@@ -18,7 +18,7 @@ public class AStarCost extends CostCalculator{
 	}
 
 	/**
-	 * Calcule le cout de l�action consistant à aller de la case départ à la case arrêt.
+	 * Calcule le cout de làaction consistant à aller de la case départ à la case arrêt.
 	 */
 	public double processCost(AiTile start, AiTile end) throws StopRequestException {
 		//pour utiliser Astar, on calcule la version basic de la cost

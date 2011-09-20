@@ -266,7 +266,7 @@ public class Securite {
 			bombeListe.add(bombe);
 
 		}
-		// si une bombe va exploser avant notre arrivee, donc on ne va pas l�.
+		// si une bombe va exploser avant notre arrivee, donc on ne va pas là.
 		if (!nextMove.isEmpty()) {
 			AiTile tile = nextMove.getFirstTile();
 			path.addTile(0, tile);

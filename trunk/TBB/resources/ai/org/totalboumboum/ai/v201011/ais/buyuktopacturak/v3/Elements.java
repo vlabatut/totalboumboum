@@ -166,7 +166,7 @@ public class Elements {
 	}
 	
 	////////////////////////////////////////////////////////////////
-	//range'imdeki Patlamayacak duvarlar� hesaplar. L�STEYE ATAR  //
+	//range'imdeki Patlamayacak duvarlar� hesaplar. làSTEYE ATAR  //
 	////////////////////////////////////////////////////////////////
 	private List<AiBlock> getRangeBombBlock(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -203,7 +203,7 @@ public class Elements {
 	}
 	
 	//////////////////////////////////////////////////
-	//range'imdeki itemlar� hesaplar. L�STEYE ATAR  //
+	//range'imdeki itemlar� hesaplar. làSTEYE ATAR  //
 	//////////////////////////////////////////////////
 	private List<AiItem> getRangeBombItem(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -237,7 +237,7 @@ public class Elements {
 	}
 	
 	//////////////////////////////////////////////////
-	//range'imdeki herolar� hesaplar. L�STEYE ATAR  //
+	//range'imdeki herolar� hesaplar. làSTEYE ATAR  //
 	//////////////////////////////////////////////////
 	private List<AiHero> getRangeBombHero(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();

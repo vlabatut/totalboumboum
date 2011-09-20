@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 /**
  * 
- * Représente un noeud dans l'arbre de recherche développ� par l'algorithme A*
+ * Représente un noeud dans l'arbre de recherche développé par l'algorithme A*
  *  
  * @author Vincent Labatut
  *

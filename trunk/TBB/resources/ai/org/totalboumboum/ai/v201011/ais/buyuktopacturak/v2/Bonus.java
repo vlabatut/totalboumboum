@@ -138,7 +138,7 @@ public class Bonus {
 	}
 	
 	//ADAM RESMEN �N�T G�B� OLDU HER �EY� TANIMLAMAK GEREK�YOR
-	//BA�INDA BONUS VE BOMBALARI L�STEYE ATMASI LAZIM
+	//BA�INDA BONUS VE BOMBALARI làSTEYE ATMASI LAZIM
 	public boolean destroyBonus()throws StopRequestException{
 		getBonus();
 		getBombs();

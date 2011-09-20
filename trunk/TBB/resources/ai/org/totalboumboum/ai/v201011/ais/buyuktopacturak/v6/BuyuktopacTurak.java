@@ -51,8 +51,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * Cette classe dépend essentiellement de la fonction �processAction� 
-	 * qui est �tendu de la classe �ArtificialIntelligence� de l�API. 
-	 * Car dans cette méthode, on décide les actions de l�iA.
+	 * qui est �tendu de la classe �ArtificialIntelligence� de làAPI. 
+	 * Car dans cette méthode, on décide les actions de làiA.
 	 * si notre Ai existe dans le jeu,
 	 * d'abordon chois la mode et decide la posage de bombe avec la methode controlBomb
 	 * -> si on renvoie "true" on met d'une bombe.
@@ -135,7 +135,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	}
 	/**
 	 * D�abord on obtient des percepts, ensuite on trouve notre héro, 
-	 * et puis on crée l�objet PerfectStrangers et Elements.
+	 * et puis on crée làobjet PerfectStrangers et Elements.
 	 * En fin, on met à jour de notre case.  
 	 */
 	private void initBT() throws StopRequestException
@@ -366,7 +366,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		return path;
 	}
 	/**
-	 * On utilise l�algorithme A*, on trouve le chemine vers les ennemies.
+	 * On utilise làalgorithme A*, on trouve le chemine vers les ennemies.
 	 * Si on trouve une chemine, on renvoie la direction de notre case à la case adversaire case par case. 
 	 */
 	private Direction aStarDirection(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
@@ -408,7 +408,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On renvoie la longueur de la chemine qui est le plus court chemin 
-	 * pour aller de la case départ à la case arrêt en utilisant l�algorithme A*.
+	 * pour aller de la case départ à la case arrêt en utilisant làalgorithme A*.
 	 * si tile1 est egale a tile2, distance est zero.
 	 * sinon on trouve un chemine a la case tile1 de la case tile2.
 	 * 	s'il y a une chemine, la distance est egale a la taille path.

@@ -61,8 +61,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * Cette classe dépend essentiellement de la fonction �processAction� 
-	 * qui est �tendu de la classe �ArtificialIntelligence� de l�API. 
-	 * Car dans cette méthode, on décide les actions de l�iA.
+	 * qui est �tendu de la classe �ArtificialIntelligence� de làAPI. 
+	 * Car dans cette méthode, on décide les actions de làiA.
 	 */
 	public AiAction processAction() throws StopRequestException, NullPointerException
 	{	// avant tout : test d'interruption
@@ -127,7 +127,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * D�abord on obtient des percepts, ensuite on trouve notre héro, 
-	 * et puis on crée l�objet Elements et met à jour de notre case.  
+	 * et puis on crée làobjet Elements et met à jour de notre case.  
 	 */
 	private void initBT() throws StopRequestException
 	{	
@@ -231,7 +231,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * On �value des critéres (tuer à l�adversaire) 
+	 * On �value des critéres (tuer à làadversaire) 
 	 * ensuite on décide le posage de bombe pour le mode attaque.
 	 */
 	private void executeAttack() throws StopRequestException{
@@ -276,7 +276,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * On utilise l�algorithme A*, on recherche le chemine vers les ennemies.
+	 * On utilise làalgorithme A*, on recherche le chemine vers les ennemies.
 	 * Si on trouve une chemine, on renvoie la direction de notre case à la case adversaire. 
 	 */
 	private void AstarDirection(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
@@ -325,7 +325,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On renvoie la longueur de la chemine qui est le plus court chemin 
-	 * pour aller de la case départ à la case arrêt en utilisant l�algorithme A*.
+	 * pour aller de la case départ à la case arrêt en utilisant làalgorithme A*.
 	 * @param tile1
 	 * @param tile2
 	 * @return
@@ -508,7 +508,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Si on ne trouve pas de chemine en utilisant l�algorithme A*, 
+	 * Si on ne trouve pas de chemine en utilisant làalgorithme A*, 
 	 * alors on trouve une direction pour se diriger de la case départ à la case arrêt.
 	 * @param tile1
 	 * @param tile2
