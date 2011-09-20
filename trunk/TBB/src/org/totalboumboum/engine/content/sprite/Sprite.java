@@ -411,7 +411,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	protected double speedAbilityCoef = 1;
 	
 	/**
-	 * S'il y  a un boundToSprite, son speedCoeff est renvoy�.
+	 * S'il y  a un boundToSprite, son speedCoeff est renvoyé.
 	 * Sinon, c'est le produit entre le speedCoeff du sprite
 	 * et celui du jeu.
 	 * @return
