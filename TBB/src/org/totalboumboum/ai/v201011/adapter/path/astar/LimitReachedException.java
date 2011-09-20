@@ -126,7 +126,7 @@ public final class LimitReachedException extends Exception
 
 	/**
 	 * renvoie la hauteur de l'arbre, i.e. la longueur
-	 * du chemin le plus long développ� lors de la recherche de solution
+	 * du chemin le plus long développé lors de la recherche de solution
 	 * 
 	 * @return
 	 * 		hauteur de l'arbre
@@ -155,7 +155,7 @@ public final class LimitReachedException extends Exception
 	}
 
 	/**
-	 * renvoie le coût du chemin le plus coûteux développ� lors de la
+	 * renvoie le coût du chemin le plus coûteux développé lors de la
 	 * recherche de solution par A*.
 	 * 
 	 * @return
@@ -185,7 +185,7 @@ public final class LimitReachedException extends Exception
 	}
 
 	/**
-	 * renvoie la taille de l'arbre développ� par A* lors de son exploration,
+	 * renvoie la taille de l'arbre développé par A* lors de son exploration,
 	 * exprimée en nombre de noeuds.
 	 * 
 	 * @return

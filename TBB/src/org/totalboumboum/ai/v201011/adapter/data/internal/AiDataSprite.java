@@ -139,7 +139,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/**
-	 * d�marque ce sprite (action réalis�e avant la mise à jour de la zone)
+	 * d�marque ce sprite (action réalisée avant la mise à jour de la zone)
 	 */
 	protected void uncheck()
 	{	checked = false; 

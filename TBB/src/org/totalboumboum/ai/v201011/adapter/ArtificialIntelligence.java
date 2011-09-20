@@ -176,7 +176,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/**
 	 * méthode à surcharger s'il est nécessaire que l'agent soit
 	 * initialisé. Toute op�ration définie dans cette fonction
-	 * sera réalis�e une fois, juste avant le début de la partie.
+	 * sera réalisée une fois, juste avant le début de la partie.
 	 * A noter que les percepts ont n�anmoins déjà été mis à jour.
 	 * Si aucune méthode init n'est définie dans l'agent, alors celle
 	 * ci sera exécut�e (qui ne fait rien du tout).

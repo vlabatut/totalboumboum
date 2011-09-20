@@ -938,7 +938,7 @@ if(target==null || source==null)
 	 * 		la version normalisée de line
 	 */
 	public int normalizePositionLine(int line)
-	{	return LevelsTools.normalizePositionLine(line,height);
+	{	return LevelsTools.normalizePositionRow(line,height);
 	}
 	
 	/////////////////////////////////////////////////////////////////
