@@ -254,8 +254,6 @@ public final class AstarNode implements Comparable<AstarNode>
     /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** fils du noeud */
-	private List<AstarNode> children = null;
 	/** calculateur des successeurs */
 	private SuccessorCalculator successorCalculator;
 	
@@ -270,39 +268,28 @@ public final class AstarNode implements Comparable<AstarNode>
 	}
 	
 	/**
-	 * renvoie les fils de ce noeud de recherche
-	 * (ils sont éventuellement calculés si ce n'est pas déjà fait)
+	 * renvoie les fils de ce noeud de recherche.
 	 * 
 	 * @return	
 	 * 		une liste contenant les fils de ce noeud
 	 * @throws StopRequestException 
 	 */
 	public List<AstarNode> getChildren() throws StopRequestException
-	{	if(children==null)
-			developNode();
-		return children;
-	}
-	
-	/**
-	 * utilise la fonction successeur pour calculer les enfants de ce noeud de recherche,
-	 * i.e. pour déterminer quelles sont les cases que l'on peut atteindre à partir
-	 * de la case courante.
-	 * 
-	 * @throws StopRequestException 
-	 */
-	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();
 	
-		children = new ArrayList<AstarNode>();
+		List<AstarNode> result = new ArrayList<AstarNode>();
 		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
 		for(AiTile neighbor: neighbors)
-		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
+		{	// optimisation : on ne garde pas les états qui appartiennent déjà au chemin 
+			// contenant le noeud de recherche courant,
 			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
 			if(!hasBeenExplored(neighbor))
 			{	AstarNode node = new AstarNode(neighbor,this);
-				children.add(node);			
+				result.add(node);			
 			}
 		}
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -367,18 +354,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * qu'il n'est plus utilisé
 	 */
 	protected void finish()
-	{	// children
-		if(children!=null)
-		{	while(!children.isEmpty())
-			{	AstarNode n = children.get(0);
-				n.finish();
-				children.remove(0);
-			}
-			children = null;
-		}
-		
-		// misc
-		ai = null;
+	{	ai = null;
 		costCalculator = null;
 		heuristicCalculator = null;
 		successorCalculator = null;
