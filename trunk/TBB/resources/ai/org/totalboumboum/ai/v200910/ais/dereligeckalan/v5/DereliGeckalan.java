@@ -24,7 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA
  * 
- * classe principale de l'IA, qui définit son comportement. n'hésitez pas �
+ * classe principale de l'IA, qui définit son comportement. n'hésitez pas à
  * décomposer le traitement en plusieurs classes, plus votre programme est
  * modulaire et plus il sera facile à débugger, modifier, relire, comprendre,
  * etc.

@@ -84,7 +84,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie le personnage contr�l� par cette IA
+	 * renvoie le personnage contrôlé par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -161,7 +161,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					if (debugMode)
 						System.out.println("attack bomb______Ben burday�m :"
 								+ ownHero.getTile().toString()
-								+ "D��man Burda : " + endTileAttack.toString());
+								+ "Dman Burda : " + endTileAttack.toString());
 					ret.actionName = AiActionName.DROP_BOMB;
 					leftBomb = isCleanDirection(ownHero.getBombRange() + 1,
 							ownHero.getTile());

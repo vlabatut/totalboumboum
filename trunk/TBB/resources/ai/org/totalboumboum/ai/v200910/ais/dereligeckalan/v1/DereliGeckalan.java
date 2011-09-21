@@ -24,7 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA
  * 
- * classe principale de l'IA, qui définit son comportement. n'hésitez pas �
+ * classe principale de l'IA, qui définit son comportement. n'hésitez pas à
  * décomposer le traitement en plusieurs classes, plus votre programme est
  * modulaire et plus il sera facile à débugger, modifier, relire, comprendre,
  * etc.
@@ -297,7 +297,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				while (i < k && !blocks.contains(tempTile)) {
 					checkInterruption();
 					AiTile tile = tempTile.getNeighbor(Direction.UP);
-					// System.out.println("yukar�");
+					// System.out.println("yukar");
 					tempTile = tile;
 					if (!blokTile.contains(tile)) {
 						// System.out.println("-2");

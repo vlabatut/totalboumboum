@@ -83,7 +83,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie le personnage contr�l� par cette IA
+	 * renvoie le personnage contrôlé par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -158,9 +158,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 			if (inAttackRange(endTileAttack)) {
 				if (isRangeClean(ownHero.getBombRange() + 1, currentTile)) {
 					if (debugMode)
-						System.out.println("attack bomb______Ben burday�m :"
+						System.out.println("attack bomb______Ben burdaym :"
 								+ ownHero.getTile().toString()
-								+ "D��man Burda : " + endTileAttack.toString());
+								+ "Dman Burda : " + endTileAttack.toString());
 					ret.actionName = AiActionName.DROP_BOMB;
 					leftBomb = isCleanDirection(ownHero.getBombRange() + 1,
 							ownHero.getTile());
@@ -434,7 +434,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 							} catch (Exception e) {
 								if (debugMode) {
 									System.out
-											.println("attak range patladû d������................................................................UP"
+											.println("attak range patladû d................................................................UP"
 													+ i);
 									System.out.println(e.getStackTrace());
 								}
@@ -455,7 +455,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 							} catch (Exception e) {
 								if (debugMode) {
 									System.out
-											.println("attak range patladû d������................................................................DOWN"
+											.println("attak range patladû d................................................................DOWN"
 													+ i);
 									System.out.println(e.getStackTrace());
 								}
@@ -481,7 +481,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 								} catch (Exception e) {
 									if (debugMode) {
 										System.out
-												.println("attak range patladû d������................................................................LEFT"
+												.println("attak range patladû d................................................................LEFT"
 														+ i);
 										System.out.println(e.getStackTrace());
 									}
@@ -501,7 +501,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 								} catch (Exception e) {
 									if (debugMode) {
 										System.out
-												.println("attak range patladû d������................................................................RIGHT"
+												.println("attak range patladû d................................................................RIGHT"
 														+ i);
 										System.out.println(e.getStackTrace());
 									}

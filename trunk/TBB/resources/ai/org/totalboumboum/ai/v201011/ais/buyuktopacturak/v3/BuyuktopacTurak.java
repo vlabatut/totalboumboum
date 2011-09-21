@@ -415,7 +415,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	// OWN HERO					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le personnage contr�l� par cette IA
+	 * renvoie le personnage contrôlé par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	
