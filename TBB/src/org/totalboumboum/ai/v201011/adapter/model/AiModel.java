@@ -64,12 +64,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</ul>
  * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
  * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
- * causant la fin du pas de simulation.<br/>
- * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
- * la classe AiModelTest. Notez toute fois que cette classe de test crée la zone
- * en partant de rien, alors que les agents disposent de leurs percepts.
- * Pour cette raison, elle utilise pour initialiser la zone des méthodes 
- * auxquelles les agents n'ont pas accès.
+ * causant la fin du pas de simulation.
  * 
  * @author Vincent Labatut
  *

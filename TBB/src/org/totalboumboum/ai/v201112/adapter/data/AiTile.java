@@ -219,13 +219,14 @@ public abstract class AiTile
 	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
 	 * passée en paramètre. 
 	 * <b>ATTENTION :</b> seulement les directions primaires sont
-	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
+	 * utilisées ({@link Direction#UP UP}, {@link Direction#RIGHT RIGHT}, {@link Direction#DOWN DOWN}, 
+	 * {@link Direction#LEFT LET}) : pas de direction composite ({@link Direction#UPLEFT UPLEFT}, etc.).
 	 * Dans le cas contraire, la fonction renvoie null.</br>
 	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
-	 * à la position (ligne,0), le voisin de gauche est la case située à la position
-	 * (ligne,width-1). même chose pour les bordures haut et bas.
+	 * à la position (row,0), le voisin de gauche est la case située à la position
+	 * (row,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction
 	 * 		direction dans laquelle le voisin se trouve
@@ -241,11 +242,11 @@ public abstract class AiTile
 	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
-	 * à la position (ligne,0), le voisin de gauche est la case située à la position
-	 * (ligne,width-1). même chose pour les bordures haut et bas.
+	 * à la position (row,0), le voisin de gauche est la case située à la position
+	 * (row,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @return	
-	 * 		la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
+	 * 		la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre.
 	 */
 	public abstract List<AiTile> getNeighbors();
 
