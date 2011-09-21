@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
  * 
- * @author Onur B�y�ktopa� & Yigit Turak
+ * @author Onur B y ktopa  & Yigit Turak
  *
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
@@ -50,9 +50,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private int maxLine, maxCol; //Col et Ligne de la case maximale
 	
 	/**
-	 * Cette classe dépend essentiellement de la fonction �processAction� 
-	 * qui est �tendu de la classe �ArtificialIntelligence� de làAPI. 
-	 * Car dans cette méthode, on décide les actions de làiA.
+	 * Cette classe dépend essentiellement de la fonction processAction 
+	 * qui est étendu de la classe ArtificialIntelligence de l'API. 
+	 * Car dans cette méthode, on décide les actions de l'iA.
 	 * si notre Ai existe dans le jeu,
 	 * d'abordon chois la mode et decide la posage de bombe avec la methode controlBomb
 	 * -> si on renvoie "true" on met d'une bombe.
@@ -76,7 +76,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		if(this.deepPurple==null)
 			initFirst();
 		initBT();
-		// si le personnage control� a été éliminé, inutile de continuer
+		// si le personnage controlé a été éliminé, inutile de continuer
 		if(!this.deepPurple.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			boolean actionBomb, mode=selectMode();
@@ -134,7 +134,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		pathStatic = null;
 	}
 	/**
-	 * D�abord on obtient des percepts, ensuite on trouve notre héro, 
+	 * D'abord on obtient des percepts, ensuite on trouve notre héro, 
 	 * et puis on crée làobjet PerfectStrangers et Elements.
 	 * En fin, on met à jour de notre case.  
 	 */

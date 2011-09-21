@@ -10,7 +10,7 @@ public class AStarCost extends CostCalculator{
 	private double[][] matrix;
 	
 	/**
-	 * C�est un constructeur qui obtient la matrice de la mode.
+	 * C'est un constructeur qui obtient la matrice de la mode.
 	 * @param matrix
 	 * @throws StopRequestException
 	 */

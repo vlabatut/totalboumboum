@@ -1,6 +1,6 @@
 package org.totalboumboum.ai.tests.ais._demo;
 
-import org.totalboumboum.ai.v201112.adapter.AiManager;
+import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

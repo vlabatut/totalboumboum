@@ -31,7 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
  * 
- * @author Onur B�y�ktopa� & Yigit Turak
+ * @author Onur B y ktopa  & Yigit Turak
  *
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
@@ -51,8 +51,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	ArtificialIntelligence ai=this;
 	
 	/**
-	 * Cette classe dépend essentiellement de la fonction �processAction� 
-	 * qui est �tendu de la classe �ArtificialIntelligence� de làAPI. 
+	 * Cette classe dépend essentiellement de la fonction processAction
+	 * qui est étendu de la classe ArtificialIntelligence de làAPI. 
 	 * Car dans cette méthode, on décide les actions de làiA.
 	 * si notre Ai existe dans le jeu,
 	 * d'abordon chois la mode et decide la posage de bombe avec la methode controlBomb
@@ -114,7 +114,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * D�abord on obtient des percepts, ensuite on trouve notre héro, 
+	 * D'abord on obtient des percepts, ensuite on trouve notre héro, 
 	 * et puis on crée làobjet PerfectStrangers et Elements.
 	 * En fin, on met à jour de notre case.  
 	 */
@@ -142,7 +142,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		boolean mode=false;
 		//calculer d'apres les bombs actuelles.
-		//System.out.println("say�: "+this.deepPurple.getBombNumberMax()+" range: "+this.deepPurple.getBombRange());
+		//System.out.println("say: "+this.deepPurple.getBombNumberMax()+" range: "+this.deepPurple.getBombRange());
 		
 			if(this.deepPurple.getBombNumberMax()>2){
 				if(getCurrentBomb()>2){
