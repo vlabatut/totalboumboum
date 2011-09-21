@@ -249,7 +249,7 @@ public final class Astar
 				// si l'arbre a atteint la hauteur maximale, on s'arrête
 				else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
 					limitReached = true;
-				// si le noeud courant a atteint le cout maximal, on s'arrête
+				// si le noeud courant a atteint le coût maximal, on s'arrête
 				else if(maxCost>0 && currentNode.getCost()>=maxCost)
 					limitReached = true;
 				// si le nombre de noeuds dans la file est trop grand, on s'arrête
