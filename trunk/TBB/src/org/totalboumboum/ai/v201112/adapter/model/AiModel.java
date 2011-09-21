@@ -182,7 +182,10 @@ public class AiModel
 	 * l'état estimé de la zone quand le personnage que l'on contrôle passera
 	 * dans la case suivante.<br/>
 	 * <b>Attention:</b> le changement d'état peut aussi être dû au fait que le 
-	 * personnage a commencé à brûler.
+	 * personnage a commencé à brûler. A noter aussi que la simulation s'arrête
+	 * quand aucun évènement ne se produit, ou quand le personnage ne fait rien
+	 * alors qu'il devrait (ex : bloqué contre un mur alors qu'il est censé
+	 * se déplacer).
 	 * 
 	 * @param hero
 	 * 		Le personnage sur lequel porte la condition
@@ -199,7 +202,8 @@ public class AiModel
 		simHero = current.getSpriteById(hero);
 
 		if(simHero.getState().getName()!=AiStateName.ENDED)
-		{	boolean found = false;
+		{	boolean found;
+			boolean blocked;
 			do
 			{	// simulate
 				simulate();
@@ -209,10 +213,20 @@ public class AiModel
 				
 				// check if the hero was among the limit sprites
 				simHero = current.getSpriteById(hero);
-				found = limitSprites.contains(simHero);
+				found = simHero!=null && limitSprites.contains(simHero);
+				
+				// check if the hero was supposed to move, and could not
+				blocked = !found && simHero.getState().getName()==AiStateName.MOVING
+					&& hero.getPosX()==simHero.getPosX() && hero.getPosY()==simHero.getPosY();
 			}
-			// stop if the hero is in the limit or nothing was done
-			while(!found && duration>0);
+			// stop if the hero is in the limit, or nothing was done, or the hero couldn't move
+			while(!found && duration>0 && !blocked);
+			
+			// if the hero was blocked: we have to come back to the previous simulation step
+			if(blocked)
+			{	current = previous;
+				totalDuration = totalDuration - duration;
+			}
 			
 			// check if the hero is still safe
 			AiState state = simHero.getState();
@@ -1263,7 +1277,7 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * permet de solliciter un changement de direction de la part du personnage.
+	 * Permet de solliciter un changement de direction de la part du personnage.
 	 * si la direction n'est pas {@link Direction#NONE NONE}, alors l'état du personnage devient {@link AiStateName#MOVING MOVING}.
 	 * sinon, il devient {@link AiStateName#STANDING STANDING}. Bien sûr, s'il y a des obstacles, le personnage
 	 * ne pourra pas effectivement se déplacer dans la direction spécifiée.
@@ -1273,7 +1287,7 @@ if(sprite instanceof AiSimBomb)
 	 * @param direction
 	 * 		la direction du déplacement
 	 * @return
-	 * 		vrai si le changement de direction a pu être effectué, faux sinon 
+	 * 		Renvoie {@code true} si le changement de direction a pu être effectué, {@code false} sinon 
 	 */
 	public boolean applyChangeHeroDirection(AiHero hero, Direction direction)
 	{	boolean result = false;
@@ -1285,7 +1299,7 @@ if(sprite instanceof AiSimBomb)
 			AiSimState state = simHero.getState();
 			long time = state.getTime();
 			AiStateName name = state.getName();
-			if(direction.isPrimary() && 
+			if((direction.isPrimary() || direction==Direction.NONE) && 
 				(name==AiStateName.MOVING || name==AiStateName.STANDING))
 			{	result = true;
 				if(direction==Direction.NONE)

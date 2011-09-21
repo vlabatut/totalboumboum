@@ -21,20 +21,14 @@ package org.totalboumboum.ai.v201112.adapter.path.dybref;
  * 
  */
 
-import java.util.HashMap;
-
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
-import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.AiModelTest;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -52,17 +46,74 @@ import org.totalboumboum.tools.images.PredefinedColor;
  */
 public final class DybrefTest
 {
+	/**
+	 * Cette méthode permet de tester
+	 * l'algorithme Dybref, qui trouve
+	 * les plus courts chemins pour une 
+	 * zone donnée.
+	 * 
+	 * @param args
+	 * 		Aucun paramètre n'est nécessaire.
+	 */
 	public static void main(String args[])
-	{	AiZone zone = AiModelTest.initZone();
+	{	// init
+		AiZone zone = AiModelTest.initZone();
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	// dummy AI
+		{	// IA bidon
 			@Override
 			public AiAction processAction() throws StopRequestException
 			{	AiAction result = new AiAction(AiActionName.NONE);
 				return result;
 			}
 		};
+		
+		/*
+		 * Pour rappel, la tête de la zone obtenue :
+		 * ┌─┬─┬─┬─┬─┬─┬─┐
+		 * │█│█│█│█│█│█│█│
+		 * ├─┼─┼─┼─┼─┼─┼─┤
+		 * │█│☺│ │□│ │ │█│
+		 * ├─┼─┼─┼─┼─┼─┼─┤
+		 * │█│ │█│ │█│ │█│
+		 * ├─┼─┼─┼─┼─┼─┼─┤
+		 * │█│ │ │ │ │▒│█│
+		 * ├─┼─┼─┼─┼─┼─┼─┤
+		 * │█│ │█│ │█│ │█│
+		 * ├─┼─┼─┼─┼─┼─┼─┤
+		 * │█│ │ │ │ │●│█│
+		 * ├─┼─┼─┼─┼─┼─┼─┤
+		 * │█│█│█│█│█│█│█│
+		 * └─┴─┴─┴─┴─┴─┴─┘
+		 */
+		
+		// application de l'algo
 		Dybref dybref = new Dybref(ai,hero);
+		DybrefMatrix matrix = null;
+		try
+		{	matrix = dybref.processShortestPaths(zone);
+		}
+		catch (StopRequestException e)
+		{	
+			e.printStackTrace();
+		}
+		catch (LimitReachedException e)
+		{	e.printStackTrace();
+		}
+		
+		// affichage du résultat
+		if(matrix!=null)
+		{	int height = zone.getHeight();
+			int width = zone.getWidth();
+			
+			// temps
+			long timeMatrix[][] = matrix.getTimeMatrix();
+			for(int i=0;i<height;i++)
+			{	for(int j=0;j<width;j++)
+				{	System.out.print(timeMatrix[i][j]+"\t");
+				}
+				System.out.println();
+			}
+		}
 	}
 }

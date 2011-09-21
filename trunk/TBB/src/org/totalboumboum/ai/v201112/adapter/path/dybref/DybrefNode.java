@@ -26,6 +26,8 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiState;
 import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
@@ -306,6 +308,10 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();
 		
+System.out.println("ORIGINAL ("+depth+")");
+System.out.println(zone);
+	
+	
 		children = new ArrayList<DybrefNode>();
 //		if(tile.isCrossableBy(hero))
 		{	List<Direction> directions = Direction.getPrimaryValues();
@@ -319,25 +325,33 @@ public final class DybrefNode implements Comparable<DybrefNode>
 				// on applique le modèle pour obtenir la zone résultant de l'action
 				AiModel model = new AiModel(zone);
 				model.applyChangeHeroDirection(hero,direction);
-				boolean safe;
+				boolean safe = true;
+				long duration = 0;
 				if(direction==Direction.NONE)
 				{	// on attend simplement jusqu'à la prochaine explosion
 					// car c'est généralement l'évènement bloquant
-					model.simulateUntilFire();
-					AiZone futureZone = model.getCurrentZone();
-					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
-					if(futureHero==null)
-						safe = false;
-					else
-					{	AiState futureState = futureHero.getState();
-						AiStateName futureName = futureState.getName();
-						safe = futureName==AiStateName.FLYING || futureName==AiStateName.MOVING || futureName==AiStateName.STANDING;
+					// de plus, on n'attend que si une des cases voisines est menacée par une explosion
+					long waitDuration = getWaitDuration();
+					if(waitDuration>0 && waitDuration<Long.MAX_VALUE)
+					{	//model.simulateUntilFire();
+						model.simulate(waitDuration);
+						duration = model.getDuration();
+						AiZone futureZone = model.getCurrentZone();
+						AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+						if(futureHero==null)
+							safe = false;
+						else
+						{	AiState futureState = futureHero.getState();
+							AiStateName futureName = futureState.getName();
+							safe = futureName==AiStateName.FLYING || futureName==AiStateName.MOVING || futureName==AiStateName.STANDING;
+						}
 					}
 				}
 				else
-					// on simule jusqu'au changement d'état du personnage : soit le changement de case, soit l'élimination
+				{	// on simule jusqu'au changement d'état du personnage : soit le changement de case, soit l'élimination
 					safe = model.simulate(hero);
-				long duration = model.getDuration();
+					duration = model.getDuration();
+				}
 	
 				// si le joueur est encore vivant dans cette zone et si l'action a bien eu lieu
 				if(safe && duration>0)
@@ -349,15 +363,17 @@ public final class DybrefNode implements Comparable<DybrefNode>
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						DybrefNode node = new DybrefNode(futureTile,duration,parent);
-// TODO optimisation >> on ne considère l'attente que s'il reste du feu ou des bombes dans la case...
-// TODO même chose pour la simulation ?
+						DybrefNode node = new DybrefNode(futureTile,duration,this);
+// TODO optimisation >> on ne considère le retour en arrière (mouvement) que s'il reste bombes/feu dans la zone
 // TODO adapter les coms de l'exception
 // TODO revoir tous les coms des classes du package dybref
 						children.add(node);
+System.out.println("DIRECTION: "+direction+" >> added");
 					}
 					// si la case n'est pas la bonne : 
 					// la case ciblée n'était pas traversable et l'action est à ignorer
+System.out.println("DIRECTION: "+direction);
+System.out.println(futureZone);
 				}
 				// si le joueur n'est plus vivant dans la zone obtenue : 
 				// la case ciblée n'est pas sûre et est ignorée
@@ -368,6 +384,48 @@ public final class DybrefNode implements Comparable<DybrefNode>
 			if(children.isEmpty())
 				parent.reportSafety(this);
 		}
+System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+	}
+	
+	private long getWaitDuration()
+	{	// init
+		long result = Long.MAX_VALUE;
+		List<AiTile> neighbors = tile.getNeighbors();
+		
+		// is there a fire in the neighbor tiles?
+		List<AiFire> fires = zone.getFires();
+		for(AiFire fire: fires)
+		{	AiTile fireTile = fire.getTile();
+			if(neighbors.contains(fireTile))
+			{	long duration = fire.getBurningDuration() - fire.getState().getTime();
+				if(duration<result)
+					result = duration;
+			}
+		}
+		
+		// is one of the neighbor tiles within the range of some bomb?
+		if(fires.isEmpty())
+		{	List<AiBomb> bombs = zone.getBombs();
+			for(AiBomb bomb: bombs)
+			{	List<AiTile> blast = bomb.getBlast();
+				List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
+				neigh.retainAll(blast);
+				if(!neigh.isEmpty())
+				{	AiStateName stateName = bomb.getState().getName();
+					long normalDuration = bomb.getNormalDuration();
+					// we can ignore burning bombs, since there's already fire in the tile
+					if(stateName.equals(AiStateName.STANDING)
+					// we can also ignore non-time bombs, since there's no mean to predict when they're going to explode
+						&& normalDuration>0)
+					{	long duration = normalDuration - bomb.getState().getTime() + bomb.getExplosionDuration();
+						if(duration<result)
+							result = duration;
+					}
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

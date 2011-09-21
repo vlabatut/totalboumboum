@@ -176,7 +176,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	private boolean explosionTrigger;
 	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** latence de la bombe quand son explosion est déclench�e par une autre bombe */
+	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
 	private long latencyDuration;
 	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;

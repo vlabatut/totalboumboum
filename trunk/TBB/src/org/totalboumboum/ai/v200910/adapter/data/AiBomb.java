@@ -95,7 +95,7 @@ public class AiBomb extends AiSprite<Bomb>
 	private long normalDuration;
 	/** durée de l'explosion (entre l'apparition et la disparition des flammes) */
 	private long explosionDuration;
-	/** latence de la bombe quand son explosion est déclench�e par une autre bombe */
+	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
 	private long latencyDuration;
 	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
@@ -154,7 +154,7 @@ public class AiBomb extends AiSprite<Bomb>
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_COMBUSTION);
 			explosionTrigger = ability.isActive();
 		}
-		// latence de la bombe en cas de détonation déclench�e par explosion
+		// latence de la bombe en cas de détonation déclenchée par explosion
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
@@ -193,12 +193,12 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 
 	/**
-	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclench�e par
+	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
 	 * une explosion. Cette latence représente le temps entre le moment o�
-	 * la bombe est touch�e par l'explosion, et le moment où elle commence effectivement
+	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
-	 * @return	la latence de la bombe pour une détonation déclench�e par une autre explosion
+	 * @return	la latence de la bombe pour une détonation déclenchée par une autre explosion
 	 */
 	public long getLatencyDuration()
 	{	return latencyDuration;
@@ -233,20 +233,20 @@ public class AiBomb extends AiSprite<Bomb>
 	 * calcule une liste de cases correspondant au souffle de cette bombe,
 	 * i.e. toutes les cases qui seront atteinte quand elle va exploser.
 	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
-	 * ne donne que les cases qui seront touch�es si la bombe devait exploser
+	 * ne donne que les cases qui seront touchées si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
 	 * alors le souffle peut changer, il faut r�-exécuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
-	 * @return	une liste de cases correspondant aux cases qui seront touch�es par la flamme de cette bombe 
+	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast()
 	{	return blast;
 	}
 
 	/**
-	 * met à jour la liste des cases qui seront touch�es par
+	 * met à jour la liste des cases qui seront touchées par
 	 * l'explosion de cette bombe
 	 */
 	private void updateBlast()

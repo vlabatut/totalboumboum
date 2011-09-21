@@ -21,8 +21,8 @@ package org.totalboumboum.ai.v201112.adapter.path.dybref;
  * 
  */
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -143,7 +143,7 @@ public final class Dybref
 		// initialisation
 		boolean limitReached = false;
 		root = new DybrefNode(ai,hero);
-		PriorityQueue<DybrefNode> queue = new PriorityQueue<DybrefNode>(1);
+		LinkedList<DybrefNode> queue = new LinkedList<DybrefNode>();
 		queue.offer(root);
 	
 		// traitement

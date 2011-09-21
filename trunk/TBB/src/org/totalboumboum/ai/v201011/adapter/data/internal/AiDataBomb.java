@@ -135,7 +135,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	private boolean explosionTrigger;
 	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** latence de la bombe quand son explosion est déclench�e par une autre bombe */
+	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
 	private long latencyDuration;
 	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
@@ -182,7 +182,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_COMBUSTION);
 			explosionTrigger = ability.isActive();
 		}
-		// latence de la bombe en cas de détonation déclench�e par explosion
+		// latence de la bombe en cas de détonation déclenchée par explosion
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
@@ -236,7 +236,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 
 	/**
-	 * met à jour la liste des cases qui seront touch�es par
+	 * met à jour la liste des cases qui seront touchées par
 	 * l'explosion de cette bombe
 	 */
 	private void updateBlast()

@@ -102,13 +102,13 @@ public interface AiBomb extends AiSprite
 	public long getNormalDuration();
 
 	/**
-	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclench�e par
+	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
 	 * une explosion. Cette latence représente le temps entre le moment o�
-	 * la bombe est touch�e par l'explosion, et le moment où elle commence effectivement
+	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
 	 * @return	
-	 * 		la latence de la bombe pour une détonation déclench�e par une autre explosion
+	 * 		la latence de la bombe pour une détonation déclenchée par une autre explosion
 	 */
 	public long getLatencyDuration();
 	
@@ -136,18 +136,18 @@ public interface AiBomb extends AiSprite
 	public boolean isPenetrating();
 
 	/**
-	 * calcule une liste de cases correspondant au souffle de cette bombe,
+	 * Calcule une liste de cases correspondant au souffle de cette bombe,
 	 * i.e. toutes les cases qui seront atteinte quand elle va exploser
 	 * (y compris la case contenant la bombe elle-même). 
 	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
-	 * ne donne que les cases qui seront touch�es si la bombe devait exploser
+	 * ne donne que les cases qui seront touchées si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer, il faut r�-exécuter cette méthode pour avoir le
+	 * alors le souffle peut changer, il faut ré-exécuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	
-	 * 		une liste de cases correspondant aux cases qui seront touch�es par la flamme de cette bombe 
+	 * 		une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast();
 
