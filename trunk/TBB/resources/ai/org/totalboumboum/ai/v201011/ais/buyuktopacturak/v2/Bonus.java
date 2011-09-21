@@ -45,8 +45,8 @@ public class Bonus {
 		this.bonusList = zone.getItems();
 	}
 	
-	//HEP PATLAYACAK MI D�YE KONTROL ETMEN�N KOLAY YOLUNU BUL
-	//HEP PATLAYACAK MI KORKUSUYLA YA�AMAK �STEM�YORUM!
+	//HEP PATLAYACAK MI D YE KONTROL ETMEN N KOLAY YOLUNU BUL
+	//HEP PATLAYACAK MI KORKUSUYLA YA AMAK  STEM YORUM!
 	private void calculateWillBurnBonus() throws StopRequestException{
 		bt.checkInterruption();
 		
@@ -66,8 +66,8 @@ public class Bonus {
 		bt.checkInterruption();
 		int i;
 		boolean crossable;
-		//neighbourTile bombam�n range.i boyunca ilerlerken while d�ng�s�nde ald���m kom�u tile
-		//tempTile methoda giren tile parametresinin de�erini korumak i�in (for d�ng�s�n�n ba��nda)
+		//neighbourTile bombam n range.i boyunca ilerlerken while d ng s nde ald   m kom u tile
+		//tempTile methoda giren tile parametresinin de erini korumak i in (for d ng s n n ba  nda)
 		AiTile neighbourTile, tempTile=bomb.getTile(), tile=bomb.getTile(); 
 		
 		AiItem bonus;
@@ -78,18 +78,18 @@ public class Bonus {
 			i = 0;
 			control=0;
 			tile=tempTile;
-			//her while d�ng�s�ne girmeden �nce i ve control s�f�rlan�p, tile'�m ba�lang�� noktas�na al�n�r.
+			//her while d ng s ne girmeden  nce i ve control s f rlan p, tile' m ba lang   noktas na al n r.
 			while(i < range && crossable==true){
 				bt.checkInterruption();
 				neighbourTile = tile.getNeighbor(dir);
-				//e�er neighbourTile crossable ise i.yi 1 art�r�p o anki tile'�m� neighbourTile yapar�m.
+				//e er neighbourTile crossable ise i.yi 1 art r p o anki tile' m  neighbourTile yapar m.
 				if(neighbourTile.isCrossableBy(bomb)){
 					i++;
 					tile = neighbourTile;
 				}
 				else{
 					crossable = false;
-					//her while d�ng�s�ne girmeden �nce duvar listesini iterator.a yeniden y�klemek gerekiyor.
+					//her while d ng s ne girmeden  nce duvar listesini iterator.a yeniden y klemek gerekiyor.
 					Iterator<AiItem> itBonus = this.foundBonusList.iterator();
 					while(itBonus.hasNext() && control==0){
 						bt.checkInterruption();
@@ -104,7 +104,7 @@ public class Bonus {
 		}
 	}	
 	
-	//L�STEYE AYNI ELEMANI 3 KERE ALIYOR
+	//L STEYE AYNI ELEMANI 3 KERE ALIYOR
 	public boolean findBonus() throws StopRequestException{
 		bt.checkInterruption();
 		foundBonusList = new ArrayList<AiItem>();
@@ -137,15 +137,15 @@ public class Bonus {
 		return hasBonus;
 	}
 	
-	//ADAM RESMEN �N�T G�B� OLDU HER �EY� TANIMLAMAK GEREK�YOR
-	//BA�INDA BONUS VE BOMBALARI làSTEYE ATMASI LAZIM
+	//ADAM RESMEN  N T G B  OLDU HER  EY  TANIMLAMAK GEREK YOR
+	//BA INDA BONUS VE BOMBALARI làSTEYE ATMASI LAZIM
 	public boolean destroyBonus()throws StopRequestException{
 		getBonus();
 		getBombs();
 		bt.checkInterruption();
 		boolean destroy = false;
-		//BURADA FIND BONUS D�ZG�NLEétéRMEM LAZIM BOOL D�ND�RMEMEL�
-		//findBonus()'u �al�étérabilmek i�in gereksiz boolean yarat�yoruz.
+		//BURADA FIND BONUS D ZG NLEétéRMEM LAZIM BOOL D ND RMEMEL 
+		//findBonus()'u  al étérabilmek i in gereksiz boolean yarat yoruz.
 		@SuppressWarnings("unused")
 		boolean salla = findBonus();
 		calculateWillBurnBonus();
@@ -161,7 +161,7 @@ public class Bonus {
 			while(itHeroes.hasNext() && destroy==false){
 				bt.checkInterruption();
 				hero = itHeroes.next();		
-				//Biz daha uzaksak bomba koymal�
+				//Biz daha uzaksak bomba koymal 
 				if(hero!=ownHero){
 					disOwn = bt.getDistance(ownHero.getTile(), bonus.getTile());
 					disEnemy = bt.getDistance(hero.getTile(), bonus.getTile());

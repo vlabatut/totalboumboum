@@ -16,7 +16,7 @@ public class PerfectStrangers {
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**
-	 * C�est un constructeur qui obtient des percepts de la zone et qui crée làobjet BuyuktopacTurak.
+	 * C'est un constructeur qui obtient des percepts de la zone et qui crée làobjet BuyuktopacTurak.
 	 * @param bt
 	 * @throws StopRequestException
 	 */

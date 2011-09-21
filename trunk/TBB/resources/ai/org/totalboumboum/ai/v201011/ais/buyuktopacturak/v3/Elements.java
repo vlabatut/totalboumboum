@@ -17,10 +17,10 @@ public class Elements {
 	private BuyuktopacTurak bt;
 	private AiZone zone;		
 	private AiHero deepPurple;  
-	private List<AiHero> heroesList;//t�m herolar
+	private List<AiHero> heroesList;//t m herolar
 	private List<AiBlock> willBurnWallsList;//patlayacak duvarlar
 	private List<AiItem> willBurnItemsList;//patlayacak itemler
-	private List<AiBomb> bombList;//T�m bombalar�n listesi
+	private List<AiBomb> bombList;//T m bombalar n listesi
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 	
 	/**
@@ -54,17 +54,17 @@ public class Elements {
 	}
 	
 	///////////////////////////////////
-	//Bomban�n etki listesini verir. //
+	//Bomban n etki listesini verir. //
 	///////////////////////////////////
 	private List<AiTile> getBombRangeList(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
-		List<AiTile> bombRangeList;//Bomba alan� listesi
+		List<AiTile> bombRangeList;//Bomba alan  listesi
 		bombRangeList = new ArrayList<AiTile>();	
 		
 		AiTile neighbourTile, tempTile = tile;
 		int i=0;
-		boolean crossableItem;//bombe Itemlere de�mi� mi (sana de�mezmi� bebe�im)
-		boolean crossable;//Tamamen ge�ilebilirlik.
+		boolean crossableItem;//bombe Itemlere de mi  mi (sana de mezmi  bebe im)
+		boolean crossable;//Tamamen ge ilebilirlik.
 		
 		for(Direction dir:this.dirTable){
 			bt.checkInterruption();
@@ -81,7 +81,7 @@ public class Elements {
 				else{
 					crossableItem = false;
 				}
-				//e�er neighbourTile crossable ise i.yi 1 art�r�p o anki tile'�m� neighbourTile yapar�m.
+				//e er neighbourTile crossable ise i.yi 1 art r p o anki tile' m  neighbourTile yapar m.
 				if(neighbourTile.isCrossableBy(deepPurple) && crossableItem){
 					i++;
 					tile = neighbourTile;
@@ -97,11 +97,11 @@ public class Elements {
 	}
 	
 	//////////////////////////////////////
-	//T�m bombalar�n Range listesini ver //
+	//T m bombalar n Range listesini ver //
 	//////////////////////////////////////
 	private List<AiTile> getAllRangeList()throws StopRequestException{
 		bt.checkInterruption();
-		List<AiTile> allRangeList;//T�m bombalar�n Alan listesi
+		List<AiTile> allRangeList;//T m bombalar n Alan listesi
 		allRangeList = new ArrayList<AiTile>();
 				
 		Iterator<AiBomb> itBombs = this.bombList.iterator(); 
@@ -122,7 +122,7 @@ public class Elements {
 		bt.checkInterruption();
 		
 		willBurnWallsList = new ArrayList<AiBlock>();
-		List<AiTile> allRangeList;//T�m bombalar�n Alan listesi
+		List<AiTile> allRangeList;//T m bombalar n Alan listesi
 		allRangeList = getAllRangeList();
 		Iterator<AiTile> itRange = allRangeList.iterator();
 		AiTile range;
@@ -132,7 +132,7 @@ public class Elements {
 			range = itRange.next();
 			//Listede eleman varsa
 			if(range.getBlocks().size() != 0){
-				//Duvar batlat�labilirse
+				//Duvar batlat labilirse
 				if(range.getBlocks().get(0).isDestructible()){
 					willBurnWallsList.add(range.getBlocks().get(0));
 				} 
@@ -148,7 +148,7 @@ public class Elements {
 		bt.checkInterruption();
 		
 		willBurnItemsList = new ArrayList<AiItem>();
-		List<AiTile> allRangeList;//T�m bombalar�n Alan listesi
+		List<AiTile> allRangeList;//T m bombalar n Alan listesi
 		allRangeList = getAllRangeList();
 		
 		Iterator<AiTile> itRange = allRangeList.iterator();
@@ -166,25 +166,25 @@ public class Elements {
 	}
 	
 	////////////////////////////////////////////////////////////////
-	//range'imdeki Patlamayacak duvarlar� hesaplar. làSTEYE ATAR  //
+	//range'imdeki Patlamayacak duvarlar  hesaplar. làSTEYE ATAR  //
 	////////////////////////////////////////////////////////////////
 	private List<AiBlock> getRangeBombBlock(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
 		
-		boolean willBurn;//bizim rangeimizdeki duvar patlayacak m�?
+		boolean willBurn;//bizim rangeimizdeki duvar patlayacak m ?
 		List<AiTile> myBombRange = new ArrayList<AiTile>();
-		List<AiBlock> inRangeWalls = new ArrayList<AiBlock>();//rangeimdeki PATLAMAYACAK duvarlar� al�r 
+		List<AiBlock> inRangeWalls = new ArrayList<AiBlock>();//rangeimdeki PATLAMAYACAK duvarlar  al r 
 		
 		myBombRange = getBombRangeList(tile, range);
 		willBurnWallsList = getWillBurnWalls();
 		
 		for(AiTile r : myBombRange){
 			bt.checkInterruption();
-			//Listede block var m�
+			//Listede block var m 
 			if(r.getBlocks().size() != 0){
-				//Bu block k�r�labilir mi
+				//Bu block k r labilir mi
 				if(r.getBlocks().get(0).isDestructible()){
-					//bu duvar zaten patlayacak m�
+					//bu duvar zaten patlayacak m 
 					willBurn = false;
 					for(AiBlock w : willBurnWallsList){
 						bt.checkInterruption();
@@ -192,7 +192,7 @@ public class Elements {
 							willBurn = true;
 						}
 					}
-					//Patlamayacaksa biz patlatal�m (bence)
+					//Patlamayacaksa biz patlatal m (bence)
 					if(willBurn == false){
 						inRangeWalls.add(r.getBlocks().get(0));
 					}
@@ -203,23 +203,23 @@ public class Elements {
 	}
 	
 	//////////////////////////////////////////////////
-	//range'imdeki itemlar� hesaplar. làSTEYE ATAR  //
+	//range'imdeki itemlar  hesaplar. làSTEYE ATAR  //
 	//////////////////////////////////////////////////
 	private List<AiItem> getRangeBombItem(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
-		boolean willBurn; //bizim rangeimizdeki item patlayacak m�?
+		boolean willBurn; //bizim rangeimizdeki item patlayacak m ?
 		
 		List<AiTile> myBombRange = new ArrayList<AiTile>();
-		List<AiItem> inRangeItems = new ArrayList<AiItem>();//rangeimdeki PATLAMAYACAK bonuslar� al�r 
+		List<AiItem> inRangeItems = new ArrayList<AiItem>();//rangeimdeki PATLAMAYACAK bonuslar  al r 
 		
 		myBombRange = getBombRangeList(tile, range);
 		willBurnItemsList = getWillBurnItems();
 		
 		for(AiTile r : myBombRange){
 			bt.checkInterruption();
-			//Listede item var m�
+			//Listede item var m 
 			if(r.getItems().size() != 0){
-				//bu item zaten patlayacak m�
+				//bu item zaten patlayacak m 
 				willBurn = false;
 				for(AiItem i : willBurnItemsList){
 					bt.checkInterruption();
@@ -227,7 +227,7 @@ public class Elements {
 						willBurn = true;
 					}
 				}
-				//Patlamayacaksa biz alal�m (bence)
+				//Patlamayacaksa biz alal m (bence)
 				if(willBurn == false){
 					inRangeItems.add(r.getItems().get(0));
 				}
@@ -237,19 +237,19 @@ public class Elements {
 	}
 	
 	//////////////////////////////////////////////////
-	//range'imdeki herolar� hesaplar. làSTEYE ATAR  //
+	//range'imdeki herolar  hesaplar. làSTEYE ATAR  //
 	//////////////////////////////////////////////////
 	private List<AiHero> getRangeBombHero(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
 		
 		List<AiTile> myBombRange = new ArrayList<AiTile>();
-		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki d��manlar� al�r
+		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki d  manlar  al r
 		
 		myBombRange = getBombRangeList(tile, range);
 		
 		for(AiTile r : myBombRange){
 			bt.checkInterruption();
-			//Listede hero var m�
+			//Listede hero var m 
 			if(r.getHeroes().size() != 0){
 				//bu hero biz miyiz
 				if(r.getHeroes().get(0)!=deepPurple){
@@ -261,14 +261,14 @@ public class Elements {
 	}
 	
 	/////////////////////////////////////////////////////
-	//Rangeimde ka� tane PATLAMAYACAK k�r�l�r duvar var//
+	//Rangeimde ka  tane PATLAMAYACAK k r l r duvar var//
 	/////////////////////////////////////////////////////
 	public int getRangeBombBlockCounter(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
 		return getRangeBombBlock(tile, range).size();
 	}
 	/////////////////////////////////////////////
-	//Rangeimde ka� tane PATLAMAYACAK bonus var//
+	//Rangeimde ka  tane PATLAMAYACAK bonus var//
 	/////////////////////////////////////////////
 	public int getRangeBombItemCounter(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -276,7 +276,7 @@ public class Elements {
 	}
 	
 	/////////////////////////////////
-	//Rangeimde ka� tane d��man var//
+	//Rangeimde ka  tane d  man var//
 	/////////////////////////////////
 	public int getRangeBombHeroCounter(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -284,11 +284,11 @@ public class Elements {
 	}
 	
 	////////////////////////////////////
-	//Bonusu Patlatak m� Bro          //
+	//Bonusu Patlatak m  Bro          //
 	////////////////////////////////////
 	public boolean destroyBonus(AiTile tile, int range)throws StopRequestException{
 		bt.checkInterruption();
-		boolean destroy = false;//Patlatak m�?(�imdilik: yok abi, g�nah nimete)
+		boolean destroy = false;//Patlatak m ?( imdilik: yok abi, g nah nimete)
 		int disOwn, disEnemy;
 		
 		heroesList = zone.getHeroes();
@@ -306,7 +306,7 @@ public class Elements {
 			while(itHeroes.hasNext() && destroy==false){
 				bt.checkInterruption();
 				hero = itHeroes.next();		
-				//Biz daha uzaksak bomba koymal�
+				//Biz daha uzaksak bomba koymal 
 				if(hero!=deepPurple){
 					disOwn = zone.getTileDistance(deepPurple.getTile(), bonus.getTile());
 					disEnemy = zone.getTileDistance(hero.getTile(), bonus.getTile());

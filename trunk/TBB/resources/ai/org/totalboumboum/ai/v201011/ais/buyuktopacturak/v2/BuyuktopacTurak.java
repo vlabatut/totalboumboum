@@ -30,7 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
  * 
- * @author Onur B�y�ktopa� & Yigit Turak
+ * @author Onur B y ktopa  & Yigit Turak
  *
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
@@ -46,7 +46,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private AttackMatrix attackMatrix;
 	private double[][] currentMatrix;
 	private boolean dropBomb=false;
-	private int maxLine, maxCol; //Max de�erin sat�r ve s�tunu
+	private int maxLine, maxCol; //Max de erin sat r ve s tunu
 	private int currentBomb;
 	private int distance;
 	/** la case occupée actuellement par le personnage */
@@ -67,7 +67,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		// premier appel : on initialise
 		myInit();
-		// si le personnage control� a été éliminé, inutile de continuer
+		// si le personnage control  a été éliminé, inutile de continuer
 		if(!ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();
@@ -79,8 +79,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 				if(!dropBomb)
 				{
 					getColMatrix();
-					currentMatrix=getSelectMatrix(true); //currentMatrix.i collectMatrix e e�itliyor.
-					this.tileMax=getMaxTile(); //currentMatrix te yer alan en y�ksek de�erli kareyi buluyor.
+					currentMatrix=getSelectMatrix(true); //currentMatrix.i collectMatrix e e itliyor.
+					this.tileMax=getMaxTile(); //currentMatrix te yer alan en y ksek de erli kareyi buluyor.
 					getDirectionAndDistance();
 					result = new AiAction(AiActionName.MOVE,this.moveDir);
 				}
@@ -91,8 +91,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 				if(!dropBomb)
 				{
 					getAttMatrix();
-					currentMatrix=getSelectMatrix(false); //currentMatrix.i attackMatrix e e�itliyor.
-					this.tileMax=getMaxTile(); //currentMatrix te yer alan en y�ksek de�erli kareyi buluyor.
+					currentMatrix=getSelectMatrix(false); //currentMatrix.i attackMatrix e e itliyor.
+					this.tileMax=getMaxTile(); //currentMatrix te yer alan en y ksek de erli kareyi buluyor.
 					getDirectionAndDistance();
 					result = new AiAction(AiActionName.MOVE,this.moveDir);
 				}
@@ -119,7 +119,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		boolean mode;
 		this.currentBomb=getCurrentBomb();
-		//elimde kalan bomba say�s�na g�re kontrol yap�yor.
+		//elimde kalan bomba say s na g re kontrol yap yor.
 		if(ownHero.getBombNumberMax()>2){
 			if(this.currentBomb>2){
 				mode=false;
@@ -145,10 +145,10 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		int hiddenBonus;
 		int blocks;
-		int calcul=10;//Ayn� anda 10 kare patlatmak imkans�z
+		int calcul=10;//Ayn  anda 10 kare patlatmak imkans z
 		Bomb myBomb = new Bomb(this);
 		Bonus myBonus = new Bonus(this);		
-		//K�r�labilir duvarlar� listeye at�yor.
+		//K r labilir duvarlar  listeye at yor.
 		List<AiBlock> wallsList = zone.getBlocks();
 		List<AiBlock> destWalls = new ArrayList<AiBlock>();
 		Iterator<AiBlock> itWalls = wallsList.iterator();
@@ -301,7 +301,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		this.moveDir = zone.getDirection(this.currentTile, tempPath2.getLastTile());
 	}
 	
-	//matrislerin distance hesaplar� i�in yazd�m
+	//matrislerin distance hesaplar  i in yazd m
 	//AMA YUKARDAKIYLE DUZENLENIRSE DAHA GUZEL OLUR
 	/////////////////////////////////////////////////////////////////
 	// DISTANCE WITH A*	/////////////////////////////////////////////
@@ -353,7 +353,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	//MATRIX				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	//matrisleri olu�turuyor.
+	//matrisleri olu turuyor.
 	private void getColMatrix() throws StopRequestException{
 		checkInterruption();
 		colMatrix = new CollectionMatrix(this);
@@ -368,7 +368,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		return currentMatrix;
 	}
-	//se�ilen moda g�re matrisi al�yor.
+	//se ilen moda g re matrisi al yor.
 	private double[][] getSelectMatrix(boolean mode) throws StopRequestException{
 		checkInterruption();
 		if (mode){
@@ -389,7 +389,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption(); //APPEL OBLIGATOIRE
 		return currentTile;
 	}
-	//en y�ksek de�erli kareyi buluyor.
+	//en y ksek de erli kareyi buluyor.
 	private AiTile getMaxTile() throws StopRequestException{
 		checkInterruption();
 		double[][] matrix=currentMatrix;

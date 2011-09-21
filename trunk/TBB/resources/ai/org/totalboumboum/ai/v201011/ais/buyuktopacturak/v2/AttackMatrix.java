@@ -56,7 +56,7 @@ public class AttackMatrix{
 	
 	public void createMatrix()throws StopRequestException{
 		init();
-		putFree();	//öncelikle her yer Free olarak doldurulur.
+		putFree();	//ncelikle her yer Free olarak doldurulur.
 		putWalls();
 		putHero();
 		putBonus();
@@ -116,7 +116,7 @@ public class AttackMatrix{
 		}
 	}
 
-	//Distance vs. hesaplarýný yaptýr. if-else içinde
+	//Distance vs. hesaplarn yaptr. if-else iinde
 	private void putBonus() throws StopRequestException{
 		bt.checkInterruption();
 		itemsList = zone.getItems();
@@ -156,7 +156,7 @@ public class AttackMatrix{
 			List<AiTile> blasts = bomb.getBlast();;
 			Iterator<AiTile> itBlasts = blasts.iterator();
 			AiTile blast;
-			//zaman hesaplamalarýný yaptýr.
+			//zaman hesaplamalarn yaptr.
 			while(itBlasts.hasNext()){
 				blast = itBlasts.next();
 				col = blast.getCol();

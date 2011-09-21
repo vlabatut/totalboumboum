@@ -59,7 +59,7 @@ public class CollectionMatrix{
 	public void createMatrix()throws StopRequestException{
 		init();
 		attMat=new AttackMatrix(bt);
-		putFree();	//öncelikle her yer Free olarak doldurulur.
+		putFree();	// ncelikle her yer Free olarak doldurulur.
 		putWalls();
 		putHero();
 		putBonus();
@@ -121,7 +121,7 @@ public class CollectionMatrix{
 		}
 	}
 
-	//Distance vs. hesaplarýný yaptýr. if-else içinde
+	//Distance vs. hesaplar n  yapt r. if-else i inde
 	private void putBonus() throws StopRequestException{
 		bt.checkInterruption();
 		itemsList=zone.getItems();
@@ -167,7 +167,7 @@ public class CollectionMatrix{
 			List<AiTile> blasts = bomb.getBlast();;
 			Iterator<AiTile> itBlasts=blasts.iterator();
 			AiTile blast;
-			//zaman hesaplamalarýný yaptýr.
+			//zaman hesaplamalar n  yapt r.
 			while(itBlasts.hasNext()){
 				blast = itBlasts.next();
 				col = blast.getCol();

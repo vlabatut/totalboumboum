@@ -22,7 +22,7 @@ public class Elements {
 
 	
 	/**
-	 * C�est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * C'est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @throws StopRequestException
 	 */
@@ -101,7 +101,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des murs destructibles qui ne vont pas d�exploser 
+	 * On renvoie la liste des murs destructibles qui ne vont pas d'exploser 
 	 * dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
@@ -132,7 +132,7 @@ public class Elements {
 							willBurn = true;
 						}
 					}
-					//Patlamayacaksa biz patlatal�m (bence)
+					//Patlamayacaksa biz patlatalm (bence)
 					if(willBurn == false){
 						inRangeWalls.add(r.getBlocks().get(0));
 					}
@@ -143,7 +143,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des bonus qui ne vont pas d�exploser dans notre portée virtuelle.
+	 * On renvoie la liste des bonus qui ne vont pas d'exploser dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -191,7 +191,7 @@ public class Elements {
 		bt.checkInterruption();
 		
 		List<AiTile> myBombRange = new ArrayList<AiTile>();
-		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki d��manlar� al�r
+		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki d manlar  al r
 		
 		myBombRange = ps.getBombRangeList(tile, range);
 		
@@ -208,7 +208,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la taille de la liste des murs destructibles qui ne vont pas d�exploser dans notre portée virtuelle.
+	 * On renvoie la taille de la liste des murs destructibles qui ne vont pas d'exploser dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -220,7 +220,7 @@ public class Elements {
 	}
 
 	/**
-	 * On renvoie la taille de la liste des bonus qui ne vont pas d�exploser dans notre portée virtuelle.
+	 * On renvoie la taille de la liste des bonus qui ne vont pas d'exploser dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return

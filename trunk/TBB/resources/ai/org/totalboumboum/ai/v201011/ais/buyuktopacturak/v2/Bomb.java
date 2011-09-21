@@ -42,8 +42,8 @@ public class Bomb {
 		this.wallsList = zone.getBlocks();
 	}
 
-	//�AliéIYOR AMA KOD �OK HANTAL 
-	//�NSAN OLUP AZICIK làSTE KULLANALIM
+	//AliéIYOR AMA KOD OK HANTAL 
+	//NSAN OLUP AZICIK làSTE KULLANALIM
 	private void calculateWillBurnWalls() throws StopRequestException{
 		bt.checkInterruption();
 		
@@ -63,8 +63,8 @@ public class Bomb {
 		bt.checkInterruption();
 		int i;
 		boolean crossable;
-		//neighbourTile bombam�n range.i boyunca ilerlerken while d�ng�s�nde ald���m kom�u tile
-		//tempTile methoda giren tile parametresinin de�erini korumak i�in (for d�ng�s�n�n ba��nda)
+		//neighbourTile bombamn range.i boyunca ilerlerken while dngsnde aldm komu tile
+		//tempTile methoda giren tile parametresinin deerini korumak iin (for dngsnn banda)
 		AiTile neighbourTile, tempTile=tile; 
 		
 		AiBlock wall;
@@ -75,18 +75,18 @@ public class Bomb {
 			i = 0;
 			control=0;
 			tile=tempTile;
-			//her while d�ng�s�ne girmeden �nce i ve control s�f�rlan�p, tile'�m ba�lang�� noktas�na al�n�r.
+			//her while dngsne girmeden nce i ve control sfrlanp, tile'm balang noktasna alnr.
 			while(i < range && crossable==true){
 				bt.checkInterruption();
 				neighbourTile = tile.getNeighbor(dir);
-				//e�er neighbourTile crossable ise i.yi 1 art�r�p o anki tile'�m� neighbourTile yapar�m.
+				//eer neighbourTile crossable ise i.yi 1 artrp o anki tile'm neighbourTile yaparm.
 				if(neighbourTile.isCrossableBy(ownHero)){
 					i++;
 					tile = neighbourTile;
 				}
 				else{
 					crossable = false;
-					//her while d�ng�s�ne girmeden �nce duvar listesini iterator.a yeniden y�klemek gerekiyor.
+					//her while dngsne girmeden nce duvar listesini iterator.a yeniden yklemek gerekiyor.
 					Iterator<AiBlock> itWalls = this.wallsList.iterator();
 					while(itWalls.hasNext() && control==0){
 						bt.checkInterruption();
@@ -100,14 +100,14 @@ public class Bomb {
 			}
 		}
 	}	
-	//range'imdeki duvarlar� hesaplar.
+	//range'imdeki duvarlar hesaplar.
 	public int getRangeBombBlock(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
-		calculateWillBurnWalls();//Her �eyi de�i�tiren fonk
+		calculateWillBurnWalls();//Her eyi deitiren fonk
 		int i;
 		boolean crossable;
-		//neighbourTile bombam�n range.i boyunca ilerlerken while d�ng�s�nde ald���m kom�u tile
-		//tempTile methoda giren tile parametresinin de�erini korumak i�in (for d�ng�s�n�n ba��nda)
+		//neighbourTile bombamn range.i boyunca ilerlerken while dngsnde aldm komu tile
+		//tempTile methoda giren tile parametresinin deerini korumak iin (for dngsnn banda)
 		AiTile neighbourTile, tempTile=tile; 
 		
 		AiBlock wall;
@@ -118,18 +118,18 @@ public class Bomb {
 			i = 0;
 			control=0;
 			tile=tempTile;
-			//her while d�ng�s�ne girmeden �nce i ve control s�f�rlan�p, tile'�m ba�lang�� noktas�na al�n�r.
+			//her while dngsne girmeden nce i ve control sfrlanp, tile'm balang noktasna alnr.
 			while(i < range && crossable==true){
 				bt.checkInterruption();
 				neighbourTile = tile.getNeighbor(dir);
-				//e�er neighbourTile crossable ise i.yi 1 art�r�p o anki tile'�m� neighbourTile yapar�m.
+				//eer neighbourTile crossable ise i.yi 1 artrp o anki tile'm neighbourTile yaparm.
 				if(neighbourTile.isCrossableBy(ownHero)){
 					i++;
 					tile = neighbourTile;
 				}
 				else{
 					crossable = false;
-					//her while d�ng�s�ne girmeden �nce duvar listesini iterator.a yeniden y�klemek gerekiyor.
+					//her while dngsne girmeden nce duvar listesini iterator.a yeniden yklemek gerekiyor.
 					Iterator<AiBlock> itWalls = this.wallsList.iterator();
 					while(itWalls.hasNext() && control==0){
 						bt.checkInterruption();
