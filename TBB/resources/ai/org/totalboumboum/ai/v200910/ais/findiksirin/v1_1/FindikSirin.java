@@ -29,7 +29,7 @@ public class FindikSirin extends ArtificialIntelligence
 		if(ownHero == null)
 			init();
 		
-		// si le personnage control� a été éliminé, inutile de continuer
+		// si le personnage controlé a été éliminé, inutile de continuer
 		if(!ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();
@@ -169,7 +169,7 @@ public class FindikSirin extends ArtificialIntelligence
 	private AiHero ownHero = null;
 
 	/**
-	 * renvoie le personnage contr�l� par cette IA
+	 * renvoie le personnage contrôlé par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

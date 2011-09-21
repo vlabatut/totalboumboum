@@ -80,7 +80,7 @@ public class PathFinder {
 	 */
 	private void findPath(ZoneEnum[][] tab,int y,int x,Noeud goal) throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire
-		//� chaque appel de la fonction,on efface les anciens valeurs.
+		//à chaque appel de la fonction,on efface les anciens valeurs.
 		path=new LinkedList<Noeud>();
 		
 		Noeud courant=new Noeud(y,x,tab[y][x],0,source);//case où se trouve ia.
@@ -88,7 +88,7 @@ public class PathFinder {
 		NoeudAstar comparator=new NoeudAstar(goal);//utilise pour l'algorithme Aetoile
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1,comparator);//les elements sont inseres en respectant l'ordre du cout et de l'heuristique.
 		LinkedList<Noeud> open=new LinkedList<Noeud>();//liste des elements qu'on regarde.
-		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dej� regardé.
+		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dejà regardé.
 		Noeud temp=new Noeud(source);
 	
 		Noeud solution = null;

@@ -77,7 +77,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie le personnage contr�l� par cette IA
+	 * renvoie le personnage contrôlé par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -365,7 +365,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladû d������................................................................"
+									.println("attak range patladû d................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -384,7 +384,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladû d������................................................................"
+									.println("attak range patladû d................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -408,7 +408,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladû d������................................................................"
+									.println("attak range patladû d................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -427,7 +427,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladû d������................................................................"
+									.println("attak range patladû d................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}

@@ -43,7 +43,7 @@ public class FindikSirin extends ArtificialIntelligence
 			// si on est en train de collecter un bonus, on continue
 			else if(bonusManager!=null)
 			{
-				//si il n'y a pas un bonus explor�, on suivit au chemin a cote du mur destructible le plus proche
+				//si il n'y a pas un bonus exploré, on suivit au chemin a cote du mur destructible le plus proche
 				if(bonusManager.noBonus()){
 					//si on est arrive, on pose une bombe
 					if(bonusManager.hasArrived())

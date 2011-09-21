@@ -194,7 +194,7 @@ public class Astar
 		if(!endTiles.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				// on prend le noeud situé en t�te de file
+				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				if(verbose)
 				{	System.out.println("Visited : "+currentNode.toString());

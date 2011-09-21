@@ -227,7 +227,7 @@ public class DangerZone {
 
 	/**
 	 * renvoi la direction ce qu'on va prendre si on pose une bombe a ce Tile
-	 * il fait ce control pour les Tile qui sont croisés*/
+	 * il fait ce control pour les Tile qui sont croisÃ©s*/
 	public Direction crossControl(int range, int line, int col)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
