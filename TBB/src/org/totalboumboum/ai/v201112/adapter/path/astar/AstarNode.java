@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.v201112.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;

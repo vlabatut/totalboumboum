@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201112.adapter.model;
  * 
  */
 
+import java.util.HashMap;
+
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
@@ -29,7 +31,7 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * classe utilisée pour tester les fonctionnalit�s de ce package,
+ * Classe utilisée pour tester les fonctionnalités de ce package,
  * en particulier que AiModel réalise des simulations correctes.
  * on crée une zone fictive en faisant varier les sprites et leurs
  * actions, et on affiche le résultat des simulation pas-à-pas.<br/>
@@ -41,12 +43,126 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("unused")
 public final class AiModelTest
 {
+	/**
+	 * Cette méthode permet de tester
+	 * le système de simulation inclus
+	 * dans l'API d'IA.
+	 * 
+	 * @param args
+	 * 		Aucun paramètre nécessaire.
+	 */
 	public static void main(String args[])
-	{	
-/*		RoundVariables.scaledTileDimension = 100;
+	{	AiSimZone zone = initZone();
+		simulate(zone);
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// SIMULATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Réalise la simulation (utilise les différentes méthodes
+	 * proposées par {@link AiModel}.
+	 * 
+	 * @param zone
+	 * 		La zone à traiter.
+	 */
+	private static void simulate(AiSimZone zone)
+	{	AiSimHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		// display initial zone
+		System.out.println("initial zone:\n"+zone);
+		AiModel model = new AiModel(zone);
+		model.setSimulateItemsAppearing(true);
+		
+		// first simulation
+		long duration = 0;
+		int iteration = 0;
+		do
+		{	// process simulation
+			model.simulate();
+//			model.simulate(hero);
+//			model.simulateUntilFire();
+			duration = model.getDuration();
+			// display result
+			System.out.println("iteration "+iteration);
+			System.out.println("duration:"+duration);
+			System.out.println(model.getCurrentZone());
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+		
+		// change hero direction
+		System.out.println("change hero direction: LEFT>DOWN");
+		model.applyChangeHeroDirection(hero,Direction.DOWN);
+		
+		// simulate until the hero undergoes some change
+		model.simulate(hero);
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulate(hero);
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		
+		// drop a bomb
+		System.out.println("hero drops a bomb");
+		model.applyDropBomb(hero);
+		
+		// change hero direction
+		System.out.println("change hero direction: DOWN>LEFT");
+		model.applyChangeHeroDirection(hero,Direction.LEFT);
+		
+		// simulate
+		model.simulate();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulate();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		
+		// change hero direction
+		System.out.println("change hero direction: LEFT>UP");
+		model.applyChangeHeroDirection(hero,Direction.UP);
+		
+		// simulate
+		model.simulate();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulate();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulate();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// INITIALISATION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Initialise la zone de manière à obtenir le résultat suivant :<br/>
+	 * <pre>
+	 * ┌─┬─┬─┬─┬─┬─┬─┐
+	 * │█│█│█│█│█│█│█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│☺│ │□│ │ │█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │█│ │█│ │█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │ │ │ │▒│█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │█│ │█│ │█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │ │ │ │●│█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│█│█│█│█│█│█│
+	 * └─┴─┴─┴─┴─┴─┴─┘
+	 * </pre>
+	 */
+	public static AiSimZone initZone()
+	{	RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
 		AiSimTile tile;
 		AiSimState state;
@@ -69,8 +185,10 @@ public final class AiModelTest
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
 		zone = new AiSimZone(7,7);
-		zone.hiddenItemsCount = 1;
-		zone.hiddenItemsCounts.put(AiItemType.EXTRA_BOMB,1);
+		int hiddenItemsCount = 1;
+		HashMap<AiItemType, Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
+		hiddenItemsCounts.put(AiItemType.EXTRA_BOMB,1);
+		zone.setHidenItemCount(hiddenItemsCount,hiddenItemsCounts);
 		
 		// fire prototype
 		burningDuration = 200;
@@ -179,72 +297,6 @@ public final class AiModelTest
 					burningDuration,currentSpeed,destructible,stopHeroes,stopFires);
 			zone.addSprite(block);
 		}
-		
-		// display initial zone
-		System.out.println("initial zone:\n"+zone);
-		AiModel model = new AiModel(zone);
-		model.setSimulateItemsAppearing(true);
-		
-		// first simulation
-		long duration = 0;
-		int iteration = 0;
-		do
-		{	// process simulation
-			model.simulate();
-//			model.simulate(hero);
-//			model.simulateUntilFire();
-			duration = model.getDuration();
-			// display result
-			System.out.println("iteration "+iteration);
-			System.out.println("duration:"+duration);
-			System.out.println(model.getCurrentZone());
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
-		
-		// change hero direction
-		System.out.println("change hero direction: LEFT>DOWN");
-		model.applyChangeHeroDirection(hero,Direction.DOWN);
-		
-		// simulate until the hero undergoes some change
-		model.simulate(hero);
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate(hero);
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		
-		// drop a bomb
-		System.out.println("hero drops a bomb");
-		model.applyDropBomb(hero);
-		
-		// change hero direction
-		System.out.println("change hero direction: DOWN>LEFT");
-		model.applyChangeHeroDirection(hero,Direction.LEFT);
-		
-		// simulate
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		
-		// change hero direction
-		System.out.println("change hero direction: LEFT>UP");
-		model.applyChangeHeroDirection(hero,Direction.UP);
-		
-		// simulate
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-*/	
+		return zone;
 	}
 }

@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter;
+package org.totalboumboum.ai.v201112.adapter.agent;
 
 /*
  * Total Boum Boum
