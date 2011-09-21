@@ -32,7 +32,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/** Le Tile ou on vas poser une bombe pour detruire des murs */
 	private AiTile endTileDestruct = null;
 	private AiTile endTileAttack = null;
-	/** le personnage dirig� par cette IA */
+	/** le personnage dirigé par cette IA */
 	private AiHero ownHero = null;
 	/** la zone de jeu */
 	private AiZone zone = null;

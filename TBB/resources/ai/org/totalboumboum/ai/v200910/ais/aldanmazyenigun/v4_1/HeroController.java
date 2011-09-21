@@ -149,7 +149,7 @@ public class HeroController {
 		private void updateCostCalculator() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-			// calcul de la matrice de coût : on prend l'opposé du niveau de sûret�
+			// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
 			// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		//	double dangerMatrix[][] = ai.getZoneFormee().getMatrix();
 			for(int line=0;line<zone.getHeight();line++)

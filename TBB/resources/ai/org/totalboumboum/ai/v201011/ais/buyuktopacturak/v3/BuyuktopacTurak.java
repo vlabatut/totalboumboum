@@ -36,7 +36,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** la zone de jeu */
 	private AiZone zone = null;		
-	/** le personnage dirig� par cette IA */
+	/** le personnage dirigé par cette IA */
 	private AiHero ownHero = null;
 	private AiAction result = new AiAction(AiActionName.NONE);
 	private Direction moveDir;

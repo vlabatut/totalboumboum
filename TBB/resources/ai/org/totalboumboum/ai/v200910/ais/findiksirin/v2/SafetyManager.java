@@ -40,7 +40,7 @@ public class SafetyManager
 	}
 	
 	/**
-	 * mise à jour de la matrice de sûret�
+	 * mise à jour de la matrice de sûreté
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption();

@@ -30,7 +30,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/** path qu'on va suivre*/
 	Astar as;
 	
-	/** le personnage dirig� par cette IA*/
+	/** le personnage dirigé par cette IA*/
 	private AiHero hero;
 	
 	/** la case occupée actuellement par le personnage */
@@ -104,7 +104,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 				}
 				
 				else{
-					// Si on n'est pas assez arm� et s'ils existent des bonus ouvert, on part pour les prendre
+					// Si on n'est pas assez armé et s'ils existent des bonus ouvert, on part pour les prendre
 					mustTakeBonus();
 					if(bonusExiste() && takeBonus)
 					{

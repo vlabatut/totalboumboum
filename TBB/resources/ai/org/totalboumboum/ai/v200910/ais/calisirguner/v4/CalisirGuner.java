@@ -22,7 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * on na pas pu atteindre nos objectifs po
  * les temps des bombes mais au moins on essaie de s'enfuir des bombes 
  * et tout va bien pour nos objectifs pour les bonus
- * et on sest profit� des classes de groupe bleu de l'annee precedente
+ * et on sest profité des classes de groupe bleu de l'annee precedente
  * 
  * @version 4
  * 

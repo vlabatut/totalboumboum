@@ -58,7 +58,7 @@ public class Map {
 		remplir();
 	}
 
-	// nous remplaçons notre map
+	// nous remplaÃ§ons notre map
 	private void remplir() {
 		accessibilite=new Etat [width][height];
 		risque=new int [width][height];
@@ -120,7 +120,7 @@ public class Map {
 
 		this.getfires();
 
-		// remplaçons les bonus
+		// remplaÃ§ons les bonus
 
 		Iterator<AiItem> itemit = objets.iterator();
 		AiItem item;

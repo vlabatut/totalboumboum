@@ -124,7 +124,7 @@ public class AvoidController
 	}
 	
 	/**
-	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
+	 * vérifie que le personnage est bien sur le chemin pré-calculé,
 	 * en supprimant si besoin les cases inutiles (car précedant la case courante).
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.

@@ -252,7 +252,7 @@ public class SafetyZone {
 				Collection<AiHero> heros = tile.getHeroes();
 				AiHero ownHero = zone.getOwnHero();
 
-				// s'il y a du feu : valeur z�ro (il ne reste pas de temps avant
+				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant
 				// l'explosion)
 				if (!fires.isEmpty()) {
 					attackMatrix[line][col] = FIRE;

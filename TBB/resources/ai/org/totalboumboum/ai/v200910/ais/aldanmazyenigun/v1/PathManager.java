@@ -100,7 +100,7 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionn�e */
+	/** la case de destination sélectionnée */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;

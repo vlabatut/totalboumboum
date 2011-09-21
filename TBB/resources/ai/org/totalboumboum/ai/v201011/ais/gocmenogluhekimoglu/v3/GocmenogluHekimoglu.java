@@ -87,7 +87,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence
 		 
 		choix.afficheText();
 		
-		// utiliser le vieux chemin si elle est plus longue, ou qu'il n'�tait pas plus de 25 millisecondes
+		// utiliser le vieux chemin si elle est plus longue, ou qu'il n'était pas plus de 25 millisecondes
 		if(oldpath == null || System.currentTimeMillis()-msec >= 25){
 			PathCalculator pcalc = new PathCalculator(this,choix);
 			if(oldpath == null || !oldpath.getLastTile().equals(pcalc.getPath().getLastTile()) || oldpath.compareTo(pcalc.getPath())<0){

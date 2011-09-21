@@ -146,7 +146,7 @@ public class DangerManager {
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 				int l = t.getLine();
 				int c = t.getCol();
-				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inf�rieur
+				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inférieur
 				if(matrix[l][c]>value)
 					matrix[l][c] = value;						
 			}
