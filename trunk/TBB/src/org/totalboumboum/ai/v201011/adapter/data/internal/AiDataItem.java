@@ -44,8 +44,8 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 
 /**
  * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlev�)
- * par l'item. Ce type est représent�e par une valeur de type AiItemType.
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
+ * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -79,7 +79,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item représent� */
+	/** type d'item représenté */
 	private AiItemType type;
 	
 	@Override
@@ -88,7 +88,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 	
 	/**
-	 * initialise le type de l'item représent�
+	 * initialise le type de l'item représenté
 	 */
 	private void initType()
 	{	Item item = getSprite();

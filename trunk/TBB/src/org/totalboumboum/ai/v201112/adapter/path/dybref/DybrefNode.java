@@ -54,16 +54,16 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * @param heuristicCalculator	
 	 * 		fonction heuristique
 	 */
-	protected DybrefNode(ArtificialIntelligence ai, AiTile tile, AiHero hero) throws StopRequestException
+	protected DybrefNode(ArtificialIntelligence ai, AiHero hero) throws StopRequestException
 	{	// ia
 		this.ai = ai;
 		// hero
 		this.hero = hero;
 		
+		// case courante
+		this.tile = hero.getTile();
 		// zone courante
 		this.zone = tile.getZone();
-		// case courante
-		this.tile = tile;
 		
 		// parent
 		parent = null;
@@ -75,10 +75,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		// durée totale
 		totalDuration = 0;
 		// matrice des temps d'accès
-		timeMatrix = new DybrefNode[zone.getHeight()][zone.getWidth()];
-		for(int i=0;i<zone.getHeight();i++)
-			for(int j=0;i<zone.getWidth();j++)
-				timeMatrix[i][j] = null;
+		matrix = new DybrefMatrix(hero);
 	}
 
 	/**
@@ -110,7 +107,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		// durée totale
 		totalDuration = parent.getTotalDuration() + duration;
 		// matrice des temps d'accès
-		timeMatrix = parent.getTimeMatrix();
+		matrix = parent.getMatrix();
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -240,7 +237,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		
 		// possibly report to parent (when all children have been processed)
 		if(processedChildren==children.size())
-		{	updateTimeMatrix();
+		{	matrix.update(this);
 			reportSafety(this);
 		}
 		
@@ -264,7 +261,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	// TIME MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** matrice contenant les chemins les plus courts pour accéder à chaque cases */
-	private DybrefNode[][] timeMatrix = null;
+	private DybrefMatrix matrix = null;
 	
 	/**
 	 * Renvoie la matrice contenant les temps d'accès
@@ -273,25 +270,10 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * @return	
 	 * 		Une matrice de {@code DybrefNode}.
 	 */
-	public DybrefNode[][] getTimeMatrix()
-	{	return timeMatrix;
+	public DybrefMatrix getMatrix()
+	{	return matrix;
 	}
 
-	/**
-	 * Met à jour la matrice des temps d'accès
-	 * en fonction du temps associé à cette case
-	 * et des valeurs déjà contenues dans la matrice.
-	 */
-	private void updateTimeMatrix()
-	{	if(safe)
-		{	int r = tile.getRow();
-			int c = tile.getCol();
-			DybrefNode node = timeMatrix[r][c];
-			if(node==null || totalDuration<node.getTotalDuration())
-				timeMatrix[r][c] = this;
-		}
-	}
-	
     /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -369,6 +351,9 @@ public final class DybrefNode implements Comparable<DybrefNode>
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						DybrefNode node = new DybrefNode(futureTile,duration,parent);
 // TODO optimisation >> on ne considère l'attente que s'il reste du feu ou des bombes dans la case...
+// TODO même chose pour la simulation ?
+// TODO adapter les coms de l'exception
+// TODO revoir tous les coms des classes du package dybref
 						children.add(node);
 					}
 					// si la case n'est pas la bonne : 

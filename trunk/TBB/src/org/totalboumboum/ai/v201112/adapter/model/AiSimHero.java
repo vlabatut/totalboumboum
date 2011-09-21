@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * simule un personnage du jeu, ie un sprite contr�l� par un joueur
+ * simule un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -40,7 +40,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		num�ro d'identification du personnage
+	 * 		numéro d'identification du personnage
 	 * @param tile
 	 * 		case contenant le personnage
 	 * @param posX

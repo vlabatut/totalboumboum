@@ -84,7 +84,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	private boolean destructible;
 
 	/** 
-	 * met jour l'indicateur de destructibilit� 
+	 * met jour l'indicateur de destructibilité 
 	 */
 	private void updateDestructible()
 	{	Block sprite = getSprite();

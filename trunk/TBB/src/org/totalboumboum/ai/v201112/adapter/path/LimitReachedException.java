@@ -26,12 +26,17 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
- * exception lev�e par l'algorithme A* quand il atteint une des limites fix�es au pr�alable.
- * On ne peut donc pas conclure quant à l'existence d'un chemin solution.
- * En d'autres termes : cette exception indique qu'A* a explor� un arbre bien trop
+ * Exception levée par un algorithme de recherche de chemin 
+ * quand il atteint une des limites fixées au préalable.<br/>
+ * Pour A*, on ne peut donc pas conclure quant à l'existence d'un chemin solution.
+ * En d'autres termes : cette exception indique qu'A* a exploré un arbre bien trop
  * grand, sans pourtant trouver la solution. On ne peut donc pas savoir s'il existe
- * un état final quelque part dans la partie non-explor�e de l'arbre, ou bien
- * s'il n'existe pas de solution du tout.  
+ * un état final quelque part dans la partie non-explorée de l'arbre, ou bien
+ * s'il n'existe pas de solution du tout.</br>
+ * Pour Dybref, cela signifie que l'algorithme n'a pas pu explorer tous les
+ * chemins existant. Il est toutefois possible qu'un chemin soit affecté à chaque
+ * case, car cet algorithme considère les pauses, et donc est susceptible de trouver
+ * plusieurs chemins pour aller à une même case.
  * 
  * @author Vincent Labatut
  */
@@ -40,8 +45,8 @@ public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 
 	/**
-	 * crée une exception représentant le fait que l'algorithme A*
-	 * a atteint une des limites qui lui �taient fix�es sans pour autant
+	 * Crée une exception représentant le fait que l'algorithme A*
+	 * a atteint une des limites qui lui étaient fixées sans pour autant
 	 * trouver de solution (i.e. de chemin)
 	 * 
 	 * @param startTile
@@ -55,11 +60,11 @@ public final class LimitReachedException extends Exception
 	 * @param size
 	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
 	 * @param maxCost
-	 * 		limite de coût fix�e pour l'exploration
+	 * 		limite de coût fixée pour l'exploration
 	 * @param maxHeight
-	 * 		limite de hauteur fix�e pour l'exploration
+	 * 		limite de hauteur fixée pour l'exploration
 	 * @param maxSize
-	 * 		limite de taille (exprimée en nombre de noeuds) fix�e pour l'exploration
+	 * 		limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration
 	 */
 	public LimitReachedException(AiTile startTile, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
 	{	this.startTile = startTile;
@@ -71,8 +76,35 @@ public final class LimitReachedException extends Exception
 		this.maxHeight = maxHeight;
 		this.maxSize = maxSize;	
 	}
+
+	/**
+	 * Crée une exception représentant le fait que l'algorithme Dybref
+	 * a atteint une des limites qui lui étaient fixées sans pour autant
+	 * terminer le traitement.
+	 * 
+	 * @param startTile
+	 * 		case initiale
+	 * @param height
+	 * 		hauteur maximale atteinte pour l'arbre de recherche
+	 * @param size
+	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
+	 * @param maxHeight
+	 * 		limite de hauteur fixée pour l'exploration
+	 * @param maxSize
+	 * 		limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration
+	 */
+	public LimitReachedException(AiTile startTile, int height, int size, int maxHeight, int maxSize)
+	{	this.startTile = startTile;
+		this.endTiles = null;
+		this.height = height;
+		this.cost = -1;
+		this.size = size;
+		this.maxCost = -1;
+		this.maxHeight = maxHeight;
+		this.maxSize = maxSize;	
+	}
 	
-    /////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/** case de départ de la recherche (état initial) */
@@ -96,6 +128,7 @@ public final class LimitReachedException extends Exception
 	
     /**
      * renvoie les cases d'arrivée de la recherche
+     * (uniquement pour A*)
      * 
      * @return
 	 * 		une case de la zone
@@ -145,6 +178,7 @@ public final class LimitReachedException extends Exception
 	/**
 	 * renvoie la limite de coût pour l'exploration de l'arbre de recherche.
 	 * une valeur négative représente une absence de limite.
+     * (uniquement pour A*)
 	 * 
 	 * @return
 	 * 		la limite de coût pour l'exploration de l'arbre de recherche
@@ -173,11 +207,11 @@ public final class LimitReachedException extends Exception
 	private int size;
 
 	/**
-	 * renvoie la limite qui avait été fix�e pour la taille
+	 * renvoie la limite qui avait été fixée pour la taille
 	 * de l'arbre de recherche exprimée en noeuds.
 	 * 
 	 * @return
-	 * 		la limite de taille fix�e pour l'arbre
+	 * 		la limite de taille fixée pour l'arbre
 	 */
 	public int getMaxSize()
 	{	return maxSize;
@@ -188,7 +222,7 @@ public final class LimitReachedException extends Exception
 	 * exprimée en nombre de noeuds.
 	 * 
 	 * @return
-	 * 		la taille de l'arbre explor�
+	 * 		la taille de l'arbre exploré
 	 */
 	public int getSize()
 	{	return size;

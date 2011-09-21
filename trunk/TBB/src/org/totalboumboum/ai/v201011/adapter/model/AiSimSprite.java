@@ -37,7 +37,7 @@ abstract class AiSimSprite implements AiSprite
 	 * crée une nouvelle simulation d'un sprite
 	 * 
 	 * @param id
-	 * 		num�ro d'identification du sprite
+	 * 		numéro d'identification du sprite
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param posX

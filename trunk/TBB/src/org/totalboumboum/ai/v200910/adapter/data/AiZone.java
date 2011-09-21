@@ -221,7 +221,7 @@ public class AiZone
 	
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, pour la manche en cours.
-	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jou�e, 
+	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jouée, 
 	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @param hero	le personnage considéré
@@ -233,7 +233,7 @@ public class AiZone
 	
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, pour la rencontre en cours.
-	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
+	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
 	 * 
 	 * @param hero	le personnage considéré
 	 * @return	son classement dans la rencontre en cours
@@ -244,7 +244,7 @@ public class AiZone
 	
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, dans le classement général du jeu (Glicko-2)
-	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
+	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
 	 * 
 	 * @param hero	le personnage considéré
 	 * @return	son classement général (Glicko-2)
@@ -256,13 +256,13 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** niveau représent� par cette classe */
+	/** niveau représenté par cette classe */
 	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** joueur contr�l� par l'IA */
+	/** joueur contrôlé par l'IA */
 	private AbstractPlayer player;
 	
 	/////////////////////////////////////////////////////////////////
@@ -312,7 +312,7 @@ public class AiZone
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].update();
-		// supprime les sprites non-marqu�s
+		// supprime les sprites non-marqués
 		removeUnchecked(blockMap);
 		removeUnchecked(bombMap);
 		removeUnchecked(fireMap);
@@ -322,7 +322,7 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'�cran)
+	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
 	 * de la zone de jeu exprimée en cases (ie: nombre de lignes)
 	 *  
 	 *  @return	hauteur de la zone
@@ -332,7 +332,7 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'�cran)
+	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
 	 * de la zone de jeu exprimée en cases (ie: nombre de colonnes)
 	 *  
 	 *  @return	largeur de la zone
@@ -347,8 +347,8 @@ public class AiZone
 	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
-	 *  @param	line	num�ro de la ligne contenant la case à renvoyer
-	 *  @param	col	num�ro de la colonne contenant la case à renvoyer
+	 *  @param	line	numéro de la ligne contenant la case à renvoyer
+	 *  @param	col	numéro de la colonne contenant la case à renvoyer
 	 *  @return	case située aux coordonnées spécifiées en paramètres
 	 */
 	public AiTile getTile(int line, int col)
@@ -384,7 +384,7 @@ public class AiZone
 	 * la classe Direction pour plus d'informations sur ces valeurs.</br>
 	 *  
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
-	 * Cette méthode renvoie la direction du plus court chemin (sans consid�rer les éventuels obstacles).
+	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
 	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long.
 	 * <br><t> S>>>>>>>>>>T  distance=11
@@ -758,7 +758,7 @@ public class AiZone
 	/**
 	 * d�marque toutes les représentations de sprites d'une liste determinée en fonction du type
 	 * T param�trant cette méthode. méthode appelée au début de la mise à jour :
-	 * les représentations de sprites qui n'ont pas été marqu�es à la fin de la mise à jour
+	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprim�es de cette représentation.
 	 * 
@@ -774,7 +774,7 @@ public class AiZone
 	}
 	/**
 	 * méthode compl�mentaire de uncheckAll, et chargée de supprimer
-	 * les représentations de sprites non-marqu�es à la fin de la mise à jour.
+	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
@@ -810,18 +810,18 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contr�l� par l'IA */
+	/** le personnage contrôlé par l'IA */
 	private AiHero ownHero;
 
 	/** 
-	 * renvoie le personnage qui est contr�l� par l'IA
+	 * renvoie le personnage qui est contrôlé par l'IA
 	 */
 	public AiHero getOwnHero()
 	{	return ownHero;	
 	}
 	
 	/**
-	 * initialise le personnage qui est contr�l� par l'IA
+	 * initialise le personnage qui est contrôlé par l'IA
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 
@@ -932,7 +932,7 @@ public class AiZone
 	 * @param col1	colonne de la première case
 	 * @param line2	ligne de la seconde case
 	 * @param col2	colonne de la seconde case
-	 * @param direction	direction à consid�rer
+	 * @param direction	direction à considérer
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
 	{	int result = level.getTileDistance(line1,col1,line2,col2,direction);
@@ -982,7 +982,7 @@ public class AiZone
 	 * 
 	 * @param sprite1	première case
 	 * @param sprite2	seconde case
-	 * @param direction	direction à consid�rer
+	 * @param direction	direction à considérer
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
 	{	int line1 = tile1.getLine();
@@ -1018,7 +1018,7 @@ public class AiZone
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
-	 * @param direction	direction à consid�rer
+	 * @param direction	direction à considérer
 	 */
 	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
 	{	AiTile tile1 = sprite1.getTile();
@@ -1061,7 +1061,7 @@ public class AiZone
 	 * @param y1	ordonnée du premier point
 	 * @param x2	abscisse du second point
 	 * @param y2	ordonnée du second point
-	 * @param direction	direction à consid�rer
+	 * @param direction	direction à considérer
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
@@ -1095,7 +1095,7 @@ public class AiZone
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
-	 * @param direction	direction à consid�rer
+	 * @param direction	direction à considérer
 	 */
 	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
 	{	double x1 = sprite1.getPosX();

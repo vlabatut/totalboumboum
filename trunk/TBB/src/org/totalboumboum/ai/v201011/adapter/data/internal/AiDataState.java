@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  */
 final class AiDataState implements AiState
 {
-	/** sprite dont l'état est représent� */
+	/** sprite dont l'état est représenté */
 	private Sprite sprite;
 	
 	/**

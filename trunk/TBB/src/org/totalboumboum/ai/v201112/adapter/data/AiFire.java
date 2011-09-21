@@ -36,7 +36,7 @@ public interface AiFire extends AiSprite
 	/**
 	 * teste si ce feu est capable de passer à travers les (certains) murs
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -47,7 +47,7 @@ public interface AiFire extends AiSprite
 	/**
 	 * teste si ce feu est capable de passer à travers les bombes
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -58,7 +58,7 @@ public interface AiFire extends AiSprite
 	/**
 	 * teste si ce feu est capable de passer à travers les items
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

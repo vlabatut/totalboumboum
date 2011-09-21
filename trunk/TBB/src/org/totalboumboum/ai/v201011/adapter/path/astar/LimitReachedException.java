@@ -27,11 +27,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 
 /**
- * exception lev�e par l'algorithme A* quand il atteint une des limites fix�es au pr�alable.
+ * exception levée par l'algorithme A* quand il atteint une des limites fixées au pr�alable.
  * On ne peut donc pas conclure quant à l'existence d'un chemin solution.
- * En d'autres termes : cette exception indique qu'A* a explor� un arbre bien trop
+ * En d'autres termes : cette exception indique qu'A* a exploré un arbre bien trop
  * grand, sans pourtant trouver la solution. On ne peut donc pas savoir s'il existe
- * un état final quelque part dans la partie non-explor�e de l'arbre, ou bien
+ * un état final quelque part dans la partie non-explorée de l'arbre, ou bien
  * s'il n'existe pas de solution du tout.  
  * 
  * @author Vincent Labatut
@@ -42,7 +42,7 @@ public final class LimitReachedException extends Exception
 
 	/**
 	 * crée une exception représentant le fait que l'algorithme A*
-	 * a atteint une des limites qui lui �taient fix�es sans pour autant
+	 * a atteint une des limites qui lui étaient fixées sans pour autant
 	 * trouver de solution (i.e. de chemin)
 	 * 
 	 * @param startTile
@@ -56,11 +56,11 @@ public final class LimitReachedException extends Exception
 	 * @param size
 	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
 	 * @param maxCost
-	 * 		limite de coût fix�e pour l'exploration
+	 * 		limite de coût fixée pour l'exploration
 	 * @param maxHeight
-	 * 		limite de hauteur fix�e pour l'exploration
+	 * 		limite de hauteur fixée pour l'exploration
 	 * @param maxSize
-	 * 		limite de taille (exprimée en nombre de noeuds) fix�e pour l'exploration
+	 * 		limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration
 	 */
 	public LimitReachedException(AiTile startTile, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
 	{	this.startTile = startTile;
@@ -174,11 +174,11 @@ public final class LimitReachedException extends Exception
 	private int size;
 
 	/**
-	 * renvoie la limite qui avait été fix�e pour la taille
+	 * renvoie la limite qui avait été fixée pour la taille
 	 * de l'arbre de recherche exprimée en noeuds.
 	 * 
 	 * @return
-	 * 		la limite de taille fix�e pour l'arbre
+	 * 		la limite de taille fixée pour l'arbre
 	 */
 	public int getMaxSize()
 	{	return maxSize;
@@ -189,7 +189,7 @@ public final class LimitReachedException extends Exception
 	 * exprimée en nombre de noeuds.
 	 * 
 	 * @return
-	 * 		la taille de l'arbre explor�
+	 * 		la taille de l'arbre exploré
 	 */
 	public int getSize()
 	{	return size;

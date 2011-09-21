@@ -67,7 +67,7 @@ public class AiOutput
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * r�initialise les chemins à afficher
+	 * réinitialise les chemins à afficher
 	 */
 	private void reinitPaths()
 	{	paths.clear();
@@ -168,7 +168,7 @@ public class AiOutput
 	private String tileTexts[][];
 	
 	/**
-	 * r�initialise les textes associés aux cases
+	 * réinitialise les textes associés aux cases
 	 */
 	private void reinitTileTexts()
 	{	for(int line=0;line<zone.getHeight();line++)

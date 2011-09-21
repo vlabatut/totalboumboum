@@ -1120,7 +1120,7 @@ if(sprite instanceof AiSimBomb)
 	 * @param tile
 	 * 		la case qui devra contenir la bombe.
 	 * @return
-	 * 		la bombe qui a été posée, ou null si c'�tait impossible.
+	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero, AiTile tile)
 	{	AiBomb result = null;
@@ -1146,7 +1146,7 @@ if(sprite instanceof AiSimBomb)
 	 * Le compteur de bombe du personnage est incr�ment�.
 	 * Si jamais la case contient déjà un objet emp�chant de poser la bombe,
 	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
-	 * Sinon (si la cr�ation est possible) alors la fonction renvoie la bombe créée.
+	 * Sinon (si la création est possible) alors la fonction renvoie la bombe créée.
 	 * Si jamais le personnage ne peut pas poser de bombes pour l'instant,
 	 * la bombe n'est pas créée et la valeur null est renvoyée. 
 	 * 
@@ -1196,7 +1196,7 @@ if(sprite instanceof AiSimBomb)
 	 * @param hero
 	 * 		le personnage que l'on veut voir poser une bombe
 	 * @return
-	 * 		la bombe qui a été posée, ou null si c'�tait impossible.
+	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero)
 	{	AiBomb result = null;

@@ -38,7 +38,7 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		num�ro d'identification du feu
+	 * 		numéro d'identification du feu
 	 * @param tile
 	 * 		case contenant le feu
 	 * @param posX

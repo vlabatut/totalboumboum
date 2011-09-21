@@ -53,7 +53,7 @@ public class AiTile
 	
 	/**
 	 * construit une représentation de la case passée en paramètre
-	 * @param tile	case représent�e
+	 * @param tile	case représentée
 	 * @param zone	zone contenant la représentation
 	 */
 	AiTile(Tile tile, AiZone zone)
@@ -125,7 +125,7 @@ public class AiTile
 	private int col;
 		
 	/** 
-	 * renvoie le num�ro de la ligne contenant cette case
+	 * renvoie le numéro de la ligne contenant cette case
 	 * 
 	 * @return	la ligne de cette case
 	 */
@@ -133,7 +133,7 @@ public class AiTile
 	{	return line;	
 	}
 	/** 
-	 * renvoie le num�ro de la colonne contenant cette case
+	 * renvoie le numéro de la colonne contenant cette case
 	 *  
 	 * @return	la colonne de cette case
 	 */
@@ -142,7 +142,7 @@ public class AiTile
 	}
 	
 	/** 
-	 * initialise les num�ros de ligne et colonne de cette case 
+	 * initialise les numéros de ligne et colonne de cette case 
 	 */
 	private void initLocation()
 	{	this.line = tile.getRow();

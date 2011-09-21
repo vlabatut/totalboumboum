@@ -79,7 +79,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'ensemble des percepts destin�s à l'IA */
+	/** l'ensemble des percepts destinés à l'IA */
 	private AiDataZone percepts;
 	/** le moteur du jeu */
 	private VisibleLoop loop;

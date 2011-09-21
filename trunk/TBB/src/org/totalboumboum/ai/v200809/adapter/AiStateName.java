@@ -55,7 +55,7 @@ public enum AiStateName
 	// unused gestures: NONE, ENDED, HIDING
 	
 	/**
-	 * convertit une chaine de caract�res correspondant à un geste du jeu
+	 * convertit une chaine de caractères correspondant à un geste du jeu
 	 * en un objet correspondant à une action telle qu'elle est per�ue par l'IA.
 	 * 
 	 * @param gesture	geste à convertir

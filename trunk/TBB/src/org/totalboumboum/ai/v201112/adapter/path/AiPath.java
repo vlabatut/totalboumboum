@@ -46,9 +46,9 @@ public class AiPath implements Comparable<AiPath>
     /////////////////////////////////////////////////////////////////
 	// STARTING POINT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse du point de départ pr�cis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
+	/** abscisse du point de départ précis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
 	private double startX;
-	/** ordonnée du point de départ pr�cis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
+	/** ordonnée du point de départ précis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
 	private double startY;
 	
 	/**
@@ -259,6 +259,19 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
+	 * Remplace la pause de la case dont la position est passée en paramètre par
+	 * la durée passée en paramètre, dans ce chemin.
+	 * 
+	 * @param index
+	 * 		position de la case dont la pause est à remplacer
+	 * @param pause
+	 * 		la nouvelle pause
+	 */
+	public void setPause(int index, long pause)
+	{	pauses.set(index,pause);
+	}
+	
+	/**
 	 * Supprime de ce chemin la case dont la position est passée en paramètre
 	 * (supprime également l'éventuelle pause associée).
 	 * 
@@ -274,7 +287,7 @@ public class AiPath implements Comparable<AiPath>
 	
 	/**
 	 * Supprime de ce chemin la case passée en paramètre,
-	 * ainsi que (éventuellement) la pause qui lui �tait
+	 * ainsi que (éventuellement) la pause qui lui était
 	 * associée.
 	 * 
 	 * @param tile

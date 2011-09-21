@@ -37,7 +37,7 @@ public interface AiBlock extends AiSprite
 	/**
 	 * indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -48,7 +48,7 @@ public interface AiBlock extends AiSprite
 	/**
 	 * indique si ce bloc arrête les explosions.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -63,7 +63,7 @@ public interface AiBlock extends AiSprite
 	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
 	 * 
 	 * @return	
-	 * 		l'indicateur de destructibilit� du mur
+	 * 		l'indicateur de destructibilité du mur
 	 */
 	public boolean isDestructible();
 }

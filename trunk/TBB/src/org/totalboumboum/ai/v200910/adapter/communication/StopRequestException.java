@@ -23,7 +23,7 @@ package org.totalboumboum.ai.v200910.adapter.communication;
 
 /**
  * 
- * exception levée par l'IA quand le moteur du jeu lui demande de se terminer.
+ * exception levÃ©e par l'IA quand le moteur du jeu lui demande de se terminer.
  *  
  * @author Vincent Labatut
  *

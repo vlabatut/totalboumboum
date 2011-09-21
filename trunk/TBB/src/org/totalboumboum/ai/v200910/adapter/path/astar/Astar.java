@@ -43,7 +43,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
  * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche anc�tre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
- * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
+ * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini.</br>
  * 
  * Cette implément trouved donc le chemin le plus court entre deux cases,
@@ -196,7 +196,7 @@ public class Astar
 		if(!endTiles.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				// on prend le noeud situé en t�te de file
+				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				if(verbose)
 				{	System.out.println("Visited : "+currentNode.toString());

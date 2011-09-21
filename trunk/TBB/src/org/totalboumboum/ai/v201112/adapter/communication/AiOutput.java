@@ -70,7 +70,7 @@ public class AiOutput
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * r�initialise les chemins à afficher
+	 * réinitialise les chemins à afficher
 	 */
 	private void reinitPaths()
 	{	paths.clear();
