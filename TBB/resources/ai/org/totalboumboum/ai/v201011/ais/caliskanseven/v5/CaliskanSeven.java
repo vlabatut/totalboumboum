@@ -55,7 +55,7 @@ public class CaliskanSeven extends ArtificialIntelligence
 		
 		// Movement & Placing the bombs
 		AiTile target = pfind.findTarget(this, mtx_final);
-		//BUNU SÝL
+		//BUNU S L
 		
 		try {
 			//Stabilizing the path

@@ -12,7 +12,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Cette classe calcule la matrice de la mode collecte.
- * @author Onur B�y�ktopa� & Yigit Turak
+ * @author Onur B y ktopa  & Yigit Turak
  */
 public class CollectionMatrix{	
 	private BuyuktopacTurak bt;
@@ -20,7 +20,7 @@ public class CollectionMatrix{
 	private AiZone zone;		
 	private AiHero deepPurple;
 	
-	private List<AiTile> freeList =new ArrayList<AiTile>(); //ula��labilir tile.lar	
+	private List<AiTile> freeList =new ArrayList<AiTile>(); //ula  labilir tile.lar	
 	private List<AiItem> itemsList;
 	private List<AiTile> bonusList; 
 	private List<AiBlock> destWallsList;
@@ -35,7 +35,7 @@ public class CollectionMatrix{
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**
-	 * C�est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * C'est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @param zone
 	 * @throws StopRequestException

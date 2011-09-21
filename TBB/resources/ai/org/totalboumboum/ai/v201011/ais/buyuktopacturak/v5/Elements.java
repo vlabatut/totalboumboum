@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
  * Cette classe contient les Contrôles du posage de bombe. 
- * @author Onur B�y�ktopa� & Yigit Turak
+ * @author Onur B y ktopa  & Yigit Turak
  */
 public class Elements {
 	private BuyuktopacTurak bt;
@@ -26,7 +26,7 @@ public class Elements {
 
 	
 	/**
-	 * C�est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * C est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @param zone
 	 * @throws StopRequestException
@@ -87,7 +87,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des murs destructibles qui ne vont pas d�exploser 
+	 * On renvoie la liste des murs destructibles qui ne vont pas d'exploser 
 	 * dans notre portée virtuelle de la bombe.
 	 * @param tile
 	 * @param range
@@ -118,7 +118,7 @@ public class Elements {
 							willBurn = true;
 						}
 					}
-					//Patlamayacaksa biz patlatal�m (bence)
+					//Patlamayacaksa biz patlatal m (bence)
 					if(willBurn == false){
 						inRangeWalls.add(r.getBlocks().get(0));
 					}
@@ -129,7 +129,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des bonus qui ne vont pas d�exploser 
+	 * On renvoie la liste des bonus qui ne vont pas d'exploser 
 	 * dans notre portée virtuelle de la bombe.
 	 * @param tile
 	 * @param range
@@ -179,7 +179,7 @@ public class Elements {
 		bt.checkInterruption();
 		
 		List<AiTile> myBombRange = new ArrayList<AiTile>();
-		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki d��manlar� al�r
+		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki d  manlar  al r
 		
 		myBombRange = ps.getBombRangeList(tile, range);
 		
@@ -197,7 +197,7 @@ public class Elements {
 	
 	/**
 	 * On renvoie la taille de la liste des murs destructibles 
-	 * qui ne vont pas d�exploser dans notre portée virtuelle de la bombe.
+	 * qui ne vont pas d'exploser dans notre portée virtuelle de la bombe.
 	 * @param tile
 	 * @param range
 	 * @return int
@@ -210,7 +210,7 @@ public class Elements {
 
 	/**
 	 * On renvoie la taille de la liste des bonus 
-	 * qui ne vont pas d�exploser dans notre portée virtuelle de la bombe.
+	 * qui ne vont pas d'exploser dans notre portée virtuelle de la bombe.
 	 * @param tile
 	 * @param range
 	 * @return int
