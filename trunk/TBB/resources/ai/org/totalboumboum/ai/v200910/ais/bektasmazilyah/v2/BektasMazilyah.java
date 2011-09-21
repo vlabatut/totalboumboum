@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class BektasMazilyah extends ArtificialIntelligence
 {	
 	private AiZone zone;
-	// le personnage dirig� par cette IA
+	// le personnage dirigé par cette IA
 	private AiHero hero;
 	//la prochaine action que l'IA veut réaliser
 	private AiAction action;
@@ -404,7 +404,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	
 	/** matrice représentant la zone et tous les sprites qu'elle contient */
 	private AiTile[][] matrix;
-	/** niveau représent� par cette classe */
+	/** niveau représenté par cette classe */
 
 	private boolean isClear(AiTile tile, int[][][] matriceDefence) throws StopRequestException
 	{	

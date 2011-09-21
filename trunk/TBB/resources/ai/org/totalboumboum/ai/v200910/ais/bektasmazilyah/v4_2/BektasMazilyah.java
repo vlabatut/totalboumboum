@@ -33,7 +33,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private AiZone zone;
 	Astar as;
 
-	// le personnage dirig� par cette IA
+	// le personnage dirigé par cette IA
 	private AiHero hero;
 //	private AiTile previousTile;
 	private AiTile currentTile;
@@ -132,7 +132,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 									System.out.println("8");
 									moveDir=zone.getDirection(currentTile, nextTile);
 									dropBomb=kacabilirmi();
-									System.out.println("8den sonra ka�ar asl�nda:"+dropBomb);
+									System.out.println("8den sonra kaar aslnda:"+dropBomb);
 									if(targetTile==currentTile && dropBomb){
 										System.out.println("9");
 										dropBomb=false;
@@ -175,7 +175,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiTile> l = dangerZone.findRivalsTiles();
 		List<AiTile> li =sirala(l);
 		Iterator<AiTile> it =li.iterator();
-	//	System.out.println("it yarat�ld�");
+	//	System.out.println("it yaratld");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -246,10 +246,10 @@ public class BektasMazilyah extends ArtificialIntelligence
 		checkInterruption();
 		AiTile tile = null;
 		List<AiTile> l = dangerZone.findSafeTiles();
-	//	System.out.println("en yak�n safe tilelar:"+li);
+	//	System.out.println("en yakn safe tilelar:"+li);
 		List<AiTile> li =sirala(l);
 		Iterator<AiTile> it =li.iterator();
-	//	System.out.println("it yarat�ld�");
+	//	System.out.println("it yaratld");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -279,9 +279,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	{
 		checkInterruption();
 		List<AiTile> neighbors = takeInRange();
-//		System.out.println("i�aretlenecek yerler:" + neighbors);
+//		System.out.println("iaretlenecek yerler:" + neighbors);
 		List<AiTile> result = removeFromList(neighbors);
-//		System.out.println("listeden ��k�nca:" + result);
+//		System.out.println("listeden knca:" + result);
 		Iterator<AiTile> it = result.iterator();
 		AiTile temp=null;
 		int count=0;
@@ -479,9 +479,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiTile> l = dangerZone.findBonusTiles();
 	//	System.out.println("bonuslar:"+l);
 		List<AiTile> li = sirala(l);
-	//	System.out.println("bonuslar�n sûral�s�:"+li);
+	//	System.out.println("bonuslarn srals:"+li);
 		Iterator<AiTile> it =li.iterator();
-		//System.out.println("it yarat�ld�");
+		//System.out.println("it yaratld");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -518,7 +518,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		AiTile tile = null;
 		ArrayList<AiTile> li = bombMatrice.findPlusSafeTiles();
 		Iterator<AiTile> it =li.iterator();
-	//	System.out.println("it yarat�ld�");
+	//	System.out.println("it yaratld");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -598,7 +598,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		AiTile temp=null;
 		List<AiTile> tiles = new ArrayList<AiTile>();
 		List<AiHero> heroes = zone.getHeroes();
-//		System.out.println("d��man burda:"+heroes);
+//		System.out.println("dman burda:"+heroes);
 		if(heroes.contains(hero))
 			heroes.remove(hero);
 		Iterator<AiHero> itHero = heroes.iterator();
@@ -619,18 +619,18 @@ public class BektasMazilyah extends ArtificialIntelligence
 		while(itTile.hasNext())
 		{
 			temp=itTile.next();
-	//		System.out.println("bu tile i�in: bak�yo" +temp);
+	//		System.out.println("bu tile iin: bakyo" +temp);
 			if(dangerZone.getValeur(temp.getCol(), temp.getLine())== EtatEnum.BLOCDEST)
 				dest.add(temp);
 		}
 		
-//		System.out.println("dest bu ��kt�:"+dest);
+//		System.out.println("dest bu kt:"+dest);
 		
 		dest=findClearNeighbors(dest);
-//		System.out.println("kom�ular� bu:"+dest);
+//		System.out.println("komular bu:"+dest);
 		List<AiTile> dst= dangerZone.findTilesForDestruct(dest);
 		dest=sirala(dst);
-//		System.out.println("�uralara b�rakmaya �al���yorum:"+dest);
+//		System.out.println("uralara brakmaya alyorum:"+dest);
 		temp=null;
 		AiTile kare=null;
 		Iterator<AiTile> it =dest.iterator();

@@ -40,7 +40,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * classe chargée d'implémenter un déplacement de fuite,
- * (personnage menac� par une ou plusieurs bombes) 
+ * (personnage menacé par une ou plusieurs bombes) 
  */
 public class EscapeManager
 {
@@ -83,7 +83,7 @@ public class EscapeManager
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionn�e pour la fuite */
+	/** la case de destination sélectionnée pour la fuite */
 	private AiTile tileDest;
 	/** destinations potentielles */
 	private List<AiTile> possibleDest;
@@ -122,8 +122,8 @@ public class EscapeManager
 	}
 	
 	/**
-	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
-	 * en supprimant si besoin les cases inutiles (car pr�cedant la case courante).
+	 * vérifie que le personnage est bien sur le chemin pré-calculé,
+	 * en supprimant si besoin les cases inutiles (car précedant la case courante).
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
 	 */
@@ -142,7 +142,7 @@ public class EscapeManager
 	 * aucun obstacle n'est apparu depuis la dernière itération.
 	 * Contrairement au PathManager, ici pour simplifier on ne teste
 	 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
-	 * les changement concernant la sûret� des cases. En d'autres termes,
+	 * les changement concernant la sûreté des cases. En d'autres termes,
 	 * si une bombe apparait avant que le personnage d'ait atteint une
 	 * case sure, elle ne sera pas prise en compte dans la trajectoire.
 	 * 
@@ -173,7 +173,7 @@ public class EscapeManager
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// calcul de la matrice de coût : on prend l'opposé du niveau de sûret�
+		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
 		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)

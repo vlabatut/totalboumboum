@@ -61,7 +61,7 @@ public class Map {
 		remplir(zone);
 	}
 
-	// nous remplaçons notre map
+	// nous remplaÃ§ons notre map
 	protected void remplir(AiZone zone) throws StopRequestException {
 		source.checkInterruption();
 		// on initialise les matrices
@@ -87,7 +87,7 @@ public class Map {
 
 		this.getfires();
 
-		// remplaçons les bonus
+		// remplaÃ§ons les bonus
 
 		Iterator<AiItem> itemit = objets.iterator();
 		AiItem item;

@@ -23,7 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * et on sest profit� des classes de groupe bleu de l'annee precedente
+ * et on sest profité des classes de groupe bleu de l'annee precedente
  * 
  * @version 5.c
  * 
@@ -515,7 +515,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		return meilleur_resultat;
 
 	}
-//on trouve les cases surs donc les cases qui ne sont pas menac�s par des flammes bombes feus
+//on trouve les cases surs donc les cases qui ne sont pas menacés par des flammes bombes feus
 	private Collection<AiTile> cases_sures(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE

@@ -29,7 +29,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 {	
 	private AiZone zone;
 
-	// le personnage dirig� par cette IA
+	// le personnage dirigé par cette IA
 	private AiHero hero;
 
 
@@ -65,7 +65,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		if(hero==null)
 			initMonAi();
 		dangerZone= new DangerZone(zone,this);
-		//System.out.println("zone yarat�ld�");
+		//System.out.println("zone yaratld");
 		
 /*		for(int i = 0; i<zone.getWidth() ; i++)
 		{	
@@ -84,9 +84,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 		if(hero != null)
 		{
 			Direction moveDir = Direction.NONE;
-			System.out.println("tehlikeye bak�lacak");
+			System.out.println("tehlikeye baklacak");
 			checkDanger();
-			System.out.println("tehlikeye bak�ld�");
+			System.out.println("tehlikeye bakld");
 			if(isDanger)
 			{//Il y a un danger, il faut se sauver.
 				//System.out.println("danger var");

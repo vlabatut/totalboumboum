@@ -147,7 +147,7 @@ public class EscapeManager
 	 * aucun obstacle n'est apparu depuis la dernière itération.
 	 * Contrairement au PathManager, ici pour simplifier on ne teste
 	 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
-	 * les changement concernant la sûret� des cases. En d'autres termes,
+	 * les changement concernant la sûreté des cases. En d'autres termes,
 	 * si une bombe apparait avant que le personnage d'ait atteint une
 	 * case sure, elle ne sera pas prise en compte dans la trajectoire.
 	 * 

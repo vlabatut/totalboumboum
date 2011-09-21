@@ -20,7 +20,7 @@ public class MatriceBlast extends MatriceCalc {
 	}
 
 	/**
-	 * Cette fonction donne 1 à la flamme et des bombes qui sont sur le point d'exploser, et il donne des valeurs inf�rieures à 1 à des cas qui sont en danger d'explosion. 0 est sûre.
+	 * Cette fonction donne 1 à la flamme et des bombes qui sont sur le point d'exploser, et il donne des valeurs inférieures à 1 à des cas qui sont en danger d'explosion. 0 est sûre.
 	 */
 	@Override
 	public void calculate() throws StopRequestException {

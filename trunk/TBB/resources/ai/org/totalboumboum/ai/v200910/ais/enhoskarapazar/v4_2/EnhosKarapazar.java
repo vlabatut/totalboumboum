@@ -25,7 +25,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	private Direction leftBomb = Direction.NONE;
 	private AiTile endTile = null;
 	private AiTile endTileAttack = null;
-	/** le personnage dirig� par cette IA */
+	/** le personnage dirigé par cette IA */
 	private AiHero ownHero = null;
 	/** la zone de jeu */
 	private AiZone zone = null;

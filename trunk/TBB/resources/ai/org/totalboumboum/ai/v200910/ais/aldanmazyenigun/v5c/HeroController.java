@@ -63,7 +63,7 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////
 		/** indique si le personnage est arrivé à destination */
 		private boolean arrived;
-		/** la case de destination sélectionn�e pour la fuite */
+		/** la case de destination sélectionnée pour la fuite */
 		private AiTile tileDest;
 		/** destinations potentielles */
 		private List<AiTile> possibleDest;
