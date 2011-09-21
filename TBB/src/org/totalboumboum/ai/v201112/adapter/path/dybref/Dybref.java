@@ -21,8 +21,6 @@ package org.totalboumboum.ai.v201112.adapter.path.dybref;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -30,7 +28,8 @@ import org.totalboumboum.ai.v201112.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 
 /**
  * implément de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
@@ -38,7 +37,7 @@ import org.totalboumboum.ai.v201112.adapter.path.AiPath;
  * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche anc�tre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
- * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
+ * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini.</br>
  * 
  * Cette implément trouve donc le chemin le plus court entre deux cases,
@@ -58,9 +57,6 @@ import org.totalboumboum.ai.v201112.adapter.path.AiPath;
  * @author Vincent Labatut
  *
  */
-
-// TODO revoir tous les coms des classes du package dybref
-
 public final class Dybref
 {	private static boolean verbose = false;
 
@@ -71,7 +67,7 @@ public final class Dybref
 	 * @param ai
 	 * 		l'AI invoquant A*
 	 * @param hero
-	 * 		le personnage à consid�rer pour les déplacements
+	 * 		le personnage à considérer pour les déplacements
 	 * @param costCalculator
 	 * 		la fonction de coût
 	 * @param heuristicCalculator
@@ -136,117 +132,68 @@ public final class Dybref
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
-	public AiPath processShortestPath(AiTile startTile) throws StopRequestException, LimitReachedException
-	{	if(verbose)
-		{	System.out.print("A*: from "+startTile+" to [");
-			for(AiTile tile: endTiles)
-				System.out.print(" "+tile);
-			System.out.println(" ]");
-		}		
+	public DybrefMatrix processShortestPaths(AiZone zone) throws StopRequestException, LimitReachedException
+	{	AiHero hero = zone.getHeroByColor(this.hero.getColor());
+		AiTile startTile = hero.getTile();
+		if(verbose)
+			System.out.println("Dybref*: from "+startTile);
 		int maxh = 0;
-		double maxc = 0;
 		int maxn = 0;
 
 		// initialisation
-		boolean found = false;
 		boolean limitReached = false;
-		AiPath result = new AiPath();
-		heuristicCalculator.setEndTiles(endTiles);
-		root = new AstarNode(ai,startTile,hero,costCalculator,heuristicCalculator,successorCalculator);
-		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
+		root = new DybrefNode(ai,hero);
+		PriorityQueue<DybrefNode> queue = new PriorityQueue<DybrefNode>(1);
 		queue.offer(root);
-		AstarNode finalNode = null;
 	
 		// traitement
-		if(!endTiles.isEmpty())
-		{	do
-			{	ai.checkInterruption();
-				// on prend le noeud situé en t�te de file
-				AstarNode currentNode = queue.poll();
-				if(verbose)
-				{	System.out.println("Visited : "+currentNode.toString());
-					System.out.println("Queue length: "+queue.size());
-				}
-				// on teste si on est arrivé à la fin de la recherche
-				if(endTiles.contains(currentNode.getTile()))
-				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
-					finalNode = currentNode;
-					found = true;
-				}
-				// si l'arbre a atteint la hauteur maximale, on s'arrête
-				else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
-					limitReached = true;
-				// si le noeud courant a atteint le cout maximal, on s'arrête
-				else if(maxCost>0 && currentNode.getCost()>=maxCost)
-					limitReached = true;
-				// si le nombre de noeuds dans la file est trop grand, on s'arrête
-				else if(maxNodes>0 && queue.size()>=maxNodes)
-					limitReached = true;
-				else
-				{	// sinon on récupére les noeuds suivants
-					List<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
-					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
-					// pour cette raison, cette implément d'A* ne renverra pas forcément toujours le même résultat :
-					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
-					Collections.shuffle(successors);
-					// puis on les rajoute dans la file de priorité
-					for(AstarNode node: successors)
-						queue.offer(node);
-				}
-				// verbose
-				if(currentNode.getDepth()>maxh)
-					maxh = currentNode.getDepth();
-				if(currentNode.getCost()>maxc)
-					maxc = currentNode.getCost();
-				if(queue.size()>maxn)
-					maxn = queue.size();
+		do
+		{	ai.checkInterruption();
+			
+			// on prend le noeud situé en tête de file
+			DybrefNode currentNode = queue.poll();
+			if(verbose)
+			{	System.out.println("Visited : "+currentNode.toString());
+				System.out.println("Queue length: "+queue.size());
 			}
-			while(!queue.isEmpty() && !found && !limitReached);
-		
-			// build solution path
-			if(found)
-			{	while(finalNode!=null)
-				{	AiTile tile = finalNode.getTile();
-					result.addTile(0,tile);
-					finalNode = finalNode.getParent();
-				}
+			
+			// si l'arbre a atteint la hauteur maximale, on s'arrête
+			else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
+				limitReached = true;
+			// si le nombre de noeuds dans la file est trop grand, on s'arrête
+			else if(maxNodes>0 && queue.size()>=maxNodes)
+				limitReached = true;
+			// sinon on récupére les noeuds suivants et on les rajoute dans la file de priorité
+			else
+			{	List<DybrefNode> successors = currentNode.getChildren();
+				for(DybrefNode node: successors)
+					queue.offer(node);
 			}
+			
+			// limits
+			if(currentNode.getDepth()>maxh)
+				maxh = currentNode.getDepth();
+			if(queue.size()>maxn)
+				maxn = queue.size();
 		}
-		
+		while(!queue.isEmpty() && !limitReached);
+	
 		if(verbose)
-		{	System.out.print("Path: [");
+		{	System.out.print("Process done: ");
 			if(limitReached)
 				System.out.println(" limit reached");
-			else if(found)
-			{	for(AiTile t: result.getTiles())
-					System.out.print(" "+t);
-			}
-			else //if(endTiles.isEmpty())
-				System.out.println(" endTiles parameter empty");
-			System.out.println(" ]");
-			//
-			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);
+			else //if(queue.isEmpty())
+				System.out.println(" nothing left to process");
+			System.out.print("height="+maxh+" size="+maxn);
 			System.out.print(" src="+root.getTile());
-			if(!endTiles.isEmpty()) 
-				System.out.print(" trgt="+endTiles.get(endTiles.size()-1));
-			if(result!=null) 
-				System.out.print(" result="+result);
 			System.out.println();
 		}
 
 		finish();
 		if(limitReached)
-			throw new LimitReachedException(startTile,endTiles,maxh,maxc,maxn,maxCost,maxHeight,maxNodes);
-		else if(endTiles.isEmpty())
-			throw new IllegalArgumentException("endTiles list must not be empty");
+			throw new LimitReachedException(startTile,maxh,maxn,maxHeight,maxNodes);
 		
-		// finish path
-		if(startTile.equals(hero.getTile()))
-		{	double startX = hero.getPosX();
-			double startY = hero.getPosY();
-			result.setStart(startX,startY);
-		}
-		
+		DybrefMatrix result = root.getMatrix();
 		return result;
 	}
 	
@@ -260,6 +207,9 @@ public final class Dybref
 	{	if(root!=null)
 		{	root.finish();
 			root = null;
-		}		
+		}
+		
+		ai = null;
+		hero = null;
 	}
 }

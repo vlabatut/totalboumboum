@@ -182,7 +182,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_COMBUSTION);
 			explosionTrigger = ability.isActive();
 		}
-		// latence de la bombe en cas de d�tonation déclench�e par explosion
+		// latence de la bombe en cas de détonation déclench�e par explosion
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}

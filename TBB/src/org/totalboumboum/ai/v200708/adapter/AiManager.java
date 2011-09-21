@@ -260,7 +260,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 		Iterator<AbstractPlayer> i = plyrs.iterator();
 		while(i.hasNext())
 		{	AbstractPlayer tempPlayer = i.next();
-			// le joueur représent� par cet objet ne doit pas apparaitre dans cette liste
+			// le joueur représenté par cet objet ne doit pas apparaitre dans cette liste
 			if(tempPlayer!=player)
 			{	// position
 				Tile t = tempPlayer.getSprite().getTile();

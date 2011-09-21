@@ -34,8 +34,8 @@ public interface AiSprite
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie le num�ro unique du sprite dans le jeu.<br/>
-	 * <b>Attention :</b> cette méthode n'est pas destin�e à la programmation des IA 
+	 * renvoie le numéro unique du sprite dans le jeu.<br/>
+	 * <b>Attention :</b> cette méthode n'est pas destinée à la programmation des IA 
 	 * 
 	 * @return	
 	 * 		l'id du sprite
@@ -74,18 +74,18 @@ public interface AiSprite
 	public AiTile getTile();
 	
 	/** 
-	 * renvoie le num�ro de la ligne contenant ce sprite 
+	 * renvoie le numéro de la ligne contenant ce sprite 
 	 * 
 	 * @return	
-	 * 		le num�ro de la ligne du sprite
+	 * 		le numéro de la ligne du sprite
 	 */
 	public int getRow();
 
 	/** 
-	 * renvoie le num�ro de la colonne contenant ce sprite
+	 * renvoie le numéro de la colonne contenant ce sprite
 	 * 
 	 * @return	
-	 * 		le num�ro de la colonne du sprite
+	 * 		le numéro de la colonne du sprite
 	 */
 	public int getCol();
 	
@@ -121,7 +121,7 @@ public interface AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la vitesse de déplacement courante du sprite exprimée en pixel/seconde.
-	 * si le sprite ne bouge pas, elle est de z�ro.
+	 * si le sprite ne bouge pas, elle est de zéro.
 	 * 
 	 * @return	
 	 * 		vitesse de déplacement du sprite en pixels/seconde

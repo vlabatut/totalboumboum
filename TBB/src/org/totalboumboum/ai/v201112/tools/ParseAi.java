@@ -40,7 +40,7 @@ import org.totalboumboum.tools.files.FileNames;
  * La liste IGNORED_PACKAGES permet, comme son nom l'indique, de spécifier
  * des packages que le parser devra ignorer dans le dossier principal de l'IA.
  * 
- * Dans la fonction main, la chaine de caract�res aiPack représente le chemin 
+ * Dans la fonction main, la chaine de caractères aiPack représente le chemin 
  * du dossier contenant l'ia (ou les ia).
  * 
  * @author Vincent Labatut

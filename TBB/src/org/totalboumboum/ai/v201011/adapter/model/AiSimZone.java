@@ -228,7 +228,7 @@ final class AiSimZone extends AiZone
 	 *  @param direction
 	 *  	direction de la case voisine relativement à la case de référence
 	 *  @return	
-	 *  	la case voisine dans la direction pr�cis�e
+	 *  	la case voisine dans la direction précis�e
 	 */
 	protected AiSimTile getNeighborTile(int line, int col, Direction direction)
 	{	AiSimTile result;
@@ -383,10 +383,10 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même num�ro (id)
+	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
-	 * de la simulation, dans lesquels il est représent�
+	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
@@ -459,10 +459,10 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même num�ro (id)
+	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
-	 * de la simulation, dans lesquels il est représent�
+	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
@@ -506,10 +506,10 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même num�ro (id)
+	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
-	 * de la simulation, dans lesquels il est représent�
+	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
@@ -565,10 +565,10 @@ final class AiSimZone extends AiZone
 	}
 		
 	/**
-	 * renvoie la simulation de sprite de même num�ro (id)
+	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
-	 * de la simulation, dans lesquels il est représent�
+	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
@@ -612,10 +612,10 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même num�ro (id)
+	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
-	 * de la simulation, dans lesquels il est représent�
+	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
@@ -704,10 +704,10 @@ final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * renvoie la simulation de sprite de même num�ro (id)
+	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
-	 * de la simulation, dans lesquels il est représent�
+	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
@@ -734,7 +734,7 @@ final class AiSimZone extends AiZone
 	 * @param hero
 	 * 		le personnage à insérer
 	 * @param 
-	 * 		isOwnHero	indique si le personnage à insérer est celui contr�l� par l'IA
+	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'IA
 	 */
 	protected void addHero(AiSimHero hero, boolean isOwnHero)
 	{	// sprites
@@ -786,10 +786,10 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même num�ro (id)
+	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
-	 * de la simulation, dans lesquels il est représent�
+	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
@@ -812,7 +812,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contr�l� par l'IA */
+	/** le personnage contrôlé par l'IA */
 	private AiSimHero ownHero;
 
 	@Override

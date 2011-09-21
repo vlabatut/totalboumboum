@@ -43,7 +43,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche anc�tre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
- * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
+ * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini.</br>
  * 
  * Cette implément trouve donc le chemin le plus court entre deux cases,
@@ -73,7 +73,7 @@ public final class Astar
 	 * @param ai
 	 * 		l'AI invoquant A*
 	 * @param hero
-	 * 		le personnage à consid�rer pour les déplacements
+	 * 		le personnage à considérer pour les déplacements
 	 * @param costCalculator
 	 * 		la fonction de coût
 	 * @param heuristicCalculator
@@ -89,7 +89,7 @@ public final class Astar
 	 * @param ai
 	 * 		l'AI invoquant A*
 	 * @param hero
-	 * 		le personnage à consid�rer pour les déplacements
+	 * 		le personnage à considérer pour les déplacements
 	 * @param costCalculator
 	 * 		la fonction de coût
 	 * @param heuristicCalculator
@@ -234,7 +234,7 @@ public final class Astar
 		if(!endTiles.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				// on prend le noeud situé en t�te de file
+				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				if(verbose)
 				{	System.out.println("Visited : "+currentNode.toString());
@@ -257,9 +257,9 @@ public final class Astar
 					limitReached = true;
 				else
 				{	// sinon on récupére les noeuds suivants
-					List<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
+					List<AstarNode> successors = currentNode.getChildren();
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
-					// pour cette raison, cette implément d'A* ne renverra pas forcément toujours le même résultat :
+					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
 					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité
@@ -333,6 +333,10 @@ public final class Astar
 	{	if(root!=null)
 		{	root.finish();
 			root = null;
-		}		
+		}
+		ai = null;
+		costCalculator = null;
+		heuristicCalculator = null;
+		root = null;
 	}
 }

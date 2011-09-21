@@ -31,7 +31,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente un personnage du jeu, ie un sprite contr�l� par un joueur
+ * représente un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -219,7 +219,7 @@ public class AiHero extends AiSprite<Hero>
 	 * teste si ce personnage est capable de passer
 	 * à travers le feu sans brûler
 	 * 
-	 * @return	vrai si le personnage r�siste au feu
+	 * @return	vrai si le personnage résiste au feu
 	 */
 	public boolean hasThroughFires()
 	{	return throughFires;	
@@ -258,7 +258,7 @@ public class AiHero extends AiSprite<Hero>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Renvoie le classement de ce joueur, pour la manche en cours.
-	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jou�e, 
+	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jouée, 
 	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @return	le classement de ce joueur dans la manche en cours
@@ -271,7 +271,7 @@ public class AiHero extends AiSprite<Hero>
 	
 	/**
 	 * Renvoie le classement de ce joueur, pour la rencontre en cours.
-	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
+	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
 	 * 
 	 * @return	le classement de ce joueur dans la rencontre en cours
 	 */
@@ -283,7 +283,7 @@ public class AiHero extends AiSprite<Hero>
 	
 	/**
 	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
-	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
+	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
 	 * 
 	 * @return	le classement général (Glicko-2) de ce joueur
 	 */

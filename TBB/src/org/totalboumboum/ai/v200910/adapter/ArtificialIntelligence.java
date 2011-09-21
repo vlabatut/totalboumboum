@@ -35,7 +35,7 @@ import org.totalboumboum.configuration.Configuration;
  * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 
  * à effectuer.
  * <p>
- * ATTENTION : remarque tr�s importante.
+ * ATTENTION : remarque très importante.
  * A la fin de la partie, le jeu demande à l'IA de s'arrêter. Dans certaines
  * conditions, l'IA ne voudra pas s'arrêter (par exemple si elle est dans une
  * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
@@ -73,7 +73,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * méthode testant si le jeu a demandé la terminaison de l'IA.
-	 * Si c'est le cas, une exception est lev�e, qui sera propag�e jusqu'à call
+	 * Si c'est le cas, une exception est levée, qui sera propag�e jusqu'à call
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
 	 * intercept�e localement par un try/catch. 
 	 */
@@ -108,7 +108,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		if(firstTime)
 			firstTime = false;
 		else
-		{	// on r�initialise la sortie de l'IA
+		{	// on réinitialise la sortie de l'IA
 			reinitOutput();
 			try
 			{	// on calcule la prochaine action à effectuer
@@ -130,7 +130,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * méthode implémentant le traitement effectué par l'IA sur les percepts,
-	 * et renvoyant une action en r�action.
+	 * et renvoyant une action en réaction.
 	 * 
 	 * @return	action que l'IA a décider d'effectuer
 	 * @throws StopRequestException	au cas où le moteur demande la terminaison de l'IA
@@ -180,7 +180,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * r�initialise la sortie graphique de l'IA.
+	 * réinitialise la sortie graphique de l'IA.
 	 * méthode appelée automatiquement avant chaque itération de l'IA.
 	 */
 	private void reinitOutput()

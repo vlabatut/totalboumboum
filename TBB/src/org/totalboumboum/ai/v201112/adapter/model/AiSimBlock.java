@@ -39,7 +39,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		num�ro d'identification du bloc
+	 * 		numéro d'identification du bloc
 	 * @param tile
 	 * 		case contenant le bloc
 	 * @param posX
@@ -55,7 +55,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * @param currentSpeed
 	 * 		vitesse courante de déplacement du bloc (a priori il est immobile)
 	 * @param destructible
-	 * 		sensibilit� au feu
+	 * 		sensibilité au feu
 	 * @param stopHeroes
 	 * 		capacité à bloquer les personnages
 	 * @param stopFires
@@ -100,10 +100,10 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	}
 	
 	/**
-	 * modifie la destructibilit� de ce mur
+	 * modifie la destructibilité de ce mur
 	 * 
 	 * @param destructible
-	 * 		nouvelle valeur de l'indicateur de destructibilit� du mur
+	 * 		nouvelle valeur de l'indicateur de destructibilité du mur
 	 */
 	public void setDestructible(boolean destructible)
 	{	this.destructible = destructible;

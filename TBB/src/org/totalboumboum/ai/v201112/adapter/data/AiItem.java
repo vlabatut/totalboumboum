@@ -24,8 +24,8 @@ package org.totalboumboum.ai.v201112.adapter.data;
 
 /**
  * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlev�)
- * par l'item. Ce type est représent�e par une valeur de type AiItemType.
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
+ * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -36,7 +36,7 @@ public interface AiItem extends AiSprite
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le type de l'item représent�
+	 * renvoie le type de l'item représenté
 	 * 
 	 * @return	
 	 * 		le type de l'item
@@ -49,7 +49,7 @@ public interface AiItem extends AiSprite
 	/**
 	 * indique si cet item arrête les explosions.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -60,7 +60,7 @@ public interface AiItem extends AiSprite
 	/**
 	 * indique si cet item arrête les bombes.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

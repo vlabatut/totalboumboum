@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente un personnage du jeu, ie un sprite contr�l� par un joueur
+ * représente un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut

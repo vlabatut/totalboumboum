@@ -38,7 +38,7 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		num�ro d'identification du sol
+	 * 		numéro d'identification du sol
 	 * @param tile
 	 * 		case contenant le sol
 	 * @param posX

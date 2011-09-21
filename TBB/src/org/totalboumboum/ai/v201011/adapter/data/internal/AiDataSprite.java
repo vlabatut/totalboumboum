@@ -32,13 +32,13 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 /**
  * cette classe permet de représenter les sprites manipul�s par le jeu,
  * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
- * Le paramètre T détermine le type de sprite représent� : bloc, bombe,
+ * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
  * feu, sol, personnage ou item. 
  * 
  * @author Vincent Labatut
  *
  * @param <T>
- * 		type de sprite représent�
+ * 		type de sprite représenté
  */
 abstract class AiDataSprite<T extends Sprite> implements AiSprite
 {	
@@ -98,7 +98,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite représent� par cette classe */ 
+	/** sprite représenté par cette classe */ 
 	protected T sprite;
 
 	/**
@@ -129,10 +129,10 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	protected boolean checked;
 
 	/**
-	 * teste si sprite est marqu� ou pas
+	 * teste si sprite est marqué ou pas
 	 * 
 	 * @return	
-	 * 		vrai si ce sprite est marqu�
+	 * 		vrai si ce sprite est marqué
 	 */
 	protected boolean isChecked()
 	{	return checked;	

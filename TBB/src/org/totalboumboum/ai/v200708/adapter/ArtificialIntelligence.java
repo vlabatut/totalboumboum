@@ -96,13 +96,13 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	private int nextShrinkPosition[];
 	/** position relative de la bombe  */
 	private int bombPosition;
-	/** portée des bombes du personnage contr�l� par l'IA */
+	/** portée des bombes du personnage contrôlé par l'IA */
 	private int ownFirePower;
-	/** nombre de bombes que le personnage contr�l� par l'IA peut encore poser */
+	/** nombre de bombes que le personnage contrôlé par l'IA peut encore poser */
 	private int ownBombCount;
-	/** portée des bombes des personnages autres que celui contr�l� par l'IA */
+	/** portée des bombes des personnages autres que celui contrôlé par l'IA */
 	private Vector<Integer> firePowers;
-	/** nombre de bombes que les personnages autres que celui contr�l� par l'IA peuvent encore poser */
+	/** nombre de bombes que les personnages autres que celui contrôlé par l'IA peuvent encore poser */
 	private Vector<Integer> bombCounts;
 	
 	/**
@@ -171,7 +171,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie le nombre de joueurs participant à la partie, en plus
-	 * de celui dirig� par cette IA. 
+	 * de celui dirigé par cette IA. 
 	 * @return	le nombre de joueurs.
 	 */
 	protected int getPlayerCount()
@@ -181,9 +181,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie la position du personnage dont l'index est passé
 	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
-	 * {-1,-1} est renvoyée. Attention, le personnage dirig� par cette IA n'est 
+	 * {-1,-1} est renvoyée. Attention, le personnage dirigé par cette IA n'est 
 	 * jamais considéré. 
-	 * @param index	num�ro du personnage
+	 * @param index	numéro du personnage
 	 * @return	position du personnage 
 	 */
 	protected int[] getPlayerPosition(int index)
@@ -203,9 +203,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie le sens de déplacement du personnage dont l'index est passé
 	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
 	 * -1 est renvoyée. Sinon, il s'agit d'un entier AI_DIR_NONE, AI_DIR_UP, AI_DIR_DOWN, 
-	 * AI_DIR_RIGHT ou AI_DIR_LEFT. Attention, le personnage dirig� par cette IA n'est 
+	 * AI_DIR_RIGHT ou AI_DIR_LEFT. Attention, le personnage dirigé par cette IA n'est 
 	 * jamais considéré.
-	 * @param index	num�ro du personnage
+	 * @param index	numéro du personnage
 	 * @return	le sens de déplacement du personnage 
 	 */
 	protected int getPlayerDirection(int index)
@@ -219,9 +219,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie vrai si la personnage dont l'index est passé
 	 * en paramètre est vivant. Si le personnage est mort ou en train de mourir,
 	 * ou bien s'il n'y a pas de personnage ayant cet index, la valeur 
-	 * faux est renvoyée. Attention, le personnage dirig� par cette IA n'est 
+	 * faux est renvoyée. Attention, le personnage dirigé par cette IA n'est 
 	 * jamais considéré.
-	 * @param index	num�ro du personnage
+	 * @param index	numéro du personnage
 	 * @return	un bool�an représentant l'état du personnage 
 	 */
 	protected boolean isPlayerAlive(int index)
@@ -241,7 +241,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie la position du bloc qui sera le prochain à se faire �craser
+	 * Renvoie la position du bloc qui sera le prochain à se faire écraser
 	 * par un bloc lors du shrink.
 	 * @return	un tableau de deux entiers représentant la position du prochain bloc du shrink
 	 */
@@ -270,7 +270,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie la portée des bombes du joueur contr�l� par l'IA.
+	 * Renvoie la portée des bombes du joueur contrôlé par l'IA.
 	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getOwnFirePower()
@@ -278,7 +278,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie une valeur correspondant au nombre de bombes que le joueur contr�l� par l'IA
+	 * Renvoie une valeur correspondant au nombre de bombes que le joueur contrôlé par l'IA
 	 * peut encore poser. Ce nombre correspond donc au nombre de bombes posables total moins 
 	 * le nombre de bombes déjà posées.
 	 * @return	nombre de bombes restant à poser
@@ -288,8 +288,8 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 
 	/**
-	 * Renvoie la portée des bombes des joueurs autre que celui contr�l� par l'IA.
-	 * @param	le num�ro du joueur considéré
+	 * Renvoie la portée des bombes des joueurs autre que celui contrôlé par l'IA.
+	 * @param	le numéro du joueur considéré
 	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getPlayerFirePower(int index)
@@ -298,10 +298,10 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 
 	/**
 	 * Renvoie une valeur correspondant aux nombres de bombes que les joueurs autres
-	 * que celui contr�l� par l'IA peuvent encore poser. 
+	 * que celui contrôlé par l'IA peuvent encore poser. 
 	 * Ce nombre correspond donc au nombre de bombes posables total moins 
 	 * le nombre de bombes déjà posées.
-	 * @param	le num�ro du joueur considéré
+	 * @param	le numéro du joueur considéré
 	 * @return	nombre de bombes restant à poser
 	 */
 	protected int getPlayerBombCount(int index)

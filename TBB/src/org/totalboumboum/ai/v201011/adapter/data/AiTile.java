@@ -47,7 +47,7 @@ public abstract class AiTile
 	protected int col;
 		
 	/** 
-	 * renvoie le num�ro de la ligne contenant cette case
+	 * renvoie le numéro de la ligne contenant cette case
 	 * 
 	 * @return	
 	 * 		la ligne de cette case
@@ -57,7 +57,7 @@ public abstract class AiTile
 	}
 
 	/** 
-	 * renvoie le num�ro de la colonne contenant cette case
+	 * renvoie le numéro de la colonne contenant cette case
 	 *  
 	 * @return	
 	 * 		la colonne de cette case

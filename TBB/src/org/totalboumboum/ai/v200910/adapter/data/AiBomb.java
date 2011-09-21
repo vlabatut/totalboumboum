@@ -154,7 +154,7 @@ public class AiBomb extends AiSprite<Bomb>
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_COMBUSTION);
 			explosionTrigger = ability.isActive();
 		}
-		// latence de la bombe en cas de d�tonation déclench�e par explosion
+		// latence de la bombe en cas de détonation déclench�e par explosion
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
@@ -198,7 +198,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * la bombe est touch�e par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
-	 * @return	la latence de la bombe pour une d�tonation déclench�e par une autre explosion
+	 * @return	la latence de la bombe pour une détonation déclench�e par une autre explosion
 	 */
 	public long getLatencyDuration()
 	{	return latencyDuration;

@@ -28,8 +28,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 
 /**
  * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlev�)
- * par l'item. Ce type est représent�e par une valeur de type AiItemType.
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
+ * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -41,7 +41,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		num�ro d'identification de l'item
+	 * 		numéro d'identification de l'item
 	 * @param tile
 	 * 		case contenant l'item
 	 * @param posX

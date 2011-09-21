@@ -26,12 +26,12 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 /**
  * cette classe permet de représenter les sprites manipul�s par le jeu,
  * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
- * Le paramètre T détermine le type de sprite représent� : bloc, bombe,
+ * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
  * feu, sol, personnage ou item. 
  * 
  * @author Vincent Labatut
  *
- * @param <T>	type de sprite représent�
+ * @param <T>	type de sprite représenté
  */
 
 public abstract class AiSprite<T extends Sprite>
@@ -66,7 +66,7 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite représent� par cette classe */ 
+	/** sprite représenté par cette classe */ 
 	private T sprite;
 
 	/**
@@ -95,9 +95,9 @@ public abstract class AiSprite<T extends Sprite>
 	private boolean checked;
 
 	/**
-	 * teste si sprite est marqu� ou pas
+	 * teste si sprite est marqué ou pas
 	 * 
-	 * @return	vrai si ce sprite est marqu�
+	 * @return	vrai si ce sprite est marqué
 	 */
 	boolean isChecked()
 	{	return checked;	
@@ -162,17 +162,17 @@ public abstract class AiSprite<T extends Sprite>
 	}
 	
 	/** 
-	 * renvoie le num�ro de la ligne contenant ce sprite 
+	 * renvoie le numéro de la ligne contenant ce sprite 
 	 * 
-	 * @return	le num�ro de la ligne du sprite
+	 * @return	le numéro de la ligne du sprite
 	 */
 	public int getLine()
 	{	return tile.getLine();	
 	}
 	/** 
-	 * renvoie le num�ro de la colonne contenant ce sprite
+	 * renvoie le numéro de la colonne contenant ce sprite
 	 * 
-	 * @return	le num�ro de la colonne du sprite
+	 * @return	le numéro de la colonne du sprite
 	 */
 	public int getCol()
 	{	return tile.getCol();	

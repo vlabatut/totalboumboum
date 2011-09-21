@@ -75,7 +75,7 @@ public class AiBlock extends AiSprite<Block>
 	private boolean destructible;
 	
 	/** 
-	 * initialise l'indicateur de destructibilit� de ce bloc 
+	 * initialise l'indicateur de destructibilité de ce bloc 
 	 */
 	private void updateDestructible()
 	{	Block sprite = getSprite();
@@ -86,7 +86,7 @@ public class AiBlock extends AiSprite<Block>
 	/**
 	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
 	 * 
-	 * @return	l'indicateur de destructibilit� du mur
+	 * @return	l'indicateur de destructibilité du mur
 	 */
 	public boolean isDestructible()
 	{	return destructible;		

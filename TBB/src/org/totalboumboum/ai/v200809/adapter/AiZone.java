@@ -59,9 +59,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  */
 
 public class AiZone
-{	/** niveau représent� par cette classe */
+{	/** niveau représenté par cette classe */
 	private Level level;
-	/** joueur contr�l� par l'IA */
+	/** joueur contrôlé par l'IA */
 	private AbstractPlayer player;
 	
 	/**
@@ -185,7 +185,7 @@ public class AiZone
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].update();
-		// supprime les sprites non-marqu�s
+		// supprime les sprites non-marqués
 		removeUnchecked(blocks);
 		removeUnchecked(bombs);
 		removeUnchecked(fires);
@@ -197,7 +197,7 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'�cran)
+	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
 	 *  de la zone de jeu exprimée en cases (ie: nombre de lignes)
 	 *  
 	 *  @return	hauteur de la zone
@@ -207,7 +207,7 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'�cran)
+	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
 	 *  de la zone de jeu exprimée en cases (ie: nombre de colonnes)
 	 *  
 	 *  @return	largeur de la zone
@@ -219,8 +219,8 @@ public class AiZone
 	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
-	 *  @param	line	num�ro de la ligne contenant la case à renvoyer
-	 *  @param	col	num�ro de la colonne contenant la case à renvoyer
+	 *  @param	line	numéro de la ligne contenant la case à renvoyer
+	 *  @param	col	numéro de la colonne contenant la case à renvoyer
 	 *  @return	case située aux coordonnées spécifiées en paramètres
 	 */
 	public AiTile getTile(int line, int col)
@@ -306,7 +306,7 @@ public class AiZone
 	 * la classe Direction pour plus d'informations sur ces valeurs. 
 	 * <p>
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
-	 * Cette méthode renvoie la direction du plus court chemin (sans consid�rer les éventuels obstacles).
+	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
 	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long. 
 	 * 
@@ -552,7 +552,7 @@ public class AiZone
 	/**
 	 * d�marque toutes les représentations de sprites d'une liste determinée en fonction du type
 	 * T param�trant cette méthode. méthode appelée au début de la mise à jour :
-	 * les représentations de sprites qui n'ont pas été marqu�es à la fin de la mise à jour
+	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprim�es de cette représentation.
 	 * 
@@ -568,7 +568,7 @@ public class AiZone
 	}
 	/**
 	 * méthode compl�mentaire de uncheckAll, et chargée de supprimer
-	 * les représentations de sprites non-marqu�es à la fin de la mise à jour.
+	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
@@ -588,18 +588,18 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contr�l� par l'IA */
+	/** le personnage contrôlé par l'IA */
 	private AiHero ownHero;
 
 	/** 
-	 * renvoie le personnage qui est contr�l� par l'IA
+	 * renvoie le personnage qui est contrôlé par l'IA
 	 */
 	public AiHero getOwnHero()
 	{	return ownHero;	
 	}
 	
 	/**
-	 * initialise le personnage qui est contr�l� par l'IA
+	 * initialise le personnage qui est contrôlé par l'IA
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 

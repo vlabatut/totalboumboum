@@ -108,7 +108,7 @@ public interface AiBomb extends AiSprite
 	 * à exploser.
 	 * 
 	 * @return	
-	 * 		la latence de la bombe pour une d�tonation déclench�e par une autre explosion
+	 * 		la latence de la bombe pour une détonation déclench�e par une autre explosion
 	 */
 	public long getLatencyDuration();
 	
@@ -127,7 +127,7 @@ public interface AiBomb extends AiSprite
 	/**
 	 * indique si le feu �mis par la bombe peut traverser les murs
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plut�t getBlast().
 	 * 
 	 * @return	
@@ -211,7 +211,7 @@ public interface AiBomb extends AiSprite
 	 * n'est valide que pour les bombes à retardement (qui ont un 
 	 * compte à rebours).
 	 * <b>Attention :</b> certaines actions spéciales comme le fait de lancer
-	 * la bombe sont susceptibles de r�initialiser le compte à rebours.
+	 * la bombe sont susceptibles de réinitialiser le compte à rebours.
 	 * 
 	 * @return	
 	 * 		temps exprimé en ms
@@ -224,7 +224,7 @@ public interface AiBomb extends AiSprite
 	/**
 	 * indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -235,7 +235,7 @@ public interface AiBomb extends AiSprite
 	/**
 	 * indique si ce bloc arrête les explosions.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -246,7 +246,7 @@ public interface AiBomb extends AiSprite
 	/**
 	 * teste si cette bombe est capable de passer à travers les items
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

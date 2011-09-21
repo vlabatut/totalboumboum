@@ -46,7 +46,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		num�ro d'identification de la bombe
+	 * 		numéro d'identification de la bombe
 	 * @param tile
 	 * 		case contenant la bombe
 	 * @param posX

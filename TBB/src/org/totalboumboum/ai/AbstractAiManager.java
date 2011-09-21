@@ -61,7 +61,7 @@ import org.totalboumboum.game.round.RoundVariables;
 public abstract class AbstractAiManager<V>
 {	/**
      * contruit un nouveau manager pour l'IA passé en paramètre.
-     * Ce constructeur est destin� à être appel� par le constructeur situé dans 
+     * Ce constructeur est destiné à être appel� par le constructeur situé dans 
      * la classe h�ritant de celle-ci et située dans le dossier de l'IA
      *    
      * @param 
@@ -87,7 +87,7 @@ public abstract class AbstractAiManager<V>
     private ExecutorService executorAi = null;
     /** future utilisé pour récupérer le résultat de l'IA */
     private Future<V> futureAi;
-    /** indique si cette IA �tait en pause */
+    /** indique si cette IA était en pause */
     private boolean paused = false;
     
     /**
@@ -123,7 +123,7 @@ public abstract class AbstractAiManager<V>
     public final boolean update(boolean aisPause)
     {	boolean result = false;
     	
-    	// si l'IA �tait en pause
+    	// si l'IA était en pause
     	if(paused)
     	{	// sortie de pause ?
     		if(!aisPause)
@@ -158,7 +158,7 @@ public abstract class AbstractAiManager<V>
     		// pas de passage en pause : cet appel est-il fini ?
     		else if(futureAi.isDone())
     		{	try
-    			{	// on récupére les r�actions de l'IA
+    			{	// on récupére les réactions de l'IA
     				V value = futureAi.get();
     				// on les convertit et les envoie au moteur
     				List<ControlEvent> events = convertReaction(value);
@@ -245,7 +245,7 @@ public abstract class AbstractAiManager<V>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** le joueur contr�l� par l'IA */
+    /** le joueur contrôlé par l'IA */
     private AiPlayer player;
    
     /**
@@ -254,7 +254,7 @@ public abstract class AbstractAiManager<V>
      * @param instance	
      * 		instance utilisée dans ce round
      * @param player	
-     * 		joueur contr�l� par l'IA
+     * 		joueur contrôlé par l'IA
      */
     @SuppressWarnings("unchecked")
 	public void init(String instance, AiPlayer player)
@@ -270,10 +270,10 @@ public abstract class AbstractAiManager<V>
 	}
 		
 	/**
-	 * renvoie le joueur contr�l� par l'IA gérée
+	 * renvoie le joueur contrôlé par l'IA gérée
 	 * 
 	 * @return	
-	 * 		un objet représentant le joueur contr�l� par l'IA
+	 * 		un objet représentant le joueur contrôlé par l'IA
 	 */
     public AbstractPlayer getPlayer()
 	{	return player;		
@@ -294,7 +294,7 @@ public abstract class AbstractAiManager<V>
 	 * @param value	
 	 * 		la valeur renvoyée par l'ia, qui est à convertir
 	 * @return	
-	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contr�l� par l'IA
+	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'IA
 	 */
 	public abstract List<ControlEvent> convertReaction(V value);
    
@@ -321,7 +321,7 @@ public abstract class AbstractAiManager<V>
 	
 	/**
 	 * met à jour la représentation des sorties de l'IA
-	 * qui est destin�e au moteur
+	 * qui est destinée au moteur
 	 */
 	protected abstract void updateOutput();
 	

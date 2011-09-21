@@ -58,7 +58,7 @@ final class AiDataTile extends AiTile
 	 * construit une représentation de la case passée en paramètre
 	 * 
 	 * @param tile
-	 * 		case représent�e
+	 * 		case représentée
 	 * @param zone
 	 * 		zone contenant la représentation
 	 */
@@ -99,10 +99,10 @@ final class AiDataTile extends AiTile
 	private Tile tile;
 	
 	/**
-	 * renvoie la case réelle représent�e par cet objet
+	 * renvoie la case réelle représentée par cet objet
 	 * 
 	 * @return
-	 * 		la case réelle représent�e par cet objet
+	 * 		la case réelle représentée par cet objet
 	 */
 	protected Tile getTile()
 	{	return tile;
@@ -112,7 +112,7 @@ final class AiDataTile extends AiTile
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * initialise les num�ros de ligne et colonne de cette case 
+	 * initialise les numéros de ligne et colonne de cette case 
 	 */
 	private void initTileLocation()
 	{	row = tile.getRow();
