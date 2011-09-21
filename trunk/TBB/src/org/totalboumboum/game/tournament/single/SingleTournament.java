@@ -134,7 +134,7 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
-		// NOTE vérifier si le nombre de joueurs sélectionn�s correspond
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}

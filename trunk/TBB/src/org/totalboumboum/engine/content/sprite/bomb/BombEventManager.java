@@ -341,7 +341,7 @@ public class BombEventManager extends EventManager
 			else
 			{
 				//NOTE prévoir le cas où la bombe ne peut pas p�ter, il faut le remettre au prochain instant
-				// sauf que certains états prévoient une r�init du timer au changement d'état (ex : bouncing)
+				// sauf que certains états prévoient une réinit du timer au changement d'état (ex : bouncing)
 				// >> en fait pas ds toutes les instances. -> mettre un paramètre (ability)
 			}
 		}

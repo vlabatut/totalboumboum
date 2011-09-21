@@ -760,7 +760,7 @@ public class Launcher
 	
 	/*
 	 * TODO quand on calcule l'ablt composite, pour les directions composites :
-	 * l'abilité renvoyée peut contenir une direction simplifi�e, en fonction 
+	 * l'abilité renvoyée peut contenir une direction simplifiée, en fonction 
 	 * des autorisations obtenues. 
 	 */
 	
@@ -794,7 +794,7 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	 * TODO
-	 * définir des stats de jeu plus compl�tes :
+	 * définir des stats de jeu plus complètes :
 	 * 		- niveaux les plus utilisés
 	 * 		- voire détail de tout par niveau
 	 * 		- stats temporelles
@@ -822,15 +822,15 @@ public class Launcher
 	 *    http://www.kodejava.org/examples/250.html)
 	 * - cette liste est mise à jour à chaque démarrage
 	 * - si d'un démarrage à l'autre il n'y a aucune adresse commune, ça veut dire que ce n'est plus la même machine
-	 * - on génére alors un nouvel UUID qui �crase le précédent
+	 * - on génére alors un nouvel UUID qui écrase le précédent
 	 * - les mots de passe de tous les profils sont réinitialisés
 	 * 
 	 * JOUEURS
 	 * - chaque joueur est identifié par l'identifiant de l'hote sur lequel il est créé
-	 *   plus un identifiant unique pour cet h�te (on peut prendre un autre UUID)
+	 *   plus un identifiant unique pour cet hôte (on peut prendre un autre UUID)
 	 * - ce numéro ne change jamais, même quand il joue sur un autre hote (ce qui est possible)
 	 * - on a un truc du style : joueur@createur
-	 * - quand le profil est utilisé sur son hote de cr�ation, pas besoin de mot de passe
+	 * - quand le profil est utilisé sur son hote de création, pas besoin de mot de passe
 	 * - sinon il faut un mot de passe, qu'on a la possibilité d'enregistrer
 	 * >> en fait pas besoin de voir l'hote, avec l'uDDi ça suffit
 	 *    chaque joueur doit entrer le mdp quel que soit l'hote (même créateur)
@@ -875,7 +875,7 @@ public class Launcher
 	/* 
 	 * TODO
 	 * cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
-	 * (il a passe-muraille et r�sistance au feu) : l'item doit être ramassé Dès qu'il a fini d'apparaitre, en théorie
+	 * (il a passe-muraille et résistance au feu) : l'item doit être ramassé Dès qu'il a fini d'apparaitre, en théorie
 	 * ou bien : un héros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
 	 * >> en même temps, ça laisse le choix au joueur de ramasser l'item ou pas, c'est pas mal finalement (si c'est un malus par ex.)
 	 */
@@ -926,7 +926,7 @@ public class Launcher
 	 * - Stats :
 	 * - Ressources :
 	 * 		- thèmes SBM1 arena, circles, hal, power, speed & warp
-	 * 		- tous les niveaux des modes histoire et ar�ne
+	 * 		- tous les niveaux des modes histoire et arène
 	 * - Divers :
 	 */
 
@@ -937,18 +937,18 @@ public class Launcher
 	/* TODO
 	 * 
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
-	 * 	 et la vie �tait fonctionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
-	 *   >> pas r�ussi à reproduire �a...
+	 * 	 et la vie était fonctionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
+	 *   >> pas réussi à reproduire ça...
 	 * 
 	 * - la pause d'IA reste même si le joueur est mort, et je ne sais pas pq : au débug le moteur n'exécute pas le code affichant le texte !
 	 * 
-	 * - quand on balance une bombe, puis une autre, puis fait p�ter la première et enfin la seconde 
+	 * - quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
 	 *   juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
 	 *   case où elle atterrit.
 	 *   
-	 * - pb de r�initialisation : 
+	 * - pb de réinitialisation : 
 	 * 		- jouer un tournoi single (par ex supercup) en entier
-	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été r�init à null
+	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été réinit à null
 	 * 
 	 *  - apparemment, y a un pb avec les GeneralAction, dont certaines définies dans les fichiers XML ne sont pas compatibles 
 	 *    avec la classe (en termes de circonstances) mais qui sont quand même chargées et initialisées normalement
@@ -962,13 +962,13 @@ public class Launcher
 
 	/* TODO priorité HAUTE
 	 * 
-	 * - faut �mettre un �vt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
+	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
 	 * - étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
 	 * 
 	 * - gérer le shrink
 	 * 
-	 * - remplacer "� vos marques" "pret" "boum!" par des graphismes pr�calculés
+	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
 	 * 
 	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
 	 * 
@@ -977,21 +977,21 @@ public class Launcher
 	/* TODO priorité BASSE
 	 * 
 	 * - NBM2 : 
-	 * 		- item veste ignifug�e (souffle de l'explosion pas implément�)
-	 * 		  (s'apparente à un push sur un joueur adverse, int�ressant pour les instances à venir)
+	 * 		- item veste ignifugée (souffle de l'explosion pas implémenté)
+	 * 		  (s'apparente à un push sur un joueur adverse, intéressant pour les instances à venir)
 	 * 
 	 * - SBM1 : 
-	 * 		- le délai de retardement ne doit pas être r�initialisé a la suite d'un punch
-	 * 		  en fait ça reprend exactement où ça ne �tait au moment ou la bombe touche le sol
-	 * 		- le clignotement d'invincibilit� est sens� ralentir quand le temps est presque terminé
-	 * 		- item clock : soit rajouter du temps normalement, soit faire un freeze tr�s court?
-	 * 		- spawn : faut décomposer en plusieurs abilities : d�lay, proba de spawn, nbre de spawn, etc
+	 * 		- le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
+	 * 		  en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
+	 * 		- le clignotement d'invincibilité est sensé ralentir quand le temps est presque terminé
+	 * 		- item clock : soit rajouter du temps normalement, soit faire un freeze très court?
+	 * 		- spawn : faut décomposer en plusieurs abilities : délai, proba de spawn, nbre de spawn, etc
 	 * 
 	 * - évènements :
 	 * 		- envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
 	 * 
 	 * - Threads :
-	 * 		- pouvoir modifier l'UPS pour les IA (pour all�ger le calcul)
+	 * 		- pouvoir modifier l'UPS pour les IA (pour alléger le calcul)
 	 * 
 	 * - Images :
 	 * 		- modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
@@ -1001,28 +1001,28 @@ public class Launcher
 	 * 		  qui sera affiche en titre de prèsentation/stats etc. 
 	 * 		  si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
 	 * 		- besoin d'une méthode permettant d'exporter un tournoi/match/round, 
-	 * 		  ie de l'écrire enti�rement en local (pas de référence à des composants existants)
+	 * 		  ie de l'écrire entièrement en local (pas de référence à des composants existants)
 	 * 		- dans les fichiers xml, pour les points, plutot que local (vrai ou faux), utiliser round/match/tournament/game (permet de mieux mutualiser les fichiers)
 	 * 		- tournoi coupe : 
-	 * 			- pouvoir se qualifier depuis n'importe quel leg, pas forcement le précédent direct (n�cessit� de préciser le num�ro du leg en plus du part, dans le doc XML et la class CupPlayer)
+	 * 			- pouvoir se qualifier depuis n'importe quel leg, pas forcement le précédent direct (nécessité de préciser le numéro du leg en plus du part, dans le doc XML et la class CupPlayer)
 	 * 			- y compris depuis le leg initial (prévoir une sous-classe pour distinguer initial des autres?)
 	 * 
 	 * - Items :
 	 * 		- définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
 	 * 
 	 * - Stats : 
-	 * 		- nombre de fois qu'un level a été jou�
+	 * 		- nombre de fois qu'un level a été joué
 	 * 
 	 * - Points : 
 	 * 		- calcul : introduire des variables comme le nombre de joueurs 
 	 *  	  (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * 		- lors du calcul des points, il faut forcer la prèsence d'un classement: 
-	 * 		  ça facilite �normêment de traitements en aval
-	 *   	  au pire, si le classement est inutile (ex: simple total), on définit un classement-identit� 
-	 *   	  (pts utilisés pr le classement <=> pts marqu�s)
+	 * 		  ça facilite énormément de traitements en aval
+	 *   	  au pire, si le classement est inutile (ex: simple total), on définit un classement-identité 
+	 *   	  (pts utilisés pr le classement <=> pts marqués)
 	 *
 	 * - Limites/Modes de jeu :
-	 * 		- limites exprimées de façon relative (peindre 75% des cases, éliminer la moiti� des joueurs...)
+	 * 		- limites exprimées de façon relative (peindre 75% des cases, éliminer la moitié des joueurs...)
 	 * 		- items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
 	 * 		- possibilité de choisir entre le fait que le round s'arrête Dès que tout le monde est mort 
 	 * 		  sauf 1, ou dernière flamme terminée
@@ -1046,21 +1046,21 @@ public class Launcher
 	 * 		- HIDING devrait être un gesture définit automatiquement, non ? pas d'image, sensible à rien, seule action autorisée=apparaitre...
 	 *  	- vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) posséde bien l'ability (avec modulate)
 	 * 		- pour chaque gesture, fixer les actions autorisées 
-	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut r�flâchir à un truc plus propre
+	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
 	 * 		- il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
 	 * 			- qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
-	 * 			- ça permettra de savoir ce qui peut être modul� et ce qui ne peut pas l'�tre
+	 * 			- ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
 	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
-	 * 		- le coup de l'indestructibilit� des items (le fait de r�apparaitre ailleurs) pourrait être �tendue à tous les sprites
-	 * 		  (en particulier les joueurs, ça serait un cas spécial de r�sistance au feu un peu p�nalisante, utilisable un nombre limité de fois, par ex !)
-	 * 		- ça serait bien que les paramètres num�riques des abilités puissent être définies 
+	 * 		- le coup de l'indestructibilité des items (le fait de réapparaitre ailleurs) pourrait être étendue à tous les sprites
+	 * 		  (en particulier les joueurs, ça serait un cas spécial de résistance au feu un peu pénalisante, utilisable un nombre limité de fois, par ex !)
+	 * 		- ça serait bien que les paramètres numériques des abilités puissent être définies 
 	 * 		  au chargement (force, durée, utilisation) de façon aléatoire, en fonction de certains paramètres. 
-	 * 		  on pourrait par ex utiliser une liste de valeur num�riques : 1=déterministe, 2=bornes pour un tirage au sort
+	 * 		  on pourrait par ex utiliser une liste de valeur numériques : 1=déterministe, 2=bornes pour un tirage au sort
 	 * 		  utile par exemple pour déterminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
 	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spéciales)
 	 * 
 	 * - Niveaux
-	 * 		- outil pour d�couper une image (background) en nxm floors
+	 * 		- outil pour découper une image (background) en nxm floors
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1069,11 +1069,11 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - rajouter un bouton dans les options avanc�es pour vider manuellement le cache mémoire
+	 * - rajouter un bouton dans les options avancées pour vider manuellement le cache mémoire
 	 * 
 	 * - rajouter une confirmation (popup) quand on sort définitivement d'une partie (icone maison)
 	 * 
-	 * - 1�re exécution
+	 * - 1ère exécution
 	 * 		- définir un popup d'informations
 	 * 		- guider l'utilisateur pas à pas pour créer son profile et commencer sa partie
 	 * 
@@ -1083,19 +1083,19 @@ public class Launcher
 	 * 
 	 * - profils: 
 	 * 		- simplifier, pas besoin de la double représentation default+selected.
-	 * 		- r�organiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
+	 * 		- réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
 	 * 
-	 * - faire le classement lexicographique g�rant les signes diacritiques partout où c'est nécessaire
+	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
-	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (d�cimales cachées), etc.
+	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * 
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * 
 	 * - results panel : 
 	 * 		- faut afficher explicitement le classement à la fin d'une confrontation
-	 * 		- quand il y a trop de rounds dans un match pour que ça rentre à l'�cran, ne pas tout afficher
-	 * 		- ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontr�e
-	 *   	  voire on définit explicitement un ordre d'affichage dans la comp�tition
+	 * 		- quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
+	 * 		- ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
+	 *   	  voire on définit explicitement un ordre d'affichage dans la compétition
 	 * 		- dans les résultats :
 	 * 			- afficher par défaut les 4 scores de base
 	 * 			- plus les scores utilisés dans les points et/ou les limites
@@ -1108,12 +1108,12 @@ public class Launcher
 	 * 		   et restreint aussi les IA pour les mêmes raisons
 	 * 
 	 * - champ en plus 
-	 * 		- dans les profils : le classement du joueur, nbre de rouds gagn�s/nbre de rounds jou�s
-	 * 		- dans les persos : % de rounds gagn�s, ou bien nbre de rounds jou�s
-	 * 		- tout ça est fait simplement en rajoutant les informations ad�quates dans les classes de stat
+	 * 		- dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
+	 * 		- dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
+	 * 		- tout ça est fait simplement en rajoutant les informations adéquates dans les classes de stat
 	 * 
 	 * - lors de la sélection des commandes :
-	 * 		- cliquer sur le bouton d'action fait r�agir quelque chose dans la ligne du joueur correspondant
+	 * 		- cliquer sur le bouton d'action fait réagir quelque chose dans la ligne du joueur correspondant
 	 * 		- permet de vérifier qu'on a pris les bonnes commandes (celles qu'on pensait avoir prises)
 	 * 
 	 * - il faudrait séparer les joueurs IA et les joueurs humain dans leur gestion.
@@ -1135,11 +1135,11 @@ public class Launcher
 	 * 		- virer les classes contenant un main()
 	 * - ressources :
 	 * 		- supprimer restmp
-	 * 		- r�initialiser les logstats
+	 * 		- réinitialiser les logstats
 	 * 		- recopier les stats (éventuellement)
 	 * 		- recréer les sauvegardes des tournois
 	 * - options :
-	 * 		- r�initialiser le joueur humain
+	 * 		- réinitialiser le joueur humain
 	 * 		- virer l'enchainement automatique
 	 * 
 	 * - pour diffusion publique :
@@ -1147,7 +1147,7 @@ public class Launcher
 	 * 			- recompiler le jeu	
 	 * 			- virer les fichiers sources
 	 * 			- virer les IA pas finies (source+profils)
-	 * 			- virer les versions interm�diaires des IA
+	 * 			- virer les versions intermédiaires des IA
 	 * 		- options :
 	 * 			- simulation des matches AI-only
 	 * 		- pr�règler la partie rapide sur : 
@@ -1161,13 +1161,13 @@ public class Launcher
 	 * 			- bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
 	 * 		- replay :
 	 * 			- bloquer le bouton "replay" dans le menu principal
-	 * 			- bloquer le bouton "cam�ra" dans les menu tournoi/match/round
-	 * 			- bloquer l'action dans les options avanc�es
+	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
+	 * 			- bloquer l'action dans les options avancées
 	 * 		- options :
 	 * 			- afficher les exceptions
 	 * 		- ressources :
 	 * 			- redonner les host id corrects pour les deux étudiants modifiés pour tester le réseau (5, 13 et 20)
-	 *		 	- virer le thème/perso TBB après avoir vir� les joueurs utilisant les perso et pr�-enregistr�s
+	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
 	 * 
 	 */
 	
@@ -1192,12 +1192,12 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * - percepts à rajouter
-	 * 		- bonus : indiquer pr�cis�ment les types de bonus restants
+	 * 		- bonus : indiquer précisément les types de bonus restants
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
-	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de d�tonation d'une bombe posée là (voire donnant un objet bombe)
-	 * 			>> définir une classe bombe virtuelle ? destin�e à ce seul effet ?
+	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de détonation d'une bombe posée là (voire donnant un objet bombe)
+	 * 			>> définir une classe bombe virtuelle ? destinée à ce seul effet ?
 	 * 		- la notion de blast peut être imprécise quand plusieurs bombes sont concernées
-	 * 			>> ça emp�che de calculer des r�action en chaine
+	 * 			>> ça empêche de calculer des réaction en chaine
 	 * 			>> faudrait associer le temps
 	 * 			>> ça permettrait d'implémenter une fonction calculant l'état des explosions dans le futur, utilisable à la fois pour les bombes normales et pour les bombes virtuelles
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
@@ -1205,10 +1205,10 @@ public class Launcher
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
-	 * 		- il faut gérer les chemins au niveau des pixels. les cases, c'est pas assez pr�cis.
-	 * - définir une mesure factuelle (reposant sur des faits de jeu) �valuant l'agressivit� des joueurs
+	 * 		- il faut gérer les chemins au niveau des pixels. les cases, c'est pas assez précis.
+	 * - définir une mesure factuelle (reposant sur des faits de jeu) évaluant l'agressivité des joueurs
 	 * 		- cible des bombes: rien, mur ou IA
-	 * 		- à pond�rer avec le nombre de bombes posées par seconde (par ex)
+	 * 		- à pondérer avec le nombre de bombes posées par seconde (par ex)
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
@@ -1219,14 +1219,14 @@ public class Launcher
 	 * 		- shrink (?)
 	 * 		- réseau
 	 * 		- revoir GUI (?)
-	 * 		- sortir de b�ta
+	 * 		- sortir de bêta
 	 * 
 	 *  - tournoi league :
 	 *  	- finir GUI
 	 *  	- finir sélection des matches
 	 *  	- ordonner les matches
 	 *  - tournoi coupe : 
-	 *  	- possiblit� de définir un tie-break random
+	 *  	- possibilité de définir un tie-break random
 	 *  	- possibilité de définir un tie-break classement stats
 	 *  	- possibilité de définir des matches de classement optionnels (?)
 	 *  
@@ -1234,22 +1234,22 @@ public class Launcher
 	 *    (ou un autre format vectoriel, SVG p-ê ?)
 	 *  
 	 *  - options pour les stats ?
-	 *  	- acc�l�rer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
+	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
-	 *  	- forcer la fin de la p�riode (now)
+	 *  	- forcer la fin de la période (now)
 	 *  - instance TBB
 	 *  	- autoriser un burning player à poser une dernière bombe...
 	 *  	- bombe sensible aux chocs : en forme d'oeuf
-	 *  	- bombe en fer, r�siste aux autres explosions
+	 *  	- bombe en fer, résiste aux autres explosions
 	 *  	- le feu passe-muraille doit être d'une autre couleur et/ou forme
-	 *  	- feu �lectrique : tente d'atteindre un adversaire dans la mesure de sa portée (prend des virages et tout)
+	 *  	- feu électrique : tente d'atteindre un adversaire dans la mesure de sa portée (prend des virages et tout)
 	 *  	- feu d'amour : 
 	 *  		- plein de petits coeurs qui contaminent ceux qu'ils touchent. 
 	 *  		- les bombes qu'ils posent sont alors aussi des bombes à coeurs. 
 	 *  		- elles ne tuent pas, elles contaminent. 
-	 *  		- le contaminateur initial est r�sistant
-	 *  	- si le feu normal �tait graphiquement un truc carré avec plein de flam�ches ?
-	 *  	- apparition des items : fum�e+l�g�rement sur-�lev�, puis l'item tombe par terre... (comm bug après cache v2)
+	 *  		- le contaminateur initial est résistant
+	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
+	 *  	- apparition des items : fumée+légèrement surélevé, puis l'item tombe par terre... (comm bug après cache v2)
 	 *  
 	 *  - enregistrement d'une partie : au lieu d'utiliser data+xml, mettre les données
 	 *    xml dans le fichier de données aussi. (au début bien entendu)
@@ -1273,11 +1273,11 @@ public class Launcher
 
 	/**
 	 * TODO faire une appli propre pour générer les niveaux
-	 * mettre une jolie doc en ligne de commande pour exécuter tout �a
+	 * mettre une jolie doc en ligne de commande pour exécuter tout ça 
 	 */
 
 	/*
-	 * TODO le caract�re local d'un joueur s'oppose à ses commandes
+	 * TODO le caractère local d'un joueur s'oppose à ses commandes
 	 * à la fois dans l'interface graphique et dans le moteur
 	 */
 
@@ -1304,17 +1304,17 @@ public class Launcher
 	 * TODO interface
 	 * remplacer le menu actuel par des icones dont la taille représente l'importance
 	 * à gauche de l'icone, mettre le texte actuellement prèsent dans les boutons
-	 * il est align� à droite et sa taille est proportionnelle à celle des boutons
+	 * il est aligné à droite et sa taille est proportionnelle à celle des boutons
 	 * 	- options       : engrenages
 	 * 	- profils       : une des icones de profil/joueur/etc
 	 * 	- stats         : icone stat utilisée en cours de jeu
 	 *  - ressources    : icone package
 	 *  - tournoi	    : coupe
-	 *  - partie rapide : �clair du bouton play
+	 *  - partie rapide : éclair du bouton play
 	 *  - charger       : disquette avec flâche (inverse de sauvegarde)
 	 *  - revoir        : une télé ? un oeil ? une pellicule?
 	 *  - à propos      : un "?"
-	 *  - quitter       : une croix (comme pour fermer une fen�tre) ou l'icone "quitter" du tournoi (?)
+	 *  - quitter       : une croix (comme pour fermer une fenêtre) ou l'icone "quitter" du tournoi (?)
 	 */
 	
 	// TODO toutes Loops >> effacer tous les objets inutiles dans finish()
@@ -1323,17 +1323,17 @@ public class Launcher
 	//	>> faut donc un modulation manager, et un ability manager (?)
 	//	>> coute cher... autre solution ?
 	// pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
-	// solution : mise à jour locale (pas comme replay) et tant pis pr la puissance perdue et la possible d�-synchro
+	// solution : mise à jour locale (pas comme replay) et tant pis pr la puissance perdue et la possible dé-synchro
 	
 	// TODO dans la gui, faudrait gérer le texte comme les images :
 	// le même texte peut servir sur plusieurs éléments.
-	// ça �conomiserait du traitement et de la place dans les fichiers de traduction,
+	// ça économiserait du traitement et de la place dans les fichiers de traduction,
 	// qui seraient plus simples à maintenir.
 	// et en plus on pourrait garder des noms d'éléments correspondant aux composants GUI,
 	// sans se soucier de leur signification réelle (contenu textuel).
-	// du cp, les cl�s du texte pourraient être plus explicites (car indépendantes)
+	// du cp, les clés du texte pourraient être plus explicites (car indépendantes)
 	
-	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les r�glages précédents"
+	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
 	
 	//TODO profiles options : reset passwords (automatically performed
 	//when the MAC address changes, anyway)
@@ -1341,12 +1341,12 @@ public class Launcher
 	/* TODO la communication [moteur >> gui] devrait se faire par evts, y compris durant le jeu
 	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
 	 * >> faut définir un système d'évènement pour toute classe affichée directement par un composant graphique
-	 * >> ça permetrait de ne pas avoir à recréer les �crans. par ex, dans les options : si qqch est changé, c'est automatiquement màj en background
+	 * >> ça permetrait de ne pas avoir à recréer les écrans. par ex, dans les options : si qqch est changé, c'est automatiquement màj en background
 	 * 		- sauf qu'en fait c'est un mvais ex car dans les options ce sont des clones qui sont utilisés
 	 *        mais il suffirait de ne pas recréer à chaque fois le panel, plutot de réutiliser le précédent en faisant un set et en affectant le listener
 	 *      - faudrait du cp faire attention à la gestion de la mémoire : 
-	 *      	- les objets finished devraient se d�barasser de leurs listeners
-	 *      	- en r�action, les listeners mettent leur référence à null et n'affichent rien >> bon �a
+	 *      	- les objets finished devraient se débarasser de leurs listeners
+	 *      	- en réaction, les listeners mettent leur référence à null et n'affichent rien >> bon ça
 	 *      >> ça va poser des pb de gestion de la mémoire (?)
 	 * >>> à faire plus tard...
 	 */
@@ -1369,11 +1369,11 @@ public class Launcher
 	
 	/**
 	 * NOTE règles générales
-	 * 	- une demande d'info aupr�s du serveur (voire client) ne doit pas être
-	 *    réalisée tant que la GUI n'est pas pr�te à traiter l'évènement de lecture associé
-	 *  - les méthodes des connexions générales susceptibles d'�tre appelées par les connexions
+	 * 	- une demande d'info auprès du serveur (voire client) ne doit pas être
+	 *    réalisée tant que la GUI n'est pas prête à traiter l'évènement de lecture associé
+	 *  - les méthodes des connexions générales susceptibles d'être appelées par les connexions
 	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
-	 *    ne demandent la même t�che en même temps, risquant une interf�rence
+	 *    ne demandent la même tâche en même temps, risquant une interférence
 	 *    
 	 * 
 	 * 
@@ -1386,17 +1386,17 @@ public class Launcher
 	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
 	 *  
 	 *  ca devrait pas être possible d'avoir un profil sans stats
-	 *  toutes les stats devraient être centralis�es et chargées quand nécessaire
+	 *  toutes les stats devraient être centralisées et chargées quand nécessaire
 	 *  y compris pour les rencontres locales (qui peuvent être stockées le temps d'avoir un accès réseau)
 	 * 
 	 * 
 	 * 
 	 * REMOTE 
-	 * propriété remote des joueurs : comment s'assurer qu'un joueur est bien identifi� ?
-	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connect�
-	 * 	  si un joueur essaie de se connecter à partir d'un h�te différent, erreur et on demande au joueur de s'identifier
-	 * >> mais en fait c'est le central qui controle la v�racit�, c'est lui qui d�tient le dernier hote de connection
-	 *    donc on ne peut faire de partie enregistr�e qu'en passant par le central, basta. sinon c'est du hors-piste, de l'amical.
+	 * propriété remote des joueurs : comment s'assurer qu'un joueur est bien identifié ?
+	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connecté
+	 * 	  si un joueur essaie de se connecter à partir d'un hôte différent, erreur et on demande au joueur de s'identifier
+	 * >> mais en fait c'est le central qui controle la véracité, c'est lui qui détient le dernier hote de connection
+	 *    donc on ne peut faire de partie enregistrée qu'en passant par le central, basta. sinon c'est du hors-piste, de l'amical.
 	 * 
 	 */ 
 	
@@ -1408,23 +1408,23 @@ public class Launcher
 	 *    - tester le mode partie rapide
 	 *    - le serveur change bien d'état à chaque modification de la partie
 	 * problèmes :
-	 *    - quand un client sélectionne des commandes : c'est pas conserv� quand le serveur valide la partie
+	 *    - quand un client sélectionne des commandes : c'est pas conservé quand le serveur valide la partie
 	 *    - impossible de bouger le perso côté client
-	 *    - jeu saccadû côté client même en LAN >> faire de l'évènementiel et pas du cosm�tique
+	 *    - jeu saccadû côté client même en LAN >> faire de l'évènementiel et pas du cosmétique
 	 *    - parfois une exception se produit liée à GregorianCalendar
 	 *    
 	 * à faire :
-	 *  - la deconnection en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolong� du serveur, à toutes les phases de la gui/du jeu
+	 *  - la deconnection en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur, à toutes les phases de la gui/du jeu
 	 *  
 	 *  - tout changement d'état du client devrait être :
-	 *  	- une requête envoy�e au serveur
+	 *  	- une requête envoyée au serveur
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
-	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est d�cidû unilat�ralement
+	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est décidé unilatéralement
 	 *  - déterminer les ressources à synchroniser et... le faire rigoureusement
 	 *  - penser à tester systématiquement si l'état du c/s qui reçoit un evt est compatible avec le traitement de cet evt 
 	 *  - tout evt transmis à la connection générale par l'indiv doit identifier l'indiv
-	 *    car pr client, il y a une diff�rence, qui doit être traitée, entre recevoir un evt donné
+	 *    car pr client, il y a une différence, qui doit être traitée, entre recevoir un evt donné
 	 *    d'une connection active ou d'une autre connection.
 	 *    plus généralement, le traitement dépend de l'état du client pour le serveur correspondant
 	 *  - quand la partie commence, faudrait :
@@ -1433,31 +1433,31 @@ public class Launcher
 	 * 
 	 * 
 	 * 
-	 * r�forme GUI
+	 * réforme GUI
 	 * 	- certains pb de gestion de la GUI viennent du fait que des données temporaires sont stockées dans les classes de la GUI
-	 * 	  alors qu'elles seraient mieux control�es et int�gr�es si elles �taient du côté du jeu
+	 * 	  alors qu'elles seraient mieux controlées et intégrées si elles étaient du côté du jeu
 	 * 	  exemple: sélection temporaire de joueurs lors de la configuration d'un joueur. le fait que ces données soient dans la GUI
-	 * 	  pose des pb de mise à jour du jeu en réseau, car on est alors oblig� de duppliquer les listes.
-	 * 	  >> r�forme à organiser conjointement à la mise en place des évènements
+	 * 	  pose des pb de mise à jour du jeu en réseau, car on est alors obligé de duppliquer les listes.
+	 * 	  >> réforme à organiser conjointement à la mise en place des évènements
 	 * 	- GUI: 
 	 *  	- dans les cas où on a un panel affichant une liste et d'autres
-	 *    	  panels affichant l'élément sélectionn�, il faudrait que ces derniers �coutent
+	 *    	  panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
 	 *    	  la liste afin de se mettre à jour automatiquement quand nécessaire.
 	 *  	- en fait on peut faire une version simple des souspanels, et une version
-	 *    	  qui �coute le panel principal et h�rite de la version simple
-	 *  	- pour la configuration des parties, faut une structure génér�e au niveau de ConfigurationXxxx
+	 *    	  qui écoute le panel principal et hérite de la version simple
+	 *  	- pour la configuration des parties, faut une structure générée au niveau de ConfigurationXxxx
 	 *    	  avec des sous classes pour le jeu en réseau (une pour client, une pour serveur)
-	 *    	  tout ça doit implémenter tout ce qui est déjà implément� au niveau des panels, afin que la GUI
+	 *    	  tout ça doit implémenter tout ce qui est déjà implémenté au niveau des panels, afin que la GUI
 	 *    	  ne fasse plus aucun traitement, mais se contente de transmettre les commandes de l'utilisateur au moteur
 	 *  - remarques : 
-	 *  	- l'int�gralit� du traitement devrait être effectué côté moteur
-	 *    	  la gui ne devrait fonctionner que par requête/r�ponses synchrones (pour le local)
+	 *  	- l'intégralité du traitement devrait être effectué côté moteur
+	 *    	  la gui ne devrait fonctionner que par requête/réponses synchrones (pour le local)
 	 *    	  ou asynchrones (pour le réseau). 
 	 *    	  voire asynchrones pour les deux, avec un système d'évènements...
-	 *  	- faire un système par d�l�gation permettant d'associer un gestionnaire de listeners/evts
+	 *  	- faire un système par délégation permettant d'associer un gestionnaire de listeners/evts
 	 *    	  à tout objet du moteur. chaque composant graphique doit simplement implémenter une interface,
-	 *    	  ce qui simplifie le beans. bien sur, chaque objet �metteur doit du cp s'identifier pr chaque evt (source)
-	 *    	  et les fonctions d'�coute seront un peu plus longue coté gui dans le cas de classes �coutant
+	 *    	  ce qui simplifie le beans. bien sur, chaque objet émetteur doit du cp s'identifier pr chaque evt (source)
+	 *    	  et les fonctions d'écoute seront un peu plus longue coté gui dans le cas de classes écoutant
 	 *    	  plusieurs éléments du moteur.
 	 *    
 	 *    
@@ -1477,7 +1477,7 @@ public class Launcher
 	 * 		- même les threads sont gardés, mais du cp le code doit être modifié
 	 * 	  	  pour ne pas tenter d'écrire/lire si la connection est morte
 	 * 		- quand le client tente de se reconnecter, si son id correspond à 
-	 * 	   	  celle d'une connection DISCONNECTED, alors on se contente de r�initialiser les 
+	 * 	   	  celle d'une connection DISCONNECTED, alors on se contente de réinitialiser les 
 	 * 	  	  streams dans le writer et le reader, et ça roule.
 	 *    
 	 *    
@@ -1497,7 +1497,7 @@ public class Launcher
 	 *  - structure abstraite, on peut accéder aux cases ou aux pixels
 	 *  - le chemin est entier, on passe le perso en paramètre et on nous dit la case suivante (null si pas sur le chemin)
 	 *    voire la direction à prendre pour suivre le chemin
-	 *  - à voir comment ça peut être représent� derri�re...
+	 *  - à voir comment ça peut être représenté derri�re...
 	 */
 	
 	// TODO clignotements de sprites : mettre de la transparence dans les version colori�es
@@ -1525,7 +1525,7 @@ public class Launcher
 	//	>> définir des borders comme dans SBM sans avoir à tout générer à la main (pr blocs sym�triques)
 	//	>> temps de chargement plus rapide (en supposant que la transfo est plus rapide que le re-chargement)
 	// TODO dans belts, y a un bidule qui passe sur les rails sur les cétés...
-	// TODO est-il vraiment nécessaire de gérer les floors en tant que sprites à part enti�re, quand on peut y mettre plusieurs blocs?
+	// TODO est-il vraiment nécessaire de gérer les floors en tant que sprites à part entière, quand on peut y mettre plusieurs blocs?
 	// TODO réseau:
 	//	>> pb quand c'est un client qui clique sur le round en 1er: si sélection aléatoire, alors le niveau est différent de celui du serveur!
 	//	>> en fait, les clients ne devraient pas pouvoir avancer dans le tournoi avant le serveur

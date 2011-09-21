@@ -156,7 +156,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	/*
 	 * change le gesture, la direction de l'animation et la direction des touches
-	 * l'animation n'est r�initialisée que si le gesture est modifié
+	 * l'animation n'est réinitialisée que si le gesture est modifié
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// record event
