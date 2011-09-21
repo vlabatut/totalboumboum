@@ -31,7 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
  * 
- * @author Onur B�y�ktopa� & Yigit Turak
+ * @author Onur B y ktopa  & Yigit Turak
  *
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
@@ -60,8 +60,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private AiPath path;
 	
 	/**
-	 * Cette classe dépend essentiellement de la fonction �processAction� 
-	 * qui est �tendu de la classe �ArtificialIntelligence� de làAPI. 
+	 * Cette classe dépend essentiellement de la fonction processAction
+	 * qui est étendu de la classe ArtificialIntelligence de làAPI. 
 	 * Car dans cette méthode, on décide les actions de làiA.
 	 */
 	public AiAction processAction() throws StopRequestException, NullPointerException
@@ -70,7 +70,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		
 		initBT();
-		// si le personnage control� a été éliminé, inutile de continuer
+		// si le personnage controlé a été éliminé, inutile de continuer
 		if(!this.deepPurple.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();
@@ -126,7 +126,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * D�abord on obtient des percepts, ensuite on trouve notre héro, 
+	 * D'abord on obtient des percepts, ensuite on trouve notre héro, 
 	 * et puis on crée làobjet Elements et met à jour de notre case.  
 	 */
 	private void initBT() throws StopRequestException
@@ -177,7 +177,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	// EXECUTION COLLECTE FOR DROP THE BOMB		  ///////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * On �value des critéres (le nombre des murs destructibles et de bonus) 
+	 * On évalue des critéres (le nombre des murs destructibles et de bonus) 
 	 * ensuite on décide le posage de bombe pour le mode collecte. 
 	 */
 	private void executeCollect() throws StopRequestException{
@@ -231,7 +231,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * On �value des critéres (tuer à làadversaire) 
+	 * On évalue des critéres (tuer à làadversaire) 
 	 * ensuite on décide le posage de bombe pour le mode attaque.
 	 */
 	private void executeAttack() throws StopRequestException{

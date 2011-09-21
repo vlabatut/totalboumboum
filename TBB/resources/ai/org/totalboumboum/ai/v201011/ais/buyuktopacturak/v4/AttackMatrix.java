@@ -32,7 +32,7 @@ public class AttackMatrix{
 	public Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 	
 	/**
-	 * C�est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * C'est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @throws StopRequestException
 	 */

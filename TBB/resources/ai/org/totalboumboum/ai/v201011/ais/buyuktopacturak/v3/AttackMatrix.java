@@ -62,7 +62,7 @@ public class AttackMatrix{
 	
 	public void createMatrix()throws StopRequestException{
 		init();
-		putFree();	//öncelikle her yer Free olarak doldurulur.
+		putFree();	// ncelikle her yer Free olarak doldurulur.
 		putWalls();
 		putHero();
 		putBonus();
@@ -148,7 +148,7 @@ public class AttackMatrix{
 		}
 	}
 
-	//Distance vs. hesaplarýný yaptýr. if-else içinde
+	//Distance vs. hesaplar n  yapt r. if-else i inde
 	private void putBonus() throws StopRequestException{
 		bt.checkInterruption();
 		itemsList = zone.getItems();
@@ -191,7 +191,7 @@ public class AttackMatrix{
 			matrix[bomb.getTile().getLine()][bomb.getTile().getCol()]=0;
 			Iterator<AiTile> itBlasts = blasts.iterator();
 			AiTile blast;
-			//zaman hesaplamalarýný yaptýr.
+			//zaman hesaplamalar n  yapt r.
 			while(itBlasts.hasNext()){
 				blast = itBlasts.next();
 				col = blast.getCol();
@@ -384,17 +384,17 @@ public class AttackMatrix{
 	}
 	
 	//////////////////////////////
-	//BURAYI ACELE EKLÝYORUM    //
+	//BURAYI ACELE EKL YORUM    //
 	//////////////////////////////
 	private List<AiTile> getBombRangeList(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
-		List<AiTile> bombRangeList;//Bomba alaný listesi
+		List<AiTile> bombRangeList;//Bomba alan  listesi
 		bombRangeList = new ArrayList<AiTile>();	
 		
 		AiTile neighbourTile, tempTile = tile;
 		int i=0;
-		boolean crossableItem;//bombe Itemlere deðmiþ mi (sana deðmezmiþ bebeðim)
-		boolean crossable;//Tamamen geçilebilirlik.
+		boolean crossableItem;//bombe Itemlere de mi  mi (sana de mezmi  bebe im)
+		boolean crossable;//Tamamen ge ilebilirlik.
 		
 		for(Direction dir:this.dirTable){
 			bt.checkInterruption();
@@ -411,7 +411,7 @@ public class AttackMatrix{
 				else{
 					crossableItem = false;
 				}
-				//eðer neighbourTile crossable ise i.yi 1 artýrýp o anki tile'ýmý neighbourTile yaparým.
+				//e er neighbourTile crossable ise i.yi 1 art r p o anki tile' m  neighbourTile yapar m.
 				if(neighbourTile.isCrossableBy(ownHero) && crossableItem){
 					i++;
 					tile = neighbourTile;
@@ -427,7 +427,7 @@ public class AttackMatrix{
 	}
 	private List<AiTile> getAllRangeList()throws StopRequestException{
 		bt.checkInterruption();
-		List<AiTile> allRangeList;//Tüm bombalarýn Alan listesi
+		List<AiTile> allRangeList;//T m bombalar n Alan listesi
 		allRangeList = new ArrayList<AiTile>();
 				
 		Iterator<AiBomb> itBombs = this.bombsList.iterator(); 
@@ -444,7 +444,7 @@ public class AttackMatrix{
 		bt.checkInterruption();
 		
 		willBurnWallsList = new ArrayList<AiBlock>();
-		List<AiTile> allRangeList;//Tüm bombalarýn Alan listesi
+		List<AiTile> allRangeList;//T m bombalar n Alan listesi
 		allRangeList = getAllRangeList();
 		Iterator<AiTile> itRange = allRangeList.iterator();
 		AiTile range;
@@ -454,7 +454,7 @@ public class AttackMatrix{
 			range = itRange.next();
 			//Listede eleman varsa
 			if(range.getBlocks().size() != 0){
-				//Duvar batlatýlabilirse
+				//Duvar batlat labilirse
 				if(range.getBlocks().get(0).isDestructible()){
 					willBurnWallsList.add(range.getBlocks().get(0));
 				} 
