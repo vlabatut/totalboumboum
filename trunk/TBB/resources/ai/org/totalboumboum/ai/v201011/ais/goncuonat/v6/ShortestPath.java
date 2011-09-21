@@ -41,7 +41,7 @@ public class ShortestPath
 	 */
 	public AiPath shortestPath(AiHero ownHero, AiTile startPoint,List<AiTile> endPoints) throws StopRequestException
 	{
-		monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		// le chemin le plus court possible
 		AiPath shortestPath=null;
 		// L'objet pour implementer l'algo A*
@@ -85,7 +85,7 @@ public class ShortestPath
 	 */
 	public List<AiPath> shortestPathAttack(AiHero ownHero, AiTile startPoint,List<AiTile> endPoints) throws StopRequestException
 	{
-		monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		// le chemin le plus court possible
 		AiPath shortestPath=null;
 		// L'objet pour implementer l'algo A*
@@ -134,7 +134,7 @@ public class ShortestPath
 	
 	public AiPath shortestPathEachTile(AiHero ownHero, AiTile startPoint,AiTile endPoint) throws StopRequestException
 	{
-		monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		// le chemin le plus court possible
 		AiPath shortestPath=null;
 		// L'objet pour implementer l'algo A*

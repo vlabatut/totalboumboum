@@ -29,22 +29,22 @@ public class ModeAttack
 	public GoncuOnat monia;
 	
 	// la case vide qui ne contient aucuns sprites
-	// est represent�e dans la matrice da la zone.
+	// est representée dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
 	// la case qui contient un mur indestructible pour le mode
-	// attaque est represent�e dans la matrice da la zone.
+	// attaque est representée dans la matrice da la zone.
 	public final int ATTACK_HARDWALL =1 ;
 	// la case qui contient le feu d'une bombe pour le mode
-	// attaque est represent�e dans la matrice da la zone.
+	// attaque est representée dans la matrice da la zone.
 	public final int ATTACK_FIRE =-20 ;
 	// la case qui contient un bonus pour le mode
-	// attaque est represent�e dans la matrice da la zone.
+	// attaque est representée dans la matrice da la zone.
 	public final int ATTACK_BONUS= 3;
 	// la case qui contient un héro pour le mode
-	// attaque est represent�e dans la matrice da la zone.
+	// attaque est representée dans la matrice da la zone.
 	public final int ATTACK_RIVAL = 4;
 	// la case qui contient une bombe pour le mode
-	// attaque est represent�e dans la matrice da la zone.
+	// attaque est representée dans la matrice da la zone.
 	public final int ATTACK_BOMB = -20;
 	
 	//public AiPath nextMove=null;
@@ -69,14 +69,14 @@ public class ModeAttack
 	 */
 	public void valueFiresAttack(double[][] matrice, AiZone zone) throws StopRequestException
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		Collection<AiFire> fires = zone.getFires();
 		Iterator<AiFire> iteratorFires = fires.iterator();
 		
 		
 		while (iteratorFires.hasNext()) 
 		{
-			monia.checkInterruption(); // APPEL OBL�GATO�RE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			AiFire fire=iteratorFires.next();
 			
 			Collection<AiTile> fireNeighbors=fire.getTile().getNeighbors();
@@ -84,7 +84,7 @@ public class ModeAttack
 			while(iteratorFire.hasNext())
 			{
 				AiTile tile=iteratorFire.next();
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(tile.isCrossableBy(monia.ourHero))
 					matrice[tile.getLine()][tile.getCol()] += ATTACK_FIRE;
 			}
@@ -105,12 +105,12 @@ public class ModeAttack
 	 */
 	public void valueBonusAttack(double[][] matrice, AiZone zone)throws StopRequestException 
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		Collection<AiItem> items = zone.getItems();
 		Iterator<AiItem> iteratorItems = items.iterator();
 		while (iteratorItems.hasNext()) 
 		{
-			monia.checkInterruption(); // APPEL OBL�GATO�RE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			AiItem item = iteratorItems.next();
 			Collection<AiTile> bonusNeighbors=item.getTile().getNeighbors();
 			Iterator<AiTile> iteratorFire = bonusNeighbors.iterator();
@@ -135,13 +135,13 @@ public class ModeAttack
 	 * @throws StopRequestException
 	 */
 	public void valueBombsAttack(double[][] matrice, AiZone zone) throws StopRequestException{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		Collection<AiBomb> bombs = zone.getBombs();
 		Iterator<AiBomb> iteratorBombs = bombs.iterator();
 		//Collection<AiTile> inScopeTiles=
 		while (iteratorBombs.hasNext()) 
 		{
-			monia.checkInterruption(); // APPEL OBL�GATO�RE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			AiBomb bomb = iteratorBombs.next();
 			
 			Collection<AiTile> bombNeighbors=bomb.getTile().getNeighbors();
@@ -159,7 +159,7 @@ public class ModeAttack
 			
 			while (iteratorScope.hasNext())
 			{
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				AiTile blastCase=iteratorScope.next();
 				matrice[blastCase.getLine()][blastCase.getCol()] += ATTACK_FIRE;
 				
@@ -179,7 +179,7 @@ public class ModeAttack
 	 */
 	public void valueRivalAttack(double[][] matrice, AiZone zone)throws StopRequestException 
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		Collection<AiHero> items = zone.getHeroes();
 		Iterator<AiHero> iteratorHeroes = items.iterator();
 		while (iteratorHeroes.hasNext()) 
@@ -203,10 +203,10 @@ public class ModeAttack
 			
 			for(int a=i;a<rangex;a++)
 			{
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				for(int k=j;k<rangey;k++)
 				{
-					monia.checkInterruption(); // APPEL OBL�GATO�RE
+					monia.checkInterruption(); // APPEL OBLIGATOIRE
 					if(zone.getTile(a, k)!=zone.getTile(monia.ourHero.getLine(),monia.ourHero.getCol()))
 					{
 						if((Math.abs(a-x)==(monia.ourHero.getBombRange()-2) || Math.abs(k-y)==(monia.ourHero.getBombRange()-2)))
@@ -242,12 +242,12 @@ public class ModeAttack
 	 * @throws StopRequestException
 	 */
 	public void valueBlocksAttack(double[][] matrice, AiZone zone) throws StopRequestException{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		Collection<AiBlock> blocks = zone.getBlocks();
 		Iterator<AiBlock> iteratorBlocks = blocks.iterator();
 		while (iteratorBlocks.hasNext()) 
 		{
-			monia.checkInterruption(); // APPEL OBL�GATO�RE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			AiBlock block = iteratorBlocks.next();
 		
 			{
@@ -284,15 +284,15 @@ public class ModeAttack
 	public List<AiTile> endPoint(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
 		
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		List<AiTile> endpoint = new ArrayList<AiTile>();
 		//AiTile tile=new AiTile();
 		for(int i=0;i<zone.getHeight();i++)
 		{
-			monia.checkInterruption(); // APPEL OBL�GATO�RE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			for(int j=0;j<zone.getWidth();j++)
 			{
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(zone.getTile(i, j).isCrossableBy(monia.ourHero))
 					endpoint.add(zone.getTile(i,j));
 					
@@ -306,7 +306,7 @@ public class ModeAttack
 	
 	public List<Double> endpointValue(List<AiTile> endPoint, double[][] matrice)throws StopRequestException 
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		double temp;
 		List<Double> result = new ArrayList<Double>();
 		for(int i=0;i<endPoint.size();i++)
@@ -335,7 +335,7 @@ public class ModeAttack
 	 */
 	public List<Double> endpointDistance(List<AiPath> shortestPathAttack)throws StopRequestException 
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		List<Double> result= new ArrayList<Double>();
 		double temp;
 		
@@ -368,7 +368,7 @@ public class ModeAttack
 	{
 		List<Double> result= new ArrayList<Double>();
 		double temp;
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		for(int i=0;i<endpointValue.size();i++)
 		{
 			if(endpointDistance.get(i)!=null)
@@ -423,7 +423,7 @@ public class ModeAttack
 	 */
 	public List<AiPath> shortestPathAttack(AiHero ownHero, AiTile startPoint,List<AiTile> endPoints, AiZone zone) throws StopRequestException
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		// le chemin le plus court possible
 		AiPath shortestPath=null;
 		// L'objet pour implementer l'algo A*
@@ -468,7 +468,7 @@ public class ModeAttack
 	
 	public void matriceAttack(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		if (monia.nextMoveAttack == null) 
 		{
 			
@@ -528,7 +528,7 @@ public class ModeAttack
 	 */
 	public AiPath shortestPath(AiHero ownHero, AiTile startPoint,List<AiTile> endPoints) throws StopRequestException
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		// le chemin le plus court possible
 		AiPath shortestPath=null;
 		// L'objet pour implementer l'algo A*
@@ -570,10 +570,10 @@ public class ModeAttack
 		List<AiTile> check= new ArrayList<AiTile>();
 		for(int i=0; i<zone.getHeight(); i++)
 		{
-			monia.checkInterruption(); // APPEL OBL�GATO�RE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			for(int j=0; j<zone.getWidth(); j++)
 			{
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(matrice[i][j]!=ATTACK_FIRE ||matrice[i][j]!=ATTACK_BOMB || zone.getTile(i,j).isCrossableBy(monia.ourHero))
 				{
 					check.add(zone.getTile(i,j));
@@ -597,7 +597,7 @@ public class ModeAttack
 			c=zone.getHeight();
 		for(int i=a;i<c;i++)
 		{
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(zone.getTile(i, y).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(i,y));
 		}
@@ -608,16 +608,16 @@ public class ModeAttack
 			d=zone.getWidth();
 		for(int j=b;j<d;j++)
 			{
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(zone.getTile(x, j).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(x,j));
 			}
 		for(int k=0;k<bombBlast.size();k++)
 		{
-			monia.checkInterruption(); // APPEL OBL�GATO�RE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			for(int l=0;l<check.size();l++)
 			{
-				monia.checkInterruption(); // APPEL OBL�GATO�RE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(bombBlast.get(k).getLine()==check.get(l).getLine()&&bombBlast.get(k).getCol()==check.get(l).getCol())
 					check.remove(l);
 			}
@@ -655,7 +655,7 @@ public class ModeAttack
 	 */
 	public AiPath shortestPathAttackTile(AiHero ownHero, AiTile startPoint,AiTile endPoint, AiZone zone) throws StopRequestException
 	{
-		monia.checkInterruption(); // APPEL OBL�GATO�RE
+		monia.checkInterruption(); // APPEL OBLIGATOIRE
 		// le chemin le plus court possible
 		AiPath shortestPath=null;
 		// L'objet pour implementer l'algo A*

@@ -30,22 +30,22 @@ public class ModeCollecte
 	private GoncuOnat monia;
 	
 	// la case vide qui ne contient aucuns sprites
-	// est represent�e dans la matrice da la zone.
+	// est representée dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
 	// la case qui contient le feu de la bombe pour le mode
-	// collecte est represent�e dans la matrice da la zone.
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_FIRE =-20 ;
 	// la case qui contient un mur destructible pour le mode
-	// collecte est represent�e dans la matrice da la zone.
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_SOFTWALL = 2;
 	// la case qui contient un bonus pour le mode
-	// collecte est represent�e dans la matrice da la zone.
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_BONUS= 10;
 	// la case qui contient un héro pour le mode
-	// collecte est represent�e dans la matrice da la zone.
+	// collecte est representée dans la matrice da la zone.
 	private final int COLLECT_RIVAL = -10;
 	// la case qui contient une bombe pour le mode
-	// collecte est represent�e dans la matrice da la zone.
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_BOMB = -20;
 	// chemin asuivre pour s'enfuir du danger
 	// AiPath nextMove=null;

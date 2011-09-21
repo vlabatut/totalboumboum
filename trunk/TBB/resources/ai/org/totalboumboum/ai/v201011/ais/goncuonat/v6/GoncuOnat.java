@@ -19,7 +19,7 @@ public class GoncuOnat extends ArtificialIntelligence
 	// notre hero sur la zone
 	public AiHero ourHero;
 	// la case vide qui ne contient aucuns sprites
-	// est represent�e dans la matrice da la zone.
+	// est representée dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
 	// chemin a suivre pour s'enfuir du danger
 	public AiPath nextMove=null;

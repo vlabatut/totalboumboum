@@ -284,7 +284,7 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochonderne direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun déplacement n'est n�cessonderre)
+	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessonderre)
 	 * @throws LimitReachedException 
 	 * */
 	public Direction update() throws StopRequestException, LimitReachedException

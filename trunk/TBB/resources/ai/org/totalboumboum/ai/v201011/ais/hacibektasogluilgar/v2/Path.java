@@ -79,9 +79,9 @@ public class Path {
 		return resultat;
 	}
 /**
- * hayali bomba konuldu�u zaman t�m etki alan� -10 olacak
- * -100 olmayan ve -10 olan yerleri taray�p e�er pozitif bir de�er bulursak 
- * oras� bizim i�in ula��labilir bir yer olacak
+ * hayali bomba konuldu u zaman t m etki alan  -10 olacak
+ * -100 olmayan ve -10 olan yerleri taray p e er pozitif bir de er bulursak 
+ * oras  bizim i in ula  labilir bir yer olacak
  *   
  * @param line
  * @param col
@@ -138,10 +138,10 @@ public class Path {
 	}
 	
 	/**
-	 * �nce t�m alan� longeur 10 ile tar�ycak 
-	 * sonra buldu�u tile lerin en b�y���n� hedef tile se�icek 
+	 *  nce t m alan  longeur 10 ile tar ycak 
+	 * sonra buldu u tile lerin en b y   n  hedef tile se icek 
 	 * sonra Astar algo yu uyguluycak 
-	 * en sonunda a�a��daki action a buldu�u path� vericek ve bitcek 
+	 * en sonunda a a  daki action a buldu u path  vericek ve bitcek 
 	 * 
 	 * @param line
 	 * @param col

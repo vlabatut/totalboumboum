@@ -19,7 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * This class has functions related to pathfinding
- * @author  Can Göçmenoðlu & Irfan Hekimoðlu
+ * @author  Can G  meno lu & Irfan Hekimo lu
  *
  */
 public class Paths {

@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 
 /**
  * Classe pour les calculs matriciels
- * @author Can G��meno�lu
+ * @author Can G  meno lu
  *
  */
 public class MatriceCalc {
@@ -175,7 +175,7 @@ public class MatriceCalc {
 	}
 	
 	/**
-	 * même que ReachMatrix mais cette fois toutes les bombes sont compt�s comme explosé.
+	 * même que ReachMatrix mais cette fois toutes les bombes sont comptés comme explosé.
 	 * @param monIa
 	 * @return
 	 * @throws StopRequestException

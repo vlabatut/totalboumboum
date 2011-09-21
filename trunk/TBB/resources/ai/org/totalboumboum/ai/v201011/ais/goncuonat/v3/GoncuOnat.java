@@ -510,7 +510,7 @@ public class GoncuOnat extends ArtificialIntelligence
 			this.valueFiresAttack(matrice, zone);
 			this.valueRivalAttack(matrice, zone);
 			this.updateOutputAttack(matrice, zone);
-			System.out.println("matrice attack dayýz");
+			System.out.println("matrice attack day z");
 			
 			dropBomb = false;
 			

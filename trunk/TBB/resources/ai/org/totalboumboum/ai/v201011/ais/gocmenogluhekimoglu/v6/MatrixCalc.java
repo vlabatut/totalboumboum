@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
  * This class represents our matrix and matrix calculation functions
- * @author Can Göçmenoðlu
+ * @author Can G  meno lu
  *
  */
 public class MatrixCalc {
