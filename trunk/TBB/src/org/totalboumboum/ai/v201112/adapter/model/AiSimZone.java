@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.model;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -807,6 +808,20 @@ final class AiSimZone extends AiZone
 				result = temp;
 		}
 		return result;
+	}
+	
+	/**
+	 * Méthode utilisée en interne
+	 * pour initialiser une zone de test.
+	 * 
+	 * @param hiddenItemsCount
+	 * 		Nombre total d'items cachés.
+	 * @param hiddenItemsCounts
+	 * 		Nombres d'items cachés par type d'item.
+	 */
+	protected void setHidenItemCount(int hiddenItemsCount, HashMap<AiItemType,Integer> hiddenItemsCounts)
+	{	this.hiddenItemsCount = hiddenItemsCount;
+		this.hiddenItemsCounts.putAll(hiddenItemsCounts);
 	}
 	
 	/////////////////////////////////////////////////////////////////
