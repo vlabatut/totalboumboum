@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.dybref;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -348,9 +349,19 @@ System.out.println(zone);
 					}
 				}
 				else
-				{	// on simule jusqu'au changement d'état du personnage : soit le changement de case, soit l'élimination
-					safe = model.simulate(hero);
-					duration = model.getDuration();
+				{	// on ne considère le retour en arrière que si on vient d'attendre 
+					// (à l'action précédente) i.e. : si cette case et celle de son parent sont les mêmes.
+					if(parent==null || !targetTile.equals(parent.getTile()))
+					{	// on ne considère les cases déjà visitées que s'il reste des bombes ou du feu en jeu
+						// ou sinon, si le temps courant permet d'en améliorer le chemin.
+						if(!zone.getFires().isEmpty() || !zone.getBombs().isEmpty()
+							|| matrix.getTime(targetTile)>totalDuration+hero.getWalkingSpeed()*tile.getSize()/1000)
+						{	// on simule jusqu'au changement d'état du personnage : 
+							// soit le changement de case, soit l'élimination
+							safe = model.simulate(hero);
+							duration = model.getDuration();
+						}
+					}
 				}
 	
 				// si le joueur est encore vivant dans cette zone et si l'action a bien eu lieu
@@ -364,7 +375,6 @@ System.out.println(zone);
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						DybrefNode node = new DybrefNode(futureTile,duration,this);
-// TODO optimisation >> on ne considère le retour en arrière (mouvement) que s'il reste bombes/feu dans la zone
 // TODO adapter les coms de l'exception
 // TODO revoir tous les coms des classes du package dybref
 						children.add(node);
@@ -422,6 +432,43 @@ System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
 							result = duration;
 					}
 				}
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Détermine si la case anciennement occupée est menacée par
+	 * du feu ou une bombe.
+	 * 
+	 * @return
+	 * 		{@code true} si la case parent est menacée.
+	 */
+	@SuppressWarnings("unused")
+	private boolean isParentTileThreatened()
+	{	// init
+		boolean result = false;
+		AiTile parentTile = parent.getTile();
+		
+		// is there a fire in the parent tile?
+		{	List<AiFire> fires = zone.getFires();
+			Iterator<AiFire> it = fires.iterator();
+			while(it.hasNext() && !result)
+			{	AiFire fire = it.next();
+				AiTile fireTile = fire.getTile();
+				result = parentTile.equals(fireTile);
+			}
+		}
+		
+		// is the parent tile within the range of some bomb?
+		if(!result)
+		{	List<AiBomb> bombs = zone.getBombs();
+			Iterator<AiBomb> it = bombs.iterator();
+			while(it.hasNext() && !result)
+			{	AiBomb bomb = it.next();
+				List<AiTile> blast = bomb.getBlast();
+				result = blast.contains(parentTile);
 			}
 		}
 		

@@ -384,7 +384,7 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin.
-	 * Si la même case apparait consécutivement plusieurs fois, elle n'est compt�e
+	 * Si la même case apparait consécutivement plusieurs fois, elle n'est comptée
 	 * qu'une seule. Le calcul ne tient pas compte des éventuels obstacles.
 	 * 
 	 * @return	
