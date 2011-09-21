@@ -1,8 +1,8 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v3;
 
 /**
- * @author Elif Nurdan ÝLGAR 
- * @author Engin Hacýbektaþoðlu
+ * @author Elif Nurdan  LGAR 
+ * @author Engin Hac bekta o lu
  *
  */
 public enum Etats {

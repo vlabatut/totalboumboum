@@ -74,7 +74,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 		if (!ourHero.getTile().getItems().isEmpty()) {
 			compteur++;
 			if (print)
-				System.out.println("Notre IA a collect� un bonus! Compteur: "
+				System.out.println("Notre IA a collecté un bonus! Compteur: "
 						+ compteur);
 		}
 		// Détermination du mode

@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  * 
  * on calcule la matrice collecte
  * 
- * @author Elif Nurdan �lgar && Engin Hac�bekta�o�lu
+ * @author Elif Nurdan  lgar && Engin Hac bekta o lu
  *
  */
 public class HacibektasogluIlgar extends ArtificialIntelligence

@@ -95,7 +95,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 				for (int j = 0; j < width; j++) {
 					checkInterruption();
-					//butun alanlar� guvenli dusunuyoruz! 
+					//butun alanlar  guvenli dusunuyoruz! 
 					matrice[i][j] = 1;
 				}
 		}

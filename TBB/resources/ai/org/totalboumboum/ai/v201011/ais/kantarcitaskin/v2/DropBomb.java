@@ -212,7 +212,7 @@ public class DropBomb
 		return resultat;		
 	}
 	
-	//La methode qui control s'il existe des adversaire dans les cases qu'on lui a envoy�
+	//La methode qui control s'il existe des adversaire dans les cases qu'on lui a envoyé
 	public boolean enemyAvaible(List<AiTile> tempBlast)
 	{
 		boolean result = false;

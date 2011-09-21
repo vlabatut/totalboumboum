@@ -80,7 +80,7 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette méthode forme une liste des murs qui peuvent se détruire c�est �
+	 * Cette méthode forme une liste des murs qui peuvent se détruire c'est à
 	 * dire elle Contrôle si la case est destructible ou indestructibles et il y
 	 * a posséde du danger ou pas . Elle prend 2 arguments la zone du jeu et une
 	 * action.

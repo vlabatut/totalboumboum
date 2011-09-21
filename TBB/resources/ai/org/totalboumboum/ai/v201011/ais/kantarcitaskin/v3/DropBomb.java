@@ -286,7 +286,7 @@ public class DropBomb
 	
 	/*
 	 * Teste s'il se trouve des cases sur à alles apres avois poser une bombe.
-	 * il prend une car� au tille de la range et enleve les cases de la porté virtuelle. puis 
+	 * il prend une caré au tille de la range et enleve les cases de la porté virtuelle. puis 
 	 * s'il se trouve des cases sur (en utilisen isSafe) il calcule les cases surs.
 	 * 
 	 * @param hero
@@ -375,7 +375,7 @@ public class DropBomb
 	
 
 	/*
-	 * Calcule la car� de taille range*range
+	 * Calcule la caré de taille range*range
 	 * 
 	 * @param range
 	 * 		la portée de la bombe d'un hero

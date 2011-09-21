@@ -1,8 +1,8 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v4;
 
 /**
- * @author Elif Nurdan �LGAR 
- * @author Engin Hac�bekta�o�lu
+ * @author Elif Nurdan  LGAR 
+ * @author Engin Hac bekta o lu
  *
  */
 
@@ -152,7 +152,7 @@ public class Path {
 	}
 	
 	/**
-	 * on a essay� d'appliquer l'algorithme de largeur d'abord
+	 * on a essayé d'appliquer l'algorithme de largeur d'abord
 	 * au debut le method prend une path qui a seulement le tile du hero et apres il regarde ses voisines
 	 * et si le vosine est inpassable ou bien si il est deja utilisé on ne l'ajoute pas au path
 	 * sinon on l'ajoute en regardent sa valeur de matriceTotale pour pouvoire decider si ça peut etre une cible ou pas.

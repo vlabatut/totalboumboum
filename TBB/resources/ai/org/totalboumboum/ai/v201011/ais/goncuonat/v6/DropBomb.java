@@ -51,10 +51,10 @@ public class DropBomb
 			for(int i=0; i<zone.getHeight(); i++)
 		
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				for(int j=0; j<zone.getWidth(); j++)
 				{
-					monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+					monia.checkInterruption(); // APPEL OBLIGATOIRE
 					
 						if(zone.getTile(i, j).getFires().isEmpty()&&zone.getTile(i, j).getBombs().isEmpty() 
 								&& zone.getTile(i,j).isCrossableBy(monia.ourHero))
@@ -80,7 +80,7 @@ public class DropBomb
 			c=zone.getHeight();
 		for(int i=a;i<c;i++)
 		{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(zone.getTile(i, y).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(i,y));
 		}
@@ -91,16 +91,16 @@ public class DropBomb
 			d=zone.getWidth();
 		for(int j=b;j<d;j++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(zone.getTile(x, j).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(x,j));
 			}
 		for(int k=0;k<bombBlast.size();k++)
 		{
-			monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			for(int l=0;l<check.size();l++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(bombBlast.get(k).getLine()==check.get(l).getLine()&&bombBlast.get(k).getCol()==check.get(l).getCol())
 					check.remove(l);
 			}
@@ -199,7 +199,7 @@ public class DropBomb
 			
 			for(int i=0; i<zone.getHeight(); i++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				for(int j=0; j<zone.getWidth(); j++)
 				{
 					monia.checkInterruption();
@@ -221,10 +221,10 @@ public class DropBomb
 			for(int i=0; i<zone.getHeight(); i++)
 		
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				for(int j=0; j<zone.getWidth(); j++)
 				{
-					monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+					monia.checkInterruption(); // APPEL OBLIGATOIRE
 					
 						if(zone.getTile(i, j).getFires().isEmpty()&&zone.getTile(i, j).getBombs().isEmpty() 
 								&& zone.getTile(i,j).isCrossableBy(monia.ourHero))
@@ -250,7 +250,7 @@ public class DropBomb
 			c=zone.getHeight();
 		for(int i=a;i<c;i++)
 		{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(zone.getTile(i, y).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(i,y));
 		}
@@ -261,16 +261,16 @@ public class DropBomb
 			d=zone.getWidth();
 		for(int j=b;j<d;j++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(zone.getTile(x, j).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(x,j));
 			}
 		for(int k=0;k<bombBlast.size();k++)
 		{
-			monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+			monia.checkInterruption(); // APPEL OBLIGATOIRE
 			for(int l=0;l<check.size();l++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLIGATOIRE
 				if(bombBlast.get(k).getLine()==check.get(l).getLine()&&bombBlast.get(k).getCol()==check.get(l).getCol())
 					check.remove(l);
 			}
@@ -296,7 +296,7 @@ public class DropBomb
 	/**
 	 * 
 	 *  
-	 * La methode qui teste si le chemin donne est securé.
+	 * La methode qui teste si le chemin donne est securï¿½.
 	 * 
 	 * @param  path
 	 * 				Le chemin

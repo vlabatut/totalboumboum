@@ -125,7 +125,7 @@ public class Securite {
 
 	/**
 	 * Cette méthode fait le Contrôle de sécurité du posage de la bombe par
-	 * làadversaire autour d�IA c�est-a-dire Contrôle si notre IA tombe en
+	 * làadversaire autour d'IA c'est-a-dire Contrôle si notre IA tombe en
 	 * danger par la bombe de làadversaire. Elle prend deux arguments la zone du
 	 * jeu et une bombe du jeu. Elle retourne une liste.
 	 * 
