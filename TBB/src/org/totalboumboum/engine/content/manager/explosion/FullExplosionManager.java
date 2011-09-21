@@ -125,7 +125,7 @@ public class FullExplosionManager extends ExplosionManager
 						{	processed.add(tempTile);
 							Fire fire;
 							if(length==flameRange)
-								fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractères par des valeurs énumérées
+								fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractÃ¨res par des valeurs ï¿½numï¿½rï¿½es
 							else
 								fire = explosion.makeFire("inside",tempTile);
 							fire.setOwner(owner);

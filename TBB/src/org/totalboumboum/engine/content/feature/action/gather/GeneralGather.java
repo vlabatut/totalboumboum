@@ -54,7 +54,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>paramètre: scope=N/D
  * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY PREVENT (ex: un bloc qui emp�che par intermitence les heros de r�colter l'item)
+ * <p>ABILITY PREVENT (ex: un bloc qui empêche par intermitence les heros de r�colter l'item)
  * 	<br>paramètre: actor=oui (hero)
  * 	<br>paramètre: target=oui (item)
  * 	<br>paramètre: direction=N/D

@@ -40,7 +40,7 @@ public class LocalSytemControl extends SystemControl
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// nécessaire pour éviter d'�mettre des évènements de façon répétitive pour un seul pressage de touche
+	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
@@ -58,7 +58,7 @@ public class LocalSytemControl extends SystemControl
 			
 			// faire renaitre le bonhomme
 //			else if(keyCode == KeyEvent.VK_1)
-//			{	//NOTE à adapter car ça peut être int�ressant pour le débug
+//			{	//NOTE à adapter car ça peut être intéressant pour le débug
 				//loop.rebirth();
 //			}
 

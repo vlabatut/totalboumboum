@@ -139,7 +139,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 			if(forcedPositionTime>0)
 				correctForcedShifts();
 			/* NOTE en cas de trajectoire repeat : 
-			 * ne faut-il pas r�initialiser la position forc�e à chaque répétition ?
+			 * ne faut-il pas réinitialiser la position forc�e à chaque répétition ?
 			 */
 		}
 	}
@@ -155,11 +155,11 @@ public class FullTrajectoryManager extends TrajectoryManager
 	private double forcedTotalZShift = 0;
 
 	/**
-	 * si on a d�passé le forcedPositionDuration, il faut :  
+	 * si on a dépassé le forcedPositionDuration, il faut :  
 	 * 		- calculer la position virtuelle à ce temps là (ce qui implique de calculer le point de départ en référence)
 	 * 		- vérifier si elle colle à la position forc�e
 	 * 		- si elle ne colle pas : la corriger
-	 * si on ne l'a pas encore d�passée : à peu près pareil
+	 * si on ne l'a pas encore dépassée : à peu près pareil
 	 * 		- calculer la position initiale
 	 * 		- calculer la position forc�e correspondante
 	 * 		- corriger  
