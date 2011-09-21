@@ -41,12 +41,14 @@ import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
  * boucler à l'infini.</br>
  * 
  * Cette implément trouve donc le chemin le plus court entre deux cases,
- * en considérant les obstacles. Elle a besoin de quatre paramètres :<ul>
+ * en considérant les obstacles. Elle a besoin de quatre paramètres :
+ * <ul>
  * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilité des cases).</li>
  * 		<li> Une fonction successeur, qui définit les actions possibles à partir d'un état donné. Dans le cas prèsent, il s'agit de 
  * 			 restreindre les déplacement possibles en considérant des facteurs supplémentaires par rapport à la simple traversabilité courrante.</li>
  * 		<li> Une fonction de coût, qui permet de définir combien coûte une action (ici : le fait de passer d'une case à l'autre).</li>
- * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li></ul>
+ * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li>
+ * </ul>
  * 
  * A noter qu'il s'agit d'une implément non-déterministe de l'algorithme.
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
