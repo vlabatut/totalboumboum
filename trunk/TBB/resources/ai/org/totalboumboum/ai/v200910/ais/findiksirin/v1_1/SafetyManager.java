@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * La valeur maximale (Double.MAX_VALUE) signifie que la case n'est pas menacée par une
  * bombe. Une valeur nulle signifie que la case est actuellement en feu.
  * Une valeur négative signifie que la case est menacée par une bombe
- * télécommand�e, qui peut exploser n'importe quand (la valeur absolue
+ * télécommandée, qui peut exploser n'importe quand (la valeur absolue
  * de la valeur correspond au temps depuis lequel la bombe a été posée)
  */
 public class SafetyManager
@@ -60,7 +60,7 @@ public class SafetyManager
 	private AiZone zone;
 	
 	/**
-	 * renvoie la matrice de suret�
+	 * renvoie la matrice de sûreté
 	 */
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

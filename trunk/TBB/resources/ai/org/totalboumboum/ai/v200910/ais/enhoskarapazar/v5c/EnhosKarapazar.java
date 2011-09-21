@@ -159,7 +159,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 			if (inAttackRange(endTileAttack)) {
 				if (isRangeClean(ownHero.getBombRange() + 1, currentTile)) {
 					if (debugMode)
-						System.out.println("attack bomb______Ben burday�m :"
+						System.out.println("attack bomb______Ben burdaym :"
 								+ ownHero.getTile().toString()
 								+ "Dman Burda : " + endTileAttack.toString());
 					ret.actionName = AiActionName.DROP_BOMB;
