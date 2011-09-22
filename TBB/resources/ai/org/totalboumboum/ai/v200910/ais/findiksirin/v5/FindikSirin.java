@@ -20,6 +20,10 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
+/**
+ * @author Ali Fındık
+ * @author Göknur Şırın
+ */
 public class FindikSirin extends ArtificialIntelligence
 {		
 	

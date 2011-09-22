@@ -14,7 +14,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * @author Sadettin Enhoş
+ * @author Ali Can Karapazar
+ */
 public class EnhosKarapazar extends ArtificialIntelligence {
 
 	AiAction result = new AiAction(AiActionName.NONE);

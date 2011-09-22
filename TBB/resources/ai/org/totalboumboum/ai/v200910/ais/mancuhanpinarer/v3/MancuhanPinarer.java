@@ -30,7 +30,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * defense et le bonus sont implementes.
  * 
  * 
- * @author Koray Mancuhan/Ozgun Pinarer
+ * @author Koray Mançuhan
+ * @author Özgün Pınarer
  * 
  */
 public class MancuhanPinarer extends ArtificialIntelligence {

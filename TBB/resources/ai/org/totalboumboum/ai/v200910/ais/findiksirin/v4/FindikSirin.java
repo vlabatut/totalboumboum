@@ -13,7 +13,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * @author Ali Fındık
+ * @author Göknur Şırın
+ */
 public class FindikSirin extends ArtificialIntelligence
 {		
 

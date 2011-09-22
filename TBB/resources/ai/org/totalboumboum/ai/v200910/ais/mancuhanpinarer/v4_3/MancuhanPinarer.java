@@ -28,9 +28,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Cette classe implemente l'AI du groupe rouge. Actuellement, la strategie de
  * defense et le bonus sont implementes.
  * 
- * 
- * @author Koray Mancuhan/Ozgun Pinarer
- * 
+ * @author Koray Mançuhan
+ * @author Özgün Pınarer
  */
 public class MancuhanPinarer extends ArtificialIntelligence {
 	// la case accessible et qui n'est pas dans la portee de la bombe est

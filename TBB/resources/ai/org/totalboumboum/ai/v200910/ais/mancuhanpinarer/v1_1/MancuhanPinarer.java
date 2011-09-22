@@ -37,7 +37,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * Pourriez-vous nous aider pour notre probleme? 
  *   
- * @author Koray Mancuhan/Ozgun Pinarer
+ * @author Koray Mançuhan
+ * @author Özgün Pınarer
  *
  */
 public class MancuhanPinarer extends ArtificialIntelligence {

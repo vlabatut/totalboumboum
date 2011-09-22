@@ -15,6 +15,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * >> c'est la classe qui est responsable de la securite
+ * @author Ali Fındık
+ * @author Göknur Şırın
  */
 public class SafetyManager
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
