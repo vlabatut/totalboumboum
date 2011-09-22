@@ -182,7 +182,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode controle s'il existe des murs dans les case qu'on lui a envoy�
+	//La methode controle s'il existe des murs dans les case qu'on lui a envoyé
 	public boolean wallAvaible(List<AiTile> tempBlast)
 	{
 		boolean resultat = false;

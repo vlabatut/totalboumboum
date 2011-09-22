@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 /**
  * Class qui determine de poser bombe
- * @author G.Lara Ozdoker && Sercan �zen
+ * @author G.Lara Ozdoker && Sercan  zen
  *
  */
 public class TileControleur {
@@ -99,16 +99,16 @@ public class TileControleur {
 
 	
 	/**
-	 * dfs algoritmas� kullanarak gidilebilecek tile'lar� buluyor.
-	 * TEST: S�PER sadece bomba hizalar�n� alm�yor.
-	 * onun i�in oralar� R�SK'e alan fonksiyon yazmal�y�z!
+	 * dfs algoritmas  kullanarak gidilebilecek tile'lar  buluyor.
+	 * TEST: S PER sadece bomba hizalar n  alm yor.
+	 * onun i in oralar  R SK'e alan fonksiyon yazmal y z!
 	 * @return
 	 * @throws StopRequestException 
 	 */
 	public void tilePossibleArrive(AiTile debut,List<AiTile> tilesPossible,int[][] matrice) {
 
 		for(int i=0;i<debut.getNeighbors().size();i++){		
-			//Y�k�labilen duvara kars�l�k geliyorsa Salla
+			//Y k labilen duvara kars l k geliyorsa Salla
 			if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SECURE){
 				if(!(tilesPossible.contains(debut.getNeighbors().get(i)))){
 					tilesPossible.add(debut.getNeighbors().get(i));
@@ -134,14 +134,14 @@ public class TileControleur {
 		for(int i=0;i<debut.getNeighbors().size();i++){	
 			try {
 				IA.checkInterruption();
-				//eklenen k�s�m
+				//eklenen k s m
 				if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SCOPE){
 					if(!(scopes.contains(debut.getNeighbors().get(i)))){
 						scopes.add(debut.getNeighbors().get(i));
 						tilePossibleArriveAvecRisk(debut.getNeighbors().get(i),tilesPossible,scopes,matrice);
 					}
 				}
-				//Y�k�labilen duvara kars�l�k geliyorsa Salla
+				//Y k labilen duvara kars l k geliyorsa Salla
 				if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SECURE){
 					if(!(tilesPossible.contains(debut.getNeighbors().get(i)))){
 						tilesPossible.add(debut.getNeighbors().get(i));
@@ -172,7 +172,7 @@ public class TileControleur {
 	 * @return
 	 */
 	public boolean facileExistePathBonus(AiTile start,AiTile cible,int valeurDeCas,int[][] matrice,AiTile tilePrecedent){
-		//ba�lang�� de�erlerini al�yoruz!
+		//ba lang   de erlerini al yoruz!
 		int hX=start.getCol();
 		int hY=start.getLine();
 		int cX=cible.getCol();
@@ -226,7 +226,7 @@ public class TileControleur {
 	 */
 	public void tierLesTilesParDistanceEtAccebilite(List<AiTile> secureTiles) {
 		////////////////////////////////////
-		//NOT:burada yoldaki di�er bombalar� ate�leri felan katmad�n!
+		//NOT:burada yoldaki di er bombalar  ate leri felan katmad n!
 		//////////////////////////////////////
 		//premierement on remove les cible qu'on ne peut pas arriver
 		//Alors on les tie par distance
@@ -437,7 +437,7 @@ public class TileControleur {
 			return -1;
 		else{
 			temp=calculateShortestPath(hero,hero.getTile(),espacePourFuir.get(0));
-			//Bu de�eri alamad�g�m�z i�in sabit
+			//Bu de eri alamad g m z i in sabit
 			double durationBombe=640;
 			if(durationBombe>temp.getDuration(hero)){
 				return 0;	
@@ -463,10 +463,10 @@ public class TileControleur {
 			tierLesTilesParDistanceEtAccebilite(cibleSecure);
 			if(possibleDeFuir(cibleSecure, placeABombe)>=0){
 				//oui,secure à poser a bombe dans le tile "placeABombe"
-				//System.out.println("bomba koyup ka�abiliriz");
+				//System.out.println("bomba koyup ka abiliriz");
 				result=true;
 			}else{
-				//System.out.println("bomba koymayal�m cunku guvenli yer yok");
+				//System.out.println("bomba koymayal m cunku guvenli yer yok");
 				//non,on doit faire une autre chose
 				result=false;
 			}

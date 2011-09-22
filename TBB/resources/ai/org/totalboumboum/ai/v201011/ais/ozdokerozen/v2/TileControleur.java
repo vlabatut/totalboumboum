@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 /**
  * Class qui determine de poser bombe
- * @author G.Lara Ozdoker && Sercan �zen
+ * @author G.Lara Ozdoker && Sercan  zen
  *
  */
 public class TileControleur {
@@ -137,7 +137,7 @@ public class TileControleur {
 	 * @return
 	 */
 	public boolean facileExistePathBonus(AiTile start,AiTile cible,int valeurDeCas,int[][] matrice,AiTile tilePrecedent){
-		//ba�lang�� de�erlerini al�yoruz!
+		//ba lang   de erlerini al yoruz!
 		int hX=start.getCol();
 		int hY=start.getLine();
 		int cX=cible.getCol();
@@ -207,7 +207,7 @@ public class TileControleur {
 	 */
 	public void tierLesTilesParDistanceEtAccebilite(List<AiTile> secureTiles) throws StopRequestException, LimitReachedException{
 		////////////////////////////////////
-		//NOT:burada yoldaki di�er bombalar� ate�leri felan katmad�n!
+		//NOT:burada yoldaki di er bombalar  ate leri felan katmad n!
 		//////////////////////////////////////
 		//premierement on remove les cible qu'on ne peut pas arriver
 		for(int i=0;i<secureTiles.size();i++){
@@ -301,7 +301,7 @@ public class TileControleur {
 			//si le cible est un mur, on analyse neighboor de ce mur.
 			if(matriceImaginaire[tile.getLine()][tile.getCol()]==5){
 				
-				//BURDA PROBLEM VAR, Tam olarak do�ru hesaplam�yor.ilk ula��lan path i al�yor ama �imdilik idare eder.
+				//BURDA PROBLEM VAR, Tam olarak do ru hesaplam yor.ilk ula  lan path i al yor ama  imdilik idare eder.
 				path=calculateShortestPath(hero, hero.getTile(),tile, matriceImaginaire);
 			}else{
 				path = calculateShortestPath(hero,hero.getTile(),tile);
@@ -336,9 +336,9 @@ public class TileControleur {
 		int result=-1;
 		for(int i=0;i<espacePourFuir.size();i++){
 			temp=calculateShortestPath(hero,hero.getTile(),espacePourFuir.get(i));
-			//NOT:burada temp.getDuration() da kullan�labilir.
+			//NOT:burada temp.getDuration() da kullan labilir.
 			double distance=temp.getPixelDistance();
-			//Bu de�eri alamad�g�m�z i�in sabit
+			//Bu de eri alamad g m z i in sabit
 			double durationBombe=640;
 			if(durationBombe>(distance/hero.getWalkingSpeed())){
 				result=i;
@@ -362,10 +362,10 @@ public class TileControleur {
 			tierLesTilesParDistanceEtAccebilite(cibleSecure);
 			if(possibleDeFuir(cibleSecure, placeABombe)>=0){
 				//oui,secure à poser a bombe dans le tile "placeABombe"
-				System.out.println("bomba koyup ka�abiliriz");
+				System.out.println("bomba koyup ka abiliriz");
 				result=true;
 			}else{
-				System.out.println("bomba koymayal�m cunku guvenli yer yok");
+				System.out.println("bomba koymayal m cunku guvenli yer yok");
 				//non,on doit faire une autre chose
 				result=false;
 			}

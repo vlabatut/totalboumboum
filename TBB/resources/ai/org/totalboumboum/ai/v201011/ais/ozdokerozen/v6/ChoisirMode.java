@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * Class pour seulement choisir mode
  * Et faire les calculs pour cette selection
  * 
- * @author Sercan Özen & Lara Özdöker
+ * @author Sercan  zen & Lara  zd ker
  *
  */
 public class ChoisirMode{

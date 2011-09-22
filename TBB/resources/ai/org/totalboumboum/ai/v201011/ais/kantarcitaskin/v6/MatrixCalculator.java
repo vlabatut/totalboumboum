@@ -349,7 +349,7 @@ public class MatrixCalculator
 	}
 
 	/**
-	 * Donne la valeur envoy� à la case qu'on indique
+	 * Donne la valeur envoyé à la case qu'on indique
 	 * 
 	 * @param item
 	 * 		l'item, prorietaire de valeur

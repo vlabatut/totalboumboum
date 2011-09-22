@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 /**
  * Class qui determine de poser bombe
- * @author G.Lara Ozdoker && Sercan �zen
+ * @author G.Lara Ozdoker && Sercan  zen
  *
  */
 public class TileControleur {
@@ -132,16 +132,16 @@ public class TileControleur {
 		}
 		
 	/**
-	 * dfs algoritmas� kullanarak gidilebilecek tile'lar� buluyor.
-	 * TEST: S�PER sadece bomba hizalar�n� alm�yor.
-	 * onun i�in oralar� R�SK'e alan fonksiyon yazmal�y�z!
+	 * dfs algoritmas  kullanarak gidilebilecek tile'lar  buluyor.
+	 * TEST: S PER sadece bomba hizalar n  alm yor.
+	 * onun i in oralar  R SK'e alan fonksiyon yazmal y z!
 	 * @return
 	 * @throws StopRequestException 
 	 */
 	public void tilePossibleArrive(AiTile debut,List<AiTile> tilesPossible,int[][] matrice) {
 
 		for(int i=0;i<debut.getNeighbors().size();i++){		
-			//Y�k�labilen duvara kars�l�k geliyorsa Salla
+			//Y k labilen duvara kars l k geliyorsa Salla
 			if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SECURE){
 				if(!(tilesPossible.contains(debut.getNeighbors().get(i)))){
 					tilesPossible.add(debut.getNeighbors().get(i));
@@ -159,20 +159,20 @@ public class TileControleur {
 	}
 	
 	/**
-	 *Bomba hizalar�n� almamas� baya buyuk bi sorun oldu ondan risk alma varsa 
-	 *bu fonsiyonu �a��r�yoruz!
+	 *Bomba hizalar n  almamas  baya buyuk bi sorun oldu ondan risk alma varsa 
+	 *bu fonsiyonu  a  r yoruz!
 	 * @return
 	 * @throws StopRequestException 
 	 */
 	public void tilePossibleArriveAvecRisk(AiTile debut,List<AiTile> tilesPossible,int[][] matrice) {
 
 		for(int i=0;i<debut.getNeighbors().size();i++){	
-			//eklenen k�s�m
+			//eklenen k s m
 			if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SCOPE){
 					tilePossibleArrive(debut.getNeighbors().get(i),tilesPossible,matrice);
 		
 			}
-			//Y�k�labilen duvara kars�l�k geliyorsa Salla
+			//Y k labilen duvara kars l k geliyorsa Salla
 			if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SECURE){
 				if(!(tilesPossible.contains(debut.getNeighbors().get(i)))){
 					tilesPossible.add(debut.getNeighbors().get(i));
@@ -197,7 +197,7 @@ public class TileControleur {
 	 * @return
 	 */
 	public boolean facileExistePathBonus(AiTile start,AiTile cible,int valeurDeCas,int[][] matrice,AiTile tilePrecedent){
-		//ba�lang�� de�erlerini al�yoruz!
+		//ba lang   de erlerini al yoruz!
 		int hX=start.getCol();
 		int hY=start.getLine();
 		int cX=cible.getCol();
@@ -267,7 +267,7 @@ public class TileControleur {
 	 */
 	public void tierLesTilesParDistanceEtAccebilite(List<AiTile> secureTiles) throws StopRequestException, LimitReachedException{
 		////////////////////////////////////
-		//NOT:burada yoldaki di�er bombalar� ate�leri felan katmad�n!
+		//NOT:burada yoldaki di er bombalar  ate leri felan katmad n!
 		//////////////////////////////////////
 		//premierement on remove les cible qu'on ne peut pas arriver
 		for(int i=0;i<secureTiles.size();i++){
@@ -371,9 +371,9 @@ public class TileControleur {
 		int result=-1;
 		for(int i=0;i<espacePourFuir.size();i++){
 			temp=calculateShortestPath(hero,hero.getTile(),espacePourFuir.get(i));
-			//NOT:burada temp.getDuration() da kullan�labilir.
+			//NOT:burada temp.getDuration() da kullan labilir.
 			double distance=temp.getPixelDistance();
-			//Bu de�eri alamad�g�m�z i�in sabit
+			//Bu de eri alamad g m z i in sabit
 			double durationBombe=640;
 			if(durationBombe>(distance/hero.getWalkingSpeed())){
 				result=i;
@@ -397,10 +397,10 @@ public class TileControleur {
 			tierLesTilesParDistanceEtAccebilite(cibleSecure);
 			if(possibleDeFuir(cibleSecure, placeABombe)>=0){
 				//oui,secure à poser a bombe dans le tile "placeABombe"
-				System.out.println("bomba koyup ka�abiliriz");
+				System.out.println("bomba koyup ka abiliriz");
 				result=true;
 			}else{
-				System.out.println("bomba koymayal�m cunku guvenli yer yok");
+				System.out.println("bomba koymayal m cunku guvenli yer yok");
 				//non,on doit faire une autre chose
 				result=false;
 			}

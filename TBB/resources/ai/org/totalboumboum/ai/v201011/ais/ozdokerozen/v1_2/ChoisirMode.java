@@ -55,7 +55,7 @@ public class ChoisirMode{
 	 */
 	boolean modeChoisir(){
 		int nosBomb=gameZone.getOwnHero().getBombNumberMax();
-		//System.out.println("Bomba Say�m�z :"+nosBomb);
+		//System.out.println("Bomba Say m z :"+nosBomb);
 		combienSuffisant();
 		//System.out.println("Combien suffisant Min:"+BESOINMIN+", Max: "+BESOINMAX);
 		if(nosBomb>=BESOINMIN | nosBomb>=BESOINMAX){

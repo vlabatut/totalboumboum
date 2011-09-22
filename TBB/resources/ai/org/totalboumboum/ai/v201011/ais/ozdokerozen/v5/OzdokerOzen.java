@@ -26,7 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * GROUPE ROUGE
- * Lara �zd�ker && Sercan �zen
+ * Lara  zd ker && Sercan  zen
  * 
  * classe principale de l'IA, qui définit son comportement.
  * 
@@ -141,7 +141,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 		
 		// initialisation et calculation de matrice de la collecte avec des fonctions
 		//de gorupe rouge l'annee dernier.
-		//ATTETION: cettes initialitions ne sont pas compliqu�s
+		//ATTETION: cettes initialitions ne sont pas compliqués
 		//elles seulement donnent les valeurs à la matrice
 		this.initialiseMatrice(matrice, gameZone);
 		this.fillBombsMatrice(matrice, gameZone);
@@ -398,7 +398,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 				for (int j = 0; j < width; j++) {
 					checkInterruption();
-					//butun alanlar� guvenli dusunuyoruz! 
+					//butun alanlar  guvenli dusunuyoruz! 
 					matrice[i][j] = 1;
 				}
 		}
@@ -585,7 +585,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path Boù Boù BO�");
+			//System.out.println("Path Boù Boù BO ");
 
 		}
 		else{ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
@@ -669,7 +669,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path Boù Boù BO�");
+			//System.out.println("Path Boù Boù BO ");
 
 		}
 		else{ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
@@ -686,7 +686,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 				controlTile=nextMove.getTile(1);
 				if(!risk && matrice[controlTile.getLine()][controlTile.getCol()]==tileControleur.SCOPE){
 					//arreter car il y a des risk
-					//ge�er ge�mez hesaab� yap�lcak unutma///
+					//ge er ge mez hesaab  yap lcak unutma///
 					check=false;
 				}else{
 					//Alez-y
@@ -757,7 +757,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path Boù Boù BO�");
+			//System.out.println("Path Boù Boù BO ");
 
 		}
 		else{ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
@@ -806,7 +806,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	private AiAction fuir() throws StopRequestException{
 		checkInterruption();
 		risk=true;
-		//System.out.println("Kacma fonksiyonu �al�été");
+		//System.out.println("Kacma fonksiyonu  al été");
 		permissionPoseBombe=false;		
 		//on cree les lists des tiles pour utiliser apres
 		List<AiTile> tilesAvecRisk=new ArrayList<AiTile>();
@@ -815,7 +815,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 		//on prend les tiles secures, mais cettes tiles avant qu'on pose bombe 
 		tileControleur.tilePossibleArriveAvecRisk(debut, tilesAvecRisk, scopes, matrice);	
 		//On cree une list tile qui on peut passer
-		//pour �a, on ajouter le tile de notre hero(Si on est dessus le bomb,on n'est pas dans secure!)
+		//pour ça, on ajouter le tile de notre hero(Si on est dessus le bomb,on n'est pas dans secure!)
 		//Et tiles scopes,et tiles possible
 		
 		for(int i=0;i<scopes.size();i++){
@@ -839,7 +839,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			}else{
 			//on cree un path 
 			pathAmeliorer=tileControleur.calculateShortestPath(notreHero, debut, tilesAvecRisk.get(0));
-			p("g�venliyer",tilesAvecRisk.get(0));
+			p("g venliyer",tilesAvecRisk.get(0));
 			AiAction a=fuirAction(pathAmeliorer,notreHero,matrice);
 			return a;}
 		}else{
