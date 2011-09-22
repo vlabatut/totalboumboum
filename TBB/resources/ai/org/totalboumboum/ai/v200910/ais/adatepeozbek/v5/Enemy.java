@@ -7,7 +7,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
  * @version 5
  * 
  * @author Can Adatape
- * @author Sena Ozbek
+ * @author Sena Özbek
  *
  */
 public class Enemy
