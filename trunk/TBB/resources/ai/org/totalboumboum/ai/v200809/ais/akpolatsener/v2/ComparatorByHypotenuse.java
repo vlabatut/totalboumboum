@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * cibles
  * 
  * @author Cem Akpolat
- * @author Emre Sener
+ * @author Emre Şener
  *
  */
 public class ComparatorByHypotenuse implements Comparator<AiTile> {

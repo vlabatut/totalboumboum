@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * Compare deux XTiles en fonction de leur heuristique et de leur nombre de visites.
  * 
  * @author Cem Akpolat
- * @author Emre Sener
+ * @author Emre Şener
  *
  */
 public class XAStarComparator implements Comparator<XTile> 

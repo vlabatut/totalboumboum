@@ -21,7 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Huseyin Akkaya
- * @author Hayko Danacioglu
+ * @author Hayko Danacioğlu
  *
  */
 public class AkkayaDanacioglu extends ArtificialIntelligence

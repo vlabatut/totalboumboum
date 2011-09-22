@@ -19,7 +19,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 /**
  * 
  * @author Cem Akpolat
- * @author Emre Sener
+ * @author Emre Şener
  *
  */
 public class AkpolatSener extends ArtificialIntelligence {

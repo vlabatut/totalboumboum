@@ -16,7 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Cem Akpolat
- * @author Emre Sener
+ * @author Emre Şener
  *
  */
 public class TileControl {

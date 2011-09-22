@@ -30,7 +30,6 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiState;
 import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
@@ -225,6 +224,34 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	}
 	
     /////////////////////////////////////////////////////////////////
+	// BRANCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** compteur des branches (pour avoir des numéros uniques) */
+	private static int branchCount = 0;
+	/** numéro de la branche à laquelle ce noeud appartient */
+	private int branchId;
+	
+	/**
+	 * Affecte un numéro unique destiné
+	 * à une nouvelle branche, à ce noeud.
+	 */
+	public void setNewBranch()
+	{	branchId = branchCount;
+		branchCount++;
+	}
+	
+	/**
+	 * Renvoie le numéro de branche 
+	 * de ce noeud de recherche.
+	 * 
+	 * @return	
+	 * 		Le numéro de branche.
+	 */
+	public int getBranchId()
+	{	return branchId;	
+	}
+	
+    /////////////////////////////////////////////////////////////////
 	// SAFETY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** état courant du noeud */
@@ -386,19 +413,23 @@ public final class DybrefNode implements Comparable<DybrefNode>
 				// on teste si la case occupée est bien celle visée (sinon > bug)
 				if(!futureTile.equals(targetTile))
 					System.err.println("ERREUR: la case devrait être la même.");
-
-				// temps nécessaire pour aller dans la case cible
-				long alternativeTime = totalDuration + duration;
-				// temps déjà présent dans la matrice
-				long existingTime = matrix.getTime(targetTile);
-				// on ne crée le noeud que si ce temps est meilleur que le temps existant
-				if(alternativeTime<existingTime)
-				{	// ce temps sera màj dans la matrice lors du développement du noeud
-					// on crée le noeud fils correspondant (qui sera traité plus tard)
-					DybrefNode node = new DybrefNode(futureTile,duration,this);
-					children.add(node);
-					
+				
+				// on ne crée le noeud que si le déplacement n'est pas un retour en arrière
+				if(parent==null || !targetTile.equals(parent.getTile()))
+				{	// temps nécessaire pour aller dans la case cible
+					long alternativeTime = totalDuration + duration;
+					// temps déjà présent dans la matrice
+					long existingTime = matrix.getTime(targetTile);
+					// on ne crée le noeud que si ce temps est meilleur que le temps existant
+//					if(alternativeTime<existingTime)
+					// pb >> on se retrouve dans l'impossibilité de refaire un chemin déjà parcouru
+					// alors que parfois c'est bien pratique, quand on doit revenir sur ses pas pour éviter une explosion
+					{	// ce temps sera màj dans la matrice lors du développement du noeud
+						// on crée le noeud fils correspondant (qui sera traité plus tard)
+						DybrefNode node = new DybrefNode(futureTile,duration,this);
+						children.add(node);
 System.out.println("DIRECTION: "+direction+" >> added");
+					}
 				}
 				
 System.out.println("DIRECTION: "+direction);

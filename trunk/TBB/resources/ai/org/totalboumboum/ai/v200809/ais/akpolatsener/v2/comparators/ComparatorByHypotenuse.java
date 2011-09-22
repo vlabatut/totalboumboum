@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v200809.ais.akpolatsener.v2.Target;
  * cibles
  * 
  * @author Cem Akpolat
- * @author Emre Sener
+ * @author Emre Şener
  *
  */
 public class ComparatorByHypotenuse implements Comparator<AiTile> {
