@@ -21,7 +21,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @version 1
  * 
  * @author Can Adatape
- * @author Sena Ozbek
+ * @author Sena Özbek
  *
  */
 public class SafetyManager

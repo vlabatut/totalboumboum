@@ -5,7 +5,7 @@ package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5;
  * @version 5
  * 
  * @author Can Adatape
- * @author Sena Ozbek
+ * @author Sena Özbek
  *
  */
 public enum EnemyTypes

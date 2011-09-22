@@ -5,7 +5,7 @@ package org.totalboumboum.ai.v200910.ais.adatepeozbek.v3;
  * @version 3
  * 
  * @author Can Adatape
- * @author Sena Ozbek
+ * @author Sena Özbek
  *
  */
 public class Debug

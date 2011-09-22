@@ -44,7 +44,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 1
  * 
  * @author Can Adatape
- * @author Sena Ozbek
+ * @author Sena Özbek
  *
  */
 public class PathManager

@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5.c
  * 
  * @author Can Adatape
- * @author Sena Ozbek
+ * @author Sena Özbek
  *
  */
 public class AiEscape
