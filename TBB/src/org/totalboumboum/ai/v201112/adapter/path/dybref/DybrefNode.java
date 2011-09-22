@@ -231,22 +231,24 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	private boolean safe = false;
 	
 	public void reportSafety(DybrefNode child)
-	{	// update processed children count
-		processedChildren++;
-		
-		// update safety
+	{	// safe child
 		if(child.isSafe())
-			safe = true;
-		
-		// possibly report to parent (when all children have been processed)
-		if(processedChildren==children.size())
-		{	matrix.update(this);
-			reportSafety(this);
+		{	// node previously unsafe
+			if(!safe)
+			{	safe = true;
+				matrix.update(this);
+				reportSafety(this);
+			}
 		}
 		
-		// remove unsafe child
-		if(!child.isSafe())
+		// unsafe child last and node still unsafe
+		else
+		{	// remove unsafe child
 			children.remove(child);
+			// last child and node already unsafe
+			if(children.isEmpty() && !safe)
+				reportSafety(this);
+		}
 	}
 
 	/**
@@ -282,8 +284,6 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	/////////////////////////////////////////////////////////////////
 	/** Liste des fils du noeud */
 	private List<DybrefNode> children = null;
-	/** nombre de fils ayant été traités */
-	private int processedChildren = 0;
 	
 	/**
 	 * renvoie les fils de ce noeud de recherche
@@ -312,7 +312,13 @@ public final class DybrefNode implements Comparable<DybrefNode>
 System.out.println("ORIGINAL ("+depth+")");
 System.out.println(zone);
 	
-	
+		// safe mode: quand il ne reste ni bombe ni feu dans la zone, le traitement peut être simplifié
+		boolean safeMode = zone.getFires().isEmpty() && zone.getBombs().isEmpty();
+		if(safeMode)
+		{	safe = true;
+			reportSafety(this);
+		}
+		
 		children = new ArrayList<DybrefNode>();
 //		if(tile.isCrossableBy(hero))
 		{	List<Direction> directions = Direction.getPrimaryValues();
@@ -328,7 +334,7 @@ System.out.println(zone);
 				model.applyChangeHeroDirection(hero,direction);
 				boolean safe = true;
 				long duration = 0;
-				if(direction==Direction.NONE)
+				if(direction==Direction.NONE && !safeMode)
 				{	// on attend simplement jusqu'à la prochaine explosion
 					// car c'est généralement l'évènement bloquant
 					// de plus, on n'attend que si une des cases voisines est menacée par une explosion
@@ -349,18 +355,13 @@ System.out.println(zone);
 					}
 				}
 				else
-				{	// on ne considère le retour en arrière que si on vient d'attendre 
+				{	// restriction : on ne considère le retour en arrière que si on vient d'attendre 
 					// (à l'action précédente) i.e. : si cette case et celle de son parent sont les mêmes.
 					if(parent==null || !targetTile.equals(parent.getTile()))
-					{	// on ne considère les cases déjà visitées que s'il reste des bombes ou du feu en jeu
-						// ou sinon, si le temps courant permet d'en améliorer le chemin.
-						if(!zone.getFires().isEmpty() || !zone.getBombs().isEmpty()
-							|| matrix.getTime(targetTile)>totalDuration+hero.getWalkingSpeed()*tile.getSize()/1000)
-						{	// on simule jusqu'au changement d'état du personnage : 
-							// soit le changement de case, soit l'élimination
-							safe = model.simulate(hero);
-							duration = model.getDuration();
-						}
+					{	// on simule jusqu'au changement d'état du personnage : 
+						// soit le changement de case, soit l'élimination
+						safe = model.simulate(hero);
+						duration = model.getDuration();
 					}
 				}
 	
@@ -373,11 +374,21 @@ System.out.println(zone);
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
-					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						DybrefNode node = new DybrefNode(futureTile,duration,this);
+					{	boolean addChild = true;
+						// si la zone est sûre : on ne considère le fils que s'il permet d'améliorer le temps
+						if(safeMode)
+						{	long temp = totalDuration + duration;
+							addChild = matrix.getTime(targetTile)>temp;
+							matrix.update(this);
+						}
+						
+						if(addChild)
+						{	// on crée le noeud fils correspondant (qui sera traité plus tard)
+							DybrefNode node = new DybrefNode(futureTile,duration,this);
+							children.add(node);
+						}
 // TODO adapter les coms de l'exception
 // TODO revoir tous les coms des classes du package dybref
-						children.add(node);
 System.out.println("DIRECTION: "+direction+" >> added");
 					}
 					// si la case n'est pas la bonne : 
@@ -389,8 +400,7 @@ System.out.println(futureZone);
 				// la case ciblée n'est pas sûre et est ignorée
 			}
 			
-			// s'il n'y a aucun enfant pour ce noeud (i.e. on ne peut même pas y rester)
-			// alors la case courante n'est pas sûre et on en informe le noeud parent.
+			// s'il n'y a aucun enfant pour ce noeud, on en informe le noeud parent.
 			if(children.isEmpty())
 				parent.reportSafety(this);
 		}

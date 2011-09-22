@@ -244,7 +244,7 @@ public class AiModel
 	
 	/**
 	 * Effectue des simulations, en gardant pour chaque sprite l'action courante,
-	 * et ce jusqu'à ce que la prochaine explosion. Plus exactement, la simulation
+	 * et ce jusqu'à la prochaine explosion. Plus exactement, la simulation
 	 * s'arrête lorsque le feu actuellement contenu dans la zone disparait. S'il
 	 * n'y a pas encore de feu, elle s'arrête quand le prochain feu disparait.<br/>
 	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
