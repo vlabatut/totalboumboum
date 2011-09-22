@@ -12,6 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Ibrahim Avcı
+ * @author Burak Güngör
+ */
 public class FillingClass {
 	private final double FOSSE = 0;
 	private final double MUR_INDESTRUCTIBLE = 1;

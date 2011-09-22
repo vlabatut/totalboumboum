@@ -20,9 +20,8 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
 /**
- * 
- * @author AVCI/GUNGOR
- * 
+ * @author Ibrahim Avcı
+ * @author Burak Güngör
  */
 @SuppressWarnings("unused")
 public class AvciGungor extends ArtificialIntelligence {
