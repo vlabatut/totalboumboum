@@ -15,8 +15,8 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * 
  * @version 5.c
  * 
- * @author Emre Calisir
- * @author Burak Ozgen Guner
+ * @author Emre Çalışır
+ * @author Burak Ozgen Güner
  *
  */
 public final class Astar {

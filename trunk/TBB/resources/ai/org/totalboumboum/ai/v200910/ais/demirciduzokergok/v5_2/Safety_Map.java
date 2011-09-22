@@ -23,7 +23,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * This class is for expriming the zone of the game with a matrix placing different danger
  * levels to each case.
  * 
- * @author MGoktug
+ * 
+ * @author Mustafa Göktuğ Düzok
+ * 
  *
  */
 

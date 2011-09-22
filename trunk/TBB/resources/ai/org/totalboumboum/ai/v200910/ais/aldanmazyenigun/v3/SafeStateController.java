@@ -18,8 +18,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @version 3
  * 
- * @author Cansin Aldanmaz
- * @author Yalcin Yenigun
+ * @author Cansın Aldanmaz
+ * @author Yalçın Yenigün
  *
  */
 public class SafeStateController {

@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Satir
+ * @author Tolga Can Şatır
  *
  */
 public class BombComparator implements Comparator<AiBomb> {

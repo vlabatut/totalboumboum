@@ -12,8 +12,8 @@ import java.util.Queue;
  * 
  * @version 5
  * 
- * @author Emre Calisir
- * @author Burak Ozgen Guner
+ * @author Emre Çalışır
+ * @author Burak Ozgen Güner
  *
  */
 public final class Astar {

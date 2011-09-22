@@ -22,8 +22,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * This class is for breaking the walls when there is no bonus visible in the game zone.
- * @author MGoktug
- *
+ * 
+ * @author Mustafa Göktuğ Düzok
+ * 
  */
 
 

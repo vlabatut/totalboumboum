@@ -18,8 +18,8 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * 
  * @version 2
  * 
- * @author Emre Calisir
- * @author Burak Ozgen Guner
+ * @author Emre Çalışır
+ * @author Burak Ozgen Güner
  *
  */
 public class Map {

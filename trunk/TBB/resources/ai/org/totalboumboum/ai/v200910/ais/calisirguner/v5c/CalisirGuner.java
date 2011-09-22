@@ -27,8 +27,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @version 5.c
  * 
- * @author Emre Calisir
- * @author Burak Ozgen Guner
+ * @author Emre Çalışır
+ * @author Burak Ozgen Güner
  *
  */
 public class CalisirGuner extends ArtificialIntelligence {

@@ -11,7 +11,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-
+/**
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
+ */
 public class Zone_IA {	
 	
 	@SuppressWarnings("unused")

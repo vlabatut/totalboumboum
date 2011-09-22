@@ -17,7 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @version 4.1
  * 
- * @author Erdem Bektas
+ * @author Erdem Bektaş
  * @author Nedim Mazilyah
  *
  */

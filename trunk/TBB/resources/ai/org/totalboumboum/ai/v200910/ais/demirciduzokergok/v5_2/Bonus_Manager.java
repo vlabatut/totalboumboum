@@ -23,8 +23,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * 
  * 
- * @author MGoktug
- *
+ * 
+ * @author Mustafa Göktuğ Düzok
+ * 
  */
 
 
