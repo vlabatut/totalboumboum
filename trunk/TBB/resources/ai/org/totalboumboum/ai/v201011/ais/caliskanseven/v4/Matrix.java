@@ -12,6 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
+/**
+ * @author Mustafa Çalışkan
+ * @author Cihan Seven
+ */
 public class Matrix {
 	public double[][] calculate(CaliskanSeven ai,int wfire,
 			int wblast,int wbomb,int wbonus,int wmalus,

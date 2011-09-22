@@ -10,6 +10,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
+/**
+ * @author Mustafa Çalışkan
+ * @author Cihan Seven
+ */
 public class CaliskanSeven extends ArtificialIntelligence
 {
 	AiTile oldtarget =null;

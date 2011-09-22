@@ -14,7 +14,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
  * This is the matrix class of our AI.
- * @author Cihan Adil SEVEN & Mustafa CALISKAN
+ * @author Mustafa Çalışkan
+ * @author Cihan Seven
  */
 public class Matrix {
 	

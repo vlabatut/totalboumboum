@@ -13,6 +13,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.BasicCostCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Mustafa Çalışkan
+ * @author Cihan Seven
+ */
 public class PathFinding {
 	public boolean canReachHeros(CaliskanSeven ai) throws StopRequestException, LimitReachedException{
 		ai.checkInterruption();
