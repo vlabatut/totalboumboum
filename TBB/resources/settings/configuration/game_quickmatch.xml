@@ -14,8 +14,8 @@
 		</points>
 	</settings>
 	<players>
-		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="dd226be2-5b7a-4017-a415-963b546bb716" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="54138bbb-cc83-4666-88a9-83b8685047d9" color="YELLOW" controls="1" spritePack="superbomberman2" spriteFolder="magnetbomber" />
+		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
 		<level pack="nbm1Custom" folder="classic" allowedPlayers="1 2 3 4" />

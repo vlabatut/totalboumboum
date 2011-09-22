@@ -421,7 +421,8 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		
 		// pour chaque déplacement possible
 		for(Direction direction: directions)
-		{	// on récupère la case cible
+		{	ai.checkInterruption();
+			// on récupère la case cible
 			AiTile targetTile = tile.getNeighbor(direction);
 			
 			// la case cible doit être traversable
@@ -462,12 +463,12 @@ public final class DybrefNode implements Comparable<DybrefNode>
 						// on crée le noeud fils correspondant (qui sera traité plus tard)
 						DybrefNode node = new DybrefNode(futureTile,duration,this);
 						children.add(node);
-System.out.println("DIRECTION: "+direction+" >> added");
+//System.out.println("DIRECTION: "+direction+" >> added");
 					}
 				}
 				
-System.out.println("DIRECTION: "+direction);
-System.out.println(futureZone);
+//System.out.println("DIRECTION: "+direction);
+//System.out.println(futureZone);
 			}
 		}
 	}
@@ -537,13 +538,13 @@ System.out.println(futureZone);
 					{	boolean safeMode = futureZone.getFires().isEmpty() && futureZone.getBombs().isEmpty();
 						node.initVisits(safeMode);
 					}
-System.out.println("DIRECTION: "+direction+" >> added");
+//System.out.println("DIRECTION: "+direction+" >> added");
 				}
 				// si la case n'est pas la bonne : 
 				// la case ciblée n'était pas traversable et l'action est à ignorer
 				
-System.out.println("DIRECTION: "+direction);
-System.out.println(futureZone);
+//System.out.println("DIRECTION: "+direction);
+//System.out.println(futureZone);
 			}
 			// si le joueur n'est plus vivant dans la zone obtenue : 
 			// la case ciblée n'est pas sûre et est ignorée
@@ -556,27 +557,30 @@ System.out.println(futureZone);
 	
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();
-	
+		
 		// safe mode: quand il ne reste ni bombe ni feu dans la zone, le traitement peut être simplifié
 		boolean safeMode = zone.getFires().isEmpty() && zone.getBombs().isEmpty();
-System.out.println("++++++ ORIGINAL (d="+depth+", mode="+safeMode+", t="+totalDuration+"ms) ++++++++++++++++++++++++++++++++++++++++++");
-System.out.println(matrix);
-System.out.println(zone);
+//System.out.println("++++++ ORIGINAL (d="+depth+", mode="+safeMode+", t="+totalDuration+"ms) ++++++++++++++++++++++++++++++++++++++++++");
+//System.out.println(matrix);
+//System.out.println(zone);
 		if(safeMode)
 			developNodeSafeMode();
 		else
 			developNodeUnsafeMode();
 	}
 	
-	private long getWaitDuration()
-	{	// init
+	private long getWaitDuration() throws StopRequestException
+	{	ai.checkInterruption();
+		
+		// init
 		long result = Long.MAX_VALUE;
 		List<AiTile> neighbors = tile.getNeighbors();
 		
 		// is there a fire in the neighbor tiles?
 		List<AiFire> fires = zone.getFires();
 		for(AiFire fire: fires)
-		{	AiTile fireTile = fire.getTile();
+		{	ai.checkInterruption();
+			AiTile fireTile = fire.getTile();
 			if(neighbors.contains(fireTile))
 			{	long duration = fire.getBurningDuration() - fire.getState().getTime();
 				if(duration<result)
@@ -588,7 +592,8 @@ System.out.println(zone);
 		if(fires.isEmpty())
 		{	List<AiBomb> bombs = zone.getBombs();
 			for(AiBomb bomb: bombs)
-			{	List<AiTile> blast = bomb.getBlast();
+			{	ai.checkInterruption();
+				List<AiTile> blast = bomb.getBlast();
 				List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
 				neigh.retainAll(blast);
 				if(!neigh.isEmpty())
@@ -615,10 +620,13 @@ System.out.println(zone);
 	 * 
 	 * @return
 	 * 		{@code true} si la case parent est menacée.
+	 * @throws StopRequestException 
 	 */
 	@SuppressWarnings("unused")
-	private boolean isParentTileThreatened()
-	{	// init
+	private boolean isParentTileThreatened() throws StopRequestException
+	{	ai.checkInterruption();
+		
+		// init
 		boolean result = false;
 		AiTile parentTile = parent.getTile();
 		
@@ -626,7 +634,8 @@ System.out.println(zone);
 		{	List<AiFire> fires = zone.getFires();
 			Iterator<AiFire> it = fires.iterator();
 			while(it.hasNext() && !result)
-			{	AiFire fire = it.next();
+			{	ai.checkInterruption();
+				AiFire fire = it.next();
 				AiTile fireTile = fire.getTile();
 				result = parentTile.equals(fireTile);
 			}
@@ -637,7 +646,8 @@ System.out.println(zone);
 		{	List<AiBomb> bombs = zone.getBombs();
 			Iterator<AiBomb> it = bombs.iterator();
 			while(it.hasNext() && !result)
-			{	AiBomb bomb = it.next();
+			{	ai.checkInterruption();
+				AiBomb bomb = it.next();
 				List<AiTile> blast = bomb.getBlast();
 				result = blast.contains(parentTile);
 			}
