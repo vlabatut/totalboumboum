@@ -331,7 +331,7 @@ public class DropBomb
 	
 	/**
 	 * Teste s'il se trouve des cases sur à alles apres avois poser une bombe.
-	 * il prend une car�e au tille de la range et enleve les cases de la portée virtuelle. puis 
+	 * il prend une carée au tille de la range et enleve les cases de la portée virtuelle. puis 
 	 * s'il se trouve des cases sur il calcule les cases surs. Alors elle retourne une liste
 	 * des cases sur ou bien une liste null.
 	 * 

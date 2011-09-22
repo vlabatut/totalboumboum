@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * Class pour seulement choisir mode
  * Et faire les calculs pour cette selection
  * 
- * @author Sercan Özen & Lara Özdöker
+ * @author Sercan  zen & Lara  zd ker
  *
  */
 public class ChoisirMode{
@@ -55,7 +55,7 @@ public class ChoisirMode{
 	 */
 	boolean modeChoisir(){
 		int nosBomb=gameZone.getOwnHero().getBombNumberMax();
-		//System.out.println("Bomba Sayýmýz :"+nosBomb);
+		//System.out.println("Bomba Say m z :"+nosBomb);
 		combienSuffisant();
 		//System.out.println("Combien suffisant Min:"+BESOINMIN+", Max: "+BESOINMAX);
 		if(nosBomb>=BESOINMIN | nosBomb>=BESOINMAX){

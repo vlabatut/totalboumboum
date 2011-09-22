@@ -134,27 +134,27 @@ public class OzdokerOzen extends ArtificialIntelligence
 							bPath.addTile(tile.get(i));
 							System.out.println(tile.get(i).getLine()+","+tile.get(i).getCol()+" - ");
 						}
-					System.out.println("A��kta bonus g�rdum");
+					System.out.println("A  kta bonus g rdum");
 					result=newAction2(bPath,notreHero,matrice);
 					*/
-					System.out.println("A��kta bonus g�rdum");
+					System.out.println("A  kta bonus g rdum");
 					
 					try {
 						if(outiles.existePath(gameZone, matrice, outiles.bonusPlusProche(matrice, gameZone))){ //Et S'il y a de path pour cette bonus 
-							System.out.println("yolu a��k");
+							System.out.println("yolu a  k");
 							AiPath rotate=tileControleur.calculateShortestPath(notreHero, notreHero.getTile(),outiles.bonusPlusProche(matrice, gameZone));
 							result=newAction2(rotate,notreHero,matrice);
-							System.out.println("A��ktaki bonusu almaya gidiyorum");
+							System.out.println("A  ktaki bonusu almaya gidiyorum");
 						}else{//S'il y n'y pas de path, on va ouvrir notre path,on va poser les bomb
 
-							System.out.println("yolu kapal�");
+							System.out.println("yolu kapal ");
 							AiTile murDet=outiles.murQuOnVaDetruitre(outiles.bonusPlusProche(matrice, gameZone), matrice, gameZone);
 							if(tileControleur.estQueOnPoseBombe(murDet)){
 								AiPath rotate=tileControleur.calculateShortestPath(notreHero, notreHero.getTile(),murDet,matrice);
 								result=newAction2(rotate,notreHero,matrice);
 								System.out.println("yol buldum gidiyorum");
 							}else{
-								System.out.println("bomba koymayal�m");
+								System.out.println("bomba koymayal m");
 								permissionPoseBombe=false;
 								
 							}
@@ -166,22 +166,22 @@ public class OzdokerOzen extends ArtificialIntelligence
 				}else{
 					//S'il n'y a pas de bonus,on va detruit les murs pour chercher de bonus
 
-					System.out.println("Bonus yok duvar k�r�cam");
+					System.out.println("Bonus yok duvar k r cam");
 					AiTile tile=null;
 					
 					try {
-						System.out.println("yak�n duvar� b�lduk mu?");
+						System.out.println("yak n duvar  b lduk mu?");
 
 						tile=outiles.murPlusProche(matrice, gameZone);
 						System.out.println("bulduk gidiyoruz");
 						if(tileControleur.estQueOnPoseBombe(tile)){
 	
 							AiPath rotate=tileControleur.calculateShortestPath(notreHero, notreHero.getTile(),tile,matrice);
-							System.out.println("Rotam�z�da bulduk");
+							System.out.println("Rotam z da bulduk");
 	
 							result=newAction2(rotate,notreHero,matrice);
 						}else{
-							System.out.println("bomba koymayal�m");
+							System.out.println("bomba koymayal m");
 							permissionPoseBombe=false;
 							
 						}
@@ -192,12 +192,12 @@ public class OzdokerOzen extends ArtificialIntelligence
 					
 				}
 			}else{
-				System.out.println("guvende de�iliz");
+				System.out.println("guvende de iliz");
 				try {
-					System.out.println("ka�al�m");
+					System.out.println("ka al m");
 					notrepath=guvenliAlanaKac(matrice, notreHero, gameZone);
 					result=newAction2(notrepath, notreHero,matrice);
-					System.out.println("Day����! biz kaéték day�!");
+					System.out.println("Day    ! biz kaéték day !");
 				} catch (LimitReachedException e) {
 					// 
 					e.printStackTrace();
@@ -210,7 +210,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			
 			System.out.println("attaque");
 			
-			//sald�rma.
+			//sald rma.
 			List<AiHero> dusman=gameZone.getHeroes();
 			plusCourtPathAdversaire(dusman, notreHero);
 			for(int i=0;i<dusman.size();i++){
@@ -462,7 +462,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	/**
 	/**
-	 * Methode voissant le bonus dans l'aire de jeu�
+	 * Methode voissant le bonus dans l'aire de jeu
 	 * @param gameZone
 	 * 			l'aire de jeu
 	 * @throws StopRequestException
@@ -538,7 +538,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 				for (int j = 0; j < width; j++) {
 					checkInterruption();
-					//butun alanlar� guvenli dusunuyoruz! 
+					//butun alanlar  guvenli dusunuyoruz! 
 					matrice[i][j] = 1;
 				}
 		}
@@ -708,10 +708,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 		boolean check = true;
 		//Si on a arrive notre cible
 		if(notreCible.equals(uneHero.getTile())){
-			System.out.println("//HEDEFE ULA�TIK//");
+			System.out.println("//HEDEFE ULA TIK//");
 			check=false;
 			if(permissionPoseBombe){
-				System.out.println("!!!Bombay� koyal�m m�?");
+				System.out.println("!!!Bombay  koyal m m ?");
 				
 				result=new AiAction(AiActionName.DROP_BOMB);
 				permissionPoseBombe=false;
@@ -791,17 +791,17 @@ public class OzdokerOzen extends ArtificialIntelligence
 		System.out.println("Tile de hero: "+uneHero.getLine()+","+uneHero.getCol());
 		if(notreCible.equals(uneHero.getTile())){
 			
-			System.out.println("//HEDEFE ULA�TIK//");
+			System.out.println("//HEDEFE ULA TIK//");
 			check=false;
 			if(permissionPoseBombe){
-				System.out.println("!!!Bombay� koyal�m m�?");
+				System.out.println("!!!Bombay  koyal m m ?");
 				if(control.estQueOnPoseBombe(notreCible)){
 					System.out.println("koyuyoruz");
 					result=new AiAction(AiActionName.DROP_BOMB);
 					permissionPoseBombe=false;
-					System.out.println("koyduk ka�acag�z");
+					System.out.println("koyduk ka acag z");
 				}else{
-					System.out.println("!!Hay�r bomba koymuyoruz");
+					System.out.println("!!Hay r bomba koymuyoruz");
 
 				}
 			}else{

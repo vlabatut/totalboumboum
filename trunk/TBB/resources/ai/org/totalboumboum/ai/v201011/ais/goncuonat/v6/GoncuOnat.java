@@ -268,11 +268,11 @@ public class GoncuOnat extends ArtificialIntelligence
 							if (nextMoveBonus != null)
 							{
 								if(verbose)
-									System.out.println("null de�ilse");
+									System.out.println("null de ilse");
 								if (nextMoveBonus.getLength() != 0)
 								{	
 									if(verbose)
-										System.out.println("length 0 de�ilse");
+										System.out.println("length 0 de ilse");
 									result = this.action(nextMoveBonus);}
 							}
 						}

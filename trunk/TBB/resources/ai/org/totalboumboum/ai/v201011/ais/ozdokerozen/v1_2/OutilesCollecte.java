@@ -34,23 +34,23 @@ public class OutilesCollecte {
 		List<AiTile> prochepath=notre.getNeighbors();
 			for(int i=0;i<prochepath.size();i++){
 				if(prochepath.get(i)==previous){
-					System.out.println("buraya bakm�yoruz.");
+					System.out.println("buraya bakm yoruz.");
 				}else{
 					if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==hedef){
 						System.out.println(" HEDEF bulundu ve ekleniyor: "+prochepath.get(i).getLine()+","+prochepath.get(i).getCol());
 						tile.add(prochepath.get(i));
 						System.out.println("////////////////////");
-						System.out.println("Bonusu bulduk be abicim,�imdi geri d�n�yoruz");
+						System.out.println("Bonusu bulduk be abicim, imdi geri d n yoruz");
 						System.out.println("////////////////////");
 						break;
 					}else if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==0 || matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==5){
 						System.out.println("Duvar var buralarda bu yol yalan oldu");
 						tile = null;
 					}else if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]<0){
-						System.out.println("Bu k�s�mlarda bomba var,ate�i var yalan olur bu yolda");
+						System.out.println("Bu k s mlarda bomba var,ate i var yalan olur bu yolda");
 						tile = null;
 					}else if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==1){
-						System.out.println("Bu yol a��k devam edelim");
+						System.out.println("Bu yol a  k devam edelim");
 						previous=notre;
 						System.out.println(" Boù yol: "+prochepath.get(i).getLine()+","+prochepath.get(i).getCol());
 						tile=add(prochepath.get(i));
@@ -113,7 +113,7 @@ public class OutilesCollecte {
 		AiTile cible=null;
 		//on commence à scanner de ces valeur
 		int i,j,plusX=1,plusY=1;
-		System.out.println("Hata ar�yoruz");
+		System.out.println("Hata ar yoruz");
 		//on les initialise en faire attention matrice length pour ne pas tomber à l'exception
 		if(bonus.getCol()!=matrice.length){
 			if(bonus.getLine()!=matrice.length){
@@ -307,7 +307,7 @@ public class OutilesCollecte {
 			return null;
 		}
 		else{
-			System.out.println("duvarlar�m�z var beya :D :D :D :");
+			System.out.println("duvarlar m z var beya :D :D :D :");
 			for(int i=0;i<mursDesturictibles.size();i++){
 				System.out.println(i+": "+mursDesturictibles.get(i).getLine()+","+mursDesturictibles.get(i).getCol());
 			}

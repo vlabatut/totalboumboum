@@ -296,7 +296,7 @@ public class DropBomb
 	/**
 	 * 
 	 *  
-	 * La methode qui teste si le chemin donne est secur�.
+	 * La methode qui teste si le chemin donne est securé.
 	 * 
 	 * @param  path
 	 * 				Le chemin

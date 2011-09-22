@@ -25,7 +25,7 @@ public class Securite {
 
 	/**
 	 * Cette méthode Contrôle si la case cible est vide ou pas et elle retourne
-	 * un type bool�enne (danger). Elle prend 2 arguments la zone du jeu et la
+	 * un type booléenne (danger). Elle prend 2 arguments la zone du jeu et la
 	 * case cible.
 	 * 
 	 * @param AiTile

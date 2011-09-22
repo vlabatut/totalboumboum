@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 
 /**
- * @author Sercan Özen & G.Lara Özdöker 
+ * @author Sercan  zen & G.Lara  zd ker 
  *
  */
 public class OutilesAttaque {
