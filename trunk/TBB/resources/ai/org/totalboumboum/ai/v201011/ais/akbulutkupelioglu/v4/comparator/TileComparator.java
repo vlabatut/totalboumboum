@@ -10,8 +10,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.AkbulutKupelioglu;
  * A comparator used to compare tiles.
  * A tile is "less than" another, if its Manhattan distance to the player's tile is less than
  * that of the other tile. 
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class TileComparator implements Comparator<AiTile>
 {

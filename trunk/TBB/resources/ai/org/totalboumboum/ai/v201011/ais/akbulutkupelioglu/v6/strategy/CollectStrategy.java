@@ -5,7 +5,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 
 /**
  * A collect strategy, used to destroy walls and search for bonus.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class CollectStrategy extends Strategy

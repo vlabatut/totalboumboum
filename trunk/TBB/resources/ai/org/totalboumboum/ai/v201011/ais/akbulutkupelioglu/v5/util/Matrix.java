@@ -19,7 +19,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.comparator.Coordina
  */
 /**
  * Represents a matrix. Used for interest matrices.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class Matrix implements Cloneable

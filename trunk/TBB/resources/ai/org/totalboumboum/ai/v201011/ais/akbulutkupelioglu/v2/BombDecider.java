@@ -12,7 +12,10 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.mode.CollectMode;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.mode.Mode;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class BombDecider
 {
 

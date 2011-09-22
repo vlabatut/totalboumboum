@@ -11,6 +11,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.AkbulutKupelioglu;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class DestructibleSuccessorCalculator extends SuccessorCalculator
 {
 

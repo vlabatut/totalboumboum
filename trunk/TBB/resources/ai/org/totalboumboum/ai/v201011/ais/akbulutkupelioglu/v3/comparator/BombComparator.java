@@ -4,6 +4,10 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class BombComparator implements Comparator<AiBomb>
 {
 

@@ -12,7 +12,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.mode.Mode;
 
 /**
  * Decides whether or not it's profitable to drop a bomb.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class BombDecider

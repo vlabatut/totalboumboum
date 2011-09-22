@@ -5,6 +5,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.AkbulutKupelioglu;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class DestructibleCostCalculator extends CostCalculator
 {
 

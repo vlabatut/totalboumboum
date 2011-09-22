@@ -7,7 +7,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.AkbulutKupelioglu;
 
 /**
  * A cost calculator used to find a path passing through the least obstacles.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class DestructibleCostCalculator extends CostCalculator

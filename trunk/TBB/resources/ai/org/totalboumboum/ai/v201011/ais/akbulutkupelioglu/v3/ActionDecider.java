@@ -24,6 +24,10 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.util.Matrix;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.util.astar.AdvancedSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class ActionDecider
 {
 	private static ActionDecider instance = null;

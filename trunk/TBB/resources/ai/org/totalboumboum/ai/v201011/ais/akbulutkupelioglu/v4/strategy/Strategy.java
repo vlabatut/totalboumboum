@@ -8,8 +8,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.AkbulutKupelioglu;
 
 /**
  * Represents a strategy to be executed by the AI.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public abstract class Strategy
 {

@@ -14,8 +14,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.mode.Mode;
  */
 /**
  * Selects a mode based on the current state of the game.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class ModeSelector
 {

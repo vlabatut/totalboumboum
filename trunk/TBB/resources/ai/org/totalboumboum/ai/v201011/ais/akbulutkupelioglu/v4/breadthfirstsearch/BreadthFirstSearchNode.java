@@ -10,8 +10,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.AkbulutKupelioglu;
 /**
  * Represents a node in a breadth-first search.
  * 
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class BreadthFirstSearchNode
 {

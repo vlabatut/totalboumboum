@@ -13,7 +13,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * A successor calculator used to find a path passing through the least obstacles.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class DestructibleSuccessorCalculator extends SuccessorCalculator

@@ -5,8 +5,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
  * Manages informations in a way to avoid recalculations. Currently not used.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class InformationManager
 {

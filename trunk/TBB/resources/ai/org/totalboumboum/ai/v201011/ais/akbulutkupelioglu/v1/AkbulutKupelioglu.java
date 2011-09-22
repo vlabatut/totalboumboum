@@ -7,6 +7,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class AkbulutKupelioglu extends ArtificialIntelligence
 {	
 	private AiZone zone;

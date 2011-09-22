@@ -7,8 +7,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 /**
  * A comparator used to compare bombs. The bombs are compared by their remaining times.
  * A bomb is "less than" another if it has less remaining time than the other.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class BombComparator implements Comparator<AiBomb>
 {

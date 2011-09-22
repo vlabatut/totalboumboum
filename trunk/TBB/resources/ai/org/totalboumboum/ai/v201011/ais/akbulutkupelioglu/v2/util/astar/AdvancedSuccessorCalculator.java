@@ -10,6 +10,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.AkbulutKupelioglu;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.util.Matrix;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class AdvancedSuccessorCalculator extends SuccessorCalculator
 {
 	private Matrix interest = null;

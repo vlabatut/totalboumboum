@@ -6,8 +6,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.AkbulutKupelioglu;
 
 /**
  * Represents a coordinate. A coordinate is a tile within the level, with a value associated to it.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class Coordinate
 {

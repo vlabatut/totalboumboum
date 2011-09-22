@@ -28,8 +28,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * The class representing the attack mode. This class is responsible for matrix
  * calculation in attack mode, as well as the strategies.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class AttackMode extends Mode
 {

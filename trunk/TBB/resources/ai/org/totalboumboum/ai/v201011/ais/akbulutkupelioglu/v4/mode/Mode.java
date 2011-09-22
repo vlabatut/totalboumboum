@@ -28,8 +28,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.util.Matrix;
 /**
  * Represents a mode the artificial intelligence can be in. All the modes the IA can use
  * should extend this class.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public abstract class Mode
 {
