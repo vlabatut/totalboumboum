@@ -3,7 +3,7 @@ package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
 /**
 *
 * @author Ekin Medeni
-* @author Pinar Uluer
+* @author Pınar Uluer
 *
 */
 public enum ZoneEnum {

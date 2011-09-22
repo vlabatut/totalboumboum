@@ -21,8 +21,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Eser Devecioglu
- * @author Alev Korkmaz
+ * @author Eser Devecioğlu
+ * @author lev Korkmaz
  *
  */
 public class DeveciogluKorkmaz extends ArtificialIntelligence {

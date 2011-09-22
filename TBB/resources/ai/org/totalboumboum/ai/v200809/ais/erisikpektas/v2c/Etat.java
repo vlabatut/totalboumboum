@@ -2,8 +2,8 @@ package org.totalboumboum.ai.v200809.ais.erisikpektas.v2c;
 
 /**
  * 
- * @author Doga Erisik
- * @author Abdurrahman Pektas
+ * @author Doğa Erişik
+ * @author Abdurrahman Pektaş
  *
  */
 public enum Etat {

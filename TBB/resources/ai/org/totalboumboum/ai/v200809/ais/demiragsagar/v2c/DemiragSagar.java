@@ -18,8 +18,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Dogus Burcu Demirag
- * @author Zeynep Sagar
+ * @author Doğus Burcu Demirağ
+ * @author Zeynep Şagar
  *
  */
 public class DemiragSagar extends ArtificialIntelligence {

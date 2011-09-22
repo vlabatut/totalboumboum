@@ -25,8 +25,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
 *
-* @author Nadin Kokciyan
-* @author Hikmet Mazmanoglu
+* @author Nadin Kökciyan
+* @author Hikmet Mazmanoğlu
 *
 */
 public class KokciyanMazmanoglu extends ArtificialIntelligence

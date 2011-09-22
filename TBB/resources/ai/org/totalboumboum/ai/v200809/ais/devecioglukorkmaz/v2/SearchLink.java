@@ -2,8 +2,8 @@ package org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2;
 
 /**
  * 
- * @author Eser Devecioglu
- * @author Alev Korkmaz
+ * @author Eser Devecioğlu
+ * @author lev Korkmaz
  *
  */
 public class SearchLink {

@@ -20,8 +20,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Selim Coremen
- * @author Umut Kucukkarakurt
+ * @author Selim Çöremen
+ * @author Umut Küçükkarakürt
  *
  */
 public class CoremenKucukkarakurt extends ArtificialIntelligence

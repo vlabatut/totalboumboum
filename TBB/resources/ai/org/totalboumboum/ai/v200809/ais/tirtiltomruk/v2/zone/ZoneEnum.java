@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.zone;
 
 /**
 *
-* @author Abdullah Tirtil
+* @author Abdullah Tırtıl
 * @author Mert Tomruk
 *
 */

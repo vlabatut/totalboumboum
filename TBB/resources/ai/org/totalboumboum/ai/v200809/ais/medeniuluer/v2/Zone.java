@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 /**
 *
 * @author Ekin Medeni
-* @author Pinar Uluer
+* @author Pınar Uluer
 *
 */
 public class Zone {

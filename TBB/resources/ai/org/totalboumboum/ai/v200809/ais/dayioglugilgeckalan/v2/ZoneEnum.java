@@ -2,8 +2,8 @@ package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2;
 
 /**
  * 
- * @author Ali Batuhan Dayioglugil
- * @author Gokhan Geckalan
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
  *
  */
 public enum ZoneEnum {

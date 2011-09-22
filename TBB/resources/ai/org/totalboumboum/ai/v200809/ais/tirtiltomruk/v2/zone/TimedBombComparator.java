@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
 *
-* @author Abdullah Tirtil
+* @author Abdullah Tırtıl
 * @author Mert Tomruk
 *
 */

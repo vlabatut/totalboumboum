@@ -2,8 +2,8 @@ package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v2c;
 
 /**
 *
-* @author Nadin Kokciyan
-* @author Hikmet Mazmanoglu
+* @author Nadin Kökciyan
+* @author Hikmet Mazmanoğlu
 *
 */
 public enum Mission {

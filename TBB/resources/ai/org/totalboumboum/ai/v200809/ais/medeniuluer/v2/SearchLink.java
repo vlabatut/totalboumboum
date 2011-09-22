@@ -10,7 +10,7 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
  * d'un état à l'autre.
  *
  * @author Ekin Medeni
- * @author Pinar Uluer
+ * @author Pınar Uluer
  *
  */
 public class SearchLink

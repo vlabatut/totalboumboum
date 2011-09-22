@@ -6,8 +6,8 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Eser Devecioglu
- * @author Alev Korkmaz
+ * @author Eser Devecioğlu
+ * @author lev Korkmaz
  *
  */
 public class NoeudComparator implements Comparator<Noeud> {

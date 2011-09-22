@@ -4,8 +4,8 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 
 /**
  * 
- * @author Ozan Gunalp
- * @author Sinan Yurtsever
+ * @author Ozan Günalp
+ * @author Sinan Yürtsever
  *
  */
 public class DangerPriorityTile{

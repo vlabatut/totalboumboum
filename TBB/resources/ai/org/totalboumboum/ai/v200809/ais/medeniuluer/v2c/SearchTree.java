@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * orientes
  *
  * @author Ekin Medeni
- * @author Pinar Uluer
+ * @author Pınar Uluer
  *
  */
 public class SearchTree {

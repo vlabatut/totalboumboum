@@ -6,7 +6,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
 *
-* @author Abdullah Tirtil
+* @author Abdullah Tırtıl
 * @author Mert Tomruk
 *
 */

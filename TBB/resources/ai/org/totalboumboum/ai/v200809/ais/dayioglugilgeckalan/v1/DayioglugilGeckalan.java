@@ -21,8 +21,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Ali Batuhan Dayioglugil
- * @author Gokhan Geckalan
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
  *
  */
 public class DayioglugilGeckalan extends ArtificialIntelligence 

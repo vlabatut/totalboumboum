@@ -2,8 +2,8 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v1;
 
 /**
  * 
- * @author Dogus Burcu Demirag
- * @author Zeynep Sagar
+ * @author Doğus Burcu Demirağ
+ * @author Zeynep Şagar
  *
  */
 public class LienRecherche {

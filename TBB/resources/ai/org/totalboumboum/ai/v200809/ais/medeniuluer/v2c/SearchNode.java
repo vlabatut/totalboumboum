@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  *et un cout.
  *
  * @author Ekin Medeni
- * @author Pinar Uluer
+ * @author Pınar Uluer
  *
  */
 public class SearchNode {

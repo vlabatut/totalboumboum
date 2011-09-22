@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.zone.ZoneEnum;
  * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  *
- * @author Abdullah Tirtil
+ * @author Abdullah Tırtıl
  * @author Mert Tomruk
  *
  */

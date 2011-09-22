@@ -5,7 +5,7 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 
 /**
 *
-* @author Abdullah Tirtil
+* @author Abdullah Tırtıl
 * @author Mert Tomruk
 *
 */

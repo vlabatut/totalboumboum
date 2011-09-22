@@ -8,8 +8,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * objet specifique qui garde les infos de cost et heuristique pour des tiles
  * 
- * @author Ozan Gunalp
- * @author Sinan Yurtsever
+ * @author Ozan Günalp
+ * @author Sinan Yürtsever
  *
  */
 public class CostTile  {

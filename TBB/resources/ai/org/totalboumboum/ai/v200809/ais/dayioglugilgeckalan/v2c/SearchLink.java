@@ -8,8 +8,8 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
  * 
- * @author Ali Batuhan Dayioglugil
- * @author Gokhan Geckalan
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
  *
  */
 public class SearchLink

@@ -7,8 +7,8 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
 *
-* @author Nadin Kokciyan
-* @author Hikmet Mazmanoglu
+* @author Nadin Kökciyan
+* @author Hikmet Mazmanoğlu
 *
 */
 public class NodeComparator implements Comparator<Node>
