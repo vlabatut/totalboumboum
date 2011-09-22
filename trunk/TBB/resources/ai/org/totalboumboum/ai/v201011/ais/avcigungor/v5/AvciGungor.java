@@ -30,11 +30,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 
 /**
- * 
- * @author AVCI/GUNGOR
- * 
+ * @author Ibrahim Avcı
+ * @author Burak Güngör
  */
-
 @SuppressWarnings("unused")
 public class AvciGungor extends ArtificialIntelligence {
 

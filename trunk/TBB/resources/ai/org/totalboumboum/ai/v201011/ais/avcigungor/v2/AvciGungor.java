@@ -19,7 +19,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author AVCI/GUNGOR
+ * @author Ibrahim Avcı
+ * @author Burak Güngör
  * 
  */
 
