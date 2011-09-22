@@ -5,6 +5,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class GocmenogluHekimoglu extends ArtificialIntelligence
 {	
 	

@@ -10,6 +10,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.MatrixCostCalculator;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class PathCalculator {
 	private GocmenogluHekimoglu monIa;
 	private PixelHeuristicCalculator heurcalc;

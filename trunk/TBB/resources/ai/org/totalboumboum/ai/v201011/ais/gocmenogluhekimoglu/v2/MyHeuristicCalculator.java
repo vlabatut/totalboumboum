@@ -7,6 +7,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class MyHeuristicCalculator extends HeuristicCalculator
 {
 	public double[][] blastmatrix;

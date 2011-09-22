@@ -3,6 +3,10 @@ package org.totalboumboum.ai.v201011.ais.gocmenogluhekimoglu.v3;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class MatriceDist extends MatriceCalc  {
 
 	public MatriceDist(GocmenogluHekimoglu monIa) throws StopRequestException {

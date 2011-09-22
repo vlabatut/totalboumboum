@@ -17,6 +17,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.BasicCostCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class Paths {
 	static void colorTiles(GocmenogluHekimoglu ai,List<AiTile> tiles,Color c) throws StopRequestException{
 		ai.checkInterruption();

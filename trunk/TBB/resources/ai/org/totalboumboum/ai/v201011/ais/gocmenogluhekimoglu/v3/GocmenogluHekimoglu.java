@@ -11,6 +11,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 @SuppressWarnings("unused")
 public class GocmenogluHekimoglu extends ArtificialIntelligence
 {	

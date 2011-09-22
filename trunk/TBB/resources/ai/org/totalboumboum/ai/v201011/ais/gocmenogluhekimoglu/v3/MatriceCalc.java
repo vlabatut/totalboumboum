@@ -19,7 +19,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 
 /**
  * Classe pour les calculs matriciels
- * @author Can G  meno lu
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
  *
  */
 public class MatriceCalc {

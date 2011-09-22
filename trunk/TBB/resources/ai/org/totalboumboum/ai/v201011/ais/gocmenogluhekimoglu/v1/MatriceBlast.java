@@ -7,6 +7,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class MatriceBlast extends MatriceCalc {
 
 	public MatriceBlast(GocmenogluHekimoglu monIa) throws StopRequestException {

@@ -17,6 +17,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 @SuppressWarnings("unused")
 public class ActionManager {
 	protected GocmenogluHekimoglu monIa;
