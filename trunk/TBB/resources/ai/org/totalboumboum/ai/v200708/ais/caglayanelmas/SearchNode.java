@@ -4,7 +4,7 @@ package org.totalboumboum.ai.v200708.ais.caglayanelmas;
 /**
  * La classe qui représente un noeud de recherche.
  * 
- * @author Ozan Caglayan
+ * @author Ozan Çağlayan
  * @author Arif Can Elmas
  *
  */

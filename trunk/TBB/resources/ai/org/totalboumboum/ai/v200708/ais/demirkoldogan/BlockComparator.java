@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Turkalp Goker Demirkol
- * @author Emre Dogan
+ * @author Turkalp Göker Demirkol
+ * @author Emre Doğan
  *
  */
 public class BlockComparator implements Comparator<Block>

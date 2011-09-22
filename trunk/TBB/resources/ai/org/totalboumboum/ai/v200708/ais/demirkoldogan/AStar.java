@@ -8,8 +8,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Turkalp Goker Demirkol
- * @author Emre Dogan
+ * @author Turkalp Göker Demirkol
+ * @author Emre Doğan
  *
  */
 public class AStar {

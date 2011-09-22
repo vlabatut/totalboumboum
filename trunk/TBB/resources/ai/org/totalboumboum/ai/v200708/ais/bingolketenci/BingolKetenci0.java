@@ -4,10 +4,6 @@ import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
 /**
  * Classe implémentant un comportement agressif:on donne des points à chaque
  * case en considerant les murs,les autres joueurs,les bombes....On choisit un
@@ -16,8 +12,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * il controle tout d'abord s'il y a un danger pour lui. S'il y en a,il bouge
  * seulement pour se sauver.
  * 
- * @author Gizem Bingol
- * @author Utku Gorkem Kentenci
+ * @author Gizem Bingöl
+ * @author Utku Görkem Kentenci
  *
  */
 public class BingolKetenci0 extends ArtificialIntelligence {

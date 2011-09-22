@@ -5,8 +5,8 @@ import java.util.List;
 /**
  * A PathFinder can find a path between two indexed nodes in a Map.
  * 
- * @author Ayca Selva Baydar
- * @author Ayfer Camci
+ * @author Ayça Selva Baydar
+ * @author Ayfer Camcı
  *
  */
 public interface PathFinder {

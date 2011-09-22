@@ -16,8 +16,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * possible des dangers existants, i.e. par ordre de dangerosité
  * croissante : le feu, les bombes, les autres joueurs. 
  * 
- * @author Ayca Selva Baydar
- * @author Ayfer Camci
+ * @author Ayça Selva Baydar
+ * @author Ayfer Camcı
  *
  */
 public class BaydarCamci extends ArtificialIntelligence

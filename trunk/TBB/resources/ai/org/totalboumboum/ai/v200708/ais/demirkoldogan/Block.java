@@ -3,8 +3,8 @@ package org.totalboumboum.ai.v200708.ais.demirkoldogan;
 /**
  * une structure qui contient les propriétés nécessaire d'un case de zone.
  * 
- * @author Turkalp Goker Demirkol
- * @author Emre Dogan
+ * @author Turkalp Göker Demirkol
+ * @author Emre Doğan
  *
  */
 public class Block {

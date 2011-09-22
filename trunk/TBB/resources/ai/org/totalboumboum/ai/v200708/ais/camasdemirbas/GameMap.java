@@ -3,8 +3,8 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 /**
  * Ceci tient l'état et le contexte de chaque carreau sur la carte. 
  * 
- * @author Gokhan Camas
- * @author Irem Demirbas
+ * @author Gökhan Çamaş
+ * @author İrem Demirbaş
  *
  */
 public class GameMap {

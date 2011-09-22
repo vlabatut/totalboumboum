@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 /**
  * 
  * @author Betul Okan
- * @author Erkan Yuksel
+ * @author Erkan Yüksel
  *
  */
 public class OkanYuksel extends ArtificialIntelligence

@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
  * étant égale à la distance de Manhattan entre les deux
  * cases.
  * 
- * @author Ozan Caglayan
+ * @author Ozan Çağlayan
  * @author Arif Can Elmas
  *
  */

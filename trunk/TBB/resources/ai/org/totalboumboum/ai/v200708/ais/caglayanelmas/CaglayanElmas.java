@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * Projet d'Intelligence Artificielle (2007-2008) : Bomberman
  * Equipe : CAGLAYAN Ozan, ELMAS Can
  * 
- * @author Ozan Caglayan
+ * @author Ozan Çağlayan
  * @author Arif Can Elmas
  *
  */

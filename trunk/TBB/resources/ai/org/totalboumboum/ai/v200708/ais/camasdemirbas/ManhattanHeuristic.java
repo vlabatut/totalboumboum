@@ -4,8 +4,8 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
  * Un heuristique que conduit la recherche a basé la distance de Manhattan
  *  entre l'emplacement actuel et le cible
  * 
- * @author Gokhan Camas
- * @author Irem Demirbas
+ * @author Gökhan Çamaş
+ * @author İrem Demirbaş
  *
  */
 public class ManhattanHeuristic implements AStarHeuristic {

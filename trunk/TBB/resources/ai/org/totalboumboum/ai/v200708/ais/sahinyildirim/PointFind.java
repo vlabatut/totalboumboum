@@ -7,8 +7,8 @@ import java.awt.Point;
  * donc on sait le cout d'un point et on sait si ce point dans la 
  * gameZone est un wallSoft
  * 
- * @author Serkan Sahin
- * @author Mehmet Yildirim
+ * @author Serkan Şahin
+ * @author Mehmet Yıldırım
  *
  */
 public class PointFind {

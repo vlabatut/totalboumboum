@@ -6,8 +6,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Gokhan Camas
- * @author Irem Demirbas
+ * @author Gökhan Çamaş
+ * @author İrem Demirbaş
  *
  */
 public class CamasDemirbas extends ArtificialIntelligence

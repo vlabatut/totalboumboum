@@ -7,8 +7,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Atahan Goksel
- * @author Erdem Menges
+ * @author Atahan Göksel
+ * @author Erdem Mengeş
  *
  */
 public class GokselMenges  extends ArtificialIntelligence
