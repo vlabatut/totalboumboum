@@ -5,7 +5,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.AkbulutKupelioglu;
 
 /**
  * A survive strategy, used to survive.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class SurviveStrategy extends Strategy

@@ -6,6 +6,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.AkbulutKupelioglu;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.breadthfirstsearch.BreadthFirstSearch;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class DistanceMatrix extends Matrix
 {
 

@@ -12,7 +12,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Coordinate;
 /**
  * Class used to find out the distances of accessible tiles from a given tile,
  * using breadth-first search. 
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class BreadthFirstSearch

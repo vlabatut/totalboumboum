@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.util;
 
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,15 +15,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.AkbulutKupelioglu;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.comparator.CoordinateComparator;
 
 /**
- * An integer matrix.
- * 
- * @author Yasa Akbulut
- * 
- */
-/**
  * Represents a matrix. Used for interest matrices.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class Matrix implements Cloneable
 {

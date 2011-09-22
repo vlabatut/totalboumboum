@@ -32,6 +32,10 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.util.astar.enemysea
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.util.astar.enemysearch.DestructibleSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class ActionDecider
 {
 	private static ActionDecider instance = null;

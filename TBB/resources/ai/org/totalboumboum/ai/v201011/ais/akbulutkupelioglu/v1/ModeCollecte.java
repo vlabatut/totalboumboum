@@ -8,6 +8,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class ModeCollecte extends Mode {
 
 	private Matrix interet;

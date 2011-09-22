@@ -5,8 +5,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.AkbulutKupelioglu;
 
 /**
  * An attack strategy, used to destroy an enemy.
- * @author yasa
- *
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class AttackStrategy extends Strategy
 {

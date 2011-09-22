@@ -27,9 +27,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.util.astar.Advanced
 /**
  * The class representing the collect mode. This class is responsible for matrix
  * calculation in collect mode, as well as the strategies.
- * 
- * @author yasa
- * 
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  */
 public class CollectMode extends Mode
 {

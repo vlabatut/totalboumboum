@@ -12,7 +12,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
 
 /**
  * A successor calculator taking into account the bombs, flames and our distance to them.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class AdvancedSuccessorCalculator extends SuccessorCalculator

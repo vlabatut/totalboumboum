@@ -10,6 +10,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.AstarNode;
 import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class DestructibleSuccessorCalculator extends SuccessorCalculator
 {
 

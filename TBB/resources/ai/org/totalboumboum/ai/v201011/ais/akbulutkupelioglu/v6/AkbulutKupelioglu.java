@@ -14,7 +14,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
  * the engine, selects a mode, calculates a matrix, chooses an action and sends
  * it to the game engine.
  * 
- * @author Yasa Akbulut & Burcu Küpelioglu
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  * 
  */
 public class AkbulutKupelioglu extends ArtificialIntelligence

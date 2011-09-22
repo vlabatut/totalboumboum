@@ -9,7 +9,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
  * Represents a step to be executed to achieve a certain goal determined by a strategy.
  * It consists of an action to be executed, a tile where that action should be executed, and a
  * value, which can be used to give weights to certain strategies.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class StrategyStep

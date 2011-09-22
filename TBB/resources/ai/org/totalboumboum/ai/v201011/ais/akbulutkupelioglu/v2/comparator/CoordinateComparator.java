@@ -4,6 +4,10 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.util.Coordinate;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class CoordinateComparator implements Comparator<Coordinate>{
 
 	@Override

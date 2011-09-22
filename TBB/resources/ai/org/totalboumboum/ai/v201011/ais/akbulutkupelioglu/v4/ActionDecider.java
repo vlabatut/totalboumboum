@@ -26,7 +26,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Decides what to do next.
- * @author yasa
+ * 
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class ActionDecider

@@ -5,6 +5,10 @@ import java.util.HashMap;
 
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.util.Coordinate;
 
+/**
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
+ */
 public class CoordinateComparator implements Comparator<Coordinate>{
 
 	

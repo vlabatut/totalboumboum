@@ -8,7 +8,8 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.breadthfirstsearch.
 
 /**
  * A matrix used to represent distances to a certain tile.
- * @author yasa
+ * @author Yasa Akbulut
+ * @author Burcu Küpelioğlu
  *
  */
 public class DistanceMatrix extends Matrix
