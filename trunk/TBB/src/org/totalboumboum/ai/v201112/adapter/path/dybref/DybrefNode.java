@@ -230,14 +230,37 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	/** état courant du noeud */
 	private boolean safe = false;
 	
-	public void reportSafety(DybrefNode child)
+	/**
+	 * Méthode appelée par un noeud
+	 * dont la sûreté vient juste d'être fixée.
+	 * Cette méthode se charge de transmettre
+	 * l'information au parent.
+	 */
+	public void reportSafety()
+	{	// mise à jour de la matrice si nécessaire
+		if(safe)
+			matrix.update(this);
+		// transmission au noeud parent
+		if(parent!=null)
+			parent.safetyReported(this);
+	}
+
+	/**
+	 * methode appellée par un fils qui veut
+	 * avertir son parent que sa sûreté a été
+	 * fixée.
+	 * 
+	 * @param child
+	 */
+	private void safetyReported(DybrefNode child)
 	{	// safe child
 		if(child.isSafe())
 		{	// node previously unsafe
 			if(!safe)
 			{	safe = true;
 				matrix.update(this);
-				reportSafety(this);
+				if(parent!=null)
+					parent.safetyReported(this);
 			}
 		}
 		
@@ -246,8 +269,8 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		{	// remove unsafe child
 			children.remove(child);
 			// last child and node already unsafe
-			if(children.isEmpty() && !safe)
-				reportSafety(this);
+			if(parent!=null && children.isEmpty() && !safe)
+				parent.safetyReported(this);
 		}
 	}
 
@@ -300,111 +323,177 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	}
 	
 	/**
+	 * teste si le perso est toujours vivant
+	 * @param hero
+	 * @return
+	 */
+	private boolean isHeroAlive(AiHero hero)
+	{	boolean result = hero!=null;
+		if(result)
+		{	AiStateName name = hero.getState().getName();
+			result = !name.equals(AiStateName.BURNING) && !name.equals(AiStateName.ENDED);
+		}
+		return result;
+	}
+	
+	/**
 	 * utilise la fonction successeur pour calculer les enfants de ce noeud de recherche,
 	 * i.e. pour déterminer quelles sont les cases que l'on peut atteindre à partir
 	 * de la case courante.
 	 * 
 	 * @throws StopRequestException 
 	 */
-	private void developNode() throws StopRequestException
+
+//TODO adapter les coms de l'exception
+//TODO revoir tous les coms des classes du package dybref
+
+	/**
+	 * NOTE on fait l'hypothèse que pas de mur mobile
+	 */
+	private void developNodeSafeMode() throws StopRequestException
 	{	ai.checkInterruption();
 		
-System.out.println("ORIGINAL ("+depth+")");
-System.out.println(zone);
+		// on modifie la sûreté et on valide auprès du père
+		safe = true;
+		reportSafety();
+		
+		// init
+		children = new ArrayList<DybrefNode>();
+		// on ne considère que les déplacement (pas besoin d'attente en mode sûr)
+		List<Direction> directions = Direction.getPrimaryValues();
+		
+		// pour chaque déplacement possible
+		for(Direction direction: directions)
+		{	// on récupère la case cible
+			AiTile targetTile = tile.getNeighbor(direction);
+			
+			// la case cible doit être traversable
+			// NOTE : à modifier si on veut tenir compte de murs mobiles
+			if(targetTile.isCrossableBy(hero))
+			{	// on applique le modèle pour obtenir la zone résultant de l'action
+				AiModel model = new AiModel(zone);
+				model.applyChangeHeroDirection(hero,direction);
+				model.simulate(hero);
+				long duration = model.getDuration();
+				
+				// on récupère la nouvelle case occupée par le personnage
+				AiZone futureZone = model.getCurrentZone();
+				AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+				// on teste si le perso est toujours en vie (sinon > bug)
+				if(!isHeroAlive(futureHero))
+					System.err.println("ERREUR: le perso ne devrait pas pouvoir mourir.");
+				AiTile futureTile = futureHero.getTile();
+				// on teste si la case occupée est bien celle visée (sinon > bug)
+				if(!futureTile.equals(targetTile))
+					System.err.println("ERREUR: la case devrait être la même.");
+
+				// temps nécessaire pour aller dans la case cible
+				long alternativeTime = totalDuration + duration;
+				// temps déjà présent dans la matrice
+				long existingTime = matrix.getTime(targetTile);
+				// on ne crée le noeud que si ce temps est meilleur que le temps existant
+				if(alternativeTime<existingTime)
+				{	// ce temps sera màj dans la matrice lors du développement du noeud
+					// on crée le noeud fils correspondant (qui sera traité plus tard)
+					DybrefNode node = new DybrefNode(futureTile,duration,this);
+					children.add(node);
+					
+System.out.println("DIRECTION: "+direction+" >> added");
+				}
+				
+System.out.println("DIRECTION: "+direction);
+System.out.println(futureZone);
+			}
+		}
+	}
+	
+	private void developNodeUnsafeMode() throws StopRequestException
+	{	ai.checkInterruption();
+		
+		// init
+		children = new ArrayList<DybrefNode>();
+		// on considère les déplacement, mais aussi l'attente
+		List<Direction> directions = Direction.getPrimaryValues();
+		directions.add(Direction.NONE);
+		
+		// pour chaque déplacement possible (y compris l'attente)
+		for(Direction direction: directions)
+		{	// on récupère la case cible
+			AiTile targetTile = tile.getNeighbor(direction);
+			
+			// on applique le modèle pour obtenir la zone résultant de l'action
+			AiModel model = new AiModel(zone);
+			model.applyChangeHeroDirection(hero,direction);
+			boolean safe = true;
+			long duration = 0;
+			// simulation pour l'attente
+			if(direction==Direction.NONE)
+			{	// on attend simplement jusqu'à la prochaine explosion car c'est généralement l'évènement bloquant
+				// de plus, on n'attend que si une des cases voisines est menacée par une explosion
+				long waitDuration = getWaitDuration();
+				if(waitDuration>0 && waitDuration<Long.MAX_VALUE)
+				{	model.simulate(waitDuration);
+					duration = model.getDuration();
+					AiZone futureZone = model.getCurrentZone();
+					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+					// on teste si le perso est toujours en vie
+					safe = isHeroAlive(futureHero);
+				}
+			}
+			// simulation pour le déplacement
+			else
+			{	// restriction : on ne considère le retour en arrière que si on vient d'attendre 
+				// (à l'action précédente) i.e. : la case cible et celle de son parent doivent être différentes
+				if(parent==null || !targetTile.equals(parent.getTile()))
+				{	// on simule jusqu'au changement d'état du personnage : 
+					// soit le changement de case, soit l'élimination
+					safe = model.simulate(hero);
+					duration = model.getDuration();
+				}
+			}
+
+			// si le joueur est encore vivant dans cette zone et si l'action a bien eu lieu
+			if(safe && duration>0)
+			{	// on récupère la nouvelle case occupée par le personnage
+				AiZone futureZone = model.getCurrentZone();
+				AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+				AiTile futureTile = futureHero.getTile();
+				
+				// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
+				if(futureTile.equals(targetTile))
+				{	// on crée le noeud fils correspondant (qui sera traité plus tard)
+					DybrefNode node = new DybrefNode(futureTile,duration,this);
+					children.add(node);
+
+System.out.println("DIRECTION: "+direction+" >> added");
+				}
+				// si la case n'est pas la bonne : 
+				// la case ciblée n'était pas traversable et l'action est à ignorer
+				
+System.out.println("DIRECTION: "+direction);
+System.out.println(futureZone);
+			}
+			// si le joueur n'est plus vivant dans la zone obtenue : 
+			// la case ciblée n'est pas sûre et est ignorée
+			
+			// s'il n'y a aucun enfant pour ce noeud, on en informe le noeud parent
+			if(children.isEmpty())
+				reportSafety();
+		}
+	}
+	
+	private void developNode() throws StopRequestException
+	{	ai.checkInterruption();
 	
 		// safe mode: quand il ne reste ni bombe ni feu dans la zone, le traitement peut être simplifié
 		boolean safeMode = zone.getFires().isEmpty() && zone.getBombs().isEmpty();
+System.out.println("++++++ ORIGINAL (d="+depth+", mode="+safeMode+", t="+totalDuration+"ms) ++++++++++++++++++++++++++++++++++++++++++");
+System.out.println(matrix);
+System.out.println(zone);
 		if(safeMode)
-		{	safe = true;
-			reportSafety(this);
-		}
-		
-		children = new ArrayList<DybrefNode>();
-//		if(tile.isCrossableBy(hero))
-		{	List<Direction> directions = Direction.getPrimaryValues();
-			directions.add(Direction.NONE);
-			
-			// pour chaque déplacement possible (y compris l'attente)
-			for(Direction direction: directions)
-			{	// on récupère la case cible
-				AiTile targetTile = tile.getNeighbor(direction);
-				
-				// on applique le modèle pour obtenir la zone résultant de l'action
-				AiModel model = new AiModel(zone);
-				model.applyChangeHeroDirection(hero,direction);
-				boolean safe = true;
-				long duration = 0;
-				if(direction==Direction.NONE && !safeMode)
-				{	// on attend simplement jusqu'à la prochaine explosion
-					// car c'est généralement l'évènement bloquant
-					// de plus, on n'attend que si une des cases voisines est menacée par une explosion
-					long waitDuration = getWaitDuration();
-					if(waitDuration>0 && waitDuration<Long.MAX_VALUE)
-					{	//model.simulateUntilFire();
-						model.simulate(waitDuration);
-						duration = model.getDuration();
-						AiZone futureZone = model.getCurrentZone();
-						AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
-						if(futureHero==null)
-							safe = false;
-						else
-						{	AiState futureState = futureHero.getState();
-							AiStateName futureName = futureState.getName();
-							safe = futureName==AiStateName.FLYING || futureName==AiStateName.MOVING || futureName==AiStateName.STANDING;
-						}
-					}
-				}
-				else
-				{	// restriction : on ne considère le retour en arrière que si on vient d'attendre 
-					// (à l'action précédente) i.e. : si cette case et celle de son parent sont les mêmes.
-					if(parent==null || !targetTile.equals(parent.getTile()))
-					{	// on simule jusqu'au changement d'état du personnage : 
-						// soit le changement de case, soit l'élimination
-						safe = model.simulate(hero);
-						duration = model.getDuration();
-					}
-				}
-	
-				// si le joueur est encore vivant dans cette zone et si l'action a bien eu lieu
-				if(safe && duration>0)
-				{	// on récupère la nouvelle case occupée par le personnage
-					AiZone futureZone = model.getCurrentZone();
-					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
-					AiTile futureTile = futureHero.getTile();
-					
-					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
-					if(futureTile.equals(targetTile))
-					{	boolean addChild = true;
-						// si la zone est sûre : on ne considère le fils que s'il permet d'améliorer le temps
-						if(safeMode)
-						{	long temp = totalDuration + duration;
-							addChild = matrix.getTime(targetTile)>temp;
-							matrix.update(this);
-						}
-						
-						if(addChild)
-						{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-							DybrefNode node = new DybrefNode(futureTile,duration,this);
-							children.add(node);
-						}
-// TODO adapter les coms de l'exception
-// TODO revoir tous les coms des classes du package dybref
-System.out.println("DIRECTION: "+direction+" >> added");
-					}
-					// si la case n'est pas la bonne : 
-					// la case ciblée n'était pas traversable et l'action est à ignorer
-System.out.println("DIRECTION: "+direction);
-System.out.println(futureZone);
-				}
-				// si le joueur n'est plus vivant dans la zone obtenue : 
-				// la case ciblée n'est pas sûre et est ignorée
-			}
-			
-			// s'il n'y a aucun enfant pour ce noeud, on en informe le noeud parent.
-			if(children.isEmpty())
-				parent.reportSafety(this);
-		}
-System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+			developNodeSafeMode();
+		else
+			developNodeUnsafeMode();
 	}
 	
 	private long getWaitDuration()

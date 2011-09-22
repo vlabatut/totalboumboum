@@ -218,4 +218,23 @@ public final class DybrefMatrix
 				result[i][j] = getTime(i,j);
 		return result;
 	}
+
+    /////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	String result = "";
+		for(int i=0;i<matrix.length;i++)
+		{	for(int j=0;j<matrix[0].length;j++)
+			{	long time = getTime(i,j);
+				String str = "-";
+				if(time!=Long.MAX_VALUE)
+					str = Long.toString(time);
+				result = result + "\t" + str;
+			}
+			result = result + "\n";
+		}
+		return result;
+	}
 }

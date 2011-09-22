@@ -298,6 +298,7 @@ public class AiModel
 		long totalDuration = 0;
 		previous = current;
 		duration = 0;
+		AiSimZone previousZone = current;
 		
 		while(totalDuration<requestedDuration)
 		{	// create a copy of the current zone
@@ -328,6 +329,11 @@ public class AiModel
 			current.updateTime(duration);
 			totalDuration = totalDuration + duration;
 		}
+		
+		// update duration to reflect the whole process
+		duration = totalDuration;
+		// same thing with the previous zone
+		previous = previousZone;
 	}
 	
 	/**

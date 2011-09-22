@@ -191,11 +191,11 @@ public final class Dybref
 			System.out.println();
 		}
 
-		finish();
 		if(limitReached)
 			throw new LimitReachedException(startTile,maxh,maxn,maxHeight,maxNodes);
 		
 		DybrefMatrix result = root.getMatrix();
+		finish();
 		return result;
 	}
 	
