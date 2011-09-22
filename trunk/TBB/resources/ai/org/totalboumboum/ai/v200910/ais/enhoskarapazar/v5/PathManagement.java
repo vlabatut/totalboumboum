@@ -13,6 +13,10 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 
+/**
+ * @author Sadettin Enhoş
+ * @author Ali Can Karapazar
+ */
 public class PathManagement {
 
 	

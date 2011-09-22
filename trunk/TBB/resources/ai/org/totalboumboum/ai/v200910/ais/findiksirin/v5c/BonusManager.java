@@ -15,6 +15,10 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Ali Fındık
+ * @author Göknur Şırın
+ */
 public class BonusManager
 {
 	public BonusManager(FindikSirin ai) throws StopRequestException

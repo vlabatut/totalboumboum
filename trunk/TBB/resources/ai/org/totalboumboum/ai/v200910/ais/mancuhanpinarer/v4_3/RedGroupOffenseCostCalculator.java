@@ -1,3 +1,4 @@
+
 package org.totalboumboum.ai.v200910.ais.mancuhanpinarer.v4_3;
 
 import java.util.Iterator;
@@ -8,7 +9,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 
-
+/**
+ * @author Koray Mançuhan
+ * @author Özgün Pınarer
+ */
 public class RedGroupOffenseCostCalculator extends CostCalculator {
 
 	@Override
