@@ -78,6 +78,8 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		totalDuration = 0;
 		// matrice des temps d'accès
 		matrix = new DybrefMatrix(hero);
+		// cases visitées dans cette branche
+		initVisits(false);
 	}
 
 	/**
@@ -110,6 +112,8 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		totalDuration = parent.getTotalDuration() + duration;
 		// matrice des temps d'accès
 		matrix = parent.getMatrix();
+		// cases visitées dans cette branche
+		visits = parent.visits;
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -224,31 +228,50 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// BRANCH			/////////////////////////////////////////////
+	// VISITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** compteur des branches (pour avoir des numéros uniques) */
-	private static int branchCount = 0;
-	/** numéro de la branche à laquelle ce noeud appartient */
-	private int branchId;
+	/** indique si les cases ont été visitées, dans la branche courante */
+	private boolean[][] visits;
 	
-	/**
-	 * Affecte un numéro unique destiné
-	 * à une nouvelle branche, à ce noeud.
-	 */
-	public void setNewBranch()
-	{	branchId = branchCount;
-		branchCount++;
+	private void initVisits(boolean safeMode)
+	{	int height = zone.getHeight();
+		int width = zone.getWidth();
+		visits = new boolean[height][width];
+
+		if(safeMode)
+		{	for(int i=0;i<height;i++)
+				for(int j=0;j<width;j++)
+				{	AiTile tile = zone.getTile(i,j);
+					visits[i][j] = !tile.isCrossableBy(hero);
+				}
+		}
+		else
+		{	for(int i=0;i<height;i++)
+				for(int j=0;j<width;j++)
+					visits[i][j] = false;
+		}
+		visits[tile.getRow()][tile.getCol()] = true;
 	}
 	
-	/**
-	 * Renvoie le numéro de branche 
-	 * de ce noeud de recherche.
-	 * 
-	 * @return	
-	 * 		Le numéro de branche.
-	 */
-	public int getBranchId()
-	{	return branchId;	
+/*	private boolean isAllVisited()
+	{	boolean result = true;
+		int height = zone.getHeight();
+		int width = zone.getWidth();
+		int i = 0;
+		while(result && i<height)
+		{	int j=0;
+			while(result && j<width)
+			{	result = visits[tile.getRow()][tile.getCol()];
+				j++;
+			}
+			i++;
+		}
+		return result;
+	}
+*/	
+	private boolean hasBeenVisited(AiTile tile)
+	{	boolean result = visits[tile.getRow()][tile.getCol()];
+		return result;
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -266,7 +289,9 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	public void reportSafety()
 	{	// mise à jour de la matrice si nécessaire
 		if(safe)
-			matrix.update(this);
+		{	matrix.update(this);
+			visits[tile.getRow()][tile.getCol()] = true;
+		}
 		// transmission au noeud parent
 		if(parent!=null)
 			parent.safetyReported(this);
@@ -286,6 +311,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 			if(!safe)
 			{	safe = true;
 				matrix.update(this);
+				visits[tile.getRow()][tile.getCol()] = true;
 				if(parent!=null)
 					parent.safetyReported(this);
 			}
@@ -373,7 +399,11 @@ public final class DybrefNode implements Comparable<DybrefNode>
 
 //TODO adapter les coms de l'exception
 //TODO revoir tous les coms des classes du package dybref
+//TODO pb en fait : il est possible de devoir repasser sur la même case, dans la même branche
+//si par ex on s'est réfugié dans un coin en attendant qu'une bombe explose... ah ben non, si on attend c'est ok (nvelle branche)
+//mais le recoin peut être un cul de sac : on peut quand même y aller, or l'algo va dire que non...
 
+// TODO bidouiller une IA bidon dans le seul but d'afficher le temps trouvés par le nouveau pathfinding
 	/**
 	 * NOTE on fait l'hypothèse que pas de mur mobile
 	 */
@@ -396,7 +426,9 @@ public final class DybrefNode implements Comparable<DybrefNode>
 			
 			// la case cible doit être traversable
 			// NOTE : à modifier si on veut tenir compte de murs mobiles
-			if(targetTile.isCrossableBy(hero))
+			if(targetTile.isCrossableBy(hero) 
+					// et également ne pas avoir déjà été visitée dans cette branche
+					&& !hasBeenVisited(targetTile))
 			{	// on applique le modèle pour obtenir la zone résultant de l'action
 				AiModel model = new AiModel(zone);
 				model.applyChangeHeroDirection(hero,direction);
@@ -415,12 +447,14 @@ public final class DybrefNode implements Comparable<DybrefNode>
 					System.err.println("ERREUR: la case devrait être la même.");
 				
 				// on ne crée le noeud que si le déplacement n'est pas un retour en arrière
-				if(parent==null || !targetTile.equals(parent.getTile()))
+				// >> le fait de considérer la matrice de visite épargne ce test
+//				if(parent==null || !targetTile.equals(parent.getTile()))
 				{	// temps nécessaire pour aller dans la case cible
-					long alternativeTime = totalDuration + duration;
+//					long alternativeTime = totalDuration + duration;
 					// temps déjà présent dans la matrice
-					long existingTime = matrix.getTime(targetTile);
+//					long existingTime = matrix.getTime(targetTile);
 					// on ne crée le noeud que si ce temps est meilleur que le temps existant
+					// >> le fait de considérer la matrice de visite épargne ce test
 //					if(alternativeTime<existingTime)
 					// pb >> on se retrouve dans l'impossibilité de refaire un chemin déjà parcouru
 					// alors que parfois c'est bien pratique, quand on doit revenir sur ses pas pour éviter une explosion
@@ -475,7 +509,10 @@ System.out.println(futureZone);
 			else
 			{	// restriction : on ne considère le retour en arrière que si on vient d'attendre 
 				// (à l'action précédente) i.e. : la case cible et celle de son parent doivent être différentes
-				if(parent==null || !targetTile.equals(parent.getTile()))
+				// >> le fait de considérer la matrice de visite épargne ce test
+//				if(parent==null || !targetTile.equals(parent.getTile()))
+				// la case ne doit pas avoir déjà été visitée dans cette branche
+				if(!hasBeenVisited(targetTile)) 
 				{	// on simule jusqu'au changement d'état du personnage : 
 					// soit le changement de case, soit l'élimination
 					safe = model.simulate(hero);
@@ -495,7 +532,11 @@ System.out.println(futureZone);
 				{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 					DybrefNode node = new DybrefNode(futureTile,duration,this);
 					children.add(node);
-
+					// en cas d'attente, on crée une nouvelle branche
+					if(direction==Direction.NONE)
+					{	boolean safeMode = futureZone.getFires().isEmpty() && futureZone.getBombs().isEmpty();
+						node.initVisits(safeMode);
+					}
 System.out.println("DIRECTION: "+direction+" >> added");
 				}
 				// si la case n'est pas la bonne : 
