@@ -47,6 +47,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * The code is a little messy(sorry for this).
  * I am working on these problems...
  */
+/**
+ * @author Furkan Arık
+ * @author Çağdaş Yaman
+ */
 @SuppressWarnings("unused")
 public class ArikYaman extends ArtificialIntelligence
 {	public String mode;

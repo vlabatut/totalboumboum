@@ -4,7 +4,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 
-
+/**
+ * @author Furkan Arık
+ * @author Çağdaş Yaman
+ */
 public class MyCostCalculator extends CostCalculator {
 
 	ArikYaman ay;
