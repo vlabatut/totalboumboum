@@ -103,7 +103,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     	// état du shrink
 //NOTE à compléter    	
     	timeBeforeShrink = Long.MAX_VALUE;
-    	// position du prochain bloc shrink�
+    	// position du prochain bloc shrinké
 //NOTE à compléter    	
     	nextShrinkPosition = new int[2];
     	nextShrinkPosition[0] = 0;

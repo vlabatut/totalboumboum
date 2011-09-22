@@ -86,7 +86,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param range
 	 * 		portée de l'explosion
 	 * @param penetrating
-	 * 		nature p�n�trante du feu
+	 * 		nature pénétrante du feu
 	 * @param color
 	 * 		couleur de la bombe
 	 * @param working

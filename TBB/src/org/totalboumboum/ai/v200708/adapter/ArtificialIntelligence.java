@@ -117,7 +117,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie le nom attribut� à cette IA
+	 * Renvoie le nom attribué à cette IA
 	 * (en général : le nom de la classe elle-même)
 	 * @return	le nom de l'IA
 	 */
@@ -222,7 +222,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * faux est renvoyée. Attention, le personnage dirigé par cette IA n'est 
 	 * jamais considéré.
 	 * @param index	numéro du personnage
-	 * @return	un bool�an représentant l'état du personnage 
+	 * @return	un booléen représentant l'état du personnage 
 	 */
 	protected boolean isPlayerAlive(int index)
 	{	if(index<playersStates.size())
@@ -261,7 +261,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie la position de la bombe relativement au personnage de l'IA,
 	 * dans le cas où une bombe occupe la même case. Une constante de 
 	 * la forme AI_DIR_XXXX est renvoyée. La constante AI_DIR_NONE est renvoyée
-	 * s'il n'y a pas de bombe dans la case, ou bien si la bombe et le joueur sont plac�s
+	 * s'il n'y a pas de bombe dans la case, ou bien si la bombe et le joueur sont placés
 	 * au même endroit.
 	 * @return	la position relative de la bombe
 	 */
@@ -317,7 +317,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * @param playersStates	liste des états (mort ou vif) des joueurs
 	 * @param ownPosition	position du personnage de l'IA
 	 * @param timeBeforeShrink	temps avant le début du shrink
-	 * @param nextShrinkPosition	prochain bloc qui va être shrink�
+	 * @param nextShrinkPosition	prochain bloc qui va être shrinké
 	 * @param bombPosition	position relative de la bombe
 	 */
 	public void setPercepts(int zoneMatrix[][],Vector<int[]> bombs,Vector<int[]> players,
@@ -340,7 +340,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Affiche la matrice représentant la zone de jeu passé à l'IA
-	 * (pour le d�boggage). 
+	 * (pour le déboggage). 
 	 */
 	public void printZoneMatrix()
 	{	System.out.println();
@@ -352,7 +352,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * lib�re les ressources occupées par l'IA
+	 * libère les ressources occupées par l'IA
 	 */
 	public void finish()
 	{	bombCounts = null;

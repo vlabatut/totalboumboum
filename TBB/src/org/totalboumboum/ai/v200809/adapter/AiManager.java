@@ -36,7 +36,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * 
  * Classe servant de traducteur entre le jeu et l'IA :
  * <br>	- elle traduit les données du jeu en percepts traitables par l'IA (données simplifi�es).
- * <br>	- elle traduit la r�ponse de l'IA (action) en un évènement compatible avec le jeu.
+ * <br>	- elle traduit la réponse de l'IA (action) en un évènement compatible avec le jeu.
  * 
  * @author Vincent Labatut
  *
@@ -45,8 +45,8 @@ import org.totalboumboum.game.round.RoundVariables;
 public abstract class AiManager extends AbstractAiManager<AiAction>
 {	/**
 	 * Construit un gestionnaire pour l'IA passée en paramètre.
-	 * Cette méthode doit être appelée par une classe h�ritant de celle-ci,
-	 * et plac�e dans le package contenant l'IA. 
+	 * Cette méthode doit être appelée par une classe héritant de celle-ci,
+	 * et placée dans le package contenant l'IA. 
 	 * 
 	 * @param ai	l'ia que cette classe doit gérer
 	 */

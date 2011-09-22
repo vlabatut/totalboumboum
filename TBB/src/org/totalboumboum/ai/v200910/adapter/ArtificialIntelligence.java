@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.configuration.Configuration;
 
 /**
- * classe dont chaque IA doit h�riter. La méthode processAction est la méthode 
+ * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
  * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 
  * à effectuer.
  * <p>

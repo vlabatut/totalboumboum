@@ -1137,7 +1137,7 @@ if(sprite instanceof AiSimBomb)
 
 	/**
 	 * crée une nouvelle bombe appartenant au personnage passé en paramètre.
-	 * La bombe est plac�e au centre de la case passée en paramètre.
+	 * La bombe est placée au centre de la case passée en paramètre.
 	 * Le compteur de bombe du personnage est incr�ment�.
 	 * Si jamais la case contient déjà un objet emp�chant de poser la bombe,
 	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.

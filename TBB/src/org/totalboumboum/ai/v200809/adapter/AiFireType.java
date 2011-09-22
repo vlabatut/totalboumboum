@@ -32,7 +32,7 @@ public enum AiFireType
 {
 	/** feu normal */
 	NORMAL,
-	/** feu p�n�trant (pas arrété par les les objets destructibles) */
+	/** feu pénétrant (pas arrété par les les objets destructibles) */
 	PENETRATION,
 	/** autre type de feu */
 	OTHER;	

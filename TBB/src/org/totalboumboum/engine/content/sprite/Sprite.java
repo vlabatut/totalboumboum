@@ -276,10 +276,10 @@ public abstract class Sprite implements Comparable<Sprite>
 		if(this.boundToSprite!=boundToSprite)
 		{	// on met à jour le trajectoryManager
 			trajectoryManager.setBoundToSprite(boundToSprite);
-			// s'il n'y a pas d'ancien boundToSprite : on d�connecte ce sprite de sa tile
+			// s'il n'y a pas d'ancien boundToSprite : on déconnecte ce sprite de sa tile
 			if(this.boundToSprite==null)
 				changeTile(null);
-			// s'il y a un ancien boundToSprite : on d�connecte ce sprite de ce boundToSprite 
+			// s'il y a un ancien boundToSprite : on déconnecte ce sprite de ce boundToSprite 
 			else
 				setToBeRemovedFromSprite(this.boundToSprite);
 			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile

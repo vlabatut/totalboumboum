@@ -32,11 +32,11 @@ public enum AiBombType
 {
 	/** bombe normale */
 	NORMAL,
-	/** bombe p�n�trante (la flamme n'est pas arrétée par les les objets destructibles) */
+	/** bombe pénétrante (la flamme n'est pas arrétée par les les objets destructibles) */
 	PENETRATION,
 	/** bombe télécommandée par le joueur (elle explose quand le joueur le lui demande) */
 	REMOTE,
-	/** bombe à la fois p�n�trante et télécommandée */
+	/** bombe à la fois pénétrante et télécommandée */
 	REMOTE_PENTRATION,
 	/** autre type de bombes */
 	OTHER;	

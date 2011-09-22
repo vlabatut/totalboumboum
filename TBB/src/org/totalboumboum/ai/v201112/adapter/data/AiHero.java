@@ -69,13 +69,13 @@ public interface AiHero extends AiSprite
 	public long getExplosionDuration();
 	
 	/**
-	 * renvoie le nombre de bombes que le personnage peut poser simultan�ment,
+	 * renvoie le nombre de bombes que le personnage peut poser simultanément,
 	 * à ce moment du jeu.
 	 * Ce nombre correspond à la somme du nombre de bombes actuellement déjà 
 	 * posées (getBombNumberCurrent) plus le nombre de bombes que le joueur peut encore poser. 
 	 * 
 	 * @return	
-	 * 		le nombre de bombes simultan�ment posables (en général)
+	 * 		le nombre de bombes simultanément posables (en général)
 	 */
 	public int getBombNumberMax();
 	
