@@ -5,6 +5,10 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.ais.dereligeckalan.v1.ZoneEnum;
 
 
+/**
+ * @author Merih Inal Dereli
+ * @author Gökhan Geçkalan
+ */
 public class Noeud {
 	
 

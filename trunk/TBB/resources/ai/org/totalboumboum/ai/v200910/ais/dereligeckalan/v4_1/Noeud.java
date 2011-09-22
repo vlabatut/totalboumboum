@@ -3,6 +3,10 @@ package org.totalboumboum.ai.v200910.ais.dereligeckalan.v4_1;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
+/**
+ * @author Merih Inal Dereli
+ * @author Gökhan Geçkalan
+ */
 public class Noeud {
 	
 

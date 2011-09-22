@@ -20,6 +20,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 
+/**
+ * @author Merih Inal Dereli
+ * @author Gökhan Geçkalan
+ */
 public class Zone {
 	private Collection <AiHero> rivals;
 	private AiHero caractere;
