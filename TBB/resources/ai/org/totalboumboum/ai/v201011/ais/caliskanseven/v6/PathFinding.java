@@ -19,7 +19,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * In this class,according to our path calculation algorithm,our AI tries to
  * find the most valuable path to walk.
  * 
- * @author Cihan Adil SEVEN & Mustafa CALISKAN
+ * @author Mustafa Çalışkan
+ * @author Cihan Seven
  * 
  */
 public class PathFinding {

@@ -9,7 +9,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 /**
  * This class has some static functions that can be helpful in other classes.
- * @author Cihan Adil SEVEN & Mustafa CALISKAN
+ * 
+ * @author Mustafa Çalışkan
+ * @author Cihan Seven
  *
  */
 public class Util {

@@ -7,6 +7,12 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
+/**
+ * 
+ * @author Mustafa Çalışkan
+ * @author Cihan Seven
+ *
+ */
 public class Util {
 	static List<AiTile> getBlastList(CaliskanSeven ai,boolean acs) throws StopRequestException{
 		ai.checkInterruption();
