@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 
- * @author Aslihan Hanci
+ * @author Aslıhan Hanci
  * @author Emine Canan Toprak
  *
  */

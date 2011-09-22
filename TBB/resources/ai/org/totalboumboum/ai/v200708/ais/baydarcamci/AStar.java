@@ -5,8 +5,8 @@ import java.util.*;
 /**
  * Implements the basic heuristic A* route finding algorithm
  * 
- * @author Ayca Selva Baydar
- * @author Ayfer Camci
+ * @author Ayça Selva Baydar
+ * @author Ayfer Camcı
  *
  */
 public class AStar implements PathFinder {

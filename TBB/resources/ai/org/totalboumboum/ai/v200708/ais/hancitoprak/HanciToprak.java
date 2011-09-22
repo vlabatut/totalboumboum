@@ -6,7 +6,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Aslihan Hanci
+ * @author Aslıhan Hanci
  * @author Emine Canan Toprak
  *
  */

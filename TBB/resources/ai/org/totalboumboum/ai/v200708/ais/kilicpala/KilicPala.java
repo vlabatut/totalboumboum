@@ -6,8 +6,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Ugur Caglar Kilic
- * @author Ibrahim Yagizhan Pala
+ * @author Uğur Çağlar Kılıç
+ * @author Ibrahim Yağızhan Pala
  *
  */
 public class KilicPala extends ArtificialIntelligence

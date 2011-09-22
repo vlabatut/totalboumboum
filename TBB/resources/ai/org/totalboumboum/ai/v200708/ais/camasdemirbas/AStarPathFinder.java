@@ -11,8 +11,8 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
  * Une implément de viseur de chemin 
  * qui utilise l'AStar l'algorithme basé heuristique déterminer un chemin. 
  * 
- * @author Gokhan Camas
- * @author Irem Demirbas
+ * @author Gökhan Çamaş
+ * @author İrem Demirbaş
  *
  */
 @SuppressWarnings("unchecked")

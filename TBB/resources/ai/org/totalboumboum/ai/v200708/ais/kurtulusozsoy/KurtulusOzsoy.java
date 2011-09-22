@@ -7,8 +7,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Mehmet Kurtulus
- * @author Yalcin Ozsoy
+ * @author Mehmet Kurtuluş
+ * @author Yalcin Özsoy
  *
  */
 public class KurtulusOzsoy extends ArtificialIntelligence{

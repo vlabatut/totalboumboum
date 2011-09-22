@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 /**
  * 
  * @author Can Eren
- * @author Mustafa Mert Gokce
+ * @author Mustafa Mert Gökçe
  *
  */
 public class ErenGokce extends ArtificialIntelligence {

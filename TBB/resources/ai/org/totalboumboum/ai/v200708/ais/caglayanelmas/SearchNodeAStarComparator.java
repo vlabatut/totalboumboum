@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
  * 
  * Compare deux noeuds de recherche en fonction de leur heuristique et de leur cout.
  * 
- * @author Ozan Caglayan
+ * @author Ozan Çağlayan
  *
  */
 public class SearchNodeAStarComparator implements Comparator<SearchNode>

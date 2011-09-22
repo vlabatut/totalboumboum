@@ -11,8 +11,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Serkan Sahin
- * @author Mehmet Yildirim
+ * @author Serkan Şahin
+ * @author Mehmet Yıldırım
  *
  */
 public class SahinYildirim extends ArtificialIntelligence {

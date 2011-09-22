@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * 
  * @author Can Eren
- * @author Mustafa Mert Gokce
+ * @author Mustafa Mert Gökçe
  *
  */
 public class MoveQueue {

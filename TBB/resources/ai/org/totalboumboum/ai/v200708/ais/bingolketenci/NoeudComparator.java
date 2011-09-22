@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Gizem Bingol
- * @author Utku Gorkem Kentenci
+ * @author Gizem Bingöl
+ * @author Utku Görkem Kentenci
  *
  */
 public class NoeudComparator implements Comparator<Noeud> {

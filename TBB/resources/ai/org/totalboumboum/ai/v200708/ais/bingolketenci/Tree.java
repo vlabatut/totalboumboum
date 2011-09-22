@@ -8,9 +8,8 @@ import java.util.Vector;
  * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  * 
- * @author Gizem Bingol
- * @author Utku Gorkem Kentenci
- *
+ * @author Gizem Bingöl
+ * @author Utku Görkem Kentenci
  */
 public class Tree {
 

@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Serkan Sahin
- * @author Mehmet Yildirim
+ * @author Serkan Şahin
+ * @author Mehmet Yıldırım
  *
  */
 public class aStarComparator implements Comparator<PointFind>

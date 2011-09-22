@@ -6,7 +6,7 @@ package org.totalboumboum.ai.v200708.ais.caglayanelmas;
  * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
  * 
- * @author Ozan Caglayan
+ * @author Ozan Çağlayan
  * @author Arif Can Elmas
  *
  */

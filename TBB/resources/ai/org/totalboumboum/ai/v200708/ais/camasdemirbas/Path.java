@@ -8,8 +8,8 @@ import java.util.List;
  * Un feuilleton d'étapes de l'emplacement commençant à l'emplacement de cible. 
  * Ceci inclut une étape pour l'emplacement initial. 
  * 
- * @author Gokhan Camas
- * @author Irem Demirbas
+ * @author Gökhan Çamaş
+ * @author İrem Demirbaş
  *
  */
 @SuppressWarnings("unchecked")

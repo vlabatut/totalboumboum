@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200708.ais.hancitoprak;
 
 /**
  * 
- * @author Aslihan Hanci
+ * @author Aslıhan Hanci
  * @author Emine Canan Toprak
  *
  */

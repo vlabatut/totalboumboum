@@ -7,7 +7,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Serkan Kecer
+ * @author Serkan Keçer
  * @author Onur Yaman
  *
  */

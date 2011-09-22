@@ -2,8 +2,8 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 /**
  * 
- * @author Gokhan Camas
- * @author Irem Demirbas
+ * @author Gökhan Çamaş
+ * @author İrem Demirbaş
  *
  */
 public interface AStarHeuristic {

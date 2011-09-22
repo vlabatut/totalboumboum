@@ -5,8 +5,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Deniz Goksay
- * @author Ipek Kose
+ * @author Deniz Göksay
+ * @author İpek Köse
  *
  */
 public class GoksayKose extends ArtificialIntelligence{

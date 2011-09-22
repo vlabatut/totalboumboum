@@ -6,7 +6,7 @@ package org.totalboumboum.ai.v200708.ais.keceryaman;
  *  - y/i axis: 15 (lignes)
  *  ++ THIS CLASS WORKS FINE!
  * 
- * @author Serkan Kecer
+ * @author Serkan Keçer
  * @author Onur Yaman
  *
  */

@@ -9,8 +9,8 @@ import java.util.Vector;
  * cette classe prendre un pointFind dans le constructor qui nous sert a trouver
  * les fils d'un point 
  * 
- * @author Serkan Sahin
- * @author Mehmet Yildirim
+ * @author Serkan Şahin
+ * @author Mehmet Yıldırım
  *
  */
 public class ParentChild {

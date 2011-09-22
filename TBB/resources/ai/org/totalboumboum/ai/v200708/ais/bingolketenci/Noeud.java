@@ -7,8 +7,8 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
  * chaque noeud possede aussi une valeur entiere 
  * et un cout.
  * 
- * @author Gizem Bingol
- * @author Utku Gorkem Kentenci
+ * @author Gizem Bingöl
+ * @author Utku Görkem Kentenci
  *
  */
 public class Noeud {
