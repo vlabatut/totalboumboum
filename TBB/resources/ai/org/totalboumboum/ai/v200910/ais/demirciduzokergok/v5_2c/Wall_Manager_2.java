@@ -23,8 +23,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * We use this class for breaking the walls near us to access the enemy when the enemies are not accessibles.
  *
+ * @author Mustafa Göktuğ Düzok
  * 
- * @author MGoktug
  *
  */
 

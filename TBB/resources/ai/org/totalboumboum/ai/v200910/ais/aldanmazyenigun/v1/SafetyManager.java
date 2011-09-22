@@ -53,8 +53,8 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * 
  * @version 1
  * 
- * @author Cansin Aldanmaz
- * @author Yalcin Yenigun
+ * @author Cansın Aldanmaz
+ * @author Yalçın Yenigün
  *
  */
 public class SafetyManager

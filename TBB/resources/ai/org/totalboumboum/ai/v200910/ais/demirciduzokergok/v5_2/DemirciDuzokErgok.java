@@ -25,6 +25,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  * >> Our bomberman can be considered as a bit defensive one because of the strategies
  * choosen while attacking and defending. Also it is giving big importance not to die
  * even in collecting the bonus and attack by tryig to choose the most secure cases.
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
  */
 
 

@@ -42,8 +42,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @version 5.c
  * 
- * @author Cansin Aldanmaz
- * @author Yalcin Yenigun
+ * @author Cansın Aldanmaz
+ * @author Yalçın Yenigün
  *
  */
 public class AvoidController

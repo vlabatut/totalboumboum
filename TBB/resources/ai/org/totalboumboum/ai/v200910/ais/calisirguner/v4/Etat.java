@@ -5,8 +5,8 @@ package org.totalboumboum.ai.v200910.ais.calisirguner.v4;
  * 
  * @version 4
  * 
- * @author Emre Calisir
- * @author Burak Ozgen Guner
+ * @author Emre Çalışır
+ * @author Burak Ozgen Güner
  *
  */
 public enum Etat {

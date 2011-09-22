@@ -17,9 +17,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
-
-
-
+/**
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
+ */
 public class Safety_Map {
 	private AiZone our_zone;
 	@SuppressWarnings("unused")

@@ -18,6 +18,13 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 
 
 
+/**
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
+ */
 
 public class Can_escape_Manager {
 

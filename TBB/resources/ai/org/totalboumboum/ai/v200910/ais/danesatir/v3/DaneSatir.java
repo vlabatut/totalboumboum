@@ -19,7 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 3
  * 
  * @author Levent Dane
- * @author Tolga Can Satir
+ * @author Tolga Can Şatır
  *
  */
 public class DaneSatir extends ArtificialIntelligence

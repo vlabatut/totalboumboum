@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * 
  * @version 1
  * 
- * @author Erdem Bektas
+ * @author Erdem Bektaş
  * @author Nedim Mazilyah
  *
  */

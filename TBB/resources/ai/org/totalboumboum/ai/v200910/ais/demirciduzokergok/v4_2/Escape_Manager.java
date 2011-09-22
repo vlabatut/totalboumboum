@@ -15,6 +15,13 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
+ */
 
 public class Escape_Manager {
 

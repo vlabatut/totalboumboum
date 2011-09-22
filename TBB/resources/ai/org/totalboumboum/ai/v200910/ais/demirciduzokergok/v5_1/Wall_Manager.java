@@ -24,6 +24,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 
+/**
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
+ */
 
 public class Wall_Manager{
 

@@ -4,7 +4,7 @@ package org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5;
  * 
  * @version 5
  * 
- * @author Erdem Bektas
+ * @author Erdem Bektaş
  * @author Nedim Mazilyah
  *
  */

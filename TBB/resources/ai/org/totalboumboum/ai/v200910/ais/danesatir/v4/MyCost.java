@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  * @version 4
  * 
  * @author Levent Dane
- * @author Tolga Can Satir
+ * @author Tolga Can Şatır
  *
  */
 public class MyCost extends CostCalculator {

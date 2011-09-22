@@ -24,8 +24,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * This class is for calculating if we can find a secured place if we pose a bomb.
- * @author MGoktug
- *
+ * 
+ * @author Mustafa Göktuğ Düzok
+ * 
  */
 
 

@@ -21,6 +21,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  * explosion of the bombs according to the valeu in our safaty map. The big and 
  * positive values express the more dangerous cases and the negative values express the
  * secure places. The value 0 expresses the enemies.
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
  */
 
 

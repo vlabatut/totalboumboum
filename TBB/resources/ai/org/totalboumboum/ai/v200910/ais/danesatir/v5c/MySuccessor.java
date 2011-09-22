@@ -15,7 +15,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Satir
+ * @author Tolga Can Şatır
  *
  */
 public class MySuccessor extends SuccessorCalculator{

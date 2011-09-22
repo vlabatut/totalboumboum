@@ -22,10 +22,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * This class is for collecting the bonus when the bonus is visible in the zone of game.
  * 
+ * @author Mustafa Göktuğ Düzok
  * 
- * 
- * @author MGoktug
- *
  */
 
 

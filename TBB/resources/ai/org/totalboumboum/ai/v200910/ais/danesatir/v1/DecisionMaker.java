@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @version 1
  * 
  * @author Levent Dane
- * @author Tolga Can Satir
+ * @author Tolga Can Şatır
  *
  */
 public class DecisionMaker {

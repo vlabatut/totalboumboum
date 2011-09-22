@@ -10,6 +10,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
+/**
+ * 
+ * @author Osman Demirci
+ * @author Mustafa Göktuğ Düzok
+ * @author Hatice Esra Ergök
+ * 
+ */
 public class OurZone {
 	// Les constructeurs:
 	@SuppressWarnings("unused")

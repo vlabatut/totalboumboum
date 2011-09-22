@@ -7,7 +7,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * @version 2
  * 
  * @author Levent Dane
- * @author Tolga Can Satir
+ * @author Tolga Can Şatır
  *
  */
 public class DecisionMaker {

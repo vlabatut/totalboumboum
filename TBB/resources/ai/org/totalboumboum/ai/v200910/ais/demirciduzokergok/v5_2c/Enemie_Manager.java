@@ -36,8 +36,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * breaking the which is chosen before and then make the movement to the enemy. The purpose of this
  * action is to make the enemy to make movement to us and then by posing bombs taking it to dangerous
  * cases.
- * @author MGoktug
- *
+ * 
+ * @author Mustafa Göktuğ Düzok
+ * 
  */
 
 
