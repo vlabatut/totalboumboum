@@ -1,7 +1,10 @@
 package org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v4_1;
 
 
-
+/**
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
+ */
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;

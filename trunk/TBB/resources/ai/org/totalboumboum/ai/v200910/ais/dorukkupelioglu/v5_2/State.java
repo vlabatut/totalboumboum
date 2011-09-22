@@ -1,5 +1,9 @@
 package org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2;
 
+/**
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
+ */
 public class State {
 	
 	public static int FIRE=17; 

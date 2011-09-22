@@ -12,8 +12,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
-
-
+/**
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
+ */
 public class DorukKupelioglu extends ArtificialIntelligence 
 {
 	private Matrix matrix;

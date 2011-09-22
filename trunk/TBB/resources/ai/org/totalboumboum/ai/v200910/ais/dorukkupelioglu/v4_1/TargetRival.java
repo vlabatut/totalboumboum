@@ -9,7 +9,10 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
-
+/**
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
+ */
 public class TargetRival {
 
 	private DorukKupelioglu dk;

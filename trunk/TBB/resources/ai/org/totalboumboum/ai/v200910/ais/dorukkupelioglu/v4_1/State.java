@@ -1,5 +1,9 @@
 package org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v4_1;
 
+/**
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
+ */
 public class State {
 	
 	public static int FIRE=17; //patlamış bomba etkisi	
