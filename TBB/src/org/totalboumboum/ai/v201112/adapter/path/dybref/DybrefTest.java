@@ -103,17 +103,6 @@ public final class DybrefTest
 		
 		// affichage du résultat
 		if(matrix!=null)
-		{	int height = zone.getHeight();
-			int width = zone.getWidth();
-			
-			// temps
-			long timeMatrix[][] = matrix.getTimeMatrix();
-			for(int i=0;i<height;i++)
-			{	for(int j=0;j<width;j++)
-				{	System.out.print(timeMatrix[i][j]+"\t");
-				}
-				System.out.println();
-			}
-		}
+			System.out.println("Result :\n"+matrix);
 	}
 }

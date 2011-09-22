@@ -223,7 +223,7 @@ public final class AiModelTest
 				color,walkingSpeed);
 		zone.addHero(hero,true);
 
-		// bomb
+		// bomb #1
 		burningDuration = 100;
 		stopHeroes = AiStopType.WEAK_STOP;
 		stopFires = AiStopType.WEAK_STOP;
@@ -240,6 +240,19 @@ public final class AiModelTest
 				color,working,0);
 		zone.addSprite(bomb);
 
+		// bomb #2
+		tile = zone.getTile(3,1);
+		posX = tile.getPosX();
+		posY = tile.getPosY();
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		bomb = new AiSimBomb(id++,tile,posX,posY,posZ,state,
+				burningDuration,currentSpeed,walkingSpeed,
+				countdownTrigger,remoteControlTrigger,explosionTrigger,
+				normalDuration,latencyDuration,failureProbability,firePrototype,
+				stopHeroes,stopFires,throughItems,bombRange,penetrating,
+				color,working,0);
+		zone.addSprite(bomb);
+		
 		// item 1
 		burningDuration = 100;
 		stopBombs = AiStopType.WEAK_STOP;

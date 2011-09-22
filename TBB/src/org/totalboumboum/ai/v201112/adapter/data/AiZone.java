@@ -1021,15 +1021,33 @@ if(target==null || source==null)
 	// MISC						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * cette fonction permet d'afficher la zone sous forme d'ASCII art,
+	 * Cette fonction permet d'afficher la zone sous forme d'ASCII art,
 	 * ce qui est beaucoup plus lisible que du texte classique.
 	 * <b>Attention :</b> pour avoir un affichage correct avec la console Eclipse, il faut
 	 * aller dans la configuration de démarrage du programme, aller
 	 * dans l'onglet "Commnon" puis dans la partie "Console Encoding" et
 	 * sélectionner UTF8 ou unicode.<br/>
+	 * Voici un exemple de zone obtenu:<
+	 * <pre>
+	 * ┌─┬─┬─┬─┬─┬─┬─┐
+	 * │█│█│█│█│█│█│█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│☺│ │□│ │ │█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │█│ │█│ │█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │ │ │ │▒│█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │█│ │█│ │█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│ │ │ │ │●│█│
+	 * ├─┼─┼─┼─┼─┼─┼─┤
+	 * │█│█│█│█│█│█│█│
+	 * └─┴─┴─┴─┴─┴─┴─┘
+	 * </pre>
 	 * 
 	 * @return
-	 * 		une représentation de la zone de type ASCII art
+	 * 		Une représentation de la zone de type ASCII art.
 	 */
 	@Override
 	public String toString()
