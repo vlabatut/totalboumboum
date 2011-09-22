@@ -5,6 +5,10 @@ package org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v4_2;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
+ */
 public class Target 
 {
 	private DorukKupelioglu dk;

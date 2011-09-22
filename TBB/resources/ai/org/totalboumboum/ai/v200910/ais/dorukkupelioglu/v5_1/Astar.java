@@ -16,8 +16,8 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
  * Cette class est pour trouver une chemin 
  * de la case actuelle du hero vers la case
  * correspondante
- * @author DorukKüpelioğlu
- *
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
  */
 public class Astar 
 {	

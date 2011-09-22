@@ -4,8 +4,8 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 /**
  * Cette class est pour creer un noeud qui contient les valeur
  * <br><br>G : Cost <br>H : Heuristic <br>F = G + H 
- * @author DorukKüpelioğlu
- *
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
  */
 public class Node {
 

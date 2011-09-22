@@ -16,7 +16,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * listeden çıkarmak ve sonrasında
  * kalan safelerden bi tanesine 
  * gidebiliyor muyuz bunu incelemek
- * @author user
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
  *
  */
 public class Bomb {

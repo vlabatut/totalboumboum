@@ -20,6 +20,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * işlemleri birçok class a ayırın,
  * böylelikle programınız değiştirmek için ve
  * débugger, modifier, relire, comprendre, etmek için kolay olacaktır.
+ * @author Burcu Küpelioğlu
+ * @author Oktay Doruk
  */
 public class DorukKupelioglu extends ArtificialIntelligence 
 {
