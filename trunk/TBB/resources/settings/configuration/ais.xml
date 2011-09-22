@@ -3,7 +3,7 @@
 	<ups value="50" />
 	<autoAdvance value="true" delay="3000" />
 	<hideAllAis value="false" />
-	<bombUselessAis value="5000" />
+	<bombUselessAis value="0" />
 	<displayExceptions value="false" />
 	<logExceptions value="true" />
 </ais>

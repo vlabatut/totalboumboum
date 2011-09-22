@@ -340,7 +340,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							lastAction = 0;
 						else
 							lastAction = lastAction + milliPeriod;
-						if(lastAction>=Configuration.getAisConfiguration().getBombUselessAis())
+						long bombUselessAis = Configuration.getAisConfiguration().getBombUselessAis();
+						if(bombUselessAis>0 && lastAction>=bombUselessAis)
 						{	int range = 0;
 							int duration = 3000;
 							Tile tile = player.getSprite().getTile();
