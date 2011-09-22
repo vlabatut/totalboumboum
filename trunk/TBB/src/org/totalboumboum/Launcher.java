@@ -1150,7 +1150,7 @@ public class Launcher
 	 * 			- virer les versions intermédiaires des IA
 	 * 		- options :
 	 * 			- simulation des matches AI-only
-	 * 		- pr�règler la partie rapide sur : 
+	 * 		- prérégler la partie rapide sur : 
 	 * 			- les meilleures IA 
 	 * 			- des niveaux compatibles
 	 * 			- les règles classiques
@@ -1467,12 +1467,12 @@ public class Launcher
 	 * 		- server checks if the id's
 	 * 		- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
 	 *  	- if accepted, the server then sends the necessary updates to the client
-	 *  - ça serait bien d'avoir un icone spécial (variante de remote) pr indiquer dans les menus qu'un joueur est d�connect�
+	 *  - ça serait bien d'avoir un icone spécial (variante de remote) pr indiquer dans les menus qu'un joueur est déconnecté
 	 *  - lié à la reconnection : possibilité de définir des open slots (pr server)
 	 *    et par la suite, des joueurs désirant prendre la partie en cours peuvent le faire
-	 *    (similaire à un joueur d�connect� qui aurait son slot r�serv� et pourrait s'y reconnecter)
-	 *  - gestion de la d�/re-connection :
-	 * 		- la connection individuelle est conserv�e côté serveur,
+	 *    (similaire à un joueur déconnecté qui aurait son slot réservé et pourrait s'y reconnecter)
+	 *  - gestion de la dé/re-connection :
+	 * 		- la connection individuelle est conservée côté serveur,
 	 * 	  	  avec un état DISCONNECTED ou autre
 	 * 		- même les threads sont gardés, mais du cp le code doit être modifié
 	 * 	  	  pour ne pas tenter d'écrire/lire si la connection est morte
@@ -1486,7 +1486,7 @@ public class Launcher
 	 *  	- définir la fonction successeur version temporelle
 	 *  - à tester :
 	 *  	- vitesse renvoyée par l'API (pour déplacement joueurs)
-	 *  	- d�compte des items
+	 *  	- décompte des items
 	 *  	>> en fait : toutes les modifs depuis la version précédente
 	 *  
 	 */
@@ -1497,13 +1497,13 @@ public class Launcher
 	 *  - structure abstraite, on peut accéder aux cases ou aux pixels
 	 *  - le chemin est entier, on passe le perso en paramètre et on nous dit la case suivante (null si pas sur le chemin)
 	 *    voire la direction à prendre pour suivre le chemin
-	 *  - à voir comment ça peut être représenté derri�re...
+	 *  - à voir comment ça peut être représenté derrière...
 	 */
 	
-	// TODO clignotements de sprites : mettre de la transparence dans les version colori�es
+	// TODO clignotements de sprites : mettre de la transparence dans les version coloriées
 	// TODO utiliser le calcul d'occupation CPU pour limiter les IA trop gourmandes
 	// 		utiliser la limite sur yield déjà définie (cf classe config d'ia)
-	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de r�f pour le temps en cours de jeu
+	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
 	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
 	// TODO finir IA
@@ -1518,11 +1518,11 @@ public class Launcher
 	// TODO quand on tente de poser une bombe, le sprite est créé et on tente de voir s'il peut apparaître
 	// 	    question : est-il d'entrée inséré dans le Level ? si oui, y en a surement un paillat au bout d'un moment;
 	//		vu qu'en cas d'apparition impossible la bombe n'est pas retirée du Level (supposition)
-	// TODO il est possib que les ombres de Shirobon SBM2 soient à d�caller un peu vers le bas, à voir comment ça rend dans le jeu
+	// TODO il est possib que les ombres de Shirobon SBM2 soient à décaler un peu vers le bas, à voir comment ça rend dans le jeu
 	// TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
 	// TODO voir les items initiaux de chaque zone + la vitesse initiale
 	// TODO dans les fichiers xml, gérer les images de façon unique, ce qui permettrait de définir des transformations (flips, rotations)
-	//	>> définir des borders comme dans SBM sans avoir à tout générer à la main (pr blocs sym�triques)
+	//	>> définir des borders comme dans SBM sans avoir à tout générer à la main (pr blocs symétriques)
 	//	>> temps de chargement plus rapide (en supposant que la transfo est plus rapide que le re-chargement)
 	// TODO dans belts, y a un bidule qui passe sur les rails sur les cétés...
 	// TODO est-il vraiment nécessaire de gérer les floors en tant que sprites à part entière, quand on peut y mettre plusieurs blocs?

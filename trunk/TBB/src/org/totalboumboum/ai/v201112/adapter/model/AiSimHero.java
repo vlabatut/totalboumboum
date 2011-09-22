@@ -126,7 +126,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	/** exemple de bombe que le personnage peut poser */
 	private AiBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultan�ment (en général) */
+	/** nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumberMax;
 	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
@@ -164,7 +164,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	/**
-	 * met à jour le nombre de bombes posables simultan�ment par ce joueur
+	 * met à jour le nombre de bombes posables simultanément par ce joueur
 	 * 
 	 * @param delta
 	 * 		la modification à apporter au nombre de bombes

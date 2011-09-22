@@ -62,7 +62,7 @@ public abstract class AbstractAiManager<V>
 {	/**
      * contruit un nouveau manager pour l'IA passé en paramètre.
      * Ce constructeur est destiné à être appel� par le constructeur situé dans 
-     * la classe h�ritant de celle-ci et située dans le dossier de l'IA
+     * la classe héritant de celle-ci et située dans le dossier de l'IA
      *    
      * @param 
      * 		ai

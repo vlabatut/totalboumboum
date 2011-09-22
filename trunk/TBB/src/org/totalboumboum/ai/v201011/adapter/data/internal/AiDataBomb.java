@@ -209,7 +209,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	private int range;
 	/** liste des cases qui vont subir l'explosion de la bombe */
 	private final List<AiTile> blast = new ArrayList<AiTile>();
-	/** type du feu génér� : normal ou p�n�trant */
+	/** type du feu génér� : normal ou pénétrant */
 	private boolean penetrating;
 	
 	@Override

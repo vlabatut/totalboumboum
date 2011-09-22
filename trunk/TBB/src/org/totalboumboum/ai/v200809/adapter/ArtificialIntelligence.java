@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v200809.adapter;
 import java.util.concurrent.Callable;
 
 /**
- * classe dont chaque IA doit h�riter. La méthode processAction est la méthode 
+ * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
  * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 
  * à effectuer.
  * <p>

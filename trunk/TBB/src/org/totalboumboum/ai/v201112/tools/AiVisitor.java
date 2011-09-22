@@ -57,7 +57,7 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
  * 			- en cas d'appel à super() : checkInterruption() est appel� en deuxième (et non pas en premier)
  * 			- dans une classe implémentant l'interface ArtificialIntelligence
  * 		- dans une méthode dont on ne Contrôle pas l'interface (du type toString, equals, compare, etc.)
- * 	- l'appel ne doit pas être plac� dans un try-catch qui annulerait son effet
+ * 	- l'appel ne doit pas être placé dans un try-catch qui annulerait son effet
  * 
  * @author Vincent Labatut
  */

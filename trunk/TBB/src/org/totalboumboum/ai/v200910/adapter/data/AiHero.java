@@ -70,7 +70,7 @@ public class AiHero extends AiSprite<Hero>
 	/////////////////////////////////////////////////////////////////
 	/** portée des bombes du personnage */
 	private int bombRange;
-	/** nombre de bombes que le personnage peut poser simultan�ment */
+	/** nombre de bombes que le personnage peut poser simultanément */
 	private int bombNumber;
 	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombCount;
@@ -85,10 +85,10 @@ public class AiHero extends AiSprite<Hero>
 	}
 	
 	/**
-	 * renvoie le nombre de bombes que le personnage peut poser simultan�ment,
+	 * renvoie le nombre de bombes que le personnage peut poser simultanément,
 	 * à ce moment du jeu.
 	 * 
-	 * @return	le nombre de bombes simultan�ment posables
+	 * @return	le nombre de bombes simultanément posables
 	 */
 	public int getBombNumber()
 	{	return bombNumber;

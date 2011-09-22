@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -126,11 +126,11 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tomb�e en panne) */
+	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
 	private boolean working;
 	
 	/**
-	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tomb�e en panne)
+	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
 	 * 
 	 * @return	vrai si cette bombe marche, faux si elle est en panne
 	 */
@@ -161,7 +161,7 @@ public class AiBomb extends AiSprite<Bomb>
 	/**
 	 * renvoie la couleur de cette bombe.
 	 * Cette couleur est null si aucun joueur n'a posé la bombe 
-	 * (pour certains niveaux sp�ciaux où les blocs peuvent générer des bombes)  
+	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
 	 * 
 	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */
