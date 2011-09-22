@@ -23,8 +23,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Ismail Gokhan Altay
- * @author Ertugrul Basaranoglu
+ * @author Ismail Gökhan Altay
+ * @author Ertuğrul Basaranoğlu
  *
  */
 public class AltayBasaranoglu extends ArtificialIntelligence {

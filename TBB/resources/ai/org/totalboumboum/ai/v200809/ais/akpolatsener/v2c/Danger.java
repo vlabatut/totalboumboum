@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 /**
  * 
  * @author Cem Akpolat
- * @author Emre Sener
+ * @author Emre Şener
  *
  */
 public class Danger {
