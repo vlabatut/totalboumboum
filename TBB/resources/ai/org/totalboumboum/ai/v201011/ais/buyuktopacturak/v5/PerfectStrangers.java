@@ -16,7 +16,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Les méthodes qui se trouvent dans ces classes servent aux autres classes dans le cas de besoins. 
  * Comme ces méthodes sont appelé par les autre classes mais elle n'appartient pas aux eux, 
  * on l'appelle comme l'tranger alors le nom de cette classe est PerfectSrangers. 
- * @author Onur B y ktopa  & Yigit Turak
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
  */
 public class PerfectStrangers {
 

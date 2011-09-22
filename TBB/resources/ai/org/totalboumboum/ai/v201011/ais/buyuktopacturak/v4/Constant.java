@@ -1,5 +1,9 @@
 package org.totalboumboum.ai.v201011.ais.buyuktopacturak.v4;
 
+/**
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
+ */
 public class Constant {
 	public static int FIRE=-100;
 	public static int BOMB=-50;

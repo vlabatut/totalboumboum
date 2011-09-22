@@ -27,9 +27,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * n'hésitez pas à décomposer le traitement en plusieurs classes,
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
- * 
- * @author Onur B y ktopa  & Yigit Turak
- *
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
 {	

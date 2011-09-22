@@ -2,7 +2,8 @@ package org.totalboumboum.ai.v201011.ais.buyuktopacturak.v5;
 
 /**
  * Cette class contient les constants des sprites.
- * @author Onur B y ktopa  & Yigit Turak
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
  */
 public class Constant {
 	public static int FIRE=-100;

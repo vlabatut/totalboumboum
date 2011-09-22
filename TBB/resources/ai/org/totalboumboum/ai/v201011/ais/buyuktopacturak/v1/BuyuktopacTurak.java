@@ -5,6 +5,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
+ */
 public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */

@@ -12,7 +12,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Cette classe calcule la matrice de la mode attaque.
- * @author Onur B y ktopa  & Yigit Turak
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
  */
 public class AttackMatrix{
 	private BuyuktopacTurak bt;

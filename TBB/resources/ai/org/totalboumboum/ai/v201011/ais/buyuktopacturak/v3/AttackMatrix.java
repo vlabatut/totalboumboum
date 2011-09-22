@@ -13,6 +13,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
+ */
 public class AttackMatrix{
 	private BuyuktopacTurak bt;
 	private AiZone zone;		

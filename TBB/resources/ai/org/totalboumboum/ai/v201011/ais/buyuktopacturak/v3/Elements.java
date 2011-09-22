@@ -1,3 +1,4 @@
+
 package org.totalboumboum.ai.v201011.ais.buyuktopacturak.v3;
 
 import java.util.ArrayList;
@@ -13,6 +14,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
+ */
 public class Elements {
 	private BuyuktopacTurak bt;
 	private AiZone zone;		
