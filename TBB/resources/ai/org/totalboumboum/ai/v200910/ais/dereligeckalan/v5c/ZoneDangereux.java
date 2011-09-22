@@ -18,11 +18,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 
-
-
-
-
-
+/**
+ * @author Merih Inal Dereli
+ * @author Gökhan Geçkalan
+ */
 public class ZoneDangereux {
 	
 	private Collection <AiHero> rivals;

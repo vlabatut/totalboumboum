@@ -15,6 +15,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 
+/**
+ * @author Merih Inal Dereli
+ * @author Gökhan Geçkalan
+ */
 public class PathFinder {
 
 	private LinkedList<Noeud> path;
