@@ -4,6 +4,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 
+/**
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
+ */
 public class AStarCost extends CostCalculator{
 
 	private double[][] matrix;

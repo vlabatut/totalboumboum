@@ -12,7 +12,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Cette classe calcule la matrice de la mode collecte.
- * @author Onur B y ktopa  & Yigit Turak
+ * @author Onur Büyüktopaç
+ * @author Yiğit Turak
  */
 public class CollectionMatrix{	
 	private BuyuktopacTurak bt;
