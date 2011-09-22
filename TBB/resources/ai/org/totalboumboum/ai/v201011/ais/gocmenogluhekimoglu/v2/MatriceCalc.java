@@ -12,7 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 
-
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 @SuppressWarnings("unused")
 public class MatriceCalc {
 	protected GocmenogluHekimoglu monIa;

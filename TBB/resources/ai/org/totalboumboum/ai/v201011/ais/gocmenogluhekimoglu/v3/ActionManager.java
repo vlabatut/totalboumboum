@@ -9,6 +9,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  *	Cette classe définit les fonctions nécessaires pour les mouvements du joueur.
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
  */
 public class ActionManager {
 	

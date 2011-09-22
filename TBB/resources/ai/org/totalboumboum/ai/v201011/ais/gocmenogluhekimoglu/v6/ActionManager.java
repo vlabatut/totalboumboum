@@ -13,7 +13,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
 /**
  * This class has functions related to action finding
- * @author  Can G  meno lu & Irfan Hekimo lu
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
  *
  */
 public class ActionManager {

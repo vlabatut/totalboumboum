@@ -10,6 +10,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.engine.content.manager.explosion.FullExplosionManager;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 @SuppressWarnings("unused")
 public class MatriceBlast extends MatriceCalc {
 

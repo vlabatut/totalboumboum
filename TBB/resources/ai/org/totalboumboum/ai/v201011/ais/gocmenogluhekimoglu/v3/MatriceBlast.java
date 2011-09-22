@@ -10,8 +10,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
  * Cette classe peut être utilisée pour calculer les effets des bombes sur la matrice nous calculons
- * @author Can G  meno lu
- *
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
  */
 public class MatriceBlast extends MatriceCalc {
 

@@ -8,6 +8,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class MatriceHero extends MatriceCalc {
 
 	public MatriceHero(GocmenogluHekimoglu monIa) throws StopRequestException {

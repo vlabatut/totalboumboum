@@ -5,6 +5,10 @@ import java.text.DecimalFormat;
 
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class MatriceCalc {
 	protected GocmenogluHekimoglu monIa;
 	protected int zoneh,zonew;

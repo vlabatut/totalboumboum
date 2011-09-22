@@ -6,6 +6,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
+/**
+ * @author Can Göçmenoğlu
+ * @author Irfan Hekimoğlu
+ */
 public class GocmenogluHekimoglu extends ArtificialIntelligence
 {	
 	AiPath oldpath;
