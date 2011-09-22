@@ -12,6 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Elif Göncü
+ * @author Yağız Onat
+ */
 @SuppressWarnings("unused")
 public class GoncuOnat extends ArtificialIntelligence
 {	

@@ -15,6 +15,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 
+/**
+ * @author Elif Göncü
+ * @author Yağız Onat
+ */
 public class ShortestPath 
 {
 

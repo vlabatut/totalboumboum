@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201011.ais.goncuonat.v5;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -22,6 +21,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 
+/**
+ * @author Elif Göncü
+ * @author Yağız Onat
+ */
 public class ModeCollecte 
 {
 
