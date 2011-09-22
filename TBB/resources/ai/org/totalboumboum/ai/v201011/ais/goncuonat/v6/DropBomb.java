@@ -11,6 +11,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
+/**
+ * @author Elif Göncü
+ * @author Yağız Onat
+ */
 public class DropBomb 
 {
 	public AiZone zone;
