@@ -8,8 +8,8 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 
 /**
  * 
- * @author Dogus Burcu Demirag
- * @author Zeynep Sagar
+ * @author Doğus Burcu Demirağ
+ * @author Zeynep Şagar
  *
  */
 public class TimeMatrice {

@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.TirtilTomruk;
 
 /**
 *
-* @author Abdullah Tirtil
+* @author Abdullah Tırtıl
 * @author Mert Tomruk
 *
 */

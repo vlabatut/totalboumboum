@@ -19,9 +19,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Anil Caliskan
- * @author Fahri Cap
- * @author Sedat Doganer
+ * @author Anıl Çalışkan
+ * @author Fahrı Cap
+ * @author Sedat Doğaner
  *
  */
 public class CaliskanCapDoganer extends ArtificialIntelligence

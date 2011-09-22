@@ -11,8 +11,8 @@ import org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2.ZoneEnum;
  * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  * 
- * @author Ali Batuhan Dayioglugil
- * @author Gokhan Geckalan
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
  *
  */
 public class Tree {

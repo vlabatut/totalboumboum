@@ -19,8 +19,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Doga Erisik
- * @author Abdurrahman Pektas
+ * @author Doğa Erişik
+ * @author Abdurrahman Pektaş
  *
  */
 public class ErisikPektas extends ArtificialIntelligence {

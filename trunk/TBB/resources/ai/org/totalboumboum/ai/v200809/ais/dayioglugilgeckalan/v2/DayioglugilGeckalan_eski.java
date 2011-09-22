@@ -1,4 +1,9 @@
 package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2;
+/**
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
+ */
+
 /*
 package tournament200809.dayioglugilgeckalan;
 

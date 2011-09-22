@@ -5,8 +5,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Ozan Gunalp
- * @author Sinan Yurtsever
+ * @author Ozan Günalp
+ * @author Sinan Yürtsever
  *
  */
 public class CostTile  {

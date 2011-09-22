@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Ozan Gunalp
- * @author Sinan Yurtsever
+ * @author Ozan Günalp
+ * @author Sinan Yürtsever
  *
  */
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {

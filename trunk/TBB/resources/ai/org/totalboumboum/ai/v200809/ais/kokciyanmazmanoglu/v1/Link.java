@@ -4,8 +4,8 @@ import org.totalboumboum.ai.v200809.adapter.AiAction;
 
 /**
 *
-* @author Nadin Kokciyan
-* @author Hikmet Mazmanoglu
+* @author Nadin Kökciyan
+* @author Hikmet Mazmanoğlu
 *
 */
 public class Link {

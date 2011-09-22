@@ -5,7 +5,7 @@ import java.util.Comparator;
 /**
 *
 * @author Ekin Medeni
-* @author Pinar Uluer
+* @author Pınar Uluer
 *
 */
 public class SearchNodeComp implements Comparator<SearchNode> {

@@ -14,8 +14,8 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * cest un class Astar que lon a trouve par un site dintenet 
  * de forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929
  * 
- * @author Doga Erisik
- * @author Abdurrahman Pektas
+ * @author Doğa Erişik
+ * @author Abdurrahman Pektaş
  *
  */
 public final class Astar {

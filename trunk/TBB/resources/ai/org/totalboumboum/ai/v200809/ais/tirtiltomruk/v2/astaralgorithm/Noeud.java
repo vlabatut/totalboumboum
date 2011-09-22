@@ -10,7 +10,7 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.zone.ZoneEnum;
  *chaque noeud possede aussi une valeur entiere 
  *et un cout.
  *
- * @author Abdullah Tirtil
+ * @author Abdullah Tırtıl
  * @author Mert Tomruk
  *
  */

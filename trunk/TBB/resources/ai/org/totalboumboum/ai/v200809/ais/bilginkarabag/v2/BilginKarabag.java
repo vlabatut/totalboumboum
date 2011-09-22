@@ -20,7 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Ali Bilgin
- * @author Cagdas Emrah Karabag
+ * @author Cağdas Emrah Karabağ
  *
  */
 public class BilginKarabag extends ArtificialIntelligence {

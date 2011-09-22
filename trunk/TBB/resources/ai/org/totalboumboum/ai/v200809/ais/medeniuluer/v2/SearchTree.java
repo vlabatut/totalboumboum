@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.ZoneEnum;
  * orientes
  *
  * @author Ekin Medeni
- * @author Pinar Uluer
+ * @author Pınar Uluer
  *
  */
 public class SearchTree {

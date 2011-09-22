@@ -19,7 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
 *
-* @author Abdullah Tirtil
+* @author Abdullah Tırtıl
 * @author Mert Tomruk
 *
 */

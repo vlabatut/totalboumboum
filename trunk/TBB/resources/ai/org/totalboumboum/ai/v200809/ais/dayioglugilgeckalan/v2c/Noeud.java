@@ -8,8 +8,8 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  *chaque noeud possede aussi une valeur entiere 
  *et un cout.
  * 
- * @author Ali Batuhan Dayioglugil
- * @author Gokhan Geckalan
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
  *
  */
 public class Noeud {

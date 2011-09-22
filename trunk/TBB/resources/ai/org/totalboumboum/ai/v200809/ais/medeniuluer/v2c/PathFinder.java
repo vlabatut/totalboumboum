@@ -11,7 +11,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
 *
 * @author Ekin Medeni
-* @author Pinar Uluer
+* @author Pınar Uluer
 *
 */
 public class PathFinder {

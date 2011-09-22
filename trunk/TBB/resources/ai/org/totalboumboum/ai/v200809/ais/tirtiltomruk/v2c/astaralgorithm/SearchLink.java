@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.TirtilTomruk;
  * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
  *
- * @author Abdullah Tirtil
+ * @author Abdullah Tırtıl
  * @author Mert Tomruk
  *
  */

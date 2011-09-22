@@ -6,8 +6,8 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Dogus Burcu Demirag
- * @author Zeynep Sagar
+ * @author Doğus Burcu Demirağ
+ * @author Zeynep Şagar
  *
  */
 public class Node {

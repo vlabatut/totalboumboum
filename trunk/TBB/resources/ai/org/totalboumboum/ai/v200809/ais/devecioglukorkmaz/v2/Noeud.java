@@ -4,8 +4,8 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 
 /**
  * 
- * @author Eser Devecioglu
- * @author Alev Korkmaz
+ * @author Eser Devecioğlu
+ * @author lev Korkmaz
  *
  */
 public class Noeud {

@@ -9,8 +9,8 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Ali Batuhan Dayioglugil
- * @author Gokhan Geckalan
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
  *
  */
 public class PathFinder {

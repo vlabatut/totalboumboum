@@ -5,12 +5,12 @@ import org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2.ZoneEnum;
 
 /**
  * Représente un noeud dans un arbre de recherche.
- *Chaque noeud est defini avec les coordonnees x et y
- *chaque noeud possede aussi une valeur entiere 
- *et un cout.
+ * Chaque noeud est defini avec les coordonnees x et y
+ * chaque noeud possede aussi une valeur entiere 
+ * et un cout.
  * 
- * @author Ali Batuhan Dayioglugil
- * @author Gokhan Geckalan
+ * @author Ali Batuhan Dayioğlugil
+ * @author Gökhan Geçkalan
  *
  */
 public class Noeud {
