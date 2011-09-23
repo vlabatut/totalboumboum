@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * types d'items reconnus par l'IA.
+ * types d'items reconnus par l'agent.
  * 	
  * @author Vincent Labatut
  *

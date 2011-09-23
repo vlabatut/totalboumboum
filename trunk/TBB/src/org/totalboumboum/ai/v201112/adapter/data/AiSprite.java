@@ -23,7 +23,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
 
 /**
  * cette interface permet de représenter les sprites manipul�s par le jeu,
- * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
+ * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'agent.
  * 
  * @author Vincent Labatut
  *
@@ -34,8 +34,9 @@ public interface AiSprite
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie le numéro unique du sprite dans le jeu.<br/>
-	 * <b>Attention :</b> cette méthode n'est pas destinée à la programmation des IA 
+	 * Renvoie le numéro unique du sprite dans le jeu.<br/>
+	 * <b>Attention :</b> cette méthode n'est pas destinée 
+	 * à la programmation des agents.
 	 * 
 	 * @return	
 	 * 		l'id du sprite

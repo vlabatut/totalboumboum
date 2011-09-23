@@ -58,13 +58,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
+ * Il s'agit de la classe principale des percepts auxquels l'agent a accès.</br>
  * 
- * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
- * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
+ * A chaque fois que l'agent est sollicité par le jeu pour connaître l'action
+ * qu'elle veut effectuer, cette représentation est mise à jour. L'agent ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
  * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
- * les autres objets. Si l'IA a besoin d'une trace des états précédents du jeu, son
+ * les autres objets. Si l'agent a besoin d'une trace des états précédents du jeu, son
  * concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
@@ -95,7 +95,7 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
-	 * usage interne, méthode non-destinée à la création des IA.
+	 * usage interne, méthode non-destinée à la création des agent.
 	 * 
 	 * @param elapsedTime
 	 * 		le temps écoulé
@@ -202,7 +202,7 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** joueur contrôlé par l'IA */
+	/** joueur contrôlé par l'agent */
 	private AbstractPlayer player;
 	
 	/////////////////////////////////////////////////////////////////
@@ -715,7 +715,7 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrôlé par l'IA */
+	/** le personnage contrôlé par l'agent */
 	private AiDataHero ownHero;
 
 	@Override
@@ -724,7 +724,7 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * initialise le personnage qui est contrôlé par l'IA
+	 * initialise le personnage qui est contrôlé par l'agent
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 
@@ -758,7 +758,7 @@ public final class AiDataZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
+	 * termine proprement cette représentation (une fois que l'agent n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

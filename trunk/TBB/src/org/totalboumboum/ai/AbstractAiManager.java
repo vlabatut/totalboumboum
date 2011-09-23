@@ -47,22 +47,22 @@ import org.totalboumboum.game.round.RoundVariables;
 
 /**
  * 
- * Classe servant d'interface entre le jeu et une IA.
- * Elle doit être surclass�e de manière à obtenir un adaptateur pour une famille
- * d'IA donnée. Puis, chaque IA doit elle même surclasser la classe résultante
- * (tout ça dans le but de faciliter le chargement de la classe implémentant l'IA).
+ * Classe servant d'interface entre le jeu et un agent.
+ * Elle doit être surclassée de manière à obtenir un adaptateur pour une famille
+ * d'agent donnée. Puis, chaque agent doit lui-même surclasser la classe résultante
+ * (tout ça dans le but de faciliter le chargement de la classe implémentant l'agent).
  * 
  * @author Vincent Labatut
  *
  * @param <V>	
- * 		le type de donnée renvoyée par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
+ * 		le type de donnée renvoyée par l'agent (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
  */
 
 public abstract class AbstractAiManager<V>
 {	/**
-     * contruit un nouveau manager pour l'IA passé en paramètre.
-     * Ce constructeur est destiné à être appel� par le constructeur situé dans 
-     * la classe héritant de celle-ci et située dans le dossier de l'IA
+     * contruit un nouveau manager pour l'agent passé en paramètre.
+     * Ce constructeur est destiné à être appelé par le constructeur situé dans 
+     * la classe héritant de celle-ci et située dans le dossier de l'agent
      *    
      * @param 
      * 		ai
@@ -81,20 +81,20 @@ public abstract class AbstractAiManager<V>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** objet implementant le comportement de l'IA */
+    /** objet implementant le comportement de l'agent */
 	private Callable<V> ai;
-    /** gestionnaire de threads pour exécuter l'IA */
+    /** gestionnaire de threads pour exécuter l'agent */
     private ExecutorService executorAi = null;
-    /** future utilisé pour récupérer le résultat de l'IA */
+    /** future utilisé pour récupérer le résultat de l'agent */
     private Future<V> futureAi;
-    /** indique si cette IA était en pause */
+    /** indique si cet agent était en pause */
     private boolean paused = false;
     
     /**
-     * renvoie l'IA gérée par cette classe.
+     * renvoie l'agent géré par cette classe.
      * 
      * @return	
-     * 		l'IA gérée par cette classe sous la forme d'un Callable
+     * 		l'agent géré par cette classe sous la forme d'un Callable
      */
     public final Callable<V> getAi()
     {	return ai;    	
@@ -112,7 +112,7 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * Utilise la classe d'IA associée à ce personnage pour mettre à jour les variables
+     * Utilise la classe d'agent associé à ce personnage pour mettre à jour les variables
      * qui permettront au moteur du jeu de déplacer le personnage.
      * 
      * @param aisPause
@@ -123,7 +123,7 @@ public abstract class AbstractAiManager<V>
     public final boolean update(boolean aisPause)
     {	boolean result = false;
     	
-    	// si l'IA était en pause
+    	// si l'agent était en pause
     	if(paused)
     	{	// sortie de pause ?
     		if(!aisPause)
@@ -158,7 +158,7 @@ public abstract class AbstractAiManager<V>
     		// pas de passage en pause : cet appel est-il fini ?
     		else if(futureAi.isDone())
     		{	try
-    			{	// on récupére les réactions de l'IA
+    			{	// on récupére les réactions de l'agent
     				V value = futureAi.get();
     				// on les convertit et les envoie au moteur
     				List<ControlEvent> events = convertReaction(value);
@@ -168,7 +168,7 @@ public abstract class AbstractAiManager<V>
     					player.getSprite().putControlEvent(event);
     				}
     				result = !events.isEmpty();
-    				// on met à jour les sorties de l'IA
+    				// on met à jour les sorties de l'agent
     				updateOutput();
 				}
     			catch (InterruptedException e)
@@ -202,8 +202,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * réalise l'appel à la classe qui implémente l'IA,
-     * afin que celle ci calcule la prochaine action à effectuer.
+     * réalise l'appel à la classe qui implémente l'agent,
+     * afin que celui-ci calcule la prochaine action à effectuer.
      * 
      * @param firstTime
      * 		la valeur vrai indique qu'il s'agit du premier appel
@@ -216,7 +216,7 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * terminer ce gestionnaire, et en particulier le thread exécutant l'IA.
+     * terminer ce gestionnaire, et en particulier le thread exécutant l'agent.
      * Ou plut�t tente de le terminer, car le résultat ne peut être forc�.
      */
     public final void finish()
@@ -236,8 +236,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * termine cette IA, et en particulier le processus qui l'exécute.
-     * Pour cette raison, l'IA doit implémenter une méthode for�ant 
+     * termine cet agent, et en particulier le processus qui l'exécute.
+     * Pour cette raison, l'agent doit implémenter une méthode for�ant 
      * sa terminaison.
      */
     public abstract void finishAi();
@@ -245,16 +245,16 @@ public abstract class AbstractAiManager<V>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** le joueur contrôlé par l'IA */
+    /** le joueur contrôlé par l'agent */
     private AiPlayer player;
    
     /**
-     * initialise le gestionnaire d'IA
+     * initialise le gestionnaire d'agent
      * 
      * @param instance	
      * 		instance utilisée dans ce round
      * @param player	
-     * 		joueur contrôlé par l'IA
+     * 		joueur contrôlé par l'agent
      */
     @SuppressWarnings("unchecked")
 	public void init(String instance, AiPlayer player)
@@ -270,36 +270,36 @@ public abstract class AbstractAiManager<V>
 	}
 		
 	/**
-	 * renvoie le joueur contrôlé par l'IA gérée
+	 * renvoie le joueur contrôlé par l'agent géré
 	 * 
 	 * @return	
-	 * 		un objet représentant le joueur contrôlé par l'IA
+	 * 		un objet représentant le joueur contrôlé par l'agent
 	 */
     public AbstractPlayer getPlayer()
 	{	return player;		
 	}
 	
 	/**
-	 * méthode utilisée pour mettre à jour les percepts de l'ia avant 
+	 * méthode utilisée pour mettre à jour les percepts de l'agent avant 
 	 * que cette dernière ne calcule la prochaine action à effectuer.
 	 * Cette méthode doit être surchargée de manière à adapter la structure
-	 * des données à l'IA qui va les traiter
+	 * des données à l'agent qui va les traiter
 	 */
 	public abstract void updatePercepts();
 	
 	/**
-	 * méthode utilisée pour convertir la valeur renvoyée par l'ia 
+	 * méthode utilisée pour convertir la valeur renvoyée par l'agent 
 	 * en un évènement standard traitable par le moteur du jeu.
 	 * 
 	 * @param value	
-	 * 		la valeur renvoyée par l'ia, qui est à convertir
+	 * 		la valeur renvoyée par l'agent, qui est à convertir
 	 * @return	
-	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'IA
+	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'agent
 	 */
 	public abstract List<ControlEvent> convertReaction(V value);
    
 	/**
-	 * termine proprement les percepts, de manière à lib�rer les ressources occupées.
+	 * termine proprement les percepts, de manière à libérer les ressources occupées.
 	 * Cette méthode est appelée lorsque la partie est terminée et que les
 	 * percepts deviennent inutiles.
 	 */
@@ -320,7 +320,7 @@ public abstract class AbstractAiManager<V>
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * met à jour la représentation des sorties de l'IA
+	 * met à jour la représentation des sorties de l'agent
 	 * qui est destinée au moteur
 	 */
 	protected abstract void updateOutput();

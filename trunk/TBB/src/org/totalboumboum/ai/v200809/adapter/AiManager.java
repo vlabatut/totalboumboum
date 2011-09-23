@@ -58,7 +58,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement le gestionnaire de manière à lib�rer les ressources 
+	 * termine proprement le gestionnaire de manière à libérer les ressources 
 	 * qu'il occupait.
 	 */
 	public void finishAi()
