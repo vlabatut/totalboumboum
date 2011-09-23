@@ -22,8 +22,6 @@ package org.totalboumboum.ai.v201112.adapter.path.dybref;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
-import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
@@ -59,14 +57,7 @@ public final class DybrefTest
 	{	// init
 		AiZone zone = AiModelTest.initZone();
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
-		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	// IA bidon
-			@Override
-			public AiAction processAction() throws StopRequestException
-			{	AiAction result = new AiAction(AiActionName.NONE);
-				return result;
-			}
-		};
+		ArtificialIntelligence ai = new ArtificialIntelligence(){};
 		
 		/*
 		 * Pour rappel, la tête de la zone obtenue :

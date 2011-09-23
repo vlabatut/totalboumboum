@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v200910.adapter.data;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * cette classe permet de représenter les sprites manipul�s par le jeu,
+ * cette classe permet de représenter les sprites manipulés par le jeu,
  * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
  * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
  * feu, sol, personnage ou item. 
@@ -91,7 +91,7 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	// CHECK			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** marquage du sprite (permet de d�tecter quels sprites ont disparu lors de la mise à jour */
+	/** marquage du sprite (permet de détecter quels sprites ont disparu lors de la mise à jour */
 	private boolean checked;
 
 	/**
@@ -104,7 +104,7 @@ public abstract class AiSprite<T extends Sprite>
 	}
 	
 	/**
-	 * d�marque ce sprite (action réalisée avant la mise à jour de la zone)
+	 * démarque ce sprite (action réalisée avant la mise à jour de la zone)
 	 */
 	void uncheck()
 	{	checked = false; 
@@ -270,7 +270,7 @@ public abstract class AiSprite<T extends Sprite>
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement ce sprite et lib�re les ressources qu'il occupait
+	 * termine proprement ce sprite et libère les ressources qu'il occupait
 	 */
 	void finish()
 	{	// state

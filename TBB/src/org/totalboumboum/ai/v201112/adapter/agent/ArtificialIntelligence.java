@@ -28,6 +28,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * classe dont chaque agent doit hériter. La méthode processAction est la méthode 
@@ -103,22 +104,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ZONE				/////////////////////////////////////////////
+	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** La zone de jeu à laquelle l'agent a accès */
 	private AiZone zone;
 	
-	/**
-	 * Méthode implémentant le traitement effectué par l'agent sur la zone,
-	 * et renvoyant une action en réaction.
-	 * 
-	 * @return	
-	 * 		action que l'agent a décidé d'effectuer
-	 * @throws StopRequestException	
-	 * 		au cas où le moteur demande la terminaison de l'agent
-	 */
-	public abstract AiAction processAction() throws StopRequestException;
-
 	/**
 	 * Renvoie la zone à laquelle l'agent a accès.
 	 * @return	
@@ -137,6 +127,22 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	public final void setZone(AiZone zone)
 	{	this.zone = zone;
 		output = new AiOutput(zone);
+	}
+	
+	/**
+	 * Méthode permettant de mettre à jour
+	 * les percepts de l'agent, c'est-à-dire
+	 * les différents objets stockés en interne
+	 * dans ses classes.<br/>
+	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
+	 * alors rien ne se passe.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public void updatePercepts() throws StopRequestException
+	{	
+		// méthode à surcharger
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -164,6 +170,20 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	private final void reinitOutput()
 	{	output.reinit();
+	}
+
+	/**
+	 * Méthode permettant de mettre à jour
+	 * les sorties graphiques de l'agent.<br/>
+	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
+	 * alors aucune sortie graphique n'est définie.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public void updateOutput() throws StopRequestException
+	{	
+		// méthode à surcharger
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -194,7 +214,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @return
 	 * 		Le mode courant de cet agent.
 	 */
-	public AiMode getMode()
+	public final AiMode getMode()
 	{	return mode;
 	}
 
@@ -206,15 +226,150 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @param mode
 	 * 		Le nouveau mode de cet agent.
 	 */
-	public void setMode(AiMode mode)
+	public final void setMode(AiMode mode)
 	{	this.mode = mode;
 	}
 
+	/**
+	 * Méthode permettant de mettre à jour
+	 * le mode de l'agent : {@link AiMode#ATTACKING}
+	 * ou {@link AiMode#COLLECTING}.<br/>
+	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
+	 * alors la valeur {@link AiMode#COLLECTING} est
+	 * systématiquement utilisée.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public void updateMode() throws StopRequestException
+	{	mode = AiMode.COLLECTING;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ACTION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Méthode implémentant le traitement effectué par l'agent sur la zone,
+	 * et renvoyant une action en réaction. Cette méthode implémente
+	 * l'algorithme général mis au point lors du projet 2010-11.
+	 * 
+	 * @return	
+	 * 		Action que l'agent a décidé d'effectuer.
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public final AiAction processAction() throws StopRequestException
+	{	checkInterruption();
+		
+		// mises à jour
+		{	// mise à jour des percepts et données communes
+			updatePercepts();
+			
+			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
+			updateMode();
+			
+			// mise à jour des valeurs d'utilité
+			updateUtility();
+			
+			// mise à jour des sorties
+			updateOutput();
+		}
+		
+		// action 
+		// (note : les actions sont mutuellement exclusives, c'est soit l'une soit l'autre)
+		AiAction result = null;
+		{	// on essaie de poser une bombe
+			if(considerBombing())
+			{	result = new AiAction(AiActionName.DROP_BOMB);
+			}
+			
+			// on essaie de se déplaccer
+			else
+			{	// on récupère la direction
+				Direction direction = considerMoving();
+				// si pas de direction : on suppose que c'est NONE
+				if(direction==null)	
+					direction = Direction.NONE;
+				// on construit l'action en fonction de la direction
+				if(direction==Direction.NONE)
+					result = new AiAction(AiActionName.NONE);
+				else
+					result = new AiAction(AiActionName.MOVE,direction);
+			}
+		}
+		
+		// on renvoie l'action sélectionnée
+		return result;
+	}
+	
+	/**
+	 * Méthode permettant de déterminer si l'agent
+	 * doit poser une bombe ou pas. Cette décision
+	 * dépend des valeurs d'utilité courantes.<br/>
+	 * La méthode renvoie un booléen {@code true}
+	 * si l'agent doit poser une bombe, et
+	 * {@code false} sinon.<br/>
+	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
+	 * alors la valeur {@code false} est systématiquement
+	 * renvoyée (i.e. : pas de bombe posée).
+	 * 
+	 * @return
+	 * 		Renvoie {@code true} ssi l'agent doit poser une bombe.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public boolean considerBombing() throws StopRequestException
+	{	return false;
+	}
+
+	/**
+	 * Méthode permettant de déterminer si l'agent
+	 * doit se déplacer, et dans quelle direction.
+	 * Cette décision dépend des valeurs d'utilité courantes.<br/>
+	 * La méthode renvoie une {@link Direction} indiquant le
+	 * sens du déplacement, ou bien {@code null} ou {@link Direction#NONE}
+	 * si aucun déplacement ne doit être effectué.<br/>
+	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
+	 * alors la valeur {@link Direction#NONE} est systématiquement
+	 * renvoyée (i.e. : pas de déplacement).
+	 * 
+	 * @return
+	 * 		Renvoie une direction indiquant le sens (ou l'absence) de déplacement de l'agent.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public Direction considerMoving() throws StopRequestException
+	{	return Direction.NONE;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// UTILITY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Méthode permettant de mettre à jour
+	 * les valeurs d'utiltié de l'agent. Il s'agit
+	 * généralement d'une matrice numérique, mais
+	 * rien n'est obligatoire. Le calcul de ces valeurs
+	 * est fonction de la zone, mais aussi du mode
+	 * courant de l'agent.<br/>
+	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
+	 * alors rien ne se passe.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public void updateUtility() throws StopRequestException
+	{	
+		// méthode à surcharger
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Termine proprement l'agent afin de libérer les ressources qu'elle occupait.
+	 * Termine proprement l'agent afin de libérer les ressources qu'il occupait.
 	 */
 	final void finish()
 	{	zone = null;

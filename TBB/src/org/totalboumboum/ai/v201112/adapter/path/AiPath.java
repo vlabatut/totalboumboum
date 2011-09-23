@@ -146,7 +146,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param index
 	 * 		la position de la case demandée
 	 * @return	
-	 * 		la case occupant la position indiqu�e dans ce chemin
+	 * 		la case occupant la position indiquée dans ce chemin
 	 */
 	public AiTile getTile(int index)
 	{	return tiles.get(index);	
@@ -160,7 +160,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param index
 	 * 		la position de la case demandée
 	 * @return	
-	 * 		la case occupant la position indiqu�e dans ce chemin
+	 * 		la case occupant la position indiquée dans ce chemin
 	 */
 	public Long getPause(int index)
 	{	return pauses.get(index);	

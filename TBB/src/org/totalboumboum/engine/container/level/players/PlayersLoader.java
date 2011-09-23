@@ -49,7 +49,7 @@ public class PlayersLoader
 		 * NOTE tester ici si le level est suffisamment grand
 		 * NOTE faut qu'il y ait au moins une config, à définir dans XSD
 		 * attention, le numéro des joueurs ne doit pas dépasser maxPlayer-1
-		 * NOTE il faut tester qu'il y a bien autant de locations de que de players indiqu� dans la situation
+		 * NOTE il faut tester qu'il y a bien autant de locations de que de players indiqué dans la situation
 		 */
 
 		/*

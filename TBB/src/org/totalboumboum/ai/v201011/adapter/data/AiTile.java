@@ -229,7 +229,7 @@ public abstract class AiTile
 	 * @param direction
 	 * 		direction dans laquelle le voisin se trouve
 	 * @return	
-	 * 		le voisin de cette case, situé dans la direction indiqu�e (ou null si la direction n'est pas primaire)
+	 * 		le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
 	public abstract AiTile getNeighbor(Direction direction);
 	

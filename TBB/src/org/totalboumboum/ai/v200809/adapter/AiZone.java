@@ -174,7 +174,7 @@ public class AiZone
 	 * met à jour la matrice en fonction de l'évolution du jeu
 	 */
 	private void updateMatrix()
-	{	// d�marque tous les sprites
+	{	// démarque tous les sprites
 		uncheckAll(blocks);
 		uncheckAll(bombs);
 		uncheckAll(fires);
@@ -240,7 +240,7 @@ public class AiZone
 	 * @param row	ligne de la case dont on veut le voisin
 	 * @param col	colonne de la case dont on veut le voisin
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiqu�e
+	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiquée
 	 */
 	public AiTile getNeighborTile(AiTile tile, Direction direction)
 	{	AiTile result = null;
@@ -550,7 +550,7 @@ public class AiZone
 	}
 	
 	/**
-	 * d�marque toutes les représentations de sprites d'une liste determinée en fonction du type
+	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
 	 * T param�trant cette méthode. méthode appelée au début de la mise à jour :
 	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être

@@ -54,7 +54,7 @@ public class AiPath
 	 * renvoie la case dont la position est passée en paramètre
 	 *
 	 * @param index	la position de la case demandée
-	 * @return	la case occupant la position indiqu�e dans ce chemin
+	 * @return	la case occupant la position indiquée dans ce chemin
 	 */
 	public AiTile getTile(int index)
 	{	return tiles.get(index);	
