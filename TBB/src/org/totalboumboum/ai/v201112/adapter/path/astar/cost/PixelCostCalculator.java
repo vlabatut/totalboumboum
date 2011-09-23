@@ -27,11 +27,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 
 /**
- * Classe �tendant la classe abstraite CostCalculator de la manière à déterminer
+ * Classe étendant la classe abstraite CostCalculator de la manière à déterminer
  * le coût en fonction de la distance en pixel entre les cases.
  * Cela ne change rien pour toutes les cases sauf la première, car en fonction
  * de la position du point de départ, deux chemins peuvent correspondre à la même
- * distance si on considère les cases, mais une distance différente si on consid�re
+ * distance si on considère les cases, mais une distance différente si on considère
  * les pixels.
  * <b>Attention :</b> le point de départ doit obligatoirement être mis à 
  * jour avant chaque nouvel appel à A*. 

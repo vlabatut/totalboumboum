@@ -139,7 +139,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 			if(forcedPositionTime>0)
 				correctForcedShifts();
 			/* NOTE en cas de trajectoire repeat : 
-			 * ne faut-il pas réinitialiser la position forc�e à chaque répétition ?
+			 * ne faut-il pas réinitialiser la position forcée à chaque répétition ?
 			 */
 		}
 	}
@@ -147,21 +147,21 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// FORCED SHIFTS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** deplacement X forc� total */
+	/** deplacement X forcé total */
 	private double forcedTotalXShift = 0;
-	/** deplacement Y forc� total */
+	/** deplacement Y forcé total */
 	private double forcedTotalYShift = 0;
-	/** deplacement Z forc� total */
+	/** deplacement Z forcé total */
 	private double forcedTotalZShift = 0;
 
 	/**
 	 * si on a dépassé le forcedPositionDuration, il faut :  
 	 * 		- calculer la position virtuelle à ce temps là (ce qui implique de calculer le point de départ en référence)
-	 * 		- vérifier si elle colle à la position forc�e
+	 * 		- vérifier si elle colle à la position forcée
 	 * 		- si elle ne colle pas : la corriger
 	 * si on ne l'a pas encore dépassée : à peu près pareil
 	 * 		- calculer la position initiale
-	 * 		- calculer la position forc�e correspondante
+	 * 		- calculer la position forcée correspondante
 	 * 		- corriger  
 	 */
 	private void correctForcedShifts()
@@ -169,7 +169,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 		double initX = currentPosX - relativePosX;
 		double initY = currentPosY - relativePosY;
 		double initZ = currentPosZ - relativePosZ;
-		// calcul des nouvelles positions forc�es
+		// calcul des nouvelles positions forcées
 		processForcedShifts(initX,initY,initZ);
 		// calcul des positions théoriques à l'instant prèsent
 		Sprite boundToSprite = getBoundToSprite();
@@ -214,7 +214,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 		double gapX = theoreticalX - currentPosX;
 		double gapY = theoreticalY - currentPosY;
 		double gapZ = theoreticalZ - currentPosZ;
-		/* NOTE on pourrait �chelonner la correction, mais on choisit l'approche brutale
+		/* NOTE on pourrait échelonner la correction, mais on choisit l'approche brutale
 		 * quitte à affiner par la suite si nécessaire
 		 */
 		currentPosX = currentPosX + gapX;
@@ -227,7 +227,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	 * 2) on l'utilise pour calculer la position absolue originale à t=forcedTime
 	 * 3) on relativise cette position par rapport à la référence courante : tile ou boundToSprite
 	 * 4) on calcule l'écart avec la forcedPosition
-	 * cet écart sera r�pandu sur le début de la trajectoire correspondant à forcedTime 
+	 * cet écart sera répandu sur le début de la trajectoire correspondant à forcedTime 
 	 */
 	private void processForcedShifts(double initX, double initY, double initZ)
 	{	forcedTotalXShift = 0;
@@ -295,7 +295,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
-	 * Cette méthode doit imp�rativement être appelée juste avant un changement de gesture.
+	 * Cette méthode doit impérativement être appelée juste avant un changement de gesture.
 	 * @param newSprite
 	 */
 	@Override
@@ -485,7 +485,7 @@ System.out.println();
 			}				
 		}
 if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
-	System.out.println("AZDSOIP�PMJP");
+	System.out.println("AZDSOIPEPMJP");
 	
 		// updating the tile
 		updateTile();
@@ -606,13 +606,13 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps normalis� écoulé de puis le début de la trajectoire */
+	/** temps normalisé écoulé de puis le début de la trajectoire */
 	private double trajectoryTime;
 	/** durée totale originale de la trajectoire */
 	private double trajectoryDuration = 0;
 	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff = 1;
-	/** temps imparti pour atteindre la position forc�e (tient compte du délai imposé à la trajectoire) */
+	/** temps imparti pour atteindre la position forcée (tient compte du délai imposé à la trajectoire) */
 	private double forcedPositionTime = 0;
 
 	private void updateTime()

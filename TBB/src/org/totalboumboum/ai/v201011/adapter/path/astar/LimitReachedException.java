@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 
 /**
- * exception levée par l'algorithme A* quand il atteint une des limites fixées au pr�alable.
+ * exception levée par l'algorithme A* quand il atteint une des limites fixées au préalable.
  * On ne peut donc pas conclure quant à l'existence d'un chemin solution.
  * En d'autres termes : cette exception indique qu'A* a exploré un arbre bien trop
  * grand, sans pourtant trouver la solution. On ne peut donc pas savoir s'il existe

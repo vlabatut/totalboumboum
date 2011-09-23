@@ -61,7 +61,7 @@ public class Level
 	// THEME				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 /*
- TODO semblait inutile, dc d�sactiv� 
+ TODO semblait inutile, dc désactivé 
  (également dans HollowLevel.loadTheme() et Level.finish())
 	private Theme theme;
 

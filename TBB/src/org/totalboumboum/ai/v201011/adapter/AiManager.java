@@ -223,7 +223,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	private AiOutput output;
 	
 	/**
-	 * tout doit être recopi� pour des histoires de synchronisation
+	 * tout doit être recopié pour des histoires de synchronisation
 	 * (on ne veut pas que l'IA modifie ses sorties pendant que
 	 * le moteur du jeu est en train d'y accéder)
 	 */

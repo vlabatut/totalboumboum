@@ -52,7 +52,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indicateur de demande de terminaison de l'IA (activ� par le jeu à la fin de la partie) */
+	/** Indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
 
 	/**
@@ -179,7 +179,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * sera réalisée une fois, juste avant le début de la partie.
 	 * A noter que les percepts ont néanmoins déjà été mis à jour.
 	 * Si aucune méthode init n'est définie dans l'agent, alors celle
-	 * ci sera exécut�e (qui ne fait rien du tout).
+	 * ci sera exécutée (qui ne fait rien du tout).
 	 */
 	public void init() throws StopRequestException
 	{	

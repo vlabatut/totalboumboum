@@ -348,7 +348,7 @@ public class AiPath implements Comparable<AiPath>
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
-	 * Cette méthode ne doit plus être utilisée, il faut plut�t se servir de {@link #compareTo}.
+	 * Cette méthode ne doit plus être utilisée, il faut plutôt se servir de {@link #compareTo}.
 	 * 
 	 * @param path
 	 * 		le chemin à comparer

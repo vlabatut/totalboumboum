@@ -48,7 +48,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
-	/** indicateur de demande de terminaison de l'IA (activ� par le jeu à la fin de la partie) */
+	/** indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
 
 	/**

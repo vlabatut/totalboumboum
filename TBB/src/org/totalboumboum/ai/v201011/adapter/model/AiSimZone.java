@@ -54,13 +54,13 @@ final class AiSimZone extends AiZone
 {	
 	/**
 	 * contruit une zone qui est une copie de celle passée en paramètre.
-	 * si la paramètre fullCopy est faux, les sprites ne sont pas copi�s,
-	 * sinon tout est copi�.
+	 * si la paramètre fullCopy est faux, les sprites ne sont pas copiés,
+	 * sinon tout est copié.
 	 * 
 	 * @param zone
 	 * 		la zone de référence
 	 * @param fullCopy
-	 * 		indique si les sprites doivent aussi être copi�s ou pas
+	 * 		indique si les sprites doivent aussi être copiés ou pas
 	 * @return	
 	 * 		une nouvelle zone vide de mêmes dimensions
 	 */
@@ -228,7 +228,7 @@ final class AiSimZone extends AiZone
 	 *  @param direction
 	 *  	direction de la case voisine relativement à la case de référence
 	 *  @return	
-	 *  	la case voisine dans la direction précis�e
+	 *  	la case voisine dans la direction précisée
 	 */
 	protected AiSimTile getNeighborTile(int line, int col, Direction direction)
 	{	AiSimTile result;
@@ -335,7 +335,7 @@ final class AiSimZone extends AiZone
 	
 	/**
 	 * supprime un sprite de la zone et de la case correspondante.
-	 * s'il s'agit d'un joueur, il est supprim� seulement de la case
+	 * s'il s'agit d'un joueur, il est supprimé seulement de la case
 	 * et de la liste des joueurs encore en jeu (mais la zone continue
 	 * à le référencer dans la liste générale des joueurs, car le sprite
 	 * peut encore etre utile, par exemple pour obtenir le classement
@@ -776,7 +776,7 @@ final class AiSimZone extends AiZone
 	 * lors de la simulation
 	 * 
 	 * @param type
-	 * 		le type d'item qui a été d�couvert
+	 * 		le type d'item qui a été découvert
 	 */
 	protected void updateHiddenItemsCount(AiItemType type)
 	{	Integer value = hiddenItemsCounts.get(type);

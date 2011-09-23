@@ -55,7 +55,7 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -209,7 +209,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	private int range;
 	/** liste des cases qui vont subir l'explosion de la bombe */
 	private final List<AiTile> blast = new ArrayList<AiTile>();
-	/** type du feu génér� : normal ou pénétrant */
+	/** type du feu généré : normal ou pénétrant */
 	private boolean penetrating;
 	
 	@Override
@@ -258,7 +258,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tomb�e en panne) */
+	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
 	private boolean working;
 	
 	@Override

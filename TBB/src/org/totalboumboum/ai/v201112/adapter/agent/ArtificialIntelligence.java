@@ -55,7 +55,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indicateur de demande de terminaison de l'agent (activ� par le jeu à la fin de la partie) */
+	/** Indicateur de demande de terminaison de l'agent (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
 
 	/**

@@ -215,7 +215,7 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps nécessaire au sprite pour brûler (� condition qu'il puisse brûler) */
+	/** temps nécessaire au sprite pour brûler (à condition qu'il puisse brûler) */
 	protected long burningDuration = 0;
 	
 	@Override

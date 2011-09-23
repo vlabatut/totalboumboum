@@ -92,7 +92,7 @@ public class ParseAi
 	
 	private static void parseFolder(File folder, int level) throws ParseException, IOException
 	{	if(IGNORED_PACKAGES.contains(folder.getName()))
-			System.out.println("Paquetage "+folder.getPath()+" ignor�");
+			System.out.println("Paquetage "+folder.getPath()+" ignoré");
 		else
 		{	System.out.println("Analyse du paquetage "+folder.getPath());
 		

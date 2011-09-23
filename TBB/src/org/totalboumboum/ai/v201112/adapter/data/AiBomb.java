@@ -26,7 +26,7 @@ import java.util.List;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -41,7 +41,7 @@ public interface AiBomb extends AiSprite
 	 * renvoie un exemple de feu que cette bombe peut générer
 	 * 
 	 * @return	
-	 * 		une représentation du feu génér� par cette bombe
+	 * 		une représentation du feu généré par cette bombe
 	 */
 	public AiFire getFirePrototype();
 
@@ -103,7 +103,7 @@ public interface AiBomb extends AiSprite
 
 	/**
 	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
-	 * une explosion. Cette latence représente le temps entre le moment o�
+	 * une explosion. Cette latence représente le temps entre le moment où
 	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
@@ -125,10 +125,10 @@ public interface AiBomb extends AiSprite
 	public int getRange();
 	
 	/**
-	 * indique si le feu �mis par la bombe peut traverser les murs
+	 * indique si le feu émis par la bombe peut traverser les murs
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plut�t getBlast().
+	 * utilisez plutôt getBlast().
 	 * 
 	 * @return	
 	 * 		vrai si le feu peut traverser les murs
@@ -155,7 +155,7 @@ public interface AiBomb extends AiSprite
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tomb�e en panne)
+	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
 	 * 
 	 * @return	
 	 * 		vrai si cette bombe marche, faux si elle est en panne
@@ -168,7 +168,7 @@ public interface AiBomb extends AiSprite
 	/**
 	 * renvoie la couleur de cette bombe.
 	 * Cette couleur est null si aucun joueur n'a posé la bombe 
-	 * (pour certains niveaux sp�ciaux où les blocs peuvent générer des bombes)  
+	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
 	 * 
 	 * @return 
 	 * 		un symbole de type PredefinedColor représentant une couleur
@@ -181,7 +181,7 @@ public interface AiBomb extends AiSprite
 	/**
 	 * renvoie le joueur qui a posé la bombe,
 	 * ou bien null si aucun joueur n'a posé cette bombe 
-	 * (pour certains niveaux sp�ciaux où les blocs peuvent générer des bombes)  
+	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
 	 * 
 	 * @return 
 	 * 		le joueur ayant posé la bombe, ou null si aucun joueur ne l'a posée

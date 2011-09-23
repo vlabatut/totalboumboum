@@ -193,7 +193,7 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 /*			
 			ArrayList<String> text = new ArrayList<String>();
 			text.add("blablablablab !");
-			text.add("blëblëblëblëb !");
+			text.add("blÃ©blÃ©blÃ©blÃ©b !");
 			InfoModalDialogPanel aboutPanel = new InfoModalDialogPanel(this,"Test","Ceci est un test",text);
 			aboutPanel.addListener(this);
 			getFrame().setModalDialog(aboutPanel);

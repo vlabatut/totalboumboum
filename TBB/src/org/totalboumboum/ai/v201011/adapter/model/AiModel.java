@@ -949,7 +949,7 @@ if(sprite instanceof AiSimBomb)
 	 * @param tile
 	 * 		la case à brûler
 	 * @param detonatingBomb
-	 * 		la bombe qui a propovoqu� l'explosion
+	 * 		la bombe qui a propovoqué l'explosion
 	 */
 	private void burnTile(AiSimTile tile, AiSimBomb detonatingBomb)
 	{	AiFire firePrototype = detonatingBomb.getFirePrototype();
@@ -1108,7 +1108,7 @@ if(sprite instanceof AiSimBomb)
 	 * dans la case spécifiée. La méthode renvoie la bombe posée,
 	 * ou bien null en cas d'impossibilité.
 	 * <b>Note :</b> cette méthode permet de poser des bombes
-	 * à distance, ce qui peut s'av�rer pratique dans certaines situations.
+	 * à distance, ce qui peut s'avérer pratique dans certaines situations.
 	 * 
 	 * @param hero
 	 * 		le personnage que l'on veut voir poser une bombe
@@ -1138,8 +1138,8 @@ if(sprite instanceof AiSimBomb)
 	/**
 	 * crée une nouvelle bombe appartenant au personnage passé en paramètre.
 	 * La bombe est placée au centre de la case passée en paramètre.
-	 * Le compteur de bombe du personnage est incr�ment�.
-	 * Si jamais la case contient déjà un objet emp�chant de poser la bombe,
+	 * Le compteur de bombe du personnage est incrémenté.
+	 * Si jamais la case contient déjà un objet empêchant de poser la bombe,
 	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
 	 * Sinon (si la création est possible) alors la fonction renvoie la bombe créée.
 	 * Si jamais le personnage ne peut pas poser de bombes pour l'instant,
@@ -1292,7 +1292,7 @@ if(sprite instanceof AiSimBomb)
 	/**
 	 * supprime tous les personnage de la zone.
 	 * ceci permet de la simplifier, et ainsi d'utiliser la zone
-	 * seulement pour prévoir comment les explosions vont �voluer,
+	 * seulement pour prévoir comment les explosions vont évoluer,
 	 * sans se soucier des déplacements des personnages.
 	 */
 	public void applyRemoveHeroes()

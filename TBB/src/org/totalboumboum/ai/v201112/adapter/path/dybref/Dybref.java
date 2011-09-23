@@ -35,7 +35,7 @@ import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
  * implément de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
- * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche anc�tre sont
+ * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini.</br>

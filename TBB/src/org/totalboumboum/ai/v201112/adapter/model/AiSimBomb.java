@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * simule une bombe du jeu, i.e. un objet que les joueurs peuvent d�poser
+ * simule une bombe du jeu, i.e. un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -76,7 +76,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param failureProbability
 	 * 		probabilité de tomber en panne
 	 * @param firePrototype
-	 * 		exemple de feu génér� par la bombe quand elle explose
+	 * 		exemple de feu généré par la bombe quand elle explose
 	 * @param stopHeroes
 	 * 		capacité à bloquer les personnages
 	 * @param stopFires
@@ -92,7 +92,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param working
 	 * 		état de fonctionnement de la bombe
 	 * @param time
-	 * 		temps écoulé depuis le d�p�t de la bombe
+	 * 		temps écoulé depuis le dépôt de la bombe
 	 */
 	protected AiSimBomb(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed, double slidingSpeed,
@@ -299,7 +299,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tomb�e en panne) */
+	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
 	private boolean working;
 	
 	@Override

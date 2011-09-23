@@ -147,19 +147,19 @@ public class Tile
 			List<Double> listY = new ArrayList<Double>(0);
 			listX.add(pX);
 			listY.add(pY);
-			// d�borde à gauche
+			// déborde à gauche
 			if(!level.isInsidePositionX(pX))
 			{	double temp = level.normalizePositionX(pX);
 				listX.add(temp);
 				listY.add(pY);			
 			}
-			// d�borde à droite
+			// déborde à droite
 			if(!level.isInsidePositionX(pX+image.getWidth()))
 			{	double temp = level.normalizePositionX(pX+image.getWidth())-image.getWidth();
 				listX.add(temp);
 				listY.add(pY);			
 			}
-			// d�borde en haut
+			// déborde en haut
 			if(!level.isInsidePositionY(pY))
 			{	double temp = level.normalizePositionY(pY);
 				int li = listX.size();
@@ -168,7 +168,7 @@ public class Tile
 					listY.add(temp);			
 				}
 			}
-			// d�borde en bas
+			// déborde en bas
 			if(!level.isInsidePositionY(pY+image.getHeight()))
 			{	double temp = level.normalizePositionY(pY+image.getHeight())-image.getHeight();
 				int li = listX.size();
@@ -223,19 +223,19 @@ public class Tile
 			List<Double> listY = new ArrayList<Double>(0);
 			listX.add(pX);
 			listY.add(pY);
-			// d�borde à gauche
+			// déborde à gauche
 			if(!level.isInsidePositionX(pX))
 			{	double temp = level.normalizePositionX(pX);
 				listX.add(temp);
 				listY.add(pY);			
 			}
-			// d�borde à droite
+			// déborde à droite
 			if(!level.isInsidePositionX(pX+image.getWidth()))
 			{	double temp = level.normalizePositionX(pX+image.getWidth())-image.getWidth();
 				listX.add(temp);
 				listY.add(pY);			
 			}
-			// d�borde en haut
+			// déborde en haut
 			if(!level.isInsidePositionY(pY))
 			{	double temp = level.normalizePositionY(pY);
 				int li = listX.size();
@@ -244,7 +244,7 @@ public class Tile
 					listY.add(temp);			
 				}
 			}
-			// d�borde en bas
+			// déborde en bas
 			if(!level.isInsidePositionY(pY+image.getHeight()))
 			{	double temp = level.normalizePositionY(pY+image.getHeight())-image.getHeight();
 				int li = listX.size();
