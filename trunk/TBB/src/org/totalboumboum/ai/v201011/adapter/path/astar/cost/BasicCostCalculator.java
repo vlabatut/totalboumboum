@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * Classe �tendant la classe abstraite CostCalculator de la manière la plus simple possible.
+ * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
  * Ici, le coût pour passer d'une case à l'autre est simplement 1, quelles que soient
  * les cases considérées.
  * 

@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 final class AiSimState  implements AiState
 {
 	/**
-	 * construit un objet simulant l'état d'un sprite qui vient d'�tre créé,
+	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
 	 * i.e. qui ne fait rien (STANDING) dans une direction neutre (NONE).
 	 */
 	protected AiSimState()
@@ -49,7 +49,7 @@ final class AiSimState  implements AiState
 	}
 
 	/**
-	 * construit un objet simulant l'état d'un sprite qui vient d'�tre créé,
+	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
 	 * en utilisant les valeurs passées en paramètres
 	 * 
 	 * @param name

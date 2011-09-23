@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de r�colter (un item)
+ * action de récolter (un item)
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
@@ -45,7 +45,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>paramètre: scope=N/D
  * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY REFUSE (ex: item qui ne peut pas être r�colt� en permanence)
+ * <p>ABILITY REFUSE (ex: item qui ne peut pas être récolté en permanence)
  * 	<br>paramètre: actor=oui (hero)
  * 	<br>paramètre: target=self
  * 	<br>paramètre: direction=N/D
@@ -54,7 +54,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>paramètre: scope=N/D
  * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY PREVENT (ex: un bloc qui empêche par intermitence les heros de r�colter l'item)
+ * <p>ABILITY PREVENT (ex: un bloc qui empêche par intermitence les heros de récolter l'item)
  * 	<br>paramètre: actor=oui (hero)
  * 	<br>paramètre: target=oui (item)
  * 	<br>paramètre: direction=N/D

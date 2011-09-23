@@ -77,7 +77,7 @@ public class AiOutput
 	/**
 	 * rajoute un chemin dans la liste des chemins à afficher.
 	 * La représentation graphique d'un chemin est une ligne
-	 * suivant les centres des cases travers�es par le chemin 
+	 * suivant les centres des cases traversées par le chemin 
 	 * 
 	 * @param path	chemin à afficher
 	 * @param color	couleur associée à ce chemin

@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
- * Classe �tendant la classe abstraite CostCalculator grâce à une matrice de coûts.
+ * Classe étendant la classe abstraite CostCalculator grâce à une matrice de coûts.
  * Ici, le coût pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce coût est égal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.

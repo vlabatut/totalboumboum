@@ -44,7 +44,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -194,7 +194,7 @@ public class AiBomb extends AiSprite<Bomb>
 
 	/**
 	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
-	 * une explosion. Cette latence représente le temps entre le moment o�
+	 * une explosion. Cette latence représente le temps entre le moment où
 	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
@@ -236,7 +236,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * ne donne que les cases qui seront touchées si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer, il faut r�-exécuter cette méthode pour avoir le
+	 * alors le souffle peut changer, il faut ré-exécuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
@@ -264,11 +264,11 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tomb�e en panne) */
+	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
 	private boolean working;
 	
 	/**
-	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tomb�e en panne)
+	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
 	 * 
 	 * @return	vrai si cette bombe marche, faux si elle est en panne
 	 */
@@ -299,7 +299,7 @@ public class AiBomb extends AiSprite<Bomb>
 	/**
 	 * renvoie la couleur de cette bombe.
 	 * Cette couleur est null si aucun joueur n'a posé la bombe 
-	 * (pour certains niveaux sp�ciaux où les blocs peuvent générer des bombes)  
+	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
 	 * 
 	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */

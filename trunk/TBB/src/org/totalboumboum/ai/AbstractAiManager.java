@@ -217,7 +217,7 @@ public abstract class AbstractAiManager<V>
     
     /**
      * terminer ce gestionnaire, et en particulier le thread exécutant l'agent.
-     * Ou plut�t tente de le terminer, car le résultat ne peut être forc�.
+     * Ou plutôt tente de le terminer, car le résultat ne peut être forcé.
      */
     public final void finish()
     {	finishAi();
@@ -237,7 +237,7 @@ public abstract class AbstractAiManager<V>
     
     /**
      * termine cet agent, et en particulier le processus qui l'exécute.
-     * Pour cette raison, l'agent doit implémenter une méthode for�ant 
+     * Pour cette raison, l'agent doit implémenter une méthode forçant 
      * sa terminaison.
      */
     public abstract void finishAi();
@@ -359,7 +359,7 @@ public abstract class AbstractAiManager<V>
 	 * renvoie la liste de chemins à afficher
 	 * 
 	 * @return	
-	 * 		liste de vecteurs de cases contig�es représentant des chemins
+	 * 		liste de vecteurs de cases contigües représentant des chemins
 	 */
 	public List<List<Tile>> getPaths()
 	{	return paths;

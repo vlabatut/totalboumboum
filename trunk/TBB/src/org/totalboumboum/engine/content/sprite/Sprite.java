@@ -327,8 +327,8 @@ public abstract class Sprite implements Comparable<Sprite>
 		animeManager.update();
 		trajectoryManager.update();
 		/*
-		 * NOTE : il est important que le trajectoryManager soit updat� en dernier
-		 * comme �a, un changement de case arrive après avoir traité tous les évènements
+		 * NOTE : il est important que le trajectoryManager soit updaté en dernier
+		 * comme ça, un changement de case arrive après avoir traité tous les évènements
 		 * (raisons de synchro)
 		 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getRow()+";"+tile.getCol());

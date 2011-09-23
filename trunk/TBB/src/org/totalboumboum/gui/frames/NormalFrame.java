@@ -72,7 +72,7 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	@SuppressWarnings("unused")
 	private void saveConfiguration()
-	{	// TODO en fait c'est la partie qu'il faut enregistrer, car la conf est déjà enregistr�e si elle a été modifiée
+	{	// TODO en fait c'est la partie qu'il faut enregistrer, car la conf est déjà enregistrée si elle a été modifiée
 		try
 		{	Configuration.saveConfiguration();
 		}

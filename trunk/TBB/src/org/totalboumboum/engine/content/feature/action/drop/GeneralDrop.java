@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /**
- * action de d�poser un objet (une bombe)
+ * action de déposer un objet (une bombe)
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM

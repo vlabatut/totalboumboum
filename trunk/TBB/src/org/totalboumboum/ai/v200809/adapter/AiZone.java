@@ -47,7 +47,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * représente la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
  * <p>
- * A chaque fois que l'IA est sollicit�e par le jeu pour conna�tre l'action
+ * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
  * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
@@ -551,10 +551,10 @@ public class AiZone
 	
 	/**
 	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
-	 * T param�trant cette méthode. méthode appelée au début de la mise à jour :
+	 * T paramétrant cette méthode. méthode appelée au début de la mise à jour :
 	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
-	 * supprim�es de cette représentation.
+	 * supprimées de cette représentation.
 	 * 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
@@ -567,7 +567,7 @@ public class AiZone
 		}
 	}
 	/**
-	 * méthode compl�mentaire de uncheckAll, et chargée de supprimer
+	 * méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <T>	type de la liste à traiter

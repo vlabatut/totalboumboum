@@ -125,7 +125,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void playerOut(int index)
-	{	//System.out.println("the player n°"+index+" is out !");		
+	{	//System.out.println("the player #"+index+" is out !");		
 	}
 
 	@Override

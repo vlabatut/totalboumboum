@@ -173,7 +173,7 @@ public class FullModulationManager extends ModulationManager
 
 	/**
 	 * on se retreint aux cases contenant l'acteur et la cible, et on teste chaque sprite.
-	 * NOTE: en r�alit�, il ne faudrait pas se limiter à ces cases et tester toutes les cases concernées...
+	 * NOTE: en réalité, il ne faudrait pas se limiter à ces cases et tester toutes les cases concernées...
 	 */
 	private ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;

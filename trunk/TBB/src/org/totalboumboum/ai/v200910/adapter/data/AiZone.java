@@ -52,7 +52,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * représente la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
  * 
- * A chaque fois que l'IA est sollicit�e par le jeu pour conna�tre l'action
+ * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
  * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
@@ -157,11 +157,11 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// META DATA		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** rangs des joueurs pour la manche en cours (ces rangs peuvent �voluer) */
+	/** rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
 	private final HashMap<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs pour la rencontre en cours (ces rangs n'�voluent pas pendant la manche) */
+	/** rangs des joueurs pour la rencontre en cours (ces rangs n'évoluent pas pendant la manche) */
 	private final HashMap<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs au classement global du jeu (ces rangs n'�voluent pas pendant la manche) */
+	/** rangs des joueurs au classement global du jeu (ces rangs n'évoluent pas pendant la manche) */
 	private final HashMap<AiHero,Integer> statsRanks = new HashMap<AiHero, Integer>();
 
 	/** 
@@ -221,7 +221,7 @@ public class AiZone
 	
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, pour la manche en cours.
-	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jouée, 
+	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
 	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @param hero	le personnage considéré
@@ -233,7 +233,7 @@ public class AiZone
 	
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, pour la rencontre en cours.
-	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @param hero	le personnage considéré
 	 * @return	son classement dans la rencontre en cours
@@ -244,7 +244,7 @@ public class AiZone
 	
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, dans le classement général du jeu (Glicko-2)
-	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @param hero	le personnage considéré
 	 * @return	son classement général (Glicko-2)
@@ -686,7 +686,7 @@ public class AiZone
 	private final HashMap<Item,AiItem> itemMap = new HashMap<Item,AiItem>();
 	/** liste externe des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
-	/** nombre d'items cachés, i.e. pas encore ramass�s */
+	/** nombre d'items cachés, i.e. pas encore ramassés */
 	private int hiddenItemsCount;
 	
 	/** 
@@ -742,11 +742,11 @@ public class AiZone
 	/**
 	 * renvoie le nombre d'items cachés restant dans le niveau.
 	 * Il s'agit des items qui sont encore cachés dans des blocs, 
-	 * et qui n'ont pas été ramass�s. Cette information permet de
+	 * et qui n'ont pas été ramassés. Cette information permet de
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
 	 * 
-	 * @return	le nombre d'items restant à d�couvrir
+	 * @return	le nombre d'items restant à découvrir
 	 */
 	public int getHiddenItemsCount()
 	{	return hiddenItemsCount;		
@@ -757,10 +757,10 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
-	 * T param�trant cette méthode. méthode appelée au début de la mise à jour :
+	 * T paramétrant cette méthode. méthode appelée au début de la mise à jour :
 	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
-	 * supprim�es de cette représentation.
+	 * supprimées de cette représentation.
 	 * 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
@@ -773,7 +773,7 @@ public class AiZone
 		}
 	}
 	/**
-	 * méthode compl�mentaire de uncheckAll, et chargée de supprimer
+	 * méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <T>	type de la liste à traiter
@@ -897,7 +897,7 @@ public class AiZone
 	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau).
-	 * La direction peut être NONE si jamais les deux positions sont �quivalentes.
+	 * La direction peut être NONE si jamais les deux positions sont équivalentes.
 	 * 
 	 * @param x1	première position horizontale en pixels
 	 * @param y1	première position verticale en pixels
@@ -1122,13 +1122,13 @@ public class AiZone
 	/**
 	 * prend n'importe quelles coordonnées exprimées en pixels et les normalise
 	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
-	 * d�signent une position située en dehors de la zone de jeu, cette méthode
+	 * désignent une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau pour déterminer une position
-	 * �quivalente située dans le niveau.
+	 * équivalente située dans le niveau.
 	 * 
 	 * @param x	abscisse
 	 * @param y	ordonnée
-	 * @return	un tableau contenant les versions normalis�es de x et y
+	 * @return	un tableau contenant les versions normalisées de x et y
 	 */
 	public double[] normalizePosition(double x, double y)
 	{	return level.normalizePosition(x, y);
@@ -1137,13 +1137,13 @@ public class AiZone
 	/**
 	 * prend n'importe quelle abscisse exprimée en pixels et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * d�signe une position située en dehors de la zone de jeu, cette méthode
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
 	 * côté droit sont reliés) pour déterminer une position
-	 * �quivalente située dans le niveau.
+	 * équivalente située dans le niveau.
 	 * 
 	 * @param x	abscisse
-	 * @return	la version normalis�e de x
+	 * @return	la version normalisée de x
 	 */
 	public double normalizePositionX(double x)
 	{	return level.normalizePositionX(x);
@@ -1152,13 +1152,13 @@ public class AiZone
 	/**
 	 * prend n'importe quelle ordonnée exprimée en pixels et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * d�signe une position située en dehors de la zone de jeu, cette méthode
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
 	 * côté bas sont reliés) pour déterminer une position
-	 * �quivalente située dans le niveau.
+	 * équivalente située dans le niveau.
 	 * 
 	 * @param y	ordonnée
-	 * @return	la version normalis�e de y
+	 * @return	la version normalisée de y
 	 */
 	public double normalizePositionY(double y)
 	{	return level.normalizePositionY(y);
@@ -1167,13 +1167,13 @@ public class AiZone
 	/**
 	 * prend n'importe quelles coordonnées exprimées en cases et les normalise
 	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
-	 * d�signent une position située en dehors de la zone de jeu, cette méthode
+	 * désignent une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau pour déterminer une position
-	 * �quivalente située dans le niveau.
+	 * équivalente située dans le niveau.
 	 * 
 	 * @param line	ligne de la case
 	 * @param col	colonne de la case
-	 * @return	un tableau contenant les versions normalis�es de line et col
+	 * @return	un tableau contenant les versions normalisées de line et col
 	 */
 	public int[] normalizePosition(int line, int col)
 	{	return level.normalizePosition(line, col);
@@ -1182,13 +1182,13 @@ public class AiZone
 	/**
 	 * prend n'importe quelle abscisse exprimée en cases et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * d�signe une position située en dehors de la zone de jeu, cette méthode
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
 	 * côté droit sont reliés) pour déterminer une position
-	 * �quivalente située dans le niveau.
+	 * équivalente située dans le niveau.
 	 * 
 	 * @param col	colonne de la case
-	 * @return	la version normalis�e de col
+	 * @return	la version normalisée de col
 	 */
 	public int normalizePositionCol(int col)
 	{	return level.normalizePositionCol(col);
@@ -1197,13 +1197,13 @@ public class AiZone
 	/**
 	 * prend n'importe quelle ordonnée exprimée en cases et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * d�signe une position située en dehors de la zone de jeu, cette méthode
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
 	 * côté bas sont reliés) pour déterminer une position
-	 * �quivalente située dans le niveau.
+	 * équivalente située dans le niveau.
 	 * 
 	 * @param line	ligne de la case
-	 * @return	la version normalis�e de line
+	 * @return	la version normalisée de line
 	 */
 	public int normalizePositionLine(int line)
 	{	return level.normalizePositionRow(line);
@@ -1256,7 +1256,7 @@ public class AiZone
 	 * @param y1	l'ordonnée de la première position
 	 * @param x2	l'abscisse de la seconde position
 	 * @param y21	l'ordonnée de la seconde position
-	 * @return	vrai ssi les deux positions sont �quivalentes au pixel près
+	 * @return	vrai ssi les deux positions sont équivalentes au pixel près
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	

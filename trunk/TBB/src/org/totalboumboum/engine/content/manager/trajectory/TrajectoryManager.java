@@ -70,7 +70,7 @@ public abstract class TrajectoryManager
 
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
-	 * Cette méthode doit imp�rativement être appelée juste avant un changement de gesture.
+	 * Cette méthode doit impérativement être appelée juste avant un changement de gesture.
 	 * @param newSprite
 	 */
 	public abstract void setBoundToSprite(Sprite newSprite);
@@ -128,7 +128,7 @@ public abstract class TrajectoryManager
 	protected double currentPosY = 0;
 	/** position Z absolue (en fait : soit par rapport au niveau, soit par rapport au boundToSprite) */
 	protected double currentPosZ = 0;
-	/** indique si la trajectoire a impliqué (pour le moment) que le sprite ait d�coll� du sol */ 
+	/** indique si la trajectoire a impliqué (pour le moment) que le sprite ait décollé du sol */ 
 	protected boolean hasFlied;
 	
 	public double getCurrentPosX()

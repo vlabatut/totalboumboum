@@ -120,7 +120,7 @@ public interface AiHero extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Renvoie le classement de ce joueur, pour la manche en cours.
-	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jouée, 
+	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
 	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @return	
@@ -130,7 +130,7 @@ public interface AiHero extends AiSprite
 	
 	/**
 	 * Renvoie le classement de ce joueur, pour la rencontre en cours.
-	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @return	
 	 * 		le classement de ce joueur dans la rencontre en cours
@@ -139,7 +139,7 @@ public interface AiHero extends AiSprite
 	
 	/**
 	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
-	 * Ce classement n'�volue pas pendant la manche actuellement jouée.
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @return	
 	 * 		le classement général (Glicko-2) de ce joueur

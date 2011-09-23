@@ -180,7 +180,7 @@ public abstract class SpecificAction
 		// actor modulation
 		if(result.isActive())
 		{	ActorModulation actorModulation = actor.getActorModulation(this);
-			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systm�tiquement une modulation, mais avec une puissance de 0?
+			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systématiquement une modulation, mais avec une puissance de 0?
 				result = actorModulation.modulate(result); //TODO écrire cette méthode aussi, qui renvoie une nouvelle ability		
 		}
 		
