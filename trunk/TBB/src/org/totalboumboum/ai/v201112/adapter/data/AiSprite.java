@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * cette interface permet de représenter les sprites manipul�s par le jeu,
+ * cette interface permet de représenter les sprites manipulés par le jeu,
  * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'agent.
  * 
  * @author Vincent Labatut

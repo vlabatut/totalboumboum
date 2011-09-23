@@ -46,7 +46,7 @@ public enum AiStateName
 	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
 	// equivalent gesture: APPEARING, CRYING, ENTERING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PREPARED, PUNCHING, STANDING, STANDING_FAILING, WAITING
-	/** le sprite ne fait rien ou bien réalise une action qui ne n�cessite pas de déplacement */ 
+	/** le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
 	STANDING,
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
 	/** le sprite se déplace sur le sol */
@@ -56,7 +56,7 @@ public enum AiStateName
 	
 	/**
 	 * convertit une chaine de caractères correspondant à un geste du jeu
-	 * en un objet correspondant à une action telle qu'elle est per�ue par l'IA.
+	 * en un objet correspondant à une action telle qu'elle est perçue par l'IA.
 	 * 
 	 * @param gesture	geste à convertir
 	 * @return	le symbole de l'action correspondante 

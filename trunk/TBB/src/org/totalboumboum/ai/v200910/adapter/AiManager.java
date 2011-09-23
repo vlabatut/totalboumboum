@@ -43,7 +43,7 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * 
  * Classe servant de traducteur entre le jeu et l'IA :
- * <br>	- elle traduit les données du jeu en percepts traitables par l'IA (données simplifi�es).
+ * <br>	- elle traduit les données du jeu en percepts traitables par l'IA (données simplifiées).
  * <br>	- elle traduit la réponse de l'IA (action) en un évènement compatible avec le jeu.
  * 
  * @author Vincent Labatut
@@ -81,7 +81,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	private AiZone percepts;
 	/** le moteur du jeu */
 	private VisibleLoop loop;
-	/** le niveau dans lequel la partie se d�roule */
+	/** le niveau dans lequel la partie se déroule */
 	private Level level;
 	/** date de la dernière mise à jour des percepts */
 	private long lastUpdateTime = 0;

@@ -459,7 +459,7 @@ public class AiTile
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de cette case, situé dans la direction indiqu�e (ou null si la direction n'est pas primaire)
+	 * @return	le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
 	public AiTile getNeighbor(Direction direction)
 	{	return neighbors.get(direction);		

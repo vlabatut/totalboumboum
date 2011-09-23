@@ -132,7 +132,7 @@ public class AiState
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine cet objet et lib�re les ressources occupées
+	 * termine cet objet et libère les ressources occupées
 	 */
 	void finish()
 	{	sprite = null;

@@ -301,7 +301,7 @@ public class AiZone
 	 */
 	private void updateMatrix()
 	{	hiddenItemsCount = 0;
-		// d�marque tous les sprites
+		// démarque tous les sprites
 		uncheckAll(blockMap);
 		uncheckAll(bombMap);
 		uncheckAll(fireMap);
@@ -756,7 +756,7 @@ public class AiZone
 	// ALL SPRITES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * d�marque toutes les représentations de sprites d'une liste determinée en fonction du type
+	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
 	 * T param�trant cette méthode. méthode appelée au début de la mise à jour :
 	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
@@ -925,7 +925,7 @@ public class AiZone
 	 * niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
-	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
 	 * @param line1	ligne de la première case
@@ -977,7 +977,7 @@ public class AiZone
 	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
-	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
 	 * @param sprite1	première case
@@ -1013,7 +1013,7 @@ public class AiZone
 	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
-	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
 	 * @param sprite1	premier sprite
@@ -1054,7 +1054,7 @@ public class AiZone
 	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
-	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
 	 * @param x1	abscisse du premier point
@@ -1089,7 +1089,7 @@ public class AiZone
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels. 
 	 * Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
-	 * Cette méthode considère la distance dans la direction indiqu�e par le 
+	 * Cette méthode considère la distance dans la direction indiquée par le 
 	 * paramètre direction, qui peut correspondre à un chemin passant par 
 	 * les bords du niveau.
 	 * 

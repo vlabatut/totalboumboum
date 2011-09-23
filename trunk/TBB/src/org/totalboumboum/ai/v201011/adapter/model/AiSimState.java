@@ -180,7 +180,7 @@ final class AiSimState  implements AiState
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine cet objet et lib�re les ressources occupées
+	 * termine cet objet et libère les ressources occupées
 	 */
 	protected void finish()
 	{	direction = null;
