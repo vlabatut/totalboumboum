@@ -27,6 +27,8 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
  * Pour indiquer le mode
+ * @author Ali Baran Kesimal
+ * @author Işıl Varol
  */
 enum Mode {
 	NONE,COLLECTE,ATTAQUE

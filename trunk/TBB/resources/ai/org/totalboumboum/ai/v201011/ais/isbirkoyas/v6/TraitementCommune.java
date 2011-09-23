@@ -9,6 +9,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.ais.isbirkoyas.v6.DeplacementCommune;
 import org.totalboumboum.ai.v201011.ais.isbirkoyas.v6.IsbirKoyas;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 public class TraitementCommune {
 
 	private DeplacementCommune deplacementCommune = null;

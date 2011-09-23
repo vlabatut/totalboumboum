@@ -10,6 +10,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Ali Baran Kesimal
+ * @author Işıl Varol
+ */
 @SuppressWarnings("unused")
 enum Mode {
 	NONE,COLLECTE,ATTAQUE

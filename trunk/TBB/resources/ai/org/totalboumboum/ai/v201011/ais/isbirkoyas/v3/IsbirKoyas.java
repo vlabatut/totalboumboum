@@ -25,10 +25,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**   
- * @author Ela Koyas
- * @author Goksu Isbir
- *
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
  */
 public class IsbirKoyas extends ArtificialIntelligence {
 	private AiPath nextMove=null;

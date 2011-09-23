@@ -6,8 +6,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 
-
-
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 @SuppressWarnings("unused")
 public class KayaYerinde extends ArtificialIntelligence{
 	

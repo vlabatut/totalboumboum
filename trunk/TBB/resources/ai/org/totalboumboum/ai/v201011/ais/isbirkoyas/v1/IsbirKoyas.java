@@ -24,6 +24,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 @SuppressWarnings("unused")
 public class IsbirKoyas extends ArtificialIntelligence
 {	

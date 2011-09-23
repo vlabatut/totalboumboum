@@ -5,6 +5,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 public class Cost extends CostCalculator
 {
 	ArtificialIntelligence ai;

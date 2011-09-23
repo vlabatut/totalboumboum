@@ -14,7 +14,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 
-
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 public class PathFinder {
 	private AiZone zone;
 	private AiHero ownHero;

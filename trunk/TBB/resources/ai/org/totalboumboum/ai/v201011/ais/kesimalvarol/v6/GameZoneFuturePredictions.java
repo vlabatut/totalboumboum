@@ -10,7 +10,6 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * 
  * @author Ali Baran Kesimal
  * @author Işıl Varol
- *
  */
 public class GameZoneFuturePredictions
 {

@@ -21,6 +21,10 @@ package org.totalboumboum.ai.v201011.ais.kayayerinde.v2;
  * 
  */
 
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 import java.util.ArrayList;
 import java.util.List;
 

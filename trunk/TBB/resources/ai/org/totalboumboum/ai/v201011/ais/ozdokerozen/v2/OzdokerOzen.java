@@ -35,8 +35,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
  * 
- * @author Vincent Labatut
- *
+ * @author Gizem Lara Özdöker
+ * @author Sercan Özen
  */
 public class OzdokerOzen extends ArtificialIntelligence
 {	

@@ -8,6 +8,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 public class PosageBombe {
 	IsbirKoyas ai = new IsbirKoyas();
 

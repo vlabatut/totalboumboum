@@ -14,6 +14,10 @@ import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201011.adapter.data.*;
 import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 @SuppressWarnings("unused")
 public class DropBomb 
 {

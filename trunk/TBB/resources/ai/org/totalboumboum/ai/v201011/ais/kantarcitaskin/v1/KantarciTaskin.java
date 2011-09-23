@@ -6,6 +6,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 public class KantarciTaskin extends ArtificialIntelligence
 {	
 	Matrix matrix;

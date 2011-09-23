@@ -18,8 +18,8 @@ import org.totalboumboum.ai.v201011.adapter.data.*;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * @author Kantarci Taskin
- *
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
  */
 public class KantarciTaskin extends ArtificialIntelligence
 {	

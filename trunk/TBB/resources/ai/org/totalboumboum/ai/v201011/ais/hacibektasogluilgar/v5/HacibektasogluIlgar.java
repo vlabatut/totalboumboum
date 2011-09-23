@@ -8,6 +8,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
+/**
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
+ */
 public class HacibektasogluIlgar extends ArtificialIntelligence {
 	
 	 AiZone zone;

@@ -14,6 +14,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 public class DeplacementAttaque {
 	IsbirKoyas ai = new IsbirKoyas();
 	private DeplacementCommune deplacementCommune = null;

@@ -19,6 +19,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Pol Kayuka
+ * @author Ozan Yıldırım
+ */
 @SuppressWarnings("unused")
 public class KayukaYildirim extends ArtificialIntelligence
 {	
