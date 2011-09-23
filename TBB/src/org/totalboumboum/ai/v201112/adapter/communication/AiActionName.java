@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.communication;
  */
 
 /**
- * noms donnés aux différentes actions qu'une IA peut effectuer : 
+ * noms donnés aux différentes actions qu'une agent peut effectuer : 
  * NONE (ne rien faire), MOVE (se déplacer, avec la direction à préciser), 
  * DROP_BOMB (poser une bombe), PUNCH (frapper une bombe)... 
  * 
@@ -30,6 +30,13 @@ package org.totalboumboum.ai.v201112.adapter.communication;
  *
  */
 public enum AiActionName
-{
-	DROP_BOMB,MOVE,NONE,PUNCH;	
+{	
+	/** poser une bombe */
+	DROP_BOMB,
+	/** se déplacer */
+	MOVE,
+	/** ne rien faire du tout */
+	NONE,
+	/** frapper une bombe */
+	PUNCH;	
 }

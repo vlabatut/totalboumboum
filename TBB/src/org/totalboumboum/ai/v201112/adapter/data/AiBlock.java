@@ -35,7 +35,7 @@ public interface AiBlock extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * indique si ce bloc arrête les personnages.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
@@ -46,7 +46,7 @@ public interface AiBlock extends AiSprite
 	
 	/**
 	 * indique si ce bloc arrête les explosions.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 

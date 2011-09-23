@@ -41,7 +41,7 @@ import org.totalboumboum.configuration.Configuration;
  * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
  * genre de problème, CHAQUE méthode définie dans l'IA doit :
  * 	- CONTENIR A SON TOUT DEBUT un appel à la méthode checkInterruption()
- *  - faire suivre (mot-cl� throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
+ *  - faire suivre (mot-clé throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
  * De plus, cette fonction doit également apparaître au début de chaque boucle
  * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
@@ -73,9 +73,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * méthode testant si le jeu a demandé la terminaison de l'IA.
-	 * Si c'est le cas, une exception est levée, qui sera propag�e jusqu'à call
+	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
-	 * intercept�e localement par un try/catch. 
+	 * interceptée localement par un try/catch. 
 	 */
 	public synchronized void checkInterruption() throws StopRequestException
 	{	if(lastYield==null)
@@ -155,7 +155,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * termine proprement l'IA afin de lib�rer les ressources qu'elle occupait.
+	 * termine proprement l'IA afin de libérer les ressources qu'elle occupait.
 	 */
 	void finish()
 	{	percepts = null;
@@ -170,7 +170,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/** 
 	 * renvoie la sortie graphique de l'IA, 
 	 * afin d'afficher des informations par dessus la zone de jeu
-	 * (utile lors du d�bogage). Le programme peut modifier cet objet
+	 * (utile lors du débogage). Le programme peut modifier cet objet
 	 * pour colorer des cases et afficher des chemins ou du texte
 	 * 
 	 * @return	la sortie de l'IA

@@ -25,7 +25,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente un personnage du jeu, ie un sprite contrôlé par un joueur
- * humain ou une IA.
+ * humain ou une agent.
  * 
  * @author Vincent Labatut
  *
@@ -151,7 +151,7 @@ public interface AiHero extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * teste si ce personnage est capable de passer à travers les (certains) murs
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
@@ -162,7 +162,7 @@ public interface AiHero extends AiSprite
 
 	/**
 	 * teste si ce personnage est capable de passer à travers les bombes
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
@@ -173,7 +173,7 @@ public interface AiHero extends AiSprite
 
 	/**
 	 * teste si ce personnage est capable de passer à travers le feu sans brûler
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 

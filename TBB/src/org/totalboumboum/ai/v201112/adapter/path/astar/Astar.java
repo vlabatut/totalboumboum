@@ -58,7 +58,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
  * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
  * renverra pas forcément toujours la même (il en choisira une au hasard).
- * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
+ * Le but est d'introduire une part de hasard dans les agent, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
  *

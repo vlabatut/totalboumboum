@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * types de blocages de déplacement possibles pour un sprite
+ * Types de blocages de déplacement possibles pour un sprite.
  * 
  * @author Vincent Labatut
  *

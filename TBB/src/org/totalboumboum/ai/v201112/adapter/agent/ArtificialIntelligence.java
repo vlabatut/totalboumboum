@@ -30,19 +30,21 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 
 /**
- * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
- * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 
- * à effectuer.
- * <p>
+ * classe dont chaque agent doit hériter. La méthode processAction est la méthode 
+ * appelée par le gestionnaire d'agents pour l'interroger que la prochaine action 
+ * à effectuer.<br/>
  * <b>ATTENTION :</b> remarque très importante.
- * A la fin de la partie, le jeu demande à l'IA de s'arrêter. Dans certaines
- * conditions, l'IA ne voudra pas s'arrêter (par exemple si elle est dans une
+ * A la fin de la partie, le jeu demande à l'agent de s'arrêter. Dans certaines
+ * conditions, l'agent ne voudra pas s'arrêter (par exemple si elle est dans une
  * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
- * genre de problème, CHAQUE méthode définie dans l'IA doit :
- * 	- CONTENIR A SON TOUT DEBUT un appel à la méthode checkInterruption()
- *  - faire suivre (mot-cl� throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
+ * genre de problème, CHAQUE méthode définie dans l'agent doit :
+ * <ul>	<li>CONTENIR A SON TOUT DEBUT un appel à la méthode {@link #checkInterruption}</li>
+ *  	<li>faire suivre (mot-clé throw) les interruptions StopRequestException, 
+ *  		et ne SURTOUT PAS les traiter (pas de try/catch)</li>
+ * </ul>
  * De plus, cette fonction doit également apparaître au début de chaque boucle
- * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
+ * définie dans l'agent, qu'il s'agisse d'un {@code for}, d'un {@code while} 
+ * ou d'un {@code do/while}.
  *  
  * @author Vincent Labatut
  *
@@ -52,23 +54,24 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indicateur de demande de terminaison de l'IA (activ� par le jeu à la fin de la partie) */
+	/** Indicateur de demande de terminaison de l'agent (activ� par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
 
 	/**
-	 * méthode appelée par le jeu pour demander la fin de l'IA.
-	 * Elle modifie la valeur de l'indcateur stopRequest, ce qui permettra
-	 * de lever une StopRequestException au prochain appel de la méthode checkInterruption.
+	 * Méthode appelée par le jeu pour demander la fin de l'agent.
+	 * Elle modifie la valeur de l'indicateur stopRequest, ce qui permettra
+	 * de lever une {@link StopRequestException} au prochain appel 
+	 * de la méthode {@link #checkInterruption}.
 	 */
 	public synchronized final void stopRequest()
 	{	stopRequest = true;		
 	}
 	
 	/**
-	 * méthode testant si le jeu a demandé la terminaison de l'IA.
-	 * Si c'est le cas, une exception est levée, qui sera propag�e jusqu'à call
-	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
-	 * intercept�e localement par un try/catch. 
+	 * Méthode testant si le jeu a demandé la terminaison de l'agent.
+	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
+	 * et forcera la terminaison de l'agent. Cette exception ne doit surtout pas être
+	 * interceptée localement par un {@code try/catch}. 
 	 */
 	public synchronized final void checkInterruption() throws StopRequestException
 	{	Thread.yield();
@@ -79,10 +82,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	@Override
 	public final AiAction call()
 	{	AiAction result;
-		// on réinitialise la sortie de l'IA
+		// on réinitialise la sortie de l'agent
 		reinitOutput();
 		try
-		{	// on initialise l'IA si besoin
+		{	// on initialise l'agent si besoin
 			if(!initialized)
 			{	initialized = true;
 				init();
@@ -100,70 +103,64 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PERCEPTS			/////////////////////////////////////////////
+	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Les percepts auxquels l'IA a accès */
-	private AiZone percepts;
+	/** La zone de jeu à laquelle l'agent a accès */
+	private AiZone zone;
 	
 	/**
-	 * méthode implémentant le traitement effectué par l'IA sur les percepts,
+	 * Méthode implémentant le traitement effectué par l'agent sur la zone,
 	 * et renvoyant une action en réaction.
 	 * 
 	 * @return	
-	 * 		action que l'IA a décider d'effectuer
+	 * 		action que l'agent a décidé d'effectuer
 	 * @throws StopRequestException	
-	 * 		au cas où le moteur demande la terminaison de l'IA
+	 * 		au cas où le moteur demande la terminaison de l'agent
 	 */
 	public abstract AiAction processAction() throws StopRequestException;
 
 	/**
-	 * Renvoie les percepts auxquels l'IA a accès
+	 * Renvoie la zone à laquelle l'agent a accès.
 	 * @return	
-	 * 		une AiZone représentant tous les percepts utilisables par l'IA
+	 * 		une {@link AiZone} représentant tous les percepts utilisables par l'agent.
 	 */
-	public final AiZone getPercepts()
-	{	return percepts;
+	public final AiZone getZone()
+	{	return zone;
 	}
 	/**
-	 * méthode utilisée par le moteur du jeu pour initialiser les percepts de l'IA. 
+	 * méthode utilisée par le moteur du jeu 
+	 * pour initialiser la zone de l'agent. 
 	 * 
-	 * @param percepts	
-	 * 		l'objet représentant les percepts auxquels l'IA aura accès
+	 * @param zone	
+	 * 		l'objet représentant la zone à laquelle l'agent aura accès
 	 */
-	public final void setPercepts(AiZone percepts)
-	{	this.percepts = percepts;
-		output = new AiOutput(percepts);
-	}
-
-	/**
-	 * Termine proprement l'IA afin de lib�rer les ressources qu'elle occupait.
-	 */
-	final void finish()
-	{	percepts = null;
+	public final void setZone(AiZone zone)
+	{	this.zone = zone;
+		output = new AiOutput(zone);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Sortie graphique de l'IA */
+	/** Sortie graphique de l'agent */
 	private AiOutput output;
 	
 	/** 
-	 * Renvoie la sortie graphique de l'IA, 
+	 * Renvoie la sortie graphique de l'agent, 
 	 * afin d'afficher des informations par dessus la zone de jeu
-	 * (utile lors du d�bogage). Le programme peut modifier cet objet
+	 * (utile lors du débogage). Le programme peut modifier cet objet
 	 * pour colorer des cases et afficher des chemins ou du texte
 	 * 
 	 * @return	
-	 * 		la sortie de l'IA
+	 * 		la sortie de l'agent
 	 */
 	public final AiOutput getOutput()
 	{	return output;
 	}
 
 	/**
-	 * réinitialise la sortie graphique de l'IA.
-	 * méthode appelée automatiquement avant chaque itération de l'IA.
+	 * réinitialise la sortie graphique de l'agent.
+	 * méthode appelée automatiquement avant chaque itération de l'agent.
 	 */
 	private final void reinitOutput()
 	{	output.reinit();
@@ -175,11 +172,51 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	private boolean initialized = false;
 	/**
 	 * méthode à surcharger s'il est nécessaire que l'agent soit
-	 * initialisé. Toute op�ration définie dans cette fonction
+	 * initagentlisé. Toute opération définie dans cette fonction
 	 * sera réalisée une fois, juste avant le début de la partie.
-	 * A noter que les percepts ont n�anmoins déjà été mis à jour.
+	 * A noter que les percepts ont néanmoins déjà été mis à jour.
 	 */
 	public void init() throws StopRequestException
 	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** le mode courant de l'agent */
+	protected AiMode mode = AiMode.COLLECTING;
+	
+	/**
+	 * Renvoie le mode courant de cet agent,
+	 * i.e. soit {@link AiMode#ATTACKING}, soit
+	 * {@link AiMode#COLLECTING}.
+	 * 
+	 * @return
+	 * 		Le mode courant de cet agent.
+	 */
+	public AiMode getMode()
+	{	return mode;
+	}
+
+	/**
+	 * Modifie le mode courant de cet agent,
+	 * i.e. soit {@link AiMode#ATTACKING}, soit
+	 * {@link AiMode#COLLECTING}.
+	 * 
+	 * @param mode
+	 * 		Le nouveau mode de cet agent.
+	 */
+	public void setMode(AiMode mode)
+	{	this.mode = mode;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Termine proprement l'agent afin de libérer les ressources qu'elle occupait.
+	 */
+	final void finish()
+	{	zone = null;
 	}
 }

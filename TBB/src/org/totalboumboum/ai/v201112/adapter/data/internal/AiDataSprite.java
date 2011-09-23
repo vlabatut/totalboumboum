@@ -31,7 +31,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
  * cette classe permet de représenter les sprites manipul�s par le jeu,
- * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
+ * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'agent.
  * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
  * feu, sol, personnage ou item. 
  * 

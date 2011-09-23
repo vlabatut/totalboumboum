@@ -40,7 +40,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
  * genre de problème, CHAQUE méthode définie dans l'IA doit :
  * 	- CONTENIR A SON TOUT DEBUT un appel à la méthode checkInterruption()
- *  - faire suivre (mot-cl� throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
+ *  - faire suivre (mot-clé throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
  * De plus, cette fonction doit également apparaître au début de chaque boucle
  * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
@@ -66,9 +66,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * méthode testant si le jeu a demandé la terminaison de l'IA.
-	 * Si c'est le cas, une exception est levée, qui sera propag�e jusqu'à call
+	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
-	 * intercept�e localement par un try/catch. 
+	 * interceptée localement par un try/catch. 
 	 */
 	public synchronized final void checkInterruption() throws StopRequestException
 	{	Thread.yield();
@@ -136,7 +136,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * Termine proprement l'IA afin de lib�rer les ressources qu'elle occupait.
+	 * Termine proprement l'IA afin de libérer les ressources qu'elle occupait.
 	 */
 	final void finish()
 	{	percepts = null;
@@ -151,7 +151,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/** 
 	 * Renvoie la sortie graphique de l'IA, 
 	 * afin d'afficher des informations par dessus la zone de jeu
-	 * (utile lors du d�bogage). Le programme peut modifier cet objet
+	 * (utile lors du débogage). Le programme peut modifier cet objet
 	 * pour colorer des cases et afficher des chemins ou du texte
 	 * 
 	 * @return	
@@ -175,9 +175,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	private boolean initialized = false;
 	/**
 	 * méthode à surcharger s'il est nécessaire que l'agent soit
-	 * initialisé. Toute op�ration définie dans cette fonction
+	 * initialisé. Toute opération définie dans cette fonction
 	 * sera réalisée une fois, juste avant le début de la partie.
-	 * A noter que les percepts ont n�anmoins déjà été mis à jour.
+	 * A noter que les percepts ont néanmoins déjà été mis à jour.
 	 * Si aucune méthode init n'est définie dans l'agent, alors celle
 	 * ci sera exécut�e (qui ne fait rien du tout).
 	 */

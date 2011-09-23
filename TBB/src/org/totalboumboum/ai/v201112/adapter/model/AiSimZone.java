@@ -735,7 +735,7 @@ final class AiSimZone extends AiZone
 	 * @param hero
 	 * 		le personnage à insérer
 	 * @param 
-	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'IA
+	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'agent
 	 */
 	protected void addHero(AiSimHero hero, boolean isOwnHero)
 	{	// sprites
@@ -827,7 +827,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrôlé par l'IA */
+	/** le personnage contrôlé par l'agent */
 	private AiSimHero ownHero;
 
 	@Override
@@ -854,7 +854,7 @@ final class AiSimZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette simulation (une fois que l'IA n'en a plus besoin).
+	 * termine proprement cette simulation (une fois que l'agent n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

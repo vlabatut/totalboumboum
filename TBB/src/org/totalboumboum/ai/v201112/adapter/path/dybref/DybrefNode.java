@@ -57,7 +57,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * 		fonction heuristique
 	 */
 	protected DybrefNode(ArtificialIntelligence ai, AiHero hero) throws StopRequestException
-	{	// ia
+	{	// agent
 		this.ai = ai;
 		// hero
 		this.hero = hero;
@@ -91,7 +91,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * 		noeud de recherche parent de ce noeud
 	 */
 	protected DybrefNode(AiTile tile, long duration, DybrefNode parent) throws StopRequestException
-	{	// ia
+	{	// agent
 		this.ai = parent.getAi();
 		// hero
 		this.hero = parent.getHero();
@@ -119,14 +119,14 @@ public final class DybrefNode implements Comparable<DybrefNode>
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** IA ayant invoqué A* */
+	/** agent ayant invoqué A* */
 	private ArtificialIntelligence ai = null;
 	
 	/**
-	 * renvoie l'IA qui a invoqué A*
+	 * renvoie l'agent qui a invoqué A*
 	 * 
 	 * @return
-	 * 		la classe principale de l'IA ayant invoqué A*
+	 * 		la classe principale de l'agent ayant invoqué A*
 	 */
 	public ArtificialIntelligence getAi()
 	{	return ai;	

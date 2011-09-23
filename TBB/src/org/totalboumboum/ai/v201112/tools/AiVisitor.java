@@ -49,7 +49,7 @@ import japa.parser.ast.type.Type;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 /**
- * cette méthode parse les codes sources définissant une IA et vérifie
+ * cette méthode parse les codes sources définissant un agent et vérifie
  * que les appels à checkInterruption sont effectués correctement, c'est à dire :
  * 	- un appel à chaque début de boucle (for, while, do)
  * 	- un appel à chaque début de méthode, sauf :

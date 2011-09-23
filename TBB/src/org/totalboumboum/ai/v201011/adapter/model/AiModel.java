@@ -693,7 +693,7 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * permet à un bloc d'éventuellement lib�rer un item
+	 * permet à un bloc d'éventuellement libérer un item
 	 * à la fin de sa destruction.
 	 * 
 	 * @param block
