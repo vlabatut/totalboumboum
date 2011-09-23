@@ -13,8 +13,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.ai.v201011.adapter.data.*;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-
-
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 @SuppressWarnings("unused")
 public class KayaYerinde extends ArtificialIntelligence{
 	

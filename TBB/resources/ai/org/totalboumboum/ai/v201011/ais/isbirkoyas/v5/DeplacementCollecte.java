@@ -11,6 +11,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 public class DeplacementCollecte {
 	IsbirKoyas ai = new IsbirKoyas();
 	private Securite securite = null;

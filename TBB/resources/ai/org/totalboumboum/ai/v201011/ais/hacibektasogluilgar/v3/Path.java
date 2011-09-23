@@ -1,11 +1,5 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v3;
 
-/**
- * @author Elif Nurdan  LGAR 
- * @author Engin Hac bekta o lu
- *
- */
-
 import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
@@ -22,6 +16,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
+ */
 public class Path {
 	HacibektasogluIlgar notreIA;
 	AiZone zone;

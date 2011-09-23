@@ -8,6 +8,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 @SuppressWarnings("unused")
 public class Fire
 {

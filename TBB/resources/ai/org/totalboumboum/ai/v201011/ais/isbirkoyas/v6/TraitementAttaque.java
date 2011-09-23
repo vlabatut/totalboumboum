@@ -9,6 +9,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 public class TraitementAttaque {
 
 	IsbirKoyas ai = new IsbirKoyas();

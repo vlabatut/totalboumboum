@@ -11,8 +11,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 /**constructeur
  * 
- * @param ai
- * @throws StopRequestException
+ * @author Göksu İsbir
+ * @author Ela Koyaş
  */
 public class DeplacementCollecte {
 	IsbirKoyas ai = new IsbirKoyas();

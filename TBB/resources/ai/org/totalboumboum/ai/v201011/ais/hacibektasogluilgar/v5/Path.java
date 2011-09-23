@@ -1,12 +1,9 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v5;
 
 /**
- * @author Elif Nurdan  LGAR 
- * @author Engin Hac bekta o lu
- *
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
  */
-
-
 import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.communication.AiAction;

@@ -12,6 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 public class Securite {
 	IsbirKoyas ai = new IsbirKoyas();
 	public boolean secure;

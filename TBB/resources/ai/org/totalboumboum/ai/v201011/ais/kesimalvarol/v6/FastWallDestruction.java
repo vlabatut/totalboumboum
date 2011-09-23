@@ -11,6 +11,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Ali Baran Kesimal
+ * @author Işıl Varol
+ */
 public class FastWallDestruction {
 	private static KesimalVarol monIA;
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {

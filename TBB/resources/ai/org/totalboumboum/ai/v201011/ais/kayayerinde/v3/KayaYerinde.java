@@ -7,6 +7,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 @SuppressWarnings("unused")
 public class KayaYerinde extends ArtificialIntelligence
 {

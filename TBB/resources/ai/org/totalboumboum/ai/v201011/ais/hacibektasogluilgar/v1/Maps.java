@@ -15,6 +15,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
+ */
 public class Maps 
 {
 	private HacibektasogluIlgar notreIA;

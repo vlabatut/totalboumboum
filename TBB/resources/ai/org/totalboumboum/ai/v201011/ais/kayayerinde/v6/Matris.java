@@ -13,8 +13,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
-
-
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 public class Matris {
 	KayaYerinde onder;
 	

@@ -38,8 +38,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 public class YolBulucu
 {
 	private boolean verbose = false;

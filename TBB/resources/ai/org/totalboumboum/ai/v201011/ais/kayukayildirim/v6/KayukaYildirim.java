@@ -31,7 +31,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
 
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * @author Pol Kayuka
+ * @author Ozan Yıldırım
+ */
 @SuppressWarnings("unused")
 public class KayukaYildirim extends ArtificialIntelligence
 {

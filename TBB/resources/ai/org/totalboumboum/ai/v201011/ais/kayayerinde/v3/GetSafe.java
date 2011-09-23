@@ -6,6 +6,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 public class GetSafe {
 
 	private double nFree = 0;

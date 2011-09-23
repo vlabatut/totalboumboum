@@ -15,6 +15,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
+ */
 public class CalculeZone {
 	
 	private HacibektasogluIlgar hi;

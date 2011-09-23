@@ -12,7 +12,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * 
  * on calcule la matrice collecte
  * 
- * @author Elif Nurdan  lgar && Engin Hac bekta o lu
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
  *
  */
 public class HacibektasogluIlgar extends ArtificialIntelligence

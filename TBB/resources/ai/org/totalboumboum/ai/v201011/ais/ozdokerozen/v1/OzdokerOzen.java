@@ -16,6 +16,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Gizem Lara Özdöker
+ * @author Sercan Özen
+ */
 public class OzdokerOzen extends ArtificialIntelligence
 {	
 	 //pour les sortie dans API

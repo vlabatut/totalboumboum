@@ -8,6 +8,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 public class Bonus 
 {
 	private AiZone zone; // La zone de jeu de cette instance

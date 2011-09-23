@@ -13,9 +13,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 /**
  * Dans cette projet on calcule deux matrice pour deux differentes modes
  * et à la fin on fait du mouvement d'apres les matrices.
- * 
- * @author Elif Nurdan  lgar && Engin Hac bekta o lu
- *
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
  */
 public class HacibektasogluIlgar extends ArtificialIntelligence
 {	

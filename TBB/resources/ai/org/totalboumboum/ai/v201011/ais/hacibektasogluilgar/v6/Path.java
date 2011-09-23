@@ -1,12 +1,9 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v6;
 
 /**
- * @author Elif Nurdan  LGAR 
- * @author Engin Hac bekta o lu
- *
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
  */
-
-
 import java.awt.Color;
 import java.util.List;
 

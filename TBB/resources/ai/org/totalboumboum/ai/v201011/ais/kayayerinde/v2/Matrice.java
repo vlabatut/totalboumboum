@@ -13,6 +13,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 public class Matrice {
 	private double nHero=0;
 	private double nFree=1;

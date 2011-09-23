@@ -17,8 +17,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 /**
  * Class qui determine de poser bombe
- * @author G.Lara Ozdoker && Sercan  zen
- *
+ * @author Gizem Lara Özdöker
+ * @author Sercan Özen
  */
 public class TileControleur {
 	AiZone gameZone;

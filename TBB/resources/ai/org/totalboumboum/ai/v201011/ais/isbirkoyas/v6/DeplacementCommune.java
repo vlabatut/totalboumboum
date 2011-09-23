@@ -26,6 +26,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @param ai
  * @throws StopRequestException
+ *
+ * @author Göksu İsbir
+ * @author Ela Koyaş
  */
 public class DeplacementCommune {
 

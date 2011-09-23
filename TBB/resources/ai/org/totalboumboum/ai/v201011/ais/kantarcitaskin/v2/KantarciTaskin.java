@@ -1,6 +1,10 @@
 package org.totalboumboum.ai.v201011.ais.kantarcitaskin.v2;
 
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;

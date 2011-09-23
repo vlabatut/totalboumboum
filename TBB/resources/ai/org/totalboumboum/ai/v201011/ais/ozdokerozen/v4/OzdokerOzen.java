@@ -27,14 +27,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * GROUPE ROUGE
- * Lara  zd ker && Sercan  zen
  * 
  * classe principale de l'IA, qui définit son comportement.
  * 
  * 
- * @author Lara Ozdoker
- * @author Sercan Ozen
- *
+ * @author Gizem Lara Özdöker
+ * @author Sercan Özen
  */
 public class OzdokerOzen extends ArtificialIntelligence
 {	

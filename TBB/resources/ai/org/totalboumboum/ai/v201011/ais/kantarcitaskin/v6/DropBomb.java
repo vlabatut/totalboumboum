@@ -12,6 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201011.adapter.data.*;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 public class DropBomb 
 {
 	ArtificialIntelligence ai;

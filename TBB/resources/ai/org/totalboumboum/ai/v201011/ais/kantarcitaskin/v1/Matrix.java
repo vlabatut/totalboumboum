@@ -4,6 +4,10 @@ import java.awt.Color;
 import org.totalboumboum.ai.v200910.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Burcu Kantarcı
+ * @author Ayça Taşkın
+ */
 public class Matrix 
 {
 	// les matrices

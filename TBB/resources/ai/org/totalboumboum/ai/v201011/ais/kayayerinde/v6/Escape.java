@@ -7,8 +7,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
-
-
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 public class Escape {
 	private KayaYerinde onder;
 	private Matris matris;

@@ -9,9 +9,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * @author Ela Koyas
- * @author Goksu Isbir
- * 
+ * @author Göksu İsbir
+ * @author Ela Koyaş
  */
 public class IsbirKoyas extends ArtificialIntelligence {
 

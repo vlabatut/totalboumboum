@@ -8,8 +8,10 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-
-
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 public class Astar {
 	
 	private KayaYerinde ky;

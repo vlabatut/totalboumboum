@@ -22,6 +22,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Göksu İsbir
+ * @author Ela Koyaş
+ */
 public class DeplacementCommune {
 
 	IsbirKoyas ai = new IsbirKoyas();

@@ -11,8 +11,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * Class pour seulement choisir mode
  * Et faire les calculs pour cette selection
  * 
- * @author Sercan  zen & Lara  zd ker
- *
+ * @author Gizem Lara Özdöker
+ * @author Sercan Özen
  */
 public class ChoisirMode{
 	AiZone gameZone;

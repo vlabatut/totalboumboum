@@ -12,6 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 @SuppressWarnings("unused")
 public class KayaYerinde extends ArtificialIntelligence {
 	private final int CASE_SUR = 0;

@@ -6,8 +6,11 @@ import java.util.List;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.*;
 
+/**
+ * @author Önder Kaya
+ * @author Nezaket Yerinde
+ */
 @SuppressWarnings("unused")
-
 public class Matrice {
 	private double nHero=0;
 	private double nFree=0;

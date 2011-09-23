@@ -1,11 +1,5 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v4;
 
-/**
- * @author Elif Nurdan  LGAR 
- * @author Engin Hac bekta o lu
- *
- */
-
 import java.awt.Color;
 import java.util.List;
 
@@ -24,6 +18,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
+ */
 public class Path {
 	HacibektasogluIlgar notreIA;
 	AiZone zone;
