@@ -1215,12 +1215,12 @@ if(sprite instanceof AiSimBomb)
 	/**
 	 * crée une nouvelle bombe appartenant au personnage passé en paramètre.
 	 * La bombe est placée au centre de la case passée en paramètre.
-	 * Le compteur de bombe du personnage est incrémenté.
+	 * Le compteur de bombes du personnage est incrémenté.
 	 * Si jamais la case contient déjà un objet empêchant de poser la bombe,
-	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
+	 * celle-ci n'est pas créée et la fonction renvoie la valeur {@code null}.
 	 * Sinon (si la création est possible) alors la fonction renvoie la bombe créée.
 	 * Si jamais le personnage ne peut pas poser de bombes pour l'instant,
-	 * la bombe n'est pas créée et la valeur null est renvoyée. 
+	 * la bombe n'est pas créée et la valeur {@code null} est renvoyée. 
 	 * 
 	 * @param tile
 	 * 		case qui contiendra la bombe nouvellement créée
