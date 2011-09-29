@@ -38,7 +38,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * au personnage parce qu'elle est trop dangereuse. 
  * 
  * @author Vincent Labatut
- *
  */
 public class MatrixCostCalculator extends CostCalculator
 {
@@ -62,7 +61,8 @@ public class MatrixCostCalculator extends CostCalculator
 	
 	/**
 	 * initialise la matrice de coût. 
-	 * <b>ATTENTION :</b>cette matrice doit avoir la même taille que la zone de jeu.
+	 * <b>ATTENTION :</b>cette matrice doit avoir 
+	 * la même taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	
 	 * 		la matrice de coût
@@ -94,18 +94,23 @@ public class MatrixCostCalculator extends CostCalculator
 	 * <b>ATTENTION :</b> si la matrice de coût est trop petite, la valeur maximale
 	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
 	 * d'avertissement est affiché dans la sortie standard d'erreur.
+	 * <b>Note :</b> les deux premières cases sont en fait ignorées, et
+	 * seule la case de destination est importante pour cette fonction
+	 * de coût. 
 	 * 
-	 * @param start	
-	 * 		la case de départ
-	 * @param end	
-	 * 		la case d'arrivée
+	 * @param previous
+	 * 		La case précédente.
+	 * @param current
+	 * 		La case courante (voisine de la précédente). 
+	 * @param next	
+	 * 		La case suivante (voisine de la courante).
 	 * @return 
-	 * 		le coût correspondant à la case d'arrivée dans la matrice de coût
+	 * 		le coût correspondant à la case suivante dans la matrice de coût.
 	 */ 
 	@Override
-	public double processCost(AiTile start, AiTile end) throws StopRequestException
-	{	int col = end.getCol();
-		int row = end.getRow();
+	public double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException
+	{	int col = next.getCol();
+		int row = next.getRow();
 		double result = Double.POSITIVE_INFINITY;
 		if(row<costMatrix.length && col<costMatrix[0].length)
 			result = costMatrix[row][col];

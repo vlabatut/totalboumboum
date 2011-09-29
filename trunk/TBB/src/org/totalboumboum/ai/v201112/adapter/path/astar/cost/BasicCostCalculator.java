@@ -31,7 +31,6 @@ import org.totalboumboum.ai.v201112.adapter.path.AiPath;
  * les cases considérées.
  * 
  * @author Vincent Labatut
- *
  */
 public class BasicCostCalculator extends CostCalculator
 {
@@ -41,17 +40,20 @@ public class BasicCostCalculator extends CostCalculator
 	/** 
 	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer leur distance
-	 * (exprimée en cases, donc forcément 1).
+	 * (exprimée en cases, donc forcément ici : 1).<br/>
+	 * <b>Note :</b> la première case est en fait ignorée. 
 	 * 
-	 * @param start	
-	 * 		la case de départ
-	 * @param end	
-	 * 		la case d'arrivée
-	 * @return 
-	 * 		la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
+	 * @param previous
+	 * 		La case précédente.
+	 * @param current
+	 * 		La case courante (voisine de la précédente). 
+	 * @param next	
+	 * 		La case suivante (voisine de la courante).
+	 * @return	
+	 * 		Le coût du déplacement entre la case courante et la case suivante.
 	 */ 
 	@Override
-	public double processCost(AiTile start, AiTile end) throws StopRequestException
+	public double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException
 	{	return 1;		
 	}
 
@@ -64,6 +66,7 @@ public class BasicCostCalculator extends CostCalculator
 	 * @return
 	 * 		le coût de ce chemin
 	 */
+	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getTileDistance();
 		return result;

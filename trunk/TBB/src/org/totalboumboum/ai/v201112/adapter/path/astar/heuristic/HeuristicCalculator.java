@@ -31,7 +31,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * A* lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class HeuristicCalculator
 {

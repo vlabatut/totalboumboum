@@ -55,20 +55,27 @@ public final class AstarNode implements Comparable<AstarNode>
 	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// agent
 		this.ai = ai;
+		
 		// case
 		this.tile = tile;
+		
 		// hero
 		this.hero = hero;
+		
 		// parent
 		parent = null;
+		
 		// profondeur
 		depth = 0;
+		
 		// cout
 		this.costCalculator = costCalculator;
 		cost = 0;
+		
 		// heuristique
 		this.heuristicCalculator = heuristicCalculator;
 		heuristic = heuristicCalculator.processHeuristic(tile);
+		
 		// successeurs
 		this.successorCalculator = successorCalculator;
 	}
@@ -100,7 +107,12 @@ public final class AstarNode implements Comparable<AstarNode>
 		
 		// coût
 		costCalculator = parent.getCostCalculator();
-		double localCost = costCalculator.processCost(parent.getTile(),tile);
+		AiTile previous = parent.getTile();
+		AstarNode grandParent = parent.getParent();
+		AiTile preprevious = null;
+		if(grandParent!=null)
+			preprevious = grandParent.getTile();
+		double localCost = costCalculator.processCost(preprevious,previous,tile);
 		cost = parent.getCost() + localCost;
 		
 		// heuristique
