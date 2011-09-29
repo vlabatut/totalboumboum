@@ -29,10 +29,13 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 
 /**
  * heuristique utilisant la distance de Manhattan exprimées en pixels,
- * pour aller avec PixelCostCalculator.
+ * pour aller avec PixelCostCalculator.<br/>
+ * Attention à la mise à jour nécessaire de la position du joueur
+ * concerné, cf. {@link #updateStartPoint}.
+ * <b>Attention :<b/> cette classe ne permet pas de gérer des
+ * chemins contenant des attentes.
  * 
  * @author Vincent Labatut
- *
  */
 public class PixelHeuristicCalculator extends HeuristicCalculator
 {
@@ -47,6 +50,18 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	/** ordonnée de départ (doit être contenue dans la case de départ) */
 	private double startY;
 	
+	/**
+	 * Cette méthosz permet de mettre jour tout changement 
+	 * dans la position du joueur. Elle doit être utilisée à
+	 * chaque nouvel appel du moteur de jeu.
+	 * 
+	 * @param startTile
+	 * 		La nouvelle case occupée par le personnage.
+	 * @param startX
+	 * 		Sa nouvelle abscisse en pixels.
+	 * @param startY
+	 * 		Sa nouvelle ordonnée en pixels.
+	 */
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
 	{	this.startTile = startTile;
 		this.startX = startX;

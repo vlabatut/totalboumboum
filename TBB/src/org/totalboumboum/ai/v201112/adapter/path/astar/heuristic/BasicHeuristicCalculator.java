@@ -28,16 +28,18 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 
 /**
- * implément la plus simple d'une heuristique : 
+ * implémentation la plus simple d'une heuristique : 
  * on utilise la distance de Manhattan entre la case de départ et 
- * la plus proche des cases d'arrivée.
+ * la plus proche des cases d'arrivée.<br/>
+ * <b>Attention :<b/> cette classe ne permet pas de gérer des
+ * chemins contenant des attentes. De plus les distances sont
+ * calculées en cases, et non pas en pixels : rapidement calculé,
+ * mais approximatif. 
  * 
  * @author Vincent Labatut
- *
  */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {
-	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

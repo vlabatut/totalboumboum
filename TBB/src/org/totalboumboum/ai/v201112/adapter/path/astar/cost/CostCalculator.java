@@ -26,11 +26,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 
 /**
- * permet de définir une fonction de coût utilisée lors de la recherche
- * avec l'algorithme A*
+ * Permet de définir une fonction de coût 
+ * utilisée lors de la recherche
+ * avec l'algorithme A*.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class CostCalculator
 {
@@ -38,40 +38,46 @@ public abstract class CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * calcule le coût de l'action consistant à aller de la case
+	 * Calcule le coût de l'action consistant à aller de la case
 	 * start à la case end, sachant que ces deux cases sont voisines.
 	 * Il est possible de définir des coûts évolués, en tenant compte par exemple des
 	 * influences négatives dans ces cases (pour le joueur) comme la prèsence de bombes 
 	 * à proximité, etc., et des influences positives telles que la prèsence de bonus.
 	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
-	 * @param start	
-	 * 		la case de départ 
-	 * @param end	
-	 * 		la case d'arrivée (qui doit être voisine)
+	 * @param previous
+	 * 		La case précédente.
+	 * @param current
+	 * 		La case courante (voisine de la précédente). 
+	 * @param next	
+	 * 		La case suivante (voisine de la courante).
 	 * @return	
-	 * 		le coût du déplacement
+	 * 		Le coût du déplacement entre la case courante et la case suivante.
 	 */
-	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
+	public abstract double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException;
 	
 	/**
-	 * calcule le coût d'un chemin, i.e. la somme des coûts des actions
+	 * Calcule le coût d'un chemin, i.e. la somme des coûts des actions
 	 * consistant à passer d'une case du chemin à la suivante.
 	 * 
 	 * @param path
-	 * 		chemin à traiter
+	 * 		Chemin à traiter
 	 * @return
-	 * 		le coût de ce chemin
+	 * 		Le coût de ce chemin.
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;
 		AiTile previous = null;
+		AiTile preprevious = null;
+		
 		for(AiTile tile: path.getTiles())
 		{	if(previous==null)
 				previous = tile;
 			else
-			{	double localCost = processCost(previous,tile);
+			{	double localCost = processCost(preprevious,previous,tile);
 				result = result + localCost;
+				preprevious = previous;
+				previous = tile;
 			}			
 		}
 		return result;
