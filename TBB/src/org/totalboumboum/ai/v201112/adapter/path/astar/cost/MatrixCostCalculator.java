@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
- * Classe étendant la classe abstraite CostCalculator grâce à une matrice de coûts.
+ * Classe étendant la classe abstraite {@link CostCalculator} grâce à une matrice de coûts.
  * Ici, le coût pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce coût est égal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
@@ -35,16 +35,16 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
  * Cette classe est utile si on veut calculer des coûts plus fins qu'avec BasicCostCalculator,
  * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
  * à l'action de passer dans une case qui est à portée d'une bombe susceptible d'exploser, ou bien 
- * un coût infini (avec Double.POSITIVE_INFINITY) à l'action de passer dans une case qu'on veut interdire
- * au personnage parce qu'elle est trop dangereuse. 
+ * un coût infini (avec {@link Double#POSITIVE_INFINITY}) à l'action de passer dans une case 
+ * qu'on veut interdire au personnage parce qu'elle est trop dangereuse. 
  * 
  * @author Vincent Labatut
  */
 public class MatrixCostCalculator extends CostCalculator
 {
 	/**
-	 * initialise la fonction de coût. On doit obligatoirement
-	 * fournir la matrice de cout correspondante.
+	 * Initialise la fonction de coût. On doit obligatoirement
+	 * fournir la matrice de cout correspondante.<br/>
 	 * <b>ATTENTION :</b> cette matrice doit avoir la même taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	
@@ -61,7 +61,7 @@ public class MatrixCostCalculator extends CostCalculator
 	private double costMatrix[][];
 	
 	/**
-	 * initialise la matrice de coût. 
+	 * Initialise la matrice de coût.<br/>
 	 * <b>ATTENTION :</b>cette matrice doit avoir 
 	 * la même taille que la zone de jeu.
 	 * 
@@ -73,14 +73,14 @@ public class MatrixCostCalculator extends CostCalculator
 	}
 	
 	/**
-	 * met à jour un coût dans la matrice
+	 * Met à jour un coût dans la matrice.
 	 * 
 	 * @param row	
-	 * 		ligne de la case à mettre à jour
+	 * 		Ligne de la case à mettre à jour.
 	 * @param col	
-	 * 		colonne de la case à mettre à jour
+	 * 		Colonne de la case à mettre à jour.
 	 * @param cost	
-	 * 		nouveau coût à affecter
+	 * 		Nouveau coût à affecter.
 	 */
 	public void setCost(int row, int col, double cost) throws StopRequestException
 	{	costMatrix[row][col] = cost;
@@ -95,20 +95,21 @@ public class MatrixCostCalculator extends CostCalculator
 	 * <b>ATTENTION :</b> si la matrice de coût est trop petite, la valeur maximale
 	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
 	 * d'avertissement est affiché dans la sortie standard d'erreur.
-	 * <b>Note :</b> seule la case de destination est importante pour cette fonction
+	 * <b>Note :</b> seul l'emplacement de destination est important pour cette fonction
 	 * de coût. 
 	 * 
 	 * @param current
-	 * 		La case courante (voisine de la précédente). 
+	 * 		L'emplacement de départ. 
 	 * @param next	
-	 * 		La case suivante (voisine de la courante).
-	 * @return 
-	 * 		le coût correspondant à la case suivante dans la matrice de coût.
+	 * 		L'emplacement d'arrivée (case voisine de la case courante).
+	 * @return	
+	 * 		Le coût correspondant à la case d'arrivée dans la matrice de coût.
 	 */ 
 	@Override
 	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
-	{	int col = next.getCol();
-		int row = next.getRow();
+	{	AiTile tile = next.getTile();
+		int col = tile.getCol();
+		int row = tile.getRow();
 		double result = Double.POSITIVE_INFINITY;
 		if(row<costMatrix.length && col<costMatrix[0].length)
 			result = costMatrix[row][col];
