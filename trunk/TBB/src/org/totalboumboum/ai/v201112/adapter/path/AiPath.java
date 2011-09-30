@@ -26,7 +26,7 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * Cette classe représente un chemin qu'un agent peut emprunter
@@ -48,16 +48,16 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	// LOCATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des emplacements composant le chemin */
+	/** Liste des emplacements composant le chemin */
 	private final List<AstarLocation> locations = new ArrayList<AstarLocation>();
-	/** liste des pauses associées à chaque emplacement (attention : ce temps n'inclut pas le temps de déplacement) */
+	/** Liste des pauses associées à chaque emplacement (attention : ce temps n'inclut pas le temps de déplacement) */
 	private final List<Long> pauses = new ArrayList<Long>();
 	
 	/**
 	 * Renvoie la liste de emplacements constituant ce chemin
 	 * 
 	 * @return	
-	 * 		la liste de emplacements du chemin
+	 * 		La liste de emplacements du chemin.
 	 */
 	public List<AstarLocation> getLocations()
 	{	return locations;	
@@ -68,7 +68,7 @@ public class AiPath implements Comparable<AiPath>
 	 * Les pauses sont exprimées en ms.
 	 * 
 	 * @return	
-	 * 		la liste de pauses du chemin
+	 * 		La liste de pauses du chemin
 	 */
 	public List<Long> getPauses()
 	{	return pauses;	
@@ -82,7 +82,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @return	
 	 * 		L'emplacement occupant la position indiquée dans ce chemin
 	 */
-	public AstarLocation getTile(int index)
+	public AstarLocation getLocation(int index)
 	{	return locations.get(index);	
 	}
 	
@@ -92,9 +92,9 @@ public class AiPath implements Comparable<AiPath>
 	 * La pause est exprimée en ms.
 	 *
 	 * @param index
-	 * 		la position de l'emplacement demandée
+	 * 		La position de l'emplacement demandé.
 	 * @return	
-	 * 		la case occupant la position indiquée dans ce chemin
+	 * 		L'emplacement occupant la position indiquée dans ce chemin.
 	 */
 	public Long getPause(int index)
 	{	return pauses.get(index);	
@@ -105,131 +105,133 @@ public class AiPath implements Comparable<AiPath>
 	 * en l'insérant à la fin de la séquence d'emplacements.
 	 * 
 	 * @param location
-	 * 		l'emplacement à insérer
+	 * 		L'emplacement à insérer.
 	 */
-	public void addTile(AstarLocation location)
-	{	addTile(location,0);
+	public void addLocation(AstarLocation location)
+	{	addLocation(location,0);
 	}
 	
 	/**
-	 * Ajoute dans ce chemin la case passée en paramètre, 
-	 * en l'insérant à la fin de la séquence de cases et
+	 * Ajoute dans ce chemin l'emplacement passé en paramètre, 
+	 * en l'insérant à la fin de la séquence d'emplacements et
 	 * en lui associant la pause spécifiée (en ms). 
 	 * 
-	 * @param tile
-	 * 		la case à insérer
+	 * @param location
+	 * 		L'emplacement à insérer.
 	 */
-	public void addTile(AstarLocation tile, long pause)
-	{	locations.add(tile);
+	public void addLocation(AstarLocation location, long pause)
+	{	locations.add(location);
 		pauses.add(pause);
 	}
 	
 	/**
-	 * Ajoute dans ce chemin la case passée en paramètre, 
+	 * Ajoute dans ce chemin l'emplacement passé en paramètre, 
 	 * en l'insérant à la position passée en paramètre.
 	 * 
 	 * @param index
-	 * 		position de la case à insérer
-	 * @param tile
-	 * 		la case à insérer
+	 * 		Position de l'emplacement à insérer.
+	 * @param location
+	 * 		L'emplacement à insérer.
 	 */
-	public void addTile(int index, AstarLocation tile)
-	{	addTile(index,tile,0);
+	public void addLocation(int index, AstarLocation location)
+	{	addLocation(index,location,0);
 	}
 	
 	/**
-	 * Ajoute dans ce chemin la case passée en paramètre, 
+	 * Ajoute dans ce chemin l'emplacement passé en paramètre, 
 	 * en l'insérant à la position passée en paramètre.
 	 * 
 	 * @param index
-	 * 		position de la case à insérer
-	 * @param tile
-	 * 		la case à insérer
+	 * 		Position de l'emplacement à insérer.
+	 * @param location
+	 * 		L'emplacement à insérer.
 	 * @param pause
-	 * 		la pause associée à la case à insérer
+	 * 		La pause associée à l'emplacement à insérer.
 	 */
-	public void addTile(int index, AstarLocation tile, long pause)
-	{	locations.add(index,tile);
+	public void addLocation(int index, AstarLocation location, long pause)
+	{	locations.add(index,location);
 		pauses.add(index,pause);
 	}
 	
 	/**
-	 * remplace la case dont la position est passée en paramètre par
-	 * la case passée en paramètre, dans ce chemin.
+	 * Remplace l'emplacement dont la position est passée en paramètre par
+	 * l'emplacement passé en paramètre, dans ce chemin.
 	 * 
 	 * @param index
-	 * 		position de la case à remplacer
-	 * @param tile
-	 * 		la nouvelle case
+	 * 		Position de l'emplacement à remplacer.
+	 * @param location
+	 * 		Le nouvel emplacement.
 	 */
-	public void setTile(int index, AstarLocation tile)
-	{	locations.set(index,tile);
+	public void setLocation(int index, AstarLocation location)
+	{	locations.set(index,location);
 	}
 	
 	/**
-	 * Remplace la case dont la position est passée en paramètre par
-	 * la case passée en paramètre, dans ce chemin. La pause
+	 * Remplace l'emplacement dont la position est passée en paramètre par
+	 * l'emplacement passé en paramètre, dans ce chemin. La pause
 	 * est également remplacée par la pause spécifiée en paramètre
 	 * (et exprimée en ms).
 	 * 
 	 * @param index
-	 * 		position de la case à remplacer
-	 * @param tile
-	 * 		la nouvelle case
+	 * 		Position de l'emplacement à remplacer.
+	 * @param location
+	 * 		Le nouvel emplacement case.
 	 * @param pause
-	 * 		la nouvelle pause associée à cette case.
+	 * 		La nouvelle pause associée à cet emplacement.
 	 */
-	public void setTile(int index, AstarLocation tile, long pause)
-	{	locations.set(index,tile);
+	public void setLocation(int index, AstarLocation location, long pause)
+	{	locations.set(index,location);
 		pauses.set(index,pause);
 	}
 	
 	/**
-	 * Remplace la pause de la case dont la position est passée en paramètre par
+	 * Remplace la pause de l'emplacement dont la position est 
+	 * passée en paramètre par
 	 * la durée passée en paramètre, dans ce chemin.
 	 * 
 	 * @param index
-	 * 		position de la case dont la pause est à remplacer
+	 * 		Position de l'emplacement dont la pause est à remplacer.
 	 * @param pause
-	 * 		la nouvelle pause
+	 * 		La nouvelle pause.
 	 */
 	public void setPause(int index, long pause)
 	{	pauses.set(index,pause);
 	}
 	
 	/**
-	 * Supprime de ce chemin la case dont la position est passée en paramètre
+	 * Supprime de ce chemin l'emplacement dont 
+	 * la position est passée en paramètre
 	 * (supprime également l'éventuelle pause associée).
 	 * 
 	 * @param index
-	 * 		position de la case à supprimer
+	 * 		Position de l'emplacement à supprimer.
 	 */
-	public void removeTile(int index)
+	public void removeLocation(int index)
 	{	locations.remove(index);
 		pauses.remove(index);
 	}
 	
 	/**
-	 * Supprime de ce chemin la case passée en paramètre,
+	 * Supprime de ce chemin l'emplacement passé en paramètre,
 	 * ainsi que (éventuellement) la pause qui lui était
 	 * associée.
 	 * 
-	 * @param tile
-	 * 		la case à supprimer
+	 * @param location
+	 * 		L'emplacement à supprimer.
 	 */
-	public void removeTile(AstarLocation tile)
-	{	int index = locations.indexOf(tile);
+	public void removeLocation(AstarLocation location)
+	{	int index = locations.indexOf(location);
 		locations.remove(index);
 		pauses.remove(index);
 	}
 	
 	/**
-	 * Renvoie la longueur (en cases) de ce chemin.<br/>
+	 * Renvoie le nombre d'emplacements dans ce chemin.<br/>
 	 * <b>Attention :</b> si le chemin contient plusieurs
-	 * fois la même case, elle sera comptée autant de fois.
+	 * fois le même emplacement, ile sera compté autant de fois.
 	 * 
 	 * @return	
-	 * 		La longueur de ce chemin, en cases.
+	 * 		La longueur de ce chemin, en emplacements.
 	 */
 	public int getLength()
 	{	return locations.size();
@@ -239,20 +241,20 @@ public class AiPath implements Comparable<AiPath>
 	 * Teste si ce chemin a une longueur non-nulle.
 	 * 
 	 * @return	
-	 * 		Renvoie {@code true} ssi le chemin ne contient aucune case.
+	 * 		Renvoie {@code true} ssi le chemin ne contient aucun emplacement.
 	 */
 	public boolean isEmpty()
 	{	return locations.size()==0;
 	}
 	
 	/**
-	 * Renvoie la dernière case du chemin,
-	 * ou {@code null} s'il n'y a pas de case dans ce chemin
+	 * Renvoie le dernier emplacement du chemin,
+	 * ou {@code null} s'il ce chemin est vide.
 	 * 
 	 * @return	
-	 * 		La dernière case du chemin ou {@code null} en cas d'erreur.
+	 * 		Le dernier emplacement du chemin ou {@code null} en cas d'erreur.
 	 */
-	public AstarLocation getLastTile()
+	public AstarLocation getLastLocation()
 	{	AstarLocation result = null;
 		if(!locations.isEmpty())
 			result = locations.get(locations.size()-1);
@@ -260,11 +262,12 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * Renvoie la pause associée à la dernière case du chemin,
-	 * ou {@code null} s'il n'y a pas de case dans ce chemin
+	 * Renvoie la pause associée au dernier emplacement du chemin,
+	 * ou {@code null} s'il n'y a pas d'emplacement dans ce chemin
 	 * 
 	 * @return	
-	 * 		La pause associée à la dernière case du chemin ou {@code null} en cas d'erreur.
+	 * 		La pause associée au dernier emplacement 
+	 * 		du chemin ou {@code null} en cas d'erreur.
 	 */
 	public Long getLastPause()
 	{	Long result = null;
@@ -274,13 +277,13 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * Renvoie la première case du chemin,
-	 * ou {@code null} s'il n'y a pas de case dans ce chemin.
+	 * Renvoie le premier emplacement du chemin,
+	 * ou {@code null} s'il n'y a pas d'emplacement dans ce chemin.
 	 * 
 	 * @return	
-	 * 		La première case du chemin ou {@code null} en cas d'erreur.
+	 * 		Le premiere emplacement du chemin ou {@code null} en cas d'erreur.
 	 */
-	public AstarLocation getFirstTile()
+	public AstarLocation getFirstLocation()
 	{	AstarLocation result = null;
 		if(!locations.isEmpty())
 			result = locations.get(0);
@@ -288,11 +291,12 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * Renvoie la pause associée à la première case du chemin,
-	 * ou {@code null} s'il n'y a pas de case dans ce chemin.
+	 * Renvoie la pause associée au premier emplacement du chemin,
+	 * ou {@code null} s'il n'y a pas d'emplacement dans ce chemin.
 	 * 
 	 * @return	
-	 * 		La pause associée à la première case du chemin ou {@code null} en cas d'erreur.
+	 * 		La pause associée au premier emplacement du chemin 
+	 * 		ou {@code null} en cas d'erreur.
 	 */
 	public Long getFirstPause()
 	{	Long result = null;
@@ -317,43 +321,41 @@ public class AiPath implements Comparable<AiPath>
 		AstarLocation previous = null;
 		AiZone zone = null;
 		
-		for(AstarLocation tile: locations)
+		for(AstarLocation location: locations)
 		{	if(previous==null)
-			{	zone = tile.getTile().getZone();
+			{	zone = location.getTile().getZone();
 			}
 			else
-			{	int dist = zone.getTileDistance(previous,tile);
+			{	int dist = zone.getTileDistance(previous,location);
 				result = result + dist;
 			}
-			previous = tile;
+			previous = location;
 		}
 		return result;	
 	}
 
 	/**
 	 * Renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin.
-	 * On utilise le point de départ pour démarrer le calcul, donc pas nécessairement
-	 * le centre de la première case. Le point d'arrivée est forcément un point à la périphérie 
-	 * de la dernière case. Le calcul ne tient pas compte des éventuels obstacles.
-	 * On suppose que le personnage passe par le centre de chaque case.
+	 * Le calcul ne tient pas compte des éventuels obstacles.<br/>
 	 * 
 	 * @return	
-	 * 		Un réel correspondant à la distance totale du chemin en pixels.
+	 * 		Un réel correspondant à la distance totale du chemin, exprimée en pixels.
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
 		AstarLocation previous = null;
 		AiZone zone = null;
 
-		for(AstarLocation tile: locations)
+		for(AstarLocation location: locations)
 		{	if(previous==null)
-			{	zone = tile.getTile().getZone();
+			{	zone = location.getTile().getZone();
 			}
 			else
-			{	double dist = zone.getPixelDistance(previous,tile);
+			{	//Direction direction = zone.getDirection(previous,location);
+				double dist = zone.getPixelDistance(previous,location);
 				result = result + dist;
 			}
-			previous = tile;
+			previous = location;
 		}
 		return result;
 	}
@@ -393,7 +395,9 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public int compareTo(AiPath path)
-	{	int result = 0;
+	{	// ça serait mieux de considérer le temps,
+		// mais pour ça il faudrait connaître le personnage concerné.
+		int result = 0;
 		double dist1 = getPixelDistance();
 		double dist2 = path.getPixelDistance();
 		if(dist1>dist2)
@@ -405,9 +409,8 @@ public class AiPath implements Comparable<AiPath>
 
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
-	 * et renvoie vrai s'ils sont constitués de la même séquence de cases
-	 *  et de pauses.<br/>
-	 * <b>Remarque :</b> on ne considère donc pas le point de départ.
+	 * et renvoie vrai s'ils sont constitués de la même séquence d'emplacements
+	 *  et de pauses.
 	 * 
 	 * @param object
 	 * 		Le chemin à comparer.
@@ -423,7 +426,7 @@ public class AiPath implements Comparable<AiPath>
 			int i=0;
 			while(result && i<locations.size())
 			{	AstarLocation loc1 = locations.get(i);
-				AstarLocation loc2 = path.getTile(i);
+				AstarLocation loc2 = path.getLocation(i);
 				long pause1 = pauses.get(i);
 				long pause2 = path.getPause(i);
 				result = loc1.equals(loc2) && pause1==pause2;
