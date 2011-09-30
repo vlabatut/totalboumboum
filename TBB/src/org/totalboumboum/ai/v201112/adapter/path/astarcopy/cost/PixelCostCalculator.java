@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
+package org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost;
 
 /*
  * Total Boum Boum
@@ -27,14 +27,20 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 
 /**
- * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
- * mais plutôt au temps nécessaire pour parcourir le chemin.<br/>
- * Ceci permet de gérer les temps d'arrêt nécessaires pour laisser
- * certains obstacles tels que les bombes disparaître.
+ * Classe étendant la classe abstraite CostCalculator de la manière à déterminer
+ * le coût en fonction de la distance en pixel entre les cases.<br/>
+ * Cela ne change rien pour toutes les cases sauf la première, car en fonction
+ * de la position du point de départ, deux chemins peuvent correspondre à la même
+ * distance si on considère les cases, mais une distance différente si on considère
+ * les pixels.<br/>
+ * <b>Attention :</b> le point de départ doit obligatoirement être mis à 
+ * jour à chaque nouvelle itération du moteur de jeu, avant l'appel à A*.<br/>
+ *  Cette classe n'est pas conçue pour traiter les chemins contenant des
+ *  retours en arrière. Voir {@link TimeCostCalculator} pour ça.
  * 
  * @author Vincent Labatut
  */
-public class TimeCostCalculator extends CostCalculator
+public class PixelCostCalculator extends CostCalculator
 {	
 	/////////////////////////////////////////////////////////////////
 	// STARTING POINT			/////////////////////////////////////
@@ -46,6 +52,18 @@ public class TimeCostCalculator extends CostCalculator
 	/** ordonnée de départ (doit être contenue dans la case de départ) */
 	private double startY;
 	
+	/**
+	 * Cette méthosz permet de mettre jour tout changement 
+	 * dans la position du joueur. Elle doit être utilisée à
+	 * chaque nouvel appel du moteur de jeu.
+	 * 
+	 * @param startTile
+	 * 		La nouvelle case occupée par le personnage.
+	 * @param startX
+	 * 		Sa nouvelle abscisse en pixels.
+	 * @param startY
+	 * 		Sa nouvelle ordonnée en pixels.
+	 */
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
 	{	this.startTile = startTile;
 		this.startX = startX;
@@ -61,32 +79,31 @@ public class TimeCostCalculator extends CostCalculator
 	 * Sauf si la case start correspond à la première case
 	 * du chemin : là, on renvoie la distance entre le point
 	 * de départ et le centre de la case suivante.
+	 * <b>Note :</b> la première case est en fait ignorée. 
 	 * 
-	 * @param previous
-	 * 		La case précédente.
 	 * @param current
 	 * 		La case courante (voisine de la précédente). 
 	 * @param next	
 	 * 		La case suivante (voisine de la courante).
 	 * @return	
-	 * 		la distance entre ces cases
+	 * 		La distance en pixels entre la cases courante et la case suivante.
 	 */ 
 	@Override
-	public double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AiTile current, AiTile next) throws StopRequestException
 	{	// init
-		double startX = start.getPosX();
-		double startY = start.getPosY();
-		double endX = end.getPosX();
-		double endY = end.getPosY();
+		double startX = current.getPosX();
+		double startY = current.getPosY();
+		double endX = next.getPosX();
+		double endY = next.getPosY();
 
 		// specific case : start is the first tile of the considered path
-		if(start.equals(startTile))
+		if(current.equals(startTile))
 		{	startX = this.startX;
 			startY = this.startY;
 		}
 		
 		// process the pixel Manhattan distance
-		AiZone zone = start.getZone();
+		AiZone zone = current.getZone();
 		double result = zone.getPixelDistance(startX,startY,endX,endY);
 		
 		return result;		
@@ -101,14 +118,9 @@ public class TimeCostCalculator extends CostCalculator
 	 * @return
 	 * 		le coût de ce chemin
 	 */
+	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getPixelDistance();
 		return result;
 	}
 }
-
-
-/**
- * - créer un objet AstarLocation contenant à la fois les positions en pixels et la case (>pratique pr gauler la simzone)
- * - au lieu de calculer le coût entre deux cases, on calcule le cout entre deux positions >> plus général
- */
