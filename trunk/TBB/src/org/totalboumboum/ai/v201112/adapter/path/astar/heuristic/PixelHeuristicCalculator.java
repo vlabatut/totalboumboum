@@ -27,10 +27,11 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.PixelCostCalculator;
 
 /**
  * Heuristique utilisant la distance de Manhattan exprimées en pixels,
- * pour aller avec PixelCostCalculator.<br/>
+ * pour fonctionner avec {@link PixelCostCalculator}.<br/>
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
  * chemins contenant des attentes. Par contre, à la différence
  * de {@link BasicHeuristicCalculator}, elle gère les distances

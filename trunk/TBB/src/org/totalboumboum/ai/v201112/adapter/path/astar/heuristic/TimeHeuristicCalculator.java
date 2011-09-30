@@ -32,11 +32,8 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
 
 /**
  * Heuristique utilisant la distance de Manhattan exprimées en pixels,
- * pour aller avec PixelCostCalculator.<br/>
- * <b>Attention :<b/> cette classe ne permet pas de gérer des
- * chemins contenant des attentes. Par contre, à la différence
- * de {@link BasicHeuristicCalculator}, elle gère les distances
- * en pixels.
+ * et surtout le temps nécessaire à son parcours,
+ * pour fonctionner avec {@link TimeCostCalculator}.<br/>
  * 
  * @author Vincent Labatut
  */
