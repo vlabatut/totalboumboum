@@ -24,56 +24,73 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.v201011.adapter.path.astar.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Implémentation la plus simple d'une fonction successeur : 
- * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
- * par le personnage considéré, et qui n'ont pas déjà été explorées. La classe 
- * est compatible avec {@link BasicCostCalculator}, {@link PixelCostCalculator}
- * et {@link MatrixCostCalculator}.<br/>
- * On empêche tout passage sur une case déjà explorée afin de rendre le traitement 
- * plus court. Par conséquent, cette fonction n'est pas capable de traiter les 
- * chemins qui contiennent des retours en arrière ou de l'attente.
+ * Cette implémentation de la fonction successeur permet de traiter explicitement
+ * le temps. L'algorithme va considérer non seulement un déplacement dans les
+ * 4 cases voisines, mais aussi l'action d'attendre. Par exemple, cette approche
+ * permet de considérer le cas où le joueur va attendre qu'un feu (présent dans
+ * une case voisine, et qui l'empêche de passer) disparaisse. Par conséquent,
+ * on envisagera aussi de passer sur des cases que l'algorithme a déjà traitées.<br>
+ * Le temps de traitement sera donc beaucoup plus long que pour les autres fonctions
+ * successeurs. Cette approche ne doit donc <b>pas être utilisée souvent</b>, car elle
+ * va vraisemblablement ralentir l'agent significativement. 
  * 
  * @author Vincent Labatut
  */
-public class BasicSuccessorCalculator extends SuccessorCalculator
+public class TimeSuccessorCalculator extends SuccessorCalculator
 {
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Fonction successeur la plus simple: on considère les 4 cases 
-	 * voisines de la case courante,
-	 * en ne conservant que les cases que le personnage 
-	 * de référence peut traverser. On ignore également
-	 * les cases déjà explorées, afin d'éviter les retours
-	 * en arrière et de rendre le traitement plus rapide.
+	 * Fonction successeur considérant à la fois les 4 cases 
+	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
+	 * mais aussi la possibilité d'attendre dans la case courante.
+	 * Autre différence : les cases déjà traversées sont considérées,
+	 * car le chemin peut inclure des retours en arrière pour éviter
+	 * des explosions.
 	 * 
 	 * @param node	
-	 * 		Le noeud de recherche courant
+	 * 		Le noeud de recherche courant.
 	 * @return	
 	 * 		La liste des noeuds fils.
 	 */
 	@Override
 	public List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException
-	{	// init
+	{	AiZone zone = node.getAi().getZone();
+	
+		// le fait qu'il n'y ait plus de bombes ni d'explosions à proximité
+		// du personnage considéré simplifie grandement les calculs
+		boolean safeMode = zone.getFires().isEmpty() && zone.getBombs().isEmpty();
+
+		
+		
+		
+		
+		
+		
+		
+		
+		// init
 		List<AstarNode> result = new ArrayList<AstarNode>();
 		AiTile tile = node.getLocation().getTile();
 		AiHero hero = node.getHero();
 		
 		// pour chaque case voisine :
 		for(Direction direction: Direction.getPrimaryValues())
-		{	AiTile neighbor = tile.getNeighbor(direction);
+		{	// on simule le déplacement dans la direction choisie
+			
+			
+			
+			AiTile neighbor = tile.getNeighbor(direction);
 			
 			// on teste si elle est traversable 
 			// et n'a pas déjà été explorée dans la branche courante de A*
@@ -84,6 +101,17 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 			}
 		}
 
+		return result;
+	}
+	
+	private boolean isSafeMode(AiHero hero)
+	{	boolean result = false;
+		AiTile tile = hero.getTile();
+		AiZone zone = tile.getZone();
+		List<AiTile> neighbors = tile.getNeighbors();
+		
+		
+		
 		return result;
 	}
 }

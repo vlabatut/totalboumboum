@@ -90,7 +90,8 @@ public class Promeneur extends ArtificialIntelligence
 		return result;
 	}
 
-	private void init() throws StopRequestException
+	@Override
+	public void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
 		nextTile = currentTile;		
