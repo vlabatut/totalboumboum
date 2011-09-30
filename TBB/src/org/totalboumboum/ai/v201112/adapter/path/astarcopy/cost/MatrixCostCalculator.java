@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost;
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * Classe étendant la classe abstraite CostCalculator grâce à une matrice de coûts.
@@ -105,7 +106,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		le coût correspondant à la case suivante dans la matrice de coût.
 	 */ 
 	@Override
-	public double processCost(AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
 	{	int col = next.getCol();
 		int row = next.getRow();
 		double result = Double.POSITIVE_INFINITY;

@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * Classe étendant la classe abstraite CostCalculator de la manière à déterminer
@@ -89,7 +90,7 @@ public class PixelCostCalculator extends CostCalculator
 	 * 		La distance en pixels entre la cases courante et la case suivante.
 	 */ 
 	@Override
-	public double processCost(AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
 	{	// init
 		double startX = current.getPosX();
 		double startY = current.getPosY();

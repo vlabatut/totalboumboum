@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
@@ -50,7 +51,7 @@ public class BasicCostCalculator extends CostCalculator
 	 * 		Le coût du déplacement entre la case courante et la case suivante.
 	 */ 
 	@Override
-	public double processCost(AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
 	{	return 1;		
 	}
 

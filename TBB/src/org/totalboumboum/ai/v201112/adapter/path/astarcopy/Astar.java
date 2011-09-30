@@ -291,7 +291,7 @@ public final class Astar
 			if(limitReached)
 				System.out.println(" limit reached");
 			else if(found)
-			{	for(AiTile t: result.getTiles())
+			{	for(AiTile t: result.getLocations())
 					System.out.print(" "+t);
 			}
 			else //if(endTiles.isEmpty())
