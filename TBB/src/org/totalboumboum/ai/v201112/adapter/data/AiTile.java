@@ -97,14 +97,14 @@ public abstract class AiTile
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** longueur d'un côté de la case en pixels */
+	/** Longueur d'un côté de la case en pixels */
 	protected double size;
 		
 	/** 
-	 * renvoie la taille de la case en pixels
+	 * Renvoie la taille de la case en pixels.
 	 * 
 	 * @return	
-	 * 		longueur d'un côté de la case en pixels
+	 * 		Longueur d'un côté de la case en pixels.
 	 */
 	public double getSize()
 	{	return size;	

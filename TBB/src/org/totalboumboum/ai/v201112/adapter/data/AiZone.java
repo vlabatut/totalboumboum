@@ -33,6 +33,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.calculus.LevelsTools;
@@ -228,8 +229,10 @@ public abstract class AiZone
 	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
 	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long.
-	 * <br><t> S>>>>>>>>>>T  distance=11
-	 * <br><t>>S..........T> distance=1
+	 * <pre>
+	 * <t> S>>>>>>>>>>T  distance=11
+	 * <t>>S..........T> distance=1
+	 * </pre>
 	 * 
 	 * @param source
 	 * 		case de référence
@@ -262,6 +265,28 @@ if(target==null || source==null)
 		
 		// result
 		Direction result = Direction.getComposite(tempX,tempY);
+		return result;
+	}
+	
+	/**
+	 * Pareil que {@link #getDirection(double, double, double, double)}, mais 
+	 * la méthode prend des emplacements en paramètres
+	 * plutôt que des coordonnées.
+	 * 
+	 * @param source
+	 * 		Emplacement de référence
+	 * @param  target
+	 * 		Emplacement dont on veut connaitre la direction
+	 * @return	
+	 * 		La direction de {@code target} par rapport à {@code source}.
+	 */
+	public Direction getDirection(AstarLocation source, AstarLocation target)
+	{	double x1 = source.getPosX();
+		double y1 = source.getPosY();
+		double x2 = target.getPosX();
+		double y2 = target.getPosY();
+		
+		Direction result = getDirection(x1,y1,x2,y2);
 		return result;
 	}
 	
@@ -523,7 +548,8 @@ if(target==null || source==null)
 	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau).
-	 * La direction peut être NONE si jamais les deux positions sont équivalentes.
+	 * La direction peut être {@code NONE} si jamais les deux positions 
+	 * sont équivalentes.
 	 * 
 	 * @param x1
 	 * 		première position horizontale en pixels
@@ -681,6 +707,49 @@ if(target==null || source==null)
 		return result;
 	}
 	
+	/**
+	 * renvoie la distance de Manhattan entre les cases de coordonnées
+	 * (row1,col1) et (row2,col2), exprimée en cases. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param location1
+	 * 		Emplacement de la première case.
+	 * @param location2
+	 * 		Emplacement de la seconde case.
+	 * @param  direction
+	 * 		Direction à considérer.
+	 */
+	public int getTileDistance(AstarLocation location1, AstarLocation location2, Direction direction)
+	{	AiTile tile1 = location1.getTile();
+		AiTile tile2 = location2.getTile();
+		int result = getTileDistance(tile1.getRow(),tile1.getCol(),tile2.getRow(),tile2.getCol(),direction);
+		return result;
+	}
+
+	/**
+	 * renvoie la distance de Manhattan entre les cases de coordonnées
+	 * (row1,col1) et (row2,col2), exprimée en cases. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * 
+	 * @param location1
+	 * 		Emplacement de la première case.
+	 * @param location2
+	 * 		Emplacement de la seconde case.
+	 */
+	public int getTileDistance(AstarLocation location1, AstarLocation location2)
+	{	AiTile tile1 = location1.getTile();
+		AiTile tile2 = location2.getTile();
+		int result = getTileDistance(tile1.getRow(),tile1.getCol(),tile2.getRow(),tile2.getCol());
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PIXEL DIMENSIONS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -832,6 +901,173 @@ if(target==null || source==null)
 		double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
 			result = 0;
+		return result;
+	}
+
+	/**
+	 * Renvoie la distance de Manhattan entre les emplacements passés
+	 * en paramètres, exprimée en pixels.<br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param location1
+	 * 		Emplacement du premier point
+	 * @param location2
+	 * 		Emplacement du second point
+	 * @param direction
+	 * 		direction à considérer
+	 */
+	public double getPixelDistance(AstarLocation location1, AstarLocation location2, Direction direction)
+	{	double posX1 = location1.getPosX();
+		double posY1 = location1.getPosY();
+		double posX2 = location2.getPosX();
+		double posY2 = location2.getPosY();
+		double result = getPixelDistance(posX1,posY1,posX2,posY2,direction);
+		return result;
+	}
+
+	/**
+	 * Renvoie la distance de Manhattan entre les emplacements passés
+	 * en paramètres, exprimée en pixels.<br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau).
+	 * 
+	 * @param location1
+	 * 		Emplacement du premier point
+	 * @param location2
+	 * 		Emplacement du second point
+	 */
+	public double getPixelDistance(AstarLocation location1, AstarLocation location2)
+	{	double posX1 = location1.getPosX();
+		double posY1 = location1.getPosY();
+		double posX2 = location2.getPosX();
+		double posY2 = location2.getPosY();
+		double result = getPixelDistance(posX1,posY1,posX2,posY2);
+		return result;
+	}
+
+	/**
+	 * Renvoie la distance de Manhattan, exprimée en pixels, 
+	 * entre les coordonnées et la case passées en paramètre.
+	 * On considère le point de la case le plus proche du
+	 * point de départ.<br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param x1
+	 * 		Abscisse du point de départ.
+	 * @param y1
+	 * 		Ordonnée du point de départ.
+	 * @param tile
+	 * 		Case d'arrivée.
+	 * @param direction
+	 * 		Direction à considérer.
+	 */
+	public double getPixelDistance(double x1, double y1, AiTile tile, Direction direction)
+	{	double xCenter = tile.getPosX();
+		double yCenter = tile.getPosY();
+		double dim = tile.getSize()/2;
+		
+		double result = Double.POSITIVE_INFINITY;
+		for(Direction d: Direction.getPrimaryValues())
+		{	int val[] = d.getIntFromDirection();
+			double x2 = xCenter + val[0]*dim;
+			double y2 = yCenter + val[1]*dim;
+			double dist = getPixelDistance(x1,y1,x2,y2,direction);
+			if(dist<result)
+				result = dist;
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Renvoie la distance de Manhattan, exprimée en pixels, 
+	 * entre les coordonnées et la case passées en paramètre.
+	 * On considère le point de la case le plus proche du
+	 * point de départ.<br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau).
+	 * 
+	 * @param x1
+	 * 		Abscisse du point de départ.
+	 * @param y1
+	 * 		Ordonnée du point de départ.
+	 * @param tile
+	 * 		Case d'arrivée.
+	 */
+	public double getPixelDistance(double x1, double y1, AiTile tile)
+	{	double xCenter = tile.getPosX();
+		double yCenter = tile.getPosY();
+		double dim = tile.getSize()/2;
+		
+		double result = Double.POSITIVE_INFINITY;
+		for(Direction d: Direction.getPrimaryValues())
+		{	int val[] = d.getIntFromDirection();
+			double x2 = xCenter + val[0]*dim;
+			double y2 = yCenter + val[1]*dim;
+			double dist = getPixelDistance(x1,y1,x2,y2);
+			if(dist<result)
+				result = dist;
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Renvoie la distance de Manhattan, exprimée en pixels, 
+	 * entre l'emplacement et la case passés en paramètre.
+	 * On considère le point de la case le plus proche du
+	 * point de départ.<br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param location
+	 * 		Emplacement du point de départ.
+	 * @param tile
+	 * 		Case d'arrivée.
+	 * @param direction
+	 * 		Direction à considérer.
+	 */
+	public double getPixelDistance(AstarLocation location, AiTile tile, Direction direction)
+	{	double x = location.getPosX();
+		double y = location.getPosY();
+		double result = getPixelDistance(x,y,tile);
+		return result;
+	}
+
+	/**
+	 * Renvoie la distance de Manhattan, exprimée en pixels, 
+	 * entre l'emplacement et la case passés en paramètre.
+	 * On considère le point de la case le plus proche du
+	 * point de départ.<br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau).
+	 * 
+	 * @param location
+	 * 		Emplacement du point de départ.
+	 * @param tile
+	 * 		Case d'arrivée.
+	 */
+	public double getPixelDistance(AstarLocation location, AiTile tile)
+	{	double x = location.getPosX();
+		double y = location.getPosY();
+		double result = getPixelDistance(x,y,tile);
 		return result;
 	}
 
@@ -1014,6 +1250,26 @@ if(target==null || source==null)
 	{	boolean result = true;	
 		result = result && CombinatoricsTools.isRelativelyEqualTo(x1,x2);
 		result = result && CombinatoricsTools.isRelativelyEqualTo(y1,y2);
+		return result;
+	}
+
+	/**
+	 * Teste si les deux emplacements passés en paramètres occupent la
+	 * même position au pixel près.
+	 * 
+	 * @param location1
+	 * 		Le premier emplacement.
+	 * @param location2
+	 * 		Le second emplacement.
+	 * @return	
+	 * 		Renvoie {@code true} ssi les deux emplacement sont équivalents au pixel près.
+	 */
+	public boolean hasSamePixelPosition(AstarLocation location1, AstarLocation location2)
+	{	double x1 = location1.getPosX();
+		double y1 = location1.getPosY();
+		double x2 = location2.getPosX();
+		double y2 = location2.getPosY();
+		boolean result = hasSamePixelPosition(x1,y1,x2,y2);
 		return result;
 	}
 
