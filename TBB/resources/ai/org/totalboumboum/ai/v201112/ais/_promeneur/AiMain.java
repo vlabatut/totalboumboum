@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201112.ais._promeneur;
  * 
  */
 
-import org.totalboumboum.ai.v200809.adapter.AiManager;
+import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
 
 /**
  * 
