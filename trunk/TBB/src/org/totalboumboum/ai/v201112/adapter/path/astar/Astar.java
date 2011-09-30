@@ -223,7 +223,7 @@ public final class Astar
 		// initialisation
 		boolean found = false;
 		boolean limitReached = false;
-		AiPath result = new AiPath();
+		AiPath result = null;
 		heuristicCalculator.setEndTiles(endTiles);
 		root = new AstarNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
@@ -278,14 +278,7 @@ public final class Astar
 		
 			// build solution path
 			if(found)
-			{	
-//				while(finalNode!=null)
-//				{	AiTile tile = finalNode.getLocation();
-//					result.addLocation(0,tile);
-//					finalNode = finalNode.getParent();
-//				}
-				
-			}
+				result = processPath(finalNode);
 		}
 		
 		if(verbose)
@@ -315,11 +308,48 @@ public final class Astar
 		else if(endTiles.isEmpty())
 			throw new IllegalArgumentException("endTiles list must not be empty");
 		
-		// finish path
-		if(startTile.equals(hero.getTile()))
-		{	double startX = hero.getPosX();
-			double startY = hero.getPosY();
-			result.setStart(startX,startY);
+		return result;
+	}
+	
+	/**
+	 * Construit à partir du noeud de recherche final
+	 * le chemin permettant d'atteindre la case correspondante
+	 * à partir de l'emplacement de départ.
+	 * 
+	 * @param finalNode
+	 * 		Le noeud de recherche final.
+	 * @return
+	 * 		Le chemin permettant d'atteindre ce noeud.
+	 */
+	private AiPath processPath(AstarNode finalNode)
+	{	AstarNode node = finalNode;
+		AstarNode previousNode = null;
+		AiPath result = new AiPath();
+	
+// ancienne version		
+//		while(node!=null)
+//		{	AiTile tile = node.getLocation();
+//			result.addLocation(0,tile);
+//			node = node.getParent();
+//		}
+		
+		while(node!=null)
+		{	AstarLocation location = node.getLocation();
+			AiTile tile = location.getTile();
+			
+			// different tile
+			if(previousNode==null || !tile.equals(previousNode.getLocation().getTile()))
+				result.addLocation(0,location);
+			
+			// same tile
+			else
+			{	long pause = (long)(previousNode.getCost() - node.getCost());
+				pause = pause + result.getPause(0);
+				result.setPause(0,pause);
+			}
+			
+			// process next node
+			node = node.getParent();
 		}
 		
 		return result;
