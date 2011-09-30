@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astarcopy.heuristic;
+package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
 
 /*
  * Total Boum Boum
@@ -26,21 +26,49 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
- * implémentation la plus simple d'une heuristique : 
- * on utilise la distance de Manhattan entre la case de départ et 
- * la plus proche des cases d'arrivée.<br/>
+ * heuristique utilisant la distance de Manhattan exprimées en pixels,
+ * pour aller avec PixelCostCalculator.<br/>
+ * Attention à la mise à jour nécessaire de la position du joueur
+ * concerné, cf. {@link #updateStartPoint}.
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
- * chemins contenant des attentes. De plus les distances sont
- * calculées en cases, et non pas en pixels : rapidement calculé,
- * mais approximatif. 
+ * chemins contenant des attentes.
  * 
  * @author Vincent Labatut
  */
-public class BasicHeuristicCalculator extends HeuristicCalculator
+public class PixelHeuristicCalculator extends HeuristicCalculator
 {
+	
+	/////////////////////////////////////////////////////////////////
+	// STARTING POINT			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** case de départ du chemin en cours de recherche */
+	private AiTile startTile;
+	/** abscisse de départ (doit être contenue dans la case de départ) */
+	private double startX;
+	/** ordonnée de départ (doit être contenue dans la case de départ) */
+	private double startY;
+	
+	/**
+	 * Cette méthosz permet de mettre jour tout changement 
+	 * dans la position du joueur. Elle doit être utilisée à
+	 * chaque nouvel appel du moteur de jeu.
+	 * 
+	 * @param startTile
+	 * 		La nouvelle case occupée par le personnage.
+	 * @param startX
+	 * 		Sa nouvelle abscisse en pixels.
+	 * @param startY
+	 * 		Sa nouvelle ordonnée en pixels.
+	 */
+	public void updateStartPoint(AstarLocation startTile)
+	{	this.startTile = startTile;
+		this.startX = startX;
+		this.startY = startY;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -48,6 +76,8 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * l'heuristique la plus simple consiste à prendre la distance
 	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
 	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
+	 * ici, on calcule cette distance exprimée en pixels plutot qu'en case
+	 * comme c'est le cas dans BasicHeuristicCalculator.
 	 * 
 	 * @param tile	
 	 * 		la case concernée 
@@ -59,11 +89,20 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	{	// init
 		List<AiTile> endTiles = getEndTiles();
 		AiZone zone = tile.getZone();
+		double startX = tile.getPosX();
+		double startY = tile.getPosY();
 		double result = Integer.MAX_VALUE;
 		
-		// process
+		// specific case : tile is the first tile of the considered path
+		if(tile.equals(startTile))
+		{	startX = this.startX;
+			startY = this.startY;
+		}
+		
 		for(AiTile endTile: endTiles)
-		{	int dist = zone.getTileDistance(tile,endTile);
+		{	double endX = endTile.getPosX();
+			double endY = endTile.getPosY();
+			double dist = zone.getPixelDistance(startX,startY,endX,endY);
 			if(dist<result)
 				result = dist;
 		}

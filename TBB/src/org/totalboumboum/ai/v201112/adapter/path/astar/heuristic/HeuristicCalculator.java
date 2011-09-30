@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astarcopy.heuristic;
+package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
 
 /*
  * Total Boum Boum
@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * permet de définir une fonction heuristique utilisée par l'algorithme

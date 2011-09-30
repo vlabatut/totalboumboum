@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astarcopy;
+package org.totalboumboum.ai.v201112.adapter.path.astar;
 
 /*
  * Total Boum Boum
