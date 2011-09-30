@@ -29,7 +29,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
- * implémentation la plus simple d'une heuristique : 
+ * Implémentation la plus simple d'une heuristique : 
  * on utilise la distance de Manhattan entre la case de départ et 
  * la plus proche des cases d'arrivée.<br/>
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
@@ -47,23 +47,25 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	/** 
 	 * l'heuristique la plus simple consiste à prendre la distance
 	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
-	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
+	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>
 	 * 
-	 * @param tile	
-	 * 		la case concernée 
+	 * @param location	
+	 * 		L'emplacement concerné. 
 	 * @return	
-	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
+	 * 		la distance de Manhattan entre l'emplacement passé en paramètre
+	 * 		et la plus proche des cases contenues dans le champ {@code endTiles}.
 	 */
 	@Override
-	public double processHeuristic(AstarLocation tile) throws StopRequestException
+	public double processHeuristic(AstarLocation location) throws StopRequestException
 	{	// init
+		AiTile startTile = location.getTile();
 		List<AiTile> endTiles = getEndTiles();
-		AiZone zone = tile.getZone();
+		AiZone zone = location.getZone();
 		double result = Integer.MAX_VALUE;
 		
 		// process
 		for(AiTile endTile: endTiles)
-		{	int dist = zone.getTileDistance(tile,endTile);
+		{	int dist = zone.getTileDistance(startTile,endTile);
 			if(dist<result)
 				result = dist;
 		}
