@@ -22,8 +22,6 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  */
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
@@ -39,32 +37,33 @@ public abstract class CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Calcule le coût de l'action consistant à aller de la case
-	 * start à la case end, sachant que ces deux cases sont voisines.
+	 * Calcule le coût de l'action consistant à aller de l'emplacement
+	 * {@code start} à l'emplacement {@code end}, sachant que les deux cases 
+	 * correspondantes doivent être voisines.<br/>
 	 * Il est possible de définir des coûts évolués, en tenant compte par exemple des
 	 * influences négatives dans ces cases (pour le joueur) comme la prèsence de bombes 
 	 * à proximité, etc., et des influences positives telles que la prèsence de bonus.
 	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
 	 * @param current
-	 * 		La case courante (voisine de la précédente). 
+	 * 		L'emplacement de départ. 
 	 * @param next	
-	 * 		La case suivante (voisine de la courante).
+	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
-	 * 		Le coût du déplacement entre la case courante et la case suivante.
+	 * 		Le coût du déplacement entre les deux emplacements.
 	 */
 	public abstract double processCost(AstarLocation current, AstarLocation next) throws StopRequestException;
 	
 	/**
 	 * Calcule le coût d'un chemin, i.e. la somme des coûts des actions
-	 * consistant à passer d'une case du chemin à la suivante.
+	 * consistant à passer d'un emplacement du chemin au suivant.
 	 * 
 	 * @param path
 	 * 		Chemin à traiter
 	 * @return
 	 * 		Le coût de ce chemin.
 	 */
-	public double processCost(AiPath path) throws StopRequestException
+/*	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;
 		AiTile previous = null;
 		
@@ -79,4 +78,5 @@ public abstract class CostCalculator
 		}
 		return result;
 	}
+*/
 }
