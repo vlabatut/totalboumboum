@@ -24,9 +24,11 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
 
 /**
  * Heuristique utilisant la distance de Manhattan exprimées en pixels,
@@ -38,8 +40,37 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
  * 
  * @author Vincent Labatut
  */
-public class PixelHeuristicCalculator extends HeuristicCalculator
+public class TimeHeuristicCalculator extends HeuristicCalculator
 {
+	/**
+	 * Crée une nouvelle fonction heuristique basée sur le temps.
+	 * La vitesse de déplacement utilisée lors de l'application
+	 * de A* sera celle du personnage passé en paramètre.
+	 * 
+	 * @param hero
+	 * 		Personnage de référence pour calculer la durée des déplacements.
+	 */
+	public TimeHeuristicCalculator(AiHero hero)
+	{	this.hero = hero;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// HERO						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Personnage concerné par la recherche de chemin */
+	private AiHero hero;
+
+	/**
+	 * Renvoie le personnage utilisé
+	 * pour calculer la durée des déplacements.
+	 * 
+	 * @return
+	 * 		Le personnage de référence.
+	 */
+	public AiHero getHero()
+	{	return hero;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -47,30 +78,36 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	 * L'heuristique la plus simple consiste à prendre la distance
 	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
 	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>.
-	 * Ici, on calcule cette distance exprimée en pixels plutôt qu'en cases
-	 * comme c'est le cas dans {@link BasicHeuristicCalculator}.
+	 * Ici, on considère le temps nécessaire pour parcourir cette distance exprimée en pixels.
+	 * L'intérêt est d'avoir une fonction heuristique cohérente avec la fonction
+	 * de coût basée sur le temps implémentée par {@link TimeCostCalculator}.
 	 * 
 	 * @param location	
 	 * 		L'emplacement concerné. 
 	 * @return	
-	 * 		La distance de Manhattan entre l'emplacement passé en paramètre
-	 * 		et la plus proche des cases contenues dans le champ {@code endTiles}.
+	 * 		Le temps nécessaire pour parcourir la distance de Manhattan entre 
+	 * 		l'emplacement passé en paramètre et la plus proche des cases contenues 
+	 * 		dans le champ {@code endTiles}.
 	 */
 	@Override
 	public double processHeuristic(AstarLocation location) throws StopRequestException
 	{	// init
+		double speed = hero.getWalkingSpeed();
 		List<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
-		double result = Integer.MAX_VALUE;
+		double minDist = Integer.MAX_VALUE;
 		
+		// on calcule la distance de Manhattan en pixels
 		for(AiTile endTile: endTiles)
 		{	//double endX = endTile.getPosX();
 			//double endY = endTile.getPosY();
 			double dist = zone.getPixelDistance(location,endTile);
-			if(dist<result)
-				result = dist;
+			if(dist<minDist)
+				minDist = dist;
 		}
 		
+		// on calcule le temps nécessaire au parcours de cette distance
+		long result = Math.round(minDist/speed * 1000);
 		return result;
 	}
 }
