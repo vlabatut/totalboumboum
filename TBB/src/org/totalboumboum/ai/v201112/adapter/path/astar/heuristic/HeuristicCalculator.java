@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
  * Permet de définir une fonction heuristique utilisée par l'algorithme
@@ -75,5 +75,5 @@ public abstract class HeuristicCalculator
 	 * @return	
 	 * 		La valeur heuristique de cet emplacement.
 	 */
-	public abstract double processHeuristic(AstarLocation location) throws StopRequestException;
+	public abstract double processHeuristic(AiLocation location) throws StopRequestException;
 }

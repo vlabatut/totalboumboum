@@ -26,12 +26,11 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * Cette classe représente un chemin qu'un agent peut emprunter
  * dans la zone de jeu. Le chemin est décrit par une séquence d'emplacements,
- * représentés par des objets {@link AstarLocation}. Un temps d'attente 
+ * représentés par des objets {@link AiLocation}. Un temps d'attente 
  * supplémentaire peut être associé à chaque étape.<br/>
  * Diverses opérations sont possibles sur un ou plusieurs chemins : modification,
  * comparaisons, calculs variés, etc.
@@ -49,7 +48,7 @@ public class AiPath implements Comparable<AiPath>
 	// LOCATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste des emplacements composant le chemin */
-	private final List<AstarLocation> locations = new ArrayList<AstarLocation>();
+	private final List<AiLocation> locations = new ArrayList<AiLocation>();
 	/** Liste des pauses associées à chaque emplacement (attention : ce temps n'inclut pas le temps de déplacement) */
 	private final List<Long> pauses = new ArrayList<Long>();
 	
@@ -59,7 +58,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @return	
 	 * 		La liste de emplacements du chemin.
 	 */
-	public List<AstarLocation> getLocations()
+	public List<AiLocation> getLocations()
 	{	return locations;	
 	}
 	
@@ -82,7 +81,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @return	
 	 * 		L'emplacement occupant la position indiquée dans ce chemin
 	 */
-	public AstarLocation getLocation(int index)
+	public AiLocation getLocation(int index)
 	{	return locations.get(index);	
 	}
 	
@@ -107,7 +106,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param location
 	 * 		L'emplacement à insérer.
 	 */
-	public void addLocation(AstarLocation location)
+	public void addLocation(AiLocation location)
 	{	addLocation(location,0);
 	}
 	
@@ -119,7 +118,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param location
 	 * 		L'emplacement à insérer.
 	 */
-	public void addLocation(AstarLocation location, long pause)
+	public void addLocation(AiLocation location, long pause)
 	{	locations.add(location);
 		pauses.add(pause);
 	}
@@ -133,7 +132,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param location
 	 * 		L'emplacement à insérer.
 	 */
-	public void addLocation(int index, AstarLocation location)
+	public void addLocation(int index, AiLocation location)
 	{	addLocation(index,location,0);
 	}
 	
@@ -148,7 +147,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param pause
 	 * 		La pause associée à l'emplacement à insérer.
 	 */
-	public void addLocation(int index, AstarLocation location, long pause)
+	public void addLocation(int index, AiLocation location, long pause)
 	{	locations.add(index,location);
 		pauses.add(index,pause);
 	}
@@ -162,7 +161,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param location
 	 * 		Le nouvel emplacement.
 	 */
-	public void setLocation(int index, AstarLocation location)
+	public void setLocation(int index, AiLocation location)
 	{	locations.set(index,location);
 	}
 	
@@ -179,7 +178,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param pause
 	 * 		La nouvelle pause associée à cet emplacement.
 	 */
-	public void setLocation(int index, AstarLocation location, long pause)
+	public void setLocation(int index, AiLocation location, long pause)
 	{	locations.set(index,location);
 		pauses.set(index,pause);
 	}
@@ -219,7 +218,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param location
 	 * 		L'emplacement à supprimer.
 	 */
-	public void removeLocation(AstarLocation location)
+	public void removeLocation(AiLocation location)
 	{	int index = locations.indexOf(location);
 		locations.remove(index);
 		pauses.remove(index);
@@ -254,8 +253,8 @@ public class AiPath implements Comparable<AiPath>
 	 * @return	
 	 * 		Le dernier emplacement du chemin ou {@code null} en cas d'erreur.
 	 */
-	public AstarLocation getLastLocation()
-	{	AstarLocation result = null;
+	public AiLocation getLastLocation()
+	{	AiLocation result = null;
 		if(!locations.isEmpty())
 			result = locations.get(locations.size()-1);
 		return result;
@@ -283,8 +282,8 @@ public class AiPath implements Comparable<AiPath>
 	 * @return	
 	 * 		Le premiere emplacement du chemin ou {@code null} en cas d'erreur.
 	 */
-	public AstarLocation getFirstLocation()
-	{	AstarLocation result = null;
+	public AiLocation getFirstLocation()
+	{	AiLocation result = null;
 		if(!locations.isEmpty())
 			result = locations.get(0);
 		return result;
@@ -318,10 +317,10 @@ public class AiPath implements Comparable<AiPath>
 	 */
 	public int getTileDistance()
 	{	int result = 0;
-		AstarLocation previous = null;
+		AiLocation previous = null;
 		AiZone zone = null;
 		
-		for(AstarLocation location: locations)
+		for(AiLocation location: locations)
 		{	if(previous==null)
 			{	zone = location.getTile().getZone();
 			}
@@ -343,10 +342,10 @@ public class AiPath implements Comparable<AiPath>
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
-		AstarLocation previous = null;
+		AiLocation previous = null;
 		AiZone zone = null;
 
-		for(AstarLocation location: locations)
+		for(AiLocation location: locations)
 		{	if(previous==null)
 			{	zone = location.getTile().getZone();
 			}
@@ -425,8 +424,8 @@ public class AiPath implements Comparable<AiPath>
 			result = getLength()==path.getLength();
 			int i=0;
 			while(result && i<locations.size())
-			{	AstarLocation loc1 = locations.get(i);
-				AstarLocation loc2 = path.getLocation(i);
+			{	AiLocation loc1 = locations.get(i);
+				AiLocation loc2 = path.getLocation(i);
 				long pause1 = pauses.get(i);
 				long pause2 = path.getPause(i);
 				result = loc1.equals(loc2) && pause1==pause2;
@@ -443,7 +442,7 @@ public class AiPath implements Comparable<AiPath>
 	public String toString()
 	{	String result = "{";
 		for(int i=0;i<locations.size();i++)
-		{	AstarLocation tile = locations.get(i);
+		{	AiLocation tile = locations.get(i);
 			long pause = pauses.get(i);
 			result = result + " ["+tile+";"+pause+"]";
 		}

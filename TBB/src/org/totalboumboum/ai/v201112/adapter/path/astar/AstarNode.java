@@ -27,6 +27,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
@@ -50,7 +51,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @param heuristicCalculator	
 	 * 		Fonction heuristique.
 	 */
-	protected AstarNode(ArtificialIntelligence ai, AstarLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
+	protected AstarNode(ArtificialIntelligence ai, AiLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// agent
 		this.ai = ai;
 		
@@ -87,7 +88,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @param parent	
 	 * 		Noeud de recherche parent de ce noeud.
 	 */
-	public AstarNode(AstarLocation location, AstarNode parent) throws StopRequestException
+	public AstarNode(AiLocation location, AstarNode parent) throws StopRequestException
 	{	// agent
 		this.ai = parent.getAi();
 		
@@ -105,7 +106,7 @@ public final class AstarNode implements Comparable<AstarNode>
 		
 		// coût
 		costCalculator = parent.getCostCalculator();
-		AstarLocation previous = parent.getLocation();
+		AiLocation previous = parent.getLocation();
 		double localCost = costCalculator.processCost(previous,location);
 		cost = parent.getCost() + localCost;
 		
@@ -174,7 +175,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Emplacement associé au noeud */
-	private AstarLocation location = null;
+	private AiLocation location = null;
 	
 	/**
 	 * Renvoie l'emplacement associé au noeud de recherche.
@@ -182,7 +183,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @return	
 	 * 		Une emplacement.
 	 */
-	public AstarLocation getLocation()
+	public AiLocation getLocation()
 	{	return location;
 	}
 

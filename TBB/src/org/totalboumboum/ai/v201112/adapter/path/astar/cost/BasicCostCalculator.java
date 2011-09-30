@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  */
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
  * Classe étendant la classe abstraite {@link CostCalculator} de 
@@ -50,7 +50,7 @@ public class BasicCostCalculator extends CostCalculator
 	 * 		Le coût du déplacement entre les deux emplacements (ici : 1).
 	 */ 
 	@Override
-	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
+	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
 	{	return 1;		
 	}
 

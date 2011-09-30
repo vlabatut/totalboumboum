@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201112.adapter.path;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * Exception levée par un algorithme de recherche de chemin 
@@ -67,7 +66,7 @@ public final class LimitReachedException extends Exception
 	 * @param maxSize
 	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
 	 */
-	public LimitReachedException(AstarLocation startLocation, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
+	public LimitReachedException(AiLocation startLocation, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
 	{	this.startLocation = startLocation;
 		this.endTiles = endTiles;
 		this.height = height;
@@ -94,7 +93,7 @@ public final class LimitReachedException extends Exception
 	 * @param maxSize
 	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
 	 */
-	public LimitReachedException(AstarLocation startLocation, int height, int size, int maxHeight, int maxSize)
+	public LimitReachedException(AiLocation startLocation, int height, int size, int maxHeight, int maxSize)
 	{	this.startLocation = startLocation;
 		this.endTiles = null;
 		this.height = height;
@@ -109,7 +108,7 @@ public final class LimitReachedException extends Exception
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/** case de départ de la recherche (état initial) */
-	private AstarLocation startLocation;
+	private AiLocation startLocation;
 	
 	/**
 	 * Renvoie l'emplacement de départ de la recherche.
@@ -117,7 +116,7 @@ public final class LimitReachedException extends Exception
 	 * @return
 	 * 		Un emplacement de la zone.
 	 */
-    public AstarLocation getStartLocation()
+    public AiLocation getStartLocation()
     {	return startLocation;
 	}
 

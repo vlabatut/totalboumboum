@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar;
+package org.totalboumboum.ai.v201112.adapter.path;
 
 /*
  * Total Boum Boum
@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * @author Vincent Labatut
  *
  */
-public final class AstarLocation
+public final class AiLocation
 {	
 	/**
 	 * Définit une nouvelle position à partir
@@ -45,17 +45,17 @@ public final class AstarLocation
 	 * @param heuristicCalculator	
 	 * 		fonction heuristique
 	 */
-	private AstarLocation(double posX, double posY, AiTile tile)
+	private AiLocation(double posX, double posY, AiTile tile)
 	{	this.tile = tile;
 		this.posX = posX;
 		this.posY = posY;
 	}
 
-	public AstarLocation(double posX, double posY, AiZone zone)
+	public AiLocation(double posX, double posY, AiZone zone)
 	{	this(posX,posY,zone.getTile(posX,posY));
 	}
 	
-	public AstarLocation(AiTile tile)
+	public AiLocation(AiTile tile)
 	{	this(tile.getPosX(),tile.getPosY(),tile);
 	}
 	
@@ -122,8 +122,8 @@ public final class AstarLocation
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AstarLocation)
-		{	AstarLocation location = (AstarLocation)o;	
+		if(o instanceof AiLocation)
+		{	AiLocation location = (AiLocation)o;	
 			result = tile.getZone().hasSamePixelPosition(this,location);
 		}
 		return result;

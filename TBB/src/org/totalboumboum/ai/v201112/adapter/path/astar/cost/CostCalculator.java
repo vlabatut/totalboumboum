@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  */
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
  * Permet de définir une fonction de coût 
@@ -52,7 +52,7 @@ public abstract class CostCalculator
 	 * @return	
 	 * 		Le coût du déplacement entre les deux emplacements.
 	 */
-	public abstract double processCost(AstarLocation current, AstarLocation next) throws StopRequestException;
+	public abstract double processCost(AiLocation current, AiLocation next) throws StopRequestException;
 	
 	/**
 	 * Calcule le coût d'un chemin, i.e. la somme des coûts des actions
