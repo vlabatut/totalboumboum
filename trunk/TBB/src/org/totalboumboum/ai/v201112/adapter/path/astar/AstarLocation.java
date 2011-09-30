@@ -23,7 +23,6 @@ package org.totalboumboum.ai.v201112.adapter.path.astar;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
@@ -73,9 +72,19 @@ public final class AstarLocation
 	 * 		La case associée à cette position.
 	 */
     public AiTile getTile()
-    {	
-		return tile;
+    {	return tile;
 	}
+
+    /**
+     * Renvoie la zone dans laquelle
+     * cet emplacement est défini.
+     * 
+     * @return
+     * 		La zone contenant cet emplacement.
+     */
+    public AiZone getZone()
+    {	return tile.getZone();
+    }
     
 	/////////////////////////////////////////////////////////////////
 	// COORDINATES				/////////////////////////////////////
@@ -113,13 +122,9 @@ public final class AstarLocation
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiTile)
-		{	
-			AiTile t = (AiTile)o;	
-			double posX = t.getPosX();
-			double posY = t.getPosY();
-			result = CombinatoricsTools.isRelativelyEqualTo(posX,this.posX)
-				&& CombinatoricsTools.isRelativelyEqualTo(posY,this.posY);
+		if(o instanceof AstarLocation)
+		{	AstarLocation location = (AstarLocation)o;	
+			result = tile.getZone().hasSamePixelPosition(this,location);
 		}
 		return result;
 	}
