@@ -183,10 +183,10 @@ public final class Astar
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
-	public AiPath processShortestPath(AiTile startTile, AiTile endTile) throws StopRequestException, LimitReachedException
+	public AiPath processShortestPath(AstarLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
 	{	List<AiTile> endTiles = new ArrayList<AiTile>();
 		endTiles.add(endTile);
-		AiPath result = processShortestPath(startTile,endTiles);
+		AiPath result = processShortestPath(startLocation,endTiles);
 		return result;
 	}
 	
@@ -209,9 +209,9 @@ public final class Astar
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
-	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath processShortestPath(AstarLocation startLocation, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	if(verbose)
-		{	System.out.print("A*: from "+startTile+" to [");
+		{	System.out.print("A*: from "+startLocation+" to [");
 			for(AiTile tile: endTiles)
 				System.out.print(" "+tile);
 			System.out.println(" ]");
@@ -225,7 +225,7 @@ public final class Astar
 		boolean limitReached = false;
 		AiPath result = new AiPath();
 		heuristicCalculator.setEndTiles(endTiles);
-		root = new AstarNode(ai,startTile,hero,costCalculator,heuristicCalculator,successorCalculator);
+		root = new AstarNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
 		queue.offer(root);
 		AstarNode finalNode = null;
@@ -241,7 +241,7 @@ public final class Astar
 					System.out.println("Queue length: "+queue.size());
 				}
 				// on teste si on est arrivé à la fin de la recherche
-				if(endTiles.contains(currentNode.getTile()))
+				if(endTiles.contains(currentNode.getLocation()))
 				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
 					finalNode = currentNode;
 					found = true;
@@ -278,11 +278,13 @@ public final class Astar
 		
 			// build solution path
 			if(found)
-			{	while(finalNode!=null)
-				{	AiTile tile = finalNode.getTile();
-					result.addTile(0,tile);
-					finalNode = finalNode.getParent();
-				}
+			{	
+//				while(finalNode!=null)
+//				{	AiTile tile = finalNode.getLocation();
+//					result.addLocation(0,tile);
+//					finalNode = finalNode.getParent();
+//				}
+				
 			}
 		}
 		
@@ -291,15 +293,15 @@ public final class Astar
 			if(limitReached)
 				System.out.println(" limit reached");
 			else if(found)
-			{	for(AiTile t: result.getLocations())
-					System.out.print(" "+t);
+			{	for(AstarLocation loc: result.getLocations())
+					System.out.print(" "+loc);
 			}
 			else //if(endTiles.isEmpty())
 				System.out.println(" endTiles parameter empty");
 			System.out.println(" ]");
 			//
 			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);
-			System.out.print(" src="+root.getTile());
+			System.out.print(" src="+root.getLocation());
 			if(!endTiles.isEmpty()) 
 				System.out.print(" trgt="+endTiles.get(endTiles.size()-1));
 			if(result!=null) 
@@ -309,7 +311,7 @@ public final class Astar
 
 		finish();
 		if(limitReached)
-			throw new LimitReachedException(startTile,endTiles,maxh,maxc,maxn,maxCost,maxHeight,maxNodes);
+			throw new LimitReachedException(startLocation,endTiles,maxh,maxc,maxn,maxCost,maxHeight,maxNodes);
 		else if(endTiles.isEmpty())
 			throw new IllegalArgumentException("endTiles list must not be empty");
 		
