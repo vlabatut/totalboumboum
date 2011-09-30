@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
@@ -183,7 +184,7 @@ public final class Astar
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
-	public AiPath processShortestPath(AstarLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
+	public AiPath processShortestPath(AiLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
 	{	List<AiTile> endTiles = new ArrayList<AiTile>();
 		endTiles.add(endTile);
 		AiPath result = processShortestPath(startLocation,endTiles);
@@ -209,7 +210,7 @@ public final class Astar
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
-	public AiPath processShortestPath(AstarLocation startLocation, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath processShortestPath(AiLocation startLocation, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	if(verbose)
 		{	System.out.print("A*: from "+startLocation+" to [");
 			for(AiTile tile: endTiles)
@@ -286,7 +287,7 @@ public final class Astar
 			if(limitReached)
 				System.out.println(" limit reached");
 			else if(found)
-			{	for(AstarLocation loc: result.getLocations())
+			{	for(AiLocation loc: result.getLocations())
 					System.out.print(" "+loc);
 			}
 			else //if(endTiles.isEmpty())
@@ -334,7 +335,7 @@ public final class Astar
 //		}
 		
 		while(node!=null)
-		{	AstarLocation location = node.getLocation();
+		{	AiLocation location = node.getLocation();
 			AiTile tile = location.getTile();
 			
 			// different tile

@@ -31,9 +31,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
@@ -121,7 +121,7 @@ public class EscapeManager
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		AstarLocation location = new AstarLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
+		AiLocation location = new AiLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
 		try
 		{	path = astar.processShortestPath(location,possibleDest);
 			tileDest = path.getLastLocation().getTile();
@@ -163,7 +163,7 @@ public class EscapeManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		boolean result = true;
-		Iterator<AstarLocation> it = path.getLocations().iterator();
+		Iterator<AiLocation> it = path.getLocations().iterator();
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			

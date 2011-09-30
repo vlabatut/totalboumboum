@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.calculus.LevelsTools;
@@ -280,7 +280,7 @@ if(target==null || source==null)
 	 * @return	
 	 * 		La direction de {@code target} par rapport à {@code source}.
 	 */
-	public Direction getDirection(AstarLocation source, AstarLocation target)
+	public Direction getDirection(AiLocation source, AiLocation target)
 	{	double x1 = source.getPosX();
 		double y1 = source.getPosY();
 		double x2 = target.getPosX();
@@ -723,7 +723,7 @@ if(target==null || source==null)
 	 * @param  direction
 	 * 		Direction à considérer.
 	 */
-	public int getTileDistance(AstarLocation location1, AstarLocation location2, Direction direction)
+	public int getTileDistance(AiLocation location1, AiLocation location2, Direction direction)
 	{	AiTile tile1 = location1.getTile();
 		AiTile tile2 = location2.getTile();
 		int result = getTileDistance(tile1.getRow(),tile1.getCol(),tile2.getRow(),tile2.getCol(),direction);
@@ -743,7 +743,7 @@ if(target==null || source==null)
 	 * @param location2
 	 * 		Emplacement de la seconde case.
 	 */
-	public int getTileDistance(AstarLocation location1, AstarLocation location2)
+	public int getTileDistance(AiLocation location1, AiLocation location2)
 	{	AiTile tile1 = location1.getTile();
 		AiTile tile2 = location2.getTile();
 		int result = getTileDistance(tile1.getRow(),tile1.getCol(),tile2.getRow(),tile2.getCol());
@@ -920,7 +920,7 @@ if(target==null || source==null)
 	 * @param direction
 	 * 		direction à considérer
 	 */
-	public double getPixelDistance(AstarLocation location1, AstarLocation location2, Direction direction)
+	public double getPixelDistance(AiLocation location1, AiLocation location2, Direction direction)
 	{	double posX1 = location1.getPosX();
 		double posY1 = location1.getPosY();
 		double posX2 = location2.getPosX();
@@ -942,7 +942,7 @@ if(target==null || source==null)
 	 * @param location2
 	 * 		Emplacement du second point
 	 */
-	public double getPixelDistance(AstarLocation location1, AstarLocation location2)
+	public double getPixelDistance(AiLocation location1, AiLocation location2)
 	{	double posX1 = location1.getPosX();
 		double posY1 = location1.getPosY();
 		double posX2 = location2.getPosX();
@@ -1042,7 +1042,7 @@ if(target==null || source==null)
 	 * @param direction
 	 * 		Direction à considérer.
 	 */
-	public double getPixelDistance(AstarLocation location, AiTile tile, Direction direction)
+	public double getPixelDistance(AiLocation location, AiTile tile, Direction direction)
 	{	double x = location.getPosX();
 		double y = location.getPosY();
 		double result = getPixelDistance(x,y,tile);
@@ -1064,7 +1064,7 @@ if(target==null || source==null)
 	 * @param tile
 	 * 		Case d'arrivée.
 	 */
-	public double getPixelDistance(AstarLocation location, AiTile tile)
+	public double getPixelDistance(AiLocation location, AiTile tile)
 	{	double x = location.getPosX();
 		double y = location.getPosY();
 		double result = getPixelDistance(x,y,tile);
@@ -1264,7 +1264,7 @@ if(target==null || source==null)
 	 * @return	
 	 * 		Renvoie {@code true} ssi les deux emplacement sont équivalents au pixel près.
 	 */
-	public boolean hasSamePixelPosition(AstarLocation location1, AstarLocation location2)
+	public boolean hasSamePixelPosition(AiLocation location1, AiLocation location2)
 	{	double x1 = location1.getPosX();
 		double y1 = location1.getPosY();
 		double x2 = location2.getPosX();

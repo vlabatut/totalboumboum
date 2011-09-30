@@ -26,7 +26,7 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
  * Implémentation la plus simple d'une heuristique : 
@@ -56,7 +56,7 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * 		et la plus proche des cases contenues dans le champ {@code endTiles}.
 	 */
 	@Override
-	public double processHeuristic(AstarLocation location) throws StopRequestException
+	public double processHeuristic(AiLocation location) throws StopRequestException
 	{	// init
 		AiTile startTile = location.getTile();
 		List<AiTile> endTiles = getEndTiles();

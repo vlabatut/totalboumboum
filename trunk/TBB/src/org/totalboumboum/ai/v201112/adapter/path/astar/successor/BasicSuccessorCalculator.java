@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
@@ -78,7 +78,7 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 			// on teste si elle est traversable 
 			// et n'a pas déjà été explorée dans la branche courante de A*
 			if(neighbor.isCrossableBy(hero) && !node.hasBeenExplored(neighbor))
-			{	AstarLocation location = new AstarLocation(neighbor);
+			{	AiLocation location = new AiLocation(neighbor);
 				AstarNode child = new AstarNode(location,node);
 				result.add(child);
 			}

@@ -32,7 +32,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -261,7 +261,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 				AiPath aiPath = aiPaths.get(index);
 				List<Tile> path = new ArrayList<Tile>();
 				enginePaths.add(path);
-				for(AstarLocation location: aiPath.getLocations())
+				for(AiLocation location: aiPath.getLocations())
 				{	// TODO should be adapted so that the pixel coordinates are used instead of the tiles'
 					AiTile aiTile = location.getTile();
 					int row = aiTile.getRow();

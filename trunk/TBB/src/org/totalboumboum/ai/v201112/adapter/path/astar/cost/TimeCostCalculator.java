@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
@@ -85,7 +85,7 @@ public class TimeCostCalculator extends CostCalculator
 	 * 		Le temps nécessaire pour aller du départ à l'arrivée.
 	 */ 
 	@Override
-	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
+	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
 	{	AiZone zone = current.getZone();
 		double speed = hero.getWalkingSpeed();
 		double distance = zone.getPixelDistance(current,next);
