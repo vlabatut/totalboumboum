@@ -27,49 +27,56 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * implémentation la plus simple d'une fonction successeur : 
+ * Implémentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
- * par le personnage considéré.
- * Une version plus complexe et plus efficace consisterait à utiliser la profondeur
- * du noeud de recherche pour calculer le temps nécessaire pour arriver jusqu'à la case
- * courante, et à vérifier qu'aucune bombe ne sera en train d'exploser dans les cases voisines
- * quand le joueur y sera. En d'autres termes, on peut calculer si le joueur a le temps
- * de passer sur une case avant qu'elle ne soit prise dans une explosion.
+ * par le personnage considéré, et qui n'ont pas déjà été explorées.<br/>
+ * On empêche tout passage sur une case déjà explorée afin de rendre le traitement 
+ * plus court. Par conséquent, cette fonction n'est pas capable de traiter les 
+ * chemins qui contiennent des retours en arrière ou de l'attente.
  * 
  * @author Vincent Labatut
- *
  */
 public class BasicSuccessorCalculator extends SuccessorCalculator
 {
-	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * fonction successeur la plus simple: on considère les 4 cases voisines de la case courante,
-	 * en ne conservant que les cases que le personnage de référence peut traverser 
+	 * Fonction successeur la plus simple: on considère les 4 cases 
+	 * voisines de la case courante,
+	 * en ne conservant que les cases que le personnage 
+	 * de référence peut traverser. On ignore également
+	 * les cases déjà explorées, afin d'éviter les retours
+	 * en arrière et de rendre le traitement plus rapide.
 	 * 
 	 * @param node	
-	 * 		le noeud de recherche courant
+	 * 		Le noeud de recherche courant
 	 * @return	
-	 * 		une liste des cases successeurs
+	 * 		La liste des noeuds fils.
 	 */
 	@Override
-	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException
+	public List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException
 	{	// init
-		List<AiTile> result = new ArrayList<AiTile>();
-		AiTile tile = node.getTile();
+		List<AstarNode> result = new ArrayList<AstarNode>();
+		AiTile tile = node.getLocation().getTile();
 		AiHero hero = node.getHero();
 		
-		// pour chaque case voisine : on la rajoute si elle est traversable
+		// pour chaque case voisine :
 		for(Direction direction: Direction.getPrimaryValues())
 		{	AiTile neighbor = tile.getNeighbor(direction);
-			if(neighbor.isCrossableBy(hero))
-				result.add(neighbor);			
+			
+			// on teste si elle est traversable 
+			// et n'a pas déjà été explorée dans la branche courante de A*
+			if(neighbor.isCrossableBy(hero) && !node.hasBeenExplored(neighbor))
+			{	AstarLocation location = new AstarLocation(neighbor);
+				AstarNode child = new AstarNode(location,node);
+				result.add(child);
+			}
 		}
 
 		return result;

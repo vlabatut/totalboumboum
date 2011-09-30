@@ -24,15 +24,13 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
 
 /**
- * permet de définir une fonction successeur utilisée par l'algorithme
- * A* lors de la recherche d'un plus court chemin, pour développer un état
+ * Permet de définir une fonction successeur utilisée par l'algorithme
+ * A* lors de la recherche d'un plus court chemin, pour développer un état.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class SuccessorCalculator
 {
@@ -40,20 +38,20 @@ public abstract class SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * calcule tous les états accessibles à partir du noeud de recherche
+	 * Calcule tous les états accessibles à partir du noeud de recherche
 	 * passé en paramètre. On prend un noeud de recherche et non pas
 	 * un état en paramètre, car le noeud de recherche contient des informations
-	 * susceptibles d'éliminer certains successeurs potentiels. 
-	 * Par exemple, si le cout correspond au temps de déplacement, alors le cout du noeud
+	 * susceptibles d'éliminer certains successeurs potentiels.<br/>
+	 * Par exemple, si le coût correspond au temps de déplacement, alors le coût du noeud
 	 * de recherche courant correspond au temps nécessaire pour arriver à l'état
 	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être
 	 * menacée par du feu, et le temps est une information cruciale pour déterminer
-	 * si le personnage peut ou pas traverser une case avant qu'elle ne brûle.
+	 * si le personnage peut ou pas traverser une case avant qu'elle brûle.
 	 * 
 	 * @param node	
-	 * 		le noeud de recherche courant 
+	 * 		Le noeud de recherche courant.
 	 * @return	
-	 * 		la liste de cases accessibles
+	 * 		La liste de noeuds fils obtenus.
 	 */
-	public abstract List<AiTile> processSuccessors(AstarNode node) throws StopRequestException;
+	public abstract List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException;
 }
