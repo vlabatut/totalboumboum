@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201112.ais._suiveur;
  * 
  */
 
-import org.totalboumboum.ai.v200910.adapter.AiManager;
+import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
