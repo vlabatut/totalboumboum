@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost;
+package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
 
 /*
  * Total Boum Boum
@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,

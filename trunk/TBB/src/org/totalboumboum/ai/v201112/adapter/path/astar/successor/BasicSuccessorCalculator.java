@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astarcopy.successor;
+package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
 
 /*
  * Total Boum Boum
@@ -27,7 +27,7 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarNode;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**

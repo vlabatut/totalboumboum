@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astarcopy;
+package org.totalboumboum.ai.v201112.adapter.path.astar;
 
 /*
  * Total Boum Boum
@@ -28,9 +28,9 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 

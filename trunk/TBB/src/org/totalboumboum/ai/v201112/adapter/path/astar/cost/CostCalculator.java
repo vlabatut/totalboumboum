@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost;
+package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
 
 /*
  * Total Boum Boum
@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
-import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * Permet de définir une fonction de coût 
