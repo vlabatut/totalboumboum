@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
- * permet de définir une fonction heuristique utilisée par l'algorithme
+ * Permet de définir une fonction heuristique utilisée par l'algorithme
  * A* lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut
@@ -39,7 +39,7 @@ public abstract class HeuristicCalculator
 	// END TILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste des cases pouvant terminer le chemin */
-	private List<AstarLocation> endTiles;	
+	private List<AiTile> endTiles;	
 
 	/**
 	 * initialise/modifie la liste de cases 
@@ -48,7 +48,7 @@ public abstract class HeuristicCalculator
 	 * @param endTiles	
 	 * 		les cases terminant le chemin
 	 */
-	public void setEndTiles(List<AstarLocation> endTiles) throws StopRequestException
+	public void setEndTiles(List<AiTile> endTiles) throws StopRequestException
 	{	this.endTiles = endTiles;		
 	}
 
@@ -59,7 +59,7 @@ public abstract class HeuristicCalculator
 	 * @return	
 	 * 		la liste des cases objectifs
 	 */
-	public List<AstarLocation> getEndTiles() throws StopRequestException
+	public List<AiTile> getEndTiles() throws StopRequestException
 	{	return endTiles;	
 	}
 
@@ -67,13 +67,13 @@ public abstract class HeuristicCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * calcule la valeur heuristique de la case tile,
+	 * Calcule la valeur heuristique de la case tile,
 	 * le but étant de se rendre dans une des cases objectifs
 	 * 
-	 * @param tile	
-	 * 		la case concernée 
+	 * @param location	
+	 * 		L'emplacement concernée 
 	 * @return	
-	 * 		l'heuristique de la case
+	 * 		La valeur heuristique de cet emplacement.
 	 */
-	public abstract double processHeuristic(AstarLocation tile) throws StopRequestException;
+	public abstract double processHeuristic(AstarLocation location) throws StopRequestException;
 }
