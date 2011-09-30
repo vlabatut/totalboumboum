@@ -25,112 +25,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * Cette classe représente un chemin qu'un agent peut emprunter
- * dans la zone de jeu. Le chemin est décrit par une séquence de cases,
- * et un point de départ exprimé en pixels. Un temps d'attente supplémentaire
- * peut être associé à chaque case.<br/>
+ * dans la zone de jeu. Le chemin est décrit par une séquence d'emplacements,
+ * représentés par des objets {@link AstarLocation}. Un temps d'attente 
+ * supplémentaire peut être associé à chaque étape.<br/>
  * Diverses opérations sont possibles sur un ou plusieurs chemins : modification,
  * comparaisons, calculs variés, etc.
+ * <b>Attention :</b> les chemins étaient gérés différemment les années
+ * précédentes : il s'agissait simplement de suites de cases, et non pas
+ * de suites d'emplacements. De plus, les temps de pause n'étaient pas considérés.
+ * Par conséquent, l'utilisation des chemins dans cette API est légèrement 
+ * différente de ce qui se faisait les années précédentes.
  * 
  * @author Vincent Labatut
- *
  */
 public class AiPath implements Comparable<AiPath>
 {	
-    /////////////////////////////////////////////////////////////////
-	// STARTING POINT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse du point de départ précis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
-	private double startX;
-	/** ordonnée du point de départ précis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
-	private double startY;
-	
-	/**
-	 * renvoie l'abscisse du point de départ de chemin,
-	 * exprimée en pixels.
-	 * 
-	 * @return
-	 * 		l'abscisse du point de départ
-	 */
-	public double getStartX()
-	{	return startX;
-	}
-
-	/**
-	 * renvoie l'ordonnée du point de départ de chemin,
-	 * exprimée en pixels.
-	 * 
-	 * @return
-	 * 		l'ordonnée du point de départ
-	 */
-	public double getStartY()
-	{	return startY;
-	}
-
-	/**
-	 * modifie la position du point de départ de chemin,
-	 * exprimée en pixels.
-	 * 
-	 * @param startY
-	 * 		la nouvelle ordonnée du point de départ
-	 * @param startY
-	 * 		la nouvelle ordonnée du point de départ
-	 */
-	public void setStart(double startX, double startY)
-	{	this.startX = startX;
-		this.startY = startY;
-	}
-
-	/**
-	 * permet de vérifier que le point de départ est
-	 * bien contenu dans la première case du chemin.
-	 * si ce n'est pas le cas, il est corrigé en utilisant
-	 * le centre de la première case du chemin. 
-	 */
-	public void checkStartingPoint()
-	{	if(!tiles.isEmpty())
-		{	AiTile firstTile = tiles.get(0);
-			if(tiles.size()==1)
-			{	startX = firstTile.getPosX();
-				startY = firstTile.getPosX();
-			}
-			else
-			{	AiZone zone = firstTile.getZone();
-				AiTile currentTile = zone.getTile(startX,startY);
-				if(!currentTile.equals(firstTile))
-				{	startX = firstTile.getPosX();
-					startY = firstTile.getPosX();
-				}
-			}
-		}
-	}
-	
+	// LOCATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TILES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** liste des cases composant le chemin */
-	private final List<AiTile> tiles = new ArrayList<AiTile>();
-	/** liste des pauses associées à chaque case (attention : ce temps n'inclut pas la durée nécessaire à la traversée de la case) */
+	/** liste des emplacements composant le chemin */
+	private final List<AstarLocation> locations = new ArrayList<AstarLocation>();
+	/** liste des pauses associées à chaque emplacement (attention : ce temps n'inclut pas le temps de déplacement) */
 	private final List<Long> pauses = new ArrayList<Long>();
 	
 	/**
-	 * Renvoie la liste de cases constituant ce chemin
+	 * Renvoie la liste de emplacements constituant ce chemin
 	 * 
 	 * @return	
-	 * 		la liste de cases du chemin
+	 * 		la liste de emplacements du chemin
 	 */
-	public List<AiTile> getTiles()
-	{	return tiles;	
+	public List<AstarLocation> getLocations()
+	{	return locations;	
 	}
 	
 	/**
-	 * Renvoie la liste de pauses associées aux cases constituant ce chemin.
+	 * Renvoie la liste de pauses associées aux emplacement constituant ce chemin.
 	 * Les pauses sont exprimées en ms.
 	 * 
 	 * @return	
@@ -141,24 +75,24 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * Renvoie la case dont la position est passée en paramètre
+	 * Renvoie l'emplacement dont l'index est passé en paramètre
 	 *
 	 * @param index
-	 * 		la position de la case demandée
+	 * 		La position de l'emplacement demandé dans le chemin.
 	 * @return	
-	 * 		la case occupant la position indiquée dans ce chemin
+	 * 		L'emplacement occupant la position indiquée dans ce chemin
 	 */
-	public AiTile getTile(int index)
-	{	return tiles.get(index);	
+	public AstarLocation getTile(int index)
+	{	return locations.get(index);	
 	}
 	
 	/**
-	 * Renvoie la pause associée à la case 
+	 * Renvoie la pause associée à l'emplacement 
 	 * dont la position est passée en paramètre.
 	 * La pause est exprimée en ms.
 	 *
 	 * @param index
-	 * 		la position de la case demandée
+	 * 		la position de l'emplacement demandée
 	 * @return	
 	 * 		la case occupant la position indiquée dans ce chemin
 	 */
@@ -167,14 +101,14 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * Ajoute dans ce chemin la case passée en paramètre, 
-	 * en l'insérant à la fin de la séquence de cases
+	 * Ajoute dans ce chemin l'emplacement passé en paramètre, 
+	 * en l'insérant à la fin de la séquence d'emplacements.
 	 * 
-	 * @param tile
-	 * 		la case à insérer
+	 * @param location
+	 * 		l'emplacement à insérer
 	 */
-	public void addTile(AiTile tile)
-	{	addTile(tile,0);
+	public void addTile(AstarLocation location)
+	{	addTile(location,0);
 	}
 	
 	/**
@@ -185,10 +119,8 @@ public class AiPath implements Comparable<AiPath>
 	 * @param tile
 	 * 		la case à insérer
 	 */
-	public void addTile(AiTile tile, long pause)
-	{	tiles.add(tile);
-		if(tiles.size()==1)
-			checkStartingPoint();
+	public void addTile(AstarLocation tile, long pause)
+	{	locations.add(tile);
 		pauses.add(pause);
 	}
 	
@@ -201,7 +133,7 @@ public class AiPath implements Comparable<AiPath>
 	 * @param tile
 	 * 		la case à insérer
 	 */
-	public void addTile(int index, AiTile tile)
+	public void addTile(int index, AstarLocation tile)
 	{	addTile(index,tile,0);
 	}
 	
@@ -216,10 +148,8 @@ public class AiPath implements Comparable<AiPath>
 	 * @param pause
 	 * 		la pause associée à la case à insérer
 	 */
-	public void addTile(int index, AiTile tile, long pause)
-	{	tiles.add(index,tile);
-		if(index==0)
-			checkStartingPoint();
+	public void addTile(int index, AstarLocation tile, long pause)
+	{	locations.add(index,tile);
 		pauses.add(index,pause);
 	}
 	
@@ -232,10 +162,8 @@ public class AiPath implements Comparable<AiPath>
 	 * @param tile
 	 * 		la nouvelle case
 	 */
-	public void setTile(int index, AiTile tile)
-	{	tiles.set(index,tile);
-		if(index==0)
-			checkStartingPoint();
+	public void setTile(int index, AstarLocation tile)
+	{	locations.set(index,tile);
 	}
 	
 	/**
@@ -251,10 +179,8 @@ public class AiPath implements Comparable<AiPath>
 	 * @param pause
 	 * 		la nouvelle pause associée à cette case.
 	 */
-	public void setTile(int index, AiTile tile, long pause)
-	{	tiles.set(index,tile);
-		if(index==0)
-			checkStartingPoint();
+	public void setTile(int index, AstarLocation tile, long pause)
+	{	locations.set(index,tile);
 		pauses.set(index,pause);
 	}
 	
@@ -279,9 +205,7 @@ public class AiPath implements Comparable<AiPath>
 	 * 		position de la case à supprimer
 	 */
 	public void removeTile(int index)
-	{	tiles.remove(index);
-		if(index==0)
-			checkStartingPoint();
+	{	locations.remove(index);
 		pauses.remove(index);
 	}
 	
@@ -293,11 +217,9 @@ public class AiPath implements Comparable<AiPath>
 	 * @param tile
 	 * 		la case à supprimer
 	 */
-	public void removeTile(AiTile tile)
-	{	int index = tiles.indexOf(tile);
-		tiles.remove(index);
-		if(index==0)
-			checkStartingPoint();
+	public void removeTile(AstarLocation tile)
+	{	int index = locations.indexOf(tile);
+		locations.remove(index);
 		pauses.remove(index);
 	}
 	
@@ -310,7 +232,7 @@ public class AiPath implements Comparable<AiPath>
 	 * 		La longueur de ce chemin, en cases.
 	 */
 	public int getLength()
-	{	return tiles.size();
+	{	return locations.size();
 	}
 	
 	/**
@@ -320,7 +242,7 @@ public class AiPath implements Comparable<AiPath>
 	 * 		Renvoie {@code true} ssi le chemin ne contient aucune case.
 	 */
 	public boolean isEmpty()
-	{	return tiles.size()==0;
+	{	return locations.size()==0;
 	}
 	
 	/**
@@ -330,10 +252,10 @@ public class AiPath implements Comparable<AiPath>
 	 * @return	
 	 * 		La dernière case du chemin ou {@code null} en cas d'erreur.
 	 */
-	public AiTile getLastTile()
-	{	AiTile result = null;
-		if(!tiles.isEmpty())
-			result = tiles.get(tiles.size()-1);
+	public AstarLocation getLastTile()
+	{	AstarLocation result = null;
+		if(!locations.isEmpty())
+			result = locations.get(locations.size()-1);
 		return result;
 	}
 	
@@ -358,10 +280,10 @@ public class AiPath implements Comparable<AiPath>
 	 * @return	
 	 * 		La première case du chemin ou {@code null} en cas d'erreur.
 	 */
-	public AiTile getFirstTile()
-	{	AiTile result = null;
-		if(!tiles.isEmpty())
-			result = tiles.get(0);
+	public AstarLocation getFirstTile()
+	{	AstarLocation result = null;
+		if(!locations.isEmpty())
+			result = locations.get(0);
 		return result;
 	}
 	
@@ -392,10 +314,17 @@ public class AiPath implements Comparable<AiPath>
 	 */
 	public int getTileDistance()
 	{	int result = 0;
-		AiTile previous = null;
-		for(AiTile tile: tiles)
-		{	if(previous==null || !tile.equals(previous))
-				result++;
+		AstarLocation previous = null;
+		AiZone zone = null;
+		
+		for(AstarLocation tile: locations)
+		{	if(previous==null)
+			{	zone = tile.getTile().getZone();
+			}
+			else
+			{	int dist = zone.getTileDistance(previous,tile);
+				result = result + dist;
+			}
 			previous = tile;
 		}
 		return result;	
@@ -413,32 +342,16 @@ public class AiPath implements Comparable<AiPath>
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
-		AiTile previous = null;
-		Double previousX = null;
-		Double previousY = null;
-		for(AiTile tile: tiles)
+		AstarLocation previous = null;
+		AiZone zone = null;
+
+		for(AstarLocation tile: locations)
 		{	if(previous==null)
-			{	previousX = startX;
-				previousY = startY;
-			} 
-			else if(!tile.equals(previous))
-			{	AiZone zone = previous.getZone();
-				Direction direction = zone.getDirection(previous,tile);
-				double previousCenterX = previous.getPosX();
-				double previousCenterY = previous.getPosY();
-				double centerX = tile.getPosX();
-				double centerY = tile.getPosY();
-				double interfaceX = centerX;
-				double interfaceY = centerY;
-				int di[] = direction.getIntFromDirection();
-				if(direction.isHorizontal())
-					interfaceX = (previousCenterX + centerX)/2 + 2*di[0]*RoundVariables.toleranceCoefficient;
-				else if(direction.isVertical())
-					interfaceY = (previousCenterY + centerY)/2 + 2*di[1]*RoundVariables.toleranceCoefficient;
-				double dist = zone.getPixelDistance(previousX,previousY,interfaceX,interfaceY);
+			{	zone = tile.getTile().getZone();
+			}
+			else
+			{	double dist = zone.getPixelDistance(previous,tile);
 				result = result + dist;
-				previousX = interfaceX;
-				previousY = interfaceY;
 			}
 			previous = tile;
 		}
@@ -463,7 +376,7 @@ public class AiPath implements Comparable<AiPath>
 	 */
 	public long getDuration(AiHero hero)
 	{	long result = 0;
-		if(tiles.size()>1)
+		if(locations.size()>1)
 		{	// on considère le temps de déplacement
 			double speed = hero.getWalkingSpeed();
 			double distance = getPixelDistance();
@@ -508,12 +421,12 @@ public class AiPath implements Comparable<AiPath>
 		{	AiPath path = (AiPath)object;
 			result = getLength()==path.getLength();
 			int i=0;
-			while(result && i<tiles.size())
-			{	AiTile t1 = tiles.get(i);
-				AiTile t2 = path.getTile(i);
-				long p1 = pauses.get(i);
-				long p2 = path.getPause(i);
-				result = t1.equals(t2) && p1==p2;
+			while(result && i<locations.size())
+			{	AstarLocation loc1 = locations.get(i);
+				AstarLocation loc2 = path.getTile(i);
+				long pause1 = pauses.get(i);
+				long pause2 = path.getPause(i);
+				result = loc1.equals(loc2) && pause1==pause2;
 				i++;
 			}
 		}		
@@ -525,13 +438,13 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = "[";
-		for(int i=0;i<tiles.size();i++)
-		{	AiTile tile = tiles.get(i);
+	{	String result = "{";
+		for(int i=0;i<locations.size();i++)
+		{	AstarLocation tile = locations.get(i);
 			long pause = pauses.get(i);
-			result = result + " ("+tile.getRow()+","+tile.getCol()+";"+pause+")";
+			result = result + " ["+tile+";"+pause+"]";
 		}
-		result = result + " ]";
+		result = result + " }";
 		return result;
 	}
 }
