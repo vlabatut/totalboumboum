@@ -21,7 +21,6 @@ package org.totalboumboum.ai.v201112.adapter.path.astar;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -36,7 +35,6 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
  * 
  * @author Vincent Labatut
- *
  */
 public final class AstarNode implements Comparable<AstarNode>
 {	
@@ -45,19 +43,19 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * Les calculateurs passés en paramètres seront utilisés
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
 	 * 
-	 * @param tile	
-	 * 		case associée à ce noeud de recherche
+	 * @param location	
+	 * 		Emplacement associé à ce noeud de recherche.
 	 * @param costCalculator	
-	 * 		fonction de cout
+	 * 		Fonction de coût.
 	 * @param heuristicCalculator	
-	 * 		fonction heuristique
+	 * 		Fonction heuristique.
 	 */
-	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
+	protected AstarNode(ArtificialIntelligence ai, AstarLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// agent
 		this.ai = ai;
 		
-		// case
-		this.tile = tile;
+		// emplacement
+		this.location = location;
 		
 		// hero
 		this.hero = hero;
@@ -74,7 +72,7 @@ public final class AstarNode implements Comparable<AstarNode>
 		
 		// heuristique
 		this.heuristicCalculator = heuristicCalculator;
-		heuristic = heuristicCalculator.processHeuristic(tile);
+		heuristic = heuristicCalculator.processHeuristic(location);
 		
 		// successeurs
 		this.successorCalculator = successorCalculator;
@@ -84,17 +82,17 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * Constructeur créant un noeud non visité, fils du noeud
 	 * passé en paramètre. 
 	 * 
-	 * @param tile	
-	 * 		case associée à ce noeud de recherche
+	 * @param location	
+	 * 		Emplacement associé à ce noeud de recherche.
 	 * @param parent	
-	 * 		noeud de recherche parent de ce noeud
+	 * 		Noeud de recherche parent de ce noeud.
 	 */
-	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
+	public AstarNode(AstarLocation location, AstarNode parent) throws StopRequestException
 	{	// agent
 		this.ai = parent.getAi();
 		
 		// case
-		this.tile = tile;
+		this.location = location;
 		
 		// hero
 		this.hero = parent.getHero();
@@ -107,18 +105,55 @@ public final class AstarNode implements Comparable<AstarNode>
 		
 		// coût
 		costCalculator = parent.getCostCalculator();
-		AiTile previous = parent.getTile();
-		double localCost = costCalculator.processCost(previous,tile);
+		AstarLocation previous = parent.getLocation();
+		double localCost = costCalculator.processCost(previous,location);
 		cost = parent.getCost() + localCost;
 		
 		// heuristique
 		heuristicCalculator = parent.getHeuristicCalculator();
-		heuristic = heuristicCalculator.processHeuristic(tile);
+		heuristic = heuristicCalculator.processHeuristic(location);
 		
 		// successeurs
 		successorCalculator = parent.getSuccessorCalculator();
 	}
 
+	/**
+	 * Constructeur créant un noeud non visité, fils du noeud
+	 * passé en paramètre. L'emplacement est le même que le noeud précédent
+	 * et l'action consiste à faire une pause (et non pas un déplacement).
+	 * 
+	 * @param wait	
+	 * 		Pause associée à ce noeud de recherche.
+	 * @param parent	
+	 * 		Noeud de recherche parent de ce noeud.
+	 */
+	public AstarNode(long wait, AstarNode parent) throws StopRequestException
+	{	// agent
+		this.ai = parent.getAi();
+		
+		// case
+		this.location = parent.getLocation();
+		
+		// hero
+		this.hero = parent.getHero();
+		
+		// parent
+		this.parent = parent;
+		
+		// profondeur
+		depth = parent.getDepth() + 1;
+		
+		// coût
+		cost = parent.getCost() + wait;
+		
+		// heuristique
+		heuristicCalculator = parent.getHeuristicCalculator();
+		heuristic = heuristicCalculator.processHeuristic(location);
+		
+		// successeurs
+		successorCalculator = parent.getSuccessorCalculator();
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -136,19 +171,19 @@ public final class AstarNode implements Comparable<AstarNode>
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// TILE				/////////////////////////////////////////////
+	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case associée au noeud */
-	private AiTile tile = null;
+	/** Emplacement associé au noeud */
+	private AstarLocation location = null;
 	
 	/**
-	 * Renvoie la case associée au noeud de recherche.
+	 * Renvoie l'emplacement associé au noeud de recherche.
 	 * 
 	 * @return	
-	 * 		une case
+	 * 		Une emplacement.
 	 */
-	public AiTile getTile()
-	{	return tile;
+	public AstarLocation getLocation()
+	{	return location;
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -227,7 +262,7 @@ public final class AstarNode implements Comparable<AstarNode>
     /////////////////////////////////////////////////////////////////
 	// PARENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** parent du noeud (null pour la racine) */
+	/** parent du noeud ({@code null} pour la racine) */
 	private AstarNode parent = null;
 	
 	/**
@@ -241,24 +276,45 @@ public final class AstarNode implements Comparable<AstarNode>
 	}
 	
 	/**
-	 * détermine si la case passée en paramètre a déjà été traitée,
-	 * i.e. si elle apparait dans les noeuds de recherche ancêtres
+	 * Détermine si la case passée en paramètre a déjà été traitée,
+	 * i.e. si elle apparait dans les noeuds de recherche ancêtres.
 	 * 
 	 * @param tile	
-	 * 		case à tester
+	 * 		Case à tester
 	 * @return	
-	 * 		vrai si la case a déjà été traitée
+	 * 		{@code true} ssi la case a déjà été traitée.
 	 * @throws StopRequestException
 	 */
-	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
+	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
-		boolean result = this.tile.equals(tile);
+		boolean result = this.location.equals(tile);
 		if(parent!=null && !result)
 			result = parent.hasBeenExplored(tile);
 		return result;
 	}
 	
+	/**
+	 * Détermine si la case contenue dans l'emplacement passé en 
+	 * paramètre a déjà été traitée, i.e. si elle apparait dans les 
+	 * noeuds de recherche ancêtres.
+	 * 
+	 * @param location
+	 * 		Emplacement contenant la case à tester
+	 * @return	
+	 * 		{@code true} ssi la case a déjà été traitée.
+	 * @throws StopRequestException
+	 */
+/*	private boolean hasBeenExplored(AstarLocation location) throws StopRequestException
+	{	ai.checkInterruption();
+	
+		AiTile tile = location.getTile();
+		boolean result = this.location.getTile().equals(tile);
+		if(parent!=null && !result)
+			result = parent.hasBeenExplored(tile);
+		return result;
+	}
+*/	
     /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -285,32 +341,24 @@ public final class AstarNode implements Comparable<AstarNode>
 	public List<AstarNode> getChildren() throws StopRequestException
 	{	ai.checkInterruption();
 	
-		List<AstarNode> result = new ArrayList<AstarNode>();
-		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
-		for(AiTile neighbor: neighbors)
-		{	// optimisation : on ne garde pas les états qui appartiennent déjà au chemin 
-			// contenant le noeud de recherche courant,
-			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
-			if(!hasBeenExplored(neighbor))
-			{	AstarNode node = new AstarNode(neighbor,this);
-				result.add(node);			
-			}
-		}
-		
+		List<AstarNode> result = successorCalculator.processSuccessors(this);
 		return result;
 	}
+
+//TODO est-il nécessaire d'avoir une représentation de la pause faite dans ce noeud, 
+//  ou peut on la calculer en fonction du cout du parent (en prenant la différence) ?
 	
 	/////////////////////////////////////////////////////////////////
 	// HERO				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** personnage considéré */
+	/** Le personnage considéré */
 	private AiHero hero = null;
 	
 	/**
-	 * renvoie le personnage de référence pour cette recherche
+	 * Renvoie le personnage de référence pour cette recherche
 	 * 
 	 * @return	
-	 * 		le personnage de référence
+	 * 		Le personnage de référence.
 	 */
 	public AiHero getHero()
 	{	return hero;	
@@ -346,7 +394,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	public String toString()
 	{	String result;
 		result = "<";
-		result = result + "("+tile.getRow()+","+tile.getCol()+") ";
+		result = result + "("+location+") ";
 		result = result + depth + ";";
 		result = result + cost + ";";
 		result = result + heuristic + " ";
@@ -368,6 +416,6 @@ public final class AstarNode implements Comparable<AstarNode>
 		successorCalculator = null;
 		parent = null;
 		hero = null;
-		tile = null;
+		location = null;
 	}
 }
