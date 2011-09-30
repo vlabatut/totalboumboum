@@ -25,12 +25,15 @@ import java.awt.Color;
 import java.util.Iterator;
 
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
@@ -41,7 +44,6 @@ import org.totalboumboum.engine.content.feature.Direction;
  * en respectant un chemin donné
  * 
  * @author Vincent Labatut
- *
  */
 public class PathManager
 {
@@ -116,7 +118,14 @@ public class PathManager
 		tileDest = destination;
 		xDest = tileDest.getPosX();
 		yDest = tileDest.getPosY();
-		path = astar.processShortestPath(ai.getCurrentTile(),destination);
+		AstarLocation location = new AstarLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
+		try
+		{	path = astar.processShortestPath(location,destination);
+		}
+		catch (LimitReachedException e)
+		{	//e.printStackTrace();
+			path = new AiPath();
+		}
 	}
 
 	/**
@@ -131,8 +140,15 @@ public class PathManager
 		double normalized[] = zone.normalizePosition(x, y);
 		xDest = normalized[0];
 		yDest = normalized[1];
-		tileDest = zone.getTile(xDest,yDest);
-		path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
+//		tileDest = zone.getTile(xDest,yDest);
+		AstarLocation location = new AstarLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
+		try
+		{	path = astar.processShortestPath(location,tileDest);
+		}
+		catch (LimitReachedException e)
+		{	//e.printStackTrace();
+			path = new AiPath();
+		}
 	}
 
 	/*	public boolean hasArrived() throws StopRequestException
@@ -216,10 +232,10 @@ public class PathManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		AiTile currentTile = ai.getCurrentTile();
-		while(!path.isEmpty() && path.getTile(0)!=currentTile)
+		while(!path.isEmpty() && !path.getLocation(0).getTile().equals(currentTile))
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-			path.removeTile(0);
+			path.removeLocation(0);
 		}
 	}
 	
@@ -264,11 +280,12 @@ public class PathManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		boolean result = true;
-		Iterator<AiTile> it = path.getTiles().iterator();
+		Iterator<AstarLocation> it = path.getLocations().iterator();
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-			AiTile tile = it.next();
+			AstarLocation location = it.next();
+			AiTile tile = location.getTile();
 			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);
 //			if(!result)
 //				System.out.println();
@@ -302,11 +319,19 @@ public class PathManager
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())
-				path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
+			{	AstarLocation location = new AstarLocation(ai.getCurrentTile());
+				try
+				{	path = astar.processShortestPath(location,tileDest);
+				}
+				catch (LimitReachedException e)
+				{	//e.printStackTrace();
+					path = new AiPath();
+				}
+			}
 			if(checkPathValidity())
 			{	// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
 				if(path.getLength()>1)
-				{	AiTile tile = path.getTile(1);
+				{	AiTile tile = path.getLocation(1).getTile();
 					result = zone.getDirection(ai.getOwnHero(),tile);	
 				}
 				// sinon, s'il ne reste qu'une seule case, on va au centre

@@ -25,14 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
-import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-
 
 /**
  * cette classe implémente une IA relativement stupide, qui choisit une cible
@@ -46,69 +42,6 @@ public class Suiveur extends ArtificialIntelligence
 {	
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
-
-	@Override
-	public AiAction processAction() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-
-		// premier appel : on initialise		
-		if(ownHero == null)
-			init();
-	
-		AiAction result = new AiAction(AiActionName.NONE);
-		
-		// si le personnage controlé a été éliminé, inutile de continuer
-		if(!ownHero.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
-			updateLocation();
-			if(verbose)
-				System.out.println(ownHero.getColor()+": ("+currentTile.getLine()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
-			Direction moveDir = Direction.NONE;			
-			
-			// on met à jour le gestionnaire de sécurité
-			safetyManager.update();
-			// si on est en train de fuir : on continue
-			if(escapeManager!=null)
-			{	if(escapeManager.hasArrived())
-					escapeManager = null;
-				else
-					moveDir = escapeManager.update();
-			}
-			
-			// sinon si on est en danger : on commence à fuir
-			else if(!safetyManager.isSafe(currentTile))
-			{	escapeManager = new EscapeManager(this);
-				moveDir = escapeManager.update();
-			}
-			
-			// sinon on se déplace vers la cible
-			else
-			{	updateTarget();
-				if(target!=null)
-					moveDir = targetManager.update();
-			}
-			
-			// on met à jour la direction renvoyée au moteur du jeu
-			result = new AiAction(AiActionName.MOVE,moveDir);
-		}
-		
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// INITIALISATION			/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private void init() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-
-		zone = getZone();
-		ownHero = zone.getOwnHero();
-	
-		updateLocation();
-		
-		safetyManager = new SafetyManager(this);
-		targetManager = new PathManager(this,currentTile);
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// PATH MANAGERS			/////////////////////////////////////
@@ -219,18 +152,59 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// PERCEPTS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la zone de jeu */
-	private AiZone zone = null;
-
-	/**
-	 * renvoie la zone de jeu
-	 */
-	public AiZone getZone() throws StopRequestException
+	@Override
+	public void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
+		
+		ownHero = getZone().getOwnHero();
 	
-		return zone;
+		updateLocation();
+		
+		safetyManager = new SafetyManager(this);
+		targetManager = new PathManager(this,currentTile);
+	}
+	
+	@Override
+	public void updatePercepts() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+		
+		// on met à jour la position de l'ia dans la zone
+		updateLocation();
+		if(verbose)
+			System.out.println(ownHero.getColor()+": ("+currentTile.getRow()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
+		
+		// on met à jour le gestionnaire de sécurité
+		safetyManager.update();
 	}
 
+	@Override
+	public Direction considerMoving() throws StopRequestException
+	{	Direction result = Direction.NONE;			
+		
+		// si on est en train de fuir : on continue
+		if(escapeManager!=null)
+		{	if(escapeManager.hasArrived())
+				escapeManager = null;
+			else
+				result = escapeManager.update();
+		}
+		
+		// sinon si on est en danger : on commence à fuir
+		else if(!safetyManager.isSafe(currentTile))
+		{	escapeManager = new EscapeManager(this);
+			result = escapeManager.update();
+		}
+		
+		// sinon on se déplace vers la cible
+		else
+		{	updateTarget();
+			if(target!=null)
+				result = targetManager.update();
+		}
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TARGET					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -246,7 +220,7 @@ public class Suiveur extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		target = null;
-		List<AiHero> heroes = new ArrayList<AiHero>(zone.getRemainingHeroes());
+		List<AiHero> heroes = new ArrayList<AiHero>(getZone().getRemainingHeroes());
 		heroes.remove(ownHero);
 		if(!heroes.isEmpty())
 		{	int index = (int)Math.random()*heroes.size();
