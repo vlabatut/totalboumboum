@@ -73,7 +73,10 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 
 		
 		
-		
+// on peut définir une fct qui hasBeenVisited qui s'arrête dès qu'on rencontre une attente
+// l'attente n'est valide que si on a un obstacle à côté
+// on ne peut pas revenir sur la case précédente (y a au moins une étape d'attente entre)
+// on peut repasser sur une case déjà visitée à condition que ça ne soit pas dans la même branche temporelle (séparation via attente)
 		
 		
 		
