@@ -22,14 +22,13 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  */
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
- * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
- * Ici, le coût pour passer d'une case à l'autre est simplement 1, quelles que soient
- * les cases considérées.
+ * Classe étendant la classe abstraite {@link CostCalculator} de 
+ * la manière la plus simple possible.<br/>
+ * Ici, le coût pour passer d'une case à l'autre est simplement 1, 
+ * quelles que soient les cases considérées.
  * 
  * @author Vincent Labatut
  */
@@ -39,16 +38,16 @@ public class BasicCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux cases sont supposées être voisines, 
+	 * Les deux emplacements sont supposés être dans des cases voisines, 
 	 * on se contente de renvoyer leur distance
-	 * (exprimée en cases, donc forcément ici : 1).<br/>
+	 * (exprimée en cases, donc forcément ici : 1).
 	 * 
 	 * @param current
-	 * 		La case courante (voisine de la précédente). 
+	 * 		L'emplacement de départ. 
 	 * @param next	
-	 * 		La case suivante (voisine de la courante).
+	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
-	 * 		Le coût du déplacement entre la case courante et la case suivante.
+	 * 		Le coût du déplacement entre les deux emplacements (ici : 1).
 	 */ 
 	@Override
 	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
@@ -64,9 +63,10 @@ public class BasicCostCalculator extends CostCalculator
 	 * @return
 	 * 		le coût de ce chemin
 	 */
-	@Override
+/*	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getTileDistance();
 		return result;
 	}
+*/	
 }
