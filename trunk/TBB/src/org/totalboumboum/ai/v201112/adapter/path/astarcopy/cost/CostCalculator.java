@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astarcopy.cost;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * Permet de définir une fonction de coût 
@@ -52,7 +53,7 @@ public abstract class CostCalculator
 	 * @return	
 	 * 		Le coût du déplacement entre la case courante et la case suivante.
 	 */
-	public abstract double processCost(AiTile current, AiTile next) throws StopRequestException;
+	public abstract double processCost(AstarLocation current, AstarLocation next) throws StopRequestException;
 	
 	/**
 	 * Calcule le coût d'un chemin, i.e. la somme des coûts des actions
@@ -67,7 +68,7 @@ public abstract class CostCalculator
 	{	double result = 0;
 		AiTile previous = null;
 		
-		for(AiTile tile: path.getTiles())
+		for(AiTile tile: path.getLocations())
 		{	if(previous==null)
 				previous = tile;
 			else

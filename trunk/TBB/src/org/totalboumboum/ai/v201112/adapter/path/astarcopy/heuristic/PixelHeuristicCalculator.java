@@ -26,6 +26,7 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * heuristique utilisant la distance de Manhattan exprimées en pixels,
@@ -62,7 +63,7 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	 * @param startY
 	 * 		Sa nouvelle ordonnée en pixels.
 	 */
-	public void updateStartPoint(AiTile startTile, double startX, double startY)
+	public void updateStartPoint(AstarLocation startTile)
 	{	this.startTile = startTile;
 		this.startX = startX;
 		this.startY = startY;
@@ -84,7 +85,7 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */
 	@Override
-	public double processHeuristic(AiTile tile) throws StopRequestException
+	public double processHeuristic(AstarLocation tile) throws StopRequestException
 	{	// init
 		List<AiTile> endTiles = getEndTiles();
 		AiZone zone = tile.getZone();

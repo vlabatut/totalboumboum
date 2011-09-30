@@ -26,6 +26,7 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * implémentation la plus simple d'une heuristique : 
@@ -54,7 +55,7 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */
 	@Override
-	public double processHeuristic(AiTile tile) throws StopRequestException
+	public double processHeuristic(AstarLocation tile) throws StopRequestException
 	{	// init
 		List<AiTile> endTiles = getEndTiles();
 		AiZone zone = tile.getZone();

@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.astarcopy.AstarLocation;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
@@ -72,7 +73,7 @@ public class TimeCostCalculator extends CostCalculator
 	 * 		la distance entre ces cases
 	 */ 
 	@Override
-	public double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AstarLocation previous, AstarLocation current, AstarLocation next) throws StopRequestException
 	{	// init
 		double startX = start.getPosX();
 		double startY = start.getPosY();
