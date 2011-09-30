@@ -22,35 +22,49 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  */
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
  * mais plutôt au temps nécessaire pour parcourir le chemin.<br/>
  * Ceci permet de gérer les temps d'arrêt nécessaires pour laisser
- * certains obstacles tels que les bombes disparaître.
+ * certains obstacles tels que les bombes disparaître. Autrement dit,
+ * cette classe gère les chemins au pixel près, et permet de tenir
+ * compte des pauses.
  * 
  * @author Vincent Labatut
  */
 public class TimeCostCalculator extends CostCalculator
-{	
-	/////////////////////////////////////////////////////////////////
-	// STARTING POINT			/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** case de départ du chemin en cours de recherche */
-	private AiTile startTile;
-	/** abscisse de départ (doit être contenue dans la case de départ) */
-	private double startX;
-	/** ordonnée de départ (doit être contenue dans la case de départ) */
-	private double startY;
+{
+	/**
+	 * Crée une nouvelle fonction de coût basée sur le temps.
+	 * La vitesse de déplacement utilisée lors de l'application
+	 * de A* sera celle du personnage passé en paramètre.
+	 * 
+	 * @param hero
+	 * 		Personnage de référence pour calculer le coût temporel.
+	 */
+	public TimeCostCalculator(AiHero hero)
+	{	this.hero = hero;
+	}
 	
-	public void updateStartPoint(AiTile startTile, double startX, double startY)
-	{	this.startTile = startTile;
-		this.startX = startX;
-		this.startY = startY;
+	/////////////////////////////////////////////////////////////////
+	// HERO						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Personnage concerné par la recherche de chemin */
+	private AiHero hero;
+
+	/**
+	 * Renvoie le personnage utilisé
+	 * pour calculer le coût temporel.
+	 * 
+	 * @return
+	 * 		Un personnage.
+	 */
+	public AiHero getHero()
+	{	return hero;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -63,53 +77,19 @@ public class TimeCostCalculator extends CostCalculator
 	 * du chemin : là, on renvoie la distance entre le point
 	 * de départ et le centre de la case suivante.
 	 * 
-	 * @param previous
-	 * 		La case précédente.
 	 * @param current
-	 * 		La case courante (voisine de la précédente). 
+	 * 		L'emplacement de départ. 
 	 * @param next	
-	 * 		La case suivante (voisine de la courante).
+	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
-	 * 		la distance entre ces cases
+	 * 		Le temps nécessaire pour aller du départ à l'arrivée.
 	 */ 
 	@Override
-	public double processCost(AstarLocation previous, AstarLocation current, AstarLocation next) throws StopRequestException
-	{	// init
-		double startX = start.getPosX();
-		double startY = start.getPosY();
-		double endX = end.getPosX();
-		double endY = end.getPosY();
-
-		// specific case : start is the first tile of the considered path
-		if(start.equals(startTile))
-		{	startX = this.startX;
-			startY = this.startY;
-		}
-		
-		// process the pixel Manhattan distance
-		AiZone zone = start.getZone();
-		double result = zone.getPixelDistance(startX,startY,endX,endY);
-		
+	public double processCost(AstarLocation current, AstarLocation next) throws StopRequestException
+	{	AiZone zone = current.getZone();
+		double speed = hero.getWalkingSpeed();
+		double distance = zone.getPixelDistance(current,next);
+		double result = Math.round(distance/speed * 1000);
 		return result;		
 	}
-
-	/**
-	 * le coût d'un chemin correspond ici à sa distance 
-	 * exprimée en pixels.
-	 * 
-	 * @param path
-	 * 		chemin à traiter
-	 * @return
-	 * 		le coût de ce chemin
-	 */
-	public double processCost(AiPath path) throws StopRequestException
-	{	double result = path.getPixelDistance();
-		return result;
-	}
 }
-
-
-/**
- * - créer un objet AstarLocation contenant à la fois les positions en pixels et la case (>pratique pr gauler la simzone)
- * - au lieu de calculer le coût entre deux cases, on calcule le cout entre deux positions >> plus général
- */
