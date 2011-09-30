@@ -94,12 +94,9 @@ public class MatrixCostCalculator extends CostCalculator
 	 * <b>ATTENTION :</b> si la matrice de coût est trop petite, la valeur maximale
 	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
 	 * d'avertissement est affiché dans la sortie standard d'erreur.
-	 * <b>Note :</b> les deux premières cases sont en fait ignorées, et
-	 * seule la case de destination est importante pour cette fonction
+	 * <b>Note :</b> seule la case de destination est importante pour cette fonction
 	 * de coût. 
 	 * 
-	 * @param previous
-	 * 		La case précédente.
 	 * @param current
 	 * 		La case courante (voisine de la précédente). 
 	 * @param next	
@@ -108,7 +105,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		le coût correspondant à la case suivante dans la matrice de coût.
 	 */ 
 	@Override
-	public double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AiTile current, AiTile next) throws StopRequestException
 	{	int col = next.getCol();
 		int row = next.getRow();
 		double result = Double.POSITIVE_INFINITY;

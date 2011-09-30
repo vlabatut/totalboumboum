@@ -41,10 +41,7 @@ public class BasicCostCalculator extends CostCalculator
 	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer leur distance
 	 * (exprimée en cases, donc forcément ici : 1).<br/>
-	 * <b>Note :</b> la première case est en fait ignorée. 
 	 * 
-	 * @param previous
-	 * 		La case précédente.
 	 * @param current
 	 * 		La case courante (voisine de la précédente). 
 	 * @param next	
@@ -53,7 +50,7 @@ public class BasicCostCalculator extends CostCalculator
 	 * 		Le coût du déplacement entre la case courante et la case suivante.
 	 */ 
 	@Override
-	public double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AiTile current, AiTile next) throws StopRequestException
 	{	return 1;		
 	}
 
