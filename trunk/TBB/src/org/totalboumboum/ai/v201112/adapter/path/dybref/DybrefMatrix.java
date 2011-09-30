@@ -125,7 +125,7 @@ public final class DybrefMatrix
 			
 			// different tile
 			if(previous ==null || !tile.equals(previous.getTile()))
-				result.addTile(0,tile);
+				result.addLocation(0,tile);
 			
 			// same tile
 			else
