@@ -29,80 +29,46 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
- * heuristique utilisant la distance de Manhattan exprimées en pixels,
+ * Heuristique utilisant la distance de Manhattan exprimées en pixels,
  * pour aller avec PixelCostCalculator.<br/>
- * Attention à la mise à jour nécessaire de la position du joueur
- * concerné, cf. {@link #updateStartPoint}.
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
- * chemins contenant des attentes.
+ * chemins contenant des attentes. Par contre, à la différence
+ * de {@link BasicHeuristicCalculator}, elle gère les distances
+ * en pixels.
  * 
  * @author Vincent Labatut
  */
 public class PixelHeuristicCalculator extends HeuristicCalculator
 {
-	
-	/////////////////////////////////////////////////////////////////
-	// STARTING POINT			/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** case de départ du chemin en cours de recherche */
-	private AiTile startTile;
-	/** abscisse de départ (doit être contenue dans la case de départ) */
-	private double startX;
-	/** ordonnée de départ (doit être contenue dans la case de départ) */
-	private double startY;
-	
-	/**
-	 * Cette méthosz permet de mettre jour tout changement 
-	 * dans la position du joueur. Elle doit être utilisée à
-	 * chaque nouvel appel du moteur de jeu.
-	 * 
-	 * @param startTile
-	 * 		La nouvelle case occupée par le personnage.
-	 * @param startX
-	 * 		Sa nouvelle abscisse en pixels.
-	 * @param startY
-	 * 		Sa nouvelle ordonnée en pixels.
-	 */
-	public void updateStartPoint(AstarLocation startTile)
-	{	this.startTile = startTile;
-		this.startX = startX;
-		this.startY = startY;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * l'heuristique la plus simple consiste à prendre la distance
+	 * L'heuristique la plus simple consiste à prendre la distance
 	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
-	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
-	 * ici, on calcule cette distance exprimée en pixels plutot qu'en case
-	 * comme c'est le cas dans BasicHeuristicCalculator.
+	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>.
+	 * Ici, on calcule cette distance exprimée en pixels plutôt qu'en cases
+	 * comme c'est le cas dans {@link BasicHeuristicCalculator}.
 	 * 
-	 * @param tile	
-	 * 		la case concernée 
+	 * @param location	
+	 * 		L'emplacement concerné. 
 	 * @return	
-	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
+	 * 		La distance de Manhattan entre l'emplacement passé en paramètre
+	 * 		et la plus proche des cases contenues dans le champ {@code endTiles}.
 	 */
 	@Override
-	public double processHeuristic(AstarLocation tile) throws StopRequestException
+	public double processHeuristic(AstarLocation location) throws StopRequestException
 	{	// init
 		List<AiTile> endTiles = getEndTiles();
-		AiZone zone = tile.getZone();
-		double startX = tile.getPosX();
-		double startY = tile.getPosY();
+		AiZone zone = location.getZone();
+		double startX = location.getPosX();
+		double startY = location.getPosY();
 		double result = Integer.MAX_VALUE;
 		
-		// specific case : tile is the first tile of the considered path
-		if(tile.equals(startTile))
-		{	startX = this.startX;
-			startY = this.startY;
-		}
-		
 		for(AiTile endTile: endTiles)
-		{	double endX = endTile.getPosX();
-			double endY = endTile.getPosY();
-			double dist = zone.getPixelDistance(startX,startY,endX,endY);
+		{	//double endX = endTile.getPosX();
+			//double endY = endTile.getPosY();
+			double dist = zone.getPixelDistance(startX,startY,endTile);
 			if(dist<result)
 				result = dist;
 		}
