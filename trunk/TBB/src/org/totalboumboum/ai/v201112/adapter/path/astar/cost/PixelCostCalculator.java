@@ -81,8 +81,6 @@ public class PixelCostCalculator extends CostCalculator
 	 * de départ et le centre de la case suivante.
 	 * <b>Note :</b> la première case est en fait ignorée. 
 	 * 
-	 * @param previous
-	 * 		La case précédente.
 	 * @param current
 	 * 		La case courante (voisine de la précédente). 
 	 * @param next	
@@ -91,7 +89,7 @@ public class PixelCostCalculator extends CostCalculator
 	 * 		La distance en pixels entre la cases courante et la case suivante.
 	 */ 
 	@Override
-	public double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException
+	public double processCost(AiTile current, AiTile next) throws StopRequestException
 	{	// init
 		double startX = current.getPosX();
 		double startY = current.getPosY();
@@ -120,6 +118,7 @@ public class PixelCostCalculator extends CostCalculator
 	 * @return
 	 * 		le coût de ce chemin
 	 */
+	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getPixelDistance();
 		return result;

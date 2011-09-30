@@ -108,11 +108,7 @@ public final class AstarNode implements Comparable<AstarNode>
 		// coût
 		costCalculator = parent.getCostCalculator();
 		AiTile previous = parent.getTile();
-		AstarNode grandParent = parent.getParent();
-		AiTile preprevious = null;
-		if(grandParent!=null)
-			preprevious = grandParent.getTile();
-		double localCost = costCalculator.processCost(preprevious,previous,tile);
+		double localCost = costCalculator.processCost(previous,tile);
 		cost = parent.getCost() + localCost;
 		
 		// heuristique

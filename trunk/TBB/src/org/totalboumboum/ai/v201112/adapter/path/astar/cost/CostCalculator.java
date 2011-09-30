@@ -45,8 +45,6 @@ public abstract class CostCalculator
 	 * à proximité, etc., et des influences positives telles que la prèsence de bonus.
 	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
-	 * @param previous
-	 * 		La case précédente.
 	 * @param current
 	 * 		La case courante (voisine de la précédente). 
 	 * @param next	
@@ -54,7 +52,7 @@ public abstract class CostCalculator
 	 * @return	
 	 * 		Le coût du déplacement entre la case courante et la case suivante.
 	 */
-	public abstract double processCost(AiTile previous, AiTile current, AiTile next) throws StopRequestException;
+	public abstract double processCost(AiTile current, AiTile next) throws StopRequestException;
 	
 	/**
 	 * Calcule le coût d'un chemin, i.e. la somme des coûts des actions
@@ -68,15 +66,13 @@ public abstract class CostCalculator
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;
 		AiTile previous = null;
-		AiTile preprevious = null;
 		
 		for(AiTile tile: path.getTiles())
 		{	if(previous==null)
 				previous = tile;
 			else
-			{	double localCost = processCost(preprevious,previous,tile);
+			{	double localCost = processCost(previous,tile);
 				result = result + localCost;
-				preprevious = previous;
 				previous = tile;
 			}			
 		}
