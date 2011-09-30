@@ -31,7 +31,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
@@ -119,8 +121,15 @@ public class EscapeManager
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
-		tileDest = path.getLastTile();
+		AstarLocation location = new AstarLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
+		try
+		{	path = astar.processShortestPath(location,possibleDest);
+			tileDest = path.getLastLocation().getTile();
+		}
+		catch (LimitReachedException e)
+		{	//e.printStackTrace();
+			path = new AiPath();
+		}
 	}
 	
 	/**
@@ -133,10 +142,10 @@ public class EscapeManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		AiTile currentTile = ai.getCurrentTile();
-		while(!path.isEmpty() && path.getTile(0)!=currentTile)
+		while(!path.isEmpty() && !path.getLocation(0).getTile().equals(currentTile))
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-			path.removeTile(0);
+			path.removeLocation(0);
 		}
 	}
 	
@@ -154,11 +163,11 @@ public class EscapeManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		boolean result = true;
-		Iterator<AiTile> it = path.getTiles().iterator();
+		Iterator<AstarLocation> it = path.getLocations().iterator();
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-			AiTile tile = it.next();
+			AiTile tile = it.next().getTile();
 			result = tile.isCrossableBy(ai.getOwnHero());			
 		}
 		return result;
@@ -215,10 +224,10 @@ public class EscapeManager
 			// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
 			AiTile tile = null;
 			if(path.getLength()>1)
-				tile = path.getTile(1);
+				tile = path.getLocation(1).getTile();
 			// sinon, s'il ne reste qu'une seule case, on va au centre
 			else if(path.getLength()>0)
-				tile = path.getTile(0);
+				tile = path.getLocation(0).getTile();
 			// on détermine la direction du prochain déplacement
 			if(tile!=null)
 				result = zone.getDirection(ai.getOwnHero(),tile);			
