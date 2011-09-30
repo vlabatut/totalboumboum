@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201112.adapter.path;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.path.astar.AstarLocation;
 
 /**
  * Exception levée par un algorithme de recherche de chemin 
@@ -50,24 +51,24 @@ public final class LimitReachedException extends Exception
 	 * trouver de solution (i.e. de chemin)
 	 * 
 	 * @param startTile
-	 * 		case initiale
+	 * 		Emplacment initial.
 	 * @param endTiles
-	 * 		cases finales
+	 * 		Cases finales.
 	 * @param height
-	 * 		hauteur maximale atteinte pour l'arbre de recherche
+	 * 		Hauteur maximale atteinte pour l'arbre de recherche.
 	 * @param cost
-	 * 		coût maximal atteint pour les chemins contenus dans l'arbre de recherche
+	 * 		Coût maximal atteint pour les chemins contenus dans l'arbre de recherche.
 	 * @param size
-	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
+	 * 		Taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds).
 	 * @param maxCost
-	 * 		limite de coût fixée pour l'exploration
+	 * 		Limite de coût fixée pour l'exploration.
 	 * @param maxHeight
-	 * 		limite de hauteur fixée pour l'exploration
+	 * 		Limite de hauteur fixée pour l'exploration.
 	 * @param maxSize
-	 * 		limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration
+	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
 	 */
-	public LimitReachedException(AiTile startTile, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
-	{	this.startTile = startTile;
+	public LimitReachedException(AstarLocation startLocation, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
+	{	this.startLocation = startLocation;
 		this.endTiles = endTiles;
 		this.height = height;
 		this.cost = cost;
@@ -83,18 +84,18 @@ public final class LimitReachedException extends Exception
 	 * terminer le traitement.
 	 * 
 	 * @param startTile
-	 * 		case initiale
+	 * 		Emplacment initial.
 	 * @param height
-	 * 		hauteur maximale atteinte pour l'arbre de recherche
+	 * 		Hauteur maximale atteinte pour l'arbre de recherche.
 	 * @param size
-	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
+	 * 		Taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds).
 	 * @param maxHeight
-	 * 		limite de hauteur fixée pour l'exploration
+	 * 		Limite de hauteur fixée pour l'exploration.
 	 * @param maxSize
-	 * 		limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration
+	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
 	 */
-	public LimitReachedException(AiTile startTile, int height, int size, int maxHeight, int maxSize)
-	{	this.startTile = startTile;
+	public LimitReachedException(AstarLocation startLocation, int height, int size, int maxHeight, int maxSize)
+	{	this.startLocation = startLocation;
 		this.endTiles = null;
 		this.height = height;
 		this.cost = -1;
@@ -108,16 +109,16 @@ public final class LimitReachedException extends Exception
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/** case de départ de la recherche (état initial) */
-	private AiTile startTile;
+	private AstarLocation startLocation;
 	
 	/**
-	 * renvoie la case de départ de la recherche
+	 * Renvoie l'emplacement de départ de la recherche.
 	 * 
 	 * @return
-	 * 		une case de la zone
+	 * 		Un emplacement de la zone.
 	 */
-    public AiTile getStartTile()
-    {	return startTile;
+    public AstarLocation getStartLocation()
+    {	return startLocation;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -237,7 +238,7 @@ public final class LimitReachedException extends Exception
 		result = result + "height=" + height + "(" + maxHeight + ") ";
 		result = result + "cost="   + cost   + "(" + maxCost   + ") ";
 		result = result + "size="   + size   + "(" + maxSize   + ") ";
-		result = result + "src="    + startTile + " ";
+		result = result + "src="    + startLocation + " ";
 		result = result + "trgt=";
 		for(AiTile tile: endTiles)
 			result = result + tile + " ";
