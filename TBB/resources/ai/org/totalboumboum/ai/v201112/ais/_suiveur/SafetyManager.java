@@ -26,6 +26,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -277,10 +279,10 @@ public class SafetyManager
 		return result;
 	}
 	
-	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
+	public Set<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		List<AiTile> result = new ArrayList<AiTile>();
+		Set<AiTile> result = new TreeSet<AiTile>();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			

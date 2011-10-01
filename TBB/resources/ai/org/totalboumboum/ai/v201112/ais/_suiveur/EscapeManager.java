@@ -23,7 +23,7 @@ package org.totalboumboum.ai.v201112.ais._suiveur;
 
 import java.awt.Color;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -92,7 +92,7 @@ public class EscapeManager
 	/** la case de destination sélectionnée pour la fuite */
 	private AiTile tileDest;
 	/** destinations potentielles */
-	private List<AiTile> possibleDest;
+	private Set<AiTile> possibleDest;
 
 	/**
 	 * détermine si le personnage est arrivé dans la case de destination.
