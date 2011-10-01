@@ -37,6 +37,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -82,7 +83,7 @@ public class PathManager
 		zone = ai.getZone();
 		costCalculator = new BasicCostCalculator(ai);
 		heuristicCalculator = new BasicHeuristicCalculator(ai);
-		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
+		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator,successorCalculator);
 		updatePrev();
 	}
 	
@@ -302,6 +303,8 @@ public class PathManager
 	private HeuristicCalculator heuristicCalculator;
 	/** classe implémentant la fonction de coût */
 	private CostCalculator costCalculator;
+	/** classe implémentant la fonction successeur */
+	private SuccessorCalculator successorCalculator;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////

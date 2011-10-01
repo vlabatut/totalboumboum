@@ -37,6 +37,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -65,7 +66,8 @@ public class EscapeManager
 		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 		costCalculator = new MatrixCostCalculator(ai,costMatrix);
 		heuristicCalculator = new BasicHeuristicCalculator(ai);
-		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
+		successorCalculator = new BasicSuccessorCalculator(ai);
+		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator,successorCalculator);
 		
 		// init destinations
 		arrived = false;
@@ -182,6 +184,8 @@ public class EscapeManager
 	private HeuristicCalculator heuristicCalculator;
 	/** classe implémentant la fonction de coût */
 	private MatrixCostCalculator costCalculator;
+	/** classe implémentant la fonction successeur */
+	private BasicSuccessorCalculator successorCalculator;
 
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

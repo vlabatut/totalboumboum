@@ -35,7 +35,6 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
@@ -62,28 +61,10 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * Le but est d'introduire une part de hasard dans les agent, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
- *
  */
 public final class Astar
 {	private static boolean verbose = false;
 
-	/**
-	 * construit un objet permettant d'appliquer l'algorithme A*
-	 * en utilisant la fonction successeur définie par défaut.
-	 * 
-	 * @param ai
-	 * 		l'AI invoquant A*
-	 * @param hero
-	 * 		le personnage à considérer pour les déplacements
-	 * @param costCalculator
-	 * 		la fonction de coût
-	 * @param heuristicCalculator
-	 * 		la fonction heuristique
-	 */
-	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
-	{	this(ai,hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
-	}
-	
 	/**
 	 * construit un objet permettant d'appliquer l'algorithme A*.
 	 * 
