@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
 
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
@@ -44,11 +45,14 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 	 * La vitesse de déplacement utilisée lors de l'application
 	 * de A* sera celle du personnage passé en paramètre.
 	 * 
+	 * @param ai
+	 * 		IA de référence.
 	 * @param hero
 	 * 		Personnage de référence pour calculer la durée des déplacements.
 	 */
-	public TimeHeuristicCalculator(AiHero hero)
-	{	this.hero = hero;
+	public TimeHeuristicCalculator(ArtificialIntelligence ai, AiHero hero)
+	{	super(ai);
+		this.hero = hero;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -85,6 +89,9 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 	 * 		Le temps nécessaire pour parcourir la distance de Manhattan entre 
 	 * 		l'emplacement passé en paramètre et la plus proche des cases contenues 
 	 * 		dans le champ {@code endTiles}.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
 	public double processHeuristic(AiLocation location) throws StopRequestException

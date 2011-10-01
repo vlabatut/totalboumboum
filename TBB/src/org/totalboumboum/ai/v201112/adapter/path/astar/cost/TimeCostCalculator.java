@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  * 
  */
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
@@ -43,11 +44,14 @@ public class TimeCostCalculator extends CostCalculator
 	 * La vitesse de déplacement utilisée lors de l'application
 	 * de A* sera celle du personnage passé en paramètre.
 	 * 
+	 * @param ai
+	 * 		IA de référence.
 	 * @param hero
 	 * 		Personnage de référence pour calculer le coût temporel.
 	 */
-	public TimeCostCalculator(AiHero hero)
-	{	this.hero = hero;
+	public TimeCostCalculator(ArtificialIntelligence ai, AiHero hero)
+	{	super(ai);
+		this.hero = hero;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -83,6 +87,9 @@ public class TimeCostCalculator extends CostCalculator
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le temps nécessaire pour aller du départ à l'arrivée.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
 	public double processCost(AiLocation current, AiLocation next) throws StopRequestException

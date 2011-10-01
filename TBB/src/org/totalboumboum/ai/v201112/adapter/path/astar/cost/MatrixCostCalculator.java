@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  * 
  */
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
@@ -47,11 +48,14 @@ public class MatrixCostCalculator extends CostCalculator
 	 * fournir la matrice de cout correspondante.<br/>
 	 * <b>ATTENTION :</b> cette matrice doit avoir la même taille que la zone de jeu.
 	 * 
+	 * @param ai
+	 * 		IA de référence.
 	 * @param costMatrix	
 	 * 		la matrice de coût
 	 */
-	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
-	{	setCostMatrix(costMatrix);			
+	public MatrixCostCalculator(ArtificialIntelligence ai, double costMatrix[][])
+	{	super(ai);
+		setCostMatrix(costMatrix);			
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -104,6 +108,9 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le coût correspondant à la case d'arrivée dans la matrice de coût.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
 	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
