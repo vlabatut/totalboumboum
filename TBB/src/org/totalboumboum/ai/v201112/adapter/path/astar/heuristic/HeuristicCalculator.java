@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
  * 
  */
 
-import java.util.List;
+import java.util.Set;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -56,28 +56,28 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	// END TILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des cases pouvant terminer le chemin */
-	private List<AiTile> endTiles;	
+	/** Ensemble des cases pouvant terminer le chemin */
+	private Set<AiTile> endTiles;	
 
 	/**
-	 * initialise/modifie la liste de cases 
-	 * pouvant terminer le chemin recherché
+	 * Initialise/modifie l'ensemble des cases 
+	 * pouvant terminer le chemin recherché.
 	 * 
 	 * @param endTiles	
 	 * 		les cases terminant le chemin
 	 */
-	public void setEndTiles(List<AiTile> endTiles) throws StopRequestException
+	public void setEndTiles(Set<AiTile> endTiles) throws StopRequestException
 	{	this.endTiles = endTiles;		
 	}
 
 	/**
-	 * renvoie la liste de cases objectifs (i.e. les cases terminant
-	 * le chemin recherché)
+	 * Renvoie l'ensemble des cases objectifs (i.e. les cases terminant
+	 * le chemin recherché).
 	 * 
 	 * @return	
-	 * 		la liste des cases objectifs
+	 * 		L'ensemble des cases objectifs.
 	 */
-	public List<AiTile> getEndTiles() throws StopRequestException
+	public Set<AiTile> getEndTiles() throws StopRequestException
 	{	return endTiles;	
 	}
 

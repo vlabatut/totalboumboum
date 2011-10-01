@@ -21,10 +21,11 @@ package org.totalboumboum.ai.v201112.adapter.path.astar;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -148,7 +149,7 @@ public final class Astar
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * calcule le plus court chemin pour aller de la case startTile à 
+	 * Calcule le plus court chemin pour aller de la case startTile à 
 	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
 	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
 	 * l'algorithme atteint une limite de cout/taille, la valeur null est
@@ -157,23 +158,27 @@ public final class Astar
 	 * exemple). 
 	 * 
 	 * @param startTile	
-	 * 		la case de départ
+	 * 		La case de départ
 	 * @param endTile	
-	 * 		la case d'arrivée
+	 * 		La case d'arrivée
 	 * @return 
-	 * 		un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
-	 * @throws StopRequestException 
-	 * @throws LimitReachedException 
+	 * 		Un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur {@ode null}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws LimitReachedException
+	 * 		L'algorithme a développé un arbre trop grand (il y a
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
 	public AiPath processShortestPath(AiLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
-	{	List<AiTile> endTiles = new ArrayList<AiTile>();
+	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
 		endTiles.add(endTile);
 		AiPath result = processShortestPath(startLocation,endTiles);
 		return result;
 	}
 	
 	/**
-	 * calcule le plus court chemin pour aller de la case startTile à 
+	 * Calcule le plus court chemin pour aller de la case startTile à 
 	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
 	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
@@ -183,15 +188,20 @@ public final class Astar
 	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
 	 * @param startTile	
-	 * 		la case de départ
+	 * 		La case de départ.
 	 * @param endTiles	
-	 * 		la liste des cases d'arrivée possibles
+	 * 		L'ensemble des cases d'arrivée possibles.
 	 * @return 
-	 * 		un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
-	 * @throws StopRequestException 
-	 * @throws LimitReachedException 
+	 * 		un chemin pour aller de {@code startTile} à une des cases de {@code endTiles},
+	 * 		ou un chemin vide, ou la valeur {@code null}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws LimitReachedException
+	 * 		L'algorithme a développé un arbre trop grand (il y a
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath processShortestPath(AiLocation startLocation, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	if(verbose)
 		{	System.out.print("A*: from "+startLocation+" to [");
 			for(AiTile tile: endTiles)
@@ -277,8 +287,10 @@ public final class Astar
 			//
 			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);
 			System.out.print(" src="+root.getLocation());
-			if(!endTiles.isEmpty()) 
-				System.out.print(" trgt="+endTiles.get(endTiles.size()-1));
+			System.out.print(" trgt=");
+			for(AiTile tile: endTiles) 
+				System.out.print(" "+tile);
+			System.out.println();
 			if(result!=null) 
 				System.out.print(" result="+result);
 			System.out.println();
