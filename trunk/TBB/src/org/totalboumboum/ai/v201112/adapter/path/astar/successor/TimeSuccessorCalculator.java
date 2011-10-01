@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
  */
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -36,7 +35,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.AiModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
-import org.totalboumboum.ai.v201112.adapter.path.dybref.DybrefNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -158,103 +156,105 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 		// considère éventuellement l'action d'attente, 
 		// si un obstacle temporaire est présent dans une case voisine
 		// l'obstacle temporaire peut être : du feu, une bombe, un mur destructible, une menace d'explosion.
-		boolean temporaryObstacle = false;
-		Iterator<Direction> it = directions.iterator();
-		while(!temporaryObstacle && it.hasNext())
-		{	// on récupère la case cible
-			Direction direction = it.next();
-			AiTile targetTile = tile.getNeighbor(direction);
+		long waitDuration = getWaitDuration(tile);
+		if(waitDuration>0 && waitDuration<Long.MAX_VALUE)
+		{	// on applique le modèle pour obtenir la zone résultant de l'action
+			AiModel model = new AiModel(zone);
+			model.applyChangeHeroDirection(hero,Direction.NONE);
 			
-			// on teste la présence d'un obstacle abstrait : menace d'une explosion
+			// on simule pendant la durée prévue
+			model.simulate(waitDuration);
+			long duration = model.getDuration();
 			
-			
-			// on teste la présence d'un obstacle concret
-			if(!targetTile.isCrossableBy(hero))
-			{	// on teste la nature temporaire de cet obstacle : 
-				// pour l'instant seulement le feu et les bombes
-				// NOTE à compléter si on inclut un jour des murs indestructibles mobiles
-				temporaryObstacle = !targetTile.getFires().isEmpty()
-					|| !targetTile.getBombs().isEmpty();
+			// si l'attente a bien eu lieu
+			if(duration>0)
+			{	// on récupère les nouvelles infos décrivant le personnage
+				AiZone futureZone = model.getCurrentZone();
+				AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+				
+				// si le perso est toujours en vie, on crée le noeud de recherche
+				if(futureHero!=null)
+				{	AiStateName name = futureHero.getState().getName();
+					boolean safe = !name.equals(AiStateName.BURNING) && !name.equals(AiStateName.ENDED);
+					if(safe)
+					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
+						AstarNode child = new AstarNode(waitDuration,node);
+						result.add(child);
+					}
+					// si le joueur n'est plus vivant dans la zone obtenue : 
+					// l'attente n'était pas une action sûre, et n'est donc pas envisagée
+				}
+				// si le perso est null, alors c'est que le joueur n'est plus vivant (cf commentaire ci-dessus)
 			}
+			// si l'action n'a pas eu lieu : problème lors de la simulation (?) 
+			// l'attente n'est pas envisagée comme une action pertinente 
 		}
-		// s'il y a un obstacle, on considère donc l'attente
-		if(temporaryObstacle)
-		{
-			
-		}
-		
-		
-		
-		
-		// init
-		AiTile tile = node.getLocation().getTile();
-		AiHero hero = node.getHero();
-		
-		// pour chaque case voisine :
-		for(Direction direction: Direction.getPrimaryValues())
-		{	// on simule le déplacement dans la direction choisie
-			
-			
-			
-			AiTile neighbor = tile.getNeighbor(direction);
-			
-			// on teste si elle est traversable 
-			// et n'a pas déjà été explorée dans la branche courante de A*
-			if(neighbor.isCrossableBy(hero) && !node.hasBeenExplored(neighbor))
-			{	AiLocation location = new AiLocation(neighbor);
-				AstarNode child = new AstarNode(location,node);
-				result.add(child);
-			}
-		}
+		// si le temps estimé d'attente est 0 ou +Inf, alors l'attente n'est pas envisagée
 
 		return result;
 	}
 	/**
+	 * Détermine le temps d'attente minimal lorsque
+	 * le joueur est placé dans la case passée en paramètre.
 	 * 
 	 * 
+	 * @tile
+	 * 		Case à considérer.
 	 * @return
+	 * 		Un entier long représentant le temps d'attente minimal.	
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	private long getWaitDuration() throws StopRequestException
+	private long getWaitDuration(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
 		// init
+		AiZone zone = tile.getZone();
 		long result = Long.MAX_VALUE;
 		List<AiTile> neighbors = tile.getNeighbors();
 		
-		// is there a fire in the neighbor tiles?
-		List<AiFire> fires = zone.getFires();
-		for(AiFire fire: fires)
+		// on s'intéresse d'abord aux obstacles concrets
+		// on considère chaque case voisine une par une
+		for(AiTile neighbor: neighbors)
 		{	ai.checkInterruption();
-			AiTile fireTile = fire.getTile();
-			if(neighbors.contains(fireTile))
-			{	long duration = fire.getBurningDuration() - fire.getState().getTime();
-				if(duration<result)
-					result = duration;
+		
+			// s'il y a un obstacle concret
+			if(!neighbor.isCrossableBy(hero))
+			{	// s'il y a du feu
+				List<AiFire> fires = neighbor.getFires();
+				for(AiFire fire: fires)
+				{	long duration = fire.getBurningDuration() - fire.getState().getTime();
+					if(duration<result)
+						result = duration;
+				}
+				// les autres obstacles (murs, bombes) n'ont pas besoin d'être traités
+				// car on s'en occupe lorsqu'on gère les cases menacées par des bombes
 			}
 		}
 		
-		// is one of the neighbor tiles within the range of some bomb?
-		if(fires.isEmpty())
-		{	List<AiBomb> bombs = zone.getBombs();
-			for(AiBomb bomb: bombs)
-			{	ai.checkInterruption();
-				List<AiTile> blast = bomb.getBlast();
-				List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
-				neigh.retainAll(blast);
-				if(!neigh.isEmpty())
-				{	AiStateName stateName = bomb.getState().getName();
-					long normalDuration = bomb.getNormalDuration();
-					// we can ignore burning bombs, since there's already fire in the tile
-					if(stateName.equals(AiStateName.STANDING)
-					// we can also ignore non-time bombs, since there's no mean to predict when they're going to explode
-						&& normalDuration>0)
-					{	long duration = normalDuration - bomb.getState().getTime() + bomb.getExplosionDuration();
-						if(duration<result)
-							result = duration;
-					}
+		// on s'intéresse ensuite aux menaces provenant des bombes
+		// on considère chaque bombe une par une
+		List<AiBomb> bombs = zone.getBombs();
+		for(AiBomb bomb: bombs)
+		{	ai.checkInterruption();
+		
+			List<AiTile> blast = bomb.getBlast();
+			List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
+			neigh.retainAll(blast);
+			// on vérifie si la bombe menace une des cases voisines
+			if(!neigh.isEmpty())
+			{	// si c'est le cas, on récupère la description de la bombe
+				AiStateName stateName = bomb.getState().getName();
+				long normalDuration = bomb.getNormalDuration();
+				// on peut ignorer les bombes déjà en train de brûler, car elles cohabitent avec du feu
+				if(stateName.equals(AiStateName.STANDING)
+				// on peut aussi ignorer les bombes qui ne sont pas à retardement,
+				// car on ne peut pas prédire quand elles vont exploser
+					&& normalDuration>0)
+				{	long duration = normalDuration - bomb.getState().getTime() + bomb.getExplosionDuration();
+					if(duration<result)
+						result = duration;
 				}
 			}
 		}
