@@ -63,8 +63,8 @@ public class EscapeManager
 		
 		// init A*
 		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator = new MatrixCostCalculator(costMatrix);
-		heuristicCalculator = new BasicHeuristicCalculator();
+		costCalculator = new MatrixCostCalculator(ai,costMatrix);
+		heuristicCalculator = new BasicHeuristicCalculator(ai);
 		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
 		
 		// init destinations
