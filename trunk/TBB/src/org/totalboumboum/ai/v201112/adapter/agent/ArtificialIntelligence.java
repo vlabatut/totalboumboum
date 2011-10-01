@@ -48,7 +48,6 @@ import org.totalboumboum.engine.content.feature.Direction;
  * ou d'un {@code do/while}.
  *  
  * @author Vincent Labatut
- *
  */
 public abstract class ArtificialIntelligence implements Callable<AiAction>
 {	
