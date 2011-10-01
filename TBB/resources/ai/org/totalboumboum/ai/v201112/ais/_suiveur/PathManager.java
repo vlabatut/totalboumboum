@@ -80,8 +80,8 @@ public class PathManager
 		
 		this.ai = ai;
 		zone = ai.getZone();
-		costCalculator = new BasicCostCalculator();
-		heuristicCalculator = new BasicHeuristicCalculator();
+		costCalculator = new BasicCostCalculator(ai);
+		heuristicCalculator = new BasicHeuristicCalculator(ai);
 		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
 		updatePrev();
 	}
