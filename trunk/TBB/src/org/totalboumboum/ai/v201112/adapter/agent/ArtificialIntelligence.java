@@ -72,7 +72,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Méthode testant si le jeu a demandé la terminaison de l'agent.
 	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
 	 * et forcera la terminaison de l'agent. Cette exception ne doit surtout pas être
-	 * interceptée localement par un {@code try/catch}. 
+	 * interceptée localement par un {@code try/catch}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public synchronized final void checkInterruption() throws StopRequestException
 	{	Thread.yield();
@@ -195,6 +198,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * initagentlisé. Toute opération définie dans cette fonction
 	 * sera réalisée une fois, juste avant le début de la partie.
 	 * A noter que les percepts ont néanmoins déjà été mis à jour.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public void init() throws StopRequestException
 	{	
@@ -255,6 +261,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @return	
 	 * 		Action que l'agent a décidé d'effectuer.
+	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

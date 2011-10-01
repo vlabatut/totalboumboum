@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path;
  * 
  */
 
-import java.util.List;
+import java.util.Set;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
@@ -66,7 +66,7 @@ public final class LimitReachedException extends Exception
 	 * @param maxSize
 	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
 	 */
-	public LimitReachedException(AiLocation startLocation, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
+	public LimitReachedException(AiLocation startLocation, Set<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
 	{	this.startLocation = startLocation;
 		this.endTiles = endTiles;
 		this.height = height;
@@ -124,7 +124,7 @@ public final class LimitReachedException extends Exception
 	// END TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/** les cases d'arrivée de la recherche (états finaux) */
-    private List<AiTile> endTiles;
+    private Set<AiTile> endTiles;
 	
     /**
      * renvoie les cases d'arrivée de la recherche
@@ -133,7 +133,7 @@ public final class LimitReachedException extends Exception
      * @return
 	 * 		une case de la zone
      */
-	public List<AiTile> getEndTiles()
+	public Set<AiTile> getEndTiles()
 	{	return endTiles;
 	}
 
