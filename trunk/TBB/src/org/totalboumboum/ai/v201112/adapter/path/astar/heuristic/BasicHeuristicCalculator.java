@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
 
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
@@ -41,6 +42,18 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
  */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {
+	/**
+	 * Construit une fonction successeur
+	 * utilisant l'IA passée en paramètre
+	 * pour gérer les interruptions.
+	 * 
+	 * @param ai
+	 * 		IA de référence.
+	 */
+	public BasicHeuristicCalculator(ArtificialIntelligence ai)
+	{	super(ai);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -54,6 +67,9 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * @return	
 	 * 		la distance de Manhattan entre l'emplacement passé en paramètre
 	 * 		et la plus proche des cases contenues dans le champ {@code endTiles}.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
 	public double processHeuristic(AiLocation location) throws StopRequestException

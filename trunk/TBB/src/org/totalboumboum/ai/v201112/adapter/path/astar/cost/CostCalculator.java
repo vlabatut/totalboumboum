@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
  * 
  */
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
@@ -33,6 +34,23 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
  */
 public abstract class CostCalculator
 {
+	/**
+	 * Construit une fonction de coût
+	 * utilisant l'IA passée en paramètre
+	 * pour gérer les interruptions.
+	 * 
+	 * @param ai
+	 * 		IA de référence.
+	 */
+	public CostCalculator(ArtificialIntelligence ai)
+	{	this.ai = ai;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ArtificialIntelligence ai = null;
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -51,6 +69,9 @@ public abstract class CostCalculator
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le coût du déplacement entre les deux emplacements.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public abstract double processCost(AiLocation current, AiLocation next) throws StopRequestException;
 	
@@ -62,6 +83,9 @@ public abstract class CostCalculator
 	 * 		Chemin à traiter
 	 * @return
 	 * 		Le coût de ce chemin.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 /*	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;

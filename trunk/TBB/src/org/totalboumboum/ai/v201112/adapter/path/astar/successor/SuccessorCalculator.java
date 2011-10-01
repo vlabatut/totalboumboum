@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
 
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
 
@@ -33,7 +34,24 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
  * @author Vincent Labatut
  */
 public abstract class SuccessorCalculator
-{
+{	
+	/**
+	 * Construit une fonction successeur
+	 * utilisant l'IA passée en paramètre
+	 * pour gérer les interruptions.
+	 * 
+	 * @param ai
+	 * 		IA de référence.
+	 */
+	public SuccessorCalculator(ArtificialIntelligence ai)
+	{	this.ai = ai;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ArtificialIntelligence ai = null;
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -22,14 +22,21 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.model.AiModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
+import org.totalboumboum.ai.v201112.adapter.path.dybref.DybrefNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -47,6 +54,38 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class TimeSuccessorCalculator extends SuccessorCalculator
 {
+	/**
+	 * Crée une nouvelle fonction successeur basée sur le temps.
+	 * La vitesse de déplacement utilisée lors de l'application
+	 * de A* sera celle du personnage passé en paramètre.
+	 * 
+	 * @param ai
+	 * 		IA de référence pour gérer les interruptions.
+	 * @param hero
+	 * 		Personnage de référence pour calculer la durée des déplacements.
+	 */
+	public TimeSuccessorCalculator(ArtificialIntelligence ai, AiHero hero)
+	{	super(ai);
+		this.hero = hero;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// HERO						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Personnage concerné par la recherche de chemin */
+	private AiHero hero;
+
+	/**
+	 * Renvoie le personnage utilisé
+	 * pour calculer les actions possibles.
+	 * 
+	 * @return
+	 * 		Le personnage de référence.
+	 */
+	public AiHero getHero()
+	{	return hero;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -62,28 +101,92 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 	 * 		Le noeud de recherche courant.
 	 * @return	
 	 * 		La liste des noeuds fils.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
 	public List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException
-	{	AiZone zone = node.getAi().getZone();
-	
-		// le fait qu'il n'y ait plus de bombes ni d'explosions à proximité
-		// du personnage considéré simplifie grandement les calculs
-		boolean safeMode = zone.getFires().isEmpty() && zone.getBombs().isEmpty();
-
+	{	ai.checkInterruption();
 		
+		AiLocation location = node.getLocation();
+		AiTile tile = location.getTile();
+		AiZone zone = node.getAi().getZone();
+		List<AstarNode> result = new ArrayList<AstarNode>();
 		
-// on peut définir une fct qui hasBeenVisited qui s'arrête dès qu'on rencontre une attente
-// l'attente n'est valide que si on a un obstacle à côté
-// on ne peut pas revenir sur la case précédente (y a au moins une étape d'attente entre)
-// on peut repasser sur une case déjà visitée à condition que ça ne soit pas dans la même branche temporelle (séparation via attente)
+		// on considère chaque déplacement possible
+		List<Direction> directions = Direction.getPrimaryValues();
+		for(Direction direction: directions)
+		{	// on récupère la case cible
+			AiTile targetTile = tile.getNeighbor(direction);
+			
+			// cette case ne doit pas avoir été visitée depuis la dernière pause
+			if(!node.hasBeenExploredSincePause(targetTile))
+			{	// on applique le modèle pour obtenir la zone résultant de l'action
+				AiModel model = new AiModel(zone);
+				model.applyChangeHeroDirection(hero,direction);
+				
+				// on simule jusqu'au changement d'état du personnage : 
+				// soit le changement de case, soit l'élimination
+				boolean safe = model.simulate(hero);
+				long duration = model.getDuration();
+				
+				// si le joueur a survécu et si une action a bien eu lieu
+				if(safe && duration>0)
+				{	// on récupère la nouvelle case occupée par le personnage
+					AiZone futureZone = model.getCurrentZone();
+					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+					AiTile futureTile = futureHero.getTile();
+					AiLocation futureLocation = new AiLocation(futureHero.getPosX(),futureHero.getPosX(),futureZone);
+					
+					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
+					if(futureTile.equals(targetTile))
+					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
+						AstarNode child = new AstarNode(futureLocation,node);
+						result.add(child);
+					}
+					// si la case n'est pas la bonne : 
+					// la case ciblée n'était pas traversable et l'action est à ignorer
+				}
+				// si le joueur n'est plus vivant dans la zone obtenue : 
+				// la case ciblée n'est pas sûre et est ignorée
+			}
+			// si la case a déjà été visitée depuis la dernière pause,
+			// on l'ignore car il est inutile d'y repasser
+		}
 		
+		// considère éventuellement l'action d'attente, 
+		// si un obstacle temporaire est présent dans une case voisine
+		// l'obstacle temporaire peut être : du feu, une bombe, un mur destructible, une menace d'explosion.
+		boolean temporaryObstacle = false;
+		Iterator<Direction> it = directions.iterator();
+		while(!temporaryObstacle && it.hasNext())
+		{	// on récupère la case cible
+			Direction direction = it.next();
+			AiTile targetTile = tile.getNeighbor(direction);
+			
+			// on teste la présence d'un obstacle abstrait : menace d'une explosion
+			
+			
+			// on teste la présence d'un obstacle concret
+			if(!targetTile.isCrossableBy(hero))
+			{	// on teste la nature temporaire de cet obstacle : 
+				// pour l'instant seulement le feu et les bombes
+				// NOTE à compléter si on inclut un jour des murs indestructibles mobiles
+				temporaryObstacle = !targetTile.getFires().isEmpty()
+					|| !targetTile.getBombs().isEmpty();
+			}
+		}
+		// s'il y a un obstacle, on considère donc l'attente
+		if(temporaryObstacle)
+		{
+			
+		}
 		
 		
 		
 		
 		// init
-		List<AstarNode> result = new ArrayList<AstarNode>();
 		AiTile tile = node.getLocation().getTile();
 		AiHero hero = node.getHero();
 		
@@ -106,14 +209,55 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 
 		return result;
 	}
-	
-	private boolean isSafeMode(AiHero hero)
-	{	boolean result = false;
-		AiTile tile = hero.getTile();
-		AiZone zone = tile.getZone();
+	/**
+	 * 
+	 * 
+	 * @return
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	private long getWaitDuration() throws StopRequestException
+	{	ai.checkInterruption();
+		
+		// init
+		long result = Long.MAX_VALUE;
 		List<AiTile> neighbors = tile.getNeighbors();
 		
+		// is there a fire in the neighbor tiles?
+		List<AiFire> fires = zone.getFires();
+		for(AiFire fire: fires)
+		{	ai.checkInterruption();
+			AiTile fireTile = fire.getTile();
+			if(neighbors.contains(fireTile))
+			{	long duration = fire.getBurningDuration() - fire.getState().getTime();
+				if(duration<result)
+					result = duration;
+			}
+		}
 		
+		// is one of the neighbor tiles within the range of some bomb?
+		if(fires.isEmpty())
+		{	List<AiBomb> bombs = zone.getBombs();
+			for(AiBomb bomb: bombs)
+			{	ai.checkInterruption();
+				List<AiTile> blast = bomb.getBlast();
+				List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
+				neigh.retainAll(blast);
+				if(!neigh.isEmpty())
+				{	AiStateName stateName = bomb.getState().getName();
+					long normalDuration = bomb.getNormalDuration();
+					// we can ignore burning bombs, since there's already fire in the tile
+					if(stateName.equals(AiStateName.STANDING)
+					// we can also ignore non-time bombs, since there's no mean to predict when they're going to explode
+						&& normalDuration>0)
+					{	long duration = normalDuration - bomb.getState().getTime() + bomb.getExplosionDuration();
+						if(duration<result)
+							result = duration;
+					}
+				}
+			}
+		}
 		
 		return result;
 	}

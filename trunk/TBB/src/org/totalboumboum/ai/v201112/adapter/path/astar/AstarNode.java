@@ -50,6 +50,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		Fonction de coût.
 	 * @param heuristicCalculator	
 	 * 		Fonction heuristique.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	protected AstarNode(ArtificialIntelligence ai, AiLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// agent
@@ -87,6 +90,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		Emplacement associé à ce noeud de recherche.
 	 * @param parent	
 	 * 		Noeud de recherche parent de ce noeud.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public AstarNode(AiLocation location, AstarNode parent) throws StopRequestException
 	{	// agent
@@ -127,6 +133,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		Pause associée à ce noeud de recherche.
 	 * @param parent	
 	 * 		Noeud de recherche parent de ce noeud.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public AstarNode(long wait, AstarNode parent) throws StopRequestException
 	{	// agent
@@ -284,7 +293,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		Case à tester
 	 * @return	
 	 * 		{@code true} ssi la case a déjà été traitée.
+	 * 
 	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
@@ -292,6 +303,32 @@ public final class AstarNode implements Comparable<AstarNode>
 		boolean result = this.location.equals(tile);
 		if(parent!=null && !result)
 			result = parent.hasBeenExplored(tile);
+		return result;
+	}
+	
+	/**
+	 * Détermine si la case passée en paramètre a déjà été traitée,
+	 * i.e. si elle apparait dans les noeuds de recherche ancêtres.
+	 * On s'arrête dès qu'on rencontre une pause : l'idée est
+	 * qu'à la suite d'une pause, il est possible de re-visiter
+	 * des cases par lesquelles on est déjà passé, car la pause
+	 * correspond à l'attente de la disparition d'un obstacle
+	 * tel qu'une explosion (ou un mur mobile, etc.).
+	 * 
+	 * @param tile	
+	 * 		Case à tester
+	 * @return	
+	 * 		{@code true} ssi la case a déjà été traitée.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	public boolean hasBeenExploredSincePause(AiTile tile) throws StopRequestException
+	{	ai.checkInterruption();
+		
+		boolean result = this.location.equals(tile);
+		if(parent!=null && !result && !parent.getLocation().equals(location))
+			result = parent.hasBeenExploredSincePause(tile);
 		return result;
 	}
 	
@@ -304,7 +341,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		Emplacement contenant la case à tester
 	 * @return	
 	 * 		{@code true} ssi la case a déjà été traitée.
+	 * 
 	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 /*	private boolean hasBeenExplored(AstarLocation location) throws StopRequestException
 	{	ai.checkInterruption();
@@ -337,7 +376,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 
 	 * @return	
 	 * 		une liste contenant les fils de ce noeud
-	 * @throws StopRequestException 
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public List<AstarNode> getChildren() throws StopRequestException
 	{	ai.checkInterruption();

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.PixelCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
@@ -48,6 +49,18 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class BasicSuccessorCalculator extends SuccessorCalculator
 {
+	/**
+	 * Construit une fonction successeur
+	 * utilisant l'IA passée en paramètre
+	 * pour gérer les interruptions.
+	 * 
+	 * @param ai
+	 * 		IA de référence.
+	 */
+	public BasicSuccessorCalculator(ArtificialIntelligence ai)
+	{	super(ai);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -63,6 +76,9 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	 * 		Le noeud de recherche courant
 	 * @return	
 	 * 		La liste des noeuds fils.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
 	public List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException

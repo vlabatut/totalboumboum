@@ -513,7 +513,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 				// >> le fait de considérer la matrice de visite épargne ce test
 //				if(parent==null || !targetTile.equals(parent.getTile()))
 				// la case ne doit pas avoir déjà été visitée dans cette branche
-				if(!hasBeenVisited(targetTile)) 
+				if(!hasBeenVisited(targetTile))
 				{	// on simule jusqu'au changement d'état du personnage : 
 					// soit le changement de case, soit l'élimination
 					safe = model.simulate(hero);
