@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
  * @author Burcu Kantarcı
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class KantarciTaskin extends ArtificialIntelligence
 {	
 	Matrix matrix;

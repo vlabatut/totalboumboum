@@ -25,6 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Kantarci Taskin
  *
  */
+@SuppressWarnings("deprecation")
 public class KantarciTaskin extends ArtificialIntelligence
 {	
 	AiActionName resultat = AiActionName.NONE;
