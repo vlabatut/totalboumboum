@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MatriceCalc {
 	protected GocmenogluHekimoglu monIa;
 	protected int zoneh,zonew;

@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class GocmenogluHekimoglu extends ArtificialIntelligence
 {
 	boolean force_collect = false;

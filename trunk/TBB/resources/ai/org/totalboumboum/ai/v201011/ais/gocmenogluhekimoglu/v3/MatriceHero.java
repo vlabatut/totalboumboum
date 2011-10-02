@@ -12,6 +12,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MatriceHero extends MatriceCalc {
 
 	public MatriceHero(GocmenogluHekimoglu monIa) throws StopRequestException {

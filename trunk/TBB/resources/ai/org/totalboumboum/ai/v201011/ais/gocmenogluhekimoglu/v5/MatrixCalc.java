@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MatrixCalc {
 	static void textTileMap(GocmenogluHekimoglu ai,HashMap<AiTile,Double> tiles) throws StopRequestException{
 		ai.checkInterruption();

@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Irfan Hekimoğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class Paths {
 	GocmenogluHekimoglu ai;
 	

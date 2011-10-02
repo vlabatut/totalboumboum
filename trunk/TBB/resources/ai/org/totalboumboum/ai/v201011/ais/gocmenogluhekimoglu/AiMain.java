@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201011.ais.gocmenogluhekimoglu.v6.GocmenogluHekimog
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**
