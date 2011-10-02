@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Onur Büyüktopaç
  * @author Yiğit Turak
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class CollecteMatrix
 {	
 	private BuyuktopacTurak ia;

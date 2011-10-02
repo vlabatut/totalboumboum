@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * Cette classe contient les Contrôles du posage de bombe. 
  * @author Onur B y ktopa  & Yigit Turak
  */
+@SuppressWarnings("deprecation")
 public class Elements {
 	private BuyuktopacTurak bt;
 	private PerfectStrangers ps;

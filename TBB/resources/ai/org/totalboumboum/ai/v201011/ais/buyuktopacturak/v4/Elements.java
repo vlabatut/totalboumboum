@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
+@SuppressWarnings("deprecation")
 public class Elements {
 	private BuyuktopacTurak bt;
 	private PerfectStrangers ps;

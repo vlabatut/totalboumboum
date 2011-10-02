@@ -30,6 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Onur Büyüktopaç
  * @author Yiğit Turak
  */
+@SuppressWarnings("deprecation")
 public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** la zone de jeu */

@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
  * @author Onur Büyüktopaç
  * @author Yiğit Turak
  */
+@SuppressWarnings("deprecation")
 public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */

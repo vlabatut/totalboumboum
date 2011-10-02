@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
  * @author Onur Büyüktopaç
  * @author Yiğit Turak
  */
+@SuppressWarnings("deprecation")
 public class AStarCost extends CostCalculator{
 
 	private double[][] matrix;
