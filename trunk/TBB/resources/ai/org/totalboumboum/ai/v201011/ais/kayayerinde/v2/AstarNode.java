@@ -38,6 +38,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AstarNode implements Comparable<AstarNode>
 {	
 	/**

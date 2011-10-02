@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class KayaYerinde extends ArtificialIntelligence{
 	
 	private Direction dir=Direction.NONE;

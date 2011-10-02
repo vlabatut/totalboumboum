@@ -59,6 +59,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class Astar
 {	private static boolean verbose = false;
 

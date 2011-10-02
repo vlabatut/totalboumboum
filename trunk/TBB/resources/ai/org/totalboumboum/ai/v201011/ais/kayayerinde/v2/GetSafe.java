@@ -16,7 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class GetSafe {
 	
 	private double nFeu=6;

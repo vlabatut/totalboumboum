@@ -10,7 +10,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class KayaYerinde extends ArtificialIntelligence{
 	
 	private Matris matris;

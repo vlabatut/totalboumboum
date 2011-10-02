@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class Bomb {
 	
 	private KayaYerinde onder;
