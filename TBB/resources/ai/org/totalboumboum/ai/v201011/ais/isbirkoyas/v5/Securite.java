@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  * @author Göksu İsbir
  * @author Ela Koyaş
  */
+@SuppressWarnings("deprecation")
 public class Securite {
 	IsbirKoyas ai = new IsbirKoyas();
 	public boolean secure;

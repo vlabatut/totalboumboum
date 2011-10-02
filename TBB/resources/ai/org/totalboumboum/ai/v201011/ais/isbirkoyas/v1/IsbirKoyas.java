@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Göksu İsbir
  * @author Ela Koyaş
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class IsbirKoyas extends ArtificialIntelligence
 {	
 	//Le chemin a suivre pour ramasser le bonus

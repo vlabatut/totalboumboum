@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  * @author Göksu İsbir
  * @author Ela Koyaş
  */
+@SuppressWarnings("deprecation")
 public class DeplacementCollecte {
 	IsbirKoyas ai = new IsbirKoyas();
 	private Securite securite = null;

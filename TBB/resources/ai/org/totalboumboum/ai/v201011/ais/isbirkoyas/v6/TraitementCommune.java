@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201011.ais.isbirkoyas.v6.IsbirKoyas;
  * @author Göksu İsbir
  * @author Ela Koyaş
  */
+@SuppressWarnings("deprecation")
 public class TraitementCommune {
 
 	private DeplacementCommune deplacementCommune = null;
