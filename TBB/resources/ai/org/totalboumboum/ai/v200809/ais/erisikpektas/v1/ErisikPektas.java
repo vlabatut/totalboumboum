@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Abdurrahman Pektaş
  *
  */
+@SuppressWarnings("deprecation")
 public class ErisikPektas extends ArtificialIntelligence {
 	/** la case occupée actuellement par le personnage */
 	private AiTile caseactuelle;

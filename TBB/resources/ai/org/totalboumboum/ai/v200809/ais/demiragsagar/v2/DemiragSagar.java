@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Zeynep Şagar
  *
  */
+@SuppressWarnings("deprecation")
 public class DemiragSagar extends ArtificialIntelligence {
 
 	//les variables globales qui sont mise a jour a chaque iteration

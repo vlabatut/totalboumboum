@@ -8,6 +8,7 @@ import java.util.Comparator;
  * @author Sinan Yürtsever
  *
  */
+@SuppressWarnings("deprecation")
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {
 
 	private int col;

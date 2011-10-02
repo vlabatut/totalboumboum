@@ -24,6 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Umut Küçükkarakürt
  *
  */
+@SuppressWarnings("deprecation")
 public class CoremenKucukkarakurt extends ArtificialIntelligence
 {
 	

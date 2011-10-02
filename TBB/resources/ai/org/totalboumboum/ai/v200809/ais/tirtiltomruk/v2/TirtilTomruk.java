@@ -31,6 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 * @author Mert Tomruk
 *
 */
+@SuppressWarnings("deprecation")
 public class TirtilTomruk extends ArtificialIntelligence {
 	private AiZone zone;
 	private AiHero caractere;

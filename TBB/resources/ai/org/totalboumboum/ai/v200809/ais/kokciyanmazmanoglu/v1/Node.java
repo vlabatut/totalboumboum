@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 * @author Hikmet Mazmanoğlu
 *
 */
+@SuppressWarnings("deprecation")
 public class Node {
 
 	private int line;

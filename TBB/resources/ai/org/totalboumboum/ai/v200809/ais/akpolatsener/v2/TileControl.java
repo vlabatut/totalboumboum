@@ -20,6 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Emre Şener
  *
  */
+@SuppressWarnings("deprecation")
 public class TileControl {
 	/** la classe principale de notre IA */
 	AkpolatSener as;

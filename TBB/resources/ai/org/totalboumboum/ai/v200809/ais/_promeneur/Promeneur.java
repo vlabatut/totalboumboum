@@ -43,6 +43,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class Promeneur extends ArtificialIntelligence 
 {
 	/** la case occupée actuellement par le personnage*/

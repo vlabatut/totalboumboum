@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.ZoneEnum;
  * @author Pınar Uluer
  *
  */
+@SuppressWarnings("deprecation")
 public class SearchTree {
 
 	// ensemble des noeuds dans l'arbre

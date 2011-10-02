@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Gökhan Geçkalan
  *
  */
+@SuppressWarnings("deprecation")
 public class Zone{
 	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	//private AiZone zone;

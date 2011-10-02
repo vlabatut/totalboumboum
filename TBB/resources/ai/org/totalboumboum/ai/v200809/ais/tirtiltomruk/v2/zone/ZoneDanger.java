@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.TirtilTomruk;
 * @author Mert Tomruk
 *
 */
+@SuppressWarnings("deprecation")
 public class ZoneDanger {
 	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	private AiZone zone;

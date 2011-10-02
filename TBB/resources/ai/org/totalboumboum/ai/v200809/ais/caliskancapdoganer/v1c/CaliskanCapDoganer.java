@@ -24,6 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Sedat Doğaner
  *
  */
+@SuppressWarnings("deprecation")
 public class CaliskanCapDoganer extends ArtificialIntelligence
 {
 	/*

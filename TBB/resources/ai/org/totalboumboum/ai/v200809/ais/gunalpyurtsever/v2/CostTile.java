@@ -10,6 +10,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Sinan Yürtsever
  *
  */
+@SuppressWarnings("deprecation")
 public class CostTile  {
 	
 	private AiTile MyAiTile;

@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 * @author Pınar Uluer
 *
 */
+@SuppressWarnings("deprecation")
 public class SearchNodeComp implements Comparator<SearchNode> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */

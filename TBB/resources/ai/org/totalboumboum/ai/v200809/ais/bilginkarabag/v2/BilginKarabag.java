@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Cağdas Emrah Karabağ
  *
  */
+@SuppressWarnings("deprecation")
 public class BilginKarabag extends ArtificialIntelligence {
 	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile;

@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 * @author Mert Tomruk
 *
 */
+@SuppressWarnings("deprecation")
 public class TimedBomb {
 	
 	private AiZone zone;

@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 * @author Hikmet Mazmanoğlu
 *
 */
+@SuppressWarnings("deprecation")
 public class Tree {
 
 	KokciyanMazmanoglu km;

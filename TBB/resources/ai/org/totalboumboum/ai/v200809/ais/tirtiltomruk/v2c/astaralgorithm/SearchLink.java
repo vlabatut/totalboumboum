@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.TirtilTomruk;
  * @author Mert Tomruk
  *
  */
+@SuppressWarnings("deprecation")
 public class SearchLink
 {	// noeud parent
 	private Noeud origin;

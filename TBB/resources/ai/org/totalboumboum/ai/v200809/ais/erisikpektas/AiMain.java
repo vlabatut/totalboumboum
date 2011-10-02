@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v200809.ais.erisikpektas.v2.ErisikPektas;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 

@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 * @author Pınar Uluer
 *
 */
+@SuppressWarnings("deprecation")
 public class MedeniUluer extends ArtificialIntelligence 
 {
 	/** la case occupée actuellement par le personnage*/

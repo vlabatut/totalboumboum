@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.zone.ZoneEnum;
  * @author Mert Tomruk
  *
  */
+@SuppressWarnings("deprecation")
 public class Tree {
 
 	// ensemble des noeuds composant l'arbre

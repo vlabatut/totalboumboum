@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v200809.ais.altaybasaranoglu.v2.AltayBasaranoglu;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 

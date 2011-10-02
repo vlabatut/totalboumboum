@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Emre Şener
  *
  */
+@SuppressWarnings("deprecation")
 public class ComparatorByHypotenuse implements Comparator<AiTile> {
 	/** la classe principale de notre IA */
 	AkpolatSener as;

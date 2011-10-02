@@ -22,6 +22,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Emre Şener
  *
  */
+@SuppressWarnings("deprecation")
 public class AkpolatSener extends ArtificialIntelligence {
 	
 	/** indique la minimum distance necessaire pour poser une bombe */

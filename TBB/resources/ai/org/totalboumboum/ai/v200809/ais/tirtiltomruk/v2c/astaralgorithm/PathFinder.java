@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 * @author Mert Tomruk
 *
 */
+@SuppressWarnings("deprecation")
 public class PathFinder {
 
 	private LinkedList<Noeud> path;

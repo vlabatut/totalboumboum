@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v200809.adapter.AiAction;
 * @author Hikmet Mazmanoğlu
 *
 */
+@SuppressWarnings("deprecation")
 public class Link {
 
 	private Node parent;

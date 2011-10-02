@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Emre Şener
  *
  */
+@SuppressWarnings("deprecation")
 public class XTile {
 	
 	/** nombre de visites à cette case */

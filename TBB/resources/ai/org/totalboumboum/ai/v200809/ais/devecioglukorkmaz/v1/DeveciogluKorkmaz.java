@@ -25,6 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author lev Korkmaz
  *
  */
+@SuppressWarnings("deprecation")
 public class DeveciogluKorkmaz extends ArtificialIntelligence {
 
 	AiHero enemy;

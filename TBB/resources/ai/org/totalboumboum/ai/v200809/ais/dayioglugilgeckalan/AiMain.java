@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2.DayioglugilGeckal
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	public AiMain()

@@ -19,6 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Abdurrahman Pektaş
  *
  */
+@SuppressWarnings("deprecation")
 public class Map {
 
 	@SuppressWarnings("unused")
