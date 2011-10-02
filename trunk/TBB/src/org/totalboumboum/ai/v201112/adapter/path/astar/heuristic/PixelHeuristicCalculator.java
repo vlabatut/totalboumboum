@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
  * 
  */
 
-import java.util.List;
+import java.util.Set;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -76,7 +76,7 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	@Override
 	public double processHeuristic(AiLocation location) throws StopRequestException
 	{	// init
-		List<AiTile> endTiles = getEndTiles();
+		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
 		double result = Integer.MAX_VALUE;
 		
