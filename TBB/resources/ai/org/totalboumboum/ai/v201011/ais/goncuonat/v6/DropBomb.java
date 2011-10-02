@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  * @author Elif Göncü
  * @author Yağız Onat
  */
+@SuppressWarnings("deprecation")
 public class DropBomb 
 {
 	public AiZone zone;

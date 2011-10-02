@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201011.ais.goncuonat.v6.GoncuOnat;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**
