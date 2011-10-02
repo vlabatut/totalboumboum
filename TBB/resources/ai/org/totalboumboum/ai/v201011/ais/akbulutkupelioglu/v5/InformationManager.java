@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class InformationManager
 {
 

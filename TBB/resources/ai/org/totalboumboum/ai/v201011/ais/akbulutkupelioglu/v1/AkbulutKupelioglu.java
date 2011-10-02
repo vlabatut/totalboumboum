@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Yasa Akbulut
  * @author Burcu Küpelioğlu
  */
+@SuppressWarnings("deprecation")
 public class AkbulutKupelioglu extends ArtificialIntelligence
 {	
 	private AiZone zone;

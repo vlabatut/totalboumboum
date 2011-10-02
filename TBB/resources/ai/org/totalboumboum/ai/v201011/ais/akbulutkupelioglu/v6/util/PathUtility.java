@@ -1,3 +1,4 @@
+
 package org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class PathUtility
 {
 

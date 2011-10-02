@@ -1,3 +1,4 @@
+
 package org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.strategy;
 
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
@@ -9,6 +10,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.AkbulutKupelioglu;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class SurviveStrategy extends Strategy
 {
 

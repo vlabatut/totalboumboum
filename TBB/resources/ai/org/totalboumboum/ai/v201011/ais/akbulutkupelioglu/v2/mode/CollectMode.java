@@ -19,6 +19,7 @@ import java.util.List;
  * @author Yasa Akbulut
  * 
  */
+@SuppressWarnings("deprecation")
 public class CollectMode extends Mode
 {
 	//gözden geçir, ben atladım bunu

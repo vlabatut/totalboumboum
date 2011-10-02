@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.util.Matrix;
  * @author Yasa Akbulut
  * @author Burcu Küpelioğlu
  */
+@SuppressWarnings("deprecation")
 public class AkbulutKupelioglu extends ArtificialIntelligence
 {
 

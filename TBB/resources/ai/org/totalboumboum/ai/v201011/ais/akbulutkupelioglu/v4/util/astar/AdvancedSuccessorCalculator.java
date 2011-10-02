@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.util.Matrix;
  * @author Yasa Akbulut
  * @author Burcu Küpelioğlu
  */
+@SuppressWarnings("deprecation")
 public class AdvancedSuccessorCalculator extends SuccessorCalculator
 {
 	private Matrix interest = null;

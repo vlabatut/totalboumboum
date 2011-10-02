@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.mode.Mode;
  * @author Yasa Akbulut
  * @author Burcu Küpelioğlu
  */
+@SuppressWarnings("deprecation")
 public class BombDecider
 {
 
