@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  * @author Işıl Varol
  *
  */
+@SuppressWarnings("deprecation")
 public class PathSafetyDeterminators {
 	/**Pour checkInterruption.*/
 	private static KesimalVarol monIA;

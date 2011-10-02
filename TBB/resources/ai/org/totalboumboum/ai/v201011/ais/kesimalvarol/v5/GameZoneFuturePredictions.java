@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Işıl Varol
  *
  */
+@SuppressWarnings("deprecation")
 public class GameZoneFuturePredictions
 {
 	/** classe principale de l'IA, permet d'accÔøΩder ÔøΩ checkInterruption() */

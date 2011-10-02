@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Işıl Varol
  *
  */
+@SuppressWarnings("deprecation")
 public class MovementController {
 	
 	private class costCalc extends CostCalculator

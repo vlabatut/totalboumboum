@@ -14,11 +14,12 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Ali Baran Kesimal
  * @author Işıl Varol
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 enum Mode {
 	NONE,COLLECTE,ATTAQUE
 }
 
+@SuppressWarnings("deprecation")
 public class KesimalVarol extends ArtificialIntelligence
 {	
 	/** Variable pour garder la zone */

@@ -23,7 +23,7 @@ import org.totalboumboum.ai.v201011.ais.kesimalvarol.v1.KesimalVarol;
  * @author Işıl Varol
  *
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class GameZone
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
 	private static KesimalVarol monIA;

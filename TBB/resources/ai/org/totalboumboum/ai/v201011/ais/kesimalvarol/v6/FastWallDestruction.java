@@ -15,6 +15,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ali Baran Kesimal
  * @author Işıl Varol
  */
+@SuppressWarnings("deprecation")
 public class FastWallDestruction {
 	private static KesimalVarol monIA;
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {

@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201011.ais.kesimalvarol.v6.KesimalVarol;
  * @author Işıl Varol
  *
  */
+@SuppressWarnings("deprecation")
 public class SelfCentricResearch 
 {
 	/** classe principale de l'IA, permet d'accÔøΩder ÔøΩ checkInterruption() */
