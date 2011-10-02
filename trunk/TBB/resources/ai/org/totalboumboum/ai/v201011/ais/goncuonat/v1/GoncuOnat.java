@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
  * @author Elif Göncü
  * @author Yağız Onat
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class GoncuOnat extends ArtificialIntelligence
 {	
 	private final int CASE_EMPTY= 2;

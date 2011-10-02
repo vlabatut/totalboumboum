@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Elif Göncü
  * @author Yağız Onat
  */
+@SuppressWarnings("deprecation")
 public class ModeCollecte 
 {
 

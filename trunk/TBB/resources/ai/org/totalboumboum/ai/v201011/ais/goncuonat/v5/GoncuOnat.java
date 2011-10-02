@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Elif Göncü
  * @author Yağız Onat
  */
+@SuppressWarnings("deprecation")
 public class GoncuOnat extends ArtificialIntelligence
 {
 	// notre hero sur la zone
