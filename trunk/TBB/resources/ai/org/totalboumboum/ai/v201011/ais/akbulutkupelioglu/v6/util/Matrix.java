@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.comparator.Coordina
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class Matrix implements Cloneable
 {
 

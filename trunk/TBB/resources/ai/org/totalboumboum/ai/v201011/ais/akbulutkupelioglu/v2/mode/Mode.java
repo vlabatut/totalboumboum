@@ -24,6 +24,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v2.util.Matrix;
  * @author Yasa Akbulut
  * 
  */
+@SuppressWarnings("deprecation")
 public abstract class Mode
 {
 	public final int BOMB_SAFETY = -100; // lets us be safe if a bomb gets past its explosion time

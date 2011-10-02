@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
  * @author Yasa Akbulut
  * @author Burcu Küpelioğlu
  */
+@SuppressWarnings("deprecation")
 public class BombComparator implements Comparator<AiBomb>
 {
 

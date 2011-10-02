@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v3.util.astar.Advanced
  * @author Yasa Akbulut
  * 
  */
+@SuppressWarnings("deprecation")
 public class CollectMode extends Mode
 {
 

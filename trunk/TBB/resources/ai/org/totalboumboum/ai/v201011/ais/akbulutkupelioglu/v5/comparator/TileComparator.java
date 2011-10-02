@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.AkbulutKupelioglu;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class TileComparator implements Comparator<AiTile>
 {
 

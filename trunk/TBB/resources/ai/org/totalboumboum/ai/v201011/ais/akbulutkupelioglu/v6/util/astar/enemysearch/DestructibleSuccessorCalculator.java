@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class DestructibleSuccessorCalculator extends SuccessorCalculator
 {
 

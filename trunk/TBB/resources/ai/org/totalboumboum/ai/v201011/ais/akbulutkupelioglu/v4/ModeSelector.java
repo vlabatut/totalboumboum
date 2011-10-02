@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.mode.Mode;
  * @author Yasa Akbulut
  * @author Burcu Küpelioğlu
  */
+@SuppressWarnings("deprecation")
 public class ModeSelector
 {
 	private static final int BONUS_THRESHOLD = 2; //minimum number of remaining items

@@ -30,6 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class ActionDecider
 {
 	private static ActionDecider instance = null;

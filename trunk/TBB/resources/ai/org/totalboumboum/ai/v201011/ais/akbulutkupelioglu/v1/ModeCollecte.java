@@ -12,6 +12,7 @@ import java.util.List;
  * @author Yasa Akbulut
  * @author Burcu Küpelioğlu
  */
+@SuppressWarnings("deprecation")
 public class ModeCollecte extends Mode {
 
 	private Matrix interet;

@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.mode.Mode;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public abstract class Strategy
 {
 

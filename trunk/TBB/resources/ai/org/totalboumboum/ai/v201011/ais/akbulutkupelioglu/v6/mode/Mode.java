@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public abstract class Mode
 {
 	/**

@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.breadthfirstsearch.
  * @author Burcu Küpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class DistanceMatrix extends Matrix
 {
 
