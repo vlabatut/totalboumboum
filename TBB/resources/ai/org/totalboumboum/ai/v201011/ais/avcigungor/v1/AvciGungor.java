@@ -23,7 +23,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
  * @author Ibrahim Avcı
  * @author Burak Güngör
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","deprecation"})
 public class AvciGungor extends ArtificialIntelligence {
 	
 	private final int MUR_DESTRUCTIBLE = 3;

@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Ibrahim Avcı
  * @author Burak Güngör
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class AvciGungor extends ArtificialIntelligence {
 
 	// notre hero sur la zone

@@ -23,7 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burak Güngör
  * 
  */
-
+@SuppressWarnings("deprecation")
 public class AvciGungor extends ArtificialIntelligence {
 
 	private final int FOSSE = 0;

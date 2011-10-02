@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Ibrahim Avcı
  * @author Burak Güngör
  */
+@SuppressWarnings("deprecation")
 public class FillingClass {
 	private final double FOSSE = 0;
 	private final double MUR_INDESTRUCTIBLE = 1;
