@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+@SuppressWarnings("deprecation")
 public class Path {
 	HacibektasogluIlgar hi;
 	AiZone zone;

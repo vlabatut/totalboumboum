@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Engin Hacıbektaşoğlu
  * @author Elif Nurdan İlgar
  */
+@SuppressWarnings("deprecation")
 public class Maps 
 {
 	private HacibektasogluIlgar notreIA;

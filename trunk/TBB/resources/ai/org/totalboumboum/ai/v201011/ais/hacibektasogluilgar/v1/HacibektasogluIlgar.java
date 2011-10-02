@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Elif Nurdan İlgar
  *
  */
+@SuppressWarnings("deprecation")
 public class HacibektasogluIlgar extends ArtificialIntelligence
 {	
 	 AiZone zone;
