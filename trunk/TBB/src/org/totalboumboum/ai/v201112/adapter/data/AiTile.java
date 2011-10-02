@@ -31,7 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-public abstract class AiTile
+public abstract class AiTile implements Comparable<AiTile>
 {	
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
@@ -251,7 +251,7 @@ public abstract class AiTile
 	public abstract List<AiTile> getNeighbors();
 
 	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
+	// COMPARISONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public boolean equals(Object o)
@@ -280,4 +280,12 @@ public abstract class AiTile
 		result.append("("+row+";"+col+")");
 		return result.toString();
 	}
+	
+	@Override
+    public int compareTo(AiTile tile)
+    {	int result = col - tile.getCol();
+    	if(result==0)
+    		result = - (row - tile.getRow());
+    	return result;
+    }
 }
