@@ -23,6 +23,7 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
  * @author Arif Can Elmas
  *
  */
+@SuppressWarnings("deprecation")
 public class PathFinder
 {
 	// L'objet qui représente notre IA. On utilise

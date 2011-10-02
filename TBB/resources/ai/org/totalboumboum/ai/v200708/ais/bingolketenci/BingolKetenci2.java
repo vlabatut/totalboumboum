@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Utku Görkem Kentenci
  *
  */
+@SuppressWarnings("deprecation")
 public class BingolKetenci2 extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	/** position de la derniere bombe qui est mis par AI. */

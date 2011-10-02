@@ -28,6 +28,7 @@ import org.totalboumboum.ai.v200708.adapter.AiManager;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	public AiMain()

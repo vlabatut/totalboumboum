@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Emine Canan Toprak
  *
  */
+@SuppressWarnings("deprecation")
 public class HanciToprak extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	/** le dernier déplacement effectué */

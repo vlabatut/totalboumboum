@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Emre Doğan
  *
  */
+@SuppressWarnings("deprecation")
 public class DemirkolDogan extends ArtificialIntelligence{
 
 	

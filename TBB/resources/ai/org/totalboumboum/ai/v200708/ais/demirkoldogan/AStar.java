@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Emre Doğan
  *
  */
+@SuppressWarnings("deprecation")
 public class AStar {
 	
 	private Block ownBlock;   //point de depart

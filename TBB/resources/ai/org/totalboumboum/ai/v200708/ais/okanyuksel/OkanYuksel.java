@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Erkan Yüksel
  *
  */
+@SuppressWarnings("deprecation")
 public class OkanYuksel extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;
