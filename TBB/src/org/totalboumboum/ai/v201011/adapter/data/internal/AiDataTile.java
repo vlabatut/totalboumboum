@@ -50,7 +50,9 @@ import org.totalboumboum.game.round.RoundVariables;
  * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataTile extends AiTile
 {	

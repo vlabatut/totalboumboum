@@ -60,7 +60,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class Astar
 {	private static boolean verbose = false;

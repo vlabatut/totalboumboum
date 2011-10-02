@@ -31,7 +31,9 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
  * avec l'algorithme A*
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class CostCalculator
 {

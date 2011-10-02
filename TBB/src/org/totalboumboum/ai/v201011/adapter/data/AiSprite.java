@@ -26,7 +26,9 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public interface AiSprite
 {	

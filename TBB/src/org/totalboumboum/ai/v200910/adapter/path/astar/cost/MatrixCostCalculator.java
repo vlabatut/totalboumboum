@@ -38,7 +38,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * au personnage parce qu'elles sont trop dangereuses. 
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class MatrixCostCalculator extends CostCalculator
 {

@@ -37,7 +37,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * comparaisons, différents calculs, etc.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiPath implements Comparable<AiPath>
 {	
@@ -348,14 +350,16 @@ public class AiPath implements Comparable<AiPath>
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
-	 * Cette méthode ne doit plus être utilisée, il faut plutôt se servir de {@link #compareTo}.
 	 * 
 	 * @param path
 	 * 		le chemin à comparer
 	 * @return	
 	 * 		vrai ssi ce chemin est plus court que celui passé en paramètre
+	 * 
+	 * @deprecated
+	 * 		Cette méthode ne doit plus être utilisée, 
+	 * 		il faut plutôt se servir de {@link #compareTo}.
 	 */
-	@Deprecated
 	public boolean isShorterThan(AiPath path)
 	{	int l1 = tiles.size();
 		int l2 = path.getLength();

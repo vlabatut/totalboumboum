@@ -67,7 +67,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * causant la fin du pas de simulation.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiModel
 {	

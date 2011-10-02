@@ -28,7 +28,9 @@ package org.totalboumboum.ai.v200910.adapter.communication;
  * DROP_BOMB (poser une bombe), PUNCH (frapper une bombe)... 
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiActionName
 {

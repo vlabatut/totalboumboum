@@ -44,6 +44,9 @@ import org.totalboumboum.tools.files.FileNames;
  * du dossier contenant l'ia (ou les ia).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class ParseAi
 {	private static boolean verbose = false;

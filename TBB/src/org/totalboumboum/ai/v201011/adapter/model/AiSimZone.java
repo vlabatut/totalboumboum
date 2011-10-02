@@ -48,7 +48,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * être modifié que via la classe AiModel.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiSimZone extends AiZone
 {	

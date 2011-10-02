@@ -46,7 +46,9 @@ import org.totalboumboum.configuration.Configuration;
  * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class ArtificialIntelligence implements Callable<AiAction>
 {	

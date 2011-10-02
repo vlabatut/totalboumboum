@@ -48,7 +48,9 @@ import org.totalboumboum.engine.content.sprite.block.Block;
  * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 {

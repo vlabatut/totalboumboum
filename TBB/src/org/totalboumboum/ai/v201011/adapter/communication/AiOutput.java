@@ -33,7 +33,9 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 /**
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiOutput
 {

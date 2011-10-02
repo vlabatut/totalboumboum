@@ -33,7 +33,9 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
  * A* lors de la recherche d'un plus court chemin, pour développer un état
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class SuccessorCalculator
 {

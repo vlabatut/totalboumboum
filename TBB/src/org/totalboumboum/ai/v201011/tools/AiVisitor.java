@@ -60,6 +60,9 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
  * 	- l'appel ne doit pas être placé dans un try-catch qui annulerait son effet
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiVisitor extends VoidVisitorAdapter<Object>
 {	

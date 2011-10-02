@@ -41,7 +41,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * de passer sur une case avant qu'elle ne soit prise dans une explosion.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class BasicSuccessorCalculator extends SuccessorCalculator
 {

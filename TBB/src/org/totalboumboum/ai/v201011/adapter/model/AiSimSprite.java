@@ -29,7 +29,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
  * et un nombre restreint de leurs propriétés.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 abstract class AiSimSprite implements AiSprite
 {	
