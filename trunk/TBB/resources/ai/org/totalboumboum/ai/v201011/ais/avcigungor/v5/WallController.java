@@ -19,6 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ibrahim Avcı
  * @author Burak Güngör
  */
+@SuppressWarnings("deprecation")
 public class WallController {
 
 		

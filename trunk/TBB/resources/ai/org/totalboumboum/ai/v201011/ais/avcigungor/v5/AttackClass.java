@@ -23,7 +23,7 @@ import java.util.List;
  * @author Ibrahim Avcı
  * @author Burak Güngör
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class AttackClass {
 
 	AiZone gameZone;
