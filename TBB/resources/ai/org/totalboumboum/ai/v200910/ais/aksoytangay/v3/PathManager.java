@@ -23,6 +23,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Necmi Murat Tangay
  *
  */
+@SuppressWarnings("deprecation")
 public class PathManager {
 	
 	//variable pour faire de l'appel

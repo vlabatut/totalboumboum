@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Hatice Esra Ergök
  * 
  */
+@SuppressWarnings("deprecation")
 public class Zone_IA {	
 	
 	@SuppressWarnings("unused")

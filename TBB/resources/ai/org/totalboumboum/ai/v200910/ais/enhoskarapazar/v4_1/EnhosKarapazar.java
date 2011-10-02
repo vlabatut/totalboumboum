@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Sadettin Enhoş
  * @author Ali Can Karapazar
  */
+@SuppressWarnings("deprecation")
 public class EnhosKarapazar extends ArtificialIntelligence {
 	private boolean dropBombAction = false;
 	AiAction result = new AiAction(AiActionName.NONE);

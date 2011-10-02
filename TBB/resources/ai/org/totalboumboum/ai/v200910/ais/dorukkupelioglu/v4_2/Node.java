@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * <br><br>G : Cost <br>H : Heuristic <br>F = G + H 
  * @author Oktay Doruk
  */
+@SuppressWarnings("deprecation")
 public class Node {
 
 

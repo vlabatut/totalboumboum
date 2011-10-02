@@ -22,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Yalçın Yenigün
  *
  */
+@SuppressWarnings("deprecation")
 public class SafetyZone {
 
 	AldanmazYenigun ai;

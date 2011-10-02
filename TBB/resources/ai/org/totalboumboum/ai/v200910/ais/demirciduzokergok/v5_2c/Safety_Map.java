@@ -1,7 +1,4 @@
-
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2c;
-
-
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -18,11 +15,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
-
 /**
  * This class is for expriming the zone of the game with a matrix placing different danger
  * levels to each case.
@@ -30,7 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Göktuğ Düzok
  *
  */
-
+@SuppressWarnings("deprecation")
 public class Safety_Map {
 	private AiZone our_zone;
 	@SuppressWarnings("unused")

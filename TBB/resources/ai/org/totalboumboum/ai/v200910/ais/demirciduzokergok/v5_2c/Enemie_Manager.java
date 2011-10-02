@@ -1,4 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2c;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,12 +14,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
-
-
 
 /**
  * Our attacking strategies is based on 3 strategies:
@@ -40,9 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Göktuğ Düzok
  * 
  */
-
-
-
+@SuppressWarnings("deprecation")
 public class Enemie_Manager {
 
 	

@@ -25,6 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Necmi Murat Tangay
  *
  */
+@SuppressWarnings("deprecation")
 public class PathManager {
 	
 	//variable pour faire de l'appel

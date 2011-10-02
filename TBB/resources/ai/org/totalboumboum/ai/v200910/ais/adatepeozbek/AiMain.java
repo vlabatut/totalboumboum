@@ -30,6 +30,7 @@ import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5c.AdatepeOzbek;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

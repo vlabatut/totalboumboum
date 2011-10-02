@@ -30,6 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Koray Mançuhan
  * @author Özgün Pınarer
  */
+@SuppressWarnings("deprecation")
 public class MancuhanPinarer extends ArtificialIntelligence {
 	// la case accessible et qui n'est pas dans la portee de la bombe est
 	// represente dans la matrice da la zone.

@@ -13,17 +13,11 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
-
-
-
 /**
  * @author Merih Inal Dereli
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class Zone {
 	private Collection <AiHero> rivals;
 	private AiHero caractere;

@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * @author Burak Ozgen Güner
  *
  */
+@SuppressWarnings("deprecation")
 public class Matrices {
 	
 	private Etat accessibilite[][];

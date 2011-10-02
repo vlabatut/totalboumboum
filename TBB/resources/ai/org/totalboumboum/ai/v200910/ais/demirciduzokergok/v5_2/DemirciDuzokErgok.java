@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2;
 
-
 import java.util.List;
 
 
@@ -35,6 +34,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /* We made a better explanation about the use of each method in the classes.*/
 
+@SuppressWarnings("deprecation")
 public class DemirciDuzokErgok extends ArtificialIntelligence
 { 
 

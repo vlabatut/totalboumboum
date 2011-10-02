@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
  * @author Sena Özbek
  *
  */
+@SuppressWarnings("deprecation")
 public class Enemy
 {
 	private AiHero _hero = null;

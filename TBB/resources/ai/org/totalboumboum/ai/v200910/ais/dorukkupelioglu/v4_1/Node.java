@@ -7,6 +7,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * @author Burcu Küpelioğlu
  * @author Oktay Doruk
  */
+@SuppressWarnings("deprecation")
 public class Node {
 
 

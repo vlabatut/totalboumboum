@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * @author Necmi Murat Tangay
  *
  */
+@SuppressWarnings("deprecation")
 public class MonTraitement
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
 	private AksoyTangay monIa;

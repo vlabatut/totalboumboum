@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
  * @author Sena Özbek
  *
  */
+@SuppressWarnings("deprecation")
 public class AdatepeOzbek extends ArtificialIntelligence 
 {	
 	private AiHero ownHero = null;

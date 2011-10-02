@@ -36,6 +36,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Özgün Pınarer
  *
  */
+@SuppressWarnings("deprecation")
 public class MancuhanPinarer extends ArtificialIntelligence {
 	private final int CASE_SUR = 0;
 	private final int CASE_INACCESSIBLE = 1;

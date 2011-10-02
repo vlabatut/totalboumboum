@@ -22,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class TimeMatrice {
 
 	private double[][] matrice;

@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class GeneralFuncs {
 	public static boolean tileCompare(AiTile tile1,AiTile tile2,ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();

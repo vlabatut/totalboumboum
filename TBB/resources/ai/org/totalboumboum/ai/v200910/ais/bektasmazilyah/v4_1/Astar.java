@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * @author Nedim Mazilyah
  *
  */
+@SuppressWarnings("deprecation")
 public final class Astar {
 	private static class CostComparator implements Comparator<Node> {
 		//

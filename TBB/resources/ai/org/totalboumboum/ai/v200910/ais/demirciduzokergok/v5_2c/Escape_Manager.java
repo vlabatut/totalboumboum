@@ -15,7 +15,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * This class is about defense strategie. Our defense strategie is based on the time of 
  * explosion of the bombs according to the valeu in our safaty map. The big and 
@@ -27,8 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hatice Esra Ergök
  * 
  */
-
-
+@SuppressWarnings("deprecation")
 public class Escape_Manager {
 	
 	

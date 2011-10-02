@@ -18,17 +18,13 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
 /**
  * This class is for breaking the walls when there is no bonus visible in the game zone.
  * 
  * @author Mustafa Göktuğ Düzok
  * 
  */
-
-
-
+@SuppressWarnings("deprecation")
 public class Wall_Manager{
 
 	

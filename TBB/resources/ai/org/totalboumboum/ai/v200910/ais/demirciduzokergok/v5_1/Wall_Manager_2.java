@@ -14,11 +14,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
-
 /**
  * 
  * @author Osman Demirci
@@ -26,7 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hatice Esra Ergök
  * 
  */
-
+@SuppressWarnings("deprecation")
 public class Wall_Manager_2 {
 
 	

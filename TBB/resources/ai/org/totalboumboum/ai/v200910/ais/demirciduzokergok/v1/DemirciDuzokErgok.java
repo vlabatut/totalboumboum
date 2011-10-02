@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * @author Hatice Esra Ergök
  * 
  */
+@SuppressWarnings("deprecation")
 public class DemirciDuzokErgok extends ArtificialIntelligence
 {	
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */

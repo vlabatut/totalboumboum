@@ -20,6 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class WallSuccessor extends BasicSuccessorCalculator {
 	private DaneSatir ai;
 	private TimeMatrice time;

@@ -17,8 +17,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
 /**
  * Our attacking strategies is based on 3 strategies:
  * 
@@ -39,9 +37,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Göktuğ Düzok
  * 
  */
-
-
-
+@SuppressWarnings("deprecation")
 public class Enemie_Manager {
 
 	

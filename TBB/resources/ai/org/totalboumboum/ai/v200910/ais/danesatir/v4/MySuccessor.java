@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class MySuccessor extends SuccessorCalculator{
 	@SuppressWarnings("unused")
 	private DaneSatir ai;

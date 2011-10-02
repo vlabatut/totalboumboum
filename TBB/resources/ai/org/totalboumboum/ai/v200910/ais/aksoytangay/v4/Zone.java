@@ -22,6 +22,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Necmi Murat Tangay
  *
  */
+@SuppressWarnings("deprecation")
 public class Zone {
 	
 	//variable pour faire de l'appel

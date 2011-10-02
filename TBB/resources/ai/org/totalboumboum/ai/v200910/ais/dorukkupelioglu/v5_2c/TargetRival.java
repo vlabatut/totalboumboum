@@ -12,6 +12,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burcu Küpelioğlu
  * @author Oktay Doruk
  */
+@SuppressWarnings("deprecation")
 public class TargetRival {
 
 	private DorukKupelioglu dk;

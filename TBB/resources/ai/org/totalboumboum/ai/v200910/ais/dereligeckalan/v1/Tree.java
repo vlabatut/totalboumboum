@@ -6,11 +6,11 @@ import java.util.Vector;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.ais.dereligeckalan.v1.ZoneEnum;
 
-
 /**
  * @author Merih Inal Dereli
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class Tree {
 	private Vector<Noeud> nodes;
 	// ensemble des liens composant l'arbre

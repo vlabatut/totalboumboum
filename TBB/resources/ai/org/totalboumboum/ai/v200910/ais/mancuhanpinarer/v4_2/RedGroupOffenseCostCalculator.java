@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  * @author Koray Mançuhan
  * @author Özgün Pınarer
  */
+@SuppressWarnings("deprecation")
 public class RedGroupOffenseCostCalculator extends CostCalculator {
 
 	@Override

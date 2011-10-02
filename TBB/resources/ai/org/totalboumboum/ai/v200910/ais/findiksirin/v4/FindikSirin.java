@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ali Fındık
  * @author Göknur Şırın
  */
+@SuppressWarnings("deprecation")
 public class FindikSirin extends ArtificialIntelligence
 {		
 

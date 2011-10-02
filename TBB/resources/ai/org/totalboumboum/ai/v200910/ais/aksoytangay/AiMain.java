@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2c.AksoyTangay;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

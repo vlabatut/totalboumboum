@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * @author Sena Özbek
  *
  */
+@SuppressWarnings("deprecation")
 public class TriedTiles
 {
 	public List<AiTile> visited = null;

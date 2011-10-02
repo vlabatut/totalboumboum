@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burak Ozgen Güner
  *
  */
+@SuppressWarnings("deprecation")
 public class Map {
 
 	

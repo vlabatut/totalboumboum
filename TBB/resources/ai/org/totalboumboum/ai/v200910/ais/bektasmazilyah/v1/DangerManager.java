@@ -21,6 +21,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Nedim Mazilyah
  *
  */
+@SuppressWarnings("deprecation")
 public class DangerManager {
 	
 	private BektasMazilyah hero;

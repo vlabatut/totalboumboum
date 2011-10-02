@@ -1,7 +1,4 @@
-
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2c;
-
-
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -17,21 +14,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
-
 /**
  * This class is for calculating if we can find a secured place if we pose a bomb.
  * 
  * @author Mustafa Göktuğ Düzok
  * 
  */
-
-
-
-
+@SuppressWarnings("deprecation")
 public class Can_escape {
 	@SuppressWarnings("unused")
 	private AiZone our_zone;

@@ -57,6 +57,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Yalçın Yenigün
  *
  */
+@SuppressWarnings("deprecation")
 public class SafetyManager
 {	
 	/** interrupteur permettant d'afficher la trace du traitement */

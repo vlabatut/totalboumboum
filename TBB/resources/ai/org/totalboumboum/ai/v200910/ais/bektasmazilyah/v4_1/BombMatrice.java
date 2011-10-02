@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Nedim Mazilyah
  *
  */
+@SuppressWarnings("deprecation")
 public class BombMatrice {
 	
 	private BektasMazilyah source;

@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2;
 
-
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -24,10 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Göktuğ Düzok
  * 
  */
-
-
-
-
+@SuppressWarnings("deprecation")
 public class Can_escape {
 	@SuppressWarnings("unused")
 	private AiZone our_zone;
