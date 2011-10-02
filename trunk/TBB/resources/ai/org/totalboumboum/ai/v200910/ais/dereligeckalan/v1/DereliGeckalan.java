@@ -18,9 +18,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.ais.dereligeckalan.v1.PathFinder;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA
  * 
@@ -33,6 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Gökhan Geçkalan
  * 
  */
+@SuppressWarnings("deprecation")
 public class DereliGeckalan extends ArtificialIntelligence {
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */

@@ -37,6 +37,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Sena Özbek
  *
  */
+@SuppressWarnings("deprecation")
 public class AdatepeOzbek extends ArtificialIntelligence 
 {	
 	@Override

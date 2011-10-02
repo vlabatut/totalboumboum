@@ -33,6 +33,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Ali Fındık
  * @author Göknur Şırın
  */
+@SuppressWarnings("deprecation")
 public class SafetyManager
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
 	private FindikSirin ai;

@@ -17,7 +17,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * This class is for collecting the bonus when the bonus is visible in the zone of game.
  * 
@@ -27,10 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Göktuğ Düzok
  * 
  */
-
-
-
-
+@SuppressWarnings("deprecation")
 public class Bonus_Manager {
 
 	

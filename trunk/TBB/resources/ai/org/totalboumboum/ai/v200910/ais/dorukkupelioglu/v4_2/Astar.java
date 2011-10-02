@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
  * @author Burcu Küpelioğlu
  * @author Oktay Doruk
  */
+@SuppressWarnings("deprecation")
 public class Astar {
 	
 	private DorukKupelioglu dk;

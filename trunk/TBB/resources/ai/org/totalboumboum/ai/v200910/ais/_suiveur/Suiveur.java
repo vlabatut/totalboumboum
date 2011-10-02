@@ -42,6 +42,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class Suiveur extends ArtificialIntelligence 
 {	
 	/** interrupteur permettant d'afficher la trace du traitement */

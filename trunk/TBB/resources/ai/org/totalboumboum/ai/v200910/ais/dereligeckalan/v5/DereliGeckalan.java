@@ -31,6 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Merih Inal Dereli
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class DereliGeckalan extends ArtificialIntelligence {
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */

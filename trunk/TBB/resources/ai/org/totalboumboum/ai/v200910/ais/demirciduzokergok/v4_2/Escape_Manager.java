@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  */
 
+@SuppressWarnings("deprecation")
 public class Escape_Manager {
 
 	

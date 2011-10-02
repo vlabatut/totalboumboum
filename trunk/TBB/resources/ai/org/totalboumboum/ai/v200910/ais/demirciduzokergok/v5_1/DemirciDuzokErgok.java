@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_1;
 
-
 import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
@@ -12,15 +11,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
-
-
-
-
-
 
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA
@@ -35,6 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hatice Esra Ergök
  * 
  */
+@SuppressWarnings("deprecation")
 public class DemirciDuzokErgok extends ArtificialIntelligence
 { 
 

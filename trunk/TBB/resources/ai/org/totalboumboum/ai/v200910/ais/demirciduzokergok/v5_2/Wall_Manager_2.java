@@ -18,7 +18,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * We use this class for breaking the walls near us to access the enemy when the enemies are not accessibles.
  *
@@ -27,10 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  *
  */
-
-
-
-
+@SuppressWarnings("deprecation")
 public class Wall_Manager_2{
 
 	

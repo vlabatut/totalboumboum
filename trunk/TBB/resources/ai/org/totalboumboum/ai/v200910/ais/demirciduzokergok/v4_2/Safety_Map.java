@@ -24,6 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hatice Esra Ergök
  * 
  */
+@SuppressWarnings("deprecation")
 public class Safety_Map {
 	private AiZone our_zone;
 	@SuppressWarnings("unused")

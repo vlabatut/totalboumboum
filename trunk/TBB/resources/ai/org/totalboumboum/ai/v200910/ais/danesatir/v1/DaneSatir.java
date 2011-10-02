@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class DaneSatir extends ArtificialIntelligence
 {
 	private AiZone zone;

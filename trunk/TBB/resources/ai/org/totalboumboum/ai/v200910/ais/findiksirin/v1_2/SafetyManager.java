@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ali Fındık
  * @author Göknur Şırın
  */
+@SuppressWarnings("deprecation")
 public class SafetyManager
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
 	private FindikSirin monIa;

@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burcu Küpelioğlu
  * @author Oktay Doruk
  */
+@SuppressWarnings("deprecation")
 public class DorukKupelioglu extends ArtificialIntelligence 
 {
 	private AiTile currentTile=null;

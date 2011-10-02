@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Sadettin Enhoş
  * @author Ali Can Karapazar
  */
+@SuppressWarnings("deprecation")
 public class PathManagement {
 
 	

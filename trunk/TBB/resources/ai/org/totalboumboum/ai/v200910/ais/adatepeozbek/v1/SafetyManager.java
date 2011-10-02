@@ -24,6 +24,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Sena Özbek
  *
  */
+@SuppressWarnings("deprecation")
 public class SafetyManager
 {		
 

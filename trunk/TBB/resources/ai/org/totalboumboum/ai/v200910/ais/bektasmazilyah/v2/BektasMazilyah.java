@@ -32,6 +32,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Nedim Mazilyah
  *
  */
+@SuppressWarnings("deprecation")
 public class BektasMazilyah extends ArtificialIntelligence
 {	
 	private AiZone zone;

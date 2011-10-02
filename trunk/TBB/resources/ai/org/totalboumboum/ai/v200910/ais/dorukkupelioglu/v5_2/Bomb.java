@@ -19,6 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Oktay Doruk
  *
  */
+@SuppressWarnings("deprecation")
 public class Bomb {
 	
 	private DorukKupelioglu dk;

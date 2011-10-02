@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class DecisionMaker {
 
 	private DaneSatir ai;

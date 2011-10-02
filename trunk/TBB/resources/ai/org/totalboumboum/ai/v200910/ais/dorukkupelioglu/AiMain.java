@@ -30,6 +30,7 @@ import org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2c.DorukKupelioglu;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 

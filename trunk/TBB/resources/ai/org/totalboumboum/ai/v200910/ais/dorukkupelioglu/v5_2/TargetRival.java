@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
+@SuppressWarnings("deprecation")
 public class TargetRival {
 
 	private DorukKupelioglu dk;

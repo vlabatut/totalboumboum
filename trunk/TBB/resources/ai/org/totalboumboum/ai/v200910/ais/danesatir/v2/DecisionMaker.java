@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class DecisionMaker {
 	
 	private TimeMatrice time;

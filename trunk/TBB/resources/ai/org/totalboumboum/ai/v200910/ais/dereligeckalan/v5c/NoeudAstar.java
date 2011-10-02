@@ -5,11 +5,11 @@ import java.util.Comparator;
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
-
 /**
  * @author Merih Inal Dereli
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class NoeudAstar implements Comparator<Noeud> {
 	private Noeud goal;
 

@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v200910.adapter.data.*;
  * @author Burcu Küpelioğlu
  * @author Oktay Doruk
  */
+@SuppressWarnings("deprecation")
 public class Matrix 
 {
 	private DorukKupelioglu dk;

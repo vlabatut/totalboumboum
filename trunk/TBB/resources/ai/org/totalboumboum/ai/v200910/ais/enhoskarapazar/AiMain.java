@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v200910.ais.enhoskarapazar.v5c.EnhosKarapazar;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

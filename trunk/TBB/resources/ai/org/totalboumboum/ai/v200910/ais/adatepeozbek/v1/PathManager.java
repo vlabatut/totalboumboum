@@ -47,6 +47,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Sena Özbek
  *
  */
+@SuppressWarnings("deprecation")
 public class PathManager
 {
 	/** Interrupteur permettant d'afficher la trace du traitement */

@@ -1,8 +1,6 @@
 
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_1;
 
-
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -16,9 +14,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
 /**
  * 
  * @author Osman Demirci
@@ -26,7 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hatice Esra Ergök
  * 
  */
-
+@SuppressWarnings("deprecation")
 public class Safety_Map {
 	private AiZone our_zone;
 	@SuppressWarnings("unused")

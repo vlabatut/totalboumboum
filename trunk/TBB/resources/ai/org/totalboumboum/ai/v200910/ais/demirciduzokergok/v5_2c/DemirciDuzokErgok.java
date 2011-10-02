@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2c;
 
-
 import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
@@ -13,23 +12,12 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
 /**
  * 
  * @author Osman Demirci
  * @author Mustafa Göktuğ Düzok
  * @author Hatice Esra Ergök
  * 
- */
-
-
-
-
-
-
-
-/**
  * >> Our bomberman can be considered as a bit defensive one because of the strategies
  * choosen while attacking and defending. Also it is giving big importance not to die
  * even in collecting the bonus and attack by tryig to choose the most secure cases.
@@ -38,6 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /* We made a better explanation about the use of each method in the classes.*/
 
+@SuppressWarnings("deprecation")
 public class DemirciDuzokErgok extends ArtificialIntelligence
 { 
 

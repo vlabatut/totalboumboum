@@ -24,6 +24,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Ali Fındık
  * @author Göknur Şırın
  */
+@SuppressWarnings("deprecation")
 public class FindikSirin extends ArtificialIntelligence
 {		
 	

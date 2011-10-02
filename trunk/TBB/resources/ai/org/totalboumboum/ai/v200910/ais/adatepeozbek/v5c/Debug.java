@@ -11,7 +11,8 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * @author Sena Özbek
  *
  */
-public class Debug
+@SuppressWarnings("deprecation")
+ class Debug
 {
 	private static boolean debug = false;
 	

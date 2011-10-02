@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class MonTile {
 	private AiTile tile;
 	private int iter;

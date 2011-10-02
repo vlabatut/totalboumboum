@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
  * @author Tolga Can Şatır
  *
  */
+@SuppressWarnings("deprecation")
 public class PathFinder {
 	
 	private AiTile source;

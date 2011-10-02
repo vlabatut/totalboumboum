@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * @author DorukKüpelioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class Node {
 	
 	private AiTile tile;//bu node un çekirdeği // oluşmasına neden olan Tile

@@ -21,6 +21,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Hatice Esra Ergök
  * 
  */
+@SuppressWarnings("deprecation")
 public class Can_escape_Manager {
 
 	

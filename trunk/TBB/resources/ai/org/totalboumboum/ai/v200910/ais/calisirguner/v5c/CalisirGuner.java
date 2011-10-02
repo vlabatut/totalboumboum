@@ -31,6 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burak Ozgen Güner
  *
  */
+@SuppressWarnings("deprecation")
 public class CalisirGuner extends ArtificialIntelligence {
 	private AiZone zone;
 	/** la case occupée actuellement par le personnage */

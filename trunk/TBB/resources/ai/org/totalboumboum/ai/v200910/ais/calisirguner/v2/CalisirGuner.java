@@ -29,20 +29,21 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burak Ozgen Güner
  *
  */
+@SuppressWarnings("deprecation")
 public class CalisirGuner extends ArtificialIntelligence
 {	private AiZone zone;
-/** la case occupée actuellement par le personnage */
-private AiTile caseactuelle;
-/** la case sur laquelle on veut aller */
-private AiTile pasprochain = null;
-private boolean premiere=true; 
-AiAction result = new AiAction(AiActionName.NONE);
-private AiTile resultat;
+	/** la case occupée actuellement par le personnage */
+	private AiTile caseactuelle;
+	/** la case sur laquelle on veut aller */
+	private AiTile pasprochain = null;
+	private boolean premiere=true; 
+	AiAction result = new AiAction(AiActionName.NONE);
+	private AiTile resultat;
+	
 
-
-/** larea du jeu */
-private Map map;
-private  AiHero bomberman;
+	/** larea du jeu */
+	private Map map;
+	private  AiHero bomberman;
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption

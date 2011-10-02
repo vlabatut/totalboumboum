@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5c.BektasMazilyah;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

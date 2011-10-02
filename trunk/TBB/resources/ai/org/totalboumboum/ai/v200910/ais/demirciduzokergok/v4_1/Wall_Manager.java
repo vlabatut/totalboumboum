@@ -22,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hatice Esra Ergök
  * 
  */
+@SuppressWarnings("deprecation")
 public class Wall_Manager {
 
 	

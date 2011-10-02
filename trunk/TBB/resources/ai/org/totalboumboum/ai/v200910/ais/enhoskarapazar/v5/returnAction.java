@@ -7,6 +7,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Sadettin Enhoş
  * @author Ali Can Karapazar
  */
+@SuppressWarnings("deprecation")
 public class returnAction {
 	Direction move = Direction.NONE;
 	AiActionName actionName = AiActionName.NONE;

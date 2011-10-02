@@ -22,6 +22,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Burak Ozgen Güner
  *
  */
+@SuppressWarnings("deprecation")
 public class Map {
 
 	@SuppressWarnings("unused")
