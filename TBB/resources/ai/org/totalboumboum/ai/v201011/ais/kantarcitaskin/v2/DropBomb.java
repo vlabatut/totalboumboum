@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  * @author Burcu Kantarcı
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class DropBomb 
 {
 	ArtificialIntelligence ai;

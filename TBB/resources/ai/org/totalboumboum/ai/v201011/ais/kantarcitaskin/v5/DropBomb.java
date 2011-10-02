@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burcu Kantarcı
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class DropBomb 
 {
 	ArtificialIntelligence ai;

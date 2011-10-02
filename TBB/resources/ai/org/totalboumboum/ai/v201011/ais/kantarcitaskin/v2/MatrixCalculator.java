@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
  * @author Burcu Kantarcı
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class MatrixCalculator
 {
 	//Les contantes

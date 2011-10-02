@@ -20,7 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burcu Kantarcı
  * @author Ayça Taşkın
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class Move 
 {
 	/*

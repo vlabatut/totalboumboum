@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Burcu Kantarcı
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class Move 
 {
 	AiZone zone;
@@ -32,7 +33,6 @@ public class Move
 	}
 	
 	//La methode qui trouve la direction suivante en utilisant l'astar pour trouver le chemin le plus interesent
-	@SuppressWarnings("deprecation")
 	public Direction getDirection()
 	{	Cost  cost = new Cost(matrix);
 		HeuristicCalculator heuristic = new BasicHeuristicCalculator();
