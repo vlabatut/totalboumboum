@@ -28,7 +28,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
  * @author Vincent Labatut
  *
  */
-public interface AiSprite
+public interface AiSprite extends Comparable<AiSprite>
 {	
 	/////////////////////////////////////////////////////////////////
 	// ID				/////////////////////////////////////////////

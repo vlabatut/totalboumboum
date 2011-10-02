@@ -115,6 +115,8 @@ public class DisplayAisTexts implements Display
 								double total = 0;
 								for(int s=0;s<textList.size();s++)
 								{	String text = textList.get(s);
+									if(text==null)
+										text = "null";
 									Rectangle2D box = metrics.getStringBounds(text,g);
 									int boxHeight = (int)Math.round(box.getHeight());
 									boxHeights.add(boxHeight);

@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * @author Vincent Labatut
  *
  */
-public final class AiLocation
+public final class AiLocation implements Comparable<AiLocation>
 {	
 	/**
 	 * Définit une nouvelle position à partir
@@ -117,7 +117,7 @@ public final class AiLocation
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// MISC						/////////////////////////////////////
+	// COMPARISON				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public boolean equals(Object o)
@@ -136,7 +136,22 @@ public final class AiLocation
 		int result = (int)(posY + height*posX);
     	return result;
     }
+
+	@Override
+	public int compareTo(AiLocation location)
+	{	Double x1 = new Double(posX);
+		Double y1 = new Double(posY);
+		Double x2 = new Double(location.posX);
+		Double y2 = new Double(location.posY);
+		int result = x1.compareTo(x2);
+		if(result==0)
+			result = y1.compareTo(y2);
+		return result;
+	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STRING					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();

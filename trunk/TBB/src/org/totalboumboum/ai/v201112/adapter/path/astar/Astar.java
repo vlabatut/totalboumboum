@@ -233,7 +233,7 @@ public final class Astar
 					System.out.println("Queue length: "+queue.size());
 				}
 				// on teste si on est arrivé à la fin de la recherche
-				if(endTiles.contains(currentNode.getLocation()))
+				if(endTiles.contains(currentNode.getLocation().getTile()))
 				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
 					finalNode = currentNode;
 					found = true;
@@ -356,13 +356,15 @@ public final class Astar
 	 * termine proprement cet objet quand il n'est plus utilisé
 	 */
 	private void finish()
-	{	if(root!=null)
-		{	root.finish();
-			root = null;
-		}
-		ai = null;
-		costCalculator = null;
-		heuristicCalculator = null;
+	{	
+//		if(root!=null)
+//		{	root.finish();
+//			root = null;
+//		}
+//		ai = null;
+//		costCalculator = null;
+//		heuristicCalculator = null;
+//		successorCalculator = null;
 		root = null;
 	}
 }
