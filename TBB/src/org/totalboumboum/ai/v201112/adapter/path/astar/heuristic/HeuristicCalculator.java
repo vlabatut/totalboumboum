@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
  */
 
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -57,7 +58,7 @@ public abstract class HeuristicCalculator
 	// END TILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Ensemble des cases pouvant terminer le chemin */
-	private Set<AiTile> endTiles;	
+	private final Set<AiTile> endTiles = new TreeSet<AiTile>();	
 
 	/**
 	 * Initialise/modifie l'ensemble des cases 
@@ -67,7 +68,8 @@ public abstract class HeuristicCalculator
 	 * 		les cases terminant le chemin
 	 */
 	public void setEndTiles(Set<AiTile> endTiles) throws StopRequestException
-	{	this.endTiles = endTiles;		
+	{	this.endTiles.clear();
+		this.endTiles.addAll(endTiles);
 	}
 
 	/**

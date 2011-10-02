@@ -241,7 +241,8 @@ public class AiOutput
 	 * 		texte à afficher sur cette case
 	 */
 	public void setTileText(int row, int col, String text)
-	{	tileTexts[row][col].add(text);	
+	{	tileTexts[row][col].clear();
+		tileTexts[row][col].add(text);	
 	}
 
 	/**
@@ -257,7 +258,8 @@ public class AiOutput
 	 * 		tableau de textes à afficher sur cette case
 	 */
 	public void setTileTexts(int row, int col, String texts[])
-	{	for(String text: texts)
+	{	tileTexts[row][col].clear();
+		for(String text: texts)
 			tileTexts[row][col].add(text);		
 	}
 

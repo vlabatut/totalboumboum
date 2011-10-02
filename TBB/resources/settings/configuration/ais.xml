@@ -4,7 +4,7 @@
 	<autoAdvance value="true" delay="3000" />
 	<hideAllAis value="false" />
 	<bombUselessAis value="0" />
-	<displayExceptions value="false" />
-	<logExceptions value="true" />
+	<displayExceptions value="true" />
+	<logExceptions value="false" />
 </ais>
 

@@ -276,9 +276,6 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			
 			// mise à jour des valeurs d'utilité
 			updateUtility();
-			
-			// mise à jour des sorties
-			updateOutput();
 		}
 		
 		// action 
@@ -303,6 +300,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 					result = new AiAction(AiActionName.MOVE,direction);
 			}
 		}
+		
+		// mise à jour des sorties
+		updateOutput();
 		
 		// on renvoie l'action sélectionnée
 		return result;

@@ -273,14 +273,7 @@ public abstract class AiTile implements Comparable<AiTile>
 		int result = col + height*row;
     	return result;
     }
-	
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("("+row+";"+col+")");
-		return result.toString();
-	}
-	
+
 	@Override
     public int compareTo(AiTile tile)
     {	int result = col - tile.getCol();
@@ -288,4 +281,14 @@ public abstract class AiTile implements Comparable<AiTile>
     		result = - (row - tile.getRow());
     	return result;
     }
+
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("("+row+";"+col+")");
+		return result.toString();
+	}
 }
