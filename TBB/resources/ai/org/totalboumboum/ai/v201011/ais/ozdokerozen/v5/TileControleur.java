@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Gizem Lara Özdöker
  * @author Sercan Özen
  */
+@SuppressWarnings("deprecation")
 public class TileControleur {
 	AiZone gameZone;
 	ArtificialIntelligence IA;

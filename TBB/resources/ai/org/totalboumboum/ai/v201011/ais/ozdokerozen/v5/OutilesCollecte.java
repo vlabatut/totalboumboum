@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  * @author Gizem Lara Özdöker
  * @author Sercan Özen
  */
+@SuppressWarnings("deprecation")
 public class OutilesCollecte {
 
 	TileControleur tileControleur;

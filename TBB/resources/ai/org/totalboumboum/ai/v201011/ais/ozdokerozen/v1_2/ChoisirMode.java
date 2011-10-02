@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Gizem Lara Özdöker
  * @author Sercan Özen
  */
+@SuppressWarnings("deprecation")
 public class ChoisirMode{
 	AiZone gameZone;
 	
