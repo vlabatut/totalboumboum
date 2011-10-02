@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Cihan Seven
  *
  */
+@SuppressWarnings("deprecation")
 public class Util {
 	static List<AiTile> getBlastList(CaliskanSeven ai,boolean acs) throws StopRequestException{
 		ai.checkInterruption();

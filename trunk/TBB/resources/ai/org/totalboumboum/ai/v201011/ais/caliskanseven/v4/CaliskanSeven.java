@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  * @author Mustafa Çalışkan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class CaliskanSeven extends ArtificialIntelligence
 {
 	AiTile oldtarget =null;

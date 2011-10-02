@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Mustafa Çalışkan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class Matrix {
 	public double[][] calculate(CaliskanSeven ai,int wfire,
 			int wblast,int wbomb,int wbonus,int wmalus,

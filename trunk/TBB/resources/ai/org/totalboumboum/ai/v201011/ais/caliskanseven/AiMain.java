@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201011.ais.caliskanseven.v6.CaliskanSeven;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**
