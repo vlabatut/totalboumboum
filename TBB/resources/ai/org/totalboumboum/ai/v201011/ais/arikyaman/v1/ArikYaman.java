@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Furkan Arık
  * @author Çağdaş Yaman
  */
+@SuppressWarnings("deprecation")
 public class ArikYaman extends ArtificialIntelligence
 { 	private final int BLANK = 0;
 	private final int INDES = 1;

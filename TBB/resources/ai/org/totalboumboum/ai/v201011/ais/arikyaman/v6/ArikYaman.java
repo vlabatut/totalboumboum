@@ -28,6 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Furkan Arık
  * @author Çağdaş Yaman
  */
+@SuppressWarnings("deprecation")
 public class ArikYaman extends ArtificialIntelligence
 {	public String mode;
 	private AiZone GameMap;
