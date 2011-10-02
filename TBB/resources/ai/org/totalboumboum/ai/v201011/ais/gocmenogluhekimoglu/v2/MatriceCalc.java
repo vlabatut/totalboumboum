@@ -16,7 +16,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class MatriceCalc {
 	protected GocmenogluHekimoglu monIa;
 	protected int zoneh,zonew;

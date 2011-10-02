@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  * @author Irfan Hekimoğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class ActionManager {
 	GocmenogluHekimoglu ai;
 	public boolean force_collect_i;

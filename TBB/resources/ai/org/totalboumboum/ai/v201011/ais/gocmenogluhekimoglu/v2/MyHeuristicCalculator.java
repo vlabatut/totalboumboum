@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MyHeuristicCalculator extends HeuristicCalculator
 {
 	public double[][] blastmatrix;

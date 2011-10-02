@@ -14,7 +14,7 @@ import org.totalboumboum.engine.content.manager.explosion.FullExplosionManager;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class MatriceBlast extends MatriceCalc {
 
 	public MatriceBlast(GocmenogluHekimoglu monIa) throws StopRequestException {

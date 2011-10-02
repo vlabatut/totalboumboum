@@ -7,6 +7,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MatriceDist extends MatriceCalc  {
 
 	public MatriceDist(GocmenogluHekimoglu monIa) throws StopRequestException {

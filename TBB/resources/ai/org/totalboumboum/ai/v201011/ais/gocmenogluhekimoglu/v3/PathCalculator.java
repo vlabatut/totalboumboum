@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.MatrixCostCalculator
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class PathCalculator {
 	private GocmenogluHekimoglu monIa;
 	private PixelHeuristicCalculator heurcalc;

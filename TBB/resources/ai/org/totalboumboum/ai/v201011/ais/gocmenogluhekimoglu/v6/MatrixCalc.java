@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Irfan Hekimoğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class MatrixCalc {
 	GocmenogluHekimoglu ai;
 	Paths paths;

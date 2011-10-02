@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MatriceWall extends MatriceCalc {
 
 	public MatriceWall(GocmenogluHekimoglu monIa) throws StopRequestException {

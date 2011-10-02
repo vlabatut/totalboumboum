@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MatriceBlast extends MatriceCalc {
 
 	public MatriceBlast(GocmenogluHekimoglu monIa) throws StopRequestException {

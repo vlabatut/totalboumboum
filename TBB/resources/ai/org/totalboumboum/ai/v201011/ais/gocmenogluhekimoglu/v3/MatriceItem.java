@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class MatriceItem extends MatriceCalc {
 
 	boolean malus;

@@ -23,6 +23,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
  * @author Irfan Hekimoğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class MatriceCalc {
 	protected GocmenogluHekimoglu monIa;
 	protected int zoneh,zonew;

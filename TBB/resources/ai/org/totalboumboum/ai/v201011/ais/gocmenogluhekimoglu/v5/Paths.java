@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Can Göçmenoğlu
  * @author Irfan Hekimoğlu
  */
+@SuppressWarnings("deprecation")
 public class Paths {
 	static void colorTiles(GocmenogluHekimoglu ai,List<AiTile> tiles,Color c) throws StopRequestException{
 		ai.checkInterruption();
