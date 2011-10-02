@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201011.ais.buyuktopacturak.v6.BuyuktopacTurak;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

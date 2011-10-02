@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Onur Büyüktopaç
  * @author Yiğit Turak
  */
+@SuppressWarnings("deprecation")
 public class Bonus {
 	private BuyuktopacTurak bt;
 	private AiZone zone;		

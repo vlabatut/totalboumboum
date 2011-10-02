@@ -33,6 +33,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Onur Büyüktopaç
  * @author Yiğit Turak
  */
+@SuppressWarnings("deprecation")
 public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** la zone de jeu */
@@ -255,7 +256,6 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// A*				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings("deprecation")
 	private void getDirectionAndDistance() throws StopRequestException, NullPointerException{	
 		checkInterruption();
 		AStarCost  cost = new AStarCost(currentMatrix);
