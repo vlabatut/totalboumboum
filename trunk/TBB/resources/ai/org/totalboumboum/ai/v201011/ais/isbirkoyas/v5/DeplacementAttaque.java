@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Göksu İsbir
  * @author Ela Koyaş
  */
+@SuppressWarnings("deprecation")
 public class DeplacementAttaque {
 	IsbirKoyas ai = new IsbirKoyas();
 	private DeplacementCommune deplacementCommune = null;

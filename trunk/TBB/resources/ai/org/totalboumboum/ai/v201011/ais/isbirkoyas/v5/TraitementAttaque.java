@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Göksu İsbir
  * @author Ela Koyaş
  */
+@SuppressWarnings("deprecation")
 public class TraitementAttaque {
 
 	IsbirKoyas ai = new IsbirKoyas();
