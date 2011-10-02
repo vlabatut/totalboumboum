@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Cihan Seven
  *
  */
+@SuppressWarnings("deprecation")
 public class Util {
 	
 	/**

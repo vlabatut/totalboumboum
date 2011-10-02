@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Cihan Seven
  * 
  */
+@SuppressWarnings("deprecation")
 public class PathFinding {
 	/**
 	 * 

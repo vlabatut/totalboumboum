@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Çalışkan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class PathFinding {
 	public boolean canReachHeros(CaliskanSeven ai) throws StopRequestException, LimitReachedException{
 		ai.checkInterruption();

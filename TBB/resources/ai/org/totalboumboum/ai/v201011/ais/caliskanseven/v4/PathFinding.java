@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+@SuppressWarnings("deprecation")
 public class PathFinding {
 	public boolean canReachHeros(CaliskanSeven ai) throws StopRequestException, LimitReachedException{
 		//Checking if we can reach at least one of the heros
