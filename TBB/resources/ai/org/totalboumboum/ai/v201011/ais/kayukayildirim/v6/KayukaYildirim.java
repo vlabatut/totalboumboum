@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Pol Kayuka
  * @author Ozan Yıldırım
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class KayukaYildirim extends ArtificialIntelligence
 {
 	private final int VIDE = 0;
