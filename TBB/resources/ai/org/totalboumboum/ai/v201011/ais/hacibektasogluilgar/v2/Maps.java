@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Engin Hacıbektaşoğlu
  * @author Elif Nurdan İlgar
  */
+@SuppressWarnings("deprecation")
 public class Maps 
 {
 	private HacibektasogluIlgar notreIA;

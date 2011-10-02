@@ -22,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Engin Hacıbektaşoğlu
  * @author Elif Nurdan İlgar
  */
+@SuppressWarnings("deprecation")
 public class Path {
 	HacibektasogluIlgar notreIA;
 	AiZone zone;
