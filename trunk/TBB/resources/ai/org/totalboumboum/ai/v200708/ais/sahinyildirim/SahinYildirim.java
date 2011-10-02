@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Mehmet Yıldırım
  *
  */
+@SuppressWarnings("deprecation")
 public class SahinYildirim extends ArtificialIntelligence {
 
 	Runtime r = Runtime.getRuntime();

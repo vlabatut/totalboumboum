@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.tree.SearchTree;
  * @author Mine Mutlu
  *
  */
+@SuppressWarnings("deprecation")
 public class CiritMutlu extends ArtificialIntelligence {
 	private SearchTree tree;	// arbre de recherche a construire
 	private State tempState;	// etat temporaire qui va etre utilise pour l'action suvante

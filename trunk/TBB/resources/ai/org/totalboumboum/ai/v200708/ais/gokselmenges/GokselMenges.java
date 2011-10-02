@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Erdem Mengeş
  *
  */
+@SuppressWarnings("deprecation")
 public class GokselMenges  extends ArtificialIntelligence
 {
 

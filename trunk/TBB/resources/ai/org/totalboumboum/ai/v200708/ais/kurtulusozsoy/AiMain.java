@@ -28,7 +28,8 @@ import org.totalboumboum.ai.v200708.adapter.AiManager;
  * @author Vincent Labatut
  *
  */
-public class AiMain extends AiManager
+@SuppressWarnings("deprecation")
+ class AiMain extends AiManager
 {
 	public AiMain()
 	{	super(new KurtulusOzsoy());		

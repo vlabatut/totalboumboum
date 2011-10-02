@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Yalcin Özsoy
  *
  */
+@SuppressWarnings("deprecation")
 public class KurtulusOzsoy extends ArtificialIntelligence{
 	
 
