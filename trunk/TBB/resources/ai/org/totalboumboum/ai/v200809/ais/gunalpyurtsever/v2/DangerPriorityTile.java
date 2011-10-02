@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
  * @author Sinan Yürtsever
  *
  */
+@SuppressWarnings("deprecation")
 public class DangerPriorityTile{
 
 	AiTile tile;

@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v200809.ais.adatepe.v1.Adatepe;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 

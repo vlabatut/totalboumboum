@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author lev Korkmaz
  *
  */
+@SuppressWarnings("deprecation")
 public class AiTileHeuristicComparator implements Comparator<AiTile> {
 
 	AiTile t;

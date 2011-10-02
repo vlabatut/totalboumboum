@@ -26,6 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Gökhan Geçkalan
  *
  */
+@SuppressWarnings("deprecation")
 public class DayioglugilGeckalan extends ArtificialIntelligence {
 	//private AiZone zone1;
 	private AiTile currentTile=null;

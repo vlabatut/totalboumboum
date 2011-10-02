@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Sinan Yürtsever
  *
  */
+@SuppressWarnings("deprecation")
 public class DangerPriorityCostTile {
 	
 	CostTile costTile;

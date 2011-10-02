@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
  * @author lev Korkmaz
  *
  */
+@SuppressWarnings("deprecation")
 public class Noeud {
 	private AiTile tile;
 	private boolean visited;

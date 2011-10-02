@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v200809.ais.caliskancapdoganer.v1.CaliskanCapDoganer
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 

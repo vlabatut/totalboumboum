@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v200809.ais.coremenkucukkarakurt.v2.CoremenKucukkara
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 

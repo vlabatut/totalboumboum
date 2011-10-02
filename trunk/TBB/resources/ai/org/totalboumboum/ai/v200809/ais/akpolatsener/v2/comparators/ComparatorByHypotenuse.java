@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v200809.ais.akpolatsener.v2.Target;
  * @author Emre Şener
  *
  */
+@SuppressWarnings("deprecation")
 public class ComparatorByHypotenuse implements Comparator<AiTile> {
 	/** la classe principale de notre IA */
 	AkpolatSener as;

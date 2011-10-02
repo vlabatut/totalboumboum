@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Zeynep Şagar
  *
  */
+@SuppressWarnings("deprecation")
 public class AStar {
 
 	AiTile firstTile;

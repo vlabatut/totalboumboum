@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2.GunalpYurtsever;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 

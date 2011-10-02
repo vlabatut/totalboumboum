@@ -27,6 +27,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ertuğrul Basaranoğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class AltayBasaranoglu extends ArtificialIntelligence {
 	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile;

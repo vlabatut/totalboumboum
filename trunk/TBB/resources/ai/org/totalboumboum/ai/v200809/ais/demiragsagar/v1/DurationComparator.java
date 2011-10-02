@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200809.adapter.AiBomb;
  * @author Zeynep Şagar
  *
  */
+@SuppressWarnings("deprecation")
 public class DurationComparator implements Comparator<AiBomb> {
 	public int compare(AiBomb bombe1, AiBomb bombe2) {
 		int resultat;

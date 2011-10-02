@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Sinan Yürtsever
  *
  */
+@SuppressWarnings("deprecation")
 public class AstarComparator implements Comparator<CostTile> {
 	
 	public int compare(CostTile tile1, CostTile tile2){

@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Zeynep Şagar
  *
  */
+@SuppressWarnings("deprecation")
 public class Functions {
 	// regarde si il existe un mur de type SOFT ou HARD
 	public static boolean hasWall(AiTile tile) {

@@ -26,6 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hikmet Mazmanoğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class KokciyanMazmanoglu extends ArtificialIntelligence
 {
 	/** la case occupée actuellement par le personnage*/

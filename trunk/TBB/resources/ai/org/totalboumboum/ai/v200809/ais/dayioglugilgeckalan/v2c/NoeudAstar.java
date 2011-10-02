@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Gökhan Geçkalan
  *
  */
+@SuppressWarnings("deprecation")
 public class NoeudAstar implements Comparator<Noeud> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */

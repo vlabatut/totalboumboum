@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Zeynep Şagar
  *
  */
+@SuppressWarnings("deprecation")
 public class Escape {
 	private List<AiTile> bombes;
 	

@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Pınar Uluer
  *
  */
+@SuppressWarnings("deprecation")
 public class SearchTree {
 
 	// ensemble des noeuds dans l'arbre

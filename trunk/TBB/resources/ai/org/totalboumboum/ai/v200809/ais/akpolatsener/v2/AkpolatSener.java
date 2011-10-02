@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Emre Şener
  *
  */
+@SuppressWarnings("deprecation")
 public class AkpolatSener extends ArtificialIntelligence {
 
 	/** les cases actuel, precedent et prochain */

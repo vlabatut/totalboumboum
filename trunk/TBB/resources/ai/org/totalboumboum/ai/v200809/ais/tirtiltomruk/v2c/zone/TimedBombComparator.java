@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 * @author Mert Tomruk
 *
 */
+@SuppressWarnings("deprecation")
 public class TimedBombComparator implements Comparator<TimedBomb>{
 
 	@Override

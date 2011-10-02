@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hayko Danacioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class AkkayaDanacioglu extends ArtificialIntelligence {
 	private AiTile currentTile = null;
 	private AiTile nextTile = null;

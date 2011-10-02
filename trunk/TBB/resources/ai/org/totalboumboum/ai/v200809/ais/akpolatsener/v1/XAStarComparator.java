@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Emre Şener
  *
  */
+@SuppressWarnings("deprecation")
 public class XAStarComparator implements Comparator<XTile> 
 {
 	public int compare(XTile xt1, XTile xt2) 

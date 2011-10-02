@@ -24,6 +24,7 @@ import org.totalboumboum.ai.adapter200809.ArtificialIntelligence;
 import org.totalboumboum.ai.adapter200809.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
+@SuppressWarnings("deprecation")
 public class DayioglugilGeckalan extends ArtificialIntelligence 
 {
 	

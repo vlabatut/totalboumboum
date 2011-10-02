@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 * @author Hikmet Mazmanoğlu
 *
 */
+@SuppressWarnings("deprecation")
 public class NodeComparator implements Comparator<Node>
 {
 	private Node start;

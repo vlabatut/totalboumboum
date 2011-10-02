@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Zeynep Şagar
  *
  */
+@SuppressWarnings("deprecation")
 public class Node {
 
 	AiTile tile;

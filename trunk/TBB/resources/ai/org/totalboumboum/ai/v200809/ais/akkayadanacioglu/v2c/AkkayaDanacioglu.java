@@ -24,6 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hayko Danacioğlu
  *
  */
+@SuppressWarnings("deprecation")
 public class AkkayaDanacioglu extends ArtificialIntelligence
 {
 	

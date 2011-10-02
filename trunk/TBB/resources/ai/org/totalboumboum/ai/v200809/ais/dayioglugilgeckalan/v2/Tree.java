@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2.ZoneEnum;
  * @author Gökhan Geçkalan
  *
  */
+@SuppressWarnings("deprecation")
 public class Tree {
 
 	// ensemble des noeuds composant l'arbre

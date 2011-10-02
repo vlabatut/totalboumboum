@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
  * @author Pınar Uluer
  *
  */
+@SuppressWarnings("deprecation")
 public class SearchLink
 {	// noeud parent
 	private SearchNode origin;

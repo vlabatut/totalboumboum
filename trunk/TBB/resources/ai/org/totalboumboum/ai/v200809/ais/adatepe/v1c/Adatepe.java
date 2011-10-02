@@ -22,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Can Adatepe
  *
  */
+@SuppressWarnings("deprecation")
 public class Adatepe extends ArtificialIntelligence 
 {
 	

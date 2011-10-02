@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  * @author Gökhan Geçkalan
  *
  */
+@SuppressWarnings("deprecation")
 public class Noeud {
 
 	/** la coordonnee x du noeud */

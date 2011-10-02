@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
  * @author Zeynep Şagar
  *
  */
+@SuppressWarnings("deprecation")
 public class Node {
 
 	AiTile tile;

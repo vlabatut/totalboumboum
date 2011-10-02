@@ -14,6 +14,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 * @author Pınar Uluer
 *
 */
+@SuppressWarnings("deprecation")
 public class PathFinder {
 	
 	private LinkedList<SearchNode> path;
