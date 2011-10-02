@@ -25,7 +25,6 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA
  * >> remplacez aussi le nom de l'auteur.
@@ -38,6 +37,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Gizem Lara Özdöker
  * @author Sercan Özen
  */
+@SuppressWarnings("deprecation")
 public class OzdokerOzen extends ArtificialIntelligence
 {	
 	 //pour les sortie dans API

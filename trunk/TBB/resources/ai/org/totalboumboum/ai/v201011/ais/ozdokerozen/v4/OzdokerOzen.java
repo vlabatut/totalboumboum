@@ -34,6 +34,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Gizem Lara Özdöker
  * @author Sercan Özen
  */
+@SuppressWarnings("deprecation")
 public class OzdokerOzen extends ArtificialIntelligence
 {	
 	//pour l'aire
