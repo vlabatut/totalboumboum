@@ -23,7 +23,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
  * @author Pol Kayuka
  * @author Ozan Yıldırım
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class KayukaYildirim extends ArtificialIntelligence
 {	
 	private final int BOMBE = -100;
