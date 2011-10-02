@@ -22,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Işıl Varol
  *
  */
+@SuppressWarnings("deprecation")
 public class GameZoneAnalyzer
 {	/** classe principale de l'IA, permet d'accÔøΩder ÔøΩ checkInterruption() */
 	private static KesimalVarol monIA;

@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  * @author Ali Baran Kesimal
  * @author Işıl Varol
  */
+@SuppressWarnings("deprecation")
 enum Mode {
 	NONE,COLLECTE,ATTAQUE
 }
@@ -30,6 +31,7 @@ enum Mode {
  * @author Işıl Varol
  *
  */
+@SuppressWarnings("deprecation")
 public class KesimalVarol extends ArtificialIntelligence
 {	
 	boolean verbose=false;

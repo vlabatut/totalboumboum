@@ -20,6 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Işıl Varol
  *
  */
+@SuppressWarnings("deprecation")
 public class Matrix implements Cloneable
 {
 	/** Pour checkInterruption. */

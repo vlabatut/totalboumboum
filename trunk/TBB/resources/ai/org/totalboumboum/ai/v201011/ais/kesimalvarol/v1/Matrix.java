@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Işıl Varol
  *
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class Matrix
 {
 	//Pour checkInterruption.
