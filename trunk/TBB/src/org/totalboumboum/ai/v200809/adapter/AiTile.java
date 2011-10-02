@@ -42,9 +42,10 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
-
 public class AiTile
 {	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;

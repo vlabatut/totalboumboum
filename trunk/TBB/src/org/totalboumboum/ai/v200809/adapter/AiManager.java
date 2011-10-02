@@ -39,9 +39,10 @@ import org.totalboumboum.game.round.RoundVariables;
  * <br>	- elle traduit la réponse de l'IA (action) en un évènement compatible avec le jeu.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
-
 public abstract class AiManager extends AbstractAiManager<AiAction>
 {	/**
 	 * Construit un gestionnaire pour l'IA passée en paramètre.

@@ -35,8 +35,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * s'il n'existe pas de solution du tout.  
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
-
 public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 

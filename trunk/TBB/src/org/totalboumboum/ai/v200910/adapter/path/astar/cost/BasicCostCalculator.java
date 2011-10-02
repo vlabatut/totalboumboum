@@ -31,7 +31,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * les cases considérées.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class BasicCostCalculator extends CostCalculator
 {

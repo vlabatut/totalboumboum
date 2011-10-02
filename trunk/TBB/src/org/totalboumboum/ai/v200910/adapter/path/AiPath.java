@@ -32,7 +32,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 /**
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiPath
 {	

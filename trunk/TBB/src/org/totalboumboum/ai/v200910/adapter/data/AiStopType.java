@@ -26,7 +26,9 @@ package org.totalboumboum.ai.v200910.adapter.data;
  * types de blocages possibles pour un sprite
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiStopType
 {

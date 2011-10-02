@@ -30,7 +30,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public interface AiBomb extends AiSprite
 {	

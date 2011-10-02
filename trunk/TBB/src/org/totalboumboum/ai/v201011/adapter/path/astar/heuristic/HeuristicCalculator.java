@@ -31,7 +31,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * A* lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class HeuristicCalculator
 {

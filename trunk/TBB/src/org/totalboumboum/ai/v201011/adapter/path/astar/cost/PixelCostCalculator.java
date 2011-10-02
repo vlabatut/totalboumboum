@@ -37,7 +37,9 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  * jour avant chaque nouvel appel à A*. 
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class PixelCostCalculator extends CostCalculator
 {	

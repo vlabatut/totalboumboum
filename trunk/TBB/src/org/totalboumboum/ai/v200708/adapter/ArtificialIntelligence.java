@@ -28,7 +28,9 @@ import java.util.concurrent.Callable;
 /**
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class ArtificialIntelligence implements Callable<Integer>
 {	// constantes de sens de déplacement

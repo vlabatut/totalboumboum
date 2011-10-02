@@ -47,7 +47,9 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiManager extends AbstractAiManager<Integer>
 {	private boolean debug = false;

@@ -27,7 +27,9 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public interface AiFire extends AiSprite
 {

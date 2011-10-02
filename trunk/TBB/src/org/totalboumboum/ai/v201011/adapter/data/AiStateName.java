@@ -34,7 +34,9 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
  * une bombe (PUSHING), etc.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiStateName
 {

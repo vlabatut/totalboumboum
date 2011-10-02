@@ -34,11 +34,14 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
  * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
  * feu, sol, personnage ou item. 
- * 
- * @author Vincent Labatut
  *
  * @param <T>
  * 		type de sprite représenté
+ * 
+ * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 abstract class AiDataSprite<T extends Sprite> implements AiSprite
 {	

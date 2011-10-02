@@ -34,7 +34,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * la plus proche des cases d'arrivée.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {
