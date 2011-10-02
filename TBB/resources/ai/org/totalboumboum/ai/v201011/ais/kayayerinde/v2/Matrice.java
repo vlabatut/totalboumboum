@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
+@SuppressWarnings("deprecation")
 public class Matrice {
 	private double nHero=0;
 	private double nFree=1;

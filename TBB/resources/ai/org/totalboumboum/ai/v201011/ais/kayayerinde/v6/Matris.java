@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
+@SuppressWarnings("deprecation")
 public class Matris {
 	KayaYerinde onder;
 	

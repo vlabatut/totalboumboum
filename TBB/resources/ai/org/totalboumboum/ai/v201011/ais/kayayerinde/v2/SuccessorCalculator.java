@@ -33,6 +33,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public abstract class SuccessorCalculator
 {
 	/////////////////////////////////////////////////////////////////

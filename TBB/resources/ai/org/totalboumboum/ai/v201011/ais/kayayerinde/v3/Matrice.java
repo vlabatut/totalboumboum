@@ -10,7 +10,7 @@ import org.totalboumboum.ai.v201011.adapter.data.*;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public class Matrice {
 	private double nHero=0;
 	private double nFree=0;

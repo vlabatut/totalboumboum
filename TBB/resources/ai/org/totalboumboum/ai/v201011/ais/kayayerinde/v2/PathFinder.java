@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
+@SuppressWarnings("deprecation")
 public class PathFinder {
 	private AiZone zone;
 	private AiHero ownHero;

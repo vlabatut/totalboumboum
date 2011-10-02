@@ -42,6 +42,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Önder Kaya
  * @author Nezaket Yerinde
  */
+@SuppressWarnings("deprecation")
 public class YolBulucu
 {
 	private boolean verbose = false;
