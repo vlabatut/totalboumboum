@@ -24,6 +24,9 @@ package org.totalboumboum.ai.v201112.adapter.data.internal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
@@ -176,12 +179,12 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	{	// par défaut, on bloque
 		boolean result = false;
 		// si le sprite considéré est un personnage
-		if(sprite instanceof AiDataHero)
+		if(sprite instanceof AiHero)
 		{	result = true;
 		}
 		// si le sprite considéré est un feu
-		else if(sprite instanceof AiDataFire)
-		{	AiDataFire fire = (AiDataFire) sprite;
+		else if(sprite instanceof AiFire)
+		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
 				result = true;
 			else if(stopFires==AiStopType.WEAK_STOP)
@@ -190,8 +193,8 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 				result = false;
 		}
 		// si le sprite considéré est une bombe
-		else if(sprite instanceof AiDataBomb)
-		{	AiDataBomb bomb = (AiDataBomb) sprite;
+		else if(sprite instanceof AiBomb)
+		{	AiBomb bomb = (AiBomb) sprite;
 			if(stopBombs==AiStopType.NO_STOP)
 				result = true;
 			else if(stopBombs==AiStopType.WEAK_STOP)

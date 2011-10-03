@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.v201011.adapter.path.astar.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;

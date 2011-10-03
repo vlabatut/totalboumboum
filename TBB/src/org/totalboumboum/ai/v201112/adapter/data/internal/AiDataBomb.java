@@ -465,8 +465,8 @@ if(slidingSpeed==0)
 	{	// par défaut, on bloque
 		boolean result = false;
 		// si le sprite considéré est un personnage
-		if(sprite instanceof AiDataHero)
-		{	AiDataHero hero = (AiDataHero) sprite;
+		if(sprite instanceof AiHero)
+		{	AiHero hero = (AiHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
 				result = true;
 			else if(stopHeroes==AiStopType.NO_STOP)
@@ -477,8 +477,8 @@ if(slidingSpeed==0)
 				result = false;
 		}
 		// si le sprite considéré est un feu
-		else if(sprite instanceof AiDataFire)
-		{	AiDataFire fire = (AiDataFire) sprite;
+		else if(sprite instanceof AiFire)
+		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
 				result = true;
 			else if(stopFires==AiStopType.WEAK_STOP)

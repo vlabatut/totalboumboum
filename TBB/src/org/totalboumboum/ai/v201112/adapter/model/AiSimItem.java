@@ -21,6 +21,9 @@ package org.totalboumboum.ai.v201112.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
@@ -125,13 +128,13 @@ final class AiSimItem extends AiSimSprite implements AiItem
 		boolean result = false;
 		
 		// si le sprite considéré est un personnage
-		if(sprite instanceof AiSimHero)
+		if(sprite instanceof AiHero)
 		{	result = true;
 		}
 		
 		// si le sprite considéré est un feu
-		else if(sprite instanceof AiSimFire)
-		{	AiSimFire fire = (AiSimFire) sprite;
+		else if(sprite instanceof AiFire)
+		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
 				result = true;
 			else if(stopFires==AiStopType.WEAK_STOP)
@@ -141,8 +144,8 @@ final class AiSimItem extends AiSimSprite implements AiItem
 		}
 		
 		// si le sprite considéré est une bombe
-		else if(sprite instanceof AiSimBomb)
-		{	AiSimBomb bomb = (AiSimBomb) sprite;
+		else if(sprite instanceof AiBomb)
+		{	AiBomb bomb = (AiBomb) sprite;
 			if(stopBombs==AiStopType.NO_STOP)
 				result = true;
 			else if(stopBombs==AiStopType.WEAK_STOP)

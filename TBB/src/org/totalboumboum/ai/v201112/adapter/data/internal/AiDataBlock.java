@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 import org.totalboumboum.engine.content.feature.Contact;
@@ -178,8 +180,8 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	{	// par défaut, on bloque
 		boolean result = false;
 		// si le sprite considéré est un personnage
-		if(sprite instanceof AiDataHero)
-		{	AiDataHero hero = (AiDataHero) sprite;
+		if(sprite instanceof AiHero)
+		{	AiHero hero = (AiHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
 				result = true;
 			else if(stopHeroes==AiStopType.NO_STOP)
@@ -190,8 +192,8 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 				result = false;
 		}
 		// si le sprite considéré est un feu
-		else if(sprite instanceof AiDataFire)
-		{	AiDataFire fire = (AiDataFire) sprite;
+		else if(sprite instanceof AiFire)
+		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
 				result = true;
 			else if(stopFires==AiStopType.WEAK_STOP)

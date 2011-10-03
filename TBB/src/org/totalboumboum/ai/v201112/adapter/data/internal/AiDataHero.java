@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.data.internal;
  */
 
 import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -232,9 +233,9 @@ if(walkingSpeed==0)
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
 	{	boolean result = false;
-		if(sprite instanceof AiDataFire)
+		if(sprite instanceof AiFire)
 			result = true;
-		else if(sprite instanceof AiDataHero)
+		else if(sprite instanceof AiHero)
 			result = true;
 		else
 			result = sprite.isCrossableBy(this);		
