@@ -21,7 +21,9 @@ package org.totalboumboum.ai.v201112.adapter.data.internal;
  * 
  */
 
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiFire;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
@@ -110,14 +112,14 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 		boolean result = false;
 		
 		// si le sprite considéré est un personnage : peut traverser le feu seulement s'il a une protection
-		if(sprite instanceof AiDataHero)
-		{	AiDataHero hero = (AiDataHero) sprite;
+		if(sprite instanceof AiHero)
+		{	AiHero hero = (AiHero) sprite;
 			result = hero.hasThroughFires();
 		}
 		
 		// si c'est une bombe : peut traverser le feu seulement si elle n'explose pas à son contact
-		else if(sprite instanceof AiDataHero)
-		{	AiDataBomb bomb = (AiDataBomb) sprite;
+		else if(sprite instanceof AiBomb)
+		{	AiBomb bomb = (AiBomb) sprite;
 			result = !bomb.hasExplosionTrigger();
 		}
 		

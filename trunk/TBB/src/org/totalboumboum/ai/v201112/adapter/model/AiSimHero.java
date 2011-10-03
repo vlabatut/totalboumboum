@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.model;
  */
 
 import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -246,11 +247,11 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	boolean result = false;
 		
 		// feu : jamais arrété par un personnage
-		if(sprite instanceof AiSimFire)
+		if(sprite instanceof AiFire)
 			result = true;
 		
 		// personnages : pareil
-		else if(sprite instanceof AiSimHero)
+		else if(sprite instanceof AiHero)
 			result = true;
 		
 		// pour tout le reste, on renverse la relation 
