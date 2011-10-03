@@ -109,7 +109,11 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 		
 		AiLocation location = node.getLocation();
 		AiTile tile = location.getTile();
-		AiZone zone = node.getAi().getZone();
+		AiZone zone = location.getZone();
+AiHero h = zone.getHeroByColor(hero.getColor());
+AiTile t = h.getTile();
+if(!t.equals(tile))
+	System.out.println();
 		List<AstarNode> result = new ArrayList<AstarNode>();
 		
 		// on considère chaque déplacement possible
@@ -135,13 +139,16 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 					AiZone futureZone = model.getCurrentZone();
 					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
 					AiTile futureTile = futureHero.getTile();
-					AiLocation futureLocation = new AiLocation(futureHero.getPosX(),futureHero.getPosX(),futureZone);
+					AiLocation futureLocation = new AiLocation(futureHero.getPosX(),futureHero.getPosY(),futureZone);
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AstarNode child = new AstarNode(futureLocation,node);
 						result.add(child);
+if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
+	System.out.println();
+						
 					}
 					// si la case n'est pas la bonne : 
 					// la case ciblée n'était pas traversable et l'action est à ignorer
@@ -180,6 +187,8 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AstarNode child = new AstarNode(waitDuration,node);
 						result.add(child);
+if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
+	System.out.println();
 					}
 					// si le joueur n'est plus vivant dans la zone obtenue : 
 					// l'attente n'était pas une action sûre, et n'est donc pas envisagée

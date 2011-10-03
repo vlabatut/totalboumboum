@@ -113,6 +113,8 @@ public final class AstarNode implements Comparable<AstarNode>
 		// coût
 		costCalculator = parent.getCostCalculator();
 		AiLocation previous = parent.getLocation();
+if(costCalculator==null)
+	System.out.println();
 		double localCost = costCalculator.processCost(previous,location);
 		cost = parent.getCost() + localCost;
 		
@@ -386,9 +388,6 @@ public final class AstarNode implements Comparable<AstarNode>
 		List<AstarNode> result = successorCalculator.processSuccessors(this);
 		return result;
 	}
-
-//TODO est-il nécessaire d'avoir une représentation de la pause faite dans ce noeud, 
-//  ou peut on la calculer en fonction du cout du parent (en prenant la différence) ?
 	
 	/////////////////////////////////////////////////////////////////
 	// HERO				/////////////////////////////////////////////

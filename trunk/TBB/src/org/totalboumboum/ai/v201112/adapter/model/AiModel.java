@@ -195,11 +195,10 @@ public class AiModel
 	public boolean simulate(AiHero hero)
 	{	// init
 		boolean result = false;
-		AiSimHero simHero;
 		long totalDuration = 0;
 		duration = 0;
 		AiSimZone previousZone = current;
-		simHero = current.getSpriteById(hero);
+		AiSimHero simHero = current.getSpriteById(hero);
 
 		if(simHero.getState().getName()!=AiStateName.ENDED)
 		{	boolean found;
