@@ -18,7 +18,7 @@
 		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="sbm1Official" folder="battle_01" allowedPlayers="2 3 4" />
+		<level pack="tournament201011" folder="classic" allowedPlayers="2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 

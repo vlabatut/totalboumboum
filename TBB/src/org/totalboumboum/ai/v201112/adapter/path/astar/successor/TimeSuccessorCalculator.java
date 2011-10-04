@@ -185,7 +185,7 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 					boolean safe = !name.equals(AiStateName.BURNING) && !name.equals(AiStateName.ENDED);
 					if(safe)
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						AstarNode child = new AstarNode(waitDuration,node);
+						AstarNode child = new AstarNode(waitDuration,futureZone,node);
 						result.add(child);
 if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
 	System.out.println();
