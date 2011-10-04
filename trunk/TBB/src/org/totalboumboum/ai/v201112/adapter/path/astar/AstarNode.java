@@ -27,6 +27,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
@@ -133,18 +134,23 @@ if(costCalculator==null)
 	 * 
 	 * @param wait	
 	 * 		Pause associée à ce noeud de recherche.
+	 * @param zone	
+	 * 		Zone correspondante au noeud de recherche.
 	 * @param parent	
 	 * 		Noeud de recherche parent de ce noeud.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public AstarNode(long wait, AstarNode parent) throws StopRequestException
+	public AstarNode(long wait, AiZone zone, AstarNode parent) throws StopRequestException
 	{	// agent
 		this.ai = parent.getAi();
 		
-		// case
-		this.location = parent.getLocation();
+		// emplacement
+		AiLocation location = parent.getLocation();
+		double posX = location.getPosX();
+		double posY = location.getPosY();
+		this.location = new AiLocation(posX,posY,zone);
 		
 		// hero
 		this.hero = parent.getHero();

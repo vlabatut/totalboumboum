@@ -1285,21 +1285,22 @@ if(target==null || source==null)
 	 * sélectionner UTF8 ou unicode.<br/>
 	 * Voici un exemple de zone obtenu:<
 	 * <pre>
-	 * ┌─┬─┬─┬─┬─┬─┬─┐
-	 * │█│█│█│█│█│█│█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│☺│ │□│ │ │█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │█│ │█│ │█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │ │ │ │▒│█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │█│ │█│ │█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │ │ │ │●│█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│█│█│█│█│█│█│
-	 * └─┴─┴─┴─┴─┴─┴─┘
+	 *   0 1 2 3 4 5 6
+	 *  ┌─┬─┬─┬─┬─┬─┬─┐
+	 * 0│█│█│█│█│█│█│█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 1│█│☺│ │□│ │ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 2│█│ │█│ │█│ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 3│█│ │ │ │ │▒│█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 4│█│ │█│ │█│ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 5│█│ │ │ │ │●│█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 6│█│█│█│█│█│█│█│
+	 *  └─┴─┴─┴─┴─┴─┴─┘
 	 * </pre>
 	 * 
 	 * @return
@@ -1307,15 +1308,35 @@ if(target==null || source==null)
 	 */
 	@Override
 	public String toString()
-	{	// top row
-		String result = "┌";
+	{	String result = "  ";
+	
+		// col numbers
+		if(width>10)
+		{	for(int i=0;i<10;i++)
+				result = result + "  ";
+			for(int i=10;i<width;i++)
+				result = result + " " + (i/10);
+			result = result + "\n";
+		}
+		result = result + "  ";
+		for(int i=0;i<width;i++)
+			result = result + " " + (i%10);
+		result = result + "\n";
+		
+		// top row
+		result = result + "  ┌";
 		for(int col=0;col<width-1;col++)
 			result = result + "─┬";
 		result = result + "─┐\n";
 		
 		// content
 		for(int row=0;row<height;row++)
-		{	for(int col=0;col<width;col++)
+		{	// row number
+			if(row<10)
+				result = result + " ";
+			result = result + row;
+			// actual content
+			for(int col=0;col<width;col++)
 			{	result = result + "│";
 				AiTile tile = getTile(row,col);
 				List<AiBlock> blocks = tile.getBlocks();
@@ -1343,7 +1364,7 @@ if(target==null || source==null)
 			}
 			result = result + "│\n";
 			if(row<width-1)
-			{	result = result + "├";
+			{	result = result + "  ├";
 				for(int col=0;col<width-1;col++)
 					result = result + "─┼";
 				result = result + "─┤\n";
@@ -1351,7 +1372,7 @@ if(target==null || source==null)
 		}
 		
 		// bottom row
-		result = result + "└";
+		result = result + "  └";
 		for(int col=0;col<width-1;col++)
 			result = result + "─┴";
 		result = result + "─┘\n";
