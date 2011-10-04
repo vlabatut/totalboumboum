@@ -203,7 +203,7 @@ public abstract class AiTile implements Comparable<AiTile>
 	
 	/**
 	 * Comme {@link #isCrossableBy(AiSprite,boolean,boolean,boolean,boolean,boolean,boolean) isCrossableBy}, 
-	 * mais considère toujours le feu.
+	 * mais considère tous les obstacles.
 	 * 
 	 *  @param sprite
 	 *  	Le sprite qui veut traverser cette case.
