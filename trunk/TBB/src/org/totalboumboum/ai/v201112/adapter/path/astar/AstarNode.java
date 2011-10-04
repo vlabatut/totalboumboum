@@ -156,6 +156,7 @@ if(costCalculator==null)
 		depth = parent.getDepth() + 1;
 		
 		// coût
+		costCalculator = parent.getCostCalculator();
 		cost = parent.getCost() + wait;
 		
 		// heuristique

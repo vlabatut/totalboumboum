@@ -92,12 +92,12 @@ public interface AiBomb extends AiSprite
 	public boolean hasExplosionTrigger();
 	
 	/**
-	 * renvoie le délai normal avant l'explosion de la bombe.
+	 * Renvoie le délai normal avant l'explosion de la bombe.
 	 * Ce délai ne tient pas compte des pannes éventuelles.
 	 * Ce délai n'est pas défini pour tous les types de bombes
 	 * 
 	 * @return	
-	 * 		le délai normal avant explosion exprimé en millisecondes
+	 * 		Le délai normal avant explosion exprimé en millisecondes.
 	 */
 	public long getNormalDuration();
 
@@ -209,7 +209,7 @@ public interface AiBomb extends AiSprite
 	 * renvoie le temps écoulé depuis que le compte à rebours de la 
 	 * bombe a commencé, exprimé en millisecondes. Bien sûr ceci
 	 * n'est valide que pour les bombes à retardement (qui ont un 
-	 * compte à rebours).
+	 * compte à rebours).<br/>
 	 * <b>Attention :</b> certaines actions spéciales comme le fait de lancer
 	 * la bombe sont susceptibles de réinitialiser le compte à rebours.
 	 * 
