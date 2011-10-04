@@ -65,7 +65,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  */
 public final class Astar
 {	/** permet d'activer/désactiver la sortie texte lors du débogage */
-	private static final boolean VERBOSE = true;
+	public static boolean verbose = false;
 
 	/**
 	 * construit un objet permettant d'appliquer l'algorithme A*.
@@ -203,7 +203,7 @@ public final class Astar
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
 	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
-	{	if(VERBOSE)
+	{	if(verbose)
 		{	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.print("A*: from "+startLocation+" to [");
 			for(AiTile tile: endTiles)
@@ -231,7 +231,7 @@ public final class Astar
 			{	ai.checkInterruption();
 				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
-				if(VERBOSE)
+				if(verbose)
 				{	System.out.println("Visited : "+currentNode.toString());
 					System.out.println("Queue length: "+queue.size());
 					System.out.println("Zone:\n"+currentNode.getLocation().getTile().getZone());
@@ -269,7 +269,7 @@ public final class Astar
 					maxc = currentNode.getCost();
 				if(queue.size()>maxn)
 					maxn = queue.size();
-				if(VERBOSE)
+				if(verbose)
 					System.out.println("==============================================");
 			}
 			while(!queue.isEmpty() && !found && !limitReached);
@@ -279,7 +279,7 @@ public final class Astar
 				result = processPath(finalNode);
 		}
 		
-		if(VERBOSE)
+		if(verbose)
 		{	System.out.print("Path: [");
 			if(limitReached)
 				System.out.println(" limit reached");

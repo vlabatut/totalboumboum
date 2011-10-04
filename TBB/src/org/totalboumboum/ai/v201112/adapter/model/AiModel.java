@@ -401,10 +401,10 @@ public class AiModel
 		
 		for(AiSimSprite sprite: sprites)
 		{	
-if(sprite instanceof AiSimHero)
-	System.out.print("");
-if(sprite instanceof AiSimBomb)
-	System.out.print("");
+//if(sprite instanceof AiSimHero)
+//	System.out.print("");
+//if(sprite instanceof AiSimBomb)
+//	System.out.print("");
 			// process the sprite next state
 			AiSimState state = sprite.getState();
 			// process the time remaining before the next change (be it of state, tile, etc.)
