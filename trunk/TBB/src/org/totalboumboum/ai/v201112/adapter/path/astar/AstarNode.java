@@ -335,8 +335,8 @@ if(costCalculator==null)
 	public boolean hasBeenExploredSincePause(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
-		boolean result = this.location.equals(tile);
-		if(parent!=null && !result && !parent.getLocation().equals(location))
+		boolean result = location.getTile().equals(tile);
+		if(!result && parent!=null && !parent.getLocation().equals(location))
 			result = parent.hasBeenExploredSincePause(tile);
 		return result;
 	}
