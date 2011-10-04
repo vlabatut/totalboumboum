@@ -114,8 +114,8 @@ public final class AstarNode implements Comparable<AstarNode>
 		// coût
 		costCalculator = parent.getCostCalculator();
 		AiLocation previous = parent.getLocation();
-if(costCalculator==null)
-	System.out.println();
+//if(costCalculator==null)
+//	System.out.println();
 		double localCost = costCalculator.processCost(previous,location);
 		cost = parent.getCost() + localCost;
 		
@@ -393,10 +393,11 @@ if(costCalculator==null)
 	{	ai.checkInterruption();
 	
 		List<AstarNode> result = successorCalculator.processSuccessors(this);
-children = result;		
+//children = result;		
 		return result;
 	}
-private List<AstarNode> children;	
+//private List<AstarNode> children;	
+	
 	/////////////////////////////////////////////////////////////////
 	// HERO				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

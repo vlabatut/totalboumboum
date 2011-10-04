@@ -334,8 +334,8 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		double totalDuration = slidingRight.getTotalDuration();
 		double basicSpeed = totalShift/totalDuration * 1000;
 		slidingSpeed = speedCoeff*basicSpeed;
-if(slidingSpeed==0)
-	System.out.print("");
+//if(slidingSpeed==0)
+//	System.out.print("");
 		//System.out.println(getSprite().getColor()+": walkingSpeed="+walkingSpeed);
 	}
 

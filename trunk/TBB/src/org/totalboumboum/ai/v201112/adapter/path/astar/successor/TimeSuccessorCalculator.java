@@ -146,8 +146,8 @@ if(!t.equals(tile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AstarNode child = new AstarNode(futureLocation,node);
 						result.add(child);
-if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
-	System.out.println();
+//if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
+//	System.out.println();
 						
 					}
 					// si la case n'est pas la bonne : 

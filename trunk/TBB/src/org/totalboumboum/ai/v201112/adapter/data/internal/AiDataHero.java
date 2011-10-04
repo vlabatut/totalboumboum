@@ -183,8 +183,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
 		walkingSpeed = speedCoeff*basicSpeed;
-if(walkingSpeed==0)
-	System.out.print("");
+//if(walkingSpeed==0)
+//	System.out.print("");
 		//System.out.println(getSprite().getColor()+": walkingSpeed="+walkingSpeed);
 	}
 
