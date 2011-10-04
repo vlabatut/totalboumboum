@@ -394,7 +394,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 		// si le sprite considéré est un personnage
 		if(sprite instanceof AiHero)
 		{	AiHero hero = (AiHero) sprite;
-			if(hero.getTile()==getTile()) //simplification
+			if(hero.getTile().equals(getTile())) //simplification
 				result = true;
 			else if(stopHeroes==AiStopType.NO_STOP)
 				result = true;

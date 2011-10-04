@@ -668,6 +668,8 @@ if(sprite instanceof AiSimBomb)
 		}
 		double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
 		double goalY = current.normalizePositionY(tileY0+dir[1]*offset);
+		double xSign = Math.signum(goalX - posX);
+		double ySign = Math.signum(goalY - posY);
 		double dx = Math.abs(posX-goalX);
 		double dy = Math.abs(posY-goalY);
 		double manDist = dx+dy;
@@ -680,15 +682,15 @@ if(sprite instanceof AiSimBomb)
 		else
 		{	if(dx>dy && dy>0)
 			{	double temp = Math.min(allowed,dy);
-				posY = posY+dir[1]*temp;
+				posY = posY+xSign*temp;
 				allowed = allowed - temp;
-				posX = posX+dir[0]*allowed;
+				posX = posX+ySign*allowed;
 			}
 			else
 			{	double temp = Math.min(allowed,dx);
-				posX = posX+dir[0]*temp;
+				posX = posX+xSign*temp;
 				allowed = allowed - temp;
-				posY = posY+dir[1]*allowed;
+				posY = posY+ySign*allowed;
 			}
 		}
 		
