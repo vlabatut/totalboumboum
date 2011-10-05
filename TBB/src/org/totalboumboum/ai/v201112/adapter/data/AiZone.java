@@ -21,8 +21,11 @@ package org.totalboumboum.ai.v201112.adapter.data;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
@@ -341,8 +344,114 @@ if(target==null || source==null)
 	 * @return	
 	 * 		une liste de bombe de la couleur passée en paramètre
 	 */
-	public abstract List<AiBomb> getBombsByColor(PredefinedColor color);
+	public List<AiBomb> getBombsByColor(PredefinedColor color)
+	{	List<AiBomb> result = new LinkedList<AiBomb>();
+		
+		for(AiBomb bomb: getBombs())
+		{	if(bomb.getColor()==color)
+				result.add(bomb);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Calcule les temps d'explosion de chaque bombe
+	 * présente dans la zone, en tenant compte des
+	 * réactions en chaîne. Le résultat prend la forme
+	 * d'une map dont la clé est la bombe et la valeur
+	 * le temps restant avant son explosion.
+	 * 
+	 * @return
+	 * 		Une map décrivant les temps d'explosion des bombes.
+	 */
+	public HashMap<AiBomb,Long> getBombDelays()
+	{	HashMap<AiBomb,Long> result = new HashMap<AiBomb,Long>();
+		HashMap<Long,List<AiBomb>> bombsByDelay = new HashMap<Long,List<AiBomb>>();
+		HashMap<AiBomb,List<AiBomb>> threatenedBombs = new HashMap<AiBomb,List<AiBomb>>();
+		
+		// retrieve necessary info
+		for(AiBomb bomb: getBombs())
+		{	// delay map & bomb map
+			long delay = 1;	// for bombs other than time bombs 
+			if(bomb.hasCountdownTrigger())
+				delay = bomb.getNormalDuration() - bomb.getTime();
+			result.put(bomb,delay);
+			List<AiBomb> tempList = bombsByDelay.get(delay);
+			if(tempList==null)
+			{	tempList = new ArrayList<AiBomb>();
+				bombsByDelay.put(delay,tempList);
+			}
+			tempList.add(bomb);
+			
+			// threatened bombs list
+			List<AiBomb> tempTarget = new ArrayList<AiBomb>();
+			List<AiTile> blast = bomb.getBlast();
+			for(AiTile tile: blast)
+			{	List<AiBomb> tileBombs = tile.getBombs();
+				// we only consider the bombs sensitive to explosions
+				for(AiBomb b: tileBombs)
+				{	if(b.hasExplosionTrigger())
+						tempTarget.addAll(tileBombs);
+				}
+			}
+			threatenedBombs.put(bomb,tempTarget);
+		}
+		
+		// get temporal explosion order
+		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelay.keySet());
+		while(!orderedDelays.isEmpty())
+		{	// get the delay
+			long delay = orderedDelays.first();
+			orderedDelays.remove(delay);
+			// get the bombs associated to this delay
+			List<AiBomb> bombList = bombsByDelay.get(delay);
 
+			// update bomb delays while considering a bomb can detonate 
+			// another one before the regular time 
+			for(AiBomb bomb1: bombList)
+			{	// get the threatened bombs
+				List<AiBomb> bList = threatenedBombs.get(bomb1);
+				// update their delays
+				for(AiBomb bomb2: bList)
+				{	// get the delay 
+					long delay2 = result.get(bomb2);
+					// add latency time
+					long newDelay = delay + bomb2.getLatencyDuration();
+					
+					// if this makes the delay shorter, we update eveywhere needed
+					if(bomb2.hasExplosionTrigger() && newDelay<delay2)
+					{	// in the result map
+						result.put(bomb2,newDelay);
+						
+						// we remove the bomb from the other (inverse) map
+						{	List<AiBomb> tempList = bombsByDelay.get(delay2);
+							tempList.remove(bomb2);
+							// and possibly the delay itself, if no other bomb uses it anymore
+							if(tempList.isEmpty())
+							{	bombsByDelay.remove(delay2);
+								orderedDelays.remove(delay2);
+							}
+						}
+						
+						// and put it again, but at the appropriate place this time
+						{	List<AiBomb> tempList = bombsByDelay.get(newDelay);
+							// on crée éventuellement la liste nécessaire
+							if(tempList==null)
+							{	tempList = new ArrayList<AiBomb>();
+								bombsByDelay.put(newDelay,tempList);
+								orderedDelays.add(newDelay);
+							}
+							tempList.add(bomb2);
+						}
+					}
+				}
+			}
+		}
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
