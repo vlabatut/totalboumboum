@@ -538,18 +538,6 @@ final class AiSimZone extends AiZone
 		}
 		return result;
 	}
-	
-	@Override
-	public List<AiBomb> getBombsByColor(PredefinedColor color)
-	{	List<AiBomb> result = new LinkedList<AiBomb>();
-		
-		for(AiBomb bomb: externalBombs)
-		{	if(bomb.getColor()==color)
-				result.add(bomb);
-		}
-		
-		return result;
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////

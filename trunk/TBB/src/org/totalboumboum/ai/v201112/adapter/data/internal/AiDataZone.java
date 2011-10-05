@@ -412,18 +412,6 @@ public final class AiDataZone extends AiZone
 	{	bombMap.put(bomb.getSprite(),bomb);	
 	}
 	
-	@Override
-	public List<AiBomb> getBombsByColor(PredefinedColor color)
-	{	List<AiBomb> result = new LinkedList<AiBomb>();
-		
-		for(AiBomb bomb: bombList)
-		{	if(bomb.getColor()==color)
-				result.add(bomb);
-		}
-		
-		return result;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

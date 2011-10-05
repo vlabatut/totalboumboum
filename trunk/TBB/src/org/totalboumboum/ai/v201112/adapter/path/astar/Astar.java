@@ -287,8 +287,10 @@ public final class Astar
 			{	for(AiLocation loc: result.getLocations())
 					System.out.print(" "+loc);
 			}
-			else //if(endTiles.isEmpty())
-				System.out.println(" endTiles parameter empty");
+			else if(endTiles.isEmpty())
+				System.out.print(" endTiles parameter empty");
+			else 
+				System.out.print(" no solution found");
 			System.out.println(" ]");
 			//
 			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);

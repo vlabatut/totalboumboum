@@ -288,6 +288,11 @@ public class AiModel
 	/**
 	 * Effectue une simulation pour la durée spécifiée.
 	 * La zone obtenue est accessible par {@link #getCurrentZone}.
+	 * Si la simulation atteint un état stable (i.e. aucun
+	 * sprite n'est plus actif) avant la fin du temps demandé,
+	 * alors elle s'arrête mais le champ {@code duration}
+	 * contient la durée effectivement simulée (par opposition
+	 * avec la durée spécifiée via le paramètre {@code requestedDuration}.
 	 * 
 	 * @param requestedDuration
 	 * 		La durée de la simulation à effectuer
@@ -298,8 +303,9 @@ public class AiModel
 		previous = current;
 		duration = 0;
 		AiSimZone previousZone = current;
+		double lastDuration = 1;
 		
-		while(totalDuration<requestedDuration)
+		while(totalDuration<requestedDuration && lastDuration>0)
 		{	// create a copy of the current zone
 			current = new AiSimZone(current);
 			
@@ -327,6 +333,7 @@ public class AiModel
 			// update the resulting zone
 			current.updateTime(duration);
 			totalDuration = totalDuration + duration;
+			lastDuration = duration;
 		}
 		
 		// update duration to reflect the whole process
@@ -401,10 +408,10 @@ public class AiModel
 		
 		for(AiSimSprite sprite: sprites)
 		{	
-//if(sprite instanceof AiSimHero)
-//	System.out.print("");
-//if(sprite instanceof AiSimBomb)
-//	System.out.print("");
+if(sprite instanceof AiSimHero)
+	System.out.print("");
+if(sprite instanceof AiSimBomb)
+	System.out.print("");
 			// process the sprite next state
 			AiSimState state = sprite.getState();
 			// process the time remaining before the next change (be it of state, tile, etc.)
@@ -501,7 +508,7 @@ public class AiModel
 				if(temp<1)
 					result = 0;
 				else
-					result = (long)temp;
+					result = (long)Math.ceil(temp);	// we take the ceiling value so that there is actually enough time to reach the location
 			}
 			
 			// it can also be a bomb waiting to explode

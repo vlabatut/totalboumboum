@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -244,6 +245,7 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 		
 		// on s'intéresse ensuite aux menaces provenant des bombes
 		// on considère chaque bombe une par une
+		HashMap<AiBomb,Long> delays = zone.getBombDelays();
 		List<AiBomb> bombs = zone.getBombs();
 		for(AiBomb bomb: bombs)
 		{	ai.checkInterruption();
@@ -255,13 +257,13 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 			if(!neigh.isEmpty())
 			{	// si c'est le cas, on récupère la description de la bombe
 				AiStateName stateName = bomb.getState().getName();
-				long normalDuration = bomb.getNormalDuration();
 				// on peut ignorer les bombes déjà en train de brûler, car elles cohabitent avec du feu
 				if(stateName.equals(AiStateName.STANDING)
 				// on peut aussi ignorer les bombes qui ne sont pas à retardement,
 				// car on ne peut pas prédire quand elles vont exploser
-					&& normalDuration>0)
-				{	long duration = normalDuration - bomb.getState().getTime() + bomb.getExplosionDuration();
+					&& bomb.hasCountdownTrigger())
+				{	//long duration = normalDuration - bomb.getState().getTime() + bomb.getExplosionDuration();
+					long duration = delays.get(bomb);
 					if(duration<result)
 						result = duration;
 				}
