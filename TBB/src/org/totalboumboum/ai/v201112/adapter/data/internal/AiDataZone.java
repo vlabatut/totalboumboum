@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -239,6 +240,7 @@ public final class AiDataZone extends AiZone
 			{	Tile tile = m[rowIndex][colIndex];
 				AiDataTile aiTile = new AiDataTile(tile,this);
 				matrix[rowIndex][colIndex] = aiTile;
+				tiles.add(aiTile);
 			}
 		}
 		
@@ -283,6 +285,14 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** liste de toutes les cases de cette zone */
+	private final List<AiTile> tiles = new LinkedList<AiTile>(); 
+	
+	@Override
+	public List<AiTile> getTiles()
+	{	return tiles;
+	}
+
 	@Override
 	public AiDataTile getTile(int row, int col)
 	{	return matrix[row][col];

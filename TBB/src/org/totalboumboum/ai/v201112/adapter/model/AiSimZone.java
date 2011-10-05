@@ -82,6 +82,7 @@ final class AiSimZone extends AiZone
 				double posY = tile.getPosY();
 				AiSimTile aiTile = new AiSimTile(this,row,col,posX,posY);
 				matrix[row][col] = aiTile;
+				tiles.add(aiTile);
 			}
 		}
 		
@@ -272,6 +273,14 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** liste de toutes les cases de cette zone */
+	private final List<AiTile> tiles = new LinkedList<AiTile>(); 
+	
+	@Override
+	public List<AiTile> getTiles()
+	{	return tiles;
+	}
+	
 	@Override
 	public AiSimTile getTile(int row, int col)
 	{	return matrix[row][col];
