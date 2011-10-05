@@ -189,6 +189,16 @@ public abstract class AiZone
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
+	 * Renvoie toutes les cases de cette zone
+	 * sous forme d'une liste. Les cases y sont
+	 * placées ligne à ligne.
+	 * 
+	 * @return
+	 * 		La liste de toutes les cases de cette zone.
+	 */
+	public abstract List<AiTile> getTiles();
+	
+	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
 	 *  @param row
