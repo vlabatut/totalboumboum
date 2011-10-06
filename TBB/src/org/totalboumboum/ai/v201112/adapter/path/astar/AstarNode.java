@@ -427,13 +427,9 @@ public final class AstarNode implements Comparable<AstarNode>
 
 	@Override
 	public int compareTo(AstarNode node)
-    {	int result = 0;
-		double f1 = cost+heuristic;
-    	double f2 = node.getCost()+node.getHeuristic();
-    	if(f1>f2)
-    		result = +1;
-    	else if(f1<f2)
-    		result = -1;
+    {	Double f1 = cost + heuristic;
+    	Double f2 = node.getCost() + node.getHeuristic();
+    	int result = f1.compareTo(f2);
     	return result;
     }
 

@@ -689,9 +689,9 @@ if(sprite instanceof AiSimBomb)
 		else
 		{	if(dx>dy && dy>0)
 			{	double temp = Math.min(allowed,dy);
-				posY = posY+xSign*temp;
+				posY = posY+ySign*temp;
 				allowed = allowed - temp;
-				posX = posX+ySign*allowed;
+				posX = posX+xSign*allowed;
 			}
 			else
 			{	double temp = Math.min(allowed,dx);

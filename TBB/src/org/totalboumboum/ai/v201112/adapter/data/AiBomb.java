@@ -206,7 +206,7 @@ public interface AiBomb extends AiSprite
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le temps écoulé depuis que le compte à rebours de la 
+	 * Renvoie le temps écoulé depuis que le compte à rebours de la 
 	 * bombe a commencé, exprimé en millisecondes. Bien sûr ceci
 	 * n'est valide que pour les bombes à retardement (qui ont un 
 	 * compte à rebours).<br/>
@@ -214,7 +214,7 @@ public interface AiBomb extends AiSprite
 	 * la bombe sont susceptibles de réinitialiser le compte à rebours.
 	 * 
 	 * @return	
-	 * 		temps exprimé en ms
+	 * 		Temps exprimé en ms.
 	 */
 	public long getTime();
 
@@ -222,10 +222,10 @@ public interface AiBomb extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si ce bloc arrête les personnages.
+	 * Indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * Utilisez plutot {@link #isCrossableBy()}.
 	 * 
 	 * @return	
 	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
