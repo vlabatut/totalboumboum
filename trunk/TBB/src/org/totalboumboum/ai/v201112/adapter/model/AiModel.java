@@ -632,7 +632,7 @@ if(sprite instanceof AiSimBomb)
 	 * 		la durée du pas de simulation
 	 */
 	private void moveSprite(AiSimSprite sprite, long duration)
-	{	//NOTE same simplification than before: we suppose the levels are all grids, 
+	{	// NOTE same simplification than before: we suppose the levels are all grids, 
 		// meaning at least one coordinate is at the center of a tile
 		// plus the sprite moves in a primary direction (DOWN, LEFT, RIGHT, UP: no composite)
 		
@@ -670,7 +670,7 @@ if(sprite instanceof AiSimBomb)
 			//because tile centers are not actually tile centers
 			if(direction==Direction.LEFT || direction==Direction.UP)
 			{	offset++; 
-				allowed++;
+//				allowed++;
 			}
 		}
 		double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
@@ -707,6 +707,10 @@ if(sprite instanceof AiSimBomb)
 		{	tile.removeSprite(sprite);
 			newTile.addSprite(sprite);
 			sprite.setTile(newTile);
+			// by security
+			// (due to approximation, it's possible the sprite was not put in this list before)
+			if(!limitSprites.contains(sprite))
+				limitSprites.add(sprite);
 		}
 		
 		// a hero might pick an item in the new tile

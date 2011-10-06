@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
@@ -252,7 +253,8 @@ public final class Astar
 				else if(maxNodes>0 && queue.size()>=maxNodes)
 					limitReached = true;
 				else
-				{	// sinon on récupére les noeuds suivants
+				{	AiZone zone = currentNode.getLocation().getTile().getZone();
+					// sinon on récupére les noeuds suivants
 					List<AstarNode> successors = currentNode.getChildren();
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
