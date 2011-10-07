@@ -394,7 +394,7 @@ if(sprite instanceof AiSimBomb)
 		{	if(direction==Direction.NONE)
 				result = Long.MAX_VALUE;
 			else
-			{	//NOTE simplification here: we suppose the levels are all grids, 
+			{	// simplification here: we suppose the levels are all grids, 
 				// meaning at least one coordinate is at the center of a tile
 				double speed = sprite.getCurrentSpeed();
 				if(sprite instanceof AiSimHero)
@@ -551,7 +551,7 @@ if(sprite instanceof AiSimBomb)
 	 * 		la durée du pas de simulation
 	 */
 	private void moveSprite(AiSimSprite sprite, long duration)
-	{	//NOTE same simplification than before: we suppose the levels are all grids, 
+	{	// same simplification than before: we suppose the levels are all grids, 
 		// meaning at least one coordinate is at the center of a tile
 		// plus the sprite moves in a primary direction (DOWN, LEFT, RIGHT, UP: no composite)
 		
@@ -666,7 +666,7 @@ if(sprite instanceof AiSimBomb)
 		// block is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = block.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) // problem for re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -680,7 +680,7 @@ if(sprite instanceof AiSimBomb)
 		
 		// blocks can't move (at least for now)
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	// NOTE useless for the moment
+		{	//  useless for the moment
 			//moveSprite(block);
 		}
 		
@@ -1030,7 +1030,7 @@ if(sprite instanceof AiSimBomb)
 		// floor is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = floor.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning blocks (but it's only an approximation, after all...)
+			if(time>=burningDuration) // problem for re-spawning blocks (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1077,7 +1077,7 @@ if(sprite instanceof AiSimBomb)
 		// hero is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = hero.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for games in which heroes can be reborn
+			if(time>=burningDuration) // problem for games in which heroes can be reborn
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1270,7 +1270,7 @@ if(sprite instanceof AiSimBomb)
 		{	// nothing to do
 		}
 		else if(type==AiItemType.PUNCH)
-		{	// NOTE to be completed
+		{	//  to be completed
 		}
 		
 		// remove item
@@ -1288,7 +1288,6 @@ if(sprite instanceof AiSimBomb)
 	 */
 	private void releaseItems(AiSimHero hero)
 	{
-		// NOTE items could be released here... (to be completed)
 	}
 	
 	/**
@@ -1325,7 +1324,7 @@ if(sprite instanceof AiSimBomb)
 		// item is burning (too bad!)
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = item.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) // problem for re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;

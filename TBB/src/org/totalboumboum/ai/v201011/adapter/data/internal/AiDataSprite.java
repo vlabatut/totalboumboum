@@ -61,7 +61,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 		state = new AiDataState(sprite);
 		
 		// burning duration
-//TODO à tester
+// à tester
 		burningDuration = -1;
 		Gesture gesture = sprite.getGesturePack().getGesture(GestureName.BURNING);
 		if(gesture!=null)

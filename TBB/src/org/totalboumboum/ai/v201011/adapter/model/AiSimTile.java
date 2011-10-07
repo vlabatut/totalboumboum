@@ -86,7 +86,7 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TODO comment
+	//  comment
 	protected void addSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -120,7 +120,7 @@ final class AiSimTile extends AiTile
 		}
 	}
 	
-	// TODO comment
+	//  comment
 	protected void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;

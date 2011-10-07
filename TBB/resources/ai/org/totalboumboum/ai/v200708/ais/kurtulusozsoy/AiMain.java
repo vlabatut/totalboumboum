@@ -29,7 +29,7 @@ import org.totalboumboum.ai.v200708.adapter.AiManager;
  *
  */
 @SuppressWarnings("deprecation")
- class AiMain extends AiManager
+public class AiMain extends AiManager
 {
 	public AiMain()
 	{	super(new KurtulusOzsoy());		
