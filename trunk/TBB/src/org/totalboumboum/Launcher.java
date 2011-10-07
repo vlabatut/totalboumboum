@@ -1139,8 +1139,11 @@ public class Launcher
 	 * 		- recopier les stats (éventuellement)
 	 * 		- recréer les sauvegardes des tournois
 	 * - options :
-	 * 		- réinitialiser le joueur humain
 	 * 		- virer l'enchainement automatique
+	 * 		- virer le bombage des IA inactives
+	 * - profils :
+	 * 		- supprimer les profils de test
+	 * 		- réinitialiser les stats des joueurs humain ou autre
 	 * 
 	 * - pour diffusion publique :
 	 * 		- fichiers :
@@ -1158,15 +1161,24 @@ public class Launcher
 	 *  - pour diffusion projet :
 	 * 		- réseau :
 	 * 			- bloquer le bouton "réseau" dans le menu principal
+	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonNetworkGame
 	 * 			- bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
+	 * 			  org.totalboumboum.gui.menus.tournament.TournamenuMenu.buttonPublish
+	 * 			  org.totalboumboum.gui.menus.quickmatch.QuickMatchMenu.buttonPublish
+	 * 			  
 	 * 		- replay :
 	 * 			- bloquer le bouton "replay" dans le menu principal
+	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonReplay
 	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
+	 * 			  org.totalboumboum.gui.game.tournament.TournamentMenu.buttonRecord
+	 * 			  org.totalboumboum.gui.game.tournament.MatchMenu.buttonRecord
+	 * 			  org.totalboumboum.gui.game.tournament.RoundMenu.buttonRecord
 	 * 			- bloquer l'action dans les options avancées
+	 * 			  org.totalboumboum.gui.menus.options.advanced.AdvancedData ligne 'case LINE_RECORD_GAMES'
 	 * 		- options :
 	 * 			- afficher les exceptions
 	 * 		- ressources :
-	 * 			- redonner les host id corrects pour les deux étudiants modifiés pour tester le réseau (5, 13 et 20)
+	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau (5, 13 et 24)
 	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
 	 * 
 	 */
