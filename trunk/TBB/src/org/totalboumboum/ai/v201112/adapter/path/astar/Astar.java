@@ -93,19 +93,45 @@ public final class Astar
     /////////////////////////////////////////////////////////////////
 	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** fonction de cout */
+	/** Fonction de coût */
 	private CostCalculator costCalculator = null;
-	/** fonction heuristique */
+	/** Fonction heuristique */
 	private HeuristicCalculator heuristicCalculator = null;
-	/** fonction successeur */
+	/** Fonction successeur */
 	private SuccessorCalculator successorCalculator = null;
-	/** racine de l'arbre de recherche */
+	/** Racine de l'arbre de recherche */
 	private AstarNode root = null;
-	/** personnage de référence */
+	/** Personnage de référence */
 	private AiHero hero = null;
-	/** l'ai qui a réalisé l'appel */
+	/** L'IA qui a réalisé l'appel */
 	private ArtificialIntelligence ai = null;
+	/** La zone associée au dernier noeud de recherche (si disponible) */
+	private AiZone lastZone = null;
+	/** L'emplacement associé au dernier noeud de recherche (si disponible) */
+	private AiLocation lastLocation = null;
 
+	/**
+	 * Renvoie la zone correspondant au
+	 * dernier noeud exploré par A*.
+	 * 
+	 * @return
+	 * 		La zone associée au dernier noeud parcouru.
+	 */
+	public AiZone getLastZone()
+	{	return lastZone;
+	}
+	
+	/**
+	 * Renvoie l'emplacement correspondant au
+	 * dernier noeud exploré par A*.
+	 * 
+	 * @return
+	 * 		L'emplacement associé au dernier noeud parcouru.
+	 */
+	public AiLocation getLastLocation()
+	{	return lastLocation;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -217,6 +243,8 @@ public final class Astar
 		int maxn = 0;
 
 		// initialisation
+		lastZone = null;
+		lastLocation = null;
 		boolean found = false;
 		boolean limitReached = false;
 		AiPath result = null;
@@ -232,6 +260,8 @@ public final class Astar
 			{	ai.checkInterruption();
 				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
+				lastLocation = currentNode.getLocation();
+				lastZone = lastLocation.getTile().getZone();
 				if(verbose)
 				{	System.out.println("Visited : "+currentNode.toString());
 					System.out.println("Queue length: "+queue.size());
@@ -253,8 +283,7 @@ public final class Astar
 				else if(maxNodes>0 && queue.size()>=maxNodes)
 					limitReached = true;
 				else
-				{	AiZone zone = currentNode.getLocation().getTile().getZone();
-					// sinon on récupére les noeuds suivants
+				{	// sinon on récupére les noeuds suivants
 					List<AstarNode> successors = currentNode.getChildren();
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
