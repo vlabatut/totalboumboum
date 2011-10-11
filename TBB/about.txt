@@ -51,14 +51,14 @@ This product includes softwares developed by:
     
   + Japa - Java parser and AST (Abstract Syntax Tree):
     javaparser library
-    Copyright 2007 Júlio Vilmar Gesser - GPL License
+    Copyright 2007 JÃºlio Vilmar Gesser - GPL License
     http://code.google.com/p/javaparser/
     Used to parse the students AI Java source code
     
   + Various AI students from Galatasaray University:
     Most classes in resources/ai (see classes for details)
     Copyright 2007-2011 their respective authors
-    http://gsu.edu.tr - GSÜ, Istanbul, Turkey
+    http://gsu.edu.tr - GSÃœ, Istanbul, Turkey
 
 -----------------------------------------------------------------------
 
