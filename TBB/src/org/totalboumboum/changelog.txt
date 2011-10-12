@@ -14,11 +14,11 @@
 - correction d'un bug sur le control manuel d'un perso
 
 + alpha.39
-- modification de la fenêtre de résultats du round, de mani�re à afficher les scores (deaths, etc)
+- modification de la fenêtre de résultats du round, de manière à afficher les scores (deaths, etc)
 - modication de la fenêtre de résultats, pour gagner de la place : icones dans les en-t�tes (� la place du texte) 
 - correction d'un bug de synchronisation du gestionnaire de d�lais
 - il FAUT un pointProcessor pour le tournament, pour g�rer les �galit�s
-- modification du système de points de mani�re à pouvoir effectuer un classement en consid�rant plusieurs param�tres complètement ordonn�s
+- modification du système de points de manière à pouvoir effectuer un classement en consid�rant plusieurs param�tres complètement ordonn�s
 - g�rer le partage des points en cas d'�galit�
 - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 - quand un h�ro re�oit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
@@ -50,7 +50,7 @@
 - dans le match, il faut g�rer différemment la limite : 
 - les capacit�s initiales ont été transform�es en items initiaux
 - les levels contiennent maintenant un certain nombre d'items initiaux, donn�s à chaque joueur au d�but du round
-- modification du système de points, de mani�re à considérer à part un classement auquel on associe les points finaux
+- modification du système de points, de manière à considérer à part un classement auquel on associe les points finaux
 - système permettant d'afficher le calcul des points sous forme textuelle (sera notamment utilis� par la GUI)
 
 + alpha.42
@@ -65,21 +65,21 @@
 - mise en place d'un compteur FPS/UPS
 - correction d'un bug dans le d�compte du temps effectu� dans la boucle principale
 - correction d'un bug : les items distribu�s au d�but du match �taient compt�s dans les stats
-- définition du paneau de pr�sentation pour les rounds
+- définition du paneau de présentation pour les rounds
 - modification de la police pour y faire appara�tre les caract�res manquants (essentiellement des op�rateurs mathèmatiques)
 - correction d'un bug graphique qui faisait appara�tre l'ombre de la derni�re ligne de blocs par dessus la première
 - correction d'un bug XML dans le thème superbomberman1.duel
 
 + alpha.43
 - Modification	: amélioration du système al�atoire de g�n�ration des niveaux (les distributions doivent �tre contr�l�es car les s�ries g�n�r�es sont trop courtes pour que les distributions soient respect�es)
-- Modification	: r�organisation du projet Eclipse de mani�re à placer les classes d'ia dans le dossier resources
+- Modification	: r�organisation du projet Eclipse de manière à placer les classes d'ia dans le dossier resources
 - Modification	: r�vision du système d'adaptateur pour les IA de 2007-08
 - Modification	: FPS baiss� de 100 à 50, afin d'�conomiser les ressources et d'�viter que �a rame trop sur des petites machines (ou pas acc�l�r�es)
 - Nouveaut�		: adaptateur spécial pour les IA 2008-09
 - Correction 	: petit bug dans la GUI, les dimensions des niveaux �taient fausses
 
 + alpha.44
-- Modification	: amélioration de la structure de donn�es destin�es aux IA 2008-09 et repr�sentant la zone et son contenu
+- Modification	: amélioration de la structure de donn�es destin�es aux IA 2008-09 et représentant la zone et son contenu
 - Nouveaut� 	: IA d'exemple pour le package 2008-09
 - Correction	: bug qui empêchait un bon d�compte des kills/deaths (différent du premier!)
 - Nouveaut�		: niveau plus petit pour tester la nouvelle IA
@@ -95,7 +95,7 @@
 - Correction	: utilisation dans la GUI d'une méthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. méthode alternative employ�e à la place.
 - Nouveaut�		: documents relatifs à la licence GPL
 - Nouveaut�		: fichiers d'information dans la racine du projet
-- Nouveaut�		: modification de l'API d'IA demani�re à refl�ter les différents types de bombes, items et flammes  
+- Nouveaut�		: modification de l'API d'IA demanière à refl�ter les différents types de bombes, items et flammes  
 - Nouveaut�		: commentaires complets des classes d'IA
 - Nouveaut�		: tournoi simple (ne contenant qu'un seul match)
 - Correction	: bug dans la barre de progression lors du chargement du round
@@ -112,7 +112,7 @@
 
 + beta.001
 - modification	: jeu nettoy� de toutes les ressources qui ne sont pas encore utilis�es
-- correction	: bug dans la GUI lorsqu'on utilise une r�solution carr�e : les itemset et initialitem dans la pr�sentation des rounds sont coupés (certains items sont hors-écran)
+- correction	: bug dans la GUI lorsqu'on utilise une r�solution carr�e : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
 - correction	: bug graphique >> les textes des boutons sont coupés
 - correction	: bug de gameplay dans SBM1 : le temps de latence des bombes �tait deux fois trop court
 - modification 	: dans la GUI, les boutons pas encore implémentés sont désactivés
@@ -125,7 +125,7 @@
 - nouveaut� : IA vierge à complèter par les �tudiants
 
 + beta.003
-- modification : repr�sentation de la zone de jeu par une matrice dans l'API d'IA (au lieu d'une liste de listes).
+- modification : représentation de la zone de jeu par une matrice dans l'API d'IA (au lieu d'une liste de listes).
 
 + beta.004
 - correction : bug du au Locale par d�faut lors de la transformation d'une chaine de caract�res en majuscules, quand la chaine contient des I ou des i et que la langue est le turc.
@@ -149,8 +149,8 @@
 - nouveaut� : écran de configuration des controles
 - nouveaut� : enregistrement de la modification des controles
 - modification : mise à jour de la police de caract�res du jeu
-- nouveaut� : affichage du type de joueur dans la pr�sentation des tournois et matches
-- nouveaut� : possibilité de choisir les commandes des joueurs dans la pr�sentation des matches
+- nouveaut� : affichage du type de joueur dans la présentation des tournois et matches
+- nouveaut� : possibilité de choisir les commandes des joueurs dans la présentation des matches
 - modification : d�coupage modulaire de la configuration
 - nouveaut� : possibilité de configurer les options graphiques depuis la GUI
 - nouveaut� : redémarrage de l'application quand on modifie la r�solution
@@ -215,7 +215,7 @@
 - nouveaut� : tournoi de type coupe 
 - nouveaut� : GUI du tournoi-coupe
 - correction : possibilité de conflit dans les controles quand les joueurs d'un match sont différents de ceux d'un tournoi (ex: coupe) >> test et reinit en d�but de match
-- modification : définition d'une classe spéciale pour repr�senter le classement à l'issue d'une confrontation
+- modification : définition d'une classe spéciale pour représenter le classement à l'issue d'une confrontation
 - nouveaut� : bad bomber (nouveau personnage)
 - correction : bug dans l'ordonnancement des joueurs à la fin d'un round
 - correction : bug d'affichage dans la dimension maximale de la liste des browsers (common contents)
@@ -254,11 +254,11 @@
 - pareil pour NONE, sauf que l'action APPEAR est autoris�e (en tant qu'acteur)
 - introduction des gestures ENTERING et PREPARED, correspondant à APPEARING et STANDING, mais seulement utilis�s pour le d�but du round
 - généralisation (aux autres sprites) de l'Ability permettant de contraindre le temps mis par les heros pour apparaitre au d�but de la partie.
-- modification dans le moteur : un sprite dans l'�tat NONE est quand m�me associ� à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
+- modification dans le moteur : un sprite dans l'�tat NONE est quand même associ� à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
 - correction d'un bug dans la gestion des animations et trajectoires proportionnelles
 - correction d'un bug dans la g�n�ration des explosions en croix (flamme trop longue)
 - définition d'un système permettant au niveau d'appara�tre graduellement au d�but du round
-- simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas o� la tile manquait a été supprim�)
+- simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas o� la tile manquait a été supprimé)
 - apparition de messages au d�but du round (ready-set-go), avec graphismes basiques puis amélior�s
 - mise en place d'un fond noir dans le loop panel avant que le niveau ne commence à apparaitre (juste avant le chargement)
 - possibilité de définir des niveaux contenant des bombes, soit directement sur le sol, soit dans des blocks
@@ -270,10 +270,10 @@
 - implémentation des modificateurs de vitesse de d�placement au sol pour les h�ros
 - implémentation de la r�sistance au feu
 - nouveau système de maximum pour les StateAbilities (avec une ability supp contenant le suffixe _MAX)
-- correction d'un bug concernant la précédence temporelle de certains évènements, en particulier quand deux joueurs br�lent au cours de la m�me explosion
+- correction d'un bug concernant la précédence temporelle de certains évènements, en particulier quand deux joueurs br�lent au cours de la même explosion
 - implémentation de la constipation bombique
 - correction d'un gros bug dans le calcul de distances entre sprites situ�s dans la classe Level
-- possibilité d'avoir plusieurs blocs, floors et items dans une m�me case (par souci de généralisation)
+- possibilité d'avoir plusieurs blocs, floors et items dans une même case (par souci de généralisation)
 - système permettant de relacher les items à la mort du joueur
 - correction dans le calcul de la direction entre deux sprites (le c�t� circulaire des niveaux n'�tait pas pris en compte)
 - système de contagion des malus
@@ -307,7 +307,7 @@
 - ajout d'un menu modal lorsque les options demandant un redémarrage du jeu sont modifi�es
 - correction d'une erreur dans la traduction anglaise de l'interface
 - correction de quelques erreurs dans AiBomb
-- amélioration de l'implémentation d'A* pour ne pas considérer les chemins qui passent plusieurs fois par la m�me case
+- amélioration de l'implémentation d'A* pour ne pas considérer les chemins qui passent plusieurs fois par la même case
 
 + beta.014
 - nouvelle version de shirobon issu de NBM1
@@ -324,7 +324,7 @@
 - ajout du système Glicko2
 - adaptation de Glicko2 :
 		- serializable
-		- utilisation d'une cl� enti�re pour repr�senter les joueurs
+		- utilisation d'une cl� enti�re pour représenter les joueurs
 		- utilisation de la g�n�ricit�
 		- nouvelles méthodes pour obtenir le classement des joueurs 
    	- suivi du nombre de matchs jou�s depuis la derni�re mise à jour
@@ -343,18 +343,18 @@
 - possibilité de d�sélectionner tous les joueurs d'un seul clic (avant un tournoi/partie rapide/quick start)
 - possibilité de d�sélectionner tous les joueurs sans classement en cliquant sur "-"
 - possibilité de simuler les rounds qui n'impliquent que des IA
-- affichage du rang dans l'écran r�capitulant les joueurs sélectionn�s avant le d�but d'une partie
-- affichage du nom des joueurs par dessus les sprites en mode d�bug
+- affichage du rang dans l'écran r�capitulant les joueurs sélectionnés avant le d�but d'une partie
+- affichage du nom des joueurs par dessus les sprites en mode débug
 - joueurs identifi�s par un entier unique (au lieu d'une chaine de caract�res) dans les stats d�taill�es
 - bufferisation de tous les acc�s au fichiers avec l'utilisation de BufferedInput et BufferedOutput
 - affichage des stats : possibilité de masquer en fonction du type de profil (IA/humain) et du rang (class�/pas class�)
 - GUI : changement de couleur de type "mouse over" pour les boutons de la GUI
 - GUI : le rang des joueurs apparait maintenant dans l'écran de sélection des profils
-- scores : les suicides sont maintenant s�par�s des bombeurs/bomb�s
+- scores : les suicides sont maintenant s�par�s des bombeurs/bombés
 - système de log : log des controles, que ce soit pour les humains ou les IA
 - un nouvel icone couronne de laurier a été défini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
 - nouvelle option "t�te de s�rie" pour les tournois de type coupe : utilise le classement Glicko-2 pour �viter que les meilleurs joueurs se rencontrent trop t�t
-- les constantes éléments/attributs ont été renomm�es de mani�re à supprimer les pr�fixes ATT_ et ELT_ (pr �viter les r�p�titions)
+- les constantes éléments/attributs ont été renomm�es de manière à supprimer les préfixes ATT_ et ELT_ (pr �viter les r�p�titions)
 - moteur : mise à jour des points en temps r�el, en prenant la première limite disponible (utile pour les rounds)
 - amélioration du d�compte du temps : le temps du jeu est arrêt� s'il est en pause, et le temps r�el est d�compt� s�par�ment
 - tournoi de type championnat implémenté
@@ -371,16 +371,16 @@
 		- bug corrigé dans la gestion des tournois de type coupe
 		- bug corrigé dans l'autosave des tournoi (le backup ne se faisait pas)
 - GUI :
-		- correction d'un bug concernant les proportions des panels dans l'écran de pr�sentation d'une manche
+		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
 		- correction d'un bug concernant l'édition de profil en général
 		- correction d'un bug lors du choix de la couleur (l'option "pas de couleur" �tait rest�e de la première version de la GUI)
 		- correction d'un bug apparaissant lors de la suppression d'un joueur pas enregistr� dans Glicko-2
-		- amélioration de la suppression de profil : c'est le profil précédent qui est alors sélectionn� (au lieu de revenir au d�but)
+		- amélioration de la suppression de profil : c'est le profil précédent qui est alors sélectionné (au lieu de revenir au d�but)
 		- la liste de noms est raffraichie quand un profil est modifi�
-		- les 3 configurations de jeu sont éventuellement mises à jour quand un profil est supprim�
+		- les 3 configurations de jeu sont éventuellement mises à jour quand un profil est supprimé
 - IA :
-		- prise en compte du coefficient de vitesse pour les valeurs li�es au temps
-		- acc�s au classement Glicko-2 (en plus de round et match déjà pr�sents)
+		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
+		- acc�s au classement Glicko-2 (en plus de round et match déjà présents)
 		- nouvelle option du jeu permettant de masquer les exceptions provoqu�es par les IA
 		- option pour logger les exceptions des IA
 		- ajout de l'appel à Thread.yield() dans la méthode checkInterruption d'ArtificialIntelligence : �a permet de mettre en sourdin les IA trop gourmandes en temps pro�
@@ -391,9 +391,9 @@
 		- méthode pour réinitialiser les stats générales d'un joueur en particulier (appel�e hors du jeu)
 		- les stats de lancement qui n'étaient pas à leur place dans les logs ont été mises dans le fichier de config des stats
 - Divers :
-		- correction d'un bug dans les scripts de compilation (classes non référenc�es dans les adaptateurs d'IA)
+		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
 		- mise à jour du perso Prognathe
-		- mise à jour du système de log pour permettre de ne pas écraser toujours le m�me fichier, mais de cr�er à chaque fois un fichier différent et dat�
+		- mise à jour du système de log pour permettre de ne pas écraser toujours le même fichier, mais de cr�er à chaque fois un fichier différent et dat�
 		- nouveaux niveaux pour le tournoi 3
 
 + beta.016
