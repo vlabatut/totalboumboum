@@ -39,6 +39,21 @@
 	</images>
 		
 	<gestures folder="pictures" >
+		<gesture name="APPEARING" folder="disappearing" shadow="standard" >
+			<direction name="NONE">
+				<step duration="50" file="10.gif" />
+				<step duration="60" file="09.gif" />
+				<step duration="80" file="08.gif" />
+				<step duration="70" file="07.gif" />
+				<step duration="90" file="06.gif" />
+				<step duration="100" file="05.gif" />
+				<step duration="110" file="04.gif" />
+				<step duration="115" file="03.gif" />
+				<step duration="125" file="02.gif" />
+				<step duration="200" file="01.gif" />
+			</direction>
+		</gesture>
+		
 		<gesture name="BOUNCING" folder="juming" shadow="standard" shadowYShift="-5">
 			<direction name="DOWN" folder="down">
 				<step file="2.gif" />
@@ -115,6 +130,21 @@
 			</direction>
 		</gesture>
 		
+		<gesture name="DISAPPEARING" folder="disappearing" shadow="standard" >
+			<direction name="NONE" shadow="shadow.png">
+				<step duration="200" file="01.gif" />
+				<step duration="125" file="02.gif" />
+				<step duration="115" file="03.gif" />
+				<step duration="110" file="04.gif" />
+				<step duration="100" file="05.gif" />
+				<step duration="90" file="06.gif" />
+				<step duration="70" file="07.gif" />
+				<step duration="80" file="08.gif" />
+				<step duration="60" file="09.gif" />
+				<step duration="50" file="10.gif" />
+			</direction>
+		</gesture>
+
 		<gesture name="EXULTING" folder="exulting" repeat="true" >
 			<direction name="NONE">
 				<step duration="320" file="1.gif" shadow="regular" />
@@ -205,6 +235,33 @@
 			</direction>
 		</gesture>
 		
+		<gesture name="PUSHING" folder="pushing" repeat="true" shadow="regular">
+			<direction name="DOWN" folder="down" shadow="shadow.png" >
+				<step duration="240" file="lf.gif" />
+				<step duration="240" file="nf.gif" />
+				<step duration="240" file="rf.gif" />
+				<step duration="240" file="nf.gif" />
+			</direction>
+			<direction name="LEFT" folder="left" shadow="shadow.png" >
+				<step duration="240" file="lf.gif" />
+				<step duration="240" file="nf.gif" />
+				<step duration="240" file="rf.gif" />
+				<step duration="240" file="nf.gif" />
+			</direction>
+			<direction name="RIGHT" folder="right" shadow="shadow.png" >
+				<step duration="240" file="lf.gif" />
+				<step duration="240" file="nf.gif" />
+				<step duration="240" file="rf.gif" />
+				<step duration="240" file="nf.gif" />
+			</direction>
+			<direction name="UP" folder="up" shadow="shadow.png" >
+				<step duration="240" file="lf.gif" />
+				<step duration="240" file="nf.gif" />
+				<step duration="240" file="rf.gif" />
+				<step duration="240" file="nf.gif" />
+			</direction>
+		</gesture>
+		
 		<gesture name="STAGGERING" folder="staggering" repeat="true" shadow="regular">
 			<direction name="NONE">
 				<step duration="210" file="center.gif" />
@@ -281,65 +338,4 @@
 		</gesture>
 		
 	</gestures>
-	
-	
-	
-	
-	
-	<gestures folder="pictures" >
-		<gesture name="APPEARING" folder="disappearing" shadow="shadow.png">
-			<direction name="NONE">
-				<step duration="60" file="8.gif" />
-				<step duration="70" file="7.gif" />
-				<step duration="90" file="6.gif" />
-				<step duration="110" file="5.gif" />
-				<step duration="100" file="4.gif" />
-				<step duration="100" file="3.gif" />
-				<step duration="115" file="2.gif" />
-				<step duration="125" file="1.gif" />
-				<step duration="200" file="0.gif" />
-			</direction>
-		</gesture>
-		
-		<gesture name="DISAPPEARING" folder="disappearing">
-			<direction name="NONE" shadow="shadow.png">
-				<step duration="125" file="1.gif" />
-				<step duration="115" file="2.gif" />
-				<step duration="110" file="3.gif" />
-				<step duration="100" file="4.gif" />
-				<step duration="100" file="5.gif" />
-				<step duration="90" file="6.gif" />
-				<step duration="70" file="7.gif" />
-				<step duration="60" file="8.gif" />
-			</direction>
-		</gesture>
-		
-		<gesture name="PUSHING" folder="pushing" repeat="true">
-			<direction name="DOWN" folder="down" shadow="shadow.png" >
-				<step duration="140" file="lf.gif" />
-				<step duration="165" file="nf.gif" />
-				<step duration="140" file="rf.gif" />
-				<step duration="165" file="nf.gif" />
-			</direction>
-			<direction name="LEFT" folder="left" shadow="shadow.png" >
-				<step duration="140" file="lf.gif" />
-				<step duration="165" file="nf.gif" />
-				<step duration="140" file="rf.gif" />
-				<step duration="165" file="nf.gif" />
-			</direction>
-			<direction name="RIGHT" folder="right" shadow="shadow.png" >
-				<step duration="140" file="lf.gif" />
-				<step duration="165" file="nf.gif" />
-				<step duration="140" file="rf.gif" />
-				<step duration="165" file="nf.gif" />
-			</direction>
-			<direction name="UP" folder="up" shadow="shadow.png" >
-				<step duration="140" file="lf.gif" />
-				<step duration="165" file="nf.gif" />
-				<step duration="140" file="rf.gif" />
-				<step duration="165" file="nf.gif" />
-			</direction>
-		</gesture>
-		
-	</gestures>		
 </animes>
