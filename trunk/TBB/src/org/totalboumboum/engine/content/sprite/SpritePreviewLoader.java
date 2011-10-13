@@ -50,7 +50,7 @@ import org.xml.sax.SAXException;
 /**
  * 
  * @author Vincent Labatut
- *
+ * TODO: load the body picture directly instead of the STANDING action, which requires a convoluted processing
  */
 public class SpritePreviewLoader
 {
@@ -206,7 +206,31 @@ public class SpritePreviewLoader
 			    				// take the first step
 			    				List<Element> stepList = directionElt.getChildren(XmlNames.STEP);
 			    				Element stepElt = stepList.get(0);
+			    				// if the step is a file, it's direct
 				    			stepFile = stepElt.getAttributeValue(XmlNames.FILE);
+				    			// if it's a name, then the corresponding file must be found
+				    			if(stepFile==null)
+				    			{	String key = stepElt.getAttributeValue(XmlNames.NAME);
+						    		Element imagesElement = root.getChild(XmlNames.IMAGES);
+				    				Attribute imgFldr = imagesElement.getAttribute(XmlNames.FOLDER);
+				    				if(imgFldr!=null)
+				    					gestureFolder = File.separator+imgFldr.getValue();
+				    				List<Element> imageList = imagesElement.getChildren(XmlNames.IMAGE);
+					    			Iterator<Element> it3 = imageList.iterator();
+					    			boolean found3 = false;
+					    			while(it3.hasNext() && !found3)
+					    			{	Element imageElement = it3.next();
+				    					String name3 = imageElement.getAttributeValue(XmlNames.NAME);
+					    				if(name3.equalsIgnoreCase(key))
+					    				{	found3 = true;
+					    					imgFldr = imageElement.getAttribute(XmlNames.FOLDER);
+						    				if(imgFldr!=null)
+						    					directionFolder = File.separator+imgFldr.getValue();
+					    					Attribute imgFile = imageElement.getAttribute(XmlNames.FILE);
+						    				stepFile  = imgFile.getValue();
+					    				}
+					    			}
+				    			}
 		    				}
 		    			}
 		    		}
@@ -219,13 +243,14 @@ public class SpritePreviewLoader
 	    		// get the colored picture
 	    		ColorFolder colorFold = null;
 	    		if(elt!=null)
-				{	List<Element> clrs = elt.getChildren();
+				{	found = false;
+	    			List<Element> clrs = elt.getChildren();
 					Iterator<Element> iter = clrs.iterator();
 					PredefinedColor mapped = null;
 			    	String defname = elt.getAttribute(XmlNames.DEFAULT).getValue().trim();
 		    		defname = defname.toUpperCase(Locale.ENGLISH);
 			    	PredefinedColor defaultColor = PredefinedColor.valueOf(defname);
-		    		while(iter.hasNext())
+		    		while(iter.hasNext() /*&& !found*/)
 			    	{	BufferedImage img;
 			    		Element temp = iter.next();
 			    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
@@ -236,6 +261,7 @@ public class SpritePreviewLoader
 						{	ColorMap colormap = (ColorMap)colorRule;
 							String imagePath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath,colormap);
+							found = true;
 							if(mapped==null)
 							{	BufferedImage img2 = ImageTools.loadImage(imagePath,null);
 								result.setImage(null,img2);
@@ -248,6 +274,7 @@ public class SpritePreviewLoader
 								colorFold = colorFolder;
 							String imagePath = colorFolder.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath,null);
+							found = true;
 							if(mapped==null && color==defaultColor)
 							{	result.setImage(null,img);
 							}
