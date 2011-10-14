@@ -338,6 +338,26 @@
 				<step duration="300" name="standing_down" />
 				<step duration="300" file="right.gif" />
 				<step duration="300" name="standing_down" />
+				<step duration="300" file="left.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="right.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="left.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="right.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="left.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="right.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="left.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="right.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="left.gif" />
+				<step duration="300" name="standing_down" />
+				<step duration="300" file="right.gif" />
+				<step duration="300" name="standing_down" />
 			</direction>
 		</gesture>
 		
