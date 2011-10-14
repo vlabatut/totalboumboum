@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../schemas/animes.xsd" 
-		scale="1" boundHeight="16">
+		scale="1" boundHeight="16" preview="pictures/standing/down.gif">
 	
 	<colors folder="colormaps" >
 		<colormap name="BLACK" file="black" />
@@ -54,18 +54,18 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="BOUNCING" folder="juming" shadow="regular" shadowYShift="-5">
-			<direction name="DOWN" folder="down">
-				<step file="2.gif" />
+		<gesture name="BOUNCING" folder="jumping" shadow="regular" shadowYShift="-5">
+			<direction name="DOWN" >
+				<step file="down.gif" />
 			</direction>
-			<direction name="LEFT" folder="left">
-				<step file="2.gif" />
+			<direction name="LEFT" >
+				<step file="left.gif" />
 			</direction>
-			<direction name="RIGHT" folder="right">
-				<step file="2.gif" />
+			<direction name="RIGHT" >
+				<step file="right.gif" />
 			</direction>
-			<direction name="UP" folder="up">
-				<step file="2.gif" />
+			<direction name="UP" >
+				<step file="up.gif" />
 			</direction>
 		</gesture>
 		
@@ -131,7 +131,7 @@
 		</gesture>
 		
 		<gesture name="DISAPPEARING" folder="disappearing" shadow="regular" >
-			<direction name="NONE" shadow="shadow.png">
+			<direction name="NONE" >
 				<step duration="200" file="01.gif" />
 				<step duration="125" file="02.gif" />
 				<step duration="115" file="03.gif" />
@@ -236,25 +236,25 @@
 		</gesture>
 		
 		<gesture name="PUSHING" folder="pushing" repeat="true" shadow="regular">
-			<direction name="DOWN" folder="down" shadow="shadow.png" >
+			<direction name="DOWN" folder="down" >
 				<step duration="240" file="lf.gif" />
 				<step duration="240" file="nf.gif" />
 				<step duration="240" file="rf.gif" />
 				<step duration="240" file="nf.gif" />
 			</direction>
-			<direction name="LEFT" folder="left" shadow="shadow.png" >
+			<direction name="LEFT" folder="left" >
 				<step duration="240" file="lf.gif" />
 				<step duration="240" file="nf.gif" />
 				<step duration="240" file="rf.gif" />
 				<step duration="240" file="nf.gif" />
 			</direction>
-			<direction name="RIGHT" folder="right" shadow="shadow.png" >
+			<direction name="RIGHT" folder="right" >
 				<step duration="240" file="lf.gif" />
 				<step duration="240" file="nf.gif" />
 				<step duration="240" file="rf.gif" />
 				<step duration="240" file="nf.gif" />
 			</direction>
-			<direction name="UP" folder="up" shadow="shadow.png" >
+			<direction name="UP" folder="up" >
 				<step duration="240" file="lf.gif" />
 				<step duration="240" file="nf.gif" />
 				<step duration="240" file="rf.gif" />
