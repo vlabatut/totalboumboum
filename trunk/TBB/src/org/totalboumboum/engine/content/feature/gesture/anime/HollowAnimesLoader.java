@@ -61,6 +61,9 @@ public class HollowAnimesLoader
 			String schemaFolder = FilePaths.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+
+if(folderPath.contains("superbomberman3"))
+	System.out.print("");
 			
 			// loading existing animes
 			loadAnimesElement(root,folderPath,pack);
@@ -245,6 +248,8 @@ public class HollowAnimesLoader
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
 				shadowName = localFilePath+shadowName;
+			else
+				shadowName = shadowFilename;
 		}
 		
 		// shadow horizontal shift
@@ -321,6 +326,8 @@ public class HollowAnimesLoader
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
 				shadowName = localFilePath+shadowName;
+			else
+				shadowName = shadowFilename;
 		}
 		
 		// shadow horizontal shift
@@ -386,6 +393,8 @@ public class HollowAnimesLoader
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
 				shadowName = filePath+attribute.getValue().trim();
+			else
+				shadowName = shadowFilename;
 
 			// shadow horizontal shift
 			attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
