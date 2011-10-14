@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+	
+	<color index="04" red="249" green="206" blue="067" /> <!-- corps -->
+	<color index="05" red="232" green="032" blue="080" /> <!-- poings + antenne -->
+	<color index="09" red="216" green="170" blue="019" /> <!-- ombre -->
+	<color index="10" red="248" green="160" blue="032" /> <!-- visage -->
+	<color index="12" red="240" green="192" blue="000" /> <!-- casque + membres -->
+
+</colormap>
