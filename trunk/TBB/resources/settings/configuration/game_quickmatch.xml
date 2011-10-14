@@ -4,7 +4,7 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="5" rounds="0" time="0" />
+		<limits points="5" rounds="0" time="10000" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -14,8 +14,8 @@
 		</points>
 	</settings>
 	<players>
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="1" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="2" spritePack="superbomberman3" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tournament201011" folder="classic" allowedPlayers="2 3 4 5" />
