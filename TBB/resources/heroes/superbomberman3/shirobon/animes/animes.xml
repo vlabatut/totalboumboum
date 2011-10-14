@@ -145,10 +145,14 @@
 			</direction>
 		</gesture>
 
-		<gesture name="EXULTING" folder="exulting" repeat="true" >
+		<gesture name="EXULTING" folder="exulting" repeat="true" shadow="regular" >
 			<direction name="NONE">
-				<step duration="320" file="1.gif" shadow="regular" />
-				<step duration="320" file="2.gif" />
+				<step duration="320" file="1.gif" />
+				<step duration="50" file="2.gif" yShift="-5" />
+				<step duration="100" file="2.gif" yShift="-8" />
+				<step duration="150" file="2.gif" yShift="-9" />
+				<step duration="100" file="2.gif" yShift="-8" />
+				<step duration="50" file="2.gif" yShift="-5" />
 			</direction>
 		</gesture>
 		
