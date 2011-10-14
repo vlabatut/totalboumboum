@@ -4,7 +4,7 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="5" rounds="0" time="10000" />
+		<limits points="5" rounds="0" time="0" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
