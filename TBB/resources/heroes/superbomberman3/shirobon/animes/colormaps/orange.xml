@@ -2,10 +2,10 @@
 <colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
 		
-	<color index="04" red="000" green="000" blue="000" /> <!-- corps -->
-	<color index="05" red="000" green="000" blue="000" /> <!-- poings + antenne -->
-	<color index="09" red="000" green="000" blue="000" /> <!-- ombre -->
-	<color index="10" red="000" green="000" blue="000" /> <!-- visage -->
-	<color index="12" red="000" green="000" blue="000" /> <!-- casque + membres -->
+	<color index="04" red="254" green="147" blue="037" /> <!-- corps -->
+	<color index="05" red="047" green="128" blue="022" /> <!-- poings + antenne -->
+	<color index="09" red="209" green="112" blue="010" /> <!-- ombre -->
+	<color index="10" red="253" green="198" blue="118" /> <!-- visage -->
+	<color index="12" red="248" green="128" blue="000" /> <!-- casque + membres -->
 	
 </colormap>
