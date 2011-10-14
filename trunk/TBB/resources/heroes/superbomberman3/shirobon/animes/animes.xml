@@ -22,24 +22,24 @@
 		<colormap name="YELLOW" file="yellow" />
 	</colors>
 	
-	<shadows folder="_shadows">
-		<shadow name="regular" file="regular.png"/>
+	<shadows folder="pictures">
+		<shadow name="regular" file="shadow.png"/>
 	</shadows>
 	
-	<images folder="_common">
-		<image name="bending_down" file="bending_down.gif" />
-		<image name="bending_left" file="bending_left.gif" />
-		<image name="bending_right" file="bending_right.gif" />
-		<image name="bending_up" file="bending_up.gif" />
+	<images folder="pictures">
+		<image name="bending_down" folder="bending" file="down.gif" />
+		<image name="bending_left" folder="bending" file="left.gif" />
+		<image name="bending_right" folder="bending" file="right.gif" />
+		<image name="bending_up" folder="bending" file="up.gif" />
 		
-		<image name="standing_down" file="standing_down.gif" />
-		<image name="standing_left" file="standing_left.gif" />
-		<image name="standing_right" file="standing_right.gif" />
-		<image name="standing_up" file="standing_up.gif" />
+		<image name="standing_down" folder="standing" file="down.gif" />
+		<image name="standing_left" folder="standing" file="left.gif" />
+		<image name="standing_right" folder="standing" file="right.gif" />
+		<image name="standing_up" folder="standing" file="up.gif" />
 	</images>
 		
 	<gestures folder="pictures" >
-		<gesture name="APPEARING" folder="disappearing" shadow="standard" >
+		<gesture name="APPEARING" folder="disappearing" shadow="regular" >
 			<direction name="NONE">
 				<step duration="50" file="10.gif" />
 				<step duration="60" file="09.gif" />
@@ -54,7 +54,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="BOUNCING" folder="juming" shadow="standard" shadowYShift="-5">
+		<gesture name="BOUNCING" folder="juming" shadow="regular" shadowYShift="-5">
 			<direction name="DOWN" folder="down">
 				<step file="2.gif" />
 			</direction>
@@ -71,10 +71,10 @@
 		
 		<gesture name="BURNING" folder="burning">
 			<direction name="NONE">
-				<step duration="180" file="1.gif" shadow="standard" />
-				<step duration="150" file="2.gif" shadow="standard" />
-				<step duration="120" file="3.gif" shadow="standard" />
-				<step duration="125" file="4.gif" shadow="standard" />
+				<step duration="180" file="1.gif" shadow="regular" />
+				<step duration="150" file="2.gif" shadow="regular" />
+				<step duration="120" file="3.gif" shadow="regular" />
+				<step duration="125" file="4.gif" shadow="regular" />
 				<step duration="80" file="5.gif" />
 				<step duration="75" file="6.gif" />
 				<step duration="80" file="7.gif" />
@@ -108,7 +108,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="CRYING" folder="crying" shadow="standard" repeat="true">
+		<gesture name="CRYING" folder="crying" shadow="regular" repeat="true">
 			<direction name="NONE" >
 				<step duration="400" file="1.gif" />
 				<step duration="300" file="2.gif" />
@@ -130,7 +130,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="DISAPPEARING" folder="disappearing" shadow="standard" >
+		<gesture name="DISAPPEARING" folder="disappearing" shadow="regular" >
 			<direction name="NONE" shadow="shadow.png">
 				<step duration="200" file="01.gif" />
 				<step duration="125" file="02.gif" />
@@ -167,7 +167,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="JUMPING" folder="jumping" shadow="standard" >
+		<gesture name="JUMPING" folder="jumping" shadow="regular" >
 			<direction name="DOWN" >
 				<step duration="90" name="bending_down" />
 				<step duration="90" file="down.gif" />
@@ -186,7 +186,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="LANDING" folder="jumping" shadow="standard" >
+		<gesture name="LANDING" folder="jumping" shadow="regular" >
 			<direction name="DOWN" >
 				<step file="down.gif" />
 			</direction>
@@ -201,7 +201,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="PICKING" shadow="standard" >
+		<gesture name="PICKING" shadow="regular" >
 			<direction name="DOWN">
 				<step duration="200" name="bending_down" />
 			</direction>
@@ -216,7 +216,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="PUNCHING" shadow="standard" >
+		<gesture name="PUNCHING" shadow="regular" >
 			<direction name="DOWN">
 				<step duration="50" name="bending_down" />
 				<step duration="100" name="bending_down" yShift="2" shadowYShift="2" />
@@ -286,18 +286,18 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="THROWING" shadow="standard" >
+		<gesture name="THROWING" shadow="regular" >
 			<direction name="DOWN">
 				<step duration="150" name="bending_down" />
 			</direction>
 			<direction name="LEFT">
-				<step duration="150" file="bending_left" shadowXShift="-1" />
+				<step duration="150" name="bending_left" shadowXShift="-1" />
 			</direction>
 			<direction name="RIGHT">
-				<step duration="150" file="bending_right" shadowXShift="2" />
+				<step duration="150" name="bending_right" shadowXShift="2" />
 			</direction>
 			<direction name="UP">
-				<step duration="150" file="bending_up" />
+				<step duration="150" name="bending_up" />
 			</direction>
 		</gesture>
 		
