@@ -5,7 +5,7 @@
 	<color index="04" red="180" green="180" blue="180" /> <!-- corps -->
 	<color index="05" red="222" green="085" blue="118" /> <!-- poings + antenne -->
 	<color index="09" red="120" green="120" blue="120" /> <!-- ombre -->
-	<color index="10" red="000" green="000" blue="000" /> <!-- visage -->
+	<color index="10" red="248" green="160" blue="032" /> <!-- visage -->
 	<color index="12" red="152" green="152" blue="152" /> <!-- casque + membres -->
 
 </colormap>
