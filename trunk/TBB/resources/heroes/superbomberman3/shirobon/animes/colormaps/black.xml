@@ -3,7 +3,7 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
 
 	<color index="04" red="036" green="036" blue="036" /> <!-- corps -->
-	<color index="05" red="000" green="000" blue="000" /> <!-- poings + antenne -->
+	<color index="05" red="232" green="032" blue="080" /> <!-- poings + antenne -->
 	<color index="09" red="030" green="030" blue="030" /> <!-- ombre -->
 	<color index="10" red="181" green="167" blue="146" /> <!-- visage -->
 	<color index="12" red="068" green="068" blue="068" /> <!-- casque + membres -->
