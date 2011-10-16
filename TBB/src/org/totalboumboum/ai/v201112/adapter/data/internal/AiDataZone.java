@@ -633,10 +633,10 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * permet de modifier le nombre d'items encore cachés dans ce niveau
+	 * Permet de modifier le nombre d'items encore cachés dans ce niveau.
 	 * 
-	 * @param hiddenItemsCount
-	 * 		le nouveau nombre d'items cachés dans le niveau
+	 * @param type
+	 * 		Le type d'item concerné.
 	 */
 	protected void signalHiddenItem(AiItemType type)
 	{	// general count
