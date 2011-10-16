@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.PixelCostCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**

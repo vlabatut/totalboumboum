@@ -38,12 +38,12 @@ public final class AiLocation implements Comparable<AiLocation>
 	 * Les coordonnées réelles sont supposées appartenir
 	 * à la case.
 	 * 
+	 * @param posX
+	 * 		Position de l'abscisse en pixels.
+	 * @param posY
+	 * 		Position de l'ordonnée en pixels.
 	 * @param tile	
-	 * 		case associée à ce noeud de recherche
-	 * @param costCalculator	
-	 * 		fonction de cout
-	 * @param heuristicCalculator	
-	 * 		fonction heuristique
+	 * 		Case contenant cette position dans la zone courante.
 	 */
 	private AiLocation(double posX, double posY, AiTile tile)
 	{	this.tile = tile;

@@ -185,12 +185,12 @@ public final class Astar
 	 * dans le façon dont A* est employé (mauvaise fonction de cout, par
 	 * exemple). 
 	 * 
-	 * @param startTile	
+	 * @param startLocation	
 	 * 		La case de départ
 	 * @param endTile	
 	 * 		La case d'arrivée
 	 * @return 
-	 * 		Un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur {@ode null}.
+	 * 		Un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur {@code null}.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
@@ -215,7 +215,7 @@ public final class Astar
 	 * dont A* est employé (mauvaise fonction de cout, par exemple).
 	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
-	 * @param startTile	
+	 * @param startLocation	
 	 * 		La case de départ.
 	 * @param endTiles	
 	 * 		L'ensemble des cases d'arrivée possibles.

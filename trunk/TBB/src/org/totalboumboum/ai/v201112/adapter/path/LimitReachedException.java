@@ -49,7 +49,7 @@ public final class LimitReachedException extends Exception
 	 * a atteint une des limites qui lui étaient fixées sans pour autant
 	 * trouver de solution (i.e. de chemin)
 	 * 
-	 * @param startTile
+	 * @param startLocation
 	 * 		Emplacment initial.
 	 * @param endTiles
 	 * 		Cases finales.
@@ -82,7 +82,7 @@ public final class LimitReachedException extends Exception
 	 * a atteint une des limites qui lui étaient fixées sans pour autant
 	 * terminer le traitement.
 	 * 
-	 * @param startTile
+	 * @param startLocation
 	 * 		Emplacment initial.
 	 * @param height
 	 * 		Hauteur maximale atteinte pour l'arbre de recherche.

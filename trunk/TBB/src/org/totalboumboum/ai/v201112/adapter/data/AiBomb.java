@@ -225,7 +225,7 @@ public interface AiBomb extends AiSprite
 	 * Indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * Utilisez plutot {@link #isCrossableBy()}.
+	 * Utilisez plutot {@link #isCrossableBy}.
 	 * 
 	 * @return	
 	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages

@@ -563,13 +563,13 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * Calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
-	 * @param statesMap	
-	 * 		la liste des états à appliquer aux sprites (calculés automatiquement ou spécifiés par l'utilisateur)
+	 * @param sprites	
+	 * 		La liste des sprites à traiter.
 	 * @param duration	
-	 * 		durée du pas de simulation
+	 * 		Durée du pas de simulation
 	 */
 	private void updateSprites(List<AiSimSprite> sprites, long duration)
 	{	
