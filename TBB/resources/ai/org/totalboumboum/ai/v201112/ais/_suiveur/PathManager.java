@@ -182,7 +182,9 @@ public class PathManager
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-//		if(!arrived)
+		if(path==null)
+			arrived = false;
+		else
 		{	// on teste si le personnage est à peu près situé à la position de destination 
 			AiHero ownHero = ai.getOwnHero();
 			double xCurrent = ownHero.getPosX();
@@ -233,12 +235,16 @@ public class PathManager
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		AiTile currentTile = ai.getCurrentTile();
-		while(!path.isEmpty() && !path.getLocation(0).getTile().equals(currentTile))
-		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-			
-			path.removeLocation(0);
+		
+		if(path==null)
+			path = new AiPath();
+		else
+		{	AiTile currentTile = ai.getCurrentTile();
+			while(!path.isEmpty() && !path.getLocation(0).getTile().equals(currentTile))
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
+				path.removeLocation(0);
+			}
 		}
 	}
 	
@@ -323,7 +329,7 @@ public class PathManager
 		{	// on vérifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
-			if(path.isEmpty() || !checkPathValidity())
+			if(path==null || path.isEmpty() || !checkPathValidity())
 			{	AiLocation location = new AiLocation(ai.getCurrentTile());
 				try
 				{	path = astar.processShortestPath(location,tileDest);
@@ -333,7 +339,7 @@ public class PathManager
 					path = new AiPath();
 				}
 			}
-			if(checkPathValidity())
+			if(path!=null && checkPathValidity())
 			{	// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
 				if(path.getLength()>1)
 				{	AiTile tile = path.getLocation(1).getTile();
