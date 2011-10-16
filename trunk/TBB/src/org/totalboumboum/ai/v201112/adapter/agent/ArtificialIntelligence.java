@@ -31,9 +31,22 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * classe dont chaque agent doit hériter. La méthode processAction est la méthode 
- * appelée par le gestionnaire d'agents pour l'interroger que la prochaine action 
- * à effectuer.<br/>
+ * Chaque agent doit hériter de cette classe. La méthode {@link #processAction} est la méthode 
+ * appelée par le gestionnaire d'agents pour obtenir la prochaine action 
+ * à effectuer. Cette méthode implémente l'algorithme général spécifié en cours
+ * et ne doit être ni modifiée ni surchargée. <br/>
+ * Le comportement de l'agent doit être implémenté en surchargeant les méthodes 
+ * {@link #updatePercepts}, {@link #updateUtility}, {@link #considerBombing} et
+ * {@link #considerMoving}.<br/>
+ * La méthode {@link #updateMode}, utilisée pour mettre le mode à jour, ne peut 
+ * pas être modifiée ni surchargée. Elle implémente l'algorithme de sélection du
+ * mode défini en cours. Elle fait appel aux méthodes {@link #hasEnoughItems} et
+ * {@link #isCollectPossible()}, qui doivent être surchargées : si elles ne le sont
+ * pas, alors le mode sera toujours {@link AiMode#COLLECTING} par défaut.<br/>  
+ * Enfin, la méthode {@link #updateOutput} peut être surchargée afin d'utiliser
+ * la sortie graphique de l'agent pour afficher des informations en cours de jeu :
+ * cases colorées, texte, chemins, etc.<br/>
+ * <br/>
  * <b>ATTENTION :</b> remarque très importante.
  * A la fin de la partie, le jeu demande à l'agent de s'arrêter. Dans certaines
  * conditions, l'agent ne voudra pas s'arrêter (par exemple si elle est dans une
@@ -142,7 +155,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public void updatePercepts() throws StopRequestException
+	protected void updatePercepts() throws StopRequestException
 	{	
 		// méthode à surcharger
 	}
@@ -183,7 +196,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public void updateOutput() throws StopRequestException
+	protected void updateOutput() throws StopRequestException
 	{	
 		// méthode à surcharger
 	}
@@ -191,25 +204,28 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indique si l'agent a déjà été initialisé ou pas */
 	private boolean initialized = false;
+	
 	/**
 	 * méthode à surcharger s'il est nécessaire que l'agent soit
-	 * initagentlisé. Toute opération définie dans cette fonction
+	 * initialisé. Toute opération définie dans cette fonction
 	 * sera réalisée une fois, juste avant le début de la partie.
-	 * A noter que les percepts ont néanmoins déjà été mis à jour.
+	 * A noter que les percepts sont néanmoins déjà à jour.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public void init() throws StopRequestException
+	protected void init() throws StopRequestException
 	{	
+		// méthode à surcharger
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// MODE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le mode courant de l'agent */
-	protected AiMode mode = AiMode.COLLECTING;
+	/** Le mode courant de l'agent */
+	private AiMode mode = AiMode.COLLECTING;
 	
 	/**
 	 * Renvoie le mode courant de cet agent,
@@ -224,18 +240,6 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * Modifie le mode courant de cet agent,
-	 * i.e. soit {@link AiMode#ATTACKING}, soit
-	 * {@link AiMode#COLLECTING}.
-	 * 
-	 * @param mode
-	 * 		Le nouveau mode de cet agent.
-	 */
-	public final void setMode(AiMode mode)
-	{	this.mode = mode;
-	}
-
-	/**
 	 * Méthode permettant de mettre à jour
 	 * le mode de l'agent : {@link AiMode#ATTACKING}
 	 * ou {@link AiMode#COLLECTING}.<br/>
@@ -246,8 +250,56 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public void updateMode() throws StopRequestException
-	{	mode = AiMode.COLLECTING;
+	private final void updateMode() throws StopRequestException
+	{	// si l'agent a assez d'items, on attaque
+		if(hasEnoughItems())
+			mode = AiMode.ATTACKING;
+		// sinon, il va essayer d'en ramasser
+		else
+		{	// s'il est possible d'en ramasser, il passe en mode collecte
+			if(isCollectPossible())
+				mode = AiMode.COLLECTING;
+			// sinon, il est obligé d'attaqué (même s'il n'a pas assez d'armes)
+			else
+				mode = AiMode.ATTACKING;
+		}
+	}
+	
+	/**
+	 * Détermine si l'agent possède assez d'item,
+	 * ou bien s'il doit essayer d'en ramasser d'autres.
+	 * Cette distinction est relative à l'environnement,
+	 * à l'agent lui-même et à la stratégie qu'il utilise.<br/>
+	 * Cette méthode est utilisée par lors de la mise 
+	 * à jour du mode par {@link #updateMode}.
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'agent possède assez d'items.
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected boolean hasEnoughItems() throws StopRequestException
+	{	
+		// méthode à surcharger
+		return false;
+	}
+	
+	/**
+	 * Détermine si l'agent a la possibilité de ramasser
+	 * des items dans la zone courante : présence d'items
+	 * cachés ou découverts, assez de temps restant, etc.<br/>
+	 * Cette méthode est utilisée par lors de la mise 
+	 * à jour du mode par {@link #updateMode}.
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'agent a la possibilité de ramasser des items.
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected boolean isCollectPossible() throws StopRequestException
+	{	
+		// méthode à surcharger
+		return true;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -325,8 +377,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public boolean considerBombing() throws StopRequestException
-	{	return false;
+	protected boolean considerBombing() throws StopRequestException
+	{	
+		// méthode à surcharger
+		return false;
 	}
 
 	/**
@@ -346,8 +400,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public Direction considerMoving() throws StopRequestException
-	{	return Direction.NONE;
+	protected Direction considerMoving() throws StopRequestException
+	{	
+		// méthode à surcharger
+		return Direction.NONE;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -366,7 +422,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public void updateUtility() throws StopRequestException
+	protected void updateUtility() throws StopRequestException
 	{	
 		// méthode à surcharger
 	}
