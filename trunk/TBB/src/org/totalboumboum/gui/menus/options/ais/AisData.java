@@ -354,7 +354,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		}
 		else
 		{	text = Long.toString(buais);
-			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+GuiKeys.TOOLTIP);
+			tooltip = text+" ms";
 		}
 		optionsPanel.getLine(LINE_BOMB_USELESS_AIS).setLabelText(2,text,tooltip);
 	}
