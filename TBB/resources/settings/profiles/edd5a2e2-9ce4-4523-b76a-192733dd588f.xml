@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/profile.xsd">
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
 	<general name="Promeneur" />
-	<ai name="_promeneur" pack="v200809" />
+	<ai name="_promeneur" pack="v201112" />
 	<character name="assistantpirate" packname="superbomberman5" color="ORANGE" />
- 	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />     
+	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />
 </profile>
 

@@ -391,7 +391,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 */
 	public List<AstarNode> getChildren() throws StopRequestException
 	{	ai.checkInterruption();
-	
+		
 		List<AstarNode> result = successorCalculator.processSuccessors(this);
 //children = result;		
 		return result;
