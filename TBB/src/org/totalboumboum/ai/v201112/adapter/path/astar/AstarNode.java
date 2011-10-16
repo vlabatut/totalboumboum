@@ -110,6 +110,8 @@ public final class AstarNode implements Comparable<AstarNode>
 		
 		// profondeur
 		depth = parent.getDepth() + 1;
+if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
+	System.out.print("");
 		
 		// coût
 		costCalculator = parent.getCostCalculator();
@@ -309,7 +311,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
-		boolean result = this.location.equals(tile);
+		boolean result = this.location.getTile().equals(tile);
 		if(parent!=null && !result)
 			result = parent.hasBeenExplored(tile);
 		return result;
