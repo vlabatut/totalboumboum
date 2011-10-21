@@ -62,7 +62,7 @@ public class HollowAnimesLoader
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 
-if(folderPath.contains("superbomberman3"))
+if(folderPath.contains("blocks"))
 	System.out.print("");
 			
 			// loading existing animes
@@ -248,8 +248,8 @@ if(folderPath.contains("superbomberman3"))
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
 				shadowName = localFilePath+shadowName;
-			else
-				shadowName = shadowFilename;
+//			else
+//				shadowName = shadowFilename;
 		}
 		
 		// shadow horizontal shift
@@ -326,8 +326,8 @@ if(folderPath.contains("superbomberman3"))
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
 				shadowName = localFilePath+shadowName;
-			else
-				shadowName = shadowFilename;
+//			else
+//				shadowName = shadowFilename;
 		}
 		
 		// shadow horizontal shift
@@ -392,9 +392,9 @@ if(folderPath.contains("superbomberman3"))
 		{	shadowName = attribute.getValue().trim();
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
-				shadowName = filePath+attribute.getValue().trim();
-			else
-				shadowName = shadowFilename;
+				shadowName = filePath+shadowName;
+//			else
+//				shadowName = shadowFilename;
 
 			// shadow horizontal shift
 			attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
