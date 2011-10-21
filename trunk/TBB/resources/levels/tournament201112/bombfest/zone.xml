@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
+	
+	<variableTiles>
+		<variableTile name="softwall">
+			<value proba="0.5">
+				<block group="softwalls" name="redyellow" />
+			</value>
+			<value proba="0.5">
+				<block group="softwalls" name="yellowred" />
+			</value>
+		</variableTile>
+	</variableTiles>
+	
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
@@ -73,50 +85,50 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
@@ -147,7 +159,7 @@
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<bomb name="normal" duration="2000" range="5" />
+				<bomb name="normal" range="5" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
@@ -162,7 +174,7 @@
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<bomb name="normal" duration="2000" range="5" />
+				<bomb name="normal" range="5" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
@@ -193,33 +205,33 @@
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<floor name="00_02" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="00_03" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
-				<floor name="00_03" />
+				<floor name="00_04" />
 				<item name="extraflame" />
 			</tile>
 			<tile pos="5">
-				<floor name="00_04" />
-			</tile>
-			<tile pos="6">
 				<floor name="00_05" />
 			</tile>
-			<tile pos="7">
+			<tile pos="6">
 				<floor name="00_06" />
-				<bomb name="normal" duration="3000" range="3" />
+			</tile>
+			<tile pos="7">
+				<floor name="00_07" />
+				<bomb name="normal" range="3" />
 			</tile>
 			<tile pos="8">
-				<floor name="00_07" />
+				<floor name="00_08" />
 			</tile>
 			<tile pos="9">
-				<floor name="00_08" />
+				<floor name="00_09" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
@@ -227,12 +239,12 @@
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
@@ -245,46 +257,46 @@
 		</line>
 		<line pos="4">
 			<tile pos="0">
-				<floor name="regular" />
+				<floor name="01_00" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="01_00" />
+				<floor name="01_01" />
 			</tile>
 			<tile pos="2">
-				<floor name="01_01" />
+				<floor name="01_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="01_02" />
+				<floor name="01_03" />
 			</tile>
 			<tile pos="4">
-				<floor name="01_03" />
+				<floor name="01_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="01_04" />
+				<floor name="01_05" />
 			</tile>
 			<tile pos="6">
-				<floor name="01_05" />
+				<floor name="01_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="01_06" />
+				<floor name="01_07" />
 			</tile>
 			<tile pos="8">
-				<floor name="01_07" />
+				<floor name="01_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="01_08" />
+				<floor name="01_09" />
 			</tile>
 			<tile pos="10">
-				<floor name="01_09" />
+				<floor name="01_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="01_10" />
+				<floor name="01_11" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
@@ -300,61 +312,61 @@
 		</line>
 		<line pos="5">
 			<tile pos="0">
-				<floor name="regular" />
+				<floor name="02_00" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="02_00" />
+				<floor name="02_01" />
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="2">
-				<floor name="02_01" />
-				<block group="default" name="softwall" />
+				<floor name="02_02" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
-				<floor name="02_02" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="02_03" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
-				<floor name="02_03" />
-				<block group="default" name="softwall" />
+				<floor name="02_04" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="5">
-				<floor name="02_04" />
-			</tile>
-			<tile pos="6">
 				<floor name="02_05" />
 			</tile>
-			<tile pos="7">
+			<tile pos="6">
 				<floor name="02_06" />
-				<bomb name="normal" duration="2500" range="1" />
+			</tile>
+			<tile pos="7">
+				<floor name="02_07" />
+				<bomb name="normal" range="1" />
 			</tile>
 			<tile pos="8">
-				<floor name="02_07" />
-			</tile>
-			<tile pos="9">
 				<floor name="02_08" />
 			</tile>
-			<tile pos="10">
+			<tile pos="9">
 				<floor name="02_09" />
-				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="02_10" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="11">
-				<floor name="02_10" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="02_11" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<floor name="02_12" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="02_13" />
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="02_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -364,52 +376,52 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="03_00" />
+				<floor name="03_01" />
 			</tile>
 			<tile pos="2">
-				<floor name="03_01" />
+				<floor name="03_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="03_02" />
+				<floor name="03_03" />
 			</tile>
 			<tile pos="4">
-				<floor name="03_03" />
+				<floor name="03_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="03_04" />
+				<floor name="03_05" />
 			</tile>
 			<tile pos="6">
-				<floor name="03_05" />
+				<floor name="03_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="03_06" />
+				<floor name="03_07" />
 			</tile>
 			<tile pos="8">
-				<floor name="03_07" />
+				<floor name="03_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="03_08" />
+				<floor name="03_09" />
 			</tile>
 			<tile pos="10">
-				<floor name="03_09" />
+				<floor name="03_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="03_10" />
+				<floor name="03_11" />
 			</tile>
 			<tile pos="12">
-				<floor name="03_11" />
+				<floor name="03_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="03_12" />
+				<floor name="03_13" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="03_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -419,57 +431,57 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="04_00" />
+				<floor name="04_01" />
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="2">
-				<floor name="04_01" />
-				<block group="default" name="softwall" />
+				<floor name="04_02" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
-				<floor name="04_02" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="04_03" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
-				<floor name="04_03" />
-				<bomb name="normal" duration="2500" range="2" />
+				<floor name="04_04" />
+				<bomb name="normal" range="2" />
 			</tile>
 			<tile pos="5">
-				<floor name="04_04" />
-			</tile>
-			<tile pos="6">
 				<floor name="04_05" />
 			</tile>
-			<tile pos="7">
+			<tile pos="6">
 				<floor name="04_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="04_07" />
 				<item name="speed" />
 			</tile>
 			<tile pos="8">
-				<floor name="04_07" />
-			</tile>
-			<tile pos="9">
 				<floor name="04_08" />
 			</tile>
-			<tile pos="10">
+			<tile pos="9">
 				<floor name="04_09" />
-				<bomb name="normal" duration="2500" range="2" />
+			</tile>
+			<tile pos="10">
+				<floor name="04_10" />
+				<bomb name="normal" range="2" />
 			</tile>
 			<tile pos="11">
-				<floor name="04_10" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="04_11" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="12">
-				<floor name="04_11" />
-				<block group="default" name="softwall" />
+				<floor name="04_12" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="13">
-				<floor name="04_12" />
+				<floor name="04_13" />
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="04_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -482,49 +494,49 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="05_01" />
+				<floor name="05_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="05_02" />
+				<floor name="05_03" />
 			</tile>
 			<tile pos="4">
-				<floor name="05_03" />
+				<floor name="05_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="05_04" />
+				<floor name="05_05" />
 			</tile>
 			<tile pos="6">
-				<floor name="05_05" />
+				<floor name="05_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="05_06" />
+				<floor name="05_07" />
 			</tile>
 			<tile pos="8">
-				<floor name="05_07" />
+				<floor name="05_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="05_08" />
+				<floor name="05_09" />
 			</tile>
 			<tile pos="10">
-				<floor name="05_09" />
+				<floor name="05_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="05_10" />
+				<floor name="05_11" />
 			</tile>
 			<tile pos="12">
-				<floor name="05_11" />
+				<floor name="05_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="05_12" />
+				<floor name="05_13" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="05_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -538,53 +550,53 @@
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="2">
-				<floor name="06_01" />
-				<block group="default" name="softwall" />
+				<floor name="06_02" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
-				<floor name="06_02" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="06_03" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
-				<floor name="06_03" />
-				<block group="default" name="softwall" />
+				<floor name="06_04" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="5">
-				<floor name="06_04" />
-			</tile>
-			<tile pos="6">
 				<floor name="06_05" />
 			</tile>
-			<tile pos="7">
+			<tile pos="6">
 				<floor name="06_06" />
-				<bomb name="normal" duration="2500" range="1" />
+			</tile>
+			<tile pos="7">
+				<floor name="06_07" />
+				<bomb name="normal" range="1" />
 			</tile>
 			<tile pos="8">
-				<floor name="06_07" />
-			</tile>
-			<tile pos="9">
 				<floor name="06_08" />
 			</tile>
-			<tile pos="10">
+			<tile pos="9">
 				<floor name="06_09" />
-				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="06_10" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="11">
-				<floor name="06_10" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="06_11" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="12">
-				<floor name="06_11" />
-				<block group="default" name="softwall" />
+				<floor name="06_12" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="13">
-				<floor name="06_12" />
+				<floor name="06_13" />
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="06_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -597,49 +609,49 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="07_01" />
+				<floor name="07_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="07_02" />
+				<floor name="07_03" />
 			</tile>
 			<tile pos="4">
-				<floor name="07_03" />
+				<floor name="07_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="07_04" />
+				<floor name="07_05" />
 			</tile>
 			<tile pos="6">
-				<floor name="07_05" />
+				<floor name="07_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="07_06" />
+				<floor name="07_07" />
 			</tile>
 			<tile pos="8">
-				<floor name="07_07" />
+				<floor name="07_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="07_08" />
+				<floor name="07_09" />
 			</tile>
 			<tile pos="10">
-				<floor name="07_09" />
+				<floor name="07_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="07_10" />
+				<floor name="07_11" />
 			</tile>
 			<tile pos="12">
-				<floor name="07_11" />
+				<floor name="07_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="07_12" />
+				<floor name="07_13" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="07_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -654,52 +666,52 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
 				<item name="extraflame" />
 			</tile>
 			<tile pos="5">
-				<floor name="08_04" />
-			</tile>
-			<tile pos="6">
 				<floor name="08_05" />
 			</tile>
-			<tile pos="7">
+			<tile pos="6">
 				<floor name="08_06" />
-				<bomb name="normal" duration="3000" range="3" />
+			</tile>
+			<tile pos="7">
+				<floor name="08_07" />
+				<bomb name="normal" range="3" />
 			</tile>
 			<tile pos="8">
-				<floor name="08_07" />
-			</tile>
-			<tile pos="9">
 				<floor name="08_08" />
 			</tile>
+			<tile pos="9">
+				<floor name="08_09" />
+			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="08_10" />
 				<item name="extraflame" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<floor name="08_11" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<floor name="08_12" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="08_13" />
 				<bomb name="remotecontrol" range="6" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="08_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -724,7 +736,7 @@
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<bomb name="normal" duration="2000" range="5" />
+				<bomb name="normal" range="5" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
@@ -739,7 +751,7 @@
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<bomb name="normal" duration="2000" range="5" />
+				<bomb name="normal" range="5" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
@@ -770,50 +782,50 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<bomb name="normal" duration="1001" range="4" />
+				<bomb name="normal" range="4" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <players xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\players.xsd">
 	<locations>
-<!-- 
-		<case players="0" />
-		<case players="1">
-			<location player="00" line="07" col="09" />
-		</case>
--->		
 		<case players="2">
 			<location player="00" line="07" col="09" />
 			<location player="01" line="09" col="13" />

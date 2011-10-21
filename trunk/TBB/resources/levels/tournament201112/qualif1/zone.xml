@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
+	
 	<variableTiles>
 		<variableTile name="tile1">
-			<value proba="0.30000001192092896">
-				<block group="default" name="softwall" />
+			<value proba="0.15">
+				<block group="softwalls" name="redyellow" />
 				<item name="extrabomb" />
 			</value>
-			<value proba="0.30000001192092896">
-				<block group="default" name="softwall" />
+			<value proba="0.15">
+				<block group="softwalls" name="yellowred" />
+				<item name="extrabomb" />
+			</value>
+			<value proba="0.15">
+				<block group="softwalls" name="redyellow" />
 				<item name="extraflame" />
 			</value>
-			<value proba="0.4000000059604645" />
+			<value proba="0.15">
+				<block group="softwalls" name="yellowred" />
+				<item name="extraflame" />
+			</value>
+			<value proba="0.4" />
 		</variableTile>
 	</variableTiles>
+	
 	<matrix>
 		<line pos="0">
 			<tile pos="0">

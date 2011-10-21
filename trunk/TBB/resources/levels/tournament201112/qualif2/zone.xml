@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
+
+	<variableTiles>
+		<variableTile name="softwall">
+			<value proba="0.5">
+				<block group="softwalls" name="redyellow" />
+			</value>
+			<value proba="0.5">
+				<block group="softwalls" name="yellowred" />
+			</value>
+		</variableTile>
+	</variableTiles>
+	
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
@@ -157,7 +169,7 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
@@ -189,7 +201,7 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
@@ -231,7 +243,7 @@
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
@@ -258,7 +270,7 @@
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
@@ -266,7 +278,7 @@
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
@@ -274,7 +286,7 @@
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
@@ -282,7 +294,7 @@
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
@@ -327,7 +339,7 @@
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
@@ -351,7 +363,7 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
@@ -383,7 +395,7 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />

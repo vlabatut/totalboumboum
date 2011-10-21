@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
+	
 	<variableTiles>
 		<variableTile name="itemTile">
 			<value proba="0.5">
@@ -10,12 +11,16 @@
 			</value>
 		</variableTile>
 		<variableTile name="blockTile">
-			<value proba="0.6000000238418579">
-				<block group="default" name="softwall" />
+			<value proba="0.3">
+				<block group="softwalls" name="redyellow" />
 			</value>
-			<value proba="0.4000000059604645" />
+			<value proba="0.3">
+				<block group="softwalls" name="yellowred" />
+			</value>
+			<value proba="0.4" />
 		</variableTile>
 	</variableTiles>
+	
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
@@ -346,35 +351,35 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="00_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="00_03" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="8">
-				<floor name="00_03" />
+				<floor name="00_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="00_04" />
+				<floor name="00_05" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="10">
-				<floor name="00_05" />
+				<floor name="00_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="00_06" />
+				<floor name="00_07" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="12">
-				<floor name="00_07" />
+				<floor name="00_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="00_08" />
+				<floor name="00_09" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="14">
@@ -423,51 +428,51 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="01_00" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="5">
-				<floor name="01_00" />
+				<floor name="01_01" />
 				<reference name="itemTile" />
 			</tile>
 			<tile pos="6">
-				<floor name="01_01" />
-				<reference name="blockTile" />
-			</tile>
-			<tile pos="7">
 				<floor name="01_02" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="8">
+			<tile pos="7">
 				<floor name="01_03" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="9">
+			<tile pos="8">
 				<floor name="01_04" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="10">
+			<tile pos="9">
 				<floor name="01_05" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="11">
+			<tile pos="10">
 				<floor name="01_06" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="12">
+			<tile pos="11">
 				<floor name="01_07" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="13">
+			<tile pos="12">
 				<floor name="01_08" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="14">
+			<tile pos="13">
 				<floor name="01_09" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="15">
+			<tile pos="14">
 				<floor name="01_10" />
+				<reference name="blockTile" />
+			</tile>
+			<tile pos="15">
+				<floor name="01_11" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="16">
@@ -509,61 +514,61 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="02_00" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="5">
-				<floor name="02_00" />
+				<floor name="02_01" />
 			</tile>
 			<tile pos="6">
-				<floor name="02_01" />
+				<floor name="02_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="02_02" />
+				<floor name="02_03" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="8">
-				<floor name="02_03" />
+				<floor name="02_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="02_04" />
+				<floor name="02_05" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="10">
-				<floor name="02_05" />
+				<floor name="02_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="02_06" />
+				<floor name="02_07" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="12">
-				<floor name="02_07" />
+				<floor name="02_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="02_08" />
+				<floor name="02_09" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="14">
-				<floor name="02_09" />
+				<floor name="02_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="15">
-				<floor name="02_10" />
+				<floor name="02_11" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="16">
-				<floor name="regular" />
+				<floor name="02_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="17">
-				<floor name="regular" />
+				<floor name="02_13" />
 			</tile>
 			<tile pos="18">
-				<floor name="regular" />
+				<floor name="02_14" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="19">
@@ -597,54 +602,54 @@
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="5">
-				<floor name="03_00" />
+				<floor name="03_01" />
 				<reference name="itemTile" />
 			</tile>
 			<tile pos="6">
-				<floor name="03_01" />
-				<reference name="blockTile" />
-			</tile>
-			<tile pos="7">
 				<floor name="03_02" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="8">
+			<tile pos="7">
 				<floor name="03_03" />
+				<reference name="blockTile" />
+			</tile>
+			<tile pos="8">
+				<floor name="03_04" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="9">
-				<floor name="03_04" />
-			</tile>
-			<tile pos="10">
 				<floor name="03_05" />
 			</tile>
-			<tile pos="11">
+			<tile pos="10">
 				<floor name="03_06" />
 			</tile>
-			<tile pos="12">
+			<tile pos="11">
 				<floor name="03_07" />
 			</tile>
-			<tile pos="13">
+			<tile pos="12">
 				<floor name="03_08" />
 			</tile>
-			<tile pos="14">
+			<tile pos="13">
 				<floor name="03_09" />
+			</tile>
+			<tile pos="14">
+				<floor name="03_10" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="15">
-				<floor name="03_10" />
-				<reference name="blockTile" />
-			</tile>
-			<tile pos="16">
 				<floor name="03_11" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="17">
+			<tile pos="16">
 				<floor name="03_12" />
+				<reference name="blockTile" />
+			</tile>
+			<tile pos="17">
+				<floor name="03_13" />
 				<reference name="itemTile" />
 			</tile>
 			<tile pos="18">
-				<floor name="regular" />
+				<floor name="03_14" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="19">
@@ -678,54 +683,54 @@
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="5">
-				<floor name="04_00" />
+				<floor name="04_01" />
 			</tile>
 			<tile pos="6">
-				<floor name="04_01" />
+				<floor name="04_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="04_02" />
+				<floor name="04_03" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="8">
-				<floor name="04_03" />
+				<floor name="04_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="04_04" />
+				<floor name="04_05" />
 			</tile>
 			<tile pos="10">
-				<floor name="04_05" />
+				<floor name="04_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="04_06" />
+				<floor name="04_07" />
 			</tile>
 			<tile pos="12">
-				<floor name="04_07" />
+				<floor name="04_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="04_08" />
+				<floor name="04_09" />
 			</tile>
 			<tile pos="14">
-				<floor name="04_09" />
+				<floor name="04_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="15">
-				<floor name="04_10" />
+				<floor name="04_11" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="16">
-				<floor name="04_11" />
+				<floor name="04_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="17">
-				<floor name="04_12" />
+				<floor name="04_13" />
 			</tile>
 			<tile pos="18">
-				<floor name="regular" />
+				<floor name="04_14" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="19">
@@ -763,50 +768,50 @@
 				<reference name="itemTile" />
 			</tile>
 			<tile pos="6">
-				<floor name="05_01" />
-				<reference name="blockTile" />
-			</tile>
-			<tile pos="7">
 				<floor name="05_02" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="8">
+			<tile pos="7">
 				<floor name="05_03" />
+				<reference name="blockTile" />
+			</tile>
+			<tile pos="8">
+				<floor name="05_04" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="9">
-				<floor name="05_04" />
-			</tile>
-			<tile pos="10">
 				<floor name="05_05" />
 			</tile>
-			<tile pos="11">
+			<tile pos="10">
 				<floor name="05_06" />
 			</tile>
-			<tile pos="12">
+			<tile pos="11">
 				<floor name="05_07" />
 			</tile>
-			<tile pos="13">
+			<tile pos="12">
 				<floor name="05_08" />
 			</tile>
-			<tile pos="14">
+			<tile pos="13">
 				<floor name="05_09" />
+			</tile>
+			<tile pos="14">
+				<floor name="05_10" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="15">
-				<floor name="05_10" />
-				<reference name="blockTile" />
-			</tile>
-			<tile pos="16">
 				<floor name="05_11" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="17">
+			<tile pos="16">
 				<floor name="05_12" />
+				<reference name="blockTile" />
+			</tile>
+			<tile pos="17">
+				<floor name="05_13" />
 				<reference name="itemTile" />
 			</tile>
 			<tile pos="18">
-				<floor name="regular" />
+				<floor name="05_14" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="19">
@@ -843,54 +848,54 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="06_01" />
+				<floor name="06_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="06_02" />
+				<floor name="06_03" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="8">
-				<floor name="06_03" />
+				<floor name="06_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="06_04" />
+				<floor name="06_05" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="10">
-				<floor name="06_05" />
+				<floor name="06_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="06_06" />
+				<floor name="06_07" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="12">
-				<floor name="06_07" />
+				<floor name="06_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="06_08" />
+				<floor name="06_09" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="14">
-				<floor name="06_09" />
+				<floor name="06_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="15">
-				<floor name="06_10" />
+				<floor name="06_11" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="16">
-				<floor name="06_11" />
+				<floor name="06_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="17">
-				<floor name="06_12" />
+				<floor name="06_13" />
 			</tile>
 			<tile pos="18">
-				<floor name="regular" />
+				<floor name="06_14" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="19">
@@ -928,55 +933,55 @@
 				<reference name="itemTile" />
 			</tile>
 			<tile pos="6">
-				<floor name="07_01" />
-				<reference name="blockTile" />
-			</tile>
-			<tile pos="7">
 				<floor name="07_02" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="8">
+			<tile pos="7">
 				<floor name="07_03" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="9">
+			<tile pos="8">
 				<floor name="07_04" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="10">
+			<tile pos="9">
 				<floor name="07_05" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="11">
+			<tile pos="10">
 				<floor name="07_06" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="12">
+			<tile pos="11">
 				<floor name="07_07" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="13">
+			<tile pos="12">
 				<floor name="07_08" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="14">
+			<tile pos="13">
 				<floor name="07_09" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="15">
+			<tile pos="14">
 				<floor name="07_10" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="16">
+			<tile pos="15">
 				<floor name="07_11" />
 				<reference name="blockTile" />
 			</tile>
-			<tile pos="17">
+			<tile pos="16">
 				<floor name="07_12" />
+				<reference name="blockTile" />
+			</tile>
+			<tile pos="17">
+				<floor name="07_13" />
 				<reference name="itemTile" />
 			</tile>
 			<tile pos="18">
-				<floor name="regular" />
+				<floor name="07_14" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="19">
@@ -1025,42 +1030,42 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="08_04" />
+				<floor name="08_05" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="10">
-				<floor name="08_05" />
+				<floor name="08_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="08_06" />
+				<floor name="08_07" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="12">
-				<floor name="08_07" />
+				<floor name="08_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="08_08" />
+				<floor name="08_09" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="08_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="15">
-				<floor name="regular" />
+				<floor name="08_11" />
 				<reference name="blockTile" />
 			</tile>
 			<tile pos="16">
-				<floor name="regular" />
+				<floor name="08_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="17">
-				<floor name="regular" />
+				<floor name="08_13" />
 			</tile>
 			<tile pos="18">
-				<floor name="regular" />
+				<floor name="08_14" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="19">
@@ -1217,11 +1222,11 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="horizontal" />
 			</tile>
-			<tile pos="17">
+			<tile pos="16">
 				<floor name="regular" />
 				<block group="hardwalls" name="horizontal" />
 			</tile>
-			<tile pos="16">
+			<tile pos="17">
 				<floor name="regular" />
 				<block group="hardwalls" name="horizontal" />
 			</tile>
