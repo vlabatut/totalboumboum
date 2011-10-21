@@ -126,12 +126,16 @@ public class EscapeManager
 		AiLocation location = new AiLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
 		try
 		{	path = astar.processShortestPath(location,possibleDest);
-			tileDest = path.getLastLocation().getTile();
 		}
 		catch (LimitReachedException e)
 		{	//e.printStackTrace();
 			path = new AiPath();
 		}
+		
+		if(path==null || path.isEmpty())
+			tileDest = ai.getCurrentTile();
+		else
+			tileDest = path.getLastLocation().getTile();
 	}
 	
 	/**
