@@ -3,6 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../../../../schemas/sprite.xsd">
 	
-	<general name="Red and yellow soft wall" base="common" />
+	<general name="Red and yellow soft wall" base="common_soft" />
 
 </sprite>
