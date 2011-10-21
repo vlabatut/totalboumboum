@@ -48,7 +48,6 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("unused")
 public class LevelTools
 {	
 	/**
@@ -59,7 +58,7 @@ public class LevelTools
 	public static void main(String[] args) throws Exception
 	{	
 		// create a level from scratch
-		HollowLevel level = initLevel(9,9,"levelpack","levelname","superbomberman1","tournament4");
+/*		HollowLevel level = initLevel(9,9,"levelpack","levelname","superbomberman1","tournament4");
 		setBackground(level);
 		addGrid(level);
 		addBorder(level,2,1,1,1);
@@ -71,16 +70,16 @@ public class LevelTools
 		insertCol(level,level.getLevelInfo().getGlobalWidth()-1,true,true,true,true,true);
 		insertRow(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
 		saveLevel(level);
-				
-/*		// open an existing level and replace the background
-		String pack = "tournament201011";
-		String folder = "carrefour";
+*/				
+		// open an existing level and replace the background
+		String pack = "tournament201112";
+		String folder = "readysetgo";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
 		removeBackground(level);
 		setBackground(level);
 		saveLevel(level);
-*/		
+		
 /*		// open an existing level and add/remove columns/rows
 		String pack = "tournament201011";
 		String folder = "level";
