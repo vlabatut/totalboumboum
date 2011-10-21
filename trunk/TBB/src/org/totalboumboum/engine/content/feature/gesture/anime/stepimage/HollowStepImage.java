@@ -74,7 +74,7 @@ public class HollowStepImage extends AbstractStepImage implements Serializable
 	{	
 //System.out.println(fileName);		
 		ColorRule colorRule = colorRulesMap.getColorRule(color);
-		BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(fileName,colorRule,zoom);
+		BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(fileName,colorRule,zoom); 
 		StepImage result = new StepImage(image,xShift*zoom,yShift*zoom);
 		
 		return result;
