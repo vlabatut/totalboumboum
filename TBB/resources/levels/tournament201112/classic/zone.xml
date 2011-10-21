@@ -92,7 +92,7 @@
 			</tile>
 			<tile pos="15">
 				<floor name="regular" />
-				<block group="hardwalls" name="angleupright" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="16">
 				<floor name="regular" />
