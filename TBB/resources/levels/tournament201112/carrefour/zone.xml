@@ -81,15 +81,15 @@
 			</tile>
 			<tile pos="4">
 				<floor name="00_06" />
-				<block group="hardwalls" name="angleupleft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="00_07" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="6">
 				<floor name="00_08" />
-				<block group="hardwalls" name="angleupright" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="00_09" />
@@ -119,7 +119,7 @@
 			</tile>
 			<tile pos="4">
 				<floor name="01_06" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="01_07" />
@@ -127,7 +127,7 @@
 			</tile>
 			<tile pos="6">
 				<floor name="01_08" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="01_09" />
@@ -157,14 +157,14 @@
 			</tile>
 			<tile pos="4">
 				<floor name="02_06" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="02_07" />
 			</tile>
 			<tile pos="6">
 				<floor name="02_08" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="02_09" />
@@ -185,38 +185,38 @@
 			</tile>
 			<tile pos="1">
 				<floor name="03_03" />
-				<block group="hardwalls" name="angleupleft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="2">
 				<floor name="03_04" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
 				<floor name="03_05" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
 				<floor name="03_06" />
-				<block group="hardwalls" name="angledownright" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="03_07" />
 			</tile>
 			<tile pos="6">
 				<floor name="03_08" />
-				<block group="hardwalls" name="angledownleft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="03_09" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="8">
 				<floor name="03_10" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
 				<floor name="03_11" />
-				<block group="hardwalls" name="angleupright" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="10">
 				<floor name="03_12" />
@@ -228,7 +228,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="04_03" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="2">
 				<floor name="04_04" />
@@ -256,7 +256,7 @@
 			</tile>
 			<tile pos="9">
 				<floor name="04_11" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="10">
 				<floor name="04_12" />
@@ -268,38 +268,38 @@
 			</tile>
 			<tile pos="1">
 				<floor name="05_03" />
-				<block group="hardwalls" name="angledownleft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="2">
 				<floor name="05_04" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
 				<floor name="05_05" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
 				<floor name="05_06" />
-				<block group="hardwalls" name="angleupright" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="05_07" />
 			</tile>
 			<tile pos="6">
 				<floor name="05_08" />
-				<block group="hardwalls" name="angleupleft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="05_09" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="8">
 				<floor name="05_10" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
 				<floor name="05_11" />
-				<block group="hardwalls" name="angledownright" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="10">
 				<floor name="05_12" />
@@ -320,14 +320,14 @@
 			</tile>
 			<tile pos="4">
 				<floor name="06_06" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="06_07" />
 			</tile>
 			<tile pos="6">
 				<floor name="06_08" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="06_09" />
@@ -357,7 +357,7 @@
 			</tile>
 			<tile pos="4">
 				<floor name="07_06" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="07_07" />
@@ -365,7 +365,7 @@
 			</tile>
 			<tile pos="6">
 				<floor name="07_08" />
-				<block group="hardwalls" name="vertical" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="07_09" />
@@ -395,15 +395,15 @@
 			</tile>
 			<tile pos="4">
 				<floor name="08_06" />
-				<block group="hardwalls" name="angledownleft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
 				<floor name="08_07" />
-				<block group="hardwalls" name="horizontal" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="6">
 				<floor name="08_08" />
-				<block group="hardwalls" name="angledownright" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
 				<floor name="08_09" />
