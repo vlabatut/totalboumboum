@@ -257,7 +257,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="00_01" />
 			</tile>
 			<tile pos="6">
 				<floor name="00_02" />

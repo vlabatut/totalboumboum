@@ -3,24 +3,17 @@
 	
 	<variableTiles>
 		<variableTile name="softwall">
-			<value proba="0.325">
-				<block group="softwalls" name="redyellow" />
+			<value proba="0.6499999761581421">
+				<block group="softwalls" name="regular" />
 			</value>
-			<value proba="0.325">
-				<block group="softwalls" name="yellowred" />
-			</value>
-			<value proba="0.175">
-				<block group="softwalls" name="redyellow" />
-				<item name="extrabomb" />
-			</value>
-			<value proba="0.175">
-				<block group="softwalls" name="yellowred" />
+			<value proba="0.3499999940395355">
+				<block group="softwalls" name="regular" />
 				<item name="extrabomb" />
 			</value>
 		</variableTile>
 		<variableTile name="left">
 			<value proba="0.15000000596046448">
-				<block group="softwalls" name="redyellow" />
+				<block group="softwalls" name="regular" />
 			</value>
 			<value proba="0.8500000238418579">
 				<block group="hardwalls" name="regular" />
@@ -28,7 +21,7 @@
 		</variableTile>
 		<variableTile name="down">
 			<value proba="0.11999999731779099">
-				<block group="softwalls" name="yellowred" />
+				<block group="softwalls" name="regular" />
 			</value>
 			<value proba="0.8799999952316284">
 				<block group="hardwalls" name="regular" />
@@ -36,7 +29,7 @@
 		</variableTile>
 		<variableTile name="right">
 			<value proba="0.15000000596046448">
-				<block group="softwalls" name="redyellow" />
+				<block group="softwalls" name="regular" />
 			</value>
 			<value proba="0.8500000238418579">
 				<block group="hardwalls" name="regular" />
@@ -44,7 +37,7 @@
 		</variableTile>
 		<variableTile name="up">
 			<value proba="0.11999999731779099">
-				<block group="softwalls" name="yellowred" />
+				<block group="softwalls" name="regular" />
 			</value>
 			<value proba="0.8799999952316284">
 				<block group="hardwalls" name="regular" />
@@ -170,7 +163,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="00_01" />
 			</tile>
 			<tile pos="2">
 				<floor name="00_02" />

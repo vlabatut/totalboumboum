@@ -166,7 +166,7 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="00_01" />
 			</tile>
 			<tile pos="2">
 				<floor name="00_02" />
