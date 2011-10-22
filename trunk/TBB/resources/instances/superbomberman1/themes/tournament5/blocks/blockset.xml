@@ -25,6 +25,7 @@
 		<group name="hardwalls" folder="hardwalls">
 			<block name="regular" folder="regular"/>
 			
+			<block name="filling" folder="filling"/>
 		</group>
 	</concreteBlocks>
 	
