@@ -16,47 +16,61 @@
 		<line pos="0">
 			<tile pos="0">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 		</line>
 		<line pos="1">
 			<tile pos="0">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -104,11 +118,13 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 		</line>
 		<line pos="2">
 			<tile pos="0">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -156,6 +172,7 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 		</line>
 		<line pos="3">
@@ -409,6 +426,7 @@
 		<line pos="8">
 			<tile pos="0">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -456,11 +474,13 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 		</line>
 		<line pos="9">
 			<tile pos="0">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -508,47 +528,61 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 		</line>
 		<line pos="10">
 			<tile pos="0">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
 			</tile>
 		</line>
 	</matrix>
