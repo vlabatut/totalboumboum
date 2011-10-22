@@ -3,29 +3,18 @@
 
 	<variableTiles>
 		<variableTile name="tile1">
-			<value proba="0.1">
-				<block group="softwalls" name="redyellow" />
+			<value proba="0.20000000298023224">
+				<block group="softwalls" name="regular" />
 			</value>
-			<value proba="0.1">
-				<block group="softwalls" name="yellowred" />
-			</value>
-			<value proba="0.025">
-				<block group="softwalls" name="redyellow" />
+			<value proba="0.05000000074505806">
+				<block group="softwalls" name="regular" />
 				<item name="extrabomb" />
 			</value>
-			<value proba="0.025">
-				<block group="softwalls" name="yellowred" />
-				<item name="extrabomb" />
-			</value>
-			<value proba="0.025">
-				<block group="softwalls" name="redyellow" />
+			<value proba="0.05000000074505806">
+				<block group="softwalls" name="regular" />
 				<item name="extraflame" />
 			</value>
-			<value proba="0.025">
-				<block group="softwalls" name="yellowred" />
-				<item name="extraflame" />
-			</value>
-			<value proba="0.7" />
+			<value proba="0.699999988079071" />
 		</variableTile>
 	</variableTiles>
 	
@@ -237,7 +226,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="00_01" />
 				<reference name="tile1" />
 			</tile>
 			<tile pos="3">
