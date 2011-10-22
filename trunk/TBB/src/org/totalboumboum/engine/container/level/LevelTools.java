@@ -74,7 +74,7 @@ public class LevelTools
 */				
 		// open an existing level and replace the background
 /*		String pack = "tournament201112";
-		String folder = "bombfest";
+		String folder = "carrefour";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
 		removeBackground(level);
@@ -93,7 +93,7 @@ public class LevelTools
 //		removeRow(level,0,true,true,true,true,true);
 //		removeRow(level,0,true,true,true,true,true);
 		insertCol(level,0,true,true,true,true,true);
-		insertCol(level,12,true,true,true,true,true);
+		insertCol(level,14,true,true,true,true,true);
 		saveLevel(level);
 */
 	}
