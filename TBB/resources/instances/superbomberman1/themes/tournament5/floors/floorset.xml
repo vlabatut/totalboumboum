@@ -9,6 +9,7 @@
 	<concreteFloors>
 		<floor name="regular" folder="regular" />
 
+		<floor name="00_01" folder="00_01"/>
 		<floor name="00_02" folder="00_02"/>
 		<floor name="00_03" folder="00_03"/>
 		<floor name="00_04" folder="00_04"/>
