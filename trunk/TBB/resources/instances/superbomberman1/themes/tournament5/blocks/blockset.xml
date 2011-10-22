@@ -16,6 +16,8 @@
 	
 	<concreteBlocks>
 		<group name="softwalls" folder="softwalls">
+			<block name="regular" folder="regular" />
+			
 			<block name="redyellow" folder="redyellow" />
 			<block name="yellowred" folder="yellowred" />
 		</group>	
