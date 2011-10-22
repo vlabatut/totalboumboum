@@ -48,6 +48,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("unused")
 public class LevelTools
 {	
 	/**
@@ -72,27 +73,27 @@ public class LevelTools
 		saveLevel(level);
 */				
 		// open an existing level and replace the background
-		String pack = "tournament201112";
-		String folder = "carrefour";
+/*		String pack = "tournament201112";
+		String folder = "bombfest";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
 		removeBackground(level);
-//		setBackground(level);
+		setBackground(level);
 		saveLevel(level);
-		
-/*		// open an existing level and add/remove columns/rows
-		String pack = "tournament201011";
-		String folder = "level";
+*/		
+		// open an existing level and add/remove columns/rows
+/*		String pack = "tournament201112";
+		String folder = "carrefour";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
-		removeRow(level,12,true,true,true,true,true);
-		removeRow(level,12,true,true,true,true,true);
-		removeRow(level,12,true,true,true,true,true);
-		removeRow(level,0,true,true,true,true,true);
-		removeRow(level,0,true,true,true,true,true);
-		removeRow(level,0,true,true,true,true,true);
+//		removeRow(level,12,true,true,true,true,true);
+//		removeRow(level,12,true,true,true,true,true);
+//		removeRow(level,12,true,true,true,true,true);
+//		removeRow(level,0,true,true,true,true,true);
+//		removeRow(level,0,true,true,true,true,true);
+//		removeRow(level,0,true,true,true,true,true);
 		insertCol(level,0,true,true,true,true,true);
-		insertCol(level,23,true,true,true,true,true);
+		insertCol(level,12,true,true,true,true,true);
 		saveLevel(level);
 */
 	}
