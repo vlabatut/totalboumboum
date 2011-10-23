@@ -366,24 +366,29 @@ public final class Astar
 //			node = node.getParent();
 //		}
 		
+		// nouvelle version
 		while(node!=null)
 		{	AiLocation location = node.getLocation();
 			AiTile tile = location.getTile();
 			
-			// different tile
+			// case différente
 			if(previousNode==null || !tile.equals(previousNode.getLocation().getTile()))
 				result.addLocation(0,location);
 			
-			// same tile
+			// même case
 			else
 			{	long pause = (long)(previousNode.getCost() - node.getCost());
 				pause = pause + result.getPause(0);
 				result.setPause(0,pause);
 			}
 			
-			// process next node
+			// noeud suivant
+			previousNode = node;
 			node = node.getParent();
 		}
+
+//if(result.getLength()>1 && result.getLocation(0).equals(result.getLocation(1)))
+//	System.out.print("");
 		
 		return result;
 	}
