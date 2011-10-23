@@ -1203,10 +1203,12 @@ if(sprite instanceof AiSimBomb)
 	 * 		le personnage que l'on veut voir poser une bombe
 	 * @param tile
 	 * 		la case qui devra contenir la bombe.
+	 * @param force
+	 * 		si ce paramètre est {@code true}, le modèle pose une bombe même si l'agent concerné n'en a plus à poser.
 	 * @return
 	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
-	public AiBomb applyDropBomb(AiHero hero, AiTile tile)
+	public AiBomb applyDropBomb(AiHero hero, AiTile tile, boolean force)
 	{	AiBomb result = null;
 	
 		// get the tile
@@ -1218,7 +1220,7 @@ if(sprite instanceof AiSimBomb)
 		AiSimHero simHero = current.getSpriteById(hero);
 		if(simHero!=null)
 		{	// drop the bomb
-			result = dropBomb(simTile,simHero);
+			result = dropBomb(simTile,simHero,force);
 		}
 		
 		return result;
@@ -1238,16 +1240,18 @@ if(sprite instanceof AiSimBomb)
 	 * 		case qui contiendra la bombe nouvellement créée
 	 * @param hero
 	 * 		personnage à qui la bombe appartiendra (ce qui détermine ses propriétés)
+	 * @param force
+	 * 		si ce paramètre est {@code true}, le modèle pose une bombe même si l'agent concerné n'en a plus à poser.
 	 * @return
 	 * 		la bombe si elle a pu être créée, ou null si ce n'est pas possible 
 	 */
-	private AiSimBomb dropBomb(AiSimTile tile, AiSimHero hero)
+	private AiSimBomb dropBomb(AiSimTile tile, AiSimHero hero, boolean force)
 	{	AiSimBomb result = null;
 		
 		// check if the hero can drop a bomb
 		int dropped = hero.getBombNumberCurrent();
 		int max = hero.getBombNumberMax();
-		if(dropped<max)
+		if(dropped<max || force)
 		{	// then check if the tile can host the bomb
 			AiBomb bomb = hero.getBombPrototype();
 			if(tile.isCrossableBy(bomb,false,false,true,false,true,false))
@@ -1274,22 +1278,24 @@ if(sprite instanceof AiSimBomb)
 	/**
 	 * permet de solliciter un personnage pour qu'il pose une bombe
 	 * dans la case spécifiée. La méthode renvoie la bombe posée,
-	 * ou bien null en cas d'impossibilité. La bombe est posée
+	 * ou bien {@code null} en cas d'impossibilité. La bombe est posée
 	 * dans la case actuellement occupée par le personnage.
 	 * 
 	 * @param hero
 	 * 		le personnage que l'on veut voir poser une bombe
+	 * @param force
+	 * 		si ce paramètre est {@code true}, le modèle pose une bombe même si l'agent concerné n'en a plus à poser.
 	 * @return
 	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
-	public AiBomb applyDropBomb(AiHero hero)
+	public AiBomb applyDropBomb(AiHero hero, boolean force)
 	{	AiBomb result = null;
 		// get hero
 		AiSimHero simHero = current.getSpriteById(hero);
 		if(simHero!=null)
 		{	// drop bomb
 			AiTile tile = simHero.getTile();
-			result = applyDropBomb(hero,tile);
+			result = applyDropBomb(hero,tile,force);
 		}
 		return result;
 	}

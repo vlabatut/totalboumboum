@@ -108,7 +108,7 @@ public final class AiModelTest
 		
 		// drop a bomb
 		System.out.println("hero drops a bomb");
-		model.applyDropBomb(hero);
+		model.applyDropBomb(hero,true);
 		
 		// change hero direction
 		System.out.println("change hero direction: DOWN>LEFT");
