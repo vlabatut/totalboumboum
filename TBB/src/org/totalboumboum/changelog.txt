@@ -462,4 +462,4 @@
 		- animation d'apparition des bombes
 		- nouveau thème pour le tournoi 4
 		- nouveaux niveaux pour la qualif et le tournoi: bombfest, qualif4, hurry
-		- mise à jour de l'année du copyright de 2008-2010 en 2008-2011
+		- mise à jour de l'année du copyright de 2009-2010 en 2010-2011
