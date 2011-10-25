@@ -257,8 +257,7 @@ public final class Astar
 		// traitement
 		if(!endTiles.isEmpty())
 		{	do
-			{	ai.checkInterruption();
-				// on prend le noeud situé en tête de file
+			{	// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				lastLocation = currentNode.getLocation();
 				lastZone = lastLocation.getTile().getZone();
