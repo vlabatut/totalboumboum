@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Chaque agent doit hériter de cette classe. La méthode {@link #processAction} est la méthode 
@@ -63,7 +64,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  */
 public abstract class ArtificialIntelligence implements Callable<AiAction>
-{	
+{	private boolean verbose = true;
+	
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -318,33 +320,62 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	public final AiAction processAction() throws StopRequestException
 	{	checkInterruption();
+verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
+		if(verbose) System.out.println(System.currentTimeMillis()+">>>>>>>>>>>>>>>>");
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes
-			updatePercepts();
+			{	long before = System.currentTimeMillis();
+				updatePercepts();
+				long after = System.currentTimeMillis();
+				long elapsed = after - before;
+				if(verbose) System.out.println(before+"::updatePercepts: "+elapsed+" ms");
+			}
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
-			updateMode();
+			{	long before = System.currentTimeMillis();
+				updateMode();
+				long after = System.currentTimeMillis();
+				long elapsed = after - before;
+				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms");
+			}
 			
 			// mise à jour des valeurs d'utilité
-			updateUtility();
+			{	long before = System.currentTimeMillis();
+				updateUtility();
+				long after = System.currentTimeMillis();
+				long elapsed = after - before;
+				if(verbose) System.out.println(before+"::updateUtility: "+elapsed+" ms");
+			}
 		}
 		
 		// action 
 		// (note : les actions sont mutuellement exclusives, c'est soit l'une soit l'autre)
 		AiAction result = null;
-		{	// on essaie de poser une bombe
-			if(considerBombing())
+		{	long before = System.currentTimeMillis();
+			boolean cb = considerBombing();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			if(verbose) System.out.println(before+"::considerBombing: "+elapsed+" ms");
+			
+			// on essaie de poser une bombe
+			if(cb)
 			{	result = new AiAction(AiActionName.DROP_BOMB);
 			}
-			
+
 			// on essaie de se déplaccer
 			else
 			{	// on récupère la direction
+				before = System.currentTimeMillis();
 				Direction direction = considerMoving();
+				after = System.currentTimeMillis();
+				elapsed = after - before;
+				if(verbose) System.out.println(before+"::considerMoving: "+elapsed+" ms");
+				
 				// si pas de direction : on suppose que c'est NONE
 				if(direction==null)	
 					direction = Direction.NONE;
+				
 				// on construit l'action en fonction de la direction
 				if(direction==Direction.NONE)
 					result = new AiAction(AiActionName.NONE);
@@ -354,9 +385,14 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		}
 		
 		// mise à jour des sorties
+		long before = System.currentTimeMillis();
 		updateOutput();
+		long after = System.currentTimeMillis();
+		long elapsed = after - before;
+		if(verbose) System.out.println(before+"::updateOutput: "+elapsed+" ms");
 		
 		// on renvoie l'action sélectionnée
+		if(verbose) System.out.println(after+"<<<<<<<<<<<<<<<<");
 		return result;
 	}
 	

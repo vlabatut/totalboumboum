@@ -62,9 +62,6 @@ public class HollowAnimesLoader
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 
-if(folderPath.contains("blocks"))
-	System.out.print("");
-			
 			// loading existing animes
 			loadAnimesElement(root,folderPath,pack);
 			
