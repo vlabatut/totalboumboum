@@ -106,9 +106,7 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 	 */
 	@Override
 	public List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException
-	{	ai.checkInterruption();
-		
-		AiLocation location = node.getLocation();
+	{	AiLocation location = node.getLocation();
 		AiTile tile = location.getTile();
 		AiZone zone = location.getZone();
 AiHero h = zone.getHeroByColor(hero.getColor());
@@ -217,9 +215,7 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	private long getWaitDuration(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption();
-		
-		// init
+	{	// init
 		AiZone zone = tile.getZone();
 		long result = Long.MAX_VALUE;
 		List<AiTile> neighbors = tile.getNeighbors();
@@ -227,9 +223,7 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 		// on s'intéresse d'abord aux obstacles concrets
 		// on considère chaque case voisine une par une
 		for(AiTile neighbor: neighbors)
-		{	ai.checkInterruption();
-		
-			// s'il y a un obstacle concret
+		{	// s'il y a un obstacle concret
 			if(!neighbor.isCrossableBy(hero))
 			{	// s'il y a du feu
 				List<AiFire> fires = neighbor.getFires();
@@ -248,9 +242,7 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 		HashMap<AiBomb,Long> delays = zone.getBombDelays();
 		List<AiBomb> bombs = zone.getBombs();
 		for(AiBomb bomb: bombs)
-		{	ai.checkInterruption();
-		
-			List<AiTile> blast = bomb.getBlast();
+		{	List<AiTile> blast = bomb.getBlast();
 			List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
 			neigh.retainAll(blast);
 			// on vérifie si la bombe menace une des cases voisines

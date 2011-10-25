@@ -309,9 +309,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption();
-		
-		boolean result = this.location.getTile().equals(tile);
+	{	boolean result = this.location.getTile().equals(tile);
 		if(parent!=null && !result)
 			result = parent.hasBeenExplored(tile);
 		return result;
@@ -335,9 +333,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public boolean hasBeenExploredSincePause(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption();
-		
-		boolean result = location.getTile().equals(tile);
+	{	boolean result = location.getTile().equals(tile);
 		if(!result && parent!=null && !parent.getLocation().equals(location))
 			result = parent.hasBeenExploredSincePause(tile);
 		return result;
@@ -357,9 +353,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 /*	private boolean hasBeenExplored(AstarLocation location) throws StopRequestException
-	{	ai.checkInterruption();
-	
-		AiTile tile = location.getTile();
+	{	AiTile tile = location.getTile();
 		boolean result = this.location.getTile().equals(tile);
 		if(parent!=null && !result)
 			result = parent.hasBeenExplored(tile);
@@ -392,9 +386,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public List<AstarNode> getChildren() throws StopRequestException
-	{	ai.checkInterruption();
-		
-		List<AstarNode> result = successorCalculator.processSuccessors(this);
+	{	List<AstarNode> result = successorCalculator.processSuccessors(this);
 //children = result;		
 		return result;
 	}
