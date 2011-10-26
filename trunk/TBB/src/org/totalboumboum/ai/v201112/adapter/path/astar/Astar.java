@@ -230,13 +230,14 @@ public final class Astar
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
 	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
-	{	if(verbose)
-		{	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+	{	long before = System.currentTimeMillis();
+		if(verbose)
+		{	System.out.println(before+"++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.print("A*: from "+startLocation+" to [");
 			for(AiTile tile: endTiles)
 				System.out.print(" "+tile);
 			System.out.println(" ]");
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println(before+"++++++++++++++++++++++++++++++++++++++++++++++");
 		}		
 		int maxh = 0;
 		double maxc = 0;
@@ -257,7 +258,8 @@ public final class Astar
 		// traitement
 		if(!endTiles.isEmpty())
 		{	do
-			{	// on prend le noeud situé en tête de file
+			{	long before1 = System.currentTimeMillis();
+				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				lastLocation = currentNode.getLocation();
 				lastZone = lastLocation.getTile().getZone();
@@ -283,7 +285,12 @@ public final class Astar
 					limitReached = true;
 				else
 				{	// sinon on récupére les noeuds suivants
+					long before2 = System.currentTimeMillis();
 					List<AstarNode> successors = currentNode.getChildren();
+					long after2 = System.currentTimeMillis();
+					long elapsed2 = after2 - before2;
+					if(verbose)
+						System.out.println("Child development: "+elapsed2+" ms");
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
@@ -299,8 +306,10 @@ public final class Astar
 					maxc = currentNode.getCost();
 				if(queue.size()>maxn)
 					maxn = queue.size();
+				long after1 = System.currentTimeMillis();
+				long elapsed1 = after1 - before1;
 				if(verbose)
-					System.out.println("==============================================");
+					System.out.println("["+elapsed1+"]==============================================");
 			}
 			while(!queue.isEmpty() && !found && !limitReached);
 		
@@ -309,8 +318,10 @@ public final class Astar
 				result = processPath(finalNode);
 		}
 		
+		long after = System.currentTimeMillis();
+		long elapsed = after - before;
 		if(verbose)
-		{	System.out.print("Path: [");
+		{	System.out.print(after+"Path: [");
 			if(limitReached)
 				System.out.println(" limit reached");
 			else if(found)
@@ -322,6 +333,7 @@ public final class Astar
 			else 
 				System.out.print(" no solution found");
 			System.out.println(" ]");
+			System.out.println("Elapsed time: "+elapsed+" ms");
 			//
 			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);
 			System.out.print(" src="+root.getLocation());
