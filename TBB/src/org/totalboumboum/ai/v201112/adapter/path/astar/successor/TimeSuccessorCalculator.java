@@ -205,7 +205,6 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 	 * Détermine le temps d'attente minimal lorsque
 	 * le joueur est placé dans la case passée en paramètre.
 	 * 
-	 * 
 	 * @param tile
 	 * 		Case à considérer.
 	 * @return
