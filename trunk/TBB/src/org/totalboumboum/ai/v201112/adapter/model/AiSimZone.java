@@ -106,11 +106,12 @@ final class AiSimZone extends AiZone
 					addSprite(simFire);
 				}
 				// floors
-				List<AiFloor> floors = tile.getFloors();
-				for(AiFloor floor: floors)
-				{	AiSimFloor simFloor = new AiSimFloor(floor,simTile);
-					addSprite(simFloor);
-				}
+// NOTE to gain a few ms...				
+//				List<AiFloor> floors = tile.getFloors();
+//				for(AiFloor floor: floors)
+//				{	AiSimFloor simFloor = new AiSimFloor(floor,simTile);
+//					addSprite(simFloor);
+//				}
 				// heroes
 				List<AiHero> heroes = tile.getHeroes();
 				for(AiHero hero: heroes)
@@ -294,49 +295,99 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * permet de rajouter un sprite dans cette zone<br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été affecté à une case 
-	 * lors de sa construction, donc il s'agit ici simplement de mettre
-	 * à jour les listes de sprites de la zone
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone
 	 * 
-	 *  @param sprite
+	 *  @param block
 	 *  	le sprite à rajouter à cette zone
 	 */
-	protected void addSprite(AiSimSprite sprite)
-	{	AiSimTile tile = sprite.getTile();
-
-		if(sprite instanceof AiSimBlock)
-		{	AiSimBlock block = (AiSimBlock)sprite;
-			internalBlocks.add(block);
-			externalBlocks.add(block);
-		}
-		else if(sprite instanceof AiSimBomb)
-		{	AiSimBomb bomb = (AiSimBomb)sprite;
-			internalBombs.add(bomb);
-			externalBombs.add(bomb);
-		}
-		else if(sprite instanceof AiSimFire)
-		{	AiSimFire fire = (AiSimFire)sprite;
-			internalFires.add(fire);
-			externalFires.add(fire);
-		}
-		else if(sprite instanceof AiSimFloor)
-		{	AiSimFloor floor = (AiSimFloor)sprite;
-			internalFloors.add(floor);
-			externalFloors.add(floor);
-		}
-		else if(sprite instanceof AiSimHero)
-		{	AiSimHero hero = (AiSimHero)sprite;
-			internalHeroes.add(hero);
-			externalHeroes.add(hero);
-			remainingHeroList.add(hero);
-		}
-		else if(sprite instanceof AiSimItem)
-		{	AiSimItem item = (AiSimItem)sprite;
-			internalItems.add(item);
-			externalItems.add(item);
-		}
-		
-		tile.addSprite(sprite);
+	protected void addSprite(AiSimBlock block)
+	{	AiSimTile tile = block.getTile();
+		internalBlocks.add(block);
+		externalBlocks.add(block);
+		tile.addSprite(block);
+	}
+	
+	/**
+	 * permet de rajouter un sprite dans cette zone<br/>
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * 
+	 *  @param bomb
+	 *  	le sprite à rajouter à cette zone
+	 */
+	protected void addSprite(AiSimBomb bomb)
+	{	AiSimTile tile = bomb.getTile();
+		internalBombs.add(bomb);
+		externalBombs.add(bomb);
+		tile.addSprite(bomb);
+	}
+	
+	/**
+	 * permet de rajouter un sprite dans cette zone<br/>
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * 
+	 *  @param fire
+	 *  	le sprite à rajouter à cette zone
+	 */
+	protected void addSprite(AiSimFire fire)
+	{	AiSimTile tile = fire.getTile();
+		internalFires.add(fire);
+		externalFires.add(fire);
+		tile.addSprite(fire);
+	}
+	
+	/**
+	 * permet de rajouter un sprite dans cette zone<br/>
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * 
+	 *  @param floor
+	 *  	le sprite à rajouter à cette zone
+	 */
+	protected void addSprite(AiSimFloor floor)
+	{	AiSimTile tile = floor.getTile();
+		internalFloors.add(floor);
+		externalFloors.add(floor);
+		tile.addSprite(floor);
+	}
+	
+	/**
+	 * permet de rajouter un sprite dans cette zone<br/>
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * 
+	 *  @param hero
+	 *  	le sprite à rajouter à cette zone
+	 */
+	protected void addSprite(AiSimHero hero)
+	{	AiSimTile tile = hero.getTile();
+		internalHeroes.add(hero);
+		externalHeroes.add(hero);
+		remainingHeroList.add(hero);
+		tile.addSprite(hero);
+	}
+	
+	/**
+	 * permet de rajouter un sprite dans cette zone<br/>
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * 
+	 *  @param item
+	 *  	le sprite à rajouter à cette zone
+	 */
+	protected void addSprite(AiSimItem item)
+	{	AiSimTile tile = item.getTile();
+		internalItems.add(item);
+		externalItems.add(item);
+		tile.addSprite(item);
 	}
 	
 	/**
@@ -351,43 +402,121 @@ final class AiSimZone extends AiZone
 	 * 		le sprit à supprimer de la zone
 	 */
 	protected void removeSprite(AiSimSprite sprite)
-	{	// sprite lists
-		if(sprite instanceof AiSimBlock)
+	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
-			internalBlocks.remove(block);
-			externalBlocks.remove(block);
+			removeSprite(block);
 		}
 		else if(sprite instanceof AiSimBomb)
 		{	AiSimBomb bomb = (AiSimBomb)sprite;
-			internalBombs.remove(bomb);
-			externalBombs.remove(bomb);
+			removeSprite(bomb);
 		}
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire)sprite;
-			internalFires.remove(fire);
-			externalFires.remove(fire);
+			removeSprite(fire);
 		}
 		else if(sprite instanceof AiSimFloor)
 		{	AiSimFloor floor = (AiSimFloor)sprite;
-			internalFloors.remove(floor);
-			externalFloors.remove(floor);
+			removeSprite(floor);
 		}
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
-			// only remove from this list, because the others must stay complete
-			remainingHeroList.remove(hero);
+			removeSprite(hero);
 		}
 		else if(sprite instanceof AiSimItem)
 		{	AiSimItem item = (AiSimItem)sprite;
-			internalItems.remove(item);
-			externalItems.remove(item);
+			removeSprite(item);
 		}
-		
-		// tile
-		AiSimTile tile = sprite.getTile();
-		tile.removeSprite(sprite);
 	}
 	
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param block
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimBlock block)
+	{	internalBlocks.remove(block);
+		externalBlocks.remove(block);
+		
+		AiSimTile tile = block.getTile();
+		tile.removeSprite(block);
+	}
+
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param bomb
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimBomb bomb)
+	{	internalBombs.remove(bomb);
+		externalBombs.remove(bomb);
+		
+		AiSimTile tile = bomb.getTile();
+		tile.removeSprite(bomb);
+	}
+
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param fire
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimFire fire)
+	{	internalFires.remove(fire);
+		externalFires.remove(fire);
+		
+		AiSimTile tile = fire.getTile();
+		tile.removeSprite(fire);
+	}
+
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param floor
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimFloor floor)
+	{	internalFloors.remove(floor);
+		externalFloors.remove(floor);
+		
+		AiSimTile tile = floor.getTile();
+		tile.removeSprite(floor);
+	}
+
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * comme il s'agit d'un joueur, il est supprimé seulement de la case
+	 * et de la liste des joueurs encore en jeu (mais la zone continue
+	 * à le référencer dans la liste générale des joueurs, car le sprite
+	 * peut encore etre utile, par exemple pour obtenir le classement
+	 * de ce joueur)
+	 * 
+	 * @param hero
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimHero hero)
+	{	// only remove from this list, because the others must stay complete
+		remainingHeroList.remove(hero);
+		
+		AiSimTile tile = hero.getTile();
+		tile.removeSprite(hero);
+	}
+
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param item
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimItem item)
+	{	internalItems.remove(item);
+		externalItems.remove(item);
+		
+		AiSimTile tile = item.getTile();
+		tile.removeSprite(item);
+	}
+
 	/**
 	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
