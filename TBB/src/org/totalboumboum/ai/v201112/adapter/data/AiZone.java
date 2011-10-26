@@ -1482,7 +1482,7 @@ if(target==null || source==null)
 					result = result + " ";
 			}
 			result = result + "│\n";
-			if(row<width-1)
+			if(row<height-1)
 			{	result = result + "  ├";
 				for(int col=0;col<width-1;col++)
 					result = result + "─┼";
