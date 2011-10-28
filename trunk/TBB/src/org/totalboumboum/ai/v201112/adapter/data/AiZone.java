@@ -1471,7 +1471,11 @@ if(target==null || source==null)
 						result = result + "█";
 				}
 				else if(heroes.size()>0)
-					result = result + "☺";
+				{	if(bombs.size()>0)
+						result = result + "☻";
+					else
+						result = result + "☺";
+				}
 				else if(items.size()>0)
 					result = result + "□";
 				else if(bombs.size()>0)
