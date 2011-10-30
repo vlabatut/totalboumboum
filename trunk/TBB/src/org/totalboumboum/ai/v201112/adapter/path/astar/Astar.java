@@ -49,18 +49,20 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * boucler à l'infini.</br>
  * 
  * Cette implément trouve donc le chemin le plus court entre deux cases,
- * en considérant les obstacles. Elle a besoin de quatre paramètres :<ul>
+ * en considérant les obstacles. Elle a besoin de quatre paramètres :
+ * <ul>	
  * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilité des cases).</li>
  * 		<li> Une fonction successeur, qui définit les actions possibles à partir d'un état donné. Dans le cas prèsent, il s'agit de 
  * 			 restreindre les déplacement possibles en considérant des facteurs supplémentaires par rapport à la simple traversabilité courrante.</li>
  * 		<li> Une fonction de coût, qui permet de définir combien coûte une action (ici : le fait de passer d'une case à l'autre).</li>
- * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li></ul>
+ * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li>
+ * </ul>
  * 
- * A noter qu'il s'agit d'une implément non-déterministe de l'algorithme.
+ * A noter qu'il s'agit d'une implémentation non-déterministe de l'algorithme.
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
- * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
+ * rapport au coût défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
  * renverra pas forcément toujours la même (il en choisira une au hasard).
- * Le but est d'introduire une part de hasard dans les agent, de manière à les rendre moins prévisibles.
+ * Le but est d'introduire une part de hasard dans les agents, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
  */
@@ -88,6 +90,13 @@ public final class Astar
 		this.costCalculator = costCalculator;
 		this.heuristicCalculator = heuristicCalculator;
 		this.successorCalculator = successorCalculator;
+		
+		// hauteur limite de l'arbre par défaut
+		AiZone zone = ai.getZone();
+		// bien que possible, c'est vraiment peu probable d'avoir 
+		// besoin d'un chemin aussi long que ça... (traverser
+		// la zone en entier diagonalement)
+		maxHeight = zone.getWidth() + zone.getHeight();
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -143,31 +152,37 @@ public final class Astar
 	private int maxNodes = 10000;
 	
 	/**
-	 * limite l'arbre de recherche à une hauteur de maxHeight,
+	 * Limite l'arbre de recherche à une hauteur de {@code maxHeight},
 	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
-	 * l'algorithme se termine et ne renvoie pas de solution (échec).
+	 * l'algorithme se termine et ne renvoie pas de solution (échec).<br/>
 	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
 	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite déjà le nombre de noeuds dans l'arbre.
+	 * limite déjà le nombre de noeuds dans l'arbre.<br/>
+	 * Par défaut, ce paramètre est initialisé avec la valeur {@code hauteur+largeur},
+	 * où {@code hauteur} et {@code largeur} sont les dimensions de la zone. En effet,
+	 * bien que ça soit possible, il est très peu probable d'avoir besoin d'un
+	 * chemin qui traverserait l'intégralité de la zone, en diagonale (ici la longueur
+	 * du chemin est exprimée en distance de Manhattan).
 	 * 
 	 * @param maxHeight
+	 * 		Hauteur maximale de l'arbre de recherche.
 	 */
 	public void setMaxHeight(int maxHeight)
 	{	this.maxHeight = maxHeight;	
 	}
 		
 	/**
-	 * limite l'arbre de recherche à un certain cout maxCost, i.e. Dès que le
+	 * Limite l'arbre de recherche à un certain coût {@code maxCost}, i.e. dès que le
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
-	 * renvoie pas de solution (échec)
+	 * renvoie pas de solution (échec). <br/>
 	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
 	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
 	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxCost	
-	 * 		le cout maximal que le noeud courant peut atteindre
+	 * 		Le coût maximal que le noeud courant peut atteindre.
 	 */
 	public void setMaxCost(int maxCost)
 	{	this.maxCost = maxCost;
@@ -258,7 +273,8 @@ public final class Astar
 		// traitement
 		if(!endTiles.isEmpty())
 		{	do
-			{	long before1 = System.currentTimeMillis();
+			{	ai.checkInterruption();
+				long before1 = System.currentTimeMillis();
 				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				lastLocation = currentNode.getLocation();
