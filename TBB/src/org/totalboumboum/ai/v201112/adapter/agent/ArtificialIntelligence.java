@@ -322,6 +322,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	{	checkInterruption();
 verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 		if(verbose) System.out.println(System.currentTimeMillis()+">>>>>>>>>>>>>>>>");
+		if(verbose) System.out.println(zone);
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes
@@ -337,7 +338,7 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 				updateMode();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms");
+				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms ["+mode+"]");
 			}
 			
 			// mise à jour des valeurs d'utilité
@@ -356,7 +357,7 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 			boolean cb = considerBombing();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			if(verbose) System.out.println(before+"::considerBombing: "+elapsed+" ms");
+			if(verbose) System.out.println(before+"::considerBombing: "+elapsed+" ms ["+cb+"]");
 			
 			// on essaie de poser une bombe
 			if(cb)
@@ -370,7 +371,7 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 				Direction direction = considerMoving();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
-				if(verbose) System.out.println(before+"::considerMoving: "+elapsed+" ms");
+				if(verbose) System.out.println(before+"::considerMoving: "+elapsed+" ms ["+direction+"]");
 				
 				// si pas de direction : on suppose que c'est NONE
 				if(direction==null)	
