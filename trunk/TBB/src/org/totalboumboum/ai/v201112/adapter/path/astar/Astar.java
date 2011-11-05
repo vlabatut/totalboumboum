@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
@@ -42,13 +43,13 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
 /**
  * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
- * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
+ * cette implémentation correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini.</br>
  * 
- * Cette implément trouve donc le chemin le plus court entre deux cases,
+ * Cette implémentation trouve donc le chemin le plus court entre deux cases,
  * en considérant les obstacles. Elle a besoin de quatre paramètres :
  * <ul>	
  * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilité des cases).</li>
@@ -109,7 +110,7 @@ public final class Astar
 	/** Fonction successeur */
 	private SuccessorCalculator successorCalculator = null;
 	/** Racine de l'arbre de recherche */
-	private AstarNode root = null;
+	private AiSearchNode root = null;
 	/** Personnage de référence */
 	private AiHero hero = null;
 	/** L'IA qui a réalisé l'appel */
@@ -265,10 +266,10 @@ public final class Astar
 		boolean limitReached = false;
 		AiPath result = null;
 		heuristicCalculator.setEndTiles(endTiles);
-		root = new AstarNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
-		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
+		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
+		PriorityQueue<AiSearchNode> queue = new PriorityQueue<AiSearchNode>(1);
 		queue.offer(root);
-		AstarNode finalNode = null;
+		AiSearchNode finalNode = null;
 	
 		// traitement
 		if(!endTiles.isEmpty())
@@ -276,7 +277,7 @@ public final class Astar
 			{	ai.checkInterruption();
 				long before1 = System.currentTimeMillis();
 				// on prend le noeud situé en tête de file
-				AstarNode currentNode = queue.poll();
+				AiSearchNode currentNode = queue.poll();
 				lastLocation = currentNode.getLocation();
 				lastZone = lastLocation.getTile().getZone();
 				if(verbose)
@@ -302,7 +303,7 @@ public final class Astar
 				else
 				{	// sinon on récupére les noeuds suivants
 					long before2 = System.currentTimeMillis();
-					List<AstarNode> successors = currentNode.getChildren();
+					List<AiSearchNode> successors = currentNode.getChildren();
 					long after2 = System.currentTimeMillis();
 					long elapsed2 = after2 - before2;
 					if(verbose)
@@ -312,7 +313,7 @@ public final class Astar
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
 					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité
-					for(AstarNode node: successors)
+					for(AiSearchNode node: successors)
 						queue.offer(node);
 				}
 				// verbose
@@ -331,7 +332,7 @@ public final class Astar
 		
 			// build solution path
 			if(found)
-				result = processPath(finalNode);
+				result = finalNode.processPath();
 		}
 		
 		long after = System.currentTimeMillis();
@@ -364,58 +365,9 @@ public final class Astar
 
 		finish();
 		if(limitReached)
-			throw new LimitReachedException(startLocation,endTiles,maxh,maxc,maxn,maxCost,maxHeight,maxNodes);
+			throw new LimitReachedException(startLocation,endTiles,maxh,maxc,maxn,maxCost,maxHeight,maxNodes,queue);
 		else if(endTiles.isEmpty())
 			throw new IllegalArgumentException("endTiles list must not be empty");
-		
-		return result;
-	}
-	
-	/**
-	 * Construit à partir du noeud de recherche final
-	 * le chemin permettant d'atteindre la case correspondante
-	 * à partir de l'emplacement de départ.
-	 * 
-	 * @param finalNode
-	 * 		Le noeud de recherche final.
-	 * @return
-	 * 		Le chemin permettant d'atteindre ce noeud.
-	 */
-	private AiPath processPath(AstarNode finalNode)
-	{	AstarNode node = finalNode;
-		AstarNode previousNode = null;
-		AiPath result = new AiPath();
-	
-// ancienne version		
-//		while(node!=null)
-//		{	AiTile tile = node.getLocation();
-//			result.addLocation(0,tile);
-//			node = node.getParent();
-//		}
-		
-		// nouvelle version
-		while(node!=null)
-		{	AiLocation location = node.getLocation();
-			AiTile tile = location.getTile();
-			
-			// case différente
-			if(previousNode==null || !tile.equals(previousNode.getLocation().getTile()))
-				result.addLocation(0,location);
-			
-			// même case
-			else
-			{	long pause = (long)(previousNode.getCost() - node.getCost());
-				pause = pause + result.getPause(0);
-				result.setPause(0,pause);
-			}
-			
-			// noeud suivant
-			previousNode = node;
-			node = node.getParent();
-		}
-
-//if(result.getLength()>1 && result.getLocation(0).equals(result.getLocation(1)))
-//	System.out.print("");
 		
 		return result;
 	}

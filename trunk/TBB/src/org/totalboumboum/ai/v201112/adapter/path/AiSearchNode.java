@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar;
+package org.totalboumboum.ai.v201112.adapter.path;
 
 /*
  * Total Boum Boum
@@ -28,17 +28,18 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
- * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
+ * Représente un noeud dans l'arbre de recherche développé par 
+ * un algorithme de recherche dans l'espace d'états, tel
+ * que A*. 
  * 
  * @author Vincent Labatut
  */
-public final class AstarNode implements Comparable<AstarNode>
+public final class AiSearchNode implements Comparable<AiSearchNode>
 {	
 	/**
 	 * Constructeur créant un noeud racine non visité. 
@@ -55,7 +56,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected AstarNode(ArtificialIntelligence ai, AiLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
+	public AiSearchNode(ArtificialIntelligence ai, AiLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// agent
 		this.ai = ai;
 		
@@ -95,7 +96,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public AstarNode(AiLocation location, AstarNode parent) throws StopRequestException
+	public AiSearchNode(AiLocation location, AiSearchNode parent) throws StopRequestException
 	{	// agent
 		this.ai = parent.getAi();
 		
@@ -144,7 +145,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public AstarNode(long wait, AiZone zone, AstarNode parent) throws StopRequestException
+	public AiSearchNode(long wait, AiZone zone, AiSearchNode parent) throws StopRequestException
 	{	// agent
 		this.ai = parent.getAi();
 		
@@ -178,14 +179,14 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** agent ayant invoqué A* */
+	/** agent ayant invoqué l'algorithme de recherche */
 	private ArtificialIntelligence ai = null;
 	
 	/**
-	 * renvoie l'agent qui a invoqué A*
+	 * renvoie l'agent qui a invoqué l'algorithme de recherche
 	 * 
 	 * @return
-	 * 		la classe principale de l'agent ayant invoqué A*
+	 * 		la classe principale de l'agent ayant invoqué l'algorithme de recherche.
 	 */
 	public ArtificialIntelligence getAi()
 	{	return ai;	
@@ -284,7 +285,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	// PARENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** parent du noeud ({@code null} pour la racine) */
-	private AstarNode parent = null;
+	private AiSearchNode parent = null;
 	
 	/**
 	 * renvoie le parent de ce noeud de recherche
@@ -292,7 +293,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * @return	
 	 * 		un noeud de recherche correspondant au parent de ce noeud
 	 */
-	public AstarNode getParent()
+	public AiSearchNode getParent()
 	{	return parent;	
 	}
 	
@@ -391,10 +392,10 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public List<AstarNode> getChildren() throws StopRequestException
+	public List<AiSearchNode> getChildren() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		List<AstarNode> result = successorCalculator.processSuccessors(this);
+		List<AiSearchNode> result = successorCalculator.processSuccessors(this);
 //children = result;		
 		return result;
 	}
@@ -417,24 +418,66 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public boolean equals(Object object)
 	{	boolean result = false;
-		if(object instanceof AstarNode)
-			result = compareTo((AstarNode)object)==0;
+		if(object instanceof AiSearchNode)
+			result = compareTo((AiSearchNode)object)==0;
 		return result;
 	}
 
 	@Override
-	public int compareTo(AstarNode node)
+	public int compareTo(AiSearchNode node)
     {	Double f1 = cost + heuristic;
     	Double f2 = node.getCost() + node.getHeuristic();
     	int result = f1.compareTo(f2);
     	return result;
     }
 
+	/////////////////////////////////////////////////////////////////
+	// PATH				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Construit, à partir de ce noeud de recherche,
+	 * le chemin permettant d'atteindre la case correspondante
+	 * à partir de l'emplacement de départ.
+	 * 
+	 * @return
+	 * 		Le chemin permettant d'atteindre ce noeud, dans cet arbre.
+	 */
+	public AiPath processPath()
+	{	AiSearchNode node = this;
+		AiSearchNode previousNode = null;
+		AiPath result = new AiPath();
+	
+		while(node!=null)
+		{	AiLocation location = node.getLocation();
+			AiTile tile = location.getTile();
+			
+			// case différente
+			if(previousNode==null || !tile.equals(previousNode.getLocation().getTile()))
+				result.addLocation(0,location);
+			
+			// même case
+			else
+			{	long pause = (long)(previousNode.getCost() - node.getCost());
+				pause = pause + result.getPause(0);
+				result.setPause(0,pause);
+			}
+			
+			// noeud suivant
+			previousNode = node;
+			node = node.getParent();
+		}
+
+//if(result.getLength()>1 && result.getLocation(0).equals(result.getLocation(1)))
+//	System.out.print("");
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
