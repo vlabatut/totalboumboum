@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path;
  * 
  */
 
+import java.util.PriorityQueue;
 import java.util.Set;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
@@ -65,8 +66,10 @@ public final class LimitReachedException extends Exception
 	 * 		Limite de hauteur fixée pour l'exploration.
 	 * @param maxSize
 	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
+	 * @param queue
+	 * 		Frange lors de l'arrêt de l'algorithme. 
 	 */
-	public LimitReachedException(AiLocation startLocation, Set<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
+	public LimitReachedException(AiLocation startLocation, Set<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize, PriorityQueue<AiSearchNode> queue)
 	{	this.startLocation = startLocation;
 		this.endTiles = endTiles;
 		this.height = height;
@@ -74,7 +77,8 @@ public final class LimitReachedException extends Exception
 		this.size = size;
 		this.maxCost = maxCost;
 		this.maxHeight = maxHeight;
-		this.maxSize = maxSize;	
+		this.maxSize = maxSize;
+		this.fringe = queue;
 	}
 
 	/**
@@ -92,8 +96,10 @@ public final class LimitReachedException extends Exception
 	 * 		Limite de hauteur fixée pour l'exploration.
 	 * @param maxSize
 	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
+	 * @param queue
+	 * 		Frange lors de l'arrêt de l'algorithme. 
 	 */
-	public LimitReachedException(AiLocation startLocation, int height, int size, int maxHeight, int maxSize)
+	public LimitReachedException(AiLocation startLocation, int height, int size, int maxHeight, int maxSize, PriorityQueue<AiSearchNode> queue)
 	{	this.startLocation = startLocation;
 		this.endTiles = null;
 		this.height = height;
@@ -102,6 +108,7 @@ public final class LimitReachedException extends Exception
 		this.maxCost = -1;
 		this.maxHeight = maxHeight;
 		this.maxSize = maxSize;	
+		this.fringe = queue;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -167,6 +174,17 @@ public final class LimitReachedException extends Exception
 	{	return height;
 	}
 
+	/**
+	 * Indique si l'algorithme a été arrêté parce qu'il
+	 * a atteint un arbre de hauteur maximale.
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'arbre de recherche a atteint la hauteur maximale.
+	 */
+	public boolean hasReachedHeightLimit()
+	{	return maxHeight == height;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -196,6 +214,17 @@ public final class LimitReachedException extends Exception
 	 */
 	public double getCost()
 	{	return cost;
+	}
+
+	/**
+	 * Indique si l'algorithme a été arrêté parce qu'il
+	 * a atteint un chemin de coût limite.
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'arbre de recherche a atteint le coût maximal.
+	 */
+	public boolean hasReachedCostLimit()
+	{	return maxCost == cost;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -228,6 +257,36 @@ public final class LimitReachedException extends Exception
 	{	return size;
 	}
 
+	/**
+	 * Indique si l'algorithme a été arrêté parce qu'il
+	 * a atteint un arbre contenant le nombre de noeuds limite.
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'arbre de recherche contient plus de noeuds que la limite autorisée.
+	 */
+	public boolean hasReachedSizeLimit()
+	{	return maxSize == size;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FRINGE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** la frange à l'instant où l'exception est levée */
+	private PriorityQueue<AiSearchNode> fringe;
+	
+	/**
+	 * renvoie la frange de l'algorithme au moment où l'exception est levée.
+	 * Cela permet notamment de récupérer la meilleure case du moment
+	 * (en termes d'heuristique).
+	 * 
+	 * @return
+	 * 		Une file de priorité correspondant à la frange de l'algorithme de recherche
+	 * 		au moment de son interruption forcée.
+	 */
+	public PriorityQueue<AiSearchNode> getFringe()
+	{	return fringe;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

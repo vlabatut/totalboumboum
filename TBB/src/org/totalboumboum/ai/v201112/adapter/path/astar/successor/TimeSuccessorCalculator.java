@@ -35,7 +35,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.AiModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -105,7 +105,7 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	public List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException
+	public List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException
 	{	AiLocation location = node.getLocation();
 		AiTile tile = location.getTile();
 		AiZone zone = location.getZone();
@@ -113,7 +113,7 @@ AiHero h = zone.getHeroByColor(hero.getColor());
 AiTile t = h.getTile();
 if(!t.equals(tile))
 	System.out.println();
-		List<AstarNode> result = new ArrayList<AstarNode>();
+		List<AiSearchNode> result = new ArrayList<AiSearchNode>();
 		
 		// on considère chaque déplacement possible
 		List<Direction> directions = Direction.getPrimaryValues();
@@ -143,7 +143,7 @@ if(!t.equals(tile))
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						AstarNode child = new AstarNode(futureLocation,node);
+						AiSearchNode child = new AiSearchNode(futureLocation,node);
 						result.add(child);
 //if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
 //	System.out.println();
@@ -184,7 +184,7 @@ if(!t.equals(tile))
 					boolean safe = !name.equals(AiStateName.BURNING) && !name.equals(AiStateName.ENDED);
 					if(safe)
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						AstarNode child = new AstarNode(waitDuration,futureZone,node);
+						AiSearchNode child = new AiSearchNode(waitDuration,futureZone,node);
 						result.add(child);
 if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
 	System.out.println();

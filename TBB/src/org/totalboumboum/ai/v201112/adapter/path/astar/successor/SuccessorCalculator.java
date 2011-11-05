@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 
 /**
  * Permet de définir une fonction successeur utilisée par l'algorithme
@@ -71,5 +71,5 @@ public abstract class SuccessorCalculator
 	 * @return	
 	 * 		La liste de noeuds fils obtenus.
 	 */
-	public abstract List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException;
+	public abstract List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException;
 }

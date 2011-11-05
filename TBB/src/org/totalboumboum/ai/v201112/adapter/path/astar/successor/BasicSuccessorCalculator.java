@@ -29,7 +29,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.PixelCostCalculator;
@@ -81,9 +81,9 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	public List<AstarNode> processSuccessors(AstarNode node) throws StopRequestException
+	public List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException
 	{	// init
-		List<AstarNode> result = new ArrayList<AstarNode>();
+		List<AiSearchNode> result = new ArrayList<AiSearchNode>();
 		AiTile tile = node.getLocation().getTile();
 		AiHero hero = node.getHero();
 		
@@ -95,7 +95,7 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 			// et n'a pas déjà été explorée dans la branche courante de A*
 			if(neighbor.isCrossableBy(hero) && !node.hasBeenExplored(neighbor))
 			{	AiLocation location = new AiLocation(neighbor);
-				AstarNode child = new AstarNode(location,node);
+				AiSearchNode child = new AiSearchNode(location,node);
 				result.add(child);
 			}
 		}
