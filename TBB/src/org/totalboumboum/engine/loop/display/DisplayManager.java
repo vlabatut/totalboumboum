@@ -34,14 +34,16 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
  *
  */
 public class DisplayManager
-{
+{	
 	/////////////////////////////////////////////////////////////////
 	// EVENT 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void provessEvent(SystemControlEvent event)
 	{	Display d = displaysMap.get(event.getName());
 		if(d!=null)
-			d.switchShow(event);
+		{	d.switchShow(event);
+			feedback.processEvent(event,d);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -49,6 +51,7 @@ public class DisplayManager
 	/////////////////////////////////////////////////////////////////
 	private List<Display> displaysList = new ArrayList<Display>();
 	private HashMap<String,Display> displaysMap = new HashMap<String, Display>();
+	private DisplayFeedbackMessage feedback = new DisplayFeedbackMessage();
 	
 	public void addDisplay(Display d)
 	{	displaysList.add(d);
@@ -65,6 +68,8 @@ public class DisplayManager
 	/////////////////////////////////////////////////////////////////
 	public void draw(Graphics g)
 	{	for(Display d: displaysList)
-			d.draw(g);		
+			d.draw(g);
+		if(!displaysList.isEmpty())
+			feedback.draw(g);
 	}
 }

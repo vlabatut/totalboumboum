@@ -73,8 +73,38 @@ public class DisplayUsage implements Display
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getMessage(SystemControlEvent event)
+	{	String message = null;
+		int s = getShow();
+		switch(s)
+		{	case 0:
+				message = "Hide all usages";
+				break;
+			case 1: 
+				message = "Display overall usage";
+				break;
+			case 2: 
+				message = "Display engine-only usage";
+				break;
+			case 3:
+				message = "Display AIs-only usage";
+				break;
+		}
+		boolean m = getMode();
+		if(m)
+			message = message + " in percents";
+		else
+			message = message + " in ms";
+		return message;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String getEventName()
 	{	return SystemControlEvent.SWITCH_DISPLAY_USAGE;
 	}
@@ -87,10 +117,10 @@ public class DisplayUsage implements Display
 	{	int s = getShow();
 		
 		if(s>0)
-		{	boolean mode = getMode();
+		{	boolean m = getMode();
 			// retrieve CPU usage
 			double[] values0;
-			if(mode)
+			if(m)
 				values0 = loop.getAverageCpuProportions();
 			else
 				values0 = loop.getAverageCpu();
@@ -118,7 +148,7 @@ public class DisplayUsage implements Display
 			double[] values = new double[values0.length];
 			switch(s)
 			{	case 1: 
-					{	if(mode)
+					{	if(m)
 							values = values0;
 						else
 						{	double total = 0;
@@ -216,7 +246,7 @@ public class DisplayUsage implements Display
 			//if(getMode())
 			{	NumberFormat nf;
 				String unit;
-				if(mode)
+				if(m)
 				{	nf = NumberFormat.getPercentInstance();
 					nf.setMinimumIntegerDigits(2);
 					nf.setMinimumFractionDigits(4);
@@ -269,7 +299,6 @@ public class DisplayUsage implements Display
 						y = y + boxHeight;
 					}
 				}
-				//"CPU:AIs="+
 			}
 		}
 	}

@@ -82,8 +82,51 @@ public class DisplaySpritesPositions implements Display
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getMessage(SystemControlEvent event)
+	{	String message = null;
+		int s = getShow();
+		switch(s)
+		{	case 0: 
+				message = "Hide all sprites' coordinates";
+				break;
+			case 1: 
+				message = "Show only heroes' coordinates";
+				break;
+			case 2: 
+				message = "Show only blocks' coordinates";
+				break;
+			case 3: 
+				message = "Show only bomb' coordinates";
+				break;
+			case 4: 
+				message = "Show only items' coordinates";
+				break;
+			case 5: 
+				message = "Show only fires' coordinates";
+				break;
+			case 6: 
+				message = "Show all sprites' coordinates";
+				break;
+		}
+		
+		boolean m = getMode();
+		if(s>0)
+		{	if(m)
+				message = message + " (in tiles)";
+			else
+				message = message + " (in pixels)";
+		}
+	
+		return message;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String getEventName()
 	{	return SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS;
 	}
@@ -103,23 +146,23 @@ public class DisplaySpritesPositions implements Display
 					go = false;
 				if(sprite instanceof Hero)
 				{	color = Color.WHITE;
-					go = show==1 || show==6;
+					go = s==1 || s==6;
 				}
 				else if(sprite instanceof Block)
 				{	color = Color.GRAY;
-					go = show==2 || show==6;
+					go = s==2 || s==6;
 				}
 				else if(sprite instanceof Bomb)
 				{	color = Color.WHITE;
-					go = show==3 || show==6;
+					go = s==3 || s==6;
 				}
 				else if(sprite instanceof Item)
 				{	color = Color.WHITE;
-					go = show==4 || show==6;
+					go = s==4 || s==6;
 				}
 				else if(sprite instanceof Fire)
 				{	color = Color.BLACK;
-					go = show==5 || show==6;
+					go = s==5 || s==6;
 				}
 				if(go)
 				{	if(m)
