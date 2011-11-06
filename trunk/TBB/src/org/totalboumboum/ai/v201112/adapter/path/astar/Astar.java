@@ -95,13 +95,13 @@ public final class Astar
 		// hauteur limite de l'arbre par défaut
 		AiZone zone = ai.getZone();
 		// bien que possible, c'est vraiment peu probable d'avoir 
-		// besoin d'un chemin aussi long que ça... (traverser
-		// la zone en entier diagonalement)
+		// besoin d'un chemin aussi long que ça...
+		// (traverser la zone en entier diagonalement)
 		maxHeight = zone.getWidth() + zone.getHeight();
 	}
 
     /////////////////////////////////////////////////////////////////
-	// DATA				/////////////////////////////////////////////
+	// CALCULATORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Fonction de coût */
 	private CostCalculator costCalculator = null;
@@ -109,17 +109,105 @@ public final class Astar
 	private HeuristicCalculator heuristicCalculator = null;
 	/** Fonction successeur */
 	private SuccessorCalculator successorCalculator = null;
+
+    /////////////////////////////////////////////////////////////////
+	// A* STATE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/** Racine de l'arbre de recherche */
 	private AiSearchNode root = null;
 	/** Personnage de référence */
 	private AiHero hero = null;
 	/** L'IA qui a réalisé l'appel */
 	private ArtificialIntelligence ai = null;
-	/** La zone associée au dernier noeud de recherche (si disponible) */
-	private AiZone lastZone = null;
-	/** L'emplacement associé au dernier noeud de recherche (si disponible) */
-	private AiLocation lastLocation = null;
+	/** Emplacement de départ pour la recherche de chemin */
+	private AiLocation startLocation = null;
+	/** Cases d'arrivée pour la recherche de chemin */
+	private Set<AiTile> endTiles = new TreeSet<AiTile>();
+	/** Frange courante */
+	private PriorityQueue<AiSearchNode> queue = null;
+	/** Indique si l'algorithme a atteint une des 3 limites définies (hauteur/cout/taille) */
+	private boolean limitReached = false;
+	/** Indique la hauteur courante de l'arbre de recherche */
+	private int treeHeight = 0;
+	/** Indique le coût maximal courant des chemins contenus dans l'arbre de recherche */
+	private double treeCost = 0;
+	/** Indique la taille courante (en noeuds) de l'arbre de recherche */
+	private int treeSize = 0;
+	
+	/**
+	 * Renvoie la frange courante de l'algorithme
+	 * de recherche. Cette variable permet
+	 * entres autres de reprendre le traitement
+	 * après avoir trouver un premier résultat.
+	 * Par conséquent, cette frange ne doit surtout pas
+	 * être modifiée par l'utilisateur.
+	 * 
+	 * @return
+	 * 		La frange courante de l'algorithme.
+	 */
+	public PriorityQueue<AiSearchNode> getQueue()
+	{	return queue;
+	}
 
+	/**
+	 * Indique si l'algorithme a atteint 
+	 * une des 3 limites définies (hauteur/cout/taille).
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'algorithme a atteint une des 3 limites.
+	 */
+	public boolean isLimitReached()
+	{	return limitReached;
+	}
+
+	/** 
+	 * Renvoie la hauteur courante de l'arbre de recherche.
+	 * 
+	 * @return
+	 * 		La hauteur courante de l'arbre de recherche.
+	 */
+	public int getTreeHeight()
+	{	return treeHeight;
+	}
+
+	/** 
+	 * Renvoie le coût maximal courant des chemins 
+	 * contenus dans l'arbre de recherche
+	 * 
+	 * @return
+	 * 		Le coût maximal courant.
+	 */
+	public double getTreeCost()
+	{	return treeCost;
+	}
+
+	/** 
+	 * Renvoie la taille courante (en noeuds) 
+	 * de l'arbre de recherche.
+	 * 
+	 * @return
+	 * 		La taille courante (en noeuds) de l'arbre de recherche.
+	 */
+	public int getTreeSize()
+	{	return treeSize;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LAST RESEARCH NODE	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Le dernier noeud de recherche traité (si disponible) */
+	private AiSearchNode lastSearchNode = null;
+
+	/**
+	 * Renvoie le dernier noeud de recherche exploré par A*.
+	 * 
+	 * @return
+	 * 		Le dernier noeud de recherche exploré par A*.
+	 */
+	public AiSearchNode getLastSearchNode()
+	{	return lastSearchNode;
+	}
+	
 	/**
 	 * Renvoie la zone correspondant au
 	 * dernier noeud exploré par A*.
@@ -128,7 +216,10 @@ public final class Astar
 	 * 		La zone associée au dernier noeud parcouru.
 	 */
 	public AiZone getLastZone()
-	{	return lastZone;
+	{	AiZone result = null;
+		if(lastSearchNode!=null)
+			result = lastSearchNode.getLocation().getTile().getZone();
+		return result;
 	}
 	
 	/**
@@ -139,11 +230,14 @@ public final class Astar
 	 * 		L'emplacement associé au dernier noeud parcouru.
 	 */
 	public AiLocation getLastLocation()
-	{	return lastLocation;
+	{	AiLocation result = null;
+		if(lastSearchNode!=null)
+			result = lastSearchNode.getLocation();
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LIMIT			/////////////////////////////////////////////
+	// LIMITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** limite de hauteur (négatif = pas de limite) */
 	private int maxHeight = -1;
@@ -246,7 +340,47 @@ public final class Astar
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
 	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
-	{	long before = System.currentTimeMillis();
+	{	// initialisation
+		this.startLocation = startLocation;
+		this.endTiles = endTiles;
+		treeHeight = 0;
+		treeCost = 0;
+		treeSize = 0;
+		limitReached = false;
+		heuristicCalculator.setEndTiles(endTiles);
+		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
+		queue = new PriorityQueue<AiSearchNode>(1);
+		queue.offer(root);
+	
+		// process
+		AiPath result = continueProcess();
+		return result;
+	}
+	
+	/**
+	 * Permet de continuer le traitement commencé par {@link #processShortestPath(AiLocation, AiTile) processShortestPath}.
+	 * Par exemple, si {@code processShortestPath} a trouvé un résultat qui ne
+	 * parait pas adapté, l'appel à cette méthode permet de continuer le traitement
+	 * pour trouver un autre chemin. <br/>
+	 * <b>Attention :</b> par définition de A*, le chemin suivant ne
+	 * sera pas forcément optimal en termes du coût défini. Bien sûr,
+	 * si d'autres chemins optimaux existent, ils seront identifiés
+	 * avant les chemin sous-optimaux.
+	 * 
+	 * @return 
+	 * 		un chemin différent de celui renvoyé par {@code processShortestPath}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws LimitReachedException
+	 * 		L'algorithme a développé un arbre trop grand (il y a
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 */
+	public AiPath continueProcess() throws StopRequestException, LimitReachedException
+	{	AiPath result = null;
+		AiSearchNode finalNode = null;
+		
+		long before = System.currentTimeMillis();
 		if(verbose)
 		{	System.out.println(before+"++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.print("A*: from "+startLocation+" to [");
@@ -255,22 +389,8 @@ public final class Astar
 			System.out.println(" ]");
 			System.out.println(before+"++++++++++++++++++++++++++++++++++++++++++++++");
 		}		
-		int maxh = 0;
-		double maxc = 0;
-		int maxn = 0;
-
-		// initialisation
-		lastZone = null;
-		lastLocation = null;
+		
 		boolean found = false;
-		boolean limitReached = false;
-		AiPath result = null;
-		heuristicCalculator.setEndTiles(endTiles);
-		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
-		PriorityQueue<AiSearchNode> queue = new PriorityQueue<AiSearchNode>(1);
-		queue.offer(root);
-		AiSearchNode finalNode = null;
-	
 		// traitement
 		if(!endTiles.isEmpty())
 		{	do
@@ -278,8 +398,6 @@ public final class Astar
 				long before1 = System.currentTimeMillis();
 				// on prend le noeud situé en tête de file
 				AiSearchNode currentNode = queue.poll();
-				lastLocation = currentNode.getLocation();
-				lastZone = lastLocation.getTile().getZone();
 				if(verbose)
 				{	System.out.println("Visited : "+currentNode.toString());
 					System.out.println("Queue length: "+queue.size());
@@ -317,12 +435,12 @@ public final class Astar
 						queue.offer(node);
 				}
 				// verbose
-				if(currentNode.getDepth()>maxh)
-					maxh = currentNode.getDepth();
-				if(currentNode.getCost()>maxc)
-					maxc = currentNode.getCost();
-				if(queue.size()>maxn)
-					maxn = queue.size();
+				if(currentNode.getDepth()>treeHeight)
+					treeHeight = currentNode.getDepth();
+				if(currentNode.getCost()>treeCost)
+					treeCost = currentNode.getCost();
+				if(queue.size()>treeSize)
+					treeSize = queue.size();
 				long after1 = System.currentTimeMillis();
 				long elapsed1 = after1 - before1;
 				if(verbose)
@@ -352,7 +470,7 @@ public final class Astar
 			System.out.println(" ]");
 			System.out.println("Elapsed time: "+elapsed+" ms");
 			//
-			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);
+			System.out.print("height="+treeHeight+" cost="+treeCost+" size="+treeSize);
 			System.out.print(" src="+root.getLocation());
 			System.out.print(" trgt=");
 			for(AiTile tile: endTiles) 
@@ -365,7 +483,7 @@ public final class Astar
 
 		finish();
 		if(limitReached)
-			throw new LimitReachedException(startLocation,endTiles,maxh,maxc,maxn,maxCost,maxHeight,maxNodes,queue);
+			throw new LimitReachedException(startLocation,endTiles,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
 		else if(endTiles.isEmpty())
 			throw new IllegalArgumentException("endTiles list must not be empty");
 		
