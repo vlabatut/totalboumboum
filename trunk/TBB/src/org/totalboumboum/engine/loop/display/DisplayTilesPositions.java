@@ -75,8 +75,28 @@ public class DisplayTilesPositions implements Display
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getMessage(SystemControlEvent event)
+	{	String message = null;
+		if(getShow())
+		{	message = "Display tiles' coordinates";
+			if(getMode())
+				message = message + " (in tiles)";
+			else
+				message = message + " (in pixels)";
+		}
+		else
+			message = "Hide tiles' coordinates";
+	
+		return message;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String getEventName()
 	{	return SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS;
 		

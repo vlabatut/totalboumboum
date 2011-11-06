@@ -70,8 +70,16 @@ public class DisplayAisColors implements Display
 		if(index<show.size())
 		{	boolean temp = show.get(index);
 			if(players.get(index) instanceof AiPlayer)
+			{	// switch
 				temp = !temp;
-			show.set(index,temp);
+				show.set(index,temp);
+				
+				// message
+				if(temp)
+					message = messageDisplay + index;
+				else
+					message = messageHide + index;
+			}
 		}
 	}
 	
@@ -80,8 +88,21 @@ public class DisplayAisColors implements Display
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final String messageDisplay = "Display colored tiles for player #";
+	private final String messageHide = "Hide colored tiles for player #";
+	private String message = null;
+	
+	@Override
+	public String getMessage(SystemControlEvent event)
+	{	return message;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String getEventName()
 	{	return SystemControlEvent.SWITCH_DISPLAY_AIS_COLORS;
 	}

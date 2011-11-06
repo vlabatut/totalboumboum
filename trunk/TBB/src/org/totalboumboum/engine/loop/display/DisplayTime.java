@@ -63,8 +63,33 @@ public class DisplayTime implements Display
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getMessage(SystemControlEvent event)
+	{	String message = null;
+		int s = getShow();
+		switch(s)
+		{	case 0:
+				message = "Hide all times";
+				break;
+			case 1: 
+				message = "Display game time";
+				break;
+			case 2: 
+				message = "Display engine time";
+				break;
+			case 3:
+				message = "Display real time";
+				break;
+		}			
+		return message;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String getEventName()
 	{	return SystemControlEvent.SWITCH_DISPLAY_TIME;
 	}
@@ -75,50 +100,57 @@ public class DisplayTime implements Display
 	@Override
 	public void draw(Graphics g)
 	{	int s = getShow();
-		// loop time
-		if(s==1)
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			long time = loop.getTotalGameTime();
-			String text = "Game time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(30+box.getHeight()/2);
-			g.setColor(Color.BLACK);
-			g.drawString(text,x+1,y+1);
-			g.setColor(Color.CYAN);
-			g.drawString(text,x,y);
-		}
-		// engine time
-		else if(s==2)
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			long time = loop.getTotalEngineTime();
-			String text = "Engine time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(30+box.getHeight()/2);
-			g.setColor(Color.BLACK);
-			g.drawString(text,x+1,y+1);
-			g.setColor(Color.CYAN);
-			g.drawString(text,x,y);
-		}
-		// real time
-		else if(s==3)
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			long time = loop.getTotalRealTime();
-			String text = "Real time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(30+box.getHeight()/2);
-			g.setColor(Color.BLACK);
-			g.drawString(text,x+1,y+1);
-			g.setColor(Color.CYAN);
-			g.drawString(text,x,y);
+		switch(s)
+		{	// loop time
+			case 1:
+			{	Font font = new Font("Dialog", Font.PLAIN, 18);
+				g.setFont(font);
+				FontMetrics metrics = g.getFontMetrics(font);
+				long time = loop.getTotalGameTime();
+				String text = "Game time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+				Rectangle2D box = metrics.getStringBounds(text, g);
+				int x = 10;
+				int y = (int)Math.round(30+box.getHeight()/2);
+				g.setColor(Color.BLACK);
+				g.drawString(text,x+1,y+1);
+				g.setColor(Color.CYAN);
+				g.drawString(text,x,y);
+			}
+			break;
+			
+			// engine time
+			case 2:
+			{	Font font = new Font("Dialog", Font.PLAIN, 18);
+				g.setFont(font);
+				FontMetrics metrics = g.getFontMetrics(font);
+				long time = loop.getTotalEngineTime();
+				String text = "Engine time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+				Rectangle2D box = metrics.getStringBounds(text, g);
+				int x = 10;
+				int y = (int)Math.round(30+box.getHeight()/2);
+				g.setColor(Color.BLACK);
+				g.drawString(text,x+1,y+1);
+				g.setColor(Color.CYAN);
+				g.drawString(text,x,y);
+			}
+			break;
+			
+			// real time
+			case 3:
+			{	Font font = new Font("Dialog", Font.PLAIN, 18);
+				g.setFont(font);
+				FontMetrics metrics = g.getFontMetrics(font);
+				long time = loop.getTotalRealTime();
+				String text = "Real time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+				Rectangle2D box = metrics.getStringBounds(text, g);
+				int x = 10;
+				int y = (int)Math.round(30+box.getHeight()/2);
+				g.setColor(Color.BLACK);
+				g.drawString(text,x+1,y+1);
+				g.setColor(Color.CYAN);
+				g.drawString(text,x,y);
+			}
+			break;
 		}
 	}
 }
