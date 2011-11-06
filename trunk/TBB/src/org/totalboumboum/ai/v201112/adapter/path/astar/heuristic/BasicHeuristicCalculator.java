@@ -35,7 +35,7 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
  * la plus proche des cases d'arrivée.<br/>
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
  * chemins contenant des attentes. De plus les distances sont
- * calculées en cases, et non pas en pixels : rapidement calculé,
+ * calculées en cases, et non pas en pixels : calcul rapide,
  * mais approximatif. 
  * 
  * @author Vincent Labatut
@@ -52,6 +52,30 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 */
 	public BasicHeuristicCalculator(ArtificialIntelligence ai)
 	{	super(ai);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// END TILES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public AiTile getClosestEndTile(AiLocation location)
+	{	// init
+		AiTile startTile = location.getTile();
+		Set<AiTile> endTiles = getEndTiles();
+		AiZone zone = location.getZone();
+		double minH = Integer.MAX_VALUE;
+		AiTile result = null;
+		
+		// process
+		for(AiTile endTile: endTiles)
+		{	int h = zone.getTileDistance(startTile,endTile);
+			if(h < minH)
+			{	minH = h;
+				result = endTile;
+			}
+		}
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -81,9 +105,9 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 		
 		// process
 		for(AiTile endTile: endTiles)
-		{	int dist = zone.getTileDistance(startTile,endTile);
-			if(dist<result)
-				result = dist;
+		{	int h = zone.getTileDistance(startTile,endTile);
+			if(h < result)
+				result = h;
 		}
 		
 		return result;

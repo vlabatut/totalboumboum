@@ -73,6 +73,31 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// END TILES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public AiTile getClosestEndTile(AiLocation location)
+	{	// init
+		Set<AiTile> endTiles = getEndTiles();
+		AiZone zone = location.getZone();
+		double minH = Integer.MAX_VALUE;
+		AiTile result = null;
+		
+		// on calcule la distance de Manhattan en pixels
+		for(AiTile endTile: endTiles)
+		{	//double endX = endTile.getPosX();
+			//double endY = endTile.getPosY();
+			double h = zone.getPixelDistance(location,endTile);
+			if(h < minH)
+			{	minH = h;
+				result = endTile;
+			}
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
@@ -99,19 +124,19 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 		double speed = hero.getWalkingSpeed();
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
-		double minDist = Integer.MAX_VALUE;
+		double minH = Integer.MAX_VALUE;
 		
 		// on calcule la distance de Manhattan en pixels
 		for(AiTile endTile: endTiles)
 		{	//double endX = endTile.getPosX();
 			//double endY = endTile.getPosY();
-			double dist = zone.getPixelDistance(location,endTile);
-			if(dist<minDist)
-				minDist = dist;
+			double h = zone.getPixelDistance(location,endTile);
+			if(h < minH)
+				minH = h;
 		}
 		
 		// on calcule le temps nécessaire au parcours de cette distance
-		long result = Math.round(minDist/speed * 1000);
+		long result = Math.round(minH/speed * 1000);
 		return result;
 	}
 }

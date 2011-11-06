@@ -55,6 +55,28 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// END TILES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public AiTile getClosestEndTile(AiLocation location)
+	{	// init
+		Set<AiTile> endTiles = getEndTiles();
+		AiZone zone = location.getZone();
+		double minH = Integer.MAX_VALUE;
+		AiTile result = null;
+		
+		for(AiTile endTile: endTiles)
+		{	double h = zone.getPixelDistance(location,endTile);
+			if(h < minH)
+			{	minH = h;
+				result = endTile;
+			}
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
@@ -83,9 +105,9 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 		for(AiTile endTile: endTiles)
 		{	//double endX = endTile.getPosX();
 			//double endY = endTile.getPosY();
-			double dist = zone.getPixelDistance(location,endTile);
-			if(dist<result)
-				result = dist;
+			double h = zone.getPixelDistance(location,endTile);
+			if(h < result)
+				result = h;
 		}
 		
 		return result;

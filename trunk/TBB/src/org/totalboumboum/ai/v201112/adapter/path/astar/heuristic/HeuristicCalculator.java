@@ -67,7 +67,7 @@ public abstract class HeuristicCalculator
 	 * @param endTiles	
 	 * 		les cases terminant le chemin
 	 */
-	public void setEndTiles(Set<AiTile> endTiles) throws StopRequestException
+	public void setEndTiles(Set<AiTile> endTiles)
 	{	this.endTiles.clear();
 		this.endTiles.addAll(endTiles);
 	}
@@ -79,9 +79,24 @@ public abstract class HeuristicCalculator
 	 * @return	
 	 * 		L'ensemble des cases objectifs.
 	 */
-	public Set<AiTile> getEndTiles() throws StopRequestException
+	public Set<AiTile> getEndTiles()
 	{	return endTiles;	
 	}
+	
+	/**
+	 * Renvoie la case de destination la
+	 * plus proche de l'emplacement passé
+	 * en paramètre. La proximité doit
+	 * être évaluée en termes d'heuristique.<br/>
+	 * Si plusieurs destinations sont également
+	 * proches, un choix quelconque (ex : hasard)
+	 * doit être réalisé).
+	 * 
+	 * @return
+	 * 		La case de destination la plus proche.
+	 */
+	public abstract AiTile getClosestEndTile(AiLocation location);
+
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
