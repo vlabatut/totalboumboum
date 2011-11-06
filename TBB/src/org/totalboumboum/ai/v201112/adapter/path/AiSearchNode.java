@@ -280,6 +280,28 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	public HeuristicCalculator getHeuristicCalculator()
 	{	return heuristicCalculator;		
 	}
+
+	/**
+	 * Renvoie la case la plus proche parmi les
+	 * destinations spécifiées avant le début
+	 * de la recherche.<br/>
+	 * La fonction heuristique est utilisée
+	 * pour determiner cette proximité. Cette
+	 * fonction peut être utile quand l'algorithme
+	 * de recherche s'est arrêté avant de trouver une
+	 * solution (par exemple si l'arbre de recherche
+	 * a atteint la hauteur maximale). Elle permet
+	 * de savoir vers quelle case se dirigerait le
+	 * chemin en cours de développement, et ainsi
+	 * à l'utiliser même s'il n'est pas complet.
+	 * 
+	 * @return
+	 * 		La case de destination la plus proche.
+	 */
+	public AiTile getClosestDestination()
+	{	AiTile result = heuristicCalculator.getClosestEndTile(location);
+		return result;
+	}
 		
     /////////////////////////////////////////////////////////////////
 	// PARENT			/////////////////////////////////////////////
