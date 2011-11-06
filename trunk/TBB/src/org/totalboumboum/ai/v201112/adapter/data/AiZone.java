@@ -256,8 +256,6 @@ public abstract class AiZone
 	 */
 	public Direction getDirection(AiTile source, AiTile target)
 	{	// differences
-if(target==null || source==null)
-	System.out.print("");
 		int dx = target.getCol()-source.getCol();
 		int dy = target.getRow()-source.getRow();
 		

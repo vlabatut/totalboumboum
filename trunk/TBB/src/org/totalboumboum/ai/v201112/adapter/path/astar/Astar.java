@@ -200,6 +200,8 @@ public final class Astar
 
 	/**
 	 * Renvoie le dernier noeud de recherche exploré par A*.
+	 * Il sera utilisé en cas de demande de poursuite de
+	 * l'algorithme, donc il ne faut surtout pas le modifier.
 	 * 
 	 * @return
 	 * 		Le dernier noeud de recherche exploré par A*.
@@ -397,23 +399,23 @@ public final class Astar
 			{	ai.checkInterruption();
 				long before1 = System.currentTimeMillis();
 				// on prend le noeud situé en tête de file
-				AiSearchNode currentNode = queue.poll();
+				lastSearchNode = queue.poll();
 				if(verbose)
-				{	System.out.println("Visited : "+currentNode.toString());
+				{	System.out.println("Visited : "+lastSearchNode.toString());
 					System.out.println("Queue length: "+queue.size());
-					System.out.println("Zone:\n"+currentNode.getLocation().getTile().getZone());
+					System.out.println("Zone:\n"+lastSearchNode.getLocation().getTile().getZone());
 				}
 				// on teste si on est arrivé à la fin de la recherche
-				if(endTiles.contains(currentNode.getLocation().getTile()))
+				if(endTiles.contains(lastSearchNode.getLocation().getTile()))
 				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
-					finalNode = currentNode;
+					finalNode = lastSearchNode;
 					found = true;
 				}
 				// si l'arbre a atteint la hauteur maximale, on s'arrête
-				else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
+				else if(maxHeight>0 && lastSearchNode.getDepth()>=maxHeight)
 					limitReached = true;
 				// si le noeud courant a atteint le coût maximal, on s'arrête
-				else if(maxCost>0 && currentNode.getCost()>=maxCost)
+				else if(maxCost>0 && lastSearchNode.getCost()>=maxCost)
 					limitReached = true;
 				// si le nombre de noeuds dans la file est trop grand, on s'arrête
 				else if(maxNodes>0 && queue.size()>=maxNodes)
@@ -421,7 +423,7 @@ public final class Astar
 				else
 				{	// sinon on récupére les noeuds suivants
 					long before2 = System.currentTimeMillis();
-					List<AiSearchNode> successors = currentNode.getChildren();
+					List<AiSearchNode> successors = lastSearchNode.getChildren();
 					long after2 = System.currentTimeMillis();
 					long elapsed2 = after2 - before2;
 					if(verbose)
@@ -435,10 +437,10 @@ public final class Astar
 						queue.offer(node);
 				}
 				// verbose
-				if(currentNode.getDepth()>treeHeight)
-					treeHeight = currentNode.getDepth();
-				if(currentNode.getCost()>treeCost)
-					treeCost = currentNode.getCost();
+				if(lastSearchNode.getDepth()>treeHeight)
+					treeHeight = lastSearchNode.getDepth();
+				if(lastSearchNode.getCost()>treeCost)
+					treeCost = lastSearchNode.getCost();
 				if(queue.size()>treeSize)
 					treeSize = queue.size();
 				long after1 = System.currentTimeMillis();
