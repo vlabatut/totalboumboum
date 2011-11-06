@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path;
  * 
  */
 
+import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 
@@ -51,12 +52,49 @@ public final class AiLocation implements Comparable<AiLocation>
 		this.posY = posY;
 	}
 
+	/**
+	 * Définit une nouvelle position à partir
+	 * de deux coordonnées réelles et d'une zone.
+	 * La zone est utilisée pour déduire la case
+	 * correspondante à partir des coordonées.
+	 * 
+	 * @param posX
+	 * 		Position de l'abscisse en pixels.
+	 * @param posY
+	 * 		Position de l'ordonnée en pixels.
+	 * @param zone	
+	 * 		Zone contenant ces coordonnées.
+	 */
 	public AiLocation(double posX, double posY, AiZone zone)
 	{	this(posX,posY,zone.getTile(posX,posY));
 	}
 	
+	/**
+	 * Définit une nouvelle position à partir
+	 * de la case spécifiée. Les coordonnées
+	 * réelles du centre de la case sont utilisées.
+	 * 
+	 * @param tile
+	 * 		La case dont on veut la position.
+	 */
 	public AiLocation(AiTile tile)
 	{	this(tile.getPosX(),tile.getPosY(),tile);
+	}
+	
+	/**
+	 * Définit une nouvelle position à partir
+	 * du sprite spécifié. Les coordonnées
+	 * réelles du sprite et la case qui le
+	 * contient sont utilisées lors
+	 * de l'initialisation.
+	 * 
+	 * @param sprite
+	 * 		Le sprite dont on veut la position.
+	 */
+	public AiLocation(AiSprite sprite)
+	{	this.tile = sprite.getTile();
+		this.posX = sprite.getPosX();
+		this.posY = sprite.getPosY();
 	}
 	
     /////////////////////////////////////////////////////////////////
