@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.agent.handler;
+package org.totalboumboum.ai.v201112.adapter.agent;
 
 /*
  * Total Boum Boum
@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
-import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
