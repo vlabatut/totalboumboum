@@ -25,7 +25,9 @@ import java.awt.Color;
 
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
@@ -49,7 +51,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiMoveHandler extends AiAbstractHandler
+public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -62,8 +64,16 @@ public abstract class AiMoveHandler extends AiAbstractHandler
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiMoveHandler(ArtificialIntelligence ai) throws StopRequestException
-    {	super(ai);
+	protected AiMoveHandler(T ai) throws StopRequestException
+    {	// init ai object
+		super(ai);
+    	
+    	// init data
+    	AiZone zone = ai.getZone();
+    	AiHero ownHero = zone.getOwnHero();
+    	currentDestination = ownHero.getTile();
+    	currentDirection = Direction.NONE;
+    	currentPath = new AiPath();
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -114,7 +124,7 @@ public abstract class AiMoveHandler extends AiAbstractHandler
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected void updateOutput() throws StopRequestException
+	public void updateOutput() throws StopRequestException
 	{	AiOutput output = ai.getOutput();
 		AiMode mode = ai.getModeHandler().mode;
 		

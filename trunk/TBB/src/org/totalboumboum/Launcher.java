@@ -1143,7 +1143,7 @@ public class Launcher
 	 * 		- virer le bombage des IA inactives
 	 * - profils :
 	 * 		- supprimer les profils de test
-	 * 		- réinitialiser les stats des joueurs humain ou autre
+	 * 		- réinitialiser les stats des joueurs humains ou autres
 	 * 
 	 * - pour diffusion publique :
 	 * 		- fichiers :

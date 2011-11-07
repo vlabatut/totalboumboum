@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -45,52 +46,39 @@ import org.totalboumboum.engine.content.feature.Direction;
  * (personnage menacé par une ou plusieurs bombes) 
  * 
  * @author Vincent Labatut
- *
  */
-public class EscapeManager
-{
-	/** interrupteur permettant d'afficher la trace du traitement */
+public class EscapeHandler extends AiMoveHandler<Suiveur>
+{	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 
 	/**
-	 * crée un EscapeManager chargé d'amener le personnage au centre d'une case sûre
+	 * crée un EscapeManager chargé d'amener le personnage 
+	 * au centre d'une case sûre
 	 */
-	public EscapeManager(Suiveur ai) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-		
-		this.ai = ai;
-		zone = ai.getZone();
-		
+	public EscapeHandler(Suiveur ai) throws StopRequestException
+	{	super(ai);
+		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		// init A*
+		AiZone zone = ai.getZone();
 		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 		costCalculator = new MatrixCostCalculator(ai,costMatrix);
 		heuristicCalculator = new BasicHeuristicCalculator(ai);
 		successorCalculator = new BasicSuccessorCalculator(ai);
-		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator,successorCalculator);
+		astar = new Astar(ai,ai.ownHero,costCalculator,heuristicCalculator,successorCalculator);
 		
 		// init destinations
 		arrived = false;
-		AiHero ownHero = ai.getOwnHero();
-		possibleDest = ai.getSafetyManager().findSafeTiles(ownHero.getTile());
+		AiHero ownHero = ai.ownHero;
+		possibleDest = ai.safetyHandler.findSafeTiles(ownHero.getTile());
 		updatePath();
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** l'IA concernée par ce gestionnaire de chemin */
-	private Suiveur ai;
-	/** zone de jeu */
-	private AiZone zone;	
 	
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionnée pour la fuite */
-	private AiTile tileDest;
 	/** destinations potentielles */
 	private Set<AiTile> possibleDest;
 
@@ -103,11 +91,11 @@ public class EscapeManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		if(!arrived)
-		{	if(tileDest==null)
+		{	if(currentDestination==null)
 				arrived = true;
 			else
-			{	AiTile currentTile = ai.getCurrentTile();
-				arrived = currentTile==tileDest;			
+			{	AiTile currentTile = ai.currentTile;
+				arrived = currentTile==currentDestination;			
 			}
 		}
 		
@@ -123,7 +111,7 @@ public class EscapeManager
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		AiLocation location = new AiLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
+		AiLocation location = new AiLocation(ai.currentX,ai.currentY,ai.getZone());
 		try
 		{	path = astar.processShortestPath(location,possibleDest);
 		}
@@ -133,9 +121,9 @@ public class EscapeManager
 		}
 		
 		if(path==null || path.isEmpty())
-			tileDest = ai.getCurrentTile();
+			currentDestination = ai.currentTile;
 		else
-			tileDest = path.getLastLocation().getTile();
+			currentDestination = path.getLastLocation().getTile();
 	}
 	
 	/**
@@ -147,7 +135,7 @@ public class EscapeManager
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		AiTile currentTile = ai.getCurrentTile();
+		AiTile currentTile = ai.currentTile;
 		while(!path.isEmpty() && !path.getLocation(0).getTile().equals(currentTile))
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -174,7 +162,7 @@ public class EscapeManager
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			AiTile tile = it.next().getTile();
-			result = tile.isCrossableBy(ai.getOwnHero());			
+			result = tile.isCrossableBy(ai.ownHero);			
 		}
 		return result;
 	}
@@ -194,9 +182,10 @@ public class EscapeManager
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
+		AiZone zone = ai.getZone();
 		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
 		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
-		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
+		double safetyMatrix[][] = ai.safetyHandler.getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -216,9 +205,11 @@ public class EscapeManager
 	 * calcule la prochaine direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 	 * */
-	public Direction update() throws StopRequestException
+	@Override
+	protected Direction considerMoving() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
+		AiZone zone = ai.getZone();
 		// on met d'abord à jour la matrice de cout
 		updateCostCalculator();
 	
@@ -238,7 +229,7 @@ public class EscapeManager
 				tile = path.getLocation(0).getTile();
 			// on détermine la direction du prochain déplacement
 			if(tile!=null)
-				result = zone.getDirection(ai.getOwnHero(),tile);			
+				result = zone.getDirection(ai.ownHero,tile);			
 		}
 		
 		// mise à jour de la sortie
@@ -259,7 +250,8 @@ public class EscapeManager
 	 * met à jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
 	 */
-	private void updateOutput() throws StopRequestException
+	@Override
+	public void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		if(path!=null && !path.isEmpty())	

@@ -73,25 +73,25 @@ public class IlterKaya extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler getModeHandler() throws StopRequestException
+	protected AiModeHandler<IlterKaya> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiUtilityHandler getUtilityHandler() throws StopRequestException
+	protected AiUtilityHandler<IlterKaya> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler getBombHandler() throws StopRequestException
+	protected AiBombHandler<IlterKaya> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<IlterKaya> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

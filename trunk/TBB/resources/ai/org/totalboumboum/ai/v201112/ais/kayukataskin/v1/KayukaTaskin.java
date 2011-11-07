@@ -73,25 +73,25 @@ public class KayukaTaskin extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler getModeHandler() throws StopRequestException
+	protected AiModeHandler<KayukaTaskin> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiUtilityHandler getUtilityHandler() throws StopRequestException
+	protected AiUtilityHandler<KayukaTaskin> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler getBombHandler() throws StopRequestException
+	protected AiBombHandler<KayukaTaskin> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<KayukaTaskin> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

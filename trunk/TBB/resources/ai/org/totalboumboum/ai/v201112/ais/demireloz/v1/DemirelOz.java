@@ -73,25 +73,25 @@ public class DemirelOz extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler getModeHandler() throws StopRequestException
+	protected AiModeHandler<DemirelOz> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiUtilityHandler getUtilityHandler() throws StopRequestException
+	protected AiUtilityHandler<DemirelOz> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler getBombHandler() throws StopRequestException
+	protected AiBombHandler<DemirelOz> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<DemirelOz> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

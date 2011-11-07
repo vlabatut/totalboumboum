@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.totalboumboum.ai.v201112.adapter.agent.AiAbstractHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
@@ -52,28 +53,20 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * de la valeur correspond au temps depuis lequel la bombe a été posée)
  * 
  * @author Vincent Labatut
- *
  */
-public class SafetyManager
-{	
-	/** interrupteur permettant d'afficher la trace du traitement */
+public class SafetyHandler extends AiAbstractHandler<Suiveur>
+{	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 	
-	public SafetyManager(Suiveur ai) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	public SafetyHandler(Suiveur ai) throws StopRequestException
+	{	super(ai);
+		ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		this.ai = ai;
 		zone = ai.getZone();
 		matrix = new double[zone.getHeight()][zone.getWidth()];
 		processedBombs = new ArrayList<AiBomb>();
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** IA associée à ce gestionnaire de sûreté */
-	private Suiveur ai;
-
 	/////////////////////////////////////////////////////////////////
 	// MATRIX	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -98,7 +91,7 @@ public class SafetyManager
 	/**
 	 * mise à jour de la matrice de sûreté
 	 */
-	private void updateMatrix() throws StopRequestException
+	public void update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 
 		processedBombs.clear();
@@ -114,7 +107,7 @@ public class SafetyManager
 			}
 		}
 		
-		AiHero ownHero = ai.getOwnHero();
+		AiHero ownHero = ai.ownHero;
 		// si le personnage est sensible au feu, on tient compte des explosions en cours et à venir
 		if(!ownHero.hasThroughFires())
 		{	for(int line=0;line<zone.getHeight();line++)
@@ -299,26 +292,13 @@ public class SafetyManager
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PROCESS		/////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * met à jour la matrice de sûreté
-	 */
-	public void update() throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-		
-		updateMatrix();
-		updateOutput();
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// OUTPUT		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
 	 * met à jour la sortie graphique de l'IA en fonction du
 	 * niveau de sûreté calculé
 	 */
-	private void updateOutput() throws StopRequestException
+	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		AiOutput output = ai.getOutput();

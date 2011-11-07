@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Gökhan Geçkalan
  * @author Cihan Seven
  */
-public class UtilityHandler extends AiUtilityHandler
+public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalanSeven>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -45,7 +45,7 @@ public class UtilityHandler extends AiUtilityHandler
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void updateOutput() throws StopRequestException
+	public void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		// ici on se contente de faire le traitement par défaut

@@ -53,7 +53,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiUtilityHandler extends AiAbstractHandler
+public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -66,7 +66,7 @@ public abstract class AiUtilityHandler extends AiAbstractHandler
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiUtilityHandler(ArtificialIntelligence ai) throws StopRequestException
+	protected AiUtilityHandler(T ai) throws StopRequestException
     {	super(ai);
 	}
 
@@ -88,6 +88,8 @@ public abstract class AiUtilityHandler extends AiAbstractHandler
 	 * rien n'est obligatoire. Le calcul de ces valeurs
 	 * est fonction de la zone, mais aussi du mode
 	 * courant de l'agent.
+	 * <b>Attention :</b> n'oubliez pas de vider les maps
+	 * à chaque itération, avant de refaire les calculs d'utilité.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
@@ -111,7 +113,7 @@ public abstract class AiUtilityHandler extends AiAbstractHandler
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected void updateOutput() throws StopRequestException
+	public void updateOutput() throws StopRequestException
 	{	NumberFormat nf = NumberFormat.getInstance(Locale.FRENCH);
 		nf.setMinimumFractionDigits(2);
 		nf.setMaximumFractionDigits(2);

@@ -27,7 +27,6 @@ import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
  * classe utilisée par le moteur du jeu pour retrouver les IA
  * 
  * @author Vincent Labatut
- *
  */
 public class AiMain extends AiManager
 {
