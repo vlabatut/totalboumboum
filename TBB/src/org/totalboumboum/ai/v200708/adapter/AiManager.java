@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.totalboumboum.ai.AbstractAiManager;
+import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -51,7 +51,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AbstractAiManager<Integer>
+public abstract class AiManager extends AiAbstractManager<Integer>
 {	private boolean debug = false;
 
 	public AiManager(ArtificialIntelligence ai)

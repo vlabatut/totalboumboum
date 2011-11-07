@@ -25,7 +25,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.AbstractAiManager;
+import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
 import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v200910.adapter.communication.AiOutput;
@@ -51,7 +51,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AbstractAiManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction>
 {	/**
 	 * Construit un gestionnaire pour l'IA passée en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci,

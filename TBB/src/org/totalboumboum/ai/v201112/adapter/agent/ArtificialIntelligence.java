@@ -23,6 +23,10 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 
 import java.util.concurrent.Callable;
 
+import org.totalboumboum.ai.v201112.adapter.agent.handler.AiBombHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.handler.AiModeHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.handler.AiMoveHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.handler.AiUtilityHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;

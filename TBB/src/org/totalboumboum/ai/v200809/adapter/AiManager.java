@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v200809.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.AbstractAiManager;
+import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -43,7 +43,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AbstractAiManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction>
 {	/**
 	 * Construit un gestionnaire pour l'IA passée en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci,

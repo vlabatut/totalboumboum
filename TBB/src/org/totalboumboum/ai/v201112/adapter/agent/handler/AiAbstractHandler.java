@@ -1,5 +1,6 @@
-package org.totalboumboum.ai.v201112.adapter.agent;
+package org.totalboumboum.ai.v201112.adapter.agent.handler;
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 
 /*

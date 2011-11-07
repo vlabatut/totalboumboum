@@ -28,7 +28,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.AbstractAiManager;
+import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.InteractiveLoop;
@@ -117,7 +117,7 @@ public class DisplayAisColors implements Display
 		for(int i=0;i<players.size();i++)
 		{	AbstractPlayer player = players.get(i);
 			if(player instanceof AiPlayer)
-			{	AbstractAiManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
+			{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				// tile colors
 				if(getShow(i))
 				{	Color[][] colors = aiMgr.getTileColors();
