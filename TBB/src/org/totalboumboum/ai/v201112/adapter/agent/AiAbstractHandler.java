@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiAbstractHandler<T extends ArtificialIntelligence<?,?,?,?>>
+public abstract class AiAbstractHandler
 {	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci
@@ -43,12 +43,12 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence<?,?,?,?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiAbstractHandler(T ai) throws StopRequestException
+	protected AiAbstractHandler(ArtificialIntelligence ai) throws StopRequestException
     {	this.ai = ai;
 	}
 
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected T ai;
+	protected ArtificialIntelligence ai;
 }

@@ -86,12 +86,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *  
  * @author Vincent Labatut
  */
-public abstract class ArtificialIntelligence<T extends AiModeHandler<?>,
-											 U extends AiUtilityHandler<?>,
-											 V extends AiBombHandler<?>,
-											 W extends AiMoveHandler<?>>
-	implements Callable<AiAction>
-{	private boolean verbose = true;
+public abstract class ArtificialIntelligence implements Callable<AiAction>
+{	/** Indique si l'agent doit utiliser la sortie texte (pour le débogage) */
+	private boolean verbose = true;
 	
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
@@ -177,33 +174,23 @@ public abstract class ArtificialIntelligence<T extends AiModeHandler<?>,
 	 * Méthode permettant de mettre à jour
 	 * les percepts de l'agent, c'est-à-dire
 	 * les différents objets stockés en interne
-	 * dans ses classes.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors rien ne se passe.
+	 * dans ses classes.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updatePercepts() throws StopRequestException
-	{	
-		// méthode à surcharger
-	}
+	protected abstract void updatePercepts() throws StopRequestException;
 	
 	/**
 	 * Méthode permettant d'initialiser
 	 * les percepts de l'agent, c'est-à-dire
 	 * les différents objets stockés en interne
-	 * dans ses classes.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors rien ne se passe.
+	 * dans ses classes.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void initPercepts() throws StopRequestException
-	{
-		// méthode à surcharger
-	}
+	protected abstract void initPercepts() throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUTS			/////////////////////////////////////////////
@@ -236,28 +223,23 @@ public abstract class ArtificialIntelligence<T extends AiModeHandler<?>,
 	 * Méthode permettant de mettre à jour
 	 * les sorties graphiques de l'agent.<br/>
 	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors aucune sortie graphique n'est définie.
+	 * alors la sortie graphique par défaut consiste à 
+	 * afficher le chemin et la destination courants,
+	 * ainsi que les valeurs d'utilité courantes.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	protected void updateOutput() throws StopRequestException
-	{	
-		// méthode à surcharger
+	{	// affiche les chemins et destinations courants
+		getMoveHandler().updateOutput();
+		// affiche les utilités courantes
+		getUtilityHandler().updateOutput();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// HANDLERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** gestionnaire chargé du mode de l'agent */
-	protected T modeHandler;
-	/** gestionnaire chargé de calculer les valeurs d'utilité */
-	protected U utilityHandler;
-	/** gestionnaire chargé de l'action de poser une bombe */
-	protected V bombHandler;
-	/** gestionnaire chargé des déplacements de l'agent */
-	protected W moveHandler;
-	
 	/**
 	 * Cette méthode a pour but d'initialiser les gestionnaires.
 	 * Elle doit obligatoirement être surchargée.
@@ -266,6 +248,58 @@ public abstract class ArtificialIntelligence<T extends AiModeHandler<?>,
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	protected abstract void initHandlers() throws StopRequestException;
+
+	/**
+	 * Renvoie le gestionnaire de mode de cet agent.
+	 * Il doit avoir d'abord été créé dans la méthode
+	 * {@link #initHandlers()}.
+	 * 
+	 * @return
+	 * 		Le gestionnaire de mode de cet agent.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract AiModeHandler getModeHandler() throws StopRequestException;
+	
+	/**
+	 * Renvoie le gestionnaire d'utilité de cet agent.
+	 * Il doit avoir d'abord été créé dans la méthode
+	 * {@link #initHandlers()}.
+	 * 
+	 * @return
+	 * 		Le gestionnaire d'utilité de cet agent.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract AiUtilityHandler getUtilityHandler() throws StopRequestException;
+	
+	/**
+	 * Renvoie le gestionnaire de posage de bombe de cet agent.
+	 * Il doit avoir d'abord été créé dans la méthode
+	 * {@link #initHandlers()}.
+	 * 
+	 * @return
+	 * 		Le gestionnaire de posage de bombe de cet agent.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract AiBombHandler getBombHandler() throws StopRequestException;
+	
+	/**
+	 * Renvoie le gestionnaire de déplacement de cet agent.
+	 * Il doit avoir d'abord été créé dans la méthode
+	 * {@link #initHandlers()}.
+	 * 
+	 * @return
+	 * 		Le gestionnaire de déplacement de cet agent.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract AiMoveHandler getMoveHandler() throws StopRequestException;
 	
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
@@ -325,15 +359,15 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
 			{	long before = System.currentTimeMillis();
-				modeHandler.update();
+				getModeHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms ["+modeHandler.mode+"]");
+				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms ["+getModeHandler().mode+"]");
 			}
 			
 			// mise à jour des valeurs d'utilité
 			{	long before = System.currentTimeMillis();
-				utilityHandler.update();
+				getUtilityHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
 				if(verbose) System.out.println(before+"::updateUtility: "+elapsed+" ms");
@@ -344,7 +378,7 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 		// (note : les actions sont mutuellement exclusives, c'est soit l'une soit l'autre)
 		AiAction result = null;
 		{	long before = System.currentTimeMillis();
-			boolean cb = bombHandler.considerBombing();
+			boolean cb = getBombHandler().considerBombing();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
 			if(verbose) System.out.println(before+"::considerBombing: "+elapsed+" ms ["+cb+"]");
@@ -358,7 +392,7 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 			else
 			{	// on récupère la direction
 				before = System.currentTimeMillis();
-				Direction direction = moveHandler.considerMoving();
+				Direction direction = getMoveHandler().considerMoving();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
 				if(verbose) System.out.println(before+"::considerMoving: "+elapsed+" ms ["+direction+"]");
@@ -394,13 +428,6 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 	 * Termine proprement l'agent afin de libérer les ressources qu'il occupait.
 	 */
 	final void finish()
-	{	// percepts
-		zone = null;
-		
-		// handlers
-		bombHandler = null;
-		modeHandler = null;
-		moveHandler = null;
-		utilityHandler = null;
+	{	zone = null;
 	}
 }
