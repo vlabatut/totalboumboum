@@ -102,11 +102,7 @@ public abstract class AiModeHandler extends AiAbstractHandler
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected boolean hasEnoughItems() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return true;
-	}
+	protected abstract boolean hasEnoughItems() throws StopRequestException;
 	
 	/**
 	 * Détermine si l'agent a la possibilité de ramasser
@@ -120,9 +116,5 @@ public abstract class AiModeHandler extends AiAbstractHandler
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected boolean isCollectPossible() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return true;
-	}
+	protected abstract boolean isCollectPossible() throws StopRequestException;
 }

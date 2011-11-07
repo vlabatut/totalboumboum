@@ -85,10 +85,7 @@ public abstract class AiMoveHandler extends AiAbstractHandler
 	 * Cette décision dépend des valeurs d'utilité courantes.<br/>
 	 * La méthode renvoie une {@link Direction} indiquant le
 	 * sens du déplacement, ou bien {@code null} ou {@link Direction#NONE}
-	 * si aucun déplacement ne doit être effectué.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors la valeur {@link Direction#NONE} est systématiquement
-	 * renvoyée (i.e. : pas de déplacement).
+	 * si aucun déplacement ne doit être effectué.
 	 * 
 	 * @return
 	 * 		Renvoie une direction indiquant le sens (ou l'absence) de déplacement de l'agent.
@@ -96,11 +93,7 @@ public abstract class AiMoveHandler extends AiAbstractHandler
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected Direction considerMoving() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return Direction.NONE;
-	}
+	protected abstract Direction considerMoving() throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
