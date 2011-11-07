@@ -8,7 +8,6 @@ import org.totalboumboum.ai.v201112.ais.arikkoseoglu.v1.ArikKoseoglu;
  * (à ne pas modifier)
  * 
  * @author Vincent Labatut
- *
  */
 public class AiMain extends AiManager
 {
