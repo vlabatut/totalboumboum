@@ -35,27 +35,50 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Chaque agent doit hériter de cette classe. La méthode {@link #processAction} est la méthode 
  * appelée par le gestionnaire d'agents pour obtenir la prochaine action 
  * à effectuer. Cette méthode implémente l'algorithme général spécifié en cours
- * et ne doit être ni modifiée ni surchargée. <br/>
- * Le comportement de l'agent doit être implémenté en surchargeant les méthodes 
- * {@link #updatePercepts}, {@link #updateUtility}, {@link #considerBombing} et
- * {@link #considerMoving}.<br/>
- * La méthode {@link #updateMode}, utilisée pour mettre le mode à jour, ne peut 
- * pas être modifiée ni surchargée. Elle implémente l'algorithme de sélection du
- * mode défini en cours. Elle fait appel aux méthodes {@link #hasEnoughItems} et
- * {@link #isCollectPossible()}, qui doivent être surchargées : si elles ne le sont
- * pas, alors le mode sera toujours {@link AiMode#COLLECTING} par défaut.<br/>  
- * Enfin, la méthode {@link #updateOutput} peut être surchargée afin d'utiliser
- * la sortie graphique de l'agent pour afficher des informations en cours de jeu :
- * cases colorées, texte, chemins, etc.<br/>
+ * et ne doit être ni modifiée ni surchargée.<br/>
+ * L'algorithme général se décompose en différentes parties :
+ * <ul>
+ * 		<li>initialisation</li>
+ * 		<li>mise à jour des percepts</li>
+ * 		<li>calcul du mode</li>
+ * 		<li>mise à jour des valeurs d'utilité</li>
+ * 		<li>décision de poser une bombe ou pas</li>
+ * 		<li>choix d'une direction de déplacement</li>
+ * 		<li>mise à jour de la sortie graphique</li>
+ * </ul>
+ * Certaines de ces parties sont implémentées directement dans cette classe.<br/>
  * <br/>
- * <b>ATTENTION :</b> remarque très importante.
+ * Ainsi, l'initialisation de l'agent est réalisée grâce à la méthode {@link #init}.
+ * Cette méthode se charge d'initialiser les percepts avec {@link #initPercepts} et
+ * les gestionnaires avec {@link #initHandlers}. Les trois méthodes peuvent être
+ * surchargées. Au moins les deux dernières doivent l'être, car par défaut {@code #initPercepts}
+ * ne fait rien du tout, et {@code #initHandlers} crée des gestionnaires qui ne 
+ * font rien du tout. A noter que rien n'empêche de surcharger une de ces méthodes 
+ * de manière à en appeler d'autres. Bien sûr, toutes ces méthodes sont appelées
+ * seulement une fois, juste avant le début de la partie (notez cependant que la zone est 
+ * déjà disponible).<br/>
+ * La mise à jour des percepts est également réalisée localement, grâce à la méthode
+ * {@link #updatePercepts()}. Par défaut, elle ne fait rien du tout, il est donc
+ * nécessaire de la surcharger.<br/>
+ * Enfin, la méthode {@link #updateOutput} se charge de mettre à jour la sortie
+ * graphique de l'agent. Elle doit donc être surchargée si on veut afficher des 
+ * informations en cours de jeu : cases colorées, texte, chemins, etc. Sinon,
+ * par défaut, elle n'affiche rien du tout.<br/>
+ * <br/>
+ * Le reste du comportement de l'agent est implémenté dans des gestionnaires spécialisés,
+ * qui prennent la forme de classes spécifiques. Les gestionnaires de mode, d'utilité,
+ * de posage de bombe et de déplacement doivent respectivement hériter des classes 
+ * {@link AiModeHandler}, {@link AiUtilityHandler}, {@link AiBombHandler} et {@link AiMoveHandler}. 
+ * Cf. leur documentation pour plus d'information.<br/>
+ * <br/>
+ * <b>Attention :</b> remarque très importante.
  * A la fin de la partie, le jeu demande à l'agent de s'arrêter. Dans certaines
- * conditions, l'agent ne voudra pas s'arrêter (par exemple si elle est dans une
+ * conditions anormales, l'agent ne voudra pas s'arrêter (par exemple s'il est dans une
  * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
- * genre de problème, CHAQUE méthode définie dans l'agent doit :
- * <ul>	<li>CONTENIR A SON TOUT DEBUT un appel à la méthode {@link #checkInterruption}</li>
+ * genre de problème, <b>chaque</b> méthode définie dans l'agent doit :
+ * <ul>	<li><b>Contenir à son tout début</b> un appel à la méthode {@link #checkInterruption}</li>
  *  	<li>faire suivre (mot-clé throw) les interruptions StopRequestException, 
- *  		et ne SURTOUT PAS les traiter (pas de try/catch)</li>
+ *  		et ne <b>surtout pas</b> les traiter localement (pas de {@code try}/{@code catch})</li>
  * </ul>
  * De plus, cette fonction doit également apparaître au début de chaque boucle
  * définie dans l'agent, qu'il s'agisse d'un {@code for}, d'un {@code while} 
@@ -123,7 +146,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** La zone de jeu à laquelle l'agent a accès */
+	/** La zone de jeu à laquelle l'agent a accès (privée pour ne pas que l'agent puisse la changer) */
 	private AiZone zone;
 	
 	/**
@@ -159,6 +182,22 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	protected void updatePercepts() throws StopRequestException
 	{	
+		// méthode à surcharger
+	}
+	
+	/**
+	 * Méthode permettant d'initialiser
+	 * les percepts de l'agent, c'est-à-dire
+	 * les différents objets stockés en interne
+	 * dans ses classes.<br/>
+	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
+	 * alors rien ne se passe.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected void initPercepts() throws StopRequestException
+	{
 		// méthode à surcharger
 	}
 
@@ -204,106 +243,64 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// HANDLERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** gestionnaire chargé du mode de l'agent */
+	protected AiModeHandler modeHandler;
+	/** gestionnaire chargé de calculer les valeurs d'utilité */
+	protected AiUtilityHandler utilityHandler;
+	/** gestionnaire chargé de l'action de poser une bombe */
+	protected AiBombHandler bombHandler;
+	/** gestionnaire chargé des déplacements de l'agent */
+	protected AiMoveHandler moveHandler;
+	
+	/**
+	 * Cette méthode a pour but d'initialiser les gestionnaires.<br/>
+	 * Par défaut, elle crée des versions minimales des gestionnaires
+	 * standards, qui ne font absolument rien. Il est donc
+	 * nécessaire de la surcharger de manière à utiliser
+	 * vos propres classes de gestionnaires.<br/>
+	 * De plus, si votre agent utilise d'autres gestionnaires que
+	 * les gestionnaires standards, il faut également rajouter leur
+	 * initialisation.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected void initHandlers() throws StopRequestException
+	{	modeHandler = new AiModeHandler(this){};
+		utilityHandler = new AiUtilityHandler(this){};
+		bombHandler = new AiBombHandler(this){};
+		moveHandler = new AiMoveHandler(this){};
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Indique si l'agent a déjà été initialisé ou pas */
 	private boolean initialized = false;
 	
 	/**
-	 * méthode à surcharger s'il est nécessaire que l'agent soit
-	 * initialisé. Toute opération définie dans cette fonction
+	 * Cette méthode initialise l'agent.
+	 * Toute opération qui y est définie
 	 * sera réalisée une fois, juste avant le début de la partie.
-	 * A noter que les percepts sont néanmoins déjà à jour.
+	 * A noter que la zone est néanmoins déjà à jour.<br/>
+	 * Par défaut, l'initialisation porte sur les gestionnaires
+	 * avec {@link #initHandlers()} et sur les percepts
+	 * avec {@link #initPercepts()}. Si d'autres initialisations
+	 * sont nécessaires, il est possible de surcharger cette méthode.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	protected void init() throws StopRequestException
-	{	
-		// méthode à surcharger
+	{	// initialisation des gestionnaires
+		initHandlers();
+		
+		// initialisation des percepts
+		initPercepts();
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// MODE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Le mode courant de l'agent */
-	private AiMode mode = AiMode.COLLECTING;
-	
-	/**
-	 * Renvoie le mode courant de cet agent,
-	 * i.e. soit {@link AiMode#ATTACKING}, soit
-	 * {@link AiMode#COLLECTING}.
-	 * 
-	 * @return
-	 * 		Le mode courant de cet agent.
-	 */
-	public final AiMode getMode()
-	{	return mode;
-	}
-
-	/**
-	 * Méthode permettant de mettre à jour
-	 * le mode de l'agent : {@link AiMode#ATTACKING}
-	 * ou {@link AiMode#COLLECTING}.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors la valeur {@link AiMode#COLLECTING} est
-	 * systématiquement utilisée.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	private final void updateMode() throws StopRequestException
-	{	// si l'agent a assez d'items, on attaque
-		if(hasEnoughItems())
-			mode = AiMode.ATTACKING;
-		// sinon, il va essayer d'en ramasser
-		else
-		{	// s'il est possible d'en ramasser, il passe en mode collecte
-			if(isCollectPossible())
-				mode = AiMode.COLLECTING;
-			// sinon, il est obligé d'attaqué (même s'il n'a pas assez d'armes)
-			else
-				mode = AiMode.ATTACKING;
-		}
-	}
-	
-	/**
-	 * Détermine si l'agent possède assez d'item,
-	 * ou bien s'il doit essayer d'en ramasser d'autres.
-	 * Cette distinction est relative à l'environnement,
-	 * à l'agent lui-même et à la stratégie qu'il utilise.<br/>
-	 * Cette méthode est utilisée par lors de la mise 
-	 * à jour du mode par {@link #updateMode}.
-	 * 
-	 * @return
-	 * 		{@code true} ssi l'agent possède assez d'items.
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	protected boolean hasEnoughItems() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return false;
-	}
-	
-	/**
-	 * Détermine si l'agent a la possibilité de ramasser
-	 * des items dans la zone courante : présence d'items
-	 * cachés ou découverts, assez de temps restant, etc.<br/>
-	 * Cette méthode est utilisée par lors de la mise 
-	 * à jour du mode par {@link #updateMode}.
-	 * 
-	 * @return
-	 * 		{@code true} ssi l'agent a la possibilité de ramasser des items.
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	protected boolean isCollectPossible() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return true;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -335,15 +332,15 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
 			{	long before = System.currentTimeMillis();
-				updateMode();
+				modeHandler.update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms ["+mode+"]");
+				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms ["+modeHandler.mode+"]");
 			}
 			
 			// mise à jour des valeurs d'utilité
 			{	long before = System.currentTimeMillis();
-				updateUtility();
+				utilityHandler.update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
 				if(verbose) System.out.println(before+"::updateUtility: "+elapsed+" ms");
@@ -354,7 +351,7 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 		// (note : les actions sont mutuellement exclusives, c'est soit l'une soit l'autre)
 		AiAction result = null;
 		{	long before = System.currentTimeMillis();
-			boolean cb = considerBombing();
+			boolean cb = bombHandler.considerBombing();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
 			if(verbose) System.out.println(before+"::considerBombing: "+elapsed+" ms ["+cb+"]");
@@ -368,7 +365,7 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 			else
 			{	// on récupère la direction
 				before = System.currentTimeMillis();
-				Direction direction = considerMoving();
+				Direction direction = moveHandler.considerMoving();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
 				if(verbose) System.out.println(before+"::considerMoving: "+elapsed+" ms ["+direction+"]");
@@ -397,73 +394,6 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 		return result;
 	}
 	
-	/**
-	 * Méthode permettant de déterminer si l'agent
-	 * doit poser une bombe ou pas. Cette décision
-	 * dépend des valeurs d'utilité courantes.<br/>
-	 * La méthode renvoie un booléen {@code true}
-	 * si l'agent doit poser une bombe, et
-	 * {@code false} sinon.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors la valeur {@code false} est systématiquement
-	 * renvoyée (i.e. : pas de bombe posée).
-	 * 
-	 * @return
-	 * 		Renvoie {@code true} ssi l'agent doit poser une bombe.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	protected boolean considerBombing() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return false;
-	}
-
-	/**
-	 * Méthode permettant de déterminer si l'agent
-	 * doit se déplacer, et dans quelle direction.
-	 * Cette décision dépend des valeurs d'utilité courantes.<br/>
-	 * La méthode renvoie une {@link Direction} indiquant le
-	 * sens du déplacement, ou bien {@code null} ou {@link Direction#NONE}
-	 * si aucun déplacement ne doit être effectué.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors la valeur {@link Direction#NONE} est systématiquement
-	 * renvoyée (i.e. : pas de déplacement).
-	 * 
-	 * @return
-	 * 		Renvoie une direction indiquant le sens (ou l'absence) de déplacement de l'agent.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	protected Direction considerMoving() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return Direction.NONE;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// UTILITY			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Méthode permettant de mettre à jour
-	 * les valeurs d'utiltié de l'agent. Il s'agit
-	 * généralement d'une matrice numérique, mais
-	 * rien n'est obligatoire. Le calcul de ces valeurs
-	 * est fonction de la zone, mais aussi du mode
-	 * courant de l'agent.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors rien ne se passe.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	protected void updateUtility() throws StopRequestException
-	{	
-		// méthode à surcharger
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -471,6 +401,13 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 	 * Termine proprement l'agent afin de libérer les ressources qu'il occupait.
 	 */
 	final void finish()
-	{	zone = null;
+	{	// percepts
+		zone = null;
+		
+		// handlers
+		bombHandler = null;
+		modeHandler = null;
+		moveHandler = null;
+		utilityHandler = null;
 	}
 }

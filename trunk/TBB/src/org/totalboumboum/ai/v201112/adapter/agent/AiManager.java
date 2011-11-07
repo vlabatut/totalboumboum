@@ -25,7 +25,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.AbstractAiManager;
+import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
@@ -50,8 +50,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @author Vincent Labatut
  *
  */
-
-public abstract class AiManager extends AbstractAiManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction>
 {	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci,
