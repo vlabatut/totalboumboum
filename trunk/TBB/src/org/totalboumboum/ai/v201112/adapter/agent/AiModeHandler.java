@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.agent.handler;
+package org.totalboumboum.ai.v201112.adapter.agent;
 
 /*
  * Total Boum Boum
@@ -21,8 +21,6 @@ package org.totalboumboum.ai.v201112.adapter.agent.handler;
  * 
  */
 
-import org.totalboumboum.ai.v201112.adapter.agent.AiMode;
-import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 
 /**
