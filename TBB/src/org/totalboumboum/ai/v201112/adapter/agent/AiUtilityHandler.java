@@ -53,7 +53,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiUtilityHandler extends AiAbstractHandler
+public abstract class AiUtilityHandler<T extends ArtificialIntelligence<?,?,?,?>> extends AiAbstractHandler<T>
 {	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci
@@ -65,7 +65,7 @@ public abstract class AiUtilityHandler extends AiAbstractHandler
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiUtilityHandler(ArtificialIntelligence ai) throws StopRequestException
+	protected AiUtilityHandler(T ai) throws StopRequestException
     {	super(ai);
 	}
 

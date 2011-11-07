@@ -49,7 +49,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiMoveHandler extends AiAbstractHandler
+public abstract class AiMoveHandler<T extends ArtificialIntelligence<?,?,?,?>> extends AiAbstractHandler<T>
 {	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci
@@ -61,7 +61,7 @@ public abstract class AiMoveHandler extends AiAbstractHandler
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiMoveHandler(ArtificialIntelligence ai) throws StopRequestException
+	protected AiMoveHandler(T ai) throws StopRequestException
     {	super(ai);
 	}
 
