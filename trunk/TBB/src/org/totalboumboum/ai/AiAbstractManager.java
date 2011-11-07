@@ -58,7 +58,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * 		le type de donnée renvoyée par l'agent (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
  */
 
-public abstract class AbstractAiManager<V>
+public abstract class AiAbstractManager<V>
 {	/**
      * contruit un nouveau manager pour l'agent passé en paramètre.
      * Ce constructeur est destiné à être appelé par le constructeur situé dans 
@@ -67,7 +67,7 @@ public abstract class AbstractAiManager<V>
      * @param 
      * 		ai
      */
-	public AbstractAiManager(Callable<V> ai)
+	public AiAbstractManager(Callable<V> ai)
     {	this.ai = ai;
     	
 	}

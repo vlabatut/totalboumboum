@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.agent;
+package org.totalboumboum.ai.v201112.adapter.agent.handler;
 
 /*
  * Total Boum Boum
@@ -23,6 +23,8 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 
 import java.awt.Color;
 
+import org.totalboumboum.ai.v201112.adapter.agent.AiMode;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
