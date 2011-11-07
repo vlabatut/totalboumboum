@@ -59,7 +59,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer
 	 */
-	protected AiManager(ArtificialIntelligence<?,?,?,?> ai)
+	protected AiManager(ArtificialIntelligence ai)
     {	super(ai);
 	}
 
@@ -72,7 +72,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	 */
     @Override
 	public void finishAi()
-	{	ArtificialIntelligence<?,?,?,?> ai = ((ArtificialIntelligence<?,?,?,?>)getAi());
+	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.stopRequest();
 	}
 	
@@ -94,7 +94,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		loop = RoundVariables.loop;
 		level = RoundVariables.level;
 		percepts = new AiDataZone(level,player);
-		ArtificialIntelligence<?,?,?,?> ai = ((ArtificialIntelligence<?,?,?,?>)getAi());
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setZone(percepts);
 		output = ai.getOutput();
 	}
@@ -111,7 +111,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	{	// percepts
 		percepts.finish();
 		percepts = null;
-		ArtificialIntelligence<?,?,?,?> ai = ((ArtificialIntelligence<?,?,?,?>)getAi());
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.finish();
 		
 		// misc
