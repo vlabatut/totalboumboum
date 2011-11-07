@@ -39,9 +39,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Cette classe contient 3 variables qui doivent être 
  * obligatoirement être mises à jour par {@code considerMoving} :
  * <ul>
- * 		<li>{@code currentDestination} : la case de destination courante</li>
- * 		<li>{@code currentPath} : le chemin courant (pour aller à la destination courante)</li>
- * 		<li>{@code currentDirection} : la direction courante (qui dépend directement du chemin courant)</li>
+ * 		<li>{@link #currentDestination} : la case de destination courante ;</li>
+ * 		<li>{@link #currentPath} : le chemin courant (pour aller à la destination courante) ;</li>
+ * 		<li>{@link #currentDirection} : la direction courante (qui dépend directement du chemin courant).</li>
  * </ul>
  * Ces variables sont notamment utilisées par la méthode {@link #updateOutput()}
  * qui est donnée ici en exemple afin d'afficher le mode,
