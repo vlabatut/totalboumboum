@@ -50,10 +50,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  */
 public abstract class AiMoveHandler extends AiAbstractHandler
-{	/**
+{	
+	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci
-	 * grâce au mot-clé {@code this}.
+	 * grâce au mot-clé {@code super}.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
