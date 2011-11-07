@@ -21,14 +21,14 @@ package org.totalboumboum.ai.v201112.ais._suiveur;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * cette classe implémente une IA relativement stupide, qui choisit une cible
@@ -36,132 +36,31 @@ import org.totalboumboum.engine.content.feature.Direction;
  * suivre partout où elle va.
  * 
  * @author Vincent Labatut
- *
+ * @version 2 - version adaptée à l'API 2011-2012
  */
 public class Suiveur extends ArtificialIntelligence
-{	
-	/** interrupteur permettant d'afficher la trace du traitement */
+{	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 
 	/////////////////////////////////////////////////////////////////
-	// PATH MANAGERS			/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** classe chargée du déplacement vers la cible */
-	private PathManager targetManager = null;
-	/** classe chargée de la fuite du personnage */
-	private EscapeManager escapeManager = null;
-	
-	/////////////////////////////////////////////////////////////////
-	// SAFETY MANAGER				/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** classe chargée de déterminer quelles cases sont sûres */
-	private SafetyManager safetyManager = null;
-
-	/**
-	 * renvoie le gestionnaire de sécurité
-	 */
-	public SafetyManager getSafetyManager() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		return safetyManager;		
-	}
-	
-	/**
-	 * renvoie le niveau de sécurité de la case passée en paramètre
-	 */
-	public double getSafetyLevel(AiTile tile) throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		return safetyManager.getSafetyLevel(tile);		
-	}
-	
-	/**
-	 * détermine si la case passée en paramètre est sûre
-	 */
-	public boolean isSafe(AiTile tile) throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-			
-		return safetyManager.isSafe(tile);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CURRENT TILE				/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** la case occupée actuellement par le personnage */
-	private AiTile currentTile = null;
-
-	/**
-	 * renvoie la case courante
-	 */
-	public AiTile getCurrentTile() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		return currentTile;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CURRENT LOCATION			/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** la position en pixels occupée actuellement par le personnage */
-	private double currentX;
-	/** la position en pixels occupée actuellement par le personnage */
-	private double currentY;
-
-	/**
-	 * renvoie l'abscisse courante (en pixels)
-	 */
-	public double getCurrentX() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		return currentX;
-	}
-	
-	/**
-	 * renvoie l'ordonnée courante (en pixels)
-	 */
-	public double getCurrentY() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-		
-		return currentY;
-	}
-	
-	private void updateLocation() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-		
-		currentTile = ownHero.getTile();
-		currentX = ownHero.getPosX();
-		currentY = ownHero.getPosY();
-				
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// OWN HERO					/////////////////////////////////////
+	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** le personnage dirigé par cette IA */
-	private AiHero ownHero = null;
+	protected AiHero ownHero = null;
+	/** la case occupée actuellement par le personnage */
+	protected AiTile currentTile = null;
+	/** la position en pixels occupée actuellement par le personnage */
+	protected double currentX;
+	/** la position en pixels occupée actuellement par le personnage */
+	protected double currentY;
 
-	/**
-	 * renvoie le personnage contrôlé par cette IA
-	 */
-	public AiHero getOwnHero() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		return ownHero;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PERCEPTS					/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	@Override
-	public void init() throws StopRequestException
+	protected void initPercepts() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
 		ownHero = getZone().getOwnHero();
 	
 		updateLocation();
-		
-		safetyManager = new SafetyManager(this);
-		targetManager = new PathManager(this,currentTile);
 	}
 	
 	@Override
@@ -174,85 +73,120 @@ public class Suiveur extends ArtificialIntelligence
 			System.out.println(ownHero.getColor()+": ("+currentTile.getRow()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
 		
 		// on met à jour le gestionnaire de sécurité
-		safetyManager.update();
+		safetyHandler.update();
+		
+		// on met à jour le gestionnaire de déplacement
+		updateMoveHandler();
+	}
+
+	private void updateLocation() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+		
+		currentTile = ownHero.getTile();
+		currentX = ownHero.getPosX();
+		currentY = ownHero.getPosY();
+				
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// HANDLERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** gestionnaire de déplacement vers la cible */
+	protected TargetHandler targetHandler;
+	/** gestionnaire de fuite */
+	protected EscapeHandler escapeHandler;
+	/** gestionnaire de sûreté */
+	protected SafetyHandler safetyHandler;
+	/** gestionnaire de déplacement */
+	protected AiMoveHandler<Suiveur> moveHandler;
+	/** gestionnaire de mode (bidon) */
+	protected AiModeHandler<Suiveur> modeHandler;
+	/** gestionnaire d'utilité (bidon) */
+	protected AiUtilityHandler<Suiveur> utilityHandler;
+	/** gestionnaire de bombage (bidon) */
+	protected AiBombHandler<Suiveur> bombHandler;
+	
+	@Override
+	protected void initHandlers() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+		
+		modeHandler = new AiModeHandler<Suiveur>(this)
+		{	@Override
+			protected boolean isCollectPossible() throws StopRequestException
+			{	return true;
+			}
+			
+			@Override
+			protected boolean hasEnoughItems() throws StopRequestException
+			{	return false;
+			}
+		};
+		
+		utilityHandler = new AiUtilityHandler<Suiveur>(this)
+		{	@Override
+			protected void update() throws StopRequestException
+			{	
+			}
+		};
+		
+		bombHandler = new AiBombHandler<Suiveur>(this)
+		{	@Override
+			protected boolean considerBombing() throws StopRequestException
+			{	return false;
+			}
+		};
+		
+		targetHandler = new TargetHandler(this);
+		escapeHandler = new EscapeHandler(this);
+		safetyHandler = new SafetyHandler(this);
 	}
 
 	@Override
-	public Direction considerMoving() throws StopRequestException
-	{	Direction result = Direction.NONE;			
-		
-		// si on est en train de fuir : on continue
-		if(escapeManager!=null)
-		{	if(escapeManager.hasArrived())
-				escapeManager = null;
-			else
-				result = escapeManager.update();
+	protected AiModeHandler<Suiveur> getModeHandler() throws StopRequestException
+	{	return modeHandler;
+	}
+
+	@Override
+	protected AiUtilityHandler<Suiveur> getUtilityHandler() throws StopRequestException
+	{	return utilityHandler;
+	}
+
+	@Override
+	protected AiBombHandler<Suiveur> getBombHandler() throws StopRequestException
+	{	return bombHandler;
+	}
+
+	@Override
+	protected AiMoveHandler<Suiveur> getMoveHandler() throws StopRequestException
+	{	return moveHandler;
+	}
+
+	private void updateMoveHandler() throws StopRequestException
+	{	// si on est en train de fuir : on continue
+		if(moveHandler!=escapeHandler)
+		{	if(escapeHandler.hasArrived())
+				moveHandler = targetHandler;
 		}
 		
 		// sinon si on est en danger : on commence à fuir
-		else if(!safetyManager.isSafe(currentTile))
-		{	escapeManager = new EscapeManager(this);
-			result = escapeManager.update();
+		else if(!safetyHandler.isSafe(currentTile))
+		{	moveHandler = escapeHandler;
 		}
 		
 		// sinon on se déplace vers la cible
 		else
-		{	updateTarget();
-			if(target!=null)
-				result = targetManager.update();
+		{	moveHandler = targetHandler;
 		}
-		
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TARGET					/////////////////////////////////////
+	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la cible à suivre (ou null si aucune cible n'existe) */
-	private AiHero target;
-	/** case précédente de la cible */
-	private AiTile targetPreviousTile;
-	
-	/**
-	 * choisit aléatoirement un joueur comme cible à suivre
-	 */
-	private void chooseTarget() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		target = null;
-		List<AiHero> heroes = new ArrayList<AiHero>(getZone().getRemainingHeroes());
-		heroes.remove(ownHero);
-		if(!heroes.isEmpty())
-		{	int index = (int)Math.random()*heroes.size();
-			target = heroes.get(index);
-		}
-	}
+	@Override
+	protected void updateOutput() throws StopRequestException
+	{	checkInterruption();
 
-	/**
-	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
-	 */
-	private void updateTarget() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		if(target==null || target.hasEnded())
-		{	chooseTarget();
-			if(target!=null)
-			{	AiTile targetCurrentTile = target.getTile();
-				targetManager.setDestination(targetCurrentTile);
-				targetPreviousTile = targetCurrentTile; 
-			}
-		}
-		else
-		{	AiTile targetCurrentTile = target.getTile();
-			if(targetCurrentTile==currentTile)
-			{	double targetX = target.getPosX();
-				double targetY = target.getPosY();
-				targetManager.setDestination(targetX,targetY);				
-			}
-			else if(targetCurrentTile!=targetPreviousTile)
-			{	targetManager.setDestination(targetCurrentTile);
-				targetPreviousTile = targetCurrentTile;				
-			}
-		}
+		moveHandler.updateOutput();
+		safetyHandler.updateOutput();
 	}
 }

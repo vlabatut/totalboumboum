@@ -73,25 +73,25 @@ public class DemirSazan extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler getModeHandler() throws StopRequestException
+	protected AiModeHandler<DemirSazan> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiUtilityHandler getUtilityHandler() throws StopRequestException
+	protected AiUtilityHandler<DemirSazan> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler getBombHandler() throws StopRequestException
+	protected AiBombHandler<DemirSazan> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<DemirSazan> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

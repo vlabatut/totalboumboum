@@ -73,25 +73,25 @@ public class GungorKavus extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler getModeHandler() throws StopRequestException
+	protected AiModeHandler<GungorKavus> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiUtilityHandler getUtilityHandler() throws StopRequestException
+	protected AiUtilityHandler<GungorKavus> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler getBombHandler() throws StopRequestException
+	protected AiBombHandler<GungorKavus> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<GungorKavus> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

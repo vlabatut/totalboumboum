@@ -13,7 +13,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Serdil Demir
  * @author Gökhan Sazan
  */
-public class MoveHandler extends AiMoveHandler
+public class MoveHandler extends AiMoveHandler<DemirSazan>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -47,7 +47,7 @@ public class MoveHandler extends AiMoveHandler
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void updateOutput() throws StopRequestException
+	public void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		// ici on se contente de faire le traitement par défaut

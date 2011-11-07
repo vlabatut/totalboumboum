@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Serdil Demir
  * @author Gökhan Sazan
  */
-public class ModeHandler extends AiModeHandler
+public class ModeHandler extends AiModeHandler<DemirSazan>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

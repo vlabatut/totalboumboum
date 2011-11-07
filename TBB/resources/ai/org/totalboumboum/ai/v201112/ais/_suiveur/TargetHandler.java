@@ -22,12 +22,15 @@ package org.totalboumboum.ai.v201112.ais._suiveur;
  */
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -47,63 +50,30 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public class PathManager
-{
-	/** interrupteur permettant d'afficher la trace du traitement */
+public class TargetHandler extends AiMoveHandler<Suiveur>
+{	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 
 	/**
 	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
 	 * exprimée en pixels
 	 */
-	public PathManager(Suiveur ai, double x, double y) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	public TargetHandler(Suiveur ai) throws StopRequestException
+	{	super(ai);
+		ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		init(ai);
-		setDestination(x,y);
-	}
-	
-	/**
-	 * crée un PathManager chargé d'amener le personnage au centre de la case
-	 * passée en paramètre
-	 */
-	public PathManager(Suiveur ai, AiTile destination) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		init(ai);
-		setDestination(destination);
-	}
-	
-	/**
-	 * initialise ce PathManager
-	 */
-	private void init(Suiveur ai) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-		
-		this.ai = ai;
-		zone = ai.getZone();
 		costCalculator = new BasicCostCalculator(ai);
 		heuristicCalculator = new BasicHeuristicCalculator(ai);
 		successorCalculator = new BasicSuccessorCalculator(ai);
-		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator,successorCalculator);
+		astar = new Astar(ai,ai.ownHero,costCalculator,heuristicCalculator,successorCalculator);
 		updatePrev();
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** l'IA concernée par ce gestionnaire de chemin */
-	private Suiveur ai;
-	/** zone de jeu */
-	private AiZone zone;
 	
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionnée */
-	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
 	/** l'ordonnée de destination */
@@ -118,16 +88,16 @@ public class PathManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		arrived = false;
-		tileDest = destination;
-		xDest = tileDest.getPosX();
-		yDest = tileDest.getPosY();
-		AiLocation location = new AiLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
+		currentDestination = destination;
+		xDest = currentDestination.getPosX();
+		yDest = currentDestination.getPosY();
+		AiLocation location = new AiLocation(ai.currentX,ai.currentY,ai.getZone());
 		try
-		{	path = astar.processShortestPath(location,destination);
+		{	currentPath = astar.processShortestPath(location,destination);
 		}
 		catch (LimitReachedException e)
 		{	//e.printStackTrace();
-			path = new AiPath();
+			currentPath = new AiPath();
 		}
 	}
 
@@ -139,18 +109,19 @@ public class PathManager
 	public void setDestination(double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
+		AiZone zone = ai.getZone();
 		arrived = false;
 		double normalized[] = zone.normalizePosition(x, y);
 		xDest = normalized[0];
 		yDest = normalized[1];
 //		tileDest = zone.getTile(xDest,yDest);
-		AiLocation location = new AiLocation(ai.getCurrentX(),ai.getCurrentY(),zone);
+		AiLocation location = new AiLocation(ai.currentX,ai.currentY,zone);
 		try
-		{	path = astar.processShortestPath(location,tileDest);
+		{	currentPath = astar.processShortestPath(location,currentDestination);
 		}
 		catch (LimitReachedException e)
 		{	//e.printStackTrace();
-			path = new AiPath();
+			currentPath = new AiPath();
 		}
 	}
 
@@ -182,16 +153,17 @@ public class PathManager
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		if(path==null)
+		AiZone zone = ai.getZone();
+		if(currentPath==null)
 			arrived = false;
 		else
 		{	// on teste si le personnage est à peu près situé à la position de destination 
-			AiHero ownHero = ai.getOwnHero();
+			AiHero ownHero = ai.ownHero;
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
 			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
 			// cas particulier : oscillation autour du point d'arrivée
-			if(!arrived && path.getLength()==1)
+			if(!arrived && currentPath.getLength()==1)
 			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
 				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
 				arrived = prevDir.getOpposite()==currentDir;
@@ -216,7 +188,7 @@ public class PathManager
 	private void updatePrev() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		AiHero hero = ai.getOwnHero();
+		AiHero hero = ai.ownHero;
 		xPrev = hero.getPosX();
 		yPrev = hero.getPosY();		
 	}
@@ -224,9 +196,6 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin à suivre */
-	private AiPath path;
-	
 	/**
 	 * vérifie que le personnage est bien sur le chemin pré-calculé,
 	 * en supprimant si besoin les cases inutiles.
@@ -236,14 +205,14 @@ public class PathManager
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		if(path==null)
-			path = new AiPath();
+		if(currentPath==null)
+			currentPath = new AiPath();
 		else
-		{	AiTile currentTile = ai.getCurrentTile();
-			while(!path.isEmpty() && !path.getLocation(0).getTile().equals(currentTile))
+		{	AiTile currentTile = ai.currentTile;
+			while(!currentPath.isEmpty() && !currentPath.getLocation(0).getTile().equals(currentTile))
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				
-				path.removeLocation(0);
+				currentPath.removeLocation(0);
 			}
 		}
 	}
@@ -289,13 +258,13 @@ public class PathManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		boolean result = true;
-		Iterator<AiLocation> it = path.getLocations().iterator();
+		Iterator<AiLocation> it = currentPath.getLocations().iterator();
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			AiLocation location = it.next();
 			AiTile tile = location.getTile();
-			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);
+			result = tile.isCrossableBy(ai.ownHero) && ai.safetyHandler.isSafe(tile);
 //			if(!result)
 //				System.out.println();
 		}
@@ -321,53 +290,111 @@ public class PathManager
 	 * calcule la prochaine direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 	 * */
-	public Direction update() throws StopRequestException
+	@Override
+	protected Direction considerMoving() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
+		AiZone zone = ai.getZone();
 		Direction result = Direction.NONE;
-		if(!hasArrived())
-		{	// on vérifie que le joueur est toujours sur le chemin
-			checkIsOnPath();
-			// si le chemin est vide ou invalide, on le recalcule
-			if(path==null || path.isEmpty() || !checkPathValidity())
-			{	AiLocation location = new AiLocation(ai.getCurrentTile());
-				try
-				{	path = astar.processShortestPath(location,tileDest);
+
+		updateTarget();
+		if(target!=null)
+		{	if(!hasArrived())
+			{	// on vérifie que le joueur est toujours sur le chemin
+				checkIsOnPath();
+				// si le chemin est vide ou invalide, on le recalcule
+				if(currentPath==null || currentPath.isEmpty() || !checkPathValidity())
+				{	AiLocation location = new AiLocation(ai.currentTile);
+					try
+					{	currentPath = astar.processShortestPath(location,currentDestination);
+					}
+					catch (LimitReachedException e)
+					{	//e.printStackTrace();
+						currentPath = new AiPath();
+					}
 				}
-				catch (LimitReachedException e)
-				{	//e.printStackTrace();
-					path = new AiPath();
+				if(currentPath!=null && checkPathValidity())
+				{	// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
+					if(currentPath.getLength()>1)
+					{	AiTile tile = currentPath.getLocation(1).getTile();
+						result = zone.getDirection(ai.ownHero,tile);	
+					}
+					// sinon, s'il ne reste qu'une seule case, on va au centre
+					else if(currentPath.getLength()>0)
+					{	AiHero ownHero = ai.ownHero;
+						double x1 = ownHero.getPosX();
+						double y1 = ownHero.getPosY();
+						result = zone.getDirection(x1,y1,xDest,yDest);
+					}
 				}
 			}
-			if(path!=null && checkPathValidity())
-			{	// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
-				if(path.getLength()>1)
-				{	AiTile tile = path.getLocation(1).getTile();
-					result = zone.getDirection(ai.getOwnHero(),tile);	
-				}
-				// sinon, s'il ne reste qu'une seule case, on va au centre
-				else if(path.getLength()>0)
-				{	AiHero ownHero = ai.getOwnHero();
-					double x1 = ownHero.getPosX();
-					double y1 = ownHero.getPosY();
-					result = zone.getDirection(x1,y1,xDest,yDest);
-				}
+			
+			// mise à jour de la position précédente
+			updatePrev();
+			// mise à jour de la sortie
+			updateOutput();
+			
+			if(verbose)
+			{	System.out.println(">>>>>>>>>> PATH MANAGER <<<<<<<<<<");
+				System.out.println("path: "+currentPath);
+				System.out.println("direction: "+result);
 			}
 		}
 		
-		// mise à jour de la position précédente
-		updatePrev();
-		// mise à jour de la sortie
-		updateOutput();
-		
-		if(verbose)
-		{	System.out.println(">>>>>>>>>> PATH MANAGER <<<<<<<<<<");
-			System.out.println("path: "+path);
-			System.out.println("direction: "+result);
-		}
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TARGET					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** la cible à suivre (ou null si aucune cible n'existe) */
+	private AiHero target;
+	/** case précédente de la cible */
+	private AiTile targetPreviousTile;
+	
+	/**
+	 * choisit aléatoirement un joueur comme cible à suivre
+	 */
+	private void chooseTarget() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
+		target = null;
+		List<AiHero> heroes = new ArrayList<AiHero>(ai.getZone().getRemainingHeroes());
+		heroes.remove(ai.ownHero);
+		if(!heroes.isEmpty())
+		{	int index = (int)Math.random()*heroes.size();
+			target = heroes.get(index);
+		}
+	}
+
+	/**
+	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
+	 */
+	private void updateTarget() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
+		if(target==null || target.hasEnded())
+		{	chooseTarget();
+			if(target!=null)
+			{	AiTile targetCurrentTile = target.getTile();
+				setDestination(targetCurrentTile);
+				targetPreviousTile = targetCurrentTile; 
+			}
+		}
+		else
+		{	AiTile targetCurrentTile = target.getTile();
+			if(targetCurrentTile==ai.currentTile)
+			{	double targetX = target.getPosX();
+				double targetY = target.getPosY();
+				setDestination(targetX,targetY);				
+			}
+			else if(targetCurrentTile!=targetPreviousTile)
+			{	setDestination(targetCurrentTile);
+				targetPreviousTile = targetCurrentTile;				
+			}
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -375,13 +402,14 @@ public class PathManager
 	 * met à jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
 	 */
-	private void updateOutput() throws StopRequestException
+	@Override
+	public void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		if(path!=null && !path.isEmpty())	
+		if(currentPath!=null && !currentPath.isEmpty())	
 		{	AiOutput output = ai.getOutput();
 			Color color = Color.BLACK;
-			output.addPath(path, color);
+			output.addPath(currentPath, color);
 		}
 	}
 }

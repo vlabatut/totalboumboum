@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
-public class BombHandler extends AiBombHandler
+public class BombHandler extends AiBombHandler<CoskunOzdemir>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

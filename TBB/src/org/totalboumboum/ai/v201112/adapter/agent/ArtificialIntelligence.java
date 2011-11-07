@@ -260,7 +260,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiModeHandler getModeHandler() throws StopRequestException;
+	protected abstract AiModeHandler<?> getModeHandler() throws StopRequestException;
 	
 	/**
 	 * Renvoie le gestionnaire d'utilité de cet agent.
@@ -273,7 +273,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiUtilityHandler getUtilityHandler() throws StopRequestException;
+	protected abstract AiUtilityHandler<?> getUtilityHandler() throws StopRequestException;
 	
 	/**
 	 * Renvoie le gestionnaire de posage de bombe de cet agent.
@@ -286,7 +286,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiBombHandler getBombHandler() throws StopRequestException;
+	protected abstract AiBombHandler<?> getBombHandler() throws StopRequestException;
 	
 	/**
 	 * Renvoie le gestionnaire de déplacement de cet agent.
@@ -299,7 +299,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiMoveHandler getMoveHandler() throws StopRequestException;
+	protected abstract AiMoveHandler<?> getMoveHandler() throws StopRequestException;
 	
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
