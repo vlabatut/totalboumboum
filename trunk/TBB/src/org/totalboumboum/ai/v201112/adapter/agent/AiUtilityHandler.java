@@ -87,17 +87,12 @@ public abstract class AiUtilityHandler extends AiAbstractHandler
 	 * généralement d'une matrice numérique, mais
 	 * rien n'est obligatoire. Le calcul de ces valeurs
 	 * est fonction de la zone, mais aussi du mode
-	 * courant de l'agent.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors rien ne se passe.
+	 * courant de l'agent.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void update() throws StopRequestException
-	{	
-		// méthode à surcharger
-	}
+	protected abstract void update() throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////

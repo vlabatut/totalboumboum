@@ -59,10 +59,7 @@ public abstract class AiBombHandler extends AiAbstractHandler
 	 * dépend des valeurs d'utilité courantes.<br/>
 	 * La méthode renvoie un booléen {@code true}
 	 * si l'agent doit poser une bombe, et
-	 * {@code false} sinon.<br/>
-	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
-	 * alors la valeur {@code false} est systématiquement
-	 * renvoyée (i.e. : pas de bombe posée).
+	 * {@code false} sinon.
 	 * 
 	 * @return
 	 * 		Renvoie {@code true} ssi l'agent doit poser une bombe.
@@ -70,9 +67,5 @@ public abstract class AiBombHandler extends AiAbstractHandler
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected boolean considerBombing() throws StopRequestException
-	{	
-		// méthode à surcharger
-		return false;
-	}
+	protected abstract boolean considerBombing() throws StopRequestException;
 }
