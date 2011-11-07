@@ -34,10 +34,11 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Vincent Labatut
  */
 public abstract class AiBombHandler extends AiAbstractHandler
-{	/**
+{	
+	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci
-	 * grâce au mot-clé {@code this}.
+	 * grâce au mot-clé {@code super}.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
