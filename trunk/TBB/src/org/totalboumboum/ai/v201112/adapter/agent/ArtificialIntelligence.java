@@ -86,7 +86,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *  
  * @author Vincent Labatut
  */
-public abstract class ArtificialIntelligence implements Callable<AiAction>
+public abstract class ArtificialIntelligence<T extends AiModeHandler<?>,
+											 U extends AiUtilityHandler<?>,
+											 V extends AiBombHandler<?>,
+											 W extends AiMoveHandler<?>>
+	implements Callable<AiAction>
 {	private boolean verbose = true;
 	
 	/////////////////////////////////////////////////////////////////
@@ -246,33 +250,22 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	// HANDLERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** gestionnaire chargé du mode de l'agent */
-	protected AiModeHandler modeHandler;
+	protected T modeHandler;
 	/** gestionnaire chargé de calculer les valeurs d'utilité */
-	protected AiUtilityHandler utilityHandler;
+	protected U utilityHandler;
 	/** gestionnaire chargé de l'action de poser une bombe */
-	protected AiBombHandler bombHandler;
+	protected V bombHandler;
 	/** gestionnaire chargé des déplacements de l'agent */
-	protected AiMoveHandler moveHandler;
+	protected W moveHandler;
 	
 	/**
-	 * Cette méthode a pour but d'initialiser les gestionnaires.<br/>
-	 * Par défaut, elle crée des versions minimales des gestionnaires
-	 * standards, qui ne font absolument rien. Il est donc
-	 * nécessaire de la surcharger de manière à utiliser
-	 * vos propres classes de gestionnaires.<br/>
-	 * De plus, si votre agent utilise d'autres gestionnaires que
-	 * les gestionnaires standards, il faut également rajouter leur
-	 * initialisation.
+	 * Cette méthode a pour but d'initialiser les gestionnaires.
+	 * Elle doit obligatoirement être surchargée.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void initHandlers() throws StopRequestException
-	{	modeHandler = new AiModeHandler(this){};
-		utilityHandler = new AiUtilityHandler(this){};
-		bombHandler = new AiBombHandler(this){};
-		moveHandler = new AiMoveHandler(this){};
-	}
+	protected abstract void initHandlers() throws StopRequestException;
 	
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
