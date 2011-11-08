@@ -78,14 +78,34 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/** Map contenant les cases rangées par valeur d'utilité */
 	protected final HashMap<Float,List<AiTile>> utilitiesByValue = new HashMap<Float,List<AiTile>>();
 
+	/**
+	 * Renvoie les utilités courantes, rangées par case.
+	 * 
+	 * @return
+	 * 		Une map contenant les utilités rangées par case.
+	 */
+	public HashMap<AiTile, Float> getUtilitiesByTile()
+	{	return utilitiesByTile;
+	}
+
+	/**
+	 * Renvoie les utilités courantes, rangées par valeur.
+	 * 
+	 * @return
+	 * 		Une map contenant les utilités rangées par valeur.
+	 */
+	public HashMap<Float, List<AiTile>> getUtilitiesByValue()
+	{	return utilitiesByValue;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Méthode permettant de mettre à jour
-	 * les valeurs d'utilité de l'agent. Il s'agit
-	 * généralement d'une matrice numérique, mais
-	 * rien n'est obligatoire. Le calcul de ces valeurs
+	 * les valeurs d'utilité de l'agent. Ces valeurs
+	 * doivent être placées dans les deux maps {@link #utilitiesByTile}
+	 * et {@link #utilitiesByValue}. Le calcul de ces valeurs
 	 * est fonction de la zone, mais aussi du mode
 	 * courant de l'agent.
 	 * <b>Attention :</b> n'oubliez pas de vider les maps
