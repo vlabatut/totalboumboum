@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  * 
  */
 
+import java.util.HashMap;
 import java.util.concurrent.Callable;
 
 import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
@@ -29,7 +30,6 @@ import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Chaque agent doit hériter de cette classe. La méthode {@link #processAction} est la méthode 
@@ -87,9 +87,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 public abstract class ArtificialIntelligence implements Callable<AiAction>
-{	/** Indique si l'agent doit utiliser la sortie texte (pour le débogage) */
-	private boolean verbose = true;
-	
+{	
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -130,6 +128,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		{	// on initialise l'agent si besoin
 			if(!initialized)
 			{	initialized = true;
+				colorStr = zone.getOwnHero().getColor().toString();
 				init();
 				result = new AiAction(AiActionName.NONE);
 			}
@@ -233,6 +232,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	protected void updateOutput() throws StopRequestException
 	{	// affiche les chemins et destinations courants
 		getMoveHandler().updateOutput();
+		
 		// affiche les utilités courantes
 		getUtilityHandler().updateOutput();
 	}
@@ -344,33 +344,40 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	public final AiAction processAction() throws StopRequestException
 	{	checkInterruption();
-verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
-		if(verbose) System.out.println(System.currentTimeMillis()+">>>>>>>>>>>>>>>>");
-		if(verbose) System.out.println(zone);
+		resetDurations();
+		long before0 = System.currentTimeMillis();
+		print(">> Entering processAction ----------------------");
+		print(zone.toString());
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes
 			{	long before = System.currentTimeMillis();
+				print(">>>> Entering updatePercepts");
 				updatePercepts();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				if(verbose) System.out.println(before+"::updatePercepts: "+elapsed+" ms");
+				print("<<<< Exiting updatePercepts: duration="+elapsed+" ms");
+				stepDurations.put(AiStep.PERCEPTS,elapsed);
 			}
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
 			{	long before = System.currentTimeMillis();
+				print(">>>> Entering updateMode");
 				getModeHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				if(verbose) System.out.println(before+"::updateMode: "+elapsed+" ms ["+getModeHandler().mode+"]");
+				print("<<<< Exiting updateMode: duration="+elapsed+" ms result="+getModeHandler().mode);
+				stepDurations.put(AiStep.MODE,elapsed);
 			}
 			
 			// mise à jour des valeurs d'utilité
 			{	long before = System.currentTimeMillis();
+				print(">>>> Entering updateUtility");
 				getUtilityHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				if(verbose) System.out.println(before+"::updateUtility: "+elapsed+" ms");
+				print("<<<< Exiting updateUtility: duration="+elapsed+" ms");
+				stepDurations.put(AiStep.UTILITY,elapsed);
 			}
 		}
 		
@@ -378,10 +385,12 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 		// (note : les actions sont mutuellement exclusives, c'est soit l'une soit l'autre)
 		AiAction result = null;
 		{	long before = System.currentTimeMillis();
+			print(">>>> Entering considerBombing");
 			boolean cb = getBombHandler().considerBombing();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			if(verbose) System.out.println(before+"::considerBombing: "+elapsed+" ms ["+cb+"]");
+			print("<<<< Exiting updateUtility: duration="+elapsed+" ms result="+cb);
+			stepDurations.put(AiStep.BOMB,elapsed);
 			
 			// on essaie de poser une bombe
 			if(cb)
@@ -392,10 +401,12 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 			else
 			{	// on récupère la direction
 				before = System.currentTimeMillis();
+				print(">>>> Entering considerMoving");
 				Direction direction = getMoveHandler().considerMoving();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
-				if(verbose) System.out.println(before+"::considerMoving: "+elapsed+" ms ["+direction+"]");
+				print("<<<< Exiting considerMoving: duration="+elapsed+" ms result="+direction);
+				stepDurations.put(AiStep.MOVE,elapsed);
 				
 				// si pas de direction : on suppose que c'est NONE
 				if(direction==null)	
@@ -410,15 +421,105 @@ verbose = zone.getOwnHero().getColor()==PredefinedColor.YELLOW;
 		}
 		
 		// mise à jour des sorties
-		long before = System.currentTimeMillis();
-		updateOutput();
-		long after = System.currentTimeMillis();
-		long elapsed = after - before;
-		if(verbose) System.out.println(before+"::updateOutput: "+elapsed+" ms");
+		{	long before = System.currentTimeMillis();
+			updateOutput();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("<<<< Exiting updateOutput: duration="+elapsed+" ms");
+			stepDurations.put(AiStep.OUTPUT,elapsed);
+		}
 		
 		// on renvoie l'action sélectionnée
-		if(verbose) System.out.println(after+"<<<<<<<<<<<<<<<<");
+		long after0 = System.currentTimeMillis();
+		long elapsed0 = after0 - before0;
+		print("<< Exiting processAction duration="+elapsed0+" ----------------------");
+		totalDuration = elapsed0;
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Les différentes étapes du traitement */
+	public enum AiStep
+	{	PERCEPTS,MODE,UTILITY,BOMB,MOVE,OUTPUT;
+	
+		@Override
+		public String toString()
+		{	String result = this.name();
+			String initial = result.substring(0,1);
+			result = initial + result.substring(1).toLowerCase();
+			return result;
+		}
+	};
+	/** Temps réel total utilisé lors du dernier appel (en ms) */ 
+	private long totalDuration;
+	/** Temps réel de chaque étape (en ms) */
+	private final HashMap<AiStep,Long> stepDurations = new HashMap<AiStep, Long>();
+	
+	/**
+	 * Réinitialise tous les temps réels
+	 * avant de démarrer le traitement.
+	 */
+	private final void resetDurations()
+	{	totalDuration = 0;
+		stepDurations.clear();
+		for(AiStep step: AiStep.values())
+			stepDurations.put(step,0l);
+	}
+	
+	/**
+	 * Renvoie le temps réel écoulé lors
+	 * du dernier appel de cet agent,
+	 * exprimé en ms.
+	 * 
+	 * @return
+	 * 		Temps réel total en ms.
+	 */
+	public final long getTotalTime()
+	{	return totalDuration;
+	}
+
+	/**
+	 * Renvoie une map contenant 
+	 * le temps réel écoulé pour
+	 * chacune des étapes de cet
+	 * agent, lors du dernier appel,
+	 * exprimé en ms.
+	 * 
+	 * @return
+	 * 		Temps réel de chaque étape, en ms.
+	 */
+	public final HashMap<AiStep, Long> getStepTimes()
+	{	return stepDurations;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Préfixe affiché avant chaque message */
+	protected String colorStr;
+	/** Indique si l'agent doit utiliser la sortie texte (pour le débogage) */
+	protected boolean verbose = false;
+	
+	/**
+	 * Cette méthode affiche à l'écran le message passé en paramètre,
+	 * à condition que {@link #verbose} soit {@code true}. Elle
+	 * préfixe automatiquement la couleur de l'agent et le moment
+	 * de l'affichage. Utilisez-la pour tout affichage de message,
+	 * car elle vous permet de désactiver tous vos messages simplement
+	 * en faisant {@code verbose = false;}.
+	 * 
+	 * @param msg
+	 * 		Le message à afficher dans la console.
+	 */
+	protected final void print(String msg)
+	{	if(verbose)
+		{	long time = System.currentTimeMillis();
+			String prefix = "[" + time + ":" + colorStr + "]";
+			String message = prefix + " " + msg;
+			System.out.println(message);
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
