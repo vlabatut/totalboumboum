@@ -347,7 +347,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		resetDurations();
 		long before0 = System.currentTimeMillis();
 		print(">> Entering processAction ----------------------");
-		print(zone.toString());
+		print("\n"+zone);
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes
@@ -389,7 +389,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			boolean cb = getBombHandler().considerBombing();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("<<<< Exiting updateUtility: duration="+elapsed+" ms result="+cb);
+			print("<<<< Exiting considerBombing: duration="+elapsed+" ms result="+cb);
 			stepDurations.put(AiStep.BOMB,elapsed);
 			
 			// on essaie de poser une bombe
@@ -422,6 +422,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		
 		// mise à jour des sorties
 		{	long before = System.currentTimeMillis();
+			print(">>>> Entering updateOutput");
 			updateOutput();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
