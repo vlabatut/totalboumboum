@@ -26,6 +26,9 @@ public class UtilityHandler extends AiUtilityHandler<GungorKavus>
 	protected UtilityHandler(GungorKavus ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
+		
+		// on règle la sortie texte pour ce gestionnaire
+		verbose = true;
 	
 		// TODO à compléter
 	}

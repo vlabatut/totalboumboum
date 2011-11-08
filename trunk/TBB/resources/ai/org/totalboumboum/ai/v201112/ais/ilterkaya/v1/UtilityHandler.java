@@ -26,6 +26,9 @@ public class UtilityHandler extends AiUtilityHandler<IlterKaya>
 	protected UtilityHandler(IlterKaya ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
+		
+		// on règle la sortie texte pour ce gestionnaire
+		verbose = true;
 	
 		// TODO à compléter
 	}

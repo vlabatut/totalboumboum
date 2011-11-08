@@ -27,6 +27,9 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 	protected UtilityHandler(KayukaTaskin ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
+		
+		// on règle la sortie texte pour ce gestionnaire
+		verbose = true;
 	
 		// TODO à compléter
 	}

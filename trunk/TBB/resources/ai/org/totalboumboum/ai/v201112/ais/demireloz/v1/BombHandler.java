@@ -26,6 +26,9 @@ public class BombHandler extends AiBombHandler<DemirelOz>
 	protected BombHandler(DemirelOz ai) throws StopRequestException
     {	super(ai);
     	ai.checkInterruption();
+		
+		// on règle la sortie texte pour ce gestionnaire
+		verbose = true;
     	
     	// TODO à compléter
 	}
