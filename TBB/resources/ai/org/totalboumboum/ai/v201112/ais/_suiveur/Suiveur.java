@@ -69,8 +69,7 @@ public class Suiveur extends ArtificialIntelligence
 		
 		// on met à jour la position de l'ia dans la zone
 		updateLocation();
-		if(verbose)
-			System.out.println(ownHero.getColor()+": ("+currentTile.getRow()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
+		if(verbose) System.out.println(ownHero.getColor()+": ("+currentTile.getRow()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
 		
 		// on met à jour le gestionnaire de sécurité
 		safetyHandler.update();
@@ -163,7 +162,7 @@ public class Suiveur extends ArtificialIntelligence
 
 	private void updateMoveHandler() throws StopRequestException
 	{	// si on est en train de fuir : on continue
-		if(moveHandler!=escapeHandler)
+		if(moveHandler==escapeHandler)
 		{	if(escapeHandler.hasArrived())
 				moveHandler = targetHandler;
 		}
@@ -171,6 +170,7 @@ public class Suiveur extends ArtificialIntelligence
 		// sinon si on est en danger : on commence à fuir
 		else if(!safetyHandler.isSafe(currentTile))
 		{	moveHandler = escapeHandler;
+			escapeHandler.reset();
 		}
 		
 		// sinon on se déplace vers la cible

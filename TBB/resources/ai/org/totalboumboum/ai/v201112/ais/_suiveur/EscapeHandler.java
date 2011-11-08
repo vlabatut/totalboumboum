@@ -66,8 +66,18 @@ public class EscapeHandler extends AiMoveHandler<Suiveur>
 		heuristicCalculator = new BasicHeuristicCalculator(ai);
 		successorCalculator = new BasicSuccessorCalculator(ai);
 		astar = new Astar(ai,ai.ownHero,costCalculator,heuristicCalculator,successorCalculator);
+	}
+	
+	/**
+	 * Méthode appelée à l'activation du gestionnaire
+	 * de fuite.
+	 * 
+	 * @throws StopRequestException
+	 * 		En cas de demande d'arrêt de la part du moteur.
+	 */
+	protected void reset() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// init destinations
 		arrived = false;
 		AiHero ownHero = ai.ownHero;
 		possibleDest = ai.safetyHandler.findSafeTiles(ownHero.getTile());
