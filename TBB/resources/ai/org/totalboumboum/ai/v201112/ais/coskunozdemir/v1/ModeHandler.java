@@ -27,6 +27,9 @@ public class ModeHandler extends AiModeHandler<CoskunOzdemir>
     {	super(ai);
 		ai.checkInterruption();
 		
+		// on règle la sortie texte pour ce gestionnaire
+		verbose = true;
+		
 		// TODO à compléter
 	}
 

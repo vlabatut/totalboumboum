@@ -26,6 +26,9 @@ public class BombHandler extends AiBombHandler<CapMunavarov>
 	protected BombHandler(CapMunavarov ai) throws StopRequestException
     {	super(ai);
     	ai.checkInterruption();
+		
+		// on règle la sortie texte pour ce gestionnaire
+		verbose = true;
     	
     	// TODO à compléter
 	}
