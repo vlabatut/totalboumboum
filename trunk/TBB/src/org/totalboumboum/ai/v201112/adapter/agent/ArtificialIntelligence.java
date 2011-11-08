@@ -312,20 +312,20 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Toute opération qui y est définie
 	 * sera réalisée une fois, juste avant le début de la partie.
 	 * A noter que la zone est néanmoins déjà à jour.<br/>
-	 * Par défaut, l'initialisation porte sur les gestionnaires
-	 * avec {@link #initHandlers()} et sur les percepts
-	 * avec {@link #initPercepts()}. Si d'autres initialisations
+	 * Par défaut, l'initialisation porte sur les percepts
+	 * avec {@link #initPercepts()} et sur les gestionnaires
+	 * avec {@link #initHandlers()}. Si d'autres initialisations
 	 * sont nécessaires, il est possible de surcharger cette méthode.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	protected void init() throws StopRequestException
-	{	// initialisation des gestionnaires
-		initHandlers();
-		
-		// initialisation des percepts
+	{	// initialisation des percepts
 		initPercepts();
+		
+		// initialisation des gestionnaires
+		initHandlers();
 	}
 
 	/////////////////////////////////////////////////////////////////
