@@ -51,4 +51,30 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected T ai;
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indique si l'agent doit utiliser la sortie texte (pour le débogage) */
+	protected boolean verbose = false;
+	
+	/**
+	 * Cette méthode affiche à l'écran le message passé en paramètre,
+	 * à condition que {@link #verbose} soit {@code true}. Elle
+	 * préfixe automatiquement la couleur de l'agent et le moment
+	 * de l'affichage. Utilisez-la pour tout affichage de message,
+	 * car elle vous permet de désactiver tous vos messages simplement
+	 * en faisant {@code verbose = false;}.
+	 * 
+	 * @param msg
+	 * 		Le message à afficher dans la console.
+	 */
+	protected final void print(String msg)
+	{	if(verbose)
+		{	long time = System.currentTimeMillis();
+			String prefix = "[" + time + ":" + ai.colorStr + "]";
+			String message = prefix + " " + msg;
+			System.out.println(message);
+		}
+	}
 }
