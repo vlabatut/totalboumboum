@@ -62,6 +62,16 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	/** Le mode courant de l'agent */
 	protected AiMode mode = AiMode.COLLECTING;
 
+	/**
+	 * Renvoie le mode courant de l'agent.
+	 * 
+	 * @return
+	 * 		Le mode courant de l'agent.
+	 */
+	public AiMode getMode()
+	{	return mode;
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

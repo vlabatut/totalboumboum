@@ -86,6 +86,36 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	/** La direction à prendre pour suivre le chemin courant */ 
 	protected Direction currentDirection = null;
 	
+	/**
+	 * Renvoie la destination courante de l'agent.
+	 * 
+	 * @return
+	 * 		La destination courante de l'agent.
+	 */
+	public AiTile getCurrentDestination()
+	{	return currentDestination;
+	}
+
+	/**
+	 * Renvoie le chemin courant de l'agent.
+	 * 
+	 * @return
+	 * 		Le chemin courant de l'agent.
+	 */
+	public AiPath getCurrentPath()
+	{	return currentPath;
+	}
+
+	/**
+	 * Renvoie la direction courante de l'agent.
+	 * 
+	 * @return
+	 * 		La direction courante de l'agent.
+	 */
+	public Direction getCurrentDirection()
+	{	return currentDirection;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
