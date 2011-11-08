@@ -76,9 +76,9 @@ public class DisplayAisColors implements Display
 				
 				// message
 				if(temp)
-					message = messageDisplay + index;
+					message = messageDisplay + (index+1);
 				else
-					message = messageHide + index;
+					message = messageHide + (index+1);
 			}
 		}
 	}
