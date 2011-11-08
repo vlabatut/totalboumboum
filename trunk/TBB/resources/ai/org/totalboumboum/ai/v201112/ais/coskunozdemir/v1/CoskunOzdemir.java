@@ -18,6 +18,24 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  */
 public class CoskunOzdemir extends ArtificialIntelligence
 {
+	@Override
+	protected void init() throws StopRequestException
+	{	checkInterruption();
+		
+		super.init();
+		verbose = true;
+		
+		// TODO à compléter si vous voulez créer des objets 
+		// particuliers pour réaliser votre traitement, et qui
+		// ne sont ni des gestionnaires (initialisés dans initHandlers)
+		// ni des percepts (initialisés dans initPercepts).
+		// Par exemple, ici on surcharge init() pour initialiser
+		// verbose, qui est la variable controlant la sortie 
+		// texte de l'agent (true -> debug, false -> pas de sortie)
+	
+		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
