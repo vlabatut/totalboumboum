@@ -33,14 +33,19 @@ import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.PixelCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.PixelHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Implémentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
- * par le personnage considéré, et qui n'ont pas déjà été explorées. La classe 
- * est compatible avec {@link BasicCostCalculator}, {@link PixelCostCalculator}
- * et {@link MatrixCostCalculator}.<br/>
+ * par le personnage considéré, et qui n'ont pas déjà été explorées.<br/>
+ * La classe est compatible avec {@link BasicCostCalculator}, 
+ * {@link PixelCostCalculator} et {@link MatrixCostCalculator};
+ * et {@link NoHeuristicCalculator}, {@link PixelHeuristicCalculator}
+ * et {@link TileHeuristicCalculator}.<br/>
  * On empêche tout passage sur une case déjà explorée afin de rendre le traitement 
  * plus court. Par conséquent, cette fonction n'est pas capable de traiter les 
  * chemins qui contiennent des retours en arrière ou de l'attente.
