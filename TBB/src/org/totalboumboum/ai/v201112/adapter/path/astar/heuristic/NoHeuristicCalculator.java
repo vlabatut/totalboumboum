@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
+package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
 
 /*
  * Total Boum Boum
@@ -23,66 +23,60 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
- * Classe étendant la classe abstraite {@link CostCalculator} de 
- * la manière la plus simple possible.<br/>
- * Ici, le coût pour passer d'une case à l'autre est simplement 1, 
- * quelles que soient les cases considérées.
+ * Implémente une fonction heuristique bidon,
+ * dans le but d'utiliser des algorithmes de recherche
+ * aveugle tels que le parcours en largeur ou en profondeur.
+ * Ici, la méthode {@link #processHeuristic} renvoie toujours 0.<br/>
+ * La classe est compatible avec toutes les fonctions de coût
+ * et toutes les fonctions successeurs.
  * 
  * @author Vincent Labatut
  */
-public class BasicCostCalculator extends CostCalculator
+public class NoHeuristicCalculator extends HeuristicCalculator
 {
 	/**
-	 * Construit une fonction de côut
+	 * Construit une fonction heuristique
 	 * utilisant l'IA passée en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
 	 * 		IA de référence.
 	 */
-	public BasicCostCalculator(ArtificialIntelligence ai)
+	public NoHeuristicCalculator(ArtificialIntelligence ai)
 	{	super(ai);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// END TILES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public AiTile getClosestEndTile(AiLocation location)
+	{	// comme c'est de la recherche aveugle, on renvoie le
+		// premier objectif rencontré
+		AiTile result = getEndTiles().iterator().next();
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux emplacements sont supposés être dans des cases voisines, 
-	 * on se contente de renvoyer leur distance
-	 * (exprimée en cases, donc forcément ici : 1).
+	 * Cette heuristique est constante et renvoie toujours la valeur 0.
 	 * 
-	 * @param current
-	 * 		L'emplacement de départ. 
-	 * @param next	
-	 * 		L'emplacement d'arrivée (case voisine de la case courante).
+	 * @param location	
+	 * 		L'emplacement concerné (ignoré). 
 	 * @return	
-	 * 		Le coût du déplacement entre les deux emplacements (ici : 1).
+	 * 		Toujours zéro.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
-	 */ 
-	@Override
-	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
-	{	return 1;		
-	}
-
-	/**
-	 * le coût d'un chemin correspond ici à sa distance exprimée
-	 * en cases.
-	 * 
-	 * @param path
-	 * 		chemin à traiter
-	 * @return
-	 * 		le coût de ce chemin
 	 */
-/*	@Override
-	public double processCost(AiPath path) throws StopRequestException
-	{	double result = path.getTileDistance();
-		return result;
+	@Override
+	public double processHeuristic(AiLocation location) throws StopRequestException
+	{	return 0;
 	}
-*/	
 }

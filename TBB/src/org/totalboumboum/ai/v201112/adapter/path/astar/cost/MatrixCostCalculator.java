@@ -25,6 +25,9 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 
 /**
  * Classe étendant la classe abstraite {@link CostCalculator} grâce à une matrice de coûts.
@@ -37,7 +40,22 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
  * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
  * à l'action de passer dans une case qui est à portée d'une bombe susceptible d'exploser, ou bien 
  * un coût infini (avec {@link Double#POSITIVE_INFINITY}) à l'action de passer dans une case 
- * qu'on veut interdire au personnage parce qu'elle est trop dangereuse. 
+ * qu'on veut interdire au personnage parce qu'elle est trop dangereuse.
+ * <br/>
+ * La classe est compatible avec :
+ * <ul>
+ * 		<li>Fonction heuristiques :
+ * 			<ul>
+ * 				<li>{@link NoHeuristicCalculator}</li>
+ * 				<li>{@link TileHeuristicCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * 		<li>Fonctions successeurs :
+ * 			<ul>
+ * 				<li>{@link BasicSuccessorCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * </ul>
  * 
  * @author Vincent Labatut
  */

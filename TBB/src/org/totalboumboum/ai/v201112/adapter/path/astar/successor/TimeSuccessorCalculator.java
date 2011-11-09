@@ -51,8 +51,19 @@ import org.totalboumboum.engine.content.feature.Direction;
  * successeurs. Cette approche ne doit donc <b>pas être utilisée souvent</b>, car elle
  * va vraisemblablement ralentir l'agent significativement.<br/>
  * Cette classe nécessite que le temps soit considéré aussi par les autres
- * fonctions, donc il faut l'utiliser conjointement à {@link TimeHeuristicCalculator}
- * et {@link TimeCostCalculator}.
+ * fonctions, donc il faut l'utiliser conjointement à :
+ * <ul>
+ * 		<li>Fonctions de coût :
+ * 			<ul>
+ * 				<li>{@link TimeCostCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * 		<li>Fonction heuristiques :
+ * 			<ul>
+ * 				<li>{@link TimeHeuristicCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * </ul>
  * 
  * @author Vincent Labatut
  */

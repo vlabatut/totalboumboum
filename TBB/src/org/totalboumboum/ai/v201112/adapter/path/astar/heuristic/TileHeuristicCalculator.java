@@ -28,11 +28,28 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TileCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 
 /**
  * Implémentation la plus simple d'une heuristique : 
- * on utilise la distance de Manhattan entre la case de départ et 
- * la plus proche des cases d'arrivée.<br/>
+ * on utilise la <a href="http://fr.wikipedia.org/wiki/Distance_de_Manhattan">distance de Manhattan</a> 
+ * entre la case de départ et la plus proche des cases d'arrivée.
+ * <br/>
+ * La classe est compatible avec :
+ * <ul>
+ * 		<li>Fonction de coût :
+ * 			<ul>
+ * 				<li>{@link TileCostCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * 		<li>Fonctions successeurs :
+ * 			<ul>
+ * 				<li>{@link BasicSuccessorCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * </ul>
+ * <br/>
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
  * chemins contenant des attentes. De plus les distances sont
  * calculées en cases, et non pas en pixels : calcul rapide,
@@ -40,7 +57,7 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
  * 
  * @author Vincent Labatut
  */
-public class BasicHeuristicCalculator extends HeuristicCalculator
+public class TileHeuristicCalculator extends HeuristicCalculator
 {
 	/**
 	 * Construit une fonction successeur
@@ -50,7 +67,7 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * @param ai
 	 * 		IA de référence.
 	 */
-	public BasicHeuristicCalculator(ArtificialIntelligence ai)
+	public TileHeuristicCalculator(ArtificialIntelligence ai)
 	{	super(ai);
 	}
 	

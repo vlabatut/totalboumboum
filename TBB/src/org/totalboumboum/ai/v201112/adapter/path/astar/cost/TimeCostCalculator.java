@@ -26,6 +26,8 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TimeHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeSuccessorCalculator;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
@@ -33,7 +35,21 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
  * Ceci permet de gérer les temps d'arrêt nécessaires pour laisser
  * certains obstacles tels que les bombes disparaître. Autrement dit,
  * cette classe gère les chemins au pixel près, et permet de tenir
- * compte des pauses.
+ * compte des pauses.<br/>
+ * Cette classe nécessite que le temps soit considéré aussi par les autres
+ * fonctions, donc il faut l'utiliser conjointement à :
+ * <ul>
+ * 		<li>Fonction heuristiques :
+ * 			<ul>
+ * 				<li>{@link TimeHeuristicCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * 		<li>Fonctions successeurs :
+ * 			<ul>
+ * 				<li>{@link TimeSuccessorCalculator}</li>
+ * 			</ul>
+ * 		</li>
+ * </ul>
  * 
  * @author Vincent Labatut
  */

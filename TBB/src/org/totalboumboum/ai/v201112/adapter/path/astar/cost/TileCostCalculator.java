@@ -23,89 +23,82 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.PixelHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 
 /**
- * Classe étendant la classe abstraite {@link CostCalculator} de la manière à déterminer
- * le coût en fonction de la distance en pixels entre deux emplacements.
- * <br/>
+ * Classe étendant la classe abstraite {@link CostCalculator} de 
+ * la manière la plus simple possible.<br/>
+ * Ici, le coût pour passer d'une case à l'autre est simplement 1, 
+ * quelles que soient les cases considérées.<br/>
  * La classe est compatible avec :
  * <ul>
  * 		<li>Fonction heuristiques :
  * 			<ul>
  * 				<li>{@link NoHeuristicCalculator}</li>
- * 				<li>{@link PixelHeuristicCalculator}</li>
+ * 				<li>{@link TileHeuristicCalculator}</li>
  * 			</ul>
  * 		</li> 
  * 		<li>Fonctions successeurs :
  * 			<ul>
  * 				<li>{@link BasicSuccessorCalculator}</li>
  * 			</ul>
- * 		</li>
+ * 		</li> 
  * </ul>
- * <br/> 
- * Cette classe n'est pas conçue pour traiter les chemins contenant des
- * retours en arrière. Voir {@link TimeCostCalculator} pour ça.
  * 
  * @author Vincent Labatut
  */
-public class PixelCostCalculator extends CostCalculator
-{	
+public class TileCostCalculator extends CostCalculator
+{
 	/**
-	 * Construit une fonction de coût
+	 * Construit une fonction de côut
 	 * utilisant l'IA passée en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
 	 * 		IA de référence.
 	 */
-	public PixelCostCalculator(ArtificialIntelligence ai)
+	public TileCostCalculator(ArtificialIntelligence ai)
 	{	super(ai);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PROCESS					/////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux emplacements sont supposés être dans des cases voisines. 
-	 * On renvoie la distance de Manhattan (en pixels) qui les sépare. 
+	 * Les deux emplacements sont supposés être dans des cases voisines, 
+	 * on se contente de renvoyer leur distance
+	 * (exprimée en cases, donc forcément ici : 1).
 	 * 
 	 * @param current
 	 * 		L'emplacement de départ. 
 	 * @param next	
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
-	 * 		La distance en pixels entre l'emplacement de départ et celui d'arrivée.
+	 * 		Le coût du déplacement entre les deux emplacements (ici : 1).
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
 	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
-	{	AiZone zone = current.getZone();
-		double result = zone.getPixelDistance(current,next);
-		return result;		
+	{	return 1;		
 	}
 
 	/**
-	 * le coût d'un chemin correspond ici à sa distance 
-	 * exprimée en pixels.
+	 * le coût d'un chemin correspond ici à sa distance exprimée
+	 * en cases.
 	 * 
 	 * @param path
 	 * 		chemin à traiter
 	 * @return
 	 * 		le coût de ce chemin
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 /*	@Override
 	public double processCost(AiPath path) throws StopRequestException
-	{	double result = path.getPixelDistance();
+	{	double result = path.getTileDistance();
 		return result;
 	}
 */	

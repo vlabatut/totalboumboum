@@ -30,11 +30,25 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeSuccessorCalculator;
 
 /**
  * Heuristique utilisant la distance de Manhattan exprimées en pixels,
- * et surtout le temps nécessaire à son parcours,
- * pour fonctionner avec {@link TimeCostCalculator}.<br/>
+ * et surtout le temps nécessaire à son parcours.<br/>
+ * Cette classe nécessite que le temps soit considéré aussi par les autres
+ * fonctions, donc il faut l'utiliser conjointement à :
+ * <ul>
+ * 		<li>Fonction de coût :
+ * 			<ul>
+ * 				<li>{@link TimeCostCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * 		<li>Fonctions successeurs :
+ * 			<ul>
+ * 				<li>{@link TimeSuccessorCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * </ul>
  * 
  * @author Vincent Labatut
  */
