@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar;
+package org.totalboumboum.ai.v201112.adapter.path.breadthfirst;
 
 /*
  * Total Boum Boum
@@ -41,7 +41,13 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
- * Implémentation de l'<a href="http://fr.wikipedia.org/wiki/Algorithme_A*">algorithme A*</a> adapté au
+ * TODO
+ * version sans limite de la recherche par coût uniforme, aussi appelée algorithme de Dijkstra
+ * http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+ * http://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra
+ * 
+ * 
+ * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implémentation correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
@@ -67,9 +73,10 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * 
  * @author Vincent Labatut
  */
-public final class Astar
+public final class BreadthFirst
 {	
 	/**
+	 * TODO
 	 * construit un objet permettant d'appliquer l'algorithme A*.
 	 * 
 	 * @param ai
@@ -83,11 +90,10 @@ public final class Astar
 	 * @param successorCalculator
 	 * 		la fonction successeur
 	 */
-	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
+	public BreadthFirst(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	this.ai = ai;
 		this.hero = hero;
 		this.costCalculator = costCalculator;
-		this.heuristicCalculator = heuristicCalculator;
 		this.successorCalculator = successorCalculator;
 		
 		// hauteur limite de l'arbre par défaut
@@ -106,8 +112,6 @@ public final class Astar
 	/////////////////////////////////////////////////////////////////
 	/** Fonction de coût */
 	private CostCalculator costCalculator = null;
-	/** Fonction heuristique */
-	private HeuristicCalculator heuristicCalculator = null;
 	/** Fonction successeur */
 	private SuccessorCalculator successorCalculator = null;
 

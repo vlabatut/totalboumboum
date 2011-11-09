@@ -24,7 +24,6 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  */
 
 /**
- * 
  * Classe servant de base à la définition de gestionnaires
  * utilisés pour décomposer le traitement réalisé par un agent.
  * Cf. les différentes spécialisations de cette classe.
@@ -68,13 +67,16 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	 * 
 	 * @param msg
 	 * 		Le message à afficher dans la console.
+	 * @return
+	 * 		Le temps à l'instant de l'affichage.
 	 */
-	protected final void print(String msg)
-	{	if(verbose)
-		{	long time = System.currentTimeMillis();
-			String prefix = "[" + time + ":" + ai.colorStr + "]";
+	protected final long print(String msg)
+	{	long time = System.currentTimeMillis();
+		if(verbose)
+		{	String prefix = "[" + time + ":" + ai.colorStr + "]";
 			String message = prefix + " " + msg;
 			System.out.println(message);
 		}
+		return time;
 	}
 }

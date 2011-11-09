@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 
 /**
- * 
  * Classe gérant les déplacements de l'agent. Elle
  * implémente la méthode {@link #updateMode}, utilisée pour 
  * mettre le mode à jour, et qui ne peut pas être modifiée 
@@ -86,18 +85,22 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 */
 	protected final void update() throws StopRequestException
 	{	// si l'agent a assez d'items, on attaque
-		print(">>>>>> Entering hasEnoughItems");
+		long before = print(">>>>>> Entering hasEnoughItems");
 		boolean enoughItems = hasEnoughItems();
-		print("<<<<<< Exiting hasEnoughItems result="+enoughItems);
+		long after = System.currentTimeMillis();
+		long elapsed = after - before;
+		print("<<<<<< Exiting hasEnoughItems duration="+elapsed+" result="+enoughItems);
 		if(enoughItems)
 			mode = AiMode.ATTACKING;
 		
 		// sinon, il va essayer d'en ramasser
 		else
 		{	// s'il est possible d'en ramasser, il passe en mode collecte
-			print(">>>>>> Entering isCollectPossible");
+			before = print(">>>>>> Entering isCollectPossible");
 			boolean collectPossible = isCollectPossible();
-			print("<<<<<< Exiting isCollectPossible result="+collectPossible);
+			after = System.currentTimeMillis();
+			elapsed = after - before;
+			print("<<<<<< Exiting isCollectPossible duration="+elapsed+" result="+collectPossible);
 			if(collectPossible)
 				mode = AiMode.COLLECTING;
 			
