@@ -334,8 +334,8 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
-		boolean result = this.location.getTile().equals(tile);
-		if(parent!=null && !result)
+		boolean result = location.getTile().equals(tile);
+		if(!result && parent!=null)
 			result = parent.hasBeenExplored(tile);
 		return result;
 	}
