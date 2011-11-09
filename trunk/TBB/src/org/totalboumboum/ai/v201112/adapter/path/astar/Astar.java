@@ -98,20 +98,19 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Calcule le plus court chemin pour aller de la case startTile à 
-	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
+	 * Calcule le plus court chemin pour aller de la case {@code startTile} à 
+	 * la case {@code endTile}, en utilisant l'algorithme A*. Si jamais aucun
 	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
-	 * l'algorithme atteint une limite de cout/taille, la valeur null est
+	 * l'algorithme atteint une limite de coût/taille, la valeur {@code null} est
 	 * renvoyée. Dans ce cas là, c'est qu'il y a généralement un problème
-	 * dans le façon dont A* est employé (mauvaise fonction de cout, par
-	 * exemple). 
+	 * dans le façon dont A* est employé (mauvaise fonction de coût, par exemple). 
 	 * 
 	 * @param startLocation	
 	 * 		La case de départ
 	 * @param endTile	
 	 * 		La case d'arrivée
 	 * @return 
-	 * 		Un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur {@code null}.
+	 * 		Un chemin pour aller de {@code startTile} à {@code endTile}, ou un chemin vide, ou la valeur {@code null}.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
@@ -127,14 +126,14 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	}
 	
 	/**
-	 * Calcule le plus court chemin pour aller de la case startTile à 
-	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
+	 * Calcule le plus court chemin pour aller de la case {@code startTile} à 
+	 * l'une des cases contenues dans la liste {@code endTiles} (n'importe laquelle),
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
 	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
-	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
+	 * une limite de cout/taille, la valeur {@code null} est renvoyée. Dans ce 
 	 * cas-là, c'est qu'il y a généralement un problème dans le façon 
-	 * dont A* est employé (mauvaise fonction de cout, par exemple).
-	 * La fonction renvoie également null si la liste endTiles est vide.
+	 * dont A* est employé (mauvaise fonction de coût, par exemple).
+	 * La fonction renvoie également {@code null} si la liste {@code endTiles} est vide.
 	 * 
 	 * @param startLocation	
 	 * 		La case de départ.
@@ -151,15 +150,72 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
 	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
-	{	// initialisation
+	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
+		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
+		
+		AiPath result = processShortestPath(endTiles);
+		return result;
+	}
+	
+	/**
+	 * Réalise le même traitement que {@link #processShortestPath(AiLocation, AiTile)},
+	 * à la différence qu'ici on réutilise l'arbre de recherche déjà existant. 
+	 * Autrement dit, on n'a pas besoin de préciser la case de départ, car elle 
+	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
+	 * lors d'un précédent appel (ou de plusieurs appels précédents) afin de 
+	 * calculer plus vite le résultat.
+	 * 
+	 * @param endTile	
+	 * 		La case d'arrivée
+	 * @return 
+	 * 		Un chemin pour aller à {@code endTile}, ou un chemin vide, ou la valeur {@code null}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws LimitReachedException
+	 * 		L'algorithme a développé un arbre trop grand (il y a
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 */
+	public AiPath processShortestPath(AiTile endTile) throws StopRequestException, LimitReachedException
+	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
+		endTiles.add(endTile);
+		AiPath result = processShortestPath(endTiles);
+		return result;
+	}
+	/**
+	 * Réalise le même traitement que {@link #processShortestPath(AiLocation, Set)},
+	 * à la différence qu'ici on réutilise l'arbre de recherche déjà existant. 
+	 * Autrement dit, on n'a pas besoin de préciser la case de départ, car elle 
+	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
+	 * lors d'un précédent appel (ou de plusieurs appels précédents) afin de 
+	 * calculer plus vite le résultat.
+	 * 
+	 * @param endTiles	
+	 * 		L'ensemble des cases d'arrivée possibles.
+	 * @return 
+	 * 		un chemin pour aller à l'une des cases de {@code endTiles},
+	 * 		ou un chemin vide, ou la valeur {@code null}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws LimitReachedException
+	 * 		L'algorithme a développé un arbre trop grand (il y a
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 */
+	public AiPath processShortestPath(Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
+		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
+		if(root==null)
+			throw new NullPointerException("The algorithm must be called at least once with processShortestPath(AiLocation,...) for init purposes");
+		
+		// initialisation
 		this.endTiles = endTiles;
 		treeHeight = 0;
 		treeCost = 0;
 		treeSize = 0;
 		limitReached = false;
 		heuristicCalculator.setEndTiles(endTiles);
-		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		queue = new PriorityQueue<AiSearchNode>(1);
 		queue.offer(root);
 		
@@ -167,16 +223,6 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		AiPath result = continueProcess();
 		return result;
 	}
-	
-	/*
-	 * TODO Rajouter une fonction qui ne prend pas de case d'origine,
-	 * et qui va utilisé l'arbre déjà présent pour le traitement, sans
-	 * refaire bien entendu le développement déjà effectué
-	 * >> faut donc inclure les liste d'enfants dans les noeuds de recherche
-	 * 
-	 * TODO rajouter une fonction permettant d'initialiser la racine,
-	 * par exemple avec un arbre calculé avec dijkstra.
-	 */
 	
 	/**
 	 * Permet de continuer le traitement commencé par {@link #processShortestPath(AiLocation, AiTile) processShortestPath}.
