@@ -32,7 +32,6 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
- * 
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * En particulier, elle doit implémenter la méthode
  * {@link #updateUtility} de l'algorithme général.<br/>

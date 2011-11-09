@@ -32,7 +32,6 @@ import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * 
  * Classe gérant le déplacement de l'agent.
  * En particulier, elle doit implémenter la méthode
  * {@link #considerMoving} de l'algorithme général.

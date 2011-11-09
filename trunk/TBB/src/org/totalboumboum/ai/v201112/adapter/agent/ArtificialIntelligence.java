@@ -345,14 +345,12 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	public final AiAction processAction() throws StopRequestException
 	{	checkInterruption();
 		resetDurations();
-		long before0 = System.currentTimeMillis();
-		print(">> Entering processAction ----------------------");
+		long before0 = print(">> Entering processAction ----------------------");
 		print("\n"+zone);
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes
-			{	long before = System.currentTimeMillis();
-				print(">>>> Entering updatePercepts");
+			{	long before = print(">>>> Entering updatePercepts");
 				updatePercepts();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
@@ -361,8 +359,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			}
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
-			{	long before = System.currentTimeMillis();
-				print(">>>> Entering updateMode");
+			{	long before = print(">>>> Entering updateMode");
 				getModeHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
@@ -371,8 +368,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			}
 			
 			// mise à jour des valeurs d'utilité
-			{	long before = System.currentTimeMillis();
-				print(">>>> Entering updateUtility");
+			{	long before = print(">>>> Entering updateUtility");
 				getUtilityHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
@@ -384,8 +380,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		// action 
 		// (note : les actions sont mutuellement exclusives, c'est soit l'une soit l'autre)
 		AiAction result = null;
-		{	long before = System.currentTimeMillis();
-			print(">>>> Entering considerBombing");
+		{	long before = print(">>>> Entering considerBombing");
 			boolean cb = getBombHandler().considerBombing();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
@@ -400,8 +395,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			// on essaie de se déplaccer
 			else
 			{	// on récupère la direction
-				before = System.currentTimeMillis();
-				print(">>>> Entering considerMoving");
+				before = print(">>>> Entering considerMoving");
 				Direction direction = getMoveHandler().considerMoving();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
@@ -421,8 +415,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		}
 		
 		// mise à jour des sorties
-		{	long before = System.currentTimeMillis();
-			print(">>>> Entering updateOutput");
+		{	long before = print(">>>> Entering updateOutput");
 			updateOutput();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
@@ -513,14 +506,17 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @param msg
 	 * 		Le message à afficher dans la console.
+	 * @return
+	 * 		Le temps à l'instant de l'affichage.
 	 */
-	protected final void print(String msg)
-	{	if(verbose)
-		{	long time = System.currentTimeMillis();
-			String prefix = "[" + time + ":" + colorStr + "]";
+	protected final long print(String msg)
+	{	long time = System.currentTimeMillis();
+		if(verbose)
+		{	String prefix = "[" + time + ":" + colorStr + "]";
 			String message = prefix + " " + msg;
 			System.out.println(message);
 		}
+		return time;
 	}
 	
 	/////////////////////////////////////////////////////////////////

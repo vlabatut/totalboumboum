@@ -42,13 +42,11 @@ import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
- * 
  * Classe servant de traducteur entre le jeu et l'agent :
  * <br>	- elle traduit les données du jeu en percepts traitables par l'agent (données simplifiées).
  * <br>	- elle traduit la réponse de l'agent (action) en un évènement compatible avec le jeu.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class AiManager extends AiAbstractManager<AiAction>
 {	/**

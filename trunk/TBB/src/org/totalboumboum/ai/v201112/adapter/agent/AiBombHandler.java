@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 
 /**
- * 
  * Classe gérant l'action de déposer une bombe
  * pour l'agent. En particulier, elle doit implémenter la méthode
  * {@link #considerBombing} de l'algorithme général.<br/>
