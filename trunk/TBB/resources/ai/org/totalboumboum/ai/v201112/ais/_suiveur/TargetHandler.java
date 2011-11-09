@@ -29,7 +29,7 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TileCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -38,7 +38,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
@@ -62,8 +62,8 @@ public class TargetHandler extends AiMoveHandler<Suiveur>
 	{	super(ai);
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		costCalculator = new BasicCostCalculator(ai);
-		heuristicCalculator = new BasicHeuristicCalculator(ai);
+		costCalculator = new TileCostCalculator(ai);
+		heuristicCalculator = new TileHeuristicCalculator(ai);
 		successorCalculator = new BasicSuccessorCalculator(ai);
 		astar = new Astar(ai,ai.ownHero,costCalculator,heuristicCalculator,successorCalculator);
 		updatePrev();

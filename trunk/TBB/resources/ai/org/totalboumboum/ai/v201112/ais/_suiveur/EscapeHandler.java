@@ -36,7 +36,7 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -63,7 +63,7 @@ public class EscapeHandler extends AiMoveHandler<Suiveur>
 		AiZone zone = ai.getZone();
 		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 		costCalculator = new MatrixCostCalculator(ai,costMatrix);
-		heuristicCalculator = new BasicHeuristicCalculator(ai);
+		heuristicCalculator = new TileHeuristicCalculator(ai);
 		successorCalculator = new BasicSuccessorCalculator(ai);
 		astar = new Astar(ai,ai.ownHero,costCalculator,heuristicCalculator,successorCalculator);
 	}
