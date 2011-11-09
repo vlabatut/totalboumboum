@@ -32,12 +32,14 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.path.AiAbstractSearchAlgorithm;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
@@ -47,33 +49,10 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * http://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra
  * 
  * 
- * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
- * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
- * cette implémentation correspond à peu près à un A* classique. Il y a quand même une modification,
- * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
- * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
- * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
- * boucler à l'infini.</br>
- * 
- * Cette implémentation trouve donc le chemin le plus court entre deux cases,
- * en considérant les obstacles. Elle a besoin de quatre paramètres :
- * <ul>	
- * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilité des cases).</li>
- * 		<li> Une fonction successeur, qui définit les actions possibles à partir d'un état donné. Dans le cas prèsent, il s'agit de 
- * 			 restreindre les déplacement possibles en considérant des facteurs supplémentaires par rapport à la simple traversabilité courrante.</li>
- * 		<li> Une fonction de coût, qui permet de définir combien coûte une action (ici : le fait de passer d'une case à l'autre).</li>
- * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li>
- * </ul>
- * 
- * A noter qu'il s'agit d'une implémentation non-déterministe de l'algorithme.
- * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
- * rapport au coût défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
- * renverra pas forcément toujours la même (il en choisira une au hasard).
- * Le but est d'introduire une part de hasard dans les agents, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
  */
-public final class BreadthFirst
+public final class BreadthFirst extends AiAbstractSearchAlgorithm
 {	
 	/**
 	 * TODO
@@ -90,206 +69,16 @@ public final class BreadthFirst
 	 * @param successorCalculator
 	 * 		la fonction successeur
 	 */
-	public BreadthFirst(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
-	{	this.ai = ai;
-		this.hero = hero;
-		this.costCalculator = costCalculator;
-		this.successorCalculator = successorCalculator;
-		
-		// hauteur limite de l'arbre par défaut
-		AiZone zone = ai.getZone();
-		// bien que possible, c'est vraiment peu probable d'avoir 
-		// besoin d'un chemin aussi long que ça...
-		// (traverser la zone en entier diagonalement)
-		maxHeight = zone.getWidth() + zone.getHeight();
-		
-		// pour la sortie texte
-		colorStr = zone.getOwnHero().getColor().toString();
+	public BreadthFirst(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, SuccessorCalculator successorCalculator)
+	{	super(ai,hero,costCalculator,new NoHeuristicCalculator(ai),successorCalculator);
 	}
 
     /////////////////////////////////////////////////////////////////
-	// CALCULATORS		/////////////////////////////////////////////
+	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Fonction de coût */
-	private CostCalculator costCalculator = null;
-	/** Fonction successeur */
-	private SuccessorCalculator successorCalculator = null;
-
-    /////////////////////////////////////////////////////////////////
-	// A* STATE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Racine de l'arbre de recherche */
-	private AiSearchNode root = null;
-	/** Personnage de référence */
-	private AiHero hero = null;
-	/** L'IA qui a réalisé l'appel */
-	private ArtificialIntelligence ai = null;
-	/** Emplacement de départ pour la recherche de chemin */
-	private AiLocation startLocation = null;
-	/** Cases d'arrivée pour la recherche de chemin */
-	private Set<AiTile> endTiles = new TreeSet<AiTile>();
-	/** Frange courante */
-	private PriorityQueue<AiSearchNode> queue = null;
-	/** Indique si l'algorithme a atteint une des 3 limites définies (hauteur/cout/taille) */
-	private boolean limitReached = false;
-	/** Indique la hauteur courante de l'arbre de recherche */
-	private int treeHeight = 0;
-	/** Indique le coût maximal courant des chemins contenus dans l'arbre de recherche */
-	private double treeCost = 0;
-	/** Indique la taille courante (en noeuds) de l'arbre de recherche */
-	private int treeSize = 0;
+	/** Cases restant à traiter */
+	private Set<AiTile> remainingTiles = new TreeSet<AiTile>();
 	
-	/**
-	 * Renvoie la frange courante de l'algorithme
-	 * de recherche. Cette variable permet
-	 * entres autres de reprendre le traitement
-	 * après avoir trouver un premier résultat.
-	 * Par conséquent, cette frange ne doit surtout pas
-	 * être modifiée par l'utilisateur.
-	 * 
-	 * @return
-	 * 		La frange courante de l'algorithme.
-	 */
-	public PriorityQueue<AiSearchNode> getQueue()
-	{	return queue;
-	}
-
-	/**
-	 * Indique si l'algorithme a atteint 
-	 * une des 3 limites définies (hauteur/cout/taille).
-	 * 
-	 * @return
-	 * 		{@code true} ssi l'algorithme a atteint une des 3 limites.
-	 */
-	public boolean isLimitReached()
-	{	return limitReached;
-	}
-
-	/** 
-	 * Renvoie la hauteur courante de l'arbre de recherche.
-	 * 
-	 * @return
-	 * 		La hauteur courante de l'arbre de recherche.
-	 */
-	public int getTreeHeight()
-	{	return treeHeight;
-	}
-
-	/** 
-	 * Renvoie le coût maximal courant des chemins 
-	 * contenus dans l'arbre de recherche
-	 * 
-	 * @return
-	 * 		Le coût maximal courant.
-	 */
-	public double getTreeCost()
-	{	return treeCost;
-	}
-
-	/** 
-	 * Renvoie la taille courante (en noeuds) 
-	 * de l'arbre de recherche.
-	 * 
-	 * @return
-	 * 		La taille courante (en noeuds) de l'arbre de recherche.
-	 */
-	public int getTreeSize()
-	{	return treeSize;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// LAST RESEARCH NODE	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Le dernier noeud de recherche traité (si disponible) */
-	private AiSearchNode lastSearchNode = null;
-
-	/**
-	 * Renvoie le dernier noeud de recherche exploré par A*.
-	 * Il sera utilisé en cas de demande de poursuite de
-	 * l'algorithme, donc il ne faut surtout pas le modifier.
-	 * 
-	 * @return
-	 * 		Le dernier noeud de recherche exploré par A*.
-	 */
-	public AiSearchNode getLastSearchNode()
-	{	return lastSearchNode;
-	}
-	
-	/**
-	 * Renvoie la zone correspondant au
-	 * dernier noeud exploré par A*.
-	 * 
-	 * @return
-	 * 		La zone associée au dernier noeud parcouru.
-	 */
-	public AiZone getLastZone()
-	{	AiZone result = null;
-		if(lastSearchNode!=null)
-			result = lastSearchNode.getLocation().getTile().getZone();
-		return result;
-	}
-	
-	/**
-	 * Renvoie l'emplacement correspondant au
-	 * dernier noeud exploré par A*.
-	 * 
-	 * @return
-	 * 		L'emplacement associé au dernier noeud parcouru.
-	 */
-	public AiLocation getLastLocation()
-	{	AiLocation result = null;
-		if(lastSearchNode!=null)
-			result = lastSearchNode.getLocation();
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LIMITS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** limite de hauteur (négatif = pas de limite) */
-	private int maxHeight = -1;
-	/** limite de coût (négatif = pas de limite) */
-	private double maxCost = -1;
-	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
-	private int maxNodes = 10000;
-	
-	/**
-	 * Limite l'arbre de recherche à une hauteur de {@code maxHeight},
-	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
-	 * l'algorithme se termine et ne renvoie pas de solution (échec).<br/>
-	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
-	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
-	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite déjà le nombre de noeuds dans l'arbre.<br/>
-	 * Par défaut, ce paramètre est initialisé avec la valeur {@code hauteur+largeur},
-	 * où {@code hauteur} et {@code largeur} sont les dimensions de la zone. En effet,
-	 * bien que ça soit possible, il est très peu probable d'avoir besoin d'un
-	 * chemin qui traverserait l'intégralité de la zone, en diagonale (ici la longueur
-	 * du chemin est exprimée en distance de Manhattan).
-	 * 
-	 * @param maxHeight
-	 * 		Hauteur maximale de l'arbre de recherche.
-	 */
-	public void setMaxHeight(int maxHeight)
-	{	this.maxHeight = maxHeight;	
-	}
-		
-	/**
-	 * Limite l'arbre de recherche à un certain coût {@code maxCost}, i.e. dès que le
-	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
-	 * renvoie pas de solution (échec). <br/>
-	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
-	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
-	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite déjà le nombre de noeuds dans l'arbre.
-	 * 
-	 * @param maxCost	
-	 * 		Le coût maximal que le noeud courant peut atteindre.
-	 */
-	public void setMaxCost(int maxCost)
-	{	this.maxCost = maxCost;
-	}
-		
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
@@ -349,7 +138,7 @@ public final class BreadthFirst
 	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	// initialisation
 		this.startLocation = startLocation;
-		this.endTiles = endTiles;
+		this.remainingTiles = endTiles;
 		treeHeight = 0;
 		treeCost = 0;
 		treeSize = 0;
@@ -389,14 +178,14 @@ public final class BreadthFirst
 		
 		long before = print(">>>>>>>> Starting/resuming A* +++++++++++++++++++++");
 		String msg = "         searching paths from "+startLocation+" to [";
-		for(AiTile tile: endTiles)
+		for(AiTile tile: remainingTiles)
 			msg = msg + " " + tile;
 		msg = msg + " ]";
 		print(msg);
 		
 		boolean found = false;
 		// traitement
-		if(!endTiles.isEmpty())
+		if(!remainingTiles.isEmpty())
 		{	do
 			{	ai.checkInterruption();
 				long before1 = print("---------- new iteration --");
@@ -408,7 +197,7 @@ public final class BreadthFirst
 				print("           Zone:\n"+lastSearchNode.getLocation().getTile().getZone());
 				
 				// on teste si on est arrivé à la fin de la recherche
-				if(endTiles.contains(lastSearchNode.getLocation().getTile()))
+				if(remainingTiles.contains(lastSearchNode.getLocation().getTile()))
 				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
 					finalNode = lastSearchNode;
 					found = true;
@@ -467,7 +256,7 @@ public final class BreadthFirst
 		{	for(AiLocation loc: result.getLocations())
 				msg = msg + " " + loc;
 		}
-		else if(endTiles.isEmpty())
+		else if(remainingTiles.isEmpty())
 			msg = msg + " endTiles parameter empty";
 		else
 			msg = msg + " no solution found";
@@ -478,7 +267,7 @@ public final class BreadthFirst
 		msg = "         height="+treeHeight+" cost="+treeCost+" size="+treeSize;
 		msg = msg + " src="+root.getLocation();
 		msg = msg + " trgt=";
-		for(AiTile tile: endTiles) 
+		for(AiTile tile: remainingTiles) 
 			msg = msg + " " + tile;
 		print(msg);
 		if(result!=null) 
@@ -486,72 +275,10 @@ public final class BreadthFirst
 
 //		finish();
 		if(limitReached)
-			throw new LimitReachedException(startLocation,endTiles,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
-		else if(endTiles.isEmpty())
+			throw new LimitReachedException(startLocation,remainingTiles,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
+		else if(remainingTiles.isEmpty())
 			throw new IllegalArgumentException("endTiles list must not be empty");
 		
 		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// TEXT				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Préfixe affiché avant chaque message */
-	private String colorStr;
-	/** permet d'activer/désactiver la sortie texte lors du débogage */
-	private boolean verbose = false;
-
-	/**
-	 * Permet d'activer/désactiver la sortie
-	 * texte de cet algorithme (pour le débogage).
-	 * 
-	 * @param verbose
-	 * 		La sortie est activée pour {@code true}.
-	 */
-	public void setVerbose(boolean verbose)
-	{	this.verbose = verbose;
-	}
-	
-	/**
-	 * Cette méthode affiche à l'écran le message passé en paramètre,
-	 * à condition que {@link #verbose} soit {@code true}. Elle
-	 * préfixe automatiquement la couleur de l'agent et le moment
-	 * de l'affichage. Utilisez-la pour tout affichage de message,
-	 * car elle vous permet de désactiver tous vos messages simplement
-	 * en faisant {@code verbose = false;}.
-	 * 
-	 * @param msg
-	 * 		Le message à afficher dans la console.
-	 * @return
-	 * 		Le temps à l'instant de l'affichage.
-	 */
-	protected final long print(String msg)
-	{	long time = System.currentTimeMillis();
-		if(verbose)
-		{	String prefix = "[" + time + ":" + colorStr + "]";
-			String message = prefix + " " + msg;
-			System.out.println(message);
-		}
-		return time;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * termine proprement cet objet quand il n'est plus utilisé
-	 */
-	@SuppressWarnings("unused")
-	private void finish()
-	{	
-//		if(root!=null)
-//		{	root.finish();
-//			root = null;
-//		}
-//		ai = null;
-//		costCalculator = null;
-//		heuristicCalculator = null;
-//		successorCalculator = null;
-		root = null;
 	}
 }
