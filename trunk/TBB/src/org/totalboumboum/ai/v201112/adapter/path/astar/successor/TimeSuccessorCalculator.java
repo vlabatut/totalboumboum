@@ -122,7 +122,8 @@ if(!t.equals(tile))
 			AiTile targetTile = tile.getNeighbor(direction);
 			
 			// cette case ne doit pas avoir été visitée depuis la dernière pause
-			if(!node.hasBeenExploredSincePause(targetTile))
+			if(!node.hasBeenExplored(targetTile))
+//			if(!node.hasBeenExploredSincePause(targetTile))
 			{	// on applique le modèle pour obtenir la zone résultant de l'action
 				AiModel model = new AiModel(zone);
 				model.applyChangeHeroDirection(hero,direction);

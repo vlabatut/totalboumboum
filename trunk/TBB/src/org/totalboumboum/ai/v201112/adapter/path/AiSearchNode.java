@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path;
  * 
  */
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -69,6 +70,10 @@ public final class AiSearchNode implements Comparable<AiSearchNode>
 		// parent
 		parent = null;
 		
+		// noeuds explorés
+		exploredNodes = new HashMap<AiTile, AiSearchNode>();
+		exploredNodes.put(location.getTile(),this);
+		
 		// profondeur
 		depth = 0;
 		
@@ -108,6 +113,10 @@ public final class AiSearchNode implements Comparable<AiSearchNode>
 		
 		// parent
 		this.parent = parent;
+		
+		// noeuds explorés
+		exploredNodes = new HashMap<AiTile, AiSearchNode>(parent.exploredNodes);
+		exploredNodes.put(location.getTile(),this);
 		
 		// profondeur
 		depth = parent.getDepth() + 1;
@@ -160,6 +169,10 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 		
 		// parent
 		this.parent = parent;
+		
+		// noeuds explorés
+		exploredNodes = new HashMap<AiTile, AiSearchNode>();
+		exploredNodes.put(location.getTile(),this);
 		
 		// profondeur
 		depth = parent.getDepth() + 1;
@@ -319,6 +332,43 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	{	return parent;	
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// EXPLORED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** map contenant les noeuds ancêtres présent dans la branche courante de l'arbre de recherche */
+	private HashMap<AiTile,AiSearchNode> exploredNodes;
+
+	/**
+	 * Renvoie la map des noeud explorés,
+	 * i.e. situés dans la même branche que ce noeud.
+	 * 
+	 * @return
+	 * 		La map contenant les noeuds déjà explorés
+	 */
+/*	public HashMap<AiTile,AiSearchNode> getExploredNodes()
+	{	return exploredNodes;
+	}
+*/	
+	/**
+	 * Détermine si la case passée en paramètre a déjà été traitée,
+	 * i.e. si elle apparait dans la branche courante de l'arbre de recherche.
+	 * La racine de la branche n'est pas forcément celle de l'arbre,
+	 * mais plutôt celle datant de la dernière pause.
+	 * L'idée est qu'à la suite d'une pause, il est possible de re-visiter
+	 * des cases par lesquelles on est déjà passé, car la pause
+	 * correspond à l'attente de la disparition d'un obstacle
+	 * tel qu'une explosion (ou un mur mobile, etc.).
+	 * 
+	 * @param tile	
+	 * 		Case à tester
+	 * @return	
+	 * 		{@code true} ssi la case a déjà été traitée.
+	 */
+	public boolean hasBeenExplored(AiTile tile)
+	{	boolean result = exploredNodes.containsKey(tile);
+		return result;
+	}
+
 	/**
 	 * Détermine si la case passée en paramètre a déjà été traitée,
 	 * i.e. si elle apparait dans les noeuds de recherche ancêtres.
@@ -331,7 +381,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
+/*	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
 		boolean result = location.getTile().equals(tile);
@@ -339,7 +389,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 			result = parent.hasBeenExplored(tile);
 		return result;
 	}
-	
+*/	
 	/**
 	 * Détermine si la case passée en paramètre a déjà été traitée,
 	 * i.e. si elle apparait dans les noeuds de recherche ancêtres.
@@ -357,7 +407,7 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public boolean hasBeenExploredSincePause(AiTile tile) throws StopRequestException
+/*	public boolean hasBeenExploredSincePause(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
 		boolean result = location.getTile().equals(tile);
@@ -365,31 +415,8 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 			result = parent.hasBeenExploredSincePause(tile);
 		return result;
 	}
-	
-	/**
-	 * Détermine si la case contenue dans l'emplacement passé en 
-	 * paramètre a déjà été traitée, i.e. si elle apparait dans les 
-	 * noeuds de recherche ancêtres.
-	 * 
-	 * @param location
-	 * 		Emplacement contenant la case à tester
-	 * @return	
-	 * 		{@code true} ssi la case a déjà été traitée.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
-	 */
-/*	private boolean hasBeenExplored(AstarLocation location) throws StopRequestException
-	{	ai.checkInterruption();
-		
-		AiTile tile = location.getTile();
-		boolean result = this.location.getTile().equals(tile);
-		if(parent!=null && !result)
-			result = parent.hasBeenExplored(tile);
-		return result;
-	}
 */	
-    /////////////////////////////////////////////////////////////////
+   /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** calculateur des successeurs */
