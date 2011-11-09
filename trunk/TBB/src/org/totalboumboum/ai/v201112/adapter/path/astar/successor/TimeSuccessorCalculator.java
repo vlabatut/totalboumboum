@@ -36,6 +36,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.AiModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -47,7 +49,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * on envisagera aussi de passer sur des cases que l'algorithme a déjà traitées.<br>
  * Le temps de traitement sera donc beaucoup plus long que pour les autres fonctions
  * successeurs. Cette approche ne doit donc <b>pas être utilisée souvent</b>, car elle
- * va vraisemblablement ralentir l'agent significativement. 
+ * va vraisemblablement ralentir l'agent significativement.<br/>
+ * Cette classe nécessite que le temps soit considéré aussi par les autres
+ * fonctions, donc il faut l'utiliser conjointement à {@link TimeHeuristicCalculator}
+ * et {@link TimeCostCalculator}.
  * 
  * @author Vincent Labatut
  */
