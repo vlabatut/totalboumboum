@@ -421,6 +421,8 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	/////////////////////////////////////////////////////////////////
 	/** calculateur des successeurs */
 	private SuccessorCalculator successorCalculator;
+	/** Liste des enfants de ce noeud */
+	private List<AiSearchNode> children = null;
 	
 	/**
 	 * renvoie la fonction successeur de ce noeud
@@ -444,11 +446,11 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	public List<AiSearchNode> getChildren() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		List<AiSearchNode> result = successorCalculator.processSuccessors(this);
-//children = result;		
-		return result;
+		if(children==null)
+			children = successorCalculator.processSuccessors(this);
+		
+		return children;
 	}
-//private List<AstarNode> children;	
 	
 	/////////////////////////////////////////////////////////////////
 	// HERO				/////////////////////////////////////////////
