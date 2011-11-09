@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.BasicCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TileCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
@@ -41,11 +41,26 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Implémentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
- * par le personnage considéré, et qui n'ont pas déjà été explorées.<br/>
- * La classe est compatible avec {@link BasicCostCalculator}, 
- * {@link PixelCostCalculator} et {@link MatrixCostCalculator};
- * et {@link NoHeuristicCalculator}, {@link PixelHeuristicCalculator}
- * et {@link TileHeuristicCalculator}.<br/>
+ * par le personnage considéré, et qui n'ont pas déjà été explorées.
+ * <br/>
+ * La classe est compatible avec :
+ * <ul>
+ * 		<li>Fonctions de coût :
+ * 			<ul>
+ * 				<li>{@link MatrixCostCalculator}</li>
+ * 				<li>{@link PixelCostCalculator}</li>
+ * 				<li>{@link TileCostCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * 		<li>Fonction heuristiques :
+ * 			<ul>
+ * 				<li>{@link NoHeuristicCalculator}</li>
+ * 				<li>{@link PixelHeuristicCalculator}</li>
+ * 				<li>{@link TileHeuristicCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * </ul>
+ * <br/>
  * On empêche tout passage sur une case déjà explorée afin de rendre le traitement 
  * plus court. Par conséquent, cette fonction n'est pas capable de traiter les 
  * chemins qui contiennent des retours en arrière ou de l'attente.

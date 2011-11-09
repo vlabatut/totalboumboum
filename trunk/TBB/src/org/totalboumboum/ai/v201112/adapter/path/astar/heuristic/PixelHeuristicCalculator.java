@@ -29,13 +29,29 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.PixelCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
 
 /**
- * Heuristique utilisant la distance de Manhattan exprimées en pixels,
- * pour fonctionner avec {@link PixelCostCalculator}.<br/>
+ * Heuristique utilisant la <a> href="http://fr.wikipedia.org/wiki/Distance_de_Manhattan">distance de Manhattan</a>
+ * exprimées en pixels, pour fonctionner avec {@link PixelCostCalculator}.
+ * <br/>
+ * La classe est compatible avec :
+ * <ul>
+ * 		<li>Fonction de coût :
+ * 			<ul>
+ * 				<li>{@link PixelCostCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * 		<li>Fonctions successeurs :
+ * 			<ul>
+ * 				<li>{@link BasicSuccessorCalculator}</li>
+ * 			</ul>
+ * 		</li> 
+ * </ul>
+ * <br/>
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
  * chemins contenant des attentes. Par contre, à la différence
- * de {@link BasicHeuristicCalculator}, elle gère les distances
+ * de {@link TileHeuristicCalculator}, elle gère les distances
  * en pixels.
  * 
  * @author Vincent Labatut
@@ -84,7 +100,7 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
 	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>.
 	 * Ici, on calcule cette distance exprimée en pixels plutôt qu'en cases
-	 * comme c'est le cas dans {@link BasicHeuristicCalculator}.
+	 * comme c'est le cas dans {@link TileHeuristicCalculator}.
 	 * 
 	 * @param location	
 	 * 		L'emplacement concerné. 
