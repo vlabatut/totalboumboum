@@ -10,19 +10,19 @@ import java.util.List;
  * @author Emine Canan Toprak
  *
  */
-public class HanciTprkAStar {
+public class HanciToprakAStar {
 
 	/** The set of nodes that have been searched through */
-	private List<HanciTprkNode> closed = new ArrayList<HanciTprkNode>();
+	private List<HanciToprakNode> closed = new ArrayList<HanciToprakNode>();
 	/** The set of nodes that we do not yet consider fully searched */
-	private HanciTprkSortedList open = new HanciTprkSortedList();
+	private HanciToprakSortedList open = new HanciToprakSortedList();
 
-	public List<HanciTprkNode> path = new ArrayList<HanciTprkNode>();
+	public List<HanciToprakNode> path = new ArrayList<HanciToprakNode>();
 
-	private HanciTprkNode[][] nodes;
+	private HanciToprakNode[][] nodes;
 
-	HanciTprkNode debut;
-	HanciTprkNode fin;
+	HanciToprakNode debut;
+	HanciToprakNode fin;
 	private int[][] pos = {
 			{ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },// 0 //ceci est un
 			// exemple
@@ -44,15 +44,15 @@ public class HanciTprkAStar {
 			{ 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2 },
 			{ 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2 } };// 14
 
-	public HanciTprkAStar(HanciTprkNode debut, HanciTprkNode fin) {
+	public HanciToprakAStar(HanciToprakNode debut, HanciToprakNode fin) {
 
 		this.debut = debut;
 		this.fin = fin;
 
-		nodes = new HanciTprkNode[posDimX()][posDimY()];
+		nodes = new HanciToprakNode[posDimX()][posDimY()];
 		for (int x = 0; x < posDimX(); x++) {
 			for (int y = 0; y < posDimY(); y++) {
-				nodes[x][y] = new HanciTprkNode(x, y);
+				nodes[x][y] = new HanciToprakNode(x, y);
 			}
 		}
 
@@ -71,7 +71,7 @@ public class HanciTprkAStar {
 		return pos[0].length;
 	}
 
-	public void findPath(HanciTprkNode debut) {
+	public void findPath(HanciToprakNode debut) {
 
 		// int xc, yc;
 		// open.clear();
@@ -163,8 +163,8 @@ public class HanciTprkAStar {
 		open.clear();
 		closed.clear();
 
-		HanciTprkNode courante = debut;
-		HanciTprkNode temp_node = null;
+		HanciToprakNode courante = debut;
+		HanciToprakNode temp_node = null;
 
 //		System.out.println("debut: " + debut.getX() + debut.getY());
 //		System.out.println("fin: " + fin.getX() + fin.getY());
@@ -192,7 +192,7 @@ public class HanciTprkAStar {
 									+ "(new HanciTprkNode(xc, yc - 1))"
 									+ xc
 									+ (yc - 1));
-					ajoutOuverte(courante, (new HanciTprkNode(xc, yc - 1)));
+					ajoutOuverte(courante, (new HanciToprakNode(xc, yc - 1)));
 
 				}
 				if ((yc < posDimY() - 1) && (pos[xc][yc + 1] != 2)) {
@@ -202,36 +202,36 @@ public class HanciTprkAStar {
 									+ "(new HanciTprkNode(xc, yc + 1))"
 									+ xc
 									+ (yc + 1));
-					ajoutOuverte(courante, (new HanciTprkNode(xc, yc + 1)));
+					ajoutOuverte(courante, (new HanciToprakNode(xc, yc + 1)));
 				}
 
 				if (xc < posDimX() - 1) {
 
 					if ((pos[xc + 1][yc] != 2))
-						ajoutOuverte(courante, (new HanciTprkNode(xc + 1, yc)));
+						ajoutOuverte(courante, (new HanciToprakNode(xc + 1, yc)));
 					if ((yc >= 2)
 							&& (pos[xc + 1][yc - 1] != 2)
 							&& !((pos[xc][yc - 1] == 2) || (pos[xc + 1][yc] == 2)))
-						ajoutOuverte(courante, (new HanciTprkNode(xc + 1,
+						ajoutOuverte(courante, (new HanciToprakNode(xc + 1,
 								yc - 1)));
 					if ((yc < posDimY() - 1)
 							&& (pos[xc + 1][yc + 1] != 2)
 							&& !((pos[xc + 1][yc] == 2) || (pos[xc][yc + 1] == 2)))
-						ajoutOuverte(courante, (new HanciTprkNode(xc + 1,
+						ajoutOuverte(courante, (new HanciToprakNode(xc + 1,
 								yc + 1)));
 				}
 				if (xc >= 2) {
 					if ((pos[xc - 1][yc] != 2))
-						ajoutOuverte(courante, (new HanciTprkNode(xc - 1, yc)));
+						ajoutOuverte(courante, (new HanciToprakNode(xc - 1, yc)));
 					if ((yc >= 2)
 							&& (pos[xc - 1][yc - 1] != 2)
 							&& !((pos[xc - 1][yc] == 2) || (pos[xc][yc - 1] == 2)))
-						ajoutOuverte(courante, (new HanciTprkNode(xc - 1,
+						ajoutOuverte(courante, (new HanciToprakNode(xc - 1,
 								yc - 1)));
 					if ((yc < posDimY() - 1)
 							&& (pos[xc - 1][yc + 1] != 2)
 							&& !((pos[xc - 1][yc] == 2) || (pos[xc][yc + 1] == 2)))
-						ajoutOuverte(courante, (new HanciTprkNode(xc - 1,
+						ajoutOuverte(courante, (new HanciToprakNode(xc - 1,
 								yc + 1)));
 
 				}
@@ -252,7 +252,7 @@ public class HanciTprkAStar {
 			}
 
 			// System.out.println("courante = (HanciTprkNode) open.first()");
-			courante = (HanciTprkNode) open.first();
+			courante = (HanciToprakNode) open.first();
 		}
 
 		fin.setParent(temp_node);
@@ -260,7 +260,7 @@ public class HanciTprkAStar {
 //		System.out.println("findPatht bitti ");
 	}
 
-	public void ajoutOuverte(HanciTprkNode courante, HanciTprkNode adjacente) {
+	public void ajoutOuverte(HanciToprakNode courante, HanciToprakNode adjacente) {
 //		System.out.println("ajoutouvertteyim");
 		int g = courante.getCost()
 				+ ((adjacente.getX() == courante.getX() || adjacente.getY() == courante
@@ -298,7 +298,7 @@ public class HanciTprkAStar {
 
 	public void Path() {
 
-		HanciTprkNode current = fin;
+		HanciToprakNode current = fin;
 		while (current.getParent() != null) {
 			path.add(current);
 			current = current.getParent();
@@ -306,7 +306,7 @@ public class HanciTprkAStar {
 
 	}
 
-	public void initialiser(HanciTprkNode debut, HanciTprkNode fin,
+	public void initialiser(HanciToprakNode debut, HanciToprakNode fin,
 			int[][] matrix) {
 //		System.out.println("initialisenin icindeyim");
 //		System.out.println();
@@ -357,7 +357,7 @@ public class HanciTprkAStar {
 	 *            The node to check for
 	 * @return True if the node given is in the open list
 	 */
-	public boolean inOpenList(HanciTprkNode node) {
+	public boolean inOpenList(HanciToprakNode node) {
 		return open.contains(node);
 	}
 
@@ -368,13 +368,13 @@ public class HanciTprkAStar {
 	 *            The node to search for
 	 * @return True if the node specified is in the closed list
 	 */
-	public boolean inClosedList(HanciTprkNode node) {
+	public boolean inClosedList(HanciToprakNode node) {
 		return closed.contains(node);
 	}
 
-	public boolean isInList(HanciTprkNode courante,
-			List<HanciTprkNode> list) {
-		Iterator<HanciTprkNode> ito = list.iterator();
+	public boolean isInList(HanciToprakNode courante,
+			List<HanciToprakNode> list) {
+		Iterator<HanciToprakNode> ito = list.iterator();
 		while (ito.hasNext()) {
 			if (ito.next().equals(courante))
 				return true;
@@ -393,7 +393,7 @@ public class HanciTprkAStar {
 	//		return min;
 	//
 	//	} 
-	HanciTprkNode compareF(HanciTprkNode cF1, HanciTprkNode cF2) {
+	HanciToprakNode compareF(HanciToprakNode cF1, HanciToprakNode cF2) {
 		if (cF1.getF() < cF2.getF())
 			return cF1;
 		return cF2;

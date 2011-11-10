@@ -63,6 +63,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	private Long lastYield = null;
 	/** compte les appels à checkInterruption() entre deux yields */
 	private int callCount = 0;
+	/** temps total écoulé */
+	protected long totalDuration = 0;
 
 	/**
 	 * méthode appelée par le jeu pour demander la fin de l'IA.
@@ -105,7 +107,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	@Override
 	public final AiAction call()
-	{	AiAction result = new AiAction(AiActionName.NONE);
+	{	long before = System.currentTimeMillis();
+		AiAction result = new AiAction(AiActionName.NONE);
 	
 		if(firstTime)
 			firstTime = false;
@@ -121,6 +124,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			}
 		}
 		
+		long after = System.currentTimeMillis();
+		totalDuration = after - before;
 		return result;
 	}
 	

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -210,6 +211,12 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	{	// inutile ici
 	}
 	
+	@Override
+	public void updateDurations()
+	{	ArtificialIntelligence ai = (ArtificialIntelligence)getAi();
+		totalDuration = ai.totalDuration;
+	}
+
     /////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

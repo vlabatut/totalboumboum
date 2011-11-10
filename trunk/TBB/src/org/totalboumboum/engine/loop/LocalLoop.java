@@ -81,7 +81,7 @@ import org.totalboumboum.engine.loop.display.DisplaySpeed;
 import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
-import org.totalboumboum.engine.loop.display.DisplayUsage;
+import org.totalboumboum.engine.loop.display.DisplayEffectiveUsage;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
@@ -423,7 +423,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		display = new DisplayAisPause(this);
 		displayManager.addDisplay(display);
 		// AIs CPU usage
-		display = new DisplayUsage(this);
+		display = new DisplayEffectiveUsage(this);
 		displayManager.addDisplay(display);
 		
 		// players names

@@ -132,7 +132,9 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 		snake[4][1] = 1;
 	}
 
-	public Integer call() throws Exception {
+	@Override
+	public Integer process() throws Exception
+	{
 
 		int tab[][] = getZoneMatrix();
 

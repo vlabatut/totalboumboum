@@ -50,10 +50,9 @@ public class BaydarCamci extends ArtificialIntelligence
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
-	public Integer call() throws Exception
-	{	
-		
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	@Override
+	public Integer process() throws Exception
+	{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(firstTime)
 			firstTime = false;
 		else
@@ -74,7 +73,7 @@ public class BaydarCamci extends ArtificialIntelligence
 		}
 		}
 		
-	return result;	
+		return result;	
 	}	
 	
 	/**

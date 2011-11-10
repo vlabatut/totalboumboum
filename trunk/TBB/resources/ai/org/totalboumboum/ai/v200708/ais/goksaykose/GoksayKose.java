@@ -25,8 +25,9 @@ public class GoksayKose extends ArtificialIntelligence{
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
-	public Integer call() throws Exception {
-		
+	@Override
+	public Integer process() throws Exception
+	{		
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(firstTime)
 			firstTime = false;

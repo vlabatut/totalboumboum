@@ -107,6 +107,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/** nombre de bombes que les personnages autres que celui contrôlé par l'IA peuvent encore poser */
 	private Vector<Integer> bombCounts;
 	
+	/** temps total du dernier appel */
+	protected long totalDuration = 0;
+	
 	/**
 	 * Constructeur. 
 	 * @param name	nom de la classe
@@ -117,6 +120,23 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 		else
 			this.name = name;
 	}
+	
+	@Override
+	public Integer call() throws Exception
+	{	long before = System.currentTimeMillis();
+		int result = process();
+		long after = System.currentTimeMillis();
+		totalDuration = after - before;
+		return result;
+	}
+	
+	/**
+	 * Réalise le traitement.
+	 * 
+	 * @return
+	 * 		Un code correspondant à l'action à effectuer.
+	 */
+	protected abstract Integer process() throws Exception;
 	
 	/**
 	 * Renvoie le nom attribué à cette IA

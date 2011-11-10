@@ -25,7 +25,9 @@ import java.awt.Color;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -72,11 +74,31 @@ public abstract class AiAbstractManager<V>
     	
 	}
 
-    /////////////////////////////////////////////////////////////////
+    /**
+     * initialise le gestionnaire d'agent
+     * 
+     * @param instance	
+     * 		instance utilisée dans ce round
+     * @param player	
+     * 		joueur contrôlé par l'agent
+     */
+    @SuppressWarnings("unchecked")
+	public void init(String instance, AiPlayer player)
+	{	// input
+    	this.player = player;
+		
+    	// output
+		Level level = RoundVariables.level;
+		int height = level.getGlobalHeight();
+		int width = level.getGlobalWidth();
+		tileColors = new Color[height][width];
+		tileTexts = new List[height][width];
+	}
+		
+   /////////////////////////////////////////////////////////////////
 	// EXCEPTIONS LOG	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
@@ -171,6 +193,8 @@ public abstract class AiAbstractManager<V>
     				result = !events.isEmpty();
     				// on met à jour les sorties de l'agent
     				updateOutput();
+    				// on met à jour les temps de l'agent
+    				updateDurations();
 				}
     			catch (InterruptedException e)
     			{	if(aisConfiguration.getLogExceptions())
@@ -244,32 +268,11 @@ public abstract class AiAbstractManager<V>
     public abstract void finishAi();
 
     /////////////////////////////////////////////////////////////////
-	// PERCEPTS			/////////////////////////////////////////////
+	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** le joueur contrôlé par l'agent */
     private AiPlayer player;
    
-    /**
-     * initialise le gestionnaire d'agent
-     * 
-     * @param instance	
-     * 		instance utilisée dans ce round
-     * @param player	
-     * 		joueur contrôlé par l'agent
-     */
-    @SuppressWarnings("unchecked")
-	public void init(String instance, AiPlayer player)
-	{	// input
-    	this.player = player;
-		
-    	// output
-		Level level = RoundVariables.level;
-		int height = level.getGlobalHeight();
-		int width = level.getGlobalWidth();
-		tileColors = new Color[height][width];
-		tileTexts = new List[height][width];
-	}
-		
 	/**
 	 * renvoie le joueur contrôlé par l'agent géré
 	 * 
@@ -280,6 +283,9 @@ public abstract class AiAbstractManager<V>
 	{	return player;		
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// PERCEPTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * méthode utilisée pour mettre à jour les percepts de l'agent avant 
 	 * que cette dernière ne calcule la prochaine action à effectuer.
@@ -307,6 +313,61 @@ public abstract class AiAbstractManager<V>
 	public abstract void finishPercepts();
 	
     /////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Noms des différentes étapes implémentées par l'agent */
+	private final List<String> stepNames = new LinkedList<String>();
+	/** Durées associées aux différentes étapes implémentées par l'agent, pour le moteur */
+	private final HashMap<String,Long> stepDurations = new HashMap<String, Long>();
+	/** Durée totale du traitement */
+	protected long totalDuration = 0;
+	
+	/** 
+	 * initialise la liste des noms des étapes 
+	 * implémentées par l'agent 
+	 */
+	protected abstract void initStepNames();
+	
+	/**
+	 * Met à jour la map contenant
+	 * les temps destinés au moteur.
+	 */
+	public abstract void updateDurations();
+	
+	/**
+	 * Renvoie les noms des différentes
+	 * étapes implémentées par l'agent.
+	 * 
+	 * @return
+	 * 		Une liste de noms d'étapes.
+	 */
+	public List<String> getStepNames()
+	{	return stepNames;
+	}
+	
+	/**
+	 * Renvoie les dernières durées associées
+	 * aux étapes implémentées par l'agent.
+	 * 
+	 * @return
+	 * 		Une map associant une durée à chaque nom d'étape.
+	 */
+	public HashMap<String,Long> getStepDurations()
+	{	return stepDurations;
+	}
+	
+	/**
+	 * Renvoie la durée totale du dernier appel
+	 * de l'agent.
+	 * 
+	 * @return
+	 * 		Dernière durée totale exprimée en ms.
+	 */
+	public long getTotalDuration()
+	{	return totalDuration;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** couleurs associées aux cases (ou null pour aucune couleur */
@@ -321,8 +382,8 @@ public abstract class AiAbstractManager<V>
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * met à jour la représentation des sorties de l'agent
-	 * qui est destinée au moteur
+	 * Met à jour la représentation des sorties de l'agent
+	 * qui est destinée au moteur.
 	 */
 	protected abstract void updateOutput();
 	

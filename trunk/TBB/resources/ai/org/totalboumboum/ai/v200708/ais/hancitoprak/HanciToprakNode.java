@@ -7,7 +7,7 @@ package org.totalboumboum.ai.v200708.ais.hancitoprak;
  *
  */
 @SuppressWarnings("rawtypes")
-public class HanciTprkNode implements Comparable {
+public class HanciToprakNode implements Comparable {
 	/** coordonnee x de HanciTprkNode */
 	private int x;
 	/** coordonnee y de HanciTprkNode */
@@ -15,7 +15,7 @@ public class HanciTprkNode implements Comparable {
 	/** The path cost for this HanciTprkNode */
 	private int cost;
 	/** le parent du HanciTprkNode, how we reached it in the search */
-	private HanciTprkNode parent;
+	private HanciToprakNode parent;
 	/**  cost heuristique du HanciTprkNode */
 	private int heuristic;
 	/** The search depth of this HanciTprkNode */
@@ -30,7 +30,7 @@ public class HanciTprkNode implements Comparable {
 	 * @param x The x coordinate of the HanciTprkNode
 	 * @param y The y coordinate of the HanciTprkNode
 	 */
-	public HanciTprkNode(int x, int y) {
+	public HanciToprakNode(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -41,7 +41,7 @@ public class HanciTprkNode implements Comparable {
 	 * @param parent The parent HanciTprkNode which lead us to this HanciTprkNode
 	 * @return The depth we have no reached in searching
 	 */
-	public int setParent(HanciTprkNode parent) {
+	public int setParent(HanciToprakNode parent) {
 		depth = parent.depth + 1;
 		this.parent = parent;
 		
@@ -93,7 +93,7 @@ public class HanciTprkNode implements Comparable {
 
 	
 	
-	public HanciTprkNode getParent() {
+	public HanciToprakNode getParent() {
 		return parent;
 	}
 
@@ -105,7 +105,7 @@ public class HanciTprkNode implements Comparable {
 	 * @see Comparable#compareTo(Object)
 	 */
 	public int compareTo(Object other) {
-		HanciTprkNode o = (HanciTprkNode) other;
+		HanciToprakNode o = (HanciToprakNode) other;
 		
 		float f = heuristic + cost;
 		float of = o.heuristic + o.cost;

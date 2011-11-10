@@ -53,7 +53,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
-	public Integer call() throws Exception {
+	@Override
+	public Integer process() throws Exception
+	{
 		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(firstTime)
 			firstTime = false;

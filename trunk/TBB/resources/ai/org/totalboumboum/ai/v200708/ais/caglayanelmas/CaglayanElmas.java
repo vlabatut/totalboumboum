@@ -84,7 +84,8 @@ public class CaglayanElmas extends ArtificialIntelligence
 	 * 
 	 * @return AI_ACTION_XXXX
 	 */
-	public Integer call() throws Exception
+	@Override
+	public Integer process() throws Exception
 	{
 		if(firstTime)
 			firstTime = false;

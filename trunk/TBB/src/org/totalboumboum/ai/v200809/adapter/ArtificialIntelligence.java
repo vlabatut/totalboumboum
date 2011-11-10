@@ -52,7 +52,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	private boolean firstTime = true;
 	/** indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
-
+	/** temps total écoulé */
+	protected long totalDuration = 0;
+	
 	/**
 	 * méthode appelée par le jeu pour demander la fin de l'IA.
 	 * Elle modifie la valeur de l'indcateur stopRequest, ce qui permettra
@@ -75,8 +77,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	@Override
 	public final AiAction call()
-	{	AiAction result = new AiAction(AiActionName.NONE);
+	{	long before = System.currentTimeMillis();
 		
+		AiAction result = new AiAction(AiActionName.NONE);
 		if(firstTime)
 			firstTime = false;
 		else
@@ -88,6 +91,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			}
 		}
 		
+		long after = System.currentTimeMillis();
+		totalDuration = after - before;
 		return result;
 	}
 	

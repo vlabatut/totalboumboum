@@ -140,7 +140,9 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
-	public Integer call() throws Exception {
+	@Override
+	public Integer process() throws Exception
+	{
 
 		int action = AI_ACTION_DO_NOTHING;
 

@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
@@ -89,12 +90,14 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	@Override
 	public void init(String instance, AiPlayer player)
 	{	super.init(instance,player);
+	
 		loop = RoundVariables.loop;
 		level = RoundVariables.level;
 		percepts = new AiDataZone(level,player);
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setZone(percepts);
 		output = ai.getOutput();
+		initStepNames();
 	}
 
 	@Override
@@ -215,6 +218,34 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	}
 
     /////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected void initStepNames()
+	{	List<String> stepNames = getStepNames();
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		stepNames.addAll(ai.stepNames);
+	}
+	
+	@Override
+	/**
+	 * Met à jour la map contenant
+	 * les temps destinés au moteur.
+	 */
+	public void updateDurations()
+	{	// steps
+		HashMap<String,Long> engineStepDurations = getStepDurations();
+		engineStepDurations.clear();
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		HashMap<String,Long> agentStepDurations = ai.getStepDurations();
+		engineStepDurations.putAll(agentStepDurations);
+		
+		// total
+		totalDuration = ai.getTotalDuration();
+	}
+
+	
+	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** sortie de l'agent */
