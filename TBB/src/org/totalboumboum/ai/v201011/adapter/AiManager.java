@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
+import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -217,6 +218,14 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		lastMove = direction;
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected void initStepNames()
+	{	// inutile ici
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
