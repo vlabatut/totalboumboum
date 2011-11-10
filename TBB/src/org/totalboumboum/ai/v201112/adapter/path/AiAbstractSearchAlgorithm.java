@@ -44,7 +44,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
 public abstract class AiAbstractSearchAlgorithm
 {	
 	/**
-	 * construit un objet permettant d'appliquer l'algorithme de recherche.
+	 * Construit un objet permettant d'appliquer l'algorithme de recherche.
 	 * 
 	 * @param ai
 	 * 		L'AI invoquant l'algorithme de recherche.

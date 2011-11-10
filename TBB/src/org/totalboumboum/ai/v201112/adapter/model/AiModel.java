@@ -532,7 +532,7 @@ if(sprite instanceof AiSimBomb)
 			{	AiSimBomb bomb = (AiSimBomb) sprite;
 				if(bomb.hasCountdownTrigger())
 				{	long normalDuration = bomb.getNormalDuration();
-					result = normalDuration - state.getTime();
+					result = normalDuration - bomb.getTime();
 					if(result<0)
 						result = 0;
 				}
