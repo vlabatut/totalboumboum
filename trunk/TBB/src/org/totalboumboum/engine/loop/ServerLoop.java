@@ -264,16 +264,15 @@ public class ServerLoop extends LocalLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	String name = event.getName();
+	{	super.processEvent(event);
+		
+		String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
 			switchAiPause(index);
-		}
-		else
-		{	super.processEvent(event);
 		}
 	}
 

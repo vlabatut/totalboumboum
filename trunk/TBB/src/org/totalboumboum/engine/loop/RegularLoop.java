@@ -51,6 +51,7 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.system.LocalSytemControl;
 import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.DisplayEnginePause;
+import org.totalboumboum.engine.loop.display.DisplayEngineStep;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
@@ -222,6 +223,9 @@ public class RegularLoop extends LocalLoop
 		// engine pause
 		display = new DisplayEnginePause(this);
 		displayManager.addDisplay(display);
+		// engine step
+		display = new DisplayEngineStep(this);
+		displayManager.addDisplay(display);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -229,7 +233,9 @@ public class RegularLoop extends LocalLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	String name = event.getName();
+	{	super.processEvent(event);
+	
+		String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
@@ -248,9 +254,6 @@ public class RegularLoop extends LocalLoop
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
 		{	switchEnginePause();
-		}
-		else
-		{	super.processEvent(event);
 		}
 	}
 }

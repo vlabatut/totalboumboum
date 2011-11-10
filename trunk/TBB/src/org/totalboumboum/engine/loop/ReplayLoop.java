@@ -40,6 +40,9 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.control.system.ReplaySytemControl;
 import org.totalboumboum.engine.loop.display.Display;
+import org.totalboumboum.engine.loop.display.DisplayCancel;
+import org.totalboumboum.engine.loop.display.DisplayEngineStep;
+import org.totalboumboum.engine.loop.display.DisplaySpeedChange;
 import org.totalboumboum.engine.loop.display.DisplayEnginePause;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
 import org.totalboumboum.engine.loop.display.DisplayGrid;
@@ -303,6 +306,9 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		// speed
 		display = new DisplaySpeed();
 		displayManager.addDisplay(display);
+		// change speed
+		display = new DisplaySpeedChange();
+		displayManager.addDisplay(display);
 		
 		// time
 		display = new DisplayTime(this);
@@ -314,6 +320,13 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		
 		// engine pause
 		display = new DisplayEnginePause(this);
+		displayManager.addDisplay(display);
+		// engine step
+		display = new DisplayEngineStep(this);
+		displayManager.addDisplay(display);
+				
+		// cancel
+		display = new DisplayCancel();
 		displayManager.addDisplay(display);
 	}
 
@@ -362,7 +375,9 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	String name = event.getName();
+	{	super.processEvent(event);
+	
+		String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
@@ -380,9 +395,6 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_FAST_FORWARD))
 		{	switchFastforward();
-		}
-		else
-		{	super.processEvent(event);
 		}
 	}
 }
