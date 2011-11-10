@@ -21,7 +21,10 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
@@ -355,7 +358,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
 				print("<<<< Exiting updatePercepts: duration="+elapsed+" ms");
-				stepDurations.put(AiStep.PERCEPTS,elapsed);
+				stepDurations.put(PERCEPTS,elapsed);
 			}
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
@@ -364,7 +367,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
 				print("<<<< Exiting updateMode: duration="+elapsed+" ms result="+getModeHandler().mode);
-				stepDurations.put(AiStep.MODE,elapsed);
+				stepDurations.put(MODE,elapsed);
 			}
 			
 			// mise à jour des valeurs d'utilité
@@ -373,7 +376,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
 				print("<<<< Exiting updateUtility: duration="+elapsed+" ms");
-				stepDurations.put(AiStep.UTILITY,elapsed);
+				stepDurations.put(UTILITY,elapsed);
 			}
 		}
 		
@@ -385,7 +388,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
 			print("<<<< Exiting considerBombing: duration="+elapsed+" ms result="+cb);
-			stepDurations.put(AiStep.BOMB,elapsed);
+			stepDurations.put(BOMB,elapsed);
 			
 			// on essaie de poser une bombe
 			if(cb)
@@ -400,7 +403,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 				after = System.currentTimeMillis();
 				elapsed = after - before;
 				print("<<<< Exiting considerMoving: duration="+elapsed+" ms result="+direction);
-				stepDurations.put(AiStep.MOVE,elapsed);
+				stepDurations.put(MOVE,elapsed);
 				
 				// si pas de direction : on suppose que c'est NONE
 				if(direction==null)	
@@ -420,7 +423,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
 			print("<<<< Exiting updateOutput: duration="+elapsed+" ms");
-			stepDurations.put(AiStep.OUTPUT,elapsed);
+			stepDurations.put(OUTPUT,elapsed);
 		}
 		
 		// on renvoie l'action sélectionnée
@@ -434,22 +437,24 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Étape de mise à jour des percepts */
+	private final String PERCEPTS = "Percepts";
+	/** Étape de mise à jour des percepts */
+	private final String MODE = "Percepts";
+	/** Étape de mise à jour des percepts */
+	private final String UTILITY = "Percepts";
+	/** Étape de mise à jour des percepts */
+	private final String BOMB = "Percepts";
+	/** Étape de mise à jour des percepts */
+	private final String MOVE = "Percepts";
+	/** Étape de mise à jour des percepts */
+	private final String OUTPUT = "Percepts";
 	/** Les différentes étapes du traitement */
-	public enum AiStep
-	{	PERCEPTS,MODE,UTILITY,BOMB,MOVE,OUTPUT;
-	
-		@Override
-		public String toString()
-		{	String result = this.name();
-			String initial = result.substring(0,1);
-			result = initial + result.substring(1).toLowerCase();
-			return result;
-		}
-	};
+	protected final List<String> stepNames = new ArrayList<String>(Arrays.asList(PERCEPTS,MODE,UTILITY,BOMB,MOVE,OUTPUT));
 	/** Temps réel total utilisé lors du dernier appel (en ms) */ 
 	private long totalDuration;
 	/** Temps réel de chaque étape (en ms) */
-	private final HashMap<AiStep,Long> stepDurations = new HashMap<AiStep, Long>();
+	private final HashMap<String,Long> stepDurations = new HashMap<String,Long>();
 	
 	/**
 	 * Réinitialise tous les temps réels
@@ -458,7 +463,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	private final void resetDurations()
 	{	totalDuration = 0;
 		stepDurations.clear();
-		for(AiStep step: AiStep.values())
+		for(String step: stepNames)
 			stepDurations.put(step,0l);
 	}
 	
@@ -470,7 +475,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @return
 	 * 		Temps réel total en ms.
 	 */
-	public final long getTotalTime()
+	public final long getTotalDuration()
 	{	return totalDuration;
 	}
 
@@ -484,7 +489,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @return
 	 * 		Temps réel de chaque étape, en ms.
 	 */
-	public final HashMap<AiStep, Long> getStepTimes()
+	public final HashMap<String,Long> getStepDurations()
 	{	return stepDurations;
 	}
 
