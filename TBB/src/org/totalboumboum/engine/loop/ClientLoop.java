@@ -55,6 +55,8 @@ import org.totalboumboum.engine.loop.display.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.DisplayAisPause;
 import org.totalboumboum.engine.loop.display.DisplayAisTexts;
+import org.totalboumboum.engine.loop.display.DisplayCancel;
+import org.totalboumboum.engine.loop.display.DisplaySpeedChange;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
 import org.totalboumboum.engine.loop.display.DisplayGrid;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
@@ -431,6 +433,9 @@ System.out.println(hero+" "+hero.getId());
 		// speed
 		display = new DisplaySpeed();
 		displayManager.addDisplay(display);
+		// change speed
+		display = new DisplaySpeedChange();
+		displayManager.addDisplay(display);
 		
 		// time
 		display = new DisplayTime(this);
@@ -438,6 +443,10 @@ System.out.println(hero+" "+hero.getId());
 		
 		// FPS
 		display = new DisplayFPS(this);
+		displayManager.addDisplay(display);
+		
+		// cancel
+		display = new DisplayCancel();
 		displayManager.addDisplay(display);
 	}
 
@@ -505,16 +514,15 @@ System.out.println(hero+" "+hero.getId());
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	String name = event.getName();
+	{	super.processEvent(event);
+		
+		String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
 			switchAiPause(index);
-		}
-		else
-		{	super.processEvent(event);
 		}
 	}
 }

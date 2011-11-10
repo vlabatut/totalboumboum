@@ -71,6 +71,8 @@ import org.totalboumboum.engine.loop.display.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.DisplayAisPause;
 import org.totalboumboum.engine.loop.display.DisplayAisTexts;
+import org.totalboumboum.engine.loop.display.DisplayCancel;
+import org.totalboumboum.engine.loop.display.DisplaySpeedChange;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
 import org.totalboumboum.engine.loop.display.DisplayGrid;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
@@ -431,6 +433,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		// speed
 		display = new DisplaySpeed();
 		displayManager.addDisplay(display);
+		// change speed
+		display = new DisplaySpeedChange();
+		displayManager.addDisplay(display);
 		
 		// time
 		display = new DisplayTime(this);
@@ -438,6 +443,10 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		
 		// FPS
 		display = new DisplayFPS(this);
+		displayManager.addDisplay(display);
+		
+		// cancel
+		display = new DisplayCancel();
 		displayManager.addDisplay(display);
 	}
 	
