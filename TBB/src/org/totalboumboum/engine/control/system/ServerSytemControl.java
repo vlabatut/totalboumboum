@@ -120,9 +120,23 @@ public class ServerSytemControl extends SystemControl
 				loop.processEvent(controlEvent);
 			}
 			
-			// debug: CPU usage
+			// debug: CPU effective usage
 			else if(keyCode == KeyEvent.VK_F8)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_USAGE);
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_EFFECTIVE_USAGE,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_EFFECTIVE_USAGE,SystemControlEvent.REGULAR);
+				loop.processEvent(controlEvent);
+			}
+
+			// debug: real-time usage
+			else if(keyCode == KeyEvent.VK_F9)
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 		}

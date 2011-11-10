@@ -221,6 +221,12 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	{	// inutile ici
 	}
 	
+	@Override
+	public void updateDurations()
+	{	ArtificialIntelligence ai = (ArtificialIntelligence)getAi();
+		totalDuration = ai.totalDuration;
+	}
+
     /////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -276,5 +282,4 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 			}
 		}
 	}
-
 }

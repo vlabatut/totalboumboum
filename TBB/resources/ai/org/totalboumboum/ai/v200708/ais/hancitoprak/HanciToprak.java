@@ -55,8 +55,9 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * la methode Contrôle le mouvement du personnage pour chaque itération 
 	*/
 
-	public Integer call() throws Exception {
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	@Override
+	public Integer process() throws Exception
+	{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)
 			firstTime = false;

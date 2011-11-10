@@ -28,7 +28,8 @@ public class KilicPala extends ArtificialIntelligence
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
-	public synchronized Integer call() throws Exception
+	@Override
+	public synchronized Integer process() throws Exception
 	{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		
 	if(firstTime)

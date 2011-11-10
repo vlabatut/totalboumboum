@@ -10,13 +10,13 @@ import java.util.List;
  * @author Emine Canan Toprak
  *
  */
-public class HanciTprkSortedList {
+public class HanciToprakSortedList {
 	/** The list of elements */
 	@SuppressWarnings("rawtypes")
 	private List list = new ArrayList();
 	
 	@SuppressWarnings("rawtypes")
-	public HanciTprkSortedList() {
+	public HanciToprakSortedList() {
 		super();
 		this.list = new ArrayList();
 	}

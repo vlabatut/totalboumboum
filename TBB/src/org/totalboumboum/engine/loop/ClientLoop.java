@@ -65,7 +65,7 @@ import org.totalboumboum.engine.loop.display.DisplaySpeed;
 import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
-import org.totalboumboum.engine.loop.display.DisplayUsage;
+import org.totalboumboum.engine.loop.display.DisplayEffectiveUsage;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
@@ -423,7 +423,7 @@ System.out.println(hero+" "+hero.getId());
 		display = new DisplayAisPause(this);
 		displayManager.addDisplay(display);
 		// AIs CPU usage
-		display = new DisplayUsage(this);
+		display = new DisplayEffectiveUsage(this);
 		displayManager.addDisplay(display);
 		
 		// players names

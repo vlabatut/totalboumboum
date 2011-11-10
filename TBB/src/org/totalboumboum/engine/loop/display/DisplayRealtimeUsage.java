@@ -31,41 +31,47 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.totalboumboum.ai.AiAbstractManager;
+import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.AiPlayer;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class DisplayUsage implements Display
+public class DisplayRealtimeUsage implements Display
 {
-	public DisplayUsage(VisibleLoop loop)
+	public DisplayRealtimeUsage(VisibleLoop loop)
 	{	this.loop = loop;
+		this.players = loop.getPlayers();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private VisibleLoop loop;
+	private List<AbstractPlayer> players;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int show = 0;
+	private boolean show = false;
 	private boolean mode = true;
 	
 	@Override
 	public synchronized void switchShow(SystemControlEvent event)
 	{	if(event.getIndex()==SystemControlEvent.REGULAR)
-			show = (show+1)%4;
+			show = !show;
 		else
 			mode = !mode;
 	}
 	
-	private synchronized int getShow()
+	private synchronized boolean getShow()
 	{	return show;
 	}
 
@@ -79,33 +85,26 @@ public class DisplayUsage implements Display
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
-		int s = getShow();
-		switch(s)
-		{	case 0:
-				message = "Hide all usages";
-				break;
-			case 1: 
-				message = "Display overall usage";
-				break;
-			case 2: 
-				message = "Display engine-only usage";
-				break;
-			case 3:
-				message = "Display AIs-only usage";
-				break;
-		}
-		boolean m = getMode();
-		if(m)
-			message = message + " in percents";
+		boolean s = getShow();
+		if(s)
+			message = "Display real-time AIs usage";
 		else
-			message = message + " in ms";
+			message = "Hide real time usage";
+
+		if(!s)
+		{	boolean m = getMode();
+			if(m)
+				message = message + " in percents";
+			else
+				message = message + " in ms";
+		}
 		return message;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_USAGE));
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE));
 	
 	@Override
 	public List<String> getEventNames()
@@ -117,10 +116,22 @@ public class DisplayUsage implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	int s = getShow();
+	{	boolean s = getShow();
 		
-		if(s>0)
+		if(s)
 		{	boolean m = getMode();
+			for(int i=0;i<players.size();i++)
+			{	AbstractPlayer player = players.get(i);
+				if(player instanceof AiPlayer)
+				{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
+					
+					
+					
+				}
+			}
+		
+		
+			
 			// retrieve CPU usage
 			double[] values0;
 			if(m)
