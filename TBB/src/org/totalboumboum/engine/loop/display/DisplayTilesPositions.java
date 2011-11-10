@@ -26,6 +26,9 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -96,10 +99,11 @@ public class DisplayTilesPositions implements Display
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS));
+	
 	@Override
-	public String getEventName()
-	{	return SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS;
-		
+	public List<String> getEventNames()
+	{	return eventNames;
 	}
 
 	/////////////////////////////////////////////////////////////////

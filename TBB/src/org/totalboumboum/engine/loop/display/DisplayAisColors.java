@@ -26,6 +26,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
@@ -76,11 +77,15 @@ public class DisplayAisColors implements Display
 				
 				// message
 				if(temp)
-					message = messageDisplay + (index+1);
+					message = MESSAGE_DISPLAY + (index+1);
 				else
-					message = messageHide + (index+1);
+					message = MESSAGE_HIDE + (index+1);
 			}
+			else
+				message = null;
 		}
+		else
+			message = null;
 	}
 	
 	private synchronized boolean getShow(int index)
@@ -90,8 +95,8 @@ public class DisplayAisColors implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final String messageDisplay = "Display colored tiles for player #";
-	private final String messageHide = "Hide colored tiles for player #";
+	private final String MESSAGE_DISPLAY = "Display colored tiles for player #";
+	private final String MESSAGE_HIDE = "Hide colored tiles for player #";
 	private String message = null;
 	
 	@Override
@@ -102,9 +107,11 @@ public class DisplayAisColors implements Display
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_AIS_COLORS));
+	
 	@Override
-	public String getEventName()
-	{	return SystemControlEvent.SWITCH_DISPLAY_AIS_COLORS;
+	public List<String> getEventNames()
+	{	return eventNames;
 	}
 
 	/////////////////////////////////////////////////////////////////

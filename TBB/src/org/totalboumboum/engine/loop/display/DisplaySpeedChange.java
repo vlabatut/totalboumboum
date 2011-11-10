@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
@@ -38,23 +38,29 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
  * @author Vincent Labatut
  *
  */
-public class DisplayWaitMessage implements Display
+public class DisplaySpeedChange implements Display
 {
-	public DisplayWaitMessage(VisibleLoop loop)
-	{	this.loop = loop;
+	public DisplaySpeedChange()
+	{	
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** total display time */
+	private final long MESSAGE_DURATION = 1000;
+	/** remaining display time */
+	private long messageTime = 0;
+	
 	@Override
-	public void switchShow(SystemControlEvent event)
-	{	// useless here
+	public synchronized void switchShow(SystemControlEvent event)
+	{	messageTime = System.currentTimeMillis();
+	}
+
+	private synchronized long getElapsedTime()
+	{	long currentTime = System.currentTimeMillis();
+		long result = currentTime - messageTime;
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -62,13 +68,18 @@ public class DisplayWaitMessage implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String getMessage(SystemControlEvent event)
-	{	return null;
+	{	String message;
+		if(event.getName().equals(SystemControlEvent.REQUIRE_SPEED_UP))
+			message = "Increase game speed";
+		else //if(event.getName().equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
+			message = "Decrease game speed";
+		return message;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_ENGINE_PAUSE));
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.REQUIRE_SPEED_UP,SystemControlEvent.REQUIRE_SLOW_DOWN));
 	
 	@Override
 	public List<String> getEventNames()
@@ -80,17 +91,21 @@ public class DisplayWaitMessage implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(loop.getEnginePause())
+	{	long elapsedTime = getElapsedTime();
+		if(elapsedTime<MESSAGE_DURATION)
 		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Waiting for other players";
+			String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.setColor(Color.GRAY);
+			int y = (int)Math.round(10+box.getHeight()/2);
+			int alpha = Math.round((1-elapsedTime/(float)MESSAGE_DURATION)*255);
+			Color background = new Color(0,0,0,alpha);
+			g.setColor(background);
 			g.drawString(text,x+1,y+1);
-			g.setColor(Color.RED);
+			Color foreground = new Color(255,200,0,alpha);
+			g.setColor(foreground);
 			g.drawString(text,x,y);
 		}
 	}

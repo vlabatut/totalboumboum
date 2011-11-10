@@ -21,11 +21,7 @@ package org.totalboumboum.engine.loop.display;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,9 +34,9 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
  * @author Vincent Labatut
  *
  */
-public class DisplayWaitMessage implements Display
+public class DisplayEngineStep implements Display
 {
-	public DisplayWaitMessage(VisibleLoop loop)
+	public DisplayEngineStep(VisibleLoop loop)
 	{	this.loop = loop;
 	}
 	
@@ -53,8 +49,8 @@ public class DisplayWaitMessage implements Display
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void switchShow(SystemControlEvent event)
-	{	// useless here
+	public synchronized void switchShow(SystemControlEvent event)
+	{	//
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -62,13 +58,16 @@ public class DisplayWaitMessage implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String getMessage(SystemControlEvent event)
-	{	return null;
+	{	String message = null;
+		if(loop.getEnginePause())
+			message = "Execute one engine iteration";
+		return message;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_ENGINE_PAUSE));
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.REQUIRE_ENGINE_STEP));
 	
 	@Override
 	public List<String> getEventNames()
@@ -80,18 +79,6 @@ public class DisplayWaitMessage implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(loop.getEnginePause())
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Waiting for other players";
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.setColor(Color.GRAY);
-			g.drawString(text,x+1,y+1);
-			g.setColor(Color.RED);
-			g.drawString(text,x,y);
-		}
+	{	// nothing to display
 	}
 }

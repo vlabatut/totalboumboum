@@ -27,6 +27,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
@@ -78,9 +81,11 @@ public class DisplayFPS implements Display
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_FPS));
+	
 	@Override
-	public String getEventName()
-	{	return SystemControlEvent.SWITCH_DISPLAY_FPS;
+	public List<String> getEventNames()
+	{	return eventNames;
 	}
 
 	/////////////////////////////////////////////////////////////////

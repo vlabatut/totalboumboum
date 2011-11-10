@@ -27,6 +27,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
@@ -75,11 +76,15 @@ public class DisplayAisTexts implements Display
 				
 				// message
 				if(temp)
-					message = messageDisplay + (index+1);
+					message = MESSAGE_DISPLAY + (index+1);
 				else
-					message = messageHide + (index+1);
+					message = MESSAGE_HIDE + (index+1);
 			}
+			else
+				message = null;
 		}
+		else
+			message = null;
 	}
 	
 	private synchronized boolean getShow(int index)
@@ -89,8 +94,8 @@ public class DisplayAisTexts implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final String messageDisplay = "Display texts for player #";
-	private final String messageHide = "Hide texts for player #";
+	private final String MESSAGE_DISPLAY = "Display texts for player #";
+	private final String MESSAGE_HIDE = "Hide texts for player #";
 	private String message = null;
 	
 	@Override
@@ -101,9 +106,11 @@ public class DisplayAisTexts implements Display
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_AIS_TEXTS));
+	
 	@Override
-	public String getEventName()
-	{	return SystemControlEvent.SWITCH_DISPLAY_AIS_TEXTS;
+	public List<String> getEventNames()
+	{	return eventNames;
 	}
 
 	/////////////////////////////////////////////////////////////////

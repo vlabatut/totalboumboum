@@ -61,7 +61,7 @@ public class DisplayFeedbackMessage
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final long messageDuration = 10000;
+	private final long MESSAGE_DURATION = 10000;
 	
 	public void draw(Graphics g)
 	{	// init
@@ -78,7 +78,7 @@ public class DisplayFeedbackMessage
 			String message = messages.get(index);
 			long time = times.get(index);
 			long elapsedTime = currentTime - time;
-			if(elapsedTime>=messageDuration)
+			if(elapsedTime>=MESSAGE_DURATION)
 			{	messages.remove(index);
 				times.remove(index);
 			}
@@ -87,7 +87,7 @@ public class DisplayFeedbackMessage
 				Rectangle2D box = metrics.getStringBounds(message,g);
 				int x = (int)Math.round(dim.getWidth()-box.getWidth()-10);
 				int y = (int)Math.round(dim.getHeight()-box.getHeight()-line*20);
-				int alpha = Math.round((1-elapsedTime/(float)messageDuration)*255);
+				int alpha = Math.round((1-elapsedTime/(float)MESSAGE_DURATION)*255);
 				Color background = new Color(0,0,0,alpha);
 				g.setColor(background);
 				g.drawString(message,x+1,y+1);

@@ -23,6 +23,9 @@ package org.totalboumboum.engine.loop.display;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -57,7 +60,7 @@ public class DisplayGrid implements Display
 	
 	@Override
 	public synchronized void switchShow(SystemControlEvent event)
-	{	show = !show;		
+	{	show = !show;
 	}
 	
 	private synchronized boolean getShow()
@@ -80,9 +83,11 @@ public class DisplayGrid implements Display
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_GRID));
+	
 	@Override
-	public String getEventName()
-	{	return SystemControlEvent.SWITCH_DISPLAY_GRID;
+	public List<String> getEventNames()
+	{	return eventNames;
 	}
 
 	/////////////////////////////////////////////////////////////////
