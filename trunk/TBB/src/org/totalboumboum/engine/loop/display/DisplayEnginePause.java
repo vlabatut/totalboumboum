@@ -26,6 +26,9 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
@@ -38,20 +41,21 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 public class DisplayEnginePause implements Display
 {
 	public DisplayEnginePause(VisibleLoop loop)
-	{	this.loop = loop;
+	{	//this.loop = loop;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean show = false;
+
 	@Override
 	public void switchShow(SystemControlEvent event)
-	{	// useless here
+	{	show = !show;
+	}
+	
+	private synchronized boolean getShow()
+	{	return show;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -59,15 +63,22 @@ public class DisplayEnginePause implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String getMessage(SystemControlEvent event)
-	{	return null;
+	{	String message = null;
+		if(getShow())
+			message = "Pause engine";
+		else
+			message = "Unpause engine";
+		return message;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_ENGINE_PAUSE));
+	
 	@Override
-	public String getEventName()
-	{	return SystemControlEvent.SWITCH_ENGINE_PAUSE;
+	public List<String> getEventNames()
+	{	return eventNames;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -75,7 +86,7 @@ public class DisplayEnginePause implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(loop.getEnginePause())
+	{	if(getShow())
 		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);

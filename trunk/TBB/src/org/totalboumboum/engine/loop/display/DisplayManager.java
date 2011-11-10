@@ -39,10 +39,12 @@ public class DisplayManager
 	// EVENT 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void provessEvent(SystemControlEvent event)
-	{	Display d = displaysMap.get(event.getName());
-		if(d!=null)
-		{	d.switchShow(event);
-			feedback.processEvent(event,d);
+	{	List<Display> displays = displaysMap.get(event.getName());
+		if(displays!=null)
+		{	for(Display display: displays)
+			{	display.switchShow(event);
+				feedback.processEvent(event,display);
+			}
 		}
 	}
 
@@ -50,17 +52,38 @@ public class DisplayManager
 	// DISPLAYS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private List<Display> displaysList = new ArrayList<Display>();
-	private HashMap<String,Display> displaysMap = new HashMap<String, Display>();
+	private HashMap<String,List<Display>> displaysMap = new HashMap<String,List<Display>>();
 	private DisplayFeedbackMessage feedback = new DisplayFeedbackMessage();
 	
-	public void addDisplay(Display d)
-	{	displaysList.add(d);
-		displaysMap.put(d.getEventName(),d);
+	public void addDisplay(Display display)
+	{	// list
+		displaysList.add(display);
+		
+		// map
+		List<String> events = display.getEventNames();
+		for(String event: events)
+		{	List<Display> displays = displaysMap.get(event);
+			if(displays==null)
+				displays = new ArrayList<Display>();
+			displays.add(display);
+			displaysMap.put(event,displays);
+		}
 	}
 	
-	public void removeDisplay(Display d)
-	{	displaysList.remove(d);
-		displaysMap.remove(d);
+	public void removeDisplay(Display display)
+	{	// list
+		displaysList.remove(display);
+		
+		// map
+		List<String> events = display.getEventNames();
+		for(String event: events)
+		{	List<Display> displays = displaysMap.get(event);
+			displays.remove(display);
+			if(displays.isEmpty())
+				displaysMap.remove(event);
+			else
+				displaysMap.put(event,displays);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////

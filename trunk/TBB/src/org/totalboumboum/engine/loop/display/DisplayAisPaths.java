@@ -28,6 +28,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
@@ -80,11 +81,15 @@ public class DisplayAisPaths implements Display
 				
 				// message
 				if(temp)
-					message = messageDisplay + (index+1);
+					message = MESSAGE_DISPLAY + (index+1);
 				else
-					message = messageHide + (index+1);
+					message = MESSAGE_HIDE + (index+1);
 			}
+			else
+				message = null;
 		}
+		else
+			message = null;
 	}
 	
 	private synchronized boolean getShow(int index)
@@ -94,8 +99,8 @@ public class DisplayAisPaths implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final String messageDisplay = "Display paths for player #";
-	private final String messageHide = "Hide paths for player #";
+	private final String MESSAGE_DISPLAY = "Display paths for player #";
+	private final String MESSAGE_HIDE = "Hide paths for player #";
 	private String message = null;
 	
 	@Override
@@ -106,11 +111,13 @@ public class DisplayAisPaths implements Display
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_AIS_PATHS));
+	
 	@Override
-	public String getEventName()
-	{	return SystemControlEvent.SWITCH_DISPLAY_AIS_PATHS;
+	public List<String> getEventNames()
+	{	return eventNames;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

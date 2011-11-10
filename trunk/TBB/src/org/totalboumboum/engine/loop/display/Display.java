@@ -22,6 +22,7 @@ package org.totalboumboum.engine.loop.display;
  */
 
 import java.awt.Graphics;
+import java.util.List;
 
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
@@ -50,5 +51,5 @@ public interface Display
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public String getEventName();
+	public List<String> getEventNames();
 }
