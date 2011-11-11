@@ -56,6 +56,7 @@ import org.totalboumboum.engine.loop.display.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.DisplayAisPause;
 import org.totalboumboum.engine.loop.display.DisplayAisTexts;
 import org.totalboumboum.engine.loop.display.DisplayCancel;
+import org.totalboumboum.engine.loop.display.DisplayRealtimeUsage;
 import org.totalboumboum.engine.loop.display.DisplaySpeedChange;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
 import org.totalboumboum.engine.loop.display.DisplayGrid;
@@ -422,8 +423,11 @@ System.out.println(hero+" "+hero.getId());
 		// AIs pauses
 		display = new DisplayAisPause(this);
 		displayManager.addDisplay(display);
-		// AIs CPU usage
+		// AIs effective usage
 		display = new DisplayEffectiveUsage(this);
+		displayManager.addDisplay(display);
+		// AIs real-time usage
+		display = new DisplayRealtimeUsage(this);
 		displayManager.addDisplay(display);
 		
 		// players names
