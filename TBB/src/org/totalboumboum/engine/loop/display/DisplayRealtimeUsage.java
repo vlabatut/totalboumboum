@@ -29,15 +29,16 @@ import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 
@@ -47,14 +48,12 @@ import org.totalboumboum.engine.player.AiPlayer;
 public class DisplayRealtimeUsage implements Display
 {
 	public DisplayRealtimeUsage(VisibleLoop loop)
-	{	this.loop = loop;
-		this.players = loop.getPlayers();
+	{	this.players = loop.getPlayers();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private VisibleLoop loop;
 	private List<AbstractPlayer> players;
 	
 	/////////////////////////////////////////////////////////////////
@@ -87,17 +86,14 @@ public class DisplayRealtimeUsage implements Display
 	{	String message = null;
 		boolean s = getShow();
 		if(s)
-			message = "Display real-time AIs usage";
-		else
-			message = "Hide real time usage";
-
-		if(!s)
 		{	boolean m = getMode();
 			if(m)
-				message = message + " in percents";
+				message = "Display averaged real-time AIs usage";
 			else
-				message = message + " in ms";
+				message = "Display instant real-time AIs usage";
 		}
+		else
+			message = "Hide all real-time usage";
 		return message;
 	}
 	
@@ -120,198 +116,121 @@ public class DisplayRealtimeUsage implements Display
 		
 		if(s)
 		{	boolean m = getMode();
+			NumberFormat nf = NumberFormat.getIntegerInstance();
+			nf.setMinimumIntegerDigits(6);
+			if(m)
+			{	nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(2);
+			}
+			String unit = " ms";
+					
+			Font bigFont = new Font("Dialog", Font.PLAIN, 18);
+			FontMetrics bigMetrics = g.getFontMetrics(bigFont);
+			Font smallFont = new Font("Dialog", Font.PLAIN, 14);
+			FontMetrics smallMetrics = g.getFontMetrics(smallFont);
+			Rectangle2D box = smallMetrics.getStringBounds(nf.format(0)+unit,g);
+			int maxDurationWidth = (int)box.getWidth();
+			int x = 350;
+			int y = 90;
+			
 			for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
 				if(player instanceof AiPlayer)
 				{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
-					
-					
-					
-				}
-			}
-		
-		
-			
-			// retrieve CPU usage
-			double[] values0;
-			if(m)
-				values0 = loop.getAverageCpuProportions();
-			else
-				values0 = loop.getAverageCpu();
-			
-			// init text
-			String text = null;
-			switch(s)
-			{	case 1: 
-					text = "All";
-					break;
-				case 2:
-					text = "Engine";
-					break;
-				case 3:
-					text = "AIs";
-					break;
-			}
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			FontMetrics metrics = g.getFontMetrics(font);
-			Rectangle2D box = metrics.getStringBounds(text,g);
-			int boxHeight = (int)box.getHeight();
-			int margin = boxHeight/8;
-			
-			// possibly renormalize
-			double[] values = new double[values0.length];
-			switch(s)
-			{	case 1: 
-					{	if(m)
-							values = values0;
-						else
-						{	double total = 0;
-							for(int i=0;i<values0.length;i++)
-								total = total + values0[i];
-							for(int i=0;i<values0.length;i++)
-								values[i] = values0[i]/total;
-						}
-					}
-					break;
-				case 2:
-					{	double total = values0[0] + values0[1];
-						values[0] = values0[0]/total;
-						values[1] = values0[1]/total;
-						for(int i=2;i<values0.length;i++)
-							values[i] = 0;
-					}
-					break;
-				case 3:
-					{	double total = 0;
-						for(int i=2;i<values0.length;i++)
-							total = total + values0[i];
-						values[0] = 0;
-						values[1] = 0;
-						for(int i=2;i<values0.length;i++)
-							values[i] = values0[i]/total;
-					}
-					break;
-			}
-			
-			// init dimensions
-			int height = boxHeight+2*margin;
-			int width = 200;
-	        int y = 100;
-	        int x = 10;
-	        
-			// init colors
-			List<Color> colors = new ArrayList<Color>();
-			switch(s)
-			{	case 1: 
-					{	Color clr = new Color(0,0,0,50);
-						colors.add(clr);
-						colors.add(clr);
-					}
-					break;
-				case 2:
-					{	colors.add(Color.GRAY);
-						colors.add(Color.MAGENTA);
-					}
-					break;
-				case 3:
-					{	Color clr = new Color(0,0,0,50);
-						colors.add(clr);
-						colors.add(clr);
-					}
-					break;
-			}
-			List<AbstractPlayer> players = loop.getPlayers();
-			for(AbstractPlayer player: players)
-				colors.add(player.getColor().getColor());
-			
-			// process the diagram dims
-			int widths[] = new int[values0.length];
-			int usedWidth = 0;
-			for(int i=1;i<values.length;i++)
-			{	widths[i] = (int)(width*values[i]);
-				usedWidth = usedWidth + widths[i];
-			}
-	        widths[0] = width - usedWidth;
-	        
-	        // draw the diagram
-			g.setColor(new Color(0,0,0,50));
-			g.fillRect(x,y-boxHeight/2,width,height);
-			g.setColor(Color.BLACK);
-			g.drawRect(x+1,y-boxHeight/2+1,width,height);
-			int offset = 0;
-			for(int i=0;i<colors.size();i++)
-			{	int w = widths[i];
-				Color color = colors.get(i);
-				g.setColor(color);
-				g.fillRect(x+offset,y-boxHeight/2,w,height);
-				offset = offset + w;
-			}
-			g.setColor(Color.WHITE);
-			g.drawRect(x,y-boxHeight/2,width,height);
-			
-			// add the main text
-			g.setColor(new Color(255,255,255,50));
-			g.setFont(font);
-			int yText = (int)Math.round(y+boxHeight/2-margin);
-			int xText = x+2*margin;
-			g.drawString(text,xText,yText);
-			
-			// put the details
-			//if(getMode())
-			{	NumberFormat nf;
-				String unit;
-				if(m)
-				{	nf = NumberFormat.getPercentInstance();
-					nf.setMinimumIntegerDigits(2);
-					nf.setMinimumFractionDigits(4);
-					nf.setMaximumFractionDigits(4);
-					unit = "";
-				}
-				else
-				{	nf = NumberFormat.getIntegerInstance();
-					nf.setMinimumIntegerDigits(6);
-					values = values0;
-					unit = " ms ";
-				}
-				List<AbstractPlayer> plrs = loop.getPlayers();
+					List<String> stepNames = new ArrayList<String>(aiMgr.getStepNames());
 				
-				offset = 0;
-				y = y + height;
-				for(int i=0;i<colors.size();i++)
-				{	if((i<=1 && (s==1 || s==2))
-						|| (i>=2 && (s==1 || s==3)))
-					{	// init text
-						switch(i)
-						{	case 0:
-								text = "Swing"; 
-								break;
-							case 1:
-								text = "Engine";
-								break;
-							default:
-								text = plrs.get(i-2).getName();
-						
+					// draw background
+					{	int xBg = x - maxDurationWidth - 5;
+						int yBg = y - 5;
+						int width = maxDurationWidth + 5 + 300;
+						int height = 26 + (stepNames.size()+1)*16;
+						g.setColor(new Color(255,255,255,100));
+						g.fillRect(xBg,yBg,width,height);
+					}					
+					
+					// draw the player's name
+					{	g.setFont(bigFont);
+						String text = "["+player.getName()+"]";
+						box = bigMetrics.getStringBounds(text,g);
+						int offset = (int)Math.round(box.getHeight()/2);
+						y = y + offset;
+						g.setColor(Color.black);	
+						g.drawString(text,x+1,y+1);
+						PredefinedColor color = player.getColor();
+						g.setColor(color.getColor());
+						g.drawString(text,x,y);
+						y = y + offset + 3;
+					}					
+					
+					// get the durations
+					HashMap<String,Color> stepColors = aiMgr.getStepColors();
+					stepNames.add(0,aiMgr.TOTAL_DURATION);
+					HashMap<String,LinkedList<Long>> instantDurations = aiMgr.getInstantDurations();
+					HashMap<String,Float> averageDurations = aiMgr.getAverageDurations();
+					
+					// draw the durations
+					g.setFont(smallFont);
+					for(String stepName: stepNames)
+					{	// get text
+						String durationStr;
+						Long duration = null;
+						if(m)
+						{	Float averageDuration = averageDurations.get(stepName);
+							if(averageDuration==null)
+								averageDuration = 0f;
+							duration = (long)(averageDuration*1);
+							durationStr = nf.format(averageDuration)+unit;
 						}
-						text = nf.format(values[i])+unit+" ["+text+"]";
-						// process size and location
-						box = metrics.getStringBounds(text,g);
-						boxHeight = (int)box.getHeight();
-						int boxWidth = (int)box.getWidth();
-						// draw background
-						int rectMargin = 0;
-						int rectHeight = boxHeight + 2*rectMargin;
-						int rectWidth = boxWidth + 2*rectMargin;
-						g.setColor(new Color(255,255,255,50));
-						g.fillRect(x-5,y-rectHeight/2,rectWidth,rectHeight);
-						// draw text
-						yText = (int)Math.round(y+boxHeight/2-metrics.getDescent());
-						g.setColor(new Color(0,0,0,150));
-						g.drawString(text,x+1,yText+1);
-						g.setColor(colors.get(i));
-						g.drawString(text,x,yText);
-						// increase offset
-						y = y + boxHeight;
+						else
+						{	LinkedList<Long> list = instantDurations.get(stepName);
+							if(!list.isEmpty())
+								duration = list.getLast();
+							if(duration==null)
+								duration = 0l;
+							durationStr = nf.format(duration)+unit;
+						}
+						
+						// draw rectangle
+						box = smallMetrics.getStringBounds(stepName,g);
+						int height = (int)box.getHeight();
+						int width = (int)(duration*1);
+//						int width = 100;
+						Color color = stepColors.get(stepName);
+						g.setColor(color);
+						g.fillRect(x,y-height/2,width,height);
+						
+						// draw inside text
+						int colorTotal = color.getRed()+color.getGreen()+color.getBlue();
+						Color background;
+						if(colorTotal>3*128)
+						{	color = new Color(0,0,0,200);
+							background = new Color(255,255,255,200);
+						}
+						else
+						{	color = new Color(255,255,255,200);
+							background = new Color(0,0,0,200);
+						}
+						int yText = y + height/3;
+						int xText = x + 2;
+						g.setColor(background);
+						g.drawString(stepName,xText+1,yText+1);
+						g.setColor(color);
+						g.drawString(stepName,xText,yText);
+
+						// draw duration text
+						box = smallMetrics.getStringBounds(durationStr,g);
+						width = (int)box.getWidth();
+						background = new Color(255,255,255,200);
+						color = new Color(0,0,0,200);
+						xText = x - 2 - width;
+						g.setColor(background);
+						g.drawString(durationStr,xText+1,yText+1);
+						g.setColor(color);
+						g.drawString(durationStr,xText,yText);
+						
+						y = y + height;
 					}
+					y = y + 5;
 				}
 			}
 		}
