@@ -29,7 +29,7 @@ public class KilicPala extends ArtificialIntelligence
 	private boolean firstTime = true;
 
 	@Override
-	public synchronized Integer process() throws Exception
+	public synchronized Integer processAction() throws Exception
 	{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		
 	if(firstTime)

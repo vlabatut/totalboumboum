@@ -141,7 +141,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 	private boolean firstTime = true;
 
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{
 
 		int action = AI_ACTION_DO_NOTHING;

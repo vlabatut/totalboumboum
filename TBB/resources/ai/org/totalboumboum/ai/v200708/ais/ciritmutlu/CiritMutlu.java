@@ -52,7 +52,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 *  La methode qui fait deplacer le joueur IA
 	 */
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{		
 		if(firstTime)
 			firstTime = false;

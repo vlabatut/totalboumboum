@@ -54,7 +54,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	private boolean firstTime = true;
 
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{		
 		//Les variables locaux
 		//----------------------------------------

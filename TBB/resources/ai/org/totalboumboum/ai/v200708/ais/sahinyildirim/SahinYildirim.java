@@ -54,7 +54,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	private boolean firstTime = true;
 
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{
 		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(firstTime)
