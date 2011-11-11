@@ -91,7 +91,7 @@ public class DisplayEnginePause implements Display
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			String text = "Engine paused";
-			Rectangle2D box = metrics.getStringBounds(text, g);
+			Rectangle2D box = metrics.getStringBounds(text,g);
 			int x = 10;
 			int y = (int)Math.round(70+box.getHeight()/2);
 			g.setColor(Color.BLACK);
