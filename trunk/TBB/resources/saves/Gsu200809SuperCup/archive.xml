@@ -2,7 +2,7 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Super-coupe de Galatasaray I" type="SINGLE" />
 	<played matches="0" rounds="0" />
-	<dates start="2011-02-16T22:17:03" save="2011-02-16T22:17:07" />
+	<dates start="2011-11-11T16:22:33" save="2011-11-11T16:22:56" />
 	<players>
 		<player name="0708.Bingöl+Ketenci" />
 		<player name="0708.Kılıç+Pala" />

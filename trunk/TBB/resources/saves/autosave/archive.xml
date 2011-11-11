@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Single classic tournament" type="SINGLE" />
+	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
 	<played matches="0" rounds="1" />
-	<dates start="2011-07-28T10:15:18" save="2011-07-28T10:17:06" />
+	<dates start="2011-11-11T16:38:24" save="2011-11-11T16:39:22" />
 	<players>
-		<player name="Promeneur" />
-		<player name="0809.Akkaya+Danacioğlu" />
+		<player name="1011.Kesimal+Varol" />
+		<player name="1011.Akbulut+Küpelioğlu" />
+		<player name="1011.Çalışkan+Seven" />
+		<player name="1011.Özdöker+Özen" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+		<player name="1011.Hacıbektaşoğlu+İlgar" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="1011.Büyüktopaç+Turak" />
 	</players>
 </archive>
 

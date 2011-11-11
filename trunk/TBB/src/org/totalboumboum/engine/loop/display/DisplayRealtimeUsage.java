@@ -130,7 +130,7 @@ public class DisplayRealtimeUsage implements Display
 			FontMetrics smallMetrics = g.getFontMetrics(smallFont);
 			Rectangle2D box = smallMetrics.getStringBounds(nf.format(0)+unit,g);
 			int maxDurationWidth = (int)box.getWidth();
-			int x = 350;
+			int x = 400;
 			int y = 90;
 			
 			for(int i=0;i<players.size();i++)
