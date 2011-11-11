@@ -2,7 +2,7 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
 	<played matches="0" rounds="0" />
-	<dates start="2011-02-16T22:16:06" save="2011-02-16T22:16:15" />
+	<dates start="2011-11-11T16:38:24" save="2011-11-11T16:38:37" />
 	<players>
 		<player name="1011.Kesimal+Varol" />
 		<player name="1011.Akbulut+Küpelioğlu" />
