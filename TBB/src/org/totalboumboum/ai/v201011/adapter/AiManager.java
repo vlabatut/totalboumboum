@@ -23,6 +23,8 @@ package org.totalboumboum.ai.v201011.adapter;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
@@ -93,6 +95,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	@Override
 	public void init(String instance, AiPlayer player)
 	{	super.init(instance,player);
+	
 		loop = RoundVariables.loop;
 		level = RoundVariables.level;
 		percepts = new AiDataZone(level,player);
@@ -222,14 +225,40 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void initStepNames()
-	{	// inutile ici
+	protected void initSteps()
+	{	// durations
+		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
+		HashMap<String,Float> averageDurations = getAverageDurations();
+		LinkedList<Long> list = new LinkedList<Long>();
+		for(int i=0;i<AVERAGE_SCOPE;i++)
+			list.add(0l);
+		instantDurations.put(TOTAL_DURATION,list);
+		averageDurations.put(TOTAL_DURATION,0f);
+		
+		// colors
+		HashMap<String,Color> stepColors = getStepColors();
+		stepColors.put(TOTAL_DURATION,Color.DARK_GRAY);
 	}
 	
 	@Override
 	public void updateDurations()
-	{	ArtificialIntelligence ai = (ArtificialIntelligence)getAi();
-		totalDuration = ai.totalDuration;
+	{	// init
+		ArtificialIntelligence ai = (ArtificialIntelligence)getAi();
+		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
+		HashMap<String,Float> averageDurations = getAverageDurations();
+		
+		// instant durations
+		LinkedList<Long> list = instantDurations.get(TOTAL_DURATION);
+		list.poll();
+		long duration = ai.totalDuration;
+		list.offer(duration);
+
+		// average durations
+		float average = 0;
+		for(long value: list)
+			average = average + value;
+		average = average / AVERAGE_SCOPE;
+		averageDurations.put(TOTAL_DURATION,average);
 	}
 
     /////////////////////////////////////////////////////////////////
