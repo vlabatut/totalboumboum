@@ -54,7 +54,7 @@ public class KecerYaman extends ArtificialIntelligence {
 	private boolean firstTime = true;
 
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{	action = AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)

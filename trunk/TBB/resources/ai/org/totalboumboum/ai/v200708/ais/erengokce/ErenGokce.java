@@ -44,7 +44,7 @@ public class ErenGokce extends ArtificialIntelligence {
 	private boolean firstTime = true;
 
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{	Integer result=AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)

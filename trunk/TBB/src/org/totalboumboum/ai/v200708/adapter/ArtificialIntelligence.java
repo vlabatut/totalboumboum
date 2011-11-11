@@ -124,7 +124,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	@Override
 	public Integer call() throws Exception
 	{	long before = System.currentTimeMillis();
-		int result = process();
+		int result = processAction();
 		long after = System.currentTimeMillis();
 		totalDuration = after - before;
 		return result;
@@ -136,7 +136,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * @return
 	 * 		Un code correspondant à l'action à effectuer.
 	 */
-	protected abstract Integer process() throws Exception;
+	protected abstract Integer processAction() throws Exception;
 	
 	/**
 	 * Renvoie le nom attribué à cette IA

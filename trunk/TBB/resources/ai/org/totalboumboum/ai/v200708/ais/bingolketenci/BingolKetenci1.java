@@ -137,7 +137,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	}
 
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{
 
 		int tab[][] = getZoneMatrix();

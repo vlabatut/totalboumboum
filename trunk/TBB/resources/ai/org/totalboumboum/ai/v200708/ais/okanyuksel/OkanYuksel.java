@@ -56,7 +56,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	private boolean firstTime = true;
 
 	@Override
-	public Integer process() throws Exception
+	public Integer processAction() throws Exception
 	{
 		if(firstTime)
 			firstTime = false;
