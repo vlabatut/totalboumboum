@@ -23,7 +23,10 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
@@ -97,7 +100,6 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setZone(percepts);
 		output = ai.getOutput();
-		initStepNames();
 	}
 
 	@Override
@@ -221,10 +223,37 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void initStepNames()
-	{	List<String> stepNames = getStepNames();
-		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+	protected void initSteps()
+	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		
+		// names
+		List<String> stepNames = getStepNames();
 		stepNames.addAll(ai.stepNames);
+		
+		// colors
+		HashMap<String,Color> stepColors = getStepColors();
+		List<Color> colorList = Arrays.asList(Color.BLUE,Color.CYAN,Color.GRAY,Color.GREEN,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.RED,Color.WHITE,Color.YELLOW);
+		Iterator<Color> it = colorList.iterator();
+		for(String stepName: stepNames)
+		{	if(!it.hasNext())
+				it = colorList.iterator();
+			Color color = it.next();;
+			stepColors.put(stepName,color);
+		}
+		stepColors.put(TOTAL_DURATION,Color.DARK_GRAY);
+
+		// durations
+		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
+		HashMap<String,Float> averageDurations = getAverageDurations();
+		List<String> stepNames2 = new ArrayList<String>(stepNames);
+		stepNames2.add(TOTAL_DURATION);
+		for(String stepName: stepNames2)
+		{	LinkedList<Long> list = new LinkedList<Long>();
+			for(int i=0;i<AVERAGE_SCOPE;i++)
+				list.add(0l);
+			instantDurations.put(stepName,list);
+			averageDurations.put(stepName,0f);
+		}
 	}
 	
 	@Override
@@ -233,18 +262,39 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	 * les temps destinés au moteur.
 	 */
 	public void updateDurations()
-	{	// steps
-		HashMap<String,Long> engineStepDurations = getStepDurations();
-		engineStepDurations.clear();
+	{	// init
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
-		HashMap<String,Long> agentStepDurations = ai.getStepDurations();
-		engineStepDurations.putAll(agentStepDurations);
+		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
+		HashMap<String,Float> averageDurations = getAverageDurations();
+		List<String> stepNames = new ArrayList<String>(getStepNames());
+		stepNames.add(0,TOTAL_DURATION);
+		HashMap<String,Long> agentDurations = ai.getStepDurations();
 		
-		// total
-		totalDuration = ai.getTotalDuration();
+		// update
+		averageDurations.clear();
+		for(String stepName: stepNames)
+		{	// instant durations
+			LinkedList<Long> list = instantDurations.get(stepName);
+			list.poll();
+			Long duration;
+			if(stepName.equals(TOTAL_DURATION))
+				duration = ai.getTotalDuration();
+			else
+			{	duration = agentDurations.get(stepName);
+				if(duration==null)
+					duration = 0l;
+			}
+			list.offer(duration);
+
+			// average durations
+			float average = 0;
+			for(long value: list)
+				average = average + value;
+			average = average / AVERAGE_SCOPE;
+			averageDurations.put(stepName,average);
+		}
 	}
 
-	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

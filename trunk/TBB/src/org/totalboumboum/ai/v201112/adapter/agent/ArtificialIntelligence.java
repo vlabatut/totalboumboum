@@ -440,15 +440,15 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/** Étape de mise à jour des percepts */
 	private final String PERCEPTS = "Percepts";
 	/** Étape de mise à jour des percepts */
-	private final String MODE = "Percepts";
+	private final String MODE = "Mode";
 	/** Étape de mise à jour des percepts */
-	private final String UTILITY = "Percepts";
+	private final String UTILITY = "Utility";
 	/** Étape de mise à jour des percepts */
-	private final String BOMB = "Percepts";
+	private final String BOMB = "Bomb";
 	/** Étape de mise à jour des percepts */
-	private final String MOVE = "Percepts";
+	private final String MOVE = "Move";
 	/** Étape de mise à jour des percepts */
-	private final String OUTPUT = "Percepts";
+	private final String OUTPUT = "Output";
 	/** Les différentes étapes du traitement */
 	protected final List<String> stepNames = new ArrayList<String>(Arrays.asList(PERCEPTS,MODE,UTILITY,BOMB,MOVE,OUTPUT));
 	/** Temps réel total utilisé lors du dernier appel (en ms) */ 

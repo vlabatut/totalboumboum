@@ -93,6 +93,8 @@ public abstract class AiAbstractManager<V>
 		int width = level.getGlobalWidth();
 		tileColors = new Color[height][width];
 		tileTexts = new List[height][width];
+		
+		initSteps();
 	}
 		
    /////////////////////////////////////////////////////////////////
@@ -317,16 +319,22 @@ public abstract class AiAbstractManager<V>
 	/////////////////////////////////////////////////////////////////
 	/** Noms des différentes étapes implémentées par l'agent */
 	private final List<String> stepNames = new LinkedList<String>();
-	/** Durées associées aux différentes étapes implémentées par l'agent, pour le moteur */
-	private final HashMap<String,Long> stepDurations = new HashMap<String, Long>();
-	/** Durée totale du traitement */
-	protected long totalDuration = 0;
+	/** Couleurs associées aux différentes étapes implémentées par l'agent, pour l'affichage */
+	private final HashMap<String,Color> stepColors = new HashMap<String, Color>();
+	/** Durées instantannées associées aux différentes étapes implémentées par l'agent, pour le moteur */
+	private final HashMap<String,LinkedList<Long>> stepInstantDurations = new HashMap<String, LinkedList<Long>>();
+	/** Durées moyennes associées aux différentes étapes implémentées par l'agent, pour le moteur */
+	private final HashMap<String,Float> stepAverageDurations = new HashMap<String, Float>();
+	/** Name of the fake step corresponding to the total duration */
+	public final String TOTAL_DURATION = "Total";
+	/** Nombre de valeurs considérées pour la moyenne flottante */
+	protected final int AVERAGE_SCOPE = 10;
 	
 	/** 
 	 * initialise la liste des noms des étapes 
 	 * implémentées par l'agent 
 	 */
-	protected abstract void initStepNames();
+	protected abstract void initSteps();
 	
 	/**
 	 * Met à jour la map contenant
@@ -346,25 +354,36 @@ public abstract class AiAbstractManager<V>
 	}
 	
 	/**
-	 * Renvoie les dernières durées associées
+	 * Renvoie les dernières durées instantannées associées
 	 * aux étapes implémentées par l'agent.
 	 * 
 	 * @return
 	 * 		Une map associant une durée à chaque nom d'étape.
 	 */
-	public HashMap<String,Long> getStepDurations()
-	{	return stepDurations;
+	public HashMap<String,LinkedList<Long>> getInstantDurations()
+	{	return stepInstantDurations;
 	}
 	
 	/**
-	 * Renvoie la durée totale du dernier appel
-	 * de l'agent.
+	 * Renvoie les dernières durées moyennes associées
+	 * aux étapes implémentées par l'agent.
 	 * 
 	 * @return
-	 * 		Dernière durée totale exprimée en ms.
+	 * 		Une map associant une durée à chaque nom d'étape.
 	 */
-	public long getTotalDuration()
-	{	return totalDuration;
+	public HashMap<String,Float> getAverageDurations()
+	{	return stepAverageDurations;
+	}
+	
+	/**
+	 * Renvoie les couleurs associées
+	 * aux étapes implémentées par l'agent.
+	 * 
+	 * @return
+	 * 		Une map associant une couleur à chaque nom d'étape.
+	 */
+	public HashMap<String,Color> getStepColors()
+	{	return stepColors;
 	}
 	
 	/////////////////////////////////////////////////////////////////
