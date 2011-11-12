@@ -332,7 +332,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		TrajectoryDirection slidingRight = sliding.getTrajectoryDirection(Direction.RIGHT);
 		double totalShift = slidingRight.getTotalXShift();
 		double totalDuration = slidingRight.getTotalDuration();
-		double basicSpeed = totalShift/totalDuration * 1000;
+		double basicSpeed = totalShift/totalDuration * 1000; // TODO pas sûr de ce x1000 (absent de AiHero)
 		slidingSpeed = speedCoeff*basicSpeed;
 //if(slidingSpeed==0)
 //	System.out.print("");

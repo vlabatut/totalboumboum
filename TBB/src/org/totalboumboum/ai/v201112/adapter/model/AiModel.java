@@ -83,7 +83,9 @@ public class AiModel
 	 * 		la zone courante, qui servira de point de départ à la simulation
 	 */
 	public AiModel(AiZone currentZone)
-	{	// init the model with a copy of the current zone
+	{	Thread.yield();
+		
+		// init the model with a copy of the current zone
 		this.current = new AiSimZone(currentZone);
 		
 		// no previous zone for now
@@ -504,7 +506,7 @@ if(sprite instanceof AiSimBomb)
 				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
 				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
 				double manDist = Math.abs(posX-goalX)+Math.abs(posY-goalY);
-				double temp = 1000*manDist/speed;
+				double temp = manDist/speed * 1000;
 				if(temp<1)
 					result = 0;
 				else
@@ -658,7 +660,7 @@ if(sprite instanceof AiSimBomb)
 		}
 		
 		// compute move
-		double allowed = currentSpeed*duration/1000;
+		double allowed = currentSpeed*duration/1000d;
 		int dir[] = direction.getIntFromDirection();
 		double tileSize = tile.getSize();
 		double tileX0 = tile.getPosX();
@@ -1070,7 +1072,7 @@ if(sprite instanceof AiSimBomb)
 		{	if(!bomb.equals(detonatingBomb))
 			{	AiStateName name = bomb.getState().getName();
 				if(bomb.hasExplosionTrigger() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
-					detonateBomb(bomb);
+					bomb.fireTriggerBomb();
 			}
 		}
 
@@ -1268,7 +1270,7 @@ if(sprite instanceof AiSimBomb)
 				
 				// check for fire
 				if(tile.getFires().size()>0 && result.hasExplosionTrigger())
-					detonateBomb(result);
+					result.fireTriggerBomb();
 			}
 		}
 		
