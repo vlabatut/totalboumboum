@@ -123,15 +123,18 @@ public class DisplayRealtimeUsage implements Display
 				nf.setMinimumFractionDigits(2);
 			}
 			String unit = " ms";
-					
-			Font bigFont = new Font("Dialog", Font.PLAIN, 18);
+			
+			int bigSize = 18;
+			Font bigFont = new Font("Dialog", Font.PLAIN, bigSize);
 			FontMetrics bigMetrics = g.getFontMetrics(bigFont);
+			int smallSize = 14;
 			Font smallFont = new Font("Dialog", Font.PLAIN, 14);
 			FontMetrics smallMetrics = g.getFontMetrics(smallFont);
 			Rectangle2D box = smallMetrics.getStringBounds(nf.format(0)+unit,g);
 			int maxDurationWidth = (int)box.getWidth();
 			int x = 400;
 			int y = 90;
+			int xLines[] = {10,20,30,40,50,60,70,80,90,100,200,300,400,500};
 			
 			for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
@@ -140,13 +143,20 @@ public class DisplayRealtimeUsage implements Display
 					List<String> stepNames = new ArrayList<String>(aiMgr.getStepNames());
 				
 					// draw background
-					{	int xBg = x - maxDurationWidth - 5;
-						int yBg = y - 5;
-						int width = maxDurationWidth + 5 + 300;
-						int height = 26 + (stepNames.size()+1)*16;
+					{	// background color
+						int xBg = x - maxDurationWidth - 5;
+						int margin = 5;
+						int yBg = y - margin;
+						int width = maxDurationWidth + margin + 300;
+						int height = margin + bigSize + (stepNames.size()+1)*(smallSize+2) + margin;
 						g.setColor(new Color(255,255,255,100));
 						g.fillRect(xBg,yBg,width,height);
-					}					
+						
+						// vertical lines
+						g.setColor(new Color(0,0,0,150));
+						for(int xLine: xLines)
+							g.drawLine(x+xLine,y+bigSize,x+xLine,y+height-2*margin);
+					}
 					
 					// draw the player's name
 					{	g.setFont(bigFont);
@@ -230,6 +240,7 @@ public class DisplayRealtimeUsage implements Display
 						
 						y = y + height;
 					}
+					
 					y = y + 5;
 				}
 			}
