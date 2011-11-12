@@ -122,7 +122,9 @@ public class TimeSuccessorCalculator extends SuccessorCalculator
 	 */
 	@Override
 	public List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException
-	{	AiLocation location = node.getLocation();
+	{	ai.checkInterruption();
+		
+		AiLocation location = node.getLocation();
 		AiTile tile = location.getTile();
 		AiZone zone = location.getZone();
 AiHero h = zone.getHeroByColor(hero.getColor());

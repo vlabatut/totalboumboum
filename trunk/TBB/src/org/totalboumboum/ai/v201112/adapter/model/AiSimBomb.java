@@ -212,6 +212,18 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	{	return latencyDuration;
 	}
 	
+	/**
+	 * Indique à la bombe qu'elle a été
+	 * touchée par du feu et devra donc
+	 * exploser.
+	 */
+	protected void fireTriggerBomb()
+	{	countdownTrigger = true;
+		failureProbability = 0;
+		normalDuration = latencyDuration;
+		time = 0;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

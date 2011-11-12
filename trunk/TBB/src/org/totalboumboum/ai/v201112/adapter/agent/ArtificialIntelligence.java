@@ -138,7 +138,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			
 			// on calcule la prochaine action à effectuer
 			else
-				result = processAction();		
+				result = processAction();
 		}
 		catch (StopRequestException e)
 		{	result = new AiAction(AiActionName.NONE);
