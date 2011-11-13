@@ -747,7 +747,8 @@ if(sprite instanceof AiSimBomb)
 	 */
 	private void updateBlock(AiSimBlock block, long duration)
 	{	// init
-		AiSimState state = block.getState(),newState;
+		AiSimState state = block.getState();
+		AiSimState newState;
 		AiStateName name = state.getName();
 		Direction direction = state.getDirection();
 		long time = state.getTime() + duration;

@@ -22,15 +22,15 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModel;
+import org.totalboumboum.ai.v201112.adapter.model.partial.AiExplosion;
+import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
@@ -65,7 +65,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public class TimePartialSuccessorCalculator extends TimeAbstractSuccessorCalculator
+public class TimePartialSuccessorCalculator extends SuccessorCalculator
 {
 	/**
 	 * Crée une nouvelle fonction successeur basée sur le temps.
@@ -74,17 +74,27 @@ public class TimePartialSuccessorCalculator extends TimeAbstractSuccessorCalcula
 	 * 
 	 * @param ai
 	 * 		IA de référence pour gérer les interruptions.
-	 * @param hero
-	 * 		Personnage de référence pour calculer la durée des déplacements.
 	 */
-	public TimePartialSuccessorCalculator(ArtificialIntelligence ai, AiHero hero)
-	{	super(ai,hero);
+	public TimePartialSuccessorCalculator(ArtificialIntelligence ai)
+	{	super(ai);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// MODELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** structure utilisée pour stocker les modèles partiels */
+	private HashMap<AiSearchNode,AiPartialModel> models;
+	
+	@Override
+	public void init()
+	{	models = new HashMap<AiSearchNode, AiPartialModel>();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
+	 * TODO
 	 * Fonction successeur considérant à la fois les 4 cases 
 	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
 	 * mais aussi la possibilité d'attendre dans la case courante.
@@ -104,14 +114,16 @@ public class TimePartialSuccessorCalculator extends TimeAbstractSuccessorCalcula
 	public List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException
 	{	ai.checkInterruption();
 		
+		// init
 		AiLocation location = node.getLocation();
 		AiTile tile = location.getTile();
-		AiZone zone = location.getZone();
-AiHero h = zone.getHeroByColor(hero.getColor());
-AiTile t = h.getTile();
-if(!t.equals(tile))
-	System.out.println();
 		List<AiSearchNode> result = new ArrayList<AiSearchNode>();
+		AiPartialModel currentModel = models.get(node);
+		AiZone zone = location.getZone();
+		if(currentModel==null)
+		{	currentModel = new AiPartialModel(zone);
+			models.put(node,currentModel);
+		}
 		
 		// on considère chaque déplacement possible
 		List<Direction> directions = Direction.getPrimaryValues();
@@ -121,32 +133,28 @@ if(!t.equals(tile))
 			
 			// cette case ne doit pas avoir été visitée depuis la dernière pause
 			if(!node.hasBeenExplored(targetTile))
-//			if(!node.hasBeenExploredSincePause(targetTile))
 			{	// on applique le modèle pour obtenir la zone résultant de l'action
-				AiFullModel model = new AiFullModel(zone);
-				model.applyChangeHeroDirection(hero,direction);
+				AiPartialModel model = new AiPartialModel(currentModel);
 				
 				// on simule jusqu'au changement d'état du personnage : 
 				// soit le changement de case, soit l'élimination
-				boolean safe = model.simulate(hero);
+				boolean safe = model.simulateMove(direction);
 				long duration = model.getDuration();
 				
 				// si le joueur a survécu et si une action a bien eu lieu
 				if(safe && duration>0)
 				{	// on récupère la nouvelle case occupée par le personnage
-					AiZone futureZone = model.getCurrentZone();
-					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
-					AiTile futureTile = futureHero.getTile();
-					AiLocation futureLocation = new AiLocation(futureHero.getPosX(),futureHero.getPosY(),futureZone);
+					AiLocation futureLocation = model.getOwnLocation();
+					AiTile futureTile = futureLocation.getTile();
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AiSearchNode child = new AiSearchNode(futureLocation,node);
+						// on l'ajoute au noeud courant
 						result.add(child);
-//if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
-//	System.out.println();
-						
+						// on enregistre le modèle correspondant pour une utilisation ultérieure ici-même
+						models.put(child,model);
 					}
 					// si la case n'est pas la bonne : 
 					// la case ciblée n'était pas traversable et l'action est à ignorer
@@ -161,43 +169,59 @@ if(!t.equals(tile))
 		// considère éventuellement l'action d'attente, 
 		// si un obstacle temporaire est présent dans une case voisine
 		// l'obstacle temporaire peut être : du feu, une bombe, un mur destructible, une menace d'explosion.
-		long waitDuration = getWaitDuration(tile);
+		AiPartialModel model = new AiPartialModel(currentModel);
+		long waitDuration = getWaitDuration(currentModel);
 		if(waitDuration>0 && waitDuration<Long.MAX_VALUE)
 		{	// on applique le modèle pour obtenir la zone résultant de l'action
-			AiFullModel model = new AiFullModel(zone);
-			model.applyChangeHeroDirection(hero,Direction.NONE);
-			
 			// on simule pendant la durée prévue
-			model.simulate(waitDuration);
+			boolean safe = model.simulateWait(waitDuration);
 			long duration = model.getDuration();
 			
-			// si l'attente a bien eu lieu
-			if(duration>0)
-			{	// on récupère les nouvelles infos décrivant le personnage
-				AiZone futureZone = model.getCurrentZone();
-				AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
-				
-				// si le perso est toujours en vie, on crée le noeud de recherche
-				if(futureHero!=null)
-				{	AiStateName name = futureHero.getState().getName();
-					boolean safe = !name.equals(AiStateName.BURNING) && !name.equals(AiStateName.ENDED);
-					if(safe)
-					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						AiSearchNode child = new AiSearchNode(waitDuration,futureZone,node);
-						result.add(child);
-if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
-	System.out.println();
-					}
-					// si le joueur n'est plus vivant dans la zone obtenue : 
-					// l'attente n'était pas une action sûre, et n'est donc pas envisagée
-				}
-				// si le perso est null, alors c'est que le joueur n'est plus vivant (cf commentaire ci-dessus)
+			// si l'attente a bien eu lieu et si le perso est toujours en vie
+			if(duration>0 && safe)
+			{	// on crée le noeud fils correspondant (qui sera traité plus tard)
+				AiSearchNode child = new AiSearchNode(waitDuration,zone,node);
+				result.add(child);
 			}
 			// si l'action n'a pas eu lieu : problème lors de la simulation (?) 
-			// l'attente n'est pas envisagée comme une action pertinente 
+			// >> l'attente n'est pas envisagée comme une action pertinente 
+			// si le joueur n'est plus vivant dans la zone obtenue : 
+			// >> l'attente n'était pas une action sûre, et n'est donc pas envisagée
 		}
 		// si le temps estimé d'attente est 0 ou +Inf, alors l'attente n'est pas envisagée
 
+		return result;
+	}
+	
+	/**
+	 * Détermine le temps d'attente minimal lorsque
+	 * le joueur est placé dans la case passée en paramètre.
+	 * 
+	 * @param tile
+	 * 		Case à considérer.
+	 * @return
+	 * 		Un entier long représentant le temps d'attente minimal.	
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	private long getWaitDuration(AiPartialModel model) throws StopRequestException
+	{	// init
+		long result = Long.MAX_VALUE;
+		AiTile tile = model.getOwnLocation().getTile();
+		List<AiTile> neighbors = tile.getNeighbors();
+		
+		// on considère chaque case voisine une par une
+		for(AiTile neighbor: neighbors)
+		{	// si une explosion menace cette case
+			AiExplosion explosion = model.getExplosion(neighbor);
+			if(explosion!=null)
+			{	long duration = explosion.getDuration();
+				if(duration<result)
+					result = duration;
+			}
+		}
+		
 		return result;
 	}
 }

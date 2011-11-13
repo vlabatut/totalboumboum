@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201112.adapter.model.partial;
  * 
  */
 
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+
 /**
  * Représente une explosion simplement par
  * deux durées :
@@ -43,9 +45,24 @@ public class AiExplosion implements Comparable<AiExplosion>
 	 * @param end
 	 * 		Moment de terminaison de l'explosion.
 	 */
-	public AiExplosion(long start, long end)
+	public AiExplosion(long start, long end, AiTile tile)
 	{	this.start = start;
 		this.end = end;
+		this.tile = tile;
+	}	
+	
+	/**
+	 * Construit une nouvelle représentation
+	 * d'explosion constituant une copie
+	 * de celle passée en paramètre.
+	 * 
+	 * @param explosion
+	 * 		Explosion à copier.
+	 */
+	public AiExplosion(AiExplosion explosion)
+	{	this.start = explosion.start;
+		this.end = explosion.end;
+		this.tile = explosion.tile;
 	}	
 	
 	/////////////////////////////////////////////////////////////////
@@ -65,6 +82,17 @@ public class AiExplosion implements Comparable<AiExplosion>
 	{	return start;
 	}
 	
+	/**
+	 * Modifie le moment de démarrage
+	 * (en ms) de l'explosion.
+	 * 
+	 * @param
+	 * 		Le nouveau moment de démarrage de l'explosion.
+	 */
+	public void setStart(long start)
+	{	this.start = start;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// END				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -73,25 +101,57 @@ public class AiExplosion implements Comparable<AiExplosion>
 
 	/**
 	 * Renvoie le moment de terminaison 
-	 * (en ms) de l'explosion.
+	 * (en ms) de cette explosion.
 	 * 
 	 * @return
-	 * 		Le moment de terminaison de l'explosion.
+	 * 		Le moment de terminaison de cette explosion.
 	 */
 	public long getEnd()
 	{	return end;
 	}
 
 	/**
-	 * Modifie le moment de terminaison de l'explosion.
+	 * Modifie le moment de terminaison de cette explosion.
 	 * 
 	 * @param end
-	 * 		Le moment de terminaison de l'explosion (en ms).
+	 * 		Le moment de terminaison de cette explosion (en ms).
 	 */
 	public void setEnd(long end)
 	{	this.end = end;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Renvoie la durée de cette explosion
+	 * exprimée en ms.
+	 * 
+	 * @return
+	 * 		La durée de cette explosion.
+	 */
+	public long getDuration()
+	{	long result = end - start;
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TILE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Case concernée par l'explosion */
+	private AiTile tile;
+	
+	/**
+	 * Renvoie la case concernée
+	 * par cette explosion.
+	 * 
+	 * @return
+	 * 		La case concernée par cette explosion.
+	 */
+	public AiTile getTile()
+	{	return tile;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

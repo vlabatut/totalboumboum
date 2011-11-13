@@ -22,10 +22,14 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
@@ -64,7 +68,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public class TimeFullSuccessorCalculator extends TimeAbstractSuccessorCalculator
+public class TimeFullSuccessorCalculator extends SuccessorCalculator
 {
 	/**
 	 * Crée une nouvelle fonction successeur basée sur le temps.
@@ -77,9 +81,27 @@ public class TimeFullSuccessorCalculator extends TimeAbstractSuccessorCalculator
 	 * 		Personnage de référence pour calculer la durée des déplacements.
 	 */
 	public TimeFullSuccessorCalculator(ArtificialIntelligence ai, AiHero hero)
-	{	super(ai, hero);
+	{	super(ai);
+		this.hero = hero;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// HERO						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Personnage concerné par la recherche de chemin */
+	protected AiHero hero;
+
+	/**
+	 * Renvoie le personnage utilisé
+	 * pour calculer les actions possibles.
+	 * 
+	 * @return
+	 * 		Le personnage de référence.
+	 */
+	public AiHero getHero()
+	{	return hero;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -197,6 +219,85 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 		}
 		// si le temps estimé d'attente est 0 ou +Inf, alors l'attente n'est pas envisagée
 
+		return result;
+	}
+
+	/**
+	 * Détermine le temps d'attente minimal lorsque
+	 * le joueur est placé dans la case passée en paramètre.
+	 * 
+	 * @param tile
+	 * 		Case à considérer.
+	 * @return
+	 * 		Un entier long représentant le temps d'attente minimal.	
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	private long getWaitDuration(AiTile tile) throws StopRequestException
+	{	// init
+		AiZone zone = tile.getZone();
+		long result = Long.MAX_VALUE;
+		List<AiTile> neighbors = tile.getNeighbors();
+		
+		// on s'intéresse d'abord aux obstacles concrets
+		// on considère chaque case voisine une par une
+		for(AiTile neighbor: neighbors)
+		{	// s'il y a un obstacle concret
+			if(!neighbor.isCrossableBy(hero))
+			{	// s'il y a du feu
+				List<AiFire> fires = neighbor.getFires();
+				long fireDuration = 0;
+				for(AiFire fire: fires)
+				{	long duration = fire.getBurningDuration() - fire.getState().getTime();
+					//long duration = fire.getBurningDuration() - fire.getTime();
+					if(duration>fireDuration)
+						fireDuration = duration;
+				}
+				if(fireDuration>0 && fireDuration<result)
+					result = fireDuration;
+				
+				// s'il y a un mur en train de brûler
+				List<AiBlock> blocks = neighbor.getBlocks();
+				long blockDuration = 0;
+				for(AiBlock block: blocks)
+				{	long duration = block.getBurningDuration() - block.getState().getTime();
+					if(duration>blockDuration)
+						blockDuration = duration;
+				}
+				if(blockDuration>0 && blockDuration<result)
+					result = blockDuration;
+				// les autres obstacles (murs normaux, bombes) n'ont pas besoin d'être traités
+				// car on s'en occupe lorsqu'on gère les cases menacées par des bombes
+			}
+		}
+		
+		// on s'intéresse ensuite aux menaces provenant des bombes
+		// on considère chaque bombe une par une
+		HashMap<AiBomb,Long> delays = zone.getDelaysByBombs();
+		List<AiBomb> bombs = zone.getBombs();
+		for(AiBomb bomb: bombs)
+		{	List<AiTile> blast = bomb.getBlast();
+			List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
+			neigh.retainAll(blast);
+			// on vérifie si la bombe menace une des cases voisines
+			if(!neigh.isEmpty())
+			{	// si c'est le cas, on récupère la description de la bombe
+				AiStateName stateName = bomb.getState().getName();
+				// on peut ignorer les bombes déjà en train de brûler, car elles cohabitent avec du feu
+				if(stateName.equals(AiStateName.STANDING)
+				// on peut aussi ignorer les bombes qui ne sont pas à retardement,
+				// car on ne peut pas prédire quand elles vont exploser
+					&& bomb.hasCountdownTrigger())
+				{	long bombDuration = Math.max(0,bomb.getNormalDuration()-bomb.getTime());
+					long duration = delays.get(bomb) + bombDuration + bomb.getExplosionDuration();
+					//long duration = delays.get(bomb);
+					if(duration<result)
+						result = duration;
+				}
+			}
+		}
+		
 		return result;
 	}
 }

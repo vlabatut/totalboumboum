@@ -152,6 +152,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
+		heuristicCalculator.setEndTiles(endTiles);
+		successorCalculator.init();
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		
 		AiPath result = processShortestPath(endTiles);
@@ -183,6 +185,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		AiPath result = processShortestPath(endTiles);
 		return result;
 	}
+	
 	/**
 	 * Réalise le même traitement que {@link #processShortestPath(AiLocation, Set)},
 	 * à la différence qu'ici on réutilise l'arbre de recherche déjà existant. 
@@ -215,7 +218,15 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		treeCost = 0;
 		treeSize = 0;
 		limitReached = false;
-		heuristicCalculator.setEndTiles(endTiles);
+		
+		// heuristic
+		Set<AiTile> et = heuristicCalculator.getEndTiles();
+		if(!et.equals(endTiles))
+		{	heuristicCalculator.setEndTiles(endTiles);
+			root.updateHeuristic();
+		}
+
+		// queue
 		queue = new PriorityQueue<AiSearchNode>(1);
 		queue.offer(root);
 		
