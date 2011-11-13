@@ -47,6 +47,15 @@ public abstract class SuccessorCalculator
 	{	this.ai = ai;
 	}
 	
+	/**
+	 * Réinitialise les structures internes de
+	 * l'objet avant de commencer une nouvelle
+	 * recherche.
+	 */
+	public void init()
+	{	// à surcharger si nécessaire
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

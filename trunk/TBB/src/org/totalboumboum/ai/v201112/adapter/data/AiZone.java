@@ -1259,6 +1259,202 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////////////////
+	// CONTACT POINTS			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Renvoie le point de contact entre
+	 * les centres des deux cases passées en paramètres. 
+	 * Les coordonnées du point de contact sont renvoyées 
+	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * <b>Attention :</b> Ces deux cases doivent être 
+	 * des voisines directes.
+	 * 
+	 * @param tile1
+	 * 		La première case.
+	 * @param tile2
+	 * 		La seconde case.
+	 * @return
+	 * 		La position du point de contact sous forme de couple (x,y)
+	 * 
+	 * @throw IllegalArgumentException
+	 * 		Si les deux cases ne sont pas voisines.
+	 */
+	public double[] getContactPoint(AiTile tile1, AiTile tile2)
+	{	double result[] = {0,0};
+
+		// on récupère les coordonnées des cases
+		double tile1x = tile1.getPosX();
+		double tile1y = tile1.getPosY();
+		double tile2x = tile2.getPosX();
+		double tile2y = tile2.getPosY();
+		
+		// direction entre les points
+		Direction direction = getDirection(tile1,tile2);
+		if(direction.isComposite())
+			throw new IllegalArgumentException("The tiles must be direct neighbors");
+		
+		if(direction.isHorizontal())
+		{	result[0] = (tile1x + tile2x) / 2;
+			result[1] = tile1y;
+		}
+		else if(direction.isVertical())
+		{	result[0] = tile1x;
+			result[1] = (tile1y + tile2y) / 2;
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Renvoie le point de contact entre
+	 * les deux points dont les coordonnées sont
+	 * passées en paramètres. 
+	 * Les coordonnées du point de contact sont renvoyées 
+	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * <b>Attention :</b> Ces deux points doivent appartenir 
+	 * à des des cases voisines directes.
+	 * 
+	 * @param x1
+	 * 		L'abscisse du premier point.
+	 * @param y1
+	 * 		L'ordonnée du premier point.
+	 * @param x2
+	 * 		L'abscisse du second point.
+	 * @param y2
+	 * 		L'ordonnée du second point.
+	 * @return
+	 * 		La position du point de contact sous forme de couple (x,y)
+	 * 
+	 * @throw IllegalArgumentException
+	 * 		Si les deux points n'appartiennent pas à des cases voisines.
+	 */
+	public double[] getContactPoint(double x1, double y1, double x2, double y2)
+	{	double result[] = {0,0};
+
+		// on récupère les cases
+		AiTile tile1 = getTile(x1,y1);
+		double tile1x = tile1.getPosX();
+		double tile1y = tile1.getPosY();
+		AiTile tile2 = getTile(x2,y2);
+		double tile2x = tile2.getPosX();
+		double tile2y = tile2.getPosY();
+		
+		// direction entre les points
+		Direction direction = getDirection(tile1,tile2);
+		if(direction.isComposite())
+			throw new IllegalArgumentException("Points must be in direct neighbor tiles");
+		
+		if(direction.isHorizontal())
+		{	result[0] = (tile1x + tile2x) / 2;
+			result[1] = (y1 + y2) / 2;
+		}
+		else if(direction.isVertical())
+		{	result[0] = (x1 + x2) / 2;
+			result[1] = (tile1y + tile2y) / 2;
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Renvoie le point de contact entre
+	 * le point dont les coordonnées sont
+	 * passées en paramètres et la case également
+	 * passée en paramètre. 
+	 * Les coordonnées du point de contact sont renvoyées 
+	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * <b>Attention :</b> Le point et la case passés
+	 *  en paramètres doivent appartenir à des des 
+	 *  cases voisines directes.
+	 * 
+	 * @param x
+	 * 		L'abscisse du point.
+	 * @param y
+	 * 		L'ordonnée du point.
+	 * @param tile2
+	 * 		La case.
+	 * @return
+	 * 		La position du point de contact sous forme de couple (x,y)
+	 * 
+	 * @throw IllegalArgumentException
+	 * 		Si le point et la case ne sont pas voisins.
+	 */
+	public double[] getContactPoint(double x1, double y1, AiTile tile)
+	{	double result[] = {0,0};
+
+		// on récupère les cases
+		AiTile tile1 = getTile(x1,y1);
+		double tile1x = tile1.getPosX();
+		double tile1y = tile1.getPosY();
+		double tile2x = tile.getPosX();
+		double tile2y = tile.getPosY();
+		
+		// direction entre les points
+		Direction direction = getDirection(tile1,tile);
+		if(direction.isComposite())
+			throw new IllegalArgumentException("Points must be in direct neighbor tiles");
+		
+		if(direction.isHorizontal())
+		{	result[0] = (tile1x + tile2x) / 2;
+			result[1] = (y1 + tile2y) / 2;
+		}
+		else if(direction.isVertical())
+		{	result[0] = (x1 + tile2x) / 2;
+			result[1] = (tile1y + tile2y) / 2;
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Renvoie le point de contact entre
+	 * l'emplacement et la case passés en paramètres. 
+	 * Les coordonnées du point de contact sont renvoyées 
+	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * <b>Attention :</b> L'emplacement et la case passés
+	 *  en paramètres doivent appartenir à des des 
+	 *  cases voisines directes.
+	 * 
+	 * @param location
+	 * 		L'emplacement.
+	 * @param tile2
+	 * 		La case.
+	 * @return
+	 * 		La position du point de contact sous forme de couple (x,y)
+	 * 
+	 * @throw IllegalArgumentException
+	 * 		Si l'emplacement et la case ne sont pas voisins.
+	 */
+	public double[] getContactPoint(AiLocation location, AiTile tile)
+	{	double result[] = {0,0};
+
+		// on récupère les cases
+		double x1 = location.getPosX();
+		double y1 = location.getPosY();
+		AiTile tile1 = location.getTile();
+		double tile1x = tile1.getPosX();
+		double tile1y = tile1.getPosY();
+		double tile2x = tile.getPosX();
+		double tile2y = tile.getPosY();
+		
+		// direction entre les points
+		Direction direction = getDirection(tile1,tile);
+		if(direction.isComposite())
+			throw new IllegalArgumentException("Both location and tile must be direct neighbors");
+		
+		if(direction.isHorizontal())
+		{	result[0] = (tile1x + tile2x) / 2;
+			result[1] = (y1 + tile2y) / 2;
+		}
+		else if(direction.isVertical())
+		{	result[0] = (x1 + tile2x) / 2;
+			result[1] = (tile1y + tile2y) / 2;
+		}
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// COORDINATE NORMALIZING	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**

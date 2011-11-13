@@ -44,31 +44,90 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 	{	// init
 		SortedSet<AiExplosion> head = headSet(explosion);
 		SortedSet<AiExplosion> tail = tailSet(explosion);
-
-		// before the explosion
-		AiExplosion previous = head.last();
-		long explosionStart = explosion.getStart();
 		long explosionEnd = explosion.getEnd();
-		long previousEnd = previous.getEnd();
-		if(explosionStart<=previousEnd)
-		{	previous.setEnd(explosionEnd);
-			explosion = previous;
-		}
+		boolean wasMerged = false;
 		
-		// after the explosion
-		Iterator<AiExplosion> it = tail.iterator();
-		boolean merged = true;
-		while(it.hasNext() && merged)
-		{	AiExplosion next = it.next();
-			long nextStart = next.getStart();
-			if(merged=nextStart<=explosionEnd)
-			{	long nextEnd = next.getEnd();
-				explosion.setEnd(nextEnd);
-				explosionEnd = nextEnd;
-				it.remove();
+		// before the explosion
+		if(!head.isEmpty())
+		{	AiExplosion previous = head.last();
+			long explosionStart = explosion.getStart();
+			long previousEnd = previous.getEnd();
+			if(explosionStart<=previousEnd)
+			{	previous.setEnd(explosionEnd);
+				explosion = previous;
+				wasMerged = true;
 			}
 		}
 		
+		// after the explosion
+		if(!tail.isEmpty())
+		{	Iterator<AiExplosion> it = tail.iterator();
+			boolean merged = true;
+			while(it.hasNext() && merged)
+			{	AiExplosion next = it.next();
+				long nextStart = next.getStart();
+				if(merged=nextStart<=explosionEnd)
+				{	long nextEnd = next.getEnd();
+					explosion.setEnd(nextEnd);
+					explosionEnd = nextEnd;
+					it.remove();
+					wasMerged = true;
+				}
+			}
+		}
+		
+		// no mergin at all -> insertion
+		if(!wasMerged)
+			super.add(explosion);
+			
 		return true;
+	}
+	
+	/**
+	 * Détermine si la période allant de l'instant
+	 * courant à l'instant donné en paramètre
+	 * intersecte l'une des explosions contenues
+	 * dans cette liste.
+	 * 
+	 * @param time
+	 * 		L'instant de fin de l'intervalle à tester.
+	 * @return
+	 * 		{@code true} ssi au moins une explosion est en
+	 * 		intersection avec l'intervale spécifié.
+	 */
+	public boolean intersects(long time)
+	{	boolean result = false;
+		Iterator<AiExplosion> it = iterator();
+		boolean goOn = true;
+		while(it.hasNext() && goOn && !result)
+		{	AiExplosion explosion = it.next();
+			long startTime = explosion.getStart();
+			long endTime = explosion.getEnd();
+			if(startTime<=time)
+			{	if(endTime>=time)
+					result = true;
+			}
+			else //if(startTime>time)
+				goOn = false;
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Crée une liste d'explosions
+	 * correspondant à une copie de celle
+	 * passée en paramètre.
+	 * 
+	 * @param list
+	 * 		La liste à copier
+	 */
+	public AiExplosionList copy()
+	{	AiExplosionList result = new AiExplosionList();
+		for(AiExplosion explosion: this)
+			result.add(new AiExplosion(explosion));
+		return result;
 	}
 }

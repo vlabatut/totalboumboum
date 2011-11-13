@@ -315,6 +315,24 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	{	AiTile result = heuristicCalculator.getClosestEndTile(location);
 		return result;
 	}
+	
+	/**
+	 * Met à jour toutes les heuristiques (méthode
+	 * utilisée en cas de changement de destination).
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	public void updateHeuristic() throws StopRequestException
+	{	// this node
+		heuristic = heuristicCalculator.processHeuristic(location);
+
+		// its children
+		if(children!=null)
+		{	for(AiSearchNode child: children)
+				child.updateHeuristic();
+		}
+	}
 		
     /////////////////////////////////////////////////////////////////
 	// PARENT			/////////////////////////////////////////////
