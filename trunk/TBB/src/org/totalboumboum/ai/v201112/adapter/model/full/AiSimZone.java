@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.model;
+package org.totalboumboum.ai.v201112.adapter.model.full;
 
 /*
  * Total Boum Boum

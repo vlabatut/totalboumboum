@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.model;
+package org.totalboumboum.ai.v201112.adapter.model.full;
 
 /*
  * Total Boum Boum
@@ -21,112 +21,105 @@ package org.totalboumboum.ai.v201112.adapter.model;
  * 
  */
 
-import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiItem;
+import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 
 /**
- * Simule un bloc du jeu, c'est à dire généralement un mur
- * (pouvant être détruit ou pas). 
+ * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
+ * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
  */
-final class AiSimBlock extends AiSimSprite implements AiBlock
+final class AiSimItem extends AiSimSprite implements AiItem
 {
 	/**
-	 * crée une simulation du bloc passé en paramètre,
+	 * crée une simulation de l'item passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification du bloc
+	 * 		numéro d'identification de l'item
 	 * @param tile
-	 * 		case contenant le bloc
+	 * 		case contenant l'item
 	 * @param posX
-	 * 		abscisse du bloc
+	 * 		abscisse de l'item
 	 * @param posY
-	 * 		ordonnée du bloc
+	 * 		ordonnée de l'item
 	 * @param posZ
-	 * 		hauteur du bloc
+	 * 		hauteur de l'item
 	 * @param state
-	 * 		état du bloc
+	 * 		état de l'item
 	 * @param burningDuration
-	 * 		durée de combustion du bloc
+	 * 		durée de combustion de l'item
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement du bloc (a priori il est immobile)
-	 * @param destructible
-	 * 		sensibilité au feu
-	 * @param stopHeroes
-	 * 		capacité à bloquer les personnages
+	 * 		vitesse courante de déplacement de l'item
+	 * @param type
+	 * 		type d'item (extrabomb, extraflame, etc.)
+	 * @param stopBombs
+	 * 		capacité à bloquer les bombes
 	 * @param stopFires
 	 * 		capacité à bloquer le feu
 	 */
-	protected AiSimBlock(int id, AiSimTile tile, double posX, double posY, double posZ,
+	protected AiSimItem(int id, AiSimTile tile,  double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
-			boolean destructible, AiStopType stopHeroes, AiStopType stopFires)
+			AiItemType type, AiStopType stopBombs, AiStopType stopFires)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
-		this.destructible = destructible;
-		this.stopHeroes = stopHeroes;
+		this.type = type;		
+		this.stopBombs = stopBombs;
 		this.stopFires = stopFires;
 	}	
 
 	/**
-	 * crée une simulation du bloc passé en paramètre, et contenue dans 
+	 * crée une simulation de l'item passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param block
+	 * @param item
 	 * 		sprite à simuler
 	 * @param tile
 	 * 		case contenant le sprite
 	 */
-	protected AiSimBlock(AiBlock block, AiSimTile tile)
-	{	super(block,tile);
+	protected AiSimItem(AiItem item, AiSimTile tile)
+	{	super(item,tile);
 		
-		this.destructible = block.isDestructible();
-		this.stopHeroes = block.hasStopHeroes();
-		this.stopFires = block.hasStopFires();
-	}	
-	
-	/////////////////////////////////////////////////////////////////
-	// DESTRUCTIBLE		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut être détruit par une bombe */
-	private boolean destructible;
+		type = item.getType();		
+		stopBombs = item.hasStopBombs();
+		stopFires = item.hasStopFires();
+	}
 
+	/////////////////////////////////////////////////////////////////
+	// TYPE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** type d'item simulé */
+	private AiItemType type;
+	
 	@Override
-	public boolean isDestructible()
-	{	return destructible;		
+	public AiItemType getType()
+	{	return type;	
 	}
 	
-	/**
-	 * modifie la destructibilité de ce mur
-	 * 
-	 * @param destructible
-	 * 		nouvelle valeur de l'indicateur de destructibilité du mur
-	 */
-	public void setDestructible(boolean destructible)
-	{	this.destructible = destructible;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si ce bloc laisse passer les joueurs */
-	private AiStopType stopHeroes;
+	private AiStopType stopBombs;
 	/** indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
-	
-	@Override
-	public AiStopType hasStopHeroes()
-	{	return stopHeroes;
-	}
-	
+
 	@Override
 	public AiStopType hasStopFires()
 	{	return stopFires;
+	}
+
+	@Override
+	public AiStopType hasStopBombs()
+	{	return stopBombs;
 	}
 
 	@Override
@@ -136,15 +129,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 		
 		// si le sprite considéré est un personnage
 		if(sprite instanceof AiHero)
-		{	AiHero hero = (AiHero) sprite;
-			if(hero.getTile().equals(getTile())) //simplification
-				result = true;
-			else if(stopHeroes==AiStopType.NO_STOP)
-				result = true;
-			else if(stopHeroes==AiStopType.WEAK_STOP)
-				result = hero.hasThroughBlocks();
-			else if(stopHeroes==AiStopType.STRONG_STOP)
-				result = false;
+		{	result = true;
 		}
 		
 		// si le sprite considéré est un feu
@@ -153,23 +138,34 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 			if(stopFires==AiStopType.NO_STOP)
 				result = true;
 			else if(stopFires==AiStopType.WEAK_STOP)
-				result = fire.hasThroughBlocks();
+				result = fire.hasThroughItems();
 			else if(stopFires==AiStopType.STRONG_STOP)
+				result = false;
+		}
+		
+		// si le sprite considéré est une bombe
+		else if(sprite instanceof AiBomb)
+		{	AiBomb bomb = (AiBomb) sprite;
+			if(stopBombs==AiStopType.NO_STOP)
+				result = true;
+			else if(stopBombs==AiStopType.WEAK_STOP)
+				result = bomb.hasThroughItems();
+			else if(stopBombs==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append("Block: [");
+		result.append("Item: [");
 		result.append(super.toString());
-		result.append(" - destr.: "+destructible);
+		result.append(" - type: "+type);
 		result.append(" ]");
 		return result.toString();
 	}
