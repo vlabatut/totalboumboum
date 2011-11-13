@@ -23,23 +23,14 @@ package org.totalboumboum.ai.v201112.adapter.model.partial;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
-import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
-import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
-import org.totalboumboum.ai.v201112.adapter.data.AiState;
-import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * TODO à corriger

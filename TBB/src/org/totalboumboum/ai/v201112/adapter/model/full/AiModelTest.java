@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.model;
+package org.totalboumboum.ai.v201112.adapter.model.full;
 
 /*
  * Total Boum Boum
@@ -63,7 +63,7 @@ public final class AiModelTest
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Réalise la simulation (utilise les différentes méthodes
-	 * proposées par {@link AiModel}.
+	 * proposées par {@link AiFullModel}.
 	 * 
 	 * @param zone
 	 * 		La zone à traiter.
@@ -73,7 +73,7 @@ public final class AiModelTest
 		
 		// display initial zone
 		System.out.println("initial zone:\n"+zone);
-		AiModel model = new AiModel(zone);
+		AiFullModel model = new AiFullModel(zone);
 		model.setSimulateItemsAppearing(true);
 		
 		// first simulation

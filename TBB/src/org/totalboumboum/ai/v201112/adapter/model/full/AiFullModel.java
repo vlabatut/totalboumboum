@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.model;
+package org.totalboumboum.ai.v201112.adapter.model.full;
 
 /*
  * Total Boum Boum
@@ -74,7 +74,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-public class AiModel
+public class AiFullModel
 {	
 	/**
 	 * initialise le modèle avec la zone passée en paramètre.
@@ -82,7 +82,7 @@ public class AiModel
 	 * @param currentZone
 	 * 		la zone courante, qui servira de point de départ à la simulation
 	 */
-	public AiModel(AiZone currentZone)
+	public AiFullModel(AiZone currentZone)
 	{	Thread.yield();
 		
 		// init the model with a copy of the current zone
