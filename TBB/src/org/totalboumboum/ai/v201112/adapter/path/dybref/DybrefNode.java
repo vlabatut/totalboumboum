@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.model.AiModel;
+import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModel;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -431,7 +431,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 					// et également ne pas avoir déjà été visitée dans cette branche
 					&& !hasBeenVisited(targetTile))
 			{	// on applique le modèle pour obtenir la zone résultant de l'action
-				AiModel model = new AiModel(zone);
+				AiFullModel model = new AiFullModel(zone);
 				model.applyChangeHeroDirection(hero,direction);
 				model.simulate(hero);
 				long duration = model.getDuration();
@@ -488,7 +488,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 			AiTile targetTile = tile.getNeighbor(direction);
 			
 			// on applique le modèle pour obtenir la zone résultant de l'action
-			AiModel model = new AiModel(zone);
+			AiFullModel model = new AiFullModel(zone);
 			model.applyChangeHeroDirection(hero,direction);
 			boolean safe = true;
 			long duration = 0;

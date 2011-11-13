@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.model.AiModelTest;
+import org.totalboumboum.ai.v201112.adapter.model.full.AiModelTest;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.tools.images.PredefinedColor;
 

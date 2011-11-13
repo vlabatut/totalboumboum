@@ -325,6 +325,13 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Map associant à chaque bombe la liste des bombes qu'elle menace */
+	private HashMap<AiBomb,List<AiBomb>> threatenedBombs = null;
+	/** Map associant à chaque bombe le temps avant son explosion */
+	private HashMap<AiBomb,Long> delaysByBombs = null;
+	/** Map associant à chaque temps avant explosion la liste des bombes concernées */
+	private HashMap<Long,List<AiBomb>> bombsByDelays = null;
+	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
@@ -354,7 +361,7 @@ public abstract class AiZone
 	}
 	
 	/**
-	 * Calcule les temps d'explosion de chaque bombe
+	 * Renvoie les temps d'explosion de chaque bombe
 	 * présente dans la zone, en tenant compte des
 	 * réactions en chaîne. Le résultat prend la forme
 	 * d'une map dont la clé est la bombe et la valeur
@@ -363,22 +370,78 @@ public abstract class AiZone
 	 * @return
 	 * 		Une map décrivant les temps d'explosion des bombes.
 	 */
-	public HashMap<AiBomb,Long> getBombDelays()
-	{	HashMap<AiBomb,Long> result = new HashMap<AiBomb,Long>();
-		HashMap<Long,List<AiBomb>> bombsByDelay = new HashMap<Long,List<AiBomb>>();
-		HashMap<AiBomb,List<AiBomb>> threatenedBombs = new HashMap<AiBomb,List<AiBomb>>();
+	public HashMap<AiBomb,Long> getDelaysByBombs()
+	{	if(delaysByBombs==null)
+			initBombData();
+		return delaysByBombs;
+	}
+	
+	/**
+	 * Renvoie les temps d'explosion de chaque bombe
+	 * présente dans la zone, en tenant compte des
+	 * réactions en chaîne. Le résultat prend la forme
+	 * d'une map dont la est le temps restant avant l'explosion
+	 * et la valeur une liste de bombes associées à ce temps.
+	 * 
+	 * @return
+	 * 		Une map décrivant les temps d'explosion des bombes.
+	 */
+	public HashMap<Long,List<AiBomb>> getBombsByDelays()
+	{	if(bombsByDelays==null)
+			initBombData();
+		return bombsByDelays;
+	}
+	
+	/**
+	 * Renvoie une map décrivant les bombes menacées
+	 * par d'autres bombe. La clé de cette map est une
+	 * bombe menaçante et la valeur une liste de bombes
+	 * menacées par cette bombe.
+	 * 
+	 * @return
+	 * 		Une map décrivant les bombes menacées.
+	 */
+	public HashMap<AiBomb,List<AiBomb>> getThreatenedBombs()
+	{	if(threatenedBombs==null)
+			initBombData();
+		return threatenedBombs;
+	}
+	
+	/**
+	 * Initialise différentes structures 
+	 * contenant des données sur les bombes
+	 * et explosions de cette zone.
+	 */
+	private void initBombData()
+	{	delaysByBombs = new HashMap<AiBomb,Long>();
+		bombsByDelays = new HashMap<Long,List<AiBomb>>();
+		threatenedBombs = new HashMap<AiBomb,List<AiBomb>>();
 		
 		// retrieve necessary info
 		for(AiBomb bomb: getBombs())
-		{	// delay map & bomb map
-			long delay = 1;	// for bombs other than time bombs 
+		{	List<AiFire> fires = bomb.getTile().getFires();
+			// delay map & bomb map
+			long delay = Long.MAX_VALUE; //TODO non-time bombs are considered to have an infinite delay, which should be corrected
+			// fire-sensitive bomb currently caught in an explosion
+			if(bomb.hasExplosionTrigger() && !fires.isEmpty())
+			{	long fireDuration = 0;
+				for(AiFire fire: fires)
+				{	long time = fire.getTime();
+					if(time>fireDuration)
+						fireDuration = time;
+				}
+				delay = Math.max(bomb.getLatencyDuration()-fireDuration,0);
+			}
+			// time bomb
 			if(bomb.hasCountdownTrigger())
-				delay = bomb.getNormalDuration() - bomb.getTime();
-			result.put(bomb,delay);
-			List<AiBomb> tempList = bombsByDelay.get(delay);
+			{	long temp = Math.max(bomb.getNormalDuration()-bomb.getTime(),0);
+				delay = Math.min(delay,temp);
+			}
+			delaysByBombs.put(bomb,delay);
+			List<AiBomb> tempList = bombsByDelays.get(delay);
 			if(tempList==null)
 			{	tempList = new ArrayList<AiBomb>();
-				bombsByDelay.put(delay,tempList);
+				bombsByDelays.put(delay,tempList);
 			}
 			tempList.add(bomb);
 			
@@ -393,19 +456,20 @@ public abstract class AiZone
 						tempTarget.addAll(tileBombs);
 				}
 			}
-			threatenedBombs.put(bomb,tempTarget);
+			if(!tempTarget.isEmpty())
+				threatenedBombs.put(bomb,tempTarget);
 		}
 		
 		// get temporal explosion order
-		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelay.keySet());
+		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelays.keySet());
 		while(!orderedDelays.isEmpty())
 		{	// get the delay
 			long delay = orderedDelays.first();
 			orderedDelays.remove(delay);
 			// get the bombs associated to this delay
-			List<AiBomb> bombList = bombsByDelay.get(delay);
+			List<AiBomb> bombList = bombsByDelays.get(delay);
 
-			// update bomb delays while considering a bomb can detonate 
+			// update threatened bomb delays while considering a bomb can detonate 
 			// another one before the regular time 
 			for(AiBomb bomb1: bombList)
 			{	// get the threatened bombs
@@ -413,31 +477,31 @@ public abstract class AiZone
 				// update their delays
 				for(AiBomb bomb2: bList)
 				{	// get the delay 
-					long delay2 = result.get(bomb2);
+					long delay2 = delaysByBombs.get(bomb2);
 					// add latency time
 					long newDelay = delay + bomb2.getLatencyDuration();
 					
 					// if this makes the delay shorter, we update eveywhere needed
 					if(bomb2.hasExplosionTrigger() && newDelay<delay2)
 					{	// in the result map
-						result.put(bomb2,newDelay);
+						delaysByBombs.put(bomb2,newDelay);
 						
 						// we remove the bomb from the other (inverse) map
-						{	List<AiBomb> tempList = bombsByDelay.get(delay2);
+						{	List<AiBomb> tempList = bombsByDelays.get(delay2);
 							tempList.remove(bomb2);
 							// and possibly the delay itself, if no other bomb uses it anymore
 							if(tempList.isEmpty())
-							{	bombsByDelay.remove(delay2);
+							{	bombsByDelays.remove(delay2);
 								orderedDelays.remove(delay2);
 							}
 						}
 						
 						// and put it again, but at the appropriate place this time
-						{	List<AiBomb> tempList = bombsByDelay.get(newDelay);
+						{	List<AiBomb> tempList = bombsByDelays.get(newDelay);
 							// on crée éventuellement la liste nécessaire
 							if(tempList==null)
 							{	tempList = new ArrayList<AiBomb>();
-								bombsByDelay.put(newDelay,tempList);
+								bombsByDelays.put(newDelay,tempList);
 								orderedDelays.add(newDelay);
 							}
 							tempList.add(bomb2);
@@ -446,8 +510,6 @@ public abstract class AiZone
 				}
 			}
 		}
-		
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -1400,21 +1462,21 @@ public abstract class AiZone
 	 * aller dans la configuration de démarrage du programme, aller
 	 * dans l'onglet "Commnon" puis dans la partie "Console Encoding" et
 	 * sélectionner UTF8 ou unicode.<br/>
-	 * Voici un exemple de zone obtenu:<
+	 * Voici un exemple de zone obtenue:<
 	 * <pre>
 	 *   0 1 2 3 4 5 6
 	 *  ┌─┬─┬─┬─┬─┬─┬─┐
-	 * 0│█│█│█│█│█│█│█│
-	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 1│█│☺│ │□│ │ │█│
-	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 2│█│ │█│ │█│ │█│
-	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 3│█│ │ │ │ │▒│█│
-	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 4│█│ │█│ │█│ │█│
-	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 5│█│ │ │ │ │●│█│
+	 * 0│█│█│█│█│█│█│█│	Légende:
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	┌─┐
+	 * 1│█│☺│ │□│ │ │█│	│ │	case vide
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	└─┘
+	 * 2│█│ │█│ │█│ │█│	 █ 	mur indestructible
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ▒ 	mur destructible
+	 * 3│█│░│☻│ │ │▒│█│	 □ 	item
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ● 	bombe
+	 * 4│█│░│█│ │█│ │█│	 ☺ 	joueur
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ☻ 	joueur et bombe
+	 * 5│█│░│░│░│ │●│█│	 ░	flammes
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 6│█│█│█│█│█│█│█│
 	 *  └─┴─┴─┴─┴─┴─┴─┘
