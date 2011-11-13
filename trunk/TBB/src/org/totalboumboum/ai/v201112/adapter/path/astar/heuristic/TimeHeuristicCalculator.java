@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeFullSuccessorCalculator;
 
 /**
  * Heuristique utilisant la distance de Manhattan exprimées en pixels,
@@ -45,7 +45,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeSuccessorCa
  * 		</li> 
  * 		<li>Fonctions successeurs :
  * 			<ul>
- * 				<li>{@link TimeSuccessorCalculator}</li>
+ * 				<li>{@link TimeFullSuccessorCalculator}</li>
  * 			</ul>
  * 		</li> 
  * </ul>

@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.model.partial;
+package org.totalboumboum.ai.v201112.adapter.model;
 
 /*
  * Total Boum Boum
@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.model.partial;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
@@ -30,6 +31,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.model.partial.AiExplosion;
+import org.totalboumboum.ai.v201112.adapter.model.partial.AiExplosionList;
 
 /**
  * TODO à corriger
@@ -67,89 +70,18 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * @author Vincent Labatut
  *
  */
-public class AiPartialModel
+public class AiAbstractModel
 {	
-	/**
-	 * initialise le modèle avec la zone passée en paramètre.
-	 * 
-	 * @param currentZone
-	 * 		la zone courante, qui servira de point de départ à la simulation
-	 */
-	public AiPartialModel(AiZone zone)
-	{	// dimensions
-		this.width = zone.getWidth();
-		this.height = zone.getHeight();
-		
-		// hero
-		ownHero = zone.getOwnHero();
-		
-		// obstacles
-		obstacles = new boolean[height][width];
-		initObstacles(zone);
-		
-		// explosions
-		explosions = new AiExplosionList[height][width];
-		initExplosions(zone);
-	}	
-	
-	/////////////////////////////////////////////////////////////////
-	// DIMENSIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int width;
-	private int height;
-	
-	/////////////////////////////////////////////////////////////////
-	// HERO				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private AiHero ownHero;
-	
-	/////////////////////////////////////////////////////////////////
-	// OBSTACLES		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** matrice contenant tous les obstacles pour l'agent */
-	private boolean[][] obstacles;
-	
-	/**
-	 * Analyse la zone passée en paramètre et
-	 * en déduit le contenu de la matrice des
-	 * obstacles. On y distingue seulement trois
-	 * types de cases : sans obstacles, avec
-	 * des obstacles destructibles, ou avec
-	 * des obstacles indestructibles.
-	 * 
-	 * @param zone
-	 * 		La zone de référence.
-	 */
-	private void initObstacles(AiZone zone)
-	{	List<AiTile> tiles = zone.getTiles();
-		for(AiTile tile: tiles)
-		{	boolean crossable = tile.isCrossableBy(ownHero);
-			int col = tile.getCol();
-			int row = tile.getRow();
-			obstacles[row][col] = crossable;
-		}
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice contenant toutes les explosions prévues */
-	private AiExplosionList[][] explosions;
 	/** Map associant à chaque bombe la liste des bombes qu'elle menace */
-	private HashMap<AiBomb,List<AiBomb>> threatenedBombs;
+	private HashMap<AiBomb,List<AiBomb>> threatenedBombs = new HashMap<AiBomb,List<AiBomb>>();
 	/** Map associant à chaque bombe le temps avant son explosion */
 	private HashMap<AiBomb,Long> delaysByBombs;
 	/** Map associant à chaque temps avant explosion la liste des bombes concernées */
-	private HashMap<Long,List<AiBomb>> bombsByDelays;
-	
-	
-	/**
-	 * NOTE
-	 * a-t-on vraiment besoin d'obstacles ?
-	 * >> si la case est touchée par une explosion, elle sera vide à la fin de l'explosion,
-	 * 	  de toute façon
-	 */
-	
+	private HashMap<Long,List<AiBomb>> bombsByDelays = new HashMap<Long,List<AiBomb>>();
+
 	/**
 	 * Analyse la zone passée en paramètre et
 	 * en déduit le contenu de la matrice des
@@ -159,11 +91,54 @@ public class AiPartialModel
 	 * 		La zone de référence.
 	 */
 	private void initExplosions(AiZone zone)
-	{	delaysByBombs = zone.getDelaysByBombs();
-		bombsByDelays = zone.getBombsByDelays();
-		threatenedBombs = zone.getThreatenedBombs();
+	{	List<AiBomb> bombs = zone.getBombs();
+		delaysByBombs = new HashMap<AiBomb,Long>();
+		bombsByDelays = new HashMap<Long,List<AiBomb>>();
+		threatenedBombs = new HashMap<AiBomb,List<AiBomb>>();
 		
-		// on rajoute dans les matrice les feux existant
+		// retrieve necessary info
+		for(AiBomb bomb: bombs)
+		{	List<AiFire> fires = bomb.getTile().getFires();
+			// delay map & bomb map
+			long delay = Long.MAX_VALUE; //TODO remote bombs are considered to have an infinite delay, which should be corrected
+			// fire-sensitive bomb currently caught in an explosion
+			if(bomb.hasExplosionTrigger() && !fires.isEmpty())
+			{	long fireDuration = 0;
+				for(AiFire fire: fires)
+				{	long time = fire.getTime();
+					if(time>fireDuration)
+						fireDuration = time;
+				}
+				delay = Math.max(bomb.getLatencyDuration()-fireDuration,0);
+			}
+			// time bomb
+			if(bomb.hasCountdownTrigger())
+			{	long temp = Math.max(bomb.getNormalDuration()-bomb.getTime(),0);
+				delay = Math.min(delay,temp);
+			}
+			delaysByBombs.put(bomb,delay);
+			List<AiBomb> tempList = bombsByDelays.get(delay);
+			if(tempList==null)
+			{	tempList = new ArrayList<AiBomb>();
+				bombsByDelays.put(delay,tempList);
+			}
+			tempList.add(bomb);
+			
+			// threatened bombs list
+			List<AiBomb> tempTarget = new ArrayList<AiBomb>();
+			List<AiTile> blast = bomb.getBlast();
+			for(AiTile tile: blast)
+			{	List<AiBomb> tileBombs = tile.getBombs();
+				// we only consider the bombs sensitive to explosions
+				for(AiBomb b: tileBombs)
+				{	if(b.hasExplosionTrigger())
+						tempTarget.addAll(tileBombs);
+				}
+			}
+			threatenedBombs.put(bomb,tempTarget);
+		}
+		
+		// include existing fires in the matrix
 		{	List<AiFire> fires = zone.getFires();
 			for(AiFire fire: fires)
 			{	int col = fire.getCol();
@@ -181,7 +156,7 @@ public class AiPartialModel
 			}
 		}
 		
-		// on traite les bombes par ordre d'explosion effectif
+		// get temporal explosion order
 		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelays.keySet());
 		while(!orderedDelays.isEmpty())
 		{	// get the delay
@@ -191,21 +166,62 @@ public class AiPartialModel
 			List<AiBomb> bombList = bombsByDelays.get(delay);
 			
 			// process each bomb for the current delay
-			for(AiBomb bomb: bombList)
+			for(AiBomb bomb1: bombList)
 			{	// add explosion to the matrix
-				long endTime = delay + bomb.getExplosionDuration();
-				// get the bomb blast
-				List<AiTile> blast = bomb.getBlast();
-				for(AiTile tile: blast)
-				{	int col = tile.getCol();
-					int row = tile.getRow();
-					AiExplosionList list = explosions[row][col];
-					if(list==null)
-					{	list = new AiExplosionList();
-						explosions[row][col] = list;
+				{	long endTime = delay + bomb1.getExplosionDuration();
+					// get the bomb blast
+					List<AiTile> blast = bomb1.getBlast();
+					for(AiTile tile: blast)
+					{	int col = tile.getCol();
+						int row = tile.getRow();
+						AiExplosionList list = explosions[row][col];
+						if(list==null)
+						{	list = new AiExplosionList();
+							explosions[row][col] = list;
+						}
+						AiExplosion explosion = new AiExplosion(delay,endTime);
+						list.add(explosion);
 					}
-					AiExplosion explosion = new AiExplosion(delay,endTime);
-					list.add(explosion);
+				}
+				
+				// update threatened bombs delays while considering a bomb 
+				// can detonate another one before the regular time 
+				{	// get the threatened bombs
+					List<AiBomb> bList = threatenedBombs.get(bomb1);
+					// update their delays
+					for(AiBomb bomb2: bList)
+					{	// get the delay 
+						long delay2 = delaysByBombs.get(bomb2);
+						// add latency time
+						long newDelay = delay + bomb2.getLatencyDuration();
+						
+						// if this makes the delay shorter, we update eveywhere needed
+						if(bomb2.hasExplosionTrigger() && newDelay<delay2)
+						{	// in the result map
+							delaysByBombs.put(bomb2,newDelay);
+							
+							// we remove the bomb from the other (inverse) map
+							{	List<AiBomb> tempList = bombsByDelays.get(delay2);
+								tempList.remove(bomb2);
+								// and possibly the delay itself, if no other bomb uses it anymore
+								if(tempList.isEmpty())
+								{	bombsByDelays.remove(delay2);
+									orderedDelays.remove(delay2);
+								}
+							}
+							
+							// and put it again, but at the appropriate place this time
+							{	List<AiBomb> tempList = bombsByDelays.get(newDelay);
+								// on crée éventuellement la liste nécessaire
+								if(tempList==null)
+								{	tempList = new ArrayList<AiBomb>();
+									bombsByDelays.put(newDelay,tempList);
+									orderedDelays.add(newDelay);
+								}
+								tempList.add(bomb2);
+							}
+						}
+					}
 				}
 			}
 		}
