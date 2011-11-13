@@ -45,11 +45,13 @@ import org.totalboumboum.engine.content.feature.Direction;
  * obtenue simplement à partir des percepts de l'agent.<br/>
  * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
- * méthodes proposées dans cette classe. Il peut :<ul>
+ * méthodes proposées dans cette classe. Il peut :
+ * <ul>
  * 		<li> réaliser un ou plusieurs pas de simulation et obtenir la zone résultante.</li>
  * 		<li> demander à un des joueurs de poser une bombe</li>
  * 		<li> modifier la direction de déplacement d'un joueur, ou arrêter son déplacement</li>
- * 		<li> demander à une bombe d'exploser</li></ul>
+ * 		<li> demander à une bombe d'exploser</li>
+ * </ul>
  * Au cours de la simulation, une nouvelle zone est calculée et stockée
  * en interne : l'utilisateur peut alors y accéder et l'utiliser. Si
  * de nouveaux pas de simulation sont effectués, cette zone interne est 
@@ -57,16 +59,18 @@ import org.totalboumboum.engine.content.feature.Direction;
  * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.<br/>
  * Il faut souligner que les pas de simulation sont déterminés de façon évènementielle.
  * En d'autres termes, un pas se termine quand un évènement se produit. Les 
- * évènements considérés par cette classe sont :<ul>
- * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)
- * 		<li> un changement d'état (ex : un mur qui commence à brûler)
- * 		<li> un changement de case (ex : un joueur se déplaçant d'une case à une autre)
- * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</ul>
+ * évènements considérés par cette classe sont :
+ * <ul>
+ * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)</li>
+ * 		<li> un changement d'état (ex : un mur qui commence à brûler)</li>
+ * 		<li> un changement de case (ex : un joueur se déplaçant d'une case à une autre)</li>
+ * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</li>
+ * </ul>
  * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
  * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
  * causant la fin du pas de simulation.<br/>
  * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
- * la classe AiModelTest. Notez toute fois que cette classe de test crée la zone
+ * la classe {@link AiFullModelTest}. Notez toute fois que cette classe de test crée la zone
  * en partant de rien, alors que les agents disposent de leurs percepts.
  * Pour cette raison, elle utilise pour initialiser la zone des méthodes 
  * auxquelles les agents n'ont pas accès.

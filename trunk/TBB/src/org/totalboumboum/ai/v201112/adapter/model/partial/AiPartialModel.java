@@ -33,52 +33,59 @@ import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModel;
+import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModelTest;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * TODO à corriger
  * Cette classe est chargée de simuler l'évolution d'une zone.
  * Pour cela, une modèle doit d'abord être initialisé avec une zone de départ,
  * obtenue simplement à partir des percepts de l'agent.<br/>
+ * Par rapport à {@link AiFullModel}, il s'agit ici d'une représentation
+ * simplifiée, définie spécifiquement pour A*. Au contraire, les
+ * objets de classe {@link AiFullModel}, qui contiennent plus
+ * d'information (la zone complète, en fait) sont plus appropriés
+ * à des calculs liés à la précise de décision et à la stratégie de l'agent.<br/>
  * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
- * méthodes proposées dans cette classe. Il peut :<ul>
- * 		<li> réaliser un ou plusieurs pas de simulation et obtenir la zone résultante.</li>
- * 		<li> demander à un des joueurs de poser une bombe</li>
- * 		<li> modifier la direction de déplacement d'un joueur, ou arrêter son déplacement</li>
- * 		<li> demander à une bombe d'exploser</li></ul>
- * Au cours de la simulation, une nouvelle zone est calculée et stockée
- * en interne : l'utilisateur peut alors y accéder et l'utiliser. Si
- * de nouveaux pas de simulation sont effectués, cette zone interne est 
- * remplacée par le résultats de ces simulations.<br/>
+ * méthodes proposées dans cette classe. Il peut :
+ * <ul>
+ * 		<li>simuler un déplacement du joueur.</li>
+ * 		<li>simuler une attente du jouru</li>
+ * </ul>
+ * Au cours de la simulation, le modèle est modifié et son ancien
+ * état est donc perdu. Si vous voulez conserver l'ancien état,
+ * il faut en faire une copie en re-créant un nouveau modèle à
+ * partir de l'existant, avant d'y effectuer une simulation.<br/>
  * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.<br/>
  * Il faut souligner que les pas de simulation sont déterminés de façon évènementielle.
  * En d'autres termes, un pas se termine quand un évènement se produit. Les 
- * évènements considérés par cette classe sont :<ul>
- * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)
- * 		<li> un changement d'état (ex : un mur qui commence à brûler)
- * 		<li> un changement de case (ex : un joueur se déplaçant d'une case à une autre)
- * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</ul>
+ * évènements considérés par cette classe sont :
+ * <ul>
+ * 		<li>la fin du déplacement demandé</li>
+ * 		<li>la fin de l'attente demandée</li>
+ * 		<li>l'élimination du joueur</li>
+ * </ul>
  * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
- * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
- * causant la fin du pas de simulation.<br/>
+ * Si une attente est demandée alors qu'il ne reste pas d'explosion
+ * à venir dans la zone, alors l'attente n'est pas réalisée (car la
+ * zone ne peut plus évoluer).<br/>
  * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
- * la classe AiModelTest. Notez toute fois que cette classe de test crée la zone
+ * la classe {@link AiFullModelTest}. Notez toute fois que cette classe de test crée la zone
  * en partant de rien, alors que les agents disposent de leurs percepts.
  * Pour cette raison, elle utilise pour initialiser la zone des méthodes 
  * auxquelles les agents n'ont pas accès.
  * 
  * @author Vincent Labatut
- *
  */
 public class AiPartialModel
 {	
 	/**
 	 * initialise le modèle avec la zone passée en paramètre.
 	 * 
-	 * @param currentZone
-	 * 		la zone courante, qui servira de point de départ à la simulation
+	 * @param zone
+	 * 		la zone courante, qui servira de point de départ à la simulation.
 	 */
 	public AiPartialModel(AiZone zone)
 	{	// zone
