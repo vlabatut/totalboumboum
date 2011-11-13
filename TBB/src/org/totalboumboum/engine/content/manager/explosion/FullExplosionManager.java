@@ -65,10 +65,13 @@ public class FullExplosionManager extends ExplosionManager
 	}
 	
 	/**
-	 * create the explosion and returns the list of concerned tiles
+	 * Create the explosion and returns the list of concerned tiles.
 	 * 
-	 * @param fake	false if one just wants the tile list and not the actual explosion
-	 * @return	the list of tiles to be put on fire
+	 * @param fake	
+	 * 		{@code true} if one just wants the tile list 
+	 * 		and not the actual explosion.
+	 * @return	
+	 * 		the list of tiles to be put on fire
 	 */
 	@Override
 	public List<Tile> makeExplosion(boolean fake)
