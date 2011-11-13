@@ -294,6 +294,8 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 				// car on ne peut pas prédire quand elles vont exploser
 					&& bomb.hasCountdownTrigger())
 				{	long bombDuration = Math.max(0,bomb.getNormalDuration()-bomb.getTime());
+if(delays.get(bomb)==null)
+	System.out.print("");
 					long duration = delays.get(bomb) + bombDuration + bomb.getExplosionDuration();
 					//long duration = delays.get(bomb);
 					if(duration<result)
