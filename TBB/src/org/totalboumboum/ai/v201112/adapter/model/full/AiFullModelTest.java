@@ -43,7 +43,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public final class AiModelTest
+public final class AiFullModelTest
 {
 	/**
 	 * Cette méthode permet de tester

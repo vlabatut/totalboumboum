@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.model.full.AiModelTest;
+import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModelTest;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -55,7 +55,7 @@ public final class DybrefTest
 	 */
 	public static void main(String args[])
 	{	// init
-		AiZone zone = AiModelTest.initZone();
+		AiZone zone = AiFullModelTest.initZone();
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		ArtificialIntelligence ai = new ArtificialIntelligence(){};
 		

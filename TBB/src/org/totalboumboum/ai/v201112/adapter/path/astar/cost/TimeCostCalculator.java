@@ -28,6 +28,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeFullSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimePartialSuccessorCalculator;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
@@ -47,6 +48,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeFullSuccess
  * 		<li>Fonctions successeurs :
  * 			<ul>
  * 				<li>{@link TimeFullSuccessorCalculator}</li>
+ * 				<li>{@link TimePartialSuccessorCalculator}</li>
  * 			</ul>
  * 		</li>
  * </ul>
