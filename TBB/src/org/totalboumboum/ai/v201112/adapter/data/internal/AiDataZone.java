@@ -387,6 +387,10 @@ public final class AiDataZone extends AiZone
 		{	AiDataBomb bomb = entry.getValue();
 			bombList.add(bomb);
 		}
+		
+		threatenedBombs = null;
+		delaysByBombs = null;
+		bombsByDelays = null;
 	}
 	
 	/**
