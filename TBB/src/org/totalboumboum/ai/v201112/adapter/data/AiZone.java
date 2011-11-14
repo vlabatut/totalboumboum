@@ -225,82 +225,6 @@ public abstract class AiZone
 	 */
 	public abstract AiTile getTile(double x, double y);
 		
-	/**
-	 * renvoie la direction de la case target relativement à la case source.
-	 * Par exemple, la case target de coordonnées (5,5) est à droite de
-	 * la case source de coordonnées (5,6).</br>
-	 * 
-	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
-	 * il faut se déplacer pour aller de la case source à la case target.</br>
-	 * 
-	 * <b>ATTENTION 1 :</b> si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
-	 * il est possible que cette méthode renvoie une direction composite,
-	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
-	 * la classe Direction pour plus d'informations sur ces valeurs.</br>
-	 *  
-	 * <b>ATTENTION 2 :</b> comme les niveaux sont circulaires, il y a toujours deux directions possibles.
-	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
-	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
-	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long.
-	 * <pre>
-	 * <t> S>>>>>>>>>>T  distance=11
-	 * <t>>S..........T> distance=1
-	 * </pre>
-	 * 
-	 * @param source
-	 * 		case de référence
-	 * @param  target
-	 * 		case dont on veut connaitre la direction
-	 * @return	
-	 * 		la direction de target par rapport à source
-	 */
-	public Direction getDirection(AiTile source, AiTile target)
-	{	// differences
-		int dx = target.getCol()-source.getCol();
-		int dy = target.getRow()-source.getRow();
-		
-		// direction
-		Direction temp = Direction.getCompositeFromDouble(dx,dy);
-		Direction tempX = temp.getHorizontalPrimary();
-		Direction tempY = temp.getVerticalPrimary();
-		
-		// distances
-		int distDirX = Math.abs(dx);
-		int distIndirX = getWidth()-distDirX;
-		if(distDirX>distIndirX)
-			tempX = tempX.getOpposite();
-		int distDirY = Math.abs(dy);
-		int distIndirY = getHeight()-distDirY;
-		if(distDirY>distIndirY)
-			tempY = tempY.getOpposite();
-		
-		// result
-		Direction result = Direction.getComposite(tempX,tempY);
-		return result;
-	}
-	
-	/**
-	 * Pareil que {@link #getDirection(double, double, double, double)}, mais 
-	 * la méthode prend des emplacements en paramètres
-	 * plutôt que des coordonnées.
-	 * 
-	 * @param source
-	 * 		Emplacement de référence
-	 * @param  target
-	 * 		Emplacement dont on veut connaitre la direction
-	 * @return	
-	 * 		La direction de {@code target} par rapport à {@code source}.
-	 */
-	public Direction getDirection(AiLocation source, AiLocation target)
-	{	double x1 = source.getPosX();
-		double y1 = source.getPosY();
-		double x2 = target.getPosX();
-		double y2 = target.getPosY();
-		
-		Direction result = getDirection(x1,y1,x2,y2);
-		return result;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -373,10 +297,6 @@ public abstract class AiZone
 	public HashMap<AiBomb,Long> getDelaysByBombs()
 	{	if(delaysByBombs==null)
 			initBombData();
-else
-	System.out.print("");
-if(delaysByBombs.isEmpty())
-	System.out.print("");
 		return delaysByBombs;
 	}
 	
@@ -668,6 +588,82 @@ if(delaysByBombs.isEmpty())
 	// DIRECTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
+	 * Renvoie la direction de la case target relativement à la case source.
+	 * Par exemple, la case target de coordonnées (5,5) est à droite de
+	 * la case source de coordonnées (5,6).
+	 * </br>
+	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
+	 * il faut se déplacer pour aller de la case source à la case target.
+	 * </br>
+	 * <b>ATTENTION 1 :</b> si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
+	 * il est possible que cette méthode renvoie une direction composite,
+	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
+	 * la classe {@link Direction} pour plus d'informations sur ces valeurs.
+	 * </br>
+	 * <b>ATTENTION 2 :</b> comme les niveaux sont circulaires, il y a toujours deux directions possibles.
+	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
+	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
+	 * {@link Direction#RIGHT RIGHT}, car {@link Direction#LEFT LEFT} permet également d'atteindre la case, 
+	 * mais en parcourant un chemin plus long.
+	 * <pre>
+	 * <t> S>>>>>>>>>>T  distance=11
+	 * <t>>S..........T> distance=1
+	 * </pre>
+	 * 
+	 * @param source
+	 * 		Case de référence.
+	 * @param target
+	 * 		Case dont on veut connaitre la direction.
+	 * @return	
+	 * 		La direction de {@code target} par rapport à {@code source}.
+	 */
+	public Direction getDirection(AiTile source, AiTile target)
+	{	// differences
+		int dx = target.getCol()-source.getCol();
+		int dy = target.getRow()-source.getRow();
+		
+		// direction
+		Direction temp = Direction.getCompositeFromDouble(dx,dy);
+		Direction tempX = temp.getHorizontalPrimary();
+		Direction tempY = temp.getVerticalPrimary();
+		
+		// distances
+		int distDirX = Math.abs(dx);
+		int distIndirX = getWidth()-distDirX;
+		if(distDirX>distIndirX)
+			tempX = tempX.getOpposite();
+		int distDirY = Math.abs(dy);
+		int distIndirY = getHeight()-distDirY;
+		if(distDirY>distIndirY)
+			tempY = tempY.getOpposite();
+		
+		// result
+		Direction result = Direction.getComposite(tempX,tempY);
+		return result;
+	}
+	
+	/**
+	 * Pareil que {@link #getDirection(double, double, double, double)}, mais 
+	 * la méthode prend des emplacements en paramètres
+	 * plutôt que des coordonnées.
+	 * 
+	 * @param source
+	 * 		Emplacement de référence
+	 * @param  target
+	 * 		Emplacement dont on veut connaitre la direction
+	 * @return	
+	 * 		La direction de {@code target} par rapport à {@code source}.
+	 */
+	public Direction getDirection(AiLocation source, AiLocation target)
+	{	double x1 = source.getPosX();
+		double y1 = source.getPosY();
+		double x2 = target.getPosX();
+		double y2 = target.getPosY();
+		Direction result = getDirection(x1,y1,x2,y2);
+		return result;
+	}
+	
+	/**
 	 * Calcule la direction pour aller du sprite source au sprite target.
 	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
 	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
@@ -680,19 +676,14 @@ if(delaysByBombs.isEmpty())
 	 * @param target
 	 * 		sprite de destination
 	 * @return	
-	 * 		la direction pour aller de source vers target
+	 * 		La direction pour aller de source vers target
 	 */
 	public Direction getDirection(AiSprite source, AiSprite target)
-	{	Direction result;
-		if(source==null || target==null)
-			result = Direction.NONE;
-		else
-		{	double x1 = source.getPosX();
-			double y1 = source.getPosY();
-			double x2 = target.getPosX();
-			double y2 = target.getPosY();
-			result = getDirection(x1,y1,x2,y2);
-		}
+	{	double x1 = source.getPosX();
+		double y1 = source.getPosY();
+		double x2 = target.getPosX();
+		double y2 = target.getPosY();
+		Direction result = getDirection(x1,y1,x2,y2);
 		return result;		
 	}
 	
@@ -712,16 +703,11 @@ if(delaysByBombs.isEmpty())
 	 * 		la direction pour aller du sprite vers la case
 	 */
 	public Direction getDirection(AiSprite sprite, AiTile tile)
-	{	Direction result;
-		if(sprite==null || tile==null)
-			result = Direction.NONE;
-		else
-		{	double x1 = sprite.getPosX();
-			double y1 = sprite.getPosY();
-			double x2 = tile.getPosX();
-			double y2 = tile.getPosY();
-			result = getDirection(x1,y1,x2,y2);
-		}
+	{	double x1 = sprite.getPosX();
+		double y1 = sprite.getPosY();
+		double x2 = tile.getPosX();
+		double y2 = tile.getPosY();
+		Direction result = getDirection(x1,y1,x2,y2);
 		return result;
 	}
 	
@@ -760,8 +746,9 @@ if(delaysByBombs.isEmpty())
 	// TILE DISTANCES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (row1,col1) et (row2,col2), exprimée en cases. 
+	 * Renvoie la distance de Manhattan entre les cases de coordonnées
+	 * (row1,col1) et (row2,col2), exprimée en cases.
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
@@ -785,8 +772,9 @@ if(delaysByBombs.isEmpty())
 	}
 
 	/**
-	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (row1,col1) et (row2,col2), exprimée en cases. 
+	 * Renvoie la distance de Manhattan entre les cases de coordonnées
+	 * (row1,col1) et (row2,col2), exprimée en cases.
+	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
@@ -807,8 +795,9 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. 
+	 * Renvoie la distance de Manhattan entre les deux cases passées en paramètres,
+	 * exprimée en cases.
+	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
@@ -825,8 +814,9 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. 
+	 * Renvoie la distance de Manhattan entre les deux cases passées en paramètres,
+	 * exprimée en cases.
+	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
@@ -850,8 +840,9 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. 
+	 * Renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
+	 * exprimée en cases.
+	 * <br/> 
    	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
@@ -868,8 +859,9 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. 
+	 * Renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
+	 * exprimée en cases.
+	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
@@ -891,8 +883,10 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (row1,col1) et (row2,col2), exprimée en cases. 
+	 * Renvoie la distance de Manhattan, exprimée en cases,
+	 *  entre les cases contenant
+	 * les emplacements passés en paramètres.
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
@@ -914,8 +908,9 @@ if(delaysByBombs.isEmpty())
 	}
 
 	/**
-	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (row1,col1) et (row2,col2), exprimée en cases. 
+	 * renvoie la distance de Manhattan, exprimées en cases,
+	 * entre les cases contenant les emplacements passés en paramètres.
+	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
@@ -993,8 +988,9 @@ if(delaysByBombs.isEmpty())
 	// PIXEL DISTANCES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. 
+	 * Renvoie la distance de Manhattan entre les points de coordonnées
+	 * (x1,y1) et (x2,y2), exprimée en pixels.
+	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
@@ -1017,8 +1013,9 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. 
+	 * Renvoie la distance de Manhattan entre les points de coordonnées
+	 * (x1,y1) et (x2,y2), exprimée en pixels.
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
@@ -1044,8 +1041,9 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en pixels. 
+	 * Renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
+	 * exprimée en pixels.
+	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
@@ -1062,7 +1060,8 @@ if(delaysByBombs.isEmpty())
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels. 
+	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels.
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction indiquée par le 
@@ -1089,7 +1088,8 @@ if(delaysByBombs.isEmpty())
 
 	/**
 	 * Renvoie la distance de Manhattan entre les emplacements passés
-	 * en paramètres, exprimée en pixels.<br/>
+	 * en paramètres, exprimée en pixels.
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
@@ -1114,7 +1114,8 @@ if(delaysByBombs.isEmpty())
 
 	/**
 	 * Renvoie la distance de Manhattan entre les emplacements passés
-	 * en paramètres, exprimée en pixels.<br/>
+	 * en paramètres, exprimée en pixels.
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
@@ -1138,7 +1139,8 @@ if(delaysByBombs.isEmpty())
 	 * Renvoie la distance de Manhattan, exprimée en pixels, 
 	 * entre les coordonnées et la case passées en paramètre.
 	 * On considère le point de la case le plus proche du
-	 * point de départ.<br/>
+	 * point de départ (et non pas son centre !).
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
@@ -1155,7 +1157,11 @@ if(delaysByBombs.isEmpty())
 	 * 		Direction à considérer.
 	 */
 	public double getPixelDistance(double x1, double y1, AiTile tile, Direction direction)
-	{	double xCenter = tile.getPosX();
+	{	double contactPoint[] = getContactPoint(x1,y1,tile);
+		double result = getPixelDistance(x1,y1,contactPoint[0],contactPoint[1],direction);
+	
+/*	
+		double xCenter = tile.getPosX();
 		double yCenter = tile.getPosY();
 		double dim = tile.getSize()/2;
 		
@@ -1168,7 +1174,7 @@ if(delaysByBombs.isEmpty())
 			if(dist<result)
 				result = dist;
 		}
-		
+*/		
 		return result;
 	}
 
@@ -1176,7 +1182,8 @@ if(delaysByBombs.isEmpty())
 	 * Renvoie la distance de Manhattan, exprimée en pixels, 
 	 * entre les coordonnées et la case passées en paramètre.
 	 * On considère le point de la case le plus proche du
-	 * point de départ.<br/>
+	 * point de départ (et non pas son centre !).
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
@@ -1190,20 +1197,7 @@ if(delaysByBombs.isEmpty())
 	 * 		Case d'arrivée.
 	 */
 	public double getPixelDistance(double x1, double y1, AiTile tile)
-	{	double xCenter = tile.getPosX();
-		double yCenter = tile.getPosY();
-		double dim = tile.getSize()/2;
-		
-		double result = Double.POSITIVE_INFINITY;
-		for(Direction d: Direction.getPrimaryValues())
-		{	int val[] = d.getIntFromDirection();
-			double x2 = xCenter + val[0]*dim;
-			double y2 = yCenter + val[1]*dim;
-			double dist = getPixelDistance(x1,y1,x2,y2);
-			if(dist<result)
-				result = dist;
-		}
-		
+	{	double result = getPixelDistance(x1,y1,tile,Direction.NONE);
 		return result;
 	}
 
@@ -1211,7 +1205,8 @@ if(delaysByBombs.isEmpty())
 	 * Renvoie la distance de Manhattan, exprimée en pixels, 
 	 * entre l'emplacement et la case passés en paramètre.
 	 * On considère le point de la case le plus proche du
-	 * point de départ.<br/>
+	 * point de départ (et non pas son centre !).
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
@@ -1228,7 +1223,7 @@ if(delaysByBombs.isEmpty())
 	public double getPixelDistance(AiLocation location, AiTile tile, Direction direction)
 	{	double x = location.getPosX();
 		double y = location.getPosY();
-		double result = getPixelDistance(x,y,tile);
+		double result = getPixelDistance(x,y,tile,direction);
 		return result;
 	}
 
@@ -1236,7 +1231,8 @@ if(delaysByBombs.isEmpty())
 	 * Renvoie la distance de Manhattan, exprimée en pixels, 
 	 * entre l'emplacement et la case passés en paramètre.
 	 * On considère le point de la case le plus proche du
-	 * point de départ.<br/>
+	 * point de départ (et non pas son centre !).
+	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
@@ -1269,7 +1265,8 @@ if(delaysByBombs.isEmpty())
 	 * Renvoie le point de contact entre
 	 * les centres des deux cases passées en paramètres. 
 	 * Les coordonnées du point de contact sont renvoyées 
-	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * sous forme de tableau contenant deux doubles x et y.
+	 * <br/>
 	 * <b>Attention :</b> Ces deux cases doivent être 
 	 * des voisines directes.
 	 * 
@@ -1281,31 +1278,33 @@ if(delaysByBombs.isEmpty())
 	 * 		La position du point de contact sous forme de couple (x,y)
 	 * 
 	 * @throw IllegalArgumentException
-	 * 		Si les deux cases ne sont pas voisines.
+	 * 		Si les deux cases ne sont pas des voisines directes.
 	 */
 	public double[] getContactPoint(AiTile tile1, AiTile tile2)
-	{	double result[] = {0,0};
-
+	{	double x = 0;
+		double y = 0;
+		
 		// on récupère les coordonnées des cases
 		double tile1x = tile1.getPosX();
 		double tile1y = tile1.getPosY();
-		double tile2x = tile2.getPosX();
-		double tile2y = tile2.getPosY();
 		
 		// direction entre les points
 		Direction direction = getDirection(tile1,tile2);
 		if(direction.isComposite())
 			throw new IllegalArgumentException("The tiles must be direct neighbors");
+		int dir[] = direction.getIntFromDirection();
 		
+		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	result[0] = (tile1x + tile2x) / 2;
-			result[1] = tile1y;
+		{	x = tile1x + dir[0]*tile1.size/2;
+			y = tile1y;
 		}
 		else if(direction.isVertical())
-		{	result[0] = tile1x;
-			result[1] = (tile1y + tile2y) / 2;
+		{	x = tile1x;
+			y = tile1y + dir[1]*tile1.size/2;
 		}
 		
+		double result[] = normalizePosition(x,y);
 		return result;
 	}
 	
@@ -1314,7 +1313,8 @@ if(delaysByBombs.isEmpty())
 	 * les deux points dont les coordonnées sont
 	 * passées en paramètres. 
 	 * Les coordonnées du point de contact sont renvoyées 
-	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * sous forme de tableau contenant deux doubles x et y.
+	 * <br/>
 	 * <b>Attention :</b> Ces deux points doivent appartenir 
 	 * à des des cases voisines directes.
 	 * 
@@ -1333,30 +1333,32 @@ if(delaysByBombs.isEmpty())
 	 * 		Si les deux points n'appartiennent pas à des cases voisines.
 	 */
 	public double[] getContactPoint(double x1, double y1, double x2, double y2)
-	{	double result[] = {0,0};
-
+	{	double x = 0;
+		double y = 0;
+	
 		// on récupère les cases
 		AiTile tile1 = getTile(x1,y1);
 		double tile1x = tile1.getPosX();
 		double tile1y = tile1.getPosY();
 		AiTile tile2 = getTile(x2,y2);
-		double tile2x = tile2.getPosX();
-		double tile2y = tile2.getPosY();
 		
 		// direction entre les points
 		Direction direction = getDirection(tile1,tile2);
 		if(direction.isComposite())
 			throw new IllegalArgumentException("Points must be in direct neighbor tiles");
+		int dir[] = direction.getIntFromDirection();
 		
+		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	result[0] = (tile1x + tile2x) / 2;
-			result[1] = (y1 + y2) / 2;
+		{	x = tile1x + dir[0]*tile1.size/2;
+			y = (y1 + y2) / 2;
 		}
 		else if(direction.isVertical())
-		{	result[0] = (x1 + x2) / 2;
-			result[1] = (tile1y + tile2y) / 2;
+		{	x = (x1 + x2) / 2;
+			y = tile1y + dir[1]*tile1.size/2;
 		}
 		
+		double result[] = normalizePosition(x,y);
 		return result;
 	}
 
@@ -1366,7 +1368,8 @@ if(delaysByBombs.isEmpty())
 	 * passées en paramètres et la case également
 	 * passée en paramètre. 
 	 * Les coordonnées du point de contact sont renvoyées 
-	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * sous forme de tableau contenant deux doubles x et y.
+	 * <br/>
 	 * <b>Attention :</b> Le point et la case passés
 	 *  en paramètres doivent appartenir à des des 
 	 *  cases voisines directes.
@@ -1384,8 +1387,9 @@ if(delaysByBombs.isEmpty())
 	 * 		Si le point et la case ne sont pas voisins.
 	 */
 	public double[] getContactPoint(double x1, double y1, AiTile tile)
-	{	double result[] = {0,0};
-
+	{	double x = 0;
+		double y = 0;
+		
 		// on récupère les cases
 		AiTile tile1 = getTile(x1,y1);
 		double tile1x = tile1.getPosX();
@@ -1397,16 +1401,19 @@ if(delaysByBombs.isEmpty())
 		Direction direction = getDirection(tile1,tile);
 		if(direction.isComposite())
 			throw new IllegalArgumentException("Points must be in direct neighbor tiles");
+		int dir[] = direction.getIntFromDirection();
 		
+		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	result[0] = (tile1x + tile2x) / 2;
-			result[1] = (y1 + tile2y) / 2;
+		{	x = tile1x + dir[0]*tile1.size/2;
+			y = (y1 + tile2y) / 2;
 		}
 		else if(direction.isVertical())
-		{	result[0] = (x1 + tile2x) / 2;
-			result[1] = (tile1y + tile2y) / 2;
+		{	x = (x1 + tile2x) / 2;
+			y = tile1y + dir[1]*tile1.size/2;
 		}
 		
+		double result[] = normalizePosition(x,y);
 		return result;
 	}
 
@@ -1414,7 +1421,8 @@ if(delaysByBombs.isEmpty())
 	 * Renvoie le point de contact entre
 	 * l'emplacement et la case passés en paramètres. 
 	 * Les coordonnées du point de contact sont renvoyées 
-	 * sous forme de tableau contenant deux doubles x et y.<br/>
+	 * sous forme de tableau contenant deux doubles x et y.
+	 * <br/>
 	 * <b>Attention :</b> L'emplacement et la case passés
 	 *  en paramètres doivent appartenir à des des 
 	 *  cases voisines directes.
@@ -1430,8 +1438,9 @@ if(delaysByBombs.isEmpty())
 	 * 		Si l'emplacement et la case ne sont pas voisins.
 	 */
 	public double[] getContactPoint(AiLocation location, AiTile tile)
-	{	double result[] = {0,0};
-
+	{	double x = 0;
+		double y = 0;
+		
 		// on récupère les cases
 		double x1 = location.getPosX();
 		double y1 = location.getPosY();
@@ -1445,16 +1454,19 @@ if(delaysByBombs.isEmpty())
 		Direction direction = getDirection(tile1,tile);
 		if(direction.isComposite())
 			throw new IllegalArgumentException("Both location and tile must be direct neighbors");
+		int dir[] = direction.getIntFromDirection();
 		
+		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	result[0] = (tile1x + tile2x) / 2;
-			result[1] = (y1 + tile2y) / 2;
+		{	x = tile1x + dir[0]*tile1.size/2;
+			y = (y1 + tile2y) / 2;
 		}
 		else if(direction.isVertical())
-		{	result[0] = (x1 + tile2x) / 2;
-			result[1] = (tile1y + tile2y) / 2;
+		{	x = (x1 + tile2x) / 2;
+			y = tile1y + dir[1]*tile1.size/2;
 		}
 		
+		double result[] = normalizePosition(x,y);
 		return result;
 	}
 
