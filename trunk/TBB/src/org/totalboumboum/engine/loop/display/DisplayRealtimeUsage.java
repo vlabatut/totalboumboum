@@ -29,6 +29,7 @@ import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -199,6 +200,12 @@ public class DisplayRealtimeUsage implements Display
 								duration = 0l;
 							durationStr = nf.format(duration)+unit;
 						}
+						// get max text
+						String maxStr;
+						{	LinkedList<Long> list = instantDurations.get(stepName);
+							long max = Collections.max(list);
+							maxStr = "max: "+ nf.format(max) + unit;	
+						}						
 						
 						// draw rectangle
 						box = smallMetrics.getStringBounds(stepName,g);
@@ -221,12 +228,19 @@ public class DisplayRealtimeUsage implements Display
 							background = new Color(0,0,0,200);
 						}
 						int yText = y + height/3;
+						// title
 						int xText = x + 2;
 						g.setColor(background);
 						g.drawString(stepName,xText+1,yText+1);
 						g.setColor(color);
 						g.drawString(stepName,xText,yText);
-
+						// max
+						xText = x + 200;
+						g.setColor(background);
+						g.drawString(maxStr,xText+1,yText+1);
+						g.setColor(color);
+						g.drawString(maxStr,xText,yText);
+						
 						// draw duration text
 						box = smallMetrics.getStringBounds(durationStr,g);
 						width = (int)box.getWidth();
