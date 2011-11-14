@@ -63,6 +63,7 @@ final class AiSimZone extends AiZone
 	 */
 	protected AiSimZone(AiZone zone)
 	{	// matrix and tiles
+		Thread.yield();
 		AiTile[][] m = zone.getMatrix();
 		height = zone.getHeight();
 		width = zone.getWidth();
@@ -83,6 +84,7 @@ final class AiSimZone extends AiZone
 		}
 		
 		// sprites
+		Thread.yield();
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
 			{	AiTile tile = zone.getTile(row,col);
@@ -128,6 +130,7 @@ final class AiSimZone extends AiZone
 		}
 		
 		// also copy the eliminated heroes
+		Thread.yield();
 		for(AiHero hero: zone.getHeroes())
 		{	if(!externalHeroes.contains(hero))
 			{	AiTile tile = hero.getTile();
@@ -145,6 +148,7 @@ final class AiSimZone extends AiZone
 		ownHero = getInternalHeroByColor(color);
 		
 		// set meta-data
+		Thread.yield();
 		for(AiHero hero: zone.getHeroes())
 		{	color = hero.getColor();
 			AiSimHero aiHero = getInternalHeroByColor(color);
@@ -157,6 +161,7 @@ final class AiSimZone extends AiZone
 		}
 		
 		// items
+		Thread.yield();
 		hiddenItemsCount = zone.getHiddenItemsCount();
 		for(AiItemType type: AiItemType.values())
 		{	int value = zone.getHiddenItemsCount(type);
@@ -179,7 +184,8 @@ final class AiSimZone extends AiZone
 	 * 		largeur de la zone à créer, en cases
 	 */
 	protected AiSimZone(int height, int width)
-	{	this.height = height;
+	{	Thread.yield();
+		this.height = height;
 		this.width = width;
 		pixelLeftX = 0;
 		pixelTopY = 0;
