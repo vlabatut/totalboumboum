@@ -1157,11 +1157,7 @@ public abstract class AiZone
 	 * 		Direction à considérer.
 	 */
 	public double getPixelDistance(double x1, double y1, AiTile tile, Direction direction)
-	{	double contactPoint[] = getContactPoint(x1,y1,tile);
-		double result = getPixelDistance(x1,y1,contactPoint[0],contactPoint[1],direction);
-	
-/*	
-		double xCenter = tile.getPosX();
+	{	double xCenter = tile.getPosX();
 		double yCenter = tile.getPosY();
 		double dim = tile.getSize()/2;
 		
@@ -1174,7 +1170,7 @@ public abstract class AiZone
 			if(dist<result)
 				result = dist;
 		}
-*/		
+		
 		return result;
 	}
 
