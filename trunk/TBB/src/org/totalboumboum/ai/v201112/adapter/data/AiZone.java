@@ -326,11 +326,11 @@ public abstract class AiZone
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map associant à chaque bombe la liste des bombes qu'elle menace */
-	private HashMap<AiBomb,List<AiBomb>> threatenedBombs = null;
+	protected HashMap<AiBomb,List<AiBomb>> threatenedBombs = null;
 	/** Map associant à chaque bombe le temps avant son explosion */
-	private HashMap<AiBomb,Long> delaysByBombs = null;
+	protected HashMap<AiBomb,Long> delaysByBombs = null;
 	/** Map associant à chaque temps avant explosion la liste des bombes concernées */
-	private HashMap<Long,List<AiBomb>> bombsByDelays = null;
+	protected HashMap<Long,List<AiBomb>> bombsByDelays = null;
 	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
@@ -373,6 +373,10 @@ public abstract class AiZone
 	public HashMap<AiBomb,Long> getDelaysByBombs()
 	{	if(delaysByBombs==null)
 			initBombData();
+else
+	System.out.print("");
+if(delaysByBombs.isEmpty())
+	System.out.print("");
 		return delaysByBombs;
 	}
 	
