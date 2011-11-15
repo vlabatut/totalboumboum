@@ -129,7 +129,8 @@ public class AiPartialModel
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
 			{	obstacles[row][col] = model.obstacles[row][col];
-				explosions[row][col] = model.explosions[row][col].copy();
+				if(explosions[row][col]!=null)
+					explosions[row][col] = model.explosions[row][col].copy();
 			}
 		}
 		
@@ -221,7 +222,7 @@ public class AiPartialModel
 		{	boolean crossable = tile.isCrossableBy(ownHero);
 			int col = tile.getCol();
 			int row = tile.getRow();
-			obstacles[row][col] = crossable;
+			obstacles[row][col] = !crossable;
 		}
 	}
 	
@@ -360,14 +361,16 @@ public class AiPartialModel
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
 			{	AiExplosionList expls = explosions[row][col];
-				for(AiExplosion explosion: expls)
-				{	long startTime = explosion.getStart();
-					List<AiExplosion> list = explosionMap.get(startTime);
-					if(list==null)
-					{	list = new ArrayList<AiExplosion>();
-						explosionMap.put(startTime,list);
+				if(expls!=null)
+				{	for(AiExplosion explosion: expls)
+					{	long startTime = explosion.getStart();
+						List<AiExplosion> list = explosionMap.get(startTime);
+						if(list==null)
+						{	list = new ArrayList<AiExplosion>();
+							explosionMap.put(startTime,list);
+						}
+						list.add(explosion);
 					}
-					list.add(explosion);
 				}
 			}
 		}
@@ -435,6 +438,8 @@ public class AiPartialModel
 		result = simulateExplosions(timeNeeded,direction);
 		double cp[] = zone.getContactPoint(ownLocation,destinationTile);
 		ownLocation = new AiLocation(cp[0],cp[1],zone);
+		if(duration==0)
+			duration = timeNeeded;
 		
 		return result;
 	}
@@ -483,6 +488,8 @@ public class AiPartialModel
 		int sourceRow = sourceTile.getRow();
 		int sourceCol = sourceTile.getCol();
 		AiTile destinationTile = sourceTile.getNeighbor(direction);
+if(destinationTile==null)
+	System.out.print("");
 		int destinationRow = destinationTile.getRow();
 		int destinationCol = destinationTile.getCol();
 		
@@ -531,6 +538,8 @@ public class AiPartialModel
 						itExp.remove();
 						// et aussi de la liste de la matrice
 						explosions[row][col].remove(explosion);
+						if(explosions[row][col].isEmpty())
+							explosions[row][col] = null;
 						// on màj la durée simulée
 						duration = Math.max(duration,endTime);
 						// on màj la matrice d'obstacles, car le contenu éventuel de la case disparait

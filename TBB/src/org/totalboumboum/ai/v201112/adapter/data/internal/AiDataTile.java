@@ -390,9 +390,9 @@ final class AiDataTile extends AiTile
 	private final HashMap<Direction,AiDataTile> neighbors = new HashMap<Direction, AiDataTile>();
 	
 	/**
-	 * initialise une fois pour toutes les voisins de la case,
+	 * Initialise une fois pour toutes les voisins de la case,
 	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
-	 * getNeighbors.
+	 * {@link #getNeighbors}.
 	 */
 	protected void initNeighbors()
 	{	List<Direction> directions = Direction.getPrimaryValues();
@@ -403,11 +403,15 @@ final class AiDataTile extends AiTile
 			AiDataTile aiNeighbor = getZone().getTile(row,col);
 			neighbors.put(direction,aiNeighbor);
 		}
+		neighbors.put(Direction.NONE,this);
 	}
 	
 	@Override
 	public AiDataTile getNeighbor(Direction direction)
-	{	return neighbors.get(direction);		
+	{	if(direction.isComposite())
+			throw new IllegalArgumentException("getNeighbor does not handle not composite directions.");
+		AiDataTile result = neighbors.get(direction);
+		return result;
 	}
 	
 	@Override
