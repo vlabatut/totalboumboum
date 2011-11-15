@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiAbstractSearchAlgorithm;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
@@ -267,7 +268,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		
 		boolean found = false;
 		// traitement
-		if(!endTiles.isEmpty())
+		if(!endTiles.isEmpty() && !queue.isEmpty())
 		{	do
 			{	ai.checkInterruption();
 				long before1 = print("---------- new iteration --");
@@ -276,7 +277,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				lastSearchNode = queue.poll();
 				print("           Visited : "+lastSearchNode.toString());
 				print("           Queue length: "+queue.size());
-				print("           Zone:\n"+lastSearchNode.getLocation().getTile().getZone());
+				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
+				print("           Zone:\n"+zone);
 				
 				// on teste si on est arrivé à la fin de la recherche
 				if(endTiles.contains(lastSearchNode.getLocation().getTile()))
