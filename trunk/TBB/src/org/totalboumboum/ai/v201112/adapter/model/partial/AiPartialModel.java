@@ -488,8 +488,6 @@ public class AiPartialModel
 		int sourceRow = sourceTile.getRow();
 		int sourceCol = sourceTile.getCol();
 		AiTile destinationTile = sourceTile.getNeighbor(direction);
-if(destinationTile==null)
-	System.out.print("");
 		int destinationRow = destinationTile.getRow();
 		int destinationCol = destinationTile.getCol();
 		
@@ -564,6 +562,113 @@ if(destinationTile==null)
 					explosionMap.put(limit,list);
 			}
 		}
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Cette fonction permet d'afficher la zone représentée dans ce modèle
+	 * sous forme d'ASCII art, ce qui est beaucoup plus lisible que du texte classique.
+	 * <br/>
+	 * <b>Attention :</b> pour avoir un affichage correct avec la console Eclipse, il faut
+	 * aller dans la configuration de démarrage du programme, aller
+	 * dans l'onglet "Commnon" puis dans la partie "Console Encoding" et
+	 * sélectionner UTF8 ou unicode.
+	 * <br/>
+	 * Voici un exemple d'affichage obtenu :<
+	 * <pre>
+	 *   0 1 2 3 4 5 6
+	 *  ┌─┬─┬─┬─┬─┬─┬─┐
+	 * 0│█│█│█│█│█│█│█│	Légende:
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	┌─┐
+	 * 1│█│☺│ │□│ │ │█│	│ │	case vide
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	└─┘
+	 * 2│█│ │█│ │█│ │█│	 █ 	mur destructible non-menacé ou mur indestructible
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ▒ 	mur destructible menacé
+	 * 3│█│░│☻│ │ │▒│█│	 ☺ 	joueur non-menacé
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ☻ 	joueur menacé
+	 * 4│█│░│█│ │█│ │█│	 ░	feu ou case vide menacée
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	  	case vide non-menacée
+	 * 5│█│░│░│░│ │●│█│	 
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 6│█│█│█│█│█│█│█│
+	 *  └─┴─┴─┴─┴─┴─┴─┘
+	 * </pre>
+	 * 
+	 * @return
+	 * 		Une représentation de la zone de type ASCII art.
+	 */
+	@Override
+	public String toString()
+	{	String result = "  ";
+		AiTile ownTile = ownLocation.getTile();
+		int ownRow = ownTile.getRow();
+		int ownCol = ownTile.getCol();
+	
+		// col numbers
+		if(width>10)
+		{	for(int i=0;i<10;i++)
+				result = result + "  ";
+			for(int i=10;i<width;i++)
+				result = result + " " + (i/10);
+			result = result + "\n";
+		}
+		result = result + "  ";
+		for(int i=0;i<width;i++)
+			result = result + " " + (i%10);
+		result = result + "\n";
+		
+		// top row
+		result = result + "  ┌";
+		for(int col=0;col<width-1;col++)
+			result = result + "─┬";
+		result = result + "─┐\n";
+		
+		// content
+		for(int row=0;row<height;row++)
+		{	// row number
+			if(row<10)
+				result = result + " ";
+			result = result + row;
+			// actual content
+			for(int col=0;col<width;col++)
+			{	result = result + "│";
+				if(obstacles[row][col])
+				{	if(explosions[row][col]==null)
+						result = result + "█";
+					else
+						result = result + "▒";
+				}
+				else if(row==ownRow && col==ownCol)
+				{	if(explosions[row][col]==null)
+						result = result + "☺";
+					else
+						result = result + "☻";
+				}
+				else
+				{	if(explosions[row][col]==null)
+						result = result + " ";
+					else
+						result = result + "░ ";
+				}
+			}
+			result = result + "│\n";
+			if(row<height-1)
+			{	result = result + "  ├";
+				for(int col=0;col<width-1;col++)
+					result = result + "─┼";
+				result = result + "─┤\n";
+			}
+		}
+		
+		// bottom row
+		result = result + "  └";
+		for(int col=0;col<width-1;col++)
+			result = result + "─┴";
+		result = result + "─┘\n";
 		
 		return result;
 	}
