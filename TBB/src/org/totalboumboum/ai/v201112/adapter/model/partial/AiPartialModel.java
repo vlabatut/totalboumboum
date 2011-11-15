@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
+import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -129,7 +130,7 @@ public class AiPartialModel
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
 			{	obstacles[row][col] = model.obstacles[row][col];
-				if(explosions[row][col]!=null)
+				if(model.explosions[row][col]!=null)
 					explosions[row][col] = model.explosions[row][col].copy();
 			}
 		}
@@ -220,6 +221,8 @@ public class AiPartialModel
 	{	List<AiTile> tiles = zone.getTiles();
 		for(AiTile tile: tiles)
 		{	boolean crossable = tile.isCrossableBy(ownHero);
+				// pour éviter de considérer une bombe comme un obstacle
+//				&& !tile.getBlocks().isEmpty(); // inutile, en fait : une bombe est un obstacle qui va disparaitre
 			int col = tile.getCol();
 			int row = tile.getRow();
 			obstacles[row][col] = !crossable;
@@ -338,15 +341,27 @@ public class AiPartialModel
 				// get the bomb blast
 				List<AiTile> blast = bomb.getBlast();
 				for(AiTile tile: blast)
-				{	int col = tile.getCol();
-					int row = tile.getRow();
-					AiExplosionList list = explosions[row][col];
-					if(list==null)
-					{	list = new AiExplosionList();
-						explosions[row][col] = list;
+				{	// check if the tile contains a hardwall
+					List<AiBlock> blocks = tile.getBlocks();
+					boolean hardwall = false;
+					Iterator<AiBlock> it = blocks.iterator();
+					while(it.hasNext() && !hardwall)
+					{	AiBlock block = it.next();
+						hardwall = !block.isDestructible();
 					}
-					AiExplosion explosion = new AiExplosion(delay,endTime,tile);
-					list.add(explosion);
+					
+					// only ass tiles without any hardwall (these will always be obstacles anyway)
+					if(!hardwall)
+					{	int col = tile.getCol();
+						int row = tile.getRow();
+						AiExplosionList list = explosions[row][col];
+						if(list==null)
+						{	list = new AiExplosionList();
+							explosions[row][col] = list;
+						}
+						AiExplosion explosion = new AiExplosion(delay,endTime,tile);
+						list.add(explosion);
+					}
 				}
 			}
 		}
@@ -419,6 +434,8 @@ public class AiPartialModel
 		AiTile destinationTile = sourceTile.getNeighbor(direction);
 		int destinationRow = destinationTile.getRow();
 		int destinationCol = destinationTile.getCol();
+		double destinationX = ownX;
+		double destinationY = ownY;
 		
 		// distance à parcourir pour changer de case
 		double distance = 0;
@@ -426,18 +443,24 @@ public class AiPartialModel
 		{	// si la case d'arrivée contient un obstacle infranchissable, on avance jusqu'à lui seulement
 			Direction effectiveDirection = zone.getDirection(ownX,ownY,sourceX,sourceY); // on teste si on est du bon côté de la case
 			if(direction==effectiveDirection)
-				distance = zone.getPixelDistance(ownX,ownY,sourceX,sourceY);
+			{	distance = zone.getPixelDistance(ownX,ownY,sourceX,sourceY);
+				destinationX = sourceX;
+				destinationY = sourceY;
+			}
 		}
 		else
-			// sinon on considère le point le plus proche dans cette case
+		{	// sinon on considère le point le plus proche dans cette case
 			distance = zone.getPixelDistance(ownLocation,destinationTile,direction) + 1;
+			double cp[] = zone.getContactPoint(ownLocation,destinationTile);
+			destinationX = cp[0];
+			destinationY = cp[1];
+		}
 		// temps nécessaire pour parcourir cette distance
 		long timeNeeded = (long)Math.ceil(distance/speed * 1000);
 	
 		// on applique la simulation
 		result = simulateExplosions(timeNeeded,direction);
-		double cp[] = zone.getContactPoint(ownLocation,destinationTile);
-		ownLocation = new AiLocation(cp[0],cp[1],zone);
+		ownLocation = new AiLocation(destinationX,destinationY,zone);
 		if(duration==0)
 			duration = timeNeeded;
 		
@@ -482,7 +505,6 @@ public class AiPartialModel
 	{	// init
 		boolean result = true;
 		duration = 0;
-		Iterator<Entry<Long,List<AiExplosion>>> itMap = explosionMap.entrySet().iterator();
 		boolean finished = false;
 		AiTile sourceTile = ownLocation.getTile();
 		int sourceRow = sourceTile.getRow();
@@ -509,6 +531,8 @@ public class AiPartialModel
 		}
 		
 		// on considère chaque explosion restant et située avant la limite
+		HashMap<Long,List<AiExplosion>> newMap = new HashMap<Long, List<AiExplosion>>();
+		Iterator<Entry<Long,List<AiExplosion>>> itMap = explosionMap.entrySet().iterator();
 		while(itMap.hasNext() && !finished)
 		{	Entry<Long,List<AiExplosion>> entry = itMap.next();
 			long startTime = entry.getKey();
@@ -557,11 +581,14 @@ public class AiPartialModel
 				
 				// on sort la liste de la map
 				itMap.remove();
-				// si elle n'est pas vide, on l'y remet avec le nouveau temps
+				// si elle n'est pas vide, on l'ajoute dans la nouvelle map avec le nouveau temps
 				if(!list.isEmpty())
-					explosionMap.put(limit,list);
+					newMap.put(limit,list);
 			}
 		}
+		// on met à jour la map
+		explosionMap.clear();
+		explosionMap.putAll(newMap);
 		
 		return result;
 	}
@@ -587,7 +614,7 @@ public class AiPartialModel
 	 * 1│█│☺│ │□│ │ │█│	│ │	case vide
 	 *  ├─┼─┼─┼─┼─┼─┼─┤	└─┘
 	 * 2│█│ │█│ │█│ │█│	 █ 	mur destructible non-menacé ou mur indestructible
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ▒ 	mur destructible menacé
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ▒ 	obstacle menacé (bombe ou mur destructible)
 	 * 3│█│░│☻│ │ │▒│█│	 ☺ 	joueur non-menacé
 	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ☻ 	joueur menacé
 	 * 4│█│░│█│ │█│ │█│	 ░	feu ou case vide menacée
@@ -652,7 +679,7 @@ public class AiPartialModel
 				{	if(explosions[row][col]==null)
 						result = result + " ";
 					else
-						result = result + "░ ";
+						result = result + "░";
 				}
 			}
 			result = result + "│\n";
