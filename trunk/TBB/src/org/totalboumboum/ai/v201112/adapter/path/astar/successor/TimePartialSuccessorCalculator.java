@@ -92,6 +92,22 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	public void init()
 	{	models = new HashMap<AiSearchNode, AiPartialModel>();
 	}
+
+	/**
+	 * Renvoie le modèle associé au noeud de recherche
+	 * passé en paramètre. Ce modèle correspond à la représentation
+	 * interne (ici simplifiée) utilisée pour calculer
+	 * les successeur du noeud de recherche.
+	 * 
+	 * @param searchNode
+	 * 		Le noeud de recherche dont on veut le modèle.
+	 * @return
+	 * 		Le modèle associé au noeud de recherche, ou {@code null}
+	 * 		si aucun modèle ne lui est associé.
+	 */
+	public AiPartialModel getModel(AiSearchNode searchNode)
+	{	return models.get(searchNode);
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////

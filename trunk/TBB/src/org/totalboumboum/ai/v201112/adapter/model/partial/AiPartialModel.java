@@ -275,6 +275,22 @@ public class AiPartialModel
 	}
 	
 	/**
+	 * Permet de savoir si une case contient
+	 * une explosion ou pas.
+	 * 
+	 * @param tile
+	 * 		La case à tester.
+	 * @return
+	 * 		{@code true} ssi la case contient au moins une explosion.
+	 */
+	public boolean isThreatened(AiTile tile)
+	{	int row = tile.getRow();
+		int col = tile.getCol();
+		boolean result = explosions[row][col]==null || explosions[row][col].isEmpty();
+		return result;
+	}
+	
+	/**
 	 * Analyse la zone passée en paramètre et
 	 * en déduit le contenu de la matrice des
 	 * explosions.
@@ -499,13 +515,12 @@ public class AiPartialModel
 	 * @param duration
 	 * 		La durée d'attente souhaitée.
 	 * @return
-	 * 		{@code true} ssi le personnage a survécu à l'attente.
+	 * 		{@code true} ssi le personnage a survécu à la simulation.
 	 */
 	public boolean simulateExplosions(long limit, Direction direction)
 	{	// init
 		boolean result = true;
 		duration = 0;
-		boolean finished = false;
 		AiTile sourceTile = ownLocation.getTile();
 		int sourceRow = sourceTile.getRow();
 		int sourceCol = sourceTile.getCol();
@@ -518,74 +533,84 @@ public class AiPartialModel
 			if(sourceExplList!=null)
 			{	long sourceExplTime = sourceExplList.first().getStart();
 				// si ça se produit avant la limite, on la met à jour
-				limit = Math.min(limit,sourceExplTime);
+				if(sourceExplTime<=limit)
+				{	limit = sourceExplTime;
+					result = false;
+				}
 			}
 			if(!sourceTile.equals(destinationTile))
 			{	AiExplosionList destinationExplList = explosions[destinationRow][destinationCol];
 				if(destinationExplList!=null)
 				{	long destinationExplTime = destinationExplList.first().getStart();
 					// si ça se produit avant la limite, on la met à jour
-					limit = Math.min(limit,destinationExplTime);
+					if(destinationExplTime<=limit)
+					{	limit = destinationExplTime;
+						result = false;
+					}
 				}
 			}
 		}
 		
-		// on considère chaque explosion restant et située avant la limite
+		// on considère chaque explosion restant
 		HashMap<Long,List<AiExplosion>> newMap = new HashMap<Long, List<AiExplosion>>();
 		Iterator<Entry<Long,List<AiExplosion>>> itMap = explosionMap.entrySet().iterator();
-		while(itMap.hasNext() && !finished)
-		{	Entry<Long,List<AiExplosion>> entry = itMap.next();
+		while(itMap.hasNext())
+		{	// on récupère la liste d'explosions
+			Entry<Long,List<AiExplosion>> entry = itMap.next();
+			List<AiExplosion> list = entry.getValue();
+			
+			// on calcule le nouveau temps de démarrage pour toutes les explosions de la liste
 			long startTime = entry.getKey();
+			long newStartTime = Math.max(0,startTime-limit);
 			
-			// on s'arrête si on a dépassé la limite
-			if(startTime>=limit)
-				finished = true;
-			
-			// sinon on traite toute la liste
-			else
-			{	List<AiExplosion> list = entry.getValue();
-				// on traite chaque explosion de la liste
-				Iterator<AiExplosion> itExp = list.iterator();
-				while(itExp.hasNext())
-				{	// init
-					AiExplosion explosion = itExp.next();
-					long endTime = explosion.getEnd();
-					AiTile tile = explosion.getTile();
-					int col = tile.getCol();
-					int row = tile.getRow();
+			// on traite séparément chaque explosion de la liste
+			Iterator<AiExplosion> itExp = list.iterator();
+			while(itExp.hasNext())
+			{	// init
+				AiExplosion explosion = itExp.next();
+ 				long endTime = explosion.getEnd();
+				AiTile tile = explosion.getTile();
+				int col = tile.getCol();
+				int row = tile.getRow();
+				
+				// si l'explosion s'achève avant la limite
+				if(endTime<=limit)
+				{	// elle est carrément supprimée de la liste de la map
+					itExp.remove();
+					// et aussi de la liste de la matrice
+					explosions[row][col].remove(explosion);
+					if(explosions[row][col].isEmpty())
+						explosions[row][col] = null;
+					// on màj la durée simulée
+					duration = Math.max(duration,endTime);
+					// on màj la matrice d'obstacles, car le contenu éventuel de la case disparait
+					obstacles[row][col] = false;
+				}
+				// sinon on met juste à jour les temps de démarrage/fin
+				else
+				{	// modifs valables à la fois pour les listes de la map et de la matrice
+					// màj du temps de départ
+					explosion.setStart(newStartTime);
+					// màj du temps de fin
+					long newEndTime = endTime - limit;
+					explosion.setEnd(newEndTime);
 					
-					// si l'explosion s'achève avant la limite
-					if(endTime<=limit)
-					{	// elle est carrément supprimée de la liste de la map
-						itExp.remove();
-						// et aussi de la liste de la matrice
-						explosions[row][col].remove(explosion);
-						if(explosions[row][col].isEmpty())
-							explosions[row][col] = null;
-						// on màj la durée simulée
-						duration = Math.max(duration,endTime);
-						// on màj la matrice d'obstacles, car le contenu éventuel de la case disparait
-						obstacles[row][col] = false;
-					}
-					// sinon on met juste à jour le temps de démarrage
-					else
-					{	// valable à la fois pour les listes de la map et de la matrice
-						explosion.setStart(limit);
-						// on màj la durée simulée
-						duration = Math.max(duration,limit);
-					}
-					
-					// si la case concernée est source ou destination du personnage, il est éliminé
-					result = result && !tile.equals(sourceTile) && tile.equals(destinationTile);
+					// màj de la durée simulée
+					duration = Math.max(duration,limit);
 				}
 				
-				// on sort la liste de la map
-				itMap.remove();
-				// si elle n'est pas vide, on l'ajoute dans la nouvelle map avec le nouveau temps
-				if(!list.isEmpty())
-					newMap.put(limit,list);
+				// si la case concernée est source ou destination du personnage, il est éliminé
+				//result = result && !tile.equals(sourceTile) && tile.equals(destinationTile);
+				// en fait, déjà décidé avant la boucle
 			}
+			
+			// on sort la liste de la map
+			itMap.remove();
+			// si elle n'est pas vide, on l'ajoute dans la nouvelle map avec le nouveau temps de départ
+			if(!list.isEmpty())
+				newMap.put(newStartTime,list);
 		}
+		
 		// on met à jour la map
 		explosionMap.clear();
 		explosionMap.putAll(newMap);

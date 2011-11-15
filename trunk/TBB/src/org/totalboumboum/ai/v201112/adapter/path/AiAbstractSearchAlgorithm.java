@@ -85,6 +85,39 @@ public abstract class AiAbstractSearchAlgorithm
 	/** Fonction successeur */
 	protected SuccessorCalculator successorCalculator = null;
 
+	/**
+	 * Renvoie la fonction de coût affectée
+	 * à cet algorithme de recherche.
+	 * 
+	 * @return
+	 * 		La fonction de coût utilisée pour initialiser cet objet.
+	 */
+	public CostCalculator getCostCalculator()
+	{	return costCalculator;
+	}
+	
+	/**
+	 * Renvoie la fonction heuristique affectée
+	 * à cet algorithme de recherche.
+	 * 
+	 * @return
+	 * 		La fonction heuristique utilisée pour initialiser cet objet.
+	 */
+	public HeuristicCalculator getHeuristicCalculator()
+	{	return heuristicCalculator;
+	}
+	
+	/**
+	 * Renvoie la fonction successeur affectée
+	 * à cet algorithme de recherche.
+	 * 
+	 * @return
+	 * 		La fonction successeur utilisée pour initialiser cet objet.
+	 */
+	public SuccessorCalculator getSuccessorCalculator()
+	{	return successorCalculator;
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
