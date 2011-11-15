@@ -347,7 +347,7 @@ public class TargetHandler extends AiMoveHandler<Suiveur>
 	/////////////////////////////////////////////////////////////////
 	// TARGET					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la cible à suivre (ou null si aucune cible n'existe) */
+	/** la cible à suivre (ou {@code null} si aucune cible n'existe) */
 	private AiHero target;
 	/** case précédente de la cible */
 	private AiTile targetPreviousTile;

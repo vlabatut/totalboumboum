@@ -47,10 +47,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * pas la modifier directement, mais seulement à travers les 
  * méthodes proposées dans cette classe. Il peut :
  * <ul>
- * 		<li> réaliser un ou plusieurs pas de simulation et obtenir la zone résultante.</li>
- * 		<li> demander à un des joueurs de poser une bombe</li>
- * 		<li> modifier la direction de déplacement d'un joueur, ou arrêter son déplacement</li>
- * 		<li> demander à une bombe d'exploser</li>
+ * 		<li>Réaliser un ou plusieurs pas de simulation et obtenir la zone résultante ;</li>
+ * 		<li>Demander à un des joueurs de poser une bombe ;</li>
+ * 		<li>Modifier la direction de déplacement d'un joueur, ou arrêter son déplacement ;</li>
+ * 		<li>Demander à une bombe d'exploser.</li>
  * </ul>
  * Au cours de la simulation, une nouvelle zone est calculée et stockée
  * en interne : l'utilisateur peut alors y accéder et l'utiliser. Si
@@ -61,10 +61,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  * En d'autres termes, un pas se termine quand un évènement se produit. Les 
  * évènements considérés par cette classe sont :
  * <ul>
- * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)</li>
- * 		<li> un changement d'état (ex : un mur qui commence à brûler)</li>
- * 		<li> un changement de case (ex : un joueur se déplaçant d'une case à une autre)</li>
- * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</li>
+ * 		<li>La disparition ou l'apparition d'un sprite (ex : une bombe 
+ * 			qui a explosé, un item qui apparait) ;</li>
+ * 		<li>Un changement d'état (ex : un mur qui commence à brûler) ;</li>
+ * 		<li>Un changement de case (ex : un joueur se déplaçant d'une case à une autre) ;</li>
+ * 		<li>La fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur).</li>
  * </ul>
  * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
  * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
@@ -509,7 +510,7 @@ if(sprite instanceof AiSimBomb)
 				}
 				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
 				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
-				double manDist = Math.abs(posX-goalX)+Math.abs(posY-goalY);
+				double manDist = current.getPixelDistance(posX,posY,goalX,goalY);
 				double temp = manDist/speed * 1000;
 				if(temp<1)
 					result = 0;
@@ -681,10 +682,13 @@ if(sprite instanceof AiSimBomb)
 		}
 		double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
 		double goalY = current.normalizePositionY(tileY0+dir[1]*offset);
-		double xSign = Math.signum(goalX - posX);
-		double ySign = Math.signum(goalY - posY);
-		double dx = Math.abs(posX-goalX);
-		double dy = Math.abs(posY-goalY);
+		double deltas[] = current.getPixelDeltas(posX,posY,goalX,goalY);
+//		double xSign = Math.signum(goalX - posX);
+//		double ySign = Math.signum(goalY - posY);
+		double xSign = Math.signum(deltas[0]);
+		double ySign = Math.signum(deltas[1]);
+		double dx = Math.abs(deltas[0]);
+		double dy = Math.abs(deltas[1]);
 		double manDist = dx+dy;
 		if(manDist<=allowed)
 		{	posX = goalX;
@@ -708,6 +712,8 @@ if(sprite instanceof AiSimBomb)
 		}
 		
 		// update tile
+		posX = current.normalizePositionX(posX);
+		posY = current.normalizePositionX(posY);
 		AiSimTile newTile = current.getTile(posX,posY);
 		if(!newTile.equals(tile))
 		{	tile.removeSprite(sprite);

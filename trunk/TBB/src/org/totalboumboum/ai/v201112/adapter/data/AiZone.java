@@ -1253,6 +1253,58 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	// PIXEL DELTAS				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Calcule la différence entre les coordonnées de deux points,
+	 * exprimée en pixels. Le résultat est un tableau contenant
+	 * deux valeurs : la première pour l'axe des abscisse et la seconde
+	 * pour celui des ordonnées. Les valeurs correspondent à des
+	 * distanes signées, le signe dépendant de la position relative
+	 * des deux points. On a x1+deltax = x2 et y1+deltay = y2.
+	 * 
+	 * @param x1
+	 * 		Abscisse du premier point.
+	 * @param y1
+	 * 		Ordonnée du premier point.
+	 * @param x2
+	 * 		Abscisse du second point.
+	 * @param y2
+	 * 		Ordonnée du second point.
+	 * @param direction
+	 * 		La direction dans laquelle calculer la difference.
+	 * @return
+	 * 		Un tableau de deux réels.
+	 */
+	public double[] getPixelDeltas(double x1, double y1, double x2, double y2, Direction direction)
+	{	double dx = LevelsTools.getDeltaX(x1,x2,direction.getHorizontalPrimary(),pixelLeftX,pixelWidth);
+		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
+			dx = 0;
+		double dy = LevelsTools.getDeltaY(y1,y2,direction.getVerticalPrimary(),pixelTopY,pixelHeight);
+		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
+			dy = 0;
+		double result[] = {dx,dy};
+		return result;
+	}
+	
+	/**
+	 * Comme {@link #getPixelDeltas(double, double, double, double, Direction)},
+	 * mais on considère automatiquement la direction correspondant à la plus
+	 * petite distance.
+	 * 
+	 * @param x1
+	 * 		Abscisse du premier point.
+	 * @param y1
+	 * 		Ordonnée du premier point.
+	 * @param x2
+	 * 		Abscisse du second point.
+	 * @param y2
+	 * 		Ordonnée du second point.
+	 * @return
+	 * 		Un tableau de deux réels.
+	 */
+	public double[] getPixelDeltas(double x1, double y1, double x2, double y2)
+	{	double result[] = getPixelDeltas(x1,y1,x2,y2,Direction.NONE);
+		return result;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONTACT POINTS			/////////////////////////////////////
@@ -1466,6 +1518,65 @@ public abstract class AiZone
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TRANSLATIONS				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Calcule le résultat de la translation de coordonnées
+	 * (drow,dcol) appliquée à la case (row,col). Les coordonnées
+	 * résultantes sont normalisées pour être dans la zone de jeu.
+	 * <br/>
+	 * Il est recommandé d'utiliser cette méthode pour effectuer
+	 * des soustractions/additions sur les coordonnées des cases, 
+	 * plutôt que directement utiliser les opérateurs + et -, afin
+	 * d'éviter de sortir de la zone.
+	 * 
+	 * @param x
+	 * 		Abscisse du point original.
+	 * @param y
+	 * 		Ordonnée du point original.
+	 * @param dx
+	 * 		Translation sur l'axe des abscisses.
+	 * @param dy
+	 * 		Translation sur l'axe des ordonnées.
+	 * @return
+	 * 		Un tableau contenant les coordonnées du résultat de la translation.
+	 */
+	public int[] getTranslatedTile(int row, int col, int drow, int dcol)
+	{	row = row + drow;
+		col = col + dcol;
+		int result[] = LevelsTools.normalizePosition(row,col,height,width);
+		return result;
+	}
+
+	/**
+	 * Calcule le résultat de la translation de coordonnées
+	 * (dx,dy) appliquée au point (x,y). Les coordonnées
+	 * résultantes sont normalisées pour être dans la zone de jeu.
+	 * <br/>
+	 * Il est recommandé d'utiliser cette méthode pour effectuer
+	 * des soustractions/additions sur les coordonnées, plutot
+	 * que directement utiliser les opérateurs + et -, afin
+	 * d'éviter de sortir de la zone.
+	 * 
+	 * @param x
+	 * 		Abscisse du point original.
+	 * @param y
+	 * 		Ordonnée du point original.
+	 * @param dx
+	 * 		Translation sur l'axe des abscisses.
+	 * @param dy
+	 * 		Translation sur l'axe des ordonnées.
+	 * @return
+	 * 		Un tableau contenant les coordonnées du résultat de la translation.
+	 */
+	public double[] getTranslatedPoint(double x, double y, double dx, double dy)
+	{	x = x + dx;
+		y = y + dy;
+		double result[] = LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COORDINATE NORMALIZING	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
