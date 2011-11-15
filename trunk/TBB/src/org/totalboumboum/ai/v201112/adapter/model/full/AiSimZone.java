@@ -222,9 +222,16 @@ final class AiSimZone extends AiZone
 	}
 	
 	/** 
-	 * renvoie la case voisine de la case passée en paramètre,
+	 * Renvoie la case voisine de la case passée en paramètre,
 	 * dans la direction spécifiée (en considérant le fait que le niveau
-	 * est fermé.
+	 * est fermé. 
+	 * <br/>
+	 * Si la direction est {@link Direction#NONE NONE}, alors c'est
+	 * la case de coordonnées ({@code row},{@code col}) qui est
+	 * renvoyée.
+	 * <br/>
+	 * Si la direction est composite, une {@link IllegalArgumentException}
+	 * est levée.
 	 *  
 	 *  @param row
 	 *  	ligne de la case à traite
@@ -234,9 +241,15 @@ final class AiSimZone extends AiZone
 	 *  	direction de la case voisine relativement à la case de référence
 	 *  @return	
 	 *  	la case voisine dans la direction précisée
+	 *  
+	 *  @throws IllegalArgumentException
+	 *  	Si la {@code direction} est composite.
 	 */
 	protected AiSimTile getNeighborTile(int row, int col, Direction direction)
-	{	AiSimTile result;
+	{	if(direction.isComposite())
+			throw new IllegalArgumentException("getNeighborTile does not handle composite directions.");
+	
+		AiSimTile result;
 		int c,l;
 		Direction p[] = direction.getPrimaries(); 
 

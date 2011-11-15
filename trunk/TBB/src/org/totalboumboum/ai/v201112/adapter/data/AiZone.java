@@ -1315,6 +1315,9 @@ public abstract class AiZone
 	 * Les coordonnées du point de contact sont renvoyées 
 	 * sous forme de tableau contenant deux doubles x et y.
 	 * <br/>
+	 * Attention, le point de contact est <i>à l'intérieur</i> 
+	 * de la case de destination.
+	 * <br/>
 	 * <b>Attention :</b> Ces deux cases doivent être 
 	 * des voisines directes.
 	 * 
@@ -1345,11 +1348,15 @@ public abstract class AiZone
 		// calcul des coordonnées
 		if(direction.isHorizontal())
 		{	x = tile1x + dir[0]*tile1.size/2;
+			if(dir[0]<0)
+				x--;
 			y = tile1y;
 		}
 		else if(direction.isVertical())
 		{	x = tile1x;
 			y = tile1y + dir[1]*tile1.size/2;
+			if(dir[1]<0)
+				y--;
 		}
 		
 		double result[] = normalizePosition(x,y);
@@ -1362,6 +1369,9 @@ public abstract class AiZone
 	 * passées en paramètres. 
 	 * Les coordonnées du point de contact sont renvoyées 
 	 * sous forme de tableau contenant deux doubles x et y.
+	 * <br/>
+	 * Attention, le point de contact est <i>à l'intérieur</i> 
+	 * de la case de destination.
 	 * <br/>
 	 * <b>Attention :</b> Ces deux points doivent appartenir 
 	 * à des des cases voisines directes.
@@ -1399,11 +1409,15 @@ public abstract class AiZone
 		// calcul des coordonnées
 		if(direction.isHorizontal())
 		{	x = tile1x + dir[0]*tile1.size/2;
+			if(dir[0]<0)
+				x--;
 			y = (y1 + y2) / 2;
 		}
 		else if(direction.isVertical())
 		{	x = (x1 + x2) / 2;
 			y = tile1y + dir[1]*tile1.size/2;
+			if(dir[1]<0)
+				y--;
 		}
 		
 		double result[] = normalizePosition(x,y);
@@ -1417,6 +1431,9 @@ public abstract class AiZone
 	 * passée en paramètre. 
 	 * Les coordonnées du point de contact sont renvoyées 
 	 * sous forme de tableau contenant deux doubles x et y.
+	 * <br/>
+	 * Attention, le point de contact est <i>à l'intérieur</i> 
+	 * de la case de destination.
 	 * <br/>
 	 * <b>Attention :</b> Le point et la case passés
 	 *  en paramètres doivent appartenir à des des 
@@ -1454,11 +1471,15 @@ public abstract class AiZone
 		// calcul des coordonnées
 		if(direction.isHorizontal())
 		{	x = tile1x + dir[0]*tile1.size/2;
+			if(dir[0]<0)
+				x--;
 			y = (y1 + tile2y) / 2;
 		}
 		else if(direction.isVertical())
 		{	x = (x1 + tile2x) / 2;
 			y = tile1y + dir[1]*tile1.size/2;
+			if(dir[1]<0)
+				y--;
 		}
 		
 		double result[] = normalizePosition(x,y);
@@ -1470,6 +1491,9 @@ public abstract class AiZone
 	 * l'emplacement et la case passés en paramètres. 
 	 * Les coordonnées du point de contact sont renvoyées 
 	 * sous forme de tableau contenant deux doubles x et y.
+	 * <br/>
+	 * Attention, le point de contact est <i>à l'intérieur</i> 
+	 * de la case de destination.
 	 * <br/>
 	 * <b>Attention :</b> L'emplacement et la case passés
 	 *  en paramètres doivent appartenir à des des 
@@ -1507,11 +1531,15 @@ public abstract class AiZone
 		// calcul des coordonnées
 		if(direction.isHorizontal())
 		{	x = tile1x + dir[0]*tile1.size/2;
+			if(dir[0]<0)
+				x--;
 			y = (y1 + tile2y) / 2;
 		}
 		else if(direction.isVertical())
 		{	x = (x1 + tile2x) / 2;
 			y = tile1y + dir[1]*tile1.size/2;
+			if(dir[1]<0)
+				y--;
 		}
 		
 		double result[] = normalizePosition(x,y);

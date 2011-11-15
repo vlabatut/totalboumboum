@@ -217,11 +217,13 @@ public abstract class AiTile implements Comparable<AiTile>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
-	 * passée en paramètre. 
+	 * passée en paramètre.
+	 * <br/> 
 	 * <b>ATTENTION :</b> seulement les directions primaires sont
 	 * utilisées ({@link Direction#UP UP}, {@link Direction#RIGHT RIGHT}, {@link Direction#DOWN DOWN}, 
 	 * {@link Direction#LEFT LET}) : pas de direction composite ({@link Direction#UPLEFT UPLEFT}, etc.).
-	 * Dans le cas contraire, la fonction renvoie null.</br>
+	 * Dans le cas contraire, la fonction lève une {@link IllegalArgumentException}.
+	 * </br>
 	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
@@ -231,14 +233,18 @@ public abstract class AiTile implements Comparable<AiTile>
 	 * @param direction
 	 * 		direction dans laquelle le voisin se trouve
 	 * @return	
-	 * 		le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
+	 * 		le voisin de cette case, situé dans la direction indiquée.
+	 *  
+	 * @throws
+	 * 		IllegalArgumentException ssi la direction est composite. 
 	 */
 	public abstract AiTile getNeighbor(Direction direction);
 	
 	/**
-	 * renvoie la liste des voisins de cette case.
-	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
-	 * 
+	 * Renvoie la liste des voisins de cette case.
+	 * Il s'agit des voisins directs situés en haut, 
+	 * à gauche, en bas et à droite.
+	 * </br>
 	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
@@ -246,7 +252,8 @@ public abstract class AiTile implements Comparable<AiTile>
 	 * (row,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @return	
-	 * 		la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre.
+	 * 		la liste des voisins situés en haut, à gauche, en bas 
+	 * 		et à droite de la case passée en paramètre.
 	 */
 	public abstract List<AiTile> getNeighbors();
 
