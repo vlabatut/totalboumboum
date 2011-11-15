@@ -1805,11 +1805,13 @@ public abstract class AiZone
 	/**
 	 * Cette fonction permet d'afficher la zone sous forme d'ASCII art,
 	 * ce qui est beaucoup plus lisible que du texte classique.
+	 * <br/>
 	 * <b>Attention :</b> pour avoir un affichage correct avec la console Eclipse, il faut
 	 * aller dans la configuration de démarrage du programme, aller
 	 * dans l'onglet "Commnon" puis dans la partie "Console Encoding" et
-	 * sélectionner UTF8 ou unicode.<br/>
-	 * Voici un exemple de zone obtenue:<
+	 * sélectionner UTF8 ou unicode.
+	 * <br/>
+	 * Voici un exemple d'affichage obtenu :<
 	 * <pre>
 	 *   0 1 2 3 4 5 6
 	 *  ┌─┬─┬─┬─┬─┬─┬─┐
@@ -1819,11 +1821,11 @@ public abstract class AiZone
 	 *  ├─┼─┼─┼─┼─┼─┼─┤	└─┘
 	 * 2│█│ │█│ │█│ │█│	 █ 	mur indestructible
 	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ▒ 	mur destructible
-	 * 3│█│░│☻│ │ │▒│█│	 □ 	item
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ● 	bombe
-	 * 4│█│░│█│ │█│ │█│	 ☺ 	joueur
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ☻ 	joueur et bombe
-	 * 5│█│░│░│░│ │●│█│	 ░	flammes
+	 * 3│█│░│☻│ │ │▒│█│	 □ 	item seul
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ● 	bombe seule
+	 * 4│█│░│█│ │█│ │█│	 ☺ 	joueur seul
+	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ☻ 	joueur et bombe présents dans la même case
+	 * 5│█│░│░│░│ │●│█│	 ░	feu (d'autres sprites peuvent être contenus dans la même case) 
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 6│█│█│█│█│█│█│█│
 	 *  └─┴─┴─┴─┴─┴─┴─┘
