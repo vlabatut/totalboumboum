@@ -236,7 +236,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		{	// si une explosion menace cette case
 			AiExplosion explosion = model.getExplosion(neighbor);
 			if(explosion!=null)
-			{	long duration = explosion.getDuration();
+			{	long duration = explosion.getEnd();
 				if(duration<result)
 					result = duration;
 			}
