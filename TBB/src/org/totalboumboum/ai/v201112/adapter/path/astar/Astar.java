@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar;
  */
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -154,8 +155,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		heuristicCalculator.setEndTiles(endTiles);
-		successorCalculator.init();
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
+		successorCalculator.init(root);
 		
 		AiPath result = processShortestPath(endTiles);
 		return result;
@@ -228,7 +229,14 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		}
 
 		// queue
-		queue = new PriorityQueue<AiSearchNode>(1);
+		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
+		{	@Override
+			public int compare(AiSearchNode o1, AiSearchNode o2)
+			{	int result = o1.compareScoreTo(o2);
+				return result;
+			}
+		};
+		queue = new PriorityQueue<AiSearchNode>(1,comparator);
 		queue.offer(root);
 		
 		// process
@@ -266,6 +274,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		msg = msg + " ]";
 		print(msg);
 		
+		lastSearchNode = null;
 		boolean found = false;
 		// traitement
 		if(!endTiles.isEmpty() && !queue.isEmpty())

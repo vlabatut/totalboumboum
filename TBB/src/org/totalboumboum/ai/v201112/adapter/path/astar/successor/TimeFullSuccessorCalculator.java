@@ -209,6 +209,7 @@ if(!t.equals(tile))
 					if(safe)
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AiSearchNode child = new AiSearchNode(waitDuration,futureZone,node);
+						// on l'ajoute au noeud courant
 						result.add(child);
 if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
 	System.out.println();
