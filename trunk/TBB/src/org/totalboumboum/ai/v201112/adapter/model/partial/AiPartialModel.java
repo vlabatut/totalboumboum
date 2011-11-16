@@ -223,6 +223,17 @@ public class AiPartialModel
 		{	boolean crossable = tile.isCrossableBy(ownHero);
 				// pour éviter de considérer une bombe comme un obstacle
 //				&& !tile.getBlocks().isEmpty(); // inutile, en fait : une bombe est un obstacle qui va disparaitre
+			// cas particulier : bombe posée par l'agent
+			if(crossable)
+			{	List<AiBomb> bombs = tile.getBombs();
+				if(!bombs.isEmpty())
+				{	AiBomb bomb = bombs.get(0);
+					if(bomb.getOwner().equals(ownHero))
+						crossable = false;
+				}
+			}
+			
+			// on met à jour la matrice
 			int col = tile.getCol();
 			int row = tile.getRow();
 			obstacles[row][col] = !crossable;
@@ -286,7 +297,8 @@ public class AiPartialModel
 	public boolean isThreatened(AiTile tile)
 	{	int row = tile.getRow();
 		int col = tile.getCol();
-		boolean result = explosions[row][col]!=null && !explosions[row][col].isEmpty();
+		AiExplosionList explosionList = explosions[row][col];
+		boolean result = explosionList!=null && !explosionList.isEmpty();
 		return result;
 	}
 	
@@ -366,7 +378,7 @@ public class AiPartialModel
 						hardwall = !block.isDestructible();
 					}
 					
-					// only ass tiles without any hardwall (these will always be obstacles anyway)
+					// only adds tiles without any hardwall (these will always be obstacles anyway)
 					if(!hardwall)
 					{	int col = tile.getCol();
 						int row = tile.getRow();

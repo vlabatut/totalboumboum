@@ -44,13 +44,13 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 	{	// init
 		SortedSet<AiExplosion> head = headSet(explosion);
 		SortedSet<AiExplosion> tail = tailSet(explosion);
+		long explosionStart = explosion.getStart();
 		long explosionEnd = explosion.getEnd();
 		boolean wasMerged = false;
 		
-		// before the explosion
+		// existing explosions starting before the begining of the new one
 		if(!head.isEmpty())
 		{	AiExplosion previous = head.last();
-			long explosionStart = explosion.getStart();
 			long previousEnd = previous.getEnd();
 			if(explosionStart<=previousEnd)
 			{	previous.setEnd(explosionEnd);
@@ -59,19 +59,25 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 			}
 		}
 		
-		// after the explosion
+		// existing explosions starting after the begining of the new one
 		if(!tail.isEmpty())
 		{	Iterator<AiExplosion> it = tail.iterator();
-			boolean merged = true;
-			while(it.hasNext() && merged)
+			boolean covers = true;
+			while(it.hasNext() && covers)
 			{	AiExplosion next = it.next();
 				long nextStart = next.getStart();
-				if(merged=nextStart<=explosionEnd)
+				if(covers=nextStart<=explosionEnd)
 				{	long nextEnd = next.getEnd();
-					explosion.setEnd(nextEnd);
-					explosionEnd = nextEnd;
-					it.remove();
-					wasMerged = true;
+					explosionEnd = Math.max(explosionEnd,nextEnd);
+					if(wasMerged)
+					{	explosion.setEnd(explosionEnd);
+						it.remove();
+					}
+					else
+					{	explosion = next;
+						explosion.setStart(explosionStart);
+						wasMerged = true;
+					}
 				}
 			}
 		}
