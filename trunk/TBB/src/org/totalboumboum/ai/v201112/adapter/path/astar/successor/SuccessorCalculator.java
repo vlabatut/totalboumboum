@@ -51,8 +51,11 @@ public abstract class SuccessorCalculator
 	 * Réinitialise les structures internes de
 	 * l'objet avant de commencer une nouvelle
 	 * recherche.
+	 * 
+	 * @param root
+	 * 		Le noeud de recherche racine de l'arbre de recherche.
 	 */
-	public void init()
+	public void init(AiSearchNode root)
 	{	// à surcharger si nécessaire
 	}
 

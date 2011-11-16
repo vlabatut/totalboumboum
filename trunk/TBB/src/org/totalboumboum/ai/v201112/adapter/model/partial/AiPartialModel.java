@@ -286,7 +286,7 @@ public class AiPartialModel
 	public boolean isThreatened(AiTile tile)
 	{	int row = tile.getRow();
 		int col = tile.getCol();
-		boolean result = explosions[row][col]==null || explosions[row][col].isEmpty();
+		boolean result = explosions[row][col]!=null && !explosions[row][col].isEmpty();
 		return result;
 	}
 	

@@ -89,8 +89,11 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	private HashMap<AiSearchNode,AiPartialModel> models;
 	
 	@Override
-	public void init()
+	public void init(AiSearchNode root)
 	{	models = new HashMap<AiSearchNode, AiPartialModel>();
+		AiZone zone = root.getLocation().getTile().getZone();
+		AiPartialModel model = new AiPartialModel(zone);
+		models.put(root,model);
 	}
 
 	/**
@@ -138,10 +141,6 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		List<AiSearchNode> result = new ArrayList<AiSearchNode>();
 		AiPartialModel currentModel = models.get(node);
 		AiZone zone = location.getZone();
-		if(currentModel==null)
-		{	currentModel = new AiPartialModel(zone);
-			models.put(node,currentModel);
-		}
 		
 		// on considère chaque déplacement possible
 		List<Direction> directions = Direction.getPrimaryValues();
@@ -199,7 +198,10 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 			if(duration>0 && safe)
 			{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 				AiSearchNode child = new AiSearchNode(waitDuration,zone,node);
+				// on l'ajoute au noeud courant
 				result.add(child);
+				// on enregistre le modèle correspondant pour une utilisation ultérieure ici-même
+				models.put(child,model);
 			}
 			// si l'action n'a pas eu lieu : problème lors de la simulation (?) 
 			// >> l'attente n'est pas envisagée comme une action pertinente 

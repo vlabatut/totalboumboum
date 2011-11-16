@@ -40,7 +40,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * 
  * @author Vincent Labatut
  */
-public final class AiSearchNode implements Comparable<AiSearchNode>
+public final class AiSearchNode// implements Comparable<AiSearchNode>
 {	
 	/**
 	 * Constructeur créant un noeud racine non visité. 
@@ -489,16 +489,23 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+/*	@Override
 	public boolean equals(Object object)
 	{	boolean result = false;
 		if(object instanceof AiSearchNode)
 			result = compareTo((AiSearchNode)object)==0;
 		return result;
 	}
-
-	@Override
+*/
+/*	@Override
 	public int compareTo(AiSearchNode node)
+    {	Double f1 = cost + heuristic;
+    	Double f2 = node.getCost() + node.getHeuristic();
+    	int result = f1.compareTo(f2);
+    	return result;
+    }
+*/
+	public int compareScoreTo(AiSearchNode node)
     {	Double f1 = cost + heuristic;
     	Double f2 = node.getCost() + node.getHeuristic();
     	int result = f1.compareTo(f2);
