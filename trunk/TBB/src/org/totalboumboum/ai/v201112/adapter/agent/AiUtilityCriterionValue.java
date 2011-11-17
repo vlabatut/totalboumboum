@@ -1,5 +1,8 @@
 package org.totalboumboum.ai.v201112.adapter.agent;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2011 Vincent Labatut 
@@ -22,20 +25,23 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  */
 
 /**
- * Ce type énuméré représente les différents modes
- * qu'un agent peut adopter : {@code COLLECTING}
- * ou {@code ATTACKING}.
+ * TODO
+ * Cette classe permet de définir un critère,
+ * en le caractérisant par son nom et par
+ * son domaine (l'ensemble des valeurs possibles
+ * pour ce critère).
+ * <br/>
+ * Le critère peut être utilisé pour construire
+ * un ou plusieurs cas ({@link AiUtilityCase}). 
+ * Une combinaison ({@link AiUtilityCombination}) contiendra
+ * une ou plusieurs valeurs de différents critères. 
+ * <br/>
+ * Le nom du critère doit être unique pour 
+ * le(s) cas qui l'utilise(nt).
  * 
  * @author Vincent Labatut
  */
-public enum AiMode
-{	
-	/** l'agent n'a pas assez de puissance et essaie d'en obtenir plus */
-	COLLECTING,
+public interface AiUtilityCriterionValue extends Comparable<AiUtilityCriterionValue>
+{
 	
-	/** 
-	 * soit il ne reste plus d'item à ramasser, et l'agent n'a pas d'autre choix que d'attaquer les autres joueurs.
-	 * soit l'agent a assez de puissance et peut attaquer les autres joueurs. 
-	 */
-	ATTACKING;
 }
