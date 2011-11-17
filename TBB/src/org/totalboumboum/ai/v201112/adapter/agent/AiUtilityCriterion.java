@@ -1,9 +1,5 @@
 package org.totalboumboum.ai.v201112.adapter.agent;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2011 Vincent Labatut 
@@ -25,6 +21,10 @@ import java.util.Set;
  * 
  */
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * Cette classe permet de définir un critère,
  * en le caractérisant par son nom et par
@@ -41,7 +41,7 @@ import java.util.Set;
  * 
  * @author Vincent Labatut
  */
-public class AiUtilityCriterion
+public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 {	
 	/**
 	 * Crée un nouveau critère à partir
@@ -115,6 +115,31 @@ public class AiUtilityCriterion
 	 */
 	public boolean hasValue(Comparable<?> value)
 	{	boolean result = domain.contains(value);
+		return result;
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o!=null && o instanceof AiUtilityCriterion)
+		{	AiUtilityCriterion criterion = (AiUtilityCriterion)o;
+			result = compareTo(criterion)==0;
+		}
+		return result;
+	}
+
+	@Override
+	public int compareTo(AiUtilityCriterion criterion)
+	{	int result = name.compareTo(criterion.getName());
+		return result;
+	}
+	
+	@Override
+    public int hashCode()
+	{	int result = getName().hashCode();
 		return result;
 	}
 

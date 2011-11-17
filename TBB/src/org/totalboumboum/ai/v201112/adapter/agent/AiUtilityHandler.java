@@ -22,10 +22,12 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  */
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -69,6 +71,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	protected AiUtilityHandler(T ai) throws StopRequestException
     {	super(ai);
+    
+    	// on initialise les cas/critères/combinaisons une fois pour toutes
+    	initCriteria();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -115,8 +120,123 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract void update() throws StopRequestException;
-
+	protected final void update() throws StopRequestException
+	{	// on vide les structures
+		utilitiesByTile.clear();
+		utilitiesByValue.clear();
+		
+		// on sélectionne les cases dont on veut calculer l'utilité
+		long before = print("    >> Entering selectTiles");
+		Set<AiTile> selectedTiles = selectTiles();
+		long after = System.currentTimeMillis();
+		long elapsed = after - before;
+		print("    << Exiting selectTiles duration="+elapsed);
+		
+		// on calcule l'utilité de chaque case
+		before = print("    >> Processing each tile");
+		for(AiTile tile: selectedTiles)
+		{	// on identifie le cas de cette case (en fonction du mode)
+			AiUtilityCase caze = identifyCase(tile);
+			
+			// on identifie la combinaison de valeurs des critères pour le cas détecté
+			AiUtilityCombination combination = identifyCombination(tile,caze);
+			
+			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
+			float utility = referenceUtilities.get(combination);
+			
+			// on la rajoute dans les structures
+			utilitiesByTile.put(tile,utility);
+			List<AiTile> tiles = utilitiesByValue.get(utility);
+			if(tiles==null)
+			{	tiles = new ArrayList<AiTile>();
+				utilitiesByValue.put(utility,tiles);
+			}
+			tiles.add(tile);
+		}
+		after = System.currentTimeMillis();
+		elapsed = after - before;
+		print("    << Tile processing finished duration="+elapsed);
+	}
+	
+	/**
+	 * Effectue une sélection sur les case de la zone de jeu,
+	 * car il n'est pas forcément nécessaire de calculer
+	 * l'utilité de chacune d'entre elles. Dans la méthode
+	 * {@link #update()}, l'utilité sera calculée seulement
+	 * pour cette sélection.
+	 * 
+	 * @return
+	 * 		L'ensemble des cases dont on veut calculer l'utilité.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	protected abstract Set<AiTile> selectTiles() throws StopRequestException;
+	
+	/////////////////////////////////////////////////////////////////
+	// CRITERIA			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map contenant tous les cas, à initialiser dans {@link #initCriteria()} */
+	protected final HashMap<String,AiUtilityCase> cases = new HashMap<String,AiUtilityCase>();
+	/** Map contenant l'utilité de chaque combinaison, à initialiser dans {@link #initCriteria()} */
+	protected final HashMap<AiUtilityCombination,Float> referenceUtilities = new HashMap<AiUtilityCombination,Float>();
+	
+	/**
+	 * Initialise d'abord tous les critères, puis tous les cas.
+	 * Les cas doivent obligatoirement être stockés dans la map
+	 * {@link #cases} (les clés {@code String} correspondant aux
+	 * noms des cas).
+	 * <br/>
+	 * Ensuite, la méthode doit initialiser les valeurs d'utilités
+	 * de chaque combinaison possible (pour tous les cas). Ces
+	 * valeurs doivent obligatoirement être stockées dans la map 
+	 * {@link #referenceUtilities}.
+	 * <br/>
+	 * Bien entendu, cette initialisation est réalisée une seule
+	 * fois lors de la création de l'agent. On suppose donc
+	 * que les cas/critères/combinaisons sont constantes au cours
+	 * d'une partie.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	protected abstract void initCriteria() throws StopRequestException;;
+	
+	/**
+	 * Cette méthode prend une case en paramètre, et identifie
+	 * le cas correspondant. Bien sûr le traitement dépend
+	 * à la fois de la zone de jeu et du mode courant, qui est
+	 * accessible grâce à la méthode {@link ArtificialIntelligence#getModeHandler()}.
+	 * 
+	 * @param tile
+	 * 		La case dont on veut identifier le cas.
+	 * @return
+	 * 		Un objet représentant le cas correspondant à cette case.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	protected abstract AiUtilityCase identifyCase(AiTile tile) throws StopRequestException;
+	
+	/**
+	 * Cette méthode prend en paramètres une case et le cas
+	 * qui a été identifié pour elle grâce à {@link #identifyCase(AiTile)}.
+	 * Elle calcule alors la combinaison correspondante et
+	 * la renvoie. Cette combinaison sera ensuite utilisée pour
+	 * calculer l'utilité de la case grâce à {@link #referenceUtilities}.
+	 * 
+	 * @param tile
+	 * 		La tile dont on veut la combinaison.
+	 * @param caze
+	 * 		Le cas qui a été identifié pour cette case.
+	 * @return
+	 * 		La combinaison correspondant à la case passée en paramètre.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
+	protected abstract AiUtilityCombination identifyCombination(AiTile tile, AiUtilityCase caze) throws StopRequestException;
+	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -130,7 +250,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * Cette méthode peut être surchargée si vous voulez afficher
 	 * les informations différemment, ou d'autres informations. A
 	 * noter que cette méthode n'est pas appelée automatiquement : 
-	 * elle doit l'être par {@link ArtificialIntelligence#updateOutput()}
+	 * elle doit l'être par la fonction surchargeant 
+	 * {@link ArtificialIntelligence#updateOutput()}
 	 * si vous désirez l'utiliser. 
 	 * 
 	 * @throws StopRequestException
