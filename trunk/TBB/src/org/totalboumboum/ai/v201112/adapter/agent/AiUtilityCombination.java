@@ -1,8 +1,5 @@
 package org.totalboumboum.ai.v201112.adapter.agent;
 
-import java.util.HashMap;
-import java.util.Set;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2011 Vincent Labatut 
@@ -24,6 +21,11 @@ import java.util.Set;
  * 
  */
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * Cette classe permet de définir une combinaison,
  * en la décrivant par le cas ({@link AiUtilityCase})
@@ -36,7 +38,7 @@ import java.util.Set;
  * 
  * @author Vincent Labatut
  */
-public class AiUtilityCombination
+public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 {	
 	/**
 	 * Crée une nouvelle combinaison à partir
@@ -125,6 +127,49 @@ public class AiUtilityCombination
 	}
 
     /////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o!=null && o instanceof AiUtilityCombination)
+		{	AiUtilityCombination combination = (AiUtilityCombination)o;
+			result = compareTo(combination)==0;
+		}
+		return result;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public int compareTo(AiUtilityCombination combination)
+	{	int result = caze.compareTo(combination.getCase());
+		if(result!=0)
+		{	Set<String> critNames = new TreeSet<String>();
+			critNames.addAll(values.keySet());
+			critNames.addAll(combination.values.keySet());
+			Iterator<String> it = critNames.iterator();
+			while(it.hasNext() && result==0)
+			{	String critName = it.next();	
+				Comparable value1 = values.get(critName);
+				Comparable value2 = combination.values.get(critName);
+				if(value1==null)
+					result = -1;
+				else if(value2==null)
+					result = +1;
+				else
+					result = value1.compareTo(value2);
+			}
+		}
+		return result;
+	}
+	
+	@Override
+    public int hashCode()
+	{	int result = toString().hashCode();
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override

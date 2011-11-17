@@ -21,7 +21,6 @@ package org.totalboumboum.ai.v201112.adapter.path.astar;
  * 
  */
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -269,7 +268,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	{	AiPath result = null;
 		AiSearchNode finalNode = null;
 		
-		long before = print(">>>>>>>> Starting/resuming A* +++++++++++++++++++++");
+		long before = print("      >> Starting/resuming A* +++++++++++++++++++++");
 		String msg = "         searching paths from "+startLocation+" to [";
 		for(AiTile tile: endTiles)
 			msg = msg + " " + tile;
@@ -333,7 +332,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 					treeSize = queue.size();
 				long after1 = System.currentTimeMillis();
 				long elapsed1 = after1 - before1;
-				print("---------- iteration duration="+elapsed1+" --");
+				print("        -- iteration duration="+elapsed1+" --");
 			}
 			while(!queue.isEmpty() && !found && !limitReached);
 		
@@ -367,6 +366,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		print(msg);
 		if(result!=null) 
 			print("         result="+result);
+		print("      << A* finished +++++++++++++++++++++");
 
 //		finish();
 		if(limitReached)

@@ -1,9 +1,5 @@
 package org.totalboumboum.ai.v201112.adapter.agent;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2011 Vincent Labatut 
@@ -25,6 +21,10 @@ import java.util.Set;
  * 
  */
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * Cette classe permet de définir un cas,
  * en le caractérisant par son nom et par
@@ -45,7 +45,7 @@ import java.util.Set;
  * 
  * @author Vincent Labatut
  */
-public class AiUtilityCase
+public class AiUtilityCase implements Comparable<AiUtilityCase>
 {	
 	/**
 	 * Crée un nouveau cas à partir
@@ -114,6 +114,31 @@ public class AiUtilityCase
 	{	return criteria;
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o!=null && o instanceof AiUtilityCase)
+		{	AiUtilityCase caze = (AiUtilityCase)o;
+			result = compareTo(caze)==0;
+		}
+		return result;
+	}
+
+	@Override
+	public int compareTo(AiUtilityCase caze)
+	{	int result = name.compareTo(caze.getName());
+		return result;
+	}
+	
+	@Override
+    public int hashCode()
+	{	int result = getName().hashCode();
+		return result;
+	}
+
     /////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

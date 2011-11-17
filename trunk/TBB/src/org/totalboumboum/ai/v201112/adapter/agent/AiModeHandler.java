@@ -87,22 +87,22 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 */
 	protected final void update() throws StopRequestException
 	{	// si l'agent a assez d'items, on attaque
-		long before = print(">>>>>> Entering hasEnoughItems");
+		long before = print("    >> Entering hasEnoughItems");
 		boolean enoughItems = hasEnoughItems();
 		long after = System.currentTimeMillis();
 		long elapsed = after - before;
-		print("<<<<<< Exiting hasEnoughItems duration="+elapsed+" result="+enoughItems);
+		print("    << Exiting hasEnoughItems duration="+elapsed+" result="+enoughItems);
 		if(enoughItems)
 			mode = AiMode.ATTACKING;
 		
 		// sinon, il va essayer d'en ramasser
 		else
 		{	// s'il est possible d'en ramasser, il passe en mode collecte
-			before = print(">>>>>> Entering isCollectPossible");
+			before = print("    >> Entering isCollectPossible");
 			boolean collectPossible = isCollectPossible();
 			after = System.currentTimeMillis();
 			elapsed = after - before;
-			print("<<<<<< Exiting isCollectPossible duration="+elapsed+" result="+collectPossible);
+			print("    << Exiting isCollectPossible duration="+elapsed+" result="+collectPossible);
 			if(collectPossible)
 				mode = AiMode.COLLECTING;
 			
