@@ -318,7 +318,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
-					Collections.shuffle(successors);
+//TODO					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité
 					for(AiSearchNode node: successors)
 						queue.offer(node);
