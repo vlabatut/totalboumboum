@@ -30,7 +30,8 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
  * Implémente une fonction heuristique bidon,
  * dans le but d'utiliser des algorithmes de recherche
  * aveugle tels que le parcours en largeur ou en profondeur.
- * Ici, la méthode {@link #processHeuristic} renvoie toujours 0.<br/>
+ * Ici, la méthode {@link #processHeuristic} renvoie toujours 0.
+ * <br/>
  * La classe est compatible avec toutes les fonctions de coût
  * et toutes les fonctions successeurs.
  * 

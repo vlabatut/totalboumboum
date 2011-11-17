@@ -42,7 +42,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Cette classe est chargée de simuler l'évolution d'une zone.
  * Pour cela, une modèle doit d'abord être initialisé avec une zone de départ,
- * obtenue simplement à partir des percepts de l'agent.<br/>
+ * obtenue simplement à partir des percepts de l'agent.
+ * <br/>
  * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
  * méthodes proposées dans cette classe. Il peut :
@@ -55,8 +56,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Au cours de la simulation, une nouvelle zone est calculée et stockée
  * en interne : l'utilisateur peut alors y accéder et l'utiliser. Si
  * de nouveaux pas de simulation sont effectués, cette zone interne est 
- * remplacée par le résultats de ces simulations.<br/>
- * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.<br/>
+ * remplacée par le résultats de ces simulations.
+ * <br/>
+ * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.
+ * <br/>
  * Il faut souligner que les pas de simulation sont déterminés de façon évènementielle.
  * En d'autres termes, un pas se termine quand un évènement se produit. Les 
  * évènements considérés par cette classe sont :
@@ -69,7 +72,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * </ul>
  * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
  * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
- * causant la fin du pas de simulation.<br/>
+ * causant la fin du pas de simulation.
+ * <br/>
  * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
  * la classe {@link AiFullModelTest}. Notez toute fois que cette classe de test crée la zone
  * en partant de rien, alors que les agents disposent de leurs percepts.
@@ -107,7 +111,8 @@ public class AiFullModel
 	 * Détermine si l'apparition d'items sera simulée lors de la destruction de murs.
 	 * à noter que la probabilité d'apparition dépends du nombre de murs restants
 	 * et d'items cachés restant à l'instant de l'explosion.
-	 * De même, le type d'item dépend de la distribution des items restants.<br/>
+	 * De même, le type d'item dépend de la distribution des items restants.
+	 * <br/>
 	 * Par défaut, cette option est désactivée.
 	 * 
 	 * @param simulateItemsAppearing
@@ -187,7 +192,8 @@ public class AiFullModel
 	 * et ce jusqu'à ce que le personnage spécifié ait changé d'état.
 	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
 	 * l'état estimé de la zone quand le personnage que l'on contrôle passera
-	 * dans la case suivante.<br/>
+	 * dans la case suivante.
+	 * <br/>
 	 * <b>Attention:</b> le changement d'état peut aussi être dû au fait que le 
 	 * personnage a commencé à brûler. A noter aussi que la simulation s'arrête
 	 * quand aucun évènement ne se produit, ou quand le personnage ne fait rien
@@ -252,7 +258,8 @@ public class AiFullModel
 	 * Effectue des simulations, en gardant pour chaque sprite l'action courante,
 	 * et ce jusqu'à la prochaine explosion. Plus exactement, la simulation
 	 * s'arrête lorsque le feu actuellement contenu dans la zone disparait. S'il
-	 * n'y a pas encore de feu, elle s'arrête quand le prochain feu disparait.<br/>
+	 * n'y a pas encore de feu, elle s'arrête quand le prochain feu disparait.
+	 * <br/>
 	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
 	 * l'état estimé de la zone après l'explosion de la prochaine bombe.
 	 * <b>Attention :</b> s'il n'y a ni bombe ni feu dans la zone courante,
@@ -351,7 +358,8 @@ public class AiFullModel
 	
 	/**
 	 * Calcule l'état suivant de la zone. Les sprites
-	 * continuent à faire ce qu'il faisaient déjà (brûler, se déplacer, etc.).<br/> 
+	 * continuent à faire ce qu'il faisaient déjà (brûler, se déplacer, etc.).
+	 * <br/> 
 	 * La méthode renvoie l'état obtenu à la fin du prochain évènement 
 	 * (i.e. celui qui se termine le plus vite). Les évènement considérés sont :
 	 * <ul>
@@ -364,7 +372,8 @@ public class AiFullModel
 	 * <b>Attention :</b> si l'option {@code considerExplosionOnly} est activée,
 	 * alors seules les explosions de bombes sont considérées. Plus précisément,
 	 * on considère que seule la disparition du feu est un évènement (et non pas
-	 * son apparition).<br/>
+	 * son apparition).
+	 * <br/>
 	 * Les modifications sont appliquées à la zone en interne. L'utilisateur peut récupérer
 	 * la nouvelle zone mise à jour avec {@link #getCurrentZone}. Il peut également récupérer la liste
 	 * de sprites qui ont provoqué la fin de la mise à jour à la suite d'une action, avec {@link #getLimitSprites}.

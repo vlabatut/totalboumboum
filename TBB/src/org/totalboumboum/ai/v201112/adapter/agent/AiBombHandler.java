@@ -26,7 +26,8 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 /**
  * Classe gérant l'action de déposer une bombe
  * pour l'agent. En particulier, elle doit implémenter la méthode
- * {@link #considerBombing} de l'algorithme général.<br/>
+ * {@link #considerBombing} de l'algorithme général.
+ * <br/>
  * Si cette méthode n'est pas surchargée, alors ce gestionnaire
  * ne fait rien, donc l'agent ne posera jamais de bombe.
  * 
@@ -55,7 +56,8 @@ public abstract class AiBombHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Méthode permettant de déterminer si l'agent
 	 * doit poser une bombe ou pas. Cette décision
-	 * dépend des valeurs d'utilité courantes.<br/>
+	 * dépend des valeurs d'utilité courantes.
+	 * <br/>
 	 * La méthode renvoie un booléen {@code true}
 	 * si l'agent doit poser une bombe, et
 	 * {@code false} sinon.

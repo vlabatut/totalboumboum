@@ -30,9 +30,11 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorC
 
 /**
  * Classe étendant la classe abstraite {@link CostCalculator} de 
- * la manière la plus simple possible.<br/>
+ * la manière la plus simple possible.
+ * <br/>
  * Ici, le coût pour passer d'une case à l'autre est simplement 1, 
- * quelles que soient les cases considérées.<br/>
+ * quelles que soient les cases considérées.
+ * <br/>
  * La classe est compatible avec :
  * <ul>
  * 		<li>Fonction heuristiques :

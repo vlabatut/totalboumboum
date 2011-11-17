@@ -45,13 +45,14 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
 /**
  * Implémentation de l'<a href="http://fr.wikipedia.org/wiki/Algorithme_A*">algorithme A*</a> adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
- * cette implémentation correspond à peu près à un A* classique. <br>
+ * cette implémentation correspond à peu près à un A* classique.
+ * <br>
  * Il y a quand même une modification implémentée dans les fonctions successeurs,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
- * boucler à l'infini.</br>
- * 
+ * boucler à l'infini.
+ * </br>
  * Cette implémentation trouve donc le chemin le plus court entre deux cases,
  * en considérant les obstacles. Elle a besoin de quatre paramètres :
  * <ul>	
@@ -248,7 +249,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * Permet de continuer le traitement commencé par {@link #processShortestPath(AiLocation, AiTile) processShortestPath}.
 	 * Par exemple, si {@code processShortestPath} a trouvé un résultat qui ne
 	 * parait pas adapté, l'appel à cette méthode permet de continuer le traitement
-	 * pour trouver un autre chemin. <br/>
+	 * pour trouver un autre chemin.
+	 * <br/>
 	 * <b>Attention :</b> par définition de A*, le chemin suivant ne
 	 * sera pas forcément optimal en termes du coût défini. Bien sûr,
 	 * si d'autres chemins optimaux existent, ils seront identifiés

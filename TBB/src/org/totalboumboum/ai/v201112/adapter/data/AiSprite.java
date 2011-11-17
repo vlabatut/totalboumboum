@@ -34,7 +34,8 @@ public interface AiSprite extends Comparable<AiSprite>
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Renvoie le numéro unique du sprite dans le jeu.<br/>
+	 * Renvoie le numéro unique du sprite dans le jeu.
+	 * <br/>
 	 * <b>Attention :</b> cette méthode n'est pas destinée 
 	 * à la programmation des agents.
 	 * 

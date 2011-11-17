@@ -32,7 +32,8 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * méthodes {@link #hasEnoughItems} et {@link #isCollectPossible()}, 
  * qui elles doivent être surchargées : si elles ne le sont
  * pas, alors le mode sera toujours {@link AiMode#COLLECTING}
- * par défaut.<br/>
+ * par défaut.
+ * <br/>
  * Enfin, cette classe stocke le mode courant grâce au
  * champ {@link #mode}.
  * 
@@ -77,7 +78,8 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Méthode permettant de mettre à jour
 	 * le mode de l'agent : {@link AiMode#ATTACKING}
-	 * ou {@link AiMode#COLLECTING}.<br/>
+	 * ou {@link AiMode#COLLECTING}.
+	 * <br/>
 	 * <b>Attention :</b> cette méthode ne peut pas être redéfinie.
 	 * 
 	 * @throws StopRequestException	
@@ -114,7 +116,8 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * Détermine si l'agent possède assez d'item,
 	 * ou bien s'il doit essayer d'en ramasser d'autres.
 	 * Cette distinction est relative à l'environnement,
-	 * à l'agent lui-même et à la stratégie qu'il utilise.<br/>
+	 * à l'agent lui-même et à la stratégie qu'il utilise.
+	 * <br/>
 	 * Cette méthode est utilisée par lors de la mise 
 	 * à jour du mode par {@link #updateMode}.
 	 * 
@@ -128,7 +131,8 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Détermine si l'agent a la possibilité de ramasser
 	 * des items dans la zone courante : présence d'items
-	 * cachés ou découverts, assez de temps restant, etc.<br/>
+	 * cachés ou découverts, assez de temps restant, etc.
+	 * <br/>
 	 * Cette méthode est utilisée par lors de la mise 
 	 * à jour du mode par {@link #updateMode}.
 	 * 

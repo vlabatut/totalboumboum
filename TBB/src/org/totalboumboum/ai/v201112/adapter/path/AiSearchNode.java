@@ -297,7 +297,8 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	/**
 	 * Renvoie la case la plus proche parmi les
 	 * destinations spécifiées avant le début
-	 * de la recherche.<br/>
+	 * de la recherche.
+	 * <br/>
 	 * La fonction heuristique est utilisée
 	 * pour determiner cette proximité. Cette
 	 * fonction peut être utile quand l'algorithme

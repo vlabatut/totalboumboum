@@ -87,7 +87,8 @@ public abstract class HeuristicCalculator
 	 * Renvoie la case de destination la
 	 * plus proche de l'emplacement passé
 	 * en paramètre. La proximité doit
-	 * être évaluée en termes d'heuristique.<br/>
+	 * être évaluée en termes d'heuristique.
+	 * <br/>
 	 * Si plusieurs destinations sont également
 	 * proches, un choix quelconque (ex : hasard)
 	 * doit être réalisé).

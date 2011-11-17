@@ -38,7 +38,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Chaque agent doit hériter de cette classe. La méthode {@link #processAction} est la méthode 
  * appelée par le gestionnaire d'agents pour obtenir la prochaine action 
  * à effectuer. Cette méthode implémente l'algorithme général spécifié en cours
- * et ne doit être ni modifiée ni surchargée.<br/>
+ * et ne doit être ni modifiée ni surchargée.
+ * <br/>
  * L'algorithme général se décompose en différentes parties :
  * <ul>
  * 		<li>initialisation</li>
@@ -49,7 +50,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 		<li>choix d'une direction de déplacement</li>
  * 		<li>mise à jour de la sortie graphique</li>
  * </ul>
- * Certaines de ces parties sont implémentées directement dans cette classe.<br/>
+ * Certaines de ces parties sont implémentées directement dans cette classe.
+ * <br/>
  * <br/>
  * Ainsi, l'initialisation de l'agent est réalisée grâce à la méthode {@link #init}.
  * Cette méthode se charge d'initialiser les percepts avec {@link #initPercepts} et
@@ -59,20 +61,24 @@ import org.totalboumboum.engine.content.feature.Direction;
  * font rien du tout. A noter que rien n'empêche de surcharger une de ces méthodes 
  * de manière à en appeler d'autres. Bien sûr, toutes ces méthodes sont appelées
  * seulement une fois, juste avant le début de la partie (notez cependant que la zone est 
- * déjà disponible).<br/>
+ * déjà disponible).
+ * <br/>
  * La mise à jour des percepts est également réalisée localement, grâce à la méthode
  * {@link #updatePercepts()}. Par défaut, elle ne fait rien du tout, il est donc
- * nécessaire de la surcharger.<br/>
+ * nécessaire de la surcharger.
+ * <br/>
  * Enfin, la méthode {@link #updateOutput} se charge de mettre à jour la sortie
  * graphique de l'agent. Elle doit donc être surchargée si on veut afficher des 
  * informations en cours de jeu : cases colorées, texte, chemins, etc. Sinon,
- * par défaut, elle n'affiche rien du tout.<br/>
+ * par défaut, elle n'affiche rien du tout.
+ * <br/>
  * <br/>
  * Le reste du comportement de l'agent est implémenté dans des gestionnaires spécialisés,
  * qui prennent la forme de classes spécifiques. Les gestionnaires de mode, d'utilité,
  * de posage de bombe et de déplacement doivent respectivement hériter des classes 
  * {@link AiModeHandler}, {@link AiUtilityHandler}, {@link AiBombHandler} et {@link AiMoveHandler}. 
- * Cf. leur documentation pour plus d'information.<br/>
+ * Cf. leur documentation pour plus d'information.
+ * <br/>
  * <br/>
  * <b>Attention :</b> remarque très importante.
  * A la fin de la partie, le jeu demande à l'agent de s'arrêter. Dans certaines
@@ -102,6 +108,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Elle modifie la valeur de l'indicateur stopRequest, ce qui permettra
 	 * de lever une {@link StopRequestException} au prochain appel 
 	 * de la méthode {@link #checkInterruption}.
+	 * <br/>
+	 * Cette méthode est réservée au moteur du jeu.
 	 */
 	public synchronized final void stopRequest()
 	{	stopRequest = true;		
@@ -109,7 +117,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * Méthode testant si le jeu a demandé la terminaison de l'agent.
-	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
+	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à {@link #call()}
 	 * et forcera la terminaison de l'agent. Cette exception ne doit surtout pas être
 	 * interceptée localement par un {@code try/catch}.
 	 * 
@@ -223,7 +231,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 
 	/**
 	 * Méthode permettant de mettre à jour
-	 * les sorties graphiques de l'agent.<br/>
+	 * les sorties graphiques de l'agent.
+	 * <br/>
 	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
 	 * alors la sortie graphique par défaut consiste à 
 	 * afficher le chemin et la destination courants,
@@ -314,7 +323,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Cette méthode initialise l'agent.
 	 * Toute opération qui y est définie
 	 * sera réalisée une fois, juste avant le début de la partie.
-	 * A noter que la zone est néanmoins déjà à jour.<br/>
+	 * A noter que la zone est néanmoins déjà à jour.
+	 * <br/>
 	 * Par défaut, l'initialisation porte sur les percepts
 	 * avec {@link #initPercepts()} et sur les gestionnaires
 	 * avec {@link #initHandlers()}. Si d'autres initialisations
@@ -438,17 +448,17 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Étape de mise à jour des percepts */
-	private final String PERCEPTS = "Percepts";
+	protected final String PERCEPTS = "Percepts";
 	/** Étape de mise à jour des percepts */
-	private final String MODE = "Mode";
+	protected final String MODE = "Mode";
 	/** Étape de mise à jour des percepts */
-	private final String UTILITY = "Utility";
+	protected final String UTILITY = "Utility";
 	/** Étape de mise à jour des percepts */
-	private final String BOMB = "Bomb";
+	protected final String BOMB = "Bomb";
 	/** Étape de mise à jour des percepts */
-	private final String MOVE = "Move";
+	protected final String MOVE = "Move";
 	/** Étape de mise à jour des percepts */
-	private final String OUTPUT = "Output";
+	protected final String OUTPUT = "Output";
 	/** Les différentes étapes du traitement */
 	protected final List<String> stepNames = new ArrayList<String>(Arrays.asList(PERCEPTS,MODE,UTILITY,BOMB,MOVE,OUTPUT));
 	/** Temps réel total utilisé lors du dernier appel (en ms) */ 

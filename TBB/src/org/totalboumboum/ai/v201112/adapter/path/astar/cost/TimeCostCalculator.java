@@ -32,11 +32,13 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimePartialSucc
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
- * mais plutôt au temps nécessaire pour parcourir le chemin.<br/>
+ * mais plutôt au temps nécessaire pour parcourir le chemin.
+ * <br/>
  * Ceci permet de gérer les temps d'arrêt nécessaires pour laisser
  * certains obstacles tels que les bombes disparaître. Autrement dit,
  * cette classe gère les chemins au pixel près, et permet de tenir
- * compte des pauses.<br/>
+ * compte des pauses.
+ * <br/>
  * Cette classe nécessite que le temps soit considéré aussi par les autres
  * fonctions, donc il faut l'utiliser conjointement à :
  * <ul>

@@ -31,7 +31,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * Cette classe représente un chemin qu'un agent peut emprunter
  * dans la zone de jeu. Le chemin est décrit par une séquence d'emplacements,
  * représentés par des objets {@link AiLocation}. Un temps d'attente 
- * supplémentaire peut être associé à chaque étape.<br/>
+ * supplémentaire peut être associé à chaque étape.
+ * <br/>
  * Diverses opérations sont possibles sur un ou plusieurs chemins : modification,
  * comparaisons, calculs variés, etc.
  * <b>Attention :</b> les chemins étaient gérés différemment les années
@@ -225,7 +226,8 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * Renvoie le nombre d'emplacements dans ce chemin.<br/>
+	 * Renvoie le nombre d'emplacements dans ce chemin.
+	 * <br/>
 	 * <b>Attention :</b> si le chemin contient plusieurs
 	 * fois le même emplacement, ile sera compté autant de fois.
 	 * 
@@ -335,7 +337,7 @@ public class AiPath implements Comparable<AiPath>
 
 	/**
 	 * Renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin.
-	 * Le calcul ne tient pas compte des éventuels obstacles.<br/>
+	 * Le calcul ne tient pas compte des éventuels obstacles.
 	 * 
 	 * @return	
 	 * 		Un réel correspondant à la distance totale du chemin, exprimée en pixels.

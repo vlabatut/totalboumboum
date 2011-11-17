@@ -257,11 +257,13 @@ public abstract class AiAbstractSearchAlgorithm
 	/**
 	 * Limite l'arbre de recherche à une hauteur de {@code maxHeight},
 	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
-	 * l'algorithme se termine et ne renvoie pas de solution (échec).<br/>
+	 * l'algorithme se termine et ne renvoie pas de solution (échec).
+	 * <br/>
 	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
 	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite déjà le nombre de noeuds dans l'arbre.<br/>
+	 * limite déjà le nombre de noeuds dans l'arbre.
+	 * <br/>
 	 * Par défaut, ce paramètre est initialisé avec la valeur {@code hauteur+largeur},
 	 * où {@code hauteur} et {@code largeur} sont les dimensions de la zone. En effet,
 	 * bien que ça soit possible, il est très peu probable d'avoir besoin d'un
@@ -278,7 +280,8 @@ public abstract class AiAbstractSearchAlgorithm
 	/**
 	 * Limite l'arbre de recherche à un certain coût {@code maxCost}, i.e. dès que le
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
-	 * renvoie pas de solution (échec). <br/>
+	 * renvoie pas de solution (échec).
+	 * <br/>
 	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
 	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
