@@ -47,8 +47,12 @@ import org.totalboumboum.game.round.RoundVariables;
 
 /**
  * Classe servant de traducteur entre le jeu et l'agent :
- * <br>	- elle traduit les données du jeu en percepts traitables par l'agent (données simplifiées).
- * <br>	- elle traduit la réponse de l'agent (action) en un évènement compatible avec le jeu.
+ * <ul>
+ * 		<li>elle traduit les données du jeu en percepts 
+ * 			traitables par l'agent (données simplifiées).</li>
+ * 		<li>elle traduit la réponse de l'agent (action) 
+ * 			en un évènement compatible avec le jeu.</li>
+ * </ul>
  * 
  * @author Vincent Labatut
  */

@@ -209,7 +209,8 @@ public interface AiBomb extends AiSprite
 	 * Renvoie le temps écoulé depuis que le compte à rebours de la 
 	 * bombe a commencé, exprimé en millisecondes. Bien sûr ceci
 	 * n'est valide que pour les bombes à retardement (qui ont un 
-	 * compte à rebours).<br/>
+	 * compte à rebours).
+	 * <br/>
 	 * <b>Attention :</b> certaines actions spéciales comme le fait de lancer
 	 * la bombe sont susceptibles de réinitialiser le compte à rebours.
 	 * 

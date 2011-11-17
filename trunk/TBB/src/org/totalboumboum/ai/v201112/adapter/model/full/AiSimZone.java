@@ -313,7 +313,8 @@ final class AiSimZone extends AiZone
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * permet de rajouter un sprite dans cette zone<br/>
+	 * permet de rajouter un sprite dans cette zone.
+	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
 	 * ici simplement de mettre à jour les listes de sprites de la zone
@@ -329,7 +330,8 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone<br/>
+	 * permet de rajouter un sprite dans cette zone.
+	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
 	 * ici simplement de mettre à jour les listes de sprites de la zone
@@ -345,7 +347,8 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone<br/>
+	 * permet de rajouter un sprite dans cette zone.
+	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
 	 * ici simplement de mettre à jour les listes de sprites de la zone
@@ -361,7 +364,8 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone<br/>
+	 * permet de rajouter un sprite dans cette zone.
+	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
 	 * ici simplement de mettre à jour les listes de sprites de la zone
@@ -377,7 +381,8 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone<br/>
+	 * permet de rajouter un sprite dans cette zone.
+	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
 	 * ici simplement de mettre à jour les listes de sprites de la zone
@@ -394,7 +399,8 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone<br/>
+	 * permet de rajouter un sprite dans cette zone.
+	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
 	 * ici simplement de mettre à jour les listes de sprites de la zone

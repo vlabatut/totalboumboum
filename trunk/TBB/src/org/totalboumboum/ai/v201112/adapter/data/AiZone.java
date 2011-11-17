@@ -941,7 +941,8 @@ public abstract class AiZone
 	protected double pixelHeight;
 	
 	/**
-	 * Renvoie la coordonnée du pixel le plus à gauche du niveau.<br/>
+	 * Renvoie la coordonnée du pixel le plus à gauche du niveau.
+	 * <br/>
 	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
 	 * 
 	 * @return	
@@ -952,7 +953,8 @@ public abstract class AiZone
 	}
 
 	/**
-	 * Renvoie la coordonnée du pixel le plus haut du niveau.<br/>
+	 * Renvoie la coordonnée du pixel le plus haut du niveau.
+	 * <br/>
 	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
 	 * 
 	 * @return	
@@ -963,7 +965,8 @@ public abstract class AiZone
 	}
 
 	/**
-	 * Renvoie largeur du niveau en pixels.<br/>
+	 * Renvoie largeur du niveau en pixels.
+	 * <br/>
 	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
 	 * 
 	 * @return	
@@ -974,7 +977,8 @@ public abstract class AiZone
 	}
 
 	/**
-	 * Renvoie hauteur du niveau en pixels.<br/>
+	 * Renvoie hauteur du niveau en pixels.
+	 * <br/>
 	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
 	 * 
 	 * @return	

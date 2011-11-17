@@ -63,8 +63,9 @@ public class MatrixCostCalculator extends CostCalculator
 {
 	/**
 	 * Initialise la fonction de coût. On doit obligatoirement
-	 * fournir la matrice de cout correspondante.<br/>
-	 * <b>ATTENTION :</b> cette matrice doit avoir la même taille que la zone de jeu.
+	 * fournir la matrice de cout correspondante.
+	 * <br/>
+	 * <b>Attention :</b> cette matrice doit avoir la même taille que la zone de jeu.
 	 * 
 	 * @param ai
 	 * 		IA de référence.
@@ -83,8 +84,9 @@ public class MatrixCostCalculator extends CostCalculator
 	private double costMatrix[][];
 	
 	/**
-	 * Initialise la matrice de coût.<br/>
-	 * <b>ATTENTION :</b>cette matrice doit avoir 
+	 * Initialise la matrice de coût.
+	 * <br/>
+	 * <b>Attention :</b>cette matrice doit avoir 
 	 * la même taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	

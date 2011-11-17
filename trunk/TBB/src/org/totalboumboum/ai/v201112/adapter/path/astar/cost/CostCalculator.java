@@ -57,7 +57,8 @@ public abstract class CostCalculator
 	/** 
 	 * Calcule le coût de l'action consistant à aller de l'emplacement
 	 * {@code start} à l'emplacement {@code end}, sachant que les deux cases 
-	 * correspondantes doivent être voisines.<br/>
+	 * correspondantes doivent être voisines.
+	 * <br/>
 	 * Il est possible de définir des coûts évolués, en tenant compte par exemple des
 	 * influences négatives dans ces cases (pour le joueur) comme la prèsence de bombes 
 	 * à proximité, etc., et des influences positives telles que la prèsence de bonus.

@@ -42,12 +42,14 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Cette classe est chargée de simuler l'évolution d'une zone.
  * Pour cela, une modèle doit d'abord être initialisé avec une zone de départ,
- * obtenue simplement à partir des percepts de l'agent.<br/>
+ * obtenue simplement à partir des percepts de l'agent.
+ * <br/>
  * Par rapport à {@link AiFullModel}, il s'agit ici d'une représentation
  * simplifiée, définie spécifiquement pour A*. Au contraire, les
  * objets de classe {@link AiFullModel}, qui contiennent plus
  * d'information (la zone complète, en fait) sont plus appropriés
- * à des calculs liés à la précise de décision et à la stratégie de l'agent.<br/>
+ * à des calculs liés à la précise de décision et à la stratégie de l'agent.
+ * <br/>
  * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
  * méthodes proposées dans cette classe. Il peut :
@@ -58,8 +60,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Au cours de la simulation, le modèle est modifié et son ancien
  * état est donc perdu. Si vous voulez conserver l'ancien état,
  * il faut en faire une copie en re-créant un nouveau modèle à
- * partir de l'existant, avant d'y effectuer une simulation.<br/>
- * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.<br/>
+ * partir de l'existant, avant d'y effectuer une simulation.
+ * <br/>
+ * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.
+ * <br/>
  * Il faut souligner que les pas de simulation sont déterminés de façon évènementielle.
  * En d'autres termes, un pas se termine quand un évènement se produit. Les 
  * évènements considérés par cette classe sont :
@@ -71,7 +75,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
  * Si une attente est demandée alors qu'il ne reste pas d'explosion
  * à venir dans la zone, alors l'attente n'est pas réalisée (car la
- * zone ne peut plus évoluer).<br/>
+ * zone ne peut plus évoluer).
+ * <br/>
  * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
  * la classe {@link AiFullModelTest}. Notez toute fois que cette classe de test crée la zone
  * en partant de rien, alors que les agents disposent de leurs percepts.

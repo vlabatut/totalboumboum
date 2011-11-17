@@ -34,7 +34,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * En particulier, elle doit implémenter la méthode
- * {@link #updateUtility} de l'algorithme général.<br/>
+ * {@link #updateUtility} de l'algorithme général.
+ * <br/>
  * Cette classe contient 2 variables qui doivent être 
  * obligatoirement être mises à jour par {@code updateUtility} :
  * <ul>
@@ -46,7 +47,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * si on connait la case et qu'on veut l'utilité, on utilise la première map.
  * Si on veut toutes les cases d'utilité maximale, on cherche l'utilité maximale
  * dans les clés de la deuxième map, et on utilise cette même map pour
- * récupérer la liste des cases qui possèdent cette utilité.<br/>
+ * récupérer la liste des cases qui possèdent cette utilité.
+ * <br/>
  * Elles sont notamment utilisées par la méthode {@link #updateOutput()}
  * qui est donnée ici en exemple afin d'afficher les valeurs d'utilité courantes.
  * 
@@ -120,9 +122,11 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
-	 * les données de ce gestionnaire.<br/>
+	 * les données de ce gestionnaire.
+	 * <br/>
 	 * Ici, on se contente d'afficher la valeur numérique
-	 * de l'utilité dans chaque case.<br/>
+	 * de l'utilité dans chaque case.
+	 * <br/>
 	 * Cette méthode peut être surchargée si vous voulez afficher
 	 * les informations différemment, ou d'autres informations. A
 	 * noter que cette méthode n'est pas appelée automatiquement : 

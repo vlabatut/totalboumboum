@@ -47,14 +47,16 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 4 cases voisines, mais aussi l'action d'attendre. Par exemple, cette approche
  * permet de considérer le cas où le joueur va attendre qu'un feu (présent dans
  * une case voisine, et qui l'empêche de passer) disparaisse. Par conséquent,
- * on envisagera aussi de passer sur des cases que l'algorithme a déjà traitées.<br>
+ * on envisagera aussi de passer sur des cases que l'algorithme a déjà traitées.
+ * <br>
  * Le temps de traitement sera donc beaucoup plus long que pour les autres fonctions
  * successeurs. Cette approche ne doit donc <b>pas être utilisée souvent</b>, car elle
  * va vraisemblablement ralentir l'agent significativement. Si vous voulez effectuer
  * un calcul moins lourd, vous pouvez utiliser la classe {@link TimePartialSuccessorCalculator}
  * à la place. Elle repose sur un modèle plus simple, qui est moins lourd à
  * traiter, mais qui en contre partie est moins précis et amènera des prédictions
- * moins fiables.<br/>
+ * moins fiables.
+ * <br/>
  * Cette classe nécessite que le temps soit considéré aussi par les autres
  * fonctions, donc il faut l'utiliser conjointement à :
  * <ul>

@@ -157,7 +157,8 @@ public final class BreadthFirst extends AiAbstractSearchAlgorithm
 	 * Permet de continuer le traitement commencé par {@link #processShortestPath(AiLocation, AiTile) processShortestPath}.
 	 * Par exemple, si {@code processShortestPath} a trouvé un résultat qui ne
 	 * parait pas adapté, l'appel à cette méthode permet de continuer le traitement
-	 * pour trouver un autre chemin. <br/>
+	 * pour trouver un autre chemin.
+	 * <br/>
 	 * <b>Attention :</b> par définition de A*, le chemin suivant ne
 	 * sera pas forcément optimal en termes du coût défini. Bien sûr,
 	 * si d'autres chemins optimaux existent, ils seront identifiés

@@ -28,12 +28,14 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
  * Exception levée par un algorithme de recherche de chemin 
- * quand il atteint une des limites fixées au préalable.<br/>
+ * quand il atteint une des limites fixées au préalable.
+ * <br/>
  * Pour A*, on ne peut donc pas conclure quant à l'existence d'un chemin solution.
  * En d'autres termes : cette exception indique qu'A* a exploré un arbre bien trop
  * grand, sans pourtant trouver la solution. On ne peut donc pas savoir s'il existe
  * un état final quelque part dans la partie non-explorée de l'arbre, ou bien
- * s'il n'existe pas de solution du tout.</br>
+ * s'il n'existe pas de solution du tout.
+ * <br/>
  * Pour Dybref, cela signifie que l'algorithme n'a pas pu explorer tous les
  * chemins existant. Il est toutefois possible qu'un chemin soit affecté à chaque
  * case, car cet algorithme considère les pauses, et donc est susceptible de trouver

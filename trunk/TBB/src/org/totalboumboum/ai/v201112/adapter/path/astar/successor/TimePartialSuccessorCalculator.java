@@ -43,13 +43,16 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 4 cases voisines, mais aussi l'action d'attendre. Par exemple, cette approche
  * permet de considérer le cas où le joueur va attendre qu'un feu (présent dans
  * une case voisine, et qui l'empêche de passer) disparaisse. Par conséquent,
- * on envisagera aussi de passer sur des cases que l'algorithme a déjà traitées.<br>
+ * on envisagera aussi de passer sur des cases que l'algorithme a déjà traitées.
+ * <br>
  * Le temps de traitement sera donc plus long que pour les autres fonctions
  * successeurs. Cette approche ne doit donc <b>pas être utilisée souvent</b>, car elle
- * va vraisemblablement ralentir l'agent significativement.<br/>
+ * va vraisemblablement ralentir l'agent significativement.
+ * <br/>
  * A noter que le modèle utilisé pour prédire l'évolution de la zone est
  * moins précis que celui utilisé dans {@link TimeFullSuccessorCalculator},
- * donc les calculs devraient être plus rapide (mais les résultats moins fiables)<br/>
+ * donc les calculs devraient être plus rapide (mais les résultats moins fiables)
+ * <br/>
  * Cette classe nécessite que le temps soit considéré aussi par les autres
  * fonctions, donc il faut l'utiliser conjointement à :
  * <ul>
@@ -118,7 +121,8 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	/** 
 	 * Fonction successeur considérant à la fois les 4 cases 
 	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
-	 * mais aussi la possibilité d'attendre dans la case courante.<br/>
+	 * mais aussi la possibilité d'attendre dans la case courante.
+	 * <br/>
 	 * Autre différence : les cases déjà traversées sont considérées,
 	 * car le chemin peut inclure des retours en arrière pour éviter
 	 * des explosions.

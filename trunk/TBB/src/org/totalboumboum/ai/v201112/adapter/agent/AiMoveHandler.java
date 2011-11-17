@@ -36,7 +36,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * En particulier, elle doit implémenter la méthode
  * {@link #considerMoving} de l'algorithme général.
  * Cette méthode doit être surchargée, car par défaut
- * elle ne fait rien du tout et renvoie toujours {@link Direction#NONE}.<br/>
+ * elle ne fait rien du tout et renvoie toujours {@link Direction#NONE}.
+ * <br/>
  * Cette classe contient 3 variables qui doivent être 
  * obligatoirement être mises à jour par {@code considerMoving} :
  * <ul>
@@ -121,7 +122,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Méthode permettant de déterminer si l'agent
 	 * doit se déplacer, et dans quelle direction.
-	 * Cette décision dépend des valeurs d'utilité courantes.<br/>
+	 * Cette décision dépend des valeurs d'utilité courantes.
+	 * <br/>
 	 * La méthode renvoie une {@link Direction} indiquant le
 	 * sens du déplacement, ou bien {@code null} ou {@link Direction#NONE}
 	 * si aucun déplacement ne doit être effectué.
@@ -139,11 +141,13 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
-	 * les données de ce gestionnaire.<br/>
+	 * les données de ce gestionnaire.
+	 * <br/>
 	 * Ici, on représente la case de destination courante
 	 * en la coloriant, ainsi que le chemin courant, représenté
 	 * par une ligne. La couleur représente le mode : bleu pour
-	 * {@link AiMode#COLLECTING} et rouge pour {@link AiMode#ATTACKING}.<br/>
+	 * {@link AiMode#COLLECTING} et rouge pour {@link AiMode#ATTACKING}.
+	 * <br/>
 	 * Cette méthode peut être surchargée si vous voulez afficher
 	 * les informations différemment, ou d'autres informations. A
 	 * noter que cette méthode n'est pas appelée automatiquement : 

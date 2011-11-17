@@ -35,7 +35,8 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimePartialSucc
 
 /**
  * Heuristique utilisant la distance de Manhattan exprimées en pixels,
- * et surtout le temps nécessaire à son parcours.<br/>
+ * et surtout le temps nécessaire à son parcours.
+ * <br/>
  * Cette classe nécessite que le temps soit considéré aussi par les autres
  * fonctions, donc il faut l'utiliser conjointement à :
  * <ul>
