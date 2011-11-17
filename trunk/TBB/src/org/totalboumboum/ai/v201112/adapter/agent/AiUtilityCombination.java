@@ -1,7 +1,6 @@
 package org.totalboumboum.ai.v201112.adapter.agent;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
 /*
@@ -26,45 +25,36 @@ import java.util.Set;
  */
 
 /**
- * TODO
- * Cette classe permet de définir un cas,
- * en le caractérisant par son nom et par
- * l'ensemble des critères {@link AiUtilityCriterion}
- * nécessaires pour le décrire.
+ * Cette classe permet de définir une combinaison,
+ * en la décrivant par le cas ({@link AiUtilityCase})
+ * auquel elle est associée, et un ensemble de valeurs. 
+ * Le cas détermine les critères ({@link AiUtilityCriterion})
+ * que doivent décrire ces valeurs.
  * <br/>
- * Les noms des critères sont utilisés par le
- * cas pour les distinguer, par conséquent
- * il ne peut pas y avoir deux critères de
- * même nom dans un cas donné.
- * <br/>
- * Une combinaison ({@link AiUtilityCombination})
- * correspond à un cas donné, et indique une
- * valeur spécifique pour chacun des critères
- * décrivant le cas. Chaque valeur doit bien
- * sûr appartenir au domaine de définition du critère
- * correspondant. 
+ * Les valeurs doivent forcément être définies dans
+ * les domaines des critères correspondant.
  * 
  * @author Vincent Labatut
  */
 public class AiUtilityCombination
 {	
 	/**
-	 * Crée un nouveau cas à partir
-	 * du nom et de l'ensemble de
-	 * critères passés en paramètres.
+	 * Crée une nouvelle combinaison à partir
+	 * du cas passé en paramètre.
 	 * <br/>
-	 * <b>Attention </b>: chaque critère
-	 * doit avoir un nom unique pour le cas.
-	 * Il ne peut pas y avoir deux critères 
-	 * de même nom dans le même cas.
+	 * Les valeurs sont à initialiser ultérieurement.
 	 * 
-	 * @param name
-	 * 		Nom du nouveau critère.
-	 * @param domain
-	 * 		Ensemble des valeurs possible pour ce critère.
+	 * @param caze
+	 * 		Le cas associé à cette combinaison.
 	 */
 	public AiUtilityCombination(AiUtilityCase caze)
-	{	this.caze = caze;
+	{	// le cas
+		this.caze = caze;
+		
+		// les critères du cas
+		Set<AiUtilityCriterion> criteriaSet = caze.getCriteria();
+		for(AiUtilityCriterion criterion: criteriaSet)
+			criteria.put(criterion.getName(),criterion);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -72,7 +62,9 @@ public class AiUtilityCombination
 	/////////////////////////////////////////////////////////////////
 	/** Le cas dont dépend cette combinaison */
 	private AiUtilityCase caze;
-
+	/** Les critères du cas dont dépend cette combinaison */
+	private final HashMap<String,AiUtilityCriterion> criteria = new HashMap<String, AiUtilityCriterion>();
+	
 	/**
 	 * Renvoie le cas dont
 	 * dépend cette combinaison.
@@ -90,9 +82,31 @@ public class AiUtilityCombination
 	/** Les valeurs (de critères) servant à décrire cette combinaison */
 	private final HashMap<String,Comparable<?>> values = new HashMap<String, Comparable<?>>();
 	
-	public void addCriterionValue(String criterionName, Comparable<?> criterionValue)
-	{	
-		values.put(criterionName,criterionValue);
+	/**
+	 * Modifie la valeur associée au critère spécifié.
+	 * <br/>
+	 * Si le critère spécifié n'appartient pas au
+	 * cas associé à cette combinaison, ou bien si
+	 * la valeur spécifiée n'appartient pas au domaine
+	 * de définition du critère spécifié, une {@link IllegalArgumentException}
+	 * est levée.
+	 * 
+	 * @param criterionName
+	 * 		Le nom du critère concerné par la valeur.
+	 * @param criterionValue
+	 * 		La valeur à affecter au critère.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Si le critère ou la valeur sont incompatibles.
+	 */
+	public void setCriterionValue(String criterionName, Comparable<?> criterionValue)
+	{	AiUtilityCriterion criterion = criteria.get(criterionName);
+		if(criterion==null)
+			throw new IllegalArgumentException("The specified criterion is not defined for the case associated to this combination.");
+		if(criterion.hasValue(criterionValue))
+			values.put(criterionName,criterionValue);
+		else
+			throw new IllegalArgumentException("The specified value does not belong to the criterion definition domain.");
 	}
 	
 	/**
@@ -107,6 +121,22 @@ public class AiUtilityCombination
 	 */
 	public Comparable<?> getCriterionValue(String criterionName)
 	{	Comparable<?> result = values.get(criterionName);
+		return result;
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	String result = "(";
+		for(int i=0;i<values.size();i++)
+		{	Comparable<?> value = values.get(i);
+			result = result + value.toString();
+			if(i<values.size()-1)
+				result = result + ", ";
+		}
+		result = result + ")";
 		return result;
 	}
 }

@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v201112.adapter.agent;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /*
@@ -101,5 +102,36 @@ public class AiUtilityCriterion
 	 */
 	public Set<Comparable<?>> getDomain()
 	{	return domain;
+	}
+	
+	/**
+	 * Indique si le domaine de définition de ce
+	 * critère contient la valeur passée en paramètre.
+	 * 
+	 * @param value
+	 * 		La valeur à tester.
+	 * @return
+	 * 		{@code true} ssi la valeur appartient au domaine de ce critère.
+	 */
+	public boolean hasValue(Comparable<?> value)
+	{	boolean result = domain.contains(value);
+		return result;
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	String result = name + "={";
+		Iterator<Comparable<?>> it = domain.iterator();
+		while(it.hasNext())
+		{	Comparable<?> value = it.next();
+			result = result + value.toString();
+			if(it.hasNext())
+				result = result + ", ";
+		}
+		result = result + "}";
+		return result;
 	}
 }

@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v201112.adapter.agent;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /*
@@ -111,5 +112,22 @@ public class AiUtilityCase
 	 */
 	public Set<AiUtilityCriterion> getCriteria()
 	{	return criteria;
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	String result = name + "=(";
+		Iterator<AiUtilityCriterion> it = criteria.iterator();
+		while(it.hasNext())
+		{	AiUtilityCriterion criterion = it.next();
+			result = result + criterion.getName();
+			if(it.hasNext())
+				result = result + "×";
+		}
+		result = result + ")";
+		return result;
 	}
 }
