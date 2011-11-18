@@ -70,7 +70,7 @@ public class AiUtilityCase implements Comparable<AiUtilityCase>
 	public AiUtilityCase(String name, Set<AiUtilityCriterion> criteria)
 	{	this.name = name;
 		for(AiUtilityCriterion criterion: criteria)
-		{	if(criteria.contains(criterion))
+		{	if(this.criteria.contains(criterion))
 				throw new IllegalArgumentException("A case cannot contain several criteria with the same name ("+name+").");
 			else
 				this.criteria.add(criterion);
