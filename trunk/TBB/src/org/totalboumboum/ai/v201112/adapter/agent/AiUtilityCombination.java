@@ -190,11 +190,15 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	@Override
 	public String toString()
 	{	String result = "(";
-		for(int i=0;i<values.size();i++)
-		{	Comparable<?> value = values.get(i);
-			result = result + value.toString();
+		TreeSet<String> keys = new TreeSet<String>(values.keySet());
+		int i = 0;
+		for(String key: keys)
+		{	Comparable<?> value = values.get(key);
+			result = result + key + "=" + value.toString();
 			if(i<values.size()-1)
 				result = result + ", ";
+			else
+				i++;
 		}
 		result = result + ")";
 		return result;
