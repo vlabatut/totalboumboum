@@ -21,9 +21,14 @@ package org.totalboumboum.ai.v201112.ais._suiveur;
  * 
  */
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCase;
+import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCombination;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -123,8 +128,23 @@ public class Suiveur extends ArtificialIntelligence
 		
 		utilityHandler = new AiUtilityHandler<Suiveur>(this)
 		{	@Override
-			protected void update() throws StopRequestException
+			protected Set<AiTile> selectTiles() throws StopRequestException
+			{	return new TreeSet<AiTile>();
+			}
+
+			@Override
+			protected void initCriteria() throws StopRequestException
 			{	
+			}
+
+			@Override
+			protected AiUtilityCase identifyCase(AiTile tile) throws StopRequestException
+			{	return null;
+			}
+
+			@Override
+			protected AiUtilityCombination identifyCombination(AiTile tile, AiUtilityCase caze) throws StopRequestException
+			{	return null;
 			}
 		};
 		
