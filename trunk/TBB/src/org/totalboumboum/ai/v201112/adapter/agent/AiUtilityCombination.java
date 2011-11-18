@@ -59,6 +59,21 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 			criteria.put(criterion.getName(),criterion);
 	}
 	
+	/**
+	 * Crée une nouvelle combinaison qui est une 
+	 * copie de celle passée en paramètre.
+	 * <br/>
+	 * Note : les valeurs contenues ne sont pas duppliquées
+	 * (les objets existants sont réutilisés).
+	 * 
+	 * @param combination
+	 * 		La combinaison à recopier.
+	 */
+	public AiUtilityCombination(AiUtilityCombination combination)
+	{	this.caze = combination.caze;
+		this.criteria.putAll(combination.criteria);
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// CASE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -104,11 +119,11 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	public void setCriterionValue(String criterionName, Comparable<?> criterionValue)
 	{	AiUtilityCriterion criterion = criteria.get(criterionName);
 		if(criterion==null)
-			throw new IllegalArgumentException("The specified criterion is not defined for the case associated to this combination.");
+			throw new IllegalArgumentException("The specified criterion ("+criterionName+") is not defined for the case ("+caze+") associated to this combination.");
 		if(criterion.hasValue(criterionValue))
 			values.put(criterionName,criterionValue);
 		else
-			throw new IllegalArgumentException("The specified value does not belong to the criterion definition domain.");
+			throw new IllegalArgumentException("The specified value ("+criterionValue+") does not belong to the criterion ("+criterionName+") definition domain.");
 	}
 	
 	/**

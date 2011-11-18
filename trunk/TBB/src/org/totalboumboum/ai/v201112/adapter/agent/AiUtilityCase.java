@@ -71,7 +71,7 @@ public class AiUtilityCase implements Comparable<AiUtilityCase>
 	{	this.name = name;
 		for(AiUtilityCriterion criterion: criteria)
 		{	if(criteria.contains(criterion))
-				throw new IllegalArgumentException("A case cannot contain several criteria with the same name.");
+				throw new IllegalArgumentException("A case cannot contain several criteria with the same name ("+name+").");
 			else
 				this.criteria.add(criterion);
 		}

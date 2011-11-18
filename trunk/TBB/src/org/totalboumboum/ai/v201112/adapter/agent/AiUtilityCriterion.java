@@ -21,15 +21,19 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  * 
  */
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Cette classe permet de définir un critère,
  * en le caractérisant par son nom et par
  * son domaine (l'ensemble des valeurs possibles
  * pour ce critère).
+ * <br/>
+ * Les valeurs peuvent être soit booléennes,
+ * soit entières, soit des chaines de caractères,
+ * en fonction du constructeur utilisé.
  * <br/>
  * Le critère peut être utilisé pour construire
  * un ou plusieurs cas ({@link AiUtilityCase}). 
@@ -45,8 +49,35 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 {	
 	/**
 	 * Crée un nouveau critère à partir
+	 * du nom passé en paramètre. Le domaine
+	 * est binaire, donc il contient seulement
+	 * les valeurs {@link Boolean#FALSE} et
+	 * {@link Boolean#TRUE}.
+	 * <br/>
+	 * <b>Attention </b>: le nom du
+	 * critère doit être unique pour
+	 * un cas donné. Il ne peut pas
+	 * y avoir deux critères de même
+	 * nom dans le même cas.
+	 * 
+	 * @param name
+	 * 		Nom du nouveau critère.
+	 */
+	public AiUtilityCriterion(String name)
+	{	// init nom
+		this.name = name;
+		
+		// init valeurs
+		this.domain.add(Boolean.FALSE);
+		this.domain.add(Boolean.TRUE);
+	}
+	
+	/**
+	 * Crée un nouveau critère à partir
 	 * du nom et du domaine passés
-	 * en paramètres.
+	 * en paramètres. Le domaine contient
+	 * les entiers compris entre {@code inf}
+	 * et {@code sup} (inclus). 
 	 * <br/>
 	 * <b>Attention </b>: le nom du
 	 * critère doit être unique pour
@@ -59,12 +90,43 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	 * @param domain
 	 * 		Ensemble des valeurs possible pour ce critère.
 	 */
-	public AiUtilityCriterion(String name, Set<Comparable<?>> domain)
-	{	this.name = name;
+	public AiUtilityCriterion(String name, int inf, int sup)
+	{	// init nom
+		this.name = name;
+		
+		// init valeurs
+		for(int i=inf;i<=sup;i++)
+			this.domain.add(i);
+	}
+
+	/**
+	 * Crée un nouveau critère à partir
+	 * du nom et du domaine passés
+	 * en paramètres. Le domaine contient
+	 * un certain nombre de symboles
+	 * représentés par des chaînes de
+	 * caractères.
+	 * <br/>
+	 * <b>Attention </b>: le nom du
+	 * critère doit être unique pour
+	 * un cas donné. Il ne peut pas
+	 * y avoir deux critères de même
+	 * nom dans le même cas.
+	 * 
+	 * @param name
+	 * 		Nom du nouveau critère.
+	 * @param domain
+	 * 		Ensemble des valeurs possible pour ce critère.
+	 */
+	public AiUtilityCriterion(String name, Set<Comparable<String>> domain)
+	{	// init nom
+		this.name = name;
+		
+		// init valeurs
 		this.domain.addAll(domain);
 	}
-	
-    /////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Le nom de ce critère */
@@ -88,7 +150,7 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	// DOMAIN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les valeurs possibles pour ce critère */
-	private final Set<Comparable<?>> domain = new HashSet<Comparable<?>>();
+	private final Set<Comparable<?>> domain = new TreeSet<Comparable<?>>();
 	
 	/**
 	 * Renvoie le domaine, i.e. l'ensemble
@@ -100,10 +162,10 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	 * @return
 	 * 		L'ensemble des valeurs possibles pour ce critère.
 	 */
-	public Set<Comparable<?>> getDomain()
+/*	public Set<Comparable<?>> getDomain()
 	{	return domain;
 	}
-	
+/	
 	/**
 	 * Indique si le domaine de définition de ce
 	 * critère contient la valeur passée en paramètre.

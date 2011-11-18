@@ -102,7 +102,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	protected void resetData() throws StopRequestException
 	{	utilitiesByTile.clear();
-		utilitiesByValue.clear();		
+		utilitiesByValue.clear();
 	}
 	
 	/**
@@ -200,7 +200,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/** Map contenant tous les cas, à initialiser dans {@link #initCriteria()} */
 	protected final HashMap<String,AiUtilityCase> cases = new HashMap<String,AiUtilityCase>();
 	/** Map contenant l'utilité de chaque combinaison, à initialiser dans {@link #initCriteria()} */
-	protected final HashMap<AiUtilityCombination,Float> referenceUtilities = new HashMap<AiUtilityCombination,Float>();
+	protected final HashMap<AiUtilityCombination,Integer> referenceUtilities = new HashMap<AiUtilityCombination,Integer>();
+	/** Indique l'utilité maximale pour chaque mode */
+	protected final HashMap<AiMode,Integer> maxUtilities = new HashMap<AiMode,Integer>();
 	
 	/**
 	 * Initialise d'abord tous les critères, puis tous les cas.
@@ -211,7 +213,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * Ensuite, la méthode doit initialiser les valeurs d'utilités
 	 * de chaque combinaison possible (pour tous les cas). Ces
 	 * valeurs doivent obligatoirement être stockées dans la map 
-	 * {@link #referenceUtilities}.
+	 * {@link #referenceUtilities}. De plus, les valeurs d'utilité
+	 * maximales pour chaque mode doivent être stockées dans
+	 * la map {@link #maxUtilities}.
 	 * <br/>
 	 * Bien entendu, cette initialisation est réalisée une seule
 	 * fois lors de la création de l'agent. On suppose donc
@@ -257,6 +261,28 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	protected abstract AiUtilityCombination identifyCombination(AiTile tile, AiUtilityCase caze) throws StopRequestException;
+	
+	/**
+	 * Renvoie la valeur d'utilité associée à la
+	 * combinaison passée en paramètre. Si aucune
+	 * valeur d'utilité ne lui a été associée dans
+	 * {@link #referenceUtilities}, alors la
+	 * méthode lève une {@code IllegalArgumentException}.
+	 * 
+	 * @param combination
+	 * 		La combinaison dont on veut l'utilité.
+	 * @return
+	 * 		L'utilité associée à la combinaison spécifiée.
+	 * 
+	 * @throw IllegalArgumentException
+	 * 		ssi la combinaison spécifiée n'est pas présente dans {@link #referenceUtilities}.
+	 */
+	protected final int getUtilityValue(AiUtilityCombination combination)
+	{	Integer result = referenceUtilities.get(combination);
+		if(result==null)
+			throw new IllegalArgumentException("No utility value was associated to the specified combination ("+combination+").");
+		return result;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
