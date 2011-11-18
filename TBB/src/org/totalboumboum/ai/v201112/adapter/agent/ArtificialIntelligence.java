@@ -134,7 +134,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	public final AiAction call()
 	{	AiAction result;
 		// on réinitialise la sortie de l'agent
-		reinitOutput();
+		resetOutput();
 		try
 		{	// on initialise l'agent si besoin
 			if(!initialized)
@@ -225,7 +225,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * réinitialise la sortie graphique de l'agent.
 	 * méthode appelée automatiquement avant chaque itération de l'agent.
 	 */
-	private final void reinitOutput()
+	private final void resetOutput()
 	{	output.reinit();
 	}
 
