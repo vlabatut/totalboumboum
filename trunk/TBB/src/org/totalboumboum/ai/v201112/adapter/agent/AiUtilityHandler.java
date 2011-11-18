@@ -85,6 +85,27 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	protected final HashMap<Float,List<AiTile>> utilitiesByValue = new HashMap<Float,List<AiTile>>();
 
 	/**
+	 * Réinitialise les structures de données
+	 * modifiées à chaque itération.
+	 * <br/>
+	 * <b>Attention </b>: vous avez la possibilité
+	 * de surcharger cette méthode, par exemple
+	 * si vous avez besoin de réinitialiser certains
+	 * objets propre à votre programme. Mais dans ce
+	 * cas-là, vous mais vous devez impérativement
+	 * appeler {@code super.resetData()} ou bien effectuer
+	 * vous même la réinitialisation de {@link #utilitiesByTile}
+	 * et {@link #utilitiesByValue}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected void resetData() throws StopRequestException
+	{	utilitiesByTile.clear();
+		utilitiesByValue.clear();		
+	}
+	
+	/**
 	 * Renvoie les utilités courantes, rangées par case.
 	 * 
 	 * @return
@@ -122,8 +143,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	protected final void update() throws StopRequestException
 	{	// on vide les structures
-		utilitiesByTile.clear();
-		utilitiesByValue.clear();
+		print("    Reset data structures");
+		resetData();
 		
 		// on sélectionne les cases dont on veut calculer l'utilité
 		long before = print("    >> Entering selectTiles");
