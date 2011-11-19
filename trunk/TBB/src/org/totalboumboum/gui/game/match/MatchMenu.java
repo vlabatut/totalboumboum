@@ -86,6 +86,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		buttonSave = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
 		buttonRecord = GuiTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
+//buttonRecord.setEnabled(false);		
 		add(Box.createHorizontalGlue());
 		buttonTournament = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));

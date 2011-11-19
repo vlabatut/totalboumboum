@@ -1128,7 +1128,8 @@ public class Launcher
 // CLEANING PROCEDURE		//////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
-	 * - source : 
+	 * - source :
+	 * 		- éventuellement mettre à jour la version 
 	 * 		- supprimer zgraphics
 	 * 		- supprimer tous les commentaires TODO et NOTE
 	 * 		- effacer le changelog
@@ -1177,6 +1178,7 @@ public class Launcher
 	 * 			  org.totalboumboum.gui.menus.options.advanced.AdvancedData ligne 'case LINE_RECORD_GAMES'
 	 * 		- options :
 	 * 			- afficher les exceptions
+	 * 			- prérégler la partie rapide 
 	 * 		- ressources :
 	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau (5, 13 et 24)
 	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès

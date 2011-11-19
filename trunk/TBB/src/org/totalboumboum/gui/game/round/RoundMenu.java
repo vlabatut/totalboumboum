@@ -89,6 +89,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		buttonSave = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
 		buttonRecord = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
+//buttonRecord.setEnabled(false);		
 		add(Box.createHorizontalGlue());
 		buttonMatch = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
@@ -155,6 +156,7 @@ buttonStatistics.setEnabled(false);
 		// record replay
 		boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
 		buttonRecord.setSelected(recordGames);
+//buttonRecord.setEnabled(false);		
 	}
 	
 	public void autoAdvance()
