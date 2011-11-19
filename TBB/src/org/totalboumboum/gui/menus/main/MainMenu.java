@@ -85,9 +85,11 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
 		buttonNetworkGame = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_NETWORK,buttonWidth,buttonHeight,fontSize,this);
+//buttonNetworkGame.setEnabled(false);		
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonLoad = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
 		buttonReplay = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_REPLAY,buttonWidth,buttonHeight,fontSize,this);
+//buttonReplay.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuit = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);

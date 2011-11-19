@@ -136,6 +136,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		buttonLevelsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		buttonPublish = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
+//buttonPublish.setEnabled(false);
 		buttonBlockPlayers = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}

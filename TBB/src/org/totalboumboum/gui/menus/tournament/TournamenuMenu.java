@@ -108,6 +108,7 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 		buttonSettingsPrevious = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
 		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		buttonPublish = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
+//buttonPublish.setEnabled(false);
 		buttonBlockPlayers = GuiTools.createToggleButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}

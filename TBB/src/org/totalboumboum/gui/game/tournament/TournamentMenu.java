@@ -99,6 +99,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		buttonSave = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
 		buttonRecord = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
+//buttonRecord.setEnabled(false);		
 		add(Box.createHorizontalGlue());
 		buttonMenu = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
