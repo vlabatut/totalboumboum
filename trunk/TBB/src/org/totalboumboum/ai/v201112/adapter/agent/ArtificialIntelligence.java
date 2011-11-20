@@ -168,8 +168,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	public final AiZone getZone()
 	{	return zone;
 	}
+	
 	/**
-	 * méthode utilisée par le moteur du jeu 
+	 * Méthode utilisée par le moteur du jeu 
 	 * pour initialiser la zone de l'agent. 
 	 * 
 	 * @param zone	
@@ -447,23 +448,23 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
 	protected final String PERCEPTS = "Percepts";
-	/** Étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
 	protected final String MODE = "Mode";
-	/** Étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
 	protected final String UTILITY = "Utility";
-	/** Étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
 	protected final String BOMB = "Bomb";
-	/** Étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
 	protected final String MOVE = "Move";
-	/** Étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
 	protected final String OUTPUT = "Output";
-	/** Les différentes étapes du traitement */
+	/** Champ utilisé par le moteur : les différentes étapes du traitement */
 	protected final List<String> stepNames = new ArrayList<String>(Arrays.asList(PERCEPTS,MODE,UTILITY,BOMB,MOVE,OUTPUT));
-	/** Temps réel total utilisé lors du dernier appel (en ms) */ 
+	/** Champ utilisé par le moteur : temps réel total utilisé lors du dernier appel (en ms) */ 
 	private long totalDuration;
-	/** Temps réel de chaque étape (en ms) */
+	/** Champ utilisé par le moteur : temps réel de chaque étape (en ms) */
 	private final HashMap<String,Long> stepDurations = new HashMap<String,Long>();
 	
 	/**
@@ -481,6 +482,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Renvoie le temps réel écoulé lors
 	 * du dernier appel de cet agent,
 	 * exprimé en ms.
+	 * <br/>
+	 * Cette méthode est destinée au moteur
+	 * du jeu. Pour l'agent, il vaut mieux
+	 * utiliser la méthode {@link AiZone#getTotalTime()}.
 	 * 
 	 * @return
 	 * 		Temps réel total en ms.
@@ -495,6 +500,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * chacune des étapes de cet
 	 * agent, lors du dernier appel,
 	 * exprimé en ms.
+	 * <br/>
+	 * Cette méthode est destinée au moteur
+	 * du jeu. Pour l'agent, il vaut mieux
+	 * utiliser la méthode {@link AiZone#getTotalTime()}.
 	 * 
 	 * @return
 	 * 		Temps réel de chaque étape, en ms.
@@ -538,7 +547,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Termine proprement l'agent afin de libérer les ressources qu'il occupait.
+	 * Termine proprement l'agent afin de libérer les ressources 
+	 * qu'il occupait. Cette mméthode destinée au moteur.
 	 */
 	final void finish()
 	{	zone = null;
