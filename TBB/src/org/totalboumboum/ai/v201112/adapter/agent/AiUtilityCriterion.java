@@ -25,15 +25,33 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+
 /**
  * Cette classe permet de définir un critère,
  * en le caractérisant par son nom et par
  * son domaine (l'ensemble des valeurs possibles
  * pour ce critère).
  * <br/>
- * Les valeurs peuvent être soit booléennes,
- * soit entières, soit des chaines de caractères,
- * en fonction du constructeur utilisé.
+ * Les valeurs d'un critère peuvent être de n'importe
+ * quelle classe étendant {@link Object}, à condition
+ * qu'elles soient toutes de la même classe pour un
+ * critère donné.
+ * <br/>
+ * Cette classe est une classe abstraite qui doit
+ * être surclassée en indiquant le type de valeurs
+ * du critère (paramètre {@code T}. Le plus simple
+ * est d'utiliser comme base l'une des classes filles 
+ * proposées dans l'API :
+ * <ul>
+ * 		<li>{@link AiUtilityCriterionBoolean} pour des valeurs booléennes</li>
+ * 		<li>{@link AiUtilityCriterionInteger} pour des valeurs entières</li>
+ * 		<li>{@link AiUtilityCriterionString} pour des chaînes de caractères</li>
+ * </ul>
+ * Dans la classe fille créée, la méthode 
+ * {@link #evaluateCriterion(AiTile)}
+ * doit obligatoirement être définie.
  * <br/>
  * Le critère peut être utilisé pour construire
  * un ou plusieurs cas ({@link AiUtilityCase}). 
@@ -45,14 +63,11 @@ import java.util.TreeSet;
  * 
  * @author Vincent Labatut
  */
-public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
+public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCriterion<?>>
 {	
 	/**
 	 * Crée un nouveau critère à partir
-	 * du nom passé en paramètre. Le domaine
-	 * est binaire, donc il contient seulement
-	 * les valeurs {@link Boolean#FALSE} et
-	 * {@link Boolean#TRUE}.
+	 * du nom passé en paramètre.
 	 * <br/>
 	 * <b>Attention </b>: le nom du
 	 * critère doit être unique pour
@@ -62,75 +77,19 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	 * 
 	 * @param name
 	 * 		Nom du nouveau critère.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public AiUtilityCriterion(String name)
-	{	// init nom
-		this.name = name;
-		
-		// init valeurs
-		this.domain.add(Boolean.FALSE);
-		this.domain.add(Boolean.TRUE);
+	public AiUtilityCriterion(String name) throws StopRequestException
+	{	this.name = name;
 	}
 	
-	/**
-	 * Crée un nouveau critère à partir
-	 * du nom et du domaine passés
-	 * en paramètres. Le domaine contient
-	 * les entiers compris entre {@code inf}
-	 * et {@code sup} (inclus). 
-	 * <br/>
-	 * <b>Attention </b>: le nom du
-	 * critère doit être unique pour
-	 * un cas donné. Il ne peut pas
-	 * y avoir deux critères de même
-	 * nom dans le même cas.
-	 * 
-	 * @param name
-	 * 		Nom du nouveau critère.
-	 * @param domain
-	 * 		Ensemble des valeurs possible pour ce critère.
-	 */
-	public AiUtilityCriterion(String name, int inf, int sup)
-	{	// init nom
-		this.name = name;
-		
-		// init valeurs
-		for(int i=inf;i<=sup;i++)
-			this.domain.add(i);
-	}
-
-	/**
-	 * Crée un nouveau critère à partir
-	 * du nom et du domaine passés
-	 * en paramètres. Le domaine contient
-	 * un certain nombre de symboles
-	 * représentés par des chaînes de
-	 * caractères.
-	 * <br/>
-	 * <b>Attention </b>: le nom du
-	 * critère doit être unique pour
-	 * un cas donné. Il ne peut pas
-	 * y avoir deux critères de même
-	 * nom dans le même cas.
-	 * 
-	 * @param name
-	 * 		Nom du nouveau critère.
-	 * @param domain
-	 * 		Ensemble des valeurs possible pour ce critère.
-	 */
-	public AiUtilityCriterion(String name, Set<Comparable<String>> domain)
-	{	// init nom
-		this.name = name;
-		
-		// init valeurs
-		this.domain.addAll(domain);
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Le nom de ce critère */
-	private String name;
+	String name;
 
 	/**
 	 * Renvoie le nom de ce critère.
@@ -142,7 +101,7 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	 * @return
 	 * 		Le nom de ce critère.
 	 */
-	public String getName()
+	public final String getName()
 	{	return name;
 	}
 	
@@ -150,7 +109,7 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	// DOMAIN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les valeurs possibles pour ce critère */
-	private final Set<Comparable<?>> domain = new TreeSet<Comparable<?>>();
+	final Set<T> domain = new TreeSet<T>();
 	
 	/**
 	 * Renvoie le domaine, i.e. l'ensemble
@@ -165,7 +124,7 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 /*	public Set<Comparable<?>> getDomain()
 	{	return domain;
 	}
-/	
+*/	
 	/**
 	 * Indique si le domaine de définition de ce
 	 * critère contient la valeur passée en paramètre.
@@ -175,32 +134,60 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	 * @return
 	 * 		{@code true} ssi la valeur appartient au domaine de ce critère.
 	 */
-	public boolean hasValue(Comparable<?> value)
+	public final boolean hasValue(Object value)
 	{	boolean result = domain.contains(value);
 		return result;
 	}
 
     /////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Calcule et renvoie la valeur de critère
+	 * pour la case passée en paramètre.
+	 * <br/>
+	 * Il est probable que la case, bien que
+	 * nécessaire, ne soit pas une information
+	 * suffisante pour réaliser ce calcul. De plus,
+	 * il est possible qu'il soit nécessaire
+	 * d'utiliser des résultats de calculs communs
+	 * (par exemple communs à plusieurs critéres
+	 * différents). Dans ces cas-là, il est recommandé
+	 * d'utiliser un gestionnaire spécifique, dans
+	 * lequel on stocke ces données, et auquel on 
+	 * accède directement depuis cette méthode.
+	 * 
+	 * @param tile
+	 * 		La case à traiter.
+	 * @return
+	 * 		La valeur de ce critère pour la case spécifiée.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public abstract T processValue(AiTile tile) throws StopRequestException;
+	
+    /////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public boolean equals(Object o)
+	public final boolean equals(Object o)
 	{	boolean result = false;
 		if(o!=null && o instanceof AiUtilityCriterion)
-		{	AiUtilityCriterion criterion = (AiUtilityCriterion)o;
+		{	AiUtilityCriterion<?> criterion = (AiUtilityCriterion<?>)o;
 			result = compareTo(criterion)==0;
 		}
 		return result;
 	}
 
 	@Override
-	public int compareTo(AiUtilityCriterion criterion)
+	public final int compareTo(AiUtilityCriterion<?> criterion)
 	{	int result = name.compareTo(criterion.getName());
 		return result;
 	}
 	
 	@Override
-    public int hashCode()
+    public final int hashCode()
 	{	int result = getName().hashCode();
 		return result;
 	}
@@ -209,11 +196,11 @@ public class AiUtilityCriterion implements Comparable<AiUtilityCriterion>
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public String toString()
+	public final String toString()
 	{	String result = name + "={";
-		Iterator<Comparable<?>> it = domain.iterator();
+		Iterator<T> it = domain.iterator();
 		while(it.hasNext())
-		{	Comparable<?> value = it.next();
+		{	T value = it.next();
 			result = result + value.toString();
 			if(it.hasNext())
 				result = result + ", ";

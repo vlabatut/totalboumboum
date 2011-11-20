@@ -28,7 +28,6 @@ import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCase;
-import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCombination;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -139,11 +138,6 @@ public class Suiveur extends ArtificialIntelligence
 
 			@Override
 			protected AiUtilityCase identifyCase(AiTile tile) throws StopRequestException
-			{	return null;
-			}
-
-			@Override
-			protected AiUtilityCombination identifyCombination(AiTile tile, AiUtilityCase caze) throws StopRequestException
 			{	return null;
 			}
 		};
