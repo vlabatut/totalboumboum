@@ -21,9 +21,9 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  * 
  */
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
@@ -103,7 +103,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	// CRITERIA			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les critères servant à décrire ce cas */
-	private final Set<AiUtilityCriterion<?>> criteria = new HashSet<AiUtilityCriterion<?>>();
+	private final Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
 	
 	/**
 	 * Renvoie l'ensemble des critères nécessaires
