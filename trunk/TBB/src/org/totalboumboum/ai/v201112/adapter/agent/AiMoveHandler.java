@@ -139,6 +139,11 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Détermine si le gestionnaire colorie une case représentant la destination dans la sortie graphique */ 
+	protected boolean outputDestination = true;
+	/** Détermine si le gestionnaire affiche le chemin courant dans la sortie graphique */ 
+	protected boolean outputPath = true;
+
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
 	 * les données de ce gestionnaire.
@@ -169,10 +174,11 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 			color = new Color(0,0,255);
 		
 		// path
-		output.addPath(currentPath,color);
+		if(outputPath && currentPath!=null)
+			output.addPath(currentPath,color);
 		
 		// destination
-		if(currentDestination!=null)
+		if(outputDestination && currentDestination!=null)
 			output.setTileColor(currentDestination,color);
 	}
 }
