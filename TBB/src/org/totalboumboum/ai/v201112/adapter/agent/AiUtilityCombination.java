@@ -177,8 +177,7 @@ public final class AiUtilityCombination
 			result = result + criterion.getName() + "=" + value;
 			if(i<values.size()-1)
 				result = result + ", ";
-			else
-				i++;
+			i++;
 		}
 		result = result + ")";
 		return result;
