@@ -170,7 +170,7 @@ public final class AiUtilityCombination
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = "(";
+	{	String result = caze.getName()+"=(";
 		int i = 0;
 		for(AiUtilityCriterion<?> criterion: criteria)
 		{	Object value = values.get(criterion);
