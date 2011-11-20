@@ -463,3 +463,19 @@
 		- nouveau thème pour le tournoi 4
 		- nouveaux niveaux pour la qualif et le tournoi: bombfest, qualif4, hurry
 		- mise à jour de l'année du copyright de 2009-2010 en 2010-2011
+
++ beta.021
+	- GUI :
+		- message console pendant le jeu
+		- occupation temps réel des IA
+	- IA :
+		- modèle allégé de simulation
+		- extension de A* considérant le temps
+		- précision de l'algorithme général
+		- systématisation de la sortie texte
+		- systématisation de la mesure du temps pour les appels de méthodes
+		- systématisation de la sortie graphique
+		- système de cas/critères/combinaisons pour le calcul d'utilité
+	- stats :
+	- Divers :
+		- nouveau thème pour le tournoi 5
