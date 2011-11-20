@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  * 
  */
 
+import java.awt.Color;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,10 +158,14 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		before = print("    >> Processing each tile");
 		for(AiTile tile: selectedTiles)
 		{	// on identifie le cas de cette case (en fonction du mode)
+			print("      >> Identifying the case");
 			AiUtilityCase caze = identifyCase(tile);
+			print("      << case="+caze);
 			
 			// on identifie la combinaison de valeurs des critères pour le cas détecté
-			AiUtilityCombination combination = identifyCombination(tile,caze);
+			print("      >> Processing the combination");
+			AiUtilityCombination combination = caze.processCombination(tile);
+			print("      << combination="+combination);
 			
 			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
 			float utility = referenceUtilities.get(combination);
@@ -244,25 +249,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	protected abstract AiUtilityCase identifyCase(AiTile tile) throws StopRequestException;
 	
 	/**
-	 * Cette méthode prend en paramètres une case et le cas
-	 * qui a été identifié pour elle grâce à {@link #identifyCase(AiTile)}.
-	 * Elle calcule alors la combinaison correspondante et
-	 * la renvoie. Cette combinaison sera ensuite utilisée pour
-	 * calculer l'utilité de la case grâce à {@link #referenceUtilities}.
-	 * 
-	 * @param tile
-	 * 		La tile dont on veut la combinaison.
-	 * @param caze
-	 * 		Le cas qui a été identifié pour cette case.
-	 * @return
-	 * 		La combinaison correspondant à la case passée en paramètre.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
-	 */
-	protected abstract AiUtilityCombination identifyCombination(AiTile tile, AiUtilityCase caze) throws StopRequestException;
-	
-	/**
 	 * Renvoie la valeur d'utilité associée à la
 	 * combinaison passée en paramètre. Si aucune
 	 * valeur d'utilité ne lui a été associée dans
@@ -287,12 +273,20 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Détermine si le gestionnaire colorie les cases dans la sortie graphique */ 
+	protected boolean outputColors = true;
+	/** Détermine si le gestionnaire affiche du texte dans la sortie graphique */ 
+	protected boolean outputText = true;
+	
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
 	 * les données de ce gestionnaire.
 	 * <br/>
-	 * Ici, on se contente d'afficher la valeur numérique
-	 * de l'utilité dans chaque case.
+	 * Ici, on affiche la valeur numérique de l'utilité dans chaque,
+	 * et on colorie la case en fonction de cette valeur : la couleur
+	 * dépend du mode (bleu pour la collecte, rouge pour l'attaque)
+	 * et son intensité dépend de l'utilité (clair pour une utilité
+	 * faible, foncé pour une utilité élevée).
 	 * <br/>
 	 * Cette méthode peut être surchargée si vous voulez afficher
 	 * les informations différemment, ou d'autres informations. A
@@ -305,19 +299,48 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public void updateOutput() throws StopRequestException
-	{	NumberFormat nf = NumberFormat.getInstance(Locale.FRENCH);
+	{	AiMode mode = ai.getModeHandler().getMode();
+		NumberFormat nf = NumberFormat.getInstance(Locale.FRENCH);
 		nf.setMinimumFractionDigits(2);
 		nf.setMaximumFractionDigits(2);
 
+		int rCoeff = 1;
+		int gCoeff = 1;
+		int bCoeff = 1;
+		if(mode==AiMode.ATTACKING)
+			rCoeff = 0;
+		else if(mode==AiMode.COLLECTING)
+			bCoeff = 0;
+		Integer limit = maxUtilities.get(mode);
+		if(limit==0)
+			limit = 50;
 		AiOutput output = ai.getOutput();
+		
 		for(Entry<AiTile,Float> entry: utilitiesByTile.entrySet())
-		{	AiTile tile = entry.getKey();
+		{	ai.checkInterruption();
+			AiTile tile = entry.getKey();
 			float value = entry.getValue();
 			
-			String text = "-\u221E";
-			if(value!=Long.MAX_VALUE)
-				text = nf.format(value);
-			output.setTileText(tile,text);
+			// text
+			if(outputText)
+			{	String text = "-\u221E";
+				if(value!=Long.MAX_VALUE)
+					text = nf.format(value);
+				output.setTileText(tile,text);
+			}
+			
+			// color
+			if(outputColors)
+			{	if(value<0)
+					value = 0;
+				else if(value>limit)
+					value = limit;
+				int r = 255 - rCoeff*(int)(value/limit*255);
+				int g = 255 - gCoeff*(int)(value/limit*255);
+				int b = 255 - bCoeff*(int)(value/limit*255);
+				Color color = new Color(r,g,b);
+				output.setTileColor(tile,color);
+			}
 		}
 	}
 }

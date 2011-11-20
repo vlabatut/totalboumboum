@@ -24,21 +24,21 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Cette classe permet de définir une combinaison,
  * en la décrivant par le cas ({@link AiUtilityCase})
  * auquel elle est associée, et un ensemble de valeurs. 
  * Le cas détermine les critères ({@link AiUtilityCriterion})
- * que doivent décrire ces valeurs.
+ * que doivent décrire ces valeurs. Chaque valeur
+ * est associée à un critère particulier.
  * <br/>
  * Les valeurs doivent forcément être définies dans
  * les domaines des critères correspondant.
  * 
  * @author Vincent Labatut
  */
-public class AiUtilityCombination implements Comparable<AiUtilityCombination>
+public final class AiUtilityCombination
 {	
 	/**
 	 * Crée une nouvelle combinaison à partir
@@ -54,9 +54,7 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 		this.caze = caze;
 		
 		// les critères du cas
-		Set<AiUtilityCriterion> criteriaSet = caze.getCriteria();
-		for(AiUtilityCriterion criterion: criteriaSet)
-			criteria.put(criterion.getName(),criterion);
+		criteria = caze.getCriteria();
 	}
 	
 	/**
@@ -71,7 +69,7 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	 */
 	public AiUtilityCombination(AiUtilityCombination combination)
 	{	this.caze = combination.caze;
-		this.criteria.putAll(combination.criteria);
+		this.criteria = combination.criteria;
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -80,7 +78,7 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	/** Le cas dont dépend cette combinaison */
 	private AiUtilityCase caze;
 	/** Les critères du cas dont dépend cette combinaison */
-	private final HashMap<String,AiUtilityCriterion> criteria = new HashMap<String, AiUtilityCriterion>();
+	private Set<AiUtilityCriterion<?>> criteria;
 	
 	/**
 	 * Renvoie le cas dont
@@ -97,7 +95,7 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	// VALUES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les valeurs (de critères) servant à décrire cette combinaison */
-	private final HashMap<String,Comparable<?>> values = new HashMap<String, Comparable<?>>();
+	private final HashMap<AiUtilityCriterion<?>,Object> values = new HashMap<AiUtilityCriterion<?>,Object>();
 	
 	/**
 	 * Modifie la valeur associée au critère spécifié.
@@ -116,28 +114,28 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	 * @throws IllegalArgumentException
 	 * 		Si le critère ou la valeur sont incompatibles.
 	 */
-	public void setCriterionValue(String criterionName, Comparable<?> criterionValue)
-	{	AiUtilityCriterion criterion = criteria.get(criterionName);
-		if(criterion==null)
-			throw new IllegalArgumentException("The specified criterion ("+criterionName+") is not defined for the case ("+caze+") associated to this combination.");
-		if(criterion.hasValue(criterionValue))
-			values.put(criterionName,criterionValue);
-		else
-			throw new IllegalArgumentException("The specified value ("+criterionValue+") does not belong to the criterion ("+criterionName+") definition domain.");
+	public <T> void setCriterionValue(AiUtilityCriterion<T> criterion, T value)
+	{	if(!criteria.contains(criterion))
+			throw new IllegalArgumentException("The specified criterion ("+criterion.getName()+") is not defined for the case ("+caze.getName()+") associated to this combination.");
+		if(!criterion.hasValue(value))
+			throw new IllegalArgumentException("The specified value ("+value+") does not belong to the criterion ("+criterion.getName()+") definition domain.");
+
+		values.put(criterion,value);
 	}
 	
 	/**
-	 * Renvoie l'ensemble des critères nécessaires
-	 * pour décrire ce cas.
-	 * <br/>
-	 * <b>Attention </b>: Il ne faut surtout pas modifier
-	 * cet ensemble. 
+	 * Renvoie la valeur associée au critère spécifié
+	 * dans cette combinaison.
 	 * 
+	 * @param criterion
+	 * 		Le critère dont on veut la valeur associée.
 	 * @return
-	 * 		L'ensemble des critères décrivant ce cas.
+	 * 		La valeur associée au critère spécifié,
+	 * 		ou {@code null} si aucune valeur n'a encore
+	 * 		été associée au critère.
 	 */
-	public Comparable<?> getCriterionValue(String criterionName)
-	{	Comparable<?> result = values.get(criterionName);
+	public Object getCriterionValue(AiUtilityCriterion<?> criterion)
+	{	Object result = values.get(criterion);
 		return result;
 	}
 
@@ -149,30 +147,13 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	{	boolean result = false;
 		if(o!=null && o instanceof AiUtilityCombination)
 		{	AiUtilityCombination combination = (AiUtilityCombination)o;
-			result = compareTo(combination)==0;
-		}
-		return result;
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public int compareTo(AiUtilityCombination combination)
-	{	int result = caze.compareTo(combination.getCase());
-		if(result!=0)
-		{	Set<String> critNames = new TreeSet<String>();
-			critNames.addAll(values.keySet());
-			critNames.addAll(combination.values.keySet());
-			Iterator<String> it = critNames.iterator();
-			while(it.hasNext() && result==0)
-			{	String critName = it.next();	
-				Comparable value1 = values.get(critName);
-				Comparable value2 = combination.values.get(critName);
-				if(value1==null)
-					result = -1;
-				else if(value2==null)
-					result = +1;
-				else
-					result = value1.compareTo(value2);
+			result = true;
+			Iterator<AiUtilityCriterion<?>> it = criteria.iterator();
+			while(it.hasNext())
+			{	AiUtilityCriterion<?> criterion = it.next();
+				Object value1 = values.get(criterion);
+				Object value2 = combination.getCriterionValue(criterion);
+				result = value1.equals(value2);
 			}
 		}
 		return result;
@@ -190,11 +171,10 @@ public class AiUtilityCombination implements Comparable<AiUtilityCombination>
 	@Override
 	public String toString()
 	{	String result = "(";
-		TreeSet<String> keys = new TreeSet<String>(values.keySet());
 		int i = 0;
-		for(String key: keys)
-		{	Comparable<?> value = values.get(key);
-			result = result + key + "=" + value.toString();
+		for(AiUtilityCriterion<?> criterion: criteria)
+		{	Object value = values.get(criterion);
+			result = result + criterion.getName() + "=" + value;
 			if(i<values.size()-1)
 				result = result + ", ";
 			else
