@@ -340,6 +340,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		
 		// initialisation des gestionnaires
 		initHandlers();
+    	// on affiche éventuellement les utilités
+		getUtilityHandler().displayUtilities();
 	}
 
 	/////////////////////////////////////////////////////////////////

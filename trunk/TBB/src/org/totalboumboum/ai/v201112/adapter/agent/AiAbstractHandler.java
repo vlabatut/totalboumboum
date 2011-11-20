@@ -55,7 +55,7 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Indique si l'agent doit utiliser la sortie texte (pour le débogage) */
-	protected boolean verbose = false;
+	public boolean verbose = false;
 	
 	/**
 	 * Cette méthode affiche à l'écran le message passé en paramètre,

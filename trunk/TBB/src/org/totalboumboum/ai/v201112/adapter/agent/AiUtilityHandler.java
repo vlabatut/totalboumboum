@@ -24,6 +24,8 @@ package org.totalboumboum.ai.v201112.adapter.agent;
 import java.awt.Color;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -274,9 +276,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Détermine si le gestionnaire colorie les cases dans la sortie graphique */ 
-	protected boolean outputColors = true;
+	public boolean outputColors = true;
 	/** Détermine si le gestionnaire affiche du texte dans la sortie graphique */ 
-	protected boolean outputText = true;
+	public boolean outputText = true;
 	
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
@@ -342,5 +344,25 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 				output.setTileColor(tile,color);
 			}
 		}
+	}
+	
+	public void displayUtilities()
+	{	print("    >> Declared utilities :");
+		List<AiUtilityCombination> combis = new ArrayList<AiUtilityCombination>(referenceUtilities.keySet());
+		Collections.sort(combis,new Comparator<AiUtilityCombination>()
+		{	@Override
+			public int compare(AiUtilityCombination o1, AiUtilityCombination o2)
+			{	int u1 = referenceUtilities.get(o1);
+				int u2 = referenceUtilities.get(o2);
+				int result = u1 - u2;
+				return result;
+			}	
+		});
+		
+		for(AiUtilityCombination combi: combis)
+		{	int utility = referenceUtilities.get(combi);
+			print("    "+utility+"."+combi);
+		}
+		print("    << Utilities done");
 	}
 }

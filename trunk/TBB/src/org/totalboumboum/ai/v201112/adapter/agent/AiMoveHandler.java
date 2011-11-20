@@ -140,9 +140,9 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Détermine si le gestionnaire colorie une case représentant la destination dans la sortie graphique */ 
-	protected boolean outputDestination = true;
+	public boolean outputDestination = true;
 	/** Détermine si le gestionnaire affiche le chemin courant dans la sortie graphique */ 
-	protected boolean outputPath = true;
+	public boolean outputPath = true;
 
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
