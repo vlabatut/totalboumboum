@@ -179,6 +179,6 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 		
 		// destination
 		if(outputDestination && currentDestination!=null)
-			output.setTileColor(currentDestination,color);
+			output.setTileColor(currentDestination,Color.BLACK);
 	}
 }
