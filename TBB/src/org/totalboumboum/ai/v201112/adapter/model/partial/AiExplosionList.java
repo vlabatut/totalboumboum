@@ -44,6 +44,7 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 	{	// init
 		SortedSet<AiExplosion> head = headSet(explosion);
 		SortedSet<AiExplosion> tail = tailSet(explosion);
+		boolean emptyTail = tail.isEmpty();
 		long explosionStart = explosion.getStart();
 		long explosionEnd = explosion.getEnd();
 		boolean wasMerged = false;
@@ -60,7 +61,7 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 		}
 		
 		// existing explosions starting after the begining of the new one
-		if(!tail.isEmpty())
+		if(!emptyTail)
 		{	Iterator<AiExplosion> it = tail.iterator();
 			boolean covers = true;
 			while(it.hasNext() && covers)
