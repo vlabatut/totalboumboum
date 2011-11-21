@@ -136,7 +136,10 @@ public class AiPartialModel
 		{	for(int col=0;col<width;col++)
 			{	obstacles[row][col] = model.obstacles[row][col];
 				if(model.explosions[row][col]!=null)
-					explosions[row][col] = model.explosions[row][col].copy();
+				{	AiExplosionList list1 = model.explosions[row][col];
+					AiExplosionList list2 = list1.copy();
+					explosions[row][col] = list2;
+				}
 			}
 		}
 		
@@ -233,7 +236,8 @@ public class AiPartialModel
 			{	List<AiBomb> bombs = tile.getBombs();
 				if(!bombs.isEmpty())
 				{	AiBomb bomb = bombs.get(0);
-					if(bomb.getOwner().equals(ownHero))
+					AiHero owner = bomb.getOwner();
+					if(owner==null || owner.equals(ownHero))
 						crossable = false;
 				}
 			}

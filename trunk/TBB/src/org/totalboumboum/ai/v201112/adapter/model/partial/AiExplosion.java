@@ -160,8 +160,8 @@ public class AiExplosion implements Comparable<AiExplosion>
 	{	Long start = new Long(this.start);
 		int result = start.compareTo(o.start);
 		if(result==0)
-		{	Long duration = new Long(this.end);
-			result = duration.compareTo(o.end);
+		{	Long end = new Long(this.end);
+			result = end.compareTo(o.end);
 		}
 		return result;
 	}
