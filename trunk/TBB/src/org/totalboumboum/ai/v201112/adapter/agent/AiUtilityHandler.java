@@ -159,18 +159,21 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		// on calcule l'utilité de chaque case
 		before = print("    >> Processing each tile");
 		for(AiTile tile: selectedTiles)
-		{	// on identifie le cas de cette case (en fonction du mode)
-			print("      >> Identifying the case");
+		{	print("      >> Processing tile "+tile);
+			
+			// on identifie le cas de cette case (en fonction du mode)
+			print("        >> Identifying the case");
 			AiUtilityCase caze = identifyCase(tile);
-			print("      << case="+caze);
+			print("        << case="+caze);
 			
 			// on identifie la combinaison de valeurs des critères pour le cas détecté
-			print("      >> Processing the combination");
+			print("        >> Processing the combination");
 			AiUtilityCombination combination = caze.processCombination(tile);
-			print("      << combination="+combination);
+			print("        << combination="+combination);
 			
 			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
 			float utility = referenceUtilities.get(combination);
+			print("        Result: utility="+utility);
 			
 			// on la rajoute dans les structures
 			utilitiesByTile.put(tile,utility);
@@ -180,6 +183,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 				utilitiesByValue.put(utility,tiles);
 			}
 			tiles.add(tile);
+			print("      << Tile "+tile+" processing finished");
 		}
 		after = System.currentTimeMillis();
 		elapsed = after - before;
