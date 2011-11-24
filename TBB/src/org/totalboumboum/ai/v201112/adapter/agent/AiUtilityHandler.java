@@ -145,7 +145,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	protected final void update() throws StopRequestException
-	{	// on vide les structures
+	{	ai.checkInterruption();
+		// on vide les structures
 		print("    Reset data structures");
 		resetData();
 		
@@ -159,7 +160,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		// on calcule l'utilité de chaque case
 		before = print("    >> Processing each tile");
 		for(AiTile tile: selectedTiles)
-		{	print("      >> Processing tile "+tile);
+		{	ai.checkInterruption();
+			print("      >> Processing tile "+tile);
 			
 			// on identifie le cas de cette case (en fonction du mode)
 			print("        >> Identifying the case");
@@ -305,7 +307,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	public void updateOutput() throws StopRequestException
-	{	AiMode mode = ai.getModeHandler().getMode();
+	{	ai.checkInterruption();
+		AiMode mode = ai.getModeHandler().getMode();
 		NumberFormat nf = NumberFormat.getInstance(Locale.FRENCH);
 		nf.setMinimumFractionDigits(2);
 		nf.setMaximumFractionDigits(2);
@@ -350,8 +353,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		}
 	}
 	
-	public void displayUtilities()
-	{	print("    >> Declared utilities :");
+	public void displayUtilities() throws StopRequestException
+	{	ai.checkInterruption();
+		print("    >> Declared utilities :");
 		List<AiUtilityCombination> combis = new ArrayList<AiUtilityCombination>(referenceUtilities.keySet());
 		Collections.sort(combis,new Comparator<AiUtilityCombination>()
 		{	@Override
