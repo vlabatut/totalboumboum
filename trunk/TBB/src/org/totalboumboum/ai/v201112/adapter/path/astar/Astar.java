@@ -281,7 +281,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		if(!endTiles.isEmpty() && !queue.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				long before1 = print("---------- new iteration --");
+				long before1 = print("        -- new iteration --");
 				
 				// on prend le noeud situé en tête de file
 				lastSearchNode = queue.poll();

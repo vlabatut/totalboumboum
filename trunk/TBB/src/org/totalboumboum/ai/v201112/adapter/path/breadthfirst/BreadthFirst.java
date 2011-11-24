@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.breadthfirst;
  */
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -38,7 +39,6 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
@@ -78,48 +78,34 @@ public final class BreadthFirst extends AiAbstractSearchAlgorithm
 	/////////////////////////////////////////////////////////////////
 	/** Cases restant à traiter */
 	private Set<AiTile> remainingTiles = new TreeSet<AiTile>();
-	
+/* comment arrêter l'exploration pour les fct succ à base de modèle ?
+ *   > soit utiliser une liste des cases restant à résoudre
+ *		- mais comment les identifier avt le début de l'algo ?
+ *		- faudrait faire un premier parcours en largeur (?)
+ *	 > soit utiliser une liste des cases déjà résolues
+ *		- pareil : comment savoir s'il en reste à résoudre ?
+ *	 > utiliser une matrice pour représenter la zone
+ *		- initialiser avec des valeurs indéterminées
+ *		- à chaque développement, on regarde si on a trouvé un meilleur temps que celui déjà présent
+ *		- mais même si oui, on peut pas s'arrêter, car la case peut permettre de trouver un meilleur chemin pour une autre case
+ *	 > est-ce que le parcours ne revient pas en fait à parcourir autant de fois toute
+ *	   la zone qu'il y a d'explosion ? (!)
+ *
+ * - autre pb : comment s'assurer que la première case trouvée a bien le temps optimal ?
+ * 
+ */
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Calcule le plus court chemin pour aller de la case startTile à 
-	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
-	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
-	 * l'algorithme atteint une limite de cout/taille, la valeur null est
-	 * renvoyée. Dans ce cas là, c'est qu'il y a généralement un problème
-	 * dans le façon dont A* est employé (mauvaise fonction de cout, par
-	 * exemple). 
-	 * 
-	 * @param startLocation	
-	 * 		La case de départ
-	 * @param endTile	
-	 * 		La case d'arrivée
-	 * @return 
-	 * 		Un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur {@code null}.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 * @throws LimitReachedException
-	 * 		L'algorithme a développé un arbre trop grand (il y a
-	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
-	 */
-	public AiPath processShortestPath(AiLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
-	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
-		endTiles.add(endTile);
-		AiPath result = processShortestPath(startLocation,endTiles);
-		return result;
-	}
-	
-	/**
-	 * Calcule le plus court chemin pour aller de la case startTile à 
-	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
+	 * Calcule le plus court chemin pour aller de la case {@code startTile} à 
+	 * l'une des cases contenues dans la liste {@code endTiles} (n'importe laquelle),
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
 	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
-	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
+	 * une limite de cout/taille, la valeur {@code null} est renvoyée. Dans ce 
 	 * cas-là, c'est qu'il y a généralement un problème dans le façon 
-	 * dont A* est employé (mauvaise fonction de cout, par exemple).
-	 * La fonction renvoie également null si la liste endTiles est vide.
+	 * dont A* est employé (mauvaise fonction de coût, par exemple).
+	 * La fonction renvoie également {@code null} si la liste {@code endTiles} est vide.
 	 * 
 	 * @param startLocation	
 	 * 		La case de départ.
@@ -135,17 +121,57 @@ public final class BreadthFirst extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
-	{	// initialisation
+	public AiPath startProcess(AiLocation startLocation) throws StopRequestException, LimitReachedException
+	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
-		this.remainingTiles = endTiles;
+		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
+		successorCalculator.init(root);
+		
+		AiPath result = startProcess();
+		return result;
+	}
+	
+	/**
+	 * Réalise le même traitement que {@link #processShortestPath(AiLocation, Set)},
+	 * à la différence qu'ici on réutilise l'arbre de recherche déjà existant. 
+	 * Autrement dit, on n'a pas besoin de préciser la case de départ, car elle 
+	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
+	 * lors d'un précédent appel (ou de plusieurs appels précédents) afin de 
+	 * calculer plus vite le résultat.
+	 * 
+	 * @param endTiles	
+	 * 		L'ensemble des cases d'arrivée possibles.
+	 * @return 
+	 * 		un chemin pour aller à l'une des cases de {@code endTiles},
+	 * 		ou un chemin vide, ou la valeur {@code null}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws LimitReachedException
+	 * 		L'algorithme a développé un arbre trop grand (il y a
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 */
+	public AiPath startProcess() throws StopRequestException, LimitReachedException
+	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
+		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
+		if(root==null)
+			throw new NullPointerException("The algorithm must be called at least once with startProcess(AiLocation,...) for init purposes");
+		
+		// initialisation
 		treeHeight = 0;
 		treeCost = 0;
 		treeSize = 0;
 		limitReached = false;
-		heuristicCalculator.setEndTiles(endTiles);
-		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
-		queue = new PriorityQueue<AiSearchNode>(1);
+		
+		// queue
+		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
+		{	@Override
+			public int compare(AiSearchNode o1, AiSearchNode o2)
+			{	int result = o1.compareScoreTo(o2);
+				return result;
+			}
+		};
+		queue = new PriorityQueue<AiSearchNode>(1,comparator);
 		queue.offer(root);
 		
 		// process
@@ -177,16 +203,12 @@ public final class BreadthFirst extends AiAbstractSearchAlgorithm
 	{	AiPath result = null;
 		AiSearchNode finalNode = null;
 		
-		long before = print(">>>>>>>> Starting/resuming A* +++++++++++++++++++++");
-		String msg = "         searching paths from "+startLocation+" to [";
-		for(AiTile tile: remainingTiles)
-			msg = msg + " " + tile;
-		msg = msg + " ]";
-		print(msg);
+		long before = print("      >> Starting/resuming Dijkstra +++++++++++++++++++++");
+		print("         searching paths from "+startLocation);
 		
-		boolean found = false;
+		lastSearchNode = null;
 		// traitement
-		if(!remainingTiles.isEmpty())
+		if(!queue.isEmpty())
 		{	do
 			{	ai.checkInterruption();
 				long before1 = print("---------- new iteration --");
@@ -195,17 +217,11 @@ public final class BreadthFirst extends AiAbstractSearchAlgorithm
 				lastSearchNode = queue.poll();
 				print("           Visited : "+lastSearchNode.toString());
 				print("           Queue length: "+queue.size());
-				print("           Zone:\n"+lastSearchNode.getLocation().getTile().getZone());
-				
-				// on teste si on est arrivé à la fin de la recherche
-				if(remainingTiles.contains(lastSearchNode.getLocation().getTile()))
-				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
-					finalNode = lastSearchNode;
-					found = true;
-				}
+				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
+				print("           Zone:\n"+zone);
 				
 				// si l'arbre a atteint la hauteur maximale, on s'arrête
-				else if(maxHeight>0 && lastSearchNode.getDepth()>=maxHeight)
+				if(maxHeight>0 && lastSearchNode.getDepth()>=maxHeight)
 					limitReached = true;
 				// si le noeud courant a atteint le coût maximal, on s'arrête
 				else if(maxCost>0 && lastSearchNode.getCost()>=maxCost)
@@ -224,7 +240,7 @@ public final class BreadthFirst extends AiAbstractSearchAlgorithm
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
-					Collections.shuffle(successors);
+//TODO					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité
 					for(AiSearchNode node: successors)
 						queue.offer(node);
@@ -239,46 +255,25 @@ public final class BreadthFirst extends AiAbstractSearchAlgorithm
 					treeSize = queue.size();
 				long after1 = System.currentTimeMillis();
 				long elapsed1 = after1 - before1;
-				print("---------- iteration duration="+elapsed1+" --");
+				print("        -- iteration duration="+elapsed1+" --");
 			}
-			while(!queue.isEmpty() && !found && !limitReached);
-		
-			// build solution path
-			if(found)
-				result = finalNode.processPath();
+			while(!queue.isEmpty());
 		}
 		
 		long after = System.currentTimeMillis();
 		long elapsed = after - before;
-		msg = "         Path: [";
 		if(limitReached)
-			msg = msg + " limit reached";
-		else if(found)
-		{	for(AiLocation loc: result.getLocations())
-				msg = msg + " " + loc;
-		}
-		else if(remainingTiles.isEmpty())
-			msg = msg + " endTiles parameter empty";
+			print("         Limit reached");
 		else
-			msg = msg + " no solution found";
-		msg = msg + " ]";
-		print(msg);
+			print("         Search finished");
 		print("         Elapsed time: "+elapsed+" ms");
 		//
-		msg = "         height="+treeHeight+" cost="+treeCost+" size="+treeSize;
-		msg = msg + " src="+root.getLocation();
-		msg = msg + " trgt=";
-		for(AiTile tile: remainingTiles) 
-			msg = msg + " " + tile;
-		print(msg);
-		if(result!=null) 
-			print("         result="+result);
+		print("         height="+treeHeight+" cost="+treeCost+" size="+treeSize+" src="+root.getLocation());
+		print("      << Dijkstra finished +++++++++++++++++++++");
 
 //		finish();
 		if(limitReached)
-			throw new LimitReachedException(startLocation,remainingTiles,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
-		else if(remainingTiles.isEmpty())
-			throw new IllegalArgumentException("endTiles list must not be empty");
+			throw new LimitReachedException(startLocation,null,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
 		
 		return result;
 	}
