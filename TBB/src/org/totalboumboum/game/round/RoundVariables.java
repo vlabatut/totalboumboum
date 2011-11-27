@@ -56,9 +56,9 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// SCALE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static double zoomFactor;
+	public static double zoomFactor = 1;
 	public static double toleranceCoefficient = 1;
-	public static double scaledTileDimension;
+	public static double scaledTileDimension = GameData.STANDARD_TILE_DIMENSION;
 
 	public static void setZoomFactor(double zoomFactor)
 	{	RoundVariables.zoomFactor = zoomFactor;
