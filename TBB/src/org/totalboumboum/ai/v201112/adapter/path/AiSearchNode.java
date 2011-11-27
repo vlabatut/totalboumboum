@@ -21,7 +21,6 @@ package org.totalboumboum.ai.v201112.adapter.path;
  * 
  */
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -47,8 +46,12 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * Les calculateurs passés en paramètres seront utilisés
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
 	 * 
+	 * @param ai	
+	 * 		Agent utilisant ce noeud de recherche.
 	 * @param location	
 	 * 		Emplacement associé à ce noeud de recherche.
+	 * @param hero	
+	 * 		Personnage dont on veut déterminer le déplacement.
 	 * @param costCalculator	
 	 * 		Fonction de coût.
 	 * @param heuristicCalculator	
@@ -70,14 +73,17 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 		// parent
 		parent = null;
 		
+		// racine locale
+		localRoot = this;
+		
 		// noeuds explorés
-		exploredNodes = new HashMap<AiTile, AiSearchNode>();
-		exploredNodes.put(location.getTile(),this);
+//		exploredNodes = new HashMap<AiTile, AiSearchNode>();
+//		exploredNodes.put(location.getTile(),this);
 		
 		// profondeur
 		depth = 0;
 		
-		// cout
+		// coût
 		this.costCalculator = costCalculator;
 		cost = 0;
 		
@@ -114,9 +120,12 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 		// parent
 		this.parent = parent;
 		
+		// racine locale
+		localRoot = parent.getLocalRoot();
+		
 		// noeuds explorés
-		exploredNodes = new HashMap<AiTile, AiSearchNode>(parent.exploredNodes);
-		exploredNodes.put(location.getTile(),this);
+//		exploredNodes = new HashMap<AiTile, AiSearchNode>(parent.exploredNodes);
+//		exploredNodes.put(location.getTile(),this);
 		
 		// profondeur
 		depth = parent.getDepth() + 1;
@@ -170,9 +179,12 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 		// parent
 		this.parent = parent;
 		
+		// racine locale
+		localRoot = this;
+		
 		// noeuds explorés
-		exploredNodes = new HashMap<AiTile, AiSearchNode>();
-		exploredNodes.put(location.getTile(),this);
+//		exploredNodes = new HashMap<AiTile, AiSearchNode>();
+//		exploredNodes.put(location.getTile(),this);
 		
 		// profondeur
 		depth = parent.getDepth() + 1;
@@ -338,24 +350,41 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
     /////////////////////////////////////////////////////////////////
 	// PARENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** parent du noeud ({@code null} pour la racine) */
+	/** Parent du noeud ({@code null} pour la racine) */
 	private AiSearchNode parent = null;
 	
 	/**
-	 * renvoie le parent de ce noeud de recherche
+	 * Renvoie le parent de ce noeud de recherche.
 	 * 
 	 * @return	
-	 * 		un noeud de recherche correspondant au parent de ce noeud
+	 * 		Un noeud de recherche correspondant au parent de ce noeud.
 	 */
 	public AiSearchNode getParent()
 	{	return parent;	
 	}
 	
     /////////////////////////////////////////////////////////////////
+	// LOCAL ROOT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Racine locale de la branche ({@code null} pour la racine locale) */
+	private AiSearchNode localRoot = null;
+	
+	/**
+	 * Renvoie la racine locale de la branche
+	 * à laquelle appartient ce noeud de recherche.
+	 * 
+	 * @return	
+	 * 		Un noeud de recherche correspondant à la racine locale de ce noeud.
+	 */
+	public AiSearchNode getLocalRoot()
+	{	return localRoot;	
+	}
+	
+    /////////////////////////////////////////////////////////////////
 	// EXPLORED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** map contenant les noeuds ancêtres présent dans la branche courante de l'arbre de recherche */
-	private HashMap<AiTile,AiSearchNode> exploredNodes;
+//	private HashMap<AiTile,AiSearchNode> exploredNodes;
 
 	/**
 	 * Renvoie la map des noeud explorés,
@@ -383,11 +412,11 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 	 * @return	
 	 * 		{@code true} ssi la case a déjà été traitée.
 	 */
-	public boolean hasBeenExplored(AiTile tile)
+/*	public boolean hasBeenExplored(AiTile tile)
 	{	boolean result = exploredNodes.containsKey(tile);
 		return result;
 	}
-
+*/
 	/**
 	 * Détermine si la case passée en paramètre a déjà été traitée,
 	 * i.e. si elle apparait dans les noeuds de recherche ancêtres.
