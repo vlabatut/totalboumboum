@@ -58,7 +58,8 @@ public abstract class AiAbstractSearchAlgorithm
 	 * 		La fonction successeur.
 	 */
 	public AiAbstractSearchAlgorithm(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
-	{	this.ai = ai;
+	{	// champs de base
+		this.ai = ai;
 		this.hero = hero;
 		this.costCalculator = costCalculator;
 		this.heuristicCalculator = heuristicCalculator;
@@ -74,7 +75,24 @@ public abstract class AiAbstractSearchAlgorithm
 		// pour la sortie texte
 		colorStr = zone.getOwnHero().getColor().toString();
 	}
-
+	
+	/**
+	 * Construit un objet permettant d'appliquer l'algorithme de recherche.
+	 * Cet objet en utilisant un arbre de recherche existant.
+	 * Le noeud de recherche reçu doit correspondre à la racine de cet
+	 * arbre. Le fait d'utiliser un arbre existant peut accélérer
+	 * grandement la recherche de chemin.
+	 * 
+	 * @param root
+	 * 		La racine d'un arbre de recherche existant.
+	 */
+	public AiAbstractSearchAlgorithm(AiSearchNode root)
+	{	// on crée l'objet de façon classique
+		this(root.getAi(),root.getHero(),root.getCostCalculator(),root.getHeuristicCalculator(),root.getSuccessorCalculator());
+		// on utilise l'arbre de recherche existant pour effectuer l'initialisation
+		setRoot(root);
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// CALCULATORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -139,6 +157,20 @@ public abstract class AiAbstractSearchAlgorithm
 	protected double treeCost = 0;
 	/** Indique la taille courante (en noeuds) de l'arbre de recherche */
 	protected int treeSize = 0;
+	
+	/**
+	 * Initialise cet objet en utilisant un arbre de recherche existant.
+	 * Le noeud de recherche reçu doit correspondre à la racine de cet
+	 * arbre. Le fait d'utiliser un arbre existant peut accélérer
+	 * grandement la recherche de chemin.
+	 * 
+	 * @param root
+	 * 		La racine d'un arbre de recherche existant.
+	 */
+	public void setRoot(AiSearchNode root)
+	{	startLocation = root.getLocation();
+		this.root = root;
+	}
 	
 	/**
 	 * Renvoie la frange courante de l'algorithme
