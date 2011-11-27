@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -40,8 +41,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Implémentation la plus simple d'une fonction successeur : 
- * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
- * par le personnage considéré, et qui n'ont pas déjà été explorées.
+ * on prend les 4 cases voisines, en ne gardant que celles qui sont 
+ * traversables par le personnage considéré, et qui n'ont pas déjà 
+ * été explorées.
  * <br/>
  * La classe est compatible avec :
  * <ul>
@@ -61,9 +63,16 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 		</li> 
  * </ul>
  * <br/>
- * On empêche tout passage sur une case déjà explorée afin de rendre le traitement 
- * plus court. Par conséquent, cette fonction n'est pas capable de traiter les 
- * chemins qui contiennent des retours en arrière ou de l'attente.
+ * On considère qu'une case est explorée si elle
+ * a déjà été traitée par l'algorithme, <i>même dans une autre 
+ * branche</i>. Autrement dit, cette fonction est optimisée pour ne
+ * pas tester des chemins qui repassent par une case déjà utilisée.
+ * L'idée est que si une case a déjà été traitée, on ne peut pas
+ * trouver de meilleur chemin pour l'atteindre. Cette hypothèse est
+ * fausse quand le temps est pris en compte, car il induit une
+ * action d'attente. C'est la raison pour laquelle cette classe
+ * n'est pas compatible avec toutes les fonctions heuristiques et
+ * successeurs disponibles. 
  * 
  * @author Vincent Labatut
  */
@@ -81,9 +90,19 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	{	super(ai);
 	}
 	
+	@Override
+	public void init(AiSearchNode root)
+	{	processedTiles.clear();
+		processedTilesMap.clear();
+		processedTiles.put(null,processedTilesMap);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** map contenant les cases déjà traitées */
+	private final HashMap<AiTile,AiSearchNode> processedTilesMap = new HashMap<AiTile,AiSearchNode>();
+	
 	/** 
 	 * Fonction successeur la plus simple: on considère les 4 cases 
 	 * voisines de la case courante,
@@ -107,13 +126,15 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 		AiTile tile = node.getLocation().getTile();
 		AiHero hero = node.getHero();
 		
+		// màj la map des cases visitées
+		processedTilesMap.put(tile,node);
+		
 		// pour chaque case voisine :
 		for(Direction direction: Direction.getPrimaryValues())
 		{	AiTile neighbor = tile.getNeighbor(direction);
 			
-			// on teste si elle est traversable 
-			// et n'a pas déjà été explorée dans la branche courante de A*
-			if(neighbor.isCrossableBy(hero) && !node.hasBeenExplored(neighbor))
+			// on teste si elle est traversable et n'a pas déjà été explorée
+			if(neighbor.isCrossableBy(hero) && processedTiles.get(neighbor)==null)
 			{	AiLocation location = new AiLocation(neighbor);
 				AiSearchNode child = new AiSearchNode(location,node);
 				result.add(child);

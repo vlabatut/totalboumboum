@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path.astar;
  * 
  */
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -50,7 +51,8 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
- * boucler à l'infini.
+ * boucler à l'infini. La notion de 'noeud déjà exploré' est spécifiée par la fonction successeur
+ * utilisée.
  * </br>
  * Cette implémentation trouve donc le chemin le plus court entre deux cases,
  * en considérant les obstacles. Elle a besoin de quatre paramètres :
@@ -73,7 +75,8 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
 public final class Astar extends AiAbstractSearchAlgorithm
 {	
 	/**
-	 * construit un objet permettant d'appliquer l'algorithme A*.
+	 * Construit un objet permettant d'appliquer l'algorithme A*,
+	 * en utilisant les données et fonctions passées en paramètres.
 	 * 
 	 * @param ai
 	 * 		l'AI invoquant A*
@@ -90,6 +93,23 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	{	super(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 	}
 
+	/**
+	 * Construit un objet permettant d'appliquer l'algorithme A*,
+	 * en utilisant l'arbre de recherche existant dont la racine
+	 * est passée en paramètre. Cela revient à créer un objet
+	 * en utilisant l'autre constructeur, puis à appliquer
+	 * {@link #setRoot(AiSearchNode)}
+	 * 
+	 * @param root
+	 * 		La racine de l'arbre de recherche existant.
+	 */
+	public Astar(AiSearchNode root)
+	{	super(root);
+
+		// on effectue le traitement propre à A*
+		// > aucun pour l'instant
+	}
+
     /////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -103,8 +123,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * Calcule le plus court chemin pour aller de la case {@code startTile} à 
 	 * la case {@code endTile}, en utilisant l'algorithme A*. Si jamais aucun
 	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
-	 * l'algorithme atteint une limite de coût/taille, la valeur {@code null} est
-	 * renvoyée. Dans ce cas là, c'est qu'il y a généralement un problème
+	 * l'algorithme atteint une limite de coût/taille, une {@link LimitReachedException}
+	 * est levée. Dans ce cas là, c'est qu'il y a généralement un problème
 	 * dans le façon dont A* est employé (mauvaise fonction de coût, par exemple). 
 	 * 
 	 * @param startLocation	
@@ -132,10 +152,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * l'une des cases contenues dans la liste {@code endTiles} (n'importe laquelle),
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
 	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
-	 * une limite de cout/taille, la valeur {@code null} est renvoyée. Dans ce 
-	 * cas-là, c'est qu'il y a généralement un problème dans le façon 
+	 * une limite de coût/taille, une {@link LimitReachedException} est levée
+	 * Dans ce cas-là, c'est qu'il y a généralement un problème dans le façon 
 	 * dont A* est employé (mauvaise fonction de coût, par exemple).
-	 * La fonction renvoie également {@code null} si la liste {@code endTiles} est vide.
+	 * La fonction renvoie {@code null} si la liste {@code endTiles} est vide.
 	 * 
 	 * @param startLocation	
 	 * 		La case de départ.
@@ -158,6 +178,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		successorCalculator.init(root);
 		
+		// on lance le traitement
 		AiPath result = processShortestPath(endTiles);
 		return result;
 	}
@@ -169,6 +190,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
 	 * lors d'un précédent appel (ou de plusieurs appels précédents) afin de 
 	 * calculer plus vite le résultat.
+	 * <br/>
+	 * Cette méthode est également utilisable quand cet objet a été construit
+	 * à partir d'un arbre existant avec {@link #Astar(AiSearchNode)},
+	 * ou bien quand la méthode {@link #setRoot(AiSearchNode)} a été utilisée.
 	 * 
 	 * @param endTile	
 	 * 		La case d'arrivée
@@ -195,6 +220,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
 	 * lors d'un précédent appel (ou de plusieurs appels précédents) afin de 
 	 * calculer plus vite le résultat.
+	 * <br/>
+	 * Cette méthode est également utilisable quand cet objet a été construit
+	 * à partir d'un arbre existant avec {@link #Astar(AiSearchNode)},
+	 * ou bien quand la méthode {@link #setRoot(AiSearchNode)} a été utilisée.
 	 * 
 	 * @param endTiles	
 	 * 		L'ensemble des cases d'arrivée possibles.
@@ -256,7 +285,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * avant les chemin sous-optimaux.
 	 * 
 	 * @return 
-	 * 		un chemin différent de celui renvoyé par {@code processShortestPath}.
+	 * 		Un chemin différent de celui renvoyé par {@code processShortestPath}.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
