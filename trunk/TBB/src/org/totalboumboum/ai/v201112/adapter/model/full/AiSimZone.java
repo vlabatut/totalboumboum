@@ -35,9 +35,13 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201112.adapter.data.AiState;
+import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
+import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -175,13 +179,22 @@ final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * crée une zone vide des dimensions spécifiées.
-	 * <b>Note :</b> constructeur utilisé seulement pour tester AiModel.
+	 * Crée une zone vide dont les dimensions correspondent à celles
+	 * passées en paramètres.
+	 * <br/>
+	 * Bien sûr, cette zone doit ensuite être
+	 * complétée avec des sprites (personnages,
+	 * blocks, bombes, items...) pour être
+	 * utilisable (cf. et autres méthodes similaires).
+	 * <br/>
+	 * <b>Remarque</b> : cette façon de créer un modèle est réservée
+	 * au débogage, elle n'est pas prévue pour une utilisation
+	 * en cours de jeu.
 	 * 
 	 * @param height
-	 * 		hauteur de la zone à créer, en cases
+	 * 		Hauteur de la zone à créer.
 	 * @param width
-	 * 		largeur de la zone à créer, en cases
+	 * 		Largeur de la zone à créer.
 	 */
 	protected AiSimZone(int height, int width)
 	{	Thread.yield();
@@ -312,6 +325,21 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Compteur d'id pour les sprites */
+	private int spriteId = 0; 
+
+	/**
+	 * Permet de générer des id pour les sprites créés lors des simulation
+	 * 
+	 * @return
+	 * 		Une nouvelle id de sprite.
+	 */
+	private int createNewId()
+	{	int result = spriteId;
+		spriteId++;
+		return result;
+	}
+	
 	/**
 	 * permet de rajouter un sprite dans cette zone.
 	 * <br/>
@@ -583,6 +611,102 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * Cette méthode permet de rajouter un personnage dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite.
+	 * @param color
+	 * 		La couleur du joueur.
+	 * @param bombNumber
+	 * 		Le nombre de bombes que le joueur peut poser.
+	 * @param range
+	 * 		La portée des bombes du joueur.
+	 * @param ownHero
+	 * 		Indique si ce personnage est celui contrôlé par l'agent.
+	 */
+	public AiSimHero createHero(AiTile tile, PredefinedColor color, int bombNumber, int range, boolean ownHero)
+	{	// bomb prototype
+		AiSimBomb bombPrototype;
+		{	AiSimTile t = null;
+			double posX = 0;
+			double posY = 0;
+			double posZ = 0;
+	
+			AiSimFire firePrototype = createFire(null);
+			boolean countdownTrigger = true;
+			boolean remoteControlTrigger = false;
+			boolean explosionTrigger = true;
+			boolean throughItems = false;
+			float failureProbability = 0.03f;
+			long burningDuration = 100;
+			long latencyDuration = 140;
+			long normalDuration = 2400;
+			long time = 0;
+			boolean penetrating = false;
+			boolean working = true;
+			double currentSpeed = 0;
+			double slidingSpeed = (140*RoundVariables.zoomFactor)/16;
+			AiStopType stopHeroes = AiStopType.WEAK_STOP;
+			AiStopType stopFires = AiStopType.WEAK_STOP;
+			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+			int id = createNewId();
+			bombPrototype = new AiSimBomb(id,t,posX,posY,posZ,
+					state,burningDuration,currentSpeed,slidingSpeed,
+					countdownTrigger,remoteControlTrigger,explosionTrigger,
+					normalDuration,latencyDuration,failureProbability,firePrototype,
+					stopHeroes,stopFires,throughItems,range,penetrating,
+					color,working,time);
+		}
+		
+		// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		double posX = 0;
+		double posY = 0;
+		double posZ = 0;
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+			posX = t.getPosX();
+			posY = t.getPosY();
+			posZ = 0;
+		}
+		
+		// create sprite
+		long burningDuration = 810; // dépend du sprite...
+		int bombCount = 0;
+		double currentSpeed = 0;
+		double walkingSpeed = (50*RoundVariables.zoomFactor)/1000;
+		boolean throughBlocks = false;
+		boolean throughBombs = false;
+		boolean throughFires = false;
+		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		int id = createNewId();
+		AiSimHero result = new AiSimHero(id,t,posX,posY,posZ, 
+				state,burningDuration,currentSpeed,
+				bombPrototype,bombNumber,bombCount, 
+				throughBlocks,throughBombs,throughFires, 
+				color,walkingSpeed);
+		
+		// update zone
+		if(tile!=null)
+			addHero(result,ownHero);
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -642,6 +766,65 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * Cette méthode permet de rajouter un mur dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite.
+	 * @param destructible
+	 * 		Le type de mur à créer : {@code true} pour un mur destructible,
+	 * 		{@code false} pour un mur indestructible.
+	 */
+	public AiSimBlock createBlock(AiTile tile, boolean destructible)
+	{	// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		double posX = 0;
+		double posY = 0;
+		double posZ = 0;
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+			posX = t.getPosX();
+			posY = t.getPosY();
+			posZ = 0;
+		}
+		
+		// create sprite
+		long burningDuration = 470;
+		double currentSpeed = 0;
+		AiStopType stopHeroes;
+		AiStopType stopFires;
+		if(destructible)
+		{	stopHeroes = AiStopType.WEAK_STOP;
+			stopFires = AiStopType.WEAK_STOP;
+		}
+		else
+		{	stopHeroes = AiStopType.STRONG_STOP;
+			stopFires = AiStopType.STRONG_STOP;
+		}
+		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		int id = createNewId();
+		AiSimBlock result = new AiSimBlock(id,t,posX,posY,posZ,state,burningDuration,currentSpeed,destructible,stopHeroes,stopFires);
+		
+		// update zone
+		if(tile!=null)
+			addSprite(result);
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -686,6 +869,123 @@ final class AiSimZone extends AiZone
 			if(temp.getId()==id)
 				result = temp;
 		}
+		return result;
+	}
+
+	/**
+	 * Cette méthode permet de rajouter une bombe dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * La bombe crée ici n'appartient à aucun joueur, mais au niveau.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite.
+	 * @param range
+	 * 		La portée de la bombe à créer.
+	 */
+	public AiSimBomb createBomb(AiTile tile, int range)
+	{	// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		double posX = 0;
+		double posY = 0;
+		double posZ = 0;
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+			posX = t.getPosX();
+			posY = t.getPosY();
+			posZ = 0;
+		}
+
+		// create sprite
+		AiSimFire firePrototype = createFire(null);
+		boolean countdownTrigger = true;
+		boolean remoteControlTrigger = false;
+		boolean explosionTrigger = true;
+		boolean throughItems = false;
+		float failureProbability = 0.03f;
+		long burningDuration = 100;
+		long latencyDuration = 140;
+		long normalDuration = 2400;
+		long time = 0;
+		boolean penetrating = false;
+		boolean working = true;
+		double currentSpeed = 0;
+		double slidingSpeed = (140*RoundVariables.zoomFactor)/16;
+		AiStopType stopHeroes = AiStopType.WEAK_STOP;
+		AiStopType stopFires = AiStopType.WEAK_STOP;
+		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		PredefinedColor color = null;
+		int id = createNewId();
+		AiSimBomb bomb = new AiSimBomb(id,t,posX,posY,posZ,
+				state,burningDuration,currentSpeed,slidingSpeed,
+				countdownTrigger,remoteControlTrigger,explosionTrigger,
+				normalDuration,latencyDuration,failureProbability,firePrototype,
+				stopHeroes,stopFires,throughItems,range,penetrating,
+				color,working,time);
+		
+		// update zone
+		if(tile!=null)
+			addSprite(bomb);
+		
+		return bomb;
+	}
+
+	/**
+	 * Cette méthode permet de rajouter une bombe dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * La bombe crée ici appartient au joueur passé en paramètre.
+	 * Si le paramètre {@code tile} est {@code null}, la bombe
+	 * est placée dans la case du joueur.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite. Si ce paramètre
+	 * 		vaut {@code null}, alors la bombe est posée dans la case du
+	 * 		joueur spécifié.
+	 * @param hero
+	 * 		Le personnage devant poser la bombe.
+	 */
+	public AiSimBomb createBomb(AiTile tile, AiSimHero hero)
+	{	// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		if(tile==null)
+			tile = hero.getTile();
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+		}
+		
+		// create sprite
+		AiBomb bombPrototype = hero.getBombPrototype();
+		AiSimBomb result = new AiSimBomb(bombPrototype,t);
+
+		// update
+		addSprite(result);
+		hero.updateBombNumberCurrent(+1);
+		
 		return result;
 	}
 
@@ -736,6 +1036,110 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * Cette méthode permet de rajouter un fire dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite.
+	 */
+	public AiSimFire createFire(AiTile tile)
+	{	// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		double posX = 0;
+		double posY = 0;
+		double posZ = 0;
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+			posX = t.getPosX();
+			posY = t.getPosY();
+			posZ = 0;
+		}
+		
+		// create sprite
+		long burningDuration = 640;
+		double currentSpeed = 0;
+		boolean throughBlocks = false;
+		boolean throughBombs = true;
+		boolean throughItems = false;
+		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		int id = createNewId();
+		AiSimFire result = new AiSimFire(id,t,posX,posY,posZ,state,burningDuration,currentSpeed,throughBlocks,throughBombs,throughItems);
+		
+		// update zone
+		if(tile!=null)
+			addSprite(result);
+		
+		return result;
+	}
+
+	/**
+	 * Cette méthode permet de rajouter un fire dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * Cette méthode permet de créer un nouveau sprite de feu
+	 * en recopiant celui passé en paramètre.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param original
+	 * 		Le sprite original, à recopier.
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite.
+	 */
+	protected AiSimFire createFire(AiFire original, AiTile tile)
+	{	// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		double posX = 0;
+		double posY = 0;
+		double posZ = 0;
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+			posX = t.getPosX();
+			posY = t.getPosY();
+			posZ = 0;
+		}
+		
+		// create sprite
+		long burningDuration = original.getBurningDuration();
+		double currentSpeed = original.getCurrentSpeed();
+		boolean throughBlocks = original.hasThroughBlocks();
+		boolean throughBombs = original.hasThroughBombs();
+		boolean throughItems = original.hasThroughItems();
+		AiState s = original.getState();
+		AiSimState state = new AiSimState(s.getName(),s.getDirection(),0);
+		int id = createNewId();
+		AiSimFire result = new AiSimFire(id,t,posX,posY,posZ,state,burningDuration,currentSpeed,throughBlocks,throughBombs,throughItems);
+		
+		// update zone
+		if(tile!=null)
+			addSprite(result);
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -971,6 +1375,58 @@ final class AiSimZone extends AiZone
 		this.hiddenItemsCounts.putAll(hiddenItemsCounts);
 	}
 	
+	/**
+	 * Cette méthode permet de rajouter un item dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite.
+	 * @param itemType
+	 * 		Le type d'item à créer.
+	 */
+	public AiSimItem createItem(AiTile tile, AiItemType itemType)
+	{	// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		double posX = 0;
+		double posY = 0;
+		double posZ = 0;
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+			posX = t.getPosX();
+			posY = t.getPosY();
+			posZ = 0;
+		}
+		
+		// create sprite
+		long burningDuration = 900;
+		double currentSpeed = 0;
+		AiStopType stopBombs = AiStopType.WEAK_STOP;
+		AiStopType stopFires = AiStopType.WEAK_STOP;
+		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		int id = createNewId();
+		AiSimItem result = new AiSimItem(id,t,posX,posY,posZ,state,burningDuration,currentSpeed,itemType,stopBombs,stopFires);
+		
+		// update zone
+		if(tile!=null)
+		{	addSprite(result);
+			updateHiddenItemsCount(itemType);
+		}
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -983,7 +1439,7 @@ final class AiSimZone extends AiZone
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public boolean equals(Object o)

@@ -34,7 +34,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201112.adapter.data.AiState;
 import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -94,12 +93,12 @@ public class AiFullModel
 	public AiFullModel(AiZone currentZone)
 	{	Thread.yield();
 		
-		// init the model with a copy of the current zone
+		// initialise le modèle avec une copie de la zone passée en paramètre
 		this.current = new AiSimZone(currentZone);
 		
-		// no previous zone for now
+		// pas de zone précédente pour l'instant
 		previous = null;
-	}	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PARAMETERS		/////////////////////////////////////////////
@@ -151,7 +150,7 @@ public class AiFullModel
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SPRITES			/////////////////////////////////////////////
+	// LIMIT SPRITES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste des sprites dont le changement d'état marque la fin de la dernière simulation */
 	private List<AiSimSprite> limitSprites;
@@ -563,21 +562,6 @@ if(sprite instanceof AiSimBomb)
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** compteur d'id */
-	private int spriteId = Integer.MAX_VALUE; 
-
-	/**
-	 * permet de générer des id pour les sprites créés lors des simulation
-	 * 
-	 * @return
-	 * 		une nouvelle id de sprite
-	 */
-	private int createNewId()
-	{	int result = spriteId;
-		spriteId--;
-		return result;
-	}
-
 	/**
 	 * Calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
@@ -828,22 +812,9 @@ if(sprite instanceof AiSimBomb)
 			}
 			while(itemType==null && it.hasNext());
 			
-			// create item
-			int id = createNewId();
+			// create item and add it to the zone
 			AiSimTile tile = block.getTile();
-			double posX = tile.getPosX();
-			double posY = tile.getPosY();
-			double posZ = 0;
-			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-			long burningDuration = 0; //can't retrieve it
-			double currentSpeed = 0;
-			AiStopType stopBombs = AiStopType.WEAK_STOP;
-			AiStopType stopFires = AiStopType.WEAK_STOP;
-			AiSimItem item = new AiSimItem(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed,itemType,stopBombs,stopFires);
-			
-			// update zone
-			current.addSprite(item);
-			current.updateHiddenItemsCount(itemType);
+			current.createItem(tile,itemType);
 		}
 	}
 	
@@ -1067,13 +1038,7 @@ if(sprite instanceof AiSimBomb)
 		
 		// if the fire can appear, we affect it to the tile
 		if(tile.isCrossableBy(firePrototype) || tile.equals(detonatingBomb.getTile()))
-		{	// create sprite
-			AiSimFire fire = new AiSimFire(firePrototype,tile);
-			current.addSprite(fire);
-			// set properties
-			fire.setId(createNewId());
-			AiSimState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
-			fire.setState(state);
+		{	current.createFire(firePrototype,tile);
 		}
 		
 		// in any case, the tile content should be burned
@@ -1215,9 +1180,10 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * permet de solliciter un personnage pour qu'il pose une bombe
+	 * Permet de solliciter un personnage pour qu'il pose une bombe
 	 * dans la case spécifiée. La méthode renvoie la bombe posée,
-	 * ou bien null en cas d'impossibilité.
+	 * ou bien {@code null} en cas d'impossibilité.
+	 * <br/>
 	 * <b>Note :</b> cette méthode permet de poser des bombes
 	 * à distance, ce qui peut s'avérer pratique dans certaines situations.
 	 * 
@@ -1249,7 +1215,7 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * crée une nouvelle bombe appartenant au personnage passé en paramètre.
+	 * Crée une nouvelle bombe appartenant au personnage passé en paramètre.
 	 * La bombe est placée au centre de la case passée en paramètre.
 	 * Le compteur de bombes du personnage est incrémenté.
 	 * Si jamais la case contient déjà un objet empêchant de poser la bombe,
@@ -1277,16 +1243,8 @@ if(sprite instanceof AiSimBomb)
 		{	// then check if the tile can host the bomb
 			AiBomb bomb = hero.getBombPrototype();
 			if(tile.isCrossableBy(bomb,false,false,true,false,true,false))
-			{	// create the new bomb
-				result = new AiSimBomb(bomb,tile);
-				current.addSprite(result);
-				// set its properties
-				result.setId(createNewId());
-				AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-				result.setState(state);
-				
-				// update the hero
-				hero.updateBombNumberCurrent(+1);
+			{	// create the bomb
+				result = current.createBomb(tile,hero);
 				
 				// check for fire
 				if(tile.getFires().size()>0 && result.hasExplosionTrigger())
@@ -1298,17 +1256,18 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * permet de solliciter un personnage pour qu'il pose une bombe
+	 * Permet de solliciter un personnage pour qu'il pose une bombe
 	 * dans la case spécifiée. La méthode renvoie la bombe posée,
 	 * ou bien {@code null} en cas d'impossibilité. La bombe est posée
 	 * dans la case actuellement occupée par le personnage.
 	 * 
 	 * @param hero
-	 * 		le personnage que l'on veut voir poser une bombe
+	 * 		Le personnage que l'on veut voir poser une bombe.
 	 * @param force
-	 * 		si ce paramètre est {@code true}, le modèle pose une bombe même si l'agent concerné n'en a plus à poser.
+	 * 		Si ce paramètre est {@code true}, le modèle pose une bombe 
+	 * 		même si l'agent concerné n'en a plus à poser.
 	 * @return
-	 * 		la bombe qui a été posée, ou null si c'était impossible.
+	 * 		La bombe qui a été posée, ou null si c'était impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero, boolean force)
 	{	AiBomb result = null;
