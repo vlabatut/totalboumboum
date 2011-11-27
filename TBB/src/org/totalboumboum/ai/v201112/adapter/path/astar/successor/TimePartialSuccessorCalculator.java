@@ -34,25 +34,49 @@ import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Cette implémentation de la fonction successeur permet de traiter explicitement
  * le temps. L'algorithme va considérer non seulement un déplacement dans les
- * 4 cases voisines, mais aussi l'action d'attendre. Par exemple, cette approche
- * permet de considérer le cas où le joueur va attendre qu'un feu (présent dans
- * une case voisine, et qui l'empêche de passer) disparaisse. Par conséquent,
- * on envisagera aussi de passer sur des cases que l'algorithme a déjà traitées.
+ * 4 cases voisines, mais aussi l'action d'attendre. On considèrera cette possibilité
+ * quand au moins l'une des cases voisines de l'agent est occupée par du feu,
+ * menacée par du feu, contient un obstacle en train d'exploser, ou sur le point
+ * d'exploser.Par exemple, cette approche permet de considérer le cas où le 
+ * joueur va attendre qu'un feu présent dans une case voisine, et qui l'empêche de 
+ * passer, disparaisse. Par conséquent, on envisagera aussi de passer sur des cases 
+ * que l'algorithme a déjà traitées.
  * <br>
  * Le temps de traitement sera donc plus long que pour les autres fonctions
  * successeurs. Cette approche ne doit donc <b>pas être utilisée souvent</b>, car elle
  * va vraisemblablement ralentir l'agent significativement.
- * <br/>
  * A noter que le modèle utilisé pour prédire l'évolution de la zone est
  * moins précis que celui utilisé dans {@link TimeFullSuccessorCalculator},
  * donc les calculs devraient être plus rapide (mais les résultats moins fiables)
  * <br/>
+ * Afin de pouvoir contrôler (partiellement) le temps nécessaire au traitement,
+ * le paramètre {@link #searchMode} permet de limiter l'exploration de l'arbre 
+ * de recherche :
+ * <ul>
+ * 		<li>{@link #MODE_NOTREE} : quand on retombe sur une case déjà explorée,
+ * 			on ne la traite de nouveau que si le nouveau chemin est meilleur
+ * 			(en termes de coût) que l'ancien. Cette limite est celle employée
+ * 			dans les versions non-temporelles des fonctions successeurs proposées
+ * 			dans le même package. C'est la plus restrictive, donc c'est celle
+ * 			qui permet de raccourcir le plus le traitement. Mais les chemins trouvés
+ * 			ne seront pas forcément optimaux, puisqu'elle entraine que des chemins
+ * 			différents ne peuvent pas se croiser. En fait, ça concerne surtout les
+ * 			chemins assez longs et/ou compliqués (boucles, attentes, etc.).</li>
+ * 		<li>{@link #MODE_NOBRANCH} : quand on retombe sur une case déjà explorée
+ * 			dans la même branche, on ne la traite pas. La limite est moins forte
+ * 			que la précédente, donc le gain de temps sera moins important. Par 
+ * 			contre, les chemins longs/compliqués seront mieux traités.</li>
+ * 		<li>{@link #MODE_ALL} : aucune limite, la recherche est effectuée sans
+ * 			restriction. C'est donc dans ce cas que les calculs seront les plus
+ * 			longs. Par contre, l'optimalité des chemins obtenus est garantie.</li>
+ * </ul>
  * Cette classe nécessite que le temps soit considéré aussi par les autres
  * fonctions, donc il faut l'utiliser conjointement à :
  * <ul>
@@ -63,6 +87,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 		</li> 
  * 		<li>Fonction heuristiques :
  * 			<ul>
+ * 				<li>{@link NoHeuristicCalculator}</li>
  * 				<li>{@link TimeHeuristicCalculator}</li>
  * 			</ul>
  * 		</li> 
@@ -81,29 +106,46 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	 * @param ai
 	 * 		IA de référence pour gérer les interruptions.
 	 */
-	public TimePartialSuccessorCalculator(ArtificialIntelligence ai)
+	public TimePartialSuccessorCalculator(ArtificialIntelligence ai, int searchMode)
 	{	super(ai);
+		this.searchMode = searchMode;
 	}
+	
+	@Override
+	public void init(AiSearchNode root)
+	{	// modèles
+		models.clear();
+		AiZone zone = root.getLocation().getTile().getZone();
+		AiPartialModel model = new AiPartialModel(zone);
+		models.put(root,model);
+		
+		// cases traitées
+		processedTiles.clear();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SEARCH MODE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Mode de recherche : toutes les cases sont considérées (lent) */
+	public final static int MODE_ALL = 0;
+	/** Mode de recherche : seules les cases pas encore traitées dans la branche courante sont considérées */
+	public final static int MODE_NOBRANCH = 1;
+	/** Mode de recherche : seules les cases pas encore traitées du tout son considérées (rapide) */
+	public final static int MODE_NOTREE = 2;
+	/** Mode de recherche courant de cette fonction successeur */
+	private int searchMode;
 	
 	/////////////////////////////////////////////////////////////////
 	// MODELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** structure utilisée pour stocker les modèles partiels */
-	private HashMap<AiSearchNode,AiPartialModel> models;
+	/** structure utilisée pour stocker les modèles */
+	private final HashMap<AiSearchNode,AiPartialModel> models = new HashMap<AiSearchNode, AiPartialModel>();
 	
-	@Override
-	public void init(AiSearchNode root)
-	{	models = new HashMap<AiSearchNode, AiPartialModel>();
-		AiZone zone = root.getLocation().getTile().getZone();
-		AiPartialModel model = new AiPartialModel(zone);
-		models.put(root,model);
-	}
-
 	/**
 	 * Renvoie le modèle associé au noeud de recherche
 	 * passé en paramètre. Ce modèle correspond à la représentation
 	 * interne (ici simplifiée) utilisée pour calculer
-	 * les successeur du noeud de recherche.
+	 * les successeurs du noeud de recherche.
 	 * 
 	 * @param searchNode
 	 * 		Le noeud de recherche dont on veut le modèle.
@@ -118,6 +160,43 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Cases déjà traitées */
+	private HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> processedTiles = new HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>>();
+	
+	/**
+	 * Renvoie la map correspondant au noeud
+	 * de recherche passé en paramètre. La map
+	 * est créée et ajoutée dans la map principale si elle 
+	 * n'existe pas déjà.
+	 * <br/>
+	 * La map renvoyée dépend également du mode de recherche
+	 * courant.
+	 * 
+	 * @param localRoot
+	 * 		La racine locale dont on veut la matrice.
+	 * @return
+	 * 		La map associée à la racine locale spécifiée
+	 * 		(qui peut avoir été créée pour l'occasion).
+	 */
+	private HashMap<AiTile,AiSearchNode> getProcessedTiles(AiSearchNode localRoot)
+	{	HashMap<AiTile,AiSearchNode> result;
+		if(searchMode==MODE_ALL)
+			// pas de limite, donc pas de map
+			result = new HashMap<AiTile, AiSearchNode>();
+		else
+		{	if(searchMode==MODE_NOTREE)
+				// une seule map pour tout l'arbre
+				// (et sinon une map par branche)
+				localRoot = null;
+			result = processedTiles.get(localRoot);
+			if(result==null)
+			{	result = new HashMap<AiTile,AiSearchNode>();
+				processedTiles.put(localRoot,result);
+			}
+		}
+		return result;
+	}
+
 	/** 
 	 * Fonction successeur considérant à la fois les 4 cases 
 	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
@@ -146,14 +225,59 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		AiPartialModel currentModel = models.get(node);
 		AiZone zone = location.getZone();
 		
+		// on màj la map des cases visitées
+		AiSearchNode localRoot = node.getLocalRoot();
+		HashMap<AiTile,AiSearchNode> procTiles = getProcessedTiles(localRoot);
+		// pour la restriction sur l'arbre, on compare les coûts
+		if(searchMode==MODE_NOTREE)
+		{	AiSearchNode n = procTiles.get(tile);
+			if(n!=null)
+			{	double c = n.getCost();
+				double cost = node.getCost();
+				if(cost<c)
+					procTiles.put(tile,node);
+			}
+		}
+		// sinon, on met à jour la map systématiquement
+		else
+			procTiles.put(tile,node);
+
 		// on considère chaque déplacement possible
 		List<Direction> directions = Direction.getPrimaryValues();
 		for(Direction direction: directions)
 		{	// on récupère la case cible
 			AiTile targetTile = tile.getNeighbor(direction);
 			
-			// cette case ne doit pas avoir été visitée depuis la dernière pause
-			if(!node.hasBeenExplored(targetTile))
+			// on teste si on a le droit de la traiter,
+			// en fonction du mode de recherche sélectionné
+			boolean process = false;
+			if(searchMode==MODE_ALL)
+			{	// pas de limite
+				process = true;
+			}
+			else if(searchMode==MODE_NOBRANCH)
+			{	// case pas déjà traitée dans la même branche
+				process = procTiles.get(targetTile)==null;
+			}
+			else //if(searchMode==MODE_NOTREE)
+			{	AiSearchNode n = procTiles.get(targetTile);
+				// case pas déjà traitée
+				if(n==null)
+					process = true;
+				// ou alors avec un coût supérieur
+				else
+				{	AiSearchNode p = n.getParent();
+					if(process=p!=null)
+					{	// on fait une approximation du coût des fils à partir de ceux des pères
+						double c = p.getCost();
+						double cost = node.getCost();
+						process = cost<c;
+					}
+				}
+			}
+
+			// si on a le droit de traiter la case
+			if(process)
 			{	// on applique le modèle pour obtenir la zone résultant de l'action
 				AiPartialModel model = new AiPartialModel(currentModel);
 				
@@ -187,7 +311,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 			// on l'ignore car il est inutile d'y repasser
 		}
 		
-		// considère éventuellement l'action d'attente, 
+		// on considère éventuellement l'action d'attente, 
 		// si un obstacle temporaire est présent dans une case voisine
 		// l'obstacle temporaire peut être : du feu, une bombe, un mur destructible, une menace d'explosion.
 		AiPartialModel model = new AiPartialModel(currentModel);
@@ -241,6 +365,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 			AiExplosion explosion = model.getExplosion(neighbor);
 			if(explosion!=null)
 			{	long duration = explosion.getEnd();
+				// on garde celle qui se termine le plus tôt
 				if(duration<result)
 					result = duration;
 			}

@@ -27,8 +27,8 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
  * Permet de définir une fonction de coût 
- * utilisée lors de la recherche
- * avec l'algorithme A*.
+ * nécessaire aux algorithmes de recherche
+ * du type A* ou Dijkstra.
  * 
  * @author Vincent Labatut
  */

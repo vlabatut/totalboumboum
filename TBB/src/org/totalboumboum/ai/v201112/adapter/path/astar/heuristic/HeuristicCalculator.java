@@ -30,8 +30,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 
 /**
- * Permet de définir une fonction heuristique utilisée par l'algorithme
- * A* lors de la recherche d'un plus court chemin.
+ * Permet de définir une fonction heuristique utilisée par un algorithme
+ * de recherche lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut
  */

@@ -21,15 +21,18 @@ package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
  * 
  */
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 
 /**
- * Permet de définir une fonction successeur utilisée par l'algorithme
- * A* lors de la recherche d'un plus court chemin, pour développer un état.
+ * Permet de définir une fonction successeur utilisée par un algorithme
+ * de recherche lors de la recherche d'un plus court chemin, pour 
+ * développer un état.
  * 
  * @author Vincent Labatut
  */
@@ -62,11 +65,36 @@ public abstract class SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Agent utilisant cette classe */
 	protected ArtificialIntelligence ai = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Cases déjà traitées */
+	protected final HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> processedTiles = new HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>>();
+
+	/**
+	 * Renvoie la map contenant les cases traitées lors de la recherche.
+	 * Les clés sont les racines locales de l'arbre de recherche,
+	 * et les valeurs sont des maps associant des cases à des noeuds de
+	 * recherche (chaque noeud de recherche permet de récupérer le chemin
+	 * optimal pour aller à la case considérée). Cette structure peut
+	 * être utilisée après une recherche exhaustive, pour reconstruire
+	 * tous les chemins possibles.
+	 * <br/>
+	 * A noter que si la notion de racine locale n'est pas pertinente
+	 * (i.e. fonction successeur ne tenant pas compte du temps, et donc
+	 * de l'attente), alors la map contient une seule entrée dont la clé
+	 * est {@code null}.
+	 * 
+	 * @return
+	 * 		Une map associant à chaque racine locale une map de couples cases/noeuds de recherche.
+	 */
+	public HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> getProcessedTiles()
+	{	return processedTiles;
+	}
+	
 	/** 
 	 * Calcule tous les états accessibles à partir du noeud de recherche
 	 * passé en paramètre. On prend un noeud de recherche et non pas

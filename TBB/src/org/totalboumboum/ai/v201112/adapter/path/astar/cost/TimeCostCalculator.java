@@ -26,6 +26,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeFullSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimePartialSuccessorCalculator;
@@ -44,6 +45,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimePartialSucc
  * <ul>
  * 		<li>Fonction heuristiques :
  * 			<ul>
+ * 				<li>{@link NoHeuristicCalculator}</li>
  * 				<li>{@link TimeHeuristicCalculator}</li>
  * 			</ul>
  * 		</li> 
