@@ -275,7 +275,14 @@ abstract class AiSimSprite implements AiSprite
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append(" ("+getTile().getRow()+";"+getTile().getCol()+")");
+		String row = "x";
+		String col = "x";
+		if(tile!=null)
+		{	row = Integer.toString(tile.getRow());
+			col = Integer.toString(tile.getCol());
+		}
+		result.append(" ("+row+";"+col+")");
+		result.append(" ("+posX+";"+posY+";"+posZ+")");
 		result.append(" - state: "+state.toString());
 		return result.toString();
 	}

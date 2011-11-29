@@ -1840,7 +1840,7 @@ public abstract class AiZone
 	 */
 	@Override
 	public String toString()
-	{	String result = "  ";
+	{	String result = "";
 	
 		// col numbers
 		if(width>10)
