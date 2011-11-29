@@ -36,7 +36,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-final class AiSimState  implements AiState
+public final class AiSimState  implements AiState
 {
 	/**
 	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,

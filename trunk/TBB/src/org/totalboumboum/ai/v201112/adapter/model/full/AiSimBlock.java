@@ -34,7 +34,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
  * @author Vincent Labatut
  *
  */
-final class AiSimBlock extends AiSimSprite implements AiBlock
+public final class AiSimBlock extends AiSimSprite implements AiBlock
 {
 	/**
 	 * crée une simulation du bloc passé en paramètre,

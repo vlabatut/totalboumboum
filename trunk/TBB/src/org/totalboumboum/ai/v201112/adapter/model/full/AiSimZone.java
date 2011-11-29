@@ -55,7 +55,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-final class AiSimZone extends AiZone
+public final class AiSimZone extends AiZone
 {	
 	/**
 	 * contruit une zone qui est une copie de celle passée en paramètre.
@@ -65,7 +65,7 @@ final class AiSimZone extends AiZone
 	 * @param zone
 	 * 		La zone de référence
 	 */
-	protected AiSimZone(AiZone zone)
+	public AiSimZone(AiZone zone)
 	{	// matrix and tiles
 		Thread.yield();
 		AiTile[][] m = zone.getMatrix();
@@ -196,7 +196,7 @@ final class AiSimZone extends AiZone
 	 * @param width
 	 * 		Largeur de la zone à créer.
 	 */
-	protected AiSimZone(int height, int width)
+	public AiSimZone(int height, int width)
 	{	Thread.yield();
 		this.height = height;
 		this.width = width;
@@ -259,7 +259,7 @@ final class AiSimZone extends AiZone
 	 *  @throws IllegalArgumentException
 	 *  	Si la {@code direction} est composite.
 	 */
-	protected AiSimTile getNeighborTile(int row, int col, Direction direction)
+	public AiSimTile getNeighborTile(int row, int col, Direction direction)
 	{	if(direction.isComposite())
 			throw new IllegalArgumentException("getNeighborTile does not handle composite directions.");
 	
@@ -583,7 +583,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
-	protected AiSimSprite getSpriteById(AiSprite sprite)
+	public AiSimSprite getSpriteById(AiSprite sprite)
 	{	AiSimSprite result = null;
 		if(sprite instanceof AiBlock)
 		{	AiBlock temp = (AiBlock)sprite;
@@ -755,7 +755,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
-	protected AiSimBlock getSpriteById(AiBlock sprite)
+	public AiSimBlock getSpriteById(AiBlock sprite)
 	{	AiSimBlock result = null;
 		int id = sprite.getId();
 		Iterator<AiSimBlock> it = internalBlocks.iterator();
@@ -861,7 +861,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
-	protected AiSimBomb getSpriteById(AiBomb sprite)
+	public AiSimBomb getSpriteById(AiBomb sprite)
 	{	AiSimBomb result = null;
 		int id = sprite.getId();
 		Iterator<AiSimBomb> it = internalBombs.iterator();
@@ -1025,7 +1025,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
-	protected AiSimFire getSpriteById(AiFire sprite)
+	public AiSimFire getSpriteById(AiFire sprite)
 	{	AiSimFire result = null;
 		int id = sprite.getId();
 		Iterator<AiSimFire> it = internalFires.iterator();
@@ -1176,7 +1176,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
-	protected AiSimFloor getSpriteById(AiFloor sprite)
+	public AiSimFloor getSpriteById(AiFloor sprite)
 	{	AiSimFloor result = null;
 		int id = sprite.getId();
 		Iterator<AiSimFloor> it = internalFloors.iterator();
@@ -1268,7 +1268,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
-	protected AiSimHero getSpriteById(AiHero sprite)
+	public AiSimHero getSpriteById(AiHero sprite)
 	{	AiSimHero result = null;
 		int id = sprite.getId();
 		Iterator<AiSimHero> it = internalHeroes.iterator();
@@ -1350,7 +1350,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
-	protected AiSimItem getSpriteById(AiItem sprite)
+	public AiSimItem getSpriteById(AiItem sprite)
 	{	AiSimItem result = null;
 		int id = sprite.getId();
 		Iterator<AiSimItem> it = internalItems.iterator();
@@ -1371,7 +1371,7 @@ final class AiSimZone extends AiZone
 	 * @param hiddenItemsCounts
 	 * 		Nombres d'items cachés par type d'item.
 	 */
-	protected void setHidenItemCount(int hiddenItemsCount, HashMap<AiItemType,Integer> hiddenItemsCounts)
+	public void setHidenItemCount(int hiddenItemsCount, HashMap<AiItemType,Integer> hiddenItemsCounts)
 	{	this.hiddenItemsCount = hiddenItemsCount;
 		this.hiddenItemsCounts.putAll(hiddenItemsCounts);
 	}

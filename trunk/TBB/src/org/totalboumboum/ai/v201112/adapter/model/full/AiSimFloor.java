@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
  * @author Vincent Labatut
  *
  */
-final class AiSimFloor extends AiSimSprite implements AiFloor
+public final class AiSimFloor extends AiSimSprite implements AiFloor
 {
 	/**
 	 * crée une simulation du sol passé en paramètre,
