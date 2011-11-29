@@ -22,8 +22,12 @@ package org.totalboumboum.ai.v201112.adapter.model.full;
  */
 
 import java.util.HashMap;
+import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -65,13 +69,15 @@ public final class AiFullModelTest
 	 * @param zone
 	 * 		La zone à traiter.
 	 */
-	private static void simulate(AiSimZone zone)
-	{	AiSimHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+	private static void simulate(AiZone zone)
+	{	AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
 		// display initial zone
 		System.out.println("initial zone:\n"+zone);
 		AiFullModel model = new AiFullModel(zone);
 		model.setSimulateItemsAppearing(true);
+		model.applyChangeHeroDirection(hero,Direction.RIGHT);
+		System.out.println("hero: "+hero);
 		
 		// first simulation
 		long duration = 0;
@@ -81,11 +87,10 @@ public final class AiFullModelTest
 			model.simulate();
 //			model.simulate(hero);
 //			model.simulateUntilFire();
-			duration = model.getDuration();
 			// display result
+			duration = model.getDuration();
 			System.out.println("iteration "+iteration);
-			System.out.println("duration:"+duration);
-			System.out.println(model.getCurrentZone());
+			displaySimulationStep(model);
 			// update iteration
 			iteration++;
 		}
@@ -96,13 +101,12 @@ public final class AiFullModelTest
 		model.applyChangeHeroDirection(hero,Direction.DOWN);
 		
 		// simulate until the hero undergoes some change
-		model.simulate(hero);
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate(hero);
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		
+		{	model.simulate(hero);
+			displaySimulationStep(model);
+		}
+		{	model.simulate(hero);
+			displaySimulationStep(model);
+		}		
 		// drop a bomb
 		System.out.println("hero drops a bomb");
 		model.applyDropBomb(hero,true);
@@ -112,27 +116,30 @@ public final class AiFullModelTest
 		model.applyChangeHeroDirection(hero,Direction.LEFT);
 		
 		// simulate
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
+		{	model.simulate();
+			displaySimulationStep(model);
+		}
+		{	model.simulate();
+			displaySimulationStep(model);
+		}
 		
 		// change hero direction
 		System.out.println("change hero direction: LEFT>UP");
 		model.applyChangeHeroDirection(hero,Direction.UP);
 		
 		// simulate
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
-		model.simulate();
-		System.out.println(model.getDuration());
-		System.out.println(model.getCurrentZone());
+		iteration = 0;
+		do
+		{	// process simulation
+			model.simulate();
+			// display result
+			duration = model.getDuration();
+			System.out.println("iteration "+iteration);
+			displaySimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -158,7 +165,7 @@ public final class AiFullModelTest
 	 * └─┴─┴─┴─┴─┴─┴─┘
 	 * </pre>
 	 */
-	public static AiSimZone initZone()
+	private static AiSimZone initZone()
 	{	// zone
 		AiSimZone zone = new AiSimZone(7,7);
 		int hiddenItemsCount = 1;
@@ -187,16 +194,16 @@ public final class AiFullModelTest
 //		}
 		
 		// item 1
-//		{	AiSimTile tile = zone.getTile(1,3);
-//			AiItemType itemType = AiItemType.EXTRA_BOMB;
-//			zone.createItem(tile,itemType);
-//		}
-		
-		// item 2
-		{	AiSimTile tile = zone.getTile(3,5);
+		{	AiSimTile tile = zone.getTile(1,3);
 			AiItemType itemType = AiItemType.EXTRA_BOMB;
 			zone.createItem(tile,itemType);
 		}
+		
+		// item 2
+//		{	AiSimTile tile = zone.getTile(3,5);
+//			AiItemType itemType = AiItemType.EXTRA_BOMB;
+//			zone.createItem(tile,itemType);
+//		}
 
 		// softwall
 		{	AiSimTile tile = zone.getTile(3,5);
@@ -216,5 +223,19 @@ public final class AiFullModelTest
 		}
 		
 		return zone;
+	}
+	
+	private static void displaySimulationStep(AiFullModel model)
+	{	AiZone zone = model.getCurrentZone();
+		long duration = model.getDuration();
+		List<AiSprite> limitSprites = model.getLimitSprites();
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+
+		System.out.println("limits: ");
+		for(AiSprite sprite: limitSprites)
+			System.out.println("     "+sprite);
+		System.out.println("duration: "+duration);
+		System.out.println("hero: "+hero);
+		System.out.println(zone);
 	}
 }

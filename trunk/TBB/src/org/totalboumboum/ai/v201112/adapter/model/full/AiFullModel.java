@@ -1038,7 +1038,9 @@ if(sprite instanceof AiSimBomb)
 		
 		// if the fire can appear, we affect it to the tile
 		if(tile.isCrossableBy(firePrototype) || tile.equals(detonatingBomb.getTile()))
-		{	current.createFire(firePrototype,tile);
+		{	AiSimFire fire = current.createFire(firePrototype,tile);
+			AiSimState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
+			fire.setState(state);
 		}
 		
 		// in any case, the tile content should be burned

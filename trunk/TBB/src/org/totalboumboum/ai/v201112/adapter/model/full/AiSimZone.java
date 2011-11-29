@@ -202,13 +202,14 @@ final class AiSimZone extends AiZone
 		this.width = width;
 		pixelLeftX = 0;
 		pixelTopY = 0;
-		pixelWidth = 100*width;
-		pixelHeight = 100*height;
+		double dim = RoundVariables.scaledTileDimension;
+		pixelWidth = dim*width;
+		pixelHeight = dim*height;
 		matrix = new AiSimTile[height][width];
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	double posX = 100*col+50;
-				double posY = 100*row+50;
+			{	double posX = dim*col+dim/2;
+				double posY = dim*row+dim/2;
 				AiSimTile aiTile = new AiSimTile(this,row,col,posX,posY);
 				matrix[row][col] = aiTile;
 			}
@@ -655,7 +656,7 @@ final class AiSimZone extends AiZone
 			boolean penetrating = false;
 			boolean working = true;
 			double currentSpeed = 0;
-			double slidingSpeed = (140*RoundVariables.zoomFactor)/16;
+			double slidingSpeed = (140*RoundVariables.zoomFactor)/16 * 1000;
 			AiStopType stopHeroes = AiStopType.WEAK_STOP;
 			AiStopType stopFires = AiStopType.WEAK_STOP;
 			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
@@ -688,7 +689,7 @@ final class AiSimZone extends AiZone
 		long burningDuration = 810; // dépend du sprite...
 		int bombCount = 0;
 		double currentSpeed = 0;
-		double walkingSpeed = (50*RoundVariables.zoomFactor)/1000;
+		double walkingSpeed = 50*RoundVariables.zoomFactor;
 		boolean throughBlocks = false;
 		boolean throughBombs = false;
 		boolean throughFires = false;
