@@ -37,7 +37,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
  * @author Vincent Labatut
  *
  */
-final class AiSimItem extends AiSimSprite implements AiItem
+public final class AiSimItem extends AiSimSprite implements AiItem
 {
 	/**
 	 * crée une simulation de l'item passé en paramètre,

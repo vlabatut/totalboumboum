@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
  * @author Vincent Labatut
  *
  */
-final class AiSimFire extends AiSimSprite implements AiFire
+public final class AiSimFire extends AiSimSprite implements AiFire
 {
 	/**
 	 * crée une simulation du feu passé en paramètre,

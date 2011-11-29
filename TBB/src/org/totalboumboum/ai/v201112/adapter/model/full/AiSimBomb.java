@@ -40,7 +40,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-final class AiSimBomb extends AiSimSprite implements AiBomb
+public final class AiSimBomb extends AiSimSprite implements AiBomb
 {	
 	/**
 	 * crée une simulation de la bombe passée en paramètre,
