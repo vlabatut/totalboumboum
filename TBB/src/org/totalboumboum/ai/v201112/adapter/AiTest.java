@@ -32,6 +32,8 @@ import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModel;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimHero;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimTile;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimZone;
+import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -58,96 +60,16 @@ public final class AiTest
 	 * 		Aucun paramètre nécessaire.
 	 */
 	public static void main(String args[])
-	{	AiSimZone zone = initZone();
-		simulateFullModel(zone);
+	{	
+		// démonstration de simulation utilisant AiFullModel
+		simulateFullModel();
+	
+		// démonstration de simulation utilisant AiPartialModel
+		simulatePartialModel();
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// SIMULATION		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Réalise la simulation en utilisant
-	 * les différentes méthodes
-	 * proposées par {@link AiFullModel}.
-	 * 
-	 * @param zone
-	 * 		La zone à traiter.
-	 */
-	private static void simulateFullModel(AiZone zone)
-	{	AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
-		
-		// display initial zone
-		System.out.println("initial zone:\n"+zone);
-		AiFullModel model = new AiFullModel(zone);
-		model.setSimulateItemsAppearing(true);
-		model.applyChangeHeroDirection(hero,Direction.RIGHT);
-		System.out.println("hero: "+hero);
-		
-		// first simulation
-		long duration = 0;
-		int iteration = 0;
-		do
-		{	// process simulation
-			model.simulate();
-//			model.simulate(hero);
-//			model.simulateUntilFire();
-			// display result
-			duration = model.getDuration();
-			System.out.println("iteration "+iteration);
-			displayFullModelSimulationStep(model);
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
-		
-		// change hero direction
-		System.out.println("change hero direction: LEFT>DOWN");
-		model.applyChangeHeroDirection(hero,Direction.DOWN);
-		
-		// simulate until the hero undergoes some change
-		{	model.simulate(hero);
-			displayFullModelSimulationStep(model);
-		}
-		{	model.simulate(hero);
-			displayFullModelSimulationStep(model);
-		}		
-		// drop a bomb
-		System.out.println("hero drops a bomb");
-		model.applyDropBomb(hero,true);
-		
-		// change hero direction
-		System.out.println("change hero direction: DOWN>LEFT");
-		model.applyChangeHeroDirection(hero,Direction.LEFT);
-		
-		// simulate
-		{	model.simulate();
-			displayFullModelSimulationStep(model);
-		}
-		{	model.simulate();
-			displayFullModelSimulationStep(model);
-		}
-		
-		// change hero direction
-		System.out.println("change hero direction: LEFT>UP");
-		model.applyChangeHeroDirection(hero,Direction.UP);
-		
-		// simulate
-		iteration = 0;
-		do
-		{	// process simulation
-			model.simulate();
-			// display result
-			duration = model.getDuration();
-			System.out.println("iteration "+iteration);
-			displayFullModelSimulationStep(model);
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
-	}
-	
-    /////////////////////////////////////////////////////////////////
-	// INITIALISATION	/////////////////////////////////////////////
+	// INITIALIZATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Initialise la zone de manière à obtenir le résultat suivant :<br/>
@@ -229,7 +151,18 @@ public final class AiTest
 		return zone;
 	}
 	
-	private static void displayFullModelSimulationStep(AiFullModel model)
+    /////////////////////////////////////////////////////////////////
+	// FULL MODEL SIMULATION	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Affiche le contenu du modèle passé en paramètre,
+	 * ainsi que d'autres informations permettant de
+	 * suivre la simulation.
+	 * 
+	 * @param model
+	 * 		Le modèle à afficher.
+	 */
+	private static void displayModelSimulationStep(AiFullModel model)
 	{	AiZone zone = model.getCurrentZone();
 		long duration = model.getDuration();
 		List<AiSprite> limitSprites = model.getLimitSprites();
@@ -241,5 +174,165 @@ public final class AiTest
 		System.out.println("duration: "+duration);
 		System.out.println("hero: "+hero);
 		System.out.println(zone);
+	}
+	
+	/**
+	 * Réalise la simulation en utilisant
+	 * les différentes méthodes
+	 * proposées par {@link AiFullModel}.
+	 */
+	private static void simulateFullModel()
+	{	AiSimZone zone = initZone();
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		// display initial zone
+		System.out.println("initial zone:\n"+zone);
+		AiFullModel model = new AiFullModel(zone);
+		model.setSimulateItemsAppearing(true);
+		model.applyChangeHeroDirection(hero,Direction.RIGHT);
+		System.out.println("hero: "+hero);
+		
+		// first simulation
+		long duration = 0;
+		int iteration = 0;
+		do
+		{	// process simulation
+			model.simulate();
+//			model.simulate(hero);
+//			model.simulateUntilFire();
+			// display result
+			duration = model.getDuration();
+			System.out.println("iteration "+iteration);
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+		
+		// change hero direction
+		System.out.println("change hero direction: LEFT>DOWN");
+		model.applyChangeHeroDirection(hero,Direction.DOWN);
+		
+		// simulate until the hero undergoes some change
+		{	model.simulate(hero);
+			displayModelSimulationStep(model);
+		}
+		{	model.simulate(hero);
+			displayModelSimulationStep(model);
+		}		
+		// drop a bomb
+		System.out.println("hero drops a bomb");
+		model.applyDropBomb(hero,true);
+		
+		// change hero direction
+		System.out.println("change hero direction: DOWN>LEFT");
+		model.applyChangeHeroDirection(hero,Direction.LEFT);
+		
+		// simulate
+		{	model.simulate();
+			displayModelSimulationStep(model);
+		}
+		{	model.simulate();
+			displayModelSimulationStep(model);
+		}
+		
+		// change hero direction
+		System.out.println("change hero direction: LEFT>UP");
+		model.applyChangeHeroDirection(hero,Direction.UP);
+		
+		// simulate
+		iteration = 0;
+		do
+		{	// process simulation
+			model.simulate();
+			// display result
+			duration = model.getDuration();
+			System.out.println("iteration "+iteration);
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// FULL MODEL SIMULATION	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Affiche le contenu du modèle passé en paramètre,
+	 * ainsi que d'autres informations permettant de
+	 * suivre la simulation.
+	 * 
+	 * @param model
+	 * 		Le modèle à afficher.
+	 */
+	private static void displayModelSimulationStep(AiPartialModel model)
+	{	long duration = model.getDuration();
+		AiLocation ownLocation = model.getOwnLocation();
+
+		System.out.println("duration: "+duration);
+		System.out.println("own location: "+ownLocation);
+		System.out.println(model);
+		System.out.println("explosion start times:\n"+model.toStringDelays(true));
+		System.out.println("explosion end times:\n"+model.toStringDelays(false));
+	}
+	
+	/**
+	 * Réalise la simulation en utilisant
+	 * les différentes méthodes
+	 * proposées par {@link AiFullModel}.
+	 */
+	private static void simulatePartialModel()
+	{	AiSimZone zone = initZone();
+		
+		// display initial zone
+		AiPartialModel model = new AiPartialModel(zone);
+		System.out.println("initial zone:\n"+zone);
+		displayModelSimulationStep(model);
+		
+		// first simulation
+		long duration = 0;
+		int iteration = 0;
+		do
+		{	// process simulation
+			model.simulateMove(Direction.RIGHT);
+			// display result
+			duration = model.getDuration();
+			System.out.println("iteration "+iteration);
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+		
+		// wait for bomb to explode
+		model.simulateWait(1120);
+		displayModelSimulationStep(model);
+
+		// wait for wall to explode
+		model.simulateWait(640);
+		displayModelSimulationStep(model);
+
+		// change hero direction
+		System.out.println("change hero direction: LEFT>DOWN");
+		{	model.simulateMove(Direction.DOWN);
+			displayModelSimulationStep(model);
+		}
+		{	model.simulateMove(Direction.DOWN);
+			displayModelSimulationStep(model);
+		}		
+		
+		// change hero direction
+		System.out.println("change hero direction: DOWN>LEFT");
+		{	model.simulateMove(Direction.LEFT);
+			displayModelSimulationStep(model);
+		}
+		{	model.simulateMove(Direction.LEFT);
+			displayModelSimulationStep(model);
+		}
+		
+		// simulate wait
+		model.simulateWait(1000);
+		displayModelSimulationStep(model);
 	}
 }

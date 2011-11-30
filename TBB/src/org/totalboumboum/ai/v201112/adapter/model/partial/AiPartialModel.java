@@ -487,7 +487,7 @@ public class AiPartialModel
 		}
 		else
 		{	// sinon on considère le point le plus proche dans cette case
-			distance = zone.getPixelDistance(ownLocation,destinationTile,direction) + 1;
+			distance = zone.getPixelDistance(ownLocation,destinationTile,direction);
 			double cp[] = zone.getContactPoint(ownLocation,destinationTile);
 			destinationX = cp[0];
 			destinationY = cp[1];
@@ -533,8 +533,10 @@ public class AiPartialModel
 	 * de référence en cas de déplacement, et à {@link Direction#NONE}
 	 * en cas d'attente.
 	 * 
-	 * @param duration
+	 * @param limit
 	 * 		La durée d'attente souhaitée.
+	 * @param direction
+	 * 		La direction du déplacement éventuel du personnage.
 	 * @return
 	 * 		{@code true} ssi le personnage a survécu à la simulation.
 	 */
@@ -676,7 +678,7 @@ public class AiPartialModel
 	 */
 	@Override
 	public String toString()
-	{	String result = "  ";
+	{	String result = "";
 		AiTile ownTile = ownLocation.getTile();
 		int ownRow = ownTile.getRow();
 		int ownCol = ownTile.getCol();
@@ -743,6 +745,37 @@ public class AiPartialModel
 			result = result + "─┴";
 		result = result + "─┘\n";
 		
+		return result;
+	}
+	
+	/**
+	 * Renvoie une chaîne de caractères contenant
+	 * le temps de la première explosion
+	 * contenue dans chaque case.
+	 * 
+	 * @param start
+	 * 		Si {@code true}, alors les temps de début d'explosions seront affichés,
+	 * 		si {@code false}, alors ce seront ceux de fin.
+	 * @return
+	 * 		Une représentation textuelle des temps d'explosion.
+	 */
+	public String toStringDelays(boolean start)
+	{	String result = "";
+		for(int row=0;row<height;row++)
+		{	for(int col=0;col<width;col++)
+			{	result = result + "\t";
+				AiExplosionList list = explosions[row][col];
+				if(list==null)
+					result = result + "+∞";
+				else
+				{	if(start)
+						result = result + list.first().getStart();
+					else
+						result = result + list.first().getEnd();
+				}
+			}
+			result = result + "\n";
+		}
 		return result;
 	}
 }

@@ -212,6 +212,7 @@ public final class AiSimZone extends AiZone
 				double posY = dim*row+dim/2;
 				AiSimTile aiTile = new AiSimTile(this,row,col,posX,posY);
 				matrix[row][col] = aiTile;
+				tiles.add(aiTile);
 			}
 		}
 		
