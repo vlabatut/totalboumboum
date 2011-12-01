@@ -249,14 +249,13 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		if(!queue.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				long before1 = print("---------- new iteration --");
+				long before1 = print("         -- new iteration --");
 				
 				// on prend le noeud situé en tête de file
 				lastSearchNode = queue.poll();
-				print("           Visited : "+lastSearchNode.toString());
-				print("           Queue length: "+queue.size());
 				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
 				print("           Zone:\n"+zone);
+				print("           Visiting : "+lastSearchNode.toString());
 				
 				// si l'arbre a atteint la hauteur maximale, on s'arrête
 				if(maxHeight>0 && lastSearchNode.getDepth()>=maxHeight)
@@ -275,6 +274,8 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 					long after2 = System.currentTimeMillis();
 					long elapsed2 = after2 - before2;
 					print("           Child development: duration="+elapsed2+" ms");
+					for(AiSearchNode c: successors)
+						print("             + " + c.toString());
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
@@ -284,16 +285,21 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 						queue.offer(node);
 				}
 				
-				// verbose
+				// arbre
 				if(lastSearchNode.getDepth()>treeHeight)
 					treeHeight = lastSearchNode.getDepth();
 				if(lastSearchNode.getCost()>treeCost)
 					treeCost = lastSearchNode.getCost();
 				if(queue.size()>treeSize)
 					treeSize = queue.size();
+				
+				// verbose
+				print("           Queue length: "+queue.size());
+				for(AiSearchNode c: queue)
+					print("             + " + c.toString());
 				long after1 = System.currentTimeMillis();
 				long elapsed1 = after1 - before1;
-				print("        -- iteration duration="+elapsed1+" --");
+				print("         -- iteration duration="+elapsed1+" --");
 			}
 			while(!queue.isEmpty());
 		}
