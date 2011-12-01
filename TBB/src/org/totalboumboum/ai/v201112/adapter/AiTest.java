@@ -24,9 +24,18 @@ package org.totalboumboum.ai.v201112.adapter;
 import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModel;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimHero;
@@ -34,6 +43,12 @@ import org.totalboumboum.ai.v201112.adapter.model.full.AiSimTile;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
+import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TileCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -62,10 +77,12 @@ public final class AiTest
 	public static void main(String args[])
 	{	
 		// démonstration de simulation utilisant AiFullModel
-		simulateFullModel();
-	
+//		simulateFullModel();
 		// démonstration de simulation utilisant AiPartialModel
-		simulatePartialModel();
+//		simulatePartialModel();
+		
+		// démonstration de l'utilisation de A*
+		applyAstar(); 
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -74,21 +91,22 @@ public final class AiTest
 	/**
 	 * Initialise la zone de manière à obtenir le résultat suivant :<br/>
 	 * <pre>
-	 * ┌─┬─┬─┬─┬─┬─┬─┐
-	 * │█│█│█│█│█│█│█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│☺│ │□│ │ │█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │█│ │█│ │█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │ │ │ │▒│█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │█│ │█│ │█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│ │ │ │ │●│█│
-	 * ├─┼─┼─┼─┼─┼─┼─┤
-	 * │█│█│█│█│█│█│█│
-	 * └─┴─┴─┴─┴─┴─┴─┘
+	 *   0 1 2 3 4 5 6
+	 *  ┌─┬─┬─┬─┬─┬─┬─┐
+	 * 0│█│█│█│█│█│█│█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 1│█│☺│ │□│ │ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 2│█│ │█│ │█│ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 3│█│ │ │ │ │▒│█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 4│█│ │█│ │█│ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 5│█│ │ │ │ │●│█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 6│█│█│█│█│█│█│█│
+	 *  └─┴─┴─┴─┴─┴─┴─┘
 	 * </pre>
 	 */
 	private static AiSimZone initZone()
@@ -334,5 +352,53 @@ public final class AiTest
 		// simulate wait
 		model.simulateWait(1000);
 		displayModelSimulationStep(model);
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// A STAR		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static void applyAstar()
+	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+		ArtificialIntelligence ai = new ArtificialIntelligence()
+		{	protected void updatePercepts() throws StopRequestException{}
+			protected void initPercepts() throws StopRequestException{}
+			protected void initHandlers() throws StopRequestException{}
+			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
+			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
+			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
+			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
+		};
+		
+		// on initialise la zone
+		AiSimZone zone = initZone();
+		ai.setZone(zone);
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		///////////////////// EXEMPLE 1		/////////////////////////////
+		// utilisation simple
+		{	// on crée l'objet a* avec les fonctions les plus simples
+			CostCalculator costCalculator = new TileCostCalculator(ai);
+			HeuristicCalculator heuristicCalculator = new TileHeuristicCalculator(ai);
+			SuccessorCalculator successorCalculator = new BasicSuccessorCalculator(ai);
+			Astar astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
+			astar.setVerbose(true); // pour affichier les détails du traitement
+			
+			// on applique l'algorithme pour trouver une chemin entre la position
+			// courante et une case de destination
+			AiLocation startLocation = new AiLocation(hero);
+			AiTile endTile = zone.getTile(5,3);
+			try
+			{	astar.processShortestPath(startLocation,endTile);
+			}
+			catch (StopRequestException e)
+			{	e.printStackTrace();
+			}
+			catch (LimitReachedException e)
+			{	// le fait de lever cette exception indique qu'A* a
+				// développé un arbre de recherche trop grand : il existe
+				// peut-être une solution, mais elle n'a pas été trouvée
+				e.printStackTrace();
+			}
+		}
 	}
 }
