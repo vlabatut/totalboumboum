@@ -134,7 +134,7 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 		{	AiTile neighbor = tile.getNeighbor(direction);
 			
 			// on teste si elle est traversable et n'a pas déjà été explorée
-			if(neighbor.isCrossableBy(hero) && processedTiles.get(neighbor)==null)
+			if(neighbor.isCrossableBy(hero) && processedTilesMap.get(neighbor)==null)
 			{	AiLocation location = new AiLocation(neighbor);
 				AiSearchNode child = new AiSearchNode(location,node);
 				result.add(child);

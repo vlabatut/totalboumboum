@@ -194,6 +194,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * Cette méthode est également utilisable quand cet objet a été construit
 	 * à partir d'un arbre existant avec {@link #Astar(AiSearchNode)},
 	 * ou bien quand la méthode {@link #setRoot(AiSearchNode)} a été utilisée.
+	 * <br/>
+	 * <b>Attention </b>: avant d'appeler cette méthode, il est nécessaire que 
+	 * l'arbre de recherche ait été initialisé avec l'une des méthodes citées 
+	 * ci-dessus.
 	 * 
 	 * @param endTile	
 	 * 		La case d'arrivée
@@ -224,6 +228,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * Cette méthode est également utilisable quand cet objet a été construit
 	 * à partir d'un arbre existant avec {@link #Astar(AiSearchNode)},
 	 * ou bien quand la méthode {@link #setRoot(AiSearchNode)} a été utilisée.
+	 * <br/>
+	 * <b>Attention </b>: avant d'appeler cette méthode, il est nécessaire que 
+	 * l'arbre de recherche ait été initialisé avec l'une des méthodes citées 
+	 * ci-dessus.
 	 * 
 	 * @param endTiles	
 	 * 		L'ensemble des cases d'arrivée possibles.
@@ -310,14 +318,13 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		if(!endTiles.isEmpty() && !queue.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				long before1 = print("        -- new iteration --");
+				long before1 = print("         -- new iteration --");
 				
 				// on prend le noeud situé en tête de file
 				lastSearchNode = queue.poll();
-				print("           Visited : "+lastSearchNode.toString());
-				print("           Queue length: "+queue.size());
 				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
 				print("           Zone:\n"+zone);
+				print("           Visiting : "+lastSearchNode.toString());
 				
 				// on teste si on est arrivé à la fin de la recherche
 				if(endTiles.contains(lastSearchNode.getLocation().getTile()))
@@ -343,6 +350,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 					long after2 = System.currentTimeMillis();
 					long elapsed2 = after2 - before2;
 					print("           Child development: duration="+elapsed2+" ms");
+					for(AiSearchNode c: successors)
+						print("             + " + c.toString());
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
@@ -352,16 +361,21 @@ public final class Astar extends AiAbstractSearchAlgorithm
 						queue.offer(node);
 				}
 				
-				// verbose
+				// arbre
 				if(lastSearchNode.getDepth()>treeHeight)
 					treeHeight = lastSearchNode.getDepth();
 				if(lastSearchNode.getCost()>treeCost)
 					treeCost = lastSearchNode.getCost();
 				if(queue.size()>treeSize)
 					treeSize = queue.size();
+				
+				// verbose
+				print("           Queue length: "+queue.size());
+				for(AiSearchNode c: queue)
+					print("             + " + c.toString());
 				long after1 = System.currentTimeMillis();
 				long elapsed1 = after1 - before1;
-				print("        -- iteration duration="+elapsed1+" --");
+				print("         -- iteration duration="+elapsed1+" --");
 			}
 			while(!queue.isEmpty() && !found && !limitReached);
 		
@@ -389,9 +403,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		//
 		msg = "         height="+treeHeight+" cost="+treeCost+" size="+treeSize;
 		msg = msg + " src="+root.getLocation();
-		msg = msg + " trgt=";
+		msg = msg + " trgt={";
 		for(AiTile tile: endTiles) 
 			msg = msg + " " + tile;
+		msg = msg + " }";
 		print(msg);
 		if(result!=null) 
 			print("         result="+result);
