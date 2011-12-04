@@ -28,9 +28,9 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 
 /**
  * Représente un noeud dans l'arbre de recherche développé par 
@@ -593,8 +593,9 @@ if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
 		result = "<";
 		result = result + "("+location+") ";
 		result = result + depth + ";";
-		result = result + cost + ";";
-		result = result + heuristic + " ";
+		result = result + cost + "+";
+		result = result + heuristic + "=";
+		result = result + (cost+heuristic) + " ";
 		result = result + ">";
 		return result;
 	}

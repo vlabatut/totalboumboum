@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar;
+package org.totalboumboum.ai.v201112.adapter.path.algorithm;
 
 /*
  * Total Boum Boum
@@ -33,14 +33,13 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.AiAbstractSearchAlgorithm;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 
 /**
  * Implémentation de l'<a href="http://fr.wikipedia.org/wiki/Algorithme_A*">algorithme A*</a> adapté au
@@ -256,16 +255,16 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		treeHeight = 0;
 		treeCost = 0;
 		treeSize = 0;
-		limitReached = false;
+		lastSearchNode = null;
 		
-		// heuristic
+		// heuristique
 		Set<AiTile> et = heuristicCalculator.getEndTiles();
 		if(!et.equals(endTiles))
 		{	heuristicCalculator.setEndTiles(endTiles);
 			root.updateHeuristic();
 		}
 
-		// queue
+		// file
 		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
 		{	@Override
 			public int compare(AiSearchNode o1, AiSearchNode o2)
@@ -276,7 +275,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		queue = new PriorityQueue<AiSearchNode>(1,comparator);
 		queue.offer(root);
 		
-		// process
+		// traitement
 		AiPath result = continueProcess();
 		return result;
 	}
@@ -302,9 +301,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
 	public AiPath continueProcess() throws StopRequestException, LimitReachedException
-	{	AiPath result = null;
-		AiSearchNode finalNode = null;
-		
+	{	//verbose
 		long before = print("      >> Starting/resuming A* +++++++++++++++++++++");
 		String msg = "         searching paths from "+startLocation+" to [";
 		for(AiTile tile: endTiles)
@@ -312,16 +309,34 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		msg = msg + " ]";
 		print(msg);
 		
+		// on remet le dernier noeud (fautif) dans la file,
+		// pour permettre éventuellement de continuer le traitement
+		if(limitReached)
+		{	queue.offer(lastSearchNode);
+			print("           Queue length: "+queue.size());
+			printQueue("             + ",queue);
+		}
+	
+		// initialisation
+		int it = 0;
+		AiPath result = null;
+		AiSearchNode finalNode = null;
 		lastSearchNode = null;
 		boolean found = false;
+		limitReached = false;
+
 		// traitement
 		if(!endTiles.isEmpty() && !queue.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				long before1 = print("         -- new iteration --");
+				
+				// verbose : iteration
+				it ++;
+				long before1 = print("         -- starting iteration #" + it + " --");
 				
 				// on prend le noeud situé en tête de file
 				lastSearchNode = queue.poll();
+				// verbose : noeud courant
 				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
 				print("           Zone:\n"+zone);
 				print("           Visiting : "+lastSearchNode.toString());
@@ -345,13 +360,18 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				
 				// sinon on récupére les noeuds suivants
 				else
-				{	long before2 = System.currentTimeMillis();
+				{	// développement
+					long before2 = System.currentTimeMillis();
 					List<AiSearchNode> successors = lastSearchNode.getChildren();
-					long after2 = System.currentTimeMillis();
-					long elapsed2 = after2 - before2;
-					print("           Child development: duration="+elapsed2+" ms");
-					for(AiSearchNode c: successors)
-						print("             + " + c.toString());
+					
+					// verbose : temps
+					{	long after2 = System.currentTimeMillis();
+						long elapsed2 = after2 - before2;
+						print("           Child development: duration="+elapsed2+" ms");
+						for(AiSearchNode c: successors)
+							print("             + " + c.toString());
+					}
+					
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
@@ -361,7 +381,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 						queue.offer(node);
 				}
 				
-				// arbre
+				// mise à jour des données décrivant l'arbre
 				if(lastSearchNode.getDepth()>treeHeight)
 					treeHeight = lastSearchNode.getDepth();
 				if(lastSearchNode.getCost()>treeCost)
@@ -369,50 +389,61 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				if(queue.size()>treeSize)
 					treeSize = queue.size();
 				
-				// verbose
-				print("           Queue length: "+queue.size());
-				for(AiSearchNode c: queue)
-					print("             + " + c.toString());
-				long after1 = System.currentTimeMillis();
-				long elapsed1 = after1 - before1;
-				print("         -- iteration duration="+elapsed1+" --");
+				// verbose : file
+				{	print("           Queue length: "+queue.size());
+					printQueue("             + ",queue);
+				}
+				//  verbose : iteration
+				{	long after1 = System.currentTimeMillis();
+					long elapsed1 = after1 - before1;
+					print("         -- iteration #" + it + " finished, duration=" + elapsed1 + " --");
+				}
 			}
 			while(!queue.isEmpty() && !found && !limitReached);
 		
-			// build solution path
+			// on construit le chemin solution
 			if(found)
 				result = finalNode.processPath();
 		}
 		
-		long after = System.currentTimeMillis();
-		long elapsed = after - before;
-		msg = "         Path: [";
-		if(limitReached)
-			msg = msg + " limit reached";
-		else if(found)
-		{	for(AiLocation loc: result.getLocations())
-				msg = msg + " " + loc;
+		// verbose : temps écoulé
+		{	long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("         Total elapsed time: "+elapsed+" ms");
 		}
-		else if(endTiles.isEmpty())
-			msg = msg + " endTiles parameter empty";
-		else
-			msg = msg + " no solution found";
-		msg = msg + " ]";
-		print(msg);
-		print("         Elapsed time: "+elapsed+" ms");
-		//
-		msg = "         height="+treeHeight+" cost="+treeCost+" size="+treeSize;
-		msg = msg + " src="+root.getLocation();
-		msg = msg + " trgt={";
-		for(AiTile tile: endTiles) 
-			msg = msg + " " + tile;
-		msg = msg + " }";
-		print(msg);
-		if(result!=null) 
-			print("         result="+result);
-		print("      << A* finished +++++++++++++++++++++");
-
-//		finish();
+		// verbose : résultat
+		{	msg = "         Path: [";
+			if(limitReached)
+				msg = msg + " limit reached";
+			else if(found)
+			{	for(AiLocation loc: result.getLocations())
+					msg = msg + " " + loc;
+			}
+			else if(endTiles.isEmpty())
+				msg = msg + " endTiles parameter empty";
+			else
+				msg = msg + " no solution found";
+			msg = msg + " ]";
+			print(msg);
+		}
+		// verbose : limites
+		{	msg = "         height="+treeHeight+" cost="+treeCost+" size="+treeSize;
+			msg = msg + " src="+root.getLocation();
+			msg = msg + " trgt={";
+			for(AiTile tile: endTiles) 
+				msg = msg + " " + tile;
+			msg = msg + " }";
+			print(msg);
+			if(limitReached)
+				print("         maxHeight="+maxHeight+" maxCost="+maxCost+" maxSize="+maxNodes);
+		}
+		// verbose : fin
+		{	if(result!=null) 
+				print("         result="+result);
+			print("      << A* finished +++++++++++++++++++++");
+		}
+		
+		// exceptions
 		if(limitReached)
 			throw new LimitReachedException(startLocation,endTiles,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
 		else if(endTiles.isEmpty())

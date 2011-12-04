@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
+package org.totalboumboum.ai.v201112.adapter.path.successor;
 
 /*
  * Total Boum Boum

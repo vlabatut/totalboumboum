@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
+package org.totalboumboum.ai.v201112.adapter.path.heuristic;
 
 /*
  * Total Boum Boum

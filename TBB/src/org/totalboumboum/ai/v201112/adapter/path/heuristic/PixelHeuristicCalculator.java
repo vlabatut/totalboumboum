@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.heuristic;
+package org.totalboumboum.ai.v201112.adapter.path.heuristic;
 
 /*
  * Total Boum Boum
@@ -28,19 +28,18 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TileCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.PixelCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
 
 /**
- * Implémentation la plus simple d'une heuristique : 
- * on utilise la <a href="http://fr.wikipedia.org/wiki/Distance_de_Manhattan">distance de Manhattan</a> 
- * entre la case de départ et la plus proche des cases d'arrivée.
+ * Heuristique utilisant la <a> href="http://fr.wikipedia.org/wiki/Distance_de_Manhattan">distance de Manhattan</a>
+ * exprimées en pixels, pour fonctionner avec {@link PixelCostCalculator}.
  * <br/>
  * La classe est compatible avec :
  * <ul>
  * 		<li>Fonction de coût :
  * 			<ul>
- * 				<li>{@link TileCostCalculator}</li>
+ * 				<li>{@link PixelCostCalculator}</li>
  * 			</ul>
  * 		</li> 
  * 		<li>Fonctions successeurs :
@@ -51,23 +50,23 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorC
  * </ul>
  * <br/>
  * <b>Attention :<b/> cette classe ne permet pas de gérer des
- * chemins contenant des attentes. De plus les distances sont
- * calculées en cases, et non pas en pixels : calcul rapide,
- * mais approximatif. 
+ * chemins contenant des attentes. Par contre, à la différence
+ * de {@link TileHeuristicCalculator}, elle gère les distances
+ * en pixels.
  * 
  * @author Vincent Labatut
  */
-public class TileHeuristicCalculator extends HeuristicCalculator
+public class PixelHeuristicCalculator extends HeuristicCalculator
 {
 	/**
-	 * Construit une fonction successeur
+	 * Construit une fonction heuristique
 	 * utilisant l'IA passée en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
 	 * 		IA de référence.
 	 */
-	public TileHeuristicCalculator(ArtificialIntelligence ai)
+	public PixelHeuristicCalculator(ArtificialIntelligence ai)
 	{	super(ai);
 	}
 	
@@ -77,15 +76,13 @@ public class TileHeuristicCalculator extends HeuristicCalculator
 	@Override
 	public AiTile getClosestEndTile(AiLocation location)
 	{	// init
-		AiTile startTile = location.getTile();
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
 		double minH = Integer.MAX_VALUE;
 		AiTile result = null;
 		
-		// process
 		for(AiTile endTile: endTiles)
-		{	int h = zone.getTileDistance(startTile,endTile);
+		{	double h = zone.getPixelDistance(location,endTile);
 			if(h < minH)
 			{	minH = h;
 				result = endTile;
@@ -99,14 +96,16 @@ public class TileHeuristicCalculator extends HeuristicCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * l'heuristique la plus simple consiste à prendre la distance
+	 * L'heuristique la plus simple consiste à prendre la distance
 	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
-	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>
+	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>.
+	 * Ici, on calcule cette distance exprimée en pixels plutôt qu'en cases
+	 * comme c'est le cas dans {@link TileHeuristicCalculator}.
 	 * 
 	 * @param location	
 	 * 		L'emplacement concerné. 
 	 * @return	
-	 * 		la distance de Manhattan entre l'emplacement passé en paramètre
+	 * 		La distance de Manhattan entre l'emplacement passé en paramètre
 	 * 		et la plus proche des cases contenues dans le champ {@code endTiles}.
 	 * 
 	 * @throws StopRequestException
@@ -115,14 +114,14 @@ public class TileHeuristicCalculator extends HeuristicCalculator
 	@Override
 	public double processHeuristic(AiLocation location) throws StopRequestException
 	{	// init
-		AiTile startTile = location.getTile();
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
 		double result = Integer.MAX_VALUE;
 		
-		// process
 		for(AiTile endTile: endTiles)
-		{	int h = zone.getTileDistance(startTile,endTile);
+		{	//double endX = endTile.getPosX();
+			//double endY = endTile.getPosY();
+			double h = zone.getPixelDistance(location,endTile);
 			if(h < result)
 				result = h;
 		}

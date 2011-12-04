@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
+package org.totalboumboum.ai.v201112.adapter.path.successor;
 
 /*
  * Total Boum Boum
@@ -31,12 +31,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TileCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.PixelCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.PixelHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.PixelCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.TileCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.PixelHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -126,18 +126,21 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 		AiTile tile = node.getLocation().getTile();
 		AiHero hero = node.getHero();
 		
-		// màj la map des cases visitées
-		processedTilesMap.put(tile,node);
-		
-		// pour chaque case voisine :
-		for(Direction direction: Direction.getPrimaryValues())
-		{	AiTile neighbor = tile.getNeighbor(direction);
+		// on ne traite pas les cases déjà explorées
+		if(!processedTilesMap.containsKey(tile))
+		{	// màj la map des cases visitées
+			processedTilesMap.put(tile,node);
 			
-			// on teste si elle est traversable et n'a pas déjà été explorée
-			if(neighbor.isCrossableBy(hero) && processedTilesMap.get(neighbor)==null)
-			{	AiLocation location = new AiLocation(neighbor);
-				AiSearchNode child = new AiSearchNode(location,node);
-				result.add(child);
+			// pour chaque case voisine :
+			for(Direction direction: Direction.getPrimaryValues())
+			{	AiTile neighbor = tile.getNeighbor(direction);
+				
+				// on teste si elle est traversable et n'a pas déjà été explorée
+				if(neighbor.isCrossableBy(hero) && processedTilesMap.get(neighbor)==null)
+				{	AiLocation location = new AiLocation(neighbor);
+					AiSearchNode child = new AiSearchNode(location,node);
+					result.add(child);
+				}
 			}
 		}
 

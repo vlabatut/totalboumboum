@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
+package org.totalboumboum.ai.v201112.adapter.path.successor;
 
 /*
  * Total Boum Boum
@@ -27,19 +27,15 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
-import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
-import org.totalboumboum.ai.v201112.adapter.data.AiFire;
-import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModel;
+import org.totalboumboum.ai.v201112.adapter.model.partial.AiExplosion;
+import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TimeCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TimeHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.TimeCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -53,13 +49,12 @@ import org.totalboumboum.engine.content.feature.Direction;
  * passer, disparaisse. Par conséquent, on envisagera aussi de passer sur des cases 
  * que l'algorithme a déjà traitées.
  * <br>
- * Le temps de traitement sera donc beaucoup plus long que pour les autres fonctions
+ * Le temps de traitement sera donc plus long que pour les autres fonctions
  * successeurs. Cette approche ne doit donc <b>pas être utilisée souvent</b>, car elle
- * va vraisemblablement ralentir l'agent significativement. Si vous voulez effectuer
- * un calcul moins lourd, vous pouvez utiliser la classe {@link TimePartialSuccessorCalculator}
- * à la place. Elle repose sur un modèle plus simple, qui est moins lourd à
- * traiter, mais qui en contre partie est moins précis et amènera des prédictions
- * moins fiables.
+ * va vraisemblablement ralentir l'agent significativement.
+ * A noter que le modèle utilisé pour prédire l'évolution de la zone est
+ * moins précis que celui utilisé dans {@link TimeFullSuccessorCalculator},
+ * donc les calculs devraient être plus rapide (mais les résultats moins fiables)
  * <br/>
  * Afin de pouvoir contrôler (partiellement) le temps nécessaire au traitement,
  * le paramètre {@link #searchMode} permet de limiter l'exploration de l'arbre 
@@ -100,27 +95,32 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public class TimeFullSuccessorCalculator extends SuccessorCalculator
+public class TimePartialSuccessorCalculator extends SuccessorCalculator
 {
 	/**
 	 * Crée une nouvelle fonction successeur basée sur le temps.
 	 * La vitesse de déplacement utilisée lors de l'application
-	 * de A* sera celle du personnage passé en paramètre.
+	 * de A* sera forcément celle du personnage contrôlé
+	 * par l'agent passé en paramètre.
 	 * 
 	 * @param ai
 	 * 		IA de référence pour gérer les interruptions.
-	 * @param hero
-	 * 		Personnage de référence pour calculer la durée des déplacements.
 	 */
-	public TimeFullSuccessorCalculator(ArtificialIntelligence ai, AiHero hero, int searchMode)
+	public TimePartialSuccessorCalculator(ArtificialIntelligence ai, int searchMode)
 	{	super(ai);
-		this.hero = hero;
 		this.searchMode = searchMode;
 	}
 	
 	@Override
 	public void init(AiSearchNode root)
-	{	processedTiles.clear();
+	{	// modèles
+		models.clear();
+		AiZone zone = root.getLocation().getTile().getZone();
+		AiPartialModel model = new AiPartialModel(zone);
+		models.put(root,model);
+		
+		// cases traitées
+		processedTiles.clear();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -136,25 +136,33 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	private int searchMode;
 	
 	/////////////////////////////////////////////////////////////////
-	// HERO						/////////////////////////////////////
+	// MODELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Personnage concerné par la recherche de chemin */
-	protected AiHero hero;
-
+	/** structure utilisée pour stocker les modèles */
+	private final HashMap<AiSearchNode,AiPartialModel> models = new HashMap<AiSearchNode, AiPartialModel>();
+	
 	/**
-	 * Renvoie le personnage utilisé
-	 * pour calculer les actions possibles.
+	 * Renvoie le modèle associé au noeud de recherche
+	 * passé en paramètre. Ce modèle correspond à la représentation
+	 * interne (ici simplifiée) utilisée pour calculer
+	 * les successeurs du noeud de recherche.
 	 * 
+	 * @param searchNode
+	 * 		Le noeud de recherche dont on veut le modèle.
 	 * @return
-	 * 		Le personnage de référence.
+	 * 		Le modèle associé au noeud de recherche, ou {@code null}
+	 * 		si aucun modèle ne lui est associé.
 	 */
-	public AiHero getHero()
-	{	return hero;
+	public AiPartialModel getModel(AiSearchNode searchNode)
+	{	return models.get(searchNode);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Cases déjà traitées */
+	private HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> processedTiles = new HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>>();
+	
 	/**
 	 * Renvoie la map correspondant au noeud
 	 * de recherche passé en paramètre. La map
@@ -193,6 +201,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * Fonction successeur considérant à la fois les 4 cases 
 	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
 	 * mais aussi la possibilité d'attendre dans la case courante.
+	 * <br/>
 	 * Autre différence : les cases déjà traversées sont considérées,
 	 * car le chemin peut inclure des retours en arrière pour éviter
 	 * des explosions.
@@ -212,12 +221,9 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		// init
 		AiLocation location = node.getLocation();
 		AiTile tile = location.getTile();
-		AiZone zone = location.getZone();
-AiHero h = zone.getHeroByColor(hero.getColor());
-AiTile t = h.getTile();
-if(!t.equals(tile))
-	System.out.println();
 		List<AiSearchNode> result = new ArrayList<AiSearchNode>();
+		AiPartialModel currentModel = models.get(node);
+		AiZone zone = location.getZone();
 		
 		// on màj la map des cases visitées
 		AiSearchNode localRoot = node.getLocalRoot();
@@ -225,7 +231,9 @@ if(!t.equals(tile))
 		// pour la restriction sur l'arbre, on compare les coûts
 		if(searchMode==MODE_NOTREE)
 		{	AiSearchNode n = procTiles.get(tile);
-			if(n!=null)
+			if(n==null)
+				procTiles.put(tile,node);
+			else
 			{	double c = n.getCost();
 				double cost = node.getCost();
 				if(cost<c)
@@ -273,30 +281,27 @@ if(!t.equals(tile))
 			// si on a le droit de traiter la case
 			if(process)
 			{	// on applique le modèle pour obtenir la zone résultant de l'action
-				AiFullModel model = new AiFullModel(zone);
-				model.applyChangeHeroDirection(hero,direction);
+				AiPartialModel model = new AiPartialModel(currentModel);
 				
 				// on simule jusqu'au changement d'état du personnage : 
 				// soit le changement de case, soit l'élimination
-				boolean safe = model.simulate(hero);
+				boolean safe = model.simulateMove(direction);
 				long duration = model.getDuration();
 				
 				// si le joueur a survécu et si une action a bien eu lieu
 				if(safe && duration>0)
 				{	// on récupère la nouvelle case occupée par le personnage
-					AiZone futureZone = model.getCurrentZone();
-					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
-					AiTile futureTile = futureHero.getTile();
-					AiLocation futureLocation = new AiLocation(futureHero.getPosX(),futureHero.getPosY(),futureZone);
+					AiLocation futureLocation = model.getOwnLocation();
+					AiTile futureTile = futureLocation.getTile();
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AiSearchNode child = new AiSearchNode(futureLocation,node);
+						// on l'ajoute au noeud courant
 						result.add(child);
-//if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
-//	System.out.println();
-						
+						// on enregistre le modèle correspondant pour une utilisation ultérieure ici-même
+						models.put(child,model);
 					}
 					// si la case n'est pas la bonne : 
 					// la case ciblée n'était pas traversable et l'action est à ignorer
@@ -311,47 +316,33 @@ if(!t.equals(tile))
 		// on considère éventuellement l'action d'attente, 
 		// si un obstacle temporaire est présent dans une case voisine
 		// l'obstacle temporaire peut être : du feu, une bombe, un mur destructible, une menace d'explosion.
-		long waitDuration = getWaitDuration(tile);
+		AiPartialModel model = new AiPartialModel(currentModel);
+		long waitDuration = getWaitDuration(currentModel);
 		if(waitDuration>0 && waitDuration<Long.MAX_VALUE)
 		{	// on applique le modèle pour obtenir la zone résultant de l'action
-			AiFullModel model = new AiFullModel(zone);
-			model.applyChangeHeroDirection(hero,Direction.NONE);
-			
 			// on simule pendant la durée prévue
-			model.simulate(waitDuration);
+			boolean safe = model.simulateWait(waitDuration);
 			long duration = model.getDuration();
 			
-			// si l'attente a bien eu lieu
-			if(duration>0)
-			{	// on récupère les nouvelles infos décrivant le personnage
-				AiZone futureZone = model.getCurrentZone();
-				AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
-				
-				// si le perso est toujours en vie, on crée le noeud de recherche
-				if(futureHero!=null)
-				{	AiStateName name = futureHero.getState().getName();
-					boolean safe = !name.equals(AiStateName.BURNING) && !name.equals(AiStateName.ENDED);
-					if(safe)
-					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						AiSearchNode child = new AiSearchNode(waitDuration,futureZone,node);
-						// on l'ajoute au noeud courant
-						result.add(child);
-if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
-	System.out.println();
-					}
-					// si le joueur n'est plus vivant dans la zone obtenue : 
-					// l'attente n'était pas une action sûre, et n'est donc pas envisagée
-				}
-				// si le perso est null, alors c'est que le joueur n'est plus vivant (cf commentaire ci-dessus)
+			// si l'attente a bien eu lieu et si le perso est toujours en vie
+			if(duration>0 && safe)
+			{	// on crée le noeud fils correspondant (qui sera traité plus tard)
+				AiSearchNode child = new AiSearchNode(waitDuration,zone,node);
+				// on l'ajoute au noeud courant
+				result.add(child);
+				// on enregistre le modèle correspondant pour une utilisation ultérieure ici-même
+				models.put(child,model);
 			}
 			// si l'action n'a pas eu lieu : problème lors de la simulation (?) 
-			// l'attente n'est pas envisagée comme une action pertinente 
+			// >> l'attente n'est pas envisagée comme une action pertinente 
+			// si le joueur n'est plus vivant dans la zone obtenue : 
+			// >> l'attente n'était pas une action sûre, et n'est donc pas envisagée
 		}
 		// si le temps estimé d'attente est 0 ou +Inf, alors l'attente n'est pas envisagée
 
 		return result;
 	}
-
+	
 	/**
 	 * Détermine le temps d'attente minimal lorsque
 	 * le joueur est placé dans la case passée en paramètre.
@@ -364,69 +355,21 @@ if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone()
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	private long getWaitDuration(AiTile tile) throws StopRequestException
+	private long getWaitDuration(AiPartialModel model) throws StopRequestException
 	{	// init
-		AiZone zone = tile.getZone();
 		long result = Long.MAX_VALUE;
+		AiTile tile = model.getOwnLocation().getTile();
 		List<AiTile> neighbors = tile.getNeighbors();
 		
-		// on s'intéresse d'abord aux obstacles concrets
 		// on considère chaque case voisine une par une
 		for(AiTile neighbor: neighbors)
-		{	// s'il y a un obstacle concret
-			if(!neighbor.isCrossableBy(hero))
-			{	// s'il y a du feu
-				List<AiFire> fires = neighbor.getFires();
-				long fireDuration = 0;
-				for(AiFire fire: fires)
-				{	long duration = fire.getBurningDuration() - fire.getState().getTime();
-					//long duration = fire.getBurningDuration() - fire.getTime();
-					if(duration>fireDuration)
-						fireDuration = duration;
-				}
-				if(fireDuration>0 && fireDuration<result)
-					result = fireDuration;
-				
-				// s'il y a un mur en train de brûler
-				List<AiBlock> blocks = neighbor.getBlocks();
-				long blockDuration = 0;
-				for(AiBlock block: blocks)
-				{	long duration = block.getBurningDuration() - block.getState().getTime();
-					if(duration>blockDuration)
-						blockDuration = duration;
-				}
-				if(blockDuration>0 && blockDuration<result)
-					result = blockDuration;
-				// les autres obstacles (murs normaux, bombes) n'ont pas besoin d'être traités
-				// car on s'en occupe lorsqu'on gère les cases menacées par des bombes
-			}
-		}
-		
-		// on s'intéresse ensuite aux menaces provenant des bombes
-		// on considère chaque bombe une par une
-		HashMap<AiBomb,Long> delays = zone.getDelaysByBombs();
-		List<AiBomb> bombs = zone.getBombs();
-		for(AiBomb bomb: bombs)
-		{	List<AiTile> blast = bomb.getBlast();
-			List<AiTile> neigh = new ArrayList<AiTile>(neighbors);
-			neigh.retainAll(blast);
-			// on vérifie si la bombe menace une des cases voisines
-			if(!neigh.isEmpty())
-			{	// si c'est le cas, on récupère la description de la bombe
-				AiStateName stateName = bomb.getState().getName();
-				// on peut ignorer les bombes déjà en train de brûler, car elles cohabitent avec du feu
-				if(stateName.equals(AiStateName.STANDING)
-				// on peut aussi ignorer les bombes qui ne sont pas à retardement,
-				// car on ne peut pas prédire quand elles vont exploser
-					&& bomb.hasCountdownTrigger())
-				{	long bombDuration = Math.max(0,bomb.getNormalDuration()-bomb.getTime());
-if(delays.get(bomb)==null)
-	System.out.print("");
-					long duration = delays.get(bomb) + bombDuration + bomb.getExplosionDuration();
-					//long duration = delays.get(bomb);
-					if(duration<result)
-						result = duration;
-				}
+		{	// si une explosion menace cette case
+			AiExplosion explosion = model.getExplosion(neighbor);
+			if(explosion!=null)
+			{	long duration = explosion.getEnd();
+				// on garde celle qui se termine le plus tôt
+				if(duration<result)
+					result = duration;
 			}
 		}
 		

@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
+package org.totalboumboum.ai.v201112.adapter.path.cost;
 
 /*
  * Total Boum Boum
@@ -25,9 +25,9 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.TileHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
 
 /**
  * Classe étendant la classe abstraite {@link CostCalculator} grâce à une matrice de coûts.

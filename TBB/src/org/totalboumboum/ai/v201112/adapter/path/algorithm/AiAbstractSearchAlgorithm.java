@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path;
+package org.totalboumboum.ai.v201112.adapter.path.algorithm;
 
 /*
  * Total Boum Boum
@@ -28,9 +28,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 
 /**
  * Cette classe sert de base pour implémenter
@@ -89,6 +89,7 @@ public abstract class AiAbstractSearchAlgorithm
 	public AiAbstractSearchAlgorithm(AiSearchNode root)
 	{	// on crée l'objet de façon classique
 		this(root.getAi(),root.getHero(),root.getCostCalculator(),root.getHeuristicCalculator(),root.getSuccessorCalculator());
+		
 		// on utilise l'arbre de recherche existant pour effectuer l'initialisation
 		setRoot(root);
 	}
@@ -366,6 +367,26 @@ public abstract class AiAbstractSearchAlgorithm
 			System.out.println(message);
 		}
 		return time;
+	}
+
+	/**
+	 * L'affichage standard d'une file de priorité ne respecte pas
+	 * l'ordre des éléments dans cette file. Cette méthode permet
+	 * d'afficher la file dans l'ordre approprié.
+	 *  
+	 * @param prefix
+	 * 		Le texte à afficher avant chaque élément de la file.
+	 * @param queue
+	 * 		La file à afficher.
+	 */
+	protected final void printQueue(String prefix, PriorityQueue<AiSearchNode> queue)
+	{	if(verbose)
+		{	PriorityQueue<AiSearchNode> q = new PriorityQueue<AiSearchNode>(queue);
+			while(!q.isEmpty())
+			{	AiSearchNode node = q.poll();
+				print(prefix + node);	
+			}
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

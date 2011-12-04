@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.totalboumboum.ai.v201112.adapter.AiTest;
 import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -37,6 +36,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiState;
 import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.test.AstarUse;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -75,7 +75,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * causant la fin du pas de simulation.
  * <br/>
  * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
- * la classe {@link AiTest}. Notez toute fois que cette classe de test crée la zone
+ * la classe {@link AstarUse}. Notez toute fois que cette classe de test crée la zone
  * en partant de rien, alors que les agents disposent de leurs percepts.
  * Pour cette raison, elle utilise pour initialiser la zone des méthodes 
  * auxquelles les agents n'ont pas accès.
