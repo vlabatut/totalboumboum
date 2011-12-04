@@ -4,7 +4,7 @@
 	<author value="Vincent Labatut" />
 	<source value="Original" />
 	<preview file="preview.jpg" />
-	<instance name="superbomberman1" />
+	<instance name="tournament" />
 	<theme name="tournament5" />
 	<globalDimension height="11" width="15" />
 	<visibleDimension height="11" width="15" />
