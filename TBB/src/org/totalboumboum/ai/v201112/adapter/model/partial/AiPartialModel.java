@@ -488,7 +488,7 @@ public class AiPartialModel
 		else
 		{	// sinon on considère le point le plus proche dans cette case
 			distance = zone.getPixelDistance(ownLocation,destinationTile,direction);
-			double cp[] = zone.getContactPoint(ownLocation,destinationTile);
+			double cp[] = zone.getContactPoint(ownLocation,destinationTile,true);
 			destinationX = cp[0];
 			destinationY = cp[1];
 		}

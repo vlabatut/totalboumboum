@@ -1449,13 +1449,16 @@ public abstract class AiZone
 	 * 		L'ordonnée du point.
 	 * @param tile2
 	 * 		La case.
+	 * @param manhattan
+	 * 		Indique si la trajectoire doit être directe ({@code false}) ou si seuls
+	 * 		les déplacements horizontaux et verticaux sont tolérés ({@code true}).
 	 * @return
 	 * 		La position du point de contact sous forme de couple (x,y)
 	 * 
 	 * @throw IllegalArgumentException
 	 * 		Si le point et la case ne sont pas voisins.
 	 */
-	public double[] getContactPoint(double x1, double y1, AiTile tile)
+	public double[] getContactPoint(double x1, double y1, AiTile tile, boolean manhattan)
 	{	double x = 0;
 		double y = 0;
 		
@@ -1477,10 +1480,16 @@ public abstract class AiZone
 		{	x = tile1x + dir[0]*tile1.size/2;
 			if(dir[0]<0)
 				x--;
-			y = (y1 + tile2y) / 2;
+			if(manhattan)
+				y = tile2y;
+			else
+				y = (y1 + tile2y) / 2;
 		}
 		else if(direction.isVertical())
-		{	x = (x1 + tile2x) / 2;
+		{	if(manhattan)
+				x = tile2x;
+			else
+				x = (x1 + tile2x) / 2;
 			y = tile1y + dir[1]*tile1.size/2;
 			if(dir[1]<0)
 				y--;
@@ -1507,13 +1516,16 @@ public abstract class AiZone
 	 * 		L'emplacement.
 	 * @param tile2
 	 * 		La case.
+	 * @param manhattan
+	 * 		Indique si la trajectoire doit être directe ({@code false}) ou si seuls
+	 * 		les déplacements horizontaux et verticaux sont tolérés ({@code true}).
 	 * @return
 	 * 		La position du point de contact sous forme de couple (x,y)
 	 * 
 	 * @throw IllegalArgumentException
 	 * 		Si l'emplacement et la case ne sont pas voisins.
 	 */
-	public double[] getContactPoint(AiLocation location, AiTile tile)
+	public double[] getContactPoint(AiLocation location, AiTile tile, boolean manhattan)
 	{	double x = 0;
 		double y = 0;
 		
@@ -1537,10 +1549,16 @@ public abstract class AiZone
 		{	x = tile1x + dir[0]*tile1.size/2;
 			if(dir[0]<0)
 				x--;
-			y = (y1 + tile2y) / 2;
+			if(manhattan)
+				y = tile2y;
+			else
+				y = (y1 + tile2y) / 2;
 		}
 		else if(direction.isVertical())
-		{	x = (x1 + tile2x) / 2;
+		{	if(manhattan)
+				x = tile2x;
+			else
+				x = (x1 + tile2x) / 2;
 			y = tile1y + dir[1]*tile1.size/2;
 			if(dir[1]<0)
 				y--;
