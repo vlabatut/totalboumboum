@@ -46,7 +46,7 @@ public final class FullModelSimulation
 	 * proposées par {@link AiFullModel}.
 	 */
 	public static void main(String args[])
-	{	AiSimZone zone = InitZone.initZone();
+	{	AiSimZone zone = InitData.initZone();
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
 		// display initial zone

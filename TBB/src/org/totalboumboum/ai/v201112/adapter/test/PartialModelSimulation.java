@@ -42,7 +42,7 @@ public final class PartialModelSimulation
 	 * proposées par {@link AiFullModel}.
 	 */
 	public static void main(String args[])
-	{	AiSimZone zone = InitZone.initZone();
+	{	AiSimZone zone = InitData.initZone();
 		
 		// display initial zone
 		AiPartialModel model = new AiPartialModel(zone);

@@ -25,10 +25,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201112.adapter.path.algorithm.Astar;
-import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
-import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
-import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -84,18 +80,10 @@ public final class AstarUse
 	 */
 	private static void example1()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
-		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	protected void updatePercepts() throws StopRequestException{}
-			protected void initPercepts() throws StopRequestException{}
-			protected void initHandlers() throws StopRequestException{}
-			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
-			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
-			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
-			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
-		};
+		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitZone.initZone();
+		AiSimZone zone = InitData.initZone();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -167,6 +155,8 @@ public final class AstarUse
 		// pas, il est possible de reprendre la recherche. notez que le
 		// résultat suivant ne sera pas forcément optimal relativement à
 		// la fonction de coût (seule la première solution trouvée l'est).
+		// cette approche est utilisée dans l'exemple3, à la suite d'une
+		// exception.
 		try
 		{	AiPath path = astar.continueProcess();
 			System.out.println("+++ path="+path);
@@ -186,18 +176,10 @@ public final class AstarUse
 	 */
 	private static void example2()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
-		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	protected void updatePercepts() throws StopRequestException{}
-			protected void initPercepts() throws StopRequestException{}
-			protected void initHandlers() throws StopRequestException{}
-			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
-			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
-			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
-			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
-		};
+		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitZone.initZone();
+		AiSimZone zone = InitData.initZone();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -233,18 +215,10 @@ public final class AstarUse
 	 */
 	private static void example3()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
-		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	protected void updatePercepts() throws StopRequestException{}
-			protected void initPercepts() throws StopRequestException{}
-			protected void initHandlers() throws StopRequestException{}
-			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
-			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
-			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
-			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
-		};
+		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitZone.initZone();
+		AiSimZone zone = InitData.initZone();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -289,19 +263,23 @@ public final class AstarUse
 			// arbre, pour les mêmes points de départ et de destination.
 			path = astar.continueProcess();
 
-			// attention : en réalisant l'appel
-			// path = astar.processShortestPath(endTile);
+			// remarque 1 : en réalisant l'appel
+			// 		path = astar.processShortestPath(endTile);
 			// on aurait aussi le même résultat, sauf que la recherche
 			// serait repartie de la racine de l'arbre. on aurait quand
 			// même réutilisé l'arbre existant, mais le traitement aurait
 			// nécessité plus d'itérations.
 
-			// attention : en réalisant l'appel
-			// path = astar.processShortestPath(startLocation,endTile);
+			// remarque 2 : en réalisant l'appel
+			// 		path = astar.processShortestPath(startLocation,endTile);
 			// on aurait le même résultat, la recherche aurait aussi
 			// recommencé depuis le début, mais cette fois sans réutiliser
 			// l'arbre existant. on aurait construit un nouvel arbre,
 			// donc le traitement aurait été encore plus long
+			
+			// remarque 3 : l'exemple donné ici n'est pas du tout
+			// équivalent à un approfondissement itératif, qui n'est
+			// pas implément dans l'API.
 			
 			System.out.println("+++ path="+path);
 		}
@@ -320,18 +298,10 @@ public final class AstarUse
 	 */
 	private static void example4()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
-		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	protected void updatePercepts() throws StopRequestException{}
-			protected void initPercepts() throws StopRequestException{}
-			protected void initHandlers() throws StopRequestException{}
-			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
-			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
-			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
-			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
-		};
+		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitZone.initZone();
+		AiSimZone zone = InitData.initZone();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -385,18 +355,10 @@ public final class AstarUse
 	 */
 	private static void example5()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
-		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	protected void updatePercepts() throws StopRequestException{}
-			protected void initPercepts() throws StopRequestException{}
-			protected void initHandlers() throws StopRequestException{}
-			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
-			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
-			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
-			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
-		};
+		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitZone.initZone();
+		AiSimZone zone = InitData.initZone();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -535,18 +497,10 @@ public final class AstarUse
 	 */
 	private static void example6()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
-		ArtificialIntelligence ai = new ArtificialIntelligence()
-		{	protected void updatePercepts() throws StopRequestException{}
-			protected void initPercepts() throws StopRequestException{}
-			protected void initHandlers() throws StopRequestException{}
-			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
-			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
-			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
-			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
-		};
+		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitZone.initZone();
+		AiSimZone zone = InitData.initZone();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		

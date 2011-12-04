@@ -23,6 +23,12 @@ package org.totalboumboum.ai.v201112.adapter.test;
 
 import java.util.HashMap;
 
+import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimHero;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimTile;
@@ -31,11 +37,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Classe utilisée pour tester les fonctionnalités de l'API IA.
- * Cette classe permet d'initialiser une zone.
+ * Cette classe permet d'initialiser une zone et une fausse ia.
  * 
  * @author Vincent Labatut
  */
-public final class InitZone
+public final class InitData
 {
 	/**
 	 * Initialise la zone de manière à obtenir le résultat suivant :<br/>
@@ -116,5 +122,26 @@ public final class InitZone
 		}
 		
 		return zone;
+	}
+	
+	/**
+	 * Construit une fausse IA pour l'exemple
+	 * (nécessaire pour certaines méthodes et classes).
+	 * Vous pouvez bien sûr utilisez la votre à la place.
+	 * 
+	 * @return
+	 * 		Une fausse IA.
+	 */
+	public static ArtificialIntelligence initAi()
+	{	ArtificialIntelligence result = new ArtificialIntelligence()
+		{	protected void updatePercepts() throws StopRequestException{}
+			protected void initPercepts() throws StopRequestException{}
+			protected void initHandlers() throws StopRequestException{}
+			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
+			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
+			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
+			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
+		};
+		return result;
 	}
 }
