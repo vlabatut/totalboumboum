@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201112.adapter.test;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201112.adapter.path.algorithm.Astar;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -43,6 +42,7 @@ import org.totalboumboum.ai.v201112.adapter.path.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.TimeHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.search.Astar;
 import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.TimeFullSuccessorCalculator;
