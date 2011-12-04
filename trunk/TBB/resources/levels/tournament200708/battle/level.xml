@@ -7,8 +7,8 @@
 	<source value="BomberJa" />
 	<preview file="preview.jpg" />
 
-	<instance name="superbomberman1" />
-	<theme name="normal"/>
+	<instance name="tournament" />
+	<theme name="tournament1"/>
 
 	<globalDimension height="15" width="17" />
 	<visibleDimension height="15" width="17" />

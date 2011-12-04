@@ -7,7 +7,7 @@
 	<source value="Bomberman" />
 	<preview file="preview.jpg" />
 
-	<instance name="superbomberman1" />
+	<instance name="tournament" />
 	<theme name="tournament2"/>
 
 	<globalDimension height="15" width="23" />
