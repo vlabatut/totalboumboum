@@ -160,9 +160,6 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Cases déjà traitées */
-	private HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> processedTiles = new HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>>();
-	
 	/**
 	 * Renvoie la map correspondant au noeud
 	 * de recherche passé en paramètre. La map
