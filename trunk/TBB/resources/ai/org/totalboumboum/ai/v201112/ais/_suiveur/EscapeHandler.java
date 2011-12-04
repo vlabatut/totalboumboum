@@ -34,11 +34,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.algorithm.Astar;
+import org.totalboumboum.ai.v201112.adapter.path.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.TileHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
