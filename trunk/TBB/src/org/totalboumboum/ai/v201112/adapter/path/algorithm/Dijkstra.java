@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.breadthfirst;
+package org.totalboumboum.ai.v201112.adapter.path.algorithm;
 
 /*
  * Total Boum Boum
@@ -33,13 +33,12 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.AiAbstractSearchAlgorithm;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 
 /**
  * Cette classe implémente l'<a href="http://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra">algorithme 
@@ -206,7 +205,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		treeHeight = 0;
 		treeCost = 0;
 		treeSize = 0;
-		limitReached = false;
+		lastSearchNode = null;
 		
 		// queue
 		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
@@ -242,17 +241,33 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 */
 	public HashMap<AiTile,AiSearchNode> continueProcess() throws StopRequestException, LimitReachedException
 	{	long before = print("      >> Starting/resuming Dijkstra +++++++++++++++++++++");
-		print("         searching paths from "+startLocation);
+		print("         searching paths starting from "+startLocation);
 		
+		// on remet le dernier noeud (fautif) dans la file,
+		// pour permettre éventuellement de continuer le traitement
+		if(limitReached)
+		{	queue.offer(lastSearchNode);
+			print("           Queue length: "+queue.size());
+			printQueue("             + ",queue);
+		}
+	
+		// initialisation
+		int it = 0;
 		lastSearchNode = null;
+		limitReached = false;
+			
 		// traitement
 		if(!queue.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				long before1 = print("         -- new iteration --");
+				
+				// verbose : iteration
+				it ++;
+				long before1 = print("         -- starting iteration #" + it + " --");
 				
 				// on prend le noeud situé en tête de file
 				lastSearchNode = queue.poll();
+				// verbose : noeud courant
 				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
 				print("           Zone:\n"+zone);
 				print("           Visiting : "+lastSearchNode.toString());
@@ -269,13 +284,18 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				
 				// sinon on récupére les noeuds suivants
 				else
-				{	long before2 = System.currentTimeMillis();
+				{	// développement
+					long before2 = System.currentTimeMillis();
 					List<AiSearchNode> successors = lastSearchNode.getChildren();
-					long after2 = System.currentTimeMillis();
-					long elapsed2 = after2 - before2;
-					print("           Child development: duration="+elapsed2+" ms");
-					for(AiSearchNode c: successors)
-						print("             + " + c.toString());
+
+					// verbose : temps
+					{	long after2 = System.currentTimeMillis();
+						long elapsed2 = after2 - before2;
+						print("           Child development: duration="+elapsed2+" ms");
+						for(AiSearchNode c: successors)
+							print("             + " + c.toString());
+					}
+					
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
@@ -285,7 +305,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 						queue.offer(node);
 				}
 				
-				// arbre
+				// mise à jour des données décrivant l'arbre
 				if(lastSearchNode.getDepth()>treeHeight)
 					treeHeight = lastSearchNode.getDepth();
 				if(lastSearchNode.getCost()>treeCost)
@@ -293,32 +313,43 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				if(queue.size()>treeSize)
 					treeSize = queue.size();
 				
-				// verbose
-				print("           Queue length: "+queue.size());
-				for(AiSearchNode c: queue)
-					print("             + " + c.toString());
-				long after1 = System.currentTimeMillis();
-				long elapsed1 = after1 - before1;
-				print("         -- iteration duration="+elapsed1+" --");
+				// verbose : file
+				{	print("           Queue length: "+queue.size());
+					printQueue("             + ",queue);
+				}
+				// verbose : itération
+				{	long after1 = System.currentTimeMillis();
+					long elapsed1 = after1 - before1;
+					print("         -- iteration #" + it + " finished, duration=" + elapsed1 + " --");
+				}
 			}
 			while(!queue.isEmpty());
 		}
 		
-		long after = System.currentTimeMillis();
-		long elapsed = after - before;
-		if(limitReached)
-			print("         Limit reached");
-		else
-			print("         Search finished");
-		print("         Elapsed time: "+elapsed+" ms");
-		//
-		print("         height="+treeHeight+" cost="+treeCost+" size="+treeSize+" src="+root.getLocation());
+		// verbose : temps
+		{	long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("         Total elapsed time: "+elapsed+" ms");
+		}
+		// verbose résultat
+		{	if(limitReached)
+				print("         Limit reached");
+			else
+				print("         Search finished");
+		}
+		// verbose : limites
+		{	print("         height="+treeHeight+" cost="+treeCost+" size="+treeSize+" src="+root.getLocation());
+			if(limitReached)
+				print("         maxHeight="+maxHeight+" maxCost="+maxCost+" maxSize="+maxNodes);
+		}
+		// verbose : fin
 		print("      << Dijkstra finished +++++++++++++++++++++");
 
-//		finish();
+		// exceptions
 		if(limitReached)
 			throw new LimitReachedException(startLocation,null,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
 		
+		// on construit le résultat
 		HashMap<AiTile,AiSearchNode> result = integrateMaps();
 		return result;
 	}

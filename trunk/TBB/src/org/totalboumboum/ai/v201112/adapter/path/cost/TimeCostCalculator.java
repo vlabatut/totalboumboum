@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
+package org.totalboumboum.ai.v201112.adapter.path.cost;
 
 /*
  * Total Boum Boum
@@ -26,10 +26,10 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.NoHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TimeHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimeFullSuccessorCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.TimePartialSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.TimeHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.TimeFullSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.TimePartialSuccessorCalculator;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,

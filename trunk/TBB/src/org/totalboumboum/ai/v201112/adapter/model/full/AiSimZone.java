@@ -804,17 +804,19 @@ public final class AiSimZone extends AiZone
 		}
 		
 		// create sprite
-		long burningDuration = 470;
+		long burningDuration;
 		double currentSpeed = 0;
 		AiStopType stopHeroes;
 		AiStopType stopFires;
 		if(destructible)
 		{	stopHeroes = AiStopType.WEAK_STOP;
 			stopFires = AiStopType.WEAK_STOP;
+			burningDuration = 470;
 		}
 		else
 		{	stopHeroes = AiStopType.STRONG_STOP;
 			stopFires = AiStopType.STRONG_STOP;
+			burningDuration = -1;
 		}
 		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		int id = createNewId();

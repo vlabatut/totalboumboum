@@ -48,7 +48,7 @@ public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Crée une exception représentant le fait que l'algorithme A*
+	 * Crée une exception représentant le fait qu'un algorithme de recherche
 	 * a atteint une des limites qui lui étaient fixées sans pour autant
 	 * trouver de solution (i.e. de chemin)
 	 * 
@@ -72,7 +72,9 @@ public final class LimitReachedException extends Exception
 	 * 		Frange lors de l'arrêt de l'algorithme. 
 	 */
 	public LimitReachedException(AiLocation startLocation, Set<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize, PriorityQueue<AiSearchNode> queue)
-	{	this.startLocation = startLocation;
+	{	super("The search algorithm developped a tree too costly/deep/large according to the predefined limits.");
+		
+		this.startLocation = startLocation;
 		this.endTiles = endTiles;
 		this.height = height;
 		this.cost = cost;
@@ -83,36 +85,6 @@ public final class LimitReachedException extends Exception
 		this.fringe = queue;
 	}
 
-	/**
-	 * Crée une exception représentant le fait que l'algorithme Dybref
-	 * a atteint une des limites qui lui étaient fixées sans pour autant
-	 * terminer le traitement.
-	 * 
-	 * @param startLocation
-	 * 		Emplacment initial.
-	 * @param height
-	 * 		Hauteur maximale atteinte pour l'arbre de recherche.
-	 * @param size
-	 * 		Taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds).
-	 * @param maxHeight
-	 * 		Limite de hauteur fixée pour l'exploration.
-	 * @param maxSize
-	 * 		Limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration.
-	 * @param queue
-	 * 		Frange lors de l'arrêt de l'algorithme. 
-	 */
-	public LimitReachedException(AiLocation startLocation, int height, int size, int maxHeight, int maxSize, PriorityQueue<AiSearchNode> queue)
-	{	this.startLocation = startLocation;
-		this.endTiles = null;
-		this.height = height;
-		this.cost = -1;
-		this.size = size;
-		this.maxCost = -1;
-		this.maxHeight = maxHeight;
-		this.maxSize = maxSize;	
-		this.fringe = queue;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
@@ -292,8 +264,7 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
+	public String getSummary()
 	{	String result = "";
 		result = result + "height=" + height + "(" + maxHeight + ") ";
 		result = result + "cost="   + cost   + "(" + maxCost   + ") ";

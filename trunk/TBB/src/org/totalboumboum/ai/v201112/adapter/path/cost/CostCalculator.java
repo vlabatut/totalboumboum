@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.cost;
+package org.totalboumboum.ai.v201112.adapter.path.cost;
 
 /*
  * Total Boum Boum
