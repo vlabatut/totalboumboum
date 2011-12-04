@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+			
+		<!-- ACTION -->
+<!--  	APPEAR --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="APPEAR" contact="ANY" direction="ANY"
+				orientation="ANY" target="ANY" tilePosition="ANY" />
+		</ability>
+<!--  	CONSUME --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="CONSUME" contact="ANY" direction="ANY"
+				orientation="ANY" target="ANY" tilePosition="SAME" />
+		</ability>
+
+</abilities>
