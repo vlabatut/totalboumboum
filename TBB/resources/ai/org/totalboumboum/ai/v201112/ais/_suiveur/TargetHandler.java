@@ -29,19 +29,19 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.TileCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.algorithm.Astar;
 import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.TileHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.cost.TileCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.heuristic.TileHeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
