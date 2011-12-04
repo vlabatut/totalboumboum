@@ -23,7 +23,6 @@ package org.totalboumboum.ai.v201112.adapter.test;
 
 import java.util.HashMap;
 
-import org.totalboumboum.ai.v201112.adapter.path.algorithm.Dijkstra;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -38,6 +37,7 @@ import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.cost.TileCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.cost.TimeCostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.search.Dijkstra;
 import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.TimeFullSuccessorCalculator;
