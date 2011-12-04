@@ -67,7 +67,7 @@ public final class DijkstraUse
 	}
 	
 	/**
-	 * Affiche les temps correspondant aux chemins
+	 * Affiche les couts correspondant aux chemins
 	 * associés à chaque case de la zone. C'est un
 	 * affichage de l'objet renvoyé par dijkstra.
 	 * 
@@ -86,7 +86,7 @@ public final class DijkstraUse
 				if(leaf==null)
 					System.out.print("\t+∞");
 				else
-					System.out.println("\t"+leaf.getCost()+" ms");
+					System.out.print("\t"+leaf.getCost());
 			}
 			System.out.println();
 		}
@@ -229,7 +229,7 @@ public final class DijkstraUse
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
 		
 		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOBRANCH +++");
-		AiLocation startLocation = new AiLocation(24,25,zone);
+		AiLocation startLocation = new AiLocation(hero);
 		try
 		{	// application de l'algo
 			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
@@ -266,13 +266,13 @@ public final class DijkstraUse
 		// avec modèle partiel
 		System.out.println("\n\n-------- EXEMPLE 4 --------");
 		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
-		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_ALL);
+		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
 		Dijkstra dijkstra = new Dijkstra(ai,hero,costCalculator,successorCalculator);
 		dijkstra.setVerbose(true); // pour afficher les détails du traitement
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
 		
 		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOTREE +++");
-		AiLocation startLocation = new AiLocation(24,25,zone);
+		AiLocation startLocation = new AiLocation(hero);
 		try
 		{	// application de l'algo
 			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
