@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!--  	SPRITE_ENTRY_DURATION --> 
+		<ability strength="200" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_ENTRY_DURATION" />
+		</ability>
+<!--  	SPRITE_FLAT --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_FLAT" />
+		</ability>
+			
+		<!-- ACTION -->
+<!--  	APPEAR -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+		</ability> 
+
+</abilities>
