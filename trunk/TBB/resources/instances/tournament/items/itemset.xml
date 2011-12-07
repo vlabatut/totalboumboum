@@ -17,7 +17,7 @@
 				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
-				<ability strength="1" frame="true" time="20000" > -- #000001 almost black --
+				<ability strength="1" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
 				<ability time="20000" >
@@ -42,7 +42,6 @@
 			</abilities>
 		</item>
 		
-<!--
 		<item name="goldenflame" folder="goldenflame">
 			<abilities>
 				<ability strength="10" >
@@ -50,7 +49,6 @@
 				</ability>
 			</abilities>
 		</item>
--->				
 <!--
 		<item name="kick" folder="kick" >
 			<abilities>
@@ -114,15 +112,13 @@
 			</abilities>
 		</item>
 -->		
-<!--
 		<item name="speed" folder="speed" >
 			<abilities>
 				<ability strength="1">
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
-		</item>
--->		
+		</item>		
 <!--
 		<item name="superspeed" folder="superspeed" >
 			<abilities >
@@ -159,7 +155,7 @@
 				<ability strength="90" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
-				<ability strength="16777215" frame="true" time="15000" > -- #FFFFFF = white --
+				<ability strength="16777215" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
 				<ability time="15000">
@@ -177,7 +173,7 @@
 				<ability strength="90" frame="true" time="3000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
-				<ability strength="16777215" frame="true" time="3000" > -- #FFFFFF = white --
+				<ability strength="16777215" frame="true" time="3000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
 				<ability time="3000">
