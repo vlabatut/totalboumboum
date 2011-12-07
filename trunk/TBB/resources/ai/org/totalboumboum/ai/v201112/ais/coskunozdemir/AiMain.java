@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201112.ais.coskunozdemir;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.coskunozdemir.v1.CoskunOzdemir;
+import org.totalboumboum.ai.v201112.ais.coskunozdemir.v0.CoskunOzdemir;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

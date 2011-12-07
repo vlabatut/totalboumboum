@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201112.ais.ilterkaya;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.ilterkaya.v1.IlterKaya;
+import org.totalboumboum.ai.v201112.ais.ilterkaya.v0.IlterKaya;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

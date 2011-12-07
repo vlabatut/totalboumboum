@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201112.ais.balcetin;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.balcetin.v1.BalCetin;
+import org.totalboumboum.ai.v201112.ais.balcetin.v0.BalCetin;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
