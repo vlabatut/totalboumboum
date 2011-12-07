@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201112.ais.unluyildirim;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.unluyildirim.v0.UnluYildirim;
+import org.totalboumboum.ai.v201112.ais.unluyildirim.v1.UnluYildirim;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

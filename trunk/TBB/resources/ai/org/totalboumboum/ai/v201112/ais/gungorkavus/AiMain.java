@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.gungorkavus.v0.GungorKavus;
+import org.totalboumboum.ai.v201112.ais.gungorkavus.v1.GungorKavus;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

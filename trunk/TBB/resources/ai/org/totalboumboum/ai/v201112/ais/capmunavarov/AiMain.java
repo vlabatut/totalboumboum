@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201112.ais.capmunavarov;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.capmunavarov.v0.CapMunavarov;
+import org.totalboumboum.ai.v201112.ais.capmunavarov.v1.CapMunavarov;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
