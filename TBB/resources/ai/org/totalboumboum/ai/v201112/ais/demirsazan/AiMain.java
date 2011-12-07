@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201112.ais.demirsazan;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.demirsazan.v1.DemirSazan;
+import org.totalboumboum.ai.v201112.ais.demirsazan.v0.DemirSazan;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
