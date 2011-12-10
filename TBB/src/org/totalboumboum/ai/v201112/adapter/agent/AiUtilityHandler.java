@@ -152,7 +152,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		
 		// on sélectionne les cases dont on veut calculer l'utilité
 		long before = print("    >> Entering selectTiles");
-		Set<AiTile> selectedTiles = selectTiles();
+		ArrayList<AiTile> selectedTiles = new ArrayList<AiTile>(selectTiles());
+		Collections.shuffle(selectedTiles); // on désordonne les cases pour introduire du hasard
 		long after = System.currentTimeMillis();
 		long elapsed = after - before;
 		print("    << Exiting selectTiles duration="+elapsed);
