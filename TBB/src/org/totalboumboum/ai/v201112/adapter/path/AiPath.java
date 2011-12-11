@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * <br/>
  * Diverses opérations sont possibles sur un ou plusieurs chemins : modification,
  * comparaisons, calculs variés, etc.
+ * <br/>
  * <b>Attention :</b> les chemins étaient gérés différemment les années
  * précédentes : il s'agissait simplement de suites de cases, et non pas
  * de suites d'emplacements. De plus, les temps de pause n'étaient pas considérés.
