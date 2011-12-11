@@ -105,7 +105,7 @@ public final class PartialModelSimulation
 	 */
 	private static void displayModelSimulationStep(AiPartialModel model)
 	{	long duration = model.getDuration();
-		AiLocation ownLocation = model.getOwnLocation();
+		AiLocation ownLocation = model.getCurrentLocation();
 
 		System.out.println("duration: "+duration);
 		System.out.println("own location: "+ownLocation);

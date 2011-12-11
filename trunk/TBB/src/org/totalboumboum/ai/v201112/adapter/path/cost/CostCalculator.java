@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201112.adapter.path.cost;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 
 /**
  * Permet de définir une fonction de coût 
@@ -46,6 +47,19 @@ public abstract class CostCalculator
 	{	this.ai = ai;
 	}
 	
+	
+	/**
+	 * Réinitialise les structures internes de
+	 * l'objet avant de commencer une nouvelle
+	 * recherche.
+	 * 
+	 * @param root
+	 * 		Le noeud de recherche racine de l'arbre de recherche.
+	 */
+	public void init(AiSearchNode root)
+	{	// à surcharger si nécessaire
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -56,17 +70,17 @@ public abstract class CostCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * Calcule le coût de l'action consistant à aller de l'emplacement
-	 * {@code start} à l'emplacement {@code end}, sachant que les deux cases 
-	 * correspondantes doivent être voisines.
+	 * contenu dans {@code start} à l'emplacement {@code end}, sachant 
+	 * que les deux cases correspondantes doivent être voisines.
 	 * <br/>
 	 * Il est possible de définir des coûts évolués, en tenant compte par exemple des
 	 * influences négatives dans ces cases (pour le joueur) comme la prèsence de bombes 
 	 * à proximité, etc., et des influences positives telles que la prèsence de bonus.
 	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
-	 * @param current
-	 * 		L'emplacement de départ. 
-	 * @param next	
+	 * @param currentNode
+	 * 		Le noeud contenant l'emplacement de départ. 
+	 * @param nextLocation
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le coût du déplacement entre les deux emplacements.
@@ -74,7 +88,7 @@ public abstract class CostCalculator
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public abstract double processCost(AiLocation current, AiLocation next) throws StopRequestException;
+	public abstract double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException;
 	
 	/**
 	 * Calcule le coût d'un chemin, i.e. la somme des coûts des actions

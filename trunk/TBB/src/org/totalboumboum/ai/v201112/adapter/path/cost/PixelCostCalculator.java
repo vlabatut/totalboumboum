@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
@@ -74,9 +75,9 @@ public class PixelCostCalculator extends CostCalculator
 	 * Les deux emplacements sont supposés être dans des cases voisines. 
 	 * On renvoie la distance de Manhattan (en pixels) qui les sépare. 
 	 * 
-	 * @param current
-	 * 		L'emplacement de départ. 
-	 * @param next	
+	 * @param currentNode
+	 * 		Le noeud contenant l'emplacement de départ. 
+	 * @param nextLocation
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		La distance en pixels entre l'emplacement de départ et celui d'arrivée.
@@ -85,9 +86,10 @@ public class PixelCostCalculator extends CostCalculator
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
-	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
-	{	AiZone zone = current.getZone();
-		double result = zone.getPixelDistance(current,next);
+	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
+	{	AiLocation currentLocation = currentNode.getLocation();
+		AiZone zone = currentLocation.getZone();
+		double result = zone.getPixelDistance(currentLocation,nextLocation);
 		return result;		
 	}
 

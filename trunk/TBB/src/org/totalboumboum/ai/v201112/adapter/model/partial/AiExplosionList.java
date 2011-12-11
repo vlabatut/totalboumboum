@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
 
 /**
@@ -35,7 +36,29 @@ import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
  */
 public class AiExplosionList extends TreeSet<AiExplosion>
 {	private static final long serialVersionUID = 1L;
+public AiExplosionList(){}
 
+	public AiExplosionList(AiTile tile)
+	{	this.tile = tile;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TILE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Case concernée par les explosions */
+	private AiTile tile = null;
+	
+	/**
+	 * Renvoie la case concernée
+	 * par cette liste d'explosions.
+	 * 
+	 * @return
+	 * 		La case concernée par cette liste d'explosions.
+	 */
+	public AiTile getTile()
+	{	return tile;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// OPERATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -49,7 +72,7 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 		long explosionEnd = explosion.getEnd();
 		boolean wasMerged = false;
 		
-		// existing explosions starting before the begining of the new one
+		// existing explosion starting before the begining of the new one
 		if(!head.isEmpty())
 		{	AiExplosion previous = head.last();
 			long previousEnd = previous.getEnd();
@@ -86,37 +109,68 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 		// no mergin at all -> insertion
 		if(!wasMerged)
 			super.add(explosion);
-			
+		
+		if(tile==null)
+			tile = explosion.getTile();
+	
 		return true;
 	}
 	
 	/**
-	 * Détermine si la période allant de l'instant
-	 * courant à l'instant donné en paramètre
+	 * Détermine si la période définie par les deux
+	 * instants donnés en paramètre
 	 * intersecte l'une des explosions contenues
-	 * dans cette liste.
+	 * dans cette liste. Si c'est le cas, elle est
+	 * renvoyée, sinon c'est la valeur {@code null}
+	 * qui est renvoyée.
 	 * 
+	 * @param start
+	 * 		L'instant de début de l'intervalle à tester.
 	 * @param time
 	 * 		L'instant de fin de l'intervalle à tester.
 	 * @return
-	 * 		{@code true} ssi au moins une explosion est en
-	 * 		intersection avec l'intervale spécifié.
+	 * 		L'explosion intersectant le paramètre, ou bien {@code null} si l'intersection est vide.
 	 */
-	public boolean intersects(long time)
-	{	boolean result = false;
-		Iterator<AiExplosion> it = iterator();
-		boolean goOn = true;
-		while(it.hasNext() && goOn && !result)
-		{	AiExplosion explosion = it.next();
-			long startTime = explosion.getStart();
-			long endTime = explosion.getEnd();
-			if(startTime<=time)
-			{	if(endTime>=time)
-					result = true;
+	public AiExplosion getIntersection(long startTime, long endTime)
+	{	// init
+		AiExplosion explosion = new AiExplosion(startTime,endTime,tile);
+		SortedSet<AiExplosion> head = headSet(explosion);
+		SortedSet<AiExplosion> tail = tailSet(explosion);
+		boolean emptyTail = tail.isEmpty();
+		long explosionStart = Long.MAX_VALUE;
+		long explosionEnd = Long.MIN_VALUE;
+		
+		// existing explosion starting before the begining of the new one
+		if(!head.isEmpty())
+		{	AiExplosion previous = head.last();
+			long previousEnd = previous.getEnd();
+			if(startTime<=previousEnd)
+			{	long previousStart = previous.getStart();
+				explosionStart = previousStart;
+				explosionEnd = previousEnd;
 			}
-			else //if(startTime>time)
-				goOn = false;
 		}
+		
+		// existing explosions starting after the begining of the new one
+		if(!emptyTail)
+		{	Iterator<AiExplosion> it = tail.iterator();
+			boolean covers = true;
+			while(it.hasNext() && covers)
+			{	AiExplosion next = it.next();
+				long nextStart = next.getStart();
+				if(covers=nextStart<=endTime)
+				{	explosionStart = Math.min(explosionStart,nextStart);
+					long nextEnd = next.getEnd();
+					explosionEnd = Math.max(explosionEnd,nextEnd);
+				}
+			}
+		}
+		
+		// result
+		AiExplosion result = null;
+		if(explosionStart!=Long.MAX_VALUE)
+			result = new AiExplosion(explosionStart,explosionEnd,tile);
+		
 		return result;
 	}
 	
@@ -132,7 +186,7 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 	 * 		La liste à copier
 	 */
 	public AiExplosionList copy()
-	{	AiExplosionList result = new AiExplosionList();
+	{	AiExplosionList result = new AiExplosionList(tile);
 		for(AiExplosion explosion: this)
 			result.add(new AiExplosion(explosion));
 		return result;

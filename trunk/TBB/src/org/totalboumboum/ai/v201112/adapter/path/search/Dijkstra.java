@@ -102,41 +102,6 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		// > aucun pour l'instant
 	}
 	
-/* comment arrêter l'exploration pour les fct succ à base de modèle ?
- *   > soit utiliser une liste des cases restant à résoudre
- *		- mais comment les identifier avt le début de l'algo ?
- *		- faudrait faire un premier parcours en largeur (?)
- *	 > soit utiliser une liste des cases déjà résolues
- *		- pareil : comment savoir s'il en reste à résoudre ?
- *	 > utiliser une matrice pour représenter la zone
- *		- initialiser avec des valeurs indéterminées
- *		- à chaque développement, on regarde si on a trouvé un meilleur temps que celui déjà présent
- *		- mais même si oui, on peut pas s'arrêter, car la case peut permettre de trouver un meilleur chemin pour une autre case
- *	 > est-ce que le parcours ne revient pas en fait à parcourir autant de fois toute
- *	   la zone qu'il y a d'explosion ? (!)
- *
- * - autre pb : comment s'assurer que la première case trouvée a bien le temps optimal ?
- * 
- */
-	
-	/**
-	 * - on utilise une hashmap de matrices pour marquer les cases explorées, et ne garder que les meilleures
-	 * - à la fin, on intègrera cette matrice pour obtenir le meilleur de chaque case (on garde l'arbre de recherche aussi)
-	 * - on a besoin d'une fonction getAncestor dans les noeuds de recherche pour les utiliser comme clés de la map
-	 * 
-	 * - dans djikstra, pour chaque noeud fils on teste si y a pas déjà un noeud correspondant dans la matrice
-	 * - si oui, ça veut dire qu'y a déjà mieux pour cette tranche temporelle, donc on laisse tomber
-	 * - on s'arrête quand toutes les branches temporelles ont été explorées
-	 *   >> au final, le niveau entier sera exploré autant de fois qu'il y a d'explosions possibles
-	 *   
-	 * - p-ê intéressant de limiter le nombre d'explosions considérées (horizon) pour accélérer le traitement
-	 * 
-	 * 
-	 * TODO désactiver le 'chemin parcouru?' dès qu'y a pu de bombes
-	 * TODO ne pas oublier de prendre une liste de priorité pr tenir cpte du coût dans dijkstra
-	 */
-	
-	
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
@@ -166,6 +131,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
+		costCalculator.init(root);
 		successorCalculator.init(root);
 		
 		HashMap<AiTile,AiSearchNode> result = startProcess();

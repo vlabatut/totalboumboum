@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
@@ -122,9 +123,9 @@ public class MatrixCostCalculator extends CostCalculator
 	 * <b>Note :</b> seul l'emplacement de destination est important pour cette fonction
 	 * de coût. 
 	 * 
-	 * @param current
-	 * 		L'emplacement de départ. 
-	 * @param next	
+	 * @param currentNode
+	 * 		Le noeud contenant l'emplacement de départ. 
+	 * @param nextLocation
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le coût correspondant à la case d'arrivée dans la matrice de coût.
@@ -133,8 +134,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
-	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
-	{	AiTile tile = next.getTile();
+	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
+	{	AiTile tile = nextLocation.getTile();
 		int col = tile.getCol();
 		int row = tile.getRow();
 		double result = Double.POSITIVE_INFINITY;

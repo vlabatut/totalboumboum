@@ -175,6 +175,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		this.startLocation = startLocation;
 		heuristicCalculator.setEndTiles(endTiles);
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
+		costCalculator.init(root);
+		heuristicCalculator.init(root);
 		successorCalculator.init(root);
 		
 		// on lance le traitement

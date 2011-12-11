@@ -38,6 +38,7 @@ import org.totalboumboum.ai.v201112.adapter.model.full.AiFullModel;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.test.AstarUse;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Cette classe est chargée de simuler l'évolution d'une zone.
@@ -88,20 +89,36 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class AiPartialModel
 {	
 	/**
-	 * initialise le modèle avec la zone passée en paramètre.
+	 * Initialise le modèle avec la zone passée en paramètre.
+	 * Le personnage de référence est automatiquement celui
+	 * contrôlé par l'agent.
 	 * 
 	 * @param zone
-	 * 		la zone courante, qui servira de point de départ à la simulation.
+	 * 		La zone courante, qui servira de point de départ à la simulation.
 	 */
 	public AiPartialModel(AiZone zone)
+	{	this(zone,zone.getOwnHero());
+	}	
+	
+	/**
+	 * Initialise le modèle avec la zone passée en paramètre.
+	 * Le personnage de référence est celui passé en paramètre.
+	 * 
+	 * @param zone
+	 * 		La zone courante, qui servira de point de départ à la simulation.
+	 * @param hero
+	 * 		Le personnage de référence.
+	 */
+	public AiPartialModel(AiZone zone, AiHero hero)
 	{	// zone
 		this.zone = zone;
 		this.width = zone.getWidth();
 		this.height = zone.getHeight();
 		
 		// hero
-		ownHero = zone.getOwnHero();
-		ownLocation = new AiLocation(ownHero);
+		PredefinedColor color = hero.getColor();
+		currentHero = zone.getHeroByColor(color);
+		currentLocation = new AiLocation(currentHero);
 		
 		// obstacles
 		obstacles = new boolean[height][width];
@@ -111,7 +128,7 @@ public class AiPartialModel
 		explosions = new AiExplosionList[height][width];
 		initExplosions(zone);
 	}	
-	
+
 	/**
 	 * Initialise le modèle en effectuant une copie
 	 * de celui passé en paramètre.
@@ -126,8 +143,8 @@ public class AiPartialModel
 		this.height = model.height;
 		
 		// hero
-		ownHero = model.ownHero;
-		ownLocation = model.ownLocation;
+		currentHero = model.currentHero;
+		currentLocation = model.currentLocation;
 		
 		// matrices
 		obstacles = new boolean[height][width];
@@ -183,9 +200,9 @@ public class AiPartialModel
 	// HERO				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Personnage de référence */
-	private AiHero ownHero;
+	private AiHero currentHero;
 	/** Emplacement virtuel de ce personnage */
-	private AiLocation ownLocation;
+	private AiLocation currentLocation;
 	
 	/** 
 	 * Renvoie le personnage de référence.
@@ -193,8 +210,8 @@ public class AiPartialModel
 	 * @return
 	 * 		Le personnage de référence.
 	 */
-	public AiHero getOwnHero()
-	{	return ownHero;
+	public AiHero getCurrentHero()
+	{	return currentHero;
 	}
 	
 	/**
@@ -204,8 +221,8 @@ public class AiPartialModel
 	 * @return
 	 * 		La position du personnage de référence.
 	 */
-	public AiLocation getOwnLocation()
-	{	return ownLocation;
+	public AiLocation getCurrentLocation()
+	{	return currentLocation;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -228,7 +245,7 @@ public class AiPartialModel
 	private void initObstacles(AiZone zone)
 	{	List<AiTile> tiles = zone.getTiles();
 		for(AiTile tile: tiles)
-		{	boolean crossable = tile.isCrossableBy(ownHero);
+		{	boolean crossable = tile.isCrossableBy(currentHero);
 				// pour éviter de considérer une bombe comme un obstacle
 //				&& !tile.getBlocks().isEmpty(); // inutile, en fait : une bombe est un obstacle qui va disparaitre
 			// cas particulier : bombe posée par l'agent
@@ -237,7 +254,7 @@ public class AiPartialModel
 				if(!bombs.isEmpty())
 				{	AiBomb bomb = bombs.get(0);
 					AiHero owner = bomb.getOwner();
-					if(owner==null || owner.equals(ownHero))
+					if(owner==null || owner.equals(currentHero))
 						crossable = false;
 				}
 			}
@@ -295,6 +312,24 @@ public class AiPartialModel
 	}
 	
 	/**
+	 * Renvoie la liste des explosions disponibles
+	 * pour la case passée en paramètre, ou
+	 * {@code null} si aucune liste n'existe
+	 * pour cette case.
+	 * 
+	 * @param tile
+	 * 		La case à traiter.
+	 * @return
+	 * 		La liste des explosions pour la case spécifiée.
+	 */
+	public AiExplosionList getExplosionList(AiTile tile)
+	{	int row = tile.getRow();
+		int col = tile.getCol();
+		AiExplosionList result = explosions[row][col];
+		return result;
+	}
+	
+	/**
 	 * Permet de savoir si une case contient
 	 * une explosion ou pas.
 	 * 
@@ -345,7 +380,7 @@ public class AiPartialModel
 			long endTime = duration - time;
 			AiExplosionList list = explosions[row][col];
 			if(list==null)
-			{	list = new AiExplosionList();
+			{	list = new AiExplosionList(tile);
 				explosions[row][col] = list;
 			}
 			AiExplosion explosion = new AiExplosion(0,endTime,tile);
@@ -393,7 +428,7 @@ public class AiPartialModel
 						int row = tile.getRow();
 						AiExplosionList list = explosions[row][col];
 						if(list==null)
-						{	list = new AiExplosionList();
+						{	list = new AiExplosionList(tile);
 							explosions[row][col] = list;
 						}
 						AiExplosion explosion = new AiExplosion(delay,endTime,tile);
@@ -460,12 +495,12 @@ public class AiPartialModel
 	public boolean simulateMove(Direction direction)
 	{	// init
 		boolean result = true;
-		double speed = ownHero.getWalkingSpeed();
+		double speed = currentHero.getWalkingSpeed();
 		
 		// on récupère la case de destination
-		double ownX = ownLocation.getPosX();
-		double ownY = ownLocation.getPosY();
-		AiTile sourceTile = ownLocation.getTile();
+		double ownX = currentLocation.getPosX();
+		double ownY = currentLocation.getPosY();
+		AiTile sourceTile = currentLocation.getTile();
 		double sourceX = sourceTile.getPosX();
 		double sourceY = sourceTile.getPosY();
 		AiTile destinationTile = sourceTile.getNeighbor(direction);
@@ -487,8 +522,8 @@ public class AiPartialModel
 		}
 		else
 		{	// sinon on considère le point le plus proche dans cette case
-			distance = zone.getPixelDistance(ownLocation,destinationTile,direction);
-			double cp[] = zone.getContactPoint(ownLocation,destinationTile,true);
+			distance = zone.getPixelDistance(currentLocation,destinationTile,direction);
+			double cp[] = zone.getContactPoint(currentLocation,destinationTile,true);
 			destinationX = cp[0];
 			destinationY = cp[1];
 		}
@@ -497,7 +532,7 @@ public class AiPartialModel
 	
 		// on applique la simulation
 		result = simulateExplosions(timeNeeded,direction);
-		ownLocation = new AiLocation(destinationX,destinationY,zone);
+		currentLocation = new AiLocation(destinationX,destinationY,zone);
 		if(duration==0)
 			duration = timeNeeded;
 		
@@ -544,7 +579,7 @@ public class AiPartialModel
 	{	// init
 		boolean result = true;
 		duration = 0;
-		AiTile sourceTile = ownLocation.getTile();
+		AiTile sourceTile = currentLocation.getTile();
 		int sourceRow = sourceTile.getRow();
 		int sourceCol = sourceTile.getCol();
 		AiTile destinationTile = sourceTile.getNeighbor(direction);
@@ -679,7 +714,7 @@ public class AiPartialModel
 	@Override
 	public String toString()
 	{	String result = "";
-		AiTile ownTile = ownLocation.getTile();
+		AiTile ownTile = currentLocation.getTile();
 		int ownRow = ownTile.getRow();
 		int ownCol = ownTile.getCol();
 	
