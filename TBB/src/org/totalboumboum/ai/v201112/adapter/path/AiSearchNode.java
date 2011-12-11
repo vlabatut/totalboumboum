@@ -129,15 +129,12 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 		
 		// profondeur
 		depth = parent.getDepth() + 1;
-if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
-	System.out.print("");
+//if(depth>ai.getZone().getWidth()*ai.getZone().getHeight())
+//	System.out.print("");
 		
 		// coût
 		costCalculator = parent.getCostCalculator();
-		AiLocation previous = parent.getLocation();
-//if(costCalculator==null)
-//	System.out.println();
-		double localCost = costCalculator.processCost(previous,location);
+		double localCost = costCalculator.processCost(parent,location);
 		cost = parent.getCost() + localCost;
 		
 		// heuristique

@@ -288,7 +288,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 				// si le joueur a survécu et si une action a bien eu lieu
 				if(safe && duration>0)
 				{	// on récupère la nouvelle case occupée par le personnage
-					AiLocation futureLocation = model.getOwnLocation();
+					AiLocation futureLocation = model.getCurrentLocation();
 					AiTile futureTile = futureLocation.getTile();
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
@@ -355,7 +355,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	private long getWaitDuration(AiPartialModel model) throws StopRequestException
 	{	// init
 		long result = Long.MAX_VALUE;
-		AiTile tile = model.getOwnLocation().getTile();
+		AiTile tile = model.getCurrentLocation().getTile();
 		List<AiTile> neighbors = tile.getNeighbors();
 		
 		// on considère chaque case voisine une par une

@@ -33,11 +33,13 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
+import org.totalboumboum.ai.v201112.adapter.path.cost.ApproximateCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.cost.TileCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.cost.TimeCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.search.Dijkstra;
+import org.totalboumboum.ai.v201112.adapter.path.successor.ApproximateSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.TimeFullSuccessorCalculator;
@@ -64,6 +66,8 @@ public final class DijkstraUse
 		example3();
 		// fonctions à base de temps + modèle partiel
 		example4();
+		// fonctions approximatives
+		example5();
 	}
 	
 	/**
@@ -79,8 +83,14 @@ public final class DijkstraUse
 	private static void displayTimeMatrix(AiZone zone, HashMap<AiTile,AiSearchNode> paths)
 	{	int width = zone.getWidth();
 		int height = zone.getHeight();
+		
+		for(int col=0;col<width;col++)
+			System.out.print("\t"+col);
+		System.out.println();
+
 		for(int row=0;row<height;row++)
-		{	for(int col=0;col<width;col++)
+		{	System.out.print(row);
+			for(int col=0;col<width;col++)
 			{	AiTile tile = zone.getTile(row,col);
 				AiSearchNode leaf = paths.get(tile);
 				if(leaf==null)
@@ -272,6 +282,51 @@ public final class DijkstraUse
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
 		
 		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOTREE +++");
+		AiLocation startLocation = new AiLocation(hero);
+		try
+		{	// application de l'algo
+			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
+			// matrice des temps
+			displayTimeMatrix(zone,paths);
+			// chemin
+			AiTile tile = zone.getTile(3,4);
+			AiSearchNode leaf = paths.get(tile);
+			AiPath path = leaf.processPath();
+			System.out.println("+++ path="+path);
+		}
+		catch (StopRequestException e)
+		{	e.printStackTrace();
+		}
+		catch (LimitReachedException e)
+		{	e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Autre utilisation intéressante : les fonctions faisant des
+	 * calculs approximés. Ca peut être utile pour trouver des
+	 * chemins passant à travers les cases destructibles, par exemple
+	 * quand on veut identifier quels murs on doit détruire pour atteindre
+	 * un item ou un adversaire inaccessible..
+	 */
+	private static void example5()
+	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+		ArtificialIntelligence ai = InitData.initAi();
+		
+		// on initialise la zone
+		AiSimZone zone = InitData.initZone();
+		ai.setZone(zone);
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		// utilisation des fonctions approximatives (sans modèle) 
+		System.out.println("\n\n-------- EXEMPLE 5 --------");
+		CostCalculator costCalculator = new ApproximateCostCalculator(ai,hero);
+		SuccessorCalculator successorCalculator = new ApproximateSuccessorCalculator(ai);
+		Dijkstra dijkstra = new Dijkstra(ai,hero,costCalculator,successorCalculator);
+		dijkstra.setVerbose(true); // pour afficher les détails du traitement
+		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
+		
+		System.out.println("+++ Utilisation des fonctions approximatives (à base de temps, mais sans modèle) +++");
 		AiLocation startLocation = new AiLocation(hero);
 		try
 		{	// application de l'algo

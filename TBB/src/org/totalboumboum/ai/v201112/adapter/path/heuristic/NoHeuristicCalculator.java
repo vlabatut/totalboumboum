@@ -25,11 +25,13 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.search.Dijkstra;
 
 /**
  * Implémente une fonction heuristique bidon,
  * dans le but d'utiliser des algorithmes de recherche
- * aveugle tels que le parcours en largeur ou en profondeur.
+ * aveugle tels que le parcours en largeur ou en profondeur,
+ * ou bien l'algorithme de {@link Dijkstra}.
  * Ici, la méthode {@link #processHeuristic} renvoie toujours 0.
  * <br/>
  * La classe est compatible avec toutes les fonctions de coût

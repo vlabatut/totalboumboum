@@ -26,6 +26,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.TimeFullSuccessorCalculator;
@@ -76,6 +77,11 @@ public class TimeCostCalculator extends CostCalculator
 		this.hero = hero;
 	}
 	
+	@Override
+	public void init(AiSearchNode root)
+	{	this.hero = root.getHero();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// HERO						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -103,9 +109,9 @@ public class TimeCostCalculator extends CostCalculator
 	 * du chemin : là, on renvoie la distance entre le point
 	 * de départ et le centre de la case suivante.
 	 * 
-	 * @param current
-	 * 		L'emplacement de départ. 
-	 * @param next	
+	 * @param currentNode
+	 * 		Le noeud contenant l'emplacement de départ. 
+	 * @param nextLocation
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le temps nécessaire pour aller du départ à l'arrivée.
@@ -114,10 +120,11 @@ public class TimeCostCalculator extends CostCalculator
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
-	public double processCost(AiLocation current, AiLocation next) throws StopRequestException
-	{	AiZone zone = current.getZone();
+	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
+	{	AiLocation currentLocation = currentNode.getLocation();
+		AiZone zone = currentLocation.getZone();
 		double speed = hero.getWalkingSpeed();
-		double distance = zone.getPixelDistance(current,next);
+		double distance = zone.getPixelDistance(currentLocation,nextLocation);
 		double result = Math.round(distance/speed * 1000);
 		return result;		
 	}

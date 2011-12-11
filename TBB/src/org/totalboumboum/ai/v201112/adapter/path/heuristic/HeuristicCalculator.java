@@ -28,6 +28,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 
 /**
  * Permet de définir une fonction heuristique utilisée par un algorithme
@@ -47,6 +48,18 @@ public abstract class HeuristicCalculator
 	 */
 	public HeuristicCalculator(ArtificialIntelligence ai)
 	{	this.ai = ai;
+	}
+	
+	/**
+	 * Réinitialise les structures internes de
+	 * l'objet avant de commencer une nouvelle
+	 * recherche.
+	 * 
+	 * @param root
+	 * 		Le noeud de recherche racine de l'arbre de recherche.
+	 */
+	public void init(AiSearchNode root)
+	{	// à surcharger si nécessaire
 	}
 	
 	/////////////////////////////////////////////////////////////////
