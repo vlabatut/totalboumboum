@@ -262,7 +262,7 @@ public final class AiSimZone extends AiZone
 	 */
 	public AiSimTile getNeighborTile(int row, int col, Direction direction)
 	{	if(direction.isComposite())
-			throw new IllegalArgumentException("getNeighborTile does not handle composite directions.");
+			throw new IllegalArgumentException("method getNeighborTile does not handle composite directions.");
 	
 		AiSimTile result;
 		int c,l;

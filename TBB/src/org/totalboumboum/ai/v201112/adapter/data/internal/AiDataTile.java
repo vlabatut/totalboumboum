@@ -409,7 +409,7 @@ final class AiDataTile extends AiTile
 	@Override
 	public AiDataTile getNeighbor(Direction direction)
 	{	if(direction.isComposite())
-			throw new IllegalArgumentException("getNeighbor does not handle not composite directions.");
+			throw new IllegalArgumentException("method getNeighbor does not handle composite directions.");
 		AiDataTile result = neighbors.get(direction);
 		return result;
 	}
