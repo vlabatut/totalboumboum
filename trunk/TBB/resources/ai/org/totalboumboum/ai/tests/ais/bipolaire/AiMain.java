@@ -1,6 +1,6 @@
 package org.totalboumboum.ai.tests.ais.bipolaire;
 
-import org.totalboumboum.ai.tests.ais.bipolaire.v1.Bipolaire;
+import org.totalboumboum.ai.tests.ais.bipolaire.Bipolaire;
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
 
 /**

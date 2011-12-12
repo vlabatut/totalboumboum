@@ -1,6 +1,6 @@
 package org.totalboumboum.ai.tests.ais.simplet;
 
-import org.totalboumboum.ai.tests.ais.simplet.v1.Simplet;
+import org.totalboumboum.ai.tests.ais.simplet.Simplet;
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
 
 /**
