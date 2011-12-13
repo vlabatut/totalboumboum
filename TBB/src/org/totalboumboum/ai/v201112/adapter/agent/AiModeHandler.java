@@ -54,6 +54,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 */
 	protected AiModeHandler(T ai) throws StopRequestException
     {	super(ai);
+		print("    init mode handler");
 	}
 
     /////////////////////////////////////////////////////////////////

@@ -67,6 +67,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	protected AiMoveHandler(T ai) throws StopRequestException
     {	// init ai object
 		super(ai);
+		print("    init move handler");
     	
     	// init data
     	AiZone zone = ai.getZone();
