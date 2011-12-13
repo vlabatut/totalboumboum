@@ -206,7 +206,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
 	public HashMap<AiTile,AiSearchNode> continueProcess() throws StopRequestException, LimitReachedException
-	{	long before = print("      >> Starting/resuming Dijkstra +++++++++++++++++++++");
+	{	long before = print("      > Starting/resuming Dijkstra +++++++++++++++++++++");
 		print("         searching paths starting from "+startLocation);
 		
 		// on remet le dernier noeud (fautif) dans la file,
@@ -309,7 +309,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				print("         maxHeight="+maxHeight+" maxCost="+maxCost+" maxSize="+maxNodes);
 		}
 		// verbose : fin
-		print("      << Dijkstra finished +++++++++++++++++++++");
+		print("      < Dijkstra finished +++++++++++++++++++++");
 
 		// exceptions
 		if(limitReached)

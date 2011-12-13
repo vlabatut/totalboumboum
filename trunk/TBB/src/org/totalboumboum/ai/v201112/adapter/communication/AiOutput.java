@@ -39,7 +39,7 @@ public class AiOutput
 	@SuppressWarnings("unchecked")
 	public AiOutput(AiZone zone)
 	{	this.zone = zone;
-		tileColors = new Color[zone.getHeight()][zone.getWidth()];
+		tileColors = new ArrayList[zone.getHeight()][zone.getWidth()];
 		tileTexts = new List[zone.getHeight()][zone.getWidth()];
 	}
 
@@ -120,7 +120,7 @@ public class AiOutput
 	// TILES COLORING	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** couleurs pour remplir certaines cases du jeu */
-	private Color tileColors[][];
+	private List<Color> tileColors[][];
 	
 	/**
 	 * initialise les couleurs des cases
@@ -129,18 +129,21 @@ public class AiOutput
 	private void reinitTileColors()
 	{	for(int row=0;row<zone.getHeight();row++)
 			for(int col=0;col<zone.getWidth();col++)
-				tileColors[row][col] = null;
+				tileColors[row][col] = new ArrayList<Color>();
 	}
 	
 	/**
-	 * modifie la couleur d'une case, qui sera affichée
+	 * Modifie la couleur d'une case, qui sera affichée
 	 * en transparence par dessus la zone de jeu.
-	 * La valeur null correspond à une absence de couleur.
+	 * La valeur {@code null} correspond à une absence de couleur.
+	 * <br/>
+	 * Si on veut affecter plusieurs couleurs à une case,
+	 * il faut plutôt utiliser les méthodes {@code addTileColor}.
 	 * 
 	 * @param tile
-	 * 		case à colorier
+	 * 		Case à colorier
 	 * @param color
-	 * 		couleur du coloriage
+	 * 		Couleur du coloriage
 	 */
 	public void setTileColor(AiTile tile, Color color)
 	{	int row = tile.getRow();
@@ -149,19 +152,59 @@ public class AiOutput
 	}
 
 	/**
-	 * modifie la couleur d'une case, qui sera affichée
+	 * Modifie la couleur d'une case, qui sera affichée
 	 * en transparence par dessus la zone de jeu.
-	 * La valeur null correspond à une absence de couleur.
+	 * La valeur {@code null} correspond à une absence de couleur.
+	 * <br/>
+	 * Si on veut affecter plusieurs couleurs à une case,
+	 * il faut plutôt utiliser les méthodes {@code addTileColor}.
 	 * 
 	 * @param row
-	 * 		ligne de la case à colorier
+	 * 		Ligne de la case à colorier
 	 * @param col
-	 * 		colonne de la case à colorier
+	 * 		Colonne de la case à colorier
 	 * @param color
-	 * 		couleur du coloriage
+	 * 		Couleur du coloriage
 	 */
 	public void setTileColor(int row, int col, Color color)
-	{	tileColors[row][col] = color;	
+	{	tileColors[row][col].clear();
+		if(color!=null)
+			tileColors[row][col].add(color);	
+	}
+
+	/**
+	 * Ajoute une couleur à une case, qui sera affichée
+	 * en transparence par dessus la zone de jeu.
+	 * 
+	 * @param tile
+	 * 		Case à colorier
+	 * @param color
+	 * 		Couleur du coloriage
+	 */
+	public void addTileColor(AiTile tile, Color color)
+	{	int row = tile.getRow();
+		int col = tile.getCol();
+		addTileColor(row,col,color);
+	}
+
+	/**
+	 * Modifie la couleur d'une case, qui sera affichée
+	 * en transparence par dessus la zone de jeu.
+	 * La valeur {@code null} correspond à une absence de couleur.
+	 * <br/>
+	 * Si on veut affecter plusieurs couleurs à une case,
+	 * il faut plutôt utiliser les méthodes {@code addTileColor}.
+	 * 
+	 * @param row
+	 * 		Ligne de la case à colorier
+	 * @param col
+	 * 		Colonne de la case à colorier
+	 * @param color
+	 * 		Couleur du coloriage
+	 */
+	public void addTileColor(int row, int col, Color color)
+	{	if(color!=null)
+			tileColors[row][col].add(color);	
 	}
 
 	/**
@@ -170,7 +213,7 @@ public class AiOutput
 	 * @return
 	 * 		une matrice de couleurs
 	 */
-	public Color[][] getTileColors()
+	public List<Color>[][] getTileColors()
 	{	return tileColors;
 	}
 

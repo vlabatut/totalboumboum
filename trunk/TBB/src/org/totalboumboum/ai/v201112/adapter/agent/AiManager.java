@@ -313,11 +313,11 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	@Override
 	protected void updateOutput()
 	{	// tile colors
-		{	Color[][] aiMatrix = output.getTileColors();
-			Color[][] engineMatrix = getTileColors();
+		{	List<Color>[][] aiMatrix = output.getTileColors();
+			List<Color>[][] engineMatrix = getTileColors();
 			for(int row=0;row<aiMatrix.length;row++)
 				for(int col=0;col<aiMatrix[0].length;col++)
-					engineMatrix[row][col] = aiMatrix[row][col];
+					engineMatrix[row][col] = new ArrayList<Color>(aiMatrix[row][col]);
 		}
 		
 		// tile texts
@@ -325,7 +325,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 			List<String>[][] engineMatrix = getTileTexts();
 			for(int row=0;row<aiMatrix.length;row++)
 				for(int col=0;col<aiMatrix[0].length;col++)
-					engineMatrix[row][col] = aiMatrix[row][col];
+					engineMatrix[row][col] = new ArrayList<String>(aiMatrix[row][col]);
 		}
 		
 		// paths

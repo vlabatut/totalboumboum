@@ -91,7 +91,7 @@ public abstract class AiAbstractManager<V>
 		Level level = RoundVariables.level;
 		int height = level.getGlobalHeight();
 		int width = level.getGlobalWidth();
-		tileColors = new Color[height][width];
+		tileColors = new List[height][width];
 		tileTexts = new List[height][width];
 		
 		initSteps();
@@ -390,7 +390,7 @@ public abstract class AiAbstractManager<V>
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** couleurs associées aux cases (ou null pour aucune couleur */
-	private Color[][] tileColors;
+	private List<Color>[][] tileColors;
 	/** textes à afficher sur les cases (liste vide pour aucun texte) */
 	private List<String>[][] tileTexts;
 	/** mode d'affichage du texte : gras ou pas */
@@ -412,7 +412,7 @@ public abstract class AiAbstractManager<V>
 	 * @return	
 	 * 		matrice de couleurs
 	 */
-	public Color[][] getTileColors()
+	public List<Color>[][] getTileColors()
 	{	return tileColors;
 	}
 

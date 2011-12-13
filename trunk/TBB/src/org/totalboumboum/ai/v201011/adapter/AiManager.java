@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201011.adapter;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -276,10 +277,10 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	protected void updateOutput()
 	{	// tile colors
 		{	Color[][] aiMatrix = output.getTileColors();
-			Color[][] engineMatrix = getTileColors();
+			List<Color>[][] engineMatrix = getTileColors();
 			for(int line=0;line<aiMatrix.length;line++)
 				for(int col=0;col<aiMatrix[0].length;col++)
-					engineMatrix[line][col] = aiMatrix[line][col];
+					engineMatrix[line][col] = Arrays.asList(aiMatrix[line][col]);
 		}
 		
 		// tile texts
@@ -287,7 +288,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 			List<String>[][] engineMatrix = getTileTexts();
 			for(int line=0;line<aiMatrix.length;line++)
 				for(int col=0;col<aiMatrix[0].length;col++)
-					engineMatrix[line][col] = aiMatrix[line][col];
+					engineMatrix[line][col] = new ArrayList<String>(aiMatrix[line][col]);
 		}
 		
 		// paths

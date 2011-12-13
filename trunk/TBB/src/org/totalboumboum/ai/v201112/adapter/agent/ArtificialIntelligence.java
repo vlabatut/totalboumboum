@@ -361,34 +361,34 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	public final AiAction processAction() throws StopRequestException
 	{	checkInterruption();
 		resetDurations();
-		long before0 = print(">> Entering processAction ----------------------");
+		long before0 = print("> Entering processAction ----------------------");
 		print("\n"+zone);
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes
-			{	long before = print("  >> Entering updatePercepts");
+			{	long before = print("  > Entering updatePercepts");
 				updatePercepts();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				print("  << Exiting updatePercepts: duration="+elapsed+" ms");
+				print("  < Exiting updatePercepts: duration="+elapsed+" ms");
 				stepDurations.put(PERCEPTS,elapsed);
 			}
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
-			{	long before = print("  >> Entering updateMode");
+			{	long before = print("  > Entering updateMode");
 				getModeHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				print("  << Exiting updateMode: duration="+elapsed+" ms result="+getModeHandler().mode);
+				print("  < Exiting updateMode: duration="+elapsed+" ms result="+getModeHandler().mode);
 				stepDurations.put(MODE,elapsed);
 			}
 			
 			// mise à jour des valeurs d'utilité
-			{	long before = print("  >> Entering updateUtility");
+			{	long before = print("  > Entering updateUtility");
 				getUtilityHandler().update();
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
-				print("  << Exiting updateUtility: duration="+elapsed+" ms");
+				print("  < Exiting updateUtility: duration="+elapsed+" ms");
 				stepDurations.put(UTILITY,elapsed);
 			}
 		}
@@ -396,11 +396,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		// action 
 		// (note : les actions sont mutuellement exclusives, c'est soit l'une soit l'autre)
 		AiAction result = null;
-		{	long before = print("  >> Entering considerBombing");
+		{	long before = print("  > Entering considerBombing");
 			boolean cb = getBombHandler().considerBombing();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("  << Exiting considerBombing: duration="+elapsed+" ms result="+cb);
+			print("  < Exiting considerBombing: duration="+elapsed+" ms result="+cb);
 			stepDurations.put(BOMB,elapsed);
 			
 			// on essaie de poser une bombe
@@ -411,11 +411,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			// on essaie de se déplaccer
 			else
 			{	// on récupère la direction
-				before = print("  >> Entering considerMoving");
+				before = print("  > Entering considerMoving");
 				Direction direction = getMoveHandler().considerMoving();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
-				print("  << Exiting considerMoving: duration="+elapsed+" ms result="+direction);
+				print("  < Exiting considerMoving: duration="+elapsed+" ms result="+direction);
 				stepDurations.put(MOVE,elapsed);
 				
 				// si pas de direction : on suppose que c'est NONE
@@ -431,18 +431,18 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		}
 		
 		// mise à jour des sorties
-		{	long before = print("  >> Entering updateOutput");
+		{	long before = print("  > Entering updateOutput");
 			updateOutput();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("  << Exiting updateOutput: duration="+elapsed+" ms");
+			print("  < Exiting updateOutput: duration="+elapsed+" ms");
 			stepDurations.put(OUTPUT,elapsed);
 		}
 		
 		// on renvoie l'action sélectionnée
 		long after0 = System.currentTimeMillis();
 		long elapsed0 = after0 - before0;
-		print("<< Exiting processAction duration="+elapsed0+" ----------------------");
+		print("< Exiting processAction duration="+elapsed0+" ----------------------");
 		totalDuration = elapsed0;
 		return result;
 	}
