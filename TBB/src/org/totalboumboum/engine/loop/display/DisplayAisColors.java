@@ -127,17 +127,18 @@ public class DisplayAisColors implements Display
 			{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				// tile colors
 				if(getShow(i))
-				{	Color[][] colors = aiMgr.getTileColors();
+				{	List<Color>[][] colors = aiMgr.getTileColors();
 					for(int row=0;row<level.getGlobalHeight();row++)
 					{	for(int col=0;col<level.getGlobalWidth();col++)
-						{	Color color = colors[row][col];
-							if(color!=null)
-							{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),Loop.INFO_ALPHA_LEVEL);
-								g2.setPaint(paintColor);
-								Tile tile = level.getTile(row,col);
-								double x = tile.getPosX()-tileSize/2;
-								double y = tile.getPosY()-tileSize/2;
-								g2.fill(new Rectangle2D.Double(x,y,tileSize,tileSize));
+						{	for(Color color: colors[row][col])
+							{	if(color!=null)
+								{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),Loop.INFO_ALPHA_LEVEL);
+									g2.setPaint(paintColor);
+									Tile tile = level.getTile(row,col);
+									double x = tile.getPosX()-tileSize/2;
+									double y = tile.getPosY()-tileSize/2;
+									g2.fill(new Rectangle2D.Double(x,y,tileSize,tileSize));
+								}
 							}
 						}
 					}
