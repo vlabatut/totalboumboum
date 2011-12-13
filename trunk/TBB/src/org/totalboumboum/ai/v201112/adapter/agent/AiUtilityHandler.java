@@ -74,9 +74,14 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	protected AiUtilityHandler(T ai) throws StopRequestException
     {	super(ai);
-    
+		print("    init utility handler");
+   
     	// on initialise les cas/critères/combinaisons une fois pour toutes
+		long before = print("    >> Entering initCriteria");
     	initCriteria();
+		long after = System.currentTimeMillis();
+		long elapsed = after - before;
+		print("    << Exiting initCriteria duration="+elapsed);
 	}
 
 	/////////////////////////////////////////////////////////////////

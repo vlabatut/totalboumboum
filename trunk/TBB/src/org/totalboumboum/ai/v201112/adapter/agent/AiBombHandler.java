@@ -48,6 +48,7 @@ public abstract class AiBombHandler<T extends ArtificialIntelligence> extends Ai
 	 */
 	protected AiBombHandler(T ai) throws StopRequestException
     {	super(ai);
+		print("    init bomb handler");
 	}
 
     /////////////////////////////////////////////////////////////////
