@@ -225,6 +225,21 @@ public abstract class AiZone
 	 */
 	public abstract AiTile getTile(double x, double y);
 		
+	/**
+	 * Renvoie la case qui contient l'emplacement passé en paramètre.
+	 *   
+	 *  @param location
+	 *  	L'emplacement concerné.
+	 *  @return	
+	 *  	Case contenant l'emplacement spécifié en paramètres
+	 */
+	public AiTile getTile(AiLocation location)
+	{	double x = location.getPosX();
+		double y = location.getPosY();
+		AiTile result = getTile(x,y);
+		return result;
+	}
+		
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
