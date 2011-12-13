@@ -304,7 +304,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 */
 	public AiPath continueProcess() throws StopRequestException, LimitReachedException
 	{	//verbose
-		long before = print("      >> Starting/resuming A* +++++++++++++++++++++");
+		long before = print("      > Starting/resuming A* +++++++++++++++++++++");
 		String msg = "         searching paths from "+startLocation+" to [";
 		for(AiTile tile: endTiles)
 			msg = msg + " " + tile;
@@ -442,7 +442,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		// verbose : fin
 		{	if(result!=null) 
 				print("         result="+result);
-			print("      << A* finished +++++++++++++++++++++");
+			print("      < A* finished +++++++++++++++++++++");
 		}
 		
 		// exceptions

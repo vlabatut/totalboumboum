@@ -77,11 +77,11 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		print("    init utility handler");
    
     	// on initialise les cas/critères/combinaisons une fois pour toutes
-		long before = print("    >> Entering initCriteria");
+		long before = print("    > Entering initCriteria");
     	initCriteria();
 		long after = System.currentTimeMillis();
 		long elapsed = after - before;
-		print("    << Exiting initCriteria duration="+elapsed);
+		print("    < Exiting initCriteria duration="+elapsed);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -156,28 +156,28 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		resetData();
 		
 		// on sélectionne les cases dont on veut calculer l'utilité
-		long before = print("    >> Entering selectTiles");
+		long before = print("    > Entering selectTiles");
 		ArrayList<AiTile> selectedTiles = new ArrayList<AiTile>(selectTiles());
 		Collections.shuffle(selectedTiles); // on désordonne les cases pour introduire du hasard
 		long after = System.currentTimeMillis();
 		long elapsed = after - before;
-		print("    << Exiting selectTiles duration="+elapsed);
+		print("    < Exiting selectTiles duration="+elapsed);
 		
 		// on calcule l'utilité de chaque case
-		before = print("    >> Processing each tile");
+		before = print("    > Processing each tile");
 		for(AiTile tile: selectedTiles)
 		{	ai.checkInterruption();
-			print("      >> Processing tile "+tile);
+			print("      > Processing tile "+tile);
 			
 			// on identifie le cas de cette case (en fonction du mode)
-			print("        >> Identifying the case");
+			print("        > Identifying the case");
 			AiUtilityCase caze = identifyCase(tile);
-			print("        << case="+caze);
+			print("        < case="+caze);
 			
 			// on identifie la combinaison de valeurs des critères pour le cas détecté
-			print("        >> Processing the combination");
+			print("        > Processing the combination");
 			AiUtilityCombination combination = caze.processCombination(tile);
-			print("        << combination="+combination);
+			print("        < combination="+combination);
 			
 			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
 			float utility = referenceUtilities.get(combination);
@@ -191,11 +191,11 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 				utilitiesByValue.put(utility,tiles);
 			}
 			tiles.add(tile);
-			print("      << Tile "+tile+" processing finished");
+			print("      < Tile "+tile+" processing finished");
 		}
 		after = System.currentTimeMillis();
 		elapsed = after - before;
-		print("    << Tile processing finished duration="+elapsed);
+		print("    < Tile processing finished duration="+elapsed);
 	}
 	
 	/**
@@ -354,14 +354,14 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 				int g = 255 - gCoeff*(int)(value/limit*255);
 				int b = 255 - bCoeff*(int)(value/limit*255);
 				Color color = new Color(r,g,b);
-				output.setTileColor(tile,color);
+				output.addTileColor(tile,color);
 			}
 		}
 	}
 	
 	public void displayUtilities() throws StopRequestException
 	{	ai.checkInterruption();
-		print("    >> Declared utilities :");
+		print("    > Declared utilities :");
 		List<AiUtilityCombination> combis = new ArrayList<AiUtilityCombination>(referenceUtilities.keySet());
 		Collections.sort(combis,new Comparator<AiUtilityCombination>()
 		{	@Override
@@ -377,6 +377,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		{	int utility = referenceUtilities.get(combi);
 			print("    "+utility+"."+combi);
 		}
-		print("    << Utilities done");
+		print("    < Utilities done");
 	}
 }
