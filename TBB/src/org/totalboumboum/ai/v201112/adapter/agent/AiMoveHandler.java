@@ -170,9 +170,9 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 		// color
 		Color color = null;
 		if(mode==AiMode.ATTACKING)
-			color = new Color(255,0,0);
+			color = Color.RED;
 		else if(mode==AiMode.COLLECTING)
-			color = new Color(0,0,255);
+			color =Color.BLUE;
 		
 		// path
 		if(outputPath && currentPath!=null)
