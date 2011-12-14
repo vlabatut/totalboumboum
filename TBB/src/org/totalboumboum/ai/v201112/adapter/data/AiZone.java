@@ -319,7 +319,7 @@ public abstract class AiZone
 	 * Renvoie les temps d'explosion de chaque bombe
 	 * présente dans la zone, en tenant compte des
 	 * réactions en chaîne. Le résultat prend la forme
-	 * d'une map dont la est le temps restant avant l'explosion
+	 * d'une map dont la clé est le temps restant avant l'explosion
 	 * et la valeur une liste de bombes associées à ce temps.
 	 * 
 	 * @return

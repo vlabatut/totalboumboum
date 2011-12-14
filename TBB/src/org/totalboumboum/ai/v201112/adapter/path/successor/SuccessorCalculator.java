@@ -111,6 +111,24 @@ public abstract class SuccessorCalculator
 	 * 		Le noeud de recherche courant.
 	 * @return	
 	 * 		La liste de noeuds fils obtenus.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public abstract List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException;
+	
+	/**
+	 * Détermine si la case du noeud passé en paramètre est menacé par une
+	 * bombe. Cette méthode est utilisée pour rechercher un chemin vers
+	 * une case non-menacée. Elle est placée dans {@link SuccessorCalculator},
+	 * car ce dernier contient souvent un modèle utilisé pour la simulation.
+	 * 
+	 * @param node
+	 * 		Le noeud de recherche à traiter.
+	 * @return
+	 * 		{@code true} ssi la case n'est pas menacée.
+	 * 
+	 * @throws StopRequestException
+	 */
+	public abstract boolean isThreatened(AiSearchNode node);
 }

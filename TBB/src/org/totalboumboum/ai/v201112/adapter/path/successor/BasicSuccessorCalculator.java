@@ -23,12 +23,15 @@ package org.totalboumboum.ai.v201112.adapter.path.successor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.cost.MatrixCostCalculator;
@@ -144,6 +147,22 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 			}
 		}
 
+		return result;
+	}
+
+	@Override
+	public boolean isThreatened(AiSearchNode node)
+	{	boolean result = false;
+		AiLocation location = node.getLocation();
+		AiTile tile = location.getTile();
+		AiZone zone = location.getZone();
+		List<AiBomb> bombs = zone.getBombs();
+		Iterator<AiBomb> it = bombs.iterator();
+		while(!result && it.hasNext())
+		{	AiBomb bomb = it.next();
+			List<AiTile> blast = bomb.getBlast();
+			result = blast.contains(tile);
+		}
 		return result;
 	}
 }

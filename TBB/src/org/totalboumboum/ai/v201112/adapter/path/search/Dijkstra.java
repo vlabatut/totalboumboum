@@ -298,9 +298,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				
 				// mise à jour de la condition d'arrêt
 				if(stopWhenSafe)
-				{	
-					
-				}
+					safeStop = !successorCalculator.isThreatened(lastSearchNode);
 				
 				// verbose : file
 				{	print("           Queue length: "+queue.size());

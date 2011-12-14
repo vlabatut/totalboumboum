@@ -372,4 +372,15 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		
 		return result;
 	}
+	
+	@Override
+	public boolean isThreatened(AiSearchNode node)
+	{	boolean result = false;
+		AiLocation location = node.getLocation();
+		AiTile tile = location.getTile();
+		AiPartialModel model = models.get(node);
+		AiExplosion explosion = model.getExplosion(tile);
+		result = explosion!=null;
+		return result;
+	}
 }
