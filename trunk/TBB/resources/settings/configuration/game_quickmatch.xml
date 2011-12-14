@@ -15,7 +15,7 @@
 	</settings>
 	<players>
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="2" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tournament201112" folder="qualif1" allowedPlayers="0 2 3 4 5" />

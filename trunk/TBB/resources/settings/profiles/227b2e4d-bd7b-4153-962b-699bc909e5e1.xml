@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
 	<general name="ZZZZZZZZZ" />
-	<ai name="_temp" pack="tests" />
+	<ai name="simplet" pack="tests" />
 	<character name="shirobon" packname="superbomberman1" color="YELLOW" />
 	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />
 </profile>
