@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
@@ -104,7 +105,10 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
+	/////////////////////////////////////////////////////////////////
+	/** Permet d'arrêter l'exploration dès qu'on trouve une case sûre (pour {@code processEscapePath}) */ 
+	private boolean stopWhenSafe = false;
+	
 	/**
 	 * Calcule tous les plus courts chemins pour aller de la case {@code startTile}
 	 * à toutes les cases accessibles de la zone, en utilisant l'algorithme de
@@ -189,6 +193,18 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		return result;
 	}
 	
+	public AiPath processEscapePath(AiLocation startLocation) throws StopRequestException, LimitReachedException
+	{	// on indique la condition de fin pour l'exploration de la zone
+		stopWhenSafe = true;
+		
+		// on applique dijkstra
+		startProcess(startLocation);
+		
+		// on construit le chemin à partir du dernier noeud de recherche traité
+		AiPath result = lastSearchNode.processPath();
+		return result;
+	}
+	
 	/**
 	 * Permet de continuer le traitement commencé par {@link #startProcess(AiLocation) startProcess}.
 	 * Par exemple, si {@code startProcess} a provoqué une exception 
@@ -221,6 +237,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		int it = 0;
 		lastSearchNode = null;
 		limitReached = false;
+		boolean safeStop = false;
 			
 		// traitement
 		if(!queue.isEmpty())
@@ -279,6 +296,12 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				if(queue.size()>treeSize)
 					treeSize = queue.size();
 				
+				// mise à jour de la condition d'arrêt
+				if(stopWhenSafe)
+				{	
+					
+				}
+				
 				// verbose : file
 				{	print("           Queue length: "+queue.size());
 					printQueue("             + ",queue);
@@ -289,7 +312,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 					print("         -- iteration #" + it + " finished, duration=" + elapsed1 + " --");
 				}
 			}
-			while(!queue.isEmpty());
+			while(!queue.isEmpty() && !safeStop);
 		}
 		
 		// verbose : temps
