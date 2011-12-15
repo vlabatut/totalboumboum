@@ -93,7 +93,12 @@ public abstract class AiAbstractManager<V>
 		int width = level.getGlobalWidth();
 		tileColors = new List[height][width];
 		tileTexts = new List[height][width];
-		
+		for(int row=0;row<height;row++)
+		{	for(int col=0;col<width;col++)
+			{	tileColors[row][col] = new ArrayList<Color>();
+				tileTexts[row][col] = new ArrayList<String>();
+			}
+		}
 		initSteps();
 	}
 		
