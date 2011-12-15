@@ -467,7 +467,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/** Champ utilisé par le moteur : temps réel total utilisé lors du dernier appel (en ms) */ 
 	private long totalDuration;
 	/** Champ utilisé par le moteur : temps réel de chaque étape (en ms) */
-	private final HashMap<String,Long> stepDurations = new HashMap<String,Long>();
+	protected final HashMap<String,Long> stepDurations = new HashMap<String,Long>();
 	
 	/**
 	 * Réinitialise tous les temps réels
