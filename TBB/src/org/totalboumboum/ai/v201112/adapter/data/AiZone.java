@@ -202,6 +202,25 @@ public abstract class AiZone
 	public abstract List<AiTile> getTiles();
 	
 	/**
+	 * Renvoie la case de mêmes coordonnées que celle
+	 * passée en paramètre. Pratique pour obtenir la
+	 * case équivalant à une autre case, mais dans une
+	 * autre zone (par exemple deux zones représentant
+	 * le même environnement à deux instants différents).
+	 * 
+	 * @param tile
+	 * 		Case de référence contenue dans une autre zone.
+	 * @return
+	 * 		Case située au même endroit dans cette zone.
+	 */
+	public AiTile getTile(AiTile tile)
+	{	int col = tile.getCol();
+		int row = tile.getRow();
+		AiTile result = getTile(row,col);
+		return result;
+	}
+
+	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
 	 *  @param row
