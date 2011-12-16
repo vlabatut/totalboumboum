@@ -267,9 +267,6 @@ System.out.println(hero+" "+hero.getId());
 				}
 			}
 		}
-	
-		//TODO might be necessary to bomb the inactive AIs
-		//	or: extend to players in general (not just AIs)
 	}
 	
 	protected void initAis()
