@@ -115,7 +115,7 @@ public abstract class AiAbstractManager<V>
     /** gestionnaire de threads pour exécuter l'agent */
     private ExecutorService executorAi = null;
     /** future utilisé pour récupérer le résultat de l'agent */
-    private Future<V> futureAi;
+    private Future<V> futureAi = null;
     /** indique si cet agent était en pause */
     private boolean paused = false;
     
@@ -137,7 +137,7 @@ public abstract class AiAbstractManager<V>
     	executorAi = Executors.newSingleThreadExecutor(fact);
     	
     	// on lance le calcul pour le premier coup
-    	makeCall();
+//    	makeCall();
     }
     
     /**
@@ -152,82 +152,88 @@ public abstract class AiAbstractManager<V>
     public final boolean update(boolean aisPause)
     {	boolean result = false;
     	
-    	// si l'agent était en pause
-    	if(paused)
-    	{	// sortie de pause ?
-    		if(!aisPause)
-	    	{	// basculement de la pause
-    			paused = false;
-   				// on lance le calcul pour le prochain coup
-				makeCall();	    		
-	    	}    		
-    	}
+    	// on lance le calcul pour le premier coup
+    	if(futureAi==null)
+        	makeCall();
     	
-    	// sinon : un appel avait déjà été effectué
     	else
-    	{	// passage en pause ?
-    		if(aisPause)
-    		{	// basculement de la pause
-    			paused = true;
-    			// on arrête le joueur
-    			ControlEvent[] events =
-    			{	new ControlEvent(ControlEvent.UP,false),
-					new ControlEvent(ControlEvent.RIGHT,false),
-					new ControlEvent(ControlEvent.DOWN,false),
-					new ControlEvent(ControlEvent.LEFT,false),
-					new ControlEvent(ControlEvent.DROPBOMB,false),
-					new ControlEvent(ControlEvent.JUMP,false),
-					new ControlEvent(ControlEvent.PUNCHBOMB,false),
-					new ControlEvent(ControlEvent.STOPBOMB,false),
-					new ControlEvent(ControlEvent.THROWBOMB,false),
-					new ControlEvent(ControlEvent.TRIGGERBOMB,false)
-    			};
-    			for(ControlEvent event: events)
-					player.getSprite().putControlEvent(event);
-    		}
-    		// pas de passage en pause : cet appel est-il fini ?
-    		else if(futureAi.isDone())
-    		{	try
-    			{	// on récupére les réactions de l'agent
-    				V value = futureAi.get();
-    				// on les convertit et les envoie au moteur
-    				List<ControlEvent> events = convertReaction(value);
-    				Iterator<ControlEvent> it = events.iterator();
-    				while(it.hasNext())
-    				{	ControlEvent event = it.next();
-    					player.getSprite().putControlEvent(event);
-    				}
-    				result = !events.isEmpty();
-    				// on met à jour les sorties de l'agent
-    				updateOutput();
-    				// on met à jour les temps de l'agent
-    				updateDurations();
-				}
-    			catch (InterruptedException e)
-    			{	if(aisConfiguration.getLogExceptions())
-    				{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
-	    				PrintWriter printWriter = new PrintWriter(out,true);
-	    				e.printStackTrace(printWriter);
-    				}
-    				if(Configuration.getAisConfiguration().getDisplayExceptions())
-    					e.printStackTrace();
-				}
-    			catch (ExecutionException e)
-    			{	if(aisConfiguration.getLogExceptions())
-					{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
-						PrintWriter printWriter = new PrintWriter(out,true);
-						e.printStackTrace(printWriter);
+    	{	// si l'agent était en pause
+	    	if(paused)
+	    	{	// sortie de pause ?
+	    		if(!aisPause)
+		    	{	// basculement de la pause
+	    			paused = false;
+	   				// on lance le calcul pour le prochain coup
+					makeCall();	    		
+		    	}    		
+	    	}
+	    	
+	    	// sinon : un appel avait déjà été effectué
+	    	else
+	    	{	// passage en pause ?
+	    		if(aisPause)
+	    		{	// basculement de la pause
+	    			paused = true;
+	    			// on arrête le joueur
+	    			ControlEvent[] events =
+	    			{	new ControlEvent(ControlEvent.UP,false),
+						new ControlEvent(ControlEvent.RIGHT,false),
+						new ControlEvent(ControlEvent.DOWN,false),
+						new ControlEvent(ControlEvent.LEFT,false),
+						new ControlEvent(ControlEvent.DROPBOMB,false),
+						new ControlEvent(ControlEvent.JUMP,false),
+						new ControlEvent(ControlEvent.PUNCHBOMB,false),
+						new ControlEvent(ControlEvent.STOPBOMB,false),
+						new ControlEvent(ControlEvent.THROWBOMB,false),
+						new ControlEvent(ControlEvent.TRIGGERBOMB,false)
+	    			};
+	    			for(ControlEvent event: events)
+						player.getSprite().putControlEvent(event);
+	    		}
+	    		// pas de passage en pause : cet appel est-il fini ?
+	    		else if(futureAi.isDone())
+	    		{	try
+	    			{	// on récupére les réactions de l'agent
+	    				V value = futureAi.get();
+	    				// on les convertit et les envoie au moteur
+	    				List<ControlEvent> events = convertReaction(value);
+	    				Iterator<ControlEvent> it = events.iterator();
+	    				while(it.hasNext())
+	    				{	ControlEvent event = it.next();
+	    					player.getSprite().putControlEvent(event);
+	    				}
+	    				result = !events.isEmpty();
+	    				// on met à jour les sorties de l'agent
+	    				updateOutput();
+	    				// on met à jour les temps de l'agent
+	    				updateDurations();
 					}
-					if(Configuration.getAisConfiguration().getDisplayExceptions())
-    					e.printStackTrace();
-				}    			
-    			// on lance le calcul pour le prochain coup
-    			makeCall();
-    		}
-    		// sinon on ne fait rien
-    		else
-    		{	//
-    		}
+	    			catch (InterruptedException e)
+	    			{	if(aisConfiguration.getLogExceptions())
+	    				{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
+		    				PrintWriter printWriter = new PrintWriter(out,true);
+		    				e.printStackTrace(printWriter);
+	    				}
+	    				if(Configuration.getAisConfiguration().getDisplayExceptions())
+	    					e.printStackTrace();
+					}
+	    			catch (ExecutionException e)
+	    			{	if(aisConfiguration.getLogExceptions())
+						{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
+							PrintWriter printWriter = new PrintWriter(out,true);
+							e.printStackTrace(printWriter);
+						}
+						if(Configuration.getAisConfiguration().getDisplayExceptions())
+	    					e.printStackTrace();
+					}    			
+	    			// on lance le calcul pour le prochain coup
+	    			makeCall();
+	    		}
+	    		// sinon on ne fait rien
+	    		else
+	    		{	//
+	    		}
+	    	}
     	}
     	
     	return result;
