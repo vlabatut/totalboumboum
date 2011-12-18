@@ -443,13 +443,18 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = "{";
+	{	StringBuffer result = new StringBuffer();
+		result.append("{");
 		for(int i=0;i<locations.size();i++)
 		{	AiLocation tile = locations.get(i);
 			long pause = pauses.get(i);
-			result = result + " ["+tile+";"+pause+"]";
+			result.append(" [");
+			result.append(tile);
+			result.append(";");
+			result.append(pause);
+			result.append("]");
 		}
-		result = result + " }";
-		return result;
+		result.append(" }");
+		return result.toString();
 	}
 }
