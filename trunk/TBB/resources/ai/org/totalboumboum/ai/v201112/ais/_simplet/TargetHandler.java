@@ -32,11 +32,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 
 /**
- * L'agent est obsédé par un adversaire, qu'il ne lâchera pas
- * pendant tout le jeu, ou bien jusqu'à son élimination.
- * Cette cible est choisie en fonction de son classement général :
+ * L'agent choisit un adversaire et ne le lâche plus
+ * jusqu'à ce que l'un des deux soit éliminés.
+ * Ici, cette cible est choisie en fonction de son classement général :
  * l'agent choisit le plus faible (en théorie, du moins).
- * 
  * 
  * @author Vincent Labatut
  */
@@ -62,6 +61,7 @@ public class TargetHandler extends AiAbstractHandler<Simplet>
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** La zone courante */
 	protected AiZone zone = null;
 	/** L'adversaire constituant la cible actuelle de l'agent */
 	protected AiHero target = null;
@@ -69,7 +69,6 @@ public class TargetHandler extends AiAbstractHandler<Simplet>
 	/////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	/**
 	 * On met à jour la cible si c'est nécessaire,
 	 * i.e. : si on est en mode attaque, et si la cible
@@ -84,39 +83,40 @@ public class TargetHandler extends AiAbstractHandler<Simplet>
 		// on ne change d'adversaire que s'il est null ou déjà éliminé
 		boolean change = target==null;
 		if(change)
-			print("    need to select a target: no target currently selected");
+			print("      need to select a target: no target currently selected");
 		else
 		{	List<AiHero> remaining = zone.getRemainingOpponents();
 			if(!remaining.contains(target))
 			{	change = true;
-				print("    need to select a target: the previous one is dead ("+target+")");
+				print("      need to select a target: the previous one is dead ("+target+")");
 			}
 		}
 		
 		// si on doit changer, on le fait pour l'adversaire le plus mal classé
 		if(change)
-		{	print("    reviewing remaining players:");
+		{	print("      reviewing remaining players:");
 			List<AiHero> remaining = zone.getRemainingOpponents();
 			int minRank = Integer.MAX_VALUE;
 			AiHero minHero = null;
 			for(AiHero hero: remaining)
 			{	int rank = zone.getStatsRank(hero);
-				print("       +"+hero+" ["+rank+"]");
+				print("         +"+hero+" ["+rank+"]");
 				if(rank<minRank)
 				{	minRank = rank;
 					minHero = hero;
 				}
 			}
 			target = minHero;
-			print("    new target="+target);
+			print("      new target="+target);
 		}
 		else
-			print("    no need to select a target: keep the same target "+target);
+			print("      no need to select a target: keep the same target "+target);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Permet d'activer/désactiver l'affichage de la cible */
 	public boolean outputTarget = true;
 	
 	/**

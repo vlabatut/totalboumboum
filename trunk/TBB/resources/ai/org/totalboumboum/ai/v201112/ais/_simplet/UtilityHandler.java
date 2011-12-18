@@ -53,10 +53,8 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
- * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
- * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
- * 
+ * Pour cet exemple, on ne distingue qu'un petit nombre
+ * de critères et de cas.
  * 
  * @author Vincent Labatut
  */
@@ -84,15 +82,20 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 	/////////////////////////////////////////////////////////////////
 	/** La zone de jeu */
 	private AiZone zone = null;
+	/** Le personnage contrôlé par cet agent */
 	private AiHero ownHero = null;
 	/** Un objet dijkstra utilisé pour identifier le voisinage de l'agent */
 	private Dijkstra dijkstra = null;
+	/** Les méthodes communes */
 	private CommonTools commonTools;
+	/** Indique pour chaque case traitée si on veut y poser une bombe ou pas */
 	protected HashMap<AiTile,Boolean> bombTiles = new HashMap<AiTile,Boolean>();
 
 	/**
-	 * Permet d'initialiser certains objets une fois pour toutes. 
+	 * Permet d'initialiser certains objets une fois pour toutes.
+	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void initData() throws StopRequestException
 	{	ai.checkInterruption();
@@ -122,6 +125,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 	private final String CASE_COLLECT_VISIBLE_ITEM = "VISIBLE_ITEM";
 	/** Cas de collecte correspondant à une case voisine d'un mur destructible */
 	private final String CASE_COLLECT_WALL_NEIGHBOR = "WALL_NEIGHBOR";
+	/** Cas d'attaque correspondant à une case suffisamment proche de la cible */
 	private final String CASE_ATTACK = "ATTACK";
 	
 	@Override
@@ -311,6 +315,5 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
 	}
 }
