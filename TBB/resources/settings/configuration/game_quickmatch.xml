@@ -16,12 +16,21 @@
 	<players>
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="3" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="4" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201112" folder="qualif1" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="qualif2" allowedPlayers="0 2 3 4" />
-		<level pack="tournament201112" folder="qualif3" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="qualif4" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="classic" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="carrefour" allowedPlayers="0 2 3 4" />
+		<level pack="tournament201112" folder="croix" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
+		<level pack="tournament201112" folder="entrance" allowedPlayers="0 2 3 4 5 6" />
+		<level pack="tournament201112" folder="horizontal" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
+		<level pack="tournament201112" folder="items" allowedPlayers="0 2 3 4 5 6" />
+		<level pack="tournament201112" folder="limitsiz" allowedPlayers="0 2 3 4" />
+		<level pack="tournament201112" folder="line" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="pasaj" allowedPlayers="0 2 3 4 5 6" />
+		<level pack="tournament201112" folder="power" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="readysetgo" allowedPlayers="0 2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 

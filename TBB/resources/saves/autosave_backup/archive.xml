@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournoi de Galatasaray III" type="CUP" />
-	<played matches="0" rounds="1" />
-	<dates start="2011-11-11T16:35:56" save="2011-11-11T16:37:04" />
+	<tournament name="Tournoi de Galatasaray II" type="CUP" />
+	<played matches="11" rounds="4" />
+	<dates start="2011-12-18T16:09:45" save="2011-12-18T17:09:28" />
 	<players>
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="0910.Mançuhan+Pınarer" />
-		<player name="0910.Enhoş+Karapazar" />
-		<player name="0910.Aldanmaz+Yenigün" />
-		<player name="0910.Demirci+Düzok+Ergök" />
-		<player name="0910.Dane+Şatır" />
-		<player name="0910.Adatape+Özbek" />
-		<player name="0910.Dereli+Geçkalan" />
-		<player name="0910.Fındık+Şırın" />
-		<player name="0910.Çalışır+Güner" />
-		<player name="0910.Bektaş+Mazilyah" />
-		<player name="0910.Aksoy+Tangay" />
+		<player name="0809.Altay+Basaranoğlu" />
+		<player name="0809.Tırtıl+Tomruk" />
+		<player name="0809.Akpolat+Şener" />
+		<player name="0809.Çalışkan+Cap+Doğaner" />
+		<player name="0809.Erişik+Pektaş" />
+		<player name="0809.Dayioğlugil+Geçkalan" />
+		<player name="0809.Kökciyan+Mazmanoğlu" />
+		<player name="0809.Medeni+Uluer" />
+		<player name="0809.Devecioğlu+Korkmaz" />
+		<player name="0809.Bilgin+Karabağ" />
+		<player name="Simplet" />
+		<player name="0809.Günalp+Yürtsever" />
+		<player name="0809.Çöremen+Küçükkarakürt" />
+		<player name="0809.Demirağ+Şagar" />
 	</players>
 </archive>
 
