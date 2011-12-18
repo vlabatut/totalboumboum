@@ -313,7 +313,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		
 		// on remet le dernier noeud (fautif) dans la file,
 		// pour permettre éventuellement de continuer le traitement
-		if(limitReached)
+		if(limitReached && lastSearchNode!=null)
 		{	queue.offer(lastSearchNode);
 			print("           Queue length: "+queue.size());
 			printQueue("             + ",queue);
