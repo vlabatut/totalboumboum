@@ -73,8 +73,14 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	protected final long print(String msg)
 	{	long time = System.currentTimeMillis();
 		if(verbose)
-		{	String prefix = "[" + time + ":" + ai.colorStr + "]";
-			String message = prefix + " " + msg;
+		{	StringBuffer message = new StringBuffer();
+			message.append("[");
+			message.append(time);
+			message.append(":");
+			message.append(ai.colorStr);
+			message.append("]");
+			message.append(" ");
+			message.append(msg);
 			System.out.println(message);
 		}
 		return time;
