@@ -59,7 +59,7 @@ public class Simplet extends ArtificialIntelligence
 	{	checkInterruption();
 		
 		// à modifier si vous voulez afficher les sorties texte de l'agent
-		verbose = false;
+		verbose = true;
 
 		super.init();
 	}
@@ -112,24 +112,27 @@ public class Simplet extends ArtificialIntelligence
 	@Override
 	protected void initHandlers() throws StopRequestException
 	{	checkInterruption();
+		// la sortie texte de chaque gestionnaire peut être désactivée
+		// individuellement en modifiant les constantes, ou bien tous 
+		// en même temps avec le verbose de cette classe principale
 		
 		commonTools = new CommonTools(this);
-		commonTools.verbose = verbose;
+		commonTools.verbose = verbose && true;
 		
 		targetHandler = new TargetHandler(this);
-		targetHandler.verbose = verbose;
+		targetHandler.verbose = verbose && true;
 		
 		modeHandler = new ModeHandler(this);
-		modeHandler.verbose = verbose;
+		modeHandler.verbose = verbose && true;
 
 		utilityHandler = new UtilityHandler(this);
-		utilityHandler.verbose = verbose;
+		utilityHandler.verbose = verbose && true;
 
 		bombHandler = new BombHandler(this);
-		bombHandler.verbose = verbose;
+		bombHandler.verbose = verbose && true;
 
 		moveHandler = new MoveHandler(this);
-		moveHandler.verbose = verbose;
+		moveHandler.verbose = verbose && true;
 	}
 
 	@Override
