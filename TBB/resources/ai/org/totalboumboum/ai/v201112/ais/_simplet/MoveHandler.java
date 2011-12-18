@@ -246,14 +246,19 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			Iterator<Float> it1 = values.descendingIterator();
 			boolean goOn = true;
 			while(it1.hasNext() && goOn)
-			{	// on récupère la valeur d'utilité
+			{	ai.checkInterruption();	
+				
+				// on récupère la valeur d'utilité
 				float utility = it1.next();
 				print("        processing utility="+utility);
 			
 				// puis les cases qui possèdent cette utilité
 				List<AiTile> tiles = utilitiesByValue.get(utility);
 				for(AiTile tile: tiles)
+				{	ai.checkInterruption();
+					
 					print("          +"+tile);
+				}
 				// on les mélange pour introduire du hasard (elles se valent toutes)
 				Collections.shuffle(tiles);
 			
@@ -430,7 +435,9 @@ if(!tiles.isEmpty())
 				AiTile blockedTile = null;
 				AiTile previousTile = null;
 				while(it.hasNext() && blockedTile==null)
-				{	// la case est bloquante si elle contient un bloc (forcément destructible)
+				{	ai.checkInterruption();
+					
+					// la case est bloquante si elle contient un bloc (forcément destructible)
 					AiLocation location = it.next();
 					AiTile tile = location.getTile();
 					List<AiBlock> blocks = tile.getBlocks();

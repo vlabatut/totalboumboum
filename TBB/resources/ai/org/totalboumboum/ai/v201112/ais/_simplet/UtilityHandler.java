@@ -156,7 +156,9 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 			// s'il y en a, on considère uniquement leurs cases (grosse simplification !)
 			if(!items.isEmpty())
 			{	for(AiItem item: items)
-				{	AiTile tile = item.getTile();
+				{	ai.checkInterruption();	
+					
+					AiTile tile = item.getTile();
 					result.add(tile);
 				}
 			}
@@ -183,7 +185,9 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 			Collections.shuffle(neighbors);
 			Iterator<AiTile> it = neighbors.iterator();
 			while(result.isEmpty() && it.hasNext())
-			{	AiTile neighbor = it.next();
+			{	ai.checkInterruption();	
+				
+				AiTile neighbor = it.next();
 				if(neighbor.isCrossableBy(ownHero))
 				{	result.add(neighbor);
 					tile = neighbor;
@@ -243,8 +247,12 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 		AiUtilityCombination combi;
 		// cas de collecte
 		for(int locality=0;locality<=CriterionLocality.LOCALITY_LIMIT;locality++)
-		{	for(int destruction=0;destruction<=CriterionDestruction.DESTRUCTION_LIMIT;destruction++)
-			{	combi = new AiUtilityCombination(caseCollectWallNeighbor);
+		{	ai.checkInterruption();	
+			
+			for(int destruction=0;destruction<=CriterionDestruction.DESTRUCTION_LIMIT;destruction++)
+			{	ai.checkInterruption();	
+				
+				combi = new AiUtilityCombination(caseCollectWallNeighbor);
 				combi.setCriterionValue(criterionLocality,locality);
 				combi.setCriterionValue(criterionDestruction,destruction);
 				referenceUtilities.put(combi,utility);
@@ -252,7 +260,9 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 			}
 		}
 		for(int locality=0;locality<=CriterionLocality.LOCALITY_LIMIT;locality++)
-		{	combi = new AiUtilityCombination(caseCollectVisibleItem);
+		{	ai.checkInterruption();	
+			
+			combi = new AiUtilityCombination(caseCollectVisibleItem);
 			combi.setCriterionValue(criterionLocality,locality);
 			referenceUtilities.put(combi,utility);
 			utility++;
@@ -263,8 +273,12 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 		// cas d'attaque
 		utility = 1;
 		for(int threat=1;threat<=CriterionThreat.THREAT_LIMIT;threat++)
-		{	for(int locality=0;locality<=CriterionLocality.LOCALITY_LIMIT;locality++)
-			{	combi = new AiUtilityCombination(caseAttack);
+		{	ai.checkInterruption();	
+			
+			for(int locality=0;locality<=CriterionLocality.LOCALITY_LIMIT;locality++)
+			{	ai.checkInterruption();	
+				
+				combi = new AiUtilityCombination(caseAttack);
 				combi.setCriterionValue(criterionLocality,locality);
 				combi.setCriterionValue(criterionThreat,threat);
 				referenceUtilities.put(combi,utility);

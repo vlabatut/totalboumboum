@@ -99,7 +99,9 @@ public class TargetHandler extends AiAbstractHandler<Simplet>
 			int minRank = Integer.MAX_VALUE;
 			AiHero minHero = null;
 			for(AiHero hero: remaining)
-			{	int rank = zone.getStatsRank(hero);
+			{	ai.checkInterruption();	
+				
+				int rank = zone.getStatsRank(hero);
 				print("         +"+hero+" ["+rank+"]");
 				if(rank<minRank)
 				{	minRank = rank;

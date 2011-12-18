@@ -218,8 +218,9 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 	 * @throws StopRequestException 
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public boolean hasMiddleBombe(AiTile sourceTile) throws StopRequestException
+	public boolean hasMiddleBomb(AiTile sourceTile) throws StopRequestException
 	{	ai.checkInterruption();	
+		
 		boolean result = false;
 		AiHero target = ai.targetHandler.target;
 		if(target!=null)
@@ -229,7 +230,9 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 				throw new IllegalArgumentException("The tile must be on the same row or column than the current target");
 			AiTile temp = sourceTile;
 			while(!temp.equals(targetTile) && !result)
-			{	List<AiBomb> bombs = temp.getBombs();
+			{	ai.checkInterruption();	
+				
+				List<AiBomb> bombs = temp.getBombs();
 				result = !bombs.isEmpty();
 				temp = temp.getNeighbor(direction);
 			}
@@ -251,12 +254,15 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	
+		
 		long crossTime = Math.round(1000*tile.getSize()/currentSpeed);
 		boolean result = false; 
 		List<AiBomb> bombs = zone.getBombs();
 		Iterator<AiBomb> it = bombs.iterator();
 		while(!result && it.hasNext())
-		{	AiBomb bomb = it.next();
+		{	ai.checkInterruption();	
+			
+			AiBomb bomb = it.next();
 			long timeRemaining = bomb.getNormalDuration() - bomb.getTime();
 			// on ne traite que les bombes menaçante : soit pas temporelles, soit
 			// temporelles avec moins de temps restant que pour traverser une case
