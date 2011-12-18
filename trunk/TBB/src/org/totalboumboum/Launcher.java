@@ -1183,6 +1183,9 @@ public class Launcher
 	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau (5, 13 et 24)
 	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
 	 * 
+	 * promeneur :	
+	 * simplet : 	227b2e4d-bd7b-4153-962b-699bc909e5e1
+	 * suiveur :	
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
