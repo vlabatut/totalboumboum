@@ -21,9 +21,14 @@ package org.totalboumboum.ai.v201112.adapter.path.cost;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
@@ -135,12 +140,24 @@ public class MatrixCostCalculator extends CostCalculator
 	 */ 
 	@Override
 	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
-	{	AiTile tile = nextLocation.getTile();
-		int col = tile.getCol();
-		int row = tile.getRow();
+	{	// on récupère le coût associé dans la matrice
+		AiTile destination = nextLocation.getTile();
+		int col = destination.getCol();
+		int row = destination.getRow();
 		double result = Double.POSITIVE_INFINITY;
 		if(row<costMatrix.length && col<costMatrix[0].length)
 			result = costMatrix[row][col];
+		
+		// on rajoute le coût supplémentaire si la case contient un adversaire
+		if(opponentCost>0)
+		{	AiZone zone = destination.getZone();
+			List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
+			List<AiHero> heroes = destination.getHeroes();
+			opponents.retainAll(heroes);
+			if(!opponents.isEmpty())
+				result = result + opponentCost;
+		}
+		
 		return result;
 	}
 }
