@@ -253,7 +253,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				// verbose : noeud courant
 				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
 				print("           Zone:\n"+zone);
-				print("           Visiting : "+lastSearchNode.toString());
+				print("           Visiting : "+lastSearchNode);
 				
 				// si l'arbre a atteint la hauteur maximale, on s'arrête
 				if(maxHeight>0 && lastSearchNode.getDepth()>=maxHeight)
@@ -276,7 +276,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 						long elapsed2 = after2 - before2;
 						print("           Child development: duration="+elapsed2+" ms");
 						for(AiSearchNode c: successors)
-							print("             + " + c.toString());
+							print("             + " + c);
 					}
 					
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants

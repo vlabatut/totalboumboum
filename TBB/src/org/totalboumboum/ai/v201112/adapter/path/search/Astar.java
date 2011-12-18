@@ -341,7 +341,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				// verbose : noeud courant
 				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
 				print("           Zone:\n"+zone);
-				print("           Visiting : "+lastSearchNode.toString());
+				print("           Visiting : "+lastSearchNode);
 				
 				// on teste si on est arrivé à la fin de la recherche
 				if(endTiles.contains(lastSearchNode.getLocation().getTile()))
@@ -371,7 +371,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 						long elapsed2 = after2 - before2;
 						print("           Child development: duration="+elapsed2+" ms");
 						for(AiSearchNode c: successors)
-							print("             + " + c.toString());
+							print("             + " + c);
 					}
 					
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
