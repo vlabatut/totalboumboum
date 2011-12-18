@@ -586,15 +586,21 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result;
-		result = "<";
-		result = result + "("+location+") ";
-		result = result + depth + ";";
-		result = result + cost + "+";
-		result = result + heuristic + "=";
-		result = result + (cost+heuristic) + " ";
-		result = result + ">";
-		return result;
+	{	StringBuffer result = new StringBuffer();
+		result.append("<");
+		result.append("(");
+		result.append(location);
+		result.append(") ");
+		result.append(depth);
+		result.append(";");
+		result.append(cost);
+		result.append("+");
+		result.append(heuristic);
+		result.append("=");
+		result.append(cost+heuristic);
+		result.append(" ");
+		result.append(">");
+		return result.toString();
 	}
 
 	/////////////////////////////////////////////////////////////////
