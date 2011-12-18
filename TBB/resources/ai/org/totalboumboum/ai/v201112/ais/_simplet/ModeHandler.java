@@ -67,7 +67,7 @@ public class ModeHandler extends AiModeHandler<Simplet>
 		
 		int range = ownHero.getBombRange();
 		int bombs = ownHero.getBombNumberMax();
-		print("    range="+range+" & bombs="+bombs);
+		print("      range="+range+" & bombs="+bombs);
 		
 		// en raison de son attaque très (trop) simple,
 		// cet agent a simplement besoin d'au moins une
@@ -86,7 +86,7 @@ public class ModeHandler extends AiModeHandler<Simplet>
 		//		- on ne vérifie pas s'ils sont accessibles
 		// 		- ni même si on a le temps de les ramasser
 		int hiddenItems = zone.getHiddenItemsCount();
-		print("    hiddenItems="+hiddenItems);
+		print("      hiddenItems="+hiddenItems);
 		boolean result = hiddenItems>0;
 		
    		return result;

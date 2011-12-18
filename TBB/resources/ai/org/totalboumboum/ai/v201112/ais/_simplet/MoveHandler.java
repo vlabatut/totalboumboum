@@ -132,7 +132,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		}
 		long after = System.currentTimeMillis();
 		long elapsed = after - before;
-		print("    < path-finding objects initialized elapsed="+elapsed);
+		print("    < path-finding objects initialized duration="+elapsed);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -171,7 +171,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			updateDestination();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("    < exiting updateDestination elapsed="+elapsed);
+			print("    < exiting updateDestination duration="+elapsed);
 		}
 		
 		// on cherche un chemin vers cette destination
@@ -179,7 +179,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			updatePath();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("    < exiting updatePath elapsed="+elapsed);
+			print("    < exiting updatePath duration="+elapsed);
 		}
 		
 		// on utilise le chemin pour déterminer la direction de déplacement
@@ -187,7 +187,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			updateDirection();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("    < exiting updateDirection elapsed="+elapsed);
+			print("    < exiting updateDirection duration="+elapsed);
 		}
 		
 		return currentDirection;
@@ -258,12 +258,16 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 				Collections.shuffle(tiles);
 			
 				// on en choisit une différente de la case courante (si possible, sinon on continue)
-				Iterator<AiTile> it2 = tiles.iterator();
-				while(it2.hasNext() && goOn)
-				{	currentDestination = it2.next();
-					bombDestination = bombTiles.get(currentDestination);
-					goOn = currentDestination==null || currentTile.equals(currentDestination);
-				}
+//				Iterator<AiTile> it2 = tiles.iterator();
+//				while(it2.hasNext() && goOn)
+//				{	currentDestination = it2.next();
+//					bombDestination = bombTiles.get(currentDestination);
+//					goOn = currentDestination==null || currentTile.equals(currentDestination);
+//				}
+if(!tiles.isEmpty())
+{	currentDestination = tiles.get(0);
+	bombDestination = bombTiles.get(currentDestination);
+}
 				print("        currentDestination="+currentDestination+" bombDestination="+bombDestination);
 			}
 			
@@ -335,12 +339,12 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
 			if(currentPath==null || currentPath.isEmpty())
-			{	print("        no safe tile could be found! elapsed="+elapsed+" currentPath="+currentPath);
+			{	print("        no safe tile could be found! duration="+elapsed+" currentPath="+currentPath);
 			}
 			else
 			{	AiLocation lastLocation = currentPath.getLastLocation();
 				safeDestination = lastLocation.getTile();
-				print("        the escape tile is: secondaryDestination="+safeDestination+" elapsed="+elapsed);
+				print("        the escape tile is: secondaryDestination="+safeDestination+" duration="+elapsed);
 				print("        the escape path is: currentPath="+currentPath);
 			}
 		}
@@ -369,10 +373,10 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
 				if(currentPath==null || currentPath.isEmpty())
-				{	print("        no path could be found! elapsed="+elapsed+" currentPath="+currentPath);
+				{	print("        no path could be found! duration="+elapsed+" currentPath="+currentPath);
 				}
 				else
-				{	print("        the escape path is: elapsed="+elapsed+" currentPath="+currentPath);
+				{	print("        the escape path is: duration="+elapsed+" currentPath="+currentPath);
 				}
 			}
 		}
@@ -395,14 +399,14 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			
 			// si on a trouvé un chemin direct
 			if(currentPath!=null && !currentPath.isEmpty())
-			{	print("        a direct path was found: elapsed="+elapsed+" currentPath="+currentPath);
+			{	print("        a direct path was found: duration="+elapsed+" currentPath="+currentPath);
 				indirectPath = null;
 				safeDestination = null;
 			}
 			
 			// sinon : aucun chemin direct n'existe
 			else
-			{	print("        no direct path was found: elapsed="+elapsed+" currentPath="+currentPath);
+			{	print("        no direct path was found: duration="+elapsed+" currentPath="+currentPath);
 				print("        we need a indirect path");
 			
 				// s'il n'y a pas de chemin secondaire, on en trouve un
@@ -416,7 +420,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 					}
 					after = System.currentTimeMillis();
 					elapsed = after - before;
-					print("          astar finished: elapsed="+elapsed+" secondaryPath="+indirectPath);
+					print("          astar finished: duration="+elapsed+" secondaryPath="+indirectPath);
 				}
 				else
 					print("        there's already a secondary path: secondaryPath="+indirectPath);
@@ -474,9 +478,9 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 							after = System.currentTimeMillis();
 							elapsed = after - before;
 							if(currentPath==null || currentPath.isEmpty())
-								print("        no path could be found! elapsed="+elapsed);
+								print("        no path could be found! duration="+elapsed);
 							else
-								print("        astar finished: elapsed="+elapsed+" currentPath="+currentPath);
+								print("        astar finished: duration="+elapsed+" currentPath="+currentPath);
 						}
 					}
 				}

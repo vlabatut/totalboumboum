@@ -58,10 +58,10 @@ public class Simplet extends ArtificialIntelligence
 	protected void init() throws StopRequestException
 	{	checkInterruption();
 		
-		super.init();
-		
 		// à modifier si vous voulez afficher les sorties texte de l'agent
-		verbose = true;
+		verbose = false;
+
+		super.init();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -79,17 +79,17 @@ public class Simplet extends ArtificialIntelligence
 		
 		// on met à jour les gestionnaires non standard,
 		// car ils ne seront pas mis à jour par l'algo général
-		{	long before = print("  > Entering commonTools.update");
+		{	long before = print("    > Entering commonTools.update");
 			commonTools.update();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("  < Exiting commonTools.update: duration="+elapsed+" ms");
+			print("    < Exiting commonTools.update: duration="+elapsed+" ms");
 		}
-		{	long before = print("  > Entering targetHandler.update");
+		{	long before = print("    > Entering targetHandler.update");
 			targetHandler.update();
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
-			print("  < Exiting targetHandler.update: duration="+elapsed+" ms");
+			print("    < Exiting targetHandler.update: duration="+elapsed+" ms");
 		}
 	}
 	
@@ -163,6 +163,7 @@ public class Simplet extends ArtificialIntelligence
 	protected void updateOutput() throws StopRequestException
 	{	checkInterruption();
 		
+		targetHandler.updateOutput();
 		moveHandler.updateOutput();
 		utilityHandler.updateOutput();
 	}
