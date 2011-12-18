@@ -188,7 +188,12 @@ public class AiExplosion implements Comparable<AiExplosion>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = "["+start+"->"+end+"]";
-		return result;
+	{	StringBuffer result = new StringBuffer();
+		result.append("[");
+		result.append(start);
+		result.append("->");
+		result.append(end);
+		result.append("]");
+		return result.toString();
 	}
 }
