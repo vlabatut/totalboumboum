@@ -21,8 +21,14 @@ package org.totalboumboum.ai.v201112.adapter.path.cost;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201112.adapter.path.heuristic.NoHeuristicCalculator;
@@ -87,7 +93,21 @@ public class TileCostCalculator extends CostCalculator
 	 */ 
 	@Override
 	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
-	{	return 1;		
+	{	// on suppose que la case est voisine, donc le coût est toujours de 1
+		double result = 1;
+		
+		// et on rajoute le coût supplémentaire si la case contient un adversaire
+		if(opponentCost>0)
+		{	AiTile destination = nextLocation.getTile();
+			AiZone zone = destination.getZone();
+			List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
+			List<AiHero> heroes = destination.getHeroes();
+			opponents.retainAll(heroes);
+			if(!opponents.isEmpty())
+				result = result + opponentCost;
+		}
+		
+		return result;		
 	}
 
 	/**

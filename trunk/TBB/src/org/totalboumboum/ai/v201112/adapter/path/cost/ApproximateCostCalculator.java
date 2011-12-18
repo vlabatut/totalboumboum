@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.path.cost;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
@@ -192,6 +193,16 @@ public class ApproximateCostCalculator extends CostCalculator
 			}
 		}
 
+		// on rajoute le coût supplémentaire si la case contient un adversaire
+		if(opponentCost>0)
+		{	AiZone zone = destination.getZone();
+			List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
+			List<AiHero> heroes = destination.getHeroes();
+			opponents.retainAll(heroes);
+			if(!opponents.isEmpty())
+				result = result + opponentCost;
+		}
+		
 		return result;		
 	}
 }

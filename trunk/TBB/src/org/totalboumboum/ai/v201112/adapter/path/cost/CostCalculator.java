@@ -66,6 +66,34 @@ public abstract class CostCalculator
 	protected ArtificialIntelligence ai = null;
 	
 	/////////////////////////////////////////////////////////////////
+	// COST				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Le coût <i>supplémentaire</i> associé à une case contenant un personnage adverse */
+	protected double opponentCost = 0;
+	
+	/**
+	 * Change le côut <i>supplémentaire</i> associé à une 
+	 * case contenant un joueur adverse.<br/>
+	 * Utiliser un poids non-null permet de préférer des chemins 
+	 * qui ne contiennent pas d'adversaire, tout en conservant
+	 * la possibilité d'explorer des chemins contenant des adversaires
+	 * s'il n'y a pas d'autre possibilité.
+	 * <br/>
+	 * Le poids est nul par défaut.
+	 * 
+	 * @param opponentCost
+	 * 		Le coût <i>supplémentaire</i> associé à un joueur adverse.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Si le coût passé en paramètre est négatif.
+	 */
+	public void setOpponentCost(double opponentCost)
+	{	if(opponentCost<0)
+			throw new IllegalArgumentException("The extra cost for opponents in CostCalculator cannot be negative.");
+		this.opponentCost = opponentCost;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 

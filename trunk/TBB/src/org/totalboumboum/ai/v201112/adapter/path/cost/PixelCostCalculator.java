@@ -21,8 +21,13 @@ package org.totalboumboum.ai.v201112.adapter.path.cost;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
@@ -87,9 +92,21 @@ public class PixelCostCalculator extends CostCalculator
 	 */ 
 	@Override
 	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
-	{	AiLocation currentLocation = currentNode.getLocation();
+	{	// on calcule simplement la distance en pixels
+		AiLocation currentLocation = currentNode.getLocation();
 		AiZone zone = currentLocation.getZone();
 		double result = zone.getPixelDistance(currentLocation,nextLocation);
+		
+		// on rajoute le coût supplémentaire si la case contient un adversaire
+		if(opponentCost>0)
+		{	List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
+			AiTile destination = nextLocation.getTile();
+			List<AiHero> heroes = destination.getHeroes();
+			opponents.retainAll(heroes);
+			if(!opponents.isEmpty())
+				result = result + opponentCost;
+		}
+		
 		return result;		
 	}
 
