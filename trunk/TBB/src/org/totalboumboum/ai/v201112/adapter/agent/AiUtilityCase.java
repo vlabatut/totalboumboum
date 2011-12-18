@@ -194,15 +194,17 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = name + "=(";
+	{	StringBuffer result = new StringBuffer();
+		result.append(name);
+		result.append("=(");
 		Iterator<AiUtilityCriterion<?>> it = criteria.iterator();
 		while(it.hasNext())
 		{	AiUtilityCriterion<?> criterion = it.next();
-			result = result + criterion.getName();
+			result.append(criterion.getName());
 			if(it.hasNext())
-				result = result + "×";
+				result.append("×");
 		}
-		result = result + ")";
-		return result;
+		result.append(")");
+		return result.toString();
 	}
 }

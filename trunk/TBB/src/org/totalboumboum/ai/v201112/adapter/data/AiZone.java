@@ -1892,36 +1892,40 @@ public abstract class AiZone
 	 */
 	@Override
 	public String toString()
-	{	String result = "";
+	{	StringBuffer result = new StringBuffer();
 	
 		// col numbers
 		if(width>10)
 		{	for(int i=0;i<10;i++)
-				result = result + "  ";
+				result.append("  ");
 			for(int i=10;i<width;i++)
-				result = result + " " + (i/10);
-			result = result + "\n";
+			{	result.append(" ");
+				result.append(i/10);
+			}
+			result.append("\n");
 		}
-		result = result + "  ";
+		result.append("  ");
 		for(int i=0;i<width;i++)
-			result = result + " " + (i%10);
-		result = result + "\n";
+		{	result.append(" ");
+			result.append(i%10);
+		}
+		result.append("\n");
 		
 		// top row
-		result = result + "  ┌";
+		result.append("  ┌");
 		for(int col=0;col<width-1;col++)
-			result = result + "─┬";
-		result = result + "─┐\n";
+			result.append("─┬");
+		result.append("─┐\n");
 		
 		// content
 		for(int row=0;row<height;row++)
 		{	// row number
 			if(row<10)
-				result = result + " ";
-			result = result + row;
+				result.append(" ");
+			result.append(row);
 			// actual content
 			for(int col=0;col<width;col++)
-			{	result = result + "│";
+			{	result.append("│");
 				AiTile tile = getTile(row,col);
 				List<AiBlock> blocks = tile.getBlocks();
 				List<AiHero> heroes = tile.getHeroes();
@@ -1931,40 +1935,40 @@ public abstract class AiZone
 				if(blocks.size()>0)
 				{	AiBlock block = blocks.get(0);
 					if(block.isDestructible())
-						result = result + "▒";
+						result.append("▒");
 					else
-						result = result + "█";
+						result.append("█");
 				}
 				else if(heroes.size()>0)
 				{	if(bombs.size()>0)
-						result = result + "☻";
+						result.append("☻");
 					else
-						result = result + "☺";
+						result.append("☺");
 				}
 				else if(items.size()>0)
-					result = result + "□";
+					result.append("□");
 				else if(bombs.size()>0)
-					result = result + "●";
+					result.append("●");
 				else if(fires.size()>0)
-					result = result + "░";
+					result.append("░");
 				else
-					result = result + " ";
+					result.append(" ");
 			}
-			result = result + "│\n";
+			result.append("│\n");
 			if(row<height-1)
-			{	result = result + "  ├";
+			{	result.append("  ├");
 				for(int col=0;col<width-1;col++)
-					result = result + "─┼";
-				result = result + "─┤\n";
+					result.append("─┼");
+				result.append("─┤\n");
 			}
 		}
 		
 		// bottom row
-		result = result + "  └";
+		result.append("  └");
 		for(int col=0;col<width-1;col++)
-			result = result + "─┴";
-		result = result + "─┘\n";
+			result.append("─┴");
+		result.append("─┘\n");
 		
-		return result;
+		return result.toString();
 	}
 }

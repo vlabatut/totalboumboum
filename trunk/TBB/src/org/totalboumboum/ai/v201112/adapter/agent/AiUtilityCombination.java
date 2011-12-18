@@ -170,16 +170,20 @@ public final class AiUtilityCombination
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = caze.getName()+"=(";
+	{	StringBuffer result = new StringBuffer();
+		result.append(caze.getName());
+		result.append("=(");
 		int i = 0;
 		for(AiUtilityCriterion<?> criterion: criteria)
 		{	Object value = values.get(criterion);
-			result = result + criterion.getName() + "=" + value;
+			result.append(criterion.getName());
+			result.append("=");
+			result.append(value);
 			if(i<values.size()-1)
-				result = result + ", ";
+				result.append(", ");
 			i++;
 		}
-		result = result + ")";
-		return result;
+		result.append(")");
+		return result.toString();
 	}
 }

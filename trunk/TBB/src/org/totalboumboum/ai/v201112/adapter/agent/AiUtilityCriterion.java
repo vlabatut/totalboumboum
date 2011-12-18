@@ -197,15 +197,17 @@ public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCrite
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public final String toString()
-	{	String result = name + "={";
+	{	StringBuffer result = new StringBuffer();
+		result.append(name);
+		result.append("={");
 		Iterator<T> it = domain.iterator();
 		while(it.hasNext())
 		{	T value = it.next();
-			result = result + value.toString();
+			result.append(value.toString());
 			if(it.hasNext())
-				result = result + ", ";
+				result.append(", ");
 		}
-		result = result + "}";
-		return result;
+		result.append("}");
+		return result.toString();
 	}
 }
