@@ -339,7 +339,7 @@ if(!tiles.isEmpty())
 			{	currentPath = dijkstra.processEscapePath(startLocation);
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
@@ -373,7 +373,7 @@ if(!tiles.isEmpty())
 				{	currentPath = astarPrecise.processShortestPath(startLocation,safeDestination);
 				}
 				catch (LimitReachedException e)
-				{	e.printStackTrace();
+				{	//e.printStackTrace();
 				}
 				long after = System.currentTimeMillis();
 				long elapsed = after - before;
@@ -397,7 +397,7 @@ if(!tiles.isEmpty())
 			{	currentPath = astarPrecise.processShortestPath(startLocation,currentDestination);
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 			long after = System.currentTimeMillis();
 			long elapsed = after - before;
@@ -421,7 +421,7 @@ if(!tiles.isEmpty())
 					{	indirectPath = astarApproximation.processShortestPath(startLocation,currentDestination);
 					}
 					catch (LimitReachedException e)
-					{	e.printStackTrace();
+					{	//e.printStackTrace();
 					}
 					after = System.currentTimeMillis();
 					elapsed = after - before;
@@ -480,7 +480,7 @@ if(!tiles.isEmpty())
 							{	currentPath = astarPrecise.processShortestPath(startLocation,safeDestination);
 							}
 							catch (LimitReachedException e)
-							{	e.printStackTrace();
+							{	//e.printStackTrace();
 							}
 							after = System.currentTimeMillis();
 							elapsed = after - before;

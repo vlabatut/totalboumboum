@@ -59,7 +59,7 @@ public class Simplet extends ArtificialIntelligence
 	{	checkInterruption();
 		
 		// à modifier si vous voulez afficher les sorties texte de l'agent
-		verbose = true;
+		verbose = false;
 
 		super.init();
 	}

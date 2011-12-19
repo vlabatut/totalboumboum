@@ -92,6 +92,9 @@ public class BombHandler extends AiBombHandler<Simplet>
 			if(canBomb && (bombPrimaryDestination || secondaryBombing))
 			{	// on pourrait tester si l'agent ne vas pas se bloquer/tuer
 				result = true;
+				// on réinitialise l'éventuel chemin de fuite présent dans le gestionnaire de 
+				// déplacement, car le fait de poser une bombe change tout calcul précédent.
+				ai.moveHandler.safeDestination = null;
 			}
 		}
 	
