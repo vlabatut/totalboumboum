@@ -23,8 +23,8 @@ package org.totalboumboum.ai.v201112.ais._simplet;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -108,6 +108,8 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 		CostCalculator costCalculator = new TileCostCalculator(ai);
 		SuccessorCalculator successorCalculator = new BasicSuccessorCalculator(ai);
 		dijkstra = new Dijkstra(ai,ownHero,costCalculator,successorCalculator);
+		dijkstra.setMaxHeight(5); // on se met une limite raisonnable
+		
 	}
 	
 	@Override
@@ -132,6 +134,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 	protected Set<AiTile> selectTiles() throws StopRequestException
 	{	ai.checkInterruption();
 		Set<AiTile> result = new TreeSet<AiTile>();
+		HashMap<AiTile,AiSearchNode> map = null;
 		
 		// ici, la sélection des cases dont on veut l'utilité dépend du mode
 		AiMode mode = ai.modeHandler.getMode();
@@ -167,7 +170,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 			{	// on utilise une version simple de dijkstra pour identifier le voisinage
 				AiLocation startLocation = new AiLocation(ownHero);
 				try
-				{	HashMap<AiTile,AiSearchNode> map = dijkstra.startProcess(startLocation);
+				{	map = dijkstra.startProcess(startLocation);
 					result.addAll(map.keySet());
 				}
 				catch (LimitReachedException e)
@@ -180,21 +183,47 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 		if(result.isEmpty())
 		{	AiTile tile = null;
 			// si on n'en a pas, on en prend une au hasard
-			AiTile currentTile = ownHero.getTile();
-			List<AiTile> neighbors = new ArrayList<AiTile>(currentTile.getNeighbors());
-			Collections.shuffle(neighbors);
-			Iterator<AiTile> it = neighbors.iterator();
-			while(result.isEmpty() && it.hasNext())
-			{	ai.checkInterruption();	
-				
-				AiTile neighbor = it.next();
-				if(neighbor.isCrossableBy(ownHero))
-				{	result.add(neighbor);
-					tile = neighbor;
+			final AiTile currentTile = ownHero.getTile();
+			// on utilise une version simple de dijkstra pour identifier le voisinage
+			AiLocation startLocation = new AiLocation(ownHero);
+			try
+			{	if(map==null)
+					map = dijkstra.startProcess(startLocation);
+				List<AiTile> tiles = new ArrayList<AiTile>(map.keySet());
+				Collections.shuffle(tiles);
+				Collections.sort(tiles,new Comparator<AiTile>()
+				{	@Override
+					public int compare(AiTile t1, AiTile t2)
+					{	int d1 = zone.getTileDistance(t1,currentTile);
+						int d2 = zone.getTileDistance(t2,currentTile);
+						int result = d2 - d1; // ordre inverse
+						return result;
+					}
+				});
+				if(!tiles.isEmpty())
+				{	tile = tiles.get(0);
+					result.add(tile);
 				}
 			}
+			catch (LimitReachedException e)
+			{	//e.printStackTrace();
+			}		
 			
-			// si aucun voisin n'est accessible (!?) on prend la case courante
+			// on prend un voisin direct
+//			List<AiTile> neighbors = new ArrayList<AiTile>(currentTile.getNeighbors());
+//			Collections.shuffle(neighbors);
+//			Iterator<AiTile> it = neighbors.iterator();
+//			while(result.isEmpty() && it.hasNext())
+//			{	ai.checkInterruption();	
+//				
+//				AiTile neighbor = it.next();
+//				if(neighbor.isCrossableBy(ownHero))
+//				{	result.add(neighbor);
+//					tile = neighbor;
+//				}
+//			}
+			
+			// si aucune case n'est accessible (!?) on prend la case courante
 			if(result.isEmpty())
 			{	result.add(currentTile);
 				tile = currentTile;
