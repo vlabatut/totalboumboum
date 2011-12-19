@@ -28,16 +28,8 @@
 
  	<rounds randomOrder="false" >
   		<round local="true" name="round1" />
-  		<round local="true" name="round1" />
-  		<round local="true" name="round1" />
-  		<round local="true" name="round2" />
-  		<round local="true" name="round2" />
   		<round local="true" name="round2" />
   		<round local="true" name="round3" />
-  		<round local="true" name="round3" />
-  		<round local="true" name="round3" />
-  		<round local="true" name="round4" />
-  		<round local="true" name="round4" />
   		<round local="true" name="round4" />
   	</rounds>
 	
