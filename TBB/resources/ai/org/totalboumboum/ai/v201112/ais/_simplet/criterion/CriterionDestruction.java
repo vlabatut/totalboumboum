@@ -32,9 +32,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 /**
  * Cette classe représente le critère de destruction.
  * Il est entier : la valeur comprise entre 0 et {@value #DESTRUCTION_LIMIT} représente
- * le nombre de murs qu'une bombe posée dans la case concernée
- * détruirait.
- * 
+ * le nombre de murs qu'une bombe posée dans la case concernée détruirait.
  * 
  * @author Vincent Labatut
  */

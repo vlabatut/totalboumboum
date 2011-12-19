@@ -272,6 +272,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 if(!tiles.isEmpty())
 {	currentDestination = tiles.get(0);
 	bombDestination = bombTiles.get(currentDestination);
+	goOn = false;
 }
 				print("        currentDestination="+currentDestination+" bombDestination="+bombDestination);
 			}

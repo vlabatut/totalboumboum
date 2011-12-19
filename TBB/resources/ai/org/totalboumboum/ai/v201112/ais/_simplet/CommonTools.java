@@ -114,6 +114,7 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 		AiFire fire = hero.getBombPrototype().getFirePrototype();
 		
 		// on ne teste pas la case de la cible, on la considère comme ok
+		result.add(center);
 		
 		// par contre, on teste celles situées à porté de bombes
 		for(Direction d: Direction.getPrimaryValues())
