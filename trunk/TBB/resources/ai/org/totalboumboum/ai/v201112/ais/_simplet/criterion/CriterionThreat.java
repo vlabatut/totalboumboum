@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
- * Cette classe représente le critère de menace envers m'adversaire.
+ * Cette classe représente le critère de menace envers l'adversaire.
  * Il est entier : la valeur comprise entre 0 et {@value #THREAT_LIMIT}
  * représente la distance entre la case et la cible.
  * 
