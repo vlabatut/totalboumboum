@@ -65,36 +65,43 @@ public class BombHandler extends AiBombHandler<Simplet>
 	{	ai.checkInterruption();
 		
 		// à noter qu'il est peut-être préférable de tester si on peut poser 
-		// une bombe même quand on n'est pas arrivé à destination...
+		// une bombe même quand on n'est pas arrivé à destination (là on se
+		// contente de poser une bombe quand on est sur l'objectif sélectionné
+		// sur les valeurs d'utilité.
 		
 		boolean result = false;
 		AiTile currentTile = ownHero.getTile();
 
-		// on vérifie si c'est possible de poser une bombe dans cette case
-		AiBomb bomb = ownHero.getBombPrototype();
-		boolean bombAbsence = currentTile.isCrossableBy(bomb);
-		print("    bombAbsence="+bombAbsence);
-		if(bombAbsence)
-		{	// on pose une bombe si on est arrivé à destination, et que l'objectif était de bomber
-			AiTile currentDestination = ai.moveHandler.getCurrentDestination();
-			Boolean bombDestination = ai.moveHandler.bombDestination;
-			boolean bombPrimaryDestination = currentTile.equals(currentDestination) 
-				&& bombDestination;
-			print("      bombPrimaryDestination="+bombPrimaryDestination);
-			
-			// ou doit bomber un objectif secondaire
-			boolean secondaryBombing = ai.moveHandler.secondaryBombing;
-			print("      secondaryBombing="+secondaryBombing);
-			
-			// et si poser une bombe ne nous met pas en danger
-			boolean canBomb = true;
-			
-			if(canBomb && (bombPrimaryDestination || secondaryBombing))
-			{	// on pourrait tester si l'agent ne vas pas se bloquer/tuer
-				result = true;
-				// on réinitialise l'éventuel chemin de fuite présent dans le gestionnaire de 
-				// déplacement, car le fait de poser une bombe change tout calcul précédent.
-				ai.moveHandler.safeDestination = null;
+		// on vérifie si on peut au moins poser une bombe
+		int bombNumberCurrent = ownHero.getBombNumberCurrent();
+		int bombNumberMax = ownHero.getBombNumberMax();
+		if(bombNumberCurrent<bombNumberMax)
+		{	// on vérifie si c'est possible de poser une bombe dans cette case
+			AiBomb bomb = ownHero.getBombPrototype();
+			boolean bombAbsence = currentTile.isCrossableBy(bomb);
+			print("    bombAbsence="+bombAbsence);
+			if(bombAbsence)
+			{	// on pose une bombe si on est arrivé à destination, et que l'objectif était de bomber
+				AiTile currentDestination = ai.moveHandler.getCurrentDestination();
+				Boolean bombDestination = ai.moveHandler.bombDestination;
+				boolean bombPrimaryDestination = currentTile.equals(currentDestination) 
+					&& bombDestination;
+				print("      bombPrimaryDestination="+bombPrimaryDestination);
+				
+				// ou doit bomber un objectif secondaire
+				boolean secondaryBombing = ai.moveHandler.secondaryBombing;
+				print("      secondaryBombing="+secondaryBombing);
+				
+				// et si poser une bombe ne nous met pas en danger (pas implémenté)
+				boolean canBomb = true;
+				
+				if(canBomb && (bombPrimaryDestination || secondaryBombing))
+				{	// on pourrait tester si l'agent ne vas pas se bloquer/tuer
+					result = true;
+					// on réinitialise l'éventuel chemin de fuite présent dans le gestionnaire de 
+					// déplacement, car le fait de poser une bombe change tout calcul précédent.
+					ai.moveHandler.safeDestination = null;
+				}
 			}
 		}
 	
