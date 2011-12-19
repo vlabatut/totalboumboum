@@ -4,7 +4,7 @@
 	<tournament name="Trnmt201112_qualif" />
 	<players>
 		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
