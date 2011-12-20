@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/game_quickmatch.xsd">
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="17" time="0" />
+		<limits points="0" rounds="11" time="0" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -15,9 +15,9 @@
 	</settings>
 	<players>
 		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="6a64cee4-173c-41c7-a6e4-e00434ca73f8" color="RED" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="cae2cc16-dddb-479b-a022-412de414ef0f" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="b55b4e19-cc7c-4f79-8444-dfb774317119" color="INDIGO" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="9bed4abd-b956-4bf1-bf01-42d490d26dce" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tournament201112" folder="classic" allowedPlayers="0 2 3 4 5" />
