@@ -1511,7 +1511,6 @@ public class Launcher
 	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
 	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM1 & SBM2 
 	//	>> à ripper et vérifier pr les autres versions
-	// TODO gérer le tie-break du dernier tournoi
 	// TODO faire disparaitre progressivement les sprites à la fin du burning (niveau d'alpha ? cf items thème TBB)
 	//		>> en fait y a pas de gestion dynamique de l'alpha...
 	// TODO utiliser des chemins relatifs à la racine du sprite éviterait toutes les complications liées au nommage d'images/ombres
