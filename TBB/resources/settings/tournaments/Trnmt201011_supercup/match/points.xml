@@ -6,7 +6,7 @@
 	<notes>
 		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
 		<line value="Ce rang dépend de la somme des points marqués à chaque manche."/>
-		<line value="Les scores sont considérés comme critères secondaires."/>
+		<line value="Le nombre de joueurs éliminés est considéré comme le critère secondaire pour départager les ex-aequo."/>
 	</notes>
 
 	<rankpoints exaequoShare="true">
