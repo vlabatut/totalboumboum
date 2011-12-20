@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Qualification du tournoi 2011/12" type="SINGLE" />
-	<played matches="0" rounds="3" />
-	<dates start="2011-12-19T23:03:05" save="2011-12-19T23:05:15" />
+	<tournament name="Tournoi de Galatasaray V" type="CUP" />
+	<played matches="3" rounds="6" />
+	<dates start="2011-12-20T22:47:29" save="2011-12-20T23:08:23" />
 	<players>
 		<player name="Simplet" />
-		<player name="Suiveur" />
+		<player name="1011.Büyüktopaç+Turak" />
+		<player name="0708.Demirkol+Doğan" />
+		<player name="0708.Çamaş+Demirbaş" />
+		<player name="0809.Devecioğlu+Korkmaz" />
+		<player name="0910.Dane+Şatır" />
+		<player name="0809.Demirağ+Şagar" />
+		<player name="0708.Göksay+Köse" />
 	</players>
 </archive>
 
