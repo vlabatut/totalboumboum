@@ -14,7 +14,10 @@
 			<total />
 			<subtraction>
 				<scores type="BOMBINGS"/>
-				<scores type="BOMBEDS"/>			
+				<addition>
+					<scores type="BOMBEDS"/>
+					<scores type="SELF_BOMBINGS"/>			
+				</addition>
 			</subtraction>
 		</rankings>
 		<values>
