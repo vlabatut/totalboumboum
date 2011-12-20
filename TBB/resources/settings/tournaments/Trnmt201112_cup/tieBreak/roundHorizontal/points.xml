@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../../schemas/point.xsd">
+	
+	<notes>
+		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
+		<line value="Ce rang dépend du temps passé en jeu et des nombres de bombage effectués et subis." />
+	</notes>
+
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<scores type="TIME" />
+			<subtraction>
+				<scores type="BOMBINGS"/>
+				<scores type="BOMBEDS"/>			
+			</subtraction>
+			<scores type="ITEMS"/>
+			<scores type="BOMBS"/>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
+		
+</points>
