@@ -13,10 +13,7 @@
 			<scores type="TIME" />
 			<subtraction>
 				<scores type="BOMBINGS"/>
-				<addition>
-					<scores type="BOMBEDS"/>
-					<scores type="SELF_BOMBINGS"/>			
-				</addition>
+				<scores type="SELF_BOMBINGS"/>			
 			</subtraction>
 		</rankings>
 		<values>
