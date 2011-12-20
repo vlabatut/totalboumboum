@@ -9,6 +9,7 @@
 			<xsd:enumeration value="ITEMS" />
 			<xsd:enumeration value="BOMBINGS" />
 			<xsd:enumeration value="PAINTINGS" />
+			<xsd:enumeration value="SELF_BOMBINGS" />
 			<xsd:enumeration value="TIME" />
 		</xsd:restriction>
 	</xsd:simpleType>
