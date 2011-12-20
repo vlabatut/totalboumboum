@@ -5,7 +5,7 @@
 	
 	<notes>
 		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
-		<line value="Ce rang dépend du nombre de joueurs explosés." />
+		<line value="Ce rang dépend du temps passé en jeu et du nombre de joueurs explosés." />
 	</notes>
 
 	<rankpoints exaequoShare="true">
