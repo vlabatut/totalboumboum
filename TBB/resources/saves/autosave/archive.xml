@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
 	<tournament name="Tournoi de Galatasaray V" type="CUP" />
 	<played matches="4" rounds="7" />
-	<dates start="2011-12-20T22:47:29" save="2011-12-20T23:09:02" />
+	<dates start="2011-12-22T17:42:18" save="2011-12-22T18:05:09" />
 	<players>
 		<player name="Simplet" />
-		<player name="1011.Büyüktopaç+Turak" />
-		<player name="0708.Demirkol+Doğan" />
-		<player name="0708.Çamaş+Demirbaş" />
+		<player name="1011.Kesimal+Varol" />
+		<player name="1112.Coşkun+Özdemir" />
+		<player name="1011.Kaya+Yerinde" />
+		<player name="0809.Altay+Basaranoğlu" />
+		<player name="0809.Erişik+Pektaş" />
+		<player name="0910.Doruk+Küpelioğlu" />
 		<player name="0809.Devecioğlu+Korkmaz" />
-		<player name="0910.Dane+Şatır" />
-		<player name="0809.Demirağ+Şagar" />
-		<player name="0708.Göksay+Köse" />
 	</players>
 </archive>
 

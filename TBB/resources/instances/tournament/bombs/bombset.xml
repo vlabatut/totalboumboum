@@ -25,13 +25,12 @@
 			</ability>
 		</bomb>
 -->
-<!--		
 		<bomb name="remotecontrol" folder="remotecontrol" >
 			<ability >
 				<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
 			</ability>
 		</bomb>
--->		
+
 		<bomb name="normal" folder="normal" />
 	</concreteBombs>
 	
