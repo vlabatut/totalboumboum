@@ -302,7 +302,7 @@ public class RankingService implements Serializable {
                 while (teamMemberIds.hasNext()) {
                 	String teamMemberId = teamMemberIds.next();
 
-                    // NOTE added by Vincent to keep track of the rounds played since last update
+                    // TODO added by Vincent to keep track of the rounds played since last update
                 	{	PlayerRating playerRating = getPlayerRating(teamMemberId);
                 		playerRating.incrementRoundcount();
                 	}
@@ -337,7 +337,7 @@ public class RankingService implements Serializable {
             while (playerIds.hasNext()) {
             	String playerId = playerIds.next();
             	
-            	// NOTE added by Vincent to keep track of the rounds played since last update
+            	// TODO added by Vincent to keep track of the rounds played since last update
             	{	PlayerRating playerRating = getPlayerRating(playerId);
             		playerRating.incrementRoundcount();
             	}
@@ -411,16 +411,19 @@ public class RankingService implements Serializable {
         while (playerIds.hasNext()) {
             
         	String playerId = playerIds.next();
+//if(playerId.equals("227b2e4d-bd7b-4153-962b-699bc909e5e1"))
+//	System.out.print("");
             PlayerRating prePeriodPlayerRating = (PlayerRating)prePeriodRatings.get(playerId);
             
-        	// NOTE added by Vincent to keep track of the rounds played since last update
+        	// TODO added by Vincent to keep track of the rounds played since last update
             prePeriodPlayerRating.reinitRoundcount();
-            
             
             // Convert the ratings and RDs onto the Glicko-2 scale.
             double rating = prePeriodPlayerRating.getGlicko2Rating();
             double ratingDeviation = prePeriodPlayerRating.getGlicko2RatingDeviation();
             double ratingVolatility = prePeriodPlayerRating.getRatingVolatility();
+            if(ratingVolatility==0) // TODO added by Vincent to avoid a zero volatility
+            	ratingVolatility = 0.01;
             
             double postPeriodRating = rating;  
             double postPeriodRatingDeviation = ratingDeviation;
@@ -472,6 +475,7 @@ public class RankingService implements Serializable {
                 // Determine the new value of the volatility using iteration.
                 double t = ratingDeviation;
                 double s = ratingVolatility;
+System.out.println(playerId+": "+s);                
                 double v = variance;
                 double D = improvement;
                 double a = Math.log(s*s);
