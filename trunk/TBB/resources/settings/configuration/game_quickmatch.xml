@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/game_quickmatch.xsd">
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="11" time="0" />
+		<limits points="0" rounds="13" time="0" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -15,22 +15,13 @@
 	</settings>
 	<players>
 		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="b55b4e19-cc7c-4f79-8444-dfb774317119" color="INDIGO" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="9bed4abd-b956-4bf1-bf01-42d490d26dce" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="tournament201112" folder="classic" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="carrefour" allowedPlayers="0 2 3 4" />
-		<level pack="tournament201112" folder="croix" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201112" folder="entrance" allowedPlayers="0 2 3 4 5 6" />
-		<level pack="tournament201112" folder="horizontal" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201112" folder="items" allowedPlayers="0 2 3 4 5 6" />
-		<level pack="tournament201112" folder="limitsiz" allowedPlayers="0 2 3 4" />
-		<level pack="tournament201112" folder="line" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="pasaj" allowedPlayers="0 2 3 4 5 6" />
-		<level pack="tournament201112" folder="power" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="readysetgo" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="bombfest" allowedPlayers="0 2 3 4" />
+		<level pack="tournament201112" folder="hurry" allowedPlayers="0 2 3 4" />
 	</levels>
 </gameQuickmatch>
 
