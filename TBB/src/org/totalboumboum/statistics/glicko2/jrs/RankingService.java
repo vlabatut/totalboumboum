@@ -475,7 +475,7 @@ public class RankingService implements Serializable {
                 // Determine the new value of the volatility using iteration.
                 double t = ratingDeviation;
                 double s = ratingVolatility;
-System.out.println(playerId+": "+s);                
+//System.out.println(playerId+": "+s);                
                 double v = variance;
                 double D = improvement;
                 double a = Math.log(s*s);
