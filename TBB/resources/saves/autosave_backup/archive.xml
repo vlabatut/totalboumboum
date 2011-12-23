@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournoi de Galatasaray V" type="CUP" />
-	<played matches="2" rounds="1" />
-	<dates start="2011-12-22T22:51:50" save="2011-12-22T22:56:41" />
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
+	<tournament name="Coupe de test" type="CUP" />
+	<played matches="9" rounds="5" />
+	<dates start="2011-12-23T17:54:37" save="2011-12-23T18:59:36" />
 	<players>
+		<player name="0809.Erişik+Pektaş" />
+		<player name="0910.Çalışır+Güner" />
+		<player name="0809.Tırtıl+Tomruk" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="0910.Aldanmaz+Yenigün" />
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+		<player name="1011.Büyüktopaç+Turak" />
+		<player name="0809.Devecioğlu+Korkmaz" />
+		<player name="1011.Arık+Yaman" />
+		<player name="1011.Hacıbektaşoğlu+İlgar" />
 		<player name="0809.Dayioğlugil+Geçkalan" />
-		<player name="1011.Göncü+Onat" />
-		<player name="1011.Kayuka+Yıldırım" />
-		<player name="0910.Aksoy+Tangay" />
-		<player name="0910.Bektaş+Mazilyah" />
-		<player name="1011.Avcı+Güngör" />
-		<player name="0809.Demirağ+Şagar" />
-		<player name="0809.Medeni+Uluer" />
+		<player name="0809.Günalp+Yürtsever" />
+		<player name="0910.Adatape+Özbek" />
+		<player name="0910.Mançuhan+Pınarer" />
+		<player name="0910.Enhoş+Karapazar" />
 	</players>
 </archive>
 
