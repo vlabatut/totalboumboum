@@ -471,13 +471,20 @@
 	- IA :
 		- modèle allégé de simulation
 		- extension de A* considérant le temps
+		- implémentation de l'algo de Dijkstra
+		- nouvelles fonctions permettant une approximation à travers les obstacles
 		- précision de l'algorithme général
 		- systématisation de la sortie texte
 		- systématisation de la mesure du temps pour les appels de méthodes
 		- systématisation de la sortie graphique
 		- système de cas/critères/combinaisons pour le calcul d'utilité
+		- affichage de toutes les combinaisons définies, avec leur valeur d'utilité
+		- nouvelle IA de test : Simplet
+		- possibilité de tester l'agent hors-ligne
 	- stats :
+	- ressources :
+		- thèmes SBM1 arena, circles, hal, power, speed & warp
+		- tous les niveaux des modes histoire et arène
 	- Divers :
 		- nouveau thème pour le tournoi 5
-21.2 :
-	- affichage de toutes les combinaisons définies, avec leur valeur d'utilité
+		- nouveau tournoi pour la 5ème édition
