@@ -327,6 +327,8 @@ public class Launcher
 	/*
 	 * TODO PARAMETRES MEMOIRE
 	 * -Xms32m -Xmx512m
+	 * sous Linux, pour eviter les problemes avec le garbage collector :
+	 * -XX:-UseConcMarkSweepGC
 	 */
 	
 	/* TODO conseils david :
