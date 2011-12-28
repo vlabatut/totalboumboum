@@ -5,7 +5,7 @@
 # it should work on most Linux, Unix, and Mac OS systems.
 # It launches TBB with the appropriate parameters.
 #
-# v.0.2
+# v.0.3
 #
 # -------------------------------------------------------------------
 #
@@ -29,16 +29,21 @@
 # 
 # -------------------------------------------------------------------
 #
+# change current directory
+	current=$(readlink -f "$0")
+	path=`dirname "$current"`
+	cd ${path}
+#
 # define path variables
 	ai="./resources/ai"
 	bin="./bin"
 	jdom="./resources/lib/jdom.jar"
 	japa="./resources/lib/javaparser-1.0.7.jar"
 	cp="${bin}:${jdom}:${japa}:${ai}"
-	launcher="fr.free.totalboumboum.Launcher"
+	launcher="org.totalboumboum.Launcher"
 #
 # launch the game
-	java -Xmx256m -classpath $cp $launcher quick
+	java -Xmx256m -XX:-UseConcMarkSweepGC -classpath $cp $launcher quick
 #
 #
 

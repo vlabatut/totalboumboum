@@ -5,7 +5,7 @@
 # it should work on most Linux, Unix, and Mac OS systems.
 # It launches TBB with the appropriate parameters.
 #
-# v.0.2
+# v.0.3
 #
 # -------------------------------------------------------------------
 #
@@ -29,6 +29,11 @@
 # 
 # -------------------------------------------------------------------
 #
+# change current directory
+	current=$(readlink -f "$0")
+	path=`dirname "$current"`
+	cd ${path}
+#
 # define path variables
 	ai="./resources/ai"
 	bin="./bin"
@@ -39,7 +44,7 @@
 	splash="./resources/gui/images/splash.png"
 #
 # launch the game
-	java -Xmx256m -splash:$splash -classpath $cp $launcher
+	java -Xmx256m -splash:$splash -XX:-UseConcMarkSweepGC -classpath $cp $launcher
 #
 #
 
