@@ -4,7 +4,7 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="13" time="0" />
+		<limits points="0" rounds="13" time="60000" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -21,7 +21,18 @@
 	</players>
 	<levels>
 		<level pack="tournament201112" folder="bombfest" allowedPlayers="0 2 3 4" />
+		<level pack="tournament201112" folder="carrefour" allowedPlayers="0 2 3 4" />
+		<level pack="tournament201112" folder="classic" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="croix" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
+		<level pack="tournament201112" folder="entrance" allowedPlayers="0 2 3 4 5 6" />
+		<level pack="tournament201112" folder="horizontal" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
 		<level pack="tournament201112" folder="hurry" allowedPlayers="0 2 3 4" />
+		<level pack="tournament201112" folder="items" allowedPlayers="0 2 3 4 5 6" />
+		<level pack="tournament201112" folder="limitsiz" allowedPlayers="0 2 3 4" />
+		<level pack="tournament201112" folder="line" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="pasaj" allowedPlayers="0 2 3 4 5 6" />
+		<level pack="tournament201112" folder="power" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="readysetgo" allowedPlayers="0 2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 

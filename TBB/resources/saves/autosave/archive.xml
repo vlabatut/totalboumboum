@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="9" rounds="1" />
-	<dates start="2011-12-23T17:54:37" save="2011-12-23T19:00:20" />
+	<played matches="1" rounds="4" />
+	<dates start="2011-12-27T17:13:03" save="2011-12-28T10:22:19" />
 	<players>
 		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Çalışır+Güner" />
-		<player name="0809.Tırtıl+Tomruk" />
-		<player name="1011.İsbir+Koyaş" />
-		<player name="0910.Aldanmaz+Yenigün" />
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="1011.Göçmenoğlu+Hekimoğlu" />
-		<player name="1011.Büyüktopaç+Turak" />
-		<player name="0809.Devecioğlu+Korkmaz" />
 		<player name="1011.Arık+Yaman" />
-		<player name="1011.Hacıbektaşoğlu+İlgar" />
-		<player name="0809.Dayioğlugil+Geçkalan" />
-		<player name="0809.Günalp+Yürtsever" />
+		<player name="0708.Demirkol+Doğan" />
+		<player name="0910.Dane+Şatır" />
+		<player name="Simplet" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="0708.Keçer+Yaman" />
+		<player name="1011.Kayuka+Yıldırım" />
 		<player name="0910.Adatape+Özbek" />
-		<player name="0910.Mançuhan+Pınarer" />
+		<player name="1011.Kantarcı+Taşkın" />
+		<player name="0708.Şahin+Yıldırım" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="0910.Demirci+Düzok+Ergök" />
 		<player name="0910.Enhoş+Karapazar" />
+		<player name="0708.Çamaş+Demirbaş" />
+		<player name="0809.Medeni+Uluer" />
 	</players>
 </archive>
 
