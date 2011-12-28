@@ -58,8 +58,8 @@ public class ParseAi
  	});
 	
 	public static void main(String[] args) throws IOException, ParseException
-	{	String aiPack = "resources/ai/org/totalboumboum/ai/v201112/ais";
-		//String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201112/ais";
+	{	//String aiPack = "resources/ai/org/totalboumboum/ai/v201112/ais";
+		String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201112/ais";
 		parseAiPack(aiPack);
 	}
 	
