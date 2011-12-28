@@ -5,7 +5,7 @@
 # it should work on most Linux, Unix, and Mac OS systems.
 # It (re)compiles the whole TBB game and the dependant AI classes.
 #
-# v.0.4
+# v.0.5
 #
 # -------------------------------------------------------------------
 #
@@ -28,6 +28,11 @@
 # along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
 # 
 # -------------------------------------------------------------------
+#
+# change current directory
+	current=$(readlink -f "$0")
+	path=`dirname "$current"`
+	cd ${path}
 #
 # define path variables
 	main="./src/org/totalboumboum"
