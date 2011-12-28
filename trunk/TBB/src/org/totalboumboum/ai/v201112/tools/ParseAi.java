@@ -36,33 +36,62 @@ import org.totalboumboum.tools.files.FileNames;
 /**
  * cette méthode parse les codes sources définissant un agent et vérifie
  * que les appels à checkInterruption sont effectués correctement.
- * 
- * La liste IGNORED_PACKAGES permet, comme son nom l'indique, de spécifier
+ * <br/>
+ * La liste {@link #IGNORED_PACKAGES} permet, comme son nom l'indique, de spécifier
  * des packages que le parser devra ignorer dans le dossier principal de l'agent.
- * 
- * Dans la fonction main, la chaine de caractères aiPack représente le chemin 
+ * <br/>
+ * Dans la fonction {@link #main(String[])}, la chaine de caractères {@code aiPack} représente le chemin 
  * du dossier contenant l'agent (ou les agents).
  * 
  * @author Vincent Labatut
  */
 public class ParseAi
-{	private static boolean verbose = false;
+{	/** Active/désactive la sortie texte */
+	private static boolean verbose = false;
+	/** Liste des versions à ignorer */
 	private final static List<String> IGNORED_PACKAGES = Arrays.asList(new String[]
  	{	
 		"v0",
-//		"v1","v1_1","v1_2","v1_3",
+		"v1","v1_1","v1_2","v1_3",
 // 		"v2","v2_1","v2_2","v2_3",
 // 		"v3","v3_1","v3_2","v3_3",
 // 		"v4","v4_1","v4_2","v4_3",
 // 		"v5","v5_1"
  	});
 	
+	/**
+	 * Programme principal.
+	 * Ne prend pas de paramètres.
+	 * @param args
+	 * 		Rien du tout.
+	 * 
+	 * @throws ParseException
+	 * 		Erreur en analysant un des fichiers source.
+	 * @throws IOException
+	 * 		Erreur en ouvrant un des fichiers source.
+	 */
 	public static void main(String[] args) throws IOException, ParseException
-	{	//String aiPack = "resources/ai/org/totalboumboum/ai/v201112/ais";
+	{	// on définit le chemin du pack à analyser
+		//String aiPack = "resources/ai/org/totalboumboum/ai/v201112/ais";
 		String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201112/ais";
+		
+		// on lance l'analyse
 		parseAiPack(aiPack);
 	}
 	
+	/**
+	 * Analyse un fichier source.
+	 * 
+	 * @param file
+	 * 		Objet représentant le fichier source à analyser.
+	 * @param level
+	 * 		Niveau hiérarchique dans l'arbre d'appels.
+	 * 
+	 * @throws ParseException
+	 * 		Erreur en analysant un des fichiers source.
+	 * @throws IOException
+	 * 		Erreur en ouvrant un des fichiers source.
+	 */
 	private static void parseFile(File file, int level) throws ParseException, IOException
 	{	for(int i=0;i<level;i++)
 			System.out.print("..");
@@ -91,6 +120,21 @@ public class ParseAi
         }
 	}
 	
+	/**
+	 * Analyse le contenu d'un dossier
+	 * Le traitement est récursif si le dossier
+	 * contient lui-même d'autres dossiers.
+	 * 
+	 * @param folder
+	 * 		
+	 * @param level
+	 * 		Objet représentant le dossier source à analyser.
+	 * 
+	 * @throws ParseException
+	 * 		Erreur en analysant un des fichiers source.
+	 * @throws IOException
+	 * 		Erreur en ouvrant un des fichiers source.
+	 */
 	private static void parseFolder(File folder, int level) throws ParseException, IOException
 	{	if(IGNORED_PACKAGES.contains(folder.getName()))
 			System.out.println("Paquetage "+folder.getPath()+" ignoré");
@@ -115,10 +159,33 @@ public class ParseAi
 		}
 	}
 
+	/**
+	 * Analyse un package correspondant à un agent.
+	 * 
+	 * @param aiPath
+	 * 		Le chemin du package à analyser.
+	 * 
+	 * @throws ParseException
+	 * 		Erreur en analysant un des fichiers source.
+	 * @throws IOException
+	 * 		Erreur en ouvrant un des fichiers source.
+	 */
 	public static void parseAi(String aiPath) throws ParseException, IOException
 	{	File aiFolder = new File(aiPath);
 		parseAi(aiFolder);
 	}
+	
+	/**
+	 * Analyse un package correspondant à un agent.
+	 * 
+	 * @param aiFolder
+	 * 		Un objet représentant le package à analyser.
+	 * 
+	 * @throws ParseException
+	 * 		Erreur en analysant un des fichiers source.
+	 * @throws IOException
+	 * 		Erreur en ouvrant un des fichiers source.
+	 */
 	private static void parseAi(File aiFolder) throws ParseException, IOException
 	{	System.out.println("----------------------------------------------------------------------");
 		System.out.println("Analyse de l'AI "+aiFolder.getPath());
@@ -127,6 +194,18 @@ public class ParseAi
 		System.out.print("\n\n");
 	}
 	
+	/**
+	 * Analyse un dossier contenant plusieurs agents
+	 * (un pack).
+	 * 
+	 * @param aiPack
+	 * 		Chemin du dossier à analyser.
+	 * 
+	 * @throws ParseException
+	 * 		Erreur en analysant un des fichiers source.
+	 * @throws IOException
+	 * 		Erreur en ouvrant un des fichiers source.
+	 */
 	public static void parseAiPack(String aiPack) throws ParseException, IOException
 	{	File folder = new File(aiPack);
 		File[] files = folder.listFiles();
