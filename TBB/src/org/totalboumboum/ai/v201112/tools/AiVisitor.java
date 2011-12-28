@@ -24,6 +24,8 @@ package org.totalboumboum.ai.v201112.tools;
 import java.util.Arrays;
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
+
 import japa.parser.ast.TypeParameter;
 import japa.parser.ast.body.BodyDeclaration;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
@@ -50,7 +52,18 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 /**
  * cette méthode parse les codes sources définissant un agent et vérifie
- * que les appels à checkInterruption sont effectués correctement, c'est à dire :
+ * que les appels à {@code checkInterruption()} sont effectués correctement, c'est à dire :
+ *  <ul><li>un appel à chaque début de boucle ({@code for}, {@code while}, {@code do})</li>
+ * 		<li>un appel à chaque début de méthode, sauf :
+ * 			<ul><li>dans un constructeur :
+ * 				<ul><li>en cas d'appel à super() : {@code checkInterruption()} est appelé en deuxième (et non pas en premier)</li>
+ * 					<li>dans une classe implémentant l'interface {@link ArtificialIntelligence}</li>
+ * 				</ul>
+ * 				<li>dans une méthode dont on ne contrôle pas la signature (du type {@code toString}, {code equals}, {@code compare}, etc.)</li>
+ * 			</ul>
+ * 		<li>l'appel ne doit pas être placé dans un {@code try-catch} qui annulerait son effet</li>
+ * 	</ul>
+ * 
  * 	- un appel à chaque début de boucle (for, while, do)
  * 	- un appel à chaque début de méthode, sauf :
  * 		- dans un constructeur :
@@ -63,7 +76,12 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
  */
 public class AiVisitor extends VoidVisitorAdapter<Object>
 {	
-
+	/**
+	 * Crée un visiteur
+	 * 
+	 * @param initLevel
+	 * 		Niveau dans l'arbre des appels.
+	 */
 	public AiVisitor(int initLevel)
 	{	indentLevel = initLevel;		
 	}
@@ -71,14 +89,18 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// MISC	CONSTANTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Classe principale des agents */
 	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
+	/** Méthode recherchée */
 	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
+	/** Méthodes ignorées lors de l'analyse */
 	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
 	{	"AiMain",			
 		"compare",
 		"equals",
 		"toString"
 	});
+	/** Exceptions à ne pas couvrir dans un bloc {@code try-catch} */
 	private final static List<String> FORBIDDEN_EXCEPTIONS = Arrays.asList(new String[]
  	{	"Exception",			
  		"StopRequestException"
@@ -87,15 +109,26 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// MISC VARIABLES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Méthode courante */
 	private String currentMethod = null;
+	/** Niveau hiérarchique courant */
 	private int indentLevel;
+	/** La méthode courante est un constructeur */
 	private boolean checkConstructor;
 	
 	/////////////////////////////////////////////////////////////////
 	// ERROR COUNT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Décompte des erreurs relevées */
 	private int errorCount = 0;
 	
+	/**
+	 * Renvoie le nombre total d'erreurs
+	 * relevées lors de l'analyse.
+	 * 
+	 * @return
+	 * 		Le nombre d'erreurs identifiées.
+	 */
 	public int getErrorCount()
 	{	return errorCount;	
 	}
@@ -174,8 +207,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
     {	String prevMethod = currentMethod;
     	currentMethod = n.getName();
     	indentLevel++;
-if(currentMethod.equals("PathFinder"))
-	System.out.println();
+    	
     	if (n.getJavaDoc() != null)
     	{	n.getJavaDoc().accept(this, arg);
         }
@@ -243,8 +275,6 @@ if(currentMethod.equals("PathFinder"))
         }
         if(n.getBody() != null)
         {	BlockStmt block = n.getBody();
-//if(name.equals("getZoneArray"))
-//	System.out.println();
         	for(int i=0;i<indentLevel;i++)
 				System.out.print("..");
         	System.out.println("Analyse de la méthode "+currentMethod);
@@ -302,6 +332,12 @@ if(currentMethod.equals("PathFinder"))
 		statement.accept(this, arg);
     }
 
+	/**
+	 * Analyse d'un bloc de code source.
+	 * 
+	 * @param statement
+	 * 		Le bloc à analyser
+	 */
 	private void checkBlock(Statement statement)
 	{	if(!IGNORED_METHODS.contains(currentMethod))
 		{	int line = statement.getBeginLine();
