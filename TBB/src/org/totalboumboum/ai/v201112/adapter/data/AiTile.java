@@ -295,7 +295,7 @@ public abstract class AiTile implements Comparable<AiTile>
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append("("+row+";"+col+")");
+		result.append("("+row+";"+col+" - "+posX+";"+posY+")");
 		return result.toString();
 	}
 }
