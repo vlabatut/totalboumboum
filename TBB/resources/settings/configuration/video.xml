@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <video xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/video.xsd">
-	<fullScreen value="true" />
+	<fullScreen value="false" />
 	<smoothGraphics value="true" />
 	<panelDimension width="800" height="600" />
 	<border value="black" />
