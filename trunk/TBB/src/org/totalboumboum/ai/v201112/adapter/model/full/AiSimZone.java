@@ -894,8 +894,10 @@ public final class AiSimZone extends AiZone
 	 * 		La case de la zone devant contenir le sprite.
 	 * @param range
 	 * 		La portée de la bombe à créer.
+	 * @param elapsedTime
+	 * 		Le temps écoulé depuis que la bombe a été posée.
 	 */
-	public AiSimBomb createBomb(AiTile tile, int range)
+	public AiSimBomb createBomb(AiTile tile, int range, long elapsedTime)
 	{	// location
 		int row = 0;
 		int col = 0;
@@ -922,14 +924,14 @@ public final class AiSimZone extends AiZone
 		long burningDuration = 100;
 		long latencyDuration = 140;
 		long normalDuration = 2400;
-		long time = 0;
+		long time = elapsedTime;
 		boolean penetrating = false;
 		boolean working = true;
 		double currentSpeed = 0;
 		double slidingSpeed = (140*RoundVariables.zoomFactor)/16;
 		AiStopType stopHeroes = AiStopType.WEAK_STOP;
 		AiStopType stopFires = AiStopType.WEAK_STOP;
-		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,elapsedTime);
 		PredefinedColor color = null;
 		int id = createNewId();
 		AiSimBomb bomb = new AiSimBomb(id,t,posX,posY,posZ,

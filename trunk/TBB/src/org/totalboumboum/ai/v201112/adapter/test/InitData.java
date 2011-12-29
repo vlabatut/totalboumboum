@@ -125,6 +125,76 @@ public final class InitData
 	}
 	
 	/**
+	 * Initialise la zone de manière à obtenir le résultat suivant :<br/>
+	 * <pre>
+	 *   0 1 2 3 4 5 6
+	 *  ┌─┬─┬─┬─┬─┬─┬─┐
+	 * 0│█│█│█│█│█│█│█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 1│█│☻│□│ │▒│ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 2│█│ │█│ │█│ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 3│█│ │ │ │ │ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 4│█│ │█│ │█│ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 5│█│ │ │ │ │ │█│
+	 *  ├─┼─┼─┼─┼─┼─┼─┤
+	 * 6│█│█│█│█│█│█│█│
+	 *  └─┴─┴─┴─┴─┴─┴─┘
+	 * </pre>
+	 */
+	public static AiSimZone initZone2()
+	{	// zone
+		AiSimZone zone = new AiSimZone(7,7);
+		int hiddenItemsCount = 1;
+		HashMap<AiItemType, Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
+		hiddenItemsCounts.put(AiItemType.EXTRA_BOMB,1);
+		zone.setHidenItemCount(hiddenItemsCount,hiddenItemsCounts);
+		
+		// hero
+		{	AiSimTile tile = zone.getTile(1,1);
+			int bombRange = 3;
+			int bombNumber = 1;
+			//state = new AiSimState(AiStateName.MOVING,Direction.RIGHT,0);
+			PredefinedColor color = PredefinedColor.WHITE;
+			zone.createHero(tile,color,bombNumber,bombRange,true);
+		}
+
+		// bomb #1
+		{	AiSimTile tile = zone.getTile(1,1);
+			// la bombe va bientôt exploser
+			zone.createBomb(tile,3,2200);
+		}
+
+		// item 1
+		{	AiSimTile tile = zone.getTile(1,2);
+			AiItemType itemType = AiItemType.EXTRA_BOMB;
+			zone.createItem(tile,itemType);
+		}
+		
+		// softwall
+		{	AiSimTile tile = zone.getTile(1,4);
+			boolean destructible = true;
+			zone.createBlock(tile,destructible);
+		}
+		
+		
+		// hardwalls
+		{	boolean destructible = false;
+			int rows[]={0,0,0,0,0,0,0,1,1,2,2,2,2,3,3,4,4,4,4,5,5,6,6,6,6,6,6,6};
+			int cols[]= {0,1,2,3,4,5,6,0,6,0,2,4,6,0,6,0,2,4,6,0,6,0,1,2,3,4,5,6};
+			for(int i=0;i<rows.length;i++)
+			{	AiSimTile tile = zone.getTile(rows[i],cols[i]);
+				zone.createBlock(tile,destructible);
+			}
+		}
+		
+		return zone;
+	}
+	
+	/**
 	 * Construit une fausse IA pour l'exemple
 	 * (nécessaire pour certaines méthodes et classes).
 	 * Vous pouvez bien sûr utilisez la votre à la place.
