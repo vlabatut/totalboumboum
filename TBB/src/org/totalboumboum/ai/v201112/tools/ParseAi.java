@@ -207,7 +207,8 @@ public class ParseAi
 	 * 		Erreur en ouvrant un des fichiers source.
 	 */
 	public static void parseAiPack(String aiPack) throws ParseException, IOException
-	{	File folder = new File(aiPack);
+	{	//System.out.println("Analyse du pack "+aiPack);
+		File folder = new File(aiPack);
 		File[] files = folder.listFiles();
 		for(File file: files)
 		{	if(file.isDirectory())
