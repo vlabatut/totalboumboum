@@ -2,10 +2,10 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Qualification du tournoi 2011/12" type="SINGLE" />
 	<played matches="0" rounds="11" />
-	<dates start="2011-12-29T18:37:56" save="2011-12-29T18:46:53" />
+	<dates start="2011-12-30T14:43:40" save="2011-12-30T14:50:12" />
 	<players>
-		<player name="1112.Güngör+Kavuz" />
-		<player name="Suiveur" />
+		<player name="1112.Bal+Çetin" />
+		<player name="Joueur humain" />
 	</players>
 </archive>
 
