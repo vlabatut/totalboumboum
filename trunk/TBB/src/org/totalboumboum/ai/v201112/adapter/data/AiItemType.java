@@ -56,7 +56,7 @@ public enum AiItemType
 	{	AiItemType result;
 		if(name.equalsIgnoreCase("extrabomb"))
 			result = EXTRA_BOMB;
-		else if(name.equalsIgnoreCase("extraflame"))
+		else if(name.equalsIgnoreCase("extraflame") || name.equalsIgnoreCase("goldenflame"))
 			result = EXTRA_FLAME;
 		else if(name.equalsIgnoreCase("malus") || name.equalsIgnoreCase("disease"))
 			result = MALUS;
