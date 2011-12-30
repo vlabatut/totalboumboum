@@ -13,23 +13,9 @@
 			<value rank="5" points="0" />
 		</points>
 	</settings>
-	<players>
-		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="bf0ed21f-8d7a-4cee-aa27-2d6729ce9940" color="ULTRAMARINE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-	</players>
+	<players />
 	<levels>
-		<level pack="tournament201112" folder="carrefour" allowedPlayers="0 2 3 4" />
-		<level pack="tournament201112" folder="classic" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="croix" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201112" folder="entrance" allowedPlayers="0 2 3 4 5 6" />
-		<level pack="tournament201112" folder="horizontal" allowedPlayers="0 2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201112" folder="hurry" allowedPlayers="0 2 3 4" />
-		<level pack="tournament201112" folder="items" allowedPlayers="0 2 3 4 5 6" />
-		<level pack="tournament201112" folder="limitsiz" allowedPlayers="0 2 3 4" />
-		<level pack="tournament201112" folder="line" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="pasaj" allowedPlayers="0 2 3 4 5 6" />
-		<level pack="tournament201112" folder="power" allowedPlayers="0 2 3 4 5" />
-		<level pack="tournament201112" folder="readysetgo" allowedPlayers="0 2 3 4 5" />
+		<level pack="tournament201112" folder="goldrush" allowedPlayers="0 1 2 3 4 5 6" />
 	</levels>
 </gameQuickmatch>
 

@@ -13,12 +13,18 @@
 	<limits>
 		<confrontation>
 			<points local="true" name="points" />
-			<threshold value="5" />
+			<threshold value="7" />
 		</confrontation>
 	</limits>
  	
- 	<rounds randomOrder="false" >
-  		<round local="true" name="round" />
+ 	<rounds randomOrder="true" >
+  		<round local="true" name="roundClassic" />
+  		<round local="true" name="roundCroix" />
+  		<round local="true" name="roundGoldrush" />
+  		<round local="true" name="roundHorizontal" />
+  		<round local="true" name="roundItems" />
+  		<round local="true" name="roundPower" />
+  		<round local="true" name="roundReadysetgo" />
   	</rounds>
 	
 </match>
