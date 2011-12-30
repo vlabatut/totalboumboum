@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\level.xsd">
+	<title value="Gold Rush" />
+	<author value="Vincent Labatut" />
+	<source value="original" />
+	<preview file="preview.jpg" />
+	<instance name="tournament" />
+	<theme name="tournament5" />
+	<globalDimension height="12" width="13" />
+	<visibleDimension height="12" width="13" />
+	<visiblePosition upLine="0" leftCol="0" />
+	<display forceAll="false" maximize="true" />
+</level>
+
