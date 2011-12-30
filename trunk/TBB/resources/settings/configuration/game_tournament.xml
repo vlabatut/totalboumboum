@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="Trnmt201112_qualif" />
+	<tournament name="Trnmt201112_supercup" />
 	<players>
-		<player file="789afea6-f972-41ce-8cc7-108b34b06ee9" color="BLUE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="dd226be2-5b7a-4017-a415-963b546bb716" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
