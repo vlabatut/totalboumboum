@@ -144,9 +144,9 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 	protected AiHero ownHero = null;
 	/** La case courante */
 	protected AiTile currentTile = null;
-	/** L'objet a* utilisé pour le calcul des chemins directs */
+	/** L'objet A* utilisé pour le calcul des chemins directs */
 	protected Astar astarPrecise = null;
-	/** L'objet a* utilisé pour le calcul des chemins indirects */
+	/** L'objet A* utilisé pour le calcul des chemins indirects */
 	protected Astar astarApproximation = null;
 	/** L'objet dijkstra utilisé pour le calcul des chemins de fuite */
 	protected Dijkstra dijkstra = null;
