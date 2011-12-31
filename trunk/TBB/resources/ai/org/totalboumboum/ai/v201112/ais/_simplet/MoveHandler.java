@@ -325,12 +325,13 @@ if(!tiles.isEmpty())
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		secondaryBombing = false;
+		boolean isThreatened = commonTools.isTileThreatened(currentTile);
 		// on réinitialise le chemin courant
 		currentPath = null;
 		
 		// si on est menacé par une bombe
 		// mais qu'il n'y a pas encore de destination sûre >> on en trouve une
-		if(commonTools.isTileThreatened(currentTile) && safeDestination==null)
+		if(isThreatened && safeDestination==null)
 		{	print("      there's a threat and no safe tile: currentTile="+currentTile+" safeDestination="+safeDestination);
 			
 			// on trouve une destination sûre et le chemin direct qui va avec
