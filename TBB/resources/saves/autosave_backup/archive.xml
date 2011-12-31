@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Qualification du tournoi 2011/12" type="SINGLE" />
-	<played matches="0" rounds="11" />
-	<dates start="2011-12-30T14:43:40" save="2011-12-30T14:50:12" />
+	<tournament name="Super-coupe de Galatasaray IV" type="SINGLE" />
+	<played matches="0" rounds="2" />
+	<dates start="2011-12-31T10:45:09" save="2011-12-31T10:46:13" />
 	<players>
-		<player name="1112.Bal+Çetin" />
-		<player name="Joueur humain" />
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="0809.Erişik+Pektaş" />
+		<player name="0910.Doruk+Küpelioğlu" />
+		<player name="1011.Kesimal+Varol" />
+		<player name="1112.Demirel+Öz" />
 	</players>
 </archive>
 

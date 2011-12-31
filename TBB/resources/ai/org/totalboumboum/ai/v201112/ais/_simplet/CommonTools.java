@@ -34,6 +34,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -91,7 +93,7 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TILES					/////////////////////////////////////
+	// METHODS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Indentifie l'ensemble des cases situées au plus à un rayon
@@ -253,7 +255,7 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 	 * @throws StopRequestException 
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public boolean isTileThreatened(AiTile tile) throws StopRequestException
+/*	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	
 		
 		long crossTime = Math.round(1000*tile.getSize()/currentSpeed);
@@ -268,6 +270,39 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 			// on ne traite que les bombes menaçante : soit pas temporelles, soit
 			// temporelles avec moins de temps restant que pour traverser une case
 			if(!bomb.hasCountdownTrigger() || timeRemaining>crossTime)
+			{	List<AiTile> blast = bomb.getBlast();
+				result = blast.contains(tile);
+			}
+		}
+		return result;
+	}
+*/
+	public boolean isTileThreatened(AiTile tile) throws StopRequestException
+	{	ai.checkInterruption();	
+		
+		// on calcule le temps nécessaire pour se rendre sur la case suivante du chemin
+		AiPath currentPath = ai.moveHandler.getCurrentPath();
+		long totalDuration = -1;
+		if(currentPath!=null && currentPath.getLength()>1)
+		{	long waitDuration = currentPath.getPause(0);
+			AiLocation currentLocation = new AiLocation(ownHero);
+			AiLocation nextLocation = currentPath.getLocation(1);
+			double distance = zone.getPixelDistance(currentLocation,nextLocation);
+			long moveDuration = Math.round(1000*distance/currentSpeed);
+			totalDuration = waitDuration + moveDuration;
+		}
+		
+		boolean result = false; 
+		List<AiBomb> bombs = zone.getBombs();
+		Iterator<AiBomb> it = bombs.iterator();
+		while(!result && it.hasNext())
+		{	ai.checkInterruption();	
+			
+			AiBomb bomb = it.next();
+			long timeRemaining = bomb.getNormalDuration() - bomb.getTime();
+			// on ne traite que les bombes menaçante : soit pas temporelles, soit
+			// temporelles avec moins de temps restant que pour traverser une case
+			if(!bomb.hasCountdownTrigger() || totalDuration<0 || timeRemaining<totalDuration)
 			{	List<AiTile> blast = bomb.getBlast();
 				result = blast.contains(tile);
 			}
