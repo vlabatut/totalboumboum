@@ -13,7 +13,10 @@
 			<value rank="5" points="0" />
 		</points>
 	</settings>
-	<players />
+	<players>
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+	</players>
 	<levels>
 		<level pack="tournament201112" folder="goldrush" allowedPlayers="0 1 2 3 4 5 6" />
 	</levels>
