@@ -102,28 +102,29 @@ public abstract class AiAbstractManager<V>
 		initSteps();
 	}
 		
-   /////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	// EXCEPTIONS LOG	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
+	/** Objet permettant d'accéder à la configuration des IA dans le jeu */
+    private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
 	
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** objet implementant le comportement de l'agent */
+    /** Objet implementant le comportement de l'agent */
 	private Callable<V> ai;
-    /** gestionnaire de threads pour exécuter l'agent */
+    /** Gestionnaire de threads pour exécuter l'agent */
     private ExecutorService executorAi = null;
-    /** future utilisé pour récupérer le résultat de l'agent */
+    /** Future utilisé pour récupérer le résultat de l'agent */
     private Future<V> futureAi = null;
-    /** indique si cet agent était en pause */
+    /** Indique si cet agent était en pause */
     private boolean paused = false;
     
     /**
-     * renvoie l'agent géré par cette classe.
+     * Renvoie l'agent géré par cette classe.
      * 
      * @return	
-     * 		l'agent géré par cette classe sous la forme d'un Callable
+     * 		L'agent géré par cette classe sous la forme d'un Callable
      */
     public final Callable<V> getAi()
     {	return ai;    	
@@ -136,8 +137,8 @@ public abstract class AiAbstractManager<V>
     	ThreadFactory fact = new AiThreadFactory(name);
     	executorAi = Executors.newSingleThreadExecutor(fact);
     	
-    	// on lance le calcul pour le premier coup
-//    	makeCall();
+    	// on lance un calcul bidon pour initialiser le thread
+    	makeCall();
     }
     
     /**
@@ -153,10 +154,10 @@ public abstract class AiAbstractManager<V>
     {	boolean result = false;
     	
     	// on lance le calcul pour le premier coup
-    	if(futureAi==null)
-        	makeCall();
+//    	if(futureAi==null)
+//       	makeCall();
     	
-    	else
+//    	else
     	{	// si l'agent était en pause
 	    	if(paused)
 	    	{	// sortie de pause ?

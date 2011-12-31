@@ -107,6 +107,8 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/** nombre de bombes que les personnages autres que celui contrôlé par l'IA peuvent encore poser */
 	private Vector<Integer> bombCounts;
 	
+	/** Indique s'il s'agit du tout premier appel du thread (avant le début du jeu) */
+	private boolean blank = true;
 	/** temps total du dernier appel */
 	protected long totalDuration = 0;
 	
@@ -124,7 +126,18 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	@Override
 	public Integer call() throws Exception
 	{	long before = System.currentTimeMillis();
-		int result = processAction();
+		int result;
+	
+		// tout premier appel (avant le début de la partie)
+		if(blank)
+		{	blank = false;
+			result = AI_ACTION_DO_NOTHING;
+		}
+		
+		// cas général (appel en cours de jeu)
+		else
+			result = processAction();
+		
 		long after = System.currentTimeMillis();
 		totalDuration = after - before;
 		return result;

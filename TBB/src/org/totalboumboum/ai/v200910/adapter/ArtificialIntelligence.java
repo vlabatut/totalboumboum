@@ -55,6 +55,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indique s'il s'agit du tout premier appel du thread (avant le début du jeu) */
+	private boolean blank = true;
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 	/** indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
@@ -110,17 +112,30 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	{	long before = System.currentTimeMillis();
 		AiAction result = new AiAction(AiActionName.NONE);
 	
-		if(firstTime)
-			firstTime = false;
+		// on réinitialise la sortie de l'IA
+		reinitOutput();
+		
+		// tout premier appel (avant le début de la partie)
+		if(blank)
+		{	blank = false;
+			result = new AiAction(AiActionName.NONE);
+		}
+
+		// cas général (appel en cours de jeu)
 		else
-		{	// on réinitialise la sortie de l'IA
-			reinitOutput();
-			try
-			{	// on calcule la prochaine action à effectuer
-				result = processAction();		
-			}
-			catch (StopRequestException e)
-			{	result = new AiAction(AiActionName.NONE);
+		{	// initialisation seule
+			if(firstTime)
+				firstTime = false;
+			
+			// calcul de l'action
+			else
+			{	try
+				{	// on calcule la prochaine action à effectuer
+					result = processAction();		
+				}
+				catch (StopRequestException e)
+				{	result = new AiAction(AiActionName.NONE);
+				}
 			}
 		}
 		

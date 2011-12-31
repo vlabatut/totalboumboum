@@ -102,7 +102,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	/** Indicateur de demande de terminaison de l'agent (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
-
+	/** Indique s'il s'agit du tout premier appel du thread (avant le début du jeu) */
+	private boolean blank = true;
+	
 	/**
 	 * Méthode appelée par le jeu pour demander la fin de l'agent.
 	 * Elle modifie la valeur de l'indicateur stopRequest, ce qui permettra
@@ -133,24 +135,36 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	@Override
 	public final AiAction call()
 	{	AiAction result;
-		// on réinitialise la sortie de l'agent
+	
+		// dans tous les cas, on réinitialise la sortie de l'agent
 		resetOutput();
-		try
-		{	// on initialise l'agent si besoin
-			if(!initialized)
-			{	initialized = true;
-				colorStr = zone.getOwnHero().getColor().toString();
-				init();
-				result = new AiAction(AiActionName.NONE);
+	
+		// tout premier appel (avant le début de la partie)
+		if(blank)
+		{	blank = false;
+			result = new AiAction(AiActionName.NONE);
+		}
+	
+		// cas général (appel en cours de jeu)
+		else
+		{	try
+			{	// on initialise l'agent si besoin
+				if(!initialized)
+				{	initialized = true;
+					colorStr = zone.getOwnHero().getColor().toString();
+					init();
+					result = new AiAction(AiActionName.NONE);
+				}
+				
+				// on calcule la prochaine action à effectuer
+				else
+					result = processAction();
 			}
-			
-			// on calcule la prochaine action à effectuer
-			else
-				result = processAction();
+			catch (StopRequestException e)
+			{	result = new AiAction(AiActionName.NONE);
+			}
 		}
-		catch (StopRequestException e)
-		{	result = new AiAction(AiActionName.NONE);
-		}
+		
 		return result;
 	}
 	
