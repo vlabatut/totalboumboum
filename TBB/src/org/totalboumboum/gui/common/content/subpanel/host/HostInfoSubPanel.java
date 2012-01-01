@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.host;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2011 Vincent Labatut 
+ * Copyright 2008-2012 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
