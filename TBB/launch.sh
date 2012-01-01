@@ -4,13 +4,15 @@
 # This is a BASH (Bourne-Again SHell) script, 
 # it should work on most Linux, Unix, and Mac OS systems.
 # It launches TBB with the appropriate parameters.
+# You can change the value of the Xmx parameter in order
+# to increase the amount of memory used by the Java machine. 
 #
 # v.0.3
 #
 # -------------------------------------------------------------------
 #
 # Total Boum Boum
-# Copyright 2008-2010 Vincent Labatut 
+# Copyright 2008-2012 Vincent Labatut 
 # 
 # This file is part of Total Boum Boum.
 # 
@@ -47,4 +49,3 @@
 	java -Xmx256m -splash:$splash -XX:-UseConcMarkSweepGC -classpath $cp $launcher
 #
 #
-

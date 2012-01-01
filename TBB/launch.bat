@@ -2,13 +2,15 @@
 ::
 :: This is a MS-DOS script, it works only on Windows operating systems.
 :: It launches TBB, but you can preferably use TBB.exe (opens no terminal).
+:: You can change the value of the Xmx parameter in order
+:: to increase the amount of memory used by the Java machine. 
 ::
 :: v.0.2
 ::
 :: -------------------------------------------------------------------
 ::
 :: Total Boum Boum
-:: Copyright 2008-2011 Vincent Labatut 
+:: Copyright 2008-2012 Vincent Labatut 
 :: 
 :: This file is part of Total Boum Boum.
 :: 
