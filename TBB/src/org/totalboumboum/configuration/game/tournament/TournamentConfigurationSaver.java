@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.configuration.profiles.ProfilesSelectionSaver;
@@ -45,6 +46,7 @@ public class TournamentConfigurationSaver
 	public static void saveTournamentConfiguration(TournamentConfiguration tournamentConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveGameTournamentElement(tournamentConfiguration);	
+		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_GAME_TOURNAMENT+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -56,6 +58,10 @@ public class TournamentConfigurationSaver
 	private static Element saveGameTournamentElement(TournamentConfiguration tournamentConfiguration)
 	{	Element result = new Element(XmlNames.GAME_TOURNAMENT); 
 		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+
 		// options
 		Element optionsElement = saveTournamentOptionsElement(tournamentConfiguration);
 		result.addContent(optionsElement);

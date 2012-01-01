@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiXmlTools;
@@ -44,7 +45,8 @@ public class MiscConfigurationSaver
 {	
 	public static void saveMiscConfiguration(MiscConfiguration miscConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
-		Element root = saveGuiElement(miscConfiguration);	
+		Element root = saveGuiElement(miscConfiguration);
+		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+GuiFileTools.FILE_GUI+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -55,16 +57,23 @@ public class MiscConfigurationSaver
 
 	private static Element saveGuiElement(MiscConfiguration engineConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_CONFIGURATION); 
+		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+
 		// language
 		Element languageElement = saveLanguageElement(engineConfiguration);
 		result.addContent(languageElement);
+		
 		// font
 		Element fontElement = saveFontElement(engineConfiguration);
 		result.addContent(fontElement);
+		
 		// background
 		Element backgroundElement = saveBackgroundElement(engineConfiguration);
 		result.addContent(backgroundElement);
-		//
+		
 		return result;
 	}
 	

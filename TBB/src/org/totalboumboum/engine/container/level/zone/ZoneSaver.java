@@ -27,6 +27,7 @@ import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
 import org.totalboumboum.engine.container.level.variabletile.VariableTilesSaver;
@@ -59,6 +60,10 @@ public class ZoneSaver
 	private static Element saveZoneElement(Zone zone)
 	{	Element result = new Element(XmlNames.ZONE);
 		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+
 		// tiles random variable
 		HashMap<String,VariableTile> variableTiles = zone.getVariableTiles();
 		if(!variableTiles.isEmpty())

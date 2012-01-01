@@ -27,6 +27,7 @@ import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -44,6 +45,7 @@ public class AiPreviewSaver
 	public static void saveAiPreview(AiPreview aiPreview) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveAiElement(aiPreview);	
+		
 		// save file
 		String path = FilePaths.getAisPath()+File.separator+aiPreview.getPack()+File.separator+FileNames.FILE_AIS+File.separator+aiPreview.getFolder();
 		String engineFile = path+File.separator+FileNames.FILE_AI+FileNames.EXTENSION_XML;
@@ -55,13 +57,19 @@ public class AiPreviewSaver
 
 	private static Element saveAiElement(AiPreview aiPreview)
 	{	Element result = new Element(XmlNames.AI); 
+		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+		
 		// notes
 		Element notesElement = saveNotesElement(aiPreview);
 		result.addContent(notesElement);
+		
 		// authors
 		Element authorsElement = saveAuthorsElement(aiPreview);
 		result.addContent(authorsElement);
-		//
+
 		return result;
 	}
 	

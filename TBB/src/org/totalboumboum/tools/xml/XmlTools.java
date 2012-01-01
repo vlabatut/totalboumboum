@@ -35,6 +35,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.jdom.Comment;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
@@ -156,5 +157,37 @@ public class XmlTools
 	    outputter.output(document,outBuf);       
 	    // close the stream
 	    outBuf.close();
+	}
+	
+	/**
+	 * Returns a comment node to put
+	 * in an XML document.
+	 * 
+	 * @return
+	 * 		The corresponding comment node.
+	 */
+	public static Comment getGplComment()
+	{	StringBuffer text = new StringBuffer();
+		text.append("\t\n");
+		text.append("\tTotal Boum Boum\n");
+		text.append("\tCopyright 2008-2012 Vincent Labatut\n");
+		text.append("\t\n");
+		text.append("\tThis file is part of Total Boum Boum.\n");
+		text.append("\t\n");
+		text.append("\tTotal Boum Boum is free software: you can redistribute it and/or modify\n");
+		text.append("\tit under the terms of the GNU General Public License as published by\n");
+		text.append("\tthe Free Software Foundation, either version 2 of the License, or\n");
+		text.append("\t(at your option) any later version.\n");
+		text.append("\t\n");
+		text.append("\tTotal Boum Boum is distributed in the hope that it will be useful,\n");
+		text.append("\tbut WITHOUT ANY WARRANTY; without even the implied warranty of\n");
+		text.append("\tMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n");
+		text.append("\tGNU General Public License for more details.\n");
+		text.append("\t\n");
+		text.append("\tYou should have received a copy of the GNU General Public License\n");
+		text.append("\talong with Total Boum Boum.  If not, see http://www.gnu.org/licenses.\n");
+		text.append("\t\n");
+		Comment result = new Comment(text.toString());
+		return result;
 	}
 }

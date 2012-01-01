@@ -27,6 +27,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.configuration.profiles.ProfilesSelectionSaver;
@@ -46,6 +47,7 @@ public class QuickMatchConfigurationSaver
 	public static void saveQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveGameQuickMatchElement(quickMatchConfiguration);	
+		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_GAME_QUICKMATCH+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -57,6 +59,10 @@ public class QuickMatchConfigurationSaver
 	private static Element saveGameQuickMatchElement(QuickMatchConfiguration quickMatchConfiguration)
 	{	Element result = new Element(XmlNames.GAME_QUICKMATCH); 
 		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+	
 		// options
 		Element optionsElement = saveQuickMatchOptionsElement(quickMatchConfiguration);
 		result.addContent(optionsElement);
