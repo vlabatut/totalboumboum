@@ -488,3 +488,4 @@
 	- Divers :
 		- nouveau thème pour le tournoi 5
 		- nouveau tournoi pour la 5ème édition
+		- mise à jour de l'année du copyright de 2010-2011 en 2011-2012
