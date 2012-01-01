@@ -168,7 +168,7 @@ public class XmlTools
 	 */
 	public static Comment getGplComment()
 	{	StringBuffer text = new StringBuffer();
-		text.append("\t\n");
+		text.append("\n");
 		text.append("\tTotal Boum Boum\n");
 		text.append("\tCopyright 2008-2012 Vincent Labatut\n");
 		text.append("\t\n");
@@ -186,7 +186,6 @@ public class XmlTools
 		text.append("\t\n");
 		text.append("\tYou should have received a copy of the GNU General Public License\n");
 		text.append("\talong with Total Boum Boum.  If not, see http://www.gnu.org/licenses.\n");
-		text.append("\t\n");
 		Comment result = new Comment(text.toString());
 		return result;
 	}
