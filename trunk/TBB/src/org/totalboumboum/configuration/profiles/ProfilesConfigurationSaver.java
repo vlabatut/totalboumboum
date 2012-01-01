@@ -29,6 +29,7 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -58,6 +59,10 @@ public class ProfilesConfigurationSaver
 	private static Element saveProfilesElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlNames.PROFILES);
 		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+
 		// general
 		Element generalElement = saveGeneralElement(profilesConfiguration);
 		result.addContent(generalElement);

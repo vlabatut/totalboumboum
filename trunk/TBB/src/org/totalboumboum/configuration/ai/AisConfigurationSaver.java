@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -43,6 +44,7 @@ public class AisConfigurationSaver
 	public static void saveAisConfiguration(AisConfiguration aisConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveAisElement(aisConfiguration);	
+		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_AIS+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -54,6 +56,10 @@ public class AisConfigurationSaver
 	private static Element saveAisElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.AIS); 
 	
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+
 		// ups
 		Element upsElement = saveUpsElement(aisConfiguration);
 		result.addContent(upsElement);

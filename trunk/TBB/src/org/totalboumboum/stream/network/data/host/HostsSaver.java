@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -52,6 +53,10 @@ public class HostsSaver
 	private static Element saveHostsElement(HashMap<String,HostInfo> hosts)
 	{	Element result = new Element(XmlNames.HOST);
 		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+
 		for(HostInfo host: hosts.values())
 		{	Element hostElement = saveHostElement(host);
 			result.addContent(hostElement);

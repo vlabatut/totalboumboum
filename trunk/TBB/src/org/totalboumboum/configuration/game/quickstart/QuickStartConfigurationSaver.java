@@ -27,6 +27,7 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.configuration.profiles.ProfilesSelectionSaver;
@@ -46,6 +47,7 @@ public class QuickStartConfigurationSaver
 	public static void saveQuickStartConfiguration(QuickStartConfiguration quickStartConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveGameQuickStartElement(quickStartConfiguration);	
+		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_GAME_QUICKSTART+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -57,6 +59,10 @@ public class QuickStartConfigurationSaver
 	private static Element saveGameQuickStartElement(QuickStartConfiguration quickStartConfiguration)
 	{	Element result = new Element(XmlNames.GAME_QUICKSTART); 
 			
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+		
 		// round
 		Element roundElement = saveRoundELement(quickStartConfiguration);
 		result.addContent(roundElement);

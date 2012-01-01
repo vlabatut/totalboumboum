@@ -28,6 +28,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -58,6 +59,10 @@ public class ReplaySaver
 
 	private static Element saveReplayElement(FileServerStream replay)
 	{	Element result = new Element(XmlNames.REPLAY); 
+		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
 		
 		// level
 		Element tournamentElement = saveLevelElement(replay);

@@ -29,6 +29,7 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.tools.files.FileNames;
@@ -47,6 +48,7 @@ public class PlayersSaver
 	public static void savePlayers(String folder, Players players) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
 		Element root = savePlayersElement(players);	
+		
 		// save file
 		String individualFolder = folder;
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_PLAYERS+FileNames.EXTENSION_XML);
@@ -58,6 +60,10 @@ public class PlayersSaver
 	private static Element savePlayersElement(Players players)
 	{	Element result = new Element(XmlNames.PLAYERS);
 		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+
 		// locations
 		HashMap<Integer,PlayerLocation[]> locations = players.getLocations();
 		Element locationsElement = saveLocationsElement(locations);

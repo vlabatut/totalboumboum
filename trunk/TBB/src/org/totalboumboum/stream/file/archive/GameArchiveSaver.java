@@ -28,6 +28,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.tools.files.FileNames;
@@ -59,6 +60,10 @@ public class GameArchiveSaver
 
 	private static Element saveArchiveElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlNames.ARCHIVE);
+		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
 		
 		// tournament
 		Element tournamentElement = saveTournamentElement(gameArchive);

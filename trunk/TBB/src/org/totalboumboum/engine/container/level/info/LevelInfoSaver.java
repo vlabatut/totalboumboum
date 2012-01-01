@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -55,6 +56,10 @@ public class LevelInfoSaver
 	private static Element saveLevelElement(LevelInfo levelInfo)
 	{	Element result = new Element(XmlNames.LEVEL);
 		
+		// GPL comment
+		Comment gplComment = XmlTools.getGplComment();
+		result.addContent(gplComment);
+	
 		// title
 		Element titleElement = new Element(XmlNames.TITLE);
 		titleElement.setAttribute(XmlNames.VALUE,levelInfo.getTitle());
