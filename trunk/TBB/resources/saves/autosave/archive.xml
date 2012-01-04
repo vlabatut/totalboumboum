@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-<!-- 
+	<!--
 	Total Boum Boum
-	Copyright 2008-2012 Vincent Labatut 
+	Copyright 2008-2012 Vincent Labatut
 	
 	This file is part of Total Boum Boum.
 	
@@ -17,18 +17,14 @@
 	GNU General Public License for more details.
 	
 	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
-
-	<tournament name="Super-coupe de Galatasaray IV" type="SINGLE" />
-	<played matches="0" rounds="3" />
-	<dates start="2011-12-31T10:45:09" save="2011-12-31T10:47:01" />
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+	<tournament name="Qualification du tournoi 2011/12" type="SINGLE" />
+	<played matches="1" rounds="12" />
+	<dates start="2012-01-04T23:33:41" save="2012-01-04T23:39:21" />
 	<players>
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="1011.Kesimal+Varol" />
-		<player name="1112.Demirel+Öz" />
+		<player name="1112.Ünlü+Yıldırım" />
+		<player name="Simplet" />
 	</players>
 </archive>
 
