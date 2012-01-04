@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.ais.caliskangeckalanseven;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.caliskangeckalanseven.v0.CaliskanGeckalanSeven;
+import org.totalboumboum.ai.v201112.ais.caliskangeckalanseven.v3.CaliskanGeckalanSeven;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
