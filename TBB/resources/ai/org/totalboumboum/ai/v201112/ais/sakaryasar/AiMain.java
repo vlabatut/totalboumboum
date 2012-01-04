@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.ais.sakaryasar;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.sakaryasar.v2.SakarYasar;
+import org.totalboumboum.ai.v201112.ais.sakaryasar.v3.SakarYasar;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.ais.arikkoseoglu;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.arikkoseoglu.v0.ArikKoseoglu;
+import org.totalboumboum.ai.v201112.ais.arikkoseoglu.v3.ArikKoseoglu;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
