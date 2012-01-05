@@ -21,10 +21,10 @@
 -->
 	<tournament name="Qualification du tournoi 2011/12" type="SINGLE" />
 	<played matches="0" rounds="11" />
-	<dates start="2012-01-04T23:33:41" save="2012-01-04T23:38:59" />
+	<dates start="2012-01-05T10:16:12" save="2012-01-05T10:25:14" />
 	<players>
-		<player name="1112.Ünlü+Yıldırım" />
-		<player name="Simplet" />
+		<player name="1112.Demir+Sazan" />
+		<player name="Joueur humain" />
 	</players>
 </archive>
 
