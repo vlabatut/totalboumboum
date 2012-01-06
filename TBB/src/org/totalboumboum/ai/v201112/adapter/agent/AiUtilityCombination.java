@@ -110,9 +110,6 @@ public final class AiUtilityCombination
 	 * 		Le nom du critère concerné par la valeur.
 	 * @param criterionValue
 	 * 		La valeur à affecter au critère.
-	 * 
-	 * @throws IllegalArgumentException
-	 * 		Si le critère ou la valeur sont incompatibles.
 	 */
 	public <T> void setCriterionValue(AiUtilityCriterion<T> criterion, T value)
 	{	if(!criteria.contains(criterion))
