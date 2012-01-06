@@ -31,7 +31,8 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Vincent Labatut
  */
 public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
-{	/**
+{	
+	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci
 	 * grâce au mot-clé {@code this}.
@@ -49,6 +50,7 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** L'agent à traiter */
 	protected T ai;
 
 	/////////////////////////////////////////////////////////////////
