@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
+<gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/game_tournament.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -20,10 +20,16 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="Trnmt201112_qualif" />
+	<tournament name="Trnmt201112_0.altcup" />
 	<players>
+		<player file="d9dc2fd6-c0c5-42d7-9c16-46b838c6dbae" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="bf0ed21f-8d7a-4cee-aa27-2d6729ce9940" color="ULTRAMARINE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="4a22a9cf-9bd9-4a55-b206-e0cbccdce042" color="GREY" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
 		<player file="0f7cb6bb-5a8e-479c-acf9-7a3e2da3e919" color="YELLOW" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="789afea6-f972-41ce-8cc7-108b34b06ee9" color="BLUE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="c03e8aff-599e-4485-8fd2-cfe2b9ec4f0c" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="549e6962-4ec0-4098-bbec-2bb0ae4d7587" color="CYAN" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
