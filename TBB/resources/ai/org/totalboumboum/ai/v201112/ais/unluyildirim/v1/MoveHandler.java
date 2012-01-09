@@ -51,7 +51,7 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings({ "unused", "static-access" })
+	@SuppressWarnings({ "unused" })
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -136,10 +136,10 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim>
 	        	{
 	        	
 	        		
-	        		return direction_next.UP;
+//	        		return direction_next.UP;
 	        	}
 	        	else {
-	        		return direction_next.DOWN;
+//	        		return direction_next.DOWN;
 	        	}
 	        }
 	        

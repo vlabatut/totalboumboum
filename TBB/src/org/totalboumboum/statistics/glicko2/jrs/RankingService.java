@@ -421,9 +421,11 @@ public class RankingService implements Serializable {
             // Convert the ratings and RDs onto the Glicko-2 scale.
             double rating = prePeriodPlayerRating.getGlicko2Rating();
             double ratingDeviation = prePeriodPlayerRating.getGlicko2RatingDeviation();
+            if(ratingDeviation<0) // TODO added by Vincent to avoid a negative rating deviation
+            	ratingDeviation = Double.parseDouble(System.getProperty("jrs.defaultRatingDeviation", "350"));
             double ratingVolatility = prePeriodPlayerRating.getRatingVolatility();
             if(ratingVolatility==0) // TODO added by Vincent to avoid a zero volatility
-            	ratingVolatility = 0.01;
+            	ratingVolatility = Double.parseDouble(System.getProperty("jrs.defaultRatingVolatility", "0.06"));
             
             double postPeriodRating = rating;  
             double postPeriodRatingDeviation = ratingDeviation;
@@ -547,16 +549,21 @@ public class RankingService implements Serializable {
         return postPeriodPlayerRatings;
     }
     
-    /** Function used internally by the Glicko-2 algorithm.
-      * 
-      * @param ratingDeviation 
-      * @return 
-      */
+    /** 
+     * Function used internally by the Glicko-2 algorithm.
+     * Corresponds to function <i>g</i> in M. Glickman's
+     * <a href="http://www.glicko.net/glicko/glicko2.pdf">descripton</a>.
+     * 
+     * @param ratingDeviation
+     * @return 
+     */
     private double g(double ratingDeviation) {
         return 1 / Math.sqrt(1 + ((3 * ratingDeviation * ratingDeviation) / (Math.PI * Math.PI)));
     }
     
     /** Function used internally by the Glicko-2 algorithm.
+     * Corresponds to function <i>E</i> in M. Glickman's
+     * <a href="http://www.glicko.net/glicko/glicko2.pdf">descripton</a>.
       * 
       * @param playerRating 
       * @param opponentRating 
