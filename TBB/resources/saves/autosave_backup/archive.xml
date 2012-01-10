@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -19,12 +19,26 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Qualification du tournoi 2011/12" type="SINGLE" />
-	<played matches="0" rounds="11" />
-	<dates start="2012-01-05T10:16:12" save="2012-01-05T10:25:14" />
+	<tournament name="Coupe de test" type="CUP" />
+	<played matches="0" rounds="3" />
+	<dates start="2012-01-10T17:38:48" save="2012-01-10T17:41:03" />
 	<players>
+		<player name="Simplet" />
+		<player name="0910.Fındık+Şırın" />
+		<player name="0708.Hanci+Toprak" />
+		<player name="0809.Çalışkan+Cap+Doğaner" />
+		<player name="1112.Çalışkan+Geçkalan+Seven" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="0910.Aksoy+Tangay" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="1112.Bal+Çetin" />
+		<player name="0809.Medeni+Uluer" />
+		<player name="0708.Göksay+Köse" />
+		<player name="0708.Cirit+Mutlu" />
+		<player name="1112.Ünlü+Yıldırım" />
+		<player name="0809.Demirağ+Şagar" />
+		<player name="0708.Okan+Yüksel" />
 		<player name="1112.Demir+Sazan" />
-		<player name="Joueur humain" />
 	</players>
 </archive>
 
