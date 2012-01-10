@@ -54,7 +54,7 @@ public class Glicko2Loader
 		RankingService result = (RankingService) in.readObject();
 		in.close();
 		return result;		
-		// TODO: if problem while reading the file, should restaure and use the backup 
+		// TODO: if problem while reading the file, should restore and use the backup 
 	}
 
 	public static RankingService importGlicko2Statistics() throws FileNotFoundException

@@ -412,6 +412,7 @@ public class RankingService implements Serializable {
             
         	String playerId = playerIds.next();
 //if(playerId.equals("227b2e4d-bd7b-4153-962b-699bc909e5e1"))
+//if(playerId.equals("0f7cb6bb-5a8e-479c-acf9-7a3e2da3e919"))
 //	System.out.print("");
             PlayerRating prePeriodPlayerRating = (PlayerRating)prePeriodRatings.get(playerId);
             
@@ -421,11 +422,7 @@ public class RankingService implements Serializable {
             // Convert the ratings and RDs onto the Glicko-2 scale.
             double rating = prePeriodPlayerRating.getGlicko2Rating();
             double ratingDeviation = prePeriodPlayerRating.getGlicko2RatingDeviation();
-            if(ratingDeviation<0) // TODO added by Vincent to avoid a negative rating deviation
-            	ratingDeviation = Double.parseDouble(System.getProperty("jrs.defaultRatingDeviation", "350"));
             double ratingVolatility = prePeriodPlayerRating.getRatingVolatility();
-            if(ratingVolatility==0) // TODO added by Vincent to avoid a zero volatility
-            	ratingVolatility = Double.parseDouble(System.getProperty("jrs.defaultRatingVolatility", "0.06"));
             
             double postPeriodRating = rating;  
             double postPeriodRatingDeviation = ratingDeviation;

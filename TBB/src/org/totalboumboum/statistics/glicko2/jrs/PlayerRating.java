@@ -147,7 +147,15 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       *     A standard glicko rating.
       */
     void setRating(double rating) {
+    	
+    	// TODO modified by Vincent to avoid incorrect values
+        if(Double.isInfinite(rating) || Double.isNaN(rating))
+        	rating = Double.parseDouble(System.getProperty("jrs.defaultRating", "1500"));
+        else if(rating<0)
+        	rating = 0;
+        
         this.rating = rating;
+
     }
     
     /** Set the player's rating in the Glicko2 scale.
@@ -156,7 +164,10 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       *     A Glicko2 rating.
       */
     void setGlicko2Rating(double glicko2Rating) {
-        rating = (GLICKO2_SCALE * glicko2Rating) + 1500;
+        double ratingBis = (GLICKO2_SCALE * glicko2Rating) + 1500;
+        
+        // TODO added by Vincent to force a check on the rating value
+        setRating(ratingBis);
     }
 
     /** Get the rating deviation.
@@ -184,6 +195,11 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       *     A standard Glicko rating deviation.
       */
     void setRatingDeviation(double ratingDeviation) {
+        
+    	// TODO modified by Vincent to avoid incorrect values
+        if(Double.isInfinite(ratingDeviation) || Double.isNaN(ratingDeviation) || ratingDeviation<0)
+            ratingDeviation = Double.parseDouble(System.getProperty("jrs.defaultRatingDeviation", "350"));
+        
         this.ratingDeviation = ratingDeviation;
     }
     
@@ -193,7 +209,11 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       *     A Glicko2 rating deviation.
       */
     void setGlicko2RatingDeviation(double glicko2RatingDeviation) {
-        ratingDeviation = GLICKO2_SCALE * glicko2RatingDeviation;
+        double ratingDeviationBis = GLICKO2_SCALE * glicko2RatingDeviation;
+        
+        // TODO added by Vincent to force a check on the deviation value
+        setRatingDeviation(ratingDeviationBis);
+ 
     }
 
     /** Get the rating volatility.
@@ -211,6 +231,11 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       *     A rating volatility.
       */
     void setRatingVolatility(double ratingVolatility) {
+    	
+    	// TODO modified by Vincent to avoid incorrect values
+        if(Double.isInfinite(ratingVolatility) || Double.isNaN(ratingVolatility) || ratingVolatility<0)
+        	ratingVolatility = Double.parseDouble(System.getProperty("jrs.defaultRatingVolatility", "0.06"));
+        
         this.ratingVolatility = ratingVolatility;
     }
     
