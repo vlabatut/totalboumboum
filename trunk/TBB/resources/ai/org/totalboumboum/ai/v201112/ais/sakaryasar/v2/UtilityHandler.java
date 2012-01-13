@@ -24,7 +24,6 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar

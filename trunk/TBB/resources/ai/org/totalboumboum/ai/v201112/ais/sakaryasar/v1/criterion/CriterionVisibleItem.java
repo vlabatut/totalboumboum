@@ -34,7 +34,7 @@ public class CriterionVisibleItem extends AiUtilityCriterionBoolean {
 	public Boolean processValue(AiTile tile) throws StopRequestException
 	{	boolean result = true;
 	
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 		if(tile.getItems()==null)
 			result = false;
 		

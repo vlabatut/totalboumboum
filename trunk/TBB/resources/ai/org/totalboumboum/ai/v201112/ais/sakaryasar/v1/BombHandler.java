@@ -11,7 +11,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
@@ -34,7 +33,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
     	
-    	// TODO à compléter
+    	// 
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -45,7 +44,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	{	ai.checkInterruption();
 		boolean result = false;
 		
-		// TODO à compléter
+		// 
 		HashMap<AiTile,Float> hm = ai.utilityHandler.getUtilitiesByTile();
 		
 		if(ai.modeHandler.getMode()==AiMode.COLLECTING){
@@ -68,6 +67,6 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	{	
 		ai.checkInterruption();
 
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

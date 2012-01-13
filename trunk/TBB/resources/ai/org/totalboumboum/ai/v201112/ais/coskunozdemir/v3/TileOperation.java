@@ -123,7 +123,7 @@ public class TileOperation
 	 * Populates a list of tiles which will become dangerous if a bomb is put on
 	 * given tile. <br/>
 	 * (TESTED, WORKS) <br/>
-	 * NOTE: At the beginning of the game, the ranges of the heroes can be
+	 * At the beginning of the game, the ranges of the heroes can be
 	 * uninitialized. So, be careful when giving range parameter from a hero's
 	 * range. <br/>
 	 * If range is 0, this method will return an empty list.

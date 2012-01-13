@@ -20,7 +20,6 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus

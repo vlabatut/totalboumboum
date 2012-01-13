@@ -46,7 +46,7 @@ public class CriterionFirst extends AiUtilityCriterionBoolean
 	{	ai.checkInterruption();
 		boolean result = true;
 	
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 	
 		return result;
 	}

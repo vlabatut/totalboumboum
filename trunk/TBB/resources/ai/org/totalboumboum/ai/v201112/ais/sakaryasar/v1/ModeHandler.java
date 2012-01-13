@@ -11,7 +11,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
@@ -34,7 +33,7 @@ public class ModeHandler extends AiModeHandler<SakarYasar>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
 		
-		// TODO à compléter
+		// 
 	}
 
 	//definitions of the limits of range and numbers of our bombs
@@ -48,7 +47,7 @@ public class ModeHandler extends AiModeHandler<SakarYasar>
 	protected boolean hasEnoughItems() throws StopRequestException
 	{	ai.checkInterruption();
 		
-    	// TODO à compléter
+    	// 
 		// number of bombes we have got
 		int nbOfBombs = ai.getZone().getOwnHero().getBombNumberMax();
 		//range of our bombs
@@ -64,7 +63,7 @@ public class ModeHandler extends AiModeHandler<SakarYasar>
 	protected boolean isCollectPossible() throws StopRequestException
 	{	ai.checkInterruption();
 	
-   		// TODO à compléter
+   		// 
 		boolean result=true;
 		
 		int currentBombs = ai.getZone().getOwnHero().getBombNumberMax();
@@ -125,6 +124,6 @@ public class ModeHandler extends AiModeHandler<SakarYasar>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

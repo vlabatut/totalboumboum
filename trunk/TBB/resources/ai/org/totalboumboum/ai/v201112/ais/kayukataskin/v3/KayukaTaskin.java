@@ -12,7 +12,6 @@ import org.totalboumboum.ai.v201112.ais._simplet.CommonTools;
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  *
  * @author Pol Kayuka
  * @author Ayça Taşkın
@@ -26,7 +25,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 		super.init();
 		verbose = true;
 		
-		// TODO à compléter si vous voulez créer des objets 
+		//  à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement, et qui
 		// ne sont ni des gestionnaires (initialisés dans initHandlers)
 		// ni des percepts (initialisés dans initPercepts).
@@ -44,7 +43,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 	protected void initPercepts() throws StopRequestException
 	{	checkInterruption();
 	
-		// TODO à compléter si vous voulez créer des objets 
+		//  à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement.
 		// Ils peuvent être stockés dans cette classe ou dans
 		// un gestionnaire quelconque. 
@@ -56,7 +55,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 	protected void updatePercepts() throws StopRequestException
 	{	checkInterruption();
 		
-		// TODO à compléter si vous avez des objets 
+		//  à compléter si vous avez des objets 
 		// à mettre à jour à chaque itération, e.g.
 		// des objets créés par la méthode initPercepts().
 	
@@ -86,7 +85,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 		bombHandler = new BombHandler(this);
 		moveHandler = new MoveHandler(this);
 		
-		// TODO à compléter si vous utilisez d'autres gestionnaires
+		//  à compléter si vous utilisez d'autres gestionnaires
 		// (bien sûr ils doivent aussi être déclarés ci-dessus)
 		
 		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
@@ -123,7 +122,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 	protected void updateOutput() throws StopRequestException
 	{	checkInterruption();
 
-		// TODO à compléter si vous voulez modifier l'affichage
+		//  à compléter si vous voulez modifier l'affichage
 		// ici, par défaut on affiche :
 			// les chemins et destinations courants
 			moveHandler.updateOutput();

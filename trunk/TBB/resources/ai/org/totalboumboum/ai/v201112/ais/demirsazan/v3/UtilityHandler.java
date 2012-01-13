@@ -24,7 +24,6 @@ import org.totalboumboum.ai.v201112.ais.demirsazan.v3.criterion.Menace;
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Serdil Demir
  * @author Gökhan Sazan
@@ -269,6 +268,6 @@ public class UtilityHandler extends AiUtilityHandler<DemirSazan>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

@@ -21,7 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le calcul des valeurs d'utilité de l'agent. Cf. la
  * documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Doruk Coşkun
  * @author Utku Özdemir
@@ -44,7 +44,7 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir> {
 		verbose = false;
 ;
 
-		// TODO à compléter
+		// 
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -68,10 +68,10 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir> {
 
 	@Override
 	protected void initCriteria() throws StopRequestException {
-		// TODO à compléter afin d'initialiser les critères
+		//  à compléter afin d'initialiser les critères
 		// et les cas. la méthode est appelée une seule fois
 
-		// TODO le traitement défini ici utilise les classes
+		//  le traitement défini ici utilise les classes
 		// définissant des critères, données en exemple dans
 		// le package v1.criterion. Il s'agit seulement d'un
 		// exemple, vous devez définir vos propres critères !
@@ -455,6 +455,6 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir> {
 
 		// ici on se contente de faire le traitement par défaut
 		//super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

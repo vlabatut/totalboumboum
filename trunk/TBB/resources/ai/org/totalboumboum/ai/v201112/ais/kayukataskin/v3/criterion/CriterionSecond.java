@@ -46,7 +46,7 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	{	ai.checkInterruption();
 		int result = 2;
 		
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 		
 		return result;
 	}

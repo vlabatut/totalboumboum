@@ -23,7 +23,6 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
@@ -47,7 +46,7 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
 		
-		// TODO à compléter
+		// 
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -172,6 +171,6 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim>
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
 		
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

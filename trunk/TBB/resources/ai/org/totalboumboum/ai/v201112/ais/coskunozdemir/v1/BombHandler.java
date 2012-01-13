@@ -7,7 +7,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Doruk Coşkun
  * @author Utku Özdemir
@@ -31,7 +31,7 @@ public class BombHandler extends AiBombHandler<CoskunOzdemir>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
     	
-    	// TODO à compléter
+    	// 
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -58,6 +58,6 @@ public class BombHandler extends AiBombHandler<CoskunOzdemir>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

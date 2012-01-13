@@ -22,7 +22,6 @@ import org.totalboumboum.ai.v201112.adapter.path.search.Astar;
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Pol Kayuka
  * @author Ayça Taşkın
@@ -204,7 +203,6 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 		try {
 			path = astar.processShortestPath(firstLocat, endTiles);
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		tileDest = path.getLastLocation().getTile();
@@ -220,6 +218,6 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

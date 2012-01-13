@@ -12,7 +12,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
@@ -38,7 +37,7 @@ public class ModeHandler extends AiModeHandler<GungorKavus>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
 		
-		// TODO à compléter
+		// 
 
 		if(ai.getZone().getTotalTime()>=ai.getZone().getLimitTime()/5*4){
 			ai.modeHandler.mode = AiMode.ATTACKING;
@@ -102,6 +101,6 @@ public class ModeHandler extends AiModeHandler<GungorKavus>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

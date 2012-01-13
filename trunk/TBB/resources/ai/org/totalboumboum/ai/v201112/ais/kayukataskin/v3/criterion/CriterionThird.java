@@ -65,7 +65,7 @@ public class CriterionThird extends AiUtilityCriterionString
 	{	ai.checkInterruption();
 		String result = VALUE3;
 		
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 		
 		return result;
 	}

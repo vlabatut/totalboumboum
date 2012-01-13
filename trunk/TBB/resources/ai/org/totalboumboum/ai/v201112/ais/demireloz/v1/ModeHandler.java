@@ -7,7 +7,6 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Enis Demirel
  * @author Berke Öz
@@ -65,6 +64,6 @@ public class ModeHandler extends AiModeHandler<DemirelOz>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }
