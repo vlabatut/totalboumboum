@@ -11,7 +11,6 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  *
  * @author Merve Ünlü
  * @author Gülay Yıldırım
@@ -64,7 +63,7 @@ public class UnluYildirim extends ArtificialIntelligence
 		bombHandler = new BombHandler(this);
 		moveHandler = new MoveHandler(this);
 		
-		// TODO à compléter si vous utilisez d'autres gestionnaires
+		//  à compléter si vous utilisez d'autres gestionnaires
 		// (bien sûr ils doivent aussi être déclarés ci-dessus)
 		
 		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
@@ -101,7 +100,7 @@ public class UnluYildirim extends ArtificialIntelligence
 	protected void updateOutput() throws StopRequestException
 	{	checkInterruption();
 
-		// TODO à compléter si vous voulez modifier l'affichage
+		//  à compléter si vous voulez modifier l'affichage
 		// ici, par défaut on affiche :
 			// les chemins et destinations courants
 			moveHandler.updateOutput();

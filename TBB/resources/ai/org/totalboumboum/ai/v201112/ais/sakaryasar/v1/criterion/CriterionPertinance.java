@@ -53,7 +53,7 @@ public class CriterionPertinance extends AiUtilityCriterionBoolean{
 	public Boolean processValue(AiTile tile) throws StopRequestException
 	{	boolean result = false;
 	
-		// TODO à compléter par le traitement approprié	
+		//  à compléter par le traitement approprié	
 		List<AiItem> items = tile.getItems();
 		if(!items.isEmpty()){
 			result = isItemPertinant(items.get(0).getType());

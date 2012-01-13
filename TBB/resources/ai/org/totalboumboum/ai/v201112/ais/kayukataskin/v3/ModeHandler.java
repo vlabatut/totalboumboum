@@ -10,7 +10,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Pol Kayuka
  * @author Ayça Taşkın
@@ -82,6 +81,6 @@ public class ModeHandler extends AiModeHandler<KayukaTaskin>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

@@ -17,7 +17,6 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
@@ -42,7 +41,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 		verbose = true;
 		
 		
-		// TODO à compléter
+		// 
 		
 		AiZone zone = ai.getZone();
 		AiTile ownTile = zone.getOwnHero().getTile();
@@ -61,7 +60,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 		try {
 			path = astar.processShortestPath(currentDestination);
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			//  Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -106,7 +105,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 		
 		
 		
-		// TODO à compléter
+		// 
 		
 		return cDirection;
 	}
@@ -120,6 +119,6 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

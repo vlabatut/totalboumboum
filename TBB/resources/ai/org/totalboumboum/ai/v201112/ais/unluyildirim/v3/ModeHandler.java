@@ -85,6 +85,6 @@ public class ModeHandler extends AiModeHandler<UnluYildirim>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

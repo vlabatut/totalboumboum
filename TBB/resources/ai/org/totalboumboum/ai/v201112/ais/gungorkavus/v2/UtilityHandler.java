@@ -37,7 +37,6 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v2.criterion.VDMDestPertinen
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus

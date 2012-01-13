@@ -34,7 +34,6 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v1.criterion.VDMDestPertinen
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
@@ -60,7 +59,7 @@ public class UtilityHandler extends AiUtilityHandler<GungorKavus>
 	
 		
 		
-		// TODO à compléter
+		// 
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -569,7 +568,7 @@ public class UtilityHandler extends AiUtilityHandler<GungorKavus>
 	protected AiUtilityCase identifyCase(AiTile tile) throws StopRequestException
 	{	AiUtilityCase result = null;
 		
-		// TODO à compléter pour identifier le cas associé
+		//  à compléter pour identifier le cas associé
 		// à la case passée en paramètre
 	
 	if(ai.modeHandler.getMode()==AiMode.COLLECTING)
@@ -608,6 +607,6 @@ public class UtilityHandler extends AiUtilityHandler<GungorKavus>
 		super.updateOutput();
 		
 		
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

@@ -47,7 +47,7 @@ public class CaseVidePertinent extends AiUtilityCriterionBoolean
 	public Boolean processValue(AiTile tile) throws StopRequestException
 	{	boolean result = false;
 
-	// TODO à compléter par le traitement approprié
+	//  à compléter par le traitement approprié
 
 	
 	

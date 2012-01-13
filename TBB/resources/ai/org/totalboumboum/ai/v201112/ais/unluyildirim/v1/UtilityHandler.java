@@ -27,7 +27,6 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v1.criterion.CriterionTypeB
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
@@ -50,7 +49,7 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
 	
-		// TODO à compléter
+		// 
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -66,7 +65,7 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim>
 	protected Set<AiTile> selectTiles() throws StopRequestException
 	{	Set<AiTile> result = new TreeSet<AiTile>();
 		
-		// TODO à compléter afin de sélectionner les cases
+		//  à compléter afin de sélectionner les cases
 		// dont on veut calculer l'utilité
 	    AiZone zone=ai.getZone();
 	    
@@ -79,10 +78,10 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim>
 	@Override
 	protected void initCriteria() throws StopRequestException
 	{	
-		// TODO à compléter afin d'initialiser les critères 
+		//  à compléter afin d'initialiser les critères 
 		// et les cas. la méthode est appelée une seule fois
 		
-		// TODO le traitement défini ici utilise les classes
+		//  le traitement défini ici utilise les classes
 		// définissant des critères, données en exemple dans
 		// le package v1.criterion. Il s'agit seulement d'un 
 		// exemple, vous devez définir vos propres critères !
@@ -321,7 +320,7 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim>
 	protected AiUtilityCase identifyCase(AiTile tile) throws StopRequestException
 	{	AiUtilityCase result = null;
 		
-		// TODO à compléter pour identifier le cas associé
+		//  à compléter pour identifier le cas associé
 		// à la case passée en paramètre
 		
 		// cf. la java doc dans AiUtilityHandler pour une description de la méthode
@@ -338,6 +337,6 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim>
 		
 		// ici on se contente de faire le traitement par défaut
 		//super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

@@ -7,7 +7,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Doruk Coşkun
  * @author Utku Özdemir
@@ -30,7 +30,7 @@ public class ModeHandler extends AiModeHandler<CoskunOzdemir>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
 		
-		// TODO à compléter
+		// 
 	}
 
     /////////////////////////////////////////////////////////////////

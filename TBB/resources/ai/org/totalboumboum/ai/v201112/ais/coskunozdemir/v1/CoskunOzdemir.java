@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe principale de votre agent, que vous devez compléter. Cf. la
  * documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Doruk Coşkun
  * @author Utku Özdemir
@@ -48,7 +48,7 @@ public class CoskunOzdemir extends ArtificialIntelligence
 		super.init();
 		verbose = false;
 
-		// TODO à compléter si vous voulez créer des objets
+		//  à compléter si vous voulez créer des objets
 		// particuliers pour réaliser votre traitement, et qui
 		// ne sont ni des gestionnaires (initialisés dans initHandlers)
 		// ni des percepts (initialisés dans initPercepts).
@@ -80,7 +80,7 @@ public class CoskunOzdemir extends ArtificialIntelligence
 	{
 		checkInterruption();
 
-		// TODO à compléter si vous avez des objets
+		//  à compléter si vous avez des objets
 		// à mettre à jour à chaque itération, e.g.
 		// des objets créés par la méthode initPercepts().
 
@@ -117,7 +117,7 @@ public class CoskunOzdemir extends ArtificialIntelligence
 		bombHandler = new BombHandler( this );
 		moveHandler = new MoveHandler( this );
 
-		// TODO à compléter si vous utilisez d'autres gestionnaires
+		//  à compléter si vous utilisez d'autres gestionnaires
 		// (bien sûr ils doivent aussi être déclarés ci-dessus)
 
 		// cf. la java doc dans ArtificialIntelligence pour une description de
@@ -164,7 +164,7 @@ public class CoskunOzdemir extends ArtificialIntelligence
 	{
 		checkInterruption();
 
-		// TODO à compléter si vous voulez modifier l'affichage
+		//  à compléter si vous voulez modifier l'affichage
 		// ici, par défaut on affiche :
 		// les chemins et destinations courants
 		moveHandler.updateOutput();
@@ -345,7 +345,7 @@ public class CoskunOzdemir extends ArtificialIntelligence
 	/**
 	 * Fills the Arraylist accessibleTiles with the crossable tiles that I can
 	 * reach by just walking by now.
-	 * <br/>NOTE: Recursive, works but can cause memory problems in large maps with
+	 * <br/>Note: Recursive, works but can cause memory problems in large maps with
 	 * many accessible tiles.
 	 * <br/>Can be optimized by considering the incoming direction.
 	 * 
