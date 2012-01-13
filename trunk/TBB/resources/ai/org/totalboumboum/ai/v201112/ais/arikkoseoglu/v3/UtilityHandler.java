@@ -30,7 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Furkan Arık
  * @author Aksel Köseoğlu
@@ -53,7 +53,7 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
 	
-		// TODO à compléter
+		//  à compléter
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -409,6 +409,6 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

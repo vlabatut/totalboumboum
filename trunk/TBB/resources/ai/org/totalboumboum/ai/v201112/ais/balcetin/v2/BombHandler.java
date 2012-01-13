@@ -41,7 +41,7 @@ public class BombHandler extends AiBombHandler<BalCetin>
 	
 	
 	
-	// TODO à compléter
+	//  à compléter
 	
 	
 		

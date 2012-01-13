@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Adnan Bal
  * @author Özcan Çetin
@@ -55,7 +55,7 @@ public class ModeHandler extends AiModeHandler<BalCetin>
 		
 		
 		
-		// TODO à compléter
+		//  à compléter
 		
 	}
 
@@ -80,7 +80,7 @@ public class ModeHandler extends AiModeHandler<BalCetin>
 	protected boolean isCollectPossible() throws StopRequestException
 	{	ai.checkInterruption();
 		
-   		// TODO à compléter
+   		//  à compléter
 	if(ownHero.getBombNumberCurrent() <= ownHero.getBombNumberMax() && (zone.getBombs().size() != 0))
 		return true;
 	else if(ownHero.getBombNumberCurrent() < 2 && (ownHero.getBombRange() < 3) && (index != 0)) //index : if there is at least 1 extra flame bonus on the zone.
@@ -97,6 +97,6 @@ public class ModeHandler extends AiModeHandler<BalCetin>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		// à compléter, si vous voulez afficher quelque chose
 	}
 }

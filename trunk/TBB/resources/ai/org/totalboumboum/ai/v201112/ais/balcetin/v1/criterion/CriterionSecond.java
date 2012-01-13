@@ -45,7 +45,7 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	public Integer processValue(AiTile tile) throws StopRequestException
 	{	int result = 2;
 		
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 		
 		return result;
 	}
