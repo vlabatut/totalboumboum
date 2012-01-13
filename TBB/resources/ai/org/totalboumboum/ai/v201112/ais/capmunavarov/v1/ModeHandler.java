@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ * Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Fahri Cap
  * @author Suhrob Munavarov
@@ -31,7 +31,7 @@ public class ModeHandler extends AiModeHandler<CapMunavarov>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
 
-		// TODO à compléter
+		// à compléter
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ public class ModeHandler extends AiModeHandler<CapMunavarov>
 	protected boolean hasEnoughItems() throws StopRequestException
 	{	ai.checkInterruption();
 		
-    	// TODO à compléter
+    	// à compléter
 		if (ai.getZone().getOwnHero().getBombNumberMax()>=2)  //si on a deux bombes, on peut attaquer.
 			{
 			return true;
@@ -67,6 +67,6 @@ public class ModeHandler extends AiModeHandler<CapMunavarov>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		// à compléter, si vous voulez afficher quelque chose
 	}
 }
