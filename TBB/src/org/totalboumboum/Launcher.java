@@ -1418,6 +1418,7 @@ public class Launcher
 	 * 		- virer les classes contenant un main()
 	 * - ressources :
 	 * 		- supprimer restmp
+	 * 		- supprimer les agents de test
 	 * 		- réinitialiser les logstats
 	 * 		- recopier les stats (éventuellement)
 	 * 		- recréer les sauvegardes des tournois
