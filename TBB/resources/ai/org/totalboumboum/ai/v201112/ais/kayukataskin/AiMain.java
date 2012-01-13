@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.ais.kayukataskin;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.ais.kayukataskin.v0.KayukaTaskin;
+import org.totalboumboum.ai.v201112.ais.kayukataskin.v3.KayukaTaskin;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
