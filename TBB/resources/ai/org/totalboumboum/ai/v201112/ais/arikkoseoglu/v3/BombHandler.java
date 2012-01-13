@@ -18,7 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Furkan Arık
  * @author Aksel Köseoğlu
@@ -41,7 +41,7 @@ public class BombHandler extends AiBombHandler<ArikKoseoglu>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
    	
-    	// TODO à compléter
+    	//  à compléter
 	}
 	
 	
@@ -126,7 +126,7 @@ public class BombHandler extends AiBombHandler<ArikKoseoglu>
 	@Override
 	protected boolean considerBombing() throws StopRequestException
 	{	ai.checkInterruption();
-		// TODO à compléter
+		//  à compléter
 	
 		AiZone gameArea = ai.getZone();
 		AiHero ownHero = gameArea.getOwnHero();
@@ -193,6 +193,6 @@ public class BombHandler extends AiBombHandler<ArikKoseoglu>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }
