@@ -8,7 +8,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ * Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Mustafa Kaan İlter
  * @author Önder Kaya
@@ -31,7 +31,7 @@ public class MoveHandler extends AiMoveHandler<IlterKaya>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
 		
-		// TODO à compléter
+		// à compléter
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ public class MoveHandler extends AiMoveHandler<IlterKaya>
 	protected Direction considerMoving() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter
+		// à compléter
 		
 		return Direction.NONE;
 	}
@@ -55,6 +55,6 @@ public class MoveHandler extends AiMoveHandler<IlterKaya>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		// à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

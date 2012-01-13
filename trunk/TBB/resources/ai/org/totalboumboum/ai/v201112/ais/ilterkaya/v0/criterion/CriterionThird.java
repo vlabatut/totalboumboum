@@ -63,7 +63,7 @@ public class CriterionThird extends AiUtilityCriterionString
 	public String processValue(AiTile tile) throws StopRequestException
 	{	String result = VALUE3;
 		
-		// TODO à compléter par le traitement approprié
+		// à compléter par le traitement approprié
 		
 		return result;
 	}
