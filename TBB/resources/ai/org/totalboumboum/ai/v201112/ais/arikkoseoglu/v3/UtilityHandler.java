@@ -279,7 +279,7 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 				}
 			}
 		}
-		//Collecte Mode,bomb à Mur - todo bonus criter
+		//Collecte Mode,bomb à Mur - bonus criter
 		for(int j = MurDesCriter.MUR_LIMIT; j>=0; j--){
 			ai.checkInterruption();
 			for(int i = 0; i<= TempsCriter.TEMPS_LIMIT; i++){
