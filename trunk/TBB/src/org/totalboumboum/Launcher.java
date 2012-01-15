@@ -1463,12 +1463,15 @@ public class Launcher
 	 * 			- afficher les exceptions
 	 * 			- prérégler la partie rapide 
 	 * 		- ressources :
-	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau (5, 13 et 24)
+	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau
+	 * 				- 0d3dfd83-6632-423f-b63e-d7e5743ad998
+	 * 				- 2fa20b36-2ad2-4d3b-9010-eb2e090f648e
+	 * 				- 553c0fb4-5418-4e33-b244-d5f399ae40f2
 	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
 	 * 
-	 * promeneur :	
+	 * promeneur :	af92d497-7975-4dcf-b05d-89e706c3eec3
 	 * simplet : 	227b2e4d-bd7b-4153-962b-699bc909e5e1
-	 * suiveur :	
+	 * suiveur :	cc207601-8afe-4c67-94d9-17cdc9bea77d
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
