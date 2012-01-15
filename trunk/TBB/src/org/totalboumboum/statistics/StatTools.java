@@ -43,8 +43,8 @@ public class StatTools
 {	
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	//initAllStats();
-		//reinitOverallStatsForPlayer("d6aa991b-f803-4074-8259-220e648a8cd5");
-		//reinitOverallStatsForPlayer("553c0fb4-5418-4e33-b244-d5f399ae40f2");
+		//reinitOverallStatsForPlayer("d6aa991b-f803-4074-8259-220e648a8cd5"); // Joueur humain
+		//reinitOverallStatsForPlayer("553c0fb4-5418-4e33-b244-d5f399ae40f2"); // Joueur Humain 2
 		//reinitOverallStatsForPlayer("227b2e4d-bd7b-4153-962b-699bc909e5e1"); // simplet
 		//exportAllStats();
 		//importAllStats();
