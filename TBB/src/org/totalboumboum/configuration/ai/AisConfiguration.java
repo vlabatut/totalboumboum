@@ -116,6 +116,7 @@ public class AisConfiguration
 	private boolean hideAllAis = false;
 	/** drop a level bomb on players standing still (not doing anything) */
 	private long bombUselessAis = -1;
+	/** time probability */
 	
 	public boolean getHideAllAis()
 	{	return hideAllAis;
