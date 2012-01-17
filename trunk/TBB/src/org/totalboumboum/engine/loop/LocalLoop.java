@@ -344,8 +344,15 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 						else
 							lastAction = lastAction + milliPeriod;
 						long bombUselessAis = Configuration.getAisConfiguration().getBombUselessAis();
+						// we want slightly different times to avoid draws
+						double imprecision = (Math.random()-0.5)/5;
+						bombUselessAis = (long)(bombUselessAis*(1+imprecision));
 						if(bombUselessAis>0 && lastAction>=bombUselessAis)
 						{	int range = 0;
+							// we occasionally increase the range
+							double extraRangeProba = Math.random();
+							if(extraRangeProba>0.95)
+								range = 1;
 							int duration = 3000;
 							Tile tile = player.getSprite().getTile();
 							HollowLevel hollowLevel = round.getHollowLevel();

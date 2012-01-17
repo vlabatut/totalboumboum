@@ -494,4 +494,7 @@
 	- nouvelles ia
 	- nouveau tournoi
 	- intégration de toutes les màj successives des version 21.x
-		
+	
++ beta.023
+	- léger hasard dans le tirage au sort du temps des bombes menaçant les IA
+	- léger hasard dans le tirage au sort de la puissance de ces mêmes bombes
