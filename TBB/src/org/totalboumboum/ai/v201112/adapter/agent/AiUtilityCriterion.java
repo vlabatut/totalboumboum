@@ -50,7 +50,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 		<li>{@link AiUtilityCriterionString} pour des chaînes de caractères</li>
  * </ul>
  * Dans la classe fille créée, la méthode 
- * {@link #evaluateCriterion(AiTile)}
+ * {@link #processValue(AiTile)}
  * doit obligatoirement être définie.
  * <br/>
  * Le critère peut être utilisé pour construire

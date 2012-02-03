@@ -106,9 +106,9 @@ public final class AiUtilityCombination
 	 * de définition du critère spécifié, une {@link IllegalArgumentException}
 	 * est levée.
 	 * 
-	 * @param criterionName
+	 * @param criterion
 	 * 		Le nom du critère concerné par la valeur.
-	 * @param criterionValue
+	 * @param value
 	 * 		La valeur à affecter au critère.
 	 */
 	public <T> void setCriterionValue(AiUtilityCriterion<T> criterion, T value)

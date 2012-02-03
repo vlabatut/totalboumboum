@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 
 /**
  * Classe gérant les déplacements de l'agent. Elle
- * implémente la méthode {@link #updateMode}, utilisée pour 
+ * implémente la méthode {@link #update}, utilisée pour 
  * mettre le mode à jour, et qui ne peut pas être modifiée 
  * ni surchargée. Cette méthode implémente l'algorithme de 
  * sélection du mode défini en cours. Elle fait appel aux 
@@ -120,7 +120,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * à l'agent lui-même et à la stratégie qu'il utilise.
 	 * <br/>
 	 * Cette méthode est utilisée par lors de la mise 
-	 * à jour du mode par {@link #updateMode}.
+	 * à jour du mode par {@link #update}.
 	 * 
 	 * @return
 	 * 		{@code true} ssi l'agent possède assez d'items.
@@ -135,7 +135,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * cachés ou découverts, assez de temps restant, etc.
 	 * <br/>
 	 * Cette méthode est utilisée par lors de la mise 
-	 * à jour du mode par {@link #updateMode}.
+	 * à jour du mode par {@link #update}.
 	 * 
 	 * @return
 	 * 		{@code true} ssi l'agent a la possibilité de ramasser des items.
