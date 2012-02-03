@@ -1366,7 +1366,7 @@ public abstract class AiZone
 	 * @return
 	 * 		La position du point de contact sous forme de couple (x,y)
 	 * 
-	 * @throw IllegalArgumentException
+	 * @throws IllegalArgumentException
 	 * 		Si les deux cases ne sont pas des voisines directes.
 	 */
 	public double[] getContactPoint(AiTile tile1, AiTile tile2)
@@ -1425,7 +1425,7 @@ public abstract class AiZone
 	 * @return
 	 * 		La position du point de contact sous forme de couple (x,y)
 	 * 
-	 * @throw IllegalArgumentException
+	 * @throws IllegalArgumentException
 	 * 		Si les deux points n'appartiennent pas à des cases voisines.
 	 */
 	public double[] getContactPoint(double x1, double y1, double x2, double y2)
@@ -1477,11 +1477,11 @@ public abstract class AiZone
 	 *  en paramètres doivent appartenir à des des 
 	 *  cases voisines directes.
 	 * 
-	 * @param x
+	 * @param x1
 	 * 		L'abscisse du point.
-	 * @param y
+	 * @param y1
 	 * 		L'ordonnée du point.
-	 * @param tile2
+	 * @param tile
 	 * 		La case.
 	 * @param manhattan
 	 * 		Indique si la trajectoire doit être directe ({@code false}) ou si seuls
@@ -1489,7 +1489,7 @@ public abstract class AiZone
 	 * @return
 	 * 		La position du point de contact sous forme de couple (x,y)
 	 * 
-	 * @throw IllegalArgumentException
+	 * @throws IllegalArgumentException
 	 * 		Si le point et la case ne sont pas voisins.
 	 */
 	public double[] getContactPoint(double x1, double y1, AiTile tile, boolean manhattan)
@@ -1548,7 +1548,7 @@ public abstract class AiZone
 	 * 
 	 * @param location
 	 * 		L'emplacement.
-	 * @param tile2
+	 * @param tile
 	 * 		La case.
 	 * @param manhattan
 	 * 		Indique si la trajectoire doit être directe ({@code false}) ou si seuls
@@ -1556,7 +1556,7 @@ public abstract class AiZone
 	 * @return
 	 * 		La position du point de contact sous forme de couple (x,y)
 	 * 
-	 * @throw IllegalArgumentException
+	 * @throws IllegalArgumentException
 	 * 		Si l'emplacement et la case ne sont pas voisins.
 	 */
 	public double[] getContactPoint(AiLocation location, AiTile tile, boolean manhattan)
@@ -1615,13 +1615,13 @@ public abstract class AiZone
 	 * plutôt que directement utiliser les opérateurs + et -, afin
 	 * d'éviter de sortir de la zone.
 	 * 
-	 * @param x
+	 * @param row
 	 * 		Abscisse du point original.
-	 * @param y
+	 * @param col
 	 * 		Ordonnée du point original.
-	 * @param dx
+	 * @param drow
 	 * 		Translation sur l'axe des abscisses.
-	 * @param dy
+	 * @param dcol
 	 * 		Translation sur l'axe des ordonnées.
 	 * @return
 	 * 		Un tableau contenant les coordonnées du résultat de la translation.
