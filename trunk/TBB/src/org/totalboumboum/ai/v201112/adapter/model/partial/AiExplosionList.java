@@ -124,9 +124,9 @@ public AiExplosionList(){}
 	 * renvoyée, sinon c'est la valeur {@code null}
 	 * qui est renvoyée.
 	 * 
-	 * @param start
+	 * @param startTime
 	 * 		L'instant de début de l'intervalle à tester.
-	 * @param time
+	 * @param endTime
 	 * 		L'instant de fin de l'intervalle à tester.
 	 * @return
 	 * 		L'explosion intersectant le paramètre, ou bien {@code null} si l'intersection est vide.
@@ -179,11 +179,10 @@ public AiExplosionList(){}
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Crée une liste d'explosions
-	 * correspondant à une copie de celle
-	 * passée en paramètre.
+	 * correspondant à une copie de cette liste.
 	 * 
-	 * @param list
-	 * 		La liste à copier
+	 * @return
+	 * 		Une copie de cette liste.
 	 */
 	public AiExplosionList copy()
 	{	AiExplosionList result = new AiExplosionList(tile);
