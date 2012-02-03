@@ -151,11 +151,9 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * calculer plus vite le résultat.
 	 * <br/>
 	 * Cette méthode est également utilisable quand cet objet a été construit
-	 * à partir d'un arbre existant avec {@link #BreadthFirst(AiSearchNode)},
+	 * à partir d'un arbre existant avec {@link #Dijkstra(AiSearchNode)},
 	 * ou bien quand la méthode {@link #setRoot(AiSearchNode)} a été utilisée.
 	 * 
-	 * @param endTiles	
-	 * 		L'ensemble des cases d'arrivée possibles.
 	 * @return 
 	 * 		Une map associant un noeud de recherche à chaque case accessible.
 	 * 
