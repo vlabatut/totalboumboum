@@ -342,10 +342,11 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	
 	/**
 	 * Détermine le temps d'attente minimal lorsque
-	 * le joueur est placé dans la case passée en paramètre.
+	 * le joueur est placé dans la case correspondant au
+	 * modèle passé en paramètre.
 	 * 
-	 * @param tile
-	 * 		Case à considérer.
+	 * @param model
+	 * 		Modèle à considérer.
 	 * @return
 	 * 		Un entier long représentant le temps d'attente minimal.	
 	 * 
