@@ -86,7 +86,7 @@ public class AiExplosion implements Comparable<AiExplosion>
 	 * Modifie le moment de démarrage
 	 * (en ms) de l'explosion.
 	 * 
-	 * @param
+	 * @param start
 	 * 		Le nouveau moment de démarrage de l'explosion.
 	 */
 	public void setStart(long start)
