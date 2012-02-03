@@ -40,7 +40,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Si vous désirez définir un critère binaire,
  * vous devez créer une classe fille de celle-ci,
  * dans laquelle vous surchargez la méthode
- * {@link #evaluateCriterion}. Cette méthode
+ * {@link #processValue}. Cette méthode
  * prend une case en paramètre et doit calculer la
  * valeur de ce critère pour cette case-là.
  * 

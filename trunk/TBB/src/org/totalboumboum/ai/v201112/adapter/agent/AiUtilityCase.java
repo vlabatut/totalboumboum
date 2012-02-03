@@ -64,7 +64,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * 
 	 * @param name
 	 * 		Nom du nouveau critère.
-	 * @param domain
+	 * @param criteria
 	 * 		Ensemble des valeurs possible pour ce critère.
 	 * 
 	 * @throws IllegalArgumentException
@@ -126,12 +126,10 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * Méthode calculant la combinaison décrivant
 	 * une case donnée, pour ce cas.
 	 * Cette méthode utilise indirectement
-	 * {@link AiUtilityCriterion#evaluateCriterion}.
+	 * {@link AiUtilityCriterion#processValue}.
 	 * 
 	 * @param tile
 	 * 		La case à évaluer.
-	 * @param parameters
-	 * 		Liste d'objets transmise à {@link AiUtilityCriterion#evaluateCriterion}.
 	 * 
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.

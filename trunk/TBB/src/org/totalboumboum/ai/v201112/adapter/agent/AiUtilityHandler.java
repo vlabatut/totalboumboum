@@ -39,10 +39,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * En particulier, elle doit implémenter la méthode
- * {@link #updateUtility} de l'algorithme général.
+ * {@link #update} de l'algorithme général.
  * <br/>
  * Cette classe contient 2 variables qui doivent être 
- * obligatoirement être mises à jour par {@code updateUtility} :
+ * obligatoirement être mises à jour par {@code update} :
  * <ul>
  * 		<li>{@link #utilitiesByTile} : map associant une valeur d'utilité à chaque case accessible ;</li>
  * 		<li>{@link #utilitiesByValue} : map associant à chaque valeur la liste des cases qui ont cette utilité.</li>
@@ -274,7 +274,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @return
 	 * 		L'utilité associée à la combinaison spécifiée.
 	 * 
-	 * @throw IllegalArgumentException
+	 * @throws IllegalArgumentException
 	 * 		ssi la combinaison spécifiée n'est pas présente dans {@link #referenceUtilities}.
 	 */
 	protected final int getUtilityValue(AiUtilityCombination combination)
