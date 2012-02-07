@@ -1,8 +1,0 @@
-<class-diagram version="1.0.7" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
-  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
-    <attributes public="false" package="false" protected="false" private="false"/>    
-    <operations public="false" package="false" protected="false" private="false"/>  
-  </classifier-display>  
-  <association-display labels="false" multiplicity="false"/>
-</class-diagram>
