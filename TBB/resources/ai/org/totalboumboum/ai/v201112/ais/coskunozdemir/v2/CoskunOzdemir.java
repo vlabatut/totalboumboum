@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class CoskunOzdemir extends ArtificialIntelligence
 {
 	/**

@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v3.CoskunOzdemir;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class Securite extends AiUtilityCriterionBoolean
 {
 	public static final String	NAME	= "Securite";

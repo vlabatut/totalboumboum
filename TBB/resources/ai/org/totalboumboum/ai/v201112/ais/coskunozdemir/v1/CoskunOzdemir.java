@@ -27,11 +27,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe principale de votre agent, que vous devez compléter. Cf. la
  * documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
- * 
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class CoskunOzdemir extends ArtificialIntelligence
 {
 	private ArrayList<AiTile> accessibleTiles;

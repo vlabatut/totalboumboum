@@ -9,6 +9,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<CoskunOzdemir>
 {
 	/**

@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Utku Ozdemir
  * @author Doruk Coskun
  */
+@SuppressWarnings("deprecation")
 public class TileOperation
 {
 	// FIELD

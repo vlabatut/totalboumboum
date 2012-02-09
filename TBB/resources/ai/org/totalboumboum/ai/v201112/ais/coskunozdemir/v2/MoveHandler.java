@@ -16,6 +16,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<CoskunOzdemir>
 {
 	/**

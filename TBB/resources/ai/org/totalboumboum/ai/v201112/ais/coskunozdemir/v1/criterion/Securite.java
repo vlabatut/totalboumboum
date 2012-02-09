@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v1.CoskunOzdemir;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class Securite extends AiUtilityCriterionBoolean
 {
 	/** Nom de ce critère */

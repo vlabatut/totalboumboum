@@ -28,6 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir>
 {
 	/**

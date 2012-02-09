@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v2.TileOperation;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class AvancePertinence extends AiUtilityCriterionBoolean
 {
 	public static final String	NAME	= "AvancePertinence";

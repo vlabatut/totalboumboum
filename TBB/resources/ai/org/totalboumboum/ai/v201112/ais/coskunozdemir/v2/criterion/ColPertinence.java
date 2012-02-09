@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v2.CoskunOzdemir;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class ColPertinence extends AiUtilityCriterionBoolean
 {
 	public static final String	NAME	= "ColPertinence";
