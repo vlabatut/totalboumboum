@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201112.ais.capmunavarov.v1.CapMunavarov;
  * @author Fahri Cap
  * @author Suhrob Munavarov
  */
+@SuppressWarnings("deprecation")
 public class CriterionThird extends AiUtilityCriterionString
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";

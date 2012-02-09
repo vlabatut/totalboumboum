@@ -22,6 +22,7 @@ import org.totalboumboum.ai.v201112.ais.capmunavarov.v1.criterion.CriterionThird
  * @author Fahri Cap
  * @author Suhrob Munavarov
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<CapMunavarov>
 {	
 	/**

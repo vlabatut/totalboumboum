@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201112.ais.capmunavarov.v1.CapMunavarov;
  * @author Fahri Cap
  * @author Suhrob Munavarov
  */
+@SuppressWarnings("deprecation")
 public class CriterionFirst extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";
