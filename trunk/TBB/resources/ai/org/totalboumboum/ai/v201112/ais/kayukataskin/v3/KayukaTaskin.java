@@ -12,10 +12,10 @@ import org.totalboumboum.ai.v201112.ais._simplet.CommonTools;
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- *
  * @author Pol Kayuka
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class KayukaTaskin extends ArtificialIntelligence
 {
 	@Override

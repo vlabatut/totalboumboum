@@ -5,14 +5,15 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
+
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * 
  * @author Pol Kayuka
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<KayukaTaskin>
 {	
 	/**
