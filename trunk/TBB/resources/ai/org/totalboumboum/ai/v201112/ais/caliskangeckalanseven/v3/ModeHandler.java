@@ -12,12 +12,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * 
- * 
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<CaliskanGeckalanSeven>
 {	
 	/**

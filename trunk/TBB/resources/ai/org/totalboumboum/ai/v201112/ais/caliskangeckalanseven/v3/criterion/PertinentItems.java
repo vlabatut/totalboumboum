@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201112.ais.caliskangeckalanseven.v3.CaliskanGeckala
  * @author Gökhan Geçkalan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class PertinentItems extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "PERTINENTITEMS";

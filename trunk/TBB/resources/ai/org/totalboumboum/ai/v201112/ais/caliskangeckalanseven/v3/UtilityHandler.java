@@ -40,11 +40,11 @@ import org.totalboumboum.ai.v201112.ais.caliskangeckalanseven.v3.criterion.Rival
  * Classe gérant le calcul des valeurs d'utilité de l'agent. Cf. la
  * documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * 
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalanSeven> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
