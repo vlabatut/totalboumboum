@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201112.ais.kayukataskin.v3.KayukaTaskin;
  * @author Pol Kayuka
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class CriterionFirst extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";

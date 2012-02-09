@@ -22,10 +22,10 @@ import org.totalboumboum.ai.v201112.adapter.path.search.Astar;
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
  * 
- * 
  * @author Pol Kayuka
  * @author Ayça Taşkın
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 {	
 	/**
