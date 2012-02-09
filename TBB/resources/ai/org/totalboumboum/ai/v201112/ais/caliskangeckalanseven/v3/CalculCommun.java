@@ -30,9 +30,14 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.TimePartialSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Mustafa Çalışkan
+ * @author Gökhan Geçkalan
+ * @author Cihan Seven
+ */
+@SuppressWarnings("deprecation")
 public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 
-	
 	AiZone zone = null;
 	AiHero ownHero = null;
 	AiTile currentTile = null;

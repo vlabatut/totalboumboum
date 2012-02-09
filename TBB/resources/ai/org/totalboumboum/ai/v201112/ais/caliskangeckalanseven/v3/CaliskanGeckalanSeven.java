@@ -11,12 +11,11 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- *
- *
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class CaliskanGeckalanSeven extends ArtificialIntelligence
 {
 	@Override

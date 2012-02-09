@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Gökhan Geçkalan
  * @author Cihan Seven
  */
+@SuppressWarnings("deprecation")
 public class PertinentMurs extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "PERTINENTMURS";
