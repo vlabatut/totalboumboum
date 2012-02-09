@@ -7,11 +7,10 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 /**
  * Bomb Handler class to drop bomb action.
  * 
- * 
- * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<BalCetin> {
 
 	protected BombHandler(BalCetin ai) throws StopRequestException {

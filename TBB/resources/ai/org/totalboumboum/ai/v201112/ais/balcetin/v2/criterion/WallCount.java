@@ -8,11 +8,12 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v2.BalCetin;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- *Criterion integer to decide how many wall neighbors a tile has.
+ * Criterion integer to decide how many wall neighbors a tile has.
  * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class WallCount extends AiUtilityCriterionInteger {
 	/** Nom de ce critère */
 	public static final String NAME = "WallCount";

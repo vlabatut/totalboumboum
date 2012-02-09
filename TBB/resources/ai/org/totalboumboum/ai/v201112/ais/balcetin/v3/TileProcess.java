@@ -15,9 +15,9 @@ import org.totalboumboum.ai.v201112.adapter.path.search.Astar;
 /**
  * Tile process class to get tile processes.
  * 
- * @author Adnan BAL
- * 
+ * @author Adnan Bal
  */
+@SuppressWarnings("deprecation")
 public class TileProcess {
 	BalCetin ai;
 	public Astar astar = null;

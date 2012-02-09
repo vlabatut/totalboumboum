@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v1.BalCetin;
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class CriterionThird extends AiUtilityCriterionString
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";

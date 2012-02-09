@@ -7,14 +7,13 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.balcetin.v3.BalCetin;
 
-
 /**
  * Criterion to decide if the tile is max. 6 tiles away.
+ * true if the tile is max 6 tiles away. false otherwise.
  * 
- * @return true if the tile is max 6 tiles away. false otherwise.
  * @author adnan
- * 
  */
+@SuppressWarnings("deprecation")
 public class AcceptableDistance extends AiUtilityCriterionBoolean {
 
 	public static final String NAME = "AcceptableDistance";

@@ -10,9 +10,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 /**
  * Hero process class to get Hero processes.
  * 
- * @author Adnan BAL
- * 
+ * @author Adnan Bal
  */
+@SuppressWarnings("deprecation")
 public class HeroProcess {
 	BalCetin ai;
 

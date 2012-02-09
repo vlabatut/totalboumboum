@@ -1,8 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.balcetin.v2;
 
-
-
-
 import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
@@ -16,12 +13,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 /**
  * Our principal class of our AI 
  *
- * 
- * 
- *
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class BalCetin extends ArtificialIntelligence
 {
 	public AiHero ownHero ;

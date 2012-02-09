@@ -10,11 +10,10 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v2.BalCetin;
 /**
  * The criterion binary to decide if a tile is in acceptable distance for our AI.
  * 
- * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
-
+@SuppressWarnings("deprecation")
 public class AcceptableDistance extends AiUtilityCriterionBoolean {
 	/** Nom de ce critère */
 	public static final String NAME = "AcceptableDistance";

@@ -11,10 +11,13 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.BalCetin;
 import org.totalboumboum.ai.v201112.ais.balcetin.v3.TileProcess;
 
 /**
- * Criterion to decide how many opponent will be dead if we put this tile a bomb. 
+ * Criterion to decide how many opponent will
+ * be dead if we put this tile a bomb.
+ *  
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class PossibleDeadOpponentCount extends AiUtilityCriterionInteger {
 	
 	public static final String NAME = "PossibleDeadOpponentCount";

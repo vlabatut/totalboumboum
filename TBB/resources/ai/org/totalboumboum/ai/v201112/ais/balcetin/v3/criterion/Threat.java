@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.TileProcess;
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class Threat extends AiUtilityCriterionBoolean {
 	public static final String NAME = "Threat";
 
