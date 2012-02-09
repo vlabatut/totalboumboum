@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * @author Serdil Demir
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<DemirSazan>
 {	
 	/**

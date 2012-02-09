@@ -11,11 +11,12 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ * Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  *
  * @author Serdil Demir
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class DemirSazan extends ArtificialIntelligence
 {
 	@Override

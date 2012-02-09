@@ -44,9 +44,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * utilisées par les différents gestionnaires.
  * et ajoutée quelques methodes 
  * 
- * @author Vincent Labatut
- * @modifier Serdil Demir
+ * @author Serdil Demir
+ * @author Gokhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class CommonTools extends AiAbstractHandler<DemirSazan>
 {	
 	/**
