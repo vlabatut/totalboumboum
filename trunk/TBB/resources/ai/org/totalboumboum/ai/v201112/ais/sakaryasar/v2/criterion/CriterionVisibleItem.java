@@ -5,6 +5,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.sakaryasar.v2.SakarYasar;
 
+@SuppressWarnings("deprecation")
 public class CriterionVisibleItem extends AiUtilityCriterionBoolean {
 	public static final String NAME = "VISIBLEITEM";
 	

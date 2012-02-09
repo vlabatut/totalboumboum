@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
  */
+@SuppressWarnings("deprecation")
 public class SakarYasar extends ArtificialIntelligence
 {
 	@Override

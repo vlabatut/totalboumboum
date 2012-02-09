@@ -12,7 +12,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * @author Cahide Sakar
+ * @author Abdurrahman Yaşar
+ */
+@SuppressWarnings("deprecation")
 public class Tools extends AiAbstractHandler<SakarYasar>{
 
 	protected Tools(SakarYasar ai) throws StopRequestException {

@@ -30,11 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
  */
-/**
- * @author Abdurrahman Yasar
- * @author Cahide Sakar
- *
- */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	protected AiZone zone = null;
 	protected AiHero ownHero = null;

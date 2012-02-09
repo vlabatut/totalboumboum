@@ -24,10 +24,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * 
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<SakarYasar>
 {	
 	/**

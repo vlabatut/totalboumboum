@@ -1,20 +1,22 @@
 package org.totalboumboum.ai.v201112.ais.sakaryasar.v1;
 
 import java.util.List;
+
 import java.util.ListIterator;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
+
 /**
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * 
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<SakarYasar>
 {	
 	/**
