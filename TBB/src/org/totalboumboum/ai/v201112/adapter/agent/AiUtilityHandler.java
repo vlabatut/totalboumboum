@@ -58,6 +58,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * qui est donnée ici en exemple afin d'afficher les valeurs d'utilité courantes.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	

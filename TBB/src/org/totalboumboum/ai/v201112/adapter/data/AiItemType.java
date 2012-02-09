@@ -25,7 +25,9 @@ package org.totalboumboum.ai.v201112.adapter.data;
  * types d'items reconnus par l'agent.
  * 	
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiItemType
 {

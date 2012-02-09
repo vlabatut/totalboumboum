@@ -29,7 +29,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiTile implements Comparable<AiTile>
 {	

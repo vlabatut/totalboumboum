@@ -34,7 +34,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimState  implements AiState
 {

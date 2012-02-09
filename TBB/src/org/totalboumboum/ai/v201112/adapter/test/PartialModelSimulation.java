@@ -33,6 +33,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * le modèle partiel.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class PartialModelSimulation
 {

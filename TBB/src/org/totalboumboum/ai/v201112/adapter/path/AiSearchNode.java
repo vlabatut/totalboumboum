@@ -38,6 +38,9 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
  * que A*. 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSearchNode// implements Comparable<AiSearchNode>
 {	

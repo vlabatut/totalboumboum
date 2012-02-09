@@ -39,6 +39,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  *
  * @param <T>
  * 		type de sprite représenté
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 abstract class AiDataSprite<T extends Sprite> implements AiSprite
 {	

@@ -54,6 +54,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * exemples, adaptés à Dijkstra.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class DijkstraUse
 {

@@ -46,6 +46,9 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * valeur de ce critère pour cette case-là.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiUtilityCriterionInteger extends AiUtilityCriterion<Integer>
 {	

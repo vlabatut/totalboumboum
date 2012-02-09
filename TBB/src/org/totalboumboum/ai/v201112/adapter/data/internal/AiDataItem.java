@@ -51,7 +51,9 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataItem extends AiDataSprite<Item> implements AiItem
 {	

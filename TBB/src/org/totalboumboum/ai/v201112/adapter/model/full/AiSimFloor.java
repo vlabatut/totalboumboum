@@ -29,7 +29,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimFloor extends AiSimSprite implements AiFloor
 {

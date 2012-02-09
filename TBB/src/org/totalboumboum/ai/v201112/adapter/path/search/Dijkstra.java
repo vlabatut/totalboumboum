@@ -65,6 +65,9 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
  * Le but est d'introduire une part de hasard dans les agents, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class Dijkstra extends AiAbstractSearchAlgorithm
 {	

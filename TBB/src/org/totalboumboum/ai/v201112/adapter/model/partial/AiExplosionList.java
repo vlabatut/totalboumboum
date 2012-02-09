@@ -33,6 +33,9 @@ import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
  * utilisée dans {@link AiPartialModel}
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiExplosionList extends TreeSet<AiExplosion>
 {	private static final long serialVersionUID = 1L;

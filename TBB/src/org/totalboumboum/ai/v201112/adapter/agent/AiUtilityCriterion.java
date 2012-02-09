@@ -62,6 +62,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * le(s) cas qui l'utilise(nt).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCriterion<?>>
 {	

@@ -35,6 +35,9 @@ import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
  * développer un état.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class SuccessorCalculator
 {	
