@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class NombreDeMurs extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "NombreDeMurs";

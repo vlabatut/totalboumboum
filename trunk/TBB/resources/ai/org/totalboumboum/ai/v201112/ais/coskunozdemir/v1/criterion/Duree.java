@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.coskunozdemir.v1.criterion;
 
-
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
@@ -13,6 +12,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v1.CoskunOzdemir;
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class Duree extends AiUtilityCriterionBoolean
 {
 	/** Nom de ce critère */

@@ -10,10 +10,10 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v2.TileOperation;
 /**
  * The criteria that will evaluate the tile for attack suitability.
  * 
- * 
  * @author Doruk Coşkun
  * @author Utku Özdemir
  */
+@SuppressWarnings("deprecation")
 public class AttaPertinence extends AiUtilityCriterionBoolean
 {
 	public static final String	NAME			= "AttaPertinence";

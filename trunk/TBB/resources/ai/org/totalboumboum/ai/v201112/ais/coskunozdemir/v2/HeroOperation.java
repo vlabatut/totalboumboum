@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * @author Utku Ozdemir
  * @author Doruk Coskun
  */
+@SuppressWarnings("deprecation")
 public class HeroOperation
 {
 	// FIELD
