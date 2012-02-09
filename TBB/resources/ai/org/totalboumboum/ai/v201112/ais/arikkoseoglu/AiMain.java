@@ -30,6 +30,7 @@ import org.totalboumboum.ai.v201112.ais.arikkoseoglu.v3.ArikKoseoglu;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

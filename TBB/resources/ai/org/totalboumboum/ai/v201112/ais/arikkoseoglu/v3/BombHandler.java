@@ -18,11 +18,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
- * 
  * @author Furkan Arık
  * @author Aksel Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<ArikKoseoglu>
 {	
 	/**

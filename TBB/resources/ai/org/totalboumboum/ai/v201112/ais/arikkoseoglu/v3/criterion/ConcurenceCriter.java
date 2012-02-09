@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201112.ais.arikkoseoglu.v3.ArikKoseoglu;
  * @author Furkan Arık
  * @author Aksel Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class ConcurenceCriter extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "CONCURENCE";
