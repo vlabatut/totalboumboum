@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.agent;
+package org.totalboumboum.ai.v201213.adapter.agent;
 
 /*
  * Total Boum Boum
@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  * 
  */
 
-import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 
 /**
  * Classe servant de base à la définition de gestionnaires
