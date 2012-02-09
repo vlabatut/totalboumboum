@@ -52,6 +52,7 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
  *
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class Simplet extends ArtificialIntelligence
 {
 	@Override

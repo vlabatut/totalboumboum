@@ -42,6 +42,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class SimpletTest
 {
 	public static void main(String args[]) throws StopRequestException

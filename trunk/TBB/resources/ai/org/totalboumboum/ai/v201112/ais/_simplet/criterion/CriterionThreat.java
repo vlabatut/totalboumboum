@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class CriterionThreat extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "THREAT";

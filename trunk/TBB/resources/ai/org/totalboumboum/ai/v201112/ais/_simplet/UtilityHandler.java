@@ -58,6 +58,7 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<Simplet>
 {	
 	/**

@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Simplet>
 {	
 	/**
