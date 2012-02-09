@@ -13,9 +13,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Enis Demirel
  * @author Berke Öz
  */
-
-
-
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<DemirelOz>
 {	
 	/**

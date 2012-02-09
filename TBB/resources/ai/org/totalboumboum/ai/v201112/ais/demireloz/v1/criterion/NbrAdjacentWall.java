@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v1.DemirelOz;
  * @author Enis Demirel
  * @author Berke Öz
  */
+@SuppressWarnings("deprecation")
 public class NbrAdjacentWall extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "NbrAdjacentWall";

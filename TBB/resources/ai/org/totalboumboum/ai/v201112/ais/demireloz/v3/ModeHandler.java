@@ -6,6 +6,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<DemirelOz> {
 	public static final int BOMB_NUMBER = 2;
 	public static final int RANGE_NUMBER = 3;

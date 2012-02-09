@@ -7,6 +7,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.demireloz.v2.DemirelOz;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class NbrAdjacentWall extends AiUtilityCriterionInteger {
 	public static final String NAME = "NbrAdjacentWall";
 

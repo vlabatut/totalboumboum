@@ -25,6 +25,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 
 	public UtilityHandler(DemirelOz ai) throws StopRequestException {
