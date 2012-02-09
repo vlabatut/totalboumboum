@@ -37,10 +37,10 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v2.criterion.CriterionVoisi
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * 
- * @author Merve ÜNLÜ
+ * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
 	protected UtilityHandler(UnluYildirim ai) throws StopRequestException {
 		super(ai);

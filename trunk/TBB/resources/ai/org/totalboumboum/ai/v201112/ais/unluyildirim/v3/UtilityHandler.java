@@ -38,9 +38,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Merve ÜNLÜ
+ * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
 	protected UtilityHandler(UnluYildirim ai) throws StopRequestException {
 		super(ai);

@@ -10,10 +10,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
 
 /**
- * Cette classe represente la methode processValue qui compte les murs voisins de le tile. 
+ * Cette classe represente la methode processValue qui compte les murs voisins de le tile.
+ *  
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class CriterionFacile extends AiUtilityCriterionBoolean
 {	
 	public static final String NAME = "FACILE";

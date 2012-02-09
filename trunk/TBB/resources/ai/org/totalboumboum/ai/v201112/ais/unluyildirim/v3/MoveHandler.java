@@ -28,6 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 
 	AiTile hero_destination = null;

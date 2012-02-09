@@ -9,10 +9,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiItem;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 
 /**.
- * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<UnluYildirim>
 {	
 	/**

@@ -23,6 +23,7 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class CriterionAccessible extends AiUtilityCriterionBoolean
 {	
 	public static final String NAME = "ACCESSIBLE";

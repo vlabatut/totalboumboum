@@ -12,9 +12,11 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
 /**
  * Cette classe represent le critere besoin
  * Si l'agent a besoin l'item dans le tile , il retourne true.
+ * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class CriterionBesoin extends AiUtilityCriterionBoolean
 {	
 	public static final String NAME = "BESOIN";

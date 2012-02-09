@@ -15,6 +15,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class CriterionVoisin extends AiUtilityCriterionInteger {
 	public static final String NAME = "VOISIN";
 

@@ -15,9 +15,11 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  * Cette classe represente le critere de concurrence.
  * Il indique s'il y a une adversaire que se trouve plus proche que notre IA.
  * Si oui , la fonction renvoie false.
+ * 
  * @author Merve Ünlü
  * @author Gülay Yildirim
  */
+@SuppressWarnings("deprecation")
 public class CriterionConcurrence extends AiUtilityCriterionBoolean
 {	
 	public static final String NAME = "CONCURRENCE";

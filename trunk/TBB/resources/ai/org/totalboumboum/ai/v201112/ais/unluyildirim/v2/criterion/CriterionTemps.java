@@ -11,10 +11,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.unluyildirim.v2.UnluYildirim;
 
 /**
- * 
  * @author Merve Ünlü
  * @author Gülay Yildirim
  */
+@SuppressWarnings("deprecation")
 public class CriterionTemps extends AiUtilityCriterionBoolean
 {	
 	public static final String NAME = "TEMPS";
