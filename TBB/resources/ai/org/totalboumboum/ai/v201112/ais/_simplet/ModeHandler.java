@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Simplet>
 {	
 	/**

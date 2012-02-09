@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class CriterionLocality extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "LOCAL";
