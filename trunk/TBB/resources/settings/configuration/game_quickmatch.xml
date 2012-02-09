@@ -33,8 +33,8 @@
 		</points>
 	</settings>
 	<players>
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="1" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="2" spritePack="superbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tournament201112" folder="qualif1" allowedPlayers="2 3 4 5" />
