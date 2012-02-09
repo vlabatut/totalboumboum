@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**
