@@ -13,6 +13,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Kaan İlter
  * @author Önder Kaya
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<IlterKaya>
 {	
 	/**
