@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus.v2;
 
-
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiMode;
@@ -16,6 +15,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<GungorKavus>
 {	
 	

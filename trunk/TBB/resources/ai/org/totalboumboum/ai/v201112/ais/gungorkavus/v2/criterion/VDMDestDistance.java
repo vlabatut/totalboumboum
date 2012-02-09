@@ -20,6 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author EyÃ¼p Burak GÃ¼ngÃ¶r
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class VDMDestDistance extends AiUtilityCriterionBoolean
 {	/** Nom de ce critÃ¨re */
 	public static final String NAME = "Distance";

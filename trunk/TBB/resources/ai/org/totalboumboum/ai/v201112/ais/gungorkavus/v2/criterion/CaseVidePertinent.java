@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus.v2.criterion;
 
-
-
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
@@ -17,6 +15,7 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v2.GungorKavus;
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class CaseVidePertinent extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "Pertinent";

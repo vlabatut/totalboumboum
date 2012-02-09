@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus.v1;
 
-
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiMode;
@@ -12,10 +11,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<GungorKavus>
 {	
 	
