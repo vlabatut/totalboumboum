@@ -22,6 +22,11 @@ import org.totalboumboum.ai.v201112.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class DemirelOz extends ArtificialIntelligence {
 	AiZone zone;
 	AiHero ourhero;

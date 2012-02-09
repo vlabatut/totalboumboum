@@ -7,6 +7,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class Danger extends AiUtilityCriterionBoolean {
 	public static final String NAME = "Danger";
 

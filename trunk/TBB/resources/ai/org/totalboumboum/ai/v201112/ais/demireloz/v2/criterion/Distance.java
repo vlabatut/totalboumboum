@@ -5,6 +5,11 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.demireloz.v2.DemirelOz;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class Distance extends AiUtilityCriterionBoolean {
 	public static final String NAME = "Distance";
 	public static final int DISTANCE_TRUE = 4;

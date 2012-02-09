@@ -9,6 +9,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<DemirelOz> {
 
 	public static final int BLOCK = 15;

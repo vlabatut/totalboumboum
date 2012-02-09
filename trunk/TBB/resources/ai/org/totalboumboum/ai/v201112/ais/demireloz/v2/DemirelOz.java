@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.demireloz.v2;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +20,11 @@ import org.totalboumboum.ai.v201112.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201112.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class DemirelOz extends ArtificialIntelligence
 {   
 	@Override

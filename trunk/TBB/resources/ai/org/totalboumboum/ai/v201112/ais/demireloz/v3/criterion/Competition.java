@@ -8,6 +8,11 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class Competition extends AiUtilityCriterionBoolean {
 	public static final String NAME = "Competition";
 	public static final int COMPETITITON_TRUE = 5;

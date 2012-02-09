@@ -24,8 +24,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
@@ -34,6 +32,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Enis Demirel
  * @author Berke Öz
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<DemirelOz>
 {	
 	/**

@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v1.DemirelOz;
  * @author Enis Demirel
  * @author Berke Öz
  */
+@SuppressWarnings("deprecation")
 public class Convenience extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "Convenience";

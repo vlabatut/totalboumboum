@@ -1,4 +1,3 @@
-
 package org.totalboumboum.ai.v201112.ais.demireloz.v3.criterion;
 
 import java.util.HashMap;
@@ -8,6 +7,11 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
 
+/**
+ * @author Enis Demirel
+ * @author Berke Öz
+ */
+@SuppressWarnings("deprecation")
 public class IsEnemyReachable extends AiUtilityCriterionInteger
 {	
 	public static final String NAME = "IsEnemyReachable";

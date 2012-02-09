@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Enis Demirel
  * @author Berke Öz
  */
+@SuppressWarnings("deprecation")
 public class DemirelOz extends ArtificialIntelligence
 {
 	@Override
