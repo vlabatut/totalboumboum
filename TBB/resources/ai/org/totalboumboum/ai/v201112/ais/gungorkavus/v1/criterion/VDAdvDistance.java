@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v1.GungorKavus;
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class VDAdvDistance extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "Distance";

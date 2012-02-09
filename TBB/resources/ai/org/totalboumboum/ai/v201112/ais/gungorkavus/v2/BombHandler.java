@@ -15,15 +15,14 @@ import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<GungorKavus>
 {	
 	/**

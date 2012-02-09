@@ -1,13 +1,10 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus.v1.criterion;
 
-
-
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.gungorkavus.v1.GungorKavus;
 import org.totalboumboum.engine.content.feature.Direction;
-
 
 /**
  * Cette classe représente est un simple exemple de 
@@ -17,6 +14,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class VDMDestIntersection extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "Intersec";

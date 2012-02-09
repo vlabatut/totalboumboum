@@ -11,7 +11,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.gungorkavus.v3.GungorKavus;
 
-
 /**
  * Cette classe représente est un simple exemple de 
  * critère binaire. Copiez-la, renommez-la, modifiez-la
@@ -20,6 +19,7 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v3.GungorKavus;
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class ItemVisibleDistance extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "Distance";

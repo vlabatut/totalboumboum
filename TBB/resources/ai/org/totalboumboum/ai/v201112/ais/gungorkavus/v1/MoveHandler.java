@@ -17,10 +17,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
  * 
- * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<GungorKavus>
 {	
 	/**

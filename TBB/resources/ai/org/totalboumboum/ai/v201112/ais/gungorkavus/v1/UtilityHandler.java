@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus.v1;
 
-
-
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -34,10 +32,10 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v1.criterion.VDMDestPertinen
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<GungorKavus>
 {	
 	/**

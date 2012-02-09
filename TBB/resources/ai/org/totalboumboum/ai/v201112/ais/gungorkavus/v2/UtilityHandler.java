@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus.v2;
 
-
-
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -41,6 +39,7 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v2.criterion.VDMDestPertinen
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<GungorKavus>
 {	
 	/**

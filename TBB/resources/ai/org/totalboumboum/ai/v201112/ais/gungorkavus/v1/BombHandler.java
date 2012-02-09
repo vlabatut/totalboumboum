@@ -1,19 +1,16 @@
 package org.totalboumboum.ai.v201112.ais.gungorkavus.v1;
 
-
-
 import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-
 
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * 
  * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<GungorKavus>
 {	
 	/**

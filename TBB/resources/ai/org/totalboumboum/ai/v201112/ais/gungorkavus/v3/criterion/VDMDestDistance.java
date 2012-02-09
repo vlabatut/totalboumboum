@@ -17,9 +17,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * critÃ¨re binaire. Copiez-la, renommez-la, modifiez-la
  * pour l'adapter Ã vos besoin.
  * 
- * @author EyÃ¼p Burak GÃ¼ngÃ¶r
+ * @author Eyüp Burak Güngör
  * @author Umit Kavus
  */
+@SuppressWarnings("deprecation")
 public class VDMDestDistance extends AiUtilityCriterionBoolean
 {	/** Nom de ce critÃ¨re */
 	public static final String NAME = "Distance";
