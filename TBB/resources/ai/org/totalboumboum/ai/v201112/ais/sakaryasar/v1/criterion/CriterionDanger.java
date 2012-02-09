@@ -9,6 +9,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.sakaryasar.v1.SakarYasar;
 
+/**
+ * @author Cahide Sakar
+ * @author Abdurrahman Yaşar
+ */
+@SuppressWarnings("deprecation")
 public class CriterionDanger extends AiUtilityCriterionBoolean{
 	public static final String NAME = "DANGER";
 	

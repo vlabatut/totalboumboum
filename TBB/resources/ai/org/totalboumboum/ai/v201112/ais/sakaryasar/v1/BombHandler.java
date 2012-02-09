@@ -11,10 +11,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * 
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<SakarYasar>
 {	
 	/**

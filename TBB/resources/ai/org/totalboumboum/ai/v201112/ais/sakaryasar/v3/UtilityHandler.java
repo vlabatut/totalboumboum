@@ -28,6 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Cahide Sakar
  * @author Abdurrahman Yaşar
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<SakarYasar>
 {	
 	/**

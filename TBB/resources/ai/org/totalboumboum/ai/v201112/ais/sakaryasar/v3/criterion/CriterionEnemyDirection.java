@@ -9,6 +9,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.sakaryasar.v3.SakarYasar;
 
+/**
+ * @author Cahide Sakar
+ * @author Abdurrahman Yaşar
+ */
+@SuppressWarnings("deprecation")
 public class CriterionEnemyDirection extends AiUtilityCriterionBoolean{
 	public static final String NAME = "ENEMYDIRECTION";
 	

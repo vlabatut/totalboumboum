@@ -6,6 +6,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.sakaryasar.v1.SakarYasar;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Cahide Sakar
+ * @author Abdurrahman Yaşar
+ */
+@SuppressWarnings("deprecation")
 public class CriterionChaineReaction extends AiUtilityCriterionBoolean{
 	public static final String NAME = "REACTION";
 	
