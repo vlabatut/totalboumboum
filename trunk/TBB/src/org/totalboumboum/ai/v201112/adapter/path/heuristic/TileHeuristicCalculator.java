@@ -56,6 +56,9 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalcula
  * mais approximatif. 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class TileHeuristicCalculator extends HeuristicCalculator
 {

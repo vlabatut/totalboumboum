@@ -27,7 +27,9 @@ package org.totalboumboum.ai.v201112.adapter.data;
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public interface AiFloor extends AiSprite
 {	

@@ -32,6 +32,9 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * ne fait rien, donc l'agent ne posera jamais de bombe.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiBombHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	

@@ -63,6 +63,9 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.TimePartialSuccessorC
  * </ul>
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class TimeCostCalculator extends CostCalculator
 {

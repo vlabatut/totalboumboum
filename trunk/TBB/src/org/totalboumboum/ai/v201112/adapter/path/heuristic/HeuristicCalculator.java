@@ -35,6 +35,9 @@ import org.totalboumboum.ai.v201112.adapter.path.AiSearchNode;
  * de recherche lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class HeuristicCalculator
 {

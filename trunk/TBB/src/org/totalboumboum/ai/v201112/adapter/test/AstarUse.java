@@ -55,6 +55,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * manières.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AstarUse
 {

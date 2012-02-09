@@ -94,6 +94,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * </ul>
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class TimePartialSuccessorCalculator extends SuccessorCalculator
 {

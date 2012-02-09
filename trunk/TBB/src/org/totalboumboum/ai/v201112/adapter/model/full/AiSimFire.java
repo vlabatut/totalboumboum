@@ -31,7 +31,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimFire extends AiSimSprite implements AiFire
 {

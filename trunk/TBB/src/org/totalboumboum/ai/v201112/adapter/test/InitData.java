@@ -40,6 +40,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Cette classe permet d'initialiser une zone et une fausse ia.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class InitData
 {

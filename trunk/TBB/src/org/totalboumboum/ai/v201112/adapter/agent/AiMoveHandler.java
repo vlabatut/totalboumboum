@@ -50,6 +50,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * la destination et le chemin courants.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	

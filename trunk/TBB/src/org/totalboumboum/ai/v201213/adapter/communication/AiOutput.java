@@ -30,9 +30,18 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.path.AiPath;
 
 /**
+ * Cette classe permet d'accéder à la sortie graphique de l'agent.
+ * Il est ainsi possible d'afficher, en cours de jeu :
+ * <ul>
+ * 		<li>Des chemins, sous forme de lignes droites.</li>
+ * 		<li>Des couleurs en transparence sur les cases.</li>
+ * 		<li>Du texte dans les cases.</li>
+ * </ul> 
+ * A noter que l'objet {@code AiOutput} de l'agent est réinitialisé
+ * à chaque itération, donc il faut systématiquement le modifier
+ * pour avoir un affichage en continu.
  * 
  * @author Vincent Labatut
- *
  */
 public class AiOutput
 {

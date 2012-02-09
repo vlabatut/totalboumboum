@@ -44,6 +44,9 @@ import org.totalboumboum.tools.files.FileNames;
  * du dossier contenant l'agent (ou les agents).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class ParseAi
 {	/** Active/désactive la sortie texte */

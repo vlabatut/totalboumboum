@@ -42,8 +42,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * plusieurs chemins pour aller à une même case.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
-
 public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 

@@ -33,6 +33,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * </ul>
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiExplosion implements Comparable<AiExplosion>
 {	

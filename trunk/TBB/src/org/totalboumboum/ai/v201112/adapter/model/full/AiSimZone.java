@@ -54,6 +54,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * 
  * @author Vincent Labatut
  *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimZone extends AiZone
 {	

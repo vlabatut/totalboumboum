@@ -37,6 +37,9 @@ import java.util.Set;
  * les domaines des critères correspondant.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiUtilityCombination
 {	

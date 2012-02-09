@@ -27,6 +27,9 @@ package org.totalboumboum.ai.v201112.adapter.agent;
  * ou {@code ATTACKING}.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiMode
 {	

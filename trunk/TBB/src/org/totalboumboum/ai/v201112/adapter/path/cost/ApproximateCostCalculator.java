@@ -60,6 +60,9 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.ApproximateSuccessorC
  * </ul>
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class ApproximateCostCalculator extends CostCalculator
 {

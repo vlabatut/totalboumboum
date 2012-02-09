@@ -43,7 +43,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
-
 public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 

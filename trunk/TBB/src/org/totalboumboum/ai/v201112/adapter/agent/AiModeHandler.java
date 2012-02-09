@@ -38,6 +38,9 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * champ {@link #mode}.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiModeHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	
