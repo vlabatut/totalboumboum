@@ -19,13 +19,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- * Effacez ces commentaires et remplacez-les par votre propre Javadoc.
- *
  * @author Fahri Cap
  * @author Suhrob Munavarov
  */
-
-
+@SuppressWarnings("deprecation")
 public class CapMunavarov extends ArtificialIntelligence
 {
 	List<AiUtilityCase> bombcases=new ArrayList<AiUtilityCase>(); //Les cases definie pour le bombage 
