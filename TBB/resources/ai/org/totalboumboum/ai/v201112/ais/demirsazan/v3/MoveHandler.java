@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Serdil Demir
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<DemirSazan>
 {	
 	/**

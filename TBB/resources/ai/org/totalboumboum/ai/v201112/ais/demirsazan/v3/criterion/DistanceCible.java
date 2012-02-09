@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201112.ais.demirsazan.v3.DemirSazan;
  * @author Serdil Demir
  * @author Gokhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class DistanceCible extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "DISTANCE_CIBLE&TEMPS";

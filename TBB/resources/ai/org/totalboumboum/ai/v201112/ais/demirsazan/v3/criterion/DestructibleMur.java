@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201112.ais.demirsazan.v3.DemirSazan;
  * @author Serdil Demir
  * @author Gokhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class DestructibleMur extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "DESTRUCTIBLE_MURS";
