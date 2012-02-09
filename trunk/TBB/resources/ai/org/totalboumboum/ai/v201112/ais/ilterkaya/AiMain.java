@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201112.ais.ilterkaya.v0.IlterKaya;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

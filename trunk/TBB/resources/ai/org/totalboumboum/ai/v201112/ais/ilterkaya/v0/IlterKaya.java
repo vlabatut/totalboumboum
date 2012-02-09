@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * @author Mustafa Kaan İlter
  * @author Önder Kaya
  */
+@SuppressWarnings("deprecation")
 public class IlterKaya extends ArtificialIntelligence
 {
 	@Override

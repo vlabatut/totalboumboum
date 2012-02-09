@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201112.ais.ilterkaya.v0.IlterKaya;
  * @author Mustafa Kaan İlter
  * @author Önder Kaya
  */
+@SuppressWarnings("deprecation")
 public class CriterionSecond extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";

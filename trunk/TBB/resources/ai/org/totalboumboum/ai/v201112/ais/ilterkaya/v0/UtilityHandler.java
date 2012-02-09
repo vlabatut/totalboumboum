@@ -22,6 +22,7 @@ import org.totalboumboum.ai.v201112.ais.ilterkaya.v0.criterion.CriterionThird;
  * @author Mustafa Kaan İlter
  * @author Önder Kaya
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<IlterKaya>
 {	
 	/**
