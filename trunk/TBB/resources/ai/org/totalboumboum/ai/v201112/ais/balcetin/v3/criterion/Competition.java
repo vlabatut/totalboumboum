@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.BalCetin;
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class Competition extends AiUtilityCriterionBoolean {
 
 	public static final String NAME = "Competition";

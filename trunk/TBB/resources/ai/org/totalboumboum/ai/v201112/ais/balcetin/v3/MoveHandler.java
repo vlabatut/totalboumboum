@@ -21,11 +21,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Move Handler class to decide where AI moves.
  * 
- * 
- * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<BalCetin> {
 	protected Astar astar = null;
 

@@ -20,11 +20,10 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v2.criterion.WallCount;
  * Classe gérant le calcul des valeurs d'utilité de l'agent. Cf. la
  * documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
- * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<BalCetin> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

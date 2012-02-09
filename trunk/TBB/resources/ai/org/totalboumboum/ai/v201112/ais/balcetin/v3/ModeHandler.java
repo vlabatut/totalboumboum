@@ -9,12 +9,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 /**
  * Mode handler class to choose the right mode for the AI.
  * 
- * 
- * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
-
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<BalCetin> {
 
 

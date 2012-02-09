@@ -13,6 +13,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class WallCount extends AiUtilityCriterionInteger {
 	public static final String NAME = "WallCount";
 

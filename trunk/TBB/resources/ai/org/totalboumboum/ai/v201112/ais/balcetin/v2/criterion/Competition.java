@@ -8,11 +8,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.balcetin.v2.BalCetin;
 
 /**
- *Criterion binary to decide if there is competition for a tile.
+ * Criterion binary to decide if there is competition for a tile.
  * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class Competition extends AiUtilityCriterionBoolean {
 	/** Nom de ce critère */
 	public static final String NAME = "Competition";

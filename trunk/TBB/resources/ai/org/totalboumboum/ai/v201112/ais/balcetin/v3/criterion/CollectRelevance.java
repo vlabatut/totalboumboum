@@ -10,11 +10,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.balcetin.v3.BalCetin;
 
 /**
- *Criterion binary to decide if a tile is relevant.
+ * Criterion binary to decide if a tile is relevant.
  * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class CollectRelevance extends AiUtilityCriterionBoolean {
 
 	public static final String NAME = "CollectRelevance";

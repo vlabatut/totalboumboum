@@ -24,6 +24,7 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.criterion.WallCount;
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<BalCetin> {
 	
 	protected UtilityHandler(BalCetin ai) throws StopRequestException {

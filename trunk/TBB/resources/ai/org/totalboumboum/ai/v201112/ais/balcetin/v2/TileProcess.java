@@ -8,12 +8,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
-
 /**
  * Tile process class to get tile processes.
- * @author Adnan BAL
- *
+ * 
+ * @author Adnan Bal
  */
+@SuppressWarnings("deprecation")
 public class TileProcess {
 	BalCetin ai;
 

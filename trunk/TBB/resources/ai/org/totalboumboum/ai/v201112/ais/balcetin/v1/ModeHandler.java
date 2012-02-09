@@ -13,17 +13,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
- * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
-	
-
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<BalCetin>
 {
-	
-	
 	AiZone zone = ai.getZone();
 	AiHero ownHero = zone.getOwnHero();
 	List<AiItem> items = zone.getItems();

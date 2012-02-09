@@ -1,8 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.balcetin.v2;
 
-
-
-
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -13,11 +10,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Move Handler class to decide where AI moves.
  * 
- * 
- * 
  * @author Adnan Bal
  * @author Özcan Çetin
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<BalCetin>
 {	
 	/**
