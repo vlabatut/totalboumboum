@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Furkan Arık
  * @author Aksel Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class MurDesCriter extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "MURDESTRUCTIBLE";
