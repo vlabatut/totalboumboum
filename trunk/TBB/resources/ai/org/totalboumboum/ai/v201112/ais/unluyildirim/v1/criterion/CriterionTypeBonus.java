@@ -12,11 +12,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.unluyildirim.v1.UnluYildirim;
 
 /**
- * 
- * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class CriterionTypeBonus extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "TYPEBONUS";
