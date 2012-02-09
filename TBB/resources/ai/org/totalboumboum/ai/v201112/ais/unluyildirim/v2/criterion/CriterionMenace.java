@@ -10,11 +10,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.ais.unluyildirim.v2.UnluYildirim;
 
 /**
- *Cette classe a but d'exprimer si l'item est menacé par une bombe ou pas.
+ * Cette classe a but d'exprimer si l'item est menacé par une bombe ou pas.
  * 
  * @author Merve ÜNLÜ
  * @author Gülay YILDIRIM
  */
+@SuppressWarnings("deprecation")
 public class CriterionMenace extends AiUtilityCriterionBoolean
 {	
 	public static final String NAME = "MENACE";

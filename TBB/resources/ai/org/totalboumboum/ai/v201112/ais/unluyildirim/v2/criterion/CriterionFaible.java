@@ -9,9 +9,11 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v2.UnluYildirim;
 
 /**
  * Cette classe represente une method qui renvoie la valeur true si le tile possede le plus faible adversaire
+ * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class CriterionFaible extends AiUtilityCriterionBoolean
 {	
 	public static final String NAME = "FAIBLE";

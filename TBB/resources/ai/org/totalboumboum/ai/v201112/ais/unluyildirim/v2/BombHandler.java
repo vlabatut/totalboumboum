@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<UnluYildirim>
 {	
 	
