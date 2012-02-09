@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v1.UnluYildirim;
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "deprecation" })
 public class CriterionPlusFaible extends AiUtilityCriterion
 {	/** Nom de ce critère */
 	public static final String NAME = "PLUSFAIBLE";
