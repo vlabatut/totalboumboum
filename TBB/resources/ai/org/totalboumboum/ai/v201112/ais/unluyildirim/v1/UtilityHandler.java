@@ -27,10 +27,10 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v1.criterion.CriterionTypeB
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<UnluYildirim>
 {	
 	/**

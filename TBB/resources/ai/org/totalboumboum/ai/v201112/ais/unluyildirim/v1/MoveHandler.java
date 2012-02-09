@@ -1,11 +1,5 @@
 package org.totalboumboum.ai.v201112.ais.unluyildirim.v1;
 
-/*
- * La fonction que  j'ai écrit dans ce class nous aide de s'enfuire par les bombes et leurs feux.
- * On ne peut pas completer tous les fonction ,donc notre version 1 ne marche pas exactement comme on veut.
- * 
- * 
- */
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
@@ -22,11 +16,14 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
+ * La fonction que  j'ai écrit dans ce class nous aide de s'enfuire par les bombes et leurs feux.
+ * On ne peut pas completer tous les fonction ,donc notre version 1 ne marche pas exactement comme on veut.
  * 
  * 
  * @author Merve Ünlü
  * @author Gülay Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<UnluYildirim>
 {	
 	/**
