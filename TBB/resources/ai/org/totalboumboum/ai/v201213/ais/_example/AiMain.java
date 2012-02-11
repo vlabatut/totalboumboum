@@ -25,15 +25,21 @@ import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
 import org.totalboumboum.ai.v201213.ais._example.v0.Example;
 
 /**
- * classe utilisée par le moteur du jeu pour retrouver les IA
- * (à ne pas modifier)
+ * Classe utilisée par le moteur du jeu pour retrouver les agents.
+ * L'objet créé dans le constructeur de cette classe doit être de la
+ * classe principale de l'agent.
+ * Les directives {@code imports} doivent être modifiées de manière
+ * à utiliser la version la plus appropriée de l'agent : {@code v1},
+ * {@code v2}, {@code v3}, etc. 
  * 
  * @author Vincent Labatut
  */
 public class AiMain extends AiManager
 {
 	/**
-	 * constructeur utilisé pour créer une instance de l'IA
+	 * Constructeur utilisé pour créer une instance de l'IA.
+	 * L'objet créé dans le constructeur de cette classe doit être de la
+	 * classe principale de l'agent.
 	 */
 	public AiMain()
 	{	super(new Example());		
