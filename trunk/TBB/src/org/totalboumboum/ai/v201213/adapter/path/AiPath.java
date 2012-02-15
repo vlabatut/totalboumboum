@@ -230,7 +230,7 @@ public class AiPath implements Comparable<AiPath>
 	 * Renvoie le nombre d'emplacements dans ce chemin.
 	 * <br/>
 	 * <b>Attention :</b> si le chemin contient plusieurs
-	 * fois le même emplacement, ile sera compté autant de fois.
+	 * fois le même emplacement, il sera compté autant de fois.
 	 * 
 	 * @return	
 	 * 		La longueur de ce chemin, en emplacements.
