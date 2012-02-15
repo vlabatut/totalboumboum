@@ -107,7 +107,7 @@ public abstract class AiTile implements Comparable<AiTile>
 	 * 		Longueur d'un côté de la case en pixels.
 	 */
 	public double getSize()
-	{	return size;	
+	{	return size;
 	}
 	
 	/////////////////////////////////////////////////////////////////
