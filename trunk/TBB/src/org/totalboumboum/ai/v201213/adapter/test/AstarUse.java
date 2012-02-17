@@ -101,7 +101,7 @@ public final class AstarUse
 		AiLocation startLocation = new AiLocation(hero);
 		AiTile endTile = zone.getTile(5,3);
 		try
-		{	AiPath path = astar.processShortestPath(startLocation,endTile);
+		{	AiPath path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -117,7 +117,7 @@ public final class AstarUse
 		// précédent. ça permet de gagner (un peu) du temps.
 		endTile = zone.getTile(2,5);
 		try
-		{	AiPath path = astar.processShortestPath(endTile);
+		{	AiPath path = astar.startProcess(endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -140,7 +140,7 @@ public final class AstarUse
 		destinations.add(zone.getTile(3,4));
 		destinations.add(zone.getTile(5,3));
 		try
-		{	AiPath path = astar.processShortestPath(destinations);
+		{	AiPath path = astar.startProcess(destinations);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -198,7 +198,7 @@ public final class AstarUse
 		AiLocation startLocation = new AiLocation(hero);
 		AiTile endTile = zone.getTile(4,5);
 		try
-		{	AiPath path = astar.processShortestPath(startLocation,endTile);
+		{	AiPath path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -241,7 +241,7 @@ public final class AstarUse
 		AiTile endTile = zone.getTile(3,4);
 		AiPath path = null;
 		try
-		{	path = astar.processShortestPath(startLocation,endTile);
+		{	path = astar.startProcess(startLocation,endTile);
 		}
 		catch (StopRequestException e)
 		{	e.printStackTrace();
@@ -327,7 +327,7 @@ public final class AstarUse
 		AiLocation startLocation = new AiLocation(24,25,zone);
 		AiTile endTile = zone.getTile(5,3);
 		try
-		{	AiPath path = astar.processShortestPath(startLocation,endTile);
+		{	AiPath path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -413,7 +413,7 @@ public final class AstarUse
 		AiTile endTile = zone.getTile(4,5);
 		AiPath path = null;
 		try
-		{	path = astar.processShortestPath(startLocation,endTile);
+		{	path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -442,7 +442,7 @@ public final class AstarUse
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
-		{	path = astar.processShortestPath(startLocation,endTile);
+		{	path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -464,7 +464,7 @@ public final class AstarUse
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
-		{	path = astar.processShortestPath(startLocation,endTile);
+		{	path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -520,7 +520,7 @@ public final class AstarUse
 		AiTile endTile = zone.getTile(4,5);
 		AiPath path = null;
 		try
-		{	path = astar.processShortestPath(startLocation,endTile);
+		{	path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -537,7 +537,7 @@ public final class AstarUse
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
-		{	path = astar.processShortestPath(startLocation,endTile);
+		{	path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -552,7 +552,7 @@ public final class AstarUse
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
-		{	path = astar.processShortestPath(startLocation,endTile);
+		{	path = astar.startProcess(startLocation,endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)

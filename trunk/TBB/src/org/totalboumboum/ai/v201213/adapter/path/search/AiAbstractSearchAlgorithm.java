@@ -280,11 +280,11 @@ public abstract class AiAbstractSearchAlgorithm
 	/////////////////////////////////////////////////////////////////
 	// LIMITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de hauteur (négatif = pas de limite) */
+	/** Limite de hauteur (négatif = pas de limite) */
 	protected int maxHeight = -1;
-	/** limite de coût (négatif = pas de limite) */
+	/** Limite de coût (négatif = pas de limite) */
 	protected double maxCost = -1;
-	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
+	/** Limite de nombre de noeuds (négatif = pas de limite), pas configurable */
 	protected int maxNodes = 10000;
 	
 	/**
