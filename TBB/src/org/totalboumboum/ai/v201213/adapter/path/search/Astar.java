@@ -139,10 +139,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath processShortestPath(AiLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(AiLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
 	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
 		endTiles.add(endTile);
-		AiPath result = processShortestPath(startLocation,endTiles);
+		AiPath result = startProcess(startLocation,endTiles);
 		return result;
 	}
 	
@@ -170,7 +170,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath processShortestPath(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		heuristicCalculator.setEndTiles(endTiles);
@@ -180,12 +180,12 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		successorCalculator.init(root);
 		
 		// on lance le traitement
-		AiPath result = processShortestPath(endTiles);
+		AiPath result = startProcess(endTiles);
 		return result;
 	}
 	
 	/**
-	 * Réalise le même traitement que {@link #processShortestPath(AiLocation, AiTile)},
+	 * Réalise le même traitement que {@link #startProcess(AiLocation, AiTile)},
 	 * à la différence qu'ici on réutilise l'arbre de recherche déjà existant. 
 	 * Autrement dit, on n'a pas besoin de préciser la case de départ, car elle 
 	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
@@ -203,7 +203,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @param endTile	
 	 * 		La case d'arrivée
 	 * @return 
-	 * 		Un chemin pour aller à {@code endTile}, ou un chemin vide, ou la valeur {@code null}.
+	 * 		Un chemin pour aller à {@code endTile}, 
+	 * 		ou un chemin vide, ou la valeur {@code null}.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
@@ -211,15 +212,15 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath processShortestPath(AiTile endTile) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(AiTile endTile) throws StopRequestException, LimitReachedException
 	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
 		endTiles.add(endTile);
-		AiPath result = processShortestPath(endTiles);
+		AiPath result = startProcess(endTiles);
 		return result;
 	}
 	
 	/**
-	 * Réalise le même traitement que {@link #processShortestPath(AiLocation, Set)},
+	 * Réalise le même traitement que {@link #startProcess(AiLocation, Set)},
 	 * à la différence qu'ici on réutilise l'arbre de recherche déjà existant. 
 	 * Autrement dit, on n'a pas besoin de préciser la case de départ, car elle 
 	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
@@ -237,7 +238,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @param endTiles	
 	 * 		L'ensemble des cases d'arrivée possibles.
 	 * @return 
-	 * 		un chemin pour aller à l'une des cases de {@code endTiles},
+	 * 		Un chemin pour aller à l'une des cases de {@code endTiles},
 	 * 		ou un chemin vide, ou la valeur {@code null}.
 	 * 
 	 * @throws StopRequestException	
@@ -246,7 +247,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath processShortestPath(Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
 		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
 		if(root==null)
@@ -283,7 +284,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	}
 	
 	/**
-	 * Permet de continuer le traitement commencé par {@link #processShortestPath(AiLocation, AiTile) processShortestPath}.
+	 * Permet de continuer le traitement commencé par {@link #startProcess(AiLocation, AiTile) processShortestPath}.
 	 * Par exemple, si {@code processShortestPath} a trouvé un résultat qui ne
 	 * parait pas adapté, l'appel à cette méthode permet de continuer le traitement
 	 * pour trouver un autre chemin.
