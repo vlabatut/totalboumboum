@@ -76,7 +76,7 @@ public class LevelTools
 /*		String pack = "tournament201112";
 		String folder = "carrefour";
 		XmlTools.init();
-		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
+		HollowLevel level = loadLevel(pack,folder);
 		removeBackground(level);
 		setBackground(level);
 		saveLevel(level);
@@ -85,7 +85,7 @@ public class LevelTools
 /*		String pack = "tournament201112";
 		String folder = "carrefour";
 		XmlTools.init();
-		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
+		HollowLevel level = loadLevel(pack,folder);
 //		removeRow(level,12,true,true,true,true,true);
 //		removeRow(level,12,true,true,true,true,true);
 //		removeRow(level,12,true,true,true,true,true);
@@ -97,13 +97,34 @@ public class LevelTools
 		saveLevel(level);
 */
 	}
-		
+	
 	/**
-	 * save the specified level in order to get a set of files
+	 * Load the level with specified package and name.
+	 * 
+	 * @param pack
+	 * 		The pack containing the level to be loaded.
+	 * @param name
+	 * 		The name of the level.
+	 * @return
+	 * 		A {@link HollowLevel} object representing the level.
+	 * 
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	protected static HollowLevel loadLevel(String pack, String name) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,name);
+		return level;
+	}
+	
+	/**
+	 * Save the specified level in order to get a set of files
 	 * the game will be able to load and use.
 	 *  
 	 * @param hollowLevel
 	 * 		the level to be saved
+	 * 
 	 * @throws IOException
 	 * @throws IllegalArgumentException
 	 * @throws SecurityException
@@ -134,7 +155,7 @@ public class LevelTools
 	}
 	
 	/**
-	 * creates and save an empty level
+	 * Creates and save an empty level.
 	 * 
 	 * @param height
 	 * 		zone height (in tiles)
@@ -426,7 +447,7 @@ public class LevelTools
 	}
 	
 	/**
-	 * add softwalls wherever it is necessary in the specified level,
+	 * Add softwalls wherever it is necessary in the specified level,
 	 * so that a classic zone is obtained.
 	 * Note the initial locations of the players are considered,
 	 * so that no block is put on a tile possibly occupied by a player
