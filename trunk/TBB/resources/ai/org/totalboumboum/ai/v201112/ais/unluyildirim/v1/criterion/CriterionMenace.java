@@ -23,6 +23,8 @@ public class CriterionMenace extends AiUtilityCriterionInteger
 	 * Si il est menacé , il renvoie la valeur 0.
 	 * Sinon il renvoie 1.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

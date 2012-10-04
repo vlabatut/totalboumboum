@@ -17,9 +17,14 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  */
 @SuppressWarnings("deprecation")
 public class CriterionFacile extends AiUtilityCriterionBoolean
-{	
+{	/** */
 	public static final String NAME = "FACILE";
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CriterionFacile(UnluYildirim ai) throws StopRequestException
 	{	
 		super(NAME);

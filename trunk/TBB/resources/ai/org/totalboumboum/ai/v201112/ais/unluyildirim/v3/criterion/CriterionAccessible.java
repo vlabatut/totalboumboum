@@ -25,9 +25,14 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  */
 @SuppressWarnings("deprecation")
 public class CriterionAccessible extends AiUtilityCriterionBoolean
-{	
+{	/** */
 	public static final String NAME = "ACCESSIBLE";
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CriterionAccessible(UnluYildirim ai) throws StopRequestException
 	{
 		super(NAME);

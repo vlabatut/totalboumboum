@@ -26,6 +26,8 @@ public class CriterionDistanceHero extends AiUtilityCriterionBoolean
 	 * Ce critere a pour but de determiner s'il existe un adversaire 
 	 * qui se trouve dans une case plus proche que notre au tile defini.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

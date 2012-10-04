@@ -17,8 +17,14 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class CriterionVoisin extends AiUtilityCriterionInteger {
+	/** */
 	public static final String NAME = "VOISIN";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CriterionVoisin(UnluYildirim ai) throws StopRequestException {
 		super(NAME, 0, 3);
 		ai.checkInterruption();

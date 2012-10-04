@@ -29,6 +29,8 @@ public class CriterionAccessibleBonus extends AiUtilityCriterionBoolean
 	 * Ça veut dire que l'on n'a pas besoin de détruire des murs 
 	 * pour l'acceder.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

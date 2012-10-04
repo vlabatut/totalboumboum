@@ -60,7 +60,9 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
 	private final String caseName3 = "CAS3";
 	private Boolean pasaccessible = false;
 	private Boolean pasaccessible_bonus = false;
+	/** */
 	public AiZone zone = null;
+	/** */
 	public AiHero ownHero = null;
 
 	@Override

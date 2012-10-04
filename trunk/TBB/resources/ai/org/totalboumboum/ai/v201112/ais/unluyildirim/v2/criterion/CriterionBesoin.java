@@ -18,10 +18,14 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v2.UnluYildirim;
  */
 @SuppressWarnings("deprecation")
 public class CriterionBesoin extends AiUtilityCriterionBoolean
-{	
+{	/** */
 	public static final String NAME = "BESOIN";
 	
-
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CriterionBesoin(UnluYildirim ai) throws StopRequestException
 	{	
 		super(NAME);

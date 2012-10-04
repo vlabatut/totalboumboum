@@ -42,6 +42,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
+	
 	protected UtilityHandler(UnluYildirim ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -58,7 +59,9 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
 	private final String caseName2 = "CAS2";
 	private final String caseName3 = "CAS3";
 	private Boolean pasaccessible = false;
+	/** */
 	public AiZone zone = null;
+	/** */
 	public AiHero ownHero = null;
 
 	@Override
