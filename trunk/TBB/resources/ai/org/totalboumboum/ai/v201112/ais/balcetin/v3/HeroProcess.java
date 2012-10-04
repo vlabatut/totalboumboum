@@ -14,8 +14,14 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class HeroProcess {
+	/** */
 	BalCetin ai;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public HeroProcess(BalCetin ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;

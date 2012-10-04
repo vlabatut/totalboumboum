@@ -15,9 +15,14 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.BalCetin;
  */
 @SuppressWarnings("deprecation")
 public class AcceptableDistance extends AiUtilityCriterionBoolean {
-
+	/** */
 	public static final String NAME = "AcceptableDistance";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public AcceptableDistance(BalCetin ai) throws StopRequestException { // init
 																			// nom
 		super(NAME);

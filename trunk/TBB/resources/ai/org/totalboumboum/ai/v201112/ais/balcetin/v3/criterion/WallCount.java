@@ -15,8 +15,14 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class WallCount extends AiUtilityCriterionInteger {
+	/** */
 	public static final String NAME = "WallCount";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public WallCount(BalCetin ai) throws StopRequestException {
 		// criterion domain
 		super(NAME, 0, 3);

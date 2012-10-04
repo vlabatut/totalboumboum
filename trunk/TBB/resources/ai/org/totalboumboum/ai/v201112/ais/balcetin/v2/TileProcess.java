@@ -17,6 +17,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 public class TileProcess {
 	BalCetin ai;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TileProcess(BalCetin ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;

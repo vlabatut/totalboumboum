@@ -14,9 +14,14 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.HeroProcess;
  */
 @SuppressWarnings("deprecation")
 public class AttackMostRelevantHero extends AiUtilityCriterionBoolean {
+	/** */
 	public static final String NAME = "AttackMostRelevantHero";
 
-
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public AttackMostRelevantHero(BalCetin ai) throws StopRequestException { // init
 																				// nom
 		super(NAME);
