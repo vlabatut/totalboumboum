@@ -14,8 +14,14 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.TileProcess;
  */
 @SuppressWarnings("deprecation")
 public class Threat extends AiUtilityCriterionBoolean {
+	/** */
 	public static final String NAME = "Threat";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Threat(BalCetin ai) throws StopRequestException { // init
 																// nom
 		super(NAME);

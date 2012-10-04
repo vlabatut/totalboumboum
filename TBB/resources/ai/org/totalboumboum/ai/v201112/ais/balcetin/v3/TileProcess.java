@@ -19,9 +19,16 @@ import org.totalboumboum.ai.v201112.adapter.path.search.Astar;
  */
 @SuppressWarnings("deprecation")
 public class TileProcess {
+	/** */
 	BalCetin ai;
+	/** */
 	public Astar astar = null;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TileProcess(BalCetin ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;

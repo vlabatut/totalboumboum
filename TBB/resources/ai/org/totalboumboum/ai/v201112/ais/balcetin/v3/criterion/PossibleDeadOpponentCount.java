@@ -19,9 +19,14 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.TileProcess;
  */
 @SuppressWarnings("deprecation")
 public class PossibleDeadOpponentCount extends AiUtilityCriterionInteger {
-	
+	/** */
 	public static final String NAME = "PossibleDeadOpponentCount";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public PossibleDeadOpponentCount(BalCetin ai) throws StopRequestException {
 		// criterion domain
 		super(NAME, 0, 3);

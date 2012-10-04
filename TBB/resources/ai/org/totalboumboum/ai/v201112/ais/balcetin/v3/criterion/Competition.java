@@ -15,9 +15,15 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.BalCetin;
  */
 @SuppressWarnings("deprecation")
 public class Competition extends AiUtilityCriterionBoolean {
-
+	
+	/** */
 	public static final String NAME = "Competition";
-
+	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Competition(BalCetin ai) throws StopRequestException { // init nom
 		super(NAME);
 		ai.checkInterruption();

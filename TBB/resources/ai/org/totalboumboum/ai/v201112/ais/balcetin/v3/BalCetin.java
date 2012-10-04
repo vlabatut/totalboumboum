@@ -18,8 +18,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class BalCetin extends ArtificialIntelligence
-{
+{	/** */
 	public AiHero ownHero ;
+	/** */
 	public AiTile currentTile;
 	
 	@Override
