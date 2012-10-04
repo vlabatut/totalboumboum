@@ -13,12 +13,16 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class IsEnemyReachable extends AiUtilityCriterionInteger
-{	
+{	/** */
 	public static final String NAME = "IsEnemyReachable";
 	HashMap<AiTile,Integer> hashmap = new HashMap<AiTile, Integer>();
 
 
-
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public IsEnemyReachable(DemirelOz ai) throws StopRequestException
 	{	
 		super(NAME,1,6);

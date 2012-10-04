@@ -12,7 +12,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<DemirelOz> {
+	/** */
 	public static final int BOMB_NUMBER = 2;
+	/** */
 	public static final int RANGE_NUMBER = 3;
 
 	protected ModeHandler(DemirelOz ai) throws StopRequestException {

@@ -13,8 +13,14 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class Danger extends AiUtilityCriterionBoolean {
+	/** */
 	public static final String NAME = "Danger";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Danger(DemirelOz ai) throws StopRequestException {
 		super(NAME);
 		ai.checkInterruption();

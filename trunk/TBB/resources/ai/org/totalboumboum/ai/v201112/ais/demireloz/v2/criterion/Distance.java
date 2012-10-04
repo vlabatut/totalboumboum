@@ -11,9 +11,16 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v2.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class Distance extends AiUtilityCriterionBoolean {
+	/** */
 	public static final String NAME = "Distance";
+	/** */
 	public static final int DISTANCE_TRUE = 4;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Distance(DemirelOz ai) throws StopRequestException {
 		super(NAME);
 		ai.checkInterruption();

@@ -11,9 +11,14 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v2.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class IsEnemyReachable extends AiUtilityCriterionInteger
-{	
+{	/** */
 	public static final String NAME = "IsEnemyReachable";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public IsEnemyReachable(DemirelOz ai) throws StopRequestException
 	{	
 		super(NAME,1,6);

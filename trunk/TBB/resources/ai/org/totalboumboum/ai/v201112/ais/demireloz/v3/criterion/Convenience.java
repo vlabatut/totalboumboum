@@ -13,11 +13,18 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class Convenience extends AiUtilityCriterionBoolean {
-
+	/** */
 	public static final String NAME = "Convenience";
+	/** */
 	public static final int BOMB_NUMBER = 2;
+	/** */
 	public static final int RANGE_NUMBER = 3;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Convenience(DemirelOz ai) throws StopRequestException {
 		super(NAME);
 		ai.checkInterruption();

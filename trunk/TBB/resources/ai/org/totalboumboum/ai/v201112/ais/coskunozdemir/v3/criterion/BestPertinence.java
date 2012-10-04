@@ -14,9 +14,14 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v3.CoskunOzdemir;
  */
 @SuppressWarnings("deprecation")
 public class BestPertinence extends AiUtilityCriterionBoolean
-{
+{	/** */
 	public static final String	NAME	= "BestPertinence";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public BestPertinence( CoskunOzdemir ai ) throws StopRequestException
 	{
 		super( NAME );

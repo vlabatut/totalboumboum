@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v2.TileOperation;
  */
 @SuppressWarnings("deprecation")
 public class AvanceItem extends AiUtilityCriterionBoolean
-{
+{	/** */
 	public static final String	NAME				= "AvanceItem";
 
 	/**
@@ -27,6 +27,11 @@ public class AvanceItem extends AiUtilityCriterionBoolean
 	 */
 	private final int			BOMB_NUMBER_LIMIT	= 1;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public AvanceItem( CoskunOzdemir ai ) throws StopRequestException
 	{
 		super( NAME );

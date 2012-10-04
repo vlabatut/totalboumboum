@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v3.CoskunOzdemir;
  */
 @SuppressWarnings("deprecation")
 public class AvanceItem extends AiUtilityCriterionBoolean
-{
+{	/** */
 	public static final String	NAME				= "AvanceItem";
 
 	/**
@@ -25,7 +25,12 @@ public class AvanceItem extends AiUtilityCriterionBoolean
 	 * Used to determine the tile's state.
 	 */
 	private final int			BOMB_NUMBER_LIMIT	= 1;
-
+	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public AvanceItem( CoskunOzdemir ai ) throws StopRequestException
 	{
 		super( NAME );

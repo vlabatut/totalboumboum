@@ -55,6 +55,7 @@ public class UtilityHandler extends AiUtilityHandler<DemirSazan>
 	private final String caseCollectePourMur = "C_BONUS";
 	private final String caseAttaquePourAdversaire = "A_ADVERSAIRE";
 	private final String caseAttaquePourMur = "A_MUR";
+	/** */
 	public List<AiTile> selectedTiles= ai.getZone().getTiles(); 
 	
 	@Override

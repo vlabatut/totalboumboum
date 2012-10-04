@@ -15,9 +15,14 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v3.CoskunOzdemir;
  */
 @SuppressWarnings("deprecation")
 public class NonConcurrence extends AiUtilityCriterionBoolean
-{
+{	/** */
 	public static final String	NAME	= "NonConcurrence";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public NonConcurrence( CoskunOzdemir ai ) throws StopRequestException
 	{
 		super( NAME );

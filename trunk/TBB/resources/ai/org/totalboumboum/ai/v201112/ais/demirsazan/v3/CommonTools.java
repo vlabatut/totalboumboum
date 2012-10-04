@@ -108,7 +108,8 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * 		La case centrale.
 	 * @param hero
 	 * 		Le personnage à considérer.
-	 * 
+	 * @return 
+	 * 		?
 	 * @throws StopRequestException 
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
@@ -225,6 +226,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * Return possibilite de cross de bomb
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isPossibleCrossAdv(AiTile tile)throws StopRequestException

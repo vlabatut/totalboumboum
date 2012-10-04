@@ -13,8 +13,14 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class NbrAdjacentWall extends AiUtilityCriterionInteger {
+	/** */
 	public static final String NAME = "NbrAdjacentWall";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public NbrAdjacentWall(DemirelOz ai) throws StopRequestException {
 		super(NAME, 0, 3);
 		ai.checkInterruption();

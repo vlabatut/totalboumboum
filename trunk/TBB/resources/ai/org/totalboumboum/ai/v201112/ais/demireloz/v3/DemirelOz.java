@@ -31,6 +31,7 @@ public class DemirelOz extends ArtificialIntelligence {
 	AiZone zone;
 	AiHero ourhero;
 	AiTile ourtile;
+	/** */
 	public HashMap<AiTile, Integer> hashmap;
 
 	/**

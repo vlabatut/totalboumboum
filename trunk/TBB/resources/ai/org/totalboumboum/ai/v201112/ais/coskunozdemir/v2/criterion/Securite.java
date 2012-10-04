@@ -14,9 +14,14 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v2.TileOperation;
  */
 @SuppressWarnings("deprecation")
 public class Securite extends AiUtilityCriterionBoolean
-{
+{	/** */
 	public static final String	NAME	= "Securite";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Securite( CoskunOzdemir ai ) throws StopRequestException
 	{
 		super( NAME );

@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v3.CoskunOzdemir;
  */
 @SuppressWarnings("deprecation")
 public class AttaPertinence extends AiUtilityCriterionBoolean
-{
+{	/** */
 	public static final String	NAME			= "AttaPertinence";
 
 	/**
@@ -23,6 +23,11 @@ public class AttaPertinence extends AiUtilityCriterionBoolean
 	 */
 	public static final int		CLOSING_LIMIT	= 3;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public AttaPertinence( CoskunOzdemir ai ) throws StopRequestException
 	{
 		super( NAME );

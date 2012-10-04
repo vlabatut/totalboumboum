@@ -14,9 +14,16 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v2.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class Competition extends AiUtilityCriterionBoolean {
+	/** */
 	public static final String NAME = "Competition";
+	/** */
 	public static final int COMPETITITON_TRUE = 5;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Competition(DemirelOz ai) throws StopRequestException {
 		super(NAME);
 		ai.checkInterruption();

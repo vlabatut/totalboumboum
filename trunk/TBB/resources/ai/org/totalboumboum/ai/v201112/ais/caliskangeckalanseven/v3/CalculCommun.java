@@ -76,6 +76,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean danger() throws StopRequestException {
 		ai.checkInterruption();
 		boolean danger = false;
@@ -86,6 +92,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 		return danger;
 	}	
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Set<AiTile> safeZone() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE		
 		Set<AiTile> safeZone = new TreeSet<AiTile>();
@@ -113,7 +125,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Set<AiTile> safeZoneForBomb() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE		
 		Set<AiTile> safeZone = new TreeSet<AiTile>();
@@ -141,6 +158,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Boolean canBomb() throws StopRequestException {
 		ai.checkInterruption();
 		boolean result = false;
@@ -177,7 +200,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Set<AiTile> dangerZoneForBomb() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE	
 		Set<AiTile> dangerZone = new TreeSet<AiTile>();
@@ -243,7 +271,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	
 	
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Set<AiTile> dangerZone() throws StopRequestException {
 
 		ai.checkInterruption();
