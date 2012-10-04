@@ -33,7 +33,7 @@
 		</points>
 	</settings>
 	<players>
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="1" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="1" spritePack="superbomberman4" spriteFolder="shirobon" />
 		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="2" spritePack="superbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
