@@ -25,6 +25,17 @@ import org.totalboumboum.tools.images.PredefinedColor;
 @SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<GungorKavus>
 {	
+	
+	
+	/** */
+	public AiTile startTile=ai.getZone().getOwnHero().getTile();
+	protected AiZone zone;
+	protected AiHero ownHero;
+	protected AiTile ownTile;
+	private double currentSpeed = 0;
+	
+	
+	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * 
@@ -35,17 +46,6 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * 
 	 */
-	
-	
-	
-	public AiTile startTile=ai.getZone().getOwnHero().getTile();
-	protected AiZone zone;
-	protected AiHero ownHero;
-	protected AiTile ownTile;
-	private double currentSpeed = 0;
-	
-	
-	
 	protected BombHandler(GungorKavus ai) throws StopRequestException
     {	super(ai);
     	ai.checkInterruption();
@@ -419,6 +419,12 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 	
 	
 	
+	/**
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	
 		ai.checkInterruption();	

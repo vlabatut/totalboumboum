@@ -40,15 +40,6 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<GungorKavus>
 {	
-	/**
-	 * Construit un gestionnaire pour l'agent passé en paramètre.
-	 * 
-	 * @param ai	
-	 * l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * Au cas où le moteur demande la terminaison de l'agent.
-	 */
 	protected AiZone zone = null;
 	protected AiHero ownHero = null;
 	protected AiTile currentTile = null;
@@ -61,6 +52,15 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	protected Set<AiTile> safeTileL=null;
 	protected AiTile safeTilekont = null;
 
+	/**
+	 * Construit un gestionnaire pour l'agent passé en paramètre.
+	 * 
+	 * @param ai	
+	 * l'agent que cette classe doit gérer.
+	 * 
+	 * @throws StopRequestException	
+	 * Au cas où le moteur demande la terminaison de l'agent.
+	 */
 	protected MoveHandler(GungorKavus ai) throws StopRequestException
 	{	super(ai);
 	ai.checkInterruption();
@@ -239,7 +239,13 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	 * isTileThreatened(AiTile tile)
 	 * 
 	 */
-	
+
+	/**
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	
 		
