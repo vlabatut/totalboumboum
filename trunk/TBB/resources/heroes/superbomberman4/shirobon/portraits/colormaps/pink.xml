@@ -27,8 +27,8 @@
 
 	<color index="03" red="048" green="048" blue="048" /> <!-- casque foncé -->
 	<color index="07" red="096" green="096" blue="096" /> <!-- casque moyen -->
-	<color index="09" red="120" green="136" blue="120" /> <!-- casque moyen clair -->
-	<color index="10" red="120" green="136" blue="120" /> <!-- casque moyen clair -->
+	<color index="09" red="192" green="013" blue="063" /> <!-- casque moyen clair -->
+	<color index="10" red="192" green="013" blue="063" /> <!-- casque moyen clair -->
 	<color index="11" red="230" green="050" blue="100" /> <!-- casque clair -->
 	<color index="15" red="240" green="080" blue="152" /> <!-- casque normal -->
 	<color index="05" red="019" green="137" blue="017" /> <!-- casque liseret -->

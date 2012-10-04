@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../schemas/animes.xsd" 
-		scale="1" boundHeight="16" preview="pictures/standing/down.gif">
+		scale="1" boundHeight="16" preview="pictures/standing/down/nf.gif">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -42,21 +42,10 @@
 	</colors>
 	
 	<shadows folder="pictures">
-		<shadow name="regular" file="shadow.png"/>
+		<shadow name="regular" file="regular.png"/>
+		<shadow name="burn" file="burn.png"/>
 	</shadows>
 	
-	<images folder="pictures">
-		<image name="bending_down" folder="bending" file="down.gif" />
-		<image name="bending_left" folder="bending" file="left.gif" />
-		<image name="bending_right" folder="bending" file="right.gif" />
-		<image name="bending_up" folder="bending" file="up.gif" />
-		
-		<image name="standing_down" folder="standing" file="down.gif" />
-		<image name="standing_left" folder="standing" file="left.gif" />
-		<image name="standing_right" folder="standing" file="right.gif" />
-		<image name="standing_up" folder="standing" file="up.gif" />
-	</images>
-		
 	<gestures folder="pictures" >
 		<gesture name="APPEARING" folder="disappearing" shadow="regular" >
 			<direction name="NONE">
@@ -294,18 +283,18 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="STANDING" shadow="regular" >
-			<direction name="DOWN" >
-				<step name="standing_down" />
+		<gesture name="STANDING" folder="standing" shadow="regular" >
+			<direction name="DOWN" folder="down">
+				<step file="nf.gif" />
 			</direction>
-			<direction name="LEFT" >
-				<step name="standing_left" shadowXShift="-1"/>
+			<direction name="LEFT" folder="left">
+				<step file="nf.gif" shadowXShift="-1"/>
 			</direction>
-			<direction name="RIGHT" >
-				<step name="standing_right" shadowXShift="2"/>
+			<direction name="RIGHT" folder="right">
+				<step file="nf.gif" shadowXShift="2"/>
 			</direction>
-			<direction name="UP" >
-				<step name="standing_up" />
+			<direction name="UP" folder="up">
+				<step file="nf.gif" />
 			</direction>
 		</gesture>
 		
