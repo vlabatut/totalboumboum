@@ -28,6 +28,8 @@ public class VDMDestDistance extends AiUtilityCriterionBoolean
 	/**
 	 * CrÃ©e un nouveau critÃ¨re binaire.
 	 * 
+	 * @param ai
+	 * 		?	
 	 * @throws StopRequestException	
 	 * Au cas oÃ¹ le moteur demande la terminaison de l'agent.
 	 */

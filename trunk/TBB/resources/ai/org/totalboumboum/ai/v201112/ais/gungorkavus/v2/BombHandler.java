@@ -41,7 +41,7 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 		verbose = false;
     	
 	}
-	
+	/** */
 	public AiTile oootile=ai.getZone().getOwnHero().getTile();
 	
 	@Override
@@ -198,6 +198,13 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 	
 	private double currentSpeed = 0;
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	
 		ai.checkInterruption();	

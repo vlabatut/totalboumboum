@@ -28,6 +28,8 @@ public class VDMDestDistance extends AiUtilityCriterionBoolean
 	/**
 	 * CrÃ©e un nouveau critÃ¨re binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * Au cas oÃ¹ le moteur demande la terminaison de l'agent.
 	 */
@@ -39,6 +41,16 @@ public class VDMDestDistance extends AiUtilityCriterionBoolean
 		this.ai = ai;
 	}
 
+	/**
+	 * 
+	 * @param d
+	 * @param e
+	 * @param f
+	 * @param g
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int distance(int d,int e,int f,int g) throws StopRequestException{
 		ai.checkInterruption();
 

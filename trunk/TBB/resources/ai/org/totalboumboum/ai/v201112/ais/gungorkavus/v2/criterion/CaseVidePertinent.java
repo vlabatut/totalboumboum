@@ -23,6 +23,8 @@ public class CaseVidePertinent extends AiUtilityCriterionBoolean
 	/**
 	 * Crée un nouveau critère binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * Au cas où le moteur demande la terminaison de l'agent.
 	 */
@@ -33,8 +35,6 @@ public class CaseVidePertinent extends AiUtilityCriterionBoolean
 		// init agent
 		this.ai = ai;
 	}
-
-	
 
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
