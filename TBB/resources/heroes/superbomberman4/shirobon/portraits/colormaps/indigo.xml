@@ -21,7 +21,7 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 		
-	<color index="06" red="120" green="000" blue="052" /> <!-- corps clair -->
+	<color index="06" red="120" green="000" blue="152" /> <!-- corps clair -->
 	<color index="02" red="075" green="000" blue="095" /> <!-- corps moyen -->
 	<color index="01" red="055" green="000" blue="070" /> <!-- corps foncé -->
 

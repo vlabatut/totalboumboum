@@ -34,7 +34,7 @@
 	<color index="05" red="224" green="137" blue="000" /> <!-- casque liseret -->
 
 	<color index="08" red="224" green="137" blue="000" /> <!-- poings clair -->
-	<color index="04" red="144" green="000" blue="112" /> <!-- poings foncé -->
+	<color index="04" red="172" green="105" blue="000" /> <!-- poings foncé -->
 	
 	<color index="14" red="133" green="157" blue="244" /> <!-- membres -->
 	<color index="12" red="248" green="200" blue="112" /> <!-- visage -->
