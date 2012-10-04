@@ -44,6 +44,9 @@ public class CriterionDestruction extends AiUtilityCriterionInteger
 	/**
 	 * Crée un nouveau critère entier.
 	 * 
+	 * @param ai
+	 * 		L'agent concerné. 
+	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

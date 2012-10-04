@@ -45,6 +45,14 @@ import org.totalboumboum.tools.images.PredefinedColor;
 @SuppressWarnings("deprecation")
 public class SimpletTest
 {
+	/**
+	 * Méthode de test.
+	 * 
+	 * @param args
+	 * 		Pas pris en compte.
+	 * @throws StopRequestException
+	 * 		Pas pris en compte non plus.
+	 */
 	public static void main(String args[]) throws StopRequestException
 	{	// on initialise la zone (cf. InitData)
 		AiSimZone zone = InitData.initZone();
