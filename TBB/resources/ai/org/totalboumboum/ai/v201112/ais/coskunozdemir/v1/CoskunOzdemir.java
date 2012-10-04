@@ -188,6 +188,7 @@ public class CoskunOzdemir extends ArtificialIntelligence
 	 *  
 	 *  @return	
 	 *  list of AiTiles which contain a bomb,a fire or threathened by a bomb	
+	 * @throws StopRequestException 
 	 */
 	public ArrayList<AiTile> getCurrentDangerousTiles()
 			throws StopRequestException
@@ -237,6 +238,7 @@ public class CoskunOzdemir extends ArtificialIntelligence
 	 *  
 	 *  @return	
 	 *  Returns a list of AiTiles
+	 * @throws StopRequestException 
 	 */
 	public ArrayList<AiTile> getDangerousTilesOnPut( AiTile givenTile )
 			throws StopRequestException

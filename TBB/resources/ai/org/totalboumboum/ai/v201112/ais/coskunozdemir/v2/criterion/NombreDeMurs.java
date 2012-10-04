@@ -16,7 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class NombreDeMurs extends AiUtilityCriterionInteger
-{
+{	/** */
 	public static final String	NAME	= "NombreDeMurs";
 
 	/**
@@ -37,6 +37,11 @@ public class NombreDeMurs extends AiUtilityCriterionInteger
 	 */
 	private final int			EMPTY	= 0;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public NombreDeMurs( CoskunOzdemir ai ) throws StopRequestException
 	{ // init nom + bornes du domaine de définition
 		super( NAME, 1, 3 );

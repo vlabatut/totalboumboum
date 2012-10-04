@@ -31,7 +31,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
-
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public UtilityHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();

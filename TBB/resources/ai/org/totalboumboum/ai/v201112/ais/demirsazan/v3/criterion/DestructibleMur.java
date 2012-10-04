@@ -20,12 +20,15 @@ import org.totalboumboum.ai.v201112.ais.demirsazan.v3.DemirSazan;
 public class DestructibleMur extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "DESTRUCTIBLE_MURS";
+	/** */
 	public static final int MUR_LIMIT = 3;
 	//common tools
 	CommonTools commonTools;
 	/**
 	 * Crée un nouveau critère binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

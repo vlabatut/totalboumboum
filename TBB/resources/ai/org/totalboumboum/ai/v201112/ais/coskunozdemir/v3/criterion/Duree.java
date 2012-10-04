@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201112.ais.coskunozdemir.v3.CoskunOzdemir;
  */
 @SuppressWarnings("deprecation")
 public class Duree extends AiUtilityCriterionBoolean
-{
+{	/** */
 	public static final String	NAME					= "Duree";
 
 	/**
@@ -23,6 +23,11 @@ public class Duree extends AiUtilityCriterionBoolean
 	 */
 	private final int			DISTANCE_UPPER_LIMIT	= 6;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Duree( CoskunOzdemir ai ) throws StopRequestException
 	{
 		super( NAME );

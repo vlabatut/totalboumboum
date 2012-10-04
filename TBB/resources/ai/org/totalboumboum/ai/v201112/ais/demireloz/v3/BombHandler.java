@@ -15,23 +15,22 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<DemirelOz> {
-
+	/** */
 	public static final int BLOCK = 15;
-	// Minumun and maximum utility values of a tile in range of an enemy (with
-	// danger=true)
+	/** Minumun and maximum utility values of a tile in range of an enemy (with danger=true) */
 	public static final int MIN_TILE_IN_RANGE = 10;
+	/** */
 	public static final int MAX_TILE_IN_RANGE = 13;
-	// Min and max utility values of the other cases when an enemy is in our
-	// range.
+	/** Min and max utility values of the other cases when an enemy is in our range. */
 	public static final int MIN_TILE_RANGE = 6;
+	/** */ 
 	public static final int MAX_TILE_RANGE = 9;
-	// int straight refers to the minimum value of utility of the case
-	// "Tile Close to destructible wall close to enemy".
+	/** int straight refers to the minimum value of utility of the case "Tile Close to destructible wall close to enemy". */
 	public static final int STRAIGHT = 30;
 
-	// Utility values of a tile close to an enemy , when we don't have an enemy
-	// in our selected tiles.
+	/** Utility values of a tile close to an enemy , when we don't have an enemy  in our selected tiles. */
 	public static final int MIN_TILE_CLOSE_ENEMY = 2;
+	/** */
 	public static final int MAX_TILE_CLOSE_ENEMY = 29;
 
 	protected BombHandler(DemirelOz ai) throws StopRequestException {

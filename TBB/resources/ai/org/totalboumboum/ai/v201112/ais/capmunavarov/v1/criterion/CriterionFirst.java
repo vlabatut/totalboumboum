@@ -20,7 +20,8 @@ public class CriterionFirst extends AiUtilityCriterionBoolean
 	
 	/**
 	 * Crée un nouveau critère binaire.
-	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

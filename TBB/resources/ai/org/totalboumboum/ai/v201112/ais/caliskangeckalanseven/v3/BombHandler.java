@@ -26,16 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
-	/**
-	 * Construit un gestionnaire pour l'agent passé en paramètre.
-	 * 
-	 * @param ai
-	 *            l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException
-	 *             Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	
+	/** */
 	protected AiZone zone = null;
 	/** Le personnage contrôlé par l'agent */
 	protected AiHero ownHero = null;
@@ -53,6 +44,15 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 	protected boolean bombDestination = false;
 	
 	
+	/**
+	 * Construit un gestionnaire pour l'agent passé en paramètre.
+	 * 
+	 * @param ai
+	 *            l'agent que cette classe doit gérer.
+	 * 
+	 * @throws StopRequestException
+	 *             Au cas où le moteur demande la terminaison de l'agent.
+	 */
 	protected BombHandler(CaliskanGeckalanSeven ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();

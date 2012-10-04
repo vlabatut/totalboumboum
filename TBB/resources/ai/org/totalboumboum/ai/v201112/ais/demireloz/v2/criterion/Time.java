@@ -11,10 +11,16 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v2.DemirelOz;
  */
 @SuppressWarnings("deprecation")
 public class Time extends AiUtilityCriterionBoolean {
-
+	/** */
 	public static final String NAME = "Time";
+	/** */
 	public static final int TIME_TRUE = 3;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Time(DemirelOz ai) throws StopRequestException {
 		super(NAME);
 		ai.checkInterruption();
