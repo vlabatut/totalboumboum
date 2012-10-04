@@ -21,9 +21,12 @@ import org.totalboumboum.ai.v201112.ais.arikkoseoglu.v3.ArikKoseoglu;
 public class DistanceAdversaireCriter extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "DISTANCE_ADVERSAIRE";
+	/** */
 	public static final int DISTANCE_LIMIT = 15;
 	/**
 	 * Crée un nouveau critère binaire.
+	 * @param ai 
+	 * 		?
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.

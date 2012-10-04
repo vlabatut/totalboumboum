@@ -25,9 +25,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class MurDesCriter extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "MURDESTRUCTIBLE";
+	/** */
 	public static final int MUR_LIMIT = 3;
 	/**
 	 * Crée un nouveau critère binaire.
+	 * @param ai 
+	 * 		?
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
