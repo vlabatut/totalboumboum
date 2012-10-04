@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2012 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<color index="06" red="024" green="136" blue="056" /> <!-- corps clair -->
+	<color index="02" red="009" green="097" blue="034" /> <!-- corps moyen -->
+	<color index="01" red="002" green="054" blue="017" /> <!-- corps foncé -->
+
+	<color index="03" red="048" green="048" blue="048" /> <!-- casque foncé -->
+	<color index="07" red="096" green="096" blue="096" /> <!-- casque moyen -->
+	<color index="09" red="002" green="056" blue="018" /> <!-- casque moyen clair -->
+	<color index="10" red="002" green="056" blue="018" /> <!-- casque moyen clair -->
+	<color index="11" red="008" green="093" blue="032" /> <!-- casque clair -->
+	<color index="15" red="024" green="136" blue="056" /> <!-- casque normal -->
+	<color index="05" red="167" green="019" blue="134" /> <!-- casque liseret -->
+
+	<color index="08" red="248" green="048" blue="200" /> <!-- poings clair -->
+	<color index="04" red="144" green="000" blue="112" /> <!-- poings foncé -->
+	
+	<color index="14" red="200" green="224" blue="200" /> <!-- membres -->
+	<color index="12" red="248" green="200" blue="012" /> <!-- visage -->
+	<color index="13" red="248" green="200" blue="012" /> <!-- visage -->
+
+</colormap>
