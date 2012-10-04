@@ -1,24 +1,26 @@
-package org.totalboumboum.ai.v201213.ais._example.v0.criterion;
+package org.totalboumboum.ai.v201213.ais.alcarkaya.v0.criterion;
 
-import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
+import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionInteger;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais._example.v0.Example;
+import org.totalboumboum.ai.v201213.ais.alcarkaya.v0.AlcarKaya;
 
 /**
  * Cette classe représente est un simple exemple de 
- * critère binaire. Copiez-la, renommez-la, modifiez-la
- * pour l'adapter à vos besoin.
+ * critère entier. Copiez-la, renommez-la, modifiez-la
+ * pour l'adapter à vos besoin. Notez que les bornes
+ * du domaine de définition sont spécifiées dans
+ * l'appel au constructeur ({@code super(nom,inf,sup)}).
  * 
- * @author Xxxxxx
- * @author Yyyyyy
+ * @author Ekin Alçar
+ * @author Ulaş Kaya
  */
-public class CriterionFirst extends AiUtilityCriterionBoolean
+public class CriterionSecond extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
-	public static final String NAME = "FIRST";
+	public static final String NAME = "SECOND";
 	
 	/**
-	 * Crée un nouveau critère binaire.
+	 * Crée un nouveau critère entier.
 	 * 
 	 * @param ai
 	 * 		l'agent concerné. 
@@ -26,29 +28,29 @@ public class CriterionFirst extends AiUtilityCriterionBoolean
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionFirst(Example ai) throws StopRequestException
-	{	// init nom
-		super(NAME);
+	public CriterionSecond(AlcarKaya ai) throws StopRequestException
+	{	// init nom + bornes du domaine de définition
+		super(NAME,1,3);
 		
 		// init agent
 		this.ai = ai;
 	}
-	
+
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** L'agent associé au traitement */ 
-	protected Example ai;
+	protected AlcarKaya ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	boolean result = true;
-	
+	public Integer processValue(AiTile tile) throws StopRequestException
+	{	int result = 2;
+		
 		// TODO à compléter par le traitement approprié
-	
+		
 		return result;
 	}
 }
