@@ -19,11 +19,13 @@ import org.totalboumboum.ai.v201112.ais.arikkoseoglu.v3.ArikKoseoglu;
 public class TempsCriter extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "TEMPS";
+	/** */
 	public static final int TEMPS_LIMIT = 10;
 	
 	/**
 	 * Crée un nouveau critère binaire.
-	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

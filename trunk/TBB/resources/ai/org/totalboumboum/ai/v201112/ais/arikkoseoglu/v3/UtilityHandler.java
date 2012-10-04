@@ -63,6 +63,7 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	private final String attaqueModeCaseVisibleAdv = "ATTAQUECASE_VISIBLE_ADV";
 	private final String attaqueModeCaseMur = "ATTAQUECASE_MUR";
 	
+	/** cases sélectionnées */
 	public List<AiTile> selectedTiles= ai.getZone().getTiles(); 
 	
 	@Override
@@ -368,6 +369,10 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	
 	/**
 	 * Method qui calculer possibilite d'arriver ue adversaire 
+	 * 
+	 * @return
+	 * 		? 
+	 * @throws StopRequestException 
 	 */
 	public boolean getPossibilityArriver() throws StopRequestException
 	{	
