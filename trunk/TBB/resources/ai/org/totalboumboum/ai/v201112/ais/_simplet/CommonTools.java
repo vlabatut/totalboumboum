@@ -105,6 +105,8 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 	 * 		La case centrale.
 	 * @param hero
 	 * 		Le personnage à considérer.
+	 * @return 
+	 * 		L'ensemble des cases concernées.
 	 * 
 	 * @throws StopRequestException 
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
