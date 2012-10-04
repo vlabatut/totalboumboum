@@ -21,9 +21,14 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v2.UnluYildirim;
  */
 @SuppressWarnings("deprecation")
 public class CriterionConcurrence extends AiUtilityCriterionBoolean
-{	
+{	/** */
 	public static final String NAME = "CONCURRENCE";
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CriterionConcurrence(UnluYildirim ai) throws StopRequestException
 	{	
 		super(NAME);

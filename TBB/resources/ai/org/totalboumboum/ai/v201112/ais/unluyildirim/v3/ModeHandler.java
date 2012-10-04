@@ -15,6 +15,14 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<UnluYildirim>
 {	
+	
+	AiZone zone = null;
+	AiHero myhero = null ;
+	/** */
+	public static int NUMBERRANGE =3 ;
+	/** */
+	public static int NUMBERBOMB =3;
+	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * 
@@ -24,11 +32,6 @@ public class ModeHandler extends AiModeHandler<UnluYildirim>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	
-	AiZone zone = null;
-	AiHero myhero = null ;
-	public static int NUMBERRANGE =3 ;
-	public static int NUMBERBOMB =3;
 	protected ModeHandler(UnluYildirim ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();

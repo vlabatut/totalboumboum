@@ -24,10 +24,15 @@ public class CriterionFacileTuer extends AiUtilityCriterionString
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";
 	/** Valeurs du domaine de définition */
+	/** */
 	public static final String VALUE1 = "";
+	/** */
 	public static final String VALUE2 = "une autre valeur";
+	/** */
 	public static final String VALUE3 = "encore une autre";
+	/** */
 	public static final String VALUE4 = "et puis une autre";
+	/** */
 	public static final String VALUE5 = "et enfin une dernière";
 	/** Domaine de définition */
 	public static final Set<String> DOMAIN = new TreeSet<String>(Arrays.asList
@@ -41,6 +46,8 @@ public class CriterionFacileTuer extends AiUtilityCriterionString
 	/**
 	 * Crée un nouveau critère entier.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

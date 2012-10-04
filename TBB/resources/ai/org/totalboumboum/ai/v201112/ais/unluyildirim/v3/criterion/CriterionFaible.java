@@ -15,9 +15,14 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  */
 @SuppressWarnings("deprecation")
 public class CriterionFaible extends AiUtilityCriterionBoolean
-{	
+{	/** */
 	public static final String NAME = "FAIBLE";
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CriterionFaible(UnluYildirim ai) throws StopRequestException
 	{	
 		super(NAME);

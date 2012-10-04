@@ -24,6 +24,8 @@ public class CriterionTempsCollecte extends AiUtilityCriterionInteger
 	 * Ce critère a but de déterminer le plus proche bonus dans la zone.
 	 * Il renvoie la valeur 1 , si le tile contient le plus proche bonus ;
 	 * sinon il renvoie 0.
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

@@ -17,17 +17,17 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  */
 @SuppressWarnings("deprecation")
 public class CriterionTemps extends AiUtilityCriterionBoolean
-{	
+{	/** */
 	public static final String NAME = "TEMPS";
 	
 	/**
 	 * Ce critere renvoie une true si le tile possede le plus proche item/adversaire
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		
 	 */
-	
-	
 	public CriterionTemps(UnluYildirim ai) throws StopRequestException
 	{	
 		super(NAME);

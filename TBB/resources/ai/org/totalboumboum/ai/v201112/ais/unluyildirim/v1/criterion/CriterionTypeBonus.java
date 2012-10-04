@@ -24,7 +24,8 @@ public class CriterionTypeBonus extends AiUtilityCriterionInteger
 	 * Ce critère détermine notre besoin et regarde si le tile contient
 	 * l'item que l'on a besoin.Si on a besoin , il donne la valeur 1 ; 
 	 * sinon il donne la valeur 0.
-	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

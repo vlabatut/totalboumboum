@@ -17,10 +17,14 @@ import org.totalboumboum.ai.v201112.ais.unluyildirim.v3.UnluYildirim;
  */
 @SuppressWarnings("deprecation")
 public class CriterionMenace extends AiUtilityCriterionBoolean
-{	
+{	/** */
 	public static final String NAME = "MENACE";
 	
-	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CriterionMenace(UnluYildirim ai) throws StopRequestException
 	{	
 		super(NAME);
