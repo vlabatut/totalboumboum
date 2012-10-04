@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201213.ais._example.v0.criterion;
+package org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0.criterion;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionString;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais._example.v0.Example;
+import org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0.CaliskanGeckalan;
 
 /**
  * Cette classe représente est un simple exemple de 
@@ -16,8 +16,8 @@ import org.totalboumboum.ai.v201213.ais._example.v0.Example;
  * de définition est spécifiés dans l'appel au constructeur 
  * ({@code super(nom,inf,sup)}).
  * 
- * @author Xxxxxx
- * @author Yyyyyy
+ * @author Mustafa Çalışkan
+ * @author Gökhan Geçkalan
  */
 public class CriterionThird extends AiUtilityCriterionString
 {	/** Nom de ce critère */
@@ -50,7 +50,7 @@ public class CriterionThird extends AiUtilityCriterionString
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionThird(Example ai) throws StopRequestException
+	public CriterionThird(CaliskanGeckalan ai) throws StopRequestException
 	{	// init nom + bornes du domaine de définition
 		super(NAME,DOMAIN);
 		
@@ -62,7 +62,7 @@ public class CriterionThird extends AiUtilityCriterionString
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** L'agent associé au traitement */ 
-	protected Example ai;
+	protected CaliskanGeckalan ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
