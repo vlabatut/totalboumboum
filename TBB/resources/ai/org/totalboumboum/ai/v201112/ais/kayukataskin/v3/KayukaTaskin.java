@@ -73,6 +73,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 	protected BombHandler bombHandler;
 	/** gestionnaire chargé de décidé de la direction de déplacement de l'agent */
 	protected MoveHandler moveHandler;
+	/** */
 	public CommonTools commonTools;
 	
 	@Override

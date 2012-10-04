@@ -284,6 +284,14 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param center
+	 * @param hero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Set<AiTile> getTilesForRadius(AiTile center, AiHero hero) throws StopRequestException
 	{	ai.checkInterruption();
 		// init

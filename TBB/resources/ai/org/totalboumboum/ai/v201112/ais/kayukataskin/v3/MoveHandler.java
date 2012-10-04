@@ -66,6 +66,11 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 	
 	
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		

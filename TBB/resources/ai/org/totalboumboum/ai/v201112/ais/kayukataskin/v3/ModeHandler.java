@@ -16,6 +16,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<KayukaTaskin>
 {	
+	private AiZone zone;
+	private AiHero ownHero;
+	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * 
@@ -25,9 +28,6 @@ public class ModeHandler extends AiModeHandler<KayukaTaskin>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	private AiZone zone;
-	private AiHero ownHero;
-	
 	protected ModeHandler(KayukaTaskin ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
