@@ -31,6 +31,9 @@ import org.totalboumboum.ai.v200708.adapter.AiManager;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
+	/**
+	 * constructeur utilisé pour créer une instance de l'IA
+	 */
 	public AiMain()
 	{	super(new HanciToprak());		
 	}

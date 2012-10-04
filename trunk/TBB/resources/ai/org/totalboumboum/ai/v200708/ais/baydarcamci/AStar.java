@@ -180,7 +180,7 @@ public class AStar implements PathFinder {
 	
 	/**
 	 * Constructor for AStar.
-	 * @param map The map to traverse
+	 * @param zoneMatrix The map to traverse
 	 * @param maxNodes The maximum number of nodes allowed. (For a grid shaped map,
 	 * use width * height)
 	 */
@@ -375,6 +375,13 @@ public class AStar implements PathFinder {
 	    
 	}
    
+	/**
+	 * 
+	 * @param from
+	 * @param to
+	 * @return
+	 * 		?
+	 */
 	public int getDistance(int[] from, int[] to)
 	{int distance = distance(from[0],from[1],to[0],to[1]);
 	
@@ -382,6 +389,13 @@ public class AStar implements PathFinder {
 	return distance	;
 	}
    
+	/**
+	 * 
+	 * @param from
+	 * @param to
+	 * @return
+	 * 		?
+	 */
 	public int getCost(int[] from, int[] to)
 	{  int x = Math.abs(from[0]-from[1]);
 	   int y = Math.abs(to[0]-to[1]);
@@ -394,6 +408,12 @@ public class AStar implements PathFinder {
 		
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @param parent
+	 * @param path
+	 */
 	public void getNeighbors(int [] node, int [] parent, List<int[]> path)
 	{   BaydarCamci bomber = new BaydarCamci();
 	    node=ownPosition;

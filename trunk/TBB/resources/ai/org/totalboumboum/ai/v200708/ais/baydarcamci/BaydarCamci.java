@@ -34,8 +34,9 @@ public class BaydarCamci extends ArtificialIntelligence
     
     int thePutBomb[] = {-1,-1}; //yol acmak icin bomba biraktiginda eski pozisyonuna geri don
     int runAwayStep = 0; 
+    /** */
     public int bombPower =0 ;
-    
+    /** */
     public List<int[]> path = new ArrayList<int[]>();
     
     
@@ -95,7 +96,16 @@ public class BaydarCamci extends ArtificialIntelligence
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param bombX
+	 * @param bombY
+	 * @param bombPower
+	 * @return
+	 * 			?
+	 */
 	public Integer onDanger(int x, int y, int bombX, int bombY,int bombPower)
 	{
 		if(x==bombX && bombY< y)
@@ -257,6 +267,13 @@ public class BaydarCamci extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	public Integer dummyMethod(int x , int y)
 	{
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
@@ -278,8 +295,8 @@ public class BaydarCamci extends ArtificialIntelligence
 	
 	/**
 	 * moi et la bombe et dans le meme cas
-	 * @param x, mon x
-	 * @param y, mon y
+	 * @param x mon x
+	 * @param y mon y
 	 * @return mouvement
 	 */
 	public Integer onBomb(int x, int y)
@@ -456,7 +473,13 @@ public class BaydarCamci extends ArtificialIntelligence
 		return result;
 	}
 	
-	//moi est au milieu de la zone.
+	/**
+	 * moi est au milieu de la zone.
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	public Integer merkez(int x, int y)
 	{
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
@@ -488,7 +511,13 @@ public class BaydarCamci extends ArtificialIntelligence
 		return result;
 	}
 	
-	//la mouvement du personnage s'il commence au jeu au haut gauche de la zone
+	/**
+	 * la mouvement du personnage s'il commence au jeu au haut gauche de la zone
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	public Integer solUstKoseHareketleri(int x, int y)
 	{
 		
@@ -513,7 +542,13 @@ public class BaydarCamci extends ArtificialIntelligence
 		return result;
 	}
 	
-	//la mouvement du personnage s'il commence au jeu au haut droit de la zone
+	/**
+	 * la mouvement du personnage s'il commence au jeu au haut droit de la zone
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	public Integer sagUstKoseHareketleri(int x, int y)
 	{
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
@@ -535,7 +570,13 @@ public class BaydarCamci extends ArtificialIntelligence
 		return result;
 	}
 	
-	//la mouvement du personnage s'il commence au jeu au bas gauche de la zone
+	/**
+	 * la mouvement du personnage s'il commence au jeu au bas gauche de la zone
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	public Integer solAltKoseHareketleri(int x, int y)
 	{
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
@@ -557,7 +598,13 @@ public class BaydarCamci extends ArtificialIntelligence
 		return result;
 	}
 	
-	//la mouvement du personnage s'il commence au jeu au bas droit de la zone
+	/**
+	 * la mouvement du personnage s'il commence au jeu au bas gauche de la zone
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	public Integer sagAltKoseHareketleri(int x, int y)
 	{
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
@@ -580,7 +627,15 @@ public class BaydarCamci extends ArtificialIntelligence
 	}
 	
 	
-	//la position du bombe par rapport a moi
+	/**
+	 * la position du bombe par rapport a moi
+	 * @param x
+	 * @param y
+	 * @param bombX
+	 * @param bombY
+	 * @return
+	 * 		?
+	 */
 	public int bombaNerde(int x, int y, int bombX, int bombY)
 	{
 		//bomba sagimdaysa 6 solumdaysa 4 yukardaysa 8 asagidaysa 2 altimdaysa 5  
@@ -606,6 +661,7 @@ public class BaydarCamci extends ArtificialIntelligence
 	 * @param x mon x
 	 * @param y mon y
 	 * @return
+	 * 		?
 	 */
 	public Integer rightBomb(int x,int y)
 	{
@@ -618,9 +674,10 @@ public class BaydarCamci extends ArtificialIntelligence
 	}
 	/**
 	 * bombe se situe au gauche
-	 * @param x, mon x
-	 * @param y, mon y
+	 * @param x mon x
+	 * @param y mon y
 	 * @return
+	 * 		?
 	 */
 	public Integer leftBomb(int x,int y)
 	{
@@ -637,6 +694,7 @@ public class BaydarCamci extends ArtificialIntelligence
 	 * @param x mon x
 	 * @param y mon y
 	 * @return
+	 * 		?
 	 */
 	public Integer downBomb(int x,int y)
 	{
@@ -652,6 +710,7 @@ public class BaydarCamci extends ArtificialIntelligence
 	 * @param x mon x
 	 * @param y mon y
 	 * @return
+	 * 		?
 	 */
 	public Integer upBomb(int x,int y)
 	{
@@ -669,7 +728,13 @@ public class BaydarCamci extends ArtificialIntelligence
 		
 	
 
-	//se deplace au case de bombe
+	/**
+	 * se deplace au case de bombe
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	public Integer getPutBombPosition(int x, int y)
 	{
 		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_DOWN)
