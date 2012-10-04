@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0;
+package org.totalboumboum.ai.v201213.ais.caliskangeckalansazan.v0;
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201213.adapter.agent.AiModeHandler;
@@ -15,8 +15,9 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  *
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
+ * @author Gökhan Sazan
  */
-public class CaliskanGeckalan extends ArtificialIntelligence
+public class CaliskanGeckalanSazan extends ArtificialIntelligence
 {
 	@Override
 	protected void init() throws StopRequestException
@@ -91,25 +92,25 @@ public class CaliskanGeckalan extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler<CaliskanGeckalan> getModeHandler() throws StopRequestException
+	protected AiModeHandler<CaliskanGeckalanSazan> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiUtilityHandler<CaliskanGeckalan> getUtilityHandler() throws StopRequestException
+	protected AiUtilityHandler<CaliskanGeckalanSazan> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler<CaliskanGeckalan> getBombHandler() throws StopRequestException
+	protected AiBombHandler<CaliskanGeckalanSazan> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler<CaliskanGeckalan> getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<CaliskanGeckalanSazan> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

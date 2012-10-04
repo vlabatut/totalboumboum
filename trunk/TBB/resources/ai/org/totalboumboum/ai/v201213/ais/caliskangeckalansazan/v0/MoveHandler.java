@@ -1,18 +1,20 @@
-package org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0;
+package org.totalboumboum.ai.v201213.ais.caliskangeckalansazan.v0;
 
-import org.totalboumboum.ai.v201213.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201213.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
+import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Classe gérant les déplacements de l'agent. 
- * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
+ * Classe gérant le déplacement de l'agent.
+ * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
+ * @author Gökhan Sazan
  */
-public class ModeHandler extends AiModeHandler<CaliskanGeckalan>
+public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSazan>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -23,7 +25,7 @@ public class ModeHandler extends AiModeHandler<CaliskanGeckalan>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected ModeHandler(CaliskanGeckalan ai) throws StopRequestException
+	protected MoveHandler(CaliskanGeckalanSazan ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -33,33 +35,27 @@ public class ModeHandler extends AiModeHandler<CaliskanGeckalan>
 		// TODO à compléter
 	}
 
-    /////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected boolean hasEnoughItems() throws StopRequestException
+	protected Direction considerMoving() throws StopRequestException
 	{	ai.checkInterruption();
 		
-    	// TODO à compléter
+		// TODO à compléter
 		
-		return true;
-	}
-	
-	@Override
-	protected boolean isCollectPossible() throws StopRequestException
-	{	ai.checkInterruption();
-	
-   		// TODO à compléter
-		
-		return true;
+		return Direction.NONE;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected void updateOutput() throws StopRequestException
+	@Override
+	public void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		// ici on se contente de faire le traitement par défaut
+		super.updateOutput();
+		// TODO à redéfinir, si vous voulez afficher d'autres informations
 	}
 }
