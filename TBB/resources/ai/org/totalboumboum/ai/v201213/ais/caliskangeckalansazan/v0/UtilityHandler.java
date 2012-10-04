@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0;
+package org.totalboumboum.ai.v201213.ais.caliskangeckalansazan.v0;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -9,9 +9,9 @@ import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterion;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0.criterion.CriterionFirst;
-import org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0.criterion.CriterionSecond;
-import org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0.criterion.CriterionThird;
+import org.totalboumboum.ai.v201213.ais.caliskangeckalansazan.v0.criterion.CriterionFirst;
+import org.totalboumboum.ai.v201213.ais.caliskangeckalansazan.v0.criterion.CriterionSecond;
+import org.totalboumboum.ai.v201213.ais.caliskangeckalansazan.v0.criterion.CriterionThird;
 
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
@@ -21,8 +21,9 @@ import org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0.criterion.CriterionT
  * 
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
+ * @author Gökhan Sazan
  */
-public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
+public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalanSazan>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -33,7 +34,7 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected UtilityHandler(CaliskanGeckalan ai) throws StopRequestException
+	protected UtilityHandler(CaliskanGeckalanSazan ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		

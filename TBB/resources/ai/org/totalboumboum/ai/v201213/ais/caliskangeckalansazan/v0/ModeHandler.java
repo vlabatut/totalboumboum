@@ -1,18 +1,19 @@
-package org.totalboumboum.ai.v201213.ais.caliskangeckalan.v0;
+package org.totalboumboum.ai.v201213.ais.caliskangeckalansazan.v0;
 
-import org.totalboumboum.ai.v201213.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201213.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 
 /**
- * Classe gérant l'action de déposer une bombe pour l'agent. 
- * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
+ * Classe gérant les déplacements de l'agent. 
+ * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
+ * @author Gökhan Sazan
  */
-public class BombHandler extends AiBombHandler<CaliskanGeckalan>
+public class ModeHandler extends AiModeHandler<CaliskanGeckalanSazan>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -23,28 +24,36 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalan>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected BombHandler(CaliskanGeckalan ai) throws StopRequestException
+	protected ModeHandler(CaliskanGeckalanSazan ai) throws StopRequestException
     {	super(ai);
-    	ai.checkInterruption();
+		ai.checkInterruption();
 		
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
-   	
-    	// TODO à compléter
+		
+		// TODO à compléter
 	}
 
     /////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected boolean considerBombing() throws StopRequestException
+	protected boolean hasEnoughItems() throws StopRequestException
+	{	ai.checkInterruption();
+		
+    	// TODO à compléter
+		
+		return true;
+	}
+	
+	@Override
+	protected boolean isCollectPossible() throws StopRequestException
 	{	ai.checkInterruption();
 	
-		// TODO à compléter
-	
-		return false;
+   		// TODO à compléter
+		
+		return true;
 	}
-
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
