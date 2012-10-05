@@ -30,7 +30,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class ArikYaman extends ArtificialIntelligence
-{	public String mode;
+{	/** */
+	public String mode;
 	private AiZone GameMap;
 	private AiHero AY;
 	private int[][] ProcessMatrix;	
@@ -514,6 +515,12 @@ public class ArikYaman extends ArtificialIntelligence
 		}
 		return result;
 	}
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int[][] getProcessMatrix() throws StopRequestException{
 		checkInterruption();
 		return this.ProcessMatrix;

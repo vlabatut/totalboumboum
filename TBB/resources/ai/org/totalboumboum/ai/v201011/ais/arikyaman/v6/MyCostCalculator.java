@@ -15,6 +15,11 @@ public class MyCostCalculator extends CostCalculator {
 	ArikYaman ay;
     int[][]	ProcessMatrix;
 	
+    /**
+     * 
+     * @param ay
+     * @throws StopRequestException
+     */
 	public MyCostCalculator(ArikYaman ay) throws StopRequestException
 	{	ay.checkInterruption();
 		

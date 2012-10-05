@@ -17,8 +17,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.mode.Mode;
 @SuppressWarnings("deprecation")
 public abstract class Strategy
 {
-
+	/** */
 	public final int STRATEGY_UPDATE_RATE = 500; //strategy update time, in ms
+	/** */
 	public double lastUpdateTime = 0;
 	
 	/**
@@ -80,6 +81,14 @@ public abstract class Strategy
 		this.path = path;
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 * @param mode
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Strategy update(AiZone zone, Mode mode) throws StopRequestException
 	{
 		monIa.checkInterruption();

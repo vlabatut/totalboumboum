@@ -17,7 +17,12 @@ public class InformationManager
 	AiZone zone;
 
 	
-	
+	/**
+	 * 
+	 * @param zone
+	 * @param ia
+	 * @throws StopRequestException
+	 */
 	public InformationManager(AiZone zone, AkbulutKupelioglu ia) throws StopRequestException
 	{
 		ia.checkInterruption();
