@@ -146,6 +146,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean hasBomb(AiTile tile, Direction d) throws StopRequestException{
@@ -175,6 +176,14 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @param d
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasBomb2(AiTile tile, Direction d) throws StopRequestException{
 		ai.checkInterruption();
 
@@ -261,6 +270,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	 * is there any enemy danger on the 4 principal directions. that method must be 
 	 * improved because it is so naive
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isThereEnemyDanger() throws StopRequestException{

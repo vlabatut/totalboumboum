@@ -14,11 +14,14 @@ import org.totalboumboum.ai.v201112.ais.sakaryasar.v1.SakarYasar;
  */
 @SuppressWarnings("deprecation")
 public class CriterionEnemies extends AiUtilityCriterionBoolean{
+	/** */
 	public static final String NAME = "ENEMIES";
 	
 	/**
 	 * Crée un nouveau critère binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

@@ -15,11 +15,14 @@ import org.totalboumboum.ai.v201112.ais.sakaryasar.v1.SakarYasar;
  */
 @SuppressWarnings("deprecation")
 public class CriterionPertinance extends AiUtilityCriterionBoolean{
+	/** */
 	public static final String NAME = "PERTINANCE";
 	
 	/**
 	 * Crée un nouveau critère binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
@@ -31,6 +34,12 @@ public class CriterionPertinance extends AiUtilityCriterionBoolean{
 		this.ai = ai;
 	}
 	
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 * 		?
+	 */
 	public boolean isItemPertinant(AiItemType t){
 		boolean result = false;
 		if(t==AiItemType.EXTRA_BOMB){

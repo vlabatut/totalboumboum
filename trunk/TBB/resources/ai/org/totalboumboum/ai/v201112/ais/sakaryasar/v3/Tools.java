@@ -18,7 +18,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Tools extends AiAbstractHandler<SakarYasar>{
-
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected Tools(SakarYasar ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -26,25 +30,35 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 		ownHero = zone.getOwnHero();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	protected void update() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		currentTile = ownHero.getTile();
 	}
-	
+	/** */
 	public AiHero ownHero = null;
+	/** */
 	public AiZone zone = null;
+	/** */
 	public AiTile currentTile = null;
-	
+	/** */
 	public double upDelay;
+	/** */
 	public double downDelay;
+	/** */
 	public double leftDelay;
+	/** */
 	public double rightDelay;
 	
 	/**
 	 * method for controlling if a tile is in danger or not
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isTileInDanger(AiTile tile) throws StopRequestException{		
@@ -68,6 +82,7 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public double checkSide(AiTile tile,Direction d) throws StopRequestException{
@@ -107,6 +122,13 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTilePassable(AiTile tile ) throws StopRequestException{
 		ai.checkInterruption();
 		boolean result = true;

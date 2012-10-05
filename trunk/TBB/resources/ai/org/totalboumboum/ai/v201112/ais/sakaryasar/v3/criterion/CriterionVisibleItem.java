@@ -11,11 +11,14 @@ import org.totalboumboum.ai.v201112.ais.sakaryasar.v3.SakarYasar;
  */
 @SuppressWarnings("deprecation")
 public class CriterionVisibleItem extends AiUtilityCriterionBoolean {
+	/** */
 	public static final String NAME = "VISIBLEITEM";
 	
 	/**
 	 * Crée un nouveau critère binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

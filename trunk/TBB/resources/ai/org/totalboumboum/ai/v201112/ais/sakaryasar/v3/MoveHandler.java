@@ -56,6 +56,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	// ///////////////////////////////////////////////////////////////
 	// PROCESSING /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
+	/** */
 	public boolean waitNextTerm = false;
 	@Override
 	protected Direction considerMoving() throws StopRequestException {
@@ -254,6 +255,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * check path if is there any tile that is dangerous
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isThereAnyUnsafeTileOnPath() throws StopRequestException{
@@ -384,6 +386,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	 * method who checks path for seeing if there is an enemy on the road.
 	 * @param path
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean checkPathForEnemmies(AiPath path) throws StopRequestException{
@@ -420,6 +423,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	 * method for controlling bombs on the path
 	 * @param path
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean checkPathForBombs(AiPath path) throws StopRequestException{
