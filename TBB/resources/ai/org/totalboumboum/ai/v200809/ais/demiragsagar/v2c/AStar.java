@@ -27,6 +27,13 @@ public class AStar {
 	boolean debug;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public AStar(AiTile start, AiTile end, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -35,6 +42,13 @@ public class AStar {
 		this.debug = false;
 	}
 
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 * @param debug
+	 * @throws StopRequestException
+	 */
 	public AStar(AiTile start, AiTile end, boolean debug) throws StopRequestException {
 		ai.checkInterruption();
 		this.firstTile = start;
@@ -42,17 +56,34 @@ public class AStar {
 		this.debug = debug;
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void init() throws StopRequestException {
 		ai.checkInterruption();
 		links = new Vector<LienRecherche>();
 	}
 
+	/**
+	 * 
+	 * @param parent
+	 * @param fils
+	 * @throws StopRequestException
+	 */
 	public void formeLien(Node parent, Node fils) throws StopRequestException {
 		ai.checkInterruption();
 		LienRecherche link = new LienRecherche(parent, fils,ai);
 		links.add(link);
 	}
 
+	/**
+	 * 
+	 * @param courant
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Iterator<Node> developNode(AiTile courant) throws StopRequestException {
 		ai.checkInterruption();
 		Vector<Node> result = new Vector<Node>();
@@ -94,6 +125,11 @@ public class AStar {
 			}
 		return result.iterator();
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void formeArbre() throws StopRequestException {
 		ai.checkInterruption();
 			init();
@@ -144,8 +180,11 @@ public class AStar {
 			}
 
 	}
-	/*
-	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A*
+	/**
+	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A
+	 * @return
+	 * 		?
+	 * @throws StopRequestException *
 	 */
 	public LinkedList<Node> getPath() throws StopRequestException { 
 		ai.checkInterruption();
@@ -166,8 +205,12 @@ public class AStar {
 		return path;
 		
 	}
-	/*
+	/**
 	 * On trouve le parent d'un noeud 
+	 * @param child 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public LienRecherche getParentLink(Node child) throws StopRequestException {
 		ai.checkInterruption();
@@ -184,8 +227,12 @@ public class AStar {
 		}
 		return result;
 	}
-	/*
+	/**
 	 * On trouve les fils d'un noeud
+	 * @param node 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<Node> getChildrenLinks(Node node) throws StopRequestException {
 		ai.checkInterruption();
@@ -200,8 +247,13 @@ public class AStar {
 		}
 		return result;
 	}
-	//Il trouve les cases qui n'ont pas de fils
-	//ou on peut poser des bombes
+	/** Il trouve les cases qui n'ont pas de fils
+	 *ou on peut poser des bombes
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<Node> getFils() throws StopRequestException
 	{	ai.checkInterruption();
 	List<Node> nodes=new ArrayList<Node>();

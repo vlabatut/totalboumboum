@@ -16,6 +16,12 @@ public class NoeudComparator implements Comparator<Noeud> {
 	private Noeud t;
 	DeveciogluKorkmaz dk;
 
+	/**
+	 * 
+	 * @param t
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public NoeudComparator(Noeud t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
 		this.t = t;

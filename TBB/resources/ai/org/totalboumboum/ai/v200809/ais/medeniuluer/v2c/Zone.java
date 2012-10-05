@@ -35,6 +35,12 @@ public class Zone {
 	private MedeniUluer mu;
 	private int lastSimulatedBombExplodes;
 
+	/**
+	 * 
+	 * @param zone
+	 * @param mu
+	 * @throws StopRequestException
+	 */
 	public Zone(AiZone zone, MedeniUluer mu) throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		this.mu = mu;
@@ -161,7 +167,12 @@ public class Zone {
 				zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.BONUSFEU;
 		}
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		return zoneArray;
@@ -179,7 +190,14 @@ public class Zone {
 		return result;
 		
 	}
-
+	
+	/**
+	 * 
+	 * @param bomb
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum[][] simulateBomb(AiTile bomb) throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeight()];
@@ -276,6 +294,12 @@ public class Zone {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getLastSimulatedBombExplodes() throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		return lastSimulatedBombExplodes;

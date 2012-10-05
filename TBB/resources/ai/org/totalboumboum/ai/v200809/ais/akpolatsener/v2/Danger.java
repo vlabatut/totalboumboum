@@ -29,6 +29,11 @@ public class Danger {
 	/** l'objet de la danger le plus proche */
 	Object closestDanger;
 
+	/**
+	 * 
+	 * @param as
+	 * @throws StopRequestException
+	 */
 	public Danger(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
 		this.as = as;
@@ -71,6 +76,7 @@ public class Danger {
 	 * retourne le danger la plus proche
 	 * 
 	 * @return
+	 * 		?
 	 */
 	public Object getClosestDanger() {
 		return closestDanger;
@@ -140,6 +146,7 @@ public class Danger {
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public double getHypotenuseToDanger(AiTile tile)

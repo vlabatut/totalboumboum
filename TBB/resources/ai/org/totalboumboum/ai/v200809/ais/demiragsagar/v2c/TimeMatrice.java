@@ -26,6 +26,13 @@ public class TimeMatrice {
 	
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param defaultPortee
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TimeMatrice(AiZone zone,int defaultPortee, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -37,36 +44,63 @@ public class TimeMatrice {
 		this.debug=false;
 		createTimeMatrice();
 	}
+	/**
+	 * 
+	 * @param defaultPortee
+	 * @throws StopRequestException
+	 */
 	public void setDefaultPortee(int defaultPortee) throws StopRequestException {
 		ai.checkInterruption();
 		this.defaultPortee=defaultPortee;
 	}
-	/*
+	/**
 	 * Donner une valeur a une case de la matrice du temps
+	 * @param col 
+	 * @param line 
+	 * @param time 
+	 * @throws StopRequestException 
 	 */
 	public void putTime(int col,int line,long time) throws StopRequestException {
 		ai.checkInterruption();
 		this.timeMatrice[col][line]=time;
 	};
-	/*
+	/**
 	 * ça nous donne la matrice du temps
 	 * Une case contient 0 s'il n y'a aucun danger 
 	 * Sinon il contient le temps restant d'une bombe
+	 * @param col 
+	 * @param line 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public long getTime(int col,int line) throws StopRequestException {
 		ai.checkInterruption();
 		return this.timeMatrice[col][line];
 	}
+	/**
+	 * @param tile
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	public void putTime(AiTile tile,long time) throws StopRequestException {
 		ai.checkInterruption();
 		this.putTime(tile.getCol(),tile.getLine(),time);
 	}
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public long getTime(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 		return this.getTime(tile.getCol(),tile.getLine());
 	}
-	/*
+	/**
 	 * Création de la matrice du temps
+	 * @throws StopRequestException 
 	 */
 	public void createTimeMatrice() throws StopRequestException {
 		ai.checkInterruption();
@@ -83,9 +117,13 @@ public class TimeMatrice {
 			}
 		}
 	}
-	/*
+	/**
 	 * S'il ya un mur dans une case on voit -1 
 	 * On augmente la valeur d'une case selon le nombre des bombes qui affectent cette case
+	 * @param zone 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public int[][] getBombMatrice(AiZone zone) throws StopRequestException {
 		ai.checkInterruption();
@@ -136,10 +174,19 @@ public class TimeMatrice {
 		return maMatrice;
 
 	}
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void printTimeMatrice() throws StopRequestException {
 		ai.checkInterruption();
 		Functions.printMatrice(this.timeMatrice,ai);
 	}
+	/**
+	 * 
+	 * @param nouvelleBombes
+	 * @throws StopRequestException
+	 */
 	public void updateTimeMatrice(List<AiTile> nouvelleBombes) throws StopRequestException {
 		ai.checkInterruption();
 		if (this.debug)
@@ -293,6 +340,11 @@ public class TimeMatrice {
 		down=true;	
 	}
 
+	/**
+	 * 
+	 * @param temp
+	 * @throws StopRequestException
+	 */
 	public void placerNouvelleBombe(AiTile temp) throws StopRequestException {
 		ai.checkInterruption();
 		if(this.debug) System.out.println("nouvelle bombe");
@@ -365,7 +417,13 @@ public class TimeMatrice {
 
 	}
 	
-
+	/**
+	 * 
+	 * @param temp
+	 * @param portee
+	 * @param min
+	 * @throws StopRequestException
+	 */
 	public void diffuseEffetMatrice(AiTile temp, int portee, long min) throws StopRequestException {
 		ai.checkInterruption();
 		//Allez dans les 4 directions dans la longeur de la portee

@@ -15,7 +15,11 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 	private int line;
 	
 	
-
+	/**
+	 * 
+	 * @param col
+	 * @param line
+	 */
 	public DangerPriorityCostTileComparator(int col, int line) {
 		super();
 		this.col = col;
@@ -23,7 +27,9 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 	}
 
 
-
+	/**
+	 * 
+	 */
 	public int compare(DangerPriorityCostTile tile1, DangerPriorityCostTile tile2){
 		
 		

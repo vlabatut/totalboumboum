@@ -23,6 +23,14 @@ public class PathFinder {
 	private MedeniUluer mu;
 	private SearchEnum mode;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param target
+	 * @param mu
+	 * @param mode
+	 * @throws StopRequestException
+	 */
 	public PathFinder(AiZone zone, AiTile target, MedeniUluer mu,SearchEnum mode) throws StopRequestException 
 	{
 		mu.checkInterruption(); // Appel Obligatoire
@@ -53,6 +61,15 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 * @param depart
+	 * @param target
+	 * @param mu
+	 * @param mode
+	 * @throws StopRequestException
+	 */
 	public PathFinder(AiZone zone, AiTile depart, AiTile target,MedeniUluer mu, SearchEnum mode)throws StopRequestException 
 	{
 		mu.checkInterruption(); // Appel Obligatoire
@@ -84,6 +101,16 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 * @param simulatedOrAdaptedZone
+	 * @param depart
+	 * @param target
+	 * @param mu
+	 * @param mode
+	 * @throws StopRequestException
+	 */
 	public PathFinder(AiZone zone, ZoneEnum[][] simulatedOrAdaptedZone,
 			AiTile depart, AiTile target, MedeniUluer mu,
 			SearchEnum mode) throws StopRequestException {
@@ -142,6 +169,12 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public String toStringPath() throws StopRequestException {
 		mu.checkInterruption();
 		return path.toString();
@@ -254,6 +287,12 @@ public class PathFinder {
 		tree = null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unchecked")
 	public LinkedList<AiTile> getPath() throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire

@@ -25,7 +25,7 @@ public class SearchLink
 	 * 
 	 * @param origin	noeud parent
 	 * @param target	noeud fils
-	 * @param action	action de transition
+	 * @param source	action de transition
 	 * @throws StopRequestException 
 	 */
 	public SearchLink(Noeud origin,Noeud target,DayioglugilGeckalan source) throws StopRequestException
@@ -40,7 +40,6 @@ public class SearchLink
 	/**
 	 * Renvoie le noeud parent du lien 
 	 * @return	le noeud parent
-	 * @throws StopRequestException 
 	 */
 	public Noeud getOrigin()
 	{   

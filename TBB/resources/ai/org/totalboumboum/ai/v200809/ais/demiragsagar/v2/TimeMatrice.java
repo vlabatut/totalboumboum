@@ -22,7 +22,11 @@ public class TimeMatrice {
 	private int extendTime;
 	private boolean debug;
 
-	
+	/**
+	 * 
+	 * @param zone
+	 * @param defaultPortee
+	 */
 	public TimeMatrice(AiZone zone,int defaultPortee) {
 		this.zone=zone;
 		this.timeMatrice=new long[20][20];
@@ -32,30 +36,52 @@ public class TimeMatrice {
 		this.debug=false;
 		createTimeMatrice();
 	}
+	/**
+	 * 
+	 * @param defaultPortee
+	 */
 	public void setDefaultPortee(int defaultPortee) {
 		this.defaultPortee=defaultPortee;
 	}
-	/*
+	/**
 	 * Donner une valeur a une case de la matrice du temps
+	 * @param col 
+	 * @param line 
+	 * @param time 
 	 */
 	public void putTime(int col,int line,long time) {
 		this.timeMatrice[col][line]=time;
 	};
-	/*
+	/**
 	 * ça nous donne la matrice du temps
 	 * Une case contient 0 s'il n y'a aucun danger 
 	 * Sinon il contient le temps restant d'une bombe
+	 * @param col 
+	 * @param line 
+	 * @return
+	 * 		?
 	 */
 	public long getTime(int col,int line) {
 		return this.timeMatrice[col][line];
 	}
+	/**
+	 * 
+	 * @param tile
+	 * @param time
+	 */
 	public void putTime(AiTile tile,long time) {
 		this.putTime(tile.getCol(),tile.getLine(),time);
 	}
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 */
 	public long getTime(AiTile tile) {
 		return this.getTime(tile.getCol(),tile.getLine());
 	}
-	/*
+	/**
 	 * Création de la matrice du temps
 	 */
 	public void createTimeMatrice() {
@@ -68,9 +94,12 @@ public class TimeMatrice {
 				else
 					this.putTime(i,j,0);
 	}
-	/*
+	/**
 	 * S'il ya un mur dans une case on voit -1 
 	 * On augmente la valeur d'une case selon le nombre des bombes qui affectent cette case
+	 * @param zone 
+	 * @return
+	 * 		?
 	 */
 	public int[][] getBombMatrice(AiZone zone) {
 		int[][] maMatrice = new int[17][16];
@@ -119,9 +148,16 @@ public class TimeMatrice {
 		return maMatrice;
 
 	}
+	/**
+	 * 
+	 */
 	public void printTimeMatrice() {
 		Functions.printMatrice(this.timeMatrice);
 	}
+	/**
+	 * 
+	 * @param nouvelleBombes
+	 */
 	public void updateTimeMatrice(List<AiTile> nouvelleBombes) {
 		if (this.debug)
 			this.printTimeMatrice();
@@ -265,6 +301,10 @@ public class TimeMatrice {
 		down=true;	
 	}
 
+	/**
+	 * 
+	 * @param temp
+	 */
 	public void placerNouvelleBombe(AiTile temp) {
 		if(this.debug) System.out.println("nouvelle bombe");
 		// bu 2400
@@ -332,7 +372,12 @@ public class TimeMatrice {
 
 	}
 	
-
+	/**
+	 * 
+	 * @param temp
+	 * @param portee
+	 * @param min
+	 */
 	public void diffuseEffetMatrice(AiTile temp, int portee, long min) {
 		//Allez dans les 4 directions dans la longeur de la portee
 		boolean up = true, left = true, right = true, down = true;

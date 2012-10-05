@@ -36,6 +36,12 @@ public class ZoneDanger {
 	private ZoneEnum [][] zoneArray;
 	private TirtilTomruk source;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unchecked")
 	public ZoneDanger(AiZone zone, TirtilTomruk source) throws StopRequestException
 	{
@@ -236,7 +242,12 @@ public class ZoneDanger {
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		return zoneArray;

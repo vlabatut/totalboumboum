@@ -545,6 +545,13 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		this.timedBombes = newTimedBombes;
 	}
 
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unchecked")
 	public double getPathDanger(LinkedList<AiTile> path)
 			throws StopRequestException {
@@ -604,8 +611,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	}
 	
 
-	/*
+	/**
 	 * Null dndrebilir ha.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public AiTile bombTileForBonus() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -736,7 +746,12 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return maxBlocksTile;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isThereBlocDest() throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -753,19 +768,34 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return !blocksDestructibles.isEmpty();
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Vector<TimedBomb> getTimedBombes() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		return timedBombes;
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public long getTime() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		return time;
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isBonusAccessible() throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -792,7 +822,12 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return false;
 	}
 		
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public LinkedList<AiTile> getBonusPath() throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -825,7 +860,10 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return minDistBonusPath;
 	}
 
-	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void pickBonus() throws StopRequestException
 	{
 		
@@ -861,6 +899,13 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		this.targetDeplacement = minDistBonus;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getTileDanger(AiTile tile) throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
 		checkInterruption(); // Appel Obligatoire
@@ -881,7 +926,13 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return minDist;
 	}		
 		
-	
+	/**
+	 * 
+	 * @param hero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile attackRivalBombTile(AiHero hero) throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
 		int maxPath = 0;
@@ -958,6 +1009,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return maxTile;
 	}
 
+	/**
+	 * 
+	 * @param hero
+	 * @throws StopRequestException
+	 */
 	public void attackRival(AiHero hero) throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -976,6 +1032,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		}		
 	}
 
+	/**
+	 * 
+	 * @param hero
+	 * @throws StopRequestException
+	 */
 	public void attackRivalBeta(AiHero hero) throws StopRequestException
 	{
 		
@@ -1036,7 +1097,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param hero
+	 * @throws StopRequestException
+	 */
 	public void attackRivalAlpha(AiHero hero) throws StopRequestException
 	{	checkInterruption();
 		

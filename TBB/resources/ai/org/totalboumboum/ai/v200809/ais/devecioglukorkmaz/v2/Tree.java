@@ -20,11 +20,18 @@ public class Tree {
 	private Noeud lastNode;
 	private Noeud firstNode;
 
+	/**
+	 * 
+	 * @param courant
+	 */
 	public Tree(Noeud courant) {
 		this.firstNode = courant;
 		init();
 	}
 
+	/**
+	 * 
+	 */
 	public void init() {
 		nodes = new Vector<Noeud>();
 		Noeud initialNode = new Noeud(this.firstNode.getTile());
@@ -33,15 +40,31 @@ public class Tree {
 		links = new Vector<SearchLink>();
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Noeud getRoot() {
 		return nodes.get(0);
 	}
-
+	
+	/**
+	 * 
+	 * @param pere
+	 * @param fils
+	 */
 	public void addNoeud(Noeud pere, Noeud fils) {
 		SearchLink link = new SearchLink(pere, fils);
 		addLink(link);
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 */
 	public synchronized boolean containsNode(Noeud node) {
 		boolean result = false;
 		Iterator<Noeud> i = nodes.iterator();
@@ -50,6 +73,12 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 */
 	public SearchLink getParentLink(Noeud node) {
 		SearchLink result = null;
 		if (node != firstNode) {
@@ -64,6 +93,12 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) {
 		Vector<SearchLink> result = new Vector<SearchLink>();
 
@@ -76,6 +111,12 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 */
 	public LinkedList<Noeud> getPath(Noeud node) {
 		LinkedList<Noeud> result = new LinkedList<Noeud>();
 		result.add(node);
@@ -100,11 +141,19 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param link
+	 */
 	public void addLink(SearchLink link) {
 		addLinkSynch(link);
 
 	}
 
+	/**
+	 * 
+	 * @param link
+	 */
 	private synchronized void addLinkSynch(SearchLink link) {
 		Noeud target = link.getTarget();
 		links.add(link);

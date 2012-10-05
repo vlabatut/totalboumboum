@@ -18,6 +18,13 @@ public class NodeComparator implements Comparator<Node>
 	private Node end;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param startNode
+	 * @param endNode
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public NodeComparator(Node startNode, Node endNode, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;

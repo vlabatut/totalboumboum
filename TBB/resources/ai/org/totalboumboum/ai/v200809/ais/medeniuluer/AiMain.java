@@ -32,7 +32,9 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-
+	/**
+	 * constructeur utilisé pour créer une instance de l'IA
+	 */
 	public AiMain()
 	{	super(new MedeniUluer());
 	}

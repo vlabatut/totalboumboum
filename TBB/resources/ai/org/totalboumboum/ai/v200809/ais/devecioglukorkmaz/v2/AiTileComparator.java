@@ -17,6 +17,12 @@ public class AiTileComparator implements Comparator<AiTile> {
 	AiTile t;
 	DeveciogluKorkmaz dk;
 
+	/**
+	 * 
+	 * @param t
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public AiTileComparator(AiTile t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
 

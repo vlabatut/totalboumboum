@@ -23,6 +23,15 @@ public class CostTile  {
 	private boolean inDanger;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param CurrentAiTile
+	 * @param currentcost
+	 * @param ComparedAiTile
+	 * @param FirstDirection
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CostTile(AiTile CurrentAiTile, int currentcost, AiTile ComparedAiTile,Direction FirstDirection, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -37,18 +46,36 @@ public class CostTile  {
 		inDanger = false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getCost() throws StopRequestException{
 		ai.checkInterruption();
 		return cost;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getHeuristic() throws StopRequestException{
 		ai.checkInterruption();
 		return heuristic;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getAiTile() throws StopRequestException{
 		ai.checkInterruption();
 		return MyAiTile;
@@ -60,30 +87,58 @@ public class CostTile  {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction getFirstDirection() throws StopRequestException{
 		ai.checkInterruption();
 		return firstDrctn;
 		
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @throws StopRequestException
+	 */
 	public void setmarkVisited(boolean a) throws StopRequestException{
 		ai.checkInterruption();
 		this.markVisited = a;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean getmarkVisited() throws StopRequestException{
 		ai.checkInterruption();
 		return this.markVisited;
 		
 	}
 	
+	/**
+	 * 
+	 * @param danger
+	 * @throws StopRequestException
+	 */
 	public void setinDanger(boolean danger) throws StopRequestException{
 		ai.checkInterruption();
 		this.inDanger = danger;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean getinDanger() throws StopRequestException{
 		ai.checkInterruption();
 		return inDanger;

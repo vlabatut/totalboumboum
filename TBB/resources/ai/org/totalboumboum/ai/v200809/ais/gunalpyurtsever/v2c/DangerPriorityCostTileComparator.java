@@ -17,16 +17,22 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 	private int col;
 	private int line;
 	
-	
-
+	/**
+	 * 
+	 * @param col
+	 * @param line
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public DangerPriorityCostTileComparator(int col, int line, ArtificialIntelligence  ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.col = col;
 		this.line = line;
 	}
 
-
-
+	/**
+	 * 
+	 */
 	public int compare(DangerPriorityCostTile tile1, DangerPriorityCostTile tile2){
 		
 		

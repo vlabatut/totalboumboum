@@ -27,11 +27,12 @@ public class Noeud {
 	private int cout = 0;
 
 	private TirtilTomruk source;
+	
 	/**
 	 * Constructeur.
+	 * @param source 
 	 * @throws StopRequestException 
 	 */
-
 	public Noeud(TirtilTomruk source) throws StopRequestException {
 		super();
 		source.checkInterruption(); //Appel Obligatoire
@@ -50,6 +51,7 @@ public class Noeud {
 	 *            valeur du noeud
 	 * @param cout
 	 *            cout du noeud
+	 * @param source 
 	 * @throws StopRequestException 
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, int cout,TirtilTomruk source) throws StopRequestException {
@@ -71,6 +73,7 @@ public class Noeud {
 	 *            coordonne y du noeud
 	 * @param valeur
 	 *            valeur du noeud
+	 * @param source 
 	 * @throws StopRequestException 
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, TirtilTomruk source) throws StopRequestException {

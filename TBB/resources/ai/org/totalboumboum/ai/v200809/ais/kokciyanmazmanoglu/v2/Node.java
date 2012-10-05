@@ -20,6 +20,14 @@ public class Node {
 	
 	private Tree tree;
 	
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @param cost
+	 * @param t
+	 * @param depth
+	 */
 	public Node(int line, int col, double cost, Tree t, int depth) {
 		super();
 		this.line = line;
@@ -30,7 +38,13 @@ public class Node {
 		tree = t;
 	}
 	
-	
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 * 		?
+	 */
 	public  double getH(Node start, Node end){
 		double result;
         
@@ -61,67 +75,109 @@ public class Node {
 
 
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public  double getCost() {
 		return cost;
 	}
 
-
+	/**
+	 * 
+	 * @param cost
+	 */
 	public  void setCost(int cost) {
 		this.cost = cost;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public  boolean isVisited() {
 		return visited;
 	}
 
-
+	/**
+	 * 
+	 * @param visited
+	 */
 	public  void setVisited(boolean visited) {
 		this.visited = visited;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public  String getName(){
 		
 		return this.getCol() + " / " + this.getLine();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  AiTile convertToTile() throws StopRequestException{
 		tree.km.checkInterruption();
 		return tree.km.getPercepts().getTile(this.getLine(), this.getCol());
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public  int getLine() {
 		return line;
 	}
 
-
+	/**
+	 * 
+	 * @param line
+	 */
 	public  void setLine(int line) {
 		this.line = line;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public  int getCol() {
 		return col;
 	}
 
-
+	/**
+	 * 
+	 * @param col
+	 */
 	public  void setCol(int col) {
 		this.col = col;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int getDepth() {
 		return depth;
 	}
 
-
+	/**
+	 * 
+	 * @param depth
+	 */
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-
-
-
-	
 }

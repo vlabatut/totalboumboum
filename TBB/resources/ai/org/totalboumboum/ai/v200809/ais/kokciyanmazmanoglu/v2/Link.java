@@ -15,6 +15,12 @@ public class Link {
 	private Node child;
 	private AiAction action;
 	
+	/**
+	 * 
+	 * @param p
+	 * @param c
+	 * @param a
+	 */
 	public Link(Node p ,Node c, AiAction a){
 		
 		this.parent = p;
@@ -22,17 +28,29 @@ public class Link {
 		this.action = a;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiAction getAction() {
 		return action;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Node getParent() {
 		return parent;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Node getChild() {
 		return child;
 	}

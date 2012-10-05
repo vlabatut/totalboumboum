@@ -42,6 +42,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	private int distanceTarget;
 	private int counter;
 
+	/**
+	 * 
+	 */
 	public DemiragSagar() {
 		//l'initialisation des variables globales
 		this.state = 0;
@@ -344,9 +347,12 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return result;
 	}
 	
-	/*
+	/**
 	 * Prend l'intersection entre le chmein du enemie-item
 	 * et de nous-item
+	 * @param enemy 
+	 * @return
+	 * 		?
 	 */
 	public AiTile EnemyAtTheGate(AiTile enemy)
 	{
@@ -384,9 +390,12 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		return result;
 	}
-	/*
+	/**
 	 * On suppose de mettre une bombe
 	 * On regarde si on sera en danger
+	 * @param temp 
+	 * @return
+	 * 		?
 	 */
 	public boolean supposerBombe(AiTile temp){
 		try {
@@ -412,8 +421,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 			}
 		return resultat;
 	}
-	/*
+	/**
 	 * Mettre a jour les tiles des enemies
+	 * @return
+	 * 		?
 	 */
 	public List<AiTile> getEnemiesTile() {
 		try {
@@ -439,8 +450,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return monItera;
 	}
 
-	/*
+	/**
 	 * Mettre a jour les tiles des bombes
+	 * @return
+	 * 		?
 	 */
 	public List<AiTile> getBombesTile() {
 		List<AiTile> b = new ArrayList<AiTile>();
@@ -462,8 +475,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return b;
 	}
 
-	/*
+	/**
 	 * Mettre a jour les tiles des items
+	 * @return
+	 * 		?
 	 */
 	public List<AiTile> getItemsTile() {
 		List<AiTile> p = new ArrayList<AiTile>();
@@ -485,6 +500,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return p;
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 */
 	public void calculeZoneAspect(AiZone zone) {
 		try {
 			checkInterruption();
@@ -492,13 +511,20 @@ public class DemiragSagar extends ArtificialIntelligence {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean seCacher(){
 		return seCacher(false);
 	}
-	/*
+	/**
 	 * Chercher une case pour se cacher
+	 * @param poserBombe 
+	 * @return
+	 * 		?
 	 */
-	
 	public boolean seCacher(boolean poserBombe) {
 		try {
 			checkInterruption();
@@ -523,8 +549,12 @@ public class DemiragSagar extends ArtificialIntelligence {
 		this.caseTarget = petit;
 		return fuir;
 	}
-	/*
+	/**
 	 * Regarde si il existe un danger sur le chemin chosit
+	 * @param target 
+	 * @param placerBombe 
+	 * @return
+	 * 		?
 	 */
 	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) {
 		try {
@@ -548,8 +578,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return flag;
 	}
 
-	/*
+	/**
 	 * Regarde si nous sommes arrive a la case cible
+	 * @return
+	 * 		?
 	 */
 	public boolean estCaseCible() {
 		try {
@@ -565,8 +597,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 
 	}
 
-	/*
+	/**
 	 * Compte les nombres des SoftWalls restant
+	 * @return
+	 * 		?
 	 */
 	public int FindSoftWallNumber() {
 		try {

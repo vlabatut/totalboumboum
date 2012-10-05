@@ -26,6 +26,14 @@ public class PathFinder {
 	private TirtilTomruk source;
 	private SearchModeEnum mode;
 
+	/**
+	 * 
+	 * @param zone
+	 * @param target
+	 * @param source
+	 * @param mode
+	 * @throws StopRequestException
+	 */
 	public PathFinder(AiZone zone, AiTile target, TirtilTomruk source,
 			SearchModeEnum mode) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -57,6 +65,15 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 * @param depart
+	 * @param target
+	 * @param source
+	 * @param mode
+	 * @throws StopRequestException
+	 */
 	public PathFinder(AiZone zone, AiTile depart, AiTile target,
 			TirtilTomruk source, SearchModeEnum mode)
 			throws StopRequestException {
@@ -92,6 +109,16 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 * @param simulatedOrAdaptedZone
+	 * @param depart
+	 * @param target
+	 * @param source
+	 * @param mode
+	 * @throws StopRequestException
+	 */
 	public PathFinder(AiZone zone, ZoneEnum[][] simulatedOrAdaptedZone,
 			AiTile depart, AiTile target, TirtilTomruk source,
 			SearchModeEnum mode) throws StopRequestException {
@@ -154,6 +181,12 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public String toStringPath() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		return path.toString();
@@ -303,6 +336,12 @@ public class PathFinder {
 		tree = null;// on vide l'arbre.
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unchecked")
 	public LinkedList<AiTile> getPath() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire

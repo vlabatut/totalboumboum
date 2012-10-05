@@ -25,6 +25,11 @@ public class TileControl {
 	/** la classe principale de notre IA */
 	AkpolatSener as;
 
+	/**
+	 * 
+	 * @param as
+	 * @throws StopRequestException
+	 */
 	public TileControl(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
 		this.as = as;
@@ -32,6 +37,7 @@ public class TileControl {
 
 	/**
 	 * renvoie la liste des tous les voisins
+	 * @param tile 
 	 * 
 	 * @return liste des voisins sans condition
 	 * @throws StopRequestException
@@ -54,6 +60,7 @@ public class TileControl {
 
 	/**
 	 * filtre la liste des tous voisins d'apres les parametres
+	 * @param tile 
 	 * 
 	 * @param bombDanger
 	 *            true quand on veut filtrer les voisins qui est sous danger
@@ -65,7 +72,7 @@ public class TileControl {
 	 *            true quand on veut filtrer les voisins qui a de bloc
 	 * @param enemy
 	 *            true quand on veut filtrer les voisins qui a des enemies
-	 * @param softWall
+	 * @param softwall 
 	 *            true quand on veut filtrer les voisins qui a de bloc
 	 *            destructible
 	 * @param bonus
@@ -95,6 +102,7 @@ public class TileControl {
 
 	/**
 	 * controler une case
+	 * @param tile 
 	 * 
 	 * @param bombDanger
 	 *            true quand on veut le controler s'il existe
@@ -106,10 +114,12 @@ public class TileControl {
 	 *            true quand on veut le controler s'il existe
 	 * @param enemy
 	 *            true quand on veut le controler s'il existe
-	 * @param softWall
+	 * @param softwall
 	 *            true quand on veut le controler s'il existe
 	 * @param bonus
 	 *            true quand on veut le controler s'il existe
+	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean checkTile(AiTile tile, boolean bombDanger, boolean bomb,
@@ -235,7 +245,6 @@ public class TileControl {
 	 * determine si une case est dans la portée d'une bombe
 	 * 
 	 * @param tile
-	 * @param bombRange
 	 * @return true si elle est, false sinon
 	 * @throws StopRequestException
 	 */
@@ -291,6 +300,7 @@ public class TileControl {
 	 * @param tile
 	 * @param dir
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean checkDangerBehindCorner(AiTile tile, Direction dir)
@@ -325,6 +335,7 @@ public class TileControl {
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public Direction prisonBreak(AiTile tile) throws StopRequestException {

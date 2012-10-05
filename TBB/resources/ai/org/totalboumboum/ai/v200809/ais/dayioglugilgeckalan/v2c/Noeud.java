@@ -25,11 +25,12 @@ public class Noeud {
 	private int cout = 0;
 	
 	private DayioglugilGeckalan source;
+	
 	/**
 	 * Constructeur.
+	 * @param source 
 	 * @throws StopRequestException 
 	 */
-
 	public Noeud(DayioglugilGeckalan source) throws StopRequestException {
 		source.checkInterruption();
 		this.source = source;
@@ -49,6 +50,7 @@ public class Noeud {
 	 *            valeur du noeud
 	 * @param cout
 	 *            cout du noeud
+	 * @param source 
 	 * @throws StopRequestException 
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, int cout,DayioglugilGeckalan source) throws StopRequestException {
@@ -69,6 +71,7 @@ public class Noeud {
 	 *            coordonne y du noeud
 	 * @param valeur
 	 *            valeur du noeud
+	 * @param source 
 	 * @throws StopRequestException 
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, DayioglugilGeckalan source) throws StopRequestException {

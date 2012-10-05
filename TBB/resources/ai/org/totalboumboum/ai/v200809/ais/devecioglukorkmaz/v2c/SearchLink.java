@@ -15,6 +15,13 @@ public class SearchLink {
 	private Noeud target;
 	ArtificialIntelligence ai;
 
+	/**
+	 * 
+	 * @param origin
+	 * @param target
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public SearchLink(Noeud origin, Noeud target, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -22,16 +29,31 @@ public class SearchLink {
 		this.target = target;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Noeud getOrigin() throws StopRequestException {
 		ai.checkInterruption();
 		return origin;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Noeud getTarget() throws StopRequestException {
 		ai.checkInterruption();
 		return target;
 	}
 
+	/**
+	 * 
+	 */
 	public boolean equals(Object object) {
 		boolean result = false;
 		if (object == null)

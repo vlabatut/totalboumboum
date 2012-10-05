@@ -420,6 +420,14 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getDistance(AiTile a, AiTile b) throws StopRequestException {
 		checkInterruption();
 		int vertical = Math.abs(a.getCol() - b.getCol());

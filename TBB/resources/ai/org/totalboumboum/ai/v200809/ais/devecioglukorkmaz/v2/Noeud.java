@@ -14,18 +14,30 @@ public class Noeud {
 	private boolean visited;
 	private int iteration;
 
+	/**
+	 * 
+	 */
 	public Noeud() {
 		this.tile = null;
 		this.iteration = -1;
 		visited = false;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 */
 	public Noeud(AiTile tile) {
 		this.tile = tile;
 		this.iteration = -1;
 		visited = false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiTile getTile() {
 		return tile;
 	}
@@ -35,10 +47,20 @@ public class Noeud {
 		this.iteration = iteration;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean isVisited() {
 		return visited;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int getIteration() {
 		return iteration;
 	}
@@ -52,6 +74,12 @@ public class Noeud {
 			return false;
 	}
 
+	/**
+	 * 
+	 * @param goal
+	 * @return
+	 * 		?
+	 */
 	public int getHeuristic(Noeud goal) {
 		int result = 0;
 		result = result + Math.abs(tile.getLine() - goal.getTile().getLine());

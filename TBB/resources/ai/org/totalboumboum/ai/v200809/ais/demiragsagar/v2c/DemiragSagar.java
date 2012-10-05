@@ -41,6 +41,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	private int distanceTarget;
 	private int counter;
 
+	/**
+	 * 
+	 */
 	public DemiragSagar(){
 		//l'initialisation des variables globales
 		this.state = 0;
@@ -345,9 +348,13 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return result;
 	}
 	
-	/*
+	/**
 	 * Prend l'intersection entre le chmein du enemie-item
 	 * et de nous-item
+	 * @param enemy 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public AiTile EnemyAtTheGate(AiTile enemy) throws StopRequestException
 	{	checkInterruption();
@@ -381,9 +388,13 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		return result;
 	}
-	/*
+	/**
 	 * On suppose de mettre une bombe
 	 * On regarde si on sera en danger
+	 * @param temp 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean supposerBombe(AiTile temp) throws StopRequestException{
 		checkInterruption();
@@ -409,8 +420,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		return resultat;
 	}
-	/*
+	/**
 	 * Mettre a jour les tiles des enemies
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> getEnemiesTile() throws StopRequestException {
 		checkInterruption();
@@ -428,8 +442,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return monItera;
 	}
 
-	/*
+	/**
 	 * Mettre a jour les tiles des bombes
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> getBombesTile() throws StopRequestException {
 		checkInterruption();
@@ -443,8 +460,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return b;
 	}
 
-	/*
+	/**
 	 * Mettre a jour les tiles des items
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> getItemsTile() throws StopRequestException {
 		checkInterruption();
@@ -458,17 +478,31 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return p;
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 * @throws StopRequestException
+	 */
 	public void calculeZoneAspect(AiZone zone) throws StopRequestException {
 		checkInterruption();
 	}
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean seCacher() throws StopRequestException{
 		checkInterruption();
 		return seCacher(false);
 	}
-	/*
+	/**
 	 * Chercher une case pour se cacher
+	 * @param poserBombe 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
 	public boolean seCacher(boolean poserBombe) throws StopRequestException {
 		checkInterruption();
 		AiTile petit = null;
@@ -493,8 +527,13 @@ public class DemiragSagar extends ArtificialIntelligence {
 		this.caseTarget = petit;
 		return fuir;
 	}
-	/*
+	/**
 	 * Regarde si il existe un danger sur le chemin chosit
+	 * @param target 
+	 * @param placerBombe 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) throws StopRequestException {
 		checkInterruption();
@@ -515,8 +554,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return flag;
 	}
 
-	/*
+	/**
 	 * Regarde si nous sommes arrive a la case cible
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean estCaseCible() throws StopRequestException {
 		checkInterruption();
@@ -528,8 +570,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 
 	}
 
-	/*
+	/**
 	 * Compte les nombres des SoftWalls restant
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public int FindSoftWallNumber() throws StopRequestException {
 		checkInterruption();

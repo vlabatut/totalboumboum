@@ -17,6 +17,11 @@ public class Noeud {
 	private int iteration;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Noeud(ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -25,6 +30,12 @@ public class Noeud {
 		visited = false;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Noeud(AiTile tile, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -33,22 +44,45 @@ public class Noeud {
 		visited = false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getTile() throws StopRequestException {
 		ai.checkInterruption();
 		return tile;
 	}
 
+	/**
+	 * 
+	 * @param iteration
+	 * @throws StopRequestException
+	 */
 	protected void markVisited(int iteration) throws StopRequestException {
 		ai.checkInterruption();
 		visited = true;
 		this.iteration = iteration;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isVisited() throws StopRequestException {
 		ai.checkInterruption();
 		return visited;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getIteration() throws StopRequestException {
 		ai.checkInterruption();
 		return iteration;
@@ -75,6 +109,13 @@ public class Noeud {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param goal
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getHeuristic(Noeud goal) throws StopRequestException {
 		ai.checkInterruption();
 		int result = 0;

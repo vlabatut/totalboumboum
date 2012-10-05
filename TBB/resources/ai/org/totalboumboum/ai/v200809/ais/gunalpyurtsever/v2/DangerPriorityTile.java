@@ -13,19 +13,37 @@ public class DangerPriorityTile{
 
 	AiTile tile;
 	int dangerpriority;
+	/**
+	 * 
+	 * @param tile
+	 * @param dangerpriority
+	 */
 	public DangerPriorityTile(AiTile tile, int dangerpriority) {
 		
 		this.tile = tile;
 		this.dangerpriority = dangerpriority;
 	}
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiTile getTile() {
 		return tile;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int getDangerpriority() {
 		return dangerpriority;
 	}
+	/**
+	 * 
+	 * @param dangerpriority
+	 */
 	public void setDangerpriority(int dangerpriority) {
 		this.dangerpriority = dangerpriority;
 	}

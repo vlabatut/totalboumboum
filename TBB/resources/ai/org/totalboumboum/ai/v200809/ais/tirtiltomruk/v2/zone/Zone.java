@@ -36,6 +36,12 @@ public class Zone {
 	private TirtilTomruk source;
 	private int lastSimulatedBombExplodes;
 
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public Zone(AiZone zone, TirtilTomruk source) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		this.source = source;
@@ -177,6 +183,12 @@ public class Zone {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		return zoneArray;
@@ -203,6 +215,13 @@ public class Zone {
 		 */
 	}
 
+	/**
+	 * 
+	 * @param bomb
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum[][] simulateBomb(AiTile bomb) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeight()];
@@ -283,6 +302,11 @@ public class Zone {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int getLastSimulatedBombExplodes() {
 		return lastSimulatedBombExplodes;
 	}
