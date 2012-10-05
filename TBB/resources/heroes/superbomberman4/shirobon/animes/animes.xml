@@ -154,8 +154,8 @@
 
 		<gesture name="EXULTING" folder="exulting" repeat="true" shadow="regular" >
 			<direction name="NONE">
-				<step duration="200" file="1.gif" />
-				<step duration="100"  file="2.gif" />
+				<step duration="250" file="1.gif" />
+				<step duration="500"  file="2.gif" />
 			</direction>
 		</gesture>
 
@@ -206,31 +206,31 @@
 
 		<gesture name="PICKING" shadow="regular" folder="carrying">
 			<direction name="DOWN" folder="down">
-				<step duration="50" name="nf.gif" />
+				<step duration="50" file="nf.gif" />
 			</direction>
 			<direction name="LEFT" folder="left">
-				<step duration="50" name="nf.gif" />
+				<step duration="50" file="nf.gif" />
 			</direction>
 			<direction name="RIGHT" folder="right">
-				<step duration="50" name="nf.gif" />
+				<step duration="50" file="nf.gif" />
 			</direction>
 			<direction name="UP" folder="up">
-				<step duration="50" name="nf.gif" />
+				<step duration="50" file="nf.gif" />
 			</direction>
 		</gesture>
 
 		<gesture name="PUNCHING" shadow="regular" folder="punching">
 			<direction name="DOWN">
-				<step duration="130" name="down.gif" />
+				<step duration="130" file="down.gif" />
 			</direction>
 			<direction name="LEFT">
-				<step duration="130" name="left.gif" />
+				<step duration="130" file="left.gif" />
 			</direction>
 			<direction name="RIGHT">
-				<step duration="130" name="right.gif" />
+				<step duration="130" file="right.gif" />
 			</direction>
 			<direction name="UP">
-				<step duration="130" name="up.gif" />
+				<step duration="130" file="up.gif" />
 			</direction>
 		</gesture>
 
@@ -287,30 +287,30 @@
 
 		<gesture name="THROWING" folder="throwing" shadow="regular" >
 			<direction name="DOWN">
-				<step duration="50" name="down.gif" />
+				<step duration="50" file="down.gif" />
 			</direction>
 			<direction name="LEFT">
-				<step duration="50" name="left.gif" />
+				<step duration="50" file="left.gif" />
 			</direction>
 			<direction name="RIGHT">
-				<step duration="50" name="right.gif" />
+				<step duration="50" file="right.gif" />
 			</direction>
 			<direction name="UP">
-				<step duration="50" name="up.gif" />
+				<step duration="50" file="up.gif" />
 			</direction>
 		</gesture>
 
 		<gesture name="WAITING" repeat="true" shadow="regular" >
 			<direction name="NONE">
 				<step duration="435" file="throwing/down.gif" />
-				<step duration="110" name="carrying/down/nf.gif" />
+				<step duration="110" file="carrying/down/nf.gif" />
 				<step duration="60"  file="jumping/down/1.gif" yShift="-2"/>
 				<step duration="70"  file="jumping/down/1.gif" yShift="-4"/>
 				<step duration="110" file="jumping/down/1.gif" yShift="-6"/>
 				<step duration="170" file="jumping/down/1.gif" yShift="-8"/>
 				<step duration="100" file="jumping/down/1.gif" yShift="-6"/>
-				<step duration="70"  name="bouncing/down/1.gif" yShift="-4"/>
-				<step duration="40"  name="bouncing/down/1.gif" yShift="-2"/>
+				<step duration="70"  file="bouncing/down/1.gif" yShift="-4"/>
+				<step duration="40"  file="bouncing/down/1.gif" yShift="-2"/>
 				<step duration="250" file="crying/center.gif" />
 				<step duration="135" file="crying/left.gif" />
 				<step duration="135" file="crying/right.gif" />
@@ -324,27 +324,27 @@
 		<gesture name="WALKING" folder="standing" repeat="true" shadow="regular" >
 			<direction name="DOWN" folder="down" >
 				<step duration="180" file="lf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 				<step duration="180" file="rf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 			</direction>
 			<direction name="LEFT" folder="left" shadowXShift="-1">
 				<step duration="180" file="lf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 				<step duration="180" file="rf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 			</direction>
 			<direction name="RIGHT" folder="right" shadowXShift="2">
 				<step duration="180" file="lf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 				<step duration="180" file="rf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 			</direction>
 			<direction name="UP" folder="up" >
 				<step duration="180" file="lf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 				<step duration="180" file="rf.gif" />
-				<step duration="180" name="nf.gif" />
+				<step duration="180" file="nf.gif" />
 			</direction>
 		</gesture>
 		
