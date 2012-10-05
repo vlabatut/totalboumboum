@@ -21,6 +21,11 @@ public class MoveQueue {
 	//les coordonnes du noeud racine pour ne pas s'eloigner, optimiser l'algorithme
 	int xorg,yorg;
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public MoveQueue(int x,int y)
 	{
 		this.open=new Vector<Node>();
@@ -31,17 +36,29 @@ public class MoveQueue {
 		yorg=y;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public Vector<Node> getWay()
 	{
 		return way;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public Vector<Integer> getActions()
 	{
 		return actions;
 	}
 	
-	
+	/**
+	 * 
+	 */
 	public void getActionsFromWay()
 	{
 		if(!way.isEmpty())
@@ -76,6 +93,15 @@ public class MoveQueue {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param root
+	 * @param bombx
+	 * @param bomby
+	 * @param power
+	 * @param zoneMatrix
+	 * @throws ExecutionException
+	 */
 	//l'algorithme aEtoile utilise pour s'echapper du bombe ou du shrink
 	public synchronized void aStar(Node root,int bombx,int bomby,int power,int[][] zoneMatrix) throws ExecutionException
 	{

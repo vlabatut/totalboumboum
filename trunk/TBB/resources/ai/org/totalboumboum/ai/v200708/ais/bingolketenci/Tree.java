@@ -23,6 +23,10 @@ public class Tree {
 	private Noeud lastNode;
 	private Noeud firstNode;
 
+	/**
+	 * 
+	 * @param courant
+	 */
 	public Tree(Noeud courant) {
 		this.firstNode = courant;
 		init();
@@ -88,7 +92,6 @@ public class Tree {
 	 * @param node
 	 *            le noeud à traiter
 	 * @return un lien contenant le noeud en position target
-	 * @throws AbsentNodeException
 	 */
 	public SearchLink getParentLink(Noeud node) {
 		SearchLink result = null;
@@ -110,7 +113,6 @@ public class Tree {
 	 * @param node
 	 *            le noeud à traiter
 	 * @return tous les liens où ce noeud est en position origin
-	 * @throws AbsentNodeException
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) {
 		Vector<SearchLink> result = new Vector<SearchLink>();

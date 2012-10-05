@@ -29,6 +29,8 @@ public class BinaryHeapList {
 	
 	/**
 	 * Get the first element of the list
+	 * @return
+	 * 		? 
 	 */
 	public Node getFirst (){
 		Node firstNode = list.get(1);
@@ -39,11 +41,17 @@ public class BinaryHeapList {
 	
 	/**
 	 * Get the length of the list
+	 * @return
+	 * 		? 
 	 */
 	public int length (){
 		return (list.size()-1);
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int realLength (){
 		return list.size();
 	}
@@ -71,11 +79,21 @@ public class BinaryHeapList {
 		list.add(null);
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		? 
+	 */
 	public boolean contains(Node node){
 		return list.contains(node);
 	}
 	
-	// 
+	/**
+	 *  
+	 * @param node
+	 * @param parent
+	 */
 	public void compare(Node node,Node parent){
 		int length = length();
 		int i = 1;
@@ -172,9 +190,9 @@ public class BinaryHeapList {
 		return list.get(pos).getCost();
 	}
 	
-	//
-	// constructor
-	//
+	/**
+	 * 
+	 */
 	public BinaryHeapList(){
 		list = new ArrayList<Node>();
 		list.add(null);

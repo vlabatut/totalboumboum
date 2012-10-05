@@ -50,6 +50,9 @@ public class CaglayanElmas extends ArtificialIntelligence
 	private boolean savedMove;
 	private boolean startedToAttack;
 
+	/**
+	 * 
+	 */
 	public CaglayanElmas()
 	{
 		// Notre IA est appelée "Smart"
@@ -699,6 +702,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	 * de l'action "move" à la position (x,y).
 	 * @param x		position à étudier
 	 * @param y		position à étudier
+	 * @param move 
 	 * @return		la nouvelle position qui est le résultat de l'action
 	 * 				appliquée à la position (x,y)
 	 */

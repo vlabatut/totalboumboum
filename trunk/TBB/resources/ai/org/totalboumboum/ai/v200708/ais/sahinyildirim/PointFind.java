@@ -65,12 +65,21 @@ public class PointFind {
 			
 		}
 		
+		/**
+		 * *
+		 * @return
+		 * 		? 
+		 */
 		public boolean isVisited()
 		{
 			return this.visited;
 			
 		}
 		
+		/**
+		 * 
+		 * @param value
+		 */
 		public void setNodeVisited(boolean value)
 		{
 			this.visited = value;

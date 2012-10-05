@@ -22,7 +22,6 @@ public class SearchLink
 	 * 
 	 * @param origin	noeud parent
 	 * @param target	noeud fils
-	 * @param action	action de transition
 	 */
 	public SearchLink(Noeud origin,Noeud target)
 	{	this.origin = origin;

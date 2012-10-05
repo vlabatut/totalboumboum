@@ -21,6 +21,12 @@ public class AStar {
 	private Vector<Block> closedList; //contient les noeuds controlles
 	private int[][] matrix; //zone matrix amélioré
     
+	/**
+	 * 
+	 * @param ownBlock
+	 * @param targetBlock
+	 * @param matrix
+	 */
 	//CONSTRUCTEUR
 	public AStar(Block ownBlock, Block targetBlock, int[][] matrix) 
 	{

@@ -39,6 +39,7 @@ public class AStarPathFinder implements PathFinder {
 	 * @param map La carte être cherchée
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement True si la recherche doit essayer le mouvement de diaganol
+	 * @param findPathWithSoftWall 
 	 */
 	public AStarPathFinder(GameMap map, int maxSearchDistance, boolean allowDiagMovement,boolean findPathWithSoftWall ) {
 		this(map, maxSearchDistance, allowDiagMovement,findPathWithSoftWall, new ManhattanHeuristic(1));
@@ -51,6 +52,7 @@ public class AStarPathFinder implements PathFinder {
 	 * @param map La carte être cherchée
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement Vrai si la recherche doit essayer le mouvement de diaganol
+	 * @param findPathWithSoftWall2 
 	 */
 	public AStarPathFinder(GameMap map, int maxSearchDistance, 
 						   boolean allowDiagMovement, boolean findPathWithSoftWall2, AStarHeuristic heuristic) {
@@ -247,6 +249,12 @@ public class AStarPathFinder implements PathFinder {
 	
 	/**
 	 * Obtenir le coût pour se déplacer par un emplacement donné
+	 * @param sx 
+	 * @param sy 
+	 * @param tx 
+	 * @param ty 
+	 * @return
+	 * 		? 
 	 * 
 	 */
 	public float getMovementCost(int sx, int sy, int tx, int ty) {
@@ -256,6 +264,12 @@ public class AStarPathFinder implements PathFinder {
 	/**
 	 * Obtenir le coût heuristique pour l'emplacement donné. 
 	 * Ceci détermine dans lequel commande les emplacements sont traités. 
+	 * @param x 
+	 * @param y 
+	 * @param tx 
+	 * @param ty 
+	 * @return
+	 * 		? 
 	 * 
 	 */
 	public float getHeuristicCost(int x, int y, int tx, int ty) {
@@ -342,6 +356,8 @@ public class AStarPathFinder implements PathFinder {
 		
 		/**
 		 * créer un nouveau noeud
+		 * @param x 
+		 * @param y 
 		 * 
 		 */
 		public Node(int x, int y) {

@@ -41,6 +41,9 @@ public class OkanYuksel extends ArtificialIntelligence
 	/* un index qui détermine si le Contrôle des direction est croissante ou décroissante */
 	private int artis;
 	
+	/**
+	 * 
+	 */
 	public OkanYuksel()
 	{
 		super("OkanYuksel");

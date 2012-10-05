@@ -16,7 +16,7 @@ public class HanciToprakAStar {
 	private List<HanciToprakNode> closed = new ArrayList<HanciToprakNode>();
 	/** The set of nodes that we do not yet consider fully searched */
 	private HanciToprakSortedList open = new HanciToprakSortedList();
-
+	/** */
 	public List<HanciToprakNode> path = new ArrayList<HanciToprakNode>();
 
 	private HanciToprakNode[][] nodes;
@@ -44,6 +44,11 @@ public class HanciToprakAStar {
 			{ 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2 },
 			{ 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2 } };// 14
 
+	/**
+	 * 
+	 * @param debut
+	 * @param fin
+	 */
 	public HanciToprakAStar(HanciToprakNode debut, HanciToprakNode fin) {
 
 		this.debut = debut;
@@ -71,6 +76,10 @@ public class HanciToprakAStar {
 		return pos[0].length;
 	}
 
+	/**
+	 * 
+	 * @param debut
+	 */
 	public void findPath(HanciToprakNode debut) {
 
 		// int xc, yc;
@@ -260,6 +269,11 @@ public class HanciToprakAStar {
 //		System.out.println("findPatht bitti ");
 	}
 
+	/**
+	 * 
+	 * @param courante
+	 * @param adjacente
+	 */
 	public void ajoutOuverte(HanciToprakNode courante, HanciToprakNode adjacente) {
 //		System.out.println("ajoutouvertteyim");
 		int g = courante.getCost()
@@ -296,6 +310,9 @@ public class HanciToprakAStar {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void Path() {
 
 		HanciToprakNode current = fin;
@@ -306,6 +323,12 @@ public class HanciToprakAStar {
 
 	}
 
+	/**
+	 * 
+	 * @param debut
+	 * @param fin
+	 * @param matrix
+	 */
 	public void initialiser(HanciToprakNode debut, HanciToprakNode fin,
 			int[][] matrix) {
 //		System.out.println("initialisenin icindeyim");
@@ -372,6 +395,13 @@ public class HanciToprakAStar {
 		return closed.contains(node);
 	}
 
+	/**
+	 * 
+	 * @param courante
+	 * @param list
+	 * @return
+	 * 		? 
+	 */
 	public boolean isInList(HanciToprakNode courante,
 			List<HanciToprakNode> list) {
 		Iterator<HanciToprakNode> ito = list.iterator();

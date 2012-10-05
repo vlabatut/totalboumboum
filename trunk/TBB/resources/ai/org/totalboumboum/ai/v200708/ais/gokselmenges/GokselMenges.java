@@ -66,7 +66,9 @@ public class GokselMenges  extends ArtificialIntelligence
 	final int cost_distance_multiplier = 10;
 	final int cost_ennemi = 5;
 	
-	
+	/**
+	 * 
+	 */
 	public GokselMenges()
 
 	{
@@ -329,12 +331,17 @@ public class GokselMenges  extends ArtificialIntelligence
 	
 
 	
-
+	/**
+	 * 
+	 * @param directionToGO
+	 * @return
+	 * 		? 
+	 */
 	// renvoi true si le prochaine pas est sur.
 	// @param directionToGo le sens a aller
 	// @returns vrai si le prochain pas est sur et false sinon
 	
-		public boolean checkNextMoveOK(int directionToGO)
+	public boolean checkNextMoveOK(int directionToGO)
 	{
 		int result = 0;
 		boolean currentmoveBAD = false;
@@ -453,8 +460,12 @@ public class GokselMenges  extends ArtificialIntelligence
 		
 	}
 	
-		// @returns renvoi 0 si la bombe est detruite.
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
+	// @returns renvoi 0 si la bombe est detruite.
 	public int isBombExploded()
 	{
 		int result1 = 0;
@@ -470,8 +481,15 @@ public class GokselMenges  extends ArtificialIntelligence
 			return result1;
 	}
 	
+	/**
+	 * 
+	 * @param CurrentPlayerPos
+	 * @param bomb
+	 * @param seven
+	 * @return
+	 * 		? 
+	 */
 	// @returns renvoi le point a aller pour eviter la bombe
-		
 	public Point getObjectiveRunFromBomb(Point CurrentPlayerPos, Point bomb,boolean seven)
 	{
 
@@ -523,7 +541,10 @@ public class GokselMenges  extends ArtificialIntelligence
 		return result;
 	}
 	
-	
+	/**
+	 * 
+	 * @param p
+	 */
 	// change le vecteur contenant les pas possibles.
 	// @param p les coordonnees de la bombe
 		public void getZoneAccessibleForBomb(Point p)
@@ -544,7 +565,14 @@ public class GokselMenges  extends ArtificialIntelligence
 	}
 	
 	
-		
+		/**
+		 * 
+		 * @param x
+		 * @param y
+		 * @param zone
+	 * @return
+	 * 		? 
+		 */
 		// change le vecteur contenant les pas possibles.
 		// @param p les coordonnees de la bombe
 	public Vector<Point> getPossibleMovesForBomb2 (int x,int y,Vector<Point> zone) 
@@ -613,6 +641,14 @@ public class GokselMenges  extends ArtificialIntelligence
 	
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param zone
+	 * @return
+	 * 		? 
+	 */
 	// change le vecteur contenant les pas possibles.
 	// @param p les coordonnees de la bombe
 	public Vector<Point> getPossibleMovesForBomb (int x,int y,Vector<Point> zone) 
@@ -676,7 +712,13 @@ return points;
 	
 	
 
-
+	/**
+	 * 
+	 * @param CurrentPlayerPos
+	 * @param Goal
+	 * @return
+	 * 		? 
+	 */
 	public Vector<Point> getPathBomb(Point CurrentPlayerPos , Point Goal)
 	{
 
@@ -742,10 +784,12 @@ return points;
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param p
+	 */
 	// retourne la zone accessible a partir d'un point donné.
 	//@param p point actuel de notre bonhomme
-	
 	public void getZoneAccessible(Point p)
 	{
 		if ( !ZoneAccessible.contains(p))
@@ -761,7 +805,12 @@ return points;
 
 	}
 	
-	
+	/**
+	 * 
+	 * @param zoneAccessible
+	 * @return
+	 * 		? 
+	 */
 	public Point getObjective(Vector<Point> zoneAccessible)
 	{
 		Point result = new Point();
@@ -840,7 +889,13 @@ return points;
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param p1
+	 * @param p2
+	 * @return
+	 * 		? 
+	 */
 	public boolean isAdjacent(Point p1 , Point p2)
 	{
 		if ((((p1.x == p2.x) && (Math.abs(p1.y - p2.y) ==1))) || (((p1.y == p2.y) && (Math.abs(p1.x-p2.x) ==1))))
@@ -855,6 +910,12 @@ return points;
 		}
 	}
 	
+	/**
+	 * 
+	 * @param MovedPoints
+	 * @return
+	 * 		? 
+	 */
 	public Vector<Integer> refine(Vector<Point> MovedPoints)
 	{
 		
@@ -914,7 +975,14 @@ return points;
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param objORnot
+	 * @return
+	 * 		? 
+	 */
 	public Vector<Point> getPossibleMoves (int x,int y,boolean objORnot) 
 	{
 
@@ -1020,6 +1088,13 @@ return points;
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param points
+	 * @param Goal
+	 * @return
+	 * 		? 
+	 */
 	public Vector<Integer> getPointDistances ( Vector<Point> points,Point Goal ) {
 		Vector<Integer> result= new Vector<Integer>();
 		
@@ -1052,7 +1127,10 @@ return points;
 	}
 
 	
-	
+	/**
+	 * 
+	 * @param MinimumIndice
+	 */
 	public void RemoveFromVector(int MinimumIndice)
 	{
 
@@ -1064,7 +1142,13 @@ return points;
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param MoveablePoints
+	 * @param MoveablePointDistances
+	 * @return
+	 * 		? 
+	 */
 	// calcule le cout minimal en considerant les points a ou le bonhomme peut aller.
 	public int[] minimumCostCalculation(Vector<Point> MoveablePoints,Vector<Integer> MoveablePointDistances)
 	{
@@ -1114,7 +1198,13 @@ return points;
 	
 	
 	
-
+	/**
+	 * 
+	 * @param MoveablePoints
+	 * @param MoveablePointDistances
+	 * @return
+	 * 		? 
+	 */
 	// calcule le cout minimal en considerant les points a ou le bonhomme peut aller.
 	public int[] calculateMinimumCost(Vector<Point> MoveablePoints,Vector<Integer> MoveablePointDistances)
 	{
@@ -1162,6 +1252,11 @@ return points;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	// prend les donnees de getZoneMatris et renvoi une matrice amelioré en l'ajoutant les couts specifiques.
 	public int[][] BetterMatrix()
 	{
@@ -1258,6 +1353,9 @@ return points;
 		return result;
 	}
 	
+	/**
+	 * 
+	 */
 	// imprime la meilleure matrice
 	public void printBetterZoneMatrix()
 	{	

@@ -50,6 +50,8 @@ public class Problem
 	/**
 	 * Renvoie un iterateur sur la liste des actions possibles.
 	 * return un itertateur sur une liste d'actions
+	 * @return
+	 * 		? 
 	 */
 	public Iterator<Action> getActionsIterator()
 	{	return actions.iterator();	

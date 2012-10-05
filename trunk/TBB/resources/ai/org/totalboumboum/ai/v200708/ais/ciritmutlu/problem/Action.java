@@ -11,11 +11,20 @@ public class Action
 	private int action;
 	private double cost;
 	
+	/**
+	 * 
+	 * @param action
+	 * @param cost
+	 */
 	public Action(int  action, double cost) {
 		this.action = action;
 		this.cost = cost;
 	}
 	
+	/**
+	 * 
+	 * @param action
+	 */
 	public Action(int action) {
 		this.action = action;
 		this.cost = 0;

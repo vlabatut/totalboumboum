@@ -21,7 +21,6 @@ public class SearchNode
 	 * Constructeur creant un noeud non visite, d'iteration -1, caracterise par
 	 * les donnees passees en parametres. 
 	 * @param state	etat du probleme associe au noeud de recherche
-	 * @param depth	profondeur du noeud
 	 * @param cost	coet calcule depuis la racine
 	 */
 	public SearchNode(State state,double cost)

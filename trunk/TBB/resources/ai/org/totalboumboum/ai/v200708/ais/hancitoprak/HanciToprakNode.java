@@ -47,56 +47,99 @@ public class HanciToprakNode implements Comparable {
 		
 		return depth;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getX() {
 		return x;
 	}
-
+	/**
+	 * 
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getY() {
 		return y;
 	}
-
+	/**
+	 * 
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getCost() {
 		return cost;
 	}
-
+	/**
+	 * 
+	 * @param cost
+	 */
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getHeuristic() {
 		return heuristic;
 	}
-
+	/**
+	 * 
+	 * @param heuristic
+	 */
 	public void setHeuristic(int heuristic) {
 		this.heuristic = heuristic;
 	}
 	
 	
-
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getF() {
 		return cost+heuristic;
 	}
-
+	/**
+	 * 
+	 * @param f
+	 */
 	public void setF(int f) {
 		this.f = f;
 	}
 
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public HanciToprakNode getParent() {
 		return parent;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getDepth() {
 		return depth;
 	}

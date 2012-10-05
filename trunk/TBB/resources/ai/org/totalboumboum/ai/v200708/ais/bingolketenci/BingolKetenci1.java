@@ -1202,6 +1202,8 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 *           le coordonné de x de l'ia.
 	 * @param y
 	 *            le coordonné de y de l'ia.
+	 * @return
+	 * 		? 
 	 */
 	public int move(int x,int y){
 		int action = AI_ACTION_DO_NOTHING;
@@ -1345,7 +1347,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 * point est la case la plus attractive.En cas de l'égalité,il choisit la
 	 * case qui semble etre plus proche à lui.
 	 * 
-	 * @reurn goal la case cible.
+	 * @return goal la case cible.
 	 * 
 	 */
 	public Noeud findGoal() {
