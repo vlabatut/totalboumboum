@@ -13,13 +13,29 @@ package org.totalboumboum.ai.v200708.ais.keceryaman;
 public class Map {
 	private static int[][] map = new int[17][15];
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		? 
+	 */
 	public static int getValue( int x , int y ){
 		return map[x][y];
 	}
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param value
+	 */
 	public static void setValue(int x, int y, int value){
 		map[x][y]=value;
 	}
-	
+	/**
+	 * 
+	 * @param matrix
+	 */
 	public static void init ( int[][] matrix){
 		for ( int i = 0 ; i < 15 ; i++ ){
 			for ( int j = 0 ; j < 17 ; j++ ){
@@ -27,7 +43,9 @@ public class Map {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	public static void printMap (){
 //		System.out.println();
 //		for ( int i = 0 ; i < 15 ; i++ ){
@@ -37,13 +55,17 @@ public class Map {
 //			System.out.println();
 //		}
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public static int[][] getMap() {
 		return map;
 	}
 
-	//
-	// constructor
-	//
+	/**
+	 * 
+	 */
 	public Map(){}
 }

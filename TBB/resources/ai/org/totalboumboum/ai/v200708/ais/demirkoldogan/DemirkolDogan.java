@@ -33,6 +33,9 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	private final static long DD_SHRINK_TIME_LIMIT = 10000;
 	
 	//CONSTRUCTOR
+	/**
+	 * 
+	 */
 	public DemirkolDogan() {
 		//initalization
 		super("DoganDmrkl");
@@ -293,7 +296,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	
 	/**
 	 * Methode qui trouve le bonus plus proche parmi les block qu'on a acces
-	 * @param matrix: la zoneMatrix amélioré
+	 * @param matrix la zoneMatrix amélioré
 	 * @param ownBlock : le block qu'on se trouve
 	 * @return un Block qui contient un bonus
 	 */
@@ -329,8 +332,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Methode qui trouve le block plus proche qui est entouré par un soft_wall, 
 	 * qu'on veut mettre une bombe pour avancer, parmi les blocks qu'on a acces
-	 * @param ownBlock: le block qu'on se trouve
-	 * @param matrix: la zoneMatrix amélioré
+	 * @param ownBlock le block qu'on se trouve
+	 * @param matrix la zoneMatrix amélioré
 	 * @return un Block qui est entouré par un soft_wall
 	 */
 	public Block findAccessibleSoftWall(Block ownBlock, int[][] matrix)
@@ -367,7 +370,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Cette methode ressemble a "findAccessibleSoftWall", mais il essaie
 	 * de choisir un block qui est proche au centre du zone
-	 * @param matrix: la zoneMatrix amélioré
+	 * @param matrix la zoneMatrix amélioré
 	 * @return un Block qui est entouré par un soft_wall proche au centre du zone
 	 */
 	public Block findBlockToAvoidShrink(int[][] matrix)
@@ -399,8 +402,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Une modification du methode "isObstacle" qui controle si un block
 	 * est mur ou pas
-	 * @param x: coordonné horizontale du block
-	 * @param y: coordonné verticale du block
+	 * @param x coordonné horizontale du block
+	 * @param y coordonné verticale du block
 	 * @return vrai si ce block est mur, faux sinon.
 	 */
 	private boolean isWall(int x, int y)

@@ -24,7 +24,7 @@ public class ParentChild {
 	
 	
 	/**Constructor
-	 * @param PointFind parent le point pere
+	 * @param parent le point pere
 	 */
 	public ParentChild(PointFind parent)
 	{
@@ -36,7 +36,7 @@ public class ParentChild {
 	
 	/**
 	 * Methode  pour  ajouter les fils dans un vector d'un point pere
-	 * @param PointFind point
+	 * @param point
 	 */
 	public void addChild(PointFind point)
 	{

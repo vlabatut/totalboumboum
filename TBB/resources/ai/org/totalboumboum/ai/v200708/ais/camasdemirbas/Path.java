@@ -46,8 +46,8 @@ public class Path {
 	
 	/**
 	 * Obtenir la coordonnée de x pour l'étape à l'index donné
-	 * 
-	 * @param L'index de l'étape dont x la coordonnée devrait être rapportée
+	 * @param index 
+	 * 		L'index de l'étape dont x la coordonnée devrait être rapportée
 	 * @return x coordonnée à l'étape
 	 */
 	public int getX(int index) {
@@ -57,7 +57,7 @@ public class Path {
 	/**
 	 * Obtenir  la coordonnée de y pour l'étape à l'index donné
 	 * 
-	 * @param l'index de l'étape dont y la coordonnée devrait être rapportée
+	 * @param  index l'index de l'étape dont y la coordonnée devrait être rapportée
 	 * @return y
 	 */
 	public int getY(int index) {
@@ -104,17 +104,30 @@ public class Path {
 		private int x;
 		private int y;
 
+		/**
+		 * 
+		 * @param x
+		 * @param y
+		 */
 		public Step(int x, int y) {
 			this.x = x;
 			this.y = y;
 		}
 		
-
+		/**
+		 * 
+	 * @return
+	 * 		? 
+		 */
 		public int getX() {
 			return x;
 		}
 
-
+		/**
+		 * 
+	 * @return
+	 * 		? 
+		 */
 		public int getY() {
 			return y;
 		}

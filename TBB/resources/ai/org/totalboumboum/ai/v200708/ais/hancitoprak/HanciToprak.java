@@ -309,7 +309,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * la methode le sors de ses mouvements possibles
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param Vector<Integer> temp possiblemoves du personnages
+	 * @param possiblemoves du personnages
 	 * @return	au nouveau les moves possibles du peronnage. 
 	 */
 
@@ -373,7 +373,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * si il ya un danger du bombe
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param Vector<Integer> temp possiblemoves du personnages apres qu'il a mis du bombe
+	 * @param possiblemoves du personnages apres qu'il a mis du bombe
 	 * @return	vrai si ce déplacement est possible
 	 */
 	private Integer escapeFromBomb(int x, int y, Vector<Integer> temp)
@@ -624,8 +624,8 @@ public class HanciToprak extends ArtificialIntelligence {
 	
 	/**
 	 * affiche du matrice
+	 * @param matrix 
 	 */
-
 	public void printMatrix(int[][] matrix) {
 		
 //		for (int i1 = 0; i1 < matrix[0].length; i1++) {

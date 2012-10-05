@@ -35,6 +35,10 @@ public class ErenGokce extends ArtificialIntelligence {
 	int[] bombpos=new int[2];
 	int lastmove;
 	int i=0;
+	
+	/**
+	 * 
+	 */
 	public ErenGokce() {
 			super("GokceEren");
 		//  Auto-generated constructor stub

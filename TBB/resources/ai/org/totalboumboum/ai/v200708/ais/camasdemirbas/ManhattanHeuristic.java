@@ -22,7 +22,6 @@ public class ManhattanHeuristic implements AStarHeuristic {
 	}
 	
 	/**
-	 * @see AStarHeuristic#getCost(TileBasedMap, Mover, int, int, int, int)
 	 */
 	public float getCost(GameMap map, int x, int y, int tx,
 			int ty) {

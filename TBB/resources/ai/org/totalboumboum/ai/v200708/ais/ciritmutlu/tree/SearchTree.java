@@ -168,6 +168,7 @@ public class SearchTree
 	 * 3) cree les liens adequats, et 4) ajoute ces liens e l'arbre.
 	 * La liste des liens crees est renvoyee par la fonction. Une 
 	 * AbsentNodeException est levee si le noeud passe en parametre n'appartient pas a l'arbre.
+	 * @param targetState 
 	 * 
 	 * @param node	le noeud a developpe
 	 * @return	un iterateur sur les liens vers les fils du noeud. 

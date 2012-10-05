@@ -32,47 +32,85 @@ public class Node {
 	 * nodes
 	 */
 	private Node parent;
+	/** */
 	public List<Node> neighbors;
 	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getCost (){
 		return cost;
 	}
-	
+	/**
+	 * 
+	 */
 	public void updateCost (){
 		cost = costPath + costHeuristic;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getPathCost (){
 		return costPath;
 	}
-	
+	/**
+	 * 
+	 * @param value
+	 */
 	public void setPathCost ( int value ){
 		costPath = value;
 	}
-	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		? 
+	 */
 	public Node setParent ( Node node ){
 		parent = node;
 		
 		return this;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public Node getParent (){
 		return parent;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int[] getPosition (){
 		int[] pos = {this.x,this.y};
 		return pos;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getX (){
 		return x;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getY (){
 		return y;
 	}
-	
+	/**
+	 * 
+	 */
 	public void findNeighbors (){
 		// neighbors
 		neighbors = new ArrayList<Node>();
@@ -122,7 +160,12 @@ public class Node {
 		
 		return VAL_HEURISTIC * ( Math.abs( tx - x ) + Math.abs( ty - y ) );
 	}
-	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		? 
+	 */
 	public boolean equals ( Node node ){
 		if ( x == node.getX() && y == node.getY() ){
 			return true;
@@ -131,6 +174,13 @@ public class Node {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		? 
+	 */
 	public boolean equals ( int x , int y){
 		if ( x == this.x && y == this.y ){
 			return true;
@@ -139,9 +189,14 @@ public class Node {
 		}
 	}
 
-	//
-	// constructor
-	//
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param parent
+	 * @param costPath
+	 * @param costHeuristic
+	 */
 	public Node( int x , int y , Node parent, int costPath , int costHeuristic ){
 		this.x = x;
 		this.y = y;

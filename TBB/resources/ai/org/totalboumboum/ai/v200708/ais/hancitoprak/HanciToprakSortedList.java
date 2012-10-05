@@ -14,7 +14,10 @@ public class HanciToprakSortedList {
 	/** The list of elements */
 	@SuppressWarnings("rawtypes")
 	private List list = new ArrayList();
-	
+
+	/**
+	 * 
+	 */
 	@SuppressWarnings("rawtypes")
 	public HanciToprakSortedList() {
 		super();

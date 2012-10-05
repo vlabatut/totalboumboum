@@ -19,6 +19,7 @@ public class GameMap {
 	
 	/**
 	 * créer une nouvelle carte avec la matrice de zone
+	 * @param zoneMatrix 
 	 */
 	public GameMap(int[][] zoneMatrix) {
 		this.zoneMatrix = zoneMatrix;
@@ -37,6 +38,10 @@ public class GameMap {
 	}
 	
 	/**
+	 * @param x 
+	 * @param y 
+	 * @return
+	 * 		? 
 	 * 
 	 */
 	public boolean visited(int x, int y) {
@@ -55,6 +60,10 @@ public class GameMap {
 	}
 	
 	/**
+	 * @param x 
+	 * @param y 
+	 * @return
+	 * 		? 
 	 * 
 	 */
 	public boolean blocked(int x, int y) {
@@ -68,6 +77,12 @@ public class GameMap {
 		}		
 
 	/**
+	 * @param sx 
+	 * @param sy 
+	 * @param tx 
+	 * @param ty 
+	 * @return
+	 * 		? 
 	 * 
 	 */
 	public float getCost(int sx, int sy, int tx, int ty) {
@@ -75,6 +90,8 @@ public class GameMap {
 	}
 
 	/**
+	 * @return
+	 * 		? 
 	 * 
 	 */
 	public int getHeightInTiles() {
@@ -82,6 +99,8 @@ public class GameMap {
 	}
 
 	/**
+	 * @return
+	 * 		? 
 	 * 
 	 */
 	public int getWidthInTiles() {
@@ -89,6 +108,8 @@ public class GameMap {
 	}
 
 	/**
+	 * @param x 
+	 * @param y 
 	 * 
 	 */
 	public void pathFinderVisited(int x, int y) {

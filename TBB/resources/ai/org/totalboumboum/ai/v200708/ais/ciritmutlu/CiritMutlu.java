@@ -128,6 +128,8 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param y  coordonne courant du joueur IA
 	 * @param targetAction  l'action qui va etre realisee par le joueur IA au prochain
 	 * 					 deplacement
+	 * @return
+	 * 		? 
 	*/
 	public boolean lastPositionComparator(int x, int y,int targetAction){
 		switch(targetAction)
@@ -159,6 +161,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param y coordonne de la position du joueur IA
 	 * @param action l'action pour laquelle on verifie la possibilite
 	 * @return
+	 * 		? 
 	 */
 	public boolean isPossibleAction(int x, int y,int action){
 		boolean done=false;
@@ -185,6 +188,8 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * parmi les actions possibles qu'il peut realiser selon les criteres externes en 
 	 * controlant leur cout. Le joueur choisit l'action qui possede le plus grand couts\ 
 	 * @param action   action a realiser par le joueur
+	 * @return
+	 * 		? 
 	 */
 	public int returnCost(int action){
 		// Coordonnnes du joueur IA dans la zone de matrice
@@ -876,10 +881,12 @@ public class CiritMutlu extends ArtificialIntelligence {
 	/**
 	 * 	Calcule le point que le joueur IA peut obtenir selon l'etat dans lequel il  
 	 * se trouve 
+	 * @param action 
 	 * @param state   etat du joueur
 	 * @param x		  coordonne du joueur IA	
 	 * @param y		  coordonne du joueur IA
 	 * @return
+	 * 		? 
 	 */
 	public double getPoint(int action, State state,int x, int y){
 		double point=0;
@@ -934,6 +941,9 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * Renvoie l'etat obtenu si on applique l'action a l'etat passe
 	 * en parametre.
 	 * @param state	l'etat d'origine
+	 * @param x 
+	 * @param y 
+	 * @param action 
 	 * @return	l'etat cible obtenu en appliquant l'action
 	 * @throws ImpossibleActionException
 	 */

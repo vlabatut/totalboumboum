@@ -17,7 +17,12 @@ public class Block {
 	
 	
 	
-	//CONSTRUCTOR
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param cost
+	 */
 	public Block (int x, int y, int cost) 
 	{
 		this.x = x;
@@ -25,7 +30,11 @@ public class Block {
 		this.cost = cost;
 		this.heuristic = -1;  //heuristic inconnu
 	}
-	//constructor overload
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public Block (int x, int y) 
 	{
 		this.x = x;
@@ -33,32 +42,64 @@ public class Block {
 		this.cost = -1;       //cost inconnu
 		this.heuristic = -1;  //heuristic inconnu
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	//methode qui renvoie la valeur heuristique
 	public int getHeuristic() {
 		return heuristic;
 	}
 	
+	/**
+	 * 
+	 * @param targetX
+	 * @param targetY
+	 */
 	//methode qui met en jour la valeur heuristic
 	public void setHeuristic(int targetX, int targetY) {
 		this.heuristic = Math.abs(this.x - targetX) + Math.abs(this.y - targetY);
 	}
 
 	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	// GETTERS & SETTERS
 	public int getX() {
 		return x;
 	}
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getY() {
 		return y;
 	}
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public int getCost() {
 		return cost;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public Block getParentBlock() {
 		return parentBlock;
 	}
+	/**
+	 * 
+	 * @param parentBlock
+	 */
 	public void setParentBlock(Block parentBlock) {
 		this.parentBlock = parentBlock;
 	}

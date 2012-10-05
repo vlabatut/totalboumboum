@@ -38,6 +38,10 @@ public class PathFinder
 	private int[] initialState;
 	private int[] finalState;
 	
+	/**
+	 * 
+	 * @param ai
+	 */
 	public PathFinder(CaglayanElmas ai)
 	{
 		this.ai = (CaglayanElmas) ai;
@@ -46,6 +50,11 @@ public class PathFinder
 		this.links = new Vector<SearchLink>();
 	}
 	
+	/**
+	 * 
+	 * @param initialState
+	 * @param finalState
+	 */
 	public void setStates(int[] initialState, int[] finalState)
 	{
 		this.initialState = initialState.clone();
@@ -55,11 +64,23 @@ public class PathFinder
 									  this.calculateHeuristic(this.initialState, this.finalState)));
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @param iteration
+	 */
 	public void markVisitedNode(SearchNode node, int iteration)
 	{	
 		node.markVisited(iteration);
 	}
 	
+	/**
+	 * 
+	 * @param s1
+	 * @param s2
+	 * @return
+	 * 		? 
+	 */
 	public int calculateHeuristic(int[] s1, int[] s2)
 	{
 		return 10*(Math.abs(s1[0]-s2[0])+Math.abs(s1[1]-s2[1]));
@@ -75,6 +96,11 @@ public class PathFinder
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		? 
+	 */
 	public Vector<SearchLink> findShortestPath()
 	{
 		PriorityQueue<SearchNode> fringe = new PriorityQueue<SearchNode>(1, new SearchNodeAStarComparator());
@@ -110,6 +136,12 @@ public class PathFinder
 		return getPath(new SearchNode(finalState,0,0,0));
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		? 
+	 */
 	public boolean containsNode(SearchNode node)
 	{	
 		boolean result = false;
@@ -123,6 +155,12 @@ public class PathFinder
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		? 
+	 */
 	public Iterator<SearchLink> developNode(SearchNode node)
 	{	
 		Vector<SearchLink> result = new Vector<SearchLink>();
@@ -150,6 +188,12 @@ public class PathFinder
 		return result.iterator();
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		? 
+	 */
 	public Vector<SearchLink> getPath(SearchNode node)
 	{	
 		Vector<SearchLink> result;
