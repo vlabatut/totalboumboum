@@ -15,11 +15,14 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class CriterionDestructibleWalls extends AiUtilityCriterionInteger{
+	/** */
 	public static final String NAME = "WALLS";
 	
 	/**
 	 * Crée un nouveau critère binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

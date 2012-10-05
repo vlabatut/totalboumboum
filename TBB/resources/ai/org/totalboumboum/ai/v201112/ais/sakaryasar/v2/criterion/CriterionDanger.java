@@ -9,13 +9,20 @@ import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.sakaryasar.v2.SakarYasar;
 
+/**
+ * 
+ *
+ */
 @SuppressWarnings("deprecation")
 public class CriterionDanger extends AiUtilityCriterionBoolean{
+	/** */
 	public static final String NAME = "DANGER";
 	
 	/**
 	 * Crée un nouveau critère binaire.
 	 * 
+	 * @param ai 
+	 * 		?
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
