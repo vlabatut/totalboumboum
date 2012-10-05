@@ -22,6 +22,13 @@ public class AdvancedSuccessorCalculator extends SuccessorCalculator
 	private Matrix interest = null;
 	private AkbulutKupelioglu monIa = null;
 	private final int TILE_TRAVERSAL_TIME = -460;
+	
+	/**
+	 * 
+	 * @param interest
+	 * @param monIa
+	 * @throws StopRequestException
+	 */
 	public AdvancedSuccessorCalculator(Matrix interest, AkbulutKupelioglu monIa) throws StopRequestException
 	{
 		monIa.checkInterruption();

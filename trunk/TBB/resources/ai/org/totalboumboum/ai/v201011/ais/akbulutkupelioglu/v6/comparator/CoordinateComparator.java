@@ -25,6 +25,7 @@ public class CoordinateComparator implements Comparator<Coordinate>{
 	/**
 	 * The constructor initializing the distance map using a HashMap containing
 	 * the distance values to corresponding coordinates.
+	 * @param ia 
 	 * @param dm
 	 * @throws StopRequestException 
 	 */
