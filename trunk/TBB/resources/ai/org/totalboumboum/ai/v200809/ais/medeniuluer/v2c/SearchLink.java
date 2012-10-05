@@ -26,7 +26,7 @@ public class SearchLink
 	 * 
 	 * @param origin	noeud parent
 	 * @param target	noeud fils
-	 * @param action	action de transition
+	 * @param mu	action de transition
 	 * @throws StopRequestException 
 	 */
 	public SearchLink(SearchNode origin,SearchNode target,MedeniUluer mu) throws StopRequestException

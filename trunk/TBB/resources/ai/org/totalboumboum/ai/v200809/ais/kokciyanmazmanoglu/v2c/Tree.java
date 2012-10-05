@@ -25,7 +25,13 @@ public class Tree {
 	private Node currentNode;
 	private Node finalNode;
 	
-	
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Tree(int line, int col, KokciyanMazmanoglu ai) throws StopRequestException{
 		ai.checkInterruption();
 		nodes = new Vector<Node>();
@@ -35,13 +41,24 @@ public class Tree {
 		currentNode = convertToNode(ai.getCurrentTile());
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Node getRoot() throws StopRequestException {
 		km.checkInterruption();
 		return currentNode;
 	}
 	
-
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean containsNode(Node node) throws StopRequestException
 	{	km.checkInterruption();
 		boolean result=false;
@@ -54,6 +71,14 @@ public class Tree {
 		return result;		
 	}
 
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  Node getNodefromTree(int line, int col) throws StopRequestException
 	{	
 		km.checkInterruption();
@@ -72,6 +97,13 @@ public class Tree {
 		return result;		
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  Link getParentLink(Node node) throws StopRequestException
 	{	
 		km.checkInterruption();
@@ -89,6 +121,13 @@ public class Tree {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  Vector<Link> getPath(Node node) throws StopRequestException
 	{
 		km.checkInterruption();
@@ -108,13 +147,23 @@ public class Tree {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	public  void markVisitedNod(Node node) throws StopRequestException{
 		km.checkInterruption();
 		node.setVisited(true);
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  Iterator<Link> developNode(Node node) throws StopRequestException{
 		km.checkInterruption();
 		Vector<Link> vLink = new Vector<Link>();
@@ -149,23 +198,47 @@ public class Tree {
 		return vLink.iterator();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  Node getFinalNode() throws StopRequestException {
 		km.checkInterruption();
 		return finalNode;
 	}
 
-
+	/**
+	 * 
+	 * @param finalNode
+	 * @throws StopRequestException
+	 */
 	public  void setFinalNode(Node finalNode) throws StopRequestException {
 		km.checkInterruption();
 		this.finalNode = finalNode;
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  boolean isFinalNode(Node node) throws StopRequestException{
 		km.checkInterruption();
 		Node fNode = getFinalNode();
 		return (node.getLine() == fNode.getLine()) && (node.getCol() == fNode.getCol());
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  Node convertToNode(AiTile tile) throws StopRequestException{
 		km.checkInterruption();
 		Node nd = null;
@@ -174,11 +247,16 @@ public class Tree {
 		return nd; 
 	}
 	
+	/**
+	 * 
+	 * @param link
+	 * @param vLink
+	 * @throws StopRequestException
+	 */
 	public  void addLink(Link link, Vector<Link> vLink) throws StopRequestException {
 		km.checkInterruption();
 		links.add(link);
 		nodes.add(link.getChild());
 		vLink.add(link);
 	}
-	
 }

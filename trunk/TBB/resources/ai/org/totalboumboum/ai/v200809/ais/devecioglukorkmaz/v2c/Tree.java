@@ -25,12 +25,22 @@ public class Tree {
 	private Noeud firstNode;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param courant
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Tree(Noeud courant, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.firstNode = courant;
 		init();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void init() throws StopRequestException {
 		ai.checkInterruption();
 		nodes = new Vector<Noeud>();
@@ -40,17 +50,36 @@ public class Tree {
 		links = new Vector<SearchLink>();
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Noeud getRoot() throws StopRequestException {
 		ai.checkInterruption();
 		return nodes.get(0);
 	}
 
+	/**
+	 * 
+	 * @param pere
+	 * @param fils
+	 * @throws StopRequestException
+	 */
 	public void addNoeud(Noeud pere, Noeud fils) throws StopRequestException {
 		ai.checkInterruption();
 		SearchLink link = new SearchLink(pere, fils,ai);
 		addLink(link);
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public synchronized boolean containsNode(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		boolean result = false;
@@ -62,6 +91,13 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public SearchLink getParentLink(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		SearchLink result = null;
@@ -78,6 +114,13 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		
@@ -93,6 +136,13 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public LinkedList<Noeud> getPath(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		LinkedList<Noeud> result = new LinkedList<Noeud>();
@@ -119,12 +169,22 @@ public class Tree {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param link
+	 * @throws StopRequestException
+	 */
 	public void addLink(SearchLink link) throws StopRequestException {
 		ai.checkInterruption();
 		addLinkSynch(link);
 
 	}
 
+	/**
+	 * 
+	 * @param link
+	 * @throws StopRequestException
+	 */
 	private synchronized void addLinkSynch(SearchLink link) throws StopRequestException {
 		ai.checkInterruption();
 		Noeud target = link.getTarget();

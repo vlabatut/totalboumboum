@@ -33,6 +33,12 @@ public class Zone{
 	private ZoneEnum [][] zoneArray;
 	private DayioglugilGeckalan source;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public Zone(AiZone zone, DayioglugilGeckalan source) throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -193,7 +199,12 @@ public class Zone{
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		return zoneArray;

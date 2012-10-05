@@ -17,7 +17,6 @@ public class LienRecherche {
 	 * 
 	 * @param origin noeud parent
 	 * @param target noeud fils
-	 * @param action action de transition
 	 */
 	public LienRecherche(Node origin, Node target) {
 		this.origin = origin;

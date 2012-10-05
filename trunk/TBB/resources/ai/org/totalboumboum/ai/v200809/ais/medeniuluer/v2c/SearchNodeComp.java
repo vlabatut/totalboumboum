@@ -22,6 +22,7 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	 * 
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
+	 * @param ai 
 	 * @throws StopRequestException 
 	 */
 	public SearchNodeComp(SearchNode goal, ArtificialIntelligence ai) throws StopRequestException
@@ -35,9 +36,9 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	 * On fait la somme de l'heuristique et le cout de chaque noeud.
 	 * On compare ces valeurs et on tourne une valeur négative si le premier a un plus petit valeur,
 	 * une valeur positive si le premier a une plus grande valeur
-	 * @param noeud1 
+	 * @param node1 
 	 *            noeud qu'on va comparer
-	 * @param noeud2
+	 * @param node2
 	 * 			  noeud qu'on va comparer
 	 * @return valeur positive ou negative selon la comparaison          
 	 */

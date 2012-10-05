@@ -21,6 +21,15 @@ public class TimedBomb {
 	private ZoneEnum danger;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param bomb
+	 * @param releaseTime
+	 * @param time
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TimedBomb(AiZone zone,AiBomb bomb,long releaseTime, long time, ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
 		this.ai = ai;
@@ -38,16 +47,33 @@ public class TimedBomb {
 			this.danger = ZoneEnum.FEUPOSSIBLE_TRESDANGEREUX;		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum getDanger() throws StopRequestException {
 		ai.checkInterruption();
 		return danger;
 	}
 
+	/**
+	 * 
+	 * @param danger
+	 * @throws StopRequestException
+	 */
 	public void setDanger(ZoneEnum danger) throws StopRequestException {
 		ai.checkInterruption();
 		this.danger = danger;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public long getRemainingTime() throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -89,31 +115,60 @@ public class TimedBomb {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiZone getZone() throws StopRequestException {
 		ai.checkInterruption();
 		return zone;
 	}
 
+	/**
+	 * 
+	 * @param zone
+	 * @throws StopRequestException
+	 */
 	public void setZone(AiZone zone) throws StopRequestException {
 		ai.checkInterruption();
 		this.zone = zone;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiBomb getBomb() throws StopRequestException {
 		ai.checkInterruption();
 		return bomb;
 	}
-
+	/**
+	 * 
+	 * @param bomb
+	 * @throws StopRequestException
+	 */
 	public void setBomb(AiBomb bomb) throws StopRequestException {
 		ai.checkInterruption();
 		this.bomb = bomb;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public long getReleaseTime() throws StopRequestException {
 		ai.checkInterruption();
 		return releaseTime;
 	}
-
+	/**
+	 * 
+	 * @param releaseTime
+	 * @throws StopRequestException
+	 */
 	public void setReleaseTime(long releaseTime) throws StopRequestException {
 		ai.checkInterruption();
 		this.releaseTime = releaseTime;
@@ -133,6 +188,11 @@ public class TimedBomb {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	public void setTime(long time) throws StopRequestException {
 		ai.checkInterruption();
 		this.time = time;

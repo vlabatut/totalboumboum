@@ -28,6 +28,12 @@ public class Tree {
 	private Noeud firstNode;
 	private DayioglugilGeckalan source;
 	
+	/**
+	 * 
+	 * @param courant
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public Tree(Noeud courant, DayioglugilGeckalan source) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		this.source = source;
@@ -106,7 +112,6 @@ public class Tree {
 	 *            le noeud à traiter
 	 * @return un lien contenant le noeud en position target
 	 * @throws StopRequestException 
-	 * @throws AbsentNodeException
 	 */
 	public SearchLink getParentLink(Noeud node) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -131,7 +136,6 @@ public class Tree {
 	 *            le noeud à traiter
 	 * @return tous les liens où ce noeud est en position origin
 	 * @throws StopRequestException 
-	 * @throws AbsentNodeException
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire

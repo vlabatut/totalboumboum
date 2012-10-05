@@ -23,28 +23,53 @@ public class AStar {
 	AiTile lastTile;
 	Vector<LienRecherche> links;
 	boolean debug;
-
+	
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 */
 	public AStar(AiTile start, AiTile end) {
 		this.firstTile = start;
 		this.lastTile = end;
 		this.debug = false;
 	}
 
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 * @param debug
+	 */
 	public AStar(AiTile start, AiTile end, boolean debug) {
 		this.firstTile = start;
 		this.lastTile = end;
 		this.debug = debug;
 	}
 
+	/**
+	 * 
+	 */
 	public void init() {
 		links = new Vector<LienRecherche>();
 	}
 
+	/**
+	 * 
+	 * @param parent
+	 * @param fils
+	 */
 	public void formeLien(Node parent, Node fils) {
 		LienRecherche link = new LienRecherche(parent, fils);
 		links.add(link);
 	}
 
+	/**
+	 * 
+	 * @param courant
+	 * @return
+	 * 		?
+	 */
 	public Iterator<Node> developNode(AiTile courant) {
 		Vector<Node> result = new Vector<Node>();
 		Node temp;
@@ -89,6 +114,9 @@ public class AStar {
 		}
 		return result.iterator();
 	}
+	/**
+	 * 
+	 */
 	public void formeArbre() {
 		try {
 			init();
@@ -139,8 +167,10 @@ public class AStar {
 			e.printStackTrace();
 		}
 	}
-	/*
-	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A*
+	/**
+	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A
+	 * @return
+	 * 		?
 	 */
 	public LinkedList<Node> getPath() { 
 		LinkedList<Node> path;
@@ -159,8 +189,11 @@ public class AStar {
 		return path;
 		
 	}
-	/*
+	/**
 	 * On trouve le parent d'un noeud 
+	 * @param child 
+	 * @return
+	 * 		?
 	 */
 	public LienRecherche getParentLink(Node child) {
 		LienRecherche result = null;
@@ -175,8 +208,11 @@ public class AStar {
 		}
 		return result;
 	}
-	/*
+	/**
 	 * On trouve les fils d'un noeud
+	 * @param node 
+	 * @return
+	 * 		?
 	 */
 	public List <Node> getChildrenLinks(Node node) {
 		List <Node> result = new ArrayList<Node>();
@@ -189,8 +225,12 @@ public class AStar {
 		}
 		return result;
 	}
-	//Il trouve les cases qui n'ont pas de fils
+	/** Il trouve les cases qui n'ont pas de fils
 	//ou on peut poser des bombes
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public List<Node> getFils()
 	{
 		List<Node> nodes=new ArrayList<Node>();

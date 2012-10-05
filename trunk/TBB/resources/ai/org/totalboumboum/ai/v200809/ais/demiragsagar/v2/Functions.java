@@ -18,17 +18,23 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Functions {
-	// regarde si il existe un mur de type SOFT ou HARD
+	/** regarde si il existe un mur de type SOFT ou HARD
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 */
 	public static boolean hasWall(AiTile tile) {
 		boolean result;
 		AiBlock block = tile.getBlock();
 		result = block != null;
 		return result;
 	}
-	/*
+	/**
 	 * La matrice de la zone 
 	 * On voit -1 s'il ya un mur de type hard ou soft
 	 * On voit 0 s'il n'ya pas de mur
+	 * @param maMatrice 
 	 */
 	public static void printMatrice(long maMatrice[][]) {
 		int i, j;
@@ -42,20 +48,32 @@ public class Functions {
 			System.out.println();
 		}
 	}
-	/*
+	/**
 	 * Retourne true si deux nodes ont les meme coordonnees
+	 * @param node1 
+	 * @param node2 
+	 * @return
+	 * 		?
 	 */
 	public static boolean memeCordonnes(Node node1,Node node2) {
 		return Functions.memeCordonnes(node1.getTile(),node2.getTile());
 	}
-	/*
+	/**
 	 * Retourne true si deux cases ont les meme coordonnees
+	 * @param tile1 
+	 * @param tile2 
+	 * @return
+	 * 		?
 	 */
 	public static boolean memeCordonnes(AiTile tile1,AiTile tile2) {
 		return tile1.getCol()==tile2.getCol() && tile1.getLine()==tile2.getLine();
 	}
-	/*
+	/**
 	 * On donne une case cible(AiTile target) et cette fonction trouve dans ue liste des cases la case plus proche a cette case cible 
+	 * @param target 
+	 * @param tiles 
+	 * @return
+	 * 		?
 	 */
 	public static AiTile TheCloserTile(AiTile target,List<AiTile> tiles)
 	{
@@ -76,7 +94,13 @@ public class Functions {
 		return minTile;
 	}
 
-	// On trouve avec combien de cases on peut aller a une case cible
+	/** On trouve avec combien de cases on peut aller a une case cible
+	 * 
+	 * @param current
+	 * @param target
+	 * @return
+	 * 		?
+	 */
 	public static int trouveDistance(AiTile current, AiTile target) {
 		if(Functions.memeCordonnes(current, target)) return 0;
 		AStar arbre = new AStar(current, target, false);
@@ -86,8 +110,11 @@ public class Functions {
 			return -1;
 		return path.size();
 	}
-	/*
+	/**
 	 * Trouver les noeuds fils d'une case
+	 * @param courant 
+	 * @return
+	 * 		?
 	 */
 	public static int ChildNodes(AiTile courant) {
 		int result=0;
@@ -101,8 +128,11 @@ public class Functions {
 			result++;
 		return result;
 	}
-	/*
+	/**
 	 * Cette fonction retourne true si une case ne contient pas de block ni de feu et nide bombe
+	 * @param tile 
+	 * @return
+	 * 		?
 	 */
 	public static boolean isClear(AiTile tile){
 		boolean result;

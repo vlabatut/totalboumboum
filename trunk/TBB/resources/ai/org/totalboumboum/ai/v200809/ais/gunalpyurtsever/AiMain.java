@@ -32,7 +32,9 @@ import org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2.GunalpYurtsever;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-
+	/**
+	 * constructeur utilisé pour créer une instance de l'IA
+	 */
 	public AiMain()
 	{	super(new GunalpYurtsever());
 	}

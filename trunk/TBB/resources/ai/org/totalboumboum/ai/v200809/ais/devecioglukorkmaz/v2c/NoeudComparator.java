@@ -16,6 +16,12 @@ public class NoeudComparator implements Comparator<Noeud> {
 	private Noeud t;
 	DeveciogluKorkmaz dk;
 
+	/**
+	 * 
+	 * @param t
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public NoeudComparator(Noeud t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
 		dk.checkInterruption();
@@ -23,6 +29,9 @@ public class NoeudComparator implements Comparator<Noeud> {
 		this.dk = dk;
 	}
 
+	/**
+	 * 
+	 */
 	public int compare(Noeud n1, Noeud n2) {
 		//dk.checkInterruption();
 		int resultat = 0;

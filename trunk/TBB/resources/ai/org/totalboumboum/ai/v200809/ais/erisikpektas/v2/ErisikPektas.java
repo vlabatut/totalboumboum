@@ -212,8 +212,12 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	}
 
-	// pour laiisser de la bombe
-
+	/** pour laiisser de la bombe
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("static-access")
 	public AiAction laisser() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -249,8 +253,8 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * le suit(choisir) si les bonus et les heros se trouvent derrieres les murs
 	 * destructibles il laiise des bombes( exlploser()) sil existe un autre
 	 * heros proche au notre il laisse des bombes grace a la fonc alentours
+	 * @throws StopRequestException 
 	 */
-
 	@SuppressWarnings("static-access")
 	public void avancer() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -485,6 +489,13 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @param selection 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public AiTile sidanger(boolean selection) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		if (!isdangerous(x, y) && !selection) {
@@ -518,6 +529,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/**
 	 * pour controler sil se trouve un bonus ou un adversaire dans le jeu quon
 	 * peut acceder en explosant les murs destructibles
+	 * @throws StopRequestException 
 	 */
 	@SuppressWarnings("static-access")
 	public void explosion() throws StopRequestException {
@@ -698,6 +710,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/**
 	 * cette fonction sert a controler sil se trouve un bonus ou adversaire quon
 	 * peut acceder en marchant par des cases sures
+	 * @throws StopRequestException 
 	 */
 	@SuppressWarnings("static-access")
 	public void choisir() throws StopRequestException {
@@ -1030,8 +1043,14 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	}
 
-	// si ladversaire ou le bonus existe encore ( il nest pas en train de
+	/** si ladversaire ou le bonus existe encore ( il nest pas en train de
 	// burnir)
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean existe(AiTile tile) throws StopRequestException {
 		checkInterruption();
 
@@ -1055,6 +1074,13 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean impasse(AiTile tile) throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -1090,6 +1116,8 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/**
 	 * on simule une bombe et si ladversaire na pas dendroit pour senfuire et si
 	 * on la on met ce bombe
+	 * @param at 
+	 * @throws StopRequestException 
 	 */
 	public void attaque(boolean at) throws StopRequestException {
 
@@ -1151,6 +1179,11 @@ public class ErisikPektas extends ArtificialIntelligence {
 	}
 
 	// controler sil ya quelquun autour de nous
+	/**
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("static-access")
 	public boolean alentours() throws StopRequestException {
 		checkInterruption();

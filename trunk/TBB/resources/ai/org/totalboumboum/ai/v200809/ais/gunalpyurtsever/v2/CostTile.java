@@ -20,6 +20,13 @@ public class CostTile  {
 	private boolean markVisited;
 	private boolean inDanger;
 	
+	/**
+	 * 
+	 * @param CurrentAiTile
+	 * @param currentcost
+	 * @param ComparedAiTile
+	 * @param FirstDirection
+	 */
 	public CostTile(AiTile CurrentAiTile, int currentcost, AiTile ComparedAiTile,Direction FirstDirection){
 		
 		MyAiTile = CurrentAiTile;
@@ -33,53 +40,94 @@ public class CostTile  {
 		inDanger = false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int getCost(){
 		
 		return cost;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int getHeuristic(){
 		
 		return heuristic;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiTile getAiTile(){
 		
 		return MyAiTile;
 	}
 	
+	/**
+	 * 
+	 */
 	public String toString(){
 		
 		return MyAiTile.toString()+","+cost+","+heuristic+","+firstDrctn.toString();
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Direction getFirstDirection(){
 		
 		return firstDrctn;
 		
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 */
 	public void setmarkVisited(boolean a){
 	
 		this.markVisited = a;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean getmarkVisited(){
 		
 		return this.markVisited;
 		
 	}
 	
+	/**
+	 * 
+	 * @param danger
+	 */
 	public void setinDanger(boolean danger){
 		
 		this.inDanger = danger;
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean getinDanger(){
 		
 		return inDanger;

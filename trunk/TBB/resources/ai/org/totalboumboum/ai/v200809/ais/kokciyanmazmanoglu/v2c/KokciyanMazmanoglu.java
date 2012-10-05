@@ -227,6 +227,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param startTile
 	 * @param targetTile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  AiAction algoAEtoile(AiTile startTile, AiTile targetTile) throws StopRequestException{
@@ -285,7 +286,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 
 	/**
-	 * @param FieldMatrix[][]
 	 * @throws StopRequestException 
 	 */	
 	public void getMatrixValues() throws StopRequestException{
@@ -317,6 +317,10 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void getActionMatrixValuesV2() throws StopRequestException{
 		checkInterruption();
 
@@ -353,6 +357,10 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		getActionMatrixBombRanges();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void getActionMatrixValues() throws StopRequestException{
 		checkInterruption();
 
@@ -398,6 +406,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public boolean isObstacle(AiTile tile) throws StopRequestException{
@@ -410,9 +419,10 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	/**
 	 * 
-	 * @param x
-	 * @param y
+	 * @param line 
+	 * @param col 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public boolean isObstacle(int line, int col) throws StopRequestException{
@@ -439,6 +449,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isWall(AiTile tile) throws StopRequestException{
@@ -454,6 +465,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isSoft(AiTile tile) throws StopRequestException{
@@ -472,6 +484,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isFire(AiTile tile) throws StopRequestException{
@@ -488,6 +501,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param source
 	 * @param target
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  int distance(AiTile source, AiTile target) throws StopRequestException{
@@ -504,6 +518,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  boolean isMovePossible(AiTile tile, Direction d) throws StopRequestException
@@ -536,6 +551,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param col
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  boolean isMovePossible(int line,int col, Direction d) throws StopRequestException{
@@ -549,6 +565,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param ai
 	 * @param bombTile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  boolean isTrap(AiTile ai,AiTile bombTile) throws StopRequestException
@@ -723,6 +740,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param d
 	 * @param s
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  boolean possibleMoveD(int x,int y,int d, int s) throws StopRequestException{ 
@@ -804,6 +822,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/**
 	 * en yakin oyuncunun x ve y koordinatlari
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  int[] getClosestPlayerPosition() throws StopRequestException
@@ -827,6 +846,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * en yakin bombayi bul ve x,y dondur
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public int[] getClosestBombPosition(AiTile tile) throws StopRequestException {
@@ -853,6 +873,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * komsularda bomba gorursen kac
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  boolean isTimeToRun(AiTile tile) throws StopRequestException {
@@ -880,6 +901,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param bombeTile
 	 * @param me
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  boolean isSafe(AiTile bombeTile,AiTile me) throws StopRequestException{
@@ -894,6 +916,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  boolean isSafe2(AiTile tile) throws StopRequestException{
 		checkInterruption();
 		boolean result=true;
@@ -914,6 +943,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param t1
 	 * @param t2
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  boolean isBlockBetween(AiTile t1, AiTile t2) throws StopRequestException{
@@ -973,6 +1003,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  boolean isVoisinMur(AiTile tile,Direction d) throws StopRequestException{
@@ -1021,9 +1052,10 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	/**
 	 * olasi yapilabilecek hareketler
-	 * @param x
-	 * @param y
+	 * @param line 
+	 * @param col 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  Vector<Direction> getPossibleMoves(int line, int col) throws StopRequestException
@@ -1049,6 +1081,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param bombe
 	 * @param me
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiTile FindSafeCible2(AiTile bombe, AiTile me) throws StopRequestException {
@@ -1146,6 +1179,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  double[][] getFieldMatrix() throws StopRequestException {
@@ -1155,6 +1189,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  AiTile getCurrentTile() throws StopRequestException {
@@ -1164,6 +1199,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public  AiTile getPreviousTile() throws StopRequestException {
@@ -1174,6 +1210,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public  List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
@@ -1200,6 +1237,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * 
 	 * @param bomb
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public Vector<AiBomb> bombsInRange(AiBomb bomb) throws StopRequestException{
@@ -1260,6 +1298,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiTile findCible() throws StopRequestException {
@@ -1288,6 +1327,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param mainbomb
 	 * @param bombinrange
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public double shorterFuseTime(AiBomb mainbomb, AiBomb bombinrange) throws StopRequestException{
@@ -1445,6 +1485,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public Boolean isTimeToRun2() throws StopRequestException{
@@ -1523,6 +1564,12 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		return result;
 	}
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile chooseTile() throws StopRequestException{
 		checkInterruption(); // APPEL OBLIGATOIRE
 		double res = MaxValor();
@@ -1555,6 +1602,11 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return targetTile;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @throws StopRequestException
+	 */
 	public void decodeAction(AiTile tile) throws StopRequestException{
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -1590,6 +1642,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double evaluateTile(AiTile tile) throws StopRequestException{
 		checkInterruption(); // APPEL OBLIGATOIRE
 		double resultat = 0;
@@ -1700,7 +1759,12 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double MaxValor() throws StopRequestException{
 		checkInterruption();
 		double res=0;
@@ -1719,7 +1783,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return res;		
 	}
 
-
+	/**
+	 * 
+	 * @param matrix
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double MinValor(double matrix[][]) throws StopRequestException{
 		checkInterruption();
 		double res=Double.MAX_VALUE;
@@ -1738,6 +1808,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return res;		
 	}
 
+	/**
+	 * 
+	 * @param matrix
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double MinPosValor(double matrix[][]) throws StopRequestException{
 		checkInterruption();
 		double res=Double.MAX_VALUE;
@@ -1799,8 +1876,14 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 
 
-
-
+	/**
+	 * 
+	 * @param bombe
+	 * @param me
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean FindSafeCible(AiTile bombe, AiTile me) throws StopRequestException {
 		checkInterruption();
 		Collection<AiTile> cases = getPercepts().getNeighborTiles(bombe);
@@ -1923,6 +2006,12 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return res;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile findSafeTile() throws StopRequestException{
 		checkInterruption();
 		AiTile res = null;
@@ -1957,6 +2046,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return res;
 	}
 
+	/**
+	 * 
+	 * @param matrix
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile findSafeTileV2(double matrix[][]) throws StopRequestException{
 		checkInterruption();
 		AiTile res = null;
@@ -1983,6 +2079,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return res;
 	}
 
+	/**
+	 * 
+	 * @param BombTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTrap2(AiTile BombTile) throws StopRequestException{
 		checkInterruption();
 		boolean result = false;
@@ -2014,7 +2117,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return result;
 	}
 
-
+	/**
+	 * 
+	 * @param BombTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTrap3(AiTile BombTile) throws StopRequestException{
 		checkInterruption();
 		boolean result = false;
@@ -2039,6 +2148,10 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void updateAMWithTraps() throws StopRequestException{
 		checkInterruption();
 		for(int i = 0; i<zone.getHeight(); i++){
@@ -2053,6 +2166,11 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 	}
 
+	/**
+	 * 
+	 * @param matrix
+	 * @throws StopRequestException
+	 */
 	public void printmatrix(double matrix[][]) throws StopRequestException{
 		checkInterruption();
 		for(int i = 0; i<zone.getHeight(); i++){
@@ -2067,6 +2185,12 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean canIMove() throws StopRequestException{
 		checkInterruption();
 		boolean control = false;
@@ -2085,7 +2209,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		
 	}
 
-public int countPos() throws StopRequestException{
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
+	public int countPos() throws StopRequestException{
 	checkInterruption();
 	int count=0;
 	for(int i = 0; i<zone.getHeight(); i++){

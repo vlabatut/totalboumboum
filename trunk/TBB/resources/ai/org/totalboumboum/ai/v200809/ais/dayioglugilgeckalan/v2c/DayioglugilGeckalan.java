@@ -160,6 +160,11 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void init() throws StopRequestException{
 		checkInterruption();
 		nextTile=currentTile;
@@ -647,6 +652,12 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isThereBonusAccessible() throws StopRequestException
 	{
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -661,6 +672,12 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getClosestBonus() throws StopRequestException
 	{
 		checkInterruption(); // APPEL OBLIGATOIRE

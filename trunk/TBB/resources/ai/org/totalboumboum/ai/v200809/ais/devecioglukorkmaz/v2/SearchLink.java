@@ -10,19 +10,37 @@ public class SearchLink {
 	private Noeud origin;
 	private Noeud target;
 
+	/**
+	 * 
+	 * @param origin
+	 * @param target
+	 */
 	public SearchLink(Noeud origin, Noeud target) {
 		this.origin = origin;
 		this.target = target;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Noeud getOrigin() {
 		return origin;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Noeud getTarget() {
 		return target;
 	}
 
+	/**
+	 * 
+	 */
 	public boolean equals(Object object) {
 		boolean result;
 		if (object == null)

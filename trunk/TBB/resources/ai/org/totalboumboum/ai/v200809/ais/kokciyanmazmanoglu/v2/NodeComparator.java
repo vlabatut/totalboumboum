@@ -13,6 +13,11 @@ public class NodeComparator implements Comparator<Node>
 	private Node start;
 	private Node end;
 	
+	/**
+	 * 
+	 * @param startNode
+	 * @param endNode
+	 */
 	public NodeComparator(Node startNode, Node endNode){
 		this.start = startNode;
 		this.end = endNode;

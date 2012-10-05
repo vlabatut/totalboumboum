@@ -28,9 +28,9 @@ public class SearchNode {
 	
 	/**
 	 * Constructeur.
+	 * @param mu 
 	 * @throws StopRequestException 
 	 */
-
 	public SearchNode(MedeniUluer mu) throws StopRequestException {
 		super();
 		mu.checkInterruption(); //Appel Obligatoire
@@ -66,6 +66,7 @@ public class SearchNode {
 	 *            coordonne y du noeud
 	 * @param valeur
 	 *            valeur du noeud
+	 * @param mu 
 	 * @throws StopRequestException 
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur, MedeniUluer mu) throws StopRequestException {
@@ -88,6 +89,7 @@ public class SearchNode {
 	 *            valeur du noeud
 	 * @param cout
 	 *            cout du noeud
+	 * @param mu 
 	 * @throws StopRequestException 
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur, int cout,MedeniUluer mu) throws StopRequestException {

@@ -20,7 +20,14 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Functions {
-	// regarde si il existe un mur de type SOFT ou HARD
+	/** regarde si il existe un mur de type SOFT ou HARD
+	 * 
+	 * @param tile
+	 * @param ai
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public static boolean hasWall(AiTile tile, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		boolean result;
@@ -28,10 +35,13 @@ public class Functions {
 		result = block != null;
 		return result;
 	}
-	/*
+	/**
 	 * La matrice de la zone 
 	 * On voit -1 s'il ya un mur de type hard ou soft
 	 * On voit 0 s'il n'ya pas de mur
+	 * @param maMatrice 
+	 * @param ai 
+	 * @throws StopRequestException 
 	 */
 	public static void printMatrice(long maMatrice[][], ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -49,22 +59,40 @@ public class Functions {
 			System.out.println();
 		}
 	}
-	/*
+	/**
 	 * Retourne true si deux nodes ont les meme coordonnees
+	 * @param node1 
+	 * @param node2 
+	 * @param ai 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public static boolean memeCordonnes(Node node1,Node node2, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		return Functions.memeCordonnes(node1.getTile(),node2.getTile(),ai);
 	}
-	/*
+	/**
 	 * Retourne true si deux cases ont les meme coordonnees
+	 * @param tile1 
+	 * @param tile2 
+	 * @param ai 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public static boolean memeCordonnes(AiTile tile1,AiTile tile2, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		return tile1.getCol()==tile2.getCol() && tile1.getLine()==tile2.getLine();
 	}
-	/*
+	/**
 	 * On donne une case cible(AiTile target) et cette fonction trouve dans ue liste des cases la case plus proche a cette case cible 
+	 * @param target 
+	 * @param tiles 
+	 * @param ai 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public static AiTile TheCloserTile(AiTile target,List<AiTile> tiles, ArtificialIntelligence ai) throws StopRequestException
 	{
@@ -87,7 +115,15 @@ public class Functions {
 		return minTile;
 	}
 
-	// On trouve avec combien de cases on peut aller a une case cible
+	/** On trouve avec combien de cases on peut aller a une case cible
+	 * 
+	 * @param current
+	 * @param target
+	 * @param ai
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public static int trouveDistance(AiTile current, AiTile target, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		if(Functions.memeCordonnes(current, target,ai)) return 0;
@@ -98,8 +134,13 @@ public class Functions {
 			return -1;
 		return path.size();
 	}
-	/*
+	/**
 	 * Trouver les noeuds fils d'une case
+	 * @param courant 
+	 * @param ai 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public static int ChildNodes(AiTile courant, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -114,8 +155,13 @@ public class Functions {
 			result++;
 		return result;
 	}
-	/*
+	/**
 	 * Cette fonction retourne true si une case ne contient pas de block ni de feu et nide bombe
+	 * @param tile 
+	 * @param ai 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public static boolean isClear(AiTile tile, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();

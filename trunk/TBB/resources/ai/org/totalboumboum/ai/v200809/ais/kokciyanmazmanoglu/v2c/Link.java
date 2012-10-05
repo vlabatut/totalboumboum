@@ -18,6 +18,14 @@ public class Link {
 	private AiAction action;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param p
+	 * @param c
+	 * @param a
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Link(Node p ,Node c, AiAction a, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -26,19 +34,34 @@ public class Link {
 		this.action = a;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiAction getAction() throws StopRequestException {
 		ai.checkInterruption();
 		return action;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Node getParent() throws StopRequestException {
 		ai.checkInterruption();
 		return parent;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Node getChild() throws StopRequestException {
 		ai.checkInterruption();
 		return child;

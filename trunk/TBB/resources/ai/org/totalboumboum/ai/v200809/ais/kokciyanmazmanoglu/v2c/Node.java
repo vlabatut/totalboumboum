@@ -22,6 +22,16 @@ public class Node {
 	private Tree tree;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @param cost
+	 * @param t
+	 * @param depth
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Node(int line, int col, double cost, Tree t, int depth, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -33,7 +43,14 @@ public class Node {
 		tree = t;
 	}
 	
-	
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  double getH(Node start, Node end) throws StopRequestException{
 		ai.checkInterruption();
 		double result;
@@ -68,75 +85,130 @@ public class Node {
 		return false;
 	}
 
-
-
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  double getCost() throws StopRequestException {
 		ai.checkInterruption();
 		return cost;
 	}
 
-
+	/**
+	 * 
+	 * @param cost
+	 * @throws StopRequestException
+	 */
 	public  void setCost(int cost) throws StopRequestException {
 		ai.checkInterruption();
 		this.cost = cost;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  boolean isVisited() throws StopRequestException {
 		ai.checkInterruption();
 		return visited;
 	}
 
-
+	/**
+	 * 
+	 * @param visited
+	 * @throws StopRequestException
+	 */
 	public  void setVisited(boolean visited) throws StopRequestException {
 		ai.checkInterruption();
 		this.visited = visited;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  String getName() throws StopRequestException{
 		ai.checkInterruption();
 		
 		return this.getCol() + " / " + this.getLine();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  AiTile convertToTile() throws StopRequestException{
 		ai.checkInterruption();
 		tree.km.checkInterruption();
 		return tree.km.getPercepts().getTile(this.getLine(), this.getCol());
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  int getLine() throws StopRequestException {
 		ai.checkInterruption();
 		return line;
 	}
 
-
+	/**
+	 * 
+	 * @param line
+	 * @throws StopRequestException
+	 */
 	public  void setLine(int line) throws StopRequestException {
 		ai.checkInterruption();
 		this.line = line;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public  int getCol() throws StopRequestException {
 		ai.checkInterruption();
 		return col;
 	}
 
-
+	/**
+	 * 
+	 * @param col
+	 * @throws StopRequestException
+	 */
 	public  void setCol(int col) throws StopRequestException {
 		ai.checkInterruption();
 		this.col = col;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getDepth() throws StopRequestException {
 		ai.checkInterruption();
 		return depth;
 	}
 
-
+	/**
+	 * 
+	 * @param depth
+	 * @throws StopRequestException
+	 */
 	public void setDepth(int depth) throws StopRequestException {
 		ai.checkInterruption();
 		this.depth = depth;

@@ -29,6 +29,11 @@ public class Target {
 	/** l'objet de la cible le plus proche */
 	Object closestTarget;
 
+	/**
+	 * 
+	 * @param as
+	 * @throws StopRequestException
+	 */
 	public Target(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
 		this.as = as;
@@ -75,6 +80,7 @@ public class Target {
 	 * retourne le cible la plus proche
 	 * 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public Object getClosestTarget() throws StopRequestException {
@@ -152,6 +158,7 @@ public class Target {
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public double getHypotenuseToTarget(AiTile tile)
@@ -173,6 +180,7 @@ public class Target {
 	 * 
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public double getManhattanToTarget(AiTile tile) throws StopRequestException {

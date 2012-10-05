@@ -23,6 +23,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 	 * 
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
+	 * @param ai 
 	 * @throws StopRequestException 
 	 */
 	public NoeudComparator(Noeud goal, ArtificialIntelligence ai) throws StopRequestException

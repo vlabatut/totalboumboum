@@ -34,13 +34,21 @@ public class Map {
 	private Collection<AiBlock> blocks;
 	private Collection<AiItem> objets;
 	private Collection<AiFire> feu;
+	/** */
 	public int width;
+	/** */
 	public int height;
 
 	private int xadversaire, yadversaire;
 	private Etat matrix[][];
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -309,6 +317,10 @@ public class Map {
 	/**
 	 * cest le plus difficle condition a obtenir et naturellemnt cest le plus
 	 * sur
+	 * @param x1 
+	 * @param y1 
+	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public boolean isWalkable(int x1, int y1) throws StopRequestException {
@@ -325,6 +337,10 @@ public class Map {
 	}
 
 	/** nous allons lutiliser pour senfuire car on peut passer par les flmmes 
+	 * @param x1 
+	 * @param y1 
+	 * @return
+	 * 		?
 	 * @throws StopRequestException */
 	public boolean isRunnable(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -348,6 +364,10 @@ public class Map {
 	/**
 	 * on va utiliser cette methode pour voir sil ya qqch quon peut acceder en
 	 * laiissant des bombes car elle peut avoir des murs dest
+	 * @param x1 
+	 * @param y1 
+	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public boolean isReachable(int x1, int y1) throws StopRequestException {
@@ -370,6 +390,10 @@ public class Map {
 	 * on peut passer par des danger et des flammes on la cree car qd qqn met
 	 * deux bombes en meme temps on //ne bouge pas car on voit comme on na pas
 	 * de lieu pour se cacher
+	 * @param x1 
+	 * @param y1 
+	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public boolean isNoWhereElse(int x1, int y1) throws StopRequestException {
@@ -393,6 +417,9 @@ public class Map {
 	/**
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
+	 * @param x1 
+	 * @param y1 
+	 * @param range 
 	 * @throws StopRequestException 
 	 */
 
@@ -473,6 +500,9 @@ public class Map {
 
 	}
 
+	/**
+	 * @throws StopRequestException
+	 */
 	public void setdanger() throws StopRequestException {
 		ai.checkInterruption();
 		for (int i = 0; i < width; i++) {
@@ -486,7 +516,12 @@ public class Map {
 		}
 	}
 
-	// qd on transforme un bombe possible a un bombe reele
+	/** qd on transforme un bombe possible a un bombe reele
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @throws StopRequestException
+	 */
 	public void setbombe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		this.returnMatrix()[x1][y1] = Etat.BOMBE;
@@ -525,6 +560,10 @@ public class Map {
 		}
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void getfires() throws StopRequestException {
 		ai.checkInterruption();
 		Iterator<AiFire> itfeu = feu.iterator();
@@ -541,7 +580,12 @@ public class Map {
 		}
 	}
 
-	// ,l envoie la matrice de map
+	/** ,l envoie la matrice de map
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Etat[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
 		return matrix;

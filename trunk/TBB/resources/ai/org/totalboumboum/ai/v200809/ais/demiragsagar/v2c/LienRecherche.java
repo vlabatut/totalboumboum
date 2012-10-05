@@ -22,7 +22,7 @@ public class LienRecherche {
 	 * 
 	 * @param origin noeud parent
 	 * @param target noeud fils
-	 * @param action action de transition
+	 * @param ai 
 	 * @throws StopRequestException 
 	 */
 	public LienRecherche(Node origin, Node target, ArtificialIntelligence ai) throws StopRequestException {

@@ -18,6 +18,13 @@ public class TimedBomb {
 	private long time;
 	private ZoneEnum danger;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param bomb
+	 * @param releaseTime
+	 * @param time
+	 */
 	public TimedBomb(AiZone zone,AiBomb bomb,long releaseTime, long time)
 	{
 		this.zone = zone;
@@ -34,14 +41,26 @@ public class TimedBomb {
 			this.danger = ZoneEnum.FEUPOSSIBLE_TRESDANGEREUX;		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public ZoneEnum getDanger() {
 		return danger;
 	}
-
+	/**
+	 * 
+	 * @param danger
+	 */
 	public void setDanger(ZoneEnum danger) {
 		this.danger = danger;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public long getRemainingTime()
 	{
 		if(this.bomb.isWorking())
@@ -65,26 +84,48 @@ public class TimedBomb {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiZone getZone() {
 		return zone;
 	}
-
+	/**
+	 * 
+	 * @param zone
+	 */
 	public void setZone(AiZone zone) {
 		this.zone = zone;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiBomb getBomb() {
 		return bomb;
 	}
-
+	/**
+	 * 
+	 * @param bomb
+	 */
 	public void setBomb(AiBomb bomb) {
 		this.bomb = bomb;
 	}
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public long getReleaseTime() {
 		return releaseTime;
 	}
-
+	/**
+	 * 
+	 * @param releaseTime
+	 */
 	public void setReleaseTime(long releaseTime) {
 		this.releaseTime = releaseTime;
 	}
@@ -97,7 +138,11 @@ public class TimedBomb {
 		result += "/ Release Time:" + this.releaseTime;
 		return result;
 	}
-
+	
+	/**
+	 * 
+	 * @param time
+	 */
 	public void setTime(long time) {
 		this.time = time;
 		this.danger = ZoneEnum.FEUPOSSIBLE_PASDANGEREUX;

@@ -28,6 +28,12 @@ public class SearchTree {
 	private SearchNode firstNode;
 	private MedeniUluer mu;
 	
+	/**
+	 * 
+	 * @param courant
+	 * @param mu
+	 * @throws StopRequestException
+	 */
 	public SearchTree(SearchNode courant,MedeniUluer mu ) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
 		this.mu = mu;
@@ -105,7 +111,6 @@ public class SearchTree {
 	 *            le noeud à traiter
 	 * @return un lien contenant le noeud en position target
 	 * @throws StopRequestException 
-	 * @throws AbsentNodeException
 	 */
 	public SearchLink getParentLink(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -130,7 +135,6 @@ public class SearchTree {
 	 *            le noeud à traiter
 	 * @return tous les liens où ce noeud est en position origin
 	 * @throws StopRequestException 
-	 * @throws AbsentNodeException
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
