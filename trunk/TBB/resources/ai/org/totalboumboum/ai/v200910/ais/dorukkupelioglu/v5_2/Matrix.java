@@ -29,7 +29,11 @@ public class Matrix
 	private double[][] areaMatrix; 
 	private double[][] timeLeft; 
 	
-	
+	/**
+	 * 
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public Matrix(DorukKupelioglu dk)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -67,6 +71,7 @@ public class Matrix
 	 * Cette fonction creer les matrices areaMatrix et timeLeft 
 	 * putRIVAL ve putITEM fonksiyonları rival ve bonus array listlerini sırasız olarak 
 	 * dolduruyor. 
+	 * @throws StopRequestException 
 	 */
 	public void createAreaMatrix()throws StopRequestException
 	{
@@ -376,6 +381,14 @@ public class Matrix
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @param list
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> regulateList(AiTile tile,List<AiTile> list)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -408,30 +421,66 @@ public class Matrix
 		}
 		return result;
 	}
+	/**
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private double findPixelDistance(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
 		dk.checkInterruption();
 		return Math.abs(tile1.getPosX()-tile2.getPosX())+Math.abs(tile1.getPosY()-tile2.getPosY());
 	}
+	/**
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double ManhattanDistance(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
 		dk.checkInterruption();
 		return Math.abs(tile1.getLine()-tile2.getLine())+Math.abs(tile1.getCol()-tile2.getCol());
 	}
-
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @param state
+	 * @throws StopRequestException
+	 */
 	public void changeState(int line,int col,double state)throws StopRequestException
 	{
 		dk.checkInterruption();
 		areaMatrix[line][col]=state;
 	}
-	
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	public void changeTimeLeft(int line,int col,double time)throws StopRequestException
 	{
 		dk.checkInterruption();
 		timeLeft[line][col]=time;
 	}
 	
-	
+	/**
+	 * 
+	 * @param bomb
+	 * @param blast
+	 * @param bombs
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs)throws StopRequestException
 	{	
 		dk.checkInterruption();
@@ -453,48 +502,94 @@ public class Matrix
 		return blast;
 	}	
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getAreaMatrix()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return areaMatrix;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getTimeLeft()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return timeLeft;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiHero> getHeroes()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return heroes;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getRivals()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return rivals;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getBonus()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return bonus;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getSafes()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return safes;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getDestructibles()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return destructibles;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void printAreaMatrix()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -510,7 +605,10 @@ public class Matrix
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void printTimeLeft()throws StopRequestException
 	{
 		dk.checkInterruption();

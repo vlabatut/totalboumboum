@@ -30,6 +30,11 @@ public class TargetDestructible {
 	private boolean pathWorks;
 	private int MAX_DEST;
 	
+	/**
+	 * 
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public TargetDestructible(DorukKupelioglu dk) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -70,6 +75,12 @@ public class TargetDestructible {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction moveTo()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -134,6 +145,12 @@ public class TargetDestructible {
 		return indextile;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathAvailable() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -161,17 +178,33 @@ public class TargetDestructible {
 		return hasPathFound && !targetDestructibleEnded;
 	}	
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean pathWorks()
 	{
 		return pathWorks;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean succeed() throws StopRequestException
 	{
 		dk.checkInterruption();
 		return hasPathFound;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int PathLength()
 	{
 		return path.getLength();

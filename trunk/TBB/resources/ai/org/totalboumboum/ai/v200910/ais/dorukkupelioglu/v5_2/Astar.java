@@ -36,8 +36,8 @@ public class Astar
 	 * Constructeur pour initialiser les valeurs
 	 * 
 	 * @param dk pour checkinterruption 
-	 * @param matrix est la matrice qu'on utilise
-	 * @param hero hızını hesaba katacağımız hero
+	 * @param useTime 
+	 * @throws StopRequestException 
 	 */
 	public Astar(DorukKupelioglu dk,boolean useTime)throws StopRequestException
 	{
@@ -51,8 +51,9 @@ public class Astar
 	/**
 	 * Cette fonction trouve une chemin entre "start" et "end".
 	 * le chemin "path" contient la case "end" mais ne contient pas la case "start".
+	 * @param startTile 
 	 * @param endTile la case ou le hero veut aller
-	 * @return la chemin trouvee
+	 * @throws StopRequestException 
 	 */
 	public void findPath(AiTile startTile,AiTile endTile)throws StopRequestException
 	{
@@ -69,7 +70,10 @@ public class Astar
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void init()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -85,7 +89,7 @@ public class Astar
 	 * ou elle peut creer une chemin
 	 * @param startTile
 	 * @param listOfTarget
-	 * @return
+	 * @throws StopRequestException 
 	 */
 	public void findPath(AiTile startTile,List<AiTile> listOfTarget)throws StopRequestException
 	{
@@ -142,7 +146,14 @@ public class Astar
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int MannhattanDistance(AiTile tile1, AiTile tile2)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -324,12 +335,24 @@ public class Astar
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath getPath()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return path;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getPathFValue()throws StopRequestException
 	{
 		dk.checkInterruption();

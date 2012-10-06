@@ -29,7 +29,11 @@ public class Target
 	private boolean dropBomb;
 	private int counter;
 	
-	
+	/**
+	 * 
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public Target(DorukKupelioglu dk) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -41,6 +45,10 @@ public class Target
 		counter=0;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void init()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -149,6 +157,12 @@ public class Target
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction moveTo() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -162,6 +176,12 @@ public class Target
 		return moveDir;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -169,23 +189,47 @@ public class Target
 		return hasPathFound && !targetEnded;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathWorks() throws StopRequestException
 	{	dk.checkInterruption();
 		return pathWorks;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean targetEnded() throws StopRequestException
 	{
 		dk.checkInterruption();
 		return targetEnded;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean succeed() throws StopRequestException
 	{
 		dk.checkInterruption();
 		return hasPathFound;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean dropBomb() throws StopRequestException
 	{
 		dk.checkInterruption();

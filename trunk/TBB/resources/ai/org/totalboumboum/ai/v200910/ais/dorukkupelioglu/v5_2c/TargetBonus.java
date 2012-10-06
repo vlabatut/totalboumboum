@@ -25,7 +25,11 @@ public class TargetBonus {
 	private List<Double> pathStates;
 	private List<Double> pathStatesControl;
 	
-	
+	/**
+	 * 
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public TargetBonus(DorukKupelioglu dk)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -54,7 +58,12 @@ public class TargetBonus {
 		}
 	}
 	
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction moveTo()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -65,7 +74,12 @@ public class TargetBonus {
 		return moveDir;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathAvailable() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -92,17 +106,35 @@ public class TargetBonus {
 		return hasPathFound && !targetBonusEnded;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathWorks() throws StopRequestException
 	{	dk.checkInterruption();
 		return pathWorks;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean succeed() throws StopRequestException
 	{
 		dk.checkInterruption();
 		return hasPathFound;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int PathLength() throws StopRequestException
 	{	dk.checkInterruption();
 		return path.getLength();

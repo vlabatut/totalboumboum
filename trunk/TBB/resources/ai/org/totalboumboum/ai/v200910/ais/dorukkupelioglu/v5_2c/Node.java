@@ -30,6 +30,7 @@ public class Node {
 	 * @param end elle va utiliser pour la calcule d'heuristique.
 	 * @param parent le noeud parent de ce noeud
 	 * @param areaMatrix cost hesabı yaparken incelenen tile da ne olduğunu öğrenmek için
+	 * @param ai 
 	 * @throws StopRequestException 
 	 */
 	public Node(AiTile tile,AiTile end,Node parent,double[][] areaMatrix, ArtificialIntelligence ai) throws StopRequestException

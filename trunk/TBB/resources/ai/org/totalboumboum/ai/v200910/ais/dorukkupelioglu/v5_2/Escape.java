@@ -25,6 +25,11 @@ public class Escape {
 	private List<Double> pathStates;
 	private List<Double> pathStatesControl;
 	
+	/**
+	 * 
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public Escape(DorukKupelioglu dk)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -72,8 +77,12 @@ public class Escape {
 			hasPathFound=true;
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction moveTo()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -87,6 +96,12 @@ public class Escape {
 		return moveDir;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -112,17 +127,34 @@ public class Escape {
 		return hasPathFound && !escapeEnded;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean pathWorks()
 	{
 		return pathWorks;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasEnded()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return escapeEnded;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean succeed()throws StopRequestException
 	{
 		dk.checkInterruption();
