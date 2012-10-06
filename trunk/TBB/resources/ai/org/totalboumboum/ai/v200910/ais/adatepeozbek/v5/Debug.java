@@ -12,12 +12,20 @@ public class Debug
 {
 	private static boolean debug = false;
 	
+	/**
+	 * 
+	 * @param str
+	 */
 	public static void write(String str)
 	{
 		if(debug)
 			System.out.print(str);
 	}
 	
+	/***
+	 * 
+	 * @param str
+	 */
 	public static void writeln(String str)
 	{
 		if(debug)

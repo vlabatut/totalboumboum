@@ -22,6 +22,13 @@ public class Enemy
 	private long _lastCheck = 0;
 	ArtificialIntelligence ownAi;
 	
+	/**
+	 * 
+	 * @param hero
+	 * @param type
+	 * @param ownAi
+	 * @throws StopRequestException
+	 */
 	public Enemy(AiHero hero, EnemyTypes type,ArtificialIntelligence ownAi) throws StopRequestException
 	{	ownAi.checkInterruption();
 		this.ownAi = ownAi;
@@ -29,51 +36,104 @@ public class Enemy
 		_type = type;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getHero() throws StopRequestException
 	{	ownAi.checkInterruption();
 		return _hero;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public EnemyTypes getType() throws StopRequestException
 	{	ownAi.checkInterruption();
 		return _type;		
 	}
 	
+	/**
+	 * 
+	 * @param hero
+	 * @throws StopRequestException
+	 */
 	public void updateHero(AiHero hero) throws StopRequestException
 	{	ownAi.checkInterruption();
 		_hero = hero;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getPosedBombs() throws StopRequestException
 	{	ownAi.checkInterruption();
 		return _posedBombs;		
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @throws StopRequestException
+	 */
 	public void setType(EnemyTypes type) throws StopRequestException
 	{	ownAi.checkInterruption();
 		_type = type;		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getSameTileCount() throws StopRequestException
 	{	ownAi.checkInterruption();
 		return _sameTileCount;		
 	}
 	
+	/**
+	 * 
+	 * @param ct
+	 * @throws StopRequestException
+	 */
 	public void increasePosedBombs(int ct) throws StopRequestException
 	{	ownAi.checkInterruption();
 		_posedBombs += ct;		
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void increaseSameTileCount() throws StopRequestException
 	{	ownAi.checkInterruption();
 		_sameTileCount += 1;		
 	}
-	
+	/**
+	 * 
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	public void setLastCheck(long time) throws StopRequestException
 	{	ownAi.checkInterruption();
 		_lastCheck = time;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public long getLastCheck() throws StopRequestException
 	{	ownAi.checkInterruption();
 		return _lastCheck;

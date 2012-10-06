@@ -59,6 +59,12 @@ public class SafetyManager
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
 	public SafetyManager(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -88,6 +94,10 @@ public class SafetyManager
 	
 	/**
 	 * renvoie la matrice de sureté
+	 * @return 
+	 * 		Matrice de réels.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -255,6 +265,12 @@ public class SafetyManager
 	/**
 	 * renvoie le niveau de sécurité de la case passée en paramètre
 	 * (i.e. le temps restant avant explosion)
+	 * @param tile 
+	 * 		Case à traiter.
+	 * @return 
+	 * 		Niveau de sécurité.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -270,6 +286,12 @@ public class SafetyManager
 	 * est maximal (ce traitement n'est pas très subtil : en cas d'explosion potentielle,
 	 * on pourrait calculer le temps nécessaire pour atteindre la case et 
 	 * déterminer si c'est possible de passer dessus avant l'explosion)
+	 * @param tile 
+	 * 		Case à traiter.
+	 * @return
+	 * 		{@code true} ssi la case est sûre. 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -279,6 +301,15 @@ public class SafetyManager
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param origin
+	 * 		Case de départ.
+	 * @return
+	 * 		Lise de cases sûres.
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
 	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -303,6 +334,9 @@ public class SafetyManager
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour la matrice de sûreté
+	 * 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public void update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

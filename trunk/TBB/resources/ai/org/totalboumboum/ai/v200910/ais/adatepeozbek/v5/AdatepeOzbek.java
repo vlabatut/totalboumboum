@@ -29,12 +29,19 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	private AiPath path = null;
 	private List<AiTile> allPassedTiles = null;
 	private boolean debug = false;
+	/** */
 	public boolean canTheyReachMe = false;
+	/** */
 	public TriedTiles triedTiles = null;
+	/** */
 	public List<Enemy> enemies = null;
+	/** */
 	public int urgentBombs = 0 ;
+	/** */
 	public AiTile lastBombedTile = null;
+	/** */
 	public long idleTime = 0;
+	/** */
 	public int privateRang = 0;
 	
 	@Override
@@ -83,13 +90,24 @@ public class AdatepeOzbek extends ArtificialIntelligence
 		return actionToDo;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiAction getActionToDo() throws StopRequestException
 	{
 		checkInterruption();
 		
 		return actionToDo;
 	}
-	
+
+	/**
+	 * 
+	 * @param action
+	 * @throws StopRequestException
+	 */
 	public void setActionToDo(AiAction action) throws StopRequestException
 	{
 		checkInterruption();
@@ -97,30 +115,59 @@ public class AdatepeOzbek extends ArtificialIntelligence
 		actionToDo = action;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{
 		checkInterruption();
 		return ownHero;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiZone getZone() throws StopRequestException
 	{
 		checkInterruption();
 		return zone;
 	}	
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath getPath() throws StopRequestException
 	{
 		checkInterruption();
 		return path;
 	}
 	
+	/**
+	 * 
+	 * @param path
+	 * @throws StopRequestException
+	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
 		checkInterruption();
 		this.path = path;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getPassedTiles() throws StopRequestException
 	{
 		checkInterruption();

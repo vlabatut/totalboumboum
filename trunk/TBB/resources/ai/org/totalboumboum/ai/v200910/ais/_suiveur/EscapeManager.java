@@ -53,6 +53,11 @@ public class EscapeManager
 
 	/**
 	 * crée un EscapeManager chargé d'amener le personnage au centre d'une case sûre
+	 * 
+	 * @param ai
+	 * 		Agent à traiter. 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public EscapeManager(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -96,6 +101,11 @@ public class EscapeManager
 	 * détermine si le personnage est arrivé dans la case de destination.
 	 * S'il n'y a pas de case de destination, on considère que le personnage
 	 * est arrivé.
+	 * 
+	 * @return
+	 *  	{@code true} ssi l'agent est arrivé à destination.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -200,6 +210,11 @@ public class EscapeManager
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+	 *
+	 * @return
+	 * 		La direction à suivre. 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
