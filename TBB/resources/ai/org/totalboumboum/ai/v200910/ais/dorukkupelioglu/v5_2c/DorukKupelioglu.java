@@ -211,6 +211,10 @@ public class DorukKupelioglu extends ArtificialIntelligence
 		tilePixel=nextTile.getSize();
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void init()throws StopRequestException
 	{
 		checkInterruption();
@@ -218,11 +222,23 @@ public class DorukKupelioglu extends ArtificialIntelligence
 		matrix.createAreaMatrix();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getHero()throws StopRequestException
 	{
 		checkInterruption();
 		return dk;
 	}
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Matrix getMatrix() throws StopRequestException
 	{
 		checkInterruption();

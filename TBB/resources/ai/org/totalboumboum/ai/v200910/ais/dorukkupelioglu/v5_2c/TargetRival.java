@@ -25,6 +25,11 @@ public class TargetRival {
 	private boolean targetRivalEnded;
 	private int[][] rivalavailable;
 	
+	/**
+	 * 
+	 * @param dk
+	 * @throws StopRequestException
+	 */
 	public TargetRival(DorukKupelioglu dk) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -193,6 +198,7 @@ public class TargetRival {
 	/**
 	 * bomba bıraktığımda rakibe etki edecek yerleri bulur
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public List<AiTile> findAvailable()throws StopRequestException
@@ -271,6 +277,12 @@ public class TargetRival {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction moveTo()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -283,6 +295,12 @@ public class TargetRival {
 		return moveDir;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathAvailable() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -291,7 +309,12 @@ public class TargetRival {
 		return hasPathFound && !targetRivalEnded;
 	}	
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean succeed() throws StopRequestException
 	{
 		dk.checkInterruption();

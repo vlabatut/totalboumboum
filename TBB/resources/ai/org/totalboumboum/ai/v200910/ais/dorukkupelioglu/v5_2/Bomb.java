@@ -33,6 +33,12 @@ public class Bomb {
 	private boolean bombEnded;
 	private double BOMBWILLEXPLODE;
 	
+	/**
+	 * 
+	 * @param dk
+	 * @param tile
+	 * @throws StopRequestException
+	 */
 	public Bomb(DorukKupelioglu dk,AiTile tile) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -67,6 +73,11 @@ public class Bomb {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @throws StopRequestException
+	 */
 	public void tempFIRE(AiTile tile)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -163,7 +174,12 @@ public class Bomb {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction moveTo() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -174,18 +190,35 @@ public class Bomb {
 		return moveDir;
 	}
 
+	/**
+	 * 
+	 * @param dropped
+	 * @throws StopRequestException
+	 */
 	public void changeDropped(boolean dropped)throws StopRequestException
 	{
 		dk.checkInterruption();
 		this.dropped=dropped;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean Dropped()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return dropped;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -194,12 +227,24 @@ public class Bomb {
 		return hasPathFound && !bombEnded;
 	}	
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasEnded()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return bombEnded;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isDroppable()throws StopRequestException
 	{
 		dk.checkInterruption();
