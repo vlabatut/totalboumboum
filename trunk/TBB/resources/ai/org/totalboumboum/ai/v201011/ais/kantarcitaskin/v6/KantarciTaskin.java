@@ -59,17 +59,25 @@ public class KantarciTaskin extends ArtificialIntelligence
 	 * la mode et puis d'apres la mode elle decide de poser une bombe ou pas. sinon on calcule
 	 * la matrice et trouve un chemin pour se deplacer. si on se deplace la methode 
 	 * calcule aussi le valeur de la variable direction.
-	 * 
-	 * @return resultat
-	 * 		le nome d'action
-	 * */
+	 */
 	public List<AiBlock> blocks;
+	/** */
 	public List<AiBlock> destructibles ;
+	/** */
 	public List<AiBomb> bombs ;
+	/** */
 	public List<AiHero> heroes;
+	/** */
 	public List<AiFire> fires;
+	/** */
 	public List<AiItem> bonus; 
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiActionName action() throws StopRequestException
 	{
 		checkInterruption();
@@ -147,10 +155,4 @@ public class KantarciTaskin extends ArtificialIntelligence
 		
 		return resultat;
 	}	
-	
-	
 }
-
-
-
-

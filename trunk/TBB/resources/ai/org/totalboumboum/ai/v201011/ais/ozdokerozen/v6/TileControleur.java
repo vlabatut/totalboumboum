@@ -27,6 +27,7 @@ public class TileControleur {
 	ArtificialIntelligence IA;
 	int[][] matriceImaginaire;
 	int[][] matriceTiles;
+	/** */
 	public List<AiTile> cibleSecure=new ArrayList<AiTile>();
 
 	int MURDESTRUCTIBLE=5;
@@ -38,8 +39,15 @@ public class TileControleur {
 	
 	//variable temporiel
 	AiTile temp;
+	/** */
 	public  AiTile tileFuir;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param matrice
+	 * @throws StopRequestException
+	 */
 	public TileControleur(OzdokerOzen ai,int matrice[][]) throws StopRequestException {
 		ai.checkInterruption();
 		IA=ai;
@@ -122,8 +130,10 @@ public class TileControleur {
 
 	
 	/**
-	 * 	 *Methode qui retourne les tiles qu'on peut arrive (sans case scope)
-	 * @return
+	 * Methode qui retourne les tiles qu'on peut arrive (sans case scope)
+	 * @param debut 
+	 * @param tilesPossible 
+	 * @param matrice 
 	 * @throws StopRequestException 
 	 */
 	public void tilePossibleArrive(AiTile debut,List<AiTile> tilesPossible,int[][] matrice) throws StopRequestException {
@@ -150,7 +160,10 @@ public class TileControleur {
 	
 	/**
 	 *Methode qui retourne les tiles qu'on peut arrive
-	 * @return les tiles qu'on peut arrive
+	 * @param debut 
+	 * @param tilesPossible 
+	 * @param scopes 
+	 * @param matrice 
 	 * @throws StopRequestException 
 	 */
 	public void tilePossibleArriveAvecRisk(AiTile debut,List<AiTile> tilesPossible,List<AiTile> scopes,int[][] matrice) throws StopRequestException {
@@ -189,7 +202,6 @@ public class TileControleur {
 	 * Methode qui tie les path accecible 
 	 * @param secureTiles
 	 * @throws StopRequestException
-	 * @throws LimitReachedException
 	 */
 	public void tierLesTilesParDistanceEtAccebilite(List<AiTile> secureTiles) throws StopRequestException {
 		IA.checkInterruption();
@@ -218,8 +230,8 @@ public class TileControleur {
 	/**
 	 * Methode qui tie les path accecible 
 	 * @param secureTiles
+	 * @param debut 
 	 * @throws StopRequestException
-	 * @throws LimitReachedException
 	 */
 	public void tierLesTilesParDistanceEtAccebilite(List<AiTile> secureTiles,AiTile debut) throws StopRequestException {
 		IA.checkInterruption();
@@ -242,12 +254,11 @@ public class TileControleur {
 	
 	/**
 	 * Methode qui calcule le path plus court
-	 * @param ownHero
+	 * @param notreHero 
 	 * @param startPoint
 	 * @param endPoint
 	 * @return les path plus court d'apres que A*
 	 * @throws StopRequestException
-	 * @throws LimitReachedException
 	 */
 	public AiPath calculateShortestPath(AiHero notreHero, AiTile startPoint,AiTile endPoint) throws StopRequestException {
 		IA.checkInterruption();
@@ -401,6 +412,7 @@ public class TileControleur {
 	 * @param tile
 	 * @param debut
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public double calculerDistance(AiTile tile,AiTile debut) throws StopRequestException{
@@ -421,7 +433,6 @@ public class TileControleur {
 	/**
 	 * Methode calculant plus court distance entre hero et un cible
 	 * @param tile
-	 * @param uneHero
 	 * @return la distance
 	 * @throws StopRequestException 
 	 */		
@@ -518,6 +529,7 @@ public class TileControleur {
 	 * Retourne premier case sure d'apres algorith BFS
 	 * @param poseBombe
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public AiTile tileBFS(AiTile poseBombe) throws StopRequestException{

@@ -14,6 +14,11 @@ public class Bomb {
 	private KayaYerinde onder;
 	private Astar astar;
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public Bomb(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();

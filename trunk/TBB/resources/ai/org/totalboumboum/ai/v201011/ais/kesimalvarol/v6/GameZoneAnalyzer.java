@@ -26,6 +26,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class GameZoneAnalyzer
 {	/** classe principale de l'IA, permet d'accÔøΩder ÔøΩ checkInterruption() */
 	private static KesimalVarol monIA;
+	
+	/**
+	 * 
+	 * @param monIA
+	 * @throws StopRequestException
+	 */
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {
 		monIA.checkInterruption();
 		GameZoneAnalyzer.monIA = monIA;
@@ -60,7 +66,10 @@ public class GameZoneAnalyzer
 		}
 	}
 	
-	/** Methode pour construire la matrice */
+	/** Methode pour construire la matrice 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException */
 	public Matrix constructInterestMatrix() throws StopRequestException
 	{
 		monIA.checkInterruption();
@@ -307,6 +316,7 @@ public class GameZoneAnalyzer
 	 * 
 	 * @param m Matrice pour determiner les valeurs
 	 * @param modifier La valeur a utiliser lors de affectation des valeurs.
+	 * @throws StopRequestException 
 	 */
 	public void handleWalls(Matrix m,int modifier) throws StopRequestException
 	{

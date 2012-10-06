@@ -29,6 +29,12 @@ public class OutilsMur {
 	int BONUS=10;
 	int SCOPE=-3;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param matrice
+	 * @throws StopRequestException
+	 */
 	public OutilsMur(OzdokerOzen ai,int matrice[][]) throws StopRequestException {
 		ai.checkInterruption();
 		// initiliasation

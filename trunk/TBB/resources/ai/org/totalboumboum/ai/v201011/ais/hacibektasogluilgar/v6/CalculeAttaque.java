@@ -23,6 +23,13 @@ public class CalculeAttaque {
 	CalculeZone cz;
 	Action act;
 	
+	/**
+	 * 
+	 * @param hi
+	 * @param cz
+	 * @param act
+	 * @throws StopRequestException
+	 */
 	public CalculeAttaque(HacibektasogluIlgar hi,CalculeZone cz,Action act) throws StopRequestException
 	{
 		hi.checkInterruption();
@@ -88,7 +95,9 @@ private AiAction decisionBombPourAttaque(Etats[][] matriceZone,double matriceTot
 /**
  * 
  * @param matrice
- * @return
+ * @param matriceTotal 
+	 * @return
+	 * 		?
  * @throws StopRequestException
  * @throws LimitReachedException
  */

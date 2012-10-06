@@ -28,6 +28,11 @@ public class DeplacementAttaque {
 	boolean detruire = false;
 	boolean blockage = false;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public DeplacementAttaque(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -40,7 +45,9 @@ public class DeplacementAttaque {
 	 *            la zone du jeu
 	 * @param matriceAttaque
 	 *            la matrice attaque
-	 * @return resultat
+	 * @param resultat
+	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiAction algorithmAttaque(double[][] matriceAttaque,

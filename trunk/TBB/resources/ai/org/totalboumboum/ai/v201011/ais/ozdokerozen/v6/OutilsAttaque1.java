@@ -28,6 +28,14 @@ public class OutilsAttaque1 {
 	int[][] matrice;
 	TileControleur tileControleur;
 	List<AiTile> tilesPossible=new ArrayList<AiTile>();
+	
+	/***
+	 * 
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @throws StopRequestException
+	 */
 	public OutilsAttaque1(OzdokerOzen a,AiZone b,int[][] c) throws StopRequestException {
 		a.checkInterruption();
 		AI=a;
@@ -40,6 +48,13 @@ public class OutilsAttaque1 {
 		tileControleur.tierLesTilesParDistanceEtAccebilite(tilesPossible);
 		// 
 	}
+	/**
+	 * 
+	 * @param enemyTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile bombBomMur(AiTile enemyTile) throws StopRequestException{
 		AI.checkInterruption();
 		AiTile mur=null;
@@ -188,6 +203,12 @@ public class OutilsAttaque1 {
 		return bamBam;
 	} 
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero adversaireCible() throws StopRequestException{
 		AI.checkInterruption();
 		List<AiHero> heros=gameZone.getRemainingHeroes();
@@ -213,6 +234,12 @@ public class OutilsAttaque1 {
 			return heros.get(0);
 	}
 	
+	/**
+	 * 
+	 * @param adversaire
+	 * @param cibles
+	 * @throws StopRequestException
+	 */
 	public void attackAlgorithm(AiTile adversaire,List<AiTile> cibles) throws StopRequestException{
 		AI.checkInterruption();
 		int calculerDistance=(int) tileControleur.calculerDistance(adversaire, notreHero.getTile());		
@@ -258,6 +285,7 @@ public class OutilsAttaque1 {
 	 * @param adversaireTile
 	 * @param special
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean avoirSurUnBaril(AiTile adversaireTile,int special) throws StopRequestException{
@@ -290,6 +318,7 @@ public class OutilsAttaque1 {
 	 * @param adversaireTile
 	 * @param special
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean avoirSurUnCoridor(AiTile adversaireTile,int special) throws StopRequestException{
@@ -358,6 +387,7 @@ public class OutilsAttaque1 {
 	 * @param line
 	 * @param plus
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean tilesEstPropre(AiTile adversaireTile,boolean line,boolean plus) throws StopRequestException{

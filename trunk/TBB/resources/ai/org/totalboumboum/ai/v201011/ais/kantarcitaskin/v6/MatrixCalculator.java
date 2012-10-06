@@ -45,6 +45,7 @@ public class MatrixCalculator
 	 * 		la mode de l'hero
 	 * @param ai
 	 * 		AI	 * 
+	 * @param move 
 	 * @throws StopRequestException 
 	 * 
 	 * */
@@ -61,8 +62,6 @@ public class MatrixCalculator
 	/**
 	 * Initialise la matrice puis ajoute les valeurs des item qui se trouve dans le jeu
 	 * 
-	 * @return matrix
-	 * 		la matrice numerique qui represent la zone du jeu
 	 * @throws StopRequestException 
 	 * */
 	public void matrixConstruction () throws StopRequestException
@@ -361,8 +360,6 @@ public class MatrixCalculator
 	 * 		l'item, prorietaire de valeur
 	 * @param valeur
 	 * 		valeur calculé de cette cas
-	 * @param matrix
-	 * 		matrice representant la zone du jeu 
 	 * @throws StopRequestException 
 	 *
 	 * */

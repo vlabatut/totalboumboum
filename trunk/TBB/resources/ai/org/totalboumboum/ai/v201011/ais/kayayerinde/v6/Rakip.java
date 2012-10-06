@@ -23,6 +23,11 @@ public class Rakip {
 	
 	int i=0;
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public Rakip(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -30,12 +35,23 @@ public class Rakip {
 		astar=new Astar(onder);
 	}
 	
+	/**
+	 * 
+	 * @param matris
+	 * @throws StopRequestException
+	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();

@@ -17,6 +17,11 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 public class PathSafetyDeterminators {
 	/**Pour checkInterruption.*/
 	private static KesimalVarol monIA;
+	/**
+	 * 
+	 * @param monIA
+	 * @throws StopRequestException
+	 */
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {
 		monIA.checkInterruption();
 		PathSafetyDeterminators.monIA = monIA;

@@ -67,6 +67,12 @@ public class KayaYerinde extends ArtificialIntelligence{
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{
 		checkInterruption();

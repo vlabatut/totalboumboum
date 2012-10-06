@@ -18,6 +18,11 @@ public class PosageBombe {
 
 	private Securite securite = null;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public PosageBombe(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;

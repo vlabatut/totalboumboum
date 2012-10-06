@@ -23,6 +23,11 @@ public class Bonus {
 	private boolean running;
 	private boolean yaz;
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public Bonus(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -32,12 +37,23 @@ public class Bonus {
 		running=false;
 	}
 
+	/**
+	 * 
+	 * @param matris
+	 * @throws StopRequestException
+	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -112,17 +128,34 @@ public class Bonus {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void run() throws StopRequestException
 	{
 		onder.checkInterruption();
 		running=true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isRunning() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return running;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Astar getAstar() throws StopRequestException
 	{
 		onder.checkInterruption();

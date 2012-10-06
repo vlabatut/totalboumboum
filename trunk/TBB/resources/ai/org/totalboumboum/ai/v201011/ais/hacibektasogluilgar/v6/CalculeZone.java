@@ -39,7 +39,11 @@ public class CalculeZone {
 	AiHero adversairesActuelles[];
 	int nbAdversaire=0;
 	
-
+	/**
+	 * 
+	 * @param hi
+	 * @throws StopRequestException
+	 */
 	public CalculeZone(HacibektasogluIlgar hi) throws StopRequestException
 	{
 		hi.checkInterruption();
@@ -340,6 +344,7 @@ public class CalculeZone {
 	 * methode affichante la matriceTotale en console et en zone de jeu à la fois
 	 * 
 	 * @param matriceTotal
+	 * @param matriceEtat 
 	 * @throws StopRequestException
 	 */
 	public void afficherMatrice(double matriceTotal[][],Etats matriceEtat[][]) throws StopRequestException

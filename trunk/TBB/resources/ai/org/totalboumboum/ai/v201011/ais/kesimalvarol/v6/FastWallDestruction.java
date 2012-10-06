@@ -18,6 +18,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class FastWallDestruction {
 	private static KesimalVarol monIA;
+	
+	/**
+	 * 
+	 * @param monIA
+	 * @throws StopRequestException
+	 */
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {
 		monIA.checkInterruption();
 		FastWallDestruction.monIA = monIA;

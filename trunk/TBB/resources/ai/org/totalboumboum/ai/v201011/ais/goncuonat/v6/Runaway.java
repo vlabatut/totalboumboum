@@ -17,11 +17,20 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 public class Runaway 
 {
 	private GoncuOnat monia;
+	/** */
 	public final int CASE_EMPTY=0;
+	/** */
 	public final int COLLECT_SOFTWALL = 2;
+	/** */
 	public final int COLLECT_BONUS= 10;
+	/** */
 	public final int COLLECT_FIRE =-20 ;
 	
+	/**
+	 * 
+	 * @param ia
+	 * @throws StopRequestException
+	 */
 	public Runaway(GoncuOnat ia) throws StopRequestException 
 	{
 		ia.checkInterruption();

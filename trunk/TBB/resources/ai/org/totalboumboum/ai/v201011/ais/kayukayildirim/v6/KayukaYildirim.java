@@ -52,6 +52,7 @@ public class KayukaYildirim extends ArtificialIntelligence
 	private AiOutput out;
 	private double[][] matrice;
 	private AiHero ourOwnHero;
+	/** */
 	public AiPath nextMove=null;
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 	private Direction moveDir;
@@ -548,6 +549,14 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 		return possibleBurningWalls; 
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @param range
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getBombRangeList(AiTile tile, int range) throws StopRequestException{
 		checkInterruption();
 		List<AiTile> bombRangeList= new ArrayList<AiTile>();	
@@ -586,6 +595,14 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 		}
 		return bombRangeList;
 	}
+	
+	/**
+	 * 
+	 * @param bomb
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean runAway(AiTile bomb) throws StopRequestException{
 		checkInterruption();
 		boolean canIRun = false;
@@ -627,6 +644,13 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 		
 		return canIRun;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getAllRangeList()throws StopRequestException{
 		checkInterruption();
 		List<AiTile> allRangeList;
@@ -638,6 +662,16 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 		}
 		return allRangeList;
 	}
+	
+	/**
+	 * 
+	 * @param tile
+	 * @param dir
+	 * @param range
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getONeighbour(AiTile tile, Direction dir, int range) throws StopRequestException{
 		checkInterruption();
 		int i = 0;
@@ -740,6 +774,16 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 		
 		return(gameMap.getTile(maxLine, maxCol));
 	}
+	
+	/**
+	 * 
+	 * @param ownHero
+	 * @param startPoint
+	 * @param endPoints
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath shortestPath(AiHero ownHero, AiTile startPoint,List<AiTile> endPoints) throws StopRequestException
 	{
 		checkInterruption();

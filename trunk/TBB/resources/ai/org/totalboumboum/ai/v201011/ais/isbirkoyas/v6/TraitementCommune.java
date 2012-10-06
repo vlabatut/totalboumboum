@@ -19,6 +19,11 @@ public class TraitementCommune {
 	private DeplacementCommune deplacementCommune = null;
 	IsbirKoyas ai = new IsbirKoyas();
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TraitementCommune(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -31,7 +36,7 @@ public class TraitementCommune {
 	 * double et la zone du jeu. Notre IA peut se déplacer en traversant ces
 	 * cases.
 	 * 
-	 * @param matrice
+	 * @param matriceAttaque
 	 *            La Matrice attaque
 	 * @param gameZone
 	 *            la zone du jeu
@@ -78,7 +83,6 @@ public class TraitementCommune {
 	 *            La Matrice Attaque
 	 * @param endPoints
 	 * @param endPoints2
-	 * @return la liste des points finaux.
 	 * @throws StopRequestException
 	 */
 	public void destinationAttaque(List<AiTile> endPoints,
@@ -188,7 +192,6 @@ public class TraitementCommune {
 	 *            La Matrice collecte
 	 * @param endPoints
 	 * @param endPoints2
-	 * @return la liste des points finaux.
 	 * @throws StopRequestException
 	 */
 	public void destinationCollect(List<AiTile> endPoints,

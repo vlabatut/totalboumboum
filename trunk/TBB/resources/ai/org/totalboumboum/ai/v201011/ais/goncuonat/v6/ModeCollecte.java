@@ -25,35 +25,52 @@ public class ModeCollecte
 {
 
 	//notre héro
-	
 	private GoncuOnat monia;
 	
-	// la case vide qui ne contient aucuns sprites
+	/** la case vide qui ne contient aucuns sprites
 	// est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int CASE_EMPTY=0;
-	// la case qui contient le feu de la bombe pour le mode
+	/** la case qui contient le feu de la bombe pour le mode
 	// collecte est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int COLLECT_FIRE =-20 ;
-	// la case qui contient un mur destructible pour le mode
+	/** la case qui contient un mur destructible pour le mode
 	// collecte est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int COLLECT_SOFTWALL = 2;
-	// la case qui contient un bonus pour le mode
+	/** la case qui contient un bonus pour le mode
 	// collecte est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int COLLECT_BONUS= 10;
-	// la case qui contient un héro pour le mode
+	/** la case qui contient un héro pour le mode
 	// collecte est representée dans la matrice da la zone.
+	 * 
+	 */
 	private final int COLLECT_RIVAL = -10;
-	// la case qui contient une bombe pour le mode
+	/** la case qui contient une bombe pour le mode
 	// collecte est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int COLLECT_BOMB = -20;
-	// chemin asuivre pour s'enfuir du danger
+	/** chemin asuivre pour s'enfuir du danger
 	// AiPath nextMove=null;
 	// chemin a suivre pour ramasser des bonus
+	 * 
+	 */
 	//public AiPath nextMoveBonus=null;
 	public boolean searchBonus = true;
 	
 	
-
+	/**
+	 * 
+	 * @param ia
+	 * @throws StopRequestException
+	 */
 	public ModeCollecte(GoncuOnat ia)throws StopRequestException
 	{
 		ia.checkInterruption();
@@ -221,7 +238,7 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
-	 * @returns result
+	 * @return result
 	 * 				le cout de la case
 	 */
 	public double bestPathCost (double[][] matrice,AiPath nextMove) throws StopRequestException
@@ -240,7 +257,7 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
-	 * @returns result
+	 * @return result
 	 * 				le cout de la case
 	 */
 	public double shortestPathCost(double[][]matrice, AiPath nextMove)throws StopRequestException
@@ -268,7 +285,7 @@ public class ModeCollecte
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
 	 * 
-	 * @returns result
+	 * @return result
 	 * 				la distance du chemin en cases.
 	 */
 	public int getPathDistance(AiPath nextMove)throws StopRequestException

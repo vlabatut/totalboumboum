@@ -39,8 +39,7 @@ public class Move
 	 * 
 	 * @param zone
 	 * 		la zone du jeu
-	 * @param matrix
-	 * 		la zone numerique du jeu
+	 * @param mode 
 	 * @param ai
 	 * 		AI
 	 * @throws StopRequestException 
@@ -63,6 +62,7 @@ public class Move
 	 *
 	 * @return resultat
 	 * 		la direction de l'action se deplacer
+	 * @throws StopRequestException 
 	 * */
 	public Direction getDirection() throws StopRequestException
 	{	
@@ -262,6 +262,7 @@ public class Move
 	 * 
 	 * @return resultat
 	 * 		la case dont la valeur est plus eleve ou bien la case de l'hero
+	 * @throws StopRequestException 
 	 * 
 	 * */
 	
