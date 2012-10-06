@@ -21,12 +21,13 @@ public class Noeud {
 		private int cout = 0;
 
 		private DereliGeckalan source;
+		
 		/**
 		 * Constructeur.
+		 * @param source 
 		 * @throws StopRequestException 
 		 * @throws org.totalboumboum.ai.v200910.adapter.communication.StopRequestException 
 		 */
-
 		public Noeud(DereliGeckalan source) throws StopRequestException{
 			super();
 			source.checkInterruption(); //Appel Obligatoire
@@ -45,6 +46,7 @@ public class Noeud {
 		 *            valeur du noeud
 		 * @param cout
 		 *            cout du noeud
+		 * @param source 
 		 * @throws StopRequestException 
 		 * @throws org.totalboumboum.ai.v200910.adapter.communication.StopRequestException 
 		 */
@@ -67,6 +69,7 @@ public class Noeud {
 		 *            coordonne y du noeud
 		 * @param valeur
 		 *            valeur du noeud
+		 * @param source 
 		 * @throws StopRequestException 
 		 */
 		public Noeud(int y, int x, ZoneEnum valeur, DereliGeckalan source) throws StopRequestException {

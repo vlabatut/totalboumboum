@@ -17,7 +17,7 @@ public class SearchLink {
 	 * 
 	 * @param origin	noeud parent
 	 * @param target	noeud fils
-	 * @param action	action de transition
+	 * @param source 
 	 * @throws StopRequestException 
 	 */
 	public SearchLink(Noeud origin,Noeud target,DereliGeckalan source) throws StopRequestException
