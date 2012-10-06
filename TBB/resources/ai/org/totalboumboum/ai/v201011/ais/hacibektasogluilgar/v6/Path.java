@@ -1,9 +1,5 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v6;
 
-/**
- * @author Engin Hacıbektaşoğlu
- * @author Elif Nurdan İlgar
- */
 import java.awt.Color;
 import java.util.List;
 
@@ -22,6 +18,10 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * @author Engin Hacıbektaşoğlu
+ * @author Elif Nurdan İlgar
+ */
 @SuppressWarnings("deprecation")
 public class Path {
 	HacibektasogluIlgar hi;
@@ -31,6 +31,13 @@ public class Path {
 	int height;
 	int width;
 	
+	/**
+	 * 
+	 * @param hi
+	 * @param ourHero
+	 * @param adversaires
+	 * @throws StopRequestException
+	 */
 	public Path(HacibektasogluIlgar hi,AiHero ourHero,AiHero adversaires[]) throws StopRequestException
 	{
 		hi.checkInterruption();
@@ -88,6 +95,7 @@ public class Path {
 	 * @param matriceTotal
 	 * @param tilesPossibles 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean voisineControl(double matriceTotal[][],AiPath tilesPossibles) throws StopRequestException
@@ -210,6 +218,7 @@ public class Path {
 	 * @param matrice
 	 * @param tileCible
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiPath trouverChemin(int line,int col,double[][] matrice, AiTile tileCible ) throws StopRequestException
@@ -273,8 +282,8 @@ public class Path {
 	 * @param col
 	 * @param matrice
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
-	 * @throws LimitReachedException 
 	 */
 	public AiPath trouverCible(int line, int col,double[][] matrice) throws StopRequestException
 	{
@@ -355,6 +364,8 @@ public class Path {
 	 * (methode de groupe rouge de l'annee dernier mais on l'a modifié)
 	 * @param nextMove
 	 * 			Le chemin precis a suivre.
+	 * @param uneHero 
+	 * @param matriceTotal 
 	 *  
 	 * @return la nouvelle action de notre hero dans ce chemin
 	 * 

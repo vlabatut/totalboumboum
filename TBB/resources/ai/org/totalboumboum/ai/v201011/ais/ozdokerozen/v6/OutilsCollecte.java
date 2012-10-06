@@ -10,7 +10,6 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
-import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
 /**
  * @author Gizem Lara Özdöker
@@ -25,6 +24,13 @@ public class OutilsCollecte {
 	List<AiTile> tilesPossible=new ArrayList<AiTile>();
 	AiHero notreHero;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param gameZone
+	 * @param matrice
+	 * @throws StopRequestException
+	 */
 	public OutilsCollecte(OzdokerOzen ai,AiZone gameZone,int[][] matrice) throws StopRequestException {
 		ai.checkInterruption();
 		tileControleur=new TileControleur(ai, matrice);
@@ -58,6 +64,7 @@ public class OutilsCollecte {
 	 * @param matrice
 	 * @param gameZone
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public AiTile murQuOnVaDetruitre(AiTile bonus,int[][] matrice,AiZone gameZone) throws StopRequestException {
@@ -150,7 +157,6 @@ public class OutilsCollecte {
 	 * @param gameZone
 	 * @return tile de cible
 	 * @throws StopRequestException
-	 * @throws LimitReachedException
 	 */
 	public AiTile murPlusProche(int[][] matrice,AiZone gameZone) throws StopRequestException{
 		abc.checkInterruption();
@@ -219,6 +225,7 @@ public class OutilsCollecte {
 	 * @param matrice
 	 * @param gameZone
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public AiTile bonusPlusProche(int[][]matrice,AiZone gameZone) throws StopRequestException{
@@ -248,6 +255,7 @@ public class OutilsCollecte {
 	 * @param matrice
 	 * @param gameZone
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public AiTile bonusArriveProche(int[][]matrice,AiZone gameZone) throws StopRequestException{

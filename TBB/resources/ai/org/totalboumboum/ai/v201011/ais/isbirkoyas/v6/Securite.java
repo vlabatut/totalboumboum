@@ -19,9 +19,16 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Securite {
 	IsbirKoyas ai = new IsbirKoyas();
+	/** */
 	public boolean secure;
+	/** */
 	public AiPath nextMove2 = null;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Securite(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -33,7 +40,7 @@ public class Securite {
 	 * un type booléenne (danger). Elle prend 2 arguments la zone du jeu et la
 	 * case cible.
 	 * 
-	 * @param AiTile
+	 * @param tile
 	 *            tile
 	 * @param gameZone
 	 *            la zone du jeu

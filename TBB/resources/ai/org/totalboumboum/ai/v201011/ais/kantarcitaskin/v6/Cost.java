@@ -23,6 +23,7 @@ public class Cost extends CostCalculator
 	 * Constructeur de la classe 
 	 * @param matrix
 	 * 		zone numerique du jeu
+	 * @param ai 
 	 * @throws StopRequestException 
 	 * */
 	public Cost(double[][] matrix, ArtificialIntelligence ai) throws StopRequestException

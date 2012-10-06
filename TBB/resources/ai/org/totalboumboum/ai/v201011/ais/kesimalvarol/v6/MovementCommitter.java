@@ -36,6 +36,11 @@ public class MovementCommitter {
 
 	/**Pour checkInterruption.*/
 	private static KesimalVarol monIA;
+	/**
+	 * 
+	 * @param monIA
+	 * @throws StopRequestException
+	 */
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {
 		monIA.checkInterruption();
 		MovementCommitter.monIA = monIA;
@@ -48,10 +53,21 @@ public class MovementCommitter {
 	
 	/** Utilisee pour indiquer qu'on voudrait faire une operation distincte pour poser des bombes */
 	private AiTile bombSpecialRequest;
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getBombSpecialRequest() throws StopRequestException {
 		monIA.checkInterruption();
 		return bombSpecialRequest;
 	}
+	/**
+	 * 
+	 * @param bombSpecialRequest
+	 * @throws StopRequestException
+	 */
 	public void setBombSpecialRequest(AiTile bombSpecialRequest) throws StopRequestException {
 		monIA.checkInterruption();
 		this.bombSpecialRequest = bombSpecialRequest;
@@ -137,6 +153,7 @@ public class MovementCommitter {
 	 * @param m La matrice sur laquelle nos calculs se baseront
 	 * 
 	 * @return L'action a utiliser
+	 * @throws StopRequestException 
 	 */
 	public AiAction commitMovementForFutureBomb(Matrix m) throws StopRequestException
 	{
@@ -150,6 +167,7 @@ public class MovementCommitter {
 	 * @param m La matrice sur laquelle nos calculs se baseront
 	 * 
 	 * @return L'action a utiliser
+	 * @throws StopRequestException 
 	 */
 	public AiAction commitMovement(Matrix m) throws StopRequestException
 	{
@@ -164,6 +182,7 @@ public class MovementCommitter {
 	 * @param invokedForSafeBombPlacement Oui si commitMovement est appelee pour prevoir si on peut laisser une bombe ou non
 	 * 
 	 * @return L'action a utiliser
+	 * @throws StopRequestException 
 	 */
 	public AiAction commitMovement(Matrix m,boolean invokedForSafeBombPlacement) throws StopRequestException
 	{

@@ -22,6 +22,13 @@ public class CalculeCollecte {
 	CalculeZone cz;
 	Action act;
 	
+	/**
+	 * 
+	 * @param hi
+	 * @param cz
+	 * @param act
+	 * @throws StopRequestException
+	 */
 	public CalculeCollecte(HacibektasogluIlgar hi,CalculeZone cz,Action act) throws StopRequestException
 	{
 		hi.checkInterruption();

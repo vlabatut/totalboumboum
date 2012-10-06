@@ -24,8 +24,6 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**constructeur
  * 
- * @param ai
- * @throws StopRequestException
  *
  * @author Göksu İsbir
  * @author Ela Koyaş
@@ -37,6 +35,11 @@ public class DeplacementCommune {
 	// la direction de la case d'attaque
 	Direction dir2 = Direction.NONE;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public DeplacementCommune(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -90,8 +93,9 @@ public class DeplacementCommune {
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
-	 * @param AiAction
+	 * @param resultat
 	 *            resultat
+	 * @param endPoints2 
 	 * @return endPoints
 	 * @throws StopRequestException
 	 */
@@ -335,6 +339,7 @@ public class DeplacementCommune {
 	 * @param droit
 	 * @param haut
 	 * @param bas
+	 * @param gameZone 
 	 * 
 	 * @throws StopRequestException
 	 */
@@ -452,8 +457,8 @@ public class DeplacementCommune {
 	 * Cette méthode nous donne la direction de notre IA. Elle prend 3
 	 * arguments.
 	 * 
-	 * @param dx2
-	 * @param dy2
+	 * @param dx
+	 * @param dy
 	 * @param dir
 	 * @return dir
 	 * 

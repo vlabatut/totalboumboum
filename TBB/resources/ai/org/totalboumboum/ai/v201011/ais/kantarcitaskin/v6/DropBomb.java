@@ -50,6 +50,7 @@ public class DropBomb
 	 * 
 	 * @return result
 	 * 		vrai si la decision est poser une bombe faux sinon
+	 * @throws StopRequestException 
 	 * */
 	public boolean decisionOfBomb() throws StopRequestException
 	{
@@ -527,7 +528,7 @@ public class DropBomb
 	 * 
 	 * @param tile 
 	 * 		tile du hero qu'on veut trouve son chemin
-	 * @param 
+	 * @param area
 	 * 		une carée qu'on estime pour un hero pour qu'il puisse acceder à ses cases dans le temps d'explosion d'une bombe
 	 * @param safe
 	 * 		liste des cases sur. Au début c'est null.

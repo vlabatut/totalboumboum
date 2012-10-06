@@ -20,6 +20,11 @@ public class TraitementAttaque {
 	double BOUGER = 100;
 	double DISTANCE = 1000;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TraitementAttaque(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;

@@ -23,6 +23,11 @@ public class ChoisirMode{
 	private int BESOINMIN;
 	private int BESOINMAX;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public ChoisirMode(OzdokerOzen ai) throws StopRequestException {
 		ai.checkInterruption();
 		AI=ai;

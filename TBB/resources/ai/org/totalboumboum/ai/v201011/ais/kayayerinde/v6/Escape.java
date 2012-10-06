@@ -18,6 +18,11 @@ public class Escape {
 	private Astar astar;
 	private boolean running;
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public Escape(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -26,12 +31,23 @@ public class Escape {
 		running=false;
 	}
 	
+	/**
+	 * 
+	 * @param matris
+	 * @throws StopRequestException
+	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();

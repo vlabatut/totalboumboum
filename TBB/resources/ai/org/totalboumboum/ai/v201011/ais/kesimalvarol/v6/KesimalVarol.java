@@ -38,6 +38,12 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/** Variable pour garder la zone */
 	private AiZone zone;
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiZone getZone() throws StopRequestException {
 		checkInterruption();
 		return zone;
@@ -47,6 +53,13 @@ public class KesimalVarol extends ArtificialIntelligence
 	private GameZoneAnalyzer gZoneAnalyzer;
 	/** Repr. de notre agent */
 	private AiHero selfHero;
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getSelfHero() throws StopRequestException {
 		checkInterruption();
 		return selfHero;
@@ -54,6 +67,13 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/** Repr. du mode de notre agent. */
 	private Mode mode;
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Mode getMode() throws StopRequestException {
 		checkInterruption();
 		return mode;
@@ -64,6 +84,13 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/** Coefficient de tolerance utilisee pour calculer si on peut nous eviter d'une explosion potentielle */
 	private double currentToleranceCofficient;
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getCurrentToleranceCofficient() throws StopRequestException {
 		checkInterruption();
 		return currentToleranceCofficient;
@@ -90,6 +117,11 @@ public class KesimalVarol extends ArtificialIntelligence
 	private AiTile bombReleaseTile;
 	/** On a vu que les bombes ne sont pas posees juste apres l'action, a cause des delai. */
 	private AiTile bombShouldBeHere;
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void willReleaseBomb() throws StopRequestException
 	{
 		checkInterruption();
@@ -102,16 +134,36 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/** Sommes-nous en train de prevoir l'explosion ? */
 	private boolean isPredicting;
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isPredicting() throws StopRequestException {
 		checkInterruption();
 		return isPredicting;
 	}
 	/** Utilisee lors de prediction de posage des bombes, s'il existe des bonus interdissant le posage des bombes */
 	private AiTile prBonusTile;
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getPrBonusTile() throws StopRequestException {
 		checkInterruption();
 		return prBonusTile;
 	}
+	
+	/**
+	 * 
+	 * @param prBonusTile
+	 * @throws StopRequestException
+	 */
 	public void setPrBonusTile(AiTile prBonusTile) throws StopRequestException {
 		checkInterruption();
 		this.prBonusTile = prBonusTile;
@@ -123,6 +175,13 @@ public class KesimalVarol extends ArtificialIntelligence
 		private AiPath lastPathChosen;
 		private int cumulativeInterest,currentPosition;
 	
+		/**
+		 * 
+		 * @param p
+		 * @param cI
+		 * @param cP
+		 * @throws StopRequestException
+		 */
 		public _lastPathChosenParameters(AiPath p,int cI,int cP) throws StopRequestException
 		{
 			checkInterruption();
@@ -130,6 +189,13 @@ public class KesimalVarol extends ArtificialIntelligence
 			cumulativeInterest=cI;
 			currentPosition=cP;
 		}
+		
+		/**
+		 * 
+		 * @param p
+		 * @param cI
+		 * @throws StopRequestException
+		 */
 		public _lastPathChosenParameters(AiPath p,int cI) throws StopRequestException
 		{
 			checkInterruption();
@@ -137,39 +203,90 @@ public class KesimalVarol extends ArtificialIntelligence
 			cumulativeInterest=cI;
 			currentPosition=0;
 		}
+		
+		/**
+		 * 
+		 * @return
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public int getCumulativeInterest() throws StopRequestException {
 			checkInterruption();
 			return cumulativeInterest;
 		}
+		
+		/**
+		 * 
+		 * @param cumulativeInterest
+		 * @throws StopRequestException
+		 */
 		public void setCumulativeInterest(int cumulativeInterest) throws StopRequestException {
 			checkInterruption();
 			this.cumulativeInterest = cumulativeInterest;
 		}
+		
+		/**
+		 * 
+		 * @return
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public int getCurrentPosition() throws StopRequestException {
 			checkInterruption();
 			return currentPosition;
 		}
+		
+		/**
+		 * 
+		 * @param currentPosition
+		 * @throws StopRequestException
+		 */
 		public void setCurrentPosition(int currentPosition) throws StopRequestException {
 			checkInterruption();
 			this.currentPosition = currentPosition;
 		}
+		
+		/**
+		 * 
+		 * @return
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public AiPath getLastPathChosen() throws StopRequestException {
 			checkInterruption();
 			return lastPathChosen;
 		}
+		
+		/**
+		 * 
+		 * @param lastPathChosen
+		 * @throws StopRequestException
+		 */
 		public void setLastPathChosen(AiPath lastPathChosen) throws StopRequestException {
 			checkInterruption();
 			this.lastPathChosen = lastPathChosen;
 		}
 	}
+	/** */
 	public _lastPathChosenParameters lastPathChosenParameters;
 	
 	/** Les endroits d'emplacements qui seront ignores  */
 	private HashMap<AiTile, Long> temporarilyIgnoredEmplacementCases;
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public HashMap<AiTile, Long> getTemporarilyIgnoredCases() throws StopRequestException {
 		checkInterruption();
 		return temporarilyIgnoredEmplacementCases;
 	}
+	/**
+	 * 
+	 * @param temporarilyIgnoredCases
+	 * @throws StopRequestException
+	 */
 	public void setTemporarilyIgnoredCases(
 			HashMap<AiTile, Long> temporarilyIgnoredCases) throws StopRequestException {
 		checkInterruption();
@@ -182,6 +299,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/**
 	 * Utilisee par MovementCommitter, on indique que nous sommes en danger et on ne peut pas nous diriger vers aucune case.
+	 * @param val 
 	 * @throws StopRequestException 
 	 */
 	public void iAmInDanger(boolean val) throws StopRequestException
@@ -393,6 +511,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	 * 
 	 * @param m La matrice d'interet sur lequel notre calcul sera basee
 	 * @return La decision a faire
+	 * @throws StopRequestException 
 	 */
 	public boolean isBombDropPermitted(Matrix m) throws StopRequestException
 	{
@@ -446,6 +565,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	/**
 	 * Si on va laisser une bombe, la case prefereable sera deja determinee grace a cette methode
 	 * @param targ
+	 * @throws StopRequestException 
 	 */
 	public void requestSpecialBombEvasiveTarget(AiTile targ) throws StopRequestException
 	{
@@ -458,6 +578,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	 * 
 	 * @param m La matrice d'interet sur lequel notre calcul sera basee
 	 * @return La case le plus preferable si les 4 premiers chemins au A* ne marchent pas
+	 * @throws StopRequestException 
 	 */
 	public AiTile getReachablePreferableLocation(Matrix m) throws StopRequestException
 	{
@@ -470,6 +591,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	 * 
 	 * @param m La matrice d'interet sur lequel notre calcul sera basee
 	 * @param modifier Valeur a effectuer
+	 * @throws StopRequestException 
 	 */
 	public void requestWallEffects(Matrix m,int modifier) throws StopRequestException
 	{

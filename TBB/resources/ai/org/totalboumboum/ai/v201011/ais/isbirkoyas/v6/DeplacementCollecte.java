@@ -22,6 +22,11 @@ public class DeplacementCollecte {
 	private TraitementCommune traitementCommune=null;
 	private boolean poserBombe2;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public DeplacementCollecte(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -33,9 +38,11 @@ public class DeplacementCollecte {
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
-	 * @param matriceCollect
+	 * @param matriceCollecte
 	 *            la matrice collecte
-	 * @return resultat
+	 * @param resultat 
+	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiAction algorithmCollect(int[][] matriceCollecte, AiZone gameZone,

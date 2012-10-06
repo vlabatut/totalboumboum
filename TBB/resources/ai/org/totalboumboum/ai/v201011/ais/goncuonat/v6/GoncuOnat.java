@@ -20,20 +20,27 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class GoncuOnat extends ArtificialIntelligence
-{
-	// notre hero sur la zone
+{ 
+	/** notre hero sur la zone */
 	public AiHero ourHero;
-	// la case vide qui ne contient aucuns sprites
+	/** la case vide qui ne contient aucuns sprites
 	// est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int CASE_EMPTY=0;
-	// chemin a suivre pour s'enfuir du danger
+	/** chemin a suivre pour s'enfuir du danger */
 	public AiPath nextMove=null;
+	/** */
 	public AiPath nextMoveCheck=null;
+	/** */
 	public AiPath nextMoveBonus=null;
+	/** */
 	public AiPath nextMoveAttack=null;
+	/** */
 	public AiZone zone=null;
 
 	//private boolean searchAttack = true;
+	/** */
 	public boolean verbose=false;
 	
 	
@@ -43,7 +50,7 @@ public class GoncuOnat extends ArtificialIntelligence
 	 *
 	 * @param matrice
 	 *            La Matrice de Zone
-	 * @param gameZone
+	 * @param zone
 	 *            la zone du jeu
 	 * @throws StopRequestException
 	 */

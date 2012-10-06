@@ -47,12 +47,25 @@ public class YolBulucu
 {
 	private boolean verbose = false;
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public YolBulucu(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
 		init(onder);
 	}
 
+	/**
+	 * 
+	 * @param onder
+	 * @param x
+	 * @param y
+	 * @throws StopRequestException
+	 * @throws LimitReachedException
+	 */
 	public YolBulucu(KayaYerinde onder, double x, double y) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -60,6 +73,13 @@ public class YolBulucu
 		setDestination(x,y);
 	}
 	
+	/**
+	 * 
+	 * @param onder
+	 * @param destination
+	 * @throws StopRequestException
+	 * @throws LimitReachedException
+	 */
 	public YolBulucu(KayaYerinde onder, AiTile destination) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -102,6 +122,8 @@ public class YolBulucu
 	 * modifie la case de destination du personnage,
 	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
+	 * @param destination 
+	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException, LimitReachedException
@@ -118,6 +140,9 @@ public class YolBulucu
 	 * modifie les coordonnées de destination,
 	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
+	 * @param x 
+	 * @param y 
+	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
 	public void setDestination(double x, double y) throws StopRequestException, LimitReachedException
@@ -155,6 +180,9 @@ public class YolBulucu
 */
 	/**
 	 * détermine si le personnage est arrivé aux coordonnées de destination
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -288,6 +316,9 @@ public class YolBulucu
 	/** 
 	 * calcule la prochonderne direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessonderre)
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 * */
 	public Direction update() throws StopRequestException, LimitReachedException

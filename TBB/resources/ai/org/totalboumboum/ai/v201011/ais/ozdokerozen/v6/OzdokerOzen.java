@@ -887,6 +887,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui retuorne un adversaire plus proche et possible de arrivée
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiHero adversairePlusProche() throws StopRequestException{
@@ -927,6 +928,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * Methode qui retuorne un adversaire plus proche dans le zone
 	 * il y a possiblite de ne pas arriver 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiHero adversairePlusProcheMaisPasArriver() throws StopRequestException{
@@ -963,6 +965,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * Methode qui retourne le bombe du tile scope qu'on est dessus
 	 * @param scope
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiBomb bombMemeDirection(AiTile scope) throws StopRequestException{

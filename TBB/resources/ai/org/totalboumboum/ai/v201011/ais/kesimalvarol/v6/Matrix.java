@@ -25,6 +25,11 @@ public class Matrix implements Cloneable
 {
 	/** Pour checkInterruption. */
 	private static KesimalVarol monIA;
+	/**
+	 * 
+	 * @param monIA
+	 * @throws StopRequestException
+	 */
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {
 		monIA.checkInterruption();
 		Matrix.monIA = monIA;
@@ -38,9 +43,21 @@ public class Matrix implements Cloneable
 	public double representationDistanceParameters[][]; //distance for neutrals.
 	/** Utilisee lors du calcul de posage des bombes  */
 	public List<AiTile> bombRegionNodes;
+	/**
+	 * 
+	 *
+	 */
 	public static class regionEmplacementImportance {
+		/** */
 		public int importance;
+		/** */
 		public boolean forEnemy;
+		/**
+		 * 
+		 * @param i
+		 * @param f
+		 * @throws StopRequestException
+		 */
 		public regionEmplacementImportance(int i,boolean f) throws StopRequestException
 		{
 			monIA.checkInterruption();
@@ -51,7 +68,9 @@ public class Matrix implements Cloneable
 	/** L'endroit d'emplacement pour laisser les bombes  */
 	public regionEmplacementImportance regionEmplacementImportanceMatrix[][];
 	/** Dimensions de la zone du jeu  */
-	public int height,width;
+	public int height;
+	/** */
+	public int width;
 	
 	/**
 	 * Sauvegarde une copie de matrice courant pour qu'on peut faire des predictions sur la posage de bombe
@@ -86,6 +105,7 @@ public class Matrix implements Cloneable
 	/**
 	 * Ctr. de la classe Matrix
 	 * @param azone La zone du jeu dont les dimensions seront memorisees
+	 * @throws StopRequestException 
 	 */
 	public Matrix(AiZone azone) throws StopRequestException
 	{
@@ -113,6 +133,7 @@ public class Matrix implements Cloneable
 	 * @param l Le ligne courante
 	 * @param c Le colonne courante
 	 * @param val Le valeur a affecter
+	 * @throws StopRequestException 
 	 */
 	public void markForBombPlacementCandidate(AiBlock targetBlock,int l,int c,double val) throws StopRequestException
 	{
@@ -159,10 +180,10 @@ public class Matrix implements Cloneable
 	
 	/**
 	 * Indiquer une case dans l'endroit d'emplacement
-	 * @param targetBlock Le mur sur lequel le calcul sera basee
-	 * @param l Le ligne courante
-	 * @param c Le colonne courante
+	 * @param targetHero 
+	 * @param neighboringCase 
 	 * @param val Le valeur a affecter
+	 * @throws StopRequestException 
 	 */
 	public void markForBombPlacementCandidate(AiHero targetHero,AiTile neighboringCase,double val) throws StopRequestException //,int l,int c,double val) throws StopRequestException
 	{

@@ -25,25 +25,38 @@ public class ModeAttack
 {
 	
 	//public AiHero monia.ourHero;
+	/** */
 	public GoncuOnat monia;
 	
-	// la case vide qui ne contient aucuns sprites
+	/** la case vide qui ne contient aucuns sprites
 	// est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int CASE_EMPTY=0;
-	// la case qui contient un mur indestructible pour le mode
+	/** la case qui contient un mur indestructible pour le mode
 	// attaque est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int ATTACK_HARDWALL =1 ;
-	// la case qui contient le feu d'une bombe pour le mode
+	/** la case qui contient le feu d'une bombe pour le mode
 	// attaque est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int ATTACK_FIRE =-20 ;
-	// la case qui contient un bonus pour le mode
+	/** la case qui contient un bonus pour le mode
 	// attaque est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int ATTACK_BONUS= 0;
-	// la case qui contient un héro pour le mode
+	/** la case qui contient un héro pour le mode
 	// attaque est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int ATTACK_RIVAL = 100;
-	// la case qui contient une bombe pour le mode
+	/** la case qui contient une bombe pour le mode
 	// attaque est representée dans la matrice da la zone.
+	 * 
+	 */
 	public final int ATTACK_BOMB = -20;
 	//public AiZone zone;
 	//AiPath path =null;
@@ -53,6 +66,11 @@ public class ModeAttack
 	//public AiPath nextMoveAttack=null;
 	//public AiZone zone;
 	
+	/**
+	 * @param monia 
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public ModeAttack( GoncuOnat monia) throws StopRequestException
 	{	
 		monia.checkInterruption();
@@ -296,7 +314,7 @@ public class ModeAttack
 	 *			 
 	 * @throws StopRequestException
 	 * 
-	 * @returns  endpoint
+	 * @return  endpoint
 	 * 			 La liste des cases que notre ia peut passer
 	 */
 	public List<AiTile> endPoint(double[][] matrice,AiZone zone)throws StopRequestException 
@@ -331,9 +349,10 @@ public class ModeAttack
 	 * 			la matrice qui represent le zone
 	 * 
 	 *			 
-	 * @throws StopRequestException
+	 * @throw StopRequestException
 	 * 
-	 * @returns   Liste des valeurs des dernieres cases des chemins possibles.
+	 * @return   Liste des valeurs des dernieres cases des chemins possibles.
+	 * @throws StopRequestException 
 	 * 			  
 	 */
 	public List<Double> endpointValue(List<AiTile> endPoint, double[][] matrice)throws StopRequestException 
@@ -366,7 +385,7 @@ public class ModeAttack
 	 *				La matrice qui represent le zone
 	 * @throws StopRequestException
 	 * 
-	 * @returns   shortestPathAttack.get(index)
+	 * @return   shortestPathAttack.get(index)
 	 * 			  				Le chemin plus logique selon notre algorithm.
 	 */
 	public AiPath objectifPath(List<Double> endpointValue, List<AiPath> shortestPathAttack, double[][] matrice)throws StopRequestException 
@@ -431,7 +450,7 @@ public class ModeAttack
 	 *				La matrice qui represent le zone
 	 * @throws StopRequestException
 	 * 
-	 * @returns   shortestPathAttack.get(index)
+	 * @return   shortestPathAttack.get(index)
 	 * 			  				Le chemin plus logique selon notre algorithm.
 	 */
 	public AiPath objectifPathCheck(List<Double> endpointValue, List<AiTile> check, List<AiPath> shortestPathAttack, double[][] matrice)throws StopRequestException 

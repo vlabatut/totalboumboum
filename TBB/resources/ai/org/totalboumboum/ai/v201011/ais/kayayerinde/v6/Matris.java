@@ -30,18 +30,32 @@ public class Matris {
 	private int hypoBonus=0;
 	private int hypoHero;
 	
-
-	public static int FREE=0; 
+	/** */
+	public static int FREE=0;
+	/** */
 	public static int BONUS=1;
+	/** */
 	public static int RIVAL=2;
+	/** */
 	public static int BONUSDANGER=3;
+	/** */
 	public static int DANGER=4;
+	/** */
 	public static int DESTRUCTIBLE=5;
+	/** */
 	public static int DESTRUCTIBLEDANGER=6;
+	/** */
 	public static int INDESTRUCTIBLE=7;
+	/** */
 	public static int BOMB=8;
+	/** */
 	public static int FIRE=9;
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public Matris(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -55,6 +69,10 @@ public class Matris {
 		processedBombs=new ArrayList<AiBomb>();
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void refresh() throws StopRequestException
 	{	
 		onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -355,17 +373,36 @@ public class Matris {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int[][] getVarlikMatrisi() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return varlikMatrisi;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getKalanZamanMatrisi() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return kalanZamanMatrisi;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean BonusVarMi() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -374,8 +411,11 @@ public class Matris {
 		return false;
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @param t
+	 * @throws StopRequestException
+	 */
 	public void hypoteticalBomb(AiTile t) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -431,6 +471,10 @@ public class Matris {
 		
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void Undo() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -440,24 +484,48 @@ public class Matris {
 		yedekZaman=new ArrayList<double[][]>();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getHypoDuvar() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return hypoDuvar;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getHypoBonus() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return hypoBonus;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getHypoRivals() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return hypoHero;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ArrayList<AiTile> getDest() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -479,6 +547,12 @@ public class Matris {
 		return Sort(dests);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ArrayList<AiTile> getRivals() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -492,6 +566,13 @@ public class Matris {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean etrafi(AiTile t) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -505,6 +586,12 @@ public class Matris {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ArrayList<AiTile> getFrees() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -522,6 +609,12 @@ public class Matris {
 		return Sort(safes);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ArrayList<AiTile> getBonus() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -536,6 +629,13 @@ public class Matris {
 		return Sort(result);
 	}
 	
+	/**
+	 * 
+	 * @param list
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private ArrayList<AiTile> Sort(ArrayList<AiTile> list) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -550,7 +650,13 @@ public class Matris {
 		return quickSort(list, mesafeler);
 	}
 	
- 
+	 /**
+	  * 
+	  * @param list
+	  * @param value
+	  * @return
+	  * @throws StopRequestException
+	  */
 	private ArrayList<AiTile> quickSort(ArrayList<AiTile> list,ArrayList<Integer> value) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -594,7 +700,12 @@ public class Matris {
 	}
 	
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ArrayList<AiTile> getRivalInf() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -648,7 +759,13 @@ public class Matris {
 		return Sort(result);
 	}
 	
-	
+	/**
+	 * 
+	 * @param list
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private int[][] clone(int[][]list) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -685,7 +802,11 @@ public class Matris {
 		return m;
 	} 
 	
-	
+	/**
+	 * 
+	 * @param deger
+	 * @throws StopRequestException
+	 */
 	public void print(int deger) throws StopRequestException
 	{
 		onder.checkInterruption();

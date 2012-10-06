@@ -23,6 +23,11 @@ public class Duvar {
 	private AiTile incelenecek;
 	private boolean yaz;	
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public Duvar(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -32,12 +37,23 @@ public class Duvar {
 		running=false;
 	}
 
+	/**
+	 * 
+	 * @param matris
+	 * @throws StopRequestException
+	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -95,13 +111,18 @@ public class Duvar {
 	}
 
 	
-	//bulunduğum yere bomba bıraksam; 
+	/** bulunduğum yere bomba bıraksam; 
 	//1)herhangi bir bombanın etkisi altında olmayan bir kırılır duvara etki eder mi?
 	//2)kaçabilir miyim
 	//her ikisini de yapabiliyorsa true, aksi halde false gönderir
 	//işlem yaparken hayali bir bomba bırakıp matrisi değiştirir, etki alanına göre hareket eder
 	//astarda daha önceden bulunmuş olan yol ve tür değerlerini değiştirir.
 	//eğer yol bulamamışsa matrisi ve astarı eski haline getirir.
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean incele() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -144,16 +165,34 @@ public class Duvar {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void run() throws StopRequestException
 	{
 		onder.checkInterruption();
 		running=true;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isRunning() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return running;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Astar getAstar() throws StopRequestException
 	{
 		onder.checkInterruption();

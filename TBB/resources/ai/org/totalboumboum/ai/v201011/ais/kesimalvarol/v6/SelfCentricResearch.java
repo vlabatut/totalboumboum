@@ -22,6 +22,11 @@ public class SelfCentricResearch
 {
 	/** classe principale de l'IA, permet d'accÔøΩder ÔøΩ checkInterruption() */
 	private static KesimalVarol monIA;
+	/**
+	 * 
+	 * @param monIA
+	 * @throws StopRequestException
+	 */
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {
 		monIA.checkInterruption();
 		SelfCentricResearch.monIA = monIA;
@@ -43,6 +48,13 @@ public class SelfCentricResearch
 		}
 	}
 	
+	/**
+	 * 
+	 * @param m
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public static AiTile getPreferableAccesibleCase(Matrix m) throws StopRequestException
 	{
 		monIA.checkInterruption();
@@ -53,7 +65,9 @@ public class SelfCentricResearch
 	 * Renvoie la case accesible et plus preferable dans le cas ou on n'utilise pas seuls les valeurs de matrice (ex: Nous sommes bloquees par un chemin)
 	 * 
 	 * @param m Matrice necessaire pour les calculs
+	 * @param currentLocation 
 	 * @return La case souhaitee
+	 * @throws StopRequestException 
 	 */
 	public static AiTile getPreferableAccesibleCase(Matrix m,AiTile currentLocation) throws StopRequestException
 	{

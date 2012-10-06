@@ -29,7 +29,14 @@ public class Action {
 	double[][] matriceTotal;
 	CalculeZone cz;
 	
-	
+	/**
+	 * 
+	 * @param hi
+	 * @param matriceZone
+	 * @param matriceTotal
+	 * @param cz
+	 * @throws StopRequestException
+	 */
 	public Action(HacibektasogluIlgar hi,Etats[][] matriceZone,double[][] matriceTotal,CalculeZone cz) throws StopRequestException
 	{
 		hi.checkInterruption();
@@ -106,6 +113,7 @@ public class Action {
 	 * @param note
 	 * @param color
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public int calculeDapresPorte(AiTile tileActuelle,double[][] matrice,int note,Color color) throws StopRequestException
@@ -127,6 +135,7 @@ public class Action {
 	 * @param line
 	 * @param col
 	 * @param matriceTotal matrice reel qui est deja calcule pour jeu
+	 * @param matriceImaginaire 
 	 * @return matrice imaginaire
 	 * @throws StopRequestException
 	 */
@@ -200,6 +209,7 @@ public class Action {
 	 * 
 	 * @param matrice
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 * @throws LimitReachedException
 	 */

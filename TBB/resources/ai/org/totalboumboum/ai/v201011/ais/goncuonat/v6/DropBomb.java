@@ -17,13 +17,18 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 @SuppressWarnings("deprecation")
 public class DropBomb 
-{
+{	/** */
 	public AiZone zone;
 	AiPath path =null;
+	/** */
 	public GoncuOnat monia;
 
 
-	
+	/**
+	 * 
+	 * @param monia
+	 * @throws StopRequestException
+	 */
 	public DropBomb(GoncuOnat monia) throws StopRequestException 
 	{
 		monia.checkInterruption();
@@ -42,7 +47,7 @@ public class DropBomb
 	 *			 
 	 * @throws StopRequestException
 	 * 
-	 * @returns  boolean  
+	 * @return  boolean  
 	 * 			true si on peut mettre un bombe
 	 * 			  
 	 */
@@ -146,7 +151,7 @@ public class DropBomb
 	 *			 
 	 * @throws StopRequestException
 	 * 
-	 * @returns   boolean
+	 * @return   boolean
 	 * 				renvoie true si la case se trove dans la liste.
 	 * 			  
 	 */
@@ -311,7 +316,7 @@ public class DropBomb
 	 *			 
 	 * @throws StopRequestException
 	 * 
-	 * @returns   boolean
+	 * @return   boolean
 	 * 			  
 	 */
 	public boolean checkSecure(AiPath path, AiZone zone)throws StopRequestException

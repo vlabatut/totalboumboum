@@ -23,13 +23,27 @@ public class Astar {
 	private static final int ARA=10;
 	private boolean sictin;
 
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	public Astar(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.ky=onder;
 	}
 	
-	
+	/**
+	 * 
+	 * @param baslangic
+	 * @param son
+	 * @param gidilenTur
+	 * @param matris
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean yolBul(AiTile baslangic,AiTile son,int gidilenTur,Matris matris) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -166,6 +180,14 @@ public class Astar {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param t1
+	 * @param t2
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int real(AiTile t1,AiTile t2) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -209,29 +231,58 @@ public class Astar {
 		return node;
 	}
 	
-
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath getPath() throws StopRequestException
 	{
 		ky.checkInterruption();
 		return path;
 	}
+	
+	/**
+	 * 
+	 * @param path
+	 * @throws StopRequestException
+	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
 		ky.checkInterruption();
 		this.path=path;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getTur() throws StopRequestException
 	{
 		ky.checkInterruption();
 		return gidilenTur;
 	}
+	
+	/**
+	 * 
+	 * @param gidilenTur
+	 * @throws StopRequestException
+	 */
 	public void setTur(int gidilenTur) throws StopRequestException
 	{
 		ky.checkInterruption();
 		this.gidilenTur=gidilenTur;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int yoldaMi() throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -246,6 +297,14 @@ public class Astar {
 			return 0;
 		return 1;
 	}
+	
+	/**
+	 * 
+	 * @param matris
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiAction getNextAction(Matris matris) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -269,17 +328,30 @@ public class Astar {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void sictinAc() throws StopRequestException
 	{
 		ky.checkInterruption();
 		sictin=true;
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void sictinKapat() throws StopRequestException
 	{
 		ky.checkInterruption();
 		sictin=false;
 	}
 	
+	/**
+	 * 
+	 *
+	 */
 	class Node
 	{
 		private int G;

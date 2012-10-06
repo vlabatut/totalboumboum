@@ -16,6 +16,12 @@ public class GameZoneFuturePredictions
 {
 	/** classe principale de l'IA, permet d'accÔøΩder ÔøΩ checkInterruption() */
 	private static KesimalVarol monIA;
+	
+	/**
+	 * 
+	 * @param monIA
+	 * @throws StopRequestException
+	 */
 	public static void setMonIA(KesimalVarol monIA) throws StopRequestException {
 		monIA.checkInterruption();
 		GameZoneFuturePredictions.monIA = monIA;
@@ -35,6 +41,8 @@ public class GameZoneFuturePredictions
 	
 	/** Pour prevoir la matrice ayant une bombe 
 	 * @param m La matrice qui sera modifiee  
+	 * @param bombloc 
+	 * @throws StopRequestException 
 	 */
 	public static void modifyMatrixWithFutureBomb(Matrix m,AiTile bombloc) throws StopRequestException
 	{
@@ -137,6 +145,13 @@ public class GameZoneFuturePredictions
 
 	}
 	
+	/**
+	 * 
+	 * @param m
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public static boolean areBonusAdjacentAndNotTargetingEnemies(Matrix m) throws StopRequestException
 	{
 		monIA.checkInterruption();
@@ -146,7 +161,9 @@ public class GameZoneFuturePredictions
 	/** Pour ne pas detruire les bonus si elles sont a cote d'un mur destructible 
 	 * 
 	 * @param m Matrice necessaire pour les calculs
+	 * @param currentLocation 
 	 * @return Oui s'il y a des bonus en proximite.
+	 * @throws StopRequestException 
 	 * */
 	public static boolean areBonusAdjacentAndNotTargetingEnemies(Matrix m,AiTile currentLocation) throws StopRequestException
 	{

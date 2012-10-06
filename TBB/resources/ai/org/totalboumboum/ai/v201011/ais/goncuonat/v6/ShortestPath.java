@@ -25,6 +25,11 @@ public class ShortestPath
 
 	private GoncuOnat monia;
 	
+	/**
+	 * 
+	 * @param monia
+	 * @throws StopRequestException
+	 */
 	public ShortestPath(GoncuOnat monia) throws StopRequestException
 	{
 		monia.checkInterruption();
@@ -79,13 +84,9 @@ public class ShortestPath
 	 * 					notre ia
 	 * @param  startPoint
 	 * 					la case ou notre hero se trouve.
-	 * *@param endPoints
-	 *            les cases cibles ou le hero peut aller
-	 * @param   zone		 
-	 *			 La zone du jeu
 	 * @throws StopRequestException
 	 * 
-	 * @returns   result
+	 * @return   result
 	 * 			  La liste des chemins pour un movement attaque
 	 */
 	public List<AiPath> shortestPathAttack(AiHero ownHero, AiTile startPoint,List<AiTile> endPoints) throws StopRequestException
@@ -125,14 +126,14 @@ public class ShortestPath
 	 * La methode qui calcul un chemin vers le startPoint a le endPoint
 	 * @param  ownHero
 	 * 					notre ia
-	 * @param  endPoints
+	 * @param  endPoint
 	 * 				 les cases cibles ou le hero peut alle
 	 * @param  startPoint
 	 * 					la case ou notre hero se trouve.
 	 *
 	 * @throws StopRequestException
 	 * 
-	 * @returns AiPath
+	 * @return AiPath
 	 * 			le chemin entre 2 points donnees
 	 * 
 	 */
@@ -171,7 +172,7 @@ public class ShortestPath
 	 *
 	 * @throws StopRequestException
 	 * 
-	 * @returns le case de rival plus proche
+	 * @return le case de rival plus proche
 	 * 
 	 */
 	
@@ -229,7 +230,7 @@ public AiTile closestEnemy (AiZone zone) throws StopRequestException
  *
  * @throws StopRequestException
  * 
- * @returns la distance manhattan entre 2 cases quelconque
+ * @return la distance manhattan entre 2 cases quelconque
  * 
  */
 
@@ -255,7 +256,7 @@ public double distance(AiTile tile1, AiTile tile2)throws StopRequestException
  *			 La zone du jeu
  * @throws StopRequestException
  * 
- * @returns AiHero
+ * @return AiHero
  * 
  */
 
@@ -292,7 +293,7 @@ public AiHero getHero(AiTile hero, AiZone zone) throws StopRequestException
  *
  * @throws StopRequestException
  * 
- * @returns liste des distance entre les endPoints et La case du rival plus proche
+ * @return liste des distance entre les endPoints et La case du rival plus proche
  * 
  */
 

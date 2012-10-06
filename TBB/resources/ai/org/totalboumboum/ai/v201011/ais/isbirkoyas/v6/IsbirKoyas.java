@@ -22,23 +22,42 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	private TraitementAttaque traitementAttaque = null;
 	private TraitementCollect traitementCollect = null;
 	private PosageBombe posageBombe = null;
+	/** */
 	public AiPath nextMove = null;
+	/** */
 	public AiPath nextMove2 = null;
+	/** */
 	public AiPath nextMove3 = null;
+	/** */
 	public AiHero ourHero;
-
+	
+	/** */
 	public final double DEPLACEMENT = 1000;
+	/** */
 	public final int ATTAQUE = 1;
+	/** */
 	public int bonusInit;
+	/** */
 	public boolean modeCollect = false;
+	/** */
 	public boolean modeAttaque = false;
+	/** */
 	public boolean senfuire = false;
+	/** */
 	public boolean senfuire2 = false;
+	/** */
 	public boolean poserBombe;// poserbombe2=true;
+	/** */
 	public boolean attaqueBombe;
+	/** */
 	public boolean collectBombe;
-	public boolean print = false, print2 = false;
+	/** */
+	public boolean print = false;
+	/** */
+	public boolean print2 = false;
+	/** */
 	public boolean courir;
+	/** */
 	public boolean jeu = true;
 	int i = 0, k = 1, compteur = 0;
 	double t;
@@ -138,7 +157,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
-	 * @return true ou false
 	 * @throws StopRequestException
 	 */
 	private void mode(AiZone gameZone) throws StopRequestException {

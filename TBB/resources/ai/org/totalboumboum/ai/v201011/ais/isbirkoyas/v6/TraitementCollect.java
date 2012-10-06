@@ -20,10 +20,16 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class TraitementCollect {
 	IsbirKoyas ai = new IsbirKoyas();
-
+	/** */
 	public int DESTRUCTIBLEINIT = 200;
+	/** */
 	public final int BONUS = 1000;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TraitementCollect(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -198,6 +204,7 @@ public class TraitementCollect {
 	 * Cette méthode calcule le temps d'aller aux bonus du plus proche
 	 * adversaire et elle initialise cette case avec une valeur. Elle prend 3
 	 * arguments, la zone du jeu, les items du jeu et une matrice de type Int.
+	 * @param matrice 
 	 * 
 	 * @param bonus
 	 *            item bonus
