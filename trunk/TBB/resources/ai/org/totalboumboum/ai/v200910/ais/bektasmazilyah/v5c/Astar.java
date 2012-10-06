@@ -94,6 +94,16 @@ public final class Astar {
 	private final int[] closed;
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param map
+	 * @param originX
+	 * @param originY
+	 * @param destinationX
+	 * @param destinationY
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Astar(DangerZone map, int originX, int originY, int destinationX,
 			int destinationY, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -158,6 +168,7 @@ public final class Astar {
 	 * Starts the algorithm and returns true if a valid path was found.
 	 * 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException 
 	 */
 	public boolean findPath() throws StopRequestException {
@@ -177,6 +188,12 @@ public final class Astar {
 		// return true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean findSecurePath() throws StopRequestException {
 		ai.checkInterruption();
 		Node current = origin;
@@ -194,6 +211,12 @@ public final class Astar {
 		// return true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean findPathSurWall() throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -211,14 +234,13 @@ public final class Astar {
 		return current != null;
 		// return true;
 	}
-	
-	
-	
 
-
-
-
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Deque<Integer> getPath() throws StopRequestException {
 		ai.checkInterruption();
 		assert destination.parent != null

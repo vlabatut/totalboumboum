@@ -436,6 +436,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * La methode qui aligne des elements d'une liste
 	 * @param source
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public List<AiTile> aligner(List<AiTile> source) throws StopRequestException
@@ -659,6 +660,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	
 	/**
 	 * renvoie la case courante
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public AiTile getCurrentTile() throws StopRequestException {
 		checkInterruption();
@@ -766,6 +770,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * @param x
 	 * @param y
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean isRival(int x, int y) throws StopRequestException{
@@ -833,6 +838,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/****
 	 * La methode qui renvoi la dangerzone
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public DangerZone getDangerZone() throws StopRequestException {
@@ -853,6 +859,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/***********************************
 	 * La methode qui renvoie notre hero
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
