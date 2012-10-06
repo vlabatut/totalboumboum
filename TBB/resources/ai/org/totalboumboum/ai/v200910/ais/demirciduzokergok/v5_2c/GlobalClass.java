@@ -9,7 +9,7 @@ package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2c;
  */
 
 public class GlobalClass {
-
+	/** */
 	public static long globalData = 0;
 
 	}

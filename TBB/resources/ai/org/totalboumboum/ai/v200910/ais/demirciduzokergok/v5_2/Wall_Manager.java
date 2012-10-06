@@ -27,7 +27,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Wall_Manager{
 
-	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Wall_Manager(DemirciDuzokErgok ai) throws StopRequestException{
 	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -52,8 +56,10 @@ public class Wall_Manager{
 	 /**
 	  *  This method explains the direction to go if we didn't arrived the final case:
 	  Like in Escape Manger,here we control the security level of the neighbor cases too.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	  */
-	
 	public Direction direcition_updt_b() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -90,6 +96,11 @@ public class Wall_Manager{
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean canPass(){
 
 		int m=0;
@@ -111,8 +122,10 @@ public class Wall_Manager{
 	
 	/**
 	 * This method verifies that if we have enough space to escape if we place a bomb.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
 	public boolean canesc() throws StopRequestException{
 		esc=new Can_escape_Manager(ai);
 		boolean res=true;	
@@ -130,8 +143,10 @@ public class Wall_Manager{
 	/**
 	 * There may be obstacles like fire,walls or bombs on the path which we want to make the deplacement.
 	 * This method verifies it.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
 	public boolean checkPathValidity_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -149,9 +164,9 @@ public class Wall_Manager{
 	}
 	/**
 	 * Checks if we are on the path which we decided to make the movement.
+	 * @throws StopRequestException 
 	 *
 	 */
-
 	public void checkIsOnPath_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -170,10 +185,12 @@ public class Wall_Manager{
 		
 	}
 
-/**
- * Verifies if we arrived the final case or not:
- */
-
+	/**
+	 * Verifies if we arrived the final case or not:
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 */
 	public boolean hasArrived_b() throws StopRequestException {	
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -192,10 +209,6 @@ public class Wall_Manager{
 	
 	}
 	
-	
-	
-	
-	
 	return arrived_b;
 }
 
@@ -203,6 +216,7 @@ public class Wall_Manager{
 	
 	/**
 	 * Updates the cost:
+	 * @throws StopRequestException 
 	 */
 	public void updateCostCalculator_b() throws StopRequestException{
 
@@ -231,9 +245,8 @@ public class Wall_Manager{
 		
 /**
  * This method takes the path to make the movement using the astar algorithme.
+ * @throws StopRequestException 
  */
-	
-	
 	public void updatePath_b() throws StopRequestException {
 
 
@@ -253,8 +266,11 @@ public class Wall_Manager{
 	/**
 	 * The possible destinations to make the deplacement(Gets the positions of the safe cases neighbor
 	 * to the breakable walls)
+	 * @param tile 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-
 	public List<AiTile> destinations_possibles_b(AiTile tile) throws StopRequestException {
 
 
@@ -294,6 +310,10 @@ public class Wall_Manager{
 	}
 	
 	
+	/**
+	 * @return
+	 * 		?
+	 */
 	public boolean isdang(){
 		int stop=0;
 		boolean x=false;

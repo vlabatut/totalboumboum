@@ -40,7 +40,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Enemie_Manager {
 
-	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Enemie_Manager(DemirciDuzokErgok ai) throws StopRequestException{
 	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -67,10 +71,11 @@ public class Enemie_Manager {
 	/**
 	 * This method explains the direction to go if we didn't arrived the final case:
 	 * Like in Escape Manger,here we control the security level of the neighbor cases too.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 * 
 	 */
-	
-	
 	public Direction direcition_updt_b() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -118,9 +123,11 @@ public class Enemie_Manager {
 	/**
 	 *  There may be obstacles like fire,walls or bombs on the path which we want to make the deplacement.
 	 * This method verifies it.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 * 
 	 */
-		
 	public boolean checkPathValidity_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -140,9 +147,9 @@ public class Enemie_Manager {
 
 	/**
 	 * Checks if we are on the path which we decided to make the movement.
+	 * @throws StopRequestException 
 	 * 
 	 */
-	
 	public void checkIsOnPath_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -157,11 +164,13 @@ public class Enemie_Manager {
 	}
 
 	
-/**
- * Verifies if we arrived the destination case or not.(Here if we are 3 cases near the enemy,we 
- * suppose that we arrived because of the attacking strategie explained above.)
- */
-
+	/**
+	 * Verifies if we arrived the destination case or not.(Here if we are 3 cases near the enemy,we 
+	 * suppose that we arrived because of the attacking strategie explained above.)
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 */
 	public boolean hasArrived_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -200,6 +209,7 @@ public class Enemie_Manager {
 	 * This method verifies that if there are any danger levels on the path which we will make a 
 	 * movement to approch the enemie(like different danger levels,bombs and fire). If yes, we stop to make the movement.
 	 * @return
+	 * 		?
 	 */
 	public boolean canPass(){
 		int m=0;
@@ -221,6 +231,8 @@ public class Enemie_Manager {
 	
 	/**
 	 * Returns the lenght of the path.
+	 * @return
+	 * 		?
 	 * 
 	 */
 	public int getPathLength(){
@@ -231,9 +243,9 @@ public class Enemie_Manager {
 	
 	/**
 	 * Method for calculating the cost
+	 * @throws StopRequestException 
 	 *
 	 */
-	
 	public void updateCostCalculator_b() throws StopRequestException{
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -264,8 +276,8 @@ public class Enemie_Manager {
 	/**
 	 * 
 	 * This method takes the path to make the movement using the astar algorithme.
+	 * @throws StopRequestException 
 	 */
-	
 	public void updatePath_b() throws StopRequestException {
 
 
@@ -284,6 +296,8 @@ public class Enemie_Manager {
 	
 	/**
 	 * This method verifies if we can directly go to the enemie or not:
+	 * @return
+	 * 		?
 	 *
 	 */
 	public boolean accessiblePath(){
@@ -297,9 +311,10 @@ public class Enemie_Manager {
 	
 	/**
 	 * This method verifies that if we have enough space to escape if we place a bomb.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
-	
 	public boolean canesc() throws StopRequestException{
 		boolean res=false;
 		esc=new Can_escape_Manager(ai);
@@ -318,8 +333,11 @@ public class Enemie_Manager {
 	/**
 	 * The possible destinations to make the deplacement(Gets the positions of the enemies and puts
 	 * them into the list)
+	 * @param tile 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
 	public List<AiTile> destinations_possibles_b(AiTile tile) throws StopRequestException {
 
 

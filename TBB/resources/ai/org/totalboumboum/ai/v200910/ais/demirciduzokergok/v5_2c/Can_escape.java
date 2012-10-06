@@ -33,24 +33,37 @@ public class Can_escape {
 	private Collection<AiFire> fires;
 	private Collection<AiBomb> bombs;
 	
+	/** */
 	public int width;
+	/** */
 	public int height;
 	private int pos_x;
 	private int pos_y;
 	
+	/** */
 	public  double BONUS=-300;
+	/** */
 	public  double WALL=-10;
+	/** */
 	public double SAFE_CASE=-1000;
+	/** */
 	public  double FIRE= 1000000;
+	/** */
 	public  double BOMB=500000;
+	/** */
 	public double ENEMIE=0;
 	
 
-	
+	/** */
 	public double security_matrix[][];
 	ArtificialIntelligence ai;
 	
-	/* Constructeur of the Can_escape*/
+	/** Constructeur of the Can_escape
+	 * 
+	 * @param zone
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Can_escape(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -70,6 +83,10 @@ public class Can_escape {
 		Fill_The_Matrix();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void Fill_The_Matrix() throws StopRequestException {
 		ai.checkInterruption();
 		//First of all, we fill the matrce with safe cases.
@@ -304,7 +321,12 @@ public class Can_escape {
 	}
 	
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
 		return security_matrix;

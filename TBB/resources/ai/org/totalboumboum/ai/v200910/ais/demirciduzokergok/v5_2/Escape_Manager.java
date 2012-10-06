@@ -29,7 +29,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Escape_Manager {
 	
-	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Escape_Manager(DemirciDuzokErgok ai) throws StopRequestException{
 		
 	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -212,8 +216,10 @@ public class Escape_Manager {
 	/**
 	 * There may be obstacles like fire,walls or bombs on the path which we want to make the deplacement.
 	 * This method verifies it.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
 	public boolean checkPathValidity() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -228,10 +234,11 @@ public class Escape_Manager {
 		return result;
 	}
 
-/**
- * Checks if we are on the path which we decided to make the movement.
- *
- */
+	/**
+	 * Checks if we are on the path which we decided to make the movement.
+	 * @throws StopRequestException 
+	 *
+	 */
 	public void check_on_path() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 
@@ -249,11 +256,13 @@ public class Escape_Manager {
 
 
 	
-		/**
-		 * Method giving the answer that if we arrived the last coordinate of the path or not.
-		 *
-		 */
-	
+	/**
+	 * Method giving the answer that if we arrived the last coordinate of the path or not.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 *
+	 */
 	public boolean arrive_or_not() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -279,6 +288,7 @@ public class Escape_Manager {
 
 	/**
 	 * Mehtod for calculating the cost.
+	 * @throws StopRequestException 
 	 */
 	public void cost_calculator_updt() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -299,10 +309,11 @@ public class Escape_Manager {
 		
 	}
 
-/**
- * This method chooses the path to make the movement using the astar algorithme.
- * 
- */
+	/**
+	 * This method chooses the path to make the movement using the astar algorithme.
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public void path_init() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -312,9 +323,13 @@ public class Escape_Manager {
 		
 	}
 
-/**
- * This method is for collecting the possible destinations which we can make the movement.
- */
+	/**
+	 * This method is for collecting the possible destinations which we can make the movement.
+	 * @param tile 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 */
 	public List<AiTile> destinations_possibles(AiTile tile) throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		safe_map=new Safety_Map(zone);
