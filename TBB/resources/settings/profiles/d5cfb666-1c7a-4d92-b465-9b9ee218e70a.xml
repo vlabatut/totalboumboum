@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\statistics.xsd">
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -19,10 +19,9 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<includeQuickStarts value="false" />
-	<includeSimulations value="false" />
-	<glicko2 defaultRating="1500" defaultRatingDeviation="350" defaultRatingVolatility="0.06" gamesPerPeriod="5" />
-	<regularLaunch count="903" time="1290206184" />
-	<quickLaunch count="3" time="144" />
-</statistics>
+	<general name="1213.Sağlam+Seven" />
+	<ai name="saglamseven" pack="v201213" />
+	<character name="shirobon" packname="superbomberman4" color="WHITE" />
+	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />
+</profile>
 
