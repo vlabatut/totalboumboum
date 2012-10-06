@@ -30,6 +30,7 @@ public class FillingClass {
 	private final double NOUS = 9;
 	private final double FLAMME = 10;
 
+	/** */
 	public double matrice[][];
 
 	AvciGungor ai;
@@ -37,6 +38,11 @@ public class FillingClass {
 	AiZone gameZone;
 	private AiHero ourHero;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public FillingClass(AvciGungor ai) throws StopRequestException {
 		this.ai = ai;
 		gameZone = ai.getPercepts();
@@ -175,10 +181,25 @@ public class FillingClass {
 		}
 	}
 
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return matrice;
 	}
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isBonus(int i, int j) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -188,6 +209,15 @@ public class FillingClass {
 		
 		return resultat;
 	}
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isSafe(int i, int j) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -196,6 +226,15 @@ public class FillingClass {
 			resultat = true;
 		return resultat;
 	}
+	
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean iswall(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;

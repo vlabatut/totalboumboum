@@ -103,7 +103,12 @@ public class PerfectStrangers {
 		}
 	}
 	
-	//Butun matrisi doldurur
+	/** Butun matrisi doldurur
+	 * 
+	 * @param freeList
+	 * @param matrix
+	 * @throws StopRequestException
+	 */
 	public void putDistanceHero(List<AiTile> freeList, double[][] matrix) throws StopRequestException
 	{
 		bt.checkInterruption();
@@ -275,6 +280,7 @@ public class PerfectStrangers {
 	/**
 	 * Si on pose une bombe, notre hero peut trouve une/plusieurs case(s) sûre?
 	 * @param bomb
+	 * @param freeList 
 	 * @return boolean
 	 * @throws StopRequestException
 	 */	

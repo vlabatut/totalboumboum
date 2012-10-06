@@ -42,8 +42,11 @@ public class AvciGungor extends ArtificialIntelligence {
 	double matriceUpdate[][];
 	private AiZone gameZone;
 	private AiHero ourHero;
+	/** */
 	public CollecteClass collectC;
+	/** */
 	public AttackClass attackC;
+	/** */
 	public FillingClass fc;
 	AiOutput aio;
 	private AiHero targetHero;
@@ -107,6 +110,12 @@ public class AvciGungor extends ArtificialIntelligence {
 		path = astar.processShortestPath(getActualTile(),possibleDest);
 		tileDest = path.getLastTile();
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasArrived() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -120,12 +129,21 @@ public class AvciGungor extends ArtificialIntelligence {
 		}		
 		return arrived;
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getActualTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return ourHero.getTile();
 	}
-	// on met a jour la matrice
+	/** on met a jour la matrice
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateCollectMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -171,6 +189,14 @@ public class AvciGungor extends ArtificialIntelligence {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getCaseLevel(int i, int j) throws StopRequestException {
 		checkInterruption();
 		return (+1)*matriceUpdate[i][j];

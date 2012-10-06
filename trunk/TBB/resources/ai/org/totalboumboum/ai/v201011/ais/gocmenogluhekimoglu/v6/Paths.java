@@ -27,6 +27,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class Paths {
 	GocmenogluHekimoglu ai;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Paths(GocmenogluHekimoglu ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;

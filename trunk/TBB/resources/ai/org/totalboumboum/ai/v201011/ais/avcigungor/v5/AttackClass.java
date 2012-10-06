@@ -32,6 +32,11 @@ public class AttackClass {
 	private AiOutput aio;
 	 AiHero ourHero;
 	 private AvciGungor ai;
+	 /**
+	  * 
+	  * @param ai
+	  * @throws StopRequestException
+	  */
 	public AttackClass(AvciGungor ai)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -234,6 +239,12 @@ public class AttackClass {
 		fillingClass = new FillingClass(this.ai);
 		
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return matriceAttaque;

@@ -20,8 +20,14 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 @SuppressWarnings("deprecation")
 public class ActionManager {
 	GocmenogluHekimoglu ai;
+	/** */
 	public boolean force_collect_i;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public ActionManager(GocmenogluHekimoglu ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;

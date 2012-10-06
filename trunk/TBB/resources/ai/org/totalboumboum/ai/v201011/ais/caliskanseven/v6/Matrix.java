@@ -33,7 +33,8 @@ public class Matrix {
 	 * @param wwall this is the value of walls
 	 * @param closed unused
 	 * @param wclosed unused
-	 * @return
+	 * @return 
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public double[][] calculate(CaliskanSeven ai, int wfire, int wblast,

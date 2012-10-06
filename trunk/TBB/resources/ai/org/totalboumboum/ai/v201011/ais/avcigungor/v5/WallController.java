@@ -18,12 +18,20 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * @author Ibrahim Avcı
  * @author Burak Güngör
+ * 
+ * 
  */
 @SuppressWarnings("deprecation")
 public class WallController {
 
 		
 		private AiHero ourHero;
+		
+		/**
+		 * 
+		 * @param ai
+		 * @throws StopRequestException
+		 */
 		public WallController(AvciGungor ai) throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -66,6 +74,9 @@ public class WallController {
 		 * détermine si le personnage est arrivé dans la case de destination.
 		 * S'il n'y a pas de case de destination, on considère que le personnage
 		 * est arrivé.
+		 * @return 
+		 * 		?
+		 * @throws StopRequestException 
 		 */
 		public boolean hasArrived() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -172,6 +183,9 @@ public class WallController {
 		/** 
 		 * calcule la prochaine direction pour aller vers la destination 
 		 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+		 * @return 
+		 * 		?
+		 * @throws StopRequestException 
 		 * */
 		public Direction update() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -200,6 +214,12 @@ public class WallController {
 			return result;
 		}
 		
+		/**
+		 * 
+		 * @return 
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public AiPath getPath() throws StopRequestException{
 			ai.checkInterruption();
 			return path;
