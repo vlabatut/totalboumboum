@@ -27,11 +27,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class PathController
 {
-
-
 	/**
 	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
 	 * exprimée en pixels
+	 * @param ai 
+	 * @param x 
+	 * @param y 
+	 * @throws StopRequestException 
 	 */
 	public PathController(AldanmazYenigun ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -43,6 +45,9 @@ public class PathController
 	/**
 	 * crée un PathManager chargé d'amener le personnage au centre de la case
 	 * passée en paramètre
+	 * @param ai 
+	 * @param destination 
+	 * @throws StopRequestException 
 	 */
 	public PathController(AldanmazYenigun ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -89,6 +94,8 @@ public class PathController
 	 * modifie la case de destination du personnage,
 	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
+	 * @param destination 
+	 * @throws StopRequestException 
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -104,6 +111,9 @@ public class PathController
 	 * modifie les coordonnées de destination,
 	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
+	 * @param x 
+	 * @param y 
+	 * @throws StopRequestException 
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -119,6 +129,9 @@ public class PathController
 	
 	/**
 	 * détermine si le personnage est arrivé aux coordonnées de destination
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -222,6 +235,9 @@ public class PathController
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

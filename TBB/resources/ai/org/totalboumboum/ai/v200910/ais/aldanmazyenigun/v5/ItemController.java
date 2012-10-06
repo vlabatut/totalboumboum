@@ -26,6 +26,8 @@ public class ItemController {
 
 		/**
 		 * crée un ItemController chargé d'amener le personnage au centre de bonus
+		 * @param ai 
+		 * @throws StopRequestException 
 		 */
 		public ItemController(AldanmazYenigun ai) throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -70,6 +72,9 @@ public class ItemController {
 		 * détermine si le personnage est arrivé dans la case de destination.
 		 * S'il n'y a pas de case de destination, on considère que le personnage
 		 * est arrivé.
+	 * @return
+	 * 		?
+		 * @throws StopRequestException 
 		 */
 		public boolean hasArrived() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -174,7 +179,12 @@ public class ItemController {
 		
 		private boolean isBonusAccessible = true;
 		
-		
+		/**
+		 * 
+	 * @return
+	 * 		?
+		 * @throws StopRequestException
+		 */
 		public Direction update() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -207,6 +217,12 @@ public class ItemController {
 			return result;
 		}
 		
+		/**
+		 * 
+		 * @return
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public boolean isAccessible() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -237,10 +253,19 @@ public class ItemController {
 			return result;
 		}
 
+		/**
+		 * 
+		 * @param isBonusAccessible
+		 */
 		public void setBonusAccessible(boolean isBonusAccessible) {
 			this.isBonusAccessible = isBonusAccessible;
 		}
 
+		/**
+		 * 
+		 * @return
+		 * 		?
+		 */
 		public boolean isBonusAccessible() {
 			return isBonusAccessible;
 		}

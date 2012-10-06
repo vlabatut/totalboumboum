@@ -334,6 +334,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * renvoi le niveau de danger de la case
+	 * @param tile 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public double getDangerLevel(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -343,6 +347,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les cases surs
+	 * @param origin 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> findSafeTiles(AiTile origin)
 			throws StopRequestException {
@@ -368,6 +376,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les cases abstraites surs si on est en train de poser une bombe
+	 * @param origin 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> findAbstractSafeTiles(AiTile origin)
 			throws StopRequestException {
@@ -391,6 +403,9 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * s'il y a une case sur, c'est true.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean getThereIsSafeTile() throws StopRequestException {
 		checkInterruption();
@@ -399,6 +414,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les lieux des items
+	 * @param origin 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> findItemsTiles(AiTile origin)
 			throws StopRequestException {
@@ -423,6 +442,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les lieux des heros
+	 * @param origin 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> findHerosTiles(AiTile origin)
 			throws StopRequestException {
@@ -457,6 +480,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les lieux des murs
+	 * @param origin 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> findWallTiles(AiTile origin)
 			throws StopRequestException {
@@ -492,30 +519,60 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return ownHero;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiZone getZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return zone;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getActualTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return caseActuelle;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public SafetyZone getZoneFormee() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		return safetyZone;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;
@@ -593,25 +650,43 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		}
 	}
 
-
-
-
-
+	/**
+	 * 
+	 * @param accessible
+	 * @throws StopRequestException
+	 */
 	public void setAccessible(boolean accessible) throws StopRequestException {
 		checkInterruption(); 
 		this.bonusAccessible = accessible;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isBonusAccessible() throws StopRequestException {
 		checkInterruption(); 
 		return bonusAccessible;
 	}
 
+	/**
+	 * 
+	 * @param accessible
+	 * @throws StopRequestException
+	 */
 	public void setHeroAccessible(boolean accessible) throws StopRequestException {
 		checkInterruption(); 
 		this.heroAccessible = accessible;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isHeroAccessible() throws StopRequestException {
 		checkInterruption(); 
 		return heroAccessible;
@@ -622,7 +697,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	 * 
 	 * @throws StopRequestException
 	 */
-
 	private void chooseTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -683,6 +757,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getTargetHero() throws StopRequestException {
 		checkInterruption();
 		return targetHero;
