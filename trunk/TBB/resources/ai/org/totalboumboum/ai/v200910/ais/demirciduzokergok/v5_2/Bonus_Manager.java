@@ -29,7 +29,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Bonus_Manager {
 
-	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Bonus_Manager(DemirciDuzokErgok ai) throws StopRequestException{
 	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -54,9 +58,10 @@ public class Bonus_Manager {
 	
 	/**
 	 * Method for deplacement according to the path chosen.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
-	
 	public Direction direcition_updt_b() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -102,9 +107,10 @@ public class Bonus_Manager {
 	/**
 	 * There may be obstacles like fire,walls or bombs on the path which we want to make the deplacement.
 	 * This method verifies it.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-
-
 	public boolean checkPathValidity_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -124,9 +130,9 @@ public class Bonus_Manager {
 
 	/**
 	 * Checks if we are on the path which we decided to make the movement.
+	 * @throws StopRequestException 
 	 * 
 	 */
-	
 	public void checkIsOnPath_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -148,8 +154,10 @@ public class Bonus_Manager {
 
 	/**
 	 * Verifies if the bomberman arrived the last case of the path:
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
 	public boolean hasArrived_b() throws StopRequestException {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -196,8 +204,8 @@ public class Bonus_Manager {
 	
 	/**
 	 * Updates the cost:
+	 * @throws StopRequestException 
 	 */
-
 	public void updateCostCalculator_b() throws StopRequestException{
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -232,10 +240,8 @@ public class Bonus_Manager {
 	
 	/**
 	 * This method takes the path to make the movement using the astar algorithme.
+	 * @throws StopRequestException 
 	 */
-	
-	
-	
 	public void updatePath_b() throws StopRequestException {
 
 
@@ -255,8 +261,8 @@ public class Bonus_Manager {
 	/**
 	 * verifies if the path is accessible or not:
 	 * @return
+	 * 		?
 	 */
-	
 	public boolean accessiblePath(){
 		if(path_b.isEmpty()==false)
 			return true;
@@ -268,9 +274,11 @@ public class Bonus_Manager {
 	/**
 	 * The possible destinations to make the deplacement(Gets the positions of the bonus visible 
 	 * on the zone of the game)
+	 * @param tile 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
-	
-	
 	public List<AiTile> destinations_possibles_b(AiTile tile) throws StopRequestException {
 
 

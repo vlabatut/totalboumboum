@@ -34,28 +34,43 @@ public class Safety_Map {
 	private Collection<AiFire> fires;
 	private Collection<AiBomb> bombs;
 	
+	/** */
 	public int width;
+	/** */
 	public int height;
+	/** */
 	private int pos_x;
 	private int pos_y;
 	//Different exprimes for the cases possible. The more secured places will be
 	//exprimed with negative numbers and the dangerous cases will be exprimed with positive ones.
 	//enemies will be exprimed with zero.
+	/** */
 	public  double BONUS=-300;
+	/** */
 	public  double DEST_WALL=-50;
+	/** */
 	public  double INDEST_WALL=-10;
+	/** */
 	public double SAFE_CASE=-1000;
+	/** */
 	public  double FIRE= 1000000;
+	/** */
 	public  double BOMB=500000;
+	/** */
 	public double ENEMIE=0;
 	
 
 	//matrix stocking the danger levels:
+	/** */
 	public double security_matrix[][];
 	ArtificialIntelligence ai;
 	
-	/** Constructer of the class Safety_Map
-	 * @throws StopRequestException */
+	/** 
+	 * Constructer of the class Safety_Map
+	 * @param zone 
+	 * @param ai 
+	 * @throws StopRequestException 
+	 */
 	public Safety_Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -75,6 +90,10 @@ public class Safety_Map {
 		Fill_The_Matrix();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void Fill_The_Matrix() throws StopRequestException {
 		ai.checkInterruption();
 		//firstly we place all the matrice with SAFE_CASE:
@@ -300,7 +319,12 @@ public class Safety_Map {
 	}
 	
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
 		return security_matrix;

@@ -26,7 +26,11 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 @SuppressWarnings("deprecation")
 public class Can_escape_Manager {
 
-	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public Can_escape_Manager(DemirciDuzokErgok ai) throws StopRequestException{
 	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -51,7 +55,11 @@ public class Can_escape_Manager {
 	
 
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public int getPathLength(){
 		return path_b.getLength();		
 		
@@ -60,7 +68,10 @@ public class Can_escape_Manager {
 
 	
 	
-	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void updatePath_b() throws StopRequestException {
 
 
@@ -76,7 +87,13 @@ public class Can_escape_Manager {
 		
 	}
 
-	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> destinations_possibles_b(AiTile tile) throws StopRequestException {
 
 
