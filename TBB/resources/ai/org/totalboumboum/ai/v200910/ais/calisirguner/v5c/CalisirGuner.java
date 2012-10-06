@@ -127,7 +127,10 @@ public class CalisirGuner extends ArtificialIntelligence {
 		}
 		return result;
 	}
-// si qqn est proche de nous un max de 2 cases nous faisons nos controles et meetons un bombe
+	/** si qqn est proche de nous un max de 2 cases nous faisons nos controles et meetons un bombe
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void attaque1() throws StopRequestException {
 		checkInterruption();
 

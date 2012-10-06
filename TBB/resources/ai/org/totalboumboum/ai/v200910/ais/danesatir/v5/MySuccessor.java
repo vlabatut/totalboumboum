@@ -24,14 +24,26 @@ public class MySuccessor extends SuccessorCalculator{
 	private DaneSatir ai;
 	private TimeMatrice time;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	public MySuccessor(DaneSatir ai,TimeMatrice time) throws StopRequestException {
 		this.ai=ai;
 		this.time=time;
 	}
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public MySuccessor(DaneSatir ai) throws StopRequestException {
 		this(ai,new TimeMatrice(ai));
 	}
+	
 	/**
 	 * Expand current tile neighbors and check time with Depth
 	 */

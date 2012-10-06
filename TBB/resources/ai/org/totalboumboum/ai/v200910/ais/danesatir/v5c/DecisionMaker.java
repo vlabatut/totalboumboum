@@ -23,6 +23,11 @@ public class DecisionMaker {
 	private State state;
 	private TimeMatrice time;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public DecisionMaker(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
@@ -99,34 +104,67 @@ public class DecisionMaker {
 			return true;
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public State getState() throws StopRequestException {
 		ai.checkInterruption();
 		return state;
 	}
 
+	/**
+	 * 
+	 * @param state
+	 * @throws StopRequestException
+	 */
 	public void setState(State state) throws StopRequestException {
 		ai.checkInterruption();
 		this.state = state;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public TimeMatrice getTime() throws StopRequestException {
 		ai.checkInterruption();
 		setTime(new TimeMatrice(ai));
 		return time;
 	}
 
+	/**
+	 * 
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	private void setTime(TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
 		this.time = time;
 	}
+	
+	/**
+	 * 
+	 * @param bomb
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean canWeEscape(AiBomb bomb) throws StopRequestException {
 		ai.checkInterruption();
 		return canWeEscape(bomb.getTile());
 	}
+	
 	/**
 	 * check we can escape, if we put bomb
 	 * @param bomb
-	 * @return 
+	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public boolean canWeEscape(AiTile bomb) throws StopRequestException {

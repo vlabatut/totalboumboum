@@ -17,15 +17,26 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class GeneralFuncs {
+	/**
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @param ai
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public static boolean tileCompare(AiTile tile1,AiTile tile2,ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		if (tile1.getCol() == tile2.getCol() && tile1.getLine() == tile2.getLine())
 			return true;
 		return false;
 	}
+	
 	/**
 	 * Print Bomb List
 	 * @param bombs
+	 * @param ai 
 	 * @throws StopRequestException 
 	 */
 	public static void printBombs(List<AiBomb> bombs,ArtificialIntelligence ai) throws StopRequestException {
@@ -42,6 +53,7 @@ public class GeneralFuncs {
 	 * @param line
 	 * @param col
 	 * @param matrice
+	 * @param ai 
 	 * @throws StopRequestException 
 	 */
 	public static void printMatrice(int line, int col, double[][] matrice,ArtificialIntelligence ai) throws StopRequestException {
@@ -56,11 +68,27 @@ public class GeneralFuncs {
 			System.out.println("");
 		}
 	}
+	
+	/**
+	 * 
+	 * @param ai
+	 * @param str
+	 * @param v
+	 * @throws StopRequestException
+	 */
 	public static void printLog(DaneSatir ai,String str,VerboseLevel v) throws StopRequestException {
 		ai.checkInterruption();
 		//printLog(ai.getPercepts().getTotalTime()+str,v);
 		printLog(str,v,ai);
 	}
+	
+	/**
+	 * 
+	 * @param str
+	 * @param v
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public static void printLog(String str,VerboseLevel v,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		if(Limits.verbose==true && Limits.verboseLevel == v || v == VerboseLevel.ALWAYS)

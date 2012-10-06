@@ -31,6 +31,11 @@ public class TimeMatrice {
 	private List<AiBomb> bombs;
 	private DaneSatir ai;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TimeMatrice(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
@@ -43,12 +48,21 @@ public class TimeMatrice {
 		return;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void sortBombes() throws StopRequestException {
 		ai.checkInterruption();
 		Collections.sort(this.bombs,new BombComparator(ai));
 //		GeneralFuncs.printBombs(bombs);
 	}
 	
+	/**
+	 * 
+	 * @param bombes
+	 * @throws StopRequestException
+	 */
 	public void createMatrice(List<AiBomb> bombes) throws StopRequestException {
 		ai.checkInterruption();
 		for(AiBomb i : bombes ) {
@@ -57,6 +71,11 @@ public class TimeMatrice {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @throws StopRequestException
+	 */
 	public void virExpandBomb(AiTile tile) throws StopRequestException{
 		ai.checkInterruption();
 		double duration = Limits.bombDuration;
@@ -120,11 +139,24 @@ public class TimeMatrice {
 		}
 	}
 
+	/**
+	 * 
+	 * @param a
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getTime(AiTile a) throws StopRequestException {
 		ai.checkInterruption();
 		return this.matrice[a.getLine()][a.getCol()];
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getTime() throws StopRequestException {
 		ai.checkInterruption();
 		AiHero hero = zone.getOwnHero();
@@ -132,11 +164,25 @@ public class TimeMatrice {
 		return getTime(tile);
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param duration
+	 * @throws StopRequestException
+	 */
 	public void setTime(AiTile a, double duration) throws StopRequestException {
 		ai.checkInterruption();
 		this.matrice[a.getLine()][a.getCol()] = duration;
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param justZero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile mostSafeCase(AiTile a, boolean justZero) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
@@ -167,17 +213,39 @@ public class TimeMatrice {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile mostSafeCase() throws StopRequestException {
 		ai.checkInterruption();
 		AiHero hero = zone.getOwnHero();
 		AiTile tile = hero.getTile();
 		return mostSafeCase(tile);
 	}
+	
+	/**
+	 * 
+	 * @param a
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile mostSafeCase(AiTile a) throws StopRequestException {
 		ai.checkInterruption();
 		return mostSafeCase(a,false);
 	}
 	
+	/**
+	 * 
+	 * @param a1
+	 * @param a2
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isSaferThan(AiTile a1, AiTile a2) throws StopRequestException {
 		ai.checkInterruption();
 		double dur1=getTime(a1);
@@ -191,6 +259,14 @@ public class TimeMatrice {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param bomb
+	 * @param ai
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public static double getTimeToExplode(AiBomb bomb,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		// make more accurate
@@ -202,6 +278,15 @@ public class TimeMatrice {
 		return bomb.getNormalDuration() - bomb.getTime();
 	}
 	
+	/**
+	 * 
+	 * @param time
+	 * @param a
+	 * @param ai
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public static boolean isSafe(TimeMatrice time,AiTile a,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		double dur = time.getTime(a);

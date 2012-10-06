@@ -21,6 +21,11 @@ public class WallCost extends CostCalculator {
 
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public WallCost(ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
 		this.ai = ai;

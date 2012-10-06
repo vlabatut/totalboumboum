@@ -25,6 +25,11 @@ public class WallSuccessor extends BasicSuccessorCalculator {
 	private DaneSatir ai;
 	private TimeMatrice time;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public WallSuccessor(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;

@@ -37,7 +37,9 @@ public class Map {
 	private Collection<AiBlock> blocks;
 	private Collection<AiItem> objets;
 	private Collection<AiFire> feu;
+	/** */
 	public int width;
+	/** */
 	public int height;
 
 	private int xadversaire, yadversaire;
@@ -46,6 +48,12 @@ public class Map {
 	private int risque[][];
 	private int murs[][];
 
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public Map(AiZone zone, CalisirGuner source) throws StopRequestException {
 		source.checkInterruption();
 		this.map = zone;
@@ -256,6 +264,10 @@ public class Map {
 
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void getbombs() throws StopRequestException {
 		source.checkInterruption();
 		Iterator<AiBomb> itbo = bombes.iterator();
@@ -275,6 +287,10 @@ public class Map {
 		}
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void getfires() throws StopRequestException {
 		source.checkInterruption();
 		Iterator<AiFire> itfeu = feu.iterator();
@@ -295,10 +311,13 @@ public class Map {
 	/**
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
+	 * @param x1 
+	 * @param y1 
+	 * @param range 
+	 * @param bo 
 	 * 
 	 * @throws StopRequestException
 	 */
-
 	public void setbombeposs(int x1, int y1, int range, boolean bo)
 			throws StopRequestException {
 		source.checkInterruption();
@@ -387,7 +406,12 @@ public class Map {
 
 	}
 
-	// ,l envoie la matrice de map
+	/** ,l envoie la matrice de map
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Etat[][] returnMatrix() throws StopRequestException {
 		source.checkInterruption();
 		return matrix;
@@ -404,6 +428,12 @@ public class Map {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public String risquetoString() throws StopRequestException {
 		source.checkInterruption();
 		String result = "";
@@ -420,6 +450,12 @@ public class Map {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public String actoString() throws StopRequestException {
 		source.checkInterruption();
 		String result = "";
@@ -435,6 +471,12 @@ public class Map {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public String murstoString() throws StopRequestException {
 		source.checkInterruption();
 		String result = "";
@@ -450,6 +492,14 @@ public class Map {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isWalkable(int x1, int y1) throws StopRequestException {
 		source.checkInterruption();
 		boolean resultat = false;
@@ -460,7 +510,15 @@ public class Map {
 
 		return resultat;
 	}
-//pour voir si on peut acceder a un adversaire en explosant les murs
+	
+	/** pour voir si on peut acceder a un adversaire en explosant les murs
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isReachable(int x1, int y1) throws StopRequestException {
 		source.checkInterruption();
 		boolean resultat = false;

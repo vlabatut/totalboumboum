@@ -37,6 +37,12 @@ public class PathFinder {
 		this(ai,ai.getOwnHero(),time);
 	}
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param hero
+	 * @param time
+	 */
 	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) {
 		this.ai=ai;
 		this.hero=hero;
@@ -46,6 +52,12 @@ public class PathFinder {
 		this.updateTimeMatrice(time);
 	}
 	
+	/**
+	 * 
+	 * @param target
+	 * @throws StopRequestException
+	 * @throws NoWayException
+	 */
 	public void calculPath(AiTile target) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
 		List<AiTile> targets = new ArrayList<AiTile>();
@@ -78,15 +90,25 @@ public class PathFinder {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiPath getPath() {
 		return path;
 	}
+	
+	/**
+	 * 
+	 */
 	public void clearPath() {
 		this.path=null;
 	}
 	/**
 	 * Get NextTile and check on arrive and other situations
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 * @throws PathOverException
 	 * @throws NoWayException
@@ -144,20 +166,40 @@ public class PathFinder {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param targetTile
+	 * @return
+	 * 		?
+	 */
 	public boolean isTarget(AiTile targetTile) {
 		if (this.targetList == null)
 			return false;
 		return this.targetList.contains(targetTile);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean isArrive() {
 		return this.isTarget(this.hero.getTile());
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public List<AiTile> getTargets() {
 		return this.targetList;
 	}
 
+	/**
+	 * 
+	 * @param time
+	 */
 	public void updateTimeMatrice(TimeMatrice time) {
 		this.time = time;
 	}
