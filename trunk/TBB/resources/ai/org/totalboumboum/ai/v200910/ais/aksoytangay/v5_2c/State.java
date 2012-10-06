@@ -11,6 +11,26 @@ package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2c;
  *
  */
 public enum State
-{	
-	SURE, EXTRA_BOMBE, EXTRA_FLAMME, MALUS, INDESTRUCTIBLE, DESTRUCTIBLE, ADVERSAIRE, FLAMME, DANGER, SEVERALDANGERS, BOMBE;
+{	/** */
+	SURE,
+	/** */
+	EXTRA_BOMBE, 
+	/** */
+	EXTRA_FLAMME, 
+	/** */
+	MALUS, 
+	/** */
+	INDESTRUCTIBLE, 
+	/** */
+	DESTRUCTIBLE, 
+	/** */
+	ADVERSAIRE, 
+	/** */
+	FLAMME, 
+	/** */
+	DANGER, 
+	/** */
+	SEVERALDANGERS, 
+	/** */
+	BOMBE;
 }

@@ -41,7 +41,9 @@ public class Zone {
 	private Collection<AiItem> items;
 	
 	//variables des taille de la zone
+	/** */
 	public int width;
+	/** */
 	public int height;
 	
 	//variable qu'on va remplir avec les collections
@@ -50,7 +52,8 @@ public class Zone {
 	/**
 	 * La methode constructeur.
 	 * 
-	 * @param zone: Aizone
+	 * @param zone Aizone
+	 * @param myAI 
 	 * 
 	 * @throws StopRequestException
 	 */
@@ -188,6 +191,8 @@ public class Zone {
 	
 	/**
 	 * La methode qui renvoie la matrice d'état.
+	 * @return
+	 * 		?
 	 * 
 	 * @throws StopRequestException
 	 */
@@ -197,6 +202,11 @@ public class Zone {
 		return matrix;
 	}
 	
+	/**
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public State[][] updateMatrix() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -207,18 +217,37 @@ public class Zone {
 		return matrix;
 	}
 	
+	/**
+	 * 
+	 * @param zone
+	 */
 	public void setZone(AiZone zone) {
 		this.zone = zone;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiZone getZone() {
 		return zone;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Collection<AiBomb> getBombs() {
 		return bombs;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Collection<AiItem> getItems() {
 		return items;
 	}
