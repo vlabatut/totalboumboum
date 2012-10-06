@@ -24,7 +24,7 @@ public class EscapeManager {
 	private AksoyTangay myAI; 
 	
 	private PathManager pathManager;
-	
+	/** */
 	public AiPath path = null;
 	
 	private AiTile currentTile;
@@ -34,7 +34,13 @@ public class EscapeManager {
 	private AiZone percepts;
 	
 	
-	
+	/**
+	 * 
+	 * @param myAI
+	 * @param percepts
+	 * @param pathManager
+	 * @throws StopRequestException
+	 */
 	public EscapeManager(AksoyTangay myAI, AiZone percepts, PathManager pathManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -48,6 +54,12 @@ public class EscapeManager {
 		lastTile = path.getLastTile();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction getDirectionToEscape() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -113,6 +125,12 @@ public class EscapeManager {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -127,6 +145,12 @@ public class EscapeManager {
 				
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
 		myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -146,6 +170,11 @@ public class EscapeManager {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiTile getCurrentTile() {
 		return myAI.getOwnHero().getTile();
 	}

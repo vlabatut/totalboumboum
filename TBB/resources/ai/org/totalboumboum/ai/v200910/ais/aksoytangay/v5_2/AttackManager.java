@@ -35,73 +35,116 @@ public class AttackManager {
 	private AiTile currentTile;
 	
 	private AiTile lastTile;
-	
+	/** */
 	public AiTile firstTile;
-	
+	/** */
 	public AiTile secondTile;
-	
+	/** */
 	public AiTile thirdTile;
-	
+	/** */
 	public AiTile normalAttackTile = null;
 			
 	private AiZone percepts;
 	
 	private Zone zone;
-	
+	/** */
 	public List<AiBomb> bombs;
-	
+	/** */
 	public AiTile whichTileToDropBomb = null;
-	
+	/** */
 	public AiTile first;
-	
+	/** */
 	public AiTile second;
-	
+	/** */
 	public AiTile third;
-	
+	/** */
 	public AiHero heroToAttack = null;
-	
+	/** */
 	public AiTile heroToAttackTile = null;
-	
+	/** */
 	public List<AiTile> heroNeighborTiles;
-	
+	/** */
 	public AttackType attackType;
 	
 	
 	
 	
-
+	/**
+	 *  
+	 * @return
+	 * 		?
+	 */
 	public AiTile getHeroToAttackTile() {
 		return heroToAttackTile;
 	}
 
+	/**
+	 * 
+	 * @param heroToAttackTile
+	 */
 	public void setHeroToAttackTile(AiTile heroToAttackTile) {
 		this.heroToAttackTile = heroToAttackTile;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiHero getHeroToAttack() {
 		return heroToAttack;
 	}
 
+	/**
+	 * 
+	 * @param heroToAttack
+	 */
 	public void setHeroToAttack(AiHero heroToAttack) {
 		this.heroToAttack = heroToAttack;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiTile getNormalAttackTile() {
 		return normalAttackTile;
 	}
 
+	/**
+	 * 
+	 * @param normalAttackTile
+	 */
 	public void setNormalAttackTile(AiTile normalAttackTile) {
 		this.normalAttackTile = normalAttackTile;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiTile getWhichTileToDropBomb() {
 		return whichTileToDropBomb;
 	}
 
+	/**
+	 * 
+	 * @param whichTileToDropBomb
+	 */
 	public void setWhichTileToDropBomb(AiTile whichTileToDropBomb) {
 		this.whichTileToDropBomb = whichTileToDropBomb;
 	}
 
+	/**
+	 * 
+	 * @param myAI
+	 * @param percepts
+	 * @param zone
+	 * @param pathManager
+	 * @throws StopRequestException
+	 */
 	public AttackManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -115,6 +158,16 @@ public class AttackManager {
 		System.out.println("saldrcak adam : "+heroToAttack.toString());
 	}
 	
+	/**
+	 * 
+	 * @param myAI
+	 * @param percepts
+	 * @param zone
+	 * @param pathManager
+	 * @param attackType
+	 * @param nat
+	 * @throws StopRequestException
+	 */
 	public AttackManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager, AttackType attackType, AiTile nat) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -143,6 +196,12 @@ public class AttackManager {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getHeroToAttackFonx() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -203,7 +262,12 @@ public class AttackManager {
 	}
 	
 	
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction gettingAttackDirection() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -229,6 +293,13 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param whichTileToDropBomb
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction endShootDirection(AiTile whichTileToDropBomb) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -264,7 +335,14 @@ public class AttackManager {
 			
 	}
 	
-	
+	/**
+	 * 
+	 * @param ownTile
+	 * @param heroTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction normalAttack(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -370,7 +448,14 @@ public class AttackManager {
 	
 	
 	
-	//pour les  coins
+	/** pour les  coins
+	 * 
+	 * @param ownTile
+	 * @param heroTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction lTypeAttackWithTwoOrThreeBombs(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -612,6 +697,13 @@ public class AttackManager {
 		
 	}
 	
+	/**
+	 * 
+	 * @param first
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction goThere(AiTile first) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -644,6 +736,15 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param first
+	 * @param second
+	 * @param third
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction dropThreeBomb(AiTile first, AiTile second, AiTile third) throws StopRequestException
  	{
 		myAI.checkInterruption();
@@ -658,6 +759,14 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param first
+	 * @param third
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction dropTwoBomb(AiTile first, AiTile third) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -677,7 +786,12 @@ public class AttackManager {
 	
 	
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AttackType attackTypeDefiner() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -690,8 +804,12 @@ public class AttackManager {
 		return attackType;
 	}
 	
-	///gerer le chemin    ////////////
-	
+	/** gerer le chemin    ////////////
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -706,6 +824,12 @@ public class AttackManager {
 				
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean finishedOnePartOfPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -715,6 +839,12 @@ public class AttackManager {
 		return((currentTile == firstTile)||(currentTile == secondTile)||(currentTile == thirdTile)||(currentTile == normalAttackTile));
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
 		myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -750,6 +880,12 @@ public class AttackManager {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTherePath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -757,6 +893,14 @@ public class AttackManager {
 		return(path!=null);
 	}
 	
+	/**
+	 * 
+	 * @param startTile
+	 * @param finishTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("null")
 	public boolean isDangereousPath(AiTile startTile, AiTile finishTile) throws StopRequestException
 	{
@@ -820,6 +964,12 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isDangerToAttack() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -875,6 +1025,13 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isDangerAtLine(AiTile tile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -915,6 +1072,13 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isDangerAtCol(AiTile tile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -955,6 +1119,14 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param startTile
+	 * @param finishTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int tilesSizeBetweenTwoTiles(AiTile startTile, AiTile finishTile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -1002,6 +1174,14 @@ public class AttackManager {
 		return tiles.size();
 	}
 	
+	/**
+	 * 
+	 * @param ownTile
+	 * @param heroTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile mirrorTile(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
 AttackType attackType = AttackType.NONE;
@@ -1062,6 +1242,12 @@ AttackType attackType = AttackType.NONE;
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	//on regard si l'ennemi a change sa position
 	public boolean placeChanged() throws StopRequestException
 	{
@@ -1073,6 +1259,13 @@ AttackType attackType = AttackType.NONE;
 		
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isAtCorner(AiTile tile) throws StopRequestException
 	{
 		boolean result = false;

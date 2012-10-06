@@ -43,7 +43,15 @@ public class StrategyManager {
 	
 	List<AiBomb> bombs;
 		
-	
+	/**
+	 * 
+	 * @param myAI
+	 * @param percepts
+	 * @param zone
+	 * @param pathManager
+	 * @param escapeManager
+	 * @throws StopRequestException
+	 */
 	public StrategyManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager, EscapeManager escapeManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -58,11 +66,14 @@ public class StrategyManager {
 	}
 	
 	//////////////////////Defans staratejileri            ///////////////////////////////////////////////
-	/*
+	/**
 	 * cette fonx retourn vrai si plusieurs bombe nous menace avec le type t, 
 	 * sinon(si le type de menace est I) elle renvoi faux
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
 	 */
-	
 	public Direction typeDefiningAndGettingDirection() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -141,7 +152,12 @@ public class StrategyManager {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiBomb> bombsMenaceMe() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -191,7 +207,13 @@ public class StrategyManager {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param bombs
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile iTypeEscape(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -222,6 +244,13 @@ public class StrategyManager {
 		return tTypeEscapeTile;		
 	}
 	
+	/**
+	 * 
+	 * @param bombs
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile tTypeEscape(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -278,7 +307,12 @@ public class StrategyManager {
 		return tTypeEscapeTile;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile tTypeEscapeWithOneNeighbor() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -334,6 +368,13 @@ public class StrategyManager {
 		return tTypeEscapeTile;
 	}
 	
+	/**
+	 * 
+	 * @param bombs
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile escapeFromOneOfBomb(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -454,7 +495,13 @@ public class StrategyManager {
 		return result;
 	}
 	
-	
+	/**
+	 * 
+	 * @param bombs
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean bombeHasExplosed(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -464,6 +511,12 @@ public class StrategyManager {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiBomb> getBombs() throws StopRequestException {
 		myAI.checkInterruption();
 		return bombs;
@@ -471,6 +524,12 @@ public class StrategyManager {
 	
 	
 	//////////////////////BONUSSSSSS staratejileri            ///////////////////////////////////////////////
+	/**
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public boolean hasExplosed() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -514,7 +573,12 @@ public class StrategyManager {
 	//////////////////////GENERALLLLL            ///////////////////////////////////////////////
 	
 	
-
+	/**
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public boolean finishedTTypeEscape() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -525,6 +589,12 @@ public class StrategyManager {
 		return (tTypeEscapeTile == currentTile);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();

@@ -40,8 +40,9 @@ public class Zone {
 	private Collection<AiBlock> blocks;
 	private Collection<AiItem> items;
 	
-	//variables des taille de la zone
+	/** variables des taille de la zone */
 	public int width;
+	/** */
 	public int height;
 	
 	//variable qu'on va remplir avec les collections
@@ -50,7 +51,8 @@ public class Zone {
 	/**
 	 * La methode constructeur.
 	 * 
-	 * @param zone: Aizone
+	 * @param zone Aizone
+	 * @param myAI 
 	 * 
 	 * @throws StopRequestException
 	 */
@@ -188,6 +190,8 @@ public class Zone {
 	
 	/**
 	 * La methode qui renvoie la matrice d'état.
+	 * @return
+	 * 		?
 	 * 
 	 * @throws StopRequestException
 	 */
@@ -197,6 +201,12 @@ public class Zone {
 		return matrix;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public State[][] updateMatrix() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -207,21 +217,44 @@ public class Zone {
 		return matrix;
 	}
 	
+	/**
+	 * 
+	 * @param zone
+	 * @throws StopRequestException
+	 */
 	public void setZone(AiZone zone) throws StopRequestException {
 		myAI.checkInterruption();
 		this.zone = zone;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiZone getZone() throws StopRequestException {
 		myAI.checkInterruption();
 		return zone;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Collection<AiBomb> getBombs() throws StopRequestException {
 		myAI.checkInterruption();
 		return bombs;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Collection<AiItem> getItems() throws StopRequestException {
 		myAI.checkInterruption();
 		return items;
