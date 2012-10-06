@@ -54,6 +54,15 @@ public class PathManager
 	/**
 	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
 	 * exprimée en pixels
+	 * 
+	 * @param ai 
+	 * 		Agent à traiter.
+	 * @param x 
+	 * 		Abscisse.
+	 * @param y 
+	 * 		Ordonnée.
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public PathManager(Suiveur ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -65,6 +74,13 @@ public class PathManager
 	/**
 	 * crée un PathManager chargé d'amener le personnage au centre de la case
 	 * passée en paramètre
+	 * 
+	 * @param ai 
+	 * 		Agent à traiter.
+	 * @param destination 
+	 * 		Case de destination.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public PathManager(Suiveur ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -111,6 +127,11 @@ public class PathManager
 	 * modifie la case de destination du personnage,
 	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
+	 * 
+	 * @param destination 
+	 * 		Case de destination.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -126,6 +147,13 @@ public class PathManager
 	 * modifie les coordonnées de destination,
 	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
+	 * 
+	 * @param x
+	 * 		Abscisse en pixels. 
+	 * @param y 
+	 * 		Ordonnée en pixels.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -162,6 +190,11 @@ public class PathManager
 */
 	/**
 	 * détermine si le personnage est arrivé aux coordonnées de destination
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'agent est arrivé à destination. 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -295,6 +328,11 @@ public class PathManager
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+	 *
+	 * @return
+	 * 		La direction à suivre. 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

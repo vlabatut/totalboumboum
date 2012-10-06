@@ -52,6 +52,11 @@ public class AiEscape
 	private static AiTile CURRENT_TILE;
 	private AiPath path;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public AiEscape(AdatepeOzbek ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -379,6 +384,13 @@ public class AiEscape
 		}
 	}
 
+	/**
+	 * 
+	 * @param hero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isHeroInRange(AiHero hero) throws StopRequestException
 	{ownAi.checkInterruption();
 	
@@ -410,6 +422,12 @@ public class AiEscape
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isHeroInRange() throws StopRequestException
 	{ownAi.checkInterruption();
 		int range = OWN_HERO.getBombRange();
@@ -443,6 +461,12 @@ public class AiEscape
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean enoughArmed() throws StopRequestException
 	{ownAi.checkInterruption();
 		if(OWN_HERO.getBombNumber() >= 5 && OWN_HERO.getBombRange() >= 5)
@@ -451,6 +475,13 @@ public class AiEscape
 			return false;		
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getHeroByType(EnemyTypes type) throws StopRequestException
 	{ownAi.checkInterruption();
 		for(int j=0; j<ownAi.enemies.size(); j++)
@@ -464,6 +495,13 @@ public class AiEscape
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param hero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public EnemyTypes getHeroType(AiHero hero) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -478,6 +516,13 @@ public class AiEscape
 		return EnemyTypes.UNKNOWN;
 	}
 	
+	/**
+	 * 
+	 * @param hero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Enemy getEnemy(AiHero hero) throws StopRequestException
 	{ownAi.checkInterruption();
 		for(int j=0; j<ownAi.enemies.size(); j++)
@@ -492,6 +537,10 @@ public class AiEscape
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void updatePath() throws StopRequestException
 	{ownAi.checkInterruption();
 		if(path == null)
@@ -504,6 +553,11 @@ public class AiEscape
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void evaluateOpposites() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -586,6 +640,12 @@ public class AiEscape
 			}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getCloserHero() throws StopRequestException
 	{ownAi.checkInterruption();
 		double minDist = Double.MAX_VALUE;
@@ -608,6 +668,13 @@ public class AiEscape
 		
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double stuckCheck(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -639,6 +706,12 @@ public class AiEscape
 			return NOT_SAFE;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean stuckAlgorithm() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -692,6 +765,10 @@ public class AiEscape
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void initArrays() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -705,6 +782,10 @@ public class AiEscape
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void updateCostArray() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -718,12 +799,25 @@ public class AiEscape
 		}
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTileSafe(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
 		return safeArray[tile.getLine()][tile.getCol()] >= STUCK;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getShortestSafeTile() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -756,6 +850,12 @@ public class AiEscape
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getLongestSafeTile() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -778,6 +878,12 @@ public class AiEscape
 		return maxTile;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath findPathToGo() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -801,6 +907,12 @@ public class AiEscape
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getSafeTiles() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -820,6 +932,13 @@ public class AiEscape
 		return safeTiles;
 	}
 	
+	/**
+	 * 
+	 * @param from
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] copyTiles(double[][] from) throws StopRequestException
 	{	ownAi.checkInterruption();
 		double[][] to = new double[zone.getHeight()][zone.getWidth()];
@@ -834,6 +953,12 @@ public class AiEscape
 		return to;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile findStuckTile() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -886,6 +1011,10 @@ public class AiEscape
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void printTiles() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -900,6 +1029,11 @@ public class AiEscape
 		}
 	}
 	
+	/**
+	 * 
+	 * @param matrice
+	 * @throws StopRequestException
+	 */
 	public void printTiles(double matrice[][]) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -914,6 +1048,12 @@ public class AiEscape
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean canTheyReachMe() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -941,6 +1081,13 @@ public class AiEscape
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param hero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean canHeReachMe(AiHero hero) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -955,6 +1102,12 @@ public class AiEscape
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isThereBonusInTheTable() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -965,6 +1118,12 @@ public class AiEscape
 			return false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean canIEscapeIfIBomb() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1085,6 +1244,13 @@ public class AiEscape
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param hero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isPlayerStuck(AiHero hero) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1104,6 +1270,13 @@ public class AiEscape
 			return true;
 	}
 	
+	/**
+	 * 
+	 * @param len
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath getReachableBonusInArea(int len) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1142,6 +1315,12 @@ public class AiEscape
 		return minItemPath;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiBlock getDestBlockInMyRange() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1188,6 +1367,12 @@ public class AiEscape
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean goToShortestDestBlock() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1259,6 +1444,13 @@ public class AiEscape
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param tileToGo
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath calculateNewPath(AiTile tileToGo) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1278,6 +1470,13 @@ public class AiEscape
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean checkNextTileIsCrossable(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1287,6 +1486,12 @@ public class AiEscape
 			return true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean calculateNewPath() throws StopRequestException
 	{
 		ownAi.checkInterruption();

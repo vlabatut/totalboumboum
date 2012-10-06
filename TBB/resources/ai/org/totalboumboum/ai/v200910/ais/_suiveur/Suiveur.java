@@ -126,7 +126,11 @@ public class Suiveur extends ArtificialIntelligence
 	private SafetyManager safetyManager = null;
 
 	/**
-	 * renvoie le gestionnaire de sécurité
+	 * renvoie le gestionnaire de sécurité.
+	 * @return 
+	 * 		Gestionnaire de sécurité.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public SafetyManager getSafetyManager() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -136,6 +140,12 @@ public class Suiveur extends ArtificialIntelligence
 	
 	/**
 	 * renvoie le niveau de sécurité de la case passée en paramètre
+	 * @param tile
+	 * 		Case à traiter. 
+	 * @return 
+	 * 		Le niveau de sécurité.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -145,6 +155,12 @@ public class Suiveur extends ArtificialIntelligence
 	
 	/**
 	 * détermine si la case passée en paramètre est sûre
+	 * @param tile 
+	 * 		Case à traiter.
+	 * @return
+	 * 		{@code true} ssi la case est sûre. 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -160,6 +176,10 @@ public class Suiveur extends ArtificialIntelligence
 
 	/**
 	 * renvoie la case courante
+	 * @return 
+	 * 		Case courante.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public AiTile getCurrentTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -177,6 +197,10 @@ public class Suiveur extends ArtificialIntelligence
 
 	/**
 	 * renvoie l'abscisse courante (en pixels)
+	 * @return 
+	 * 		Abscisse courante.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public double getCurrentX() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -186,6 +210,10 @@ public class Suiveur extends ArtificialIntelligence
 	
 	/**
 	 * renvoie l'ordonnée courante (en pixels)
+	 * @return
+	 *  		Ordonnée courante.
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -210,6 +238,9 @@ public class Suiveur extends ArtificialIntelligence
 
 	/**
 	 * renvoie le personnage contrôlé par cette IA
+	 * @return 
+	 * 		Personnage contrôlé.
+	 * @throws StopRequestException 
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -225,6 +256,9 @@ public class Suiveur extends ArtificialIntelligence
 
 	/**
 	 * renvoie la zone de jeu
+	 * @return 
+	 * 		Zone de jeu.
+	 * @throws StopRequestException 
 	 */
 	public AiZone getZone() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

@@ -16,9 +16,15 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class TriedTiles
-{
+{	/** */
 	public List<AiTile> visited = null;
 	private AdatepeOzbek ownAi;
+	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public TriedTiles(AdatepeOzbek ai)throws StopRequestException
 	{	ai.checkInterruption();
 		ownAi = ai;
@@ -26,6 +32,11 @@ public class TriedTiles
 		visited = new ArrayList<AiTile>();
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @throws StopRequestException
+	 */
 	public void add(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -33,6 +44,10 @@ public class TriedTiles
 			visited.add(tile);
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void reset() throws StopRequestException
 	{
 		ownAi.checkInterruption();
