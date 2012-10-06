@@ -27,6 +27,8 @@ public class ItemController {
 
 		/**
 		 * crée un ItemController chargé d'amener le personnage au centre de bonus
+		 * @param ai 
+		 * @throws StopRequestException 
 		 */
 		public ItemController(AldanmazYenigun ai) throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -71,6 +73,9 @@ public class ItemController {
 		 * détermine si le personnage est arrivé dans la case de destination.
 		 * S'il n'y a pas de case de destination, on considère que le personnage
 		 * est arrivé.
+		 * @return
+		 * 		?
+		 * @throws StopRequestException 
 		 */
 		public boolean hasArrived() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -168,14 +173,16 @@ public class ItemController {
 		/////////////////////////////////////////////////////////////////
 		// PROCESS					/////////////////////////////////////
 		/////////////////////////////////////////////////////////////////	
-		/** 
-		 * calcule la prochaine direction pour aller vers la destination 
-		 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
-		 * */
 		
 		private boolean isBonusAccessible = true;
 		
-		
+		/** 
+		 * calcule la prochaine direction pour aller vers la destination 
+		 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+	 * @return
+	 * 		?
+		 * @throws StopRequestException 
+		 * */
 		public Direction update() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -208,6 +215,12 @@ public class ItemController {
 			return result;
 		}
 		
+		/**
+		 * 
+		 * @return
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public boolean isAccessible() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -238,11 +251,22 @@ public class ItemController {
 			return result;
 		}
 
+		/**
+		 * 
+		 * @param isBonusAccessible
+		 * @throws StopRequestException
+		 */
 		public void setBonusAccessible(boolean isBonusAccessible) throws StopRequestException {
 			ai.checkInterruption();
 			this.isBonusAccessible = isBonusAccessible;
 		}
 
+		/**
+		 * 
+		 * @return
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public boolean isBonusAccessible() throws StopRequestException {
 			ai.checkInterruption();
 			return isBonusAccessible;

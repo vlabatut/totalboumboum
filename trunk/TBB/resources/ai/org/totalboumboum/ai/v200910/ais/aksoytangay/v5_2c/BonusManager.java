@@ -38,6 +38,13 @@ public class BonusManager {
 		
 	private Zone zone;
 	
+	/**
+	 * 
+	 * @param myAI
+	 * @param percepts
+	 * @param pathManager
+	 * @throws StopRequestException
+	 */
 	public BonusManager(AksoyTangay myAI, AiZone percepts, PathManager pathManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -49,6 +56,12 @@ public class BonusManager {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction getDirectionToCollectBonus() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -96,6 +109,12 @@ public class BonusManager {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -106,6 +125,12 @@ public class BonusManager {
 			
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
 		myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -123,6 +148,12 @@ public class BonusManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasExplosed() throws StopRequestException
 	{
 		myAI.checkInterruption();

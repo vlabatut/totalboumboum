@@ -28,6 +28,8 @@ public class AbstractBombController {
 
 	/**
 	 * controle si on peut acceder a une case sur, si on met une bombe.
+	 * @param ai 
+	 * @throws StopRequestException 
 	 */
 	public AbstractBombController(AldanmazYenigun ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -71,6 +73,9 @@ public class AbstractBombController {
 	 * détermine si le personnage est arrivé dans la case de destination.
 	 * S'il n'y a pas de case de destination, on considère que le personnage
 	 * est arrivé.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -172,6 +177,9 @@ public class AbstractBombController {
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -200,6 +208,12 @@ public class AbstractBombController {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isThereSafeTiles() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -236,9 +250,12 @@ public class AbstractBombController {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiPath getPath(){
 		return path;
 	}
-
-
 }

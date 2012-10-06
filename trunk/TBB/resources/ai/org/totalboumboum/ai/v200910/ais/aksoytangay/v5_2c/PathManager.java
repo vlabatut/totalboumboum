@@ -34,9 +34,15 @@ public class PathManager {
 	private Zone zone;
 	
 	private AiZone percepts;
-	
+	/** */
 	public boolean temp = false;
-			
+	
+	/**
+	 * 
+	 * @param myAI
+	 * @param percepts
+	 * @throws StopRequestException
+	 */
 	public PathManager(AksoyTangay myAI, AiZone percepts) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -50,12 +56,10 @@ public class PathManager {
 	 * 
 	 * @param ownHero
 	 *           
-	 * @param startPoint
+	 * @param startTile
 	 *            
-	 * @param endPoints
-	 *            
-	 * @param myAI
-	 * 
+	 * @param endTiles
+	 *             
 	 * @return le chemin le plus court
 	 * @throws StopRequestException
 	 */
@@ -87,12 +91,10 @@ public class PathManager {
 	 * 
 	 * @param ownHero
 	 *           
-	 * @param startPoint
+	 * @param startTile
 	 *            
-	 * @param endPoints
-	 *            
-	 * @param myAI
-	 * 
+	 * @param endTile
+	 *             
 	 * @return le chemin le plus court
 	 * @throws StopRequestException
 	 */
@@ -161,6 +163,7 @@ public class PathManager {
 	/**
 	 * 
 	 * Methode qui renvoie le meilleur chemin sure.
+	 * @param availibleTiles 
 	 * 
 	 * @return meilleur chemin
 	 * @throws StopRequestException
@@ -181,6 +184,12 @@ public class PathManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getAvailibleTilesDirectToCollectBonus() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -208,6 +217,12 @@ public class PathManager {
 		return availibleTiles;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getAvailibleTilesIndirectToCollectBonus() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -251,7 +266,14 @@ public class PathManager {
 	}
 	
 		
-	
+	/**
+	 * 
+	 * @param availibleTilesDirect
+	 * @param availibleTilesIndirect
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath getBestPathToCollectBonus(List<AiTile> availibleTilesDirect, List<AiTile> availibleTilesIndirect) throws StopRequestException
 	{
 		myAI.checkInterruption();

@@ -46,7 +46,11 @@ public class SafetyZone {
 	
 	private double HERO = -2;
 	
-
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public SafetyZone(AldanmazYenigun ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -379,22 +383,49 @@ public class SafetyZone {
 			}
 		}
 	}
-			
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return matrix;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getAttackMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return attackMatrix;
 	}
 
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getCaseLevel(int line, int col) throws StopRequestException {
 		ai.checkInterruption();
 		return matrix[line][col];
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getDangerLevel(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 		int line = tile.getLine();
@@ -403,6 +434,14 @@ public class SafetyZone {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isBonus(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -413,6 +452,14 @@ public class SafetyZone {
 		return resultat;
 	}
 
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isSafe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -422,6 +469,14 @@ public class SafetyZone {
 		return resultat;
 	}
 	
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean abstractIsSafe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -431,6 +486,14 @@ public class SafetyZone {
 		return resultat;
 	}
 	
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isHero(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -440,6 +503,14 @@ public class SafetyZone {
 		return resultat;
 	}
 	
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean iswall(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;

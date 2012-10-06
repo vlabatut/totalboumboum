@@ -28,6 +28,9 @@ public class HeroController {
 
 		/**
 		 * crée un HeroManager chargé pour controller si hero est accessible ou pas.
+		 * @param ai 
+		 * @param hero 
+		 * @throws StopRequestException 
 		 */
 		public HeroController(AldanmazYenigun ai, AiHero hero) throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -74,6 +77,9 @@ public class HeroController {
 		 * détermine si le personnage est arrivé dans la case de destination.
 		 * S'il n'y a pas de case de destination, on considère que le personnage
 		 * est arrivé.
+	 * @return
+	 * 		?
+		 * @throws StopRequestException 
 		 */
 		public boolean hasArrived() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -173,6 +179,9 @@ public class HeroController {
 		/** 
 		 * calcule la prochaine direction pour aller vers la destination 
 		 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+		 * @return
+		 * 		?
+		 * @throws StopRequestException 
 		 * */
 		public Direction update() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -206,6 +215,11 @@ public class HeroController {
 			return result;
 		}
 		
+		/**
+		 * @return
+		 * 		?
+		 * @throws StopRequestException
+		 */
 		public AiPath getPath() throws StopRequestException{
 			ai.checkInterruption();
 			return path;

@@ -40,18 +40,27 @@ public class AksoyTangay extends ArtificialIntelligence
 	
 	private AiHero ownHero = null;
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption();
 		return ownHero;
 	}
 
-
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getOwnHeroTile() throws StopRequestException {
 		checkInterruption();
 		return ownHeroTile;
 	}
-
 
 
 	private AiZone percepts = null;
@@ -66,7 +75,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	private BonusManager bonusManager = null;
 	
 	private StrategyManager strategyManager = null;
-	
+	/** */
 	public AttackManager attackManager = null;
 	
 	private boolean attackVariable = false;
@@ -271,6 +280,13 @@ public class AksoyTangay extends ArtificialIntelligence
 		
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean severalDangers(AiTile tile) throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
@@ -297,6 +313,12 @@ public class AksoyTangay extends ArtificialIntelligence
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isHerosAccesible() throws StopRequestException
 	{
 		checkInterruption();
@@ -330,6 +352,12 @@ public class AksoyTangay extends ArtificialIntelligence
 		return result;		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isBonusClose() throws StopRequestException
 	{
 		checkInterruption();

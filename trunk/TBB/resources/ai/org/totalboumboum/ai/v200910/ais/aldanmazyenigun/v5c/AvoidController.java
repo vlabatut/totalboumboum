@@ -52,6 +52,8 @@ public class AvoidController
 
 	/**
 	 * crée un EscapeManager chargé d'amener le personnage au centre d'une case sûre
+	 * @param ai 
+	 * @throws StopRequestException 
 	 */
 	public AvoidController(AldanmazYenigun ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -96,6 +98,9 @@ public class AvoidController
 	 * détermine si le personnage est arrivé dans la case de destination.
 	 * S'il n'y a pas de case de destination, on considère que le personnage
 	 * est arrivé.
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -195,6 +200,9 @@ public class AvoidController
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
