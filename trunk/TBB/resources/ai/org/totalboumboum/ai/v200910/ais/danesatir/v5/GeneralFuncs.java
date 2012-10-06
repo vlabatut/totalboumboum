@@ -15,11 +15,20 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class GeneralFuncs {
+	
+	/**
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @return
+	 * 		?
+	 */
 	public static boolean tileCompare(AiTile tile1,AiTile tile2){
 		if (tile1.getCol() == tile2.getCol() && tile1.getLine() == tile2.getLine())
 			return true;
 		return false;
 	}
+	
 	/**
 	 * Print Bomb List
 	 * @param bombs
@@ -45,10 +54,23 @@ public class GeneralFuncs {
 			System.out.println("");
 		}
 	}
+	
+	/**
+	 * 
+	 * @param ai
+	 * @param str
+	 * @param v
+	 */
 	public static void printLog(DaneSatir ai,String str,VerboseLevel v) {
 		//printLog(ai.getPercepts().getTotalTime()+str,v);
 		printLog(str,v);
 	}
+	
+	/**
+	 * 
+	 * @param str
+	 * @param v
+	 */
 	public static void printLog(String str,VerboseLevel v) {
 		if(Limits.verbose==true && Limits.verboseLevel == v || v == VerboseLevel.ALWAYS)
 			System.out.println(str);

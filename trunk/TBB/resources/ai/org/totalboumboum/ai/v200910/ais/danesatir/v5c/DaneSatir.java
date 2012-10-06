@@ -313,6 +313,12 @@ public class DaneSatir extends ArtificialIntelligence
 			this.dec.setState(State.START);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption();
 		return this.myHero;
@@ -339,6 +345,11 @@ public class DaneSatir extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param result
+	 * @throws StopRequestException
+	 */
 	public void setResult(AiAction result) throws StopRequestException {
 		checkInterruption();
 		if(result == null)
@@ -351,6 +362,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Get enemies without us
 	 * @return      the image at the specified URL
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> getEnemies() throws StopRequestException {
 		checkInterruption();

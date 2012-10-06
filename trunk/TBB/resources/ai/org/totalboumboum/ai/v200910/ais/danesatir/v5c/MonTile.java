@@ -29,14 +29,29 @@ public class MonTile {
 		ai.checkInterruption();
 		this.tile = tile;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getTile() throws StopRequestException {
 		ai.checkInterruption();
 		return tile;
 	}
+	
 	private void setIter(int iter) throws StopRequestException {
 		ai.checkInterruption();
 		this.iter = iter;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getIter() throws StopRequestException {
 		ai.checkInterruption();
 		return iter;

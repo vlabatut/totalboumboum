@@ -313,6 +313,11 @@ public class DaneSatir extends ArtificialIntelligence
 			this.dec.setState(State.START);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiHero getOwnHero() {
 		return this.myHero;
 	}
@@ -334,6 +339,10 @@ public class DaneSatir extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param result
+	 */
 	public void setResult(AiAction result) {
 		if(result == null)
 			dec.setState(State.START);
@@ -345,6 +354,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Get enemies without us
 	 * @return      the image at the specified URL
+	 * @throws StopRequestException 
 	 */
 	public List<AiTile> getEnemies() throws StopRequestException {
 		checkInterruption();

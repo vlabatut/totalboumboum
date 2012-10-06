@@ -47,6 +47,7 @@ public class BonusCollector {
 	/**
 	 * Turn Item list to AiTile from AiItem
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public List<AiTile> getItemsTiles() throws StopRequestException {
@@ -115,10 +116,20 @@ public class BonusCollector {
 		
 		return path.getTile(path.getLength()-2);
 	}
+	
+	/**
+	 * 
+	 * @param nearestItem
+	 */
 	public void setNearestItem(AiItem nearestItem) {
 		this.nearestItem = nearestItem;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public AiItem getNearestItem() {
 		return nearestItem;
 	}

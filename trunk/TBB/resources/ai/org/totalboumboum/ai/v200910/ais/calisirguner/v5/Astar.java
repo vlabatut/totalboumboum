@@ -88,6 +88,14 @@ public final class Astar {
 
 	private final int[] closed;
 
+	/**
+	 * 
+	 * @param map
+	 * @param originX
+	 * @param originY
+	 * @param destinationX
+	 * @param destinationY
+	 */
 	public Astar(Map map, int originX, int originY, int destinationX,
 			int destinationY) {
 		assert map != null : "map = " + map;
@@ -163,6 +171,7 @@ public final class Astar {
 	 * Starts the algorithm and returns true if a valid path was found.
 	 * 
 	 * @return
+	 * 		?
 	 */
 	public boolean findPath() {
 		Node current = origin;
@@ -180,6 +189,11 @@ public final class Astar {
 		// return true;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public Deque<Integer> getPath() {
 		assert destination.parent != null
 				|| (destination.x == origin.x && destination.y == origin.y);
@@ -196,6 +210,11 @@ public final class Astar {
 		return path;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	public boolean findPathreach() {
 		Node current = origin;
 		while (current != null

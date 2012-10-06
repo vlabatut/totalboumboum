@@ -39,6 +39,13 @@ public class PathFinder {
 		ai.checkInterruption();
 	}
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param hero
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
@@ -49,6 +56,12 @@ public class PathFinder {
 		this.updateTimeMatrice(time);
 	}
 	
+	/**
+	 * 
+	 * @param target
+	 * @throws StopRequestException
+	 * @throws NoWayException
+	 */
 	public void calculPath(AiTile target) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
 		List<AiTile> targets = new ArrayList<AiTile>();
@@ -81,17 +94,30 @@ public class PathFinder {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiPath getPath() throws StopRequestException {
 		ai.checkInterruption();
 		return path;
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void clearPath() throws StopRequestException {
 		ai.checkInterruption();
 		this.path=null;
 	}
+	
 	/**
 	 * Get NextTile and check on arrive and other situations
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 * @throws PathOverException
 	 * @throws NoWayException
@@ -149,6 +175,13 @@ public class PathFinder {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param targetTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isTarget(AiTile targetTile) throws StopRequestException {
 		ai.checkInterruption();
 		if (this.targetList == null)
@@ -156,16 +189,33 @@ public class PathFinder {
 		return this.targetList.contains(targetTile);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isArrive() throws StopRequestException {
 		ai.checkInterruption();
 		return this.isTarget(this.hero.getTile());
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> getTargets() throws StopRequestException {
 		ai.checkInterruption();
 		return this.targetList;
 	}
 
+	/**
+	 * 
+	 * @param time
+	 * @throws StopRequestException
+	 */
 	public void updateTimeMatrice(TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
 		this.time = time;
