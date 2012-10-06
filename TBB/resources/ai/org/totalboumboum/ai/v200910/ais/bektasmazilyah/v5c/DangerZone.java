@@ -50,6 +50,12 @@ public class DangerZone {
 	// height de la zone
 	int y;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public DangerZone(AiZone zone, BektasMazilyah source) throws StopRequestException
 	{
 		source.checkInterruption(); // appel obligatoire
@@ -245,6 +251,7 @@ public class DangerZone {
 	/*******************************
 	 * La methode renvoie dangerZone
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public EtatEnum[][] getOurZone() throws StopRequestException {
@@ -267,6 +274,7 @@ public class DangerZone {
 	/***
 	 * La methode sert a trouver les tiles claires
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public List<AiTile> findSafeTiles() throws StopRequestException
