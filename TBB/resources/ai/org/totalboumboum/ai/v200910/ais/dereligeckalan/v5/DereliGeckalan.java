@@ -47,6 +47,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	Direction direction = Direction.NONE;
 	private boolean target = false;
 	private AiTile tarr;
+	/** */
 	public AiTile bombTile;
 
 	public AiAction processAction() throws StopRequestException {

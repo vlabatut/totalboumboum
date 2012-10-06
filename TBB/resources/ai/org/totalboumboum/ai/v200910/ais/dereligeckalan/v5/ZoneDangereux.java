@@ -38,6 +38,13 @@ public class ZoneDangereux {
 	private int yMax;
 	private double matris[][];
 	private DereliGeckalan source;
+	
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public ZoneDangereux(AiZone zone, DereliGeckalan source) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		this.source = source;
@@ -251,10 +258,18 @@ public class ZoneDangereux {
 			res++;
 		return res;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		return matris;
 	}
+	
 	public String toString()
 	{	
 		String result = "";

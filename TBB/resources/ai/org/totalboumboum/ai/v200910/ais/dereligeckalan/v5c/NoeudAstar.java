@@ -13,13 +13,14 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 public class NoeudAstar implements Comparator<Noeud> {
 	private Noeud goal;
 
-	/**
-	 * Constructeur.
-	 * 
-	 * @param goal
-	 *            noeud qu'on prend comme reference en comparant les noeuds
-	 */
+	/** */
 	ArtificialIntelligence ai;
+	
+	/**
+	 * @param goal
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public NoeudAstar(Noeud goal, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;

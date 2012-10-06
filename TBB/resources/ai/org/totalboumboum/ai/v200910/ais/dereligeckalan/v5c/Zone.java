@@ -29,6 +29,13 @@ public class Zone {
 	private int yMax;
 	private ZoneEnum [][] zoneArray;
 	private DereliGeckalan source;
+	
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public Zone(AiZone zone, DereliGeckalan source) throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -216,7 +223,12 @@ public class Zone {
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		return zoneArray;

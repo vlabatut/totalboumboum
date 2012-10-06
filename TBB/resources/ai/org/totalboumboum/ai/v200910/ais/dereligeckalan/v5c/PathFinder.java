@@ -21,6 +21,13 @@ public class PathFinder {
 	private AiZone zone;
 	private DereliGeckalan source;
 	
+	/**
+	 * 
+	 * @param zone
+	 * @param target
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public PathFinder(AiZone zone, AiTile target,DereliGeckalan source) throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -59,6 +66,12 @@ public class PathFinder {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public String ToStringPath() throws StopRequestException
 	{
 		source.checkInterruption();
@@ -165,6 +178,12 @@ public class PathFinder {
 		tree=null;//on vide l'arbre.
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings({ "unchecked", "unused" })
 	public LinkedList <AiTile> getPath() throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire
