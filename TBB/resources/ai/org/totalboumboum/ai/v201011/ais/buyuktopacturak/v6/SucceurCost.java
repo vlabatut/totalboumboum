@@ -18,6 +18,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class SucceurCost extends SuccessorCalculator{
 	private List<AiTile> freeList;
 	private BuyuktopacTurak bt;
+	
+	/**
+	 * 
+	 * @param bt
+	 * @param freeList
+	 * @throws StopRequestException
+	 */
 	public SucceurCost(BuyuktopacTurak bt, List<AiTile> freeList) throws StopRequestException{
 		bt.checkInterruption();
 		this.bt = bt;

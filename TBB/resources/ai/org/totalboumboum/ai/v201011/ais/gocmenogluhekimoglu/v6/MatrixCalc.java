@@ -24,6 +24,12 @@ public class MatrixCalc {
 	GocmenogluHekimoglu ai;
 	Paths paths;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param paths
+	 * @throws StopRequestException
+	 */
 	public MatrixCalc(GocmenogluHekimoglu ai,Paths paths) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;

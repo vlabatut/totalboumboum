@@ -30,6 +30,7 @@ public class CollecteClass {
 
 	private AiZone gameZone;
 	private FillingClass fillingClass;
+	/** */
 	public double matriceCollecte[][];
 	private boolean hasArrivedButDanger = false;
 	// public double matrice[][];
@@ -37,6 +38,11 @@ public class CollecteClass {
 	private AiOutput aio;
 	private AvciGungor ai;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public CollecteClass(AvciGungor ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -51,6 +57,13 @@ public class CollecteClass {
 
 	}
 
+	/**
+	 * 
+	 * @param origin
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> findItemsTiles(AiTile origin)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -71,6 +84,13 @@ public class CollecteClass {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param origin
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> findSafeTiles(AiTile origin)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -93,6 +113,13 @@ public class CollecteClass {
 
 	}
 
+	/**
+	 * 
+	 * @param origin
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> findWallTiles(AiTile origin)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -326,6 +353,12 @@ public class CollecteClass {
 
 	}
 
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return matriceCollecte;

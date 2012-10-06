@@ -16,6 +16,7 @@ public class AStarCost extends CostCalculator{
 	
 	/**
 	 * C'est un constructeur qui obtient la matrice de la mode.
+	 * @param bt 
 	 * @param matrix
 	 * @throws StopRequestException
 	 */

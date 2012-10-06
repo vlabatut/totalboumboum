@@ -415,7 +415,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * 	sinon la distance est negative -1.
 	 * @param tile1
 	 * @param tile2
-	 * @return
+	 * @return 
+	 * 		?
 	 * @throws StopRequestException
 	 * @throws NullPointerException
 	 */
@@ -461,7 +462,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	}
 	/**
 	 * renvoi currentMatrix
-	 * @return
+	 * @return 
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	public double[][] getMatrix() throws StopRequestException{
