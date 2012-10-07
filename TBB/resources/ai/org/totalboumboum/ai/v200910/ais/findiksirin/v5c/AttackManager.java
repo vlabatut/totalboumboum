@@ -21,6 +21,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class AttackManager
 {
+	/**
+	 * 
+	 * @param ai
+	 * @param posTarget
+	 * @param posWalkable
+	 * @throws StopRequestException
+	 */
 	public AttackManager(FindikSirin ai,Direction posTarget, Direction posWalkable) throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -97,7 +104,12 @@ public class AttackManager
 	private AiPath path;
 
 
-	
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean decidedToBomb() throws StopRequestException{
 		ai.checkInterruption();
 		boolean result=false;
@@ -114,6 +126,14 @@ public class AttackManager
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isOnLine(AiTile tile1, AiTile tile2) throws StopRequestException{
 		ai.checkInterruption();
 		boolean result=false;
@@ -145,7 +165,12 @@ public class AttackManager
 	}
 	
 	
-	// retourne si on est arrive ou pas
+	/** retourne si on est arrive ou pas
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
 		if(!arrived)
@@ -193,7 +218,12 @@ public class AttackManager
 		}
 		return result;
 	}	*/
-//le process de decision
+	/** le process de decision
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
 		// on met a jour la matrice de cout
@@ -219,9 +249,11 @@ public class AttackManager
 		return result;
 	}
 	
-
+	/** */
 	public AiTile bomb1Pos=null;
+	/** */
 	public AiTile bomb2Pos=null;
+	/** */
 	public AiTile bomb3Pos=null;
 
 	private void setBombingPath(Direction posTarget, Direction posWalkable) throws StopRequestException{
