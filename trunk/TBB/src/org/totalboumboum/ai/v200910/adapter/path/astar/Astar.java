@@ -64,12 +64,28 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class Astar
-{	private static boolean verbose = false;
+{	/** Numéro de série */	
+	private static boolean verbose = false;
 
+	/**
+	 * 
+	 * @param ai
+	 * @param hero
+	 * @param costCalculator
+	 * @param heuristicCalculator
+	 */
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
 	{	this(ai,hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
 	}
 	
+	/**
+	 * 
+	 * @param ai
+	 * @param hero
+	 * @param costCalculator
+	 * @param heuristicCalculator
+	 * @param successorCalculator
+	 */
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	this.ai = ai;
 		this.hero = hero;
@@ -169,7 +185,7 @@ public class Astar
 	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
 	 * @param startTile	la case de départ
-	 * @param endTile	la liste des cases d'arrivée possibles
+	 * @param endTiles	la liste des cases d'arrivée possibles
 	 * @return un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
 	 * @throws StopRequestException 
 	 */
@@ -278,6 +294,9 @@ public class Astar
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	private void finish()
 	{	if(root!=null)
 		{	root.finish();

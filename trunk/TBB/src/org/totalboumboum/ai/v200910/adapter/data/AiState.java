@@ -81,6 +81,9 @@ public class AiState
 	{	return name;
 	}
 	
+	/**
+	 *
+	 */
 	void setEnded()
 	{	name = AiStateName.ENDED;		
 	}

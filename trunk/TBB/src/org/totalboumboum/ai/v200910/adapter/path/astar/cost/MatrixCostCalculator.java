@@ -50,6 +50,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * Attention : cette matrice doit avoir la même taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	la matrice de cout
+	 * @throws StopRequestException 
 	 */
 	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
 	{	setCostMatrix(costMatrix);			
@@ -66,6 +67,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * la même taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	la matrice de cout
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public void setCostMatrix(double costMatrix[][]) throws StopRequestException
 	{	this.costMatrix = costMatrix;		
@@ -77,6 +80,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * @param line	ligne de la case à mettre à jour
 	 * @param col	colonne de la case à mettre à jour
 	 * @param cost	nouveau coût à affecter
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;

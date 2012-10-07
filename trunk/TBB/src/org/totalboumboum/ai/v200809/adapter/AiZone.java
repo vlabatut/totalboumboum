@@ -81,6 +81,7 @@ public class AiZone
 	
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
+	 * @param elapsedTime 
 	 */
 	void update(long elapsedTime)
 	{	updateTime(elapsedTime);
@@ -238,8 +239,7 @@ public class AiZone
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
-	 * @param row	ligne de la case dont on veut le voisin
-	 * @param col	colonne de la case dont on veut le voisin
+	 * @param tile 
 	 * @param direction	direction dans laquelle le voisin se trouve
 	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiquée
 	 */
@@ -557,6 +557,7 @@ public class AiZone
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprimées de cette représentation.
 	 * 
+	 * @param <U> 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
@@ -571,6 +572,7 @@ public class AiZone
 	 * méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
+	 * @param <U> 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
@@ -594,6 +596,7 @@ public class AiZone
 
 	/** 
 	 * renvoie le personnage qui est contrôlé par l'IA
+	 * @return le personnage contrôlé par l'IA.
 	 */
 	public AiHero getOwnHero()
 	{	return ownHero;	

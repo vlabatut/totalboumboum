@@ -31,5 +31,6 @@ package org.totalboumboum.ai.v200809.adapter;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class StopRequestException extends Exception
-{	private static final long serialVersionUID = 1L;	
+{	/** */
+	private static final long serialVersionUID = 1L;	
 }

@@ -158,6 +158,8 @@ public abstract class AiSprite<T extends Sprite>
 	
 	/** 
 	 * renvoie la représentation de la case contenant ce sprite 
+	 * @return
+	 * 		La case. 
 	 */
 	public AiTile getTile()
 	{	return tile;

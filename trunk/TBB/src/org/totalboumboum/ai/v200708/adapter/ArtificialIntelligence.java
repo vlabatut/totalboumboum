@@ -79,6 +79,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	
 	// champs généraux
+	/** */
 	private String name;
 	
 	// champs représentant le percept
@@ -148,6 +149,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * 
 	 * @return
 	 * 		Un code correspondant à l'action à effectuer.
+	 * @throws Exception 
 	 */
 	protected abstract Integer processAction() throws Exception;
 	
@@ -324,7 +326,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 
 	/**
 	 * Renvoie la portée des bombes des joueurs autre que celui contrôlé par l'IA.
-	 * @param	le numéro du joueur considéré
+	 * @param	index le numéro du joueur considéré
 	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getPlayerFirePower(int index)
@@ -336,7 +338,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * que celui contrôlé par l'IA peuvent encore poser. 
 	 * Ce nombre correspond donc au nombre de bombes posables total moins 
 	 * le nombre de bombes déjà posées.
-	 * @param	le numéro du joueur considéré
+	 * @param	index le numéro du joueur considéré
 	 * @return	nombre de bombes restant à poser
 	 */
 	protected int getPlayerBombCount(int index)
@@ -354,6 +356,10 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * @param timeBeforeShrink	temps avant le début du shrink
 	 * @param nextShrinkPosition	prochain bloc qui va être shrinké
 	 * @param bombPosition	position relative de la bombe
+	 * @param ownFirePower 
+	 * @param ownBombCount 
+	 * @param firePowers 
+	 * @param bombCounts 
 	 */
 	public void setPercepts(int zoneMatrix[][],Vector<int[]> bombs,Vector<int[]> players,
 			Vector<Boolean> playersStates, int[] ownPosition, long timeBeforeShrink,

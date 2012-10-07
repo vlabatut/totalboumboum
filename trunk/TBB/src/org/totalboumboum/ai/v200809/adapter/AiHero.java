@@ -112,6 +112,9 @@ public class AiHero extends AiSprite<Hero>
 	{	return bombCount;
 	}
 	
+	/**
+	 * 
+	 */
 	private void updateBombParam()
 	{	Hero sprite = getSprite();
 		

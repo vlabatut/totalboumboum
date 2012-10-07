@@ -48,14 +48,20 @@ public abstract class CostCalculator
 	 * @param start	la case de départ 
 	 * @param end	la case d'arrivée (qui doit être voisine)
 	 * @return	le coût du déplacement
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
 	
 	/**
 	 * calcule le cout d'un chemin, i.e. la somme des couts des actions
 	 * consistant à passer d'une case du chemin à la suivante.
+	 * 
 	 * @param path
 	 * @return
+	 * 		Le cout.
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;
