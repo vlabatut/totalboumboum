@@ -42,6 +42,7 @@ public class PertinentItems extends AiUtilityCriterionBoolean
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected CaliskanGeckalanSeven ai;
 
     /////////////////////////////////////////////////////////////////
@@ -56,6 +57,7 @@ public class PertinentItems extends AiUtilityCriterionBoolean
 		return result;
 	}
 	
+	/** */
 	protected AiZone zone = null;
 	/** Le personnage contrôlé par l'agent */
 	protected AiHero ownHero = null;

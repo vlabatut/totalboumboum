@@ -65,6 +65,7 @@ public class CaliskanGeckalanSeven extends ArtificialIntelligence
 	/** gestionnaire chargé de décidé de la direction de déplacement de l'agent */
 	protected MoveHandler moveHandler;
 	
+	/** */
 	protected CalculCommun calculCommun;
 	
 	@Override

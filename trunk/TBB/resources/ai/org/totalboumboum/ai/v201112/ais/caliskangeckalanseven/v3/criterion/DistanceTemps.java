@@ -56,16 +56,26 @@ public class DistanceTemps extends AiUtilityCriterionBoolean
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected CaliskanGeckalanSeven ai;
 	
+	/** */
 	protected AiZone zone = null;
+	/** */
 	protected AiHero ownHero = null;
+	/** */
 	protected AiTile currentTile = null;
+	/** */
 	protected Astar astarPrecise = null;
+	/** */
 	protected Astar astarApproximation = null;
+	/** */
 	protected Dijkstra dijkstra = null;
+	/** */
 	protected AiPath indirectPath = null;
+	/** */
 	protected AiTile safeDestination = null;
+	/** */
 	protected boolean secondaryBombing = false;
 
     /////////////////////////////////////////////////////////////////

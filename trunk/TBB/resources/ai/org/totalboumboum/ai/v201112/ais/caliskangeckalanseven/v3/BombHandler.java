@@ -37,8 +37,10 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 	/** L'objet a* utilisé pour le calcul des chemins indirects */
 	protected Astar astarApproximation = null;
 	
+	/** */
 	protected Dijkstra dijkstra = null;
 	
+	/** */
 	protected boolean secondaryBombing = false;
 	/** Indique si l'agent doit poser une bombe sur l'objectif */
 	protected boolean bombDestination = false;
@@ -93,6 +95,12 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean danger() throws StopRequestException {
 		ai.checkInterruption();
 		boolean danger = false;
@@ -103,6 +111,13 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 		return danger;
 	}
 
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
 		ai.checkInterruption();
@@ -212,6 +227,9 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 	// ///////////////////////////////////////////////////////////////
 	// OUTPUT /////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
 

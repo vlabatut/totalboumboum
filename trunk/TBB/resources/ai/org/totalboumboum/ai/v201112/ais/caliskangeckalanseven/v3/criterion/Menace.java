@@ -47,6 +47,7 @@ public class Menace extends AiUtilityCriterionBoolean
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected CaliskanGeckalanSeven ai;
 
     /////////////////////////////////////////////////////////////////
@@ -58,7 +59,12 @@ public class Menace extends AiUtilityCriterionBoolean
 		return isSafe(tile);
 	}	
 	
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
 		ai.checkInterruption();
@@ -164,6 +170,12 @@ public class Menace extends AiUtilityCriterionBoolean
 		return dangerZone;
 	}
 
+	/**
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 
