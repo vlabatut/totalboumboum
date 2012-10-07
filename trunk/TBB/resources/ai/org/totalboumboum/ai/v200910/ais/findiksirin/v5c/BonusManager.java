@@ -22,6 +22,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class BonusManager
 {
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public BonusManager(FindikSirin ai) throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -68,7 +73,12 @@ public class BonusManager
 	return dest;
 	}
 	
-	//si il n'y a pas un bonus Reachable sur la zone du jeu
+	/** si il n'y a pas un bonus Reachable sur la zone du jeu
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean noBonusReachable() throws StopRequestException{
 		ai.checkInterruption();
 		if(bonusDestinations().isEmpty())
@@ -80,18 +90,33 @@ public class BonusManager
 		}
 	}
 	
-	//si il n'y a pas un bonus sur la zone du jeu
+	/** si il n'y a pas un bonus sur la zone du jeu
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean noBonus() throws StopRequestException{
 		ai.checkInterruption();
 		return bonusDestinations().isEmpty();
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isBonusOver() throws StopRequestException{
 		ai.checkInterruption();
 		return bonusDestructions().isEmpty();
 	}
 	
-	
-	//si la liste des bombes est vide, on cree une liste des murs pour destruire
+	/** si la liste des bombes est vide, on cree une liste des murs pour destruire
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> bonusDestructions() throws StopRequestException{
 		ai.checkInterruption();
 		List<AiTile> destructibles = new ArrayList<AiTile>();
@@ -167,14 +192,24 @@ public class BonusManager
 	//le chemin qu'on va suivre
 	private AiPath path;
 
-	//
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isOnBonusDestruction() throws StopRequestException{
 		ai.checkInterruption();
 		return OnBonusDestruction;
 	}
 	
 	
-	// retourne si on est arrive ou pas
+	/** retourne si on est arrive ou pas
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
 		if(!arrived)
@@ -208,7 +243,12 @@ public class BonusManager
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isPathSecure() throws StopRequestException{
 		ai.checkInterruption();
 		AiTile temp=null;
@@ -238,7 +278,12 @@ public class BonusManager
 		}
 		return result;
 	}	
-//le process de decision
+	/** 
+	 * le process de decision
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
 		// on met a jour la matrice de cout

@@ -20,6 +20,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class EscapeManager
 {
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public EscapeManager(FindikSirin ai) throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -79,7 +84,12 @@ public class EscapeManager
 	private AiPath path;
 
 	
-	// retourne si on est arrive ou pas
+	/** retourne si on est arrive ou pas
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
 		if(!arrived)
@@ -122,7 +132,12 @@ public class EscapeManager
 		}
 		return result;
 	}	
-//le process de decision
+	/** le process de decision
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
 		// on met a jour la matrice de cout

@@ -24,6 +24,11 @@ public class SafetyManager
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
 	private FindikSirin ai;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public SafetyManager(FindikSirin ai) throws StopRequestException
 	{
 		ai.checkInterruption();
@@ -34,13 +39,23 @@ public class SafetyManager
 		processedBombs = new ArrayList<AiBomb>();	
 	}
 	
-	//la marice du jeu
+	/** la marice du jeu */
 	public static double SAFE = Double.MAX_VALUE;
+	/** */
 	public static double NOTSAFE = 0;
+	/** */
 	public static double BLOCKED = 0;
+	/** */
 	private double matrix[][];
+	/** */
 	private AiZone zone;
 	
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption();
 		return matrix;		
@@ -159,7 +174,13 @@ public class SafetyManager
 	}
 
 	
-	
+	/**
+	 * 
+	 * @param tile
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -169,7 +190,13 @@ public class SafetyManager
 		return result;		
 	}
 
-	//si le cas est completement sur
+	/** si le cas est completement sur
+	 * 
+	 * @param tile
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -178,7 +205,13 @@ public class SafetyManager
 		return result;
 	}
 
-	//retourne la liste des cases surs
+	/** retourne la liste des cases surs
+	 * 
+	 * @param origin
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -196,6 +229,13 @@ public class SafetyManager
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param currentTile
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean hasNoWhereToGo(AiTile currentTile) throws StopRequestException {
 		ai.checkInterruption();
 		int hasNoWhereToGo=0;
@@ -211,7 +251,13 @@ public class SafetyManager
 		return (hasNoWhereToGo==4);
 	}
 	
-	
+	/**
+	 * 
+	 * @param destinationTile
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isReachable(AiTile destinationTile) throws StopRequestException{
 		ai.checkInterruption();
 		AiTile currentTile=zone.getOwnHero().getTile();
@@ -225,7 +271,10 @@ public class SafetyManager
 	}
 	
 	
-// le processus
+	/** le processus
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE		
 		updateMatrix();

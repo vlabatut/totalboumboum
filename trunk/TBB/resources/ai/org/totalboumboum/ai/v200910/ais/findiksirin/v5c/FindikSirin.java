@@ -201,15 +201,26 @@ public class FindikSirin extends ArtificialIntelligence
 	}
 
 	
-//notre personnage et son acces
+	/** notre personnage et son acces */
 	private AiHero ownHero = null;
+	/**
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption();
 		return ownHero;
 	}
 
-// la zone de jeu
+	/**  la zone de jeu */
 	private AiZone zone = null;
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiZone getZone() throws StopRequestException
 	{	checkInterruption();	
 		return zone;
@@ -227,6 +238,12 @@ public class FindikSirin extends ArtificialIntelligence
 	//private AiTile bombPos=null;
 	private boolean noWall=false;
 	
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean areYouSure() throws StopRequestException{
 		checkInterruption();
 		List <AiTile> safeTiles = safetyManager.findSafeTiles(currentTile);
@@ -242,6 +259,10 @@ public class FindikSirin extends ArtificialIntelligence
 		return safetyManager.isReachable(safest);
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void setOurBombs() throws StopRequestException{
 		checkInterruption();
 		AiTile tile=null;
@@ -280,9 +301,17 @@ public class FindikSirin extends ArtificialIntelligence
 		return resultat;
 	}
 	*/
+	/** */
 	public Direction posTarget=null;
+	/** */
 	public Direction posWalkable=null;
 	
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean hasTargetAttackable() throws StopRequestException{
 		checkInterruption();
 		if(!currentTile.getNeighbor(Direction.LEFT).getNeighbor(Direction.LEFT).getHeroes().isEmpty() &&
@@ -334,28 +363,66 @@ public class FindikSirin extends ArtificialIntelligence
 
 	
 //LES METHODES D'ACCES DES GESTIONNAIRES DE TRAITEMENT
+	/**
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public SafetyManager getSafetyManager() throws StopRequestException
 	{	checkInterruption();	
 		return safetyManager;		
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public EscapeManager getEscapeManager() throws StopRequestException
 	{	checkInterruption();	
 		return escapeManager;		
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public BonusManager getBonusManager() throws StopRequestException
 	{	checkInterruption();	
 		return bonusManager;		
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AttackManager getAttackManager() throws StopRequestException
 	{	checkInterruption();	
 		return attackManager;		
 	}
 
 //LES METHODES DE CONTROLE DE SECURITE
+	/**
+	 * @param tile 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption();	
 		return safetyManager.getSafetyLevel(tile);		
-	}	
+	}
+	/**
+	 * 
+	 * @param tile
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -368,21 +435,42 @@ public class FindikSirin extends ArtificialIntelligence
 	private double currentX;
 	private double currentY;
 	
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getCurrentTile() throws StopRequestException
 	{	checkInterruption();
 		return currentTile;
 	}	
 
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getCurrentX() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return currentX;
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE	
 		return currentY;
 	}
-
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateLocation() throws StopRequestException
 	{	checkInterruption();
 		currentTile = ownHero.getTile();
@@ -407,5 +495,4 @@ public class FindikSirin extends ArtificialIntelligence
 		}
 		return resultat;
 	}
-	
 }
