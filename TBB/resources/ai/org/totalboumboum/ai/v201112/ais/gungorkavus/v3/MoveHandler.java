@@ -40,14 +40,23 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<GungorKavus>
 {	
+	/** */
 	protected AiZone zone = null;
+	/** */
 	protected AiHero ownHero = null;
+	/** */
 	protected AiTile currentTile = null;
+	/** */
 	protected AiTile nextTile = null;
+	/** */
 	protected AiTile safeTile = null;
+	/** */
 	protected Astar astarPrecise = null;
+	/** */
 	protected Astar astarApproximation = null;
+	/** */
 	protected Dijkstra dijkstra = null;	
+	/** */
 	protected AiTile safeTilekont = null;
 
 	/**
@@ -91,12 +100,14 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	
 	
 	
-	/*
+	/**
 	 * 
 	 * getSafeTile2() On controle qu'il y a une tile sure autour de nous (5x5)
+	 * @return
+	 * 		? 
+	 * @throws StopRequestException 
 	 *  
 	 */
-	
 	protected boolean getSafeTile2() throws StopRequestException{
 		ai.checkInterruption();
 		boolean result = false;
@@ -210,12 +221,11 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	
 	
 	
-	/*
+	/**
 	 * 
 	 * updateDestination()
+	 * @throws StopRequestException 
 	 */
-	
-	
 	protected void updateDestination() throws StopRequestException{
 		this.ai.checkInterruption();
 		
@@ -251,6 +261,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 
 	}
 	
+	/** */
 	private double currentSpeed = 0;
 	
 	/*
@@ -290,12 +301,12 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 		return result;
 	}
 	
-	/*
+	/**
 	 * 
 	 * updatePath()
+	 * @throws StopRequestException 
 	 * 
 	 */
-	
 	protected void updatePath() throws StopRequestException {
 		this.ai.checkInterruption();
 		

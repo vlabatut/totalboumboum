@@ -67,9 +67,13 @@ public class UtilityHandler extends AiUtilityHandler<GungorKavus>
 	/////////////////////////////////////////////////////////////////
 	/** noms des cas, utilisés dans {@link #initCriteria} */
 	private final String caseName1 = "itemVisible";
+	/** */
 	private final String caseName2 = "vDMDestructible";
+	/** */
 	private final String caseName3 = "vDMDestMenaceParUneBombe";
+	/** */
 	private final String caseName4 = "vDAdversaires";
+	/** */
 	private final String caseName5 = "caseVide";
 
 	@Override

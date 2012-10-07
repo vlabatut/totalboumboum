@@ -29,9 +29,13 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 	
 	/** */
 	public AiTile startTile=ai.getZone().getOwnHero().getTile();
+	/** */
 	protected AiZone zone;
+	/** */
 	protected AiHero ownHero;
+	/** */
 	protected AiTile ownTile;
+	/** */
 	private double currentSpeed = 0;
 	
 	
@@ -455,6 +459,10 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	
 		ai.checkInterruption();
