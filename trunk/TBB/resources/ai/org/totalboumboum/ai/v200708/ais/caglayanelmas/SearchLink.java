@@ -12,11 +12,11 @@ package org.totalboumboum.ai.v200708.ais.caglayanelmas;
  */
 public class SearchLink
 {	
-	// noeud parent
+	/** noeud parent */
 	private SearchNode origin;
-	// noeud fils
+	/** noeud fils */
 	private SearchNode target;
-	// action de transition
+	/** action de transition */
 	private Integer action;
 
 	/**

@@ -9,12 +9,17 @@ package org.totalboumboum.ai.v200708.ais.caglayanelmas;
  *
  */
 public class SearchNode
-{	
+{	/** */
 	private int[] state;
+	/** */
 	private int depth;
+	/** */
 	private int iteration;
+	/** */
 	private double cost;
+	/** */
 	private double heuristic;
+	/** */
 	private boolean visited;
 
 	/**
