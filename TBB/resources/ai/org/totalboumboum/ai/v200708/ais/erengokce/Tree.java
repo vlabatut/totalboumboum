@@ -7,9 +7,16 @@ package org.totalboumboum.ai.v200708.ais.erengokce;
  *
  */
 public class Tree {
-
+	/** */
 	Node root;
-	Node fils1,fils2,fils3,fils4;
+	/** */
+	Node fils1;
+	/** */
+	Node fils2;
+	/** */
+	Node fils3;
+	/** */
+	Node fils4;
 	/**
 	 * 
 	 * @param root

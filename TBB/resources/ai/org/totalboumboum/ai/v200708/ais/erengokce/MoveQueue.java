@@ -12,14 +12,18 @@ import java.util.concurrent.ExecutionException;
  */
 public class MoveQueue {
 
+	/** */
 	Vector<Node> way;
-	//les graphes pour aEtoile
+	/** les graphes pour aEtoile */
 	Vector<Node> open;
+	/** */
 	Vector<Node> closed;
-	//les actions
+	/** les actions */
 	Vector<Integer> actions;
-	//les coordonnes du noeud racine pour ne pas s'eloigner, optimiser l'algorithme
-	int xorg,yorg;
+	/** les coordonnes du noeud racine pour ne pas s'eloigner, optimiser l'algorithme */
+	int xorg;
+	/** */
+	int yorg;
 	
 	/**
 	 * 

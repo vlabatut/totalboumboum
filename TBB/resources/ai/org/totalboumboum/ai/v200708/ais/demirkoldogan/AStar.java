@@ -15,10 +15,15 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class AStar {
 	
+	/** */
 	private Block ownBlock;   //point de depart
+	/** */
 	private Block targetBlock;//point d'arrivee
+	/** */
 	private PriorityQueue<Block> openList; //liste qui contient les block a controller
+	/** */
 	private Vector<Block> closedList; //contient les noeuds controlles
+	/** */
 	private int[][] matrix; //zone matrix amélioré
     
 	/**
