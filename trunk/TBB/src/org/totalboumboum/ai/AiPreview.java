@@ -25,12 +25,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Classe représentant la description
+ * brève d'un agent.
  * 
  * @author Vincent Labatut
  *
  */
 public class AiPreview
 {
+	/**
+	 * Construction d'une description pour
+	 * l'agent dont le paquetage et le dossier
+	 * sont passés en paramètres.
+	 * 
+	 * @param pack
+	 * 		Paquetage de l'agent.
+	 * @param folder
+	 * 		Dossier de l'agent.
+	 */
 	public AiPreview(String pack, String folder)
 	{	this.pack = pack;
 		this.folder = folder;
@@ -39,8 +51,15 @@ public class AiPreview
 	/////////////////////////////////////////////////////////////////
 	// FOLDER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Dossier contenant l'agent */
 	private String folder;
 
+	/**
+	 * Renvoie le dossier contenant l'agent.
+	 * 
+	 * @return
+	 * 		Dossier contenant l'agent.
+	 */
 	public String getFolder()
 	{	return folder;
 	}
@@ -48,8 +67,15 @@ public class AiPreview
 	/////////////////////////////////////////////////////////////////
 	// PACK				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Paquetage contenant l'agent */
 	private String pack;
 
+	/**
+	 * Renvoie le paquetage contenant l'agent.
+	 * 
+	 * @return
+	 * 		Paquetage de l'agent.
+	 */
 	public String getPack()
 	{	return pack;
 	}	
@@ -57,12 +83,25 @@ public class AiPreview
 	/////////////////////////////////////////////////////////////////
 	// AUTHOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Autheur(s) de l'agent */
 	private final List<String> authors = new ArrayList<String>();
 	
+	/**
+	 * Renvoie la liste des auteurs de l'agent
+	 * 
+	 * @return
+	 * 		Liste des auteurs de l'agent.
+	 */
 	public List<String> getAuthors()
 	{	return authors;
 	}
 	
+	/**
+	 * Rajoute un auteur à la liste.
+	 * 
+	 * @param author
+	 * 		Auteur à rajouter à la liste.
+	 */
 	public void addAuthor(String author)
 	{	authors.add(author);
 	}
@@ -70,11 +109,25 @@ public class AiPreview
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Notes de description de l'agent */
 	private final List<String> notes = new ArrayList<String>();
 
+	/**
+	 * Modifie les notes de description de l'agent
+	 * 
+	 * @param notes
+	 * 		Nouvelles notes de description.
+	 */
 	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
+	
+	/**
+	 * Renvoie les notes de description de l'agent.
+	 * 
+	 * @return
+	 * 		Notes de description de l'agent.
+	 */
 	public List<String> getNotes()
 	{	return notes;
 	}

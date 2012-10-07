@@ -37,12 +37,31 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
- * 
+ * Classe dont le rôle est de charger un fichier
+ * XML contenant la description d'un agent.
+ *  
  * @author Vincent Labatut
  *
  */
 public class AiPreviewLoader
 {
+	/**
+	 * Charge les informations décrivant un agent,
+	 * stockés dans un fichier XML.
+	 * 
+	 * @param pack
+	 * 		Paquetage contenant l'agent.
+	 * @param folder
+	 * 		Dossier spécifique à l'agent.
+	 * @return
+	 * 		Objet représentant l'agent.
+	 * @throws ParserConfigurationException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws SAXException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws IOException
+	 * 		Problème lors de l'accès au fichier XML.
+	 */
 	public static AiPreview loadAiPreview(String pack, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	AiPreview result = new AiPreview(pack,folder);
 		String path = FilePaths.getAisPath()+File.separator+pack+File.separator+FileNames.FILE_AIS+File.separator+folder;
@@ -54,6 +73,16 @@ public class AiPreviewLoader
 		return result;
 	}
 	
+	/**
+	 * Traite un élément XML pour en extraire l'information
+	 * nécessaire à l'initialisation de l'objet représentant
+	 * l'agent.
+	 * 
+	 * @param root
+	 * 		Element à traiter.
+	 * @param result
+	 * 		Objet à initialiser.
+	 */
 	private static void loadAiElement(Element root, AiPreview result)
 	{	Element element; 
 		// notes
@@ -65,6 +94,16 @@ public class AiPreviewLoader
 		loadAuthorsElement(element,result);
 	}
 	
+	/**
+	 * Traite un élément XML pour en extraire l'information
+	 * nécessaire à l'initialisation de l'objet représentant
+	 * l'agent.
+	 * 
+	 * @param root
+	 * 		Element à traiter.
+	 * @param result
+	 * 		Objet à initialiser.
+	 */
 	@SuppressWarnings("unchecked")
 	private static void loadAuthorsElement(Element root, AiPreview result)
 	{	List<Element> authors = root.getChildren(XmlNames.AUTHOR);
@@ -75,5 +114,4 @@ public class AiPreviewLoader
 			result.addAuthor(author);
 		}
 	}
-	
 }

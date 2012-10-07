@@ -130,6 +130,9 @@ public abstract class AiAbstractManager<V>
     {	return ai;    	
     }
     
+    /**
+     * Initialise le thread de l'agent.
+     */
     public void initAgent()
     {	// on initialise le thread
     	Profile profile = player.getProfile();
@@ -241,11 +244,8 @@ public abstract class AiAbstractManager<V>
     }
     
     /**
-     * réalise l'appel à la classe qui implémente l'agent,
+     * Réalise l'appel à la classe qui implémente l'agent,
      * afin que celui-ci calcule la prochaine action à effectuer.
-     * 
-     * @param firstTime
-     * 		la valeur vrai indique qu'il s'agit du premier appel
      */
     private final void makeCall()
     {	
