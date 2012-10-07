@@ -99,6 +99,10 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
@@ -221,6 +225,10 @@ public class Suiveur extends ArtificialIntelligence
 		return currentY;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateLocation() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -276,6 +284,7 @@ public class Suiveur extends ArtificialIntelligence
 	
 	/**
 	 * choisit aléatoirement un joueur comme cible à suivre
+	 * @throws StopRequestException 
 	 */
 	private void chooseTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -291,6 +300,7 @@ public class Suiveur extends ArtificialIntelligence
 
 	/**
 	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
+	 * @throws StopRequestException 
 	 */
 	private void updateTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

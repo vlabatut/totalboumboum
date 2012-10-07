@@ -91,6 +91,9 @@ public class PathManager
 	
 	/**
 	 * initialise ce PathManager
+	 * 
+	 * @param ai 
+	 * @throws StopRequestException 
 	 */
 	private void init(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -227,6 +230,8 @@ public class PathManager
 	/**
 	 * met à jour la position précédente du personnage,
 	 * exprimée en pixels
+	 * 
+	 * @throws StopRequestException 
 	 */
 	private void updatePrev() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -247,6 +252,8 @@ public class PathManager
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
+	 * 
+	 * @throws StopRequestException 
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -295,6 +302,9 @@ public class PathManager
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
+	 * 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -379,6 +389,8 @@ public class PathManager
 	/**
 	 * met à jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
+	 * 
+	 * @throws StopRequestException 
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

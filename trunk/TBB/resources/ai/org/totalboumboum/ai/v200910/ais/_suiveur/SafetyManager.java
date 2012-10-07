@@ -107,6 +107,7 @@ public class SafetyManager
 	
 	/**
 	 * mise à jour de la matrice de sûreté
+	 * @throws StopRequestException 
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -195,6 +196,12 @@ public class SafetyManager
 	 * mais ceci n'est pas toujours vrai (cela dépend de la portée des bombes).
 	 * De plus, elle ne prend pas en compte le fait que certaines bombes ne sont pas
 	 * sensibles au feu (elles n'explosent pas quand elles sont touchées par une explosion).
+	 * 
+	 * @param bomb 
+	 * @param blast 
+	 * @param bombs 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -223,6 +230,8 @@ public class SafetyManager
 
 	/**
 	 * traite la bombe passée en paramètre
+	 * @param bomb 
+	 * @throws StopRequestException 
 	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -351,6 +360,8 @@ public class SafetyManager
 	/**
 	 * met à jour la sortie graphique de l'IA en fonction du
 	 * niveau de sûreté calculé
+	 * 
+	 * @throws StopRequestException 
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

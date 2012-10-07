@@ -27,21 +27,30 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Safety_Map {
+	/** */
 	private AiZone our_zone;
+	/** */
 	@SuppressWarnings("unused")
 	private AiHero our_hero;
+	/** */
 	private Collection<AiHero> enemies;
 	
+	/** */
 	private Collection<AiBlock> blocks;
+	/** */
 	private Collection<AiItem> bonus;
+	/** */
 	private Collection<AiFire> fires;
+	/** */
 	private Collection<AiBomb> bombs;
 	
 	/** */
 	public int width;
 	/** */
 	public int height;
+	/** */
 	private int pos_x;
+	/** */
 	private int pos_y;
 	//Different exprimes for the cases possible. The more secured places will be
 	//exprimed with negative numbers and the dangerous cases will be exprimed with positive ones.

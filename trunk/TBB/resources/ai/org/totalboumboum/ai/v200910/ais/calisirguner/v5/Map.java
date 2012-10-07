@@ -29,25 +29,40 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Map {
 
+	/** */
 	@SuppressWarnings("unused")
 	private AiZone map;
+	/** */
 	private Collection<AiHero> adversaires;
 
+	/** */
 	private AiHero bomberman;
+	/** */
 	private CalisirGuner source; // pour chechinterruption
+	/** */
 	private Collection<AiBomb> bombes;
+	/** */
 	private Collection<AiBlock> blocks;
+	/** */
 	private Collection<AiItem> objets;
+	/** */
 	private Collection<AiFire> feu;
 	/** */
 	public int width;
 	/** */
 	public int height;
 
-	private int xadversaire, yadversaire;
+	/** */
+	private int xadversaire;
+	/** */
+	private int yadversaire;
+	/** */
 	private Etat matrix[][];
+	/** */
 	private Etat accessibilite[][];
+	/** */
 	private int risque[][];
+	/** */
 	private int murs[][];
 
 	/**
@@ -71,7 +86,11 @@ public class Map {
 		remplir(zone);
 	}
 
-	// nous remplaçons notre map
+	/** nous remplaçons notre map
+	 * 
+	 * @param zone
+	 * @throws StopRequestException
+	 */
 	protected void remplir(AiZone zone) throws StopRequestException {
 		source.checkInterruption();
 		// on initialise les matrices
@@ -518,18 +537,36 @@ public class Map {
 		return resultat;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return ?
+	 */
 	int return_risque(int x, int y) {
 		return risque[x][y];
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 */
 	int[][] return_risque() {
 		return risque;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 */
 	Etat[][] return_accessibilite() {
 		return accessibilite;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 */
 	int[][] return_murs() {
 		return murs;
 	}

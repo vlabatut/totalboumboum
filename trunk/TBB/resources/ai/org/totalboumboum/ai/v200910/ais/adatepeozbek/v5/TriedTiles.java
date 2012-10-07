@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 public class TriedTiles
 {	/** */
 	public List<AiTile> visited = null;
+	/** */
 	private AdatepeOzbek ownAi;
 	
 	/**

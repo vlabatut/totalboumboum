@@ -22,15 +22,25 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Bomb {
 	
+	/** */
 	private DorukKupelioglu dk;
+	/** */
 	private Matrix matrix;
+	/** */
 	private Astar astar;
+	/** */
 	private AiPath path;
+	/** */
 	private AiZone zone;
+	/** */
 	private List<AiTile> safes;
+	/** */
 	private boolean hasPathFound;
+	/** */
 	private boolean dropped;
+	/** */
 	private boolean bombEnded;
+	/** */
 	private double BOMBWILLEXPLODE;
 	
 	/**
@@ -53,6 +63,12 @@ public class Bomb {
 		path=findPath(tile);
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiPath findPath(AiTile tile)throws StopRequestException
 	{
 		dk.checkInterruption();

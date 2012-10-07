@@ -17,6 +17,10 @@ import java.util.Queue;
  *
  */
 public final class Astar {
+	/**
+	 * 
+	 *
+	 */
 	private static class CostComparator implements Comparator<Node> {
 		//
 		public int compare(Node nodeA, Node nodeB) {
@@ -25,15 +29,28 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 *
+	 */
 	class Node {
+		/** */
 		final int x;
+		/** */
 		final int y;
 
+		/** */
 		Node parent;
+		/** */
 		int gcost;
+		/** */
 		int hcost;
 
-		// on cree les noeuds
+		/**
+		 *  on cree les noeuds
+		 * @param x
+		 * @param y
+		 */
 		public Node(int x, int y) {
 			assert x >= 0 && x < map.width : "x = " + x;
 			assert y >= 0 && y < map.height : "y = " + y;
@@ -42,12 +59,19 @@ public final class Astar {
 			this.y = y;
 		}
 
+		/**
+		 * 
+		 */
 		public void calculateHeuristic() {
 
 			hcost = (Math.abs(x - destination.x) + Math.abs(y - destination.y))
 					* (VERTICAL_COST + HORIZONTAL_COST) / 2;
 		}
 
+		/**
+		 * 
+		 * @param parent
+		 */
 		public void setParent(Node parent) {
 			this.parent = parent;
 			// on se profite de matrice de risque qui envoie le danger des cases
@@ -70,22 +94,32 @@ public final class Astar {
 		}
 	}
 
+	/** */
 	private static final CostComparator COST_CMP = new CostComparator();
 
+	/** */
 	private final int VERTICAL_COST = 10;
 
+	/** */
 	private final int HORIZONTAL_COST = 10;
 
+	/** */
 	private final int DIAGONAL_COST = (int) Math.rint(Math.sqrt(VERTICAL_COST
 			* VERTICAL_COST + HORIZONTAL_COST * HORIZONTAL_COST));
 
+	/** */
 	private final Map map;
+	/** */
 	private final Node origin;
+	/** */
 	private final Node destination;
 
+	/** */
 	private final Queue<Node> open;
+	/** */
 	private final Queue<Node> openreach;
 
+	/** */
 	private final int[] closed;
 
 	/**
@@ -147,6 +181,12 @@ public final class Astar {
 		open.add(openNode);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param parent
+	 */
 	private void addToOpenreach(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
 		openNode.setParent(parent);
@@ -236,7 +276,7 @@ public final class Astar {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return
+	 * @return ?
 	 */
 	private boolean isClosed(int x, int y) {
 		int i = map.width * y + x;
@@ -277,6 +317,10 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 * @param node
+	 */
 	private void process_reach(Node node) {
 		// no need to process it twice
 		setClosed(node.x, node.y);

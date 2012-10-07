@@ -25,19 +25,24 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class Zone {
 	
-	//variable pour faire de l'appel
+	/** variable pour faire de l'appel */
 	private AksoyTangay myAI;
-	//variable de la zone de jeu
+	/** variable de la zone de jeu */
 	private AiZone zone;
-	//variable de notre héro
+	/** variable de notre héro */
 	private AiHero ownHero;
 	
-	//variables qu'on va utiliser pour tenir l'information de la zone
+	/** variables qu'on va utiliser pour tenir l'information de la zone */
 	private Collection<AiHero> ennemies;
+	/** */
 	private Collection<AiBomb> bombs;
+	/** */
 	private Collection<AiTile> tiles;
+	/** */
 	private Collection<AiFire> fires;
+	/** */
 	private Collection<AiBlock> blocks;
+	/** */
 	private Collection<AiItem> items;
 	
 	//variables des taille de la zone
@@ -46,7 +51,7 @@ public class Zone {
 	/** */
 	public int height;
 	
-	//variable qu'on va remplir avec les collections
+	/** variable qu'on va remplir avec les collections */
 	private State matrix[][];
 	
 	/**

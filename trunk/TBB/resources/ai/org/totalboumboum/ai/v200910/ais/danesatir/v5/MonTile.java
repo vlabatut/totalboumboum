@@ -13,14 +13,25 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class MonTile {
+	/** */
 	private AiTile tile;
+	/** */
 	private int iter;
-	
+
+	/**
+	 * 
+	 * @param tile
+	 * @param iter
+	 */
 	MonTile(AiTile tile, int iter) {
 		this.setTile(tile);
 		this.setIter(iter);
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 */
 	private void setTile(AiTile tile) {
 		this.tile = tile;
 	}
@@ -34,6 +45,10 @@ public class MonTile {
 		return tile;
 	}
 	
+	/**
+	 * 
+	 * @param iter
+	 */
 	private void setIter(int iter) {
 		this.iter = iter;
 	}

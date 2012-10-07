@@ -25,7 +25,9 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 @SuppressWarnings("deprecation")
 public class BonusCollector {
 	
+	/** */
 	private DaneSatir ai;
+	/** */
 	private AiItem nearestItem;
 	
 	/**

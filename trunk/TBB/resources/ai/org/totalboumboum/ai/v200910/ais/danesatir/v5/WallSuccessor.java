@@ -22,8 +22,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class WallSuccessor extends BasicSuccessorCalculator {
+	/** */
 	@SuppressWarnings("unused")
 	private DaneSatir ai;
+	/** */
 	private TimeMatrice time;
 	
 	/**

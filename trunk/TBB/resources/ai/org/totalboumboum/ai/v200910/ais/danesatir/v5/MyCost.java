@@ -13,7 +13,13 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  */
 @SuppressWarnings("deprecation")
 public class MyCost extends CostCalculator {
+	/** */
 	private TimeMatrice time;
+
+	/**
+	 * 
+	 * @param time
+	 */
 	MyCost(TimeMatrice time) {
 		this.time = time;
 	}

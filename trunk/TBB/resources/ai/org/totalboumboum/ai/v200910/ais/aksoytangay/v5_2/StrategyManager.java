@@ -24,24 +24,34 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class StrategyManager {
 
+	/** */
 	private AksoyTangay myAI;
 	
+	/** */
 	private PathManager pathManager;
 	
+	/** */
 	private EscapeManager escapeManager;
 	
+	/** */
 	private AiPath path;
 	
+	/** */
 	private AiTile currentTile;
 	
+	/** */
 	private AiTile lastTile;
 	
+	/** */
 	AiTile tTypeEscapeTile = null;
 		
+	/** */
 	private AiZone percepts;
-	
+
+	/** */
 	private Zone zone;
 	
+	/** */
 	List<AiBomb> bombs;
 		
 	/**

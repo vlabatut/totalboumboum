@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class NoeudAstar implements Comparator<Noeud> {
+	/** */
 	private Noeud goal;
 
 	/**

@@ -19,8 +19,11 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 @SuppressWarnings("deprecation")
 public class DecisionMaker {
 
+	/** */
 	private DaneSatir ai;
+	/** */
 	private State state;
+	/** */
 	private TimeMatrice time;
 
 	/**
@@ -57,24 +60,41 @@ public class DecisionMaker {
 		}
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 */
 	private boolean isEnemyExist() {
 		if(this.ai.getPercepts().getHeroes().size()>1)
 			return true;
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 */
 	private boolean isHiddenItemExist() {
 		if(this.ai.getPercepts().getHiddenItemsCount()>0)
 			return true;
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 */
 	private boolean isItemExist() {
 		if(this.ai.getPercepts().getItems().size()>0)
 			return true;
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isWayExistToEnemy() throws StopRequestException {
 		ai.checkInterruption();
 		PathFinder temp = new PathFinder(ai, this.time);
@@ -86,12 +106,21 @@ public class DecisionMaker {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return ?
+	 */
 	private boolean isDanger() {
 		double dur = this.time.getTime();
 		if(dur>0)
 			return true;
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @return ?
+	 */
 	private boolean isHaveBomb() {
 		AiHero hero = this.ai.getOwnHero();
 		int count=hero.getBombNumber()-hero.getBombCount();

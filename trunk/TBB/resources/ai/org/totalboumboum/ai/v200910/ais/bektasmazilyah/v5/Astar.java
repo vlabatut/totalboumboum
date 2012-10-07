@@ -20,6 +20,10 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public final class Astar {
+	/**
+	 * 
+	 *
+	 */
 	private static class CostComparator implements Comparator<Node> {
 		//
 		public int compare(Node nodeA, Node nodeB) {
@@ -28,15 +32,28 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 *
+	 */
 	class Node {
+		/** */
 		final int x;
+		/** */
 		final int y;
 
+		/** */
 		Node parent;
+		/** */
 		int gcost;
+		/** */
 		int hcost;
 
-		// on cree les noeuds
+		/** on cree les noeuds
+		 * 
+		 * @param x
+		 * @param y
+		 */
 		public Node(int x, int y) {
 			assert x >= 0 && x < map.x : "x = " + x;
 			assert y >= 0 && y < map.y : "y = " + y;
@@ -45,12 +62,19 @@ public final class Astar {
 			this.y = y;
 		}
 
+		/**
+		 * 
+		 */
 		public void calculateHeuristic() {
 
 			hcost = (Math.abs(x - destination.x) + Math.abs(y - destination.y))
 					* (VERTICAL_COST + HORIZONTAL_COST) / 2;
 		}
 
+		/**
+		 * 
+		 * @param parent
+		 */
 		public void setParent(Node parent) {
 			this.parent = parent;
 			if (parent.x == x) {
@@ -69,23 +93,32 @@ public final class Astar {
 		}
 	}
 
+	/** */
 	private static final CostComparator COST_CMP = new CostComparator();
 
 
+	/** */
 	private final int VERTICAL_COST = 10;
 
+	/** */
 	private final int HORIZONTAL_COST = 10;
 
+	/** */
 	private final int DIAGONAL_COST = (int) Math.rint(Math.sqrt(VERTICAL_COST
 			* VERTICAL_COST + HORIZONTAL_COST * HORIZONTAL_COST));
 
+	/** */
 	private final DangerZone map;
+	/** */
 	private final Node origin;
+	/** */
 	private final Node destination;
 
+	/** */
 	private final Queue<Node> open;
 
 
+	/** */
 	private final int[] closed;
 
 	/**
@@ -242,7 +275,7 @@ public final class Astar {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return
+	 * @return ?
 	 */
 	private boolean isClosed(int x, int y) {
 		int i = map.x * y + x;
@@ -287,6 +320,11 @@ public final class Astar {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	private void processBonus(Node node) throws StopRequestException {
 		// no need to process it twice
 		setClosed(node.x, node.y);
@@ -310,6 +348,11 @@ public final class Astar {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	private void processWall(Node node) throws StopRequestException {
 		// no need to process it twice
 		setClosed(node.x, node.y);

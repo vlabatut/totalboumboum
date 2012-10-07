@@ -16,17 +16,33 @@ import org.totalboumboum.ai.v200910.adapter.data.*;
 @SuppressWarnings("deprecation")
 public class Matrix 
 {
+	/** */
 	private DorukKupelioglu dk;
+	/** */
 	private AiZone zone; 
+	/** */
 	private AiHero ownHero; 
+	/** */
 	private List<AiTile> safes;
+	/** */
 	private List<AiTile> bonus; 
+	/** */
 	private List<AiTile> destructibles;
+	/** */
 	private List<AiTile> rivals;
+	/** */
 	private List<AiHero> heroes;
-	private int width,height; 
-	private int col,line;	//utilisation general
+	/** */
+	private int width;
+	/** */
+	private int height; 
+	/** */
+	private int col;
+	/** */
+	private int line;	//utilisation general
+	/** */
 	private double[][] areaMatrix; 
+	/** */
 	private double[][] timeLeft; 
 	
 	/**
@@ -42,6 +58,10 @@ public class Matrix
 		init();
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -102,7 +122,10 @@ public class Matrix
 	
 	/////Creation de la matrice de la region et du temps rest/////
 	
-
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void putFREE()throws StopRequestException//önce her yeri free yaptık
 	{
 		for (line = 0; line < zone.getHeight(); line++) 
@@ -116,6 +139,10 @@ public class Matrix
 	   	}
 	}	
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void putDESTINDEST()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -153,6 +180,10 @@ public class Matrix
 		}
 	}	
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void putITEM()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -177,7 +208,11 @@ public class Matrix
 			}
 		}
 	}
-	
+
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void putRIVAL()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -198,6 +233,10 @@ public class Matrix
 		}
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void putFIRE()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -217,6 +256,10 @@ public class Matrix
 		}
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void putBLAST()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -304,6 +347,10 @@ public class Matrix
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void findSafes()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -320,6 +367,10 @@ public class Matrix
 	}
 	
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void findDestructibles()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -350,6 +401,13 @@ public class Matrix
 		}
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @param list
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiHero> regulateHeroesList(AiTile tile,List<AiHero> list)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -403,7 +461,14 @@ public class Matrix
 		}
 		return result;
 	}
-	//listedeki case lerdan tile case ine en yakın olanı gönderir
+	
+	/** listedeki case lerdan tile case ine en yakın olanı gönderir
+	 * 
+	 * @param tile
+	 * @param list
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiTile findNearestTile(AiTile tile,List<AiTile> list)throws StopRequestException
 	{
 		dk.checkInterruption();

@@ -28,15 +28,25 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class ZoneDangereux {
 	
+	/** */
 	private Collection <AiHero> rivals;
+	/** */
 	private AiHero caractere;
+	/** */
 	private Collection <AiBomb> bombes;
+	/** */
 	private Collection <AiBlock> blocs;
+	/** */
 	private Collection <AiItem> objets;
+	/** */
 	private Collection <AiFire> feus; 
+	/** */
 	private int xMax;
+	/** */
 	private int yMax;
+	/** */
 	private double matris[][];
+	/** */
 	private DereliGeckalan source;
 	
 	/**
@@ -60,6 +70,11 @@ public class ZoneDangereux {
 		//String s = toString();
 		//System.out.println(s);
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -227,6 +242,13 @@ public class ZoneDangereux {
 				matris[temp.getLine()][temp.getCol()] = -1;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param target
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private int nombreMur(AiTile target) throws StopRequestException {
 		source.checkInterruption();
 		

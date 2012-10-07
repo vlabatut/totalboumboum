@@ -25,15 +25,19 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class AttackManager {
 
-	
+	/** */
 	private AksoyTangay myAI;
 	
+	/** */
 	private PathManager pathManager;
 	
+	/** */
 	private AiPath path = null;
 	
+	/** */
 	private AiTile currentTile;
 	
+	/** */
 	private AiTile lastTile;
 	/** */
 	public AiTile firstTile;
@@ -44,8 +48,10 @@ public class AttackManager {
 	/** */
 	public AiTile normalAttackTile = null;
 			
+	/** */
 	private AiZone percepts;
 	
+	/** */
 	private Zone zone;
 	/** */
 	public List<AiBomb> bombs;
@@ -65,9 +71,6 @@ public class AttackManager {
 	public List<AiTile> heroNeighborTiles;
 	/** */
 	public AttackType attackType;
-	
-	
-	
 	
 	/**
 	 *  
@@ -864,6 +867,10 @@ public class AttackManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void removeUsedTilesOfPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
 	
