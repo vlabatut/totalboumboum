@@ -103,6 +103,9 @@ public final class AiSimState  implements AiState
 	{	return name;
 	}
 	
+	/**
+	 * 
+	 */
 	protected void setEnded()
 	{	name = AiStateName.ENDED;		
 	}
@@ -173,6 +176,10 @@ public final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @return 
+	 * 		Copie de l'état.
+	 */
 	public AiSimState copy()
 	{	AiSimState result = new AiSimState();
 		result.direction = direction;

@@ -37,6 +37,8 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Enfin, cette classe stocke le mode courant grâce au
  * champ {@link #mode}.
  * 
+ * @param <T> 
+ * 
  * @author Vincent Labatut
  * 
  * @deprecated

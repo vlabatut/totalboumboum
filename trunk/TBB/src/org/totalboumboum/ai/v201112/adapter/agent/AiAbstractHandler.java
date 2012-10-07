@@ -28,6 +28,8 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * utilisés pour décomposer le traitement réalisé par un agent.
  * Cf. les différentes spécialisations de cette classe.
  * 
+ * @param <T> 
+ * 
  * @author Vincent Labatut
  * 
  * @deprecated

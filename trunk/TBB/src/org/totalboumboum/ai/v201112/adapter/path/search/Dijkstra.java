@@ -194,6 +194,14 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param startLocation
+	 * @return
+	 * 		Le chemin
+	 * @throws StopRequestException
+	 * @throws LimitReachedException
+	 */
 	public AiPath processEscapePath(AiLocation startLocation) throws StopRequestException, LimitReachedException
 	{	// on indique la condition de fin pour l'exploration de la zone
 		stopWhenSafe = true;

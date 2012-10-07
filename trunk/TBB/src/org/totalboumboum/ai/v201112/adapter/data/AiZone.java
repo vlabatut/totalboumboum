@@ -306,6 +306,8 @@ public abstract class AiZone
 	 * la liste est vide si aucune bombe de cette couleur n'existe ou si 
 	 * cette couleur est null.
 	 * 
+	 * @param color 
+	 * 
 	 * @return	
 	 * 		une liste de bombe de la couleur passée en paramètre
 	 */
@@ -381,7 +383,7 @@ public abstract class AiZone
 		for(AiBomb bomb: getBombs())
 		{	List<AiFire> fires = bomb.getTile().getFires();
 			// delay map & bomb map
-			long delay = Long.MAX_VALUE; //TODO non-time bombs are considered to have an infinite delay, which should be corrected
+			long delay = Long.MAX_VALUE; // non-time bombs are considered to have an infinite delay, which should be corrected
 			// fire-sensitive bomb currently caught in an explosion
 			if(bomb.hasExplosionTrigger() && !fires.isEmpty())
 			{	long fireDuration = 0;
@@ -532,6 +534,8 @@ public abstract class AiZone
 	 * ou null si aucun personnage de cette couleur existe ou si 
 	 * cette couleur est null.
 	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés. 
+	 * 
+	 * @param color 
 	 * 
 	 * @return	
 	 * 		le personnage dont la couleur est celle passée en paramètre
@@ -801,6 +805,8 @@ public abstract class AiZone
 	 * 		colonne de la seconde case
 	 * @param  direction
 	 * 		direction à considérer
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(int row1, int col1, int row2, int col2, Direction direction)
 	{	int result = LevelsTools.getTileDistance(row1,col1,row2,col2,direction,height,width);
@@ -824,6 +830,8 @@ public abstract class AiZone
 	 * 		ligne de la seconde case
 	 * @param col2
 	 * 		colonne de la seconde case
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(int row1, int col1, int row2, int col2)
 	{	int result = LevelsTools.getTileDistance(row1,col1,row2,col2,Direction.NONE,height,width);
@@ -843,6 +851,8 @@ public abstract class AiZone
 	 * 		première case
 	 * @param tile2
 	 * 		seconde case
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2)
 	{	int result = getTileDistance(tile1,tile2,Direction.NONE);
@@ -865,6 +875,8 @@ public abstract class AiZone
 	 * 		seconde case
 	 * @param direction
 	 * 		direction à considérer
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
 	{	int row1 = tile1.getRow();
@@ -888,6 +900,8 @@ public abstract class AiZone
 	 * 		premier sprite
 	 * @param sprite2
 	 * 		second sprite
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(AiSprite sprite1, AiSprite sprite2)
 	{	int result = getTileDistance(sprite1,sprite2,Direction.NONE);
@@ -910,6 +924,8 @@ public abstract class AiZone
 	 * 		second sprite
 	 * @param direction
 	 * 		direction à considérer
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(AiSprite sprite1, AiSprite sprite2, Direction direction)
 	{	AiTile tile1 = sprite1.getTile();
@@ -935,6 +951,8 @@ public abstract class AiZone
 	 * 		Emplacement de la seconde case.
 	 * @param  direction
 	 * 		Direction à considérer.
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(AiLocation location1, AiLocation location2, Direction direction)
 	{	AiTile tile1 = location1.getTile();
@@ -956,6 +974,8 @@ public abstract class AiZone
 	 * 		Emplacement de la première case.
 	 * @param location2
 	 * 		Emplacement de la seconde case.
+	 * @return
+	 * 		distance 
 	 */
 	public int getTileDistance(AiLocation location1, AiLocation location2)
 	{	AiTile tile1 = location1.getTile();
@@ -1044,6 +1064,8 @@ public abstract class AiZone
 	 * 		abscisse du second point
 	 * @param y2
 	 * 		ordonnée du second point
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
@@ -1072,6 +1094,8 @@ public abstract class AiZone
 	 * 		ordonnée du second point
 	 * @param direction
 	 * 		direction à considérer
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
@@ -1093,6 +1117,8 @@ public abstract class AiZone
 	 * 		premier sprite
 	 * @param sprite2
 	 * 		second sprite
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2)
 	{	double result = getPixelDistance(sprite1, sprite2,Direction.NONE);
@@ -1114,6 +1140,8 @@ public abstract class AiZone
 	 * 		second sprite
 	 * @param direction
 	 * 		direction à considérer
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2, Direction direction)
 	{	double x1 = sprite1.getPosX();
@@ -1142,6 +1170,8 @@ public abstract class AiZone
 	 * 		Emplacement du second point
 	 * @param direction
 	 * 		direction à considérer
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(AiLocation location1, AiLocation location2, Direction direction)
 	{	double posX1 = location1.getPosX();
@@ -1165,6 +1195,8 @@ public abstract class AiZone
 	 * 		Emplacement du premier point
 	 * @param location2
 	 * 		Emplacement du second point
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(AiLocation location1, AiLocation location2)
 	{	double posX1 = location1.getPosX();
@@ -1195,6 +1227,8 @@ public abstract class AiZone
 	 * 		Case d'arrivée.
 	 * @param direction
 	 * 		Direction à considérer.
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(double x1, double y1, AiTile tile, Direction direction)
 	{	double xCenter = tile.getPosX();
@@ -1231,6 +1265,8 @@ public abstract class AiZone
 	 * 		Ordonnée du point de départ.
 	 * @param tile
 	 * 		Case d'arrivée.
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(double x1, double y1, AiTile tile)
 	{	double result = getPixelDistance(x1,y1,tile,Direction.NONE);
@@ -1255,6 +1291,8 @@ public abstract class AiZone
 	 * 		Case d'arrivée.
 	 * @param direction
 	 * 		Direction à considérer.
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(AiLocation location, AiTile tile, Direction direction)
 	{	double x = location.getPosX();
@@ -1278,6 +1316,8 @@ public abstract class AiZone
 	 * 		Emplacement du point de départ.
 	 * @param tile
 	 * 		Case d'arrivée.
+	 * @return
+	 * 		distance 
 	 */
 	public double getPixelDistance(AiLocation location, AiTile tile)
 	{	double x = location.getPosX();

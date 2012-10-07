@@ -109,6 +109,8 @@ public final class AiUtilityCombination
 	 * de définition du critère spécifié, une {@link IllegalArgumentException}
 	 * est levée.
 	 * 
+	 * @param <T> 
+	 * 
 	 * @param criterion
 	 * 		Le nom du critère concerné par la valeur.
 	 * @param value

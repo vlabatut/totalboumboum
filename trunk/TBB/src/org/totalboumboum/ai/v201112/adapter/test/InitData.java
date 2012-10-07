@@ -66,6 +66,8 @@ public final class InitData
 	 * 6│█│█│█│█│█│█│█│
 	 *  └─┴─┴─┴─┴─┴─┴─┘
 	 * </pre>
+	 * @return 
+	 * 		Zone
 	 */
 	public static AiSimZone initZone()
 	{	// zone
@@ -147,6 +149,8 @@ public final class InitData
 	 * 6│█│█│█│█│█│█│█│
 	 *  └─┴─┴─┴─┴─┴─┴─┘
 	 * </pre>
+	 * @return 
+	 * 		Zone
 	 */
 	public static AiSimZone initZone2()
 	{	// zone
