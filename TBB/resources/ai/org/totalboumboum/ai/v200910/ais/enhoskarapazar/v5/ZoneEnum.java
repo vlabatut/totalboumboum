@@ -5,5 +5,25 @@ package org.totalboumboum.ai.v200910.ais.enhoskarapazar.v5;
  * @author Ali Can Karapazar
  */
 public enum ZoneEnum {
-	CARACTERE,INDESTRUCTIBLES,FEU,FLAMMES,BOMBE,DESTRUCTIBLES,LIBRE,ADVERSAIRE,BONUSBOMBE,BONUSRANGE
+	/** */
+	CARACTERE,
+	/** */
+	INDESTRUCTIBLES,
+	/** */
+	/** */
+	FEU,
+	/** */
+	FLAMMES,
+	/** */
+	BOMBE,
+	/** */
+	DESTRUCTIBLES,
+	/** */
+	LIBRE,
+	/** */
+	ADVERSAIRE,
+	/** */
+	BONUSBOMBE,
+	/** */
+	BONUSRANGE
 }

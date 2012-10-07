@@ -35,6 +35,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	private Direction leftBomb = Direction.NONE;
 	/** Le Tile ou on vas poser une bombe pour detruire des murs */
 	private AiTile endTileDestruct = null;
+	/** */
 	private AiTile endTileAttack = null;
 	/** le personnage dirigé par cette IA */
 	private AiHero ownHero = null;
@@ -50,6 +51,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/** la position en pixels occupée actuellement par le personnage */
 	private int currentY;
 
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public AiTile getCurrentTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -58,6 +65,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * renvoie l'abscisse courante (en pixels)
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public int getCurrentX() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -67,6 +77,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * renvoie l'ordonnée courante (en pixels)
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public int getCurrentY() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -89,6 +102,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * renvoie le personnage contrôlé par cette IA
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -98,6 +114,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * renvoie la zone de jeu
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public AiZone getZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -622,7 +641,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * Control la Tile , si elle est mur
+	 * @param line 
+	 * @param col 
 	 * @return renvoi true si ce Tile est mur
+	 * @throws StopRequestException 
 	 */
 	public boolean isWall(int line, int col) throws StopRequestException {
 		checkInterruption();
@@ -635,7 +657,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * Control la Danger
+	 * @param line 
+	 * @param col 
 	 * @return renvoi true si ce Tile est en danger
+	 * @throws StopRequestException 
 	 */
 	public boolean inDanger(int line, int col) throws StopRequestException {
 		checkInterruption();
@@ -648,7 +673,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * Control la Danger en utilisant temps d'explosion
+	 * @param line 
+	 * @param col 
 	 * @return renvoi true si ce Tile est en danger
+	 * @throws StopRequestException 
 	 */
 	public boolean inDangerLevel2(int line, int col)
 			throws StopRequestException {
@@ -811,6 +839,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * @return renvoie une Tile ou on peut detruir plus de murs destructible
+	 * @throws StopRequestException 
 	 */
 	public AiTile findTileForDestructible() throws StopRequestException {
 		checkInterruption();
@@ -905,8 +934,11 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
+	 * @param line 
+	 * @param col 
 	 * @return renvoie le nombre de voisins qui vont detruire si on pose une bombe a
 	 * cette Tile
+	 * @throws StopRequestException 
 	 */
 	public int countDestructibleVoisins(int line, int col)
 			throws StopRequestException {
@@ -964,7 +996,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * @return renvoi la nextTile ce qu'on va prendre
+	 * @param a 
+	 * @throws StopRequestException 
+	 * 
 	 */
 	public void goTroughPath(List<AiTile> a) throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -991,7 +1025,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * controle s'il y a une tile a fuir
+	 * @param range 
+	 * @param bomb 
 	 * @return renvoi true si on a la chance de fuir
+	 * @throws StopRequestException 
 	 */
 	public boolean isRangeClean(int range, AiTile bomb)
 			throws StopRequestException {
@@ -1007,7 +1044,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * controle la path s'il y a un danger
+	 * @param array 
 	 * @return renvoi true si la path est en danger
+	 * @throws StopRequestException 
 	 */
 	public boolean pathInDanger(List<AiTile> array)
 			throws StopRequestException {
