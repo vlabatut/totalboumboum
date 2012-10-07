@@ -96,6 +96,12 @@ public class ModeHandler extends AiModeHandler<Simplet>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Mise à jour de la sortie graphique.
+	 * 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		

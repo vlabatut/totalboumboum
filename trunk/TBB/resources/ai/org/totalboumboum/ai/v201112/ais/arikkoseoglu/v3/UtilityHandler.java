@@ -59,8 +59,11 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	/////////////////////////////////////////////////////////////////
 	/** noms des cas, utilisés dans {@link #initCriteria} */
 	private final String collecteModeCase = "COLLECTECASE";
+	/** */
 	private final String collecteModeCaseVisibleBonus = "COLLECTECASE_VISIBLE_BONUS";
+	/** */
 	private final String attaqueModeCaseVisibleAdv = "ATTAQUECASE_VISIBLE_ADV";
+	/** */
 	private final String attaqueModeCaseMur = "ATTAQUECASE_MUR";
 	
 	/** cases sélectionnées */
@@ -109,6 +112,11 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	
 	/**
 	 * Method calcul unique tile in list 
+	 * @param result 
+	 * @param tile 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	private boolean checkExisting(List<AiTile> result,AiTile tile)throws StopRequestException
 	{
@@ -124,6 +132,8 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	
 	/**
 	 * Method calcul tiles sont dans un scope de bomb 
+	 * @param tiles 
+	 * @throws StopRequestException 
 	 */
 	private void safeTiles(List<AiTile> tiles)throws StopRequestException
 	{
@@ -145,6 +155,11 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 		}
 	}
 	
+	/**
+	 * 
+	 * @param tiles
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unused")
 	private void setPossibleFuirTiles(List<AiTile> tiles) throws StopRequestException {
 		ai.checkInterruption();
@@ -162,6 +177,12 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	
 	/**
 	* Method calculate possibilite de fuir
+	 * @param center 
+	 * @param gameArea 
+	 * @param hero 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	*/
 	private boolean possibleFuir(AiTile center, AiZone gameArea, AiHero hero) throws StopRequestException {
 		ai.checkInterruption();
@@ -390,6 +411,9 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	
 	/**
 	 * Method qui calculer possibilite de rammaser le bonus
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	private boolean getPossibilityRammaserBonus() throws StopRequestException
 	{	
