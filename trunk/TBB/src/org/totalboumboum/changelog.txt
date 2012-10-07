@@ -498,3 +498,6 @@
 + beta.023
 	- léger hasard dans le tirage au sort du temps des bombes menaçant les IA
 	- léger hasard dans le tirage au sort de la puissance de ces mêmes bombes
+	- nouveaux profils pour le tournoi 2012-13
+	
++ beta.024
