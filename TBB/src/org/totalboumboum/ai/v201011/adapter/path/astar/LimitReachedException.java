@@ -40,7 +40,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class LimitReachedException extends Exception
-{	private static final long serialVersionUID = 1L;
+{	/** */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * crée une exception représentant le fait que l'algorithme A*

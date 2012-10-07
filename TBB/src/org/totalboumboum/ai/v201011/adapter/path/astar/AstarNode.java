@@ -47,12 +47,17 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * Les calculateurs passés en paramètres seront utilisés
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
 	 * 
+	 * @param ai 
 	 * @param tile	
 	 * 		case associée à ce noeud de recherche
+	 * @param hero 
 	 * @param costCalculator	
 	 * 		fonction de cout
 	 * @param heuristicCalculator	
 	 * 		fonction heuristique
+	 * @param successorCalculator 
+	 * 
+	 * @throws StopRequestException 
 	 */
 	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// ia
@@ -83,6 +88,8 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		case associée à ce noeud de recherche
 	 * @param parent	
 	 * 		noeud de recherche parent de ce noeud
+	 * 
+	 * @throws StopRequestException 
 	 */
 	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
 	{	// ia

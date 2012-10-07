@@ -49,7 +49,10 @@ import org.totalboumboum.tools.files.FileNames;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class ParseAi
-{	private static boolean verbose = false;
+{	/** Numéro de série */
+	private static boolean verbose = false;
+	
+	/** */
 	private final static List<String> IGNORED_PACKAGES = Arrays.asList(new String[]
  	{	
 		"v1","v1_1","v1_2","v1_3",
@@ -59,12 +62,25 @@ public class ParseAi
  		"v5","v5_1"
  	});
 	
+	/**
+	 * 
+	 * @param args
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void main(String[] args) throws IOException, ParseException
 	{	String aiPack = "resources/ai/org/totalboumboum/ai/v201112/ais";
 		//String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201112/ais";
 		parseAiPack(aiPack);
 	}
 	
+	/**
+	 * 
+	 * @param file
+	 * @param level
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	private static void parseFile(File file, int level) throws ParseException, IOException
 	{	for(int i=0;i<level;i++)
 			System.out.print("..");
@@ -93,6 +109,13 @@ public class ParseAi
         }
 	}
 	
+	/**
+	 * 
+	 * @param folder
+	 * @param level
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	private static void parseFolder(File folder, int level) throws ParseException, IOException
 	{	if(IGNORED_PACKAGES.contains(folder.getName()))
 			System.out.println("Paquetage "+folder.getPath()+" ignoré");
@@ -117,10 +140,23 @@ public class ParseAi
 		}
 	}
 
+	/**
+	 * 
+	 * @param aiPath
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	public static void parseAi(String aiPath) throws ParseException, IOException
 	{	File aiFolder = new File(aiPath);
 		parseAi(aiFolder);
 	}
+	
+	/**
+	 * 
+	 * @param aiFolder
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	private static void parseAi(File aiFolder) throws ParseException, IOException
 	{	System.out.println("----------------------------------------------------------------------");
 		System.out.println("Analyse de l'AI "+aiFolder.getPath());
@@ -129,6 +165,12 @@ public class ParseAi
 		System.out.print("\n\n");
 	}
 	
+	/**
+	 * 
+	 * @param aiPack
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	public static void parseAiPack(String aiPack) throws ParseException, IOException
 	{	File folder = new File(aiPack);
 		File[] files = folder.listFiles();

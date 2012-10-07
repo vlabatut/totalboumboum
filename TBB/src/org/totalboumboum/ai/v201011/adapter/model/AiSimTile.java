@@ -86,7 +86,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	//  comment
+	/**
+	 * @param sprite
+	 */
 	protected void addSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -120,7 +122,10 @@ final class AiSimTile extends AiTile
 		}
 	}
 	
-	//  comment
+	/**
+	 * 
+	 * @param sprite
+	 */
 	protected void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -338,6 +343,8 @@ final class AiSimTile extends AiTile
 	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
 	 * 
+	 * @param <T> 
+	 * 
 	 * @param sprite
 	 * 		le sprite qui veut traverser cette case
 	 * @param list
@@ -400,8 +407,11 @@ final class AiSimTile extends AiTile
 	 * 
 	 * @param <T>
 	 * 		type de simulation
+	 * @param <U> 
+	 * 
 	 * @param internalList
 	 * 		liste de simulations
+	 * @param externalList 
 	 */
 	private <T extends AiSimSprite, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();

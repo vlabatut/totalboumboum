@@ -66,7 +66,10 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
  */
 public class AiVisitor extends VoidVisitorAdapter<Object>
 {	
-
+	/**
+	 * 
+	 * @param initLevel
+	 */
 	public AiVisitor(int initLevel)
 	{	indentLevel = initLevel;		
 	}
@@ -74,14 +77,18 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// MISC	CONSTANTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
+	/** */
 	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
+	/** */
 	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
 	{	"AiMain",			
 		"compare",
 		"equals",
 		"toString"
 	});
+	/** */
 	private final static List<String> FORBIDDEN_EXCEPTIONS = Arrays.asList(new String[]
  	{	"Exception",			
  		"StopRequestException"
@@ -90,15 +97,24 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// MISC VARIABLES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	private String currentMethod = null;
+	/** */
 	private int indentLevel;
+	/** */
 	private boolean checkConstructor;
 	
 	/////////////////////////////////////////////////////////////////
 	// ERROR COUNT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	private int errorCount = 0;
-	
+
+	/**
+	 * 
+	 * @return
+	 * 		Nombre d'erreurs.
+	 */
 	public int getErrorCount()
 	{	return errorCount;	
 	}
@@ -305,6 +321,10 @@ if(currentMethod.equals("PathFinder"))
 		statement.accept(this, arg);
     }
 
+	/**
+	 * 
+	 * @param statement
+	 */
 	private void checkBlock(Statement statement)
 	{	if(!IGNORED_METHODS.contains(currentMethod))
 		{	int line = statement.getBeginLine();

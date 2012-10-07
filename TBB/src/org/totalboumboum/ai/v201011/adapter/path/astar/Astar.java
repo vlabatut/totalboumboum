@@ -65,7 +65,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class Astar
-{	private static boolean verbose = false;
+{	/** Numéro de série */
+	private static boolean verbose = false;
 
 	/**
 	 * construit un objet permettant d'appliquer l'algorithme A*

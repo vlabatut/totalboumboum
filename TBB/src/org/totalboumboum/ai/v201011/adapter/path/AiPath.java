@@ -77,7 +77,7 @@ public class AiPath implements Comparable<AiPath>
 	 * modifie la position du point de départ de chemin,
 	 * exprimée en pixel.
 	 * 
-	 * @param startY
+	 * @param startX
 	 * 		la nouvelle ordonnée du point de départ
 	 * @param startY
 	 * 		la nouvelle ordonnée du point de départ

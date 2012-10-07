@@ -32,6 +32,12 @@ package org.totalboumboum.ai.v201011.adapter.communication;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiActionName
-{
-	DROP_BOMB,MOVE,NONE,PUNCH;	
+{	/** Poser une bombe */
+	DROP_BOMB,
+	/** Se déplacer */
+	MOVE,
+	/** Ne rien faire */
+	NONE,
+	/** Frapper une bombe */
+	PUNCH;	
 }

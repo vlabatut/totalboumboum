@@ -39,6 +39,9 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 public class AiOutput
 {
+	/**
+	 * @param zone
+	 */
 	@SuppressWarnings("unchecked")
 	public AiOutput(AiZone zone)
 	{	this.zone = zone;
