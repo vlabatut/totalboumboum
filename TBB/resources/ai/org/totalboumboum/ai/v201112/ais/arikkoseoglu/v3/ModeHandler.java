@@ -81,6 +81,12 @@ public class ModeHandler extends AiModeHandler<ArikKoseoglu>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 * 
+	 * @throws StopRequestException 
+	 * 
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		//  à compléter, si vous voulez afficher quelque chose

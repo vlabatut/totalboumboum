@@ -43,7 +43,14 @@ public class BombHandler extends AiBombHandler<ArikKoseoglu>
     	//  à compléter
 	}
 	
-	
+	/**
+	 * 
+	 * @param ownHero
+	 * @param gameArea
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	protected Boolean amIinDengeraous(AiHero ownHero, AiZone gameArea) throws StopRequestException{
 		ai.checkInterruption();
 		AiTile ownTile = ownHero.getTile();
@@ -60,6 +67,12 @@ public class BombHandler extends AiBombHandler<ArikKoseoglu>
 	
 	/**
 	 * Metho calcul possibilite de fuir si on pose bomb 
+	 * @param center 
+	 * @param gameArea 
+	 * @param hero 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	private boolean possibleFuir(AiTile center, AiZone gameArea, AiHero hero) throws StopRequestException {
 		ai.checkInterruption();
@@ -103,6 +116,10 @@ public class BombHandler extends AiBombHandler<ArikKoseoglu>
 	
 	/**
 	 * method supprimer les duplicates 
+	 * @param tiles 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	private  List<AiTile> clearDuplicate(List<AiTile> tiles)throws StopRequestException {
 		ai.checkInterruption();
@@ -189,6 +206,10 @@ public class BombHandler extends AiBombHandler<ArikKoseoglu>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
