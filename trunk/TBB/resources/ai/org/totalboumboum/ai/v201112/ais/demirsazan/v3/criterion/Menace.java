@@ -19,7 +19,7 @@ public class Menace extends AiUtilityCriterionBoolean
 {	/** Nom de ce critère */
 	public static final String NAME = "MENACE";
 
-	//common tools
+	/** common tools */
 	CommonTools commonTools;
 	/**
 	 * Crée un nouveau critère binaire.
@@ -45,6 +45,7 @@ public class Menace extends AiUtilityCriterionBoolean
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected DemirSazan ai;
 
     /////////////////////////////////////////////////////////////////

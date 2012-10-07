@@ -22,7 +22,7 @@ public class DestructibleMur extends AiUtilityCriterionInteger
 	public static final String NAME = "DESTRUCTIBLE_MURS";
 	/** */
 	public static final int MUR_LIMIT = 3;
-	//common tools
+	/** common tools */
 	CommonTools commonTools;
 	/**
 	 * Crée un nouveau critère binaire.
@@ -47,8 +47,8 @@ public class DestructibleMur extends AiUtilityCriterionInteger
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected DemirSazan ai;
-
 	
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
