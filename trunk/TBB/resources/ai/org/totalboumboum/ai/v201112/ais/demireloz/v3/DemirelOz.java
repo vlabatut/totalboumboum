@@ -28,8 +28,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class DemirelOz extends ArtificialIntelligence {
+	/** */
 	AiZone zone;
+	/** */
 	AiHero ourhero;
+	/** */
 	AiTile ourtile;
 	/** */
 	public HashMap<AiTile, Integer> hashmap;
@@ -82,9 +85,13 @@ public class DemirelOz extends ArtificialIntelligence {
 
 	}
 
+	/** */
 	protected ModeHandler modeHandler;
+	/** */
 	protected UtilityHandler utilityHandler;
+	/** */
 	protected BombHandler bombHandler;
+	/** */
 	protected MoveHandler moveHandler;
 
 	@Override

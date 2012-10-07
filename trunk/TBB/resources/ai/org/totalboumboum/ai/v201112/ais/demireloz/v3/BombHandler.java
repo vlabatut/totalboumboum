@@ -33,6 +33,11 @@ public class BombHandler extends AiBombHandler<DemirelOz> {
 	/** */
 	public static final int MAX_TILE_CLOSE_ENEMY = 29;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected BombHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -215,6 +220,10 @@ public class BombHandler extends AiBombHandler<DemirelOz> {
 		return resultat;
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
 

@@ -27,6 +27,7 @@ public class Danger extends AiUtilityCriterionBoolean {
 		this.ai = ai;
 	}
 
+	/** */
 	protected DemirelOz ai;
 
 	@Override
