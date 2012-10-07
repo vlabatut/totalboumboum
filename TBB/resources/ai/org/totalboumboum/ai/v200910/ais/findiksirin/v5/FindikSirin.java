@@ -188,7 +188,10 @@ public class FindikSirin extends ArtificialIntelligence
 	}
 	
 
-	//initialisation
+	/** initialisation
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{	checkInterruption();
 
@@ -226,16 +229,21 @@ public class FindikSirin extends ArtificialIntelligence
 		return zone;
 	}
 	
-///LES DEFINITIONS 
+	/** LES DEFINITIONS */ 
 	private EscapeManager escapeManager = null;
+	/** */
 	private SafetyManager safetyManager = null;
+	/** */
 	private BonusManager bonusManager = null;
+	/** */
 	private AttackManager attackManager = null;
 	
-//
+	/** */
 	private boolean dropBomb=false;
+	/** */
 	private List<AiTile> ourBombs=new ArrayList<AiTile>();
 	//private AiTile bombPos=null;
+	/** */
 	private boolean noWall=false;
 	
 	/**
@@ -430,9 +438,11 @@ public class FindikSirin extends ArtificialIntelligence
 	}
 	
 	
-//CASE ET POSITION OCCUPE (current tile and position)
+	/** CASE ET POSITION OCCUPE (current tile and position) */
 	private AiTile currentTile = null;
+	/** */
 	private double currentX;
+	/** */
 	private double currentY;
 	
 	/**
@@ -479,6 +489,12 @@ public class FindikSirin extends ArtificialIntelligence
 		currentY = ownHero.getPosY();				
 	}
 	
+	/**
+	 * 
+	 * @param currentTile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unused")
 	private AiBomb getOurBomb(AiTile currentTile) throws StopRequestException{
 		checkInterruption();

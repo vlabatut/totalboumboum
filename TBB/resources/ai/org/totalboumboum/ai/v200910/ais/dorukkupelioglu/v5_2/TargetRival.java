@@ -15,14 +15,23 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class TargetRival {
 
+	/** */
 	private DorukKupelioglu dk;
+	/** */
 	private Bomb bomb;
+	/** */
 	private Astar astar;
+	/** */
 	private AiPath path;
+	/** */
 	private List<AiTile> rivals;
+	/** */
 	private List<AiTile> available;
+	/** */
 	private boolean hasPathFound;
+	/** */
 	private boolean targetRivalEnded;
+	/** */
 	private int[][] rivalavailable;
 	
 	/**

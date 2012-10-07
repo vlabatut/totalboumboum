@@ -52,6 +52,8 @@ public class PathManagement {
 	
 	/**
 	 * initialise ce PathManager
+	 * @param ai 
+	 * @throws StopRequestException 
 	 */
 	private void init(EnhosKarapazar ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

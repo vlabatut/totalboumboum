@@ -54,7 +54,11 @@ public class BonusManager
 	}
 	
 	
-	//creation de la liste des bonus 
+	/** creation de la liste des bonus
+	 *  
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> bonusDestinations() throws StopRequestException{
 	ai.checkInterruption();
 	List<AiTile> dest = new ArrayList<AiTile>();
@@ -161,6 +165,10 @@ public class BonusManager
 	/** classe implémentant la fonction de coût */
 	private MatrixCostCalculator costCalculator;
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -177,19 +185,21 @@ public class BonusManager
 		}
 	}	
 //////////////////////////////////////////////////////////////////////////////////////////
-	//notre IA et la zone du jeu
+	/** notre IA et la zone du jeu */
 	private FindikSirin ai;
+	/** */
 	private AiZone zone;
 	
+	/** */
 	private boolean OnBonusDestruction;
 
-	//si on est arrive a la destination
+	/** si on est arrive a la destination */
 	private boolean arrived;
-	// la case de destination choisit pour la fuite
+	/** la case de destination choisit pour la fuite */
 	private AiTile tileDest;
-	// destinations potentielles
+	/** destinations potentielles */
 	private List<AiTile> possibleDest;
-	//le chemin qu'on va suivre
+	/** le chemin qu'on va suivre */
 	private AiPath path;
 
 	/**
@@ -223,14 +233,21 @@ public class BonusManager
 		}
 		return arrived;
 	}
-	//on met a jour le chemin qu'on a choisit
+	
+	/** on met a jour le chemin qu'on a choisit
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();		
 		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
 		tileDest = path.getLastTile();
 	}
 	
-	//si on est sur le chemin calculé
+	/** si on est sur le chemin calculé
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption();
 		

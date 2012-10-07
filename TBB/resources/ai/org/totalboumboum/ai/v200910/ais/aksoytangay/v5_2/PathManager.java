@@ -29,11 +29,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class PathManager {
 	
-	//variable pour faire de l'appel
+	/** variable pour faire de l'appel */
 	private AksoyTangay myAI;
 	
+	/** */
 	private Zone zone;
 	
+	/** */
 	private AiZone percepts;
 	/** */
 	public boolean temp = false;

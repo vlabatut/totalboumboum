@@ -11,14 +11,17 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class Tree {
+	/** */
 	private Vector<Noeud> nodes;
-	// ensemble des liens composant l'arbre
+	/** ensemble des liens composant l'arbre */
 	private Vector<SearchLink> links;
 
-	// dernier noeud traité lors de la recherche
+	/** dernier noeud traité lors de la recherche */
 	@SuppressWarnings("unused")
 	private Noeud lastNode;
+	/** */
 	private Noeud firstNode;
+	/** */
 	private DereliGeckalan source;
 	
 	/**

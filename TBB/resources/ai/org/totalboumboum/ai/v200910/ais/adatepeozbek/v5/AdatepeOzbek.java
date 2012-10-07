@@ -23,11 +23,17 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 @SuppressWarnings("deprecation")
 public class AdatepeOzbek extends ArtificialIntelligence 
 {	
+	/** */
 	private AiHero ownHero = null;
+	/** */
 	private AiZone zone = null;
+	/** */
 	private AiAction actionToDo = null;
+	/** */
 	private AiPath path = null;
+	/** */
 	private List<AiTile> allPassedTiles = null;
+	/** */
 	private boolean debug = false;
 	/** */
 	public boolean canTheyReachMe = false;

@@ -10,6 +10,7 @@ package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5;
  */
 public class Debug
 {
+	/** */
 	private static boolean debug = false;
 	
 	/**

@@ -34,9 +34,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class AksoyTangay extends ArtificialIntelligence
 {	
-	
+	/** */
 	private Zone zone = null;
 	
+	/** */
 	private AiHero ownHero = null;
 	
 	/**
@@ -60,28 +61,38 @@ public class AksoyTangay extends ArtificialIntelligence
 
 
 
+	/** */
 	private AiZone percepts = null;
 	
+	/** */
 	@SuppressWarnings("unused")
 	private State stateMatrix[][] = null;
 	
+	/** */
 	private EscapeManager escapeManager = null;
 	
+	/** */
 	private PathManager pathManager = null;
 	
+	/** */
 	private BonusManager bonusManager = null;
 	
+	/** */
 	private StrategyManager strategyManager = null;
 	/** */
 	public AttackManager attackManager = null;
 	
+	/** */
 	private boolean attackVariable = false;
 	
+	/** */
 	@SuppressWarnings("unused")
 	private AttackManager attackManager2 = null;
 	
+	/** */
 	private boolean keyBomb = true;
 	
+	/** */
 	private AiTile ownHeroTile;
 	
 	/** méthode appelée par le moteur du jeu pour obtenir une action d'IA */
@@ -378,6 +389,10 @@ public class AksoyTangay extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{
 		checkInterruption();
@@ -397,6 +412,12 @@ public class AksoyTangay extends ArtificialIntelligence
 	
 	//silinecek!!
 	
+	/**
+	 * @param tile 
+	 * @return ?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	@SuppressWarnings("unused")
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

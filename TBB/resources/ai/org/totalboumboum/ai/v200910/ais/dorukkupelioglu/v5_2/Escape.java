@@ -15,14 +15,23 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Escape {
 	
+	/** */
 	private DorukKupelioglu dk;
+	/** */
 	private Astar astar;
+	/** */
 	private AiPath path;
+	/** */
 	private boolean hasPathFound;
+	/** */
 	private boolean escapeEnded;
+	/** */
 	private boolean pathWorks;
+	/** */
 	private List<AiTile> safes;
+	/** */
 	private List<Double> pathStates;
+	/** */
 	private List<Double> pathStatesControl;
 	
 	/**

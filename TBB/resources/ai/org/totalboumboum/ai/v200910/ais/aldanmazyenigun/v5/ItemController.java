@@ -96,7 +96,10 @@ public class ItemController {
 		/** le chemin à suivre */
 		private AiPath path;
 	
-		
+		/**
+		 * 
+		 * @throws StopRequestException
+		 */
 		private void updatePath() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -109,6 +112,7 @@ public class ItemController {
 		 * en supprimant si besoin les cases inutiles (car précedant la case courante).
 		 * Si le personnage n'est plus sur le chemin, alors le chemin
 		 * est vide après l'exécution de cette méthode.
+		 * @throws StopRequestException 
 		 */
 		private void checkIsOnPath() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -128,6 +132,8 @@ public class ItemController {
 		 * les changement concernant la sûreté des cases. En d'autres termes,
 		 * si une bombe apparait avant que le personnage d'ait atteint une
 		 * case sure, elle ne sera pas prise en compte dans la trajectoire.
+		 * @return ?
+		 * @throws StopRequestException 
 		 * 
 		 */
 		private boolean checkPathValidity() throws StopRequestException
@@ -153,6 +159,9 @@ public class ItemController {
 		/** classe implémentant la fonction de coût */
 		private MatrixCostCalculator costCalculator;
 
+		/**
+		 * @throws StopRequestException
+		 */
 		private void updateCostCalculator() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			

@@ -21,16 +21,27 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DangerZone {
 
+	/** */
 	private AiZone zone;
+	/** */
 	private Collection<AiHero> rivals;
+	/** */
 	private AiHero caractere;
+	/** */
 	private Collection<AiBomb> bombes;
+	/** */
 	private Collection<AiBlock> blocs;
+	/** */
 	private Collection<AiItem> objets;
+	/** */
 	private Collection<AiFire> feus;
+	/** */
 	private int xMax;
+	/** */
 	private int yMax;
+	/** */
 	private ZoneEnum[][] zoneArray;
+	/** */
 	private EnhosKarapazar source;
 
 	/**
@@ -55,6 +66,10 @@ public class DangerZone {
 		init();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		zoneArray = new ZoneEnum[yMax][xMax];
@@ -479,6 +494,13 @@ public class DangerZone {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean canGo(int line, int col) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		boolean ret = false;

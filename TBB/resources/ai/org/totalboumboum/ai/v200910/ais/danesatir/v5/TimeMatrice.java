@@ -25,9 +25,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class TimeMatrice {
 
+	/** */
 	private double[][] matrice;
+	/** */
 	private AiZone zone;
+	/** */
 	private List<AiBomb> bombs;
+	/** */
 	private DaneSatir ai;
 	
 	/**
@@ -117,6 +121,11 @@ public class TimeMatrice {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param bomb
+	 * @throws StopRequestException
+	 */
 	private void expandBomb(AiBomb bomb) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();

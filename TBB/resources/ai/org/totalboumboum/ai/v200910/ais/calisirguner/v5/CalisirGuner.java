@@ -31,25 +31,37 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class CalisirGuner extends ArtificialIntelligence {
+	/** */
 	private AiZone zone;
 	/** la case occupée actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile pasprochain = null;
+	/** */
 	private boolean premiere = true;
 
+	/** */
 	private boolean bombe = false;
+	/** */
 	private boolean bonus = false;
+	/** */
 	private boolean arrive = false;
+	/** */
 	private boolean attaque0 = false;
+	/** */
 	private boolean attaque1 = false;
+	/** */
 	private boolean adv = false;
+	/** */
 	AiAction result = new AiAction(AiActionName.NONE);
+	/** */
 	private AiTile resultat;
+	/** */
 	Astar fuite;
 
 	/** larea du jeu */
 	private Map map;
+	/** */
 	private AiHero bomberman;
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
@@ -203,7 +215,11 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 	  
 	 }*/
 
-	// si en laisssan t un bombe on laisse un adversaire entre les bombes et bombes nous le mettons si on pourra nous echapper
+	/** si en laisssan t un bombe on laisse un adversaire entre 
+	 * les bombes et bombes nous le mettons si on pourra nous echapper
+	 * @throws StopRequestException 
+	 *
+	 */
 	  private void attaque() throws StopRequestException { 
 		  // avant tout : testd'interruption checkInterruption();
 	  
@@ -234,9 +250,12 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 	  }
 	 
 
-	// pour exploser les murs on trouve les case ou on pourra exploser un max des murs grace a notre matrice des murs
+	/** pour exploser les murs on trouve les case ou on pourra exploser un max des murs grace a notre matrice des murs
 	  //nous utilisons cette fonction qd nous avons plus de 2 adversaires car sinon il perd bcp de temps en mettant de bombes
 	  // et il ne les laisse pas par le but dacceder en adversaire
+	   * 
+	   * @throws StopRequestException
+	   */
 	private void explosion() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -280,7 +299,10 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 			}
 		}
 	}
-//il prend les adversaires dans la zone et essaie de les acceder, il les suit et qd il rencontre un mur il met un bombe etc..
+/** il prend les adversaires dans la zone et essaie de les acceder, il les suit et qd il rencontre un mur il met un bombe etc..
+ * 
+ * @throws StopRequestException
+ */
 	private void adversaires() throws StopRequestException {
 		checkInterruption();
 		AiTile res = null;
@@ -353,7 +375,10 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		}
 	}
 
-	// pour les bonus on lutilise qd on a moins de 3 bonus de nimporte quel bonus pour nee pas empecher lattaque
+	/** pour les bonus on lutilise qd on a moins de 3 bonus de nimporte quel bonus pour nee pas empecher lattaque
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void collection() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -407,13 +432,19 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 			
 		}
 	}
-//ppour nous enfuire
+/** ppour nous enfuire
+ * 
+ * @throws StopRequestException
+ */
 	private void fuite() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		resultat = meilleur();
 		chemin();
 	}
-//pour utiliser notre astar il nous donne le chemin a la case sur choisie
+/** pour utiliser notre astar il nous donne le chemin a la case sur choisie
+ * 
+ * @throws StopRequestException
+ */
 	void chemin() throws StopRequestException {
 		checkInterruption();
 		// avant tout : test d'interruption
@@ -448,9 +479,12 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 	}
 
-	// pour trover la case que le chemin est le plus sur on profite de matrice
+	/** pour trover la case que le chemin est le plus sur on profite de matrice
 	// de risques quon a defini dans map
-
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiTile meilleur() throws StopRequestException {
 		checkInterruption();
 		AiTile meilleur_resultat = null;
@@ -517,7 +551,12 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		return meilleur_resultat;
 
 	}
-//on trouve les cases surs donc les cases qui ne sont pas menacés par des flammes bombes feus
+/** on trouve les cases surs donc les cases qui ne sont pas menacés par des flammes bombes feus
+ * 
+ * @param tile
+ * @return ?
+ * @throws StopRequestException
+ */
 	private Collection<AiTile> cases_sures(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -545,8 +584,13 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		return destination;
 
 	}
-//si une case est entoure par des bombes et murs ce nest pas une case quon doit choisir donc nous utilisons
-	//cette methode pour vor si la case est comme une impasse
+/** si une case est entoure par des bombes et murs ce nest pas une case quon doit choisir donc nous utilisons
+//cette methode pour vor si la case est comme une impasse
+ * *
+ * @param tile
+ * @return ?
+ * @throws StopRequestException
+ */
 	private int ferme(AiTile tile) throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -591,7 +635,15 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 	}
 
-	// distance euclidien
+	/** distance euclidien
+	 * 
+	 * @param x
+	 * @param y
+	 * @param x1
+	 * @param y2
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	int longueur(int x, int y, int x1, int y2) throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -600,7 +652,12 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 	}
 
-	// pour controler si on est en securite
+	/** pour controler si on est en securite
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean test_sur(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		if (tile.getBombs().size() > 0
@@ -616,7 +673,12 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		else
 			return true;
 	}
-//sil ya des flammes dans le chmin cest pas la peine de nous risquer pour un adversaire u un  bonus
+	/** sil ya des flammes dans le chmin cest pas la peine de nous risquer pour un adversaire u un  bonus
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean test_chemin(AiTile tile) throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -647,7 +709,11 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		}
 		return res;
 	}
-	//pour controler sil ya encore des murs destructibles quon peut acceder
+	/** pour controler sil ya encore des murs destructibles quon peut acceder
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean yatildest() throws StopRequestException{
 		checkInterruption();
 		boolean res=false;
@@ -661,7 +727,10 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		return res;
 	}
 	
-// si one est en intersection de deux bombes on choist daller a la portee de celui qui a encore plue de temps que lautre a son explosion
+	/** si one est en intersection de deux bombes on choist daller a la portee de celui qui a encore plue de temps que lautre a son explosion
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void intersection() throws StopRequestException {
 		checkInterruption();
 		if (map.returnMatrix()[bomberman.getCol()][bomberman.getLine()] == Etat.DANGER) {

@@ -20,9 +20,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class PathFinder {
 
+	/** */
 	private LinkedList<Noeud> path;
+	/** */
 	private ZoneEnum tab[][];
+	/** */
 	private AiZone zone;
+	/** */
 	private DereliGeckalan source;
 	
 	/**

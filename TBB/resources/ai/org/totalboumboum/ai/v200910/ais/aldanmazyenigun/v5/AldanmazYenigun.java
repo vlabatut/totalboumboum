@@ -44,51 +44,69 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class AldanmazYenigun extends ArtificialIntelligence {
 
+	/** */
 	private AiHero ownHero = null; //notre joueur
 
+	/** */
 	private AiZone zone = null;
 
+	/** */
 	private AiTile caseActuelle = null; //la case actuelle du joueur
 
+	/** */
 	private AvoidController escapeManager = null; //la classe qui controlle la case sur.
 
+	/** */
 	private ItemController safeManager = null; //pour controller les items
 
+	/** */
 	private ItemController abstractSafeManager = null;
 
+	/** */
 	private WallController putBombController = null;
 
+	/** */
 	private AbstractBombController abstractBombController = null;
 
+	/** */
 	private HeroController abstractHeroController = null;
 
+	/** */
 	private AiTile targetPreviousTile;
 
 
+	/** */
 	private AiHero targetHero = null;
 
 	/** classe chargée de déterminer quelles cases sont sûres */
 	private SafetyZone safetyZone = null;
 
+	/** */
 	private boolean thereIsSafeTile = true;
 
+	/** */
 	private boolean bonusAccessible = true;
 
+	/** */
 	private boolean heroAccessible = true;
 
+	/** */
 	private boolean assezArmee = false;
 
 	// private boolean isThereAnyHeroInBombeRange = false;
 
+	/** */
 	private boolean hasArrivedButDanger = false;
 
 	/** les coordonnées de notre hero */
 	@SuppressWarnings("unused")
 	private double x;
 
+	/** */
 	@SuppressWarnings( { "unused" })
 	private double y;
 
+	/** */
 	private PathController targetManager = null;
 
 	@Override
@@ -305,7 +323,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
-	//initialisation
+	/** initialisation
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -316,7 +337,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 		targetManager = new PathController(this, caseActuelle);
 	}
-	//on met a jour la matrice
+	
+	/** on met a jour la matrice
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -324,6 +349,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		safetyZone = new SafetyZone(this);
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateLocation() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -586,6 +615,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isBonus(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;
@@ -599,6 +634,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unused")
 	private boolean isWall(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -613,6 +654,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isHero(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;
@@ -626,6 +673,10 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void findIsBonusAccessible() throws StopRequestException {
 		checkInterruption();
 
@@ -647,6 +698,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		}
 	}
 
+	/**
+	 * 
+	 * @param hero
+	 * @throws StopRequestException
+	 */
 	private void findIsHeroAccessible(AiHero hero) throws StopRequestException {
 		checkInterruption();
 
@@ -744,6 +800,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
+	 * @throws StopRequestException 
 	 */
 	private void updateTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE

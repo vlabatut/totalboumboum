@@ -58,20 +58,21 @@ public class Escape_Manager {
 		
 	}
 	
-/**
- * /* This method explains the direction to go if we didn't arrived the final case:
- * Here, there are some different controls according to our position.
- * 
- * 1. If there are safe cases to escape, we calculate the time of explosion of bombs and
- * decide if we can reach there before the bomb explores. We make this calculation by getting
- * the time of explosion of bomb from Safety_Map class and compare it with the time of our bomberman.
- * passing time from one case to another one.(We compare here the 2 neighbor cases in the path)
- * 
- * 2. If there are no safe cases to escape(If we are stucked in the range of 2 bombs) we make a movement
- * to the bomb which has more time left to explore. By this way, we may escape when the first bomb expores.
- */
-
-
+	/**
+	 * /* This method explains the direction to go if we didn't arrived the final case:
+	 * Here, there are some different controls according to our position.
+	 * 
+	 * 1. If there are safe cases to escape, we calculate the time of explosion of bombs and
+	 * decide if we can reach there before the bomb explores. We make this calculation by getting
+	 * the time of explosion of bomb from Safety_Map class and compare it with the time of our bomberman.
+	 * passing time from one case to another one.(We compare here the 2 neighbor cases in the path)
+	 * 
+	 * 2. If there are no safe cases to escape(If we are stucked in the range of 2 bombs) we make a movement
+	 * to the bomb which has more time left to explore. By this way, we may escape when the first bomb expores.
+	 * 
+	 * @return ?
+	 * @throws StopRequestException 
+	 */
 	Direction direcition_updt() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		Direction result = Direction.NONE;
@@ -357,27 +358,26 @@ public class Escape_Manager {
 		return result;
 		
 	}
-
 	
-	
-	
-	
-	
-	
-	
+	/** */
 	private DemirciDuzokErgok ai;
+	/** */
 	private AiZone zone;
+	/** */
 	private Safety_Map safe_map;
+	/** */
 	private AiTile arrived_tile;
+	/** */
 	private List<AiTile> possibleDest;
+	/** */
 	private boolean arrived;
+	/** */
 	private AiPath path;
 	
-	
+	/** */
 	private Astar star;
+	/** */
 	private HeuristicCalculator heuristicCalculator;
+	/** */
 	private MatrixCostCalculator costCalculator;
-	
-	
-	
 }
