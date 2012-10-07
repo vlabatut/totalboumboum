@@ -59,9 +59,13 @@ public class BalCetin extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// HANDLERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected ModeHandler modeHandler;
+	/** */
 	protected UtilityHandler utilityHandler;
+	/** */
 	protected BombHandler bombHandler;
+	/** */
 	protected MoveHandler moveHandler;
 	
 	@Override
