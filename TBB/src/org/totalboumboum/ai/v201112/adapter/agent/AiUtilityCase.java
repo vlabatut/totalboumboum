@@ -133,7 +133,8 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * 
 	 * @param tile
 	 * 		La case à évaluer.
-	 * 
+	 * @return 
+	 * 		Combinaison
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */

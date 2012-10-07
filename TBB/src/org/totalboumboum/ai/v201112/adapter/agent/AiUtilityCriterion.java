@@ -63,6 +63,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  * 
+ * @param <T> 
+ * 
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */

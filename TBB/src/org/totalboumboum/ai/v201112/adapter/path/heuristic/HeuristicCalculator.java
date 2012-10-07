@@ -68,6 +68,7 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected ArtificialIntelligence ai = null;
 	
 	/////////////////////////////////////////////////////////////////
@@ -108,6 +109,8 @@ public abstract class HeuristicCalculator
 	 * Si plusieurs destinations sont également
 	 * proches, un choix quelconque (ex : hasard)
 	 * doit être réalisé).
+	 * 
+	 * @param location 
 	 * 
 	 * @return
 	 * 		La case de destination la plus proche.

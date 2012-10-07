@@ -47,6 +47,7 @@ public class AiExplosion implements Comparable<AiExplosion>
 	 * 		Moment de démarrage de l'explosion.
 	 * @param end
 	 * 		Moment de terminaison de l'explosion.
+	 * @param tile 
 	 */
 	public AiExplosion(long start, long end, AiTile tile)
 	{	this.start = start;

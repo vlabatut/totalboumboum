@@ -108,6 +108,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	 * 
 	 * @param ai
 	 * 		IA de référence pour gérer les interruptions.
+	 * @param searchMode 
 	 */
 	public TimePartialSuccessorCalculator(ArtificialIntelligence ai, int searchMode)
 	{	super(ai);

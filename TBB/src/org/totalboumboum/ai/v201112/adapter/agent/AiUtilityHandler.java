@@ -59,6 +59,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  * 
+ * @param <T> 
+ * 
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
@@ -362,6 +364,10 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void displayUtilities() throws StopRequestException
 	{	ai.checkInterruption();
 		print("    > Declared utilities :");

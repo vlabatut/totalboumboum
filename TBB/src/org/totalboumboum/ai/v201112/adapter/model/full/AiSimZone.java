@@ -115,7 +115,7 @@ public final class AiSimZone extends AiZone
 					addSprite(simFire);
 				}
 				// floors
-// NOTE to gain a few ms...				
+//  to gain a few ms...				
 //				List<AiFloor> floors = tile.getFloors();
 //				for(AiFloor floor: floors)
 //				{	AiSimFloor simFloor = new AiSimFloor(floor,simTile);
@@ -638,6 +638,8 @@ public final class AiSimZone extends AiZone
 	 * 		La portée des bombes du joueur.
 	 * @param ownHero
 	 * 		Indique si ce personnage est celui contrôlé par l'agent.
+	 * @return
+	 * 		Personnage. 
 	 */
 	public AiSimHero createHero(AiTile tile, PredefinedColor color, int bombNumber, int range, boolean ownHero)
 	{	// bomb prototype
@@ -788,6 +790,8 @@ public final class AiSimZone extends AiZone
 	 * @param destructible
 	 * 		Le type de mur à créer : {@code true} pour un mur destructible,
 	 * 		{@code false} pour un mur indestructible.
+	 * @return 
+	 * 		Block
 	 */
 	public AiSimBlock createBlock(AiTile tile, boolean destructible)
 	{	// location
@@ -899,6 +903,8 @@ public final class AiSimZone extends AiZone
 	 * 		La portée de la bombe à créer.
 	 * @param elapsedTime
 	 * 		Le temps écoulé depuis que la bombe a été posée.
+	 * @return 
+	 * 		Bomb
 	 */
 	public AiSimBomb createBomb(AiTile tile, int range, long elapsedTime)
 	{	// location
@@ -973,6 +979,8 @@ public final class AiSimZone extends AiZone
 	 * 		joueur spécifié.
 	 * @param hero
 	 * 		Le personnage devant poser la bombe.
+	 * @return 
+	 * 		Bomb
 	 */
 	public AiSimBomb createBomb(AiTile tile, AiSimHero hero)
 	{	// location
@@ -1059,6 +1067,8 @@ public final class AiSimZone extends AiZone
 	 * 
 	 * @param tile
 	 * 		La case de la zone devant contenir le sprite.
+	 * @return
+	 * 		Fire 
 	 */
 	public AiSimFire createFire(AiTile tile)
 	{	// location
@@ -1113,6 +1123,8 @@ public final class AiSimZone extends AiZone
 	 * 		Le sprite original, à recopier.
 	 * @param tile
 	 * 		La case de la zone devant contenir le sprite.
+	 * @return
+	 * 		Fire 
 	 */
 	protected AiSimFire createFire(AiFire original, AiTile tile)
 	{	// location
@@ -1400,6 +1412,8 @@ public final class AiSimZone extends AiZone
 	 * 		La case de la zone devant contenir le sprite.
 	 * @param itemType
 	 * 		Le type d'item à créer.
+	 * @return
+	 * 		Item 
 	 */
 	public AiSimItem createItem(AiTile tile, AiItemType itemType)
 	{	// location

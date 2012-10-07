@@ -60,6 +60,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  */
 public final class DijkstraUse
 {
+	/**
+	 * @param args
+	 */
 	public static void main(String args[])
 	{	// utilisation de base
 		example1();

@@ -49,6 +49,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * qui est donnée ici en exemple afin d'afficher le mode,
  * la destination et le chemin courants.
  * 
+ * @param <T> 
+ * 
  * @author Vincent Labatut
  * 
  * @deprecated
