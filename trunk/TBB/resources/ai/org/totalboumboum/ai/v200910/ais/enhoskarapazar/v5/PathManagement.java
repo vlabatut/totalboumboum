@@ -24,6 +24,10 @@ public class PathManagement {
 	/**
 	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
 	 * exprimée en pixels
+	 * @param ai 
+	 * @param x 
+	 * @param y 
+	 * @throws StopRequestException 
 	 */
 	public PathManagement(EnhosKarapazar ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -35,6 +39,9 @@ public class PathManagement {
 	/**
 	 * crée un PathManager chargé d'amener le personnage au centre de la case
 	 * passée en paramètre
+	 * @param ai 
+	 * @param destination 
+	 * @throws StopRequestException 
 	 */
 	public PathManagement(EnhosKarapazar ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -79,6 +86,8 @@ public class PathManagement {
 	 * modifie la case de destination du personnage,
 	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
+	 * @param destination 
+	 * @throws StopRequestException 
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -94,6 +103,9 @@ public class PathManagement {
 	 * modifie les coordonnées de destination,
 	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
+	 * @param x 
+	 * @param y 
+	 * @throws StopRequestException 
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -118,6 +130,9 @@ public class PathManagement {
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException 
 	 */
 	public boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -150,16 +165,32 @@ public class PathManagement {
 
 	
 	
+	/**
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public int getLength() throws StopRequestException
 	{	
 		return path.getLength();
 	}
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 */
 	public  List<AiTile> getPathList()
 	{
 		
 		return path.getTiles();
 	}
 	
+	/**
+	 * 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public boolean isWalkable() throws StopRequestException
 	{ 
 		if(path.getLength()>0)
@@ -167,11 +198,22 @@ public class PathManagement {
 		else
 			return false;
 	}
+	/**
+	 * 
+	 */
 	public void printPath()
 	{
 		System.out.println(path.getTiles().toString());
 	}
 	
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean estCaseSure(int line, int col) throws StopRequestException
 	{
 		

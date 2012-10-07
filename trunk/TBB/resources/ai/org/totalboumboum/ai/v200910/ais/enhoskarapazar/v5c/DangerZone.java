@@ -33,6 +33,12 @@ public class DangerZone {
 	private ZoneEnum[][] zoneArray;
 	private EnhosKarapazar source;
 
+	/**
+	 * 
+	 * @param zone
+	 * @param source
+	 * @throws StopRequestException
+	 */
 	public DangerZone(AiZone zone, EnhosKarapazar source)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -212,6 +218,10 @@ public class DangerZone {
 		
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	public void PrintDangerZone() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		for (int i = 0; i < zone.getWidth(); i++) {
@@ -224,6 +234,14 @@ public class DangerZone {
 		}
 	}
 
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	public ZoneEnum getEnum(int line, int col) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		return zoneArray[line][col];
@@ -231,7 +249,13 @@ public class DangerZone {
 
 	/**
 	 * renvoi la direction ce qu'on va prendre si on pose une bombe a ce Tile
-	 * il fait ce control pour les Tile qui sont croisés*/
+	 * il fait ce control pour les Tile qui sont croisés
+	 * @param range 
+	 * @param line 
+	 * @param col 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException */
 	public Direction crossControl(int range, int line, int col)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -391,7 +415,13 @@ public class DangerZone {
 	 * il fait ce control pour les Tile qui sont en meme direction avec 
 	 * la direction de flamme de bomb.
 	 * sinon il fait appel a la method cross control
-	 * Donc on fait tous les controles en ce method*/
+	 * Donc on fait tous les controles en ce method
+	 * @param range 
+	 * @param line 
+	 * @param col 
+	 * @return 
+	 * 		?
+	 * @throws StopRequestException */
 	public Direction rangeControl(int range, int line, int col)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
