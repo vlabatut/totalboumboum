@@ -43,6 +43,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected UtilityHandler(UnluYildirim ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -54,11 +59,15 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
 	// ///////////////////////////////////////////////////////////////
 	// CRITERIA /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-
+	/** */
 	private final String caseName1 = "CAS1";
+	/** */
 	private final String caseName2 = "CAS2";
+	/** */
 	private final String caseName3 = "CAS3";
+	/** */
 	private Boolean pasaccessible = false;
+	/** */
 	private Boolean pasaccessible_bonus = false;
 	/** */
 	public AiZone zone = null;

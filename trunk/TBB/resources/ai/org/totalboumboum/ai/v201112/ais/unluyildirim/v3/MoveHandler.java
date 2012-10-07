@@ -30,12 +30,20 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<UnluYildirim> {
-
+	/** */
 	AiTile hero_destination = null;
+	/** */
 	Boolean isBombing = false;
+	/** */
 	int wallBombing = 0;
 
+	/** */
 	boolean canRun = true;
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected MoveHandler(UnluYildirim ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -242,6 +250,13 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isDangerous(AiTile tile) throws StopRequestException {
 
 		ai.checkInterruption();
