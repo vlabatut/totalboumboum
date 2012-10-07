@@ -14,26 +14,39 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class ErenGokce extends ArtificialIntelligence {
 
-	/**
-	 * 
-	 */
-	//variable controleur(calcul une seul fois) du fonction ou ai-je commence? whereDidIStart()
+	/** variable controleur(calcul une seul fois) du fonction ou ai-je commence? whereDidIStart() */
 	int once=0;
-	//les positions du shrink
+	/** les positions du shrink */
 	int shrinkx=1000;
+	/** */
 	int shrinky=1000;
-	//les booleens indiquant si les positons but sont acquris 
-	boolean xaccomplished=false,yaccomplished=false;
+	/** les booleens indiquant si les positons but sont acquris */ 
+	boolean xaccomplished=false;
+	/** */
+	boolean yaccomplished=false;
+	/** */
 	int startx=15;
+	/** */
 	int starty=13;
-	//right top corner, left top corner, ..etc la position du joueur au debut
-	boolean rtc=false,ltc=false,rdc=false,ldc=false;
+	/** right top corner, left top corner, ..etc la position du joueur au debut */
+	boolean rtc=false;
+	/** */
+	boolean ltc=false;
+	/** */
+	boolean rdc=false;
+	/** */
+	boolean ldc=false;
+	/** */
 	private static final long serialVersionUID = 1L; 
-	//shrink a-t-elle commencé ou pas, y-a-t-il une bombe ou pas
-	boolean mybomb=false,shrink=false;
-	//position du bombe, dernier mouvement
+	/** shrink a-t-elle commencé ou pas, y-a-t-il une bombe ou pas */
+	boolean mybomb=false;
+	/** */
+	boolean shrink=false;
+	/** position du bombe, dernier mouvement */
 	int[] bombpos=new int[2];
+	/** */
 	int lastmove;
+	/** */
 	int i=0;
 	
 	/**
@@ -185,6 +198,12 @@ public class ErenGokce extends ArtificialIntelligence {
 		
 	}
 */
+	/**
+	 * @param x 
+	 * @param y 
+	 * @return 
+	 * 		?
+	 */
 	private boolean isObstacle(int x, int y)
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
@@ -202,6 +221,14 @@ public class ErenGokce extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param move
+	 * @return
+	 * 		?
+	 */
 	private boolean isMovePossible(int x, int y, int move)
 	{	boolean result;
 		// calcum
@@ -224,6 +251,19 @@ public class ErenGokce extends ArtificialIntelligence {
 		}
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @param up
+	 * @param down
+	 * @param left
+	 * @param right
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 * @throws ExecutionException
+	 */
 	private int danger(boolean up,boolean down,boolean left,boolean right,int x,int y) throws ExecutionException
 	{
 		//implementation des structures
@@ -294,6 +334,18 @@ public class ErenGokce extends ArtificialIntelligence {
 	return action;
 	}
 	
+	/**
+	 * 
+	 * @param up
+	 * @param down
+	 * @param left
+	 * @param right
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 * @throws ExecutionException
+	 */
 	private int shrinkDanger(boolean up,boolean down,boolean left,boolean right,int x,int y) throws ExecutionException
 	{
 		//on traite le shrink comme un bombe a pouvoir 4
@@ -492,6 +544,13 @@ public class ErenGokce extends ArtificialIntelligence {
 		return action;
 	}
 */	
+	/**
+	 * @param up 
+	 * @param down 
+	 * @param left 
+	 * @param right 
+	 * 
+	 */
 	private void whereDidIStart(boolean up,boolean down,boolean left,boolean right)
 	{
 		if(once<=0)

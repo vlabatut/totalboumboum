@@ -8,12 +8,15 @@ package org.totalboumboum.ai.v200708.ais.erengokce;
  */
 public class Node {
 
-	//noeud son abscisse,ordonnee, et son noeud pere sil en existe
+	/** noeud son abscisse,ordonnee, et son noeud pere sil en existe */
 	int x;
+	/** */
 	int y;
+	/** */
 	int accessCost;
+	/** */
 	Node father;
-	//est-il visite par l'algorithme
+	/** est-il visite par l'algorithme */
 	boolean marked;
 	
 	/**

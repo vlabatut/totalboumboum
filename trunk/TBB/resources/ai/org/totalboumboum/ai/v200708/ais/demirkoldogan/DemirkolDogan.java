@@ -16,20 +16,33 @@ public class DemirkolDogan extends ArtificialIntelligence{
 
 	
 	//FIELDS
+	/** */
 	private Vector<Block> zoneAccessible; //les block qu'on a accès
+	/** */
 	private Vector<Block> path; //la serie des block qu'on doit passer pour arriver a targetBlock
+	/** */
 	private int[] oldPosition; //la position de l'IA dans la derniere appel
+	/** */
 	private Integer oldAction; //l'action de l'IA dans la derniere appel
+	/** */
 	private int actionMode;   //le mode de l'action
+	/** */
 	private int lastActionMode; //le mode de l'action de l'IA dans la derniere appel
 	
 	//CONSTANTS
+	/** */
 	private final static int DD_DANGER_POINT = 7;
+	/** */
 	private final static int DD_MODE_HIDE = 1;
+	/** */
 	private final static int DD_MODE_GET_BONUS = 2;
+	/** */
 	private final static int DD_MODE_ATTACK = 3;
+	/** */
 	private final static int DD_MODE_SHRINK = 4;
+	/** */
 	private final static int DD_TRACKING_CONSTANT = 10;
+	/** */
 	private final static long DD_SHRINK_TIME_LIMIT = 10000;
 	
 	//CONSTRUCTOR
@@ -50,7 +63,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	}
 
 
-
+	/** */
 	private static final long serialVersionUID = 1L;
 	
 	/** indicateur de première invocation (pour la compatibilité */
@@ -424,6 +437,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	 * position passée en paramètres. 
 	 * @param x	position de référence
 	 * @param y	position de référence
+	 * @param blockType 
+	 * @param zoneMatrix 
 	 * @return	position du joueur le plus proche
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType, int[][] zoneMatrix)
