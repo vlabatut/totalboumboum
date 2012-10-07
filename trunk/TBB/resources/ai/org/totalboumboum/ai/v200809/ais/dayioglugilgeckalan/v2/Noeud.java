@@ -25,6 +25,7 @@ public class Noeud {
 	/** le cout du noeud */
 	private int cout = 0;
 
+	/** */
 	private DayioglugilGeckalan source;
 	/**
 	 * Constructeur.

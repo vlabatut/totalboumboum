@@ -14,10 +14,14 @@ import java.util.Vector;
  */
 public class Tree {
 
+	/** */
 	private Vector<Noeud> nodes;
+	/** */
 	private Vector<SearchLink> links;
+	/** */
 	@SuppressWarnings("unused")
 	private Noeud lastNode;
+	/** */
 	private Noeud firstNode;
 
 	/**

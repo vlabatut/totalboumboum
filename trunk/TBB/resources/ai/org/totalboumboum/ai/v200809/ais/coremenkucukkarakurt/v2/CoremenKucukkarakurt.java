@@ -170,6 +170,10 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -181,9 +185,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
 	 * être différente de la case précédemment occupée
+	 * 
+	 * @param tile 
+	 * @return 
+	 * 		?
+	 * 
 	 * @throws StopRequestException 
 	 */
-	
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -202,6 +210,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -213,6 +228,10 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -233,7 +252,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		}
 	}
 	
-	// la methode qui verifie si la case est en securité ou non
+	/** la methode qui verifie si la case est en securité ou non
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isCaseSafe (AiTile tile) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
 		tile=currentTile;
@@ -275,7 +300,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	
-	// la methode qui verifie si je suis en meme ligne ou en meme colonne avec un case choisi
+	/** la methode qui verifie si je suis en meme ligne ou en meme colonne avec un case choisi
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean amIOnTheSameLine(AiTile tile) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -315,7 +346,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	
-	// comportement par hasard 
+	/** comportement par hasard
+	 *  
+	 * @param alan
+	 * @param ownHero
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiAction comportementHasard (AiZone alan, AiHero ownHero) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -372,7 +410,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	
-	// la methode qui renvoie la distance entre deux cases choisits
+	/** la methode qui renvoie la distance entre deux cases choisits
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private double getDistance(AiTile tile1,AiTile tile2) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -388,7 +433,12 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	
-	// la methode qui renvoi la liste des positions des bombes presentes
+	/** la methode qui renvoi la liste des positions des bombes presentes
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getBombPos() throws StopRequestException
 	{	
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -412,7 +462,10 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void pickNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -459,7 +512,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	}
 	
-	// la methode qui renvoie la direction qui n'est pas dangereuse 
+	/** la methode qui renvoie la direction qui n'est pas dangereuse
+	 *  
+	 * @param refTile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile getDirection(AiTile refTile) throws StopRequestException{
 		
 		List<AiTile> tiles = getClearNeighbors(currentTile);
@@ -482,7 +541,12 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	
-	// la methode qui renvoie la position de la bombe la proche a son explosion
+	/** la methode qui renvoie la position de la bombe la proche a son explosion
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile getDeepistBombPos() throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -512,7 +576,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 	}
 	
-	// la methode qui renvoie la liste des bombes proche a notre hero
+	/** la methode qui renvoie la liste des bombes proche a notre hero
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private List<AiBomb> getCloseBombs() throws StopRequestException
 	{	
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -536,8 +606,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}	
 	
 	
-	
-	// la methode qui renvoie si notre hero est à coté d'un mur
+	/** la methode qui renvoie si notre hero est à coté d'un mur
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean canIDestroyAWall (AiTile tile) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
 		tile=currentTile;
@@ -571,8 +646,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 
 	
-	
-	// la methode qui renvoie si notre hero a une possible direction qui n'est pas dangereuse
+	/** la methode qui renvoie si notre hero a une possible direction qui n'est pas dangereuse
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isAnySafeDirection(AiTile tile) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -647,7 +727,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	
-	// la methode qui renvoie la direction ce qu'on doit faire pour n'est pas se suicide
+	/** la methode qui renvoie la direction ce qu'on doit faire pour n'est pas se suicide
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private Direction getTheSafeDir(AiTile tile) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -730,7 +816,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 	}
 	
-	// la methode qui renvoie si il y a au moins un voisin tile qui est en securité
+	/** la methode qui renvoie si il y a au moins un voisin tile qui est en securité
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isRegionSafe(AiTile tile) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -755,7 +847,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		return false;
 	}
 	
-	// la methode qui renvoie la liste des voisins 
+	/** la methode qui renvoie la liste des voisins
+	 *  
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private Collection<AiTile> getClearNeighborTiles(AiTile tile) throws StopRequestException
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
 	List<Direction> directions = Direction.getPrimaryValues();

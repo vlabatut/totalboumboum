@@ -7,9 +7,9 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
  *
  */
 public class LienRecherche {
-	// noeud parent
+	/** noeud parent */
 	private Node origin;
-	// noeud fils
+	/** noeud fils */
 	private Node target;
 
 	/**

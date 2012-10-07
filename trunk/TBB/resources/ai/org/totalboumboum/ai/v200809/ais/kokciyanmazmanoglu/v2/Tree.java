@@ -19,10 +19,15 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Tree {
 
+	/** */
 	KokciyanMazmanoglu km;
+	/** */
 	private Vector<Node> nodes;
+	/** */
 	private Vector<Link> links;
+	/** */
 	private Node currentNode;
+	/** */
 	private Node finalNode;
 	
 	/**

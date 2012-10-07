@@ -22,22 +22,33 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Map {
 
+	/** */
 	@SuppressWarnings("unused")
 	private AiZone map;
+	/** */
 	private Collection<AiHero> adversaires;
 
+	/** */
 	private AiHero bomberman;
 
+	/** */
 	private Collection<AiBomb> bombes;
+	/** */
 	private Collection<AiBlock> blocks;
+	/** */
 	private Collection<AiItem> objets;
+	/** */
 	private Collection<AiFire> feu;
 	/** */
 	public int width;
 	/** */
 	public int height;
 
-	private int xadversaire, yadversaire;
+	/** */
+	private int xadversaire;
+	/** */
+	private int yadversaire;
+	/** */
 	private Etat matrix[][];
 
 	/**
@@ -59,7 +70,9 @@ public class Map {
 		remplir();
 	}
 
-	// nous remplaçons notre map
+	/** nous remplaçons notre map
+	 * 
+	 */
 	private void remplir() {
 
 		// premieremnt on met letat libre pour partout

@@ -15,11 +15,12 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
  */
 @SuppressWarnings("deprecation")
 public class SearchLink
-{	// noeud parent
+{	/** noeud parent */
 	private SearchNode origin;
-	// noeud fils
+	/** noeud fils */
 	private SearchNode target;
 
+	/** */
 	private MedeniUluer mu;
 	
 	/**

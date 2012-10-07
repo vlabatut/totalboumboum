@@ -14,12 +14,19 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class TimeMatrice {
+	/** */
 	private List<AiTile> caseBombes;
+	/** */
 	private long timeMatrice[][];
+	/** */
 	private AiZone zone;
+	/** */
 	private int defaultPortee;
+	/** */
 	private long durationNormale;
+	/** */
 	private int extendTime;
+	/** */
 	private boolean debug;
 
 	/**
@@ -237,8 +244,14 @@ public class TimeMatrice {
 			this.caseBombes = nouvelleBombes;
 		}
 	}
-	/*
+	
+	/**
 	 * Controle si les effets des bombes sont vrais
+	 * @param col 
+	 * @param lig 
+	 * @param temp2 
+	 * @param port 
+	 * @param nombre 
 	 */
 	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) {
 		boolean up=true,down=true,left=true,right=true;

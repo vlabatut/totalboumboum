@@ -43,16 +43,23 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	private AiTile targetTile=null;
 	/** Ce qu'on va faire.*/
 	private Mission mission; 	
+	/** */
 	private Mission lastmission; 	
 
+	/** */
 	private double FieldMatrix[][];
+	/** */
 	private double ActionMatrix[][];
 
 
+	/** */
 	private AiZone zone;
+	/** */
 	private Tree tree;
 
+	/** */
 	private int tilecounter=0;
+	/** */
 	private int missioncounter=0; 
 
 

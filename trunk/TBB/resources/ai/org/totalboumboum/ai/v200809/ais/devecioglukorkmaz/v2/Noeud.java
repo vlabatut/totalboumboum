@@ -10,8 +10,11 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class Noeud {
+	/** */
 	private AiTile tile;
+	/** */
 	private boolean visited;
+	/** */
 	private int iteration;
 
 	/**
@@ -42,6 +45,10 @@ public class Noeud {
 		return tile;
 	}
 
+	/**
+	 * 
+	 * @param iteration
+	 */
 	protected void markVisited(int iteration) {
 		visited = true;
 		this.iteration = iteration;

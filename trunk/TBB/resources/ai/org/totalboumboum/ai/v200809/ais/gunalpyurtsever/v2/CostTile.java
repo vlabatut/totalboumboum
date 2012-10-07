@@ -13,11 +13,17 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class CostTile  {
 	
+	/** */
 	private AiTile MyAiTile;
+	/** */
 	private int cost;
+	/** */
 	private int heuristic;
+	/** */
 	private Direction firstDrctn;
+	/** */
 	private boolean markVisited;
+	/** */
 	private boolean inDanger;
 	
 	/**

@@ -11,7 +11,9 @@ import java.util.Comparator;
 @SuppressWarnings("deprecation")
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {
 
+	/** */
 	private int col;
+	/** */
 	private int line;
 	
 	

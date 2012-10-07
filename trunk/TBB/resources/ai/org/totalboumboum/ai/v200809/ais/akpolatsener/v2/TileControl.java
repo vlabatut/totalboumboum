@@ -268,6 +268,7 @@ public class TileControl {
 	 * controle la case dans une direction donnés
 	 * 
 	 * @param tile
+	 * @param dir 
 	 * @return true s'il n'ya pas de danger dans cette direction
 	 * @throws StopRequestException
 	 */

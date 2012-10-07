@@ -12,10 +12,15 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 @SuppressWarnings("deprecation")
 public class TimedBomb {
 	
+	/** */
 	private AiZone zone;
+	/** */
 	private AiBomb bomb;
+	/** */
 	private long releaseTime;
+	/** */
 	private long time;
+	/** */
 	private ZoneEnum danger;
 	
 	/**
