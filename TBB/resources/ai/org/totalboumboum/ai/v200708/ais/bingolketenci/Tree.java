@@ -13,14 +13,15 @@ import java.util.Vector;
  */
 public class Tree {
 
-	// ensemble des noeuds composant l'arbre
+	/** ensemble des noeuds composant l'arbre */
 	private Vector<Noeud> nodes;
-	// ensemble des liens composant l'arbre
+	/** ensemble des liens composant l'arbre */
 	private Vector<SearchLink> links;
 
-	// dernier noeud traité lors de la recherche
+	/** dernier noeud traité lors de la recherche */
 	@SuppressWarnings("unused")
 	private Noeud lastNode;
+	/** */
 	private Noeud firstNode;
 
 	/**

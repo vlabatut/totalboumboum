@@ -12,9 +12,9 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
  *
  */
 public class SearchLink
-{	// noeud parent
+{	/** noeud parent */
 	private Noeud origin;
-	// noeud fils
+	/** noeud fils */
 	private Noeud target;
 
 	/**
