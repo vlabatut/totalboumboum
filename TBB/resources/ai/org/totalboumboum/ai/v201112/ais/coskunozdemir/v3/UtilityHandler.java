@@ -61,10 +61,15 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir>
 	// ///////////////////////////////////////////////////////////////
 	// CRITERIA /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
+	/** */
 	private final String	ItemVisible			= "ItemVisible";
+	/** */
 	private final String	VoisinageMurDest	= "VoisinageMurDest";
+	/** */
 	private final String	QuartierEnnemi		= "QuartierEnnemi";
+	/** */
 	private final String	cNull				= "cNull";
+	/** */
 	private final String	AvanceEnnemi		= "AvanceEnnemi";
 
 	@Override

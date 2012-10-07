@@ -21,7 +21,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class TileOperation
 {
 	// FIELD
+	/** */
 	private CoskunOzdemir		ai;
+	/** */
 	private ArrayList<AiTile>	accessibleTiles;
 
 	/**
