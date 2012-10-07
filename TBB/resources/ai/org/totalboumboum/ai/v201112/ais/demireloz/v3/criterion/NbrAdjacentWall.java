@@ -27,6 +27,7 @@ public class NbrAdjacentWall extends AiUtilityCriterionInteger {
 		this.ai = ai;
 	}
 
+	/** */
 	protected DemirelOz ai;
 
 	@Override

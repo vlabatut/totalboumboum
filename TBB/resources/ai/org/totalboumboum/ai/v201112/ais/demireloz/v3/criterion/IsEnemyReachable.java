@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201112.ais.demireloz.v3.DemirelOz;
 public class IsEnemyReachable extends AiUtilityCriterionInteger
 {	/** */
 	public static final String NAME = "IsEnemyReachable";
+	/** */
 	HashMap<AiTile,Integer> hashmap = new HashMap<AiTile, Integer>();
 
 
@@ -32,12 +33,11 @@ public class IsEnemyReachable extends AiUtilityCriterionInteger
 	}
 
 
+	/** */
 	protected DemirelOz ai;
 
 
 	@Override
-
-
 	public Integer processValue(AiTile tile) throws StopRequestException
 	{	//The values used to make a comparison (3,5,8,13,20), are referring to a distance
 		//calculated with the number of tiles.

@@ -43,15 +43,21 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 
 	}
 
-	// Mode collect cases
+	/** Mode collect cases */
 	private final String caseName1 = "Visible Item";
+	/** */
 	private final String caseName2 = "Tile close to a destructible wall in danger";
+	/** */
 	private final String caseName3 = "Tile close to a destructible wall";
+	/** */
 	private final String caseName4 = "Dumb Tile Collect";
-	// Mode attack cases
+	/** Mode attack cases */
 	private final String caseName5 = "Block Enemy";
+	/** */
 	private final String caseName6 = "Tile in Range of An Enemy";
+	/** */
 	private final String caseName7 = "Dumb Tile Attack";
+	/** */
 	private final String caseName8 = "Tile Close to destructible wall close to enemy";
 
 	@Override

@@ -23,6 +23,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<DemirelOz> {
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected MoveHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();

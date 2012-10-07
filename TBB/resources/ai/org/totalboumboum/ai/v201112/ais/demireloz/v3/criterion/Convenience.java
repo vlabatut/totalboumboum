@@ -31,6 +31,7 @@ public class Convenience extends AiUtilityCriterionBoolean {
 		this.ai = ai;
 	}
 
+	/** */
 	protected DemirelOz ai;
 
 	@Override

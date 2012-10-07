@@ -17,6 +17,11 @@ public class ModeHandler extends AiModeHandler<DemirelOz> {
 	/** */
 	public static final int RANGE_NUMBER = 3;
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected ModeHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -84,7 +89,11 @@ public class ModeHandler extends AiModeHandler<DemirelOz> {
 
 		return result;
 	}
-
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
 
