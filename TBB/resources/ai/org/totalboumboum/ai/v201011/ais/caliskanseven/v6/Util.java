@@ -22,7 +22,7 @@ public class Util {
 	 * 
 	 * @param ai
 	 * @param acs attack mode
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	static List<AiTile> getBlastList(CaliskanSeven ai,boolean acs) throws StopRequestException{

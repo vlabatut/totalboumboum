@@ -16,7 +16,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class SucceurCost extends SuccessorCalculator{
+	/** */
 	private List<AiTile> freeList;
+	/** */
 	private BuyuktopacTurak bt;
 	
 	/**

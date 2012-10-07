@@ -26,12 +26,19 @@ import java.util.List;
 @SuppressWarnings({ "unused", "deprecation" })
 public class AttackClass {
 
+	/** */
 	AiZone gameZone;
+	/** */
 	FillingClass fillingClass ;
+	/** */
 	double matriceAttaque[][];
+	/** */
 	private AiOutput aio;
+	/** */
 	 AiHero ourHero;
+		/** */
 	 private AvciGungor ai;
+	 
 	 /**
 	  * 
 	  * @param ai
@@ -89,6 +96,10 @@ public class AttackClass {
 	*//** classe implémentant la fonction de coût *//*
 	private MatrixCostCalculator costCalculator;*/
 
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void fillAttackMatrix() throws StopRequestException {
 		ai.checkInterruption();
 
@@ -231,6 +242,10 @@ public class AttackClass {
 		}
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 

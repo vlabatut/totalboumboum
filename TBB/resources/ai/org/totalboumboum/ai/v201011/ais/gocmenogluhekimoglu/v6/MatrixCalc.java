@@ -21,7 +21,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class MatrixCalc {
+	/** */
 	GocmenogluHekimoglu ai;
+	/** */
 	Paths paths;
 	
 	/**
@@ -54,7 +56,7 @@ public class MatrixCalc {
 	 * Round a double value to c decimal places
 	 * @param d
 	 * @param c
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	double roundTwoDecimals(double d, int c) throws StopRequestException {
@@ -70,7 +72,7 @@ public class MatrixCalc {
 	 * accesible in the first place), saving lots of CPU time.
 	 * @param accesible
 	 * @param attack
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	HashMap<AiTile,Double> calculateMatrix(List<AiTile> accesible,boolean attack) throws StopRequestException{

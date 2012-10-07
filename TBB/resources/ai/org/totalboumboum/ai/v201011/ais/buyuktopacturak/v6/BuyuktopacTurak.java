@@ -35,19 +35,33 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** la zone de jeu */
 	private AiZone zone = null;		
+	/** */
 	private AiTile currentTile = null;
+	/** */
 	private AiHero deepPurple = null;
+	/** */
 	private static AiPath pathStatic;
 	
+	/** */
 	private Elements element;
+	/** */
+	/** */
 	private CollectionMatrix colMatrix;
+	/** */
 	private AttackMatrix attackMatrix;
+	/** */
 	private PerfectStrangers ps;
+	/** */
 	ArtificialIntelligence ai=this;
 	
+	/** */
 	private double[][] currentMatrix;
+	/** */
 	private List<AiTile> freeList;
-	private int maxLine, maxCol; //Col et Ligne de la case maximale
+	/** */
+	private int maxLine;
+	/** */
+	private int maxCol; //Col et Ligne de la case maximale
 	
 	/**
 	 * Cette classe dépend essentiellement de la fonction processAction 
@@ -128,6 +142,10 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void initFirst() throws StopRequestException
 	{	
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -137,6 +155,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * D'abord on obtient des percepts, ensuite on trouve notre héro, 
 	 * et puis on crée làobjet PerfectStrangers et Elements.
 	 * En fin, on met à jour de notre case.  
+	 * @throws StopRequestException 
 	 */
 	private void initBT() throws StopRequestException
 	{	
@@ -196,7 +215,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * 
 	 * 
 	 * @param mode
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private boolean controlBomb(boolean mode) throws StopRequestException{
@@ -332,7 +351,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * 
 	 * @param tile1
 	 * @param tile2
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 * @throws NullPointerException
 	 */
@@ -368,6 +387,11 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * On utilise làalgorithme A*, on trouve le chemine vers les ennemies.
 	 * Si on trouve une chemine, on renvoie la direction de notre case à la case adversaire case par case. 
+	 * @param tile1 
+	 * @param tile2 
+	 * @return ?
+	 * @throws StopRequestException 
+	 * @throws NullPointerException 
 	 */
 	private Direction aStarDirection(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
 		checkInterruption();
@@ -474,7 +498,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * On renvoie de la matrice de la mode.
 	 * @param mode
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private double[][] getSelectMatrix(boolean mode) throws StopRequestException{
@@ -492,7 +516,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * on trouve la case maximum valeur en utilisant la matrice actuelle.
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiTile getMaxTile() throws StopRequestException{

@@ -11,7 +11,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 @SuppressWarnings("deprecation")
 public class AStarCost extends CostCalculator{
 
+	/** */
 	private BuyuktopacTurak bt;
+	/** */
 	private double[][] matrix;
 	
 	/**

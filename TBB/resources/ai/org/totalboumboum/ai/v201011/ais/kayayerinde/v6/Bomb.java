@@ -11,7 +11,9 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 @SuppressWarnings({ "unused", "deprecation" })
 public class Bomb {
 	
+	/** */
 	private KayaYerinde onder;
+	/** */
 	private Astar astar;
 	
 	/**

@@ -91,8 +91,11 @@ public class MovementCommitter {
 	 */
 	private class KesimalVarolSuccessor extends SuccessorCalculator
 	{
+		/** */
 		private HashMap<AiTile, ArrayList<AiTile> > discoveredByCases;
+		/** */
 		private Matrix m;
+
 		@Override
 		public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException {
 			monIA.checkInterruption();
@@ -338,10 +341,9 @@ public class MovementCommitter {
 	/**
 	 * La partie de commitMovement qui determine une chemin pour nous deplacer (et eventuellement, renvoie l'action suivante).
 	 * @param m
-	 * @param a
-	 * @param changedUpTo
-	 * @param usedClosestCase
+	 * @param invokedForSafeBombPlacement 
 	 * @return null si on ne peut pas decider sur une chemin, une action concernant une deplacement vers la direction sinon.
+	 * @throws StopRequestException 
 	 */
 	private AiAction choosePath(Matrix m,boolean invokedForSafeBombPlacement) throws StopRequestException
 	{

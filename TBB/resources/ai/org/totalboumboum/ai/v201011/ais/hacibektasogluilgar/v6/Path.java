@@ -24,11 +24,17 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Path {
+	/** */
 	HacibektasogluIlgar hi;
+	/** */
 	AiZone zone;
+	/** */
 	AiHero notreHeros;
+	/** */
 	AiHero adversaires[];
+	/** */
 	int height;
+	/** */
 	int width;
 	
 	/**
@@ -54,7 +60,7 @@ public class Path {
 	 * cette methode prends le mod d'une integer 
 	 * @param nombre
 	 * @param mode
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private int mod(int nombre,int mode) throws StopRequestException
@@ -70,7 +76,7 @@ public class Path {
 	 * on utilise cette method pour faire distinction de tiles qui sont deja calculé
 	 * @param tile
 	 * @param path
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private boolean tileEstDejaAppartientAuPath(AiTile tile, AiPath path) throws StopRequestException

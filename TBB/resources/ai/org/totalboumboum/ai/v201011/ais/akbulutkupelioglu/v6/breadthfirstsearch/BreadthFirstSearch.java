@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Coordinate;
 @SuppressWarnings("deprecation")
 public class BreadthFirstSearch
 {
-	
+	/** */
 	private AkbulutKupelioglu monIa;
 	
 	/**

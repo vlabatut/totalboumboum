@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  */
 @SuppressWarnings("deprecation")
 public class ActionManager {
+	/** */
 	GocmenogluHekimoglu ai;
 	/** */
 	public boolean force_collect_i;
@@ -39,7 +40,7 @@ public class ActionManager {
 	 * @param attack
 	 * @param matrix
 	 * @param force_collect 
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 * @throws LimitReachedException
 	 */

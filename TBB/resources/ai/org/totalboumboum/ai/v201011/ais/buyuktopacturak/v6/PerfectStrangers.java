@@ -22,10 +22,14 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class PerfectStrangers {
 
+	/** */
 	BuyuktopacTurak bt;
+	/** */
 	AiZone zone;
+	/** */
 	AiHero deepPurple;
 	
+	/** */
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**

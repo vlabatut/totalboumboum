@@ -23,20 +23,35 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class CalculeZone {
 	
+	/** */
 	private HacibektasogluIlgar hi;
+	/** */
 	AiZone zone;
+	/** */
 	int hauteur;
+	/** */
 	int largeur;
+	/** */
 	double[][] matriceTotal;
+	/** */
 	Etats[][] matriceZone;
+	/** */
 	int nbMurDestructible=0;
+	/** */
 	long bombeExplosionVitesse=700;
+	/** */
 	int nbBonus=0;
+	/** */
 	int nbBonusBombe=0;
+	/** */
 	int nbBonusFlamme=0;
+	/** */
 	AiItem bonuses[];
+	/** */
 	AiHero notreHero;
+	/** */
 	AiHero adversairesActuelles[];
+	/** */
 	int nbAdversaire=0;
 	
 	/**
@@ -112,7 +127,7 @@ public class CalculeZone {
 	 * @param source
 	 * @param cible
 	 * @param longueur
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private Direction direction(AiTile source,AiTile cible,int longueur) throws StopRequestException

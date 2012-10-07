@@ -15,12 +15,19 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 @SuppressWarnings("deprecation")
 public class Bonus {
+	/** */
 	private KayaYerinde onder;
+	/** */
 	private Matris matris;
+	/** */
 	private Astar astar;
+	/** */
 	private AiTile gittigim;
+	/** */
 	private AiTile incelenecek;
+	/** */
 	private boolean running;
+	/** */
 	private boolean yaz;
 	
 	/**
@@ -96,6 +103,11 @@ public class Bonus {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean incele() throws StopRequestException
 	{
 		onder.checkInterruption();

@@ -18,10 +18,15 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class OutilsCollecte {
 
+	/** */
 	TileControleur tileControleur;
+	/** */
 	List<AiItem> lesBonus;
+	/** */
 	ArtificialIntelligence abc;
+	/** */
 	List<AiTile> tilesPossible=new ArrayList<AiTile>();
+	/** */
 	AiHero notreHero;
 	
 	/**

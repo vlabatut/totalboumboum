@@ -19,8 +19,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DropBomb 
 {
+	/** */
 	ArtificialIntelligence ai;
+	/** */
 	AiZone zone;
+	/** */
 	int mode;
 	
 	

@@ -14,8 +14,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class PosageBombe {
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
 
+	/** */
 	private Securite securite = null;
 
 	/**

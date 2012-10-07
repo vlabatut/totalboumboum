@@ -20,12 +20,19 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class DeplacementAttaque {
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
+	/** */
 	private DeplacementCommune deplacementCommune = null;
+	/** */
 	private TraitementCommune traitementCommune=null;
+	/** */
 	boolean poserBombe2;
+	/** */
 	boolean attaque = false;
+	/** */
 	boolean detruire = false;
+	/** */
 	boolean blockage = false;
 
 	/**

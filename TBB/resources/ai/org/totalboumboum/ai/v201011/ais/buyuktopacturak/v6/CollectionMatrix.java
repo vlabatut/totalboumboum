@@ -17,23 +17,38 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class CollectionMatrix{	
+	/** */
 	private BuyuktopacTurak bt;
+	/** */
 	private PerfectStrangers ps;
+	/** */
 	private AiZone zone;		
+	/** */
 	private AiHero deepPurple;
 	
+	/** */
 	private List<AiTile> freeList =new ArrayList<AiTile>(); //ula  labilir tile.lar	
+	/** */
 	private List<AiItem> itemsList;
+	/** */
 	private List<AiTile> bonusList; 
+	/** */
 	private List<AiBlock> destWallsList;
+	/** */
 	private List<AiBlock> hardWallsList;
+	/** */
 	private List<AiHero> heroesList;
+	/** */
 	private List<AiBlock> willBurnWallsList;//Les murs qui vont exploser
 	
+	/** */
 	private double[][] matrix; 
+	/** */
 	private int width;
+	/** */
 	private int heigh;
 	
+	/** */
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**

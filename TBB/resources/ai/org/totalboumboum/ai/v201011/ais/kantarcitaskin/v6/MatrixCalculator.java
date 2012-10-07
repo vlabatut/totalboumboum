@@ -15,24 +15,34 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class MatrixCalculator
 {
 	
-	/**
-	 * La classe qui calcule les matrice en mode collect et en mode attaque
-	 * 
-	 * */
+	/** La classe qui calcule les matrice en mode collect et en mode attaque */
 	//Les contantes
+	/** */
 	int BOMB = -400;
+	/** */
 	int FIRE = -200;
+	/** */
 	int BLAST = -100;
+	/** */
 	int WALL = 10;
+	/** */
 	int ENEMY1 = -20;
+	/** */
 	int BONUS_COLLECT = 20;
+	/** */
 	int BONUS_ATTACK = 5;
+	/** */
 	int ENEMY2= 100;
+	/** */
 	int ENEMY_ATTACK= 100;
+	/** */
 	int mode;
 	//LEs percepts
+	/** */
 	ArtificialIntelligence ai;
+	/** */
 	AiZone zone;
+	/** */
 	Move move;
 	
 	

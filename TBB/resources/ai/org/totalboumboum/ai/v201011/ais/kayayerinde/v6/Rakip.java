@@ -15,12 +15,18 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 @SuppressWarnings("deprecation")
 public class Rakip {
+	/** */
 	private KayaYerinde onder;
+	/** */
 	private Matris matris;
+	/** */
 	private Astar astar;
+	/** */
 	private boolean kaciyor;
+	/** */
 	private boolean yaz;
 	
+	/** */
 	int i=0;
 	
 	/**
@@ -94,7 +100,11 @@ public class Rakip {
 		return result;
 	}
 	
-	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean incele() throws StopRequestException
 	{
 		onder.checkInterruption();

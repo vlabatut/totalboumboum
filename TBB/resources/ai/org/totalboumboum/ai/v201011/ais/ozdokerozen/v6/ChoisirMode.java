@@ -18,9 +18,13 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class ChoisirMode{
+	/** */
 	ArtificialIntelligence AI;
+	/** */
 	AiZone gameZone;
+	/** */
 	private int BESOINMIN;
+	/** */
 	private int BESOINMAX;
 	
 	/**

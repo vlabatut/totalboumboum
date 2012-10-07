@@ -12,10 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class InformationManager
 {
-
+	/** */
 	AkbulutKupelioglu monIa;
+	/** */
 	AiZone zone;
-
 	
 	/**
 	 * 
@@ -29,9 +29,4 @@ public class InformationManager
 		monIa = ia;
 		this.zone = zone;		
 	}
-	
-
-	
-	
-	
 }

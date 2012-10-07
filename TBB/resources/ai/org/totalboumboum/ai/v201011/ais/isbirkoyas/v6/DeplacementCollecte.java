@@ -16,10 +16,15 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class DeplacementCollecte {
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
+	/** */
 	private Securite securite = null;
+	/** */
 	private DeplacementCommune deplacementCommune = null;
+	/** */
 	private TraitementCommune traitementCommune=null;
+	/** */
 	private boolean poserBombe2;
 
 	/**

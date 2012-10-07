@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 @SuppressWarnings("deprecation")
 public class Runaway 
 {
+	/** */
 	private GoncuOnat monia;
 	/** */
 	public final int CASE_EMPTY=0;

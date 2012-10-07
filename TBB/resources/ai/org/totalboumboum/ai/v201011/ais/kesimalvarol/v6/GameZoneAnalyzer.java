@@ -56,8 +56,15 @@ public class GameZoneAnalyzer
 	/** Structure interne pour gerer les explosions enchain√©s */
 	private final class bombDetailed
 	{
+		/** */
 		public AiBomb bomb;
+		/** */
 		public double delay;
+		/**
+		 * @param b 
+		 * @param d 
+		 * @throws StopRequestException
+		 */
 		public bombDetailed(AiBomb b,double d) throws StopRequestException
 		{
 			monIA.checkInterruption();
@@ -222,6 +229,7 @@ public class GameZoneAnalyzer
 	 * @param m Matrice necessaire pour les calculs
 	 * @param i Ligne courante
 	 * @param j Colonne courante
+	 * @throws StopRequestException 
 	 */
 	private void assignBasicNums(Matrix m,int i,int j) throws StopRequestException
 	{
@@ -257,6 +265,7 @@ public class GameZoneAnalyzer
 	
 	/** Mur et adversaires sont gerees ici 
 	 * @param m Matrice necessaire pour les calculs
+	 * @throws StopRequestException 
 	 */
 	private void handleWallAndEnemies(Matrix m) throws StopRequestException
 	{

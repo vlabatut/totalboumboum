@@ -32,23 +32,45 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class ArikYaman extends ArtificialIntelligence
 {	/** */
 	public String mode;
+	/** */
 	private AiZone GameMap;
+	/** */
 	private AiHero AY;
+	/** */
 	private int[][] ProcessMatrix;	
+	/** */
 	private boolean onetime=true;
+	/** */
 	private CostCalculator clc;
+	/** */
 	private HeuristicCalculator hrc=new BasicHeuristicCalculator();
+	/** */
 	private Astar astar;
+	/** */
 	AiPath path1 = null;
+	/** */
 	AiPath path2 = null;
-	int pathrecord=1,nl,nr;
+	/** */
+	int pathrecord=1;
+	/** */
+	int nl;
+	/** */
+	int nr;
+	/** */
 	Collection<AiTile> tiles=new ArrayList<AiTile>();
+	/** */
 	List<AiTile> AccesiblePositives=new ArrayList<AiTile>();
+	/** */
 	List<AiTile> Safes=new ArrayList<AiTile>();
+	/** */
 	boolean canbomb=false;
+	/** */
 	boolean escape=true;
+	/** */
 	boolean closed=false;
+	/** */
 	boolean countcontrol=true;
+	/** */
 	int coef=1;
 	
 	
@@ -166,6 +188,14 @@ public class ArikYaman extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param path
+	 * @param hero
+	 * @param pathrecord
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private Direction DirectionChooser(AiPath path,AiHero hero,int pathrecord) throws StopRequestException
 	{	checkInterruption();
 	
@@ -194,6 +224,12 @@ public class ArikYaman extends ArtificialIntelligence
 		return direction;
 	}
 	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param GameMap
+	 * @throws StopRequestException
+	 */
 	private void initialiseMap(int[][] ProcessMatrix, AiZone GameMap) throws StopRequestException {
 		checkInterruption();
 		for(int i=0; i<GameMap.getHeight(); i++){
@@ -204,6 +240,16 @@ public class ArikYaman extends ArtificialIntelligence
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param AY
+	 * @param GameMap
+	 * @return ?
+	 * @throws StopRequestException
+	 * @throws LimitReachedException
+	 */
 	private boolean CanDropBomb(int[][] ProcessMatrix, AiHero AY, AiZone GameMap) throws StopRequestException, LimitReachedException{
 		checkInterruption();
 		int[][] DuplicateMatrix=ProcessMatrix.clone();
@@ -257,6 +303,13 @@ public class ArikYaman extends ArtificialIntelligence
 		}
 		return true;
 	}
+	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param GameMap
+	 * @throws StopRequestException
+	 */
 	private void fillwithInDes(int[][] ProcessMatrix, AiZone GameMap) throws StopRequestException{
 			checkInterruption();
 			Collection<AiBlock> allblocks = GameMap.getBlocks();
@@ -270,6 +323,13 @@ public class ArikYaman extends ArtificialIntelligence
 			}
 	}
 	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param GameMap
+	 * @param coef
+	 * @throws StopRequestException
+	 */
 	private void fillwithAtackPlaces(int[][] ProcessMatrix, AiZone GameMap,int coef) throws StopRequestException{
 			checkInterruption();
 			Collection<AiHero> allheroes = GameMap.getHeroes();
@@ -302,6 +362,11 @@ public class ArikYaman extends ArtificialIntelligence
 			}
 	}
 	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @throws StopRequestException
+	 */
 	private void refreshMatrix(int[][] ProcessMatrix) throws StopRequestException{
 			checkInterruption();
 			for(int i=0; i<ProcessMatrix.length; i++){
@@ -314,8 +379,11 @@ public class ArikYaman extends ArtificialIntelligence
 			}
 	}
 	
-
-	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @throws StopRequestException
+	 */
 	private void fillwithDes(int[][] ProcessMatrix) throws StopRequestException{
 			checkInterruption();
 			Collection<AiBlock> allblocks = GameMap.getDestructibleBlocks();
@@ -327,6 +395,12 @@ public class ArikYaman extends ArtificialIntelligence
 			}
 	}
 	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param tile
+	 * @throws StopRequestException
+	 */
 	private void fillDestructionAreas(int[][] ProcessMatrix,AiTile tile) throws StopRequestException{
 		checkInterruption();
 		for(int i=0;i<ProcessMatrix.length;i++){
@@ -344,6 +418,13 @@ public class ArikYaman extends ArtificialIntelligence
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param GameMap
+	 * @throws StopRequestException
+	 */
 	private void fillwithBombs(int[][] ProcessMatrix, AiZone GameMap) throws StopRequestException{
 			checkInterruption();	
 			Object[] bmbs= GameMap.getBombs().toArray();
@@ -370,6 +451,13 @@ public class ArikYaman extends ArtificialIntelligence
 			}
 	}
 	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param GameMap
+	 * @param n
+	 * @throws StopRequestException
+	 */
 	private void fillwithBns(int[][] ProcessMatrix, AiZone GameMap,int n) throws StopRequestException{
 			checkInterruption();
 			Collection<AiItem> allbns = GameMap.getItems();
@@ -380,6 +468,16 @@ public class ArikYaman extends ArtificialIntelligence
 				ProcessMatrix[bns.getLine()][bns.getCol()] += n-this.distanceCoefCalc(bns.getTile(),this.AY.getTile(),ProcessMatrix, n);
 			 }
 	}
+	
+	/**
+	 * 
+	 * @param tile1
+	 * @param tile2
+	 * @param matrix
+	 * @param n
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private int distanceCoefCalc(AiTile tile1, AiTile tile2,int[][] matrix,int n) throws StopRequestException{
 		checkInterruption();
 		double a=Math.sqrt(matrix.length*matrix.length+matrix[0].length*matrix[0].length);
@@ -387,6 +485,17 @@ public class ArikYaman extends ArtificialIntelligence
 		int result=(int)((b/a)*n);
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param tile2
+	 * @param matrix
+	 * @param n
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private int distanceCoefCalc(int x,int y, AiTile tile2,int[][] matrix,int n) throws StopRequestException{
 		checkInterruption();
 		double a=Math.sqrt(matrix.length*matrix.length+matrix[0].length*matrix[0].length);
@@ -394,6 +503,13 @@ public class ArikYaman extends ArtificialIntelligence
 		int result=(int)((b/a)*n);
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param GameMap
+	 * @throws StopRequestException
+	 */
 	private void takeFireHoles(int [][] ProcessMatrix,AiZone GameMap) throws StopRequestException{
 			checkInterruption();
 			Collection<AiFire> splashes = GameMap.getFires();
@@ -405,6 +521,12 @@ public class ArikYaman extends ArtificialIntelligence
 			 }
 	}
 	
+	/**
+	 * 
+	 * @param bmbs
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private Object[] sortBombs(Object[] bmbs) throws StopRequestException{
 		checkInterruption();
 		Object temp;
@@ -426,6 +548,15 @@ public class ArikYaman extends ArtificialIntelligence
 		}
 		return bmbs;
 	}
+	
+	/**
+	 * 
+	 * @param ProcessMatrix
+	 * @param Tile
+	 * @param param
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiTile FindClosestOptimum(int[][] ProcessMatrix,AiTile Tile,int param) throws StopRequestException{
 		checkInterruption();
 		AiTile[] tile=new AiTile[4];
@@ -525,18 +656,44 @@ public class ArikYaman extends ArtificialIntelligence
 		checkInterruption();
 		return this.ProcessMatrix;
 	}
+	
+	/**
+	 * 
+	 * @param Tile
+	 * @param GameMap
+	 * @return ?
+	 * @throws StopRequestException
+	 * @throws LimitReachedException
+	 */
 	private AiPath calculeShortestPath(AiTile Tile,AiZone GameMap) throws StopRequestException, LimitReachedException
 	{	checkInterruption();
 	    AiPath path=astar.processShortestPath(AY.getTile(),Tile);
 		path.setStart(AY.getPosX(), AY.getPosY());
 		return path;
 	}
+	
+	/**
+	 * 
+	 * @param Tiles
+	 * @param GameMap
+	 * @return ?
+	 * @throws StopRequestException
+	 * @throws LimitReachedException
+	 */
 	private AiPath calculeShortestPath(List<AiTile> Tiles,AiZone GameMap) throws StopRequestException, LimitReachedException
 	{	checkInterruption();
 		AiPath path=astar.processShortestPath(AY.getTile(),Tiles);
 		path.setStart(AY.getPosX(), AY.getPosY());
 		return path;
 	}
+	
+	/**
+	 * 
+	 * @param path
+	 * @param ProcessMatrix
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean checkPathCorruption(AiPath path,int[][] ProcessMatrix) throws StopRequestException{
 		checkInterruption();
 		List<AiTile> tiles = path.getTiles();
@@ -550,5 +707,4 @@ public class ArikYaman extends ArtificialIntelligence
 		}
 		return false;
 	}
-
 }

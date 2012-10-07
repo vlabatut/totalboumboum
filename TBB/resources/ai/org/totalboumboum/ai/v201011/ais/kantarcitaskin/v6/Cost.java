@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 @SuppressWarnings("deprecation")
 public class Cost extends CostCalculator
 {
+	/** */
 	ArtificialIntelligence ai;
 	/**
 	 * Classe de la fonction de cout et utilisé par A* pour determiner le chemin plus courts 

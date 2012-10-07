@@ -24,10 +24,15 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 @SuppressWarnings({ "unused", "deprecation" })
 public class CaliskanSeven extends ArtificialIntelligence {
 
+	/** */
 	AiTile oldtarget = null;
+	/** */
 	AiPath oldpath = null;
+	/** */
 	boolean collecte = true;
+	/** */
 	int targetcounter = 0;
+	/** */
 	boolean debug = false;
 
 	@Override

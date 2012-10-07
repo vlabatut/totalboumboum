@@ -38,9 +38,13 @@ public class AvciGungor extends ArtificialIntelligence {
 
 	// notre hero sur la zone
 	// private AiOutput aio;
+	/** */
 	double matrice[][];
+	/** */
 	double matriceUpdate[][];
+	/** */
 	private AiZone gameZone;
+	/** */
 	private AiHero ourHero;
 	/** */
 	public CollecteClass collectC;
@@ -48,16 +52,27 @@ public class AvciGungor extends ArtificialIntelligence {
 	public AttackClass attackC;
 	/** */
 	public FillingClass fc;
+	/** */
 	AiOutput aio;
+	/** */
 	private AiHero targetHero;
+	/** */
 	private Astar astar;
+	/** */
 	private AiPath path;
+	/** */
 	private AiTile tileDest;
+	/** */
 	private List<AiTile> possibleDest;
+	/** */
 	private Direction moveDir;
+	/** */
 	private WallController putBombController;
+	/** */
 	private HeuristicCalculator heuristicCalculator;
+	/** */
 	private MatrixCostCalculator costCalculator;
+	/** */
 	private boolean arrived;
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
@@ -104,6 +119,11 @@ public class AvciGungor extends ArtificialIntelligence {
 
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 * @throws LimitReachedException
+	 */
 	private void updatePath() throws StopRequestException, LimitReachedException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -161,6 +181,11 @@ public class AvciGungor extends ArtificialIntelligence {
 		System.out.print("-----\n");
 
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateAttackMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -178,6 +203,11 @@ public class AvciGungor extends ArtificialIntelligence {
 		System.out.print("-----\n");
 
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	void updateCostCalculator() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		for(int i=0;i<gameZone.getHeight();i++)
@@ -201,6 +231,11 @@ public class AvciGungor extends ArtificialIntelligence {
 		checkInterruption();
 		return (+1)*matriceUpdate[i][j];
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void chooseTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -217,6 +252,12 @@ public class AvciGungor extends ArtificialIntelligence {
 
 	}
 
+	/**
+	 * 
+	 * @param matriceUpdate
+	 * @param aio
+	 * @throws StopRequestException
+	 */
 	private void montrerLecran(double[][] matriceUpdate, AiOutput aio)
 			throws StopRequestException {
 		checkInterruption();

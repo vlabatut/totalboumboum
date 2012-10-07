@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class FastWallDestruction {
+	/** */
 	private static KesimalVarol monIA;
 	
 	/**

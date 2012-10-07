@@ -34,9 +34,24 @@ public class SelfCentricResearch
 	
 	/** Classe utilisee lors du gestion d'arbre de recherche*/
 	private static class caseNode {
-		public AiTile relatedCase,parentCase;
+		/** */
+		public AiTile relatedCase;
+		/** */
+		public AiTile parentCase;
+		/** */
 		public int depth;
-		public double selfImportance,cumulativeImportance;
+		/** */
+		public double selfImportance;
+		/** */
+		public double cumulativeImportance;
+		/**
+		 * @param relatedCase 
+		 * @param parentCase 
+		 * @param d 
+		 * @param cimportance 
+		 * @param depth 
+		 * @throws StopRequestException
+		 */
 		public caseNode(AiTile relatedCase,AiTile parentCase,double d,double cimportance,int depth) throws StopRequestException
 		{
 			monIA.checkInterruption();

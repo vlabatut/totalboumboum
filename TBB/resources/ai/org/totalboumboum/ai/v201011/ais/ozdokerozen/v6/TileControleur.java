@@ -23,21 +23,31 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
  */
 @SuppressWarnings("deprecation")
 public class TileControleur {
+	/** */
 	AiZone gameZone;
+	/** */
 	ArtificialIntelligence IA;
+	/** */
 	int[][] matriceImaginaire;
+	/** */
 	int[][] matriceTiles;
 	/** */
 	public List<AiTile> cibleSecure=new ArrayList<AiTile>();
 
+	/** */
 	int MURDESTRUCTIBLE=5;
+	/** */
 	int MURINDESTRUCTIBLE=0;
+	/** */
 	int FIRE=-2;
+	/** */
 	int SECURE=1;
+	/** */
 	int BONUS=10;
+	/** */
 	int SCOPE=-3;
 	
-	//variable temporiel
+	/** variable temporiel */
 	AiTile temp;
 	/** */
 	public  AiTile tileFuir;
@@ -293,7 +303,7 @@ public class TileControleur {
 	 * @param onAVu
 	 * @param path
 	 * @param tilesPossibles
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException 
 	 */
 	boolean pathFinder(AiTile debut,AiTile fin,List<AiTile> onAVu,List<AiTile> path,List<AiTile> tilesPossibles) throws StopRequestException{
