@@ -16,7 +16,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<KayukaTaskin>
 {	
+	/** */
 	private AiZone zone;
+	/** */
 	private AiHero ownHero;
 	
 	/**
@@ -78,6 +80,9 @@ public class ModeHandler extends AiModeHandler<KayukaTaskin>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		

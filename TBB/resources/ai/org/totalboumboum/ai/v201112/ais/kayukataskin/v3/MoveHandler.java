@@ -50,18 +50,29 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 	
 	
 	///////////////////////// DATA ///////////////////////////
+	/** */
 	private KayukaTaskin ai;
+	/** */
 	protected AiZone zone = null;
+	/** */
 	protected AiHero ownHero = null;
+	/** */
 	protected AiTile currentTile = null;
+	/** */
 	protected boolean bombDestination = false;
+	/** */
 	private boolean arrived;
+	/** */
 	private AiTile tileDest;
+	/** */
 	@SuppressWarnings("unused")
 	private double xDest;
+	/** */
 	@SuppressWarnings("unused")
 	private double yDest;
+	/** */
 	private Astar astar;
+	/** */
 	private AiPath path;
 	
 	
@@ -127,6 +138,10 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 	
 	/////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	@SuppressWarnings("unused")
 	private void updateDestination() throws StopRequestException
 	{
@@ -200,6 +215,11 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updatePath() throws StopRequestException
 	{
 		ai.checkInterruption(); //APPEL OBLIGATOIRE

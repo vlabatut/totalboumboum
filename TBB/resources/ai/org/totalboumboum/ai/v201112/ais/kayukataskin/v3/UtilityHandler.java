@@ -54,12 +54,17 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 		initData();
 	}
 
+	/** */
 	private AiZone zone = null;
+	/** */
 	private AiHero ownHero = null;
+	/** */
 	@SuppressWarnings("unused")
 	private Dijkstra dijkstra = null;
+	/** */
 	@SuppressWarnings("unused")
 	private CommonTools commonTools;
+	/** */
 	protected HashMap<AiTile,Boolean> bombTiles = new HashMap<AiTile,Boolean>();
 	/////////////////////////////////////////////////////////////////
 	// CRITERIA					/////////////////////////////////////
@@ -67,9 +72,14 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 	/** noms des cas, utilisés dans {@link #initCriteria} */
 	@SuppressWarnings("unused")
 	private final String caseName1 = "CAS1";
+	/** */
 	@SuppressWarnings("unused")
 	private final String caseName2 = "CAS2";
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void initData() throws StopRequestException
 	{	ai.checkInterruption();
 		
