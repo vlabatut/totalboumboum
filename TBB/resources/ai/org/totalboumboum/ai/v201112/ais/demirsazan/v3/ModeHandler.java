@@ -12,6 +12,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<DemirSazan>
 {	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected ModeHandler(DemirSazan ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
@@ -50,6 +55,9 @@ public class ModeHandler extends AiModeHandler<DemirSazan>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 	}

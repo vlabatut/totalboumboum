@@ -257,6 +257,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * @param ownHero
 	 * @param gameArea
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	protected Boolean amIinDengeraous(AiHero ownHero, AiZone gameArea) throws StopRequestException{
@@ -279,6 +280,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * @param next
 	 * @param gameArea
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	 
@@ -301,7 +303,9 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * @param center
 	 * @param gameArea
 	 * @param hero
+	 * @param tilesSelected 
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	protected boolean possibleFuir(AiTile center, AiZone gameArea, AiHero hero, List<AiTile> tilesSelected) throws StopRequestException {
@@ -345,6 +349,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * Calculate Direction
 	 * @param loc
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	Direction calculateDirection(AiLocation loc) throws StopRequestException{
@@ -386,6 +391,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * @param hero
 	 * @param path
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	protected boolean possibleDePasser(AiHero hero,AiPath path) throws StopRequestException{
@@ -439,6 +445,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * @param result
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	protected boolean checkExisting(List<AiTile> result,AiTile tile)throws StopRequestException
@@ -484,6 +491,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	 * @param gameArea
 	 * @param hero
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	@SuppressWarnings("unused")
@@ -524,6 +532,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * @param tiles
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private  List<AiTile> supprimerDuplicate(List<AiTile> tiles)throws StopRequestException {
@@ -544,6 +553,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	
 	/**
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	protected boolean isPossibleArriver() throws StopRequestException
@@ -562,6 +572,7 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	
 	/**
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	protected boolean isPossibleRammaserBonus() throws StopRequestException

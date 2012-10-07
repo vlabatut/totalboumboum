@@ -39,6 +39,14 @@ public class DistanceMenace extends AiUtilityCriterionInteger
 	
 	}
 	
+	/**
+	 * 
+	 * @param t1
+	 * @param t2
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	protected int getDistance(AiTile t1,AiTile t2) throws StopRequestException
 	{	ai.checkInterruption();
 		int distance = Math.abs(t1.getCol() - t2.getCol())+ Math.abs(t1.getRow() - t2.getRow()) ;
@@ -49,6 +57,7 @@ public class DistanceMenace extends AiUtilityCriterionInteger
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	protected DemirSazan ai;
 
     /////////////////////////////////////////////////////////////////
