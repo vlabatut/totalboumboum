@@ -56,6 +56,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 		Fonction de coût.
 	 * @param heuristicCalculator	
 	 * 		Fonction heuristique.
+	 * @param successorCalculator 
+	 * 		Fonction successeur.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
@@ -532,6 +534,18 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
     	return result;
     }
 */
+	/**
+	 * Compare ce noeud avec celui passé
+	 * en paramètre.
+	 * 
+	 * @param node
+	 * 		Le noeud comparé. 
+	 * @return
+	 * 		Une valeur positive si ce noeud est considéré comme "supérieur",
+	 * 		une valeur négative s'il est considéré comme inférieur, et
+	 * 		zéro si les noeuds sont considérés comme "égaux". 
+	 * 
+	 */
 	public int compareScoreTo(AiSearchNode node)
     {	Double f1 = cost + heuristic;
     	Double f2 = node.getCost() + node.getHeuristic();

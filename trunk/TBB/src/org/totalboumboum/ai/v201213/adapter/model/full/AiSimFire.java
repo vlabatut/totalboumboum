@@ -141,7 +141,7 @@ public final class AiSimFire extends AiSimSprite implements AiFire
 	private long time = 0;
 	
 	@Override
-	public long getTime()
+	public long getElapsedTime()
 	{	return time;
 	}
 

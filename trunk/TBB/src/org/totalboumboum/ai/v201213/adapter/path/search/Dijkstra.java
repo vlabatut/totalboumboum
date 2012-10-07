@@ -191,6 +191,18 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		return result;
 	}
 	
+	/**
+	 * Calcule un chemin de fuite.
+	 * 
+	 * @param startLocation
+	 * 		Position de départ.
+	 * @return
+	 * 		Le chemin calculé.
+	 * @throws StopRequestException
+	 * 		Si le moteur a demandé l'arrêt de l'agent.
+	 * @throws LimitReachedException
+	 * 		L'algorithme de recherche a atteint les limites fixées.
+	 */
 	public AiPath processEscapePath(AiLocation startLocation) throws StopRequestException, LimitReachedException
 	{	// on indique la condition de fin pour l'exploration de la zone
 		stopWhenSafe = true;

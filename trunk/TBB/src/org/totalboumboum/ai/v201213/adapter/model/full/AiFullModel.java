@@ -548,7 +548,7 @@ if(sprite instanceof AiSimBomb)
 			{	AiSimBomb bomb = (AiSimBomb) sprite;
 				if(bomb.hasCountdownTrigger())
 				{	long normalDuration = bomb.getNormalDuration();
-					result = normalDuration - bomb.getTime();
+					result = normalDuration - bomb.getElapsedTime();
 					if(result<0)
 						result = 0;
 				}
@@ -822,6 +822,7 @@ if(sprite instanceof AiSimBomb)
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Liste des bombes à faire exploser */
 	private List<AiSimBomb> toBeDetonated = new ArrayList<AiSimBomb>();
 	
 	/**
@@ -856,7 +857,7 @@ if(sprite instanceof AiSimBomb)
 				current.removeSprite(bomb);
 			}
 			// update time
-			long elapsedTime = bomb.getTime() + duration;
+			long elapsedTime = bomb.getElapsedTime() + duration;
 			bomb.setTime(elapsedTime);
 		}
 		
@@ -879,7 +880,7 @@ if(sprite instanceof AiSimBomb)
 					toBeDetonated.add(bomb);
 				}
 				// update time
-				long elapsedTime = bomb.getTime() + duration;
+				long elapsedTime = bomb.getElapsedTime() + duration;
 				bomb.setTime(elapsedTime);
 			}
 			else
@@ -902,7 +903,7 @@ if(sprite instanceof AiSimBomb)
 				toBeDetonated.add(bomb);
 			}
 			// update time
-			long elapsedTime = bomb.getTime() + duration;
+			long elapsedTime = bomb.getElapsedTime() + duration;
 			bomb.setTime(elapsedTime);
 		}
 
@@ -1022,7 +1023,7 @@ if(sprite instanceof AiSimBomb)
 		newState = new AiSimState(name,direction,time);
 		fire.setState(newState);
 		// and elapsed time
-		long elapsedTime = fire.getTime() + duration;
+		long elapsedTime = fire.getElapsedTime() + duration;
 		fire.setTime(elapsedTime);
 	}
 

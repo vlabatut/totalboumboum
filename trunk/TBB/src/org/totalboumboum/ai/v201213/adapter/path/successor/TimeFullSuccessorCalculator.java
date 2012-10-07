@@ -112,6 +112,8 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * 		IA de référence pour gérer les interruptions.
 	 * @param hero
 	 * 		Personnage de référence pour calculer la durée des déplacements.
+	 * @param searchMode 
+	 * 		Le type de recherche à effectuer (cf. les champs de cette classe).
 	 */
 	public TimeFullSuccessorCalculator(ArtificialIntelligence ai, AiHero hero, int searchMode)
 	{	super(ai);

@@ -58,6 +58,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
  */
 public final class AstarUse
 {
+	/**
+	 * Teste les fonctionalités de l'API IA
+	 * propres à l'algorithme A*.
+	 * 
+	 * @param args
+	 * 		Pas utilisé.
+	 */
 	public static void main(String args[])
 	{	// utilisation de base
 		example1();

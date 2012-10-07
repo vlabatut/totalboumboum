@@ -101,6 +101,9 @@ public final class AiSimState  implements AiState
 	{	return name;
 	}
 	
+	/**
+	 * Marque un sprite comme terminé.
+	 */
 	protected void setEnded()
 	{	name = AiStateName.ENDED;		
 	}
@@ -171,6 +174,12 @@ public final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Fait une copie de cet état.
+	 * 
+	 * @return 
+	 * 		La copie de cet état.
+	 */
 	public AiSimState copy()
 	{	AiSimState result = new AiSimState();
 		result.direction = direction;

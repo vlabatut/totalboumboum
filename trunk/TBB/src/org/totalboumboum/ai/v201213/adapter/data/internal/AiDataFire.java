@@ -133,7 +133,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	private long time = 0;
 	
 	@Override
-	public long getTime()
+	public long getElapsedTime()
 	{	return time;
 	}
 

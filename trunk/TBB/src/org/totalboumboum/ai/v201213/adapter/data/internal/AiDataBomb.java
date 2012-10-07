@@ -346,7 +346,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	private long time = 0;
 	
 	@Override
-	public long getTime()
+	public long getElapsedTime()
 	{	return time;	
 	}
 	

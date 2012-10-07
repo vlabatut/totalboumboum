@@ -635,6 +635,8 @@ public final class AiSimZone extends AiZone
 	 * 		La portée des bombes du joueur.
 	 * @param ownHero
 	 * 		Indique si ce personnage est celui contrôlé par l'agent.
+	 * @return
+	 * 		Le personnage créé. 
 	 */
 	public AiSimHero createHero(AiTile tile, PredefinedColor color, int bombNumber, int range, boolean ownHero)
 	{	// bomb prototype
@@ -785,6 +787,8 @@ public final class AiSimZone extends AiZone
 	 * @param destructible
 	 * 		Le type de mur à créer : {@code true} pour un mur destructible,
 	 * 		{@code false} pour un mur indestructible.
+	 * @return
+	 * 		Le block créé. 
 	 */
 	public AiSimBlock createBlock(AiTile tile, boolean destructible)
 	{	// location
@@ -896,6 +900,8 @@ public final class AiSimZone extends AiZone
 	 * 		La portée de la bombe à créer.
 	 * @param elapsedTime
 	 * 		Le temps écoulé depuis que la bombe a été posée.
+	 * @return
+	 * 		La bombe créée. 
 	 */
 	public AiSimBomb createBomb(AiTile tile, int range, long elapsedTime)
 	{	// location
@@ -970,6 +976,8 @@ public final class AiSimZone extends AiZone
 	 * 		joueur spécifié.
 	 * @param hero
 	 * 		Le personnage devant poser la bombe.
+	 * @return 
+	 * 		La bombe créée.
 	 */
 	public AiSimBomb createBomb(AiTile tile, AiSimHero hero)
 	{	// location
@@ -1056,6 +1064,8 @@ public final class AiSimZone extends AiZone
 	 * 
 	 * @param tile
 	 * 		La case de la zone devant contenir le sprite.
+	 * @return 
+	 * 		Le feu créé.
 	 */
 	public AiSimFire createFire(AiTile tile)
 	{	// location
@@ -1110,6 +1120,8 @@ public final class AiSimZone extends AiZone
 	 * 		Le sprite original, à recopier.
 	 * @param tile
 	 * 		La case de la zone devant contenir le sprite.
+	 * @return
+	 * 		Le feu créé. 
 	 */
 	protected AiSimFire createFire(AiFire original, AiTile tile)
 	{	// location
@@ -1397,6 +1409,8 @@ public final class AiSimZone extends AiZone
 	 * 		La case de la zone devant contenir le sprite.
 	 * @param itemType
 	 * 		Le type d'item à créer.
+	 * @return
+	 * 		L'item créé. 
 	 */
 	public AiSimItem createItem(AiTile tile, AiItemType itemType)
 	{	// location

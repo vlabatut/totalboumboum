@@ -94,7 +94,8 @@ public interface AiBomb extends AiSprite
 	/**
 	 * Renvoie le délai normal avant l'explosion de la bombe.
 	 * Ce délai ne tient pas compte des pannes éventuelles.
-	 * Ce délai n'est pas défini pour tous les types de bombes
+	 * Ce délai n'est pas défini pour tous les types de bombes:
+	 * seulement pour celles à retardement.
 	 * 
 	 * @return	
 	 * 		Le délai normal avant explosion exprimé en millisecondes.
@@ -217,7 +218,7 @@ public interface AiBomb extends AiSprite
 	 * @return	
 	 * 		Temps exprimé en ms.
 	 */
-	public long getTime();
+	public long getElapsedTime();
 
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////

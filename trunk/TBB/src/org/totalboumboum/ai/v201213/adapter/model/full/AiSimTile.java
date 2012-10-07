@@ -84,7 +84,13 @@ public final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TODO comment
+	/**
+	 * Rajoute à cette case le sprite passé
+	 * en paramètre.
+	 * 
+	 * @param sprite 
+	 * 		Le sprite à rajouter à cette case.
+	 */
 	protected void addSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -118,7 +124,13 @@ public final class AiSimTile extends AiTile
 		}
 	}
 	
-	// TODO comment
+	/**
+	 * Supprime de cette case le sprite passé
+	 * en paramètre.
+	 * 
+	 * @param sprite 
+	 * 		Le sprite à supprimer de cette case.
+	 */
 	protected void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -331,10 +343,13 @@ public final class AiSimTile extends AiTile
 	}
 
 	/**
-	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * Fonction auxiliaire utilisée pour déterminer si cette
 	 * case est traversable par le sprite passé en paramètre.
 	 * (cette fonction réalise le traitement relativement à 
-	 * la liste de sprite passée en paramètre)
+	 * la liste de sprite passée en paramètre).
+	 * 
+	 * @param <T> 
+	 * 		Type de sprite à traiter.
 	 * 
 	 * @param sprite
 	 * 		le sprite qui veut traverser cette case
@@ -394,12 +409,17 @@ public final class AiSimTile extends AiTile
 	}
 
 	/**
-	 * termine les simulations de sprites passées en paramètres
+	 * Termine les simulations de sprites passées en paramètres.
 	 * 
 	 * @param <T>
-	 * 		type de simulation
+	 * 		Type de simulation.
+	 * @param <U> 
+	 * 		Type de sprite à traiter.
+	 * 
 	 * @param internalList
-	 * 		liste de simulations
+	 * 		Liste de simulations.
+	 * @param externalList 
+	 * 		Liste de sprites.
 	 */
 	private <T extends AiSimSprite, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();

@@ -57,6 +57,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
  */
 public final class DijkstraUse
 {
+	/**
+	 * Teste les fonctionalités de l'API IA
+	 * liées à l'algorithme de Dijkstra.
+	 * 
+	 * @param args
+	 * 		Pas utilisé.
+	 */
 	public static void main(String args[])
 	{	// utilisation de base
 		example1();
