@@ -282,9 +282,6 @@ public class AiModel
 	 * de sprites qui ont provoqué la fin de la mise à jour à la suite d'une action, avec getLimitSprites.
 	 * Il peut aussi récupérer la durée qui s'est écoulée (en temps simulé) depuis la dernière simulation, 
 	 * avec getDuration.
-	 * 
-	 * @param specifiedStates	
-	 * 		map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
 	public void simulate()
 	{	// create a copy of the current zone
@@ -485,7 +482,7 @@ if(sprite instanceof AiSimBomb)
 	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
-	 * @param statesMap	
+	 * @param sprites	
 	 * 		la liste des états à appliquer aux sprites (calculés automatiquement ou spécifiés par l'utilisateur)
 	 * @param duration	
 	 * 		durée du pas de simulation
@@ -741,6 +738,7 @@ if(sprite instanceof AiSimBomb)
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	private List<AiSimBomb> toBeDetonated = new ArrayList<AiSimBomb>();
 	
 	/**

@@ -51,6 +51,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 
 	 * @param costMatrix	
 	 * 		la matrice de coût
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
 	{	setCostMatrix(costMatrix);			
@@ -82,6 +84,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		colonne de la case à mettre à jour
 	 * @param cost	
 	 * 		nouveau coût à affecter
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;

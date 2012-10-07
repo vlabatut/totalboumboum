@@ -72,6 +72,9 @@ public interface AiFire extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// à renommer en getElapsedTime, même chose pour les bombes (plus changer le getTime actuel en getCountdownTime) 
+	/**
+	 * @return
+	 * 		Le temps écoulé.
+	 */
 	public long getTime();	
 }

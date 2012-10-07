@@ -75,6 +75,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
 	 * interceptée localement par un try/catch. 
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public synchronized final void checkInterruption() throws StopRequestException
 	{	Thread.yield();
@@ -193,7 +195,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	private boolean initialized = false;
+	
 	/**
 	 * méthode à surcharger s'il est nécessaire que l'agent soit
 	 * initialisé. Toute opération définie dans cette fonction
@@ -201,6 +205,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * A noter que les percepts ont néanmoins déjà été mis à jour.
 	 * Si aucune méthode init n'est définie dans l'agent, alors celle
 	 * ci sera exécutée (qui ne fait rien du tout).
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public void init() throws StopRequestException
 	{	

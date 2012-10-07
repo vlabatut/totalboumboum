@@ -61,10 +61,6 @@ final class AiSimZone extends AiZone
 	 * 
 	 * @param zone
 	 * 		la zone de référence
-	 * @param fullCopy
-	 * 		indique si les sprites doivent aussi être copiés ou pas
-	 * @return	
-	 * 		une nouvelle zone vide de mêmes dimensions
 	 */
 	protected AiSimZone(AiZone zone)
 	{	// matrix and tiles

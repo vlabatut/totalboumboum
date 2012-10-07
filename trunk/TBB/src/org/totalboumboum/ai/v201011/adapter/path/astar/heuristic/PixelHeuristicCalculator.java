@@ -49,6 +49,12 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	/** ordonnée de départ (doit être contenue dans la case de départ) */
 	private double startY;
 	
+	/**
+	 * 
+	 * @param startTile
+	 * @param startX
+	 * @param startY
+	 */
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
 	{	this.startTile = startTile;
 		this.startX = startX;
