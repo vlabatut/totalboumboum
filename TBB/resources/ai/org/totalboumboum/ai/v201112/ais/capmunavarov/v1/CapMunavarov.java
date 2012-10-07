@@ -25,12 +25,16 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class CapMunavarov extends ArtificialIntelligence
 {
+	/** */
 	List<AiUtilityCase> bombcases=new ArrayList<AiUtilityCase>(); //Les cases definie pour le bombage 
+	/** */
 	List<AiUtilityCase> moveCases=new ArrayList<AiUtilityCase>();//Les cases definie pour la deplacement  
 	
-	 //on va utiliser ces valeurs 
+	/** */
 	static int zoneWidth=0;
+	/** */
 	static int zoneHeight =0;
+	/** */
 	static int bombeCount=0;
 	
 	@Override

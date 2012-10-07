@@ -41,6 +41,10 @@ public class MoveHandler extends AiMoveHandler<CapMunavarov>
 	}
 
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @return
+	 * 		?
+	 */
 	@SuppressWarnings("unused")
 	private Direction goTowards (){
 		boolean result=true;
