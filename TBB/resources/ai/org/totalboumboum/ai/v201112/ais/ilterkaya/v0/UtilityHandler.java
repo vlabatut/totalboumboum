@@ -49,6 +49,7 @@ public class UtilityHandler extends AiUtilityHandler<IlterKaya>
 	/////////////////////////////////////////////////////////////////
 	/** noms des cas, utilisés dans {@link #initCriteria} */
 	private final String caseName1 = "CAS1";
+	/** */
 	private final String caseName2 = "CAS2";
 	
 	@Override
