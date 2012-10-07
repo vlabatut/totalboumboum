@@ -15,55 +15,92 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 public class GokselMenges  extends ArtificialIntelligence
 {
 
+	/** */
 	private static final long serialVersionUID = 7954120902478357292L;
+	/** */
 	int UP;
+	/** */
 	int DOWN;
+	/** */
 	int RIGHT;
+	/** */
 	int LEFT;
+	/** */
 	int MIDDLE;
 	
+	/** */
 	int CoutInitial=0;
+	/** */
 	Vector<Integer> Costs=new Vector<Integer>();
+	/** */
 	int x=0;
+	/** */
 	int y=0;
+	/** */
 	Point Goal;
+	/** */
 	boolean path = false;
+	/** */
 	int j1 = 0;
+	/** */
 	int i1 = 0;
+	/** */
 	int path1 = -1;
+	/** */
 	int BombNumber = 1;
+	/** */
 	boolean escaping = false;
+	/** */
 	boolean BombNumberIncremented = false;
 	
-
+	/** */
 	boolean escapingFromBombIteratorNumber100 = false;
 	
 	
+	/** */
 	int[][] oldSituation = null;
+	/** */
 	Vector<Point> bombPosition = new Vector<Point>();
+	/** */
 	int getPlayerCount = -1;
+	/** */
 	Vector<Point> blockPoints = new Vector<Point>();
 	
+	/** */
 	boolean poserBombe = false;
 	
+	/** */
 	Vector< Point> MoveCosts = new Vector<Point>();
+	/** */
 	Vector<Point> ZoneAccessible = new Vector<Point>();
+	/** */
 	Vector<Point> ZoneAccessible2 = new Vector<Point>();
 
+	/** */
 	Vector<Point> ZoneAccessibleEscapeBomb = new Vector<Point>();
+	/** */
 	Vector<Point> MovedPoints = new Vector<Point>();
+	/** */
 	Vector<Integer> pathToGo = new Vector<Integer>();
 	
 	
-	// les couts pour l'algorithm A* pour trouver le meilleur chemin
+	/** les couts pour l'algorithm A* pour trouver le meilleur chemin */
 	final int cost_empty = 1;
+	/** */
 	final int cost_softwall = 3;
+	/** */
 	final int cost_bonus = 2;
+	/** */
 	final int cost_bomba = 100000;
+	/** */
 	final int cost_feu = 100000;
+	/** */
 	final int cost_hardwall = 100000;
+	/** */
 	final int cost_portee = 1000;
+	/** */
 	final int cost_distance_multiplier = 10;
+	/** */
 	final int cost_ennemi = 5;
 	
 	/**
@@ -1081,6 +1118,13 @@ return points;
 	
 	}
 
+	/**
+	 * 
+	 * @param point1
+	 * @param point2
+	 * @return
+	 * 		?
+	 */
 	private int getDistance(Point point1,Point point2)
 	{	int result = 0;
 		result = result + Math.abs(point1.x-point2.x);
@@ -1106,7 +1150,12 @@ return points;
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param CurrentPoint
+	 * @return
+	 * 		?
+	 */
 	private Point getClosestPlayerPositionAlive(Point CurrentPoint)
 	{	int minDistance = Integer.MAX_VALUE;
 	Point result=CurrentPoint;
@@ -1304,7 +1353,13 @@ return points;
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param CurrentPos
+	 * @param blockType
+	 * @return
+	 * 		?
+	 */
 	private Point BringClosestBlockPosition(Point CurrentPos , int blockType)
 	{	int minDistance = Integer.MAX_VALUE;
 		Point result=new Point(CurrentPos.x,CurrentPos.y); 
@@ -1323,6 +1378,12 @@ return points;
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param blockType
+	 * @return
+	 * 		?
+	 */
 	private Vector<Point> BringAllBlockPositions(int blockType)
 	{	
 
@@ -1345,7 +1406,15 @@ return points;
 	}
 
 	
-	// calcule la distance entre deuz points donnes.
+	/** calcule la distance entre deuz points donnes.
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 * 		?
+	 */
 	private int distance(int x1,int y1,int x2,int y2)
 	{	int result = 0;
 		result = result + Math.abs(x1-x2);
