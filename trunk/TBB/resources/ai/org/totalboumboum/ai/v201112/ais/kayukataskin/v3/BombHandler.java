@@ -38,7 +38,9 @@ public class BombHandler extends AiBombHandler<KayukaTaskin>
     /////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	private AiHero ownHero;
+	
 	protected boolean considerBombing() throws StopRequestException
 	{	ai.checkInterruption();
 		boolean canBomb=false;
@@ -134,6 +136,10 @@ public class BombHandler extends AiBombHandler<KayukaTaskin>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 
