@@ -21,6 +21,7 @@ public class AStar implements PathFinder {
 	/** The current list of closed nodes */
 	private final NodeList closedList;
      
+	/** */
 	int[][] zoneMatrix = new int[15][13];
 	/** The map */
 	
@@ -39,6 +40,7 @@ public class AStar implements PathFinder {
 	/** The current path */
 	public List<int[]> path = new ArrayList<int[]>();
 	
+	/** */
 	private int[] ownPosition;
     
 	/** The current search state */
@@ -47,9 +49,15 @@ public class AStar implements PathFinder {
 	 * A class containing a sorted list of nodes.
 	 */
 	private static class NodeList {
+		/** */
 		final Node[] node;
+		/** */
 		int count;
+		/** */
 		boolean f_sorted;
+/**
+ * @param size
+ */
 //		HashMap stateMap = new HashMap();
 
 		NodeList(int size) {
@@ -57,6 +65,11 @@ public class AStar implements PathFinder {
 		}
 
 		// Add a node. Returns false if there's no room.
+		/**
+		 * @param newNode
+		 * @return
+		 * 		?
+		 */
 		boolean addNode(Node newNode) {
 			if (count == node.length)
 				return false;
@@ -67,6 +80,9 @@ public class AStar implements PathFinder {
 		}
 
 		// Remove a node
+		/**
+		 * @param ownPosition
+		 */
 		void removeNode(int [] ownPosition) {
 			int index = findNode(ownPosition);
 //			assert index != -1;
@@ -76,6 +92,11 @@ public class AStar implements PathFinder {
 		}
 
 		// Find a node's position by its userstate. Returns -1 if node is not found.
+		/**
+		 * @param ownPosition
+		 * @return
+		 * 		?
+		 */
 		int findNode(int [] ownPosition) {
 			for (int i = 0; i < count; i ++)
 				if (node[i].userState.equals(ownPosition))
@@ -85,6 +106,11 @@ public class AStar implements PathFinder {
 		}
 		
 		// Return a node by its userstate (or null if not present)
+		/**
+		 * @param ownPosition
+		 * @return
+		 * 		?
+		 */
 		Node getNode(int [] ownPosition) {
 			int index = findNode(ownPosition);
 			if (index == -1)
@@ -94,6 +120,9 @@ public class AStar implements PathFinder {
 		}
 
 		// Empty the list
+		/**
+		 * 
+		 */
 		void clear() {
 			for (int i = 0; i < count; i ++)
 				node[i] = null;
@@ -106,10 +135,18 @@ public class AStar implements PathFinder {
 //		}
 		
 		// Is the list empty?
+		/**
+		 * @return
+		 * 		?
+		 */
 		boolean isEmpty() {
 			return count == 0;
 		}
 		
+		/**
+		 * @return
+		 * 		?
+		 */
 		// Pop and return the head of the list
 		Node popHead() {
 			if (count > 0 && !f_sorted) {
@@ -129,16 +166,26 @@ public class AStar implements PathFinder {
 	 */
 	private static class Node {
 
+		/** */
 		Node parent; // used during the search to record the parent of successor nodes
+		/** */
 		Node child; // used after the search for the application to view the search in reverse
 
+		/** */
 		int g; // cost of this node + it's predecessors
+		/** */
 		@SuppressWarnings("unused")
 		int h; // heuristic estimate of distance to goal
 //		int f; // sum of cumulative cost of predecessors and self and heuristic
 
+		/** */
 		int [] userState;
 
+		/**
+		 * 
+		 * @param userState
+		 * @param parent
+		 */
 		Node(int [] userState, Node parent) {
 			this.userState = userState;
 			this.parent = parent;
@@ -367,6 +414,15 @@ public class AStar implements PathFinder {
 
 	}
    
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 * 		?
+	 */
 	private int distance(int x1,int y1,int x2,int y2)
 	{	int result = 0;
 		result = result + Math.abs(x1-x2);
