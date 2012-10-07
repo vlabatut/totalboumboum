@@ -22,6 +22,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  */
 @SuppressWarnings("deprecation")
 public class BingolKetenci1 extends ArtificialIntelligence {
+	/** */
 	private static final long serialVersionUID = 1L;
 	/** position de la derniere bombe qui est mis par AI. */
 	private int lastBombPos[];
@@ -44,8 +45,11 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 * bombe
 	 */
 	private boolean left;
+	/** */
 	private boolean right;
+	/** */
 	private boolean up;
+	/** */
 	private boolean down;
 	/**
 	 * le percept de l'ia limité avec les cases qu'il peut arriver sans détruire
@@ -255,6 +259,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 *            position à étudier
 	 * @param tab
 	 *            le tableau du jeu
+	 * @param pos 
 	 * @return action à faire quand le shrink commence
 	 */
 	private int shrinkMove(int tab[][], int x, int y, int pos) {
@@ -866,7 +871,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 *            position à étudier
 	 * @param y
 	 *            position à étudier
-	 * @param tab
+	 * @param matrix
 	 *            matrice de la tableau du jeu.
 	 * @return vrai si la case contient un obstacle
 	 */
