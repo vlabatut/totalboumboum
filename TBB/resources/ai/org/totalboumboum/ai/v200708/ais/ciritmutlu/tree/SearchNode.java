@@ -10,11 +10,11 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.State;
  * ce noeud a ete visite par l'algorithme). 
  */
 public class SearchNode
-{	// etat du probleme associe au noeud
+{	/** etat du probleme associe au noeud */
 	private State state;
-	// cout du noeud (calcule depuis la racine)
+	/** cout du noeud (calcule depuis la racine) */
 	private double cost;
-	// iteration de visite (ou -1 si le noeud n'a pas encore ete visite)
+	/** iteration de visite (ou -1 si le noeud n'a pas encore ete visite) */
 	private int iteration;
 
 	/**

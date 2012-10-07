@@ -7,8 +7,10 @@ package org.totalboumboum.ai.v200708.ais.ciritmutlu.problem;
  */
 public class Action 
 {	
+	/** */
 	@SuppressWarnings("unused")
 	private int action;
+	/** */
 	private double cost;
 	
 	/**

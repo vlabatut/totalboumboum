@@ -17,8 +17,10 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
  */
 @SuppressWarnings("unchecked")
 public class AStarPathFinder implements PathFinder {
+	/** */
 	@SuppressWarnings("rawtypes")
 	private List closed = new ArrayList();
+	/** */
 	private SortedList open = new SortedList();
 	
 	/** La carte est cherchée */
@@ -28,7 +30,9 @@ public class AStarPathFinder implements PathFinder {
 	
 	/** La série complète de noeuds à travers la carte */
 	private Node[][] nodes;
+	/** */
 	protected static boolean findPathWithSoftWall;
+	/** */
 	private boolean allowDiagMovement;
 	/** L'heuristique nous appliquons nous déterminer quels noeuds pour chercher premièrement */
 	private AStarHeuristic heuristic;
@@ -237,6 +241,15 @@ public class AStarPathFinder implements PathFinder {
 		closed.remove(node);
 	}
 	
+	/**
+	 * 
+	 * @param sx
+	 * @param sy
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	protected boolean isValidLocation(int sx, int sy, int x, int y) {
 		boolean invalid = (x < 0) || (y < 0) || (x >= map.getWidthInTiles()) || (y >= map.getHeightInTiles());
 		
@@ -344,14 +357,19 @@ public class AStarPathFinder implements PathFinder {
 	/**
 	 * Un noeud seul dans le graphique de recherche
 	 */
-	
 	@SuppressWarnings("rawtypes")
 	private class Node implements Comparable {
+		/** */
 		private int x;
+		/** */
 		private int y;
+		/** */
 		private float cost;
+		/** */
 		private Node parent;
+		/** */
 		private float heuristic;
+		/** */
 		private int depth;
 		
 		/**
@@ -365,6 +383,12 @@ public class AStarPathFinder implements PathFinder {
 			this.y = y;
 		}
 		
+		/**
+		 * 
+		 * @param parent
+		 * @return
+		 * 		?
+		 */
 		public int setParent(Node parent) {
 			depth = parent.depth + 1;
 			this.parent = parent;

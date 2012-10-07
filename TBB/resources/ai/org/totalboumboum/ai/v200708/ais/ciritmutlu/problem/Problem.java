@@ -7,9 +7,9 @@ import java.util.Vector;
  * Represente et permet d'initialiser le probleme.
  */
 public class Problem
-{	// ensemble des etats initiaux du probleme
+{	/** ensemble des etats initiaux du probleme */
 	private Vector<State> initialStates;
-	// ensemble des actions possibles
+	/** ensemble des actions possibles */
 	private Vector<Action> actions;
 	
 	/**

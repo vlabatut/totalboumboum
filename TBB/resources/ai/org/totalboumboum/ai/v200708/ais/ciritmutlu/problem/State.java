@@ -5,20 +5,35 @@ package org.totalboumboum.ai.v200708.ais.ciritmutlu.problem;
  */
 public class State 
 {	
+	/** */
 	private boolean playerInMiddle; 	// le joueur est au milieu de la zone de jeu
+	/** */
     private boolean playerFarPlayer; 	// le joueur est loin des autres joueurs
+	/** */
     private boolean playerFarBomb;		// le joueur est loin de bombe
+	/** */
     private boolean playerClosePlayer;	// le joueur est pres d'un autre joueur 
+	/** */
     private boolean playerCloseBomb;	// le joueur est pres d'une bombe
+	/** */
     private boolean playerAlone;		// le joueur est seul dans la zone de jeu
+	/** */
     private boolean bonusClose;			// pres du joueur se trouve un bonus
+	/** */
     private boolean shrinkClose;		// le shrink est proche du joueur
+	/** */
     private boolean blockEmpty;			// il s'agit d'un bloc vide 
+	/** */
     private boolean wallSoft;			// il s'agit d'un bloc de mur destructible  
+	/** */
     private boolean wallHard;			// il s'agit d'un bloc de mur indestructible 
+	/** */
     private boolean playerCount2;		// il s'agit de deux joueurs dans la zone de jeu
+	/** */
     private boolean playerCount3;		// il s'agit de trois joueurs dans la zone de jeu
+	/** */
     private boolean playerCount4;		// il s'agit de quatre joueurs dans la zone de jeu
+	/** */
     @SuppressWarnings("unused")
 	private double point;				// le point obtenu selon les etats 
 

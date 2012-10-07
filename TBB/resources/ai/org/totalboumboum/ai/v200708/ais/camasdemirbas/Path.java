@@ -101,7 +101,9 @@ public class Path {
 	 * @author Gokhan Camas -- Irem Demirbas
 	 */
 	public class Step {
+		/** */
 		private int x;
+		/** */
 		private int y;
 
 		/**

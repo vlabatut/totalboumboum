@@ -16,17 +16,19 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.State;
  * Representation d'un arbre de recherche.
  */
 public class SearchTree
-{	private static final long serialVersionUID = 1L;
-	// probleme traite
+{	
+	/** */
+	private static final long serialVersionUID = 1L;
+	/** probleme traite */
 	private Problem problem;
-	// ensemble des noeuds composant l'arbre
+	/** ensemble des noeuds composant l'arbre */
 	private Vector<SearchNode> nodes;
-	// ensemble des liens composant l'arbre
+	/** ensemble des liens composant l'arbre */
 	private Vector<SearchLink> links;
-	// dernier noeud traite lors de la recherche
+	/** dernier noeud traite lors de la recherche */
 	@SuppressWarnings("unused")
 	private SearchNode lastNode;
-	// iteration courante lors de la recherche
+	/** iteration courante lors de la recherche */
 	private int iteration;
 	
 	/**
