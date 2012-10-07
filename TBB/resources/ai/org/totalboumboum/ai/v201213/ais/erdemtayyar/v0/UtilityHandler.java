@@ -46,8 +46,9 @@ public class UtilityHandler extends AiUtilityHandler<ErdemTayyar>
 	/////////////////////////////////////////////////////////////////
 	// CRITERIA					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** noms des cas, utilisés dans {@link #initCriteria} */
+	/** noms du premier cas, utilisé dans {@link #initCriteria} */
 	private final String caseName1 = "CAS1";
+	/** noms du second cas, utilisé dans {@link #initCriteria} */
 	private final String caseName2 = "CAS2";
 	
 	@Override
