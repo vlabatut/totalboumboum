@@ -26,16 +26,20 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
 @SuppressWarnings("deprecation")
 public class PathFinder
 {
-	// L'objet qui représente notre IA. On utilise
+	/** L'objet qui représente notre IA. On utilise
 	// cette référence pour pouvoir appeler
 	// les méthodes isObstacle, isMovePossible,
-	// applyAction.
+	// applyAction. */
 	private CaglayanElmas ai;
 	
+	/** */
 	private Vector<SearchNode> nodes;
+	/** */
 	private Vector<SearchLink> links;
 	
+	/** */
 	private int[] initialState;
+	/** */
 	private int[] finalState;
 	
 	/**
@@ -86,6 +90,13 @@ public class PathFinder
 		return 10*(Math.abs(s1[0]-s2[0])+Math.abs(s1[1]-s2[1]));
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	private Vector<Integer> getPossibleMoves(int x, int y)
 	{	
 		Vector<Integer> result = new Vector<Integer>();

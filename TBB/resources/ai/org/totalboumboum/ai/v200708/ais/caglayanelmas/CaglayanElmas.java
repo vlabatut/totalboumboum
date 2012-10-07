@@ -20,34 +20,41 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class CaglayanElmas extends ArtificialIntelligence
 {
+	/** */
 	private static final long serialVersionUID = 1L;
 	
 	// Constantes qui définissent l'état du bomberman
+	/** */
 	private final static int DOING_NOTHING = 0;
+	/** */
 	private final static int RUNNING_FROM_BOMB = 1;
+	/** */
 	private final static int COLLECTING_BONUS = 2;
+	/** */
 	private final static int DESTRUCTING_WALLS = 3;
+	/** */
 	private final static int ATTACKING = 4;
 	
-	// Contient la zone du tour précédente
+	/** Contient la zone du tour précédente */
 	private int[][] lastMatrix;
-	// Représente une destination à aller
+	/** Représente une destination à aller */
 	private int[] target;
-	// Contient la position de la dernière bombe
+	/** Contient la position de la dernière bombe */
 	private int[] lastBomb;
-	// Représente l'état du bomberman avec les constantes définies ci-dessus
+	/** Représente l'état du bomberman avec les constantes définies ci-dessus */
 	private int state;
-	// Combien de fois on a mis une bombe pour détruire des murs
+	/** Combien de fois on a mis une bombe pour détruire des murs */
 	private int destructionCount;
-	// Contient la dernière action renvoyée par call()
+	/** Contient la dernière action renvoyée par call() */
 	private Integer lastAction;
-	// Le vecteur contenant des liens entre les cases
-	// qui définissent le chemin le plus court entre A et B
+	/** Le vecteur contenant des liens entre les cases */
+	/** qui définissent le chemin le plus court entre A et B */
 	private Vector<SearchLink> links;
-	// Le vecteur qui contient les cases accessibles
+	/** Le vecteur qui contient les cases accessibles */
 	private Vector<int[]> playableCases;
-	// Si vrai, il existe une action qui reste des tours précédentes
+	/** Si vrai, il existe une action qui reste des tours précédentes */
 	private boolean savedMove;
+	/** */
 	private boolean startedToAttack;
 
 	/**
