@@ -18,10 +18,16 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<UnluYildirim>
 {	
-	
+	/** */
 	static int BOMBNUMBER = 0 ;
+	/** */
 	static int TEMPNUMBER = 10 ;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected BombHandler(UnluYildirim ai) throws StopRequestException
     {	super(ai);
     	ai.checkInterruption();
@@ -91,6 +97,9 @@ public class BombHandler extends AiBombHandler<UnluYildirim>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		

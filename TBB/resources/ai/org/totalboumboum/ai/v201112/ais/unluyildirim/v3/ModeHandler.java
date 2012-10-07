@@ -15,8 +15,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<UnluYildirim>
 {	
-	
+	/** */
 	AiZone zone = null;
+	/** */
 	AiHero myhero = null ;
 	/** */
 	public static int NUMBERRANGE =3 ;
@@ -85,6 +86,10 @@ public class ModeHandler extends AiModeHandler<UnluYildirim>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
