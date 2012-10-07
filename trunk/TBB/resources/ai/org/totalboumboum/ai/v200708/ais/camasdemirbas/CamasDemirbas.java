@@ -12,27 +12,39 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  */
 @SuppressWarnings("deprecation")
 public class CamasDemirbas extends ArtificialIntelligence
-{	private static final long serialVersionUID = 1L;
-	//si le mouvement suivant est AI_ACTION_PUT_BOMB, il est true
+{	/** */
+	private static final long serialVersionUID = 1L;
+	/** si le mouvement suivant est AI_ACTION_PUT_BOMB, il est true */
 	boolean bombFlag;
-	//il a le mouvement dernier
+	/** il a le mouvement dernier */
 	Integer previousMove;
-	//il nous donne le mouvent suivant s'il est necessaire
+	/** il nous donne le mouvent suivant s'il est necessaire */
 	Integer nextMove;
-	//il nous donne les coordonnes apres le mouvement qu'il est en train de realiser
+	/** il nous donne les coordonnes apres le mouvement qu'il est en train de realiser */
 	int[] newPosition = {-1,-1};
-	//Chemin suivi
+	/** Chemin suivi */
 	private Path path;
+	/** */
 	private AStarPathFinder finder;
+	/** */
 	private GameMap map;
+	/** */
 	private static final int MIDDLEX = 9;
+	/** */
 	private static final int MIDDLEY = 7;
+	/** */
 	private Vector<Integer> pathMoves;
+	/** */
 	private boolean pathFlag;
+	/** */
 	private int pathIndex ;
+	/** */
 	private final static int MAXSEARCHDISTANCE = 500;
+	/** */
 	private final static int RUNINTERVAL = 5;
+	/** */
 	private int x ;
+	/** */
 	private int y ;
 	
 	
@@ -158,7 +170,14 @@ public class CamasDemirbas extends ArtificialIntelligence
 	return result;
 }
 
-
+	/**
+	 * 
+	 * @param bX
+	 * @param bY
+	 * @return
+	 * 		?
+	 * @throws InterruptedException
+	 */
 	private Integer  checkAndRunAwayFromBomb(int bX, int bY) throws InterruptedException {
 		if(isRiskFromBomb(x,y,bX,bY)) {
 			map = new GameMap(getZoneMatrix() );
@@ -181,6 +200,15 @@ public class CamasDemirbas extends ArtificialIntelligence
 		
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param bX
+	 * @param bY
+	 * @return
+	 * 		?
+	 */
 	private Path findRunAwayPathFromBomb(int x, int y, int bX, int bY) {
 		for(int index=0;index<=2*RUNINTERVAL;index++) {
 			if(path!=null)
@@ -225,6 +253,15 @@ public class CamasDemirbas extends ArtificialIntelligence
 			return path;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param bX
+	 * @param bY
+	 * @return
+	 * 		?
+	 */
 	private boolean isAvailable(int x, int y, int bX, int bY) {
 		try {
 			int state = getZoneMatrix()[x][y];
@@ -242,7 +279,11 @@ public class CamasDemirbas extends ArtificialIntelligence
 		}						
 	}
 		
-
+	/**
+	 * 
+	 * @param path
+	 * @param pathMoves
+	 */
 	private void loadMoves(Path path, Vector<Integer> pathMoves) {
 		int [] position = {-1,-1};
 		int [] nextPosition = {-1,-1};
@@ -255,6 +296,13 @@ public class CamasDemirbas extends ArtificialIntelligence
 		}
 	}
 
+	/**
+	 * 
+	 * @param position
+	 * @param nextPosition
+	 * @return
+	 * 		?
+	 */
 	private Integer getMove(int[] position, int[] nextPosition) {
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(position[0]>nextPosition[0])
@@ -268,6 +316,15 @@ public class CamasDemirbas extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * *
+	 * @param x
+	 * @param y
+	 * @param bX
+	 * @param bY
+	 * @return
+	 * 		?
+	 */
 	private boolean isRiskFromBomb(int x, int y, int bX, int bY) {
 		int fire = getBombPowerAt(bX, bY);
 		if((x==bX&&y<=bY+fire&&y>=bY-fire)||(y==bY&&x<=bX+fire&&x>=bX-fire))
@@ -281,6 +338,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * @param y
 	 * @param blockType
 	 * @return
+	 * 		?
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType){
 		int minDistance = 6;
@@ -305,6 +363,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * @param x2
 	 * @param y2
 	 * @return
+	 * 		?
 	 */
 	private int distance(int x1,int y1,int x2,int y2)
 	{	int result = 0;
@@ -318,6 +377,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * @param y
 	 * @param move
 	 * @return
+	 * 		?
 	 */
 	private boolean isMovePossible(int x, int y, int move)
 	{	boolean result;
@@ -346,6 +406,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * @param x
 	 * @param y
 	 * @return
+	 * 		?
 	 */
 	private boolean isObstacle(int x, int y)
 	{	int[][] matrix = getZoneMatrix();
@@ -368,6 +429,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * @param x
 	 * @param y
 	 * @return
+	 * 		?
 	 */
 	private Vector<Integer> getPossibleMoves(int x, int y)
 	{	Vector<Integer> result = new Vector<Integer>();
@@ -382,6 +444,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * @param y
 	 * @param move
 	 * @return
+	 * 		?
 	 */
 	private int[] positionAfterMove(int x, int y, int move) {
 		int[] result= {-1,-1};
@@ -415,6 +478,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * @param y
 	 * @param possibleMoves
 	 * @return
+	 * 		?
 	 */
 	private Integer getShortestMoveToMiddle(int x,int y, Vector<Integer> possibleMoves) {
 		int temp = Integer.MAX_VALUE;
@@ -435,6 +499,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 	/**
 	 * @param integer
 	 * @return
+	 * 		?
 	 */
 	private Integer inverse(Integer integer) {
 		Integer result = 0;

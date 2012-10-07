@@ -7,10 +7,12 @@ package org.totalboumboum.ai.v200708.ais.ciritmutlu.exceptions;
  *
  */
 public class ImpossibleActionException extends Exception
-{	private static final long serialVersionUID = 1L;
-	// l'etat concerne
+{	
+	/** */
+	private static final long serialVersionUID = 1L;
+	/** l'etat concerne */
 	private Object state;
-	// l'action intentee
+	/** l'action intentee */
 	private Object action;
 
 	/**
