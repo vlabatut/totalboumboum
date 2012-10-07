@@ -45,6 +45,13 @@ import org.totalboumboum.ai.v201213.adapter.path.AiPath;
  */
 public class AiOutput
 {
+	/**
+	 * Construit un objet représentant la sortie graphique
+	 * de l'agent.
+	 * 
+	 * @param zone
+	 * 		La zone concernée.
+	 */
 	@SuppressWarnings("unchecked")
 	public AiOutput(AiZone zone)
 	{	this.zone = zone;

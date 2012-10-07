@@ -28,5 +28,6 @@ package org.totalboumboum.ai.v201213.adapter.communication;
  *
  */
 public class StopRequestException extends Exception
-{	private static final long serialVersionUID = 1L;	
+{	/** numéro de serie */
+	private static final long serialVersionUID = 1L;	
 }
