@@ -20,17 +20,22 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class EscapeManager {
 	
+	/** */
 	private AksoyTangay myAI; 
 	
+	/** */
 	private PathManager pathManager;
 	
 	/** */
 	public AiPath path = null;
 	
+	/** */
 	private AiTile currentTile;
 		
+	/** */
 	private AiTile lastTile;
 	
+	/** */
 	private AiZone percepts;
 	
 	
@@ -113,6 +118,10 @@ public class EscapeManager {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void removeUsedTilesOfPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
 	

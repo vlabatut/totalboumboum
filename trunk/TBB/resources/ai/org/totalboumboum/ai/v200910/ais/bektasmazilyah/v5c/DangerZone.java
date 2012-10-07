@@ -27,27 +27,27 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DangerZone {
 	
-	// code source
+	/** code source */
 	private BektasMazilyah source;
-	// zone du jeu
+	/** zone du jeu */
 	private AiZone map;
-	// notre own hero
+	/** notre own hero */
 	private AiHero hero;
-	// les adversaires
+	/** les adversaires */
 	private Collection<AiHero> rivals;
-	// les murs
+	/** les murs */
 	private Collection<AiBlock> blocs;
-	// les bombes
+	/** les bombes */
  	private Collection<AiBomb> bombes;
- 	// les feus
+ 	/** les feus */
  	private Collection <AiFire> feus;
- 	// les items
+ 	/** les items */
 	private Collection<AiItem> objets;
-	// dangerZone
+	/** dangerZone */
 	private EtatEnum [][] ourZone;
-	// width de la zone
+	/** width de la zone */ 
 	int x;
-	// height de la zone
+	/** height de la zone */
 	int y;
 	
 	/**
@@ -74,6 +74,10 @@ public class DangerZone {
 
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException {
 		
 		source.checkInterruption();

@@ -21,6 +21,11 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public final class Astar {
+	
+	/**
+	 * 
+	 *
+	 */
 	private static class CostComparator implements Comparator<Node> {
 		//
 		public int compare(Node nodeA, Node nodeB) {
@@ -29,16 +34,32 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 *
+	 */
 	class Node {
+		/** */
 		final int x;
+		/** */
 		final int y;
 
+		/** */
 		Node parent;
+		/** */
 		int gcost;
+		/** */
 		int hcost;
+		/** */
 		ArtificialIntelligence ai;
 		
-		// on cree les noeuds
+		/** on cree les noeuds
+		 * 
+		 * @param x
+		 * @param y
+		 * @param ai
+		 * @throws StopRequestException
+		 */
 		public Node(int x, int y, ArtificialIntelligence ai) throws StopRequestException {
 			ai.checkInterruption();
 			this.ai = ai;
@@ -49,12 +70,21 @@ public final class Astar {
 			this.y = y;
 		}
 
+		/**
+		 * 
+		 * @throws StopRequestException
+		 */
 		public void calculateHeuristic() throws StopRequestException {
 			ai.checkInterruption();
 			hcost = (Math.abs(x - destination.x) + Math.abs(y - destination.y))
 					* (VERTICAL_COST + HORIZONTAL_COST) / 2;
 		}
 
+		/**
+		 * 
+		 * @param parent
+		 * @throws StopRequestException
+		 */
 		public void setParent(Node parent) throws StopRequestException {
 			ai.checkInterruption();
 			this.parent = parent;
@@ -74,24 +104,33 @@ public final class Astar {
 		}
 	}
 
+	/** */
 	private static final CostComparator COST_CMP = new CostComparator();
 
-
+	/** */
 	private final int VERTICAL_COST = 10;
 
+	/** */
 	private final int HORIZONTAL_COST = 10;
 
+	/** */
 	private final int DIAGONAL_COST = (int) Math.rint(Math.sqrt(VERTICAL_COST
 			* VERTICAL_COST + HORIZONTAL_COST * HORIZONTAL_COST));
 
+	/** */
 	private final DangerZone map;
+	/** */
 	private final Node origin;
+	/** */
 	private final Node destination;
 
+	/** */
 	private final Queue<Node> open;
 
 
+	/** */
 	private final int[] closed;
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**
@@ -264,7 +303,7 @@ public final class Astar {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException 
 	 */
 	private boolean isClosed(int x, int y) throws StopRequestException {
@@ -314,6 +353,11 @@ public final class Astar {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	private void processBonus(Node node) throws StopRequestException {
 		ai.checkInterruption();
 		// no need to process it twice
@@ -340,6 +384,11 @@ public final class Astar {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	private void processWall(Node node) throws StopRequestException {
 		ai.checkInterruption();
 		// no need to process it twice

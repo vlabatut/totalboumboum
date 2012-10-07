@@ -33,55 +33,67 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class MancuhanPinarer extends ArtificialIntelligence {
-	// la case accessible et qui n'est pas dans la portee de la bombe est
+	/** la case accessible et qui n'est pas dans la portee de la bombe est 
 	// represente dans la matrice da la zone.
+	 */
 	private final int CASE_SUR = 0;
-	// le mur non-destructible represente dans la matrice de la zone
+	/** le mur non-destructible represente dans la matrice de la zone */
 	private final int CASE_INACCESSIBLE = 1;
-	// la portee d'une bombe represente dans la matrice de la zone
+	/** la portee d'une bombe represente dans la matrice de la zone */
 	private final int CASE_SCOPE = 2;
 
+	/** */
 	private final int CASE_BOMBE = 3;
-	// la mur destructible represente dans la matrice de la zone
+	/** la mur destructible represente dans la matrice de la zone */
 	private final int MUR_DESTRUCTIBLE = 4;
-	// l'item represente dans la matrice de la zone
+	/** l'item represente dans la matrice de la zone */
 	private final int CASE_BONUS = 5;
 
+	/** */
 	private final int ADVERSAIRE = 7;
-	// chemin a suivre pour l'algo defense
+	/** chemin a suivre pour l'algo defense */
 	private AiPath nextMove = null;
-	// chemin a suivre pour ramasser le bonus
+	/** chemin a suivre pour ramasser le bonus */
 	private AiPath nextMoveBonus = null;
-	// notre hero sur la zone
+	/** notre hero sur la zone */
 	private AiHero ourHero;
 
+	/** */
 	private boolean checkPath = true;
 
-	// Les variables de classes attaque.
+	/** Les variables de classes attaque. */
 	private AiPath nextMoveAttack = null;
-	//verifie s'il faut poser la bombe quand on attaque.
+	/** verifie s'il faut poser la bombe quand on attaque. */
 	private boolean accomplished = false;
 
+	/** */
 	private AiHero chosenEnemy = null;
 
+	/** */
 	private int dropBombLimit;
-	//verifie s'il faut poser la bombe quand on attaque pour ouvrir un chemin.
+	/** verifie s'il faut poser la bombe quand on attaque pour ouvrir un chemin. */
 	private boolean openPath;
 
+	/** */
 	private boolean badPath;
 	
+	/** */
 	private boolean checkBomb = false;
 
+	/** */
 	private AiBomb openBomb = null;
 
+	/** */
 	private AiTile openBombTile = null;
 
+	/** */
 	private List<AiTile> pathTiles = new ArrayList<AiTile>();
 
 	// le booleen pour determiner s'il est necessaire d'entrer dans l'algo de
 	// bonus.
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA 
+	 * */
 	public AiAction processAction() throws StopRequestException {
 		// avant tout: test d'interruption
 		checkInterruption();
@@ -998,6 +1010,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
+	 * @param matrice 
 	 * @throws StopRequestException
 	 */
 	private void defenseAlgorithm(AiZone gameZone, int[][] matrice)

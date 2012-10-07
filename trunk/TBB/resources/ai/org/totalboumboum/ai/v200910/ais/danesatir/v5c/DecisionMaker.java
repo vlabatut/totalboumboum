@@ -19,8 +19,11 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 @SuppressWarnings("deprecation")
 public class DecisionMaker {
 
+	/** */
 	private DaneSatir ai;
+	/** */
 	private State state;
+	/** */
 	private TimeMatrice time;
 
 	/**
@@ -57,6 +60,11 @@ public class DecisionMaker {
 		}
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isEnemyExist() throws StopRequestException {
 		ai.checkInterruption();
 		if(this.ai.getPercepts().getHeroes().size()>1)
@@ -64,6 +72,11 @@ public class DecisionMaker {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isHiddenItemExist() throws StopRequestException {
 		ai.checkInterruption();
 		if(this.ai.getPercepts().getHiddenItemsCount()>0)
@@ -71,6 +84,11 @@ public class DecisionMaker {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isItemExist() throws StopRequestException {
 		ai.checkInterruption();
 		if(this.ai.getPercepts().getItems().size()>0)
@@ -78,6 +96,11 @@ public class DecisionMaker {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isWayExistToEnemy() throws StopRequestException {
 		ai.checkInterruption();
 		PathFinder temp = new PathFinder(ai, this.time);
@@ -89,6 +112,11 @@ public class DecisionMaker {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isDanger() throws StopRequestException {
 		ai.checkInterruption();
 		double dur = this.time.getTime();
@@ -96,6 +124,12 @@ public class DecisionMaker {
 			return true;
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isHaveBomb() throws StopRequestException {
 		ai.checkInterruption();
 		AiHero hero = this.ai.getOwnHero();

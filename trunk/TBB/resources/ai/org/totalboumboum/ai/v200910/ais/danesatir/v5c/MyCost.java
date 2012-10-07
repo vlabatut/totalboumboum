@@ -15,9 +15,17 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  */
 @SuppressWarnings("deprecation")
 public class MyCost extends CostCalculator {
+	/** */
 	private TimeMatrice time;
+	/** */
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param time
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	MyCost(TimeMatrice time, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;

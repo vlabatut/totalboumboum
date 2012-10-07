@@ -18,7 +18,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  */
 @SuppressWarnings("deprecation")
 public class WallCost extends CostCalculator {
-
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

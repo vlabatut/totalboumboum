@@ -14,14 +14,27 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 @SuppressWarnings("deprecation")
  class Debug
 {
+	/** */
 	private static boolean debug = false;
 	
+	/**
+	 * 
+	 * @param str
+	 * @param ownAi
+	 * @throws StopRequestException
+	 */
 	public static void write(String str, ArtificialIntelligence ownAi) throws StopRequestException
 	{	ownAi.checkInterruption();
 		if(debug)
 			System.out.print(str);
 	}
 	
+	/**
+	 * 
+	 * @param str
+	 * @param ownAi
+	 * @throws StopRequestException
+	 */
 	public static void writeln(String str, ArtificialIntelligence ownAi) throws StopRequestException
 	{	ownAi.checkInterruption();
 		if(debug)

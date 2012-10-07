@@ -27,25 +27,41 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Map {
 
+	/** */
 	@SuppressWarnings("unused")
+	/** */
 	private AiZone map;
+	/** */
 	private Collection<AiHero> adversaires;
 
+	/** */
 	private AiHero bomberman;
+	/** */
 	private CalisirGuner source; // pour chechinterruption
+	/** */
 	private Collection<AiBomb> bombes;
+	/** */
 	private Collection<AiBlock> blocks;
+	/** */
 	private Collection<AiItem> objets;
+	/** */
 	private Collection<AiFire> feu;
 	/** */
 	public int width;
 	/** */
 	public int height;
 
-	private int xadversaire, yadversaire;
+	/** */
+	private int xadversaire;
+	/** */
+	private int yadversaire;
+	/** */
 	private Etat matrix[][];
+	/** */
 	private Etat accessibilite[][];
+	/** */
 	private int risque[][];
+	/** */
 	private int murs[][];
 
 	/**
@@ -70,7 +86,11 @@ public class Map {
 		remplir(zone);
 	}
 
-	// nous remplaçons notre map
+	/** nous remplaçons notre map
+	 * 
+	 * @param zone
+	 * @throws StopRequestException
+	 */
 	protected void remplir(AiZone zone) throws StopRequestException {
 		source.checkInterruption();
 		// on initialise les matrices
@@ -533,21 +553,43 @@ public class Map {
 		return resultat;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	int return_risque(int x, int y) throws StopRequestException {
 		source.checkInterruption();
 		return risque[x][y];
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	int[][] return_risque() throws StopRequestException {
 		source.checkInterruption();
 		return risque;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	Etat[][] return_accessibilite() throws StopRequestException {
 		source.checkInterruption();
 		return accessibilite;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	int[][] return_murs() throws StopRequestException {
 		source.checkInterruption();
 		return murs;

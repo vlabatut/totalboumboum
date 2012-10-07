@@ -63,6 +63,7 @@ public class SafetyManager
 	
 	/**
 	 * mise à jour de la matrice de sûreté
+	 * @throws StopRequestException 
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption();
@@ -114,9 +115,16 @@ public class SafetyManager
 		
 	}
 
-	//LES BOMBES ET LES BLASTES
+	/** LES BOMBES ET LES BLASTES */
 	private List<AiBomb> processedBombs;	
-	//la liste des blasts
+	/** la liste des blasts
+	 * 
+	 * @param bomb
+	 * @param blast
+	 * @param bombs
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ai.checkInterruption(); 
 	
@@ -140,7 +148,10 @@ public class SafetyManager
 		return blast;
 	}	
 
-	//le traitement avec les bombes
+	/** le traitement avec les bombes 
+	 * @param bomb 
+	 * @throws StopRequestException 
+	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	ai.checkInterruption();
 		

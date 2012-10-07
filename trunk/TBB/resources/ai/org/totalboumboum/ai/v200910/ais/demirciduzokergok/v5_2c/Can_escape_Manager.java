@@ -124,18 +124,28 @@ public class Can_escape_Manager {
 		
 	}
 
+	/** */
 	private DemirciDuzokErgok ai;
+	/** */
 	private AiZone zone;
+	/** */
 	private Can_escape safe_map;
+	/** */
 	@SuppressWarnings("unused")
 	private AiTile arrived_tile_b;
+	/** */
 	private List<AiTile> possibleDest_b;
+	/** */
 	@SuppressWarnings("unused")
 	private boolean arrived_b;
+	/** */
 	private AiPath path_b;
 	
+	/** */
 	private Astar star_b;
+	/** */
 	private HeuristicCalculator hcalcul_b;
+	/** */
 	private MatrixCostCalculator costCalculator_b;
 	
 	

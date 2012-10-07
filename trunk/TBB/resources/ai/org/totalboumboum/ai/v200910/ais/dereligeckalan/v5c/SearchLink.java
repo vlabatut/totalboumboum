@@ -7,10 +7,12 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class SearchLink {
+	/** */
 	private Noeud origin;
-	// noeud fils
+	/** noeud fils */
 	private Noeud target;
 
+	/** */
 	private DereliGeckalan source;
 	/**
 	 * Constructeur.

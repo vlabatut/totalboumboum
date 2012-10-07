@@ -51,6 +51,8 @@ public class PathManagement {
 	
 	/**
 	 * initialise ce PathManager
+	 * @param ai 
+	 * @throws StopRequestException 
 	 */
 	private void init(EnhosKarapazar ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -212,6 +214,13 @@ public class PathManagement {
 		System.out.println(path.getTiles().toString());
 	}
 	
+	/**
+	 * 
+	 * @param line
+	 * @param col
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean estCaseSure(int line, int col) throws StopRequestException
 	{
 		

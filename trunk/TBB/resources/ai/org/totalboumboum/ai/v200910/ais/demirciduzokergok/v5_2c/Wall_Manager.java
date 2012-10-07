@@ -343,16 +343,27 @@ public class Wall_Manager{
 	
 	
 
+	/** */
 	private DemirciDuzokErgok ai;
+	/** */
 	private AiZone zone;
+	/** */
 	private Safety_Map safe_map;
+	/** */
 	private AiTile arrived_tile_b;
+	/** */
 	private List<AiTile> possibleDest_b;
+	/** */
 	private boolean arrived_b;
+	/** */
 	private AiPath path_b;
+	/** */
 	private Astar star_b;
+	/** */
 	private HeuristicCalculator hcalcul_b;
+	/** */
 	private MatrixCostCalculator costCalculator_b;
+	/** */
 	private Can_escape_Manager esc;
 	
 	
