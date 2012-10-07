@@ -31,18 +31,31 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DeveciogluKorkmaz extends ArtificialIntelligence {
 
+	/** */
 	AiHero ownHero;
+	/** */
 	Collection<AiHero> enemies = new ArrayList<AiHero>();
+	/** */
 	Collection<AiBomb> bombs;
+	/** */
 	private AiTile currentTile;
+	/** */
 	AiZone zone;
+	/** */
 	Collection<AiTile> dangerousTiles;
+	/** */
 	AiTile safeTile;
+	/** */
 	AiTile nearestDestructible;
+	/** */
 	AiTile nearestItem;
+	/** */
 	AiTile nearestHero;
+	/** */
 	private LinkedList<Noeud> path;
+	/** */
 	Noeud cible;
+	/** */
 	int nombreHeroes;
 
 	public AiAction processAction() throws StopRequestException {
@@ -145,6 +158,13 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param target
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile setPath(AiTile target) throws StopRequestException {
 		checkInterruption();
 		Noeud cible = new Noeud(target);
@@ -195,6 +215,13 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param target
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile setPathNearestSafeTile(AiTile target)
 			throws StopRequestException {
 		checkInterruption();
@@ -245,6 +272,12 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile setNearestItem() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -275,6 +308,12 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile setNearestDestructible() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -314,6 +353,12 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile setNearestSafeTile() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -341,6 +386,12 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private Collection<AiTile> setDangerousTiles() throws StopRequestException {
 		checkInterruption();
 		Collection<AiTile> neigbourTiles;
@@ -389,6 +440,12 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private AiTile setNearestHero() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -436,6 +493,13 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		// return Math.hypot(vertical, horizontal);
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption();
@@ -452,6 +516,13 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;

@@ -23,7 +23,9 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 	/** les cases actuel, precedent et prochain */
 	AiTile currentTile = null;
+	/** */
 	AiTile previousTile = null;
+	/** */
 	AiTile nextTile = null;
 
 	/** zone du jeu */
@@ -43,6 +45,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 	/** objets de danger et de cible */
 	Danger danger;
+	/** */
 	Target target;
 
 	/**

@@ -14,12 +14,13 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class SearchLink
-{	// noeud parent
+{	/** noeud parent */
 	private Noeud origin;
-	// noeud fils
+	/** noeud fils */
 	private Noeud target;
-
+	/** */
 	private DayioglugilGeckalan source;
+	
 	/**
 	 * Constructeur.
 	 * 

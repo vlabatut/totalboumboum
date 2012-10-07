@@ -11,7 +11,9 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 @SuppressWarnings("deprecation")
 public class DangerPriorityTile{
 
+	/** */
 	AiTile tile;
+	/** */
 	int dangerpriority;
 	/**
 	 * 

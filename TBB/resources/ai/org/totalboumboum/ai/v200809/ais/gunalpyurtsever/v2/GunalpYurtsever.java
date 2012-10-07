@@ -29,11 +29,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class GunalpYurtsever extends ArtificialIntelligence
 {
-
+	/** */
 	private int strategy;
-	// liste des bombes
+	/** liste des bombes */
 	private List<AiBomb> bombList;
-	// Definit pour garder la cost pour acceder a cible( modifié a chaque invocation de Astar 
+	/** Definit pour garder la cost pour acceder a cible( modifié a chaque invocation de Astar */ 
 	private int cost;
 	
 	
@@ -69,7 +69,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * Avec un option qui rende le feu comme traversable ou contraire
 	 * @param head
 	 * @param fire
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private List<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
@@ -99,7 +99,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * Utilise dans la fonction getClearNeighbors
 	 * Pour prendre pas le feu comme traversable
 	 * @param tile
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private boolean isAlsoFireClear(AiTile tile) throws StopRequestException
@@ -120,7 +120,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
@@ -146,7 +146,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * ou bien OwnHero ne peut pas approcher la cible
 	 * 
 	 * @param tileGone
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiAction AstarAlgorithm(AiTile tileGone) throws StopRequestException{
@@ -269,7 +269,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * Meme avec AstarAlgorithm mais pour avancer dans les tiles en danger pour s'enfuir
 	 * @param tileGone
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiAction simpleAstarAlgorithm(AiTile tileGone) throws StopRequestException{
@@ -359,7 +359,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * Fonction obsolete pour approcher au hero cible
 	 * @param heroTile
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	@SuppressWarnings("unused")
@@ -458,7 +458,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * fonction qui supersede TargetTileCalculator pour approcher au hero cible
 	 * 
 	 * @param heroTile
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiTile TargetTileCalculator2(AiTile heroTile) throws StopRequestException
@@ -531,7 +531,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * pour trouver les tiles qui sont plus ou moins en danger a cause des bombs
 	 * 
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private List<DangerPriorityTile> markDangerTileswithPriority() throws StopRequestException {
@@ -584,7 +584,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * fonction obsolete pour s'enfuir de danger
 	 * 
 	 * @param targetedHero
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	@SuppressWarnings("unused")
@@ -642,7 +642,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * 
 	 * @param dangerTiles
 	 * @param reqTile
-	 * @return
+	 * @return ?
 	 */
 	private int getpriorityValue(Collection<DangerPriorityTile> dangerTiles,AiTile reqTile){
 		
@@ -665,7 +665,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * fonction qui supersede ultimateRunaway le hero s'enfuit regardant la place du hero cible
 	 * 
 	 * @param chosentokillTile
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiTile ultimateRunaway2(AiTile chosentokillTile) throws StopRequestException{
@@ -799,8 +799,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 *		 1 si on cherche un item
 	 *		 2 si on detruit des murs
 	 * 
-	 * @param zone
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiTile decideStrategy() throws StopRequestException{
@@ -888,7 +887,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * cette fonction verifie la cas de suicider en placant un bombe que laisse aucun tile a s'enfuir
 	 * 
 	 * @param zone
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private boolean bombCheck(AiZone zone) throws StopRequestException{

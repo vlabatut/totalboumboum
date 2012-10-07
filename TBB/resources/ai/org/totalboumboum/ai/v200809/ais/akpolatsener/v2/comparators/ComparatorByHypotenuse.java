@@ -24,6 +24,7 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 
 	/** objet cible/danger pour les comparaisons */
 	Target target;
+	/** */
 	Danger danger;
 
 	/**

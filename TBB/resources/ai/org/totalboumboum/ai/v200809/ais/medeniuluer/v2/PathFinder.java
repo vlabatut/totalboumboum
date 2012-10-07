@@ -20,10 +20,15 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class PathFinder {
 	
+	/** */
 	private LinkedList<SearchNode> path;
+	/** */
 	private ZoneEnum tab[][];
+	/** */
 	private AiZone zone;
+	/** */
 	private MedeniUluer mu;
+	/** */
 	private SearchEnum mode;
 	
 	/**
@@ -319,6 +324,14 @@ public class PathFinder {
 		return resultat;
 	}
 
+	/**
+	 * 
+	 * @param noeud
+	 * @param mode
+	 * @param direction
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean getConditions(SearchNode noeud, SearchEnum mode,Direction direction) throws StopRequestException 
 	{
 		mu.checkInterruption();

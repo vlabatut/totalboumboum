@@ -8,8 +8,11 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2;
  */
 public class DangerPriorityCostTile {
 	
+	/** */
 	CostTile costTile;
+	/** */
 	int priority;
+	
 	/**
 	 * 
 	 * @param costTile

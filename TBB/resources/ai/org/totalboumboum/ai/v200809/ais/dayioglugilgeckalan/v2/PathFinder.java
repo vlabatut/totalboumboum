@@ -15,10 +15,13 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class PathFinder {
-
+	/** */
 	private LinkedList<Noeud> path;
+	/** */
 	private ZoneEnum tab[][];
+	/** */
 	private AiZone zone;
+	/** */
 	private DayioglugilGeckalan source;
 	
 	/**
