@@ -26,8 +26,14 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<BalCetin> {
+	/** */
 	protected Astar astar = null;
-
+	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected MoveHandler(BalCetin ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();

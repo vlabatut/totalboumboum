@@ -15,7 +15,11 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<BalCetin> {
 
-
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected ModeHandler(BalCetin ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -30,10 +34,12 @@ public class ModeHandler extends AiModeHandler<BalCetin> {
 	// ///////////////////////////////////////////////////////////////
 	// PROCESSING /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-
+	/** */
 	private AiZone zone;
+	/** */
 	private AiHero ownHero;
-
+	
+	@Override
 	protected boolean hasEnoughItems() throws StopRequestException {
 		ai.checkInterruption();
 		boolean result = false;
@@ -66,6 +72,9 @@ public class ModeHandler extends AiModeHandler<BalCetin> {
 	// ///////////////////////////////////////////////////////////////
 	// OUTPUT /////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException
+	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
 

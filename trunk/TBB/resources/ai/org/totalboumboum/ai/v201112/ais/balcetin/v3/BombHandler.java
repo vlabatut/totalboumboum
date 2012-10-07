@@ -13,6 +13,11 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 @SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<BalCetin> {
 
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected BombHandler(BalCetin ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -52,6 +57,10 @@ public class BombHandler extends AiBombHandler<BalCetin> {
 	// ///////////////////////////////////////////////////////////////
 	// OUTPUT /////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
 

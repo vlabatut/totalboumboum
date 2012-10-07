@@ -27,6 +27,11 @@ import org.totalboumboum.ai.v201112.ais.balcetin.v3.criterion.WallCount;
 @SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<BalCetin> {
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected UtilityHandler(BalCetin ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -38,10 +43,11 @@ public class UtilityHandler extends AiUtilityHandler<BalCetin> {
 	// ///////////////////////////////////////////////////////////////
 	// CRITERIA /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-	
-	// Case Names
+	/** */
 	private final String Collect_Visible_Item = "VISIBLE_ITEM";
+	/** */
 	private final String Collect_Wall_Neighbor = "WALL_NEIGHBOR";
+	/** */
 	private final String Attack_Attack = "ATTACK";
 
 	@Override
