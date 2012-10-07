@@ -1472,7 +1472,7 @@ public class Launcher
 	 * 				- 0d3dfd83-6632-423f-b63e-d7e5743ad998
 	 * 				- 26db3658-cf0e-4650-96f4-55080b4720f8
 	 * 				- 553c0fb4-5418-4e33-b244-d5f399ae40f2
-	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
+	 *		 	- virer le thème/perso/niveaux TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
 	 * 
 	 * promeneur :	af92d497-7975-4dcf-b05d-89e706c3eec3
 	 * simplet : 	227b2e4d-bd7b-4153-962b-699bc909e5e1
