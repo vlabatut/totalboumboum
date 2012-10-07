@@ -36,12 +36,26 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Classe charger d'enregistrer la description
+ * d'un agent, sous la forme d'un fichier XML.
  * 
  * @author Vincent Labatut
  *
  */
 public class AiPreviewSaver
 {	
+	/**
+	 * Enregistre le fichier XML décrivant un agent.
+	 * 
+	 * @param aiPreview
+	 * 		L'objet décrivant l'agent.
+	 * @throws ParserConfigurationException
+	 * 		Problème à la création du fichier XML.
+	 * @throws SAXException
+	 * 		Problème à la création du fichier XML.
+	 * @throws IOException
+	 * 		Problème à la création du fichier XML.
+	 */
 	public static void saveAiPreview(AiPreview aiPreview) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveAiElement(aiPreview);	
@@ -55,6 +69,14 @@ public class AiPreviewSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
+	/**
+	 * Crée un des élements du fichier XML.
+	 * 
+	 * @param aiPreview
+	 * 		Objet décrivant l'agent.
+	 * @return
+	 * 		L'élément XML créé.
+	 */
 	private static Element saveAiElement(AiPreview aiPreview)
 	{	Element result = new Element(XmlNames.AI); 
 		
@@ -73,6 +95,14 @@ public class AiPreviewSaver
 		return result;
 	}
 	
+	/**
+	 * Crée un des élements du fichier XML.
+	 * 
+	 * @param aiPreview
+	 * 		Objet décrivant l'agent.
+	 * @return
+	 * 		L'élément XML créé.
+	 */
 	private static Element saveNotesElement(AiPreview aiPreview)
 	{	Element result = new Element(XmlNames.NOTES);
 		Iterator<String> it = aiPreview.getNotes().iterator();
@@ -85,6 +115,14 @@ public class AiPreviewSaver
 		return result;
 	}
 	
+	/**
+	 * Crée un des élements du fichier XML.
+	 * 
+	 * @param aiPreview
+	 * 		Objet décrivant l'agent.
+	 * @return
+	 * 		L'élément XML créé.
+	 */
 	private static Element saveAuthorsElement(AiPreview aiPreview)
 	{	Element result = new Element(XmlNames.AUTHORS);
 		Iterator<String> it = aiPreview.getAuthors().iterator();

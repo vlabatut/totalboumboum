@@ -32,8 +32,16 @@ import java.util.concurrent.ThreadFactory;
  *
  */
 public class AiThreadFactory implements ThreadFactory
-{	private String name;
+{	/** Nom des threads à créer */
+	private String name;
 
+	/**
+	 * Construit un {@link ThreadFactory} portant
+	 * le nom spécifié.
+	 * 
+	 * @param name
+	 * 		Nom du thread.
+	 */
 	public AiThreadFactory(String name)
 	{	this.name = name;
 	}

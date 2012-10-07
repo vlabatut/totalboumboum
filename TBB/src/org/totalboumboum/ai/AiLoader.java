@@ -30,12 +30,42 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
 /**
- * 
+ * Classe dont le rôle est de charger
+ * les classes de l'agent dans la JVM,
+ * puis de l'instancier pour obtenir un agent.
+ *  
  * @author Vincent Labatut
  *
  */
 public class AiLoader
 {
+	/**
+	 * Charge les classes de l'agent et
+	 * les instancie pour obtenir un agent.
+	 * 
+	 * @param name
+	 * 		Nom du dossier de l'agent.
+	 * @param packname
+	 * 		Nom du paquetage de l'agent.
+	 * @return
+	 * 		L'objet gérant le nouvel agent.
+	 * @throws FileNotFoundException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 * @throws ClassNotFoundException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 * @throws IllegalArgumentException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 * @throws SecurityException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 * @throws InstantiationException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 * @throws IllegalAccessException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 * @throws InvocationTargetException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 * @throws NoSuchMethodException
+	 * 		Problème lors de l'accès aux classes de l'agent.
+	 */
 	public static AiAbstractManager<?> loadAi(String name, String packname) throws FileNotFoundException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException 
 	{	AiAbstractManager<?> result;
 		
