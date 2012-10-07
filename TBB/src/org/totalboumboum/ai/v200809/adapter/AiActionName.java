@@ -34,5 +34,12 @@ package org.totalboumboum.ai.v200809.adapter;
  */
 public enum AiActionName
 {
-	DROP_BOMB,MOVE,NONE,PUNCH;	
+	/** Poser une bombe */
+	DROP_BOMB,
+	/** Se déplacer */
+	MOVE,
+	/** Ne rien faire */
+	NONE,
+	/** Frapper une bombe */
+	PUNCH;	
 }

@@ -41,6 +41,7 @@ public class AiPath
     /////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** */
 	private final List<AiTile> tiles = new ArrayList<AiTile>();
 	
 	/**
@@ -103,6 +104,10 @@ public class AiPath
 	{	tiles.remove(index);	
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 */
 	public void removeTile(AiTile tile)
 	{	tiles.remove(tile);		
 	}
@@ -211,7 +216,7 @@ public class AiPath
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus long que ce dernier.
 	 * 
-	 * @param object	le chemin à comparer
+	 * @param path	le chemin à comparer
 	 * @return	vrai ssi ce chemin est plus long que celui passé en paramètre
 	 */
 	public boolean isLongerThan(AiPath path)
@@ -225,7 +230,7 @@ public class AiPath
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
 	 * 
-	 * @param object	le chemin à comparer
+	 * @param path	le chemin à comparer
 	 * @return	vrai ssi ce chemin est plus court que celui passé en paramètre
 	 */
 	public boolean isShorterThan(AiPath path)

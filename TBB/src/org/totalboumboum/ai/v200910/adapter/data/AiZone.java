@@ -86,6 +86,7 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
+	 * @param elapsedTime 
 	 */
 	public void update(long elapsedTime)
 	{	updateTimes(elapsedTime);
@@ -763,6 +764,7 @@ public class AiZone
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprimées de cette représentation.
 	 * 
+	 * @param <U> 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
@@ -777,6 +779,7 @@ public class AiZone
 	 * méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
+	 * @param <U> 
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
@@ -816,6 +819,8 @@ public class AiZone
 
 	/** 
 	 * renvoie le personnage qui est contrôlé par l'IA
+	 * @return
+	 * 	 	Le personnage.
 	 */
 	public AiHero getOwnHero()
 	{	return ownHero;	
@@ -934,6 +939,7 @@ public class AiZone
 	 * @param line2	ligne de la seconde case
 	 * @param col2	colonne de la seconde case
 	 * @param direction	direction à considérer
+	 * @return la distance.
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
 	{	int result = level.getTileDistance(line1,col1,line2,col2,direction);
@@ -952,6 +958,7 @@ public class AiZone
 	 * @param col1	colonne de la première case
 	 * @param line2	ligne de la seconde case
 	 * @param col2	colonne de la seconde case
+	 * @return la distance.
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2)
 	{	int result = level.getTileDistance(line1, col1, line2, col2, Direction.NONE);
@@ -965,8 +972,9 @@ public class AiZone
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param sprite1	première case
-	 * @param sprite2	seconde case
+	 * @param tile1	première case
+	 * @param tile2	seconde case
+	 * @return la distance.
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2)
 	{	int result = getTileDistance(tile1,tile2,Direction.NONE);
@@ -981,9 +989,10 @@ public class AiZone
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param sprite1	première case
-	 * @param sprite2	seconde case
+	 * @param tile1	première case
+	 * @param tile2	seconde case
 	 * @param direction	direction à considérer
+	 * @return la distance.
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
 	{	int line1 = tile1.getLine();
@@ -1003,6 +1012,7 @@ public class AiZone
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
+	 * @return la distance.
 	 */
 	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2)
 	{	int result = getTileDistance(sprite1,sprite2,Direction.NONE);
@@ -1020,6 +1030,7 @@ public class AiZone
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
 	 * @param direction	direction à considérer
+	 * @return la distance.
 	 */
 	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
 	{	AiTile tile1 = sprite1.getTile();
@@ -1042,6 +1053,7 @@ public class AiZone
 	 * @param y1	ordonnée du premier point
 	 * @param x2	abscisse du second point
 	 * @param y2	ordonnée du second point
+	 * @return la distance.
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2);
@@ -1063,6 +1075,7 @@ public class AiZone
 	 * @param x2	abscisse du second point
 	 * @param y2	ordonnée du second point
 	 * @param direction	direction à considérer
+	 * @return la distance.
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
@@ -1080,6 +1093,7 @@ public class AiZone
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
+	 * @return la distance.
 	 */
 	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2)
 	{	double result = getPixelDistance(sprite1, sprite2,Direction.NONE);
@@ -1097,6 +1111,7 @@ public class AiZone
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
 	 * @param direction	direction à considérer
+	 * @return la distance.
 	 */
 	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
 	{	double x1 = sprite1.getPosX();
@@ -1256,7 +1271,7 @@ public class AiZone
 	 * @param x1	l'abscisse de la première position
 	 * @param y1	l'ordonnée de la première position
 	 * @param x2	l'abscisse de la seconde position
-	 * @param y21	l'ordonnée de la seconde position
+	 * @param y2	l'ordonnée de la seconde position
 	 * @return	vrai ssi les deux positions sont équivalentes au pixel près
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)

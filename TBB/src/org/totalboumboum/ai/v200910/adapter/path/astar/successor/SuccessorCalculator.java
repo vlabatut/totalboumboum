@@ -55,6 +55,8 @@ public abstract class SuccessorCalculator
 	 * 
 	 * @param node	le noeud de recherche courant 
 	 * @return	la liste de cases accessibles
+	 * 
+	 * @throws StopRequestException 
 	 */
 	public abstract List<AiTile> processSuccessors(AstarNode node) throws StopRequestException;
 }

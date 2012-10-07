@@ -55,8 +55,13 @@ import org.totalboumboum.game.round.RoundVariables;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiManager extends AiAbstractManager<Integer>
-{	private boolean debug = false;
+{	/** */
+	private boolean debug = false;
 
+	/**
+	 * 
+	 * @param ai
+	 */
 	public AiManager(ArtificialIntelligence ai)
     {	super(ai);
 		controlKeys = new ArrayList<Integer>();		

@@ -77,6 +77,11 @@ public class AiTile
 	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;
 	
+	/**
+	 * 
+	 * @return
+	 * 		La zone.
+	 */
 	public AiZone getZone()
 	{	return zone;	
 	}
@@ -87,6 +92,11 @@ public class AiTile
 	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
+	/**
+	 * 
+	 * @return
+	 * 		La case.
+	 */
 	Tile getTile()
 	{	return tile;
 	}
@@ -409,6 +419,8 @@ public class AiTile
 	 * case est traversable par le sprite passé en paramètre.
 	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
+	 * 
+	 * @param <T> 
 	 * 
 	 * @param sprite	le sprite qui veut traverser cette case
 	 * @param list	les sprites de cette case à tester
