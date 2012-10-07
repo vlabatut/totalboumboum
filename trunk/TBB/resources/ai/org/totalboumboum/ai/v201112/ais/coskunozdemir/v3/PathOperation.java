@@ -34,7 +34,7 @@ public class PathOperation
 	 */
 	private final int	NEXT_TILE_INDEX	= 1;
 
-	// FIELD
+	/** */
 	CoskunOzdemir		ai;
 
 	/**
@@ -61,7 +61,6 @@ public class PathOperation
 	 * @return Shortest path from this AI's own tile to destination tile.
 	 * @throws StopRequestException
 	 *             If the engine demands the termination of the agent.
-	 * @throws LimitReachedException
 	 */
 	protected AiPath getShortestPath( AiTile endTile ) throws StopRequestException
 	{
@@ -72,15 +71,13 @@ public class PathOperation
 	/**
 	 * Uses built-in A* method to calculate the shortest path from a given start
 	 * tile to a given destination tile.
+	 * @param hero 
 	 * 
-	 * @param startTile
-	 *            Starting tile.
 	 * @param endTile
 	 *            Destination tile.
 	 * @return Shortest path from starting tile to destination tile.
 	 * @throws StopRequestException
 	 *             If the engine demands the termination of the agent.
-	 * @throws LimitReachedException
 	 */
 	protected AiPath getShortestPath( AiHero hero, AiTile endTile ) throws StopRequestException
 	{
@@ -119,7 +116,6 @@ public class PathOperation
 	 * @return Next tile on path.
 	 * @throws StopRequestException
 	 *             If the engine demands the termination of the agent.
-	 * @throws LimitReachedException
 	 */
 	protected AiTile getNextTileOnPath( AiTile endTile ) throws StopRequestException
 	{
@@ -132,14 +128,12 @@ public class PathOperation
 	 * path between a given starting tile and an end tile. If the end tile is
 	 * starting tile, this tile will be returned, else it will be a neighbor of
 	 * the start tile.
+	 * @param hero 
 	 * 
-	 * @param startTile
-	 *            Starting Tile.
 	 * @param endTile
 	 *            Destination tile.
 	 * @return Next tile on path.
 	 * @throws StopRequestException
-	 * @throws LimitReachedException
 	 */
 	protected AiTile getNextTileOnPath( AiHero hero, AiTile endTile ) throws StopRequestException
 	{
@@ -164,7 +158,6 @@ public class PathOperation
 	 * @return Direction to go.
 	 * @throws StopRequestException
 	 *             If the engine demands the termination of the agent.
-	 * @throws LimitReachedException
 	 */
 	protected Direction getNextDirectionOnPath( AiTile endTile ) throws StopRequestException
 	{
@@ -175,15 +168,13 @@ public class PathOperation
 	/**
 	 * Method to get the direction to go to follow the path that calculated by
 	 * A* from a given start tile and an end tile.
+	 * @param hero 
 	 * 
-	 * @param startTile
-	 *            Starting tile.
 	 * @param endTile
 	 *            Destination tile.
 	 * @return Direction to go.
 	 * @throws StopRequestException
 	 *             If the engine demands the termination of the agent.
-	 * @throws LimitReachedException
 	 */
 	protected Direction getNextDirectionOnPath( AiHero hero, AiTile endTile ) throws StopRequestException
 	{
