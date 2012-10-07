@@ -51,7 +51,7 @@ public class SakarYasar extends ArtificialIntelligence
 	protected BombHandler bombHandler;
 	/** gestionnaire chargé de décidé de la direction de déplacement de l'agent */
 	protected MoveHandler moveHandler;
-	
+	/** */
 	protected Tools tools;
 	
 	@Override
