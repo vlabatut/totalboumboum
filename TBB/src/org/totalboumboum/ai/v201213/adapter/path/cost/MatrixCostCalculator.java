@@ -111,6 +111,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		Colonne de la case à mettre à jour.
 	 * @param cost	
 	 * 		Nouveau coût à affecter.
+	 * @throws StopRequestException 
+	 * 		Si le moteur a demandé l'arrêt de l'agent.
 	 */
 	public void setCost(int row, int col, double cost) throws StopRequestException
 	{	costMatrix[row][col] = cost;

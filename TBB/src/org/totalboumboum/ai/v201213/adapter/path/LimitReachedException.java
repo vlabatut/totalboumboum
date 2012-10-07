@@ -44,7 +44,8 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * @author Vincent Labatut
  */
 public final class LimitReachedException extends Exception
-{	private static final long serialVersionUID = 1L;
+{	/** numéro de série */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Crée une exception représentant le fait qu'un algorithme de recherche
@@ -263,6 +264,13 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Représentation textuelle de l'état de l'algorithme
+	 * de recherche au moment où l'exception est levée.
+	 * 
+	 * @return
+	 * 		La représentation textuelle.
+	 */
 	public String getSummary()
 	{	String result = "";
 		result = result + "height=" + height + "(" + maxHeight + ") ";

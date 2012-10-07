@@ -127,8 +127,6 @@ public abstract class SuccessorCalculator
 	 * 		Le noeud de recherche à traiter.
 	 * @return
 	 * 		{@code true} ssi la case n'est pas menacée.
-	 * 
-	 * @throws StopRequestException
 	 */
 	public abstract boolean isThreatened(AiSearchNode node);
 }

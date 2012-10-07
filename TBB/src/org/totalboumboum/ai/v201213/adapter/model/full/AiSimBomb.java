@@ -162,7 +162,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 		// misc
 		color = bomb.getColor();
 		working = bomb.isWorking();
-		time = bomb.getTime();
+		time = bomb.getElapsedTime();
 		slidingSpeed = bomb.getSlidingSpeed();
 	}
 
@@ -359,7 +359,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	private long time = 0;
 	
 	@Override
-	public long getTime()
+	public long getElapsedTime()
 	{	return time;	
 	}
 	

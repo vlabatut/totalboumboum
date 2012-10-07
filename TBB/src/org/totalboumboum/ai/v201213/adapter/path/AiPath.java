@@ -119,6 +119,8 @@ public class AiPath implements Comparable<AiPath>
 	 * 
 	 * @param location
 	 * 		L'emplacement à insérer.
+	 * @param pause 
+	 * 		La pause associée à l'emplacement.
 	 */
 	public void addLocation(AiLocation location, long pause)
 	{	locations.add(location);

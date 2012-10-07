@@ -76,6 +76,9 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette case et son contenu
+	 * 
+	 * @param elapsedTime
+	 * 		Temps écoulé depuis la dernière mise à jour.
 	 */
 	protected void update(long elapsedTime)
 	{	updateSprites(elapsedTime);		
@@ -364,6 +367,9 @@ final class AiDataTile extends AiTile
 	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
 	 * 
+	 * @param <T> 
+	 * 		Type de sprite à traiter
+	 * 
 	 * @param sprite
 	 * 		le sprite qui veut traverser cette case
 	 * @param list
@@ -447,9 +453,13 @@ final class AiDataTile extends AiTile
 	 * termine les simulations de sprites passées en paramètres
 	 * 
 	 * @param <T>
-	 * 		type de simulation
+	 * 		type de simulation.
+	 * @param <U> 
+	 * 		Type de sprite à traiter.
 	 * @param internalList
-	 * 		liste de simulations
+	 * 		liste de simulations.
+	 * @param externalList 
+	 * 		Liste de simulations.
 	 */
 	private <T extends AiDataSprite<?>, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();

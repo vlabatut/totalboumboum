@@ -65,6 +65,7 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** L'agent associé */
 	protected ArtificialIntelligence ai = null;
 	
 	/////////////////////////////////////////////////////////////////
@@ -106,6 +107,8 @@ public abstract class HeuristicCalculator
 	 * proches, un choix quelconque (ex : hasard)
 	 * doit être réalisé).
 	 * 
+	 * @param location 
+	 * 		L'emplacement à traiter.
 	 * @return
 	 * 		La case de destination la plus proche.
 	 */

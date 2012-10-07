@@ -35,9 +35,23 @@ import org.totalboumboum.ai.v201213.adapter.model.partial.AiPartialModel;
  * @author Vincent Labatut
  */
 public class AiExplosionList extends TreeSet<AiExplosion>
-{	private static final long serialVersionUID = 1L;
-public AiExplosionList(){}
+{	/** numéro de série */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Crée une liste complètement vierge.
+	 */
+	public AiExplosionList()
+	{
+	}
+
+	/**
+	 * Crée une liste dédiée à la case passée
+	 * en paramètre.
+	 * 
+	 * @param tile
+	 * 		Case de référence.
+	 */
 	public AiExplosionList(AiTile tile)
 	{	this.tile = tile;
 	}

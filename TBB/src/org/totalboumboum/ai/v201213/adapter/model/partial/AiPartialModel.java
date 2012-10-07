@@ -375,7 +375,7 @@ public class AiPartialModel
 		{	AiTile tile = fire.getTile();
 			int col = fire.getCol();
 			int row = fire.getRow();
-			long time = fire.getTime();
+			long time = fire.getElapsedTime();
 			long duration = fire.getBurningDuration();
 			long endTime = duration - time;
 			AiExplosionList list = explosions[row][col];
