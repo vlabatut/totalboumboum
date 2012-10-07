@@ -16,11 +16,17 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 @SuppressWarnings("deprecation")
 public class Duvar {
+	/** */
 	private KayaYerinde onder;
+	/** */
 	private Matris matris;
+	/** */
 	private Astar astar;
+	/** */
 	private boolean running;
+	/** */
 	private AiTile incelenecek;
+	/** */
 	private boolean yaz;	
 	
 	/**

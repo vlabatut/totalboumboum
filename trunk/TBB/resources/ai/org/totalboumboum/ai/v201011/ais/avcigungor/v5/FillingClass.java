@@ -18,24 +18,38 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class FillingClass {
+	/** */
 	private final double FOSSE = 0;
+	/** */
 	private final double MUR_INDESTRUCTIBLE = 1;
+	/** */
 	private final double MUR_DESTRUCTIBLE = 2;
+	/** */
 	private final double BOMBE = 3;
+	/** */
 	private final double BLAST = 4;
+	/** */
 	private final double BONUS_EXTRA_BOMBE = 5;
+	/** */
 	private final double BONUS_EXTRA_BLAST = 6;
+	/** */
 	private final double CASE_SUR = 7;
+	/** */
 	private final double ADVERSAIRE = 8;
+	/** */
 	private final double NOUS = 9;
+	/** */
 	private final double FLAMME = 10;
 
 	/** */
 	public double matrice[][];
 
+	/** */
 	AvciGungor ai;
 
+	/** */
 	AiZone gameZone;
+	/** */
 	private AiHero ourHero;
 
 	/**
@@ -57,6 +71,12 @@ public class FillingClass {
 		this.fillFiresMatrice(matrice, gameZone);
 	}
 
+	/**
+	 * 
+	 * @param matrice
+	 * @param gameZone
+	 * @throws StopRequestException
+	 */
 	private void initialiseMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -73,6 +93,12 @@ public class FillingClass {
 
 	}
 
+	/**
+	 * 
+	 * @param matrice
+	 * @param gameZone
+	 * @throws StopRequestException
+	 */
 	private void emplirBonus(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -93,6 +119,12 @@ public class FillingClass {
 		}
 	}
 
+	/**
+	 * 
+	 * @param matrice
+	 * @param gameZone
+	 * @throws StopRequestException
+	 */
 	private void emplirHero(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -109,6 +141,12 @@ public class FillingClass {
 
 	}
 
+	/**
+	 * 
+	 * @param matrice
+	 * @param gameZone
+	 * @throws StopRequestException
+	 */
 	private void emplirBombe(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -131,6 +169,12 @@ public class FillingClass {
 
 	}
 
+	/**
+	 * 
+	 * @param matrice
+	 * @param gameZone
+	 * @throws StopRequestException
+	 */
 	private void emplirBlock(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -149,6 +193,12 @@ public class FillingClass {
 		}
 	}
 
+	/**
+	 * 
+	 * @param matrice
+	 * @param gameZone
+	 * @throws StopRequestException
+	 */
 	private void emplirSur(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -166,6 +216,12 @@ public class FillingClass {
 
 	}
 
+	/**
+	 * 
+	 * @param matrice
+	 * @param gameZone
+	 * @throws StopRequestException
+	 */
 	private void fillFiresMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();

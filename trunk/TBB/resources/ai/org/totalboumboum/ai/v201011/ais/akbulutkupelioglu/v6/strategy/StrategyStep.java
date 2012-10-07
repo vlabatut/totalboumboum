@@ -16,9 +16,13 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 @SuppressWarnings("deprecation")
 public class StrategyStep
 {
+	/** */
 	private AiTile tile;
+	/** */
 	private AiAction action;
+	/** */
 	private int value;
+	/** */
 	private AkbulutKupelioglu monIa;
 	
 	

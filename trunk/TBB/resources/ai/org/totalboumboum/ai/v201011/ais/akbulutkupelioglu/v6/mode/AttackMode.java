@@ -35,12 +35,19 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class AttackMode extends Mode
 {
-
+	/** */
 	private final int ENEMY_VALUE = 50;
+	/** */
 	private final int UNREACHABLE_ENEMY_VALUE = 200;
 
+	/** */
 	private static AttackMode instance = null;
 	
+	/**
+	 * 
+	 * @param ia
+	 * @throws StopRequestException
+	 */
 	private AttackMode(AkbulutKupelioglu ia) throws StopRequestException
 	{
 		ia.checkInterruption();
@@ -107,6 +114,11 @@ public class AttackMode extends Mode
 		return getInterest();
 	}
 
+	/**
+	 * 
+	 * @param ownHero
+	 * @throws StopRequestException
+	 */
 	private void processDestructibles(AiHero ownHero)
 			throws StopRequestException
 	{
@@ -127,6 +139,11 @@ public class AttackMode extends Mode
 		}
 	}
 
+	/**
+	 * 
+	 * @param ownHero
+	 * @throws StopRequestException
+	 */
 	private void processBonus(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -143,6 +160,11 @@ public class AttackMode extends Mode
 		}
 	}
 
+	/**
+	 * 
+	 * @param ownHero
+	 * @throws StopRequestException
+	 */
 	private void processEnemies(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();

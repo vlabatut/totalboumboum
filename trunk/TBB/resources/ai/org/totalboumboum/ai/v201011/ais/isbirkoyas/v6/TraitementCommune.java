@@ -16,7 +16,9 @@ import org.totalboumboum.ai.v201011.ais.isbirkoyas.v6.IsbirKoyas;
 @SuppressWarnings("deprecation")
 public class TraitementCommune {
 
+	/** */
 	private DeplacementCommune deplacementCommune = null;
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
 
 	/**

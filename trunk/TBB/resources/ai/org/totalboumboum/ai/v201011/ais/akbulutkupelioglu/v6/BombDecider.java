@@ -20,12 +20,17 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.mode.Mode;
 @SuppressWarnings("deprecation")
 public class BombDecider
 {
-
+	/** */
 	private static BombDecider instance = null;
+	/** */
 	private static AkbulutKupelioglu monIA = null; 
+	/** */
 	private static AiZone zone = null;
 	
-	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private BombDecider() throws StopRequestException
 	{
 		monIA.checkInterruption();

@@ -17,8 +17,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 @SuppressWarnings("deprecation")
 public class TileComparator implements Comparator<AiTile>
 {
-
+	/** */
 	AiTile ownTile = null;
+	/** */
 	AkbulutKupelioglu monIa;
 	/**
 	 * Creates a new TileComparator.

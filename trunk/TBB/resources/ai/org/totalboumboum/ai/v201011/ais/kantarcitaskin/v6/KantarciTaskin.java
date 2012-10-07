@@ -32,6 +32,7 @@ public class KantarciTaskin extends ArtificialIntelligence
 	 * Variable qui determine la direction du deplacement et calculé par la méthode action.
 	 */
 	Direction direction = Direction.NONE;
+	/** */
 	AiZone zone;
 	
 	/**

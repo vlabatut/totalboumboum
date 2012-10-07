@@ -21,7 +21,12 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 @SuppressWarnings("deprecation")
 enum Mode {
-	NONE,COLLECTE,ATTAQUE
+	/** */
+	NONE,
+	/** */
+	COLLECTE,
+	/** */
+	ATTAQUE
 }
 
 /**
@@ -34,6 +39,7 @@ enum Mode {
 @SuppressWarnings("deprecation")
 public class KesimalVarol extends ArtificialIntelligence
 {	
+	/** */
 	boolean verbose=false;
 	
 	/** Variable pour garder la zone */
@@ -172,8 +178,12 @@ public class KesimalVarol extends ArtificialIntelligence
 	/** Utilisee pour l'intertie */
 	public class _lastPathChosenParameters
 	{
+		/** */
 		private AiPath lastPathChosen;
-		private int cumulativeInterest,currentPosition;
+		/** */
+		private int cumulativeInterest;
+		/** */
+		private int currentPosition;
 	
 		/**
 		 * 
@@ -423,6 +433,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/**
 	 * Mettre a jour les endroits d'emplacement qui etaient ignores
+	 * @throws StopRequestException 
 	 */
 	private void updateTemporarilyIgnoredExplosionCases() throws StopRequestException
 	{
@@ -601,6 +612,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/**
 	 * Determine le mode courant
+	 * @throws StopRequestException 
 	 */
 	private void changeMode() throws StopRequestException
 	{
@@ -633,6 +645,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	 * Utilisee lors de debogage, pour montrer les couleurs et textes
 	 * @param m Matrice a utiliser
 	 * @param mc MovementController a utiliser
+	 * @throws StopRequestException 
 	 * 
 	 */
 	private void colorizePath(Matrix m,MovementCommitter mc) throws StopRequestException

@@ -24,7 +24,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 public class ModeCollecte 
 {
 
-	//notre héro
+	/** notre héro */
 	private GoncuOnat monia;
 	
 	/** la case vide qui ne contient aucuns sprites

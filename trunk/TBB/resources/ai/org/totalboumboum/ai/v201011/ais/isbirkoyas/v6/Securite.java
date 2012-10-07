@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Securite {
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
 	/** */
 	public boolean secure;

@@ -21,20 +21,23 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
 @SuppressWarnings("deprecation")
 public class AkbulutKupelioglu extends ArtificialIntelligence
 {
-
+	/** */
 	private AiZone zone;
+	/** */
 	private AiOutput output;
+	/** */
 	private Strategy strategy = null;
+	/** */
 	private Mode mode = null;
 	//private InformationManager informationManager = null;
 
-	
 	public void init() throws StopRequestException {
 		checkInterruption();
 		ModeSelector.reset(this);
 	};
 	
-	/** method called by the game engine to get our action*/
+	/** method called by the game engine to get our action
+	 */
 	public AiAction processAction() throws StopRequestException
 	{
 		checkInterruption();
@@ -61,6 +64,12 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 		
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @param interest
+	 * @throws StopRequestException
+	 */
 	private void outputMatrix(Matrix interest) throws StopRequestException
 	{
 		checkInterruption();

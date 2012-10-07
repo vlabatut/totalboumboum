@@ -19,6 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class TraitementCollect {
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
 	/** */
 	public int DESTRUCTIBLEINIT = 200;

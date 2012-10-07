@@ -17,12 +17,18 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  */
 @SuppressWarnings("deprecation")
 public class Elements {
+	/** */
 	private BuyuktopacTurak bt;
+	/** */
 	private PerfectStrangers ps;
+	/** */
 	private AiZone zone;		
+	/** */
 	private AiHero deepPurple;  
 	
+	/** */
 	private List<AiBlock> willBurnWallsList;//Les murs qui vont exploser
+	/** */
 	private List<AiItem> willBurnItemsList;//Les items qui vont exploser
 
 	

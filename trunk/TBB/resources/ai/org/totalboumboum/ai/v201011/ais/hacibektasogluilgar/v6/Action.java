@@ -20,13 +20,21 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Action {
 	
+	/** */
 	HacibektasogluIlgar hi;
+	/** */
 	int hauteur;
+	/** */
 	int largeur;
+	/** */
 	AiZone zone;
+	/** */
 	AiHero notreHeros;
+	/** */
 	Etats[][] matriceZone;
+	/** */
 	double[][] matriceTotal;
+	/** */
 	CalculeZone cz;
 	
 	/**
@@ -64,7 +72,7 @@ public class Action {
 	 * @param note
 	 * @param color
 	 * @param control
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private int voisinesParDirection(AiTile tileActuelle,double[][] matrice,int porte,Direction direct,int note,Color color,int control) throws StopRequestException  

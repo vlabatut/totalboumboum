@@ -31,8 +31,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DeplacementCommune {
 
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
-	// la direction de la case d'attaque
+	/** la direction de la case d'attaque */
 	Direction dir2 = Direction.NONE;
 
 	/**

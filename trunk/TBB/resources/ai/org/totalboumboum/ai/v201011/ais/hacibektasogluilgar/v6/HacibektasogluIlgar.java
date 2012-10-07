@@ -15,7 +15,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 @SuppressWarnings("deprecation")
 public class HacibektasogluIlgar extends ArtificialIntelligence {
 	
+	/** */
 	 AiZone zone;
+		/** */
 	 AiHero notreHero;
 	
 	public AiAction processAction() throws StopRequestException {

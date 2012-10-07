@@ -35,26 +35,34 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class OzdokerOzen extends ArtificialIntelligence
 {	
-	//pour l'aire
+	/** pour l'aire */
 	AiZone gameZone;
 	
 	 //pour les sortie dans API
 	
-	//pour notre hero
+	/** pour notre hero */
 	private AiHero notreHero;
 	
 	//pour nos cibles
+	/** */
 	AiTile notreCible=null;
+	/** */
 	AiTile notreCibleMur=null;
+	/** */
 	AiTile notreCibleBonus=null;
+	/** */
 	AiTile notreCibleEnemy=null;
+	/** */
 	AiTile notreCibleEnemyFirstTile=null;
+	/** */
 	AiTile adversairePrecise=null;
 	
 	/** les listes pour on va poser bombe */
 	int notreCibleSize;
+	/** */
 	int special=1;
 	
+	/** */
 	List<AiTile> bomBom=new ArrayList<AiTile>();
 	/** tiles pour fuir! */
 	List<AiTile> tilesFuir=new ArrayList<AiTile>(); 
@@ -63,9 +71,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/** l'index de notre cible dans cette list */
 	int indexCibleAdversaire=0;
 	
-	//wait
+	/** wait */
 	boolean wait=false;
-	//risk
+	/** risk */
 	boolean risk=false;
 	
 	/** longueur de la zone */
@@ -82,9 +90,13 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	/** autorisations de poser bombe et deplacement */
 	private boolean permissionPoseBombe=false;
+	/** */
 	boolean attackAdversaire=false;
+	/** */
 	boolean detruireMur=false;
+	/** */
 	boolean collecteBonus=false;
+	/** */
 	boolean arriverACible=false;
 	
 	/**Cost calculateur*/
@@ -352,7 +364,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * 
 	 * @param matrice
 	 * @param notreHero
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private boolean guvendemiyiz(int[][] matrice,AiHero notreHero)throws StopRequestException{
@@ -516,7 +528,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param tile
 	 * @param matrice
 	 * @param gameZone
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException 
 	 */
 	long bombTime(AiTile tile,int[][] matrice,AiZone gameZone) throws StopRequestException{
@@ -541,7 +553,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param nextMove
 	 * @param uneHero
 	 * @param matrice
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiAction attackAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
@@ -650,7 +662,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param nextMove
 	 * @param uneHero
 	 * @param matrice
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiAction collecteAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
@@ -746,7 +758,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param nextMove
 	 * @param uneHero
 	 * @param matrice
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiAction fuirAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
@@ -824,7 +836,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui a alogrithm pour fuir
 	 * ça utilise aussi methode de fuirAction()
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	private AiAction fuir() throws StopRequestException{

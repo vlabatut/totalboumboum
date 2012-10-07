@@ -12,7 +12,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 @SuppressWarnings("deprecation")
 public class MyCostCalculator extends CostCalculator {
 
+	/** */
 	ArikYaman ay;
+	/** */
     int[][]	ProcessMatrix;
 	
     /**

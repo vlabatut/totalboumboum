@@ -45,6 +45,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class YolBulucu
 {
+	/** */
 	private boolean verbose = false;
 	
 	/**
@@ -87,6 +88,11 @@ public class YolBulucu
 		setDestination(destination);
 	}
 	
+	/**
+	 * 
+	 * @param onder
+	 * @throws StopRequestException
+	 */
 	private void init(KayaYerinde onder) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -215,6 +221,7 @@ public class YolBulucu
 	/**
 	 * met à jour la position précédente du personnage,
 	 * exprimée en pixels
+	 * @throws StopRequestException 
 	 */
 	private void updatePrev() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -235,6 +242,7 @@ public class YolBulucu
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
+	 * @throws StopRequestException 
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -283,6 +291,8 @@ public class YolBulucu
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -366,6 +376,7 @@ public class YolBulucu
 	/**
 	 * met à jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
+	 * @throws StopRequestException 
 	 */
 	private void updateOutput() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE

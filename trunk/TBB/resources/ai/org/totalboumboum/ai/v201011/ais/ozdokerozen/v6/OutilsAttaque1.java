@@ -19,14 +19,17 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class OutilsAttaque1 {
 
-	/**
-	 * Cette classe fait calculs pour attaque 
-	 */
+	/** Cette classe fait calculs pour attaque */
 	ArtificialIntelligence AI;
+	/** */
 	AiZone gameZone;
+	/** */
 	AiHero notreHero;
+	/** */
 	int[][] matrice;
+	/** */
 	TileControleur tileControleur;
+	/** */
 	List<AiTile> tilesPossible=new ArrayList<AiTile>();
 	
 	/***

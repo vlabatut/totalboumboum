@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Coordinate;
 @SuppressWarnings("deprecation")
 public class CoordinateComparator implements Comparator<Coordinate>{
 
-	
+	/** */
 	private HashMap<Coordinate, Integer> distanceMap = null;
 	
 	/**

@@ -26,12 +26,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Move 
 {
-	/**
-	 * Classe qui calcule la direction de movement en trouvant le chemin le plus court
-	 * */
+	/** Classe qui calcule la direction de movement en trouvant le chemin le plus court */
 	AiZone zone;
+	/** */
 	int mode;
+	/** */
 	ArtificialIntelligence ai;
+	/** */
 	double[][] matrix;
 		
 	/**

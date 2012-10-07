@@ -19,8 +19,11 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
 @SuppressWarnings("deprecation")
 public class AdvancedSuccessorCalculator extends SuccessorCalculator
 {
+	/** */
 	private Matrix interest = null;
+	/** */
 	private AkbulutKupelioglu monIa = null;
+	/** */
 	private final int TILE_TRAVERSAL_TIME = -460;
 	
 	/**

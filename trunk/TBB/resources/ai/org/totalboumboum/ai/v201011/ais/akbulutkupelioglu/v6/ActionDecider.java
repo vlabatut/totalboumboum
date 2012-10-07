@@ -33,12 +33,21 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class ActionDecider
 {
+	/** */
 	private static ActionDecider instance = null;
+	/** */
 	private static AkbulutKupelioglu monIa = null;
+	/** */
 	private static AiZone zone = null;
+	/** */
 	private static Matrix interest = null;
+	/** */
 	private static Mode mode = null;
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private ActionDecider() throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -294,8 +303,12 @@ public class ActionDecider
 		return result;
 	}
 
-	
-
+	/**
+	 * 
+	 * @param newStrategy
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiAction getActionFromStrategy(Strategy newStrategy) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -321,6 +334,15 @@ public class ActionDecider
 		return new AiAction(AiActionName.MOVE, direction);
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @param ownHero
+	 * @param direction
+	 * @param matrix
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getSafeTilesCustom(AiTile tile, AiHero ownHero, Direction direction, Matrix matrix) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -355,12 +377,24 @@ public class ActionDecider
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param ownHero
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getSafeTiles(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();	
 		return getSafeTilesCustom(ownHero.getTile(), ownHero, null, interest);
 	}
 	
+	/**
+	 * 
+	 * @param ownHero
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getSafeTilesWithSimulatedBomb(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();

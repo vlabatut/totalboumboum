@@ -16,8 +16,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class TraitementAttaque {
 
+	/** */
 	IsbirKoyas ai = new IsbirKoyas();
+	/** */
 	double BOUGER = 100;
+	/** */
 	double DISTANCE = 1000;
 
 	/**

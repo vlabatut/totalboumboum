@@ -13,12 +13,19 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 @SuppressWarnings({ "unused", "deprecation" })
 public class KayaYerinde extends ArtificialIntelligence{
 	
+	/** */
 	private Matris matris;
+	/** */
 	private Rakip rakip;
+	/** */
 	private Bonus bonus;
+	/** */
 	private Duvar duvar;
+	/** */
 	private Escape escape;
+	/** */
 	private AiHero ownHero;
+	/** */
 	private long time;
 	
 	@Override

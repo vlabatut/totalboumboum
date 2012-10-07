@@ -15,9 +15,11 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.breadthfirstsearch.
 @SuppressWarnings("deprecation")
 public class DistanceMatrix extends Matrix
 {
-
+	/** */
 	private AiTile centerTile;
+	/** */
 	private AkbulutKupelioglu monIa;
+	
 	/**
 	 * Creates a new distance matrix.
 	 * @param width Width of the matrix.

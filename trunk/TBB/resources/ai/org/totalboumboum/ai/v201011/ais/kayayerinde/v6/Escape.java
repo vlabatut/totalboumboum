@@ -13,9 +13,13 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class Escape {
+	/** */
 	private KayaYerinde onder;
+	/** */
 	private Matris matris;
+	/** */
 	private Astar astar;
+	/** */
 	private boolean running;
 	
 	/**

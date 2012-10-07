@@ -13,8 +13,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 @SuppressWarnings("deprecation")
 public class SurviveStrategy extends Strategy
 {
-
+	/** */
 	Strategy lastStrategy = null;
+	
 	/**
 	 * Creates a new SurviveStrategy instance.
 	 * @param ia The AkbulutKupelioglu using this.

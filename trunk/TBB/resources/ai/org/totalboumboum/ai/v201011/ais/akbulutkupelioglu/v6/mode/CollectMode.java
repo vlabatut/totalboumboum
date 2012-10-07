@@ -35,9 +35,14 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.astar.Advanced
 @SuppressWarnings("deprecation")
 public class CollectMode extends Mode
 {
-
+	/** */
 	private static CollectMode instance = null;
 	
+	/**
+	 * 
+	 * @param ia
+	 * @throws StopRequestException
+	 */
 	private CollectMode(AkbulutKupelioglu ia) throws StopRequestException
 	{
 		ia.checkInterruption();
@@ -102,7 +107,11 @@ public class CollectMode extends Mode
 		return getInterest();
 	}
 
-
+	/**
+	 * 
+	 * @param ownHero
+	 * @throws StopRequestException
+	 */
 	private void processBonus(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -145,6 +154,11 @@ public class CollectMode extends Mode
 		}
 	}
 
+	/**
+	 * 
+	 * @param ownHero
+	 * @throws StopRequestException
+	 */
 	private void processDestructibles(AiHero ownHero)
 			throws StopRequestException
 	{

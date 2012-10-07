@@ -15,12 +15,19 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 @SuppressWarnings("deprecation")
 public class IsbirKoyas extends ArtificialIntelligence {
 
+	/** */
 	private Securite securite = null;
+	/** */
 	private DeplacementCommune deplacementCommune = null;
+	/** */
 	private DeplacementAttaque deplacementAttaque = null;
+	/** */
 	private DeplacementCollecte deplacementCollecte = null;
+	/** */
 	private TraitementAttaque traitementAttaque = null;
+	/** */
 	private TraitementCollect traitementCollect = null;
+	/** */
 	private PosageBombe posageBombe = null;
 	/** */
 	public AiPath nextMove = null;
@@ -59,7 +66,13 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	public boolean courir;
 	/** */
 	public boolean jeu = true;
-	int i = 0, k = 1, compteur = 0;
+	/** */
+	int i = 0;
+	/** */
+	int k = 1;
+	/** */
+	int compteur = 0;
+	/** */
 	double t;
 
 	/**

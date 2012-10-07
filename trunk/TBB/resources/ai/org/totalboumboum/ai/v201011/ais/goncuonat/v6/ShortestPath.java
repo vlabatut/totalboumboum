@@ -22,7 +22,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 @SuppressWarnings("deprecation")
 public class ShortestPath 
 {
-
+	/** */
 	private GoncuOnat monia;
 	
 	/**

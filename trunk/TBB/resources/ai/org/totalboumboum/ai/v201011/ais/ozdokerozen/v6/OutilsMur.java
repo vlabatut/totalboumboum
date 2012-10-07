@@ -16,17 +16,28 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 @SuppressWarnings("deprecation")
 public class OutilsMur {
 
+	/** */
 	TileControleur tileControleur;
+	/** */
 	ArtificialIntelligence abc;
+	/** */
 	AiZone gameZone;
+	/** */
 	AiHero notreHero;
+	/** */
 	List<AiTile> tilesPossible=new ArrayList<AiTile>();
 	
+	/** */
 	int MURDESTRUCTIBLE=5;
+	/** */
 	int MURINDESTRUCTIBLE=0;
+	/** */
 	int FIRE=-2;
+	/** */
 	int SECURE=1;
+	/** */
 	int BONUS=10;
+	/** */
 	int SCOPE=-3;
 	
 	/**

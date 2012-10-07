@@ -28,12 +28,15 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.comparator.Coordina
 @SuppressWarnings("deprecation")
 public class Matrix implements Cloneable
 {
-
+	/** */
 	private AkbulutKupelioglu monIa = null;
 
+	/** */
 	private int width;
+	/** */
 	private int height;
 
+	/** */
 	private int[][] matrix;
 
 	/**

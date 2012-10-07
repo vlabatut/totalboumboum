@@ -19,15 +19,23 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  */
 @SuppressWarnings("deprecation")
 public class Matris {
+	/** */
 	KayaYerinde onder;
 	
+	/** */
 	private int varlikMatrisi[][];
+	/** */
 	private ArrayList<int[][]> yedekVarlik;
+	/** */
 	private double kalanZamanMatrisi[][];
+	/** */
 	private ArrayList<double[][]> yedekZaman;
 	
+	/** */
 	private int hypoDuvar=0;
+	/** */
 	private int hypoBonus=0;
+	/** */
 	private int hypoHero;
 	
 	/** */
@@ -149,7 +157,13 @@ public class Matris {
 	/** liste des bombes traitées au cours de cette itération (pour ne pas les traiter plusieurs fois) */
 	private List<AiBomb> processedBombs;
 	
-	
+	/**
+	 * 
+	 * @param t
+	 * @param incele
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getBlast(AiTile t,boolean incele) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -307,6 +321,11 @@ public class Matris {
 	 * passée en paramètre. Le terme "indirect" signifie que la fonction est récursive : 
 	 * si une case à portée de souffle contient une bombe, le souffle de cette bombe est rajouté
 	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
+	 * @param bomb 
+	 * @param blast 
+	 * @param bombs 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	onder.checkInterruption(); 
@@ -334,6 +353,8 @@ public class Matris {
 
 	/**
 	 * traite la bombe passée en paramètre
+	 * @param bomb 
+	 * @throws StopRequestException 
 	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -654,7 +675,7 @@ public class Matris {
 	  * 
 	  * @param list
 	  * @param value
-	  * @return
+	  * @return ?
 	  * @throws StopRequestException
 	  */
 	private ArrayList<AiTile> quickSort(ArrayList<AiTile> list,ArrayList<Integer> value) throws StopRequestException
@@ -784,6 +805,12 @@ public class Matris {
 		return m;
 	}
 	
+	/**
+	 * 
+	 * @param list
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private double[][] clone(double[][]list) throws StopRequestException
 	{
 		onder.checkInterruption();

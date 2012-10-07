@@ -28,14 +28,20 @@ import java.util.List;
 @SuppressWarnings({ "unused", "deprecation" })
 public class CollecteClass {
 
+	/** */
 	private AiZone gameZone;
+	/** */
 	private FillingClass fillingClass;
 	/** */
 	public double matriceCollecte[][];
+	/** */
 	private boolean hasArrivedButDanger = false;
 	// public double matrice[][];
+	/** */
 	private AiHero ourHero;
+	/** */
 	private AiOutput aio;
+	/** */
 	private AvciGungor ai;
 
 	/**
@@ -154,6 +160,10 @@ public class CollecteClass {
 
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void fillCollecteMatrix() throws StopRequestException {
 		ai.checkInterruption();
 
@@ -344,6 +354,10 @@ public class CollecteClass {
 		}
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 

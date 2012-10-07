@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 public class DropBomb 
 {	/** */
 	public AiZone zone;
+	/** */
 	AiPath path =null;
 	/** */
 	public GoncuOnat monia;

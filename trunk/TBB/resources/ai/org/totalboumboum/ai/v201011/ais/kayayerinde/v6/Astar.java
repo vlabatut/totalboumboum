@@ -15,12 +15,19 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 @SuppressWarnings("deprecation")
 public class Astar {
 	
+	/** */
 	private KayaYerinde ky;
+	/** */
 	private AiPath path;
+	/** */
 	private int gidilenTur;
+	/** */
 	int i=0;
+	/** */
 	private boolean yaz;
+	/** */
 	private static final int ARA=10;
+	/** */
 	private boolean sictin;
 
 	/**
@@ -156,7 +163,14 @@ public class Astar {
 		return false;
 	}
 	
-	
+	/**
+	 * 
+	 * @param t1
+	 * @param t2
+	 * @param m
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private int mesafe(AiTile t1,AiTile t2,Matris m) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -196,6 +210,12 @@ public class Astar {
 		return (int)Math.sqrt(l*l+c*c);
 	}
 	
+	/**
+	 * 
+	 * @param list
+	 * @param eleman
+	 * @throws StopRequestException
+	 */
 	private void siraliEkle(ArrayList<Node> list,Node eleman) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -213,7 +233,13 @@ public class Astar {
 		}
 	}
 	
-
+	/**
+	 * 
+	 * @param tile
+	 * @param list
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private Node tileListedeMi(AiTile tile,ArrayList<Node> list) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -354,12 +380,24 @@ public class Astar {
 	 */
 	class Node
 	{
+		/** */
 		private int G;
+		/** */
 		private int H;
 		
+		/** */
 		private Node parent;
+		/** */
 		private AiTile own;
-		
+
+		/**
+		 * 
+		 * @param own
+		 * @param parent
+		 * @param G
+		 * @param H
+		 * @throws StopRequestException
+		 */
 		public Node(AiTile own,Node parent,int G,int H) throws StopRequestException
 		{
 			ky.checkInterruption();
@@ -369,6 +407,11 @@ public class Astar {
 			this.H=H;
 		}
 		
+		/**
+		 * 
+		 * @return ?
+		 * @throws StopRequestException
+		 */
 		public int getF() throws StopRequestException
 		{
 			ky.checkInterruption();

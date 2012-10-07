@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 public class DestructibleCostCalculator extends CostCalculator
 {
 
+	/** */
 	AkbulutKupelioglu monIa;
 	//calculate that
 	/**

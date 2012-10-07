@@ -17,10 +17,14 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 @SuppressWarnings("deprecation")
 public class CalculeAttaque {
 	
+	/** */
 	HacibektasogluIlgar hi;	
+	/** */
 	AiHero notreHeros;
 
+	/** */
 	CalculeZone cz;
+	/** */
 	Action act;
 	
 	/**
@@ -46,7 +50,7 @@ public class CalculeAttaque {
  * @param matriceZone
  * @param matriceTotal
  * @param chemin
- * @return
+ * @return ?
  * @throws StopRequestException
  * @throws LimitReachedException 
  */

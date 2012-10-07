@@ -18,13 +18,15 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 public class BreadthFirstSearchNode
 {
 
-	/**
-	 *  The tile to which this node corresponds.
-	 */
+	/** The tile to which this node corresponds. */
 	public AiTile currentTile;
+	/** */
 	private BreadthFirstSearchNode parent;
+	/** */
 	private AkbulutKupelioglu monIa;
+	/** */
 	private AiHero ownHero;
+	/** */
 	int value;
 	
 	/**

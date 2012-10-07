@@ -25,6 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Paths {
+	/** */
 	GocmenogluHekimoglu ai;
 	
 	/**
@@ -55,7 +56,7 @@ public class Paths {
 	 * Find the k. highest valued tile in the given hashmap
 	 * @param accesibleTiles
 	 * @param k
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	AiTile kthHighestTile(HashMap<AiTile,Double> accesibleTiles,int k) throws StopRequestException{
@@ -83,7 +84,7 @@ public class Paths {
 	/**
 	 * calculate a path to the target using A-star algorithm
 	 * @param target
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 * @throws LimitReachedException
 	 */
@@ -103,7 +104,7 @@ public class Paths {
 	/**
 	 * check if we have any enemies in the given list of tiles
 	 * @param accesibleTiles
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	boolean areEnemiesAccesible(List<AiTile> accesibleTiles) throws StopRequestException{
@@ -122,7 +123,7 @@ public class Paths {
 	
 	/**
 	 * check if we are in the blast area of any bomb currently on the map
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	boolean isOnFire() throws StopRequestException{
@@ -142,7 +143,7 @@ public class Paths {
 	 * @param hero hero to be used
 	 * @param simBomb simulate our hero's prototype bomb
 	 * @param expBombs calculate as if all the bombs have exploded
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	List<AiTile> accesibleTiles(AiHero hero,boolean simBomb,boolean expBombs) throws StopRequestException{
@@ -234,7 +235,7 @@ public class Paths {
 	 * Find the distance between two tiles, but using a non cyclic method
 	 * @param tile1
 	 * @param tile2
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	int tileDistNonCyc(AiTile tile1,AiTile tile2) throws StopRequestException{
