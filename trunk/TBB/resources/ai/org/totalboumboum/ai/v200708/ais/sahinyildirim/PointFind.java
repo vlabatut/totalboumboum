@@ -12,16 +12,17 @@ import java.awt.Point;
  *
  */
 public class PointFind {
-		
+
+	/** */
 	private static final long serialVersionUID = 1L;
-		//le point du joueur
-		private Point rootPoint;
-		
-		private int cost;
-		
-		private boolean visited;
-		
-		private boolean blockMure;
+	/** le point du joueur */
+	private Point rootPoint;
+	/** */
+	private int cost;
+	/** */
+	private boolean visited;
+	/** */
+	private boolean blockMure;
 		
 		
 		/**

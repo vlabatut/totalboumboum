@@ -20,6 +20,7 @@ public class HanciToprakNode implements Comparable {
 	private int heuristic;
 	/** The search depth of this HanciTprkNode */
 	private int depth;
+	/** */
 	@SuppressWarnings("unused")
 	private int f=0;
 	

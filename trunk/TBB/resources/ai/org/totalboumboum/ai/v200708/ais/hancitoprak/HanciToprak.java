@@ -12,12 +12,15 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  */
 @SuppressWarnings("deprecation")
 public class HanciToprak extends ArtificialIntelligence {
+	/** */
 	private static final long serialVersionUID = 1L;
 	/** le dernier déplacement effectué */
 	private Integer lastMove = null;
+	/** */
 //	private final int DELAY = 100;
-
+	/** */
 //	private int artma = 0;
+	/** */
     int temp_putbomb = 0;
 
 	/**
@@ -27,25 +30,40 @@ public class HanciToprak extends ArtificialIntelligence {
 		super("HanciToprk");
 	}
 
+	/** */
 	int index;
+	/** */
 //	private int durma = 0;
+	/** */
 	private int durma_art = 0;
+	/** */
 //	private int yy = 0;
 
+	/** */
 	private int x1 = 0;
+	/** */
 	private int y1 = 0;
+	/** */
 	private boolean condition = true;
+	/** */
 	private boolean condition_1 = true;
 
+	/** */
 	private Integer lastMove_ = null;
 
+	/** */
 //	private int bomb_portee = 0;
+	/** */
 //	private int bombakoydum = 0;
 
+	/** */
 	private int[][] costMatrix = null;
+	/** */
 //	private int[][] costMatrix_ = null;
 
+	/** */
 	private int hasno_bomb = 0;
+	/** */
 	private int danger=0;
 	
 	/** indicateur de première invocation (pour la compatibilité */
@@ -261,6 +279,14 @@ public class HanciToprak extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param result
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	private Integer hareket(Integer result, int x, int y) {
 
 		
@@ -309,7 +335,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * la methode le sors de ses mouvements possibles
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param possiblemoves du personnages
+	 * @param possibleMoves du personnages
 	 * @return	au nouveau les moves possibles du peronnage. 
 	 */
 
@@ -373,8 +399,9 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * si il ya un danger du bombe
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param possiblemoves du personnages apres qu'il a mis du bombe
+	 * @param temp 
 	 * @return	vrai si ce déplacement est possible
+	 * @throws Exception 
 	 */
 	private Integer escapeFromBomb(int x, int y, Vector<Integer> temp)
 			throws Exception {

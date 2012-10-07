@@ -11,6 +11,7 @@ package org.totalboumboum.ai.v200708.ais.keceryaman;
  *
  */
 public class Map {
+	/** */
 	private static int[][] map = new int[17][15];
 	
 	/**

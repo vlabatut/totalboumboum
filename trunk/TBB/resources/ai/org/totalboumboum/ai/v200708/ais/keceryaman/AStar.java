@@ -11,19 +11,23 @@ import java.util.List;
  *
  */
 public class AStar {
-	/**
-	 * Class fields
-	 */
+	/** Class fields */
 	public static BinaryHeapList openList = new BinaryHeapList(); // open list (nodes to be visited)
 	/** */
 	public static List<Node> closedList = new ArrayList<Node>(); // closed list (visited nodes)
+	/** */
 	private Node current; // current node
+	/** */
 	private Node neighbor; // a neighbor node (changes during a loop)
+	/** */
 	private Node targetNode;
+	/** */
 //	private Node startNode;
 	/** */
 	public static int[] target; // target node
+	/** */
 	private Iterator<Node> nodes;
+	/** */
 	private List<Node> path = new ArrayList<Node>();
 	/** */
 	public static boolean[] closedListCheck = new boolean[255];

@@ -18,11 +18,14 @@ public class HanciToprakAStar {
 	private HanciToprakSortedList open = new HanciToprakSortedList();
 	/** */
 	public List<HanciToprakNode> path = new ArrayList<HanciToprakNode>();
-
+	/** */
 	private HanciToprakNode[][] nodes;
 
+	/** */
 	HanciToprakNode debut;
+	/** */
 	HanciToprakNode fin;
+	/** */
 	private int[][] pos = {
 			{ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },// 0 //ceci est un
 			// exemple
@@ -63,6 +66,11 @@ public class HanciToprakAStar {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	protected int posDimX() {
 		return pos.length;
 	}
@@ -423,6 +431,13 @@ public class HanciToprakAStar {
 	//		return min;
 	//
 	//	} 
+	
+	/**
+	 * @param cF1 
+	 * @param cF2 
+	 * @return 
+	 * 		?
+	 */
 	HanciToprakNode compareF(HanciToprakNode cF1, HanciToprakNode cF2) {
 		if (cF1.getF() < cF2.getF())
 			return cF1;

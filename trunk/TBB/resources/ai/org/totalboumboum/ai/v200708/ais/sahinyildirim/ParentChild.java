@@ -15,11 +15,11 @@ import java.util.Vector;
  */
 public class ParentChild {
 	
-	
+	/** */
 	private PointFind parent;
 	
 
-	//vector pour deposer les fils de ce point
+	/** vector pour deposer les fils de ce point */
 	private Vector<PointFind> child;
 	
 	
