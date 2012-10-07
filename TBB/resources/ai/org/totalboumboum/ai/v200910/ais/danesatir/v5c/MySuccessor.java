@@ -20,7 +20,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class MySuccessor extends SuccessorCalculator{
+	/** */
 	private DaneSatir ai;
+	/** */
 	private TimeMatrice time;
 	
 	/**

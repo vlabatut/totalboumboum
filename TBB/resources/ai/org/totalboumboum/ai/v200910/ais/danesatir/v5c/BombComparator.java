@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 @SuppressWarnings("deprecation")
 public class BombComparator implements Comparator<AiBomb> {
 
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

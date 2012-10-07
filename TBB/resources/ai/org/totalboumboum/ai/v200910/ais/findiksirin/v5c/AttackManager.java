@@ -45,7 +45,11 @@ public class AttackManager
 			setBombingPath(posTarget,posWalkable);
 	}
 	
-	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> heroDestinations() throws StopRequestException{
 	ai.checkInterruption();
 	List<AiTile> dest = new ArrayList<AiTile>();
@@ -73,6 +77,10 @@ public class AttackManager
 	/** classe implémentant la fonction de coût */
 	private MatrixCostCalculator costCalculator;
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -89,18 +97,21 @@ public class AttackManager
 		}
 	}	
 //////////////////////////////////////////////////////////////////////////////////////////
-	//notre IA et la zone du jeu
+	/** notre IA et la zone du jeu */
 	private FindikSirin ai;
+	/** */
 	private AiZone zone;
 
 
-	//si on est arrive a la destination
+	/** si on est arrive a la destination */
 	private boolean arrived;
 
+	/** */
 	private AiTile tileDest;
-	// destinations potentielles
+	/** destinations potentielles
 	//private List<AiTile> possibleDest;
 	//le chemin qu'on va suivre
+	 */
 	private AiPath path;
 
 
@@ -193,7 +204,8 @@ public class AttackManager
 		tileDest = path.getLastTile();
 	}
 	*/
-	//si on est sur le chemin calculé
+	/** si on est sur le chemin calculé 
+	 * @throws StopRequestException */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -256,6 +268,11 @@ public class AttackManager
 	/** */
 	public AiTile bomb3Pos=null;
 
+	/**
+	 * @param posTarget 
+	 * @param posWalkable 
+	 * @throws StopRequestException  
+	 */
 	private void setBombingPath(Direction posTarget, Direction posWalkable) throws StopRequestException{
 		ai.checkInterruption();
 		AiTile currentTile=ai.getCurrentTile();

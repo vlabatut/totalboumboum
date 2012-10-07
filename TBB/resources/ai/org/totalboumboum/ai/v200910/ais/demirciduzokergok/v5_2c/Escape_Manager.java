@@ -69,9 +69,9 @@ public class Escape_Manager {
  * 
  * 2. If there are no safe cases to escape(If we are stucked in the range of 2 bombs) we make a movement
  * to the bomb which has more time left to explore. By this way, we may escape when the first bomb expores.
+ * @return ?
+ * @throws StopRequestException 
  */
-
-
 	Direction direcition_updt() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		Direction result = Direction.NONE;
@@ -370,17 +370,27 @@ public class Escape_Manager {
 	
 	
 	
+	/** */
 	private DemirciDuzokErgok ai;
+	/** */
 	private AiZone zone;
+	/** */
 	private Safety_Map safe_map;
+	/** */
 	private AiTile arrived_tile;
+	/** */
 	private List<AiTile> possibleDest;
+	/** */
 	private boolean arrived;
+	/** */
 	private AiPath path;
 	
 	
+	/** */
 	private Astar star;
+	/** */
 	private HeuristicCalculator heuristicCalculator;
+	/** */
 	private MatrixCostCalculator costCalculator;
 	
 	

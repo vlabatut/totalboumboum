@@ -20,22 +20,29 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class BonusManager {
 
+	/** */
 	private AksoyTangay myAI; 
 	
+	/** */
 	private PathManager pathManager;
 	
+	/** */
 	private AiPath path;
 	
+	/** */
 	private AiTile currentTile;
 	
+	/** */
 	private AiTile lastTile;
 	
+	/** */
 	private AiZone percepts;
 	
 //	public List<AiTile> availibleTilesDirect;
 //	
 //	public List<AiTile> availibleTilesIndirect;
 		
+	/** */
 	private Zone zone;
 	
 	/**
@@ -98,6 +105,10 @@ public class BonusManager {
 		
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
 	

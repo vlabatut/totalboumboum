@@ -10,23 +10,37 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class Target 
 {
+	/** */
 	private DorukKupelioglu dk;
 	
+	/** */
 	private TargetBonus bonus;
+	/** */
 	private TargetDestructible destructible;
+	/** */
 	private TargetRival rival;
 	
+	/** */
 	private boolean hasPathFound;
+	/** */
 	private boolean targetEnded;
+	/** */
 	private boolean pathWorks;
 
+	/** */
 	private static int noTarget=0;
+	/** */
 	private static int targetDest=1;
+	/** */
 	private static int targetBonus=2;
+	/** */
 	private static int targetRival=3;
 
+	/** */
 	private int currTarget;
+	/** */
 	private boolean dropBomb;
+	/** */
 	private int counter;
 	
 	/**

@@ -22,22 +22,30 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class Can_escape {
+	/** */
 	@SuppressWarnings("unused")
 	private AiZone our_zone;
+	/** */
 	private AiHero our_hero;
+	/** */
 	@SuppressWarnings("unused")
 	private Collection<AiHero> enemies;
 	
+	/** */
 	private Collection<AiBlock> blocks;
 
+	/** */
 	private Collection<AiFire> fires;
+	/** */
 	private Collection<AiBomb> bombs;
 	
 	/** */
 	public int width;
 	/** */
 	public int height;
+	/** */
 	private int pos_x;
+	/** */
 	private int pos_y;
 	
 	/** */
@@ -56,6 +64,7 @@ public class Can_escape {
 
 	/** */
 	public double security_matrix[][];
+	/** */
 	ArtificialIntelligence ai;
 	
 	/** Constructeur of the Can_escape

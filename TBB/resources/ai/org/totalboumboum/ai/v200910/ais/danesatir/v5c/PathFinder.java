@@ -21,11 +21,17 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 @SuppressWarnings("deprecation")
 public class PathFinder {
 	
+	/** */
 	private DaneSatir ai;
+	/** */
 	private AiHero hero;
+	/** */
 	private AiPath path;
+	/** */
 	private int curIndex;
+	/** */
 	private List<AiTile> targetList;
+	/** */
 	private TimeMatrice time;
 
 	/**

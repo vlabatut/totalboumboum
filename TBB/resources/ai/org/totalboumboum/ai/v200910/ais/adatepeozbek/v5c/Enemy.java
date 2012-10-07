@@ -15,11 +15,17 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 @SuppressWarnings("deprecation")
 public class Enemy
 {
+	/** */
 	private AiHero _hero = null;
+	/** */
 	private EnemyTypes _type = null;
+	/** */
 	private int _posedBombs = 0;
+	/** */
 	private int _sameTileCount = 0;
+	/** */
 	private long _lastCheck = 0;
+	/** */
 	ArtificialIntelligence ownAi;
 	
 	/**

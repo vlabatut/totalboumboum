@@ -33,23 +33,41 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class AiEscape
 {		
+	/** */
 	private AdatepeOzbek ownAi;
+	/** */
 	private AiZone zone;
+	/** */
 	private List<AiBomb> bombs;
+	/** */
 	private List<AiFire> fires;
+	/** */
 	private List<AiHero> heroes;
+	/** */
 	private List<AiItem> items;
+	/** */
 	private List<AiBlock> blocks;
+	/** */
 	private AiAction actionToDo = null;
+	/** */
 	private double safeArray[][];
+	/** */
 	private List<AiBlock> indestBlocks;
+	/** */
 	private List<AiBlock> destBlocks;
+	/** */
 	private double costArray[][];
+	/** */
 	private static double SAFE = 10;
+	/** */
 	private static double NOT_SAFE = 0;
+	/** */
 	private static double STUCK = 7.5;
+	/** */
 	private static AiHero OWN_HERO;
+	/** */
 	private static AiTile CURRENT_TILE;
+	/** */
 	private AiPath path;
 	
 	/**
@@ -1521,7 +1539,12 @@ public class AiEscape
 	 * passée en paramètre. Le terme "indirect" signifie que la fonction est récursive : 
 	 * si une case à portée de souffle contient une bombe, le souffle de cette bombe est rajouté
 	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
-	 * Par Vincent Labatut
+	 * 
+	 * @param bomb 
+	 * @param blast 
+	 * @param bombs 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE

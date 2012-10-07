@@ -16,18 +16,31 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class TargetDestructible {
 
+	/** */
 	private DorukKupelioglu dk;
+	/** */
 	private Astar astar;
+	/** */
 	private Bomb bomb;
+	/** */
 	private AiPath path;
+	/** */
 	private AiPath[] pathesOwnHero;
+	/** */
 	private double[] FvaluesOwnHero;
+	/** */
 	private List<AiTile> destructibles;
+	/** */
 	private List<Double> pathStates;
+	/** */
 	private List<Double> pathStatesControl;
+	/** */
 	private boolean hasPathFound;
+	/** */
 	private boolean targetDestructibleEnded;
+	/** */
 	private boolean pathWorks;
+	/** */
 	private int MAX_DEST;
 	
 	/**
@@ -92,7 +105,11 @@ public class TargetDestructible {
 	}
 	
 	
-
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private int findDestructible()throws StopRequestException
 	{
 		dk.checkInterruption();

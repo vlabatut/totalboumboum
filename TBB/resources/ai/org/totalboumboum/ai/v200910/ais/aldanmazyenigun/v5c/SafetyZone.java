@@ -25,25 +25,35 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class SafetyZone {
 
+	/** */
 	AldanmazYenigun ai;
 
+	/** */
 	AiZone zone;
 
+	/** */
 	private double matrix[][];
 	
+	/** */
 	private double attackMatrix[][];
 
+	/** */
 	private double SAFE = 0;
 
+	/** */
 	private double FIRE = 10000;
 
+	/** */
 	private double BLOCKDEST = 80000;
+	/** */
 	private double BLOCKINDEST =81111;
 	
 
+	/** */
 	private double BOMB = 11;
+	/** */
 	private double BONUS =-1;
-	
+	/** */	
 	private double HERO = -2;
 	
 	/**
@@ -61,6 +71,10 @@ public class SafetyZone {
 		fillAttackMatrix();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void fillSafetyMatrix() throws StopRequestException {
 		ai.checkInterruption();
 
@@ -231,6 +245,11 @@ public class SafetyZone {
 				}
 			}
 		}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void fillAttackMatrix() throws StopRequestException {
 		ai.checkInterruption();
 

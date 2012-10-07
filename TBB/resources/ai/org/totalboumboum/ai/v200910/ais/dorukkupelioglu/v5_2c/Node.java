@@ -16,13 +16,21 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 @SuppressWarnings("deprecation")
 public class Node {
 	
+	/** */
 	private AiTile tile;//bu node un çekirdeği // oluşmasına neden olan Tile
+	/** */
 	private AiTile end; //bi anlamı yok sadece bir yerde kullanıldı
+	/** */
 	private double[][] areaMatrix;
+	/** */
 	private Node parent=null;// hangi node bu nodun anası 
+	/** */
 	private double Gvalue;//cost
+	/** */
 	private double Hvalue;//heuristic
+	/** */
 	private double Fvalue;//cost + heuristic
+	/** */
 	ArtificialIntelligence ai;
 	/**
 	 * Constucteur a faire les initialisation

@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 @SuppressWarnings("deprecation")
 public class RedGroupDefenseCostCalculator extends CostCalculator {
 
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

@@ -22,15 +22,25 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 @SuppressWarnings("deprecation")
 public class Astar 
 {	
+	/** */
 	private DorukKupelioglu dk;
+	/** */
 	private Matrix matrix;
+	/** */
 	private AiPath path;
+	/** */
 	private AiHero hero;
+	/** */
 	private AiTile start;
+	/** */
 	private List<Node> closed;
+	/** */
 	private List<Node> open;
+	/** */
 	private boolean stop;
+	/** */
 	private boolean useTime;
+	/** */
 	private double PathFValue;
 
 	/**
@@ -168,6 +178,7 @@ public class Astar
 	 * nous a aide bien a construire cette algorithme.
 	 * @param node
 	 * @param end
+	 * @throws StopRequestException 
 	 */
 	private void CreateClosedList(Node node,AiTile end)throws StopRequestException
 	{
@@ -278,6 +289,7 @@ public class Astar
 	 * Cherche le noeud a la plus petite valeur dans la list "open"
 	 * 
 	 * @return "null" si la list est vide ou le noeud correspondant sinon
+	 * @throws StopRequestException 
 	 */
 	private Node smallestF()throws StopRequestException
 	{
@@ -303,6 +315,7 @@ public class Astar
 	 * @param tile case a chercher
 	 * @param list 
 	 * @return "null" si la case "tile" n'est pas dans la list ou le noeud correspondant de case "tile" sinon
+	 * @throws StopRequestException 
 	 */
 	private Node isTileInList(AiTile tile,List<Node> list)throws StopRequestException
 	{
@@ -321,6 +334,11 @@ public class Astar
 		return node;
 	}
 
+	/**
+	 * @param start
+	 * @param endNode
+	 * @throws StopRequestException
+	 */
 	private void NodePathToTilePath(AiTile start,Node endNode)throws StopRequestException
 	{
 		dk.checkInterruption();

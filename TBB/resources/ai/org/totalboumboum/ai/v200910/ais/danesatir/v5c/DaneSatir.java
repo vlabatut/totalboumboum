@@ -32,13 +32,21 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DaneSatir extends ArtificialIntelligence
 {
+	/** */
 	private AiZone zone;
+	/** */
 	private AiHero myHero;
+	/** */
 	private PathFinder p;
+	/** */
 	private BonusCollector bonus;
+	/** */
 	private DecisionMaker dec;
+	/** */
 	private AiAction result;
+	/** */
 	private int moveCount;
+	/** */
 	private int waitCount;
 
 	
@@ -284,6 +292,7 @@ public class DaneSatir extends ArtificialIntelligence
 	
 	/**
 	 * Initialize Variables
+	 * @throws StopRequestException 
 	 */
 	private void init() throws StopRequestException 	{	
 		// avant tout : test d'interruption

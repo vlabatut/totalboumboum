@@ -20,17 +20,29 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DorukKupelioglu extends ArtificialIntelligence 
 {
+	/** */
 	private Matrix matrix;
+	/** */
 	private Escape escape=null;
+	/** */
 	private Target target=null;
+	/** */
 	private Bomb bomb=null;
+	/** */
 	private AiTile currentTile=null;
+	/** */
 	private AiTile nextTile=null;
+	/** */
 	private AiHero dk=null;
+	/** */
 	private AiAction result;
+	/** */
 	private Direction moveDir=Direction.NONE;
+	/** */
 	private double time;
+	/** */
 	private double tilePixel;
+	/** */
 	private boolean wait=false;
 	
 	public AiAction processAction() throws StopRequestException
@@ -202,6 +214,10 @@ public class DorukKupelioglu extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void initFirst()throws StopRequestException
 	{
 		checkInterruption();
