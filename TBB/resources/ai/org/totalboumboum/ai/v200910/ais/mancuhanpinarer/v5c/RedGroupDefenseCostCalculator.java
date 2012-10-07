@@ -19,6 +19,11 @@ public class RedGroupDefenseCostCalculator extends CostCalculator {
 
 	ArtificialIntelligence ai;
 	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	public RedGroupDefenseCostCalculator(ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
 		this.ai = ai;
