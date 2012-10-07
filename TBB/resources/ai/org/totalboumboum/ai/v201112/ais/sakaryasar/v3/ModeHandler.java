@@ -36,8 +36,9 @@ public class ModeHandler extends AiModeHandler<SakarYasar>
 		verbose = false;
 	}
 
-	//definitions of the limits of range and numbers of our bombs
+	/** definitions of the limits of range and numbers of our bombs */
 	private int RANGE = 4;
+	/** */
 	private int BOMB = 3;
 	
     /////////////////////////////////////////////////////////////////
@@ -122,6 +123,10 @@ public class ModeHandler extends AiModeHandler<SakarYasar>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		

@@ -32,11 +32,20 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<SakarYasar> {
+	/** */
 	protected AiZone zone = null;
+	/** */
 	protected AiHero ownHero = null;
+	/** */
 	protected Astar astarPath = null;
+	/** */
 	protected AiTile heroTile = null;
-	
+
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected MoveHandler(SakarYasar ai) throws StopRequestException {
 		super(ai);
 		ai.checkInterruption();
@@ -99,6 +108,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	 * Method for testing if the given tile is in danger or not
 	 * @param tile
 	 * @return
+	 * 		,
 	 * @throws StopRequestException
 	 */
 	private boolean isPassable(AiTile tile) throws StopRequestException{
@@ -140,6 +150,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		,
 	 * @throws StopRequestException
 	 */
 	private double checkSide(AiTile tile,Direction d) throws StopRequestException{
@@ -278,6 +289,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * find best destination from current position of our hero.
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private AiTile findDestination() throws StopRequestException{
@@ -347,6 +359,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	 * method for finding a destination whose utility is 'value'
 	 * @param value
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private AiTile findDestinationInEnemyDanger(Float value) throws StopRequestException{
@@ -454,8 +467,11 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 		return result;
 	}
 	
+	/** */
 	protected AiTile oldDestination = null;
+	/** */
 	private Direction lastDirections[] = new Direction[4];
+	/** */
 	private int step =0;
 	/**
 	 * method for updating direction in some special cases this method returns Direction.none

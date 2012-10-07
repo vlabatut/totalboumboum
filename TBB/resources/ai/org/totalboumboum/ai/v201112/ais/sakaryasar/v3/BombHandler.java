@@ -71,13 +71,17 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	//////////////////////////////////////////////////////////////////
 	// Own Methods 		//////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////
+	/** */
 	private AiZone zone = ai.getZone();
+	/** */
 	private AiHero ownHero = zone.getOwnHero();
+	
 	/**
 	 * method for checking safet of tiles in direction d 
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private boolean checkSafety(AiTile tile, Direction d) throws StopRequestException {
@@ -98,6 +102,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private boolean checkNeighbors(AiTile tile, Direction d) throws StopRequestException{
@@ -117,6 +122,8 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 		}
 		return result;
 	}
+	
+	/** */
     private static final Map<Direction, Direction> directionMap = new HashMap<Direction, Direction>();
     static {
     	directionMap.put(Direction.DOWNLEFT, Direction.DOWN);
@@ -129,6 +136,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	 * method for testing if dropping a bomb is safe or not
 	 * @param tile
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private boolean isSafeToDropBomb(AiTile tile) throws StopRequestException{
@@ -210,6 +218,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * method for attacking strategies (naive)
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private boolean attackBombing() throws StopRequestException{
@@ -318,6 +327,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	 * @param tile
 	 * @param d
 	 * @return
+	 * 		?
 	 * @throws StopRequestException
 	 */
 	private AiHero isThereAnyEnemyOnDirection(AiTile tile, Direction d) throws StopRequestException{
@@ -344,6 +354,10 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 		/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	protected void updateOutput() throws StopRequestException
 	{	
 		ai.checkInterruption();
