@@ -37,6 +37,9 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * Enfin, cette classe stocke le mode courant grâce au
  * champ {@link #mode}.
  * 
+ * @param <T> 
+ * 		Classe de l'agent.
+ * 
  * @author Vincent Labatut
  */
 public abstract class AiModeHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>

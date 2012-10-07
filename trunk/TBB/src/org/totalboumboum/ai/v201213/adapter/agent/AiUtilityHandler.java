@@ -57,6 +57,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * Elles sont notamment utilisées par la méthode {@link #updateOutput()}
  * qui est donnée ici en exemple afin d'afficher les valeurs d'utilité courantes.
  * 
+ * @param <T> 
+ * 		Classe de l'agent.
+ * 
  * @author Vincent Labatut
  */
 public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
@@ -359,6 +362,12 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		}
 	}
 	
+	/**
+	 * Affiche une représentation textuelle des utilités déclarées.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 */
 	public void displayUtilities() throws StopRequestException
 	{	ai.checkInterruption();
 		print("    > Declared utilities :");
