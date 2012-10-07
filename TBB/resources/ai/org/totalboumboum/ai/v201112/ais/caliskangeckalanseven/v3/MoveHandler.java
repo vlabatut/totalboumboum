@@ -74,10 +74,14 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	protected boolean secondaryBombing = false;
 	/** Indique si l'agent doit poser une bombe sur l'objectif */
 	protected boolean bombDestination = false;
-	
+	/** */
 	protected boolean itemDestination = false;
 	
-	
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected MoveHandler(CaliskanGeckalanSeven ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
@@ -120,7 +124,12 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	}
 	
 	
-
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
 		ai.checkInterruption();
@@ -225,7 +234,10 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 		return dangerZone;
 	}
 
-
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateDestination() throws StopRequestException
 	{	ai.checkInterruption();
 		zone = ai.getZone();
@@ -332,6 +344,10 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -451,7 +467,10 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	}
 	}
 	
-	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void updateDirection() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -483,7 +502,13 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean checkPathValidity(AiPath path) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -501,7 +526,13 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	}
 	
 	
-
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 
@@ -510,6 +541,13 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 			result = false;
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean danger() throws StopRequestException {
 		ai.checkInterruption();
 		boolean danger = false;

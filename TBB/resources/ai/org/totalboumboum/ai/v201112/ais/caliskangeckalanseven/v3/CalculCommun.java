@@ -38,13 +38,24 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 
+	/** */
 	AiZone zone = null;
+	/** */
 	AiHero ownHero = null;
+	/** */
 	AiTile currentTile = null;
+	/** */
 	protected Astar astarPrecise = null;
+	/** */
 	protected Astar astarApproximation = null;	
+	/** */
 	AiLocation startLocation = null;
-	
+
+	/**
+	 * 
+	 * @param ai
+	 * @throws StopRequestException
+	 */
 	protected CalculCommun(CaliskanGeckalanSeven ai)
 			throws StopRequestException {
 		
@@ -69,6 +80,11 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	}
 		
 	}
+	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	protected void update() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -382,6 +398,13 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 		return dangerZone;
 	}
 	
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean checkPathValidity(AiPath path) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -398,6 +421,13 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return
+	 * 		?
+	 * @throws StopRequestException
+	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 

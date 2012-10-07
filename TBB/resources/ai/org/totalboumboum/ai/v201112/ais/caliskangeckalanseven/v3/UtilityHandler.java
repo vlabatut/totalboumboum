@@ -88,21 +88,27 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalanSeven> {
 	// ///////////////////////////////////////////////////////////////
 	/** noms des cas, utilisés dans {@link #initCriteria} */
 	private final String caseName1 = "CAS1";
+	/** */
 	private final String caseName2 = "CAS2";
 
+	/** */
 	protected AiZone zone = null;
+	/** */
 	protected AiHero ownHero = null;
+	/** */
 	protected AiTile currentTile = null;
+	/** */
 	private Dijkstra dijkstra = null;
+	/** */
 	protected Astar astarPrecise = null;
 	/** L'objet a* utilisé pour le calcul des chemins indirects */
 	protected Astar astarApproximation = null;
 	/** Les méthodes communes */
 	/** Indique pour chaque case traitée si on veut y poser une bombe ou pas */
-	
 	protected CalculCommun calculCommun = null;
-	
+	/** */
 	protected HashMap<AiTile,Boolean> bombTiles = new HashMap<AiTile,Boolean>();
+	/** */
 	protected HashMap<AiTile,Boolean> collectTiles = new HashMap<AiTile,Boolean>();
 	
 	
