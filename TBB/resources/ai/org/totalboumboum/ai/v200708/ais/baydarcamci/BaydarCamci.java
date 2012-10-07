@@ -23,7 +23,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class BaydarCamci extends ArtificialIntelligence
 {
-		private static final long serialVersionUID = 1L;
+	/** */
+	private static final long serialVersionUID = 1L;
    
    
     /** dernière mouvement du personnage */
@@ -32,7 +33,9 @@ public class BaydarCamci extends ArtificialIntelligence
     /** mouvement precedent du personnage */
     private Integer lastPreMove;
     
+	/** */
     int thePutBomb[] = {-1,-1}; //yol acmak icin bomba biraktiginda eski pozisyonuna geri don
+	/** */
     int runAwayStep = 0; 
     /** */
     public int bombPower =0 ;
