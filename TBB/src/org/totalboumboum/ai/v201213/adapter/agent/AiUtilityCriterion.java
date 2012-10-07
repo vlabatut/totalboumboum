@@ -61,6 +61,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * Le nom du critère doit être unique pour 
  * le(s) cas qui l'utilise(nt).
  * 
+ * @param <T> 
+ * 		Classe de l'agent.
+ * 
  * @author Vincent Labatut
  */
 public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCriterion<?>>

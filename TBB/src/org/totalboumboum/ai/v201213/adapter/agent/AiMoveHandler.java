@@ -49,6 +49,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * qui est donnée ici en exemple afin d'afficher le mode,
  * la destination et le chemin courants.
  * 
+ * @param <T> 
+ * 		Classe de l'agent.
+ * 
  * @author Vincent Labatut
  */
 public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>

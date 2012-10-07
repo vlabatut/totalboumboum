@@ -28,7 +28,11 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * utilisés pour décomposer le traitement réalisé par un agent.
  * Cf. les différentes spécialisations de cette classe.
  * 
+ * @param <T>
+ * 		Classe de l'agent.
+ *  
  * @author Vincent Labatut
+ * 
  */
 public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 {	

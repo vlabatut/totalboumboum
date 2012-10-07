@@ -31,6 +31,9 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * Si cette méthode n'est pas surchargée, alors ce gestionnaire
  * ne fait rien, donc l'agent ne posera jamais de bombe.
  * 
+ * @param <T> 
+ * 		Classe de l'agent.
+ * 
  * @author Vincent Labatut
  */
 public abstract class AiBombHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
