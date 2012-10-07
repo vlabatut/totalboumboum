@@ -10,6 +10,7 @@ import java.util.List;
  *
  */
 public class BinaryHeapList {
+	/** */
 	private List<Node> list;
 	
 	/**
@@ -126,7 +127,7 @@ public class BinaryHeapList {
 	
 	/**
 	 * Reverse-sort the list (in the manner of a binary heap)
-	 * @param pos
+	 * @param pos1
 	 */
 	private void reverseSort ( int pos1 ){
 		int pos = 1;
@@ -185,6 +186,7 @@ public class BinaryHeapList {
 	 * Returns cost value of the node found in the given position of the list
 	 * @param pos
 	 * @return
+	 * 		?
 	 */
 	private int getValue ( int pos ){
 		return list.get(pos).getCost();

@@ -10,17 +10,16 @@ import java.util.List;
  *
  */
 public class Node {
-	/**
-	 * position
-	 */
+	/** position */
 	private int x;
+	/** */
 	private int y;
 	
-	/**
-	 * costs
-	 */
+	/** costs */
 	private int cost;
+	/** */
 	private int costPath;
+	/** */
 	private int costHeuristic;
 	
 	/**
@@ -154,6 +153,13 @@ public class Node {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	private int heuristic ( int x , int y  ){
 		int tx = AStar.target[0];
 		int ty = AStar.target[1];

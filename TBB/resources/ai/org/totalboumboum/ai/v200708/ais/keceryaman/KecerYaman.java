@@ -16,36 +16,46 @@ public class KecerYaman extends ArtificialIntelligence {
 	/********************************************************************************/
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * les points des objets differents
-	 */
+	/** les points des objets differents */
 	private int VAL_HARD = AI_BLOCK_WALL_HARD;
+	/** */
 	private int VAL_BOMB = 500;
+	/** */
 	private int VAL_FLAME = VAL_BOMB;
 //	private int VAL_SHRINK = VAL_BOMB;
 //	private int VAL_SHRINK_CST = 7;
+	/** */
 	private int VAL_SOFT = 200;
+	/** */
 	private int VAL_PLAYER = -1000;
+	/** */
 	private int VAL_PLAYER_CST = 7;
+	/** */
 	private int VAL_EMPTY = 0;
+	/** */
 	private int VAL_BONUS = -10;
+	/** */
 	private int VAL_UNKNOWN = 50000;
+	/** */
 	private int VAL_HEURISTIC = 3;
+	/** */
 	private int[][] AREA = {{7,7},{8,7},{7,8},{8,8}};
+	/** */
 	private int[] GROUP_POINTS = {0,0,0,0};
-	/**
-	 * algorithm pour trouver le mieux chemin
-	 */
+	/** algorithm pour trouver le mieux chemin 	 */
 	private AStar bestPath;
+	/** */
 	private List<Node> path = new ArrayList<Node>();
+	/** */
 	private Node currentNode;
+	/** */
 	private Node nextNode;
 	
-	/**
-	 * temporary variables
-	 */
+	/** temporary variables */
 	private boolean started = false;
+	/** */
 	private boolean bombPlanted = false;
+	/** */
 	private int action;
 	
 	/********************************************************************************/
@@ -194,6 +204,14 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param bombPower
+	 * @param wX
+	 * @param wY
+	 */
 	private void addFlamesToDirection ( int x , int y , int bombPower , int wX , int wY ){
 		boolean blocked = false;
 		int i = 0;
@@ -219,6 +237,13 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param current
+	 * @param next
+	 * @return
+	 * 		?
+	 */
 	private int calculateAction ( Node current , Node next ){
 		int currentX = current.getX();
 		int nextX = next.getX();
@@ -249,20 +274,35 @@ public class KecerYaman extends ArtificialIntelligence {
 		return action;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		?
+	 */
 	private boolean bombPlanted (){
 		boolean temp = bombPlanted;
 		setBombNotPlanted();
 		return temp;
 	}
 	
+	/**
+	 * 
+	 */
 	private void setBombPlanted (){
 		bombPlanted = true;
 	}
 	
+	/**
+	 * 
+	 */
 	private void setBombNotPlanted (){
 		bombPlanted = false;
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 */
 	private void updatePath ( Node node ){
 		path.clear();
 		bestPath.setTargetNotAdded();
@@ -277,6 +317,13 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	private boolean isInDanger ( int x , int y ){
 		if ( Map.getValue((x-1), y) == VAL_BOMB || 
 			 Map.getValue((x-1), y) == VAL_FLAME ||
@@ -355,6 +402,11 @@ public class KecerYaman extends ArtificialIntelligence {
 		AStar.target[1] = (int) min[1];
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	private void updateGroupPoint ( int x , int y ){
 		int value = Map.getValue(x, y);
 		
@@ -380,6 +432,13 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 * 		?
+	 */
 	private int heuristic ( int x , int y  ){
 		int tx = getOwnPosition()[0];
 		int ty = getOwnPosition()[1];
@@ -387,6 +446,11 @@ public class KecerYaman extends ArtificialIntelligence {
 		return VAL_HEURISTIC * ( Math.abs( tx - x ) + Math.abs( ty - y ) );
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	private void updatePositionPoint ( int x , int y ){
 		int heuristic = heuristic(x,y);
 		Map.setValue(x,y,Map.getValue(x,y) + heuristic);

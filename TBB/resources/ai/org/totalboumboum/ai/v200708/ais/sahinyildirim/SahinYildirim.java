@@ -18,28 +18,48 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class SahinYildirim extends ArtificialIntelligence {
 
+	/** */
 	Runtime r = Runtime.getRuntime();
+	/** */
 	private static final long serialVersionUID = 1L;	
+	/** */
 	private Integer lastMove;	
+	/** */
 	boolean bombVar = false;
+	/** */
 	private int tryNum = 1;
 	
 	// A****************************
+	/** */
 	private List<Integer> path = new ArrayList<Integer>();
+	/** */
 	private Vector<ParentChild> perler = new Vector<ParentChild>();
    
+	/** */
 	int pathtoFait = 0;
+	/** */
 	int nextMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	/** */
 	boolean lastMoveFromPutbomb = false;
 
+	/** */
 	Point lastPoint;
+	/** */
 	PointFind pointMeRoot;
+	/** */
 	PointFind pointFind;
+	/** */
 	PointFind pointShrink;
 	
-	int monIndex,closestPlayerIndex;
+	/** */
+	int monIndex;
+	/** */
+	int closestPlayerIndex;
+	/** */
 	int initialCost;
+	/** */
 	private int bonusBomb = 0;
+	/** */
 	private int bonusFire = 1;
 	
 	/**
@@ -673,6 +693,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param y
 	 * @param bombs
 	 * @return
+	 * 		?
 	 */
 	private Vector<Integer> defence(int x, int y, List<Integer> bombs) {
 		int xB, yB;
@@ -1220,6 +1241,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param y
 	 * @param move
 	 * @return
+	 * 		?
 	 */
 	private boolean isMovePossibleAStar(int x, int y, int move) {
 		boolean result;
@@ -1252,6 +1274,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param x 
 	 * @param y
 	 * @return
+	 * 		?
 	 */
 	private Vector<Integer> possibleAStarMoves(int x, int y) {
 		Vector<Integer> result = new Vector<Integer>();
