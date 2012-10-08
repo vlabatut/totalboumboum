@@ -29,27 +29,42 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DayioglugilGeckalan extends ArtificialIntelligence {
 	//private AiZone zone1;
+	/** */
 	private AiTile currentTile=null;
+	/** */
 	private AiTile nextTile=null;
 	//private AiTile previousTile=null;
+	/** */
 	private AiTile targetTile=null;
+	/** */
 	private boolean danger;
+	/** */
 	private LinkedList<AiTile> path;	
+	/** */
 	int width = 0;
+	/** */
 	int heigh = 0;
+	/** */
 	int x;
+	/** */
 	LinkedList<AiTile> choix;
+	/** */
 	int y;
+	/** */
 	AiZone zone;
+	/** */
 	AiHero ownHero;
+	/** */
 	AiTile mur;
+	/** */
 	Direction direction = Direction.NONE;
+	/** */
 	Noeud goal;
+	/** */
 	boolean arret=false;
+	/** */
 	AiAction result = new AiAction(AiActionName.NONE);
 
-	
-	
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		
@@ -248,6 +263,11 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		return safeWay;
 	}
 */
+	/**
+	 * @return ?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -331,6 +351,11 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		return dangerZone;	
 	}
 	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private LinkedList<AiTile> safeZone() throws StopRequestException
 	{	checkInterruption(); // APPEL OBLIGATOIRE
 		LinkedList<AiTile> safeZone = new LinkedList<AiTile>();
@@ -384,6 +409,12 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 		
 	}*/
+	
+	/**
+	 * @param targettile 
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void pickNextTile(AiTile targettile) throws StopRequestException {
 		checkInterruption();
 		AiZone zone = getPercepts();
@@ -424,6 +455,11 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiTile findPath() throws StopRequestException {
 		checkInterruption();
 		LinkedList<AiTile> escapeTiles = new LinkedList<AiTile>();
@@ -457,6 +493,12 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 		return targetTile;
 	}
+	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiTile getClosestDestructibleBlock() throws StopRequestException 
 	{	checkInterruption();
 		
@@ -613,6 +655,13 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 		return resultat;
 	}*/
+	
+	/**
+	 * @param tile 
+	 * @return ?
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException 
 	{
 		

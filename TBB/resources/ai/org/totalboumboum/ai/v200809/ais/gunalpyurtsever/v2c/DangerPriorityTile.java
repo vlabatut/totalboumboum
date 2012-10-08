@@ -13,9 +13,13 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 @SuppressWarnings("deprecation")
 public class DangerPriorityTile{
 
+	/** */
 	AiTile tile;
+	/** */
 	int dangerpriority;
+	/** */
 	ArtificialIntelligence ai;
+	
 	/**
 	 * 
 	 * @param tile

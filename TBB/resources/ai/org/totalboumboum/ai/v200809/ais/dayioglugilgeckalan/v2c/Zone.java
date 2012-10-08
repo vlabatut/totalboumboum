@@ -22,15 +22,25 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 public class Zone{
 	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	//private AiZone zone;
+	/** */
 	private Collection <AiHero> rivals;
+	/** */
 	private AiHero caractere;
+	/** */
 	private Collection <AiBomb> bombes;
+	/** */
 	private Collection <AiBlock> blocs;
+	/** */
 	private Collection <AiItem> objets;
+	/** */
 	private Collection <AiFire> feus; 
+	/** */
 	private int xMax;
+	/** */
 	private int yMax;
+	/** */
 	private ZoneEnum [][] zoneArray;
+	/** */
 	private DayioglugilGeckalan source;
 	
 	/**
@@ -55,6 +65,10 @@ public class Zone{
 		init();
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire

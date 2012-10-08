@@ -16,6 +16,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */
 	private Noeud goal;
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

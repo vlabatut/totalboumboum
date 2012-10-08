@@ -18,11 +18,16 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 @SuppressWarnings("deprecation")
 public class Tree {
 
+	/** */
 	private Vector<Noeud> nodes;
+	/** */
 	private Vector<SearchLink> links;
+	/** */
 	@SuppressWarnings("unused")
 	private Noeud lastNode;
+	/** */
 	private Noeud firstNode;
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

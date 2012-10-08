@@ -126,6 +126,10 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -137,9 +141,12 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
 	 * être différente de la case précédemment occupée
+	 * 
+	 * @param tile 
+	 * @return ?
+	 * 
 	 * @throws StopRequestException 
 	 */
-	
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -158,6 +165,12 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -169,6 +182,10 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -194,7 +211,10 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	// comportement par hasard 
 	
 	
-	
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void pickNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -244,8 +264,10 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	// la methode qui renvoie la liste des bombes proche a notre hero
 	
 	
-	/*
+	/**
 	 * renvoi la liste des bombes qui me menacent
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private List<AiBomb> dangerousBombs() throws StopRequestException{
 		
@@ -275,10 +297,12 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 
 	
-	/*
+	/**
 	 *  isInDanger regarde a tile s'il y a danger
+	 * @param tile 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
-		
 	private boolean isInDanger(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		boolean result = false;
@@ -331,10 +355,14 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 	
 	
-	/*
+	/**
 	 *  est qu'il y a un block entre les deux line
+	 * @param tile1 
+	 * @param tile2 
+	 * @param zone 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
-
 	private boolean isThereBlockBetween(AiTile tile1, AiTile tile2, AiZone zone)throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		int col1 = tile1.getCol();
@@ -380,8 +408,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 		
 	
-	/*
+	/**
 	 * regarde a direction entree comme un parametre (danger ou safe)
+	 * @param dir 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private boolean isItDangerousDir(Direction dir) throws StopRequestException{
 			checkInterruption();
@@ -411,8 +442,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 	
 	
-	/*
+	/**
 	 * renvoi la liste des directions possibles
+	 * @param tile 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private List<Direction> getPossibleDirs(AiTile tile) throws StopRequestException{
 		
@@ -434,9 +468,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
-	
-	
-	// le comportement de promeneur
+	/** le comportement de promeneur
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiAction getNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	

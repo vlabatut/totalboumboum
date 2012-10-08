@@ -21,10 +21,15 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class AStar {
 
+	/** */
 	AiTile firstTile;
+	/** */
 	AiTile lastTile;
+	/** */
 	Vector<LienRecherche> links;
+	/** */
 	boolean debug;
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

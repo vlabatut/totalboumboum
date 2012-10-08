@@ -17,15 +17,17 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 @SuppressWarnings("deprecation")
 public class SearchTree {
 
-	// ensemble des noeuds dans l'arbre
+	/** ensemble des noeuds dans l'arbre */
 	private Vector<SearchNode> nodes;
-	// ensemble des liens dans l'arbre
+	/** ensemble des liens dans l'arbre */
 	private Vector<SearchLink> links;
 
-	// dernier noeud traité lors de la recherche
+	/** dernier noeud traité lors de la recherche */
 	@SuppressWarnings("unused")
 	private SearchNode lastNode;
+	/** */
 	private SearchNode firstNode;
+	/** */
 	private MedeniUluer mu;
 	
 	/**

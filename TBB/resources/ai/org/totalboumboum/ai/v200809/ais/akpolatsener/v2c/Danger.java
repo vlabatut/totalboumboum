@@ -87,7 +87,7 @@ public class Danger {
 	/**
 	 * retourne la bombe la plus proche à une case donnée
 	 * 
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	AiBomb findClosestBomb() throws StopRequestException {
@@ -117,7 +117,7 @@ public class Danger {
 	/**
 	 * retourne la feu la plus proche à une case donnée
 	 * 
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	AiFire findClosestFire() throws StopRequestException {
@@ -174,7 +174,7 @@ public class Danger {
 	 * case donnée
 	 * 
 	 * @param tile
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	double getManhattanToDanger(AiTile tile) throws StopRequestException {

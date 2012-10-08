@@ -14,7 +14,9 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 @SuppressWarnings("deprecation")
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {
 
+	/** */
 	private int col;
+	/** */
 	private int line;
 	
 	/**

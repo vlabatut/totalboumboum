@@ -21,18 +21,29 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 */
 @SuppressWarnings("deprecation")
 public class Zone {
-	// Une personnalisation generale du AiZone
+	/** Une personnalisation generale du AiZone */
 	private AiZone zone;
+	/** */
 	private Collection<AiHero> rivals;
+	/** */
 	private AiHero hero;
+	/** */
 	private Collection<AiBomb> bombs;
+	/** */
 	private Collection<AiBlock> blocs;
+	/** */
 	private Collection<AiItem> objects;
+	/** */
 	private Collection<AiFire> fires;
+	/** */
 	private int xMax;
+	/** */
 	private int yMax;
+	/** */
 	private ZoneEnum[][] zoneArray;
+	/** */
 	private MedeniUluer mu;
+	/** */
 	private int lastSimulatedBombExplodes;
 
 	/**
@@ -56,6 +67,10 @@ public class Zone {
 		init();
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		zoneArray = new ZoneEnum[xMax][yMax];
