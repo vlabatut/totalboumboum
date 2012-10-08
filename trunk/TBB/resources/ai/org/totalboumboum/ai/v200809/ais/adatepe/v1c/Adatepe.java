@@ -35,12 +35,17 @@ public class Adatepe extends ArtificialIntelligence
 	/** Representation de la
 	 *  table du jeu : 0 = Empty, 1 = Wall, 
 	 *  2 = Bomb, 3 = Yellow Zone, 4 = Red Zone */
-	private int[][] boardTiles; 
+	private int[][] boardTiles;
+	/** */
 	private Collection <AiBomb> bomb;
+	/** */
 	private Collection <AiBlock> wall;
+	/** */
 	private Collection <AiFire> fire;
+	/** */
 	@SuppressWarnings("unused")
 	private Collection <AiHero> hero;
+	/** */
 	private Collection <AiZone> zone;
 	/** Decide si on doit mettre un bombe ou pas */
 	boolean dropbomb = false;
@@ -100,7 +105,9 @@ public class Adatepe extends ArtificialIntelligence
 	return result;
 }
 	
-	/** Mets les blocs et les zones wides a la table*/
+	/** Mets les blocs et les zones wides a la table
+	 * @throws StopRequestException 
+	 */
 	private void boarddraw() throws StopRequestException
 	{	
 		checkInterruption(); 
@@ -126,7 +133,9 @@ public class Adatepe extends ArtificialIntelligence
 		
 	
 	
-	/** Mets les bombes, les zones dangereux a traverser et les feus a la table*/
+	/** Mets les bombes, les zones dangereux a traverser et les feus a la table
+	 * @throws StopRequestException 
+	 */
 	private void drawdangerzones() throws StopRequestException
 	{	
 		checkInterruption(); 
@@ -169,7 +178,9 @@ public class Adatepe extends ArtificialIntelligence
 	}
 	
 	
-	/** Decide la destination suivante est dangereux ou pas */
+	/** Decide la destination suivante est dangereux ou pas 
+	 * @throws StopRequestException 
+	 */
 	private void checknexttilesafe() throws StopRequestException
 	{	checkInterruption(); 
 	int x3 = currentTile.getLine();
@@ -197,7 +208,9 @@ public class Adatepe extends ArtificialIntelligence
 	}
 		
 	}
-	/** Decide les coordonnes qu'on trouve est dangereux ou pas */
+	/** Decide les coordonnes qu'on trouve est dangereux ou pas 
+	 * @throws StopRequestException 
+	 */
 	private void checksafety() throws StopRequestException
 	{	checkInterruption(); 
 	
@@ -217,7 +230,9 @@ public class Adatepe extends ArtificialIntelligence
 		}
 		
 	}
-	/** Esseye d'evider les bombes */
+	/** Esseye d'evider les bombes 
+	 * @throws StopRequestException 
+	 */
 	private void evade() throws StopRequestException
 	{	checkInterruption(); 
 	
@@ -264,7 +279,9 @@ public class Adatepe extends ArtificialIntelligence
 		direction = Direction.UP;
 	}	
 	}
-	/** Esseye de tuer les autres joueurs */
+	/** Esseye de tuer les autres joueurs 
+	 * @throws StopRequestException 
+	 */
 	private void aggro() throws StopRequestException
 	{	checkInterruption(); 
 	
@@ -273,6 +290,12 @@ public class Adatepe extends ArtificialIntelligence
 		
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -284,6 +307,12 @@ public class Adatepe extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	@SuppressWarnings("unused")
 	private List<AiTile> getClearNeighbor(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

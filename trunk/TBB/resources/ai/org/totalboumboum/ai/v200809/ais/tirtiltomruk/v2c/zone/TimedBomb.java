@@ -14,11 +14,17 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 @SuppressWarnings("deprecation")
 public class TimedBomb {
 	
+	/** */
 	private AiZone zone;
+	/** */
 	private AiBomb bomb;
+	/** */
 	private long releaseTime;
+	/** */
 	private long time;
+	/** */
 	private ZoneEnum danger;
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

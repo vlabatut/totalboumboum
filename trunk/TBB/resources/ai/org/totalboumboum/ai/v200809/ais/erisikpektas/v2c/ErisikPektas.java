@@ -25,12 +25,14 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 @SuppressWarnings("deprecation")
 public class ErisikPektas extends ArtificialIntelligence {
+	/** */
 	private Map map;
 	/** la case occupée actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile caseprochaine = null;
 
+	/** */
 	private AiTile casedestination = null;
 	/** larea du jeu */
 	private AiZone tous;
@@ -40,23 +42,31 @@ public class ErisikPektas extends ArtificialIntelligence {
 	AiHero bomberman;
 
 	/** notrre x y */
-	private int x, y;
+	private int x;
+	/** */
+	private int y;
 	/**
 	 * une llong que nous allons utiliser pour prendre normalduratin dun bombe
 	 * et une int pour le prendre une seule fois
 	 */
 	long bombtimer = 0;
+	/** */
 	private int premier = 0;
 
 	/** deux tableaux que nous allons utiliser pour stocker les temps des bombes nous  mettons 50 pour que ce soit grandecestun nombre aleatoire*/
 	long[][] temps = new long[50][50];
+	/** */
 	long[][] danger = new long[50][50];
 
 	/** les listes pour jouer */
 	private LinkedList<AiTile> choix;
+	/** */
 	private LinkedList<Astar> choixas;
+	/** */
 	private LinkedList<Astar> exploas;
+	/** */
 	private LinkedList<AiTile> explo;
+	/** */
 	private LinkedList<AiTile> moresafe;
 
 	/** pour la classe etat */
@@ -64,6 +74,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/** les Astar */
 	/** pour la fonc choix */
 	Astar choixAstar;
+	/** */
 	Astar choice;
 	/** pour la fonc court */
 	Astar courtAstar;
@@ -72,6 +83,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/** pour la fonc securtie */
 	Astar securite;
 
+	/** */
 	AiAction result = new AiAction(AiActionName.NONE);
 
 	/** les boolean qui portent les noms de leurs fonctions */
@@ -91,8 +103,11 @@ public class ErisikPektas extends ArtificialIntelligence {
 	boolean choisir = false;
 	/** il faut attaquer qd il y a qqn de proche */
 	boolean alentours = false;
+	/** */
 	boolean endanger = false;
+	/** */
 	boolean aleatoire = false;
+	/** */
 	boolean bouger = false;
 	/** pour la fonc court la meilleure destination */
 	AiTile response;
@@ -100,6 +115,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/** si case prochaine est dangereuse cherchons un autre */
 	AiTile pasdedanger;
 
+	/** */
 	int h = 0;
 
 	@SuppressWarnings("static-access")
@@ -203,8 +219,10 @@ public class ErisikPektas extends ArtificialIntelligence {
 		return result;
 	}
 
-	// pour linitialisation de bomberman
-
+	/** pour linitialisation de bomberman
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		
@@ -841,8 +859,8 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/**
 	 * cest une fonc qui collecte les temps passe des la creation des bombes et
 	 * des flmmes feus
+	 * @throws StopRequestException 
 	 */
-
 	@SuppressWarnings("static-access")
 	private void setdangerous() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -892,8 +910,14 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	}
 
+	/**
+	 * 
+	 * @param xx
+	 * @param yy
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isdangerous(int xx, int yy) throws StopRequestException
-
 	{
 		checkInterruption(); // APPEL OBLIGATOIRE
 		boolean resultat = false;
@@ -910,7 +934,13 @@ public class ErisikPektas extends ArtificialIntelligence {
 		return resultat;
 	}
 
-	// pour prendre le temps ecoule depuis la creation de la bombe
+	/** pour prendre le temps ecoule depuis la creation de la bombe
+	 * 
+	 * @param xx
+	 * @param yy
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private long getdangerous(int xx, int yy) throws StopRequestException
 
 	{ // avant tout : test d'interruption
@@ -925,8 +955,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	}
 
-	/** trouve le dern,er bombe mis */
-
+	/** trouve le dern,er bombe mis
+	 * @throws StopRequestException 
+	 */
 	private void getnewest() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		moresafe = new LinkedList<AiTile>();
@@ -978,6 +1009,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/**
 	 * la fonction qui controle la securite dune case grace a la fonc de //
 	 * isWalkable de la classe map
+	 * @param tile 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private boolean controle2(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -998,6 +1032,11 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * par des flammes // ou des cases sures, sil est 1 on peut passer par des
 	 * cases definies comme danger aussi sil est 2 on ne peut que passer par des
 	 * cases sures
+	 * @param c 
+	 * @param l 
+	 * @param selection 
+	 * @return ?
+	 * @throws StopRequestException 
 	 */
 	private Collection<AiTile> securite(int c, int l, int selection)
 			throws StopRequestException {
@@ -1226,7 +1265,10 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// la fonc qui sert a courir des dangers
+	/** la fonc qui sert a courir des dangers
+	 * @throws StopRequestException 
+	 * 
+	 */
 	@SuppressWarnings("static-access")
 	private void court() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE

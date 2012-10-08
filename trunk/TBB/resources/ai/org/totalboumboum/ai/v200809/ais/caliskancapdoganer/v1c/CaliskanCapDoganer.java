@@ -35,12 +35,15 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 	/*private boolean secondMoveAfterBomb;*/
 	/** la case occupée actuellement par le personnage*/
 	private AiTile bombedTile = null;
+	/** */
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
 	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
+	/** */
 	private static int i=1;
+	
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -85,6 +88,10 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -154,6 +161,12 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		}
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -172,6 +185,12 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -183,6 +202,10 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -203,6 +226,11 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		}
 	}
 	
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean CheckAvailability() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		

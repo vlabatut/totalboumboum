@@ -11,8 +11,11 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class SearchLink {
+	/** */
 	private Noeud origin;
+	/** */
 	private Noeud target;
+	/** */
 	ArtificialIntelligence ai;
 
 	/**

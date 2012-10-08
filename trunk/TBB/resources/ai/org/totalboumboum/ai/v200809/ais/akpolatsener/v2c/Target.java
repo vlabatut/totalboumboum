@@ -91,7 +91,7 @@ public class Target {
 	/**
 	 * retourne l'enemie la plus proche à une case donnée
 	 * 
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	AiHero findClosestEnemy() throws StopRequestException {
@@ -125,7 +125,7 @@ public class Target {
 	/**
 	 * retourne le bonus la plus proche à une case donnée
 	 * 
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException
 	 */
 	AiItem findClosestBonus() throws StopRequestException {

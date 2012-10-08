@@ -33,8 +33,10 @@ public class MedeniUluer extends ArtificialIntelligence
 	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 	
+	/** */
 	private int lastBombTime = 0;
 	
+	/** */
 	private boolean poseBombe = false;
 	
 	public AiAction processAction() throws StopRequestException
@@ -84,6 +86,10 @@ public class MedeniUluer extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -143,6 +149,12 @@ public class MedeniUluer extends ArtificialIntelligence
 		}
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -161,6 +173,12 @@ public class MedeniUluer extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -172,6 +190,10 @@ public class MedeniUluer extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -192,6 +214,10 @@ public class MedeniUluer extends ArtificialIntelligence
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void putBomb() throws StopRequestException
 	{
 		checkInterruption();

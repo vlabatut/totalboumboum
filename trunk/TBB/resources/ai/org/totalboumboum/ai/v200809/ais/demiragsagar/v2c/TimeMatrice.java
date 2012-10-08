@@ -16,14 +16,22 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class TimeMatrice {
+	/** */
 	private List<AiTile> caseBombes;
+	/** */
 	private long timeMatrice[][];
+	/** */
 	private AiZone zone;
+	/** */
 	private int defaultPortee;
+	/** */
 	private long durationNormale;
+	/** */
 	private int extendTime;
+	/** */
 	private boolean debug;
 	
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**
@@ -275,8 +283,14 @@ public class TimeMatrice {
 			this.caseBombes = nouvelleBombes;
 		}
 	}
-	/*
+	/**
 	 * Controle si les effets des bombes sont vrais
+	 * @param col 
+	 * @param lig 
+	 * @param temp2 
+	 * @param port 
+	 * @param nombre 
+	 * @throws StopRequestException 
 	 */
 	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) throws StopRequestException {
 		ai.checkInterruption();

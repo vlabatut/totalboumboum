@@ -20,6 +20,10 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public final class Astar {
+	/**
+	 * 
+	 *
+	 */
 	private static class CostComparator implements Comparator<Node> {
 		//
 		public int compare(Node nodeA, Node nodeB) {
@@ -28,17 +32,33 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 *
+	 */
 	class Node {
+		/** */
 		final int x;
+		/** */
 		final int y;
 
+		/** */
 		Node parent;
+		/** */
 		int gcost;
+		/** */
 		int hcost;
 		
+		/** */
 		ArtificialIntelligence ai;
 		
-		// on cree les noeuds
+		/** on cree les noeuds
+		 * 
+		 * @param x
+		 * @param y
+		 * @param ai
+		 * @throws StopRequestException
+		 */
 		public Node(int x, int y, ArtificialIntelligence ai) throws StopRequestException {
 			ai.checkInterruption();
 			this.ai = ai;
@@ -49,12 +69,21 @@ public final class Astar {
 			this.y = y;
 		}
 
+		/**
+		 * 
+		 * @throws StopRequestException
+		 */
 		public void calculateHeuristic() throws StopRequestException {
 			ai.checkInterruption();
 			hcost = (Math.abs(x - destination.x) + Math.abs(y - destination.y))
 					* (VERTICAL_COST + HORIZONTAL_COST) / 2;
 		}
 
+		/**
+		 * 
+		 * @param parent
+		 * @throws StopRequestException
+		 */
 		public void setParent(Node parent) throws StopRequestException {
 			ai.checkInterruption();
 			this.parent = parent;
@@ -68,34 +97,49 @@ public final class Astar {
 			}
 		}
 
-		//
 		public String toString() {
 			return "(" + x + ", " + y + " : " + super.toString() + ')';
 		}
 	}
 
+	/** */
 	private static final CostComparator COST_CMP = new CostComparator();
+	/** */
 	private static final CostComparator COST_CMPdan = new CostComparator();
+	/** */
 	private static final CostComparator COST_CMPexp = new CostComparator();
+	/** */
 	private static final CostComparator COST_CMPcho = new CostComparator();
 
+	/** */
 	private final int VERTICAL_COST = 10;
 
+	/** */
 	private final int HORIZONTAL_COST = 10;
 
+	/** */
 	private final int DIAGONAL_COST = (int) Math.rint(Math.sqrt(VERTICAL_COST
 			* VERTICAL_COST + HORIZONTAL_COST * HORIZONTAL_COST));
 
+	/** */
 	private final Map map;
+	/** */
 	private final Node origin;
+	/** */
 	private final Node destination;
 
+	/** */
 	private final Queue<Node> open;
+	/** */
 	private final Queue<Node> openchoix;
+	/** */
 	private final Queue<Node> openexp;
+	/** */
 	private final Queue<Node> opendang;
 
+	/** */
 	private final int[] closed;
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**
@@ -167,6 +211,13 @@ public final class Astar {
 		open.add(openNode);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param parent
+	 * @throws StopRequestException
+	 */
 	private void addToOpenchoix(int x, int y, Node parent) throws StopRequestException {
 		ai.checkInterruption();
 		Node openNode = new Node(x, y,ai);
@@ -189,6 +240,13 @@ public final class Astar {
 		openchoix.add(openNode);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param parent
+	 * @throws StopRequestException
+	 */
 	private void addToOpenexp(int x, int y, Node parent) throws StopRequestException {
 		ai.checkInterruption();
 		Node openNode = new Node(x, y,ai);
@@ -211,6 +269,13 @@ public final class Astar {
 		openexp.add(openNode);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param parent
+	 * @throws StopRequestException
+	 */
 	private void addToOpendang(int x, int y, Node parent) throws StopRequestException {
 		ai.checkInterruption();
 		Node openNode = new Node(x, y,ai);
@@ -359,7 +424,7 @@ public final class Astar {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return
+	 * @return ?
 	 * @throws StopRequestException 
 	 */
 	private boolean isClosed(int x, int y) throws StopRequestException {
@@ -406,6 +471,11 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	private void processchoix(Node node) throws StopRequestException {
 		ai.checkInterruption();
 		// no need to process it twice
@@ -433,6 +503,11 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	private void processexp(Node node) throws StopRequestException {
 		ai.checkInterruption();
 		// no need to process it twice
@@ -459,6 +534,11 @@ public final class Astar {
 		}
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @throws StopRequestException
+	 */
 	private void processdang(Node node) throws StopRequestException {
 		ai.checkInterruption();
 		// no need to process it twice

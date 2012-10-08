@@ -25,20 +25,33 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class DemiragSagar extends ArtificialIntelligence {
 
-	//les variables globales qui sont mise a jour a chaque iteration
+	/** les variables globales qui sont mise a jour a chaque iteration */
 	private int state;
+	/** */
 	private Direction d;
+	/** */
 	private AiZone zone;
+	/** */
 	private AiHero ownHero;
+	/** */
 	private AiTile caseCourant;
+	/** */
 	private AiTile caseTarget;
+	/** */
 	private boolean debug;
+	/** */
 	private List<AiTile> caseEnemies;
+	/** */
 	private List<AiTile> caseBombes;
+	/** */
 	private List<AiTile> caseItems;
+	/** */
 	private TimeMatrice timeMatrice;
+	/** */
 	private long dangerTime;
+	/** */
 	private int distanceTarget;
+	/** */
 	private int counter;
 
 	/**

@@ -12,9 +12,14 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  */
 @SuppressWarnings("deprecation")
 public class Noeud {
+
+	/** */
 	private AiTile tile;
+	/** */
 	private boolean visited;
+	/** */
 	private int iteration;
+	/** */
 	ArtificialIntelligence ai;
 	
 	/**

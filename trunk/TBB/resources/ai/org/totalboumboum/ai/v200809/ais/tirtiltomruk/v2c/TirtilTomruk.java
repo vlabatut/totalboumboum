@@ -33,24 +33,42 @@ import org.totalboumboum.engine.content.feature.Direction;
 */
 @SuppressWarnings("deprecation")
 public class TirtilTomruk extends ArtificialIntelligence {
+	/** */
 	private AiZone zone;
+	/** */
 	private AiHero caractere;
+	/** */
 	private Vector<AiHero> rivals;
+	/** */
 	private AiAction action;
+	/** */
 	private AiTile targetDeplacement;
+	/** */
 	private AiTile currentTile;
+	/** */
 	private AiTile nextTile;
+	/** */
 	private AiTile previousTile;
+	/** */
 	private LinkedList<AiTile> path;
+	/** */
 	private boolean danger = false;
+	/** */
 	private Zone zoneAdapted;
 	
+	/** */
 	private Vector<TimedBomb> timedBombes;
+	/** */
 	private boolean dropBombe = false;
+	/** */
 	private boolean init = false;
+	/** */
 	private long time;
+	/** */
 	private boolean isAlone = true;
+	/** */
 	private boolean isBlocDest = true;
+	/** */
 	private boolean isBonus = false;
 	
 	public AiAction processAction() throws StopRequestException {
@@ -232,6 +250,10 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void pickNextTile() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		if (!danger) {
@@ -292,6 +314,10 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	}
 	*/
 
+	/**
+	 * @throws StopRequestException 
+	 * 
+	 */
 	private void explodeForBonus() throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
 		AiTile temp = bombTileForBonus();
@@ -302,6 +328,10 @@ public class TirtilTomruk extends ArtificialIntelligence {
 				this.targetDeplacement = temp;
 	}
 	
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkDanger() throws StopRequestException {
 		checkInterruption(); // Appel obligatoire
 		if (!isClear(currentTile) || !isClear(nextTile)) {
@@ -310,6 +340,12 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			danger = false;
 	}
 
+	/**
+	 * 
+	 * @param tile
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption(); // Appel obligatoire
 		if (tile == null)
@@ -319,6 +355,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return !(temp == ZoneEnum.FEU || temp == ZoneEnum.FEUPOSSIBLE || temp == ZoneEnum.BOMBE);
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private LinkedList<AiTile> getEscapePath() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		Vector<AiTile> escapeTiles = new Vector<AiTile>();
@@ -379,6 +420,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return ?
+	 * @throws StopRequestException
+	 */
 	private AiAction deplace() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		if (caractere != null) { // on met à jour la position de l'ia dans la
@@ -429,6 +475,10 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			return new AiAction(AiActionName.NONE);
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void initAI() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		if (!init) {
@@ -521,6 +571,10 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		// System.out.print(this.timedBombes + "\n");
 	}
 
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void refreshTimedBombes() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		Collection<AiBomb> bombes = this.zone.getBombs();

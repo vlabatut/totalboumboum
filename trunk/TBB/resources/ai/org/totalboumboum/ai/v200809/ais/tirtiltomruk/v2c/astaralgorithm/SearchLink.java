@@ -15,11 +15,12 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.TirtilTomruk;
  */
 @SuppressWarnings("deprecation")
 public class SearchLink
-{	// noeud parent
+{	/** noeud parent */
 	private Noeud origin;
-	// noeud fils
+	/** noeud fils */
 	private Noeud target;
 
+	/** */
 	private TirtilTomruk source;
 	/**
 	 * Constructeur.
