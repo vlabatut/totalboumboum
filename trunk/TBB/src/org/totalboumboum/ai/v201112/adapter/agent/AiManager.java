@@ -347,7 +347,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 				List<Tile> path = new ArrayList<Tile>();
 				enginePaths.add(path);
 				for(AiLocation location: aiPath.getLocations())
-				{	// TODO should be adapted so that the pixel coordinates are used instead of the tiles'
+				{	// should be adapted so that the pixel coordinates are used instead of the tiles'
 					AiTile aiTile = location.getTile();
 					int row = aiTile.getRow();
 					int col = aiTile.getCol();

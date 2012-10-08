@@ -154,7 +154,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 							System.out.print(">>");
 				       	System.out.println("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel à "+CHECK_INTERRUPTION_METHOD+"()");
 						errorCount++;
-						//TODO à compléter par la création d'un commentaire dans le code source
+						// à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
@@ -362,7 +362,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 									System.out.print(">>");
 						       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 			        			errorCount++;
-			        			//TODO à compléter par la création d'un commentaire dans le code source
+			        			// à compléter par la création d'un commentaire dans le code source
 			        		}
 						}
 						else
@@ -371,7 +371,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 								System.out.print(">>");
 					       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
-							//TODO à compléter par la création d'un commentaire dans le code source
+							// à compléter par la création d'un commentaire dans le code source
 						}
 					}
 					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
@@ -383,7 +383,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 								System.out.print(">>");
 					       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
-							//TODO à compléter par la création d'un commentaire dans le code source
+							// à compléter par la création d'un commentaire dans le code source
 						}
 						else
 						{	line = firstStatement.getBeginLine();
@@ -400,7 +400,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 											System.out.print(">>");
 								       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 					        			errorCount++;
-					        			//TODO à compléter par la création d'un commentaire dans le code source
+					        			// à compléter par la création d'un commentaire dans le code source
 					        		}
 								}
 								else
@@ -409,7 +409,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 										System.out.print(">>");
 							       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 				        			errorCount++;
-									//TODO à compléter par la création d'un commentaire dans le code source
+									// à compléter par la création d'un commentaire dans le code source
 								}
 							}
 						}
@@ -420,7 +420,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 							System.out.print(">>");
 				       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 	        			errorCount++;
-						//TODO à compléter par la création d'un commentaire dans le code source
+						// à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
@@ -428,7 +428,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					for(int i=0;i<indentLevel;i++)
 						System.out.print("--");
 			       	System.out.println("Attention ligne "+line+" : le bloc est vide !");
-					//TODO à compléter par la création d'un commentaire dans le code source
+					// à compléter par la création d'un commentaire dans le code source
 				}
 			}
 			else
@@ -437,7 +437,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					System.out.print(">>");
 		       	System.out.println("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
 				errorCount++;
-				//TODO à compléter par la création d'un commentaire dans le code source
+				// à compléter par la création d'un commentaire dans le code source
 			}
 		}
 	}
