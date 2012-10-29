@@ -125,7 +125,8 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	 */
 	private void updateCollisions()
 	{	Block sprite = getSprite();
-		
+//if(!sprite.getName().equals("Regular hard wall"))
+//	System.out.println();
 		// bloque les personnages
 		{	GeneralAction generalAction = new GeneralMoveLow();
 			generalAction.addActor(Role.HERO);
@@ -140,6 +141,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 			if(temp)
 			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+				ability.setStrength(1);
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
