@@ -139,6 +139,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 			if(temp)
 			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
 				actorProperties.add(ability);
+				ability.setStrength(1);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
 					stopHeroes = AiStopType.STRONG_STOP;
