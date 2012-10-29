@@ -139,12 +139,14 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		{	Sprite target = specificAction.getTarget();
 			Iterator<AbstractAbility> i = targetRestrictions.iterator();
 			while(i.hasNext() && result)
-			{	AbstractAbility ab = i.next();
-				if(ab instanceof ActionAbility)
-					ab = target.getAbility(((ActionAbility)ab).getAction());
+			{	AbstractAbility ab1 = i.next();
+				AbstractAbility ab2 = null;
+				if(ab1 instanceof ActionAbility)
+					ab2 = target.getAbility(((ActionAbility)ab1).getAction());
 				else
-					ab = target.modulateStateAbility(((StateAbility)ab).getName());
-				result = ab.isActive();
+					ab2 = target.modulateStateAbility(((StateAbility)ab1).getName());
+				//result = ab.isActive();
+				result = ab2.isAsStrong(ab1);
 			}
 		}
 
@@ -152,16 +154,77 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	}
 	public boolean isConcerningAction(GeneralAction generalAction, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties)
 	{	boolean result;
+	
 		// action
 		result = action.subsume(generalAction);
+		
 		// actor restrictions
 		if(result)
-			result = actorProperties.containsAll(actorRestrictions);
+		{	Iterator<AbstractAbility> i = actorRestrictions.iterator();
+			while(i.hasNext() && result)
+			{	AbstractAbility ab1 = i.next();
+				AbstractAbility ab2 = null;
+				if(ab1 instanceof ActionAbility)
+					ab2 = getAbility(actorProperties, ((ActionAbility)ab1).getAction());
+				else
+					ab2 = getAbility(actorProperties, ((StateAbility)ab1).getName());
+				
+				//result = ab2.isActive();
+				result = ab2.isAsStrong(ab1);
+			}
+			//result = actorProperties.containsAll(actorRestrictions);
+		}
+		
 		// target restrictions
 		if(result)
-			result = actorProperties.containsAll(targetRestrictions);
-		//	
+		{	Iterator<AbstractAbility> i = targetRestrictions.iterator();
+			while(i.hasNext() && result)
+			{	AbstractAbility ab1 = i.next();
+				AbstractAbility ab2 = null;
+				if(ab1 instanceof ActionAbility)
+					ab2 = getAbility(targetProperties, ((ActionAbility)ab1).getAction());
+				else
+					ab2 = getAbility(targetProperties, ((StateAbility)ab1).getName());
+				
+				//result = ab2.isActive();
+				result = ab2.isAsStrong(ab1);
+			}
+			//result = targetProperties.containsAll(targetRestrictions);
+		}
+			
 		return result;		
+	}
+	
+	public StateAbility getAbility(List<AbstractAbility> abilities, String name)
+	{	StateAbility result = null;
+		Iterator<AbstractAbility> i = abilities.iterator();
+		while(i.hasNext() && result==null)
+		{	AbstractAbility ab = i.next();
+			if(ab instanceof StateAbility)
+			{	StateAbility ablt = (StateAbility)ab;
+				if(ablt.getName().equals(name))
+					result = ablt;
+			}
+		}
+		if(result==null)
+			result = new StateAbility(name);
+		return result;
+	}
+
+	public ActionAbility getAbility(List<AbstractAbility> abilities, GeneralAction action)
+	{	ActionAbility result = null;
+		Iterator<AbstractAbility> i = abilities.iterator();
+		while(i.hasNext() && result==null)
+		{	AbstractAbility ab = i.next();
+			if(ab instanceof ActionAbility)
+			{	ActionAbility ablt = (ActionAbility)ab;
+				if(ablt.getAction().subsume(action))
+					result = ablt;
+			}
+		}
+		if(result==null)
+			result = new ActionAbility(action);
+		return result;
 	}
 	
 	/**
