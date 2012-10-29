@@ -1582,7 +1582,6 @@ public class Launcher
 	 * 		- item count tenant compte des évènements
 	 * 
 	 * - bugs :
-	 * 		- graphique : définir une ombre pleine pour les blocs
 	 */
 	
 }
