@@ -25,7 +25,9 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,10 +42,13 @@ import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.level.zone.Zone;
+import org.totalboumboum.engine.container.level.zone.ZoneTile;
 import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.container.theme.ThemeLoader;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
+import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -123,9 +128,9 @@ public class HollowLevel implements Serializable
 	{	this.itemCounts = itemCounts;
 	}
 	
-	public void makeZone()
+	public void makeZone(long timeLimit)
 	{	if(zone!=null)
-			zone.makeMatrix();		
+			zone.makeMatrix(timeLimit);		
 	}
 	
 	public HashMap<String,Integer> getItemCount()
@@ -145,20 +150,18 @@ public class HollowLevel implements Serializable
 	{	this.zone = zone;		
 	}
 	
+	/**
+	 * Used to create the sprites whose names
+	 * have been alread loaded in the zone object.
+	 */
 	public void instanciateZone()
 	{	// init zone
 		Tile[][] matrix = level.getMatrix();
-		Itemset itemset = instance.getItemset();
-		Bombset bombset = instance.getBombsetMap().getBombset(null);
 		double globalLeftX = level.getPixelLeftX();
 		double globalUpY = level.getPixelTopY();
 		int globalHeight = levelInfo.getGlobalHeight();
 		int globalWidth = levelInfo.getGlobalWidth();
-		List<String[][]> matrices = zone.getMatrices();
-    	String[][] mFloors = matrices.get(0);
-		String[][] mBlocks = matrices.get(1);
-		String[][] mItems = matrices.get(2);
-		String[][] mBombs = matrices.get(3);
+		ZoneTile[][] m = zone.getMatrix();
 		
 		// init tiles
 		for(int row=0;row<globalHeight;row++)
@@ -167,43 +170,7 @@ public class HollowLevel implements Serializable
 				double y = globalUpY + RoundVariables.scaledTileDimension/2 + row*RoundVariables.scaledTileDimension;
 				matrix[row][col] = new Tile(level,row,col,x,y);
 
-				// floors
-				Floor floor;
-				if(mFloors[row][col]==null)
-				{	floor = theme.makeFloor(matrix[row][col]);
-					level.insertSpriteTile(floor);
-				}
-				else
-				{	floor = theme.makeFloor(mFloors[row][col],matrix[row][col]);
-					level.insertSpriteTile(floor);
-				}
-				
-				// blocks
-				if(mBlocks[row][col]!=null)
-				{	Block block = theme.makeBlock(mBlocks[row][col],matrix[row][col]);
-					level.insertSpriteTile(block);
-				}
-				
-				// items
-				if(mItems[row][col]!=null)
-				{	Item item = itemset.makeItem(mItems[row][col],matrix[row][col]);
-					level.insertSpriteTile(item);				
-				}
-				
-				// bombs
-				if(mBombs[row][col]!=null)
-				{	String temp[] = mBombs[row][col].split(Theme.PROPERTY_SEPARATOR);
-					int range = Integer.parseInt(temp[temp.length-2]);
-					int duration = Integer.parseInt(temp[temp.length-1]);
-					String name = "";
-					for(int i=0;i<temp.length-2;i++)
-						name = name + temp[i];
-					Bomb bomb = bombset.makeBomb(name,matrix[row][col],range,duration);
-					if(bomb==null)
-						System.err.println("makeBomb error: sprite "+name+" not found.");
-					
-					level.insertSpriteTile(bomb);				
-				}
+				initSprites(m[row][col],matrix[row][col],true);
 			}
 		}
 		level.initTileList();
@@ -212,7 +179,193 @@ public class HollowLevel implements Serializable
 		StopReplayEvent event = new StopReplayEvent();
 		RoundVariables.writeEvent(event);
 	}
+	
+	/**
+	 * Initializes the sprites for the specified tile, using
+	 * the specified ZoneTile (basically a list of the names
+	 * of the sprites to be created). The force parameter
+	 * allows to force the creation of basic floor when the 
+	 * floor type is not explicitly stated in the ZoneTile object.
+	 * 
+	 * @param zoneTile
+	 * 		Object containing the names of the sprites to be created.
+	 * @param tile
+	 * 		Tile to contain the created sprites.
+	 * @param force
+	 * 		Force the creation of floor when not specified.
+	 * @return
+	 * 		The list of created sprites.
+	 */
+	private List<Sprite> initSprites(ZoneTile zoneTile, Tile tile, boolean force)
+	{	List<Sprite> result = new ArrayList<Sprite>();
+	
+		// floors
+		String floorName = zoneTile.getFloor();
+		if(floorName==null && force)
+		{	Floor floor = theme.makeFloor(tile);
+			level.insertSpriteTile(floor);
+			result.add(floor);
+		}
+		else if(floorName!=null)
+		{	Floor floor = theme.makeFloor(floorName,tile);
+			level.insertSpriteTile(floor);
+			result.add(floor);
+		}
+		
+		// blocks
+		String blockName = zoneTile.getBlock();
+		if(blockName!=null)
+		{	Block block = theme.makeBlock(blockName,tile);
+			level.insertSpriteTile(block);
+			result.add(block);
+		}
+		
+		// items
+		String itemName = zoneTile.getItem();
+		if(itemName!=null)
+		{	Itemset itemset = instance.getItemset();
+			Item item = itemset.makeItem(itemName,tile);
+			level.insertSpriteTile(item);				
+			result.add(item);
+		}
+		
+		// bombs
+		String bombName = zoneTile.getBomb();
+		if(bombName!=null)
+		{	Bombset bombset = instance.getBombsetMap().getBombset(null);
+			String temp[] = bombName.split(Theme.PROPERTY_SEPARATOR);
+			int range = Integer.parseInt(temp[temp.length-2]);
+			int duration = Integer.parseInt(temp[temp.length-1]);
+			String name = "";
+			for(int i=0;i<temp.length-2;i++)
+				name = name + temp[i];
+			Bomb bomb = bombset.makeBomb(name,tile,range,duration);
+			if(bomb==null)
+				System.err.println("makeBomb error: sprite "+name+" not found.");
+			
+			level.insertSpriteTile(bomb);				
+			result.add(bomb);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Checks if some sprites should fall from the sky.
+	 * If it's the case, creates them.
+	 * 
+	 * Summary of the expected behaviors of the sprites during
+	 * sudden death fall:
+	 * 			x floor
+	 * 				x sur case vide : apparait
+	 * 				x sur item : prendre l'item pr vérifier
+	 * 				x sur softwall, détruire le bloc pr vérifier
+	 * 				x sur hardwall, juste pour tester
+	 * 				x sur shrinkwall, juste pour tester
+	 * 				x sur bombe : apparait dessous
+	 * 				x sur joueur : apparait dessous
+	 * 			x item
+	 * 				x sur case vide
+	 * 				x sur item : attend que l'item soit pris
+	 * 				x sur softwall : apparait à sa destruction
+	 * 				x sur hardwall : juste pour tester
+	 * 				x sur bombe : attend que la bombe explose
+	 * 				x sur joueur : attend qu'il bouge
+	 * 			x bomb
+	 * 				x sur case vide
+	 * 				x sur item : rebond
+	 * 				x sur softwall : rebond
+	 * 				x sur hardwall : rebond
+	 * 				x sur shrinkwall : rebond
+	 * 				x sur bombe : rebond
+	 * 				x sur joueur : atterit normalement (le joueur devrait normalement être étourdi)
+	 * 			x softwall
+	 * 				x sur case vide : exploser pour voir le sol
+	 * 				x sur bombe : rebondit
+	 * 				x sur item : recouvre seulement l'item sans le crusher (détruire bloc pr tester, ou throughwalls)
+	 * 				x sur softwall : rebond
+	 * 				x sur hardwall : rebond
+	 * 				x sur shrinkwall : rebond
+	 * 				x sur joueur : crush, sauf si throughwall
+	 * 			x hardwall
+	 * 				x sur case vide
+	 * 				x sur bombe : crush (vérifier en debuggant)
+	 * 				x sur item : crush (vérifier en debuggant)
+	 * 				x sur softwall : crush (vérif graphique)
+	 * 				x sur hardwall : rebond
+	 * 				x sur shrinkwall : rebond
+	 * 				x sur joueur : crush, toujours (y compris through wall)
+	 * 			x shrinkwall
+	 * 				x sur case vide
+	 * 				x sur bombe : crush (vérifier en debuggant)
+	 * 				x sur item : crush (vérifier en debuggant)
+	 * 				x sur softwall : crush (vérif graphique)
+	 * 				x sur hardwall : crush (vérif graphique)
+	 * 				x sur shrinkwall : rebond
+	 * 				x sur joueur : crush, toujours (y compris through wall)
+	 * 			x softwall + item 
+	 * 				x sur case vide
+	 * 			x softwall + bomb  
+	 * 				x sur case vide
+	 * 
+	 * @param currentGameTime
+	 * 		The current game time, in ms.
+	 */
+	public void applySuddenDeath(long currentGameTime)
+	{	// get the info of the sprites to be created
+		List<ZoneTile> tiles = zone.getEventsInit(currentGameTime);
 
+		// pre-init the necessary events
+		EngineEvent fallEvent = new EngineEvent(EngineEvent.START_FALL);
+		fallEvent.setDirection(Direction.NONE);
+		EngineEvent enterEvent = new EngineEvent(EngineEvent.ROUND_ENTER);
+		enterEvent.setDirection(Direction.NONE);
+		
+		// create them
+		Tile[][] matrix = level.getMatrix();
+		for(ZoneTile zoneTile: tiles)
+		{	// create the sprites
+			int col = zoneTile.getCol();
+			int row = zoneTile.getRow();
+			Tile tile = matrix[row][col];
+			List<Sprite> sprites = initSprites(zoneTile, tile, false);
+			
+			// checks if there's a block amongst them
+			Iterator<Sprite> it = sprites.iterator();
+			Block block = null;
+			while(it.hasNext() && block==null)
+			{	Sprite sprite = it.next();
+				if(sprite instanceof Block)
+						block = (Block)sprite;
+			}
+			
+// block, bomb, floor, item
+System.out.println("["+tile.getRow()+","+tile.getCol()+"] sudden death event processed");			
+// TODO TODO what should we send to the client so that its own sprites also fall?
+			
+			// put the possible block at the begining of the list
+			if(block!=null)
+			{	sprites.remove(block);
+				sprites.add(0,block);
+			}
+			
+			// init the new sprites actions
+			for(Sprite sprite: sprites)
+			{	if(block!=null && (sprite instanceof Item || sprite instanceof Bomb))
+					sprite.processEvent(enterEvent);
+				else
+					sprite.processEvent(fallEvent);
+			}
+		}
+	}
+	
+	/**
+	 * similar to {@link #instanciateZone()}, but for
+	 * replay/client loops, i.e. the sprites come from
+	 * a stream, and not the zone obejct.
+	 * 
+	 * @param loop
+	 */
 	public void synchronizeZone(ReplayedLoop loop)
 	{	// init zone
 		Tile[][] matrix = level.getMatrix();
@@ -275,17 +428,20 @@ public class HollowLevel implements Serializable
 		{	sprite = theme.makeFloor(name,matrix[row][col]);
 			sprite.setId(id);
 		}
+		
 		// blocks
 		else if(role==Role.BLOCK)
 		{	sprite = theme.makeBlock(name,matrix[row][col]);
 			sprite.setId(id);
 		}
+		
 		// items
 		else if(role==Role.ITEM)
 		{	Itemset itemset = instance.getItemset();
 			sprite = itemset.makeItem(name,matrix[row][col]);
 			sprite.setId(id);
 		}
+		
 		// bombs
 		else if(role==Role.BOMB)
 		{	String names[] = name.split("/");
@@ -296,6 +452,7 @@ public class HollowLevel implements Serializable
 			sprite = bombset.makeBomb(names[0],matrix[row][col],0,-1);
 			sprite.setId(id);
 		}
+		
 		// fires
 		else if(role==Role.FIRE)
 		{	String names[] = name.split("/");
@@ -304,10 +461,12 @@ public class HollowLevel implements Serializable
 			sprite = fireset.makeFire(names[1],matrix[row][col]);
 			sprite.setId(id);
 		}
+		
 		// heroes
 		else if(role==Role.HERO)
 		{	//TODO
 		}
+		
 		return sprite;
 	}
 	

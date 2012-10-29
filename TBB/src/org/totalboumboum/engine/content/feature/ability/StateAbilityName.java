@@ -61,6 +61,9 @@ public class StateAbilityName implements Serializable
 	/** cross (some?) walls */
 	public static final String SPRITE_TRAVERSE_WALL = "SPRITE_TRAVERSE_WALL";
 	
+	/** cross (some?) players (actually more about block crushing heroes, sudden-death-style) */
+	public static final String SPRITE_TRAVERSE_HERO = "SPRITE_TRAVERSE_HERO";
+	
 	/** the sprite is twinkling, the strenght corresponds to the twinkling color in RGB integer (0=no twinkling, <0=transparent twinkling) */
 	public static final String SPRITE_TWINKLE = "SPRITE_TWINKLE";	
 	/** time the sprite is colored (or hidden) when twinkling */

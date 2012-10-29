@@ -293,10 +293,8 @@ public abstract class VisibleLoop extends Loop
 
 			beforeTime = System.currentTimeMillis();
 
-			/* 
-			 * If frame animation is taking too long, update the game state
-			 * without rendering it, to get the updates/sec nearer to the required FPS.
-			 */
+			// If frame animation is taking too long, update the game state
+			// without rendering it, to get the updates/sec nearer to the required FPS.
 			int skips = 0;
 			RoundVariables.setFilterEvents(true); // in this situation, we do not want to record certain events
 			while (excess>milliPeriod
@@ -310,10 +308,11 @@ public abstract class VisibleLoop extends Loop
 			RoundVariables.setFilterEvents(false);			
 			framesSkipped = framesSkipped + skips;
 			
-			long delta = afterTime-lastTime;
+			long delta = afterTime - lastTime;
 			totalEngineTime = totalEngineTime + delta;
 			if(!getEnginePause() && gameStarted && !gameOver)
-			{	totalGameTime = totalGameTime + (long)(delta*Configuration.getEngineConfiguration().getSpeedCoeff());
+			{	//prevTotalGameTime = totalGameTime;
+				totalGameTime = totalGameTime + (long)(delta*Configuration.getEngineConfiguration().getSpeedCoeff());
 				round.updateTime(totalGameTime);
 			}
 		}
@@ -332,12 +331,15 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	/** total game time elapsed since the players took control */
 	protected long totalGameTime = 0;
+	/** total game time elapsed at the previous iteration */
+//	protected long prevTotalGameTime = 0;
 	/** total real time elapsed since the level started appearing */
 	protected long totalEngineTime = 0;
 	
 	protected void initTimes()
 	{	gameStartTime = System.currentTimeMillis();
 		prevStatsTime = gameStartTime;
+//		prevTotalGameTime = 0;
 		totalGameTime = 0;
 		totalEngineTime = 0;
 	}
@@ -345,6 +347,10 @@ public abstract class VisibleLoop extends Loop
 	public long getTotalGameTime()
 	{	return totalGameTime;	
 	}
+	
+//	public long getPrevTotalGameTime()
+//	{	return prevTotalGameTime;	
+//	}
 	
 	public long getTotalEngineTime()
 	{	return totalEngineTime;	
@@ -745,7 +751,8 @@ public abstract class VisibleLoop extends Loop
 	
 	protected void updateEngineStep()
 	{	if(getEngineStep())
-		{	totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+		{	//prevTotalGameTime = totalGameTime;
+			totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 			switchEngineStep(false);
 		}
 	}
@@ -775,6 +782,9 @@ public abstract class VisibleLoop extends Loop
 	protected int entryIndex = 0;
 	protected String[] entryTexts;
 	
+	/**
+	 * handles how sprites enter the zone
+	 */
 	protected void initEntries()
 	{	entryIndex = 0;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};

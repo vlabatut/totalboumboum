@@ -35,6 +35,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
@@ -68,7 +69,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	private MyLabel buttonConfirm;
 	private MyLabel buttonCancel;
-	private JTextPane inputPane;
+	private JTextArea inputPane;
 	
 	public void setContent(List<String> text, String defaultText)
 	{	// sizes
@@ -82,7 +83,8 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 		}
 		
 		// message
-		{	JPanel textPanel = new JPanel();
+		{	// note: a JTextPane was used before, but it was taking ages to appear (the first time)
+			JPanel textPanel = new JPanel();
 			textPanel.setOpaque(false);
 			Dimension dim = new Dimension(getDataWidth(),textHeight);
 			textPanel.setPreferredSize(dim);
@@ -92,7 +94,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			textPanel.setLayout(layout);
 			getDataPanel().add(textPanel);
 			
-			JTextPane textPane = new JTextPane()
+			JTextArea textArea = new JTextArea()
 			{	private static final long serialVersionUID = 1L;
 				public void paintComponent(Graphics g)
 			    {	Graphics2D g2 = (Graphics2D) g;
@@ -101,42 +103,24 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 		        	super.paintComponent(g2);
 			    }			
 			};
-			textPane.setEditable(false);
-			textPane.setHighlighter(null);
-			textPane.setOpaque(true);
-			textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-	
-			// styles
-			StyledDocument doc = textPane.getStyledDocument();
-			SimpleAttributeSet sa = new SimpleAttributeSet();
-			// alignment
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
-			// font size
-			StyleConstants.setFontFamily(sa,font.getFamily());
-			StyleConstants.setFontSize(sa,font.getSize());
-			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
-			// color
-			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-			StyleConstants.setForeground(sa,fg);
-			// set style
-			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
-			// text
-			try
-			{	doc.remove(0,doc.getLength());
-				for(String txt: text)
-					doc.insertString(doc.getLength(),txt+"\n",sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
-			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
-			textPanel.add(textPane);
+			textArea.setEditable(false);
+			textArea.setHighlighter(null);
+			textArea.setOpaque(true);
+			textArea.setLineWrap(true);
+			textArea.setWrapStyleWord(true);
+			textArea.setFont(font);
+			textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+			for(String txt: text)
+				textArea.append(txt+"\n");
+			textPanel.add(textArea);
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 
 		// text field
-		{	inputPane = new JTextPane()
+		{	// note: a JTextPane was used before, but it was taking ages to appear (the first time)
+			inputPane = new JTextArea()
 			{	private static final long serialVersionUID = 1L;
 				public void paintComponent(Graphics g)
 			    {	Graphics2D g2 = (Graphics2D) g;
@@ -147,29 +131,17 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			};
 			inputPane.setEditable(true);
 			inputPane.setOpaque(true);
+			inputPane.setLineWrap(true);
+			inputPane.setWrapStyleWord(true);
+			inputPane.setFont(font);
+			inputPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			inputPane.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 			Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
 			inputPane.setPreferredSize(dim);
 			inputPane.setMinimumSize(dim);
 			inputPane.setMaximumSize(dim);
 			inputPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-			Color bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
-			inputPane.setBackground(bg);
-			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-			inputPane.setForeground(fg);
-			SimpleAttributeSet sa = new SimpleAttributeSet();
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
-			StyleConstants.setFontFamily(sa,font.getFamily());
-			StyleConstants.setFontSize(sa,font.getSize());
-			StyleConstants.setForeground(sa,fg);
-			StyledDocument doc = inputPane.getStyledDocument();
-			doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
-			try
-			{	doc.remove(0,doc.getLength());
-				doc.insertString(doc.getLength(),defaultText,sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
+			inputPane.append(defaultText);
 			getDataPanel().add(inputPane);
 			inputPane.selectAll();
 			inputPane.getCaret().setSelectionVisible(true);

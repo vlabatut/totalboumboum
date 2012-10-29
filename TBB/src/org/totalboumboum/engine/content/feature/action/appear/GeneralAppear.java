@@ -69,7 +69,8 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralAppear extends GeneralAction
-{	private static final long serialVersionUID = 1L;
+{	/** Serial */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

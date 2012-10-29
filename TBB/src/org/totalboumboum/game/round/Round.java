@@ -113,7 +113,11 @@ public class Round implements StatisticHolder, Serializable
 			playersStatus.add(new Boolean(true));
 		
 		// level
-		hollowLevel.makeZone();
+		long timeLimit = Long.MAX_VALUE;
+		LimitTime lt = limits.getTimeLimit();
+		if(lt!=null)
+			timeLimit = lt.getThreshold();
+		hollowLevel.makeZone(timeLimit);
 		
 		// current points
 		currentPoints = new float[getProfiles().size()];

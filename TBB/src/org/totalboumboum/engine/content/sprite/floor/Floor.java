@@ -21,7 +21,15 @@ package org.totalboumboum.engine.content.sprite.floor;
  * 
  */
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Role;
+import org.totalboumboum.engine.content.feature.ability.ActionAbility;
+import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.action.crush.SpecificCrush;
+import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
@@ -40,5 +48,22 @@ public class Floor extends Sprite
 	/////////////////////////////////////////////////////////////////
 	public Role getRole()
 	{	return Role.FLOOR;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void crushTile(Tile tile)
+	{	List<Floor> floors = tile.getFloors();
+		for(Floor floor: floors)
+		{	if(floor!=this)
+			{	SpecificAction specificAction = new SpecificCrush(this,floor);
+				ActionAbility ability = modulateAction(specificAction);
+				if(ability.isActive())
+				{	ActionEvent e = new ActionEvent(specificAction);
+					floor.processEvent(e);
+				}			
+			}
+		}	
 	}
 }

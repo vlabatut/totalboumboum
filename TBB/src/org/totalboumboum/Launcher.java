@@ -834,6 +834,12 @@ public class Launcher
 	 *  - portée aléatoire : on sait pas à quelle distance ça va péter
 	 *  - portée nulle : permet quand même de bloquer les explosions des autres, donc aspect défensif important 
 	 */
+	
+	/*
+	 * TODO grâce au système de modulation:
+	 * 	 - mur ne se laissant traverser que par des joueurs ayant au moins 5 bombes
+	 *   - condition sur d'autres abilities? 
+	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // XML			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1556,6 +1562,27 @@ public class Launcher
 	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
 	
 	
-	
+	/**
+	 * TODO mort subite
+	 * 
+	 * - mettre à jour configuration partie rapide pour évènements
+	 *   (proposer plusieurs choix standard de mort subite + activer/désactiver)
+	 * - gérer l'envoi des évènements via réseau/fichier (cf. TODO TODO)
+	 * - gérer la réception des mêmes évènements
+	 * - màj l'api :
+	 * 		- accès aux infos concernant le shrink
+	 * 		- prise en compte du shrink dans le modèle
+	 * 
+	 * - réformer tous les thèmes des instances déjà traitées
+	 * 		- de manière à mutualiser au max
+	 * 		- épurer en virant les items pas standard
+	 * - adapter les niveaux existants pour qu'il y ait la mort subite originale
+	 * 
+	 * - à tester :
+	 * 		- item count tenant compte des évènements
+	 * 
+	 * - bugs :
+	 * 		- graphique : définir une ombre pleine pour les blocs
+	 */
 	
 }

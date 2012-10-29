@@ -116,6 +116,7 @@ public class XmlNames
 	public static final String DURATION = "duration";
 	public static final String ENGINE = "engine";
 	public static final String EVENT = "event";
+	public static final String EVENTS = "events";
 	public static final String EXAEQUO_SHARE = "exaequoShare";
 	public static final String EXPLOSION = "explosion";
 	public static final String EXPLOSIONS = "explosions";
@@ -260,6 +261,7 @@ public class XmlNames
 	public static final String RED = "red";
 	public static final String REFERENCE = "reference";
 	public static final String REGULAR_LAUNCH = "regularLaunch";
+	public static final String RELATIVE = "relative";
 	public static final String REPEAT = "repeat";
 	public static final String REPLAY = "replay";
 	public static final String ROUND = "round";

@@ -49,6 +49,8 @@ public class HollowItemFactory extends HollowSpriteFactory<Item>
 		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
 		// EXULTING
+		// FALLING
+		animeReplacements.put(GestureName.FALLING,GestureName.STANDING);
 		// HIDING
 		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING

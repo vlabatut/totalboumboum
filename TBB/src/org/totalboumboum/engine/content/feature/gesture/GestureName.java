@@ -60,6 +60,9 @@ public enum GestureName implements Serializable
 	/** the sprite is expressing its joy (hero winning a round) */
 	EXULTING,
 	
+	/** the sprite is falling from the skies (just before landing) */
+	FALLING,
+	
 	/** the sprite is being held by another sprite */
 //	HELD,
 	

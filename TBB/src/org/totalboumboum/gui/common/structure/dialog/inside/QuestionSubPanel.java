@@ -35,6 +35,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
@@ -80,7 +81,8 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 		}
 		
 		// message
-		{	JPanel textPanel = new JPanel();
+		{	// note: a JTextPane was used before, but it was taking ages to appear (the first time)
+			JPanel textPanel = new JPanel();
 			textPanel.setOpaque(false);
 			Dimension dim = new Dimension(getDataWidth(),textHeight);
 			textPanel.setPreferredSize(dim);
@@ -90,7 +92,7 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 			textPanel.setLayout(layout);
 			getDataPanel().add(textPanel);
 			
-			JTextPane textPane = new JTextPane()
+			JTextArea textArea = new JTextArea()
 			{	private static final long serialVersionUID = 1L;
 				public void paintComponent(Graphics g)
 			    {	Graphics2D g2 = (Graphics2D) g;
@@ -99,36 +101,17 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 		        	super.paintComponent(g2);
 			    }			
 			};
-			textPane.setEditable(false);
-			textPane.setHighlighter(null);
-			textPane.setOpaque(true);
-			textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-	
-			// styles
-			StyledDocument doc = textPane.getStyledDocument();
-			SimpleAttributeSet sa = new SimpleAttributeSet();
-			// alignment
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
-			// font size
-			StyleConstants.setFontFamily(sa,font.getFamily());
-			StyleConstants.setFontSize(sa,font.getSize());
-			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
-			// color
-			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-			StyleConstants.setForeground(sa,fg);
-			// set
-	//		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
-			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
-			// text
-			try
-			{	doc.remove(0,doc.getLength());
-				for(String txt: text)
-					doc.insertString(doc.getLength(),txt+"\n",sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
-			textPanel.add(textPane);
+			textArea.setEditable(false);
+			textArea.setHighlighter(null);
+			textArea.setOpaque(true);
+			textArea.setLineWrap(true);
+			textArea.setWrapStyleWord(true);
+			textArea.setFont(font);
+			textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+			for(String txt: text)
+				textArea.append(txt+"\n");
+			textPanel.add(textArea);
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));

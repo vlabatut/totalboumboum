@@ -74,7 +74,8 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralDetonate extends GeneralAction
-{	private static final long serialVersionUID = 1L;
+{	/** Serial */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

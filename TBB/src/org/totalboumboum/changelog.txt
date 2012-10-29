@@ -499,5 +499,10 @@
 	- léger hasard dans le tirage au sort du temps des bombes menaçant les IA
 	- léger hasard dans le tirage au sort de la puissance de ces mêmes bombes
 	- nouveaux profils pour le tournoi 2012-13
+	- correction du bug qui faisait que le panel "about" mettait deux plombes à s'afficher :
+	  remplacement de JTextPane par JTextArea.
 	
 + beta.024
+	- nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation)
+	- système de mort subite
+	

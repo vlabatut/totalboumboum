@@ -122,12 +122,15 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		{	Sprite actor = specificAction.getActor();
 			Iterator<AbstractAbility> i = actorRestrictions.iterator();
 			while(i.hasNext() && result)
-			{	AbstractAbility ab = i.next();
-				if(ab instanceof ActionAbility)
-					ab = actor.getAbility(((ActionAbility)ab).getAction());
+			{	AbstractAbility ab1 = i.next();
+				AbstractAbility ab2 = null;
+				if(ab1 instanceof ActionAbility)
+					ab2 = actor.getAbility(((ActionAbility)ab1).getAction());
 				else
-					ab = actor.modulateStateAbility(((StateAbility)ab).getName());
-				result = ab.isActive();
+					ab2 = actor.modulateStateAbility(((StateAbility)ab1).getName());
+				
+				//result = ab2.isActive();
+				result = ab2.isAsStrong(ab1);
 			}
 		}
 		
