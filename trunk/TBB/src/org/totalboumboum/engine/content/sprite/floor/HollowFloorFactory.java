@@ -41,10 +41,13 @@ public class HollowFloorFactory extends HollowSpriteFactory<Floor>
 	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
 	{	// APPEARING
+		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
 		// BOUNCING
 		// BURNING
 		// CRYING
 		// EXULTING
+		// FALLING
+		animeReplacements.put(GestureName.FALLING,GestureName.STANDING);
 		// HIDING
 		// JUMPING
 		// LANDING

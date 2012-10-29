@@ -33,7 +33,7 @@ import org.totalboumboum.engine.container.level.hollow.HollowLevelSaver;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.level.zone.Zone;
-import org.totalboumboum.engine.container.level.zone.ZoneTile;
+import org.totalboumboum.engine.container.level.zone.ZoneHollowTile;
 import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.gui.tools.GuiFileTools;
@@ -44,6 +44,8 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Set of tools (no GUI) allowing basic
+ * editing of the zones.
  * 
  * @author Vincent Labatut
  *
@@ -52,9 +54,12 @@ import org.xml.sax.SAXException;
 public class LevelTools
 {	
 	/**
-	 * allows to programmatically initialize a zone,
+	 * Allows to programmatically initialize a zone,
 	 * in order to help designing new levels
 	 * 
+	 * @param args 
+	 * 		Not used.
+	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception
 	{	
@@ -200,7 +205,7 @@ public class LevelTools
 		Zone zone = new Zone(width,height);
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	ZoneTile tile = new ZoneTile(row,col);
+			{	ZoneHollowTile tile = new ZoneHollowTile(row,col);
 				tile.setFloor("regular");
 				zone.addTile(tile);
 			}
@@ -290,7 +295,7 @@ public class LevelTools
 		// top border
 		for(int row=yMargin;row<yMargin+yThickness;row++)
 		{	for(int col=xMargin;col<width-xMargin;col++)
-			{	ZoneTile tile = zone.getTile(row,col);
+			{	ZoneHollowTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
@@ -298,12 +303,12 @@ public class LevelTools
 		// side borders
 		for(int row=yMargin+yThickness;row<height-yMargin;row++)
 		{	for(int col=xMargin;col<xMargin+xThickness;col++)
-			{	ZoneTile tile = zone.getTile(row,col);
+			{	ZoneHollowTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
 			for(int col=width-xMargin-xThickness;col<width-xMargin;col++)
-			{	ZoneTile tile = zone.getTile(row,col);
+			{	ZoneHollowTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
@@ -311,7 +316,7 @@ public class LevelTools
 		// bottom border
 		for(int row=height-yMargin-yThickness;row<height-yMargin;row++)
 		{	for(int col=xMargin;col<width-xMargin;col++)
-			{	ZoneTile tile = zone.getTile(row,col);
+			{	ZoneHollowTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
@@ -394,7 +399,7 @@ public class LevelTools
 			{	int l = bgUp+row;
 				int c = bgLeft+col;
 				if(l>=0 && l<lvHeight && c>=0 && c<lvWidth)
-				{	ZoneTile tile = zone.getTile(bgUp+row,bgLeft+col);
+				{	ZoneHollowTile tile = zone.getTile(bgUp+row,bgLeft+col);
 					String floorName = nf.format(row)+"_"+nf.format(col);
 					File tempFile = new File(path+File.separator+floorName);
 					if(tempFile.exists())
@@ -404,6 +409,13 @@ public class LevelTools
 		}
 	}
 
+	/**
+	 * Just removes all floor background from the 
+	 * specified level object.
+	 * 
+	 * @param level
+	 * 		The level whose background must be removed.
+	 */
 	protected static void removeBackground(HollowLevel level)
 	{	Zone zone = level.getZone();
 		int height = zone.getGlobalHeight();
@@ -411,7 +423,7 @@ public class LevelTools
 		
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	ZoneTile tile = zone.getTile(row,col);
+			{	ZoneHollowTile tile = zone.getTile(row,col);
 				tile.setFloor("regular");
 			}
 		}
@@ -438,7 +450,7 @@ public class LevelTools
 		{	if(row%2!=yCenter%2)
 			{	for(int col=0;col<width;col++)
 				{	if(col%2!=xCenter%2)
-					{	ZoneTile tile = zone.getTile(row,col);
+					{	ZoneHollowTile tile = zone.getTile(row,col);
 						tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");				
 					}
 				}
@@ -472,7 +484,7 @@ public class LevelTools
 					&& !players.isOccupied(row+1,col)
 					&& !players.isOccupied(row,col-1)
 					&& !players.isOccupied(row,col+1))
-				{	ZoneTile tile = zone.getTile(row,col);
+				{	ZoneHollowTile tile = zone.getTile(row,col);
 					if(tile.getBlock()==null)
 						tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
 				}
@@ -518,14 +530,14 @@ public class LevelTools
 		zone.setGlobalHeight(height);
 		// add new row
 		for(int c=0;c<width;c++)
-		{	ZoneTile tile = new ZoneTile(height-1,c);			
+		{	ZoneHollowTile tile = new ZoneHollowTile(height-1,c);			
 			zone.addTile(tile);
 		}
 		// move existing rows
 		for(int l=height-1;l>row;l--)
 		{	for(int c=0;c<width;c++)
-			{	ZoneTile tile1 = zone.getTile(l,c);
-				ZoneTile tile2 = zone.getTile(l-1,c);
+			{	ZoneHollowTile tile1 = zone.getTile(l,c);
+				ZoneHollowTile tile2 = zone.getTile(l-1,c);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
 				else
@@ -550,7 +562,7 @@ public class LevelTools
 		}
 		// reinit row "row"
 		for(int c=0;c<width;c++)
-		{	ZoneTile tile = zone.getTile(row,c);
+		{	ZoneHollowTile tile = zone.getTile(row,c);
 			tile.setFloor("regular");
 			tile.setBlock(null);
 			tile.setBomb(null);
@@ -608,8 +620,8 @@ public class LevelTools
 		// move existing rows
 		for(int l=row;l<height;l++)
 		{	for(int c=0;c<width;c++)
-			{	ZoneTile tile1 = zone.getTile(l,c);
-				ZoneTile tile2 = zone.getTile(l+1,c);
+			{	ZoneHollowTile tile1 = zone.getTile(l,c);
+				ZoneHollowTile tile2 = zone.getTile(l+1,c);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
 				else
@@ -634,7 +646,7 @@ public class LevelTools
 		}
 		// remove row
 		for(int c=0;c<width;c++)
-		{	ZoneTile tile = zone.getTile(height,c);			
+		{	ZoneHollowTile tile = zone.getTile(height,c);			
 			zone.removeTile(tile);
 		}
 		
@@ -687,14 +699,14 @@ public class LevelTools
 		zone.setGlobalWidth(width);
 		// add new col
 		for(int l=0;l<height;l++)
-		{	ZoneTile tile = new ZoneTile(l,width-1);			
+		{	ZoneHollowTile tile = new ZoneHollowTile(l,width-1);			
 			zone.addTile(tile);
 		}
 		// move existing columns
 		for(int c=width-1;c>col;c--)
 		{	for(int l=0;l<height;l++)
-			{	ZoneTile tile1 = zone.getTile(l,c);
-				ZoneTile tile2 = zone.getTile(l,c-1);
+			{	ZoneHollowTile tile1 = zone.getTile(l,c);
+				ZoneHollowTile tile2 = zone.getTile(l,c-1);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
 				else
@@ -719,7 +731,7 @@ public class LevelTools
 		}
 		// reinit column "col"
 		for(int l=0;l<height;l++)
-		{	ZoneTile tile = zone.getTile(l,col);
+		{	ZoneHollowTile tile = zone.getTile(l,col);
 			tile.setFloor("regular");
 			tile.setBlock(null);
 			tile.setBomb(null);
@@ -777,8 +789,8 @@ public class LevelTools
 		// move existing columns
 		for(int c=col;c<width;c++)
 		{	for(int l=0;l<height;l++)
-			{	ZoneTile tile1 = zone.getTile(l,c);
-				ZoneTile tile2 = zone.getTile(l,c+1);
+			{	ZoneHollowTile tile1 = zone.getTile(l,c);
+				ZoneHollowTile tile2 = zone.getTile(l,c+1);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
 				else
@@ -803,7 +815,7 @@ public class LevelTools
 		}
 		// remove col
 		for(int l=0;l<height;l++)
-		{	ZoneTile tile = zone.getTile(l,width);			
+		{	ZoneHollowTile tile = zone.getTile(l,width);			
 			zone.removeTile(tile);
 		}
 		

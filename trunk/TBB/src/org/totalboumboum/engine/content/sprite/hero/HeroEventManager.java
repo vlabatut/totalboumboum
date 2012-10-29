@@ -32,6 +32,7 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
+import org.totalboumboum.engine.content.feature.action.crush.SpecificCrush;
 import org.totalboumboum.engine.content.feature.action.cry.SpecificCry;
 import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.feature.action.exult.SpecificExult;
@@ -83,6 +84,8 @@ public class HeroEventManager extends EventManager
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
+		else if(event.getAction() instanceof SpecificCrush)
+			actionCrush(event);
 		else if(event.getAction() instanceof SpecificTransmit)
 			actionTransmit(event);
 	}
@@ -115,6 +118,40 @@ public class HeroEventManager extends EventManager
 				}
 				// stats
 				StatisticAction statAction = StatisticAction.BOMB_PLAYER;
+				long statTime = sprite.getLoopTime();
+				String statActor = explosedBy;
+				String statTarget = sprite.getPlayer().getId();
+				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+				sprite.addStatisticEvent(statEvent);
+				// other lifes remaining?
+				StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.HERO_LIFE);
+				if(stateAbility.isActive())
+				{	// if the life ability is present, then its use is necessarily >0 (else the manager would've removed it
+					sprite.modifyUse(stateAbility,-1);
+				}
+				else
+				{	AbstractPlayer player = sprite.getPlayer(); 
+					if(player!=null)
+						player.setOut();
+				}
+				// state
+				gesture = GestureName.BURNING;
+				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
+			}
+		}
+	}
+
+	private void actionCrush(ActionEvent event)
+	{	if(gesture.equals(GestureName.PUNCHING) 
+			|| gesture.equals(GestureName.PUSHING) 
+			|| gesture.equals(GestureName.WAITING) 
+			|| gesture.equals(GestureName.STANDING) 
+			|| gesture.equals(GestureName.WALKING))
+		{	//StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_FIRE_PROTECTION); //NOTE maybe should check for life or another protection
+			//if(!ability.isActive())
+			{	
+				// stats
+				StatisticAction statAction = StatisticAction.BOMB_PLAYER; //NOTE maybe a new statistical event should be defined for being crushed
 				long statTime = sprite.getLoopTime();
 				String statActor = explosedBy;
 				String statTarget = sprite.getPlayer().getId();

@@ -38,6 +38,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
@@ -89,38 +90,50 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 		}
 		
 		// message
-		{	JTextPane textPane = new JTextPane();
-			textPane.setEditable(false);
-			textPane.setHighlighter(null);
-			textPane.setOpaque(true);
-			textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-	
-			// styles
-			StyledDocument doc = textPane.getStyledDocument();
-			SimpleAttributeSet sa = new SimpleAttributeSet();
-			// alignment
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
-			// font size
-			StyleConstants.setFontFamily(sa,"Courier");
-			StyleConstants.setFontSize(sa,font.getSize());
-			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
-			// color
-			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-			StyleConstants.setForeground(sa,fg);
-			// set
-			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
-			// text
-			try
-			{	doc.remove(0,doc.getLength());
-				for(String txt: text)
-					doc.insertString(doc.getLength(),txt+"\n",sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
-			textPane.setCaretPosition(0);
+		{	// note: a JTextPane was used before, but it was taking ages to appear (the first time)
+			JTextArea textArea = new JTextArea();
+			textArea.setEditable(false);
+			textArea.setHighlighter(null);
+			textArea.setOpaque(true);
+			textArea.setLineWrap(true);
+			textArea.setWrapStyleWord(true);
+			textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, font.getSize()));
+			for(String txt: text)
+				textArea.append(txt+"\n");
+			textArea.setCaretPosition(0);
 			
-			JScrollPane textPanel = new JScrollPane(textPane);
+//JTextPane textPane = new JTextPane();
+//textPane.setEditable(false);
+//textPane.setHighlighter(null);
+//textPane.setOpaque(true);
+////textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+//	
+//// styles
+//StyledDocument doc = textPane.getStyledDocument();
+//SimpleAttributeSet sa = new SimpleAttributeSet();
+//// alignment
+//StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
+//// font size
+//StyleConstants.setFontFamily(sa,"Courier");
+//StyleConstants.setFontSize(sa,font.getSize());
+//doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+//// color
+//Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+//StyleConstants.setForeground(sa,fg);
+//// set
+//doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
+//// text
+//try
+//{	doc.remove(0,doc.getLength());
+//	for(String txt: text)
+//		doc.insertString(doc.getLength(),txt+"\n",sa);
+//}
+//catch (BadLocationException e)
+//{	e.printStackTrace();
+//}
+//textPane.setCaretPosition(0);
+			
+			JScrollPane textPanel = new JScrollPane(textArea);
 			textPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			Dimension dim = new Dimension(getDataWidth(),textHeight);
 			textPanel.setPreferredSize(dim);

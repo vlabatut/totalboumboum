@@ -88,7 +88,7 @@ public class ZoneSaver
 			rowElement.setAttribute(XmlNames.POSITION,Integer.toString(row));
 			result.addContent(rowElement);
     		for(int col=0;col<width;col++)
-	    	{	ZoneTile tile = zone.getTile(row,col);
+	    	{	ZoneHollowTile tile = zone.getTile(row,col);
     			// process contant terms
         		String floor = tile.getFloor();
             	String block = tile.getBlock();

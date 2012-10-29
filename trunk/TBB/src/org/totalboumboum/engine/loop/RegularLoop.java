@@ -205,6 +205,7 @@ public class RegularLoop extends LocalLoop
 			updateLogs();
 			updateCelebration();
 			updateEntries();
+			updateSuddenDeath();
 			level.update();		
 			updateAis();
 			updateStats();

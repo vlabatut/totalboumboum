@@ -82,9 +82,12 @@ public class Bombset extends AbstractBombset
 	}
 	
 	/**
-	 * only for player-generated bombs
+	 * Only for player-generated bombs.
+	 * 
 	 * @param sprite
+	 * 		The sprite creating the bomb.
 	 * @return
+	 * 		The created bomb.
 	 */
 	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
@@ -147,7 +150,8 @@ public class Bombset extends AbstractBombset
 	
 	
 	/**
-	 * only for level-generated bombs
+	 * Only for level-generated bombs
+	 * 
 	 * @param tile
 	 * 		tile where the bomb should be dropped
 	 * @param name
@@ -157,7 +161,7 @@ public class Bombset extends AbstractBombset
 	 * @param duration
 	 * 		time bomb duration (can be negative if not a time bomb)
 	 * @return
-	 * @throws IOException 
+	 * 		The generated bomb.
 	 */
 	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration)
 	{	Bomb result = null;

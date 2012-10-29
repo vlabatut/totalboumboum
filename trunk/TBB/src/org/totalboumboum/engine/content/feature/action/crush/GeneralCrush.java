@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.action.trigger;
+package org.totalboumboum.engine.content.feature.action.crush;
 
 /*
  * Total Boum Boum
@@ -33,24 +33,30 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action d'activer l'explosion d'une remote bomb
+ * action de détruire un objet en atterissant dessus
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
  * 	<br>paramètre: actor=self
- * 	<br>paramètre: target=oui (bombe)
+ * 	<br>paramètre: target=oui (général: toutes les classes)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ *
+ * <p>ABILITY REFUSE
+ * 	<br>paramètre: actor=oui (bloc?)
+ * 	<br>paramètre: target=N/D
  * 	<br>paramètre: direction=N/D
  * 	<br>paramètre: strength=bool
  * 	<br>paramètre: kind=N/D
  * 	<br>paramètre: scope=N/D
  * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY REFUSE (généralement pas utilisé, mais possible)
- * 	<br>N/D
- * 
  * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=all
+ * 	<br>paramètre: actor=oui
+ * 	<br>paramètre: target=oui
  * 	<br>paramètre: direction=N/D
  * 	<br>paramètre: strength=bool
  * 	<br>paramètre: kind=N/D
@@ -58,20 +64,20 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>paramètre: restriction=N/D
  */
 /** 
- * asking a remote bomb to explode.
- * usually performed by a hero on.. well, on a bomb.
+ * destroying certain object by landing on the same tile,
+ * e.g.: block landing during sudden death.
  * 
- * 	<br>actor: 			any (probably hero)
- * 	<br>target: 		bomb
+ * 	<br>actor: 			any (probably a block or bomb)
+ * 	<br>target: 		any (not none)
  * 	<br>direction:		any or none
  * 	<br>contact:		any or none
- * 	<br>tilePosition:	any or undefined
+ * 	<br>tilePosition:	same
  * 	<br>orientation:	any or undefined
  * 
  * @author Vincent Labatut
  *
  */
-public class GeneralTrigger extends GeneralAction
+public class GeneralCrush extends GeneralAction
 {	/** Serial */
 	private static final long serialVersionUID = 1L;
 
@@ -79,7 +85,7 @@ public class GeneralTrigger extends GeneralAction
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** name of the action */
-	private final ActionName name = ActionName.TRIGGER;
+	private final ActionName name = ActionName.CRUSH;
 
 	public ActionName getName()
 	{	return name;	
@@ -93,10 +99,10 @@ public class GeneralTrigger extends GeneralAction
 //		Role.NONE,
 		Role.BLOCK,
 		Role.BOMB,
-		Role.FIRE,
-		Role.FLOOR,
-		Role.HERO,
-		Role.ITEM
+//		Role.FIRE,
+		Role.FLOOR
+//		Role.HERO,
+//		Role.ITEM
     });
 	
 	@Override
@@ -113,12 +119,12 @@ public class GeneralTrigger extends GeneralAction
 	/** role of the targeted sprite */
 	private static final List<Role> allowedTargets = Arrays.asList(new Role[]{
 //		Role.NONE,
-//		Role.BLOCK,
-		Role.BOMB
-//		Role.FIRE,
-//		Role.FLOOR,
-//		Role.HERO,
-//		Role.ITEM
+		Role.BLOCK,
+		Role.BOMB,
+		Role.FIRE,
+		Role.FLOOR,
+		Role.HERO,
+		Role.ITEM
     });
 	
 	@Override
@@ -174,11 +180,11 @@ public class GeneralTrigger extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	// TILE POSITIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** positions of the target in termes of tiles */
+	/** positions of the target in terms of tiles */
 	private static final List<TilePosition> allowedTilePositions = Arrays.asList(new TilePosition[]{
-		TilePosition.NONE,
-		TilePosition.NEIGHBOR,
-		TilePosition.REMOTE,
+//		TilePosition.NONE,
+//		TilePosition.NEIGHBOR,
+//		TilePosition.REMOTE,
 		TilePosition.SAME
     });
 	
@@ -197,10 +203,10 @@ public class GeneralTrigger extends GeneralAction
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
 		Orientation.NONE,
 		Orientation.BACK,
-		Orientation.OTHER,
 		Orientation.FACE,
-		Orientation.NEUTRAL
-    });
+		Orientation.NEUTRAL,
+		Orientation.OTHER,
+     });
 
 	@Override
 	public void addOrientation(Orientation orientation)
@@ -213,8 +219,8 @@ public class GeneralTrigger extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public GeneralTrigger copy()
-	{	GeneralTrigger result = new GeneralTrigger();
+	public GeneralCrush copy()
+	{	GeneralCrush result = new GeneralCrush();
 		super.copy(result);
 		return result;
 	}

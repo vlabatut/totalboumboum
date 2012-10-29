@@ -44,7 +44,7 @@ public abstract class AbstractAbility implements Serializable
 	protected float strength;
 
 	public boolean isActive()
-	{	return strength>0;		
+	{	return strength>0;
 	}
 
 	public float getStrength()
@@ -57,6 +57,17 @@ public abstract class AbstractAbility implements Serializable
 	
 	public void setStrength(float strength)
 	{	this.strength = strength;
+	}
+	
+	public boolean isAsStrong(AbstractAbility ability)
+	{	boolean result = strength >= ability.getStrength();
+		return result;
+	}
+	
+	public int compareStrength(AbstractAbility ability)
+	{	float temp = strength - ability.getStrength();
+		int result = (int)Math.signum(temp);
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

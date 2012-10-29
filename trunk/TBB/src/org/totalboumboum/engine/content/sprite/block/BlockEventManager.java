@@ -21,13 +21,17 @@ package org.totalboumboum.engine.content.sprite.block;
  * 
  */
 
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import org.totalboumboum.engine.content.feature.ability.ActionAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
+import org.totalboumboum.engine.content.feature.action.crush.SpecificCrush;
+import org.totalboumboum.engine.content.feature.action.land.SpecificLand;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -54,12 +58,21 @@ public class BlockEventManager extends EventManager
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
+		else if(event.getAction() instanceof SpecificCrush)
+			actionCrush(event);
 	}
 
 	private void actionConsume(ActionEvent event)
 	{	if(gesture.equals(GestureName.STANDING))
 		{	gesture = GestureName.BURNING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+
+	private void actionCrush(ActionEvent event)
+	{	// crushed by a block: just disappear //NOTE could also have a specific animation
+		if(gesture.equals(GestureName.STANDING))
+		{	endSprite();
 		}
 	}
 
@@ -78,12 +91,18 @@ public class BlockEventManager extends EventManager
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
 			engAnimeOver(event);
+		else if(event.getName().equals(EngineEvent.COLLIDING_ON))
+			engCollidingOn(event);
 		else if(event.getName().equals(EngineEvent.DELAY_OVER))
 			engDelayOver(event);
+		else if(event.getName().equals(EngineEvent.TRAJECTORY_OVER))
+			engTrajectoryOver(event);
 		else if(event.getName().equals(EngineEvent.ROUND_ENTER))
 			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
+		else if(event.getName().equals(EngineEvent.START_FALL))
+			engStartFall(event);
 	}		
 
 	private void engAnimeOver(EngineEvent event)
@@ -124,6 +143,21 @@ public class BlockEventManager extends EventManager
 		}
 	}
 
+	private void engCollidingOn(EngineEvent event)
+	{	// bouncing : bouncing on the obstacle
+		if(gesture.equals(GestureName.BOUNCING))
+		{	spriteDirection = spriteDirection.getOpposite();
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,false);
+		}
+		// sliding : the block stops in the center of the tile
+		else if(gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING_FAILING))
+		{	gesture = GestureName.STANDING;
+			spriteDirection = Direction.NONE;
+			sprite.center();
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+
 	private void engDelayOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.HIDING) && event.getStringParameter().equals(DelayManager.DL_SPAWN))
 		{	SpecificAction specificAction = new SpecificAppear(sprite/*,Direction.NONE*/);
@@ -149,6 +183,59 @@ public class BlockEventManager extends EventManager
 		}
 	}
 	
+	private void engTrajectoryOver(EngineEvent event)
+	{	// the sprite is currently bouncing
+		if(gesture.equals(GestureName.BOUNCING))
+		{	SpecificAction specificAction = new SpecificLand(sprite);
+			ActionAbility ability = sprite.modulateAction(specificAction);
+			// the sprite is allowed to land
+			if(ability.isActive())
+				gesture = GestureName.LANDING;
+			// the sprite is not allowed to land
+			else
+				gesture = GestureName.BOUNCING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+		// the sprite is falling (sudden death)
+		else if(gesture.equals(GestureName.FALLING))
+		{	SpecificAction action = new SpecificLand(sprite);
+			ActionAbility a = sprite.modulateAction(action);
+System.out.println("["+sprite.getTile().getRow()+","+sprite.getTile().getCol()+"] FALLING finished, landing authorization="+a.isActive());		
+			// the sprite is allowed to land
+			if(a.isActive())
+			{	gesture = GestureName.LANDING;
+				spriteDirection = Direction.DOWN;
+			}
+			else
+			{	gesture = GestureName.BOUNCING;
+				// bounces in a random direction
+				spriteDirection = Direction.getRandomPrimaryDirection();
+				//spriteDirection = Direction.LEFT;
+			}
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+		// the sprite is landing
+		else if(gesture.equals(GestureName.LANDING))
+		{	//spriteDirection = Direction.NONE;
+			gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			Tile tile = sprite.getTile();
+			Block block = (Block) sprite;
+			block.crushTile(tile);
+		}
+		// the sprite has been punched
+		else if(gesture.equals(GestureName.PUNCHED))
+		{	SpecificAction action = new SpecificLand(sprite);
+			ActionAbility a = sprite.modulateAction(action);
+			// the sprite is allowed to land
+			if(a.isActive())
+				gesture = GestureName.LANDING;
+			else
+				gesture = GestureName.BOUNCING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);			
+		}
+	}
+
 	private void engEnter(EngineEvent event)
 	{	if(gesture.equals(GestureName.NONE))
 		{	gesture = GestureName.ENTERING;
@@ -167,6 +254,14 @@ public class BlockEventManager extends EventManager
 		}
 		else if(gesture.equals(GestureName.ENTERING))
 		{	sprite.addIterDelay(DelayManager.DL_START,1);			
+		}
+	}
+
+	private void engStartFall(EngineEvent event)
+	{	if(gesture.equals(GestureName.NONE))
+		{	gesture = GestureName.FALLING;
+System.out.println("["+sprite.getTile().getRow()+","+sprite.getTile().getCol()+"] Starting FALLING");		
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
 

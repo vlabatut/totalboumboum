@@ -32,6 +32,8 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.block.Block;
+import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
@@ -387,15 +389,24 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double speedCoeff = sprite.getCurrentSpeedCoeff();
 		shiftX = xMove*currentTrajectory.getXInteraction()*milliPeriod*speedCoeff/1000;
+		shiftY = yMove*currentTrajectory.getYInteraction()*milliPeriod*speedCoeff/1000;
+		shiftZ = 0;
 //if(sprite instanceof Hero)
-//{	System.out.println("xMove: "+xMove);
+//if(sprite instanceof Block && sprite.getTile().getCol()==8 && sprite.getTile().getRow()==8 )
+//{	System.out.println("currentPosX: "+currentPosX);
+//	System.out.println("currentPosY: "+currentPosY);
+//	System.out.println("currentPosZ: "+currentPosZ);
+//	System.out.println("xMove: "+xMove);
+//	System.out.println("yMove: "+yMove);
+//	System.out.println("shiftX: "+shiftX);
+//	System.out.println("shiftY: "+shiftY);
+//	System.out.println("shiftZ: "+shiftZ);
 //	System.out.println("currentTrajectory.getXInteraction(): "+currentTrajectory.getXInteraction());
+//	System.out.println("currentTrajectory.getYInteraction(): "+currentTrajectory.getYInteraction());
 //	System.out.println("milliPeriod: "+milliPeriod);
 //	System.out.println("speedCoeff: "+speedCoeff);
 //	System.out.println("----------------------------");
 //}
-		shiftY = yMove*currentTrajectory.getYInteraction()*milliPeriod*speedCoeff/1000;
-		shiftZ = 0;
 		
 		// is the trajectory terminated ?
 		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
@@ -516,9 +527,9 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 		{	TrajectoryStep trajectoryStep = i.next();
 			nextTime = nextTime + trajectoryStep.getDuration();
 			nextStep = trajectoryStep;
-			nextX = nextX+nextStep.getXShift();
-			nextY = nextY+nextStep.getYShift();				
-			nextZ = nextZ+nextStep.getZShift(getBoundToSprite());				
+			nextX = nextX + nextStep.getXShift();
+			nextY = nextY + nextStep.getYShift();				
+			nextZ = nextZ + nextStep.getZShift(getBoundToSprite());				
 		}
 		while(nextTime<trajectoryTime && i.hasNext());
 		// round

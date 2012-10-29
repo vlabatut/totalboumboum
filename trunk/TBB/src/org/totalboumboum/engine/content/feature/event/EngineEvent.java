@@ -92,6 +92,8 @@ public class EngineEvent extends AbstractEvent
 	/** the engine signals a sprite it must appear */
 //	public static final String SHOW_UP = "SHOW_UP";
 	
+	/** the engine makes the sprite fall from the skies (sudden death) */
+	public static final String START_FALL = "START_FALL";
 	/** the engine signals the sprite he as to finish itself */
 	public static final String END_SPRITE = "END_SPRITE";
 	

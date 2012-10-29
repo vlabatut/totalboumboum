@@ -21,7 +21,9 @@ package org.totalboumboum.gui.frames;
  * 
  */
 
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.RepaintManager;
 import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
@@ -38,6 +40,7 @@ import org.xml.sax.SAXException;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -171,6 +174,10 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		JLayeredPane layeredPane = getLayeredPane();
 //		layeredPane.setLayout(new BoxLayout(layeredPane,BoxLayout.PAGE_AXIS));
 		layeredPane.add(modalDialogPanel,JLayeredPane.MODAL_LAYER);
+//JPanel panel = new JPanel();
+//panel.setBackground(Color.RED);
+//panel.add(new JLabel("32516546dsfjklm sdfoksd fosdk cmlwxck wmxlckopqsdfkqsojkfopdwjcvfmjdowopdwjcvpowj"));
+//layeredPane.add(panel);
 	}
 	
 	public void unsetModalDialog()
