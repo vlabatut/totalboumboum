@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201213.adapter.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
@@ -1895,6 +1896,38 @@ public abstract class AiZone
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SUDDEN DEATH				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map associant à chaque temps une liste de sprites apparaissant lors de la mort subite */
+	protected HashMap<Long,List<AiSprite>> suddenDeathEvents = new HashMap<Long, List<AiSprite>>();
+
+/**
+ * TODO
+ * peut être une autre représentation ? une classe spécifique ?
+ * 	liste d'évènements serait plus pratique
+ */
+	
+	/**
+	 * Renvoie la liste des sprites qui vont apparaitre lors du prochain
+	 * évènement de mort subite. La liste est vide si aucun évènements ne
+	 * doit se produire (en particulier si aucune mort subite n'est prévue).
+	 * 
+	 * @return
+	 * 		Une liste de sprite (peut être vide).
+	 */
+	public List<AiSprite> getNextSuddenDeathEvent()
+	{	List<AiSprite> result = new ArrayList<AiSprite>();
+		TreeSet<Long> keys = new TreeSet<Long>(suddenDeathEvents.keySet());
+		Iterator<Long> it = keys.iterator();
+		if(it.hasNext())
+		{	Long key = it.next();
+			result.addAll(suddenDeathEvents.get(key));
+		}
+		return result;
+	}
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// MISC						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
