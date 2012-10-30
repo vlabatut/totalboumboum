@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
@@ -74,7 +75,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public final class AiDataZone extends AiZone
 {	
 	/**
-	 * construit une représentation du niveau passé en paramètre,
+	 * Construit une représentation du niveau passé en paramètre,
 	 * du point de vue du joueur passé en paramètre.
 	 * 
 	 * @param level
@@ -89,13 +90,14 @@ public final class AiDataZone extends AiZone
 		initTime();
 //		updateMatrix();
 		initOwnHero();
+		initSuddenDeath();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cette représentation ainsi que tous ses constituants.
+	 * Met à jour cette représentation ainsi que tous ses constituants.
 	 * usage interne, méthode non-destinée à la création des agent.
 	 * 
 	 * @param elapsedTime
@@ -106,13 +108,14 @@ public final class AiDataZone extends AiZone
 		updateMatrix(elapsedTime);
 		updateSpriteLists();
 		updateMeta();
+		updateSuddenDeath();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * initialise les constantes temporelles pour la partie en cours
+	 * Initialise les constantes temporelles pour la partie en cours
 	 */
 	private void initTime()
 	{	// init
@@ -126,7 +129,7 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * met à jour les données temporelles
+	 * Met à jour les données temporelles
 	 * 
 	 * @param elapsedTime
 	 * 		le temps écoulé
@@ -146,7 +149,7 @@ public final class AiDataZone extends AiZone
 	// META DATA		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * met à jour des données qui ne sont pas directement reliées
+	 * Met à jour des données qui ne sont pas directement reliées
 	 * à l'action en cours, telles que l'évolution du classement des joueurs
 	 */
 	private void updateMeta()
@@ -250,7 +253,7 @@ public final class AiDataZone extends AiZone
 	}	
 	
 	/**
-	 * met à jour la matrice en fonction de l'évolution du jeu
+	 * Met à jour la matrice en fonction de l'évolution du jeu.
 	 * 
 	 * @param elapsedTime
 	 * 		le temps écoulé
@@ -745,6 +748,25 @@ public final class AiDataZone extends AiZone
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SUDDEN DEATH				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Initialise la map contenant les évènements décrivant
+	 * la mort subite. Cette map peut être vide s'il n'y a pas de mort
+	 * subite.
+	 */
+	private void initSuddenDeath()
+	{	suddenDeathEvents = new HashMap<Long, List<AiSprite>>();
+		
+	}
+	
+	private void updateSuddenDeath()
+	{	while(totalTime>eventTime)
+			// remove event from list
+		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
