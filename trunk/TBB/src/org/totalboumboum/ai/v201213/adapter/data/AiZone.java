@@ -1899,8 +1899,8 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	// SUDDEN DEATH				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map associant à chaque temps une liste de sprites apparaissant lors de la mort subite */
-	protected HashMap<Long,List<AiSprite>> suddenDeathEvents = new HashMap<Long, List<AiSprite>>();
+	/** Liste associant à chaque temps une liste de sprites apparaissant lors de la mort subite */
+	protected List<AiSuddenDeathEvent> suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 
 /**
  * TODO

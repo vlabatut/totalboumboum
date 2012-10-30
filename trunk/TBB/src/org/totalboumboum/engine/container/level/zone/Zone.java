@@ -188,6 +188,16 @@ public class Zone implements Serializable
 	}
 	
 	/**
+	 * Returns all remaining sudden death events.
+	 * 
+	 * @return
+	 * 		A map containing all remaining sudden death events.
+	 */
+	public HashMap<Long,List<ZoneTile>> getEventsInit()
+	{	return eventsInit;
+	}
+	
+	/**
 	 * Returns sudden death events occuring in
 	 * the specified period.
 	 * 

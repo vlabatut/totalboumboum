@@ -36,9 +36,11 @@ import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
@@ -757,7 +759,14 @@ public final class AiDataZone extends AiZone
 	 * subite.
 	 */
 	private void initSuddenDeath()
-	{	suddenDeathEvents = new HashMap<Long, List<AiSprite>>();
+	{	// init
+		VisibleLoop loop = level.getLoop();
+		Round round = loop.getRound();
+		HollowLevel hollowLevel = round.getHollowLevel();
+		hollowLevel.get
+		
+		// reset
+		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 		
 	}
 	
