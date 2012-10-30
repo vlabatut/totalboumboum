@@ -1565,6 +1565,8 @@ public class Launcher
 	/**
 	 * TODO mort subite
 	 * 
+	 * - désactiver les sorties texte
+	 * 
 	 * - mettre à jour configuration partie rapide pour évènements
 	 *   (proposer plusieurs choix standard de mort subite + activer/désactiver)
 	 * - gérer l'envoi des évènements via réseau/fichier (cf. TODO TODO)

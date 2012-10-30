@@ -321,7 +321,7 @@ public class HollowLevel implements Serializable
 		EngineEvent enterEvent = new EngineEvent(EngineEvent.ROUND_ENTER);
 		enterEvent.setDirection(Direction.NONE);
 		
-		// create them
+		// create the sprites
 		Tile[][] matrix = level.getMatrix();
 		for(ZoneTile zoneTile: tiles)
 		{	// create the sprites
