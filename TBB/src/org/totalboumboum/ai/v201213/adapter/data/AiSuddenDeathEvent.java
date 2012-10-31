@@ -37,7 +37,7 @@ public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEven
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Instant associé à cet évènement */
-	private long time;
+	protected long time;
 	
 	/**
 	 * Renvoie l'instant associé à cet évènement.

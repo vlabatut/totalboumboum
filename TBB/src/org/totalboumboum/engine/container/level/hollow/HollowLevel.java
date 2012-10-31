@@ -29,9 +29,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.bombset.Bombset;
 import org.totalboumboum.engine.container.fireset.Fireset;
@@ -170,7 +173,7 @@ public class HollowLevel implements Serializable
 				double y = globalUpY + RoundVariables.scaledTileDimension/2 + row*RoundVariables.scaledTileDimension;
 				matrix[row][col] = new Tile(level,row,col,x,y);
 
-				initSprites(m[row][col],matrix[row][col],true);
+				initSprites(m[row][col],matrix[row][col],true,false);
 			}
 		}
 		level.initTileList();
@@ -193,21 +196,23 @@ public class HollowLevel implements Serializable
 	 * 		Tile to contain the created sprites.
 	 * @param force
 	 * 		Force the creation of floor when not specified.
+	 * @param fake
+	 * 		Do not insert the sprites in the level (for the AI API).
 	 * @return
 	 * 		The list of created sprites.
 	 */
-	private List<Sprite> initSprites(ZoneTile zoneTile, Tile tile, boolean force)
+	private List<Sprite> initSprites(ZoneTile zoneTile, Tile tile, boolean force, boolean fake)
 	{	List<Sprite> result = new ArrayList<Sprite>();
 	
 		// floors
 		String floorName = zoneTile.getFloor();
 		if(floorName==null && force)
-		{	Floor floor = theme.makeFloor(tile);
+		{	Floor floor = theme.makeFloor(tile,fake);
 			level.insertSpriteTile(floor);
 			result.add(floor);
 		}
 		else if(floorName!=null)
-		{	Floor floor = theme.makeFloor(floorName,tile);
+		{	Floor floor = theme.makeFloor(floorName,tile,fake);
 			level.insertSpriteTile(floor);
 			result.add(floor);
 		}
@@ -215,7 +220,7 @@ public class HollowLevel implements Serializable
 		// blocks
 		String blockName = zoneTile.getBlock();
 		if(blockName!=null)
-		{	Block block = theme.makeBlock(blockName,tile);
+		{	Block block = theme.makeBlock(blockName,tile,fake);
 			level.insertSpriteTile(block);
 			result.add(block);
 		}
@@ -224,7 +229,7 @@ public class HollowLevel implements Serializable
 		String itemName = zoneTile.getItem();
 		if(itemName!=null)
 		{	Itemset itemset = instance.getItemset();
-			Item item = itemset.makeItem(itemName,tile);
+			Item item = itemset.makeItem(itemName,tile,fake);
 			level.insertSpriteTile(item);				
 			result.add(item);
 		}
@@ -239,7 +244,7 @@ public class HollowLevel implements Serializable
 			String name = "";
 			for(int i=0;i<temp.length-2;i++)
 				name = name + temp[i];
-			Bomb bomb = bombset.makeBomb(name,tile,range,duration);
+			Bomb bomb = bombset.makeBomb(name,tile,range,duration,fake);
 			if(bomb==null)
 				System.err.println("makeBomb error: sprite "+name+" not found.");
 			
@@ -328,7 +333,7 @@ public class HollowLevel implements Serializable
 			int col = zoneTile.getCol();
 			int row = zoneTile.getRow();
 			Tile tile = matrix[row][col];
-			List<Sprite> sprites = initSprites(zoneTile, tile, false);
+			List<Sprite> sprites = initSprites(zoneTile, tile, false, false);
 			
 			// checks if there's a block amongst them
 			Iterator<Sprite> it = sprites.iterator();
@@ -357,6 +362,35 @@ System.out.println("["+tile.getRow()+","+tile.getCol()+"] sudden death event pro
 					sprite.processEvent(fallEvent);
 			}
 		}
+	}
+	
+	/**
+	 * Deestined to be used by the AI API, in order to initialize
+	 * its internal representation of the sudden death.
+	 * 
+	 * @return
+	 * 		A list of fake sprites used to initalize {@link AiSuddenDeathEvent}.
+	 */
+	public HashMap<Long,List<Sprite>> getSuddenDeathSpriteList()
+	{	HashMap<Long,List<Sprite>> result = new HashMap<Long, List<Sprite>>();
+	 	HashMap<Long, List<ZoneTile>> map = zone.getEventsInit();
+	 	
+		Tile[][] matrix = level.getMatrix();
+		for(Entry<Long, List<ZoneTile>> entry: map.entrySet())
+		{	long time = entry.getKey();
+			
+			List<ZoneTile> tiles = entry.getValue();
+			for(ZoneTile zoneTile: tiles)
+			{	int col = zoneTile.getCol();
+				int row = zoneTile.getRow();
+				Tile tile = matrix[row][col];
+				
+				List<Sprite> sprites = initSprites(zoneTile, tile, false, true);
+				result.put(time, sprites);
+			}
+		}
+	 	
+		return result;
 	}
 	
 	/**
@@ -425,20 +459,20 @@ System.out.println("["+tile.getRow()+","+tile.getCol()+"] sudden death event pro
 		
 		// floors
 		if(role==Role.FLOOR)
-		{	sprite = theme.makeFloor(name,matrix[row][col]);
+		{	sprite = theme.makeFloor(name,matrix[row][col],false);
 			sprite.setId(id);
 		}
 		
 		// blocks
 		else if(role==Role.BLOCK)
-		{	sprite = theme.makeBlock(name,matrix[row][col]);
+		{	sprite = theme.makeBlock(name,matrix[row][col],false);
 			sprite.setId(id);
 		}
 		
 		// items
 		else if(role==Role.ITEM)
 		{	Itemset itemset = instance.getItemset();
-			sprite = itemset.makeItem(name,matrix[row][col]);
+			sprite = itemset.makeItem(name,matrix[row][col],false);
 			sprite.setId(id);
 		}
 		
@@ -449,7 +483,7 @@ System.out.println("["+tile.getRow()+","+tile.getCol()+"] sudden death event pro
 			if(!names[1].equalsIgnoreCase(null))
 				color = PredefinedColor.valueOf(names[1]);
 			Bombset bombset = instance.getBombsetMap().getBombset(color);
-			sprite = bombset.makeBomb(names[0],matrix[row][col],0,-1);
+			sprite = bombset.makeBomb(names[0],matrix[row][col],0,-1,false);
 			sprite.setId(id);
 		}
 		

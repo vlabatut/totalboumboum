@@ -37,6 +37,20 @@ import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
  */
 public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 {	
+	/**
+	 * Creates a new event with the specified time
+	 * and sprites.
+	 * 
+	 * @param time
+	 * 		Time of this sudden death event.
+	 * @param sprites
+	 * 		Sprites destined to appear during this event.
+	 */
+	public AiDataSuddenDeathEvent(long time, List<AiSprite> sprites)
+	{	this.time = time;
+		sprites.addAll(sprites);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -70,28 +70,32 @@ public class Theme extends AbstractTheme
 	{	floors.put(name,floorFactory);
 	}
 	
-	public Floor makeFloor(Tile tile)
+	public Floor makeFloor(Tile tile, boolean fake)
 	{	Entry<String,FloorFactory> entry = floors.entrySet().iterator().next();
 		Floor result = entry.getValue().makeSprite(tile);
 		
 		// record/transmit event
-		String name = entry.getKey();
-		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.writeEvent(event);
+		if(!fake)
+		{	String name = entry.getKey();
+			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
+		}
 		
 		//result.initGesture();
 		return result;
 	}
 	
-	public Floor makeFloor(String name, Tile tile)
+	public Floor makeFloor(String name, Tile tile, boolean fake)
 	{	FloorFactory ff = floors.get(name);
 if(ff==null)
 	System.err.println("makeFloor: sprite '"+name+"' not found");
 		Floor result = ff.makeSprite(tile);
 		
 		// record/transmit event
-		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.writeEvent(event);
+		if(!fake)
+		{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
+		}
 
 		//result.initGesture();
 		return result;
@@ -106,7 +110,7 @@ if(ff==null)
 	{	blocks.put(name,blocFactory);
 	}
 	
-	public Block makeBlock(String name, Tile tile)
+	public Block makeBlock(String name, Tile tile, boolean fake)
 	{	BlockFactory bf = blocks.get(name);
 if(bf==null)
 	System.err.println("makeBlock: sprite '"+name+"' not found");
@@ -114,8 +118,10 @@ if(bf==null)
 //NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !
 		
 		// record/transmit event
-		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.writeEvent(event);
+		if(!fake)
+		{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
+		}
 
 		//result.initGesture();
 		return result;

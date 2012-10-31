@@ -160,10 +160,12 @@ public class Bombset extends AbstractBombset
 	 * 		bomb range
 	 * @param duration
 	 * 		time bomb duration (can be negative if not a time bomb)
+	 * @param fake
+	 * 		sprite not inserted in the level (for the AI API).
 	 * @return
 	 * 		The generated bomb.
 	 */
-	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration)
+	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration, boolean fake)
 	{	Bomb result = null;
 		BombFactory bombFactory = null;
 		if(name==null)
@@ -186,9 +188,12 @@ public class Bombset extends AbstractBombset
 				ability.setFrame(true);
 				result.addDirectAbility(ability);
 			}
+			
 			// record/transmit event
-			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-			RoundVariables.writeEvent(event);
+			if(!fake)
+			{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+				RoundVariables.writeEvent(event);
+			}
 		}
 		
 		return result;
