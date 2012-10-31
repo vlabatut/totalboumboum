@@ -41,7 +41,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.zone.ZoneTile;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -763,17 +765,49 @@ public final class AiDataZone extends AiZone
 		VisibleLoop loop = level.getLoop();
 		Round round = loop.getRound();
 		HollowLevel hollowLevel = round.getHollowLevel();
-		hollowLevel.get
-		
-		// reset
 		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 		
+		// insert events
+		HashMap<Long,List<Sprite>> map = hollowLevel.getSuddenDeathSpriteList();
+		for(Entry<Long, List<Sprite>> entry: map.entrySet())
+		{	long time = entry.getKey();
+			List<Sprite> sprites = entry.getValue();
+			List<AiSprite> aiSprites = new ArrayList<AiSprite>();
+			for(Sprite s: sprites)
+			{	// tile
+				Tile t = s.getTile();
+				int col = t.getCol();
+				int row = t.getRow();
+				AiDataTile tile = matrix[row][col];
+				
+				// block
+				if(s instanceof Block)
+				{	Block b = (Block) s;
+					AiDataBlock block = new AiDataBlock(tile,b);
+					aiSprites.add(block);
+				}
+				// bombs
+				else if(s instanceof Block)
+				{	Bomb b = (Bomb) s;
+					AiDataBomb bomb = new AiDataBomb(tile,b);
+					aiSprites.add(bomb);
+				}
+				else if(s instanceof Item)
+				// item
+				{	Item i = (Item) s;
+					AiDataItem item = new AiDataItem(tile,i);
+					aiSprites.add(item);
+				}
+			}
+				
+			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(time,aiSprites);
+		}
 	}
 	
 	private void updateSuddenDeath()
 	{	while(totalTime>eventTime)
 			// remove event from list
-		
+		// TODO TODO don't process : use the hollowlevel (or zone)
 	}
 	
 	/////////////////////////////////////////////////////////////////

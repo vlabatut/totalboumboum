@@ -67,7 +67,7 @@ public class Itemset extends AbstractItemset
 	{	itemFactories.put(name,itemFactory);		
 	}
 	
-	public Item makeItem(String name, Tile tile)
+	public Item makeItem(String name, Tile tile, boolean fake)
 	{	Item result = null;
 		ItemFactory itemFactory = itemFactories.get(name);
 if(itemFactory==null)
@@ -75,8 +75,10 @@ if(itemFactory==null)
 		result = itemFactory.makeSprite(tile);
 
 		// record/transmit event
-		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.writeEvent(event);
+		if(!fake)
+		{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
+		}
 
 		//result.initGesture();
 		return result;
