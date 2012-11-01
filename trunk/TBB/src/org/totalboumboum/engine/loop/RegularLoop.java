@@ -161,7 +161,7 @@ public class RegularLoop extends LocalLoop
 				int number = entry.getValue();
 				for(int k=0;k<number;k++)
 				{	// create item
-					Item item = itemset.makeItem(name,tile);
+					Item item = itemset.makeItem(name,tile,false);
 					// add item
 					hero.addInitialItem(item);
 					// hide item
