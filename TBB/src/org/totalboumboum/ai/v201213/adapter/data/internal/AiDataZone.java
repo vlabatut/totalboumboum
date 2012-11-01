@@ -22,11 +22,13 @@ package org.totalboumboum.ai.v201213.adapter.data.internal;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
@@ -41,9 +43,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.level.zone.ZoneTile;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -801,13 +803,37 @@ public final class AiDataZone extends AiZone
 			}
 				
 			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(time,aiSprites);
+			suddenDeathEvents.add(event);
 		}
+		Collections.sort(suddenDeathEvents);
 	}
 	
+	/**
+	 * Met à jour la map contenant les évènements décrivant
+	 * la mort subite.
+	 */
 	private void updateSuddenDeath()
-	{	while(totalTime>eventTime)
-			// remove event from list
-		// TODO TODO don't process : use the hollowlevel (or zone)
+	{	if(!suddenDeathEvents.isEmpty())
+		{	// init
+			VisibleLoop loop = level.getLoop();
+			Round round = loop.getRound();
+			HollowLevel hollowLevel = round.getHollowLevel();
+			Zone zone = hollowLevel.getZone();
+			HashMap<Long, List<ZoneTile>> events = zone.getEventsInit();
+			
+			// update
+			if(events.isEmpty())
+				suddenDeathEvents.clear();
+			else 
+			{	long time0 = suddenDeathEvents.get(0).getTime();
+				TreeSet<Long> times = new TreeSet<Long>(events.keySet());
+				long time = times.first();
+				while(time0!=time && !suddenDeathEvents.isEmpty())
+				{	suddenDeathEvents.remove(0);
+					time0 = suddenDeathEvents.get(0).getTime();
+				}
+			}
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
