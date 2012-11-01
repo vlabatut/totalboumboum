@@ -187,7 +187,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 				int number = entry.getValue();
 				for(int k=0;k<number;k++)
 				{	// create item
-					Item item = itemset.makeItem(name,tile);
+					Item item = itemset.makeItem(name,tile,false);
 					// add item
 					hero.addInitialItem(item);
 					// hide item
@@ -358,7 +358,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							HollowLevel hollowLevel = round.getHollowLevel();
 							BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
 							Bombset bombset = bombsetMap.getBombset(null);
-							Bomb bomb = bombset.makeBomb(null,tile,range,duration);
+							Bomb bomb = bombset.makeBomb(null,tile,range,duration,false);
 							SpecificAction appearAction = new SpecificAppear(bomb);
 							ActionAbility actionAbility = bomb.modulateAction(appearAction);
 							if(actionAbility.isActive())
