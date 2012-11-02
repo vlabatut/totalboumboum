@@ -143,10 +143,10 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	/**
-	 * met à jour la portée des bombes posées par ce joueur
+	 * Met à jour la portée des bombes posées par ce joueur.
 	 * 
 	 * @param delta
-	 * 		la modification à apporter à la portée des bombes
+	 * 		La modification à apporter à la portée des bombes.
 	 */
 	protected void updateBombRange(int delta)
 	{	AiSimBomb proto = new AiSimBomb(bombPrototype,null);
@@ -215,6 +215,16 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	@Override
 	public double getWalkingSpeed()
 	{	return walkingSpeed;	
+	}
+	
+	/**
+	 * Met à jour la portée des bombes posées par ce joueur.
+	 * 
+	 * @param delta
+	 * 		La modification à apporter à la portée des bombes.
+	 */
+	protected void updateWalkingSpeed(int delta)
+	{	// TODO TODO
 	}
 	
 	/////////////////////////////////////////////////////////////////

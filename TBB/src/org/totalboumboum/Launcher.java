@@ -1569,10 +1569,10 @@ public class Launcher
 	 * 
 	 * - mettre à jour configuration partie rapide pour évènements
 	 *   (proposer plusieurs choix standard de mort subite + activer/désactiver)
-	 * - gérer l'envoi des évènements via réseau/fichier (cf. TODO TODO)
-	 * - gérer la réception des mêmes évènements
+	 * - évènements
+	 * 		- envoi des évènements via réseau/fichier (cf. TODO TODO)
+	 * 		- réception des mêmes évènements
 	 * - màj l'api :
-	 * 		- accès aux infos concernant le shrink
 	 * 		- prise en compte du shrink dans le modèle
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
@@ -1584,6 +1584,18 @@ public class Launcher
 	 * 		- item count tenant compte des évènements
 	 * 
 	 * - bugs :
+	 * 
+	 * 
+	 * 
+	 * TODO nouveaux items
+	 * - à faire :
+	 * 		- full model (AiFullModel.pickItem):
+	 * 			- gérer les changement de vitesse d'un joueur (aussi dans AiSimHero.updateWalkingSpeed)
+	 * 			- gérer l'aspect temporel de certains malus
+	 * 			- gérer aussi leur aspect contagieux
+	 * 		- ressources
+	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
+	 *  
 	 */
 	
 }

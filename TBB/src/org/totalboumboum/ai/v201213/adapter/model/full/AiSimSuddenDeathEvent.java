@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201213.adapter.data.internal;
+package org.totalboumboum.ai.v201213.adapter.model.full;
 
 /*
  * Total Boum Boum
@@ -26,6 +26,11 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
+import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataBlock;
+import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataBomb;
+import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataItem;
+import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataSprite;
+import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataTile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
@@ -40,7 +45,7 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * @author Vincent Labatut
  *
  */
-public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
+public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 {	
 	/**
 	 * Creates a new event with the specified time
@@ -53,7 +58,7 @@ public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 	 * @param sprites
 	 * 		Sprites destined to appear during this event.
 	 */
-	public AiDataSuddenDeathEvent(AiDataTile[][] matrix, long time, List<Sprite> sprites)
+	public AiSimSuddenDeathEvent(AiDataTile[][] matrix, long time, List<Sprite> sprites)
 	{	// time
 		this.time = time;
 		
@@ -92,7 +97,7 @@ public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste de sprites apparaissant à l'instant associé à cet évènement */
-	private List<AiDataSprite<?>> sprites = new ArrayList<AiDataSprite<?>>();
+	private List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
 	
 	@Override
 	public List<AiSprite> getSprites()
