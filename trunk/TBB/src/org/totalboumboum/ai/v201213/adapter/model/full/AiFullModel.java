@@ -1334,12 +1334,53 @@ if(sprite instanceof AiSimBomb)
 	 */
 	private void pickItem(AiSimHero hero, AiSimItem item)
 	{	AiItemType type = item.getType();
-		if(type==AiItemType.EXTRA_BOMB)
+	
+		// bombs
+		if(type==AiItemType.NO_BOMB)
+		{	hero.updateBombNumberMax(Integer.MIN_VALUE);
+			// NOTE actually temporary, but this should exceed the simulated duration
+		}
+		else if(type==AiItemType.ANTI_BOMB)
+		{	hero.updateBombNumberMax(-1);
+		}
+		else if(type==AiItemType.EXTRA_BOMB)
 		{	hero.updateBombNumberMax(+1);
+		}
+		else if(type==AiItemType.GOLDEN_BOMB)
+		{	hero.updateBombNumberMax(+10);
+		}
+		
+		// range
+		if(type==AiItemType.NO_FLAME)
+		{	hero.updateBombRange(Integer.MIN_VALUE);
+			// NOTE actually temporary, but this should exceed the simulated duration
+		}
+		else if(type==AiItemType.ANTI_FLAME)
+		{	hero.updateBombRange(-1);
 		}
 		else if(type==AiItemType.EXTRA_FLAME)
 		{	hero.updateBombRange(1);
 		}
+		else if(type==AiItemType.GOLDEN_FLAME)
+		{	hero.updateBombRange(+10);
+		}
+		
+		// speed
+		if(type==AiItemType.NO_SPEED)
+		{	hero.updateWalkingSpeed(Integer.MIN_VALUE);
+			// NOTE actually temporary, but this should exceed the simulated duration
+		}
+		else if(type==AiItemType.ANTI_SPEED)
+		{	hero.updateWalkingSpeed(-1);
+		}
+		else if(type==AiItemType.EXTRA_SPEED)
+		{	hero.updateWalkingSpeed(1);
+		}
+		else if(type==AiItemType.GOLDEN_SPEED)
+		{	hero.updateWalkingSpeed(+10);
+		}
+		
+		// others
 		else if(type==AiItemType.MALUS)
 		{	// nothing to do (can't know what the effect is)
 			// or maybe deal with the contagious aspect?

@@ -37,7 +37,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
-import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
@@ -774,35 +773,7 @@ public final class AiDataZone extends AiZone
 		for(Entry<Long, List<Sprite>> entry: map.entrySet())
 		{	long time = entry.getKey();
 			List<Sprite> sprites = entry.getValue();
-			List<AiSprite> aiSprites = new ArrayList<AiSprite>();
-			for(Sprite s: sprites)
-			{	// tile
-				Tile t = s.getTile();
-				int col = t.getCol();
-				int row = t.getRow();
-				AiDataTile tile = matrix[row][col];
-				
-				// block
-				if(s instanceof Block)
-				{	Block b = (Block) s;
-					AiDataBlock block = new AiDataBlock(tile,b);
-					aiSprites.add(block);
-				}
-				// bombs
-				else if(s instanceof Block)
-				{	Bomb b = (Bomb) s;
-					AiDataBomb bomb = new AiDataBomb(tile,b);
-					aiSprites.add(bomb);
-				}
-				else if(s instanceof Item)
-				// item
-				{	Item i = (Item) s;
-					AiDataItem item = new AiDataItem(tile,i);
-					aiSprites.add(item);
-				}
-			}
-				
-			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(time,aiSprites);
+			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(matrix,time,sprites);
 			suddenDeathEvents.add(event);
 		}
 		Collections.sort(suddenDeathEvents);

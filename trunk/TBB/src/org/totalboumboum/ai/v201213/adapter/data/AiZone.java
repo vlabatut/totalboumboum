@@ -43,7 +43,7 @@ import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente la zone de jeu et tous ces constituants : cases et sprites.
+ * Représente la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
  * 
  * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
