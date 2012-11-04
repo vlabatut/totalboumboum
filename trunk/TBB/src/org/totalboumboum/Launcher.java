@@ -1569,11 +1569,12 @@ public class Launcher
 	 * 
 	 * - mettre à jour configuration partie rapide pour évènements
 	 *   (proposer plusieurs choix standard de mort subite + activer/désactiver)
-	 * - évènements
+	 * - évènements sd
 	 * 		- envoi des évènements via réseau/fichier (cf. TODO TODO)
 	 * 		- réception des mêmes évènements
 	 * - màj l'api :
 	 * 		- prise en compte du shrink dans le modèle
+	 * 		- màj des tests des modèles de l'API
 	 * 		- voir si les items sont bien décomptés dans les deux AiZones
 	 * 		- implémenter un cache automatique. 
 	 * 			- deux maps : 
@@ -1591,7 +1592,9 @@ public class Launcher
 	 * - adapter les niveaux existants pour qu'il y ait la mort subite originale
 	 * 
 	 * - à tester :
-	 * 		- item count tenant compte des évènements
+	 * 		- distribution des items tenant compte des évènements dans la GUI
+	 * 		- item count tenant compte des évènements (ou pas ?) dans l'API
+	 * 		- simulation correcte des évènements SD
 	 * 
 	 * - bugs :
 	 * 
