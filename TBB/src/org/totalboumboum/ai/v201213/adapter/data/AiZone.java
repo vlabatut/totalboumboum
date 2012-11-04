@@ -549,39 +549,45 @@ public abstract class AiZone
 	protected final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
 	
 	/** 
-	 * renvoie la liste des items apparents contenus dans cette zone 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des items apparents contenus dans cette zone.
+	 * La liste peut être vide.
+	 * <p/>
+	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
 	 * 
 	 * @return	
-	 * 		liste de tous les items contenus dans cette zone
+	 * 		Liste de tous les items contenus dans cette zone.
 	 */
 	public abstract List<AiItem> getItems();
 	
 	/**
-	 * renvoie le nombre d'items cachés restant dans le niveau.
+	 * Renvoie le nombre d'items cachés restant dans le niveau.
 	 * Il s'agit des items qui sont encore cachés dans des blocs, 
 	 * et qui n'ont pas été ramassés. Cette information permet de
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
+	 * <p/>
+	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
 	 * 
 	 * @return	
-	 * 		le nombre d'items restant à découvrir
+	 * 		Le nombre d'items restant à découvrir.
 	 */
 	public int getHiddenItemsCount()
 	{	return hiddenItemsCount;		
 	}
 	
 	/**
-	 * renvoie le nombre d'items cachés restant dans le niveau, pour un type donné.
+	 * Renvoie le nombre d'items cachés restant dans le niveau, pour un type donné.
 	 * Il s'agit des items qui sont encore cachés dans des blocs, 
 	 * et qui n'ont pas été ramassés. Cette information permet de
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
+	 * <p/>
+	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
 	 * 
 	 * @param type
-	 * 		le type d'items à considérer
+	 * 		Le type d'items à considérer.
 	 * @return	
-	 * 		le nombre d'items de ce type restant à découvrir
+	 * 		Le nombre d'items de ce type restant à découvrir.
 	 */
 	public int getHiddenItemsCount(AiItemType type)
 	{	Integer result = hiddenItemsCounts.get(type);
@@ -591,13 +597,15 @@ public abstract class AiZone
 	}
 	
 	/**
-	 * renvoie une HashMap contenant la proportion d'items restant
+	 * Renvoie une HashMap contenant la proportion d'items restant
 	 * cachés dans le niveau, par type d'item. Cette proportion peut
 	 * être assimilée à une probabilité : celle de découvrir un item
 	 * de ce type quand le mur qu'on fait exploser contient un item.
+	 * <p/>
+	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
 	 * 
 	 * @return
-	 * 		une HashMap contenant les probabilités associées à chaque type d'item
+	 * 		Une HashMap contenant les probabilités associées à chaque type d'item.
 	 */
 	public HashMap<AiItemType,Double> getHiddenItemsProbas()
 	{	HashMap<AiItemType,Double> result = new HashMap<AiItemType, Double>();
@@ -1903,6 +1911,10 @@ public abstract class AiZone
 
 	/**
 	 * Renvoie le prochain des évènements constituant la mort subite.
+	 * <p/>
+	 * Les items apparaissant éventuellement dans l'évènement renvoyé ne sont
+	 * pas comptés comme des items présents dans la zone de jeu. Ils le seront
+	 * uniquement après leur apparition.
 	 * 
 	 * @return
 	 * 		Un évènement de la mort subite.
@@ -1918,6 +1930,10 @@ public abstract class AiZone
 	 * Renvoie la liste de tous les évènements constituant la mort subite.
 	 * Elle est vide si aucun évènement ne doit se produire (en particulier 
 	 * si aucune mort subite n'est prévue).
+	 * <p/>
+	 * Les items apparaissant éventuellement dans la liste renvoyée ne sont
+	 * pas comptés comme des items présents dans la zone de jeu. Ils le seront
+	 * uniquement après leur apparition.
 	 * 
 	 * @return
 	 * 		Une liste d'évènements de mort subite.

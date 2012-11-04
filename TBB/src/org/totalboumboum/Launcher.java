@@ -1572,19 +1572,20 @@ public class Launcher
 	 * - évènements sd
 	 * 		- envoi des évènements via réseau/fichier (cf. TODO TODO)
 	 * 		- réception des mêmes évènements
-	 * - màj l'api :
+	 * - màj modèle :
 	 * 		- prise en compte du shrink dans le modèle
 	 * 		- màj des tests des modèles de l'API
-	 * 		- voir si les items sont bien décomptés dans les deux AiZones
-	 * 		- implémenter un cache automatique. 
-	 * 			- deux maps : 
-	 * 				- une associant une AiTile à un TileCache
-	 * 				- TileCache=map une associant un nom unique (nom de classe critère qualifié) à des objets
-	 * 			- dans les classes critères, imposer un appel au cache :
-	 * 				- si pas de valeur, on la calcule et on la met en cache
-	 * 				- si la valeur existe, il faut la récup et faire un transtypage
-	 * 			- penser à réinitialiser le cache à chaque itération
-	 * 		- utiliser une map sur les modes, contenant deux maps (ordre des combinaisons)
+	 * - màj api accès :
+	 * 
+	 * - cache automatique
+	 * 		- deux maps : 
+	 * 			- une associant une AiTile à un TileCache
+	 * 			- TileCache=map une associant un nom unique (nom de classe critère qualifié) à des objets
+	 * 		- dans les classes critères, imposer un appel au cache :
+	 * 			- si pas de valeur, on la calcule et on la met en cache
+	 * 			- si la valeur existe, il faut la récup et faire un transtypage
+	 * 		- penser à réinitialiser le cache à chaque itération
+	 * 	- utiliser une map sur les modes, contenant deux maps (ordre des combinaisons)
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max
@@ -1592,9 +1593,6 @@ public class Launcher
 	 * - adapter les niveaux existants pour qu'il y ait la mort subite originale
 	 * 
 	 * - à tester :
-	 * 		- distribution des items tenant compte des évènements dans la GUI
-	 * 		- item count tenant compte des évènements (ou pas ?) dans l'API
-	 * 		- simulation correcte des évènements SD
 	 * 
 	 * - bugs :
 	 * 

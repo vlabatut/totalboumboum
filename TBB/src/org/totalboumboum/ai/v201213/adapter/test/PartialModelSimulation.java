@@ -45,7 +45,7 @@ public final class PartialModelSimulation
 	 * 		Pas utilisé.
 	 */
 	public static void main(String args[])
-	{	AiSimZone zone = InitData.initZone();
+	{	AiSimZone zone = InitData.initZone1();
 		
 		// display initial zone
 		AiPartialModel model = new AiPartialModel(zone);

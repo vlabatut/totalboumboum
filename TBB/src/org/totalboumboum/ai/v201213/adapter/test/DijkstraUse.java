@@ -119,7 +119,7 @@ public final class DijkstraUse
 		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitData.initZone();
+		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -186,7 +186,7 @@ public final class DijkstraUse
 		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitData.initZone();
+		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -231,7 +231,7 @@ public final class DijkstraUse
 		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitData.initZone();
+		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -275,7 +275,7 @@ public final class DijkstraUse
 		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitData.initZone();
+		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -321,7 +321,7 @@ public final class DijkstraUse
 		ArtificialIntelligence ai = InitData.initAi();
 		
 		// on initialise la zone
-		AiSimZone zone = InitData.initZone();
+		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
