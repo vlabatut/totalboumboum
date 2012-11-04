@@ -133,13 +133,13 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * crée une simulation de la bombe passée en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param bomb	
-	 * 		sprite à simuler
 	 * @param tile	
 	 * 		case devant contenir le sprite
+	 * @param bomb	
+	 * 		sprite à simuler
 	 */
-	protected AiSimBomb(AiBomb bomb, AiSimTile tile)
-	{	super(bomb,tile);
+	protected AiSimBomb(AiSimTile tile, AiBomb bomb)
+	{	super(tile,bomb);
 	
 		// fuse
 		countdownTrigger = bomb.hasCountdownTrigger();
@@ -273,7 +273,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	public List<AiTile> getBlast()
 	{	// init
 		List<AiTile> result = new ArrayList<AiTile>();
-		AiSimFire fire = new AiSimFire(firePrototype,null);
+		AiSimFire fire = new AiSimFire(null,firePrototype);
 		
 		// center
 		result.add(tile);

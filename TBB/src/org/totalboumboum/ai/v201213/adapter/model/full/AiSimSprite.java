@@ -69,14 +69,14 @@ public abstract class AiSimSprite implements AiSprite
 	}
 
 	/**
-	 * construit une simulation du sprite passé en paramètre
+	 * Construit une simulation du sprite passé en paramètre.
 	 * 
-	 * @param sprite	
-	 * 		sprite à simuler
 	 * @param tile	
-	 * 		simulation de la case contenant le sprite
+	 * 		La simulation de la case contenant le sprite.
+	 * @param sprite	
+	 * 		Le sprite à simuler.
 	 */
-	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
+	protected AiSimSprite(AiSimTile tile, AiSprite sprite)
 	{	// general
 		state = new AiSimState(sprite);
 		burningDuration = sprite.getBurningDuration();

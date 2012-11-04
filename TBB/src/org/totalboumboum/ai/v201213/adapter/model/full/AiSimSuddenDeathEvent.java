@@ -24,23 +24,19 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
-import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataBlock;
-import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataBomb;
-import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataItem;
-import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataSprite;
-import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataTile;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.block.Block;
-import org.totalboumboum.engine.content.sprite.bomb.Bomb;
-import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 
 /**
  * Représente un évènement de la mort subite,
  * composé d'un instant exprimé en ms et d'un ensemble
  * de sprites destinés à apparaître à cet instant.
+ * Les sprites sont forcément des blocs, des items ou
+ * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
  *
@@ -51,46 +47,58 @@ public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 	 * Creates a new event with the specified time
 	 * and sprites.
 	 * 
-	 * @param matrix
-	 * 		Matrix of tiles composing the zone.
 	 * @param time
 	 * 		Time of this sudden death event.
 	 * @param sprites
 	 * 		Sprites destined to appear during this event.
 	 */
-	public AiSimSuddenDeathEvent(AiDataTile[][] matrix, long time, List<Sprite> sprites)
+	protected AiSimSuddenDeathEvent(long time, List<AiSimSprite> sprites)
 	{	// time
 		this.time = time;
 		
 		// sprites
-		List<AiDataSprite<?>> aiSprites = new ArrayList<AiDataSprite<?>>();
-		for(Sprite s: sprites)
+		this.sprites.addAll(sprites);
+	}
+	
+	/**
+	 * Creates a new event which is a copy of the specified one.
+	 * 
+	 * @param zone
+	 * 		Zone undergoing the event.
+	 * @param event
+	 * 		The event to be copied.
+	 */
+	protected AiSimSuddenDeathEvent(AiSimZone zone, AiSuddenDeathEvent event)
+	{	// time
+		this.time = event.getTime();
+		
+		// sprites
+		for(AiSprite s: event.getSprites())
 		{	// tile
-			Tile t = s.getTile();
+			AiTile t = s.getTile();
 			int col = t.getCol();
 			int row = t.getRow();
-			AiDataTile tile = matrix[row][col];
+			AiSimTile tile = zone.getTile(row,col);
 			
 			// block
-			if(s instanceof Block)
-			{	Block b = (Block) s;
-				AiDataBlock block = new AiDataBlock(tile,b);
-				aiSprites.add(block);
+			if(s instanceof AiBlock)
+			{	AiBlock b = (AiBlock) s;
+				AiSimBlock block = new AiSimBlock(tile,b);
+				this.sprites.add(block);
 			}
 			// bombs
-			else if(s instanceof Block)
-			{	Bomb b = (Bomb) s;
-				AiDataBomb bomb = new AiDataBomb(tile,b);
-				aiSprites.add(bomb);
+			else if(s instanceof AiBomb)
+			{	AiBomb b = (AiBomb) s;
+				AiSimBomb bomb = new AiSimBomb(tile,b);
+				this.sprites.add(bomb);
 			}
-			else if(s instanceof Item)
+			else if(s instanceof AiItem)
 			// item
-			{	Item i = (Item) s;
-				AiDataItem item = new AiDataItem(tile,i);
-				aiSprites.add(item);
+			{	AiItem i = (AiItem) s;
+				AiSimItem item = new AiSimItem(tile,i);
+				this.sprites.add(item);
 			}
 		}	
-		this.sprites.addAll(aiSprites);
 	}
 	
 	/////////////////////////////////////////////////////////////////

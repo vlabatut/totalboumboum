@@ -1902,12 +1902,10 @@ public abstract class AiZone
 	protected List<AiSuddenDeathEvent> suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 
 	/**
-	 * Renvoie la liste des sprites qui vont apparaitre lors du prochain
-	 * évènement de mort subite. La liste est vide si aucun évènements ne
-	 * doit se produire (en particulier si aucune mort subite n'est prévue).
+	 * Renvoie le prochain des évènements constituant la mort subite.
 	 * 
 	 * @return
-	 * 		Une liste de sprite (peut être vide).
+	 * 		Un évènement de la mort subite.
 	 */
 	public AiSuddenDeathEvent getNextSuddenDeathEvent()
 	{	AiSuddenDeathEvent result = null;
@@ -1916,6 +1914,17 @@ public abstract class AiZone
 		return result;
 	}
 	
+	/**
+	 * Renvoie la liste de tous les évènements constituant la mort subite.
+	 * Elle est vide si aucun évènement ne doit se produire (en particulier 
+	 * si aucune mort subite n'est prévue).
+	 * 
+	 * @return
+	 * 		Une liste d'évènements de mort subite.
+	 */
+	public List<AiSuddenDeathEvent> getAllSuddenDeathEvents()
+	{	return suddenDeathEvents;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// MISC						/////////////////////////////////////

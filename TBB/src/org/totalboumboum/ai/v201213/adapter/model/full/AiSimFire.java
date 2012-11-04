@@ -76,13 +76,13 @@ public final class AiSimFire extends AiSimSprite implements AiFire
 	 * crée une simulation du feu passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param fire	
-	 * 		sprite à simuler
 	 * @param tile	
 	 * 		case contenant le sprite
+	 * @param fire	
+	 * 		sprite à simuler
 	 */
-	protected AiSimFire(AiFire fire, AiSimTile tile)
-	{	super(fire,tile);
+	protected AiSimFire(AiSimTile tile, AiFire fire)
+	{	super(tile,fire);
 		
 		this.throughBlocks = fire.hasThroughBlocks();
 		this.throughBombs = fire.hasThroughBombs();

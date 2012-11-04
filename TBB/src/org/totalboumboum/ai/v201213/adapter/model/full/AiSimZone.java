@@ -38,6 +38,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiState;
 import org.totalboumboum.ai.v201213.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201213.adapter.data.AiStopType;
+import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -170,6 +171,13 @@ public final class AiSimZone extends AiZone
 		for(AiItemType type: AiItemType.values())
 		{	int value = zone.getHiddenItemsCount(type);
 			hiddenItemsCounts.put(type,value);
+		}
+		
+		// sudden death events
+		List<AiSuddenDeathEvent> sdEvents = zone.getAllSuddenDeathEvents();
+		for(AiSuddenDeathEvent event: sdEvents)
+		{	AiSim
+			
 		}
 		
 		// time

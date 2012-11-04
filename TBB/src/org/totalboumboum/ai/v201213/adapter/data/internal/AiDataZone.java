@@ -773,7 +773,7 @@ public final class AiDataZone extends AiZone
 		for(Entry<Long, List<Sprite>> entry: map.entrySet())
 		{	long time = entry.getKey();
 			List<Sprite> sprites = entry.getValue();
-			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(matrix,time,sprites);
+			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(this,time,sprites);
 			suddenDeathEvents.add(event);
 		}
 		Collections.sort(suddenDeathEvents);

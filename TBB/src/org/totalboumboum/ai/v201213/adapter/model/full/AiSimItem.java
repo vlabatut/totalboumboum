@@ -80,13 +80,13 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	 * crée une simulation de l'item passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param item
-	 * 		sprite à simuler
 	 * @param tile
 	 * 		case contenant le sprite
+	 * @param item
+	 * 		sprite à simuler
 	 */
-	protected AiSimItem(AiItem item, AiSimTile tile)
-	{	super(item,tile);
+	protected AiSimItem(AiSimTile tile, AiItem item)
+	{	super(tile,item);
 		
 		type = item.getType();		
 		stopBombs = item.hasStopBombs();

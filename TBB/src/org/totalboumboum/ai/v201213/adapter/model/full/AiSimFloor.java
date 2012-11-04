@@ -63,13 +63,13 @@ public final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * crée une simulation du sol passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param floor
-	 * 		sprite à simuler
 	 * @param tile
 	 * 		case contenant le sprite
+	 * @param floor
+	 * 		sprite à simuler
 	 */
-	protected AiSimFloor(AiFloor floor, AiSimTile tile)
-	{	super(floor,tile);		
+	protected AiSimFloor(AiSimTile tile, AiFloor floor)
+	{	super(tile,floor);		
 	}
 
 	/////////////////////////////////////////////////////////////////
