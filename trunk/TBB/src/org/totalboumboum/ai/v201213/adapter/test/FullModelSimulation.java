@@ -33,7 +33,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Classe utilisée pour tester les fonctionnalités de l'API IA.
- * Cette classe permet de réaliser des simulation en utilisant
+ * Cette classe permet de réaliser des simulations en utilisant
  * le modèle complet.
  * 
  * @author Vincent Labatut
@@ -49,7 +49,7 @@ public final class FullModelSimulation
 	 * 		Pas utilisé. 
 	 */
 	public static void main(String args[])
-	{	AiSimZone zone = InitData.initZone();
+	{	AiSimZone zone = InitData.initZone1();
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
 		// display initial zone

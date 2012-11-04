@@ -314,6 +314,14 @@ public class Zone implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Returns the number of items (both visible en hidden)
+	 * in this zone. Items appearing during the sudden death
+	 * are not counted.
+	 *  
+	 * @return
+	 * 		The numbers of items in this zone.
+	 */
 	public HashMap<String,Integer> getItemCount()
 	{	HashMap<String,Integer> result = new HashMap<String,Integer>();
 	
@@ -326,11 +334,11 @@ public class Zone implements Serializable
 		}
 		
 		// events
-    	for(List<ZoneTile> list: eventsInit.values())
-    	{	for(ZoneTile tile: list)
-	    	{	updateItemCount(tile,result);
-	    	}
-    	}
+//		for(List<ZoneTile> list: eventsInit.values())
+//    	{	for(ZoneTile tile: list)
+//	    	{	updateItemCount(tile,result);
+//	    	}
+//		}
 		
 		return result;
 	}
