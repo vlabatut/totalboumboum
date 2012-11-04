@@ -99,13 +99,13 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * crée une simulation du joueur passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param tile	
-	 * 		case contenant le sprite
 	 * @param hero	
 	 * 		sprite à simuler
+	 * @param tile	
+	 * 		case contenant le sprite
 	 */
-	protected AiSimHero(AiHero hero, AiSimTile tile)
-	{	super(hero,tile);
+	protected AiSimHero(AiSimTile tile, AiHero hero)
+	{	super(tile,hero);
 		
 		// bombs
 		bombPrototype = hero.getBombPrototype();
@@ -149,7 +149,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * 		La modification à apporter à la portée des bombes.
 	 */
 	protected void updateBombRange(int delta)
-	{	AiSimBomb proto = new AiSimBomb(bombPrototype,null);
+	{	AiSimBomb proto = new AiSimBomb(null,bombPrototype);
 		proto.updateRange(delta);
 		bombPrototype = proto;
 	}

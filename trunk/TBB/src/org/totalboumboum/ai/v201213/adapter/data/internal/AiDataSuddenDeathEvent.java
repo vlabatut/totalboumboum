@@ -36,6 +36,8 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * Représente un évènement de la mort subite,
  * composé d'un instant exprimé en ms et d'un ensemble
  * de sprites destinés à apparaître à cet instant.
+ * Les sprites sont forcément des blocs, des items ou
+ * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
  *
@@ -46,46 +48,44 @@ public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 	 * Creates a new event with the specified time
 	 * and sprites.
 	 * 
-	 * @param matrix
-	 * 		Matrix of tiles composing the zone.
+	 * @param zone
+	 * 		Zone undergoing the event.
 	 * @param time
 	 * 		Time of this sudden death event.
 	 * @param sprites
 	 * 		Sprites destined to appear during this event.
 	 */
-	public AiDataSuddenDeathEvent(AiDataTile[][] matrix, long time, List<Sprite> sprites)
+	public AiDataSuddenDeathEvent(AiDataZone zone, long time, List<Sprite> sprites)
 	{	// time
 		this.time = time;
 		
 		// sprites
-		List<AiDataSprite<?>> aiSprites = new ArrayList<AiDataSprite<?>>();
 		for(Sprite s: sprites)
 		{	// tile
 			Tile t = s.getTile();
 			int col = t.getCol();
 			int row = t.getRow();
-			AiDataTile tile = matrix[row][col];
+			AiDataTile tile = zone.getTile(row,col);
 			
 			// block
 			if(s instanceof Block)
 			{	Block b = (Block) s;
 				AiDataBlock block = new AiDataBlock(tile,b);
-				aiSprites.add(block);
+				this.sprites.add(block);
 			}
 			// bombs
-			else if(s instanceof Block)
+			else if(s instanceof Bomb)
 			{	Bomb b = (Bomb) s;
 				AiDataBomb bomb = new AiDataBomb(tile,b);
-				aiSprites.add(bomb);
+				this.sprites.add(bomb);
 			}
 			else if(s instanceof Item)
 			// item
 			{	Item i = (Item) s;
 				AiDataItem item = new AiDataItem(tile,i);
-				aiSprites.add(item);
+				this.sprites.add(item);
 			}
 		}	
-		this.sprites.addAll(aiSprites);
 	}
 	
 	/////////////////////////////////////////////////////////////////

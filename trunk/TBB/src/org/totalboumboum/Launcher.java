@@ -1574,6 +1574,16 @@ public class Launcher
 	 * 		- réception des mêmes évènements
 	 * - màj l'api :
 	 * 		- prise en compte du shrink dans le modèle
+	 * 		- voir si les items sont bien décomptés dans les deux AiZones
+	 * 		- implémenter un cache automatique. 
+	 * 			- deux maps : 
+	 * 				- une associant une AiTile à un TileCache
+	 * 				- TileCache=map une associant un nom unique (nom de classe critère qualifié) à des objets
+	 * 			- dans les classes critères, imposer un appel au cache :
+	 * 				- si pas de valeur, on la calcule et on la met en cache
+	 * 				- si la valeur existe, il faut la récup et faire un transtypage
+	 * 			- penser à réinitialiser le cache à chaque itération
+	 * 		- utiliser une map sur les modes, contenant deux maps (ordre des combinaisons)
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max

@@ -27,6 +27,8 @@ import java.util.List;
  * Représente un évènement de la mort subite,
  * composé d'un instant exprimé en ms et d'un ensemble
  * de sprites destinés à apparaître à cet instant.
+ * Les sprites sont forcément des blocs, des items ou
+ * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
  *
