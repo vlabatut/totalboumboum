@@ -844,6 +844,7 @@ public final class AiDataZone extends AiZone
 		ownHero = null;
 		
 		// misc
+		suddenDeathEvents.clear();
 		level = null;
 		player = null;
 	}

@@ -106,12 +106,25 @@ public class FireFactory extends SpriteFactory<Fire>
 	/////////////////////////////////////////////////////////////////
 	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name of this fireset */
 	private String firesetName;
 
+	/**
+	 * Changes the name of this fireset.
+	 *  
+	 * @param firesetName
+	 * 		The new name.
+	 */
 	public void setFiresetName(String firesetName)
 	{	this.firesetName = firesetName;	
 	}
 	
+	/**
+	 * Returns the name of this fireset.
+	 * 
+	 * @return
+	 * 		The name of this fireset.
+	 */
 	public String getFiresetName()
 	{	return firesetName;
 	}

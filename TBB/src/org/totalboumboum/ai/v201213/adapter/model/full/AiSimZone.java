@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
@@ -97,19 +98,19 @@ public final class AiSimZone extends AiZone
 				// blocks
 				List<AiBlock> blocks = tile.getBlocks();
 				for(AiBlock block: blocks)
-				{	AiSimBlock simBlock = new AiSimBlock(block,simTile);
+				{	AiSimBlock simBlock = new AiSimBlock(simTile, block);
 					addSprite(simBlock);
 				}
 				// bombs
 				List<AiBomb> bombs = tile.getBombs();
 				for(AiBomb bomb: bombs)
-				{	AiSimBomb simBomb = new AiSimBomb(bomb,simTile);
+				{	AiSimBomb simBomb = new AiSimBomb(simTile, bomb);
 					addSprite(simBomb);
 				}
 				// fires
 				List<AiFire> fires = tile.getFires();
 				for(AiFire fire: fires)
-				{	AiSimFire simFire = new AiSimFire(fire,simTile);
+				{	AiSimFire simFire = new AiSimFire(simTile, fire);
 					addSprite(simFire);
 				}
 				// floors
@@ -122,13 +123,13 @@ public final class AiSimZone extends AiZone
 				// heroes
 				List<AiHero> heroes = tile.getHeroes();
 				for(AiHero hero: heroes)
-				{	AiSimHero simHero = new AiSimHero(hero,simTile);
+				{	AiSimHero simHero = new AiSimHero(simTile, hero);
 					addSprite(simHero);
 				}
 				// items
 				List<AiItem> items = tile.getItems();
 				for(AiItem item: items)
-				{	AiSimItem simItem = new AiSimItem(item,simTile);
+				{	AiSimItem simItem = new AiSimItem(simTile, item);
 					addSprite(simItem);
 				}
 			}
@@ -141,7 +142,7 @@ public final class AiSimZone extends AiZone
 			{	AiTile tile = hero.getTile();
 				int row = tile.getRow();
 				int col = tile.getCol();
-				AiSimHero simHero = new AiSimHero(hero,matrix[row][col]);
+				AiSimHero simHero = new AiSimHero(matrix[row][col], hero);
 				internalHeroes.add(simHero);
 				externalHeroes.add(simHero);
 			}
@@ -176,8 +177,8 @@ public final class AiSimZone extends AiZone
 		// sudden death events
 		List<AiSuddenDeathEvent> sdEvents = zone.getAllSuddenDeathEvents();
 		for(AiSuddenDeathEvent event: sdEvents)
-		{	AiSim
-			
+		{	AiSimSuddenDeathEvent e = new AiSimSuddenDeathEvent(this, event);
+			suddenDeathEvents.add(e);
 		}
 		
 		// time
@@ -226,6 +227,9 @@ public final class AiSimZone extends AiZone
 		
 		// items
 		hiddenItemsCount = 0;
+		
+		// sudden death events
+		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 		
 		// time
 		totalTime = 0;
@@ -437,7 +441,7 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone.
+	 * Permet de rajouter un sprite dans cette zone.
 	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
@@ -1002,7 +1006,7 @@ public final class AiSimZone extends AiZone
 		
 		// create sprite
 		AiBomb bombPrototype = hero.getBombPrototype();
-		AiSimBomb result = new AiSimBomb(bombPrototype,t);
+		AiSimBomb result = new AiSimBomb(t, bombPrototype);
 
 		// update
 		addSprite(result);
@@ -1482,6 +1486,56 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// SUDDEN DEATH				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Crée un évènement de mort subite. Il se produira à l'instant spécifié
+	 * en ms, et verra apparaître les sprites indiqués dans la map passée en
+	 * paramètre. La clé de cette map est une case, dans laquelle les sprites
+	 * composant la valeur (une liste) apparaîtront lors de l'évènement.
+	 * <p/>
+	 * Les sprites doivent avoir été créés avec l'une des méthodes {@code createXxxx} 
+	 * de cette classe, et surtout sans sans préciser leur case à la création (i.e.
+	 * en utilisant la valeur {@code null} à la place de la case). En effet, si vous précisez
+	 * une case, le sprite est directement inséré dans la zone de jeu, ce qui est en
+	 * conflit avec la définition d'un évènement. Pour compenser, la case doit
+	 * être indiquée lors de la création del'évènement, en tant que clé de la map passée
+	 * en paramètre.
+	 * <p/>
+	 * Ce sont bien les sprites passés en paramètre, et pas des copies, qui vont
+	 * être utilisés pour créer l'évènement.
+	 * 
+	 * @param time
+	 * 		Instant de l'évènement à créer.
+	 * @param sprites
+	 * 		Map contenant les sprites devant apparaître, et la case d'apparition.
+	 * @return
+	 * 		L'évènement correspondant (qui est aussi enregistré dans cette zone).
+	 */
+	public AiSuddenDeathEvent createSuddenDeathEvent(long time, HashMap<AiTile, List<AiSprite>> sprites)
+	{	List<AiSimSprite> s = new ArrayList<AiSimSprite>();
+		
+		for(Entry<AiTile,List<AiSprite>> entry: sprites.entrySet())
+		{	AiTile tile = entry.getKey();
+			AiSimTile t = matrix[tile.getRow()][tile.getCol()];
+			double posX = t.getPosX();
+			double posY = t.getPosY();
+			double posZ = 0;
+			List<AiSprite> list = entry.getValue();
+			for(AiSprite sprite: list)
+			{	AiSimSprite sprt = (AiSimSprite)sprite;
+				sprt.setTile(t);
+				sprt.setPos(posX, posY, posZ);
+				s.add(sprt);
+			}
+		}
+		
+		AiSuddenDeathEvent result = new AiSimSuddenDeathEvent(time, s);
+		suddenDeathEvents.add(result);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
@@ -1518,5 +1572,8 @@ public final class AiSimZone extends AiZone
 		// items
 		internalItems.clear();
 		externalItems.clear();
+		
+		// sudden death events
+		suddenDeathEvents.clear();
 	}
 }
