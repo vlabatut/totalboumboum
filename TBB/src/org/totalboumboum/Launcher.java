@@ -1565,8 +1565,6 @@ public class Launcher
 	/**
 	 * TODO mort subite
 	 * 
-	 * - désactiver les sorties texte
-	 * 
 	 * - mettre à jour configuration partie rapide pour évènements
 	 *   (proposer plusieurs choix standard de mort subite + activer/désactiver)
 	 * - évènements sd
@@ -1595,7 +1593,7 @@ public class Launcher
 	 * - à tester :
 	 * 
 	 * - bugs :
-	 * 
+	 * 		- mort subite : les éléments qui vont tomber sont déjà là au début du jeu !
 	 * 
 	 * 
 	 * TODO nouveaux items

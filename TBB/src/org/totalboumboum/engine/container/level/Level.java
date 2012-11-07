@@ -273,6 +273,19 @@ public class Level
 		spritesMap.put(sprite.getId(),sprite);
 		sprite.getTile().addSprite(sprite);
 	}
+
+	/**
+	 * Like insertSpriteTile, but no insertion
+	 * in the tile (the sprite is not really
+	 * a part of the game, yet).
+	 * 
+	 * @param sprite
+	 * 		The sprite to be inserted.
+	 */
+	public void addSprite(Sprite sprite)
+	{	spritesList.add(sprite);
+		spritesMap.put(sprite.getId(),sprite);
+	}
 	
 	public List<Sprite> getSprites()
 	{	return spritesList;

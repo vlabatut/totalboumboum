@@ -41,6 +41,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
@@ -117,8 +118,8 @@ public class Bombset extends AbstractBombset
 			// record/transmit event
 			String name = bf.getBombName();
 			name = name + "/" + bf.getColor();
-			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-			RoundVariables.writeEvent(event);
+			SpriteCreationEvent creationEvent = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(creationEvent);
 		}
 
 		return result;
@@ -160,12 +161,12 @@ public class Bombset extends AbstractBombset
 	 * 		bomb range
 	 * @param duration
 	 * 		time bomb duration (can be negative if not a time bomb)
-	 * @param fake
+	 * @param insert
 	 * 		sprite not inserted in the level (for the AI API).
 	 * @return
 	 * 		The generated bomb.
 	 */
-	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration, boolean fake)
+	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration)
 	{	Bomb result = null;
 		BombFactory bombFactory = null;
 		if(name==null)
@@ -189,11 +190,8 @@ public class Bombset extends AbstractBombset
 				result.addDirectAbility(ability);
 			}
 			
-			// record/transmit event
-			if(!fake)
-			{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-				RoundVariables.writeEvent(event);
-			}
+			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
 		}
 		
 		return result;

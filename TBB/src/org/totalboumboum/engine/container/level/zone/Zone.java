@@ -197,26 +197,6 @@ public class Zone implements Serializable
 	{	return eventsInit;
 	}
 	
-	/**
-	 * Returns sudden death events occuring in
-	 * the specified period.
-	 * 
-	 * @param currentGameTime
-	 * 		Current game time.
-	 * @return
-	 * 		List of tiles containing sprites to appear during sudden death.
-	 */
-	public List<ZoneTile> getEventsInit(long currentGameTime)
-	{	List<ZoneTile> result = new ArrayList<ZoneTile>();
-		SortedSet<Long> times = new TreeSet<Long>(eventsInit.keySet());
-		SortedSet<Long> head = times.headSet(currentGameTime);
-		for(Long time: head)
-		{	result.addAll(eventsInit.get(time));
-			eventsInit.remove(time);
-		}
-		return result;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ZONE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

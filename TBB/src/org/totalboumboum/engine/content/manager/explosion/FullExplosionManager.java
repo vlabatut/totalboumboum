@@ -37,6 +37,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
@@ -99,6 +100,9 @@ public class FullExplosionManager extends ExplosionManager
 				}
 				else
 				{	RoundVariables.level.insertSpriteTile(fire);
+					SpriteInsertionEvent event = new SpriteInsertionEvent(fire);
+					RoundVariables.writeEvent(event);
+					//
 					SpecificDetonate detonateAction = new SpecificDetonate(sprite,Direction.NONE);
 					ActionEvent evt = new ActionEvent(detonateAction);
 					fire.processEvent(evt);
@@ -143,6 +147,9 @@ public class FullExplosionManager extends ExplosionManager
 								else
 								{	goOn = true;
 									RoundVariables.level.insertSpriteTile(fire);
+									SpriteInsertionEvent event = new SpriteInsertionEvent(fire);
+									RoundVariables.writeEvent(event);
+									//
 									SpecificDetonate detonateAction = new SpecificDetonate(sprite,direction);
 									ActionEvent evt = new ActionEvent(detonateAction);
 									fire.processEvent(evt);
