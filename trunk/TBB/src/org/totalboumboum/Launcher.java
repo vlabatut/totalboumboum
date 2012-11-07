@@ -1606,6 +1606,7 @@ public class Launcher
 	 *  - adapter simplet pour être sûr que tout est ok
 	 *  - noter les modifs dans le changelog
 	 *  - màj le document de l'API
+	 *  - rajouter la deuxième map dans l'utility manager (une par mode)
 	 */
 	
 }
