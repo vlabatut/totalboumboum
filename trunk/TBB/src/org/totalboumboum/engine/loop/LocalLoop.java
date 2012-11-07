@@ -85,6 +85,7 @@ import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.display.DisplayEffectiveUsage;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.PlayerLocation;
@@ -173,9 +174,12 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			pauseAis.add(false);
 			lastActionAis.add(0l);
 			
-			// record/transmit event
-			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
-			RoundVariables.writeEvent(spriteEvent);
+			// record/transmit creation event
+			SpriteCreationEvent creationEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.writeEvent(creationEvent);
+			// record/transmit insertion event
+			SpriteInsertionEvent insertionEvent = new SpriteInsertionEvent(player.getSprite());
+			RoundVariables.writeEvent(insertionEvent);
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
@@ -187,7 +191,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 				int number = entry.getValue();
 				for(int k=0;k<number;k++)
 				{	// create item
-					Item item = itemset.makeItem(name,tile,false);
+					Item item = itemset.makeItem(name,tile);
 					// add item
 					hero.addInitialItem(item);
 					// hide item
@@ -358,11 +362,14 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							HollowLevel hollowLevel = round.getHollowLevel();
 							BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
 							Bombset bombset = bombsetMap.getBombset(null);
-							Bomb bomb = bombset.makeBomb(null,tile,range,duration,false);
+							Bomb bomb = bombset.makeBomb(null,tile,range,duration);
 							SpecificAction appearAction = new SpecificAppear(bomb);
 							ActionAbility actionAbility = bomb.modulateAction(appearAction);
 							if(actionAbility.isActive())
 							{	level.insertSpriteTile(bomb);
+								SpriteInsertionEvent event = new SpriteInsertionEvent(bomb);
+								RoundVariables.writeEvent(event);
+								//
 								SpecificDrop dropAction = new SpecificDrop(tile,bomb);
 								ActionEvent evt = new ActionEvent(dropAction);
 								bomb.processEvent(evt);

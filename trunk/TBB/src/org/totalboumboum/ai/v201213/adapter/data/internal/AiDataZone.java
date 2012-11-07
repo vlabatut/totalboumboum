@@ -42,6 +42,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.hollow.SuddenDeathEvent;
 import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.level.zone.ZoneTile;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -769,10 +770,10 @@ public final class AiDataZone extends AiZone
 		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 		
 		// insert events
-		HashMap<Long,List<Sprite>> map = hollowLevel.getSuddenDeathSpriteList();
-		for(Entry<Long, List<Sprite>> entry: map.entrySet())
-		{	long time = entry.getKey();
-			List<Sprite> sprites = entry.getValue();
+		List<SuddenDeathEvent> sdeList = hollowLevel.getSuddenDeathEvents();
+		for(SuddenDeathEvent sde: sdeList)
+		{	long time = sde.getTime();
+			HashMap<Tile,List<Sprite>> sprites = sde.getSprites();
 			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(this,time,sprites);
 			suddenDeathEvents.add(event);
 		}
@@ -789,16 +790,14 @@ public final class AiDataZone extends AiZone
 			VisibleLoop loop = level.getLoop();
 			Round round = loop.getRound();
 			HollowLevel hollowLevel = round.getHollowLevel();
-			Zone zone = hollowLevel.getZone();
-			HashMap<Long, List<ZoneTile>> events = zone.getEventsInit();
+			List<SuddenDeathEvent> events = hollowLevel.getSuddenDeathEvents();
 			
 			// update
 			if(events.isEmpty())
 				suddenDeathEvents.clear();
 			else 
 			{	long time0 = suddenDeathEvents.get(0).getTime();
-				TreeSet<Long> times = new TreeSet<Long>(events.keySet());
-				long time = times.first();
+				long time = events.get(0).getTime();
 				while(time0!=time && !suddenDeathEvents.isEmpty())
 				{	suddenDeathEvents.remove(0);
 					time0 = suddenDeathEvents.get(0).getTime();

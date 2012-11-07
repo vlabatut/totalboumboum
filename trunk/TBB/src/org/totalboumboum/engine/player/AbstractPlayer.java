@@ -55,6 +55,7 @@ public abstract class AbstractPlayer
 		tempHeroFactory.setInstance(RoundVariables.instance);
 		sprite = tempHeroFactory.makeSprite(tile);
 		RoundVariables.level.insertSpriteTile(sprite);
+// NOTE should send a sprite creation event? what about insertion?		
 		
 		sprite.setPlayer(this);
 	}

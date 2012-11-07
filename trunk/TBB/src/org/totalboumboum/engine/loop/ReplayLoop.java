@@ -59,6 +59,7 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.ReplayedPlayer;
 import org.totalboumboum.game.profile.Profile;
@@ -248,12 +249,20 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		
 				// process events
 				for(ReplayEvent event: events)
-				{	// sprite creation
-					if(event instanceof SpriteCreationEvent)
+				{	// sprite insertion
+					if(event instanceof SpriteInsertionEvent)
+					{	SpriteInsertionEvent siEvent = (SpriteInsertionEvent) event;
+						int id = siEvent.getSpriteId();
+						Sprite sprite = level.getSprite(id);
+						sprite.getTile().addSprite(sprite); // add to the tile (complete the below process)
+					}
+					
+					// sprite creation
+					else if(event instanceof SpriteCreationEvent)
 					{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
 						HollowLevel hollowLevel = round.getHollowLevel();
 						Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-						level.insertSpriteTile(sprite);
+						level.insertSpriteTile(sprite); // just add to the level lists, not in the tile
 					}
 					
 					// sprite anime change

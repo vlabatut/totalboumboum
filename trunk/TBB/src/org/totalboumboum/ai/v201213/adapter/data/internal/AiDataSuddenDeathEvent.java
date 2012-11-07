@@ -22,7 +22,9 @@ package org.totalboumboum.ai.v201213.adapter.data.internal;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
@@ -52,40 +54,44 @@ public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 	 * 		Zone undergoing the event.
 	 * @param time
 	 * 		Time of this sudden death event.
-	 * @param sprites
+	 * @param spriteMap
 	 * 		Sprites destined to appear during this event.
 	 */
-	public AiDataSuddenDeathEvent(AiDataZone zone, long time, List<Sprite> sprites)
+	public AiDataSuddenDeathEvent(AiDataZone zone, long time, HashMap<Tile,List<Sprite>> spriteMap)
 	{	// time
 		this.time = time;
 		
-		// sprites
-		for(Sprite s: sprites)
+		// tiles
+		for(Entry<Tile, List<Sprite>> entry: spriteMap.entrySet())
 		{	// tile
-			Tile t = s.getTile();
+			Tile t = entry.getKey();
 			int col = t.getCol();
 			int row = t.getRow();
 			AiDataTile tile = zone.getTile(row,col);
 			
-			// block
-			if(s instanceof Block)
-			{	Block b = (Block) s;
-				AiDataBlock block = new AiDataBlock(tile,b);
-				this.sprites.add(block);
+			// sprites
+			List<Sprite> sprites = entry.getValue();
+			for(Sprite s: sprites)
+			{	// block
+				if(s instanceof Block)
+				{	Block b = (Block) s;
+					AiDataBlock block = new AiDataBlock(tile,b);
+					this.sprites.add(block);
+				}
+				// bombs
+				else if(s instanceof Bomb)
+				{	Bomb b = (Bomb) s;
+					AiDataBomb bomb = new AiDataBomb(tile,b);
+					this.sprites.add(bomb);
+				}
+				else if(s instanceof Item)
+				// item
+				{	Item i = (Item) s;
+					AiDataItem item = new AiDataItem(tile,i);
+					this.sprites.add(item);
+				}
 			}
-			// bombs
-			else if(s instanceof Bomb)
-			{	Bomb b = (Bomb) s;
-				AiDataBomb bomb = new AiDataBomb(tile,b);
-				this.sprites.add(bomb);
-			}
-			else if(s instanceof Item)
-			// item
-			{	Item i = (Item) s;
-				AiDataItem item = new AiDataItem(tile,i);
-				this.sprites.add(item);
-			}
-		}	
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

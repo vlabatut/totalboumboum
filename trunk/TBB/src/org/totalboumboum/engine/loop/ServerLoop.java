@@ -55,6 +55,7 @@ import org.totalboumboum.engine.loop.display.DisplayWaitMessage;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
@@ -152,10 +153,13 @@ public class ServerLoop extends LocalLoop
 			pauseAis.add(false);
 			lastActionAis.add(0l);
 			
-			// record/transmit event
-			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
-			RoundVariables.writeEvent(spriteEvent);
-			
+			// record/transmit creation event
+			SpriteCreationEvent creationEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.writeEvent(creationEvent);
+			// record/transmit insertion event
+			SpriteInsertionEvent insertionEvent = new SpriteInsertionEvent(player.getSprite());
+			RoundVariables.writeEvent(insertionEvent);
+
 			// level
 			Hero hero = (Hero)player.getSprite();
 //			level.addHero(hero,pl.getRow(),pl.getCol());
@@ -166,7 +170,7 @@ public class ServerLoop extends LocalLoop
 				int number = entry.getValue();
 				for(int k=0;k<number;k++)
 				{	// create item
-					Item item = itemset.makeItem(name,tile,false);
+					Item item = itemset.makeItem(name,tile);
 					// add item
 					hero.addInitialItem(item);
 					// hide item

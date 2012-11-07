@@ -34,6 +34,7 @@ import org.totalboumboum.engine.content.sprite.block.BlockFactory;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
@@ -70,32 +71,28 @@ public class Theme extends AbstractTheme
 	{	floors.put(name,floorFactory);
 	}
 	
-	public Floor makeFloor(Tile tile, boolean fake)
+	public Floor makeFloor(Tile tile)
 	{	Entry<String,FloorFactory> entry = floors.entrySet().iterator().next();
 		Floor result = entry.getValue().makeSprite(tile);
 		
-		// record/transmit event
-		if(!fake)
-		{	String name = entry.getKey();
-			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-			RoundVariables.writeEvent(event);
-		}
+		// record/transmit creation event
+		String name = entry.getKey();
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.writeEvent(event);
 		
 		//result.initGesture();
 		return result;
 	}
 	
-	public Floor makeFloor(String name, Tile tile, boolean fake)
+	public Floor makeFloor(String name, Tile tile)
 	{	FloorFactory ff = floors.get(name);
 if(ff==null)
 	System.err.println("makeFloor: sprite '"+name+"' not found");
 		Floor result = ff.makeSprite(tile);
 		
-		// record/transmit event
-		if(!fake)
-		{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-			RoundVariables.writeEvent(event);
-		}
+		// record/transmit creation event
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.writeEvent(event);
 
 		//result.initGesture();
 		return result;
@@ -110,19 +107,17 @@ if(ff==null)
 	{	blocks.put(name,blocFactory);
 	}
 	
-	public Block makeBlock(String name, Tile tile, boolean fake)
+	public Block makeBlock(String name, Tile tile)
 	{	BlockFactory bf = blocks.get(name);
 if(bf==null)
 	System.err.println("makeBlock: sprite '"+name+"' not found");
 		Block result = bf.makeSprite(tile);
 //NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !
 		
-		// record/transmit event
-		if(!fake)
-		{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-			RoundVariables.writeEvent(event);
-		}
-
+		// record/transmit creation event
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.writeEvent(event);
+		
 		//result.initGesture();
 		return result;
 	}

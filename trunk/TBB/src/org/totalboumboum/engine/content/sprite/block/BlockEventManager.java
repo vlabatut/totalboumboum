@@ -200,7 +200,7 @@ public class BlockEventManager extends EventManager
 		else if(gesture.equals(GestureName.FALLING))
 		{	SpecificAction action = new SpecificLand(sprite);
 			ActionAbility a = sprite.modulateAction(action);
-System.out.println("["+sprite.getTile().getRow()+","+sprite.getTile().getCol()+"] FALLING finished, landing authorization="+a.isActive());		
+//System.out.println("["+sprite.getTile().getRow()+","+sprite.getTile().getCol()+"] FALLING finished, landing authorization="+a.isActive());		
 			// the sprite is allowed to land
 			if(a.isActive())
 			{	gesture = GestureName.LANDING;
@@ -260,7 +260,7 @@ System.out.println("["+sprite.getTile().getRow()+","+sprite.getTile().getCol()+"
 	private void engStartFall(EngineEvent event)
 	{	if(gesture.equals(GestureName.NONE))
 		{	gesture = GestureName.FALLING;
-System.out.println("["+sprite.getTile().getRow()+","+sprite.getTile().getCol()+"] Starting FALLING");		
+//System.out.println("["+sprite.getTile().getRow()+","+sprite.getTile().getCol()+"] Starting FALLING");		
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}

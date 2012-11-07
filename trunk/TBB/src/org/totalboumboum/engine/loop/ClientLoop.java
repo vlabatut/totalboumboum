@@ -74,6 +74,7 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
@@ -353,12 +354,20 @@ System.out.println(hero+" "+hero.getId());
 			{	if(VERBOSE)
 					System.out.print("["+event.getTime()+"<"+getTotalEngineTime()+"]");		
 				
+				// sprite insertion
+				if(event instanceof SpriteInsertionEvent)
+				{	SpriteInsertionEvent siEvent = (SpriteInsertionEvent) event;
+					int id = siEvent.getSpriteId();
+					Sprite sprite = level.getSprite(id);
+					sprite.getTile().addSprite(sprite); // add to the tile (complete the below process)
+				}
+				
 				// sprite creation
-				if(event instanceof SpriteCreationEvent)
+				else if(event instanceof SpriteCreationEvent)
 				{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
 					HollowLevel hollowLevel = round.getHollowLevel();
 					Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-					level.insertSpriteTile(sprite);
+					level.addSprite(sprite); // just add to the level lists, not in the tile
 				}
 				
 				// sprite anime change

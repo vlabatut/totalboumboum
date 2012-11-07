@@ -74,7 +74,7 @@ public class FullItemManager extends ItemManager
 		// recreate all initial items
 		for(Item item: originalInitialItems)
 		{	String name = item.getItemName();
-			Item itm = itemset.makeItem(name,tile,false);
+			Item itm = itemset.makeItem(name,tile);
 			addItem(itm,initialItems);
 		}		
 	}

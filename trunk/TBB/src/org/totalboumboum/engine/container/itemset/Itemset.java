@@ -33,6 +33,7 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
@@ -67,18 +68,16 @@ public class Itemset extends AbstractItemset
 	{	itemFactories.put(name,itemFactory);		
 	}
 	
-	public Item makeItem(String name, Tile tile, boolean fake)
+	public Item makeItem(String name, Tile tile)
 	{	Item result = null;
 		ItemFactory itemFactory = itemFactories.get(name);
 if(itemFactory==null)
 	System.err.println("makeItem: sprite '"+name+"' not found");
 		result = itemFactory.makeSprite(tile);
 
-		// record/transmit event
-		if(!fake)
-		{	SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-			RoundVariables.writeEvent(event);
-		}
+		// record/transmit creation event
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.writeEvent(event);
 
 		//result.initGesture();
 		return result;
