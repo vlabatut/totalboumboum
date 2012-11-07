@@ -37,8 +37,9 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * Une combinaison ({@link AiUtilityCombination}) contiendra
  * une ou plusieurs valeurs de différents critères. 
  * <br/>
- * Le nom du critère doit être unique pour 
- * le(s) cas qui l'utilise(nt).
+ * Le nom du critère doit être unique pour l'agent.
+ * Il ne peut pas y avoir plusieurs critères de même 
+ * nom.
  * <br/>
  * Si vous désirez définir un critère binaire,
  * vous devez créer une classe fille de celle-ci,
@@ -47,9 +48,12 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * prend une case en paramètre et doit calculer la
  * valeur de ce critère pour cette case-là.
  * 
+ * @param <T>
+ * 		Agent de référence.
+ *  
  * @author Vincent Labatut
  */
-public abstract class AiUtilityCriterionString extends AiUtilityCriterion<String>
+public abstract class AiUtilityCriterionString<T extends ArtificialIntelligence> extends AiUtilityCriterion<T,String>
 {	
 	/**
 	 * Crée un nouveau critère à partir
@@ -65,6 +69,8 @@ public abstract class AiUtilityCriterionString extends AiUtilityCriterion<String
 	 * y avoir deux critères de même
 	 * nom dans le même cas.
 	 * 
+	 * @param ai 
+	 * 		Agent concerné.
 	 * @param name
 	 * 		Nom du nouveau critère.
 	 * @param domain
@@ -73,9 +79,9 @@ public abstract class AiUtilityCriterionString extends AiUtilityCriterion<String
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public AiUtilityCriterionString(String name, Set<String> domain) throws StopRequestException
-	{	// init nom
-		super(name);
+	public AiUtilityCriterionString(T ai, String name, Set<String> domain) throws StopRequestException
+	{	// init
+		super(ai,name);
 		
 		// init valeurs
 		this.domain.addAll(domain);

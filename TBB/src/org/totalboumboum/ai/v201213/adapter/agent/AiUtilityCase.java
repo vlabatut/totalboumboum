@@ -37,7 +37,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * Les noms des critères sont utilisés par le
  * cas pour les distinguer, par conséquent
  * il ne peut pas y avoir deux critères de
- * même nom dans un cas donné.
+ * même nom.
  * <br/>
  * Une combinaison ({@link AiUtilityCombination})
  * correspond à un cas donné, et indique une
@@ -56,11 +56,10 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * critères passés en paramètres.
 	 * <br/>
 	 * <b>Attention </b>: chaque critère
-	 * doit avoir un nom unique pour le cas.
-	 * Il ne peut pas y avoir deux critères 
-	 * de même nom dans le même cas. Dans le
-	 * case contraire, la méthode lève une
-	 * {@link IllegalArgumentException}.
+	 * doit avoir un nom unique. Il ne peut 
+	 * pas y avoir deux critères de même nom. 
+	 * Dans le cas contraire, la méthode lève 
+	 * une {@link IllegalArgumentException}.
 	 * 
 	 * @param name
 	 * 		Nom du nouveau critère.
@@ -70,12 +69,12 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * @throws IllegalArgumentException
 	 * 		Si plusieurs critères portent le même nom.
 	 */
-	public AiUtilityCase(String name, Set<AiUtilityCriterion<?>> criteria)
+	public AiUtilityCase(String name, Set<AiUtilityCriterion<?,?>> criteria)
 	{	// on initialise le nom
 		this.name = name;
 		
 		// on initialise les critères
-		for(AiUtilityCriterion<?> criterion: criteria)
+		for(AiUtilityCriterion<?,?> criterion: criteria)
 		{	if(this.criteria.contains(criterion))
 				throw new IllegalArgumentException("A case ("+name+") cannot contain several criteria with the same name ("+criterion.getName()+").");
 			else
@@ -95,7 +94,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * @return
 	 * 		Le nom de ce cas.
 	 */
-	public String getName()
+	public final String getName()
 	{	return name;
 	}
 	
@@ -103,7 +102,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	// CRITERIA			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les critères servant à décrire ce cas */
-	private final Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+	private final Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
 	
 	/**
 	 * Renvoie l'ensemble des critères nécessaires
@@ -115,7 +114,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * @return
 	 * 		L'ensemble des critères décrivant ce cas.
 	 */
-	public Set<AiUtilityCriterion<?>> getCriteria()
+	public final Set<AiUtilityCriterion<?,?>> getCriteria()
 	{	return criteria;
 	}
 	
@@ -126,7 +125,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * Méthode calculant la combinaison décrivant
 	 * une case donnée, pour ce cas.
 	 * Cette méthode utilise indirectement
-	 * {@link AiUtilityCriterion#processValue}.
+	 * {@link AiUtilityCriterion#fetchValue}.
 	 * 
 	 * @param tile
 	 * 		La case à évaluer.
@@ -136,9 +135,9 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public AiUtilityCombination processCombination(AiTile tile) throws StopRequestException
+	public final AiUtilityCombination processCombination(AiTile tile) throws StopRequestException
 	{	AiUtilityCombination result = new AiUtilityCombination(this);
-		for(AiUtilityCriterion<?> criterion: criteria)
+		for(AiUtilityCriterion<?,?> criterion: criteria)
 			processCombinationCriterion(criterion,tile,result);
 		return result;
 	}
@@ -148,7 +147,9 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * chargée d'initialiser une valeur la combinaison.
 	 * 
 	 * @param <T>
-	 * 		Le type de la valeur.
+	 * 		Classe de l'agent.
+	 * @param <U> 
+	 * 		Classe du domaine de définition du critère.
 	 * @param criterion
 	 * 		Le critère à traiter.
 	 * @param tile
@@ -159,8 +160,8 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	private <T> void processCombinationCriterion(AiUtilityCriterion<T> criterion, AiTile tile, AiUtilityCombination result) throws StopRequestException
-	{	T value = criterion.processValue(tile);
+	private final <T extends ArtificialIntelligence,U> void processCombinationCriterion(AiUtilityCriterion<T,U> criterion, AiTile tile, AiUtilityCombination result) throws StopRequestException
+	{	U value = criterion.fetchValue(tile);
 		result.setCriterionValue(criterion,value);
 	}
 	
@@ -168,7 +169,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public boolean equals(Object o)
+	public final boolean equals(Object o)
 	{	boolean result = false;
 		if(o!=null && o instanceof AiUtilityCase)
 		{	AiUtilityCase caze = (AiUtilityCase)o;
@@ -178,13 +179,13 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	}
 
 	@Override
-	public int compareTo(AiUtilityCase caze)
+	public final int compareTo(AiUtilityCase caze)
 	{	int result = name.compareTo(caze.getName());
 		return result;
 	}
 	
 	@Override
-    public int hashCode()
+    public final int hashCode()
 	{	int result = getName().hashCode();
 		return result;
 	}
@@ -193,13 +194,13 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public String toString()
+	public final String toString()
 	{	StringBuffer result = new StringBuffer();
 		result.append(name);
 		result.append("=(");
-		Iterator<AiUtilityCriterion<?>> it = criteria.iterator();
+		Iterator<AiUtilityCriterion<?,?>> it = criteria.iterator();
 		while(it.hasNext())
-		{	AiUtilityCriterion<?> criterion = it.next();
+		{	AiUtilityCriterion<?,?> criterion = it.next();
 			result.append(criterion.getName());
 			if(it.hasNext())
 				result.append("×");

@@ -1565,11 +1565,6 @@ public class Launcher
 	/**
 	 * TODO mort subite
 	 * 
-	 * - mettre à jour configuration partie rapide pour évènements
-	 *   (proposer plusieurs choix standard de mort subite + activer/désactiver)
-	 * - évènements sd
-	 * 		- envoi des évènements via réseau/fichier (cf. TODO TODO)
-	 * 		- réception des mêmes évènements
 	 * - màj modèle :
 	 * 		- prise en compte du shrink dans le modèle
 	 * 		- màj des tests des modèles de l'API
@@ -1593,7 +1588,6 @@ public class Launcher
 	 * - à tester :
 	 * 
 	 * - bugs :
-	 * 		- mort subite : les éléments qui vont tomber sont déjà là au début du jeu !
 	 * 
 	 * 
 	 * TODO nouveaux items
@@ -1605,6 +1599,13 @@ public class Launcher
 	 * 		- ressources
 	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
 	 *  
+	 *  
+	 *  - rajouter une map dans le gestionnaire d'utilité, pour s'assurer que chaque critère a un nom unique
+	 *  - corriger les nouveaux bugs dans les agents de cette année
+	 *  	- modifier les commentaires pour rappeler de ne pas utiliser "process" mais "fetch"
+	 *  - adapter simplet pour être sûr que tout est ok
+	 *  - noter les modifs dans le changelog
+	 *  - màj le document de l'API
 	 */
 	
 }

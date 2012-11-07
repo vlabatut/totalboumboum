@@ -54,12 +54,12 @@ import org.totalboumboum.engine.content.feature.Direction;
  * <br/>
  * <br/>
  * Ainsi, l'initialisation de l'agent est réalisée grâce à la méthode {@link #init}.
- * Cette méthode se charge d'initialiser les percepts avec {@link #initPercepts} et
- * les gestionnaires avec {@link #initHandlers}. Les trois méthodes peuvent être
- * surchargées. Au moins les deux dernières doivent l'être, car par défaut {@code #initPercepts}
- * ne fait rien du tout, et {@code #initHandlers} crée des gestionnaires qui ne 
- * font rien du tout. A noter que rien n'empêche de surcharger une de ces méthodes 
- * de manière à en appeler d'autres. Bien sûr, toutes ces méthodes sont appelées
+ * Cette méthode se charge d'initialiser les percepts avec {@link #initPercepts},
+ * les gestionnaires avec {@link #initHandlers} et d'autres structures avec
+ * {@link #initOthers()}. Les deux premières méthodes doivent être surchargées.
+ * La troisième est optionnelle, elle permet de faire un traitement supplémentaire,
+ * qui ne serait lié ni aux percepts ni aux gestionnaires. A noter que rien n'empêche 
+ * ces méthodes d'en appeler d'autres. Bien sûr, toutes ces méthodes sont appelées
  * seulement une fois, juste avant le début de la partie (notez cependant que la zone est 
  * déjà disponible).
  * <br/>
@@ -70,7 +70,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Enfin, la méthode {@link #updateOutput} se charge de mettre à jour la sortie
  * graphique de l'agent. Elle doit donc être surchargée si on veut afficher des 
  * informations en cours de jeu : cases colorées, texte, chemins, etc. Sinon,
- * par défaut, elle n'affiche rien du tout.
+ * par défaut, elle les sorties des gestionnaires de déplacement et d'utilité.
  * <br/>
  * <br/>
  * Le reste du comportement de l'agent est implémenté dans des gestionnaires spécialisés,
@@ -107,7 +107,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * Méthode appelée par le jeu pour demander la fin de l'agent.
-	 * Elle modifie la valeur de l'indicateur stopRequest, ce qui permettra
+	 * Elle modifie la valeur de l'indicateur {@code stopRequest}, ce qui permettra
 	 * de lever une {@link StopRequestException} au prochain appel 
 	 * de la méthode {@link #checkInterruption}.
 	 * <br/>
@@ -340,24 +340,43 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * sera réalisée une fois, juste avant le début de la partie.
 	 * A noter que la zone est néanmoins déjà à jour.
 	 * <br/>
-	 * Par défaut, l'initialisation porte sur les percepts
+	 * L'initialisation porte sur les percepts
 	 * avec {@link #initPercepts()} et sur les gestionnaires
 	 * avec {@link #initHandlers()}. Si d'autres initialisations
-	 * sont nécessaires, il est possible de surcharger cette méthode.
+	 * sont nécessaires, il est possible de surcharger la méthode
+	 * {@link #initOthers()}, qui ne fait rien par défaut.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void init() throws StopRequestException
+	protected final void init() throws StopRequestException
 	{	// initialisation des percepts
 		initPercepts();
 		
 		// initialisation des gestionnaires
 		initHandlers();
-    	// on affiche éventuellement les utilités
+		
+		// autres initialisations
+		initOthers();
+		
+    	// on affiche éventuellement les utilités, ça peut servir
 		getUtilityHandler().displayUtilities();
 	}
 
+	/**
+	 * Méthode permettant de faire une initialisation supplémentaire.
+	 * Elle est automatiquement appelée à la fin de {@link #init()}.
+	 * Par défaut, cette méthode ne fait rien, mais elle peut être
+	 * surchargée si nécessaire.
+	 * 
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected void initOthers() throws StopRequestException
+	{
+		// à surcharger, si nécessaire
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

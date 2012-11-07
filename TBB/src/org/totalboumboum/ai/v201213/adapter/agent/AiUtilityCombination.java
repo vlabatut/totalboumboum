@@ -28,7 +28,8 @@ import java.util.Set;
 /**
  * Cette classe permet de définir une combinaison,
  * en la décrivant par le cas ({@link AiUtilityCase})
- * auquel elle est associée, et un ensemble de valeurs. 
+ * auquel elle est associée, et un ensemble de valeurs.
+ * <br/> 
  * Le cas détermine les critères ({@link AiUtilityCriterion})
  * que doivent décrire ces valeurs. Chaque valeur
  * est associée à un critère particulier.
@@ -78,7 +79,7 @@ public final class AiUtilityCombination
 	/** Le cas dont dépend cette combinaison */
 	private AiUtilityCase caze;
 	/** Les critères du cas dont dépend cette combinaison */
-	private Set<AiUtilityCriterion<?>> criteria;
+	private Set<AiUtilityCriterion<?,?>> criteria;
 	
 	/**
 	 * Renvoie le cas dont
@@ -87,7 +88,7 @@ public final class AiUtilityCombination
 	 * @return
 	 * 		Le cas correspondant à cette combinaison.
 	 */
-	public AiUtilityCase getCase()
+	public final AiUtilityCase getCase()
 	{	return caze;
 	}
 	
@@ -95,7 +96,7 @@ public final class AiUtilityCombination
 	// VALUES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les valeurs (de critères) servant à décrire cette combinaison */
-	private final HashMap<AiUtilityCriterion<?>,Object> values = new HashMap<AiUtilityCriterion<?>,Object>();
+	private final HashMap<AiUtilityCriterion<?,?>,Object> values = new HashMap<AiUtilityCriterion<?,?>,Object>();
 	
 	/**
 	 * Modifie la valeur associée au critère spécifié.
@@ -108,13 +109,15 @@ public final class AiUtilityCombination
 	 * 
 	 * @param <T> 
 	 * 		Classe de l'agent.
+	 * @param <U> 
+	 * 		Classe du domaine de définition du critère.
 	 * 
 	 * @param criterion
 	 * 		Le nom du critère concerné par la valeur.
 	 * @param value
 	 * 		La valeur à affecter au critère.
 	 */
-	public <T> void setCriterionValue(AiUtilityCriterion<T> criterion, T value)
+	public final <T extends ArtificialIntelligence,U> void setCriterionValue(AiUtilityCriterion<T,U> criterion, U value)
 	{	if(!criteria.contains(criterion))
 			throw new IllegalArgumentException("The specified criterion ("+criterion.getName()+") is not defined for the case ("+caze.getName()+") associated to this combination.");
 		if(!criterion.hasValue(value))
@@ -134,7 +137,7 @@ public final class AiUtilityCombination
 	 * 		ou {@code null} si aucune valeur n'a encore
 	 * 		été associée au critère.
 	 */
-	public Object getCriterionValue(AiUtilityCriterion<?> criterion)
+	public final Object getCriterionValue(AiUtilityCriterion<?,?> criterion)
 	{	Object result = values.get(criterion);
 		return result;
 	}
@@ -143,14 +146,14 @@ public final class AiUtilityCombination
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public boolean equals(Object o)
+	public final boolean equals(Object o)
 	{	boolean result = false;
 		if(o!=null && o instanceof AiUtilityCombination)
 		{	AiUtilityCombination combination = (AiUtilityCombination)o;
 			result = true;
-			Iterator<AiUtilityCriterion<?>> it = criteria.iterator();
+			Iterator<AiUtilityCriterion<?,?>> it = criteria.iterator();
 			while(it.hasNext())
-			{	AiUtilityCriterion<?> criterion = it.next();
+			{	AiUtilityCriterion<?,?> criterion = it.next();
 				Object value1 = values.get(criterion);
 				Object value2 = combination.getCriterionValue(criterion);
 				result = value1.equals(value2);
@@ -160,7 +163,7 @@ public final class AiUtilityCombination
 	}
 	
 	@Override
-    public int hashCode()
+    public final int hashCode()
 	{	int result = toString().hashCode();
 		return result;
 	}
@@ -169,12 +172,12 @@ public final class AiUtilityCombination
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public String toString()
+	public final String toString()
 	{	StringBuffer result = new StringBuffer();
 		result.append(caze.getName());
 		result.append("=(");
 		int i = 0;
-		for(AiUtilityCriterion<?> criterion: criteria)
+		for(AiUtilityCriterion<?,?> criterion: criteria)
 		{	Object value = values.get(criterion);
 			result.append(criterion.getName());
 			result.append("=");

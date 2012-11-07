@@ -97,23 +97,37 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 
 	/**
 	 * Réinitialise les structures de données
-	 * modifiées à chaque itération.
-	 * <br/>
-	 * <b>Attention </b>: vous avez la possibilité
-	 * de surcharger cette méthode, par exemple
-	 * si vous avez besoin de réinitialiser certains
-	 * objets propre à votre programme. Mais dans ce
-	 * cas-là, vous mais vous devez impérativement
-	 * appeler {@code super.resetData()} ou bien effectuer
-	 * vous même la réinitialisation de {@link #utilitiesByTile}
-	 * et {@link #utilitiesByValue}.
+	 * modifiées à chaque itération. Cette méthode
+	 * ne traite que les structures de données imposées.
+	 * Si le concepteur veut réinitialiser ses propres
+	 * structures de données, il doit surcharger la méthode
+	 * {@link #resetCustomData()}.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void resetData() throws StopRequestException
-	{	utilitiesByTile.clear();
+	protected final void resetData() throws StopRequestException
+	{	// le cache des critères
+		criterionCache.clear();
+		
+		// les valeurs d'utilité précédemment calculées.
+		utilitiesByTile.clear();
 		utilitiesByValue.clear();
+	}
+	
+	/**
+	 * Réinitialise les structures de données
+	 * modifiées à chaque itération. Cette méthode concerne
+	 * seulement les structures de données créées par le 
+	 * concepteur : les structures imposées sont réinitialisées
+	 * par {@link #resetData()}.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected final void resetCustomData() throws StopRequestException
+	{
+		// peut être surchargée par le concepteur de l'agent
 	}
 	
 	/**
@@ -122,7 +136,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @return
 	 * 		Une map contenant les utilités rangées par case.
 	 */
-	public HashMap<AiTile, Float> getUtilitiesByTile()
+	public final HashMap<AiTile, Float> getUtilitiesByTile()
 	{	return utilitiesByTile;
 	}
 
@@ -132,7 +146,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @return
 	 * 		Une map contenant les utilités rangées par valeur.
 	 */
-	public HashMap<Float, List<AiTile>> getUtilitiesByValue()
+	public final HashMap<Float, List<AiTile>> getUtilitiesByValue()
 	{	return utilitiesByValue;
 	}
 
@@ -157,6 +171,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		// on vide les structures
 		print("    Reset data structures");
 		resetData();
+		resetCustomData();
 		
 		// on sélectionne les cases dont on veut calculer l'utilité
 		long before = print("    > Entering selectTiles");
@@ -278,13 +293,68 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		L'utilité associée à la combinaison spécifiée.
 	 * 
 	 * @throws IllegalArgumentException
-	 * 		ssi la combinaison spécifiée n'est pas présente dans {@link #referenceUtilities}.
+	 * 		Ssi la combinaison spécifiée n'est pas présente dans {@link #referenceUtilities}.
 	 */
 	protected final int getUtilityValue(AiUtilityCombination combination)
 	{	Integer result = referenceUtilities.get(combination);
 		if(result==null)
 			throw new IllegalArgumentException("No utility value was associated to the specified combination ("+combination+").");
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Cache stockant temporairement les résultats du calcul des critères */
+	protected final HashMap<String,HashMap<AiTile,Object>> criterionCache = new HashMap<String, HashMap<AiTile,Object>>();
+	
+	/**
+	 * Méthode permettant de rechercher si un critère a déjà été calculé lors
+	 * de cette itération. Si c'est le cas, on ne le recalcule pas : le cache
+	 * nous renvoie la valeur précédemment calculée. Sinon, le cache renvoie 
+	 * {@code null}.
+	 * <br/>
+	 * Cette méthode est automatiquement utilisée par les classes héritant
+	 * de {@link AiUtilityCriterion}. Le concepteur d'un agent n'a, a priori,
+	 * pas besoin de l'utiliser.
+	 * 
+	 * @param name
+	 * 		Nom (unique) du critère à calculer.
+	 * @param tile
+	 * 		Case pour laquelle on veut calculer le critère.
+	 * @return
+	 * 		Valeur du critère, si elle existe (sinon : {@code null}).
+	 */
+	final Object getValueForCriterion(String name, AiTile tile)
+	{	Object result = null;
+		HashMap<AiTile,Object> map = criterionCache.get(name);
+		if(map!=null)
+			result = map.get(tile);
+		return result;
+	}
+	
+	/**
+	 * Méthode permettant d'insérer une valeur dans le cache. Cette opération
+	 * est réalisée quand cette valeur n'a pas été trouvée dans le cache.
+	 * <br/>
+	 * Cette méthode est automatiquement utilisée par les classes héritant
+	 * de {@link AiUtilityCriterion}. Le concepteur d'un agent n'a, a priori,
+	 * pas besoin de l'utiliser.
+	 * 
+	 * @param name
+	 * 		Nom (unique) du critère calculé.
+	 * @param tile
+	 * 		Case pour laquelle on a calculé le critère.
+	 * @param value
+	 * 		Valeur du critère.
+	 */
+	final void putValueForCriterion(String name, AiTile tile, Object value)
+	{	HashMap<AiTile,Object> map = criterionCache.get(name);
+		if(map==null)
+		{	map = new HashMap<AiTile, Object>();
+			criterionCache.put(name, map);
+		}
+		map.put(tile,value);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -368,7 +438,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public void displayUtilities() throws StopRequestException
+	public final void displayUtilities() throws StopRequestException
 	{	ai.checkInterruption();
 		print("    > Declared utilities :");
 		List<AiUtilityCombination> combis = new ArrayList<AiUtilityCombination>(referenceUtilities.keySet());
