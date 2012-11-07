@@ -41,7 +41,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * <br/>
  * Cette classe est une classe abstraite qui doit
  * être surclassée en indiquant le type de valeurs
- * du critère (paramètre {@code T}. Le plus simple
+ * du critère (paramètre {@code U}. Le plus simple
  * est d'utiliser comme base l'une des classes filles 
  * proposées dans l'API :
  * <ul>
@@ -51,22 +51,27 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * </ul>
  * Dans la classe fille créée, la méthode 
  * {@link #processValue(AiTile)}
- * doit obligatoirement être définie.
+ * doit obligatoirement être définie. Elle permet de calculer le critère
+ * pour une case donnée. Cependant, <b>elle ne doit jamais être appelée
+ * directement<b> par l'agent. Il faut utiliser la méthode {@link #fetchValue(AiTile)},
+ * qui est plus efficace car elle utilise le cache du gestionnaire d'utilité pour
+ * ne pas faire de calcul inutile.
  * <br/>
  * Le critère peut être utilisé pour construire
  * un ou plusieurs cas ({@link AiUtilityCase}). 
  * Une combinaison ({@link AiUtilityCombination}) contiendra
  * une ou plusieurs valeurs de différents critères. 
  * <br/>
- * Le nom du critère doit être unique pour 
- * le(s) cas qui l'utilise(nt).
+ * Le nom du critère doit être unique pour l'agent.
  * 
  * @param <T> 
  * 		Classe de l'agent.
+ * @param <U> 
+ * 		Classe des objets renvoyés par ce critère.
  * 
  * @author Vincent Labatut
  */
-public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCriterion<?>>
+public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> implements Comparable<AiUtilityCriterion<?,?>>
 {	
 	/**
 	 * Crée un nouveau critère à partir
@@ -74,20 +79,29 @@ public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCrite
 	 * <br/>
 	 * <b>Attention </b>: le nom du
 	 * critère doit être unique pour
-	 * un cas donné. Il ne peut pas
+	 * l'agent. Il ne peut pas
 	 * y avoir deux critères de même
-	 * nom dans le même cas.
+	 * nom.
 	 * 
+	 * @param ai 
+	 * 		Agent de référence.
 	 * @param name
 	 * 		Nom du nouveau critère.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public AiUtilityCriterion(String name) throws StopRequestException
-	{	this.name = name;
+	public AiUtilityCriterion(T ai, String name) throws StopRequestException
+	{	this.ai = ai;
+		this.name = name;
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** L'agent à traiter */
+	protected T ai;
+
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -112,7 +126,7 @@ public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCrite
 	// DOMAIN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les valeurs possibles pour ce critère */
-	final Set<T> domain = new TreeSet<T>();
+	final Set<U> domain = new TreeSet<U>();
 	
 	/**
 	 * Renvoie le domaine, i.e. l'ensemble
@@ -159,6 +173,14 @@ public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCrite
 	 * d'utiliser un gestionnaire spécifique, dans
 	 * lequel on stocke ces données, et auquel on 
 	 * accède directement depuis cette méthode.
+	 * <br/>
+	 * Cette méthode n'est pas destinée à être appelée
+	 * par le concepteur. Elle est appelée automatiquement
+	 * par le système de cache géré par le gestionnaire
+	 * d'utilité. Ainsi, le calcul ne sera effectué que si
+	 * nécessaire. Le concepteur de l'agent doit utiliser
+	 * la méthode {@link #fetchValue(AiTile)}, qui passe
+	 * automatiquement par le cache.
 	 * 
 	 * @param tile
 	 * 		La case à traiter.
@@ -168,7 +190,35 @@ public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCrite
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public abstract T processValue(AiTile tile) throws StopRequestException;
+	protected abstract U processValue(AiTile tile) throws StopRequestException;
+	
+	/**
+	 * Méthode calculant la valeur de ce critère pour la case
+	 * passée en paramètre. La méthode utilise le cache du gestionnaire
+	 * d'utilité, ce qui lui permet de n'effectuer le calcul que si
+	 * c'est nécessaire. Autrement dit, si le calcul a déjà été fait
+	 * lors de cette itération, la méthode ira chercher la valeur
+	 * précédemment calculée. Sinon, le calcul est effectué grâce
+	 * à {@link #processValue(AiTile)}, puis mis en cache et renvoyé.
+	 * 
+	 * @param tile
+	 * 		La case à traiter.
+	 * @return
+	 * 		La valeur de ce critère pour la case spécifiée.
+	 * 
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	public final U fetchValue(AiTile tile) throws StopRequestException
+	{	AiUtilityHandler<?> utilityHandler = ai.getUtilityHandler();
+		@SuppressWarnings("unchecked")
+		U result = (U)utilityHandler.getValueForCriterion(name,tile);
+		if(result==null)
+		{	result = processValue(tile);
+			utilityHandler.putValueForCriterion(name,tile,result);
+		}
+		return result;
+	}
 	
     /////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
@@ -177,14 +227,14 @@ public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCrite
 	public final boolean equals(Object o)
 	{	boolean result = false;
 		if(o!=null && o instanceof AiUtilityCriterion)
-		{	AiUtilityCriterion<?> criterion = (AiUtilityCriterion<?>)o;
+		{	AiUtilityCriterion<?,?> criterion = (AiUtilityCriterion<?,?>)o;
 			result = compareTo(criterion)==0;
 		}
 		return result;
 	}
 
 	@Override
-	public final int compareTo(AiUtilityCriterion<?> criterion)
+	public final int compareTo(AiUtilityCriterion<?,?> criterion)
 	{	int result = name.compareTo(criterion.getName());
 		return result;
 	}
@@ -203,9 +253,9 @@ public abstract class AiUtilityCriterion<T> implements Comparable<AiUtilityCrite
 	{	StringBuffer result = new StringBuffer();
 		result.append(name);
 		result.append("={");
-		Iterator<T> it = domain.iterator();
+		Iterator<U> it = domain.iterator();
 		while(it.hasNext())
-		{	T value = it.next();
+		{	U value = it.next();
 			result.append(value.toString());
 			if(it.hasNext())
 				result.append(", ");

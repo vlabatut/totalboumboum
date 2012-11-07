@@ -28,7 +28,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
@@ -43,8 +42,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.hollow.SuddenDeathEvent;
-import org.totalboumboum.engine.container.level.zone.Zone;
-import org.totalboumboum.engine.container.level.zone.ZoneTile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;

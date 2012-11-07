@@ -35,8 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le déplacement de l'agent.
  * En particulier, elle doit implémenter la méthode
  * {@link #considerMoving} de l'algorithme général.
- * Cette méthode doit être surchargée, car par défaut
- * elle ne fait rien du tout et renvoie toujours {@link Direction#NONE}.
+ * Cette méthode doit obligatoirement être surchargée.
  * <br/>
  * Cette classe contient 3 variables qui doivent être 
  * obligatoirement être mises à jour par {@code considerMoving} :
@@ -58,8 +57,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
-	 * Cette méthode doit être appelée par une classe héritant de celle-ci
-	 * grâce au mot-clé {@code super}.
+	 * Cette méthode doit obligatoirement être appelée par une classe 
+	 * héritant de celle-ci grâce au mot-clé {@code super}.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
@@ -96,7 +95,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * @return
 	 * 		La destination courante de l'agent.
 	 */
-	public AiTile getCurrentDestination()
+	public final AiTile getCurrentDestination()
 	{	return currentDestination;
 	}
 
@@ -106,7 +105,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * @return
 	 * 		Le chemin courant de l'agent.
 	 */
-	public AiPath getCurrentPath()
+	public final AiPath getCurrentPath()
 	{	return currentPath;
 	}
 
@@ -116,7 +115,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * @return
 	 * 		La direction courante de l'agent.
 	 */
-	public Direction getCurrentDirection()
+	public final Direction getCurrentDirection()
 	{	return currentDirection;
 	}
 

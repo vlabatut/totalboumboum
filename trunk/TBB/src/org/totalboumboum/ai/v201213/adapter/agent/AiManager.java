@@ -48,11 +48,13 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * Classe servant de traducteur entre le jeu et l'agent :
  * <ul>
- * 		<li>elle traduit les données du jeu en percepts 
+ * 		<li>Elle traduit les données du jeu en percepts 
  * 			traitables par l'agent (données simplifiées).</li>
- * 		<li>elle traduit la réponse de l'agent (action) 
+ * 		<li>Elle traduit la réponse de l'agent (action) 
  * 			en un évènement compatible avec le jeu.</li>
  * </ul>
+ * Elle n'est pas destinée à être modifiée par le
+ * concepteur d'un agent.
  * 
  * @author Vincent Labatut
  */
@@ -73,11 +75,11 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	// AI				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement le gestionnaire de manière à libérer les ressources 
+	 * Termine proprement le gestionnaire de manière à libérer les ressources 
 	 * qu'il occupait.
 	 */
     @Override
-	public void finishAi()
+	public final void finishAi()
 	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.stopRequest();
 	}
@@ -85,17 +87,17 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'ensemble des percepts destinés à l'agent */
+	/** L'ensemble des percepts destinés à l'agent */
 	private AiDataZone percepts;
-	/** le moteur du jeu */
+	/** Le moteur du jeu */
 	private VisibleLoop loop;
-	/** le niveau dans lequel la partie se déroule */
+	/** Le niveau dans lequel la partie se déroule */
 	private Level level;
-	/** date de la dernière mise à jour des percepts */
+	/** Date de la dernière mise à jour des percepts */
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public void init(String instance, AiPlayer player)
+	public final void init(String instance, AiPlayer player)
 	{	super.init(instance,player);
 	
 		loop = RoundVariables.loop;
@@ -107,14 +109,14 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	}
 
 	@Override
-	public void updatePercepts()
+	public final void updatePercepts()
 	{	long elapsedTime = loop.getTotalGameTime() - lastUpdateTime;
 		lastUpdateTime = loop.getTotalGameTime();
 		percepts.update(elapsedTime);
 	}
 	
 	@Override
-	public void finishPercepts()
+	public final void finishPercepts()
 	{	// percepts
 		percepts.finish();
 		percepts = null;
@@ -129,11 +131,11 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
     /////////////////////////////////////////////////////////////////
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** simule les touches de controle d'un joueur humain */
+    /** Simule les touches de controle d'un joueur humain */
     private Direction lastMove = Direction.NONE;
 
 	@Override
-	public List<ControlEvent> convertReaction(AiAction value)
+	public final List<ControlEvent> convertReaction(AiAction value)
 	{	List<ControlEvent> result = new ArrayList<ControlEvent>();
 		AiActionName name = value.getName();
 		Direction direction = value.getDirection();
@@ -165,13 +167,13 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	}
 	
 	/**
-	 * active les évènements nécessaires à l'arrêt du personnage.
-	 * utilisé quand l'agent renvoie l'action "ne rien faire"
+	 * Active les évènements nécessaires à l'arrêt du personnage.
+	 * Utilisé quand l'agent renvoie l'action "ne rien faire"
 	 * 
 	 * @param result	
-	 * 		liste des évènements adaptée à l'action renvoyée par l'agent
+	 * 		Liste des évènements adaptée à l'action renvoyée par l'agent.
 	 */
-	private void reactionStop(List<ControlEvent> result)
+	private final void reactionStop(List<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
 		{	Direction prim[] = lastMove.getPrimaries();
 			for(int i=0;i<prim.length;i++)
@@ -186,14 +188,15 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	}
 	
 	/**
-	 * active les évènements nécessaires à un changement de direction,
-	 * en simulant un joueur humain qui appuierait sur des touches
-	 * @param 
-	 * 		result
-	 * @param 
-	 * 		direction
+	 * Active les évènements nécessaires à un changement de direction,
+	 * en simulant un joueur humain qui appuierait sur des touches.
+	 * 
+	 * @param result
+	 * 		Évènements de contrôle.
+	 * @param direction
+	 * 		Direction de déplacement.
 	 */
-	private void updateMove(List<ControlEvent> result, Direction direction)
+	private final void updateMove(List<ControlEvent> result, Direction direction)
 	{	// init
 		Direction prim1[] = lastMove.getPrimaries();
 		Direction prim2[] = direction.getPrimaries();
@@ -227,7 +230,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void initSteps()
+	protected final void initSteps()
 	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		
 		// names
@@ -265,7 +268,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	 * Met à jour la map contenant
 	 * les temps destinés au moteur.
 	 */
-	public void updateDurations()
+	public final void updateDurations()
 	{	// init
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
@@ -302,16 +305,16 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sortie de l'agent */
+	/** Sortie de l'agent */
 	private AiOutput output;
 	
 	/**
-	 * tout doit être recopié pour des histoires de synchronisation
+	 * Tout doit être recopié pour des histoires de synchronisation
 	 * (on ne veut pas que l'agent modifie ses sorties pendant que
-	 * le moteur du jeu est en train d'y accéder)
+	 * le moteur du jeu est en train d'y accéder).
 	 */
 	@Override
-	protected void updateOutput()
+	protected final void updateOutput()
 	{	// tile colors
 		{	List<Color>[][] aiMatrix = output.getTileColors();
 			List<Color>[][] engineMatrix = getTileColors();

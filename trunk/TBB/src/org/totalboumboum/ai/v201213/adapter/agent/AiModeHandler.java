@@ -24,15 +24,13 @@ package org.totalboumboum.ai.v201213.adapter.agent;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 
 /**
- * Classe gérant les déplacements de l'agent. Elle
+ * Classe gérant le mode de l'agent. Elle
  * implémente la méthode {@link #update}, utilisée pour 
  * mettre le mode à jour, et qui ne peut pas être modifiée 
  * ni surchargée. Cette méthode implémente l'algorithme de 
  * sélection du mode défini en cours. Elle fait appel aux 
  * méthodes {@link #hasEnoughItems} et {@link #isCollectPossible()}, 
- * qui elles doivent être surchargées : si elles ne le sont
- * pas, alors le mode sera toujours {@link AiMode#COLLECTING}
- * par défaut.
+ * qui, elles, doivent être surchargées.
  * <br/>
  * Enfin, cette classe stocke le mode courant grâce au
  * champ {@link #mode}.
@@ -50,7 +48,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * grâce au mot-clé {@code super}.
 	 * 
 	 * @param ai	
-	 * 		l'agent que cette classe doit gérer.
+	 * 		L'agent que cette classe doit gérer.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
@@ -72,7 +70,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * @return
 	 * 		Le mode courant de l'agent.
 	 */
-	public AiMode getMode()
+	public final AiMode getMode()
 	{	return mode;
 	}
 	
@@ -122,7 +120,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * Cette distinction est relative à l'environnement,
 	 * à l'agent lui-même et à la stratégie qu'il utilise.
 	 * <br/>
-	 * Cette méthode est utilisée par lors de la mise 
+	 * Cette méthode est utilisée lors de la mise 
 	 * à jour du mode par {@link #update}.
 	 * 
 	 * @return
@@ -137,7 +135,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * des items dans la zone courante : présence d'items
 	 * cachés ou découverts, assez de temps restant, etc.
 	 * <br/>
-	 * Cette méthode est utilisée par lors de la mise 
+	 * Cette méthode est utilisée lors de la mise 
 	 * à jour du mode par {@link #update}.
 	 * 
 	 * @return

@@ -25,6 +25,9 @@ package org.totalboumboum.ai.v201213.adapter.agent;
  * Ce type énuméré représente les différents modes
  * qu'un agent peut adopter : {@code COLLECTING}
  * ou {@code ATTACKING}.
+ * <br/>
+ * Aucun mode ne peut être ajouté par le concepteur
+ * d'un agent : les modes sont imposés.
  * 
  * @author Vincent Labatut
  */
