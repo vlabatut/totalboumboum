@@ -1607,6 +1607,7 @@ public class Launcher
 	 *  - noter les modifs dans le changelog
 	 *  - màj le document de l'API
 	 *  - rajouter la deuxième map dans l'utility manager (une par mode)
+	 *  - dans l'utility handler, séparer l'init des critères puis des cases ? (voir dans simplet si ça vaut le coup)
 	 */
 	
 }
