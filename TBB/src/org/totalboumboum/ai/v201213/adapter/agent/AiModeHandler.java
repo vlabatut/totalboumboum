@@ -49,11 +49,8 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @param ai	
 	 * 		L'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiModeHandler(T ai) throws StopRequestException
+	protected AiModeHandler(T ai)
     {	super(ai);
 		print("    init mode handler");
 	}

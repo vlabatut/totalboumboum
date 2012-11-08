@@ -34,10 +34,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * l'ensemble des critères {@link AiUtilityCriterion}
  * nécessaires pour le décrire.
  * <br/>
- * Les noms des critères sont utilisés par le
- * cas pour les distinguer, par conséquent
- * il ne peut pas y avoir deux critères de
- * même nom.
+ * Un cas ne peut pas contenir plusieurs fois
+ * le même critère. Deux cas ne peuvent pas avoir
+ * le même nom.
  * <br/>
  * Une combinaison ({@link AiUtilityCombination})
  * correspond à un cas donné, et indique une
@@ -56,27 +55,35 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * critères passés en paramètres.
 	 * <br/>
 	 * <b>Attention </b>: chaque critère
-	 * doit avoir un nom unique. Il ne peut 
-	 * pas y avoir deux critères de même nom. 
-	 * Dans le cas contraire, la méthode lève 
-	 * une {@link IllegalArgumentException}.
+	 * ne peut apparaître qu'une seule fois
+	 * dans un cas donné. Dans le cas contraire, 
+	 * la méthode lève une {@link IllegalArgumentException}.
 	 * 
+	 * @param ai 
+	 * 		Agent de référence.
 	 * @param name
 	 * 		Nom du nouveau critère.
 	 * @param criteria
 	 * 		Ensemble des valeurs possible pour ce critère.
 	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 * @throws IllegalArgumentException
-	 * 		Si plusieurs critères portent le même nom.
+	 * 		Si le même critère apparaît plusieurs fois.
 	 */
-	public AiUtilityCase(String name, Set<AiUtilityCriterion<?,?>> criteria)
-	{	// on initialise le nom
+	public AiUtilityCase(ArtificialIntelligence ai, String name, Set<AiUtilityCriterion<?,?>> criteria) throws StopRequestException
+	{	// vérifie l'unicité du nom
+		AiUtilityHandler<?> handler = ai.getUtilityHandler();
+		if(handler.checkCriterionName(name))
+			throw new IllegalArgumentException("A case with the same name ("+name+") already exists for this agent.");
+		
+		// on initialise le nom
 		this.name = name;
 		
 		// on initialise les critères
 		for(AiUtilityCriterion<?,?> criterion: criteria)
 		{	if(this.criteria.contains(criterion))
-				throw new IllegalArgumentException("A case ("+name+") cannot contain several criteria with the same name ("+criterion.getName()+").");
+				throw new IllegalArgumentException("A case ("+name+") cannot contain several times the same criterion ("+criterion.getName()+").");
 			else
 				this.criteria.add(criterion);
 		}
@@ -146,8 +153,8 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * Méthode auxiliaire de {@link #processCombination},
 	 * chargée d'initialiser une valeur la combinaison.
 	 * 
-	 * @param <T>
-	 * 		Classe de l'agent.
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
 	 * @param <U> 
 	 * 		Classe du domaine de définition du critère.
 	 * @param criterion
@@ -160,7 +167,9 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	private final <T extends ArtificialIntelligence,U> void processCombinationCriterion(AiUtilityCriterion<T,U> criterion, AiTile tile, AiUtilityCombination result) throws StopRequestException
+	private final <T extends ArtificialIntelligence, U> 
+		void processCombinationCriterion(AiUtilityCriterion<T,U> criterion, AiTile tile, AiUtilityCombination result) 
+		throws StopRequestException
 	{	U value = criterion.fetchValue(tile);
 		result.setCriterionValue(criterion,value);
 	}

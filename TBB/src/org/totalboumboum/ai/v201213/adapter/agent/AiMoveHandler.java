@@ -62,11 +62,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiMoveHandler(T ai) throws StopRequestException
+	protected AiMoveHandler(T ai)
     {	// init ai object
 		super(ai);
 		print("    init move handler");

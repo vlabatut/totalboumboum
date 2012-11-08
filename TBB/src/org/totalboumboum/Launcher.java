@@ -1600,14 +1600,14 @@ public class Launcher
 	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
 	 *  
 	 *  
-	 *  - rajouter une map dans le gestionnaire d'utilité, pour s'assurer que chaque critère a un nom unique
+	 *  - rajouter la deuxième map dans l'utility manager (une par mode) >> corriger les erreurs en résultant
+	 *  - dans l'utility handler, séparer l'init des critères puis des cases ? (voir dans simplet si ça vaut le coup)
 	 *  - corriger les nouveaux bugs dans les agents de cette année
 	 *  	- modifier les commentaires pour rappeler de ne pas utiliser "process" mais "fetch"
 	 *  - adapter simplet pour être sûr que tout est ok
 	 *  - noter les modifs dans le changelog
+	 *  - màj commentaires de l'API
 	 *  - màj le document de l'API
-	 *  - rajouter la deuxième map dans l'utility manager (une par mode)
-	 *  - dans l'utility handler, séparer l'init des critères puis des cases ? (voir dans simplet si ça vaut le coup)
 	 */
 	
 }
