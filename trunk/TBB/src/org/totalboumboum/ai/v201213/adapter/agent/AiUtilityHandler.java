@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201213.adapter.agent;
 import java.awt.Color;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -81,22 +82,46 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
     {	super(ai);
 		print("    init utility handler");
    
-    	// on initialise les cas/critères/combinaisons une fois pour toutes
-		long before = print("    > Entering initCriteria");
-    	initCriteria();
-		long after = System.currentTimeMillis();
-		long elapsed = after - before;
-		print("    < Exiting initCriteria duration="+elapsed);
+		// on initialise les maps de réference
+		createReference();
+		
+    	// on initialise les critères une fois pour toutes
+		{	long before = print("    > Entering initCriteria");
+	    	initCriteria();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("    < Exiting initCriteria duration="+elapsed);
+		}
+		
+    	// on initialise les cas une fois pour toutes
+		{	long before = print("    > Entering initCases");
+			initCases();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("    < Exiting initCases duration="+elapsed);
+		}
+		
+    	// on initialise les utilités de réference une fois pour toutes
+		{	long before = print("    > Entering initReference");
+			initReferenceUtilities();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("    < Exiting initReference duration="+elapsed);
+		}
+		
+		// on calcule les utilités maximales une fois pour toutes
+		{	long before = print("    > Entering initMaxUtilities");
+    		initMaxUtilities();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("    < Exiting initMaxUtilities duration="+elapsed);
+		}
+
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant les valeurs d'utilité (les cases absentes sont inutiles) */
-	protected final HashMap<AiTile,Float> utilitiesByTile = new HashMap<AiTile,Float>();
-	/** Map contenant les cases rangées par valeur d'utilité */
-	protected final HashMap<Float,List<AiTile>> utilitiesByValue = new HashMap<Float,List<AiTile>>();
-
 	/**
 	 * Réinitialise les structures de données
 	 * modifiées à chaque itération. Cette méthode
@@ -104,11 +129,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * Si le concepteur veut réinitialiser ses propres
 	 * structures de données, il doit surcharger la méthode
 	 * {@link #resetCustomData()}.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected final void resetData() throws StopRequestException
+	protected final void resetData()
 	{	// le cache des critères
 		criterionCache.clear();
 		
@@ -132,6 +154,14 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		// peut être surchargée par le concepteur de l'agent
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// UTILITIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map contenant les valeurs d'utilité (les cases absentes sont inutiles) */
+	protected final HashMap<AiTile,Float> utilitiesByTile = new HashMap<AiTile,Float>();
+	/** Map contenant les cases rangées par valeur d'utilité */
+	protected final HashMap<Float,List<AiTile>> utilitiesByValue = new HashMap<Float,List<AiTile>>();
+
 	/**
 	 * Renvoie les utilités courantes, rangées par case.
 	 * 
@@ -230,21 +260,32 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	protected abstract Set<AiTile> selectTiles() throws StopRequestException;
-	
+
 	/////////////////////////////////////////////////////////////////
-	// CRITERIA			/////////////////////////////////////////////
+	// CRITERIA	/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant tous les cas, à initialiser dans {@link #initCriteria()} */
-	protected final HashMap<String,AiUtilityCase> cases = new HashMap<String,AiUtilityCase>();
-	/** Map contenant l'utilité de chaque combinaison, à initialiser dans {@link #initCriteria()} */
-	protected final HashMap<AiUtilityCombination,Integer> referenceUtilities = new HashMap<AiUtilityCombination,Integer>();
-	/** Indique l'utilité maximale pour chaque mode */
-	protected final HashMap<AiMode,Integer> maxUtilities = new HashMap<AiMode,Integer>();
+	/** Map de tous les critères créés */
+	private final HashMap<String,AiUtilityCriterion<?,?>> criterionMap = new HashMap<String,AiUtilityCriterion<?,?>>();
+
+	/**
+	 * Vérifie si un critère portant le nom passé
+	 * en paramètre existe déjà.
+	 * Cette méthode est destinée à un usage interne.
+	 * 
+	 * @param name
+	 * 		Nom à tester.
+	 * @return
+	 * 		{@code true} ssi un critère de ce nom existe déjà.
+	 */
+	boolean checkCriterionName(String name)
+	{	boolean result = criterionMap.keySet().contains(name);
+		return result;
+	}
 	
 	/**
 	 * Initialise d'abord tous les critères, puis tous les cas.
 	 * Les cas doivent obligatoirement être stockés dans la map
-	 * {@link #cases} (les clés {@code String} correspondant aux
+	 * {@link #caseMap} (les clés {@code String} correspondant aux
 	 * noms des cas).
 	 * <br/>
 	 * Ensuite, la méthode doit initialiser les valeurs d'utilités
@@ -252,7 +293,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * valeurs doivent obligatoirement être stockées dans la map 
 	 * {@link #referenceUtilities}. De plus, les valeurs d'utilité
 	 * maximales pour chaque mode doivent être stockées dans
-	 * la map {@link #maxUtilities}.
+	 * la map {@link #maxReferenceUtilities}.
 	 * <br/>
 	 * Bien entendu, cette initialisation est réalisée une seule
 	 * fois lors de la création de l'agent. On suppose donc
@@ -262,7 +303,31 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected abstract void initCriteria() throws StopRequestException;;
+	protected abstract void initCriteria() throws StopRequestException;
+	
+	/////////////////////////////////////////////////////////////////
+	// CASES	/////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map contenant tous les cas, à initialiser dans {@link #initCriteria()} */
+	protected final HashMap<String,AiUtilityCase> caseMap = new HashMap<String,AiUtilityCase>();
+
+	/**
+	 * Vérifie si un cas portant le nom passé
+	 * en paramètre existe déjà.
+	 * Cette méthode est destinée à un usage interne.
+	 * 
+	 * @param name
+	 * 		Nom à tester.
+	 * @return
+	 * 		{@code true} ssi un cas de ce nom existe déjà.
+	 */
+	boolean checkCaseName(String name)
+	{	boolean result = caseMap.keySet().contains(name);
+		return result;
+	}
+
+	// TODO
+	protected abstract void initCases() throws StopRequestException;
 	
 	/**
 	 * Cette méthode prend une case en paramètre, et identifie
@@ -279,6 +344,44 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	protected abstract AiUtilityCase identifyCase(AiTile tile) throws StopRequestException;
+
+	/////////////////////////////////////////////////////////////////
+	// REFERENCE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map contenant l'utilité de chaque combinaison, à initialiser dans {@link #initCriteria()} */
+	protected final HashMap<AiMode, HashMap<AiUtilityCombination,Integer>> referenceUtilities = new HashMap<AiMode, HashMap<AiUtilityCombination,Integer>>();
+	/** Indique l'utilité maximale pour chaque mode */
+	protected final HashMap<AiMode,Integer> maxReferenceUtilities = new HashMap<AiMode,Integer>();
+	
+	/**
+	 * Crée une map vide pour chaque mode. Ces
+	 * maps devront être remplies par {@link #initReferenceUtilities()}.
+	 */
+	private void createReference()
+	{	// pour chaque mode, on crée une map vide,
+		// qui devra être remplie par initReference()
+		for(AiMode mode: AiMode.values())
+		{	HashMap<AiUtilityCombination, Integer> map = new HashMap<AiUtilityCombination, Integer>();
+			referenceUtilities.put(mode,map);
+		}
+	}
+	
+	// TODO
+	protected abstract void initReferenceUtilities() throws StopRequestException;
+	
+	/**
+	 * Calcule l'utilité de réference maximale pour chaque mode.
+	 * Ces valeurs sont utilisées lors de l'initialisation de
+	 * la sortie graphique (pour normaliser les valeurs d'utilité)
+	 */
+	private void initMaxUtilities()
+	{	for(AiMode mode: AiMode.values())
+		{	HashMap<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
+			Collection<Integer> utilities = map.values();
+			int max = Collections.max(utilities);
+			maxReferenceUtilities.put(mode, max);
+		}
+	}
 	
 	/**
 	 * Renvoie la valeur d'utilité associée à la
@@ -294,6 +397,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 
 	 * @throws IllegalArgumentException
 	 * 		Ssi la combinaison spécifiée n'est pas présente dans {@link #referenceUtilities}.
+	 * 
+	 * TODO renommer en "retrieveUtilityValue"
 	 */
 	protected final int getUtilityValue(AiUtilityCombination combination)
 	{	Integer result = referenceUtilities.get(combination);
@@ -399,7 +504,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			rCoeff = 0;
 		else if(mode==AiMode.COLLECTING)
 			bCoeff = 0;
-		Integer limit = maxUtilities.get(mode);
+		Integer limit = maxReferenceUtilities.get(mode);
 		if(limit==0)
 			limit = 50;
 		AiOutput output = ai.getOutput();

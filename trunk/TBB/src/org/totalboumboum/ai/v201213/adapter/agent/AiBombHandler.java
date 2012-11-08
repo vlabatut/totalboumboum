@@ -45,11 +45,8 @@ public abstract class AiBombHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiBombHandler(T ai) throws StopRequestException
+	protected AiBombHandler(T ai)
     {	super(ai);
 		print("    init bomb handler");
 	}

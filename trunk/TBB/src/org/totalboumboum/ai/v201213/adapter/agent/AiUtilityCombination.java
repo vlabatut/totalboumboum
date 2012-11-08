@@ -71,6 +71,7 @@ public final class AiUtilityCombination
 	public AiUtilityCombination(AiUtilityCombination combination)
 	{	this.caze = combination.caze;
 		this.criteria = combination.criteria;
+// TODO pb: faudrait initialiser les valeurs		
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -104,8 +105,8 @@ public final class AiUtilityCombination
 	 * Si le critère spécifié n'appartient pas au
 	 * cas associé à cette combinaison, ou bien si
 	 * la valeur spécifiée n'appartient pas au domaine
-	 * de définition du critère spécifié, une {@link IllegalArgumentException}
-	 * est levée.
+	 * de définition du critère spécifié, une 
+	 * {@link IllegalArgumentException} est levée.
 	 * 
 	 * @param <T> 
 	 * 		Classe de l'agent.
@@ -117,7 +118,7 @@ public final class AiUtilityCombination
 	 * @param value
 	 * 		La valeur à affecter au critère.
 	 */
-	public final <T extends ArtificialIntelligence,U> void setCriterionValue(AiUtilityCriterion<T,U> criterion, U value)
+	public final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiUtilityCriterion<T,U> criterion, U value) 
 	{	if(!criteria.contains(criterion))
 			throw new IllegalArgumentException("The specified criterion ("+criterion.getName()+") is not defined for the case ("+caze.getName()+") associated to this combination.");
 		if(!criterion.hasValue(value))

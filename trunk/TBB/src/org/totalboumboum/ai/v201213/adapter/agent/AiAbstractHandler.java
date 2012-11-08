@@ -21,8 +21,6 @@ package org.totalboumboum.ai.v201213.adapter.agent;
  * 
  */
 
-import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
-
 /**
  * Classe servant de base à la définition de gestionnaires
  * utilisés pour décomposer le traitement réalisé par un agent.
@@ -43,11 +41,8 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiAbstractHandler(T ai) throws StopRequestException
+	protected AiAbstractHandler(T ai)
     {	this.ai = ai;
 	}
 

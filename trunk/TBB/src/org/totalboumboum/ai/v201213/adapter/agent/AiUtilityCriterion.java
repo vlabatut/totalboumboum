@@ -81,18 +81,27 @@ public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> im
 	 * critère doit être unique pour
 	 * l'agent. Il ne peut pas
 	 * y avoir deux critères de même
-	 * nom.
+	 * nom. Dans le cas contraire, la méthode 
+	 * lève une {@link IllegalArgumentException}.
 	 * 
 	 * @param ai 
 	 * 		Agent de référence.
 	 * @param name
 	 * 		Nom du nouveau critère.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
+	 * @throws IllegalArgumentException
+	 * 		Un critère du même nom existe déjà.
 	 */
 	public AiUtilityCriterion(T ai, String name) throws StopRequestException
-	{	this.ai = ai;
+	{	// vérifie l'unicité du nom
+		AiUtilityHandler<?> handler = ai.getUtilityHandler();
+		if(handler.checkCriterionName(name))
+			throw new IllegalArgumentException("A criterion with the same name ("+name+") already exists for this agent.");
+		
+		// initialise le critère
+		this.ai = ai;
 		this.name = name;
 	}
 	

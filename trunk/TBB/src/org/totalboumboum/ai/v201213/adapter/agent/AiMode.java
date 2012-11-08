@@ -33,12 +33,12 @@ package org.totalboumboum.ai.v201213.adapter.agent;
  */
 public enum AiMode
 {	
-	/** l'agent n'a pas assez de puissance et essaie d'en obtenir plus */
+	/** L'agent n'a pas assez de puissance et essaie d'en obtenir plus */
 	COLLECTING,
 	
 	/** 
-	 * soit il ne reste plus d'item à ramasser, et l'agent n'a pas d'autre choix que d'attaquer les autres joueurs.
-	 * soit l'agent a assez de puissance et peut attaquer les autres joueurs. 
+	 * Soit il ne reste plus d'item à ramasser, et l'agent n'a pas d'autre choix que d'attaquer les autres joueurs.
+	 * Soit l'agent a assez de puissance et peut attaquer les autres joueurs. 
 	 */
 	ATTACKING;
 }
