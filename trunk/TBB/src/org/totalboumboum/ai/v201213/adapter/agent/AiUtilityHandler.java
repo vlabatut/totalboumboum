@@ -38,7 +38,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
- * En particulier, elle doit implémenter la méthode
+ * En particulier, elle implémente la méthode
  * {@link #update} de l'algorithme général.
  * <br/>
  * Cette classe contient 2 variables qui doivent être 
@@ -56,6 +56,8 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * <br/>
  * Elles sont notamment utilisées par la méthode {@link #updateOutput()}
  * qui est donnée ici en exemple afin d'afficher les valeurs d'utilité courantes.
+ * 
+ * TODO mentionner le cache pour les critères
  * 
  * @param <T> 
  * 		Classe de l'agent.
@@ -160,8 +162,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * et {@link #utilitiesByValue}. Le calcul de ces valeurs
 	 * est fonction de la zone, mais aussi du mode
 	 * courant de l'agent.
-	 * <b>Attention :</b> n'oubliez pas de vider les maps
-	 * à chaque itération, avant de refaire les calculs d'utilité.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
