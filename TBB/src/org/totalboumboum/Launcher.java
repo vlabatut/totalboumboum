@@ -1608,6 +1608,7 @@ public class Launcher
 	 *  - noter les modifs dans le changelog
 	 *  - màj commentaires de l'API
 	 *  - màj le document de l'API
+	 *  - GUI: on peut activer / désactiver la mort subite (mais pas la configurer)
 	 */
 	
 }
