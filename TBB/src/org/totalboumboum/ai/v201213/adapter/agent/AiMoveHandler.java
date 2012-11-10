@@ -33,20 +33,21 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Classe gérant le déplacement de l'agent.
- * En particulier, elle doit implémenter la méthode
+ * En particulier, elle implémente la méthode
  * {@link #considerMoving} de l'algorithme général.
- * Cette méthode doit obligatoirement être surchargée.
+ * Cette méthode fait appel à trois méthodes pour 
+ * réaliser son traitement : {@link #updateCurrentDestination()},
+ * {@link #updateCurrentPath()} et {@link #updateCurrentDirection()}.
+ * Ces trois méthodes doivent être surchargées.
  * <br/>
- * Cette classe contient 3 variables qui doivent être 
- * obligatoirement être mises à jour par {@code considerMoving} :
+ * Ces trois méthodes permettent chacune de mettre à jour une variable : 
  * <ul>
  * 		<li>{@link #currentDestination} : la case de destination courante ;</li>
  * 		<li>{@link #currentPath} : le chemin courant (pour aller à la destination courante) ;</li>
  * 		<li>{@link #currentDirection} : la direction courante (qui dépend directement du chemin courant).</li>
  * </ul>
- * Ces variables sont notamment utilisées par la méthode {@link #updateOutput()}
- * qui est donnée ici en exemple afin d'afficher le mode,
- * la destination et le chemin courants.
+ * Ces variables sont notamment utilisées lors du traitement (méthode {@link #updateCurrentDestination()})
+ * et de l'affichage (méthode {@link #updateOutput()}).
  * 
  * @param <T> 
  * 		Classe de l'agent.
@@ -58,7 +59,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit obligatoirement être appelée par une classe 
-	 * héritant de celle-ci grâce au mot-clé {@code super}.
+	 * héritant de celle-ci, grâce au mot-clé {@code super}.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
@@ -77,15 +78,11 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	}
 
     /////////////////////////////////////////////////////////////////
-	// DATA						/////////////////////////////////////
+	// DESTINATION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** La case objectif courante, i.e. celle dans laquelle on veut aller */ 
 	protected AiTile currentDestination = null;
-	/** Le chemin courant, permettant d'aller dans la case de destination */ 
-	protected AiPath currentPath = null;
-	/** La direction à prendre pour suivre le chemin courant */ 
-	protected Direction currentDirection = null;
-	
+
 	/**
 	 * Renvoie la destination courante de l'agent.
 	 * 
@@ -95,6 +92,28 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	public final AiTile getCurrentDestination()
 	{	return currentDestination;
 	}
+
+	/**
+	 * Met à jour l'objectif courant de l'agent, c'est à dire
+	 * la case dans laquelle il veut aller. 
+	 * <br/>
+	 * Ce calcul dépend devrait dépendre au moins des valeurs 
+	 * d'utilité déjà calculées, et éventuellement d'autres 
+	 * calculs supplémentaires.
+	 * 
+	 * @return
+	 * 		La case correspondant à la destination courante de l'agent.
+	 * 
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract AiTile updateCurrentDestination() throws StopRequestException;
+
+	/////////////////////////////////////////////////////////////////
+	// PATH						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Le chemin courant, permettant d'aller dans la case de destination */ 
+	protected AiPath currentPath = null;
 
 	/**
 	 * Renvoie le chemin courant de l'agent.
@@ -107,6 +126,28 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	}
 
 	/**
+	 * Met à jour le chemin courant de l'agent, c'est à dire 
+	 * la séquence de cases à parcourir pour atteindre
+	 * (directement ou indirectement) la case objectif.
+	 * <br/>
+	 * Ce traitement devrait a priori faire usage des méthodes
+	 * et classes de l'API permettant de rechercher des chemins. 
+	 * 
+	 * @return
+	 * 		Le chemin courant suivant par l'agent.
+	 * 
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract AiPath updateCurrentPath() throws StopRequestException;
+
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** La direction à prendre pour suivre le chemin courant */ 
+	protected Direction currentDirection = null;
+
+	/**
 	 * Renvoie la direction courante de l'agent.
 	 * 
 	 * @return
@@ -115,6 +156,20 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	public final Direction getCurrentDirection()
 	{	return currentDirection;
 	}
+
+	/**
+	 * Met à jour la direction courante suivie par l'agent.
+	 * <br/>
+	 * Ce traitement devrait a priori dépendre du chemin courant,
+	 * et éventuellement d'autres informations. 
+	 * 
+	 * @return
+	 * 		La direction courante de l'agent.
+	 * 
+	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract Direction updateCurrentDirection() throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
@@ -134,7 +189,35 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract Direction considerMoving() throws StopRequestException;
+	protected final Direction considerMoving() throws StopRequestException
+	{	ai.checkInterruption();
+	
+		// si nécessaire, on change la destination courante
+		{	long before = print("    > entering updateCurrentDestination");
+			currentDestination = updateCurrentDestination();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("    < exiting updateCurrentDestination duration="+elapsed);
+		}
+		
+		// on cherche un chemin vers cette destination
+		{	long before = print("    > entering updateCurrentPath");
+			currentPath = updateCurrentPath();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("    < exiting updateCurrentPath duration="+elapsed);
+		}
+		
+		// on utilise le chemin pour déterminer la direction de déplacement
+		{	long before = print("    > entering updateCurrentDirection");
+			currentDirection = updateCurrentDirection();
+			long after = System.currentTimeMillis();
+			long elapsed = after - before;
+			print("    < exiting updateCurrentDirection duration="+elapsed);
+		}
+		
+		return currentDirection;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////

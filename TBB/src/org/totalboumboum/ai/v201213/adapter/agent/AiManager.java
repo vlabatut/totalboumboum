@@ -54,7 +54,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * 			en un évènement compatible avec le jeu.</li>
  * </ul>
  * Elle n'est pas destinée à être modifiée par le
- * concepteur d'un agent.
+ * concepteur d'un agent (vous). Elle est réservée au moteur.
  * 
  * @author Vincent Labatut
  */
@@ -263,11 +263,11 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		}
 	}
 	
-	@Override
 	/**
 	 * Met à jour la map contenant
 	 * les temps destinés au moteur.
 	 */
+	@Override
 	public final void updateDurations()
 	{	// init
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());

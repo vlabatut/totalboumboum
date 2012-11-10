@@ -55,7 +55,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * pour une case donnée. Cependant, <b>elle ne doit jamais être appelée
  * directement<b> par l'agent. Il faut utiliser la méthode {@link #fetchValue(AiTile)},
  * qui est plus efficace car elle utilise le cache du gestionnaire d'utilité pour
- * ne pas faire de calcul inutile.
+ * ne pas faire de calcul inutile (cf. la documentation de {@link AiUtilityHandler}.
  * <br/>
  * Le critère peut être utilisé pour construire
  * un ou plusieurs cas ({@link AiUtilityCase}). 

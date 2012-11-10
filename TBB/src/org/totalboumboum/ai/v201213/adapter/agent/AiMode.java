@@ -26,8 +26,8 @@ package org.totalboumboum.ai.v201213.adapter.agent;
  * qu'un agent peut adopter : {@code COLLECTING}
  * ou {@code ATTACKING}.
  * <br/>
- * Aucun mode ne peut être ajouté par le concepteur
- * d'un agent : les modes sont imposés.
+ * Vous ne devez pas modifier ce type : aucun mode
+ * ne doit être ajouté ou retiré. Les modes sont imposés.
  * 
  * @author Vincent Labatut
  */

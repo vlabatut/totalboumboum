@@ -69,9 +69,9 @@ public final class AiUtilityCombination
 	 * 		La combinaison à recopier.
 	 */
 	public AiUtilityCombination(AiUtilityCombination combination)
-	{	this.caze = combination.caze;
-		this.criteria = combination.criteria;
-// TODO pb: faudrait initialiser les valeurs		
+	{	caze = combination.caze;
+		criteria = combination.criteria;
+		values.putAll(combination.values);
 	}
 	
     /////////////////////////////////////////////////////////////////

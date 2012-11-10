@@ -511,6 +511,11 @@
 	- mort subite :
 		- système de mort subite inclus dans le moteur
 	- API IA:
+		- initOthers dans ArtificialIntelligence
+		- vérification de l'unicité des noms de cas pour un agent
 		- cache automatique pour le calcul de critères
 		- vérification de l'unicité des noms de critère pour un agent
+		- références stockées dans des maps différentes pour chaque mode
+		- décomposition du traitement plus avancée dans le MoveHandler
+		
 	
