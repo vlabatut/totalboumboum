@@ -36,9 +36,9 @@ public class CriterionFirst extends AiUtilityCriterionBoolean<OralOzugur>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	boolean result = true;
-		ai.checkInterruption();
-	
+	{	ai.checkInterruption();
+		boolean result = true;
+		
 		// TODO à compléter par le traitement approprié
 	
 		return result;
