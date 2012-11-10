@@ -51,9 +51,9 @@ public class ParseAi
 	/** Liste des versions à ignorer */
 	private final static List<String> IGNORED_PACKAGES = Arrays.asList(new String[]
  	{	
-		"v0",
-		"v1","v1_1","v1_2","v1_3",
- 		"v2","v2_1","v2_2","v2_3",
+//		"v0",
+//		"v1","v1_1","v1_2","v1_3",
+// 		"v2","v2_1","v2_2","v2_3",
 // 		"v3","v3_1","v3_2","v3_3",
 // 		"v4","v4_1","v4_2","v4_3",
 // 		"v5","v5_1"
@@ -72,8 +72,8 @@ public class ParseAi
 	 */
 	public static void main(String[] args) throws IOException, ParseException
 	{	// on définit le chemin du pack à analyser
-		//String aiPack = "resources/ai/org/totalboumboum/ai/v201112/ais";
-		String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201112/ais";
+		String aiPack = "resources/ai/org/totalboumboum/ai/v201213/ais";
+		//String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201112/ais";
 		
 		// on lance l'analyse
 		parseAiPack(aiPack);
