@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v0.GuneySharef;
  * @author Melis Güney
  * @author Seli Sharef
  */
-public class CriterionSecond extends AiUtilityCriterionInteger
+public class CriterionSecond extends AiUtilityCriterionInteger<GuneySharef>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";
 	
@@ -29,18 +29,9 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionSecond(GuneySharef ai) throws StopRequestException
-	{	// init nom + bornes du domaine de définition
-		super(NAME,1,3);
-		
-		// init agent
-		this.ai = ai;
+	{	super(ai,NAME,1,3);
+		ai.checkInterruption();
 	}
-
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected GuneySharef ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
@@ -48,6 +39,7 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	@Override
 	public Integer processValue(AiTile tile) throws StopRequestException
 	{	int result = 2;
+		ai.checkInterruption();
 		
 		// TODO à compléter par le traitement approprié
 		

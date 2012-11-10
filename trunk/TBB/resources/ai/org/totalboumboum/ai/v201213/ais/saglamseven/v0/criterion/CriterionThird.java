@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201213.ais.saglamseven.v0.SaglamSeven;
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
-public class CriterionThird extends AiUtilityCriterionString
+public class CriterionThird extends AiUtilityCriterionString<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";
 	/** Valeur du domaine de définition */
@@ -51,18 +51,9 @@ public class CriterionThird extends AiUtilityCriterionString
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionThird(SaglamSeven ai) throws StopRequestException
-	{	// init nom + bornes du domaine de définition
-		super(NAME,DOMAIN);
-		
-		// init agent
-		this.ai = ai;
+	{	super(ai,NAME,DOMAIN);
+		ai.checkInterruption();
 	}
-
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected SaglamSeven ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
@@ -70,6 +61,7 @@ public class CriterionThird extends AiUtilityCriterionString
 	@Override
 	public String processValue(AiTile tile) throws StopRequestException
 	{	String result = VALUE3;
+		ai.checkInterruption();
 		
 		// TODO à compléter par le traitement approprié
 		

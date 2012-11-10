@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v0.GuneySharef;
  * @author Melis Güney
  * @author Seli Sharef
  */
-public class CriterionFirst extends AiUtilityCriterionBoolean
+public class CriterionFirst extends AiUtilityCriterionBoolean<GuneySharef>
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";
 	
@@ -27,26 +27,18 @@ public class CriterionFirst extends AiUtilityCriterionBoolean
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionFirst(GuneySharef ai) throws StopRequestException
-	{	// init nom
-		super(NAME);
-		
-		// init agent
-		this.ai = ai;
+	{	super(ai,NAME);
+		ai.checkInterruption();
 	}
 	
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected GuneySharef ai;
-
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	boolean result = true;
-	
+	{	ai.checkInterruption();
+		boolean result = true;
+		
 		// TODO à compléter par le traitement approprié
 	
 		return result;

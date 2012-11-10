@@ -22,7 +22,7 @@ import org.totalboumboum.ai.v201213.ais.enginsazan.v0.criterion.CriterionThird;
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
-public class UtilityHandler extends AiUtilityHandler<Example>
+public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -33,7 +33,7 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected UtilityHandler(Example ai) throws StopRequestException
+	protected UtilityHandler(EnginSazan ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -96,8 +96,8 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 		// on met les cas dans la map prévue à cet effet
 		// ceci permettra de les retrouver facilement plus tard,
 		// en particulier dans la méthode identifyCase()
-		cases.put(caseName1,case1);
-		cases.put(caseName2,case2);
+		caseMap.put(caseName1,case1);
+		caseMap.put(caseName2,case2);
 		
 		// on affecte les valeurs d'utilité
 		int utility = 1;

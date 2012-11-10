@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201213.ais.cetinilter.v0.CetinIlter;
  * @author Hakan Çetin
  * @author Mustafa Kaan İlter
  */
-public class CriterionSecond extends AiUtilityCriterionInteger
+public class CriterionSecond extends AiUtilityCriterionInteger<CetinIlter>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";
 	
@@ -29,25 +29,17 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionSecond(CetinIlter ai) throws StopRequestException
-	{	// init nom + bornes du domaine de définition
-		super(NAME,1,3);
-		
-		// init agent
-		this.ai = ai;
+	{	super(ai,NAME,1,3);
+		ai.checkInterruption();
 	}
-
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected CetinIlter ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Integer processValue(AiTile tile) throws StopRequestException
-	{	int result = 2;
+	{	ai.checkInterruption();
+		int result = 2;
 		
 		// TODO à compléter par le traitement approprié
 		

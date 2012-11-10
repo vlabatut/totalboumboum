@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.saglamseven.v0.SaglamSeven;
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
-public class CriterionFirst extends AiUtilityCriterionBoolean
+public class CriterionFirst extends AiUtilityCriterionBoolean<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";
 	
@@ -27,25 +27,17 @@ public class CriterionFirst extends AiUtilityCriterionBoolean
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionFirst(SaglamSeven ai) throws StopRequestException
-	{	// init nom
-		super(NAME);
-		
-		// init agent
-		this.ai = ai;
+	{	super(ai,NAME);
+		ai.checkInterruption();
 	}
 	
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected SaglamSeven ai;
-
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
 	{	boolean result = true;
+		ai.checkInterruption();
 	
 		// TODO à compléter par le traitement approprié
 	
