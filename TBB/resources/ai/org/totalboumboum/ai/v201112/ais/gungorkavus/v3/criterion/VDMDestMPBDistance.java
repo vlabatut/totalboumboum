@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201112.ais.gungorkavus.v3.GungorKavus;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Cette classe représente est un simple exemple de 
+ * Cette classe est un simple exemple de 
  * critère binaire. Copiez-la, renommez-la, modifiez-la
  * pour l'adapter à vos besoin.
  * 

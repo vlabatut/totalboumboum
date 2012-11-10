@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.gungorkavus.v3.GungorKavus;
 
 /**
- * Cette classe représente est un simple exemple de 
+ * Cette classe est un simple exemple de 
  * critère binaire. Copiez-la, renommez-la, modifiez-la
  * pour l'adapter à vos besoin.
  * 
