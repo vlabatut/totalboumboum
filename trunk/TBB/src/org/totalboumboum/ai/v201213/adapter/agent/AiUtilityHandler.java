@@ -163,7 +163,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected final void resetCustomData() throws StopRequestException
+	protected void resetCustomData() throws StopRequestException
 	{
 		// peut être surchargée par le concepteur de l'agent
 	}
@@ -288,7 +288,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// CRITERIA	/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map de tous les critères créés */
-	private final HashMap<String,AiUtilityCriterion<?,?>> criterionMap = new HashMap<String,AiUtilityCriterion<?,?>>();
+	protected final HashMap<String,AiUtilityCriterion<?,?>> criterionMap = new HashMap<String,AiUtilityCriterion<?,?>>();
 
 	/**
 	 * Vérifie si un critère portant le nom passé
@@ -308,9 +308,23 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	}
 	
 	/**
+	 * Ajoute un nouveau critère à la map.
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
+	 * 
+	 * @param criterion
+	 * 		Le critère à ajouter.
+	 */
+	final void insertCriterion(AiUtilityCriterion<?, ?> criterion)
+	{	String name = criterion.getName();
+		criterionMap.put(name,criterion);
+	}
+	
+	/**
 	 * Initialise tous les critères nécessaires à la définitions
-	 * des cas pour cet agent. Ces critères doivent obligatoirement 
-	 * être stockés dans la map {@link #criterionMap} (les clés 
+	 * des cas pour cet agent. Ces critères sont automatiquement
+	 * stockés dans la map {@link #criterionMap} (les clés 
 	 * {@code String} correspondent aux noms des critères).
 	 * <br/>
 	 * Bien entendu, cette initialisation est réalisée une seule
@@ -346,8 +360,22 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	}
 
 	/**
+	 * Ajoute un nouveau cas à la map.
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
+	 * 
+	 * @param caze
+	 * 		Le cas à ajouter.
+	 */
+	final void insertCase(AiUtilityCase caze)
+	{	String name = caze.getName();
+		caseMap.put(name,caze);
+	}
+	
+	/**
 	 * Initialise tous les cas nécessaires à cet agent. Ces 
-	 * cas doivent obligatoirement être stockés dans la map 
+	 * cas sont automatiquement stockés dans la map 
 	 * {@link #caseMap} (les clés {@code String} correspondent 
 	 * aux noms des cas). Cette map contient tous les cas
 	 * sans distinction de mode (i.e. à la fois les cas de

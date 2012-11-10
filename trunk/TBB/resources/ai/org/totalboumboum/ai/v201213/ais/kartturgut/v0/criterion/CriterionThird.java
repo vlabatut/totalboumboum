@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionString;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais._example.v0.Example;
+import org.totalboumboum.ai.v201213.ais.kartturgut.v0.KartTurgut;
 
 /**
  * Cette classe est un simple exemple de 
@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201213.ais._example.v0.Example;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-public class CriterionThird extends AiUtilityCriterionString<Example>
+public class CriterionThird extends AiUtilityCriterionString<KartTurgut>
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";
 	/** Valeur du domaine de définition */
@@ -50,7 +50,7 @@ public class CriterionThird extends AiUtilityCriterionString<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionThird(Example ai) throws StopRequestException
+	public CriterionThird(KartTurgut ai) throws StopRequestException
 	{	super(ai,NAME,DOMAIN);
 		ai.checkInterruption();
 	}
