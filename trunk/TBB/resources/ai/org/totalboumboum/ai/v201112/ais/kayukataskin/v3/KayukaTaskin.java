@@ -33,7 +33,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 		// verbose, qui est la variable controlant la sortie 
 		// texte de l'agent (true -> debug, false -> pas de sortie)
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 		// Ils peuvent être stockés dans cette classe ou dans
 		// un gestionnaire quelconque. 
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 		// à mettre à jour à chaque itération, e.g.
 		// des objets créés par la méthode initPercepts().
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 		//  à compléter si vous utilisez d'autres gestionnaires
 		// (bien sûr ils doivent aussi être déclarés ci-dessus)
 		
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 
 	@Override
@@ -130,6 +130,6 @@ public class KayukaTaskin extends ArtificialIntelligence
 			// les utilités courantes
 			utilityHandler.updateOutput();
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 }

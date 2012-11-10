@@ -39,7 +39,7 @@ public class CaliskanGeckalanSeven extends ArtificialIntelligence
 		// Ils peuvent être stockés dans cette classe ou dans
 		// un gestionnaire quelconque. 
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class CaliskanGeckalanSeven extends ArtificialIntelligence
 		
 		// des objets créés par la méthode initPercepts().
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -122,6 +122,6 @@ public class CaliskanGeckalanSeven extends ArtificialIntelligence
 			
 			
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 }

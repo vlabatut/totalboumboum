@@ -59,7 +59,7 @@ public class UtilityHandler extends AiUtilityHandler<IlterKaya>
 		// à compléter afin de sélectionner les cases
 		// dont on veut calculer l'utilité
 	
-		// cf. la java doc dans AiUtilityHandler pour une description de la méthode
+		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode
 		
 		return result;
 	}
@@ -75,7 +75,7 @@ public class UtilityHandler extends AiUtilityHandler<IlterKaya>
 		// le package v1.criterion. Il s'agit seulement d'un 
 		// exemple, vous devez définir vos propres critères !
 		
-		// cf. la java doc dans AiUtilityHandler pour une description de la méthode
+		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode
 
 		// on définit les critères
 		CriterionFirst criterionFirst = new CriterionFirst(ai);
@@ -170,7 +170,7 @@ public class UtilityHandler extends AiUtilityHandler<IlterKaya>
 		// à compléter pour identifier le cas associé
 		// à la case passée en paramètre
 		
-		// cf. la java doc dans AiUtilityHandler pour une description de la méthode
+		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode
 		
 		return result;
 	}

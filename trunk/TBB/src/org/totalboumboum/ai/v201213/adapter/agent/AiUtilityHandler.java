@@ -79,16 +79,34 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de 
 	 * celle-ci, grâce au mot-clé {@code super}.
+	 * <br/>
+	 * A la différence des autres gestionnaires, l'initisation
+	 * est réalisée dans une méthode séparée, qu'il faut penser
+	 * à appeler avoir créé l'object. Il s'agit de la méthode
+	 * {@link #init()}.
 	 * 
 	 * @param ai	
 	 * 		L'agent que cette classe doit gérer.
+	 */
+	protected AiUtilityHandler(T ai)
+    {	super(ai);
+    }
+	
+	/**
+	 * Initialise le gestionnaire d'utilité, en créant
+	 * les structures nécessaires ainsi que les cas,
+	 * critères et combinaisons.
+	 * <br/>
+	 * Pour des raisons techniques, ces opérations
+	 * ne peuvent pas être faites à l'instanciation
+	 * de l'objet. Cette méthode est appelée automatique,
+	 * vous (le concepteur de l'agent) ne devez pas l'invoquer.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected AiUtilityHandler(T ai) throws StopRequestException
-    {	super(ai);
-		print("    init utility handler");
+	final void init() throws StopRequestException
+	{	print("    init utility handler");
    
 		// on initialise les maps de réference (vides pour l'instant)
 		createReference();

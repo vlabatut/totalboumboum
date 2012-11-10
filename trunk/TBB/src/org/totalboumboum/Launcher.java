@@ -1589,8 +1589,6 @@ public class Launcher
 	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
 	 *  
 	 *  
-	 *  - adapter simplet pour être sûr que tout est ok
-	 *  - noter les modifs dans le changelog
 	 *  - GUI: on peut activer / désactiver la mort subite (mais pas la configurer)
 	 */
 	
