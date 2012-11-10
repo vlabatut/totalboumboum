@@ -24,15 +24,14 @@ package org.totalboumboum.ai.v201213.adapter.agent;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 
 /**
- * Classe gérant l'action de déposer une bombe
- * pour l'agent. En particulier, elle doit implémenter la méthode
- * {@link #considerBombing} de l'algorithme général.
+ * Classe gérant l'action de déposer une bombe pour l'agent.
  * <br/>
- * Si cette méthode n'est pas surchargée, alors ce gestionnaire
- * ne fait rien, donc l'agent ne posera jamais de bombe.
+ * En particulier, toute classe héritant d'elle doit 
+ * implémenter la méthode {@link #considerBombing} de 
+ * l'algorithme général..
  * 
  * @param <T> 
- * 		Classe de l'agent.
+ * 		Classe de l'agent concerné.
  * 
  * @author Vincent Labatut
  */
@@ -40,8 +39,8 @@ public abstract class AiBombHandler<T extends ArtificialIntelligence> extends Ai
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
-	 * Cette méthode doit être appelée par une classe héritant de celle-ci
-	 * grâce au mot-clé {@code super}.
+	 * Cette méthode doit obligatoirement être appelée par une classe 
+	 * héritant de celle-ci, grâce au mot-clé {@code super}.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
@@ -57,11 +56,11 @@ public abstract class AiBombHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Méthode permettant de déterminer si l'agent
 	 * doit poser une bombe ou pas. Cette décision
-	 * dépend des valeurs d'utilité courantes.
+	 * dépend, entre autres, des valeurs d'utilité 
+	 * courantes, et éventuellement d'autres informations.
 	 * <br/>
-	 * La méthode renvoie un booléen {@code true}
-	 * si l'agent doit poser une bombe, et
-	 * {@code false} sinon.
+	 * La méthode renvoie {@code true} si l'agent doit 
+	 * poser une bombe, et {@code false} sinon.
 	 * 
 	 * @return
 	 * 		Renvoie {@code true} ssi l'agent doit poser une bombe.

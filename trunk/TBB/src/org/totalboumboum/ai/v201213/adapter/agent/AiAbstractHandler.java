@@ -24,10 +24,11 @@ package org.totalboumboum.ai.v201213.adapter.agent;
 /**
  * Classe servant de base à la définition de gestionnaires
  * utilisés pour décomposer le traitement réalisé par un agent.
- * Cf. les différentes spécialisations de cette classe.
+ * Cf. les différentes spécialisations de cette classe, pour plus
+ * de détails.
  * 
  * @param <T>
- * 		Classe de l'agent.
+ * 		Classe de l'agent concerné.
  *  
  * @author Vincent Labatut
  * 
@@ -62,7 +63,9 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	 * Cette méthode affiche à l'écran le message passé en paramètre,
 	 * à condition que {@link #verbose} soit {@code true}. Elle
 	 * préfixe automatiquement la couleur de l'agent et le moment
-	 * de l'affichage. Utilisez-la pour tout affichage de message,
+	 * de l'affichage. 
+	 * <br/>
+	 * Vous devez l'utiliser pour tout affichage de message,
 	 * car elle vous permet de désactiver tous vos messages simplement
 	 * en faisant {@code verbose = false;}.
 	 * 

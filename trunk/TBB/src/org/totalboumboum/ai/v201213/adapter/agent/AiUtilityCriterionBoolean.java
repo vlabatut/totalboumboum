@@ -38,7 +38,7 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * Il ne peut pas y avoir plusieurs critères de même 
  * nom.
  * <br/>
- * Si vous désirez définir un critère binaire,
+ * Si vous désirez définir un critère booléen,
  * vous devez créer une classe fille de celle-ci,
  * dans laquelle vous surchargez la méthode
  * {@link #processValue}. Cette méthode

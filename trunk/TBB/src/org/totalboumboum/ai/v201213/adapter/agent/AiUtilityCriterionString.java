@@ -82,7 +82,7 @@ public abstract class AiUtilityCriterionString<T extends ArtificialIntelligence>
 	public AiUtilityCriterionString(T ai, String name, Set<String> domain) throws StopRequestException
 	{	// init
 		super(ai,name);
-		
+		 
 		// init valeurs
 		this.domain.addAll(domain);
 	}

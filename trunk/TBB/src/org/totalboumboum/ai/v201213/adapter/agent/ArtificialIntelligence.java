@@ -64,18 +64,17 @@ import org.totalboumboum.engine.content.feature.Direction;
  * déjà disponible).
  * <br/>
  * La mise à jour des percepts est également réalisée localement, grâce à la méthode
- * {@link #updatePercepts()}. Par défaut, elle ne fait rien du tout, il est donc
- * nécessaire de la surcharger.
+ * {@link #updatePercepts()}. Elle est abstraite, il est donc nécessaire de la surcharger.
  * <br/>
  * Enfin, la méthode {@link #updateOutput} se charge de mettre à jour la sortie
  * graphique de l'agent. Elle doit donc être surchargée si on veut afficher des 
  * informations en cours de jeu : cases colorées, texte, chemins, etc. Sinon,
- * par défaut, elle les sorties des gestionnaires de déplacement et d'utilité.
+ * par défaut, elle affiche les sorties des gestionnaires de déplacement et d'utilité.
  * <br/>
  * <br/>
  * Le reste du comportement de l'agent est implémenté dans des gestionnaires spécialisés,
  * qui prennent la forme de classes spécifiques. Les gestionnaires de mode, d'utilité,
- * de posage de bombe et de déplacement doivent respectivement hériter des classes 
+ * de dépôt de bombe et de déplacement doivent respectivement hériter des classes 
  * {@link AiModeHandler}, {@link AiUtilityHandler}, {@link AiBombHandler} et {@link AiMoveHandler}. 
  * Cf. leur documentation pour plus d'information.
  * <br/>
@@ -111,7 +110,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * de lever une {@link StopRequestException} au prochain appel 
 	 * de la méthode {@link #checkInterruption}.
 	 * <br/>
-	 * Cette méthode est réservée au moteur du jeu.
+	 * Cette méthode est réservée au moteur du jeu : 
+	 * à ne pas utiliser dans votre agent.
 	 */
 	public synchronized final void stopRequest()
 	{	stopRequest = true;		
@@ -185,7 +185,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * Méthode utilisée par le moteur du jeu 
-	 * pour initialiser la zone de l'agent. 
+	 * pour initialiser la zone de l'agent.
+	 * <br/>
+	 * Cette méthode est réservée au moteur du jeu : 
+	 * à ne pas utiliser dans votre agent.
 	 * 
 	 * @param zone	
 	 * 		l'objet représentant la zone à laquelle l'agent aura accès
@@ -194,17 +197,6 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	{	this.zone = zone;
 		output = new AiOutput(zone);
 	}
-	
-	/**
-	 * Méthode permettant de mettre à jour
-	 * les percepts de l'agent, c'est-à-dire
-	 * les différents objets stockés en interne
-	 * dans ses classes.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	protected abstract void updatePercepts() throws StopRequestException;
 	
 	/**
 	 * Méthode permettant d'initialiser
@@ -217,6 +209,17 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	protected abstract void initPercepts() throws StopRequestException;
 
+	/**
+	 * Méthode permettant de mettre à jour
+	 * les percepts de l'agent, c'est-à-dire
+	 * les différents objets stockés en interne
+	 * dans ses classes.
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	protected abstract void updatePercepts() throws StopRequestException;
+	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -237,7 +240,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * réinitialise la sortie graphique de l'agent.
+	 * Réinitialise la sortie graphique de l'agent.
 	 * méthode appelée automatiquement avant chaque itération de l'agent.
 	 */
 	private final void resetOutput()
@@ -384,6 +387,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Méthode implémentant le traitement effectué par l'agent sur la zone,
 	 * et renvoyant une action en réaction. Cette méthode implémente
 	 * l'algorithme général mis au point lors du projet 2010-11.
+	 * Elle ne peut pas être modifiée ou surchargée.
 	 * 
 	 * @return	
 	 * 		Action que l'agent a décidé d'effectuer.
@@ -507,6 +511,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/**
 	 * Réinitialise tous les temps réels
 	 * avant de démarrer le traitement.
+	 * <br/>
+	 * Cette méthode est réservée au moteur du jeu : 
+	 * à ne pas utiliser dans votre agent.
 	 */
 	private final void resetDurations()
 	{	totalDuration = 0;

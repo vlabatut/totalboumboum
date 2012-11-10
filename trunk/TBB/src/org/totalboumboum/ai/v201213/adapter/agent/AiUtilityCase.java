@@ -148,7 +148,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 			processCombinationCriterion(criterion,tile,result);
 		return result;
 	}
-	
+	 
 	/**
 	 * Méthode auxiliaire de {@link #processCombination},
 	 * chargée d'initialiser une valeur la combinaison.

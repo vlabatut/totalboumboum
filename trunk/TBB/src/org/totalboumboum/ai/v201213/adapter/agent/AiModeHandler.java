@@ -28,9 +28,11 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * implémente la méthode {@link #update}, utilisée pour 
  * mettre le mode à jour, et qui ne peut pas être modifiée 
  * ni surchargée. Cette méthode implémente l'algorithme de 
- * sélection du mode défini en cours. Elle fait appel aux 
- * méthodes {@link #hasEnoughItems} et {@link #isCollectPossible()}, 
- * qui, elles, doivent être surchargées.
+ * sélection du mode défini en cours, qui est imposé.
+ * <br/>
+ * Elle fait appel aux méthodes {@link #hasEnoughItems} et 
+ * {@link #isCollectPossible()}, qui, elles, doivent être 
+ * surchargées.
  * <br/>
  * Enfin, cette classe stocke le mode courant grâce au
  * champ {@link #mode}.
@@ -44,8 +46,8 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
-	 * Cette méthode doit être appelée par une classe héritant de celle-ci
-	 * grâce au mot-clé {@code super}.
+	 * Cette méthode doit obligatoirement être appelée par une classe 
+	 * héritant de celle-ci, grâce au mot-clé {@code super}.
 	 * 
 	 * @param ai	
 	 * 		L'agent que cette classe doit gérer.
@@ -112,7 +114,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	}
 	
 	/**
-	 * Détermine si l'agent possède assez d'item,
+	 * Détermine si l'agent possède assez d'items,
 	 * ou bien s'il doit essayer d'en ramasser d'autres.
 	 * Cette distinction est relative à l'environnement,
 	 * à l'agent lui-même et à la stratégie qu'il utilise.
@@ -122,6 +124,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		{@code true} ssi l'agent possède assez d'items.
+	 * 
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
@@ -137,6 +140,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		{@code true} ssi l'agent a la possibilité de ramasser des items.
+	 * 
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
