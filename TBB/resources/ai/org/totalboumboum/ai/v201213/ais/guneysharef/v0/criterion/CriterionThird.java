@@ -60,8 +60,8 @@ public class CriterionThird extends AiUtilityCriterionString<GuneySharef>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String processValue(AiTile tile) throws StopRequestException
-	{	String result = VALUE3;
-		ai.checkInterruption();
+	{	ai.checkInterruption();
+		String result = VALUE3;
 		
 		// TODO à compléter par le traitement approprié
 		

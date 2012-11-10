@@ -38,9 +38,9 @@ public class CriterionSecond extends AiUtilityCriterionInteger<OralOzugur>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Integer processValue(AiTile tile) throws StopRequestException
-	{	int result = 2;
-		ai.checkInterruption();
-
+	{	ai.checkInterruption();
+		int result = 2;
+		
 		// TODO à compléter par le traitement approprié
 		
 		return result;
