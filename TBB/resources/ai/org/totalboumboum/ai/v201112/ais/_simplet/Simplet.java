@@ -40,7 +40,7 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
  * <br/>
  * L'agent Simplet change très peu d'objectif, il est capable  de trouver un chemin 
  * pour atteindre son adversaire. Sa stratégie  d'attaque est minimaliste :
- * il se contente de poser une bombe à la fois de manière à géner son 
+ * il se contente de poser une bombe à la fois, de manière à géner son 
  * adversaire. Ceci montre bien l'inutilité de cette stratégie : n'importe 
  * quel joueur, même moyen, pourra s'échapper facilement de ce genre de 
  * situation.
