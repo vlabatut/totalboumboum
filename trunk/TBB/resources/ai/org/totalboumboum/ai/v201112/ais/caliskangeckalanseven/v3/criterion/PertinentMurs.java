@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201112.ais.caliskangeckalanseven.v3.CaliskanGeckala
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Cette classe représente est un simple exemple de 
+ * Cette classe est un simple exemple de 
  * critère entier. Copiez-la, renommez-la, modifiez-la
  * pour l'adapter à vos besoin. Notez que les bornes
  * du domaine de définition sont spécifiées dans

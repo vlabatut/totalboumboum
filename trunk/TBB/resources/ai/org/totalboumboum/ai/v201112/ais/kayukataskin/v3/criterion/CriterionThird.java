@@ -10,7 +10,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.ais.kayukataskin.v3.KayukaTaskin;
 
 /**
- * Cette classe représente est un simple exemple de 
+ * Cette classe est un simple exemple de 
  * critère chaîne de caractères. Copiez-la, renommez-la, modifiez-la
  * pour l'adapter à vos besoin. Notez que le domaine
  * de définition est spécifiés dans l'appel au constructeur 
