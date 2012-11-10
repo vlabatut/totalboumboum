@@ -518,4 +518,3 @@
 		- références stockées dans des maps différentes pour chaque mode
 		- décomposition du traitement plus avancée dans le MoveHandler
 		
-	
