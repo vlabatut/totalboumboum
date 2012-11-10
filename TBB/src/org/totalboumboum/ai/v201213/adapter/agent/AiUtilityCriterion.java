@@ -103,6 +103,9 @@ public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> im
 		// initialise le critère
 		this.ai = ai;
 		this.name = name;
+		
+		// ajoute à la liste du gestionnaire d'utilité
+		handler.insertCriterion(this);
 	}
 	
     /////////////////////////////////////////////////////////////////

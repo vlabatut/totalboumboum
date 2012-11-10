@@ -87,6 +87,9 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 			else
 				this.criteria.add(criterion);
 		}
+		
+		// on ajoute à la liste de cas du gestionnaire d'utilité
+		handler.insertCase(this);
 	}
 	
     /////////////////////////////////////////////////////////////////

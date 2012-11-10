@@ -1600,7 +1600,6 @@ public class Launcher
 	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
 	 *  
 	 *  
-	 *  - dans l'utility handler, séparer l'init des critères puis des cases ? (voir dans simplet si ça vaut le coup)
 	 *  - corriger les nouveaux bugs dans les agents de cette année
 	 *  	- modifier les commentaires pour rappeler de ne pas utiliser "process" mais "fetch"
 	 *  - adapter simplet pour être sûr que tout est ok

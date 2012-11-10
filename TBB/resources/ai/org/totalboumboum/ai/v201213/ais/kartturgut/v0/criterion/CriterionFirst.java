@@ -3,7 +3,7 @@ package org.totalboumboum.ai.v201213.ais.kartturgut.v0.criterion;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais._example.v0.Example;
+import org.totalboumboum.ai.v201213.ais.kartturgut.v0.KartTurgut;
 
 /**
  * Cette classe est un simple exemple de 
@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais._example.v0.Example;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-public class CriterionFirst extends AiUtilityCriterionBoolean<Example>
+public class CriterionFirst extends AiUtilityCriterionBoolean<KartTurgut>
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";
 	
@@ -26,7 +26,7 @@ public class CriterionFirst extends AiUtilityCriterionBoolean<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionFirst(Example ai) throws StopRequestException
+	public CriterionFirst(KartTurgut ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
 	}

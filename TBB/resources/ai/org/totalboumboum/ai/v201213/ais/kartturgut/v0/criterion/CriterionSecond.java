@@ -3,7 +3,7 @@ package org.totalboumboum.ai.v201213.ais.kartturgut.v0.criterion;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionInteger;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais._example.v0.Example;
+import org.totalboumboum.ai.v201213.ais.kartturgut.v0.KartTurgut;
 
 /**
  * Cette classe est un simple exemple de 
@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201213.ais._example.v0.Example;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-public class CriterionSecond extends AiUtilityCriterionInteger<Example>
+public class CriterionSecond extends AiUtilityCriterionInteger<KartTurgut>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";
 	
@@ -28,7 +28,7 @@ public class CriterionSecond extends AiUtilityCriterionInteger<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionSecond(Example ai) throws StopRequestException
+	public CriterionSecond(KartTurgut ai) throws StopRequestException
 	{	super(ai,NAME,1,3);
 		ai.checkInterruption();
 	}

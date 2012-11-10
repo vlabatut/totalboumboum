@@ -2,6 +2,8 @@ package org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v0;
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201213.adapter.data.AiTile;
+import org.totalboumboum.ai.v201213.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -35,10 +37,34 @@ public class MoveHandler extends AiMoveHandler<GerginOzkanoglu>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PROCESSING				/////////////////////////////////////
+	// DESTINATION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected Direction considerMoving() throws StopRequestException
+	protected AiTile updateCurrentDestination() throws StopRequestException
+	{	ai.checkInterruption();
+		
+		// TODO à compléter
+		
+		return null;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PATH						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected AiPath updateCurrentPath() throws StopRequestException
+	{	ai.checkInterruption();
+		
+		// TODO à compléter
+		
+		return null;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected Direction updateCurrentDirection() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		// TODO à compléter
