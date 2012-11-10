@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet;
+package org.totalboumboum.ai.v201213.ais._simplet;
 
 /*
  * Total Boum Boum
@@ -26,16 +26,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201112.adapter.agent.AiAbstractHandler;
-import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
-import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
-import org.totalboumboum.ai.v201112.adapter.data.AiFire;
-import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201213.adapter.agent.AiAbstractHandler;
+import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201213.adapter.data.AiFire;
+import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiTile;
+import org.totalboumboum.ai.v201213.adapter.data.AiZone;
+import org.totalboumboum.ai.v201213.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201213.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -44,7 +44,6 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-@SuppressWarnings("deprecation")
 public class CommonTools extends AiAbstractHandler<Simplet>
 {	
 	/**
@@ -302,7 +301,7 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 		{	ai.checkInterruption();	
 			
 			AiBomb bomb = it.next();
-			long timeRemaining = bomb.getNormalDuration() - bomb.getTime();
+			long timeRemaining = bomb.getNormalDuration() - bomb.getElapsedTime();
 			// on ne traite que les bombes menaçantes : soit pas temporelles, soit
 			// temporelles avec moins de temps restant que pour traverser une case
 			if(!bomb.hasCountdownTrigger() || totalDuration<0 || timeRemaining<totalDuration)

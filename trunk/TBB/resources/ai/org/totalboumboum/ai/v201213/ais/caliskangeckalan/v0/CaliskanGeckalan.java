@@ -18,11 +18,17 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  */
 public class CaliskanGeckalan extends ArtificialIntelligence
 {
+	/**
+	 * Instancie la classe principale de l'agent.
+	 */
+	public CaliskanGeckalan()
+	{	// active/désactive la sortie texte
+		verbose = true;
+	}
+	
 	@Override
 	protected void initOthers() throws StopRequestException
 	{	checkInterruption();
-		
-		verbose = true;
 		
 		// TODO à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement, et qui
