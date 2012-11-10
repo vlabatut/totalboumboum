@@ -147,7 +147,9 @@ public class UtilityHandler extends AiUtilityHandler<BalyerGuven>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	protected void initReferenceUtilities() throws StopRequestException
-	{	// on affecte les valeurs d'utilité
+	{	ai.checkInterruption();
+	
+		// on affecte les valeurs d'utilité
 		int utility;
 		AiUtilityCombination combi;
 		AiMode mode;
