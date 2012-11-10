@@ -66,7 +66,7 @@ public class UnluYildirim extends ArtificialIntelligence
 		//  à compléter si vous utilisez d'autres gestionnaires
 		// (bien sûr ils doivent aussi être déclarés ci-dessus)
 		
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 
 	@Override
@@ -107,6 +107,6 @@ public class UnluYildirim extends ArtificialIntelligence
 			// les utilités courantes
 			utilityHandler.updateOutput();
 	
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 }

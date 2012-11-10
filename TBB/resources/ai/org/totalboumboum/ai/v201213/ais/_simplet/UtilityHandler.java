@@ -338,7 +338,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 		}
 		
 		// cas d'attaque
-		mode = AiMode.COLLECTING;
+		mode = AiMode.ATTACKING;
 		utility = 1;
 		for(int threat=1;threat<=CriterionThreat.THREAT_LIMIT;threat++)
 		{	ai.checkInterruption();	

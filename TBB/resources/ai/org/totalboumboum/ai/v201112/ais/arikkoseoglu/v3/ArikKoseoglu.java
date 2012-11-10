@@ -104,6 +104,6 @@ public class ArikKoseoglu extends ArtificialIntelligence
 			//utilityHandler.updateOutput();
 			//AiOutput ecran = new AiOutput(getZone());
 			
-		// cf. la java doc dans ArtificialIntelligence pour une description de la méthode
+		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 }

@@ -358,6 +358,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		
 		// initialisation des gestionnaires
 		initHandlers();
+		getUtilityHandler().init(); // l'initialisation de ce gestionnaire doit être terminée après sa création
 		
 		// autres initialisations
 		initOthers();
@@ -413,20 +414,20 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			}
 			
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
-			{	before = print("  > Entering updateMode");
+			{	before = print("  > Entering mode update");
 				getModeHandler().update();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
-				print("  < Exiting updateMode: duration="+elapsed+" ms result="+getModeHandler().mode);
+				print("  < Exiting mode update: duration="+elapsed+" ms result="+getModeHandler().mode);
 				stepDurations.put(MODE,elapsed);
 			}
 			
 			// mise à jour des valeurs d'utilité
-			{	before = print("  > Entering updateUtility");
+			{	before = print("  > Entering utility update");
 				getUtilityHandler().update();
 				after = System.currentTimeMillis();
 				elapsed = after - before;
-				print("  < Exiting updateUtility: duration="+elapsed+" ms");
+				print("  < Exiting utility update: duration="+elapsed+" ms");
 				stepDurations.put(UTILITY,elapsed);
 			}
 		}
