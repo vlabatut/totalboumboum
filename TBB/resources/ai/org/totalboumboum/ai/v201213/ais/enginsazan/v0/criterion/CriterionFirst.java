@@ -3,7 +3,7 @@ package org.totalboumboum.ai.v201213.ais.enginsazan.v0.criterion;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais.enginsazan.v0.Example;
+import org.totalboumboum.ai.v201213.ais.enginsazan.v0.EnginSazan;
 
 /**
  * Cette classe représente est un simple exemple de 
@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.enginsazan.v0.Example;
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
-public class CriterionFirst extends AiUtilityCriterionBoolean
+public class CriterionFirst extends AiUtilityCriterionBoolean<EnginSazan>
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";
 	
@@ -26,26 +26,18 @@ public class CriterionFirst extends AiUtilityCriterionBoolean
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionFirst(Example ai) throws StopRequestException
-	{	// init nom
-		super(NAME);
-		
-		// init agent
-		this.ai = ai;
+	public CriterionFirst(EnginSazan ai) throws StopRequestException
+	{	super(ai,NAME);
+		ai.checkInterruption();
 	}
 	
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected Example ai;
-
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	boolean result = true;
+	{	ai.checkInterruption();
+		boolean result = true;
 	
 		// TODO à compléter par le traitement approprié
 	

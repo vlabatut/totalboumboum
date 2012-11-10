@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.enginsazan;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.enginsazan.v0.Example;
+import org.totalboumboum.ai.v201213.ais.enginsazan.v0.EnginSazan;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.
@@ -42,6 +42,6 @@ public class AiMain extends AiManager
 	 * classe principale de l'agent.
 	 */
 	public AiMain()
-	{	super(new Example());		
+	{	super(new EnginSazan());		
 	}
 }

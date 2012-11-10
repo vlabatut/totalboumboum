@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionString;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.ais.enginsazan.v0.Example;
+import org.totalboumboum.ai.v201213.ais.enginsazan.v0.EnginSazan;
 
 /**
  * Cette classe représente est un simple exemple de 
@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201213.ais.enginsazan.v0.Example;
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
-public class CriterionThird extends AiUtilityCriterionString
+public class CriterionThird extends AiUtilityCriterionString<EnginSazan>
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";
 	/** Valeur du domaine de définition */
@@ -50,26 +50,18 @@ public class CriterionThird extends AiUtilityCriterionString
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionThird(Example ai) throws StopRequestException
-	{	// init nom + bornes du domaine de définition
-		super(NAME,DOMAIN);
-		
-		// init agent
-		this.ai = ai;
+	public CriterionThird(EnginSazan ai) throws StopRequestException
+	{	super(ai,NAME,DOMAIN);
+		ai.checkInterruption();
 	}
-
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected Example ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String processValue(AiTile tile) throws StopRequestException
-	{	String result = VALUE3;
+	{	ai.checkInterruption();
+		String result = VALUE3;
 		
 		// TODO à compléter par le traitement approprié
 		

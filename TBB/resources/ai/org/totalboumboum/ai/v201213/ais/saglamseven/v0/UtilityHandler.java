@@ -96,8 +96,8 @@ public class UtilityHandler extends AiUtilityHandler<SaglamSeven>
 		// on met les cas dans la map prévue à cet effet
 		// ceci permettra de les retrouver facilement plus tard,
 		// en particulier dans la méthode identifyCase()
-		cases.put(caseName1,case1);
-		cases.put(caseName2,case2);
+		caseMap.put(caseName1,case1);
+		caseMap.put(caseName2,case2);
 		
 		// on affecte les valeurs d'utilité
 		int utility = 1;

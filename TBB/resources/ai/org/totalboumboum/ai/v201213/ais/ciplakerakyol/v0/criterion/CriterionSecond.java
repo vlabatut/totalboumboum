@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v0.CiplakErakyol;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
-public class CriterionSecond extends AiUtilityCriterionInteger
+public class CriterionSecond extends AiUtilityCriterionInteger<CiplakErakyol>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";
 	
@@ -29,25 +29,17 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionSecond(CiplakErakyol ai) throws StopRequestException
-	{	// init nom + bornes du domaine de définition
-		super(NAME,1,3);
-		
-		// init agent
-		this.ai = ai;
+	{	super(ai,NAME,1,3);
+		ai.checkInterruption();
 	}
-
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected CiplakErakyol ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Integer processValue(AiTile tile) throws StopRequestException
-	{	int result = 2;
+	{	ai.checkInterruption();
+		int result = 2;
 		
 		// TODO à compléter par le traitement approprié
 		

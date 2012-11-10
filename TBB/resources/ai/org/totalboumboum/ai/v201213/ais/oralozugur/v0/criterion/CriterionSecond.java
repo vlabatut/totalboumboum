@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201213.ais.oralozugur.v0.OralOzugur;
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
-public class CriterionSecond extends AiUtilityCriterionInteger
+public class CriterionSecond extends AiUtilityCriterionInteger<OralOzugur>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";
 	
@@ -29,18 +29,9 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionSecond(OralOzugur ai) throws StopRequestException
-	{	// init nom + bornes du domaine de définition
-		super(NAME,1,3);
-		
-		// init agent
-		this.ai = ai;
+	{	super(ai,NAME,1,3);
+		ai.checkInterruption();
 	}
-
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected OralOzugur ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
@@ -48,7 +39,8 @@ public class CriterionSecond extends AiUtilityCriterionInteger
 	@Override
 	public Integer processValue(AiTile tile) throws StopRequestException
 	{	int result = 2;
-		
+		ai.checkInterruption();
+
 		// TODO à compléter par le traitement approprié
 		
 		return result;

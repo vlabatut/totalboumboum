@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
-public class Example extends ArtificialIntelligence
+public class EnginSazan extends ArtificialIntelligence
 {
 	@Override
 	protected void init() throws StopRequestException
@@ -91,25 +91,25 @@ public class Example extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler<Example> getModeHandler() throws StopRequestException
+	protected AiModeHandler<EnginSazan> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiUtilityHandler<Example> getUtilityHandler() throws StopRequestException
+	protected AiUtilityHandler<EnginSazan> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler<Example> getBombHandler() throws StopRequestException
+	protected AiBombHandler<EnginSazan> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler<Example> getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<EnginSazan> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}
