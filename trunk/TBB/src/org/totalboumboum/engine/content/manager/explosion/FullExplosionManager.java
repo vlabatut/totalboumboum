@@ -94,11 +94,11 @@ public class FullExplosionManager extends ExplosionManager
 			fire.setOwner(owner);
 			SpecificAction specificAction = new SpecificAppear(fire,Direction.NONE);
 			AbstractAbility ability = fire.modulateAction(specificAction);
-			if(!fake)
-			{	if(!ability.isActive())
-				{	fire.consumeTile(tile);
-				}
-				else
+			if(!ability.isActive())
+			{	fire.consumeTile(tile,fake);
+			}
+			else
+			{	if(!fake)
 				{	RoundVariables.level.insertSpriteTile(fire);
 					SpriteInsertionEvent event = new SpriteInsertionEvent(fire);
 					RoundVariables.writeEvent(event);
@@ -130,6 +130,7 @@ public class FullExplosionManager extends ExplosionManager
 						tiles[i] = tempTile;
 						if(!processed.contains(tempTile))
 						{	processed.add(tempTile);
+							boolean inRange = false;
 							Fire fire;
 							if(length==flameRange)
 								fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractères par des valeurs énumérées
@@ -139,14 +140,15 @@ public class FullExplosionManager extends ExplosionManager
 							SpecificAction specificAction = new SpecificAppear(fire,direction);
 							AbstractAbility ability = fire.modulateAction(specificAction);
 							blocked[i] = !ability.isActive();
-							if(!fake)
-							{	if(blocked[i])
-								{	fire.consumeTile(tempTile);
-									//blocked[i] = true;
-								}
-								else
-								{	goOn = true;
-									RoundVariables.level.insertSpriteTile(fire);
+							if(blocked[i])
+							{	inRange = fire.consumeTile(tempTile,fake);
+								//blocked[i] = true;
+							}
+							else
+							{	goOn = true;
+								inRange = true;
+								if(!fake)
+								{	RoundVariables.level.insertSpriteTile(fire);
 									SpriteInsertionEvent event = new SpriteInsertionEvent(fire);
 									RoundVariables.writeEvent(event);
 									//
@@ -155,10 +157,8 @@ public class FullExplosionManager extends ExplosionManager
 									fire.processEvent(evt);
 								}
 							}
-							else
-							{	goOn = goOn || !blocked[i];
-							}
-							result.add(tempTile);
+							if(inRange)
+								result.add(tempTile);
 						}
 					}
 				}

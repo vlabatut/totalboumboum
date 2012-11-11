@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -299,7 +300,9 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 					{	processed.add(tempTile);
 						blocked[i] = !tempTile.isCrossableBy(fire);
 						goOn = goOn || !blocked[i];
-						result.add(tempTile);
+						List<AiBlock> blocks = tempTile.getBlocks();
+						if(blocks.isEmpty() || blocks.get(0).isDestructible())
+							result.add(tempTile);
 					}
 				}
 			}

@@ -32,6 +32,8 @@ import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.model.full.AiFullModel;
@@ -51,7 +53,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * d'information (la zone complète, en fait) sont plus appropriés
  * à des calculs liés à la prise de décision et à la stratégie de l'agent.
  * <br/>
- * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
+ * Pour préserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
  * méthodes proposées dans cette classe. Il peut :
  * <ul>
@@ -64,6 +66,12 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * partir de l'existant, avant d'y effectuer une simulation.
  * <br/>
  * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.
+ * <br/>
+ * A noter que la mort subite est prise en compte seulement partiellement, en
+ * raison de sa nature partiellement aléatoire : quand un sprite tombe du ciel,
+ * il est possible qu'il rebondisse au hasard si sa case d'atterrissage est déjà
+ * occupée. La case dans laquelle ce sprite finira est complètement imprévisible,
+ * et ne peut donc être simulée.
  * <br/>
  * Il faut souligner que les pas de simulation sont déterminés de façon évènementielle.
  * En d'autres termes, un pas se termine quand un évènement se produit. Les 
@@ -411,7 +419,7 @@ public class AiPartialModel
 			{	// add explosion to the matrix
 				long endTime = delay + bomb.getExplosionDuration();
 				// get the bomb blast
-				List<AiTile> blast = bomb.getBlast();
+				List<AiTile> blast = getBlast(delay,bomb);
 				for(AiTile tile: blast)
 				{	// check if the tile contains a hardwall
 					List<AiBlock> blocks = tile.getBlocks();
@@ -421,7 +429,7 @@ public class AiPartialModel
 					{	AiBlock block = it.next();
 						hardwall = !block.isDestructible();
 					}
-					
+// TODO question: si un mur disparait, est-il compté pour les explosions futures ? 					
 					// only adds tiles without any hardwall (these will always be obstacles anyway)
 					if(!hardwall)
 					{	int col = tile.getCol();
@@ -437,6 +445,107 @@ public class AiPartialModel
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Cette méthode identifie les case qui seront touchées
+	 * par l'explosion de la bombe passée en paramètre.
+	 * <br/>
+	 * La méthode {@link AiBomb#getBlast} n'est pas utilisable ici,
+	 * car elle ne tient pas compte de l'évolution précedente de
+	 * la zone. Il faut donc explicitement faire ce calcul ici.
+	 * C'est aussi dans cette méthode qu'on tiendra compte de la mort
+	 * subite (partiellement).
+	 *  
+	 * @param start
+	 * 		Instant d'explosion de la bombe.
+	 * @param bomb
+	 * 		La bombe qu'on veut traiter.
+	 * @return
+	 *		Une liste de cases (peut être vide, en fonction de la bombe).
+	 */
+	private List<AiTile> getBlast(long start, AiBomb bomb)
+	{	List<AiTile> result = new ArrayList<AiTile>();
+		int range = bomb.getRange();
+		AiFire fire = bomb.getFirePrototype();
+		
+		// center
+		AiTile tile = bomb.getTile();
+		result.add(tile);
+		
+		// branches
+		boolean blocked[] = {false,false,false,false};
+		AiTile tiles[] = {tile,tile,tile,tile};
+		Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
+		List<AiTile> processed = new ArrayList<AiTile>();
+		processed.add(tile);
+		boolean goOn = true;
+		int length = 1;
+		while(goOn && length<=range)
+		{	goOn = false;
+			// increase the explosion
+			for(int i=0;i<directions.length;i++)
+			{	if(!blocked[i])
+				{	// get the tile
+					Direction direction = directions[i];
+					AiTile tempTile = tiles[i].getNeighbor(direction);
+					tiles[i] = tempTile;
+					int col = tempTile.getCol();
+					int row = tempTile.getRow();
+					if(!processed.contains(tempTile))
+					{	processed.add(tempTile);
+					
+						// retrieve all related sudden death events
+						List<AiSuddenDeathEvent> sde = zone.getAllSuddenDeathEvents();
+						List<AiSuddenDeathEvent> relatedSde = new ArrayList<AiSuddenDeathEvent>();
+						Iterator<AiSuddenDeathEvent> it = sde.iterator();
+						if(it.hasNext())
+						{	AiSuddenDeathEvent s;
+							do
+							{	s = it.next();
+								if(s.getTime()<=start)
+									relatedSde.add(s);
+							}
+							while(it.hasNext() && s.getTime()<=start);
+						}
+				
+					
+						long since = -1;
+						if(tempTile.isCrossableBy(fire))
+						{	// no current obstacle >> fire not blocked
+							blocked[i] = false;
+							since = 0;
+						}
+						else
+						{	// obstacle...
+							AiExplosionList exps = explosions[row][col];
+							if(exps==null)
+							{	blocked[i] = true;
+							}
+							else
+							{	AiExplosion exp = exps.getIntersection(0,start);
+								// no previous explosion >> fire blocked
+								if(exp==null)
+									blocked[i] = true;
+								// previous explosion >> fire not blocked
+								else
+								{	blocked[i] = false;
+									since = exp.getEnd();
+								}
+							}
+						}
+						
+						
+						// finishing the tile process
+						goOn = goOn || !blocked[i];
+						result.add(tempTile);
+					}
+				}
+			}
+			length++;
+		}
+	
+		return result;
 	}
 	
 	/**

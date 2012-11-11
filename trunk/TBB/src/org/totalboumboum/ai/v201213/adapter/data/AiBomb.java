@@ -138,8 +138,8 @@ public interface AiBomb extends AiSprite
 
 	/**
 	 * Calcule une liste de cases correspondant au souffle de cette bombe,
-	 * i.e. toutes les cases qui seront atteinte quand elle va exploser
-	 * (y compris la case contenant la bombe elle-même). 
+	 * i.e. toutes les cases qui seraient atteintes <b>si elle va explosait
+	 * maintenant </b> (y compris la case contenant la bombe elle-même). 
 	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
 	 * ne donne que les cases qui seront touchées si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
@@ -148,7 +148,7 @@ public interface AiBomb extends AiSprite
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	
-	 * 		une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
+	 * 		une liste de cases correspondant aux cases qui seraint touchées par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast();
 
