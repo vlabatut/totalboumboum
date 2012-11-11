@@ -140,7 +140,7 @@ public interface AiSprite extends Comparable<AiSprite>
 	 *  @param sprite
 	 *  	le sprite à tester
 	 *  @return	
-	 *  	vrai si ce sprite le laisser passer par sa case 
+	 *  	vrai si ce sprite le laisse passer par sa case 
 	 */
 	public boolean isCrossableBy(AiSprite sprite);
 

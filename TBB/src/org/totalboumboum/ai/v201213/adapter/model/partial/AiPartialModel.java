@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -397,8 +398,11 @@ public class AiPartialModel
 	}
 	
 	/**
-	 * Intègre les bombes dans la matrice
-	 * d'explosions.
+	 * Intègre les bombes dans la matrice d'explosions.
+	 * Toutes les cases appartenant au blast des bombes sont
+	 * ajoutées dans la matrice. Les explosions précédentes
+	 * et les évènements de mort subite sont pris en compte
+	 * (approximativement, pour ces dernier). 
 	 */
 	private void initBombs()
 	{	//HashMap<AiBomb,List<AiBomb>> threatenedBombs = zone.getThreatenedBombs();
@@ -420,28 +424,17 @@ public class AiPartialModel
 				long endTime = delay + bomb.getExplosionDuration();
 				// get the bomb blast
 				List<AiTile> blast = getBlast(delay,bomb);
+				// add each tile to the explosion matrix
 				for(AiTile tile: blast)
-				{	// check if the tile contains a hardwall
-					List<AiBlock> blocks = tile.getBlocks();
-					boolean hardwall = false;
-					Iterator<AiBlock> it = blocks.iterator();
-					while(it.hasNext() && !hardwall)
-					{	AiBlock block = it.next();
-						hardwall = !block.isDestructible();
+				{	int col = tile.getCol();
+					int row = tile.getRow();
+					AiExplosionList list = explosions[row][col];
+					if(list==null)
+					{	list = new AiExplosionList(tile);
+						explosions[row][col] = list;
 					}
-// TODO question: si un mur disparait, est-il compté pour les explosions futures ? 					
-					// only adds tiles without any hardwall (these will always be obstacles anyway)
-					if(!hardwall)
-					{	int col = tile.getCol();
-						int row = tile.getRow();
-						AiExplosionList list = explosions[row][col];
-						if(list==null)
-						{	list = new AiExplosionList(tile);
-							explosions[row][col] = list;
-						}
-						AiExplosion explosion = new AiExplosion(delay,endTime,tile);
-						list.add(explosion);
-					}
+					AiExplosion explosion = new AiExplosion(delay,endTime,tile);
+					list.add(explosion);
 				}
 			}
 		}
@@ -467,7 +460,6 @@ public class AiPartialModel
 	private List<AiTile> getBlast(long start, AiBomb bomb)
 	{	List<AiTile> result = new ArrayList<AiTile>();
 		int range = bomb.getRange();
-		AiFire fire = bomb.getFirePrototype();
 		
 		// center
 		AiTile tile = bomb.getTile();
@@ -490,55 +482,22 @@ public class AiPartialModel
 					Direction direction = directions[i];
 					AiTile tempTile = tiles[i].getNeighbor(direction);
 					tiles[i] = tempTile;
-					int col = tempTile.getCol();
-					int row = tempTile.getRow();
 					if(!processed.contains(tempTile))
 					{	processed.add(tempTile);
+						boolean inRange = true;
 					
-						// retrieve all related sudden death events
-						List<AiSuddenDeathEvent> sde = zone.getAllSuddenDeathEvents();
-						List<AiSuddenDeathEvent> relatedSde = new ArrayList<AiSuddenDeathEvent>();
-						Iterator<AiSuddenDeathEvent> it = sde.iterator();
-						if(it.hasNext())
-						{	AiSuddenDeathEvent s;
-							do
-							{	s = it.next();
-								if(s.getTime()<=start)
-									relatedSde.add(s);
-							}
-							while(it.hasNext() && s.getTime()<=start);
+						// get the tile content at this time
+						AiSprite sprite = getTileContentAtTime(tempTile,start);
+						if(sprite!=null)
+						{	blocked[i] = true;
+							if(sprite instanceof AiBlock)
+								inRange = ((AiBlock)sprite).isDestructible();
 						}
-				
-					
-						long since = -1;
-						if(tempTile.isCrossableBy(fire))
-						{	// no current obstacle >> fire not blocked
-							blocked[i] = false;
-							since = 0;
-						}
-						else
-						{	// obstacle...
-							AiExplosionList exps = explosions[row][col];
-							if(exps==null)
-							{	blocked[i] = true;
-							}
-							else
-							{	AiExplosion exp = exps.getIntersection(0,start);
-								// no previous explosion >> fire blocked
-								if(exp==null)
-									blocked[i] = true;
-								// previous explosion >> fire not blocked
-								else
-								{	blocked[i] = false;
-									since = exp.getEnd();
-								}
-							}
-						}
-						
 						
 						// finishing the tile process
 						goOn = goOn || !blocked[i];
-						result.add(tempTile);
+						if(inRange)
+							result.add(tempTile);
 					}
 				}
 			}
@@ -549,8 +508,106 @@ public class AiPartialModel
 	}
 	
 	/**
-	 * Initialise la map d'explosions à 
-	 * partir de la matrice.
+	 * Méthode utilisée pour calculer le blast des bombes.
+	 * Elle renvoie le contenu d'une case à l'instant spécifié.
+	 * Les explosions et évènements de mort subite sont pris
+	 * en compte (de façon approximative, pour ces derniers).
+	 * 
+	 * @param tile
+	 * 		La case dont on veut le contenu.
+	 * @param time
+	 * 		L'instant ciblé.
+	 * @return
+	 * 		Un sprite représentant le contenu de la case, ou {@code null}
+	 * 		si elle ne contient pas d'obstacle.
+	 */
+	private AiSprite getTileContentAtTime(AiTile tile, long time)
+	{	AiSprite result = null;
+		AiSprite temp = null;
+		long totalTime = zone.getTotalTime();
+		int row = tile.getRow();
+		int col = tile.getCol();
+		
+		// init
+		List<AiBlock> blocks = tile.getBlocks();
+		List<AiItem> items = tile.getItems();
+		List<AiBomb> bombs = tile.getBombs();
+		if(!blocks.isEmpty())
+		{	temp = blocks.get(0);
+			if(!((AiBlock)temp).isDestructible())
+				result = temp;
+		}
+		else if(!items.isEmpty())
+		{	temp = items.get(0);
+		}
+		else if(!bombs.isEmpty())
+		{	temp = bombs.get(0);
+		}
+		
+		if(result == null)
+		{	// retrieve all related sudden death events
+			List<AiSuddenDeathEvent> sde = zone.getAllSuddenDeathEvents();
+			List<AiSuddenDeathEvent> relatedSde = new ArrayList<AiSuddenDeathEvent>();
+			Iterator<AiSuddenDeathEvent> it = sde.iterator();
+			if(it.hasNext())
+			{	AiSuddenDeathEvent s;
+				do
+				{	s = it.next();
+					if(s.getTime()<=time)
+						relatedSde.add(s);
+				}
+				while(it.hasNext() && s.getTime()<=time);
+			}
+			
+			// (approximate) simulation
+			it = relatedSde.iterator();
+			Iterator<AiExplosion> it2 = explosions[row][col].iterator();
+			long time1 = Long.MAX_VALUE;
+			long time2 = Long.MAX_VALUE;
+			AiSuddenDeathEvent evt = null;
+			while(result==null && (it.hasNext() || it2.hasNext()))
+			{	// get the respective times
+				if(time1==Long.MAX_VALUE && it.hasNext())
+				{	evt = it.next();
+					time1 = evt.getTime() - totalTime;
+				}
+				if(time2==Long.MAX_VALUE && it2.hasNext())
+				{	AiExplosion e = it2.next();
+					time2 = e.getStart();
+				}
+				
+				// a sd event occurs
+				if(time1<time2)
+				{	List<AiSprite> list = evt.getSpritesForTile(tile);
+					for(AiSprite s: list)
+					{	if(s instanceof AiBlock)
+						{	temp = s;	
+							if(!((AiBlock)s).isDestructible())
+								result = temp;
+						}
+						else if(s instanceof AiItem || s instanceof AiBomb)
+						{	if(temp == null)
+								temp = s;
+						}
+					}
+					time1 = Long.MAX_VALUE;
+				}
+				// an explosion occurs 
+				else if(time2>time1 || (time1==time2 && time2!=Long.MAX_VALUE))
+				{	temp = null;
+					time2 = Long.MAX_VALUE;
+				}
+			}
+			
+			if(result==null)
+				result = temp;
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Initialise la map d'explosions à partir de la matrice.
 	 */
 	private void initMap()
 	{	explosionMap = new HashMap<Long, List<AiExplosion>>();
