@@ -49,14 +49,14 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * simplifiée, définie spécifiquement pour A*. Au contraire, les
  * objets de classe {@link AiFullModel}, qui contiennent plus
  * d'information (la zone complète, en fait) sont plus appropriés
- * à des calculs liés à la précise de décision et à la stratégie de l'agent.
+ * à des calculs liés à la prise de décision et à la stratégie de l'agent.
  * <br/>
  * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
  * méthodes proposées dans cette classe. Il peut :
  * <ul>
  * 		<li>simuler un déplacement du joueur.</li>
- * 		<li>simuler une attente du jouru</li>
+ * 		<li>simuler une attente du joueur</li>
  * </ul>
  * Au cours de la simulation, le modèle est modifié et son ancien
  * état est donc perdu. Si vous voulez conserver l'ancien état,
@@ -234,10 +234,10 @@ public class AiPartialModel
 	/**
 	 * Analyse la zone passée en paramètre et
 	 * en déduit le contenu de la matrice des
-	 * obstacles. On y distingue seulement trois
-	 * types de cases : sans obstacles, avec
-	 * des obstacles destructibles, ou avec
-	 * des obstacles indestructibles.
+	 * obstacles. On y distingue seulement deux
+	 * types de cases : avec ou sans obstacle.
+	 * On ignore ici l'aspect destructible ou
+	 * indestructible des murs.
 	 * 
 	 * @param zone
 	 * 		La zone de référence.
