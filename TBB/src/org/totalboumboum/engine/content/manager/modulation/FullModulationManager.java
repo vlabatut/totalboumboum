@@ -205,7 +205,7 @@ public class FullModulationManager extends ModulationManager
 				Circumstance actorCircumstances = new Circumstance(tempSprite,sprite);
 				Circumstance targetCircumstances = new Circumstance(tempSprite,target);
 				ThirdModulation thirdModulation = tempSprite.getThirdModulation(action,actorCircumstances,targetCircumstances);
-				result = thirdModulation.modulate(result); 		
+				result = thirdModulation.modulate(result);
 			}
 		}
 		return result;

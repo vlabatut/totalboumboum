@@ -30,7 +30,10 @@ import org.totalboumboum.ai.v201213.adapter.model.partial.AiPartialModel;
 
 /**
  * Représente une liste d'explosions,
- * utilisée dans {@link AiPartialModel}
+ * utilisée dans {@link AiPartialModel}.
+ * Chaque liste concerne une seule case.
+ * Elle représente les explosions successives
+ * traversant la case au fil du temps.
  * 
  * @author Vincent Labatut
  */

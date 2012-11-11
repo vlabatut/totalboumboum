@@ -1577,7 +1577,7 @@ public class Launcher
 	 * - à tester :
 	 * 
 	 * - bugs :
-	 * 
+	 * 		- on ne peut plus mourir !
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :

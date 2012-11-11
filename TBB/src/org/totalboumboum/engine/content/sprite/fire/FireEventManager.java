@@ -108,12 +108,12 @@ public class FireEventManager extends EventManager
 			// fire enters a new tile
 			if(event.getSource()==sprite)
 			{	Tile tile = sprite.getTile();
-				fire.consumeTile(tile);
+				fire.consumeTile(tile,false);
 			}
 			// another sprite enters the fire's tile
 			else
 			{	Sprite s = event.getSource();
-				fire.consumeSprite(s);
+				fire.consumeSprite(s,false);
 			}
 		}
 	}

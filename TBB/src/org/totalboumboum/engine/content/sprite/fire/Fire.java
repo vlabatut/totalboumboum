@@ -35,6 +35,7 @@ import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.hero.Hero;
 
 /**
  * 
@@ -70,21 +71,27 @@ public class Fire extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public void consumeTile(Tile tile)
-	{	List<Sprite> sprites = tile.getSprites();
+	public boolean consumeTile(Tile tile, boolean fake)
+	{	boolean result = false;
+if(!fake)
+	System.out.println();
+		List<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();
 		while(i.hasNext())
 		{	Sprite ts = i.next();
-			consumeSprite(ts);
-		}	
+			result = consumeSprite(ts,fake) || result;
+		}
+		return result || sprites.isEmpty();
 	}
 	
-	public void consumeSprite(Sprite sprite)
+	public boolean consumeSprite(Sprite sprite, boolean fake)
 	{	SpecificAction specificAction = new SpecificConsume(this,sprite,Direction.NONE,Contact.INTERSECTION,TilePosition.SAME,Orientation.NEUTRAL);
 		ActionAbility ability = modulateAction(specificAction);
-		if(ability.isActive())
+		boolean result = ability.isActive();
+		if(result && !fake)
 		{	ActionEvent e = new ActionEvent(specificAction);
 			sprite.processEvent(e);
 		}
+		return result;
 	}
 }

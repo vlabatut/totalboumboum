@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,6 +66,28 @@ public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEven
 	 */
 	public abstract List<AiSprite> getSprites();
 
+	/**
+	 * Renvoie la liste des sprites contenus dans
+	 * cet évènement et qui vont apparaitre dans la
+	 * case passée en paramètre. La liste retournée en
+	 * résultat peut être vide si aucun sprite n'apparait
+	 * dans cette case lors de cet évènement.
+	 * 
+	 * @param tile
+	 * 		La case sur laquelle la recherche se concentre.
+	 * @return
+	 * 		La liste des sprites qui vont apparaître dans cette case.
+	 */
+	public List<AiSprite> getSpritesForTile(AiTile tile)
+	{	List<AiSprite> result = new ArrayList<AiSprite>();
+		List<AiSprite> sprites = getSprites();
+		for(AiSprite sprite: sprites)
+		{	if(sprite.getTile().equals(tile))
+				result.add(sprite);
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COMPARABLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

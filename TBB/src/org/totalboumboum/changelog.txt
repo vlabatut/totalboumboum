@@ -503,14 +503,16 @@
 	  remplacement de JTextPane par JTextArea.
 	
 + beta.024
+ 	- moteur :
+ 		- quelques bugs corrigés
+		- système de mort subite inclus dans le moteur
 	- GUI :
 		- résolution du bug qui rendait l'apparition de menus modaux très lente
-		- TODO addition des menus modaux manquant
+		- TODO ajout des menus modaux manquant
 	- ressources : 
-		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation)
-	- mort subite :
-		- système de mort subite inclus dans le moteur
+		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 	- API IA:
+		- quelques bugs corrigés
 		- initOthers dans ArtificialIntelligence
 		- vérification de l'unicité des noms de cas pour un agent
 		- cache automatique pour le calcul de critères
