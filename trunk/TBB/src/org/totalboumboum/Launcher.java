@@ -1566,8 +1566,12 @@ public class Launcher
 	 * TODO mort subite
 	 * 
 	 * - màj modèle :
-	 * 		- prise en compte du shrink dans le modèle
+	 * 		- prise en compte du shrink dans les deux modèles
 	 * 		- màj des tests des modèles de l'API
+	 * 		- en cours :
+	 * 			1) intégrer les évènements de mort subite dans la simulation (apparition d'obstacle)
+	 *  		2) modifier les classes de test pour vérifier tout
+	 * 			3) tester, déboguer le bouzin	 * 
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max
@@ -1577,7 +1581,6 @@ public class Launcher
 	 * - à tester :
 	 * 
 	 * - bugs :
-	 * 		- on ne peut plus mourir !
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :
