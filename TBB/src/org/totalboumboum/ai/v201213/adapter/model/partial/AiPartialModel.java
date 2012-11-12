@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201213.adapter.model.partial;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -697,7 +698,7 @@ public class AiPartialModel
 		long timeNeeded = (long)Math.ceil(distance/speed * 1000);
 	
 		// on applique la simulation
-		result = simulateExplosions(timeNeeded,direction);
+		result = simulateTime(timeNeeded,direction);
 		currentLocation = new AiLocation(destinationX,destinationY,zone);
 		if(duration==0)
 			duration = timeNeeded;
@@ -720,15 +721,18 @@ public class AiPartialModel
 	 * 		{@code true} ssi le personnage a survécu à l'attente.
 	 */
 	public boolean simulateWait(long limit)
-	{	boolean result = simulateExplosions(limit,Direction.NONE);
+	{	boolean result = simulateTime(limit,Direction.NONE);
 		return result;
 	}
 
 	/**
-	 * Effectue une simulation d'explosion. La matrice et
-	 * la map d'explosion sont mises à jour. La variable
-	 * {@code duration} est également mise à jour pour une 
-	 * durée pouvant être inférieure à {@code limit} en
+	 * Effectue une simulation générale du passage du temps. La 
+	 * matrice et la map d'explosion sont mises à jour. La matrice
+	 * des obstacles aussi, en fonction des évènements de mort
+	 * subite.
+	 * <br/>
+	 * La variable {@code duration} est également mise à jour 
+	 * pour une durée pouvant être inférieure à {@code limit} en
 	 * cas d'élimination du personnage. Le paramètre {@code direction}
 	 * correspond à la direction de déplacement du personnage
 	 * de référence en cas de déplacement, et à {@link Direction#NONE}
@@ -741,7 +745,7 @@ public class AiPartialModel
 	 * @return
 	 * 		{@code true} ssi le personnage a survécu à la simulation.
 	 */
-	public boolean simulateExplosions(long limit, Direction direction)
+	public boolean simulateTime(long limit, Direction direction)
 	{	// init
 		boolean result = true;
 		duration = 0;
@@ -775,7 +779,57 @@ public class AiPartialModel
 			}
 		}
 		
-		// on considère chaque explosion restant
+		// on calcule quand les cases source et destination vont être écrasées lors d'un évènement de mort subite
+		{	List<AiSuddenDeathEvent> list = zone.getAllSuddenDeathEvents();
+			long elapsed = zone.getTotalTime();
+			long time = 0;
+			// on teste chaque évènement
+			Iterator<AiSuddenDeathEvent> it = list.iterator();
+			while(time<limit && it.hasNext())
+			{	// on récupère le temps
+				AiSuddenDeathEvent event = it.next();
+				time = event.getTime() - elapsed;
+				if(time>0 && time<limit)
+				{	// on teste chacune des deux cases de déplacement
+					List<AiTile> tiles = Arrays.asList(sourceTile,destinationTile);
+					Iterator<AiTile> it2 = tiles.iterator();
+					boolean found = false;
+					while(it2.hasNext() && !found)
+					{	AiTile tile = it2.next();
+						// on teste chaque sprite de l'évènement
+						List<AiSprite> sprites = event.getSpritesForTile(tile);
+						Iterator<AiSprite> it3 = sprites.iterator();
+						while(it3.hasNext() && !found)
+						{	AiSprite sprite = it3.next();
+							found = sprite instanceof AiBlock;
+						}
+					}
+					if(found)
+						limit = time;
+				}
+			}
+		}
+		
+		// on fait les mises à jour pour la limite de temps fixée
+		updateExplosions(limit);
+		updateSuddenDeath(limit);
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// UPDATE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Complète la simulation en réalisant les explosions
+	 * devant avoir lieu avant la limite de temps spécifiée
+	 * en paramètre.
+	 * 
+	 * @param limit
+	 * 		Limite de temps de la mise à jour.
+	 */
+	private void updateExplosions(long limit)
+	{	// on considère chaque explosion restant
 		HashMap<Long,List<AiExplosion>> newMap = new HashMap<Long, List<AiExplosion>>();
 		Iterator<Entry<Long,List<AiExplosion>>> itMap = explosionMap.entrySet().iterator();
 		while(itMap.hasNext())
@@ -838,10 +892,42 @@ public class AiPartialModel
 		// on met à jour la map
 		explosionMap.clear();
 		explosionMap.putAll(newMap);
-		
-		return result;
 	}
 
+	/**
+	 * Complète la simulation en réalisant les explosions
+	 * devant avoir lieu avant la limite de temps spécifiée
+	 * en paramètre.
+	 * 
+	 * @param limit
+	 * 		Limite de temps de la mise à jour.
+	 */
+	private void updateSuddenDeath(long limit)
+	{	List<AiSuddenDeathEvent> list = zone.getAllSuddenDeathEvents();
+		long elapsed = zone.getTotalTime();
+		long time = 0;
+		// on teste chaque évènement
+		Iterator<AiSuddenDeathEvent> it = list.iterator();
+		while(time<limit && it.hasNext())
+		{	// on récupère le temps
+			AiSuddenDeathEvent event = it.next();
+			time = event.getTime() - elapsed;
+			if(time>0 && time<limit)
+			{	// on teste chaque sprite de l'évènement
+				List<AiSprite> sprites = event.getSprites();
+				for(AiSprite sprite: sprites)
+				{	if(sprite instanceof AiBlock
+						|| sprite instanceof AiBomb)
+					{	AiTile tile = sprite.getTile();
+						int row = tile.getRow();
+						int col = tile.getCol();
+						obstacles[row][col] = true;
+					}
+				}
+			}
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

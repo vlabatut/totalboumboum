@@ -21,7 +21,9 @@ package org.totalboumboum.ai.v201213.adapter.test;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201213.adapter.agent.AiModeHandler;
@@ -29,7 +31,12 @@ import org.totalboumboum.ai.v201213.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityHandler;
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.model.full.AiSimHero;
 import org.totalboumboum.ai.v201213.adapter.model.full.AiSimTile;
 import org.totalboumboum.ai.v201213.adapter.model.full.AiSimZone;
@@ -37,12 +44,15 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Classe utilisée pour tester les fonctionnalités de l'API IA.
- * Cette classe permet d'initialiser une zone et une fausse ia.
+ * Cette classe permet d'initialiser des zones et des faux agents.
  * 
  * @author Vincent Labatut
  */
 public final class InitData
 {
+	/////////////////////////////////////////////////////////////////
+	// ZONES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Initialise la zone de manière à obtenir le résultat suivant :<br/>
 	 * <pre>
@@ -206,21 +216,29 @@ public final class InitData
 	 *  ┌─┬─┬─┬─┬─┬─┬─┐
 	 * 0│█│█│█│█│█│█│█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 1│█│☻│□│ │▒│ │█│
+	 * 1│█│☺│ │ │ │ │█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 2│█│ │█│ │█│ │█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 3│█│ │ │ │ │ │█│
+	 * 3│█│ │ │ │ │▒│█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 4│█│ │█│ │█│ │█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 5│█│ │ │ │ │ │█│
+	 * 5│█│ │ │ │ │●│█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 6│█│█│█│█│█│█│█│
 	 *  └─┴─┴─┴─┴─┴─┴─┘
 	 * </pre>
-	 * @return 
-	 * 		La zone décrite ci-dessus.
+	 * avec une mort subite provoquant les apparitions suivantes :
+	 * <ul>
+	 * 		<li>t=1s: bloc en (4,1)</li>
+	 * 		<li>t=3s: bloc destructible en (1,5) et bombe en (2,5)</li>
+	 * 		<li>t=4s: item en (4,5)</li>
+	 * 		<li>t=10s: bloc en (3,1)</li>
+	 * </ul>
+	 * 
+	 * @return
+	 * 		La zone décrite ci-dessus. 
 	 */
 	public static AiSimZone initZone3()
 	{	// zone
@@ -231,28 +249,22 @@ public final class InitData
 		zone.setHidenItemCount(hiddenItemsCount,hiddenItemsCounts);
 		
 		// hero
+		AiSimHero hero;
 		{	AiSimTile tile = zone.getTile(1,1);
 			int bombRange = 3;
 			int bombNumber = 1;
 			//state = new AiSimState(AiStateName.MOVING,Direction.RIGHT,0);
 			PredefinedColor color = PredefinedColor.WHITE;
-			zone.createHero(tile,color,bombNumber,bombRange,true);
+			hero = zone.createHero(tile,color,bombNumber,bombRange,true);
 		}
 
 		// bomb #1
-		{	AiSimTile tile = zone.getTile(1,1);
-			// la bombe va bientôt exploser
-			zone.createBomb(tile,3,2200);
+		{	AiSimTile tile = zone.getTile(5,5);
+			zone.createBomb(tile,hero);
 		}
 
-		// item 1
-		{	AiSimTile tile = zone.getTile(1,2);
-			AiItemType itemType = AiItemType.EXTRA_BOMB;
-			zone.createItem(tile,itemType);
-		}
-		
 		// softwall
-		{	AiSimTile tile = zone.getTile(1,4);
+		{	AiSimTile tile = zone.getTile(3,5);
 			boolean destructible = true;
 			zone.createBlock(tile,destructible);
 		}
@@ -268,9 +280,72 @@ public final class InitData
 			}
 		}
 		
+		// sudden death events
+		{	AiTile tile;
+			long time;
+			HashMap<AiTile, List<AiSprite>> sprites;
+			List<AiSprite> lst;
+			{	// t=1s: bloc en (4,1)
+				boolean destructible = true;
+				AiBlock block = zone.createBlock(null,destructible);
+				tile = zone.getTile(4,1);
+				time = 1000;
+				lst = new ArrayList<AiSprite>();
+				lst.add(block);
+				sprites = new HashMap<AiTile, List<AiSprite>>();
+				sprites.put(tile,lst);
+				zone.createSuddenDeathEvent(time, sprites);
+			}
+			{	// t=3s: bloc destructible en (1,5) et bombe en (2,5)
+				time = 3000;
+				{	boolean destructible = true;
+					AiBlock block = zone.createBlock(null,destructible);
+					tile = zone.getTile(1,5);
+					lst = new ArrayList<AiSprite>();
+					lst.add(block);
+					sprites = new HashMap<AiTile, List<AiSprite>>();
+					sprites.put(tile,lst);
+				}
+				{	AiBomb bomb = zone.createBomb(null,hero);
+					tile = zone.getTile(2,5);
+					lst = new ArrayList<AiSprite>();
+					lst.add(bomb);
+					sprites = new HashMap<AiTile, List<AiSprite>>();
+					sprites.put(tile,lst);
+				}
+				zone.createSuddenDeathEvent(time, sprites);
+			}
+			{	// t=4s: item en (4,5)
+				AiItemType itemType = AiItemType.EXTRA_BOMB;
+				AiItem item = zone.createItem(null,itemType);
+				tile = zone.getTile(4,5);
+				time = 4000;
+				lst = new ArrayList<AiSprite>();
+				lst.add(item);
+				sprites = new HashMap<AiTile, List<AiSprite>>();
+				sprites.put(tile,lst);
+				zone.createSuddenDeathEvent(time, sprites);
+			}
+			{	// t=10s: bloc en (3,1)
+				boolean destructible = true;
+				AiBlock block = zone.createBlock(null,destructible);
+				tile = zone.getTile(3,1);
+				time = 10000;
+				lst = new ArrayList<AiSprite>();
+				lst.add(block);
+				sprites = new HashMap<AiTile, List<AiSprite>>();
+				sprites.put(tile,lst);
+				zone.createSuddenDeathEvent(time, sprites);
+			}
+		}
+		
 		return zone;
 	}
+
 	
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Construit un faux agent pour l'exemple
 	 * (nécessaire pour certaines méthodes et classes).
