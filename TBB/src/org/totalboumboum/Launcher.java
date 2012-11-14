@@ -1572,7 +1572,8 @@ public class Launcher
 	 * 			1) intégrer les évènements de mort subite dans la simulation (apparition d'obstacle)
 	 *  		2) modifier les classes de test pour vérifier tout
 	 * 			3) tester, déboguer le bouzin
-	 * 			4) dans le modèle précis, vérif si la mauvaise version de getBlast était gérée, ou pas 
+	 * 			4) dans le modèle précis, vérif si la mauvaise version de getBlast était gérée, ou pas
+	 *  	- NOTE : dans modèle complet, quand sd il faut ajouter les sprites au niveau, qui ne les possède pas 
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max

@@ -21,6 +21,9 @@ package org.totalboumboum.ai.v201213.adapter.test;
  * 
  */
 
+import java.util.List;
+
+import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.model.full.AiFullModel;
 import org.totalboumboum.ai.v201213.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201213.adapter.model.partial.AiPartialModel;
@@ -37,14 +40,25 @@ import org.totalboumboum.engine.content.feature.Direction;
 public final class PartialModelSimulation
 {
 	/**
-	 * Réalise la simulation en utilisant
-	 * les différentes méthodes
-	 * proposées par {@link AiFullModel}.
+	 * Teste les fonctionalités de l'API IA
+	 * propres au modèle partiel.
 	 * 
-	 * @param args 
+	 * @param args
 	 * 		Pas utilisé.
 	 */
 	public static void main(String args[])
+	{	// utilisation de base
+//		example1();
+		// mort subite
+		example2();
+	}
+	
+	/**
+	 * Réalise la simulation en utilisant
+	 * les différentes méthodes
+	 * proposées par {@link AiFullModel}.
+	 */
+	public static void example1()
 	{	AiSimZone zone = InitData.initZone1();
 		
 		// display initial zone
@@ -53,6 +67,7 @@ public final class PartialModelSimulation
 		displayModelSimulationStep(model);
 		
 		// first simulation
+		System.out.println("series of simulations");
 		long duration = 0;
 		int iteration = 0;
 		do
@@ -68,10 +83,12 @@ public final class PartialModelSimulation
 		while(duration!=0);
 		
 		// wait for bomb to explode
+		System.out.println("wait for bomb to explode");
 		model.simulateWait(1120);
 		displayModelSimulationStep(model);
 
 		// wait for wall to explode
+		System.out.println("wait for wall to explode");
 		model.simulateWait(640);
 		displayModelSimulationStep(model);
 
@@ -94,10 +111,61 @@ public final class PartialModelSimulation
 		}
 		
 		// simulate wait
+		System.out.println("simulate wait");
 		model.simulateWait(1000);
 		displayModelSimulationStep(model);
 	}
 
+	/**
+	 * Réalise une simulation impliquant
+	 * une mort subite.
+	 */
+	public static void example2()
+	{	AiSimZone zone = InitData.initZone3();
+		
+		// display initial zone
+		AiPartialModel model = new AiPartialModel(zone);
+		System.out.println("initial zone:\n"+zone);
+		displayModelSimulationStep(model);
+
+		// display sudden death events
+		List<AiSuddenDeathEvent> events = model.getOriginalZone().getAllSuddenDeathEvents();
+		if(!events.isEmpty())
+		{	System.out.println("sudden death events: ");
+			for(AiSuddenDeathEvent event: events)
+				System.out.println(event);
+		}
+
+		long duration = 0;
+		long totalDuration = 0;
+		int iteration = 0;
+		do
+		{	// process simulation
+			model.simulateMove(Direction.RIGHT);
+			// display result
+			duration = model.getDuration();
+			totalDuration = model.getTotalDuration();
+			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+		
+		do
+		{	// process simulation
+			model.simulateMove(Direction.LEFT);
+			// display result
+			duration = model.getDuration();
+			totalDuration = model.getTotalDuration();
+			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+	}
+	
 	/**
 	 * Affiche le contenu du modèle passé en paramètre,
 	 * ainsi que d'autres informations permettant de
@@ -116,5 +184,4 @@ public final class PartialModelSimulation
 		System.out.println("explosion start times:\n"+model.toStringDelays(true));
 		System.out.println("explosion end times:\n"+model.toStringDelays(false));
 	}
-	
 }

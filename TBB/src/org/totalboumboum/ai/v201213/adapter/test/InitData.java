@@ -306,7 +306,9 @@ public final class InitData
 					sprites = new HashMap<AiTile, List<AiSprite>>();
 					sprites.put(tile,lst);
 				}
-				{	AiBomb bomb = zone.createBomb(null,hero);
+				{	int range = 3;
+					long duration = 2000; 
+					AiBomb bomb = zone.createBomb(null,range,duration);
 					tile = zone.getTile(2,5);
 					lst = new ArrayList<AiSprite>();
 					lst.add(bomb);
