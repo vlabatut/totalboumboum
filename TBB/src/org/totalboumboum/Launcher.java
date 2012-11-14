@@ -1583,6 +1583,9 @@ public class Launcher
 	 * - à tester :
 	 * 
 	 * - bugs :
+	 * 		x l'obstacle devrait disparaitre avec la première bombe
+	 *   	- le blast de la deuxième bombe n'est pas assez grand, bloqué par ce mur fantôme
+	 *   	- les flammes situées à la place du mur fantôme ne sont pas mises à jour
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :
