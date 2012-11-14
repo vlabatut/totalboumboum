@@ -183,6 +183,17 @@ public class AiPartialModel
 	private int width;
 	/** Hauteur de la zone de jeu. */
 	private int height;
+
+	/**
+	 * Renvoie la zone ayant servi à initialiser
+	 * ce modèle partiel.
+	 * 
+	 * @return
+	 * 		La {@link AiZone} ayant servi à initialiser ce modèle partiel.
+	 */
+	public AiZone getOriginalZone()
+	{	return zone;
+	}
 	
 	/** 
 	 * Renvoie la hauteur de la zone de jeu
@@ -525,7 +536,6 @@ public class AiPartialModel
 	private AiSprite getTileContentAtTime(AiTile tile, long time)
 	{	AiSprite result = null;
 		AiSprite temp = null;
-		long totalTime = zone.getTotalTime();
 		int row = tile.getRow();
 		int col = tile.getCol();
 		
@@ -562,7 +572,11 @@ public class AiPartialModel
 			
 			// (approximate) simulation
 			it = relatedSde.iterator();
-			Iterator<AiExplosion> it2 = explosions[row][col].iterator();
+			Iterator<AiExplosion> it2;
+			if(explosions[row][col] == null)
+				it2 = new AiExplosionList().iterator();
+			else
+				it2 = explosions[row][col].iterator();
 			long time1 = Long.MAX_VALUE;
 			long time2 = Long.MAX_VALUE;
 			AiSuddenDeathEvent evt = null;
@@ -570,14 +584,14 @@ public class AiPartialModel
 			{	// get the respective times
 				if(time1==Long.MAX_VALUE && it.hasNext())
 				{	evt = it.next();
-					time1 = evt.getTime() - totalTime;
+					time1 = evt.getTime() - totalDuration;
 				}
 				if(time2==Long.MAX_VALUE && it2.hasNext())
 				{	AiExplosion e = it2.next();
 					time2 = e.getStart();
 				}
 				
-				// a sd event occurs
+				// a sudden death event occurs
 				if(time1<time2)
 				{	List<AiSprite> list = evt.getSpritesForTile(tile);
 					for(AiSprite s: list)
@@ -631,14 +645,27 @@ public class AiPartialModel
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SIMULATION		/////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Durée totale depuis le début de la simulation */
+	private long totalDuration = 0;
 	/** Durée de la dernière simulation */
 	private long duration = 0;
 
 	/**
+	 * Renvoie la durée totale depuis
+	 * le début de la simulation.
+	 * 
+	 * @return
+	 * 		La durée totale depuis le début de la simulation (en ms).
+	 */
+	public long getTotalDuration()
+	{	return totalDuration;
+	}
+	
+	/**
 	 * Renvoie la durée de la
-	 * dernière simulation
+	 * dernière simulation.
 	 * 
 	 * @return
 	 * 		La durée de la dernière simulation (en ms).
@@ -647,6 +674,9 @@ public class AiPartialModel
 	{	return duration;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SIMULATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Effectue une simulation jusqu'à ce que le
 	 * personnage de référence ait changé de case
@@ -701,7 +731,9 @@ public class AiPartialModel
 		result = simulateTime(timeNeeded,direction);
 		currentLocation = new AiLocation(destinationX,destinationY,zone);
 		if(duration==0)
-			duration = timeNeeded;
+		{	duration = timeNeeded;
+			totalDuration = totalDuration + duration;
+		}
 		
 		return result;
 	}
@@ -781,14 +813,13 @@ public class AiPartialModel
 		
 		// on calcule quand les cases source et destination vont être écrasées lors d'un évènement de mort subite
 		{	List<AiSuddenDeathEvent> list = zone.getAllSuddenDeathEvents();
-			long elapsed = zone.getTotalTime();
 			long time = 0;
 			// on teste chaque évènement
 			Iterator<AiSuddenDeathEvent> it = list.iterator();
 			while(time<limit && it.hasNext())
 			{	// on récupère le temps
 				AiSuddenDeathEvent event = it.next();
-				time = event.getTime() - elapsed;
+				time = event.getTime() - totalDuration;
 				if(time>0 && time<limit)
 				{	// on teste chacune des deux cases de déplacement
 					List<AiTile> tiles = Arrays.asList(sourceTile,destinationTile);
@@ -813,6 +844,9 @@ public class AiPartialModel
 		// on fait les mises à jour pour la limite de temps fixée
 		updateExplosions(limit);
 		updateSuddenDeath(limit);
+		
+		// mise à jour du temps
+		totalDuration = totalDuration + duration;
 		
 		return result;
 	}
@@ -904,14 +938,13 @@ public class AiPartialModel
 	 */
 	private void updateSuddenDeath(long limit)
 	{	List<AiSuddenDeathEvent> list = zone.getAllSuddenDeathEvents();
-		long elapsed = zone.getTotalTime();
 		long time = 0;
 		// on teste chaque évènement
 		Iterator<AiSuddenDeathEvent> it = list.iterator();
 		while(time<limit && it.hasNext())
 		{	// on récupère le temps
 			AiSuddenDeathEvent event = it.next();
-			time = event.getTime() - elapsed;
+			time = event.getTime() - totalDuration;
 			if(time>0 && time<limit)
 			{	// on teste chaque sprite de l'évènement
 				List<AiSprite> sprites = event.getSprites();
@@ -943,21 +976,21 @@ public class AiPartialModel
 	 * Voici un exemple d'affichage obtenu :<
 	 * <pre>
 	 *   0 1 2 3 4 5 6
-	 *  ┌─┬─┬─┬─┬─┬─┬─┐
-	 * 0│█│█│█│█│█│█│█│	Légende:
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	┌─┐
-	 * 1│█│☺│ │□│ │ │█│	│ │	case vide
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	└─┘
-	 * 2│█│ │█│ │█│ │█│	 █ 	mur destructible non-menacé ou mur indestructible
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ▒ 	obstacle menacé (bombe ou mur destructible)
-	 * 3│█│░│☻│ │ │▒│█│	 ☺ 	joueur non-menacé
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	 ☻ 	joueur menacé
-	 * 4│█│░│█│ │█│ │█│	 ░	feu ou case vide menacée
-	 *  ├─┼─┼─┼─┼─┼─┼─┤	  	case vide non-menacée
-	 * 5│█│░│░│░│ │●│█│	 
-	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 6│█│█│█│█│█│█│█│
-	 *  └─┴─┴─┴─┴─┴─┴─┘
+	 *  ╔═╦═╦═╦═╦═╦═╦═╗
+	 * 0║█║█║█║█║█║█║█║	Légende:
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣	╔═╗
+	 * 1║█║☺║ ║□║ ║ ║█║	║ ║	case vide non-menacée
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣	╚═╝
+	 * 2║█║ ║█║ ║█║ ║█║	 █ 	mur destructible non-menacé ou mur indestructible
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣	 ▒ 	obstacle menacé (bombe ou mur destructible)
+	 * 3║█║░║☻║ ║ ║▒║█║	 ☺ 	joueur non-menacé
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣	 ☻ 	joueur menacé
+	 * 4║█║░║█║ ║█║ ║█║	 ░	feu ou case vide menacée
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣
+	 * 5║█║░║░║░║ ║●║█║
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣
+	 * 6║█║█║█║█║█║█║█║
+	 *  ╚═╩═╩═╩═╩═╩═╩═╝
 	 * </pre>
 	 * 
 	 * @return
@@ -988,10 +1021,10 @@ public class AiPartialModel
 		result.append("\n");
 		
 		// top row
-		result.append("  ┌");
+		result.append("  ╔");
 		for(int col=0;col<width-1;col++)
-			result.append("─┬");
-		result.append("─┐\n");
+			result.append("═╦");
+		result.append("═╗\n");
 		
 		// content
 		for(int row=0;row<height;row++)
@@ -1001,7 +1034,7 @@ public class AiPartialModel
 			result.append(row);
 			// actual content
 			for(int col=0;col<width;col++)
-			{	result.append("│");
+			{	result.append("║");
 				if(obstacles[row][col])
 				{	if(explosions[row][col]==null)
 						result.append("█");
@@ -1021,20 +1054,20 @@ public class AiPartialModel
 						result.append("░");
 				}
 			}
-			result.append("│\n");
+			result.append("║\n");
 			if(row<height-1)
-			{	result.append("  ├");
+			{	result.append("  ╠");
 				for(int col=0;col<width-1;col++)
-					result.append("─┼");
-				result.append("─┤\n");
+					result.append("═╬");
+				result.append("═╣\n");
 			}
 		}
 		
 		// bottom row
-		result.append("  └");
+		result.append("  ╚");
 		for(int col=0;col<width-1;col++)
-			result.append("─┴");
-		result.append("─┘\n");
+			result.append("═╩");
+		result.append("═╝\n");
 		
 		return result.toString();
 	}

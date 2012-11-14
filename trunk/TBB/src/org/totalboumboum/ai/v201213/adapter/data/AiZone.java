@@ -1241,11 +1241,19 @@ public abstract class AiZone
 		double yCenter = tile.getPosY();
 		double dim = tile.getSize()/2;
 		
+		int dir[] = direction.getIntFromDirection();
+		double xCorrection = 0;
+		if(dir[0]<0)
+			xCorrection = -1;
+		double yCorrection = 0;
+		if(dir[1]<0)
+			yCorrection = -1;
+		
 		double result = Double.POSITIVE_INFINITY;
 		for(Direction d: Direction.getPrimaryValues())
 		{	int val[] = d.getIntFromDirection();
-			double x2 = xCenter + val[0]*dim;
-			double y2 = yCenter + val[1]*dim;
+			double x2 = xCenter + val[0]*dim + xCorrection;
+			double y2 = yCenter + val[1]*dim + yCorrection;
 			double dist = getPixelDistance(x1,y1,x2,y2,direction);
 			if(dist<result)
 				result = dist;
