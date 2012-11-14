@@ -164,6 +164,32 @@ public final class PartialModelSimulation
 			iteration++;
 		}
 		while(duration!=0);
+		
+		do
+		{	// process simulation
+			model.simulateMove(Direction.DOWN);
+			// display result
+			duration = model.getDuration();
+			totalDuration = model.getTotalDuration();
+			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+
+		do
+		{	// process simulation
+			model.simulateMove(Direction.UP);
+			// display result
+			duration = model.getDuration();
+			totalDuration = model.getTotalDuration();
+			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
 	}
 	
 	/**

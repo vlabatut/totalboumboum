@@ -379,7 +379,7 @@ public class AiPartialModel
 	{	// on màj la matrice en fonction des feux existants
 		initFires();
 
-		// on màj la matrice en fonction des bombes existantes
+		// on màj la matrice en fonction des bombes existantes et à venir
 		initBombs();
 		
 		// on remplit la map contenant les explosions
@@ -414,14 +414,14 @@ public class AiPartialModel
 	 * Toutes les cases appartenant au blast des bombes sont
 	 * ajoutées dans la matrice. Les explosions précédentes
 	 * et les évènements de mort subite sont pris en compte
-	 * (approximativement, pour ces dernier). 
+	 * (approximativement, pour ces derniers). 
 	 */
 	private void initBombs()
 	{	//HashMap<AiBomb,List<AiBomb>> threatenedBombs = zone.getThreatenedBombs();
 		//HashMap<AiBomb,Long> delaysByBombs = zone.getDelaysByBombs();
 		HashMap<Long,List<AiBomb>> bombsByDelays = zone.getBombsByDelays();
 		
-		// on traite les bombes par ordre d'explosion effectif
+		// process bombs by order of explosion
 		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelays.keySet());
 		while(!orderedDelays.isEmpty())
 		{	// get the delay
@@ -447,6 +447,34 @@ public class AiPartialModel
 					}
 					AiExplosion explosion = new AiExplosion(delay,endTime,tile);
 					list.add(explosion);
+				}
+			}
+		}
+		
+		// process sudden death event by order of occurrence
+		List<AiSuddenDeathEvent> events = zone.getAllSuddenDeathEvents();
+		for(AiSuddenDeathEvent event: events)
+		{	long time = event.getTime() - totalDuration;
+			List<AiSprite> sprites = event.getSprites();
+			for(AiSprite sprite: sprites)
+			{	if(sprite instanceof AiBomb)
+				{	AiBomb bomb = (AiBomb) sprite;
+					// add explosion to the matrix
+					long endTime = time + bomb.getExplosionDuration();
+					// get the bomb blast
+					List<AiTile> blast = getBlast(time,bomb);
+					// add each tile to the explosion matrix
+					for(AiTile tile: blast)
+					{	int col = tile.getCol();
+						int row = tile.getRow();
+						AiExplosionList list = explosions[row][col];
+						if(list==null)
+						{	list = new AiExplosionList(tile);
+							explosions[row][col] = list;
+						}
+						AiExplosion explosion = new AiExplosion(time,endTime,tile);
+						list.add(explosion);
+					}
 				}
 			}
 		}
@@ -562,12 +590,14 @@ public class AiPartialModel
 			Iterator<AiSuddenDeathEvent> it = sde.iterator();
 			if(it.hasNext())
 			{	AiSuddenDeathEvent s;
+				long sdTime; 
 				do
 				{	s = it.next();
-					if(s.getTime()<=time)
+					sdTime = s.getTime() - totalDuration;
+					if(sdTime<=time)
 						relatedSde.add(s);
 				}
-				while(it.hasNext() && s.getTime()<=time);
+				while(it.hasNext() && sdTime<=time);
 			}
 			
 			// (approximate) simulation
@@ -885,6 +915,12 @@ public class AiPartialModel
 				int col = tile.getCol();
 				int row = tile.getRow();
 				
+				// si l'explosion a commencé
+				if(startTime==0)
+				{	// on màj la matrice d'obstacles, car le contenu éventuel de la case disparait
+					obstacles[row][col] = false;
+				}
+				
 				// si l'explosion s'achève avant la limite
 				if(endTime<=limit)
 				{	// elle est carrément supprimée de la liste de la map
@@ -895,8 +931,6 @@ public class AiPartialModel
 						explosions[row][col] = null;
 					// on màj la durée simulée
 					duration = Math.max(duration,endTime);
-					// on màj la matrice d'obstacles, car le contenu éventuel de la case disparait
-					obstacles[row][col] = false;
 				}
 				// sinon on met juste à jour les temps de démarrage/fin
 				else
@@ -979,15 +1013,15 @@ public class AiPartialModel
 	 *  ╔═╦═╦═╦═╦═╦═╦═╗
 	 * 0║█║█║█║█║█║█║█║	Légende:
 	 *  ╠═╬═╬═╬═╬═╬═╬═╣	╔═╗
-	 * 1║█║☺║ ║□║ ║ ║█║	║ ║	case vide non-menacée
+	 * 1║█║☺║ ║ ║ ║◊║█║	║ ║	case vide non-menacée
 	 *  ╠═╬═╬═╬═╬═╬═╬═╣	╚═╝
-	 * 2║█║ ║█║ ║█║ ║█║	 █ 	mur destructible non-menacé ou mur indestructible
-	 *  ╠═╬═╬═╬═╬═╬═╬═╣	 ▒ 	obstacle menacé (bombe ou mur destructible)
-	 * 3║█║░║☻║ ║ ║▒║█║	 ☺ 	joueur non-menacé
-	 *  ╠═╬═╬═╬═╬═╬═╬═╣	 ☻ 	joueur menacé
-	 * 4║█║░║█║ ║█║ ║█║	 ░	feu ou case vide menacée
-	 *  ╠═╬═╬═╬═╬═╬═╬═╣
-	 * 5║█║░║░║░║ ║●║█║
+	 * 2║█║ ║█║ ║█║▲║█║	 █ 	mur destructible non-menacé ou mur indestructible
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣	 ◊ 	obstacle menacé (bombe ou mur destructible)
+	 * 3║█║░║ ║☻║▲║◊║█║	 ☺ 	joueur non-menacé
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣	 ☻ 	joueur menacé par une explosion à venir
+	 * 4║█║░║█║ ║█║▲║█║	 ░	feu présent
+	 *  ╠═╬═╬═╬═╬═╬═╬═╣  ▲	case vide pour l'instant, mais menacée
+	 * 5║█║░║░║░║ ║▲║█║
 	 *  ╠═╬═╬═╬═╬═╬═╬═╣
 	 * 6║█║█║█║█║█║█║█║
 	 *  ╚═╩═╩═╩═╩═╩═╩═╝
@@ -1036,22 +1070,31 @@ public class AiPartialModel
 			for(int col=0;col<width;col++)
 			{	result.append("║");
 				if(obstacles[row][col])
-				{	if(explosions[row][col]==null)
+				{	// regular obstacle (hardwall or non-threatened softwall)
+					if(explosions[row][col]==null)
 						result.append("█");
+					// threatened softwall or bomb
 					else
-						result.append("▒");
+						result.append("◊");
 				}
 				else if(row==ownRow && col==ownCol)
-				{	if(explosions[row][col]==null)
+				{	// non-threatened player
+					if(explosions[row][col]==null)
 						result.append("☺");
+					// threatened or dead player
 					else
 						result.append("☻");
 				}
 				else
-				{	if(explosions[row][col]==null)
+				{	// non-threatened empty tile
+					if(explosions[row][col]==null)
 						result.append(" ");
-					else
+					// fire
+					else if(explosions[row][col].first().getStart()==0)
 						result.append("░");
+					// threatened empty tile
+					else
+						result.append("▲");
 				}
 			}
 			result.append("║\n");
