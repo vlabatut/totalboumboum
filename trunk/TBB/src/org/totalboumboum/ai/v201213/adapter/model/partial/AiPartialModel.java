@@ -130,6 +130,9 @@ public class AiPartialModel
 		currentHero = zone.getHeroByColor(color);
 		currentLocation = new AiLocation(currentHero);
 		
+		// sudden death events
+		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>(zone.getAllSuddenDeathEvents());
+
 		// obstacles
 		obstacles = new boolean[height][width];
 		initObstacles(zone);
@@ -155,6 +158,9 @@ public class AiPartialModel
 		// hero
 		currentHero = model.currentHero;
 		currentLocation = model.currentLocation;
+		
+		// sudden death events
+		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>(model.suddenDeathEvents);
 		
 		// matrices
 		obstacles = new boolean[height][width];
@@ -183,6 +189,8 @@ public class AiPartialModel
 	private int width;
 	/** Hauteur de la zone de jeu. */
 	private int height;
+	/** Copie des évènements de mort subite */
+	private List<AiSuddenDeathEvent> suddenDeathEvents;
 
 	/**
 	 * Renvoie la zone ayant servi à initialiser
@@ -452,8 +460,7 @@ public class AiPartialModel
 		}
 		
 		// process sudden death event by order of occurrence
-		List<AiSuddenDeathEvent> events = zone.getAllSuddenDeathEvents();
-		for(AiSuddenDeathEvent event: events)
+		for(AiSuddenDeathEvent event: suddenDeathEvents)
 		{	long time = event.getTime() - totalDuration;
 			List<AiSprite> sprites = event.getSprites();
 			for(AiSprite sprite: sprites)
@@ -585,9 +592,8 @@ public class AiPartialModel
 		
 		if(result == null)
 		{	// retrieve all related sudden death events
-			List<AiSuddenDeathEvent> sde = zone.getAllSuddenDeathEvents();
 			List<AiSuddenDeathEvent> relatedSde = new ArrayList<AiSuddenDeathEvent>();
-			Iterator<AiSuddenDeathEvent> it = sde.iterator();
+			Iterator<AiSuddenDeathEvent> it = suddenDeathEvents.iterator();
 			if(it.hasNext())
 			{	AiSuddenDeathEvent s;
 				long sdTime; 
@@ -638,7 +644,7 @@ public class AiPartialModel
 					time1 = Long.MAX_VALUE;
 				}
 				// an explosion occurs 
-				else if(time2>time1 || (time1==time2 && time2!=Long.MAX_VALUE))
+				else if(time2<time1 || (time1==time2 && time2!=Long.MAX_VALUE))
 				{	temp = null;
 					time2 = Long.MAX_VALUE;
 				}
@@ -842,15 +848,16 @@ public class AiPartialModel
 		}
 		
 		// on calcule quand les cases source et destination vont être écrasées lors d'un évènement de mort subite
-		{	List<AiSuddenDeathEvent> list = zone.getAllSuddenDeathEvents();
-			long time = 0;
+		{	long time = 0;
 			// on teste chaque évènement
-			Iterator<AiSuddenDeathEvent> it = list.iterator();
+if(totalDuration==4420)
+	System.out.println();
+			Iterator<AiSuddenDeathEvent> it = suddenDeathEvents.iterator();
 			while(time<limit && it.hasNext())
 			{	// on récupère le temps
 				AiSuddenDeathEvent event = it.next();
 				time = event.getTime() - totalDuration;
-				if(time>0 && time<limit)
+				if(time<=limit)
 				{	// on teste chacune des deux cases de déplacement
 					List<AiTile> tiles = Arrays.asList(sourceTile,destinationTile);
 					Iterator<AiTile> it2 = tiles.iterator();
@@ -866,7 +873,9 @@ public class AiPartialModel
 						}
 					}
 					if(found)
-						limit = time;
+					{	limit = time;
+						result = false;
+					}
 				}
 			}
 		}
@@ -954,7 +963,12 @@ public class AiPartialModel
 			itMap.remove();
 			// si elle n'est pas vide, on l'ajoute dans la nouvelle map avec le nouveau temps de départ
 			if(!list.isEmpty())
-				newMap.put(newStartTime,list);
+			{	List<AiExplosion> temp = newMap.get(newStartTime);
+				if(temp==null)
+					newMap.put(newStartTime,list);
+				else
+					temp.addAll(list);
+			}
 		}
 		
 		// on met à jour la map
@@ -971,15 +985,14 @@ public class AiPartialModel
 	 * 		Limite de temps de la mise à jour.
 	 */
 	private void updateSuddenDeath(long limit)
-	{	List<AiSuddenDeathEvent> list = zone.getAllSuddenDeathEvents();
-		long time = 0;
+	{	long time = 0;
 		// on teste chaque évènement
-		Iterator<AiSuddenDeathEvent> it = list.iterator();
+		Iterator<AiSuddenDeathEvent> it = suddenDeathEvents.iterator();
 		while(time<limit && it.hasNext())
 		{	// on récupère le temps
 			AiSuddenDeathEvent event = it.next();
 			time = event.getTime() - totalDuration;
-			if(time>0 && time<limit)
+			if(time<=limit)
 			{	// on teste chaque sprite de l'évènement
 				List<AiSprite> sprites = event.getSprites();
 				for(AiSprite sprite: sprites)
@@ -991,6 +1004,8 @@ public class AiPartialModel
 						obstacles[row][col] = true;
 					}
 				}
+				// on supprime de la liste
+				it.remove();
 			}
 		}
 	}
