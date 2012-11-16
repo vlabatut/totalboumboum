@@ -1584,6 +1584,7 @@ public class Launcher
 	 * 
 	 * - bugs :
 	 * 		- la simulation continue même si le perso est mort >> à voir comment c'est gaulé en simu précise
+	 * 
 	 * TODO nouveaux items
 	 * - à faire :
 	 * 		- full model (AiFullModel.pickItem):
