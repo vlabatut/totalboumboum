@@ -36,13 +36,14 @@ import org.totalboumboum.ai.v201213.adapter.data.AiState;
 import org.totalboumboum.ai.v201213.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
-import org.totalboumboum.ai.v201213.adapter.test.AstarUse;
+import org.totalboumboum.ai.v201213.adapter.test.FullModelSimulation;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Cette classe est chargée de simuler l'évolution d'une zone.
- * Pour cela, une modèle doit d'abord être initialisé avec une zone de départ,
- * obtenue simplement à partir des percepts de l'agent.
+ * Pour cela, un modèle doit d'abord être initialisé avec une zone de départ,
+ * obtenue simplement à partir des percepts de l'agent (ou de n'importe 
+ * quelle autre source).
  * <br/>
  * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
@@ -74,8 +75,12 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
  * causant la fin du pas de simulation.
  * <br/>
+ * Ce modèle gère les évènements de mort subite, et la zone est modifiée en conséquence.
+ * Cependant, en raison de leur nature partiellement aléatoire, ces évènements-là sont
+ * modélisés seulement de façon approximative.
+ * <br/>
  * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
- * la classe {@link AstarUse}. Notez toute fois que cette classe de test crée la zone
+ * la classe {@link FullModelSimulation}. Notez toute fois que cette classe de test crée la zone
  * en partant de rien, alors que les agents disposent de leurs percepts.
  * Pour cette raison, elle utilise pour initialiser la zone des méthodes 
  * auxquelles les agents n'ont pas accès.

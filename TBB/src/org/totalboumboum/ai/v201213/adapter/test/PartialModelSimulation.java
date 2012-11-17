@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201213.adapter.test;
  * 
  */
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
@@ -139,83 +141,27 @@ public final class PartialModelSimulation
 		long duration = 0;
 		long totalDuration = 0;
 		int iteration = 0;
-		do
-		{	// process simulation
-			model.simulateMove(Direction.RIGHT);
-			// display result
-			duration = model.getDuration();
-			totalDuration = model.getTotalDuration();
-			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
-			displayModelSimulationStep(model);
-			// update iteration
-			iteration++;
+		boolean result = true;
+		List<Direction> directions = Arrays.asList
+		(	Direction.RIGHT, Direction.LEFT, Direction.DOWN, 
+			Direction.UP, Direction.DOWN, Direction.RIGHT
+		);
+		Iterator<Direction> it = directions.iterator();
+		while(it.hasNext() && result)
+		{	Direction direction = it.next();
+			do
+			{	// process simulation
+				result = model.simulateMove(direction);
+				// display result
+				duration = model.getDuration();
+				totalDuration = model.getTotalDuration();
+				System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+				displayModelSimulationStep(model);
+				// update iteration
+				iteration++;
+			}
+			while(duration!=0 && result);
 		}
-		while(duration!=0);
-		
-		do
-		{	// process simulation
-			model.simulateMove(Direction.LEFT);
-			// display result
-			duration = model.getDuration();
-			totalDuration = model.getTotalDuration();
-			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
-			displayModelSimulationStep(model);
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
-		
-		do
-		{	// process simulation
-			model.simulateMove(Direction.DOWN);
-			// display result
-			duration = model.getDuration();
-			totalDuration = model.getTotalDuration();
-			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
-			displayModelSimulationStep(model);
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
-
-		do
-		{	// process simulation
-			model.simulateMove(Direction.UP);
-			// display result
-			duration = model.getDuration();
-			totalDuration = model.getTotalDuration();
-			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
-			displayModelSimulationStep(model);
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
-		
-		do
-		{	// process simulation
-			model.simulateMove(Direction.DOWN);
-			// display result
-			duration = model.getDuration();
-			totalDuration = model.getTotalDuration();
-			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
-			displayModelSimulationStep(model);
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
-		
-		do
-		{	// process simulation
-			model.simulateMove(Direction.RIGHT);
-			// display result
-			duration = model.getDuration();
-			totalDuration = model.getTotalDuration();
-			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
-			displayModelSimulationStep(model);
-			// update iteration
-			iteration++;
-		}
-		while(duration!=0);
 	}
 	
 	/**

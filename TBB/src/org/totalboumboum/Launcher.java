@@ -1566,14 +1566,10 @@ public class Launcher
 	 * TODO mort subite
 	 * 
 	 * - màj modèle :
-	 * 		- prise en compte du shrink dans les deux modèles
-	 * 		- màj des tests des modèles de l'API
-	 * 		- en cours :
-	 * 			1) intégrer les évènements de mort subite dans la simulation (apparition d'obstacle)
-	 *  		2) modifier les classes de test pour vérifier tout
-	 * 			3) tester, déboguer le bouzin
-	 * 			4) dans le modèle précis, vérif si la mauvaise version de getBlast était gérée, ou pas
-	 *  	- NOTE : dans modèle complet, quand sd il faut ajouter les sprites au niveau, qui ne les possède pas 
+	 * 		- prise en compte du shrink dans le modèle détaillé
+	 * 		- tests de simulation détaillée
+	 *		- dans le modèle précis, vérif si la mauvaise version de getBlast était gérée, ou pas
+	 *  	- dans modèle complet, quand sd il faut ajouter les sprites au niveau, qui ne les possède pas 
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max
@@ -1583,7 +1579,6 @@ public class Launcher
 	 * - à tester :
 	 * 
 	 * - bugs :
-	 * 		- la simulation continue même si le perso est mort >> à voir comment c'est gaulé en simu précise
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :

@@ -718,6 +718,13 @@ public class AiPartialModel
 	 * personnage de référence ait changé de case
 	 * dans la direction demandée, ou bien qu'il
 	 * rencontre un obstacle, ou bien qu'il soit éliminé.
+	 * <br/>
+	 * En cas d'élimination, la fonction renvoie {@code false}
+	 * (et si tout va bien, elle renvoie {@code true}. Attention
+	 * de bien tenir compte de ce résultat, car si, après une 
+	 * élimination, vous demandez à nouveau une simulation sur ce modèle, 
+	 * cette simulation sera effectuée comme si l'élimination n'avait pas
+	 * eu lieu.
 	 * 
 	 * @param direction
 	 * 		La direction du déplacement.
@@ -782,6 +789,11 @@ public class AiPartialModel
 	 * {@code duration} est mise à jour avec la durée
 	 * attendue (qui peut être inférieure à {@code limit}
 	 * si le personnage a été éliminé avant la fin de l'attente).
+	 * <br/>
+	 * Attention de bien tenir compte du résultat de la méthode.
+	 * En effet, après une élimination, si vous demandez à nouveau 
+	 * une simulation sur ce modèle, cette simulation sera effectuée 
+	 * comme si l'élimination n'avait pas eu lieu.
 	 * 
 	 * @param limit
 	 * 		La durée d'attente souhaitée.
@@ -805,6 +817,13 @@ public class AiPartialModel
 	 * correspond à la direction de déplacement du personnage
 	 * de référence en cas de déplacement, et à {@link Direction#NONE}
 	 * en cas d'attente.
+	 * <br/>
+	 * En cas d'élimination, la fonction renvoie {@code false}
+	 * (et si tout va bien, elle renvoie {@code true}. Attention
+	 * de bien tenir compte de ce résultat, car si, après une 
+	 * élimination, vous demandez à nouveau une simulation sur ce modèle, 
+	 * cette simulation sera effectuée comme si l'élimination n'avait pas
+	 * eu lieu.
 	 * 
 	 * @param limit
 	 * 		La durée d'attente souhaitée.
@@ -850,8 +869,6 @@ public class AiPartialModel
 		// on calcule quand les cases source et destination vont être écrasées lors d'un évènement de mort subite
 		{	long time = 0;
 			// on teste chaque évènement
-if(totalDuration==4420)
-	System.out.println();
 			Iterator<AiSuddenDeathEvent> it = suddenDeathEvents.iterator();
 			while(time<limit && it.hasNext())
 			{	// on récupère le temps
