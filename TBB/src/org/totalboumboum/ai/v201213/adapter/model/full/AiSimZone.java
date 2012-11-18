@@ -179,6 +179,7 @@ public final class AiSimZone extends AiZone
 		for(AiSuddenDeathEvent event: sdEvents)
 		{	AiSimSuddenDeathEvent e = new AiSimSuddenDeathEvent(this, event);
 			suddenDeathEvents.add(e);
+			internalSuddenDeathEvents.add(e);
 		}
 		
 		// time
@@ -230,6 +231,7 @@ public final class AiSimZone extends AiZone
 		
 		// sudden death events
 		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
+		internalSuddenDeathEvents = new ArrayList<AiSimSuddenDeathEvent>();
 		
 		// time
 		totalTime = 0;
@@ -355,14 +357,14 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone.
+	 * Permet de rajouter un bloc dans cette zone.
 	 * <br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * <b>Attention :</b> le bloc a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param block
-	 *  	le sprite à rajouter à cette zone
+	 *  	le bloc à rajouter à cette zone
 	 */
 	protected void addSprite(AiSimBlock block)
 	{	AiSimTile tile = block.getTile();
@@ -372,14 +374,14 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone.
+	 * Permet de rajouter une bombe dans cette zone.
 	 * <br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * <b>Attention :</b> la bombe a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param bomb
-	 *  	le sprite à rajouter à cette zone
+	 *  	La bombe à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimBomb bomb)
 	{	AiSimTile tile = bomb.getTile();
@@ -389,14 +391,14 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone.
+	 * Permet de rajouter un feu dans cette zone.
 	 * <br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * <b>Attention :</b> le feu a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param fire
-	 *  	le sprite à rajouter à cette zone
+	 *  	Le feu à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimFire fire)
 	{	AiSimTile tile = fire.getTile();
@@ -406,14 +408,14 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone.
+	 * Permet de rajouter un sol dans cette zone.
 	 * <br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * <b>Attention :</b> le sol a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param floor
-	 *  	le sprite à rajouter à cette zone
+	 *  	le sol à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimFloor floor)
 	{	AiSimTile tile = floor.getTile();
@@ -423,14 +425,14 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de rajouter un sprite dans cette zone.
+	 * Permet de rajouter un personnage dans cette zone.
 	 * <br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * <b>Attention :</b> le personnage a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param hero
-	 *  	le sprite à rajouter à cette zone
+	 *  	Le personnage à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimHero hero)
 	{	AiSimTile tile = hero.getTile();
@@ -441,14 +443,14 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * Permet de rajouter un sprite dans cette zone.
+	 * Permet de rajouter un item dans cette zone.
 	 * <br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * <b>Attention :</b> l'item a obligatoirement déjà été 
 	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param item
-	 *  	le sprite à rajouter à cette zone
+	 *  	L'item sprite à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimItem item)
 	{	AiSimTile tile = item.getTile();
@@ -458,15 +460,52 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
+	 * Permet de rajouter un sprite dans cette zone.
+	 * <br/>
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone
+	 * 
+	 *  @param sprite
+	 *  	Le sprite à rajouter à cette zone.
+	 */
+	protected void addSprite(AiSimSprite sprite)
+	{	if(sprite instanceof AiSimBlock)
+		{	AiSimBlock block = (AiSimBlock)sprite;
+			addSprite(block);
+		}
+		else if(sprite instanceof AiSimBomb)
+		{	AiSimBomb bomb = (AiSimBomb)sprite;
+			addSprite(bomb);
+		}
+		else if(sprite instanceof AiSimFire)
+		{	AiSimFire fire = (AiSimFire)sprite;
+			addSprite(fire);
+		}
+		else if(sprite instanceof AiSimFloor)
+		{	AiSimFloor floor = (AiSimFloor)sprite;
+			addSprite(floor);
+		}
+		else if(sprite instanceof AiSimHero)
+		{	AiSimHero hero = (AiSimHero)sprite;
+			addSprite(hero);
+		}
+		else if(sprite instanceof AiSimItem)
+		{	AiSimItem item = (AiSimItem)sprite;
+			addSprite(item);
+		}
+	}
+
+	/**
+	 * Supprime un sprite de la zone et de la case correspondante.
 	 * s'il s'agit d'un joueur, il est supprimé seulement de la case
 	 * et de la liste des joueurs encore en jeu (mais la zone continue
 	 * à le référencer dans la liste générale des joueurs, car le sprite
 	 * peut encore etre utile, par exemple pour obtenir le classement
-	 * de ce joueur)
+	 * de ce joueur).
 	 * 
 	 * @param sprite
-	 * 		le sprit à supprimer de la zone
+	 * 		Le sprit à supprimer de la zone.
 	 */
 	protected void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
@@ -571,10 +610,10 @@ public final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
+	 * Supprime un sprite de la zone et de la case correspondante.
 	 * 
 	 * @param item
-	 * 		le sprite à supprimer de la zone
+	 * 		Le sprite à supprimer de la zone.
 	 */
 	protected void removeSprite(AiSimItem item)
 	{	internalItems.remove(item);
@@ -585,16 +624,16 @@ public final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * renvoie la simulation de sprite de même numéro (id)
+	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblé
+	 * 		Le sprite ciblé.
 	 * @return	
-	 * 		sa représentation dans cette zone
+	 * 		Sa représentation dans cette zone.
 	 */
 	public AiSimSprite getSpriteById(AiSprite sprite)
 	{	AiSimSprite result = null;
@@ -1488,6 +1527,20 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// SUDDEN DEATH				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Liste interne d'évènements de mort subite */
+	private List<AiSimSuddenDeathEvent> internalSuddenDeathEvents = new ArrayList<AiSimSuddenDeathEvent>();
+
+	/**
+	 * Renvoie la représentation interne des évènements
+	 * de mort subite.
+	 * 
+	 * @return
+	 * 		Renvoie une liste d'évènements de mort subite.
+	 */
+	protected List<AiSimSuddenDeathEvent> getInternalSuddenDeathEvents()
+	{	return internalSuddenDeathEvents;
+	}
+	
 	/**
 	 * Crée un évènement de mort subite. Il se produira à l'instant spécifié
 	 * en ms, et verra apparaître les sprites indiqués dans la map passée en
@@ -1530,8 +1583,9 @@ public final class AiSimZone extends AiZone
 			}
 		}
 		
-		AiSuddenDeathEvent result = new AiSimSuddenDeathEvent(time, s);
+		AiSimSuddenDeathEvent result = new AiSimSuddenDeathEvent(time, s);
 		suddenDeathEvents.add(result);
+		internalSuddenDeathEvents.add(result);
 		return result;
 	}
 	
@@ -1575,5 +1629,6 @@ public final class AiSimZone extends AiZone
 		
 		// sudden death events
 		suddenDeathEvents.clear();
+		internalSuddenDeathEvents.clear();
 	}
 }

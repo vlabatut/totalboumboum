@@ -26,14 +26,20 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
+import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
+import org.totalboumboum.ai.v201213.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiState;
 import org.totalboumboum.ai.v201213.adapter.data.AiStateName;
+import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.test.FullModelSimulation;
@@ -348,10 +354,12 @@ public class AiFullModel
 			updateSprites(sprites,duration);
 		
 			// update detonating bombs
-			for(AiSimBomb bomb: toBeDetonated)
-				detonateBomb(bomb);
+			updateDetonations();
 		
-			// update the resulting zone
+			// update sudden death events
+			updateSuddenDeath(duration);
+			
+			// update time
 			current.updateTime(duration);
 			totalDuration = totalDuration + duration;
 			lastDuration = duration;
@@ -367,8 +375,9 @@ public class AiFullModel
 	 * Calcule l'état suivant de la zone. Les sprites
 	 * continuent à faire ce qu'il faisaient déjà (brûler, se déplacer, etc.).
 	 * <br/> 
-	 * La méthode renvoie l'état obtenu à la fin du prochain évènement 
-	 * (i.e. celui qui se termine le plus vite). Les évènement considérés sont :
+	 * La méthode met à jour l'état de la zone de manière à avoir celui obtenu 
+	 * à la fin du prochain évènement (i.e. celui qui se termine le plus vite).
+	 * Les évènement considérés sont :
 	 * <ul>
 	 * 		<li>la disparition d'un sprite (ex : une bombe qui a explosé)</li>
 	 * 		<li>l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)</li>
@@ -402,7 +411,7 @@ public class AiFullModel
 		sprites.addAll(current.getInternalHeroes());
 		sprites.addAll(current.getInternalItems());
 		
-		// process iteration duration
+		// process the duration of the next iteration
 		processDuration(sprites);
 		
 		// apply events for the resulting minimal time
@@ -410,32 +419,36 @@ public class AiFullModel
 		updateSprites(sprites,duration);
 		
 		// update detonating bombs
-		for(AiSimBomb bomb: toBeDetonated)
-			detonateBomb(bomb);
+		updateDetonations();
 		
-		// update the resulting zone
+		// update sudden death events
+		updateSuddenDeath(duration);
+
+		// update time in the resulting zone
 		current.updateTime(duration);
 	}
 	
 	/**
 	 * Calcule le temps minimal avant le prochain changement d'état de chaque sprite.
-	 * Ce laps de temps sera ensuite appliqué uniformêment à chaque sprite.
+	 * Ce changement d'état inclut aussi l'apparition de sprites dûe à la mort subite.
+	 * La durée calculée sera ensuite simulée uniformêment pour chaque sprite.
 	 * 
 	 * @param sprites
-	 * 		liste des sprites à traiter
+	 * 		Liste des sprites à traiter.
 	 */
 	private void processDuration(List<AiSimSprite> sprites)
 	{	// init
 		duration = Long.MAX_VALUE;
 		limitSprites = new ArrayList<AiSimSprite>();
 		
+		// sprites already in the zone
 		for(AiSimSprite sprite: sprites)
 		{	// process the sprite next state
 			AiSimState state = sprite.getState();
 			// process the time remaining before the next change (be it of state, tile, etc.)
 			if(state.getName()!=AiStateName.ENDED)
 			{	long changeTime = processChangeTime(current,sprite);
-				// a zero change time means there's nothing to do 
+				// a zero change time means there is nothing to do 
 				// (e.g.: moving towards an obstacle) and should therefore be ignored
 				if(changeTime>0)
 				{	// new min time
@@ -447,6 +460,33 @@ public class AiFullModel
 					// equals existing min time
 					else if(changeTime==duration)
 						limitSprites.add(sprite);
+				}
+			}
+		}
+		
+		// sprites appearing due to sudden death events
+		List<AiSimSuddenDeathEvent> events = current.getInternalSuddenDeathEvents();
+		for(AiSimSuddenDeathEvent event: events)
+		{	long changeTime = event.getTime() - current.getTotalTime();
+			List<AiTile> tiles = event.getTiles();
+			// only considering non-empty events
+			if(!tiles.isEmpty())
+			{	// get the crushed/crushing existing sprites
+				Set<AiSimSprite> crushedSprites = new TreeSet<AiSimSprite>();
+				Set<AiSimSprite> crushingSprites = new TreeSet<AiSimSprite>();
+				processCrush(event,crushedSprites,crushingSprites);
+				
+				// new min time
+				if(changeTime<duration)
+				{	duration = changeTime;
+					limitSprites.clear();
+					limitSprites.addAll(crushedSprites);
+					limitSprites.addAll(crushingSprites);
+				}
+				// equals existing min time
+				else if(changeTime==duration)
+				{	limitSprites.addAll(crushedSprites);
+					limitSprites.addAll(crushingSprites);
 				}
 			}
 		}
@@ -566,7 +606,7 @@ public class AiFullModel
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Calcule l'état du sprite à la fin de la durée spécifiée,
+	 * Calcule l'état de chaque sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param sprites	
@@ -575,7 +615,7 @@ public class AiFullModel
 	 * 		Durée du pas de simulation.
 	 */
 	private void updateSprites(List<AiSimSprite> sprites, long duration)
-	{	
+	{	// process each sprite from the list, for the specified duration
 		for(AiSimSprite sprite: sprites)
 		{	// init
 			AiSimState state = sprite.getState();
@@ -737,6 +777,170 @@ public class AiFullModel
 		
 		// update speed
 		sprite.setCurrentSpeed(currentSpeed);
+	}
+	
+	/**
+	 * Analyse l'évènement passé en paramètre, de manière à compléter
+	 * les deux listes elles aussi passées en paramètres, avec les 
+	 * sprites existant qui vont se faire écraser ({@code crushedSprites}, 
+	 * et les sprites nouvellement apparus qui vont les écraser ({@code crushingSprites}.
+	 * 
+	 * @param event
+	 * 		L'évènement de mort subite à analyser.
+	 * @param crushedSprites
+	 * 		La liste des sprites qui vont être écrasés (complétée).
+	 * @param crushingSprites
+	 * 		La liste des sprites qui apparaissent (complétée).
+	 */
+	private void processCrush(AiSimSuddenDeathEvent event, Set<AiSimSprite> crushedSprites, Set<AiSimSprite> crushingSprites)
+	{	// process separately each tile concerned by the event
+		List<AiTile> tiles = event.getTiles();
+		for(AiTile tile: tiles)
+		{	List<AiSprite> sprites = event.getSpritesForTile(tile);
+			// identify the main sprite in the event
+			AiSprite mainSprite = null;
+			for(AiSprite sprite: sprites)
+			{	if(sprite instanceof AiBlock)
+					mainSprite = sprite;
+				else if(sprite instanceof AiBomb &&
+						(mainSprite==null || mainSprite instanceof AiItem))
+					mainSprite = sprite;
+				else if(sprite instanceof AiItem && mainSprite==null)
+					mainSprite = sprite;
+				// NOTE other sprite types are just ignored (including floors)
+				// sprite types with less priority are also ignored. for instance,
+				// if a block and an item fall together, we ignore the item by
+				// simplification. same thing for a block and a bomb, and so on.
+			}
+			
+			if(mainSprite!=null) // normally, should not be null
+			{	// retrieve tile data
+				int row = tile.getRow();
+				int col = tile.getCol();
+				AiSimTile t = current.getTile(row,col);
+				List<AiSimBlock> blocks = t.getInternalBlocks();
+				List<AiSimBomb> bombs = t.getInternalBombs();
+				List<AiSimFire> fires = t.getInternalFires();
+				List<AiSimFloor> floors = t.getInternalFloors();
+				List<AiSimHero> heroes = t.getInternalHeroes();
+				List<AiSimItem> items = t.getInternalItems();
+				// check the sprite depending on its type
+				if(mainSprite instanceof AiBlock)
+				{	AiSimBlock block = (AiSimBlock)mainSprite;
+					// softwall falling
+					if(block.isDestructible())
+					{	if(blocks.isEmpty() && bombs.isEmpty())
+						{	// can appear in the tile
+							crushingSprites.add(block);
+							crushedSprites.addAll(fires);
+							crushedSprites.addAll(floors);
+							crushedSprites.addAll(heroes);
+							crushedSprites.addAll(items);
+						}
+						else
+						{	// NOTE cannot appear >> randomly bounces elsewhere
+						}
+					}
+					// hardwall falling
+					else
+					{	if(blocks.isEmpty() || blocks.get(0).isDestructible())
+						{	// can appear in the tile
+							crushingSprites.add(block);
+							crushedSprites.addAll(bombs);
+							crushedSprites.addAll(fires);
+							crushedSprites.addAll(floors);
+							crushedSprites.addAll(heroes);
+							crushedSprites.addAll(items);
+						}
+						else
+						{	// NOTE cannot appear >> randomly bounces elsewhere
+						}
+					}
+				}
+				// bomb falling
+				else if(mainSprite instanceof AiBomb)
+				{	AiSimBomb bomb = (AiSimBomb)mainSprite;
+					if(blocks.isEmpty() && bombs.isEmpty() 
+							&& items.isEmpty())
+					{	// can appear in the tile
+						crushingSprites.add(bomb);
+						crushedSprites.addAll(floors);
+						crushedSprites.addAll(heroes);
+					}
+					else
+					{	// NOTE cannot appear >> randomly bounces elsewhere
+					}
+				}
+				// item falling
+				else if(mainSprite instanceof AiItem)
+				{	AiSimItem item = (AiSimItem)mainSprite;
+					if(blocks.isEmpty() && bombs.isEmpty() 
+							&& items.isEmpty() && heroes.isEmpty())
+					{	// can appear in the tile
+						crushingSprites.add(item);
+						crushedSprites.addAll(floors);
+					}
+					else
+					{	// NOTE cannot appear >> wait for the tile to be clear
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Réalise l'écrament consécutif à un évènement de mort subite.
+	 * A ce stade de la simulation, tout a déjà été testé, donc cette
+	 * méthode gère uniquement les écrasement autorisés.
+	 *  
+	 * @param crushingSprite
+	 * 		Le sprite qui écrase.
+	 * @param crushedSprite
+	 * 		Le sprite qui est écrasé.
+	 */
+	private void crushSprite(AiSimSprite crushingSprite, AiSimSprite crushedSprite)
+	{	// general process
+		AiStateName name = AiStateName.ENDED;
+		Direction direction = Direction.NONE;
+		long time = 0;
+		// remove from zone
+		current.removeSprite(crushedSprite);
+		// update state
+		AiSimState newState = new AiSimState(name,direction,time);
+		crushedSprite.setState(newState);
+		
+		// block
+		if(crushedSprite instanceof AiSimBlock)
+		{	AiSimBlock block = (AiSimBlock)crushedSprite;
+			// possibly release items
+			releaseItem(block);
+		}
+		// bomb
+		else if(crushedSprite instanceof AiSimBomb)
+		{	AiSimBomb bomb = (AiSimBomb)crushedSprite;
+			// possibly update owner
+			AiSimHero owner = bomb.getOwner();
+			if(owner!=null)
+				owner.updateBombNumberCurrent(-1);
+		}
+		// fire
+		else if(crushedSprite instanceof AiSimFire)
+		{	// nothing special
+		}
+		// floor
+		else if(crushedSprite instanceof AiSimFloor)
+		{	// nothing special
+		}
+		// hero
+		else if(crushedSprite instanceof AiSimHero)
+		{	AiSimHero hero = (AiSimHero)crushedSprite;
+			// possibly release items
+			releaseItems(hero);
+		}
+		// item
+		else if(crushedSprite instanceof AiSimHero)
+		{	// nothing special
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -942,13 +1146,13 @@ public class AiFullModel
 	 * Permet de solliciter l'explosion d'une bombe.
 	 * <br/>
 	 * <b>Note :</b> la bombe n'explosera que si c'est possible,
-	 * auquel cas la fonction renvoie la valeur vrai (et sinon
-	 * elle renvoie la valeur faux).
+	 * auquel cas la fonction renvoie la valeur {@code true} (et sinon
+	 * elle renvoie la valeur {@code false}).
 	 * 
 	 * @param bomb
 	 * 		La bombe à faire exploser
 	 * @return
-	 * 		{@code true} si le modèle a pu faire exploser la bombe.
+	 * 		{@code true} ssi le modèle a pu faire exploser la bombe.
 	 */
 	private boolean detonateBomb(AiSimBomb bomb)
 	{	// init
@@ -978,6 +1182,16 @@ public class AiFullModel
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * Fait exploser toutes les bombes devant
+	 * exploser pour cette itération. Tous
+	 * les sprites touchés sont mise à jour.
+	 */
+	private void updateDetonations()
+	{	for(AiSimBomb bomb: toBeDetonated)
+			detonateBomb(bomb);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -1474,5 +1688,47 @@ public class AiFullModel
 		// always update the state
 		newState = new AiSimState(name,direction,time);
 		item.setState(newState);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SUDDEN DEATH		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Fait apparaître les sprites en fonction
+	 * des évènements de mort subite.
+	 * 
+	 * @param duration
+	 * 		La durée à considérer.
+	 */
+	private void updateSuddenDeath(long duration)
+	{	List<AiSimSuddenDeathEvent> events = current.getInternalSuddenDeathEvents();
+		Iterator<AiSimSuddenDeathEvent> it = events.iterator();
+		long time = 0;
+		while(it.hasNext() && time<duration)
+		{	AiSimSuddenDeathEvent event = it.next();
+			time = event.getTime() - current.getTotalTime();
+			if(time<=duration)
+			{	// get the concerned sprites
+				Set<AiSimSprite> crushedSprites = new TreeSet<AiSimSprite>();
+				Set<AiSimSprite> crushingSprites = new TreeSet<AiSimSprite>();
+				processCrush(event,crushedSprites,crushingSprites);
+				// NOTE for now, we suppose there's only a single crushing sprite
+				{	AiSimSprite crushingSprite = crushingSprites.iterator().next();
+					// affect the existing sprites
+					for(AiSimSprite crushedSprite: crushedSprites)
+						crushSprite(crushingSprite,crushedSprite);
+				}
+				// make the new sprites appear
+				for(AiSimSprite crushingSprite: crushingSprites)
+				{	current.addSprite(crushingSprite);
+// check for fire
+if(tile.getFires().size()>0 && result.hasExplosionTrigger())
+	result.fireTriggerBomb();
+				
+				}
+				//
+				it.remove();
+			}
+		}
 	}
 }

@@ -163,4 +163,16 @@ public interface AiSprite extends Comparable<AiSprite>
 	 * 		le temps que ce sprite va mettre à brûler, en ms
 	 */
 	public long getBurningDuration();
+
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o);
+
+	@Override
+    public int hashCode();
+ 	
+	@Override
+	public int compareTo(AiSprite sprite);
 }
