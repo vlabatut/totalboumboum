@@ -151,12 +151,13 @@ public interface AiSprite extends Comparable<AiSprite>
 	 * Renvoie le temps que va mettre ce sprite à brûler s'il est touché
 	 * par du feu, exprimé en ms. Si ce sprite ne peut pas brûler, ce
 	 * temps est égal à -1.
+	 * <br/>
 	 * <b>Attention :</b> si ce sprite est une bombe, ce temps correspond
 	 * à la durée mise par la bombe pour disparaître, et non pas à la durée
 	 * de l'explosion. La durée de l'explosion correspond à la valeur
-	 * renvoyée par getBurningDuration pour le sprite de feu produit
+	 * renvoyée par {@code getBurningDuration} pour le sprite de feu produit
 	 * par l'explosion de la bombe, ou aussi à la durée renvoyée par 
-	 * getExplosionDuration pour la bombe.
+	 * {@code getExplosionDuration} pour la bombe.
 	 * 
 	 * @return	
 	 * 		le temps que ce sprite va mettre à brûler, en ms
