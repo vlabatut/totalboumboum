@@ -1565,16 +1565,7 @@ public class Launcher
 	/**
 	 * TODO mort subite
 	 * - màj modèle :
-	 * 			- TODO
-	 * 				- qu'est-ce qu'il faut faire quand l'agent dirigé est éliminé ?
-	 * 				- on n'a pas tenu compte des états des sprites pour voir si on peut vraiment les écraser, cf. burning
-	 * 				- tout re-factorer comme pour burning ?
-	 * 			- modif dans les simul en ce qui concerne la durée de la simul (si l'agent est écrasé...autre?)
-	 * 			- est-ce que le décompte des items est bien pris en compte à chaque disparition d'item dans le modèle détaillé ?
-	 * 				- y compris sur un crush
-	 * 		- prise en compte du shrink dans le modèle détaillé
 	 * 		- tests de simulation détaillée
-	 *		- dans le modèle précis, vérif si la mauvaise version de getBlast était gérée, ou pas
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max

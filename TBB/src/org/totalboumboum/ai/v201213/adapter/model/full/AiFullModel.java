@@ -32,14 +32,12 @@ import java.util.TreeSet;
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
-import org.totalboumboum.ai.v201213.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiState;
 import org.totalboumboum.ai.v201213.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.test.FullModelSimulation;
@@ -824,6 +822,7 @@ public class AiFullModel
 				List<AiSimFloor> floors = t.getInternalFloors();
 				List<AiSimHero> heroes = t.getInternalHeroes();
 				List<AiSimItem> items = t.getInternalItems();
+// NOTE should we take the state of the (crushed) sprite into account?				
 				// check the sprite depending on its type
 				if(mainSprite instanceof AiBlock)
 				{	AiSimBlock block = (AiSimBlock)mainSprite;
@@ -1266,7 +1265,34 @@ public class AiFullModel
 		
 		// blocks
 		for(AiSimBlock block: tile.getInternalBlocks())
-		{	AiStateName name = block.getState().getName();
+			burnSprite(block);
+		
+		// bombs
+		for(AiSimBomb bomb: tile.getInternalBombs())
+		{	if(!bomb.equals(detonatingBomb))
+				burnSprite(bomb);
+		}
+		
+		// heroes
+		for(AiSimHero hero: tile.getInternalHeroes())
+			burnSprite(hero);
+		
+		// items
+		for(AiSimItem item: tile.getInternalItems())
+			burnSprite(item);
+	}
+	
+	/**
+	 * Brûle un sprite, à la suite d'une explosion.
+	 * 
+	 * @param sprite
+	 * 		Le spriteà brûler.
+	 */
+	private void burnSprite(AiSimSprite sprite)
+	{	// blocks
+		if(sprite instanceof AiSimBlock)
+		{	AiSimBlock block = (AiSimBlock) sprite;
+			AiStateName name = block.getState().getName();
 			if(block.isDestructible() && name==AiStateName.STANDING)
 			{	AiSimState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
 				block.setState(state);
@@ -1274,17 +1300,17 @@ public class AiFullModel
 		}
 		
 		// bombs
-		for(AiSimBomb bomb: tile.getInternalBombs())
-		{	if(!bomb.equals(detonatingBomb))
-			{	AiStateName name = bomb.getState().getName();
-				if(bomb.hasExplosionTrigger() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
-					bomb.fireTriggerBomb();
-			}
+		else if(sprite instanceof AiSimBomb)
+		{	AiSimBomb bomb = (AiSimBomb) sprite;
+			AiStateName name = bomb.getState().getName();
+			if(bomb.hasExplosionTrigger() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
+				bomb.fireTriggerBomb();
 		}
 
 		// heroes
-		for(AiSimHero hero: tile.getInternalHeroes())
-		{	AiStateName name = hero.getState().getName();
+		else if(sprite instanceof AiSimHero)
+		{	AiSimHero hero = (AiSimHero) sprite;
+			AiStateName name = hero.getState().getName();
 			if(!hero.hasThroughFires() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
 			{	Direction direction = hero.getState().getDirection();
 				AiSimState state = new AiSimState(AiStateName.BURNING,direction,0);
@@ -1293,8 +1319,9 @@ public class AiFullModel
 		}
 		
 		// items
-		for(AiSimItem item: tile.getInternalItems())
-		{	AiStateName name = item.getState().getName();
+		else if(sprite instanceof AiSimItem)
+		{	AiSimItem item = (AiSimItem) sprite;
+			AiStateName name = item.getState().getName();
 			//if(simItem.isDestructible())
 			if(name==AiStateName.STANDING)
 			{	AiSimState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
@@ -1718,15 +1745,16 @@ public class AiFullModel
 					for(AiSimSprite crushedSprite: crushedSprites)
 						crushSprite(crushingSprite,crushedSprite);
 				}
+				
 				// make the new sprites appear
 				for(AiSimSprite crushingSprite: crushingSprites)
 				{	current.addSprite(crushingSprite);
-// check for fire
-if(tile.getFires().size()>0 && result.hasExplosionTrigger())
-	result.fireTriggerBomb();
-				
+					// check for fire
+					AiSimTile tile = crushingSprite.getTile();
+					if(tile.getFires().size()>0)
+						burnSprite(crushingSprite);
 				}
-				//
+				
 				it.remove();
 			}
 		}
