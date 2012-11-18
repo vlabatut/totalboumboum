@@ -53,6 +53,26 @@ public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEven
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// TILES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Renvoie la liste de cases concernées par
+	 * cet évènement de mort subite.
+	 * 
+	 * @return
+	 * 		Une liste de cases.
+	 */
+	public List<AiTile> getTiles()
+	{	List<AiTile> result = new ArrayList<AiTile>();
+		for(AiSprite sprite: getSprites())
+		{	AiTile tile = sprite.getTile();
+			if(!result.contains(tile))
+				result.add(tile);
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
