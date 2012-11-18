@@ -1566,6 +1566,7 @@ public class Launcher
 	 * TODO mort subite
 	 * - màj modèle :
 	 * 		- tests de simulation détaillée
+	 * 		- tester commen un hardwall tombe sur un softwall ou autres combis
 	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max

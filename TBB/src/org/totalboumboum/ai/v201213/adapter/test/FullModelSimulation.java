@@ -41,14 +41,25 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public final class FullModelSimulation
 {
 	/**
-	 * Réalise la simulation en utilisant
-	 * les différentes méthodes
-	 * proposées par {@link AiFullModel}.
+	 * Teste les fonctionalités de l'API IA
+	 * propres au modèle complet.
 	 * 
 	 * @param args
 	 * 		Pas utilisé. 
 	 */
 	public static void main(String args[])
+	{	// utilisation de base
+//		example1();
+		// mort subite
+		example2();
+	}
+	
+	/**
+	 * Réalise la simulation en utilisant
+	 * les différentes méthodes
+	 * proposées par {@link AiFullModel}.
+	 */
+	public static void example1()
 	{	AiSimZone zone = InitData.initZone1();
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
@@ -122,6 +133,37 @@ public final class FullModelSimulation
 		while(duration!=0);
 	}
 
+	/**
+	 * Réalise une simulation impliquant
+	 * une mort subite.
+	 */
+	public static void example2()
+	{	AiSimZone zone = InitData.initZone3();
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		// display initial zone
+		System.out.println("initial zone:\n"+zone);
+		AiFullModel model = new AiFullModel(zone);
+		model.applyChangeHeroDirection(hero,Direction.NONE);
+		System.out.println("hero: "+hero);
+		
+		// simulate
+		int iteration = 0;
+		long duration = 0;
+		do
+		{	// process simulation
+			model.simulate();
+			// display result
+			duration = model.getDuration();
+			long totalDuration = model.getCurrentZone().getTotalTime();
+			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+			displayModelSimulationStep(model);
+			// update iteration
+			iteration++;
+		}
+		while(duration!=0);
+	}
+	
 	/**
 	 * Affiche le contenu du modèle passé en paramètre,
 	 * ainsi que d'autres informations permettant de
