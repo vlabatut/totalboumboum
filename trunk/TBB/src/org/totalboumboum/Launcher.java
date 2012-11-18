@@ -1564,7 +1564,6 @@ public class Launcher
 	
 	/**
 	 * TODO mort subite
-	 * 
 	 * - màj modèle :
 	 * 		- prise en compte du shrink dans le modèle détaillé
 	 * 		- tests de simulation détaillée
