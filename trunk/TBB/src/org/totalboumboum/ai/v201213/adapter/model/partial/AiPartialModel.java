@@ -130,8 +130,12 @@ public class AiPartialModel
 		currentHero = zone.getHeroByColor(color);
 		currentLocation = new AiLocation(currentHero);
 		
+		// durations
+		totalDuration = zone.getTotalTime();
+		
 		// sudden death events
-		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>(zone.getAllSuddenDeathEvents());
+		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
+		initSuddenDeathEvents(zone);
 
 		// obstacles
 		obstacles = new boolean[height][width];
@@ -158,6 +162,9 @@ public class AiPartialModel
 		// hero
 		currentHero = model.currentHero;
 		currentLocation = model.currentLocation;
+		
+		// durations
+		totalDuration = model.totalDuration;
 		
 		// sudden death events
 		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>(model.suddenDeathEvents);
@@ -189,9 +196,7 @@ public class AiPartialModel
 	private int width;
 	/** Hauteur de la zone de jeu. */
 	private int height;
-	/** Copie des évènements de mort subite */
-	private List<AiSuddenDeathEvent> suddenDeathEvents;
-
+	
 	/**
 	 * Renvoie la zone ayant servi à initialiser
 	 * ce modèle partiel.
@@ -309,6 +314,38 @@ public class AiPartialModel
 		int col = tile.getCol();
 		boolean result = obstacles[row][col];
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ZONE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Évènements de mort subite */
+	private List<AiSuddenDeathEvent> suddenDeathEvents;
+
+	/**
+	 * Intialise la liste d'évènements de mort
+	 * subite. on ne garde que ceux qui ne se sont
+	 * pas encore réalisés.
+	 * 
+	 * @param zone
+	 * 		La zone utilisée pour initialiser ce modèle.
+	 */
+	private void initSuddenDeathEvents(AiZone zone)
+	{	List<AiSuddenDeathEvent> events = zone.getAllSuddenDeathEvents();
+
+		// detect the next event which hasn't happened yet
+		int i = 0;
+		long time = 0;
+		while(i<events.size() && time<totalDuration)
+		{	AiSuddenDeathEvent event = events.get(i);
+			time = event.getTime();
+			if(time<totalDuration)
+				i++;
+		}
+		
+		// keep only the following ones
+		for(int j=i;j<events.size();j++)
+			suddenDeathEvents.add(events.get(j));
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -476,7 +513,17 @@ public class AiPartialModel
 				}
 				if(bomb!=null && !noBomb)
 				{	// add explosion to the matrix
-					long endTime = time + bomb.getExplosionDuration();
+					long startTime;
+					// start time depends on whether the tile is already in an explosion
+					{	int col = tile.getCol();
+						int row = tile.getRow();
+						AiExplosionList list = explosions[row][col];
+						if(list!=null && list.getIntersection(time,time+1)!=null)
+							startTime = time + bomb.getLatencyDuration();
+						else
+							startTime = time + bomb.getNormalDuration() - bomb.getElapsedTime();
+					}
+					long endTime = startTime + bomb.getExplosionDuration();
 					// get the bomb blast
 					List<AiTile> blast = getBlast(time,bomb);
 					// add each tile to the explosion matrix
@@ -488,7 +535,7 @@ public class AiPartialModel
 						{	list = new AiExplosionList(t);
 							explosions[row][col] = list;
 						}
-						AiExplosion explosion = new AiExplosion(time,endTime,t);
+						AiExplosion explosion = new AiExplosion(startTime,endTime,t);
 						list.add(explosion);
 					}
 				}
@@ -693,7 +740,7 @@ public class AiPartialModel
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Durée totale depuis le début de la simulation */
-	private long totalDuration = 0;
+	private long totalDuration;
 	/** Durée de la dernière simulation */
 	private long duration = 0;
 
@@ -1027,7 +1074,10 @@ public class AiPartialModel
 					{	AiTile tile = sprite.getTile();
 						int row = tile.getRow();
 						int col = tile.getCol();
-						obstacles[row][col] = true;
+						// on vérifie si la case n'est pas déjà occupée par une explosion
+						AiExplosionList list = explosions[row][col];
+						obstacles[row][col] = (sprite instanceof AiBlock && !((AiBlock)sprite).isDestructible())
+							|| list==null || list.getIntersection(time,time+1)==null;
 					}
 				}
 				// on supprime de la liste

@@ -430,12 +430,7 @@ public class AiFullModel
 		limitSprites = new ArrayList<AiSimSprite>();
 		
 		for(AiSimSprite sprite: sprites)
-		{	
-if(sprite instanceof AiSimHero)
-	System.out.print("");
-if(sprite instanceof AiSimBomb)
-	System.out.print("");
-			// process the sprite next state
+		{	// process the sprite next state
 			AiSimState state = sprite.getState();
 			// process the time remaining before the next change (be it of state, tile, etc.)
 			if(state.getName()!=AiStateName.ENDED)
@@ -767,7 +762,7 @@ if(sprite instanceof AiSimBomb)
 		// block is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = block.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) //NOTE problem for future re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1116,7 +1111,7 @@ if(sprite instanceof AiSimBomb)
 		// floor is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = floor.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning blocks (but it's only an approximation, after all...)
+			if(time>=burningDuration) //NOTE problem for future re-spawning blocks (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1350,7 +1345,7 @@ if(sprite instanceof AiSimBomb)
 		// bombs
 		if(type==AiItemType.NO_BOMB)
 		{	hero.updateBombNumberMax(Integer.MIN_VALUE);
-			// NOTE actually temporary, but this should exceed the simulated duration
+			// NOTE actually temporary, but this should exceed the simulated duration anyway
 		}
 		else if(type==AiItemType.ANTI_BOMB)
 		{	hero.updateBombNumberMax(-1);
@@ -1365,7 +1360,7 @@ if(sprite instanceof AiSimBomb)
 		// range
 		if(type==AiItemType.NO_FLAME)
 		{	hero.updateBombRange(Integer.MIN_VALUE);
-			// NOTE actually temporary, but this should exceed the simulated duration
+			// NOTE actually temporary, but this should exceed the simulated duration, anyway
 		}
 		else if(type==AiItemType.ANTI_FLAME)
 		{	hero.updateBombRange(-1);
@@ -1380,7 +1375,7 @@ if(sprite instanceof AiSimBomb)
 		// speed
 		if(type==AiItemType.NO_SPEED)
 		{	hero.updateWalkingSpeed(Integer.MIN_VALUE);
-			// NOTE actually temporary, but this should exceed the simulated duration
+			// NOTE actually temporary, but this should exceed the simulated duration, anyway
 		}
 		else if(type==AiItemType.ANTI_SPEED)
 		{	hero.updateWalkingSpeed(-1);
@@ -1401,7 +1396,7 @@ if(sprite instanceof AiSimBomb)
 		{	// nothing to do
 		}
 		else if(type==AiItemType.PUNCH)
-		{	// NOTE to be completed
+		{	// NOTE to be completed, useless for now
 		}
 		
 		// remove item
@@ -1456,7 +1451,7 @@ if(sprite instanceof AiSimBomb)
 		// item is burning (too bad!)
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = item.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) //NOTE problem for future re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;

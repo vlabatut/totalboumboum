@@ -1565,6 +1565,9 @@ public class Launcher
 	/**
 	 * TODO mort subite
 	 * - màj modèle :
+	 * 			- représenter les evts sd dans une liste à part (car à modifier), avec seulement les evts pas encore passés
+	 * 			- mettre à jour la zone avec tous les évènements passés (à supprimer de la liste) >> permet de simplement appliquer l'ancienne simulation sans modif
+	 * 			- modif dans les simul en ce qui concerne la durée de la simul (si l'agent est écrasé...autre?)
 	 * 		- prise en compte du shrink dans le modèle détaillé
 	 * 		- tests de simulation détaillée
 	 *		- dans le modèle précis, vérif si la mauvaise version de getBlast était gérée, ou pas

@@ -175,7 +175,7 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 			while(it.hasNext() && covers)
 			{	AiExplosion next = it.next();
 				long nextStart = next.getStart();
-				if(covers=nextStart<=endTime)
+				if(covers = (nextStart<=endTime))
 				{	explosionStart = Math.min(explosionStart,nextStart);
 					long nextEnd = next.getEnd();
 					explosionEnd = Math.max(explosionEnd,nextEnd);
