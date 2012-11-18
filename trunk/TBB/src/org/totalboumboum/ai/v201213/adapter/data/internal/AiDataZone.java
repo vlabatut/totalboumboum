@@ -778,7 +778,7 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * Met à jour la map contenant les évènements décrivant
+	 * Met à jour la liste contenant les évènements décrivant
 	 * la mort subite.
 	 */
 	private void updateSuddenDeath()

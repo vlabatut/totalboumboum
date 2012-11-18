@@ -112,4 +112,15 @@ public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 	{	List<AiSprite> result = new ArrayList<AiSprite>(sprites);
 		return result;
 	}
+	
+	/**
+	 * Renvoie la représentation interne des sprites
+	 * de cet évènement.
+	 * 
+	 * @return
+	 * 		Une liste de sprites en représentation interne.
+	 */
+	protected List<AiSimSprite> getInternalSprites()
+	{	return sprites;
+	}
 }
