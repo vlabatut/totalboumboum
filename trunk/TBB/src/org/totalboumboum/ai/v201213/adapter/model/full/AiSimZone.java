@@ -357,109 +357,6 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * Permet de rajouter un bloc dans cette zone.
-	 * <br/>
-	 * <b>Attention :</b> le bloc a obligatoirement déjà été 
-	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone.
-	 * 
-	 *  @param block
-	 *  	le bloc à rajouter à cette zone
-	 */
-	protected void addSprite(AiSimBlock block)
-	{	AiSimTile tile = block.getTile();
-		internalBlocks.add(block);
-		externalBlocks.add(block);
-		tile.addSprite(block);
-	}
-	
-	/**
-	 * Permet de rajouter une bombe dans cette zone.
-	 * <br/>
-	 * <b>Attention :</b> la bombe a obligatoirement déjà été 
-	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone.
-	 * 
-	 *  @param bomb
-	 *  	La bombe à rajouter à cette zone.
-	 */
-	protected void addSprite(AiSimBomb bomb)
-	{	AiSimTile tile = bomb.getTile();
-		internalBombs.add(bomb);
-		externalBombs.add(bomb);
-		tile.addSprite(bomb);
-	}
-	
-	/**
-	 * Permet de rajouter un feu dans cette zone.
-	 * <br/>
-	 * <b>Attention :</b> le feu a obligatoirement déjà été 
-	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone.
-	 * 
-	 *  @param fire
-	 *  	Le feu à rajouter à cette zone.
-	 */
-	protected void addSprite(AiSimFire fire)
-	{	AiSimTile tile = fire.getTile();
-		internalFires.add(fire);
-		externalFires.add(fire);
-		tile.addSprite(fire);
-	}
-	
-	/**
-	 * Permet de rajouter un sol dans cette zone.
-	 * <br/>
-	 * <b>Attention :</b> le sol a obligatoirement déjà été 
-	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone.
-	 * 
-	 *  @param floor
-	 *  	le sol à rajouter à cette zone.
-	 */
-	protected void addSprite(AiSimFloor floor)
-	{	AiSimTile tile = floor.getTile();
-		internalFloors.add(floor);
-		externalFloors.add(floor);
-		tile.addSprite(floor);
-	}
-	
-	/**
-	 * Permet de rajouter un personnage dans cette zone.
-	 * <br/>
-	 * <b>Attention :</b> le personnage a obligatoirement déjà été 
-	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone.
-	 * 
-	 *  @param hero
-	 *  	Le personnage à rajouter à cette zone.
-	 */
-	protected void addSprite(AiSimHero hero)
-	{	AiSimTile tile = hero.getTile();
-		internalHeroes.add(hero);
-		externalHeroes.add(hero);
-		remainingHeroList.add(hero);
-		tile.addSprite(hero);
-	}
-	
-	/**
-	 * Permet de rajouter un item dans cette zone.
-	 * <br/>
-	 * <b>Attention :</b> l'item a obligatoirement déjà été 
-	 * affecté à une case lors de sa construction, donc il s'agit 
-	 * ici simplement de mettre à jour les listes de sprites de la zone.
-	 * 
-	 *  @param item
-	 *  	L'item sprite à rajouter à cette zone.
-	 */
-	protected void addSprite(AiSimItem item)
-	{	AiSimTile tile = item.getTile();
-		internalItems.add(item);
-		externalItems.add(item);
-		tile.addSprite(item);
-	}
-	
-	/**
 	 * Permet de rajouter un sprite dans cette zone.
 	 * <br/>
 	 * <b>Attention :</b> le sprite a obligatoirement déjà été 
@@ -535,95 +432,6 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
-	 * 
-	 * @param block
-	 * 		le sprite à supprimer de la zone
-	 */
-	protected void removeSprite(AiSimBlock block)
-	{	internalBlocks.remove(block);
-		externalBlocks.remove(block);
-		
-		AiSimTile tile = block.getTile();
-		tile.removeSprite(block);
-	}
-
-	/**
-	 * supprime un sprite de la zone et de la case correspondante.
-	 * 
-	 * @param bomb
-	 * 		le sprite à supprimer de la zone
-	 */
-	protected void removeSprite(AiSimBomb bomb)
-	{	internalBombs.remove(bomb);
-		externalBombs.remove(bomb);
-		
-		AiSimTile tile = bomb.getTile();
-		tile.removeSprite(bomb);
-	}
-
-	/**
-	 * supprime un sprite de la zone et de la case correspondante.
-	 * 
-	 * @param fire
-	 * 		le sprite à supprimer de la zone
-	 */
-	protected void removeSprite(AiSimFire fire)
-	{	internalFires.remove(fire);
-		externalFires.remove(fire);
-		
-		AiSimTile tile = fire.getTile();
-		tile.removeSprite(fire);
-	}
-
-	/**
-	 * supprime un sprite de la zone et de la case correspondante.
-	 * 
-	 * @param floor
-	 * 		le sprite à supprimer de la zone
-	 */
-	protected void removeSprite(AiSimFloor floor)
-	{	internalFloors.remove(floor);
-		externalFloors.remove(floor);
-		
-		AiSimTile tile = floor.getTile();
-		tile.removeSprite(floor);
-	}
-
-	/**
-	 * supprime un sprite de la zone et de la case correspondante.
-	 * comme il s'agit d'un joueur, il est supprimé seulement de la case
-	 * et de la liste des joueurs encore en jeu (mais la zone continue
-	 * à le référencer dans la liste générale des joueurs, car le sprite
-	 * peut encore etre utile, par exemple pour obtenir le classement
-	 * de ce joueur)
-	 * 
-	 * @param hero
-	 * 		le sprite à supprimer de la zone
-	 */
-	protected void removeSprite(AiSimHero hero)
-	{	// only remove from this list, because the others must stay complete
-		remainingHeroList.remove(hero);
-		
-		AiSimTile tile = hero.getTile();
-		tile.removeSprite(hero);
-	}
-
-	/**
-	 * Supprime un sprite de la zone et de la case correspondante.
-	 * 
-	 * @param item
-	 * 		Le sprite à supprimer de la zone.
-	 */
-	protected void removeSprite(AiSimItem item)
-	{	internalItems.remove(item);
-		externalItems.remove(item);
-		
-		AiSimTile tile = item.getTile();
-		tile.removeSprite(item);
-	}
-
-	/**
 	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
@@ -664,104 +472,6 @@ public final class AiSimZone extends AiZone
 		return result;
 	}
 	
-	/**
-	 * Cette méthode permet de rajouter un personnage dans une zone,
-	 * afin de créer un cas de test par exemple. Aucun contrôle
-	 * n'est effectué sur la possibilité de créer le sprite ou pas.
-	 * Par exemple, la méthode ne teste pas si la case spécifiée 
-	 * contient déjà un mur.
-	 * <br/>
-	 * <b>Attention</b> : cette méthode est prévue pour effectuer
-	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
-	 * est utilisée pour modifier une zone initialisée par le moteur
-	 * du jeu, alors il est probable que des erreurs apparaissent.
-	 * 
-	 * @param tile
-	 * 		La case de la zone devant contenir le sprite.
-	 * @param color
-	 * 		La couleur du joueur.
-	 * @param bombNumber
-	 * 		Le nombre de bombes que le joueur peut poser.
-	 * @param range
-	 * 		La portée des bombes du joueur.
-	 * @param ownHero
-	 * 		Indique si ce personnage est celui contrôlé par l'agent.
-	 * @return
-	 * 		Le personnage créé. 
-	 */
-	public AiSimHero createHero(AiTile tile, PredefinedColor color, int bombNumber, int range, boolean ownHero)
-	{	// bomb prototype
-		AiSimBomb bombPrototype;
-		{	AiSimTile t = null;
-			double posX = 0;
-			double posY = 0;
-			double posZ = 0;
-	
-			AiSimFire firePrototype = createFire(null);
-			boolean countdownTrigger = true;
-			boolean remoteControlTrigger = false;
-			boolean explosionTrigger = true;
-			boolean throughItems = false;
-			float failureProbability = 0.03f;
-			long burningDuration = 100;
-			long latencyDuration = 140;
-			long normalDuration = 2400;
-			long time = 0;
-			boolean penetrating = false;
-			boolean working = true;
-			double currentSpeed = 0;
-			double slidingSpeed = (140*RoundVariables.zoomFactor)/16 * 1000;
-			AiStopType stopHeroes = AiStopType.WEAK_STOP;
-			AiStopType stopFires = AiStopType.WEAK_STOP;
-			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-			int id = createNewId();
-			bombPrototype = new AiSimBomb(id,t,posX,posY,posZ,
-					state,burningDuration,currentSpeed,slidingSpeed,
-					countdownTrigger,remoteControlTrigger,explosionTrigger,
-					normalDuration,latencyDuration,failureProbability,firePrototype,
-					stopHeroes,stopFires,throughItems,range,penetrating,
-					color,working,time);
-		}
-		
-		// location
-		int row = 0;
-		int col = 0;
-		AiSimTile t = null;
-		double posX = 0;
-		double posY = 0;
-		double posZ = 0;
-		if(tile!=null)
-		{	row = tile.getRow();
-			col = tile.getCol();
-			t = matrix[row][col];
-			posX = t.getPosX();
-			posY = t.getPosY();
-			posZ = 0;
-		}
-		
-		// create sprite
-		long burningDuration = 810; // dépend du sprite...
-		int bombCount = 0;
-		double currentSpeed = 0;
-		double walkingSpeed = 50*RoundVariables.zoomFactor;
-		boolean throughBlocks = false;
-		boolean throughBombs = false;
-		boolean throughFires = false;
-		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-		int id = createNewId();
-		AiSimHero result = new AiSimHero(id,t,posX,posY,posZ, 
-				state,burningDuration,currentSpeed,
-				bombPrototype,bombNumber,bombCount, 
-				throughBlocks,throughBombs,throughFires, 
-				color,walkingSpeed);
-		
-		// update zone
-		if(tile!=null)
-			addHero(result,ownHero);
-		
-		return result;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -821,6 +531,37 @@ public final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * Permet de rajouter un bloc dans cette zone.
+	 * <br/>
+	 * <b>Attention :</b> le bloc a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
+	 * 
+	 *  @param block
+	 *  	le bloc à rajouter à cette zone
+	 */
+	protected void addSprite(AiSimBlock block)
+	{	AiSimTile tile = block.getTile();
+		internalBlocks.add(block);
+		externalBlocks.add(block);
+		tile.addSprite(block);
+	}
+	
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param block
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimBlock block)
+	{	internalBlocks.remove(block);
+		externalBlocks.remove(block);
+		
+		AiSimTile tile = block.getTile();
+		tile.removeSprite(block);
+	}
+
 	/**
 	 * Cette méthode permet de rajouter un mur dans une zone,
 	 * afin de créer un cas de test par exemple. Aucun contrôle
@@ -929,6 +670,37 @@ public final class AiSimZone extends AiZone
 				result = temp;
 		}
 		return result;
+	}
+
+	/**
+	 * Permet de rajouter une bombe dans cette zone.
+	 * <br/>
+	 * <b>Attention :</b> la bombe a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
+	 * 
+	 *  @param bomb
+	 *  	La bombe à rajouter à cette zone.
+	 */
+	protected void addSprite(AiSimBomb bomb)
+	{	AiSimTile tile = bomb.getTile();
+		internalBombs.add(bomb);
+		externalBombs.add(bomb);
+		tile.addSprite(bomb);
+	}
+	
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param bomb
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimBomb bomb)
+	{	internalBombs.remove(bomb);
+		externalBombs.remove(bomb);
+		
+		AiSimTile tile = bomb.getTile();
+		tile.removeSprite(bomb);
 	}
 
 	/**
@@ -1102,6 +874,37 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
+	 * Permet de rajouter un feu dans cette zone.
+	 * <br/>
+	 * <b>Attention :</b> le feu a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
+	 * 
+	 *  @param fire
+	 *  	Le feu à rajouter à cette zone.
+	 */
+	protected void addSprite(AiSimFire fire)
+	{	AiSimTile tile = fire.getTile();
+		internalFires.add(fire);
+		externalFires.add(fire);
+		tile.addSprite(fire);
+	}
+	
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param fire
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimFire fire)
+	{	internalFires.remove(fire);
+		externalFires.remove(fire);
+		
+		AiSimTile tile = fire.getTile();
+		tile.removeSprite(fire);
+	}
+
+	/**
 	 * Cette méthode permet de rajouter un fire dans une zone,
 	 * afin de créer un cas de test par exemple. Aucun contrôle
 	 * n'est effectué sur la possibilité de créer le sprite ou pas.
@@ -1256,6 +1059,37 @@ public final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * Permet de rajouter un sol dans cette zone.
+	 * <br/>
+	 * <b>Attention :</b> le sol a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
+	 * 
+	 *  @param floor
+	 *  	le sol à rajouter à cette zone.
+	 */
+	protected void addSprite(AiSimFloor floor)
+	{	AiSimTile tile = floor.getTile();
+		internalFloors.add(floor);
+		externalFloors.add(floor);
+		tile.addSprite(floor);
+	}
+	
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param floor
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimFloor floor)
+	{	internalFloors.remove(floor);
+		externalFloors.remove(floor);
+		
+		AiSimTile tile = floor.getTile();
+		tile.removeSprite(floor);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -1349,6 +1183,43 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
+	 * Permet de rajouter un personnage dans cette zone.
+	 * <br/>
+	 * <b>Attention :</b> le personnage a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
+	 * 
+	 *  @param hero
+	 *  	Le personnage à rajouter à cette zone.
+	 */
+	protected void addSprite(AiSimHero hero)
+	{	AiSimTile tile = hero.getTile();
+		internalHeroes.add(hero);
+		externalHeroes.add(hero);
+		remainingHeroList.add(hero);
+		tile.addSprite(hero);
+	}
+	
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * comme il s'agit d'un joueur, il est supprimé seulement de la case
+	 * et de la liste des joueurs encore en jeu (mais la zone continue
+	 * à le référencer dans la liste générale des joueurs, car le sprite
+	 * peut encore etre utile, par exemple pour obtenir le classement
+	 * de ce joueur)
+	 * 
+	 * @param hero
+	 * 		le sprite à supprimer de la zone
+	 */
+	protected void removeSprite(AiSimHero hero)
+	{	// only remove from this list, because the others must stay complete
+		remainingHeroList.remove(hero);
+		
+		AiSimTile tile = hero.getTile();
+		tile.removeSprite(hero);
+	}
+
+	/**
 	 * insûre un nouveau personnage dans la zone
 	 * (méthode utilisée lors de la simulation)
 	 * 
@@ -1367,6 +1238,104 @@ public final class AiSimZone extends AiZone
 		roundRanks.put(hero,0);
 		matchRanks.put(hero,0);
 		statsRanks.put(hero,0);
+	}
+
+	/**
+	 * Cette méthode permet de rajouter un personnage dans une zone,
+	 * afin de créer un cas de test par exemple. Aucun contrôle
+	 * n'est effectué sur la possibilité de créer le sprite ou pas.
+	 * Par exemple, la méthode ne teste pas si la case spécifiée 
+	 * contient déjà un mur.
+	 * <br/>
+	 * <b>Attention</b> : cette méthode est prévue pour effectuer
+	 * du débogage hors-ligne, c'est à dire en dehors du jeu. Si elle
+	 * est utilisée pour modifier une zone initialisée par le moteur
+	 * du jeu, alors il est probable que des erreurs apparaissent.
+	 * 
+	 * @param tile
+	 * 		La case de la zone devant contenir le sprite.
+	 * @param color
+	 * 		La couleur du joueur.
+	 * @param bombNumber
+	 * 		Le nombre de bombes que le joueur peut poser.
+	 * @param range
+	 * 		La portée des bombes du joueur.
+	 * @param ownHero
+	 * 		Indique si ce personnage est celui contrôlé par l'agent.
+	 * @return
+	 * 		Le personnage créé. 
+	 */
+	public AiSimHero createHero(AiTile tile, PredefinedColor color, int bombNumber, int range, boolean ownHero)
+	{	// bomb prototype
+		AiSimBomb bombPrototype;
+		{	AiSimTile t = null;
+			double posX = 0;
+			double posY = 0;
+			double posZ = 0;
+	
+			AiSimFire firePrototype = createFire(null);
+			boolean countdownTrigger = true;
+			boolean remoteControlTrigger = false;
+			boolean explosionTrigger = true;
+			boolean throughItems = false;
+			float failureProbability = 0.03f;
+			long burningDuration = 100;
+			long latencyDuration = 140;
+			long normalDuration = 2400;
+			long time = 0;
+			boolean penetrating = false;
+			boolean working = true;
+			double currentSpeed = 0;
+			double slidingSpeed = (140*RoundVariables.zoomFactor)/16 * 1000;
+			AiStopType stopHeroes = AiStopType.WEAK_STOP;
+			AiStopType stopFires = AiStopType.WEAK_STOP;
+			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+			int id = createNewId();
+			bombPrototype = new AiSimBomb(id,t,posX,posY,posZ,
+					state,burningDuration,currentSpeed,slidingSpeed,
+					countdownTrigger,remoteControlTrigger,explosionTrigger,
+					normalDuration,latencyDuration,failureProbability,firePrototype,
+					stopHeroes,stopFires,throughItems,range,penetrating,
+					color,working,time);
+		}
+		
+		// location
+		int row = 0;
+		int col = 0;
+		AiSimTile t = null;
+		double posX = 0;
+		double posY = 0;
+		double posZ = 0;
+		if(tile!=null)
+		{	row = tile.getRow();
+			col = tile.getCol();
+			t = matrix[row][col];
+			posX = t.getPosX();
+			posY = t.getPosY();
+			posZ = 0;
+		}
+		
+		// create sprite
+		long burningDuration = 810; // dépend du sprite...
+		int bombCount = 0;
+		double currentSpeed = 0;
+		double walkingSpeed = 50*RoundVariables.zoomFactor;
+		boolean throughBlocks = false;
+		boolean throughBombs = false;
+		boolean throughFires = false;
+		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		int id = createNewId();
+		AiSimHero result = new AiSimHero(id,t,posX,posY,posZ, 
+				state,burningDuration,currentSpeed,
+				bombPrototype,bombNumber,bombCount, 
+				throughBlocks,throughBombs,throughFires, 
+				color,walkingSpeed);
+		
+		// update zone
+		if(tile!=null)
+			addHero(result,ownHero);
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -1393,17 +1362,18 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de diminuer le nombre d'items cachés,
-	 * lors de la simulation
+	 * Permet de diminuer le nombre d'items cachés,
+	 * lors de la simulation.
 	 * 
 	 * @param type
-	 * 		le type d'item qui a été découvert
+	 * 		Le type d'item dont le nombre doit être changer.
+	 * @param delta
+	 * 		La modification à apporter au nombre d'items.
 	 */
-	protected void updateHiddenItemsCount(AiItemType type)
+	protected void updateHiddenItemsCount(AiItemType type, int delta)
 	{	Integer value = hiddenItemsCounts.get(type);
-		value --;
-		hiddenItemsCounts.put(type,value);
-		hiddenItemsCount--;
+		hiddenItemsCounts.put(type,value + delta);
+		hiddenItemsCount = hiddenItemsCount + delta;
 	}
 	
 	/**
@@ -1430,6 +1400,37 @@ public final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * Permet de rajouter un item dans cette zone.
+	 * <br/>
+	 * <b>Attention :</b> l'item a obligatoirement déjà été 
+	 * affecté à une case lors de sa construction, donc il s'agit 
+	 * ici simplement de mettre à jour les listes de sprites de la zone.
+	 * 
+	 *  @param item
+	 *  	L'item sprite à rajouter à cette zone.
+	 */
+	protected void addSprite(AiSimItem item)
+	{	AiSimTile tile = item.getTile();
+		internalItems.add(item);
+		externalItems.add(item);
+		tile.addSprite(item);
+	}
+	
+	/**
+	 * Supprime un sprite de la zone et de la case correspondante.
+	 * 
+	 * @param item
+	 * 		Le sprite à supprimer de la zone.
+	 */
+	protected void removeSprite(AiSimItem item)
+	{	internalItems.remove(item);
+		externalItems.remove(item);
+		
+		AiSimTile tile = item.getTile();
+		tile.removeSprite(item);
+	}
+
 	/**
 	 * Méthode utilisée en interne
 	 * pour initialiser une zone de test.
@@ -1492,7 +1493,7 @@ public final class AiSimZone extends AiZone
 		// update zone
 		if(tile!=null)
 		{	addSprite(result);
-			updateHiddenItemsCount(itemType);
+			updateHiddenItemsCount(itemType,1);
 		}
 		
 		return result;
