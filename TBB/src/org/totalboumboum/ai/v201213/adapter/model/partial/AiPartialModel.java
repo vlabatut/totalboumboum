@@ -462,24 +462,33 @@ public class AiPartialModel
 		// process sudden death event by order of occurrence
 		for(AiSuddenDeathEvent event: suddenDeathEvents)
 		{	long time = event.getTime() - totalDuration;
-			List<AiSprite> sprites = event.getSprites();
-			for(AiSprite sprite: sprites)
-			{	if(sprite instanceof AiBomb)
-				{	AiBomb bomb = (AiBomb) sprite;
-					// add explosion to the matrix
+			List<AiTile> tiles = event.getTiles();
+			for(AiTile tile: tiles)
+			{	List<AiSprite> sprites = event.getSpritesForTile(tile);
+				// check if a bomb is going to fall
+				AiBomb bomb = null;
+				boolean noBomb = false;
+				for(AiSprite sprite: sprites)
+				{	if(sprite instanceof AiBomb)
+						bomb = (AiBomb) sprite;
+					if(sprite instanceof AiBlock)
+						noBomb = true;
+				}
+				if(bomb!=null && !noBomb)
+				{	// add explosion to the matrix
 					long endTime = time + bomb.getExplosionDuration();
 					// get the bomb blast
 					List<AiTile> blast = getBlast(time,bomb);
 					// add each tile to the explosion matrix
-					for(AiTile tile: blast)
-					{	int col = tile.getCol();
-						int row = tile.getRow();
+					for(AiTile t: blast)
+					{	int col = t.getCol();
+						int row = t.getRow();
 						AiExplosionList list = explosions[row][col];
 						if(list==null)
-						{	list = new AiExplosionList(tile);
+						{	list = new AiExplosionList(t);
 							explosions[row][col] = list;
 						}
-						AiExplosion explosion = new AiExplosion(time,endTime,tile);
+						AiExplosion explosion = new AiExplosion(time,endTime,t);
 						list.add(explosion);
 					}
 				}
@@ -488,7 +497,7 @@ public class AiPartialModel
 	}
 	
 	/**
-	 * Cette méthode identifie les case qui seront touchées
+	 * Cette méthode identifie les cases qui seront touchées
 	 * par l'explosion de la bombe passée en paramètre.
 	 * <br/>
 	 * La méthode {@link AiBomb#getBlast} n'est pas utilisable ici,
