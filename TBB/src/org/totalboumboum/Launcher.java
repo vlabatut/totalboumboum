@@ -1564,10 +1564,6 @@ public class Launcher
 	
 	/**
 	 * TODO mort subite
-	 * - màj modèle :
-	 * 		- tests de simulation détaillée
-	 * 		- tester commen un hardwall tombe sur un softwall ou autres combis
-	 * 
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max
 	 * 		- épurer en virant les items pas standard
@@ -1585,9 +1581,5 @@ public class Launcher
 	 * 			- gérer aussi leur aspect contagieux
 	 * 		- ressources
 	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
-	 *  
-	 *  
-	 *  - GUI: on peut activer / désactiver la mort subite (mais pas la configurer)
 	 */
-	
 }

@@ -831,7 +831,6 @@ public class AiFullModel
 					{	if(blocks.isEmpty() && bombs.isEmpty())
 						{	// can appear in the tile
 							crushingSprites.add(block);
-							crushedSprites.addAll(fires);
 							crushedSprites.addAll(floors);
 							crushedSprites.addAll(heroes);
 							crushedSprites.addAll(items);
@@ -845,6 +844,7 @@ public class AiFullModel
 					{	if(blocks.isEmpty() || blocks.get(0).isDestructible())
 						{	// can appear in the tile
 							crushingSprites.add(block);
+							crushedSprites.addAll(blocks);
 							crushedSprites.addAll(bombs);
 							crushedSprites.addAll(fires);
 							crushedSprites.addAll(floors);
@@ -1729,10 +1729,10 @@ public class AiFullModel
 	 */
 	private void updateSuddenDeath(long duration)
 	{	List<AiSimSuddenDeathEvent> events = current.getInternalSuddenDeathEvents();
-		Iterator<AiSimSuddenDeathEvent> it = events.iterator();
+		int i = 0;
 		long time = 0;
-		while(it.hasNext() && time<duration)
-		{	AiSimSuddenDeathEvent event = it.next();
+		while(i<events.size() && time<duration)
+		{	AiSimSuddenDeathEvent event = events.get(i);
 			time = event.getTime() - current.getTotalTime();
 			if(time<=duration)
 			{	// get the concerned sprites
@@ -1755,8 +1755,10 @@ public class AiFullModel
 						burnSprite(crushingSprite);
 				}
 				
-				it.remove();
+				current.removeSuddenDeathEvent(0);
 			}
+			else
+				i++;
 		}
 	}
 }

@@ -69,6 +69,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 	private static final int LINE_POINTS_VALUES = 4;
 	private static final int LINE_POINTS_SHARE = 5;
 	private static final int LINE_POINTS_DRAW = 6;
+	private static final int LINE_SUDDEN_DEATH = 7;
 
 	private QuickMatchConfiguration quickMatchConfiguration;
 
@@ -88,17 +89,9 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		int pointsValuesWidth = pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
 //		getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
 		int firstPointsValuesWidth = firstPointsRankWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
-
-		
-		
-		
-		
-		
 		
 		if(quickMatchConfiguration!=null)
-		{	
-			
-			// levels order
+		{	// levels order
 			{	Line ln = getLine(LINE_LEVELS_ORDER);
 				ln.addLabel(0);
 				int col = 0;
@@ -334,8 +327,34 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				}
 			}
 			
+			// sudden death
+			{	Line ln = getLine(LINE_SUDDEN_DEATH);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMinWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
+					ln.setLabelMaxWidth(col,nameWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
+					col++;
+				}
+				// value
+				{	setSuddenDeathDisabled();
+					int valueWidth = getDataWidth() - nameWidth - GuiTools.subPanelMargin;
+					ln.setLabelMinWidth(col,valueWidth);
+					ln.setLabelPrefWidth(col,valueWidth);
+					ln.setLabelMaxWidth(col,valueWidth);
+					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+					col++;
+				}
+			}
+			
 			// empty lines
-			{	for(int line=LINE_POINTS_DRAW+1;line<LINE_COUNT;line++)
+			{	for(int line=LINE_SUDDEN_DEATH+1;line<LINE_COUNT;line++)
 				{	Line ln = getLine(line);
 					int col = 0;
 					int mw = ln.getWidth();
@@ -422,10 +441,19 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		getLine(LINE_POINTS_DRAW).setLabelKey(1,key,false);
 	}
 	
+	private void setSuddenDeathDisabled()
+	{	boolean suddenDeathDisabled = quickMatchConfiguration.getSuddenDeathDisabled();
+		String key;
+		if(suddenDeathDisabled)
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_YOK;
+		else
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_VAR;
+		getLine(LINE_SUDDEN_DEATH).setLabelKey(1,key,false);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{	
@@ -514,6 +542,13 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				setPointsDraw();
 				fireRoundQuickConfigModified();
 				break;
+			// points share
+			case LINE_SUDDEN_DEATH:
+				boolean suddenDeath = !quickMatchConfiguration.getSuddenDeathDisabled();
+				quickMatchConfiguration.setSuddenDeathDisabled(suddenDeath);
+				setSuddenDeathDisabled();
+				fireRoundQuickConfigModified();
+				break;			
 		}
 	}
 

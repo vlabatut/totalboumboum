@@ -231,12 +231,14 @@ public final class InitData
 	 * </pre>
 	 * avec une mort subite provoquant les apparitions suivantes :
 	 * <ul>
-	 * 		<li>t=1000ms: bloc en (4,1)</li>
+	 * 		<li>t=1000ms: bloc destructible en (4,1)</li>
+	 * 		<li>t=1500ms: bloc indestructible en (4,1)</li>
 	 * 		<li>t=2000ms: bloc destructible en (1,5)</li>
 	 * 		<li>t=3000ms: bloc destructible en (1,4) et bombe en (2,5)</li>
 	 * 		<li>t=3800ms: bombe en (3,5)</li>
 	 * 		<li>t=4000ms: item en (4,5) et bloc destructible en (3,4)</li>
-	 * 		<li>t=4500mss: bloc en (3,1)</li>
+	 * 		<li>t=4500mss: bloc destructible en (3,1)</li>
+	 * 		<li>t=5000mss: bloc destructible en (1,1)</li>
 	 * </ul>
 	 * 
 	 * @return
@@ -287,7 +289,7 @@ public final class InitData
 			long time;
 			HashMap<AiTile, List<AiSprite>> sprites;
 			List<AiSprite> lst;
-			{	// t=1s: bloc en (4,1)
+			{	// t=1000ms: bloc destructible en (4,1)
 				boolean destructible = true;
 				AiBlock block = zone.createBlock(null,destructible);
 				tile = zone.getTile(4,1);
@@ -298,7 +300,18 @@ public final class InitData
 				sprites.put(tile,lst);
 				zone.createSuddenDeathEvent(time, sprites);
 			}
-			{	// t=2s: bloc destructible en (1,5)
+			{	// t=1500ms: bloc indestructible en (4,1)
+				boolean destructible = false;
+				AiBlock block = zone.createBlock(null,destructible);
+				tile = zone.getTile(4,1);
+				time = 1500;
+				lst = new ArrayList<AiSprite>();
+				lst.add(block);
+				sprites = new HashMap<AiTile, List<AiSprite>>();
+				sprites.put(tile,lst);
+				zone.createSuddenDeathEvent(time, sprites);
+			}
+			{	// t=2000ms: bloc destructible en (1,5)
 				time = 2000;
 				boolean destructible = true;
 				AiBlock block = zone.createBlock(null,destructible);
@@ -309,7 +322,7 @@ public final class InitData
 				sprites.put(tile,lst);
 				zone.createSuddenDeathEvent(time, sprites);
 			}
-			{	// t=3s: bloc destructible en (1,4) et bombe en (2,5)
+			{	// t=3000ms: bloc destructible en (1,4) et bombe en (2,5)
 				time = 3000;
 				sprites = new HashMap<AiTile, List<AiSprite>>();
 				{	boolean destructible = true;
@@ -341,7 +354,7 @@ public final class InitData
 				sprites.put(tile,lst);
 				zone.createSuddenDeathEvent(time, sprites);
 			}
-			{	// t=4s: item en (4,5) et bloc destructible en (3,4)
+			{	// t=4000ms: item en (4,5) et bloc destructible en (3,4)
 				time = 4000;
 				sprites = new HashMap<AiTile, List<AiSprite>>();
 				{	AiItemType itemType = AiItemType.EXTRA_BOMB;
@@ -360,11 +373,22 @@ public final class InitData
 				}
 				zone.createSuddenDeathEvent(time, sprites);
 			}
-			{	// t=4.5s: bloc en (3,1)
+			{	// t=4500ms: bloc destructible en (3,1)
 				boolean destructible = true;
 				AiBlock block = zone.createBlock(null,destructible);
 				tile = zone.getTile(3,1);
 				time = 4500;
+				lst = new ArrayList<AiSprite>();
+				lst.add(block);
+				sprites = new HashMap<AiTile, List<AiSprite>>();
+				sprites.put(tile,lst);
+				zone.createSuddenDeathEvent(time, sprites);
+			}
+			{	// t=5000ms: bloc destructible en (1,1)
+				boolean destructible = true;
+				AiBlock block = zone.createBlock(null,destructible);
+				tile = zone.getTile(1,1);
+				time = 5000;
 				lst = new ArrayList<AiSprite>();
 				lst.add(block);
 				sprites = new HashMap<AiTile, List<AiSprite>>();

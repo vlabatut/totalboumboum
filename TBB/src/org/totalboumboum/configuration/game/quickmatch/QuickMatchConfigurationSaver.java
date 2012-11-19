@@ -156,6 +156,13 @@ public class QuickMatchConfigurationSaver
 				valueElement.setAttribute(XmlNames.POINTS,points);
 			}
 		}
+		// sudden death
+		{	Element suddenDeathElement = new Element(XmlNames.SUDDEN_DEATH);
+			result.addContent(suddenDeathElement);
+			// disabled
+			String disabled = Boolean.toString(quickMatchConfiguration.getSuddenDeathDisabled());
+			suddenDeathElement.setAttribute(XmlNames.DISABLED,disabled);
+		}
 
 		return result;
 	}

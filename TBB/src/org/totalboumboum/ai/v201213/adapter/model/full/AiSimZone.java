@@ -1533,13 +1533,25 @@ public final class AiSimZone extends AiZone
 
 	/**
 	 * Renvoie la représentation interne des évènements
-	 * de mort subite.
+	 * de mort subite. A ne pas modifier !
 	 * 
 	 * @return
 	 * 		Renvoie une liste d'évènements de mort subite.
 	 */
 	protected List<AiSimSuddenDeathEvent> getInternalSuddenDeathEvents()
 	{	return internalSuddenDeathEvents;
+	}
+
+	/**
+	 * Supprime un évènement de mort subite. Méthode
+	 * utilisée lors de la simulation.
+	 * 
+	 * @param index
+	 * 		La position de l'élément à supprimer.
+	 */
+	protected void removeSuddenDeathEvent(int index)
+	{	internalSuddenDeathEvents.remove(index);
+		suddenDeathEvents.remove(index);
 	}
 	
 	/**
