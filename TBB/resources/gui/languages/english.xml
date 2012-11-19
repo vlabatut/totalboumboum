@@ -537,6 +537,11 @@
 						<text name="Plus" value="Plus" tooltip="More time" />
 					</group>			
 				</group>			
+				<group name="SuddenDeath">
+					<text name="Title" value="Sudden death" tooltip="Force sudden death disabling" />
+					<text name="Var" value="Normal" tooltip="Sudden death is active, provided the level has one" />
+					<text name="Yok" value="None" tooltip="Sudden death is disabled" />
+				</group>
 			</group>	
 		</group>	
 

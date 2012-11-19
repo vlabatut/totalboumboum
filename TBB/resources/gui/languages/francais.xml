@@ -537,6 +537,11 @@
 						<text name="Plus" value="Plus" tooltip="Augmenter la limite de temps" />
 					</group>			
 				</group>			
+				<group name="SuddenDeath">
+					<text name="Title" value="Mort subite" tooltip="Force la désactivation de la mort subite" />
+					<text name="Var" value="Normal" tooltip="La mort subite est activée si le niveau est prévu pour" />
+					<text name="Yok" value="Sans" tooltip="La mort subite est désactivée" />
+				</group>
 			</group>
 		</group>	
 
