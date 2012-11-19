@@ -1563,6 +1563,9 @@ public class Launcher
 	
 	
 	/**
+	 * TODO certains menus modaux sont toujours très lents
+	 * TODO ajout des menus modaux manquant
+	 * 
 	 * TODO mort subite
 	 * - réformer tous les thèmes des instances déjà traitées
 	 * 		- de manière à mutualiser au max
