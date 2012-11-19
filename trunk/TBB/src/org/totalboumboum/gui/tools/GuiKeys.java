@@ -272,6 +272,7 @@ public class GuiKeys
 	public static final String START = "Start";
 	public static final String STATE = "State";
 	public static final String STATISTICS = "Statistics";
+	public static final String SUDDEN_DEATH = "SuddenDeath";
 	public static final String SUM = "Sum";
 	public static final String TEXT = "Text";
 	public static final String THEME = "Theme";
@@ -792,6 +793,11 @@ public class GuiKeys
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_MINUS = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+MINUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_PLUS = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+PLUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+TITLE;
+			/* SUDDEN DEATH */
+			public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH = MENU_QUICKMATCH_SETTINGS+SUDDEN_DEATH;
+				public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_TITLE = MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH+TITLE;
+				public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_VAR = MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH+VAR;
+				public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_YOK = MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH+YOK;
 
 	/* REPLAY */
 	public static final String MENU_REPLAY = MENU+REPLAY;

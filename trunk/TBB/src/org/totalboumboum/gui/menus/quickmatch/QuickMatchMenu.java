@@ -43,6 +43,7 @@ import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.hollow.HollowLevelLoader;
+import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.game.limit.Comparisons;
 import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.LimitLastStanding;
@@ -389,6 +390,16 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			// synch game options
 			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(tournament.getProfiles());
 			quickMatchConfiguration.setProfilesSelection(profilesSelection);
+			
+			// possibly disable sudden death
+			if(quickMatchConfiguration.getSuddenDeathDisabled())
+			{	List<Round> rounds = tournament.getCurrentMatch().getRounds();
+				for(Round round: rounds)
+				{	HollowLevel level = round.getHollowLevel();
+					Zone zone = level.getZone();
+					zone.resetSuddenDeath();
+				}
+			}
 			
 			// save quick match options
 			try

@@ -196,6 +196,14 @@ public class Zone implements Serializable
 	public HashMap<Long,List<ZoneTile>> getEventsInit()
 	{	return eventsInit;
 	}
+
+	/**
+	 * Used to disable sudden death, depending
+	 * on quickmatch configuration.
+	 */
+	public void resetSuddenDeath()
+	{	events.clear();
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ZONE			/////////////////////////////////////////////

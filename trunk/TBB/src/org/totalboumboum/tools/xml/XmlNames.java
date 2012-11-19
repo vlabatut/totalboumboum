@@ -108,6 +108,7 @@ public class XmlNames
 	public static final String DELAY = "delay";
 	public static final String DIRECT = "direct";
 	public static final String DIRECTION = "direction";
+	public static final String DISABLED = "disabled";
 	public static final String DISCRETIZE = "discretize";
 	public static final String DISPLAY = "display";
 	public static final String DISPLAY_EXCEPTIONS = "displayExceptions";
@@ -295,6 +296,7 @@ public class XmlNames
 	public static final String STEPS = "steps";
 	public static final String STRENGTH = "strength";
 	public static final String SUBTRACTION = "subtraction";
+	public static final String SUDDEN_DEATH = "suddenDeath";
 	public static final String SUMMATION = "summation";
 	public static final String SUP = "sup";
 	public static final String TARGET = "target";

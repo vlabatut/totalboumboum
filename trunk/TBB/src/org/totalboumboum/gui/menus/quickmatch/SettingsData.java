@@ -73,7 +73,7 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 			
 			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
 			
-			// commands panel
+			// round panel
 			{	roundPanel = new RoundQuickConfigSubPanel(dataWidth,panelHeight);
 				mainPanel.add(roundPanel);
 				roundPanel.addListener(this);

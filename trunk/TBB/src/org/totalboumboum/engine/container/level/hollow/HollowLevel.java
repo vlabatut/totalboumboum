@@ -378,8 +378,7 @@ public class HollowLevel implements Serializable
 	 * 		The current game time, in ms.
 	 */
 	public void applySuddenDeath(long currentGameTime)
-	{	
-		if(!suddenDeathEvents.isEmpty())
+	{	if(!suddenDeathEvents.isEmpty())
 		{	SuddenDeathEvent event = suddenDeathEvents.get(0);
 			if(event.getTime()<=currentGameTime)
 			{	// update event list

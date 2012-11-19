@@ -92,15 +92,22 @@ public class QuickMatchConfigurationLoader
 	{	// levels 
 		Element levelsElement = root.getChild(XmlNames.LEVELS);
 		loadLevelsElement(levelsElement,result);
+		
 		// players 
 		Element playersElement = root.getChild(XmlNames.PLAYERS);
 		loadPlayersElement(playersElement,result);
+		
 		// limits 
 		Element limitsElement = root.getChild(XmlNames.LIMITS);
 		loadLimitsElement(limitsElement,result);
+		
 		// points
 		Element pointsElement = root.getChild(XmlNames.POINTS);
 		loadPointsElement(pointsElement,result);
+		
+		// sudden death
+		Element suddenDeathElement = root.getChild(XmlNames.SUDDEN_DEATH);
+		loadSuddenDeathElement(suddenDeathElement,result);
 	}
 
 	private static void loadLevelsElement(Element root, QuickMatchConfiguration result)
@@ -147,13 +154,22 @@ public class QuickMatchConfigurationLoader
 			points.set(rank-1,pts);
 		}
 		result.setPoints(points);
+		
 		// share
 		String att = root.getAttributeValue(XmlNames.SHARE);
 		boolean pointsShare = Boolean.parseBoolean(att);
 		result.setPointsShare(pointsShare);
+		
 		// points draw
 		att = root.getAttributeValue(XmlNames.DRAW);
 		QuickMatchDraw pointsDraw = QuickMatchDraw.valueOf(att.toUpperCase(Locale.ENGLISH));
 		result.setPointsDraw(pointsDraw);		
+	}
+
+	private static void loadSuddenDeathElement(Element root, QuickMatchConfiguration result)
+	{	// disabled
+		String att = root.getAttributeValue(XmlNames.DISABLED);
+		boolean suddenDeath = Boolean.parseBoolean(att);
+		result.setSuddenDeathDisabled(suddenDeath);
 	}
 }
