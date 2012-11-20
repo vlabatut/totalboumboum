@@ -1584,5 +1584,14 @@ public class Launcher
 	 * 			- gérer aussi leur aspect contagieux
 	 * 		- ressources
 	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
+	 * 
+	 * 
+	 * en cours:
+	 * - mutualiser les ombres
+	 *     - attention, certains blocs n'en ont pas : cf TBB SVN
+	 *     - modifier les xml anime pr faire référence à nouveau nom des ombres
+	 *     - traiter les softwalls dans tous les thèmes
+	 *     - traiter les blocs supplémentaires (eg tunnels)
+	 *     
 	 */
 }
