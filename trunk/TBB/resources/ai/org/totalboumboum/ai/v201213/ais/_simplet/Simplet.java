@@ -67,7 +67,6 @@ public class Simplet extends ArtificialIntelligence
 	@Override
 	protected void initPercepts() throws StopRequestException
 	{	checkInterruption();
-	
 	}
 	
 	@Override
