@@ -513,6 +513,7 @@
 		- TODO ajout des menus modaux manquant
 	- ressources : 
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
+		- morts subites dans les niveaux officiels de SBM1
 	- API IA:
 		- quelques bugs corrigés
 		- initOthers dans ArtificialIntelligence

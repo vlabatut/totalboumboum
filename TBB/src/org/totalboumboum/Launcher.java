@@ -1587,11 +1587,9 @@ public class Launcher
 	 * 
 	 * 
 	 * en cours:
-	 * - mutualiser les ombres
-	 *     - attention, certains blocs n'en ont pas : cf TBB SVN
-	 *     - modifier les xml anime pr faire référence à nouveau nom des ombres
-	 *     - traiter les softwalls dans tous les thèmes
-	 *     - traiter les blocs supplémentaires (eg tunnels)
+	 *  - modifier les animes des autres blocs pour inclure le fall
+	 *  - compléter les niveaux avec les morts subites
+	 *  - tester
 	 *     
 	 */
 }
