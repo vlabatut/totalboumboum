@@ -1587,7 +1587,7 @@ public class Launcher
 	 * 
 	 * 
 	 * en cours:
-	 *  - modifier les animes des autres blocs pour inclure le fall
+	 *  x modifier les animes des autres blocs pour inclure le fall
 	 *  - compléter les niveaux avec les morts subites
 	 *  - tester
 	 *     
