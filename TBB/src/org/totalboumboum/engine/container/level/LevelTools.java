@@ -24,6 +24,9 @@ package org.totalboumboum.engine.container.level;
 import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -34,9 +37,12 @@ import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.level.zone.ZoneHollowTile;
+import org.totalboumboum.engine.container.level.zone.ZoneTile;
 import org.totalboumboum.engine.container.theme.Theme;
+import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.gui.tools.GuiFileTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
@@ -48,18 +54,18 @@ import org.xml.sax.SAXException;
  * editing of the zones.
  * 
  * @author Vincent Labatut
- *
  */
 @SuppressWarnings("unused")
 public class LevelTools
 {	
 	/**
 	 * Allows to programmatically initialize a zone,
-	 * in order to help designing new levels
+	 * in order to help designing new levels.
 	 * 
 	 * @param args 
 	 * 		Not used.
 	 * @throws Exception 
+	 * 		Whatever exception.
 	 */
 	public static void main(String[] args) throws Exception
 	{	
@@ -101,10 +107,27 @@ public class LevelTools
 		insertCol(level,14,true,true,true,true,true);
 		saveLevel(level);
 */
+		// open an existing level and add a sudden death spiral
+		String pack = "sbm1Official";
+		String folder = "battle_02";
+		XmlTools.init();
+		HollowLevel level = loadLevel(pack,folder);
+		int thickness = 3;
+		boolean clockwise = true;
+		long startTime = 60000;
+		long endTime = 90000;
+		boolean relative = true;
+		long totalTime = 120000;
+		boolean crushHardwalls = false;
+		addSpiralSuddenDeath(level, thickness, clockwise, 11, 2, startTime, endTime, relative, totalTime, crushHardwalls);
+		saveLevel(level);
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// I/O					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
-	 * Load the level with specified package and name.
+	 * Loads the level with specified package and name.
 	 * 
 	 * @param pack
 	 * 		The pack containing the level to be loaded.
@@ -124,7 +147,7 @@ public class LevelTools
 	}
 	
 	/**
-	 * Save the specified level in order to get a set of files
+	 * Saves the specified level in order to get a set of files
 	 * the game will be able to load and use.
 	 *  
 	 * @param hollowLevel
@@ -159,6 +182,9 @@ public class LevelTools
 		HollowLevelSaver.saveHollowLevel(hollowLevel);
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// INIT					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Creates and save an empty level.
 	 * 
@@ -225,18 +251,18 @@ public class LevelTools
 	}
 	
 	/**
-	 * set the location of 4 players in the level
+	 * Sets the location of 4 players in the level.
 	 * 
 	 * @param players
-	 * 		object representing the players locations in the level object
+	 * 		Object representing the players locations in the level object.
 	 * @param left
-	 * 		column of the left players
+	 * 		Column of the left players.
 	 * @param up
-	 * 		row of the top players
+	 * 		Row of the top players.
 	 * @param right
-	 * 		column of the right players
+	 * 		Column of the right players.
 	 * @param down
-	 * 		column of the bottom players
+	 * 		Column of the bottom players.
 	 */
 	protected static void initPlayersLocations(Players players, int left, int up, int right, int down)
 	{	for(int i=1;i<=4;i++)
@@ -271,80 +297,17 @@ public class LevelTools
 		}
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// BACKGROUND			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
-	 * put a border on a supposedly empty level
-	 * 
-	 * @param hollowLevel
-	 * 		the level get borders
-	 * @param xThickness
-	 * 		thickness of the vertical borders (in tiles)
-	 * @param yThickness
-	 * 		thickness of the horizontal borders (in tiles)
-	 * @param xMargin
-	 * 		empty space between the left/right sides of the zone and their vertical border (in tiles)
-	 * @param yMargin
-	 * 		empty space between the top/bottom sides of the zone and their horizontal border (in tiles)
-	 */
-	protected static void addBorder(HollowLevel hollowLevel, int xThickness, int yThickness, int xMargin, int yMargin)
-	{	// init
-		LevelInfo levelInfo = hollowLevel.getLevelInfo();
-		int width = levelInfo.getGlobalWidth();
-		int height = levelInfo.getGlobalHeight();
-		Zone zone = hollowLevel.getZone();
-		
-		// top border
-		for(int row=yMargin;row<yMargin+yThickness;row++)
-		{	for(int col=xMargin;col<width-xMargin;col++)
-			{	ZoneHollowTile tile = zone.getTile(row,col);
-//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
-				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
-			}
-		}
-		// side borders
-		for(int row=yMargin+yThickness;row<height-yMargin;row++)
-		{	for(int col=xMargin;col<xMargin+xThickness;col++)
-			{	ZoneHollowTile tile = zone.getTile(row,col);
-//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
-				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
-			}
-			for(int col=width-xMargin-xThickness;col<width-xMargin;col++)
-			{	ZoneHollowTile tile = zone.getTile(row,col);
-//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
-				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
-			}
-		}
-		// bottom border
-		for(int row=height-yMargin-yThickness;row<height-yMargin;row++)
-		{	for(int col=xMargin;col<width-xMargin;col++)
-			{	ZoneHollowTile tile = zone.getTile(row,col);
-//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
-				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
-			}
-		}
-		
-		// center visible area on the upper left border corner 
-		levelInfo.setVisiblePositionLeftCol(xMargin+xThickness-1);
-		levelInfo.setVisiblePositionUpRow(yMargin+yThickness-1);
-		levelInfo.setVisibleWidth(width-2*xMargin-2*(xThickness-1));
-		levelInfo.setVisibleHeight(height-2*yMargin-2*(yThickness-1));
-		
-		// move players locations inside the border
-		int left = xMargin + xThickness;
-		int up = yMargin + yThickness;
-		int right = width - 1 - xMargin - xThickness;
-		int down = height - 1 - yMargin - yThickness;
-		Players players = hollowLevel.getPlayers();
-		initPlayersLocations(players,left,up,right,down);
-	}
-
-	/**
-	 * set a background on the floor, 
+	 * Sets a background on the floor, 
 	 * without changing anything else in the level structure.
-	 * the method automatically uses the floors located
+	 * The method automatically uses the floors located
 	 * in the theme set for the specified level
 	 * 
 	 * @param hollowLevel
-	 * 		the level to get a nice background
+	 * 		The level to get a nice background.
 	 */
 	protected static void setBackground(HollowLevel hollowLevel)
 	{	// init
@@ -429,12 +392,81 @@ public class LevelTools
 		}
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// STRUCTURE			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
-	 * add the traditional grid structure to an empty level
+	 * Puts a border on a supposedly empty level.
+	 * 
+	 * @param hollowLevel
+	 * 		The level get borders.
+	 * @param xThickness
+	 * 		Thickness of the vertical borders (in tiles).
+	 * @param yThickness
+	 * 		Thickness of the horizontal borders (in tiles).
+	 * @param xMargin
+	 * 		Empty space between the left/right sides of the zone and their vertical border (in tiles).
+	 * @param yMargin
+	 * 		Empty space between the top/bottom sides of the zone and their horizontal border (in tiles).
+	 */
+	protected static void addBorder(HollowLevel hollowLevel, int xThickness, int yThickness, int xMargin, int yMargin)
+	{	// init
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		int width = levelInfo.getGlobalWidth();
+		int height = levelInfo.getGlobalHeight();
+		Zone zone = hollowLevel.getZone();
+		
+		// top border
+		for(int row=yMargin;row<yMargin+yThickness;row++)
+		{	for(int col=xMargin;col<width-xMargin;col++)
+			{	ZoneHollowTile tile = zone.getTile(row,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
+			}
+		}
+		// side borders
+		for(int row=yMargin+yThickness;row<height-yMargin;row++)
+		{	for(int col=xMargin;col<xMargin+xThickness;col++)
+			{	ZoneHollowTile tile = zone.getTile(row,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
+			}
+			for(int col=width-xMargin-xThickness;col<width-xMargin;col++)
+			{	ZoneHollowTile tile = zone.getTile(row,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
+			}
+		}
+		// bottom border
+		for(int row=height-yMargin-yThickness;row<height-yMargin;row++)
+		{	for(int col=xMargin;col<width-xMargin;col++)
+			{	ZoneHollowTile tile = zone.getTile(row,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
+			}
+		}
+		
+		// center visible area on the upper left border corner 
+		levelInfo.setVisiblePositionLeftCol(xMargin+xThickness-1);
+		levelInfo.setVisiblePositionUpRow(yMargin+yThickness-1);
+		levelInfo.setVisibleWidth(width-2*xMargin-2*(xThickness-1));
+		levelInfo.setVisibleHeight(height-2*yMargin-2*(yThickness-1));
+		
+		// move players locations inside the border
+		int left = xMargin + xThickness;
+		int up = yMargin + yThickness;
+		int right = width - 1 - xMargin - xThickness;
+		int down = height - 1 - yMargin - yThickness;
+		Players players = hollowLevel.getPlayers();
+		initPlayersLocations(players,left,up,right,down);
+	}
+
+	/**
+	 * Adds the traditional grid structure to an empty level
 	 * i.e. hardwall on 1 column/row out of 2.
 	 * 
 	 * @param hollowLevel
-	 * 		the level to be completed
+	 * 		Rhe level to be completed.
 	 */
 	protected static void addGrid(HollowLevel hollowLevel)
 	{	// init
@@ -459,14 +491,15 @@ public class LevelTools
 	}
 	
 	/**
-	 * Add softwalls wherever it is necessary in the specified level,
+	 * Adds softwalls wherever it is necessary in the specified level,
 	 * so that a classic zone is obtained.
+	 * <br/>
 	 * Note the initial locations of the players are considered,
 	 * so that no block is put on a tile possibly occupied by a player
 	 * when the round starts.
 	 * 
 	 * @param hollowLevel
-	 * 		the level to be completed
+	 * 		The level to be completed.
 	 */
 	protected static void addSoftwalls(HollowLevel hollowLevel)
 	{	// init
@@ -492,25 +525,28 @@ public class LevelTools
 		}		
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// SIZE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
-	 * insert a new row in order to make the zone taller.
+	 * Inserts a new row in order to make the zone taller.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
 	 * @param hollowLevel
-	 * 		the level to be modified
+	 * 		The level to be modified.
 	 * @param row
-	 * 		the location of the new row
+	 * 		The location of the new row.
 	 * @param moveFloors
-	 * 		whether the floor sprites should be moved to make room for the new row 
+	 * 		Whether the floor sprites should be moved to make room for the new row.
 	 * @param moveBlocks
-	 * 		whether the block sprites should be moved to make room for the new row 
+	 * 		Whether the block sprites should be moved to make room for the new row.
 	 * @param moveItems
-	 * 		whether the item sprites should be moved to make room for the new row 
+	 * 		Whether the item sprites should be moved to make room for the new row.
 	 * @param moveBombs
-	 * 		whether the bomb sprites should be moved to make room for the new row 
+	 * 		Whether the bomb sprites should be moved to make room for the new row.
 	 * @param moveVariables
-	 * 		whether the variable sprites should be moved to make room for the new row 
+	 * 		Whether the variable sprites should be moved to make room for the new row.
 	 */
 	protected static void insertRow(HollowLevel hollowLevel, int row, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
@@ -582,24 +618,24 @@ public class LevelTools
 	}
 
 	/**
-	 * remove the specified row in order to make the zone narrower.
+	 * Removes the specified row in order to make the zone narrower.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
 	 * @param hollowLevel
-	 * 		the level to be modified
+	 * 		The level to be modified.
 	 * @param row
-	 * 		the location of the row to be removed
+	 * 		The location of the row to be removed.
 	 * @param moveFloors
-	 * 		whether the floor sprites should be moved to make room for the new row 
+	 * 		Whether the floor sprites should be moved to make room for the new row.
 	 * @param moveBlocks
-	 * 		whether the block sprites should be moved to make room for the new row 
+	 * 		Whether the block sprites should be moved to make room for the new row.
 	 * @param moveItems
-	 * 		whether the item sprites should be moved to make room for the new row 
+	 * 		Whether the item sprites should be moved to make room for the new row.
 	 * @param moveBombs
-	 * 		whether the bomb sprites should be moved to make room for the new row 
+	 * 		Whether the bomb sprites should be moved to make room for the new row.
 	 * @param moveVariables
-	 * 		whether the variable sprites should be moved to make room for the new row 
+	 * 		Whether the variable sprites should be moved to make room for the new row.
 	 */
 	protected static void removeRow(HollowLevel hollowLevel, int row, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
@@ -662,24 +698,24 @@ public class LevelTools
 	}
 
 	/**
-	 * insert a new column in order to make the zone wider.
+	 * Inserts a new column in order to make the zone wider.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
 	 * @param hollowLevel
-	 * 		the level to be modified
+	 * 		The level to be modified.
 	 * @param col
-	 * 		the location of the new column
+	 * 		The location of the new column.
 	 * @param moveFloors
-	 * 		whether the floor sprites should be moved to make room for the new column 
+	 * 		Whether the floor sprites should be moved to make room for the new column.
 	 * @param moveBlocks
-	 * 		whether the block sprites should be moved to make room for the new column 
+	 * 		Whether the block sprites should be moved to make room for the new column.
 	 * @param moveItems
-	 * 		whether the item sprites should be moved to make room for the new column 
+	 * 		Whether the item sprites should be moved to make room for the new column.
 	 * @param moveBombs
-	 * 		whether the bomb sprites should be moved to make room for the new column 
+	 * 		Whether the bomb sprites should be moved to make room for the new column.
 	 * @param moveVariables
-	 * 		whether the variable sprites should be moved to make room for the new column 
+	 * 		Whether the variable sprites should be moved to make room for the new column.
 	 */
 	protected static void insertCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
@@ -751,24 +787,24 @@ public class LevelTools
 	}
 	
 	/**
-	 * remove the specified column in order to make the zone smaller.
+	 * Removes the specified column in order to make the zone smaller.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
 	 * @param hollowLevel
-	 * 		the level to be modified
+	 * 		The level to be modified.
 	 * @param col
-	 * 		the location of the column to be removed
+	 * 		The location of the column to be removed.
 	 * @param moveFloors
-	 * 		whether the floor sprites should be moved to make room for the new column 
+	 * 		Whether the floor sprites should be moved to make room for the new column.
 	 * @param moveBlocks
-	 * 		whether the block sprites should be moved to make room for the new column 
+	 * 		Whether the block sprites should be moved to make room for the new column.
 	 * @param moveItems
-	 * 		whether the item sprites should be moved to make room for the new column 
+	 * 		Whether the item sprites should be moved to make room for the new column.
 	 * @param moveBombs
-	 * 		whether the bomb sprites should be moved to make room for the new column 
+	 * 		Whether the bomb sprites should be moved to make room for the new column.
 	 * @param moveVariables
-	 * 		whether the variable sprites should be moved to make room for the new column 
+	 * 		Whether the variable sprites should be moved to make room for the new column.
 	 */
 	protected static void removeCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
@@ -828,5 +864,190 @@ public class LevelTools
 					pl.setCol(temp-1);
 			}
 		}
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// SUDDEN DEATH			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Adds the appropriate sudden death events in order to form a spiral
+	 * of hardwalls. The user must specify the first tile to be crushed,
+	 * the rest are deducted by symmetry. The direction the spiral unfolds
+	 * is determined depending on the position of this starting point. The
+	 * time parameters allow determining when the events should occur.
+	 *  
+	 * TODO slide sudden death events when inserting/removing cols/rows
+	 * 
+	 * @param level
+	 * 		The level to be modified.
+	 * @param thickness
+	 * 		Thickness of the spiral, expressed in number of tiles.
+	 * @param clockwise
+	 * 		Rotation of the spiral: {@code true} for clockwise, {@code false} for anti-clockwise.
+	 * @param startRow
+	 * 		Row of the the first tile to be crushed.
+	 * @param startCol
+	 * 		Column of the the first tile to be crushed.
+	 * @param startTime
+	 * 		Starting time of the sudden death.
+	 * @param endTime
+	 * 		Ending time of the sudden death.
+	 * @param relative
+	 * 		Whether those times should be interpreted relatively to the actual game duration.
+	 * @param totalTime
+	 * 		Total duration to be used if no time limit exist when actually playing this level.
+	 * @param crushHardwalls
+	 * 		Whether hardwalls should be ignored, or crushed (mainly for esthetic reasons).
+	 */
+	protected static void addSpiralSuddenDeath(HollowLevel level, int thickness, boolean clockwise, int startRow, int startCol, long startTime, long endTime, boolean relative, long totalTime, boolean crushHardwalls)
+	{	// get level info
+		LevelInfo info = level.getLevelInfo();
+		int globalHeight = info.getGlobalHeight();
+		int globalWidth = info.getGlobalWidth();
+		Zone zone = level.getZone();
+		
+		// set general stuff
+		zone.setEventsDuration(totalTime);
+		zone.setEventsRelative(relative);
+		
+		// determine spiral direction
+		int row2[] = {0,0,globalHeight-1,globalHeight-1};
+		int col2[] = {0,globalWidth-1,0,globalWidth-1};
+		Direction dirs[] = {Direction.UPLEFT,Direction.UPRIGHT,Direction.DOWNLEFT,Direction.DOWNRIGHT};
+		int minDist = Integer.MAX_VALUE;
+		Direction direction = null;
+		for(int i=0;i<row2.length;i++)
+		{	int dist = LevelsTools.getTileDistance(startRow, startCol, row2[i], col2[i], dirs[i], globalHeight, globalWidth);
+			if(dist<minDist)
+			{	minDist = dist;
+				direction = dirs[i];
+			}
+		}
+		direction = direction.getNext().getNext().getNext();
+		Direction originalDirection = direction;
+
+		// process the corresponding (first) limits
+		HashMap<Direction,int[]> originalLimits = new HashMap<Direction, int[]>();
+		int colLimit = globalWidth - startCol - 1;
+		int rowLimit = globalHeight - startRow - 1;
+		int temp[] = null;
+		if(originalDirection.isHorizontal())
+			temp = new int[]{startRow,colLimit,rowLimit,colLimit,rowLimit,startCol,startRow-(int)Math.signum(startRow-rowLimit),startCol};
+		else if(originalDirection.isVertical())
+			temp = new int[]{rowLimit,startCol,rowLimit,colLimit,startRow,colLimit,startRow,startCol-(int)Math.signum(startCol-colLimit)};
+		direction = originalDirection;
+		for(int i=0;i<temp.length;i=i+2)
+		{	originalLimits.put(direction, new int[]{temp[i],temp[i+1]});
+			if(clockwise)
+				direction = direction.getNextPrimary();
+			else
+				direction = direction.getPreviousPrimary();
+		}
+		int sidesLimit = thickness * 4; 
+		
+		// count the number of events
+		int row = startRow;
+		int col = startCol;
+		int eventCount = 0;
+		int sides = 0;
+		direction = originalDirection;
+		HashMap<Direction,int[]> limits = new HashMap<Direction, int[]>();
+		for(Entry<Direction,int[]> entry: originalLimits.entrySet())
+		{	Direction key = entry.getKey();
+			int[] t = entry.getValue();
+			int[] value = Arrays.copyOf(t,t.length);
+			limits.put(key,value);
+		}
+		do
+		{	// check current tile
+			ZoneHollowTile tile = zone.getTile(row,col);
+			String blockName = tile.getBlock();
+			if(crushHardwalls || blockName==null  || !blockName.contains("hardwall"))
+				eventCount++;
+				
+			// process next tile coordinates
+			int intDir[] = direction.getIntFromDirection();
+			row = row + intDir[1];
+			col = col + intDir[0];
+			
+			// check for a direction change
+			int limit[] = limits.get(direction);
+			if(row==limit[0] && col==limit[1])
+			{	if(direction.isHorizontal())
+					limit[1] = limit[1] - intDir[0];
+				else if(direction.isVertical())
+					limit[0] = limit[0] - intDir[1];
+				if(clockwise)
+					direction = direction.getNextPrimary();
+				else
+					direction = direction.getPreviousPrimary();
+				intDir = direction.getIntFromDirection();
+				if(direction.isHorizontal())
+					limit[1] = limit[1] + intDir[0];
+				else if(direction.isVertical())
+					limit[0] = limit[0] + intDir[1];
+				sides++;
+			}
+		}
+		while(sides<sidesLimit);
+		
+		// determine the time steps
+		long duration = (endTime - startTime) / (eventCount-1);
+		long rem = (endTime - startTime) % (eventCount-1);
+		
+		row = startRow;
+		col = startCol;
+		eventCount = 0;
+		sides = 0;
+		direction = originalDirection;
+		limits = new HashMap<Direction, int[]>();
+		long time = startTime;
+		for(Entry<Direction,int[]> entry: originalLimits.entrySet())
+		{	Direction key = entry.getKey();
+			int[] t = entry.getValue();
+			int[] value = Arrays.copyOf(t,t.length);
+			limits.put(key,value);
+		}
+		do
+		{	// possibly insert new event
+			ZoneHollowTile tile = zone.getTile(row,col);
+			String blockName = tile.getBlock();
+			if(crushHardwalls || blockName==null  || !blockName.contains("hardwall"))
+			{	// create new event
+				ZoneHollowTile eTile = new ZoneHollowTile(row, col);
+				eTile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"shrink");
+				zone.addEvent(time, eTile);
+				// update counts and time
+				eventCount++;
+				time = time + duration;
+				if(eventCount<rem)
+					time++;
+			}
+				
+			// process next tile coordinates
+			int intDir[] = direction.getIntFromDirection();
+			row = row + intDir[1];
+			col = col + intDir[0];
+			
+			// check for a direction change
+			int limit[] = limits.get(direction);
+			if(row==limit[0] && col==limit[1])
+			{	if(direction.isHorizontal())
+					limit[1] = limit[1] - intDir[0];
+				else if(direction.isVertical())
+					limit[0] = limit[0] - intDir[1];
+				if(clockwise)
+					direction = direction.getNextPrimary();
+				else
+					direction = direction.getPreviousPrimary();
+				intDir = direction.getIntFromDirection();
+				if(direction.isHorizontal())
+					limit[1] = limit[1] + intDir[0];
+				else if(direction.isVertical())
+					limit[0] = limit[0] + intDir[1];
+				sides++;
+			}
+		}
+		while(sides<sidesLimit);
 	}
 }

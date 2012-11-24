@@ -205,6 +205,17 @@ public class Zone implements Serializable
 	{	events.clear();
 	}
 	
+	/**
+	 * Returns the list of non-initialized sudden
+	 * death events.
+	 * 
+	 * @return
+	 * 		A list of {@link ZoneHollowTile}.
+	 */
+	public HashMap<Long, List<ZoneHollowTile>> getEvents()
+	{	return events;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ZONE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
