@@ -36,6 +36,8 @@ import org.totalboumboum.engine.container.level.hollow.HollowLevelLoader;
 import org.totalboumboum.engine.container.level.hollow.HollowLevelSaver;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.players.Players;
+import org.totalboumboum.engine.container.level.variabletile.ValueTile;
+import org.totalboumboum.engine.container.level.variabletile.VariableTile;
 import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.level.zone.ZoneHollowTile;
 import org.totalboumboum.engine.container.level.zone.ZoneTile;
@@ -110,7 +112,7 @@ public class LevelTools
 */
 		// open an existing level and add a sudden death spiral
 		String pack = "sbm1Official";
-		String folder = "battle_02";
+		String folder = "battle_03";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 		int thickness = 2;
@@ -122,6 +124,7 @@ public class LevelTools
 		boolean crushHardwalls = false;
 		removeSuddenDeath(level);
 		addSpiralSuddenDeath(level, thickness, clockwise, 11, 2, startTime, endTime, relative, totalTime, crushHardwalls);
+		addRandomFallingBombs(level, 20, new int[]{1,2,11,14}, 500, 59500, 3000, relative, totalTime);
 		saveLevel(level);
 	}
 	
@@ -1069,5 +1072,73 @@ public class LevelTools
 		ZoneHollowTile eTile = new ZoneHollowTile(row, col);
 		eTile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"shrink");
 		zone.addEvent(time, eTile);
+	}
+	
+	/**
+	 * Sets sudden death events taking the form of bombs falling
+	 * from the sky randomly during the game.
+	 * 
+	 * @param level
+	 * 		Level to be processed.
+	 * @param totalNumber
+	 * 		Total number of bombs to fall.
+	 * @param boundaries
+	 * 		Boundaries of the area concerned by the falling bombs (or {@code null} for no limit).
+	 * @param startTime
+	 * 		Time when the bombs start falling (or {@code -1} for no limit).
+	 * @param endTime
+	 * 		Time when the bombs stop falling (or {@code -1} for no limit).
+	 * @param timeStep
+	 * 		Time between the dropping of two bombs.
+	 * @param relative
+	 * 		Whether the specified times should be taken relatively.
+	 * @param totalTime
+	 * 		Supposed total duration of the game.
+	 */
+	protected static void addRandomFallingBombs(HollowLevel level, int totalNumber, int[] boundaries, long startTime, long endTime, long timeStep, boolean relative, long totalTime)
+	{	Zone zone = level.getZone();
+		int globalHeight = zone.getGlobalHeight();
+		int globalWidth = zone.getGlobalWidth();
+		
+		// size of the area
+		if(boundaries==null)
+			boundaries = new int[]{0,0,globalHeight-1,globalWidth-1};
+		int height = Math.abs(boundaries[0]-boundaries[2]);
+		int width = Math.abs(boundaries[1]-boundaries[3]);
+		int surface = height * width;
+		
+		// number of time steps
+		if(startTime==-1)
+			startTime = 1;
+		if(endTime==-1)
+			endTime = totalTime;
+		long duration = endTime - startTime;
+		int steps = (int)(duration / timeStep);
+		
+		// probability for a bomb to appear on a give tile at a given time step
+		float proba = totalNumber / (float)(surface * steps);
+		//proba = proba / 2;
+		
+		// create appropriate variable
+		HashMap<String, VariableTile> variables = zone.getVariableTiles();
+		String varName = "fallingBomb";
+		VariableTile variable = new VariableTile(varName);
+		variables.put(varName, variable);
+		String name = "normal"+Theme.PROPERTY_SEPARATOR+1+Theme.PROPERTY_SEPARATOR+2000;
+		ValueTile value1 = new ValueTile(null, null, null, name, proba);
+		variable.addValue(value1);
+		ValueTile value2 = new ValueTile(null, null, null, null, 1-proba);
+		variable.addValue(value2);
+		
+		// insert as sudden death events
+		for(long time=startTime;time<=endTime;time=time+timeStep)
+		{	for(int row=boundaries[0];row<=boundaries[2];row++)
+			{	for(int col=boundaries[1];col<=boundaries[3];col++)
+				{	ZoneHollowTile tile = new ZoneHollowTile(row, col);
+					tile.setVariable(varName);
+					zone.addEvent(time, tile);
+				}
+			}
+		}
 	}
 }
