@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -112,13 +113,14 @@ public class LevelTools
 		String folder = "battle_02";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
-		int thickness = 3;
+		int thickness = 2;
 		boolean clockwise = true;
 		long startTime = 60000;
 		long endTime = 90000;
 		boolean relative = true;
 		long totalTime = 120000;
 		boolean crushHardwalls = false;
+		removeSuddenDeath(level);
 		addSpiralSuddenDeath(level, thickness, clockwise, 11, 2, startTime, endTime, relative, totalTime, crushHardwalls);
 		saveLevel(level);
 	}
@@ -870,6 +872,19 @@ public class LevelTools
 	// SUDDEN DEATH			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
+	 * Removes all sudden death events.
+	 * 
+	 * @param level 
+	 * 		The level to be modified.
+	 */
+	protected static void removeSuddenDeath(HollowLevel level)
+	{	Zone zone = level.getZone();
+		HashMap<Long, List<ZoneHollowTile>> map = zone.getEvents();
+		map.clear();
+		zone.setEventsDuration(-1);
+	}
+
+	/**
 	 * Adds the appropriate sudden death events in order to form a spiral
 	 * of hardwalls. The user must specify the first tile to be crushed,
 	 * the rest are deducted by symmetry. The direction the spiral unfolds
@@ -990,6 +1005,7 @@ public class LevelTools
 			}
 		}
 		while(sides<sidesLimit);
+		eventCount++;
 		
 		// determine the time steps
 		long duration = (endTime - startTime) / (eventCount-1);
@@ -1049,5 +1065,9 @@ public class LevelTools
 			}
 		}
 		while(sides<sidesLimit);
+		// create last event
+		ZoneHollowTile eTile = new ZoneHollowTile(row, col);
+		eTile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"shrink");
+		zone.addEvent(time, eTile);
 	}
 }
