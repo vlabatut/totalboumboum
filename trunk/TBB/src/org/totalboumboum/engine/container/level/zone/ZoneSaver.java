@@ -23,10 +23,16 @@ package org.totalboumboum.engine.container.level.zone;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Attribute;
 import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
@@ -41,13 +47,12 @@ import org.xml.sax.SAXException;
 /**
  * 
  * @author Vincent Labatut
- *
  */
 public class ZoneSaver
 {	    
 	public static void saveZone(String folder, Zone zone) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
-		Element root = saveZoneElement(zone);	
+		Element root = saveZoneElement(zone);
 		
 		// save file
 		String individualFolder = folder;
@@ -74,9 +79,98 @@ public class ZoneSaver
 		// matrix
 		Element matrixElement = saveMatrixElement(zone);
 		result.addContent(matrixElement);
+		
+		// events
+		Element eventsElement = saveEventsElement(zone);
+		if(eventsElement!=null)
+			result.addContent(eventsElement);
+		
 		return result;
 	}
     
+    private static Element saveEventsElement(Zone zone)
+    {	Element result = null;
+
+    	HashMap<Long, List<ZoneHollowTile>> map = zone.getEvents();
+    	if(!map.isEmpty())
+    	{	result = new Element(XmlNames.EVENTS);
+			
+    		// duration
+    		long totalDuration = zone.getEventsDuration();
+    		result.setAttribute(XmlNames.DURATION,Long.toString(totalDuration));
+	    	
+	    	// relative
+    		boolean relative = zone.isEventsRelative();
+    		result.setAttribute(XmlNames.RELATIVE,Boolean.toString(relative));
+	    	
+	    	// process each event
+    		List<Long> times = new ArrayList<Long>(map.keySet());
+    		Collections.sort(times);
+    		for(Long time: times)
+    		{	// create event element
+    			List<ZoneHollowTile> tiles = map.get(time);
+    			Element eventElement = new Element(XmlNames.EVENT);
+    			eventElement.setAttribute(XmlNames.TIME,Long.toString(time));
+    			result.addContent(eventElement);
+				
+    			// order tiles
+    			HashMap<Integer,HashMap<Integer,List<ZoneHollowTile>>> temp = new HashMap<Integer, HashMap<Integer,List<ZoneHollowTile>>>();
+    			for(ZoneHollowTile tile: tiles)
+    			{	int row = tile.getRow();
+    				HashMap<Integer,List<ZoneHollowTile>> temp2 = temp.get(row);
+    				if(temp2 == null)
+    				{	temp2 = new HashMap<Integer, List<ZoneHollowTile>>();
+    					temp.put(row,temp2);
+    				}
+    				int col = tile.getCol();
+    				List<ZoneHollowTile> temp3 = temp2.get(col);
+    				if(temp3 == null)
+    				{	temp3 = new ArrayList<ZoneHollowTile>();
+    					temp2.put(col,temp3);
+    				}
+    				temp3.add(tile);
+    			}
+				
+    			// process line
+    			for(Entry<Integer,HashMap<Integer,List<ZoneHollowTile>>> entry: temp.entrySet())
+    			{	// create row element
+    				int row = entry.getKey();
+    				Element rowElement = new Element(XmlNames.LINE);
+    				rowElement.setAttribute(XmlNames.POSITION,Integer.toString(row));
+    				eventElement.addContent(rowElement);
+    				
+		    		HashMap<Integer,List<ZoneHollowTile>> temp2 = entry.getValue();
+        			for(Entry<Integer,List<ZoneHollowTile>> entry2: temp2.entrySet())
+        			{	int col = entry2.getKey();
+    					List<ZoneHollowTile> temp3 = entry2.getValue();
+    					for(ZoneHollowTile tile: temp3)
+    					{	// process contant terms
+			        		String floor = tile.getFloor();
+			            	String block = tile.getBlock();
+			           		String item = tile.getItem();
+			           		String bomb = tile.getBomb();
+			           		Element tileElement = saveTileElement(floor,block,item,bomb);
+			    			tileElement.setAttribute(XmlNames.POSITION,Integer.toString(col));
+			        		
+			    			// process variable term
+			        		String variable = tile.getVariable();
+			        		if(variable!=null)
+			        		{	Element variableElement = new Element(XmlNames.REFERENCE);
+			        			variableElement.setAttribute(XmlNames.NAME,variable);
+			        			tileElement.addContent(variableElement);
+			        		}
+			        		
+			        		// set row element
+			        		rowElement.addContent(tileElement);	    	
+			        	}
+         			}
+    			}
+    		}
+    	}
+    	
+    	return result;
+    }
+
     private static Element saveMatrixElement(Zone zone)
     {	Element result = new Element(XmlNames.MATRIX);
     	

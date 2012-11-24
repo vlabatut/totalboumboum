@@ -43,7 +43,6 @@ import org.xml.sax.SAXException;
 /**
  * 
  * @author Vincent Labatut
- *
  */
 public class ZoneLoader
 {	    
@@ -128,6 +127,7 @@ public class ZoneLoader
         		Element tile = iL.next();
         		int posT = Integer.parseInt(tile.getAttribute(XmlNames.POSITION).getValue().trim());
         		ZoneHollowTile zt = new ZoneHollowTile(posL,posT);
+        		
         		// constant parts
         		content = loadBasicTileElement(tile);
     			// floor
@@ -142,7 +142,8 @@ public class ZoneLoader
     			// bombs
     			if(content[3]!=null)
     				zt.setBomb(content[3]);        		
-        		// variable part
+        		
+    			// variable part
         		Element elt = tile.getChild(XmlNames.REFERENCE);
         		if(elt!=null)
         		{	String name = elt.getAttribute(XmlNames.NAME).getValue();
