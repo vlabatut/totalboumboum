@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
+	<!--
+	Total Boum Boum
+	Copyright 2008-2012 Vincent Labatut
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+	<variableTiles>
+		<variableTile name="softwall">
+			<value proba="0.5">
+				<block group="softwalls" name="redyellow" />
+			</value>
+			<value proba="0.5">
+				<block group="softwalls" name="yellowred" />
+			</value>
+		</variableTile>
+	</variableTiles>
+	<matrix>
+		<line pos="0">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="1">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="2">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="3">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="4">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="5">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="6">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="7">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="8">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="9">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="10">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="11">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="12">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="13">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+		<line pos="14">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="15">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+			<tile pos="16">
+				<floor name="regular" />
+				<block group="hardwalls" name="filling" />
+			</tile>
+		</line>
+	</matrix>
+</zone>
+
