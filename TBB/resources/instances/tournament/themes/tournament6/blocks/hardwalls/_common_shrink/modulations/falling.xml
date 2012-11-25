@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
+<gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../schemas/gesture_modulations.xsd" >
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -20,9 +20,29 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
+
+	<selfModulations>
+	</selfModulations>
 	
-	<general name="Tournament5" version="1" />
-	<author value="Vincent Labatut" />
-	<source value="Super Bomberman 5"/>
+	<otherModulations>
+	</otherModulations>
 	
-</theme>
+	<actorModulations>
+	</actorModulations>
+	
+	<targetModulations>
+	</targetModulations>
+	
+	<thirdModulations>
+<!--  	APPEAR --> 
+		<modulation frame="true" strength="0" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+	</thirdModulations>
+
+</gesture-modulations>
