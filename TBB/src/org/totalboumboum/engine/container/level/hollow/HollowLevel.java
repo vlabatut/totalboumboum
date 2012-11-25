@@ -225,7 +225,9 @@ public class HollowLevel implements Serializable
 	 */
 	private List<Sprite> initSprites(ZoneTile zoneTile, Tile tile, boolean force, boolean insert)
 	{	List<Sprite> result = new ArrayList<Sprite>();
-	
+		if(zoneTile==null)
+			zoneTile = new ZoneTile(tile.getRow(), tile.getCol());
+		
 		// floors
 		String floorName = zoneTile.getFloor();
 		if(floorName==null && force)
