@@ -21,8 +21,13 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 
+	<abstractFloors>
+		<floor name="common" folder="_common" />
+	</abstractFloors>
+
 	<concreteFloors>
 		<floor name="regular" folder="regular" />
+		<floor name="variant" folder="variant" />
 	</concreteFloors>
 
 </floorset>

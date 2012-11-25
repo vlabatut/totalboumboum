@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <sprite
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../../../schemas/sprite.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../../../schemas/sprite.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -22,6 +22,6 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
-	<general name="Border" base="common_normal_hard" />
+	<general name="Abstract floor" />
 
 </sprite>

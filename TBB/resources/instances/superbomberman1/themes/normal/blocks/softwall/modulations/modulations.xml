@@ -23,6 +23,8 @@
 	
 	<gesture name="APPEARING" file="appearing.xml" />
 	<gesture name="BURNING" file="burning.xml" />
+	<gesture name="FALLING" file="falling.xml" />
+	<gesture name="LANDING" file="landing.xml" />
 	<gesture name="STANDING" file="standing.xml" />
 
 </modulations>

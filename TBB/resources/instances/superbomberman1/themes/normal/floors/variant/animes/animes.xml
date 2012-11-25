@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<sprite
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../../../schemas/sprite.xsd">
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/animes.xsd" 
+		scale="1" >
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -21,7 +21,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
-	
-	<general name="Border" base="common_normal_hard" />
 
-</sprite>
+	<gestures>
+		<gesture name="STANDING" >
+			<direction name="NONE">
+				<step file="standing.gif" />
+			</direction>
+		</gesture>
+	</gestures>
+</animes>
