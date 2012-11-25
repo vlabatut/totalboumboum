@@ -1568,9 +1568,8 @@ public class Launcher
 	 * 
 	 * TODO mort subite
 	 * - réformer tous les thèmes des instances déjà traitées
-	 * 		- de manière à mutualiser au max
 	 * 		- épurer en virant les items pas standard
-	 * - adapter les niveaux existants pour qu'il y ait la mort subite originale
+	 * - màj doc sur xml : définition de la mort subite
 	 * 
 	 * - à tester :
 	 * 
@@ -1587,9 +1586,6 @@ public class Launcher
 	 * 
 	 * 
 	 * en cours:
-	 *  x modifier les animes des autres blocs pour inclure le fall
-	 *  - compléter les niveaux avec les morts subites
-	 *  - tester
 	 *     
 	 */
 }
