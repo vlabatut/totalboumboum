@@ -43,9 +43,6 @@
 	<items>
 		<item name="extrabomb" number="3" />
 		<item name="extraflame" number="4" />
-<!--
-		<item name="speed" number="1" />  
--->
 	</items>
 	
 </players>
