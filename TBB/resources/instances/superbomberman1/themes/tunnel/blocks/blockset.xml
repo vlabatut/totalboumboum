@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2012 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<abstractBlocks >
+		<block name="abstract_wall" folder="../../_common/wall" />
+		<block name="abstract_hardwall" folder="../../_common/hardwall" />
+		<block name="abstract_regular_hardwall" folder="../../_common/regular_hardwall" />
+		<block name="abstract_shrink_hardwall" folder="../../_common/shrink_hardwall" />
+		<block name="abstract_softwall" folder="../../_common/softwall" />
+
+		<group name="tunnels" folder="tunnels">
+			<block name="common_tunnel" folder="_common"/>
+		</group>
+	</abstractBlocks>
+	
+	<concreteBlocks>
+		<block folder="softwall" name="softwall" />
+		
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			
+			<block name="center" folder="center"/>
+			<block name="down" folder="down"/>
+			<block name="downleft" folder="downleft"/>
+			<block name="downright" folder="downright"/>
+			<block name="downT" folder="downT"/>
+			<block name="horizontalA" folder="horizontalA"/>
+			<block name="horizontalB" folder="horizontalB"/>
+			<block name="leftT" folder="leftT"/>
+			<block name="rightT" folder="rightT"/>
+			<block name="up" folder="up"/>
+			<block name="upleft" folder="upleft"/>
+			<block name="upright" folder="upright"/>
+			<block name="upT" folder="upT"/>
+
+			<block name="shrink" folder="shrink"/>
+		</group>
+
+		<group name="tunnels" folder="tunnels">
+			<block name="center" folder="center"/>
+			<block name="down" folder="down"/>
+			<block name="downT" folder="downT"/>
+			<block name="horizontal" folder="horizontal"/>
+			<block name="left" folder="left"/>
+			<block name="leftT" folder="leftT"/>
+			<block name="right" folder="right"/>
+			<block name="rightT" folder="rightT"/>
+			<block name="up" folder="up"/>
+			<block name="upT" folder="upT"/>
+			<block name="vertical" folder="vertical"/>
+		</group>
+	</concreteBlocks>
+	
+</blockset>
