@@ -222,13 +222,6 @@ public class Zone implements Serializable
 	/** Matrix representing the content of this zone */
 	private ZoneTile[][] matrix;
 	
-	/**
-	 * 0: floors
-	 * 1: blocks
-	 * 2: items
-	 * 3: bombs
-	 * @return
-	 */
 	public ZoneTile[][] getMatrix()
 	{	return matrix;		
 	}
@@ -250,7 +243,7 @@ public class Zone implements Serializable
 			value.init();
 		}
 		
-		// populate matrices
+		// populate matrix
     	Iterator<ZoneHollowTile> it = tiles.iterator();
     	while(it.hasNext())
     	{	ZoneHollowTile tile = it.next();
@@ -328,7 +321,8 @@ public class Zone implements Serializable
 		for(int i=0;i<globalHeight;i++)
 		{	for(int j=0;j<globalWidth;j++)
 			{	ZoneTile tile = matrix[i][j];
-				updateItemCount(tile,result);
+				if(tile!=null)
+					updateItemCount(tile,result);
 			}
 		}
 		
