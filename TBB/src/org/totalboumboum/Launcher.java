@@ -1566,10 +1566,11 @@ public class Launcher
 	 * TODO certains menus modaux sont toujours très lents
 	 * TODO ajout des menus modaux manquant
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
+	 * TODO programmer le shrink vertical, l'appliquer au le niveau line
+	 * TODO revoir les niveaux pour lesquels y a pas de mort subite
+	 * TODO envisager aussi les mort-subites de type bombe, voire bonus
 	 * 
 	 * TODO mort subite
-	 * - réformer tous les thèmes des instances déjà traitées
-	 * 		- épurer en virant les items pas standard
 	 * - màj doc sur xml : définition de la mort subite
 	 * 
 	 * - à tester :
