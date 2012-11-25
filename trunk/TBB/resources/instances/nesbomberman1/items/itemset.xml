@@ -96,7 +96,7 @@
 
 		<item name="throughbombs" folder="throughbombs" >
 			<abilities>
-				<ability >
+				<ability strength="1" frame="true">
 					<name value="SPRITE_TRAVERSE_BOMB" />
 				</ability>
 			</abilities>
@@ -104,7 +104,7 @@
 		
 		<item name="throughwalls" folder="throughwalls" >
 			<abilities>
-				<ability >
+				<ability strength="1" frame="true">
 					<name value="SPRITE_TRAVERSE_WALL" />
 				</ability>
 			</abilities>
