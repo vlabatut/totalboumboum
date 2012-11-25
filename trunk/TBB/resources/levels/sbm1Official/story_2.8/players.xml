@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<players 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/players.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2012 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<locations>
+<!-- 
+		<case players="0" />
+		<case players="1">
+			<location player="0" line="01" col="02" />
+		</case>
+-->		
+		<case players="2">
+			<location player="0" line="01" col="02" />
+			<location player="1" line="11" col="14" />
+		</case>
+		<case players="3">
+			<location player="0" line="01" col="02" />
+			<location player="1" line="01" col="14" />
+			<location player="2" line="11" col="02" />
+		</case>
+		<case players="4">
+			<location player="0" line="01" col="02" />
+			<location player="1" line="01" col="14" />
+			<location player="2" line="11" col="02" />
+			<location player="3" line="11" col="14" />
+		</case>
+	</locations>
+	
+	<items>
+		<item name="extrabomb" number="5" />
+		<item name="extraflame" number="5" />
+		<item name="speed" number="2" />
+		<item name="vestart" number="1" />
+		<item name="kick" number="1" />
+<!-- 
+		<item name="punch" number="1" />
+		<item name="goldenflame" number="10" />
+		<item name="kick" number="1" />
+		<item name="penetration" number="1" />
+		<item name="remotecontrol" number="1" />
+		<item name="throughwalls" number="5" />
+		<item name="throughbombs" number="3" />
+ -->		
+	</items>
+	
+</players>
