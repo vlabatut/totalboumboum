@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
+<floorset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/floorset.xsd" >
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -20,9 +20,13 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
+
+	<abstractFloors>
+		<floor name="common" folder="_common" />
+	</abstractFloors>
 	
-	<general name="Tournament5" version="1" />
-	<author value="Vincent Labatut" />
-	<source value="Super Bomberman 5"/>
-	
-</theme>
+	<concreteFloors>
+		<floor name="regular" folder="regular" />
+	</concreteFloors>
+
+</floorset>

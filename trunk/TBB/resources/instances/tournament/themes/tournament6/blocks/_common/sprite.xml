@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
+<sprite
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../../../schemas/sprite.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -21,8 +22,6 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
-	<general name="Tournament5" version="1" />
-	<author value="Vincent Labatut" />
-	<source value="Super Bomberman 5"/>
-	
-</theme>
+	<general name="Abstract block" />
+
+</sprite>
