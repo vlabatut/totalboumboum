@@ -45,6 +45,47 @@
 			</abilities>
 		</item>
 -->		
+		<item name="antibomb" folder="antibomb">	
+			<abilities>
+				<ability strength="-1" >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+
+		<item name="antiflame" folder="antiflame">	
+			<abilities>
+				<ability strength="-1" >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+
+		<item name="antispeed" folder="antispeed" >
+			<abilities>
+				<ability strength="-1">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>		
+
+		<item name="clog" folder="clog" >
+			<abilities>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="1" time="20000" >
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+
 		<item name="extrabomb" folder="extrabomb">	
 			<abilities>
 				<ability >
@@ -61,6 +102,14 @@
 			</abilities>
 		</item>
 		
+		<item name="goldenbomb" folder="goldenbomb">	
+			<abilities>
+				<ability strength="10" >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+
 		<item name="goldenflame" folder="goldenflame">
 			<abilities>
 				<ability strength="10" >
@@ -150,7 +199,7 @@
 <!--
 		<item name="throughbombs" folder="throughbombs" >
 			<abilities>
-				<ability >
+				<ability strength="1" frame="true">
 					<name value="SPRITE_TRAVERSE_BOMB" />
 				</ability>
 			</abilities>
@@ -159,7 +208,7 @@
 <!--
 		<item name="throughwalls" folder="throughwalls" >
 			<abilities>
-				<ability >
+				<ability strength="1" frame="true">
 					<name value="SPRITE_TRAVERSE_WALL" />
 				</ability>
 			</abilities>
