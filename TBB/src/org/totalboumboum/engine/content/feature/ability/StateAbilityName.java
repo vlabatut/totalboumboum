@@ -116,7 +116,7 @@ public class StateAbilityName implements Serializable
 	/** bomb constipation: the hero can't drop any bombs */
 	public static final String HERO_BOMB_CONSTIPATION = "HERO_BOMB_CONSTIPATION";
 	
-	/** bomb constipation: the hero can't help dropping bombs */
+	/** bomb diarrhea: the hero can't help dropping bombs */
 	public static final String HERO_BOMB_DIARRHEA = "HERO_BOMB_DIARRHEA";
 	
 	/** minimal delay between two dropped bombs */
