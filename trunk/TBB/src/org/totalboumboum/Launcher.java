@@ -1582,6 +1582,8 @@ public class Launcher
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :
+	 * 		- pr constip/extinction, on devrait pas avoir à utiliser des ability spéciales :
+	 * 	      des valeurs négatives devraient, normalement suffire
 	 * 		- full model (AiFullModel.pickItem):
 	 * 			- gérer les changement de vitesse d'un joueur (aussi dans AiSimHero.updateWalkingSpeed)
 	 * 			- gérer l'aspect temporel de certains malus
