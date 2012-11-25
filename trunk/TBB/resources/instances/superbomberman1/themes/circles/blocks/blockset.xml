@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2012 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<abstractBlocks >
+		<block name="abstract_wall" folder="../../_common/wall" />
+		<block name="abstract_hardwall" folder="../../_common/hardwall" />
+		<block name="abstract_regular_hardwall" folder="../../_common/regular_hardwall" />
+		<block name="abstract_shrink_hardwall" folder="../../_common/shrink_hardwall" />
+		<block name="abstract_softwall" folder="../../_common/softwall" />
+		
+		<group name="softwalls" folder="softwalls">
+			<block name="common_softwall" folder="_common"/>
+		</group>
+	</abstractBlocks>
+	
+	<concreteBlocks>
+		<group name="softwalls" folder="softwalls">
+			<block name="regular" folder="regular"/>
+			
+			<block name="retractable" folder="retractable"/>
+		</group>
+		
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			
+			<block name="down" folder="down"/>
+			<block name="insideleft" folder="insideleft"/>
+			<block name="insideright" folder="insideright"/>
+			<block name="outsidedownleft" folder="outsidedownleft"/>
+			<block name="outsidedownright" folder="outsidedownright"/>
+			<block name="outsideleft" folder="outsideleft"/>
+			<block name="outsideright" folder="outsideright"/>
+			<block name="outsideupleft" folder="outsideupleft"/>
+			<block name="outsideupright" folder="outsideupright"/>
+			<block name="up" folder="up"/>
+			<block name="upleft" folder="upleft"/>
+			<block name="upright" folder="upright"/>
+
+			<block name="shrink" folder="shrink"/>
+		</group>
+	</concreteBlocks>
+	
+</blockset>
