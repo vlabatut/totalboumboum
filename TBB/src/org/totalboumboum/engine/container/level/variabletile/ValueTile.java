@@ -30,7 +30,6 @@ import java.io.Serializable;
  */
 public class ValueTile implements Serializable
 {	private static final long serialVersionUID = 1L;
-
 	
 	public ValueTile(String floor, String block, String item, String bomb, float proba)
 	{	this.block = block;
