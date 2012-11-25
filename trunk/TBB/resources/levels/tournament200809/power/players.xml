@@ -49,15 +49,6 @@
 	<items>
 		<item name="extrabomb" number="10" />
 		<item name="extraflame" number="10" />
-<!-- 
-		<item name="punch" number="1" />
-		<item name="goldenflame" number="10" />
-		<item name="kick" number="1" />
-		<item name="penetration" number="1" />
-		<item name="remotecontrol" number="1" />
-		<item name="throughwalls" number="5" />
-		<item name="throughbombs" number="3" />
- -->		
 	</items>
 	
 </players>
