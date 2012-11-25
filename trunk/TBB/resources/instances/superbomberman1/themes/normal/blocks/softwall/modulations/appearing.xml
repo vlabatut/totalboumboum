@@ -46,7 +46,7 @@
 			<action name="APPEAR" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actorRestrictions>
-				<ability><name value="SPRITE_TRAVERSE_WALL" /></ability>
+				<ability strength="1"><name value="SPRITE_TRAVERSE_WALL" /></ability>
 			</actorRestrictions>
 			<targetRestrictions />
 			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
@@ -60,12 +60,33 @@
 			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
 			<targetCircumstances  />
 		</modulation>
+<!--  	CONSUME --> 
+		<!-- let penetration fire consume anything -->
+		<modulation frame="false" strength="0" >
+			<action name="CONSUME" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="ANY" />
+			<actorRestrictions>
+				<ability strength="1"><name value="SPRITE_TRAVERSE_WALL" /></ability>
+			</actorRestrictions>
+			<targetRestrictions />
+			<actorCircumstances />
+			<targetCircumstances />
+		</modulation>
+		<!-- prevent normal fire from consuming bombs and items located under the block -->
+		<modulation frame="true" strength="0" >
+			<action name="CONSUME" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="FIRE" target="BOMB FLOOR ITEM" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances />
+			<targetCircumstances />
+		</modulation>
 <!--  	LAND --> 
 		<modulation frame="false" strength="0" >
 			<action name="LAND" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actorRestrictions>
-				<ability><name value="SPRITE_TRAVERSE_WALL" /></ability>
+				<ability strength="1"><name value="SPRITE_TRAVERSE_WALL" /></ability>
 			</actorRestrictions>
 			<targetRestrictions />
 			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
@@ -85,7 +106,7 @@
 			<action name="MOVELOW" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actorRestrictions>
-				<ability><name value="SPRITE_TRAVERSE_WALL" /></ability>
+				<ability strength="1"><name value="SPRITE_TRAVERSE_WALL" /></ability>
 			</actorRestrictions>
 			<targetRestrictions />
 			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />

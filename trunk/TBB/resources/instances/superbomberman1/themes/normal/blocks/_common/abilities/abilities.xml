@@ -26,7 +26,16 @@
 		<ability strength="500" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_ENTRY_DURATION" />
 		</ability>
+<!--  	SPRITE_TRAVERSE_ITEM --> 
+		<ability >
+			<name value="SPRITE_TRAVERSE_ITEM" />
+		</ability>
 			
 		<!-- ACTION -->
+<!--  	LAND -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="LAND" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
+		</ability> 
 
 </abilities>

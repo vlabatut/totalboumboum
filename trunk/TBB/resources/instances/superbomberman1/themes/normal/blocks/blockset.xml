@@ -26,6 +26,7 @@
 		
 		<group name="hardwalls" folder="hardwalls">
 			<block name="common_hard" folder="_common"/>
+			<block name="common_normal_hard" folder="_common_normal"/>
 		</group>
 	</abstractBlocks>
 	
@@ -35,7 +36,9 @@
 		<group name="hardwalls" folder="hardwalls">
 			<block name="regular" folder="regular"/>
 			
-			<block folder="border" name="border" />
+			<block name="border" folder="border" />
+			
+			<block name="shrink" folder="shrink"/>
 		</group>
 	</concreteBlocks>
 	
