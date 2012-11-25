@@ -514,6 +514,8 @@
 	- ressources : 
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 		- morts subites dans les niveaux officiels de SBM1
+		- thème pour le tournoi VI (à compléter)
+		- niveaux pour le tournoi VI (à compléter)
 	- API IA:
 		- quelques bugs corrigés
 		- initOthers dans ArtificialIntelligence
