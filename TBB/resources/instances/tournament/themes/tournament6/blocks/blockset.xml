@@ -47,6 +47,8 @@
 			<block name="regular" folder="regular"/>
 			
 			<block name="filling" folder="filling"/>
+			
+			<block name="shrink" folder="shrink" />
 		</group>
 	</concreteBlocks>
 	
