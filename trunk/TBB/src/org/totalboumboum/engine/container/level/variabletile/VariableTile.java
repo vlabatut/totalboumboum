@@ -99,6 +99,7 @@ public class VariableTile implements Serializable
 	 * respect of the probability distribution, by monitoring the generated values, but the resulting 
 	 * zone is always the same ! So a mixture of these two methods is used : half the values are 
 	 * generated completely randomly, and the rest is generated in a controlled way. 
+	 * 
 	 * @return	a value generated randomly
 	 */
 	public ValueTile getNext()

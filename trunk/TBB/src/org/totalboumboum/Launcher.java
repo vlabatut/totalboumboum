@@ -1565,6 +1565,7 @@ public class Launcher
 	/**
 	 * TODO certains menus modaux sont toujours très lents
 	 * TODO ajout des menus modaux manquant
+	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 
 	 * TODO mort subite
 	 * - réformer tous les thèmes des instances déjà traitées
