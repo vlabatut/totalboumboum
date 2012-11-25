@@ -27,6 +27,7 @@
 	
 	<concreteFloors>
 		<floor name="regular" folder="regular" />
+		
 		<floor name="beltdown" folder="beltdown" />
 		<floor name="beltleft" folder="beltleft" />
 		<floor name="beltright" folder="beltright" />
