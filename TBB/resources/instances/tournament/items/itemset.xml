@@ -150,7 +150,7 @@
 			</abilities>
 		</item>
 		
-		<item name="randombonus" folder="randombonus" >
+		<item name="randomextra" folder="randomextra" >
 			<item name="extrabomb" />
 			<item name="extraflame" />
 			<item name="extraspeed" />
