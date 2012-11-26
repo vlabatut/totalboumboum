@@ -111,8 +111,8 @@ public class LevelTools
 		saveLevel(level);
 */
 		// open an existing level and add a sudden death spiral
-		String pack = "sbm1Official";
-		String folder = "battle_03";
+		String pack = "tournament201213";
+		String folder = "classic";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 		int thickness = 2;
@@ -123,8 +123,8 @@ public class LevelTools
 		long totalTime = 120000;
 		boolean crushHardwalls = false;
 		removeSuddenDeath(level);
-		addSpiralSuddenDeath(level, thickness, clockwise, 11, 2, startTime, endTime, relative, totalTime, crushHardwalls);
-		addRandomFallingBombs(level, 20, new int[]{1,2,11,14}, 500, 59500, 3000, relative, totalTime);
+		addSpiralSuddenDeath(level, thickness, clockwise, 1, 2, startTime, endTime, relative, totalTime, crushHardwalls);
+//		addRandomFallingBombs(level, 20, new int[]{1,2,11,14}, 5000, 59500, 3000, relative, totalTime);
 		saveLevel(level);
 	}
 	

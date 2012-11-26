@@ -114,7 +114,7 @@ public class StateAbilityName implements Serializable
 	// HEROES ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** bomb constipation: the hero can't drop any bombs */
-	public static final String HERO_BOMB_CONSTIPATION = "HERO_BOMB_CONSTIPATION";
+//	public static final String HERO_BOMB_CONSTIPATION = "HERO_BOMB_CONSTIPATION";
 	
 	/** bomb diarrhea: the hero can't help dropping bombs */
 	public static final String HERO_BOMB_DIARRHEA = "HERO_BOMB_DIARRHEA";
