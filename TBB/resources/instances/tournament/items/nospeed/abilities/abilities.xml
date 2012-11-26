@@ -23,11 +23,11 @@
 
 		<!-- STATE -->
 <!--  	ITEM_CONTAGION_MODE --> 
-		<ability strength="4" frame="false" time="-1" uses="-1">
+		<ability strength="3" frame="false" time="-1" uses="-1">
 			<name value="ITEM_CONTAGION_MODE" />
 		</ability>
 <!--  	ITEM_ON_DEATH_ACTION --> 
-		<ability strength="2">
+		<ability strength="1">
 			<name value="ITEM_ON_DEATH_ACTION" />
 		</ability>
 			
