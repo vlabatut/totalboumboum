@@ -39,8 +39,8 @@
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability time="20000" >
-					<name value="HERO_BOMB_CONSTIPATION" />
+				<ability time="20000" strength="-1000" >
+					<name value="HERO_BOMB_NUMBER" />
 				</ability>
 			</abilities>
 		</item>

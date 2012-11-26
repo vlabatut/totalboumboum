@@ -44,10 +44,22 @@
 
 		<gesture name="RELEASED" repeat="false" folder="released" yShift="9">
 			<direction name="NONE">
-				<step duration="85" file="1.gif" />
-				<step duration="105" file="2.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="60" file="4.gif" />
+				<step duration="85" >
+					<image file="standing.gif" />
+					<imageref name="smoke1" yShift="9" />
+				</step>
+				<step duration="105" >
+					<image file="standing.gif" />
+					<imageref name="smoke2" yShift="9" />
+				</step>
+				<step duration="80" >
+					<image file="standing.gif" />
+					<imageref name="smoke3" yShift="9" />
+				</step>
+				<step duration="60" >
+					<image file="standing.gif" />
+					<imageref name="smoke4" yShift="9" />
+				</step>				
 			</direction>
 		</gesture>
 
