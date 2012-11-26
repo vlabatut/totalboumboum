@@ -80,8 +80,8 @@
 				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability time="30000" >
-					<name value="HERO_BOMB_CONSTIPATION" />
+				<ability time="30000" strength="-1000" >
+					<name value="HERO_BOMB_NUMBER" />
 				</ability>
 			</abilities>
 			<!-- bomb diarrhea-->
