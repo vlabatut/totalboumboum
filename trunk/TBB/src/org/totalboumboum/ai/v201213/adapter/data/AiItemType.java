@@ -75,11 +75,18 @@ public enum AiItemType
 	GOLDEN_SPEED,
 
 	////////////////////////
+	// EFFET ALÉATOIRE
+	////////////////////////
+	/** Effet négatif sur le joueur (ralentissement, constipation, etc.) */
+	RANDOM_NONE,
+	
+	/** Effet positif sur le joueur (bombe supplémentaire, portée étendue, etc.) */
+	RANDOM_EXTRA,
+	
+
+	////////////////////////
 	// AUTRES
 	////////////////////////
-	/** effet négatif sur le joueur (ralentissement, constipation, etc.) */
-	MALUS,
-	
 	/** le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
 	// (pas utilisé)
 	PUNCH,
@@ -130,7 +137,7 @@ public enum AiItemType
 		
 		// autres
 		else if(name.equalsIgnoreCase("malus") || name.equalsIgnoreCase("disease"))
-			result = MALUS;
+			result = RANDOM_NONE;
 		else if(name.equalsIgnoreCase("punch"))
 			result = PUNCH;
 		else
