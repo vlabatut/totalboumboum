@@ -75,24 +75,34 @@
 			<name value="HERO_WAIT_DURATION" />
 		</ability>
 <!--  	HERO_WALK_SPEED --> 
-		<ability strength="0.42" frame="false" time="-1" uses="-1">
-			<name value="HERO_WALK_SPEED_M1" />
+		<ability strength="0.50" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_M99" />
 		</ability>
-		<ability strength="1.28" frame="false" time="-1" uses="-1">
+		<ability strength="1.25" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P1" />
 		</ability>
-		<ability strength="1.51" frame="false" time="-1" uses="-1">
+		<ability strength="1.50" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P2" />
 		</ability>
 		<ability strength="1.75" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P3" />
 		</ability>
-		<ability strength="2.03" frame="false" time="-1" uses="-1">
+		<ability strength="2.00" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P4" />
 		</ability>
-		<ability strength="3.89" frame="false" time="-1" uses="-1">
-			<name value="HERO_WALK_SPEED_P49" />
+		<ability strength="2.25" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_P5" />
 		</ability>
+		<ability strength="2.50" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_P6" />
+		</ability>
+		<ability strength="2.75" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_P7" />
+		</ability>
+		<ability strength="3.00" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_P8" />
+		</ability>
+		<!-- actually a malus -->
 		<ability strength="4.12" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P99" />
 		</ability>
