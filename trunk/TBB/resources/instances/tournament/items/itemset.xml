@@ -27,24 +27,6 @@
 	</abstractItems>
 
 	<concreteItems>
-<!--
-		<item name="disease" folder="disease" >
-			<abilities>
-				<ability strength="90"  frame="true" time="20000" >
-					<name value="SPRITE_TWINKLE_COLOR"/>
-				</ability>
-				<ability strength="90"  frame="true" time="20000" >
-					<name value="SPRITE_TWINKLE_NORMAL"/>
-				</ability>
-				<ability strength="1" frame="true" time="20000" >
-					<name value="SPRITE_TWINKLE" />
-				</ability>
-				<ability time="20000" >
-					<name value="HERO_BOMB_CONSTIPATION" />
-				</ability>
-			</abilities>
-		</item>
--->		
 		<item name="antibomb" folder="antibomb">	
 			<abilities>
 				<ability strength="-1" >
@@ -71,7 +53,7 @@
 
 		<item name="extrabomb" folder="extrabomb">	
 			<abilities>
-				<ability >
+				<ability strength="1">
 					<name value="HERO_BOMB_NUMBER" />
 				</ability>
 			</abilities>
@@ -79,7 +61,7 @@
 		
 		<item name="extraflame" folder="extraflame">
 			<abilities>
-				<ability >
+				<ability strength="1">
 					<name value="HERO_BOMB_RANGE" />
 				</ability>
 			</abilities>
@@ -111,7 +93,7 @@
 		
 		<item name="goldenspeed" folder="goldenspeed" >
 			<abilities >
-				<ability strength="49" frame="true" >
+				<ability strength="10" frame="true" >
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
@@ -128,7 +110,7 @@
 				<ability strength="1" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability time="20000" strength="-1000" >
+				<ability time="20000" strength="-10000" >
 					<name value="HERO_BOMB_NUMBER" />
 				</ability>
 			</abilities>
@@ -145,7 +127,7 @@
 				<ability strength="1" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability time="20000" strength="-1000" >
+				<ability time="20000" strength="-10000" >
 					<name value="HERO_BOMB_RANGE" />
 				</ability>
 			</abilities>
@@ -162,7 +144,7 @@
 				<ability strength="1" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability strength="1" time="20000" >
+				<ability strength="-10000" time="20000" >
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
