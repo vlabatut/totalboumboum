@@ -215,7 +215,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement courante en pixels/s (est nulle si le sprite ne bouge pas */
+	/** Vitesse de déplacement courante en pixels/s (est nulle si le sprite ne bouge pas */
 	protected double currentSpeed = 0;
 	
 	@Override
@@ -224,7 +224,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 
 	/**
-	 * met à jour la vitesse de ce sprite
+	 * Met à jour la vitesse de ce sprite.
 	 */
 	protected void updateSpeed()
 	{	Sprite sprite = getSprite();
@@ -235,11 +235,11 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse de ce sprite en pixels */
+	/** Abscisse de ce sprite en pixels */
 	protected double posX;
-	/** ordonnée de ce sprite en pixels */
+	/** Ordonnée de ce sprite en pixels */
 	protected double posY;
-	/** altitude de ce sprite en pixels */
+	/** Altitude de ce sprite en pixels */
 	protected double posZ;
 
 	@Override
@@ -258,7 +258,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/** 
-	 * initialise les coordonnées (en pixels) de ce sprite 
+	 * Initialise les coordonnées (en pixels) de ce sprite. 
 	 */
 	private void updateLocation()
 	{	posX = sprite.getCurrentPosX();
@@ -315,7 +315,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement ce sprite et libère les ressources qu'il occupait
+	 * Termine proprement ce sprite 
+	 * et libère les ressources qu'il occupait.
 	 */
 	protected void finish()
 	{	// state

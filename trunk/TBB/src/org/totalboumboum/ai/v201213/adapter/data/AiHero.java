@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * 
  */
 
+import java.util.HashMap;
+
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -94,10 +96,10 @@ public interface AiHero extends AiSprite
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la couleur de ce personnage (et de ses bombes)
+	 * Renvoie la couleur de ce personnage (et de ses bombes).
 	 * 
 	 * @return 
-	 * 		un symbole de type PredefinedColor représentant une couleur
+	 * 		Un symbole de type {@link PredefinedColor} représentant une couleur.
 	 */
 	public PredefinedColor getColor();
 	
@@ -105,13 +107,36 @@ public interface AiHero extends AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de déplacement au sol de ce personnage,
-	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
+	 * Renvoie l'index de vitesse de déplacement de ce personnage.
+	 * <br/>
+	 * Cette information est à usage interne, vous (le concepteur
+	 * de l'agent) n'en avez pas besoin.
+	 * 
+	 * @return
+	 * 		Un entier indiquant l'index de vitesse courant du joueur.
+	 */
+	public int getWalkingSpeedIndex();
+	
+	/**
+	 * Renvoie une map contenant les vitesses de déplacement possible
+	 * pour ce joueur.
+	 * <br/>
+	 * Cette information est à usage interne, vous (le concepteur
+	 * de l'agent) n'en avez pas besoin.
+	 * 
+	 * @return
+	 * 		Une map contenant les vitesses de déplacement possible du joueur.
+	 */
+	public HashMap<Integer,Double> getWalkingSpeeds();
+	
+	/**
+	 * Renvoie la vitesse de déplacement au sol de ce personnage,
+	 * exprimée en pixel/seconde. Il ne s'agit pas de la vitesse 
 	 * de déplacement courante, il s'agit de la vitesse du personnage
 	 * quand il marche. Cette vitesse peut être modifiée par certains items.
 	 * 
 	 * @return	
-	 * 		la vitesse de déplacement de ce personnage
+	 * 		La vitesse de déplacement de ce personnage.
 	 */
 	public double getWalkingSpeed();
 	

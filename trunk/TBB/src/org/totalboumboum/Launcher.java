@@ -1506,7 +1506,6 @@ public class Launcher
 	 * 		- instance TBB
 	 * 		- sons
 	 * 		- BM'83
-	 * 		- shrink (?)
 	 * 		- réseau
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
@@ -1519,9 +1518,6 @@ public class Launcher
 	 *  	- possibilité de définir un tie-break random
 	 *  	- possibilité de définir un tie-break classement stats
 	 *  	- possibilité de définir des matches de classement optionnels (?)
-	 *  
-	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
-	 *    (ou un autre format vectoriel, SVG p-ê ?)
 	 *  
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? et/ou une option : oui-non-demander)
@@ -1564,30 +1560,25 @@ public class Launcher
 	
 	/**
 	 * TODO certains menus modaux sont toujours très lents
+	 * 
 	 * TODO ajout des menus modaux manquant
+	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
-	 * 		>> adapter les thèmes (blocs, sols)
+	 * 		x adapter les thèmes (blocs, sols)
 	 * 		x rajouter la modif sur le throughwall des items
-	 * 		>> adapter les traj des bombes
+	 * 		x adapter les traj des bombes
+	 * 
 	 * TODO programmer le shrink vertical, l'appliquer au niveau line
-	 * TODO revoir les niveaux pour lesquels y a pas (encore) de mort subite
-	 * TODO envisager aussi les mort-subites de type bombe, voire bonus
 	 * 
-	 * TODO mort subite
+	 * TODO revoir les niveaux du tournoi pour lesquels y a pas (encore) de mort subite
 	 * 
-	 * - à tester :
-	 * 
-	 * - bugs :
+	 * TODO envisager aussi les mort-subites de type bombe, voire bonus (nouveaux niveaux ?)
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :
 	 * 		- full model (AiFullModel.pickItem):
-	 * 			- gérer les changement de vitesse d'un joueur (aussi dans AiSimHero.updateWalkingSpeed)
-	 * 			- gérer l'aspect temporel de certains malus
-	 * 			- gérer aussi leur aspect contagieux
-	 * 
-	 * 
-	 * en cours:
-	 *     
+	 * 			- gérer l'aspect temporel de certains malus ?
+	 * 			- gérer aussi leur aspect contagieux ?
+	 * 				>> besoin de savoir si contagieux, dans AiHero
 	 */
 }

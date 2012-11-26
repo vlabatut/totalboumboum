@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
  * 
  */
 
+import java.util.HashMap;
+
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -70,14 +72,16 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * 		capacité du personnage à traverser le feu (sans mourir !)
 	 * @param color
 	 * 		couleur du personnage
-	 * @param walkingSpeed
-	 * 		vitesse de déplacement au sol du personnage
+	 * @param walkingSpeedIndex
+	 * 		Index de vitesse de déplacement au sol.
+	 * @param walkingSpeeds
+	 * 		Vitesses de déplacement au sol du personnage.
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
 			AiBomb bombPrototype, int bombNumber, int bombCount,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
-			PredefinedColor color, double walkingSpeed)
+			PredefinedColor color, int walkingSpeedIndex, HashMap<Integer,Double> walkingSpeeds)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		// bombs
@@ -89,10 +93,13 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		this.throughBlocks = throughBlocks;
 		this.throughBombs = throughBombs;
 		this.throughFires = throughFires;
+
+		// speeds
+		this.walkingSpeedIndex = walkingSpeedIndex;
+		this.walkingSpeeds = new HashMap<Integer,Double>(walkingSpeeds);
 		
 		// misc
 		this.color = color;
-		this.walkingSpeed = walkingSpeed;
 	}	
 
 	/**
@@ -117,9 +124,12 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		throughBombs = hero.hasThroughBombs();
 		throughFires = hero.hasThroughFires();
 		
+		// speed
+		walkingSpeedIndex = hero.getWalkingSpeedIndex();
+		walkingSpeeds = new HashMap<Integer, Double>(hero.getWalkingSpeeds());
+		
 		// misc
 		color = hero.getColor();
-		walkingSpeed = hero.getWalkingSpeed();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -209,22 +219,35 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
-	private double walkingSpeed;
+	/** Index de vitesse de déplacement au sol du personnage */
+	private int walkingSpeedIndex;
+	/** Vitesses possibles de déplacement du personnage, exprimées en pixel/seconde */
+	private HashMap<Integer,Double> walkingSpeeds;
 	
 	@Override
 	public double getWalkingSpeed()
-	{	return walkingSpeed;	
+	{	double result = walkingSpeeds.get(walkingSpeedIndex);
+		return result;
 	}
 	
+	@Override
+	public int getWalkingSpeedIndex()
+	{	return walkingSpeedIndex;
+	}
+	
+	@Override
+	public HashMap<Integer,Double> getWalkingSpeeds()
+	{	return walkingSpeeds;
+	}
+
 	/**
-	 * Met à jour la portée des bombes posées par ce joueur.
+	 * Met à jour la vitesse de déplacement de ce joueur.
 	 * 
 	 * @param delta
-	 * 		La modification à apporter à la portée des bombes.
+	 * 		La modification à apporter à l'index de vitesse du joueur.
 	 */
-	protected void updateWalkingSpeed(int delta)
-	{	// TODO TODO
+	protected void updateWalkingSpeedIndex(int delta)
+	{	walkingSpeedIndex = walkingSpeedIndex + delta;
 	}
 	
 	/////////////////////////////////////////////////////////////////

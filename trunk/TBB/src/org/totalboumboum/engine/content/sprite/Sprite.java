@@ -440,13 +440,18 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	public double[] getGroundSpeedCoeff()
 	{	double[] result = new double[2];
-	
+		
+		// get the current speed ability
 		StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
 		int speed = (int)ability.getStrength();
+		
+		// if the speed ability didn't change since last time it was checked
 		if(speed==speedAbility)
 		{	result[0] = speedAbilityCoef;
 			result[1] = speedAbility;
 		}
+		
+		// otherwise it must be updated
 		else
 		{	double speedAbility = speed;
 			double speedAbilityCoef = 1;
