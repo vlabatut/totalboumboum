@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201213.adapter.data.internal;
  * 
  */
 
+import java.util.HashMap;
+
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -56,6 +58,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	protected AiDataHero(AiDataTile tile, Hero sprite)
 	{	super(tile,sprite);
 		initColor();
+		initSpeed();
 		updateBombParam();
 		updateSpeed();
 		updateCollisions();
@@ -164,28 +167,59 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
-	private double walkingSpeed;
+	/** Index de vitesse de déplacement au sol du personnage */
+	private int walkingSpeedIndex;
+	/** Vitesses possibles de déplacement du personnage, exprimées en pixel/seconde */
+	private HashMap<Integer,Double> walkingSpeeds;
 	
 	@Override
 	public double getWalkingSpeed()
-	{	return walkingSpeed;	
+	{	double result = walkingSpeeds.get(walkingSpeedIndex);
+		return result;
+	}
+	
+	@Override
+	public int getWalkingSpeedIndex()
+	{	return walkingSpeedIndex;
+	}
+	
+	@Override
+	public HashMap<Integer,Double> getWalkingSpeeds()
+	{	return walkingSpeeds;
+	}
+	
+	/**
+	 * Initialise les données relatives à la vitesse
+	 * de déplacement de ce personnage.
+	 */
+	private void initSpeed()
+	{	walkingSpeedIndex = 1;
+		walkingSpeeds = new HashMap<Integer, Double>();
+		Sprite sprite = getSprite();
+		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
+		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
+		walkingSpeeds.put(1, basicSpeed);
+		for(int speedIndex=-1000;speedIndex<1000;speedIndex++)
+		{	String name = StateAbilityName.getHeroWalkSpeed(speedIndex);
+			if(name!=null)
+			{	StateAbility ability = sprite.modulateStateAbility(name);
+				if(ability.isActive())
+				{	double speedCoeff = ability.getStrength();
+					double walkingSpeed = speedCoeff*basicSpeed;
+					walkingSpeeds.put(speedIndex, walkingSpeed);
+				}
+			}
+		}
 	}
 	
 	@Override
 	protected void updateSpeed()
-	{	// current speed
+	{	// update current speed
 		super.updateSpeed();
 		
-		// walking speed (in general)
+		// update current walking speed index
 		Sprite sprite = getSprite();
-		double speedCoeff = sprite.getGroundSpeedCoeff()[0];
-		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
-		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
-		walkingSpeed = speedCoeff*basicSpeed;
-//if(walkingSpeed==0)
-//	System.out.print("");
-		//System.out.println(getSprite().getColor()+": walkingSpeed="+walkingSpeed);
+		walkingSpeedIndex = (int)sprite.getGroundSpeedCoeff()[1];
 	}
 
 	/////////////////////////////////////////////////////////////////

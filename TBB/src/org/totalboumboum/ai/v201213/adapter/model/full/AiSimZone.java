@@ -1319,7 +1319,9 @@ public final class AiSimZone extends AiZone
 		long burningDuration = 810; // dépend du sprite...
 		int bombCount = 0;
 		double currentSpeed = 0;
-		double walkingSpeed = 50*RoundVariables.zoomFactor;
+		int walkingSpeedIndex = 1;
+		HashMap<Integer,Double> walkingSpeeds = new HashMap<Integer, Double>();
+		walkingSpeeds.put(1,50*RoundVariables.zoomFactor);
 		boolean throughBlocks = false;
 		boolean throughBombs = false;
 		boolean throughFires = false;
@@ -1329,7 +1331,7 @@ public final class AiSimZone extends AiZone
 				state,burningDuration,currentSpeed,
 				bombPrototype,bombNumber,bombCount, 
 				throughBlocks,throughBombs,throughFires, 
-				color,walkingSpeed);
+				color,walkingSpeedIndex,walkingSpeeds);
 		
 		// update zone
 		if(tile!=null)

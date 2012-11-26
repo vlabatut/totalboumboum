@@ -130,14 +130,24 @@ public enum AiItemType
 			result = NO_SPEED;
 		else if(name.equalsIgnoreCase("antispeed"))
 			result = ANTI_SPEED;
-		else if(name.equalsIgnoreCase("extraspeed"))
+		else if(name.equalsIgnoreCase("extraspeed")
+				|| name.equalsIgnoreCase("speed"))
 			result = EXTRA_SPEED;
-		else if(name.equalsIgnoreCase("goldenspeed"))
+		else if(name.equalsIgnoreCase("goldenspeed")
+				|| name.equalsIgnoreCase("superspeed"))
 			result = GOLDEN_SPEED;
-		
-		// autres
-		else if(name.equalsIgnoreCase("malus") || name.equalsIgnoreCase("disease"))
+
+		// aléatoires
+		else if(name.equalsIgnoreCase("malus") 
+				|| name.equalsIgnoreCase("disease")
+				|| name.equalsIgnoreCase("randomnone"))
 			result = RANDOM_NONE;
+		else if(name.equalsIgnoreCase("question")
+				|| name.equalsIgnoreCase("random")
+				|| name.equalsIgnoreCase("randomextra"))
+			result = RANDOM_EXTRA;
+
+		// autres
 		else if(name.equalsIgnoreCase("punch"))
 			result = PUNCH;
 		else

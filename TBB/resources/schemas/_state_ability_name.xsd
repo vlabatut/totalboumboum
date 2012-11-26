@@ -74,6 +74,7 @@
 				<xsd:enumeration value="HERO_WALK_SPEED_M7" />
 				<xsd:enumeration value="HERO_WALK_SPEED_M8" />
 				<xsd:enumeration value="HERO_WALK_SPEED_M9" />
+				<xsd:enumeration value="HERO_WALK_SPEED_M99" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P1" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P2" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P3" />
