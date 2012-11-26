@@ -49,7 +49,7 @@
 			<xsd:enumeration value="BOMB_TRIGGER_TIMER" />
 			
 			<xsd:enumeration value="HERO_BOMB_DIARRHEA" />
-			<xsd:enumeration value="HERO_BOMB_CONSTIPATION" />
+<!--			<xsd:enumeration value="HERO_BOMB_CONSTIPATION" /> -->
 			<xsd:enumeration value="HERO_BOMB_DROP_LATENCY" />
 			<xsd:enumeration value="HERO_BOMB_NUMBER" />
 				<xsd:enumeration value="HERO_BOMB_NUMBER_MAX" />
