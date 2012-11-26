@@ -171,7 +171,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="10">
-				<item name="randombonus" />
+				<item name="randomextra" />
 			</tile>
 			<tile pos="11">
 				<block group="hardwalls" name="regular" />
