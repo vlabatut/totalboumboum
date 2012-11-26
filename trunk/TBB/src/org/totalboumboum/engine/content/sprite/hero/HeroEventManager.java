@@ -277,26 +277,22 @@ public class HeroEventManager extends EventManager
 				double currentTime = RoundVariables.loop.getTotalGameTime();
 				double elapsedTime = currentTime - lastDropTime;
 				if(elapsedTime>ablt.getStrength())
-				{	ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_CONSTIPATION);
-//System.out.println("constipation ("+sprite.getCurrentPosX()+"): "+ablt.isActive());		
-					if(!ablt.isActive())
-					{	Bomb bomb = sprite.makeBomb();
-						SpecificDrop action = new SpecificDrop(sprite,bomb);
-						ActionAbility ability = sprite.modulateAction(action);
+				{	Bomb bomb = sprite.makeBomb();
+					SpecificDrop action = new SpecificDrop(sprite,bomb);
+					ActionAbility ability = sprite.modulateAction(action);
 //System.out.println("drop ("+sprite.getCurrentPosX()+"): "+ablt.isActive());
 //if(!ablt.isActive())
 //	System.out.println();
-						if(ability.isActive())
-						{	lastDropTime = currentTime;
-							sprite.dropBomb(action);
-							if(gesture.equals(GestureName.WAITING))
-							{	setWaitDelay();
-								gesture = GestureName.STANDING;
-								sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
-							}
-							else if(gesture.equals(GestureName.STANDING))
-								setWaitDelay();
+					if(ability.isActive())
+					{	lastDropTime = currentTime;
+						sprite.dropBomb(action);
+						if(gesture.equals(GestureName.WAITING))
+						{	setWaitDelay();
+							gesture = GestureName.STANDING;
+							sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
 						}
+						else if(gesture.equals(GestureName.STANDING))
+							setWaitDelay();
 					}
 				}
 			}

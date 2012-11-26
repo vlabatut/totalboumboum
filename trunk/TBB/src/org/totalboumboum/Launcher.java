@@ -1574,7 +1574,6 @@ public class Launcher
 	 * TODO envisager aussi les mort-subites de type bombe, voire bonus
 	 * 
 	 * TODO mort subite
-	 * - màj doc sur xml : définition de la mort subite
 	 * 
 	 * - à tester :
 	 * 
@@ -1582,14 +1581,10 @@ public class Launcher
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :
-	 * 		- pr constip/extinction, on devrait pas avoir à utiliser des ability spéciales :
-	 * 	      des valeurs négatives devraient, normalement suffire
 	 * 		- full model (AiFullModel.pickItem):
 	 * 			- gérer les changement de vitesse d'un joueur (aussi dans AiSimHero.updateWalkingSpeed)
 	 * 			- gérer l'aspect temporel de certains malus
 	 * 			- gérer aussi leur aspect contagieux
-	 * 		- ressources
-	 * 			- màj les noms des items: no-xxxx, anti-xxxx, extra-xxxx, golden-xxxx
 	 * 
 	 * 
 	 * en cours:
