@@ -462,7 +462,7 @@
 			</tile>
 			<tile pos="7">
 				<floor name="04_07" />
-				<item name="speed" />
+				<item name="extraspeed" />
 			</tile>
 			<tile pos="8">
 				<floor name="04_08" />

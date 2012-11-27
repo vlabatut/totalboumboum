@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-<!-- 
+	<!--
 	Total Boum Boum
-	Copyright 2008-2012 Vincent Labatut 
+	Copyright 2008-2012 Vincent Labatut
 	
 	This file is part of Total Boum Boum.
 	
@@ -17,22 +17,22 @@
 	GNU General Public License for more details.
 	
 	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
 	<tournament name="Tournoi de Galatasaray III" type="CUP" />
 	<played matches="0" rounds="0" />
-	<dates start="2011-11-11T16:35:56" save="2011-11-11T16:36:12" />
+	<dates start="2012-11-27T11:30:42" save="2012-11-27T11:30:50" />
 	<players>
 		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="0910.Mançuhan+Pınarer" />
 		<player name="0910.Enhoş+Karapazar" />
+		<player name="0910.Dereli+Geçkalan" />
 		<player name="0910.Aldanmaz+Yenigün" />
+		<player name="0910.Çalışır+Güner" />
+		<player name="0910.Fındık+Şırın" />
+		<player name="0910.Adatape+Özbek" />
 		<player name="0910.Demirci+Düzok+Ergök" />
 		<player name="0910.Dane+Şatır" />
-		<player name="0910.Adatape+Özbek" />
-		<player name="0910.Dereli+Geçkalan" />
-		<player name="0910.Fındık+Şırın" />
-		<player name="0910.Çalışır+Güner" />
+		<player name="0910.Mançuhan+Pınarer" />
 		<player name="0910.Bektaş+Mazilyah" />
 		<player name="0910.Aksoy+Tangay" />
 	</players>

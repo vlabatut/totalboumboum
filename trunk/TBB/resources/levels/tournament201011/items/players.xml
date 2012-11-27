@@ -60,7 +60,7 @@
 	</locations>
 	<items>
 		<item name="extrabomb" number="1" />
-		<item name="speed" number="1" />
+		<item name="extraspeed" number="1" />
 		<item name="extraflame" number="1" />
 	</items>
 </players>
