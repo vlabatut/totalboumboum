@@ -89,6 +89,15 @@
 		</direction>
 	</gesture>
 
+	<gesture name="FALLING" repeat="false" >
+		<direction name="NONE">
+			<steps>
+				<step duration="0" zShift="500" />
+				<step duration="480" zShift="-496" />
+			</steps>
+		</direction>
+	</gesture>
+	
 	<gesture name="PUNCHED" repeat="false" >
 		<direction name="DOWN">
 			<forcePosition time="40" xPosition="0" yPosition="8"/>
