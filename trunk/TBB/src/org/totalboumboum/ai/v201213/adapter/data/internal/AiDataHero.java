@@ -174,8 +174,16 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	
 	@Override
 	public double getWalkingSpeed()
-	{	double result = walkingSpeeds.get(walkingSpeedIndex);
-//TODO à compléter comme dans Sprite	
+	{	Double result = null;
+		int index = walkingSpeedIndex;
+		int delta = -(int)Math.signum(index);
+		do
+		{	result = walkingSpeeds.get(index);
+			if(result==null)
+				index = index + delta;
+		}
+		while(index!=0 && result==null);
+		
 		return result;
 	}
 	
@@ -194,12 +202,12 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	 * de déplacement de ce personnage.
 	 */
 	private void initSpeed()
-	{	walkingSpeedIndex = 1;
+	{	walkingSpeedIndex = 0;
 		walkingSpeeds = new HashMap<Integer, Double>();
 		Sprite sprite = getSprite();
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
-		walkingSpeeds.put(1, basicSpeed);
+		walkingSpeeds.put(walkingSpeedIndex, basicSpeed);
 		for(int speedIndex=-1000;speedIndex<1000;speedIndex++)
 		{	String name = StateAbilityName.getHeroWalkSpeed(speedIndex);
 			if(name!=null)

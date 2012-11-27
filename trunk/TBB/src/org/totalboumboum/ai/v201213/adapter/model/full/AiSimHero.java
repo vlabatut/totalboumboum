@@ -226,7 +226,16 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	
 	@Override
 	public double getWalkingSpeed()
-	{	double result = walkingSpeeds.get(walkingSpeedIndex);
+	{	Double result = null;
+		int index = walkingSpeedIndex;
+		int delta = -(int)Math.signum(index);
+		do
+		{	result = walkingSpeeds.get(index);
+			if(result==null)
+				index = index + delta;
+		}
+		while(index!=0 && result==null);
+		
 		return result;
 	}
 	
