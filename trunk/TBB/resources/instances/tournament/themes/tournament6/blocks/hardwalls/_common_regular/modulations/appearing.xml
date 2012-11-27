@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../../../schemas/gesture_modulations.xsd" >
+		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/gesture_modulations.xsd" >
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
