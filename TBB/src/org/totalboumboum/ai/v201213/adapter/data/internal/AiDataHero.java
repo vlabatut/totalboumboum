@@ -175,6 +175,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	@Override
 	public double getWalkingSpeed()
 	{	double result = walkingSpeeds.get(walkingSpeedIndex);
+//TODO à compléter comme dans Sprite	
 		return result;
 	}
 	
@@ -210,6 +211,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 				}
 			}
 		}
+//		System.out.print("done");
 	}
 	
 	@Override

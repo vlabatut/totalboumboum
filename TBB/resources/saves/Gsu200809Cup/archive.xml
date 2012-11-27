@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-<!-- 
+	<!--
 	Total Boum Boum
-	Copyright 2008-2012 Vincent Labatut 
+	Copyright 2008-2012 Vincent Labatut
 	
 	This file is part of Total Boum Boum.
 	
@@ -17,27 +17,25 @@
 	GNU General Public License for more details.
 	
 	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
 	<tournament name="Tournoi de Galatasaray II" type="CUP" />
 	<played matches="0" rounds="0" />
-	<dates start="2011-11-11T16:33:40" save="2011-11-11T16:33:59" />
+	<dates start="2012-11-27T11:25:30" save="2012-11-27T11:25:41" />
 	<players>
 		<player name="0809.Altay+Basaranoğlu" />
-		<player name="0809.Çöremen+Küçükkarakürt" />
-		<player name="0809.Akkaya+Danacioğlu" />
-		<player name="0809.Medeni+Uluer" />
-		<player name="0809.Erişik+Pektaş" />
 		<player name="0809.Dayioğlugil+Geçkalan" />
-		<player name="0809.Adatepe" />
+		<player name="0809.Çöremen+Küçükkarakürt" />
 		<player name="0809.Demirağ+Şagar" />
-		<player name="0809.Devecioğlu+Korkmaz" />
-		<player name="0809.Tırtıl+Tomruk" />
-		<player name="0809.Akpolat+Şener" />
-		<player name="0809.Çalışkan+Cap+Doğaner" />
+		<player name="0809.Erişik+Pektaş" />
 		<player name="0809.Günalp+Yürtsever" />
+		<player name="0809.Akpolat+Şener" />
+		<player name="0809.Devecioğlu+Korkmaz" />
 		<player name="0809.Bilgin+Karabağ" />
 		<player name="0809.Kökciyan+Mazmanoğlu" />
+		<player name="0809.Tırtıl+Tomruk" />
+		<player name="0809.Akkaya+Danacioğlu" />
+		<player name="0809.Medeni+Uluer" />
 	</players>
 </archive>
 

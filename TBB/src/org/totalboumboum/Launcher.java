@@ -1466,8 +1466,8 @@ public class Launcher
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonReplay
 	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
 	 * 			  org.totalboumboum.gui.game.tournament.TournamentMenu.buttonRecord
-	 * 			  org.totalboumboum.gui.game.tournament.MatchMenu.buttonRecord
-	 * 			  org.totalboumboum.gui.game.tournament.RoundMenu.buttonRecord
+	 * 			  org.totalboumboum.gui.game.match.MatchMenu.buttonRecord
+	 *			  org.totalboumboum.gui.game.round.RoundMenu.buttonRecord
 	 * 			- bloquer l'action dans les options avancées
 	 * 			  org.totalboumboum.gui.menus.options.advanced.AdvancedData ligne 'case LINE_RECORD_GAMES'
 	 * 		- options :
@@ -1560,6 +1560,7 @@ public class Launcher
 	
 	/**
 	 * TODO certains menus modaux sont toujours très lents
+	 * TODO la modification de profil prend deux plombes
 	 * 
 	 * TODO ajout des menus modaux manquant
 	 * 
@@ -1573,6 +1574,8 @@ public class Launcher
 	 * TODO revoir les niveaux du tournoi pour lesquels y a pas (encore) de mort subite
 	 * 
 	 * TODO envisager aussi les mort-subites de type bombe, voire bonus (nouveaux niveaux ?)
+	 * 
+	 * TODO adapter le temps des nivaux, certains méritent 2 minutes
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :
