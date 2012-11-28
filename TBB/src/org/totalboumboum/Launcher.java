@@ -1562,7 +1562,7 @@ public class Launcher
 	 * TODO certains menus modaux sont toujours très lents
 	 * TODO la modification de profil prend deux plombes
 	 * 
-	 * TODO ajout des menus modaux manquant
+	 * TODO ajout des menus modaux manquants
 	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
@@ -1582,6 +1582,8 @@ public class Launcher
 	 * 		- full model (AiFullModel.pickItem):
 	 * 			- gérer l'aspect temporel de certains malus ?
 	 * 			- gérer aussi leur aspect contagieux ?
-	 * 				>> besoin de savoir si contagieux, dans AiHero
+	 * 		- besoin de savoir si contagieux, dans AiHero
+	 * 			- rajouter une méthode dans AIHero
+	 * 			- créer la methode getTIme ou duration + iscontagious dans AiItem
 	 */
 }
