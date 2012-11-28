@@ -29,8 +29,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -50,36 +52,62 @@ public class TextContentPanel extends ContentPanel
 	{	super(width, height);
 //		setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		
-		// text pane
-		textPane = new JTextPane()
-		{	private static final long serialVersionUID = 1L; 
+		// for some reason, using a JTextPane is very slow
+		// (at least for the first call). couldn't find why.
+		if(useJTextPane)
+		{	JTextPane pane = new JTextPane()
+			{	private static final long serialVersionUID = 1L; 
+		
+				public void paintComponent(Graphics g)
+			    {	Graphics2D g2 = (Graphics2D) g;
+		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+		        	super.paintComponent(g2);
+			    }			
+			};
+			pane.setEditable(false);
+			pane.setHighlighter(null);
+			pane.setOpaque(false);
+			pane.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+			// text components
+			doc = pane.getStyledDocument();
+			sa = new SimpleAttributeSet();
+			// alignment
+			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
+			// font size
+			setFontSize(fontSize);
+			// color
+			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+			StyleConstants.setForeground(sa,fg);
+			// set
+//			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
+			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
+			textPane = pane;
+		}
+		// much faster when using a JTextArea instead of the JTextPane
+		else
+		{	JTextArea textArea = new JTextArea()
+			{	private static final long serialVersionUID = 1L;
+				public void paintComponent(Graphics g)
+			    {	Graphics2D g2 = (Graphics2D) g;
+		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+		        	super.paintComponent(g2);
+			    }			
+			};
+			textArea.setEditable(false);
+			textArea.setHighlighter(null);
+			textArea.setOpaque(true);
+			textArea.setLineWrap(true);
+			textArea.setWrapStyleWord(true);
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+			textArea.setFont(font);
+			textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+			textPane = textArea;
+		}
 	
-			public void paintComponent(Graphics g)
-		    {	Graphics2D g2 = (Graphics2D) g;
-	        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-	        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-	        	super.paintComponent(g2);
-		    }			
-		};
-		textPane.setEditable(false);
-		textPane.setHighlighter(null);
-		textPane.setOpaque(false);
-		textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		// text components
-		doc = textPane.getStyledDocument();
-		sa = new SimpleAttributeSet();
-		// alignment
-		StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
-		// font size
-		setFontSize(fontSize);
-		// color
-		Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-		StyleConstants.setForeground(sa,fg);
-		// set
-//		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
-		doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
-		
 		add(textPane);
 		setDim(width,height);
 	}
@@ -94,18 +122,23 @@ public class TextContentPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	private JTextPane textPane;
+	private boolean useJTextPane = false;
+	private JTextComponent textPane;
 	private StyledDocument doc;
 	private SimpleAttributeSet sa;
 
 	public void setText(String text)
-	{	// set text
-		try
-		{	doc.remove(0,doc.getLength());
-			doc.insertString(0,text,sa);
+	{	if(useJTextPane)
+		{	try
+			{	doc.remove(0,doc.getLength());
+				doc.insertString(0,text,sa);
+			}
+			catch (BadLocationException e)
+			{	e.printStackTrace();
+			}
 		}
-		catch (BadLocationException e)
-		{	e.printStackTrace();
+		else
+		{	textPane.setText(text);
 		}
 	}
 
@@ -127,10 +160,16 @@ public class TextContentPanel extends ContentPanel
 
 	public void setFontSize(float fontSize)
 	{	this.fontSize = fontSize;
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		StyleConstants.setFontFamily(sa,font.getFamily());
-		StyleConstants.setFontSize(sa,font.getSize());
-		doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
+		if(useJTextPane)
+		{	Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+			StyleConstants.setFontFamily(sa,font.getFamily());
+			StyleConstants.setFontSize(sa,font.getSize());
+			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
+		}
+		else
+		{	Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+			textPane.setFont(font);
+		}
 	}
 	
 	public float getFontSize()

@@ -36,11 +36,13 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -140,38 +142,68 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				}				
 				namePanel.add(Box.createGlue());
 				// text pane
-				{	textPane = new JTextPane()
-					{	private static final long serialVersionUID = 1L;
-						public void paintComponent(Graphics g)
-					    {	Graphics2D g2 = (Graphics2D) g;
-				        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-				        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-				        	super.paintComponent(g2);
-					    }			
-					};
-					textPane.setEditable(true);
-					textPane.setOpaque(true);
+				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+					if(useJTextPane)
+					{	JTextPane pane = new JTextPane()
+						{	private static final long serialVersionUID = 1L;
+							public void paintComponent(Graphics g)
+						    {	Graphics2D g2 = (Graphics2D) g;
+					        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+					        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+					        	super.paintComponent(g2);
+						    }			
+						};
+						pane.setEditable(true);
+						pane.setOpaque(true);
+						pane.setAlignmentX(Component.CENTER_ALIGNMENT);
+						sa = new SimpleAttributeSet();
+						StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER/*JUSTIFIED*/);
+						Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
+						StyleConstants.setFontFamily(sa,font.getFamily());
+						StyleConstants.setFontSize(sa,font.getSize());
+						StyleConstants.setForeground(sa,fg);
+						StyledDocument docu = pane.getStyledDocument();
+						docu.setParagraphAttributes(0,docu.getLength()+1,sa,true);
+						docu.addDocumentListener(this);
+						namePanel.add(pane);
+						textPane = pane;
+						doc = docu;
+					}
+					// much faster when using a JTextArea instead of the JTextPane
+					else
+					{	JTextArea textArea = new JTextArea()
+						{	private static final long serialVersionUID = 1L;
+							public void paintComponent(Graphics g)
+						    {	Graphics2D g2 = (Graphics2D) g;
+					        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+					        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+					        	super.paintComponent(g2);
+						    }			
+						};
+						textArea.setEditable(true);
+						textArea.setOpaque(true);
+						textArea.setLineWrap(true);
+						textArea.setWrapStyleWord(true);
+						Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
+						textArea.setFont(font);
+						textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+						textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+						doc = textArea.getDocument();
+						doc.addDocumentListener(this);
+						namePanel.add(textArea);
+						textPane = textArea;
+					}
+					
 					int nameWidth = lineWidth - nameHeight - GuiTools.subPanelMargin;
 					Dimension dim = new Dimension(nameWidth,nameHeight);
 					textPane.setPreferredSize(dim);
 					textPane.setMinimumSize(dim);
 					textPane.setMaximumSize(dim);
-					textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					textPane.setBackground(bg);
-					Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 					textPane.setForeground(fg);
-					sa = new SimpleAttributeSet();
-					StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER/*JUSTIFIED*/);
-					Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
-					StyleConstants.setFontFamily(sa,font.getFamily());
-					StyleConstants.setFontSize(sa,font.getSize());
-					StyleConstants.setForeground(sa,fg);
-					doc = textPane.getStyledDocument();
-					doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
-					doc.addDocumentListener(this);
-					namePanel.add(textPane);
 				}
+				
 				namePanel.add(Box.createGlue());
 				contentPanel.add(namePanel);
 			}
@@ -465,13 +497,21 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	{	// name
 		String text = profile.getName();
 		String tooltip = text;
-		try
-		{	doc.remove(0,doc.getLength());
-			doc.insertString(0,text,sa);
-			doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
+		
+		if(useJTextPane)
+		{	try
+			{	StyledDocument docu = (StyledDocument)doc;
+				docu.remove(0,docu.getLength());
+				docu.insertString(0,text,sa);
+				docu.setParagraphAttributes(0,docu.getLength()+1,sa,true);
+			}
+			catch (BadLocationException e)
+			{	e.printStackTrace();
+			}
 		}
-		catch (BadLocationException e)
-		{	e.printStackTrace();
+		else
+		{
+			textPane.setText(text);
 		}
 		textPane.setToolTipText(tooltip);		
 	}
@@ -515,8 +555,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	/////////////////////////////////////////////////////////////////
 	// DOCUMENT LISTENER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private JTextPane textPane;
-	private StyledDocument doc;
+	private boolean useJTextPane = false;
+	private JTextComponent textPane;
+	private Document doc;
 	private SimpleAttributeSet sa;
 
 	@Override
