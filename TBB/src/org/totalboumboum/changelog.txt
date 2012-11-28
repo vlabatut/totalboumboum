@@ -509,7 +509,7 @@
 	- GUI :
 		- nouvelle option permettant d'activer/désactiver la mort subite sur une partie rapide
 		- résolution du bug qui rendait l'apparition de menus modaux très lente
-		- TODO certains menus modaux sont toujours très lents
+		- correction de certains menus modaux, toujours très lents
 		- TODO ajout des menus modaux manquant
 	- ressources : 
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)

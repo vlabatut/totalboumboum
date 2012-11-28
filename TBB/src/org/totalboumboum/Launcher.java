@@ -1559,9 +1559,6 @@ public class Launcher
 	
 	
 	/**
-	 * TODO certains menus modaux sont toujours très lents
-	 * TODO la modification de profil prend deux plombes
-	 * 
 	 * TODO ajout des menus modaux manquants
 	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite

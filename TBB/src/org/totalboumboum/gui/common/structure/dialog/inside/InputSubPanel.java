@@ -39,6 +39,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -54,7 +55,8 @@ import org.totalboumboum.gui.tools.GuiTools;
  *
  */
 public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
 	public InputSubPanel(int width, int height, String key, List<String> text, String defaultText)
 	{	super(width,height);
@@ -69,7 +71,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	private MyLabel buttonConfirm;
 	private MyLabel buttonCancel;
-	private JTextArea inputPane;
+	private JTextComponent inputPane;
 	
 	public void setContent(List<String> text, String defaultText)
 	{	// sizes
@@ -83,8 +85,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 		}
 		
 		// message
-		{	// note: a JTextPane was used before, but it was taking ages to appear (the first time)
-			JPanel textPanel = new JPanel();
+		{	JPanel textPanel = new JPanel();
 			textPanel.setOpaque(false);
 			Dimension dim = new Dimension(getDataWidth(),textHeight);
 			textPanel.setPreferredSize(dim);
@@ -94,63 +95,162 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			textPanel.setLayout(layout);
 			getDataPanel().add(textPanel);
 			
-			JTextArea textArea = new JTextArea()
-			{	private static final long serialVersionUID = 1L;
-				public void paintComponent(Graphics g)
-			    {	Graphics2D g2 = (Graphics2D) g;
-		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-		        	super.paintComponent(g2);
-			    }			
-			};
-			textArea.setEditable(false);
-			textArea.setHighlighter(null);
-			textArea.setOpaque(true);
-			textArea.setLineWrap(true);
-			textArea.setWrapStyleWord(true);
-			textArea.setFont(font);
-			textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
-			for(String txt: text)
-				textArea.append(txt+"\n");
-			textPanel.add(textArea);
+			boolean useJTextPanel = false;
+			// for some reason, using a JTextPane is very slow
+			// (at least for the first call). couldn't find why.
+			if(useJTextPanel)
+			{	JTextPane textPane = new JTextPane()
+				{	private static final long serialVersionUID = 1L;
+					public void paintComponent(Graphics g)
+				    {	Graphics2D g2 = (Graphics2D) g;
+			        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+			        	super.paintComponent(g2);
+				    }			
+				};
+				textPane.setEditable(false);
+				textPane.setHighlighter(null);
+				textPane.setOpaque(true);
+				textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		
+				// styles
+				StyledDocument doc = textPane.getStyledDocument();
+				SimpleAttributeSet sa = new SimpleAttributeSet();
+				// alignment
+				StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
+				// font size
+				StyleConstants.setFontFamily(sa,font.getFamily());
+				StyleConstants.setFontSize(sa,font.getSize());
+				doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+				// color
+				Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				StyleConstants.setForeground(sa,fg);
+				// set style
+				doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+				// text
+				try
+				{	doc.remove(0,doc.getLength());
+					for(String txt: text)
+						doc.insertString(doc.getLength(),txt+"\n",sa);
+				}
+				catch (BadLocationException e)
+				{	e.printStackTrace();
+				}
+				doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
+				textPanel.add(textPane);
+			}
+			// much faster when using a JTextArea instead of the JTextPane
+			else
+			{	JTextArea textArea = new JTextArea()
+				{	private static final long serialVersionUID = 1L;
+					public void paintComponent(Graphics g)
+				    {	Graphics2D g2 = (Graphics2D) g;
+			        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+			        	super.paintComponent(g2);
+				    }			
+				};
+				textArea.setEditable(false);
+				textArea.setHighlighter(null);
+				textArea.setOpaque(true);
+				textArea.setLineWrap(true);
+				textArea.setWrapStyleWord(true);
+				textArea.setFont(font);
+				textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				for(String txt: text)
+					textArea.append(txt+"\n");
+				textPanel.add(textArea);
+			}
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 
 		// text field
-		{	// note: a JTextPane was used before, but it was taking ages to appear (the first time)
-			inputPane = new JTextArea()
-			{	private static final long serialVersionUID = 1L;
-				public void paintComponent(Graphics g)
-			    {	Graphics2D g2 = (Graphics2D) g;
-		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-		        	super.paintComponent(g2);
-			    }			
-			};
-			inputPane.setEditable(true);
-			inputPane.setOpaque(true);
-			inputPane.setLineWrap(true);
-			inputPane.setWrapStyleWord(true);
-			inputPane.setFont(font);
-			inputPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			inputPane.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
-			Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
-			inputPane.setPreferredSize(dim);
-			inputPane.setMinimumSize(dim);
-			inputPane.setMaximumSize(dim);
-			inputPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-			inputPane.append(defaultText);
-			getDataPanel().add(inputPane);
-			inputPane.selectAll();
-			inputPane.getCaret().setSelectionVisible(true);
-			// request focus to be directly on the text field
-			SwingUtilities.invokeLater(new Runnable()
-			{	public void run()
-				{	inputPane.requestFocusInWindow();
+		{	boolean useJTextPanel = false;
+			// for some reason, using a JTextPane is very slow
+			// (at least for the first call). couldn't find why.
+			if(useJTextPanel)
+			{	final JTextPane pane = new JTextPane()
+				{	private static final long serialVersionUID = 1L;
+					public void paintComponent(Graphics g)
+				    {	Graphics2D g2 = (Graphics2D) g;
+			        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+			        	super.paintComponent(g2);
+				    }			
+				};
+				pane.setEditable(true);
+				pane.setOpaque(true);
+				Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
+				pane.setPreferredSize(dim);
+				pane.setMinimumSize(dim);
+				pane.setMaximumSize(dim);
+				pane.setAlignmentX(Component.CENTER_ALIGNMENT);
+				Color bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+				pane.setBackground(bg);
+				Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				pane.setForeground(fg);
+				SimpleAttributeSet sa = new SimpleAttributeSet();
+				StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
+				StyleConstants.setFontFamily(sa,font.getFamily());
+				StyleConstants.setFontSize(sa,font.getSize());
+				StyleConstants.setForeground(sa,fg);
+				StyledDocument doc = pane.getStyledDocument();
+				doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
+				try
+				{	doc.remove(0,doc.getLength());
+					doc.insertString(doc.getLength(),defaultText,sa);
 				}
-			});
+				catch (BadLocationException e)
+				{	e.printStackTrace();
+				}
+				getDataPanel().add(pane);
+				pane.selectAll();
+				pane.getCaret().setSelectionVisible(true);
+				// request focus to be directly on the text field
+				SwingUtilities.invokeLater(new Runnable()
+				{	public void run()
+					{	pane.requestFocusInWindow();
+					}
+				});				
+				inputPane = pane;
+			}
+			// much faster when using a JTextArea instead of the JTextPane
+			else
+			{	final JTextArea pane = new JTextArea()
+				{	private static final long serialVersionUID = 1L;
+					public void paintComponent(Graphics g)
+				    {	Graphics2D g2 = (Graphics2D) g;
+			        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+			        	super.paintComponent(g2);
+				    }			
+				};
+				pane.setEditable(true);
+				pane.setOpaque(true);
+				pane.setLineWrap(true);
+				pane.setWrapStyleWord(true);
+				pane.setFont(font);
+				pane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				pane.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
+				pane.setPreferredSize(dim);
+				pane.setMinimumSize(dim);
+				pane.setMaximumSize(dim);
+				pane.setAlignmentX(Component.CENTER_ALIGNMENT);
+				pane.append(defaultText);
+				getDataPanel().add(pane);
+				pane.selectAll();
+				pane.getCaret().setSelectionVisible(true);
+				// request focus to be directly on the text field
+				SwingUtilities.invokeLater(new Runnable()
+				{	public void run()
+					{	pane.requestFocusInWindow();
+					}
+				});
+				inputPane = pane;
+			}
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));

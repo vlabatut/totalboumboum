@@ -81,8 +81,7 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 		}
 		
 		// message
-		{	// note: a JTextPane was used before, but it was taking ages to appear (the first time)
-			JPanel textPanel = new JPanel();
+		{	JPanel textPanel = new JPanel();
 			textPanel.setOpaque(false);
 			Dimension dim = new Dimension(getDataWidth(),textHeight);
 			textPanel.setPreferredSize(dim);
@@ -91,27 +90,75 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 			BoxLayout layout = new BoxLayout(textPanel,BoxLayout.PAGE_AXIS);
 			textPanel.setLayout(layout);
 			getDataPanel().add(textPanel);
-			
-			JTextArea textArea = new JTextArea()
-			{	private static final long serialVersionUID = 1L;
-				public void paintComponent(Graphics g)
-			    {	Graphics2D g2 = (Graphics2D) g;
-		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-		        	super.paintComponent(g2);
-			    }			
-			};
-			textArea.setEditable(false);
-			textArea.setHighlighter(null);
-			textArea.setOpaque(true);
-			textArea.setLineWrap(true);
-			textArea.setWrapStyleWord(true);
-			textArea.setFont(font);
-			textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
-			for(String txt: text)
-				textArea.append(txt+"\n");
-			textPanel.add(textArea);
+				
+			boolean useJTextPane = false;
+			// for some reason, using a JTextPane is very slow
+			// (at least for the first call). couldn't find why.
+			if(useJTextPane)
+			{	JTextPane textPane = new JTextPane()
+				{	private static final long serialVersionUID = 1L;
+					public void paintComponent(Graphics g)
+				    {	Graphics2D g2 = (Graphics2D) g;
+			        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+			        	super.paintComponent(g2);
+				    }			
+				};
+				textPane.setEditable(false);
+				textPane.setHighlighter(null);
+				textPane.setOpaque(true);
+				textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		
+				// styles
+				StyledDocument doc = textPane.getStyledDocument();
+				SimpleAttributeSet sa = new SimpleAttributeSet();
+				// alignment
+				StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
+				// font size
+				StyleConstants.setFontFamily(sa,font.getFamily());
+				StyleConstants.setFontSize(sa,font.getSize());
+				doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+				// color
+				Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				StyleConstants.setForeground(sa,fg);
+				// set
+//				doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
+				doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+				// text
+				try
+				{	doc.remove(0,doc.getLength());
+					for(String txt: text)
+						doc.insertString(doc.getLength(),txt+"\n",sa);
+				}
+				catch (BadLocationException e)
+				{	e.printStackTrace();
+				}
+				textPanel.add(textPane);
+			}
+			// much faster when using a JTextArea instead of the JTextPane
+			else
+			{	
+				JTextArea textArea = new JTextArea()
+				{	private static final long serialVersionUID = 1L;
+					public void paintComponent(Graphics g)
+				    {	Graphics2D g2 = (Graphics2D) g;
+			        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+			        	super.paintComponent(g2);
+				    }			
+				};
+				textArea.setEditable(false);
+				textArea.setHighlighter(null);
+				textArea.setOpaque(true);
+				textArea.setLineWrap(true);
+				textArea.setWrapStyleWord(true);
+				textArea.setFont(font);
+				textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				for(String txt: text)
+					textArea.append(txt+"\n");
+				textPanel.add(textArea);
+			}
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
