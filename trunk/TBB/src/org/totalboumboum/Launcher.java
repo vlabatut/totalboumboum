@@ -1559,10 +1559,7 @@ public class Launcher
 	
 	
 	/**
-	 * TODO màj la version étudiante avec les correcs des menus
 	 * TODO site : mort subite (et autres ajouts ?)
-	 * 
-	 * TODO ajout des menus modaux manquants
 	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
