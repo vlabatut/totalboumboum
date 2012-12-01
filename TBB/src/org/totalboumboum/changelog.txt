@@ -519,7 +519,7 @@
 		- niveaux pour le tournoi VI (à compléter)
 	- API IA:
 		- quelques bugs corrigés
-		- initOthers dans ArtificialIntelligence
+		- méthode initOthers dans ArtificialIntelligence
 		- vérification de l'unicité des noms de cas pour un agent
 		- cache automatique pour le calcul de critères
 		- vérification de l'unicité des noms de critère pour un agent
