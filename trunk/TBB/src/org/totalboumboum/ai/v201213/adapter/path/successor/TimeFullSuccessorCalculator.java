@@ -425,8 +425,8 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 				// car on ne peut pas prédire quand elles vont exploser
 					&& bomb.hasCountdownTrigger())
 				{	//long bombDuration = Math.max(0,bomb.getNormalDuration()-bomb.getTime());
-if(delays.get(bomb)==null)
-	System.out.print("");
+//if(delays.get(bomb)==null)
+//	System.out.print("");
 					long duration = delays.get(bomb) + bomb.getExplosionDuration();
 					//long duration = delays.get(bomb);
 					if(duration<result)
