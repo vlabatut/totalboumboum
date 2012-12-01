@@ -495,8 +495,8 @@ System.out.println();
 				sprite.getTile().spreadEvent(e);
 			}				
 		}
-if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
-	System.out.println("AZDSOIPEPMJP");
+//if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
+//	System.out.println("AZDSOIPEPMJP");
 	
 		// updating the tile
 		updateTile();
