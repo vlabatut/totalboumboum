@@ -73,8 +73,8 @@ public class Fire extends Sprite
 	/////////////////////////////////////////////////////////////////	
 	public boolean consumeTile(Tile tile, boolean fake)
 	{	boolean result = false;
-if(!fake)
-	System.out.println();
+//if(!fake)
+//	System.out.println();
 		List<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();
 		while(i.hasNext())
