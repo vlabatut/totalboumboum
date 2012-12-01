@@ -510,7 +510,8 @@
 		- nouvelle option permettant d'activer/désactiver la mort subite sur une partie rapide
 		- résolution du bug qui rendait l'apparition de menus modaux très lente
 		- correction de certains menus modaux, toujours très lents
-		- TODO ajout des menus modaux manquant
+		- ajout des menus modaux manquant
+		- correction de problèmes de traduction dans la version anglaise
 	- ressources : 
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 		- morts subites dans les niveaux officiels de SBM1
