@@ -427,7 +427,7 @@
 			</group>
 
 			<group name="Delete">
-				<text name="Question" value="Êtes-vous sûr de vouloir supprimer ce profil ?" tooltip="Êtes-vous sûr de vouloir supprimer ce profil ?" />
+				<text name="Question" value="Êtes-vous sûr(e) de vouloir supprimer ce profil ?" tooltip="Êtes-vous sûr de vouloir supprimer ce profil ?" />
 				<text name="Title" value="Suppression de profil" tooltip="Suppression de profil" />
 			</group>
 
@@ -554,6 +554,10 @@
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer et revoir la manche sélectionnée" />
 					<text name="Delete" value="Supprimer" tooltip="Supprimer le fichier sélectionné" />
 				</group>
+				<group name="Delete">
+					<text name="Title" value="Supprimession de vidéo" tooltip="Supprimession de vidéo" />
+					<text name="Question" value="Êtes-vous sûr(e) de vouloir supprimer cette vidéo ?" tooltip="Êtes-vous sûr(e) de vouloir supprimer cette vidéo ?" />
+				</group>
 			</group>
 			<group name="Controls">
 				<group name="Button">
@@ -586,6 +590,10 @@
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au menu principal" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer et charger la partie sélectionnée" />
 					<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
+				</group>
+				<group name="Delete">
+					<text name="Title" value="Supprimession de partie" tooltip="Supprimession de partie" />
+					<text name="Question" value="Êtes-vous sûr(e) de vouloir supprimer cette partie ?" tooltip="Êtes-vous sûr(e) de vouloir supprimer cette partie ?" />
 				</group>
 			</group>
 			<group name="Players">
