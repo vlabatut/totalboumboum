@@ -1561,14 +1561,11 @@ public class Launcher
 	/**
 	 * TODO site : 
 	 * 		- mort subite (et autres ajouts ?)
-	 * 		- pb avec textpane
 	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
 	 * 		x rajouter la modif sur le throughwall des items
 	 * 		x adapter les traj des bombes
-	 * 
-	 * TODO programmer le shrink vertical, l'appliquer au niveau line
 	 * 
 	 * TODO revoir les niveaux du tournoi pour lesquels y a pas (encore) de mort subite
 	 * 
