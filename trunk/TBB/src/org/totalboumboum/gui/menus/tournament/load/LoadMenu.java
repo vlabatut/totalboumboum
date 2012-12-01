@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
@@ -34,10 +35,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
+import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
+import org.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.save.SaveData;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
@@ -52,7 +57,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class LoadMenu extends InnerMenuPanel implements DataPanelListener
+public class LoadMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public LoadMenu(SplitMenuPanel container, MenuPanel parent)
@@ -131,14 +136,12 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 		{	replaceWith(parent);
 	    }
 		if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE))
-		{	GameArchive selectedArchive = levelData.getSelectedGameArchive();
-			if(selectedArchive!=null)
-			{	String folder = selectedArchive.getFolder();
-				String path = baseFolder+File.separator+folder;
-				File file = new File(path);
-				FileTools.deleteDirectory(file);
-				levelData.refresh();			
-			}
+		{	String key = GuiKeys.MENU_TOURNAMENT_LOAD_DELETE_TITLE;
+			List<String> text = new ArrayList<String>();
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_TOURNAMENT_LOAD_DELETE_QUESTION));
+			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
+			questionModalDelete.addListener(this);
+			getFrame().setModalDialog(questionModalDelete);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM))
 		{	try
@@ -176,5 +179,29 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private QuestionModalDialogPanel questionModalDelete = null;
+	
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	getFrame().unsetModalDialog();
+		if(questionModalDelete!=null)
+		{	questionModalDelete.removeListener(this);
+			questionModalDelete = null;				
+			GameArchive selectedArchive = levelData.getSelectedGameArchive();
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	if(selectedArchive!=null)
+				{	String folder = selectedArchive.getFolder();
+					String path = baseFolder+File.separator+folder;
+					File file = new File(path);
+					FileTools.deleteDirectory(file);
+					levelData.refresh();			
+				}			
+			}
+		}
 	}
 }
