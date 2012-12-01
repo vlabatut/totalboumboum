@@ -54,7 +54,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalDialogPanelListener
+public class SaveMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public SaveMenu(SplitMenuPanel container, MenuPanel parent)
@@ -146,7 +146,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	    }
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_DELETE))
 		{	String key = GuiKeys.GAME_SAVE_DELETE_TITLE;
-		List<String> text = new ArrayList<String>();
+			List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_DELETE_QUESTION));
 			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionModalDelete.addListener(this);
@@ -154,7 +154,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	String key = GuiKeys.GAME_SAVE_CONFIRM_TITLE;
-		List<String> text = new ArrayList<String>();
+			List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_CONFIRM_QUESTION));
 			questionModalConfirm = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionModalConfirm.addListener(this);
