@@ -42,8 +42,8 @@ public class HollowStepImage extends AbstractStepImage implements Serializable
 	{	super(xShift,yShift);
 		this.fileName = imageFileName;
 		this.colorRulesMap = colorRulesMap;
-		if(colorRulesMap==null)
-			System.out.println();
+//		if(colorRulesMap==null)
+//			System.out.println();
 	}
 	
 	/////////////////////////////////////////////////////////////////
