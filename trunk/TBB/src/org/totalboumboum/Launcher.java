@@ -1559,7 +1559,9 @@ public class Launcher
 	
 	
 	/**
-	 * TODO site : mort subite (et autres ajouts ?)
+	 * TODO site : 
+	 * 		- mort subite (et autres ajouts ?)
+	 * 		- pb avec textpane
 	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
