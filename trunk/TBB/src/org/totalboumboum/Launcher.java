@@ -1565,12 +1565,13 @@ public class Launcher
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
 	 * 		x rajouter la modif sur le throughwall des items
-	 * 		x adapter les traj des bombes
+	 * 		x adapter les traj des bombes 
+	 * 
+	 * TODO coder la méthode pour une mort subite custom
+	 * 		l'utiliser pour générer la mort subite du niveau "line"
 	 * 
 	 * TODO revoir les niveaux du tournoi pour lesquels y a pas (encore) de mort subite
-	 * 
 	 * TODO envisager aussi les mort-subites de type bombe, voire bonus (nouveaux niveaux ?)
-	 * 
 	 * TODO adapter le temps des nivaux, certains méritent 2 minutes
 	 * 
 	 * TODO nouveaux items
