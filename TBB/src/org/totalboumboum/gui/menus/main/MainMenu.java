@@ -191,16 +191,7 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 			replaceWith(networkContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_ABOUT))
-		{	
-/*			
-			ArrayList<String> text = new ArrayList<String>();
-			text.add("blablablablab !");
-			text.add("blébléblébléb !");
-			InfoModalDialogPanel aboutPanel = new InfoModalDialogPanel(this,"Test","Ceci est un test",text);
-			aboutPanel.addListener(this);
-			getFrame().setModalDialog(aboutPanel);
-*/			
-			AboutModalDialogPanel aboutPanel = new AboutModalDialogPanel(this);
+		{	AboutModalDialogPanel aboutPanel = new AboutModalDialogPanel(this);
 			aboutPanel.addListener(this);
 			getFrame().setModalDialog(aboutPanel);
 	    }
