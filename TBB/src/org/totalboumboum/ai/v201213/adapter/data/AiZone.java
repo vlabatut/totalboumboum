@@ -533,6 +533,7 @@ public abstract class AiZone
 	 * renvoie le personnage de la couleur passée en paramètre,
 	 * ou null si aucun personnage de cette couleur existe ou si 
 	 * cette couleur est null.
+	 * <br/>
 	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés.
 	 *  
 	 * @param color 
