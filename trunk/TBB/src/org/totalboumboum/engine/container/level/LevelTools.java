@@ -53,8 +53,9 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
- * Set of tools (no GUI) allowing basic
- * editing of the zones.
+ * Set of tools (without any GUI) allowing basic
+ * editing of the zones. See the details in the
+ * methods Javadoc.
  * 
  * @author Vincent Labatut
  */
@@ -111,8 +112,8 @@ public class LevelTools
 		saveLevel(level);
 */
 		// open an existing level and add a sudden death spiral
-		String pack = "tournament201213";
-		String folder = "classic";
+		String pack = "tests";
+		String folder = "test2";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 		int thickness = 2;
@@ -123,7 +124,8 @@ public class LevelTools
 		long totalTime = 120000;
 		boolean crushHardwalls = false;
 		removeSuddenDeath(level);
-		addSpiralSuddenDeath(level, thickness, clockwise, 1, 2, startTime, endTime, relative, totalTime, crushHardwalls);
+//		addSpiralSuddenDeath(level, thickness, clockwise, 1, 2, startTime, endTime, relative, totalTime, crushHardwalls);
+		addLinearSuddenDeath(level, thickness, 2, true, 1, 13, startTime, endTime, relative, totalTime, crushHardwalls);
 //		addRandomFallingBombs(level, 20, new int[]{1,2,11,14}, 5000, 59500, 3000, relative, totalTime);
 		saveLevel(level);
 	}
@@ -894,7 +896,7 @@ public class LevelTools
 	 * is determined depending on the position of this starting point. The
 	 * time parameters allow determining when the events should occur.
 	 *  
-	 * TODO slide sudden death events when inserting/removing cols/rows
+	 * TODO Slide sudden death events when inserting/removing cols/rows
 	 * 
 	 * @param level
 	 * 		The level to be modified.
@@ -1073,6 +1075,155 @@ public class LevelTools
 		eTile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"shrink");
 		zone.addEvent(time, eTile);
 	}
+	
+	/**
+	 * Adds the appropriate sudden death events in order to progressively 
+	 * fill the level with strait lines. The user must specify the location
+	 * and number of lines, and if those should be vertical or horizontal.
+	 * The rest is deducted by symmetry. The time parameters allow determining 
+	 * when the events should occur.
+	 *  
+	 * TODO Slide sudden death events when inserting/removing cols/rows
+	 * 
+	 * @param level
+	 * 		The level to be modified.
+	 * @param thickness
+	 * 		Number of lines to be created. 
+	 * @param offset
+	 * 		Where the lines should start. For a vertical sudden death, then this represents
+	 * 		the column of the left first line. For a horizontal one, it is its row. 
+	 * @param vertical
+	 * 		Orientation of the lines: {@code true} for vertical, {@code false} for horizontal.
+	 * @param startPosition
+	 * 		Position of the the first tile to be crushed. For a vertical sudden death, this is the
+	 * 		row of the upper tiles composing the liens. For a horizontal one, it is their left column.
+	 * @param endPosition
+	 * 		Symmetrical to {@code startPosition}.
+	 * @param startTime
+	 * 		Starting time of the sudden death.
+	 * @param endTime
+	 * 		Ending time of the sudden death.
+	 * @param relative
+	 * 		Whether those times should be interpreted relatively to the actual game duration.
+	 * @param totalTime
+	 * 		Total duration to be used if no time limit exist when actually playing this level.
+	 * @param crushHardwalls
+	 * 		Whether hardwalls should be ignored, or crushed (mainly for esthetic reasons).
+	 */
+	protected static void addLinearSuddenDeath(HollowLevel level, int thickness, int offset, boolean vertical, int startPosition, int endPosition, long startTime, long endTime, boolean relative, long totalTime, boolean crushHardwalls)
+	{	// get level info
+		LevelInfo info = level.getLevelInfo();
+		int globalHeight = info.getGlobalHeight();
+		int globalWidth = info.getGlobalWidth();
+		Zone zone = level.getZone();
+		
+		// set general stuff
+		zone.setEventsDuration(totalTime);
+		zone.setEventsRelative(relative);
+
+		// set positions
+		if(startPosition>endPosition)
+		{	int temp = startPosition;
+			startPosition = endPosition;
+			endPosition = temp;
+		}
+		
+		// count the number of events
+		int eventCount = 0;
+		int gap;
+		if(vertical)
+			gap = globalWidth - 1 - offset - offset;
+		else
+			gap = globalHeight - 1 - offset - offset;
+		int pos1 = offset;
+		for(int i=0;i<thickness*2;i++)
+		{	// set coordinates
+			int row = -1;
+			int col = -1;
+			if(vertical)
+				col = pos1;
+			else
+				row = pos1;
+			for(int pos2=startPosition;pos2<=endPosition;pos2++)
+			{	// set coordinates
+				if(vertical)
+					row = pos2;
+				else
+					col = pos2;
+				
+				// check current tile
+				ZoneHollowTile tile = zone.getTile(row,col);
+				String blockName = tile.getBlock();
+				if(crushHardwalls || blockName==null  || !blockName.contains("hardwall"))
+					eventCount++;
+			}
+			
+			// update position
+			pos1 = pos1 + gap;
+			gap = -(gap-1);
+		}
+		
+		// determine the time steps
+		long duration = (endTime - startTime) / (eventCount-1);
+		long rem = (endTime - startTime) % (eventCount-1);
+
+		long time = startTime;
+		if(vertical)
+			gap = globalWidth - 1 - offset - offset;
+		else
+			gap = globalHeight - 1 - offset - offset;
+		pos1 = offset;
+		for(int i=0;i<thickness*2;i++)
+		{	// set coordinates
+			int row = -1;
+			int col = -1;
+			if(vertical)
+				col = pos1;
+			else
+				row = pos1;
+			for(int pos2=startPosition;pos2<=endPosition;pos2++)
+			{	// set coordinates
+				if(vertical)
+					row = pos2;
+				else
+					col = pos2;
+				
+				// possibly insert new event
+				ZoneHollowTile tile = zone.getTile(row,col);
+				String blockName = tile.getBlock();
+				if(crushHardwalls || blockName==null  || !blockName.contains("hardwall"))
+				{	// create new event
+					ZoneHollowTile eTile = new ZoneHollowTile(row, col);
+					eTile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"shrink");
+					zone.addEvent(time, eTile);
+					// update counts and time
+					eventCount++;
+					time = time + duration;
+					if(eventCount<rem)
+						time++;
+				}
+			}
+			
+			// update position
+			pos1 = pos1 + gap;
+			gap = -(gap-1);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param level
+	 * @param coords
+	 * @param startTime
+	 * @param endTime
+	 * @param relative
+	 * @param totalTime
+	 */
+	protected static void addCustomSuddenDeath(HollowLevel level, List<int[]> coords, long startTime, long endTime, boolean relative, long totalTime)
+	{	
+		
+	}
+
 	
 	/**
 	 * Sets sudden death events taking the form of bombs falling
