@@ -42,7 +42,7 @@
 			</direction>
 		</gesture>
 
-		<gesture name="RELEASED" repeat="false" folder="released" yShift="9">
+		<gesture name="RELEASED" repeat="false" folder="standing" yShift="9">
 			<direction name="NONE">
 				<step duration="85" >
 					<image file="standing.gif" />
