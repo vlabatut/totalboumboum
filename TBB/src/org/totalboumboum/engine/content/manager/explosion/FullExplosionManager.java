@@ -27,6 +27,7 @@ import java.util.List;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
@@ -171,10 +172,10 @@ public class FullExplosionManager extends ExplosionManager
 	
 	// NOTE workaround needed by the AI API
 	public boolean isPenetrating()
-	{	boolean result = false;
-		Tile tile = sprite.getTile();
+	{	Tile tile = sprite.getTile();
 		Fire fire = explosion.makeFire("outside",tile);
-		fire.getAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+		StateAbility ability = fire.getAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+		boolean result = ability.isActive();
 		return result;
 	}
 
