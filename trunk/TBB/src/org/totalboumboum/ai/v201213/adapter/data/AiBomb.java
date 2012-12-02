@@ -181,12 +181,14 @@ public interface AiBomb extends AiSprite
 	// OWNER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le joueur qui a posé la bombe,
-	 * ou bien null si aucun joueur n'a posé cette bombe 
-	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
+	 * Renvoie le joueur qui a posé la bombe,
+	 * ou bien {@code null} si aucun joueur n'a posé cette bombe 
+	 * (pour certains niveaux spéciaux où le niveau peut générer 
+	 * des bombes).  
 	 * 
 	 * @return 
-	 * 		le joueur ayant posé la bombe, ou null si aucun joueur ne l'a posée
+	 * 		Le joueur ayant posé la bombe, ou {@code null} si 
+	 * 		ce n'est pas un joueur qui l'a posée.
 	 */
 	public AiHero getOwner();
 
