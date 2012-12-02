@@ -163,7 +163,7 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 		// on ne teste pas la case de la cible, on la considère comme ok
 		
 		// par contre, on teste celles situées à porté de bombes
-		for(Direction d: Direction.values())
+		for(Direction d: Direction.getPrimaryValues())
 		{	ai.checkInterruption();
 			AiTile neighbor = center;
 			int i = 1;
