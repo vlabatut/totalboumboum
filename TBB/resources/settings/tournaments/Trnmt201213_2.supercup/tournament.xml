@@ -22,16 +22,17 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
-	<general name="Tournoi de Galatasaray VI"/>
+	<general name="Super-coupe de Galatasaray V"/>
 
  	<notes>
- 		<line value="6ème tournoi d'évaluation pour le projet d'IA de la GSÜ." />
+ 		<line value="5ème tournoi opposant les meilleurs agents de chaque édition du tournoi." />
+ 		<line value="Attention : le(s) agent(s) de la dernière édition doivent être sélectionnés en premier." />
  		<line value="Date: 02-12-2012" />
  	</notes>
  	
 	<author value="Vincent Labatut" />
 
-	<cup sortPlayers="SEEDS" >
+	<cup sortPlayers="NONE" >
 		<leg number="0" randomizeParts="false" >
 			<part name="Demi-finale 1" number="0">
 				<match local="true" name="leg1" />
