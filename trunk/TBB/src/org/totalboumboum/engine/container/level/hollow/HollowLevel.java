@@ -312,7 +312,7 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SUDDEN DEATH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<SuddenDeathEvent> suddenDeathEvents = null;
+	transient private List<SuddenDeathEvent> suddenDeathEvents = null;
 	
 	public List<SuddenDeathEvent> getSuddenDeathEvents()
 	{	return suddenDeathEvents;

@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * @author Vincent Labatut
  *
  */
-public class SuddenDeathEvent implements Comparable<SuddenDeathEvent>, Serializable
+public class SuddenDeathEvent implements Comparable<SuddenDeathEvent>
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
