@@ -94,7 +94,8 @@ public interface AiBomb extends AiSprite
 	/**
 	 * Renvoie le délai normal avant l'explosion de la bombe.
 	 * Ce délai ne tient pas compte des pannes éventuelles.
-	 * Ce délai n'est pas défini pour tous les types de bombes:
+	 * <br/>
+	 * <b>Attention :</b> Ce délai n'est pas défini pour tous les types de bombes:
 	 * seulement pour celles à retardement.
 	 * 
 	 * @return	
@@ -103,13 +104,13 @@ public interface AiBomb extends AiSprite
 	public long getNormalDuration();
 
 	/**
-	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
-	 * une explosion. Cette latence représente le temps entre le moment où
-	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
-	 * à exploser.
+	 * Renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée 
+	 * par une explosion. Cette latence représente le temps entre le moment où
+	 * la bombe est touchée par l'explosion, et le moment où elle commence 
+	 * effectivement à exploser.
 	 * 
 	 * @return	
-	 * 		la latence de la bombe pour une détonation déclenchée par une autre explosion
+	 * 		La latence de la bombe pour une détonation déclenchée par une autre explosion.
 	 */
 	public long getLatencyDuration();
 	
@@ -193,13 +194,13 @@ public interface AiBomb extends AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de déplacement au sol de cette bombe,
+	 * Renvoie la vitesse de déplacement au sol de cette bombe,
 	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
 	 * de déplacement courante, il s'agit de la vitesse de la bombe
 	 * quand elle glisse par terre. 
 	 * 
 	 * @return	
-	 * 		la vitesse de déplacement de cette bombe
+	 * 		La vitesse de déplacement de cette bombe.
 	 */
 	public double getSlidingSpeed();
 	
