@@ -1256,13 +1256,27 @@ public class LevelTools
 	}
 	
 	/**
+	 * Define the sudden death events as specified in the list parameter.
+	 * This list contains list of integer arrays. Each array contains the
+	 * coordinates of a tile. Each sublist corresponds to an event : all
+	 * tiles in the list will be crushed by a falling block at the same time.
+	 *  
+	 * TODO Slide sudden death events when inserting/removing cols/rows
 	 * 
 	 * @param level
+	 * 		The level to be modified.
 	 * @param coords
+	 * 		The list of list of coordinates.
 	 * @param startTime
+	 * 		Starting time of the sudden death.
 	 * @param endTime
+	 * 		Ending time of the sudden death.
 	 * @param relative
+	 * 		Whether those times should be interpreted relatively to the actual game duration.
 	 * @param totalTime
+	 * 		Total duration to be used if no time limit exist when actually playing this level.
+	 * @param crushHardwalls
+	 * 		Whether hardwalls should be ignored, or crushed (mainly for esthetic reasons).
 	 */
 	protected static void addCustomSuddenDeath(HollowLevel level, List<List<int[]>> coords, long startTime, long endTime, boolean relative, long totalTime, boolean crushHardwalls)
 	{	// get level info
