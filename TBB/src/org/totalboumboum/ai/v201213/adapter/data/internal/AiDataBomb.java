@@ -283,7 +283,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
+	/** Couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
 	private PredefinedColor color;
 	
 	@Override
@@ -292,7 +292,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 	
 	/**
-	 * initialise la couleur de la bombe
+	 * Initialise la couleur de la bombe.
 	 */
 	private void initColor()
 	{	Bomb sprite = getSprite();
