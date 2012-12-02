@@ -21,6 +21,7 @@ package org.totalboumboum.engine.container.level.hollow;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +35,10 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * @author Vincent Labatut
  *
  */
-public class SuddenDeathEvent implements Comparable<SuddenDeathEvent>
-{	
+public class SuddenDeathEvent implements Comparable<SuddenDeathEvent>, Serializable
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+
 	public SuddenDeathEvent(long time)
 	{	// time
 		this.time = time;
