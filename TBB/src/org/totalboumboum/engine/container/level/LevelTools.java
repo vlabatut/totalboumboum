@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -112,8 +113,8 @@ public class LevelTools
 		saveLevel(level);
 */
 		// open an existing level and add a sudden death spiral
-		String pack = "tests";
-		String folder = "test2";
+		String pack = "tournament201213";
+		String folder = "line";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 		int thickness = 2;
@@ -124,8 +125,51 @@ public class LevelTools
 		long totalTime = 120000;
 		boolean crushHardwalls = false;
 		removeSuddenDeath(level);
-//		addSpiralSuddenDeath(level, thickness, clockwise, 1, 2, startTime, endTime, relative, totalTime, crushHardwalls);
-		addLinearSuddenDeath(level, thickness, 2, true, 1, 13, startTime, endTime, relative, totalTime, crushHardwalls);
+		addSpiralSuddenDeath(level, thickness, clockwise, 1, 2, startTime, endTime, relative, totalTime, crushHardwalls);
+//		addLinearSuddenDeath(level, thickness, 2, true, 1, 13, startTime, endTime, relative, totalTime, crushHardwalls);
+/*		addCustomSuddenDeath(level, Arrays.asList(
+				// columns 5 & 17
+				Arrays.asList(new int[]{3,5},new int[]{3,17},new int[]{13,5},new int[]{13,17}),
+				Arrays.asList(new int[]{4,5},new int[]{4,17},new int[]{12,5},new int[]{12,17}),
+				Arrays.asList(new int[]{5,5},new int[]{5,17},new int[]{11,5},new int[]{11,17}),
+				Arrays.asList(new int[]{6,5},new int[]{6,17},new int[]{10,5},new int[]{10,17}),
+				Arrays.asList(new int[]{7,5},new int[]{7,17},new int[]{9,5}, new int[]{9,17}),
+				// columns 6 & 16
+				Arrays.asList(new int[]{3,6},new int[]{3,16},new int[]{13,6},new int[]{13,16}),
+				Arrays.asList(new int[]{5,6},new int[]{5,16},new int[]{11,6},new int[]{11,16}),
+				Arrays.asList(new int[]{7,6},new int[]{7,16},new int[]{9,6}, new int[]{9,16}),
+				// columns 7 & 15
+				Arrays.asList(new int[]{3,7},new int[]{3,15},new int[]{13,7},new int[]{13,15}),
+				Arrays.asList(new int[]{4,7},new int[]{4,15},new int[]{12,7},new int[]{12,15}),
+				Arrays.asList(new int[]{5,7},new int[]{5,15},new int[]{11,7},new int[]{11,15}),
+				Arrays.asList(new int[]{6,7},new int[]{6,15},new int[]{10,7},new int[]{10,15}),
+				Arrays.asList(new int[]{7,7},new int[]{7,15},new int[]{9,7}, new int[]{9,15}),
+				// columns 8 & 14
+				Arrays.asList(new int[]{3,8},new int[]{3,14},new int[]{13,8},new int[]{13,14}),
+				Arrays.asList(new int[]{5,8},new int[]{5,14},new int[]{11,8},new int[]{11,14}),
+				Arrays.asList(new int[]{7,8},new int[]{7,14},new int[]{9,8}, new int[]{9,14}),
+				// columns 9 & 13
+				Arrays.asList(new int[]{3,9},new int[]{3,13},new int[]{13,9},new int[]{13,13}),
+				Arrays.asList(new int[]{4,9},new int[]{4,13},new int[]{12,9},new int[]{12,13}),
+				Arrays.asList(new int[]{5,9},new int[]{5,13},new int[]{11,9},new int[]{11,13}),
+				Arrays.asList(new int[]{6,9},new int[]{6,13},new int[]{10,9},new int[]{10,13}),
+				Arrays.asList(new int[]{7,9},new int[]{7,13},new int[]{9,9}, new int[]{9,13}),
+				// columns 10 & 12
+				Arrays.asList(new int[]{3,10},new int[]{3,12},new int[]{13,10},new int[]{13,12}),
+				Arrays.asList(new int[]{7,10},new int[]{7,12},new int[]{9,10}, new int[]{9,12}),
+				// column 11
+				Arrays.asList(new int[]{3,11}),
+				Arrays.asList(new int[]{13,11}),
+				Arrays.asList(new int[]{4,11}),
+				Arrays.asList(new int[]{12,11}),
+				Arrays.asList(new int[]{5,11}),
+				Arrays.asList(new int[]{11,11}),
+				Arrays.asList(new int[]{6,11}),
+				Arrays.asList(new int[]{10,11}),
+				Arrays.asList(new int[]{7,11}),
+				Arrays.asList(new int[]{9,11}),
+				Arrays.asList(new int[]{8,11})
+				), startTime, endTime, relative, totalTime, crushHardwalls);*/
 //		addRandomFallingBombs(level, 20, new int[]{1,2,11,14}, 5000, 59500, 3000, relative, totalTime);
 		saveLevel(level);
 	}
@@ -1168,6 +1212,7 @@ public class LevelTools
 		long rem = (endTime - startTime) % (eventCount-1);
 
 		long time = startTime;
+		eventCount = 0;
 		if(vertical)
 			gap = globalWidth - 1 - offset - offset;
 		else
@@ -1219,11 +1264,72 @@ public class LevelTools
 	 * @param relative
 	 * @param totalTime
 	 */
-	protected static void addCustomSuddenDeath(HollowLevel level, List<int[]> coords, long startTime, long endTime, boolean relative, long totalTime)
-	{	
+	protected static void addCustomSuddenDeath(HollowLevel level, List<List<int[]>> coords, long startTime, long endTime, boolean relative, long totalTime, boolean crushHardwalls)
+	{	// get level info
+		LevelInfo info = level.getLevelInfo();
+		int globalHeight = info.getGlobalHeight();
+		int globalWidth = info.getGlobalWidth();
+		Zone zone = level.getZone();
 		
-	}
+		// set general stuff
+		zone.setEventsDuration(totalTime);
+		zone.setEventsRelative(relative);
 
+		// count the number of events
+		int eventCount = 0;
+		for(List<int[]> tiles: coords)
+		{	Iterator<int[]> it = tiles.iterator();
+			boolean found = false;
+			while(!found && it.hasNext())
+			{	// set coordinates
+				int[] pos = it.next();
+				int row = pos[0];
+				int col = pos[1];
+	
+				// check current tile
+				ZoneHollowTile tile = zone.getTile(row,col);
+				String blockName = tile.getBlock();
+				if(crushHardwalls || blockName==null  || !blockName.contains("hardwall"))
+				{	found = true;
+					eventCount++;
+				}
+			}
+		}
+		
+		// determine the time steps
+		long duration = (endTime - startTime) / (eventCount-1);
+		long rem = (endTime - startTime) % (eventCount-1);
+		
+		// set sudden death events
+		eventCount = 0;
+		long time = startTime;
+		for(List<int[]> tiles: coords)
+		{	boolean found = false;
+			for(int[] pos: tiles)
+			{	// set coordinates
+				int row = pos[0];
+				int col = pos[1];
+
+				// possibly insert new event
+				ZoneHollowTile tile = zone.getTile(row,col);
+				String blockName = tile.getBlock();
+				if(crushHardwalls || blockName==null  || !blockName.contains("hardwall"))
+				{	// create new event
+					ZoneHollowTile eTile = new ZoneHollowTile(row, col);
+					eTile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"shrink");
+					zone.addEvent(time, eTile);
+					found = true;
+				}
+			}
+			// update counts and time
+			if(found)
+			{	eventCount++;
+				time = time + duration;
+				if(eventCount<rem)
+					time++;
+			}
+		}
+	}
 	
 	/**
 	 * Sets sudden death events taking the form of bombs falling
