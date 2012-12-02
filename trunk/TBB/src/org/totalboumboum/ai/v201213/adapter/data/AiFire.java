@@ -71,7 +71,7 @@ public interface AiFire extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Renvoie le temps temps écoulé depuis que le feu existe, 
-	 * exprimé en ms
+	 * exprimé en ms.
 	 *
 	 * @return 
 	 * 		Temps écoulé depuis que le feu existe.
