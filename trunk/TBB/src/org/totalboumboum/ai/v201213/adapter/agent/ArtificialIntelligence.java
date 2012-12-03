@@ -371,7 +371,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Méthode permettant de faire une initialisation supplémentaire.
 	 * Elle est automatiquement appelée à la fin de {@link #init()}.
 	 * Par défaut, cette méthode ne fait rien, mais elle peut être
-	 * surchargée si nécessaire.
+	 * surchargée si nécessaire. Comme elle est faite après l'initialisation
+	 * des gestionnaires, il est possible d'y utiliser les gestionnaires,
+	 * ou des objets qu'ils ont créés (ce qui n'est pas le cas de 
+	 * {@link #initPercepts()}, qui est elle appelée avant la création des
+	 * gestionnaires).
 	 * 
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
