@@ -52,7 +52,7 @@ public class AbstractStateModulation extends AbstractModulation
 	// MODULATE					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * modulates the specified ability. This ability is 
+	 * Modulates the specified ability. This ability is 
 	 * supposed to concern the specified state ability.
 	 * The returned ability is a new object, with fields similar to
 	 * the specified parameter, excepted for the strength and frame,
