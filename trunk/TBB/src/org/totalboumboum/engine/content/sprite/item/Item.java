@@ -61,9 +61,9 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// ITEM ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** original abilities given by this item */
+	/** Original abilities given by this item */
 	private List<AbstractAbility> originalItemAbilities;
-	/** working abilities given by this item */
+	/** Working abilities given by this item */
 	private List<AbstractAbility> itemAbilities;
 	
 	public List<AbstractAbility> getItemAbilities()
