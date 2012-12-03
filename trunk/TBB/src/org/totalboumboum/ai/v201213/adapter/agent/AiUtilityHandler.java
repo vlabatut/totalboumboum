@@ -704,7 +704,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			{	int utility = map.get(combi);
 				print("      "+utility+"."+combi);
 			}
-			print("      > Mode " + mode + " done");
+			print("      < Mode " + mode + " done");
 		}
 		print("    < Utilities done");
 	}
