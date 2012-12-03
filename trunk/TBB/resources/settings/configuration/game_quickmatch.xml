@@ -38,7 +38,7 @@
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="tournament201213" folder="line" allowedPlayers="2 3 4 5" />
+		<level pack="tests" folder="test2" allowedPlayers="2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 
