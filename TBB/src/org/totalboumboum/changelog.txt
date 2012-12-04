@@ -491,7 +491,7 @@
 		- mise à jour de l'année du copyright de 2010-2011 en 2011-2012
 		
 + beta.022
-	- nouvelles ia
+	- nouveaux agents
 	- nouveau tournoi
 	- intégration de toutes les màj successives des version 21.x
 	
@@ -520,10 +520,14 @@
 		- niveaux pour le tournoi VI (à compléter)
 	- API IA:
 		- quelques bugs corrigés
-		- méthode initOthers dans ArtificialIntelligence
+		- méthode initOthers dans ArtificialIntelligence, permettant d'initialiser des objets après les gestionnaires.
 		- vérification de l'unicité des noms de cas pour un agent
 		- cache automatique pour le calcul de critères
 		- vérification de l'unicité des noms de critère pour un agent
 		- références stockées dans des maps différentes pour chaque mode
 		- décomposition du traitement plus avancée dans le MoveHandler
+		- représentation et accès aux éveènements de mort subite
+		- simulation des évènements de mort subite
+		- représentation et accès aux items contagieux et à effet temporaire
+		- simulation des items contagieux et à effet temporaire
 		

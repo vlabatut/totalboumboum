@@ -1559,6 +1559,8 @@ public class Launcher
 	
 	
 	/**
+	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
+	 * 
 	 * TODO site : 
 	 * 		- mort subite (et autres ajouts ?)
 	 * 
@@ -1567,12 +1569,13 @@ public class Launcher
 	 * 		x rajouter la modif sur le throughwall des items
 	 * 		x adapter les traj des bombes 
 	 * 
-	 * TODO coder la méthode pour une mort subite custom
-	 * 		l'utiliser pour générer la mort subite du niveau "line"
-	 * 
 	 * TODO revoir les niveaux du tournoi pour lesquels y a pas (encore) de mort subite
 	 * TODO envisager aussi les mort-subites de type bombe, voire bonus (nouveaux niveaux ?)
 	 * TODO adapter le temps des nivaux, certains méritent 2 minutes
+	 * TODO tournoi supercoupe :
+	 * 		- demi-finale : les 2 premiers de cette année contre les 3 ex-gagnants les moins bien classés
+	 * 		- finale : les 3 premiers de la demi-finale contre les 2 ex-gagnants les mieux classés
+	 * 		>> il faut implémenter un système de qualif directe pour certains joueurs 
 	 * 
 	 * TODO nouveaux items
 	 * - à faire :
@@ -1581,6 +1584,6 @@ public class Launcher
 	 * 			- gérer aussi leur aspect contagieux ?
 	 * 		- besoin de savoir si contagieux, dans AiHero
 	 * 			- rajouter une méthode dans AIHero
-	 * 			- créer la methode getTIme ou duration + iscontagious dans AiItem
+	 * 			- créer la methode getTime ou duration + iscontagious dans AiItem
 	 */
 }
