@@ -299,8 +299,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		String row = "x";
-		String col = "x";
+		String row = "?";
+		String col = "?";
 		if(tile!=null)
 		{	row = Integer.toString(tile.getRow());
 			col = Integer.toString(tile.getCol());
