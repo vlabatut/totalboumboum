@@ -620,12 +620,13 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la représentation de l'item passé en paramètre.
+	 * Renvoie la représentation de l'item passé en paramètre,
+	 * ou {@code null} si cet item est inconnu.
 	 * 
 	 * @param item
-	 * 		l'item dont on veut la représentation
+	 * 		L'item dont on veut la représentation.
 	 * @return	
-	 * 		le AiItem correspondant
+	 * 		Le {@code AiItem} correspondant, ou {@code null} s'il est inconnu.
 	 */
 	protected AiDataItem getItem(Item item)
 	{	return itemMap.get(item);
