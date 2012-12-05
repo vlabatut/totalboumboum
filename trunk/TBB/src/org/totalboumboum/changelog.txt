@@ -523,11 +523,12 @@
 		- méthode initOthers dans ArtificialIntelligence, permettant d'initialiser des objets après les gestionnaires.
 		- vérification de l'unicité des noms de cas pour un agent
 		- cache automatique pour le calcul de critères
-		- vérification de l'unicité des noms de critère pour un agent
-		- références stockées dans des maps différentes pour chaque mode
+		- vérification de l'unicité des noms de critères pour un agent
+		- utilités de référence stockées dans des maps différentes pour chaque mode
 		- décomposition du traitement plus avancée dans le MoveHandler
-		- représentation et accès aux éveènements de mort subite
+		- représentation et accès aux évènements de mort subite
 		- simulation des évènements de mort subite
 		- représentation et accès aux items contagieux et à effet temporaire
 		- simulation des items contagieux et à effet temporaire
+		- méthode permettant d'accéder à l'effet qu'un item aurait sur un joueur (effet contextuel)
 		

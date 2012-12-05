@@ -1582,8 +1582,10 @@ public class Launcher
 	 * 		- full model (AiFullModel.pickItem):
 	 * 			- gérer l'aspect temporel de certains malus ?
 	 * 			- gérer aussi leur aspect contagieux ?
-	 * 		- besoin de savoir si contagieux, dans AiHero
-	 * 			- rajouter une méthode dans AIHero
-	 * 			- créer la methode getTime ou duration + iscontagious dans AiItem
 	 */
+
+	// TODO màj : inclure
+	//		- l'instance tournament entière
+	//		- l'api ia entière
+	//		- le reste au cas par cas
 }
