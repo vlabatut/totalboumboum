@@ -21,11 +21,15 @@ package org.totalboumboum.ai.v201213.adapter.data.internal;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
+import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -35,33 +39,35 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
+import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente un personnage du jeu, ie un sprite contrôlé par un joueur
- * humain ou une IA.
+ * Représente un personnage du jeu, ie un sprite 
+ * contrôlé par un joueur humain ou une IA.
  * 
  * @author Vincent Labatut
- *
  */
 final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 {
 	/**
-	 * crée une représentation du joueur passé en paramètre, et contenue dans 
+	 * Crée une représentation du joueur passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite.
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		Sprite à représenter.
 	 */
 	protected AiDataHero(AiDataTile tile, Hero sprite)
 	{	super(tile,sprite);
+		
 		initColor();
 		initSpeed();
 		updateBombParam();
 		updateSpeed();
 		updateCollisions();
+		updateContagious(0);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -70,20 +76,26 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	@Override
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	super.update(tile,elapsedTime);
+		
 		updateBombParam();
 		updateSpeed();
 		updateCollisions();
+		updateContagious(elapsedTime);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** exemple de bombe que le personnage peut poser */
+	/** Exemple de bombe que le personnage peut poser */
 	private AiDataBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultanément (en général) */
+	/** Nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumberMax;
-	/** nombre de bombes que le personnage a actuellement posées */
+	/** Nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
+	/** Nombre maximal de bombes que le personnage peut poser simultanément (dans l'absolu) */
+	private int bombNumberLimit;
+	/** Portée maximale de la bombe, dans l'absolu */
+	private int rangeLimit;
 	
 	@Override
 	public AiBomb getBombPrototype()
@@ -93,6 +105,11 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	@Override
 	public int getBombRange()
 	{	return bombPrototype.getRange();
+	}
+	
+	@Override
+	public int getBombRangeLimit()
+	{	return rangeLimit;
 	}
 	
 	@Override
@@ -115,40 +132,59 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	{	return bombNumberCurrent;
 	}
 	
+	@Override
+	public int getBombNumberLimit()
+	{	return bombNumberLimit;
+	}
+
 	/**
-	 * met à jour les paramètres décrivant les bombes que ce personnage peut poser
+	 * Met à jour les paramètres décrivant les 
+	 * bombes que ce personnage peut poser.
 	 */
 	private void updateBombParam()
 	{	Hero sprite = getSprite();
 		
 		// prototype bomb
-		Bomb bomb = sprite.makeBomb();
-		bombPrototype = new AiDataBomb(tile,bomb);
-		bombPrototype.tile = null;
-		bombPrototype.posX = 0;
-		bombPrototype.posY = 0;
-		bombPrototype.posZ = 0;
-	
-		// max number of simultaneous bombs
-		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
-    	bombNumberMax = (int)ab.getStrength();
-        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
-		if(ab.isActive())
-		{	int limit = (int)ab.getStrength();
-			if(bombNumberMax>limit)
-				bombNumberMax = limit;
+		{	Bomb bomb = sprite.makeBomb();
+			bombPrototype = new AiDataBomb(tile,bomb);
+			bombPrototype.tile = null;
+			bombPrototype.posX = 0;
+			bombPrototype.posY = 0;
+			bombPrototype.posZ = 0;
 		}
-
+		
+		// max number of simultaneous bombs
+		{	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
+	    	bombNumberMax = (int)ab.getStrength();
+	        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
+			if(ab.isActive())
+			{	int limit = (int)ab.getStrength();
+				if(bombNumberMax>limit)
+					bombNumberMax = limit;
+			}
+		}
+		
+    	// limit for this value
+		{	StateAbility ab = sprite.getAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
+			bombNumberLimit = (int)ab.getStrength();
+		}
+		
 		// number of bombs currently dropped
     	bombNumberCurrent = sprite.getDroppedBombs().size();
     	
-    	//System.out.println(getSprite().getColor()+": bombRange="+bombRange+" bombNumber="+bombNumber+" bombCount="+bombCount);    	
+    	// limit for the bomb range
+		{	StateAbility ab = sprite.getAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
+			rangeLimit = (int)ab.getStrength();
+		}
+    	
+    	//System.out.println(getSprite().getColor()+": bombRange="+bombRange+" bombNumber="+bombNumber+" bombCount="+bombCount);
+		//System.out.println("bombNumberLimit: "+bombNumberLimit+ " rangeLimit:"+rangeLimit);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur du personnage (et de ses bombes) */
+	/** Couleur du personnage (et de ses bombes) */
 	private PredefinedColor color;
 	
 	@Override
@@ -157,7 +193,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	}
 	
 	/**
-	 * initialise la couleur du personnage
+	 * Initialise la couleur du personnage
 	 */
 	private void initColor()
 	{	Hero sprite = getSprite();
@@ -174,10 +210,21 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	
 	@Override
 	public double getWalkingSpeed()
+	{	Double result = getWalkingSpeed(walkingSpeedIndex);
+		return result;
+	}
+	
+	/**
+	 * Calcule la vitesse de déplacement pour
+	 * l'index spécifié.
+	 * 
+	 * @param index
+	 * 		Index à considérer.
+	 * @return
+	 * 		Vitesse de déplacement en pixel/seconde.
+	 */
+	private double getWalkingSpeed(int index)
 	{	Double result = null;
-		int index = walkingSpeedIndex;
-		if(index==0)
-			result = walkingSpeeds.get(index);
 		
 		int delta = -(int)Math.signum(index);
 		while(index!=0 && result==null)
@@ -185,6 +232,9 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 			if(result==null)
 				index = index + delta;
 		}
+		
+		if(index==0)
+			result = walkingSpeeds.get(index);
 		
 		return result;
 	}
@@ -237,11 +287,11 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage peut traverser les murs */
+	/** Indique si le personnage peut traverser les murs */
 	private boolean throughBlocks;
-	/** indique si le personnage peut traverser les bombes */
+	/** Indique si le personnage peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le personnage peut traverser le feu (sans brûler) */
+	/** Indique si le personnage peut traverser le feu (sans brûler) */
 	private boolean throughFires;
 	
 	@Override
@@ -260,7 +310,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	}
 
 	/**
-	 * met à jour les divers pouvoirs du personnage
+	 * Met à jour les divers pouvoirs du personnage.
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();
@@ -288,6 +338,94 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public double getEffect(AiItem item)
+	{	double result = -1;
+	
+		AiItemType type = item.getType();
+		if(type==AiItemType.ANTI_BOMB || type==AiItemType.EXTRA_BOMB|| type==AiItemType.GOLDEN_BOMB || type==AiItemType.NO_BOMB)
+		{	result = bombNumberMax + item.getStrength();
+			result = Math.min(result, bombNumberLimit);
+			result = Math.max(result, 0);
+		}
+		else if(type==AiItemType.ANTI_FLAME || type==AiItemType.EXTRA_FLAME || type==AiItemType.GOLDEN_FLAME || type==AiItemType.NO_FLAME)
+		{	result = getBombRange()+ item.getStrength();
+			result = Math.min(result, rangeLimit);
+			result = Math.max(result, 0);
+		}
+		else if(type==AiItemType.ANTI_SPEED || type==AiItemType.EXTRA_SPEED || type==AiItemType.GOLDEN_SPEED || type==AiItemType.NO_SPEED)
+		{	int index = walkingSpeedIndex + (int)item.getStrength();
+			result = getWalkingSpeed(index);
+		}
+		else
+		{	// rien à faire
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTAGION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indique si ce joueur a un item contagieux */
+	private boolean contagious;
+	/** Liste des items contagieux possédés */
+	private List<AiDataItem> contagiousItems = new ArrayList<AiDataItem>();
+	
+	/**
+	 * Met à jour la liste des items contagieux
+	 * de ce joueur, ainsi que les items eux-mêmes.
+	 * 
+	 * @param elapsedTime 
+	 * 		Temps écoulé depuis la dernière mise à jour.
+	 */
+	private void updateContagious(long elapsedTime)
+	{	List<Item> items = sprite.getAllItems();
+		AiDataZone zone = tile.getZone();
+		contagious = false;
+		
+System.out.println("-------------------------------------------");
+System.out.println(this);
+System.out.println("-------------------------------------------");
+		// on traite chaque item de l'agent
+		for(Item item: items)
+		{	// on teste si l'item est contagieux
+			StateAbility ability = item.getAbility(StateAbilityName.ITEM_CONTAGION_MODE);
+			float mode = ability.getStrength();
+			if(mode!=StateAbilityName.ITEM_CONTAGION_NONE)
+			{	contagious = true;
+				// on récupère éventuellement l'item à partir de la zone
+				AiDataItem aiItem = zone.getItem(item);
+				// et on le met à jour
+				if(aiItem!=null)
+					aiItem.update(null, elapsedTime);
+				// ou sinon, on le crée et on l'ajoute à la zone
+				else
+				{	aiItem = new AiDataItem(null, item);
+					zone.addItem(aiItem);
+				}
+				// dans les deux cas, on ajoute à la liste
+				contagiousItems.add(aiItem);
+//System.out.println(aiItem);
+			}
+		}
+//System.out.println("contagious: "+contagious);
+	}
+	
+	@Override
+	public boolean isContagious()
+	{	return contagious;
+	}
+	
+	@Override
+	public List<AiItem> getContagiousItems()
+	{	List<AiItem> result = new ArrayList<AiItem>(contagiousItems);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

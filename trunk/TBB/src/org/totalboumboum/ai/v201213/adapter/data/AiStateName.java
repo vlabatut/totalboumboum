@@ -39,26 +39,28 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 public enum AiStateName
 {
 	// equivalent gesture: BURNING
-	/** le sprite est en train de brûler */
+	/** Le sprite est en train de brûler */
 	BURNING,
 	
 	// equivalent gesture: ENDED
-	/** le sprite n'est plus en jeu */
+	/** Le sprite n'est plus en jeu */
 	ENDED,
 	
 	// equivalent gesture: BOUNCING, JUMPING, LANDING, PUNCHED
-	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
+	/** Le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
 	
 	// equivalent gesture: APPEARING, CRYING, ENTERING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PREPARED, PUNCHING, STANDING, STANDING_FAILING, WAITING
-	/** le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
+	/** Le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
 	STANDING,
 	
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
-	/** le sprite se déplace sur le sol */
-	MOVING;
+	/** Le sprite se déplace sur le sol */
+	MOVING,
 	
 	// unused gestures: NONE, HIDING
+	/** Le sprite n'est pas en jeu (par ex: un item ramassé par un joueur) */
+	HIDING;
 	
 	/**
 	 * convertit une chaine de caractères correspondant à un geste du jeu
@@ -97,6 +99,8 @@ public enum AiStateName
 				|| gesture==GestureName.SLIDING_FAILING
 				|| gesture==GestureName.WALKING)
 			result = AiStateName.MOVING;		
+		else if(gesture==GestureName.HIDING)
+			result = AiStateName.HIDING;
 		return result;
 	}
 }

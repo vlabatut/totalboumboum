@@ -66,7 +66,11 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	 */
 	protected AiDataItem(AiDataTile tile, Item sprite)
 	{	super(tile,sprite);
+		
 		initType();
+		initStrength();
+		initContagious();
+		updateDurations();
 		updateCollisions();
 	}
 
@@ -76,13 +80,15 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	@Override
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	super.update(tile,elapsedTime);
+		
+		updateDurations();
 		updateCollisions();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item représenté */
+	/** Type d'item représenté */
 	private AiItemType type;
 	
 	@Override
@@ -91,7 +97,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 	
 	/**
-	 * initialise le type de l'item représenté
+	 * Initialise le type de l'item représenté.
 	 */
 	private void initType()
 	{	Item item = getSprite();
@@ -99,11 +105,42 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// STRENGTH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Force de l'item */
+	private double strength;
+
+	/**
+	 * Initialise la force de cet item.
+	 */
+	private void initStrength()
+	{	if(type==AiItemType.ANTI_BOMB || type==AiItemType.EXTRA_BOMB || type==AiItemType.GOLDEN_BOMB || type==AiItemType.NO_BOMB)
+		{	StateAbility ability = sprite.getCurrentItemAbility(StateAbilityName.HERO_BOMB_NUMBER);
+			strength = ability.getStrength();
+		}
+		else if(type==AiItemType.ANTI_FLAME || type==AiItemType.EXTRA_FLAME || type==AiItemType.GOLDEN_FLAME || type==AiItemType.NO_FLAME)
+		{	StateAbility ability = sprite.getCurrentItemAbility(StateAbilityName.HERO_BOMB_RANGE);
+			strength = ability.getStrength();
+		}
+		else if(type==AiItemType.ANTI_SPEED || type==AiItemType.EXTRA_SPEED || type==AiItemType.GOLDEN_SPEED || type==AiItemType.NO_SPEED)
+		{	StateAbility ability = sprite.getCurrentItemAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
+			strength = ability.getStrength();
+		}
+		else
+			strength = 0;
+	}
+	
+	@Override
+	public double getStrength()
+	{	return strength;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc laisse passer les joueurs */
+	/** Indique si ce bloc laisse passer les joueurs */
 	private AiStopType stopBombs;
-	/** indique si ce bloc laisse passer le feu */
+	/** Indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
 
 	@Override
@@ -117,8 +154,8 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 
 	/** 
-	 * met jour les différentes caractéristiques de ce bloc
-	 * concernant la gestion des collisions avec les autres sprites
+	 * Met jour les différentes caractéristiques de ce bloc
+	 * concernant la gestion des collisions avec les autres sprites.
 	 */
 	private void updateCollisions()
 	{	Item sprite = getSprite();
@@ -206,6 +243,86 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// CONTAGION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indique si cet item a un effet contagieux */
+	private boolean contagious = false;
+	
+	/**
+	 * Initialise l'indicateur de contagion.
+	 */
+	private void initContagious()
+	{	Item item = getSprite();
+		StateAbility ability = item.getAbility(StateAbilityName.ITEM_CONTAGION_MODE);
+		float mode = ability.getStrength();
+		contagious = mode!=StateAbilityName.ITEM_CONTAGION_NONE;
+	}
+	
+	@Override
+	public boolean isContagious()
+	{	return contagious;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indique si cet item a un effet à durée limitée */
+	private boolean limitedDuration;
+	/** Durée de l'effet de cet item( s'il a une durée limitée) */
+	private long normalDuration;
+	/** Durée écoulée depuis que cet item a commencé à faire son effet */
+	private long elapsedTime;
+	
+	/**
+	 * Initialise les champs relatifs aux durées de l'effet
+	 * de cet item.
+	 */
+	private void updateDurations()
+	{	Item item = getSprite();
+		// NOTE we suppose the temporary item makes the player blink
+		StateAbility ability = item.getOriginalItemAbility(StateAbilityName.SPRITE_TWINKLE_COLOR);
+		if(ability.isActive())
+		{	normalDuration = (long)ability.getTime();
+			limitedDuration = normalDuration>-1;
+			ability = item.getCurrentItemAbility(StateAbilityName.SPRITE_TWINKLE_COLOR);
+			long remainingTime = (long)ability.getTime();
+			elapsedTime = normalDuration - remainingTime;
+//if(item.getName().equals("No bomb"))
+//	System.out.println("normalDuration="+normalDuration+" limitedDuration="+limitedDuration+" elapsedTime="+elapsedTime);
+		}
+		else
+		{	normalDuration = -1;
+			limitedDuration = false;
+			elapsedTime = -1;
+		}
+	}
+	
+	@Override
+	public boolean hasLimitedDuration()
+	{	return limitedDuration;
+	}
+	
+	@Override
+	public long getNormalDuration()
+	{	return normalDuration;
+	}
+
+	@Override
+	public long getElapsedTime()
+	{	return elapsedTime;
+	}
+
+	// x TODO dans AiHero: liste des items contagieux possédés + méthodes d'accès
+	//      (juste savoir si contagieux + quels items exactement)
+	//	    à mettre à jour à chaque itération (à partir du joueur, car l'item n'est plus dans une case, à vérif)
+	// remarque : les items sans cases ne seront pas transférés 
+	// TODO dans simulateur, le temps d'effet des items doit être mis à jour
+	// TODO màj : inclure
+	//		- l'instance tournament entière
+	//		- l'api ia entière
+	//		- le reste au cas par cas
+	
+	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -214,6 +331,9 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 		result.append("Item: [");
 		result.append(super.toString());
 		result.append(" - type: "+type);
+		result.append(" - contagious: "+contagious);
+		result.append(" - limited: "+limitedDuration);
+		result.append(" ("+elapsedTime+"/"+normalDuration+")");
 		result.append(" ]");
 		return result.toString();
 	}

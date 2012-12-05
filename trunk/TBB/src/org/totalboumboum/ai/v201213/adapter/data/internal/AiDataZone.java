@@ -519,11 +519,11 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des personnages contenus dans cette zone */
+	/** Liste interne des personnages contenus dans cette zone */
 	private final HashMap<Hero,AiDataHero> heroMap = new HashMap<Hero,AiDataHero>();
-	/** liste externe de tous les personnages contenus dans cette zone */
+	/** Liste externe de tous les personnages contenus dans cette zone */
 	private final List<AiHero> heroList = new ArrayList<AiHero>();
-	/** liste externe des personnages restant encore dans cette zone */
+	/** Liste externe des personnages restant encore dans cette zone */
 	private final List<AiHero> remainingHeroList = new ArrayList<AiHero>();
 	
 	@Override
@@ -544,7 +544,7 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * met à jour les listes externes des personnages
+	 * Met à jour les listes externes des personnages.
 	 */
 	private void updateHeroLists()
 	{	// reset lists
@@ -561,23 +561,23 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du personnage passé en paramètre.
+	 * Renvoie la représentation du personnage passé en paramètre.
 	 * 
 	 * @param hero
-	 * 		le personnage dont on veut la représentation
+	 * 		Le personnage dont on veut la représentation.
 	 * @return	
-	 * 		le AiHero correspondant
+	 * 		Le {@code AiHero} correspondant.
 	 */
 	protected AiDataHero getHero(Hero hero)
 	{	return heroMap.get(hero);
 	}
 	
 	/**
-	 * ajoute un personnage dans la liste de personnages de cette zone
+	 * Ajoute un personnage dans la liste de personnages de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
 	 * @param hero
-	 * 		le personnage à rajouter à la liste
+	 * 		Le personnage à rajouter à la liste.
 	 */
 	protected void addHero(AiDataHero hero)
 	{	heroMap.put(hero.getSprite(),hero);	
@@ -598,9 +598,9 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des items contenus dans cette zone */
+	/** Liste interne des items contenus dans cette zone */
 	private final HashMap<Item,AiDataItem> itemMap = new HashMap<Item,AiDataItem>();
-	/** liste externe des items contenus dans cette zone */
+	/** Liste externe des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
 	
 	@Override
@@ -609,13 +609,14 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * met à jour la liste externe des items
+	 * Met à jour la liste externe des items.
 	 */
 	private void updateItemList()
 	{	itemList.clear();
 		for(Entry<Item,AiDataItem> entry: itemMap.entrySet())
 		{	AiDataItem item = entry.getValue();
-			itemList.add(item);
+			if(item.getTile()!=null)
+				itemList.add(item);
 		}
 	}
 	
@@ -633,11 +634,11 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * ajoute un item dans la liste d'items de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * Ajoute un item dans la liste d'items de cette zone
+	 * (méthode appelée depuis une {@code AiTile})
 	 * 
 	 * @param item
-	 * 		l'item à rajouter à la liste
+	 * 		L'item à rajouter à la liste.
 	 */
 	protected void addItem(AiDataItem item)
 	{	itemMap.put(item.getSprite(),item);	
@@ -666,18 +667,18 @@ public final class AiDataZone extends AiZone
 	// ALL SPRITES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
+	 * Démarque toutes les représentations de sprites d'une liste determinée en fonction du type
 	 * T paramétrant cette méthode. Méthode appelée au début de la mise à jour :
 	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprimées de cette représentation.
 	 * 
 	 * @param <U>	
-	 * 		type de sprite à traiter
+	 * 		Type de sprite à traiter.
 	 * @param <T>	
-	 * 		type de la liste à traiter
+	 * 		Type de la liste à traiter.
 	 * @param list
-	 * 		liste à traiter
+	 * 		Liste à traiter.
 	 */
 	private <U extends Sprite, T extends AiDataSprite<?>> void uncheckAll(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -687,15 +688,15 @@ public final class AiDataZone extends AiZone
 		}
 	}
 	/**
-	 * méthode complémentaire de uncheckAll, et chargée de supprimer
+	 * Méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <U>
-	 * 		type de sprite à traiter
+	 * 		Type de sprite à traiter.
 	 * @param <T>
-	 * 		type de la liste à traiter
+	 * 		Type de la liste à traiter.
 	 * @param list
-	 * 		liste à traiter
+	 * 		Liste à traiter.
 	 */
 	private <U extends Sprite, T extends AiDataSprite<?>> void removeUnchecked(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -714,7 +715,7 @@ public final class AiDataZone extends AiZone
 	}
 
 	/**
-	 * met à jour toutes les listes externes de sprites
+	 * Met à jour toutes les listes externes de sprites.
 	 */
 	private void updateSpriteLists()
 	{	updateBlockLists();
@@ -728,7 +729,7 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrôlé par l'agent */
+	/** Le personnage contrôlé par l'agent */
 	private AiDataHero ownHero;
 
 	@Override
@@ -737,7 +738,7 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * initialise le personnage qui est contrôlé par l'agent
+	 * Initialise le personnage qui est contrôlé par l'agent.
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 

@@ -56,6 +56,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 		this.sprite = sprite;
 		id = sprite.getId();
 		state = new AiDataState(sprite);
+		checked = true;
 		
 		// burning duration
 //TODO à tester
@@ -66,6 +67,10 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 			if(anime!=null)
 				burningDuration = anime.getTotalDuration();
 		}
+		
+		// hiding state
+		if(tile==null)
+			state.setHiding();
 	}
 	
 	/////////////////////////////////////////////////////////////////

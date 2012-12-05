@@ -48,21 +48,18 @@ import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * simule la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale pour la simulation de l'évolution du jeu.</br>
- * 
+ * Simule la zone de jeu et tous ces constituants : cases et sprites.
+ * Il s'agit de la classe principale pour la simulation de l'évolution du jeu.
+ * </br>
  * L'ensemble des objets représente un état du jeu et ne peut 
- * être modifié que via la classe AiModel.
+ * être modifié que via la classe {@link AiFullModel}.
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimZone extends AiZone
 {	
 	/**
-	 * contruit une zone qui est une copie de celle passée en paramètre.
-	 * si la paramètre fullCopy est faux, les sprites ne sont pas copiés,
-	 * sinon tout est copié.
+	 * Contruit une zone qui est une copie de celle passée en paramètre.
 	 * 
 	 * @param zone
 	 * 		La zone de référence
@@ -542,9 +539,10 @@ public final class AiSimZone extends AiZone
 	 *  	le bloc à rajouter à cette zone
 	 */
 	protected void addSprite(AiSimBlock block)
-	{	AiSimTile tile = block.getTile();
-		internalBlocks.add(block);
+	{	internalBlocks.add(block);
 		externalBlocks.add(block);
+		
+		AiSimTile tile = block.getTile();
 		tile.addSprite(block);
 	}
 	
@@ -683,9 +681,10 @@ public final class AiSimZone extends AiZone
 	 *  	La bombe à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimBomb bomb)
-	{	AiSimTile tile = bomb.getTile();
-		internalBombs.add(bomb);
+	{	internalBombs.add(bomb);
 		externalBombs.add(bomb);
+		
+		AiSimTile tile = bomb.getTile();
 		tile.addSprite(bomb);
 	}
 	
@@ -884,9 +883,10 @@ public final class AiSimZone extends AiZone
 	 *  	Le feu à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimFire fire)
-	{	AiSimTile tile = fire.getTile();
-		internalFires.add(fire);
+	{	internalFires.add(fire);
 		externalFires.add(fire);
+		
+		AiSimTile tile = fire.getTile();
 		tile.addSprite(fire);
 	}
 	
@@ -1070,9 +1070,10 @@ public final class AiSimZone extends AiZone
 	 *  	le sol à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimFloor floor)
-	{	AiSimTile tile = floor.getTile();
-		internalFloors.add(floor);
+	{	internalFloors.add(floor);
 		externalFloors.add(floor);
+		
+		AiSimTile tile = floor.getTile();
 		tile.addSprite(floor);
 	}
 	
@@ -1193,10 +1194,11 @@ public final class AiSimZone extends AiZone
 	 *  	Le personnage à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimHero hero)
-	{	AiSimTile tile = hero.getTile();
-		internalHeroes.add(hero);
+	{	internalHeroes.add(hero);
 		externalHeroes.add(hero);
 		remainingHeroList.add(hero);
+		
+		AiSimTile tile = hero.getTile();
 		tile.addSprite(hero);
 	}
 	
@@ -1318,6 +1320,8 @@ public final class AiSimZone extends AiZone
 		// create sprite
 		long burningDuration = 810; // dépend du sprite...
 		int bombCount = 0;
+		int bombNumberLimit = 10;
+		int rangeLimit = 10;
 		double currentSpeed = 0;
 		int walkingSpeedIndex = 1;
 		HashMap<Integer,Double> walkingSpeeds = new HashMap<Integer, Double>();
@@ -1325,13 +1329,16 @@ public final class AiSimZone extends AiZone
 		boolean throughBlocks = false;
 		boolean throughBombs = false;
 		boolean throughFires = false;
+		boolean contagious = false;
+		List<AiItem> contagiousItems = new ArrayList<AiItem>();
 		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		int id = createNewId();
 		AiSimHero result = new AiSimHero(id,t,posX,posY,posZ, 
 				state,burningDuration,currentSpeed,
-				bombPrototype,bombNumber,bombCount, 
+				bombPrototype,bombNumber,bombCount,bombNumberLimit,rangeLimit,
 				throughBlocks,throughBombs,throughFires, 
-				color,walkingSpeedIndex,walkingSpeeds);
+				color,walkingSpeedIndex,walkingSpeeds,
+				contagious,contagiousItems);
 		
 		// update zone
 		if(tile!=null)
@@ -1361,6 +1368,30 @@ public final class AiSimZone extends AiZone
 	@Override
 	public List<AiItem> getItems()
 	{	return externalItems;	
+	}
+	
+	/**
+	 * Renvoie la version de l'item spécifié,
+	 * pour cette zone. Si elle ne contient
+	 * pas un tel item, alors c'est {@code null}
+	 * qui est renvoyé.
+	 * 
+	 * @param item
+	 * 		L'item de référence.
+	 * @return
+	 * 		La version contenue dans cette zone.
+	 */
+	protected AiSimItem getItem(AiItem item)
+	{	AiSimItem result = null;
+	
+		Iterator<AiSimItem> it = internalItems.iterator();
+		while(it.hasNext() && result==null)
+		{	AiSimItem temp = it.next();
+			if(temp.getId()==item.getId())
+				result = temp;
+		}
+		
+		return result;
 	}
 	
 	/**
@@ -1413,10 +1444,13 @@ public final class AiSimZone extends AiZone
 	 *  	L'item sprite à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimItem item)
-	{	AiSimTile tile = item.getTile();
-		internalItems.add(item);
-		externalItems.add(item);
-		tile.addSprite(item);
+	{	internalItems.add(item);
+		
+		AiSimTile tile = item.getTile();
+		if(tile!=null)
+		{	externalItems.add(item);
+			tile.addSprite(item);
+		}
 	}
 	
 	/**
@@ -1427,10 +1461,12 @@ public final class AiSimZone extends AiZone
 	 */
 	protected void removeSprite(AiSimItem item)
 	{	internalItems.remove(item);
-		externalItems.remove(item);
 		
 		AiSimTile tile = item.getTile();
-		tile.removeSprite(item);
+		if(tile!=null)
+		{	externalItems.remove(item);
+			tile.removeSprite(item);
+		}
 	}
 
 	/**
@@ -1490,7 +1526,23 @@ public final class AiSimZone extends AiZone
 		AiStopType stopFires = AiStopType.WEAK_STOP;
 		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		int id = createNewId();
-		AiSimItem result = new AiSimItem(id,t,posX,posY,posZ,state,burningDuration,currentSpeed,itemType,stopBombs,stopFires);
+		double strength = 1;
+		if(itemType==AiItemType.GOLDEN_BOMB || itemType==AiItemType.GOLDEN_FLAME || itemType==AiItemType.GOLDEN_SPEED)
+			strength = -100;
+		else if(itemType==AiItemType.NO_BOMB || itemType==AiItemType.NO_FLAME || itemType==AiItemType.NO_SPEED)
+			strength = -100;
+		boolean contagious = false;
+		boolean limitedDuration = false;
+		long normalDuration = -1;
+		long elapsedTime = -1;
+		if(itemType==AiItemType.NO_BOMB || itemType==AiItemType.NO_FLAME || itemType==AiItemType.NO_SPEED)
+		{	contagious = true;
+			limitedDuration = true;
+			normalDuration = 20000;
+			elapsedTime = 0;
+		}
+		AiSimItem result = new AiSimItem(id,t,posX,posY,posZ,state,burningDuration,currentSpeed,
+				itemType,strength,stopBombs,stopFires,contagious,limitedDuration,normalDuration,elapsedTime);
 		
 		// update zone
 		if(tile!=null)

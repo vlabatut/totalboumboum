@@ -28,25 +28,24 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * décrit un état dans lequel un sprite peut se trouver, c'est
+ * Décrit un état dans lequel un sprite peut se trouver, c'est
  * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
  * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orientées
  * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
- *
  */
 final class AiDataState implements AiState
 {
-	/** sprite dont l'état est représenté */
+	/** Sprite dont l'état est représenté */
 	private Sprite sprite;
 	
 	/**
-	 * construit un objet représentant l'état du sprite passé en paramètre
+	 * Construit un objet représentant l'état du sprite passé en paramètre.
 	 * 
 	 * @param sprite
-	 * 		sprite dont on veut représenter l'état
+	 * 		Sprite dont on veut représenter l'état.
 	 */
 	protected AiDataState(Sprite sprite)
 	{	this.sprite = sprite;
@@ -58,10 +57,10 @@ final class AiDataState implements AiState
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cet état en fonction de l'évolution du sprite de référence
+	 * Met à jour cet état en fonction de l'évolution du sprite de référence.
 	 * 
 	 * @param elapsedTime
-	 * 		temps écoulé depuis la dernière mise à jour
+	 * 		Temps écoulé depuis la dernière mise à jour.
 	 */
 	protected void update(long elapsedTime)
 	{	// direction
@@ -82,8 +81,8 @@ final class AiDataState implements AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associée à l'état */
-	private AiStateName name;
+	/** Nom associée à l'état */
+	private AiStateName name = null;
 	
 	@Override
 	public AiStateName getName()
@@ -91,17 +90,24 @@ final class AiDataState implements AiState
 	}
 	
 	/**
-	 * indique que ce sprite a disparu du jeu
+	 * Indique que ce sprite a disparu du jeu.
 	 */
 	protected void setEnded()
 	{	name = AiStateName.ENDED;		
 	}
 	
+	/**
+	 * Indique que ce sprite n'est pas actuellement en jeu.
+	 */
+	protected void setHiding()
+	{	name = AiStateName.HIDING;		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
-	private Direction direction;
+	/** Direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
+	private Direction direction = null;
 	
 	@Override
 	public Direction getDirection()
@@ -111,7 +117,7 @@ final class AiDataState implements AiState
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** compte combien de temps le sprite a passé dans l'état courant */
+	/** Compte combien de temps le sprite a passé dans l'état courant */
 	private long time = 0;
 	
 	@Override
@@ -151,7 +157,7 @@ final class AiDataState implements AiState
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine cet objet et libère les ressources occupées
+	 * Termine cet objet et libère les ressources occupées.
 	 */
 	protected void finish()
 	{	sprite = null;

@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201213.adapter.data;
  */
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -52,6 +53,17 @@ public interface AiHero extends AiSprite
 	 * 		la portée des bombes
 	 */
 	public int getBombRange();
+
+	/**
+	 * Renvoie la portée maximale que les bombes
+	 * du personnage peuvent atteindre, dans l'absolu
+	 * (i.e. limite qu'on ne peut pas dépasser, quel
+	 * que soit le nombre d'items ramassés).
+	 * 
+	 * @return
+	 * 		La portée limite des bombes.
+	 */
+	public int getBombRangeLimit();
 	
 	/**
 	 * renvoie la durée actuelle des bombes du personnage
@@ -91,6 +103,17 @@ public interface AiHero extends AiSprite
 	 * 		nombre de bombes posées en ce moment
 	 */
 	public int getBombNumberCurrent();
+	
+	/**
+	 * Renvoie le nombre maximal de bombes que le personnage peut poser,
+	 * dans l'absolu (i.e. limite qu'on ne peut pas dépasser, quel
+	 * que soit le nombre d'items ramassés).
+	 * 
+	 * @return
+	 * 		Le nombre maximal de bombes que le personnage peut 
+	 * 		poser, dans l'absolu.
+	 */
+	public int getBombNumberLimit();
 	
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
@@ -206,4 +229,47 @@ public interface AiHero extends AiSprite
 	 * 		vrai si le personnage résiste au feu
 	 */
 	public boolean hasThroughFires();
+
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Renvoie une valeur numérique que l'item spécifié aurait sur ce
+	 * joueur. L'interprétation de cette valeur dépend de l'item considéré. 
+	 * Par exemple, si on obtient +5 pour {@link AiItemType#EXTRA_BOMB}, 
+	 * cela signifie que le joueur pourra poser jusqu'à 5 bombes, <i>s'il 
+	 * ramasse cet item</i>.
+	 * <br/>
+	 * Si l'effet de l'item n'est pas quantifiable (ex : {@link AiItemType#RANDOM_EXTRA},
+	 * {@link AiItemType#OTHER}, etc.), alors la fonction renvoie -1.
+	 * 
+	 * @param item
+	 * 		L'item à considérer.
+	 *  @return
+	 *  	Une valeur numérique représentant la propriété modifiée par l'item,
+	 *  	telle qu'elle sera après que ce joueur aura ramassé l'item.
+	 *  	Ou bien -1 si le type de l'item n'a pas un effet quantifiable. 
+	 */
+	public double getEffect(AiItem item);
+
+	/////////////////////////////////////////////////////////////////
+	// CONTAGION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Indique si ce joueur possède des items à l'effet contagieux.
+	 * 
+	 * @return
+	 * 		{@code true} ssi le joueur possède des items contagieux.
+	 */
+	public boolean isContagious();
+	
+	/**
+	 * Renvoie la liste des items contagieux possédés
+	 * par ce joueur. La liste est vide s'il ne possède
+	 * aucun item contagieux actuellement actif.
+	 * 
+	 * @return
+	 * 		Une liste d'item, qui peut être vide.
+	 */
+	public List<AiItem> getContagiousItems();
 }
