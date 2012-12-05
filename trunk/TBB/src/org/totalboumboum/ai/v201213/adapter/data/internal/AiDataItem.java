@@ -317,10 +317,6 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	//	    à mettre à jour à chaque itération (à partir du joueur, car l'item n'est plus dans une case, à vérif)
 	// remarque : les items sans cases ne seront pas transférés 
 	// TODO dans simulateur, le temps d'effet des items doit être mis à jour
-	// TODO màj : inclure
-	//		- l'instance tournament entière
-	//		- l'api ia entière
-	//		- le reste au cas par cas
 	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
