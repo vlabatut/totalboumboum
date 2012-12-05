@@ -30,50 +30,67 @@ import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiStopType;
 
 /**
- * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
+ * Simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * Un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
  * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimItem extends AiSimSprite implements AiItem
 {
 	/**
-	 * crée une simulation de l'item passé en paramètre,
+	 * Crée une simulation de l'item passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification de l'item
+	 * 		Numéro d'identification de l'item.
 	 * @param tile
-	 * 		case contenant l'item
+	 * 		Case contenant l'item.
 	 * @param posX
-	 * 		abscisse de l'item
+	 * 		Abscisse de l'item.
 	 * @param posY
-	 * 		ordonnée de l'item
+	 * 		Ordonnée de l'item.
 	 * @param posZ
-	 * 		hauteur de l'item
+	 * 		Hauteur de l'item.
 	 * @param state
-	 * 		état de l'item
+	 * 		État de l'item.
 	 * @param burningDuration
-	 * 		durée de combustion de l'item
+	 * 		Durée de combustion de l'item.
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement de l'item
+	 * 		Vitesse courante de déplacement de l'item.
 	 * @param type
-	 * 		type d'item (extrabomb, extraflame, etc.)
+	 * 		Type d'item (extrabomb, extraflame...).
+	 * @param strength
+	 * 		Force de l'item.
 	 * @param stopBombs
-	 * 		capacité à bloquer les bombes
+	 * 		Capacité à bloquer les bombes.
 	 * @param stopFires
-	 * 		capacité à bloquer le feu
+	 * 		Capacité à bloquer le feu.
+	 * @param contagious
+	 * 		Effet contagieux.
+	 * @param limitedDuration
+	 * 		Effet limité. 
+	 * @param normalDuration
+	 * 		Durée de l'effet. 
+	 * @param elapsedTime 
+	 * 		Temps d'effet déjà écoulé.
 	 */
 	protected AiSimItem(int id, AiSimTile tile,  double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
-			AiItemType type, AiStopType stopBombs, AiStopType stopFires)
+			AiItemType type, double strength, 
+			AiStopType stopBombs, AiStopType stopFires,
+			boolean contagious,
+			boolean limitedDuration, long normalDuration, long elapsedTime)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		this.type = type;		
+		this.strength = strength;
 		this.stopBombs = stopBombs;
 		this.stopFires = stopFires;
+		this.contagious = contagious;
+		this.limitedDuration = limitedDuration;
+		this.normalDuration = normalDuration;
+		this.elapsedTime = elapsedTime;
 	}	
 
 	/**
@@ -89,14 +106,19 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	{	super(tile,item);
 		
 		type = item.getType();		
+		strength = item.getStrength();
 		stopBombs = item.hasStopBombs();
 		stopFires = item.hasStopFires();
+		contagious = item.isContagious();
+		limitedDuration = item.hasLimitedDuration();
+		normalDuration = item.getNormalDuration();
+		elapsedTime = item.getElapsedTime();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item simulé */
+	/** Type d'item simulé */
 	private AiItemType type;
 	
 	@Override
@@ -105,11 +127,22 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// STRENGTH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Force de l'item */
+	private double strength;
+
+	@Override
+	public double getStrength()
+	{	return strength;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc laisse passer les joueurs */
+	/** Indique si ce bloc laisse passer les joueurs */
 	private AiStopType stopBombs;
-	/** indique si ce bloc laisse passer le feu */
+	/** Indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
 
 	@Override
@@ -155,6 +188,42 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 		}
 		
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTAGION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indique si cet item a un effet contagieux */
+	private boolean contagious = false;
+	
+	@Override
+	public boolean isContagious()
+	{	return contagious;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indique si cet item a un effet à durée limitée */
+	private boolean limitedDuration;
+	/** Durée de l'effet de cet item( s'il a une durée limitée) */
+	private long normalDuration;
+	/** Durée écoulée depuis que cet item a commencé à faire son effet */
+	private long elapsedTime;
+	
+	@Override
+	public boolean hasLimitedDuration()
+	{	return limitedDuration;
+	}
+	
+	@Override
+	public long getNormalDuration()
+	{	return normalDuration;
+	}
+
+	@Override
+	public long getElapsedTime()
+	{	return elapsedTime;
 	}
 	
 	/////////////////////////////////////////////////////////////////

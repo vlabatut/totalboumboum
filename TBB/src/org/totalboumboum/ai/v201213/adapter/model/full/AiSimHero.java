@@ -21,11 +21,15 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
+import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -39,55 +43,67 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public final class AiSimHero extends AiSimSprite implements AiHero
 {
 	/**
-	 * crée une simulation du personnage passé en paramètre,
+	 * Crée une simulation du personnage passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification du personnage
+	 * 		Numéro d'identification du personnage.
 	 * @param tile
-	 * 		case contenant le personnage
+	 * 		Case contenant le personnage.
 	 * @param posX
-	 * 		abscisse du personnage
+	 * 		Abscisse du personnage.
 	 * @param posY
-	 * 		ordonnée du personnage
+	 * 		Ordonnée du personnage.
 	 * @param posZ
-	 * 		hauteur du personnage
+	 * 		Hauteur du personnage.
 	 * @param state
-	 * 		état du personnage
+	 * 		État du personnage.
 	 * @param burningDuration
-	 * 		durée de combustion du personnage
+	 * 		Durée de combustion du personnage.
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement du personnage
+	 * 		Vitesse courante de déplacement du personnage.
 	 * @param bombPrototype
-	 * 		exemple de bombe que le personnage peut poser
-	 * @param bombNumber
-	 * 		nombre de bombes que le personnage peut poser
-	 * @param bombCount
-	 * 		nombre de bombes actuellement posées
+	 * 		Exemple de bombe que le personnage peut poser.
+	 * @param bombNumberMax
+	 * 		Nombre de bombes que le personnage peut poser.
+	 * @param bombNumberCurrent
+	 * 		Nombre de bombes actuellement posées.
+	 * @param bombNumberLimit
+	 * 		Nombre maximal de bombes que le personnage peut poser simultanément (dans l'absolu). 
+	 * @param rangeLimit 
+	 * 		Portée maximale de la bombe, dans l'absolu.
 	 * @param throughBlocks
-	 * 		capacité du personnage à traverser les blocs
+	 * 		Capacité du personnage à traverser les blocs.
 	 * @param throughBombs
-	 * 		capacité du personnage à traverser les bombes
+	 * 		Capacité du personnage à traverser les bombes.
 	 * @param throughFires
-	 * 		capacité du personnage à traverser le feu (sans mourir !)
+	 * 		Capacité du personnage à traverser le feu (sans mourir !).
 	 * @param color
-	 * 		couleur du personnage
+	 * 		Couleur du personnage.
 	 * @param walkingSpeedIndex
 	 * 		Index de vitesse de déplacement au sol.
 	 * @param walkingSpeeds
 	 * 		Vitesses de déplacement au sol du personnage.
+	 * @param contagious
+	 * 		Indique si le personnage possède des items contagieux. 
+	 * @param contagiousItems 
+	 * 		Liste des items contagieux.
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
-			AiBomb bombPrototype, int bombNumber, int bombCount,
+			AiBomb bombPrototype, int bombNumberMax, int bombNumberCurrent, int bombNumberLimit, int rangeLimit,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
-			PredefinedColor color, int walkingSpeedIndex, HashMap<Integer,Double> walkingSpeeds)
+			PredefinedColor color, int walkingSpeedIndex, HashMap<Integer,Double> walkingSpeeds,
+			boolean contagious, List<AiItem> contagiousItems)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
+		AiSimZone zone = tile.getZone();
 		
 		// bombs
 		this.bombPrototype = bombPrototype;
-		this.bombNumberMax = bombNumber;
-		this.bombNumberCurrent = bombCount;
+		this.bombNumberMax = bombNumberMax;
+		this.bombNumberCurrent = bombNumberCurrent;
+		this.bombNumberLimit = bombNumberLimit;
+		this.rangeLimit = rangeLimit;
 		
 		// collisions
 		this.throughBlocks = throughBlocks;
@@ -98,26 +114,41 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		this.walkingSpeedIndex = walkingSpeedIndex;
 		this.walkingSpeeds = new HashMap<Integer,Double>(walkingSpeeds);
 		
+		// contagion
+		this.contagious = contagious;
+		this.contagiousItems = new ArrayList<AiSimItem>();
+		for(AiItem item: contagiousItems)
+		{	AiSimItem simItem = zone.getItem(item);
+			if(simItem==null)
+			{	simItem = new AiSimItem(null,item);
+				zone.addSprite(simItem);
+			}
+			this.contagiousItems.add(simItem);
+		}
+		
 		// misc
 		this.color = color;
 	}	
 
 	/**
-	 * crée une simulation du joueur passé en paramètre, et contenue dans 
+	 * Crée une simulation du joueur passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param hero	
-	 * 		sprite à simuler
+	 * 		Sprite à simuler.
 	 * @param tile	
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite.
 	 */
 	protected AiSimHero(AiSimTile tile, AiHero hero)
 	{	super(tile,hero);
-		
+		AiSimZone zone = tile.getZone();
+	
 		// bombs
 		bombPrototype = hero.getBombPrototype();
 		bombNumberMax = hero.getBombNumberMax();
 		bombNumberCurrent = hero.getBombNumberCurrent();
+		bombNumberLimit = hero.getBombNumberLimit();
+		rangeLimit = hero.getBombRangeLimit();
 		
 		// collisions
 		throughBlocks = hero.hasThroughBlocks();
@@ -128,6 +159,18 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		walkingSpeedIndex = hero.getWalkingSpeedIndex();
 		walkingSpeeds = new HashMap<Integer, Double>(hero.getWalkingSpeeds());
 		
+		// contagion
+		contagious = hero.isContagious();
+		contagiousItems = new ArrayList<AiSimItem>();
+		for(AiItem item: hero.getContagiousItems())
+		{	AiSimItem simItem = zone.getItem(item);
+			if(simItem==null)
+			{	simItem = new AiSimItem(null,item);
+				zone.addSprite(simItem);
+			}
+			this.contagiousItems.add(simItem);
+		}
+
 		// misc
 		color = hero.getColor();
 	}
@@ -141,6 +184,10 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	private int bombNumberMax;
 	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
+	/** Nombre maximal de bombes que le personnage peut poser simultanément (dans l'absolu) */
+	private int bombNumberLimit;
+	/** Portée maximale de la bombe, dans l'absolu */
+	private int rangeLimit;
 	
 	@Override
 	public AiBomb getBombPrototype()
@@ -150,6 +197,11 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	@Override
 	public int getBombRange()
 	{	return bombPrototype.getRange();
+	}
+	
+	@Override
+	public int getBombRangeLimit()
+	{	return rangeLimit;
 	}
 	
 	/**
@@ -205,6 +257,11 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	{	return bombNumberCurrent;
 	}
 	
+	@Override
+	public int getBombNumberLimit()
+	{	return bombNumberLimit;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -226,10 +283,21 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	
 	@Override
 	public double getWalkingSpeed()
+	{	Double result = getWalkingSpeed(walkingSpeedIndex);
+		return result;
+	}
+	
+	/**
+	 * Calcule la vitesse de déplacement pour
+	 * l'index spécifié.
+	 * 
+	 * @param index
+	 * 		Index à considérer.
+	 * @return
+	 * 		Vitesse de déplacement en pixel/seconde.
+	 */
+	private double getWalkingSpeed(int index)
 	{	Double result = null;
-		int index = walkingSpeedIndex;
-		if(index==0)
-			result = walkingSpeeds.get(index);
 		
 		int delta = -(int)Math.signum(index);
 		while(index!=0 && result==null)
@@ -237,6 +305,9 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 			if(result==null)
 				index = index + delta;
 		}
+		
+		if(index==0)
+			result = walkingSpeeds.get(index);
 		
 		return result;
 	}
@@ -305,6 +376,63 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public double getEffect(AiItem item)
+	{	double result = -1;
+	
+		AiItemType type = item.getType();
+		if(type==AiItemType.ANTI_BOMB || type==AiItemType.EXTRA_BOMB || type==AiItemType.NO_BOMB)
+		{	result = bombNumberMax + item.getStrength();
+			result = Math.min(result, bombNumberLimit);
+		}
+		else if(type==AiItemType.ANTI_FLAME || type==AiItemType.EXTRA_FLAME || type==AiItemType.NO_FLAME)
+		{	result = getBombRange()+ item.getStrength();
+			result = Math.min(result, rangeLimit);
+		}
+		else if(type==AiItemType.ANTI_SPEED || type==AiItemType.EXTRA_SPEED || type==AiItemType.NO_SPEED)
+		{	int index = walkingSpeedIndex + (int)item.getStrength();
+			result = getWalkingSpeed(index);
+		}
+		else
+		{	// rien à faire
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTAGION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indique si ce joueur a un item contagieux */
+	private boolean contagious;
+	/** Liste des items contagieux possédés */
+	private List<AiSimItem> contagiousItems;
+	
+	@Override
+	public boolean isContagious()
+	{	return contagious;
+	}
+	
+	@Override
+	public List<AiItem> getContagiousItems()
+	{	List<AiItem> result = new ArrayList<AiItem>(contagiousItems);
+		return result;
+	}
+	
+	/**
+	 * Renvoie la liste interne contenant les items
+	 * contagieux.
+	 * 
+	 * @return
+	 * 		Une liste d'items.
+	 */
+	public List<AiSimItem> getInternalContagiousItems()
+	{	return contagiousItems;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
