@@ -44,10 +44,6 @@
 		</ability>
 <!--  	HERO_BOMB_RANGE_MAX --> 
 		<ability strength="10" frame="false" time="-1" uses="-1">
-			<name value="HERO_BOMB_NUMBER_MAX" />
-		</ability>
-<!--  	HERO_BOMB_RANGE_MAX --> 
-		<ability strength="10" frame="false" time="-1" uses="-1">
 			<name value="HERO_BOMB_RANGE_MAX" />
 		</ability>
 <!--  	HERO_BOMB_TIMER_COEFFICIENT --> 

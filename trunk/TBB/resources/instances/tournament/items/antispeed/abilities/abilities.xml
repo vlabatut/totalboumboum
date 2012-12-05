@@ -23,7 +23,7 @@
 
 		<!-- STATE -->
 <!--  	ITEM_ON_DEATH_ACTION --> 
-		<ability strength="2">
+		<ability strength="1">
 			<name value="ITEM_ON_DEATH_ACTION" />
 		</ability>
 			
