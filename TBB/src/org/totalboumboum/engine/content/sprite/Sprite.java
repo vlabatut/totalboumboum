@@ -731,6 +731,17 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return itemManager.getItemAbilities();	
 	}
 	
+	/**
+	 * Returns the list of all items this player
+	 * has at this moment of the game.
+	 * 
+	 * @return
+	 * 		A list of items.
+	 */
+	public List<Item> getAllItems()
+	{	return itemManager.getAllItems();	
+	}
+	
 	public void reinitInitialItems()
 	{	itemManager.reinitInitialItems();	
 	}
