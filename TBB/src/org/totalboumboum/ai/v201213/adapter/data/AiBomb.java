@@ -26,11 +26,10 @@ import java.util.List;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
+ * Représente une bombe du jeu, i.e. un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
- *
  */
 public interface AiBomb extends AiSprite
 {	
@@ -38,21 +37,22 @@ public interface AiBomb extends AiSprite
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie un exemple de feu que cette bombe peut générer
+	 * Renvoie un exemple de feu que cette bombe peut générer.
 	 * 
 	 * @return	
-	 * 		une représentation du feu généré par cette bombe
+	 * 		Une représentation du feu généré par cette bombe.
 	 */
 	public AiFire getFirePrototype();
 
 	/**
-	 * renvoie la durée de l'explosion de cette bombe.
+	 * Renvoie la durée de l'explosion de cette bombe.
 	 * Cette durée comprend l'apparition des flammes,
 	 * la durée de vie des flammes, et leur disparition.
-	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
+	 * Cette valeur n'est pas forcément constante, et peut 
+	 * varier d'une bombe à l'autre.
 	 * 
 	 * @return	
-	 * 		la durée de l'explosion
+	 * 		La durée de l'explosion.
 	 */
 	public long getExplosionDuration();
 
@@ -60,34 +60,35 @@ public interface AiBomb extends AiSprite
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
+	 * Renvoie la probabilité que la bombe tombe en panne 
+	 * quand elle devrait exploser.
 	 * 
 	 * @return	
-	 * 		une mesure de probabilité
+	 * 		Une mesure de probabilité.
 	 */
 	public float getFailureProbability();
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'un compte à rebours
+	 * Indique si l'explosion de la bombe dépend d'un compte à rebours.
 	 * 
 	 * @return	
-	 * 		vrai si la bombe dépend d'un compte à rebours
+	 * 		{@code true} ssi la bombe dépend d'un compte à rebours.
 	 */
 	public boolean hasCountdownTrigger();
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'une télécommande
+	 * Indique si l'explosion de la bombe dépend d'une télécommande.
 	 * 
 	 * @return	
-	 * 		vrai si la bombe dépend d'une télécommande
+	 * 		{@code true} si la bombe dépend d'une télécommande.
 	 */
 	public boolean hasRemoteControlTrigger();
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'un contact avec du feu
+	 * Indique si l'explosion de la bombe dépend d'un contact avec du feu.
 	 * 
 	 * @return	
-	 * 		vrai si la bombe explose au contact du feu
+	 * 		{@code true} ssi la bombe explose au contact du feu.
 	 */
 	public boolean hasExplosionTrigger();
 	
@@ -118,22 +119,23 @@ public interface AiBomb extends AiSprite
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la portée de la bombe
-	 * (ie. le nombre de cases occupées par sa flamme)
+	 * Renvoie la portée de la bombe
+	 * (ie. le nombre de cases occupées par sa flamme).
 	 * 
 	 * @return	
-	 * 		portée de la bombe
+	 * 		Portée de la bombe.
 	 */
 	public int getRange();
 	
 	/**
-	 * indique si le feu émis par la bombe peut traverser les murs
+	 * Indique si le feu émis par la bombe peut traverser les murs.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutôt getBlast().
+	 * utilisez plutôt {@link #getBlast()};
 	 * 
 	 * @return	
-	 * 		vrai si le feu peut traverser les murs
+	 * 		{@code true} ssi le feu peut traverser les murs.
 	 */
 	public boolean isPenetrating();
 
@@ -149,7 +151,8 @@ public interface AiBomb extends AiSprite
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	
-	 * 		une liste de cases correspondant aux cases qui seraint touchées par la flamme de cette bombe 
+	 * 		Une liste de cases correspondant aux cases qui seraint touchées 
+	 * 		par la flamme de cette bombe. 
 	 */
 	public List<AiTile> getBlast();
 
@@ -157,10 +160,10 @@ public interface AiBomb extends AiSprite
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
+	 * Indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
 	 * 
 	 * @return	
-	 * 		vrai si cette bombe marche, faux si elle est en panne
+	 * 		{@code true} ssi cette bombe marche, faux si elle est en panne.
 	 */
 	public boolean isWorking();
 
@@ -168,12 +171,12 @@ public interface AiBomb extends AiSprite
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la couleur de cette bombe.
+	 * Renvoie la couleur de cette bombe.
 	 * Cette couleur est null si aucun joueur n'a posé la bombe 
-	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
+	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes).  
 	 * 
 	 * @return 
-	 * 		un symbole de type PredefinedColor représentant une couleur
+	 * 		Un symbole de type PredefinedColor représentant une couleur.
 	 */
 	public PredefinedColor getColor();
 
@@ -228,34 +231,37 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Indique si ce bloc arrête les personnages.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * Utilisez plutot {@link #isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 * 		Une valeur AiStopType indiquant si ce bloc arrête les personnages.
 	 */
 	public AiStopType hasStopHeroes();
 	
 	/**
-	 * indique si ce bloc arrête les explosions.
+	 * Indique si ce bloc arrête les explosions.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * utilisez plutot {@link #isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
+	 * 		Une valeur AiStopType indiquant si ce bloc arrête le feu.
 	 */
 	public AiStopType hasStopFires();
 	
 	/**
-	 * teste si cette bombe est capable de passer à travers les items
+	 * Teste si cette bombe est capable de passer à travers les items.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * utilisez plutot {@link #isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		vrai si la bombe traverse les items
+	 * 		{@code true} ssi la bombe traverse les items.
 	 */
 	public boolean hasThroughItems();
 }

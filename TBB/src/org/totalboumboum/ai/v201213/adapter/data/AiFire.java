@@ -22,11 +22,10 @@ package org.totalboumboum.ai.v201213.adapter.data;
  */
 
 /**
- * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
- * de l'explosion d'une bombe. 
+ * Représente un feu du jeu, i.e. une projection mortelle résultant 
+ * (généralement) de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- *
  */
 public interface AiFire extends AiSprite
 {
@@ -34,35 +33,38 @@ public interface AiFire extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * teste si ce feu est capable de passer à travers les (certains) murs
+	 * Teste si ce feu est capable de passer à travers les (certains) murs.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * utilisez plutot {@link AiSprite#isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		vrai si le feu traverse les murs
+	 * 		{@code true} ssi le feu traverse les murs.
 	 */
 	public boolean hasThroughBlocks();
 
 	/**
-	 * teste si ce feu est capable de passer à travers les bombes
+	 * Teste si ce feu est capable de passer à travers les bombes.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * utilisez plutot {@link AiSprite#isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		vrai si le feu traverse les bombes
+	 * 		{@code true} ssi le feu traverse les bombes.
 	 */
 	public boolean hasThroughBombs();
 
 	/**
-	 * teste si ce feu est capable de passer à travers les items
+	 * Teste si ce feu est capable de passer à travers les items.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * utilisez plutot {@link AiSprite#isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		vrai si le feu traverse les items
+	 * 		{@code true} ssi le feu traverse les items.
 	 */
 	public boolean hasThroughItems();
 
