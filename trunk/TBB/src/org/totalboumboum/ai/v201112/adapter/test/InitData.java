@@ -211,12 +211,19 @@ public final class InitData
 	 */
 	public static ArtificialIntelligence initAi()
 	{	ArtificialIntelligence result = new ArtificialIntelligence()
-		{	protected void updatePercepts() throws StopRequestException{}
+		{	@Override
+			protected void updatePercepts() throws StopRequestException{}
+			@Override
 			protected void initPercepts() throws StopRequestException{}
+			@Override
 			protected void initHandlers() throws StopRequestException{}
+			@Override
 			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
+			@Override
 			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
+			@Override
 			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
+			@Override
 			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
 		};
 		return result;

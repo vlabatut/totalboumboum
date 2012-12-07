@@ -66,6 +66,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	 * termine proprement le gestionnaire de manière à libérer les ressources 
 	 * qu'il occupait.
 	 */
+	@Override
 	public void finishAi()
 	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.stopRequest();

@@ -112,6 +112,7 @@ public class PixelCostCalculator extends CostCalculator
 	 * @return
 	 * 		le coût de ce chemin
 	 */
+	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getPixelDistance();
 		return result;
