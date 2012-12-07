@@ -261,11 +261,15 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			// on identifie le cas de cette case (en fonction du mode)
 			print("        > Identifying the case");
 			AiUtilityCase caze = identifyCase(tile);
+			if(caze == null)
+				throw new NullPointerException("The value returned by your method identifyCase is null. It should not.");
 			print("        < case="+caze);
 			
 			// on identifie la combinaison de valeurs des critères pour le cas détecté
 			print("        > Processing the combination");
 			AiUtilityCombination combination = caze.processCombination(tile);
+			if(combination == null)
+				throw new NullPointerException("The value returned by your method processCombination (for case "+caze.getName()+") is null. It should not.");
 			print("        < combination="+combination);
 			
 			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
