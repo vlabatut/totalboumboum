@@ -250,7 +250,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		Collections.shuffle(selectedTiles); // on désordonne les cases pour introduire du hasard
 		long after = System.currentTimeMillis();
 		long elapsed = after - before;
-		print("    < Exiting selectTiles duration="+elapsed+"number="+selectedTiles.size());
+		print("    < Exiting selectTiles duration="+elapsed+" number="+selectedTiles.size());
 		
 		// on calcule l'utilité de chaque case
 		before = print("    > Processing each tile");
