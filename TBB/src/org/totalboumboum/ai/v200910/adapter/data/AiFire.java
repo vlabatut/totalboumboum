@@ -116,6 +116,7 @@ public class AiFire extends AiSprite<Fire>
 		throughItems = ability.isActive();
 	}
 
+	@Override
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	// par défaut, on bloque
 		boolean result = false;

@@ -302,6 +302,7 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public boolean equals(Object object)
 	{	boolean result = false;
 		if(object instanceof AstarNode)
@@ -309,6 +310,7 @@ public class AstarNode implements Comparable<AstarNode>
 		return result;
 	}
 
+	@Override
 	public int compareTo(AstarNode node)
     {	int result = 0;
 		double f1 = cost+heuristic;
@@ -323,6 +325,7 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String toString()
 	{	String result;
 		result = "<";
