@@ -581,6 +581,13 @@ public class AiFullModel
 			}
 		}
 		
+		// sprite is hidden (generally an item)
+		else if(name==AiStateName.HIDING)
+		{	// for contagious items, we could consider the remaining effect time
+			// but this seems to be too much precision. it's not really neeeded.
+			result = Long.MAX_VALUE;
+		}
+		
 		// sprites just stands doing nothing special
 		else if(name==AiStateName.STANDING)
 		{	// it can also be a bomb waiting to explode
@@ -1697,7 +1704,7 @@ public class AiFullModel
 		Direction direction = state.getDirection();
 		long time = state.getTime() + duration;
 
-		// item is burning (too bad!)
+		// item is burning (too bad, if it's a bonus!)
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = item.getBurningDuration();
 			if(time>=burningDuration) //NOTE problem for future re-spawning sprites (but it's only an approximation, after all...)
@@ -1713,6 +1720,22 @@ public class AiFullModel
 		// items can't move (at least for now)
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
 		{	// useless here
+		}
+		
+		// hidden item (certainly belongs to a player)
+		else if(name==AiStateName.HIDING)
+		{	if(item.hasLimitedDuration())
+			{	long totalDuration = item.getNormalDuration();
+				long elapsedTime = item.getElapsedTime() + duration;
+				if(elapsedTime>=totalDuration)
+				{	elapsedTime = totalDuration;
+					name = AiStateName.ENDED;
+					direction = Direction.NONE;
+					time = 0;
+// TODO comment màj le sprite dans le hero ? (et le supprimer si besoin)					
+				}
+				item.setElapsedTime(elapsedTime);
+			}
 		}
 		
 		// item just stands

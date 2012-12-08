@@ -226,6 +226,17 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	{	return elapsedTime;
 	}
 	
+	/**
+	 * Modifie le temps écoulé pour l'effet de cet item.
+	 * Cette fonction est réservée à un usage interne.
+	 * 
+	 * @param elapsedTime
+	 * 		Le nouveau temps écoulé pour l'effet de cet item.
+	 */
+	protected void setElapsedTime(long elapsedTime)
+	{	this.elapsedTime = elapsedTime;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
