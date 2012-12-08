@@ -1325,7 +1325,12 @@ public final class AiSimZone extends AiZone
 		double currentSpeed = 0;
 		int walkingSpeedIndex = 1;
 		HashMap<Integer,Double> walkingSpeeds = new HashMap<Integer, Double>();
-		walkingSpeeds.put(1,50*RoundVariables.zoomFactor);
+		walkingSpeeds.put(-10000,5*RoundVariables.zoomFactor);
+		walkingSpeeds.put(0,50*RoundVariables.zoomFactor);
+		walkingSpeeds.put(1,100*RoundVariables.zoomFactor);
+		walkingSpeeds.put(2,150*RoundVariables.zoomFactor);
+		walkingSpeeds.put(3,200*RoundVariables.zoomFactor);
+		walkingSpeeds.put(10000,500*RoundVariables.zoomFactor);
 		boolean throughBlocks = false;
 		boolean throughBombs = false;
 		boolean throughFires = false;
@@ -1395,7 +1400,7 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * Permet de diminuer le nombre d'items cachés,
+	 * Permet de modifier le nombre d'items cachés,
 	 * lors de la simulation.
 	 * 
 	 * @param type
@@ -1410,16 +1415,16 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même numéro (id)
+	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblé
+	 * 		Le sprite ciblé.
 	 * @return	
-	 * 		sa représentation dans cette zone
+	 * 		Sa représentation dans cette zone.
 	 */
 	public AiSimItem getSpriteById(AiItem sprite)
 	{	AiSimItem result = null;
@@ -1546,9 +1551,7 @@ public final class AiSimZone extends AiZone
 		
 		// update zone
 		if(tile!=null)
-		{	addSprite(result);
-			updateHiddenItemsCount(itemType,1);
-		}
+			addSprite(result);
 		
 		return result;
 	}

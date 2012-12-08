@@ -1581,8 +1581,8 @@ public class Launcher
 	 * TODO nouveaux items
 	 * - à faire :
 	 * 		- full model (AiFullModel.pickItem):
-	 * 			- gérer l'aspect temporel de certains malus ?
-	 * 			- gérer aussi leur aspect contagieux ?
+	 * 			x gérer l'aspect temporel de certains malus ? >> testé
+	 * 			x gérer aussi leur aspect contagieux ? >> TODO à implémenter + tester !!!!!
 	 */
 
 	// TODO màj : inclure

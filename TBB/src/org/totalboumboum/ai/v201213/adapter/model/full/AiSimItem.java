@@ -246,6 +246,9 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 		result.append("Item: [");
 		result.append(super.toString());
 		result.append(" - type: "+type);
+		result.append(" - contagious: "+contagious);
+		result.append(" - limited: "+limitedDuration);
+		result.append(" ("+elapsedTime+"/"+normalDuration+")");
 		result.append(" ]");
 		return result.toString();
 	}

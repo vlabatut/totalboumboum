@@ -340,8 +340,8 @@ public class AiFullModel
 			sprites.addAll(current.getInternalBombs());
 			sprites.addAll(current.getInternalFires());
 			sprites.addAll(current.getInternalFloors());
-			sprites.addAll(current.getInternalHeroes());
 			sprites.addAll(current.getInternalItems());
+			sprites.addAll(current.getInternalHeroes());
 		
 			// set iteration duration
 			processDuration(sprites);
@@ -406,8 +406,8 @@ public class AiFullModel
 		sprites.addAll(current.getInternalBombs());
 		sprites.addAll(current.getInternalFires());
 		sprites.addAll(current.getInternalFloors());
-		sprites.addAll(current.getInternalHeroes());
 		sprites.addAll(current.getInternalItems());
+		sprites.addAll(current.getInternalHeroes());
 		
 		// process the duration of the next iteration
 		processDuration(sprites);
@@ -583,9 +583,15 @@ public class AiFullModel
 		
 		// sprite is hidden (generally an item)
 		else if(name==AiStateName.HIDING)
-		{	// for contagious items, we could consider the remaining effect time
-			// but this seems to be too much precision. it's not really neeeded.
-			result = Long.MAX_VALUE;
+		{	// we consider the remaining effect time
+			if(sprite instanceof AiItem)
+			{	AiItem item = (AiItem)sprite;
+				if(item.hasLimitedDuration())
+				{	long total = item.getNormalDuration();
+					long elapsed = item.getElapsedTime();
+					result = total - elapsed;
+				}
+			}
 		}
 		
 		// sprites just stands doing nothing special
@@ -1028,6 +1034,7 @@ public class AiFullModel
 			// create item and add it to the zone
 			AiSimTile tile = block.getTile();
 			current.createItem(tile,itemType);
+			current.updateHiddenItemsCount(itemType,-1);
 		}
 	}
 	
@@ -1403,6 +1410,16 @@ public class AiFullModel
 		Direction direction = state.getDirection();
 		long time = state.getTime() + duration;
 
+		// possibly remove terminated items
+		List<AiItem> items = hero.getContagiousItems();
+		Iterator<AiItem> it = items.iterator();
+		while(it.hasNext())
+		{	AiItem item = it.next();
+			AiState st = item.getState();
+			if(st.getName()==AiStateName.ENDED)
+				it.remove();
+		}
+		
 		// hero is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = hero.getBurningDuration();
@@ -1589,11 +1606,12 @@ public class AiFullModel
 	 */
 	private void pickItem(AiSimHero hero, AiSimItem item)
 	{	AiItemType type = item.getType();
-	
+		boolean remove = true;
+		
 		// bombs
 		if(type==AiItemType.NO_BOMB)
 		{	hero.updateBombNumberMax(Integer.MIN_VALUE);
-			// NOTE actually temporary, but this should exceed the simulated duration anyway
+			remove = false;
 			// TODO simulate the contagious aspect
 		}
 		else if(type==AiItemType.ANTI_BOMB)
@@ -1609,7 +1627,7 @@ public class AiFullModel
 		// range
 		if(type==AiItemType.NO_FLAME)
 		{	hero.updateBombRange(Integer.MIN_VALUE);
-			// NOTE actually temporary, but this should exceed the simulated duration, anyway
+			remove = false;
 			// TODO simulate the contagious aspect
 		}
 		else if(type==AiItemType.ANTI_FLAME)
@@ -1625,7 +1643,7 @@ public class AiFullModel
 		// speed
 		if(type==AiItemType.NO_SPEED)
 		{	hero.updateWalkingSpeedIndex(Integer.MIN_VALUE);
-			// NOTE actually temporary, but this should exceed the simulated duration, anyway
+			remove = false;
 			// TODO simulate the contagious aspect
 		}
 		else if(type==AiItemType.ANTI_SPEED)
@@ -1656,9 +1674,25 @@ public class AiFullModel
 		}
 		
 		// remove item
-		AiSimState state = new AiSimState(AiStateName.ENDED,Direction.NONE,0);
-		item.setState(state);
-		current.removeSprite(item);
+		if(remove)
+		{	// update state
+			AiSimState state = new AiSimState(AiStateName.ENDED,Direction.NONE,0);
+			item.setState(state);
+			// remove from the zone
+			current.removeSprite(item);
+		}
+		// or keep it inside the hero sprite
+		else
+		{	// update state
+			AiSimState state = new AiSimState(AiStateName.HIDING,Direction.NONE,0);
+			item.setState(state);
+			// remove from the tile
+			current.removeSprite(item);
+			item.setTile(null);
+			current.addSprite(item);
+			// add to the hero
+			hero.addContagiousItem(item);
+		}
 	}
 	
 	/**
@@ -1728,11 +1762,15 @@ public class AiFullModel
 			{	long totalDuration = item.getNormalDuration();
 				long elapsedTime = item.getElapsedTime() + duration;
 				if(elapsedTime>=totalDuration)
-				{	elapsedTime = totalDuration;
+				{	// update sprite
+					elapsedTime = totalDuration;
 					name = AiStateName.ENDED;
 					direction = Direction.NONE;
 					time = 0;
-// TODO comment màj le sprite dans le hero ? (et le supprimer si besoin)					
+					// update hero >> how ?
+					// >> the sprite should be updated by the hero, it's more convenient
+					// >> reset the hero ability (possibly use additional fields for AiSimHero, to store the old values
+					// >> implement the contagion
 				}
 				item.setElapsedTime(elapsedTime);
 			}

@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201213.adapter.test;
 import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.model.full.AiFullModel;
@@ -51,7 +52,9 @@ public final class FullModelSimulation
 	{	// utilisation de base
 //		example1();
 		// mort subite
-		example2();
+//		example2();
+		// items contagieux à durée limitée
+		example3();
 	}
 	
 	/**
@@ -162,6 +165,50 @@ public final class FullModelSimulation
 			iteration++;
 		}
 		while(duration!=0);
+	}
+	
+	/**
+	 * Réalise une simulation impliquant
+	 * un item contagieux à durée limitée,
+	 * qui modifie la vitesse.
+	 */
+	public static void example3()
+	{	AiSimZone zone = InitData.initZone4();
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		// display initial zone
+		System.out.println("initial zone:\n"+zone);
+		AiFullModel model = new AiFullModel(zone);
+		model.applyChangeHeroDirection(hero,Direction.NONE);
+		System.out.println("hero: "+hero);
+		
+		// simulate
+		int iteration = 0;
+		long duration = 0;
+		long totalDuration;
+		Direction direction = Direction.RIGHT;
+		do
+		{	model.applyChangeHeroDirection(hero, direction);
+			do
+			{	// process simulation
+				model.simulate();
+				// display result
+				duration = model.getDuration();
+				totalDuration = model.getCurrentZone().getTotalTime();
+				System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+				displayModelSimulationStep(model);
+				// display the white player contagious items
+				hero = model.getCurrentZone().getHeroByColor(hero.getColor());
+				List<AiItem> items = hero.getContagiousItems();
+				for(AiItem item: items)
+					System.out.println("\t- "+item);
+				// update iteration
+				iteration++;
+			}
+			while(duration!=0);
+			direction = direction.getNextPrimary();
+		}
+		while(totalDuration<100000);
 	}
 	
 	/**
