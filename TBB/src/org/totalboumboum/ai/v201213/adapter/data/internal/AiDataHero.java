@@ -387,9 +387,9 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		AiDataZone zone = tile.getZone();
 		contagious = false;
 		
-System.out.println("-------------------------------------------");
-System.out.println(this);
-System.out.println("-------------------------------------------");
+//System.out.println("-------------------------------------------");
+//System.out.println(this);
+//System.out.println("-------------------------------------------");
 		// on traite chaque item de l'agent
 		for(Item item: items)
 		{	// on teste si l'item est contagieux

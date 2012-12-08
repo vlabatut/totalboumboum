@@ -312,12 +312,6 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	{	return elapsedTime;
 	}
 
-	// x TODO dans AiHero: liste des items contagieux possédés + méthodes d'accès
-	//      (juste savoir si contagieux + quels items exactement)
-	//	    à mettre à jour à chaque itération (à partir du joueur, car l'item n'est plus dans une case, à vérif)
-	// remarque : les items sans cases ne seront pas transférés 
-	// TODO dans simulateur, le temps d'effet des items doit être mis à jour
-	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

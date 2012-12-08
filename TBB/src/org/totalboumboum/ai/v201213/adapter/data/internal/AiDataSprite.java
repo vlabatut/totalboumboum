@@ -59,13 +59,13 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 		checked = true;
 		
 		// burning duration
-//TODO à tester
 		burningDuration = -1;
 		Gesture gesture = sprite.getGesturePack().getGesture(GestureName.BURNING);
 		if(gesture!=null)
 		{	AnimeDirection anime = gesture.getAnimeDirection(Direction.NONE);
 			if(anime!=null)
 				burningDuration = anime.getTotalDuration();
+				//System.out.println(sprite.getName()+" : "+burningDuration);			
 		}
 		
 		// hiding state
