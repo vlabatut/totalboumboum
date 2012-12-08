@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -299,16 +300,30 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	private double getWalkingSpeed(int index)
 	{	Double result = null;
 		
-		int delta = -(int)Math.signum(index);
-		while(index!=0 && result==null)
-		{	result = walkingSpeeds.get(index);
-			if(result==null)
-				index = index + delta;
+		// get the speed indices
+		List<Integer> keys = new ArrayList<Integer>(walkingSpeeds.keySet());
+		Collections.sort(keys);
+		int zero = keys.indexOf(0);
+		
+		// increased speed
+		if(index>0)
+		{	int i = zero;
+			while(i<keys.size() && keys.get(i)<=index)
+				i++;
+			i--;
+			index = keys.get(i);
 		}
 		
-		if(index==0)
-			result = walkingSpeeds.get(index);
-		
+		// decreased speed
+		else if(index<0)
+		{	int i = zero;
+			while(i>=0 && keys.get(i)>=index)
+				i--;
+			i++;
+			index = keys.get(i);
+		}
+		result = walkingSpeeds.get(index);
+				
 		return result;
 	}
 	
@@ -420,6 +435,19 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	public List<AiItem> getContagiousItems()
 	{	List<AiItem> result = new ArrayList<AiItem>(contagiousItems);
 		return result;
+	}
+	
+	/**
+	 * Rajoute un item à la liste des items contagieux de ce personnage.
+	 * <br/>
+	 * Cette fonction est à usage interne et vous (le concepteur de l'agent)
+	 * ne devez pas l'utiliser.
+	 * 
+	 * @param item
+	 * 		L'item à rajouter à la liste des items contagieux de ce personnage.
+	 */
+	public void addContagiousItem(AiSimItem item)
+	{	contagiousItems.add(item);
 	}
 	
 	/**
