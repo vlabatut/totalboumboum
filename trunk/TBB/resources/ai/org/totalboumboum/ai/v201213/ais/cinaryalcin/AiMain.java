@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.cinaryalcin;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.cinaryalcin.v0.CinarYalcin;
+import org.totalboumboum.ai.v201213.ais.cinaryalcin.v1.CinarYalcin;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

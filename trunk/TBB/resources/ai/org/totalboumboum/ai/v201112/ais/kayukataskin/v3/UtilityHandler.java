@@ -93,6 +93,7 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 		dijkstra = new Dijkstra(ai,ownHero,costCalculator,successorCalculator);
 	}
 	
+	@Override
 	protected void resetData() throws StopRequestException
 	{	ai.checkInterruption();
 		super.resetData();
@@ -100,6 +101,7 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 		bombTiles.clear();
 	}
 	
+	@Override
 	protected Set<AiTile> selectTiles() throws StopRequestException
 	{	ai.checkInterruption();
 		Set<AiTile> result = new TreeSet<AiTile>();

@@ -53,6 +53,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	 * 
 	 * @return action d'IA
 	 */
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 

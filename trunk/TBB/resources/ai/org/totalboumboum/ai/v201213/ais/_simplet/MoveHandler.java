@@ -171,6 +171,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 	 * @throws StopRequestException 
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
+	@Override
 	protected AiTile updateCurrentDestination() throws StopRequestException
 	{	ai.checkInterruption();
 		zone = ai.getZone();
@@ -292,6 +293,7 @@ if(!tiles.isEmpty())
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
+	@Override
 	protected AiPath updateCurrentPath() throws StopRequestException
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
@@ -476,6 +478,7 @@ if(!tiles.isEmpty())
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
+	@Override
 	protected Direction updateCurrentDirection() throws StopRequestException
 	{	ai.checkInterruption();
 		
