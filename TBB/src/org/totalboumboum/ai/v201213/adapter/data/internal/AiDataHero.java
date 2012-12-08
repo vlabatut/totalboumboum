@@ -386,6 +386,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	{	List<Item> items = sprite.getAllItems();
 		AiDataZone zone = tile.getZone();
 		contagious = false;
+		contagiousItems.clear();
 		
 //System.out.println("-------------------------------------------");
 //System.out.println(this);

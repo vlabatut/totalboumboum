@@ -87,6 +87,16 @@ public class Simplet extends ArtificialIntelligence
 			long elapsed = after - before;
 			print("    < Exiting targetHandler.update: duration="+elapsed+" ms");
 		}
+		
+//PredefinedColor color = getZone().getOwnHero().getColor();
+//if(color==PredefinedColor.GRASS)
+//{	System.out.println("-----------------------------------------------------");
+//	AiSimZone zone = new AiSimZone(getZone());
+//	AiHero hero = zone.getHeroByColor(color);
+//	List<AiItem> items = hero.getContagiousItems();
+//	for(AiItem item: items)
+//		System.out.println(item+" "+item.getElapsedTime()+"/"+item.getNormalDuration());
+//}
 	}
 	
 	/////////////////////////////////////////////////////////////////
