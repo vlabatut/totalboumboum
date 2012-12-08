@@ -41,6 +41,7 @@ public class BombHandler extends AiBombHandler<KayukaTaskin>
 	/** */
 	private AiHero ownHero;
 	
+	@Override
 	protected boolean considerBombing() throws StopRequestException
 	{	ai.checkInterruption();
 		boolean canBomb=false;

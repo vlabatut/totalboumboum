@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.gerginozkanoglu;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v0.GerginOzkanoglu;
+import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v2.GerginOzkanoglu;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

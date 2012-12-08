@@ -45,6 +45,7 @@ public class ModeHandler extends AiModeHandler<DemirelOz> {
 		return result;
 	}
 
+	@Override
 	protected boolean isCollectPossible() throws StopRequestException {
 		ai.checkInterruption();
 		AiZone zone = this.ai.getZone();

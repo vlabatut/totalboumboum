@@ -81,6 +81,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * 
 	 * @return resultat
 	 * */
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		// avant tout: test d'interruption
 		checkInterruption();

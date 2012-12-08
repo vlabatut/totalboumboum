@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.alcarkayayildirim;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v0.AlcarKayaYildirim;
+import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v1.AlcarKayaYildirim;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

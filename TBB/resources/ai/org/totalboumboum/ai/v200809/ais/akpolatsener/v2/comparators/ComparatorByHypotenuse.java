@@ -51,6 +51,7 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 		danger = null;
 	}
 
+	@Override
 	public int compare(AiTile tile1, AiTile tile2) {
 		int result = 0;
 

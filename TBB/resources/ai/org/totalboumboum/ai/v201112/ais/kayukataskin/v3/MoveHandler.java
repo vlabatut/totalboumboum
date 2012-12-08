@@ -97,7 +97,7 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 		return arrived;
 	}
 	
-	
+	@Override
 	protected Direction considerMoving() throws StopRequestException
 	{	ai.checkInterruption();
 	zone = ai.getZone();
