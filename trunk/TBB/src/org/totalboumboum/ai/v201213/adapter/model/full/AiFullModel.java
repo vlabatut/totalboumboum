@@ -1646,7 +1646,6 @@ public class AiFullModel
 		{	hero.recordBombNumberMax();
 			hero.updateBombNumberMax(Integer.MIN_VALUE);
 			remove = false;
-			// TODO simulate the contagious aspect
 		}
 		else if(type==AiItemType.ANTI_BOMB)
 		{	hero.updateBombNumberMax(-1);
@@ -1663,7 +1662,6 @@ public class AiFullModel
 		{	hero.recordRange();
 			hero.updateBombRange(Integer.MIN_VALUE);
 			remove = false;
-			// TODO simulate the contagious aspect
 		}
 		else if(type==AiItemType.ANTI_FLAME)
 		{	hero.updateBombRange(-1);
@@ -1680,7 +1678,6 @@ public class AiFullModel
 		{	hero.recordWalkingSpeedIndex();
 			hero.updateWalkingSpeedIndex(Integer.MIN_VALUE);
 			remove = false;
-			// TODO simulate the contagious aspect
 		}
 		else if(type==AiItemType.ANTI_SPEED)
 		{	hero.updateWalkingSpeedIndex(-1);
@@ -1695,7 +1692,6 @@ public class AiFullModel
 		// random
 		else if(type==AiItemType.RANDOM_NONE)
 		{	// nothing to do (can't know what the effect is)
-			// TODO or maybe deal with the contagious aspect?
 		}
 		else if(type==AiItemType.RANDOM_EXTRA)
 		{	// nothing to do (can't know what the effect is)

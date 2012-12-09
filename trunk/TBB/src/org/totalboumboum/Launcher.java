@@ -1577,12 +1577,6 @@ public class Launcher
 	 * 		- demi-finale : les 2 premiers de cette année contre les 3 ex-gagnants les moins bien classés
 	 * 		- finale : les 3 premiers de la demi-finale contre les 2 ex-gagnants les mieux classés
 	 * 		>> il faut implémenter un système de qualif directe pour certains joueurs 
-	 * 
-	 * TODO nouveaux items
-	 * - à faire :
-	 * 		- full model (AiFullModel.pickItem):
-	 * 			x gérer l'aspect temporel de certains malus ? >> testé
-	 * 			x gérer aussi leur aspect contagieux ? >> TODO à implémenter + tester !!!!!
 	 */
 
 	// TODO màj : inclure
