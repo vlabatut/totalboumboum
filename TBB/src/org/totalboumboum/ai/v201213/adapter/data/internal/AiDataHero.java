@@ -385,8 +385,6 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// CONTAGION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indique si ce joueur a un item contagieux */
-	private boolean contagious;
 	/** Liste des items contagieux possédés */
 	private List<AiDataItem> contagiousItems = new ArrayList<AiDataItem>();
 	
@@ -400,7 +398,6 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	private void updateContagious(long elapsedTime)
 	{	List<Item> items = sprite.getAllItems();
 		AiDataZone zone = tile.getZone();
-		contagious = false;
 		contagiousItems.clear();
 		
 //System.out.println("-------------------------------------------");
@@ -412,8 +409,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 			StateAbility ability = item.getAbility(StateAbilityName.ITEM_CONTAGION_MODE);
 			float mode = ability.getStrength();
 			if(mode!=StateAbilityName.ITEM_CONTAGION_NONE)
-			{	contagious = true;
-				// on récupère éventuellement l'item à partir de la zone
+			{	// on récupère éventuellement l'item à partir de la zone
 				AiDataItem aiItem = zone.getItem(item);
 				// et on le met à jour
 				if(aiItem!=null)
@@ -433,7 +429,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	
 	@Override
 	public boolean isContagious()
-	{	return contagious;
+	{	return !contagiousItems.isEmpty();
 	}
 	
 	@Override

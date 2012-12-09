@@ -1583,4 +1583,8 @@ public class Launcher
 	//		- l'instance tournament entière
 	//		- l'api ia entière (toutes les versions)
 	//		- le reste au cas par cas
+	
+	// TODO debug
+	// - tester si black a la limite de vitesse après la contagion
+	// - lors d'une transmition d'item, il y a apparemment une double mise à jour du temps
 }

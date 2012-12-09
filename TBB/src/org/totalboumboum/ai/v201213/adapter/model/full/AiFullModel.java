@@ -1423,6 +1423,7 @@ public class AiFullModel
 
 		// possibly update possessed items
 		List<AiItem> items = hero.getContagiousItems();
+		List<AiItem> rm = new ArrayList<AiItem>();
 		Iterator<AiItem> it = items.iterator();
 		while(it.hasNext())
 		{	AiSimItem item = (AiSimItem)it.next();
@@ -1434,12 +1435,9 @@ public class AiFullModel
 				if(elapsedTime>=totalDuration)
 				{	// remove item
 					elapsedTime = totalDuration;
-					name = AiStateName.ENDED;
-					direction = Direction.NONE;
-					time = 0;
-					newState = new AiSimState(name,direction,time);
+					newState = new AiSimState(AiStateName.ENDED,Direction.NONE,0);
 					item.setState(newState);
-					it.remove();
+					rm.add(item);
 					// restore hero abilities
 					AiItemType type = item.getType();
 					if(type==AiItemType.NO_BOMB)
@@ -1452,6 +1450,8 @@ public class AiFullModel
 				item.setElapsedTime(elapsedTime);
 			}		
 		}
+		for(AiItem item: rm)
+			hero.removeContagiousItem(item);
 		
 		// hero is burning
 		if(name==AiStateName.BURNING)

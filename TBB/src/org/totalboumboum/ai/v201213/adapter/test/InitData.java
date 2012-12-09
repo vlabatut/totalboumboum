@@ -435,7 +435,7 @@ public final class InitData
 			AiSimTile tile = zone.getTile(1,1);
 			PredefinedColor color = PredefinedColor.WHITE;
 			zone.createHero(tile,color,bombNumber,bombRange,true);
-			tile = zone.getTile(5,5);
+			tile = zone.getTile(5,1);
 			color = PredefinedColor.BLACK;
 			zone.createHero(tile,color,bombNumber,bombRange,true);
 		}

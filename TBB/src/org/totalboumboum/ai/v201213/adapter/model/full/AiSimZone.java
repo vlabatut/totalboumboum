@@ -1334,7 +1334,6 @@ public final class AiSimZone extends AiZone
 		boolean throughBlocks = false;
 		boolean throughBombs = false;
 		boolean throughFires = false;
-		boolean contagious = false;
 		List<AiItem> contagiousItems = new ArrayList<AiItem>();
 		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		int id = createNewId();
@@ -1343,7 +1342,7 @@ public final class AiSimZone extends AiZone
 				bombPrototype,bombNumber,bombCount,bombNumberLimit,rangeLimit,
 				throughBlocks,throughBombs,throughFires, 
 				color,walkingSpeedIndex,walkingSpeeds,
-				contagious,contagiousItems);
+				contagiousItems);
 		
 		// update zone
 		if(tile!=null)
