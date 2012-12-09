@@ -85,8 +85,6 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * 		Index de vitesse de déplacement au sol.
 	 * @param walkingSpeeds
 	 * 		Vitesses de déplacement au sol du personnage.
-	 * @param contagious
-	 * 		Indique si le personnage possède des items contagieux. 
 	 * @param contagiousItems 
 	 * 		Liste des items contagieux.
 	 */
@@ -95,7 +93,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 			AiSimBomb bombPrototype, int bombNumberMax, int bombNumberCurrent, int bombNumberLimit, int rangeLimit,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, int walkingSpeedIndex, HashMap<Integer,Double> walkingSpeeds,
-			boolean contagious, List<AiItem> contagiousItems)
+			List<AiItem> contagiousItems)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		AiSimZone zone = tile.getZone();
 		
@@ -116,7 +114,6 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		this.walkingSpeeds = new HashMap<Integer,Double>(walkingSpeeds);
 		
 		// contagion
-		this.contagious = contagious;
 		this.contagiousItems = new ArrayList<AiSimItem>();
 		for(AiItem item: contagiousItems)
 		{	AiSimItem simItem = zone.getItem(item);
@@ -161,7 +158,6 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		walkingSpeeds = new HashMap<Integer, Double>(hero.getWalkingSpeeds());
 		
 		// contagion
-		contagious = hero.isContagious();
 		contagiousItems = new ArrayList<AiSimItem>();
 		for(AiItem item: hero.getContagiousItems())
 		{	AiSimItem simItem = zone.getItem(item);
@@ -552,14 +548,12 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// CONTAGION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indique si ce joueur a un item contagieux */
-	private boolean contagious;
 	/** Liste des items contagieux possédés */
 	private List<AiSimItem> contagiousItems;
 	
 	@Override
 	public boolean isContagious()
-	{	return contagious;
+	{	return !contagiousItems.isEmpty();
 	}
 	
 	@Override

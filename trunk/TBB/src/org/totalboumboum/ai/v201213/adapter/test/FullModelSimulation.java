@@ -184,31 +184,32 @@ public final class FullModelSimulation
 		
 		// simulate
 		int iteration = 0;
-		long duration = 0;
-		long totalDuration;
-		Direction direction = Direction.RIGHT;
+		long totalDuration = 0;
+		Direction direction = Direction.DOWN;
 		do
 		{	model.applyChangeHeroDirection(hero, direction);
-			do
+			for(int i=0;i<4;i++)
 			{	// process simulation
 				model.simulate();
 				// display result
-				duration = model.getDuration();
 				totalDuration = model.getCurrentZone().getTotalTime();
+				System.out.println("---------------------------------------------------");
 				System.out.println("iteration "+iteration+" ["+totalDuration+"]");
 				displayModelSimulationStep(model);
-				// display the white player contagious items
-				hero = model.getCurrentZone().getHeroByColor(hero.getColor());
-				List<AiItem> items = hero.getContagiousItems();
-				for(AiItem item: items)
-					System.out.println("\t- "+item);
+				// display the players contagious items
+				for(PredefinedColor c: new PredefinedColor[]{PredefinedColor.WHITE,PredefinedColor.BLACK})
+				{	System.out.println(">>"+c+":");
+					AiHero h = model.getCurrentZone().getHeroByColor(c);
+					List<AiItem> items = h.getContagiousItems();
+					for(AiItem item: items)
+						System.out.println("\t- "+item);
+				}
 				// update iteration
 				iteration++;
 			}
-			while(duration!=0);
-			direction = direction.getNextPrimary();
+			direction = direction.getPreviousPrimary();
 		}
-		while(totalDuration<100000);
+		while(totalDuration<45000);
 	}
 	
 	/**
