@@ -96,7 +96,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/** Nombre maximal de bombes que le personnage peut poser simultanément (dans l'absolu) */
 	private int bombNumberLimit;
 	/** Portée maximale de la bombe, dans l'absolu */
-	private int rangeLimit;
+	private int bombRangeLimit;
 	
 	@Override
 	public AiBomb getBombPrototype()
@@ -110,7 +110,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	
 	@Override
 	public int getBombRangeLimit()
-	{	return rangeLimit;
+	{	return bombRangeLimit;
 	}
 	
 	@Override
@@ -175,7 +175,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
     	
     	// limit for the bomb range
 		{	StateAbility ab = sprite.getAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
-			rangeLimit = (int)ab.getStrength();
+			bombRangeLimit = (int)ab.getStrength();
 		}
     	
     	//System.out.println(getSprite().getColor()+": bombRange="+bombRange+" bombNumber="+bombNumber+" bombCount="+bombCount);
@@ -368,7 +368,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		}
 		else if(type==AiItemType.ANTI_FLAME || type==AiItemType.EXTRA_FLAME || type==AiItemType.GOLDEN_FLAME || type==AiItemType.NO_FLAME)
 		{	result = getBombRange()+ item.getStrength();
-			result = Math.min(result, rangeLimit);
+			result = Math.min(result, bombRangeLimit);
 			result = Math.max(result, 0);
 		}
 		else if(type==AiItemType.ANTI_SPEED || type==AiItemType.EXTRA_SPEED || type==AiItemType.GOLDEN_SPEED || type==AiItemType.NO_SPEED)

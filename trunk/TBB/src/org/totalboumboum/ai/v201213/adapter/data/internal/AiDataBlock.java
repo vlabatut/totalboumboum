@@ -55,13 +55,13 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 {
 	/**
-	 * crée une représentation du bloc passé en paramètre, et contenue dans 
+	 * Crée une représentation du bloc passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite.
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		Sprite à représenter.
 	 */
 	protected AiDataBlock(AiDataTile tile, Block sprite)
 	{	super(tile,sprite);
@@ -82,11 +82,11 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut être détruit par une bombe */
+	/** Indique si ce bloc peut être détruit par une bombe */
 	private boolean destructible;
 
 	/** 
-	 * met jour l'indicateur de destructibilité 
+	 * Met jour l'indicateur de destructibilité.
 	 */
 	private void updateDestructible()
 	{	Block sprite = getSprite();
@@ -102,9 +102,9 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc laisse passer les joueurs */
+	/** Indique si ce bloc laisse passer les joueurs */
 	private AiStopType stopHeroes;
-	/** indique si ce bloc laisse passer le feu */
+	/** Indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
 	
 	@Override
@@ -118,8 +118,8 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	}
 	
 	/** 
-	 * met jour les différentes caractéristiques de ce bloc
-	 * concernant la gestion des collisions avec les autres sprites
+	 * Met jour les différentes caractéristiques de ce bloc
+	 * concernant la gestion des collisions avec les autres sprites.
 	 */
 	private void updateCollisions()
 	{	Block sprite = getSprite();

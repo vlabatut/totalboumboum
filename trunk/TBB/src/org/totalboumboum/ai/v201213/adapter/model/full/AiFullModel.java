@@ -340,8 +340,8 @@ public class AiFullModel
 			sprites.addAll(current.getInternalBombs());
 			sprites.addAll(current.getInternalFires());
 			sprites.addAll(current.getInternalFloors());
-			sprites.addAll(current.getInternalItems());
 			sprites.addAll(current.getInternalHeroes());
+			sprites.addAll(current.getInternalItems());
 		
 			// set iteration duration
 			processDuration(sprites);
@@ -406,8 +406,8 @@ public class AiFullModel
 		sprites.addAll(current.getInternalBombs());
 		sprites.addAll(current.getInternalFires());
 		sprites.addAll(current.getInternalFloors());
-		sprites.addAll(current.getInternalItems());
 		sprites.addAll(current.getInternalHeroes());
+		sprites.addAll(current.getInternalItems());
 		
 		// process the duration of the next iteration
 		processDuration(sprites);
@@ -772,14 +772,25 @@ public class AiFullModel
 				limitSprites.add(sprite);
 		}
 		
-		// a hero might pick an item in the new tile
+		// a hero might pick an item in the new tile, or propagate a contagion
 		if(sprite instanceof AiSimHero && !newTile.equals(tile))
 		{	AiSimHero hero = (AiSimHero)sprite;
+			// pick the items present in the tile
 			List<AiSimItem> items = new ArrayList<AiSimItem>(newTile.getInternalItems()); 
 			for(AiSimItem item: items)
 			{	AiStateName itemStateName = item.getState().getName();
 				if(itemStateName==AiStateName.STANDING)
 					pickItem(hero,item);
+			}
+			// transmit diseases
+			if(hero.isContagious())
+			{	List<AiSimHero> heroes = new ArrayList<AiSimHero>(newTile.getInternalHeroes());
+				if(heroes.size()>0)
+				{	AiSimHero target = heroes.get(0);
+					List<AiSimItem> diseases = new ArrayList<AiSimItem>(hero.getInternalContagiousItems());
+					for(AiSimItem disease: diseases)
+						transmitItem(hero,target,disease);
+				}
 			}
 		}
 
@@ -849,7 +860,7 @@ public class AiFullModel
 							crushedSprites.addAll(items);
 						}
 						else
-						{	// NOTE cannot appear >> randomly bounces elsewhere
+						{	// NOTE cannot appear >> should randomly bounces elsewhere
 						}
 					}
 					// hardwall falling
@@ -865,7 +876,7 @@ public class AiFullModel
 							crushedSprites.addAll(items);
 						}
 						else
-						{	// NOTE cannot appear >> randomly bounces elsewhere
+						{	// NOTE cannot appear >> should randomly bounces elsewhere
 						}
 					}
 				}
@@ -880,7 +891,7 @@ public class AiFullModel
 						crushedSprites.addAll(heroes);
 					}
 					else
-					{	// NOTE cannot appear >> randomly bounces elsewhere
+					{	// NOTE cannot appear >> should randomly bounces elsewhere
 					}
 				}
 				// item falling
@@ -893,7 +904,7 @@ public class AiFullModel
 						crushedSprites.addAll(floors);
 					}
 					else
-					{	// NOTE cannot appear >> wait for the tile to be clear
+					{	// NOTE cannot appear >> should wait for the tile to be clear
 					}
 				}
 			}
@@ -1410,14 +1421,36 @@ public class AiFullModel
 		Direction direction = state.getDirection();
 		long time = state.getTime() + duration;
 
-		// possibly remove terminated items
+		// possibly update possessed items
 		List<AiItem> items = hero.getContagiousItems();
 		Iterator<AiItem> it = items.iterator();
 		while(it.hasNext())
-		{	AiItem item = it.next();
-			AiState st = item.getState();
-			if(st.getName()==AiStateName.ENDED)
-				it.remove();
+		{	AiSimItem item = (AiSimItem)it.next();
+			// process only items with limited effect
+			if(item.hasLimitedDuration())
+			{	long totalDuration = item.getNormalDuration();
+				long elapsedTime = item.getElapsedTime() + duration;
+				// if the item effect is over, it is removed
+				if(elapsedTime>=totalDuration)
+				{	// remove item
+					elapsedTime = totalDuration;
+					name = AiStateName.ENDED;
+					direction = Direction.NONE;
+					time = 0;
+					newState = new AiSimState(name,direction,time);
+					item.setState(newState);
+					it.remove();
+					// restore hero abilities
+					AiItemType type = item.getType();
+					if(type==AiItemType.NO_BOMB)
+						hero.restoreBombNumberMax();
+					else if(type==AiItemType.NO_FLAME)
+						hero.restoreRange();
+					else if(type==AiItemType.NO_SPEED)
+						hero.restoreWalkingSpeedIndex();
+				}
+				item.setElapsedTime(elapsedTime);
+			}		
 		}
 		
 		// hero is burning
@@ -1610,7 +1643,8 @@ public class AiFullModel
 		
 		// bombs
 		if(type==AiItemType.NO_BOMB)
-		{	hero.updateBombNumberMax(Integer.MIN_VALUE);
+		{	hero.recordBombNumberMax();
+			hero.updateBombNumberMax(Integer.MIN_VALUE);
 			remove = false;
 			// TODO simulate the contagious aspect
 		}
@@ -1626,7 +1660,8 @@ public class AiFullModel
 		
 		// range
 		if(type==AiItemType.NO_FLAME)
-		{	hero.updateBombRange(Integer.MIN_VALUE);
+		{	hero.recordRange();
+			hero.updateBombRange(Integer.MIN_VALUE);
 			remove = false;
 			// TODO simulate the contagious aspect
 		}
@@ -1642,7 +1677,8 @@ public class AiFullModel
 		
 		// speed
 		if(type==AiItemType.NO_SPEED)
-		{	hero.updateWalkingSpeedIndex(Integer.MIN_VALUE);
+		{	hero.recordWalkingSpeedIndex();
+			hero.updateWalkingSpeedIndex(Integer.MIN_VALUE);
 			remove = false;
 			// TODO simulate the contagious aspect
 		}
@@ -1687,12 +1723,41 @@ public class AiFullModel
 			AiSimState state = new AiSimState(AiStateName.HIDING,Direction.NONE,0);
 			item.setState(state);
 			// remove from the tile
-			current.removeSprite(item);
-			item.setTile(null);
-			current.addSprite(item);
+			if(item.getTile()!=null)
+			{	current.removeSprite(item);
+				item.setTile(null);
+				current.addSprite(item);
+			}
 			// add to the hero
 			hero.addContagiousItem(item);
 		}
+	}
+	
+	/**
+	 * Implémente les modifications liées à la transmission d'un
+	 * item entre deux joueurs (de la source vers la cible).
+	 *  
+	 * @param source
+	 * 		Le personnage perdant l'item.
+	 * @param target
+	 * 		Le personnage recevant l'item.
+	 * @param item
+	 * 		L'item transmis par la source à la cible.
+	 */
+	private void transmitItem(AiSimHero source, AiSimHero target, AiSimItem item)
+	{	AiItemType type = item.getType();
+
+		// update source
+		if(type==AiItemType.NO_BOMB)
+			source.restoreBombNumberMax();
+		else if(type==AiItemType.NO_FLAME)
+			source.restoreRange();
+		else if(type==AiItemType.NO_SPEED)
+			source.restoreWalkingSpeedIndex();
+		source.removeContagiousItem(item);
+		
+		// update target
+		pickItem(target,item);
 	}
 	
 	/**
@@ -1758,22 +1823,7 @@ public class AiFullModel
 		
 		// hidden item (certainly belongs to a player)
 		else if(name==AiStateName.HIDING)
-		{	if(item.hasLimitedDuration())
-			{	long totalDuration = item.getNormalDuration();
-				long elapsedTime = item.getElapsedTime() + duration;
-				if(elapsedTime>=totalDuration)
-				{	// update sprite
-					elapsedTime = totalDuration;
-					name = AiStateName.ENDED;
-					direction = Direction.NONE;
-					time = 0;
-					// update hero >> how ?
-					// >> the sprite should be updated by the hero, it's more convenient
-					// >> reset the hero ability (possibly use additional fields for AiSimHero, to store the old values
-					// >> implement the contagion
-				}
-				item.setElapsedTime(elapsedTime);
-			}
+		{	// already updated by the player possessing the item
 		}
 		
 		// item just stands

@@ -92,7 +92,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
-			AiBomb bombPrototype, int bombNumberMax, int bombNumberCurrent, int bombNumberLimit, int rangeLimit,
+			AiSimBomb bombPrototype, int bombNumberMax, int bombNumberCurrent, int bombNumberLimit, int rangeLimit,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, int walkingSpeedIndex, HashMap<Integer,Double> walkingSpeeds,
 			boolean contagious, List<AiItem> contagiousItems)
@@ -104,7 +104,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		this.bombNumberMax = bombNumberMax;
 		this.bombNumberCurrent = bombNumberCurrent;
 		this.bombNumberLimit = bombNumberLimit;
-		this.rangeLimit = rangeLimit;
+		this.bombRangeLimit = rangeLimit;
 		
 		// collisions
 		this.throughBlocks = throughBlocks;
@@ -145,11 +145,11 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		AiSimZone zone = tile.getZone();
 	
 		// bombs
-		bombPrototype = hero.getBombPrototype();
+		bombPrototype = new AiSimBomb(null,hero.getBombPrototype());
 		bombNumberMax = hero.getBombNumberMax();
 		bombNumberCurrent = hero.getBombNumberCurrent();
 		bombNumberLimit = hero.getBombNumberLimit();
-		rangeLimit = hero.getBombRangeLimit();
+		bombRangeLimit = hero.getBombRangeLimit();
 		
 		// collisions
 		throughBlocks = hero.hasThroughBlocks();
@@ -179,16 +179,18 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** exemple de bombe que le personnage peut poser */
-	private AiBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultanément (en général) */
+	/** Exemple de bombe que le personnage peut poser */
+	private AiSimBomb bombPrototype;
+	/** Nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumberMax;
-	/** nombre de bombes que le personnage a actuellement posées */
+	/** Nombre de bombes maximal avant de prendre un malus genre no-bomb */
+	protected int savedBombNumberMax = -1;
+	/** Nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
 	/** Nombre maximal de bombes que le personnage peut poser simultanément (dans l'absolu) */
 	private int bombNumberLimit;
 	/** Portée maximale de la bombe, dans l'absolu */
-	private int rangeLimit;
+	private int bombRangeLimit;
 	
 	@Override
 	public AiBomb getBombPrototype()
@@ -200,9 +202,46 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	{	return bombPrototype.getRange();
 	}
 	
+	/**
+	 * Renvoie la portée enregistrée avant de prendre
+	 * un malus, genre no-flame. Utilisée lors de la
+	 * simulation.
+	 * 
+	 * @return
+	 * 		La portée avant malus.
+	 */
+	protected int getSavedRange()
+	{	return bombPrototype.getSavedRange();	
+	}
+	
+	/**
+	 * Enregistre la portée, avant de la modifier
+	 * en raison d'un malus genre no-flame. Utilisée 
+	 * lors de la simulation, pour restaurer la portée
+	 * originale.
+	 * <br/>
+	 * Si la portée a déjà été enregistrée (i.e. plusieurs
+	 * malus ramassés successivement), alors elle n'est
+	 * pas ré-enregistrée, pour ne pas perdre la valeur pertinente.
+	 */
+	protected void recordRange()
+	{	bombPrototype.recordRange();
+	}
+	
+	/**
+	 * Restaure la portée, après qu'un malus genre 
+	 * no-flame ait arrêté de l'affecter.
+	 * <br/>
+	 * L'enregistrement est ré-initialisé à -1, afin
+	 * de permettre des sauvegardes ultérieures.
+	 */
+	protected void restoreRange()
+	{	bombPrototype.restoreRange();
+	}
+	
 	@Override
 	public int getBombRangeLimit()
-	{	return rangeLimit;
+	{	return bombRangeLimit;
 	}
 	
 	/**
@@ -243,6 +282,51 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	/**
+	 * Renvoie le nombre de bombes enregistré avant de prendre
+	 * un malus, genre no-bomb. Utilisée lors de la
+	 * simulation.
+	 * 
+	 * @return
+	 * 		Le nombnre de bombes avant malus.
+	 */
+	protected int getSavedBombNumberMax()
+	{	return savedBombNumberMax;	
+	}
+	
+	/**
+	 * Enregistre le nombre de bombes maximal, avant de le modifier
+	 * en raison d'un malus genre no-bomb. Utilisée 
+	 * lors de la simulation, pour restaurer le nombre
+	 * original.
+	 * <br/>
+	 * Si le nombre a déjà été enregistré (i.e. plusieurs
+	 * malus ramassés successivement), alors il n'est
+	 * pas ré-enregistré, pour ne pas perdre la valeur pertinente.
+	 */
+	protected void recordBombNumberMax()
+	{	if(savedBombNumberMax == -1)
+			savedBombNumberMax = bombNumberMax;
+	}
+	
+	/**
+	 * Restaure le nombre de bombes maximal, après qu'un malus genre 
+	 * no-bomb ait arrêté de l'affecter.
+	 * <br/>
+	 * L'enregistrement est ré-initialisé à -1, afin
+	 * de permettre des sauvegardes ultérieures.
+	 */
+	protected void restoreBombNumberMax()
+	{	if(savedBombNumberMax == -1)
+		{	bombNumberMax = 1;
+			savedBombNumberMax = -1;
+		}
+		else
+		{	bombNumberMax = savedBombNumberMax;
+			savedBombNumberMax = -1;
+		}
+	}
+	
+	/**
 	 * met à jour le nombre de bombes actuellement en jeu et appartenant
 	 * à ce joueur
 	 * 
@@ -279,6 +363,8 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	/** Index de vitesse de déplacement au sol du personnage */
 	private int walkingSpeedIndex;
+	/** Portée de la bombe avant de prendre un malus genre no-flame */
+	protected int savedWalkingSpeedIndex = -1;
 	/** Vitesses possibles de déplacement du personnage, exprimées en pixel/seconde */
 	private HashMap<Integer,Double> walkingSpeeds;
 	
@@ -347,6 +433,51 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	{	walkingSpeedIndex = walkingSpeedIndex + delta;
 	}
 	
+	/**
+	 * Renvoie la vitesse enregistrée avant de prendre
+	 * un malus, genre no-speed. Utilisée lors de la
+	 * simulation.
+	 * 
+	 * @return
+	 * 		La vitesse avant malus.
+	 */
+	protected int getSavedWalkingSpeed()
+	{	return savedWalkingSpeedIndex;	
+	}
+	
+	/**
+	 * Enregistre la vitesse, avant de la modifier
+	 * en raison d'un malus genre no-speed. Utilisée 
+	 * lors de la simulation, pour restaurer la vitesse
+	 * originale.
+	 * <br/>
+	 * Si la vitesse a déjà été enregistrée (i.e. plusieurs
+	 * malus ramassés successivement), alors elle n'est
+	 * pas ré-enregistrée, pour ne pas perdre la valeur pertinente.
+	 */
+	protected void recordWalkingSpeedIndex()
+	{	if(savedWalkingSpeedIndex == -1)
+			savedWalkingSpeedIndex = walkingSpeedIndex;
+	}
+	
+	/**
+	 * Restaure la vitesse, après qu'un malus genre 
+	 * no-speed ait arrêté de l'affecter.
+	 * <br/>
+	 * L'enregistrement est ré-initialisé à -1, afin
+	 * de permettre des sauvegardes ultérieures.
+	 */
+	protected void restoreWalkingSpeedIndex()
+	{	if(savedWalkingSpeedIndex == -1)
+		{	walkingSpeedIndex = 1;
+			savedWalkingSpeedIndex = -1;
+		}
+		else
+		{	walkingSpeedIndex = savedWalkingSpeedIndex;
+			savedWalkingSpeedIndex = -1;
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -405,7 +536,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		}
 		else if(type==AiItemType.ANTI_FLAME || type==AiItemType.EXTRA_FLAME || type==AiItemType.NO_FLAME)
 		{	result = getBombRange()+ item.getStrength();
-			result = Math.min(result, rangeLimit);
+			result = Math.min(result, bombRangeLimit);
 		}
 		else if(type==AiItemType.ANTI_SPEED || type==AiItemType.EXTRA_SPEED || type==AiItemType.NO_SPEED)
 		{	int index = walkingSpeedIndex + (int)item.getStrength();
@@ -459,6 +590,16 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 */
 	public List<AiSimItem> getInternalContagiousItems()
 	{	return contagiousItems;
+	}
+	
+	/**
+	 * Supprime un item contagieux de la liste.
+	 * 
+	 * @param item
+	 * 		L'item à supprimer.
+	 */
+	public void removeContagiousItem(AiItem item)
+	{	contagiousItems.remove(item);
 	}
 	
 	/////////////////////////////////////////////////////////////////

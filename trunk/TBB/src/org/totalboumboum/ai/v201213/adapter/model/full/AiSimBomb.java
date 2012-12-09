@@ -44,57 +44,57 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public final class AiSimBomb extends AiSimSprite implements AiBomb
 {	
 	/**
-	 * crée une simulation de la bombe passée en paramètre,
+	 * Crée une simulation de la bombe passée en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification de la bombe
+	 * 		Numéro d'identification de la bombe.
 	 * @param tile
-	 * 		case contenant la bombe
+	 * 		Case contenant la bombe.
 	 * @param posX
-	 * 		abscisse de la bombe
+	 * 		Abscisse de la bombe.
 	 * @param posY
-	 * 		ordonnée de la bombe
+	 * 		Ordonnée de la bombe.
 	 * @param posZ
-	 * 		hauteur de la bombe
+	 * 		Hauteur de la bombe.
 	 * @param state
-	 * 		état de la bombe
+	 * 		État de la bombe.
 	 * @param burningDuration
-	 * 		durée de combustion de la bombe
+	 * 		Durée de combustion de la bombe.
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement de la bombe
+	 * 		Vitesse courante de déplacement de la bombe.
 	 * @param slidingSpeed
-	 * 		vitesse de déplacement au sol de la bombe
+	 * 		Vitesse de déplacement au sol de la bombe.
 	 * @param countdownTrigger
-	 * 		capacité à exploser en fonction du temps
+	 * 		Capacité à exploser en fonction du temps.
 	 * @param remoteControlTrigger
-	 * 		capacité à exploser sur commande à distance
+	 * 		Capacité à exploser sur commande à distance.
 	 * @param explosionTrigger
-	 * 		capacité à exploser au contact du feu
+	 * 		Capacité à exploser au contact du feu.
 	 * @param normalDuration
-	 * 		durée totale avant explosion (bombe à retardement seulement)
+	 * 		Durée totale avant explosion (bombe à retardement seulement).
 	 * @param latencyDuration
-	 * 		latence entre le contact avec le feu et l'explosion
+	 * 		Latence entre le contact avec le feu et l'explosion.
 	 * @param failureProbability
-	 * 		probabilité de tomber en panne
+	 * 		Probabilité de tomber en panne.
 	 * @param firePrototype
-	 * 		exemple de feu généré par la bombe quand elle explose
+	 * 		Exemple de feu généré par la bombe quand elle explose.
 	 * @param stopHeroes
-	 * 		capacité à bloquer les personnages
+	 * 		Capacité à bloquer les personnages.
 	 * @param stopFires
-	 * 		capacité à bloquer le feu
+	 * 		Capacité à bloquer le feu.
 	 * @param throughItems
-	 * 		capacité à traverser les items
+	 * 		Capacité à traverser les items.
 	 * @param range
-	 * 		portée de l'explosion
+	 * 		Portée de l'explosion.
 	 * @param penetrating
-	 * 		nature pénétrante du feu
+	 * 		Nature pénétrante du feu.
 	 * @param color
-	 * 		couleur de la bombe
+	 * 		Couleur de la bombe.
 	 * @param working
-	 * 		état de fonctionnement de la bombe
+	 * 		État de fonctionnement de la bombe.
 	 * @param time
-	 * 		temps écoulé depuis le dépôt de la bombe
+	 * 		Temps écoulé depuis le dépôt de la bombe.
 	 */
 	protected AiSimBomb(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed, double slidingSpeed,
@@ -131,13 +131,13 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	}	
 
 	/**
-	 * crée une simulation de la bombe passée en paramètre, et contenue dans 
+	 * Crée une simulation de la bombe passée en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile	
-	 * 		case devant contenir le sprite
+	 * 		Case devant contenir le sprite.
 	 * @param bomb	
-	 * 		sprite à simuler
+	 * 		Sprite à simuler.
 	 */
 	protected AiSimBomb(AiSimTile tile, AiBomb bomb)
 	{	super(tile,bomb);
@@ -170,17 +170,17 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** déclenchement par compte à rebours */
+	/** Déclenchement par compte à rebours */
 	private boolean countdownTrigger;
-	/** déclenchement par télécommande */
+	/** Déclenchement par télécommande */
 	private boolean remoteControlTrigger;
-	/** déclenchement par explosion */
+	/** Déclenchement par explosion */
 	private boolean explosionTrigger;
-	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
+	/** Délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
+	/** Latence de la bombe quand son explosion est déclenchée par une autre bombe */
 	private long latencyDuration;
-	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
+	/** Probabilité que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
 	
 	@Override
@@ -228,7 +228,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** exemple de feu que la bombe peut générer */
+	/** Exemple de feu que la bombe peut générer */
 	private AiFire firePrototype;
 	
 	@Override
@@ -244,9 +244,11 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
+	/** Portée de la bombe, ie. : nombre de cases occupées par sa flamme */
 	private int range;
-	/** indique si la flamme produite par cette bombe est capable de traverser les murs */
+	/** Portée de la bombe avant de prendre un malus genre no-flame */
+	protected int savedRange = -1;
+	/** Indique si la flamme produite par cette bombe est capable de traverser les murs */
 	private boolean penetrating;
 	
 	@Override
@@ -255,14 +257,59 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 	
 	/**
-	 * met à jour la portée de cette bombe
-	 * (méthode utilisée seulement lors de la simulation)
+	 * Met à jour la portée de cette bombe
+	 * (méthode utilisée seulement lors de la simulation).
 	 * 
 	 * @param delta	
-	 * 		la modification à apporter à la portée de cette bombe
+	 * 		La modification à apporter à la portée de cette bombe.
 	 */
 	protected void updateRange(int delta)
 	{	range = range + delta;
+	}
+	
+	/**
+	 * Renvoie la portée enregistrée avant de prendre
+	 * un malus, genre no-flame. Utilisée lors de la
+	 * simulation.
+	 * 
+	 * @return
+	 * 		La portée avant malus.
+	 */
+	protected int getSavedRange()
+	{	return savedRange;	
+	}
+	
+	/**
+	 * Enregistre la portée, avant de la modifier
+	 * en raison d'un malus genre no-flame. Utilisée 
+	 * lors de la simulation, pour restaurer la portée
+	 * originale.
+	 * <br/>
+	 * Si la portée a déjà été enregistrée (i.e. plusieurs
+	 * malus ramassés successivement), alors elle n'est
+	 * pas ré-enregistrée, pour ne pas perdre la valeur pertinente.
+	 */
+	protected void recordRange()
+	{	if(savedRange == -1)
+			savedRange = range;
+	}
+	
+	/**
+	 * Restaure la portée, après qu'un malus genre 
+	 * no-flame ait arrêté de l'affecter.
+	 * <br/>
+	 * L'enregistrement est ré-initialisé à -1, afin
+	 * de permettre des sauvegardes ultérieures.
+	 */
+	protected void restoreRange()
+	{	if(savedRange == -1)
+		{	range = 1;
+			savedRange = -1;
+		}
+		else
+		{	range = savedRange;
+			savedRange = -1;
+		}
 	}
 	
 	@Override
@@ -315,7 +362,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
+	/** Indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
 	private boolean working;
 	
 	@Override
@@ -326,7 +373,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
+	/** Couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
 	private PredefinedColor color;
 	
 	@Override
@@ -347,7 +394,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol de la bombe, exprimée en pixel/seconde */
+	/** Vitesse de déplacement au sol de la bombe, exprimée en pixel/seconde */
 	private double slidingSpeed;
 	
 	@Override
@@ -358,7 +405,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// TIME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
+	/** Temps écoulé depuis que la bombe a été posée, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -367,10 +414,10 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 	
 	/**
-	 * modifie le temps écoulé
+	 * Modifie le temps écoulé.
 	 * 
 	 * @param time
-	 * 		temps écoulé
+	 * 		Nouveau temps écoulé, en ms.
 	 */
 	protected void setTime(long time)
 	{	this.time = time;
@@ -379,11 +426,11 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si cette bombe laisse passer les joueurs */
+	/** Indique si cette bombe laisse passer les joueurs */
 	private AiStopType stopHeroes;
-	/** indique si cette bombe laisse passer le feu */
+	/** Indique si cette bombe laisse passer le feu */
 	private AiStopType stopFires;
-	/** indique si cette bombe peut traverser les items */
+	/** Indique si cette bombe peut traverser les items */
 	private boolean throughItems;
 
 	@Override
