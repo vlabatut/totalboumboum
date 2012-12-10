@@ -411,11 +411,11 @@ public final class InitData
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 2│█│ │█│ │█│ │█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 3│█│ │ │ │ │ │█│
+	 * 3│█│☺│ │ │ │ │█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 4│█│ │█│ │█│ │█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
-	 * 5│█│ │ │ │ │☺│█│
+	 * 5│█│ │ │ │ │ │█│
 	 *  ├─┼─┼─┼─┼─┼─┼─┤
 	 * 6│█│█│█│█│█│█│█│
 	 *  └─┴─┴─┴─┴─┴─┴─┘
@@ -435,7 +435,7 @@ public final class InitData
 			AiSimTile tile = zone.getTile(1,1);
 			PredefinedColor color = PredefinedColor.WHITE;
 			zone.createHero(tile,color,bombNumber,bombRange,true);
-			tile = zone.getTile(5,1);
+			tile = zone.getTile(3,1);
 			color = PredefinedColor.BLACK;
 			zone.createHero(tile,color,bombNumber,bombRange,true);
 		}

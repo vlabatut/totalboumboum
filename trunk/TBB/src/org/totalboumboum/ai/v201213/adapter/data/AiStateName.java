@@ -24,17 +24,16 @@ package org.totalboumboum.ai.v201213.adapter.data;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
 /**
- * représente un nom associé à un état, c'est à dire : l'action
+ * Représente un nom associé à un état, c'est à dire : l'action
  * effectuée par le sprite concerné, ou bien l'action qu'il subit.
  * Ces actions sont différentes des 'gestes' utilisés dans le jeu,
  * car elles sont plus simples : une de ces actions peut correspondre à 
- * plusieurs gestes différents. Par exemple, MOVING
- * peut correspondre à un joueur qui marche (WALKING), ou bien à une bombe 
- * en train de glisser (SLIDING), ou bien à un joueur en train de pousser 
- * une bombe (PUSHING), etc.
+ * plusieurs gestes différents. Par exemple, {@link #MOVING}
+ * peut correspondre à un joueur qui marche ({@code WALKING}), ou bien à une bombe 
+ * en train de glisser ({@code SLIDING}), ou bien à un joueur en train de pousser 
+ * une bombe ({@code PUSHING}), etc.
  * 
  * @author Vincent Labatut
- *
  */
 public enum AiStateName
 {
@@ -63,13 +62,13 @@ public enum AiStateName
 	HIDING;
 	
 	/**
-	 * convertit une chaine de caractères correspondant à un geste du jeu
+	 * Convertit une chaine de caractères correspondant à un geste du jeu
 	 * en un objet correspondant à une action telle qu'elle est perçue par l'agent.
 	 * 
 	 * @param gesture
-	 * 		geste à convertir
+	 * 		Geste à convertir.
 	 * @return	
-	 * 		le symbole de l'action correspondante 
+	 * 		Le symbole de l'action correspondante. 
 	 */
 	public static AiStateName makeNameFromGesture(GestureName gesture)
 	{	AiStateName result = null;
@@ -78,6 +77,7 @@ public enum AiStateName
 		else if(gesture==GestureName.ENDED)
 			result = AiStateName.ENDED;
 		else if(gesture==GestureName.BOUNCING
+				|| gesture==GestureName.FALLING
 				|| gesture==GestureName.JUMPING
 				|| gesture==GestureName.LANDING
 				|| gesture==GestureName.PUNCHED)
