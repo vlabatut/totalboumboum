@@ -209,7 +209,46 @@ public final class FullModelSimulation
 			}
 			direction = direction.getPreviousPrimary();
 		}
-		while(totalDuration<45000);
+		while(totalDuration<12050);
+		
+		{	model.applyChangeHeroDirection(hero, Direction.NONE);
+			model.applyChangeHeroDirection(model.getCurrentZone().getHeroByColor(PredefinedColor.BLACK), Direction.DOWN);
+			// process simulation
+			model.simulate();
+			// display result
+			totalDuration = model.getCurrentZone().getTotalTime();
+			System.out.println("---------------------------------------------------");
+			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+			displayModelSimulationStep(model);
+			// display the players contagious items
+			for(PredefinedColor c: new PredefinedColor[]{PredefinedColor.WHITE,PredefinedColor.BLACK})
+			{	System.out.println(">>"+c+":");
+				AiHero h = model.getCurrentZone().getHeroByColor(c);
+				List<AiItem> items = h.getContagiousItems();
+				for(AiItem item: items)
+					System.out.println("\t- "+item);
+			}
+		}
+		
+		for(int i=0;i<2;i++)
+		{	model.applyChangeHeroDirection(hero, Direction.UP);
+			model.applyChangeHeroDirection(model.getCurrentZone().getHeroByColor(PredefinedColor.BLACK), Direction.NONE);
+			// process simulation
+			model.simulate();
+			// display result
+			totalDuration = model.getCurrentZone().getTotalTime();
+			System.out.println("---------------------------------------------------");
+			System.out.println("iteration "+iteration+" ["+totalDuration+"]");
+			displayModelSimulationStep(model);
+			// display the players contagious items
+			for(PredefinedColor c: new PredefinedColor[]{PredefinedColor.WHITE,PredefinedColor.BLACK})
+			{	System.out.println(">>"+c+":");
+				AiHero h = model.getCurrentZone().getHeroByColor(c);
+				List<AiItem> items = h.getContagiousItems();
+				for(AiItem item: items)
+					System.out.println("\t- "+item);
+			}
+		}
 	}
 	
 	/**

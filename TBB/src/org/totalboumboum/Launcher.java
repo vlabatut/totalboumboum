@@ -1490,7 +1490,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * - percepts à rajouter
-	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * 		- pour faire un suivi d'une ia à travers plusieurs rounds :
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
@@ -1503,7 +1502,7 @@ public class Launcher
 	 * 
 	 * - prochaines étapes :
 	 * 		- league
-	 * 		- instance TBB
+	 * 		- instance TBB (>> pixel art)
 	 * 		- sons
 	 * 		- BM'83
 	 * 		- réseau
@@ -1562,9 +1561,8 @@ public class Launcher
 	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
 	 * 
 	 * TODO site : 
-	 * 		- mort subite (et autres ajouts ?)
-	 * 		- items contagieux
-	 * 
+	 * 		- mort subite (et autres objets ?)
+o	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
 	 * 		x rajouter la modif sur le throughwall des items
@@ -1583,8 +1581,4 @@ public class Launcher
 	//		- l'instance tournament entière
 	//		- l'api ia entière (toutes les versions)
 	//		- le reste au cas par cas
-	
-	// TODO debug
-	// - tester si black a la limite de vitesse après la contagion
-	// - lors d'une transmition d'item, il y a apparemment une double mise à jour du temps
 }

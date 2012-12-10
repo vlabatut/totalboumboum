@@ -772,7 +772,7 @@ public class AiFullModel
 				limitSprites.add(sprite);
 		}
 		
-		// a hero might pick an item in the new tile, or propagate a contagion
+		// a hero might pick an item in the new tile, or propagate a contagion, or be infected itself
 		if(sprite instanceof AiSimHero && !newTile.equals(tile))
 		{	AiSimHero hero = (AiSimHero)sprite;
 			// pick the items present in the tile
@@ -789,7 +789,36 @@ public class AiFullModel
 				{	AiSimHero target = heroes.get(0);
 					List<AiSimItem> diseases = new ArrayList<AiSimItem>(hero.getInternalContagiousItems());
 					for(AiSimItem disease: diseases)
-						transmitItem(hero,target,disease);
+					{	transmitItem(hero,target,disease);
+						// ugly workaround to avoid updating the item twice
+						List<AiSimHero> hoes = current.getInternalHeroes();
+						int index1 = hoes.indexOf(hero);
+						int index2 = hoes.indexOf(target);
+						if(index1<index2)
+						{	long elapsedTime = disease.getElapsedTime() - duration;
+							disease.setElapsedTime(elapsedTime);
+						}
+					}
+				}
+			}
+			// receives infection
+			else
+			{	List<AiSimHero> heroes = new ArrayList<AiSimHero>(newTile.getInternalHeroes());
+				for(AiSimHero h: heroes)
+				{	if(h.isContagious())
+					{	List<AiSimItem> diseases = new ArrayList<AiSimItem>(h.getInternalContagiousItems());
+						for(AiSimItem disease: diseases)
+						{	transmitItem(h,hero,disease);
+							// ugly workaround to avoid updating the item twice
+							List<AiSimHero> hoes = current.getInternalHeroes();
+							int index1 = hoes.indexOf(hero);
+							int index2 = hoes.indexOf(h);
+							if(index1<index2)
+							{	long elapsedTime = disease.getElapsedTime() - duration;
+								disease.setElapsedTime(elapsedTime);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -1741,19 +1770,21 @@ public class AiFullModel
 	 * 		L'item transmis par la source à la cible.
 	 */
 	private void transmitItem(AiSimHero source, AiSimHero target, AiSimItem item)
-	{	AiItemType type = item.getType();
-
-		// update source
-		if(type==AiItemType.NO_BOMB)
-			source.restoreBombNumberMax();
-		else if(type==AiItemType.NO_FLAME)
-			source.restoreRange();
-		else if(type==AiItemType.NO_SPEED)
-			source.restoreWalkingSpeedIndex();
-		source.removeContagiousItem(item);
-		
-		// update target
-		pickItem(target,item);
+	{	if(item.getState().getName()!=AiStateName.ENDED)
+		{	AiItemType type = item.getType();
+			
+			// update source
+			if(type==AiItemType.NO_BOMB)
+				source.restoreBombNumberMax();
+			else if(type==AiItemType.NO_FLAME)
+				source.restoreRange();
+			else if(type==AiItemType.NO_SPEED)
+				source.restoreWalkingSpeedIndex();
+			source.removeContagiousItem(item);
+			
+			// update target
+			pickItem(target,item);
+		}
 	}
 	
 	/**
