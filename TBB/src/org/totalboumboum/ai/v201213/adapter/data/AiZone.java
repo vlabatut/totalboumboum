@@ -45,7 +45,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 /**
  * Représente la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
- * 
+ * <br/>
  * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
@@ -54,47 +54,46 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class AiZone
 {	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis le début du jeu */
+	/** Temps écoulé depuis le début du jeu */
 	protected long totalTime = 0;
-	/** temps écoulé depuis la mise à jour précédente de l'IA considérée */
+	/** Temps écoulé depuis la mise à jour précédente de l'IA considérée */
 	protected long elapsedTime = 0;
-	/** durée maximale de la partie */
+	/** Durée maximale de la partie */
 	protected long limitTime = 0;
 	
 	/**
-	 * renvoie le temps total écoulé depuis le début du jeu
+	 * Renvoie le temps total écoulé depuis le début du jeu.
 	 * 
 	 * @return	
-	 * 		le temps total écoulé exprimé en millisecondes
+	 * 		Le temps total écoulé exprimé en millisecondes.
 	 */
 	public long getTotalTime()
 	{	return totalTime;		
 	}
 	
 	/**
-	 * renvoie le temps écoulé depuis la mise à jour précédente
+	 * Renvoie le temps écoulé depuis la mise à jour précédente
 	 * de l'IA considérée.
 	 * 
 	 * @return	
-	 * 		le temps écoulé exprimé en millisecondes
+	 * 		Le temps écoulé exprimé en millisecondes.
 	 */
 	public long getElapsedTime()
 	{	return elapsedTime;		
 	}
 	
 	/**
-	 * renvoie la durée maximale de la partie
-	 * (elle peut éventuellement durer moins longtemps)
+	 * Renvoie la durée maximale de la partie
+	 * (elle peut éventuellement durer moins longtemps).
 	 * 
 	 * @return	
-	 * 		la durée maximale de la partie
+	 * 		La durée maximale de la partie.
 	 */
 	public long getLimitTime()
 	{	return limitTime;		
@@ -103,11 +102,11 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	// META DATA		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
+	/** Rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
 	protected final HashMap<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs pour la rencontre en cours (ces rangs n'évoluent pas pendant la manche) */
+	/** Rangs des joueurs pour la rencontre en cours (ces rangs n'évoluent pas pendant la manche) */
 	protected final HashMap<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs au classement global du jeu (ces rangs n'évoluent pas pendant la manche) */
+	/** Rangs des joueurs au classement global du jeu (ces rangs n'évoluent pas pendant la manche) */
 	protected final HashMap<AiHero,Integer> statsRanks = new HashMap<AiHero, Integer>();
 
 	/**
@@ -116,9 +115,9 @@ public abstract class AiZone
 	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @param hero
-	 * 		le personnage considéré
+	 * 		Le personnage considéré.
 	 * @return	
-	 * 		son classement dans la manche en cours
+	 * 		Son classement dans la manche en cours.
 	 */
 	public int getRoundRank(AiHero hero)
 	{	return roundRanks.get(hero);
@@ -129,9 +128,9 @@ public abstract class AiZone
 	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @param hero
-	 * 		le personnage considéré
+	 * 		Le personnage considéré.
 	 * @return	
-	 * 		son classement dans la rencontre en cours
+	 * 		Son classement dans la rencontre en cours.
 	 */
 	public int getMatchRank(AiHero hero)
 	{	return matchRanks.get(hero);
@@ -142,9 +141,9 @@ public abstract class AiZone
 	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @param hero
-	 * 		le personnage considéré
+	 * 		Le personnage considéré.
 	 * @return	
-	 * 		son classement général (Glicko-2)
+	 * 		Son classement général (Glicko-2).
 	 */
 	public int getStatsRank(AiHero hero)
 	{	return statsRanks.get(hero);
