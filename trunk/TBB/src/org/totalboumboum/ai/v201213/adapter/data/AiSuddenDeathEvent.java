@@ -43,7 +43,10 @@ public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEven
 	protected long time;
 	
 	/**
-	 * Renvoie l'instant associé à cet évènement.
+	 * Renvoie l'instant associé à cet évènement,
+	 * i.e. le moment auquel l'évènement va se produire
+	 * au cours de la partie, exprimé par rapport au 
+	 * début de la partie.
 	 * 
 	 * @return
 	 * 		Instant exprimé en ms.
