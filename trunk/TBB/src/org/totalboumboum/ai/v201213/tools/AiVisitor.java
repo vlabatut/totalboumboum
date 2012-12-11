@@ -98,6 +98,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	{	"AiMain",			
 		"compare",
 		"equals",
+		"hashCode",
 		"toString"
 	});
 	/** Exceptions à ne pas couvrir dans un bloc {@code try-catch} */
@@ -105,7 +106,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
  	{	"Exception",			
  		"StopRequestException"
  	});
-
+	
 	/////////////////////////////////////////////////////////////////
 	// MISC VARIABLES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

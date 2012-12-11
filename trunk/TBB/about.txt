@@ -50,7 +50,7 @@ This product includes softwares developed by:
     Used to rank players depending on their long term results
     
   + Japa - Java parser and AST (Abstract Syntax Tree):
-    javaparser library
+    Javaparser library v1.0.8
     Copyright 2007 Júlio Vilmar Gesser - GPL License
     http://code.google.com/p/javaparser/
     Used to parse the students AI Java source code

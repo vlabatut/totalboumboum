@@ -52,12 +52,32 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Class used to launch the game.
  * 
  * @author Vincent Labatut
- *
  */
 public class Launcher
 {	
+	/**
+	 * Launches the game. Three possible options:
+	 * <ul>
+	 * 		<li>{@code help}: displays a description of the command</li>
+	 * 		<li>{@code quick}: launches the game in quick mode</li>
+	 * 		<li>{@code window}: force the launch in windowed mode (even if the options are set to fullscreen)</li>
+	 * </ul>
+	 * If not options are precised, then the game is launched normally.
+	 * 
+	 * @param args
+	 * 		One out of 3 possible options.
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException
+	 * @throws ClassNotFoundException
+	 */
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// set thread name
 		Thread thread = Thread.currentThread();
@@ -79,6 +99,9 @@ public class Launcher
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Displays the help message (option {@code help}).
+	 */
 	private static void displayHelp()
 	{	System.out.println(GuiTools.OPTION_HELP_MESSAGE);
 		for(int i=0;i<GuiTools.OPTIONS.length;i++)
@@ -88,6 +111,19 @@ public class Launcher
 	/////////////////////////////////////////////////////////////////
 	// NORMAL LAUNCH	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Launches the game normally (no option specified),
+	 * i.e. not in quickmode.
+	 * 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 * @throws IllegalArgumentException 
+	 * @throws SecurityException 
+	 * @throws IOException 
+	 * @throws IllegalAccessException 
+	 * @throws NoSuchFieldException 
+	 * @throws ClassNotFoundException 
+	 */
 	private static void normalLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// splashscreen
 		SplashScreen splash = SplashScreen.getSplashScreen();
@@ -114,7 +150,8 @@ public class Launcher
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
+		{	@Override
+			public void run()
 			{	try
 				{	NormalFrame normalFrame = new NormalFrame();
 					if(fullScreen)
@@ -150,6 +187,14 @@ public class Launcher
 		});		
 	}
 	
+	/**
+	 * Updates the text displayed in the splash screen (normal launch only).
+	 * 
+	 * @param splash
+	 * 		The splash screen to update.
+	 * @param msg
+	 * 		The text message to display.
+	 */
 	private static void updateSplash(SplashScreen splash, String msg)
 	{	if(splash!=null)
 		{	Graphics2D g = (Graphics2D)splash.createGraphics();
@@ -170,6 +215,20 @@ public class Launcher
 	/////////////////////////////////////////////////////////////////
 	// QUICK LAUNCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Launches the game with a minimal graphical
+	 * interface ({@code quick} option).
+	 * 
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws IllegalArgumentException
+	 * @throws SecurityException
+	 * @throws IOException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException
+	 * @throws ClassNotFoundException
+	 */
 	private static void quickLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// legal
 		for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
@@ -200,7 +259,8 @@ public class Launcher
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
+		{	@Override
+			public void run()
 			{	try
 				{	QuickFrame quickFrame = new QuickFrame();
 					if(fullScreen)
@@ -240,11 +300,19 @@ public class Launcher
 	/////////////////////////////////////////////////////////////////
 	// RESOLUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether or not the game should be forced in windowed mode */
 	private static boolean forceWindow;
+	/** Graphical devide */
 	private static GraphicsDevice device;
+	/** Graphical display mode */
 	private static DisplayMode newMode;
+	/** Whether or not the game should be displayed in fullscreen mode */
 	private static boolean fullScreen;
 
+	/**
+	 * Selects the graphical resolution depending
+	 * on the specified options.
+	 */
 	private static void resolutionSelection()
 	{	fullScreen = false;
 		// graphic conf
@@ -1562,7 +1630,7 @@ public class Launcher
 	 * 
 	 * TODO site : 
 	 * 		- mort subite (et autres objets ?)
-o	 * 
+	 * 
 	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
 	 * 		x rajouter la modif sur le throughwall des items
@@ -1576,9 +1644,4 @@ o	 *
 	 * 		- finale : les 3 premiers de la demi-finale contre les 2 ex-gagnants les mieux classés
 	 * 		>> il faut implémenter un système de qualif directe pour certains joueurs 
 	 */
-
-	// TODO màj : inclure
-	//		- l'instance tournament entière
-	//		- l'api ia entière (toutes les versions)
-	//		- le reste au cas par cas
 }
