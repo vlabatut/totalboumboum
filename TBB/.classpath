@@ -8,7 +8,7 @@
 			<attribute name="javadoc_location" value="http://www.jdom.org/docs/apidocs"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="resources/lib/javaparser-1.0.7.jar" sourcepath="resources/lib/javaparser-1.0.7-src.zip"/>
 	<classpathentry kind="src" path="/TBBtemp"/>
+	<classpathentry kind="lib" path="resources/lib/javaparser-1.0.8.jar" sourcepath="resources/lib/javaparser-1.0.8-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

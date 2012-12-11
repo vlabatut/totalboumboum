@@ -116,7 +116,7 @@ public class ParseAi
         if(errorCount>0)
         {	for(int i=0;i<level;i++)
 				System.out.print("..");
-        	System.out.println("   total : "+errorCount);
+        	System.out.println("   total pour la classe : "+errorCount);
         }
 	}
 	
