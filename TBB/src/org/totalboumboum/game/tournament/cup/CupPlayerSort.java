@@ -22,13 +22,16 @@ package org.totalboumboum.game.tournament.cup;
  */
 
 /**
+ * Represents various ways of sorting
+ * players before the begining of a tournament.
  * 
  * @author Vincent Labatut
- *
  */
 public enum CupPlayerSort
-{	
+{	/** No sort at all (as is defined during the selection) */
 	NONE,
+	/** Player order is randomized */
 	RANDOM,
+	/** Uses the Glicko-2 ranking */
 	SEEDS;
 }

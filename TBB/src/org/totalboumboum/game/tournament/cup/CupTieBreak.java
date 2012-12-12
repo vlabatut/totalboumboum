@@ -1,16 +1,5 @@
 package org.totalboumboum.game.tournament.cup;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.points.PointsRankings;
-import org.totalboumboum.game.profile.Profile;
-import org.totalboumboum.game.rank.Ranks;
-
-
 /*
  * Total Boum Boum
  * Copyright 2008-2012 Vincent Labatut 
@@ -32,13 +21,24 @@ import org.totalboumboum.game.rank.Ranks;
  * 
  */
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.points.PointsRankings;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.rank.Ranks;
+
+
 /**
  * 
  * @author Vincent Labatut
- *
  */
 public class CupTieBreak implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Id */
+	private static final long serialVersionUID = 1L;
 
 	public CupTieBreak(CupPart part)
 	{	this.part = part;

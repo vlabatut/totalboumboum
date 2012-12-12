@@ -27,14 +27,36 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 
 /**
+ * Implemented by objects able to generate
+ * data to process statistics.
  * 
  * @author Vincent Labatut
- *
  */
 public interface StatisticHolder
 {
+	/**
+	 * Returns the statistics for the associated game.
+	 * 
+	 * @return
+	 * 		Some statistics.
+	 */
 	public StatisticBase getStats();
+	
+	/**
+	 * Returns the list of involved players .
+	 * 
+	 * @return
+	 * 		List of profiles.
+	 */
 	public List<Profile> getProfiles();
+	
+	/**
+	 * Returns the statuses of the plauers.
+	 * 
+	 * @return
+	 * 		The statistics of this tournament.
+	 */
 	public List<Boolean> getPlayersStatus();
+	
 	public Ranks getOrderedPlayers();
 }
