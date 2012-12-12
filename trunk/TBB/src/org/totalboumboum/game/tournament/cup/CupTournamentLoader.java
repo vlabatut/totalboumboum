@@ -40,7 +40,6 @@ import org.xml.sax.SAXException;
 /**
  * 
  * @author Vincent Labatut
- *
  */
 public class CupTournamentLoader
 {

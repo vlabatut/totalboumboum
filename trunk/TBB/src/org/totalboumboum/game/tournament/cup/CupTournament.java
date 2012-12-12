@@ -50,10 +50,10 @@ import org.totalboumboum.tools.calculus.CombinatoricsTools;
 /**
  * 
  * @author Vincent Labatut
- *
  */
 public class CupTournament extends AbstractTournament
-{	private static final long serialVersionUID = 1L;
+{	/** Id */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
@@ -104,7 +104,9 @@ public class CupTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Way of sorting players before the tournament starts */
 	private CupPlayerSort sortPlayers;
+	/** How players are distributed for the first leg */
 	private List<Integer> firstLegPlayersdistribution;
 	private int highestEmptyRank;
 	
@@ -436,14 +438,17 @@ for(ArrayList<Integer> list: permutations)
 	}
 	
 	/**
-	 * check if the parameter players distribution is compatible 
+	 * Checks if the parameter players distribution is compatible 
 	 * with the matches composing this tournament. If it's not,
 	 * the method result is -1. If it is, it's the highest rank
 	 * (at the end of the tournament) for which the player is missing. 
 	 * This value allows ranking all the possible distributions in order
-	 * to pick the best one (i.e. the one with the lowest value)
+	 * to pick the best one (i.e. the one with the lowest value).
+	 * 
 	 * @param distribution
+	 * 		The distribution to be checked.
 	 * @return
+	 * 		
 	 */
 	private int checkPlayerDistribution(List<Integer> distribution)
 	{	// init
@@ -746,22 +751,54 @@ for(ArrayList<Integer> list: permutations)
 	/////////////////////////////////////////////////////////////////
 	// LEGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** The legs composing this cup tournament */
 	private final List<CupLeg> legs = new ArrayList<CupLeg>();
+	/** Index of the current leg */
 	private int currentIndex;
+	/** Object representing the current leg */
 	private CupLeg currentLeg;
 	
+	/**
+	 * Returns the list of legs for
+	 * this tournament.
+	 * 
+	 * @return
+	 * 		List of legs.
+	 */
 	public List<CupLeg> getLegs()
 	{	return legs;	
 	}
 	
+	/**
+	 * Returns the leg whose index
+	 * is specified.
+	 * 
+	 * @param index
+	 * 		Index of the required leg.
+	 * @return
+	 * 		The required leg.
+	 */
 	public CupLeg getLeg(int index)
 	{	return legs.get(index);	
 	}
 	
+	/**
+	 * Adds a new leg to this tournament.
+	 * 
+	 * @param leg
+	 * 		The leg to add to this tournament.
+	 */
 	public void addLeg(CupLeg leg)
 	{	legs.add(leg);	
 	}
 	
+	/**
+	 * Returns the current leg
+	 * (the tournament must have begun).
+	 * 
+	 * @return
+	 * 		The current leg.
+	 */
 	public CupLeg getCurrentLeg()
 	{	return currentLeg;	
 	}
@@ -769,6 +806,13 @@ for(ArrayList<Integer> list: permutations)
 	/////////////////////////////////////////////////////////////////
 	// PARTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the total number of parts (over all legs)
+	 * in this tournament.
+	 * 
+	 * @return
+	 * 		The number of parts in this tournament.
+	 */
 	public int getTotalPartCount()
 	{	int result = 0;
 		for(CupLeg leg: legs)
@@ -776,6 +820,13 @@ for(ArrayList<Integer> list: permutations)
 		return result;	
 	}
 
+	/**
+	 * Returns the list of all parts
+	 * in this tournament.
+	 * 
+	 * @return
+	 * 		A list of parts.
+	 */
 	public List<CupPart> getAllParts()
 	{	List<CupPart> result = new ArrayList<CupPart>();
 		for(CupLeg leg: legs)
@@ -816,6 +867,7 @@ for(ArrayList<Integer> list: permutations)
 		}
 	}
 
+	@Override
 	public void roundOver()
 	{	panel.roundOver();
 	}

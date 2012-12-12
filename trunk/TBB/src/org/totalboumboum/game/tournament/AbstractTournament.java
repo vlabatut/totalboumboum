@@ -37,27 +37,52 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.xml.sax.SAXException;
 
 /**
+ * General representation of a tournament.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class AbstractTournament implements StatisticHolder, Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Id */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if the tournament has begun */
 	protected boolean begun = false;
 	
+	/**
+	 * Initializes this tournament,
+	 * before actually starting it.
+	 */
 	public abstract void init();
+	
+	/**
+	 * Goes to the next stage in
+	 * this tournament.
+	 */
 	public abstract void progress();
+	
+	/**
+	 * Terminates this tournament.
+	 */
 	public abstract void finish();
 	
+	/**
+	 * Cancels an ongoing tournament.
+	 */
 	public void cancel()
 	{	// TODO à compléter (sauver stats?)
 		tournamentOver = true;
 	}
 	
+	/**
+	 * Returns {@code true} iff
+	 * this tournament has begun.
+	 * 
+	 * @return
+	 * 		{@code true} iff the tournament has begun.
+	 */
 	public boolean hasBegun()
 	{	return begun;	
 	}
@@ -65,11 +90,25 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if the tournament is finished */
 	private boolean tournamentOver = false;
 
+	/**
+	 * Indicates if the tournament is finished.
+	 * 
+	 * @return
+	 * 		{@code true} iff the tournament is finished.
+	 */
 	public boolean isOver()
 	{	return tournamentOver;
 	}
+	
+	/**
+	 * Sets the tournament to finished.
+	 * 
+	 * @param tournamentOver
+	 * 		Indicates if the tournament is finished.
+	 */
 	public void setOver(boolean tournamentOver)
 	{	this.tournamentOver = tournamentOver;
 	}
@@ -77,24 +116,58 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// MATCHES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the currently ongoing
+	 * match.
+	 * 
+	 * @return
+	 * 		The current match for this tournament.
+	 */
 	public abstract Match getCurrentMatch();
+	
+	/**
+	 * Method called when a match is
+	 * finished.
+	 */
 	public abstract void matchOver();
+	
+	/**
+	 * Method called when a round is
+	 * finished.
+	 */
 	public abstract void roundOver();
 
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of players participating to the tournament */
 	protected List<Profile> profiles = new ArrayList<Profile>();
 
+	/**
+	 * Set the list of players participating 
+	 * to the tournament
+	 * 
+	 * @param profiles
+	 * 		List of profiles.
+	 */
 	public void setProfiles(List<Profile> profiles)
 	{	this.profiles.clear();
 		this.profiles.addAll(profiles);		
 	}
 	
+	@Override
 	public List<Profile> getProfiles()
 	{	return profiles;	
 	}
 
+	/**
+	 * Returns the numbers of players
+	 * allowed for this tournament.
+	 * 
+	 * @return
+	 * 		A set of integers, each one corresponding 
+	 * 		to an allowed number of players for this tournament.
+	 */
 	public abstract Set<Integer> getAllowedPlayerNumbers();
 	
 	@Override
@@ -103,6 +176,19 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 		return null;
 	}
 	
+	/**
+	 * Loads only the portraits of the players
+	 * (for GUI purposes).
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the portraits.
+	 * @throws SAXException
+	 * 		Problem while loading the portraits.
+	 * @throws IOException
+	 * 		Problem while loading the portraits.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the portraits.
+	 */
 	public void reloadPortraits() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	for(Profile p: profiles)
 			ProfileLoader.reloadPortraits(p);
@@ -111,11 +197,25 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// NAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name of this tournament */
 	protected String name = "N/A";
 
+	/**
+	 * Returns the Name of this tournament
+	 * 
+	 * @return
+	 * 		The name of this tournament.
+	 */
 	public String getName()
 	{	return name;
 	}
+	
+	/**
+	 * Changes the name of this tournament.
+	 *  
+	 * @param name
+	 * 		New name for this tournament.
+	 */
 	public void setName(String name)
 	{	this.name = name;
 	}
@@ -123,8 +223,10 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Statistics of this tournament */
 	protected StatisticTournament stats;
 
+	@Override
 	public StatisticTournament getStats()
 	{	return stats;
 	}
@@ -132,11 +234,25 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel displaying this tournament data */
 	transient protected TournamentRenderPanel panel;
 	
+	/**
+	 * Change the panel displaying this tournament.
+	 * 
+	 * @param panel
+	 * 		The new panel.
+	 */
 	public void setPanel(TournamentRenderPanel panel)
 	{	this.panel = panel;
 	}
+	
+	/**
+	 * Returns the panel displaying this tournament.
+	 * 
+	 * @return
+	 * 		The panel associated to this tournament.
+	 */
 	public TournamentRenderPanel getPanel()
 	{	return panel;	
 	}
@@ -144,12 +260,25 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// AUTHOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Author of the tournament */
 	private String author;
 	
+	/**
+	 * Returns the author of the tournament.
+	 * 
+	 * @return
+	 * 		Name of the author of the tournament.
+	 */
 	public String getAuthor()
 	{	return author;
 	}
 	
+	/**
+	 * Changes the author of the tournament.
+	 * 
+	 * @param author
+	 * 		New author for this tournament.
+	 */
 	public void setAuthor(String author)
 	{	this.author = author;
 	}
@@ -157,11 +286,25 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Notes associated to this tournament */
 	private final List<String> notes = new ArrayList<String>();
 
+	/**
+	 * Changes the notes associated to this tournament.
+	 * 
+	 * @param notes
+	 * 		New notes for this tournament.
+	 */
 	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
+	
+	/**
+	 * Returns the notes associated to this tournament.
+	 * 
+	 * @return
+	 * 		A list of texts.
+	 */
 	public List<String> getNotes()
 	{	return notes;
 	}
