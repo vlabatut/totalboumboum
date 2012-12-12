@@ -34,7 +34,7 @@ import java.util.List;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
- * cette méthode parse les codes sources définissant un agent et vérifie
+ * Cette méthode parse les codes sources définissant un agent et vérifie
  * que les appels à checkInterruption sont effectués correctement.
  * <br/>
  * La liste {@link #IGNORED_PACKAGES} permet, comme son nom l'indique, de spécifier
