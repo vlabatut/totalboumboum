@@ -73,8 +73,7 @@ public class ParseAi
 	public static void main(String[] args) throws IOException, ParseException
 	{	// on définit le chemin du pack à analyser
 		//String aiPack = "resources/ai/org/totalboumboum/ai/v201213/ais";
-//		String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201213/ais";
-		String aiPack = "../Test/src";
+		String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201213/ais";
 		
 		// on lance l'analyse
 		parseAiPack(aiPack);
