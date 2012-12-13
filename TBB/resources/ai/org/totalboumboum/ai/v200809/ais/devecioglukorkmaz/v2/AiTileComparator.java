@@ -33,6 +33,7 @@ public class AiTileComparator implements Comparator<AiTile> {
 		this.dk = dk;
 	}
 
+	@Override
 	public int compare(AiTile n1, AiTile n2) {
 		try {
 			dk.checkInterruption();

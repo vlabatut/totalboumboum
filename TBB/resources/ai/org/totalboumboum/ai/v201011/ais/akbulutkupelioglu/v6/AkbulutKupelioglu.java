@@ -31,6 +31,7 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	private Mode mode = null;
 	//private InformationManager informationManager = null;
 
+	@Override
 	public void init() throws StopRequestException {
 		checkInterruption();
 		ModeSelector.reset(this);
@@ -38,6 +39,7 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	
 	/** method called by the game engine to get our action
 	 */
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{
 		checkInterruption();

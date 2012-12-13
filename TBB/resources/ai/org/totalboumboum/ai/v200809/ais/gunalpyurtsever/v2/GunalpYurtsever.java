@@ -936,6 +936,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/* (non-Javadoc)
 	 * @see org.totalboumboum.ai.adapter200809.ArtificialIntelligence#processAction()
 	 */
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption(); // APPEL OBLIGATOIRE

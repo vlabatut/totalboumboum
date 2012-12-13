@@ -28,6 +28,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class FindikSirin extends ArtificialIntelligence
 {		
 	/** méthode appelée par le moteur du jeu pour obtenir une action de notre IA */
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();

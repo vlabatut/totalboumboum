@@ -191,6 +191,7 @@ public class CollectMode extends Mode
 		}
 	}
 
+	@Override
 	public Strategy getNewStrategy() throws StopRequestException
 	{
 		monIa.checkInterruption();

@@ -74,6 +74,7 @@ public class TimedBomb {
 			return -1;
 	}
 	
+	@Override
 	public boolean equals(Object timedBomb)
 	{
 		if(!TimedBomb.class.isInstance(timedBomb))
@@ -135,6 +136,7 @@ public class TimedBomb {
 		this.releaseTime = releaseTime;
 	}
 		
+	@Override
 	public String toString()
 	{
 		String result = "";

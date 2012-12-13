@@ -31,9 +31,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 		this.dk = dk;
 	}
 
-	/**
-	 * 
-	 */
+	@Override
 	public int compare(Noeud n1, Noeud n2) {
 		//dk.checkInterruption();
 		int resultat = 0;

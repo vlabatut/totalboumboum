@@ -185,7 +185,7 @@ public class Noeud {
 	 *            objet qu'on va comparer
 	 * @return true si l'objet est égal à l'objet passé en parametre
 	 */
-
+	@Override
 	public boolean equals(Object object) {
 
 		Noeud noeud;
@@ -237,7 +237,7 @@ public class Noeud {
 	 * 
 	 * @return string les coordonnees du noeud et sa valeur sour forme de texte
 	 */
-
+	@Override
 	public String toString() {
 		String resultat;
 		resultat = x + "  " + y + "  " + valeur;

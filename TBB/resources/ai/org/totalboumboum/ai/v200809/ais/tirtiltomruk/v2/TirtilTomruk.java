@@ -71,6 +71,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/** */
 	private boolean isBonus = false;
 
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 

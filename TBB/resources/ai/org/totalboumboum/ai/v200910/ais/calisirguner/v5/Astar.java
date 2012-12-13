@@ -22,7 +22,7 @@ public final class Astar {
 	 *
 	 */
 	private static class CostComparator implements Comparator<Node> {
-		//
+		@Override
 		public int compare(Node nodeA, Node nodeB) {
 
 			return (nodeA.gcost + nodeA.hcost) - (nodeB.gcost + nodeB.hcost);
@@ -88,7 +88,7 @@ public final class Astar {
 			}
 		}
 
-		//
+		@Override
 		public String toString() {
 			return "(" + x + ", " + y + " : " + super.toString() + ')';
 		}

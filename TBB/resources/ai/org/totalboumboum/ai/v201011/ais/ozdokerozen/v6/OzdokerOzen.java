@@ -123,6 +123,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	OutilsMur outilesMur;
 	
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	
 		// avant tout : test d'interruption

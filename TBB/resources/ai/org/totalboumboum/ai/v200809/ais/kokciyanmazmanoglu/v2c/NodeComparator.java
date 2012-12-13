@@ -35,6 +35,7 @@ public class NodeComparator implements Comparator<Node>
 		this.end = endNode;
 	}
 	
+	@Override
 	public int compare(Node n1, Node n2)
 	{	int res = 0;
 		

@@ -60,6 +60,7 @@ public class BinaryHeapList {
 	/**
 	 * Print out the costs of each element in the list
 	 */
+	@Override
 	public String toString(){
 		String strList = "[";
 		int length = length();

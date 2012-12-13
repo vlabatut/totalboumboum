@@ -436,9 +436,7 @@ public class Map {
 		return matrix;
 	}
 
-	/**
-	 * 
-	 */
+	@Override
 	public String toString() {
 		String result = "";
 		for (int i = 0; i < height; i++) {

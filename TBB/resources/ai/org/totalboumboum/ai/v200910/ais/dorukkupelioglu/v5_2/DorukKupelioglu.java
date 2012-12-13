@@ -44,6 +44,7 @@ public class DorukKupelioglu extends ArtificialIntelligence
 	/** */
 	private boolean wait=false;
 	
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{
 		checkInterruption(); 

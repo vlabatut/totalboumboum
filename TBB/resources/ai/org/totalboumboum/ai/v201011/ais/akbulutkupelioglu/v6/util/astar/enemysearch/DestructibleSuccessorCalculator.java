@@ -36,6 +36,7 @@ public class DestructibleSuccessorCalculator extends SuccessorCalculator
 		// 
 	}
 	
+	@Override
 	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException
 	{
 		monIa.checkInterruption();

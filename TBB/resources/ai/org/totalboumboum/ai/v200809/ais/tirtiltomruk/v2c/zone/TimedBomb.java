@@ -89,6 +89,7 @@ public class TimedBomb {
 			return -1;
 	}
 	
+	@Override
 	public boolean equals(Object timedBomb)
 	{	try {
 		ai.checkInterruption();
@@ -180,6 +181,7 @@ public class TimedBomb {
 		this.releaseTime = releaseTime;
 	}
 		
+	@Override
 	public String toString()
 	{
 		String result = "";

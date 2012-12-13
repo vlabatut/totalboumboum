@@ -43,6 +43,8 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 	private AiTile previousTile = null;
 	/** */
 	private static int i=1;
+
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		

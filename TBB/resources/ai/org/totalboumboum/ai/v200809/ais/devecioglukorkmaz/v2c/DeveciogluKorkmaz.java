@@ -55,6 +55,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/** */
 	int nombreHeroes;
 
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 		AiZone zone = getPercepts();

@@ -292,6 +292,7 @@ public class ZoneDangereux {
 		return matris;
 	}
 	
+	@Override
 	public String toString()
 	{	
 		String result = "";

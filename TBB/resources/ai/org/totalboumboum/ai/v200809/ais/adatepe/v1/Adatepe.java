@@ -57,6 +57,7 @@ public class Adatepe extends ArtificialIntelligence
 	Direction direction;
 	
 	
+	@Override
 	public AiAction processAction() throws StopRequestException
 {	
 	checkInterruption();

@@ -38,6 +38,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	private AiTile previousTile = null;
 	
 	// la methode principale
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	
 		

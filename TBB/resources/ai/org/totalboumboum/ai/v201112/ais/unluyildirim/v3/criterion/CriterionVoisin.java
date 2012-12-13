@@ -38,7 +38,7 @@ public class CriterionVoisin extends AiUtilityCriterionInteger {
 	protected UnluYildirim ai;
 
 	// ///////////////////////////////////////////////////////////////
-
+	@Override
 	public Integer processValue(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 

@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 @SuppressWarnings("deprecation")
 public class AstarComparator implements Comparator<CostTile> {
 	
+	@Override
 	public int compare(CostTile tile1, CostTile tile2){
 		
 		int i=0;

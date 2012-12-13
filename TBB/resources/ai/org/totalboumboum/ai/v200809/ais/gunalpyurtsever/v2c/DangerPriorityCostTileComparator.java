@@ -32,9 +32,7 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 		this.line = line;
 	}
 
-	/**
-	 * 
-	 */
+	@Override
 	public int compare(DangerPriorityCostTile tile1, DangerPriorityCostTile tile2){
 		
 		

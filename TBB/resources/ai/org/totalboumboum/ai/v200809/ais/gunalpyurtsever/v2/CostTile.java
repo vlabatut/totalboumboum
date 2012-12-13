@@ -78,9 +78,7 @@ public class CostTile  {
 		return MyAiTile;
 	}
 	
-	/**
-	 * 
-	 */
+	@Override
 	public String toString(){
 		
 		return MyAiTile.toString()+","+cost+","+heuristic+","+firstDrctn.toString();

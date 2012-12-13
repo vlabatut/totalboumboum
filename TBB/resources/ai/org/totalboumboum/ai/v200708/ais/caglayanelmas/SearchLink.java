@@ -60,6 +60,7 @@ public class SearchLink
 		return action;
 	}
 
+	@Override
 	public boolean equals(Object object)
 	{	
 		boolean result;

@@ -323,6 +323,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return ret;
 	}
 
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 

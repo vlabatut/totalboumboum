@@ -97,6 +97,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 	/** */
 	private final int BONUS_STEP=64;
 
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{
 		checkInterruption();

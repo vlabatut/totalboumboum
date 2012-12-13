@@ -65,6 +65,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	/** */
 	AiAction result = new AiAction(AiActionName.NONE);
 
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		

@@ -31,6 +31,7 @@ public class AStarCost extends CostCalculator{
 	/**
 	 * Calcule le cout de làaction consistant à aller de la case départ à la case arrêt.
 	 */
+	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException {
 		bt.checkInterruption();
 		//pour utiliser Astar, on calcule la version basic de la cost
