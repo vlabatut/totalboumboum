@@ -120,6 +120,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	}
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 		AiAction result = new AiAction(AiActionName.NONE);

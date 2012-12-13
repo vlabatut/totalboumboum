@@ -61,6 +61,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/** */
 	public AiTile bombTile;
 
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		// avant tout
 		// : test
@@ -304,6 +305,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		LinkedList<AiTile> bonusZone = bonusZone();
 	}
 
+	@Override
 	public String toString() {
 		String result = "";
 		for (int i = 0; i < getPercepts().getHeight(); i++) {

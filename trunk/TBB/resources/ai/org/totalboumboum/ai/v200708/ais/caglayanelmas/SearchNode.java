@@ -100,6 +100,7 @@ public class SearchNode
 		return iteration;
 	}
 	
+	@Override
 	public boolean equals(Object object)
 	{
 		SearchNode sn = (SearchNode) object;

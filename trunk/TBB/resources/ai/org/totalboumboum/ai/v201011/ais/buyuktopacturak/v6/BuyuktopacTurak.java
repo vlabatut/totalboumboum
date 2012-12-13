@@ -82,6 +82,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * @throws StopRequestException
 	 * @throws NullPointerException
 	 */
+	@Override
 	public AiAction processAction() throws StopRequestException, NullPointerException
 	{	// avant tout : test d'interruption
 		checkInterruption();

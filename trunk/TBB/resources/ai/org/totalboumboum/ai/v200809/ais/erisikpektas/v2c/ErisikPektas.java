@@ -119,6 +119,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	int h = 0;
 
 	@SuppressWarnings("static-access")
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();

@@ -148,6 +148,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * @see Comparable#compareTo(Object)
 	 */
+	@Override
 	public int compareTo(Object other) {
 		HanciToprakNode o = (HanciToprakNode) other;
 		

@@ -94,6 +94,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA 
 	 * */
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		// avant tout: test d'interruption
 		checkInterruption();

@@ -93,6 +93,7 @@ public class Noeud {
 		return iteration;
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		Noeud noeud=null;
 		try {

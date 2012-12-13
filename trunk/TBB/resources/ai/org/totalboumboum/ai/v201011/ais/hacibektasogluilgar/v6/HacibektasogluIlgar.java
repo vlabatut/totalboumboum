@@ -20,6 +20,7 @@ public class HacibektasogluIlgar extends ArtificialIntelligence {
 		/** */
 	 AiHero notreHero;
 	
+		@Override
 	public AiAction processAction() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();

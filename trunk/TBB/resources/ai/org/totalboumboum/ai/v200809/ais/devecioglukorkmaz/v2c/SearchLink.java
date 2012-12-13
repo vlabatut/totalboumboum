@@ -54,9 +54,7 @@ public class SearchLink {
 		return target;
 	}
 
-	/**
-	 * 
-	 */
+	@Override
 	public boolean equals(Object object) {
 		boolean result = false;
 		if (object == null)

@@ -100,6 +100,7 @@ public class AStar {
 		return path;
 	}
 	
+	@Override
 	public String toString (){
 		Node node = targetNode;
 		String path = "";

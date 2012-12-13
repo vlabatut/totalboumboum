@@ -42,7 +42,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	 * (non-Javadoc)
 	 * @see fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence#processAction()
 	 */
-	
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	
 		

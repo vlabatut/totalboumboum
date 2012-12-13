@@ -145,6 +145,7 @@ public class Enemy
 		return _lastCheck;
 	}
 	
+	@Override
 	public String toString()
 	{
 		StringBuffer result = new StringBuffer();

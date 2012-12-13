@@ -68,6 +68,7 @@ public class SearchLink
 	 * false sinon 
 	 * @return result indique l'egalite	
 	 */
+	@Override
 	public boolean equals(Object object)
 	{		boolean result;
 		if(object == null)

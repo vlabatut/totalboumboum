@@ -73,7 +73,7 @@ public class ArikYaman extends ArtificialIntelligence
 	/** */
 	int coef=1;
 	
-	
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption();
 		AiAction result = new AiAction(AiActionName.NONE);

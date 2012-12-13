@@ -75,9 +75,7 @@ public class Node {
         return  result;
 	}
 	
-	
-	
-	
+	@Override
 	public  boolean equals(Object object) {
 		Node node = (Node)object;
 		try {

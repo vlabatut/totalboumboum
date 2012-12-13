@@ -191,6 +191,7 @@ public class AStar implements PathFinder {
 			this.parent = parent;
 		}
 
+		@Override
 		public boolean equals(Object obj) {
 			return ((Node) obj).userState.equals(this.userState);
 		}
@@ -241,6 +242,7 @@ public class AStar implements PathFinder {
 	    
 	}
 	
+	@Override
 	public synchronized void findPath(int[] from, int[] to, List<int[]> path) {
 		cleanup();
 		steps = 0;
@@ -274,6 +276,7 @@ public class AStar implements PathFinder {
 	}
 
 	
+	@Override
 	public synchronized int nextStep() {
 
 		if (state == SEARCH_STATE_FAILED || state == SEARCH_STATE_SUCCEEDED || state == SEARCH_STATE_CANCELLED)

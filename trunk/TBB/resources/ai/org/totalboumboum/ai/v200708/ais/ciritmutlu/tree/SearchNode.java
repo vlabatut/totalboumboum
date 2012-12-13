@@ -55,6 +55,7 @@ public class SearchNode
 	{	return iteration;
 	}
 	
+	@Override
 	public boolean equals(Object object)
 	{	return object == this;		
 	}

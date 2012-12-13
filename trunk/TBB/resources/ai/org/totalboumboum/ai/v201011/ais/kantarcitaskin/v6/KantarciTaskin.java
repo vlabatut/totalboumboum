@@ -40,6 +40,7 @@ public class KantarciTaskin extends ArtificialIntelligence
 	 * @return restult
 	 * 		action de l'hero dans cette iteration
 	 * */	
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();

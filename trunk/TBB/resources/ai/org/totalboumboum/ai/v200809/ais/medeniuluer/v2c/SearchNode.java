@@ -224,7 +224,7 @@ public class SearchNode {
 	 *            objet qu'on va comparer
 	 * @return true si l'objet est égal à l'objet passé en parametre
 	 */
-
+	@Override
 	public boolean equals(Object object) {
 
 		SearchNode node;
@@ -277,7 +277,7 @@ public class SearchNode {
 	 * 
 	 * @return string les coordonnees du noeud et sa valeur sour forme de texte
 	 */
-
+	@Override
 	public String toString() {
 		String resultat;
 		resultat = x + "  " + y + "  " + valeur;

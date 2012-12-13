@@ -39,11 +39,12 @@ public class MyCostCalculator extends CostCalculator {
 		double y=(ay.getPercepts().getOwnHero().getPosY()-end.getPosY());
 		return Math.sqrt(x*x+y*y)/10;
 	}
+	
+	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	ay.checkInterruption();
 		
 		double result = path.getTileDistance();
 		return result;
 	}
-
 }

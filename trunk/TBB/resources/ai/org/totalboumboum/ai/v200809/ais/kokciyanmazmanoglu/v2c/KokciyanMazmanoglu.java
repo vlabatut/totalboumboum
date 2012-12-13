@@ -61,6 +61,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/** */
 	private int missioncounter=0; 
 
+	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		zone = getPercepts();

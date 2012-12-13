@@ -58,6 +58,7 @@ public class Link {
 		return child;
 	}
 	
+	@Override
 	public boolean equals(Object object)
 	{	boolean result;
 		if(object == null)

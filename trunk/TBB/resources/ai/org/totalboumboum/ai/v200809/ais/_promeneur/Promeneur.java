@@ -53,6 +53,7 @@ public class Promeneur extends ArtificialIntelligence
 	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 	
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 

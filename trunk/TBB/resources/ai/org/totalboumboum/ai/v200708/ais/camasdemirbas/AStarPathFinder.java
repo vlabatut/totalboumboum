@@ -74,6 +74,7 @@ public class AStarPathFinder implements PathFinder {
 		}
 	}
 	
+	@Override
 	public Path findPath(int sx, int sy, int tx, int ty) {		
 		// initial state for A*. The closed group is empty. Only the starting
 		// tile is in the open list and it's cost is zero, i.e. we're already there
@@ -396,6 +397,7 @@ public class AStarPathFinder implements PathFinder {
 			return depth;
 		}
 		
+		@Override
 		public int compareTo(Object other) {
 			Node o = (Node) other;
 			

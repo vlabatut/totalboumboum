@@ -355,6 +355,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	 * methode appelee par le moteur du jeu pour obtenir une action de votre IA 
 	 * @return Methode principal pour renvoyer une action
 	 */
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();

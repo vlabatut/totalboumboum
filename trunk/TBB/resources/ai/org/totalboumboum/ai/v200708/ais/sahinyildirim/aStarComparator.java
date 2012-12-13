@@ -10,6 +10,7 @@ import java.util.Comparator;
  */
 public class aStarComparator implements Comparator<PointFind>
 {
+	@Override
 	public int compare(PointFind point1, PointFind point2) 
 	{
 		int result = -1;
