@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <players xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\players.xsd">
-<!-- 
+	<!--
 	Total Boum Boum
-	Copyright 2008-2012 Vincent Labatut 
+	Copyright 2008-2012 Vincent Labatut
 	
 	This file is part of Total Boum Boum.
 	
@@ -17,13 +17,9 @@
 	GNU General Public License for more details.
 	
 	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
-
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
 	<locations>
-<!--	
-		<case players="0" />
- -->		
 		<case players="2">
 			<location player="00" line="03" col="06" />
 			<location player="01" line="11" col="08" />

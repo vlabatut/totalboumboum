@@ -21,18 +21,24 @@
 -->
 	<variableTiles>
 		<variableTile name="itemTile">
-			<value proba="0.5">
+			<value proba="0.3">
 				<item name="extrabomb" />
 			</value>
-			<value proba="0.5">
+			<value proba="0.3">
 				<item name="extraflame" />
+			</value>
+			<value proba="0.3">
+				<item name="extraspeed" />
+			</value>
+			<value proba="0.1">
+				<item name="randomextra" />
 			</value>
 		</variableTile>
 		<variableTile name="blockTile">
-			<value proba="0.6000000238418579">
+			<value proba="0.60">
 				<block group="softwalls" name="regular" />
 			</value>
-			<value proba="0.4000000059604645" />
+			<value proba="0.40" />
 		</variableTile>
 		<variableTile name="sureBlockTile">
 			<value proba="1.0">
