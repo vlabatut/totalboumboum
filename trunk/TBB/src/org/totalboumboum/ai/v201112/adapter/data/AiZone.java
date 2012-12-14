@@ -428,45 +428,47 @@ public abstract class AiZone
 		{	// get the delay
 			long delay = orderedDelays.first();
 			orderedDelays.remove(delay);
-			// get the bombs associated to this delay
-			List<AiBomb> bombList = bombsByDelays.get(delay);
-
-			// update threatened bomb delays while considering a bomb can detonate 
-			// another one before the regular time 
-			for(AiBomb bomb1: bombList)
-			{	// get the threatened bombs
-				List<AiBomb> bList = threatenedBombs.get(bomb1);
-				// update their delays
-				for(AiBomb bomb2: bList)
-				{	// get the delay 
-					long delay2 = delaysByBombs.get(bomb2);
-					// add latency time
-					long newDelay = delay + bomb2.getLatencyDuration();
-					
-					// if this makes the delay shorter, we update eveywhere needed
-					if(bomb2.hasExplosionTrigger() && newDelay<delay2)
-					{	// in the result map
-						delaysByBombs.put(bomb2,newDelay);
+			if(delay<Integer.MAX_VALUE)	// we ignore non-time bombs
+			{	// get the bombs associated to this delay
+				List<AiBomb> bombList = bombsByDelays.get(delay);
+	
+				// update threatened bomb delays while considering a bomb can detonate 
+				// another one before the regular time 
+				for(AiBomb bomb1: bombList)
+				{	// get the threatened bombs
+					List<AiBomb> bList = threatenedBombs.get(bomb1);
+					// update their delays
+					for(AiBomb bomb2: bList)
+					{	// get the delay 
+						long delay2 = delaysByBombs.get(bomb2);
+						// add latency time
+						long newDelay = delay + bomb2.getLatencyDuration();
 						
-						// we remove the bomb from the other (inverse) map
-						{	List<AiBomb> tempList = bombsByDelays.get(delay2);
-							tempList.remove(bomb2);
-							// and possibly the delay itself, if no other bomb uses it anymore
-							if(tempList.isEmpty())
-							{	bombsByDelays.remove(delay2);
-								orderedDelays.remove(delay2);
+						// if this makes the delay shorter, we update eveywhere needed
+						if(bomb2.hasExplosionTrigger() && newDelay<delay2)
+						{	// in the result map
+							delaysByBombs.put(bomb2,newDelay);
+							
+							// we remove the bomb from the other (inverse) map
+							{	List<AiBomb> tempList = bombsByDelays.get(delay2);
+								tempList.remove(bomb2);
+								// and possibly the delay itself, if no other bomb uses it anymore
+								if(tempList.isEmpty())
+								{	bombsByDelays.remove(delay2);
+									orderedDelays.remove(delay2);
+								}
 							}
-						}
-						
-						// and put it again, but at the appropriate place this time
-						{	List<AiBomb> tempList = bombsByDelays.get(newDelay);
-							// on crée éventuellement la liste nécessaire
-							if(tempList==null)
-							{	tempList = new ArrayList<AiBomb>();
-								bombsByDelays.put(newDelay,tempList);
-								orderedDelays.add(newDelay);
+							
+							// and put it again, but at the appropriate place this time
+							{	List<AiBomb> tempList = bombsByDelays.get(newDelay);
+								// on crée éventuellement la liste nécessaire
+								if(tempList==null)
+								{	tempList = new ArrayList<AiBomb>();
+									bombsByDelays.put(newDelay,tempList);
+									orderedDelays.add(newDelay);
+								}
+								tempList.add(bomb2);
 							}
-							tempList.add(bomb2);
 						}
 					}
 				}

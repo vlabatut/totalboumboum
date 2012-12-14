@@ -425,7 +425,7 @@ public abstract class AiZone
 		{	// get the delay
 			long delay = orderedDelays.first();
 			orderedDelays.remove(delay);
-			if(delay<Integer.MAX_VALUE)	// we ignore non-time bombs&&
+			if(delay<Integer.MAX_VALUE)	// we ignore non-time bombs
 			{	// get the bombs associated to this delay
 				List<AiBomb> bombList = bombsByDelays.get(delay);
 	
