@@ -23,7 +23,7 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="30" time="0" />
+		<limits points="0" rounds="30" time="90000" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -36,13 +36,11 @@
 	<players>
 		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="2" spritePack="superbomberman3" spriteFolder="shirobon" />
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="bf0ed21f-8d7a-4cee-aa27-2d6729ce9940" color="ULTRAMARINE" controls="3" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="4" spritePack="superbomberman3" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tests" folder="test2" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="qualif2" allowedPlayers="2 3 4" />
-		<level pack="tournament201213" folder="qualif3" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="qualif4" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="qualif5" allowedPlayers="2 3 4" />
+		<level pack="tournament201213" folder="readysetgo" allowedPlayers="2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 

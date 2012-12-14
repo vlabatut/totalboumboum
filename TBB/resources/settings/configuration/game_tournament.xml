@@ -20,20 +20,16 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="Trnmt200910_1.cup" />
+	<tournament name="Trnmt201213_1.cup" />
 	<players>
 		<player file="bbe5482b-6fa0-4204-a5a6-43c4efff917c" color="WHITE" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 		<player file="e346d333-bbba-4dc8-bfd0-31de94a3dbae" color="RUST" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
 		<player file="6120e48f-3b5d-4681-b2f8-ae7f7277345b" color="BROWN" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="b4da1179-5a61-4300-a267-487179de9b98" color="GRASS" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="bc8b7b98-7456-486a-a5b0-9cc9715d6e45" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="48ecfdd6-9904-4e80-be3a-2d41277ded4e" color="BLACK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="fa0e458a-a12b-41ef-921a-e494933ef80c" color="ORANGE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="e61690df-94cd-48f2-a052-831a6508c971" color="YELLOW" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="c6bea657-b93e-4e7c-8aa8-11eddca19f41" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="6a64cee4-173c-41c7-a6e4-e00434ca73f8" color="ULTRAMARINE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="da8e37f2-e75e-4e07-b18c-317a9283d47d" color="GREEN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="ac0853de-bb8f-4141-8fa9-4a3b2708d331" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 

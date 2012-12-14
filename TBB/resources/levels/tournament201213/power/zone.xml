@@ -1298,5 +1298,791 @@
 			</tile>
 		</line>
 	</matrix>
+	<events duration="120000" relative="true">
+		<event time="60000">
+			<line pos="1">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="60271">
+			<line pos="1">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="60542">
+			<line pos="1">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="60813">
+			<line pos="1">
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="61084">
+			<line pos="1">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="61355">
+			<line pos="1">
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="61626">
+			<line pos="1">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="61897">
+			<line pos="1">
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="62168">
+			<line pos="1">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="62439">
+			<line pos="1">
+				<tile pos="14">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="62710">
+			<line pos="1">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="62981">
+			<line pos="1">
+				<tile pos="16">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="63252">
+			<line pos="1">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="63523">
+			<line pos="2">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="63794">
+			<line pos="3">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="64065">
+			<line pos="4">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="64336">
+			<line pos="5">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="64607">
+			<line pos="6">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="64878">
+			<line pos="7">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="65149">
+			<line pos="8">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="65420">
+			<line pos="9">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="65691">
+			<line pos="10">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="65962">
+			<line pos="11">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="66233">
+			<line pos="12">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="66504">
+			<line pos="13">
+				<tile pos="17">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="66775">
+			<line pos="13">
+				<tile pos="16">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="67046">
+			<line pos="13">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="67317">
+			<line pos="13">
+				<tile pos="14">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="67588">
+			<line pos="13">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="67859">
+			<line pos="13">
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="68129">
+			<line pos="13">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="68399">
+			<line pos="13">
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="68669">
+			<line pos="13">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="68939">
+			<line pos="13">
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="69209">
+			<line pos="13">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="69479">
+			<line pos="13">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="69749">
+			<line pos="13">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="70019">
+			<line pos="12">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="70289">
+			<line pos="11">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="70559">
+			<line pos="10">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="70829">
+			<line pos="9">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="71099">
+			<line pos="8">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="71369">
+			<line pos="7">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="71639">
+			<line pos="6">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="71909">
+			<line pos="5">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="72179">
+			<line pos="4">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="72449">
+			<line pos="3">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="72719">
+			<line pos="2">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="72989">
+			<line pos="2">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="73259">
+			<line pos="2">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="73529">
+			<line pos="2">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="73799">
+			<line pos="2">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="74069">
+			<line pos="2">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="74339">
+			<line pos="3">
+				<tile pos="16">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="74609">
+			<line pos="5">
+				<tile pos="16">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="74879">
+			<line pos="7">
+				<tile pos="16">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="75149">
+			<line pos="9">
+				<tile pos="16">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="75419">
+			<line pos="11">
+				<tile pos="16">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="75689">
+			<line pos="12">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="75959">
+			<line pos="12">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="76229">
+			<line pos="12">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="76499">
+			<line pos="12">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="76769">
+			<line pos="12">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="77039">
+			<line pos="11">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="77309">
+			<line pos="9">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="77579">
+			<line pos="7">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="77849">
+			<line pos="5">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="78119">
+			<line pos="3">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="78389">
+			<line pos="3">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="78659">
+			<line pos="3">
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="78929">
+			<line pos="3">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="79199">
+			<line pos="3">
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="79469">
+			<line pos="3">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="79739">
+			<line pos="3">
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="80009">
+			<line pos="3">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="80279">
+			<line pos="3">
+				<tile pos="14">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="80549">
+			<line pos="3">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="80819">
+			<line pos="4">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="81089">
+			<line pos="5">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="81359">
+			<line pos="6">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="81629">
+			<line pos="7">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="81899">
+			<line pos="8">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="82169">
+			<line pos="9">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="82439">
+			<line pos="10">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="82709">
+			<line pos="11">
+				<tile pos="15">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="82979">
+			<line pos="11">
+				<tile pos="14">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="83249">
+			<line pos="11">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="83519">
+			<line pos="11">
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="83789">
+			<line pos="11">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="84059">
+			<line pos="11">
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="84329">
+			<line pos="11">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="84599">
+			<line pos="11">
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="84869">
+			<line pos="11">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="85139">
+			<line pos="10">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="85409">
+			<line pos="9">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="85679">
+			<line pos="8">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="85949">
+			<line pos="7">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="86219">
+			<line pos="6">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="86489">
+			<line pos="5">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="86759">
+			<line pos="4">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="87029">
+			<line pos="4">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="87299">
+			<line pos="4">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="87569">
+			<line pos="4">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="87839">
+			<line pos="5">
+				<tile pos="14">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="88109">
+			<line pos="7">
+				<tile pos="14">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="88379">
+			<line pos="9">
+				<tile pos="14">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="88649">
+			<line pos="10">
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="88919">
+			<line pos="10">
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="89189">
+			<line pos="10">
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="89459">
+			<line pos="9">
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="89729">
+			<line pos="7">
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="89999">
+			<line pos="5">
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+	</events>
 </zone>
 
