@@ -36,7 +36,7 @@
 		</lastStanding>
 		<time>
 			<points local="true" name="points" />
- 			<threshold value="60000" />
+ 			<threshold value="60000" /> 
 		</time>
 	</limits>
 	

@@ -40,9 +40,6 @@
  	<rounds randomOrder="true" >
   		<round local="true" name="roundCarrefour" />
   		<round local="true" name="roundHorizontal" />
-<!--  		<round local="true" name="roundBombfest" />
-  		<round local="true" name="roundHurry" />
--->
   	</rounds>
 	
 </match>

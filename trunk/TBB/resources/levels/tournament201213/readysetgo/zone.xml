@@ -194,11 +194,11 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<item name="goldenflame" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<item name="goldenbomb" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -310,11 +310,11 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<item name="goldenflame" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<item name="goldenbomb" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -426,11 +426,11 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<item name="goldenflame" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<item name="goldenbomb" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -542,11 +542,11 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<item name="goldenflame" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<item name="goldenbomb" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />

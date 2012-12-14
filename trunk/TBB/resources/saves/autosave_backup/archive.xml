@@ -19,26 +19,18 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Tournoi de Galatasaray I" type="CUP" />
+	<tournament name="Tournoi de Galatasaray VI" type="CUP" />
 	<played matches="0" rounds="1" />
-	<dates start="2012-12-02T17:44:45" save="2012-12-02T17:46:16" />
+	<dates start="2012-12-13T21:50:50" save="2012-12-13T21:52:23" />
 	<players>
-		<player name="1112.Demirel+Öz" />
+		<player name="0809.Altay+Basaranoğlu" />
+		<player name="0708.Çağlayan+Elmas" />
+		<player name="0910.Fındık+Şırın" />
+		<player name="1112.Çalışkan+Geçkalan+Seven" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
 		<player name="0708.Kılıç+Pala" />
-		<player name="0809.Çalışkan+Cap+Doğaner" />
-		<player name="1112.Güngör+Kavuz" />
-		<player name="1213.Çetin+İlter" />
-		<player name="1112.Arık+Köseoğlu" />
-		<player name="1011.Kantarcı+Taşkın" />
-		<player name="Suiveur" />
-		<player name="1213.Kart+Turgut" />
-		<player name="0708.Göksay+Köse" />
-		<player name="1011.Özdöker+Özen" />
-		<player name="1112.Coşkun+Özdemir" />
-		<player name="1213.Besnili+Kangal" />
-		<player name="1112.Ünlü+Yıldırım" />
-		<player name="1213.Oral+Özuğur" />
-		<player name="1213.Alçar+Kaya+Yıldırım" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="Joueur humain" />
 	</players>
 </archive>
 

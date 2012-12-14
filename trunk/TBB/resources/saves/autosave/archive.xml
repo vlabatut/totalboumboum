@@ -19,22 +19,18 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Tournoi de Galatasaray III" type="CUP" />
-	<played matches="0" rounds="1" />
-	<dates start="2012-12-02T17:48:08" save="2012-12-02T17:48:22" />
+	<tournament name="Tournoi de Galatasaray VI" type="CUP" />
+	<played matches="0" rounds="2" />
+	<dates start="2012-12-13T21:50:50" save="2012-12-13T21:53:04" />
 	<players>
 		<player name="0809.Altay+Basaranoğlu" />
+		<player name="0708.Çağlayan+Elmas" />
+		<player name="0910.Fındık+Şırın" />
+		<player name="1112.Çalışkan+Geçkalan+Seven" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
 		<player name="0708.Kılıç+Pala" />
 		<player name="0708.Okan+Yüksel" />
-		<player name="1011.Göçmenoğlu+Hekimoğlu" />
-		<player name="0708.Demirkol+Doğan" />
-		<player name="0910.Dane+Şatır" />
-		<player name="1011.Çalışkan+Seven" />
-		<player name="0910.Fındık+Şırın" />
-		<player name="0708.Baydar+Camcı" />
-		<player name="0708.Çağlayan+Elmas" />
-		<player name="ZZZZZZZtest" />
-		<player name="1112.Çalışkan+Geçkalan+Seven" />
+		<player name="Joueur humain" />
 	</players>
 </archive>
 
