@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -89,12 +90,12 @@ public class LevelTools
 		saveLevel(level);
 */				
 		// open an existing level and replace the background
-/*		String pack = "tournament201112";
-		String folder = "carrefour";
+/*		String pack = "tournament201213";
+		String folder = "bombfest";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 		removeBackground(level);
-		setBackground(level);
+//		setBackground(level);
 		saveLevel(level);
 */		
 		// open an existing level and add/remove columns/rows
@@ -112,66 +113,55 @@ public class LevelTools
 		insertCol(level,14,true,true,true,true,true);
 		saveLevel(level);
 */
-		// open an existing level and add a sudden death spiral
+		// open an existing level and add a sudden death
 		String pack = "tournament201213";
-		String folder = "line";
+		String folder = "power";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
-		int thickness = 2;
+//		rescaleSuddenDeathTime(level,90000,120000);
+//		removeSuddenDeath(level);
+		int thickness = 4;
 		boolean clockwise = true;
 		long startTime = 60000;
 		long endTime = 90000;
 		boolean relative = true;
 		long totalTime = 120000;
 		boolean crushHardwalls = false;
-		removeSuddenDeath(level);
-		addSpiralSuddenDeath(level, thickness, clockwise, 1, 2, startTime, endTime, relative, totalTime, crushHardwalls);
+		addSpiralSuddenDeath(level, thickness, clockwise, 1, 5, startTime, endTime, relative, totalTime, crushHardwalls);
 //		addLinearSuddenDeath(level, thickness, 2, true, 1, 13, startTime, endTime, relative, totalTime, crushHardwalls);
 /*		addCustomSuddenDeath(level, Arrays.asList(
 				// columns 5 & 17
-				Arrays.asList(new int[]{3,5},new int[]{3,17},new int[]{13,5},new int[]{13,17}),
-				Arrays.asList(new int[]{4,5},new int[]{4,17},new int[]{12,5},new int[]{12,17}),
-				Arrays.asList(new int[]{5,5},new int[]{5,17},new int[]{11,5},new int[]{11,17}),
+				Arrays.asList(new int[]{0,7},new int[]{0,15},new int[]{1,7},new int[]{1,15},new int[]{2,7},new int[]{2,15},new int[]{14,7},new int[]{14,15}),
+				Arrays.asList(new int[]{8,5},new int[]{8,17}),
+				Arrays.asList(new int[]{7,5},new int[]{7,17},new int[]{9,5},new int[]{9,17}),
 				Arrays.asList(new int[]{6,5},new int[]{6,17},new int[]{10,5},new int[]{10,17}),
-				Arrays.asList(new int[]{7,5},new int[]{7,17},new int[]{9,5}, new int[]{9,17}),
-				// columns 6 & 16
+				Arrays.asList(new int[]{5,5},new int[]{5,17},new int[]{11,5},new int[]{11,17}),
+				Arrays.asList(new int[]{4,5},new int[]{4,17},new int[]{12,5},new int[]{12,17}),
+				Arrays.asList(new int[]{3,5},new int[]{3,17},new int[]{13,5},new int[]{13,17}),
 				Arrays.asList(new int[]{3,6},new int[]{3,16},new int[]{13,6},new int[]{13,16}),
-				Arrays.asList(new int[]{5,6},new int[]{5,16},new int[]{11,6},new int[]{11,16}),
-				Arrays.asList(new int[]{7,6},new int[]{7,16},new int[]{9,6}, new int[]{9,16}),
-				// columns 7 & 15
+				Arrays.asList(new int[]{3,11},new int[]{13,11}),
+				Arrays.asList(new int[]{3,10},new int[]{3,12},new int[]{13,10},new int[]{13,12}),
+				Arrays.asList(new int[]{3,9},new int[]{3,13},new int[]{13,9},new int[]{13,13}),
+				Arrays.asList(new int[]{3,8},new int[]{3,14},new int[]{13,8},new int[]{13,14}),
 				Arrays.asList(new int[]{3,7},new int[]{3,15},new int[]{13,7},new int[]{13,15}),
 				Arrays.asList(new int[]{4,7},new int[]{4,15},new int[]{12,7},new int[]{12,15}),
 				Arrays.asList(new int[]{5,7},new int[]{5,15},new int[]{11,7},new int[]{11,15}),
 				Arrays.asList(new int[]{6,7},new int[]{6,15},new int[]{10,7},new int[]{10,15}),
-				Arrays.asList(new int[]{7,7},new int[]{7,15},new int[]{9,7}, new int[]{9,15}),
-				// columns 8 & 14
-				Arrays.asList(new int[]{3,8},new int[]{3,14},new int[]{13,8},new int[]{13,14}),
+				Arrays.asList(new int[]{7,7},new int[]{7,15},new int[]{9,7},new int[]{9,15}),
+				Arrays.asList(new int[]{8,7},new int[]{8,15}),
+				Arrays.asList(new int[]{4,11},new int[]{8,8},new int[]{8,14},new int[]{12,11}),
 				Arrays.asList(new int[]{5,8},new int[]{5,14},new int[]{11,8},new int[]{11,14}),
-				Arrays.asList(new int[]{7,8},new int[]{7,14},new int[]{9,8}, new int[]{9,14}),
-				// columns 9 & 13
-				Arrays.asList(new int[]{3,9},new int[]{3,13},new int[]{13,9},new int[]{13,13}),
-				Arrays.asList(new int[]{4,9},new int[]{4,13},new int[]{12,9},new int[]{12,13}),
 				Arrays.asList(new int[]{5,9},new int[]{5,13},new int[]{11,9},new int[]{11,13}),
-				Arrays.asList(new int[]{6,9},new int[]{6,13},new int[]{10,9},new int[]{10,13}),
-				Arrays.asList(new int[]{7,9},new int[]{7,13},new int[]{9,9}, new int[]{9,13}),
-				// columns 10 & 12
-				Arrays.asList(new int[]{3,10},new int[]{3,12},new int[]{13,10},new int[]{13,12}),
-				Arrays.asList(new int[]{7,10},new int[]{7,12},new int[]{9,10}, new int[]{9,12}),
-				// column 11
-				Arrays.asList(new int[]{3,11}),
-				Arrays.asList(new int[]{13,11}),
-				Arrays.asList(new int[]{4,11}),
-				Arrays.asList(new int[]{12,11}),
-				Arrays.asList(new int[]{5,11}),
-				Arrays.asList(new int[]{11,11}),
-				Arrays.asList(new int[]{6,11}),
-				Arrays.asList(new int[]{10,11}),
-				Arrays.asList(new int[]{7,11}),
-				Arrays.asList(new int[]{9,11}),
-				Arrays.asList(new int[]{8,11})
+				Arrays.asList(new int[]{5,10},new int[]{5,12},new int[]{11,10},new int[]{11,12}),
+				Arrays.asList(new int[]{5,11},new int[]{11,11}),
+				Arrays.asList(new int[]{6,9},new int[]{6,13},new int[]{10,9},new int[]{10,13})
 				), startTime, endTime, relative, totalTime, crushHardwalls);*/
 //		addRandomFallingBombs(level, 20, new int[]{1,2,11,14}, 5000, 59500, 3000, relative, totalTime);
+		
+		
+		
 		saveLevel(level);
+		System.out.println("Process done");
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -1371,6 +1361,10 @@ public class LevelTools
 		int globalHeight = zone.getGlobalHeight();
 		int globalWidth = zone.getGlobalWidth();
 		
+		// set general stuff
+		zone.setEventsDuration(totalTime);
+		zone.setEventsRelative(relative);
+		
 		// size of the area
 		if(boundaries==null)
 			boundaries = new int[]{0,0,globalHeight-1,globalWidth-1};
@@ -1411,5 +1405,63 @@ public class LevelTools
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Translates all existing sudden death events by a fixed
+	 * duration, which can be negative (events happen sooner)
+	 * or positive (they occur later). 
+	 * 
+	 * @param level
+	 * 		Level to be modified.
+	 * @param delta
+	 * 		Amount of time used to translate all events (can be negative).
+	 */
+	private static void translateSuddenDeathTime(HollowLevel level, long delta)
+	{	// get data
+		Zone zone = level.getZone();
+		HashMap<Long, List<ZoneHollowTile>> temp = zone.getEvents();
+	 	HashMap<Long, List<ZoneHollowTile>> events = new HashMap<Long, List<ZoneHollowTile>>(temp);
+	 	temp.clear();
+	 	
+	 	// translate events
+	 	for(Entry<Long, List<ZoneHollowTile>> entry: events.entrySet())
+	 	{	Long time = entry.getKey() + delta;
+	 		List<ZoneHollowTile> list = entry.getValue();
+	 		zone.addEvents(time,list);
+	 	}
+	}
+
+	/**
+	 * Translates all existing sudden death events in order to
+	 * match new begin and ending times. 
+	 * 
+	 * @param level
+	 * 		Level to be modified.
+	 * @param newStart
+	 * 		New starting time.
+	 * @param newEnd
+	 * 		New ending time.
+	 */
+	private static void rescaleSuddenDeathTime(HollowLevel level, long newStart, long newEnd)
+	{	// get data
+		Zone zone = level.getZone();
+		HashMap<Long, List<ZoneHollowTile>> temp = zone.getEvents();
+	 	HashMap<Long, List<ZoneHollowTile>> events = new HashMap<Long, List<ZoneHollowTile>>(temp);
+	 	temp.clear();
+	 	
+	 	// process transformation
+	 	TreeSet<Long> times = new TreeSet<Long>(events.keySet());
+	 	long oldStart = times.first();
+	 	long oldEnd = times.last();
+	 	double coef = (newEnd-newStart)/(double)(oldEnd-oldStart);
+	 	
+	 	// translate events
+	 	for(Entry<Long, List<ZoneHollowTile>> entry: events.entrySet())
+	 	{	long oldTime = entry.getKey();
+	 		long newTime = (long)(newStart + (oldTime-oldStart)*coef); 
+	 		List<ZoneHollowTile> list = entry.getValue();
+	 		zone.addEvents(newTime,list);
+	 	}
 	}
 }

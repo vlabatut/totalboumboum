@@ -186,15 +186,22 @@ public class Zone implements Serializable
 		}
 		list.add(tile);
 	}
-	
+
 	/**
-	 * Returns all remaining sudden death events.
+	 * Add a new modification to the map.
 	 * 
-	 * @return
-	 * 		A map containing all remaining sudden death events.
+	 * @param time
+	 * 		Time of the modification.
+	 * @param tiles
+	 * 		Nature of the modification.
 	 */
-	public HashMap<Long,List<ZoneTile>> getEventsInit()
-	{	return eventsInit;
+	public void addEvents(Long time, List<ZoneHollowTile> tiles)
+	{	List<ZoneHollowTile> list = events.get(time);
+		if(list==null)
+		{	list = new ArrayList<ZoneHollowTile>();
+			events.put(time,list);
+		}
+		list.addAll(tiles);
 	}
 
 	/**
@@ -214,6 +221,16 @@ public class Zone implements Serializable
 	 */
 	public HashMap<Long, List<ZoneHollowTile>> getEvents()
 	{	return events;
+	}
+	
+	/**
+	 * Returns all remaining sudden death events.
+	 * 
+	 * @return
+	 * 		A map containing all remaining sudden death events.
+	 */
+	public HashMap<Long,List<ZoneTile>> getEventsInit()
+	{	return eventsInit;
 	}
 	
 	/////////////////////////////////////////////////////////////////

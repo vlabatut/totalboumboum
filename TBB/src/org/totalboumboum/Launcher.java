@@ -1622,8 +1622,10 @@ public class Launcher
 	
 	
 	
-	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
+	// TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
 	
+	// TODO faire apparaitre les données en cours de jeu (F-x) en faisant une animation
+	// genre le bazard sort du bord de l'écran.
 	
 	/**
 	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
@@ -1645,3 +1647,5 @@ public class Launcher
 	 * 		>> il faut implémenter un système de qualif directe pour certains joueurs 
 	 */
 }
+
+// TODO modifier la mort subite du niveau items (plus tot)
