@@ -1035,6 +1035,10 @@ public class Launcher
 	 * TODO faire une appli propre pour générer les niveaux
 	 * mettre une jolie doc en ligne de commande pour exécuter tout ça 
 	 */
+	
+	/*
+	 * TODO bloc devant être explosé plusieurs fois avant de disparaitre
+	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ANIMES / ANIMATIONS	//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1130,17 +1134,6 @@ public class Launcher
 	 * (pr gather : la case).
 	 */
 	
-	/*
-	 * TODO chargement des niveaux
-	 * 	- commencer une partie rapide avec un seul niveau
-	 * 	- jouer un round
-	 * 	- changer les items par défaut pour ce niveau, directement dans le fichier XML
-	 * 	- jouer le round suivant: 
-	 * 		- la GUI affiche la modif
-	 *		- mais le hollow level n'a pas été rechargé (mutualisation)
-	 *		- et donc la modif n'est pas prise en compte dans l'initialisation des joueurs 
-	 */
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // STATS / STATISTIQUES / STATISTICS	//////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1264,7 +1257,7 @@ public class Launcher
 	/*
 	 * TODO
 	 * bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
-	 * >> pas trouvé la cause de ce beans... (et c'est pas faut d'avoir cherché !)
+	 * >> pas trouvé la cause de ce problème... (et c'est pas faut d'avoir cherché !)
 	 */
 	
 	
@@ -1331,8 +1324,6 @@ public class Launcher
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
 	 * - étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
-	 * 
-	 * - gérer le shrink
 	 * 
 	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
 	 * 
@@ -1426,7 +1417,7 @@ public class Launcher
 	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spéciales)
 	 * 
 	 * - Niveaux
-	 * 		- outil pour découper une image (background) en nxm floors
+	 * 		- outil pour découper une image (background) en (n x m) floors
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1646,4 +1637,12 @@ public class Launcher
 	 */
 }
 
-// TODO modifier la mort subite du niveau items (plus tot)
+/**
+ * TODO utiliser les softwalls de couleur
+ * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
+ * 		(avec bordure de sol différente (?)
+ * 
+ * TODO v.étudiants >> màj niveaux et tournois
+ * TODO régler le tournoi sur la qualif
+ * TODO vérifier tous les TODOs
+ */
