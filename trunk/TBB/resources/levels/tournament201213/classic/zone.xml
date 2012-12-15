@@ -28,15 +28,27 @@
 				<block group="softwalls" name="regular" />
 				<item name="extrabomb" />
 			</value>
+			<value proba="0.03">
+				<block group="softwalls" name="regular" />
+				<item name="antibomb" />
+			</value>
 			<value proba="0.04">
 				<block group="softwalls" name="regular" />
 				<item name="extraflame" />
 			</value>
-			<value proba="0.02">
+			<value proba="0.03">
+				<block group="softwalls" name="regular" />
+				<item name="antiflame" />
+			</value>
+			<value proba="0.03">
 				<block group="softwalls" name="regular" />
 				<item name="extraspeed" />
 			</value>
-			<value proba="0.70" />
+			<value proba="0.03">
+				<block group="softwalls" name="regular" />
+				<item name="antispeed" />
+			</value>
+			<value proba="0.60" />
 		</variableTile>
 	</variableTiles>
 	<matrix>
