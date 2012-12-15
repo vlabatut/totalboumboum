@@ -22,6 +22,7 @@ package org.totalboumboum.engine.content.sprite;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -97,6 +98,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	this.tile = tile;
 		center();
 		eventManager.initGesture();
+		initGroundSpeedIndices();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -407,13 +409,59 @@ public abstract class Sprite implements Comparable<Sprite>
 	/////////////////////////////////////////////////////////////////
 	// SPEED COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Index for the speed */
 	protected double speedAbility = 1;
+	/** Actual speed (corresponding to the above index), expressed in pixel/s*/
 	protected double speedAbilityCoef = 1;
+	/** List of all defined speed indices for this sprite */
+	protected List<Integer> walkingSpeedIndices;
+	
+	/**
+	 * Initializes all possible ground speed indices
+	 * for this sprite.
+	 */
+	private void initGroundSpeedIndices()
+	{	// init
+		walkingSpeedIndices = new ArrayList<Integer>();
+		
+		// bonuses
+		List<StateAbility> bonuses = getAbilitiesStartingWith(StateAbilityName.HERO_WALK_SPEED_P);
+		for(StateAbility ability: bonuses)
+		{	String name = ability.getName();
+			String str = name.substring(StateAbilityName.HERO_WALK_SPEED_P.length(),name.length());
+			int index = Integer.parseInt(str);
+			walkingSpeedIndices.add(index);
+		}
+		
+		// maluses
+		List<StateAbility> maluses = getAbilitiesStartingWith(StateAbilityName.HERO_WALK_SPEED_M);
+		for(StateAbility ability: maluses)
+		{	String name = ability.getName();
+			String str = name.substring(StateAbilityName.HERO_WALK_SPEED_M.length(),name.length());
+			int index = -Integer.parseInt(str);
+			walkingSpeedIndices.add(index);
+		}
+		
+		// sort
+		Collections.sort(walkingSpeedIndices);
+	}
+	
+	/**
+	 * Returns the list of defined speed
+	 * indices for this sprite.
+	 * 
+	 * @return
+	 * 		A list of integers.
+	 */
+	public List<Integer> getGroundSpeedIndices()
+	{	return walkingSpeedIndices;
+	}
 	
 	/**
 	 * S'il y  a un boundToSprite, son speedCoeff est renvoyé.
 	 * Sinon, c'est le produit entre le speedCoeff du sprite
 	 * et celui du jeu.
+	 * 
 	 * @return
 	 */
 	public double getCurrentSpeedCoeff()
@@ -438,38 +486,58 @@ public abstract class Sprite implements Comparable<Sprite>
 		return result;
 	}
 	
+	/**
+	 * Returns data relative to the current
+	 * speed on the ground.
+	 * 
+	 * @return
+	 * 		A double array containing two values: 
+	 * 		the speed and the corresponding index.
+	 */
 	public double[] getGroundSpeedCoeff()
 	{	double[] result = new double[2];
 		
 		// get the current speed ability
 		StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
-		int speed = (int)ability.getStrength();
+		int speedIndex = (int)ability.getStrength();
 		
 		// if the speed ability didn't change since last time it was checked
-		if(speed==speedAbility)
+		if(speedIndex==speedAbility)
 		{	result[0] = speedAbilityCoef;
 			result[1] = speedAbility;
 		}
 		
 		// otherwise it must be updated
 		else
-		{	double speedAbility = speed;
-			double speedAbilityCoef = 1;
-			int delta = -(int)Math.signum(speed);
-			String name;
-			do
-			{	name = StateAbilityName.getHeroWalkSpeed(speed);
-				if(name!=null) // i.e. if speed is not zero
-				{	ability = modulateStateAbility(name);
-					if(ability.isActive())
-						speedAbilityCoef = ability.getStrength();
-					else
-						speed = speed + delta;
-				}
+		{	// increased speed
+			if(speedIndex>0)
+			{	int i = walkingSpeedIndices.indexOf(1);
+				while(i<walkingSpeedIndices.size() && walkingSpeedIndices.get(i)<=speedIndex)
+					i++;
+				i--;
+				speedIndex = walkingSpeedIndices.get(i);
 			}
-			while(name!=null && !ability.isActive());
-			result[0] = speedAbilityCoef;
-			result[1] = speedAbility;
+			
+			// decreased speed
+			else if(speedIndex<0)
+			{	int i = walkingSpeedIndices.indexOf(1);
+				while(i>=0 && walkingSpeedIndices.get(i)>=speedIndex)
+					i--;
+				i++;
+				speedIndex = walkingSpeedIndices.get(i);
+			}
+			
+			// update speed info
+			if(speedIndex==0)
+			{	result[0] = 1;
+				result[1] = speedIndex;
+			}
+			else
+			{	String name = StateAbilityName.getHeroWalkSpeed(speedIndex);
+				ability = modulateStateAbility(name);
+				result[0] = ability.getStrength();
+				result[1] = speedIndex;
+			}
 		}
 		
 		return result;
@@ -495,6 +563,10 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return abilityManager.getAbility(ability);
 	}
 	
+	public List<StateAbility> getAbilitiesStartingWith(String name)
+	{	return abilityManager.getAbilitiesStartingWith(name);
+	}
+
 /*	public StateAbility getAbility(String name)
 	{	return abilityManager.getAbility(name);
 	}
