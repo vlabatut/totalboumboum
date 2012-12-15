@@ -1424,6 +1424,11 @@
 					<block group="hardwalls" name="shrink" />
 				</tile>
 			</line>
+			<line pos="7">
+				<tile pos="7">
+					<item name="goldenspeed" />
+				</tile>
+			</line>
 			<line pos="9">
 				<tile pos="4">
 					<block group="hardwalls" name="shrink" />
