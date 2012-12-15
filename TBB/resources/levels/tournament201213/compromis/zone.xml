@@ -21,19 +21,19 @@
 -->
 	<variableTiles>
 		<variableTile name="tile1">
-			<value proba="0.98">
+			<value proba="0.9800000190734863">
 				<block group="softwalls" name="regular" />
 			</value>
-			<value proba="0.02">
+			<value proba="0.019999999552965164">
 				<block group="softwalls" name="regular" />
 				<item name="goldenflame" />
 			</value>
 		</variableTile>
 	</variableTiles>
-
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
@@ -221,35 +221,35 @@
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="00_02" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="00_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="00_04" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="00_05" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="00_06" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="00_07" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="00_08" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="00_09" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="10">
@@ -279,245 +279,245 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="01_01" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="01_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="01_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="01_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="01_05" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="01_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="01_07" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="01_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="01_09" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="01_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="01_11" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="01_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="01_13" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="01_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
 		<line pos="5">
 			<tile pos="0">
-				<floor name="regular" />
+				<floor name="02_00" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="02_01" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="02_02" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="02_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="02_04" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="02_05" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="02_06" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="02_07" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="02_08" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="02_09" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="02_10" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="02_11" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="02_12" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="02_13" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="02_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
 		<line pos="6">
 			<tile pos="0">
-				<floor name="regular" />
+				<floor name="03_00" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="03_01" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="03_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="03_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="03_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="03_05" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="03_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="03_07" />
 				<item name="goldenbomb" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="03_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="03_09" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="03_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="03_11" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="03_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="03_13" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="03_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
 		<line pos="7">
 			<tile pos="0">
-				<floor name="regular" />
+				<floor name="04_00" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="04_01" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="04_02" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="04_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="04_04" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="04_05" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="04_06" />
 				<item name="goldenbomb" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="04_07" />
 				<item name="goldenflame" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="04_08" />
 				<item name="goldenbomb" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="04_09" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="04_10" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="04_11" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="04_12" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="04_13" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="04_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -531,55 +531,55 @@
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="05_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="05_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="05_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="05_05" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="05_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="05_07" />
 				<item name="goldenbomb" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="05_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="05_09" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="05_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="05_11" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="05_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="05_13" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="05_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -593,55 +593,55 @@
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="06_02" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="06_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="06_04" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="06_05" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="06_06" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="06_07" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="06_08" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="06_09" />
 				<item name="nospeed" />
 			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="06_10" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="06_11" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="06_12" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="06_13" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="06_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -655,55 +655,55 @@
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="07_02" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="07_03" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="07_04" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="07_05" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="07_06" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="07_07" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="07_08" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="07_09" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="10">
-				<floor name="regular" />
+				<floor name="07_10" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="07_11" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="07_12" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="07_13" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="14">
-				<floor name="regular" />
+				<floor name="07_14" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 		</line>
@@ -729,23 +729,23 @@
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="08_05" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="08_06" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="08_07" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="8">
-				<floor name="regular" />
+				<floor name="08_08" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="9">
-				<floor name="regular" />
+				<floor name="08_09" />
 				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="10">
@@ -950,5 +950,497 @@
 			</tile>
 		</line>
 	</matrix>
+	<events duration="90000" relative="false">
+		<event time="60000">
+			<line pos="1">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="13">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="61250">
+			<line pos="1">
+				<tile pos="2">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="2">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="12">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="13">
+				<tile pos="2">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="62500">
+			<line pos="1">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="3">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="11">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="13">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="63750">
+			<line pos="1">
+				<tile pos="4">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="4">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="10">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="13">
+				<tile pos="4">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="65000">
+			<line pos="1">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="5">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="9">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="13">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="66250">
+			<line pos="1">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="6">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="8">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="13">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="67500">
+			<line pos="1">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="7">
+				<tile pos="1">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="13">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="13">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="68750">
+			<line pos="2">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="7">
+				<tile pos="2">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="12">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="70000">
+			<line pos="2">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="5">
+				<tile pos="2">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="9">
+				<tile pos="2">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="12">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="71250">
+			<line pos="2">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="3">
+				<tile pos="2">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="11">
+				<tile pos="2">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="12">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="12">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="72500">
+			<line pos="3">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="11">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="73750">
+			<line pos="3">
+				<tile pos="4">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="4">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="10">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="11">
+				<tile pos="4">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="75000">
+			<line pos="3">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="5">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="9">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="11">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="76250">
+			<line pos="3">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="6">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="8">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="11">
+				<tile pos="6">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="8">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="77500">
+			<line pos="3">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="7">
+				<tile pos="3">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="11">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="11">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="78750">
+			<line pos="4">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="7">
+				<tile pos="4">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="10">
+				<tile pos="7">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+		<event time="80000">
+			<line pos="4">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="5">
+				<tile pos="4">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="9">
+				<tile pos="4">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="10">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+			<line pos="10">
+				<tile pos="5">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+				<tile pos="9">
+					<block group="hardwalls" name="shrink" />
+				</tile>
+			</line>
+		</event>
+	</events>
 </zone>
 
