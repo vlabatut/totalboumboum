@@ -115,9 +115,26 @@ public class LevelTools
 */
 		// open an existing level and add a sudden death
 		String pack = "tournament201213";
-		String folder = "power";
+		String folder = "compromis";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
+		
+Zone zone = level.getZone();
+for(int row=0;row<15;row++)
+{	for(int col=0;col<15;col++)
+	{	ZoneHollowTile tile = new ZoneHollowTile(row,col);
+		tile.setFloor("regular");
+		zone.addTile(tile);
+	}
+}
+
+		addGrid(level);
+		addBorder(level,1,1,0,0);
+		
+		
+		
+		
+		
 //		rescaleSuddenDeathTime(level,90000,120000);
 //		removeSuddenDeath(level);
 		int thickness = 4;
@@ -127,7 +144,7 @@ public class LevelTools
 		boolean relative = true;
 		long totalTime = 120000;
 		boolean crushHardwalls = false;
-		addSpiralSuddenDeath(level, thickness, clockwise, 1, 5, startTime, endTime, relative, totalTime, crushHardwalls);
+//		addSpiralSuddenDeath(level, thickness, clockwise, 1, 5, startTime, endTime, relative, totalTime, crushHardwalls);
 //		addLinearSuddenDeath(level, thickness, 2, true, 1, 13, startTime, endTime, relative, totalTime, crushHardwalls);
 /*		addCustomSuddenDeath(level, Arrays.asList(
 				// columns 5 & 17
