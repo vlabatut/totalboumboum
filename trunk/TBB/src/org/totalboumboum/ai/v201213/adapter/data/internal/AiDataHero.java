@@ -275,7 +275,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
 		walkingSpeeds.put(walkingSpeedIndex, basicSpeed);
-		for(int speedIndex=-1000;speedIndex<1000;speedIndex++)
+		List<Integer> indices = sprite.getGroundSpeedIndices();
+		for(int speedIndex: indices)
 		{	String name = StateAbilityName.getHeroWalkSpeed(speedIndex);
 			if(name!=null)
 			{	StateAbility ability = sprite.modulateStateAbility(name);
