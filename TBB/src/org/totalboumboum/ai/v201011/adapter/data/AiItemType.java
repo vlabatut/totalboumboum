@@ -56,16 +56,26 @@ public enum AiItemType
 	 */
 	public static AiItemType makeItemType(String name)
 	{	AiItemType result;
-		if(name.equalsIgnoreCase("extrabomb"))
+		
+		if(name.equalsIgnoreCase("extrabomb") || name.equalsIgnoreCase("goldenbomb"))
 			result = EXTRA_BOMB;
-		else if(name.equalsIgnoreCase("extraflame"))
+		
+		else if(name.equalsIgnoreCase("extraflame") || name.equalsIgnoreCase("goldenflame"))
 			result = EXTRA_FLAME;
-		else if(name.equalsIgnoreCase("malus") || name.equalsIgnoreCase("disease"))
+		
+		else if(name.equalsIgnoreCase("malus") || name.equalsIgnoreCase("disease")
+				|| name.equalsIgnoreCase("antibomb") || name.equalsIgnoreCase("nobomb")
+				|| name.equalsIgnoreCase("antiflame") || name.equalsIgnoreCase("noflame")
+				|| name.equalsIgnoreCase("antispeed") || name.equalsIgnoreCase("nospeed")
+				|| name.equalsIgnoreCase("randomnone"))
 			result = MALUS;
+		
 		else if(name.equalsIgnoreCase("punch"))
 			result = PUNCH;
+		
 		else
 			result = OTHER;
+		
 		return result;
 	}
 }
