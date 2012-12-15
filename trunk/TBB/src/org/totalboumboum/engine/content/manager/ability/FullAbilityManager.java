@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.manager.ability;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -81,6 +82,19 @@ public class FullAbilityManager extends AbilityManager
 		}
 		if(result==null)
 			result = new StateAbility(name);
+		return result;
+	}
+
+	@Override
+	public List<StateAbility> getAbilitiesStartingWith(String name)
+	{	List<StateAbility> result = new ArrayList<StateAbility>();
+		for(AbstractAbility ab: currentAbilities)
+		{	if(ab instanceof StateAbility)
+			{	StateAbility ablt = (StateAbility)ab;
+				if(ablt.getName().startsWith(name))
+					result.add(ablt);
+			}
+		}
 		return result;
 	}
 
