@@ -1638,9 +1638,7 @@ public class Launcher
 	 * 		x rajouter la modif sur le throughwall des items
 	 * 		x adapter les traj des bombes 
 	 * 
-	 * TODO revoir les niveaux du tournoi pour lesquels y a pas (encore) de mort subite
 	 * TODO envisager aussi les mort-subites de type bombe, voire bonus (nouveaux niveaux ?)
-	 * TODO adapter le temps des nivaux, certains méritent 2 minutes
 	 * TODO tournoi supercoupe :
 	 * 		- demi-finale : les 2 premiers de cette année contre les 3 ex-gagnants les moins bien classés
 	 * 		- finale : les 3 premiers de la demi-finale contre les 2 ex-gagnants les mieux classés
