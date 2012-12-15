@@ -78,6 +78,8 @@ public abstract class AbilityManager
 	
 	public abstract StateAbility getAbility(String name);
 	
+	public abstract List<StateAbility> getAbilitiesStartingWith(String name);
+
 /*	public StateAbility getAbility(StateAbility ability)
 	{	return getAbility(ability.getName());
 	}
