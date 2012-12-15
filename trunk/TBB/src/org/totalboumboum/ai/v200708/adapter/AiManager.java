@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v200708.adapter;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -30,6 +31,8 @@ import java.util.List;
 import java.util.Vector;
 
 import org.totalboumboum.ai.AiAbstractManager;
+import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.hollow.SuddenDeathEvent;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -112,13 +115,28 @@ public abstract class AiManager extends AiAbstractManager<Integer>
     	Sprite sprite = player.getSprite();
     	
     	// état du shrink
-//NOTE à compléter    	
+    	long totalTime = loop.getTotalGameTime();
+    	HollowLevel hollowLevel = RoundVariables.loop.getRound().getHollowLevel();
+    	List<SuddenDeathEvent> suddenDeathEvents = hollowLevel.getSuddenDeathEvents();
     	timeBeforeShrink = Long.MAX_VALUE;
-    	// position du prochain bloc shrinké
-//NOTE à compléter    	
-    	nextShrinkPosition = new int[2];
-    	nextShrinkPosition[0] = 0;
-    	nextShrinkPosition[1] = 0;
+		nextShrinkPosition = new int[]{0,0};
+    	if(!suddenDeathEvents.isEmpty())
+    	{	// temps restant avant le shrink
+    		SuddenDeathEvent suddenDeathEvent = suddenDeathEvents.get(0);
+    		long time = suddenDeathEvent.getTime();
+    		timeBeforeShrink = time - totalTime;
+    		// position du prochain bloc shrinké (il peut y en avoir plusieurs, 
+    		// mais on ne prend que le premier par simplification)
+	    	Collection<List<Sprite>> sprites = suddenDeathEvent.getSprites().values();
+	    	if(!sprites.isEmpty())
+	    	{	List<Sprite> list = sprites.iterator().next();
+	    		if(!list.isEmpty())
+	    		{	Sprite s = list.get(0);
+	    			Tile t = s.getTile();
+	    			nextShrinkPosition = new int[]{t.getRow(),t.getCol()};
+	    		}
+	    	}
+    	}
     	
     	// position du joueur
  		ownPosition = new int[2];
