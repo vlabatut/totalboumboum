@@ -69,6 +69,10 @@
   		<round local="true" name="round6" />
   		<round local="true" name="round6" />
   		<round local="true" name="round6" />
+  		
+  		<round local="true" name="round7" />
+  		<round local="true" name="round7" />
+  		<round local="true" name="round7" />
   	</rounds>
 	
 </match>
