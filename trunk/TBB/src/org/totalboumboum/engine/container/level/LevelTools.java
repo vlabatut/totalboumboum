@@ -91,11 +91,11 @@ public class LevelTools
 */				
 		// open an existing level and replace the background
 /*		String pack = "tournament201213";
-		String folder = "bombfest";
+		String folder = "vite";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 		removeBackground(level);
-//		setBackground(level);
+		setBackground(level);
 		saveLevel(level);
 */		
 		// open an existing level and add/remove columns/rows
@@ -114,70 +114,61 @@ public class LevelTools
 		saveLevel(level);
 */
 		// open an existing level and add a sudden death
-		String pack = "tournament201213";
+/*		String pack = "tournament201213";
 		String folder = "compromis";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
-		
-Zone zone = level.getZone();
-for(int row=0;row<15;row++)
-{	for(int col=0;col<15;col++)
-	{	ZoneHollowTile tile = new ZoneHollowTile(row,col);
-		tile.setFloor("regular");
-		zone.addTile(tile);
-	}
-}
-
-		addGrid(level);
-		addBorder(level,1,1,0,0);
-		
-		
-		
-		
-		
 //		rescaleSuddenDeathTime(level,90000,120000);
 //		removeSuddenDeath(level);
 		int thickness = 4;
 		boolean clockwise = true;
 		long startTime = 60000;
-		long endTime = 90000;
-		boolean relative = true;
-		long totalTime = 120000;
+		long endTime = 80000;
+		boolean relative = false;
+		long totalTime = 90000;
 		boolean crushHardwalls = false;
 //		addSpiralSuddenDeath(level, thickness, clockwise, 1, 5, startTime, endTime, relative, totalTime, crushHardwalls);
 //		addLinearSuddenDeath(level, thickness, 2, true, 1, 13, startTime, endTime, relative, totalTime, crushHardwalls);
 /*		addCustomSuddenDeath(level, Arrays.asList(
-				// columns 5 & 17
-				Arrays.asList(new int[]{0,7},new int[]{0,15},new int[]{1,7},new int[]{1,15},new int[]{2,7},new int[]{2,15},new int[]{14,7},new int[]{14,15}),
-				Arrays.asList(new int[]{8,5},new int[]{8,17}),
-				Arrays.asList(new int[]{7,5},new int[]{7,17},new int[]{9,5},new int[]{9,17}),
-				Arrays.asList(new int[]{6,5},new int[]{6,17},new int[]{10,5},new int[]{10,17}),
-				Arrays.asList(new int[]{5,5},new int[]{5,17},new int[]{11,5},new int[]{11,17}),
-				Arrays.asList(new int[]{4,5},new int[]{4,17},new int[]{12,5},new int[]{12,17}),
-				Arrays.asList(new int[]{3,5},new int[]{3,17},new int[]{13,5},new int[]{13,17}),
-				Arrays.asList(new int[]{3,6},new int[]{3,16},new int[]{13,6},new int[]{13,16}),
-				Arrays.asList(new int[]{3,11},new int[]{13,11}),
-				Arrays.asList(new int[]{3,10},new int[]{3,12},new int[]{13,10},new int[]{13,12}),
-				Arrays.asList(new int[]{3,9},new int[]{3,13},new int[]{13,9},new int[]{13,13}),
-				Arrays.asList(new int[]{3,8},new int[]{3,14},new int[]{13,8},new int[]{13,14}),
-				Arrays.asList(new int[]{3,7},new int[]{3,15},new int[]{13,7},new int[]{13,15}),
-				Arrays.asList(new int[]{4,7},new int[]{4,15},new int[]{12,7},new int[]{12,15}),
-				Arrays.asList(new int[]{5,7},new int[]{5,15},new int[]{11,7},new int[]{11,15}),
-				Arrays.asList(new int[]{6,7},new int[]{6,15},new int[]{10,7},new int[]{10,15}),
-				Arrays.asList(new int[]{7,7},new int[]{7,15},new int[]{9,7},new int[]{9,15}),
-				Arrays.asList(new int[]{8,7},new int[]{8,15}),
-				Arrays.asList(new int[]{4,11},new int[]{8,8},new int[]{8,14},new int[]{12,11}),
-				Arrays.asList(new int[]{5,8},new int[]{5,14},new int[]{11,8},new int[]{11,14}),
-				Arrays.asList(new int[]{5,9},new int[]{5,13},new int[]{11,9},new int[]{11,13}),
-				Arrays.asList(new int[]{5,10},new int[]{5,12},new int[]{11,10},new int[]{11,12}),
-				Arrays.asList(new int[]{5,11},new int[]{11,11}),
-				Arrays.asList(new int[]{6,9},new int[]{6,13},new int[]{10,9},new int[]{10,13})
+				Arrays.asList(new int[]{1,1},new int[]{1,13},new int[]{13,1},new int[]{13,13}),
+				Arrays.asList(new int[]{1,2},new int[]{1,12},new int[]{2,1},new int[]{2,13},new int[]{12,1},new int[]{12,13},new int[]{13,2},new int[]{13,12}),
+				Arrays.asList(new int[]{1,3},new int[]{1,11},new int[]{3,1},new int[]{3,13},new int[]{11,1},new int[]{11,13},new int[]{13,3},new int[]{13,11}),
+				Arrays.asList(new int[]{1,4},new int[]{1,10},new int[]{4,1},new int[]{4,13},new int[]{10,1},new int[]{10,13},new int[]{13,4},new int[]{13,10}),
+				Arrays.asList(new int[]{1,5},new int[]{1,9},new int[]{5,1},new int[]{5,13},new int[]{9,1},new int[]{9,13},new int[]{13,5},new int[]{13,9}),
+				Arrays.asList(new int[]{1,6},new int[]{1,8},new int[]{6,1},new int[]{6,13},new int[]{8,1},new int[]{8,13},new int[]{13,6},new int[]{13,8}),
+				Arrays.asList(new int[]{1,7},new int[]{7,1},new int[]{7,13},new int[]{13,7}),
+				Arrays.asList(new int[]{2,7},new int[]{7,2},new int[]{7,12},new int[]{12,7}),
+				Arrays.asList(new int[]{2,5},new int[]{2,9},new int[]{5,2},new int[]{5,12},new int[]{9,2},new int[]{9,12},new int[]{12,5},new int[]{12,9}),
+				Arrays.asList(new int[]{2,3},new int[]{2,11},new int[]{3,2},new int[]{3,12},new int[]{11,2},new int[]{11,12},new int[]{12,3},new int[]{12,11}),
+				Arrays.asList(new int[]{3,3},new int[]{3,11},new int[]{11,3},new int[]{11,11}),
+				Arrays.asList(new int[]{3,4},new int[]{3,10},new int[]{4,3},new int[]{4,11},new int[]{10,3},new int[]{10,11},new int[]{11,4},new int[]{11,10}),
+				Arrays.asList(new int[]{3,5},new int[]{3,9},new int[]{5,3},new int[]{5,11},new int[]{9,3},new int[]{9,11},new int[]{11,5},new int[]{11,9}),
+				Arrays.asList(new int[]{3,6},new int[]{3,8},new int[]{6,3},new int[]{6,11},new int[]{8,3},new int[]{8,11},new int[]{11,6},new int[]{11,8}),
+				Arrays.asList(new int[]{3,7},new int[]{7,3},new int[]{7,11},new int[]{11,7}),
+				Arrays.asList(new int[]{4,7},new int[]{7,4},new int[]{7,10},new int[]{10,7}),
+				Arrays.asList(new int[]{4,5},new int[]{4,9},new int[]{5,4},new int[]{5,10},new int[]{9,4},new int[]{9,10},new int[]{10,5},new int[]{10,9})
 				), startTime, endTime, relative, totalTime, crushHardwalls);*/
 //		addRandomFallingBombs(level, 20, new int[]{1,2,11,14}, 5000, 59500, 3000, relative, totalTime);
 		
 		
-		
+/*		HollowLevel level = initLevel(15,15,"tournament201213","vite","tournament","tournament6");
+		level.getLevelInfo().setVisibleHeight(15);
+		level.getLevelInfo().setVisibleWidth(15);
+		level.getLevelInfo().setVisiblePositionLeftCol(0);
+		level.getLevelInfo().setVisiblePositionUpRow(0);
+		addGrid(level);
+		removeCol(level, 0, true, true, true, true, true);
+		removeCol(level, 0, true, true, true, true, true);
+		removeRow(level, 0, true, true, true, true, true);
+		removeRow(level, 0, true, true, true, true, true);
+		addBorder(level,1,1,0,0);
+		setBackground(level);
 		saveLevel(level);
+*/		
+
+		
+		
+		
 		System.out.println("Process done");
 	}
 	
@@ -524,7 +515,7 @@ for(int row=0;row<15;row++)
 	 * i.e. hardwall on 1 column/row out of 2.
 	 * 
 	 * @param hollowLevel
-	 * 		Rhe level to be completed.
+	 * 		The level to be completed.
 	 */
 	protected static void addGrid(HollowLevel hollowLevel)
 	{	// init
