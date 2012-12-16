@@ -23,11 +23,11 @@
  -->
 	
  	<notes>
- 		<line value="Puissance ou rapidité ?" />
+ 		<line value="Vitesse maximale" />
  		<line value="Date: 16-12-2012" />
  	</notes>
 
-	<author value="Vincent Labatut" />
+	<author value="Vincent Labatut" /> 
 
 	<limits>
 		<lastStanding>
@@ -40,6 +40,6 @@
 		</time>
 	</limits>
 	
-	<level packname="tournament201213" name="compromis" randomLocation="true"/>
+	<level packname="tournament201213" name="vite" randomLocation="true"/>
 
 </round>
