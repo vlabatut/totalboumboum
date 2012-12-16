@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tournament
+<round
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -22,18 +22,32 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
-	<general name="Qualification du tournoi 2012/13"/>
-
  	<notes>
- 		<line value="Tournoi pour la qualification des agents de l'année 2012/13." />
+ 		<line value="Manche utilisée pour la qualification des agents de l'édition 2012/13." />
  		<line value="Author: Vincent Labatut" />
- 		<line value="Date: 15-12-2012" />
+ 		<line value="Date: 16-12-2012" />
  	</notes>
- 	
+
 	<author value="Vincent Labatut" />
 
-	<single>
-		<match local="true" name="match" />
-	</single>		
+	<limits>
+		<lastStanding>
+			<points local="true" name="zeroPoint" />
+			<threshold value="0" comparator="EQUAL"/>
+		</lastStanding>
+
+		<lastStanding>
+			<points local="true" name="onePoint" />
+			<threshold value="1" comparator="EQUAL"/>
+		</lastStanding>
+
+		<time>
+			<points local="true" name="zeroPoint" />
+ 			<threshold value="30000" />
+		</time>
 		
-</tournament>
+	</limits>
+	
+	<level packname="tournament201213" name="qualif6" />
+
+</round>
