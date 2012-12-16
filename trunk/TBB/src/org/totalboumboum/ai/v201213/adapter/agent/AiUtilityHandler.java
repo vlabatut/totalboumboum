@@ -36,6 +36,7 @@ import java.util.Set;
 import org.totalboumboum.ai.v201213.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
@@ -235,6 +236,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	protected final void update() throws StopRequestException
 	{	ai.checkInterruption();
+		PredefinedColor color = ai.getZone().getOwnHero().getColor();
 	
 		// on vide les structures
 		print("    Reset data structures");
@@ -262,14 +264,14 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			print("        > Identifying the case");
 			AiUtilityCase caze = identifyCase(tile);
 			if(caze == null)
-				throw new NullPointerException("The value returned by your method identifyCase is null. It should not.");
+				throw new NullPointerException("The value returned by the method identifyCase@"+color+" is null. It should not.");
 			print("        < case="+caze);
 			
 			// on identifie la combinaison de valeurs des critères pour le cas détecté
 			print("        > Processing the combination");
 			AiUtilityCombination combination = caze.processCombination(tile);
 			if(combination == null)
-				throw new NullPointerException("The value returned by your method processCombination (for case "+caze.getName()+") is null. It should not.");
+				throw new NullPointerException("The value returned by the method processCombination@"+color+" (for case "+caze.getName()+") is null. It should not.");
 			print("        < combination="+combination);
 			
 			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)

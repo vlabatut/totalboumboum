@@ -21,32 +21,24 @@
 -->
 	<locations>
 		<case players="2">
-			<location player="00" line="03" col="02" />
-			<location player="01" line="11" col="14" />
+			<location player="00" line="05" col="01" />
+			<location player="01" line="05" col="09" />
 		</case>
 		<case players="3">
-			<location player="00" line="03" col="02" />
-			<location player="01" line="03" col="14" />
-			<location player="02" line="11" col="03" />
+			<location player="00" line="05" col="01" />
+			<location player="01" line="05" col="01" />
+			<location player="02" line="05" col="09" />
 		</case>
 		<case players="4">
-			<location player="00" line="03" col="02" />
-			<location player="01" line="03" col="14" />
-			<location player="02" line="11" col="02" />
-			<location player="03" line="11" col="14" />
-		</case>
-		<case players="5">
-			<location player="00" line="03" col="02" />
-			<location player="01" line="03" col="14" />
-			<location player="02" line="11" col="02" />
-			<location player="03" line="11" col="14" />
-			<location player="05" line="07" col="08" />
+			<location player="00" line="05" col="01" />
+			<location player="01" line="05" col="01" />
+			<location player="02" line="05" col="01" />
+			<location player="02" line="05" col="09" />
 		</case>
 	</locations>
 	<items>
-		<item name="extrabomb" number="2" />
-		<item name="extraspeed" number="1" />
-		<item name="extraflame" number="2" />
+		<item name="extrabomb" number="1" />
+		<item name="extraflame" number="4" />
 	</items>
 </players>
 

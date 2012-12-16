@@ -24,7 +24,7 @@
 	
  	<notes>
  		<line value="Rencontre utilisée pour la qualification des agents l'édition 2012/13." />
- 		<line value="L'agent à qualifier rencontre un agent de référence sur 5 zones différentes, à l'occasion de 3 manches (soit un total de 15 manches)." />
+ 		<line value="L'agent à qualifier rencontre un agent de référence sur 6 zones différentes, à l'occasion de 3 manches (soit un total de 18 manches)." />
  		<line value="Author: Vincent Labatut" />
  		<line value="Date: 15-12-2012" />
  	</notes>
@@ -61,6 +61,9 @@
   		<round local="true" name="round5" />
   		<round local="true" name="round5" />
   		<round local="true" name="round5" />
+  		<round local="true" name="round6" />
+  		<round local="true" name="round6" />
+  		<round local="true" name="round6" />
   	</rounds>
 	
 </match>
