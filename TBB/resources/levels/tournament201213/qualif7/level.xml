@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
+<level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\level.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -19,23 +19,16 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
-	<settings>
-		<levels randomOrder="false" />
-		<players randomLocation="false" />
-		<limits points="0" rounds="30" time="90000" />
-		<points share="true" draw="TIME">
-			<value rank="1" points="8" />
-			<value rank="2" points="4" />
-			<value rank="3" points="2" />
-			<value rank="4" points="1" />
-			<value rank="5" points="0" />
-		</points>
-		<suddenDeath disabled="false" />
-	</settings>
-	<players />
-	<levels>
-		<level pack="tournament201213" folder="qualif7" allowedPlayers="0 2 3 4" />
-	</levels>
-</gameQuickmatch>
+	<title value="Qualif'7" />
+	<!-- Teste comment l'agent réagit face aux malus -->
+	<author value="Vincent Labatut" />
+	<source value="original" />
+	<preview file="preview.jpg" />
+	<instance name="tournament" />
+	<theme name="tournament6" />
+	<globalDimension height="7" width="11" />
+	<visibleDimension height="7" width="11" />
+	<visiblePosition upLine="0" leftCol="0" />
+	<display forceAll="false" maximize="true" />
+</level>
 

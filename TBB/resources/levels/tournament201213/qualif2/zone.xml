@@ -28,6 +28,14 @@
 				<block group="softwalls" name="yellowred" />
 			</value>
 		</variableTile>
+		<variableTile name="item">
+			<value proba="0.5">
+				<item name="extrabomb" />
+			</value>
+			<value proba="0.5">
+				<item name="extraflame" />
+			</value>
+		</variableTile>
 	</variableTiles>
 	<matrix>
 		<line pos="0">
@@ -149,39 +157,39 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
@@ -451,39 +459,39 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<reference name="item" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<item name="extraflame" />
+				<reference name="item" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
