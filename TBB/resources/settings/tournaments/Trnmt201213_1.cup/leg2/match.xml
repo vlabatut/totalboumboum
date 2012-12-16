@@ -38,12 +38,12 @@
  	
  	<rounds randomOrder="true" >
   		<round local="true" name="roundClassic" />
+  		<round local="true" name="roundCompromis" />
   		<round local="true" name="roundCroix" />
   		<round local="true" name="roundHorizontal" />
   		<round local="true" name="roundItems" />
   		<round local="true" name="roundLimitsiz" />
   		<round local="true" name="roundPower" />
-  		<round local="true" name="roundReadysetgo" />
   	</rounds>
 	
 </match>
