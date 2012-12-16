@@ -20,6 +20,7 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<locations>
+		<case players="0" />
 		<case players="2">
 			<location player="00" line="03" col="01" />
 			<location player="01" line="07" col="01" />
