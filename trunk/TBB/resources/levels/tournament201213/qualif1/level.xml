@@ -20,6 +20,7 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<title value="Qualif'1" />
+	<!-- Teste si l'agent se laisse distraire par les items ou va directement attaquer son adversaire -->
 	<author value="Vincent Labatut" />
 	<source value="Original" />
 	<preview file="preview.jpg" />

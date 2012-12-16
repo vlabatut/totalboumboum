@@ -20,6 +20,7 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<title value="Qualif'2" />
+	<!-- Teste si l'agent reste en collecte alors qu'il n'a pas besoin des items apparents -->
 	<author value="Vincent Labatut" />
 	<source value="Original" />
 	<preview file="preview.jpg" />
