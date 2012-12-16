@@ -20,6 +20,7 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<title value="Qualif'5" />
+	<!-- Teste comment l'agent réagit face aux niveaux refermés sur eux-mêmes -->
 	<author value="Vincent Labatut" />
 	<source value="Original" />
 	<preview file="preview.jpg" />

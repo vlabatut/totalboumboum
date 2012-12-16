@@ -19,7 +19,8 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<title value="qualif6" />
+	<title value="Qualif'6" />
+	<!-- Teste comment l'agent réagit face à la mort subite -->
 	<author value="Vincent Labatut" />
 	<source value="original" />
 	<preview file="preview.jpg" />
