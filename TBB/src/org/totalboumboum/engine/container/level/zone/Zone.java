@@ -270,7 +270,7 @@ public class Zone implements Serializable
 		
     	// init events
     	double factor = 1;
-		if(!eventsRelative || timeLimit != Long.MAX_VALUE)
+		if(eventsRelative && timeLimit != Long.MAX_VALUE)
 			factor = timeLimit / (double)eventsDuration;
     	//long maxTime = Collections.max(events.keySet());
     	eventsInit = new HashMap<Long,List<ZoneTile>>();
