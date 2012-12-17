@@ -32,7 +32,6 @@ import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
-import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201213.adapter.path.AiPath;
 import org.totalboumboum.ai.v201213.adapter.path.AiSearchNode;
@@ -76,7 +75,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * initialisée à {@link NoHeuristicCalculator}.
 	 * 
 	 * @param ai
-	 * 		L'AI invoquant A*.
+	 * 		L'agent invoquant A*.
 	 * @param hero
 	 * 		Le personnage à considérer pour les déplacements.
 	 * @param costCalculator
@@ -261,8 +260,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				// on prend le noeud situé en tête de file
 				lastSearchNode = queue.poll();
 				// verbose : noeud courant
-				AiZone zone = lastSearchNode.getLocation().getTile().getZone();
-				print("           Zone:\n"+zone);
+				print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
 				print("           Visiting : "+lastSearchNode);
 				
 				// si l'arbre a atteint la hauteur maximale, on s'arrête

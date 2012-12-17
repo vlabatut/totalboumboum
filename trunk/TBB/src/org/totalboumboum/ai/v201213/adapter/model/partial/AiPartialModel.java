@@ -1140,7 +1140,8 @@ public class AiPartialModel
 	
 		// col numbers
 		if(width>10)
-		{	for(int i=0;i<10;i++)
+		{	result.append("  ");
+			for(int i=0;i<10;i++)
 				result.append("  ");
 			for(int i=10;i<width;i++)
 			{	result.append(" ");
