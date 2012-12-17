@@ -71,6 +71,8 @@ public abstract class AiAbstractSearchAlgorithm
 		// besoin d'un chemin aussi long que ça...
 		// (traverser la zone en entier diagonalement)
 		maxHeight = zone.getWidth() + zone.getHeight();
+		// on prend un minimum de 25, au cas où on aurait un petit niveau tortueux
+		maxHeight = Math.max(maxHeight, 25);
 	}
 	
 	/**
