@@ -40,10 +40,10 @@
   		<round local="true" name="roundClassic" />
   		<round local="true" name="roundEntrance" />
   		<round local="true" name="roundGoldrush" />
-  		<round local="true" name="roundHorizontal" />
   		<round local="true" name="roundLine" />
   		<round local="true" name="roundPasaj" />
   		<round local="true" name="roundReadysetgo" />
+  		<round local="true" name="roundVite" />
   	</rounds>
 	
 </match>
