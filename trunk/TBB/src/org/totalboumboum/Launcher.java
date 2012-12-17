@@ -371,6 +371,7 @@ public class Launcher
 		}		
 	}
 	
+}
 	
 	
 	
@@ -1635,7 +1636,6 @@ public class Launcher
 	 * 		- finale : les 3 premiers de la demi-finale contre les 2 ex-gagnants les mieux classés
 	 * 		>> il faut implémenter un système de qualif directe pour certains joueurs 
 	 */
-}
 
 /**
  * TODO utiliser les softwalls de couleur
@@ -1653,4 +1653,3 @@ public class Launcher
  * - màj toutes les api : noms des états de sprites dans AiStateName
  * - synchro toutes les api avec v23.5
  */
-*/
