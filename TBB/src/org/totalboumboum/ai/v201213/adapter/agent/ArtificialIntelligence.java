@@ -411,7 +411,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		{	// mise à jour des percepts et données communes
 			{	before = print("  > Entering updatePercepts");
 				updatePercepts();
-				after = System.currentTimeMillis();
+				after = getCurrentTime();
 				elapsed = after - before;
 				print("  < Exiting updatePercepts: duration="+elapsed+" ms");
 				stepDurations.put(PERCEPTS,elapsed);
@@ -420,7 +420,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			// mise à jour du mode de l'agent : ATTACKING ou COLLECTING
 			{	before = print("  > Entering mode update");
 				getModeHandler().update();
-				after = System.currentTimeMillis();
+				after = getCurrentTime();
 				elapsed = after - before;
 				print("  < Exiting mode update: duration="+elapsed+" ms result="+getModeHandler().mode);
 				stepDurations.put(MODE,elapsed);
@@ -429,7 +429,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			// mise à jour des valeurs d'utilité
 			{	before = print("  > Entering utility update");
 				getUtilityHandler().update();
-				after = System.currentTimeMillis();
+				after = getCurrentTime();
 				elapsed = after - before;
 				print("  < Exiting utility update: duration="+elapsed+" ms");
 				stepDurations.put(UTILITY,elapsed);
@@ -442,7 +442,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		{	// on essaie de poser une bombe
 			before = print("  > Entering considerBombing");
 			boolean cb = getBombHandler().considerBombing();
-			after = System.currentTimeMillis();
+			after = getCurrentTime();
 			elapsed = after - before;
 			print("  < Exiting considerBombing: duration="+elapsed+" ms result="+cb);
 			stepDurations.put(BOMB,elapsed);
@@ -457,7 +457,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			{	// on récupère la direction
 				before = print("  > Entering considerMoving");
 				Direction direction = getMoveHandler().considerMoving();
-				after = System.currentTimeMillis();
+				after = getCurrentTime();
 				elapsed = after - before;
 				print("  < Exiting considerMoving: duration="+elapsed+" ms result="+direction);
 				stepDurations.put(MOVE,elapsed);
@@ -477,14 +477,14 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		// mise à jour des sorties
 		{	before = print("  > Entering updateOutput");
 			updateOutput();
-			after = System.currentTimeMillis();
+			after = getCurrentTime();
 			elapsed = after - before;
 			print("  < Exiting updateOutput: duration="+elapsed+" ms");
 			stepDurations.put(OUTPUT,elapsed);
 		}
 		
 		// on renvoie l'action sélectionnée
-		afterAll = System.currentTimeMillis();
+		afterAll = getCurrentTime();
 		elapsedAll = afterAll - beforeAll;
 		print("< Exiting processAction duration="+elapsedAll+" ----------------------");
 		totalDuration = elapsedAll;
@@ -582,8 +582,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @return
 	 * 		Le temps à l'instant de l'affichage.
 	 */
-	protected final long print(String msg)
-	{	long time = zone.getTotalTime();
+	public final long print(String msg)
+	{	long time = getCurrentTime();
 		if(verbose)
 		{	StringBuffer message = new StringBuffer();
 			message.append("[");
@@ -596,6 +596,19 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			System.out.println(message);
 		}
 		return time;
+	}
+	
+	/**
+	 * Renvoie le temps écoulé depuis le début
+	 * de la partie (en ne comptant que le temps
+	 * de jeu, pas le temps réel).
+	 * 
+	 * @return
+	 * 		Temps écoulé, exprimé en ms.
+	 */
+	public final long getCurrentTime()
+	{	long result = zone.getTotalTime();
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

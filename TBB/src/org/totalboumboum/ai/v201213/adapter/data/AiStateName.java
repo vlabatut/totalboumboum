@@ -77,7 +77,7 @@ public enum AiStateName
 		else if(gesture==GestureName.ENDED)
 			result = AiStateName.ENDED;
 		else if(gesture==GestureName.BOUNCING
-//				|| gesture==GestureName.FALLING // it's better to simplify this as standing
+				|| gesture==GestureName.FALLING
 				|| gesture==GestureName.JUMPING
 				|| gesture==GestureName.LANDING
 				|| gesture==GestureName.PUNCHED)
@@ -86,7 +86,6 @@ public enum AiStateName
 				|| gesture==GestureName.CRYING
 				|| gesture==GestureName.ENTERING
 				|| gesture==GestureName.EXULTING
-				|| gesture==GestureName.FALLING // simplification (rather than flying)
 				|| gesture==GestureName.OSCILLATING
 				|| gesture==GestureName.OSCILLATING_FAILING
 				|| gesture==GestureName.PREPARED

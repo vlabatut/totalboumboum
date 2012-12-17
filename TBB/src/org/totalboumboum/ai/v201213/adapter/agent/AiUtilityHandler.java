@@ -115,7 +115,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
     	// on initialise les critères une fois pour toutes
 		{	long before = print("    > Entering initCriteria");
 	    	initCriteria();
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < Exiting initCriteria duration="+elapsed);
 		}
@@ -123,7 +123,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
     	// on initialise les cas une fois pour toutes
 		{	long before = print("    > Entering initCases");
 			initCases();
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < Exiting initCases duration="+elapsed);
 		}
@@ -131,7 +131,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
     	// on initialise les utilités de réference une fois pour toutes
 		{	long before = print("    > Entering initReference");
 			initReferenceUtilities();
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < Exiting initReference duration="+elapsed);
 		}
@@ -139,7 +139,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		// on calcule les utilités maximales une fois pour toutes
 		{	long before = print("    > Entering initMaxUtilities");
     		initMaxUtilities();
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < Exiting initMaxUtilities duration="+elapsed);
 		}
@@ -250,7 +250,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		long before = print("    > Entering selectTiles");
 		ArrayList<AiTile> selectedTiles = new ArrayList<AiTile>(selectTiles());
 		Collections.shuffle(selectedTiles); // on désordonne les cases pour introduire du hasard
-		long after = System.currentTimeMillis();
+		long after = ai.getCurrentTime();
 		long elapsed = after - before;
 		print("    < Exiting selectTiles duration="+elapsed+" number="+selectedTiles.size());
 		
@@ -288,7 +288,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			tiles.add(tile);
 			print("      < Tile "+tile+" processing finished");
 		}
-		after = System.currentTimeMillis();
+		after = ai.getCurrentTime();
 		elapsed = after - before;
 		print("    < Tile processing finished duration="+elapsed);
 	}

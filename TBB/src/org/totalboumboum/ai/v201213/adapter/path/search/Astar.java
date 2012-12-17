@@ -364,11 +364,11 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				// sinon on récupére les noeuds suivants
 				else
 				{	// développement
-					long before2 = System.currentTimeMillis();
+					long before2 = ai.getCurrentTime();
 					List<AiSearchNode> successors = lastSearchNode.getChildren();
 					
 					// verbose : temps
-					{	long after2 = System.currentTimeMillis();
+					{	long after2 = ai.getCurrentTime();
 						long elapsed2 = after2 - before2;
 						print("           Child development: duration="+elapsed2+" ms");
 						for(AiSearchNode c: successors)
@@ -397,7 +397,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 					printQueue("             + ",queue);
 				}
 				//  verbose : iteration
-				{	long after1 = System.currentTimeMillis();
+				{	long after1 = ai.getCurrentTime();
 					long elapsed1 = after1 - before1;
 					print("         -- iteration #" + it + " finished, duration=" + elapsed1 + " --");
 				}
@@ -410,7 +410,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		}
 		
 		// verbose : temps écoulé
-		{	long after = System.currentTimeMillis();
+		{	long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("         Total elapsed time: "+elapsed+" ms");
 		}

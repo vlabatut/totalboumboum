@@ -195,7 +195,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 		// si nécessaire, on change la destination courante
 		{	long before = print("    > entering updateCurrentDestination");
 			currentDestination = updateCurrentDestination();
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < exiting updateCurrentDestination duration="+elapsed);
 		}
@@ -203,7 +203,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 		// on cherche un chemin vers cette destination
 		{	long before = print("    > entering updateCurrentPath");
 			currentPath = updateCurrentPath();
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < exiting updateCurrentPath duration="+elapsed);
 		}
@@ -211,7 +211,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 		// on utilise le chemin pour déterminer la direction de déplacement
 		{	long before = print("    > entering updateCurrentDirection");
 			currentDirection = updateCurrentDirection();
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < exiting updateCurrentDirection duration="+elapsed);
 		}

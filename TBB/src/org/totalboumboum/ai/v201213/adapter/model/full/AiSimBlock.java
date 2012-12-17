@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201213.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201213.adapter.data.AiStopType;
 
 /**
@@ -84,10 +85,17 @@ public final class AiSimBlock extends AiSimSprite implements AiBlock
 	 */
 	protected AiSimBlock(AiSimTile tile, AiBlock block)
 	{	super(tile,block);
-		
+	
 		this.destructible = block.isDestructible();
 		this.stopHeroes = block.hasStopHeroes();
 		this.stopFires = block.hasStopFires();
+		
+// NOTE workaround pour que les agents ne croient pas que les blocs de mort subite sont sans danger
+if(state.getName()==null || state.getName()==AiStateName.FLYING)
+{	this.destructible = false;
+	this.stopHeroes = AiStopType.STRONG_STOP;
+	this.stopFires = AiStopType.STRONG_STOP;
+}
 	}	
 	
 	/////////////////////////////////////////////////////////////////

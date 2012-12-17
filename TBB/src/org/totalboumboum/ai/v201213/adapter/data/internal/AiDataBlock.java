@@ -43,6 +43,7 @@ import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.block.Block;
 
 /**
@@ -123,6 +124,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	 */
 	private void updateCollisions()
 	{	Block sprite = getSprite();
+		GestureName gestureName = GestureName.STANDING;
 		
 		// bloque les personnages
 		{	GeneralAction generalAction = new GeneralMoveLow();
@@ -161,7 +163,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 			Circumstance targetCircumstance = new Circumstance();
 			List<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
 			List<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
-			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+			boolean temp = sprite.wouldThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance,gestureName);
 			if(temp)
 			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
 				actorProperties.add(ability);
