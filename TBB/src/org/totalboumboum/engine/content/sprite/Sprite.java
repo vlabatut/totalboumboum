@@ -851,11 +851,18 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return modulationManager.getTargetModulation(action);
 	}
 	
+	public TargetModulation getTargetModulation(SpecificAction action, GestureName gestureName)
+	{	return modulationManager.getTargetModulation(action,gestureName);
+	}
+	
 	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.getThirdModulation(action,actorCircumstances,targetCircumstances);
 	}
 	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
+	}
+	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
+	{	return modulationManager.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances,gestureName);
 	}
 	
 	public StateAbility modulateStateAbility(String name)
@@ -870,11 +877,18 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return modulationManager.isTargetPreventing(action);
 	}
 
+	public boolean wouldTargetPreventing(SpecificAction action, GestureName gestureName)
+	{	return modulationManager.wouldTargetPreventing(action,gestureName);
+	}
+
 	public boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.isThirdPreventing(action,actorCircumstances,targetCircumstances);
 	}
 	public boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.isThirdPreventing(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
+	}
+	public boolean wouldThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
+	{	return modulationManager.wouldThirdPreventing(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances,gestureName);
 	}
 	
 /*	
