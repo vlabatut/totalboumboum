@@ -71,9 +71,6 @@ public abstract class AiAbstractSearchAlgorithm
 		// besoin d'un chemin aussi long que ça...
 		// (traverser la zone en entier diagonalement)
 		maxHeight = zone.getWidth() + zone.getHeight();
-		
-		// pour la sortie texte
-		colorStr = zone.getOwnHero().getColor().toString();
 	}
 	
 	/**
@@ -330,8 +327,6 @@ public abstract class AiAbstractSearchAlgorithm
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Préfixe affiché avant chaque message */
-	private String colorStr;
 	/** permet d'activer/désactiver la sortie texte lors du débogage */
 	private boolean verbose = false;
 
@@ -360,13 +355,12 @@ public abstract class AiAbstractSearchAlgorithm
 	 * 		Le temps à l'instant de l'affichage.
 	 */
 	protected final long print(String msg)
-	{	long time = System.currentTimeMillis();
+	{	long result;
 		if(verbose)
-		{	String prefix = "[" + time + ":" + colorStr + "]";
-			String message = prefix + " " + msg;
-			System.out.println(message);
-		}
-		return time;
+			result = ai.print(msg);
+		else
+			result = ai.getZone().getTotalTime();
+		return result;
 	}
 
 	/**

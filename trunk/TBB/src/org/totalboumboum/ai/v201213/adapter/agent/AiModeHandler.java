@@ -90,7 +90,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	{	// si l'agent a assez d'items, on attaque
 		long before = print("    > Entering hasEnoughItems");
 		boolean enoughItems = hasEnoughItems();
-		long after = System.currentTimeMillis();
+		long after = ai.getCurrentTime();
 		long elapsed = after - before;
 		print("    < Exiting hasEnoughItems duration="+elapsed+" result="+enoughItems);
 		if(enoughItems)
@@ -101,7 +101,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 		{	// s'il est possible d'en ramasser, il passe en mode collecte
 			before = print("    > Entering isCollectPossible");
 			boolean collectPossible = isCollectPossible();
-			after = System.currentTimeMillis();
+			after = ai.getCurrentTime();
 			elapsed = after - before;
 			print("    < Exiting isCollectPossible duration="+elapsed+" result="+collectPossible);
 			if(collectPossible)

@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiFire;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201213.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
@@ -289,6 +290,15 @@ public class AiPartialModel
 				{	AiBomb bomb = bombs.get(0);
 					AiHero owner = bomb.getOwner();
 					if(owner==null || owner.equals(currentHero))
+						crossable = false;
+				}
+			}
+			// cas particulier : bloc en train d'atterrir >> considéré comme un obstacle (même si pas obstacle)
+			if(crossable)
+			{	List<AiBlock> blocks = tile.getBlocks();
+				if(!blocks.isEmpty())
+				{	AiBlock block = blocks.get(0);
+					if(block.getState().getName()==AiStateName.FLYING)
 						crossable = false;
 				}
 			}
