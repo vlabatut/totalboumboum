@@ -238,7 +238,7 @@ public final class AstarUse
 		Astar astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		
-		System.out.println("+++ Utilisation de A* dépassant une des 3 limitse (cout/hauteur/nombre de noeud de l'arbre de recherche) +++");
+		System.out.println("+++ Utilisation de A* dépassant une des 3 limites (cout/hauteur/nombre de noeud de l'arbre de recherche) +++");
 		// on modifie la limite de hauteur de l'arbre de manière à ne
 		// pas chercher des chemins plus longs que 4 déplacements.
 		astar.setMaxHeight(4);

@@ -836,7 +836,7 @@ public class AiPartialModel
 		
 		return result;
 	}
-
+	
 	/**
 	 * Effectue une simulation d'attente pour la durée
 	 * spécifiée. Si le personnage est éliminé avant
