@@ -175,4 +175,14 @@ public class ApproximateSuccessorCalculator extends SuccessorCalculator
 		}
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getZoneRepresentation(AiSearchNode node)
+	{	AiZone zone = node.getLocation().getZone();
+		String result = zone.toString();
+		return result;
+	}
 }

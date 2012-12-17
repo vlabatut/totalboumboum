@@ -616,7 +616,19 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 		result.append(">");
 		return result.toString();
 	}
-
+	
+	/**
+	 * Renvoie une représentation textuelle de la
+	 * zone associée à ce noeud de recherche.
+	 * 
+	 * @return
+	 * 		Une chaîne de caractères représentant la zone associée à ce noeud.
+	 */
+	public String getZoneRepresentation()
+	{	String result = successorCalculator.getZoneRepresentation(this);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

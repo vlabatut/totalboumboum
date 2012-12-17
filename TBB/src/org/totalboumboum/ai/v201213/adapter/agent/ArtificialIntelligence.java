@@ -405,7 +405,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		resetDurations();
 		long before,after,elapsed,afterAll,elapsedAll;
 		long beforeAll = print("> Entering processAction ----------------------");
-		print("\n");print(zone.toString());
+		print("\n"+zone.toString());
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes

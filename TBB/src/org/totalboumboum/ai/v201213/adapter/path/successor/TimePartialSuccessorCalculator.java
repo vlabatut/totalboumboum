@@ -140,7 +140,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// MODELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** structure utilisée pour stocker les modèles */
+	/** Structure utilisée pour stocker les modèles */
 	private final HashMap<AiSearchNode,AiPartialModel> models = new HashMap<AiSearchNode, AiPartialModel>();
 	
 	/**
@@ -384,6 +384,16 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		AiPartialModel model = models.get(node);
 		AiExplosion explosion = model.getExplosion(tile);
 		result = explosion!=null;
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getZoneRepresentation(AiSearchNode node)
+	{	AiPartialModel model = models.get(node);
+		String result = model.toString();
 		return result;
 	}
 }

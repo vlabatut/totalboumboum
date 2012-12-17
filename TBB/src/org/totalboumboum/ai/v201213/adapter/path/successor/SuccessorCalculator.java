@@ -129,4 +129,18 @@ public abstract class SuccessorCalculator
 	 * 		{@code true} ssi la case n'est pas menacée.
 	 */
 	public abstract boolean isThreatened(AiSearchNode node);
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Renvoie une représentation textuelle de la
+	 * zone associée au noeud de recherche spécifié.
+	 * 
+	 * @param node
+	 * 		Le noeud dont on veut la représentation textuelle de la zone.
+	 * @return
+	 * 		Une chaîne de caractères représentant la zone associée au noeud.
+	 */
+	public abstract String getZoneRepresentation(AiSearchNode node);
 }
