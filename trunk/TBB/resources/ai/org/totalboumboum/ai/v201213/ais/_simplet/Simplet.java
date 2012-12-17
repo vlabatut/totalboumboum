@@ -77,13 +77,13 @@ public class Simplet extends ArtificialIntelligence
 		// car ils ne seront pas mis à jour par l'algo général
 		{	long before = print("    > Entering commonTools.update");
 			commonTools.update();
-			long after = System.currentTimeMillis();
+			long after = getCurrentTime();
 			long elapsed = after - before;
 			print("    < Exiting commonTools.update: duration="+elapsed+" ms");
 		}
 		{	long before = print("    > Entering targetHandler.update");
 			targetHandler.update();
-			long after = System.currentTimeMillis();
+			long after = getCurrentTime();
 			long elapsed = after - before;
 			print("    < Exiting targetHandler.update: duration="+elapsed+" ms");
 		}

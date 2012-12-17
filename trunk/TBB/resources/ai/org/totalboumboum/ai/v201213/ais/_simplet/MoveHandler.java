@@ -131,7 +131,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOBRANCH);
 			dijkstra = new Dijkstra(ai,ownHero, costCalculator,successorCalculator);
 		}
-		long after = System.currentTimeMillis();
+		long after = ai.getCurrentTime();
 		long elapsed = after - before;
 		print("    < path-finding objects initialized duration="+elapsed);
 	}
@@ -302,7 +302,8 @@ if(!tiles.isEmpty())
 		boolean isThreatened = commonTools.isTileThreatened(currentTile);
 		// on réinitialise le chemin courant
 		currentPath = null;
-		
+if(!zone.getTile(5,2).getBlocks().isEmpty())
+	System.out.print("");
 		// si on est menacé par une bombe
 		// mais qu'il n'y a pas encore de destination sûre >> on en trouve une
 		if(isThreatened && safeDestination==null)
@@ -317,7 +318,7 @@ if(!tiles.isEmpty())
 			catch (LimitReachedException e)
 			{	//e.printStackTrace();
 			}
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			if(currentPath==null || currentPath.isEmpty())
 			{	print("        no safe tile could be found! duration="+elapsed+" currentPath="+currentPath);
@@ -351,7 +352,7 @@ if(!tiles.isEmpty())
 				catch (LimitReachedException e)
 				{	//e.printStackTrace();
 				}
-				long after = System.currentTimeMillis();
+				long after = ai.getCurrentTime();
 				long elapsed = after - before;
 				if(currentPath==null || currentPath.isEmpty())
 				{	print("        no path could be found! duration="+elapsed+" currentPath="+currentPath);
@@ -375,7 +376,7 @@ if(!tiles.isEmpty())
 			catch (LimitReachedException e)
 			{	//e.printStackTrace();
 			}
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			
 			// si on a trouvé un chemin direct
@@ -399,7 +400,7 @@ if(!tiles.isEmpty())
 					catch (LimitReachedException e)
 					{	//e.printStackTrace();
 					}
-					after = System.currentTimeMillis();
+					after = ai.getCurrentTime();
 					elapsed = after - before;
 					print("          astar finished: duration="+elapsed+" secondaryPath="+indirectPath);
 				}
@@ -458,7 +459,7 @@ if(!tiles.isEmpty())
 							catch (LimitReachedException e)
 							{	//e.printStackTrace();
 							}
-							after = System.currentTimeMillis();
+							after = ai.getCurrentTime();
 							elapsed = after - before;
 							if(currentPath==null || currentPath.isEmpty())
 								print("        no path could be found! duration="+elapsed);
