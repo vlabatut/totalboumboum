@@ -1625,12 +1625,11 @@ public class Launcher
 	 * TODO site : 
 	 * 		- mort subite (et autres objets ?)
 	 * 
-	 * TODO réviser les instances antérieurs à SBM1, même si pas de mort subite
+	 * TODO réviser les instances antérieures à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
 	 * 		x rajouter la modif sur le throughwall des items
 	 * 		x adapter les traj des bombes 
 	 * 
-	 * TODO envisager aussi les mort-subites de type bombe, voire bonus (nouveaux niveaux ?)
 	 * TODO tournoi supercoupe :
 	 * 		- demi-finale : les 2 premiers de cette année contre les 3 ex-gagnants les moins bien classés
 	 * 		- finale : les 3 premiers de la demi-finale contre les 2 ex-gagnants les mieux classés
@@ -1642,14 +1641,4 @@ public class Launcher
  * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
  * 		(avec bordure de sol différente (?)
  * 
- * TODO v.étudiants >> màj niveaux et tournois
- * TODO régler le tournoi sur la qualif
- * TODO vérifier tous les TODOs
- */
-
-
-/*
- * - désactiver les sorties texte de simplet (ds movehandler et simplet)
- * - màj toutes les api : noms des états de sprites dans AiStateName
- * - synchro toutes les api avec v23.5
  */
