@@ -32,6 +32,8 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.gesture.Gesture;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
@@ -107,6 +109,17 @@ public class FullModulationManager extends ModulationManager
 		return result;
 	}
 	
+	@Override
+	public TargetModulation getTargetModulation(SpecificAction action, GestureName gestureName)
+	{	TargetModulation result = null;
+		Gesture gesture = sprite.getGesturePack().getGesture(gestureName);
+		if(gesture!=null)
+			result = gesture.getTargetModulation(action);
+		if(result==null)
+			result = new TargetModulation(action);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// THIRD MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -124,6 +137,16 @@ public class FullModulationManager extends ModulationManager
 	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	ThirdModulation result = null;
 		if(currentGesture!=null)
+			result = currentGesture.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
+		if(result==null)
+			result = new ThirdModulation(action);
+		return result;
+	}
+
+	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
+	{	ThirdModulation result = null;
+		Gesture gesture = sprite.getGesturePack().getGesture(gestureName);
+		if(gesture!=null)
 			result = currentGesture.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
 		if(result==null)
 			result = new ThirdModulation(action);
@@ -271,9 +294,25 @@ public class FullModulationManager extends ModulationManager
 	}
 	
 	@Override
+	public boolean wouldThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
+	{	boolean result = false;
+		ThirdModulation thirdModulation = sprite.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances,gestureName);
+		result = thirdModulation.getFrame() && thirdModulation.getStrength()<=0;
+		return result;
+	}
+	
+	@Override
 	public boolean isTargetPreventing(SpecificAction action)
 	{	boolean result = false;
 		TargetModulation targetModulation = sprite.getTargetModulation(action);
+		result = targetModulation.getFrame() && targetModulation.getStrength()<=0;
+		return result;
+	}
+	
+	@Override
+	public boolean wouldTargetPreventing(SpecificAction action, GestureName gestureName)
+	{	boolean result = false;
+		TargetModulation targetModulation = sprite.getTargetModulation(action,gestureName);
 		result = targetModulation.getFrame() && targetModulation.getStrength()<=0;
 		return result;
 	}
