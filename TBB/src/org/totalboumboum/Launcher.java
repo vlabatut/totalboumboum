@@ -1640,5 +1640,4 @@ public class Launcher
  * TODO utiliser les softwalls de couleur
  * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
  * 		(avec bordure de sol différente (?)
- * 
  */
