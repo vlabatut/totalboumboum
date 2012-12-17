@@ -117,7 +117,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(ai,ownHero);
 			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
 			astarPrecise = new Astar(ai,ownHero, costCalculator, heuristicCalculator, successorCalculator);
-			astarPrecise.setVerbose(true);
+//			astarPrecise.setVerbose(true);
 		}
 		// astar approximation
 		{	CostCalculator costCalculator = new ApproximateCostCalculator(ai,ownHero);
