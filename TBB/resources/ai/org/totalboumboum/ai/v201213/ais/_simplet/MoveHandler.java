@@ -117,6 +117,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 			HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(ai,ownHero);
 			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
 			astarPrecise = new Astar(ai,ownHero, costCalculator, heuristicCalculator, successorCalculator);
+			astarPrecise.setVerbose(true);
 		}
 		// astar approximation
 		{	CostCalculator costCalculator = new ApproximateCostCalculator(ai,ownHero);
@@ -387,7 +388,7 @@ if(!tiles.isEmpty())
 			// sinon : aucun chemin direct n'existe
 			else
 			{	print("        no direct path was found: duration="+elapsed+" currentPath="+currentPath);
-				print("        we need a indirect path");
+				print("        we need an indirect path");
 			
 				// s'il n'y a pas de chemin secondaire, on en trouve un
 				if(indirectPath==null)

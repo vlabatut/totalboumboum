@@ -583,7 +583,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 		Le temps à l'instant de l'affichage.
 	 */
 	protected final long print(String msg)
-	{	long time = System.currentTimeMillis();
+	{	long time = zone.getTotalTime();
 		if(verbose)
 		{	StringBuffer message = new StringBuffer();
 			message.append("[");

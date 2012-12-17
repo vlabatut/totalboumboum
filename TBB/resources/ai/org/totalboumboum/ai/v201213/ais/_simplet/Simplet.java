@@ -58,7 +58,7 @@ public class Simplet extends ArtificialIntelligence
 	 * Instancie la classe principale de l'agent.
 	 */
 	public Simplet()
-	{	verbose = false;
+	{	verbose = true;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -130,13 +130,13 @@ public class Simplet extends ArtificialIntelligence
 		
 		modeHandler = new ModeHandler(this);
 		modeHandler.verbose = verbose && true;
-
+		
 		utilityHandler = new UtilityHandler(this);
 		utilityHandler.verbose = verbose && true;
-
+		
 		bombHandler = new BombHandler(this);
 		bombHandler.verbose = verbose && true;
-
+		
 		moveHandler = new MoveHandler(this);
 		moveHandler.verbose = verbose && true;
 	}

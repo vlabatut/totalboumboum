@@ -1646,3 +1646,11 @@ public class Launcher
  * TODO régler le tournoi sur la qualif
  * TODO vérifier tous les TODOs
  */
+
+
+/*
+ * - désactiver les sorties texte de simplet (ds movehandler et simplet)
+ * - màj toutes les api : noms des états de sprites dans AiStateName
+ * - synchro toutes les api avec v23.5
+ */
+*/
