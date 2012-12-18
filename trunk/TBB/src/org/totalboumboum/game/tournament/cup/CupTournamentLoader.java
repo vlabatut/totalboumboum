@@ -28,6 +28,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.PointsProcessor;
@@ -285,16 +286,32 @@ public class CupTournamentLoader
 	private static CupPlayer loadPlayerElement(Element root, CupPart part)
 	{	CupPlayer result = new CupPlayer(part);
 	
-		// number
-		String partStr = root.getAttribute(XmlNames.PART).getValue().trim();
-		int prevPart = Integer.valueOf(partStr);
-		result.setPrevPart(prevPart);
-
 		// rank
 		String rankStr = root.getAttribute(XmlNames.RANK).getValue().trim();
 		int prevRank = Integer.valueOf(rankStr);
 		result.setPrevRank(prevRank);
 
+		// part
+		String partStr = root.getAttribute(XmlNames.PART).getValue().trim();
+		int prevPart = Integer.valueOf(partStr);
+		result.setPrevPart(prevPart);
+
+		// leg
+		int prevLeg;
+		Attribute legAttr = root.getAttribute(XmlNames.LEG);
+		if(legAttr!=null)
+		{	String legStr = legAttr.getValue().trim();
+			prevLeg = Integer.valueOf(legStr);
+		}
+		else
+		{	CupLeg previousLeg = part.getLeg().getPreviousLeg();
+			if(previousLeg==null)
+				prevLeg = -1;
+			else
+				prevLeg = previousLeg.getNumber();
+		}
+		result.setPrevLeg(prevLeg);
+		
 		return result;
 	}
 }

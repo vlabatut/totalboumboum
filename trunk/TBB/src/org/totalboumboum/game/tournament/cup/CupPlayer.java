@@ -61,6 +61,32 @@ public class CupPlayer implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// PREVIOUS LEG		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Leg this player comes from */
+	private int prevLeg;
+	
+	/**
+	 * Returns the leg this player comes from.
+	 * 	
+	 * @return
+	 * 		The leg this player played before.
+	 */
+	public int getLegPart()
+	{	return prevLeg;
+	}
+	
+	/**
+	 * Changes the leg this player comes from.
+	 * 
+	 * @param leg
+	 * 		The new previous leg for this player.
+	 */
+	public void setPrevLeg(int leg)
+	{	this.prevLeg = leg;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// PREVIOUS PART	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Part this player comes from */
