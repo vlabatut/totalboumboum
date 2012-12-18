@@ -48,6 +48,9 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
+ * Class representing a cup tournament, i.e. with knock-out system.
+ * The tournament contains several legs, e.g. quarter final, semi final, final.
+ * Each leg contains several parts, e.g. semi final A, semi final B.
  * 
  * @author Vincent Labatut
  */
