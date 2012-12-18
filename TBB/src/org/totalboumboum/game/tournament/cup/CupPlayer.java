@@ -61,6 +61,47 @@ public class CupPlayer implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// RANK				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Updates the actual final rank for this player,
+	 * in this leg and all the previous legs this player
+	 * was involved in.
+	 * 
+	 * @param actualFinalRank
+	 * 		New actual final rank.
+	 */
+	public void setActualFinalRank(int actualFinalRank)
+	{	this.actualFinalRank = actualFinalRank;
+		CupTournament tournament = part.getTournament();
+		CupLeg previousLeg = tournament.getLeg(prevLeg);
+		if(previousLeg!=null)
+		{	CupPart previousPart = previousLeg.getPart(prevPart);
+			int index = part.getPlayers().indexOf(this);
+			Profile profile = part.getProfileForIndex(index);
+			CupPlayer prevPlayer = previousPart.getPlayerForProfile(profile);
+			prevPlayer.setActualFinalRank(actualFinalRank);
+		}
+	}
+
+	/**
+	 * Returns the the actual final rank for this player.
+	 * 
+	 * @return
+	 * 		Actual final rank.
+	 */
+	public int getActualFinalRank()
+	{	return actualFinalRank;
+	}
+	
+	/**
+	 * Reset the actual final rank for this player.
+	 */
+	public void reinitActualFinalRank()
+	{	actualFinalRank = 0;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// PREVIOUS LEG		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Leg this player comes from */
@@ -195,18 +236,21 @@ public class CupPlayer implements Serializable
 	}
 
 	/**
-	 * Changes the simulated final rank for this player.
+	 * Updates the simulated final rank for this player,
+	 * in this leg and all the previous ones the player
+	 * is involved.
 	 * 
 	 * @param simulatedFinalRank
 	 * 		New simulated final rank.
 	 */
 	public void setSimulatedFinalRank(int simulatedFinalRank)
 	{	this.simulatedFinalRank = simulatedFinalRank;
-		CupLeg prevLeg = part.getLeg().getPreviousLeg();
-		if(prevLeg!=null)
-		{	CupPart prevPart = prevLeg.getPart(this.prevPart);
-			CupPlayer prevPlayer = prevPart.getPlayerSimulatedRank(prevRank);
-			prevPlayer.setSimulatedFinalRank(simulatedFinalRank);
+		CupTournament tournament = part.getTournament();
+		CupLeg previousLeg = tournament.getLeg(prevLeg);
+		if(previousLeg!=null)
+		{	CupPart previousPart = previousLeg.getPart(prevPart);
+			CupPlayer previousPlayer = previousPart.getPlayerSimulatedRank(prevRank);
+			previousPlayer.setSimulatedFinalRank(simulatedFinalRank);
 		}
 	}
 
@@ -218,41 +262,6 @@ public class CupPlayer implements Serializable
 	 */
 	public int getSimulatedFinalRank()
 	{	return simulatedFinalRank;
-	}
-	
-	/**
-	 * Changes the actual final rank for this player.
-	 * 
-	 * @param actualFinalRank
-	 * 		Actual final rank.
-	 */
-	public void setActualFinalRank(int actualFinalRank)
-	{	this.actualFinalRank = actualFinalRank;
-		CupLeg prevLeg = part.getLeg().getPreviousLeg();
-		if(prevLeg!=null)
-		{	CupPart prevPart = prevLeg.getPart(this.prevPart);
-			int index = part.getPlayers().indexOf(this);
-			Profile profile = part.getProfileForIndex(index);
-			CupPlayer prevPlayer = prevPart.getPlayerForProfile(profile);
-			prevPlayer.setActualFinalRank(actualFinalRank);
-		}
-	}
-
-	/**
-	 * Returns the the actual final rank for this player.
-	 * 
-	 * @return
-	 * 		Actual final rank.
-	 */
-	public int getActualFinalRank()
-	{	return actualFinalRank;
-	}
-	
-	/**
-	 * Reset the actual final rank for this player.
-	 */
-	public void reinitActualFinalRank()
-	{	actualFinalRank = 0;
 	}
 	
 	/////////////////////////////////////////////////////////////////
