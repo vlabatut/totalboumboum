@@ -31,13 +31,24 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * Represents the settings of a leg in a 
+ * cup tournament. It is formed of several 
+ * parts. The tournament itself is made up 
+ * of several legs.
  * 
  * @author Vincent Labatut
  *
  */
 public class CupLeg implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard cup leg.
+	 * 
+	 * @param tournament
+	 * 		The tournament containing this leg.
+	 */
 	public CupLeg(CupTournament tournament)
 	{	this.tournament = tournament;	
 	}
