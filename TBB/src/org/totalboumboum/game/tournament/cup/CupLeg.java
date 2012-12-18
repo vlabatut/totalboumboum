@@ -92,6 +92,13 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// LEG				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the previous leg in the tournament,
+	 * or {@code null} if this one is the first.
+	 * 
+	 * @return
+	 * 		Previous leg in the tournament.
+	 */
 	public CupLeg getPreviousLeg()
 	{	CupLeg result = null;
 		if(number>0)
@@ -99,6 +106,13 @@ public class CupLeg implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Returns the next leg in the tournament,
+	 * or {@code null} if this is the last one.
+	 * 
+	 * @return
+	 * 		The next leg in the tournament.
+	 */
 	public CupLeg getNextLeg()
 	{	CupLeg result = null;
 		if(number<tournament.getLegs().size()-1)
@@ -110,11 +124,27 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if this leg is finished */
 	private boolean legOver = false;
 
+	/**
+	 * Indices whether this leg is finished
+	 * or not.
+	 * 
+	 * @return
+	 * 		{@code true} iff this leg is finished.
+	 */
 	public boolean isOver()
 	{	return legOver;
 	}
+	
+	/**
+	 * Changes the flag indicating if this
+	 * leg is finished.
+	 * 
+	 * @param legOver
+	 * 		New value for the flag.
+	 */
 	public void setOver(boolean legOver)
 	{	this.legOver = legOver;
 	}
@@ -122,12 +152,25 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Tournament containing this leg */
 	private CupTournament tournament;
 	
+	/**
+	 * Returns the tournament containing this leg.
+	 *  
+	 * @return
+	 * 		The tournament containing this leg.
+	 */
 	public CupTournament getTournament()
 	{	return tournament;
 	}
 	
+	/**
+	 * Changes the tournament containing this leg.
+	 * 
+	 * @param tournament
+	 * 		New tournament containing this leg.
+	 */
 	public void setTournament(CupTournament tournament)
 	{	this.tournament = tournament;
 	}
@@ -135,27 +178,61 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PARTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of parts constituting this leg */
 	private final List<CupPart> parts = new ArrayList<CupPart>();
+	/** Number of the current part */
 	private int currentIndex;
+	/** Part currently played */
 	private CupPart currentPart;
+	/**  Indicates if the parts should be played in a random order */
 	private boolean randomizeParts;
 	
+	/**
+	 * Returns the list of parts constituting this leg.
+	 * 
+	 * @return
+	 * 		The list of parts constituting this leg.
+	 */
 	public List<CupPart> getParts()
 	{	return parts;
 	}
 	
+	/**
+	 * Returns the part whose position
+	 * is specified.
+	 * 
+	 * @param index
+	 * 		Position of the part of interest.
+	 * @return
+	 * 		The requested part.
+	 */
 	public CupPart getPart(int index)
 	{	return parts.get(index);
 	}
 	
+	/**
+	 * Adds a new part to this leg.
+	 * 
+	 * @param part
+	 * 		The new part.
+	 */
 	public void addPart(CupPart part)
 	{	parts.add(part);
 	}
 
+	/**
+	 * Returns the part currently played.
+	 * 
+	 * @return
+	 * 		The current part.
+	 */
 	public CupPart getCurrentPart()
 	{	return currentPart;
 	}
 
+	/**
+	 * Shuffles the parts.
+	 */
 	private void randomizeParts()
 	{	Calendar cal = new GregorianCalendar();
 		long seed = cal.getTimeInMillis();
@@ -163,13 +240,37 @@ public class CupLeg implements Serializable
 		Collections.shuffle(parts,random);
 	}
 	
+	/**
+	 * Returns the flag indicating if the
+	 * parts should be played in a random order.
+	 * 
+	 * @return
+	 * 		{@code true} iff the part are randomized.
+	 */
 	public boolean getRandomizeParts()
 	{	return randomizeParts;
 	}
+	
+	/**
+	 * Changes the flag indicating if the
+	 * parts should be played in a random order.
+	 * 
+	 * @param randomizeParts
+	 * 		New value for the flat.
+	 */
 	public void setRandomizeParts(boolean randomizeParts)
 	{	this.randomizeParts = randomizeParts;
 	}
 
+	/**
+	 * Returns the part corresponding to the
+	 * specified position.
+	 * 
+	 * @param rank
+	 * 		Position of the part of interest.
+	 * @return
+	 * 		The corresponding part.
+	 */
 	public CupPart getPartFromRank(int rank)
 	{	CupPart result = null;
 		Iterator<CupPart> it = parts.iterator();
@@ -184,6 +285,12 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the list of players appearing in this leg.
+	 * 
+	 * @return
+	 * 		A list of cup player involved in this leg.
+	 */
 	public List<CupPlayer> getAllUsedPlayers()
 	{	List<CupPlayer> result = new ArrayList<CupPlayer>();
 		for(CupPart part: parts)
@@ -196,12 +303,25 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NUMBER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Number of this leg in the tournament */
 	private int number;
 
+	/**
+	 * Changes the number of this leg in the tournament.
+	 * 
+	 * @param number
+	 * 		New number for this leg.
+	 */
 	public void setNumber(int number)
 	{	this.number = number;
 	}
 
+	/**
+	 * Returns the number of this leg in the tournament.
+	 * 
+	 * @return
+	 * 		Number of this leg in the tournament.
+	 */
 	public int getNumber()
 	{	return number;
 	}

@@ -28,6 +28,7 @@
 	<xsd:complexType name="tPlayer">
 		<xsd:attribute name="rank" type="xsd:integer" use="required"/>
 		<xsd:attribute name="part" type="xsd:integer" use="required"/>
+		<xsd:attribute name="leg" type="xsd:integer" use="optional"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="tPlayers">
