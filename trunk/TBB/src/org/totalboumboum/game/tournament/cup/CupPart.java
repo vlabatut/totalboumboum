@@ -34,13 +34,22 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.tools.GameData;
 
 /**
+ * Represents the settings of a match in a 
+ * cup tournament. Several parts form a leg.
+ * The tournament is made up of several legs.
  * 
  * @author Vincent Labatut
- *
  */
 public class CupPart implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard cup part.
+	 * 
+	 * @param leg
+	 * 		The leg this part belongs to.
+	 */
 	public CupPart(CupLeg leg)
 	{	this.leg = leg;
 		ranks = new Ranks();
@@ -49,12 +58,23 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if a tie break is necessary to finish this part */
 	private int problematicTie = -1;
 	
+	/**
+	 * Returns whether or not a tie break
+	 * is needed to finish this part.
+	 * 
+	 * @return
+	 * 		{@code true} iff a tie break is needed.
+	 */
 	public int getProblematicTie()
 	{	return problematicTie;
 	}
 	
+	/**
+	 * Initializes this part.
+	 */
 	public void init()
 	{	// match
 		currentMatch = match;
@@ -68,10 +88,17 @@ public class CupPart implements Serializable
 		currentMatch.init(profiles);
 	}
 	
+	/**
+	 * Advances through this part (which
+	 * is likely to contain several rounds). 
+	 */
 	public void progress()
 	{	currentMatch = tieBreak.initMatch();
 	}
 	
+	/**
+	 * Cleanly terminates this part.
+	 */
 	public void finish()
 	{	// misc
 		leg = null;
@@ -80,6 +107,10 @@ public class CupPart implements Serializable
 		players.clear();
 	}
 
+	/**
+	 * Method called when the match corresponding
+	 * to this part is over. 
+	 */
 	public void matchOver()
 	{	// init the players rankings according to the match results
 		if(ranks.isEmpty())
@@ -101,6 +132,13 @@ public class CupPart implements Serializable
 			setOver(true);
 	}
 
+	/**
+	 * Returns a list of ranks associated
+	 * to the players from this part.
+	 * 
+	 * @return
+	 * 		A list of ranks.
+	 */
 	private List<Integer> getNeededRanks()
 	{	List<Integer> result = new ArrayList<Integer>();
 		int nextLegNumber = leg.getNumber()+1;
@@ -132,6 +170,10 @@ public class CupPart implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Updates the player ranks depending
+	 * on the last results of this part.
+	 */
 	private void updateRankings()
 	{	// process ranks
 		Ranks matchRanks = currentMatch.getOrderedPlayers();
@@ -151,6 +193,15 @@ public class CupPart implements Serializable
 		}
 	}
 	
+	/**
+	 * Returns the first tie needing
+	 * to be broken.
+	 * 
+	 * @param neededRanks
+	 * 		Current ranks.
+	 * @return
+	 * 		Problematic ties.
+	 */
 	private int getProblematicTie(List<Integer> neededRanks)
 	{	// keep only (meaninful) ties
 		int result = -1;
@@ -359,9 +410,13 @@ public class CupPart implements Serializable
 	}	
 	
 	/**
-	 * process the next part for the player ranked at the indicated position
+	 * Process the next part for the player 
+	 * ranked at the indicated position.
+	 * 
 	 * @param rank
+	 * 		Position of the player.
 	 * @return
+	 * 		The next part to be played by the player.
 	 */
 	public CupPart getNextPartForRank(int rank)
 	{	CupPart result = null;
@@ -394,8 +449,15 @@ public class CupPart implements Serializable
 	}
 	
 	/** 
-	 * simulate player progression in a part from first leg
-	 * receiving a number qualified of players
+	 * Simulates player progression in a part,
+	 * from the first leg of the tournament.
+	 * The parameter corresponds to the number 
+	 * of qualified of players.
+	 * 
+	 * @param qualified
+	 * 		Number of qualified players.
+	 * @return
+	 * 		{@code false} if there's a problem with the parameter.
 	 */
 	public boolean simulatePlayerProgression(int qualified)
 	{	// init
@@ -427,7 +489,11 @@ public class CupPart implements Serializable
 	}
 
 	/** 
-	 * simulate player progression in a part from a leg which is not the first one 
+	 * simulate player progression in a part 
+	 * from a leg which is not the first one.
+	 * 
+	 * @return
+	 * 		{@code false} if there's a problem with the parameter.
 	 */
 	public boolean simulatePlayerProgression()
 	{	// init
@@ -458,10 +524,14 @@ public class CupPart implements Serializable
 	}
 	
 	/**
-	 * returns the player corresponding to the specified local rank
-	 * in the simulated cup (or null if no player has this rank in this part)
+	 * Returns the player corresponding to the specified local rank
+	 * in the simulated cup (or {@code null} if no player has this 
+	 * rank in this part).
+	 * 
 	 * @param rank
+	 * 		A local rank.
 	 * @return
+	 * 		The corresponding player.
 	 */
 	public CupPlayer getPlayerSimulatedRank(int rank)
 	{	CupPlayer result = null;
@@ -475,11 +545,15 @@ public class CupPart implements Serializable
 	}
 	
 	/**
-	 * process the simulated final rank (ie rank for the whole cup)
-	 * for each used players in this part
+	 * Changes the simulated final rank (i.e. for the 
+	 * whole cup) for the specified player.
+	 * 
 	 * @param localRank
+	 * 		Rank of the concerned player in this part. 
 	 * @param finalRank
+	 * 		New final rank of this player.
 	 * @return
+	 * 		{@code false} if there's a problem with the local rank.
 	 */
 	public boolean simulatePlayerFinalRank(int localRank, int finalRank)
 	{	boolean result = false;
@@ -494,9 +568,11 @@ public class CupPart implements Serializable
 	}
 	
 	/**
-	 * returns the final rank of the last used player
-	 * or Integer.MAX_VALUE if all players are used  
+	 * Returns the final rank of the last used player,
+	 * or {@link Integer#MAX_VALUE} if all players are used.
+	 *   
 	 * @return
+	 * 		Final rank of the last used player.
 	 */
 	public int getSimulatedFinalRankMax()
 	{	int result = 0;
