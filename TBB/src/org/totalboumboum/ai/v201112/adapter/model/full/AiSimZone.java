@@ -42,7 +42,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.LevelsTools;
+import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**

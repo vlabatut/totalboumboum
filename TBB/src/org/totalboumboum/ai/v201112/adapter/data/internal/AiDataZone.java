@@ -53,8 +53,8 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
-import org.totalboumboum.tools.calculus.LevelsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**

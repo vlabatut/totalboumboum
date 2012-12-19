@@ -37,7 +37,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.calculus.LevelsTools;
+import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**

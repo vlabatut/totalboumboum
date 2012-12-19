@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.action.movehigh.SpecificMoveHigh
 import org.totalboumboum.engine.content.feature.action.movelow.SpecificMoveLow;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
  * 
