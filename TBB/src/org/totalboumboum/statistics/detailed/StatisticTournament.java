@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
  * 
