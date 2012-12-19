@@ -21,18 +21,20 @@ package org.totalboumboum.tools.computing;
  * 
  */
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
+ * Compares two collections of integers.
+ * First using their sizes, then their
+ * content.
  * 
  * @author Vincent Labatut
- *
  */
-public class IntegerSetComparator implements Comparator<Set<Integer>>
+public class IntegerCollectionComparator implements Comparator<Collection<Integer>>
 {	@Override
-	public int compare(Set<Integer> s1, Set<Integer> s2)
+	public int compare(Collection<Integer> s1, Collection<Integer> s2)
 	{	int size1 = s1.size();
 		int size2 = s2.size();
 		int result = size1-size2;
