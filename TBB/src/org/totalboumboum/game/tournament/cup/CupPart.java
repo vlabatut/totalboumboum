@@ -266,17 +266,38 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Prototype of the match, kept as is and used for reset */
 	private Match match;
+	/** Match object, actually used when playing */
 	private Match currentMatch;
 	
+	/**
+	 * Changes the prototype match.
+	 * 
+	 * @param match
+	 * 		New prototype match.
+	 */
 	public void setMatch(Match match)
 	{	this.match = match;
 	}	
 	
+	/**
+	 * Returns the prototype match.
+	 * 
+	 * @return
+	 * 		Prototype match.
+	 */
 	public Match getMatch()
 	{	return match;
 	}
 	
+	/**
+	 * Returns the match currently
+	 * played.
+	 * 
+	 * @return
+	 * 		Currently played match.
+	 */
 	public Match getCurrentMatch()
 	{	return currentMatch;
 	}
@@ -440,6 +461,30 @@ public class CupPart implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// PLAYER DISTRIBUTION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Checks if the match associated to this part
+	 * includes players involved in their very
+	 * first match of the tournament.
+	 * 
+	 * @return
+	 * 		{@code true} iff there are new players
+	 * 		involved in this part. 
+	 */
+	protected boolean isEntryMatch()
+	{	boolean result = false;
+		
+		Iterator<CupPlayer> it = players.iterator();
+		while(it.hasNext() && !result)
+		{	CupPlayer player = it.next();
+			result = player.getPrevLeg() == -1;
+		}
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int simulatedCount;
@@ -489,7 +534,7 @@ public class CupPart implements Serializable
 	}
 
 	/** 
-	 * simulate player progression in a part 
+	 * Simulates player progression in a part 
 	 * from a leg which is not the first one.
 	 * 
 	 * @return

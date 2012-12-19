@@ -327,6 +327,29 @@ public class CupLeg implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// PLAYER DISTRIBUTION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Counts the number of matches in this leg
+	 * which includes players involved in their very
+	 * first match of the tournament.
+	 * 
+	 * @return
+	 * 		Number of matches in the leg accepting
+	 * 		new players. 
+	 */
+	protected int countEntryMatches()
+	{	int result = 0;
+		
+		for(CupPart part: parts)
+		{	if(part.isEntryMatch())
+				result++;
+		}
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
@@ -334,9 +357,13 @@ public class CupLeg implements Serializable
 	 * tournament. This updates various objects, including cup players.
 	 * The results of this simulation are then used to sort the players
 	 * in order to get seeds.
+	 * <br/>
+	 * This specific method is destined to the very first leg.
 	 * 
 	 *  @param distribution
 	 *  	How the players are distributed in this leg.
+	 *  @return
+	 *  	{@code true} iff the distribution is allowed.
 	 */
 	public boolean simulatePlayerProgression(List<Integer> distribution)
 	{	boolean result = true;
@@ -360,6 +387,17 @@ public class CupLeg implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Similates how some players would progress through the whole
+	 * tournament. This updates various objects, including cup players.
+	 * The results of this simulation are then used to sort the players
+	 * in order to get seeds.
+	 * <br/>
+	 * This specific method is destined to legs after the first one.
+	 * 
+	 *  @return
+	 *  	{@code true} iff the distribution is allowed.
+	 */
 	public boolean simulatePlayerProgression()
 	{	boolean result = true;
 		

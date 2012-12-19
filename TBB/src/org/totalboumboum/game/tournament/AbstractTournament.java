@@ -161,7 +161,7 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	}
 
 	/**
-	 * Returns the numbers of players
+	 * Returns the various numbers of players
 	 * allowed for this tournament.
 	 * 
 	 * @return
