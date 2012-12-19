@@ -413,7 +413,7 @@ for(List<Set<Integer>> list: matches)
 	}
 	
 	public static Set<Set<Integer>> processCombinationsRec(int n, int k)
-	{	Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+	{	Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
 		
 		if(k==1)
 		{	for(int i=0;i<n;i++)
@@ -440,11 +440,11 @@ for(List<Set<Integer>> list: matches)
 
 	public static Set<Set<Integer>> processCombinationsIter(int n, int k, List<Set<Integer>> previous)
 	{	System.out.println("\tprocess C("+n+","+k+")");
-		Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+		Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
 		
 		if(previous!=null)
 		{	result.addAll(previous);
-			Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+			Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
 			for(int i=0;i<n;i++)
 			{	for(Set<Integer> set: result)
 				{	boolean test;
@@ -475,7 +475,7 @@ for(List<Set<Integer>> list: matches)
 			
 			for(int m=2;m<=k;m++)
 			{	System.out.println("\t\tprocess C("+n+","+m+")");
-				Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+				Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
 				for(int i=0;i<n;i++)
 				{	for(Set<Integer> set: result)
 					{	boolean test;
