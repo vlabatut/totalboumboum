@@ -103,8 +103,16 @@ public class CombinatoricsTools
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * process all the unique distributions (i.e. without considering permutations)
+	 * Processes all the unique distributions (i.e. without considering permutations)
 	 * of a certain number of players in a certain number of matches.
+	 * 
+	 * @param players
+	 * 		Number of players
+	 * @param matches
+	 * 		Number of matches.
+	 * @return
+	 * 		A list of integers, each values represents a number of players in
+	 * 		the corresponding match.
 	 */
 	public static List<List<Integer>> processDistributions(int players, int matches)
 	{	return processDistributions(players,matches,players);
@@ -145,11 +153,15 @@ public class CombinatoricsTools
 	}
 	
 	/**
-	 * process all possible permutations for the integer list in input,
+	 * Process all possible permutations for the integer list in input,
 	 * according to Johnson's algorithm. 
-	 * cf http://en.wikipedia.org/wiki/Steinhaus-Johnson-Trotter_algorithm
+	 * <br/>
+	 * <b>Source:</b> <a href="http://en.wikipedia.org/wiki/Steinhaus-Johnson-Trotter_algorithm">Wikipedia</a>
+	 * 
 	 * @param values
+	 * 		Values to be permuted.
 	 * @return
+	 * 		A list of permutations (i.e. integer lists).
 	 */
 	public static List<List<Integer>> processPermutations(List<Integer> values)
 	{	List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -518,7 +530,7 @@ for(List<Set<Integer>> list: matches)
 
 	public static List<Integer> getWinners(float[] points)
 	{	List<Integer> result = new ArrayList<Integer>();
-		int[] ranks = CombinatoricsTools.getRanks(points);
+		int[] ranks = getRanks(points);
 		for(int i=0;i<ranks.length;i++)
 			if(ranks[i]==1 && points[i]>0)
 				result.add(i);
@@ -529,9 +541,18 @@ for(List<Set<Integer>> list: matches)
 	// FUNCTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * process the value of a sigmoid function for x.
-	 * The lambda parameter defines the slope (the higher, the sloping)
+	 * Processes the value of a sigmoid function for x.
+	 * The lambda parameter defines the slope (the higher, the more slopy)
 	 * and the theta parameter defines the center of symmetry. 
+	 * 
+	 * @param lambda
+	 * 		Slope.
+	 * @param theta
+	 * 		Center of symmetry.
+	 * @param x
+	 * 		Argument of the fonction.
+	 * @return
+	 * 		The result of the sigmoid function when applied to x.
 	 */
 	public static double sigmoid(double lambda, double theta, double x)
 	{	double result;
