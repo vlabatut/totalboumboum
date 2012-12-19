@@ -113,7 +113,7 @@ public class CupPlayer implements Serializable
 	 * @return
 	 * 		The leg this player played before.
 	 */
-	public int getLegPart()
+	public int getPrevLeg()
 	{	return prevLeg;
 	}
 	

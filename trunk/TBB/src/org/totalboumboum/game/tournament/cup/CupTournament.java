@@ -46,6 +46,7 @@ import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.IntegerCollectionComparator;
 
 /**
  * Class representing a cup tournament, i.e. with knock-out system.
@@ -66,12 +67,7 @@ public class CupTournament extends AbstractTournament
 	{	begun = true;
 	
 		// players distribution
-		int playerCount = profiles.size();
-		HashMap<Integer,List<List<Integer>>> distris = processPlayerDistribution(playerCount);
-		highestEmptyRank = Collections.max(distris.keySet());
-		List<List<Integer>> distri = distris.get(highestEmptyRank);
-		int index = (int)(Math.random()*distri.size());
-		firstLegPlayersdistribution = distri.get(index);
+		initPlayerDistribution();
 		
 		// sort players (either: as is, random or seeds)
 		sortPlayers();
@@ -110,9 +106,6 @@ public class CupTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	/** Way of sorting players before the tournament starts */
 	private CupPlayerSort sortPlayers;
-	/** Player distribution for the first leg */
-	private List<Integer> firstLegPlayersdistribution;
-	private int highestEmptyRank;
 	
 	/**
 	 * Returns the way of sorting players before
@@ -191,6 +184,43 @@ public class CupTournament extends AbstractTournament
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PLAYER DISTRIBUTION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Player distribution for the first leg */
+	private List<Integer> firstLegPlayersdistribution;
+	/** Highest empty rank for the above distribution */ 
+	private int highestEmptyRank;
+	
+	/**
+	 * Initializes the way players are distributed
+	 * over entry matches.
+	 */
+	private void initPlayerDistribution()
+	{	// number of players
+		int playerCount = profiles.size();
+		// get all possible distributions
+		HashMap<Integer,List<List<Integer>>> distris = processPlayerDistribution(playerCount);
+		// retrieve the best ones
+		highestEmptyRank = Collections.max(distris.keySet());
+		List<List<Integer>> distri = distris.get(highestEmptyRank);
+		// randomly pick one of them
+		int index = (int)(Math.random()*distri.size());
+		firstLegPlayersdistribution = distri.get(index);
+	}
+	
+	/**
+	 * Returns the distribution of players for the first
+	 * leg of this tournament.
+	 * 
+	 * @return
+	 * 		How the players should be distributed over
+	 * 		entry matches for this tournament.
+	 */
+	public List<Integer> getFirstLegPlayersdistribution()
+	{	return firstLegPlayersdistribution;		
+	}
+
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
@@ -199,51 +229,33 @@ public class CupTournament extends AbstractTournament
 			if(distri.size()>0)
 				result.add(i);
 		}
+		
 		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// PLAYER DISTRIBUTION	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Returns the distribution of players for the first
-	 * leg of this tournament.
-	 * 
-	 */
-	public List<Integer> getFirstLegPlayersdistribution()
-	{	return firstLegPlayersdistribution;		
-	}
-
 	/**
 	 * Processes the player distribution for the specified number
-	 * of players.
+	 * of players. In other words, in the case where there are less
+	 * players than the maximum allowed for this tournament, this 
+	 * method determines how the players should be distributed over
+	 * all matches, so that the tournament can still takes place. 
 	 * 
 	 * @param playerCount
+	 * 		Total number of players involved.
 	 * @return
+	 * 		A map containing all allowed distributions, the key being
+	 * 		the highest empty rank. Several distributions might be associated
+	 * 		to the same rank, hence the list of lists.
 	 */
 	private HashMap<Integer,List<List<Integer>>> processPlayerDistribution(int playerCount)
-	{	int matches = legs.get(0).getParts().size();
-		// get the distributions
+	{	// get the number of entry matches
+		int matches = countEntryMatches();
+		
+		// process corresponding player distributions
 		List<List<Integer>> distributions = CombinatoricsTools.processDistributions(playerCount,matches);
 		
 		// permute them
-		TreeSet<List<Integer>> permutations = new TreeSet<List<Integer>>(new Comparator<List<Integer>>()
-		{	@Override
-			public int compare(List<Integer> o1, List<Integer> o2)
-			{	int result = 0;
-				// size
-				int size1 = o1.size();
-				int size2 = o2.size();
-				result = size1 - size2;
-				// content
-				int i=0;
-				while(i<size1 && result==0)
-				{	result = o1.get(i)-o2.get(i);
-					i++;
-				}
-				return result;
-			}				
-		});
+		TreeSet<List<Integer>> permutations = new TreeSet<List<Integer>>(new IntegerCollectionComparator());
 /*		
 System.out.println();
 System.out.println("DISTRIBUTIONS");
@@ -307,6 +319,24 @@ for(ArrayList<Integer> list: permutations)
 	}
 	
 	/**
+	 * Counts the number of matches in this tournament
+	 * which includes players involved in their very
+	 * first match.
+	 * 
+	 * @return
+	 * 		Number of matches in the tournament accepting
+	 * 		new players. 
+	 */
+	private int countEntryMatches()
+	{	int result = 0;
+		
+		for(CupLeg leg: legs)
+			result = result + leg.countEntryMatches();
+		
+		return result;
+	}
+	
+	/**
 	 * Checks if the specified players distribution is compatible 
 	 * with the matches composing this tournament. If it's not,
 	 * the method result is -1. If it is, it's the highest rank
@@ -315,9 +345,11 @@ for(ArrayList<Integer> list: permutations)
 	 * to pick the best one (i.e. the one with the lowest value).
 	 * 
 	 * @param distribution
-	 * 		The distribution to be checked. Each value corresponds to TODO ?
+	 * 		The distribution to be checked. Each value corresponds to 
+	 * 		a number of players in one of the entry matches (i.e. matches
+	 * 		involving at least one fresh player).
 	 * @return
-	 * 		
+	 * 		The first final rank not assigned to any player. 
 	 */
 	private int checkPlayerDistribution(List<Integer> distribution)
 	{	// init
