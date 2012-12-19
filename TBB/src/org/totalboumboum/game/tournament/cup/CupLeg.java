@@ -329,6 +329,15 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Similates how some players would progress through the whole
+	 * tournament. This updates various objects, including cup players.
+	 * The results of this simulation are then used to sort the players
+	 * in order to get seeds.
+	 * 
+	 *  @param distribution
+	 *  	How the players are distributed in this leg.
+	 */
 	public boolean simulatePlayerProgression(List<Integer> distribution)
 	{	boolean result = true;
 		
