@@ -45,7 +45,7 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
  * Class representing a cup tournament, i.e. with knock-out system.
@@ -223,11 +223,6 @@ public class CupTournament extends AbstractTournament
 	 */
 	private HashMap<Integer,List<List<Integer>>> processPlayerDistribution(int playerCount)
 	{	int matches = legs.get(0).getParts().size();
-/*
- * TODO faut adapter: on ne peut pas simplement considérer le nombre de matches
- * dans le 1er leg, puisque les joueurs peuvent intervenir directement dans des legs
- * ultérieurs. faut donc analyser le tournoi (?)
- */
 		// get the distributions
 		List<List<Integer>> distributions = CombinatoricsTools.processDistributions(playerCount,matches);
 		

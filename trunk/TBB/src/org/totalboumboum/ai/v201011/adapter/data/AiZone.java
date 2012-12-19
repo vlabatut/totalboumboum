@@ -25,8 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
-import org.totalboumboum.tools.calculus.LevelsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**

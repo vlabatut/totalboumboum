@@ -28,7 +28,7 @@ import java.util.Locale;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**

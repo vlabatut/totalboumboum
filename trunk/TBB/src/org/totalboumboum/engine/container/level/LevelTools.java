@@ -47,7 +47,7 @@ import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.gui.tools.GuiFileTools;
-import org.totalboumboum.tools.calculus.LevelsTools;
+import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;

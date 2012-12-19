@@ -58,7 +58,7 @@ import org.totalboumboum.stream.file.replay.FileServerStream;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 

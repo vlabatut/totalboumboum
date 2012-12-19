@@ -42,7 +42,7 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
  * 

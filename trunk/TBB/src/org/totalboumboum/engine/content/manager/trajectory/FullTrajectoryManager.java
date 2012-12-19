@@ -36,7 +36,7 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
  * 

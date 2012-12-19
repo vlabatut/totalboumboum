@@ -36,7 +36,7 @@ import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.LevelsTools;
+import org.totalboumboum.tools.computing.LevelsTools;
 
 /**
  * 

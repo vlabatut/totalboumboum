@@ -27,7 +27,7 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
  * 
