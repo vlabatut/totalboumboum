@@ -353,15 +353,19 @@ for(ArrayList<Integer> list: permutations)
 	 */
 	private int checkPlayerDistribution(List<Integer> distribution)
 	{	// init
+		distribution = new ArrayList<Integer>(distribution);
 //		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
 //		HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>();
 
 		// check compatibility with matches
 		CupLeg firstLeg = legs.get(0);
 		int result = profiles.size();
+		// first, try simulating players progression
 		boolean res = firstLeg.simulatePlayerProgression(distribution);
 		if(res)
-		{	simulatePlayerFinalRank();
+		{	// if this works, then retrieve their final ranks
+// TODO			
+			simulatePlayerFinalRank();
 			List<CupPart> parts = getAllParts();
 			for(CupPart part: parts)
 			{	int m = part.getSimulatedFinalRankMax();

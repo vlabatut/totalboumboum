@@ -353,12 +353,10 @@ public class CupLeg implements Serializable
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Similates how some players would progress through the whole
+	 * Simulates how some players would progress through the whole
 	 * tournament. This updates various objects, including cup players.
 	 * The results of this simulation are then used to sort the players
 	 * in order to get seeds.
-	 * <br/>
-	 * This specific method is destined to the very first leg.
 	 * 
 	 *  @param distribution
 	 *  	How the players are distributed in this leg.
@@ -369,56 +367,22 @@ public class CupLeg implements Serializable
 	{	boolean result = true;
 		
 		// this leg parts
-		int i = 0;
-		while(i<distribution.size() && result)
-		{	CupPart part = parts.get(i);
-			int nbr = distribution.get(i);
-			result = part.simulatePlayerProgression(nbr);
-			i++;
+		Iterator<CupPart> it = parts.iterator();
+		while(it.hasNext() && result)
+		{	CupPart part = it.next();
+			result = part.simulatePlayerProgression(distribution);
 		}
 	
 		// next leg
 		if(result)
 		{	CupLeg nextLeg = getNextLeg();
 			if(nextLeg!=null)
-				result = nextLeg.simulatePlayerProgression();
+				result = nextLeg.simulatePlayerProgression(distribution);
 		}
 		
 		return result;
 	}
 	
-	/**
-	 * Similates how some players would progress through the whole
-	 * tournament. This updates various objects, including cup players.
-	 * The results of this simulation are then used to sort the players
-	 * in order to get seeds.
-	 * <br/>
-	 * This specific method is destined to legs after the first one.
-	 * 
-	 *  @return
-	 *  	{@code true} iff the distribution is allowed.
-	 */
-	public boolean simulatePlayerProgression()
-	{	boolean result = true;
-		
-		// this leg parts
-		int i = 0;
-		while(i<parts.size() && result)
-		{	CupPart part = parts.get(i);
-			result = part.simulatePlayerProgression();
-			i++;
-		}
-	
-		// next leg
-		if(result)
-		{	CupLeg nextLeg = getNextLeg();
-			if(nextLeg!=null)
-				result = nextLeg.simulatePlayerProgression();
-		}
-		
-		return result;
-	}
-
 	public void reinitPlayersActualFinalRanks()
 	{	for(CupPart part: parts)
 			part.reinitPlayersActualFinalRanks();

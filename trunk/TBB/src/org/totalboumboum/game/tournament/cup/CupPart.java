@@ -484,93 +484,116 @@ public class CupPart implements Serializable
 		return result;
 	}
 
+//	/**
+//	 * Counts the number of players
+//	 * entering the tournament during
+//	 * this part.
+//	 * 
+//	 * @return
+//	 * 		Number of new players involved in this part.
+//	 */
+//	private int countNewPlayers()
+//	{	int result = 0;
+//		
+//		for(CupPlayer player: players)
+//		{	if(player.getPrevLeg() == -1)
+//				result++;
+//		}
+//		
+//		return result;
+//	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Number of players in this part actually used during the last simulation */
 	private int simulatedCount;
 	
+	/**
+	 * Returns the Number of players in this part 
+	 * actually used during the last simulation.
+	 * 
+	 * @return
+	 * 		Number of players actually used during the last simulation.
+	 */
 	public int getSimulatedCount()
 	{	return simulatedCount;		
 	}
 	
 	/** 
-	 * Simulates player progression in a part,
-	 * from the first leg of the tournament.
-	 * The parameter corresponds to the number 
-	 * of qualified of players.
+	 * Simulates player progression in a part.
 	 * 
-	 * @param qualified
-	 * 		Number of qualified players.
+	 * @param distribution
+	 * 		List of directly qualified players. Only used if
+	 * 		the part is an entry one.
 	 * @return
 	 * 		{@code false} if there's a problem with the parameter.
 	 */
-	public boolean simulatePlayerProgression(int qualified)
+	public boolean simulatePlayerProgression(List<Integer> distribution)
 	{	// init
 		boolean result = true;
 		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
 		int qualifiedAllowed = players.size();
 		simulatedCount = 0;
+		int qualified = 0; // total number of players (entry+qualified)
 		
-		if(!matchAllowed.contains(qualified))
-			result = false;
-		else if(qualified>qualifiedAllowed)
-			result = false;
-		else
-		{	// mark players
-			for(int i=0;i<players.size();i++)
-			{	CupPlayer player = players.get(i);
-				if(i<qualified)
+		// get the number of entry players
+		int entryPlayers = 0;
+		if(isEntryMatch() && !distribution.isEmpty())
+		{	entryPlayers = distribution.get(0);
+			distribution.remove(0);
+		}
+		
+		// check each player depending on its previous leg (or absence of)
+		for(CupPlayer player: players)
+		{	int prevLegNbr = player.getPrevLeg();
+			// entry player
+			if(prevLegNbr==-1)
+			{	// rejected (no slot left)
+				if(entryPlayers==0)
+				{	player.setUsed(false);
+					player.setSimulatedRank(0);
+				}
+				// accepted
+				else
 				{	player.setUsed(true);
 					simulatedCount++;
 					player.setSimulatedRank(simulatedCount);
-				}
-				else
-				{	player.setUsed(false);
-					player.setSimulatedRank(0);				
+					qualified++;
 				}
 			}
-		}
-		return result;
-	}
-
-	/** 
-	 * Simulates player progression in a part 
-	 * from a leg which is not the first one.
-	 * 
-	 * @return
-	 * 		{@code false} if there's a problem with the parameter.
-	 */
-	public boolean simulatePlayerProgression()
-	{	// init
-		boolean result = true;
-		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
-		
-		simulatedCount = 0;
-		CupLeg previousLeg = leg.getPreviousLeg();
-		for(CupPlayer player: players)
-		{	int prevPartNbr = player.getPrevPart();
-			int prevRank = player.getPrevRank();
-			CupPlayer prevPlayer = previousLeg.getPart(prevPartNbr).getPlayerSimulatedRank(prevRank);
-			if(prevPlayer==null)
-			{	player.setUsed(false);
-				player.setSimulatedRank(0);				
-			}
+			// qualified player
 			else
-			{	player.setUsed(true);
-				simulatedCount++;
-				player.setSimulatedRank(simulatedCount);
+			{	CupLeg previousLeg = getTournament().getLeg(prevLegNbr);
+				int prevPartNbr = player.getPrevPart();
+				CupPart previousPart = previousLeg.getPart(prevPartNbr);
+				int prevRank = player.getPrevRank();
+				CupPlayer prevPlayer = previousPart.getPlayerSimulatedRank(prevRank);
+				// not qualified
+				if(prevPlayer==null)
+				{	player.setUsed(false);
+					player.setSimulatedRank(0);
+				}
+				// qualified
+				else
+				{	player.setUsed(true);
+					simulatedCount++;
+					player.setSimulatedRank(simulatedCount);
+					qualified++;
+				}
 			}
 		}
 		
-		if(!matchAllowed.contains(simulatedCount))
-			result = false;
+		// total number of players (entry+qualified) must be consistant with
+		// the specifications of both the match and the part
+		result = matchAllowed.contains(qualified) && qualified<=qualifiedAllowed;
 
 		return result;
 	}
-	
+
 	/**
 	 * Returns the player corresponding to the specified local rank
-	 * in the simulated cup (or {@code null} if no player has this 
+	 * in the last simulation (or {@code null} if no player has this 
 	 * rank in this part).
 	 * 
 	 * @param rank
@@ -580,12 +603,14 @@ public class CupPart implements Serializable
 	 */
 	public CupPlayer getPlayerSimulatedRank(int rank)
 	{	CupPlayer result = null;
+		
 		Iterator<CupPlayer> it = players.iterator();
 		while(result==null && it.hasNext())
 		{	CupPlayer player = it.next();
 			if(player.getSimulatedRank()==rank)
 				result = player;
 		}
+		
 		return result;
 	}
 	
