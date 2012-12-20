@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.ciplakerakyol;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v1.CiplakErakyol;
+import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v2.CiplakErakyol;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.guneysharef;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.guneysharef.v1.GuneySharef;
+import org.totalboumboum.ai.v201213.ais.guneysharef.v2.GuneySharef;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

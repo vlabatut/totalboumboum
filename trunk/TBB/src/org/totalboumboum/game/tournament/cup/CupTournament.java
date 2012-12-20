@@ -102,7 +102,7 @@ public class CupTournament extends AbstractTournament
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PLAYER ORDER		/////////////////////////////////////////////
+	// PLAYER INITIAL ORDER		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Way of sorting players before the tournament starts */
 	private CupPlayerSort sortPlayers;
@@ -199,11 +199,14 @@ public class CupTournament extends AbstractTournament
 	private void initPlayerDistribution()
 	{	// number of players
 		int playerCount = profiles.size();
+		
 		// get all possible distributions
 		HashMap<Integer,List<List<Integer>>> distris = processPlayerDistribution(playerCount);
+		
 		// retrieve the best ones
 		highestEmptyRank = Collections.max(distris.keySet());
 		List<List<Integer>> distri = distris.get(highestEmptyRank);
+		
 		// randomly pick one of them
 		int index = (int)(Math.random()*distri.size());
 		firstLegPlayersdistribution = distri.get(index);
@@ -234,7 +237,7 @@ public class CupTournament extends AbstractTournament
 	}
 	
 	/**
-	 * Processes the player distribution for the specified number
+	 * Processes the player distributions for the specified number
 	 * of players. In other words, in the case where there are less
 	 * players than the maximum allowed for this tournament, this 
 	 * method determines how the players should be distributed over
@@ -357,15 +360,16 @@ for(ArrayList<Integer> list: permutations)
 //		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
 //		HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>();
 
-		// check compatibility with matches
+		// check compatibility with all tournament matches
 		CupLeg firstLeg = legs.get(0);
 		int result = profiles.size();
 		// first, try simulating players progression
 		boolean res = firstLeg.simulatePlayerProgression(distribution);
 		if(res)
-		{	// if this works, then retrieve their final ranks
-// TODO			
+		{	// if this works, then process their final ranks
 			simulatePlayerFinalRank();
+			
+			// identify the highest non-assigned rank (used as a criterion)
 			List<CupPart> parts = getAllParts();
 			for(CupPart part: parts)
 			{	int m = part.getSimulatedFinalRankMax();
@@ -388,7 +392,7 @@ for(ArrayList<Integer> list: permutations)
 		
 		// reinit ranks
 		for(CupLeg leg: legs)
-			leg.reinitPlayersActualFinalRanks();
+			leg.resetPlayersActualFinalRanks();
 	
 		// update ranks
 		List<CupPart> remainingParts = getAllParts();
@@ -442,13 +446,18 @@ for(ArrayList<Integer> list: permutations)
 	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Simulates what the final ranks would be for the
+	 * players used during the last simulation. 
+	 */
 	public void simulatePlayerFinalRank()
 	{	List<CupPart> remainingParts = getAllParts();
+		
 		int totalPartCount = remainingParts.size();
 		int partRank = 1;
 		int playerRank = 1;
 		while(!remainingParts.isEmpty())
-		{	// init list of parts with this rank
+		{	// retrieve the list of parts with the rank partRank
 			List<CupPart> templist = new ArrayList<CupPart>();
 			Iterator<CupPart> it = remainingParts.iterator();
 			while(it.hasNext())
@@ -458,7 +467,8 @@ for(ArrayList<Integer> list: permutations)
 					it.remove();
 				}
 			}
-			// process players ranks
+			
+			// process their players ranks
 			int count;
 			int localRank = 1;
 			do
@@ -556,7 +566,7 @@ for(ArrayList<Integer> list: permutations)
 	}
 
 	/**
-	 * Returns the list of all parts
+	 * Returns a copy of the list of all parts
 	 * in this tournament.
 	 * 
 	 * @return
@@ -585,7 +595,7 @@ for(ArrayList<Integer> list: permutations)
 		Match currentMatch = getCurrentMatch();
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
-		
+//TODO		
 		currentLeg.matchOver();
 		if(currentLeg.isOver() && currentIndex==legs.size()-1)
 		{	setOver(true);

@@ -228,20 +228,83 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Ranks of the players at the end of the tournament */
 	private Ranks ranks;
 	
+	/**
+	 * Returns the final ranks.
+	 * 
+	 * @return
+	 * 		Final ranks at the end of the tournament.
+	 */
 	public Ranks getOrderedPlayers()
 	{	return ranks;
 	}
 	
+	/**
+	 * Process the final ranks of the players
+	 * involved in this part.
+	 * 
+	 * @param localRank
+	 * 		Local rank of the player.
+	 * @param finalRank
+	 * 		Final rank of the player (overall).
+	 * @return
+	 * 		The number of players ranked in this match.
+	 */
+	public int processPlayerFinalRank(int localRank, int finalRank)
+	{	int result = 0;
+		
+		List<Profile> prfls = ranks.getProfilesFromRank(localRank);
+		if(prfls!=null)
+		{	// process each player with the specified local rank
+			for(Profile profile: prfls)
+			{	CupPlayer player = getPlayerForProfile(profile);
+				// only if the player was not already ranked in a higher level match 
+				if(player.getActualFinalRank()==0)
+				{	CupPart nextPart = getNextPartForRank(localRank);
+					// and only if the player has no other match coming
+					if(nextPart==null)
+					{	result ++;
+						player.setActualFinalRank(finalRank);
+					}
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Resets the actual final ranks of each player.
+	 */
+	public void resetPlayersActualFinalRanks()
+	{	for(CupPlayer player: players)
+			player.resetActualFinalRank();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if this part is over */ 
 	private boolean partOver = false;
 
+	/**
+	 * Indicates if this part is over.
+	 * 
+	 * @return
+	 * 		{@code true} iff this part is over.
+	 */
 	public boolean isOver()
 	{	return partOver;
 	}
+	
+	/**
+	 * Changes the flag indicating if this part is over.
+	 *  
+	 * @param partOver
+	 * 		New value for the flag indicating if this part is over. 
+	 */
 	public void setOver(boolean partOver)
 	{	this.partOver = partOver;
 	}
@@ -249,16 +312,35 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// LEG				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Leg containing this part */
 	private CupLeg leg;
 	
+	/**
+	 * Returns the leg containing this part.
+	 * 
+	 * @return
+	 * 		Leg containing this part.
+	 */
 	public CupLeg getLeg()
 	{	return leg;
 	}
 	
+	/**
+	 * Changes the leg containing this part.
+	 * 
+	 * @param leg
+	 * 		New leg containing this part.
+	 */
 	public void setLeg(CupLeg leg)
 	{	this.leg = leg;
 	}
 	
+	/**
+	 * Returns the tournament containing this part.
+	 * 
+	 * @return
+	 * 		The tournament containing this part.
+	 */
 	public CupTournament getTournament()
 	{	return leg.getTournament();		
 	}
@@ -305,11 +387,25 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TIE BREAK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Tie breaker for this part */
 	private CupTieBreak tieBreak;
+	
+	/**
+	 * Changes the tie breaker.
+	 * 
+	 * @param tieBreak
+	 * 		New tie breaker.
+	 */
 	public void setTieBreak(CupTieBreak tieBreak)
 	{	this.tieBreak = tieBreak;
 	}	
 	
+	/**
+	 * Returns the tie breaker for this part.
+	 * 
+	 * @return
+	 * 		Tie breaker of this part.
+	 */
 	public CupTieBreak getTieBreak()
 	{	return tieBreak;
 	}
@@ -317,12 +413,25 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NUMBER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Number (position) of this part in the containing leg */ 
 	private int number;
 	
+	/**
+	 * Changes the number of this part in its leg.
+	 * 
+	 * @param number
+	 * 		New position of this part.
+	 */
 	public void setNumber(int number)
 	{	this.number = number;
 	}
 	
+	/**
+	 * Returns the number of this part in its leg.
+	 * 
+	 * @return
+	 * 		Position of this part.
+	 */
 	public int getNumber()
 	{	return number;
 	}
@@ -330,12 +439,25 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// RANK				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Final rank of this part in the whole tournament */
 	private int rank = -1;
 
+	/**
+	 * Changes the rank of this part in the tournament.
+	 * 
+	 * @param rank
+	 * 		New rank.
+	 */
 	public void setRank(int rank)
 	{	this.rank = rank;
 	}
 
+	/**
+	 * Returns the rank of this part in the whole tournament.
+	 * 
+	 * @return
+	 * 		Final rank of the part in the tournament.
+	 */
 	public int getRank()
 	{	return rank;
 	}
@@ -343,12 +465,25 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name of this part */
 	private String name;
 	
+	/**
+	 * Changes the name of this part.
+	 * 
+	 * @param name
+	 * 		New name of this part.
+	 */
 	public void setName(String name)
 	{	this.name = name;
 	}
 	
+	/**
+	 * Returns the name of this part.
+	 * 
+	 * @return
+	 * 		The name of this part.
+	 */
 	public String getName()
 	{	return name;
 	}
@@ -356,20 +491,48 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Players involved in this part */
 	private final List<CupPlayer> players = new ArrayList<CupPlayer>();
 	
+	/**
+	 * Returns the players involved in this part.
+	 *  
+	 * @return
+	 * 		Players involved in this part.
+	 */
 	public List<CupPlayer> getPlayers()
 	{	return players;
 	}
 	
+	/**
+	 * Returns the player whose position is specified.
+	 * 
+	 * @param index
+	 * 		Position of the required player.
+	 * @return
+	 * 		The corresponding player.
+	 */
 	public CupPlayer getPlayer(int index)
 	{	return players.get(index);
 	}
 	
+	/**
+	 * Adds a new player to this part.
+	 * 
+	 * @param player
+	 * 		New player.
+	 */
 	public void addPlayer(CupPlayer player)
 	{	players.add(player);
 	}
 	
+	/**
+	 * Returns the list of players used during
+	 * the last simulation.
+	 * 
+	 * @return
+	 * 		List of used players.
+	 */
 	public List<CupPlayer> getUsedPlayers()
 	{	List<CupPlayer> result = new ArrayList<CupPlayer>();
 		for(CupPlayer player: players)
@@ -382,7 +545,15 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
+	/**
+	 * Returns the cup player object corresponding
+	 * to the specified profile.
+	 * 
+	 * @param profile
+	 * 		Profile of interest.
+	 * @return
+	 * 		The corresponding {@link CupPlayer} object.
+	 */
 	public CupPlayer getPlayerForProfile(Profile profile)
 	{	CupPlayer result = null;
 		int i = 0;
@@ -397,7 +568,13 @@ public class CupPart implements Serializable
 	}
 	
 	/**
-	 * get the profile for the player whose index is indicated in parameter
+	 * Returns the profile of the player whose position
+	 * is spicified as a parameter.
+	 * 
+	 * @param index
+	 * 		Position of the player in this part.
+	 * @return
+	 * 		Corresponding profile.
 	 */
 	public Profile getProfileForIndex(int index)
 	{	Profile result = null;
@@ -533,7 +710,6 @@ public class CupPart implements Serializable
 	{	// init
 		boolean result = true;
 		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
-		int qualifiedAllowed = players.size();
 		simulatedCount = 0;
 		int qualified = 0; // total number of players (entry+qualified)
 		
@@ -547,6 +723,7 @@ public class CupPart implements Serializable
 		// check each player depending on its previous leg (or absence of)
 		for(CupPlayer player: players)
 		{	int prevLegNbr = player.getPrevLeg();
+			
 			// entry player
 			if(prevLegNbr==-1)
 			{	// rejected (no slot left)
@@ -584,9 +761,8 @@ public class CupPart implements Serializable
 			}
 		}
 		
-		// total number of players (entry+qualified) must be consistant with
-		// the specifications of both the match and the part
-		result = matchAllowed.contains(qualified) && qualified<=qualifiedAllowed;
+		// total number of players (entry+qualified) must be consistant with the match specifications
+		result = matchAllowed.contains(qualified);
 
 		return result;
 	}
@@ -616,14 +792,15 @@ public class CupPart implements Serializable
 	
 	/**
 	 * Changes the simulated final rank (i.e. for the 
-	 * whole cup) for the specified player.
+	 * whole cup) for the specified player. This is
+	 * possible only if a rank is associated to this part.
 	 * 
 	 * @param localRank
 	 * 		Rank of the concerned player in this part. 
 	 * @param finalRank
-	 * 		New final rank of this player.
+	 * 		Final rank of this player.
 	 * @return
-	 * 		{@code false} if there's a problem with the local rank.
+	 * 		{@code false} iff the local rank is not assigned.
 	 */
 	public boolean simulatePlayerFinalRank(int localRank, int finalRank)
 	{	boolean result = false;
@@ -638,8 +815,9 @@ public class CupPart implements Serializable
 	}
 	
 	/**
-	 * Returns the final rank of the last used player,
-	 * or {@link Integer#MAX_VALUE} if all players are used.
+	 * Returns the lowest final rank for the players used 
+	 * in this part during the simulation, or {@link Integer#MAX_VALUE} 
+	 * if all players were used.
 	 *   
 	 * @return
 	 * 		Final rank of the last used player.
@@ -660,34 +838,6 @@ public class CupPart implements Serializable
 			result = Integer.MAX_VALUE;
 		
 		return result;
-	}
-
-	public int processPlayerFinalRank(int localRank, int finalRank)
-	{	int result = 0;
-		
-		List<Profile> prfls = ranks.getProfilesFromRank(localRank);
-		if(prfls!=null)
-		{	// process each player with the specified local rank
-			for(Profile profile: prfls)
-			{	CupPlayer player = getPlayerForProfile(profile);
-				// only if the player was not already ranked in a higher level match 
-				if(player.getActualFinalRank()==0)
-				{	CupPart nextPart = getNextPartForRank(localRank);
-					// and only if the player has no other match coming
-					if(nextPart==null)
-					{	result ++;
-						player.setActualFinalRank(finalRank);
-					}
-				}
-			}
-		}
-		
-		return result;
-	}
-
-	public void reinitPlayersActualFinalRanks()
-	{	for(CupPlayer player: players)
-			player.reinitActualFinalRank();
 	}
 
 	/////////////////////////////////////////////////////////////////
