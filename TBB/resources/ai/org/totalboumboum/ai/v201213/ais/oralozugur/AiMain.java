@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.oralozugur;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.oralozugur.v1.OralOzugur;
+import org.totalboumboum.ai.v201213.ais.oralozugur.v2.OralOzugur;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.
