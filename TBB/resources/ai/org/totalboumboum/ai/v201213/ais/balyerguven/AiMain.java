@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.balyerguven;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.balyerguven.v1.BalyerGuven;
+import org.totalboumboum.ai.v201213.ais.balyerguven.v2.BalyerGuven;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

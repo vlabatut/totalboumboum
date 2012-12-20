@@ -95,9 +95,9 @@ public class CupPlayer implements Serializable
 	}
 	
 	/**
-	 * Reset the actual final rank for this player.
+	 * Reset the actual final rank of this player.
 	 */
-	public void reinitActualFinalRank()
+	public void resetActualFinalRank()
 	{	actualFinalRank = 0;
 	}
 

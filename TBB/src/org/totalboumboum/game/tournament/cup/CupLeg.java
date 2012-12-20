@@ -56,6 +56,9 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Initializes this leg before starting it.
+	 */
 	public void init()
 	{	// are parts in random order ?
 		if(randomizeParts)
@@ -66,6 +69,10 @@ public class CupLeg implements Serializable
 		currentPart.init();
 	}
 	
+	/**
+	 * Triggers progress in this leg,
+	 * i.e. goes to the next part. 
+	 */
 	public void progress()
 	{	if(currentPart.isOver())
 		{	currentIndex++;
@@ -76,6 +83,9 @@ public class CupLeg implements Serializable
 			currentPart.progress();
 	}
 	
+	/**
+	 * Cleanly finishes this object.
+	 */
 	public void finish()
 	{	// misc
 		tournament = null;
@@ -83,6 +93,11 @@ public class CupLeg implements Serializable
 		parts.clear();
 	}
 	
+	/**
+	 * Signals to the current part
+	 * that its match has just finished,
+	 * in order to trigger an update.
+	 */
 	public void matchOver()
 	{	currentPart.matchOver();
 		if(currentPart.isOver() && currentIndex==parts.size()-1)
@@ -264,10 +279,10 @@ public class CupLeg implements Serializable
 
 	/**
 	 * Returns the part corresponding to the
-	 * specified position.
+	 * specified final rank.
 	 * 
 	 * @param rank
-	 * 		Position of the part of interest.
+	 * 		Final rank of the part of interest.
 	 * @return
 	 * 		The corresponding part.
 	 */
@@ -383,9 +398,16 @@ public class CupLeg implements Serializable
 		return result;
 	}
 	
-	public void reinitPlayersActualFinalRanks()
+	/////////////////////////////////////////////////////////////////
+	// FINAL RANKS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Resets the actual final ranks of the players,
+	 * in each part of this leg.
+	 */
+	public void resetPlayersActualFinalRanks()
 	{	for(CupPart part: parts)
-			part.reinitPlayersActualFinalRanks();
+			part.resetPlayersActualFinalRanks();
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -92,7 +92,10 @@ public final class AiLocation implements Comparable<AiLocation>
 	 * 		Le sprite dont on veut la position.
 	 */
 	public AiLocation(AiSprite sprite)
-	{	this.tile = sprite.getTile();
+	{	
+		if(sprite==null)
+			System.out.println();
+		this.tile = sprite.getTile();
 		this.posX = sprite.getPosX();
 		this.posY = sprite.getPosY();
 	}

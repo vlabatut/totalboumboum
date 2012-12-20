@@ -519,7 +519,7 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Liste interne des personnages contenus dans cette zone */
+	/** Liste interne des personnages contenus dans cette zone (y compris ceux éliminés) */
 	private final HashMap<Hero,AiDataHero> heroMap = new HashMap<Hero,AiDataHero>();
 	/** Liste externe de tous les personnages contenus dans cette zone */
 	private final List<AiHero> heroList = new ArrayList<AiHero>();
