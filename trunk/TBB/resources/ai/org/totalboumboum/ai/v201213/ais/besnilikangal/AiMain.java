@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.besnilikangal;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.besnilikangal.v1.BesniliKangal;
+import org.totalboumboum.ai.v201213.ais.besnilikangal.v2.BesniliKangal;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.
