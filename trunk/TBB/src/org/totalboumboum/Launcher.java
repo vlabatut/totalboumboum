@@ -1641,3 +1641,11 @@ public class Launcher
  * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
  * 		(avec bordure de sol différente (?)
  */
+
+
+/** TODO
+ * - voir comment la gui traitait le fait que tous les entry étaient au premier leg
+ * - compléter le tournoi supercoupe
+ * - tester nouvelles classes
+ * - tester anciennnes formules
+ */
