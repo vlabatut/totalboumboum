@@ -75,18 +75,13 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	 * 		Le temps à l'instant de l'affichage.
 	 */
 	protected final long print(String msg)
-	{	long time = ai.getZone().getTotalTime();
+	{	long time;
+		
 		if(verbose)
-		{	StringBuffer message = new StringBuffer();
-			message.append("[");
-			message.append(time);
-			message.append(":");
-			message.append(ai.colorStr);
-			message.append("]");
-			message.append(" ");
-			message.append(msg);
-			System.out.println(message);
-		}
+			time = ai.print(msg);
+		else
+			time = ai.getCurrentTime();
+		
 		return time;
 	}
 }

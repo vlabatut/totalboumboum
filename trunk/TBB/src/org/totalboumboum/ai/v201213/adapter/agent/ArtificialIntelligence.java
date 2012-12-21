@@ -33,6 +33,7 @@ import org.totalboumboum.ai.v201213.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.game.round.RoundVariables;
 
 /**
  * Chaque agent doit hériter de cette classe. La méthode {@link #processAction} est la méthode 
@@ -514,6 +515,20 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	protected final HashMap<String,Long> stepDurations = new HashMap<String,Long>();
 	
 	/**
+	 * Renvoie le temps écoulé depuis le début
+	 * de la partie (en ne comptant que le temps
+	 * de jeu, pas le temps réel).
+	 * 
+	 * @return
+	 * 		Temps écoulé, exprimé en ms.
+	 */
+	public final long getCurrentTime()
+	{	long result = RoundVariables.loop.getTotalGameTime();
+		return result;
+	}
+	
+	
+	/**
 	 * Réinitialise tous les temps réels
 	 * avant de démarrer le traitement.
 	 * <br/>
@@ -596,19 +611,6 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			System.out.println(message);
 		}
 		return time;
-	}
-	
-	/**
-	 * Renvoie le temps écoulé depuis le début
-	 * de la partie (en ne comptant que le temps
-	 * de jeu, pas le temps réel).
-	 * 
-	 * @return
-	 * 		Temps écoulé, exprimé en ms.
-	 */
-	public final long getCurrentTime()
-	{	long result = zone.getTotalTime();
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
