@@ -358,10 +358,12 @@ public abstract class AiAbstractSearchAlgorithm
 	 */
 	protected final long print(String msg)
 	{	long result;
+		
 		if(verbose)
 			result = ai.print(msg);
 		else
-			result = ai.getZone().getTotalTime();
+			result = ai.getCurrentTime();
+		
 		return result;
 	}
 
