@@ -331,19 +331,27 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	/** total game time elapsed since the players took control */
 	protected long totalGameTime = 0;
-	/** total game time elapsed at the previous iteration */
-//	protected long prevTotalGameTime = 0;
 	/** total real time elapsed since the level started appearing */
 	protected long totalEngineTime = 0;
 	
+	/**
+	 * Initializes the time-related variales
+	 */
 	protected void initTimes()
 	{	gameStartTime = System.currentTimeMillis();
 		prevStatsTime = gameStartTime;
-//		prevTotalGameTime = 0;
 		totalGameTime = 0;
 		totalEngineTime = 0;
 	}
 	
+	/** 
+	 * Returns the total game time elapsed 
+	 * since the players took control. It ignores
+	 * the time spent in pause.
+	 * 
+	 * @return
+	 * 		Time spent since the player took control, excluding pauses.
+	 */
 	public long getTotalGameTime()
 	{	return totalGameTime;	
 	}
@@ -352,10 +360,25 @@ public abstract class VisibleLoop extends Loop
 //	{	return prevTotalGameTime;	
 //	}
 	
+	/** 
+	 * Returns the total time elapsed 
+	 * since the level started appearing.
+	 * It includes the time spent in pause.
+	 * 
+	 * @return
+	 * 		Total time spent since the round started.
+	 */
 	public long getTotalEngineTime()
 	{	return totalEngineTime;	
 	}
 
+	/** 
+	 * Returns the total real time elapsed 
+	 * since the round started.
+	 * 
+	 * @return
+	 * 		Total real time spent since the round started.
+	 */
 	public long getTotalRealTime()
 	{	long result = System.currentTimeMillis() - gameStartTime;
 		return result;	
