@@ -523,7 +523,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 		Temps écoulé, exprimé en ms.
 	 */
 	public final long getCurrentTime()
-	{	long result = RoundVariables.loop.getTotalGameTime();
+	{	long result = RoundVariables.loop.getTotalEngineTime();
 		return result;
 	}
 	
