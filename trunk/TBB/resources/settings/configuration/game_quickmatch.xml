@@ -31,10 +31,10 @@
 			<value rank="4" points="1" />
 			<value rank="5" points="0" />
 		</points>
-		<suddenDeath disabled="false" />
+		<suddenDeath disabled="true" />
 	</settings>
 	<players>
-		<player file="0ff9f846-9767-42c7-b662-05dd6e851c6d" color="GRASS" controls="2" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="2" spritePack="superbomberman3" spriteFolder="shirobon" />
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
