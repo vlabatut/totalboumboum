@@ -62,18 +62,17 @@ import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'agent a accès.</br>
- * 
+ * Représente la zone de jeu et tous ces constituants : cases et sprites.
+ * Il s'agit de la classe principale des percepts auxquels l'agent a accès.
+ * </br>
  * A chaque fois que l'agent est sollicité par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'agent ne reçoit
- * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
- * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
- * les autres objets. Si l'agent a besoin d'une trace des états précédents du jeu, son
- * concepteur doit se charger de l'implémenter lui-même.
+ * pas une nouvelle {@code AiZone} : l'{@code AiZone} existante est modifiée en fonction de 
+ * l'évolution du jeu. De la même façon, les cases ({@code AiTile}) restent les mêmes, ainsi 
+ * que les sprites et les autres objets. Si l'agent a besoin d'une trace des états précédents 
+ * du jeu, son concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiDataZone extends AiZone
 {	
