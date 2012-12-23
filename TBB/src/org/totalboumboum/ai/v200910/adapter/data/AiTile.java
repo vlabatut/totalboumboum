@@ -387,7 +387,8 @@ public class AiTile
 	 * cela dépend à la fois du type des sprites considérés (Hero,
 	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
 	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
-	 * un obstacle, notamment pour les sprite de tyep Hero.</br>
+	 * un obstacle, notamment pour les sprite de tyep Hero.
+	 * <br/>
 	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
 	 *  @param sprite	le sprite qui veut traverser cette case
@@ -464,7 +465,8 @@ public class AiTile
 	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
 	 * passée en paramètre. Attention, seulement les directions primaires sont
 	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
-	 * Dans le cas contraire, la fonction renvoie null.</br>
+	 * Dans le cas contraire, la fonction renvoie null.
+	 * <br/>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
@@ -480,8 +482,8 @@ public class AiTile
 	
 	/**
 	 * renvoie la liste des voisins de cette case.
-	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
-	 * 
+	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.
+	 * <br/>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située

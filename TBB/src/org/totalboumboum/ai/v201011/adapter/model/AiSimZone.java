@@ -42,8 +42,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * simule la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale pour la simulation de l'évolution du jeu.</br>
- * 
+ * Il s'agit de la classe principale pour la simulation de l'évolution du jeu.
+ * <br/>
  * L'ensemble des objets représente un état du jeu et ne peut 
  * être modifié que via la classe AiModel.
  * 

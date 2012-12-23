@@ -58,8 +58,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
- * 
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
+ * <br/>
  * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution

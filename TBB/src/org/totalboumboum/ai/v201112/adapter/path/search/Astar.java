@@ -52,7 +52,7 @@ import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini. La notion de 'noeud déjà exploré' est spécifiée par la fonction successeur
  * utilisée.
- * </br>
+ * <br/>
  * Cette implémentation trouve donc le chemin le plus court entre deux cases,
  * en considérant les obstacles. Elle a besoin de quatre paramètres :
  * <ul>	
