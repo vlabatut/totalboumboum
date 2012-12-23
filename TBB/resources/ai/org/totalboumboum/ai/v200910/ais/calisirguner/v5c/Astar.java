@@ -49,8 +49,6 @@ public final class Astar {
 		int gcost;
 		/** */
 		int hcost;
-		/** */
-		ArtificialIntelligence ai;
 		
 		/** on cree les noeuds
 		 * 
@@ -61,7 +59,6 @@ public final class Astar {
 		 */
 		public Node(int x, int y, ArtificialIntelligence ai) throws StopRequestException {
 			ai.checkInterruption();
-			this.ai = ai;
 			assert x >= 0 && x < map.width : "x = " + x;
 			assert y >= 0 && y < map.height : "y = " + y;
 
