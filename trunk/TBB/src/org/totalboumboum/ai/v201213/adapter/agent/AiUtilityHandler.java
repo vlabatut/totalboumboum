@@ -30,6 +30,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -191,9 +192,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// UTILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map contenant les valeurs d'utilité (les cases absentes sont inutiles) */
-	protected final HashMap<AiTile,Float> utilitiesByTile = new HashMap<AiTile,Float>();
+	private final Map<AiTile,Float> utilitiesByTile = new HashMap<AiTile,Float>();
 	/** Map contenant les cases rangées par valeur d'utilité */
-	protected final HashMap<Float,List<AiTile>> utilitiesByValue = new HashMap<Float,List<AiTile>>();
+	private final Map<Float,List<AiTile>> utilitiesByValue = new HashMap<Float,List<AiTile>>();
 
 	/**
 	 * Renvoie les utilités courantes, rangées par case.
@@ -202,7 +203,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @return
 	 * 		Une map contenant les utilités rangées par case.
 	 */
-	public final HashMap<AiTile, Float> getUtilitiesByTile()
+	public final Map<AiTile, Float> getUtilitiesByTile()
 	{	return utilitiesByTile;
 	}
 
@@ -213,7 +214,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @return
 	 * 		Une map contenant les utilités rangées par valeur.
 	 */
-	public final HashMap<Float, List<AiTile>> getUtilitiesByValue()
+	public final Map<Float, List<AiTile>> getUtilitiesByValue()
 	{	return utilitiesByValue;
 	}
 
@@ -311,8 +312,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/////////////////////////////////////////////////////////////////
 	// CRITERIA	/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map de tous les critères créés */
-	protected final HashMap<String,AiUtilityCriterion<?,?>> criterionMap = new HashMap<String,AiUtilityCriterion<?,?>>();
+	/** Map de tous les critères créés, à ne surtout pas modifier manuellement */
+	protected final Map<String,AiUtilityCriterion<?,?>> criterionMap = new HashMap<String,AiUtilityCriterion<?,?>>();
+	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
 
 	/**
 	 * Vérifie si un critère portant le nom passé
@@ -363,9 +365,10 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/////////////////////////////////////////////////////////////////
 	// CASES	/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant tous les cas, à initialiser dans {@link #initCriteria()} */
-	protected final HashMap<String,AiUtilityCase> caseMap = new HashMap<String,AiUtilityCase>();
-
+	/** Map contenant tous les cas, à initialiser dans {@link #initCases} */
+	protected final Map<String,AiUtilityCase> caseMap = new HashMap<String,AiUtilityCase>();
+	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
+	
 	/**
 	 * Vérifie si un cas portant le nom passé
 	 * en paramètre existe déjà.
@@ -438,9 +441,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// REFERENCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map contenant l'utilité de chaque combinaison, à initialiser dans {@link #initReferenceUtilities} */
-	protected final HashMap<AiMode, HashMap<AiUtilityCombination,Integer>> referenceUtilities = new HashMap<AiMode, HashMap<AiUtilityCombination,Integer>>();
+	private final Map<AiMode, Map<AiUtilityCombination,Integer>> referenceUtilities = new HashMap<AiMode, Map<AiUtilityCombination,Integer>>();
 	/** Indique l'utilité maximale pour chaque mode (map automatiquement initialisée) */
-	protected final HashMap<AiMode,Integer> maxReferenceUtilities = new HashMap<AiMode,Integer>();
+	private final Map<AiMode,Integer> maxReferenceUtilities = new HashMap<AiMode,Integer>();
 	
 	/**
 	 * Crée une map vide pour chaque mode. Ces
@@ -487,7 +490,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	private final void initMaxUtilities()
 	{	for(AiMode mode: AiMode.values())
-		{	HashMap<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
+		{	Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
 			Collection<Integer> utilities = map.values();
 			int max = Collections.max(utilities);
 			maxReferenceUtilities.put(mode, max);
@@ -522,7 +525,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Si la combinaison passée en paramètre est introuvable dans {@link #referenceUtilities}.
 	 */
 	protected final int retrieveUtilityValue(AiMode mode, AiUtilityCombination combination)
-	{	HashMap<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
+	{	Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
 		Integer result = map.get(combination);
 		if(result==null)
 			throw new IllegalArgumentException("No utility value was associated to the specified combination ("+combination+").");
@@ -548,7 +551,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		pour le mode passé en paramètre.
 	 */
 	protected final void defineUtilityValue(AiMode mode, AiUtilityCombination combination, int utility)
-	{	HashMap<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
+	{	Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
 		map.put(combination,utility);
 	}
 	
@@ -556,7 +559,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Cache stockant temporairement les résultats du calcul des critères. Il est réinitialisé à chaque itération */
-	protected final HashMap<String,HashMap<AiTile,Object>> criterionCache = new HashMap<String, HashMap<AiTile,Object>>();
+	private final Map<String,Map<AiTile,Object>> criterionCache = new HashMap<String, Map<AiTile,Object>>();
 	
 	/**
 	 * Méthode permettant de rechercher si un critère a déjà été calculé lors
@@ -577,7 +580,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	final Object getValueForCriterion(String name, AiTile tile)
 	{	Object result = null;
-		HashMap<AiTile,Object> map = criterionCache.get(name);
+		Map<AiTile,Object> map = criterionCache.get(name);
 		if(map!=null)
 			result = map.get(tile);
 		return result;
@@ -599,7 +602,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 		Valeur du critère.
 	 */
 	final void putValueForCriterion(String name, AiTile tile, Object value)
-	{	HashMap<AiTile,Object> map = criterionCache.get(name);
+	{	Map<AiTile,Object> map = criterionCache.get(name);
 		if(map==null)
 		{	map = new HashMap<AiTile, Object>();
 			criterionCache.put(name, map);
@@ -694,7 +697,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		
 		for(AiMode mode: AiMode.values())
 		{	print("      > Mode: ----- " + mode + " -------------------------------");
-			final HashMap<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
+			final Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
 			List<AiUtilityCombination> combis = new ArrayList<AiUtilityCombination>(map.keySet());
 			Collections.sort(combis,new Comparator<AiUtilityCombination>()
 			{	@Override

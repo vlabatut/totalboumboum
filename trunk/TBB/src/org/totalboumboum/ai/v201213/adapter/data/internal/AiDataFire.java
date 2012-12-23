@@ -31,22 +31,21 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
+ * Représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- *
  */
 final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 {
 	/**
-	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * Crée une représentation du feu passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite.
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		Sprite à représenter.
 	 */
 	protected AiDataFire(AiDataTile tile, Fire sprite)
 	{	super(tile,sprite);
@@ -66,11 +65,11 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le feu peut traverser les murs */
+	/** Indique si le feu peut traverser les murs */
 	private boolean throughBlocks;
-	/** indique si le feu peut traverser les bombes */
+	/** Indique si le feu peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le feu peut traverser les items */
+	/** Indique si le feu peut traverser les items */
 	private boolean throughItems;
 	
 	@Override
@@ -89,8 +88,8 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	}
 
 	/**
-	 * met à jour les diverse propriétés de ce feu
-	 * liée à la gestion des collisions
+	 * Met à jour les diverse propriétés de ce feu
+	 * liée à la gestion des collisions.
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();
@@ -129,7 +128,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis que le feu existe, exprimé en ms */
+	/** Temps écoulé depuis que le feu existe, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -138,7 +137,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	}
 
 	/**
-	 * met à jour le temps écoulé depuis que le feu existe
+	 * Met à jour le temps écoulé depuis que le feu existe.
 	 */
 	private void updateTime()
 	{	long elapsedTime = getTile().getZone().getElapsedTime();

@@ -63,11 +63,11 @@ public class TileCostCalculator extends CostCalculator
 {
 	/**
 	 * Construit une fonction de côut
-	 * utilisant l'IA passée en paramètre
+	 * utilisant l'agent passé en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 */
 	public TileCostCalculator(ArtificialIntelligence ai)
 	{	super(ai);
@@ -115,9 +115,9 @@ public class TileCostCalculator extends CostCalculator
 	 * en cases.
 	 * 
 	 * @param path
-	 * 		chemin à traiter
+	 * 		Chemin à traiter.
 	 * @return
-	 * 		le coût de ce chemin
+	 * 		Le coût de ce chemin.
 	 */
 /*	@Override
 	public double processCost(AiPath path) throws StopRequestException

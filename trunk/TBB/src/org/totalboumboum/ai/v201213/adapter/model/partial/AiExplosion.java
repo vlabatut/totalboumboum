@@ -72,7 +72,7 @@ public class AiExplosion implements Comparable<AiExplosion>
 	/////////////////////////////////////////////////////////////////
 	/** Moment de démarrage (en ms) de l'explosion */
 	private long start;
-
+	
 	/**
 	 * Renvoie le moment de démarrage
 	 * (en ms) de l'explosion.

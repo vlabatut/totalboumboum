@@ -33,36 +33,35 @@ import org.totalboumboum.ai.v201213.adapter.data.AiStopType;
  * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimBlock extends AiSimSprite implements AiBlock
-{
+{	
 	/**
-	 * crée une simulation du bloc passé en paramètre,
+	 * Crée une simulation du bloc passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification du bloc
+	 * 		Numéro d'identification du bloc.
 	 * @param tile
-	 * 		case contenant le bloc
+	 * 		Case contenant le bloc.
 	 * @param posX
-	 * 		abscisse du bloc
+	 * 		Abscisse du bloc.
 	 * @param posY
-	 * 		ordonnée du bloc
+	 * 		Ordonnée du bloc.
 	 * @param posZ
-	 * 		hauteur du bloc
+	 * 		Hauteur du bloc.
 	 * @param state
-	 * 		état du bloc
+	 * 		État du bloc.
 	 * @param burningDuration
-	 * 		durée de combustion du bloc
+	 * 		Durée de combustion du bloc.
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement du bloc (a priori il est immobile)
+	 * 		Vitesse courante de déplacement du bloc (a priori il est immobile).
 	 * @param destructible
-	 * 		sensibilité au feu
+	 * 		Sensibilité au feu.
 	 * @param stopHeroes
-	 * 		capacité à bloquer les personnages
+	 * 		Capacité à bloquer les personnages.
 	 * @param stopFires
-	 * 		capacité à bloquer le feu
+	 * 		Capacité à bloquer le feu.
 	 */
 	protected AiSimBlock(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -75,13 +74,13 @@ public final class AiSimBlock extends AiSimSprite implements AiBlock
 	}	
 
 	/**
-	 * crée une simulation du bloc passé en paramètre, et contenue dans 
+	 * Crée une simulation du bloc passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite.
 	 * @param block
-	 * 		sprite à simuler
+	 * 		Sprite à simuler.
 	 */
 	protected AiSimBlock(AiSimTile tile, AiBlock block)
 	{	super(tile,block);
@@ -101,7 +100,7 @@ if(state.getName()==null || state.getName()==AiStateName.FLYING)
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut être détruit par une bombe */
+	/** Indique si ce bloc peut être détruit par une bombe */
 	private boolean destructible;
 
 	@Override
@@ -110,10 +109,10 @@ if(state.getName()==null || state.getName()==AiStateName.FLYING)
 	}
 	
 	/**
-	 * modifie la destructibilité de ce mur
+	 * Modifie la destructibilité de ce mur.
 	 * 
 	 * @param destructible
-	 * 		nouvelle valeur de l'indicateur de destructibilité du mur
+	 * 		Nouvelle valeur de l'indicateur de destructibilité du mur.
 	 */
 	public void setDestructible(boolean destructible)
 	{	this.destructible = destructible;
@@ -122,9 +121,9 @@ if(state.getName()==null || state.getName()==AiStateName.FLYING)
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc laisse passer les joueurs */
+	/** Indique si ce bloc laisse passer les joueurs */
 	private AiStopType stopHeroes;
-	/** indique si ce bloc laisse passer le feu */
+	/** Indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
 	
 	@Override

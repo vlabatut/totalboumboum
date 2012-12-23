@@ -22,8 +22,11 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
@@ -37,26 +40,26 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
- * simule une case du jeu, avec tous les sprites qu'elle contient.
+ * Simule une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimTile extends AiTile
 {	
 	/**
-	 * construit une simulation de case à partir des coordonnées passées en paramètres
+	 * Construit une simulation de case à partir 
+	 * des coordonnées passées en paramètres.
 	 * 
 	 * @param zone
-	 * 		zone contenant la simulation
+	 * 		Zone contenant la simulation.
 	 * @param row
-	 * 		ligne de la case
+	 * 		Ligne de la case.
 	 * @param col
-	 * 		colonne de la case
+	 * 		Colonne de la case.
 	 * @param posX
-	 * 		abscisse de la case
+	 * 		Abscisse de la case.
 	 * @param posY
-	 * 		ordonnée de la case
+	 * 		Ordonnée de la case.
 	 */
 	protected AiSimTile(AiSimZone zone, int row, int col, double posX, double posY)
 	{	this.zone = zone;
@@ -73,7 +76,7 @@ public final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** simulation de la zone à laquelle cette case appartient */
+	/** Simulation de la zone à laquelle cette case appartient */
 	private AiSimZone zone;
 	
 	@Override
@@ -94,33 +97,33 @@ public final class AiSimTile extends AiTile
 	protected void addSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
-			internalBlocks.add(block);
-			externalBlocks.add(block);
+			blocks.add(block);
+			neutralBlocks.add(block);
 		}
 		else if(sprite instanceof AiSimBomb)
 		{	AiSimBomb bomb = (AiSimBomb)sprite;
-			internalBombs.add(bomb);
-			externalBombs.add(bomb);
+			bombs.add(bomb);
+			neutralBombs.add(bomb);
 		}
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire)sprite;
-			internalFires.add(fire);
-			externalFires.add(fire);
+			fires.add(fire);
+			neutralFires.add(fire);
 		}
 		else if(sprite instanceof AiSimFloor)
 		{	AiSimFloor floor = (AiSimFloor)sprite;
-			internalFloors.add(floor);
-			externalFloors.add(floor);
+			floors.add(floor);
+			neutralFloors.add(floor);
 		}
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
-			internalHeroes.add(hero);
-			externalHeroes.add(hero);
+			heroes.add(hero);
+			neutralHeroes.add(hero);
 		}
 		else if(sprite instanceof AiSimItem)
 		{	AiSimItem item = (AiSimItem)sprite;
-			internalItems.add(item);
-			externalItems.add(item);
+			items.add(item);
+			neutralItems.add(item);
 		}
 	}
 	
@@ -134,178 +137,190 @@ public final class AiSimTile extends AiTile
 	protected void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
-			internalBlocks.remove(block);
-			externalBlocks.remove(block);
+			blocks.remove(block);
+			neutralBlocks.remove(block);
 		}
 		else if(sprite instanceof AiSimBomb)
 		{	AiSimBomb bomb = (AiSimBomb)sprite;
-			internalBombs.remove(bomb);
-			externalBombs.remove(bomb);
+			bombs.remove(bomb);
+			neutralBombs.remove(bomb);
 		}
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire)sprite;
-			internalFires.remove(fire);
-			externalFires.remove(fire);
+			fires.remove(fire);
+			neutralFires.remove(fire);
 		}
 		else if(sprite instanceof AiSimFloor)
 		{	AiSimFloor floor = (AiSimFloor)sprite;
-			internalFloors.remove(floor);
-			externalFloors.remove(floor);
+			floors.remove(floor);
+			neutralFloors.remove(floor);
 		}
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
-			internalHeroes.remove(hero);
-			externalHeroes.remove(hero);
+			heroes.remove(hero);
+			neutralHeroes.remove(hero);
 		}
 		else if(sprite instanceof AiSimItem)
 		{	AiSimItem item = (AiSimItem)sprite;
-			internalItems.remove(item);
-			externalItems.remove(item);
+			items.remove(item);
+			neutralItems.remove(item);
 		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des blocks éventuellement contenus dans cette case */
-	private final List<AiSimBlock> internalBlocks = new ArrayList<AiSimBlock>();
-	/** liste à usage externe des blocks éventuellement contenus dans cette case */
-	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
+	/** Liste à usage interne des blocs éventuellement contenus dans cette case */
+	private final List<AiSimBlock> blocks = new ArrayList<AiSimBlock>();
+	/** Liste à usage externe des blocs éventuellement contenus dans cette case */
+	private final List<AiBlock> neutralBlocks = new ArrayList<AiBlock>();
+	/** Version immuable de la liste neutre des blocs */
+	private final List<AiBlock> externalNeutralBlocks = Collections.unmodifiableList(neutralBlocks);
 	
 	@Override
 	public List<AiBlock> getBlocks()
-	{	return externalBlocks;	
+	{	return externalNeutralBlocks;	
 	}
 	
 	/** 
-	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des blocks contenus dans cette case 
+	 * (la liste peut être vide).
 	 * 
 	 * @return	
-	 * 		les blocks éventuellement contenus dans cette case
+	 * 		Les blocks éventuellement contenus dans cette case.
 	 */
 	protected List<AiSimBlock> getInternalBlocks()
-	{	return internalBlocks;	
+	{	return blocks;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des bombes éventuellement contenues dans cette case */
-	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
-	/** liste à usage externe des bombes éventuellement contenues dans cette case */
-	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
+	/** Liste à usage interne des bombes éventuellement contenues dans cette case */
+	private final List<AiSimBomb> bombs = new ArrayList<AiSimBomb>();
+	/** Liste à usage externe des bombes éventuellement contenues dans cette case */
+	private final List<AiBomb> neutralBombs = new ArrayList<AiBomb>();
+	/** Version immuable del la liste neutre de bombes */
+	private final List<AiBomb> externalNeutralBombs = Collections.unmodifiableList(neutralBombs);
 	
 	@Override
 	public List<AiBomb> getBombs()
-	{	return externalBombs;	
+	{	return externalNeutralBombs;	
 	}
 	
 	/** 
-	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des bombes contenues dans cette case 
+	 * (la liste peut être vide).
 	 * 
 	 * @return	
-	 * 		les bombes éventuellement contenues dans cette case
+	 * 		Les bombes éventuellement contenues dans cette case.
 	 */
 	protected List<AiSimBomb> getInternalBombs()
-	{	return internalBombs;	
+	{	return bombs;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des feux éventuellement contenus dans cette case */
-	private final List<AiSimFire> internalFires = new ArrayList<AiSimFire>();
-	/** liste à usage externe des feux éventuellement contenus dans cette case */
-	private final List<AiFire> externalFires = new ArrayList<AiFire>();
+	/** Liste à usage interne des feux éventuellement contenus dans cette case */
+	private final List<AiSimFire> fires = new ArrayList<AiSimFire>();
+	/** Liste à usage externe des feux éventuellement contenus dans cette case */
+	private final List<AiFire> neutralFires = new ArrayList<AiFire>();
+	/** Version immuable de la liste neutre de feux */
+	private final List<AiFire> externalNeutralFires = Collections.unmodifiableList(neutralFires);
 	
 	@Override
 	public List<AiFire> getFires()
-	{	return externalFires;	
+	{	return externalNeutralFires;	
 	}
 	
 	/** 
-	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des feux contenus dans cette case 
+	 * (la liste peut être vide).
 	 * 
 	 * @return	
-	 * 		les feux éventuellement contenus dans cette case
+	 * 		Les feux éventuellement contenus dans cette case.
 	 */
 	protected List<AiSimFire> getInternalFires()
-	{	return internalFires;	
+	{	return fires;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des sols éventuellement contenus dans cette case */
-	private final List<AiSimFloor> internalFloors = new ArrayList<AiSimFloor>();
-	/** liste à usage externe des sols éventuellement contenus dans cette case */
-	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
+	/** Liste à usage interne des sols éventuellement contenus dans cette case */
+	private final List<AiSimFloor> floors = new ArrayList<AiSimFloor>();
+	/** Liste à usage externe des sols éventuellement contenus dans cette case */
+	private final List<AiFloor> neutralFloors = new ArrayList<AiFloor>();
+	/** Version immuable de la liste neutre des sols */
+	private final List<AiFloor> externalNeutralFloors = Collections.unmodifiableList(neutralFloors);
 	
 	@Override
 	public List<AiFloor> getFloors()
-	{	return externalFloors;	
+	{	return externalNeutralFloors;	
 	}
 	
 	/** 
-	 * renvoie les sols de cette case 
-	 * (il y a forcément au moins un sol)
+	 * Renvoie les sols de cette case 
+	 * (il y a forcément au moins un sol).
 	 * 
 	 * @return	
-	 * 		les sols contenus dans cette case
+	 * 		Les sols contenus dans cette case.
 	 */
 	protected List<AiSimFloor> getInternalFloors()
-	{	return internalFloors;	
+	{	return floors;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des personnages éventuellement contenus dans cette case */
-	private final List<AiSimHero> internalHeroes = new ArrayList<AiSimHero>();
-	/** liste à usage externe des personnages éventuellement contenus dans cette case */
-	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
+	/** Liste à usage interne des personnages éventuellement contenus dans cette case */
+	private final List<AiSimHero> heroes = new ArrayList<AiSimHero>();
+	/** Liste à usage externe des personnages éventuellement contenus dans cette case */
+	private final List<AiHero> neutralHeroes = new ArrayList<AiHero>();
+	/** Version immuable de la liste des personnages */
+	private final List<AiHero> externalNeutralHeroes = Collections.unmodifiableList(neutralHeroes);
 	
 	@Override
 	public List<AiHero> getHeroes()
-	{	return externalHeroes;	
+	{	return externalNeutralHeroes;	
 	}
 	
 	/** 
-	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des personnages contenus dans cette case 
+	 * (la liste peut être vide).
 	 * 
 	 * @return	
-	 * 		les personnages éventuellement contenus dans cette case
+	 * 		Les personnages éventuellement contenus dans cette case.
 	 */
 	protected List<AiSimHero> getInternalHeroes()
-	{	return internalHeroes;	
+	{	return heroes;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des items éventuellement contenus dans cette case */
-	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
-	/** liste à usage externe des items éventuellement contenus dans cette case */
-	private final List<AiItem> externalItems = new ArrayList<AiItem>();
+	/** Liste à usage interne des items éventuellement contenus dans cette case */
+	private final List<AiSimItem> items = new ArrayList<AiSimItem>();
+	/** Liste à usage externe des items éventuellement contenus dans cette case */
+	private final List<AiItem> neutralItems = new ArrayList<AiItem>();
+	/** Version immuable de la liste neutre des items */
+	private final List<AiItem> externalNeutralItems = Collections.unmodifiableList(neutralItems);
 
 	@Override
 	public List<AiItem> getItems()
-	{	return externalItems;	
+	{	return externalNeutralItems;	
 	}
 
 	/** 
-	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des items contenus dans cette case 
+	 * (la liste peut être vide).
 	 * 
 	 * @return	
-	 * 		les items éventuellement contenus dans cette case
+	 * 		Les items éventuellement contenus dans cette case.
 	 */
 	protected List<AiSimItem> getInternalItems()
-	{	return internalItems;	
+	{	return items;	
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -317,22 +332,22 @@ public final class AiSimTile extends AiTile
 	{	boolean result = true;
 		// murs
 		if(result && !ignoreBlocks)
-			result = isCrossableBy(sprite,internalBlocks);
+			result = isCrossableBy(sprite,blocks);
 		// bombes
 		if(result && !ignoreBombs)
-			result = isCrossableBy(sprite,internalBombs);
+			result = isCrossableBy(sprite,bombs);
 		// feu
 		if(result && !ignoreFires)
-			result = isCrossableBy(sprite,internalFires);
+			result = isCrossableBy(sprite,fires);
 		// sol
 	//	if(result && !ignoreFloors)
 	//		result = isCrossableBy(sprite,internalFloors);
 		// heroes
 		if(result && !ignoreHeroes)
-			result = isCrossableBy(sprite,internalHeroes);
+			result = isCrossableBy(sprite,heroes);
 		// item
 		if(result && !ignoreItems)
-			result = isCrossableBy(sprite,internalItems);
+			result = isCrossableBy(sprite,items);
 		//
 		return result;
 	}
@@ -352,11 +367,11 @@ public final class AiSimTile extends AiTile
 	 * 		Type de sprite à traiter.
 	 * 
 	 * @param sprite
-	 * 		le sprite qui veut traverser cette case
+	 * 		Le sprite qui veut traverser cette case.
 	 * @param list
-	 * 		les sprites de cette case à tester
+	 * 		Les sprites de cette case à tester.
 	 * @return	
-	 * 		vrai si le sprite peut traverser tous les sprites de la liste
+	 * 		{@code true} ssi le sprite peut traverser tous les sprites de la liste.
 	 */
 	private <T extends AiSprite> boolean isCrossableBy(AiSprite sprite, List<T> list)
 	{	boolean result = true;
@@ -373,39 +388,64 @@ public final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Map des voisins de cette case dans les quatre directions principales */
+	private final Map<Direction,AiSimTile> neighborMap = new HashMap<Direction, AiSimTile>();
+	/** Liste des voisins de cette case dans les quatre directions principales */
+	private final List<AiTile> neighborList = new ArrayList<AiTile>();
+	/** Version immuable de la liste des voisins */
+	private final List<AiTile> externalNeighborList = Collections.unmodifiableList(neighborList);
+	
+	/**
+	 * Initialise une fois pour toutes les voisins de la case,
+	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
+	 * {@link #getNeighbors}.
+	 */
+	protected void initNeighbors()
+	{	List<Direction> directions = Direction.getPrimaryValues();
+		for(Direction direction: directions)
+		{	AiSimTile neighbor = zone.getNeighborTile(row,col,direction);
+			neighborMap.put(direction,neighbor);
+		}
+		neighborMap.put(Direction.NONE,this);
+		
+		for(Direction direction: Direction.getPrimaryValues())
+			neighborList.add(neighborMap.get(direction));
+	}
+	
 	@Override
 	public AiSimTile getNeighbor(Direction direction)
-	{	AiSimTile result = zone.getNeighborTile(row,col,direction);
+	{	if(direction.isComposite())
+			throw new IllegalArgumentException("method getNeighbor does not handle composite directions.");
+		AiSimTile result = neighborMap.get(direction);
+if(result==null)
+	System.out.print("");
 		return result;		
 	}
 	
 	@Override
 	public List<AiTile> getNeighbors()
-	{	List<AiTile> result = new ArrayList<AiTile>();
-		for(Direction direction: Direction.getPrimaryValues())
-			result.add(getNeighbor(direction));
-		return result;
+	{	return externalNeighborList;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette case
+	 * Termine proprement cette case.
 	 */
 	protected void finish()
 	{	// block
-		finishSprites(internalBlocks,externalBlocks);
+		finishSprites(blocks,neutralBlocks);
 		// bombs
-		finishSprites(internalBombs,externalBombs);
+		finishSprites(bombs,neutralBombs);
 		// fires
-		finishSprites(internalFires,externalFires);
+		finishSprites(fires,neutralFires);
 		// floor
-		finishSprites(internalFloors,externalFloors);
+		finishSprites(floors,neutralFloors);
 		// heroes
-		finishSprites(internalHeroes,externalHeroes);
+		finishSprites(heroes,neutralHeroes);
 		// item
-		finishSprites(internalItems,externalItems);
+		finishSprites(items,neutralItems);
 	}
 
 	/**

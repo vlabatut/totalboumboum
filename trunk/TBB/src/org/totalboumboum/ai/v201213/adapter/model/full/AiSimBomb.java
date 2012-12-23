@@ -35,11 +35,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * simule une bombe du jeu, i.e. un objet que les joueurs peuvent déposer
+ * Simule une bombe du jeu, i.e. un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimBomb extends AiSimSprite implements AiBomb
 {	

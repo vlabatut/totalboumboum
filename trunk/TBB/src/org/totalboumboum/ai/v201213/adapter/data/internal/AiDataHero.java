@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
@@ -45,7 +46,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Représente un personnage du jeu, ie un sprite 
- * contrôlé par un joueur humain ou une IA.
+ * contrôlé par un joueur humain ou un agent.
  * 
  * @author Vincent Labatut
  */
@@ -207,7 +208,9 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/** Index de vitesse de déplacement au sol du personnage */
 	private int walkingSpeedIndex;
 	/** Vitesses possibles de déplacement du personnage, exprimées en pixel/seconde */
-	private HashMap<Integer,Double> walkingSpeeds;
+	private final Map<Integer,Double> walkingSpeeds = new HashMap<Integer, Double>();
+	/** Copie externe des vitesses */
+	private final Map<Integer,Double> externalWalkingSpeeds = Collections.unmodifiableMap(walkingSpeeds);
 	
 	@Override
 	public double getWalkingSpeed()
@@ -260,8 +263,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	}
 	
 	@Override
-	public HashMap<Integer,Double> getWalkingSpeeds()
-	{	return walkingSpeeds;
+	public Map<Integer,Double> getWalkingSpeeds()
+	{	return externalWalkingSpeeds;
 	}
 	
 	/**
@@ -270,7 +273,6 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	 */
 	private void initSpeed()
 	{	walkingSpeedIndex = 0;
-		walkingSpeeds = new HashMap<Integer, Double>();
 		Sprite sprite = getSprite();
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
@@ -387,7 +389,9 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	// CONTAGION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste des items contagieux possédés */
-	private List<AiDataItem> contagiousItems = new ArrayList<AiDataItem>();
+	private final List<AiItem> contagiousItems = new ArrayList<AiItem>();
+	/** Version immuable des liste des items contagieux possédés */
+	private final List<AiItem> externalContagiousItems = Collections.unmodifiableList(contagiousItems);
 	
 	/**
 	 * Met à jour la liste des items contagieux
@@ -435,8 +439,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	
 	@Override
 	public List<AiItem> getContagiousItems()
-	{	List<AiItem> result = new ArrayList<AiItem>(contagiousItems);
-		return result;
+	{	return externalContagiousItems;
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -22,9 +22,9 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
@@ -166,7 +166,7 @@ public class AiFullModel
 	private List<AiSimSprite> limitSprites;
 	
 	/**
-	 * Renvoie la liste des sprites dont le changement d'état
+	 * Renvoie une copie la liste des sprites dont le changement d'état
 	 * marque la fin de la dernière simulation.
 	 * 
 	 * @return	
@@ -1056,7 +1056,7 @@ public class AiFullModel
 	private void releaseItem(AiSimBlock block)
 	{	if(simulateItemsAppearing && current.getHiddenItemsCount()>0)
 		{	// select item type
-			HashMap<AiItemType, Double> probas = current.getHiddenItemsProbas();
+			Map<AiItemType, Double> probas = current.getHiddenItemsProbas();
 			double p = Math.random();
 			double total = 0;
 			Iterator<Entry<AiItemType,Double>> it = probas.entrySet().iterator();

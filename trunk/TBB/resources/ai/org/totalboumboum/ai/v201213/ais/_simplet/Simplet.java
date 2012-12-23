@@ -58,7 +58,7 @@ public class Simplet extends ArtificialIntelligence
 	 * Instancie la classe principale de l'agent.
 	 */
 	public Simplet()
-	{	verbose = true;
+	{	verbose = false;
 	}
 	
 	/////////////////////////////////////////////////////////////////

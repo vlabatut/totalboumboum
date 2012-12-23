@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 import org.totalboumboum.ai.v201213.adapter.communication.AiAction;
@@ -512,7 +513,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/** Champ utilisé par le moteur : temps réel total utilisé lors du dernier appel (en ms) */ 
 	private long totalDuration;
 	/** Champ utilisé par le moteur : temps réel de chaque étape (en ms) */
-	protected final HashMap<String,Long> stepDurations = new HashMap<String,Long>();
+	protected final Map<String,Long> stepDurations = new HashMap<String,Long>();
 	
 	/**
 	 * Renvoie le temps écoulé depuis le début
@@ -572,7 +573,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * @return
 	 * 		Temps réel de chaque étape, en ms.
 	 */
-	public final HashMap<String,Long> getStepDurations()
+	public final Map<String,Long> getStepDurations()
 	{	return stepDurations;
 	}
 

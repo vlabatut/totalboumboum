@@ -27,40 +27,39 @@ import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 
 /**
- * simule un feu du jeu, ie une projection mortelle résultant (généralement) 
+ * Simule un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimFire extends AiSimSprite implements AiFire
 {
 	/**
-	 * crée une simulation du feu passé en paramètre,
+	 * Crée une simulation du feu passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification du feu
+	 * 		Numéro d'identification du feu.
 	 * @param tile
-	 * 		case contenant le feu
+	 * 		Case contenant le feu.
 	 * @param posX
-	 * 		abscisse du feu
+	 * 		Abscisse du feu.
 	 * @param posY
-	 * 		ordonnée du feu
+	 * 		Ordonnée du feu.
 	 * @param posZ
-	 * 		hauteur du feu
+	 * 		Hauteur du feu.
 	 * @param state
-	 * 		état du feu
+	 * 		État du feu.
 	 * @param burningDuration
-	 * 		durée de combustion du feu
+	 * 		Durée de combustion du feu.
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement du feu (inutile)
+	 * 		Vitesse courante de déplacement du feu (inutile).
 	 * @param throughBlocks
-	 * 		capacité à traverser les murs
+	 * 		Capacité à traverser les murs.
 	 * @param throughBombs
-	 * 		capacité à traverser les bombes
+	 * 		Capacité à traverser les bombes.
 	 * @param throughItems
-	 * 		capacité à traverser les items
+	 * 		Capacité à traverser les items.
 	 */
 	protected AiSimFire(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -73,13 +72,13 @@ public final class AiSimFire extends AiSimSprite implements AiFire
 	}	
 
 	/**
-	 * crée une simulation du feu passé en paramètre, et contenue dans 
+	 * Crée une simulation du feu passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile	
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite.
 	 * @param fire	
-	 * 		sprite à simuler
+	 * 		Sprite à simuler.
 	 */
 	protected AiSimFire(AiSimTile tile, AiFire fire)
 	{	super(tile,fire);
@@ -92,11 +91,11 @@ public final class AiSimFire extends AiSimSprite implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le feu peut traverser les murs */
+	/** Indique si le feu peut traverser les murs */
 	private boolean throughBlocks;
-	/** indique si le feu peut traverser les bombes */
+	/** Indique si le feu peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le feu peut traverser les items */
+	/** Indique si le feu peut traverser les items */
 	private boolean throughItems;
 	
 	@Override
@@ -137,7 +136,7 @@ public final class AiSimFire extends AiSimSprite implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis que le feu existe, exprimé en ms */
+	/** Temps écoulé depuis que le feu existe, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -146,7 +145,7 @@ public final class AiSimFire extends AiSimSprite implements AiFire
 	}
 
 	/**
-	 * modifie le temps écoulé
+	 * Modifie le temps écoulé
 	 * 
 	 * @param time
 	 * 		temps écoulé

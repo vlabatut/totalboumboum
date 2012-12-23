@@ -76,7 +76,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
     	currentDirection = Direction.NONE;
     	currentPath = new AiPath();
 	}
-
+	
     /////////////////////////////////////////////////////////////////
 	// DESTINATION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -92,7 +92,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	public final AiTile getCurrentDestination()
 	{	return currentDestination;
 	}
-
+	
 	/**
 	 * Met à jour l'objectif courant de l'agent, c'est à dire
 	 * la case dans laquelle il veut aller. 
@@ -108,13 +108,13 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	protected abstract AiTile updateCurrentDestination() throws StopRequestException;
-
+	
 	/////////////////////////////////////////////////////////////////
 	// PATH						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Le chemin courant, permettant d'aller dans la case de destination */ 
 	protected AiPath currentPath = null;
-
+	
 	/**
 	 * Renvoie le chemin courant de l'agent.
 	 * 
@@ -124,7 +124,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	public final AiPath getCurrentPath()
 	{	return currentPath;
 	}
-
+	
 	/**
 	 * Met à jour le chemin courant de l'agent, c'est à dire 
 	 * la séquence de cases à parcourir pour atteindre

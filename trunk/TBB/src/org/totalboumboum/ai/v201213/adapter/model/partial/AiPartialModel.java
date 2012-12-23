@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
@@ -135,7 +136,6 @@ public class AiPartialModel
 		totalDuration = zone.getTotalTime();
 		
 		// sudden death events
-		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 		initSuddenDeathEvents(zone);
 
 		// obstacles
@@ -168,7 +168,7 @@ public class AiPartialModel
 		totalDuration = model.totalDuration;
 		
 		// sudden death events
-		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>(model.suddenDeathEvents);
+		suddenDeathEvents.addAll(model.suddenDeathEvents);
 		
 		// matrices
 		obstacles = new boolean[height][width];
@@ -192,7 +192,7 @@ public class AiPartialModel
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Zone de jeu. */
-	private AiZone zone;
+	private final AiZone zone;
 	/** Largeur de la zone de jeu. */
 	private int width;
 	/** Hauteur de la zone de jeu. */
@@ -235,7 +235,7 @@ public class AiPartialModel
 	// HERO				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Personnage de référence */
-	private AiHero currentHero;
+	private final AiHero currentHero;
 	/** Emplacement virtuel de ce personnage */
 	private AiLocation currentLocation;
 	
@@ -330,7 +330,7 @@ public class AiPartialModel
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Évènements de mort subite */
-	private List<AiSuddenDeathEvent> suddenDeathEvents;
+	private final List<AiSuddenDeathEvent> suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 
 	/**
 	 * Intialise la liste d'évènements de mort
@@ -364,7 +364,7 @@ public class AiPartialModel
 	/** Matrice contenant toutes les explosions prévues */
 	private AiExplosionList[][] explosions;
 	/** Map contenant toutes les explosions classées par instant de départ */
-	private HashMap<Long,List<AiExplosion>> explosionMap;
+	private final Map<Long,List<AiExplosion>> explosionMap = new HashMap<Long, List<AiExplosion>>();
 	
 	/**
 	 * Renvoie la première explosion disponible
@@ -472,9 +472,9 @@ public class AiPartialModel
 	 * (approximativement, pour ces derniers). 
 	 */
 	private void initBombs()
-	{	//HashMap<AiBomb,List<AiBomb>> threatenedBombs = zone.getThreatenedBombs();
-		//HashMap<AiBomb,Long> delaysByBombs = zone.getDelaysByBombs();
-		HashMap<Long,List<AiBomb>> bombsByDelays = zone.getBombsByDelays();
+	{	//Map<AiBomb,List<AiBomb>> threatenedBombs = zone.getThreatenedBombs();
+		//Map<AiBomb,Long> delaysByBombs = zone.getDelaysByBombs();
+		Map<Long,List<AiBomb>> bombsByDelays = zone.getBombsByDelays();
 		
 		// process bombs by order of explosion
 		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelays.keySet());
@@ -562,6 +562,9 @@ public class AiPartialModel
 	 * la zone. Il faut donc explicitement faire ce calcul ici.
 	 * C'est aussi dans cette méthode qu'on tiendra compte de la mort
 	 * subite (partiellement).
+	 * <br/>
+	 * <b>Note :</b> la liste renvoyée est générée à la demande.
+	 * Elle peut donc être modifiée sans problème par l'agent.
 	 *  
 	 * @param start
 	 * 		Instant d'explosion de la bombe.
@@ -727,7 +730,7 @@ public class AiPartialModel
 	 * Initialise la map d'explosions à partir de la matrice.
 	 */
 	private void initMap()
-	{	explosionMap = new HashMap<Long, List<AiExplosion>>();
+	{	explosionMap.clear();
 		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
 			{	AiExplosionList expls = explosions[row][col];
@@ -1223,7 +1226,7 @@ public class AiPartialModel
 	 * contenue dans chaque case.
 	 * 
 	 * @param start
-	 * 		Si {@code true}, alors les temps de début d'explosions seront affichés,
+	 * 		Si {@code true}, alors les temps de début d'explosions seront affichés ;
 	 * 		si {@code false}, alors ce seront ceux de fin.
 	 * @return
 	 * 		Une représentation textuelle des temps d'explosion.

@@ -25,16 +25,15 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * Types de blocages de déplacement possibles pour un sprite.
  * 
  * @author Vincent Labatut
- *
  */
 public enum AiStopType
 {
-	/** laisse passer n'importe quel sprite */
+	/** Laisse passer n'importe quel sprite */
 	NO_STOP,
 	
-	/** laisse passer seulement les sprites ayant un pouvoir spécial */
+	/** Laisse passer seulement les sprites ayant un pouvoir spécial */
 	WEAK_STOP,
 	
-	/** ne laisse passer aucun sprite */
+	/** Ne laisse passer aucun sprite */
 	STRONG_STOP;		
 }

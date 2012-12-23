@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
@@ -109,7 +110,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * de A* sera celle du personnage passé en paramètre.
 	 * 
 	 * @param ai
-	 * 		IA de référence pour gérer les interruptions.
+	 * 		Agent de référence pour gérer les interruptions.
 	 * @param hero
 	 * 		Personnage de référence pour calculer la durée des déplacements.
 	 * @param searchMode 
@@ -142,7 +143,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	// HERO						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Personnage concerné par la recherche de chemin */
-	protected AiHero hero;
+	private AiHero hero;
 
 	/**
 	 * Renvoie le personnage utilisé
@@ -173,8 +174,8 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * 		La map associée à la racine locale spécifiée
 	 * 		(qui peut avoir été créée pour l'occasion).
 	 */
-	private HashMap<AiTile,AiSearchNode> getProcessedTiles(AiSearchNode localRoot)
-	{	HashMap<AiTile,AiSearchNode> result;
+	private Map<AiTile,AiSearchNode> getProcessedTiles(AiSearchNode localRoot)
+	{	Map<AiTile,AiSearchNode> result;
 		if(searchMode==MODE_ALL)
 			// pas de limite, donc pas de map
 			result = new HashMap<AiTile, AiSearchNode>();
@@ -199,6 +200,9 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * Autre différence : les cases déjà traversées sont considérées,
 	 * car le chemin peut inclure des retours en arrière pour éviter
 	 * des explosions.
+	 * <br/>
+	 * <b>Note :</b> la liste est générée à la demande, elle peut
+	 * être modifiée sans causer de problème.
 	 * 
 	 * @param node	
 	 * 		Le noeud de recherche courant.
@@ -224,7 +228,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		
 		// on màj la map des cases visitées
 		AiSearchNode localRoot = node.getLocalRoot();
-		HashMap<AiTile,AiSearchNode> procTiles = getProcessedTiles(localRoot);
+		Map<AiTile,AiSearchNode> procTiles = getProcessedTiles(localRoot);
 		// pour la restriction sur l'arbre, on compare les coûts
 		if(searchMode==MODE_NOTREE)
 		{	AiSearchNode n = procTiles.get(tile);
@@ -409,7 +413,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		
 		// on s'intéresse ensuite aux menaces provenant des bombes
 		// on considère chaque bombe une par une
-		HashMap<AiBomb,Long> delays = zone.getDelaysByBombs();
+		Map<AiBomb,Long> delays = zone.getDelaysByBombs();
 		List<AiBomb> bombs = zone.getBombs();
 		for(AiBomb bomb: bombs)
 		{	List<AiTile> blast = bomb.getBlast();

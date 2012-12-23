@@ -32,7 +32,6 @@ import java.util.List;
  * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEvent>
 {	
@@ -61,6 +60,9 @@ public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEven
 	/**
 	 * Renvoie la liste de cases concernées par
 	 * cet évènement de mort subite.
+	 * <br/>
+	 * <b>Note :</b> la liste est générée à la demande,
+	 * elle peut donc être modifiée par l'agent.
 	 * 
 	 * @return
 	 * 		Une liste de cases.
@@ -83,9 +85,13 @@ public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEven
 	 * à l'instant associé à cet évènement. On
 	 * peut récupérer la position des sprites simplement
 	 * en accédant à leur case.
+	 * <br/>
+	 * <b>Note :</b> la list renvoyées n'est pas modifiable.
+	 * Toute tentative de modification provoquera une 
+	 * {@link UnsupportedOperationException}. 
 	 * 
 	 * @return	
-	 * 		Liste de sprite.
+	 * 		Liste des sprites de cet évènement de mort subite.
 	 */
 	public abstract List<AiSprite> getSprites();
 
@@ -95,6 +101,9 @@ public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEven
 	 * case passée en paramètre. La liste retournée en
 	 * résultat peut être vide si aucun sprite n'apparait
 	 * dans cette case lors de cet évènement.
+	 * <br/>
+	 * <b>Note :</b> la liste est générée à la demande,
+	 * elle peut donc être modifiée par l'agent.
 	 * 
 	 * @param tile
 	 * 		La case sur laquelle la recherche se concentre.

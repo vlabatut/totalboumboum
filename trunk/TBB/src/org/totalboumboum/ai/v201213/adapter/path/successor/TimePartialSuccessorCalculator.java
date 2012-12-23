@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201213.adapter.path.successor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
@@ -104,7 +105,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	 * par l'agent passé en paramètre.
 	 * 
 	 * @param ai
-	 * 		IA de référence pour gérer les interruptions.
+	 * 		Agent de référence pour gérer les interruptions.
 	 * @param searchMode 
 	 * 		Le type de recherche à effectuer (cf. les champs de cette classe).
 	 */
@@ -141,7 +142,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	// MODELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Structure utilisée pour stocker les modèles */
-	private final HashMap<AiSearchNode,AiPartialModel> models = new HashMap<AiSearchNode, AiPartialModel>();
+	private final Map<AiSearchNode,AiPartialModel> models = new HashMap<AiSearchNode, AiPartialModel>();
 	
 	/**
 	 * Renvoie le modèle associé au noeud de recherche
@@ -177,8 +178,8 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	 * 		La map associée à la racine locale spécifiée
 	 * 		(qui peut avoir été créée pour l'occasion).
 	 */
-	private HashMap<AiTile,AiSearchNode> getProcessedTiles(AiSearchNode localRoot)
-	{	HashMap<AiTile,AiSearchNode> result;
+	private Map<AiTile,AiSearchNode> getProcessedTiles(AiSearchNode localRoot)
+	{	Map<AiTile,AiSearchNode> result;
 		if(searchMode==MODE_ALL)
 			// pas de limite, donc pas de map
 			result = new HashMap<AiTile, AiSearchNode>();
@@ -204,6 +205,9 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	 * Autre différence : les cases déjà traversées sont considérées,
 	 * car le chemin peut inclure des retours en arrière pour éviter
 	 * des explosions.
+	 * <br/>
+	 * <b>Note :</b> la liste est générée à la demande, elle peut
+	 * être modifiée sans causer de problème.
 	 * 
 	 * @param node	
 	 * 		Le noeud de recherche courant.
@@ -226,7 +230,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		
 		// on màj la map des cases visitées
 		AiSearchNode localRoot = node.getLocalRoot();
-		HashMap<AiTile,AiSearchNode> procTiles = getProcessedTiles(localRoot);
+		Map<AiTile,AiSearchNode> procTiles = getProcessedTiles(localRoot);
 		// pour la restriction sur l'arbre, on compare les coûts
 		if(searchMode==MODE_NOTREE)
 		{	AiSearchNode n = procTiles.get(tile);

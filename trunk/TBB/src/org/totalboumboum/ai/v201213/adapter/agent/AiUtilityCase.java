@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201213.adapter.agent;
  * 
  */
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -113,19 +114,22 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	/////////////////////////////////////////////////////////////////
 	/** Les critères servant à décrire ce cas */
 	private final Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+	/** Version immuable de l'ensemble de critères */
+	private final Set<AiUtilityCriterion<?,?>> externalCriteria = Collections.unmodifiableSet(criteria);
 	
 	/**
 	 * Renvoie l'ensemble des critères nécessaires
 	 * pour décrire ce cas.
 	 * <br/>
-	 * <b>Attention </b>: Il ne faut surtout pas modifier
-	 * cet ensemble. 
+	 * <b>Attention :</b> l'ensemble renvoyé par cette méthode 
+	 * ne doit pas être modifié par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		L'ensemble des critères décrivant ce cas.
 	 */
 	public final Set<AiUtilityCriterion<?,?>> getCriteria()
-	{	return criteria;
+	{	return externalCriteria;
 	}
 	
     /////////////////////////////////////////////////////////////////

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
@@ -83,11 +84,11 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 {
 	/**
 	 * Construit une fonction successeur
-	 * utilisant l'IA passée en paramètre
+	 * utilisant l'agent passé en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 */
 	public BasicSuccessorCalculator(ArtificialIntelligence ai)
 	{	super(ai);
@@ -103,8 +104,8 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** map contenant les cases déjà traitées */
-	private final HashMap<AiTile,AiSearchNode> processedTilesMap = new HashMap<AiTile,AiSearchNode>();
+	/** Map contenant les cases déjà traitées */
+	private final Map<AiTile,AiSearchNode> processedTilesMap = new HashMap<AiTile,AiSearchNode>();
 	
 	/** 
 	 * Fonction successeur la plus simple: on considère les 4 cases 
@@ -113,6 +114,9 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	 * de référence peut traverser. On ignore également
 	 * les cases déjà explorées, afin d'éviter les retours
 	 * en arrière et de rendre le traitement plus rapide.
+	 * <br/>
+	 * <b>Note :</b> la liste est générée à la demande, elle peut
+	 * être modifiée sans causer de problème.
 	 * 
 	 * @param node	
 	 * 		Le noeud de recherche courant

@@ -63,11 +63,11 @@ public class PixelCostCalculator extends CostCalculator
 {	
 	/**
 	 * Construit une fonction de coût
-	 * utilisant l'IA passée en paramètre
+	 * utilisant l'agent passée en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 */
 	public PixelCostCalculator(ArtificialIntelligence ai)
 	{	super(ai);
@@ -78,7 +78,8 @@ public class PixelCostCalculator extends CostCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * Les deux emplacements sont supposés être dans des cases voisines. 
-	 * On renvoie la distance de Manhattan (en pixels) qui les sépare. 
+	 * On renvoie la <a href="http://fr.wikipedia.org/wiki/Distance_de_Manhattan">distance de Manhattan</a>
+	 * (exprimée en pixels) qui les sépare. 
 	 * 
 	 * @param currentNode
 	 * 		Le noeud contenant l'emplacement de départ. 
@@ -111,13 +112,13 @@ public class PixelCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le coût d'un chemin correspond ici à sa distance 
+	 * Le coût d'un chemin correspond ici à sa distance 
 	 * exprimée en pixels.
 	 * 
 	 * @param path
-	 * 		chemin à traiter
+	 * 		Chemin à traiter.
 	 * @return
-	 * 		le coût de ce chemin
+	 * 		Le coût de ce chemin.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 

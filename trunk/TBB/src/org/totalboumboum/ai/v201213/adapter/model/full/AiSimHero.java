@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201213.adapter.data.AiFire;
@@ -35,11 +36,10 @@ import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * simule un personnage du jeu, ie un sprite contrôlé par un joueur
- * humain ou une IA.
+ * Simule un personnage du jeu, ie un sprite contrôlé par un joueur
+ * humain ou un agent.
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimHero extends AiSimSprite implements AiHero
 {
@@ -92,7 +92,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 			AiSimState state, long burningDuration, double currentSpeed,
 			AiSimBomb bombPrototype, int bombNumberMax, int bombNumberCurrent, int bombNumberLimit, int rangeLimit,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
-			PredefinedColor color, int walkingSpeedIndex, HashMap<Integer,Double> walkingSpeeds,
+			PredefinedColor color, int walkingSpeedIndex, Map<Integer,Double> walkingSpeeds,
 			List<AiItem> contagiousItems)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		AiSimZone zone = tile.getZone();
@@ -111,10 +111,9 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 
 		// speeds
 		this.walkingSpeedIndex = walkingSpeedIndex;
-		this.walkingSpeeds = new HashMap<Integer,Double>(walkingSpeeds);
+		this.walkingSpeeds.putAll(walkingSpeeds);
 		
 		// contagion
-		this.contagiousItems = new ArrayList<AiSimItem>();
 		for(AiItem item: contagiousItems)
 		{	AiSimItem simItem = zone.getItem(item);
 			if(simItem==null)
@@ -122,6 +121,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 				zone.addSprite(simItem);
 			}
 			this.contagiousItems.add(simItem);
+			this.neutralContagiousItems.add(simItem);
 		}
 		
 		// misc
@@ -155,10 +155,9 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		
 		// speed
 		walkingSpeedIndex = hero.getWalkingSpeedIndex();
-		walkingSpeeds = new HashMap<Integer, Double>(hero.getWalkingSpeeds());
+		walkingSpeeds.putAll(hero.getWalkingSpeeds());
 		
 		// contagion
-		contagiousItems = new ArrayList<AiSimItem>();
 		for(AiItem item: hero.getContagiousItems())
 		{	AiSimItem simItem = zone.getItem(item);
 			if(simItem==null)
@@ -166,6 +165,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 				zone.addSprite(simItem);
 			}
 			this.contagiousItems.add(simItem);
+			this.neutralContagiousItems.add(simItem);
 		}
 
 		// misc
@@ -362,7 +362,9 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	/** Portée de la bombe avant de prendre un malus genre no-flame */
 	protected int savedWalkingSpeedIndex = -1;
 	/** Vitesses possibles de déplacement du personnage, exprimées en pixel/seconde */
-	private HashMap<Integer,Double> walkingSpeeds;
+	private final Map<Integer,Double> walkingSpeeds = new HashMap<Integer, Double>();
+	/** Version immuable de la map des vitesses */
+	private final Map<Integer,Double> externalWalkingSpeeds = Collections.unmodifiableMap(walkingSpeeds);
 	
 	@Override
 	public double getWalkingSpeed()
@@ -415,8 +417,8 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	@Override
-	public HashMap<Integer,Double> getWalkingSpeeds()
-	{	return walkingSpeeds;
+	public Map<Integer,Double> getWalkingSpeeds()
+	{	return externalWalkingSpeeds;
 	}
 
 	/**
@@ -549,7 +551,11 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	// CONTAGION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste des items contagieux possédés */
-	private List<AiSimItem> contagiousItems;
+	private final List<AiSimItem> contagiousItems = new ArrayList<AiSimItem>();
+	/** Liste neutre des items contagieux possédés */
+	private final List<AiItem> neutralContagiousItems = new ArrayList<AiItem>();
+	/** Version immuable de la liste neutre des items contagieux possédés */
+	private final List<AiItem> externalNeutralContagiousItems = Collections.unmodifiableList(neutralContagiousItems);
 	
 	@Override
 	public boolean isContagious()
@@ -558,8 +564,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	
 	@Override
 	public List<AiItem> getContagiousItems()
-	{	List<AiItem> result = new ArrayList<AiItem>(contagiousItems);
-		return result;
+	{	return externalNeutralContagiousItems;
 	}
 	
 	/**
@@ -573,6 +578,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 */
 	public void addContagiousItem(AiSimItem item)
 	{	contagiousItems.add(item);
+		neutralContagiousItems.add(item);
 	}
 	
 	/**
@@ -594,6 +600,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 */
 	public void removeContagiousItem(AiItem item)
 	{	contagiousItems.remove(item);
+		neutralContagiousItems.remove(item);
 	}
 	
 	/////////////////////////////////////////////////////////////////

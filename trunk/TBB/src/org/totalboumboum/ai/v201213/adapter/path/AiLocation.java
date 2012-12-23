@@ -29,7 +29,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiLocation implements Comparable<AiLocation>
 {	
@@ -93,8 +92,8 @@ public final class AiLocation implements Comparable<AiLocation>
 	 */
 	public AiLocation(AiSprite sprite)
 	{	
-		if(sprite==null)
-			System.out.println();
+//		if(sprite==null)
+//			System.out.print("");
 		this.tile = sprite.getTile();
 		this.posX = sprite.getPosX();
 		this.posY = sprite.getPosY();
@@ -130,9 +129,9 @@ public final class AiLocation implements Comparable<AiLocation>
 	/////////////////////////////////////////////////////////////////
 	// COORDINATES				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse associée à cette position */
+	/** Abscisse associée à cette position */
 	private double posX;
-	/** ordonnée associée à cette position */
+	/** Ordonnée associée à cette position */
 	private double posY;
 	
 	/**

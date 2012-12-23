@@ -43,7 +43,7 @@ public interface AiFire extends AiSprite
 	 * 		{@code true} ssi le feu traverse les murs.
 	 */
 	public boolean hasThroughBlocks();
-
+	
 	/**
 	 * Teste si ce feu est capable de passer à travers les bombes.
 	 * <br/>

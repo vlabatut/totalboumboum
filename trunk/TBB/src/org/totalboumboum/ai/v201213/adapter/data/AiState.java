@@ -25,14 +25,13 @@ import org.totalboumboum.ai.v201213.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * décrit un état dans lequel un sprite peut se trouver, c'est
+ * Décrit un état dans lequel un sprite peut se trouver, c'est
  * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
  * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orientées
  * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
- *
  */
 public interface AiState
 {
@@ -40,10 +39,10 @@ public interface AiState
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le nom associé à l'état
+	 * Renvoie le nom associé à l'état.
 	 * 
 	 * @return	
-	 * 		nom associé à l'état
+	 * 		Nom associé à l'état.
 	 */
 	public AiStateName getName();
 	
@@ -51,11 +50,12 @@ public interface AiState
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la direction associée à l'état,
-	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
+	 * Renvoie la direction associée à l'état,
+	 * qui peut être NONE, c'est à dire : 
+	 * l'état n'est pas orienté.
 	 * 
 	 * @return	
-	 * 		direction associée à l'état
+	 * 		Direction associée à l'état.
 	 */
 	public Direction getDirection();
 
@@ -63,10 +63,10 @@ public interface AiState
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la durée que le sprite a passé dans l'état courant
+	 * Renvoie la durée que le sprite a passé dans l'état courant.
 	 * 
 	 * @return	
-	 * 		une durée exprimée en ms
+	 * 		Une durée exprimée en ms.
 	 */
 	public long getTime();
 }

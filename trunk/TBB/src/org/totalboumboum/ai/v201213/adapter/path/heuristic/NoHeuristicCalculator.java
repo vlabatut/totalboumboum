@@ -43,11 +43,11 @@ public class NoHeuristicCalculator extends HeuristicCalculator
 {
 	/**
 	 * Construit une fonction heuristique
-	 * utilisant l'IA passée en paramètre
+	 * utilisant l'agent passé en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 */
 	public NoHeuristicCalculator(ArtificialIntelligence ai)
 	{	super(ai);

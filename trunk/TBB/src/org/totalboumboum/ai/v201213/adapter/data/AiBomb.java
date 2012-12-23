@@ -55,7 +55,7 @@ public interface AiBomb extends AiSprite
 	 * 		La durée de l'explosion.
 	 */
 	public long getExplosionDuration();
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -147,8 +147,11 @@ public interface AiBomb extends AiSprite
 	 * ne donne que les cases qui seront touchées si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer, il faut ré-exécuter cette méthode pour avoir le
-	 * nouveau souffle de la bombe dans ce nouvel environnement.
+	 * alors le souffle peut changer.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
 	 * 		Une liste de cases correspondant aux cases qui seraint touchées 

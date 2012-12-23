@@ -37,8 +37,9 @@ public enum AiMode
 	COLLECTING,
 	
 	/** 
-	 * Soit il ne reste plus d'item à ramasser, et l'agent n'a pas d'autre choix que d'attaquer les autres joueurs.
-	 * Soit l'agent a assez de puissance et peut attaquer les autres joueurs. 
+	 * Soit il ne reste plus d'item à ramasser, et l'agent n'a pas d'autre 
+	 * choix que d'attaquer les autres joueurs ; soit l'agent a assez de 
+	 * puissance et peut attaquer les autres joueurs. 
 	 */
 	ATTACKING;
 }

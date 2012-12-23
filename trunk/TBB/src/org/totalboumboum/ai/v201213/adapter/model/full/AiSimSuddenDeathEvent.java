@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
@@ -39,7 +40,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
- *
  */
 public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 {	
@@ -58,6 +58,7 @@ public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 		
 		// sprites
 		this.sprites.addAll(sprites);
+		neutralSprites.addAll(sprites);
 	}
 	
 	/**
@@ -85,18 +86,21 @@ public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 			{	AiBlock b = (AiBlock) s;
 				AiSimBlock block = new AiSimBlock(tile,b);
 				this.sprites.add(block);
+				this.neutralSprites.add(block);
 			}
 			// bombs
 			else if(s instanceof AiBomb)
 			{	AiBomb b = (AiBomb) s;
 				AiSimBomb bomb = new AiSimBomb(tile,b);
 				this.sprites.add(bomb);
+				this.neutralSprites.add(bomb);
 			}
 			else if(s instanceof AiItem)
 			// item
 			{	AiItem i = (AiItem) s;
 				AiSimItem item = new AiSimItem(tile,i);
 				this.sprites.add(item);
+				this.neutralSprites.add(item);
 			}
 		}	
 	}
@@ -105,12 +109,15 @@ public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste de sprites apparaissant à l'instant associé à cet évènement */
-	private List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
+	private final List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
+	/** Liste de sprites apparaissant à l'instant associé à cet évènement */
+	private final List<AiSprite> neutralSprites = new ArrayList<AiSprite>();
+	/** Version immuable de la liste neutre de sprites */
+	private final List<AiSprite> externalNeutralSprites = Collections.unmodifiableList(neutralSprites);
 	
 	@Override
 	public List<AiSprite> getSprites()
-	{	List<AiSprite> result = new ArrayList<AiSprite>(sprites);
-		return result;
+	{	return externalNeutralSprites;
 	}
 	
 	/**

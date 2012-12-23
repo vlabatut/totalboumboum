@@ -197,7 +197,7 @@ public abstract class AiAbstractSearchAlgorithm
 	public boolean isLimitReached()
 	{	return limitReached;
 	}
-
+	
 	/** 
 	 * Renvoie la hauteur courante de l'arbre de recherche.
 	 * 
@@ -391,7 +391,7 @@ public abstract class AiAbstractSearchAlgorithm
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cet objet quand il n'est plus utilisé
+	 * Termine proprement cet objet quand il n'est plus utilisé.
 	 */
 	protected void finish()
 	{	

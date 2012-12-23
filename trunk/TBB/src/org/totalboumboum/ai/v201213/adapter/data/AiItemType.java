@@ -32,69 +32,96 @@ public enum AiItemType
 	////////////////////////
 	// BOMBES
 	////////////////////////
-	/** le joueur ne peut plus poser de bombe du tout (malus temporaire) = constipation */
-	NO_BOMB,
+	/** Le joueur ne peut plus poser de bombe du tout (malus temporaire) = constipation */
+	NO_BOMB(false),
 
-	/** le joueur peut poser une bombe de moins (malus) */
-	ANTI_BOMB,
+	/** Le joueur peut poser une bombe de moins (malus) */
+	ANTI_BOMB(false),
 
-	/** le joueur peut poser une bombe de plus */
-	EXTRA_BOMB,
+	/** Le joueur peut poser une bombe de plus */
+	EXTRA_BOMB(true),
 	
-	/** donne le nombre de bombes maximal */
-	GOLDEN_BOMB,
+	/** Donne le nombre de bombes maximal */
+	GOLDEN_BOMB(true),
 	
 	////////////////////////
 	// PORTÉE
 	////////////////////////
-	/** les bombes ont une portée nulle (malus temporaire) */
-	NO_FLAME,
+	/** Les bombes ont une portée nulle (malus temporaire) */
+	NO_FLAME(false),
 
-	/** diminue la portée des bombes */
-	ANTI_FLAME,
+	/** Diminue la portée des bombes */
+	ANTI_FLAME(false),
 	
-	/** augmente la portée des bombes */
-	EXTRA_FLAME,
+	/** Augmente la portée des bombes */
+	EXTRA_FLAME(true),
 	
-	/** donne la portée maximale */
-	GOLDEN_FLAME,
+	/** Donne la portée maximale */
+	GOLDEN_FLAME(true),
 	
 	////////////////////////
 	// VITESSE
 	////////////////////////
-	/** le joueur se déplace très lentement (malus temporaire) */
-	NO_SPEED,
+	/** Le joueur se déplace très lentement (malus temporaire) */
+	NO_SPEED(false),
 	
-	/** le joueur se déplace plus lentement (malus) */
-	ANTI_SPEED,
+	/** Le joueur se déplace plus lentement (malus) */
+	ANTI_SPEED(false),
 	
-	/** le joueur se déplace plus rapidement */
-	EXTRA_SPEED,
+	/** Le joueur se déplace plus rapidement */
+	EXTRA_SPEED(true),
 	
-	/** donne la vitesse maximale */
-	GOLDEN_SPEED,
+	/** Donne la vitesse maximale */
+	GOLDEN_SPEED(true),
 
 	////////////////////////
 	// EFFET ALÉATOIRE
 	////////////////////////
 	/** Effet négatif sur le joueur (ralentissement, constipation, etc.) */
-	RANDOM_NONE,
+	RANDOM_NONE(false),
 	
 	/** Effet positif sur le joueur (bombe supplémentaire, portée étendue, etc.) */
-	RANDOM_EXTRA,
+	RANDOM_EXTRA(true),
 	
 
 	////////////////////////
 	// AUTRES
 	////////////////////////
-	/** le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
+	/** Le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
 	// (pas utilisé)
-	PUNCH,
+	PUNCH(true),
 	
-	/** autre type d'item */
-	OTHER;	
+	/** Autre type d'item */
+	OTHER(false);
 	
 	/**
+	 * Constructeur standard.
+	 * 
+	 * @param bonus
+	 * 		Indique si le type correspond à un bonus.
+	 */
+	AiItemType(boolean bonus)
+	{	this.bonus = bonus;
+    }
+
+	////////////////////////
+	// BONUS/MALUS
+	////////////////////////
+	/** Variable vraie ssi l'item est un bonus */
+	private final boolean bonus;
+
+	/**
+	 * Indique si ce type correspond à 
+	 * un item bonus.
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'item est un bonus.
+	 */
+	public boolean isBonus()
+	{	return bonus;
+	}
+	
+    /**
 	 * calcule l'AiItemType correspondant au nom d'item passé en paramètre
 	 * 
 	 * @param name	

@@ -22,11 +22,10 @@ package org.totalboumboum.ai.v201213.adapter.data;
  */
 
 /**
- * cette interface permet de représenter les sprites manipulés par le jeu,
+ * Cette interface permet de représenter les sprites manipulés par le jeu,
  * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'agent.
  * 
  * @author Vincent Labatut
- *
  */
 public interface AiSprite extends Comparable<AiSprite>
 {	
@@ -48,19 +47,19 @@ public interface AiSprite extends Comparable<AiSprite>
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie l'état dans lequel se trouve ce sprite
-	 * (ie: quelle action il est en train d'effectuer ou de subir)
+	 * Renvoie l'état dans lequel se trouve ce sprite
+	 * (i.e. : quelle action il est en train d'effectuer ou de subir).
 	 * 
 	 * @return	
-	 * 		l'état du sprite
+	 * 		L'état du sprite.
 	 */
 	public AiState getState();
 	
 	/**
-	 * renvoie vrai si ce sprite a été éliminé du jeu
+	 * Renvoie vrai si ce sprite a été éliminé du jeu.
 	 * 
 	 * @return	
-	 * 		vrai si le sprite n'est plus en jeu
+	 * 		{@code true} ssi le sprite n'est plus en jeu.
 	 */
 	public boolean hasEnded();
 	
@@ -68,26 +67,26 @@ public interface AiSprite extends Comparable<AiSprite>
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la représentation de la case contenant ce sprite
+	 * Renvoie la représentation de la case contenant ce sprite.
 	 * 
 	 *  @return
-	 *  	la case contenant ce sprite
+	 *  	La case contenant ce sprite.
 	 */
 	public AiTile getTile();
 	
 	/** 
-	 * renvoie le numéro de la ligne contenant ce sprite 
+	 * Renvoie le numéro de la ligne contenant ce sprite. 
 	 * 
 	 * @return	
-	 * 		le numéro de la ligne du sprite
+	 * 		Le numéro de la ligne du sprite.
 	 */
 	public int getRow();
 
 	/** 
-	 * renvoie le numéro de la colonne contenant ce sprite
+	 * Renvoie le numéro de la colonne contenant ce sprite.
 	 * 
 	 * @return	
-	 * 		le numéro de la colonne du sprite
+	 * 		Le numéro de la colonne du sprite.
 	 */
 	public int getCol();
 	
@@ -95,26 +94,26 @@ public interface AiSprite extends Comparable<AiSprite>
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie l'abscisse de ce sprite en pixels 
+	 * Renvoie l'abscisse de ce sprite en pixels. 
 	 * 
 	 * @return	
-	 * 		l'abscisse du sprite
+	 * 		L'abscisse du sprite.
 	 */
 	public double getPosX();
 	
 	/** 
-	 * renvoie l'ordonnée de ce sprite en pixels 
+	 * Renvoie l'ordonnée de ce sprite en pixels. 
 	 * 
 	 * @return	
-	 * 		l'ordonnée du sprite
+	 * 		L'ordonnée du sprite.
 	 */
 	public double getPosY();
 	
 	/** 
-	 * renvoie l'altitude de ce sprite en pixels 
+	 * Renvoie l'altitude de ce sprite en pixels. 
 	 * 
 	 * @return	
-	 * 		l'altitude du sprite
+	 * 		L'altitude du sprite.
 	 */
 	public double getPosZ();
 	
@@ -122,11 +121,11 @@ public interface AiSprite extends Comparable<AiSprite>
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de déplacement courante du sprite exprimée en pixel/seconde.
-	 * si le sprite ne bouge pas, elle est de zéro.
+	 * Renvoie la vitesse de déplacement courante du sprite exprimée en pixel/seconde.
+	 * Si le sprite ne bouge pas, elle est de zéro.
 	 * 
 	 * @return	
-	 * 		vitesse de déplacement du sprite en pixels/seconde
+	 * 		Vitesse de déplacement du sprite en pixels/seconde.
 	 */
 	public double getCurrentSpeed();
 	
@@ -135,12 +134,12 @@ public interface AiSprite extends Comparable<AiSprite>
 	/////////////////////////////////////////////////////////////////	
 	/**
 	 * Teste si le sprite passé en paramètre est capable de traverser
-	 * la case de ce sprite
+	 * la case de ce sprite.
 	 * 
 	 *  @param sprite
-	 *  	le sprite à tester
+	 *  	le sprite à tester.
 	 *  @return	
-	 *  	vrai si ce sprite le laisse passer par sa case 
+	 *  	{@code true} ssi ce sprite le laisse passer par sa case.
 	 */
 	public boolean isCrossableBy(AiSprite sprite);
 
@@ -160,7 +159,7 @@ public interface AiSprite extends Comparable<AiSprite>
 	 * {@code getExplosionDuration} pour la bombe.
 	 * 
 	 * @return	
-	 * 		le temps que ce sprite va mettre à brûler, en ms
+	 * 		Le temps que ce sprite va mettre à brûler, en ms.
 	 */
 	public long getBurningDuration();
 

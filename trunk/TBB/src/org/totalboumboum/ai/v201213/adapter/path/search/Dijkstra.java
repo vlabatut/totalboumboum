@@ -21,10 +21,12 @@ package org.totalboumboum.ai.v201213.adapter.path.search;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
@@ -130,14 +132,14 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public HashMap<AiTile,AiSearchNode> startProcess(AiLocation startLocation) throws StopRequestException, LimitReachedException
+	public Map<AiTile,AiSearchNode> startProcess(AiLocation startLocation) throws StopRequestException, LimitReachedException
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		costCalculator.init(root);
 		successorCalculator.init(root);
 		
-		HashMap<AiTile,AiSearchNode> result = startProcess();
+		Map<AiTile,AiSearchNode> result = startProcess();
 		return result;
 	}
 	
@@ -162,7 +164,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public HashMap<AiTile,AiSearchNode> startProcess() throws StopRequestException, LimitReachedException
+	public Map<AiTile,AiSearchNode> startProcess() throws StopRequestException, LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
 		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
 		if(root==null)
@@ -186,7 +188,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		queue.offer(root);
 		
 		// process
-		HashMap<AiTile,AiSearchNode> result = continueProcess();
+		Map<AiTile,AiSearchNode> result = continueProcess();
 		return result;
 	}
 	
@@ -230,7 +232,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public HashMap<AiTile,AiSearchNode> continueProcess() throws StopRequestException, LimitReachedException
+	public Map<AiTile,AiSearchNode> continueProcess() throws StopRequestException, LimitReachedException
 	{	long before = print("      > Starting/resuming Dijkstra +++++++++++++++++++++");
 		print("         searching paths starting from "+startLocation);
 		
@@ -275,9 +277,9 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				
 				// sinon on récupére les noeuds suivants
 				else
-				{	// développement
+				{	// développement (on copie la liste des enfants, qui est sinon immuable)
 					long before2 = ai.getCurrentTime();
-					List<AiSearchNode> successors = lastSearchNode.getChildren();
+					List<AiSearchNode> successors = new ArrayList<AiSearchNode>(lastSearchNode.getChildren());
 
 					// verbose : temps
 					{	long after2 = ai.getCurrentTime();
@@ -345,7 +347,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 			throw new LimitReachedException(startLocation,null,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
 		
 		// on construit le résultat
-		HashMap<AiTile,AiSearchNode> result = integrateMaps();
+		Map<AiTile,AiSearchNode> result = integrateMaps();
 		return result;
 	}
 
@@ -359,10 +361,10 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * @return
 	 * 		Une map contenant tous les meilleurs chemins trouvés.
 	 */
-	private HashMap<AiTile,AiSearchNode> integrateMaps()
-	{	HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> processedTiles = successorCalculator.getProcessedTiles();
-		HashMap<AiTile,AiSearchNode> result = new HashMap<AiTile,AiSearchNode>();
-		for(HashMap<AiTile,AiSearchNode> map: processedTiles.values())
+	private Map<AiTile,AiSearchNode> integrateMaps()
+	{	Map<AiSearchNode,Map<AiTile,AiSearchNode>> processedTiles = successorCalculator.getProcessedTiles();
+		Map<AiTile,AiSearchNode> result = new HashMap<AiTile,AiSearchNode>();
+		for(Map<AiTile,AiSearchNode> map: processedTiles.values())
 		{	for(Entry<AiTile,AiSearchNode> entry: map.entrySet())
 			{	AiTile tile = entry.getKey();
 				AiSearchNode node1 = result.get(tile);

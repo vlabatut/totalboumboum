@@ -22,11 +22,10 @@ package org.totalboumboum.ai.v201213.adapter.data;
  */
 
 /**
- * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
+ * Représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
- *
  */
 public interface AiFloor extends AiSprite
 {	

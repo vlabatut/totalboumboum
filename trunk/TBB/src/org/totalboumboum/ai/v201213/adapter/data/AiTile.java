@@ -26,10 +26,9 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * représente une case du jeu, avec tous les sprites qu'elle contient.
+ * Représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class AiTile implements Comparable<AiTile>
 {	
@@ -47,26 +46,26 @@ public abstract class AiTile implements Comparable<AiTile>
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** ligne de la zone contenant cette case */
+	/** Ligne de la zone contenant cette case */
 	protected int row;
-	/** colonne de la zone contenant cette case */
+	/** Colonne de la zone contenant cette case */
 	protected int col;
 		
 	/** 
-	 * renvoie le numéro de la ligne contenant cette case
+	 * Renvoie le numéro de la ligne contenant cette case.
 	 * 
 	 * @return	
-	 * 		la ligne de cette case
+	 * 		La ligne de cette case.
 	 */
 	public int getRow()
 	{	return row;	
 	}
 
 	/** 
-	 * renvoie le numéro de la colonne contenant cette case
+	 * Renvoie le numéro de la colonne contenant cette case.
 	 *  
 	 * @return	
-	 * 		la colonne de cette case
+	 * 		La colonne de cette case.
 	 */
 	public int getCol()
 	{	return col;	
@@ -75,26 +74,26 @@ public abstract class AiTile implements Comparable<AiTile>
 	/////////////////////////////////////////////////////////////////
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** position de la case en pixels */
+	/** Position de la case en pixels */
 	protected double posX;
-	/** position de la case en pixels */
+	/** Position de la case en pixels */
 	protected double posY;
 	
 	/** 
-	 * renvoie l'abscisse de la case en pixels
+	 * Renvoie l'abscisse de la case en pixels.
 	 * 
 	 * @return	
-	 * 		l'abscisse de cette case
+	 * 		L'abscisse de cette case.
 	 */
 	public double getPosX()
 	{	return posX;	
 	}
 	
 	/** 
-	 * renvoie l'ordonnée de la case en pixels
+	 * Renvoie l'ordonnée de la case en pixels.
 	 * 
 	 * @return	
-	 * 		l'ordonnée de cette case
+	 * 		L'ordonnée de cette case.
 	 */
 	public double getPosY()
 	{	return posY;	
@@ -120,56 +119,80 @@ public abstract class AiTile implements Comparable<AiTile>
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des blocks contenus dans cette case 
+	 * (la liste peut être vide).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		les blocks éventuellement contenus dans cette case
+	 * 		Les blocks éventuellement contenus dans cette case.
 	 */
 	public abstract List<AiBlock> getBlocks();
 
 	/** 
-	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des bombes contenues dans cette case 
+	 * (la liste peut être vide).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		les bombes éventuellement contenues dans cette case
+	 * 		Les bombes éventuellement contenues dans cette case.
 	 */
 	public abstract List<AiBomb> getBombs();
 
 	/** 
-	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des feux contenus dans cette case 
+	 * (la liste peut être vide).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		les feux éventuellement contenus dans cette case
+	 * 		Les feux éventuellement contenus dans cette case.
 	 */
 	public abstract List<AiFire> getFires();
 
 	/** 
-	 * renvoie les sols de cette case 
-	 * (il y a forcément au moins un sol)
+	 * Renvoie les sols de cette case 
+	 * (il y a forcément au moins un sol).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		les sols contenus dans cette case
+	 * 		Les sols contenus dans cette case.
 	 */
 	public abstract List<AiFloor> getFloors();
 
 	/** 
-	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des personnages contenus dans cette case 
+	 * (la liste peut être vide).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		les personnages éventuellement contenus dans cette case
+	 * 		Les personnages éventuellement contenus dans cette case.
 	 */
 	public abstract List<AiHero> getHeroes();
 
 	/** 
-	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des items contenus dans cette case 
+	 * (la liste peut être vide).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		les items éventuellement contenus dans cette case
+	 * 		Les items éventuellement contenus dans cette case.
 	 */
 	public abstract List<AiItem> getItems();
 	
@@ -184,25 +207,27 @@ public abstract class AiTile implements Comparable<AiTile>
 	 * cela dépend à la fois du type des sprites considérés (Hero,
 	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
 	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
-	 * un obstacle, notamment pour les sprite de type Hero.</br>
-	 * cf. les méthodes de même nom dans les classes filles de {@link AiSprite}
+	 * un obstacle, notamment pour les sprite de type Hero.
+	 * <br/>
+	 * cf. les méthodes de même nom dans les classes filles de {@link AiSprite}.
 	 * 
 	 *  @param sprite
-	 *  	le sprite qui veut traverser cette case
+	 *  	Le sprite qui veut traverser cette case.
 	 *  @param ignoreBlocks
-	 *  	si vrai, la fonction ne considère pas les blocks comme des obstacles
+	 *  	Si vrai, la fonction ne considère pas les blocks comme des obstacles.
 	 *  @param ignoreBombs
-	 *  	si vrai, la fonction ne considère pas les bombes comme des obstacles
+	 *  	Si vrai, la fonction ne considère pas les bombes comme des obstacles.
 	 *  @param ignoreFires
-	 *  	si vrai, la fonction ne considère pas le feu comme un obstacle
+	 *  	Si vrai, la fonction ne considère pas le feu comme un obstacle.
 	 *  @param ignoreFloors
-	 *  	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute façon)
+	 *  	Si vrai, la fonction ne considère pas les sols comme des obstacles 
+	 *  	(ce qu'ils sont rarement, de toute façon).
 	 *  @param ignoreHeroes
-	 *  	si vrai, la fonction ne considère pas les personnages comme des obstacles
+	 *  	Si vrai, la fonction ne considère pas les personnages comme des obstacles.
 	 *  @param ignoreItems
-	 *  	si vrai, la fonction ne considère pas les items comme des obstacles
+	 *  	Si vrai, la fonction ne considère pas les items comme des obstacles.
 	 *  @return	
-	 *  	Renvoie {@code true} ssi ce sprite, à cet instant, peut traverser cette case
+	 *  	Renvoie {@code true} ssi ce sprite, à cet instant, peut traverser cette case.
 	 */
 	public abstract boolean isCrossableBy(AiSprite sprite, 
 			boolean ignoreBlocks, boolean ignoreBombs, boolean ignoreFires, boolean ignoreFloors, boolean ignoreHeroes, boolean ignoreItems);
@@ -222,14 +247,14 @@ public abstract class AiTile implements Comparable<AiTile>
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
+	 * Renvoie le voisin de cette case passée en paramètre, situé dans la direction
 	 * passée en paramètre.
 	 * <br/> 
 	 * <b>ATTENTION :</b> seulement les directions primaires sont
 	 * utilisées ({@link Direction#UP UP}, {@link Direction#RIGHT RIGHT}, {@link Direction#DOWN DOWN}, 
 	 * {@link Direction#LEFT LET}) : pas de direction composite ({@link Direction#UPLEFT UPLEFT}, etc.).
 	 * Dans le cas contraire, la fonction lève une {@link IllegalArgumentException}.
-	 * </br>
+	 * <br/>
 	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
@@ -237,9 +262,9 @@ public abstract class AiTile implements Comparable<AiTile>
 	 * (row,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction
-	 * 		direction dans laquelle le voisin se trouve
+	 * 		Direction dans laquelle le voisin se trouve.
 	 * @return	
-	 * 		le voisin de cette case, situé dans la direction indiquée.
+	 * 		Le voisin de cette case, situé dans la direction indiquée.
 	 *  
 	 * @throws
 	 * 		IllegalArgumentException ssi la direction est composite. 
@@ -250,15 +275,23 @@ public abstract class AiTile implements Comparable<AiTile>
 	 * Renvoie la liste des voisins de cette case.
 	 * Il s'agit des voisins directs situés en haut, 
 	 * à gauche, en bas et à droite.
-	 * </br>
+	 * <br/>
+	 * <b>Note :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
+	 * <br/>
 	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (row,0), le voisin de gauche est la case située à la position
 	 * (row,width-1). même chose pour les bordures haut et bas.
+	 * <br/>
+	 * <b>ATTENTION :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		la liste des voisins situés en haut, à gauche, en bas 
+	 * 		La liste des voisins situés en haut, à gauche, en bas 
 	 * 		et à droite de la case passée en paramètre.
 	 */
 	public abstract List<AiTile> getNeighbors();

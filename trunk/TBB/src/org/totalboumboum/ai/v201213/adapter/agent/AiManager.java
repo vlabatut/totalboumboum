@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201213.adapter.communication.AiAction;
@@ -271,11 +273,11 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	public final void updateDurations()
 	{	// init
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
-		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
-		HashMap<String,Float> averageDurations = getAverageDurations();
+		Map<String,LinkedList<Long>> instantDurations = getInstantDurations();
+		Map<String,Float> averageDurations = getAverageDurations();
 		List<String> stepNames = new ArrayList<String>(getStepNames());
 		stepNames.add(0,TOTAL_DURATION);
-		HashMap<String,Long> agentDurations = ai.getStepDurations();
+		Map<String,Long> agentDurations = ai.getStepDurations();
 		
 		// update
 		averageDurations.clear();
@@ -332,18 +334,17 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		}
 		
 		// paths
-		{	List<AiPath> aiPaths = output.getPaths();
+		{	Map<AiPath,Color> aiPaths = output.getPaths();
 			List<List<Tile>> enginePaths = getPaths();
 			enginePaths.clear();
-			List<Color> aiPathColors = output.getPathColors();
 			List<Color> enginePathColors = getPathColors();
 			enginePathColors.clear();
-			for(int index=0;index<aiPaths.size();index++)
+			for(Entry<AiPath, Color> entry: aiPaths.entrySet())
 			{	// color
-				Color color = aiPathColors.get(index);
+				Color color = entry.getValue();
 				enginePathColors.add(color);
 				// path
-				AiPath aiPath = aiPaths.get(index);
+				AiPath aiPath = entry.getKey();
 				List<Tile> path = new ArrayList<Tile>();
 				enginePaths.add(path);
 				for(AiLocation location: aiPath.getLocations())

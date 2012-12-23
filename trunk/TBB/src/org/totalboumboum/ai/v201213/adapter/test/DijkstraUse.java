@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201213.adapter.test;
  * 
  */
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
@@ -87,7 +87,7 @@ public final class DijkstraUse
 	 * @param paths
 	 * 		Les chemins trouvés par dijkstra.
 	 */
-	private static void displayTimeMatrix(AiZone zone, HashMap<AiTile,AiSearchNode> paths)
+	private static void displayTimeMatrix(AiZone zone, Map<AiTile,AiSearchNode> paths)
 	{	int width = zone.getWidth();
 		int height = zone.getHeight();
 		
@@ -148,7 +148,7 @@ public final class DijkstraUse
 			// de recherche, alors la méthode processPath de ce
 			// noeud permet d'obtenir le chemin pour aller dans
 			// cette case
-			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
+			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
 			// on affiche une matrice correspondant au temps nécessaire
 			// pour aller dans chaque case
 			displayTimeMatrix(zone,paths);
@@ -203,7 +203,7 @@ public final class DijkstraUse
 		AiLocation startLocation = new AiLocation(24,25,zone);
 		try
 		{	// application de l'algo
-			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
+			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
 			// matrice des temps
 			displayTimeMatrix(zone,paths);
 			// chemin
@@ -249,7 +249,7 @@ public final class DijkstraUse
 		AiLocation startLocation = new AiLocation(hero);
 		try
 		{	// application de l'algo
-			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
+			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
 			// matrice des temps
 			displayTimeMatrix(zone,paths);
 			// chemin
@@ -292,7 +292,7 @@ public final class DijkstraUse
 		AiLocation startLocation = new AiLocation(hero);
 		try
 		{	// application de l'algo
-			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
+			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
 			// matrice des temps
 			displayTimeMatrix(zone,paths);
 			// chemin
@@ -337,7 +337,7 @@ public final class DijkstraUse
 		AiLocation startLocation = new AiLocation(hero);
 		try
 		{	// application de l'algo
-			HashMap<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
+			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
 			// matrice des temps
 			displayTimeMatrix(zone,paths);
 			// chemin
