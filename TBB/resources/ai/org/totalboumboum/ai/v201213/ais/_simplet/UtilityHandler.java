@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -125,7 +126,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 	protected Set<AiTile> selectTiles() throws StopRequestException
 	{	ai.checkInterruption();
 		Set<AiTile> result = new TreeSet<AiTile>();
-		HashMap<AiTile,AiSearchNode> map = null;
+		Map<AiTile,AiSearchNode> map = null;
 		
 		// ici, la sélection des cases dont on veut l'utilité dépend du mode
 		AiMode mode = ai.modeHandler.getMode();
