@@ -44,8 +44,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
- * 
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
+ * <br/>
  * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
@@ -633,15 +633,15 @@ public abstract class AiZone
 	 * Renvoie la direction de la case target relativement à la case source.
 	 * Par exemple, la case target de coordonnées (5,5) est à droite de
 	 * la case source de coordonnées (5,6).
-	 * </br>
+	 * <br/>
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
 	 * il faut se déplacer pour aller de la case source à la case target.
-	 * </br>
+	 * <br/>
 	 * <b>ATTENTION 1 :</b> si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
 	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
 	 * la classe {@link Direction} pour plus d'informations sur ces valeurs.
-	 * </br>
+	 * <br/>
 	 * <b>ATTENTION 2 :</b> comme les niveaux sont circulaires, il y a toujours deux directions possibles.
 	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera

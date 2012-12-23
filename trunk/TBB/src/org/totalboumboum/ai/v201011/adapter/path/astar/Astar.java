@@ -43,8 +43,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
- * boucler à l'infini.</br>
- * 
+ * boucler à l'infini.
+ * <br/>
  * Cette implément trouve donc le chemin le plus court entre deux cases,
  * en considérant les obstacles. Elle a besoin de quatre paramètres :<ul>
  * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilité des cases).</li>

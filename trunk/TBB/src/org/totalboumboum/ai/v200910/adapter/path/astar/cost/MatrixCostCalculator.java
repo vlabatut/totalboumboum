@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * Ici, le cout pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce cout est égal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
- * </br>
+ * <br/>
  * Cette classe est utilie si on veut calculer des couts plus fins qu'avec BasicCostCalculator,
  * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
  * aux cases qui sont à portée d'une bombe susceptibles d'exploser, ou bien 

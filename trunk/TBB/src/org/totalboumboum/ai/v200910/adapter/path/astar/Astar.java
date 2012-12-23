@@ -44,14 +44,14 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
- * boucler à l'infini.</br>
- * 
+ * boucler à l'infini.
+ * <br/>
  * Cette implément trouved donc le chemin le plus court entre deux cases,
  * en considérant les obstacles. Elle a besoin de trois paramètres :
  * 		- le personnage qui doit effectuer le trajet entre les deux cases
  * 		- une fonction de coût, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
- * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir</br>
- * 
+ * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir
+ * <br/>
  * A noter qu'il s'agit d'une implément non-déterministe de l'algorithme.
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
  * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
