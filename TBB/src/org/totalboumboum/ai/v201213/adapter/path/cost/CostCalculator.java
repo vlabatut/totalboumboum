@@ -71,11 +71,13 @@ public abstract class CostCalculator
 	/////////////////////////////////////////////////////////////////
 	/** Le coût <i>supplémentaire</i> associé à une case contenant un personnage adverse */
 	protected double opponentCost = 0;
+	/** Le coût <i>supplémentaire</i> associé à une case contenant un malus */
+	protected double malusCost = 0;
 	
 	/**
 	 * Change le côut <i>supplémentaire</i> associé à une 
 	 * case contenant un joueur adverse.<br/>
-	 * Utiliser un poids non-null permet de préférer des chemins 
+	 * Utiliser un poids non-nul permet de préférer des chemins 
 	 * qui ne contiennent pas d'adversaire, tout en conservant
 	 * la possibilité d'explorer des chemins contenant des adversaires
 	 * s'il n'y a pas d'autre possibilité.
@@ -92,6 +94,28 @@ public abstract class CostCalculator
 	{	if(opponentCost<0)
 			throw new IllegalArgumentException("The extra cost for opponents in CostCalculator cannot be negative.");
 		this.opponentCost = opponentCost;
+	}
+	
+	/**
+	 * Change le côut <i>supplémentaire</i> associé à une 
+	 * case contenant un malus.<br/>
+	 * Utiliser un poids non-nul permet de préférer des chemins 
+	 * qui ne contiennent pas de malus, tout en conservant
+	 * la possibilité d'explorer des chemins contenant des malus
+	 * s'il n'y a pas d'autre possibilité.
+	 * <br/>
+	 * Le poids est nul par défaut.
+	 * 
+	 * @param malusCost
+	 * 		Le coût <i>supplémentaire</i> associé à un malus.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Si le coût passé en paramètre est négatif.
+	 */
+	public void setMalusCost(double malusCost)
+	{	if(malusCost<0)
+			throw new IllegalArgumentException("The extra cost for malus in CostCalculator cannot be negative.");
+		this.malusCost = malusCost;
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -22,11 +22,13 @@ package org.totalboumboum.ai.v201213.adapter.path.cost;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
+import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.path.AiLocation;
@@ -158,6 +160,19 @@ public class MatrixCostCalculator extends CostCalculator
 			opponents.retainAll(heroes);
 			if(!opponents.isEmpty())
 				result = result + opponentCost;
+		}
+		
+		// on rajoute le coût supplémentaire si la case contient un malus
+		if(malusCost>0)
+		{	List<AiItem> items = destination.getItems();
+			Iterator<AiItem> it = items.iterator();
+			boolean containsMalus = false;
+			while(it.hasNext() && !containsMalus)
+			{	AiItem item = it.next();
+				containsMalus = !item.getType().isBonus();
+			}
+			if(containsMalus)
+				result = result + malusCost;
 		}
 		
 		return result;
