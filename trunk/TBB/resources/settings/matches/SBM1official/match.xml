@@ -56,7 +56,6 @@
 
  	
  	<rounds randomOrder="true" >
-  		<round local="false" name="round11" />
   		<round local="false" name="round12" />
   		<round local="false" name="round13" />
   		<round local="false" name="round14" />

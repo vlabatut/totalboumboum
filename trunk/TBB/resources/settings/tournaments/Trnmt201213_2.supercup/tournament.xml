@@ -26,7 +26,7 @@
 
  	<notes>
  		<line value="5ème tournoi opposant les meilleurs agents de chaque édition du tournoi." />
- 		<line value="Attention : le(s) agent(s) de la dernière édition doivent être sélectionnés en premier." />
+ 		<line value="Attention : l'ordre de sélection des agents a un effet sur la structure du tournoi. Il faut d'abord sélectionner les deux premiers de cette année, puis ranger les agents par ordre de niveau croissant." />
  		<line value="Date: 02-12-2012" />
  	</notes>
  	
@@ -34,8 +34,8 @@
 
 	<cup sortPlayers="NONE" >
 		<leg number="0" randomizeParts="false" >
-			<part name="Demi-finale 1" number="0">
-				<match local="true" name="leg1" />
+			<part name="Demi-Finale" number="0" rank="2">
+				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
 						<scores type="BOMBINGS"/>
@@ -47,28 +47,14 @@
 					<player part="-1" rank="2"/>
 					<player part="-1" rank="3"/>
 					<player part="-1" rank="4"/>
-				</players>
-			</part>
-			<part name="Demi-finale 2" number="1">
-				<match local="true" name="leg1" />
-				<tieBreak>
-					<rankings>
-						<scores type="BOMBINGS"/>
-					</rankings>
-					<match local="true" name="tieBreak" />
-				</tieBreak>
-				<players>
 					<player part="-1" rank="5"/>
-					<player part="-1" rank="6"/>
-					<player part="-1" rank="7"/>
-					<player part="-1" rank="8"/>
 				</players>
 			</part>
 		</leg>
 		
-		<leg number="1" >
-			<part name="Petite finale" number="0"  rank="2">
-				<match local="true" name="leg2" />
+		<leg number="1" randomizeParts="false" >
+			<part name="Finale" number="0" rank="1">
+				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
 						<scores type="BOMBINGS"/>
@@ -76,29 +62,14 @@
 					<match local="true" name="tieBreak" />
 				</tieBreak>
 				<players>
-					<player part="0" rank="3"/>
-					<player part="1" rank="3"/>
-					<player part="0" rank="4"/>
-					<player part="1" rank="4"/>
-				</players>
-			</part>
-			<part name="Finale" number="1" rank="1">
-				<match local="true" name="leg2" />
-				<tieBreak>
-					<rankings>
-						<scores type="BOMBINGS"/>
-					</rankings>
-					<match local="true" name="tieBreak" />
-				</tieBreak>
-				<players>
-					<player part="0" rank="1"/>
-					<player part="1" rank="1"/>
-					<player part="0" rank="2"/>
-					<player part="1" rank="2"/>
+					<player leg="-1" part="-1" rank="6"/>
+					<player leg="-1" part="-1" rank="7"/>
+					<player leg="0"  part="0"  rank="1"/>
+					<player leg="0"  part="0"  rank="2"/>
+					<player leg="0"  part="0"  rank="3"/>
 				</players>
 			</part>
 		</leg>
-		
 	</cup>		
 		
 </tournament>
