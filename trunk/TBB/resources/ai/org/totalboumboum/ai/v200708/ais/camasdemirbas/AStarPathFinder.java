@@ -369,6 +369,7 @@ public class AStarPathFinder implements PathFinder {
 		/** */
 		private Node parent;
 		/** */
+		@SuppressWarnings("hiding")
 		private float heuristic;
 		/** */
 		private int depth;
