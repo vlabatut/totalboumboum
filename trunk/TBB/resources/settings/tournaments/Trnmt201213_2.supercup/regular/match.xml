@@ -32,7 +32,7 @@
 	<limits>
 		<confrontation>
 			<points local="true" name="points" />
-			<threshold value="7" />			
+			<threshold value="6" />			
 		</confrontation>
 	</limits>
  	
@@ -41,7 +41,6 @@
   		<round local="true" name="roundCroix" />
   		<round local="true" name="roundHorizontal" />
   		<round local="true" name="roundItems" />
-  		<round local="true" name="roundLimitsiz" />
   		<round local="true" name="roundPower" />
   		<round local="true" name="roundReadysetgo" />
   	</rounds>
