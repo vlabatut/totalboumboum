@@ -25,34 +25,33 @@ import org.totalboumboum.ai.v201213.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
 
 /**
- * simule un sol du jeu, ie le graphisme affiché en tant que première couche de toute
+ * Simule un sol du jeu, ie le graphisme affiché en tant que première couche de toute
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
- *
  */
 public final class AiSimFloor extends AiSimSprite implements AiFloor
 {
 	/**
-	 * crée une simulation du sol passé en paramètre,
+	 * Crée une simulation du sol passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification du sol
+	 * 		Numéro d'identification du sol.
 	 * @param tile
-	 * 		case contenant le sol
+	 * 		Case contenant le sol.
 	 * @param posX
-	 * 		abscisse du sol
+	 * 		Abscisse du sol.
 	 * @param posY
-	 * 		ordonnée du sol
+	 * 		Ordonnée du sol.
 	 * @param posZ
-	 * 		hauteur du sol (forcément 0)
+	 * 		Hauteur du sol (forcément 0).
 	 * @param state
-	 * 		état du sol
+	 * 		État du sol.
 	 * @param burningDuration
-	 * 		durée de combustion du sol
+	 * 		Durée de combustion du sol.
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement du sol (inutile ici)
+	 * 		Vitesse courante de déplacement du sol (inutile ici).
 	 */
 	protected AiSimFloor(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed)
@@ -60,13 +59,13 @@ public final class AiSimFloor extends AiSimSprite implements AiFloor
 	}	
 
 	/**
-	 * crée une simulation du sol passé en paramètre, et contenue dans 
+	 * Crée une simulation du sol passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite
 	 * @param floor
-	 * 		sprite à simuler
+	 * 		Sprite à simuler.
 	 */
 	protected AiSimFloor(AiSimTile tile, AiFloor floor)
 	{	super(tile,floor);		

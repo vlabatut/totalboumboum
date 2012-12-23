@@ -81,7 +81,7 @@ public abstract class AiUtilityCriterionInteger<T extends ArtificialIntelligence
 	public AiUtilityCriterionInteger(T ai, String name, int inf, int sup) throws StopRequestException
 	{	// init
 		super(ai,name);
-		 
+		
 		// init valeurs
 		for(int i=inf;i<=sup;i++)
 			this.domain.add(i);

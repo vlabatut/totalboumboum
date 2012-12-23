@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201213.adapter.path;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
@@ -203,14 +205,14 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** agent ayant invoqué l'algorithme de recherche */
+	/** Agent ayant invoqué l'algorithme de recherche */
 	private ArtificialIntelligence ai = null;
 	
 	/**
-	 * renvoie l'agent qui a invoqué l'algorithme de recherche
+	 * Renvoie l'agent qui a invoqué l'algorithme de recherche.
 	 * 
 	 * @return
-	 * 		la classe principale de l'agent ayant invoqué l'algorithme de recherche.
+	 * 		La classe principale de l'agent ayant invoqué l'algorithme de recherche.
 	 */
 	public ArtificialIntelligence getAi()
 	{	return ai;	
@@ -226,7 +228,7 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * Renvoie l'emplacement associé au noeud de recherche.
 	 * 
 	 * @return	
-	 * 		Une emplacement.
+	 * 		Un emplacement.
 	 */
 	public AiLocation getLocation()
 	{	return location;
@@ -235,7 +237,7 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
     /////////////////////////////////////////////////////////////////
 	// DEPTH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** profondeur du noeud dans l'arbre de recherche */
+	/** Profondeur du noeud dans l'arbre de recherche */
 	private int depth = 0;
 	
 	/**
@@ -243,7 +245,7 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * dans l'arbre de recherche. 
 	 * 
 	 * @return	
-	 * 		un entier
+	 * 		Un entier.
 	 */
 	public int getDepth()
 	{	return depth;
@@ -252,26 +254,26 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** coût du noeud (calculé depuis la racine) */
+	/** Coût du noeud (calculé depuis la racine) */
 	private double cost = 0;
-	/** calculateur de coût */
+	/** Calculateur de coût */
 	private CostCalculator costCalculator;
 	
 	/**
 	 * Renvoie le coût du noeud calculé depuis la racine. 
 	 * 
 	 * @return	
-	 * 		le coût
+	 * 		Le coût.
 	 */
 	public double getCost()
 	{	return cost;
 	}
 	
 	/**
-	 * renvoie la fonction de cout de ce noeud
+	 * Renvoie la fonction de coût de ce noeud.
 	 * 
 	 * @return 
-	 * 		la fonction de cout de ce noeud
+	 * 		La fonction de cout de ce noeud.
 	 */
 	public CostCalculator getCostCalculator()
 	{	return costCalculator;		
@@ -280,26 +282,26 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	/////////////////////////////////////////////////////////////////
 	// HEURISTIC		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** heuristique du noeud */
+	/** Heuristique du noeud */
 	private double heuristic = 0;
-	/** calculateur de l'heuristique */
+	/** Calculateur de l'heuristique */
 	private HeuristicCalculator heuristicCalculator;
 	
 	/**
 	 * Renvoie l'heuristique du noeud 
 	 * 
 	 * @return	
-	 * 		l'heuristique
+	 * 		L'heuristique.
 	 */
 	public double getHeuristic()
 	{	return heuristic;
 	}
 	
 	/**
-	 * renvoie la fonction heuristique de ce noeud
+	 * Renvoie la fonction heuristique de ce noeud.
 	 * 
 	 * @return 
-	 * 		la fonction heuristique de ce noeud
+	 * 		La fonction heuristique de ce noeud.
 	 */
 	public HeuristicCalculator getHeuristicCalculator()
 	{	return heuristicCalculator;		
@@ -382,8 +384,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
     /////////////////////////////////////////////////////////////////
 	// EXPLORED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** map contenant les noeuds ancêtres présent dans la branche courante de l'arbre de recherche */
-//	private HashMap<AiTile,AiSearchNode> exploredNodes;
+	/** Map contenant les noeuds ancêtres présent dans la branche courante de l'arbre de recherche */
+//	private Map<AiTile,AiSearchNode> exploredNodes;
 
 	/**
 	 * Renvoie la map des noeud explorés,
@@ -392,7 +394,7 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * @return
 	 * 		La map contenant les noeuds déjà explorés
 	 */
-/*	public HashMap<AiTile,AiSearchNode> getExploredNodes()
+/*	public Map<AiTile,AiSearchNode> getExploredNodes()
 	{	return exploredNodes;
 	}
 */	
@@ -466,26 +468,34 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
    /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** calculateur des successeurs */
+	/** Calculateur des successeurs */
 	private SuccessorCalculator successorCalculator;
+	/** Indique si les enfants de ce noeud ont déjà été calculés */ 
+	private boolean childrenProcessed = false;
 	/** Liste des enfants de ce noeud */
-	private List<AiSearchNode> children = null;
+	private final List<AiSearchNode> children = new ArrayList<AiSearchNode>();
+	/** Version immuable de la liste des enfants de ce noeud */
+	private final List<AiSearchNode> externalChildren = Collections.unmodifiableList(children);
 	
 	/**
-	 * renvoie la fonction successeur de ce noeud
+	 * Renvoie la fonction successeur de ce noeud.
 	 * 
 	 * @return 
-	 * 		la fonction successeur de ce noeud
+	 * 		La fonction successeur de ce noeud.
 	 */
 	public SuccessorCalculator getSuccessorCalculator()
 	{	return successorCalculator;		
 	}
 	
 	/**
-	 * renvoie les fils de ce noeud de recherche.
+	 * Renvoie les fils de ce noeud de recherche.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		une liste contenant les fils de ce noeud
+	 * 		Une liste contenant les fils de ce noeud.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
@@ -493,10 +503,13 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	public List<AiSearchNode> getChildren() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		if(children==null)
-			children = successorCalculator.processSuccessors(this);
+		if(!childrenProcessed)
+		{	childrenProcessed = true;
+			List<AiSearchNode> temp = successorCalculator.processSuccessors(this);
+			children.addAll(temp);
+		}
 		
-		return children;
+		return externalChildren;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -633,8 +646,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * permet de terminer proprement ce noeud une fois
-	 * qu'il n'est plus utilisé
+	 * Permet de terminer proprement ce noeud une fois
+	 * qu'il n'est plus utilisé.
 	 */
 	protected void finish()
 	{	ai = null;

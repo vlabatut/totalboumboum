@@ -22,9 +22,11 @@ package org.totalboumboum.ai.v201213.adapter.data.internal;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201213.adapter.data.AiBomb;
@@ -47,20 +49,19 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
- * représente une case du jeu, avec tous les sprites qu'elle contient.
+ * Représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- *
  */
 final class AiDataTile extends AiTile
 {	
 	/**
-	 * construit une représentation de la case passée en paramètre
+	 * Construit une représentation de la case passée en paramètre.
 	 * 
 	 * @param tile
-	 * 		case représentée
+	 * 		Case représentée.
 	 * @param zone
-	 * 		zone contenant la représentation
+	 * 		Zone contenant la représentation.
 	 */
 	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
@@ -75,7 +76,7 @@ final class AiDataTile extends AiTile
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cette case et son contenu
+	 * Met à jour cette case et son contenu.
 	 * 
 	 * @param elapsedTime
 	 * 		Temps écoulé depuis la dernière mise à jour.
@@ -87,7 +88,7 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** représentation de la zone à laquelle cette case appartient */
+	/** Représentation de la zone à laquelle cette case appartient */
 	private AiDataZone zone;
 	
 	@Override
@@ -98,14 +99,14 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case du jeu que cette classe représente */
+	/** Case du jeu que cette classe représente */
 	private Tile tile;
 	
 	/**
-	 * renvoie la case réelle représentée par cet objet
+	 * Renvoie la case réelle représentée par cet objet.
 	 * 
 	 * @return
-	 * 		la case réelle représentée par cet objet
+	 * 		La case réelle représentée par cet objet.
 	 */
 	protected Tile getTile()
 	{	return tile;
@@ -115,7 +116,7 @@ final class AiDataTile extends AiTile
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * initialise les numéros de ligne et colonne de cette case 
+	 * Initialise les numéros de ligne et colonne de cette case. 
 	 */
 	private void initTileLocation()
 	{	row = tile.getRow();
@@ -126,7 +127,7 @@ final class AiDataTile extends AiTile
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * initialise la position de cette case en pixels 
+	 * Initialise la position de cette case en pixels. 
 	 */
 	private void initPixelLocation()
 	{	posX = tile.getPosX();
@@ -136,193 +137,276 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des blocks éventuellement contenus dans cette case */
-	private final List<AiDataBlock> internalBlocks = new ArrayList<AiDataBlock>();
-	/** liste à usage externe des blocks éventuellement contenus dans cette case */
-	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
-	/** liste à usage interne des bombes éventuellement contenues dans cette case */
-	private final List<AiDataBomb> internalBombs = new ArrayList<AiDataBomb>();
-	/** liste à usage externe des bombes éventuellement contenues dans cette case */
-	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
-	/** liste à usage interne des feux éventuellement contenus dans cette case */
-	private final List<AiDataFire> internalFires = new ArrayList<AiDataFire>();
-	/** liste à usage externe des feux éventuellement contenus dans cette case */
-	private final List<AiFire> externalFires = new ArrayList<AiFire>();
-	/** liste à usage interne des sols éventuellement contenus dans cette case */
-	private final List<AiDataFloor> internalFloors = new ArrayList<AiDataFloor>();
-	/** liste à usage externe des sols éventuellement contenus dans cette case */
-	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
-	/** liste à usage interne des personnages éventuellement contenus dans cette case */
-	private final List<AiDataHero> internalHeroes = new ArrayList<AiDataHero>();
-	/** liste à usage externe des personnages éventuellement contenus dans cette case */
-	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
-	/** liste à usage interne des items éventuellement contenus dans cette case */
-	private final List<AiDataItem> internalItems = new ArrayList<AiDataItem>();
-	/** liste à usage externe des items éventuellement contenus dans cette case */
-	private final List<AiItem> externalItems = new ArrayList<AiItem>();
-
+	/** 
+	 * Met à jour les représentations des sprites contenus dans cette case.
+	 * 
+	 * @param elapsedTime
+	 * 		Temps écoulé depuis la dernière mise à jour.
+	 */
+	private void updateSprites(long elapsedTime)
+	{	updateBlocks(elapsedTime);
+		updateBombs(elapsedTime);
+		updateFires(elapsedTime);
+		updateFloors(elapsedTime);
+		updateHeroes(elapsedTime);
+		updateItems(elapsedTime);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BLOCKS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Liste à usage interne des blocs éventuellement contenus dans cette case */
+	private final List<AiDataBlock> blocks = new ArrayList<AiDataBlock>();
+	/** Liste à usage externe des blocs éventuellement contenus dans cette case */
+	private final List<AiBlock> neutralBlocks = new ArrayList<AiBlock>();
+	/** Version immuable de la liste externe de blocs */
+	private final List<AiBlock> externalNeutralBlocks = Collections.unmodifiableList(neutralBlocks);
+	
 	@Override
 	public List<AiBlock> getBlocks()
-	{	return externalBlocks;	
-	}
-	
-	@Override
-	public List<AiBomb> getBombs()
-	{	return externalBombs;	
-	}
-	
-	@Override
-	public List<AiFire> getFires()
-	{	return externalFires;	
-	}
-	
-	@Override
-	public List<AiFloor> getFloors()
-	{	return externalFloors;	
-	}
-	
-	@Override
-	public List<AiHero> getHeroes()
-	{	return externalHeroes;	
-	}
-	
-	@Override
-	public List<AiItem> getItems()
-	{	return externalItems;	
+	{	return externalNeutralBlocks;	
 	}
 	
 	/** 
-	 * met à jour les représentations des sprites contenus dans cette case
+	 * Met à jour les représentations des blocs contenus dans cette case.
 	 * 
 	 * @param elapsedTime
-	 * 		temps écoulé depuis la dernière mise à jour
+	 * 		Temps écoulé depuis la dernière mise à jour.
 	 */
-	private void updateSprites(long elapsedTime)
-	{	// block
-		{	internalBlocks.clear();
-			externalBlocks.clear();
-			Iterator<Block> it = tile.getBlocks().iterator();
-			while(it.hasNext())
-			{	Block b = it.next();
-				GestureName gesture = b.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataBlock block = zone.getBlock(b);
-					if(block==null)
-					{	block = new AiDataBlock(this,b);
-						zone.addBlock(block);
-					}
-					block.update(this,elapsedTime);
-					internalBlocks.add(block);
-					externalBlocks.add(block);
+	private void updateBlocks(long elapsedTime)
+	{	blocks.clear();
+		neutralBlocks.clear();
+		Iterator<Block> it = tile.getBlocks().iterator();
+		while(it.hasNext())
+		{	Block b = it.next();
+			GestureName gesture = b.getCurrentGesture().getName();
+			if(!(gesture==GestureName.NONE
+				|| gesture==GestureName.HIDING
+				|| gesture==GestureName.ENDED))
+			{	AiDataBlock block = zone.getBlock(b);
+				if(block==null)
+				{	block = new AiDataBlock(this,b);
+					zone.addBlock(block);
 				}
+				block.update(this,elapsedTime);
+				blocks.add(block);
+				neutralBlocks.add(block);
 			}
 		}
-		// bombs
-		{	internalBombs.clear();
-			externalBombs.clear();
-			Iterator<Bomb> it = tile.getBombs().iterator();
-			while(it.hasNext())
-			{	Bomb b = it.next();
-				GestureName gesture = b.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataBomb bomb = zone.getBomb(b);
-					if(bomb==null)
-					{	bomb = new AiDataBomb(this,b);
-						zone.addBomb(bomb);
-					}
-					bomb.update(this,elapsedTime);
-					internalBombs.add(bomb);
-					externalBombs.add(bomb);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BOMBS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Liste à usage interne des bombes éventuellement contenues dans cette case */
+	private final List<AiDataBomb> bombs = new ArrayList<AiDataBomb>();
+	/** Liste à usage externe des bombes éventuellement contenues dans cette case */
+	private final List<AiBomb> neutralBombs = new ArrayList<AiBomb>();
+	/** Version immuable de la liste externe de bombes */
+	private final List<AiBomb> externalNeutralBombs = Collections.unmodifiableList(neutralBombs);
+	
+	@Override
+	public List<AiBomb> getBombs()
+	{	return externalNeutralBombs;	
+	}
+	
+	/** 
+	 * Met à jour les représentations des bombes contenus dans cette case.
+	 * 
+	 * @param elapsedTime
+	 * 		Temps écoulé depuis la dernière mise à jour.
+	 */
+	private void updateBombs(long elapsedTime)
+	{	bombs.clear();
+		neutralBombs.clear();
+		Iterator<Bomb> it = tile.getBombs().iterator();
+		while(it.hasNext())
+		{	Bomb b = it.next();
+			GestureName gesture = b.getCurrentGesture().getName();
+			if(!(gesture==GestureName.NONE
+				|| gesture==GestureName.HIDING
+				|| gesture==GestureName.ENDED))
+			{	AiDataBomb bomb = zone.getBomb(b);
+				if(bomb==null)
+				{	bomb = new AiDataBomb(this,b);
+					zone.addBomb(bomb);
 				}
+				bomb.update(this,elapsedTime);
+				bombs.add(bomb);
+				neutralBombs.add(bomb);
 			}
 		}
-		// fires
-		{	internalFires.clear();
-			externalFires.clear();
-			Iterator<Fire> it = tile.getFires().iterator();
-			while(it.hasNext())
-			{	Fire f = it.next();
-				GestureName gesture = f.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataFire fire = zone.getFire(f);
-					if(fire==null)
-					{	fire = new AiDataFire(this,f);
-						zone.addFire(fire);
-					}
-					fire.update(this,elapsedTime);
-					internalFires.add(fire);
-					externalFires.add(fire);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FIRES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Liste à usage interne des feux éventuellement contenus dans cette case */
+	private final List<AiDataFire> fires = new ArrayList<AiDataFire>();
+	/** Liste à usage externe des feux éventuellement contenus dans cette case */
+	private final List<AiFire> neutralFires = new ArrayList<AiFire>();
+	/** Version immuable de la liste externe de feux */
+	private final List<AiFire> externalNeutralFires = Collections.unmodifiableList(neutralFires);
+	
+	@Override
+	public List<AiFire> getFires()
+	{	return externalNeutralFires;	
+	}
+	
+	/** 
+	 * Met à jour les représentations des feux contenus dans cette case.
+	 * 
+	 * @param elapsedTime
+	 * 		Temps écoulé depuis la dernière mise à jour.
+	 */
+	private void updateFires(long elapsedTime)
+	{	fires.clear();
+		neutralFires.clear();
+		Iterator<Fire> it = tile.getFires().iterator();
+		while(it.hasNext())
+		{	Fire f = it.next();
+			GestureName gesture = f.getCurrentGesture().getName();
+			if(!(gesture==GestureName.NONE
+				|| gesture==GestureName.HIDING
+				|| gesture==GestureName.ENDED))
+			{	AiDataFire fire = zone.getFire(f);
+				if(fire==null)
+				{	fire = new AiDataFire(this,f);
+					zone.addFire(fire);
 				}
+				fire.update(this,elapsedTime);
+				fires.add(fire);
+				neutralFires.add(fire);
 			}
 		}
-		// floor
-		{	internalFloors.clear();
-			externalFloors.clear();
-			Iterator<Floor> it = tile.getFloors().iterator();
-			while(it.hasNext())
-			{	Floor f = it.next();
-				GestureName gesture = f.getCurrentGesture().getName();
-				if(!(gesture==GestureName.HIDING 
-					|| gesture==GestureName.ENDED))
-				{	AiDataFloor floor = zone.getFloor(f);
-					if(floor==null)
-					{	floor = new AiDataFloor(this,f);
-						zone.addFloor(floor);
-					}
-					floor.update(this,elapsedTime);
-					internalFloors.add(floor);
-					externalFloors.add(floor);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FLOORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Liste à usage interne des sols éventuellement contenus dans cette case */
+	private final List<AiDataFloor> floors = new ArrayList<AiDataFloor>();
+	/** Liste à usage externe des sols éventuellement contenus dans cette case */
+	private final List<AiFloor> neutralFloors = new ArrayList<AiFloor>();
+	/** Version immuable de la liste externe de sols */
+	private final List<AiFloor> externalNeutralFloors = Collections.unmodifiableList(neutralFloors);
+	
+	@Override
+	public List<AiFloor> getFloors()
+	{	return externalNeutralFloors;	
+	}
+	
+	/** 
+	 * Met à jour les représentations des sols contenus dans cette case.
+	 * 
+	 * @param elapsedTime
+	 * 		Temps écoulé depuis la dernière mise à jour.
+	 */
+	private void updateFloors(long elapsedTime)
+	{	floors.clear();
+		neutralFloors.clear();
+		Iterator<Floor> it = tile.getFloors().iterator();
+		while(it.hasNext())
+		{	Floor f = it.next();
+			GestureName gesture = f.getCurrentGesture().getName();
+			if(!(gesture==GestureName.HIDING 
+				|| gesture==GestureName.ENDED))
+			{	AiDataFloor floor = zone.getFloor(f);
+				if(floor==null)
+				{	floor = new AiDataFloor(this,f);
+					zone.addFloor(floor);
 				}
+				floor.update(this,elapsedTime);
+				floors.add(floor);
+				neutralFloors.add(floor);
 			}
 		}
-		// heroes
-		{	internalHeroes.clear();
-			externalHeroes.clear();
-			Iterator<Hero> it = tile.getHeroes().iterator();
-			while(it.hasNext())
-			{	Hero h = it.next();
-				GestureName gesture = h.getCurrentGesture().getName();
-				if(!(gesture==GestureName.HIDING 
-					|| gesture==GestureName.ENDED))
-				{	AiDataHero hero = zone.getHero(h);
-					if(hero==null)
-					{	hero = new AiDataHero(this,h);
-						zone.addHero(hero);
-					}
-					hero.update(this,elapsedTime);
-					internalHeroes.add(hero);
-					externalHeroes.add(hero);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// HEROES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Liste à usage interne des personnages éventuellement contenus dans cette case */
+	private final List<AiDataHero> heroes = new ArrayList<AiDataHero>();
+	/** Liste à usage externe des personnages éventuellement contenus dans cette case */
+	private final List<AiHero> neutralHeroes = new ArrayList<AiHero>();
+	/** Version immuable de la liste externe de personnages */
+	private final List<AiHero> externalNeutralHeroes = Collections.unmodifiableList(neutralHeroes);
+	
+	@Override
+	public List<AiHero> getHeroes()
+	{	return externalNeutralHeroes;	
+	}
+	
+	/** 
+	 * Met à jour les représentations des personnages contenus dans cette case.
+	 * 
+	 * @param elapsedTime
+	 * 		Temps écoulé depuis la dernière mise à jour.
+	 */
+	private void updateHeroes(long elapsedTime)
+	{	heroes.clear();
+		neutralHeroes.clear();
+		Iterator<Hero> it = tile.getHeroes().iterator();
+		while(it.hasNext())
+		{	Hero h = it.next();
+			GestureName gesture = h.getCurrentGesture().getName();
+			if(!(gesture==GestureName.HIDING 
+				|| gesture==GestureName.ENDED))
+			{	AiDataHero hero = zone.getHero(h);
+				if(hero==null)
+				{	hero = new AiDataHero(this,h);
+					zone.addHero(hero);
 				}
+				hero.update(this,elapsedTime);
+				heroes.add(hero);
+				neutralHeroes.add(hero);
 			}
 		}
-		// item
-		{	internalItems.clear();
-			externalItems.clear();
-			Iterator<Item> it = tile.getItems().iterator();
-			while(it.hasNext())
-			{	Item i = it.next();
-				GestureName gesture = i.getCurrentGesture().getName();
-				if(gesture==GestureName.NONE)
-				{	AiItemType type = AiItemType.makeItemType(i.getItemName());	
-					zone.signalHiddenItem(type);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Liste à usage interne des items éventuellement contenus dans cette case */
+	private final List<AiDataItem> items = new ArrayList<AiDataItem>();
+	/** Liste à usage externe des items éventuellement contenus dans cette case */
+	private final List<AiItem> neutralItems = new ArrayList<AiItem>();
+	/** Version immuable de la liste externe de items */
+	private final List<AiItem> externalNeutralItems = Collections.unmodifiableList(neutralItems);
+
+	@Override
+	public List<AiItem> getItems()
+	{	return externalNeutralItems;	
+	}
+
+	/** 
+	 * Met à jour les représentations des items contenus dans cette case.
+	 * 
+	 * @param elapsedTime
+	 * 		Temps écoulé depuis la dernière mise à jour.
+	 */
+	private void updateItems(long elapsedTime)
+	{	items.clear();
+		neutralItems.clear();
+		Iterator<Item> it = tile.getItems().iterator();
+		while(it.hasNext())
+		{	Item i = it.next();
+			GestureName gesture = i.getCurrentGesture().getName();
+			if(gesture==GestureName.NONE)
+			{	AiItemType type = AiItemType.makeItemType(i.getItemName());	
+				zone.signalHiddenItem(type);
+			}
+			else if(!(gesture==GestureName.HIDING
+				|| gesture==GestureName.ENDED))
+			{	AiDataItem item = zone.getItem(i);
+				if(item==null)
+				{	item = new AiDataItem(this,i);
+					zone.addItem(item);
 				}
-				else if(!(gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataItem item = zone.getItem(i);
-					if(item==null)
-					{	item = new AiDataItem(this,i);
-						zone.addItem(item);
-					}
-					item.update(this,elapsedTime);
-					internalItems.add(item);
-					externalItems.add(item);
-				}
+				item.update(this,elapsedTime);
+				items.add(item);
+				neutralItems.add(item);
 			}
 		}
 	}
@@ -336,22 +420,22 @@ final class AiDataTile extends AiTile
 	{	boolean result = true;
 		// murs
 		if(result && !ignoreBlocks)
-			result = isCrossableBy(sprite,internalBlocks);
+			result = isCrossableBy(sprite,blocks);
 		// bombes
 		if(result && !ignoreBombs)
-			result = isCrossableBy(sprite,internalBombs);
+			result = isCrossableBy(sprite,bombs);
 		// feu
 		if(result && !ignoreFires)
-			result = isCrossableBy(sprite,internalFires);
+			result = isCrossableBy(sprite,fires);
 		// sol
 //		if(result && !ignoreFloors)
 //			result = isCrossableBy(sprite,internalFloors);
 		// heroes
 		if(result && !ignoreHeroes)
-			result = isCrossableBy(sprite,internalHeroes);
+			result = isCrossableBy(sprite,heroes);
 		// item
 		if(result && !ignoreItems)
-			result = isCrossableBy(sprite,internalItems);
+			result = isCrossableBy(sprite,items);
 		//
 		return result;
 	}
@@ -362,20 +446,20 @@ final class AiDataTile extends AiTile
 	}
 
 	/**
-	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * Méthode auxiliaire utilisée pour déterminer si cette
 	 * case est traversable par le sprite passé en paramètre.
 	 * (cette fonction réalise le traitement relativement à 
-	 * la liste de sprite passée en paramètre)
+	 * la liste de sprite passée en paramètre).
 	 * 
 	 * @param <T> 
 	 * 		Type de sprite à traiter
 	 * 
 	 * @param sprite
-	 * 		le sprite qui veut traverser cette case
+	 * 		Le sprite qui veut traverser cette case.
 	 * @param list
-	 * 		les sprites de cette case à tester
+	 * 		Les sprites de cette case à tester.
 	 * @return	
-	 * 		vrai si le sprite peut traverser tous les sprites de la liste
+	 * 		{@code true} ssi le sprite peut traverser tous les sprites de la liste.
 	 */
 	private <T extends AiSprite> boolean isCrossableBy(AiSprite sprite, List<T> list)
 	{	boolean result = true;
@@ -392,8 +476,12 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** voisins de cette case dans les quatre directions principales */
-	private final HashMap<Direction,AiDataTile> neighbors = new HashMap<Direction, AiDataTile>();
+	/** Map des voisins de cette case dans les quatre directions principales */
+	private final Map<Direction,AiDataTile> neighborMap = new HashMap<Direction, AiDataTile>();
+	/** Liste des voisins de cette case dans les quatre directions principales */
+	private final List<AiTile> neighborList = new ArrayList<AiTile>();
+	/** Version immuable de la liste des voisins */
+	private final List<AiTile> externalNeighborList = Collections.unmodifiableList(neighborList);
 	
 	/**
 	 * Initialise une fois pour toutes les voisins de la case,
@@ -407,50 +495,50 @@ final class AiDataTile extends AiTile
 			int row = neighbor.getRow();
 			int col = neighbor.getCol();
 			AiDataTile aiNeighbor = getZone().getTile(row,col);
-			neighbors.put(direction,aiNeighbor);
+			neighborMap.put(direction,aiNeighbor);
 		}
-		neighbors.put(Direction.NONE,this);
+		neighborMap.put(Direction.NONE,this);
+		
+		for(Direction direction: Direction.getPrimaryValues())
+			neighborList.add(neighborMap.get(direction));
 	}
 	
 	@Override
 	public AiDataTile getNeighbor(Direction direction)
 	{	if(direction.isComposite())
 			throw new IllegalArgumentException("method getNeighbor does not handle composite directions.");
-		AiDataTile result = neighbors.get(direction);
+		AiDataTile result = neighborMap.get(direction);
 		return result;
 	}
 	
 	@Override
 	public List<AiTile> getNeighbors()
-	{	List<AiTile> result = new ArrayList<AiTile>();
-		for(Direction direction: Direction.getPrimaryValues())
-			result.add(neighbors.get(direction));
-		return result;
+	{	return externalNeighborList;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette case
+	 * Termine proprement cette case.
 	 */
 	void finish()
 	{	// block
-		finishSprites(internalBlocks,externalBlocks);
+		finishSprites(blocks,neutralBlocks);
 		// bombs
-		finishSprites(internalBombs,externalBombs);
+		finishSprites(bombs,neutralBombs);
 		// fires
-		finishSprites(internalFires,externalFires);
+		finishSprites(fires,neutralFires);
 		// floor
-		finishSprites(internalFloors,externalFloors);
+		finishSprites(floors,neutralFloors);
 		// heroes
-		finishSprites(internalHeroes,externalHeroes);
+		finishSprites(heroes,neutralHeroes);
 		// item
-		finishSprites(internalItems,externalItems);
+		finishSprites(items,neutralItems);
 	}
 
 	/**
-	 * termine les simulations de sprites passées en paramètres
+	 * Termine les simulations de sprites passées en paramètres.
 	 * 
 	 * @param <T>
 	 * 		type de simulation.

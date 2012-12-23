@@ -94,13 +94,13 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	}	
 
 	/**
-	 * crée une simulation de l'item passé en paramètre, et contenue dans 
+	 * Crée une simulation de l'item passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile
-	 * 		case contenant le sprite
+	 * 		Case contenant le sprite.
 	 * @param item
-	 * 		sprite à simuler
+	 * 		Sprite à simuler.
 	 */
 	protected AiSimItem(AiSimTile tile, AiItem item)
 	{	super(tile,item);

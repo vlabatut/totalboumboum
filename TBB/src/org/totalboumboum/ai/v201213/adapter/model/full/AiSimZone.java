@@ -22,10 +22,12 @@ package org.totalboumboum.ai.v201213.adapter.model.full;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
@@ -50,7 +52,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 /**
  * Simule la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale pour la simulation de l'évolution du jeu.
- * </br>
+ * <br/>
  * L'ensemble des objets représente un état du jeu et ne peut 
  * être modifié que via la classe {@link AiFullModel}.
  * 
@@ -83,6 +85,12 @@ public final class AiSimZone extends AiZone
 				AiSimTile aiTile = new AiSimTile(this,row,col,posX,posY);
 				matrix[row][col] = aiTile;
 				tiles.add(aiTile);
+			}
+		}
+		for(int row=0;row<height;row++)
+		{	for(int col=0;col<width;col++)
+			{	AiSimTile tile = matrix[row][col];
+				tile.initNeighbors();
 			}
 		}
 		
@@ -135,13 +143,13 @@ public final class AiSimZone extends AiZone
 		// also copy the eliminated heroes
 		Thread.yield();
 		for(AiHero hero: zone.getHeroes())
-		{	if(!externalHeroes.contains(hero))
+		{	if(!neutralHeroes.contains(hero))
 			{	AiTile tile = hero.getTile();
 				int row = tile.getRow();
 				int col = tile.getCol();
 				AiSimHero simHero = new AiSimHero(matrix[row][col], hero);
-				internalHeroes.add(simHero);
-				externalHeroes.add(simHero);
+				heroes.add(simHero);
+				neutralHeroes.add(simHero);
 			}
 		}
 		
@@ -239,7 +247,7 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice représentant la zone et tous les sprites qu'elle contient */
+	/** Matrice représentant la zone et tous les sprites qu'elle contient */
 	private AiSimTile[][] matrix;
 	
 	@Override
@@ -260,13 +268,13 @@ public final class AiSimZone extends AiZone
 	 * est levée.
 	 *  
 	 *  @param row
-	 *  	ligne de la case à traite
+	 *  	Ligne de la case à traite.
 	 *  @param col
-	 *  	colonne de la case à traiter
+	 *  	Colonne de la case à traiter.
 	 *  @param direction
-	 *  	direction de la case voisine relativement à la case de référence
+	 *  	Direction de la case voisine relativement à la case de référence.
 	 *  @return	
-	 *  	la case voisine dans la direction précisée
+	 *  	La case voisine dans la direction précisée.
 	 *  
 	 *  @throws IllegalArgumentException
 	 *  	Si la {@code direction} est composite.
@@ -301,11 +309,11 @@ public final class AiSimZone extends AiZone
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour les variables temporelles de cette zone.
-	 * (méthode utilisée seulement lors de la simulation)
+	 * Met à jour les variables temporelles de cette zone
+	 * (méthode utilisée seulement lors de la simulation).
 	 * 
 	 * @param duration
-	 * 		délai depuis la dernière simulation
+	 * 		Délai depuis la dernière simulation.
 	 */
 	protected void updateTime(long duration)
 	{	totalTime = totalTime + duration;
@@ -315,12 +323,14 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste de toutes les cases de cette zone */
+	/** Liste de toutes les cases de cette zone */
 	private final List<AiTile> tiles = new LinkedList<AiTile>(); 
+	/** Version immuable de la liste des cases de cette zone */
+	private final List<AiTile> externalTiles = Collections.unmodifiableList(tiles); 
 	
 	@Override
 	public List<AiTile> getTiles()
-	{	return tiles;
+	{	return externalTiles;
 	}
 	
 	@Override
@@ -472,54 +482,53 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des blocks contenus dans cette zone */
-	private final List<AiSimBlock> internalBlocks = new ArrayList<AiSimBlock>();
-	/** liste externe des blocks contenus dans cette zone */
-	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
+	/** Liste interne des blocs contenus dans cette zone */
+	private final List<AiSimBlock> blocks = new ArrayList<AiSimBlock>();
+	/** Liste externe des blocks contenus dans cette zone */
+	private final List<AiBlock> neutralBlocks = new ArrayList<AiBlock>();
+	/** Version immuable de la liste des blocs */
+	private final List<AiBlock> externalNeutralBlocks = Collections.unmodifiableList(neutralBlocks);
+	/** Liste externe des blocs destructibles contenus dans cette zone */
+	private final List<AiBlock> destructibleBlocks = new ArrayList<AiBlock>();
+	/** Version immuable de la liste des blocs destructibles */
+	private final List<AiBlock> externalDestructibleBlocks = Collections.unmodifiableList(destructibleBlocks);
 	
 	/**
-	 * renvoie la liste interne de blocs
+	 * Renvoie la liste interne de blocs.
 	 * 
 	 * @return	
-	 * 		liste interne de blocs
+	 * 		Liste interne de blocs.
 	 */
 	protected List<AiSimBlock> getInternalBlocks()
-	{	return internalBlocks;	
+	{	return blocks;	
 	}
 		
 	@Override
 	public List<AiBlock> getBlocks()
-	{	return externalBlocks;	
+	{	return externalNeutralBlocks;	
 	}
 	
 	@Override
 	public List<AiBlock> getDestructibleBlocks()
-	{	List<AiBlock> result = new ArrayList<AiBlock>();
-
-		for(AiBlock block: internalBlocks)
-		{	if(block.isDestructible())
-				result.add(block);
-		}
-		
-		return result;
+	{	return externalDestructibleBlocks;
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même numéro (id)
+	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblé
+	 * 		Le sprite ciblé.
 	 * @return	
-	 * 		sa représentation dans cette zone
+	 * 		Sa représentation dans cette zone.
 	 */
 	public AiSimBlock getSpriteById(AiBlock sprite)
 	{	AiSimBlock result = null;
 		int id = sprite.getId();
-		Iterator<AiSimBlock> it = internalBlocks.iterator();
+		Iterator<AiSimBlock> it = blocks.iterator();
 		while(result==null)
 		{	AiSimBlock temp = it.next();
 			if(temp.getId()==id)
@@ -536,25 +545,30 @@ public final class AiSimZone extends AiZone
 	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param block
-	 *  	le bloc à rajouter à cette zone
+	 *  	Le bloc à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimBlock block)
-	{	internalBlocks.add(block);
-		externalBlocks.add(block);
+	{	blocks.add(block);
+		neutralBlocks.add(block);
+		if(block.isDestructible())
+			destructibleBlocks.add(block);
 		
 		AiSimTile tile = block.getTile();
 		tile.addSprite(block);
 	}
 	
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
+	 * Supprime un sprite de la zone 
+	 * et de la case correspondante.
 	 * 
 	 * @param block
 	 * 		le sprite à supprimer de la zone
 	 */
 	protected void removeSprite(AiSimBlock block)
-	{	internalBlocks.remove(block);
-		externalBlocks.remove(block);
+	{	blocks.remove(block);
+		neutralBlocks.remove(block);
+		if(block.isDestructible())
+			destructibleBlocks.remove(block);
 		
 		AiSimTile tile = block.getTile();
 		tile.removeSprite(block);
@@ -626,42 +640,44 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des bombes contenues dans cette zone */
-	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
-	/** liste externe des bombes contenues dans cette zone */
-	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
+	/** Liste interne des bombes contenues dans cette zone */
+	private final List<AiSimBomb> bombs = new ArrayList<AiSimBomb>();
+	/** Liste externe des bombes contenues dans cette zone */
+	private final List<AiBomb> neutralBombs = new ArrayList<AiBomb>();
+	/** Version immuable de la liste des bombes */
+	private final List<AiBomb> externalNeutralBombs = Collections.unmodifiableList(neutralBombs);
 
 	/**
-	 * renvoie la liste interne de bombes
+	 * Renvoie la liste interne de bombes.
 	 * 
 	 * @return	
-	 * 		liste interne de bombes
+	 * 		Liste interne de bombes.
 	 */
 	protected List<AiSimBomb> getInternalBombs()
-	{	return internalBombs;	
+	{	return bombs;	
 	}
 		
 	@Override
 	public List<AiBomb> getBombs()
-	{	return externalBombs;	
+	{	return externalNeutralBombs;	
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même numéro (id)
+	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblé
+	 * 		Le sprite ciblé.
 	 * @return	
-	 * 		sa représentation dans cette zone
+	 * 		Sa représentation dans cette zone.
 	 */
 	public AiSimBomb getSpriteById(AiBomb sprite)
 	{	AiSimBomb result = null;
 		int id = sprite.getId();
-		Iterator<AiSimBomb> it = internalBombs.iterator();
+		Iterator<AiSimBomb> it = bombs.iterator();
 		while(result==null)
 		{	AiSimBomb temp = it.next();
 			if(temp.getId()==id)
@@ -681,22 +697,23 @@ public final class AiSimZone extends AiZone
 	 *  	La bombe à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimBomb bomb)
-	{	internalBombs.add(bomb);
-		externalBombs.add(bomb);
+	{	bombs.add(bomb);
+		neutralBombs.add(bomb);
 		
 		AiSimTile tile = bomb.getTile();
 		tile.addSprite(bomb);
 	}
 	
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
+	 * Supprime un sprite de la zone 
+	 * et de la case correspondante.
 	 * 
 	 * @param bomb
-	 * 		le sprite à supprimer de la zone
+	 * 		Le sprite à supprimer de la zone.
 	 */
 	protected void removeSprite(AiSimBomb bomb)
-	{	internalBombs.remove(bomb);
-		externalBombs.remove(bomb);
+	{	bombs.remove(bomb);
+		neutralBombs.remove(bomb);
 		
 		AiSimTile tile = bomb.getTile();
 		tile.removeSprite(bomb);
@@ -828,42 +845,44 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des feux contenus dans cette zone */
-	private final List<AiSimFire> internalFires = new ArrayList<AiSimFire>();
-	/** liste externe des feux contenus dans cette zone */
-	private final List<AiFire> externalFires = new ArrayList<AiFire>();
+	/** Liste interne des feux contenus dans cette zone */
+	private final List<AiSimFire> fires = new ArrayList<AiSimFire>();
+	/** Liste externe des feux contenus dans cette zone */
+	private final List<AiFire> neutralFires = new ArrayList<AiFire>();
+	/** Version immuable de la liste des feux contenus dans cette zone */
+	private final List<AiFire> externalNeutralFires = Collections.unmodifiableList(neutralFires);
 	
 	/**
-	 * renvoie la liste interne de feux
+	 * Renvoie la liste interne de feux.
 	 * 
 	 * @return	
-	 * 		liste interne de feux
+	 * 		Liste interne de feux.
 	 */
 	protected List<AiSimFire> getInternalFires()
-	{	return internalFires;	
+	{	return fires;	
 	}
 		
 	@Override
 	public List<AiFire> getFires()
-	{	return externalFires;	
+	{	return externalNeutralFires;	
 	}
 		
 	/**
-	 * renvoie la simulation de sprite de même numéro (id)
+	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblé
+	 * 		Le sprite ciblé.
 	 * @return	
-	 * 		sa représentation dans cette zone
+	 * 		Sa représentation dans cette zone.
 	 */
 	public AiSimFire getSpriteById(AiFire sprite)
 	{	AiSimFire result = null;
 		int id = sprite.getId();
-		Iterator<AiSimFire> it = internalFires.iterator();
+		Iterator<AiSimFire> it = fires.iterator();
 		while(result==null)
 		{	AiSimFire temp = it.next();
 			if(temp.getId()==id)
@@ -883,22 +902,22 @@ public final class AiSimZone extends AiZone
 	 *  	Le feu à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimFire fire)
-	{	internalFires.add(fire);
-		externalFires.add(fire);
+	{	fires.add(fire);
+		neutralFires.add(fire);
 		
 		AiSimTile tile = fire.getTile();
 		tile.addSprite(fire);
 	}
 	
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
+	 * Supprime un sprite de la zone et de la case correspondante.
 	 * 
 	 * @param fire
-	 * 		le sprite à supprimer de la zone
+	 * 		Le sprite à supprimer de la zone.
 	 */
 	protected void removeSprite(AiSimFire fire)
-	{	internalFires.remove(fire);
-		externalFires.remove(fire);
+	{	fires.remove(fire);
+		neutralFires.remove(fire);
 		
 		AiSimTile tile = fire.getTile();
 		tile.removeSprite(fire);
@@ -1015,42 +1034,44 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des sols contenus dans cette zone */
-	private final List<AiSimFloor> internalFloors = new ArrayList<AiSimFloor>();
-	/** liste externe des sols contenus dans cette zone */
-	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
+	/** Liste interne des sols contenus dans cette zone */
+	private final List<AiSimFloor> floors = new ArrayList<AiSimFloor>();
+	/** Liste externe des sols contenus dans cette zone */
+	private final List<AiFloor> neutralFloors = new ArrayList<AiFloor>();
+	/** Liste externe des sols contenus dans cette zone */
+	private final List<AiFloor> externalNeutralFloors = Collections.unmodifiableList(neutralFloors);
 
 	/**
-	 * renvoie la liste interne de sols
+	 * Renvoie la liste interne de sols.
 	 * 
 	 * @return	
-	 * 		liste interne de sols
+	 * 		Liste interne de sols.
 	 */
 	protected List<AiSimFloor> getInternalFloors()
-	{	return internalFloors;	
+	{	return floors;	
 	}
 		
 	@Override
 	public List<AiFloor> getFloors()
-	{	return externalFloors;	
+	{	return externalNeutralFloors;	
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de même numéro (id)
+	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblé
+	 * 		Le sprite ciblé.
 	 * @return	
-	 * 		sa représentation dans cette zone
+	 * 		Sa représentation dans cette zone.
 	 */
 	public AiSimFloor getSpriteById(AiFloor sprite)
 	{	AiSimFloor result = null;
 		int id = sprite.getId();
-		Iterator<AiSimFloor> it = internalFloors.iterator();
+		Iterator<AiSimFloor> it = floors.iterator();
 		while(result==null)
 		{	AiSimFloor temp = it.next();
 			if(temp.getId()==id)
@@ -1067,25 +1088,25 @@ public final class AiSimZone extends AiZone
 	 * ici simplement de mettre à jour les listes de sprites de la zone.
 	 * 
 	 *  @param floor
-	 *  	le sol à rajouter à cette zone.
+	 *  	Le sol à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimFloor floor)
-	{	internalFloors.add(floor);
-		externalFloors.add(floor);
+	{	floors.add(floor);
+		neutralFloors.add(floor);
 		
 		AiSimTile tile = floor.getTile();
 		tile.addSprite(floor);
 	}
 	
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
+	 * Supprime un sprite de la zone et de la case correspondante.
 	 * 
 	 * @param floor
-	 * 		le sprite à supprimer de la zone
+	 * 		Le sprite à supprimer de la zone.
 	 */
 	protected void removeSprite(AiSimFloor floor)
-	{	internalFloors.remove(floor);
-		externalFloors.remove(floor);
+	{	floors.remove(floor);
+		neutralFloors.remove(floor);
 		
 		AiSimTile tile = floor.getTile();
 		tile.removeSprite(floor);
@@ -1094,31 +1115,35 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne de tous les personnages contenus dans cette zone */
-	private final List<AiSimHero> internalHeroes = new ArrayList<AiSimHero>();
-	/** liste externe de tous les personnages contenus dans cette zone */
-	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
-	/** liste externe des personnages restant encore dans cette zone */
+	/** Liste interne de tous les personnages contenus dans cette zone */
+	private final List<AiSimHero> heroes = new ArrayList<AiSimHero>();
+	/** Liste externe de tous les personnages contenus dans cette zone */
+	private final List<AiHero> neutralHeroes = new ArrayList<AiHero>();
+	/** Version immuable de la liste des personnages */
+	private final List<AiHero> externalNeutralHeroes = Collections.unmodifiableList(neutralHeroes);
+	/** Liste externe des personnages restant encore dans cette zone */
 	private final List<AiHero> remainingHeroList = new ArrayList<AiHero>();
+	/** Version immuable de la liste des personnages restant */
+	private final List<AiHero> externalRemainingHeroList = Collections.unmodifiableList(remainingHeroList);
 	
 	/**
-	 * renvoie la liste interne de personnages
+	 * Renvoie la liste interne de personnages.
 	 * 
 	 * @return	
-	 * 		liste interne de personnages
+	 * 		Liste interne de personnages.
 	 */
 	protected List<AiSimHero> getInternalHeroes()
-	{	return internalHeroes;	
+	{	return heroes;	
 	}
 		
 	@Override
 	public List<AiHero> getHeroes()
-	{	return externalHeroes;	
+	{	return externalNeutralHeroes;	
 	}
 	
 	@Override
 	public List<AiHero> getRemainingHeroes()
-	{	return remainingHeroList;	
+	{	return externalRemainingHeroList;	
 	}
 	
 	@Override
@@ -1129,16 +1154,16 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * retrouve l'objet simulant un personnage grâce à sa couleur
+	 * Retrouve l'objet simulant un personnage grâce à sa couleur.
 	 * 
 	 * @param color
-	 * 		couleur du personnage à retrouver
+	 * 		Couleur du personnage à retrouver.
 	 * @return	
-	 * 		le personnage correspondant à la couleur spécifiée
+	 * 		Le personnage correspondant à la couleur spécifiée.
 	 */
 	private AiSimHero getInternalHeroByColor(PredefinedColor color)
 	{	AiSimHero result = null;
-		Iterator<AiSimHero> it = internalHeroes.iterator();
+		Iterator<AiSimHero> it = heroes.iterator();
 		while(result==null && it.hasNext())
 		{	AiSimHero htemp = it.next();
 			if(htemp.getColor()==color)
@@ -1150,7 +1175,7 @@ public final class AiSimZone extends AiZone
 	@Override
 	public AiSimHero getHeroByColor(PredefinedColor color)
 	{	AiSimHero result = null;
-		Iterator<AiSimHero> it = internalHeroes.iterator();
+		Iterator<AiSimHero> it = heroes.iterator();
 		while(result==null && it.hasNext())
 		{	AiSimHero hero = it.next();
 			if(hero.getColor()==color)
@@ -1160,21 +1185,21 @@ public final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * renvoie la simulation de sprite de même numéro (id)
+	 * Renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet
 	 * de suivre le même sprite à travers différents états
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblé
+	 * 		Le sprite ciblé.
 	 * @return	
-	 * 		sa représentation dans cette zone
+	 * 		Sa représentation dans cette zone.
 	 */
 	public AiSimHero getSpriteById(AiHero sprite)
 	{	AiSimHero result = null;
 		int id = sprite.getId();
-		Iterator<AiSimHero> it = internalHeroes.iterator();
+		Iterator<AiSimHero> it = heroes.iterator();
 		while(result==null && it.hasNext())
 		{	AiSimHero temp = it.next();
 			if(temp.getId()==id)
@@ -1194,8 +1219,8 @@ public final class AiSimZone extends AiZone
 	 *  	Le personnage à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimHero hero)
-	{	internalHeroes.add(hero);
-		externalHeroes.add(hero);
+	{	heroes.add(hero);
+		neutralHeroes.add(hero);
 		remainingHeroList.add(hero);
 		
 		AiSimTile tile = hero.getTile();
@@ -1203,15 +1228,15 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * supprime un sprite de la zone et de la case correspondante.
+	 * Supprime un sprite de la zone et de la case correspondante.
 	 * comme il s'agit d'un joueur, il est supprimé seulement de la case
 	 * et de la liste des joueurs encore en jeu (mais la zone continue
 	 * à le référencer dans la liste générale des joueurs, car le sprite
 	 * peut encore etre utile, par exemple pour obtenir le classement
-	 * de ce joueur)
+	 * de ce joueur).
 	 * 
 	 * @param hero
-	 * 		le sprite à supprimer de la zone
+	 * 		Le sprite à supprimer de la zone.
 	 */
 	protected void removeSprite(AiSimHero hero)
 	{	// only remove from this list, because the others must stay complete
@@ -1222,13 +1247,13 @@ public final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * insûre un nouveau personnage dans la zone
-	 * (méthode utilisée lors de la simulation)
+	 * Insère un nouveau personnage dans la zone
+	 * (méthode utilisée lors de la simulation).
 	 * 
 	 * @param hero
-	 * 		le personnage à insérer
-	 * @param 
-	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'agent
+	 * 		Le personnage à insérer
+	 * @param isOwnHero	
+	 * 		Indique si le personnage à insérer est celui contrôlé par l'agent.
 	 */
 	protected void addHero(AiSimHero hero, boolean isOwnHero)
 	{	// sprites
@@ -1354,24 +1379,26 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des items contenus dans cette zone */
-	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
-	/** liste externe des items contenus dans cette zone */
-	private final List<AiItem> externalItems = new ArrayList<AiItem>();
+	/** Liste interne des items contenus dans cette zone */
+	private final List<AiSimItem> items = new ArrayList<AiSimItem>();
+	/** Liste externe des items contenus dans cette zone */
+	private final List<AiItem> neutralItems = new ArrayList<AiItem>();
+	/** Version immuable de la liste des items */
+	private final List<AiItem> externalNeutralItems = Collections.unmodifiableList(neutralItems);
 	
 	/**
-	 * renvoie la liste interne d'items
+	 * Renvoie la liste interne d'items.
 	 * 
 	 * @return	
-	 * 		liste interne d'items
+	 * 		Liste interne d'items.
 	 */
 	protected List<AiSimItem> getInternalItems()
-	{	return internalItems;	
+	{	return items;	
 	}
 		
 	@Override
 	public List<AiItem> getItems()
-	{	return externalItems;	
+	{	return externalNeutralItems;	
 	}
 	
 	/**
@@ -1388,7 +1415,7 @@ public final class AiSimZone extends AiZone
 	protected AiSimItem getItem(AiItem item)
 	{	AiSimItem result = null;
 	
-		Iterator<AiSimItem> it = internalItems.iterator();
+		Iterator<AiSimItem> it = items.iterator();
 		while(it.hasNext() && result==null)
 		{	AiSimItem temp = it.next();
 			if(temp.getId()==item.getId())
@@ -1428,7 +1455,7 @@ public final class AiSimZone extends AiZone
 	public AiSimItem getSpriteById(AiItem sprite)
 	{	AiSimItem result = null;
 		int id = sprite.getId();
-		Iterator<AiSimItem> it = internalItems.iterator();
+		Iterator<AiSimItem> it = items.iterator();
 		while(result==null)
 		{	AiSimItem temp = it.next();
 			if(temp.getId()==id)
@@ -1448,11 +1475,11 @@ public final class AiSimZone extends AiZone
 	 *  	L'item sprite à rajouter à cette zone.
 	 */
 	protected void addSprite(AiSimItem item)
-	{	internalItems.add(item);
+	{	items.add(item);
 		
 		AiSimTile tile = item.getTile();
 		if(tile!=null)
-		{	externalItems.add(item);
+		{	neutralItems.add(item);
 			tile.addSprite(item);
 		}
 	}
@@ -1464,11 +1491,11 @@ public final class AiSimZone extends AiZone
 	 * 		Le sprite à supprimer de la zone.
 	 */
 	protected void removeSprite(AiSimItem item)
-	{	internalItems.remove(item);
+	{	items.remove(item);
 		
 		AiSimTile tile = item.getTile();
 		if(tile!=null)
-		{	externalItems.remove(item);
+		{	neutralItems.remove(item);
 			tile.removeSprite(item);
 		}
 	}
@@ -1482,7 +1509,7 @@ public final class AiSimZone extends AiZone
 	 * @param hiddenItemsCounts
 	 * 		Nombres d'items cachés par type d'item.
 	 */
-	public void setHidenItemCount(int hiddenItemsCount, HashMap<AiItemType,Integer> hiddenItemsCounts)
+	public void setHidenItemCount(int hiddenItemsCount, Map<AiItemType,Integer> hiddenItemsCounts)
 	{	this.hiddenItemsCount = hiddenItemsCount;
 		this.hiddenItemsCounts.putAll(hiddenItemsCounts);
 	}
@@ -1558,7 +1585,7 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrôlé par l'agent */
+	/** Le personnage contrôlé par l'agent */
 	private AiSimHero ownHero;
 
 	@Override
@@ -1615,7 +1642,7 @@ public final class AiSimZone extends AiZone
 	 * en ms, et verra apparaître les sprites indiqués dans la map passée en
 	 * paramètre. La clé de cette map est une case, dans laquelle les sprites
 	 * composant la valeur (une liste) apparaîtront lors de l'évènement.
-	 * <p/>
+	 * <br/>
 	 * Les sprites doivent avoir été créés avec l'une des méthodes {@code createXxxx} 
 	 * de cette classe, et surtout sans sans préciser leur case à la création (i.e.
 	 * en utilisant la valeur {@code null} à la place de la case). En effet, si vous précisez
@@ -1623,7 +1650,7 @@ public final class AiSimZone extends AiZone
 	 * conflit avec la définition d'un évènement. Pour compenser, la case doit
 	 * être indiquée lors de la création del'évènement, en tant que clé de la map passée
 	 * en paramètre.
-	 * <p/>
+	 * <br/>
 	 * Ce sont bien les sprites passés en paramètre, et pas des copies, qui vont
 	 * être utilisés pour créer l'évènement.
 	 * 
@@ -1634,7 +1661,7 @@ public final class AiSimZone extends AiZone
 	 * @return
 	 * 		L'évènement correspondant (qui est aussi enregistré dans cette zone).
 	 */
-	public AiSuddenDeathEvent createSuddenDeathEvent(long time, HashMap<AiTile, List<AiSprite>> sprites)
+	public AiSuddenDeathEvent createSuddenDeathEvent(long time, Map<AiTile, List<AiSprite>> sprites)
 	{	List<AiSimSprite> s = new ArrayList<AiSimSprite>();
 		
 		for(Entry<AiTile,List<AiSprite>> entry: sprites.entrySet())
@@ -1662,7 +1689,8 @@ public final class AiSimZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette simulation (une fois que l'agent n'en a plus besoin).
+	 * Termine proprement cette simulation 
+	 * (une fois que l'agent n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix
@@ -1672,29 +1700,30 @@ public final class AiSimZone extends AiZone
 		matrix = null;
 		
 		// blocks
-		internalBlocks.clear();
-		externalBlocks.clear();
+		blocks.clear();
+		neutralBlocks.clear();
+		destructibleBlocks.clear();
 
 		// bombs
-		internalBombs.clear();
-		externalBombs.clear();
+		bombs.clear();
+		neutralBombs.clear();
 		
 		// fires
-		internalFires.clear();
-		externalFires.clear();
+		fires.clear();
+		neutralFires.clear();
 		
 		// floors
-		internalFloors.clear();
-		externalFloors.clear();
+		floors.clear();
+		neutralFloors.clear();
 		
 		// heroes
-		internalHeroes.clear();
-		externalHeroes.clear();
+		heroes.clear();
+		neutralHeroes.clear();
 		ownHero = null;
 		
 		// items
-		internalItems.clear();
-		externalItems.clear();
+		items.clear();
+		neutralItems.clear();
 		
 		// sudden death events
 		suddenDeathEvents.clear();

@@ -22,10 +22,9 @@ package org.totalboumboum.ai.v201213.adapter.communication;
  */
 
 /**
- * exception levée par l'agent quand le moteur du jeu lui demande de se terminer. 
+ * Exception levée par l'agent quand le moteur du jeu lui demande de se terminer. 
  * 
  * @author Vincent Labatut
- *
  */
 public class StopRequestException extends Exception
 {	/** numéro de serie */

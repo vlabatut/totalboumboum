@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201213.adapter.path.search;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -51,7 +52,7 @@ import org.totalboumboum.ai.v201213.adapter.path.successor.SuccessorCalculator;
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini. La notion de 'noeud déjà exploré' est spécifiée par la fonction successeur
  * utilisée.
- * </br>
+ * <br/>
  * Cette implémentation trouve donc le chemin le plus court entre deux cases,
  * en considérant les obstacles. Elle a besoin de quatre paramètres :
  * <ul>	
@@ -361,9 +362,9 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				
 				// sinon on récupére les noeuds suivants
 				else
-				{	// développement
+				{	// développement (on copie la liste des enfants, qui est sinon immuable)
 					long before2 = ai.getCurrentTime();
-					List<AiSearchNode> successors = lastSearchNode.getChildren();
+					List<AiSearchNode> successors = new ArrayList<AiSearchNode>(lastSearchNode.getChildren());
 					
 					// verbose : temps
 					{	long after2 = ai.getCurrentTime();

@@ -36,7 +36,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
  * @author Vincent Labatut
  */
 public enum AiStateName
-{
+{	
 	// equivalent gesture: BURNING
 	/** Le sprite est en train de brûler */
 	BURNING,

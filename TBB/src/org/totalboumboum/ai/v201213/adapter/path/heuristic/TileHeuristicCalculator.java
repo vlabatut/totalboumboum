@@ -61,11 +61,11 @@ public class TileHeuristicCalculator extends HeuristicCalculator
 {
 	/**
 	 * Construit une fonction successeur
-	 * utilisant l'IA passée en paramètre
+	 * utilisant l'agent passé en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 */
 	public TileHeuristicCalculator(ArtificialIntelligence ai)
 	{	super(ai);

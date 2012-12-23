@@ -21,17 +21,16 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * 
  */
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente un personnage du jeu, ie un sprite contrôlé par un joueur
+ * Représente un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une agent.
  * 
  * @author Vincent Labatut
- *
  */
 public interface AiHero extends AiSprite
 {
@@ -39,18 +38,18 @@ public interface AiHero extends AiSprite
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie un exemple de bombe que ce personnage peut poser
+	 * Renvoie un exemple de bombe que ce personnage peut poser
 	 * 
 	 * @return	
-	 * 		une représentation de la bombe
+	 * 		Une représentation de la bombe.
 	 */
 	public AiBomb getBombPrototype();
 
 	/**
-	 * renvoie la portée actuelle des bombes du personnage
+	 * Renvoie la portée actuelle des bombes du personnage
 	 * 
 	 * @return	
-	 * 		la portée des bombes
+	 * 		La portée des bombes.
 	 */
 	public int getBombRange();
 
@@ -66,41 +65,43 @@ public interface AiHero extends AiSprite
 	public int getBombRangeLimit();
 	
 	/**
-	 * renvoie la durée actuelle des bombes du personnage
-	 * (valide seulement pour les bombes à retardement)
+	 * Renvoie la durée actuelle des bombes du personnage
+	 * (valide seulement pour les bombes à retardement).
 	 * 
 	 * @return	
-	 * 		la durée de vie des bombes (i.e. temps entre la pose et l'explosion)
+	 * 		La durée de vie des bombes (i.e. temps entre la pose et l'explosion).
 	 */
 	public long getBombDuration();
 	
 	/**
-	 * renvoie la durée actuelle des explosions des bombes du personnage
+	 * Renvoie la durée actuelle des explosions des bombes du personnage.
 	 * 
 	 * @return	
-	 * 		la durée de l'explosion des bombes
+	 * 		La durée de l'explosion des bombes.
 	 */
 	public long getExplosionDuration();
 	
 	/**
-	 * renvoie le nombre de bombes que le personnage peut poser simultanément,
+	 * Renvoie le nombre de bombes que le personnage peut poser simultanément,
 	 * à ce moment du jeu.
+	 * <br/>
 	 * Ce nombre correspond à la somme du nombre de bombes actuellement déjà 
-	 * posées ({@link #getBombNumberCurrent()}) plus le nombre de bombes que le joueur peut encore poser. 
+	 * posées ({@link #getBombNumberCurrent()}) plus le nombre de bombes que 
+	 * le joueur peut encore poser. 
 	 * 
 	 * @return	
-	 * 		le nombre de bombes simultanément posables (en général)
+	 * 		Le nombre de bombes simultanément posables (en général).
 	 */
 	public int getBombNumberMax();
 	
 	/**
-	 * renvoie le nombre de bombes posées par le personnage à ce moment-là.
-	 * Ce nombre est limité par la valeur renvoyée par getBombNumberMax,
+	 * Renvoie le nombre de bombes posées par le personnage à ce moment-là.
+	 * Ce nombre est limité par la valeur renvoyée par {@link #getBombNumberMax()},
 	 * i.e. il ne peut pas être plus grand puisque getBombNumberMax renvoie
 	 * le nombre de bombes maximal que le joueur peut poser en même temps. 
 	 * 
 	 * @return	
-	 * 		nombre de bombes posées en ce moment
+	 * 		Nombre de bombes posées en ce moment.
 	 */
 	public int getBombNumberCurrent();
 	
@@ -144,13 +145,15 @@ public interface AiHero extends AiSprite
 	 * Renvoie une map contenant les vitesses de déplacement possible
 	 * pour ce joueur.
 	 * <br/>
-	 * Cette information est à usage interne, vous (le concepteur
-	 * de l'agent) n'en avez pas besoin.
+	 * <b>Note :</b> cette information est à usage interne, vous (le concepteur
+	 * de l'agent) n'en avez pas besoin. La map renvoyées n'est pas modifiable.
+	 * Toute tentative de modification provoquera une 
+	 * {@link UnsupportedOperationException}. 
 	 * 
 	 * @return
 	 * 		Une map contenant les vitesses de déplacement possible du joueur.
 	 */
-	public HashMap<Integer,Double> getWalkingSpeeds();
+	public Map<Integer,Double> getWalkingSpeeds();
 	
 	/**
 	 * Renvoie la vitesse de déplacement au sol de ce personnage,
@@ -198,35 +201,38 @@ public interface AiHero extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * teste si ce personnage est capable de passer à travers les (certains) murs
+	 * Teste si ce personnage est capable de passer à travers les (certains) murs.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * utilisez plutot {@link #isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		vrai si le personnage traverse les murs
+	 * 		{@code true} ssi le personnage traverse les murs.
 	 */
 	public boolean hasThroughBlocks();
 
 	/**
-	 * teste si ce personnage est capable de passer à travers les bombes
+	 * Teste si ce personnage est capable de passer à travers les bombes.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * Utilisez plutot {@link #isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		vrai si le personnage traverse les bombes
+	 * 		{@code true} ssi le personnage traverse les bombes.
 	 */
 	public boolean hasThroughBombs();
 
 	/**
-	 * teste si ce personnage est capable de passer à travers le feu sans brûler
+	 * Teste si ce personnage est capable de passer à travers le feu sans brûler.
+	 * <br/>
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'agent,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
+	 * Utilisez plutot {@link #isCrossableBy}.
 	 * 
 	 * @return	
-	 * 		vrai si le personnage résiste au feu
+	 * 		{@code true} ssi le personnage résiste au feu.
 	 */
 	public boolean hasThroughFires();
 
@@ -267,6 +273,10 @@ public interface AiHero extends AiSprite
 	 * Renvoie la liste des items contagieux possédés
 	 * par ce joueur. La liste est vide s'il ne possède
 	 * aucun item contagieux actuellement actif.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		Une liste d'item, qui peut être vide.

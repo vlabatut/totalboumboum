@@ -38,7 +38,7 @@ import org.totalboumboum.ai.v201213.adapter.model.partial.AiPartialModel;
  * @author Vincent Labatut
  */
 public class AiExplosionList extends TreeSet<AiExplosion>
-{	/** numéro de série */
+{	/** Numéro de série */
 	private static final long serialVersionUID = 1L;
 
 	/**

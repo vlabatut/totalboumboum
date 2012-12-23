@@ -51,7 +51,6 @@ import org.totalboumboum.engine.content.sprite.block.Block;
  * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
- *
  */
 final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 {

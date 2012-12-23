@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201213.adapter.path;
  * 
  */
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -36,7 +38,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * un état final quelque part dans la partie non-explorée de l'arbre, ou bien
  * s'il n'existe pas de solution du tout.
  * <br/>
- * Pour Dybref, cela signifie que l'algorithme n'a pas pu explorer tous les
+ * Pour Dijkstra, cela signifie que l'algorithme n'a pas pu explorer tous les
  * chemins existant. Il est toutefois possible qu'un chemin soit affecté à chaque
  * case, car cet algorithme considère les pauses, et donc est susceptible de trouver
  * plusieurs chemins pour aller à une même case.
@@ -44,7 +46,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * @author Vincent Labatut
  */
 public final class LimitReachedException extends Exception
-{	/** numéro de série */
+{	/** Numéro de série */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -82,13 +84,13 @@ public final class LimitReachedException extends Exception
 		this.maxCost = maxCost;
 		this.maxHeight = maxHeight;
 		this.maxSize = maxSize;
-		this.fringe = queue;
+		this.fringe = Collections.unmodifiableCollection(queue);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** case de départ de la recherche (état initial) */
+	/** Case de départ de la recherche (état initial) */
 	private AiLocation startLocation;
 	
 	/**
@@ -104,15 +106,15 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// END TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** les cases d'arrivée de la recherche (états finaux) */
+	/** Les cases d'arrivée de la recherche (états finaux) */
     private Set<AiTile> endTiles;
 	
     /**
-     * renvoie les cases d'arrivée de la recherche
-     * (uniquement pour A*)
+     * Renvoie les cases d'arrivée de la recherche
+     * (uniquement pour A*).
      * 
      * @return
-	 * 		une case de la zone
+	 * 		Une case de la zone.
      */
 	public Set<AiTile> getEndTiles()
 	{	return endTiles;
@@ -121,28 +123,28 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// HEIGHT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de hauteur (négatif = pas de limite) */
+	/** Limite de hauteur (négatif = pas de limite) */
 	private int maxHeight;
-	/** hauteur maximale atteinte */
+	/** Hauteur maximale atteinte */
 	private int height;
 
 	/**
-	 * renvoie la limite de hauteur pour l'exploration de l'arbre de recherche.
+	 * Renvoie la limite de hauteur pour l'exploration de l'arbre de recherche.
 	 * une valeur négative représente une absence de limite.
 	 * 
 	 * @return
-	 * 		la limite de hauteur pour l'exploration de l'arbre de recherche
+	 * 		La limite de hauteur pour l'exploration de l'arbre de recherche.
 	 */
 	public int getMaxHeight()
 	{	return maxHeight;
 	}
 
 	/**
-	 * renvoie la hauteur de l'arbre, i.e. la longueur
-	 * du chemin le plus long développé lors de la recherche de solution
+	 * Renvoie la hauteur de l'arbre, i.e. la longueur
+	 * du chemin le plus long développé lors de la recherche de solution.
 	 * 
 	 * @return
-	 * 		hauteur de l'arbre
+	 * 		Hauteur de l'arbre.
 	 */
 	public int getHeight()
 	{	return height;
@@ -162,29 +164,29 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de coût (négatif = pas de limite) */
+	/** Limite de coût (négatif = pas de limite) */
 	private double maxCost;
-	/** coût maximal atteint */
+	/** Coût maximal atteint */
 	private double cost;
 
 	/**
-	 * renvoie la limite de coût pour l'exploration de l'arbre de recherche.
+	 * Renvoie la limite de coût pour l'exploration de l'arbre de recherche.
 	 * une valeur négative représente une absence de limite.
-     * (uniquement pour A*)
+     * (uniquement pour A*).
 	 * 
 	 * @return
-	 * 		la limite de coût pour l'exploration de l'arbre de recherche
+	 * 		La limite de coût pour l'exploration de l'arbre de recherche.
 	 */
 	public double getMaxCost()
 	{	return maxCost;
 	}
 
 	/**
-	 * renvoie le coût du chemin le plus coûteux développé lors de la
+	 * Renvoie le coût du chemin le plus coûteux développé lors de la
 	 * recherche de solution par A*.
 	 * 
 	 * @return
-	 * 		coût maximal atteint lors de la recherche de solution
+	 * 		Coût maximal atteint lors de la recherche de solution.
 	 */
 	public double getCost()
 	{	return cost;
@@ -204,28 +206,28 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de taille exprimée en nombre de noeuds (négatif = pas de limite) */
+	/** Limite de taille exprimée en nombre de noeuds (négatif = pas de limite) */
 	private int maxSize;
-	/** taille atteinte lors de l'exploration */
+	/** Taille atteinte lors de l'exploration */
 	private int size;
 
 	/**
-	 * renvoie la limite qui avait été fixée pour la taille
+	 * Renvoie la limite qui avait été fixée pour la taille
 	 * de l'arbre de recherche exprimée en noeuds.
 	 * 
 	 * @return
-	 * 		la limite de taille fixée pour l'arbre
+	 * 		La limite de taille fixée pour l'arbre
 	 */
 	public int getMaxSize()
 	{	return maxSize;
 	}
 
 	/**
-	 * renvoie la taille de l'arbre développé par A* lors de son exploration,
+	 * Renvoie la taille de l'arbre développé par A* lors de son exploration,
 	 * exprimée en nombre de noeuds.
 	 * 
 	 * @return
-	 * 		la taille de l'arbre exploré
+	 * 		La taille de l'arbre exploré
 	 */
 	public int getSize()
 	{	return size;
@@ -245,19 +247,23 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// FRINGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la frange à l'instant où l'exception est levée */
-	private PriorityQueue<AiSearchNode> fringe;
+	/** La frange à l'instant où l'exception est levée */
+	private Collection<AiSearchNode> fringe;
 	
 	/**
-	 * renvoie la frange de l'algorithme au moment où l'exception est levée.
+	 * Renvoie la frange de l'algorithme au moment où l'exception est levée.
 	 * Cela permet notamment de récupérer la meilleure case du moment
 	 * (en termes d'heuristique).
+	 * <br/>
+	 * <b>Attention :</b> la collection renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
-	 * 		Une file de priorité correspondant à la frange de l'algorithme de recherche
+	 * 		Une collection correspondant à la frange de l'algorithme de recherche
 	 * 		au moment de son interruption forcée.
 	 */
-	public PriorityQueue<AiSearchNode> getFringe()
+	public Collection<AiSearchNode> getFringe()
 	{	return fringe;
 	}
 	

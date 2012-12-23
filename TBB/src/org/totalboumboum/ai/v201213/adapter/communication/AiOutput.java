@@ -23,7 +23,10 @@ package org.totalboumboum.ai.v201213.adapter.communication;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
@@ -63,7 +66,7 @@ public class AiOutput
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * efface toutes les données spécifiées précédemment
+	 * Efface toutes les données spécifiées précédemment.
 	 */
 	public void reinit()
 	{	reinitPaths();
@@ -74,73 +77,63 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** représentation interne de la zone */
+	/** Représentation interne de la zone */
 	private AiZone zone;
 		
 	/////////////////////////////////////////////////////////////////
 	// PATHS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste de chemins à afficher par dessus la zone de jeu */
-	private final List<AiPath> paths = new ArrayList<AiPath>();
-	/** couleur des chemins à afficher */
-	private final List<Color> pathColors = new ArrayList<Color>();
+	/** Liste de chemins à afficher par dessus la zone de jeu */
+	private final Map<AiPath,Color> paths = new HashMap<AiPath,Color>();
+	/** Vue externe immuable de paths */
+	private final Map<AiPath,Color> externalPaths = Collections.unmodifiableMap(paths);
 	
 	/**
-	 * réinitialise les chemins à afficher
+	 * Réinitialise les chemins à afficher.
 	 */
 	private void reinitPaths()
 	{	paths.clear();
-		pathColors.clear();
 	}
 	
 	/**
-	 * rajoute un chemin dans la liste des chemins à afficher.
+	 * Rajoute un chemin dans la liste des chemins à afficher.
 	 * La représentation graphique d'un chemin est une ligne
-	 * suivant les centres des cases traversées par le chemin 
+	 * suivant les centres des cases traversées par le chemin. 
 	 * 
 	 * @param path
-	 * 		chemin à afficher
+	 * 		Chemin à afficher.
 	 * @param color
-	 * 		couleur associée à ce chemin
+	 * 		Couleur associée à ce chemin.
 	 */
 	public void addPath(AiPath path, Color color)
 	{	if(color!=null && path!=null && !path.isEmpty())
-		{	paths.add(path);
-			pathColors.add(color);
-		}
+			paths.put(path,color);
 	}
 	
 	/**
-	 * renvoie la liste des chemins à afficher
+	 * Renvoie la liste des chemins à afficher.
+	 * <br/>
+	 * <b>Note :</b> cette méthode n'est pas destinée à être utilisée par
+	 * les agents, mais par le moteur du jeu. Toute tentative de modification
+	 * provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
-	 * 		une liste de chemins
+	 * 		Une liste de chemins.
 	 */
-	public List<AiPath> getPaths()
+	public Map<AiPath,Color> getPaths()
 	{
-		return paths;
-	}
-
-	/**
-	 * renvoie la liste des couleurs associées aux chemins
-	 * 
-	 * @return
-	 * 		une liste de couleurs
-	 */
-	public List<Color> getPathColors()
-	{
-		return pathColors;
+		return externalPaths;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TILES COLORING	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleurs pour remplir certaines cases du jeu */
+	/** Couleurs pour remplir certaines cases du jeu */
 	private List<Color> tileColors[][];
 	
 	/**
-	 * initialise les couleurs des cases
-	 * (null = aucune couleur initialement)
+	 * Réinitialise les couleurs des cases
+	 * ({@code null} = aucune couleur initialement).
 	 */
 	private void reinitTileColors()
 	{	for(int row=0;row<zone.getHeight();row++)
@@ -157,9 +150,9 @@ public class AiOutput
 	 * il faut plutôt utiliser les méthodes {@code addTileColor}.
 	 * 
 	 * @param tile
-	 * 		Case à colorier
+	 * 		Case à colorer.
 	 * @param color
-	 * 		Couleur du coloriage
+	 * 		Couleur du coloriage.
 	 */
 	public void setTileColor(AiTile tile, Color color)
 	{	int row = tile.getRow();
@@ -176,11 +169,11 @@ public class AiOutput
 	 * il faut plutôt utiliser les méthodes {@code addTileColor}.
 	 * 
 	 * @param row
-	 * 		Ligne de la case à colorier
+	 * 		Ligne de la case à colorier.
 	 * @param col
-	 * 		Colonne de la case à colorier
+	 * 		Colonne de la case à colorier.
 	 * @param color
-	 * 		Couleur du coloriage
+	 * 		Couleur du coloriage.
 	 */
 	public void setTileColor(int row, int col, Color color)
 	{	tileColors[row][col].clear();
@@ -224,10 +217,14 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie les couleurs à utiliser pour colorier les cases
+	 * Renvoie les couleurs à utiliser pour colorier les cases.
+	 * <br/>
+	 * <b>Note :</b> cette méthode n'est pas destinée à être utilisée par
+	 * les agents, mais par le moteur du jeu. La matrice renvoyée ne doit
+	 * surtout pas être modifiée directement par un agent.
 	 * 
 	 * @return
-	 * 		une matrice de couleurs
+	 * 		Une matrice de couleurs.
 	 */
 	public List<Color>[][] getTileColors()
 	{	return tileColors;
@@ -236,34 +233,34 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// TEXTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** détermine si le texte sera affiché en normalement ou en gras */
+	/** Détermine si le texte sera affiché en normalement ou en gras */
 	private boolean bold = false;
-	/** texte à afficher sur les cases de la zone de jeu */
+	/**Texte à afficher sur les cases de la zone de jeu */
 	private List<String> tileTexts[][];
 
 	/**
-	 * change le mode d'affichage du texte : gras ou pas
+	 * Change le mode d'affichage du texte : gras ou pas.
 	 * 
 	 * @param bold
-	 * 		la valeur vrai indique que l'affichage sera effectué en gras
+	 * 		La valeur vrai indique que l'affichage sera effectué en gras.
 	 */
 	public void setBold(boolean bold)
 	{	this.bold = bold;
 	}
 	
 	/**
-	 * permet de savoir si le mode d'affichage courant
+	 * Permet de savoir si le mode d'affichage courant
 	 * du teste est en gras ou pas.
 	 * 
 	 * @return
-	 * 		vrai si le mode d'affichage courant du texte est eb gras
+	 * 		{@code true} ssi le mode d'affichage courant du texte est en gras.
 	 */
 	public boolean isBold()
 	{	return bold;
 	}
 	
 	/**
-	 * réinitialise les textes associés aux cases
+	 * Réinitialise les textes associés aux cases.
 	 */
 	private void reinitTileTexts()
 	{	for(int row=0;row<zone.getHeight();row++)
@@ -272,14 +269,14 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associé à une case. Permet
+	 * Modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des couts
 	 * en temps réel.
 	 * 
 	 * @param tile
-	 * 		case associée au texte
+	 * 		Case associée au texte.
 	 * @param text
-	 * 		texte à afficher sur cette case
+	 * 		Texte à afficher sur cette case.
 	 */
 	public void setTileText(AiTile tile, String text)
 	{	int row = tile.getRow();
@@ -288,16 +285,16 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associé à une case. Permet
+	 * Modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des coûts
 	 * en temps réel.
 	 * 
 	 * @param row
-	 * 		ligne de la case associée au texte
+	 * 		Ligne de la case associée au texte.
 	 * @param col
-	 * 		colonne de la case associée au texte
+	 * 		Colonne de la case associée au texte.
 	 * @param text
-	 * 		texte à afficher sur cette case
+	 * 		Texte à afficher sur cette case.
 	 */
 	public void setTileText(int row, int col, String text)
 	{	tileTexts[row][col].clear();
@@ -305,16 +302,16 @@ public class AiOutput
 	}
 
 	/**
-	 * modifie le texte associé à une case. Permet
+	 * Modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des coûts
 	 * en temps réel.
 	 * 
 	 * @param row
-	 * 		ligne de la case associée au texte
+	 * 		Ligne de la case associée au texte.
 	 * @param col	
-	 * 		colonne de la case associée au texte
+	 * 		Colonne de la case associée au texte.
 	 * @param texts	
-	 * 		tableau de textes à afficher sur cette case
+	 * 		Tableau de textes à afficher sur cette case.
 	 */
 	public void setTileTexts(int row, int col, String texts[])
 	{	tileTexts[row][col].clear();
@@ -323,10 +320,14 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie les textes à afficher sur les cases
+	 * Renvoie les textes à afficher sur les cases.
+	 * <br/>
+	 * <b>Note :</b> cette méthode n'est pas destinée à être utilisée par
+	 * les agents, mais par le moteur du jeu. La matrice renvoyée ne doit
+	 * surtout pas être modifiée directement par un agent.
 	 * 
 	 * @return
-	 * 		une matrice de textes
+	 * 		Une matrice de textes.
 	 */
 	public List<String>[][] getTileTexts()
 	{	return tileTexts;

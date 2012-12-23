@@ -22,9 +22,11 @@ package org.totalboumboum.ai.v201213.adapter.data;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
@@ -44,13 +46,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
+ * Il s'agit de la classe principale des percepts auxquels l'agent a accès.
  * <br/>
- * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
- * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
+ * A chaque fois que l'agent est sollicité par le jeu pour connaître l'action
+ * qu'il veut effectuer, cette représentation est mise à jour. L'agent ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
- * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
- * les autres objets. Si l'IA a besoin d'une trace des états précédents du jeu, son
+ * du jeu. De la même façon, les cases ({@link AiTile}) restent les mêmes, ainsi que les sprites et
+ * les autres objets. Si l'agent a besoin d'une trace des états précédents du jeu, son
  * concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
@@ -103,11 +105,11 @@ public abstract class AiZone
 	// META DATA		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
-	protected final HashMap<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
+	protected final Map<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
 	/** Rangs des joueurs pour la rencontre en cours (ces rangs n'évoluent pas pendant la manche) */
-	protected final HashMap<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
+	protected final Map<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
 	/** Rangs des joueurs au classement global du jeu (ces rangs n'évoluent pas pendant la manche) */
-	protected final HashMap<AiHero,Integer> statsRanks = new HashMap<AiHero, Integer>();
+	protected final Map<AiHero,Integer> statsRanks = new HashMap<AiHero, Integer>();
 
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, pour la manche en cours.
@@ -152,36 +154,41 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** hauteur totale de la zone de jeu exprimée en cases (ie: nombre de lignes) */
+	/** Hauteur totale de la zone de jeu exprimée en cases (ie: nombre de lignes) */
 	protected int height;
-	/** largeur totale de la zone de jeu exprimée en cases (ie: nombre de colonnes) */
+	/** Largeur totale de la zone de jeu exprimée en cases (ie: nombre de colonnes) */
 	protected int width;
 
 	/**
-	 * renvoie la matrice de cases représentant la zone de jeu
+	 * Renvoie la matrice de cases représentant la zone de jeu.
+	 * <br/>
+	 * <b>Attention :</b> cette matrice ne doit surtout pas être modifiée, sinon
+	 * les percepts reçus par l'agent ultérieurement seront
+	 * probablement faux. De plus, cela peut provoquer certaines
+	 * exceptions.
 	 * 
 	 * @return	
-	 * 		la matrice correspondant à la zone de jeu
+	 * 		La matrice correspondant à la zone de jeu.
 	 */
 	public abstract AiTile[][] getMatrix();
 
 	/** 
-	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
-	 * de la zone de jeu exprimée en cases (ie: nombre de lignes)
+	 * Renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
+	 * de la zone de jeu exprimée en cases (i.e. : nombre de lignes).
 	 *  
 	 *  @return	
-	 *  	hauteur de la zone
+	 *  	Hauteur de la zone.
 	 */
 	public int getHeight()
 	{	return height;	
 	}
 	
 	/** 
-	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
-	 * de la zone de jeu exprimée en cases (ie: nombre de colonnes)
+	 * Renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
+	 * de la zone de jeu exprimée en cases (i.e. : nombre de colonnes).
 	 *  
 	 *  @return	
-	 *  	largeur de la zone
+	 *  	Largeur de la zone.
 	 */
 	public int getWidth()
 	{	return width;	
@@ -194,6 +201,10 @@ public abstract class AiZone
 	 * Renvoie toutes les cases de cette zone
 	 * sous forme d'une liste. Les cases y sont
 	 * placées ligne à ligne.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		La liste de toutes les cases de cette zone.
@@ -220,26 +231,26 @@ public abstract class AiZone
 	}
 
 	/**
-	 * renvoie la case située dans la zone à la position passée en paramètre.
+	 * Renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
 	 *  @param row
-	 *  	numéro de la ligne contenant la case à renvoyer
+	 *  	Numéro de la ligne contenant la case à renvoyer.
 	 *  @param col
-	 *  	numéro de la colonne contenant la case à renvoyer
+	 *  	Numéro de la colonne contenant la case à renvoyer.
 	 *  @return	
-	 *  	case située aux coordonnées spécifiées en paramètres
+	 *  	Case située aux coordonnées spécifiées en paramètres.
 	 */
 	public abstract AiTile getTile(int row, int col);
 	
 	/**
-	 * renvoie la case qui contient le pixel passé en paramètre
+	 * Renvoie la case qui contient le pixel passé en paramètre.
 	 *   
 	 *  @param x
-	 *  	abscisse du pixel concerné
+	 *  	Abscisse du pixel concerné.
 	 *  @param y
-	 *  	ordonnée du pixel concerné
+	 *  	Ordonnée du pixel concerné.
 	 *  @return	
-	 *  	case contenant le pixel situé aux coordonnées spécifiées en paramètres
+	 *  	Case contenant le pixel situé aux coordonnées spécifiées en paramètres.
 	 */
 	public abstract AiTile getTile(double x, double y);
 		
@@ -249,7 +260,7 @@ public abstract class AiZone
 	 *  @param location
 	 *  	L'emplacement concerné.
 	 *  @return	
-	 *  	Case contenant l'emplacement spécifié en paramètres
+	 *  	Case contenant l'emplacement spécifié en paramètres.
 	 */
 	public AiTile getTile(AiLocation location)
 	{	double x = location.getPosX();
@@ -262,51 +273,74 @@ public abstract class AiZone
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la liste des blocks contenus dans cette zone
+	 * Renvoie la liste des blocks contenus dans cette zone
 	 * (la liste peut être vide). 
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		liste de tous les blocs contenus dans cette zone
+	 * 		Liste de tous les blocs contenus dans cette zone.
 	 */
 	public abstract List<AiBlock> getBlocks();
 	
 	/** 
-	 * renvoie la liste des blocks destructibles contenus dans cette zone
+	 * Renvoie la liste des blocks destructibles contenus dans cette zone
 	 * (la liste peut être vide). 
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		liste de tous les blocs destructibles contenus dans cette zone
+	 * 		Liste de tous les blocs destructibles contenus dans cette zone.
 	 */
 	public abstract List<AiBlock> getDestructibleBlocks();
 	
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indique si la mise à jour des maps de bombes a été faite à cette itéeation */
+	protected boolean bombmapsUpdated = false;
 	/** Map associant à chaque bombe la liste des bombes qu'elle menace */
-	protected HashMap<AiBomb,List<AiBomb>> threatenedBombs = null;
+	protected final Map<AiBomb,List<AiBomb>> threatenedBombs = new HashMap<AiBomb, List<AiBomb>>();
+	/** Version immuable de la map associant à chaque bombe la liste des bombes qu'elle menace */
+	protected final Map<AiBomb,List<AiBomb>> externalThreatenedBombs = Collections.unmodifiableMap(threatenedBombs);
 	/** Map associant à chaque bombe le temps avant son explosion */
-	protected HashMap<AiBomb,Long> delaysByBombs = null;
+	protected final Map<AiBomb,Long> delaysByBombs = new HashMap<AiBomb, Long>();
+	/** Version immuable de la map associant à chaque bombe le temps avant son explosion */
+	protected final Map<AiBomb,Long> externalDelaysByBombs = Collections.unmodifiableMap(delaysByBombs);
 	/** Map associant à chaque temps avant explosion la liste des bombes concernées */
-	protected HashMap<Long,List<AiBomb>> bombsByDelays = null;
+	protected final Map<Long,List<AiBomb>> bombsByDelays = new HashMap<Long, List<AiBomb>>();
+	/** Version immuable de la map associant à chaque temps avant explosion la liste des bombes concernées */
+	protected final Map<Long,List<AiBomb>> externalBombsByDelays = Collections.unmodifiableMap(bombsByDelays);
 	
 	/** 
-	 * renvoie la liste des bombes contenues dans cette zone 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des bombes contenues dans cette zone 
+	 * (la liste peut être vide).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		liste de toutes les bombes contenues dans cette zone
+	 * 		Liste de toutes les bombes contenues dans cette zone.
 	 */
 	public abstract List<AiBomb> getBombs();
 	
 	/** 
-	 * renvoie la liste de bombes de la couleur passée en paramètre.
+	 * Renvoie la liste de bombes de la couleur passée en paramètre.
 	 * la liste est vide si aucune bombe de cette couleur n'existe ou si 
-	 * cette couleur est null.
+	 * cette couleur est {@code null}.
+	 * <br/>
+	 * <b>Note :</b> la liste renvoyée est générée à la demande.
+	 * Elle peut être modifiée par l'agent sans problème.
 	 * 
 	 * @param color 
 	 * 		La couleur recherchée.
 	 * @return	
-	 * 		une liste de bombe de la couleur passée en paramètre
+	 * 		Une liste de bombe de la couleur passée en paramètre.
 	 */
 	public List<AiBomb> getBombsByColor(PredefinedColor color)
 	{	List<AiBomb> result = new LinkedList<AiBomb>();
@@ -325,14 +359,18 @@ public abstract class AiZone
 	 * réactions en chaîne. Le résultat prend la forme
 	 * d'une map dont la clé est la bombe et la valeur
 	 * le temps restant avant son explosion.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		Une map décrivant les temps d'explosion des bombes.
 	 */
-	public HashMap<AiBomb,Long> getDelaysByBombs()
-	{	if(delaysByBombs==null)
+	public Map<AiBomb,Long> getDelaysByBombs()
+	{	if(!bombmapsUpdated)
 			initBombData();
-		return delaysByBombs;
+		return externalDelaysByBombs;
 	}
 	
 	/**
@@ -345,10 +383,10 @@ public abstract class AiZone
 	 * @return
 	 * 		Une map décrivant les temps d'explosion des bombes.
 	 */
-	public HashMap<Long,List<AiBomb>> getBombsByDelays()
-	{	if(bombsByDelays==null)
+	public Map<Long,List<AiBomb>> getBombsByDelays()
+	{	if(!bombmapsUpdated)
 			initBombData();
-		return bombsByDelays;
+		return externalBombsByDelays;
 	}
 	
 	/**
@@ -360,10 +398,10 @@ public abstract class AiZone
 	 * @return
 	 * 		Une map décrivant les bombes menacées.
 	 */
-	public HashMap<AiBomb,List<AiBomb>> getThreatenedBombs()
-	{	if(threatenedBombs==null)
+	public Map<AiBomb,List<AiBomb>> getThreatenedBombs()
+	{	if(!bombmapsUpdated)
 			initBombData();
-		return threatenedBombs;
+		return externalThreatenedBombs;
 	}
 	
 	/**
@@ -372,9 +410,9 @@ public abstract class AiZone
 	 * et explosions de cette zone.
 	 */
 	private void initBombData()
-	{	delaysByBombs = new HashMap<AiBomb,Long>();
-		bombsByDelays = new HashMap<Long,List<AiBomb>>();
-		threatenedBombs = new HashMap<AiBomb,List<AiBomb>>();
+	{	delaysByBombs.clear();
+		bombsByDelays.clear();
+		threatenedBombs.clear();
 		
 		// retrieve necessary info
 		for(AiBomb bomb: getBombs())
@@ -471,17 +509,23 @@ public abstract class AiZone
 				}
 			}
 		}
+		
+		bombmapsUpdated = true;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la liste des feux contenus dans cette zone 
-	 * (la liste peut être vide)
+	 * Renvoie la liste des feux contenus dans cette zone 
+	 * (la liste peut être vide).
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		liste de tous les feux contenus dans cette zone
+	 * 		Liste de tous les feux contenus dans cette zone.
 	 */
 	public abstract List<AiFire> getFires();
 
@@ -489,10 +533,14 @@ public abstract class AiZone
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la liste des sols contenus dans cette zone 
+	 * Renvoie la liste des sols contenus dans cette zone. 
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		liste de tous les sols contenus dans cette zone
+	 * 		Liste de tous les sols contenus dans cette zone.
 	 */
 	public abstract List<AiFloor> getFloors();
 	
@@ -500,61 +548,76 @@ public abstract class AiZone
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la liste des personnages contenus dans cette zone,
+	 * Renvoie la liste des personnages contenus dans cette zone,
 	 * y compris ceux qui ont été éliminés. 
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		liste de tous les joueurs contenus dans cette zone
+	 * 		Liste de tous les joueurs contenus dans cette zone.
 	 */
 	public abstract List<AiHero> getHeroes();
 	
 	/** 
-	 * renvoie la liste des personnages contenus dans cette zone, 
+	 * Renvoie la liste des personnages contenus dans cette zone, 
 	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
 	 * en jeu.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
-	 * 		liste de tous les joueurs encore contenus dans cette zone
+	 * 		Liste de tous les joueurs encore contenus dans cette zone.
 	 */
 	public abstract List<AiHero> getRemainingHeroes();
 	
 	/** 
-	 * renvoie la liste des personnages contenus dans cette zone, 
+	 * Renvoie la liste des personnages contenus dans cette zone, 
 	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
-	 * en jeu, et sauf le personnage contrôlé par l'IA.
+	 * en jeu, et sauf le personnage contrôlé par l'agent.
+	 * <br/>
+	 * <b>Note :</b> cette liste est générée à la demande, elle
+	 * peut être modifiée par l'agent sans problème.
 	 * 
 	 * @return	
-	 * 		liste de tous les joueurs encore contenus dans cette zone, sauf celui de l'IA
+	 * 		Liste de tous les joueurs encore contenus dans cette zone, sauf celui de l'agent.
 	 */
 	public abstract List<AiHero> getRemainingOpponents();
 
 	/** 
-	 * renvoie le personnage de la couleur passée en paramètre,
+	 * Renvoie le personnage de la couleur passée en paramètre,
 	 * ou null si aucun personnage de cette couleur existe ou si 
-	 * cette couleur est null.
+	 * cette couleur est {@code null}.
 	 * <br/>
 	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés.
 	 *  
 	 * @param color 
 	 * 		La couleur recherchée.
 	 * @return	
-	 * 		le personnage dont la couleur est celle passée en paramètre
+	 * 		Le personnage dont la couleur est celle passée en paramètre
 	 */
 	public abstract AiHero getHeroByColor(PredefinedColor color);
 
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nombre d'items cachés, i.e. pas encore ramassés */
+	/** Nombre d'items cachés, i.e. pas encore ramassés */
 	protected int hiddenItemsCount;
-	/** nombre d'items cachés, par type*/
-	protected final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
+	/** Nombre d'items cachés, par type*/
+	protected final Map<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
 	
 	/** 
 	 * Renvoie la liste des items apparents contenus dans cette zone.
 	 * La liste peut être vide.
-	 * <p/>
+	 * <br/>
 	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return	
 	 * 		Liste de tous les items contenus dans cette zone.
@@ -567,7 +630,7 @@ public abstract class AiZone
 	 * et qui n'ont pas été ramassés. Cette information permet de
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
-	 * <p/>
+	 * <br/>
 	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
 	 * 
 	 * @return	
@@ -583,7 +646,7 @@ public abstract class AiZone
 	 * et qui n'ont pas été ramassés. Cette information permet de
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
-	 * <p/>
+	 * <br/>
 	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
 	 * 
 	 * @param type
@@ -599,17 +662,20 @@ public abstract class AiZone
 	}
 	
 	/**
-	 * Renvoie une HashMap contenant la proportion d'items restant
+	 * Renvoie une map contenant la proportion d'items restant
 	 * cachés dans le niveau, par type d'item. Cette proportion peut
 	 * être assimilée à une probabilité : celle de découvrir un item
 	 * de ce type quand le mur qu'on fait exploser contient un item.
-	 * <p/>
+	 * <br/>
 	 * Les items apparaissant lors de la mort subite ne sont pas comptés.
+	 * <br/>
+	 * <b>Note :</b> cette map est générée à la demande, elle peut
+	 * être modifiée sans problème par l'agent.
 	 * 
 	 * @return
-	 * 		Une HashMap contenant les probabilités associées à chaque type d'item.
+	 * 		Une map contenant les probabilités associées à chaque type d'item.
 	 */
-	public HashMap<AiItemType,Double> getHiddenItemsProbas()
+	public Map<AiItemType,Double> getHiddenItemsProbas()
 	{	HashMap<AiItemType,Double> result = new HashMap<AiItemType, Double>();
 		double total = hiddenItemsCount;
 		if(total==0)
@@ -625,10 +691,10 @@ public abstract class AiZone
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie le personnage qui est contrôlé par l'IA
+	 * Renvoie le personnage qui est contrôlé par l'agent.
 	 * 
 	 * @return
-	 * 		le personnage contrôlé par l'IA
+	 * 		Le personnage contrôlé par l'agent.
 	 */
 	public abstract AiHero getOwnHero();
 	
@@ -639,15 +705,15 @@ public abstract class AiZone
 	 * Renvoie la direction de la case target relativement à la case source.
 	 * Par exemple, la case target de coordonnées (5,5) est à droite de
 	 * la case source de coordonnées (5,6).
-	 * </br>
+	 * <br/>
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
 	 * il faut se déplacer pour aller de la case source à la case target.
-	 * </br>
+	 * <br/>
 	 * <b>ATTENTION 1 :</b> si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
 	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
 	 * la classe {@link Direction} pour plus d'informations sur ces valeurs.
-	 * </br>
+	 * <br/>
 	 * <b>ATTENTION 2 :</b> comme les niveaux sont circulaires, il y a toujours deux directions possibles.
 	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
@@ -717,14 +783,14 @@ public abstract class AiZone
 	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
-	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
+	 * La direction peut être {@code NONE} si jamais les deux sprites sont au même endroit.
 	 * 
 	 * @param source
-	 * 		sprite de départ
+	 * 		Sprite de départ.
 	 * @param target
-	 * 		sprite de destination
+	 * 		Sprite de destination.
 	 * @return	
-	 * 		La direction pour aller de source vers target
+	 * 		La direction pour aller de source vers target.
 	 */
 	public Direction getDirection(AiSprite source, AiSprite target)
 	{	double x1 = source.getPosX();
@@ -741,14 +807,14 @@ public abstract class AiZone
 	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
-	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
+	 * La direction peut être {@code NONE} si jamais les deux sprites sont au même endroit
 	 * 
 	 * @param sprite
-	 * 		sprite en déplacement
+	 * 		Sprite en déplacement.
 	 * @param tile
-	 * 		case de destination
+	 * 		Case de destination.
 	 * @return	
-	 * 		la direction pour aller du sprite vers la case
+	 * 		La direction pour aller du sprite vers la case.
 	 */
 	public Direction getDirection(AiSprite sprite, AiTile tile)
 	{	double x1 = sprite.getPosX();
@@ -769,15 +835,15 @@ public abstract class AiZone
 	 * sont équivalentes.
 	 * 
 	 * @param x1
-	 * 		première position horizontale en pixels
+	 * 		Première position horizontale en pixels.
 	 * @param y1
-	 * 		première position verticale en pixels
+	 * 		Première position verticale en pixels.
 	 * @param x2
-	 * 		seconde position horizontale en pixels
+	 * 		Seconde position horizontale en pixels.
 	 * @param y2
-	 * 		seconde position verticale en pixels
+	 * 		Seconde position verticale en pixels.
 	 * @return	
-	 * 		la direction correspondant au chemin le plus court
+	 * 		La direction correspondant au chemin le plus court.
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
 	{	double dx = LevelsTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
@@ -804,15 +870,15 @@ public abstract class AiZone
 	 * passant par les bords du niveau.
 	 * 
 	 * @param  row1
-	 * 		ligne de la première case
+	 * 		Ligne de la première case.
 	 * @param col1
-	 * 		colonne de la première case
+	 * 		Colonne de la première case.
 	 * @param  row2
-	 * 		ligne de la seconde case
+	 * 		Ligne de la seconde case.
 	 * @param  col2
-	 * 		colonne de la seconde case
+	 * 		Colonne de la seconde case.
 	 * @param  direction
-	 * 		direction à considérer
+	 * 		Direction à considérer.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -831,13 +897,13 @@ public abstract class AiZone
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
 	 * @param row1
-	 * 		ligne de la première case
+	 * 		Ligne de la première case.
 	 * @param  col1
-	 * 		colonne de la première case
+	 * 		Colonne de la première case.
 	 * @param  row2
-	 * 		ligne de la seconde case
+	 * 		Ligne de la seconde case.
 	 * @param col2
-	 * 		colonne de la seconde case
+	 * 		Colonne de la seconde case.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -856,9 +922,9 @@ public abstract class AiZone
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
 	 * @param tile1
-	 * 		première case
+	 * 		Première case.
 	 * @param tile2
-	 * 		seconde case
+	 * 		Seconde case.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -878,11 +944,11 @@ public abstract class AiZone
 	 * passant par les bords du niveau.
 	 * 
 	 * @param tile1
-	 * 		première case
+	 * 		Première case.
 	 * @param tile2
-	 * 		seconde case
+	 * 		Seconde case.
 	 * @param direction
-	 * 		direction à considérer
+	 * 		Direction à considérer.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -905,9 +971,9 @@ public abstract class AiZone
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
 	 * @param sprite1
-	 * 		premier sprite
+	 * 		Premier sprite.
 	 * @param sprite2
-	 * 		second sprite
+	 * 		Second sprite.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -927,11 +993,11 @@ public abstract class AiZone
 	 * passant par les bords du niveau.
 	 * 
 	 * @param sprite1
-	 * 		premier sprite
+	 * 		Premier sprite.
 	 * @param sprite2
-	 * 		second sprite
+	 * 		Second sprite.
 	 * @param direction
-	 * 		direction à considérer
+	 * 		Direction à considérer.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -970,7 +1036,7 @@ public abstract class AiZone
 	}
 
 	/**
-	 * renvoie la distance de Manhattan, exprimées en cases,
+	 * Renvoie la distance de Manhattan, exprimées en cases,
 	 * entre les cases contenant les emplacements passés en paramètres.
 	 * <br/> 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
@@ -995,22 +1061,22 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	// PIXEL DIMENSIONS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** coordonnée du pixel le plus a gauche */
+	/** Coordonnée du pixel le plus a gauche */
 	protected double pixelLeftX;
-	/** coordonnée du pixel le plus haut */
+	/** Coordonnée du pixel le plus haut */
 	protected double pixelTopY;
-	/** largeur du niveau en pixels */
+	/** Largeur du niveau en pixels */
 	protected double pixelWidth;
-	/** hauteur du niveau en pixels */
+	/** Hauteur du niveau en pixels */
 	protected double pixelHeight;
 	
 	/**
 	 * Renvoie la coordonnée du pixel le plus à gauche du niveau.
 	 * <br/>
-	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'un agent.
 	 * 
 	 * @return	
-	 * 		l'abscisse du pixel le plus à gauche du niveau
+	 * 		L'abscisse du pixel le plus à gauche du niveau.
 	 */
 	public double getPixelLeftX()
 	{	return pixelLeftX;
@@ -1019,10 +1085,10 @@ public abstract class AiZone
 	/**
 	 * Renvoie la coordonnée du pixel le plus haut du niveau.
 	 * <br/>
-	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'un agent.
 	 * 
 	 * @return	
-	 * 		l'ordonnée du pixel le plus haut du niveau
+	 * 		L'ordonnée du pixel le plus haut du niveau.
 	 */
 	public double getPixelTopY()
 	{	return pixelTopY;
@@ -1031,10 +1097,10 @@ public abstract class AiZone
 	/**
 	 * Renvoie largeur du niveau en pixels.
 	 * <br/>
-	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'un agent.
 	 * 
 	 * @return	
-	 * 		la largeur du niveau en pixels
+	 * 		La largeur du niveau en pixels.
 	 */
 	public double getPixelWidth()
 	{	return pixelWidth;
@@ -1043,10 +1109,10 @@ public abstract class AiZone
 	/**
 	 * Renvoie hauteur du niveau en pixels.
 	 * <br/>
-	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'un agent.
 	 * 
 	 * @return	
-	 * 		la hauteur du niveau en pixels
+	 * 		La hauteur du niveau en pixels.
 	 */
 	public double getPixelHeight()
 	{	return pixelHeight;
@@ -1062,16 +1128,16 @@ public abstract class AiZone
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
-	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * (qui peut correspondre à un chemin passant par les bords du niveau).
 	 * 
 	 * @param x1
-	 * 		abscisse du premier point
+	 * 		Abscisse du premier point.
 	 * @param y1
-	 * 		ordonnée du premier point
+	 * 		Ordonnée du premier point.
 	 * @param x2
-	 * 		abscisse du second point
+	 * 		Abscisse du second point.
 	 * @param y2
-	 * 		ordonnée du second point
+	 * 		Ordonnée du second point.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -1093,15 +1159,15 @@ public abstract class AiZone
 	 * passant par les bords du niveau.
 	 * 
 	 * @param x1
-	 * 		abscisse du premier point
+	 * 		Abscisse du premier point.
 	 * @param y1
-	 * 		ordonnée du premier point
+	 * 		Ordonnée du premier point.
 	 * @param x2
-	 * 		abscisse du second point
+	 * 		Abscisse du second point.
 	 * @param y2
-	 * 		ordonnée du second point
+	 * 		Ordonnée du second point.
 	 * @param direction
-	 * 		direction à considérer
+	 * 		Direction à considérer.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -1122,9 +1188,9 @@ public abstract class AiZone
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
 	 * @param sprite1
-	 * 		premier sprite
+	 * 		Premier sprite.
 	 * @param sprite2
-	 * 		second sprite
+	 * 		Second sprite.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -1134,7 +1200,7 @@ public abstract class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels.
+	 * Renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels.
 	 * <br/>
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
@@ -1143,11 +1209,11 @@ public abstract class AiZone
 	 * les bords du niveau.
 	 * 
 	 * @param sprite1
-	 * 		premier sprite
+	 * 		Premier sprite.
 	 * @param sprite2
-	 * 		second sprite
+	 * 		Second sprite.
 	 * @param direction
-	 * 		direction à considérer
+	 * 		Direction à considérer.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -1173,11 +1239,11 @@ public abstract class AiZone
 	 * passant par les bords du niveau.
 	 * 
 	 * @param location1
-	 * 		Emplacement du premier point
+	 * 		Emplacement du premier point.
 	 * @param location2
-	 * 		Emplacement du second point
+	 * 		Emplacement du second point.
 	 * @param direction
-	 * 		direction à considérer
+	 * 		Direction à considérer.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -1200,9 +1266,9 @@ public abstract class AiZone
 	 * (qui peut correspondre à un chemin passant par les bords du niveau).
 	 * 
 	 * @param location1
-	 * 		Emplacement du premier point
+	 * 		Emplacement du premier point.
 	 * @param location2
-	 * 		Emplacement du second point
+	 * 		Emplacement du second point.
 	 * @return
 	 * 		La distance calculée. 
 	 */
@@ -1723,25 +1789,25 @@ public abstract class AiZone
 	// COORDINATE NORMALIZING	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * prend n'importe quelles coordonnées exprimées en pixels et les normalise
+	 * Prend n'importe quelles coordonnées exprimées en pixels et les normalise
 	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
 	 * désignent une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
 	 * @param x
-	 * 		abscisse
+	 * 		Abscisse.
 	 * @param y
-	 * 		ordonnée
+	 * 		Ordonnée.
 	 * @return	
-	 * 		un tableau contenant les versions normalisées de x et y
+	 * 		Un tableau contenant les versions normalisées de x et y.
 	 */
 	public double[] normalizePosition(double x, double y)
 	{	return LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	/**
-	 * prend n'importe quelle abscisse exprimée en pixels et la normalise
+	 * Prend n'importe quelle abscisse exprimée en pixels et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
@@ -1749,16 +1815,16 @@ public abstract class AiZone
 	 * équivalente située dans le niveau.
 	 * 
 	 * @param x
-	 * 		abscisse
+	 * 		Abscisse.
 	 * @return	
-	 * 		la version normalisée de x
+	 * 		La version normalisée de x.
 	 */
 	public double normalizePositionX(double x)
 	{	return LevelsTools.normalizePositionX(x,pixelLeftX,pixelWidth);
 	}
 	
 	/**
-	 * prend n'importe quelle ordonnée exprimée en pixels et la normalise
+	 * Prend n'importe quelle ordonnée exprimée en pixels et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
@@ -1766,34 +1832,34 @@ public abstract class AiZone
 	 * équivalente située dans le niveau.
 	 * 
 	 * @param y
-	 * 		ordonnée
+	 * 		Ordonnée.
 	 * @return	
-	 * 		la version normalisée de y
+	 * 		La version normalisée de y.
 	 */
 	public double normalizePositionY(double y)
 	{	return LevelsTools.normalizePositionY(y,pixelTopY,pixelHeight);
 	}
 	
 	/**
-	 * prend n'importe quelles coordonnées exprimées en cases et les normalise
+	 * Prend n'importe quelles coordonnées exprimées en cases et les normalise
 	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
 	 * désignent une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
 	 * @param row
-	 * 		ligne de la case
+	 * 		Ligne de la case.
 	 * @param col
-	 * 		colonne de la case
+	 * 		Colonne de la case.
 	 * @return	
-	 * 		un tableau contenant les versions normalisées de row et col
+	 * 		Un tableau contenant les versions normalisées de row et col.
 	 */
 	public int[] normalizePosition(int row, int col)
 	{	return LevelsTools.normalizePosition(row,col,height,width);
 	}
 
 	/**
-	 * prend n'importe quelle abscisse exprimée en cases et la normalise
+	 * Prend n'importe quelle abscisse exprimée en cases et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
@@ -1801,16 +1867,16 @@ public abstract class AiZone
 	 * équivalente située dans le niveau.
 	 * 
 	 * @param col
-	 * 		colonne de la case
+	 * 		Colonne de la case.
 	 * @return	
-	 * 		la version normalisée de col
+	 * 		La version normalisée de col.
 	 */
 	public int normalizePositionCol(int col)
 	{	return LevelsTools.normalizePositionCol(col,width);
 	}
 
 	/**
-	 * prend n'importe quelle ordonnée exprimée en cases et la normalise
+	 * Prend n'importe quelle ordonnée exprimée en cases et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * désigne une position située en dehors de la zone de jeu, cette méthode
 	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
@@ -1818,9 +1884,9 @@ public abstract class AiZone
 	 * équivalente située dans le niveau.
 	 * 
 	 * @param row
-	 * 		ligne de la case
+	 * 		Ligne de la case.
 	 * @return	
-	 * 		la version normalisée de row
+	 * 		La version normalisée de row.
 	 */
 	public int normalizePositionRow(int row)
 	{	return LevelsTools.normalizePositionRow(row,height);
@@ -1830,15 +1896,15 @@ public abstract class AiZone
 	// SAME PIXEL POSITION		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * teste si les deux sprites passés en paramètres occupent la
-	 * même position au pixel près
+	 * Teste si les deux sprites passés en paramètres occupent la
+	 * même position au pixel près.
 	 * 
 	 * @param sprite1
-	 * 		le premier sprite
+	 * 		Le premier sprite.
 	 * @param sprite2
-	 * 		le second sprite
+	 * 		Le second sprite.
 	 * @return	
-	 * 		vrai ssi les deux sprites sont au même endroit
+	 * 		{@code true} ssi les deux sprites sont au même endroit.
 	 */
 	public boolean hasSamePixelPosition(AiSprite sprite1, AiSprite sprite2)
 	{	boolean result;
@@ -1851,15 +1917,15 @@ public abstract class AiZone
 	}
 	
 	/**
-	 * teste si le sprite passé en paramètre occupent le
-	 * centre de la case passée en paramètre, au pixel près
+	 * Teste si le sprite passé en paramètre occupent le
+	 * centre de la case passée en paramètre, au pixel près.
 	 * 
 	 * @param sprite
-	 * 		le sprite
+	 * 		Le sprite concerné.
 	 * @param tile
-	 * 		la case
+	 * 		La case à traiter.
 	 * @return	
-	 * 		vrai ssi le sprite est au centre de la case
+	 * 		{@code true} ssi le sprite est au centre de la case.
 	 */
 	public boolean hasSamePixelPosition(AiSprite sprite, AiTile tile)
 	{	boolean result;	
@@ -1872,19 +1938,19 @@ public abstract class AiZone
 	}
 
 	/**
-	 * teste si les deux points passés en paramètres occupent la
-	 * même position au pixel près
+	 * Teste si les deux points passés en paramètres occupent la
+	 * même position au pixel près.
 	 * 
 	 * @param x1
-	 * 		l'abscisse de la première position
+	 * 		L'abscisse de la première position.
 	 * @param y1
-	 * 		l'ordonnée de la première position
+	 * 		L'ordonnée de la première position.
 	 * @param x2
-	 * 		l'abscisse de la seconde position
+	 * 		L'abscisse de la seconde position.
 	 * @param y2
-	 * 		l'ordonnée de la seconde position
+	 * 		L'ordonnée de la seconde position.
 	 * @return	
-	 * 		vrai ssi les deux positions sont équivalentes au pixel près
+	 * 		{@code true} ssi les deux positions sont équivalentes au pixel près.
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	
@@ -1918,10 +1984,12 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	/** Liste associant à chaque temps une liste de sprites apparaissant lors de la mort subite */
 	protected List<AiSuddenDeathEvent> suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
+	/** Version immuable de la Liste des évènements de mort subite */
+	protected List<AiSuddenDeathEvent> externalSuddenDeathEvents = Collections.unmodifiableList(suddenDeathEvents);
 
 	/**
 	 * Renvoie le prochain des évènements constituant la mort subite.
-	 * <p/>
+	 * <br/>
 	 * Les items apparaissant éventuellement dans l'évènement renvoyé ne sont
 	 * pas comptés comme des items présents dans la zone de jeu. Ils le seront
 	 * uniquement après leur apparition.
@@ -1940,16 +2008,20 @@ public abstract class AiZone
 	 * Renvoie la liste de tous les évènements constituant la mort subite.
 	 * Elle est vide si aucun évènement ne doit se produire (en particulier 
 	 * si aucune mort subite n'est prévue).
-	 * <p/>
+	 * <br/>
 	 * Les items apparaissant éventuellement dans la liste renvoyée ne sont
 	 * pas comptés comme des items présents dans la zone de jeu. Ils le seront
 	 * uniquement après leur apparition.
+	 * <br/>
+	 * <b>Attention :</b> la liste renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		Une liste d'évènements de mort subite.
 	 */
 	public List<AiSuddenDeathEvent> getAllSuddenDeathEvents()
-	{	return suddenDeathEvents;
+	{	return externalSuddenDeathEvents;
 	}
 	
 	/////////////////////////////////////////////////////////////////

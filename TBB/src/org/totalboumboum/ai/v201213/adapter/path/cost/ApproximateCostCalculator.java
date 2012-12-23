@@ -73,7 +73,7 @@ public class ApproximateCostCalculator extends CostCalculator
 	 * aux temps d'explosions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 * @param hero
 	 * 		Personnage de référence pour calculer le coût temporel.
 	 */

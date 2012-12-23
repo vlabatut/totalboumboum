@@ -21,8 +21,10 @@ package org.totalboumboum.ai.v201213.adapter.path.successor;
  * 
  */
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
@@ -40,11 +42,11 @@ public abstract class SuccessorCalculator
 {	
 	/**
 	 * Construit une fonction successeur
-	 * utilisant l'IA passée en paramètre
+	 * utilisant l'agent passé en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 */
 	public SuccessorCalculator(ArtificialIntelligence ai)
 	{	this.ai = ai;
@@ -72,7 +74,9 @@ public abstract class SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Cases déjà traitées */
-	protected final HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> processedTiles = new HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>>();
+	protected final Map<AiSearchNode,Map<AiTile,AiSearchNode>> processedTiles = new HashMap<AiSearchNode,Map<AiTile,AiSearchNode>>();
+	/** Version immuable de la map contenant les cases déjà traitées */
+	protected final Map<AiSearchNode,Map<AiTile,AiSearchNode>> externalProcessedTiles = Collections.unmodifiableMap(processedTiles);
 
 	/**
 	 * Renvoie la map contenant les cases traitées lors de la recherche.
@@ -87,12 +91,16 @@ public abstract class SuccessorCalculator
 	 * (i.e. fonction successeur ne tenant pas compte du temps, et donc
 	 * de l'attente), alors la map contient une seule entrée dont la clé
 	 * est {@code null}.
+	 * <br/>
+	 * <b>Attention :</b> la map renvoyée par cette méthode 
+	 * ne doit pas être modifiée par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		Une map associant à chaque racine locale une map de couples cases/noeuds de recherche.
 	 */
-	public HashMap<AiSearchNode,HashMap<AiTile,AiSearchNode>> getProcessedTiles()
-	{	return processedTiles;
+	public Map<AiSearchNode,Map<AiTile,AiSearchNode>> getProcessedTiles()
+	{	return externalProcessedTiles;
 	}
 	
 	/** 
@@ -106,6 +114,9 @@ public abstract class SuccessorCalculator
 	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être
 	 * menacée par du feu, et le temps est une information cruciale pour déterminer
 	 * si le personnage peut ou pas traverser une case avant qu'elle brûle.
+	 * <br/>
+	 * <b>Note :</b> la liste est générée à la demande, elle peut
+	 * être modifiée sans causer de problème.
 	 * 
 	 * @param node	
 	 * 		Le noeud de recherche courant.

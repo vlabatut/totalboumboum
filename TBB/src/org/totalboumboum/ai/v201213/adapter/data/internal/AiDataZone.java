@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiBlock;
@@ -64,7 +65,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 /**
  * Représente la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale des percepts auxquels l'agent a accès.
- * </br>
+ * <br/>
  * A chaque fois que l'agent est sollicité par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'agent ne reçoit
  * pas une nouvelle {@code AiZone} : l'{@code AiZone} existante est modifiée en fonction de 
@@ -81,9 +82,9 @@ public final class AiDataZone extends AiZone
 	 * du point de vue du joueur passé en paramètre.
 	 * 
 	 * @param level
-	 * 		niveau à représenter
+	 * 		Niveau à représenter.
 	 * @param player
-	 * 		joueur dont le point de vue est à adopter
+	 * 		Joueur dont le point de vue est à adopter.
 	 */
 	public AiDataZone(Level level, AbstractPlayer player)
 	{	this.level = level;
@@ -103,7 +104,7 @@ public final class AiDataZone extends AiZone
 	 * usage interne, méthode non-destinée à la création des agent.
 	 * 
 	 * @param elapsedTime
-	 * 		le temps écoulé
+	 * 		Le temps écoulé.
 	 */
 	public void update(long elapsedTime)
 	{	updateTimes(elapsedTime);
@@ -131,10 +132,10 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * Met à jour les données temporelles
+	 * Met à jour les données temporelles.
 	 * 
 	 * @param elapsedTime
-	 * 		le temps écoulé
+	 * 		Le temps écoulé.
 	 */
 	private void updateTimes(long elapsedTime)
 	{	// init
@@ -208,19 +209,19 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** joueur contrôlé par l'agent */
+	/** Joueur contrôlé par l'agent */
 	private AbstractPlayer player;
 	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** niveau représenté par cette classe */
+	/** Niveau représenté par cette classe */
 	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice représentant la zone et tous les sprites qu'elle contient */
+	/** Matrice représentant la zone et tous les sprites qu'elle contient */
 	private AiDataTile[][] matrix;
 	
 	@Override
@@ -229,7 +230,8 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/** 
-	 * initialise cette représentation de la zone en fonction du niveau passé en paramètre
+	 * Initialise cette représentation de la zone en fonction 
+	 * du niveau passé en paramètre.
 	 */
 	private void initMatrix()
 	{	Tile[][] m = level.getMatrix();
@@ -258,7 +260,7 @@ public final class AiDataZone extends AiZone
 	 * Met à jour la matrice en fonction de l'évolution du jeu.
 	 * 
 	 * @param elapsedTime
-	 * 		le temps écoulé
+	 * 		Le temps écoulé.
 	 */
 	private void updateMatrix(long elapsedTime)
 	{	// réinitialise les compteurs d'items
@@ -290,12 +292,14 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste de toutes les cases de cette zone */
+	/** Liste de toutes les cases de cette zone */
 	private final List<AiTile> tiles = new LinkedList<AiTile>(); 
+	/** Version immuable de la liste des cases */
+	private final List<AiTile> externalTiles = Collections.unmodifiableList(tiles); 
 	
 	@Override
 	public List<AiTile> getTiles()
-	{	return tiles;
+	{	return externalTiles;
 	}
 
 	@Override
@@ -313,25 +317,29 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des blocks contenus dans cette zone */
-	private final HashMap<Block,AiDataBlock> blockMap = new HashMap<Block,AiDataBlock>();
-	/** liste externe des blocks contenus dans cette zone */
+	/** Map des blocks contenus dans cette zone */
+	private final Map<Block,AiDataBlock> blockMap = new HashMap<Block,AiDataBlock>();
+	/** Liste des blocks contenus dans cette zone */
 	private final List<AiBlock> blockList = new ArrayList<AiBlock>();
-	/** liste externe des blocks destructibles contenus dans cette zone */
+	/** Version immuable de la liste des blocks */
+	private final List<AiBlock> externalBlockList = Collections.unmodifiableList(blockList);
+	/** Liste des blocks destructibles contenus dans cette zone */
 	private final List<AiBlock> softBlockList = new ArrayList<AiBlock>();
+	/** Version immuable de la liste des blocks destructibles */
+	private final List<AiBlock> externalSoftBlockList = Collections.unmodifiableList(softBlockList);
 	
 	@Override
 	public List<AiBlock> getBlocks()
-	{	return blockList;	
+	{	return externalBlockList;	
 	}
 	
 	@Override
 	public List<AiBlock> getDestructibleBlocks()
-	{	return softBlockList;
+	{	return externalSoftBlockList;
 	}
 	
 	/**
-	 * met à jour la liste externe des blocs
+	 * Met à jour la liste des blocs.
 	 */
 	private void updateBlockLists()
 	{	// reinit lists
@@ -348,23 +356,23 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du bloc passé en paramètre.
+	 * Renvoie la représentation du bloc passé en paramètre.
 	 * 
 	 * @param block
-	 * 		le bloc dont on veut la représentation
+	 * 		Le bloc dont on veut la représentation.
 	 * @return	
-	 * 		le AiBlock correspondant
+	 * 		Le {@link AiDataBlock} correspondant.
 	 */
 	protected AiDataBlock getBlock(Block block)
 	{	return blockMap.get(block);
 	}
 	
 	/**
-	 * ajoute un bloc dans la liste de blocs de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * Ajoute un bloc dans la map de blocs de cette zone
+	 * (méthode appelée depuis une {@link AiTile}).
 	 * 
 	 * @param block
-	 * 		le bloc à rajouter à la liste
+	 * 		Le bloc à rajouter à la map.
 	 */
 	protected void addBlock(AiDataBlock block)
 	{	blockMap.put(block.getSprite(),block);	
@@ -373,18 +381,20 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des bombes contenues dans cette zone */
-	private final HashMap<Bomb,AiDataBomb> bombMap = new HashMap<Bomb,AiDataBomb>();
-	/** liste externe des bombes contenues dans cette zone */
+	/** Map des bombes contenues dans cette zone */
+	private final Map<Bomb,AiDataBomb> bombMap = new HashMap<Bomb,AiDataBomb>();
+	/** Liste des bombes contenues dans cette zone */
 	private final List<AiBomb> bombList = new ArrayList<AiBomb>();
+	/** Version immuable de la liste des bombes */
+	private final List<AiBomb> externalBombList = Collections.unmodifiableList(bombList);
 	
 	@Override
 	public List<AiBomb> getBombs()
-	{	return bombList;	
+	{	return externalBombList;	
 	}
 	
 	/**
-	 * met à jour la liste externe des bombes
+	 * Met à jour la liste des bombes.
 	 */
 	private void updateBombList()
 	{	bombList.clear();
@@ -393,29 +403,30 @@ public final class AiDataZone extends AiZone
 			bombList.add(bomb);
 		}
 		
-		threatenedBombs = null;
-		delaysByBombs = null;
-		bombsByDelays = null;
+		threatenedBombs.clear();
+		delaysByBombs.clear();
+		bombsByDelays.clear();
+		bombmapsUpdated = false;
 	}
 	
 	/**
-	 * renvoie la représentation de la bombe passée en paramètre.
+	 * Renvoie la représentation de la bombe passée en paramètre.
 	 * 
 	 * @param bomb
-	 * 		la bombe dont on veut la représentation
+	 * 		La bombe dont on veut la représentation.
 	 * @return	
-	 * 		le AiBomb correspondant
+	 * 		Le AiBomb correspondant.
 	 */
 	protected AiDataBomb getBomb(Bomb bomb)
 	{	return bombMap.get(bomb);
 	}
 	
 	/**
-	 * ajoute une bombe dans la liste de bombes de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * Ajoute une bombe dans la map de bombes de cette zone
+	 * (méthode appelée depuis une {@link AiTile}).
 	 * 
 	 * @param bomb
-	 * 		la bombe à rajouter à la liste
+	 * 		La bombe à rajouter à la map.
 	 */
 	protected void addBomb(AiDataBomb bomb)
 	{	bombMap.put(bomb.getSprite(),bomb);	
@@ -424,18 +435,20 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des feux contenus dans cette zone */
-	private final HashMap<Fire,AiDataFire> fireMap = new HashMap<Fire,AiDataFire>();
-	/** liste externe des feux contenus dans cette zone */
+	/** Map des feux contenus dans cette zone */
+	private final Map<Fire,AiDataFire> fireMap = new HashMap<Fire,AiDataFire>();
+	/** Liste des feux contenus dans cette zone */
 	private final List<AiFire> fireList = new ArrayList<AiFire>();
+	/** Version immuable de la liste des feux */
+	private final List<AiFire> externalFireList = Collections.unmodifiableList(fireList);
 	
 	@Override
 	public List<AiFire> getFires()
-	{	return fireList;	
+	{	return externalFireList;	
 	}
 	
 	/**
-	 * met à jour la liste externe des feux
+	 * Met à jour la liste des feux.
 	 */
 	private void updateFireList()
 	{	fireList.clear();
@@ -446,23 +459,23 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du feu passé en paramètre.
+	 * Renvoie la représentation du feu passé en paramètre.
 	 * 
 	 * @param fire
-	 * 		le feu dont on veut la représentation
+	 * 		Le feu dont on veut la représentation.
 	 * @return	
-	 * 		le AiFire correspondant
+	 * 		Le {@link AiFire} correspondant.
 	 */
 	protected AiDataFire getFire(Fire fire)
 	{	return fireMap.get(fire);
 	}
 	
 	/**
-	 * ajoute un feu dans la liste de feux de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * Ajoute un feu dans la map de feux de cette zone
+	 * (méthode appelée depuis une {@link AiTile}).
 	 * 
 	 * @param fire
-	 * 		le feu à rajouter à la liste
+	 * 		Le feu à rajouter à la map.
 	 */
 	protected void addFire(AiDataFire fire)
 	{	fireMap.put(fire.getSprite(),fire);	
@@ -471,18 +484,20 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des sols contenus dans cette zone */
-	private final HashMap<Floor,AiDataFloor> floorMap = new HashMap<Floor,AiDataFloor>();
-	/** liste externe des sols contenus dans cette zone */
+	/** Map des sols contenus dans cette zone */
+	private final Map<Floor,AiDataFloor> floorMap = new HashMap<Floor,AiDataFloor>();
+	/** Liste des sols contenus dans cette zone */
 	private final List<AiFloor> floorList = new ArrayList<AiFloor>();
+	/** Version immuable de la liste des sols */
+	private final List<AiFloor> externalFloorList = Collections.unmodifiableList(floorList);
 
 	@Override
 	public List<AiFloor> getFloors()
-	{	return floorList;	
+	{	return externalFloorList;	
 	}
 	
 	/**
-	 * met à jour la liste externe des sols
+	 * Met à jour la liste des sols.
 	 */
 	private void updateFloorList()
 	{	floorList.clear();
@@ -493,23 +508,23 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du sol passé en paramètre.
+	 * Renvoie la représentation du sol passé en paramètre.
 	 * 
 	 * @param floor
-	 * 		le sol dont on veut la représentation
+	 * 		Le sol dont on veut la représentation.
 	 * @return	
-	 * 		le AiFloor correspondant
+	 * 		Le {@link AiFloor} correspondant.
 	 */
 	protected AiDataFloor getFloor(Floor floor)
 	{	return floorMap.get(floor);
 	}
 	
 	/**
-	 * ajoute un sol dans la liste de sols de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * Ajoute un sol dans la map de sols de cette zone
+	 * (méthode appelée depuis une {@link AiTile}).
 	 * 
 	 * @param floor
-	 * 		le sol à rajouter à la liste
+	 * 		Le sol à rajouter à la map.
 	 */
 	protected void addFloor(AiDataFloor floor)
 	{	floorMap.put(floor.getSprite(),floor);	
@@ -518,21 +533,25 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Liste interne des personnages contenus dans cette zone (y compris ceux éliminés) */
-	private final HashMap<Hero,AiDataHero> heroMap = new HashMap<Hero,AiDataHero>();
-	/** Liste externe de tous les personnages contenus dans cette zone */
+	/** Map des personnages contenus dans cette zone (y compris ceux éliminés) */
+	private final Map<Hero,AiDataHero> heroMap = new HashMap<Hero,AiDataHero>();
+	/** Liste de tous les personnages contenus dans cette zone */
 	private final List<AiHero> heroList = new ArrayList<AiHero>();
-	/** Liste externe des personnages restant encore dans cette zone */
+	/** Version immuable de la liste de tous les personnages */
+	private final List<AiHero> externalHeroList = Collections.unmodifiableList(heroList);
+	/** Liste des personnages restant encore dans cette zone */
 	private final List<AiHero> remainingHeroList = new ArrayList<AiHero>();
+	/** Version immuable de la liste des personnages restant */
+	private final List<AiHero> externalRemainingHeroList = Collections.unmodifiableList(remainingHeroList);
 	
 	@Override
 	public List<AiHero> getHeroes()
-	{	return heroList;	
+	{	return externalHeroList;	
 	}
 	
 	@Override
 	public List<AiHero> getRemainingHeroes()
-	{	return remainingHeroList;	
+	{	return externalRemainingHeroList;	
 	}
 	
 	@Override
@@ -543,7 +562,7 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * Met à jour les listes externes des personnages.
+	 * Met à jour les listes de personnages.
 	 */
 	private void updateHeroLists()
 	{	// reset lists
@@ -572,11 +591,11 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * Ajoute un personnage dans la liste de personnages de cette zone
+	 * Ajoute un personnage dans la map de personnages de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
 	 * @param hero
-	 * 		Le personnage à rajouter à la liste.
+	 * 		Le personnage à rajouter à la map.
 	 */
 	protected void addHero(AiDataHero hero)
 	{	heroMap.put(hero.getSprite(),hero);	
@@ -597,18 +616,20 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Liste interne des items contenus dans cette zone */
-	private final HashMap<Item,AiDataItem> itemMap = new HashMap<Item,AiDataItem>();
-	/** Liste externe des items contenus dans cette zone */
+	/** Map des items contenus dans cette zone */
+	private final Map<Item,AiDataItem> itemMap = new HashMap<Item,AiDataItem>();
+	/** Liste des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
+	/** Version immuable de la liste des items */
+	private final List<AiItem> externalItemList = Collections.unmodifiableList(itemList);
 	
 	@Override
 	public List<AiItem> getItems()
-	{	return itemList;	
+	{	return externalItemList;	
 	}
 	
 	/**
-	 * Met à jour la liste externe des items.
+	 * Met à jour la liste des items.
 	 */
 	private void updateItemList()
 	{	itemList.clear();
@@ -633,11 +654,11 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * Ajoute un item dans la liste d'items de cette zone
+	 * Ajoute un item dans la map d'items de cette zone
 	 * (méthode appelée depuis une {@code AiTile})
 	 * 
 	 * @param item
-	 * 		L'item à rajouter à la liste.
+	 * 		L'item à rajouter à la map.
 	 */
 	protected void addItem(AiDataItem item)
 	{	itemMap.put(item.getSprite(),item);	
@@ -663,7 +684,7 @@ public final class AiDataZone extends AiZone
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ALL SPRITES		/////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Démarque toutes les représentations de sprites d'une liste determinée en fonction du type
@@ -679,7 +700,7 @@ public final class AiDataZone extends AiZone
 	 * @param list
 	 * 		Liste à traiter.
 	 */
-	private <U extends Sprite, T extends AiDataSprite<?>> void uncheckAll(HashMap<U,T> list)
+	private <U extends Sprite, T extends AiDataSprite<?>> void uncheckAll(Map<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
 		while(it.hasNext())
 		{	T temp = it.next().getValue();
@@ -697,7 +718,7 @@ public final class AiDataZone extends AiZone
 	 * @param list
 	 * 		Liste à traiter.
 	 */
-	private <U extends Sprite, T extends AiDataSprite<?>> void removeUnchecked(HashMap<U,T> list)
+	private <U extends Sprite, T extends AiDataSprite<?>> void removeUnchecked(Map<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
 		while(it.hasNext())
 		{	Entry<U,T> entry = it.next();
@@ -771,7 +792,7 @@ public final class AiDataZone extends AiZone
 		List<SuddenDeathEvent> sdeList = hollowLevel.getSuddenDeathEvents();
 		for(SuddenDeathEvent sde: sdeList)
 		{	long time = sde.getTime();
-			HashMap<Tile,List<Sprite>> sprites = sde.getSprites();
+			Map<Tile,List<Sprite>> sprites = sde.getSprites();
 			AiDataSuddenDeathEvent event = new AiDataSuddenDeathEvent(this,time,sprites);
 			suddenDeathEvents.add(event);
 		}
@@ -779,8 +800,8 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/**
-	 * Met à jour la liste contenant les évènements décrivant
-	 * la mort subite.
+	 * Met à jour la liste contenant les évènements 
+	 * décrivant la mort subite.
 	 */
 	private void updateSuddenDeath()
 	{	if(!suddenDeathEvents.isEmpty())
@@ -823,13 +844,15 @@ public final class AiDataZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette représentation (une fois que l'agent n'en a plus besoin).
+	 * Termine proprement cette représentation 
+	 * (une fois que l'agent n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix
 		for(int row=0;row<height;row++)
-			for(int col=0;col<width;col++)
+		{	for(int col=0;col<width;col++)
 				matrix[row][col].finish();
+		}
 		
 		// sprites
 		blockMap.clear();

@@ -76,7 +76,7 @@ public abstract class AiUtilityCriterionBoolean<T extends ArtificialIntelligence
 	public AiUtilityCriterionBoolean(T ai, String name) throws StopRequestException
 	{	// init
 		super(ai,name);
-		
+			
 		// init valeurs
 		domain.add(Boolean.FALSE);
 		domain.add(Boolean.TRUE);

@@ -22,8 +22,9 @@ package org.totalboumboum.ai.v201213.adapter.data.internal;
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
@@ -42,7 +43,6 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
- *
  */
 public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 {	
@@ -57,7 +57,7 @@ public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 	 * @param spriteMap
 	 * 		Sprites destined to appear during this event.
 	 */
-	public AiDataSuddenDeathEvent(AiDataZone zone, long time, HashMap<Tile,List<Sprite>> spriteMap)
+	public AiDataSuddenDeathEvent(AiDataZone zone, long time, Map<Tile,List<Sprite>> spriteMap)
 	{	// time
 		this.time = time;
 		
@@ -98,11 +98,12 @@ public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste de sprites apparaissant à l'instant associé à cet évènement */
-	private List<AiDataSprite<?>> sprites = new ArrayList<AiDataSprite<?>>();
+	private List<AiSprite> sprites = new ArrayList<AiSprite>();
+	/** Liste de sprites apparaissant à l'instant associé à cet évènement */
+	private List<AiSprite> externalsprites = Collections.unmodifiableList(sprites);
 	
 	@Override
 	public List<AiSprite> getSprites()
-	{	List<AiSprite> result = new ArrayList<AiSprite>(sprites);
-		return result;
+	{	return externalsprites;
 	}
 }

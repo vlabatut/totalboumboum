@@ -60,11 +60,11 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 {
 	/**
 	 * Construit une fonction heuristique
-	 * utilisant l'IA passée en paramètre
+	 * utilisant l'agent passé en paramètre
 	 * pour gérer les interruptions.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 */
 	public PixelHeuristicCalculator(ArtificialIntelligence ai)
 	{	super(ai);
@@ -99,6 +99,7 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	 * L'heuristique la plus simple consiste à prendre la distance
 	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
 	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>.
+	 * <br/>
 	 * Ici, on calcule cette distance exprimée en pixels plutôt qu'en cases
 	 * comme c'est le cas dans {@link TileHeuristicCalculator}.
 	 * 

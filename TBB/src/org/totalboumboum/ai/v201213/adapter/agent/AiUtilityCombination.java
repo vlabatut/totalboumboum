@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201213.adapter.agent;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -97,7 +98,7 @@ public final class AiUtilityCombination
 	// VALUES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les valeurs (de critères) servant à décrire cette combinaison */
-	private final HashMap<AiUtilityCriterion<?,?>,Object> values = new HashMap<AiUtilityCriterion<?,?>,Object>();
+	private final Map<AiUtilityCriterion<?,?>,Object> values = new HashMap<AiUtilityCriterion<?,?>,Object>();
 	
 	/**
 	 * Modifie la valeur associée au critère spécifié.

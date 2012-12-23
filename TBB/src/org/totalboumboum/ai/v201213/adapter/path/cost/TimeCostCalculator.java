@@ -72,7 +72,7 @@ public class TimeCostCalculator extends CostCalculator
 	 * de A* sera celle du personnage passé en paramètre.
 	 * 
 	 * @param ai
-	 * 		IA de référence.
+	 * 		Agent de référence.
 	 * @param hero
 	 * 		Personnage de référence pour calculer le coût temporel.
 	 */
