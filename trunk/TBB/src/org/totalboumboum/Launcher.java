@@ -1649,3 +1649,17 @@ public class Launcher
  * - tester nouvelles classes
  * - tester anciennnes formules
  */
+
+
+/**
+ * TODO 
+ * - dans l'utility manager :
+ * 		- rendre private tous les objets nécessaires (+ final pour les listes/conteneurs)
+ * 		- définir des fonctions d'accès pour empêcher toute réaffectation
+ * 		>> pas besoin pour les structures que l'agent doit modifier
+ * 		- pour les autres, renvoyer des structure immuables
+ * - dans les sprites (et le reste des données IA)
+ * 		- passer les listes en final (pour etre sur qu'elle ne sont pas recrées)
+ * - si la classe de guava permettent d'avoir une vue immuable tout en ayant une classe spécifique
+ * 		>> adopter pour la prochaine version de l'api.    
+*/
