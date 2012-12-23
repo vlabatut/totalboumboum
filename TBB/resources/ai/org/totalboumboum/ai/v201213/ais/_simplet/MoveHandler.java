@@ -115,6 +115,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		// astar précis
 		{	CostCalculator costCalculator = new TimeCostCalculator(ai,ownHero);
 			costCalculator.setOpponentCost(1000); // on assimile la traversée d'un adversaire à un détour de 1 seconde
+			costCalculator.setMalusCost(1000); // on assimile la traversée d'un malus à un détour de 1 seconde
 			HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(ai,ownHero);
 			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
 			astarPrecise = new Astar(ai,ownHero, costCalculator, heuristicCalculator, successorCalculator);
