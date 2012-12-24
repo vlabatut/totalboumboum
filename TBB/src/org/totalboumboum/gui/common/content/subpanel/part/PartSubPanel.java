@@ -359,12 +359,12 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			switch(pos[1])
 			{	// before button
 				case COL_BEFORE:
-					{	CupLeg leg = part.getLeg();
-						CupLeg previousLeg = leg.getPreviousLeg();
-						// doesn't work for the first leg 
-						if(previousLeg!=null)
-						{	CupPlayer p = part.getPlayerForProfile(profile);
-							int partNumber = p.getPrevPart();
+					{	CupPlayer p = part.getPlayerForProfile(profile);
+						int partNumber = p.getPrevPart();
+						// doesn't work for entry players 
+						if(partNumber!=-1)
+						{	int legNumber = p.getPrevLeg();
+							CupLeg previousLeg = part.getTournament().getLeg(legNumber);
 							CupPart previousPart = previousLeg.getPart(partNumber);
 							fireBeforeClicked(previousPart);
 						}

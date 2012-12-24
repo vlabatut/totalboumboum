@@ -230,7 +230,8 @@ public class CupTournament extends AbstractTournament
 		int i = 0;
 		while(i<entryParts.size() && entryParts.get(i)!=part)
 		{	int legCount = playersdistribution.get(i);
-			result = result + legCount;				
+			result = result + legCount;
+			i++;
 		}
 		
 		return result;
