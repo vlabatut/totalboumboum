@@ -148,7 +148,7 @@ public class CupTournament extends AbstractTournament
 		
 		else if(sortPlayers==CupPlayerSort.SEEDS)
 		{	CupLeg firstLeg = legs.get(0);
-			firstLeg.simulatePlayerProgression(firstLegPlayersdistribution);
+			firstLeg.simulatePlayerProgression(playersdistribution);
 			simulatePlayerFinalRank();
 		
 			// use first leg detailed progression to sort profiles list
@@ -187,8 +187,8 @@ public class CupTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// PLAYER DISTRIBUTION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Player distribution for the first leg */
-	private List<Integer> firstLegPlayersdistribution;
+	/** Player distribution for the entry parts */
+	private List<Integer> playersdistribution;
 	/** Highest empty rank for the above distribution */ 
 	private int highestEmptyRank;
 	
@@ -209,21 +209,52 @@ public class CupTournament extends AbstractTournament
 		
 		// randomly pick one of them
 		int index = (int)(Math.random()*distri.size());
-		firstLegPlayersdistribution = distri.get(index);
+		playersdistribution = distri.get(index);
 	}
 	
 	/**
-	 * Returns the distribution of players for the first
-	 * leg of this tournament.
+	 * Returns the number of entry players involved
+	 * in the parts played before the specified one, 
+	 * for the current player distribution.
+	 * <br/>
+	 * This methods only works for entry parts.
 	 * 
+	 * @param part
+	 * 		The cup part of reference.
 	 * @return
-	 * 		How the players should be distributed over
-	 * 		entry matches for this tournament.
+	 * 		Number of entry players involved before for the specified part.
 	 */
-	public List<Integer> getFirstLegPlayersdistribution()
-	{	return firstLegPlayersdistribution;		
+	public int getEntryPlayerNumberBeforePart(CupPart part)
+	{	int result = 0;
+		List<CupPart> entryParts = getEntryParts();
+		int i = 0;
+		while(i<entryParts.size() && entryParts.get(i)!=part)
+		{	int legCount = playersdistribution.get(i);
+			result = result + legCount;				
+		}
+		
+		return result;
 	}
-
+	
+	/**
+	 * Returns the number of entry players involved
+	 * in the specified part, 
+	 * for the current player distribution.
+	 * <br/>
+	 * This method only works for entry parts.
+	 * 
+	 * @param part
+	 * 		The cup part of reference.
+	 * @return
+	 * 		Number of entry players for the specified part.
+	 */
+	public int getEntryPlayerNumberForPart(CupPart part)
+	{	List<CupPart> entryParts = getEntryParts();
+		int index = entryParts.indexOf(part);
+		int result = playersdistribution.get(index);
+		return result;
+	}
+	
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
@@ -335,6 +366,26 @@ for(ArrayList<Integer> list: permutations)
 		
 		for(CupLeg leg: legs)
 			result = result + leg.countEntryMatches();
+		
+		return result;
+	}
+	
+	/**
+	 * Returns all the parts in this tournament
+	 * which include players involved in their very
+	 * first match.
+	 * 
+	 * @return
+	 * 		List of parts in the tournament accepting
+	 * 		new players. 
+	 */
+	private List<CupPart> getEntryParts()
+	{	List<CupPart> result = new ArrayList<CupPart>();
+		
+		for(CupLeg leg: legs)
+		{	List<CupPart> temp = leg.getEntryParts();
+			result.addAll(temp);
+		}
 		
 		return result;
 	}

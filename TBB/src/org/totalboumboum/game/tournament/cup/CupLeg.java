@@ -364,6 +364,26 @@ public class CupLeg implements Serializable
 		return result;
 	}
 
+	/**
+	 * Returns the parts in this leg
+	 * which includes players involved in their very
+	 * first match of the tournament.
+	 * 
+	 * @return
+	 * 		List of parts in the leg accepting
+	 * 		new players. 
+	 */
+	protected List<CupPart> getEntryParts()
+	{	List<CupPart> result = new ArrayList<CupPart>();
+		
+		for(CupPart part: parts)
+		{	if(part.isEntryMatch())
+				result.add(part);
+		}
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
