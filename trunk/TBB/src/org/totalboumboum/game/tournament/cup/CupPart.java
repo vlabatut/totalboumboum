@@ -83,7 +83,7 @@ public class CupPart implements Serializable
 		for(int i=0;i<players.size();i++)
 		{	Profile p = getProfileForIndex(i);
 			if(p!=null)
-			profiles.add(p);
+				profiles.add(p);
 		}
 		currentMatch.init(profiles);
 	}
@@ -569,7 +569,7 @@ public class CupPart implements Serializable
 	
 	/**
 	 * Returns the profile of the player whose position
-	 * is spicified as a parameter.
+	 * is specified as a parameter.
 	 * 
 	 * @param index
 	 * 		Position of the player in this part.
@@ -581,7 +581,8 @@ public class CupPart implements Serializable
 		CupPlayer player = players.get(index);
 		int previousRank = player.getPrevRank();
 		int previousPartNumber = player.getPrevPart();
-		// not the first leg
+		
+		// not an entry player
 		if(previousPartNumber>=0)
 		{	CupLeg previousLeg = leg.getPreviousLeg();
 			CupPart previousPart = previousLeg.getPart(previousPartNumber);
@@ -590,15 +591,13 @@ public class CupPart implements Serializable
 			if(list!=null && list.size()==1)
 				result = list.get(0);
 		}
-		// first leg
+		
+		// entry player
 		else
-		{	List<Integer> firstLegPlayersdistribution = getTournament().getFirstLegPlayersdistribution();
+		{	int prevPlayers = getTournament().getEntryPlayerNumberBeforePart(this);
+			int thisPlayers = getTournament().getEntryPlayerNumberForPart(this);
 			if(firstLegPlayersdistribution.get(number)>index)
-			{	int count = 0;
-				for(int i=0;i<number;i++)
-				{	int legCount = firstLegPlayersdistribution.get(i);
-					count = count + legCount;				
-				}
+			{	
 				List<Profile> profiles = getTournament().getProfiles();
 				result = profiles.get(count+index);
 			}
