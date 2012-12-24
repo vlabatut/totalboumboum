@@ -737,6 +737,7 @@ public class CupPart implements Serializable
 					simulatedCount++;
 					player.setSimulatedRank(simulatedCount);
 					qualified++;
+					entryPlayers--;
 				}
 			}
 			// qualified player
@@ -762,7 +763,7 @@ public class CupPart implements Serializable
 		}
 		
 		// total number of players (entry+qualified) must be consistant with the match specifications
-		result = matchAllowed.contains(qualified);
+		result = matchAllowed.contains(qualified) && entryPlayers==0;
 
 		return result;
 	}
