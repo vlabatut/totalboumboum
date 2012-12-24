@@ -431,8 +431,17 @@ for(ArrayList<Integer> list: permutations)
 				partRank = 0;
 		}
 	
-		// use first leg rankings to build final ranks
-		List<CupPlayer> allPlayers = legs.get(0).getAllUsedPlayers();
+		// retrieve the list of all entry players in the tournament
+		List<CupPlayer> allPlayers = new ArrayList<CupPlayer>();
+		for(CupLeg leg: legs)
+		{	List<CupPlayer> usedPlayers = leg.getAllUsedPlayers();
+			for(CupPlayer usedPlayer: usedPlayers)
+			{	if(usedPlayer.getPrevPart()==-1)
+					allPlayers.add(usedPlayer);
+			}
+		}
+		
+		// use entry players rankings to build final ranks
 		for(int i=0;i<allPlayers.size();i++)
 		{	CupPlayer player = allPlayers.get(i);
 			int rank = player.getActualFinalRank();
