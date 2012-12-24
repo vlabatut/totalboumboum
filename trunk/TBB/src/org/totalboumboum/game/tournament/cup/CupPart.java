@@ -594,12 +594,22 @@ public class CupPart implements Serializable
 		
 		// entry player
 		else
-		{	int prevPlayers = getTournament().getEntryPlayerNumberBeforePart(this);
+		{	// number of entry players in the previous parts
+			int prevPlayers = getTournament().getEntryPlayerNumberBeforePart(this);
+			// number of entry players in this part
 			int thisPlayers = getTournament().getEntryPlayerNumberForPart(this);
-			if(firstLegPlayersdistribution.get(number)>index)
-			{	
+			if(thisPlayers>index)
+			{	// number of entry players before this index
+				int entryBefore = 0;
+				for(int i=0;i<index;i++)
+				{	CupPlayer p = players.get(i);
+					if(p.getPrevPart()==-1)
+						entryBefore++;
+				}
+				// get the profile
 				List<Profile> profiles = getTournament().getProfiles();
-				result = profiles.get(count+index);
+				int idx = prevPlayers + entryBefore;
+				result = profiles.get(idx);
 			}
 		}
 

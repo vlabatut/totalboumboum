@@ -74,9 +74,9 @@ public class CupPlayer implements Serializable
 	public void setActualFinalRank(int actualFinalRank)
 	{	this.actualFinalRank = actualFinalRank;
 		CupTournament tournament = part.getTournament();
-		CupLeg previousLeg = tournament.getLeg(prevLeg);
-		if(previousLeg!=null)
-		{	CupPart previousPart = previousLeg.getPart(prevPart);
+		if(prevLeg!=-1)
+		{	CupLeg previousLeg = tournament.getLeg(prevLeg);
+			CupPart previousPart = previousLeg.getPart(prevPart);
 			int index = part.getPlayers().indexOf(this);
 			Profile profile = part.getProfileForIndex(index);
 			CupPlayer prevPlayer = previousPart.getPlayerForProfile(profile);
