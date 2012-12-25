@@ -1983,19 +1983,20 @@ public abstract class AiZone
 	// SUDDEN DEATH				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste associant à chaque temps une liste de sprites apparaissant lors de la mort subite */
-	protected List<AiSuddenDeathEvent> suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
+	protected final List<AiSuddenDeathEvent> suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
 	/** Version immuable de la Liste des évènements de mort subite */
-	protected List<AiSuddenDeathEvent> externalSuddenDeathEvents = Collections.unmodifiableList(suddenDeathEvents);
+	protected final List<AiSuddenDeathEvent> externalSuddenDeathEvents = Collections.unmodifiableList(suddenDeathEvents);
 
 	/**
-	 * Renvoie le prochain des évènements constituant la mort subite.
+	 * Renvoie le prochain des évènements constituant la mort subite,
+	 * ou {null} si aucun évènement suivant n'est prévu.
 	 * <br/>
 	 * Les items apparaissant éventuellement dans l'évènement renvoyé ne sont
 	 * pas comptés comme des items présents dans la zone de jeu. Ils le seront
 	 * uniquement après leur apparition.
 	 * 
 	 * @return
-	 * 		Un évènement de la mort subite.
+	 * 		Un évènement de la mort subite, ou {@code null} s'il n'y en a pas/plus.
 	 */
 	public AiSuddenDeathEvent getNextSuddenDeathEvent()
 	{	AiSuddenDeathEvent result = null;
@@ -2021,7 +2022,11 @@ public abstract class AiZone
 	 * 		Une liste d'évènements de mort subite.
 	 */
 	public List<AiSuddenDeathEvent> getAllSuddenDeathEvents()
-	{	return externalSuddenDeathEvents;
+	{
+//System.out.println("--------------------------------------------");		
+//for(AiSuddenDeathEvent e: externalSuddenDeathEvents)
+//	System.out.println(e);		
+		return externalSuddenDeathEvents;
 	}
 	
 	/////////////////////////////////////////////////////////////////
