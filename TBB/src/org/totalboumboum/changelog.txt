@@ -506,6 +506,7 @@
  	- moteur :
  		- quelques bugs corrigés
 		- système de mort subite inclus dans le moteur
+		- amélioration du tournoi coupe : possibilité de faire entrer des joueurs après le 1er tour
 	- GUI :
 		- nouvelle option permettant d'activer/désactiver la mort subite sur une partie rapide
 		- résolution du bug qui rendait l'apparition de menus modaux très lente
@@ -516,8 +517,9 @@
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 		- morts subites dans les niveaux officiels de SBM1
 		- outils de niveaux pour générer programmatiquement des morts subites typiques
-		- thème pour le tournoi VI (à compléter)
-		- niveaux pour le tournoi VI (à compléter)
+		- thème pour le tournoi VI
+		- niveaux pour le tournoi VI
+		- tournoi VI et super-coupe V
 	- API IA:
 		- quelques bugs corrigés
 		- méthode initOthers dans ArtificialIntelligence, permettant d'initialiser des objets après les gestionnaires.

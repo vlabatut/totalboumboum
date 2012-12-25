@@ -22,13 +22,13 @@
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
 	<tournament name="Trnmt201213_2.supercup" />
 	<players>
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="2" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="dd226be2-5b7a-4017-a415-963b546bb716" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="d5cfb666-1c7a-4d92-b465-9b9ee218e70a" color="WHITE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="6a64cee4-173c-41c7-a6e4-e00434ca73f8" color="RED" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="a7e0a85a-819f-4d43-88c9-80fced007e4f" color="BLACK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="27a298f3-ea71-4e96-8e5f-2b50862d4798" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
