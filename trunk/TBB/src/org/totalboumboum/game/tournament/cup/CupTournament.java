@@ -465,18 +465,22 @@ for(ArrayList<Integer> list: permutations)
 			// process players ranks
 			int count;
 			int localRank = 1;
+			boolean stop = false;
 			do
 			{	count = 0;
 				it = templist.iterator();
 				while(it.hasNext())
 				{	CupPart part = it.next();
 					int cnt = part.processPlayerFinalRank(localRank,playerRank);
-					count = count + cnt;
+					if(cnt<0)
+						stop = true;
+					else
+						count = count + cnt;
 				}
 				playerRank = playerRank + count;
 				localRank++;
 			}
-			while(count>0);
+			while(!stop);
 			
 			partRank++;
 			if(partRank>totalPartCount)

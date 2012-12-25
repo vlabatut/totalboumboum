@@ -253,11 +253,12 @@ public class CupPart implements Serializable
 	 * 		The number of players ranked in this match.
 	 */
 	public int processPlayerFinalRank(int localRank, int finalRank)
-	{	int result = 0;
+	{	int result = -1;
 		
 		List<Profile> prfls = ranks.getProfilesFromRank(localRank);
 		if(prfls!=null)
-		{	// process each player with the specified local rank
+		{	result = 0;
+			// process each player with the specified local rank
 			for(Profile profile: prfls)
 			{	CupPlayer player = getPlayerForProfile(profile);
 				// only if the player was not already ranked in a higher level match 

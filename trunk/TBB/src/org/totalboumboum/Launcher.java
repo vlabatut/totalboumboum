@@ -1624,27 +1624,16 @@ public class Launcher
 	 * 
 	 * TODO site : 
 	 * 		- mort subite (et autres objets ?)
+	 * 		- modif du tournoi coupe (pour la super-coupe)
 	 * 
 	 * TODO réviser les instances antérieures à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
 	 * 		x rajouter la modif sur le throughwall des items
 	 * 		x adapter les traj des bombes 
-	 * 
-	 * TODO tournoi supercoupe :
-	 * 		- demi-finale : les 2 premiers de cette année contre les 3 ex-gagnants les moins bien classés
-	 * 		- finale : les 3 premiers de la demi-finale contre les 2 ex-gagnants les mieux classés
-	 * 		>> il faut implémenter un système de qualif directe pour certains joueurs 
 	 */
 
 /**
  * TODO utiliser les softwalls de couleur
  * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
  * 		(avec bordure de sol différente (?)
- */
-
-
-/** TODO
- * - voir comment la gui traitait le fait que tous les entry étaient au premier leg
- * - tester nouvelles classes
- * - tester anciennnes formules
  */

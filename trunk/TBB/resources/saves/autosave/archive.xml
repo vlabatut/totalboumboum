@@ -21,15 +21,15 @@
 -->
 	<tournament name="Super-coupe de Galatasaray V" type="CUP" />
 	<played matches="2" rounds="6" />
-	<dates start="2012-12-24T19:38:09" save="2012-12-24T19:48:51" />
+	<dates start="2012-12-25T13:38:03" save="2012-12-25T13:49:56" />
 	<players>
-		<player name="Simplet" />
-		<player name="0910.Doruk+Küpelioğlu" />
+		<player name="Joueur humain" />
+		<player name="0708.Bingöl+Ketenci" />
 		<player name="0809.Erişik+Pektaş" />
-		<player name="1213.Sağlam+Seven" />
-		<player name="0708.Kılıç+Pala" />
+		<player name="0910.Doruk+Küpelioğlu" />
 		<player name="1011.Kesimal+Varol" />
-		<player name="0809.Tırtıl+Tomruk" />
+		<player name="1112.Coşkun+Özdemir" />
+		<player name="0910.Çalışır+Güner" />
 	</players>
 </archive>
 
