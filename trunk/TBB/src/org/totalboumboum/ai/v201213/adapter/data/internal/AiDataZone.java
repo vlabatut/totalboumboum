@@ -37,7 +37,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiItem;
 import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
-import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
@@ -786,7 +785,7 @@ public final class AiDataZone extends AiZone
 		VisibleLoop loop = level.getLoop();
 		Round round = loop.getRound();
 		HollowLevel hollowLevel = round.getHollowLevel();
-		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
+		suddenDeathEvents.clear();
 		
 		// insert events
 		List<SuddenDeathEvent> sdeList = hollowLevel.getSuddenDeathEvents();

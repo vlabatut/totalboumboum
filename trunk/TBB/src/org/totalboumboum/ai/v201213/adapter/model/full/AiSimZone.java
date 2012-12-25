@@ -234,10 +234,6 @@ public final class AiSimZone extends AiZone
 		// items
 		hiddenItemsCount = 0;
 		
-		// sudden death events
-		suddenDeathEvents = new ArrayList<AiSuddenDeathEvent>();
-		internalSuddenDeathEvents = new ArrayList<AiSimSuddenDeathEvent>();
-		
 		// time
 		totalTime = 0;
 		elapsedTime = 0;
@@ -1612,7 +1608,7 @@ public final class AiSimZone extends AiZone
 	// SUDDEN DEATH				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Liste interne d'évènements de mort subite */
-	private List<AiSimSuddenDeathEvent> internalSuddenDeathEvents = new ArrayList<AiSimSuddenDeathEvent>();
+	private final List<AiSimSuddenDeathEvent> internalSuddenDeathEvents = new ArrayList<AiSimSuddenDeathEvent>();
 
 	/**
 	 * Renvoie la représentation interne des évènements
