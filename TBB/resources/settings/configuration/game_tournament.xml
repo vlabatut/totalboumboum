@@ -26,9 +26,9 @@
 		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="d5cfb666-1c7a-4d92-b465-9b9ee218e70a" color="WHITE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="2fa20b36-2ad2-4d3b-9010-eb2e090f648e" color="INDIGO" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="6a64cee4-173c-41c7-a6e4-e00434ca73f8" color="RED" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="c1f4127a-f70d-447e-94ee-679a66bb08ad" color="RUST" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="a7e0a85a-819f-4d43-88c9-80fced007e4f" color="BLACK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
