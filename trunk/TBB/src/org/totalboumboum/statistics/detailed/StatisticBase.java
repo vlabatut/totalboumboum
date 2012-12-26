@@ -42,17 +42,21 @@ public abstract class StatisticBase implements Serializable
 	
 	public StatisticBase(StatisticHolder holder)
 	{	totalTime = 0;
+		
 		// players
 		for(Profile p: holder.getProfiles())
 		{	String playerId = p.getId();
 			playersIds.add(playerId);
 		}
+		
 		// points
 		points = new float[playersIds.size()];
 		Arrays.fill(points,0);
+		
 		// total
 		total = new float[playersIds.size()];
 		Arrays.fill(total,0);
+		
 		// scores
 		for(Score score : Score.values())
 		{	long[] sc = new long[playersIds.size()];
@@ -105,6 +109,11 @@ public abstract class StatisticBase implements Serializable
 	{	return total;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// STATISTIC EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract List<StatisticEvent> getStatisticEvents();
+	
 	/////////////////////////////////////////////////////////////////
 	// CONFRONTATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

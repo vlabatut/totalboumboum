@@ -24,6 +24,7 @@ package org.totalboumboum.game.tournament;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -160,6 +161,29 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	{	return profiles;	
 	}
 
+	/**
+	 * Returns the profile whose id corresponds
+	 * to the specified one. If not player
+	 * participating to this tournament has this
+	 * id, then the method returns {@code null}.
+	 * 
+	 * @param id
+	 * 		The id of interest.
+	 * @return
+	 * 		The corresponding profile, or {@code null} if
+	 * 		the player is not involved in this tournament.
+	 */
+	public Profile getProfileById(String id)
+	{	Profile result = null;
+		Iterator<Profile> it = profiles.iterator();
+		while(result==null && it.hasNext())
+		{	Profile profile = it.next();
+			if(profile.getId().equals(id))
+				result = profile;
+		}
+		return null;
+	}
+	
 	/**
 	 * Returns the various numbers of players
 	 * allowed for this tournament.
