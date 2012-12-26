@@ -22,6 +22,8 @@ package org.totalboumboum.gui.game.round.statistics;
  */
 
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.gui.common.content.subpanel.events.BombEventsRoundSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
@@ -35,6 +37,8 @@ public class RoundStatistics extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
+	private BombEventsRoundSubPanel eventsPanel;
+
 	public RoundStatistics(SplitMenuPanel container)
 	{	super(container);
 
@@ -42,6 +46,12 @@ public class RoundStatistics extends EntitledDataPanel
 		String key = GuiKeys.GAME_ROUND_STATISTICS_TITLE;
 		setTitleKey(key);
 	
+		// data
+		{	eventsPanel = new BombEventsRoundSubPanel(dataWidth,dataHeight);
+//			eventsPanel.setShowConfrontations(false);
+//			eventsPanel.setShowTotal(false);
+			setDataPart(eventsPanel);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -51,6 +61,7 @@ public class RoundStatistics extends EntitledDataPanel
 
 	public void setRound(Round round)
 	{	this.round = round;
+		eventsPanel.setRound(round);
 	}
 	
 	public Round getRound()
@@ -62,6 +73,6 @@ public class RoundStatistics extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	// 
+	{	setRound(round);
 	}
 }

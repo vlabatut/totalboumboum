@@ -100,7 +100,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
 	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
-buttonStatistics.setEnabled(false);		
+//buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonPlay = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_PLAY,buttonWidth,buttonHeight,1,this);

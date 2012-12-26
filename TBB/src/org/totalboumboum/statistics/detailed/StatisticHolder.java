@@ -51,7 +51,7 @@ public interface StatisticHolder
 	public List<Profile> getProfiles();
 	
 	/**
-	 * Returns the statuses of the plauers.
+	 * Returns the statuses of the players.
 	 * 
 	 * @return
 	 * 		The statistics of this tournament.

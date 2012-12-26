@@ -1637,3 +1637,5 @@ public class Launcher
  * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
  * 		(avec bordure de sol différente (?)
  */
+
+// TODO ajouter la nvelle bibli chart à la doc + changelog
