@@ -1623,6 +1623,7 @@ public class Launcher
 	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
 	 * 
 	 * TODO site : 
+	 * 		- shirobon SBM4	
 	 * 		- mort subite (et autres objets ?)
 	 * 		- modif du tournoi coupe (pour la super-coupe)
 	 * 
