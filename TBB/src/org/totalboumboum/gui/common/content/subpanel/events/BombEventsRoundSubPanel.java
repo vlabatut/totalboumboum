@@ -21,11 +21,15 @@ package org.totalboumboum.gui.common.content.subpanel.events;
  * 
  */
 
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.RadialGradientPaint;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +37,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import javax.swing.Box;
@@ -53,6 +58,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
+import org.totalboumboum.statistics.detailed.StatisticAction;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -60,11 +66,26 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 import com.sun.org.glassfish.external.statistics.Statistic;
 
+import de.erichseifert.gral.data.DataSeries;
 import de.erichseifert.gral.data.DataTable;
+import de.erichseifert.gral.plots.PlotArea;
+import de.erichseifert.gral.plots.XYPlot;
+import de.erichseifert.gral.plots.axes.AxisRenderer;
+import de.erichseifert.gral.plots.axes.LogarithmicRenderer2D;
+import de.erichseifert.gral.plots.lines.DiscreteLineRenderer2D;
+import de.erichseifert.gral.plots.lines.LineRenderer;
+import de.erichseifert.gral.plots.points.DefaultPointRenderer2D;
+import de.erichseifert.gral.plots.points.PointRenderer;
+import de.erichseifert.gral.plots.points.SizeablePointRenderer;
+import de.erichseifert.gral.ui.InteractivePanel;
+import de.erichseifert.gral.util.GraphicsUtils;
+import de.erichseifert.gral.util.Insets2D;
+import de.erichseifert.gral.util.Orientation;
 
 /**
  * 
@@ -90,39 +111,164 @@ public class BombEventsRoundSubPanel extends EmptySubPanel implements MouseListe
 		{	BoxLayout layout = new BoxLayout(dataPanel,BoxLayout.PAGE_AXIS); 
 			dataPanel.setLayout(layout);
 		}
+		
+		// main panel
+		{	plotPanel = new XYPlot();
+			tempPanel = new InteractivePanel(plotPanel);
+tempPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+Dimension dim = new Dimension(getDataWidth(),getDataHeight());
+tempPanel.setPreferredSize(dim);
+tempPanel.setMaximumSize(dim);
+tempPanel.setMinimumSize(dim);
+
+			dataPanel.add(tempPanel);
+		}
+
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TableSubPanel plotPanel;
+	private XYPlot plotPanel;
 	private Round round;
+	private InteractivePanel tempPanel;
 	
 	public void setRound(Round round)
-	{	this.round = round;
-		AbstractTournament tournament;
-	
-		// init player series
-		StatisticRound statisticRound = round.getStats();
-		List<String> ids = statisticRound.getPlayersIds();
-		Map<Integer,String> series = new HashMap<Integer, String>();
-		for(int i=0;i<ids.size();i++)
-			series.put(i+1, value)
+	{	
+//		plotPanel.clear();
+//		this.round = round;
+//		AbstractTournament tournament = round.getMatch().getTournament();
+//	
+//		// init player data
+//		StatisticRound statisticRound = round.getStats();
+//		List<String> ids = statisticRound.getPlayersIds();
+//		Map<String,Integer> series = new HashMap<String,Integer>();
+//		List<DataTable> data = new ArrayList<DataTable>();
+//		for(int i=0;i<ids.size();i++)
+//		{	String id = ids.get(i);
+//			series.put(id,i);
+//			@SuppressWarnings("unchecked")
+//			DataTable dataTable = new DataTable(Long.class, Integer.class);
+//			data.add(dataTable);
+//		}
+//		
+//		// init player colors
+//		List<PredefinedColor> colors = new ArrayList<PredefinedColor>();
+//		for(String id: ids)
+//		{	Profile profile = tournament.getProfileById(id);
+//			colors.add(profile.getSpriteColor());
+//		}
+//		
+//		// setting data model
+//		List<StatisticEvent> events = statisticRound.getStatisticEvents();
+//		for(StatisticEvent event: events)
+//		{	StatisticAction action = event.getAction();
+//			if(action==StatisticAction.DROP_BOMB)
+//			{	long time = event.getTime();
+//				String id = event.getActorId();
+//				int index = series.get(id);
+//				DataTable dataTable = data.get(index);
+//				dataTable.add(time,1);
+//			}
+//		}
+//		
+//		// adding to panel
+//		for(int i=0;i<ids.size();i++)
+//		{	DataTable dataTable = data.get(i);
+//			plotPanel.add(dataTable);
+//			Color color = colors.get(i).getColor();
+//	        plotPanel.getPointRenderer(dataTable).setSetting(PointRenderer.COLOR,color);
+//		}
 		
-		// setting up data model
-		DataTable dataTable = new DataTable(Integer.class, Integer.class);
-		List<StatisticEvent> events = statisticRound.getStatisticEvents();
 		
-		for(StatisticEvent event: events)
-		{	String id = event.getActorId();
-			Profile profile = tournament.getProfileById(id);
-			
-		}
-		// main panel
-		{	plotPanel = 
-			dataPanel.add(plotPanel);
+		
+		// Generate data
+		Random random = new Random();
+		DataTable data = new DataTable(Double.class, Double.class, Double.class,
+				Double.class, Double.class, Double.class);
+		for (double x = 1.0; x <= 400.0; x *= 1.5) {
+			double x2 = x/5.0;
+			data.add(x2, -Math.sqrt(x2) + 5.0,  5.0*Math.log10(x2),
+				random.nextDouble() + 1.0, random.nextDouble() + 0.5, 1.0 + 2.0*random.nextDouble());
 		}
 
+		// Create data series
+		DataSeries seriesLog = new DataSeries(data, 0, 2, 3, 4);
+		DataSeries seriesLin = new DataSeries(data, 0, 1, 5);
+
+		// Create new xy-plot
+		XYPlot plot = new XYPlot(seriesLog, seriesLin);
+
+		// Format plot
+		plot.setInsets(new Insets2D.Double(20.0, 40.0, 40.0, 40.0));
+		plot.setSetting(XYPlot.BACKGROUND, Color.WHITE);
+		plot.setSetting(XYPlot.TITLE, "Descriptionnn");
+
+		// Format plot area
+		plot.getPlotArea().setSetting(PlotArea.BACKGROUND, new RadialGradientPaint(
+			new Point2D.Double(0.5, 0.5),
+			0.75f,
+			new float[] { 0.6f, 0.8f, 1.0f },
+			new Color[] { new Color(0, 0, 0, 0), new Color(0, 0, 0, 32), new Color(0, 0, 0, 128) }
+		));
+		plot.getPlotArea().setSetting(PlotArea.BORDER, null);
+
+		// Format axes
+		AxisRenderer axisRendererX = new LogarithmicRenderer2D();
+		AxisRenderer axisRendererY = plot.getAxisRenderer(XYPlot.AXIS_Y);
+		axisRendererX.setSetting(AxisRenderer.LABEL, "Logarithmic axis");
+		plot.setAxisRenderer(XYPlot.AXIS_X, axisRendererX);
+		// Custom tick labels
+		Map<Double, String> labels = new HashMap<Double, String>();
+		labels.put(2.0, "Two");
+		labels.put(1.5, "OnePointFive");
+		axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
+		// Custom stroke for the x-axis
+		BasicStroke stroke = new BasicStroke(2f);
+		axisRendererX.setSetting(AxisRenderer.SHAPE_STROKE, stroke);
+		axisRendererY.setSetting(AxisRenderer.LABEL, "Linear axis");
+		// Change intersection point of Y axis
+		axisRendererY.setSetting(AxisRenderer.INTERSECTION, 1.0);
+		// Change tick spacing
+		axisRendererX.setSetting(AxisRenderer.TICKS_SPACING, 2.0);
+
+		// Format rendering of data points
+		PointRenderer sizeablePointRenderer = new SizeablePointRenderer();
+		sizeablePointRenderer.setSetting(PointRenderer.COLOR, GraphicsUtils.deriveDarker(Color.RED));
+		plot.setPointRenderer(seriesLin, sizeablePointRenderer);
+		PointRenderer defaultPointRenderer = new DefaultPointRenderer2D();
+		defaultPointRenderer.setSetting(PointRenderer.COLOR, GraphicsUtils.deriveDarker(Color.BLUE));
+		defaultPointRenderer.setSetting(PointRenderer.ERROR_DISPLAYED, true);
+		defaultPointRenderer.setSetting(PointRenderer.ERROR_COLOR, Color.BLUE);
+		plot.setPointRenderer(seriesLog, defaultPointRenderer);
+
+		// Format data lines
+		LineRenderer discreteRenderer = new DiscreteLineRenderer2D();
+		discreteRenderer.setSetting(LineRenderer.COLOR, Color.RED);
+		discreteRenderer.setSetting(LineRenderer.STROKE, new BasicStroke(
+			3.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
+			10.0f, new float[] {3f, 6f}, 0.0f));
+		plot.setLineRenderer(seriesLin, discreteRenderer);
+		// Custom gaps for points
+		discreteRenderer.setSetting(LineRenderer.GAP, 2.0);
+		discreteRenderer.setSetting(LineRenderer.GAP_ROUNDED, true);
+		// Custom ascending
+		discreteRenderer.setSetting(DiscreteLineRenderer2D.ASCENT_DIRECTION,
+			Orientation.VERTICAL);
+		discreteRenderer.setSetting(DiscreteLineRenderer2D.ASCENDING_POINT,
+			0.5);
+
+		// Add plot to Swing component
+		EmptyContentPanel dataPanel = getDataPanel();
+		dataPanel.remove(tempPanel);
+		tempPanel = new InteractivePanel(plot);
+		dataPanel.add(tempPanel, BorderLayout.CENTER);		
+		
+		
+		
+		
+		
+		
 	}
 	
 	public void refresh()

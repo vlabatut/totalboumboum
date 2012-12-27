@@ -514,6 +514,7 @@
 		- ajout des menus modaux manquant
 		- correction de problèmes de traduction dans la version anglaise
 	- ressources : 
+		- Shirobon SBM4
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 		- morts subites dans les niveaux officiels de SBM1
 		- outils de niveaux pour générer programmatiquement des morts subites typiques

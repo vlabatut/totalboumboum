@@ -178,10 +178,11 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 		Iterator<Profile> it = profiles.iterator();
 		while(result==null && it.hasNext())
 		{	Profile profile = it.next();
-			if(profile.getId().equals(id))
+			String id0 = profile.getId();
+			if(id0.equals(id))
 				result = profile;
 		}
-		return null;
+		return result;
 	}
 	
 	/**
