@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -19,17 +19,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Super-coupe de Galatasaray V" type="CUP" />
-	<played matches="1" rounds="5" />
-	<dates start="2012-12-25T13:38:03" save="2012-12-25T13:48:32" />
+	<tournament name="Qualification du tournoi 2012/13" type="SINGLE" />
+	<played matches="0" rounds="20" />
+	<dates start="2012-12-27T19:07:17" save="2012-12-27T19:24:26" />
 	<players>
-		<player name="Joueur humain" />
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="1011.Kesimal+Varol" />
-		<player name="1112.Coşkun+Özdemir" />
-		<player name="0910.Çalışır+Güner" />
+		<player name="1213.Çalışkan+Geçkalan" />
+		<player name="Suiveur" />
 	</players>
 </archive>
 

@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.erdemtayyar;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.erdemtayyar.v2.ErdemTayyar;
+import org.totalboumboum.ai.v201213.ais.erdemtayyar.v3.ErdemTayyar;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

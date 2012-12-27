@@ -69,8 +69,6 @@ import org.totalboumboum.statistics.overall.PlayerStats;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
-import com.sun.org.glassfish.external.statistics.Statistic;
-
 import de.erichseifert.gral.data.DataSeries;
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.plots.PlotArea;

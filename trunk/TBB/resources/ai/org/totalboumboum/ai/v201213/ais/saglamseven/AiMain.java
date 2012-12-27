@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.saglamseven;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.saglamseven.v0.SaglamSeven;
+import org.totalboumboum.ai.v201213.ais.saglamseven.v3.SaglamSeven;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.

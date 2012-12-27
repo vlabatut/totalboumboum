@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/game_quickmatch.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -23,7 +23,7 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="false" />
-		<limits points="0" rounds="30" time="90000" />
+		<limits points="0" rounds="30" time="30000" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -34,15 +34,10 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="2" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="0ff9f846-9767-42c7-b662-05dd6e851c6d" color="GRASS" controls="1" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="tournament201213" folder="qualif1" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="qualif2" allowedPlayers="2 3 4" />
-		<level pack="tournament201213" folder="qualif3" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="qualif4" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="qualif5" allowedPlayers="2 3 4" />
 		<level pack="tournament201213" folder="qualif6" allowedPlayers="2 3 4" />
 		<level pack="tournament201213" folder="qualif7" allowedPlayers="0 2 3 4" />
 	</levels>
