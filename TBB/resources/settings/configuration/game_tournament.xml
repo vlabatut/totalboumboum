@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/game_tournament.xsd">
+<gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -22,8 +22,8 @@
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
 	<tournament name="Trnmt201213_0.qualif" />
 	<players>
-		<player file="7707670a-6bf0-4072-926d-dbd1e3f150d8" color="YELLOW" controls="1" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="1" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="PINK" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameTournament>
 

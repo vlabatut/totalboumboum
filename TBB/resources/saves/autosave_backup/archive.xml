@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -21,10 +21,10 @@
 -->
 	<tournament name="Qualification du tournoi 2012/13" type="SINGLE" />
 	<played matches="0" rounds="20" />
-	<dates start="2012-12-27T19:07:17" save="2012-12-27T19:24:26" />
+	<dates start="2012-12-27T23:37:45" save="2012-12-27T23:57:33" />
 	<players>
-		<player name="1213.Çalışkan+Geçkalan" />
-		<player name="Suiveur" />
+		<player name="1213.Erdem+Tayyar" />
+		<player name="Promeneur" />
 	</players>
 </archive>
 
