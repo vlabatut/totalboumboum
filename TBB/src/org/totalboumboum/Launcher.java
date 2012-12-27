@@ -1623,8 +1623,9 @@ public class Launcher
 	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
 	 * 
 	 * TODO site : 
-	 * 		- shirobon SBM4	
 	 * 		- mort subite (et autres objets ?)
+	 * 		- niveaux de qualif supplementaires, et ce qu'ils testent
+	 * 		- shirobon SBM4	+ qualif exemple
 	 * 		- modif du tournoi coupe (pour la super-coupe)
 	 * 
 	 * TODO réviser les instances antérieures à SBM1, même si pas de mort subite
@@ -1640,3 +1641,4 @@ public class Launcher
  */
 
 // TODO ajouter la nvelle bibli chart à la doc + changelog
+// TODO utilite dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de preferences ?
