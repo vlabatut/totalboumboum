@@ -27,8 +27,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.RadialGradientPaint;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,6 +79,7 @@ import de.erichseifert.gral.plots.axes.AxisRenderer;
 import de.erichseifert.gral.plots.axes.LogarithmicRenderer2D;
 import de.erichseifert.gral.plots.lines.DiscreteLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
+import de.erichseifert.gral.plots.lines.SmoothLineRenderer2D;
 import de.erichseifert.gral.plots.points.DefaultPointRenderer2D;
 import de.erichseifert.gral.plots.points.PointRenderer;
 import de.erichseifert.gral.plots.points.SizeablePointRenderer;
@@ -181,92 +184,98 @@ tempPanel.setMinimumSize(dim);
 		
 		
 		// Generate data
-		Random random = new Random();
-		DataTable data = new DataTable(Double.class, Double.class, Double.class,
-				Double.class, Double.class, Double.class);
-		for (double x = 1.0; x <= 400.0; x *= 1.5) {
-			double x2 = x/5.0;
-			data.add(x2, -Math.sqrt(x2) + 5.0,  5.0*Math.log10(x2),
-				random.nextDouble() + 1.0, random.nextDouble() + 0.5, 1.0 + 2.0*random.nextDouble());
-		}
+//		Random random = new Random();
+//		DataTable data = new DataTable(Double.class, Double.class, Double.class,
+//				Double.class, Double.class, Double.class);
+//		for (double x = 1.0; x <= 400.0; x *= 1.5) {
+//			double x2 = x/5.0;
+//			data.add(x2, -Math.sqrt(x2) + 5.0,  5.0*Math.log10(x2),
+//				random.nextDouble() + 1.0, random.nextDouble() + 0.5, 1.0 + 2.0*random.nextDouble());
+//		}
+//
+//		// Create data series
+//		DataSeries series1 = new DataSeries(data, 0, 2, 3, 4);
+//		DataSeries series2 = new DataSeries(data, 0, 1, 5);
 
-		// Create data series
-		DataSeries seriesLog = new DataSeries(data, 0, 2, 3, 4);
-		DataSeries seriesLin = new DataSeries(data, 0, 1, 5);
-
+// creating fake data
+List<int[][]> data = new ArrayList<int[][]>();
+int data1[][] = {
+	{120,1},{250,1},{300,1},{400,1},{560,1},{659,1},{805,1}
+};data.add(data1);
+int data2[][] = {
+	{105,1},{235,1},{345,1},{368,1},{456,1},{865,1},{875,1},{986,1}
+};data.add(data2);
+// creating data model
+List<DataTable> dataTables = new ArrayList<DataTable>(); 
+for(int i=0;i<data.size();i++)
+{	DataTable dataTable = new DataTable(Integer.class, Integer.class);
+	int[][] d = data.get(i);
+	for(int j=0;j<d.length;j++)
+		dataTable.add(d[j][0],d[j][1]);
+	dataTables.add(dataTable);
+}
+DataSeries series1 = new DataSeries(dataTables.get(0), 0, 1);
+DataSeries series2 = new DataSeries(dataTables.get(1), 0, 1);
+		
 		// Create new xy-plot
-		XYPlot plot = new XYPlot(seriesLog, seriesLin);
+		XYPlot plot = new XYPlot(series1,series2);
 
 		// Format plot
-		plot.setInsets(new Insets2D.Double(20.0, 40.0, 40.0, 40.0));
-		plot.setSetting(XYPlot.BACKGROUND, Color.WHITE);
-		plot.setSetting(XYPlot.TITLE, "Descriptionnn");
+//		plot.setInsets(new Insets2D.Double(20.0, 40.0, 40.0, 40.0));
+		plot.setSetting(XYPlot.BACKGROUND, GuiTools.COLOR_COMMON_BACKGROUND);
+//		plot.setSetting(XYPlot.TITLE, "Descriptionnn");
 
 		// Format plot area
-		plot.getPlotArea().setSetting(PlotArea.BACKGROUND, new RadialGradientPaint(
-			new Point2D.Double(0.5, 0.5),
-			0.75f,
-			new float[] { 0.6f, 0.8f, 1.0f },
-			new Color[] { new Color(0, 0, 0, 0), new Color(0, 0, 0, 32), new Color(0, 0, 0, 128) }
-		));
+//		plot.getPlotArea().setSetting(PlotArea.BACKGROUND, new RadialGradientPaint(
+//			new Point2D.Double(0.5, 0.5),
+//			0.75f,
+//			new float[] { 0.6f, 0.8f, 1.0f },
+//			new Color[] { new Color(0, 0, 0, 0), new Color(0, 0, 0, 32), new Color(0, 0, 0, 128) }
+//		));
+		plot.getPlotArea().setSetting(PlotArea.BACKGROUND, null);
 		plot.getPlotArea().setSetting(PlotArea.BORDER, null);
 
 		// Format axes
-		AxisRenderer axisRendererX = new LogarithmicRenderer2D();
+		AxisRenderer axisRendererX = plot.getAxisRenderer(XYPlot.AXIS_X);
 		AxisRenderer axisRendererY = plot.getAxisRenderer(XYPlot.AXIS_Y);
-		axisRendererX.setSetting(AxisRenderer.LABEL, "Logarithmic axis");
-		plot.setAxisRenderer(XYPlot.AXIS_X, axisRendererX);
-		// Custom tick labels
-		Map<Double, String> labels = new HashMap<Double, String>();
-		labels.put(2.0, "Two");
-		labels.put(1.5, "OnePointFive");
-		axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
-		// Custom stroke for the x-axis
-		BasicStroke stroke = new BasicStroke(2f);
-		axisRendererX.setSetting(AxisRenderer.SHAPE_STROKE, stroke);
-		axisRendererY.setSetting(AxisRenderer.LABEL, "Linear axis");
+		axisRendererX.setSetting(AxisRenderer.LABEL, "Time");
+//		BasicStroke stroke = new BasicStroke(2f);
+//		axisRendererX.setSetting(AxisRenderer.SHAPE_STROKE, stroke);
+		axisRendererY.setSetting(AxisRenderer.LABEL, "Bombs");
 		// Change intersection point of Y axis
-		axisRendererY.setSetting(AxisRenderer.INTERSECTION, 1.0);
+//		axisRendererY.setSetting(AxisRenderer.INTERSECTION, 1.0);
 		// Change tick spacing
-		axisRendererX.setSetting(AxisRenderer.TICKS_SPACING, 2.0);
+//		axisRendererX.setSetting(AxisRenderer.TICKS_SPACING, 2.0);
 
 		// Format rendering of data points
-		PointRenderer sizeablePointRenderer = new SizeablePointRenderer();
-		sizeablePointRenderer.setSetting(PointRenderer.COLOR, GraphicsUtils.deriveDarker(Color.RED));
-		plot.setPointRenderer(seriesLin, sizeablePointRenderer);
-		PointRenderer defaultPointRenderer = new DefaultPointRenderer2D();
-		defaultPointRenderer.setSetting(PointRenderer.COLOR, GraphicsUtils.deriveDarker(Color.BLUE));
-		defaultPointRenderer.setSetting(PointRenderer.ERROR_DISPLAYED, true);
-		defaultPointRenderer.setSetting(PointRenderer.ERROR_COLOR, Color.BLUE);
-		plot.setPointRenderer(seriesLog, defaultPointRenderer);
+		PointRenderer pointRenderer1 = new DefaultPointRenderer2D();
+		Shape circle = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
+		pointRenderer1.setSetting(PointRenderer.SHAPE, circle);
+		pointRenderer1.setSetting(PointRenderer.COLOR, Color.RED);
+		plot.setPointRenderer(series2, pointRenderer1);
+		PointRenderer pointRenderer2 = new DefaultPointRenderer2D();
+		pointRenderer2.setSetting(PointRenderer.SHAPE, circle);
+		pointRenderer2.setSetting(PointRenderer.COLOR, Color.BLUE);
+		plot.setPointRenderer(series1, pointRenderer2);
 
 		// Format data lines
-		LineRenderer discreteRenderer = new DiscreteLineRenderer2D();
-		discreteRenderer.setSetting(LineRenderer.COLOR, Color.RED);
-		discreteRenderer.setSetting(LineRenderer.STROKE, new BasicStroke(
-			3.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
-			10.0f, new float[] {3f, 6f}, 0.0f));
-		plot.setLineRenderer(seriesLin, discreteRenderer);
-		// Custom gaps for points
-		discreteRenderer.setSetting(LineRenderer.GAP, 2.0);
-		discreteRenderer.setSetting(LineRenderer.GAP_ROUNDED, true);
-		// Custom ascending
-		discreteRenderer.setSetting(DiscreteLineRenderer2D.ASCENT_DIRECTION,
-			Orientation.VERTICAL);
-		discreteRenderer.setSetting(DiscreteLineRenderer2D.ASCENDING_POINT,
-			0.5);
+		BasicStroke stroke = new BasicStroke(2f);
+		LineRenderer lineRenderer1 = new SmoothLineRenderer2D();
+		lineRenderer1.setSetting(LineRenderer.COLOR, Color.RED);
+		lineRenderer1.setSetting(LineRenderer.GAP, 2.0);
+		lineRenderer1.setSetting(LineRenderer.STROKE, stroke);
+		plot.setLineRenderer(series2, lineRenderer1);
+		LineRenderer lineRenderer2 = new SmoothLineRenderer2D();
+		lineRenderer2.setSetting(LineRenderer.COLOR, Color.BLUE);
+		lineRenderer1.setSetting(LineRenderer.GAP, 2.0);
+		lineRenderer1.setSetting(LineRenderer.STROKE, stroke);
+		plot.setLineRenderer(series1, lineRenderer2);
 
 		// Add plot to Swing component
 		EmptyContentPanel dataPanel = getDataPanel();
 		dataPanel.remove(tempPanel);
 		tempPanel = new InteractivePanel(plot);
 		dataPanel.add(tempPanel, BorderLayout.CENTER);		
-		
-		
-		
-		
-		
-		
 	}
 	
 	public void refresh()
