@@ -147,6 +147,7 @@ tempPanel.setMinimumSize(dim);
 		Map<String,Integer> series = new HashMap<String,Integer>();
 		List<DataTable> dataTables = new ArrayList<DataTable>();
 		List<Integer> counts = new ArrayList<Integer>();
+		List<List<Long>> eliminations = new ArrayList<List<Long>>();
 		for(int i=0;i<ids.size();i++)
 		{	String id = ids.get(i);
 			series.put(id,i);
@@ -154,6 +155,7 @@ tempPanel.setMinimumSize(dim);
 			DataTable dataTable = new DataTable(Long.class, Integer.class);
 			dataTables.add(dataTable);
 			counts.add(0);
+			eliminations.add(new ArrayList<Long>());
 		}
 		
 		// init player colors
@@ -169,14 +171,22 @@ tempPanel.setMinimumSize(dim);
 		{	StatisticAction action = event.getAction();
 			if(action==StatisticAction.DROP_BOMB)
 			{	long time = event.getTime();
-				String id = event.getActorId();
-				int index = series.get(id);
+				String actorId = event.getActorId();
+				int index = series.get(actorId);
 				int count = counts.get(index);
 				count++;
 				counts.set(index, count);
 				DataTable dataTable = dataTables.get(index);
 				dataTable.add(time,count);
 			}
+			else if(action==StatisticAction.BOMB_PLAYER)
+			{	long time = event.getTime();
+				String targetId = event.getTargetId();
+				int index = series.get(targetId);
+				List<Long> elim = eliminations.get(index);
+				elim.add(time);
+			}
+				
 		}
 		
 		// creating series
@@ -250,6 +260,16 @@ tempPanel.setMinimumSize(dim);
 //		axisRendererY.setSetting(AxisRenderer.INTERSECTION, 1.0);
 		// Change tick spacing
 //		axisRendererX.setSetting(AxisRenderer.TICKS_SPACING, 2.0);
+        Map<Double, String> labels = new HashMap<Double, String>();
+		for(int i=0;i<ids.size();i++)
+		{	String id = ids.get(i);
+			Profile profile = tournament.getProfileById(id);
+			String name = profile.getName();
+			List<Long> elim = eliminations.get(i);
+			for(Long time: elim)
+				labels.put(time.doubleValue(), name);
+		}
+		axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
 
 		// set format
 		Shape circle = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
