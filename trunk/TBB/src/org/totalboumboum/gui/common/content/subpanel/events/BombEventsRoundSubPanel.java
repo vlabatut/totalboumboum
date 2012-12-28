@@ -77,6 +77,7 @@ import de.erichseifert.gral.plots.PlotArea;
 import de.erichseifert.gral.plots.XYPlot;
 import de.erichseifert.gral.plots.axes.AxisRenderer;
 import de.erichseifert.gral.plots.axes.LogarithmicRenderer2D;
+import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.DiscreteLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.plots.lines.SmoothLineRenderer2D;
@@ -137,42 +138,54 @@ tempPanel.setMinimumSize(dim);
 	public void setRound(Round round)
 	{	
 //		plotPanel.clear();
-//		this.round = round;
-//		AbstractTournament tournament = round.getMatch().getTournament();
-//	
-//		// init player data
-//		StatisticRound statisticRound = round.getStats();
-//		List<String> ids = statisticRound.getPlayersIds();
-//		Map<String,Integer> series = new HashMap<String,Integer>();
-//		List<DataTable> data = new ArrayList<DataTable>();
-//		for(int i=0;i<ids.size();i++)
-//		{	String id = ids.get(i);
-//			series.put(id,i);
-//			@SuppressWarnings("unchecked")
-//			DataTable dataTable = new DataTable(Long.class, Integer.class);
-//			data.add(dataTable);
-//		}
-//		
-//		// init player colors
-//		List<PredefinedColor> colors = new ArrayList<PredefinedColor>();
-//		for(String id: ids)
-//		{	Profile profile = tournament.getProfileById(id);
-//			colors.add(profile.getSpriteColor());
-//		}
-//		
-//		// setting data model
-//		List<StatisticEvent> events = statisticRound.getStatisticEvents();
-//		for(StatisticEvent event: events)
-//		{	StatisticAction action = event.getAction();
-//			if(action==StatisticAction.DROP_BOMB)
-//			{	long time = event.getTime();
-//				String id = event.getActorId();
-//				int index = series.get(id);
-//				DataTable dataTable = data.get(index);
-//				dataTable.add(time,1);
-//			}
-//		}
-//		
+		this.round = round;
+		AbstractTournament tournament = round.getMatch().getTournament();
+		
+		// init player data
+		StatisticRound statisticRound = round.getStats();
+		List<String> ids = statisticRound.getPlayersIds();
+		Map<String,Integer> series = new HashMap<String,Integer>();
+		List<DataTable> dataTables = new ArrayList<DataTable>();
+		List<Integer> counts = new ArrayList<Integer>();
+		for(int i=0;i<ids.size();i++)
+		{	String id = ids.get(i);
+			series.put(id,i);
+			@SuppressWarnings("unchecked")
+			DataTable dataTable = new DataTable(Long.class, Integer.class);
+			dataTables.add(dataTable);
+			counts.add(0);
+		}
+		
+		// init player colors
+		List<PredefinedColor> colors = new ArrayList<PredefinedColor>();
+		for(String id: ids)
+		{	Profile profile = tournament.getProfileById(id);
+			colors.add(profile.getSpriteColor());
+		}
+		
+		// setting data model
+		List<StatisticEvent> events = statisticRound.getStatisticEvents();
+		for(StatisticEvent event: events)
+		{	StatisticAction action = event.getAction();
+			if(action==StatisticAction.DROP_BOMB)
+			{	long time = event.getTime();
+				String id = event.getActorId();
+				int index = series.get(id);
+				int count = counts.get(index);
+				count++;
+				counts.set(index, count);
+				DataTable dataTable = dataTables.get(index);
+				dataTable.add(time,count);
+			}
+		}
+		
+		// creating series
+		List<DataSeries> dataSeries = new ArrayList<DataSeries>();
+		for(DataTable dataTable: dataTables)
+		{	DataSeries dataSerie = new DataSeries(dataTable, 0, 1);
+			dataSeries.add(dataSerie);
+		}
+		
 //		// adding to panel
 //		for(int i=0;i<ids.size();i++)
 //		{	DataTable dataTable = data.get(i);
@@ -197,28 +210,19 @@ tempPanel.setMinimumSize(dim);
 //		DataSeries series1 = new DataSeries(data, 0, 2, 3, 4);
 //		DataSeries series2 = new DataSeries(data, 0, 1, 5);
 
-// creating fake data
-List<int[][]> data = new ArrayList<int[][]>();
-int data1[][] = {
-	{120,1},{250,1},{300,1},{400,1},{560,1},{659,1},{805,1}
-};data.add(data1);
-int data2[][] = {
-	{105,1},{235,1},{345,1},{368,1},{456,1},{865,1},{875,1},{986,1}
-};data.add(data2);
-// creating data model
-List<DataTable> dataTables = new ArrayList<DataTable>(); 
-for(int i=0;i<data.size();i++)
-{	DataTable dataTable = new DataTable(Integer.class, Integer.class);
-	int[][] d = data.get(i);
-	for(int j=0;j<d.length;j++)
-		dataTable.add(d[j][0],d[j][1]);
-	dataTables.add(dataTable);
-}
-DataSeries series1 = new DataSeries(dataTables.get(0), 0, 1);
-DataSeries series2 = new DataSeries(dataTables.get(1), 0, 1);
+//DataTable dataTable1 = new DataTable(Integer.class,Integer.class);
+//DataTable dataTable2 = new DataTable(Integer.class,Integer.class);
+//for(int i=0;i<100;i++)
+//{	dataTable1.add(i,(int)Math.round(Math.random()*100));
+//	dataTable2.add(i,(int)Math.round(Math.random()*100));
+//}
+//DataSeries series1 = new DataSeries(dataTable1, 0, 1);
+//DataSeries series2 = new DataSeries(dataTable2, 0, 1);
 		
 		// Create new xy-plot
-		XYPlot plot = new XYPlot(series1,series2);
+		XYPlot plot = new XYPlot();
+		for(DataSeries dataSerie: dataSeries)
+			plot.add(dataSerie);
 
 		// Format plot
 //		plot.setInsets(new Insets2D.Double(20.0, 40.0, 40.0, 40.0));
@@ -247,30 +251,28 @@ DataSeries series2 = new DataSeries(dataTables.get(1), 0, 1);
 		// Change tick spacing
 //		axisRendererX.setSetting(AxisRenderer.TICKS_SPACING, 2.0);
 
-		// Format rendering of data points
-		PointRenderer pointRenderer1 = new DefaultPointRenderer2D();
+		// set format
 		Shape circle = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
-		pointRenderer1.setSetting(PointRenderer.SHAPE, circle);
-		pointRenderer1.setSetting(PointRenderer.COLOR, Color.RED);
-		plot.setPointRenderer(series2, pointRenderer1);
-		PointRenderer pointRenderer2 = new DefaultPointRenderer2D();
-		pointRenderer2.setSetting(PointRenderer.SHAPE, circle);
-		pointRenderer2.setSetting(PointRenderer.COLOR, Color.BLUE);
-		plot.setPointRenderer(series1, pointRenderer2);
-
-		// Format data lines
 		BasicStroke stroke = new BasicStroke(2f);
-		LineRenderer lineRenderer1 = new SmoothLineRenderer2D();
-		lineRenderer1.setSetting(LineRenderer.COLOR, Color.RED);
-		lineRenderer1.setSetting(LineRenderer.GAP, 2.0);
-		lineRenderer1.setSetting(LineRenderer.STROKE, stroke);
-		plot.setLineRenderer(series2, lineRenderer1);
-		LineRenderer lineRenderer2 = new SmoothLineRenderer2D();
-		lineRenderer2.setSetting(LineRenderer.COLOR, Color.BLUE);
-		lineRenderer1.setSetting(LineRenderer.GAP, 2.0);
-		lineRenderer1.setSetting(LineRenderer.STROKE, stroke);
-		plot.setLineRenderer(series1, lineRenderer2);
+		for(int i=0;i<ids.size();i++)
+		{	DataSeries dataSerie = dataSeries.get(i);
+			Color color = colors.get(i).getColor();
+			
+			// Format rendering of data points
+			PointRenderer pointRenderer = new DefaultPointRenderer2D();
+			pointRenderer.setSetting(PointRenderer.SHAPE, circle);
+			pointRenderer.setSetting(PointRenderer.COLOR, color);
+			plot.setPointRenderer(dataSerie, pointRenderer);
 
+			// Format data lines
+			//LineRenderer lineRenderer = new SmoothLineRenderer2D();
+			LineRenderer lineRenderer = new DefaultLineRenderer2D();
+			lineRenderer.setSetting(LineRenderer.COLOR, color);
+			lineRenderer.setSetting(LineRenderer.GAP, 2.0);
+			lineRenderer.setSetting(LineRenderer.STROKE, stroke);
+			plot.setLineRenderer(dataSerie, lineRenderer);
+		}
+		
 		// Add plot to Swing component
 		EmptyContentPanel dataPanel = getDataPanel();
 		dataPanel.remove(tempPanel);
