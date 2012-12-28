@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/statistics.xsd">
+<statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\statistics.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut
@@ -22,7 +22,7 @@
 	<includeQuickStarts value="false" />
 	<includeSimulations value="false" />
 	<glicko2 defaultRating="1500" defaultRatingDeviation="350" defaultRatingVolatility="0.06" gamesPerPeriod="5" />
-	<regularLaunch count="1301" time="1290425714" />
+	<regularLaunch count="1304" time="1288095628" />
 	<quickLaunch count="6" time="226" />
 </statistics>
 
