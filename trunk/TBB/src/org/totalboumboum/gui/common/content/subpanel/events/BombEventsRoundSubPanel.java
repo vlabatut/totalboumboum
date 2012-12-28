@@ -185,6 +185,9 @@ tempPanel.setMinimumSize(dim);
 				int index = series.get(targetId);
 				List<Long> elim = eliminations.get(index);
 				elim.add(time);
+				counts.set(index, 0);
+				DataTable dataTable = dataTables.get(index);
+				dataTable.add(time,0);
 			}
 				
 		}
