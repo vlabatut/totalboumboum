@@ -834,6 +834,21 @@
 			<text name="Cancel" value="Annuler"  tooltip="Annuler l'opération et fermer cette fenêtre" />
 			<text name="Confirm" value="Confirmer"  tooltip="Confirmer l'opération et fermer cette fenêtre" />
 		</group>
+
+<!-- EVOLUTION -->
+		<group name="Evolution" >
+			<group name="Button">
+				<text name="Bombeds" value="Bombé" tooltip="Nombre de fois que le joueur a été éliminé" />
+				<text name="Bombings" value="Bombeur" tooltip="Nombre de fois que le joueur en a éliminé un autre" />
+				<text name="Bombs" value="Bombes" tooltip="Nombre de bombes posées" />
+				<text name="Crowns" value="Couronnes" tooltip="Nombre de couronnes ramassées" />
+				<text name="Items" value="Items" tooltip="Nombres d'items ramassés" />
+				<text name="Paintings" value="Peinture" tooltip="Nombre de cases peintes" />
+				<text name="Points" value="Points" tooltip="Nombre de points marqués" />
+				<text name="SelfBombings" value="Auto-bombages" tooltip="Nombre de fois que le joueur s'est auto-éliminé" />
+				<text name="Time" value="Temps" tooltip="Temps de jeu" />
+			</group>
+		</group>
 								
 <!-- GAME INFO -->
 		<group name="GameInfo" >

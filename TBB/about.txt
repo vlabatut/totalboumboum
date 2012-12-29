@@ -17,47 +17,53 @@ For source availability and license information see licence.txt
 
 This product includes softwares developed by:
 
-  + Chris Adamson & Joshua Marinacci:
+  + Chris Adamson & Joshua Marinacci
     Class org.totalboumboum.gui.tools.FullRepaintManager
     Copyright 2005 Chris Adamson & Joshua Marinacci 
     http://weblogs.java.net/blog/invalidname
     http://weblogs.java.net/blog/joshy
     Used to allow alpha effects in the GUI panels
     
-  + Adam Walker:
+  + Adam Walker
     Class org.totalboumboum.tools.images.MessageDisplayer
     Copyright 2005 Adam Walker
     http://www.walkersoftware.net/articles/text-effects-in-java
     Used to display messages at the begining of a round
     
-  + Sun Microsystems Inc: 
+  + Sun Microsystems Inc.
     Class org.totalboumboum.gui.tools.SpringUtilities
     Copyright 1995-2008 Sun Microsystems Inc.
     http://www.sun.com
     Used to layout graphical components in the GUI
     
-  + JDOM Project:
+  + JDOM Project
     jdom library
     Copyright 2000-2007 JDOM Project - Apache-based license
     http://www.jdom.org
     Used to parse the many XML files defining the sprites and other ingame objects
     
-  + JRS - Java Ranking Service:
+  + JRS - Java Ranking Service
     Classes in the org.totalboumboum.game.statistics.glicko2.jrs package
     Copyright 2005-2006 JRS project - BSD License
     https://jrs.dev.java.net
     Some of these classes were modified by Vincent Labatut
     Used to rank players depending on their long term results
     
-  + Japa - Java parser and AST (Abstract Syntax Tree):
+  + Japa - Java parser and AST (Abstract Syntax Tree)
     Javaparser library v1.0.8
-    Copyright 2007 Júlio Vilmar Gesser - GPL License
+    Copyright 2007 Júlio Vilmar Gesser - GPL
     http://code.google.com/p/javaparser/
     Used to parse the students AI Java source code
     
-  + Various AI students from Galatasaray University:
+  + Erich Seifert
+    Gral - Graphing Library
+    Copyright 2012 Erich Seifert - LGPL
+    http://trac.erichseifert.de/gral/
+  	Used to display the evolution of the game as plots
+    
+  + Various AI students from Galatasaray University
     Most classes in resources/ai (see classes for details)
-    Copyright 2007-2011 their respective authors
+    Copyright 2007-2012 their respective authors
     http://gsu.edu.tr - GSÜ, Istanbul, Turkey
 
 -----------------------------------------------------------------------

@@ -72,8 +72,8 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * set a label's icon or text. for an icon, the label's PREFERRED SIZE
-	 * MUST BE SET before calling this method.
+	 * Sets a label's icon or text. For an icon, the label preferred size
+	 * <b>must be set before</b> calling this method.
 	 * @param label
 	 * @param key
 	 * @param imageFlag
@@ -96,7 +96,10 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	{	ImageIcon icn = null;
 		if(icon!=null)
 		{	int h = getPreferredSize().height;
-			double zoom = h/(double)icon.getHeight();
+			double zoomH = h/(double)icon.getHeight();
+			int w = getPreferredSize().width;
+			double zoomW = w/(double)icon.getWidth();
+			double zoom = Math.min(zoomH, zoomW);
 			icon = ImageTools.getResizedImage(icon,zoom,true);
 			icn = new ImageIcon(icon);
 		}

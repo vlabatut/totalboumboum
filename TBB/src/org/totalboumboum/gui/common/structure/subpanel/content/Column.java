@@ -22,6 +22,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
  */
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
@@ -148,7 +149,11 @@ public class Column extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	
 	public MyLabel getLabel(int line)
-	{	return (MyLabel)getComponent(line*2);
+	{	MyLabel result = null;
+		Component temp = getComponent(line*2);
+		if(temp instanceof MyLabel)
+			result = (MyLabel)temp;
+		return result;
 	}
 	
 	public void addLabel(int line)

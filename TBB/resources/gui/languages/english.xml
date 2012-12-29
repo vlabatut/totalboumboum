@@ -837,6 +837,21 @@
 			<text name="Confirm" value="Confirm"  tooltip="Confirme the ongoing operation and close this window" />
 		</group>
 								
+<!-- EVOLUTION -->
+		<group name="Evolution" >
+			<group name="Button">
+				<text name="Bombeds" value="Bombeds"  tooltip="Number of times the player was bombed by another player" />
+				<text name="Bombings" value="Bombings"  tooltip="Number of times the player bombed another player" />
+				<text name="Bombs" value="Bombs"  tooltip="Number of bombs the player dropped" />
+				<text name="Crowns" value="Crowns"  tooltip="Number of crowns the player gathered" />
+				<text name="Items" value="Items"  tooltip="Number of items the player picked up" />
+				<text name="Paintings" value="Paintings"  tooltip="Number of tiles the player painted" />
+				<text name="Points" value="Points" tooltip="Number of points scored" />
+				<text name="SelfBombings" value="Self-bombings"  tooltip="Number of times the player bombed himself" />
+				<text name="Time" value="Time" tooltip="Time played" />
+			</group>
+		</group>
+								
 <!-- GAME INFO -->
 		<group name="GameInfo" >
 			<text name="AllowedPlayers" value="Allowed" tooltip="Numbers of players allowed for this tournament" />

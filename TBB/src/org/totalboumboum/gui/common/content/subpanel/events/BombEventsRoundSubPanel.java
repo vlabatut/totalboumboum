@@ -22,124 +22,220 @@ package org.totalboumboum.gui.common.content.subpanel.events;
  */
 
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.RadialGradientPaint;
 import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
+import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
-import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
-import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
+import org.totalboumboum.gui.common.structure.subpanel.content.Column;
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticAction;
-import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
-import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticRound;
-import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
-import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.statistics.overall.PlayerStats;
 import org.totalboumboum.tools.images.PredefinedColor;
-import org.xml.sax.SAXException;
 
 import de.erichseifert.gral.data.DataSeries;
+import de.erichseifert.gral.data.DataSource;
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.plots.PlotArea;
 import de.erichseifert.gral.plots.XYPlot;
 import de.erichseifert.gral.plots.axes.AxisRenderer;
-import de.erichseifert.gral.plots.axes.LogarithmicRenderer2D;
 import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
-import de.erichseifert.gral.plots.lines.DiscreteLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
-import de.erichseifert.gral.plots.lines.SmoothLineRenderer2D;
 import de.erichseifert.gral.plots.points.DefaultPointRenderer2D;
 import de.erichseifert.gral.plots.points.PointRenderer;
-import de.erichseifert.gral.plots.points.SizeablePointRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
-import de.erichseifert.gral.util.GraphicsUtils;
-import de.erichseifert.gral.util.Insets2D;
-import de.erichseifert.gral.util.Orientation;
 
 /**
+ * This class is used to display plots representing the evolution
+ * of certain scores during a round. It includes various controls
+ * allowing to hide/display players and switch to other scores.
  * 
  * @author Vincent Labatut
- *
  */
-public class BombEventsRoundSubPanel extends EmptySubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
-
+public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseListener
+{	/** Class id for serialization */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Builds an empty panel
+	 * 
+	 * @param width
+	 * 		Width of the panel in pixels.
+	 * @param height
+	 * 		Height of the panel in pixels.
+	 */
 	public BombEventsRoundSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER);
-
-		// set panel
-		EmptyContentPanel dataPanel = getDataPanel();
-		dataPanel.setOpaque(false);
+	{	super(width,height,SubPanel.Mode.BORDER,3);
 		
-		// background
-		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
-			setBackground(bg);
+		// sizes
+		int colorLines;
+		int scoreLines;
+		{	// colors
+			{	PredefinedColor colorValues[] = PredefinedColor.values();		
+				colorLines = colorValues.length;
+				colorWidth = (getDataHeight() - (colorLines-1)*GuiTools.subPanelMargin) / colorLines;
+				int temp = getDataHeight() - (colorLines-1)*GuiTools.subPanelMargin - colorLines*colorWidth;
+				colorFirstLineHeight = colorWidth + temp/2;
+				colorLastLineHeight = colorWidth + (temp - temp/2);
+			}
+			
+			// scores
+			{	Score scoreValues[] = Score.values();
+				scoreLines = scoreValues.length;
+				scoreWidth = (getDataHeight() - (scoreLines-1)*GuiTools.subPanelMargin) / scoreLines;
+				scoreFirstLineHeight = getDataHeight() - (scoreLines-1)*GuiTools.subPanelMargin - (scoreLines-1)*scoreWidth;
+			}
+			
+			// plot
+			{	plotWidth = getDataWidth() - colorWidth - colorWidth - 2*GuiTools.subPanelMargin;
+//				plotWidth = getDataWidth() - scoreWidth - colorWidth - 2*GuiTools.subPanelMargin;
+			}
 		}
 		
-		// layout
-		{	BoxLayout layout = new BoxLayout(dataPanel,BoxLayout.PAGE_AXIS); 
-			dataPanel.setLayout(layout);
+		// buttons
+		{	// scores
+			{	Column cl = getColumn(COL_SCORES);
+//				cl.setDim(scoreWidth,getDataHeight());
+				cl.setDim(colorWidth,getDataHeight());
+				for(int i=1;i<scoreLines;i++)
+					cl.addLabel(0);
+				Map<Integer,String> keys = new HashMap<Integer, String>();
+				keys.put(LINE_BOMBEDS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBEDS);
+				keys.put(LINE_SELFBOMBINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_SELF_BOMBINGS);
+				keys.put(LINE_BOMBINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBINGS);
+				keys.put(LINE_TIME, GuiKeys.COMMON_EVOLUTION_BUTTON_TIME);
+				keys.put(LINE_ITEMS, GuiKeys.COMMON_EVOLUTION_BUTTON_ITEMS);
+				keys.put(LINE_BOMBS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBS);
+				keys.put(LINE_PAINTINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_PAINTINGS);
+				keys.put(LINE_CROWNS, GuiKeys.COMMON_EVOLUTION_BUTTON_CROWNS);
+				//keys.put(LINE_POINTS, GuiKeys.COMMON_EVOLUTION_BUTTON_POINTS);
+				
+				for(int line=0;line<scoreLines;line++)
+				{	int h = scoreWidth;
+					if(line==0)
+						h = scoreFirstLineHeight;
+					cl.setLabelMinHeight(line,h);
+					cl.setLabelPreferredHeight(line,h);
+					cl.setLabelMaxHeight(line,h);
+					MyLabel label = cl.getLabel(line);
+					String key = keys.get(line);
+					label.setKey(key,true);
+					label.setHorizontalAlignment(JLabel.CENTER);
+					label.setVerticalAlignment(JLabel.CENTER);
+					label.addMouseListener(this);
+					label.setMouseSensitive(true);
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				cl.setBackgroundColor(bg);
+			}
+			
+			// plot
+			{	Column cl = getColumn(COL_PLOT);
+				cl.setDim(plotWidth,getDataHeight());
+				Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+				cl.setBackgroundColor(bg);
+				plot = new XYPlot();
+				plot.setSetting(XYPlot.BACKGROUND, GuiTools.COLOR_COMMON_BACKGROUND);
+				plot.getPlotArea().setSetting(PlotArea.BACKGROUND, null);
+				plot.getPlotArea().setSetting(PlotArea.BORDER, null);
+				insertPlotPanel();
+			}
+			
+			// colors
+			{	Column cl = getColumn(COL_COLORS);
+				cl.setDim(colorWidth,getDataHeight());
+				for(int i=1;i<colorLines;i++)
+					cl.addLabel(0);
+				for(int line=0;line<colorLines;line++)
+				{	int h = colorWidth;
+					if(line==0)
+						h = colorFirstLineHeight;
+					else if(line==colorLines-1)
+						h = colorLastLineHeight;
+					cl.setLabelMinHeight(line,h);
+					cl.setLabelPreferredHeight(line,h);
+					cl.setLabelMaxHeight(line,h);
+					MyLabel label = cl.getLabel(line);
+					label.addMouseListener(this);
+					label.setMouseSensitive(true);
+				}
+				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				cl.setBackgroundColor(bg);
+				Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				cl.setForegroundColor(fg);
+			}
 		}
 		
-		// main panel
-		{	plotPanel = new XYPlot();
-			tempPanel = new InteractivePanel(plotPanel);
-tempPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-Dimension dim = new Dimension(getDataWidth(),getDataHeight());
-tempPanel.setPreferredSize(dim);
-tempPanel.setMaximumSize(dim);
-tempPanel.setMinimumSize(dim);
-
-			dataPanel.add(tempPanel);
-		}
-
+//		updatePlot();
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PAGES			/////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private XYPlot plotPanel;
-	private Round round;
-	private InteractivePanel tempPanel;
+	/** Round displayed in this panel */
+	private Round round = null;
 	
+	/**
+	 * Changes the round displayed in
+	 * this panel.
+	 * 
+	 * @param round
+	 * 		New round displayed in this panel.
+	 */
 	public void setRound(Round round)
-	{	
-//		plotPanel.clear();
-		this.round = round;
-		AbstractTournament tournament = round.getMatch().getTournament();
+	{	if(this.round!=round)
+		{	this.round = round;
+		
+			// update displayed players
+			selectedColors.clear();
+			List<Profile> profiles = round.getProfiles();
+			for(Profile profile: profiles)
+			{	PredefinedColor color = profile.getSpriteColor();
+				selectedColors.add(color);
+			}
+			
+			updateColorButtons();
+		}
+		
+		updatePlot();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PLOT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Column number of the plot panel */
+	private final static int COL_PLOT = 1;
+	/** Width of the color buttons */
+	private int plotWidth;
+	/** Drawable object used to plot */
+	private XYPlot plot = null;
+
+	/**
+	 * Updates the plot depending on the
+	 * current parameters : round, colors, score.
+	 */
+	private void updatePlot()
+	{	AbstractTournament tournament = round.getMatch().getTournament();
 		
 		// init player data
 		StatisticRound statisticRound = round.getStats();
@@ -198,57 +294,14 @@ tempPanel.setMinimumSize(dim);
 		{	DataSeries dataSerie = new DataSeries(dataTable, 0, 1);
 			dataSeries.add(dataSerie);
 		}
-		
-//		// adding to panel
-//		for(int i=0;i<ids.size();i++)
-//		{	DataTable dataTable = data.get(i);
-//			plotPanel.add(dataTable);
-//			Color color = colors.get(i).getColor();
-//	        plotPanel.getPointRenderer(dataTable).setSetting(PointRenderer.COLOR,color);
-//		}
-		
-		
-		
-		// Generate data
-//		Random random = new Random();
-//		DataTable data = new DataTable(Double.class, Double.class, Double.class,
-//				Double.class, Double.class, Double.class);
-//		for (double x = 1.0; x <= 400.0; x *= 1.5) {
-//			double x2 = x/5.0;
-//			data.add(x2, -Math.sqrt(x2) + 5.0,  5.0*Math.log10(x2),
-//				random.nextDouble() + 1.0, random.nextDouble() + 0.5, 1.0 + 2.0*random.nextDouble());
-//		}
-//
-//		// Create data series
-//		DataSeries series1 = new DataSeries(data, 0, 2, 3, 4);
-//		DataSeries series2 = new DataSeries(data, 0, 1, 5);
-
-//DataTable dataTable1 = new DataTable(Integer.class,Integer.class);
-//DataTable dataTable2 = new DataTable(Integer.class,Integer.class);
-//for(int i=0;i<100;i++)
-//{	dataTable1.add(i,(int)Math.round(Math.random()*100));
-//	dataTable2.add(i,(int)Math.round(Math.random()*100));
-//}
-//DataSeries series1 = new DataSeries(dataTable1, 0, 1);
-//DataSeries series2 = new DataSeries(dataTable2, 0, 1);
-		
+				
 		// Create new xy-plot
-		XYPlot plot = new XYPlot();
+		plot = new XYPlot();
 		for(DataSeries dataSerie: dataSeries)
 			plot.add(dataSerie);
 
 		// Format plot
-//		plot.setInsets(new Insets2D.Double(20.0, 40.0, 40.0, 40.0));
 		plot.setSetting(XYPlot.BACKGROUND, GuiTools.COLOR_COMMON_BACKGROUND);
-//		plot.setSetting(XYPlot.TITLE, "Descriptionnn");
-
-		// Format plot area
-//		plot.getPlotArea().setSetting(PlotArea.BACKGROUND, new RadialGradientPaint(
-//			new Point2D.Double(0.5, 0.5),
-//			0.75f,
-//			new float[] { 0.6f, 0.8f, 1.0f },
-//			new Color[] { new Color(0, 0, 0, 0), new Color(0, 0, 0, 32), new Color(0, 0, 0, 128) }
-//		));
 		plot.getPlotArea().setSetting(PlotArea.BACKGROUND, null);
 		plot.getPlotArea().setSetting(PlotArea.BORDER, null);
 
@@ -256,13 +309,7 @@ tempPanel.setMinimumSize(dim);
 		AxisRenderer axisRendererX = plot.getAxisRenderer(XYPlot.AXIS_X);
 		AxisRenderer axisRendererY = plot.getAxisRenderer(XYPlot.AXIS_Y);
 		axisRendererX.setSetting(AxisRenderer.LABEL, "Time");
-//		BasicStroke stroke = new BasicStroke(2f);
-//		axisRendererX.setSetting(AxisRenderer.SHAPE_STROKE, stroke);
 		axisRendererY.setSetting(AxisRenderer.LABEL, "Bombs");
-		// Change intersection point of Y axis
-//		axisRendererY.setSetting(AxisRenderer.INTERSECTION, 1.0);
-		// Change tick spacing
-//		axisRendererX.setSetting(AxisRenderer.TICKS_SPACING, 2.0);
         Map<Double, String> labels = new HashMap<Double, String>();
 		for(int i=0;i<ids.size();i++)
 		{	String id = ids.get(i);
@@ -272,7 +319,7 @@ tempPanel.setMinimumSize(dim);
 			for(Long time: elim)
 				labels.put(time.doubleValue(), name);
 		}
-		axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
+//		axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
 
 		// set format
 		Shape circle = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
@@ -296,17 +343,174 @@ tempPanel.setMinimumSize(dim);
 			plot.setLineRenderer(dataSerie, lineRenderer);
 		}
 		
-		// Add plot to Swing component
-		EmptyContentPanel dataPanel = getDataPanel();
-		dataPanel.remove(tempPanel);
-		tempPanel = new InteractivePanel(plot);
-		dataPanel.add(tempPanel, BorderLayout.CENTER);		
+		// Add plot to this panel
+		insertPlotPanel();
 	}
 	
+	/**
+	 * Inserts the plot panel into
+	 * this table panel, at the
+	 * appropriate position.
+	 */
+	private void insertPlotPanel()
+	{	Column cl = getColumn(COL_PLOT);
+		cl.removeAll();
+		JPanel tempPanel = new InteractivePanel(plot);
+		tempPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		Dimension dim = new Dimension(plotWidth,getDataHeight());
+		tempPanel.setPreferredSize(dim);
+		tempPanel.setMaximumSize(dim);
+		tempPanel.setMinimumSize(dim);
+		cl.add(tempPanel);
+	}
+	
+	/**
+	 * Updates this panel
+	 * (called after a change, unlikely for rounds)
+	 */
 	public void refresh()
 	{	setRound(round);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SCORES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Line for the number of times bombed by other players */
+	private final static int LINE_BOMBEDS = 0;
+	/** Line for the number of times the player bombed himself */
+	private final static int LINE_SELFBOMBINGS = 1;
+	/** Line for the number of other players bombed */
+	private final static int LINE_BOMBINGS = 2;
+	/** Line for the time played */
+	private final static int LINE_TIME = 3;
+	/** Line for the number of items picked up */
+	private final static int LINE_ITEMS = 4;
+	/** Line for the number of bombs dropped */
+	private final static int LINE_BOMBS = 5;
+	/** Line for the number of tiles painted */
+	private final static int LINE_PAINTINGS = 6;
+	/** Line for the number of crowns picked up */
+	private final static int LINE_CROWNS = 7;
+//	/** Line for the number of points scored */
+//	private final static int LINE_POINTS = 8;
+	/** Column number of the score buttons */
+	private final static int COL_SCORES = 0;
+	/** Width of the score buttons */
+	private int scoreWidth;
+	/** Height of the first score button */
+	private int scoreFirstLineHeight;
+	/** Type of data currently displayed in the plot */
+	private Score selectedScore = Score.BOMBS;
+	
+	/**
+	 * Changes the currently displayed score.
+	 * 
+	 * @param score
+	 * 		New score to display in the plot.
+	 */
+	public void setScore(Score score)
+	{	selectedScore = score;
+		updatePlot();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COLORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Column number of the color buttons */
+	private final static int COL_COLORS = 2;
+	/** Width of the color buttons */
+	private int colorWidth;
+	/** Height of the the first color button */
+	private int colorFirstLineHeight;
+	/** Height of the the last color button */
+	private int colorLastLineHeight;
+	/** Colors of the players displayed in the plot */
+	private List<PredefinedColor> selectedColors = new ArrayList<PredefinedColor>();
+	/** Colors used by the players of this round */
+	private List<PredefinedColor> playerColors = new ArrayList<PredefinedColor>();
+	
+	/**
+	 * Hide/show the player corresponding to the specified
+	 * color.
+	 * 
+	 * @param color
+	 * 		Color of the player to hide/show.
+	 */
+	public void switchColor(PredefinedColor color)
+	{	List<PredefinedColor> colors = Arrays.asList(PredefinedColor.values());
+		Color c = color.getColor();
+		int line = colors.indexOf(color);
+		if(selectedColors.contains(color))
+		{	int index = playerColors.indexOf(color);
+			selectedColors.remove(color);
+			Color bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+			setLabelBackground(line,COL_COLORS,bg);
+			List<DataSource> dataSources = plot.getData();
+			if(dataSources!=null && !dataSources.isEmpty())
+				plot.setVisible(dataSources.get(index), false);
+		}
+		else if(playerColors.contains(color))
+		{	int index = playerColors.indexOf(color);
+			selectedColors.add(color);
+			Color bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
+			setLabelBackground(line,COL_COLORS,bg);
+			List<DataSource> dataSources = plot.getData();
+			if(dataSources!=null && !dataSources.isEmpty())
+				plot.setVisible(dataSources.get(index), true);
+		}
+		
+		if(round!=null)
+		{	// TODO display/hide the corresponding series
+			
+		}
+	}
+	
+	/**
+	 * Draws the color buttons when the
+	 * round is changed.
+	 */
+	private void updateColorButtons()
+	{	// init colors
+		PredefinedColor colors[] = PredefinedColor.values();
+		playerColors.clear();
+		List<Profile> profiles = round.getProfiles();
+		for(Profile profile: profiles)
+		{	PredefinedColor color = profile.getSpriteColor();
+			playerColors.add(color);
+		}
+		
+		Column cl = getColumn(COL_COLORS);
+		for(int line=0;line<cl.getLineCount();line++)
+		{	MyLabel label = getLabel(line,COL_COLORS);
+			PredefinedColor color = colors[line];
+			Color c = color.getColor();
+			String text = null;
+			String tooltip = null;
+			Color bg = null;
+			int index = playerColors.indexOf(color);
+			if(index==-1)
+			{	label.setMouseSensitive(false);
+				bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			}
+			else
+			{	label.setMouseSensitive(true);
+				bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				String colorKey = color.toString();
+				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+				colorKey = GuiKeys.COMMON_COLOR+colorKey;
+				String colorStr = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey);
+				String playerStr = profiles.get(index).getName();
+				text = colorStr + " - " + playerStr;
+				tooltip = text;
+				if(selectedColors.contains(color))
+					bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
+			}
+			setLabelBackground(line,COL_COLORS,bg);
+			setLabelText(line,COL_COLORS,text,tooltip);
+			label.validate();
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -327,7 +531,24 @@ tempPanel.setMinimumSize(dim);
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
+	{	int[] pos = {0,COL_PLOT};
+		if(e.getComponent() instanceof MyLabel)
+		{	MyLabel label = (MyLabel)e.getComponent();
+			pos = getLabelPosition(label);
+		}
+		
+		// scores
+		if(pos[1]==COL_SCORES)
+		{
+			
+		}
+
+		// colors
+		if(pos[1]==COL_COLORS)
+		{	PredefinedColor colors[] = PredefinedColor.values();
+			PredefinedColor color = colors[pos[0]];
+			switchColor(color);
+		}
 	}
 	
 	@Override
