@@ -410,7 +410,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_CONSTANT,
 				GuiKeys.COMMON_POINTS_MATCH_HEADER_CONSTANT,
-				GuiKeys.COMMON_POINTS_ROUND_HEADER_CONSTANT
+				GuiKeys.COMMON_POINTS_ROUND_HEADER_CONSTANT,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_POINTS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -900,7 +901,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_BOMBS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_BOMBS,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBS
+				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBS,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -944,7 +946,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_CROWNS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_CROWNS,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_CROWNS
+				GuiKeys.COMMON_POINTS_ROUND_DATA_CROWNS,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_CROWNS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -960,7 +963,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_BOMBEDS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_BOMBEDS,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBEDS
+				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBEDS,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBEDS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1068,7 +1072,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_ITEMS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_ITEMS,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_ITEMS
+				GuiKeys.COMMON_POINTS_ROUND_DATA_ITEMS,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_ITEMS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1077,7 +1082,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_BOMBINGS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_BOMBINGS,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBINGS
+				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBINGS,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBINGS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1184,7 +1190,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_PAINTINGS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_PAINTINGS,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_PAINTINGS
+				GuiKeys.COMMON_POINTS_ROUND_DATA_PAINTINGS,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_PAINTINGS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1322,7 +1329,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_MATCH_DATA_SELF_BOMBINGS,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_SELF_BOMBINGS,
-				GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_SELF_BOMBINGS
+				GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_SELF_BOMBINGS,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_SELF_BOMBINGS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1352,7 +1360,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_TIME,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_TIME,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_TIME
+				GuiKeys.COMMON_POINTS_ROUND_DATA_TIME,
+				GuiKeys.COMMON_EVOLUTION_BUTTON_TIME
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1624,8 +1633,9 @@ public class GuiTools
 		int b = color.getBlue();
 		int a = color.getAlpha();
 		int newAlpha = a + delta;
-		if(newAlpha>0 && newAlpha<255)
-			result = new Color(r,g,b,newAlpha);
+		newAlpha = Math.max(0,newAlpha);
+		newAlpha = Math.min(newAlpha,255);
+		result = new Color(r,g,b,newAlpha);
 		return result;
 	}
 	
