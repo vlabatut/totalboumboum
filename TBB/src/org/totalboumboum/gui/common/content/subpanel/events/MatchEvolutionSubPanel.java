@@ -333,11 +333,11 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 //					labels.put(time.doubleValue(), name);
 //			}
 //			axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
-	        Map<Integer, String> labels = new HashMap<Integer, String>();
+	        Map<Double, String> labels = new HashMap<Double, String>();
 			String prefix = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_EVOLUTION_LABEL_ROUND_PREFIX);
 			for(int i=0;i<statisticRounds.size();i++)
 			{	String label = prefix + (i+1);
-				labels.put(i+1,label);
+				labels.put((double)(i+1),label);
 			}
 			axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
 	
