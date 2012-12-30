@@ -148,7 +148,7 @@ public class CupTournament extends AbstractTournament
 		
 		else if(sortPlayers==CupPlayerSort.SEEDS)
 		{	CupLeg firstLeg = legs.get(0);
-			firstLeg.simulatePlayerProgression(playersdistribution);
+			firstLeg.simulatePlayerProgression(new ArrayList<Integer>(playersdistribution));
 			simulatePlayerFinalRank();
 		
 			// use first leg detailed progression to sort profiles list
@@ -457,34 +457,39 @@ for(ArrayList<Integer> list: permutations)
 			Iterator<CupPart> it = remainingParts.iterator();
 			while(it.hasNext())
 			{	CupPart part = it.next();
-				if(part.getRank()==partRank)
+				int tempRank = part.getRank();
+				if(tempRank==0)
+					it.remove();
+				else if(part.getRank()==partRank)
 				{	templist.add(part);
 					it.remove();
 				}
 			}
 			// process players ranks
-			int count;
-			int localRank = 1;
-			boolean stop = false;
-			do
-			{	count = 0;
-				it = templist.iterator();
-				while(it.hasNext())
-				{	CupPart part = it.next();
-					int cnt = part.processPlayerFinalRank(localRank,playerRank);
-					if(cnt<0)
-						stop = true;
-					else
-						count = count + cnt;
+			if(!templist.isEmpty())
+			{	int count;
+				int localRank = 1;
+				boolean stop = false;
+				do
+				{	count = 0;
+					it = templist.iterator();
+					while(it.hasNext())
+					{	CupPart part = it.next();
+						int cnt = part.processPlayerFinalRank(localRank,playerRank);
+						if(cnt<0)
+							stop = true;
+						else
+							count = count + cnt;
+					}
+					playerRank = playerRank + count;
+					localRank++;
 				}
-				playerRank = playerRank + count;
-				localRank++;
+				while(!stop);
+				
+				partRank++;
+				if(partRank>totalPartCount)
+					partRank = 0;
 			}
-			while(!stop);
-			
-			partRank++;
-			if(partRank>totalPartCount)
-				partRank = 0;
 		}
 	
 		// retrieve the list of all entry players in the tournament

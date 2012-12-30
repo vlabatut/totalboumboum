@@ -848,6 +848,12 @@
 				<text name="SelfBombings" value="Auto-bombages" tooltip="Nombre de fois que le joueur s'est auto-éliminé" />
 				<text name="Time" value="Temps" tooltip="Temps de jeu" />
 			</group>
+			<group name="Label">
+				<text name="Match" value="Rencontre" tooltip="Rencontres jouées" />
+				<text name="MatchPrefix" value="R" tooltip="Rencontre" />
+				<text name="Round" value="Manche" tooltip="Manches jouées" />
+				<text name="RoundPrefix" value="M" tooltip="Manche" />
+			</group>
 		</group>
 								
 <!-- GAME INFO -->

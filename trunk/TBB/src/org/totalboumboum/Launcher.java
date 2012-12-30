@@ -1635,12 +1635,12 @@ public class Launcher
 	 */
 
 /**
- * TODO utiliser les softwalls de couleur
  * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
- * 		(avec bordure de sol différente (?)
+ * 		(avec bordure de sol différente (?) >> avec hardwalls con logo GSU
  */
 
 // TODO ajouter la nvelle bibli chart au changelog
 // TODO utilite dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de preferences ?
 // TODO plot glicko-2 : évolution du classement. pareil pour les différents scores.
-// TODO ajouter un bouton "position" dans les plots d'évolution
+// TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
+// TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?

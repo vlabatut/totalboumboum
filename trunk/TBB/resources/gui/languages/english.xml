@@ -850,6 +850,12 @@
 				<text name="SelfBombings" value="Self-bombings"  tooltip="Number of times the player bombed himself" />
 				<text name="Time" value="Time" tooltip="Time played" />
 			</group>
+			<group name="Label">
+				<text name="Match" value="Match" tooltip="Matches played" />
+				<text name="MatchPrefix" value="M" tooltip="Match" />
+				<text name="Round" value="Round" tooltip="Rounds played" />
+				<text name="RoundPrefix" value="R" tooltip="Round" />
+			</group>
 		</group>
 								
 <!-- GAME INFO -->

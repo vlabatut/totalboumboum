@@ -97,7 +97,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
 	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
-buttonStatistics.setEnabled(false);		
+//buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonRound = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonWidth,buttonHeight,1,this);
@@ -451,6 +451,7 @@ buttonStatistics.setEnabled(false);
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	matchResults.refresh();
+				matchStatistics.refresh();
 //				saveTournament();
 				buttonResults.doClick();
 			}
