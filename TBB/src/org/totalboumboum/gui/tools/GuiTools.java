@@ -410,8 +410,7 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_CONSTANT,
 				GuiKeys.COMMON_POINTS_MATCH_HEADER_CONSTANT,
-				GuiKeys.COMMON_POINTS_ROUND_HEADER_CONSTANT,
-				GuiKeys.COMMON_EVOLUTION_BUTTON_POINTS
+				GuiKeys.COMMON_POINTS_ROUND_HEADER_CONSTANT
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1244,6 +1243,13 @@ public class GuiTools
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION_PLUS,
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY_PLUS,
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_PLUS
+			};
+			loadTableImages(folder,uses);
+		}
+		// points
+		{	String folder = baseFolder+GuiFileTools.FILE_POINTS;
+			String[] uses =
+			{	GuiKeys.COMMON_EVOLUTION_BUTTON_POINTS
 			};
 			loadTableImages(folder,uses);
 		}

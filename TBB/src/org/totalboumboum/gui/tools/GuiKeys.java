@@ -284,6 +284,8 @@ public class GuiKeys
 	/** Individual word used to define GUI keys */
 	public static final String ITEMSET = "Itemset";
 	/** Individual word used to define GUI keys */
+	public static final String LABEL = "Label";
+	/** Individual word used to define GUI keys */
 	public static final String LANGUAGE = "Language";
 	/** Individual word used to define GUI keys */
 	public static final String LAST_STANDING = "LastStanding";
@@ -393,6 +395,8 @@ public class GuiKeys
 	public static final String PORTRAIT = "Portrait";
 	/** Individual word used to define GUI keys */
 	public static final String PREFERRED = "Preferred";
+	/** Individual word used to define GUI keys */
+	public static final String PREFIX = "Prefix";
 	/** Individual word used to define GUI keys */
 	public static final String PREVIEW = "Preview";
 	/** Individual word used to define GUI keys */
@@ -1354,6 +1358,12 @@ public class GuiKeys
 		public static final String COMMON_EVOLUTION_BUTTON_SELF_BOMBINGS = COMMON_EVOLUTION_BUTTON+SELF+BOMBINGS;
 		public static final String COMMON_EVOLUTION_BUTTON_TIME = COMMON_EVOLUTION_BUTTON+TIME;
 		public static final String COMMON_EVOLUTION_BUTTON_POINTS = COMMON_EVOLUTION_BUTTON+POINTS;
+		/** BUTTON */
+		public static final String COMMON_EVOLUTION_LABEL = COMMON_EVOLUTION+LABEL;
+		public static final String COMMON_EVOLUTION_LABEL_MATCH = COMMON_EVOLUTION_LABEL+MATCH;
+		public static final String COMMON_EVOLUTION_LABEL_MATCH_PREFIX = COMMON_EVOLUTION_LABEL+MATCH+PREFIX;
+		public static final String COMMON_EVOLUTION_LABEL_ROUND = COMMON_EVOLUTION_LABEL+ROUND;
+		public static final String COMMON_EVOLUTION_LABEL_ROUND_PREFIX = COMMON_EVOLUTION_LABEL+ROUND+PREFIX;
 		
 	/** GAME INFO */
 	public static final String COMMON_GAME_INFO = COMMON+GAME+INFO;

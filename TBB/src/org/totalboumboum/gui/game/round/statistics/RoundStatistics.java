@@ -22,23 +22,31 @@ package org.totalboumboum.gui.game.round.statistics;
  */
 
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.gui.common.content.subpanel.events.BombEventsRoundSubPanel;
-import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.events.RoundEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
+ * This class was designed to display
+ * plots describing the evolution of
+ * a round.
  * 
  * @author Vincent Labatut
  *
  */
 public class RoundStatistics extends EntitledDataPanel
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
-	private BombEventsRoundSubPanel eventsPanel;
-
+	/**
+	 * Builds a standard panel to display
+	 * plots describing the evolution of
+	 * a round.
+	 * 
+	 * @param container
+	 * 		The GUI component containing this panel.
+	 */
 	public RoundStatistics(SplitMenuPanel container)
 	{	super(container);
 
@@ -47,23 +55,37 @@ public class RoundStatistics extends EntitledDataPanel
 		setTitleKey(key);
 	
 		// data
-		{	eventsPanel = new BombEventsRoundSubPanel(dataWidth,dataHeight);
-//			eventsPanel.setShowConfrontations(false);
-//			eventsPanel.setShowTotal(false);
-			setDataPart(eventsPanel);
+		{	evolutionPanel = new RoundEvolutionSubPanel(dataWidth,dataHeight);
+			setDataPart(evolutionPanel);
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** The round displayed in this panel */
 	private Round round;
 
+	/**
+	 * Changes the round displayed in this
+	 * panel, and updates all concerned GUI
+	 * components.
+	 * 
+	 * @param round
+	 * 		The new round to display.
+	 */
 	public void setRound(Round round)
 	{	this.round = round;
-		eventsPanel.setRound(round);
+		evolutionPanel.setRound(round);
 	}
 	
+	/**
+	 * Returns the round currently
+	 * displayed.
+	 * 
+	 * @return
+	 * 		The current round.
+	 */
 	public Round getRound()
 	{	return round;	
 	}
@@ -71,6 +93,9 @@ public class RoundStatistics extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel used to display the plot */
+	private RoundEvolutionSubPanel evolutionPanel;
+
 	@Override
 	public void refresh()
 	{	setRound(round);

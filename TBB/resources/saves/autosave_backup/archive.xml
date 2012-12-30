@@ -19,12 +19,18 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Qualification du tournoi 2012/13" type="SINGLE" />
-	<played matches="0" rounds="20" />
-	<dates start="2012-12-27T23:37:45" save="2012-12-27T23:57:33" />
+	<tournament name="Tournoi de Galatasaray VI" type="CUP" />
+	<played matches="0" rounds="4" />
+	<dates start="2012-12-30T23:05:09" save="2012-12-30T23:22:50" />
 	<players>
-		<player name="1213.Erdem+Tayyar" />
-		<player name="Promeneur" />
+		<player name="0809.Tırtıl+Tomruk" />
+		<player name="1011.Çalışkan+Seven" />
+		<player name="1011.Özdöker+Özen" />
+		<player name="1112.Ünlü+Yıldırım" />
+		<player name="0809.Erişik+Pektaş" />
+		<player name="1112.Güngör+Kavuz" />
+		<player name="1112.İlter+Kaya" />
+		<player name="1011.Kayuka+Yıldırım" />
 	</players>
 </archive>
 

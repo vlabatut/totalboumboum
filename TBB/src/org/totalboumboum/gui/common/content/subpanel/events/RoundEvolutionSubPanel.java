@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
@@ -73,7 +72,7 @@ import de.erichseifert.gral.ui.InteractivePanel;
  * 
  * @author Vincent Labatut
  */
-public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseListener
+public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseListener
 {	/** Class id for serialization */
 	private static final long serialVersionUID = 1L;
 	
@@ -85,7 +84,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 	 * @param height
 	 * 		Height of the panel in pixels.
 	 */
-	public BombEventsRoundSubPanel(int width, int height)
+	public RoundEvolutionSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,3);
 		
 		// sizes
@@ -216,6 +215,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 			updateColorButtons();
 		}
 		
+		updateScoreButtons(selectedScore);
 		updatePlot();
 	}
 	
@@ -242,19 +242,19 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 			List<String> ids = statisticRound.getPlayersIds();
 			Map<String,Integer> series = new HashMap<String,Integer>();
 			List<DataTable> dataTables = new ArrayList<DataTable>();
-			List<Integer> counts = new ArrayList<Integer>();
+			List<Long> counts = new ArrayList<Long>();
 			List<List<Long>> eliminations = new ArrayList<List<Long>>();
 			for(int i=0;i<ids.size();i++)
 			{	String id = ids.get(i);
 				series.put(id,i);
 				@SuppressWarnings("unchecked")
-				DataTable dataTable = new DataTable(Long.class, Integer.class);
-				dataTable.add(0l,0);
+				DataTable dataTable = new DataTable(Long.class, Long.class);
+				dataTable.add(0l,0l);
 				dataTables.add(dataTable);
 				if(selectedScore==Score.TIME)
-					counts.add(1);
+					counts.add(1l);
 				else
-					counts.add(0);
+					counts.add(0l);
 				eliminations.add(new ArrayList<Long>());
 			}
 			
@@ -275,9 +275,9 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						String targetId = event.getTargetId();
-						if(!actorId.equals(targetId))
+						if(actorId==null || !actorId.equals(targetId))
 						{	int index = series.get(targetId);
-							int count = counts.get(index);
+							long count = counts.get(index);
 							count++;
 							counts.set(index, count);
 							DataTable dataTable = dataTables.get(index);
@@ -292,9 +292,9 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						String targetId = event.getTargetId();
-						if(!actorId.equals(targetId))
+						if(actorId!=null && !actorId.equals(targetId))
 						{	int index = series.get(actorId);
-							int count = counts.get(index);
+							long count = counts.get(index);
 							count++;
 							counts.set(index, count);
 							DataTable dataTable = dataTables.get(index);
@@ -309,7 +309,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						int index = series.get(actorId);
-						int count = counts.get(index);
+						long count = counts.get(index);
 						count++;
 						counts.set(index, count);
 						DataTable dataTable = dataTables.get(index);
@@ -323,17 +323,17 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						int index = series.get(actorId);
-						int count = counts.get(index);
+						long count = counts.get(index);
 						count++;
 						counts.set(index, count);
 						DataTable dataTable = dataTables.get(index);
 						dataTable.add(time,count);
 					}
 					else if(action==StatisticAction.LOSE_CROWN)
-						{	long time = event.getTime();
+					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						int index = series.get(actorId);
-						int count = counts.get(index);
+						long count = counts.get(index);
 						if(count>0)
 						{	count--;
 							counts.set(index, count);
@@ -349,7 +349,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						int index = series.get(actorId);
-						int count = counts.get(index);
+						long count = counts.get(index);
 						count++;
 						counts.set(index, count);
 						DataTable dataTable = dataTables.get(index);
@@ -359,7 +359,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 						{	long time = event.getTime();
 						String actorId = event.getActorId();
 						int index = series.get(actorId);
-						int count = counts.get(index);
+						long count = counts.get(index);
 						if(count>0)
 						{	count--;
 							counts.set(index, count);
@@ -375,7 +375,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						int index = series.get(actorId);
-						int count = counts.get(index);
+						long count = counts.get(index);
 						count++;
 						counts.set(index, count);
 						DataTable dataTable = dataTables.get(index);
@@ -385,7 +385,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 						{	long time = event.getTime();
 						String actorId = event.getActorId();
 						int index = series.get(actorId);
-						int count = counts.get(index);
+						long count = counts.get(index);
 						if(count>0)
 						{	count--;
 							counts.set(index, count);
@@ -401,9 +401,9 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						String targetId = event.getTargetId();
-						if(actorId.equals(targetId))
+						if(actorId!=null && actorId.equals(targetId))
 						{	int index = series.get(actorId);
-							int count = counts.get(index);
+							long count = counts.get(index);
 							count++;
 							counts.set(index, count);
 							DataTable dataTable = dataTables.get(index);
@@ -418,19 +418,20 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					{	long time = event.getTime();
 						String actorId = event.getActorId();
 						String targetId = event.getTargetId();
+						if(actorId!=null)
 						{	int index = series.get(actorId);
-							int count = counts.get(index);
+							long count = counts.get(index);
 							if(count>0)
-							{	count = (int)time;
+							{	count = time;
 								counts.set(index, count);
 								DataTable dataTable = dataTables.get(index);
 								dataTable.add(time,count);
 							}
 						}
-						if(!actorId.equals(targetId))
+						if(actorId==null || !actorId.equals(targetId))
 						{	int index = series.get(targetId);
-							int count = counts.get(index);
-							count = (int)time;
+							long count = counts.get(index);
+							count = time;
 							counts.set(index, count);
 							DataTable dataTable = dataTables.get(index);
 							dataTable.add(time,count);
@@ -450,8 +451,8 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 						List<Long> elim = eliminations.get(index);
 						elim.add(time);
 						DataTable dataTable = dataTables.get(index);
-						counts.set(index,0);
-						dataTable.add(time,0);
+						counts.set(index,0l);
+						dataTable.add(time,0l);
 					}
 				}
 			}
@@ -461,16 +462,16 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 			for(DataTable dataTable: dataTables)
 			{	int last = dataTable.getRowCount() - 1;
 				long time = (Long)dataTable.get(0,last);
-				int value = (Integer)dataTable.get(1,last);
+				long value = (Long)dataTable.get(1,last);
 				if(time<totalTime && value!=0)
 				{	if(selectedScore==Score.TIME)
-						dataTable.add(totalTime,(int)totalTime);
+						dataTable.add(totalTime,totalTime);
 					else
 						dataTable.add(totalTime,value);
 				}
 				else if(time==0)
 				{	if(selectedScore==Score.TIME)
-						dataTable.add(totalTime,(int)totalTime);
+						dataTable.add(totalTime,totalTime);
 				}
 			}
 			
@@ -555,7 +556,8 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 	private void insertPlotPanel()
 	{	Column cl = getColumn(COL_PLOT);
 		cl.removeAll();
-		JPanel tempPanel = new InteractivePanel(plot);
+		InteractivePanel tempPanel = new InteractivePanel(plot);
+		tempPanel.setPopupMenuEnabled(false);
 		tempPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		Dimension dim = new Dimension(plotWidth,getDataHeight());
 		tempPanel.setPreferredSize(dim);
@@ -626,6 +628,19 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 	 * 		New score to display in the plot.
 	 */
 	private void setScore(Score score)
+	{	if(score!=selectedScore)
+		{	updateScoreButtons(score);
+			updatePlot();
+		}
+	}
+	
+	/**
+	 * Updates the state of the score buttons.
+	 * 
+	 * @param score
+	 * 		New selected score.
+	 */
+	private void updateScoreButtons(Score score)
 	{	// unselected previously selected score
 		if(selectedScore!=null)
 		{	int pos = getLineForScore(selectedScore);
@@ -638,9 +653,6 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 		int pos = getLineForScore(selectedScore);
 		Color bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 		setLabelBackground(pos,COL_SCORES,bg);
-		
-		// update data
-		updatePlot();
 	}
 	
 	/**
