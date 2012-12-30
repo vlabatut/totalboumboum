@@ -524,7 +524,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 		Temps écoulé, exprimé en ms.
 	 */
 	public final long getCurrentTime()
-	{	long result = RoundVariables.loop.getTotalEngineTime();
+	{	//long result = RoundVariables.loop.getTotalEngineTime();
+		long result = RoundVariables.loop.getTotalRealTime(); // otherwise, agents with short process times appear to have zero durations
 		return result;
 	}
 	
