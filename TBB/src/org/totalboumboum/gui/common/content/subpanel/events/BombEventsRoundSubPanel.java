@@ -61,6 +61,7 @@ import de.erichseifert.gral.plots.XYPlot;
 import de.erichseifert.gral.plots.axes.AxisRenderer;
 import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
+import de.erichseifert.gral.plots.lines.SmoothLineRenderer2D;
 import de.erichseifert.gral.plots.points.DefaultPointRenderer2D;
 import de.erichseifert.gral.plots.points.PointRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
@@ -119,16 +120,6 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 				cl.setDim(colorWidth,getDataHeight());
 				for(int i=1;i<scoreLines;i++)
 					cl.addLabel(0);
-				Map<Integer,String> keys = new HashMap<Integer, String>();
-				keys.put(LINE_BOMBEDS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBEDS);
-				keys.put(LINE_SELFBOMBINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_SELF_BOMBINGS);
-				keys.put(LINE_BOMBINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBINGS);
-				keys.put(LINE_TIME, GuiKeys.COMMON_EVOLUTION_BUTTON_TIME);
-				keys.put(LINE_ITEMS, GuiKeys.COMMON_EVOLUTION_BUTTON_ITEMS);
-				keys.put(LINE_BOMBS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBS);
-				keys.put(LINE_PAINTINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_PAINTINGS);
-				keys.put(LINE_CROWNS, GuiKeys.COMMON_EVOLUTION_BUTTON_CROWNS);
-				//keys.put(LINE_POINTS, GuiKeys.COMMON_EVOLUTION_BUTTON_POINTS);
 				
 				for(int line=0;line<scoreLines;line++)
 				{	int h = scoreWidth;
@@ -138,15 +129,22 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 					cl.setLabelPreferredHeight(line,h);
 					cl.setLabelMaxHeight(line,h);
 					MyLabel label = cl.getLabel(line);
-					String key = keys.get(line);
+					String key = SCORE_KEYS.get(line);
 					label.setKey(key,true);
 					label.setHorizontalAlignment(JLabel.CENTER);
 					label.setVerticalAlignment(JLabel.CENTER);
-					label.addMouseListener(this);
-					label.setMouseSensitive(true);
+					Color bg;
+					if(line==LINE_CROWNS || line==LINE_PAINTINGS)
+					{	label.setMouseSensitive(false);
+						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+					}
+					else
+					{	label.addMouseListener(this);
+						label.setMouseSensitive(true);
+						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					}
+					label.setBackground(bg);
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				cl.setBackgroundColor(bg);
 			}
 			
 			// plot
@@ -186,6 +184,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 			}
 		}
 		
+		setScore(Score.BOMBS);
 //		updatePlot();
 	}
 	
@@ -235,116 +234,317 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 	 * current parameters : round, colors, score.
 	 */
 	private void updatePlot()
-	{	AbstractTournament tournament = round.getMatch().getTournament();
-		
-		// init player data
-		StatisticRound statisticRound = round.getStats();
-		List<String> ids = statisticRound.getPlayersIds();
-		Map<String,Integer> series = new HashMap<String,Integer>();
-		List<DataTable> dataTables = new ArrayList<DataTable>();
-		List<Integer> counts = new ArrayList<Integer>();
-		List<List<Long>> eliminations = new ArrayList<List<Long>>();
-		for(int i=0;i<ids.size();i++)
-		{	String id = ids.get(i);
-			series.put(id,i);
-			@SuppressWarnings("unchecked")
-			DataTable dataTable = new DataTable(Long.class, Integer.class);
-			dataTables.add(dataTable);
-			counts.add(0);
-			eliminations.add(new ArrayList<Long>());
-		}
-		
-		// init player colors
-		List<PredefinedColor> colors = new ArrayList<PredefinedColor>();
-		for(String id: ids)
-		{	Profile profile = tournament.getProfileById(id);
-			colors.add(profile.getSpriteColor());
-		}
-		
-		// setting data model
-		List<StatisticEvent> events = statisticRound.getStatisticEvents();
-		for(StatisticEvent event: events)
-		{	StatisticAction action = event.getAction();
-			if(action==StatisticAction.DROP_BOMB)
-			{	long time = event.getTime();
-				String actorId = event.getActorId();
-				int index = series.get(actorId);
-				int count = counts.get(index);
-				count++;
-				counts.set(index, count);
-				DataTable dataTable = dataTables.get(index);
-				dataTable.add(time,count);
-			}
-			else if(action==StatisticAction.BOMB_PLAYER)
-			{	long time = event.getTime();
-				String targetId = event.getTargetId();
-				int index = series.get(targetId);
-				List<Long> elim = eliminations.get(index);
-				elim.add(time);
-				counts.set(index, 0);
-				DataTable dataTable = dataTables.get(index);
-				dataTable.add(time,0);
-			}
-				
-		}
-		
-		// creating series
-		List<DataSeries> dataSeries = new ArrayList<DataSeries>();
-		for(DataTable dataTable: dataTables)
-		{	DataSeries dataSerie = new DataSeries(dataTable, 0, 1);
-			dataSeries.add(dataSerie);
-		}
-				
-		// Create new xy-plot
-		plot = new XYPlot();
-		for(DataSeries dataSerie: dataSeries)
-			plot.add(dataSerie);
-
-		// Format plot
-		plot.setSetting(XYPlot.BACKGROUND, GuiTools.COLOR_COMMON_BACKGROUND);
-		plot.getPlotArea().setSetting(PlotArea.BACKGROUND, null);
-		plot.getPlotArea().setSetting(PlotArea.BORDER, null);
-
-		// Format axes
-		AxisRenderer axisRendererX = plot.getAxisRenderer(XYPlot.AXIS_X);
-		AxisRenderer axisRendererY = plot.getAxisRenderer(XYPlot.AXIS_Y);
-		axisRendererX.setSetting(AxisRenderer.LABEL, "Time");
-		axisRendererY.setSetting(AxisRenderer.LABEL, "Bombs");
-        Map<Double, String> labels = new HashMap<Double, String>();
-		for(int i=0;i<ids.size();i++)
-		{	String id = ids.get(i);
-			Profile profile = tournament.getProfileById(id);
-			String name = profile.getName();
-			List<Long> elim = eliminations.get(i);
-			for(Long time: elim)
-				labels.put(time.doubleValue(), name);
-		}
-//		axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
-
-		// set format
-		Shape circle = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
-		BasicStroke stroke = new BasicStroke(2f);
-		for(int i=0;i<ids.size();i++)
-		{	DataSeries dataSerie = dataSeries.get(i);
-			Color color = colors.get(i).getColor();
+	{	if(round!=null)
+		{	AbstractTournament tournament = round.getMatch().getTournament();
 			
-			// Format rendering of data points
-			PointRenderer pointRenderer = new DefaultPointRenderer2D();
-			pointRenderer.setSetting(PointRenderer.SHAPE, circle);
-			pointRenderer.setSetting(PointRenderer.COLOR, color);
-			plot.setPointRenderer(dataSerie, pointRenderer);
+			// init player data
+			StatisticRound statisticRound = round.getStats();
+			List<String> ids = statisticRound.getPlayersIds();
+			Map<String,Integer> series = new HashMap<String,Integer>();
+			List<DataTable> dataTables = new ArrayList<DataTable>();
+			List<Integer> counts = new ArrayList<Integer>();
+			List<List<Long>> eliminations = new ArrayList<List<Long>>();
+			for(int i=0;i<ids.size();i++)
+			{	String id = ids.get(i);
+				series.put(id,i);
+				@SuppressWarnings("unchecked")
+				DataTable dataTable = new DataTable(Long.class, Integer.class);
+				dataTable.add(0l,0);
+				dataTables.add(dataTable);
+				if(selectedScore==Score.TIME)
+					counts.add(1);
+				else
+					counts.add(0);
+				eliminations.add(new ArrayList<Long>());
+			}
+			
+			// init player colors
+			List<PredefinedColor> colors = new ArrayList<PredefinedColor>();
+			for(String id: ids)
+			{	Profile profile = tournament.getProfileById(id);
+				colors.add(profile.getSpriteColor());
+			}
+			
+			// setting data model
+			List<StatisticEvent> events = statisticRound.getStatisticEvents();
+			for(StatisticEvent event: events)
+			{	StatisticAction action = event.getAction();
+				// bombeds
+				if(selectedScore==Score.BOMBEDS)
+				{	if(action==StatisticAction.BOMB_PLAYER)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						String targetId = event.getTargetId();
+						if(!actorId.equals(targetId))
+						{	int index = series.get(targetId);
+							int count = counts.get(index);
+							count++;
+							counts.set(index, count);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+					}
+				}
+				
+				// bombings
+				else if(selectedScore==Score.BOMBINGS)
+				{	if(action==StatisticAction.BOMB_PLAYER)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						String targetId = event.getTargetId();
+						if(!actorId.equals(targetId))
+						{	int index = series.get(actorId);
+							int count = counts.get(index);
+							count++;
+							counts.set(index, count);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+					}
+				}
+				
+				// bombs
+				else if(selectedScore==Score.BOMBS)
+				{	if(action==StatisticAction.DROP_BOMB)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						int index = series.get(actorId);
+						int count = counts.get(index);
+						count++;
+						counts.set(index, count);
+						DataTable dataTable = dataTables.get(index);
+						dataTable.add(time,count);
+					}
+				}
+				
+				// crowns
+				else if(selectedScore==Score.CROWNS)
+				{	if(action==StatisticAction.GATHER_CROWN)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						int index = series.get(actorId);
+						int count = counts.get(index);
+						count++;
+						counts.set(index, count);
+						DataTable dataTable = dataTables.get(index);
+						dataTable.add(time,count);
+					}
+					else if(action==StatisticAction.LOSE_CROWN)
+						{	long time = event.getTime();
+						String actorId = event.getActorId();
+						int index = series.get(actorId);
+						int count = counts.get(index);
+						if(count>0)
+						{	count--;
+							counts.set(index, count);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+					}
+				}
+	
+				// items
+				else if(selectedScore==Score.ITEMS)
+				{	if(action==StatisticAction.GATHER_ITEM || action==StatisticAction.RECEIVE_ITEM)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						int index = series.get(actorId);
+						int count = counts.get(index);
+						count++;
+						counts.set(index, count);
+						DataTable dataTable = dataTables.get(index);
+						dataTable.add(time,count);
+					}
+					else if(action==StatisticAction.LOSE_ITEM || action==StatisticAction.TRANSMIT_ITEM)
+						{	long time = event.getTime();
+						String actorId = event.getActorId();
+						int index = series.get(actorId);
+						int count = counts.get(index);
+						if(count>0)
+						{	count--;
+							counts.set(index, count);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+					}
+				}
+	
+				// paintings
+				else if(selectedScore==Score.PAINTINGS)
+				{	if(action==StatisticAction.WIN_TILE)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						int index = series.get(actorId);
+						int count = counts.get(index);
+						count++;
+						counts.set(index, count);
+						DataTable dataTable = dataTables.get(index);
+						dataTable.add(time,count);
+					}
+					else if(action==StatisticAction.LOSE_TILE)
+						{	long time = event.getTime();
+						String actorId = event.getActorId();
+						int index = series.get(actorId);
+						int count = counts.get(index);
+						if(count>0)
+						{	count--;
+							counts.set(index, count);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+					}
+				}
+	
+				// self-bombings
+				else if(selectedScore==Score.SELF_BOMBINGS)
+				{	if(action==StatisticAction.BOMB_PLAYER)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						String targetId = event.getTargetId();
+						if(actorId.equals(targetId))
+						{	int index = series.get(actorId);
+							int count = counts.get(index);
+							count++;
+							counts.set(index, count);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+					}
+				}
 
-			// Format data lines
-			//LineRenderer lineRenderer = new SmoothLineRenderer2D();
-			LineRenderer lineRenderer = new DefaultLineRenderer2D();
-			lineRenderer.setSetting(LineRenderer.COLOR, color);
-			lineRenderer.setSetting(LineRenderer.GAP, 2.0);
-			lineRenderer.setSetting(LineRenderer.STROKE, stroke);
-			plot.setLineRenderer(dataSerie, lineRenderer);
+				// time
+				else if(selectedScore==Score.TIME)
+				{	if(action==StatisticAction.BOMB_PLAYER)
+					{	long time = event.getTime();
+						String actorId = event.getActorId();
+						String targetId = event.getTargetId();
+						{	int index = series.get(actorId);
+							int count = counts.get(index);
+							if(count>0)
+							{	count = (int)time;
+								counts.set(index, count);
+								DataTable dataTable = dataTables.get(index);
+								dataTable.add(time,count);
+							}
+						}
+						if(!actorId.equals(targetId))
+						{	int index = series.get(targetId);
+							int count = counts.get(index);
+							count = (int)time;
+							counts.set(index, count);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+					}
+				}
+
+				// common (to certain scores) // TODO should be corrected for game rules where players can come back all the time
+				if(selectedScore==Score.BOMBS 
+					|| selectedScore==Score.BOMBINGS
+					|| selectedScore==Score.ITEMS
+					|| selectedScore==Score.TIME)
+				{	if(action==StatisticAction.BOMB_PLAYER)
+					{	long time = event.getTime();
+						String targetId = event.getTargetId();
+						int index = series.get(targetId);
+						List<Long> elim = eliminations.get(index);
+						elim.add(time);
+						DataTable dataTable = dataTables.get(index);
+						counts.set(index,0);
+						dataTable.add(time,0);
+					}
+				}
+			}
+			
+			// set the final points
+			long totalTime = statisticRound.getTotalTime();
+			for(DataTable dataTable: dataTables)
+			{	int last = dataTable.getRowCount() - 1;
+				long time = (Long)dataTable.get(0,last);
+				int value = (Integer)dataTable.get(1,last);
+				if(time<totalTime && value!=0)
+				{	if(selectedScore==Score.TIME)
+						dataTable.add(totalTime,(int)totalTime);
+					else
+						dataTable.add(totalTime,value);
+				}
+				else if(time==0)
+				{	if(selectedScore==Score.TIME)
+						dataTable.add(totalTime,(int)totalTime);
+				}
+			}
+			
+			// creating series
+			List<DataSeries> dataSeries = new ArrayList<DataSeries>();
+			for(DataTable dataTable: dataTables)
+			{	DataSeries dataSerie = new DataSeries(dataTable, 0, 1);
+				dataSeries.add(dataSerie);
+			}
+					
+			// Create new xy-plot
+			plot = new XYPlot();
+			for(DataSeries dataSerie: dataSeries)
+				plot.add(dataSerie);
+	
+			// Format plot
+			plot.setSetting(XYPlot.BACKGROUND, GuiTools.COLOR_COMMON_BACKGROUND);
+			plot.getPlotArea().setSetting(PlotArea.BACKGROUND, null);
+			plot.getPlotArea().setSetting(PlotArea.BORDER, null);
+	
+			// Format axes
+			AxisRenderer axisRendererX = plot.getAxisRenderer(XYPlot.AXIS_X);
+			AxisRenderer axisRendererY = plot.getAxisRenderer(XYPlot.AXIS_Y);
+			String xLabel = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_EVOLUTION_BUTTON_TIME);
+			axisRendererX.setSetting(AxisRenderer.LABEL, xLabel);
+			int index = getLineForScore(selectedScore);
+			String yLabel = GuiConfiguration.getMiscConfiguration().getLanguage().getText(SCORE_KEYS.get(index));
+			axisRendererY.setSetting(AxisRenderer.LABEL, yLabel);
+	        Map<Double, String> labels = new HashMap<Double, String>();
+			for(int i=0;i<ids.size();i++)
+			{	String id = ids.get(i);
+				Profile profile = tournament.getProfileById(id);
+				String name = profile.getName();
+				List<Long> elim = eliminations.get(i);
+				for(Long time: elim)
+					labels.put(time.doubleValue(), name);
+			}
+	//		axisRendererX.setSetting(AxisRenderer.TICKS_CUSTOM, labels);
+	
+			// set format
+			Shape circle = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
+			BasicStroke stroke = new BasicStroke(2f);
+			for(int i=0;i<ids.size();i++)
+			{	DataSeries dataSerie = dataSeries.get(i);
+				Color color = colors.get(i).getColor();
+				
+				// Format rendering of data points
+				PointRenderer pointRenderer = new DefaultPointRenderer2D();
+				pointRenderer.setSetting(PointRenderer.SHAPE, circle);
+				pointRenderer.setSetting(PointRenderer.COLOR, color);
+				plot.setPointRenderer(dataSerie, pointRenderer);
+	
+				// Format data lines
+				LineRenderer lineRenderer;
+				if(curves)
+					lineRenderer = new SmoothLineRenderer2D();
+				else
+					lineRenderer = new DefaultLineRenderer2D();
+				lineRenderer.setSetting(LineRenderer.COLOR, color);
+				lineRenderer.setSetting(LineRenderer.GAP, 2.0);
+				lineRenderer.setSetting(LineRenderer.STROKE, stroke);
+				plot.setLineRenderer(dataSerie, lineRenderer);
+			}
+			
+			// update visibility
+			for(int i=0;i<ids.size();i++)
+			{	PredefinedColor color = playerColors.get(i);
+				if(!selectedColors.contains(color))
+					plot.setVisible(dataSeries.get(i), false);
+			}
+			
+			// Add plot to this panel
+			insertPlotPanel();
 		}
-		
-		// Add plot to this panel
-		insertPlotPanel();
 	}
 	
 	/**
@@ -362,6 +562,9 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 		tempPanel.setMaximumSize(dim);
 		tempPanel.setMinimumSize(dim);
 		cl.add(tempPanel);
+		
+		revalidate();
+//		repaint();
 	}
 	
 	/**
@@ -395,6 +598,20 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 //	private final static int LINE_POINTS = 8;
 	/** Column number of the score buttons */
 	private final static int COL_SCORES = 0;
+	/** Map associating GUI keys with each button */
+	private final static Map<Integer,String> SCORE_KEYS;
+	static
+	{	SCORE_KEYS = new HashMap<Integer, String>();
+		SCORE_KEYS.put(LINE_BOMBEDS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBEDS);
+		SCORE_KEYS.put(LINE_SELFBOMBINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_SELF_BOMBINGS);
+		SCORE_KEYS.put(LINE_BOMBINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBINGS);
+		SCORE_KEYS.put(LINE_TIME, GuiKeys.COMMON_EVOLUTION_BUTTON_TIME);
+		SCORE_KEYS.put(LINE_ITEMS, GuiKeys.COMMON_EVOLUTION_BUTTON_ITEMS);
+		SCORE_KEYS.put(LINE_BOMBS, GuiKeys.COMMON_EVOLUTION_BUTTON_BOMBS);
+		SCORE_KEYS.put(LINE_PAINTINGS, GuiKeys.COMMON_EVOLUTION_BUTTON_PAINTINGS);
+		SCORE_KEYS.put(LINE_CROWNS, GuiKeys.COMMON_EVOLUTION_BUTTON_CROWNS);
+		//SCORE_KEYS.put(LINE_POINTS, GuiKeys.COMMON_EVOLUTION_BUTTON_POINTS);
+	}
 	/** Width of the score buttons */
 	private int scoreWidth;
 	/** Height of the first score button */
@@ -408,9 +625,56 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 	 * @param score
 	 * 		New score to display in the plot.
 	 */
-	public void setScore(Score score)
-	{	selectedScore = score;
+	private void setScore(Score score)
+	{	// unselected previously selected score
+		if(selectedScore!=null)
+		{	int pos = getLineForScore(selectedScore);
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			setLabelBackground(pos,COL_SCORES,bg);
+		}
+		
+		// select new score
+		selectedScore = score;
+		int pos = getLineForScore(selectedScore);
+		Color bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+		setLabelBackground(pos,COL_SCORES,bg);
+		
+		// update data
 		updatePlot();
+	}
+	
+	/**
+	 * Results the line of the button
+	 * associated to the specified score.
+	 * 
+	 * @param score
+	 * 		Score to look for.
+	 * @return
+	 * 		Position of the corresponding button.
+	 */
+	private int getLineForScore(Score score)
+	{	int result = -1;
+		
+		if(score==Score.BOMBEDS)
+			result = LINE_BOMBEDS;
+		else if(score==Score.BOMBINGS)
+			result = LINE_BOMBINGS;
+		else if(score==Score.BOMBS)
+			result = LINE_BOMBS;
+		else if(score==Score.CROWNS)
+			result = LINE_CROWNS;
+		else if(score==Score.ITEMS)
+			result = LINE_ITEMS;
+		else if(score==Score.PAINTINGS)
+			result = LINE_PAINTINGS;
+		else if(score==Score.SELF_BOMBINGS)
+			result = LINE_SELFBOMBINGS;
+		else if(score==Score.TIME)
+			result = LINE_TIME;
+	//	else if(score==Score.TIME)
+	//		result = LINE_POINTS);
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -436,7 +700,7 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 	 * @param color
 	 * 		Color of the player to hide/show.
 	 */
-	public void switchColor(PredefinedColor color)
+	private void switchColor(PredefinedColor color)
 	{	List<PredefinedColor> colors = Arrays.asList(PredefinedColor.values());
 		Color c = color.getColor();
 		int line = colors.indexOf(color);
@@ -457,11 +721,6 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 			List<DataSource> dataSources = plot.getData();
 			if(dataSources!=null && !dataSources.isEmpty())
 				plot.setVisible(dataSources.get(index), true);
-		}
-		
-		if(round!=null)
-		{	// TODO display/hide the corresponding series
-			
 		}
 	}
 	
@@ -512,6 +771,23 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// DISPLAY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indicates if curves or straight lines should be drawn in the plot */
+	private boolean curves = false;
+	
+	/**
+	 * Changes the fact this plot contains straight
+	 * lines or curves.
+	 * 
+	 * @param curves
+	 * 		{@code true} to draw curves instead of straight lines.
+	 */
+	public void setCurves(boolean curves)
+	{	this.curves = curves;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -539,8 +815,24 @@ public class BombEventsRoundSubPanel extends ColumnsSubPanel implements MouseLis
 		
 		// scores
 		if(pos[1]==COL_SCORES)
-		{
-			
+		{	if(pos[0]==LINE_BOMBEDS)
+				setScore(Score.BOMBEDS);
+			else if(pos[0]==LINE_BOMBINGS)
+				setScore(Score.BOMBINGS);
+			else if(pos[0]==LINE_BOMBS)
+				setScore(Score.BOMBS);
+			else if(pos[0]==LINE_CROWNS)
+				setScore(Score.CROWNS);
+			else if(pos[0]==LINE_ITEMS)
+				setScore(Score.ITEMS);
+			else if(pos[0]==LINE_PAINTINGS)
+				setScore(Score.PAINTINGS);
+			else if(pos[0]==LINE_SELFBOMBINGS)
+				setScore(Score.SELF_BOMBINGS);
+			else if(pos[0]==LINE_TIME)
+				setScore(Score.TIME);
+//			else if(pos[0]==LINE_POINTS)
+//				setScore(Score.TIME);
 		}
 
 		// colors

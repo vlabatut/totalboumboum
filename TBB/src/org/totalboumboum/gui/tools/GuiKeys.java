@@ -1,13 +1,5 @@
 package org.totalboumboum.gui.tools;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-
-
 /*
  * Total Boum Boum
  * Copyright 2008-2012 Vincent Labatut 
@@ -29,290 +21,570 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+
 /**
+ * Strings used to automate the loading
+ * and handling of the GUI components
+ * (buttons, icons, text, etc.). The corresponding
+ * text content is defined in language-specific XML
+ * files. THe corresponding icons are associated in
+ * class {@link GuiTools}.
  * 
  * @author Vincent Labatut
- *
  */
 public class GuiKeys
 {
 	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
+	// INDIVIDUAL WORDS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Individual word used to define GUI keys */
 	public static final String ABOUT = "About";
+	/** Individual word used to define GUI keys */
 	public static final String ADD = "Add";
+	/** Individual word used to define GUI keys */
 	public static final String ADJUST = "Adjust";
+	/** Individual word used to define GUI keys */
 	public static final String ADVANCE = "Advance";
+	/** Individual word used to define GUI keys */
 	public static final String ADVANCED = "Advanced";
+	/** Individual word used to define GUI keys */
 	public static final String AFTER = "After";
+	/** Individual word used to define GUI keys */
 	public static final String AI = "Ai";
+	/** Individual word used to define GUI keys */
 	public static final String AIS = "Ais";
+	/** Individual word used to define GUI keys */
 	public static final String ALL = "All";
+	/** Individual word used to define GUI keys */
 	public static final String ALLOWED = "Allowed";
+	/** Individual word used to define GUI keys */
 	public static final String ARCHIVE = "Archive";
+	/** Individual word used to define GUI keys */
 	public static final String AUTHOR = "Author";
+	/** Individual word used to define GUI keys */
 	public static final String AUTO = "Auto";
+	/** Individual word used to define GUI keys */
 	public static final String AUTOKILL = "Autokill";
+	/** Individual word used to define GUI keys */
 	public static final String AUTOLOAD = "Autoload";
+	/** Individual word used to define GUI keys */
 	public static final String AUTOSAVE = "Autosave";
+	/** Individual word used to define GUI keys */
 	public static final String AVAILABLE = "Available";
+	/** Individual word used to define GUI keys */
 	public static final String AVERAGE = "Average";
+	/** Individual word used to define GUI keys */
 	public static final String BACK = "Back";
+	/** Individual word used to define GUI keys */
 	public static final String BACKWARD = "Backward";
+	/** Individual word used to define GUI keys */
 	public static final String BACKGROUND = "Background";
+	/** Individual word used to define GUI keys */
 	public static final String BEFORE = "Before";
+	/** Individual word used to define GUI keys */
 	public static final String BLACK = "Black";
+	/** Individual word used to define GUI keys */
 	public static final String BLOCK = "Block";
+	/** Individual word used to define GUI keys */
 	public static final String BLUE = "Blue";
+	/** Individual word used to define GUI keys */
 	public static final String BOMBEDS = "Bombeds";
+	/** Individual word used to define GUI keys */
 	public static final String BOMBINGS = "Bombings";
+	/** Individual word used to define GUI keys */
 	public static final String BOMB = "Bomb";
+	/** Individual word used to define GUI keys */
 	public static final String BOMBS = "Bombs";
+	/** Individual word used to define GUI keys */
 	public static final String BOMBSET = "Bombset";
+	/** Individual word used to define GUI keys */
 	public static final String BOTH = "Both";
+	/** Individual word used to define GUI keys */
 	public static final String BROWN = "Brown";
+	/** Individual word used to define GUI keys */
 	public static final String BROWSE = "Browse";
+	/** Individual word used to define GUI keys */
 	public static final String BROWSER = "Browser";
+	/** Individual word used to define GUI keys */
 	public static final String BUTTON = "Button";
+	/** Individual word used to define GUI keys */
 	public static final String CACHE = "Cache";
+	/** Individual word used to define GUI keys */
 	public static final String CANCEL = "Cancel";
+	/** Individual word used to define GUI keys */
 	public static final String CENTRAL = "Central";
+	/** Individual word used to define GUI keys */
 	public static final String CHANGE = "Change";
+	/** Individual word used to define GUI keys */
 	public static final String CLOSED = "Closed";
+	/** Individual word used to define GUI keys */
 	public static final String COLOR = "Color";
+	/** Individual word used to define GUI keys */
 	public static final String COLORS = "Colors";
+	/** Individual word used to define GUI keys */
 	public static final String COMMON = "Common";
+	/** Individual word used to define GUI keys */
 	public static final String COMPLETE = "Complete";
+	/** Individual word used to define GUI keys */
 	public static final String COMPUTER = "Computer";
+	/** Individual word used to define GUI keys */
 	public static final String CONFIRM = "Confirm";
+	/** Individual word used to define GUI keys */
 	public static final String CONFIRMED = "Confirmed";
+	/** Individual word used to define GUI keys */
 	public static final String CONFRONTATION = "Confrontation";
+	/** Individual word used to define GUI keys */
 	public static final String CONFRONTATIONS = "Confrontations";
+	/** Individual word used to define GUI keys */
 	public static final String CONSTANT = "Constant";
+	/** Individual word used to define GUI keys */
 	public static final String CONTROLS = "Controls";
+	/** Individual word used to define GUI keys */
 	public static final String COUNT = "Count";
+	/** Individual word used to define GUI keys */
 	public static final String CROWNS = "Crowns";
+	/** Individual word used to define GUI keys */
 	public static final String CUP = "Cup";
+	/** Individual word used to define GUI keys */
 	public static final String CURRENT = "Current";
+	/** Individual word used to define GUI keys */
 	public static final String CYAN = "Cyan";
+	/** Individual word used to define GUI keys */
 	public static final String CUSTOM = "Custom";
+	/** Individual word used to define GUI keys */
 	public static final String DATA = "Data";
+	/** Individual word used to define GUI keys */
 	public static final String DEFAULT = "Default";
+	/** Individual word used to define GUI keys */
 	public static final String DELAY = "Delay";
+	/** Individual word used to define GUI keys */
 	public static final String DELETE = "Delete";
+	/** Individual word used to define GUI keys */
 	public static final String DESCRIPTION = "Description";
+	/** Individual word used to define GUI keys */
 	public static final String DEVIATION = "Deviation";
+	/** Individual word used to define GUI keys */
 	public static final String DIALOG = "Dialog";
+	/** Individual word used to define GUI keys */
 	public static final String DIMENSION = "Dimension";
+	/** Individual word used to define GUI keys */
 	public static final String DIRECT = "Direct";
+	/** Individual word used to define GUI keys */
 	public static final String DISABLED = "Disabled";
+	/** Individual word used to define GUI keys */
 	public static final String DISCRETIZE = "Discretize";
+	/** Individual word used to define GUI keys */
 	public static final String DISPLAY = "Display";
+	/** Individual word used to define GUI keys */
 	public static final String DO = "Do";
+	/** Individual word used to define GUI keys */
 	public static final String DONE = "Done";
+	/** Individual word used to define GUI keys */
 	public static final String DOWN = "Down";
+	/** Individual word used to define GUI keys */
 	public static final String DRAW = "Draw";
+	/** Individual word used to define GUI keys */
 	public static final String DRAWN = "Drawn";
+	/** Individual word used to define GUI keys */
 	public static final String EDIT = "Edit";
+	/** Individual word used to define GUI keys */
 	public static final String ENABLED = "Enabled";
+	/** Individual word used to define GUI keys */
 	public static final String ENTER = "Enter";
+	/** Individual word used to define GUI keys */
 	public static final String ENTRY = "Entry";
+	/** Individual word used to define GUI keys */
 	public static final String EVOLUTION = "Evolution";
+	/** Individual word used to define GUI keys */
 	public static final String EXCEPTIONS = "Exceptions";
+	/** Individual word used to define GUI keys */
 	public static final String EXIT = "Exit";
+	/** Individual word used to define GUI keys */
 	public static final String FALSE = "False";
+	/** Individual word used to define GUI keys */
 	public static final String FASTER = "Faster";
+	/** Individual word used to define GUI keys */
 	public static final String FAV = "Fav";
+	/** Individual word used to define GUI keys */
 	public static final String FILE = "File";
+	/** Individual word used to define GUI keys */
 	public static final String FINISH = "Finish";
+	/** Individual word used to define GUI keys */
 	public static final String FINISHED = "Finished";
+	/** Individual word used to define GUI keys */
 	public static final String FIRESETMAP = "Firesetmap";
+	/** Individual word used to define GUI keys */
 	public static final String FIXED = "Fixed";
+	/** Individual word used to define GUI keys */
 	public static final String FOLDER = "Folder";
+	/** Individual word used to define GUI keys */
 	public static final String FONT = "Font";
+	/** Individual word used to define GUI keys */
 	public static final String FORWARD = "Forward";
+	/** Individual word used to define GUI keys */
 	public static final String FPS = "Fps";
+	/** Individual word used to define GUI keys */
 	public static final String FULL = "Full";
+	/** Individual word used to define GUI keys */
 	public static final String GAME = "Game";
+	/** Individual word used to define GUI keys */
 	public static final String GAMES = "Games";
+	/** Individual word used to define GUI keys */
 	public static final String GLICKO2 = "Glicko2";
+	/** Individual word used to define GUI keys */
 	public static final String GO = "Go";
+	/** Individual word used to define GUI keys */
 	public static final String GRAPHICS = "Graphics";
+	/** Individual word used to define GUI keys */
 	public static final String GRASS = "Grass";
+	/** Individual word used to define GUI keys */
 	public static final String GREEN = "Green";
+	/** Individual word used to define GUI keys */
 	public static final String GREY = "Grey";
+	/** Individual word used to define GUI keys */
 	public static final String GUI = "Gui";
+	/** Individual word used to define GUI keys */
 	public static final String HEADER = "Header";
+	/** Individual word used to define GUI keys */
 	public static final String HERO = "Hero";
+	/** Individual word used to define GUI keys */
 	public static final String HEROES = "Heroes";
+	/** Individual word used to define GUI keys */
 	public static final String HIDE = "Hide";
+	/** Individual word used to define GUI keys */
 	public static final String HOST = "Host";
+	/** Individual word used to define GUI keys */
 	public static final String HUMAN = "Human";
+	/** Individual word used to define GUI keys */
 	public static final String IMAGE = "Image";
+	/** Individual word used to define GUI keys */
 	public static final String INCLUDE = "Include";
+	/** Individual word used to define GUI keys */
 	public static final String INDIGO = "Indigo";
+	/** Individual word used to define GUI keys */
 	public static final String INFO = "Info";
+	/** Individual word used to define GUI keys */
 	public static final String INITIAL = "Initial";
+	/** Individual word used to define GUI keys */
 	public static final String INSTANCE = "Instance";
+	/** Individual word used to define GUI keys */
 	public static final String INSTANCES = "Instances";
+	/** Individual word used to define GUI keys */
 	public static final String INVERTED = "Inverted";
+	/** Individual word used to define GUI keys */
 	public static final String IP = "Ip";
+	/** Individual word used to define GUI keys */
 	public static final String ITEMS = "Items";
+	/** Individual word used to define GUI keys */
 	public static final String ITEMSET = "Itemset";
+	/** Individual word used to define GUI keys */
 	public static final String LANGUAGE = "Language";
+	/** Individual word used to define GUI keys */
 	public static final String LAST_STANDING = "LastStanding";
+	/** Individual word used to define GUI keys */
 	public static final String LEAGUE = "League";
+	/** Individual word used to define GUI keys */
 	public static final String LEFT = "Left";
+	/** Individual word used to define GUI keys */
 	public static final String LEG = "Leg";
+	/** Individual word used to define GUI keys */
 	public static final String LEVEL = "Level";
+	/** Individual word used to define GUI keys */
 	public static final String LEVELS = "Levels";
+	/** Individual word used to define GUI keys */
 	public static final String LIMIT = "Limit";
+	/** Individual word used to define GUI keys */
 	public static final String LINE = "Line";
+	/** Individual word used to define GUI keys */
 	public static final String LIST = "List";
+	/** Individual word used to define GUI keys */
 	public static final String LOAD = "Load";
+	/** Individual word used to define GUI keys */
 	public static final String LOCATION = "Location";
+	/** Individual word used to define GUI keys */
 	public static final String LOG = "Log";
+	/** Individual word used to define GUI keys */
 	public static final String LOST = "Lost";
+	/** Individual word used to define GUI keys */
 	public static final String MAIN = "Main";
+	/** Individual word used to define GUI keys */
 	public static final String MATCH = "Match";
+	/** Individual word used to define GUI keys */
 	public static final String MATCHES = "Matches";
+	/** Individual word used to define GUI keys */
 	public static final String MEAN = "Mean";
+	/** Individual word used to define GUI keys */
 	public static final String MENU = "Menu";
+	/** Individual word used to define GUI keys */
 	public static final String MESSAGES = "Messages";
+	/** Individual word used to define GUI keys */
 	public static final String MINUS = "Minus";
+	/** Individual word used to define GUI keys */
 	public static final String MODIFY = "Modify";
+	/** Individual word used to define GUI keys */
 	public static final String NAME = "Name";
+	/** Individual word used to define GUI keys */
 	public static final String NETWORK = "Network";
+	/** Individual word used to define GUI keys */
 	public static final String NEW = "New";
+	/** Individual word used to define GUI keys */
 	public static final String NEXT = "Next";
+	/** Individual word used to define GUI keys */
 	public static final String NO = "No";
+	/** Individual word used to define GUI keys */
 	public static final String NON = "Non";
+	/** Individual word used to define GUI keys */
 	public static final String NONE = "None";
+	/** Individual word used to define GUI keys */
 	public static final String NOTES = "Notes";
+	/** Individual word used to define GUI keys */
 	public static final String OPEN = "Open";
+	/** Individual word used to define GUI keys */
 	public static final String OPTIONS = "Options";
+	/** Individual word used to define GUI keys */
 	public static final String ORANGE = "Orange";
+	/** Individual word used to define GUI keys */
 	public static final String ORDER = "Order";
+	/** Individual word used to define GUI keys */
 	public static final String PACK = "Pack";
+	/** Individual word used to define GUI keys */
 	public static final String PACKAGE = "Package";
+	/** Individual word used to define GUI keys */
 	public static final String PAGEDOWN = "PageDown";
+	/** Individual word used to define GUI keys */
 	public static final String PAGEUP = "PageUp";
+	/** Individual word used to define GUI keys */
 	public static final String PAINTINGS = "Paintings";
+	/** Individual word used to define GUI keys */
 	public static final String PANEL = "Panel";
+	/** Individual word used to define GUI keys */
 	public static final String PARENT = "Parent";
+	/** Individual word used to define GUI keys */
 	public static final String PART = "Part";
+	/** Individual word used to define GUI keys */
 	public static final String PARTIAL = "Partial";
+	/** Individual word used to define GUI keys */
 	public static final String PER = "Per";
+	/** Individual word used to define GUI keys */
 	public static final String PERIOD = "Period";
+	/** Individual word used to define GUI keys */
 	public static final String PINK = "Pink";
+	/** Individual word used to define GUI keys */
 	public static final String PLAY = "Play";
+	/** Individual word used to define GUI keys */
 	public static final String PLAYED = "Played";
+	/** Individual word used to define GUI keys */
 	public static final String PLAYER = "Player";
+	/** Individual word used to define GUI keys */
 	public static final String PLAYERS = "Players";
+	/** Individual word used to define GUI keys */
 	public static final String PLAYING = "Playing";
+	/** Individual word used to define GUI keys */
 	public static final String PLUS = "Plus";
+	/** Individual word used to define GUI keys */
 	public static final String POINTS = "Points";
+	/** Individual word used to define GUI keys */
 	public static final String PORTRAIT = "Portrait";
+	/** Individual word used to define GUI keys */
 	public static final String PREFERRED = "Preferred";
+	/** Individual word used to define GUI keys */
 	public static final String PREVIEW = "Preview";
+	/** Individual word used to define GUI keys */
 	public static final String PREVIOUS = "Previous";
+	/** Individual word used to define GUI keys */
 	public static final String PROFILE = "Profile";
+	/** Individual word used to define GUI keys */
 	public static final String PROFILES = "Profiles";
+	/** Individual word used to define GUI keys */
 	public static final String PROGRESSBAR = "Progressbar";
+	/** Individual word used to define GUI keys */
 	public static final String PUBLISH = "Publish";
+	/** Individual word used to define GUI keys */
 	public static final String PURPLE = "Purple";
+	/** Individual word used to define GUI keys */
 	public static final String QUESTION = "Question";
+	/** Individual word used to define GUI keys */
 	public static final String QUICKMATCH = "Quickmatch";
+	/** Individual word used to define GUI keys */
 	public static final String QUICKSTART = "Quickstart";
+	/** Individual word used to define GUI keys */
 	public static final String QUIT = "Quit";
+	/** Individual word used to define GUI keys */
 	public static final String RANDOM = "Random";
+	/** Individual word used to define GUI keys */
 	public static final String RANK = "Rank";
+	/** Individual word used to define GUI keys */
 	public static final String RANKS = "Ranks";
+	/** Individual word used to define GUI keys */
 	public static final String RANKINGS = "Rankings";
+	/** Individual word used to define GUI keys */
 	public static final String RANKPOINTS = "Rankpoints";
+	/** Individual word used to define GUI keys */
 	public static final String RATING = "Rating";
+	/** Individual word used to define GUI keys */
 	public static final String READY = "Ready";
+	/** Individual word used to define GUI keys */
 	public static final String RECORD = "Record";
+	/** Individual word used to define GUI keys */
 	public static final String RED = "Red";
+	/** Individual word used to define GUI keys */
 	public static final String REGISTER = "Register";
+	/** Individual word used to define GUI keys */
 	public static final String REGULAR = "Regular";
+	/** Individual word used to define GUI keys */
 	public static final String REINIT = "Reinit";
+	/** Individual word used to define GUI keys */
 	public static final String REMOTE = "Remote";
+	/** Individual word used to define GUI keys */
 	public static final String REMOVE = "Remove";
+	/** Individual word used to define GUI keys */
 	public static final String REPLAY = "Replay";
+	/** Individual word used to define GUI keys */
 	public static final String RESET = "Reset";
+	/** Individual word used to define GUI keys */
 	public static final String RESOURCES = "Resources";
+	/** Individual word used to define GUI keys */
 	public static final String RESULTS = "Results";
+	/** Individual word used to define GUI keys */
 	public static final String RETRIEVING = "Retrieving";
+	/** Individual word used to define GUI keys */
 	public static final String RIGHT = "Right";
+	/** Individual word used to define GUI keys */
 	public static final String ROUND = "Round";
+	/** Individual word used to define GUI keys */
 	public static final String ROUNDS = "Rounds";
+	/** Individual word used to define GUI keys */
 	public static final String RUST = "Rust";
+	/** Individual word used to define GUI keys */
 	public static final String SAME = "Same";
+	/** Individual word used to define GUI keys */
 	public static final String SAVE = "Save";
+	/** Individual word used to define GUI keys */
 	public static final String SCORE = "Score";
+	/** Individual word used to define GUI keys */
 	public static final String SCORES = "Scores";
+	/** Individual word used to define GUI keys */
 	public static final String SCREEN = "Screen";
+	/** Individual word used to define GUI keys */
 	public static final String SELECT = "Select";
+	/** Individual word used to define GUI keys */
 	public static final String SELECTION = "Selection";
+	/** Individual word used to define GUI keys */
 	public static final String SELF = "Self";
+	/** Individual word used to define GUI keys */
 	public static final String SEQUENCE = "Sequence";
+	/** Individual word used to define GUI keys */
 	public static final String SET = "Set";
+	/** Individual word used to define GUI keys */
 	public static final String SETTINGS = "Settings";
+	/** Individual word used to define GUI keys */
 	public static final String SHARE = "Share";
+	/** Individual word used to define GUI keys */
 	public static final String SIMULATION = "Simulation";
+	/** Individual word used to define GUI keys */
 	public static final String SINGLE = "Single";
+	/** Individual word used to define GUI keys */
 	public static final String SIZE = "Size";
+	/** Individual word used to define GUI keys */
 	public static final String SLOWER = "Slower";
+	/** Individual word used to define GUI keys */
 	public static final String SMOOTH = "Smooth";
+	/** Individual word used to define GUI keys */
 	public static final String SOURCE = "Source";
+	/** Individual word used to define GUI keys */
+	/** Individual word used to define GUI keys */
 	public static final String SPEED = "Speed";
+	/** Individual word used to define GUI keys */
 	public static final String SPRITE = "Sprite";
+	/** Individual word used to define GUI keys */
 	public static final String STANDARD = "Standard";
+	/** Individual word used to define GUI keys */
 	public static final String START = "Start";
+	/** Individual word used to define GUI keys */
 	public static final String STATE = "State";
+	/** Individual word used to define GUI keys */
 	public static final String STATISTICS = "Statistics";
+	/** Individual word used to define GUI keys */
 	public static final String SUDDEN_DEATH = "SuddenDeath";
+	/** Individual word used to define GUI keys */
 	public static final String SUM = "Sum";
+	/** Individual word used to define GUI keys */
 	public static final String TEXT = "Text";
+	/** Individual word used to define GUI keys */
 	public static final String THEME = "Theme";
+	/** Individual word used to define GUI keys */
 	public static final String TIME = "Time";
+	/** Individual word used to define GUI keys */
 	public static final String TITLE = "Title";
+	/** Individual word used to define GUI keys */
 	public static final String TOOLTIP = "Tooltip";
+	/** Individual word used to define GUI keys */
 	public static final String TOTAL = "Total";
+	/** Individual word used to define GUI keys */
 	public static final String TOURNAMENT = "Tournament";
+	/** Individual word used to define GUI keys */
 	public static final String TOURNAMENTS = "Tournaments";
+	/** Individual word used to define GUI keys */
 	public static final String TRANSFER = "Transfer";
+	/** Individual word used to define GUI keys */
 	public static final String TRUE = "True";
+	/** Individual word used to define GUI keys */
 	public static final String TURNING = "Turning";
+	/** Individual word used to define GUI keys */
 	public static final String TYPE = "Type";
+	/** Individual word used to define GUI keys */
 	public static final String TYPES = "Types";
+	/** Individual word used to define GUI keys */
 	public static final String ULTRAMARINE = "Ultramarine";
+	/** Individual word used to define GUI keys */
 	public static final String UNCONFIRMED = "Unconfirmed";
+	/** Individual word used to define GUI keys */
 	public static final String UNDECIDED = "Undecided";
+	/** Individual word used to define GUI keys */
 	public static final String UNKNOWN = "Unknown";
+	/** Individual word used to define GUI keys */
 	public static final String UNREGISTER = "Unregister";
+	/** Individual word used to define GUI keys */
 	public static final String UP = "Up";
+	/** Individual word used to define GUI keys */
 	public static final String UPS = "Ups";
+	/** Individual word used to define GUI keys */
 	public static final String USE = "Use";
+	/** Individual word used to define GUI keys */
 	public static final String USELESS = "Useless";
+	/** Individual word used to define GUI keys */
 	public static final String VALIDATE = "Validate";
+	/** Individual word used to define GUI keys */
 	public static final String VALUE = "Value";
+	/** Individual word used to define GUI keys */
 	public static final String VALUES = "Values";
+	/** Individual word used to define GUI keys */
 	public static final String VAR = "Var";
+	/** Individual word used to define GUI keys */
 	public static final String VIDEO = "Video";
+	/** Individual word used to define GUI keys */
 	public static final String VOLATILITY = "Volatility";
+	/** Individual word used to define GUI keys */
 	public static final String WHITE = "White";
+	/** Individual word used to define GUI keys */
 	public static final String WON = "Won";
+	/** Individual word used to define GUI keys */
 	public static final String YELLOW = "Yellow";
+	/** Individual word used to define GUI keys */
 	public static final String YOK = "Yok";
 	
 	/////////////////////////////////////////////////////////////////
 	// MENUS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/* MAIN */ 
+	/** MAIN */ 
 	public static final String MENU_MAIN = MENU+MAIN;
-		/* BUTTON */
+		/** BUTTON */
 		public static final String MENU_MAIN_BUTTON = MENU_MAIN+BUTTON;
 		public static final String MENU_MAIN_BUTTON_ABOUT = MENU_MAIN_BUTTON+ABOUT;
 		public static final String MENU_MAIN_BUTTON_LOAD = MENU_MAIN_BUTTON+LOAD;
@@ -326,11 +598,11 @@ public class GuiKeys
 		public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+STATISTICS;
 		public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+TOURNAMENT;
 	
-	/* ABOUT */
+	/** ABOUT */
 	public static final String MENU_ABOUT = MENU+ABOUT;
 	public static final String MENU_ABOUT_TITLE = MENU_ABOUT+TITLE;
 
-	/* RESOURCES */
+	/** RESOURCES */
 	public static final String MENU_RESOURCES = MENU+RESOURCES;
 	public static final String MENU_RESOURCES_BUTTON = MENU_RESOURCES+BUTTON;
 	public static final String MENU_RESOURCES_BUTTON_AI = MENU_RESOURCES_BUTTON+AI;
@@ -341,39 +613,39 @@ public class GuiKeys
 	public static final String MENU_RESOURCES_BUTTON_MATCHES = MENU_RESOURCES_BUTTON+MATCHES;
 	public static final String MENU_RESOURCES_BUTTON_ROUNDS = MENU_RESOURCES_BUTTON+ROUNDS;
 	public static final String MENU_RESOURCES_BUTTON_TOURNAMENTS = MENU_RESOURCES_BUTTON+TOURNAMENTS;
-		/* AI */
-			/* BUTTON */
+		/** AI */
+			/** BUTTON */
 			public static final String MENU_RESOURCES_AI = MENU_RESOURCES+AI;	
 			public static final String MENU_RESOURCES_AI_BUTTON = MENU_RESOURCES_AI+BUTTON;	
 			public static final String MENU_RESOURCES_AI_BUTTON_BACK = MENU_RESOURCES_AI_BUTTON+BACK;	
-			/* SELECT */
+			/** SELECT */
 			public static final String MENU_RESOURCES_AI_SELECT = MENU_RESOURCES_AI+SELECT;
 			public static final String MENU_RESOURCES_AI_SELECT_TITLE = MENU_RESOURCES_AI_SELECT+TITLE;
 			public static final String MENU_RESOURCES_AI_SELECT_NOTES = MENU_RESOURCES_AI_SELECT+NOTES;
-		/* HERO */
+		/** HERO */
 		public static final String MENU_RESOURCES_HERO = MENU_RESOURCES+HERO;
 		public static final String MENU_RESOURCES_HERO_TITLE = MENU_RESOURCES_HERO+TITLE;
-			/* BUTTON */
+			/** BUTTON */
 			public static final String MENU_RESOURCES_HERO_BUTTON = MENU_RESOURCES_HERO+BUTTON;	
 			public static final String MENU_RESOURCES_HERO_BUTTON_BACK = MENU_RESOURCES_HERO_BUTTON+BACK;	
-		/* LEVEL */
+		/** LEVEL */
 		public static final String MENU_RESOURCES_LEVEL = MENU_RESOURCES+LEVEL;	
-			/* BUTTON */
+			/** BUTTON */
 			public static final String MENU_RESOURCES_LEVEL_BUTTON = MENU_RESOURCES_LEVEL+BUTTON;	
 			public static final String MENU_RESOURCES_LEVEL_BUTTON_BACK = MENU_RESOURCES_LEVEL_BUTTON+BACK;	
-			/* SELECT */
+			/** SELECT */
 			public static final String MENU_RESOURCES_LEVEL_SELECT = MENU_RESOURCES_LEVEL+SELECT;
 			public static final String MENU_RESOURCES_LEVEL_SELECT_TITLE = MENU_RESOURCES_LEVEL_SELECT+TITLE;
-				/* FOLDER */
+				/** FOLDER */
 				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER = MENU_RESOURCES_LEVEL_SELECT+FOLDER;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN = MENU_RESOURCES_LEVEL_SELECT_FOLDER+PAGEDOWN;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP = MENU_RESOURCES_LEVEL_SELECT_FOLDER+PAGEUP;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PARENT = MENU_RESOURCES_LEVEL_SELECT_FOLDER+PARENT;
-				/* PACKAGES */
+				/** PACKAGES */
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE = MENU_RESOURCES_LEVEL_SELECT+PACKAGE;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEDOWN = MENU_RESOURCES_LEVEL_SELECT_PACKAGE+PAGEDOWN;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEUP = MENU_RESOURCES_LEVEL_SELECT_PACKAGE+PAGEUP;
-				/* PREVIEW */
+				/** PREVIEW */
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW = MENU_RESOURCES_LEVEL_SELECT+PREVIEW;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+AUTHOR;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+IMAGE;
@@ -383,28 +655,28 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+SIZE;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+SOURCE;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+THEME;
-		/* MATCH */
+		/** MATCH */
 		public static final String MENU_RESOURCES_MATCH = MENU_RESOURCES+MATCH;
 		public static final String MENU_RESOURCES_MATCH_TITLE = MENU_RESOURCES_MATCH+TITLE;
-			/* BUTTON */
+			/** BUTTON */
 			public static final String MENU_RESOURCES_MATCH_BUTTON = MENU_RESOURCES_MATCH+BUTTON;	
 			public static final String MENU_RESOURCES_MATCH_BUTTON_BACK = MENU_RESOURCES_MATCH_BUTTON+BACK;	
-		/* ROUND */
+		/** ROUND */
 		public static final String MENU_RESOURCES_ROUND = MENU_RESOURCES+ROUND;
 		public static final String MENU_RESOURCES_ROUND_TITLE = MENU_RESOURCES_ROUND+TITLE;
-			/* BUTTON */
+			/** BUTTON */
 			public static final String MENU_RESOURCES_ROUND_BUTTON = MENU_RESOURCES_ROUND+BUTTON;	
 			public static final String MENU_RESOURCES_ROUND_BUTTON_BACK = MENU_RESOURCES_ROUND_BUTTON+BACK;	
-		/* TOURNAMENT */
+		/** TOURNAMENT */
 		public static final String MENU_RESOURCES_TOURNAMENT = MENU_RESOURCES+TOURNAMENT;
 		public static final String MENU_RESOURCES_TOURNAMENT_TITLE = MENU_RESOURCES_TOURNAMENT+TITLE;
-			/* BUTTON */
+			/** BUTTON */
 			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON = MENU_RESOURCES_TOURNAMENT+BUTTON;	
 			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON_BACK = MENU_RESOURCES_TOURNAMENT_BUTTON+BACK;	
 			
-	/* OPTIONS */
+	/** OPTIONS */
 	public static final String MENU_OPTIONS = MENU+OPTIONS;
-		/* BUTTON */
+		/** BUTTON */
 		public static final String MENU_OPTIONS_BUTTON = MENU_OPTIONS+BUTTON;
 		public static final String MENU_OPTIONS_BUTTON_ADVANCED = MENU_OPTIONS_BUTTON+ADVANCED;
 		public static final String MENU_OPTIONS_BUTTON_AIS = MENU_OPTIONS_BUTTON+AIS;
@@ -418,100 +690,100 @@ public class GuiKeys
 		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = MENU_OPTIONS_BUTTON+PREVIOUS;
 		public static final String MENU_OPTIONS_BUTTON_STATISTICS = MENU_OPTIONS_BUTTON+STATISTICS;
 		public static final String MENU_OPTIONS_BUTTON_VIDEO = MENU_OPTIONS_BUTTON+VIDEO;
-		/* CONFIRM */
+		/** CONFIRM */
 		public static final String MENU_OPTIONS_CONFIRM = MENU_OPTIONS+CONFIRM;
 		public static final String MENU_OPTIONS_CONFIRM_QUESTION = MENU_OPTIONS_CONFIRM+QUESTION;
 		public static final String MENU_OPTIONS_CONFIRM_TITLE = MENU_OPTIONS_CONFIRM+TITLE;
 		
-		/* ADVANCED */
+		/** ADVANCED */
 		public static final String MENU_OPTIONS_ADVANCED = MENU_OPTIONS+ADVANCED;
 		public static final String MENU_OPTIONS_ADVANCED_TITLE = MENU_OPTIONS_ADVANCED+TITLE;
-			/* LINE */
+			/** LINE */
 			public static final String MENU_OPTIONS_ADVANCED_LINE = MENU_OPTIONS_ADVANCED+LINE;
-				/* ADJUST FPS */
+				/** ADJUST FPS */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST = MENU_OPTIONS_ADVANCED_LINE+ADJUST;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE = MENU_OPTIONS_ADVANCED_LINE_ADJUST+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED = MENU_OPTIONS_ADVANCED_LINE_ADJUST+DISABLED;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED = MENU_OPTIONS_ADVANCED_LINE_ADJUST+ENABLED;
-				/* CACHE */
+				/** CACHE */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE = MENU_OPTIONS_ADVANCED_LINE+CACHE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE_TITLE = MENU_OPTIONS_ADVANCED_LINE_CACHE+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE_DISABLED = MENU_OPTIONS_ADVANCED_LINE_CACHE+DISABLED;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE_ENABLED = MENU_OPTIONS_ADVANCED_LINE_CACHE+ENABLED;
-				/* CACHE LIMIT */
+				/** CACHE LIMIT */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT = MENU_OPTIONS_ADVANCED_LINE+CACHE+LIMIT;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT_TITLE = MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT_MINUS = MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT+MINUS;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT_PLUS = MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT+PLUS;
-				/* FPS */
+				/** FPS */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS = MENU_OPTIONS_ADVANCED_LINE+FPS;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE = MENU_OPTIONS_ADVANCED_LINE_FPS+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS = MENU_OPTIONS_ADVANCED_LINE_FPS+MINUS;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS = MENU_OPTIONS_ADVANCED_LINE_FPS+PLUS;
-				/* RECORD GAMES */
+				/** RECORD GAMES */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES = MENU_OPTIONS_ADVANCED_LINE+RECORD+GAMES;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_TITLE = MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_DISABLED = MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES+DISABLED;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_ENABLED = MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES+ENABLED;
-				/* SPEED */
+				/** SPEED */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED = MENU_OPTIONS_ADVANCED_LINE+SPEED;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE = MENU_OPTIONS_ADVANCED_LINE_SPEED+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS = MENU_OPTIONS_ADVANCED_LINE_SPEED+MINUS;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS = MENU_OPTIONS_ADVANCED_LINE_SPEED+PLUS;
-				/* LOG EXCEPTIONS */
+				/** LOG EXCEPTIONS */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS = MENU_OPTIONS_ADVANCED_LINE+LOG+CONTROLS;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS_TITLE = MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS_DISABLED = MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS+DISABLED;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS_ENABLED = MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS+ENABLED;
-		/* AIS */
+		/** AIS */
 		public static final String MENU_OPTIONS_AIS = MENU_OPTIONS+AIS;
 		public static final String MENU_OPTIONS_AIS_TITLE = MENU_OPTIONS_AIS+TITLE;
-			/* LINE */
+			/** LINE */
 			public static final String MENU_OPTIONS_AIS_LINE = MENU_OPTIONS_AIS+LINE;
-				/* AUTO ADVANCE */
+				/** AUTO ADVANCE */
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE = MENU_OPTIONS_AIS_LINE+AUTO+ADVANCE;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_TITLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DISABLED = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+DISABLED;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_ENABLED = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+ENABLED;
-				/* AUTO ADVANCE DELAY */
+				/** AUTO ADVANCE DELAY */
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY = MENU_OPTIONS_AIS_LINE+AUTO+ADVANCE+DELAY;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_TITLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_MINUS = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+MINUS;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_PLUS = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+PLUS;
-				/* UPS */
+				/** UPS */
 				public static final String MENU_OPTIONS_AIS_LINE_UPS = MENU_OPTIONS_AIS_LINE+UPS;
 				public static final String MENU_OPTIONS_AIS_LINE_UPS_TITLE = MENU_OPTIONS_AIS_LINE_UPS+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_UPS_MINUS = MENU_OPTIONS_AIS_LINE_UPS+MINUS;
 				public static final String MENU_OPTIONS_AIS_LINE_UPS_PLUS = MENU_OPTIONS_AIS_LINE_UPS+PLUS;
-				/* HIDE ALL AIS */
+				/** HIDE ALL AIS */
 				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS = MENU_OPTIONS_AIS_LINE+HIDE+ALL+AIS;
 				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_TITLE = MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_DISABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS+DISABLED;
 				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_ENABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS+ENABLED;
-				/* BOMB USELESS AIS */
+				/** BOMB USELESS AIS */
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS = MENU_OPTIONS_AIS_LINE+BOMB+USELESS+AIS;
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_TITLE = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_MINUS = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+MINUS;
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_PLUS = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+PLUS;
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_DISABLED = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+DISABLED;
-				/* DISPLAY EXCEPTIONS */
+				/** DISPLAY EXCEPTIONS */
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS = MENU_OPTIONS_AIS_LINE+DISPLAY+EXCEPTIONS;
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_TITLE = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_DISABLED = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+DISABLED;
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_ENABLED = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+ENABLED;
-				/* LOG EXCEPTIONS */
+				/** LOG EXCEPTIONS */
 				public static final String MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS = MENU_OPTIONS_AIS_LINE+LOG+EXCEPTIONS;
 				public static final String MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_TITLE = MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_DISABLED = MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS+DISABLED;
 				public static final String MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_ENABLED = MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS+ENABLED;
-		/* CONTROLS */
+		/** CONTROLS */
 		public static final String MENU_OPTIONS_CONTROLS_TITLE = "MenuOptionsControlsTitle";
-			/* HEADER */
+			/** HEADER */
 			public static final String MENU_OPTIONS_CONTROLS_HEADER_KEY = "MenuOptionsControlsHeaderKey";
 			public static final String MENU_OPTIONS_CONTROLS_HEADER_COMMAND = "MenuOptionsControlsHeaderCommand";
 			public static final String MENU_OPTIONS_CONTROLS_HEADER_AUTO = "MenuOptionsControlsHeaderAuto";
-			/* LINE */
-				/* COMMAND */
+			/** LINE */
+				/** COMMAND */
 				public static final String MENU_OPTIONS_CONTROLS_LINE_COMMAND_UP = "MenuOptionsControlsLineCommandUp";
 				public static final String MENU_OPTIONS_CONTROLS_LINE_COMMAND_RIGHT = "MenuOptionsControlsLineCommandRight";
 				public static final String MENU_OPTIONS_CONTROLS_LINE_COMMAND_DOWN = "MenuOptionsControlsLineCommandDown";
@@ -519,135 +791,135 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_CONTROLS_LINE_COMMAND_DROPBOMB = "MenuOptionsControlsLineCommandDropbomb";
 				public static final String MENU_OPTIONS_CONTROLS_LINE_COMMAND_PUNCHBOMB = "MenuOptionsControlsLineCommandPunchbomb";
 				public static final String MENU_OPTIONS_CONTROLS_LINE_COMMAND_TRIGGERBOMB = "MenuOptionsControlsLineCommandTriggerbomb";
-				/* AUTO */
+				/** AUTO */
 				public static final String MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE = "MenuOptionsControlsLineAutoTrue";
 				public static final String MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE = "MenuOptionsControlsLineAutoFalse";
-		/* GAME */
+		/** GAME */
 		public static final String MENU_OPTIONS_GAME = MENU_OPTIONS+GAME;
-			/* BUTTON */
+			/** BUTTON */
 			public static final String MENU_OPTIONS_GAME_BUTTON = MENU_OPTIONS_GAME+BUTTON;
 			public static final String MENU_OPTIONS_GAME_BUTTON_QUICKSTART = MENU_OPTIONS_GAME_BUTTON+QUICKSTART;
 			public static final String MENU_OPTIONS_GAME_BUTTON_QUICKMATCH = MENU_OPTIONS_GAME_BUTTON+QUICKMATCH;
 			public static final String MENU_OPTIONS_GAME_BUTTON_TOURNAMENT = MENU_OPTIONS_GAME_BUTTON+TOURNAMENT;
-			/* QUICK START */
+			/** QUICK START */
 			public static final String MENU_OPTIONS_GAME_QUICKSTART = MENU_OPTIONS_GAME+QUICKSTART;
 			public static final String MENU_OPTIONS_GAME_QUICKSTART_TITLE = MENU_OPTIONS_GAME_QUICKSTART+TITLE;
-				/* ROUND */
+				/** ROUND */
 				public static final String MENU_OPTIONS_GAME_QUICKSTART_ROUND = MENU_OPTIONS_GAME_QUICKSTART+ROUND;
 				public static final String MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE = MENU_OPTIONS_GAME_QUICKSTART_ROUND+BROWSE;
-			/* QUICK MATCH */
+			/** QUICK MATCH */
 			public static final String MENU_OPTIONS_GAME_QUICKMATCH = MENU_OPTIONS_GAME+QUICKMATCH;
 			public static final String MENU_OPTIONS_GAME_QUICKMATCH_TITLE = MENU_OPTIONS_GAME_QUICKMATCH+TITLE;
-				/* LEVELS */
+				/** LEVELS */
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_LEVELS = MENU_OPTIONS_GAME_QUICKMATCH+LEVELS;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_FALSE = MENU_OPTIONS_GAME_QUICKMATCH_LEVELS+FALSE;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_TRUE = MENU_OPTIONS_GAME_QUICKMATCH_LEVELS+TRUE;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_USE = MENU_OPTIONS_GAME_QUICKMATCH_LEVELS+USE;
-				/* PLAYERS */
+				/** PLAYERS */
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS = MENU_OPTIONS_GAME_QUICKMATCH+PLAYERS;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_FALSE = MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS+FALSE;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_TRUE = MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS+TRUE;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_USE = MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS+USE;
-				/* SETTINGS */
+				/** SETTINGS */
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS = MENU_OPTIONS_GAME_QUICKMATCH+SETTINGS;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_FALSE = MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS+FALSE;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_TRUE = MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS+TRUE;
 				public static final String MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_USE = MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS+USE;
-			/* TOURNAMENT */
+			/** TOURNAMENT */
 			public static final String MENU_OPTIONS_GAME_TOURNAMENT = MENU_OPTIONS_GAME+TOURNAMENT;
 			public static final String MENU_OPTIONS_GAME_TOURNAMENT_TITLE = MENU_OPTIONS_GAME_TOURNAMENT+TITLE;
-				/* AUTOSAVE */
+				/** AUTOSAVE */
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE = MENU_OPTIONS_GAME_TOURNAMENT+AUTOSAVE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_FALSE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE+FALSE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TRUE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE+TRUE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TITLE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE+TITLE;
-				/* AUTOLOAD */
+				/** AUTOLOAD */
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD = MENU_OPTIONS_GAME_TOURNAMENT+AUTOLOAD;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_FALSE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD+FALSE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TRUE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD+TRUE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TITLE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD+TITLE;
-				/* PLAYERS */
+				/** PLAYERS */
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS = MENU_OPTIONS_GAME_TOURNAMENT+PLAYERS;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_FALSE = MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS+FALSE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_TRUE = MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS+TRUE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_USE = MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS+USE;
-				/* TOURNAMENT */
+				/** TOURNAMENT */
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT = MENU_OPTIONS_GAME_TOURNAMENT+TOURNAMENT;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_FALSE = MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT+FALSE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_TRUE = MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT+TRUE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_USE = MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT+USE;
-		/* GUI */
+		/** GUI */
 		public static final String MENU_OPTIONS_GUI = MENU_OPTIONS+GUI;
 		public static final String MENU_OPTIONS_GUI_TITLE = MENU_OPTIONS_GUI+TITLE;
-			/* LINE */
+			/** LINE */
 			public static final String MENU_OPTIONS_GUI_LINE = MENU_OPTIONS_GUI+LINE;
-				/* LANGUAGE */
+				/** LANGUAGE */
 				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE = MENU_OPTIONS_GUI_LINE+LANGUAGE;
 				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE = MENU_OPTIONS_GUI_LINE_LANGUAGE+TITLE;
 				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT = MENU_OPTIONS_GUI_LINE_LANGUAGE+NEXT;
 				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS = MENU_OPTIONS_GUI_LINE_LANGUAGE+PREVIOUS;
-				/* FONT */
+				/** FONT */
 				public static final String MENU_OPTIONS_GUI_LINE_FONT = MENU_OPTIONS_GUI_LINE+FONT;
 				public static final String MENU_OPTIONS_GUI_LINE_FONT_TITLE = MENU_OPTIONS_GUI_LINE_FONT+TITLE;
 				public static final String MENU_OPTIONS_GUI_LINE_FONT_NEXT = MENU_OPTIONS_GUI_LINE_FONT+NEXT;
 				public static final String MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS = MENU_OPTIONS_GUI_LINE_FONT+PREVIOUS;
-				/* BACKGROUND */
+				/** BACKGROUND */
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND = MENU_OPTIONS_GUI_LINE+BACKGROUND;
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE = MENU_OPTIONS_GUI_LINE_BACKGROUND+TITLE;
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT = MENU_OPTIONS_GUI_LINE_BACKGROUND+NEXT;
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS = MENU_OPTIONS_GUI_LINE_BACKGROUND+PREVIOUS;
-		/* STATISTICS */
+		/** STATISTICS */
 		public static final String MENU_OPTIONS_STATISTICS = MENU_OPTIONS+STATISTICS;
 		public static final String MENU_OPTIONS_STATISTICS_TITLE = MENU_OPTIONS_STATISTICS+TITLE;
-			/* LINE */
+			/** LINE */
 			public static final String MENU_OPTIONS_STATISTICS_LINE = MENU_OPTIONS_STATISTICS+LINE;
-				/* INCLUDE */
+				/** INCLUDE */
 				public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE = MENU_OPTIONS_STATISTICS_LINE+INCLUDE;
-					/* QUICKSTARTS */
+					/** QUICKSTARTS */
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART = MENU_OPTIONS_STATISTICS_LINE_INCLUDE+QUICKSTART;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_TITLE = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART+TITLE;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_DISABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART+DISABLED;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_ENABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART+ENABLED;
-					/* SIMULATIONS */
+					/** SIMULATIONS */
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION = MENU_OPTIONS_STATISTICS_LINE_INCLUDE+SIMULATION;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_TITLE = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION+TITLE;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_DISABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION+DISABLED;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_ENABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION+ENABLED;
-				/* GLICKO-2 */
+				/** GLICKO-2 */
 				public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2 = MENU_OPTIONS_STATISTICS_LINE+GLICKO2;
-					/* DEFAULT RATING */
+					/** DEFAULT RATING */
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING = MENU_OPTIONS_STATISTICS_LINE_GLICKO2+DEFAULT+RATING;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+TITLE;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+MINUS;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+PLUS;
-					/* DEFAULT RATING DEVIATION */
+					/** DEFAULT RATING DEVIATION */
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+DEVIATION;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION+TITLE;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION+MINUS;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION+PLUS;
-					/* DEFAULT RATING VOLATILITY */
+					/** DEFAULT RATING VOLATILITY */
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+VOLATILITY;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY+TITLE;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY+MINUS;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY+PLUS;
-					/* GAMES PER PERIOD */
+					/** GAMES PER PERIOD */
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD = MENU_OPTIONS_STATISTICS_LINE_GLICKO2+GAMES+PER+PERIOD;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+TITLE;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+MINUS;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+PLUS;
-				/* REINIT */
+				/** REINIT */
 				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT = MENU_OPTIONS_STATISTICS_LINE+REINIT;
 				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT_TITLE = MENU_OPTIONS_STATISTICS_LINE_REINIT+TITLE;
 				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT_DO = MENU_OPTIONS_STATISTICS_LINE_REINIT+DO;
 				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT_DONE = MENU_OPTIONS_STATISTICS_LINE_REINIT+DONE;
-			/* DIALOG */
+			/** DIALOG */
 			public static final String MENU_OPTIONS_STATISTICS_DIALOG = MENU_OPTIONS_STATISTICS+DIALOG;
 			public static final String MENU_OPTIONS_STATISTICS_DIALOG_TITLE = MENU_OPTIONS_STATISTICS_DIALOG+TITLE;
 			public static final String MENU_OPTIONS_STATISTICS_DIALOG_QUESTION = MENU_OPTIONS_STATISTICS_DIALOG+QUESTION;			
-		/* VIDEO */
+		/** VIDEO */
 		public static final String MENU_OPTIONS_VIDEO = MENU_OPTIONS+VIDEO;
 		public static final String MENU_OPTIONS_VIDEO_TITLE = MENU_OPTIONS_VIDEO+TITLE;
-			/* LINE */
+			/** LINE */
 			public static final String MENU_OPTIONS_VIDEO_LINE = MENU_OPTIONS_VIDEO+LINE;
 			public static final String MENU_OPTIONS_VIDEO_LINE_DISABLED = MENU_OPTIONS_VIDEO_LINE+DISABLED;
 			public static final String MENU_OPTIONS_VIDEO_LINE_ENABLED = MENU_OPTIONS_VIDEO_LINE+ENABLED;
@@ -656,15 +928,15 @@ public class GuiKeys
 			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = MENU_OPTIONS_VIDEO_LINE+PANEL+DIMENSION;
 			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = MENU_OPTIONS_VIDEO_LINE+PLUS;
 			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = MENU_OPTIONS_VIDEO_LINE+SMOOTH+GRAPHICS;
-				/* COLOR */
+				/** COLOR */
 			public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR = "MenuOptionsVideoLineBorderColor";
 				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_BLACK = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+BLACK;
 				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_NONE = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+NONE;
 				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+TITLE;
 			
-	/* PROFILES */
+	/** PROFILES */
 	public static final String MENU_PROFILES = MENU+PROFILES;
-		/* BUTTON */
+		/** BUTTON */
 		public static final String MENU_PROFILES_BUTTON = MENU_PROFILES+BUTTON;
 		public static final String MENU_PROFILES_BUTTON_BACK = MENU_PROFILES_BUTTON+BACK;
 		public static final String MENU_PROFILES_BUTTON_CANCEL = MENU_PROFILES_BUTTON+CANCEL;
@@ -672,7 +944,7 @@ public class GuiKeys
 		public static final String MENU_PROFILES_BUTTON_DELETE = MENU_PROFILES_BUTTON+DELETE;
 		public static final String MENU_PROFILES_BUTTON_MODIFY = MENU_PROFILES_BUTTON+MODIFY;
 		public static final String MENU_PROFILES_BUTTON_NEW = MENU_PROFILES_BUTTON+NEW;
-		/* EDIT */
+		/** EDIT */
 		public static final String MENU_PROFILES_EDIT = MENU_PROFILES+EDIT;		
 		public static final String MENU_PROFILES_EDIT_TITLE = MENU_PROFILES_EDIT+TITLE;		
 		public static final String MENU_PROFILES_EDIT_AI = MENU_PROFILES_EDIT+AI;
@@ -685,137 +957,137 @@ public class GuiKeys
 		public static final String MENU_PROFILES_EDIT_HERO_CHANGE = MENU_PROFILES_EDIT_HERO+CHANGE;
 		public static final String MENU_PROFILES_EDIT_NAME = MENU_PROFILES_EDIT+NAME;
 		public static final String MENU_PROFILES_EDIT_NAME_CHANGE = MENU_PROFILES_EDIT_NAME+CHANGE;
-		/* DELETE */
+		/** DELETE */
 		public static final String MENU_PROFILES_DELETE = MENU_PROFILES+DELETE;
 		public static final String MENU_PROFILES_DELETE_QUESTION = MENU_PROFILES_DELETE+QUESTION;
 		public static final String MENU_PROFILES_DELETE_TITLE = MENU_PROFILES_DELETE+TITLE;
-		/* NEW */
+		/** NEW */
 		public static final String MENU_PROFILES_NEW = MENU_PROFILES+NEW;
 		public static final String MENU_PROFILES_NEW_NAME = MENU_PROFILES_NEW+NAME;
 		public static final String MENU_PROFILES_NEW_QUESTION = MENU_PROFILES_NEW+QUESTION;
 		public static final String MENU_PROFILES_NEW_TITLE = MENU_PROFILES_NEW+TITLE;
-		/* SELECT */
+		/** SELECT */
 		public static final String MENU_PROFILES_SELECT = MENU_PROFILES+SELECT;
 		public static final String MENU_PROFILES_SELECT_TITLE = MENU_PROFILES_SELECT+TITLE;
 		
-	/* STATISTICS NOTE*/	
+	/** STATISTICS NOTe */	
 	public static final String MENU_STATISTICS = MENU+STATISTICS;
-		/* PLAYER */
+		/** PLAYER */
 		public static final String MENU_STATISTICS_PLAYER = MENU_STATISTICS+PLAYER;
 		public static final String MENU_STATISTICS_PLAYER_TITLE = MENU_STATISTICS_PLAYER+TITLE;
-			/* BUTTON */
+			/** BUTTON */
 			public static final String MENU_STATISTICS_PLAYER_BUTTON = MENU_STATISTICS_PLAYER+BUTTON;
 			public static final String MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS = MENU_STATISTICS_PLAYER_BUTTON+CONFRONTATIONS;
 			public static final String MENU_STATISTICS_PLAYER_BUTTON_GLICKO2 = MENU_STATISTICS_PLAYER_BUTTON+GLICKO2;
 			public static final String MENU_STATISTICS_PLAYER_BUTTON_SCORES = MENU_STATISTICS_PLAYER_BUTTON+SCORES;
 		
-	/* QUICKMATCH */	
+	/** QUICKMATCH */	
 	public static final String MENU_QUICKMATCH = MENU+QUICKMATCH;
-		/* LEVELS */
+		/** LEVELS */
 		public static final String MENU_QUICKMATCH_LEVELS = MENU_QUICKMATCH+LEVELS;
 		public static final String MENU_QUICKMATCH_LEVELS_TITLE = MENU_QUICKMATCH_LEVELS+TITLE;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_QUICKMATCH_LEVELS_BUTTON = MENU_QUICKMATCH_LEVELS+BUTTON;
 			public static final String MENU_QUICKMATCH_LEVELS_BUTTON_NEXT = MENU_QUICKMATCH_LEVELS_BUTTON+NEXT;
 			public static final String MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS = MENU_QUICKMATCH_LEVELS_BUTTON+PREVIOUS;
 			public static final String MENU_QUICKMATCH_LEVELS_BUTTON_QUIT = MENU_QUICKMATCH_LEVELS_BUTTON+QUIT;
-		/* PLAYERS */
+		/** PLAYERS */
 		public static final String MENU_QUICKMATCH_PLAYERS = MENU_QUICKMATCH+PLAYERS;
 		public static final String MENU_QUICKMATCH_PLAYERS_TITLE = MENU_QUICKMATCH_PLAYERS+TITLE;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_QUICKMATCH_PLAYERS_BUTTON = MENU_QUICKMATCH_PLAYERS+BUTTON;
 			public static final String MENU_QUICKMATCH_PLAYERS_BUTTON_CANCEL = MENU_QUICKMATCH_PLAYERS_BUTTON+CANCEL;
 			public static final String MENU_QUICKMATCH_PLAYERS_BUTTON_CONFIRM = MENU_QUICKMATCH_PLAYERS_BUTTON+CONFIRM;
 			public static final String MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT = MENU_QUICKMATCH_PLAYERS_BUTTON+NEXT;
 			public static final String MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS = MENU_QUICKMATCH_PLAYERS_BUTTON+PREVIOUS;
 			public static final String MENU_QUICKMATCH_PLAYERS_BUTTON_QUIT = MENU_QUICKMATCH_PLAYERS_BUTTON+QUIT;
-		/* SETTINGS */
+		/** SETTINGS */
 		public static final String MENU_QUICKMATCH_SETTINGS = MENU_QUICKMATCH+SETTINGS;
 		public static final String MENU_QUICKMATCH_SETTINGS_TITLE = MENU_QUICKMATCH_SETTINGS+TITLE;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON = MENU_QUICKMATCH_SETTINGS+BUTTON;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS = MENU_QUICKMATCH_SETTINGS_BUTTON+BLOCK+PLAYERS;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT = MENU_QUICKMATCH_SETTINGS_BUTTON+NEXT;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS = MENU_QUICKMATCH_SETTINGS_BUTTON+PREVIOUS;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_PUBLISH = MENU_QUICKMATCH_SETTINGS_BUTTON+PUBLISH;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT = MENU_QUICKMATCH_SETTINGS_BUTTON+QUIT;
-			/* LEVELS */
+			/** LEVELS */
 			public static final String MENU_QUICKMATCH_SETTINGS_LEVELS = MENU_QUICKMATCH_SETTINGS+LEVELS;
-				/* ORDER */
+				/** ORDER */
 				public static final String MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER = MENU_QUICKMATCH_SETTINGS_LEVELS+ORDER;
 				public static final String MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_FIXED = MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER+FIXED;
 				public static final String MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_RANDOM = MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER+RANDOM;
 				public static final String MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_TITLE = MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER+TITLE;
-			/* LIMIT */
+			/** LIMIT */
 			public static final String MENU_QUICKMATCH_SETTINGS_LIMIT = MENU_QUICKMATCH_SETTINGS+LIMIT;
-				/* ROUNDS */
+				/** ROUNDS */
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS = MENU_QUICKMATCH_SETTINGS_LIMIT+ROUNDS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_MINUS = MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS+MINUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_PLUS = MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS+PLUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_TITLE = MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS+TITLE;			
-				/* POINTS */
+				/** POINTS */
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS = MENU_QUICKMATCH_SETTINGS_LIMIT+POINTS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_MINUS = MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS+MINUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_PLUS = MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS+PLUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_TITLE = MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS+TITLE;			
-				/* TIME */
+				/** TIME */
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_TIME = MENU_QUICKMATCH_SETTINGS_LIMIT+TIME;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_MINUS = MENU_QUICKMATCH_SETTINGS_LIMIT_TIME+MINUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_PLUS = MENU_QUICKMATCH_SETTINGS_LIMIT_TIME+PLUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_TITLE = MENU_QUICKMATCH_SETTINGS_LIMIT_TIME+TITLE;			
-			/* PLAYERS */
+			/** PLAYERS */
 			public static final String MENU_QUICKMATCH_SETTINGS_PLAYERS = MENU_QUICKMATCH_SETTINGS+PLAYERS;
-				/* LOCATION */
+				/** LOCATION */
 				public static final String MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION = MENU_QUICKMATCH_SETTINGS_PLAYERS+LOCATION;
 				public static final String MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_FIXED = MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION+FIXED;
 				public static final String MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_RANDOM = MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION+RANDOM;
 				public static final String MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_TITLE = MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION+TITLE;
-			/* POINTS */
+			/** POINTS */
 			public static final String MENU_QUICKMATCH_SETTINGS_POINTS = MENU_QUICKMATCH_SETTINGS+POINTS;
-				/* RANKS */
+				/** RANKS */
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_RANKS = MENU_QUICKMATCH_SETTINGS_POINTS+RANKS;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_RANKS+TITLE;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE = MENU_QUICKMATCH_SETTINGS_POINTS_RANKS+VALUE;
-				/* DRAW */
+				/** DRAW */
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW = MENU_QUICKMATCH_SETTINGS_POINTS+DRAW;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_AUTOKILL = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+AUTOKILL;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_BOTH = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+BOTH;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_NONE = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+NONE;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TIME = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+TIME;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+TITLE;
-				/* SHARE */
+				/** SHARE */
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_SHARE = MENU_QUICKMATCH_SETTINGS_POINTS+SHARE;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_SHARE+TITLE;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_VAR = MENU_QUICKMATCH_SETTINGS_POINTS_SHARE+VAR;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_YOK = MENU_QUICKMATCH_SETTINGS_POINTS_SHARE+YOK;
-				/* VALUES */
+				/** VALUES */
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES = MENU_QUICKMATCH_SETTINGS_POINTS+VALUES;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_MINUS = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+MINUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_PLUS = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+PLUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+TITLE;
-			/* SUDDEN DEATH */
+			/** SUDDEN DEATH */
 			public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH = MENU_QUICKMATCH_SETTINGS+SUDDEN_DEATH;
 				public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_TITLE = MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH+TITLE;
 				public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_VAR = MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH+VAR;
 				public static final String MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH_YOK = MENU_QUICKMATCH_SETTINGS_SUDDEN_DEATH+YOK;
 
-	/* REPLAY */
+	/** REPLAY */
 	public static final String MENU_REPLAY = MENU+REPLAY;
-		/* LOAD */
+		/** LOAD */
 		public static final String MENU_REPLAY_LOAD = MENU_REPLAY+LOAD;
 		public static final String MENU_REPLAY_LOAD_TITLE = MENU_REPLAY_LOAD+TITLE;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_REPLAY_LOAD_BUTTON = MENU_REPLAY_LOAD+BUTTON;
 			public static final String MENU_REPLAY_LOAD_BUTTON_CANCEL = MENU_REPLAY_LOAD_BUTTON+CANCEL;
 			public static final String MENU_REPLAY_LOAD_BUTTON_CONFIRM = MENU_REPLAY_LOAD_BUTTON+CONFIRM;
 			public static final String MENU_REPLAY_LOAD_BUTTON_DELETE = MENU_REPLAY_LOAD_BUTTON+DELETE;
-			/* DELETE */
+			/** DELETE */
 			public static final String MENU_REPLAY_LOAD_DELETE = MENU_REPLAY_LOAD+DELETE;
 			public static final String MENU_REPLAY_LOAD_DELETE_TITLE = MENU_REPLAY_LOAD_DELETE+TITLE;
 			public static final String MENU_REPLAY_LOAD_DELETE_QUESTION = MENU_REPLAY_LOAD_DELETE+QUESTION;
-		/* CONTROLS */
+		/** CONTROLS */
 		public static final String MENU_REPLAY_CONTROLS = MENU_REPLAY+CONTROLS;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_REPLAY_CONTROLS_BUTTON = MENU_REPLAY_CONTROLS+BUTTON;
 			public static final String MENU_REPLAY_CONTROLS_BUTTON_BACK = MENU_REPLAY_CONTROLS_BUTTON+BACK;
 			public static final String MENU_REPLAY_CONTROLS_BUTTON_BACKWARD = MENU_REPLAY_CONTROLS_BUTTON+BACKWARD;
@@ -824,44 +1096,44 @@ public class GuiKeys
 			public static final String MENU_REPLAY_CONTROLS_BUTTON_PLAY = MENU_REPLAY_CONTROLS_BUTTON+PLAY;
 			public static final String MENU_REPLAY_CONTROLS_BUTTON_QUIT = MENU_REPLAY_CONTROLS_BUTTON+QUIT;
 			public static final String MENU_REPLAY_CONTROLS_BUTTON_SLOWER = MENU_REPLAY_CONTROLS_BUTTON+SLOWER;
-		/* ROUND */
+		/** ROUND */
 		public static final String MENU_REPLAY_ROUND = MENU_REPLAY+ROUND;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_REPLAY_ROUND_BUTTON = MENU_REPLAY_ROUND+BUTTON;
 			public static final String MENU_REPLAY_ROUND_BUTTON_BACK = MENU_REPLAY_ROUND_BUTTON+BACK;
 			public static final String MENU_REPLAY_ROUND_BUTTON_QUIT = MENU_REPLAY_ROUND_BUTTON+QUIT;
 			public static final String MENU_REPLAY_ROUND_BUTTON_REPLAY = MENU_REPLAY_ROUND_BUTTON+REPLAY;
 				
-	/* TOURNAMENT */
+	/** TOURNAMENT */
 	public static final String MENU_TOURNAMENT = MENU+TOURNAMENT;
-		/* BUTTONS */
+		/** BUTTONS */
 		public static final String MENU_TOURNAMENT_BUTTON = MENU_TOURNAMENT+BUTTON;
 		public static final String MENU_TOURNAMENT_BUTTON_QUIT = MENU_TOURNAMENT_BUTTON+QUIT;
-		/* LOAD */
+		/** LOAD */
 		public static final String MENU_TOURNAMENT_LOAD = MENU_TOURNAMENT+LOAD;
 		public static final String MENU_TOURNAMENT_LOAD_TITLE = MENU_TOURNAMENT_LOAD+TITLE;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_TOURNAMENT_LOAD_BUTTON = MENU_TOURNAMENT_LOAD+BUTTON;
 			public static final String MENU_TOURNAMENT_LOAD_BUTTON_CANCEL = MENU_TOURNAMENT_LOAD_BUTTON+CANCEL;
 			public static final String MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM = MENU_TOURNAMENT_LOAD_BUTTON+CONFIRM;
 			public static final String MENU_TOURNAMENT_LOAD_BUTTON_DELETE = MENU_TOURNAMENT_LOAD_BUTTON+DELETE;
-			/* DELETE */
+			/** DELETE */
 			public static final String MENU_TOURNAMENT_LOAD_DELETE = MENU_TOURNAMENT_LOAD+DELETE;
 			public static final String MENU_TOURNAMENT_LOAD_DELETE_TITLE = MENU_TOURNAMENT_LOAD_DELETE+TITLE;
 			public static final String MENU_TOURNAMENT_LOAD_DELETE_QUESTION = MENU_TOURNAMENT_LOAD_DELETE+QUESTION;
-		/* PLAYERS */
+		/** PLAYERS */
 		public static final String MENU_TOURNAMENT_PLAYERS = MENU_TOURNAMENT+PLAYERS;
 		public static final String MENU_TOURNAMENT_PLAYERS_TITLE = MENU_TOURNAMENT_PLAYERS+TITLE;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON = MENU_TOURNAMENT_PLAYERS+BUTTON;
 			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_CANCEL = MENU_TOURNAMENT_PLAYERS_BUTTON+CANCEL;
 			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_CONFIRM = MENU_TOURNAMENT_PLAYERS_BUTTON+CONFIRM;
 			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT = MENU_TOURNAMENT_PLAYERS_BUTTON+NEXT;
 			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS = MENU_TOURNAMENT_PLAYERS_BUTTON+PREVIOUS;
-		/* SETTINGS */
+		/** SETTINGS */
 		public static final String MENU_TOURNAMENT_SETTINGS = MENU_TOURNAMENT+SETTINGS;
 		public static final String MENU_TOURNAMENT_SETTINGS_TITLE = MENU_TOURNAMENT_SETTINGS+TITLE;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON = MENU_TOURNAMENT_SETTINGS+BUTTON;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS = MENU_TOURNAMENT_SETTINGS_BUTTON+BLOCK+PLAYERS;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_CANCEL = MENU_TOURNAMENT_SETTINGS_BUTTON+CANCEL;
@@ -871,63 +1143,63 @@ public class GuiKeys
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS = MENU_TOURNAMENT_SETTINGS_BUTTON+PREVIOUS;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT = MENU_TOURNAMENT_SETTINGS_BUTTON+SELECT;
 	
-		/* NETWORK GAME */
+		/** NETWORK GAME */
 		public static final String MENU_NETWORK = MENU+NETWORK;
-			/* BUTTONS */
+			/** BUTTONS */
 			public static final String MENU_NETWORK_BUTTON = MENU_NETWORK+BUTTON;
 			public static final String MENU_NETWORK_BUTTON_QUIT = MENU_NETWORK_BUTTON+QUIT;
-			/* GAMES */
+			/** GAMES */
 			public static final String MENU_NETWORK_GAMES = MENU_NETWORK+GAMES;
 			public static final String MENU_NETWORK_GAMES_TITLE = MENU_NETWORK_GAMES+TITLE;
-				/* ADD HOST */
+				/** ADD HOST */
 				public static final String MENU_NETWORK_GAMES_ADD_HOST = MENU_NETWORK_GAMES+ADD+HOST;
 				public static final String MENU_NETWORK_GAMES_ADD_HOST_TITLE = MENU_NETWORK_GAMES_ADD_HOST+TITLE;
 				public static final String MENU_NETWORK_GAMES_ADD_HOST_TEXT = MENU_NETWORK_GAMES_ADD_HOST+TEXT;
-				/* SET HOST */
+				/** SET HOST */
 				public static final String MENU_NETWORK_GAMES_SET_HOST = MENU_NETWORK_GAMES+SET+HOST;
 				public static final String MENU_NETWORK_GAMES_SET_HOST_TITLE = MENU_NETWORK_GAMES_SET_HOST+TITLE;
 				public static final String MENU_NETWORK_GAMES_SET_HOST_TEXT = MENU_NETWORK_GAMES_SET_HOST+TEXT;
-				/* BUTTONS */
+				/** BUTTONS */
 				public static final String MENU_NETWORK_GAMES_BUTTON = MENU_NETWORK_GAMES+BUTTON;
 				public static final String MENU_NETWORK_GAMES_BUTTON_NEXT = MENU_NETWORK_GAMES_BUTTON+NEXT;
 				public static final String MENU_NETWORK_GAMES_BUTTON_PREVIOUS = MENU_NETWORK_GAMES_BUTTON+PREVIOUS;
-			/* PLAYERS */
+			/** PLAYERS */
 			public static final String MENU_NETWORK_PLAYERS = MENU_NETWORK+PLAYERS;
 			public static final String MENU_NETWORK_PLAYERS_TITLE = MENU_NETWORK_PLAYERS+TITLE;
-				/* BUTTONS */
+				/** BUTTONS */
 				public static final String MENU_NETWORK_PLAYERS_BUTTON = MENU_NETWORK_PLAYERS+BUTTON;
 				public static final String MENU_NETWORK_PLAYERS_BUTTON_CANCEL = MENU_NETWORK_PLAYERS_BUTTON+CANCEL;
 				public static final String MENU_NETWORK_PLAYERS_BUTTON_CONFIRM = MENU_NETWORK_PLAYERS_BUTTON+CONFIRM;
 				public static final String MENU_NETWORK_PLAYERS_BUTTON_VALIDATE = MENU_NETWORK_PLAYERS_BUTTON+VALIDATE;
 				public static final String MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS = MENU_NETWORK_PLAYERS_BUTTON+PREVIOUS;
 		
-	/* GAME */
-		/* SAVE */
+	/** GAME */
+		/** SAVE */
 		public static final String GAME_SAVE = GAME+SAVE;
 		public static final String GAME_SAVE_TITLE = GAME_SAVE+TITLE;
-			/* BUTTONS */	
+			/** BUTTONS */	
 			public static final String GAME_SAVE_BUTTON = GAME_SAVE+BUTTON;
 			public static final String GAME_SAVE_BUTTON_CANCEL = GAME_SAVE_BUTTON+CANCEL;
 			public static final String GAME_SAVE_BUTTON_CONFIRM = GAME_SAVE_BUTTON+CONFIRM;
 			public static final String GAME_SAVE_BUTTON_DELETE = GAME_SAVE_BUTTON+DELETE;
 			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+NEW;
-			/* CONFIRM */
+			/** CONFIRM */
 			public static final String GAME_SAVE_CONFIRM = GAME_SAVE+CONFIRM;
 			public static final String GAME_SAVE_CONFIRM_QUESTION = GAME_SAVE_CONFIRM+QUESTION;
 			public static final String GAME_SAVE_CONFIRM_TITLE = GAME_SAVE_CONFIRM+TITLE;
-			/* DELETE */
+			/** DELETE */
 			public static final String GAME_SAVE_DELETE = GAME_SAVE+DELETE;
 			public static final String GAME_SAVE_DELETE_QUESTION = GAME_SAVE_DELETE+QUESTION;
 			public static final String GAME_SAVE_DELETE_TITLE = GAME_SAVE_DELETE+TITLE;
-			/* NEW */
+			/** NEW */
 			public static final String GAME_SAVE_NEW = GAME_SAVE+NEW;
 			public static final String GAME_SAVE_NEW_NAME = GAME_SAVE_NEW+NAME;
 			public static final String GAME_SAVE_NEW_QUESTION = GAME_SAVE_NEW+QUESTION;
 			public static final String GAME_SAVE_NEW_TITLE = GAME_SAVE_NEW+TITLE;
 			
-		/* TOURNAMENT */
+		/** TOURNAMENT */
 		public static final String GAME_TOURNAMENT = GAME+TOURNAMENT;
-			/* BUTTONS */	
+			/** BUTTONS */	
 			public static final String GAME_TOURNAMENT_BUTTON = GAME_TOURNAMENT+BUTTON;
 			public static final String GAME_TOURNAMENT_BUTTON_CURRENT_MATCH = GAME_TOURNAMENT_BUTTON+CURRENT+MATCH;
 			public static final String GAME_TOURNAMENT_BUTTON_DESCRIPTION = GAME_TOURNAMENT_BUTTON+DESCRIPTION;
@@ -939,18 +1211,18 @@ public class GuiKeys
 			public static final String GAME_TOURNAMENT_BUTTON_RESULTS = GAME_TOURNAMENT_BUTTON+RESULTS;
 			public static final String GAME_TOURNAMENT_BUTTON_SAVE = GAME_TOURNAMENT_BUTTON+SAVE;
 			public static final String GAME_TOURNAMENT_BUTTON_STATISTICS = GAME_TOURNAMENT_BUTTON+STATISTICS;
-			/* DESCRIPTION */
+			/** DESCRIPTION */
 			public static final String GAME_TOURNAMENT_DESCRIPTION = GAME_TOURNAMENT+DESCRIPTION;
 			public static final String GAME_TOURNAMENT_DESCRIPTION_TITLE = GAME_TOURNAMENT_DESCRIPTION+TITLE;
-			/* RESULTS */
+			/** RESULTS */
 			public static final String GAME_TOURNAMENT_RESULTS = GAME_TOURNAMENT+RESULTS;
 			public static final String GAME_TOURNAMENT_RESULTS_TITLE = GAME_TOURNAMENT_RESULTS+TITLE;
-			/* STATISTICS */
+			/** STATISTICS */
 			public static final String GAME_TOURNAMENT_STATISTICS = GAME_TOURNAMENT+STATISTICS;
 			public static final String GAME_TOURNAMENT_STATISTICS_TITLE = GAME_TOURNAMENT_STATISTICS+TITLE;
-		/* MATCH */
+		/** MATCH */
 		public static final String GAME_MATCH = GAME+MATCH;
-			/* BUTTON */	
+			/** BUTTON */	
 			public static final String GAME_MATCH_BUTTON = GAME_MATCH+BUTTON;
 			public static final String GAME_MATCH_BUTTON_QUIT = GAME_MATCH_BUTTON+QUIT;
 			public static final String GAME_MATCH_BUTTON_CURRENT_ROUND = GAME_MATCH_BUTTON+CURRENT+ROUND;
@@ -962,18 +1234,18 @@ public class GuiKeys
 			public static final String GAME_MATCH_BUTTON_RESULTS = GAME_MATCH_BUTTON+RESULTS;
 			public static final String GAME_MATCH_BUTTON_SAVE = GAME_MATCH_BUTTON+SAVE;
 			public static final String GAME_MATCH_BUTTON_STATISTICS = GAME_MATCH_BUTTON+STATISTICS;
-			/* DESCRIPTION */
+			/** DESCRIPTION */
 			public static final String GAME_MATCH_DESCRIPTION = GAME_MATCH+DESCRIPTION;
 			public static final String GAME_MATCH_DESCRIPTION_TITLE = GAME_MATCH_DESCRIPTION+TITLE;
-			/* RESULTS */
+			/** RESULTS */
 			public static final String GAME_MATCH_RESULTS = GAME_MATCH+RESULTS;
 			public static final String GAME_MATCH_RESULTS_TITLE = GAME_MATCH_RESULTS+TITLE;
-			/* STATISTICS */
+			/** STATISTICS */
 			public static final String GAME_MATCH_STATISTICS = GAME_MATCH+STATISTICS;
 			public static final String GAME_MATCH_STATISTICS_TITLE = GAME_MATCH_STATISTICS+TITLE;
-		/* ROUND */
+		/** ROUND */
 		public static final String GAME_ROUND = GAME+ROUND;
-			/* BUTTON */	
+			/** BUTTON */	
 			public static final String GAME_ROUND_BUTTON = GAME_ROUND+BUTTON;
 			public static final String GAME_ROUND_BUTTON_QUIT = GAME_ROUND_BUTTON+QUIT;
 			public static final String GAME_ROUND_BUTTON_CURRENT_MATCH = GAME_ROUND_BUTTON+CURRENT+MATCH;
@@ -984,7 +1256,7 @@ public class GuiKeys
 			public static final String GAME_ROUND_BUTTON_RESULTS = GAME_ROUND_BUTTON+RESULTS;
 			public static final String GAME_ROUND_BUTTON_SAVE = GAME_ROUND_BUTTON+SAVE;
 			public static final String GAME_ROUND_BUTTON_STATISTICS = GAME_ROUND_BUTTON+STATISTICS;
-			/* PROGRESS BAR */	
+			/** PROGRESS BAR */	
 			public static final String GAME_ROUND_PROGRESSBAR = GAME_ROUND+PROGRESSBAR;
 			public static final String GAME_ROUND_PROGRESSBAR_BOMBSET = GAME_ROUND_PROGRESSBAR+BOMBSET;
 			public static final String GAME_ROUND_PROGRESSBAR_COMPLETE = GAME_ROUND_PROGRESSBAR+COMPLETE;
@@ -993,17 +1265,17 @@ public class GuiKeys
 			public static final String GAME_ROUND_PROGRESSBAR_PLAYER = GAME_ROUND_PROGRESSBAR+PLAYER;
 			public static final String GAME_ROUND_PROGRESSBAR_THEME = GAME_ROUND_PROGRESSBAR+THEME;
 			public static final String GAME_ROUND_PROGRESSBAR_SIMULATION = GAME_ROUND_PROGRESSBAR+SIMULATION;
-			/* DESCRIPTION */
+			/** DESCRIPTION */
 			public static final String GAME_ROUND_DESCRIPTION = GAME_ROUND+DESCRIPTION;
 			public static final String GAME_ROUND_DESCRIPTION_TITLE = GAME_ROUND_DESCRIPTION+TITLE;
 			public static final String GAME_ROUND_DESCRIPTION_PREVIEW = GAME_ROUND_DESCRIPTION+PREVIEW;
-			/* RESULTS */
+			/** RESULTS */
 			public static final String GAME_ROUND_RESULTS = GAME_ROUND+RESULTS;
 			public static final String GAME_ROUND_RESULTS_TITLE = GAME_ROUND_RESULTS+TITLE;
-			/* STATISTICS */
+			/** STATISTICS */
 			public static final String GAME_ROUND_STATISTICS = GAME_ROUND+STATISTICS;
 			public static final String GAME_ROUND_STATISTICS_TITLE = GAME_ROUND_STATISTICS+TITLE;
-			/* MESSAGES */
+			/** MESSAGES */
 			public static final String GAME_ROUND_MESSAGES = GAME_ROUND+MESSAGES;
 			public static final String GAME_ROUND_MESSAGES_READY = GAME_ROUND_MESSAGES+READY;
 			public static final String GAME_ROUND_MESSAGES_SET = GAME_ROUND_MESSAGES+SET;
@@ -1012,13 +1284,13 @@ public class GuiKeys
 	/////////////////////////////////////////////////////////////////
 	// COMMON CONTENT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/* AI */
+	/** AI */
 	public static final String COMMON_AI = COMMON+AI;
 	public static final String COMMON_AI_AUTHOR = COMMON_AI+AUTHOR;
 	public static final String COMMON_AI_NAME = COMMON_AI+NAME;
 	public static final String COMMON_AI_PACK = COMMON_AI+PACK;			
 			
-	/* ARCHIVE */
+	/** ARCHIVE */
 	public static final String COMMON_ARCHIVE = COMMON+ARCHIVE;
 	public static final String COMMON_ARCHIVE_NAME = COMMON_ARCHIVE+NAME;
 	public static final String COMMON_ARCHIVE_TYPE = COMMON_ARCHIVE+TYPE;			
@@ -1026,26 +1298,26 @@ public class GuiKeys
 	public static final String COMMON_ARCHIVE_PLAYERS = COMMON_ARCHIVE+PLAYERS;
 	public static final String COMMON_ARCHIVE_START = COMMON_ARCHIVE+START;			
 	public static final String COMMON_ARCHIVE_SAVE = COMMON_ARCHIVE+SAVE;
-		/* TYPES */
+		/** TYPES */
 		public static final String COMMON_ARCHIVE_TYPES = COMMON_ARCHIVE+TYPES;
 		public static final String COMMON_ARCHIVE_TYPES_CUP = COMMON_ARCHIVE_TYPES+CUP;
 		public static final String COMMON_ARCHIVE_TYPES_LEAGUE = COMMON_ARCHIVE_TYPES+LEAGUE;
 		public static final String COMMON_ARCHIVE_TYPES_SEQUENCE = COMMON_ARCHIVE_TYPES+SEQUENCE;
 		public static final String COMMON_ARCHIVE_TYPES_SINGLE = COMMON_ARCHIVE_TYPES+SINGLE;
 
-	/* BROWSER */
+	/** BROWSER */
 	public static final String COMMON_BROWSER = COMMON+BROWSER;
-		/* FILE */
+		/** FILE */
 		public static final String COMMON_BROWSER_FILE = COMMON_BROWSER+FILE;
 		public static final String COMMON_BROWSER_FILE_PAGEDOWN = COMMON_BROWSER_FILE+PAGEDOWN;
 		public static final String COMMON_BROWSER_FILE_PAGEUP = COMMON_BROWSER_FILE+PAGEUP;
 		public static final String COMMON_BROWSER_FILE_PARENT = COMMON_BROWSER_FILE+PARENT;
-		/* PACK */
+		/** PACK */
 		public static final String COMMON_BROWSER_PACK = COMMON_BROWSER+PACK;
 		public static final String COMMON_BROWSER_PACK_PAGEDOWN = COMMON_BROWSER_PACK+PAGEDOWN;
 		public static final String COMMON_BROWSER_PACK_PAGEUP = COMMON_BROWSER_PACK+PAGEUP;
 
-	/* COLORS */
+	/** COLORS */
 	public static final String COMMON_COLOR = COMMON+COLOR;
 		public static final String COMMON_COLOR_BLACK = COMMON_COLOR+BLACK;
 		public static final String COMMON_COLOR_BLUE = COMMON_COLOR+BLUE;
@@ -1064,14 +1336,14 @@ public class GuiKeys
 		public static final String COMMON_COLOR_WHITE = COMMON_COLOR+WHITE;
 		public static final String COMMON_COLOR_YELLOW = COMMON_COLOR+YELLOW;	
 
-	/* DIALOG */
+	/** DIALOG */
 	public static final String COMMON_DIALOG = COMMON+DIALOG;
 	public static final String COMMON_DIALOG_CANCEL = COMMON_DIALOG+CANCEL;
 	public static final String COMMON_DIALOG_CONFIRM = COMMON_DIALOG+CONFIRM;
 
-	/* EVOLUTION */
+	/** EVOLUTION */
 	public static final String COMMON_EVOLUTION = COMMON+EVOLUTION;
-		/* BUTTON */
+		/** BUTTON */
 		public static final String COMMON_EVOLUTION_BUTTON = COMMON_EVOLUTION+BUTTON;
 		public static final String COMMON_EVOLUTION_BUTTON_BOMBS = COMMON_EVOLUTION_BUTTON+BOMBS;
 		public static final String COMMON_EVOLUTION_BUTTON_CROWNS = COMMON_EVOLUTION_BUTTON+CROWNS;
@@ -1083,15 +1355,15 @@ public class GuiKeys
 		public static final String COMMON_EVOLUTION_BUTTON_TIME = COMMON_EVOLUTION_BUTTON+TIME;
 		public static final String COMMON_EVOLUTION_BUTTON_POINTS = COMMON_EVOLUTION_BUTTON+POINTS;
 		
-	/* GAME INFO */
+	/** GAME INFO */
 	public static final String COMMON_GAME_INFO = COMMON+GAME+INFO;
 	public static final String COMMON_GAME_INFO_ALLOWED_PLAYERS = COMMON_GAME_INFO+ALLOWED+PLAYERS;
 	public static final String COMMON_GAME_INFO_AVERAGE_SCORE = COMMON_GAME_INFO+AVERAGE+SCORE;
 	public static final String COMMON_GAME_INFO_PLAYER_COUNT = COMMON_GAME_INFO+PLAYER+COUNT;
 	public static final String COMMON_GAME_INFO_TOURNAMENT_NAME = COMMON_GAME_INFO+TOURNAMENT+NAME;
-		/* GAME INFO TOURNAMENT STATE */
+		/** GAME INFO TOURNAMENT STATE */
 		public static final String COMMON_GAME_INFO_TOURNAMENT_STATE = COMMON_GAME_INFO+TOURNAMENT+STATE;
-			/* GAME INFO TOURNAMENT STATE DATA */
+			/** GAME INFO TOURNAMENT STATE DATA */
 			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA = COMMON_GAME_INFO_TOURNAMENT_STATE+DATA;
 			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_CLOSED = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+CLOSED;
 			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_FINISHED = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+FINISHED;
@@ -1099,9 +1371,9 @@ public class GuiKeys
 			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_PLAYING = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+PLAYING;
 			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_RETRIEVING = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+RETRIEVING;
 			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_UNKNOWN = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+UNKNOWN;
-		/* GAME INFO TOURNAMENT TYPE */
+		/** GAME INFO TOURNAMENT TYPE */
 		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE = COMMON_GAME_INFO+TOURNAMENT+TYPE;
-			/* GAME INFO TOURNAMENT TYPE DATA */
+			/** GAME INFO TOURNAMENT TYPE DATA */
 			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA = COMMON_GAME_INFO_TOURNAMENT_TYPE+DATA;
 			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_CUP = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+CUP;
 			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_LEAGUE = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+LEAGUE;
@@ -1109,9 +1381,9 @@ public class GuiKeys
 			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_SINGLE = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+SINGLE;
 			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_TURNING = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+TURNING;
 
-	/* GAME LIST */
+	/** GAME LIST */
 	public static final String COMMON_GAME_LIST = COMMON+GAME+LIST;
-		/* GAME LIST BUTTON */
+		/** GAME LIST BUTTON */
 		public static final String COMMON_GAME_LIST_BUTTON = COMMON_GAME_LIST+BUTTON;
 		public static final String COMMON_GAME_LIST_BUTTON_ADD = COMMON_GAME_LIST_BUTTON+ADD;
 		public static final String COMMON_GAME_LIST_BUTTON_CENTRAL = COMMON_GAME_LIST_BUTTON+CENTRAL;
@@ -1119,7 +1391,7 @@ public class GuiKeys
 		public static final String COMMON_GAME_LIST_BUTTON_NEXT = COMMON_GAME_LIST_BUTTON+NEXT;
 		public static final String COMMON_GAME_LIST_BUTTON_PREVIOUS = COMMON_GAME_LIST_BUTTON+PREVIOUS;
 		public static final String COMMON_GAME_LIST_BUTTON_REMOVE = COMMON_GAME_LIST_BUTTON+REMOVE;
-		/* GAME LIST HEADER */
+		/** GAME LIST HEADER */
 		public static final String COMMON_GAME_LIST_HEADER = COMMON_GAME_LIST+HEADER;
 		public static final String COMMON_GAME_LIST_HEADER_ALLOWED_PLAYER = COMMON_GAME_LIST_HEADER+ALLOWED+PLAYER;
 		public static final String COMMON_GAME_LIST_HEADER_AVERAGE_LEVEL = COMMON_GAME_LIST_HEADER+AVERAGE+LEVEL;
@@ -1131,7 +1403,7 @@ public class GuiKeys
 		public static final String COMMON_GAME_LIST_HEADER_PREFERRED = COMMON_GAME_LIST_HEADER+PREFERRED;
 		public static final String COMMON_GAME_LIST_HEADER_TOURNAMENT_STATE = COMMON_GAME_LIST_HEADER+TOURNAMENT+STATE;
 		public static final String COMMON_GAME_LIST_HEADER_TOURNAMENT_TYPE = COMMON_GAME_LIST_HEADER+TOURNAMENT+TYPE;
-		/* GAME LIST DATA */
+		/** GAME LIST DATA */
 		public static final String COMMON_GAME_LIST_DATA = COMMON_GAME_LIST+DATA;
 		public static final String COMMON_GAME_LIST_DATA_FAV_PREFERRED = COMMON_GAME_LIST_DATA+FAV+PREFERRED;
 		public static final String COMMON_GAME_LIST_DATA_FAV_REGULAR = COMMON_GAME_LIST_DATA+FAV+REGULAR;
@@ -1147,42 +1419,42 @@ public class GuiKeys
 		public static final String COMMON_GAME_LIST_DATA_TYPE_SINGLE = COMMON_GAME_LIST_DATA+TYPE+SINGLE;
 		public static final String COMMON_GAME_LIST_DATA_TYPE_TURNING = COMMON_GAME_LIST_DATA+TYPE+TURNING;
 
-	/* HOST INFO */
+	/** HOST INFO */
 	public static final String COMMON_HOST_INFO = COMMON+HOST+INFO;
 	public static final String COMMON_HOST_INFO_IP = COMMON_HOST_INFO+IP;
 	public static final String COMMON_HOST_INFO_NAME = COMMON_HOST_INFO+NAME;
 	public static final String COMMON_HOST_INFO_PLAYED = COMMON_HOST_INFO+PLAYED;
-		/* HOST INFO PREFERRED*/
+		/** HOST INFO PREFERRED*/
 		public static final String COMMON_HOST_INFO_PREFERRED = COMMON_HOST_INFO+PREFERRED;
-			/* HOST INFO PREFERRED DATA */
+			/** HOST INFO PREFERRED DATA */
 			public static final String COMMON_HOST_INFO_PREFERRED_DATA = COMMON_HOST_INFO_PREFERRED+DATA;
 			public static final String COMMON_HOST_INFO_PREFERRED_DATA_PREFERRED = COMMON_HOST_INFO_PREFERRED_DATA+PREFERRED;
 			public static final String COMMON_HOST_INFO_PREFERRED_DATA_NON_PREFERRED = COMMON_HOST_INFO_PREFERRED_DATA+NON+PREFERRED;
-		/* HOST INFO TYPE*/
+		/** HOST INFO TYPE*/
 		public static final String COMMON_HOST_INFO_TYPE = COMMON_HOST_INFO+TYPE;
-			/* HOST INFO TYPE DATA */
+			/** HOST INFO TYPE DATA */
 			public static final String COMMON_HOST_INFO_TYPE_DATA = COMMON_HOST_INFO_TYPE+DATA;
 			public static final String COMMON_HOST_INFO_TYPE_DATA_BOTH = COMMON_HOST_INFO_TYPE_DATA+BOTH;
 			public static final String COMMON_HOST_INFO_TYPE_DATA_CENTRAL = COMMON_HOST_INFO_TYPE_DATA+CENTRAL;
 			public static final String COMMON_HOST_INFO_TYPE_DATA_DIRECT = COMMON_HOST_INFO_TYPE_DATA+DIRECT;
 
-	/* ITEMS */
+	/** ITEMS */
 	public static final String COMMON_ITEMS = COMMON+ITEMS;
-		/* AVAILABLE */
+		/** AVAILABLE */
 		public static final String COMMON_ITEMS_AVAILABLE = COMMON_ITEMS+AVAILABLE;
 		public static final String COMMON_ITEMS_AVAILABLE_TITLE = COMMON_ITEMS_AVAILABLE+TITLE;
-		/* INITIAL */
+		/** INITIAL */
 		public static final String COMMON_ITEMS_INITIAL = COMMON_ITEMS+INITIAL;
 		public static final String COMMON_ITEMS_INITIAL_TITLE = COMMON_ITEMS_INITIAL+TITLE;
 
-	/* LEG */
+	/** LEG */
 	public static final String COMMON_LEG = COMMON+LEG;
 	public static final String COMMON_LEG_DOWN = COMMON_LEG+DOWN;
 	public static final String COMMON_LEG_LEFT = COMMON_LEG+LEFT;
 	public static final String COMMON_LEG_RIGHT = COMMON_LEG+RIGHT;
 	public static final String COMMON_LEG_UP = COMMON_LEG+UP;
 
-	/* LEVEL */
+	/** LEVEL */
 	public static final String COMMON_LEVEL = COMMON+LEVEL;
 	public static final String COMMON_LEVEL_TITLE = COMMON_LEVEL+TITLE;
 	public static final String COMMON_LEVEL_ALLOWED_PLAYERS = COMMON_LEVEL+ALLOWED+PLAYERS;
@@ -1194,12 +1466,12 @@ public class GuiKeys
 	public static final String COMMON_LEVEL_SOURCE = COMMON_LEVEL+SOURCE;
 	public static final String COMMON_LEVEL_THEME = COMMON_LEVEL+THEME;
 		
-	/* LIMIT */
+	/** LIMIT */
 	public static final String COMMON_LIMIT = COMMON+LIMIT;
-		/* MATCH */
+		/** MATCH */
 		public static final String COMMON_LIMIT_MATCH = COMMON_LIMIT+MATCH;
 		public static final String COMMON_LIMIT_MATCH_TITLE = COMMON_LIMIT_MATCH+TITLE;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_LIMIT_MATCH_HEADER = COMMON_LIMIT_MATCH+HEADER;
 			public static final String COMMON_LIMIT_MATCH_HEADER_BOMBEDS = COMMON_LIMIT_MATCH_HEADER+BOMBEDS;
 			public static final String COMMON_LIMIT_MATCH_HEADER_BOMBINGS = COMMON_LIMIT_MATCH_HEADER+BOMBINGS;
@@ -1211,10 +1483,10 @@ public class GuiKeys
 			public static final String COMMON_LIMIT_MATCH_HEADER_PAINTINGS = COMMON_LIMIT_MATCH_HEADER+PAINTINGS;
 			public static final String COMMON_LIMIT_MATCH_HEADER_SELF_BOMBINGS = COMMON_LIMIT_MATCH_HEADER+SELF+BOMBINGS;
 			public static final String COMMON_LIMIT_MATCH_HEADER_TIME = COMMON_LIMIT_MATCH_HEADER+TIME;
-		/* ROUND */
+		/** ROUND */
 		public static final String COMMON_LIMIT_ROUND = COMMON_LIMIT+ROUND;
 		public static final String COMMON_LIMIT_ROUND_TITLE = COMMON_LIMIT_ROUND+TITLE;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_LIMIT_ROUND_HEADER = COMMON_LIMIT_ROUND+HEADER;
 			public static final String COMMON_LIMIT_ROUND_HEADER_BOMBEDS = COMMON_LIMIT_ROUND_HEADER+BOMBEDS;
 			public static final String COMMON_LIMIT_ROUND_HEADER_BOMBINGS = COMMON_LIMIT_ROUND_HEADER+BOMBINGS;
@@ -1226,10 +1498,10 @@ public class GuiKeys
 			public static final String COMMON_LIMIT_ROUND_HEADER_PAINTINGS = COMMON_LIMIT_ROUND_HEADER+PAINTINGS;
 			public static final String COMMON_LIMIT_ROUND_HEADER_SELF_BOMBINGS = COMMON_LIMIT_ROUND_HEADER+SELF+BOMBINGS;
 			public static final String COMMON_LIMIT_ROUND_HEADER_TIME = COMMON_LIMIT_ROUND_HEADER+TIME;
-		/* TOURNAMENT */
+		/** TOURNAMENT */
 		public static final String COMMON_LIMIT_TOURNAMENT = COMMON_LIMIT+TOURNAMENT;
 		public static final String COMMON_LIMIT_TOURNAMENT_TITLE = COMMON_LIMIT_TOURNAMENT+TITLE;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER = COMMON_LIMIT_TOURNAMENT+HEADER;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_BOMBEDS = COMMON_LIMIT_TOURNAMENT_HEADER+BOMBEDS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_BOMBINGS = COMMON_LIMIT_TOURNAMENT_HEADER+BOMBINGS;
@@ -1242,14 +1514,14 @@ public class GuiKeys
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_SELF_BOMBINGS = COMMON_LIMIT_TOURNAMENT_HEADER+SELF+BOMBINGS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_TIME = COMMON_LIMIT_TOURNAMENT_HEADER+TIME;
 
-	/* MATCH */
+	/** MATCH */
 	public static final String COMMON_MATCH = COMMON+MATCH;
 	public static final String COMMON_MATCH_AUTHOR = COMMON_MATCH+AUTHOR;
 	public static final String COMMON_MATCH_NAME = COMMON_MATCH+NAME;
 	public static final String COMMON_MATCH_ALLOWED_PLAYERS = COMMON_MATCH+ALLOWED+PLAYERS;
 	public static final String COMMON_MATCH_ROUND_COUNT = COMMON_MATCH+ROUND+COUNT;
 			
-	/* PART */
+	/** PART */
 	public static final String COMMON_PART = COMMON+PART;
 	public static final String COMMON_PART_AFTER = COMMON_PART+AFTER;
 	public static final String COMMON_PART_BEFORE = COMMON_PART+BEFORE;
@@ -1257,27 +1529,27 @@ public class GuiKeys
 	public static final String COMMON_PART_RANK = COMMON_PART+RANK;
 	public static final String COMMON_PART_UNDECIDED = COMMON_PART+UNDECIDED;
 
-	/* PLAYERS */
+	/** PLAYERS */
 	public static final String COMMON_PLAYERS = COMMON+PLAYERS;
-		/* LIST */
+		/** LIST */
 		public static final String COMMON_PLAYERS_LIST = COMMON_PLAYERS+LIST;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_PLAYERS_LIST_HEADER = COMMON_PLAYERS_LIST+HEADER;
 			public static final String COMMON_PLAYERS_LIST_HEADER_CONTROLS = COMMON_PLAYERS_LIST_HEADER+CONTROLS;
 			public static final String COMMON_PLAYERS_LIST_HEADER_HERO = COMMON_PLAYERS_LIST_HEADER+HERO;
 			public static final String COMMON_PLAYERS_LIST_HEADER_NAME = COMMON_PLAYERS_LIST_HEADER+NAME;
 			public static final String COMMON_PLAYERS_LIST_HEADER_PROFILE = COMMON_PLAYERS_LIST_HEADER+PROFILE;
 			public static final String COMMON_PLAYERS_LIST_HEADER_RANK = COMMON_PLAYERS_LIST_HEADER+RANK;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_PLAYERS_LIST_DATA = COMMON_PLAYERS_LIST+DATA;
 			public static final String COMMON_PLAYERS_LIST_DATA_COMPUTER = COMMON_PLAYERS_LIST_DATA+COMPUTER;
 			public static final String COMMON_PLAYERS_LIST_DATA_CONTROLS = COMMON_PLAYERS_LIST_DATA+CONTROLS;
 			public static final String COMMON_PLAYERS_LIST_DATA_HUMAN = COMMON_PLAYERS_LIST_DATA+HUMAN;
 			public static final String COMMON_PLAYERS_LIST_DATA_REMOTE = COMMON_PLAYERS_LIST_DATA+REMOTE;
 			public static final String COMMON_PLAYERS_LIST_DATA_NO_CONTROLS = COMMON_PLAYERS_LIST_DATA+NO+CONTROLS;
-		/* SELECTION */
+		/** SELECTION */
 		public static final String COMMON_PLAYERS_SELECTION = COMMON_PLAYERS+SELECTION;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_PLAYERS_SELECTION_HEADER = COMMON_PLAYERS_SELECTION+HEADER;
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_COLOR = COMMON_PLAYERS_SELECTION_HEADER+COLOR;
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_CONTROLS = COMMON_PLAYERS_SELECTION_HEADER+CONTROLS;
@@ -1287,7 +1559,7 @@ public class GuiKeys
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_RANK = COMMON_PLAYERS_SELECTION_HEADER+RANK;
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_READY = COMMON_PLAYERS_SELECTION_HEADER+READY;
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_TYPE = COMMON_PLAYERS_SELECTION_HEADER+TYPE;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_PLAYERS_SELECTION_DATA = COMMON_PLAYERS_SELECTION+DATA;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_ADD = COMMON_PLAYERS_SELECTION_DATA+ADD;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_COMPUTER = COMMON_PLAYERS_SELECTION_DATA+COMPUTER;
@@ -1297,12 +1569,12 @@ public class GuiKeys
 			public static final String COMMON_PLAYERS_SELECTION_DATA_REMOTE = COMMON_PLAYERS_SELECTION_DATA+REMOTE;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_UNCONFIRMED = COMMON_PLAYERS_SELECTION_DATA+UNCONFIRMED;
 
-	/* POINTS */
+	/** POINTS */
 	public static final String COMMON_POINTS = COMMON+POINTS;
-		/* MATCH */
+		/** MATCH */
 		public static final String COMMON_POINTS_MATCH = COMMON_POINTS+MATCH;
 		public static final String COMMON_POINTS_MATCH_TITLE = COMMON_POINTS_MATCH+TITLE;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_POINTS_MATCH_HEADER = COMMON_POINTS_MATCH+HEADER;
 			public static final String COMMON_POINTS_MATCH_HEADER_CONSTANT = COMMON_POINTS_MATCH_HEADER+CONSTANT;
 			public static final String COMMON_POINTS_MATCH_HEADER_DISCRETIZE = COMMON_POINTS_MATCH_HEADER+DISCRETIZE;
@@ -1311,7 +1583,7 @@ public class GuiKeys
 			public static final String COMMON_POINTS_MATCH_HEADER_RANKPOINTS = COMMON_POINTS_MATCH_HEADER+RANKPOINTS;
 			public static final String COMMON_POINTS_MATCH_HEADER_SCORE = COMMON_POINTS_MATCH_HEADER+SCORE;
 			public static final String COMMON_POINTS_MATCH_HEADER_TOTAL = COMMON_POINTS_MATCH_HEADER+TOTAL;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_POINTS_MATCH_DATA = COMMON_POINTS_MATCH+DATA;
 			public static final String COMMON_POINTS_MATCH_DATA_BOMBEDS = COMMON_POINTS_MATCH_DATA+BOMBEDS;
 			public static final String COMMON_POINTS_MATCH_DATA_BOMBINGS = COMMON_POINTS_MATCH_DATA+BOMBINGS;
@@ -1326,10 +1598,10 @@ public class GuiKeys
 			public static final String COMMON_POINTS_MATCH_DATA_SELF_BOMBINGS = COMMON_POINTS_MATCH_DATA+SELF+BOMBINGS;
 			public static final String COMMON_POINTS_MATCH_DATA_SHARE = COMMON_POINTS_MATCH_DATA+SHARE;
 			public static final String COMMON_POINTS_MATCH_DATA_TIME = COMMON_POINTS_MATCH_DATA+TIME;
-		/* ROUND */
+		/** ROUND */
 		public static final String COMMON_POINTS_ROUND = COMMON_POINTS+ROUND;
 		public static final String COMMON_POINTS_ROUND_TITLE = COMMON_POINTS_ROUND+TITLE;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_POINTS_ROUND_HEADER = COMMON_POINTS_ROUND+HEADER;
 			public static final String COMMON_POINTS_ROUND_HEADER_CONSTANT = COMMON_POINTS_ROUND_HEADER+CONSTANT;
 			public static final String COMMON_POINTS_ROUND_HEADER_DISCRETIZE = COMMON_POINTS_ROUND_HEADER+DISCRETIZE;
@@ -1338,7 +1610,7 @@ public class GuiKeys
 			public static final String COMMON_POINTS_ROUND_HEADER_RANKPOINTS = COMMON_POINTS_ROUND_HEADER+RANKPOINTS;
 			public static final String COMMON_POINTS_ROUND_HEADER_SCORE = COMMON_POINTS_ROUND_HEADER+SCORE;
 			public static final String COMMON_POINTS_ROUND_HEADER_TOTAL = COMMON_POINTS_ROUND_HEADER+TOTAL;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_POINTS_ROUND_DATA = COMMON_POINTS_ROUND+DATA;
 			public static final String COMMON_POINTS_ROUND_DATA_BOMBEDS = COMMON_POINTS_ROUND_DATA+BOMBEDS;
 			public static final String COMMON_POINTS_ROUND_DATA_BOMBINGS = COMMON_POINTS_ROUND_DATA+BOMBINGS;
@@ -1353,10 +1625,10 @@ public class GuiKeys
 			public static final String COMMON_POINTS_ROUND_DATA_SELF_BOMBINGS = COMMON_POINTS_ROUND_DATA+SELF+BOMBINGS;
 			public static final String COMMON_POINTS_ROUND_DATA_SHARE = COMMON_POINTS_ROUND_DATA+SHARE;
 			public static final String COMMON_POINTS_ROUND_DATA_TIME = COMMON_POINTS_ROUND_DATA+TIME;
-		/* TOURNAMENT */
+		/** TOURNAMENT */
 		public static final String COMMON_POINTS_TOURNAMENT = COMMON_POINTS+TOURNAMENT;
 		public static final String COMMON_POINTS_TOURNAMENT_TITLE = COMMON_POINTS_TOURNAMENT+TITLE;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_POINTS_TOURNAMENT_HEADER = COMMON_POINTS_TOURNAMENT+HEADER;
 			public static final String COMMON_POINTS_TOURNAMENT_HEADER_CONSTANT = COMMON_POINTS_TOURNAMENT_HEADER+CONSTANT;
 			public static final String COMMON_POINTS_TOURNAMENT_HEADER_DISCRETIZE = COMMON_POINTS_TOURNAMENT_HEADER+DISCRETIZE;
@@ -1365,7 +1637,7 @@ public class GuiKeys
 			public static final String COMMON_POINTS_TOURNAMENT_HEADER_RANKPOINTS = COMMON_POINTS_TOURNAMENT_HEADER+RANKPOINTS;
 			public static final String COMMON_POINTS_TOURNAMENT_HEADER_SCORE = COMMON_POINTS_TOURNAMENT_HEADER+SCORE;
 			public static final String COMMON_POINTS_TOURNAMENT_HEADER_TOTAL = COMMON_POINTS_TOURNAMENT_HEADER+TOTAL;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_POINTS_TOURNAMENT_DATA = COMMON_POINTS_TOURNAMENT+DATA;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_BOMBEDS = COMMON_POINTS_TOURNAMENT_DATA+BOMBEDS;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_BOMBINGS = COMMON_POINTS_TOURNAMENT_DATA+BOMBINGS;
@@ -1381,7 +1653,7 @@ public class GuiKeys
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_SHARE = COMMON_POINTS_TOURNAMENT_DATA+SHARE;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_TIME = COMMON_POINTS_TOURNAMENT_DATA+TIME;
 
-	/* PROFILES */
+	/** PROFILES */
 	public static final String COMMON_PROFILES = COMMON+PROFILES;
 	public static final String COMMON_PROFILES_AI_NAME = COMMON_PROFILES+AI+NAME;
 	public static final String COMMON_PROFILES_AI_PACK = COMMON_PROFILES+AI+PACK;
@@ -1391,18 +1663,18 @@ public class GuiKeys
 	public static final String COMMON_PROFILES_NAME = COMMON_PROFILES+NAME;
 	public static final String COMMON_PROFILES_RANK = COMMON_PROFILES+RANK;
 			
-	/* REPLAY */
+	/** REPLAY */
 	public static final String COMMON_REPLAY = COMMON+REPLAY;
 	public static final String COMMON_REPLAY_NAME = COMMON_REPLAY+NAME;
 	public static final String COMMON_REPLAY_PACK = COMMON_REPLAY+PACK;			
 	public static final String COMMON_REPLAY_PLAYERS = COMMON_REPLAY+PLAYERS;
 	public static final String COMMON_REPLAY_SAVE = COMMON_REPLAY+SAVE;
 
-	/* RESULTS */
+	/** RESULTS */
 	public static final String COMMON_RESULTS = COMMON+RESULTS;
-		/* MATCH */
+		/** MATCH */
 		public static final String COMMON_RESULTS_MATCH = COMMON_RESULTS+MATCH;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_RESULTS_MATCH_HEADER = COMMON_RESULTS_MATCH+HEADER;
 			public static final String COMMON_RESULTS_MATCH_HEADER_BOMBEDS = COMMON_RESULTS_MATCH_HEADER+BOMBEDS;
 			public static final String COMMON_RESULTS_MATCH_HEADER_BOMBINGS = COMMON_RESULTS_MATCH_HEADER+BOMBINGS;
@@ -1420,14 +1692,14 @@ public class GuiKeys
 			public static final String COMMON_RESULTS_MATCH_HEADER_SELF_BOMBINGS = COMMON_RESULTS_MATCH_HEADER+SELF+BOMBINGS;
 			public static final String COMMON_RESULTS_MATCH_HEADER_TIME = COMMON_RESULTS_MATCH_HEADER+TIME;
 			public static final String COMMON_RESULTS_MATCH_HEADER_TOTAL = COMMON_RESULTS_MATCH_HEADER+TOTAL;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_RESULTS_MATCH_DATA = COMMON_RESULTS_MATCH+DATA;
 			public static final String COMMON_RESULTS_MATCH_DATA_COMPUTER = COMMON_RESULTS_MATCH_DATA+COMPUTER;
 			public static final String COMMON_RESULTS_MATCH_DATA_HUMAN = COMMON_RESULTS_MATCH_DATA+HUMAN;
 			public static final String COMMON_RESULTS_MATCH_DATA_REMOTE = COMMON_RESULTS_MATCH_DATA+REMOTE;
-		/* TOURNAMENT */
+		/** TOURNAMENT */
 		public static final String COMMON_RESULTS_TOURNAMENT = COMMON_RESULTS+TOURNAMENT;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER = COMMON_RESULTS_TOURNAMENT+HEADER;
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_BOMBEDS = COMMON_RESULTS_TOURNAMENT_HEADER+BOMBEDS;
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_BOMBINGS = COMMON_RESULTS_TOURNAMENT_HEADER+BOMBINGS;
@@ -1449,14 +1721,14 @@ public class GuiKeys
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_WON = COMMON_RESULTS_TOURNAMENT_HEADER+WON;
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_DRAWN = COMMON_RESULTS_TOURNAMENT_HEADER+DRAWN;
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_LOST = COMMON_RESULTS_TOURNAMENT_HEADER+LOST;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_RESULTS_TOURNAMENT_DATA = COMMON_RESULTS_TOURNAMENT+DATA;
 			public static final String COMMON_RESULTS_TOURNAMENT_DATA_COMPUTER = COMMON_RESULTS_TOURNAMENT_DATA+COMPUTER;
 			public static final String COMMON_RESULTS_TOURNAMENT_DATA_HUMAN = COMMON_RESULTS_TOURNAMENT_DATA+HUMAN;
 			public static final String COMMON_RESULTS_TOURNAMENT_DATA_REMOTE = COMMON_RESULTS_TOURNAMENT_DATA+REMOTE;
-		/* ROUND */
+		/** ROUND */
 		public static final String COMMON_RESULTS_ROUND = COMMON_RESULTS+ROUND;
-			/* HEADER */
+			/** HEADER */
 			public static final String COMMON_RESULTS_ROUND_HEADER = COMMON_RESULTS_ROUND+HEADER;
 			public static final String COMMON_RESULTS_ROUND_HEADER_BOMBEDS = COMMON_RESULTS_ROUND_HEADER+BOMBEDS;
 			public static final String COMMON_RESULTS_ROUND_HEADER_BOMBINGS = COMMON_RESULTS_ROUND_HEADER+BOMBINGS;
@@ -1472,13 +1744,13 @@ public class GuiKeys
 			public static final String COMMON_RESULTS_ROUND_HEADER_RANK = COMMON_RESULTS_ROUND_HEADER+RANK;
 			public static final String COMMON_RESULTS_ROUND_HEADER_SELF_BOMBINGS = COMMON_RESULTS_ROUND_HEADER+SELF+BOMBINGS;
 			public static final String COMMON_RESULTS_ROUND_HEADER_TIME = COMMON_RESULTS_ROUND_HEADER+TIME;
-			/* DATA */
+			/** DATA */
 			public static final String COMMON_RESULTS_ROUND_DATA = COMMON_RESULTS_ROUND+DATA;
 			public static final String COMMON_RESULTS_ROUND_DATA_COMPUTER = COMMON_RESULTS_ROUND_DATA+COMPUTER;
 			public static final String COMMON_RESULTS_ROUND_DATA_HUMAN = COMMON_RESULTS_MATCH_DATA+HUMAN;
 			public static final String COMMON_RESULTS_ROUND_DATA_REMOTE = COMMON_RESULTS_MATCH_DATA+REMOTE;
 	
-	/* ROUND */
+	/** ROUND */
 	public static final String COMMON_ROUND = COMMON+ROUND;
 	public static final String COMMON_ROUND_ALLOWED_PLAYERS = COMMON_ROUND+ALLOWED+PLAYERS;
 	public static final String COMMON_ROUND_AUTHOR = COMMON_ROUND+AUTHOR;
@@ -1486,7 +1758,7 @@ public class GuiKeys
 	public static final String COMMON_ROUND_LEVEL_PACK = COMMON_ROUND+LEVEL+PACK;
 	public static final String COMMON_ROUND_TITLE = COMMON_ROUND+TITLE;
 	
-	/* SPRITE */
+	/** SPRITE */
 	public static final String COMMON_SPRITE = COMMON+SPRITE;
 	public static final String COMMON_SPRITE_AUTHOR = COMMON_SPRITE+AUTHOR;
 	public static final String COMMON_SPRITE_COLORS = COMMON_SPRITE+COLORS;
@@ -1495,20 +1767,20 @@ public class GuiKeys
 	public static final String COMMON_SPRITE_PACK = COMMON_SPRITE+PACK;
 	public static final String COMMON_SPRITE_SOURCE = COMMON_SPRITE+SOURCE;	
 	
-	/* STATISTICS */	
+	/** STATISTICS */	
 	public static final String COMMON_STATISTICS = COMMON+STATISTICS;
-		/* PLAYER */
+		/** PLAYER */
 		public static final String COMMON_STATISTICS_PLAYER = COMMON_STATISTICS+PLAYER;
-			/* COMMON */
+			/** COMMON */
 			public static final String COMMON_STATISTICS_PLAYER_COMMON = COMMON_STATISTICS_PLAYER+COMMON;
-				/* HEADER */
+				/** HEADER */
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER = COMMON_STATISTICS_PLAYER_COMMON+HEADER;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_NAME = COMMON_STATISTICS_PLAYER_COMMON_HEADER+NAME;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT = COMMON_STATISTICS_PLAYER_COMMON_HEADER+PORTRAIT;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK = COMMON_STATISTICS_PLAYER_COMMON_HEADER+RANK;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION= COMMON_STATISTICS_PLAYER_COMMON_HEADER+EVOLUTION;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_TYPE = COMMON_STATISTICS_PLAYER_COMMON_HEADER+TYPE;
-				/* DATA */
+				/** DATA */
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA = COMMON_STATISTICS_PLAYER_COMMON+DATA;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER = COMMON_STATISTICS_PLAYER_COMMON_DATA+COMPUTER;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_HUMAN = COMMON_STATISTICS_PLAYER_COMMON_DATA+HUMAN;
@@ -1521,7 +1793,7 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_SAME = COMMON_STATISTICS_PLAYER_COMMON_DATA+SAME;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_UP = COMMON_STATISTICS_PLAYER_COMMON_DATA+UP;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_DOWN = COMMON_STATISTICS_PLAYER_COMMON_DATA+DOWN;
-				/* BUTTON */
+				/** BUTTON */
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON = COMMON_STATISTICS_PLAYER_COMMON+BUTTON;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+REGISTER;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+UNREGISTER;
@@ -1535,19 +1807,19 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+ALL+RANKS;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NORANKS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+NO+RANKS;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALL = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+ALL;
-			/* GLICKO2 */
+			/** GLICKO2 */
 			public static final String COMMON_STATISTICS_PLAYER_GLICKO2 = COMMON_STATISTICS_PLAYER+GLICKO2;
 			public static final String COMMON_STATISTICS_PLAYER_GLICKO2_TITLE = COMMON_STATISTICS_PLAYER_GLICKO2+TITLE;
-				/* HEADER */
+				/** HEADER */
 				public static final String COMMON_STATISTICS_PLAYER_GLICKO2_HEADER = COMMON_STATISTICS_PLAYER_GLICKO2+HEADER;
 				public static final String COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_MEAN = COMMON_STATISTICS_PLAYER_GLICKO2_HEADER+MEAN;
 				public static final String COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT = COMMON_STATISTICS_PLAYER_GLICKO2_HEADER+ROUND+COUNT;
 				public static final String COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_STANDARD_DEVIATION = COMMON_STATISTICS_PLAYER_GLICKO2_HEADER+STANDARD+DEVIATION;
 				public static final String COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_VOLATILITY = COMMON_STATISTICS_PLAYER_GLICKO2_HEADER+VOLATILITY;
-			/* SCORES */
+			/** SCORES */
 			public static final String COMMON_STATISTICS_PLAYER_SCORES = COMMON_STATISTICS_PLAYER+SCORES;
 			public static final String COMMON_STATISTICS_PLAYER_SCORES_TITLE = COMMON_STATISTICS_PLAYER_SCORES+TITLE;
-				/* HEADER */
+				/** HEADER */
 				public static final String COMMON_STATISTICS_PLAYER_SCORES_HEADER = COMMON_STATISTICS_PLAYER_SCORES+HEADER;
 				public static final String COMMON_STATISTICS_PLAYER_SCORES_HEADER_BOMBINGS = COMMON_STATISTICS_PLAYER_SCORES_HEADER+BOMBINGS;
 				public static final String COMMON_STATISTICS_PLAYER_SCORES_HEADER_BOMBEDS = COMMON_STATISTICS_PLAYER_SCORES_HEADER+BOMBEDS;
@@ -1556,10 +1828,10 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_SCORES_HEADER_ITEMS = COMMON_STATISTICS_PLAYER_SCORES_HEADER+ITEMS;
 				public static final String COMMON_STATISTICS_PLAYER_SCORES_HEADER_PAINTINGS = COMMON_STATISTICS_PLAYER_SCORES_HEADER+PAINTINGS;
 				public static final String COMMON_STATISTICS_PLAYER_SCORES_HEADER_SELF_BOMBINGS = COMMON_STATISTICS_PLAYER_SCORES_HEADER+SELF+BOMBINGS;
-			/* CONFRONTATIONS */
+			/** CONFRONTATIONS */
 			public static final String COMMON_STATISTICS_PLAYER_CONFRONTATIONS = COMMON_STATISTICS_PLAYER+CONFRONTATIONS;
 			public static final String COMMON_STATISTICS_PLAYER_CONFRONTATIONS_TITLE = COMMON_STATISTICS_PLAYER_CONFRONTATIONS+TITLE;
-				/* HEADER */
+				/** HEADER */
 				public static final String COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER = COMMON_STATISTICS_PLAYER_CONFRONTATIONS+HEADER;
 				public static final String COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN = COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+ROUNDS+DRAWN;
 				public static final String COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST = COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+ROUNDS+LOST;
@@ -1567,20 +1839,20 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED = COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+ROUNDS+PLAYED;
 				public static final String COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_TIME_PLAYED = COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+TIME+PLAYED;
 
-	/* TOURNAMENT */
+	/** TOURNAMENT */
 	public static final String COMMON_TOURNAMENT = COMMON+TOURNAMENT;
 	public static final String COMMON_TOURNAMENT_AUTHOR = COMMON_TOURNAMENT+AUTHOR;
 	public static final String COMMON_TOURNAMENT_NAME = COMMON_TOURNAMENT+NAME;
 	public static final String COMMON_TOURNAMENT_ALLOWED_PLAYERS = COMMON_TOURNAMENT+ALLOWED+PLAYERS;
 	public static final String COMMON_TOURNAMENT_TYPE = COMMON_TOURNAMENT+TYPE;
-		/* TYPES */
+		/** TYPES */
 		public static final String COMMON_TOURNAMENT_TYPES = COMMON_TOURNAMENT+TYPES;
 		public static final String COMMON_TOURNAMENT_TYPES_CUP = COMMON_TOURNAMENT_TYPES+CUP;
 		public static final String COMMON_TOURNAMENT_TYPES_LEAGUE = COMMON_TOURNAMENT_TYPES+LEAGUE;
 		public static final String COMMON_TOURNAMENT_TYPES_SEQUENCE = COMMON_TOURNAMENT_TYPES+SEQUENCE;
 		public static final String COMMON_TOURNAMENT_TYPES_SINGLE = COMMON_TOURNAMENT_TYPES+SINGLE;
 
-	/* TRANSFER */
+	/** TRANSFER */
 	public static final String COMMON_TRANSFER = COMMON+TRANSFER;
 	public static final String COMMON_TRANSFER_LEFT = COMMON_TRANSFER+LEFT;
 	public static final String COMMON_TRANSFER_RIGHT = COMMON_TRANSFER+RIGHT;
