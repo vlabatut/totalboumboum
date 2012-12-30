@@ -369,7 +369,7 @@ public abstract class VisibleLoop extends Loop
 	 * 		Total time spent since the round started.
 	 */
 	public long getTotalEngineTime()
-	{	return totalEngineTime;	
+	{	return totalEngineTime;
 	}
 
 	/** 
