@@ -33,7 +33,6 @@ import org.totalboumboum.gui.tools.GuiKeys;
  * a match.
  * 
  * @author Vincent Labatut
- *
  */
 public class MatchStatistics extends EntitledDataPanel
 {	/** Class id */
@@ -84,7 +83,7 @@ public class MatchStatistics extends EntitledDataPanel
 	 * displayed.
 	 * 
 	 * @return
-	 * 		The current round.
+	 * 		The current match.
 	 */
 	public Match getMatch()
 	{	return match;	

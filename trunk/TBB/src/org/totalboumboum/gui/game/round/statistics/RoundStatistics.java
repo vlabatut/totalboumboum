@@ -33,7 +33,6 @@ import org.totalboumboum.gui.tools.GuiKeys;
  * a round.
  * 
  * @author Vincent Labatut
- *
  */
 public class RoundStatistics extends EntitledDataPanel
 {	/** Class id */

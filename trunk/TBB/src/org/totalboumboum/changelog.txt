@@ -513,6 +513,8 @@
 		- correction de certains menus modaux, toujours très lents
 		- ajout des menus modaux manquant
 		- correction de problèmes de traduction dans la version anglaise
+		- inclusion de panels de statistiques pendant les parties, pour afficher décrire 
+		  l'évolution de tournois/rencontres/manches sous forme de graphiques
 	- ressources : 
 		- Shirobon SBM4
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)

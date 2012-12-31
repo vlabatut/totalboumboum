@@ -20,16 +20,16 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="Trnmt201213_1.cup" />
+	<tournament name="Trnmt201112_0.altcup" />
 	<players>
-		<player file="b4da1179-5a61-4300-a267-487179de9b98" color="GRASS" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="a7e0a85a-819f-4d43-88c9-80fced007e4f" color="BLACK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="f1b50f3a-3ad0-41b9-a7ab-4029288c9a3d" color="ULTRAMARINE" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="d9dc2fd6-c0c5-42d7-9c16-46b838c6dbae" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="bf0ed21f-8d7a-4cee-aa27-2d6729ce9940" color="ULTRAMARINE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="c03e8aff-599e-4485-8fd2-cfe2b9ec4f0c" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
 		<player file="549e6962-4ec0-4098-bbec-2bb0ae4d7587" color="CYAN" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
 		<player file="4a22a9cf-9bd9-4a55-b206-e0cbccdce042" color="GREY" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="cadc893f-eebe-448f-8351-15365d1f4e71" color="RED" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="2fa20b36-2ad2-4d3b-9010-eb2e090f648e" color="INDIGO" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="INDIGO" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="GRASS" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameTournament>
 

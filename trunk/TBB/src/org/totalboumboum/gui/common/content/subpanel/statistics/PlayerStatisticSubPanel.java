@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.Box;
@@ -55,18 +56,24 @@ import org.totalboumboum.statistics.overall.PlayerStats;
 import org.xml.sax.SAXException;
 
 /**
+ * This class displays the overall statistics
+ * for all players, including glicko-2 rankings
+ * and more detailed info such as scores or confrontations.
  * 
  * @author Vincent Labatut
- *
  */
 public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
-	private final static int COL_PREVIOUS = 0;
-	private final static int COL_TYPE = 2;
-	private final static int COL_RANKS = 4;
-	private final static int COL_SUM_MEAN = 6;
-	private final static int COL_NEXT = 8;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard player statistic panel.
+	 * 
+	 * @param width
+	 * 		Width in pixels.
+	 * @param height
+	 * 		Height in pixels.
+	 */
 	public PlayerStatisticSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER);
 
@@ -204,27 +211,57 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PAGES			/////////////////////////////////////////////
+	// TABLE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of player ids */
 	private List<String> playersIds;
+	/** Map of player profiles */
 	private HashMap<String,Profile> profilesMap;
-	@SuppressWarnings("rawtypes")
-	private HashMap<String,List<Comparable>> playersScores = new HashMap<String, List<Comparable>>();
+	/** List of player data */
+	private Map<String,List<Comparable<?>>> playersScores = new HashMap<String, List<Comparable<?>>>();
+	/** Page currently displayed */
 	private int currentPage = 0;
+	/** List of panels constituting the table */
 	private final List<TableSubPanel> listPanels = new ArrayList<TableSubPanel>();
-	private int pageCount;	
+	/** Number of pages in the table */
+	private int pageCount;
+	/** Number of rows in the table */
 	private int lines;
+	/** Main panel for the table */
 	private TableSubPanel mainPanel;
-	private JPanel buttonsPanel;
-	
+
+	/**
+	 * Returns the map of profiles
+	 * for all the players displayed in
+	 * the table.
+	 * 
+	 * @return
+	 * 		Map of profiles.
+	 */
 	public HashMap<String,Profile> getPlayersProfiles()
 	{	return profilesMap;	
 	}
 	
+	/**
+	 * Returns the ids of the players
+	 * displayed in the table.
+	 * 
+	 * @return
+	 * 		A list of ids.
+	 */
 	public List<String> getPlayersIds()
 	{	return playersIds;	
 	}
 	
+	/**
+	 * Changes the data displayed by this panel.
+	 * The table is upadated.
+	 * 
+	 * @param profilesMap
+	 * 		Map of player profiles.
+	 * @param lines
+	 * 		Number of rows in the table.
+	 */
 	public void setPlayersIds(HashMap<String,Profile> profilesMap, int lines)
 	{	// init
 		this.lines = lines;
@@ -243,8 +280,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			@Override
 			public int compare(String playerId1, String playerId2)
 			{	int result = 0;
-				List<Comparable> list1 = playersScores.get(playerId1);
-				List<Comparable> list2 = playersScores.get(playerId2);
+				List<Comparable<?>> list1 = playersScores.get(playerId1);
+				List<Comparable<?>> list2 = playersScores.get(playerId2);
 				int index = 0;
 				while(result==0 && index<list1.size())
 				{	Comparable o1 = list1.get(index);
@@ -364,6 +401,9 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		refreshList();
 	}
 	
+	/**
+	 * Updates the table panel.
+	 */
 	private void refreshList()
 	{	EmptyContentPanel dataPanel = getDataPanel();
 		// remove the old panel
@@ -379,15 +419,41 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		repaint();
 	}
 	
+	/**
+	 * Resets and redraws this panel.
+	 */
 	public void refresh()
 	{	setPlayersIds(profilesMap,lines);
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Column of the 'previous page' button */
+	private final static int COL_PREVIOUS = 0;
+	/** Column of the 'player type' button */
+	private final static int COL_TYPE = 2;
+	/** Column of the 'ranked-only/all players' button */
+	private final static int COL_RANKS = 4;
+	/** Column of the 'sum/mean' button */
+	private final static int COL_SUM_MEAN = 6;
+	/** Column of the 'next page' button */
+	private final static int COL_NEXT = 8;
+	/** Panel containing the buttons */
+	private JPanel buttonsPanel;
+
+	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of columns composing the table */
 	private List<StatisticColumn> columns = new ArrayList<StatisticColumn>();
 	
+	/**
+	 * Change the columns composing the table.
+	 * 
+	 * @param columns
+	 * 		New list of columns.
+	 */
 	public void setColumns(List<StatisticColumn> columns)
 	{	if(columns==null)
 			columns = new ArrayList<StatisticColumn>();
@@ -398,16 +464,35 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	/////////////////////////////////////////////////////////////////
 	// SORT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Column used to sort the table rows */
 	private StatisticColumn sortCriterion = null;
+	/** Whether the sort should be natural or inverted */
 	private boolean inverted = false;
+	/** Whether sums or means should be displayed */
 	private boolean mean = false;
+	/** Which type of players should be displayed */
 	private Type type = Type.BOTH;
+	/** Whether only ranked or all players should be displayed */
 	private Ranks ranks = Ranks.ALL;
 	
+	/**
+	 * Indicates if the mean or sums
+	 * should be displayed.
+	 * 
+	 * @return
+	 * 		{@code true} if means should be displayed.
+	 */
 	public boolean hasMean()
 	{	return mean;
 	}	
 	
+	/**
+	 * Change the column used
+	 * to sort the rows.
+	 * 
+	 * @param sort
+	 * 		New sort criterion.
+	 */
 	public void setSort(StatisticColumn sort)
 	{	if(sortCriterion==sort)
 			inverted = !inverted;		
@@ -418,11 +503,27 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		refresh();
 	}
 	
+	/**
+	 * Type of players
+	 * displayed in the table.
+	 * 
+	 * @author Vincent Labatut
+	 */
 	private enum Type
-	{	HUMAN,
+	{	/** Human players only */
+		HUMAN,
+		/** Artificial intelligences only */
 		AI,
+		/** All players */
 		BOTH;
-	
+		
+		/**
+		 * Cycle through all {@code Type}
+		 * values.
+		 * 
+		 * @return
+		 * 		The next {@code Type} value.
+		 */
 		public Type getNext()
 		{	Type[] values = Type.values();
 			int index = (this.ordinal()+1)%values.length;
@@ -431,11 +532,27 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		}
 	}
 	
+	/**
+	 * Filter players according to
+	 * their rank/no rank.
+	 * 
+	 * @author Vincent Labatut
+	 */
 	private enum Ranks
-	{	ALL,
+	{	/** All players */
+		ALL,
+		/** Only ranked players */
 		ALL_RANKS,
+		/** Only non-ranked players */
 		NO_RANKS;
 	
+		/**
+		 * Cycle through all {@code Ranks}
+		 * values.
+		 * 
+		 * @return
+		 * 		The next {@code Ranks} value.
+		 */
 		public Ranks getNext()
 		{	Ranks[] values = Ranks.values();
 			int index = (this.ordinal()+1)%values.length;
@@ -582,16 +699,39 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY								/////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Adds a new column to the table.
+	 * 
+	 * @param index 
+	 * 		Position of the new column.
+	 * @param column 
+	 * 		New column to insert in the table.
+	 * 
+	 */
 	public void addColumn(int index, StatisticColumn column)
 	{	columns.add(index,column);
 		refresh();
 	}
 
+	/**
+	 * Changes one of the column of the table.
+	 * 
+	 * @param index
+	 * 		Position of the column to be exchanged.
+	 * @param column
+	 * 		Column used for the substitution.
+	 */
 	public void setColumn(int index, StatisticColumn column)
 	{	columns.set(index,column);
 		refresh();
 	}
 
+	/**
+	 * Removes one column from the table.
+	 * 
+	 * @param index
+	 * 		Position of the column to remove.
+	 */
 	public void removeColumn(int index)
 	{	columns.remove(index);
 		refresh();
