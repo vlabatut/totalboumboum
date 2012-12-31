@@ -1639,7 +1639,6 @@ public class Launcher
  * 		(avec bordure de sol différente (?) >> avec hardwalls con logo GSU
  */
 
-// TODO ajouter la nvelle bibli chart au changelog
 // TODO utilite dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de preferences ?
 // TODO plot glicko-2 : évolution du classement. pareil pour les différents scores.
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)

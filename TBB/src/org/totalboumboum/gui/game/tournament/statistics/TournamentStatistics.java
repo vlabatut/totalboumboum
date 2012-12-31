@@ -22,19 +22,30 @@ package org.totalboumboum.gui.game.tournament.statistics;
  */
 
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.gui.common.content.subpanel.events.TournamentEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
+ * This class was designed to display
+ * plots describing the evolution of
+ * a tournament.
  * 
  * @author Vincent Labatut
- *
  */
 public class TournamentStatistics extends EntitledDataPanel
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard panel to display
+	 * plots describing the evolution of
+	 * a tournament.
+	 * 
+	 * @param container
+	 * 		The GUI component containing this panel.
+	 */
 	public TournamentStatistics(SplitMenuPanel container)
 	{	super(container);
 
@@ -42,17 +53,38 @@ public class TournamentStatistics extends EntitledDataPanel
 		String key = GuiKeys.GAME_TOURNAMENT_STATISTICS_TITLE;
 		setTitleKey(key);
 	
+		// data
+		{	evolutionPanel = new TournamentEvolutionSubPanel(dataWidth,dataHeight);
+			setDataPart(evolutionPanel);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** The tournament displayed in this panel */
 	private AbstractTournament tournament;
 
+	/**
+	 * Changes the tournament displayed in this
+	 * panel, and updates all concerned GUI
+	 * components.
+	 * 
+	 * @param tournament
+	 * 		The new tournament to display.
+	 */
 	public void setTournament(AbstractTournament tournament)
 	{	this.tournament = tournament;
+		evolutionPanel.setTournament(tournament);
 	}
 	
+	/**
+	 * Returns the tournament currently
+	 * displayed.
+	 * 
+	 * @return
+	 * 		The current tournament.
+	 */
 	public AbstractTournament getTournament()
 	{	return tournament;	
 	}
@@ -60,8 +92,11 @@ public class TournamentStatistics extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/** Panel used to display the plot */
+	private TournamentEvolutionSubPanel evolutionPanel;
+	
 	@Override
 	public void refresh()
-	{	// nothing to do here
+	{	setTournament(tournament);
 	}
 }

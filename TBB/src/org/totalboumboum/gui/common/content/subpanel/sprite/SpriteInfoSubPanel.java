@@ -33,30 +33,56 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
+ * This class displays the various details
+ * decribing some sprite (author, name, etc.).
  * 
  * @author Vincent Labatut
- *
  */
 public class SpriteInfoSubPanel extends TableSubPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines in the panel */ 
 	private static final int LINES = 10;
+	/** Number of columns in each column group */
 	private static final int COL_SUBS = 2;
+	/** Number of column groups */
 	private static final int COL_GROUPS = 1;
 	
+	/**
+	 * Builds a standard sprite info panel.
+	 * 
+	 * @param width
+	 * 		Width in pixels.
+	 * @param height
+	 * 		Height in pixels.
+	 */
 	public SpriteInfoSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		setSpritePreview(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// ROUND			/////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** The concerned sprite */
 	private SpritePreview spritePreview;
 
+	/**
+	 * Returns the sprite currently displayed.
+	 * 
+	 * @return
+	 * 		The sprite, or {@code null} for no sprite.
+	 */
 	public SpritePreview getSpritePreview()
 	{	return spritePreview;	
 	}
 	
+	/**
+	 * Change the currently displayed sprite.
+	 * 
+	 * @param spritePreview
+	 * 		New sprite to display.
+	 */
 	public void setSpritePreview(SpritePreview spritePreview)
 	{	this.spritePreview = spritePreview;
 		
@@ -149,23 +175,55 @@ public class SpriteInfoSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the sprite name should be displayed */
 	private boolean showName = true;
+	/** Whether the sprite pack should be displayed */
 	private boolean showPack = true;
+	/** Whether the sprite author should be displayed */
 	private boolean showAuthor = true;
+	/** Whether the sprite source should be displayed */
 	private boolean showSource = true;
 
+	/**
+	 * Changes the flag controling the
+	 * name display.
+	 * 
+	 * @param showName
+	 * 		Whether the sprite name should be displayed.
+	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 	}
 
+	/**
+	 * Changes the flag controling the
+	 * pack name display.
+	 * 
+	 * @param showPack
+	 * 		Whether the sprite pack name should be displayed.
+	 */
 	public void setShowPack(boolean showPack)
 	{	this.showPack = showPack;
 	}
 
+	/**
+	 * Changes the flag controling the
+	 * author display.
+	 * 
+	 * @param showAuthor
+	 * 		Whether the sprite author should be displayed.
+	 */
 	public void setShowAuthor(boolean showAuthor)
 	{	this.showAuthor = showAuthor;
 	}
 
+	/**
+	 * Changes the flag controling the
+	 * source display.
+	 * 
+	 * @param showSource
+	 * 		Whether the sprite source should be displayed.
+	 */
 	public void setShowSource(boolean showSource)
 	{	this.showSource = showSource;
 	}
