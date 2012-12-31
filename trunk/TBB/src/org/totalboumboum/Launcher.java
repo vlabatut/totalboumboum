@@ -1623,10 +1623,9 @@ public class Launcher
 	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
 	 * 
 	 * TODO site : 
-	 * 		- mort subite (et autres objets ?)
-	 * 		- niveaux de qualif supplementaires, et ce qu'ils testent
-	 * 		- shirobon SBM4	+ qualif exemple
+	 * 		- nouveaux niveaux + modification des niveaux existants
 	 * 		- modif du tournoi coupe (pour la super-coupe)
+	 * 		- stats
 	 * 
 	 * TODO réviser les instances antérieures à SBM1, même si pas de mort subite
 	 * 		x adapter les thèmes (blocs, sols)
