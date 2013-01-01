@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
+	<!--
+	Total Boum Boum
+	Copyright 2008-2012 Vincent Labatut
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+	<variableTiles>
+		<variableTile name="softwall">
+			<value proba="1.0">
+				<block group="softwalls" name="regular" />
+			</value>
+		</variableTile>
+	</variableTiles>
+	<matrix>
+		<line pos="0">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="1">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="00_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="00_03" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="4">
+				<floor name="00_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="00_05" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="00_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="00_07" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="8">
+				<floor name="00_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="00_09" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="2">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="01_01" />
+			</tile>
+			<tile pos="2">
+				<floor name="01_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="01_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="01_04" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="01_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="01_06" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="01_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="01_08" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="01_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="01_10" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="01_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="01_12" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="13">
+				<floor name="01_13" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="14">
+				<floor name="01_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="3">
+			<tile pos="0">
+				<floor name="02_00" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="02_01" />
+			</tile>
+			<tile pos="2">
+				<floor name="02_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="02_03" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="4">
+				<floor name="02_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="02_05" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="02_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="02_07" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="8">
+				<floor name="02_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="02_09" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="02_10" />
+			</tile>
+			<tile pos="11">
+				<floor name="02_11" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="12">
+				<floor name="02_12" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="13">
+				<floor name="02_13" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="14">
+				<floor name="02_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="4">
+			<tile pos="0">
+				<floor name="03_00" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="03_01" />
+			</tile>
+			<tile pos="2">
+				<floor name="03_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="03_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="03_04" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="03_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="03_06" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="03_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="03_08" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="03_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="03_10" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="03_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="03_12" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="13">
+				<floor name="03_13" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="14">
+				<floor name="03_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="5">
+			<tile pos="0">
+				<floor name="04_00" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="04_01" />
+			</tile>
+			<tile pos="2">
+				<floor name="04_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="04_03" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="4">
+				<floor name="04_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="04_05" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="04_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="04_07" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="8">
+				<floor name="04_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="04_09" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="04_10" />
+			</tile>
+			<tile pos="11">
+				<floor name="04_11" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="12">
+				<floor name="04_12" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="13">
+				<floor name="04_13" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="14">
+				<floor name="04_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="6">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="05_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="05_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="05_04" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="05_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="05_06" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="05_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="05_08" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="05_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="05_10" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="05_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="05_12" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="13">
+				<floor name="05_13" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="14">
+				<floor name="05_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="7">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="06_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="06_03" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="4">
+				<floor name="06_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="06_05" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="06_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="06_07" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="8">
+				<floor name="06_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="06_09" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="06_10" />
+			</tile>
+			<tile pos="11">
+				<floor name="06_11" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="12">
+				<floor name="06_12" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="13">
+				<floor name="06_13" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="14">
+				<floor name="06_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="8">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="07_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="07_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="07_04" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="07_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="07_06" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="07_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="07_08" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="07_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="07_10" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="07_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="07_12" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="13">
+				<floor name="07_13" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="14">
+				<floor name="07_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="9">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="08_05" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="6">
+				<floor name="08_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="08_07" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="8">
+				<floor name="08_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="08_09" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<reference name="softwall" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="10">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="5">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="9">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+	</matrix>
+</zone>
+
