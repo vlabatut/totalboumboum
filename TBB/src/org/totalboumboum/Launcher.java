@@ -1637,3 +1637,9 @@ public class Launcher
 // TODO plot glicko-2 : évolution du classement. pareil pour les différents scores.
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
 // TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
+
+// TODO
+// 1) finir le bloc GSU
+// 2) l'insérer dans les niveaux neutres
+// 3) tester la super coupe en entier
+// 4) tester le tournoi en entier

@@ -60,6 +60,8 @@ import org.totalboumboum.gui.game.tournament.results.LeagueResults;
 import org.totalboumboum.gui.game.tournament.results.SequenceResults;
 import org.totalboumboum.gui.game.tournament.results.SingleResults;
 import org.totalboumboum.gui.game.tournament.results.TournamentResults;
+import org.totalboumboum.gui.game.tournament.statistics.OthersStatistics;
+import org.totalboumboum.gui.game.tournament.statistics.SingleStatistics;
 import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -141,11 +143,12 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 				container.setDataPart(tournamentDescription);
 				SequenceResults trnmtResults = new SequenceResults(container);
 				tournamentResults = trnmtResults;
-				tournamentStatistics = new TournamentStatistics(container);
+				OthersStatistics ts = new OthersStatistics(container);
+				tournamentStatistics = ts;
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				tournamentStatistics.setTournament(trnmt);	
+				ts.setTournament(trnmt);	
 			}
 			else if(tournament instanceof CupTournament)
 			{	CupTournament trnmt = (CupTournament) tournament;
@@ -155,11 +158,12 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 				container.setDataPart(tournamentDescription);
 				CupResults trnmtResults = new CupResults(container);
 				tournamentResults = trnmtResults;
-				tournamentStatistics = new TournamentStatistics(container);
+				OthersStatistics ts = new OthersStatistics(container);
+				tournamentStatistics = ts;
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				tournamentStatistics.setTournament(trnmt);	
+				ts.setTournament(trnmt);	
 			}
 			else if(tournament instanceof LeagueTournament)
 			{	LeagueTournament trnmt = (LeagueTournament) tournament;
@@ -169,11 +173,12 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 				container.setDataPart(tournamentDescription);
 				LeagueResults trnmtResults = new LeagueResults(container);
 				tournamentResults = trnmtResults;
-				tournamentStatistics = new TournamentStatistics(container);
+				OthersStatistics ts = new OthersStatistics(container);
+				tournamentStatistics = ts;
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				tournamentStatistics.setTournament(trnmt);	
+				ts.setTournament(trnmt);	
 			}
 			else if(tournament instanceof SingleTournament)
 			{	tournament.progress();
@@ -184,11 +189,12 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 				container.setDataPart(tournamentDescription);
 				SingleResults trnmtResults = new SingleResults(container);
 				tournamentResults = trnmtResults;
-				tournamentStatistics = new TournamentStatistics(container);
+				SingleStatistics ts = new SingleStatistics(container);
+				tournamentStatistics = ts;
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				tournamentStatistics.setTournament(trnmt);
+				ts.setTournament(trnmt);
 				// change button
 				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonMatch);
 			}
