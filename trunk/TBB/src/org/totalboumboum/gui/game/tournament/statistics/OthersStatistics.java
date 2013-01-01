@@ -22,21 +22,17 @@ package org.totalboumboum.gui.game.tournament.statistics;
  */
 
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.gui.common.content.subpanel.events.TournamentEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
- * This abstract class was designed to display
+ * This class was designed to display
  * plots describing the evolution of
- * a tournament.
- * 
- * @param <T>
- * 		Type of tournament handled by this panel. 
+ * a non-single tournament.
  * 
  * @author Vincent Labatut
  */
-public abstract class TournamentStatistics<T extends AbstractTournament> extends EntitledDataPanel
+public class OthersStatistics extends TournamentStatistics<AbstractTournament>
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
@@ -48,38 +44,32 @@ public abstract class TournamentStatistics<T extends AbstractTournament> extends
 	 * @param container
 	 * 		The GUI component containing this panel.
 	 */
-	public TournamentStatistics(SplitMenuPanel container)
+	public OthersStatistics(SplitMenuPanel container)
 	{	super(container);
 
-		// title
-		String key = GuiKeys.GAME_TOURNAMENT_STATISTICS_TITLE;
-		setTitleKey(key);
+		// data
+		{	evolutionPanel = new TournamentEvolutionSubPanel(dataWidth,dataHeight);
+			setDataPart(evolutionPanel);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** The tournament displayed in this panel */
-	protected T tournament;
-
-	/**
-	 * Changes the tournament displayed in this
-	 * panel, and updates all concerned GUI
-	 * components.
-	 * 
-	 * @param tournament
-	 * 		The new tournament to display.
-	 */
-	public abstract void setTournament(T tournament);
+	@Override
+	public void setTournament(AbstractTournament tournament)
+	{	this.tournament = tournament;
+		evolutionPanel.setTournament(tournament);
+	}
 	
-	/**
-	 * Returns the tournament currently
-	 * displayed.
-	 * 
-	 * @return
-	 * 		The current tournament.
-	 */
-	public T getTournament()
-	{	return tournament;	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	/** Panel used to display the plot */
+	private TournamentEvolutionSubPanel evolutionPanel;
+	
+	@Override
+	public void refresh()
+	{	setTournament(tournament);
 	}
 }
