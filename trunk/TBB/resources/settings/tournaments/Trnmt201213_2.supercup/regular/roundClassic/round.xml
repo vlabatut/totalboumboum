@@ -40,6 +40,6 @@
 		</time>
 	</limits>
 	
-	<level packname="tournament201213" name="classic" randomLocation="true"/>
+	<level packname="tournament201213neutral" name="classic" randomLocation="true"/>
 
 </round>

@@ -23,7 +23,7 @@
  -->
 	
  	<notes>
- 		<line value="Bomb powa !" />
+ 		<line value="Trouve vite l'entrée !" />
  		<line value="Date: 02-12-2012" />
  	</notes>
 
@@ -36,10 +36,10 @@
 		</lastStanding>
 		<time>
 			<points local="true" name="points" />
- 			<threshold value="90000" />
+ 			<threshold value="60000" /> 
 		</time>
 	</limits>
 	
-	<level packname="tournament201213neutral" name="power" randomLocation="true"/>
+	<level packname="tournament201213neutral" name="entrance" randomLocation="true"/>
 
 </round>

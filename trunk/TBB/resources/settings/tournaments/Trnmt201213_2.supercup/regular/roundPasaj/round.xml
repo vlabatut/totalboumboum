@@ -23,7 +23,7 @@
  -->
 	
  	<notes>
- 		<line value="Bomb powa !" />
+ 		<line value="Pas de haut, pas de bas" />
  		<line value="Date: 02-12-2012" />
  	</notes>
 
@@ -40,6 +40,6 @@
 		</time>
 	</limits>
 	
-	<level packname="tournament201213neutral" name="power" randomLocation="true"/>
+	<level packname="tournament201213neutral" name="pasaj" randomLocation="true"/>
 
 </round>
