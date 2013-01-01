@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<players xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\players.xsd">
+	<!--
+	Total Boum Boum
+	Copyright 2008-2012 Vincent Labatut
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+	<locations>
+		<case players="2">
+			<location player="00" line="03" col="05" />
+			<location player="01" line="13" col="17" />
+		</case>
+		<case players="3">
+			<location player="00" line="03" col="05" />
+			<location player="01" line="03" col="17" />
+			<location player="02" line="13" col="05" />
+		</case>
+		<case players="4">
+			<location player="00" line="03" col="05" />
+			<location player="01" line="03" col="17" />
+			<location player="02" line="13" col="05" />
+			<location player="03" line="13" col="17" />
+		</case>
+		<case players="5">
+			<location player="00" line="03" col="07" />
+			<location player="01" line="03" col="15" />
+			<location player="02" line="13" col="05" />
+			<location player="03" line="13" col="17" />
+			<location player="04" line="03" col="11" />
+		</case>
+		<case players="6">
+			<location player="00" line="03" col="07" />
+			<location player="01" line="03" col="15" />
+			<location player="02" line="13" col="07" />
+			<location player="03" line="13" col="15" />
+			<location player="04" line="03" col="11" />
+			<location player="05" line="13" col="11" />
+		</case>
+	</locations>
+	<items>
+		<item name="extrabomb" number="1" />
+		<item name="extraspeed" number="1" />
+		<item name="extraflame" number="2" />
+	</items>
+</players>
+
