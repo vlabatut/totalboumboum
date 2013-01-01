@@ -90,14 +90,14 @@ public class LevelTools
 		saveLevel(level);
 */				
 		// open an existing level and replace the background
-/*		String pack = "tournament201213";
-		String folder = "hurry";
+		String pack = "tournament201213neutral";
+		String folder = "readysetgo";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 		removeBackground(level);
-//		setBackground(level);
+		setBackground(level);
 		saveLevel(level);
-*/		
+		
 		// open an existing level and add/remove columns/rows
 /*		String pack = "tournament201112";
 		String folder = "carrefour";
