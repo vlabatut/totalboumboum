@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<round
+<points
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../../schemas/point.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2012 Vincent Labatut 
@@ -22,24 +22,25 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
- 	<notes>
- 		<line value="Bomb powa !" />
- 		<line value="Date: 02-12-2012" />
- 	</notes>
+	<notes>
+		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
+		<line value="Ce rang dépend du temps passé en jeu et des nombres de bombage effectués et subis." />
+	</notes>
 
-	<author value="Vincent Labatut" />
-
-	<limits>
-		<lastStanding>
-			<points local="true" name="points" />
-			<threshold value="1" comparator="LESSEQ"/>
-		</lastStanding>
-		<time>
-			<points local="true" name="points" />
- 			<threshold value="90000" />
-		</time>
-	</limits>
-	
-	<level packname="tournament201213neutral" name="power" randomLocation="true"/>
-
-</round>
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<scores type="TIME" />
+			<subtraction>
+				<scores type="BOMBINGS"/>
+				<scores type="SELF_BOMBINGS"/>			
+			</subtraction>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
+		
+</points>
