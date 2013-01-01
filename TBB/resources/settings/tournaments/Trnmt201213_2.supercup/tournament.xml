@@ -35,7 +35,7 @@
 	<cup sortPlayers="NONE" >
 		<leg number="0" randomizeParts="false" >
 			<part name="Demi-Finale" number="0" rank="2">
-				<match local="true" name="regular" />
+				<match local="true" name="leg1" />
 				<tieBreak>
 					<rankings>
 						<scores type="BOMBINGS"/>
@@ -54,7 +54,7 @@
 		
 		<leg number="1" randomizeParts="false" >
 			<part name="Finale" number="0" rank="1">
-				<match local="true" name="regular" />
+				<match local="true" name="leg2" />
 				<tieBreak>
 					<rankings>
 						<scores type="BOMBINGS"/>
