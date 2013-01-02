@@ -1633,13 +1633,20 @@ public class Launcher
  * 		(avec bordure de sol différente (?) >> avec hardwalls con logo GSU
  */
 
-// TODO utilite dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de preferences ?
-// TODO plot glicko-2 : évolution du classement. pareil pour les différents scores.
+// TODO utilité dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de préférences ?
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
 // TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
 
-// TODO
-// 1) finir le bloc GSU
-// 2) l'insérer dans les niveaux neutres
-// 3) tester la super coupe en entier
-// 4) tester le tournoi en entier
+/* TODO
+ * - ça serait pas mal soit de :
+ * 		- visualiser les stats de chaque round pdt le tournoi (un peu long ? + pb d'échelle)
+ * 		- enregistrer ces stats dans des fichiers textes (nécessite de pouvoir les rouvrir par la suite)
+ * 		x enregistrer chaque round automatiquement et séparément (peut on charger et revenir au round ? >> non)
+ * - évolution des stats globales
+ * 		- rajouter un bouton dans le menu principal, sous g-2/sc/conf : table vs. graphique
+ * 		- ça fait trois panels graphiques différents, chacun avec ses propres boutons
+ * 		- pb : comment
+ * 		- nécessaire de changer le stockage des stats
+ * 		- résolution temporelle ? rounds ? dates ? mises à jour G-2 ?
+ * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
+ */

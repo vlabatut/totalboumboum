@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201213.ais.kartturgut;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201213.ais.kartturgut.v0.KartTurgut;
+import org.totalboumboum.ai.v201213.ais.kartturgut.v4.KartTurgut;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les agents.
