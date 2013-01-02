@@ -34,13 +34,14 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="07e9860d-ef52-4389-b415-d053f5a2f35b" color="BLACK" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="7707670a-6bf0-4072-926d-dbd1e3f150d8" color="YELLOW" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="d5437bdc-e1e0-4778-b2a1-d95f086ae957" color="RED" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="5e4ee407-71c3-4220-9265-26253cc08f1a" color="GREY" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="3f1ca4a0-6c9e-44b4-811a-a24cbac8c758" color="BLUE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="2fa20b36-2ad2-4d3b-9010-eb2e090f648e" color="INDIGO" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="af92d497-7975-4dcf-b05d-89e706c3eec3" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="d2a951db-eeff-443a-9b7f-36742bd8567b" color="CYAN" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201213" folder="vite" allowedPlayers="1 2 3 4" />
+		<level pack="tournament201213" folder="qualif1" allowedPlayers="2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 
