@@ -51,8 +51,6 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 	
 	///////////////////////// DATA ///////////////////////////
 	/** */
-	private KayukaTaskin ai;
-	/** */
 	protected AiZone zone = null;
 	/** */
 	protected AiHero ownHero = null;
