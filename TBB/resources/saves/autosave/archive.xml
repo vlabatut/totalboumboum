@@ -19,15 +19,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Super-coupe de Galatasaray IV" type="SINGLE" />
-	<played matches="1" rounds="7" />
-	<dates start="2012-11-27T11:55:38" save="2013-01-01T19:56:09" />
+	<tournament name="Qualification du tournoi 2012/13" type="SINGLE" />
+	<played matches="1" rounds="21" />
+	<dates start="2012-12-06T18:09:01" save="2012-12-06T18:24:42" />
 	<players>
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="1011.Kesimal+Varol" />
-		<player name="1112.Coşkun+Özdemir" />
+		<player name="1213.Oral+Özuğur" />
+		<player name="Promeneur" />
 	</players>
 </archive>
 

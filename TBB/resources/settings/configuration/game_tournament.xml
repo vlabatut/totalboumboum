@@ -20,16 +20,10 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="Trnmt201112_0.altcup" />
+	<tournament name="Trnmt201213_0.qualif" />
 	<players>
-		<player file="d9dc2fd6-c0c5-42d7-9c16-46b838c6dbae" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="bf0ed21f-8d7a-4cee-aa27-2d6729ce9940" color="ULTRAMARINE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="c03e8aff-599e-4485-8fd2-cfe2b9ec4f0c" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="549e6962-4ec0-4098-bbec-2bb0ae4d7587" color="CYAN" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="4a22a9cf-9bd9-4a55-b206-e0cbccdce042" color="GREY" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="INDIGO" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="GRASS" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="d5437bdc-e1e0-4778-b2a1-d95f086ae957" color="RED" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameTournament>
 
