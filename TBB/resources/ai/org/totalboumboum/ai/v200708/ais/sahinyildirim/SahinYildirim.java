@@ -21,7 +21,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/** */
 	Runtime r = Runtime.getRuntime();
 	/** */
-	private static final long serialVersionUID = 1L;	
+	public static final long serialVersionUID = 1L;	
 	/** */
 	private Integer lastMove;	
 	/** */
@@ -58,7 +58,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/** */
 	int initialCost;
 	/** */
-	private int bonusBomb = 0;
+//	private int bonusBomb = 0;
 	/** */
 	private int bonusFire = 1;
 	
@@ -89,8 +89,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 		pointMe = new Point(x, y);
 
-		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_BOMB)
-			bonusBomb++;
+//		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_BOMB)
+//			bonusBomb++;
 		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
 			bonusFire++;
 		
@@ -308,7 +308,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		
 			prq.offer(pointMeRoot);
 
-		int count = 1;
+//		int count = 1;
 		
 		int iteration =1;
 
@@ -347,15 +347,15 @@ public class SahinYildirim extends ArtificialIntelligence {
 						node.setNodeVisited(true);
 						// si le point suivant est un wall soft alors putBomb
 						if (prqFils.peek().isPointMure()) {
-							count++;
+//							count++;
 							path.add(addToPath(prqFils.peek(), node));
-							count++;
+//							count++;
 							path.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 							solution = pointFind;
 						} else {
 							if(prqFils.peek().equals(pointFind))
 								solution = new PointFind(pointFind.getRootPoint(),0,false);
-							count++;
+//							count++;
 							path.add(addToPath(prqFils.peek(), node));
 						}
 
@@ -393,7 +393,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 					
 								path.add(addToPath(prqFils.peek(), perler
 										.get(0).getPere()));
-								count++;
+//								count++;
 								path
 										.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 								solution = pointFind;
@@ -402,7 +402,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 										.equals(pointMeRoot.getRootPoint()))
 											path.add(addToPath(perler.get(0).getPere(),
 													pointMeRoot));
-								count++;
+//								count++;
 								if(prqFils.peek().equals(pointFind))
 									solution = new PointFind(pointFind.getRootPoint(),0,false);
 								
@@ -428,7 +428,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 						} else if (perler.get(1).getChildVector().contains(prqFils.peek())) {
 							if (prqFils.peek().isPointMure()) {
 							
-								count++;
+//								count++;
 								path.add(addToPath(prqFils.peek(), perler
 										.get(1).getPere()));
 
@@ -445,7 +445,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 								
 								path.add(addToPath(prqFils.peek(), perler
 										.get(1).getPere()));
-								count++;
+//								count++;
 								}
 							lastPoint = perler.get(1).getPere().getRootPoint();
 							prq.clear();
@@ -468,7 +468,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 					if (prqFils.peek().isPointMure()) {
 						path.add(addToPath(prqFils.peek(), node));
-						count++;
+//						count++;
 						path.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 						solution = pointFind;
 					} else {

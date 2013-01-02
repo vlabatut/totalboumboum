@@ -18,7 +18,7 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.State;
 public class SearchTree
 {	
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	/** probleme traite */
 	private Problem problem;
 	/** ensemble des noeuds composant l'arbre */

@@ -21,7 +21,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 public class CaglayanElmas extends ArtificialIntelligence
 {
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	
 	// Constantes qui définissent l'état du bomberman
 	/** */

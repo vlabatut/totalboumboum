@@ -16,7 +16,7 @@ public class GokselMenges  extends ArtificialIntelligence
 {
 
 	/** */
-	private static final long serialVersionUID = 7954120902478357292L;
+	public static final long serialVersionUID = 7954120902478357292L;
 	/** */
 	int UP;
 	/** */
@@ -239,7 +239,7 @@ public class GokselMenges  extends ArtificialIntelligence
 
 
 
-		int i = 0;
+//		int i = 0;
 		MovedPoints.add(CurrentPlayerPos);
 
 		if(path == false)	
@@ -289,7 +289,7 @@ public class GokselMenges  extends ArtificialIntelligence
 				y = MoveCosts.get(pt).y;
 
 
-				i++;
+//				i++;
 
 				RemoveFromVector(pt);
 
@@ -761,7 +761,7 @@ return points;
 
 		MovedPoints.clear();
 		Vector<Point> result = new Vector<Point>();
-		int i = 0;
+//		int i = 0;
 		pathToGo.clear();
 		MovedPoints.add(CurrentPlayerPos);
 		int x = CurrentPlayerPos.x;
@@ -810,10 +810,7 @@ return points;
 			MoveablePoints.clear();
 			MoveablePointDistances.clear();
 			
-			i++;
-
-
-			
+//			i++;
 		}		
 		result = MovedPoints;
 		

@@ -147,13 +147,13 @@ public class AStar {
 			PriorityQueue<Node> fifo = new PriorityQueue<Node>(1, monComp);
 			first=new Node(firstTile);
 			fifo.offer(first);
-			int iteration = 1;
+//			int iteration = 1;
 			while (!fifo.isEmpty() && solution == null) {
 				ai.checkInterruption();
 				Node node = fifo.poll();
 				
 				if (debug) System.out.println("Node qui sort du fifo: " + "("	+ node.tile.getCol() + "," + node.tile.getLine() + ")");
-				iteration++;
+//				iteration++;
 				if (node.memeCoordonnees(new Node(lastTile))) {
 					solution = node;
 					if (debug) System.out.println("Solution trouve : (" + solution.tile.getCol() + "," + solution.tile.getLine() + ")");

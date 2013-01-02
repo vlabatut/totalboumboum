@@ -24,7 +24,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 public class BaydarCamci extends ArtificialIntelligence
 {
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
    
    
     /** dernière mouvement du personnage */

@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class KurtulusOzsoy extends ArtificialIntelligence {
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	/** le dernier déplacement effectué */
 	private Integer lastMove;
 

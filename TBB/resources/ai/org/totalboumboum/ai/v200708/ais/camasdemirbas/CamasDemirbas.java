@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class CamasDemirbas extends ArtificialIntelligence
 {	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	/** si le mouvement suivant est AI_ACTION_PUT_BOMB, il est true */
 	boolean bombFlag;
 	/** il a le mouvement dernier */

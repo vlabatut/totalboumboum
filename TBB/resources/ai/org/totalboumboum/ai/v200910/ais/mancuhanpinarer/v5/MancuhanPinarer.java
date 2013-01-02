@@ -195,20 +195,20 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 				if (gameZone.getRemainingHeroes().size() > 1) {
 					this.nextMove = null;
 					this.nextMoveBonus = null;
-					int scopeCount = 0;
-					int blockCount = 0;
+//					int scopeCount = 0;
+//					int blockCount = 0;
 					List<AiTile> neighboors = ourHero.getTile().getNeighbors();
 					for (int i = 0; i < neighboors.size(); i++) {
 						checkInterruption();
 						if (matrice[neighboors.get(i).getLine()][neighboors
 								.get(i).getCol()] == CASE_SCOPE) {
-							scopeCount++;
+//							scopeCount++;
 						}
 						if (matrice[neighboors.get(i).getLine()][neighboors
 								.get(i).getCol()] == MUR_DESTRUCTIBLE
 								|| matrice[neighboors.get(i).getLine()][neighboors
 										.get(i).getCol()] == CASE_INACCESSIBLE) {
-							blockCount++;
+//							blockCount++;
 						}
 					}
 					boolean isDead = false;
