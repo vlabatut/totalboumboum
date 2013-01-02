@@ -108,11 +108,9 @@ public class TileProcess {
 		result.add(currentTile);
 		int oldCount = 0;
 		int newCount = Integer.MAX_VALUE;
-		int i = 0;
 
 		while (oldCount != newCount) {
 			ai.checkInterruption();
-			i++;
 			oldCount = result.size();
 			List<AiTile> list = new ArrayList<AiTile>(result);
 

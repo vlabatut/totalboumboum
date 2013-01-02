@@ -53,14 +53,14 @@ public class ModeHandler extends AiModeHandler<GungorKavus>
 		
     	List<AiHero> heroL = ai.getZone().getRemainingHeroes();
     	
-    	int heroBombNbr = 0;
-    	int heroBombRng = 0;
+  //  	int heroBombNbr = 0;
+   // 	int heroBombRng = 0;
    // 	int average = 0;
     	
     	for(int i=0;i<heroL.size();i++){
     		ai.checkInterruption();
-    		heroBombNbr += heroL.get(i).getBombNumberMax();
-    		heroBombRng += heroL.get(i).getBombRange();
+//    		heroBombNbr += heroL.get(i).getBombNumberMax();
+ //   		heroBombRng += heroL.get(i).getBombRange();
     	}
     //		average = (50*heroBombNbr + 70*heroBombRng)/heroL.size();
     	
