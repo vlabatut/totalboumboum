@@ -64,7 +64,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/** compteur temporel pour éviter que le thread rende la main trop souvent */
 	private Long lastYield = null;
 	/** compte les appels à checkInterruption() entre deux yields */
-	private int callCount = 0;
+//	private int callCount = 0;
 	/** temps total écoulé */
 	protected long totalDuration = 0;
 
@@ -91,7 +91,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			Thread.yield();
 		}
 		else
-		{	callCount++;
+		{	
+//			callCount++;
 			long newTime = System.currentTimeMillis();
 			long diff = newTime - lastYield;
 			long limit = Configuration.getAisConfiguration().getAiYieldPeriod();
@@ -99,7 +100,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			{	lastYield = newTime;
 //if(this instanceof AdatepeOzbek)		
 //	System.out.println(this.getClass()+">"+diff+"("+callCount+")");
-				callCount = 0;
+//				callCount = 0;
 				Thread.yield();
 			}			
 		}
