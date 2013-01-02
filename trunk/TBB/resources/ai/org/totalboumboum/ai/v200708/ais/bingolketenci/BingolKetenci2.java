@@ -23,7 +23,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class BingolKetenci2 extends ArtificialIntelligence {
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	/** position de la derniere bombe qui est mis par AI. */
 	private int lastBombPos[];
 	/** dernière position du personnage pour la fonction "danger". */

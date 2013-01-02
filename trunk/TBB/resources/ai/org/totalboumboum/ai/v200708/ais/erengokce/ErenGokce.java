@@ -37,7 +37,7 @@ public class ErenGokce extends ArtificialIntelligence {
 	/** */
 	boolean ldc=false;
 	/** */
-	private static final long serialVersionUID = 1L; 
+	public static final long serialVersionUID = 1L; 
 	/** shrink a-t-elle commencé ou pas, y-a-t-il une bombe ou pas */
 	boolean mybomb=false;
 	/** */

@@ -35,7 +35,7 @@ public class AStar implements PathFinder {
 	private Node start;
 
 	/** The number of steps */
-	private int steps;
+//	private int steps;
 	
 	/** The current path */
 	public List<int[]> path = new ArrayList<int[]>();
@@ -245,7 +245,7 @@ public class AStar implements PathFinder {
 	@Override
 	public synchronized void findPath(int[] from, int[] to, List<int[]> path) {
 		cleanup();
-		steps = 0;
+//		steps = 0;
 		this.path = path;
 		state = SEARCH_STATE_SEARCHING;
 		start = new Node(from, null);
@@ -294,7 +294,7 @@ public class AStar implements PathFinder {
 		}
 
 		// Incremement step count
-		steps++;
+//		steps++;
 
 		// Pop the best node (the one with the lowest f) : this is at the head of the list
 		Node n = openList.popHead(); // get pointer to the node

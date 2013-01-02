@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class KecerYaman extends ArtificialIntelligence {
 	/********************************************************************************/
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	
 	/** les points des objets differents */
 	private int VAL_HARD = AI_BLOCK_WALL_HARD;

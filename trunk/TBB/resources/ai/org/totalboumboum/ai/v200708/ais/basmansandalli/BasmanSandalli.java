@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 @SuppressWarnings("deprecation")
 public class BasmanSandalli extends ArtificialIntelligence {
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	
 	/**
 	 * La position de la bombe la plus proche

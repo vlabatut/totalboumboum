@@ -24,7 +24,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 public class OkanYuksel extends ArtificialIntelligence
 {
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 
 	/** Pour calculer case suivant en utilisant l'index de direction. */
 	private static int[][] yonelim = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}, {0, 0}};

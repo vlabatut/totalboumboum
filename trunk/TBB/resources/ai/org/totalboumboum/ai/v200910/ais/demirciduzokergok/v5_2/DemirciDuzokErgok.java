@@ -107,11 +107,11 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 			moveDir = Direction.NONE;
 			safe_map = new Safety_Map(IA_ZONE);
 
-			int k = 0;
+//			int k = 0;
 			for (int i = 0; i < IA_ZONE.getHeight(); i++) {
 				for (int j = 0; j < IA_ZONE.getWidth(); j++) {
-					if (safe_map.returnMatrix()[i][j] == safe_map.DEST_WALL)
-						k++;
+//					if (safe_map.returnMatrix()[i][j] == safe_map.DEST_WALL)
+//						k++;
 				}
 			}
 

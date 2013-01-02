@@ -52,7 +52,7 @@ public class PathSafetyDeterminators {
 	{
 		monIA.checkInterruption();
 		List<AiTile> tiles=p.getTiles();
-		int CumulativeInterest=0;
+//		int CumulativeInterest=0;
 		int stepsTaken=0;
 		int safePlaceFoundBeforeDanger=-1;
 		if(offset==p.getLength()-1)
@@ -108,7 +108,7 @@ public class PathSafetyDeterminators {
 				if(!monIA.isInDangerAndWontMoveAnyway())
 					return true;
 			}
-			CumulativeInterest+=m.representation[t.getLine()][t.getCol()];
+//			CumulativeInterest+=m.representation[t.getLine()][t.getCol()];
 			stepsTaken++;
 		}
 		

@@ -45,7 +45,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/** */
 	private AiAction result;
 	/** */
-	private int moveCount;
+//	private int moveCount;
 	/** */
 	private int waitCount;
 
@@ -299,7 +299,7 @@ public class DaneSatir extends ArtificialIntelligence
 		checkInterruption();
 		zone = getPercepts();
 		myHero = zone.getOwnHero();
-		this.moveCount = 0;
+	//	this.moveCount = 0;
 		this.bonus = new BonusCollector(this);
 		this.dec = new DecisionMaker(this);
 		this.p = new PathFinder(this,dec.getTime());
@@ -312,7 +312,7 @@ public class DaneSatir extends ArtificialIntelligence
 	private void updateEnvironment() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
-		this.moveCount++;
+	//	this.moveCount++;
 		this.setResult(null);
 		this.p.updateTimeMatrice(this.dec.getTime());
 		Limits.tileDistance = (this.myHero.getTile().getSize()/this.myHero.getWalkingSpeed());

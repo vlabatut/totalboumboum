@@ -64,7 +64,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 
 
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	
 	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;

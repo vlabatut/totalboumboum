@@ -14,7 +14,7 @@ import java.awt.Point;
 public class PointFind {
 
 	/** */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	/** le point du joueur */
 	private Point rootPoint;
 	/** */

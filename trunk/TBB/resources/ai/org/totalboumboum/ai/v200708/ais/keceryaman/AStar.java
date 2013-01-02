@@ -51,11 +51,11 @@ public class AStar {
 		closedList.clear();
 		clearClosedListCheck();
 		openList.add(nodenode);
-		int i = 0;
+//		int i = 0;
 		int[] coordinates = null;
 		// main loop
 		while ( !targetAdded && openList.length() > 0 /*&& i++ < 10*/ ){
-			i++;
+//			i++;
 			// get the first item of the open list and remove it
 			current = openList.getFirst();
 			// move to the closed list
