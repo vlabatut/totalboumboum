@@ -47,6 +47,7 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Représente une case du jeu, avec tous les sprites qu'elle contient.
@@ -506,7 +507,9 @@ final class AiDataTile extends AiTile
 	@Override
 	public AiDataTile getNeighbor(Direction direction)
 	{	if(direction.isComposite())
-			throw new IllegalArgumentException("method getNeighbor does not handle composite directions.");
+		{	PredefinedColor color = getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("method getNeighbor does not handle composite directions ("+color+" player).");
+		}
 		AiDataTile result = neighborMap.get(direction);
 		return result;
 	}

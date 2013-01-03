@@ -1504,7 +1504,9 @@ public abstract class AiZone
 		// direction entre les points
 		Direction direction = getDirection(tile1,tile2);
 		if(direction.isComposite())
-			throw new IllegalArgumentException("The tiles must be direct neighbors");
+		{	PredefinedColor color = getOwnHero().getColor();
+			throw new IllegalArgumentException("The tiles must be direct neighbors ("+color+" player)");
+		}
 		int dir[] = direction.getIntFromDirection();
 		
 		// calcul des coordonnées
@@ -1565,7 +1567,9 @@ public abstract class AiZone
 		// direction entre les points
 		Direction direction = getDirection(tile1,tile2);
 		if(direction.isComposite())
-			throw new IllegalArgumentException("Points must be in direct neighbor tiles");
+		{	PredefinedColor color = getOwnHero().getColor();
+			throw new IllegalArgumentException("Points must be in direct neighbor tiles ("+color+" player)");
+		}
 		int dir[] = direction.getIntFromDirection();
 		
 		// calcul des coordonnées
@@ -1630,7 +1634,9 @@ public abstract class AiZone
 		// direction entre les points
 		Direction direction = getDirection(tile1,tile);
 		if(direction.isComposite())
-			throw new IllegalArgumentException("Points must be in direct neighbor tiles");
+		{	PredefinedColor color = getOwnHero().getColor();
+			throw new IllegalArgumentException("Points must be in direct neighbor tiles ("+color+" player)");
+		}
 		int dir[] = direction.getIntFromDirection();
 		
 		// calcul des coordonnées
@@ -1699,7 +1705,9 @@ public abstract class AiZone
 		// direction entre les points
 		Direction direction = getDirection(tile1,tile);
 		if(direction.isComposite())
-			throw new IllegalArgumentException("Both location and tile must be direct neighbors");
+		{	PredefinedColor color = getOwnHero().getColor();
+			throw new IllegalArgumentException("Both location and tile must be direct neighbors ("+color+" player)");
+		}
 		int dir[] = direction.getIntFromDirection();
 		
 		// calcul des coordonnées

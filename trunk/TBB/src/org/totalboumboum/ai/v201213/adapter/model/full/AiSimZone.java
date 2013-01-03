@@ -277,7 +277,9 @@ public final class AiSimZone extends AiZone
 	 */
 	public AiSimTile getNeighborTile(int row, int col, Direction direction)
 	{	if(direction.isComposite())
-			throw new IllegalArgumentException("method getNeighborTile does not handle composite directions.");
+		{	PredefinedColor color = ownHero.getColor();
+			throw new IllegalArgumentException("method getNeighborTile does not handle composite directions ("+color+" player).");
+		}
 	
 		AiSimTile result;
 		int c,l;

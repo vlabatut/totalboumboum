@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.totalboumboum.tools.images.PredefinedColor;
+
 /**
  * Cette classe permet de définir une combinaison,
  * en la décrivant par le cas ({@link AiUtilityCase})
@@ -121,9 +123,13 @@ public final class AiUtilityCombination
 	 */
 	public final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiUtilityCriterion<T,U> criterion, U value) 
 	{	if(!criteria.contains(criterion))
-			throw new IllegalArgumentException("The specified criterion ("+criterion.getName()+") is not defined for the case ("+caze.getName()+") associated to this combination.");
+		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("The specified criterion ("+criterion.getName()+") is not defined for the case ("+caze.getName()+") associated to this combination ("+color+" player).");
+		}
 		if(!criterion.hasValue(value))
-			throw new IllegalArgumentException("The specified value ("+value+") does not belong to the criterion ("+criterion.getName()+") definition domain.");
+		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("The specified value ("+value+") does not belong to the criterion ("+criterion.getName()+") definition domain ("+color+" player).");
+		}
 
 		values.put(criterion,value);
 	}

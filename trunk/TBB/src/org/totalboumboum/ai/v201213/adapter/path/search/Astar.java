@@ -40,6 +40,7 @@ import org.totalboumboum.ai.v201213.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201213.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201213.adapter.path.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201213.adapter.path.successor.SuccessorCalculator;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Implémentation de l'<a href="http://fr.wikipedia.org/wiki/Algorithme_A*">algorithme A*</a> adapté au
@@ -449,7 +450,9 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		if(limitReached)
 			throw new LimitReachedException(startLocation,endTiles,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
 		else if(endTiles.isEmpty())
-			throw new IllegalArgumentException("endTiles list must not be empty");
+		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("endTiles list must not be empty ("+color+" player)");
+		}
 		
 		return result;
 	}

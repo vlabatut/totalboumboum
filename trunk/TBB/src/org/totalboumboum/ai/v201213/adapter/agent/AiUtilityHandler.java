@@ -528,7 +528,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	{	Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
 		Integer result = map.get(combination);
 		if(result==null)
-			throw new IllegalArgumentException("No utility value was associated to the specified combination ("+combination+").");
+		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("No utility value was associated to the specified combination (combination="+combination+", player="+color+").");
+		}
 		return result;
 	}
 	
