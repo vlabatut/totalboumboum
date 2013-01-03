@@ -1645,7 +1645,9 @@ public class Launcher
  * - évolution des stats globales
  * 		- rajouter un bouton dans le menu principal, sous g-2/sc/conf : table vs. graphique
  * 		- ça fait trois panels graphiques différents, chacun avec ses propres boutons
- * 		- pb : comment
+ * 		- pb : comment choisir les joueurs a afficher ?
+ * 			>> on pourrait simplement les selectionner en cliquant sur leur nom dans la table
+ * 			>> mais alors, comment donner/changer la legende ?
  * 		- nécessaire de changer le stockage des stats
  * 		- résolution temporelle ? rounds ? dates ? mises à jour G-2 ?
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
