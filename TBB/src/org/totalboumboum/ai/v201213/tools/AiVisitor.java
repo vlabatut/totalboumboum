@@ -150,9 +150,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 				if(t2 instanceof ClassOrInterfaceType)
 				{	String exceptionName = ((ClassOrInterfaceType)t2).getName();
 					if(FORBIDDEN_EXCEPTIONS.contains(exceptionName))
-					{	for(int i=0;i<indentLevel;i++)
-							System.err.print(">>");
-				       	System.err.println("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel à "+CHECK_INTERRUPTION_METHOD+"()");
+					{	printErr("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel à "+CHECK_INTERRUPTION_METHOD+"()");
 						errorCount++;
 						//NOTE à compléter par la création d'un commentaire dans le code source
 					}
@@ -357,19 +355,13 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 						{	MethodCallExpr methodCallExpr = (MethodCallExpr) expression;
 							String methodName = methodCallExpr.getName();
 							if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
-			        		{	// erreur
-								for(int i=0;i<indentLevel;i++)
-									System.err.print(">>");
-						       	System.err.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+			        		{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 			        			errorCount++;
 			        			//NOTE à compléter par la création d'un commentaire dans le code source
 			        		}
 						}
 						else
-						{	// erreur
-							for(int i=0;i<indentLevel;i++)
-								System.err.print(">>");
-					       	System.err.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+						{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
 							//NOTE à compléter par la création d'un commentaire dans le code source
 						}
@@ -378,10 +370,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					{	// c'est un appel à super/this, donc ça doit forcément être au début
 						// mais la deuxième instruction doit être un appel à checkInterruption()
 						if(statements.size()<2)
-						{	// erreur
-							for(int i=0;i<indentLevel;i++)
-								System.err.print(">>");
-					       	System.err.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+						{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
 							//NOTE à compléter par la création d'un commentaire dans le code source
 						}
@@ -395,19 +384,13 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 								{	MethodCallExpr methodCallExpr = (MethodCallExpr) expression;
 									String methodName = methodCallExpr.getName();
 									if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
-					        		{	// erreur
-										for(int i=0;i<indentLevel;i++)
-											System.err.print(">>");
-								       	System.err.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+					        		{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 					        			errorCount++;
 					        			//NOTE à compléter par la création d'un commentaire dans le code source
 					        		}
 								}
 								else
-								{	// erreur
-									for(int i=0;i<indentLevel;i++)
-										System.err.print(">>");
-							       	System.err.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+								{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 				        			errorCount++;
 									//NOTE à compléter par la création d'un commentaire dans le code source
 								}
@@ -415,27 +398,18 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 						}
 					}
 					else
-					{	// erreur
-						for(int i=0;i<indentLevel;i++)
-							System.err.print(">>");
-				       	System.err.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+					{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 	        			errorCount++;
 						//NOTE à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
-				{	// erreur
-					for(int i=0;i<indentLevel;i++)
-						System.out.print("--");
-			       	System.out.println("Attention ligne "+line+" : le bloc est vide !");
+				{	printErr("Attention ligne "+line+" : le bloc est vide !");
 					//NOTE à compléter par la création d'un commentaire dans le code source
 				}
 			}
 			else
-			{	// erreur
-				for(int i=0;i<indentLevel;i++)
-					System.err.print(">>");
-		       	System.err.println("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
+			{	printErr("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
 				errorCount++;
 				//NOTE à compléter par la création d'un commentaire dans le code source
 			}
@@ -452,13 +426,24 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 			{	StringLiteralExpr sle = (StringLiteralExpr) expr;
 				if(sle.getValue().equalsIgnoreCase("javadoc"))
 				{	int line = expression.getBeginLine();
-					for(int i=0;i<indentLevel;i++)
-						System.err.print(">>");
-			       	System.err.println("Erreur ligne "+line+" : utilisation de l'annotation SuppressWarnings sur 'javadoc'. Il faut supprimer cette annotation et compléter la Javadoc.");
+					printErr("Erreur ligne "+line+" : utilisation de l'annotation SuppressWarnings sur 'javadoc'. Il faut supprimer cette annotation et compléter la Javadoc.");
 					errorCount++;
 				}
 			}
 		}
 		//NOTE ne traite pas le cas où on a plusieurs membres, e.g. @SuppressWarnings({"javadoc","xxxx"})
+	}
+	
+	/**
+	 * Affiche le message d'erreur spécifié
+	 * 
+	 * @param msg
+	 * 		Message d'erreur à afficher.
+	 */
+	private void printErr(String msg)
+	{	for(int i=0;i<indentLevel;i++)
+			msg = ">>" + msg;
+       	System.out.println(msg);
+       	System.err.println(msg);
 	}
 }

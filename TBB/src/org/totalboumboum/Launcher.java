@@ -1652,3 +1652,5 @@ public class Launcher
  * 		- résolution temporelle ? rounds ? dates ? mises à jour G-2 ?
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
  */
+
+// TODO interdire d'utiliser printf dans l'agent >> utiliser print de l'api
