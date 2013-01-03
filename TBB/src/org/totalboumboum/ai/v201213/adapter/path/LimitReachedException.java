@@ -74,7 +74,7 @@ public final class LimitReachedException extends Exception
 	 * 		Frange lors de l'arrêt de l'algorithme. 
 	 */
 	public LimitReachedException(AiLocation startLocation, Set<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize, PriorityQueue<AiSearchNode> queue)
-	{	super("The search algorithm developped a tree too costly/deep/large according to the predefined limits.");
+	{	super("The search algorithm developped a tree too costly/deep/large according to the predefined limits ("+startLocation.getZone().getOwnHero().getColor()+" player).");
 		
 		this.startLocation = startLocation;
 		this.endTiles = endTiles;

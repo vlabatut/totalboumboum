@@ -28,6 +28,7 @@ import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Cette classe permet de définir un cas,
@@ -76,7 +77,9 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	{	// vérifie l'unicité du nom
 		AiUtilityHandler<?> handler = ai.getUtilityHandler();
 		if(handler.checkCriterionName(name))
-			throw new IllegalArgumentException("A case with the same name ("+name+") already exists for this agent.");
+		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("A case with the same name ("+name+") already exists for this agent ("+color+" player).");
+		}
 		
 		// on initialise le nom
 		this.name = name;
@@ -84,7 +87,9 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 		// on initialise les critères
 		for(AiUtilityCriterion<?,?> criterion: criteria)
 		{	if(this.criteria.contains(criterion))
-				throw new IllegalArgumentException("A case ("+name+") cannot contain several times the same criterion ("+criterion.getName()+").");
+			{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+				throw new IllegalArgumentException("A case ("+name+") cannot contain several times the same criterion (criterion="+criterion.getName()+", player="+color+").");
+			}
 			else
 				this.criteria.add(criterion);
 		}

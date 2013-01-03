@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201213.adapter.path.AiSearchNode;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Permet de définir une fonction de coût 
@@ -92,7 +93,9 @@ public abstract class CostCalculator
 	 */
 	public void setOpponentCost(double opponentCost)
 	{	if(opponentCost<0)
-			throw new IllegalArgumentException("The extra cost for opponents in CostCalculator cannot be negative.");
+		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("The extra cost for opponents in CostCalculator cannot be negative ("+color+" player).");
+		}
 		this.opponentCost = opponentCost;
 	}
 	
@@ -114,7 +117,9 @@ public abstract class CostCalculator
 	 */
 	public void setMalusCost(double malusCost)
 	{	if(malusCost<0)
-			throw new IllegalArgumentException("The extra cost for malus in CostCalculator cannot be negative.");
+		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("The extra cost for malus in CostCalculator cannot be negative ("+color+" player).");
+		}
 		this.malusCost = malusCost;
 	}
 	
