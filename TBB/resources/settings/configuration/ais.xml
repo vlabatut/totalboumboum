@@ -22,7 +22,7 @@
 	<ups value="50" />
 	<autoAdvance value="true" delay="3000" />
 	<hideAllAis value="false" />
-	<bombUselessAis value="0" />
+	<bombUselessAis value="5000" />
 	<displayExceptions value="true" />
 	<logExceptions value="false" />
 </ais>

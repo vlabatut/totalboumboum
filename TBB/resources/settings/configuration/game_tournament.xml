@@ -28,16 +28,16 @@
 		<player file="7707670a-6bf0-4072-926d-dbd1e3f150d8" color="YELLOW" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 		<player file="29b27765-b609-4444-bcb8-115f42e84a72" color="GREY" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="46af46f8-eee5-44a1-9b1d-857a8654bba2" color="PINK" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 		<player file="d5437bdc-e1e0-4778-b2a1-d95f086ae957" color="RED" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="90d43698-a591-4f03-aa22-8e662f9d0b89" color="INDIGO" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="1d8af34e-db74-4826-86e5-4d88492a27d3" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="6bdd7857-18dd-4128-b5d9-4d52543ba1f8" color="PURPLE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="c217f22b-685e-4a3b-a3ce-155b3cf959bc" color="RUST" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
-		<player file="c59d31dc-e0f3-4e65-b864-d84388dae592" color="WHITE" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="f24c1e2b-2c86-478d-8e77-83af0126440a" color="PINK" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="ac0853de-bb8f-4141-8fa9-4a3b2708d331" color="CYAN" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="GREEN" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="b4cf64b8-0338-4076-ae6d-f3bfc67f139c" color="ULTRAMARINE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="0195e355-12be-44e8-8809-975ae535ef89" color="PURPLE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="bc8b7b98-7456-486a-a5b0-9cc9715d6e45" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="WHITE" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="7b4170c4-4362-47e5-abcd-8e78a70f9b30" color="BROWN" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="1d8af34e-db74-4826-86e5-4d88492a27d3" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="INDIGO" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREEN" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
