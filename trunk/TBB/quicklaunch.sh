@@ -7,7 +7,7 @@
 # You can change the value of the Xmx parameter in order
 # to increase the amount of memory used by the Java machine. 
 #
-# v.0.3
+# v.0.4
 #
 # -------------------------------------------------------------------
 #
@@ -40,8 +40,9 @@
 	ai="./resources/ai"
 	bin="./bin"
 	jdom="./resources/lib/jdom.jar"
-	japa="./resources/lib/javaparser-1.0.7.jar"
-	cp="${bin}:${jdom}:${japa}:${ai}"
+	japa="./resources/lib/javaparser-1.0.8.jar"
+	gral="./resources/lib/gral-core-0.9-SNAPSHOT.jar"
+	cp="${bin}:${jdom}:${japa}:${gral}:${ai}"
 	launcher="org.totalboumboum.Launcher"
 #
 # launch the game

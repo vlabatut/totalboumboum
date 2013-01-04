@@ -5,7 +5,7 @@
 # it should work on most Linux, Unix, and Mac OS systems.
 # It (re)compiles the whole TBB game and the dependant AI classes.
 #
-# v.0.5
+# v.0.6
 #
 # -------------------------------------------------------------------
 #
@@ -41,8 +41,9 @@
 	ai=${aib}/org/totalboumboum/ai
 	bin="./bin"
 	jdom="./resources/lib/jdom.jar"
-	japa="./resources/lib/javaparser-1.0.7.jar"
-	cp="${bin}:${jdom}:${japa}"
+	japa="./resources/lib/javaparser-1.0.8.jar"
+	gral="./resources/lib/gral-core-0.9-SNAPSHOT.jar"
+	cp="${bin}:${jdom}:${japa}:${gral}"
 	sp="./src"
 #
 # create directory for .class files

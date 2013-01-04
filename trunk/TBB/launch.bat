@@ -5,7 +5,7 @@
 :: You can change the value of the Xmx parameter in order
 :: to increase the amount of memory used by the Java machine. 
 ::
-:: v.0.2
+:: v.0.3
 ::
 :: -------------------------------------------------------------------
 ::
@@ -35,8 +35,9 @@
 	Set ai=.\resources\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
-	Set japa=.\resources\lib\javaparser-1.0.7.jar
-	Set cp=%bin%;%jdom%;%japa%;%ai%
+	Set japa=.\resources\lib\javaparser-1.0.8.jar
+	Set gral=.\resources\lib\gral-core-0.9-SNAPSHOT.jar
+	Set cp=%bin%;%jdom%;%japa%;%gral%;%ai%
 	Set launcher=org.totalboumboum.Launcher
 	Set splash=.\resources\gui\images\splash.png
 
