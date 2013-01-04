@@ -2,7 +2,7 @@
 ::
 :: This is an MS-DOS script, it works only on Windows operating systems.
 :: It (re)compiles the whole TBB game (and all AIs located in resources/ai).
-:: v.0.4
+:: v.0.5
 ::
 :: -------------------------------------------------------------------
 ::
@@ -36,8 +36,9 @@
 	Set ai=%aib%\org\totalboumboum\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
-	Set japa=.\resources\lib\javaparser-1.0.7.jar
-	Set cp=%bin%;%jdom%;%japa%
+	Set japa=.\resources\lib\javaparser-1.0.8.jar
+	Set gral=.\resources\lib\gral-core-0.9-SNAPSHOT.jar
+	Set cp=%bin%;%jdom%;%japa%;%gral%
 	Set sp=.\src
 
 :: create directory for .class files
