@@ -1653,4 +1653,8 @@ public class Launcher
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
  */
 
-// TODO interdire d'utiliser printf dans l'agent >> utiliser print de l'api
+// TODO parser : interdire d'utiliser printf dans l'agent >> utiliser print de l'api
+// TODO affichage ingame API : shift+F pour cycler affichage, F tout seul pour on/off (pour toutes les infos)
+// TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
+// TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
+// TODO le script ne compile pas à cause de UTF8
