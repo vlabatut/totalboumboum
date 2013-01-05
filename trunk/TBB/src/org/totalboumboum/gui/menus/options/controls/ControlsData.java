@@ -39,6 +39,7 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.classes.ClassTools;
@@ -104,7 +105,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			// data
 			{	controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(index).copy();;
 				for(int line=1;line<actions.length+1;line++)
-				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				{	Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					keysPanel.setLineBackground(line, bg);
 
 					// command
@@ -158,7 +159,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 
 	public void deselect()
 	{	if(selectedRow!=-1)
-		{	keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+		{	keysPanel.setLabelBackground(selectedRow,1,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedRow = -1;		
 		}		
 	}
@@ -219,7 +220,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			case COL_KEY:
 				deselect();
 				selectedRow = pos[0];
-				keysPanel.setLabelBackground(pos[0],pos[1],GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+				keysPanel.setLabelBackground(pos[0],pos[1],GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND);
 				keysPanel.requestFocusInWindow();
 				break;
 			// autofire

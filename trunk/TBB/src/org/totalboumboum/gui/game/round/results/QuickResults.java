@@ -36,6 +36,7 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.gui.tools.SpringUtilities;
@@ -76,7 +77,7 @@ public class QuickResults extends JPanel
 		setOpaque(false);
 		
 		// background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 			
 		// layout
 		SpringLayout layout = new SpringLayout();
@@ -156,7 +157,7 @@ sc = "Time";
 					String playerName = profile.getName();
 					nameLabel.setText(playerName);
 					nameLabel.setToolTipText(playerName);
-					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					nameLabel.setBackground(bg);
 					Dimension dimension = new Dimension(Integer.MAX_VALUE,lineHeight);
@@ -194,7 +195,7 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 					for(int j=0;j<scores.length;j++)
 					{	MyLabel pointsLabel = getLabel(line, col++);
 						pointsLabel.setText(scores[j]);
-						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+						int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						pointsLabel.setBackground(bg);
 					}
@@ -207,7 +208,7 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 					nf.setMinimumFractionDigits(0);
 					String txt = nf.format(pts);
 					pointsLabel.setText(txt);
-					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					pointsLabel.setBackground(bg);
 				}
@@ -225,8 +226,8 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 			MyLabel lbl = new MyLabel(txt);
 			lbl.setFont(headerFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-			lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
+			lbl.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+			lbl.setForeground(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
 			lbl.setOpaque(true);
 			add(lbl,index);		
 		}
@@ -237,8 +238,8 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 			MyLabel lbl = new MyLabel(txt);
 			lbl.setFont(regularFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+			lbl.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			lbl.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
 			lbl.setOpaque(true);
 			add(lbl,index+line*columns);
 		}

@@ -21,6 +21,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
  * 
  */
 
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -33,6 +34,6 @@ public class EmptyContentPanel extends ContentPanel
 
 	public EmptyContentPanel(int width, int height)
 	{	super(width, height);
-		setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 	}
 }

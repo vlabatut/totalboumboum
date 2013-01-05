@@ -31,6 +31,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
@@ -44,7 +45,7 @@ public class ImageContentPanel extends ContentPanel
 
 	public ImageContentPanel(int width, int height)
 	{	super(width,height);
-//		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+//		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS);
@@ -60,8 +61,8 @@ public class ImageContentPanel extends ContentPanel
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		imageLabel.setVerticalAlignment(SwingConstants.CENTER);
 		// colors
-		imageLabel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		imageLabel.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+		imageLabel.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		imageLabel.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
 		imageLabel.setOpaque(true);
 		// content
 		imageLabel.setText(null);
@@ -106,14 +107,14 @@ public class ImageContentPanel extends ContentPanel
 			ImageIcon icon = new ImageIcon(image);
 			imageLabel.setIcon(icon);
 			// change color
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			imageLabel.setBackground(bg);
 		}
 		else
 		{	// remove image
 			imageLabel.setIcon(null);
 			// change color
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			imageLabel.setBackground(bg);
 		}
 		// tooltip

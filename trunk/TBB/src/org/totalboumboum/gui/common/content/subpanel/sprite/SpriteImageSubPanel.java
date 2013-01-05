@@ -35,6 +35,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
@@ -126,7 +127,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				label.addMouseListener(this);
 				label.setMouseSensitive(true);
 			}
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
 			col++;
 		}
@@ -147,7 +148,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				label.addMouseListener(this);
 				label.setMouseSensitive(true);
 			}
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
 			col++;
 		}
@@ -162,7 +163,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 			MyLabel label = cl.getLabel(line);
 			label.addMouseListener(this);
 			label.setMouseSensitive(true);
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
 			col++;
 		}
@@ -214,7 +215,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		{	// colors
 			String text = null;
 			String tooltip = null;
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			if(colors[i])
 			{	String colorKey = colorValues[i].toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
@@ -247,10 +248,10 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 			label.setText(null);
 			Color bg;
 			if(selectedColor==null)
-				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			else
 			{	Color clr = selectedColor.getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+				int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				
 			}
@@ -259,7 +260,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		else
 		{	label.setIcon(null);
 			label.setText(null);
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			label.setBackground(bg);
 		}		
 	}

@@ -34,6 +34,7 @@ import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
@@ -107,15 +108,15 @@ public class AvailableItemsSubPanel extends TableSubPanel
 				//
 				int colSub = 0;
 				{	setLabelIcon(line,colGroup,colSub,image,tooltip);
-					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,colGroup,colSub,fg);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}
 				{	String text = value;
 					setLabelText(line,colGroup,colSub,text,tooltip);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}

@@ -47,6 +47,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
@@ -82,7 +83,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		dataPanel.setOpaque(false);
 		
 		// background
-		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+		{	Color bg = GuiColorTools.COLOR_COMMON_BACKGROUND;
 			setBackground(bg);
 		}
 		
@@ -120,7 +121,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			// up button
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -137,7 +138,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			// type
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -154,7 +155,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			// ranks
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -171,7 +172,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			// sum/mean
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(centerButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -188,7 +189,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			// down
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -350,7 +351,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					&& ((ranks==Ranks.ALL_RANKS && playerRating!=null) || (ranks==Ranks.NO_RANKS && playerRating==null) || ranks==Ranks.ALL))
 				{	// color
 					Color clr = profile.getSpriteColor().getColor();
-					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					if(playerRating==null)
 						alpha = alpha/3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);

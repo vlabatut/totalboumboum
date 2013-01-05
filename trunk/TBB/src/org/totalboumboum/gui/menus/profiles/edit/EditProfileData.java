@@ -59,6 +59,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.menus.profiles.ais.SelectedAiSplitPanel;
 import org.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
@@ -92,7 +93,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		// data
 		{	EmptySubPanel subPanel = (EmptySubPanel)dataPart;
 			EmptyContentPanel contentPanel = subPanel.getDataPanel();
-			contentPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+			contentPanel.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 
 			int lineHeightEstimation = (subPanel.getDataHeight() - (LINE_COUNT+2)*GuiTools.subPanelMargin) / (LINE_COUNT+1);
 			int heightEstimation = (lineHeightEstimation*LINE_COUNT) + (LINE_COUNT+1)*GuiTools.subPanelMargin;
@@ -127,7 +128,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					label.setPreferredSize(dim);
 					label.setMaximumSize(dim);
 					label.setOpaque(true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					label.setBackground(bg);
 					String key = GuiKeys.MENU_PROFILES_EDIT_NAME;
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
@@ -142,8 +143,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				}				
 				namePanel.add(Box.createGlue());
 				// text pane
-				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				{	Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
 					if(useJTextPane)
 					{	JTextPane pane = new JTextPane()
 						{	private static final long serialVersionUID = 1L;
@@ -187,8 +188,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 						textArea.setWrapStyleWord(true);
 						Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
 						textArea.setFont(font);
-						textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-						textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+						textArea.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+						textArea.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
 						doc = textArea.getDocument();
 						doc.addDocumentListener(this);
 						namePanel.add(textArea);
@@ -224,7 +225,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI,true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -232,7 +233,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,packWidth);
 					ln.setLabelPrefWidth(col,packWidth);
 					ln.setLabelMaxWidth(col,packWidth);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -240,7 +241,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,nameWidth);
 					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelMaxWidth(col,nameWidth);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -249,7 +250,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_RESET,true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(LINE_AI,col);
 					label.addMouseListener(this);
@@ -261,7 +262,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_CHANGE,true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(LINE_AI,col);
 					label.addMouseListener(this);
@@ -284,7 +285,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO,true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -292,7 +293,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,packWidth);
 					ln.setLabelPrefWidth(col,packWidth);
 					ln.setLabelMaxWidth(col,packWidth);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -300,7 +301,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,nameWidth);
 					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelMaxWidth(col,nameWidth);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -309,7 +310,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO_CHANGE,true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(LINE_HERO,col);
 					label.addMouseListener(this);
@@ -332,7 +333,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR;
 					ln.setLabelKey(col,key,true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -348,7 +349,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS;
 					ln.setLabelKey(col,key,true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(line,col);
 					label.addMouseListener(this);
@@ -361,7 +362,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT;
 					ln.setLabelKey(col,key,true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(line,col);
 					label.addMouseListener(this);
@@ -478,7 +479,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	{	PredefinedColor color = profile.getDefaultSprite().getColor();
 		String text = null;
 		String tooltip = null;
-		Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 		if(color!=null)
 		{	String colorKey = color.toString();
 			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
@@ -486,7 +487,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			tooltip = text;
 			Color clr = color.getColor();
-			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 		}
 		editPanel.setLabelText(LINE_COLOR,1,text,tooltip);

@@ -217,7 +217,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 		refreshList();
 		unselectList();
 		selectedRow = index%(LIST_LINE_COUNT-2)+1;
-		listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		refreshPreview();
 	}
 */

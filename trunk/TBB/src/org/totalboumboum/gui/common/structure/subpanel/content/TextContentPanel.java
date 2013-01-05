@@ -38,6 +38,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -50,7 +51,7 @@ public class TextContentPanel extends ContentPanel
 	
 	public TextContentPanel(int width, int height, float fontSize)
 	{	super(width, height);
-//		setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+//		setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		
 		// for some reason, using a JTextPane is very slow
 		// (at least for the first call). couldn't find why.
@@ -78,7 +79,7 @@ public class TextContentPanel extends ContentPanel
 			// font size
 			setFontSize(fontSize);
 			// color
-			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+			Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
 			StyleConstants.setForeground(sa,fg);
 			// set
 //			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
@@ -103,8 +104,8 @@ public class TextContentPanel extends ContentPanel
 			textArea.setWrapStyleWord(true);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 			textArea.setFont(font);
-			textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+			textArea.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			textArea.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
 			textPane = textArea;
 		}
 	

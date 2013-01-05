@@ -32,6 +32,7 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -85,7 +86,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				ln.setBackgroundColor(bg);
 			}
 
@@ -108,7 +109,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				ln.setBackgroundColor(bg);
 			}
 			
@@ -131,7 +132,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				ln.setBackgroundColor(bg);
 			}
 

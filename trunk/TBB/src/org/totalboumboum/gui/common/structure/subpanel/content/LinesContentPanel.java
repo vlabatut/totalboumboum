@@ -32,6 +32,7 @@ import javax.swing.BoxLayout;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -49,7 +50,7 @@ public class LinesContentPanel extends ContentPanel
 	
 	public LinesContentPanel(int width, int height, int lines, int cols, boolean header)
 	{	super(width,height);
-//		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+//		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 		setOpaque(false);
 		
 		this.header = header;
@@ -224,8 +225,8 @@ public class LinesContentPanel extends ContentPanel
 		// header
 		if(header && index==0)
 		{	line = new Line(headerWidth,getHeaderHeight(),cols);
-			line.setBackgroundColor(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-			line.setForegroundColor(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
+			line.setBackgroundColor(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+			line.setForegroundColor(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
 		}
 		//data
 		else
