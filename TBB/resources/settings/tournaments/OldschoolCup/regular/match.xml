@@ -37,7 +37,7 @@
 	</limits>
  	
  	<rounds randomOrder="true" >
-  		<round local="true" name="old" />
+  		<round local="true" name="classic" />
   	</rounds>
 	
 </match>
