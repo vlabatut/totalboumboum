@@ -58,7 +58,7 @@ public class Escape {
 		AiAction result=new AiAction(AiActionName.NONE);
 		if(matris.getVarlikMatrisi()[onder.getOwnHero().getLine()][onder.getOwnHero().getCol()]<Matris.BONUSDANGER)
 			return result;
-		System.out.println("bakıyorum");
+//		System.out.println("bakıyorum");
 		if(running)
 		{
 			if(astar.yoldaMi()==1)

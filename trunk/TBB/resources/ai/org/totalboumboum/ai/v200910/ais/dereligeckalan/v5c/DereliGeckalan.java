@@ -175,7 +175,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		while (it1.hasNext()) {
 			checkInterruption();
 			AiTile temp = it1.next();
-			System.out.println(temp.toString() + "\n");
+//			System.out.println(temp.toString() + "\n");
 
 		}
 		return res;
@@ -553,7 +553,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				right = right.getNeighbor(Direction.RIGHT);
-				System.out.println("3");
+//				System.out.println("3");
 			}
 			if (i != x) {
 				res++;
@@ -563,7 +563,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				left = left.getNeighbor(Direction.LEFT);
-				System.out.println("4");
+//				System.out.println("4");
 			}
 			if (i != x) {
 				res++;
@@ -573,7 +573,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				down = down.getNeighbor(Direction.DOWN);
-				System.out.println("5");
+//				System.out.println("5");
 			}
 			if (i != x) {
 				res++;
@@ -583,7 +583,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				up = up.getNeighbor(Direction.UP);
-				System.out.println("6");
+//				System.out.println("6");
 			}
 			if (i != x) {
 				res++;

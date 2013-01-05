@@ -128,7 +128,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 		ourOwnHero = gameMap.getOwnHero();
 		out = getOutput();
 		matrice = new double[gameMap.getHeight()][gameMap.getWidth()];
-		System.out.print(ourOwnHero.getBombNumberMax());
+//		System.out.print(ourOwnHero.getBombNumberMax());
 		if (isModeCollecte()) {
 			if (poserBombeCollecte())
 				result = new AiAction(AiActionName.DROP_BOMB);

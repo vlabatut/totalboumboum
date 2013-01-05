@@ -36,7 +36,7 @@ public class MoveHandler extends AiMoveHandler<CapMunavarov>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
 		
-		System.out.println("in Movehadnler ..."); 
+//		System.out.println("in Movehadnler ..."); 
 		// à compléter
 	}
 

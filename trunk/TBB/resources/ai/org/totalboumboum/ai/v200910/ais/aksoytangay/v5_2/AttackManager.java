@@ -158,7 +158,7 @@ public class AttackManager {
 		this.pathManager = pathManager;
 		
 		heroToAttack = getHeroToAttackFonx();
-		System.out.println("saldrcak adam : "+heroToAttack.toString());
+//		System.out.println("saldrcak adam : "+heroToAttack.toString());
 	}
 	
 	/**
@@ -190,7 +190,7 @@ public class AttackManager {
 		if(attackType == AttackType.NORMAL)
 		{
 			path = pathManager.getShortestPathToOneTile(myAI.getOwnHero(), myAI.getOwnHeroTile(), normalAttackTile);
-			System.out.println(path.toString());
+//			System.out.println(path.toString());
 		}
 		
 		if(attackType == AttackType.TWOORTHREEBOMBL)
@@ -443,7 +443,7 @@ public class AttackManager {
 			}
 		}
 		
-		System.out.println("normal atack : "+result.toString());
+//		System.out.println("normal atack : "+result.toString());
 		
 		return result;
 		
@@ -1191,10 +1191,10 @@ public class AttackManager {
 	 */
 	public AiTile mirrorTile(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
-AttackType attackType = AttackType.NONE;
+		AttackType attackType = AttackType.NONE;
 		
 		heroToAttack = getHeroToAttackFonx();
-		System.out.println("heroToAttack : "+heroToAttack.toString());
+//		System.out.println("heroToAttack : "+heroToAttack.toString());
 		heroToAttackTile = heroToAttack.getTile();
 		
 		//definons une type d'attaque    ////////
@@ -1260,7 +1260,7 @@ AttackType attackType = AttackType.NONE;
 	{
 		myAI.checkInterruption();
 		
-		System.out.println(heroToAttack.toString());				
+//		System.out.println(heroToAttack.toString());				
 		return(heroToAttackTile == heroToAttack.getTile());
 		
 		

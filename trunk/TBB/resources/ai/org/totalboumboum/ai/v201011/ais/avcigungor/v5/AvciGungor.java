@@ -173,13 +173,13 @@ public class AvciGungor extends ArtificialIntelligence {
 		collectC = new CollecteClass(this);
 		matriceUpdate = collectC.getMatrice();
 
-		for (int i = 0; i < gameZone.getHeight(); i++) {
-			for (int j = 0; j < gameZone.getWidth(); j++) {
-				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
-			}
-			System.out.print("\n");
-		}
-		System.out.print("-----\n");
+//		for (int i = 0; i < gameZone.getHeight(); i++) {
+//			for (int j = 0; j < gameZone.getWidth(); j++) {
+//				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
+//			}
+//			System.out.print("\n");
+//		}
+//		System.out.print("-----\n");
 
 	}
 	
@@ -195,13 +195,13 @@ public class AvciGungor extends ArtificialIntelligence {
 		attackC = new AttackClass(this);
 		matriceUpdate = attackC.getMatrice();
 
-		for (int i = 0; i < gameZone.getHeight(); i++) {
-			for (int j = 0; j < gameZone.getWidth(); j++) {
-				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
-			}
-			System.out.print("\n");
-		}
-		System.out.print("-----\n");
+//		for (int i = 0; i < gameZone.getHeight(); i++) {
+//			for (int j = 0; j < gameZone.getWidth(); j++) {
+//				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
+//			}
+//			System.out.print("\n");
+//		}
+//		System.out.print("-----\n");
 
 	}
 	
