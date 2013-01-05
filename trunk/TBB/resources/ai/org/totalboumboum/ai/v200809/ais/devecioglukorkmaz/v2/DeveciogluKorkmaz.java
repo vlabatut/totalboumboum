@@ -104,7 +104,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				while (i.hasNext()) {
 					checkInterruption();
 					AiBomb temp3 = i.next();
-					if (temp3!=null && 
+					if (temp3!=null && temp3.getColor()!=null &&
 							temp3.getColor().
 							equals(ownHero.
 									getColor())) {
@@ -294,7 +294,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		while (!fifo.isEmpty() && solution == null) {
 			checkInterruption();
 			AiTile node = fifo.poll();
-			if (node.getItem() != null) {
+			if (node.getItem() != null && node.getItem().getState().getName()!=null) {
 				if (!node.
 						getItem().
 						getState().

@@ -20,8 +20,8 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="10" rounds="3" />
-	<dates start="2013-01-05T11:15:34" save="2013-01-05T12:59:20" />
+	<played matches="11" rounds="1" />
+	<dates start="2013-01-05T11:15:34" save="2013-01-05T16:21:57" />
 	<players>
 		<player name="0809.Erişik+Pektaş" />
 		<player name="1213.Çıplak+Erakyol" />
