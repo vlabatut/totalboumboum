@@ -48,6 +48,7 @@ import org.totalboumboum.gui.game.loop.LoopPanel;
 import org.totalboumboum.gui.game.round.description.RoundDescription;
 import org.totalboumboum.gui.game.round.results.RoundResults;
 import org.totalboumboum.gui.game.round.statistics.RoundStatistics;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -76,21 +77,21 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		int buttonHeight = getHeight();
 
 		// buttons
-		buttonQuit = GuiTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
-		buttonBack = GuiTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK,buttonWidth,buttonHeight,1,this);
+		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
-	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
+	    buttonDescription = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
+	    buttonResults = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
-	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
+	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		buttonReplay = GuiTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_REPLAY,buttonWidth,buttonHeight,1,this);
+		buttonReplay = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_REPLAY,buttonWidth,buttonHeight,1,this);
 		buttonReplay.setEnabled(false);		
 		
 		// panels
@@ -118,13 +119,13 @@ buttonStatistics.setEnabled(false);
 			{	// play
 				buttonReplay.setEnabled(false);
 				// finish
-				GuiTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT, buttonQuit);
+				GuiButtonTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT, buttonQuit);
 			}
 			else
 			{	// play
 				buttonReplay.setEnabled(true);
 				// match
-				GuiTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK, buttonBack);
+				GuiButtonTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK, buttonBack);
 			}
 		}
 		else

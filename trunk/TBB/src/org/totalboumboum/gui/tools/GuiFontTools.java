@@ -33,7 +33,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 
 /**
  * Sets of fields and methods related
- * to GUI management.
+ * to font management in the GUI.
  * 
  * @author Vincent Labatut
  */

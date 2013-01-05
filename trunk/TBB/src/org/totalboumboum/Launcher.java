@@ -45,6 +45,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import org.totalboumboum.gui.frames.NormalFrame;
 import org.totalboumboum.gui.frames.QuickFrame;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
@@ -208,7 +209,7 @@ public class Launcher
 			g.setColor(new Color(0,0,0,100));
 			for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
 				g.drawString(GuiTools.STARTUP_LEGAL[i],70,90+i*10);
-			g.setColor(GuiTools.COLOR_SPLASHSCREEN_TEXT);
+			g.setColor(GuiColorTools.COLOR_SPLASHSCREEN_TEXT);
 	        g.drawString(msg,70,315);
 	        splash.update();
 		}

@@ -31,6 +31,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
@@ -129,7 +130,7 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	@Override
 	public void setBackground(Color background)
 	{	originalBackground = background;
-		darkerBackground = GuiTools.changeColorAlpha(background,GuiTools.ALPHA_DARKER_CHANGE);
+		darkerBackground = GuiColorTools.changeColorAlpha(background,GuiColorTools.ALPHA_DARKER_CHANGE);
 		switchBackground(darkSwitch);
 	}
 	

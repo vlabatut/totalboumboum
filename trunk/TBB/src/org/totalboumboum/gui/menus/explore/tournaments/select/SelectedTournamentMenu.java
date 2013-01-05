@@ -31,6 +31,7 @@ import javax.swing.JButton;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -67,7 +68,7 @@ public class SelectedTournamentMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_TOURNAMENT_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_TOURNAMENT_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

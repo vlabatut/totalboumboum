@@ -42,6 +42,7 @@ import org.totalboumboum.gui.menus.options.game.GameSplitPanel;
 import org.totalboumboum.gui.menus.options.gui.GuiSplitPanel;
 import org.totalboumboum.gui.menus.options.statistics.StatisticsSplitPanel;
 import org.totalboumboum.gui.menus.options.video.VideoSplitPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -92,15 +93,15 @@ public class OptionsMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonControls = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,buttonWidth,buttonHeight,fontSize,this);
-		buttonGameplay = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAME,buttonWidth,buttonHeight,fontSize,this);
-		buttonVideo = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,buttonWidth,buttonHeight,fontSize,this);
-		buttonGui = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,buttonWidth,buttonHeight,fontSize,this);
-		buttonStatistics = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
-		buttonAis = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_AIS,buttonWidth,buttonHeight,fontSize,this);
-		buttonAdvanced = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
+		buttonControls = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,buttonWidth,buttonHeight,fontSize,this);
+		buttonGameplay = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAME,buttonWidth,buttonHeight,fontSize,this);
+		buttonVideo = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,buttonWidth,buttonHeight,fontSize,this);
+		buttonGui = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,buttonWidth,buttonHeight,fontSize,this);
+		buttonStatistics = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
+		buttonAis = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_AIS,buttonWidth,buttonHeight,fontSize,this);
+		buttonAdvanced = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonBack = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
