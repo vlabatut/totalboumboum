@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.hollow;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2012 Vincent Labatut 
+ * Copyright 2008-2013 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,14 +30,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.v201213.adapter.data.AiSprite;
-import org.totalboumboum.ai.v201213.adapter.data.AiSuddenDeathEvent;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.bombset.Bombset;
 import org.totalboumboum.engine.container.fireset.Fireset;

@@ -2,7 +2,7 @@ package org.totalboumboum;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2012 Vincent Labatut 
+ * Copyright 2008-2013 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -1653,8 +1653,9 @@ public class Launcher
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
  */
 
-// TODO parser : interdire d'utiliser printf dans l'agent >> utiliser print de l'api
+// TODO parser : interdire d'utiliser printf dans l'agent >> utiliser print de l'api à la place
 // TODO affichage ingame API : shift+F pour cycler affichage, F tout seul pour on/off (pour toutes les infos)
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
 // TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
 // TODO le script ne compile pas à cause de UTF8
+// TODO virer le logo du tournoi neutre, en faire un deuxième moins neutre qui a différents niveaux
