@@ -23,7 +23,7 @@
  -->
 	
  	<notes>
- 		<line value="Pas de haut, pas de bas" />
+ 		<line value="Tout le monde sur la ligne de départ..." />
  		<line value="Date: 02-12-2012" />
  	</notes>
 
@@ -40,6 +40,6 @@
 		</time>
 	</limits>
 	
-	<level packname="tournament201213neutral" name="pasaj" randomLocation="true"/>
+	<level packname="tournament201213neutral" name="readysetgo" randomLocation="true"/>
 
 </round>

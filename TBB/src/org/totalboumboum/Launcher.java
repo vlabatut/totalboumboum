@@ -1667,3 +1667,4 @@ public class Launcher
 // TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
 // TODO le script ne compile pas à cause de UTF8
 // TODO virer le logo du tournoi neutre, en faire un deuxième moins neutre qui a différents niveaux
+// TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
