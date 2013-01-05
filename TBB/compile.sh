@@ -10,7 +10,7 @@
 # -------------------------------------------------------------------
 #
 # Total Boum Boum
-# Copyright 2008-2012 Vincent Labatut 
+# Copyright 2008-2013 Vincent Labatut 
 # 
 # This file is part of Total Boum Boum.
 # 
@@ -46,6 +46,11 @@
 	cp="${bin}:${jdom}:${japa}:${gral}"
 	sp="./src"
 #
+# define compile options
+	warnings="-nowarn"
+	encoding="-encoding UTF8"
+	options="${warnings} ${encoding}"
+#
 # create directory for .class files
 	if [ -d $bin ]; then
 		echo "${bin} already exists"
@@ -55,14 +60,14 @@
 #
 # (re)compile the game
 	echo "compiling the game..."
-	javac -nowarn -sourcepath $sp -classpath $cp ${main}/Launcher.java -d $bin
+	javac $options -sourcepath $sp -classpath $cp ${main}/Launcher.java -d $bin
 # (re)compile the AI classes located in the game
 	echo "compiling the AI classes inside the game..."
 	for i in $(ls -d ${aig}/*/); do 
 		echo -e "\t${i}"
 		for j in $(find $i -name "*.java" -print -type f); do 
 			echo -e "\t\t${j}"
-			javac -nowarn -sourcepath $sp -classpath $cp $j -d $bin
+			javac $options -sourcepath $sp -classpath $cp $j -d $bin
 		done
 	done
 #
@@ -72,9 +77,8 @@
 		echo -e "\t${i}"
 		for j in $(ls -d ${i}/ais/*/); do
 			echo -e "\t\t${j}"	
-			javac -nowarn -sourcepath ${sp}:${aib} -classpath ${cp}:${aib} $j/*.java
+			javac $options -sourcepath ${sp}:${aib} -classpath ${cp}:${aib} $j/*.java
 		done
 	done
 #
 #
-
