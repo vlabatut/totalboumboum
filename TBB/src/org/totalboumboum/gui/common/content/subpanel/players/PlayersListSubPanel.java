@@ -37,6 +37,7 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiStringTools;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -182,7 +183,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 					{	text = Integer.toString(playerRank);
 						tooltip = text;
 					}
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>rankWidth)
 						rankWidth = temp;
 					setLabelText(line,col,text,tooltip);

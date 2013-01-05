@@ -35,6 +35,7 @@ import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
@@ -68,7 +69,7 @@ public class Line extends ContentPanel
 	public void setDim(int width, int height)
 	{	super.setDim(width,height);
 		// font
-		lineFontSize = GuiTools.getFontSize(height*GuiTools.FONT_RATIO);
+		lineFontSize = GuiFontTools.getFontSize(height*GuiFontTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		// content
 		updateLabelsHeights();

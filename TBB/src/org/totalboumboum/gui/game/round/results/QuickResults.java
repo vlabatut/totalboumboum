@@ -36,6 +36,7 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.gui.tools.SpringUtilities;
 import org.totalboumboum.statistics.detailed.Score;
@@ -96,10 +97,10 @@ public class QuickResults extends JPanel
 //		Graphics g = bi.getGraphics();
 //		GuiTools.setGraphics(g);
 		int headerHeight = (int)(1.5*pHeight/(lines+0.5));
-		int headerSize = GuiTools.getFontSize(headerHeight);
+		int headerSize = GuiFontTools.getFontSize(headerHeight);
 		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(headerSize*0.8f); 
 		int lineHeight = (pHeight-headerHeight)/(lines-1);
-		int lineSize = GuiTools.getFontSize(lineHeight);
+		int lineSize = GuiFontTools.getFontSize(lineHeight);
 		regularFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(lineSize*0.8f); 
 		
 		// table

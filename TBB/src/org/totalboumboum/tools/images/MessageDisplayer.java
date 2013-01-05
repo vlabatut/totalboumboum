@@ -18,6 +18,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -59,7 +60,7 @@ public class MessageDisplayer
 	{	shape = null;
 		outline = null;
 		
-		Graphics2D g = (Graphics2D)GuiTools.getGraphics();
+		Graphics2D g = (Graphics2D)GuiFontTools.getGraphics();
 		Stroke bs = new BasicStroke(fatten);
 		GlyphVector gv = font.createGlyphVector(g.getFontRenderContext(),text);
 		GeneralPath path = new GeneralPath();

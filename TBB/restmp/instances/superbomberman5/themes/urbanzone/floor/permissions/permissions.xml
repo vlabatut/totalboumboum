@@ -25,4 +25,4 @@
 
 	<gesture name="standing" file="standing.xml" />
 
-</permissions>
+</modulations>

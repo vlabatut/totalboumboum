@@ -28,4 +28,4 @@
 	<gesture name="spawning" file="spawning.xml" />
 	<gesture name="standing" file="standing.xml" />
 
-</permissions>
+</modulations>

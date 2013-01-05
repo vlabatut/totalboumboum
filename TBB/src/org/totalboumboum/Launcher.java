@@ -45,6 +45,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import org.totalboumboum.gui.frames.NormalFrame;
 import org.totalboumboum.gui.frames.QuickFrame;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.tools.GameData;
@@ -140,6 +141,7 @@ public class Launcher
 		resolutionSelection();
 		// initalize GUI
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
+		GuiFontTools.init();
 		GuiTools.init();
 		// load engine stats
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
@@ -248,7 +250,7 @@ public class Launcher
 		resolutionSelection();
 		// initalize GUI
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
-		GuiTools.quickInit();
+		GuiFontTools.init();
 		// load engine stats
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
 		if(Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
@@ -1653,7 +1655,12 @@ public class Launcher
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
  */
 
-// TODO parser : interdire d'utiliser printf dans l'agent >> utiliser print de l'api à la place
+/* TODO parser : 
+ * 		- interdire d'utiliser printf dans l'agent >> utiliser print de l'api à la place
+ * 		- vérifier que pas d'include sur d'autres package que l'api, les deux classes autorisées, les classes java standard, et l'agent lui-même
+ * 		- modifier le document pour présenter le parser à la fin, avec la checklist
+ */
+
 // TODO affichage ingame API : shift+F pour cycler affichage, F tout seul pour on/off (pour toutes les infos)
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
 // TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)

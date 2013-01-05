@@ -35,6 +35,7 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
@@ -282,7 +283,7 @@ public enum StatisticColumn
 			{	String text = Integer.toString(playerRank);
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -359,7 +360,7 @@ public enum StatisticColumn
 				nfTooltip.setMaximumFractionDigits(6);
 				String tooltip = nfTooltip.format(mean);
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -374,7 +375,7 @@ public enum StatisticColumn
 				nfTooltip.setMaximumFractionDigits(6);
 				String tooltip = nfTooltip.format(stdev);
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -390,7 +391,7 @@ public enum StatisticColumn
 				nfTooltip.setMaximumFractionDigits(6);
 				String tooltip = nfTooltip.format(variability);
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -401,7 +402,7 @@ public enum StatisticColumn
 				String text = Integer.toString(roundcount);
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -442,7 +443,7 @@ public enum StatisticColumn
 				tooltip = TimeTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);							
 			}
 			panel.setLabelText(line,col,text,tooltip);
-			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+			int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 			if(temp>colWidths[col])
 				colWidths[col] = temp;
 			col++;
@@ -515,7 +516,7 @@ public enum StatisticColumn
 			tooltip = text;
 		}
 		panel.setLabelText(line,col,text,tooltip);
-		int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+		int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 		if(temp>colWidths[col])
 			colWidths[col] = temp;
 	}
@@ -563,7 +564,7 @@ public enum StatisticColumn
 			tooltip = nfTooltip.format(value)+"%";
 		}
 		panel.setLabelText(line,col,text,tooltip);
-		int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+		int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
 		if(temp>colWidths[col])
 			colWidths[col] = temp;
 	}

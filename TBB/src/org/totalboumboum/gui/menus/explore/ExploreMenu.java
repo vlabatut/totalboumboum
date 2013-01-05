@@ -39,6 +39,7 @@ import org.totalboumboum.gui.menus.explore.levels.select.SelectedLevelSplitPanel
 import org.totalboumboum.gui.menus.explore.matches.select.SelectedMatchSplitPanel;
 import org.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundSplitPanel;
 import org.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -85,7 +86,7 @@ public class ExploreMenu extends InnerMenuPanel
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_BUTTON);
-		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());

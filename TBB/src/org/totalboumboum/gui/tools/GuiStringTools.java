@@ -53,7 +53,7 @@ public class GuiStringTools
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PLAYERS_LIST_DATA_NO_CONTROLS+GuiKeys.TOOLTIP);
 			controlTooltips.add(tooltip);
 			// width
-			result = GuiTools.getPixelWidth(fontSize,text);
+			result = GuiFontTools.getPixelWidth(fontSize,text);
 		}
 		// control number X
 		for(int index=1;index<=GameData.CONTROL_COUNT;index++)
@@ -64,7 +64,7 @@ public class GuiStringTools
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PLAYERS_LIST_DATA_CONTROLS+GuiKeys.TOOLTIP)+" "+index;
 			controlTooltips.add(tooltip);
 			// width
-			int temp = GuiTools.getPixelWidth(fontSize,text);
+			int temp = GuiFontTools.getPixelWidth(fontSize,text);
 			if(temp>result)
 				result = temp;
 		}
@@ -98,7 +98,7 @@ public class GuiStringTools
 			colorTooltips.add(tooltip);
 			colorBackgrounds.add(bg);
 			// width
-			int temp = GuiTools.getPixelWidth(fontSize,text);
+			int temp = GuiFontTools.getPixelWidth(fontSize,text);
 			if(temp>result)
 				result = temp;
 		}

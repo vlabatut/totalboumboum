@@ -47,6 +47,7 @@ import org.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
 import org.totalboumboum.gui.menus.replay.ReplayContainer;
 import org.totalboumboum.gui.menus.statistics.players.PlayerStatisticsSplitPanel;
 import org.totalboumboum.gui.menus.tournament.TournamenuContainer;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
@@ -72,7 +73,7 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		int buttonWidth = GuiTools.buttonTextWidth;
 		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_MAIN_BUTTON);
-		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 		
 		// buttons
 		add(Box.createVerticalGlue());
