@@ -37,6 +37,7 @@ import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
@@ -162,7 +163,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					{	String tempText = text+(c+1);
 						String tempTooltip = tooltip+" "+(c+1);
 						setLabelText(0,col+c,tempText,tempTooltip);
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),tempText); 
+						int temp = GuiFontTools.getPixelWidth(getLineFontSize(),tempText); 
 						if(temp>confrontationsWidth[c])
 							confrontationsWidth[c] = temp;
 					}
@@ -215,7 +216,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>rankWidth)
 						rankWidth = temp;
 					col++;;
@@ -259,7 +260,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						setLabelBackground(line,col,bg);
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 						if(temp>scoresWidth[j])
 							scoresWidth[j] = temp;
 						col++;
@@ -273,7 +274,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>timeWidth)
 						timeWidth = temp;
 					col++;
@@ -294,7 +295,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						setLabelBackground(line,col,bg);			
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 						if(temp>confrontationsWidth[cfrt])
 							confrontationsWidth[cfrt] = temp;
 						cfrt++;
@@ -313,7 +314,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>totalWidth)
 						totalWidth = temp;
 					col++;
@@ -330,7 +331,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>pointsWidth)
 						pointsWidth = temp;
 					col++;;

@@ -26,16 +26,13 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -49,34 +46,41 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
+ * Sets of fields and methods related
+ * to GUI management.
  * 
  * @author Vincent Labatut
- *
  */
 public class GuiTools
 {	
 	/////////////////////////////////////////////////////////////////
 	// INIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Initializes the fields in this class,
+	 * for a full GUI.
+	 */
 	public static void init()
-	{	initFonts();
-		initSizes();
+	{	initSizes();
 		initImages();
 	}
 	
-	public static void quickInit()
-	{	initFonts();
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// STARTUP			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Startup message index */
 	public static final int STARTUP_XML = 0;
+	/** Startup message index */
 	public static final int STARTUP_CONFIG = 1;
+	/** Startup message index */
 	public static final int STARTUP_GUI = 2;
+	/** Startup message index */
 	public static final int STARTUP_INIT = 3;
+	/** Startup message index */
 	public static final int STARTUP_STATS = 4;
+	/** Startup message index */
 	public static final int STARTUP_DONE = 5;
+	/** Array of startup messages */
 	public static final String STARTUP_MESSAGES[] = 
 	{	"[Loading XML schemas]",
 		"[Loading configuration]",
@@ -85,24 +89,31 @@ public class GuiTools
 		"[Loading statistics]",
 		"[Done]"
 	};
+	/** Copyright message */
 	public static final String STARTUP_LEGAL[] = 
 	{	"Total Boum Boum version "+GameData.VERSION,
-		new Character('\u00A9').toString()+" 2008-2012 Vincent Labatut",
+		new Character('\u00A9').toString()+" 2008-2013 Vincent Labatut",
 		"Licensed under the GPL v2"
 	};
 	
 	/////////////////////////////////////////////////////////////////
 	// HELP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static final int OPTION_HELP = 0;
+	/** Help message */
 	public static final String OPTION_HELP_MESSAGE = "In-line parameters allowed for this software:";
+	/** Option index */
+	public static final int OPTION_HELP = 0;
+	/** Option index */
 	public static final int OPTION_QUICK = 1;
+	/** Option index */
 	public static final int OPTION_WINDOW = 2;
+	/** Options tags */
 	public static final String OPTIONS[] = 
 	{	"help",
 		"quick",
 		"window"
 	};
+	/** Option descriptions */
 	public static final String OPTIONS_HELP[] = 
 	{	"show this page (and does not launch the game)",
 		"launch the game in quick mode, i.e. with a minimal graphical interface, and allows playing only one predefined round",
@@ -112,19 +123,32 @@ public class GuiTools
 	/////////////////////////////////////////////////////////////////
 	// IMAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// icons
+	/** Part of an icon button file name */
 	private static final String ICON_NORMAL = "normal";
+	/** Part of an icon button file name */
 	private static final String ICON_NORMAL_SELECTED = "normal_selected";
+	/** Part of an icon button file name */
 	private static final String ICON_DISABLED = "disabled";
+	/** Part of an icon button file name */
 	private static final String ICON_DISABLED_SELECTED = "disabled_selected";
+	/** Part of an icon button file name */
 	private static final String ICON_ROLLOVER = "rollover";
+	/** Part of an icon button file name */
 	private static final String ICON_ROLLOVER_SELECTED = "rollover_selected";
+	/** Part of an icon button file name */
 	private static final String ICON_PRESSED = "pressed";
+	/** Standard replacement image used when some image is missing */
 	private static BufferedImage absentImage;	
-	private static final HashMap<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
+	/** List of images already loaded */
+	private static final Map<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
 	
 	/**
-	 * get the image for the specified key	
+	 * Get the image for the specified key.
+	 * 
+	 * @param key
+	 * 		Id requested.
+	 * @return
+	 * 		The corresponding image.
 	 */
 	public static BufferedImage getIcon(String key)
 	{	BufferedImage result;
@@ -137,20 +161,27 @@ public class GuiTools
 	}
 
 	/**
-	 * tests if an image is stored for the specified key
+	 * Tests if an image is stored for the specified key.
+	 * 
 	 * @param key
+	 * 		Key of interest.
 	 * @return
+	 * 		{@code true} iff an image is associated to this key.
 	 */
 	public static boolean hasIcon(String key)
 	{	return icons.containsKey(key);		
 	}
 
 	/**
-	 * loads an image. If the image cannot be loaded, it is replaced by a
-	 * standard image (eg a red cross) 
+	 * Loads an image. If the image cannot be loaded, it is replaced by a
+	 * standard image (e.g. a red cross).
+	 *  
 	 * @param path
+	 * 		Path of the file.
 	 * @param absent
+	 * 		What to put instead if the file is missing.
 	 * @return
+	 * 		The resulting image.
 	 */
 	private static BufferedImage loadIcon(String path, BufferedImage absent)
 	{	BufferedImage image;
@@ -164,6 +195,9 @@ public class GuiTools
 		return image;	
 	}
 	
+	/**
+	 * Initializes all images.
+	 */
 	private static void initImages()
 	{	// absent
 		absentImage = ImageTools.getAbsentImage(64,64);
@@ -173,6 +207,14 @@ public class GuiTools
 		initDataImages();		
 	}
 	
+	/**
+	 * Load all images for a button.
+	 * 
+	 * @param buttonStates
+	 * 		
+	 * @param folder
+	 * @param uses
+	 */
 	private static void loadButtonImages(String[] buttonStates, String folder, String[] uses)
 	{	for(int i=0;i<buttonStates.length;i++)
 		{	BufferedImage image = loadIcon(folder+buttonStates[i]+".png",absentImage);
@@ -181,6 +223,9 @@ public class GuiTools
 		}
 	}
 	
+	/**
+	 * Initializes all button images.
+	 */
 	private static void initButtonImages()
 	{	// init
 		String[] buttonStates = {ICON_NORMAL,ICON_NORMAL_SELECTED,
@@ -316,12 +361,24 @@ public class GuiTools
 		}
 	}
 	
+	/**
+	 * Load the images for table-related icons.
+	 * 
+	 * @param folder
+	 * 		Folder containing the images.
+	 * @param uses
+	 * 		List of keys associated to these images.
+	 */
 	private static void loadTableImages(String folder, String[] uses)
 	{	BufferedImage image = loadIcon(folder,absentImage);
 		for(int j=0;j<uses.length;j++)
 			icons.put(uses[j],image);
 	}
 	
+	/**
+	 * Initializes all images for
+	 * table headers.
+	 */
 	private static void initHeaderImages()
 	{	String baseFolder = GuiFileTools.getHeadersPath()+File.separator;
 		// address
@@ -886,6 +943,11 @@ public class GuiTools
 		}
 	}
 	
+	/**
+	 * Initializes all images for
+	 * icons contained in tables 
+	 * (but headers).
+	 */
 	private static void initDataImages()
 	{	String baseFolder = GuiFileTools.getDataPath()+File.separator;
 		// average
@@ -1420,140 +1482,6 @@ public class GuiTools
 		}
 	}
 				
-	/////////////////////////////////////////////////////////////////
-	// FONTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private static Graphics graphics;
-	public final static float FONT_RATIO = 0.8f; // font height relatively to the containing label (or component)
-	public final static float FONT_TEXT_RATIO = 0.75f; // font height relatively to the container title font 
-
-	public static Graphics getGraphics()
-	{	return graphics;	
-	}
-	
-	private static void initFonts()
-	{	BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
-		graphics = img.getGraphics();			
-	}
-	
-	/**
-	 * process the maximal font size for the specified height limit,
-	 * whatever the displayed text will be
-	 * @param limit
-	 * @return
-	 */
-	public static int getFontSize(double limit)
-	{	int result = 0;
-		int fheight;
-		do
-		{	result++;
-			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
-			graphics.setFont(font);
-			FontMetrics metrics = graphics.getFontMetrics(font);
-			fheight = metrics.getHeight();
-		}
-		while(fheight<limit);
-		return result;
-	}
-
-	/**
-	 * process the maximal font size for the specified width and height limits
-	 * and given text.
-	 * @param width
-	 * @param height
-	 * @param text
-	 * @return
-	 */
-	public static int getFontSize(double width, double height, String text)
-	{	int result = 0;
-		int fheight,fwidth;
-		do
-		{	result++;
-			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
-			graphics.setFont(font);
-			FontMetrics metrics = graphics.getFontMetrics(font);
-			fheight = metrics.getHeight();
-			Rectangle2D bounds = metrics.getStringBounds(text,graphics);
-			fwidth = (int)bounds.getWidth();
-		}
-		while(fheight<height && fwidth<width);
-		return result-1;
-	}
-	
-	/**
-	 * process the pixel height corresponding to the specified font size 
-	 * @param fontSize
-	 * @return
-	 */
-	public static int getPixelHeight(float fontSize)
-	{	int result;
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		graphics.setFont(font);
-		FontMetrics metrics = graphics.getFontMetrics(font);
-		result = (int)(metrics.getHeight()*1.2);
-		return result;
-	}
-	
-	/**
-	 * process the pixel width corresponding to the specified font size
-	 * @param fontSize
-	 * @param text
-	 * @return
-	 */
-	public static int getPixelWidth(float fontSize, String text)
-	{	int result;
-		fontSize = fontSize + 6;
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		graphics.setFont(font);
-		FontMetrics metrics = graphics.getFontMetrics(font);
-		Rectangle2D bounds = metrics.getStringBounds(text,graphics);
-		result = (int)bounds.getWidth();
-		return result;
-	}
-	
-	/**
-	 * process the maximal font size fot the given dimensions and the set of texts
-	 * @param width
-	 * @param height
-	 * @param texts
-	 * @return
-	 */
-	public static int getOptimalFontSize(double width, double height, List<String> texts)
-	{	int result;
-		Iterator<String> it = texts.iterator();
-		int longest = 0;
-		String longestString = null;
-		while(it.hasNext())
-		{	String text = it.next();
-			int length = getPixelWidth(10,text);
-			if(length>longest)
-			{	longest = length;
-				longestString = text;
-			}
-		}
-		result = getFontSize(width,height,longestString);
-		return result;
-	}
-
-	/**
-	 * process the maximal width for the given list of texts, relatively
-	 * to the given font size
-	 * @param fontSize
-	 * @param texts
-	 * @return
-	 */
-	public static int getMaximalWidth(float fontSize, List<String> texts)
-	{	int result = 0;
-		Iterator<String> it = texts.iterator();
-		while(it.hasNext())
-		{	String text = it.next();
-			int length = getPixelWidth(10,text);
-			if(length>result)
-				result = length;
-		}
-		return result;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// SIZE 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

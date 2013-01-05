@@ -54,6 +54,7 @@ import org.totalboumboum.gui.game.round.results.RoundResults;
 import org.totalboumboum.gui.game.round.statistics.RoundStatistics;
 import org.totalboumboum.gui.game.save.SaveSplitPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
@@ -334,7 +335,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 			buttonRecord.setEnabled(false);
 			buttonSave.setEnabled(false);
 			buttonMatch.setEnabled(false);
-			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
+			int fontSize = GuiFontTools.getFontSize(getHeight()*0.6);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 			int width = Integer.MAX_VALUE;
 			int height = getHeight();

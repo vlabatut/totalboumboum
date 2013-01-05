@@ -32,6 +32,7 @@ import javax.swing.BoxLayout;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -144,7 +145,7 @@ public class LinesContentPanel extends ContentPanel
 		
 		if(lines==0)
 		{	if(header)
-				headerFontSize = GuiTools.getFontSize(getHeaderHeight()*GuiTools.FONT_RATIO);
+				headerFontSize = GuiFontTools.getFontSize(getHeaderHeight()*GuiFontTools.FONT_RATIO);
 			else
 				headerFontSize = 0;
 		}
@@ -154,7 +155,7 @@ public class LinesContentPanel extends ContentPanel
 			if(header)
 			{	int lineHeight = (int)((height - margins)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
 				int headerHeight = (int)(lineHeight*GuiTools.TABLE_HEADER_RATIO);
-				headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
+				headerFontSize = GuiFontTools.getFontSize(headerHeight*GuiFontTools.FONT_RATIO);
 				lineHeights.add(headerHeight);
 				for(int i=1;i<lines;i++)
 					lineHeights.add(lineHeight);
@@ -180,7 +181,7 @@ public class LinesContentPanel extends ContentPanel
 			}			
 		}
 
-		lineFontSize = GuiTools.getFontSize(getLineHeight()*GuiTools.FONT_RATIO);
+		lineFontSize = GuiFontTools.getFontSize(getLineHeight()*GuiFontTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		lineWidth = width;
 		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);

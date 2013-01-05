@@ -32,6 +32,7 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
@@ -208,7 +209,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						setLabelBackground(line,col,bg);
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 						if(temp>scoresWidth[j])
 							scoresWidth[j] = temp;
 						col++;
@@ -222,7 +223,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>timeWidth)
 						timeWidth = temp;
 					col++;
@@ -242,7 +243,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						setLabelBackground(line,col,bg);
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 						if(temp>confrontationsWidth[j])
 							confrontationsWidth[j] = temp;
 						col++;
@@ -260,7 +261,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>totalWidth)
 						totalWidth = temp;
 					col++;

@@ -43,7 +43,7 @@
 :: define compile options
 	Set warnings=-nowarn
 	Set encoding=-encoding UTF8
-	Set options=%warnings% %encoding"
+	Set options=%warnings% %encoding%
 
 :: create directory for .class files
 	If exist %bin% goto EXISTS

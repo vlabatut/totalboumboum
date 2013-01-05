@@ -37,6 +37,7 @@ import javax.swing.SwingConstants;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.ContentPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
@@ -133,7 +134,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 		// content
 		titleWidth = width - 2*GuiTools.subPanelMargin;
 		titleHeight = GuiTools.subPanelTitleHeight;
-		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
+		titleFontSize = GuiFontTools.getFontSize(titleHeight*GuiFontTools.FONT_RATIO);
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)titleFontSize);
 		title.setFont(font);
 		Dimension dim;

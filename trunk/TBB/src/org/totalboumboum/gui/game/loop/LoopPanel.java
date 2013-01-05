@@ -47,6 +47,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.round.RoundSplitPanel;
+import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -239,7 +240,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	{	String txts[] = {getMessageTextGo(),getMessageTextReady(),getMessageTextSet()};
 		List<String> texts = Arrays.asList(txts);
 		Font result = GuiConfiguration.getMiscConfiguration().getFont();
-		float fontSize = GuiTools.getOptimalFontSize(width*0.9,height*0.9,texts);
+		float fontSize = GuiFontTools.getOptimalFontSize(width*0.9,height*0.9,texts);
 		result = result.deriveFont(fontSize);
 		return result;
 	}
