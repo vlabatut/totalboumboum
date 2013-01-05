@@ -37,6 +37,7 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiStringTools;
@@ -130,7 +131,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				Profile profile = i.next();
 				// color
 				Color clr = profile.getSpriteColor().getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				setLineBackground(line,bg);
 				// portrait

@@ -42,7 +42,7 @@ public class ColumnsContentPanel extends ContentPanel
 
 	public ColumnsContentPanel(int width, int height, int cols)
 	{	super(width,height);
-//		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+//		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 		setOpaque(false);
 		
 		// layout

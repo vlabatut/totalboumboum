@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -170,8 +171,8 @@ public class Column extends ContentPanel
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl.setAlignmentX(CENTER_ALIGNMENT);
 		lbl.setAlignmentY(CENTER_ALIGNMENT);
-		lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+		lbl.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		lbl.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
 		lbl.setOpaque(true);
 //		Dimension dim = new Dimension(height,height);
 //		lbl.setPreferredSize(dim);

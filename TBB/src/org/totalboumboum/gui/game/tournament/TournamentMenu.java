@@ -64,6 +64,7 @@ import org.totalboumboum.gui.game.tournament.statistics.OthersStatistics;
 import org.totalboumboum.gui.game.tournament.statistics.SingleStatistics;
 import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import org.totalboumboum.gui.tools.GuiButtonTools;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
@@ -92,7 +93,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 		
 		// sizes
 		int buttonWidth = getHeight();

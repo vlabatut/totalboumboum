@@ -43,6 +43,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.data.game.GameInfo;
@@ -67,7 +68,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		dataPanel.setOpaque(false);
 		
 		// background
-		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+		{	Color bg = GuiColorTools.COLOR_COMMON_BACKGROUND;
 			setBackground(bg);
 		}
 		
@@ -105,7 +106,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			// up button
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -122,7 +123,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			// central
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(centerButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -139,7 +140,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			// down
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -368,7 +369,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			int line = indexOld%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			panel.setLineBackground(line,bg);
 			// update selected id
 			selectedId = null;
@@ -389,7 +390,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			int line = indexNew%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
-			Color bg = GuiTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
 			panel.setLineBackground(line,bg);
 		}
 		

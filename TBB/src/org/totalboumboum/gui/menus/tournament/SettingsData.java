@@ -39,6 +39,7 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -178,7 +179,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				result.setColSubPrefWidth(col,fileWidth);
 				result.setColSubMaxWidth(col,fileWidth);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// next
 				col++;
@@ -192,7 +193,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				String key = GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT;
 				result.setLabelKey(line,col,key,true);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// listener
 				MyLabel lbl = result.getLabel(line,col);

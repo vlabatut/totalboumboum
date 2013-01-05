@@ -35,6 +35,7 @@ import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -124,7 +125,7 @@ public class TournamentMiscSubPanel extends TableSubPanel
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -132,13 +133,13 @@ public class TournamentMiscSubPanel extends TableSubPanel
 				{	String text = textValues.get(line);
 					String tooltip = tooltipValues.get(line);
 					setLabelText(line,colSub,text,tooltip);
-					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,0,fg);
 					Color bg;
 					if(line>0)
-						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					else
-						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -149,7 +150,7 @@ public class TournamentMiscSubPanel extends TableSubPanel
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -159,9 +160,9 @@ public class TournamentMiscSubPanel extends TableSubPanel
 					setLabelText(line,colSub,text,tooltip);
 					Color bg;
 					if(line>0)
-						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 					else
-						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -182,12 +183,12 @@ public class TournamentMiscSubPanel extends TableSubPanel
 	public void selectAllowedPlayers(boolean flag)
 	{	Color hbg,dbg;
 		if(showAllowedPlayerNumbers && flag)
-		{	hbg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
-			dbg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+		{	hbg = GuiColorTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
+			dbg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
 		}
 		else
-		{	hbg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-			dbg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		{	hbg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+			dbg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 		}
 		setLabelBackground(allowedPlayersLine,0,hbg);
 		setLabelBackground(allowedPlayersLine,1,dbg);

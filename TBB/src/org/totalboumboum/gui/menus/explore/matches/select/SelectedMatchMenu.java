@@ -32,6 +32,7 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.tools.GuiButtonTools;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -58,7 +59,7 @@ public class SelectedMatchMenu extends InnerMenuPanel
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();

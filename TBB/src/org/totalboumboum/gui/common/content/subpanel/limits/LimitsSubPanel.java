@@ -39,6 +39,7 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.time.TimeTools;
@@ -88,7 +89,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 		
 		if(limits!=null)
 		{	// title
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			{	Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 				setTitleBackground(bg);
 			}
 	
@@ -168,9 +169,9 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 				//
 				int colSub = 0;
 				{	setLabelKey(line,colGroup,colSub,iconName,true);
-					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,colGroup,colSub,fg);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					MyLabel lbl = getLabel(line,colGroup,colSub);
 					lbl.addMouseListener(this);
@@ -180,7 +181,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 				{	String text = value;
 					String tooltip = value;
 					setLabelText(line,colGroup,colSub,text,tooltip);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					MyLabel lbl = getLabel(line,colGroup,colSub);
 					lbl.addMouseListener(this);
@@ -198,7 +199,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 		}
 		else
 		{	// title
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			setTitleBackground(bg);			
 			
 			// empty lines
@@ -221,8 +222,8 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	private void selectLimit(int row)
 	{	// paint line
 		selectedRow = row;
-		setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
-		setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		setLabelBackground(selectedRow,0,GuiColorTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
+		setLabelBackground(selectedRow,1,GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		// update listeners
 		fireLimitSelectionChange();
 	}
@@ -259,8 +260,8 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 		int[] pos = getLabelPositionMultiple(label);
 		// unselect
 		if(selectedRow!=-1)
-		{	setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-			setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+		{	setLabelBackground(selectedRow,0,GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+			setLabelBackground(selectedRow,1,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedRow = -1;
 		}		
 		// select

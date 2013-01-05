@@ -31,6 +31,7 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.data.host.HostInfo;
@@ -157,7 +158,7 @@ public class HostInfoSubPanel extends TableSubPanel implements MouseListener
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
 					{	MyLabel lbl = getLabel(line,colSub);
@@ -170,13 +171,13 @@ public class HostInfoSubPanel extends TableSubPanel implements MouseListener
 				{	String text = texts.get(line);
 					String tooltip = tooltips.get(line);
 					setLabelText(line,colSub,text,tooltip);
-					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,0,fg);
 					Color bg;
 					if(line>0)
-						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					else
-						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
 					{	MyLabel lbl = getLabel(line,colSub);
@@ -192,7 +193,7 @@ public class HostInfoSubPanel extends TableSubPanel implements MouseListener
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
 					{	MyLabel lbl = getLabel(line,colSub);
@@ -207,9 +208,9 @@ public class HostInfoSubPanel extends TableSubPanel implements MouseListener
 					setLabelText(line,colSub,text,tooltip);
 					Color bg;
 					if(line>0)
-						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 					else
-						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
 					{	MyLabel lbl = getLabel(line,colSub);

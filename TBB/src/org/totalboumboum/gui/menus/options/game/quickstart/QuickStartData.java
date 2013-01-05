@@ -49,6 +49,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
@@ -206,9 +207,9 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 			int playersNumber = playersPanel.getPlayers().size();
 			Color bg;
 			if(allowedPlayers.contains(playersNumber))
-				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			else
-				bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+				bg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
 			roundPanel.setLabelBackground(0,1,bg);
 		}
 		fireDataPanelSelectionChange(null);
@@ -233,7 +234,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				result.setColSubPrefWidth(col,nameWidth);
 				result.setColSubMaxWidth(col,nameWidth);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// next
 				col++;
@@ -244,7 +245,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				result.setColSubPrefWidth(col,allowedPlayersWidth);
 				result.setColSubMaxWidth(col,allowedPlayersWidth);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// next
 				col++;
@@ -258,7 +259,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE;
 				result.setLabelKey(line,col,key,true);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// listener
 				MyLabel lbl = result.getLabel(line,col);

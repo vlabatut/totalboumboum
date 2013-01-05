@@ -41,6 +41,7 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TextSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.TextContentPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
@@ -117,7 +118,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 				float fontSize = notesPanel.getTitleFontSize()/2;
 				notesPanel.setFontSize(fontSize);
 				TextContentPanel textPanel = notesPanel.getDataPanel();
-				textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				textPanel.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				previewPanel.add(notesPanel);
 				
 				mainPanel.add(previewPanel);
@@ -136,12 +137,12 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 		// no player selected
 		if(selectedAi==null)
 		{	notesValues = new ArrayList<String>();
-			textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			textPanel.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		}
 		// one player selected
 		else
 		{	notesValues = selectedAi.getNotes();
-			textPanel.setBackground(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			textPanel.setBackground(GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
 		}
 		// refresh
 		String text = "";

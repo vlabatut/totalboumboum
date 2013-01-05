@@ -44,6 +44,7 @@ import javax.swing.text.StyledDocument;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -108,7 +109,7 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 				textPane.setEditable(false);
 				textPane.setHighlighter(null);
 				textPane.setOpaque(true);
-				textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				textPane.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		
 				// styles
 				StyledDocument doc = textPane.getStyledDocument();
@@ -120,7 +121,7 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 				StyleConstants.setFontSize(sa,font.getSize());
 				doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
 				// color
-				Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
 				StyleConstants.setForeground(sa,fg);
 				// set
 //				doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
@@ -154,8 +155,8 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 				textArea.setLineWrap(true);
 				textArea.setWrapStyleWord(true);
 				textArea.setFont(font);
-				textArea.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-				textArea.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				textArea.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				textArea.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
 				for(String txt: text)
 					textArea.append(txt+"\n");
 				textPanel.add(textArea);

@@ -38,6 +38,7 @@ import org.totalboumboum.game.points.PointsTotal;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
@@ -90,12 +91,12 @@ public class PointsSubPanel extends TableSubPanel
 
 		if(pointsProcessor==null)
 		{	// title
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			setTitleBackground(bg);
 		}
 		else
 		{	// title
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			{	Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 				setTitleBackground(bg);
 			}
 		
@@ -111,9 +112,9 @@ public class PointsSubPanel extends TableSubPanel
 				int colSub = 0;
 				// left
 				{	String tooltip = tempTt.get(colSub);
-					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,colGroup,colSub,fg);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					if(tempDt.get(colSub) instanceof BufferedImage)
 					{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
@@ -135,7 +136,7 @@ public class PointsSubPanel extends TableSubPanel
 					{	String text = (String)tempDt.get(colSub);
 						setLabelText(line,colGroup,colSub,text,tooltip);
 					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}

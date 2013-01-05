@@ -46,6 +46,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiButtonTools;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
@@ -71,7 +72,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 
 		// buttons
 		initButtons();	

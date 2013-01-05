@@ -43,6 +43,7 @@ import org.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.part.PartSubPanelListener;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -62,7 +63,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		dataPanel.setOpaque(false);
 	
 		// background
-		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+		{	Color bg = GuiColorTools.COLOR_COMMON_BACKGROUND;
 			setBackground(bg);
 		}
 		
@@ -84,7 +85,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		// buttons up panel
 		{	upPanel = new JPanel();
 			upPanel.setOpaque(false);
-			Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 			// layout
 			{	BoxLayout layout = new BoxLayout(upPanel,BoxLayout.LINE_AXIS); 
 				upPanel.setLayout(layout);
@@ -174,7 +175,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		// buttons down panel
 		{	downPanel = new JPanel();
 			downPanel.setOpaque(false);
-			Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 			// layout
 			{	BoxLayout layout = new BoxLayout(downPanel,BoxLayout.LINE_AXIS); 
 				downPanel.setLayout(layout);

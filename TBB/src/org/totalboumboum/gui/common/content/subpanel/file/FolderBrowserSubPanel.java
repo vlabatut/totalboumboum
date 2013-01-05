@@ -39,6 +39,7 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -124,7 +125,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 			int line = controlUpCount;
 			int nameIndex = panelIndex*(LINES-controlTotalCount);
 			while(line<LINES && nameIndex<names.size())
-			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			{	Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				String name = names.get(nameIndex);
 				listPanel.setLabelBackground(line,0,bg);
 				listPanel.setLabelText(line,0,name,name);
@@ -135,7 +136,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				line++;
 			}			
 			// page up
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			{	Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(linePrevious,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEUP;
 				listPanel.setLabelKey(linePrevious,0,key,true);
@@ -145,7 +146,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 			}
 			// parent
 			if(showParent)
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			{	Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(lineParent,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_FILE_PARENT;
 				listPanel.setLabelKey(lineParent,0,key,false);
@@ -154,7 +155,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				label.setMouseSensitive(true);
 			}
 			// page down
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			{	Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(lineNext,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEDOWN;
 				listPanel.setLabelKey(lineNext,0,key,true);
@@ -228,11 +229,11 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	{	TableContentPanel table = listPanels.get(currentPage);
 		// unselect the previous selected line
 		if(selectedRow!=-1)
-			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			table.setLabelBackground(selectedRow,0,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
 		// select the new line
 		selectedRow = row;
 		if(selectedRow!=-1)
-			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+			table.setLabelBackground(selectedRow,0,GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		// update listeners
 		fireFolderBrowserSelectionChanged();
 	}

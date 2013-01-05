@@ -34,6 +34,7 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -71,8 +72,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 			title = new JLabel(text);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(titleFontSize);
-			title.setForeground(GuiTools.COLOR_TITLE_FOREGROUND);
-			title.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+			title.setForeground(GuiColorTools.COLOR_TITLE_FOREGROUND);
+			title.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -87,7 +88,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		
 		// data panel
 		{	dataPart = new EmptySubPanel(dataWidth,dataHeight);
-			dataPart.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+			dataPart.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 			add(dataPart);
 		}
 		

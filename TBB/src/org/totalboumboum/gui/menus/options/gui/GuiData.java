@@ -40,6 +40,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import org.totalboumboum.gui.data.language.Language;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -124,7 +125,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 				
@@ -165,7 +166,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 				
@@ -206,7 +207,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 

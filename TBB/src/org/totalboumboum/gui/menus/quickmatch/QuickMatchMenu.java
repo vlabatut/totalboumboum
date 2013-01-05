@@ -71,6 +71,7 @@ import org.totalboumboum.gui.menus.quickmatch.LevelsData;
 import org.totalboumboum.gui.menus.quickmatch.PlayersData;
 import org.totalboumboum.gui.menus.quickmatch.SettingsData;
 import org.totalboumboum.gui.tools.GuiButtonTools;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
@@ -96,7 +97,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 
 		// buttons
 		initButtons();	

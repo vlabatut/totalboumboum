@@ -37,6 +37,7 @@ import javax.swing.SwingConstants;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.ContentPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -54,7 +55,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 	{	super(width,height);
 	
 		// background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -67,8 +68,8 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 			title.setToolTipText(tooltip);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);						
-			title.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
-			title.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+			title.setForeground(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+			title.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
 			title.setOpaque(true);
 		}
 		// data
