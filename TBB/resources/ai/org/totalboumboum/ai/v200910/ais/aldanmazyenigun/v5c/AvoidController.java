@@ -303,7 +303,9 @@ public class AvoidController
 				int m=0;
 				if(at!=null)
 				{
-					double min=ai.getDangerLevel(at.get(0));
+					double min = Double.MAX_VALUE;
+					if(!at.isEmpty())
+						min = ai.getDangerLevel(at.get(0));
 					AiTile BestTile=null;
 					while(m<at.size())
 					{	ai.checkInterruption();
