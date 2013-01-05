@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<round
+<match
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut 
@@ -23,23 +23,23 @@
  -->
 	
  	<notes>
- 		<line value="Pas de haut, pas de bas" />
+ 		<line value="Rencontre décisive, permettant de départagers les joueurs en cas d'égalité à la fin de la rencontre régulière." />
  		<line value="Date: 02-12-2012" />
  	</notes>
-
+ 	
 	<author value="Vincent Labatut" />
 
 	<limits>
-		<lastStanding>
+		<points>
 			<points local="true" name="points" />
-			<threshold value="1" comparator="LESSEQ"/>
-		</lastStanding>
-		<time>
-			<points local="true" name="points" />
- 			<threshold value="60000" />
-		</time>
+			<threshold value="1" />
+			<source local="true" name="points" />
+		</points>
 	</limits>
+ 	
+ 	<rounds randomOrder="true" >
+  		<round local="true" name="roundCarrefour" />
+  		<round local="true" name="roundHorizontal" />
+  	</rounds>
 	
-	<level packname="tournament201213neutral" name="pasaj" randomLocation="true"/>
-
-</round>
+</match>

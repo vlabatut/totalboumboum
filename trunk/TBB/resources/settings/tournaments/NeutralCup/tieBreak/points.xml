@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<round
+<points
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../schemas/point.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut 
@@ -22,24 +22,29 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
- 	<notes>
- 		<line value="Pas de haut, pas de bas" />
- 		<line value="Date: 02-12-2012" />
- 	</notes>
+	<notes>
+		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
+		<line value="Ce rang dépend de la somme des points marqués à chaque manche."/>
+		<line value="Les scores sont considérés comme critères secondaires."/>
+		<line value="Remarque: pour une rencontre décisive, il n'y a, a priori, qu'une seule manche."/>
+	</notes>
 
-	<author value="Vincent Labatut" />
-
-	<limits>
-		<lastStanding>
-			<points local="true" name="points" />
-			<threshold value="1" comparator="LESSEQ"/>
-		</lastStanding>
-		<time>
-			<points local="true" name="points" />
- 			<threshold value="60000" />
-		</time>
-	</limits>
-	
-	<level packname="tournament201213neutral" name="pasaj" randomLocation="true"/>
-
-</round>
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<total />
+			<subtraction>
+				<scores type="BOMBINGS"/>
+				<scores type="SELF_BOMBINGS"/>			
+			</subtraction>
+			<scores type="ITEMS"/>
+			<scores type="BOMBS"/>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
+ 		
+</points>

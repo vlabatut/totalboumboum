@@ -23,8 +23,8 @@
  -->
 	
  	<notes>
- 		<line value="Pas de haut, pas de bas" />
- 		<line value="Date: 02-12-2012" />
+ 		<line value="Le premier à poser une bombe a gagné... ou pas !" />
+ 		<line value="Date: 02-12-2012" /> 
  	</notes>
 
 	<author value="Vincent Labatut" />
@@ -40,6 +40,6 @@
 		</time>
 	</limits>
 	
-	<level packname="tournament201213neutral" name="pasaj" randomLocation="true"/>
+	<level packname="tournament201213" name="horizontal" randomLocation="true"/>
 
 </round>

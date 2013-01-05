@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<round
+<match
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut 
@@ -23,23 +23,28 @@
  -->
 	
  	<notes>
- 		<line value="Pas de haut, pas de bas" />
- 		<line value="Date: 02-12-2012" />
+ 		<line value="Rencontre normale, utilisé lors des quarts, demis et classements." />
+ 		<line value="Date: 05-01-2013" />
  	</notes>
-
+ 	
 	<author value="Vincent Labatut" />
 
 	<limits>
-		<lastStanding>
+		<confrontation>
 			<points local="true" name="points" />
-			<threshold value="1" comparator="LESSEQ"/>
-		</lastStanding>
-		<time>
-			<points local="true" name="points" />
- 			<threshold value="60000" />
-		</time>
+			<threshold value="5" />			
+		</confrontation>
 	</limits>
+ 	
+ 	<rounds randomOrder="true" >
+  		<round local="true" name="roundClassic" />
+   		<round local="true" name="roundCroix" />
+  		<round local="true" name="roundEntrance" />
+  		<round local="true" name="roundItems" />
+  		<round local="true" name="roundLine" />
+  		<round local="true" name="roundPasaj" />
+  		<round local="true" name="roundPower" />
+  		<round local="true" name="roundReadysetgo" />
+  	</rounds>
 	
-	<level packname="tournament201213neutral" name="pasaj" randomLocation="true"/>
-
-</round>
+</match>
