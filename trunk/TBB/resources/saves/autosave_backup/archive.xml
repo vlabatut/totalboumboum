@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<!--
 	Total Boum Boum
-	Copyright 2008-2012 Vincent Labatut
+	Copyright 2008-2013 Vincent Labatut
 	
 	This file is part of Total Boum Boum.
 	
@@ -20,24 +20,24 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="4" rounds="3" />
-	<dates start="2013-01-04T18:48:00" save="2013-01-04T19:15:28" />
+	<played matches="10" rounds="2" />
+	<dates start="2013-01-05T11:15:34" save="2013-01-05T12:58:07" />
 	<players>
 		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Çalışır+Güner" />
+		<player name="1213.Çıplak+Erakyol" />
 		<player name="0910.Adatape+Özbek" />
-		<player name="1112.Coşkun+Özdemir" />
+		<player name="1213.Balyer+Güven" />
 		<player name="0809.Altay+Basaranoğlu" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="0809.Dayioğlugil+Geçkalan" />
-		<player name="0809.Tırtıl+Tomruk" />
+		<player name="1011.Kaya+Yerinde" />
+		<player name="0910.Aldanmaz+Yenigün" />
+		<player name="0809.Günalp+Yürtsever" />
 		<player name="1011.Kesimal+Varol" />
 		<player name="0809.Devecioğlu+Korkmaz" />
-		<player name="0910.Aldanmaz+Yenigün" />
-		<player name="1213.Alçar+Kaya+Yıldırım" />
-		<player name="1011.Kaya+Yerinde" />
-		<player name="0809.Günalp+Yürtsever" />
-		<player name="1213.Balyer+Güven" />
+		<player name="0809.Tırtıl+Tomruk" />
+		<player name="0910.Mançuhan+Pınarer" />
+		<player name="0910.Doruk+Küpelioğlu" />
+		<player name="0910.Çalışır+Güner" />
+		<player name="0809.Dayioğlugil+Geçkalan" />
 		<player name="0910.Dereli+Geçkalan" />
 	</players>
 </archive>

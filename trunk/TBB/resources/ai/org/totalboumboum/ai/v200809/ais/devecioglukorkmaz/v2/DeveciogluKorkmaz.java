@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v200809.adapter.AiBlock;
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 import org.totalboumboum.ai.v200809.adapter.AiFire;
 import org.totalboumboum.ai.v200809.adapter.AiHero;
+import org.totalboumboum.ai.v200809.adapter.AiStateName;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
@@ -75,7 +76,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				checkInterruption();
 				temp = k.next();
 				if (!temp.equals(ownHero)
-						&& !temp.getState().getName().name().equals("BURNING"))
+						&& !temp.getState().getName().equals(AiStateName.BURNING))
 					enemies.add(temp);
 			}
 			// updating bombs
@@ -298,9 +299,8 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 						getItem().
 						getState().
 						getName().
-						name().
 						equals(
-						"BURNING"))
+						AiStateName.BURNING))
 					solution = node;
 			} else {
 				visited.add(node);

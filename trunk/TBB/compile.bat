@@ -7,7 +7,7 @@
 :: -------------------------------------------------------------------
 ::
 :: Total Boum Boum
-:: Copyright 2008-2012 Vincent Labatut 
+:: Copyright 2008-2013 Vincent Labatut 
 :: 
 :: This file is part of Total Boum Boum.
 :: 
@@ -40,6 +40,10 @@
 	Set gral=.\resources\lib\gral-core-0.9-SNAPSHOT.jar
 	Set cp=%bin%;%jdom%;%japa%;%gral%
 	Set sp=.\src
+:: define compile options
+	Set warnings=-nowarn
+	Set encoding=-encoding UTF8
+	Set options=%warnings% %encoding"
 
 :: create directory for .class files
 	If exist %bin% goto EXISTS
@@ -51,7 +55,7 @@
 :: (re)compile the game
 :COMPILE	
 	echo compiling the game...
-	javac -nowarn -sourcepath %sp% -classpath %cp% %main%\Launcher.java -d %bin%
+	javac %options% -sourcepath %sp% -classpath %cp% %main%\Launcher.java -d %bin%
 
 :: (re)compile the AI classes inside the game
 	echo compiling the AI classes inside the game...
@@ -60,7 +64,7 @@
 		dir %%f\*.java /b /s /x > sources.txt
 		For /f "delims=;" %%g In (sources.txt) Do (
 			echo 		%%g
-			javac -nowarn -sourcepath %sp% -classpath %cp% "%%g" -d %bin%
+			javac %options% -sourcepath %sp% -classpath %cp% "%%g" -d %bin%
 		)
 	)
 	del sources.txt
@@ -71,7 +75,7 @@
 		echo 	%%f
 		For /d %%g In (%%f\ais\*) Do ( 
 			echo 	 	%%g
-			javac -nowarn -sourcepath %sp%;%aib% -classpath %cp%;%aib% %%g\*.java
+			javac %options% -sourcepath %sp%;%aib% -classpath %cp%;%aib% %%g\*.java
 		)
 	)
 
