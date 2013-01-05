@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.movehigh;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2012 Vincent Labatut 
+ * Copyright 2008-2013 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
