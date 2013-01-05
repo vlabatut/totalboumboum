@@ -124,23 +124,23 @@ public class GuiTools
 	// IMAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Part of an icon button file name */
-	private static final String ICON_NORMAL = "normal";
+	protected static final String ICON_NORMAL = "normal";
 	/** Part of an icon button file name */
-	private static final String ICON_NORMAL_SELECTED = "normal_selected";
+	protected static final String ICON_NORMAL_SELECTED = "normal_selected";
 	/** Part of an icon button file name */
-	private static final String ICON_DISABLED = "disabled";
+	protected static final String ICON_DISABLED = "disabled";
 	/** Part of an icon button file name */
-	private static final String ICON_DISABLED_SELECTED = "disabled_selected";
+	protected static final String ICON_DISABLED_SELECTED = "disabled_selected";
 	/** Part of an icon button file name */
-	private static final String ICON_ROLLOVER = "rollover";
+	protected static final String ICON_ROLLOVER = "rollover";
 	/** Part of an icon button file name */
-	private static final String ICON_ROLLOVER_SELECTED = "rollover_selected";
+	protected static final String ICON_ROLLOVER_SELECTED = "rollover_selected";
 	/** Part of an icon button file name */
-	private static final String ICON_PRESSED = "pressed";
+	protected static final String ICON_PRESSED = "pressed";
 	/** Standard replacement image used when some image is missing */
-	private static BufferedImage absentImage;	
+	protected static BufferedImage absentImage;	
 	/** List of images already loaded */
-	private static final Map<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
+	protected static final Map<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
 	
 	/**
 	 * Get the image for the specified key.
@@ -1538,56 +1538,6 @@ public class GuiTools
 		buttonVerticalSpace = (int)(height*BUTTON_VERTICAL_SPACE_RATIO);
 	}
 	
-	
-	/////////////////////////////////////////////////////////////////
-	// COLORS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-
-	public final static Color COLOR_SPLASHSCREEN_TEXT = new Color(204,18,128);
-	public final static Color COLOR_DIALOG_BACKGROUND = new Color(0,0,0,175);
-	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
-	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
-	public final static Color COLOR_TABLE_SELECTED_PALE_BACKGROUND = new Color(204,18,128,50);
-	public final static Color COLOR_TABLE_SELECTED_BACKGROUND = new Color(204,18,128,80);
-	public final static Color COLOR_TABLE_SELECTED_DARK_BACKGROUND = new Color(204,18,128,130);
-	public final static Color COLOR_TABLE_REGULAR_BACKGROUND = new Color(0,0,0,80);
-	public final static Color COLOR_TABLE_NEUTRAL_BACKGROUND = new Color(0,0,0,20);
-	public final static Color COLOR_TABLE_REGULAR_FOREGROUND = Color.BLACK;
-	public final static Color COLOR_TABLE_HEADER_BACKGROUND = new Color(0,0,0,130);
-	public final static Color COLOR_TABLE_HEADER_FOREGROUND = Color.WHITE;
-	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1 = 80; //scores
-	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2 = 140; // rounds/matches
-	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3 = 200; //portrait/name/total/points
-	public final static int ALPHA_DARKER_CHANGE = 55; 
-	
-	public static Color changeColorAlpha(Color color, int delta)
-	{	Color result = color;
-		int r = color.getRed();
-		int g = color.getGreen();
-		int b = color.getBlue();
-		int a = color.getAlpha();
-		int newAlpha = a + delta;
-		newAlpha = Math.max(0,newAlpha);
-		newAlpha = Math.min(newAlpha,255);
-		result = new Color(r,g,b,newAlpha);
-		return result;
-	}
-	
-/*	public static void changeColorMouseEntered(Component component)
-	{	Color oldColor = component.getBackground();
-		Color newColor = changeColorAlpha(oldColor,+54);
-		component.setBackground(newColor);
-	}
-	
-	public static void changeColorMouseExited(Component component)
-	{	Color oldColor = component.getBackground();
-		int a = oldColor.getAlpha();
-		if(a>0 && a<255)
-		{	Color newColor = changeColorAlpha(oldColor,-54);
-			component.setBackground(newColor);
-		}
-	}*/
-	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -1595,134 +1545,6 @@ public class GuiTools
 	{	Component[] components = container.getComponents();
 		List<Component> list = Arrays.asList(components);
 		int result = list.indexOf(component);
-		return result;
-	}
-	
-	
-	/////////////////////////////////////////////////////////////////
-	// BUTTONS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-
-	/**
-	 * automatically define the content of a button : images or text
-	 */
-	public static void setButtonContent(String name, AbstractButton button)
-	{	// content
-		if(icons.containsKey(name+ICON_NORMAL))
-		{	// normal icon
-			{	BufferedImage icon = getIcon(name+ICON_NORMAL);
-				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*BUTTON_ICON_MARGIN_RATION,true);
-				ImageIcon ii = new ImageIcon(icon);
-				button.setIcon(ii);
-			}
-			// disabled icon
-			{	BufferedImage icon = getIcon(name+ICON_DISABLED);
-				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*BUTTON_ICON_MARGIN_RATION,true);
-				ImageIcon ii = new ImageIcon(icon);
-				button.setDisabledIcon(ii);
-			}
-			// pressed icon
-			{	BufferedImage icon = getIcon(name+ICON_PRESSED);
-				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*BUTTON_ICON_MARGIN_RATION,true);
-				ImageIcon ii = new ImageIcon(icon);
-				button.setPressedIcon(ii);
-			}
-			// selected icon
-			{	BufferedImage icon = getIcon(name+ICON_NORMAL_SELECTED);
-				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*BUTTON_ICON_MARGIN_RATION,true);
-				ImageIcon ii = new ImageIcon(icon);
-				button.setSelectedIcon(ii);
-			}
-			// disabled selected icon
-			{	BufferedImage icon = getIcon(name+ICON_DISABLED_SELECTED);
-				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*BUTTON_ICON_MARGIN_RATION,true);
-				ImageIcon ii = new ImageIcon(icon);
-				button.setDisabledSelectedIcon(ii);
-			}
-			// rollover icon
-			{	BufferedImage icon = getIcon(name+ICON_ROLLOVER);
-				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*BUTTON_ICON_MARGIN_RATION,true);
-				ImageIcon ii = new ImageIcon(icon);
-				button.setRolloverEnabled(true);
-				button.setRolloverIcon(ii);
-			}
-			// rollover selected icon
-			{	BufferedImage icon = getIcon(name+ICON_ROLLOVER_SELECTED);
-				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*BUTTON_ICON_MARGIN_RATION,true);
-				ImageIcon ii = new ImageIcon(icon);
-				button.setRolloverSelectedIcon(ii);
-			}
-			// 
-			button.setBorderPainted(false);
-			button.setBorder(null);
-			button.setMargin(null);
-	        button.setContentAreaFilled(false);
-	        button.setFocusPainted(false);
-		}
-		else
-		{	// text 
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name);
-			button.setText(text);
-		}		
-		// action command
-		button.setActionCommand(name);
-		// tooltip
-		String tooltipKey = name+GuiKeys.TOOLTIP;
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(tooltipKey);
-		button.setToolTipText(tooltip);
-	}		
-	
-	/**
-	 * automatically initializes a button and its content
-	 * @param result
-	 * @param name
-	 * @param width
-	 * @param height
-	 * @param panel
-	 */
-	private static void initButton(AbstractButton result, String name, int width, int height, ButtonAware panel)
-	{	// dimension
-		Dimension dim = new Dimension(width,height);
-		result.setMinimumSize(dim);
-		result.setMaximumSize(dim);
-		result.setPreferredSize(dim);
-		// set text
-		setButtonContent(name,result);
-		// add to panel
-		if(panel!=null)
-		{	panel.add(result);
-			result.addActionListener(panel);
-		}
-	}
-	
-	public static JButton createButton(String name, int width, int height, int fontSize, ButtonAware panel)
-	{	JButton result = new JButton();
-		initButton(result,name,width,height,panel);
-		result.setAlignmentX(Component.CENTER_ALIGNMENT);
-		result.setAlignmentY(Component.CENTER_ALIGNMENT);
-		// font
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
-		result.setFont(font);
-		//
-		return result;
-	}
-
-	public static JToggleButton createToggleButton(String name, int width, int height, int fontSize, ButtonAware panel)
-	{	JToggleButton result = new JToggleButton();
-		initButton(result,name,width,height,panel);
-		result.setAlignmentX(Component.CENTER_ALIGNMENT);
-		result.setAlignmentY(Component.CENTER_ALIGNMENT);
-		// font
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
-		result.setFont(font);
-		//
 		return result;
 	}
 }

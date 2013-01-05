@@ -34,6 +34,7 @@ import javax.swing.JToggleButton;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -73,15 +74,15 @@ public class PlayerStatisticsMenu extends InnerMenuPanel
 		// buttons
 		add(Box.createVerticalGlue());
 	    ButtonGroup group = new ButtonGroup();
-	    buttonGlicko2 = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2,buttonWidth,buttonHeight,fontSize,this);
+	    buttonGlicko2 = GuiButtonTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2,buttonWidth,buttonHeight,fontSize,this);
 	    buttonGlicko2.setSelected(true);
 	    group.add(buttonGlicko2);
-		buttonScores = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES,buttonWidth,buttonHeight,fontSize,this);
+		buttonScores = GuiButtonTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES,buttonWidth,buttonHeight,fontSize,this);
 	    group.add(buttonScores);
-		buttonConfrontations = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfrontations = GuiButtonTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS,buttonWidth,buttonHeight,fontSize,this);
 	    group.add(buttonConfrontations);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());
 
 		// panels

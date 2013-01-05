@@ -40,6 +40,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import org.totalboumboum.gui.data.configuration.misc.MiscConfigurationSaver;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -78,9 +79,9 @@ public class GuiMenu extends InnerMenuPanel implements ModalDialogPanelListener
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

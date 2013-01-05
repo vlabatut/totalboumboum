@@ -47,6 +47,7 @@ import org.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
 import org.totalboumboum.gui.menus.replay.ReplayContainer;
 import org.totalboumboum.gui.menus.statistics.players.PlayerStatisticsSplitPanel;
 import org.totalboumboum.gui.menus.tournament.TournamenuContainer;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -77,23 +78,23 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonOptions = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_OPTIONS,buttonWidth,buttonHeight,fontSize,this);
+		buttonOptions = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_OPTIONS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonProfiles = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,buttonWidth,buttonHeight,fontSize,this);
-		buttonStats = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
-		buttonResources = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_RESOURCES,buttonWidth,buttonHeight,fontSize,this);
+		buttonProfiles = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,buttonWidth,buttonHeight,fontSize,this);
+		buttonStats = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
+		buttonResources = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_RESOURCES,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
-		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
-		buttonNetworkGame = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_NETWORK,buttonWidth,buttonHeight,fontSize,this);
+		buttonTournament = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
+		buttonQuickMatch = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
+		buttonNetworkGame = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_NETWORK,buttonWidth,buttonHeight,fontSize,this);
 //buttonNetworkGame.setEnabled(false);		
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonLoad = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
-		buttonReplay = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_REPLAY,buttonWidth,buttonHeight,fontSize,this);
+		buttonLoad = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
+		buttonReplay = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_REPLAY,buttonWidth,buttonHeight,fontSize,this);
 //buttonReplay.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
-		buttonQuit = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
+		buttonAbout = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
+		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 	}
 	

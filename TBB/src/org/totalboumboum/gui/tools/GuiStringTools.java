@@ -91,7 +91,7 @@ public class GuiStringTools
 			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			String tooltip = text;
 			Color clr = color.getColor();
-			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 			//
 			colorTexts.add(text);

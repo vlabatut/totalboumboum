@@ -51,6 +51,7 @@ import org.totalboumboum.gui.game.match.statistics.MatchStatistics;
 import org.totalboumboum.gui.game.round.RoundSplitPanel;
 import org.totalboumboum.gui.game.save.SaveSplitPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
@@ -83,24 +84,24 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 		int buttonHeight = getHeight();
 
 		// buttons
-		buttonQuit = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonSave = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
-		buttonRecord = GuiTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiButtonTools.createButton(GuiKeys.GAME_MATCH_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonSave = GuiButtonTools.createButton(GuiKeys.GAME_MATCH_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
+		buttonRecord = GuiButtonTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
 //buttonRecord.setEnabled(false);		
 		add(Box.createHorizontalGlue());
-		buttonTournament = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,buttonWidth,buttonHeight,1,this);
+		buttonTournament = GuiButtonTools.createButton(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
-	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
+	    buttonDescription = GuiButtonTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
+	    buttonResults = GuiButtonTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
-	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
+	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_MATCH_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 //buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		buttonRound = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonWidth,buttonHeight,1,this);
+		buttonRound = GuiButtonTools.createButton(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonWidth,buttonHeight,1,this);
 		
 		// panels
 		{	matchDescription = new MatchDescription(container);
@@ -225,18 +226,18 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 			{	// Round
 				buttonRound.setEnabled(false);
 				// Finish
-				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_FINISH, buttonTournament);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_FINISH, buttonTournament);
 			}
 			else
 			{	// Round
 				buttonRound.setEnabled(true);
 				Round round = match.getCurrentRound();
 				if(round==null || round.isOver())
-					GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound);
+					GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound);
 				else
-					GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonRound);
+					GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonRound);
 				// Tournament
-				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament);
 			}
 		}
 		else

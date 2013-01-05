@@ -38,6 +38,7 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.options.controls.ControlsData;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -84,12 +85,12 @@ public class ControlsMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonPrevious = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,fontSize,this);
-		buttonNext = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_NEXT,buttonWidth,buttonHeight,fontSize,this);
+		buttonPrevious = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,fontSize,this);
+		buttonNext = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_NEXT,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

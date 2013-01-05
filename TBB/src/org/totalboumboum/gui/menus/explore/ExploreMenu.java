@@ -39,6 +39,7 @@ import org.totalboumboum.gui.menus.explore.levels.select.SelectedLevelSplitPanel
 import org.totalboumboum.gui.menus.explore.matches.select.SelectedMatchSplitPanel;
 import org.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundSplitPanel;
 import org.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -90,18 +91,18 @@ public class ExploreMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonHeroes = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_HEROES,buttonWidth,buttonHeight,fontSize,this);
-		buttonAi = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_AI,buttonWidth,buttonHeight,fontSize,this);
+		buttonHeroes = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_HEROES,buttonWidth,buttonHeight,fontSize,this);
+		buttonAi = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_AI,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonInstances = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_INSTANCES,buttonWidth,buttonHeight,fontSize,this);
+		buttonInstances = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_INSTANCES,buttonWidth,buttonHeight,fontSize,this);
 buttonInstances.setEnabled(false);
-		buttonLevels = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
+		buttonLevels = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonRounds = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
-		buttonMatches = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
-		buttonTournaments = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS,buttonWidth,buttonHeight,fontSize,this);
+		buttonRounds = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
+		buttonMatches = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
+		buttonTournaments = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

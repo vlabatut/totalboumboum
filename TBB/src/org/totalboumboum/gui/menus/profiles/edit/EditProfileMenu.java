@@ -40,6 +40,7 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -73,9 +74,9 @@ public class EditProfileMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

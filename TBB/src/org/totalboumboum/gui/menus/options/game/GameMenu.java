@@ -36,6 +36,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.options.game.quickmatch.QuickMatchSplitPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.QuickStartSplitPanel;
 import org.totalboumboum.gui.menus.options.game.tournament.TournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -78,11 +79,11 @@ public class GameMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonQuickStart = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART,buttonWidth,buttonHeight,fontSize,this);
-		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
-		buttonTournament = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
+		buttonQuickStart = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART,buttonWidth,buttonHeight,fontSize,this);
+		buttonQuickMatch = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
+		buttonTournament = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonBack = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

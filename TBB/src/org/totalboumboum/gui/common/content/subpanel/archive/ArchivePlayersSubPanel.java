@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
@@ -66,7 +67,7 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 		int line = 0;
 		{	String key = GuiKeys.COMMON_ARCHIVE_PLAYERS;
 			setLabelKey(line,0,key,true);
-			Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 			setLabelBackground(line,0,bg);
 			line++;
 		}
@@ -81,9 +82,9 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 			{	String text = textValues.get(line-1);
 				String tooltip = tooltipValues.get(line-1);
 				setLabelText(line,0,text,tooltip);
-				Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
 				setLabelForeground(line,0,fg);
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				setLabelBackground(line,0,bg);
 				line++;
 			}
@@ -94,7 +95,7 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 		{	String text = null;
 			String tooltip = null;
 			setLabelText(line,0,text,tooltip);
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			setLabelBackground(line,0,bg);
 			line++;
 		}

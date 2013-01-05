@@ -45,6 +45,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.save.SaveData;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -79,11 +80,11 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonDelete = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		buttonDelete = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

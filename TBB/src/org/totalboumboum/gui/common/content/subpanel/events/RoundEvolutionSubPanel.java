@@ -44,6 +44,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
@@ -135,12 +136,12 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 					Color bg;
 					if(line==LINE_CROWNS || line==LINE_PAINTINGS)
 					{	label.setMouseSensitive(false);
-						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 					}
 					else
 					{	label.addMouseListener(this);
 						label.setMouseSensitive(true);
-						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					}
 					label.setBackground(bg);
 				}
@@ -149,10 +150,10 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 			// plot
 			{	Column cl = getColumn(COL_PLOT);
 				cl.setDim(plotWidth,getDataHeight());
-				Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_COMMON_BACKGROUND;
 				cl.setBackgroundColor(bg);
 				plot = new XYPlot();
-				plot.setSetting(XYPlot.BACKGROUND, GuiTools.COLOR_COMMON_BACKGROUND);
+				plot.setSetting(XYPlot.BACKGROUND, GuiColorTools.COLOR_COMMON_BACKGROUND);
 				plot.getPlotArea().setSetting(PlotArea.BACKGROUND, null);
 				plot.getPlotArea().setSetting(PlotArea.BORDER, null);
 				insertPlotPanel();
@@ -176,9 +177,9 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 					label.addMouseListener(this);
 					label.setMouseSensitive(true);
 				}
-				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				cl.setBackgroundColor(bg);
-				Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+				Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
 				cl.setForegroundColor(fg);
 			}
 		}
@@ -488,7 +489,7 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 				plot.add(dataSerie);
 	
 			// Format plot
-			plot.setSetting(XYPlot.BACKGROUND, GuiTools.COLOR_COMMON_BACKGROUND);
+			plot.setSetting(XYPlot.BACKGROUND, GuiColorTools.COLOR_COMMON_BACKGROUND);
 			plot.getPlotArea().setSetting(PlotArea.BACKGROUND, null);
 			plot.getPlotArea().setSetting(PlotArea.BORDER, null);
 	
@@ -558,7 +559,7 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 		cl.removeAll();
 		InteractivePanel tempPanel = new InteractivePanel(plot);
 		tempPanel.setPopupMenuEnabled(false);
-		tempPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		tempPanel.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 		Dimension dim = new Dimension(plotWidth,getDataHeight());
 		tempPanel.setPreferredSize(dim);
 		tempPanel.setMaximumSize(dim);
@@ -644,14 +645,14 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	{	// unselected previously selected score
 		if(selectedScore!=null)
 		{	int pos = getLineForScore(selectedScore);
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			setLabelBackground(pos,COL_SCORES,bg);
 		}
 		
 		// select new score
 		selectedScore = score;
 		int pos = getLineForScore(selectedScore);
-		Color bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+		Color bg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
 		setLabelBackground(pos,COL_SCORES,bg);
 	}
 	
@@ -719,7 +720,7 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 		if(selectedColors.contains(color))
 		{	int index = playerColors.indexOf(color);
 			selectedColors.remove(color);
-			Color bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+			Color bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 			setLabelBackground(line,COL_COLORS,bg);
 			List<DataSource> dataSources = plot.getData();
 			if(dataSources!=null && !dataSources.isEmpty())
@@ -728,7 +729,7 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 		else if(playerColors.contains(color))
 		{	int index = playerColors.indexOf(color);
 			selectedColors.add(color);
-			Color bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
+			Color bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
 			setLabelBackground(line,COL_COLORS,bg);
 			List<DataSource> dataSources = plot.getData();
 			if(dataSources!=null && !dataSources.isEmpty())
@@ -761,11 +762,11 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 			int index = playerColors.indexOf(color);
 			if(index==-1)
 			{	label.setMouseSensitive(false);
-				bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			}
 			else
 			{	label.setMouseSensitive(true);
-				bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				String colorKey = color.toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
 				colorKey = GuiKeys.COMMON_COLOR+colorKey;
@@ -774,7 +775,7 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 				text = colorStr + " - " + playerStr;
 				tooltip = text;
 				if(selectedColors.contains(color))
-					bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
+					bg = new Color(c.getRed(),c.getGreen(),c.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
 			}
 			setLabelBackground(line,COL_COLORS,bg);
 			setLabelText(line,COL_COLORS,text,tooltip);

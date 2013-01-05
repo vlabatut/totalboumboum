@@ -54,6 +54,7 @@ import org.totalboumboum.gui.game.round.results.RoundResults;
 import org.totalboumboum.gui.game.round.statistics.RoundStatistics;
 import org.totalboumboum.gui.game.save.SaveSplitPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
@@ -87,24 +88,24 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		int buttonHeight = getHeight();
 
 		// buttons
-		buttonQuit = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonSave = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
-		buttonRecord = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiButtonTools.createButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonSave = GuiButtonTools.createButton(GuiKeys.GAME_ROUND_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
+		buttonRecord = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
 //buttonRecord.setEnabled(false);		
 		add(Box.createHorizontalGlue());
-		buttonMatch = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,buttonWidth,buttonHeight,1,this);
+		buttonMatch = GuiButtonTools.createButton(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
-	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
+	    buttonDescription = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
+	    buttonResults = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
-	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
+	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 //buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		buttonPlay = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_PLAY,buttonWidth,buttonHeight,1,this);
+		buttonPlay = GuiButtonTools.createButton(GuiKeys.GAME_ROUND_BUTTON_PLAY,buttonWidth,buttonHeight,1,this);
 		buttonPlay.setEnabled(false);		
 		
 		// panels
@@ -134,13 +135,13 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 			{	// play
 				buttonPlay.setEnabled(false);
 				// finish
-				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
 			}
 			else
 			{	// play
 				buttonPlay.setEnabled(true);
 				// match
-				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
 			}
 		}
 		else

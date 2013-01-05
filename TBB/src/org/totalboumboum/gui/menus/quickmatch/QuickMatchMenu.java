@@ -70,6 +70,7 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.menus.quickmatch.LevelsData;
 import org.totalboumboum.gui.menus.quickmatch.PlayersData;
 import org.totalboumboum.gui.menus.quickmatch.SettingsData;
+import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
@@ -129,16 +130,16 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 	{	buttonWidth = getHeight();
 		buttonHeight = getHeight();
 		//
-		buttonQuit = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonLevelsPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonSettingsPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonLevelsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonPublish = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonPlayersPrevious = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonLevelsPrevious = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonSettingsPrevious = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonPlayersNext = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonLevelsNext = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonSettingsNext = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonPublish = GuiButtonTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
 //buttonPublish.setEnabled(false);
-		buttonBlockPlayers = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
+		buttonBlockPlayers = GuiButtonTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}
 	
