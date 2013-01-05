@@ -28,7 +28,7 @@ public class Bonus {
 	/** */
 	private boolean running;
 	/** */
-	private boolean yaz;
+//	private boolean yaz;
 	
 	/**
 	 * 
@@ -73,8 +73,8 @@ public class Bonus {
 				incelenecek=own;
 				if(incele())
 				{
-					if(yaz)
-						System.out.println("bonusta bomba bıraktı "+onder.getOwnHero().getTile());
+//					if(yaz)
+//						System.out.println("bonusta bomba bıraktı "+onder.getOwnHero().getTile());
 					return new AiAction(AiActionName.DROP_BOMB);
 				}
 			}

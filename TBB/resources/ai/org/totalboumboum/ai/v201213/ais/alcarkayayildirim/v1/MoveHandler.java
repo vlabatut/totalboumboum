@@ -238,7 +238,7 @@ public class MoveHandler extends AiMoveHandler<AlcarKayaYildirim> {
 		ownHero = zone.getOwnHero();
 
 		Map<Float, List<AiTile>> utilitiesByValue = ai.utilityHandler.getUtilitiesByValue();
-		System.out.println(utilitiesByValue);
+//		System.out.println(utilitiesByValue);
 		TreeSet<Float> values = new TreeSet<Float>(utilitiesByValue.keySet());
 		Iterator<Float> it = values.descendingIterator();
 

@@ -103,7 +103,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				while (i.hasNext()) {
 					checkInterruption();
 					AiBomb temp3 = i.next();
-					if (temp3.getColor().equals(ownHero.getColor())) {
+					if (temp3!=null && temp3.getColor().equals(ownHero.getColor())) {
 						myBombs++;
 					}
 				}

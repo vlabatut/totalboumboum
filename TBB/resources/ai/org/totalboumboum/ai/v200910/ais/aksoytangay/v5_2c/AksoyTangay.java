@@ -111,10 +111,10 @@ public class AksoyTangay extends ArtificialIntelligence
 		Direction direction = Direction.NONE;
 			
 		ownHeroTile = ownHero.getTile();
-		System.out.println("reel tile: "+ownHeroTile);
+//		System.out.println("reel tile: "+ownHeroTile);
 		
 		
-		System.out.println(ownHero.getWalkingSpeed());
+//		System.out.println(ownHero.getWalkingSpeed());
 		
 		
 		//algo commence
@@ -346,7 +346,7 @@ public class AksoyTangay extends ArtificialIntelligence
 			{	
 				tmpHero = itrHero.next();
 				
-				System.out.println("hero tile : "+tmpHero.getTile().toString());
+//				System.out.println("hero tile : "+tmpHero.getTile().toString());
 				
 				AiPath tmpPath = pathManager.getShortestPathToOneTile(getOwnHero(), getOwnHeroTile(), tmpHero.getTile());
 				if(tmpPath != null)

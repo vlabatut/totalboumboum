@@ -44,11 +44,11 @@ public class FindikSirin extends ArtificialIntelligence
 			updateLocation();
 			setOurBombs();
 			Direction moveDir = Direction.NONE;
-			AiTile destinationTile=currentTile.getNeighbor(Direction.LEFT);
-			System.out.println(zone.getPixelDistance(currentTile.getPosX(), currentTile.getPosY(), destinationTile.getPosX(), destinationTile.getPosY()));
-			if(!ourBombs.isEmpty()){
-				System.out.println(ourBombs.iterator().next().getBombs().iterator().next().getExplosionDuration());
-			}
+//			AiTile destinationTile=currentTile.getNeighbor(Direction.LEFT);
+//			System.out.println(zone.getPixelDistance(currentTile.getPosX(), currentTile.getPosY(), destinationTile.getPosX(), destinationTile.getPosY()));
+//			if(!ourBombs.isEmpty()){
+//				System.out.println(ourBombs.iterator().next().getBombs().iterator().next().getExplosionDuration());
+//			}
 			// on met a jour le safetyManager
 			safetyManager.update();
 			
@@ -124,9 +124,9 @@ public class FindikSirin extends ArtificialIntelligence
 						attackManager = new AttackManager(this,posTarget,posWalkable);
 						dropBomb=true;
 						attackManager.update();
-						System.out.println(attackManager.bomb1Pos.toString());
-						System.out.println(attackManager.bomb2Pos.toString());
-						System.out.println(attackManager.bomb3Pos.toString());
+//						System.out.println(attackManager.bomb1Pos.toString());
+//						System.out.println(attackManager.bomb2Pos.toString());
+//						System.out.println(attackManager.bomb3Pos.toString());
 					}
 					//t'as pas d'assez bombes?
 					else

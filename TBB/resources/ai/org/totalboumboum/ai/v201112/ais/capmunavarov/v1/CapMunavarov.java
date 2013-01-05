@@ -49,7 +49,7 @@ public class CapMunavarov extends ArtificialIntelligence
 		initHandlers();
 		
 		
-		System.out.println("girdim");
+//		System.out.println("girdim");
 		
 		// à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement, et qui
@@ -75,7 +75,7 @@ public class CapMunavarov extends ArtificialIntelligence
 		List<AiHero >  allheros =zone.getHeroes();
 		bombeCount=getZone().getOwnHero().getBombNumberCurrent();
 		
-		System.out.println ("initpercepts ");
+//		System.out.println ("initpercepts ");
 		// à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement.
 		// Ils peuvent être stockés dans cette classe ou dans
@@ -96,7 +96,7 @@ public class CapMunavarov extends ArtificialIntelligence
 	if (bombeCount>0){
 		bombHandler.considerBombing();
 		bombHandler.updateOutput();
-		System.out.println("Putting bombes..");
+//		System.out.println("Putting bombes..");
 	}
 	
 		// à compléter si vous avez des objets 

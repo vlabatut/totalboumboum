@@ -24,7 +24,7 @@ public class Rakip {
 	/** */
 	private boolean kaciyor;
 	/** */
-	private boolean yaz;
+//	private boolean yaz;
 	
 	/** */
 	int i=0;
@@ -68,8 +68,8 @@ public class Rakip {
 		if(rivals.contains(onder.getOwnHero().getTile()))
 			if(incele())
 			{
-				if(yaz)
-					System.out.println("rakipte bomba bıraktı "+onder.getOwnHero().getTile());
+//				if(yaz)
+//					System.out.println("rakipte bomba bıraktı "+onder.getOwnHero().getTile());
 				if(onder.getOwnHero().getTile().getBombs().size()==0)
 					return new AiAction(AiActionName.DROP_BOMB);
 			}

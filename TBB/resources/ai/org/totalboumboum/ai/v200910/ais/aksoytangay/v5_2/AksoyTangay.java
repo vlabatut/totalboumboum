@@ -108,10 +108,10 @@ public class AksoyTangay extends ArtificialIntelligence
 		Direction direction = Direction.NONE;
 			
 		ownHeroTile = ownHero.getTile();
-		System.out.println("reel tile: "+ownHeroTile);
+//		System.out.println("reel tile: "+ownHeroTile);
 		
 		
-		System.out.println(ownHero.getWalkingSpeed());
+//		System.out.println(ownHero.getWalkingSpeed());
 		
 		
 		//algo commence
