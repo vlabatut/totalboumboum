@@ -173,16 +173,20 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 
 	/**
-	 * Renvoie la largeur de la zone de jeu 
-	 * @return	la largeur de la matrice
+	 * Renvoie la largeur de la zone de jeu.
+	 * 
+	 * @return	
+	 * 		La largeur de la matrice.
 	 */
 	protected int getZoneMatrixDimX()
 	{	return zoneMatrix.length;
 	}
 
 	/**
-	 * Renvoie la hauteur de la zone de jeu 
-	 * @return	la hauteur de la matrice
+	 * Renvoie la hauteur de la zone de jeu.
+	 * 
+	 * @return	
+	 * 		La hauteur de la matrice.
 	 */
 	protected int getZoneMatrixDimY()
 	{	return zoneMatrix[0].length;
