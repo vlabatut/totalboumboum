@@ -31,7 +31,7 @@ import javax.swing.BoxLayout;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 

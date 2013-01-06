@@ -62,7 +62,7 @@ import org.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -134,7 +134,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					String key = GuiKeys.MENU_PROFILES_EDIT_NAME;
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 					label.setToolTipText(tooltip);
-					BufferedImage icon = GuiTools.getIcon(key);
+					BufferedImage icon = GuiImageTools.getIcon(key);
 					double zoom = nameHeight/(double)icon.getHeight();
 					icon = ImageTools.getResizedImage(icon,zoom,true);
 					ImageIcon icn = new ImageIcon(icon);

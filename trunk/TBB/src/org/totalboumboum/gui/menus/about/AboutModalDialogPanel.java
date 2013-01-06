@@ -25,7 +25,7 @@ package org.totalboumboum.gui.menus.about;
 import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 

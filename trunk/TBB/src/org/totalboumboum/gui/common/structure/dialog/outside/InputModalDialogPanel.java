@@ -27,7 +27,7 @@ import java.util.List;
 import org.totalboumboum.gui.common.structure.dialog.inside.InputSubPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 

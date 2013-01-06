@@ -22,7 +22,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
  */
 
 import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 

@@ -33,7 +33,7 @@ import javax.swing.JLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
@@ -83,7 +83,7 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
-		{	BufferedImage icon = GuiTools.getIcon(key);
+		{	BufferedImage icon = GuiImageTools.getIcon(key);
 			setIcon(icon,tooltip);		
 		}
 		// if not : use text

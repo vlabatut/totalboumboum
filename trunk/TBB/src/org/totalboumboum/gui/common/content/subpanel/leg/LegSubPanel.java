@@ -45,8 +45,9 @@ import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 
@@ -383,7 +384,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	}
 
 	private void refreshList()
-	{	int index = GuiTools.indexOfComponent(getDataPanel(),partsPanel);
+	{	int index = GuiMiscTools.indexOfComponent(getDataPanel(),partsPanel);
 		getDataPanel().remove(partsPanel);
 		partsPanel = pagePanels.get(currentPage);
 		getDataPanel().add(partsPanel,index);
@@ -418,10 +419,10 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	{	// init
 		MyLabel label = (MyLabel)e.getComponent();
 		boolean up = true;
-		int index = GuiTools.indexOfComponent(upPanel,label);
+		int index = GuiMiscTools.indexOfComponent(upPanel,label);
 		if(index<0)
 		{	up = false;
-			index = GuiTools.indexOfComponent(downPanel,label);
+			index = GuiMiscTools.indexOfComponent(downPanel,label);
 		}
 
 		// previous leg

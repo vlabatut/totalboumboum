@@ -47,8 +47,9 @@ import org.totalboumboum.gui.frames.NormalFrame;
 import org.totalboumboum.gui.frames.QuickFrame;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
+import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.xml.XmlTools;
@@ -88,11 +89,11 @@ public class Launcher
 		
 		List<String> argList = Arrays.asList(args); 
 
-		if(argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_HELP]))
+		if(argList.contains(GuiMiscTools.OPTIONS[GuiMiscTools.OPTION_HELP]))
 			displayHelp();
 		else
-		{	forceWindow = argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_WINDOW]);
-			if(argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_QUICK]))
+		{	forceWindow = argList.contains(GuiMiscTools.OPTIONS[GuiMiscTools.OPTION_WINDOW]);
+			if(argList.contains(GuiMiscTools.OPTIONS[GuiMiscTools.OPTION_QUICK]))
 				quickLaunch();
 			else
 				normalLaunch();
@@ -106,9 +107,9 @@ public class Launcher
 	 * Displays the help message (option {@code help}).
 	 */
 	private static void displayHelp()
-	{	System.out.println(GuiTools.OPTION_HELP_MESSAGE);
-		for(int i=0;i<GuiTools.OPTIONS.length;i++)
-			System.out.println("    ->"+GuiTools.OPTIONS[i]+": "+GuiTools.OPTIONS_HELP[i]);
+	{	System.out.println(GuiMiscTools.OPTION_HELP_MESSAGE);
+		for(int i=0;i<GuiMiscTools.OPTIONS.length;i++)
+			System.out.println("    ->"+GuiMiscTools.OPTIONS[i]+": "+GuiMiscTools.OPTIONS_HELP[i]);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -132,25 +133,25 @@ public class Launcher
 		SplashScreen splash = SplashScreen.getSplashScreen();
 		
 		// load XML schemas
-		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_XML]);
+		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_XML]);
 		XmlTools.init();
 		// load configuration
-		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_CONFIG]);
+		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_CONFIG]);
 		Configuration.loadConfiguration();
 		// load GUI configuration
-		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_GUI]);
+		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_GUI]);
 		GuiConfiguration.loadConfiguration();
 		resolutionSelection();
 		// initalize GUI
-		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
+		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_INIT]);
 		GuiFontTools.init();
 		GuiSizeTools.init();
-		GuiTools.init();
+		GuiImageTools.init();
 		// load engine stats
-		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
+		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_STATS]);
 		GameStatistics.loadStatistics();
 		// startup finished
-		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
+		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_DONE]);
 		GameData.quickMode = false;
 		
 		// create GUI
@@ -209,8 +210,8 @@ public class Launcher
 			g.setPaintMode();
 			g.setFont(new Font("Arial",Font.PLAIN,10));
 			g.setColor(new Color(0,0,0,100));
-			for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
-				g.drawString(GuiTools.STARTUP_LEGAL[i],70,90+i*10);
+			for(int i=0;i<GuiMiscTools.STARTUP_LEGAL.length;i++)
+				g.drawString(GuiMiscTools.STARTUP_LEGAL[i],70,90+i*10);
 			g.setColor(GuiColorTools.COLOR_SPLASHSCREEN_TEXT);
 	        g.drawString(msg,70,315);
 	        splash.update();
@@ -236,30 +237,30 @@ public class Launcher
 	 */
 	private static void quickLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// legal
-		for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
-			System.out.println(GuiTools.STARTUP_LEGAL[i]);
+		for(int i=0;i<GuiMiscTools.STARTUP_LEGAL.length;i++)
+			System.out.println(GuiMiscTools.STARTUP_LEGAL[i]);
 		System.out.println("--------------------------------");
 		// load XML schemas
-		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_XML]);
+		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_XML]);
 		XmlTools.init();
 		// load configuration 
-		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_CONFIG]);
+		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_CONFIG]);
 		Configuration.loadConfiguration();
 		// load GUI configuration
-		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_GUI]);
+		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_GUI]);
 		MiscConfiguration miscConfig = new MiscConfiguration();
 		miscConfig.setFont(null,new Font("Arial",Font.PLAIN,10));
 		GuiConfiguration.setMiscConfiguration(miscConfig);
 		resolutionSelection();
 		// initalize GUI
-		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
+		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_INIT]);
 		GuiFontTools.init();
 		// load engine stats
-		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
+		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_STATS]);
 		if(Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
 			GameStatistics.loadStatistics();
 		// done
-		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
+		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_DONE]);
 		GameData.quickMode = true;
 		
 		// create GUI

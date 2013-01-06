@@ -34,7 +34,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
  * (buttons, icons, text, etc.). The corresponding
  * text content is defined in language-specific XML
  * files. THe corresponding icons are associated in
- * class {@link GuiTools}.
+ * class {@link GuiImageTools}.
  * 
  * @author Vincent Labatut
  */

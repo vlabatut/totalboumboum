@@ -37,7 +37,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -319,7 +319,7 @@ public enum StatisticColumn
 				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);			
 			}
 			if(key!=null)
-			{	BufferedImage icon = GuiTools.getIcon(key);
+			{	BufferedImage icon = GuiImageTools.getIcon(key);
 				panel.setLabelIcon(line,col,icon,tooltip);	
 			}
 /*
