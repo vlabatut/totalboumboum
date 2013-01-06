@@ -84,7 +84,7 @@ public class Matrix {
 			ai.checkInterruption();
 			
 			//checking the bomb if it's ours
-			if(bomb.getOwner().equals(ai.getPercepts().getOwnHero())){
+			if(bomb.getOwner()!=null && bomb.getOwner().equals(ai.getPercepts().getOwnHero())){
 				if(bomb.getTime()<lastbombdur)
 					lastbombdur = bomb.getTime();
 			}
