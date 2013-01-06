@@ -25,9 +25,11 @@ public class ErenGokce extends ArtificialIntelligence {
 	/** */
 	boolean yaccomplished=false;
 	/** */
-	int startx=15;
+//	int startx = 15;
+	int startx; // adjustment
 	/** */
-	int starty=13;
+//	int starty = 13;
+	int starty; // adjustment
 	/** right top corner, left top corner, ..etc la position du joueur au debut */
 	boolean rtc=false;
 	/** */
@@ -65,7 +67,10 @@ public class ErenGokce extends ArtificialIntelligence {
 	{	Integer result=AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)
-			firstTime = false;
+		{	firstTime = false;
+			startx = getZoneMatrixDimX(); // adjustment
+			starty = getZoneMatrixDimY(); // adjustment
+		}
 		else
 		{	
 		//controle shrink
