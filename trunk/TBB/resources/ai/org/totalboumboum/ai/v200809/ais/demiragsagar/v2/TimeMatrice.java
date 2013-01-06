@@ -94,8 +94,10 @@ public class TimeMatrice {
 	public void createTimeMatrice() {
 		// ajout des murs dans la matrice pour une seule fois
 		int i, j;
-		for (j = 0; j < 15; j++)
-			for (i = 0; i < 17; i++)
+//		for (j = 0; j < 15; j++) {
+		for (j = 0; j < zone.getHeight(); j++) //adjustment
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < zone.getWidth(); i++) //adjustment
 				if (Functions.hasWall(this.zone.getTile(j, i)))
 					this.putTime(i,j,-1);
 				else
@@ -112,8 +114,10 @@ public class TimeMatrice {
 		int[][] maMatrice = new int[17][16];
 		int etki;
 		int i, j;
-		for (j = 0; j < 15; j++)
-			for (i = 0; i < 17; i++)
+//		for (j = 0; j < 15; j++) {
+		for (j = 0; j < zone.getHeight(); j++) //adjustment
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < zone.getWidth(); i++) //adjustment
 				if (Functions.hasWall(zone.getTile(j, i)))
 					maMatrice[i][j] = -1;
 				else
@@ -175,8 +179,10 @@ public class TimeMatrice {
 		if(debug)
 			System.out.println("Elapsed time : "+elapsedTime);
 		if (elapsedTime > 0) {
-			for (j = 0; j < 15; j++)
-				for (i = 0; i < 17; i++)
+//			for (j = 0; j < 15; j++) {
+			for (j = 0; j < zone.getHeight(); j++) //adjustment
+//				for (i = 0; i < 17; i++)
+				for (i = 0; i < zone.getWidth(); i++) //adjustment
 					if(zone.getTile(j, i).getFires().isEmpty())
 					{						
 						if(this.getTime(i,j)==0 && this.caseBombes!=null)

@@ -9,9 +9,12 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
  */
 public class GameMap {
 	/** La largeur de carte dans les carreaux */
-	public static final int WIDTH = 17;
+//	public static final int WIDTH;
+	public static int WIDTH; // adjustment
 	/** La hauteur de carte dans les carreaux */
-	public static final int HEIGHT = 15;	
+//	public static final int HEIGHT = 15;	
+	public static int HEIGHT;	// adjustment
+	
 	/** Les cadres de terrain pour chaque carreau dans la carte */
 	private int[][] zoneMatrix = new int[WIDTH][HEIGHT];
 	/** L'indicateur si un carreau donné a été visité pendant la recherche */
@@ -23,6 +26,8 @@ public class GameMap {
 	 */
 	public GameMap(int[][] zoneMatrix) {
 		this.zoneMatrix = zoneMatrix;
+		WIDTH = zoneMatrix.length; // adjustment
+		HEIGHT = zoneMatrix[0].length; // adjustment
 	}
 	
 	/**

@@ -114,9 +114,11 @@ public class TimeMatrice {
 		ai.checkInterruption();
 		// ajout des murs dans la matrice pour une seule fois
 		int i, j;
-		for (j = 0; j < 15; j++)
+//		for (j = 0; j < 15; j++)
+		for (j = 0; j < zone.getHeight(); j++) // adjustment
 		{	ai.checkInterruption();
-			for (i = 0; i < 17; i++)
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < zone.getWidth(); i++) //adjustment
 			{	ai.checkInterruption();
 				if (Functions.hasWall(this.zone.getTile(j, i),ai))
 					this.putTime(i,j,-1);
@@ -138,9 +140,11 @@ public class TimeMatrice {
 		int[][] maMatrice = new int[17][16];
 		int etki;
 		int i, j;
-		for (j = 0; j < 15; j++)
+//		for (j = 0; j < 15; j++)
+		for (j = 0; j < zone.getHeight(); j++) // adjustment
 		{	ai.checkInterruption();
-			for (i = 0; i < 17; i++)
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < zone.getWidth(); i++) //adjustment
 			{	ai.checkInterruption();
 				if (Functions.hasWall(zone.getTile(j, i),ai))
 					maMatrice[i][j] = -1;
@@ -206,9 +210,11 @@ public class TimeMatrice {
 		if(debug)
 			System.out.println("Elapsed time : "+elapsedTime);
 		if (elapsedTime > 0) {
-			for (j = 0; j < 15; j++)
+//			for (j = 0; j < 15; j++)
+			for (j = 0; j < zone.getHeight(); j++) // adjustment
 			{	ai.checkInterruption();
-				for (i = 0; i < 17; i++)
+//				for (i = 0; i < 17; i++)
+				for (i = 0; i < zone.getWidth(); i++) //adjustment
 				{	ai.checkInterruption();
 					if(zone.getTile(j, i).getFires().isEmpty())
 					{						

@@ -39,8 +39,10 @@ public class Functions {
 	public static void printMatrice(long maMatrice[][]) {
 		int i, j;
 		System.out.println("Affichement de la matrice des bombes:");
-		for (j = 0; j < 15; j++) {
-			for (i = 0; i < 17; i++)
+//		for (j = 0; j < 15; j++) {
+		for (j = 0; j < maMatrice[0].length; j++) { //adjustment
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < maMatrice.length; i++) //adjustment
 				if (maMatrice[i][j] >= 0)
 					System.out.print(" " + maMatrice[i][j]);
 				else

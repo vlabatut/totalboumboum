@@ -119,11 +119,13 @@ public class Node {
 			topValue = Map.getValue(x, (y-1));
 		}
 		int rightValue= Map.getValue(x, y) ;;
-		if (x<17){
+//		if (x<17){
+		if (x<Map.getMap().length){ //adjustment
 			rightValue = Map.getValue((x+1), y);
 		}
 		int bottomValue= Map.getValue(x, y) ;;
-		if (y<15){
+//		if (y<15){
+		if (y<Map.getMap()[0].length){ //adjustment
 			bottomValue = Map.getValue(x, (y+1));
 		}
 		int leftValue= Map.getValue(x, y) ;;

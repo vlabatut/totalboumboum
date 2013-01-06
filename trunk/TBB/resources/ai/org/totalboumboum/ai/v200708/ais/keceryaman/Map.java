@@ -12,7 +12,8 @@ package org.totalboumboum.ai.v200708.ais.keceryaman;
  */
 public class Map {
 	/** */
-	private static int[][] map = new int[17][15];
+//	private static int[][] map = new int[17][15];
+	private static int[][] map = null; //adjustement
 	
 	/**
 	 * 
@@ -38,8 +39,11 @@ public class Map {
 	 * @param matrix
 	 */
 	public static void init ( int[][] matrix){
-		for ( int i = 0 ; i < 15 ; i++ ){
-			for ( int j = 0 ; j < 17 ; j++ ){
+		map = matrix.clone();
+//		for ( int i = 0 ; i < 15 ; i++ ){
+		for ( int i = 0 ; i < map[0].length ; i++ ){ //adjustment
+//			for ( int j = 0 ; j < 17 ; j++ ){
+			for ( int j = 0 ; j < map.length ; j++ ){ //adjustment
 				setValue(j,i,matrix[j][i]);
 			}
 		}
@@ -66,7 +70,7 @@ public class Map {
 	}
 
 	/**
-	 * 
+	 * 		
 	 */
 	public Map(){}
 }

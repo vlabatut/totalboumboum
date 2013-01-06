@@ -21,9 +21,9 @@ public class AStar implements PathFinder {
 	/** The current list of closed nodes */
 	private final NodeList closedList;
      
-	/** */
-	int[][] zoneMatrix = new int[15][13];
 	/** The map */
+//	int[][] zoneMatrix = new int[15][13];
+	int[][] zoneMatrix = null; // adjustment
 	
 	/** A current list of neighbors. Optimized for 2D grids to begin with but it will adjust itself */
 	private List<int[]> neighbors = new ArrayList<int[]>(8);

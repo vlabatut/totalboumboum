@@ -368,8 +368,10 @@ public class HanciToprakAStar {
 		}
 //		System.out.println("obur matris");
 
-		for (int i = 0; i < 17; i++) {
-			for (int j = 0; j < 15; j++) {
+//		for (int i = 0; i < 17; i++) {
+		for (int i = 0; i < pos.length; i++) { // adjustment
+//			for (int j = 0; j < 15; j++) { // adjustment
+			for (int j = 0; j < pos[0].length; j++) {
 				pos[i][j] = matrix[i][j];
 				nodes[i][j].setCost(matrix[i][j]);
 

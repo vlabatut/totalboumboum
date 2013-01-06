@@ -413,10 +413,12 @@ public class DemiragSagar extends ArtificialIntelligence {
 		checkInterruption();
 		int i,j;
 		boolean resultat=false;
-		long nouveauTime [][]= new long[17][15];
-		for (j = 0; j < 15; j++)
+		long nouveauTime [][]= new long[zone.getWidth()][zone.getHeight()];
+//		for (j = 0; j < 15; j++)
+		for (j = 0; j < zone.getHeight(); j++) // adjustment
 		{	checkInterruption();
-			for (i = 0; i < 17; i++)
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < zone.getWidth(); i++) //adjustment
 			{	checkInterruption();
 				nouveauTime[i][j]=this.timeMatrice.getTime(i,j);
 			}
@@ -424,9 +426,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 		this.timeMatrice.placerNouvelleBombe(temp);
 		if(this.seCacher(true))
 			resultat=true;
-		for (j = 0; j < 15; j++)
+//		for (j = 0; j < 15; j++)
+		for (j = 0; j < zone.getHeight(); j++) // adjustment
 		{	checkInterruption();
-			for (i = 0; i < 17; i++)
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < zone.getWidth(); i++) //adjustment
 			{	checkInterruption();
 				this.timeMatrice.putTime(i,j,nouveauTime[i][j]);
 			}
@@ -521,9 +525,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 		AiTile petit = null;
 		boolean fuir = false;
 		int min = 10000, temp, i, j;
-		for (j = 0; j < 15; j++)
+//		for (j = 0; j < 15; j++)
+		for (j = 0; j < zone.getHeight(); j++) // adjustment
 		{	checkInterruption();
-			for (i = 0; i < 17; i++)
+//			for (i = 0; i < 17; i++)
+			for (i = 0; i < zone.getWidth(); i++) //adjustment
 			{	checkInterruption();
 				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant,this))
 					if ( this.timeMatrice.getTime(i,j)==0) {//bulacakkkk
@@ -593,12 +599,16 @@ public class DemiragSagar extends ArtificialIntelligence {
 		checkInterruption();
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;
-		for (int i = 0; i < 15; i++)
+//		for (int i = 0; i < 15; i++)
+		for (int i = 0; i < zone.getWidth(); i++) //adjustment
 		{	checkInterruption();
-			for (int j = 0; j < 17; j++)
+//			for (int j = 0; j < 17; j++)
+			for (int j = 0; j < zone.getHeight(); j++) //adjustment
 			{	checkInterruption();
-				if (mat[j][i] == -1) {
-					AiTile temp = this.zone.getTile(i, j);
+//				if (mat[j][i] == -1) { 
+				if (mat[i][j] == -1) { //adjustment
+//					AiTile temp = this.zone.getTile(i, j);
+					AiTile temp = this.zone.getTile(j, i); //adjustment
 					if (!temp.getBlock().isDestructible())
 						sommeHardWall++;
 				}

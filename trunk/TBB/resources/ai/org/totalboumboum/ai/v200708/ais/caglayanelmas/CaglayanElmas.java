@@ -76,7 +76,8 @@ public class CaglayanElmas extends ArtificialIntelligence
 		savedMove = false;
 		
 		playableCases = new Vector<int[]>();
-		lastMatrix = new int[17][15];
+//		lastMatrix = new int[17][15];
+lastMatrix = null; // adjustment
 		
 		state = DOING_NOTHING;
 		startedToAttack = false;
@@ -98,7 +99,9 @@ public class CaglayanElmas extends ArtificialIntelligence
 	public Integer processAction() throws Exception
 	{
 		if(firstTime)
-			firstTime = false;
+		{	firstTime = false;
+lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
+		}
 		else
 		{	
 		// Notre position
@@ -427,8 +430,10 @@ public class CaglayanElmas extends ArtificialIntelligence
 		
 		Vector<int[]> bombs = new Vector<int[]>();
 		
-		for (int i = 1; i <= 15; i++)
-			for (int j = 1; j <= 13; j++)
+//		for (int i = 1; i <= 15; i++)
+		for (int i = 1; i <= getZoneMatrixDimX(); i++) // adjustment
+//			for (int j = 1; j <= 13; j++)
+			for (int j = 1; j <= getZoneMatrixDimY(); j++) // adjustment
 				if ( (power = getBombPowerAt(i, j)) != -1 )
 				{
 					int[] bomb = {i, j, power};
@@ -450,9 +455,11 @@ public class CaglayanElmas extends ArtificialIntelligence
 				
 				// Les limites de la recherche
 				int sx = (x-p<1)?1:x-p;
-				int ex = (x+p>15)?15:x+p;
+//				int ex = (x+p>15)?15:x+p;
+				int ex = (x+p>getZoneMatrixDimX())?getZoneMatrixDimX():x+p; // adjustment
 				int sy = (y-p<1)?1:y-p;
-				int ey = (y+p>13)?13:y+p;
+//				int ey = (y+p>13)?13:y+p;
+				int ey = (y+p>getZoneMatrixDimY())?getZoneMatrixDimY():y+p; // adjustment
 				
 				for (int j = sx; j <= ex & canBeSolution; j++)
 					canBeSolution = !(c[0] == j && c[1] == y);

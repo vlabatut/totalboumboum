@@ -170,8 +170,10 @@ public class KecerYaman extends ArtificialIntelligence {
 		int value;
 		
 		// for each square in the map (except the outside boundries)
-		for ( int y = 1 ; y <= 13 ; y ++ ){
-			for ( int x = 1 ; x <=15 ; x++ ){
+//		for ( int y = 1 ; y <= 13 ; y ++ ){
+		for ( int y = 1 ; y <= getZoneMatrixDimY() ; y ++ ){ //adjustment
+//			for ( int x = 1 ; x <=15 ; x++ ){
+			for ( int x = 1 ; x <=getZoneMatrixDimX() ; x++ ){ //adjustment
 				value = Map.getValue(x, y);
 				if ( value == AI_BLOCK_BOMB || value == VAL_PLAYER ){
 					bombPower = getBombPowerAt(x, y);
@@ -219,8 +221,10 @@ public class KecerYaman extends ArtificialIntelligence {
 		
 		while ( i < bombPower && !blocked ){
 			// boundry check
-			if ( x > 0 && x < 17 ) x += wX;
-			if ( y > 0 && y < 15 ) y += wY;
+//			if ( x > 0 && x < 17 ) x += wX;
+			if ( x > 0 && x < getZoneMatrixDimX() ) x += wX; //adjustment
+//			if ( y > 0 && y < 15 ) y += wY;
+			if ( y > 0 && y < getZoneMatrixDimY() ) y += wY; //adjustment
 			
 			// does anything blocks the flames?
 			value = Map.getValue(x, y);
@@ -359,8 +363,10 @@ public class KecerYaman extends ArtificialIntelligence {
 		 */
 		else if ( getTimeBeforeShrink() > 1000 ){	
 			if ( bombPlanted() ){
-				for ( int y = 1 ; y <= 13 ; y++ ){
-					for ( int x = 1 ; x <= 15 ; x++ ){
+//				for ( int y = 1 ; y <= 13 ; y++ ){
+				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+//					for ( int x = 1 ; x <= 15 ; x++ ){
+					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) <= VAL_EMPTY ){
 							min[0] = x;
 							min[1] = y;
@@ -369,24 +375,30 @@ public class KecerYaman extends ArtificialIntelligence {
 					}
 				}
 			}else{
-				for ( int y = 1 ; y <= 13 ; y++ ){
-					for ( int x = 1 ; x <= 15 ; x++ ){
+//				for ( int y = 1 ; y <= 13 ; y++ ){
+				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+//					for ( int x = 1 ; x <= 15 ; x++ ){
+					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							updateGroupPoint ( x , y );
 						}
 					}
 				}
 				
-				for ( int y = 1 ; y <= 13 ; y++ ){
-					for ( int x = 1 ; x <= 15 ; x++ ){
+//				for ( int y = 1 ; y <= 13 ; y++ ){
+				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+//					for ( int x = 1 ; x <= 15 ; x++ ){
+					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							updatePositionPoint ( x , y );
 						}
 					}
 				}
 				
-				for ( int y = 1 ; y <= 13 ; y++ ){
-					for ( int x = 1 ; x <= 15 ; x++ ){
+//				for ( int y = 1 ; y <= 13 ; y++ ){
+				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+//					for ( int x = 1 ; x <= 15 ; x++ ){
+					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							if ( Map.getValue(x,y) < Map.getValue(min[0], min[1])){
 								min[0] = x;
