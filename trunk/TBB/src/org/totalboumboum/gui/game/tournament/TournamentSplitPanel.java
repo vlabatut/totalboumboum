@@ -71,10 +71,35 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Sets a tournament loaded in order
+	 * to go on playing (and not just
+	 * browse its statistics, like {@link #setTournamentStats}).
+	 * 
+	 * @param tournament
+	 * 		The loaded tournament.
+	 */
 	public void setTournament(AbstractTournament tournament)
-	{	if(!tournament.hasBegun())
+	{	TournamentMenu tm = (TournamentMenu)getMenuPart();
+		tm.setBrowseOnly(false);
+		if(!tournament.hasBegun())
 			tournament.init();
-		((TournamentMenu)getMenuPart()).setTournament(tournament);
+		tm.setTournament(tournament);
+	}
+	
+	/**
+	 * Sets a tournament loaded in order
+	 * to browse its statistics (and not
+	 * to go on playing, like {@link #setTournament}).
+	 * 
+	 * @param tournament
+	 * 		The loaded tournament.
+	 */
+	public void setTournamentStats(AbstractTournament tournament)
+	{	TournamentMenu tm = (TournamentMenu)getMenuPart();
+		tm.setBrowseOnly(true);
+		tournament.rewind();
+		tm.setTournament(tournament);
 	}
 
 	/////////////////////////////////////////////////////////////////

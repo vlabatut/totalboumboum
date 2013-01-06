@@ -78,6 +78,7 @@ public class CupPart implements Serializable
 	public void init()
 	{	// match
 		currentMatch = match;
+		
 		// profiles
 		List<Profile> profiles = new ArrayList<Profile>();
 		for(int i=0;i<players.size();i++)
@@ -225,6 +226,15 @@ public class CupPart implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Used to come back to the first match,
+	 * when browsing statistics (<i>a posteriori</i>).
+	 */
+	public void rewind()
+	{	currentMatch = match;
+		currentMatch.rewind();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

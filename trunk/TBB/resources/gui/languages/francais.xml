@@ -590,6 +590,7 @@
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au menu principal" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer et charger la partie sélectionnée" />
 					<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
+					<text name="Statistics" value="Statistiques" tooltip="Charger le tournoi pour revoir ses statistiques" />
 				</group>
 				<group name="Delete">
 					<text name="Title" value="Supprimession de partie" tooltip="Supprimession de partie" />

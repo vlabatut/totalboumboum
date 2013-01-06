@@ -104,6 +104,16 @@ public class CupLeg implements Serializable
 			setOver(true);			
 	}
 
+	/**
+	 * Used to come back to the first match,
+	 * when browsing statistics (<i>a posteriori</i>).
+	 */
+	public void rewind()
+	{	currentIndex = 0;
+		currentPart = parts.get(currentIndex);
+		currentPart.rewind();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LEG				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

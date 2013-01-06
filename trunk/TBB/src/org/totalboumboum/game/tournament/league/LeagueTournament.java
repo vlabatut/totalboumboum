@@ -97,6 +97,12 @@ public class LeagueTournament extends AbstractTournament
 //		pointsProcessor = null;
 	}
 
+	@Override
+	public void rewind()
+	{	currentIndex = 0;
+		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -227,12 +233,14 @@ public class LeagueTournament extends AbstractTournament
 	private int currentIndex;
 	private int matchCount;
 	private List<Set<Integer>> confrontations;
+	private List<Match> playedMatches = new ArrayList<Match>();
 
 	private void initMatches()
 	{	// matches
 		if(randomizeMatches)
 			randomizeMatches();
 		currentIndex = 0;
+		playedMatches.clear();
 		
 		// confrontations
 		int n = profiles.size();
@@ -320,12 +328,18 @@ public class LeagueTournament extends AbstractTournament
 	{	// stats
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
+		
+		// matches
+		playedMatches.add(currentMatch);
+
+		
 		// iterator
 		if(currentIndex>=matches.size())
 		{	if(randomizeMatches)
 				randomizeMatches();
 			currentIndex = 0;
 		}
+		
 		// limits
 		if(matchCount==confrontations.size()-1)
 		{	float[] points;

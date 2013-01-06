@@ -110,7 +110,7 @@ public class WallController {
 					path = astar.processShortestPath(ourHero.getTile(),possibleDest);
 				} catch (LimitReachedException e) {
 					// 
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			
 			tileDest = path.getLastTile();

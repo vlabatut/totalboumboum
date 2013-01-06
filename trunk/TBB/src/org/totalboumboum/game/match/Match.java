@@ -140,6 +140,14 @@ public class Match implements StatisticHolder, Serializable
 		tournament.cancel();
 	}
 	
+	/**
+	 * Used to come back to the first round,
+	 * when browsing statistics (<i>a posteriori</i>).
+	 */
+	public void rewind()
+	{	currentIndex = 0;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LIMITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
