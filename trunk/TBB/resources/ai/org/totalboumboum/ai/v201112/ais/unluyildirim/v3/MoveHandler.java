@@ -202,17 +202,16 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 			
 			long wait = hero_path.getFirstPause();
 	
-			
-			current_location = hero_path.getLocation(1); 
 			if(hero_path.getLength()<2 || wait>0 )
-				{
-			//direction_current =Direction.NONE;
+			{
+				//direction_current =Direction.NONE;
 				//direction_current = zone.getDirection(source.getTile(),target.getTile());
-				}
+			}
 			
 			
 			else
-			{	
+			{	current_location = hero_path.getLocation(1); 
+				
 				
 				AiLocation source = hero_path.getFirstLocation();
 			    AiLocation target = hero_path.getLocation(1);
