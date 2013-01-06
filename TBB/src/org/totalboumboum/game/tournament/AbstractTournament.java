@@ -88,6 +88,12 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	{	return begun;	
 	}
 
+	/**
+	 * Used to come back to the first match,
+	 * when browsing statistics (<i>a posteriori</i>).
+	 */
+	public abstract void rewind();
+	
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

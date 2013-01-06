@@ -171,9 +171,9 @@ public class KecerYaman extends ArtificialIntelligence {
 		
 		// for each square in the map (except the outside boundries)
 //		for ( int y = 1 ; y <= 13 ; y ++ ){
-		for ( int y = 1 ; y <= getZoneMatrixDimY() ; y ++ ){ //adjustment
+		for ( int y = 0 ; y < getZoneMatrixDimY() ; y ++ ){ //adjustment
 //			for ( int x = 1 ; x <=15 ; x++ ){
-			for ( int x = 1 ; x <=getZoneMatrixDimX() ; x++ ){ //adjustment
+			for ( int x = 0 ; x <getZoneMatrixDimX() ; x++ ){ //adjustment
 				value = Map.getValue(x, y);
 				if ( value == AI_BLOCK_BOMB || value == VAL_PLAYER ){
 					bombPower = getBombPowerAt(x, y);

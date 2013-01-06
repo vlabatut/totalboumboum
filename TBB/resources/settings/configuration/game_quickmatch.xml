@@ -35,7 +35,7 @@
 	</settings>
 	<players>
 		<player file="b4cf64b8-0338-4076-ae6d-f3bfc67f139c" color="ULTRAMARINE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="fa0e458a-a12b-41ef-921a-e494933ef80c" color="ORANGE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tournament201213" folder="qualif1" allowedPlayers="2 3 4 5" />

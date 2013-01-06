@@ -87,4 +87,9 @@ public class TurningTournament extends AbstractTournament
 		return null;
 	}
 
+	@Override
+	public void rewind() {
+		// TODO Auto-generated method stub
+		
+	}
 }

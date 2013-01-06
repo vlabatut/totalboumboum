@@ -85,6 +85,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 		buttonDelete = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonStats = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
@@ -106,6 +107,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private JButton buttonConfirm;
+	private JButton buttonStats;
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 	private JButton buttonDelete;
@@ -115,10 +117,12 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 		if(gameArchive==null)
 		{	buttonDelete.setEnabled(false);
 			buttonConfirm.setEnabled(false);
+			buttonStats.setEnabled(false);
 		}
 		else
 		{	buttonDelete.setEnabled(true);
 			buttonConfirm.setEnabled(true);
+			buttonStats.setEnabled(true);
 		}
 	}
 	
@@ -152,6 +156,27 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 			{	String folder = levelData.getSelectedGameArchive().getFolder();
 				AbstractTournament tournament = GameArchive.loadGame(folder);
 				tournamentPanel.setTournament(tournament);
+				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			replaceWith(tournamentPanel);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_STATISTICS))
+		{	try
+			{	String folder = levelData.getSelectedGameArchive().getFolder();
+				AbstractTournament tournament = GameArchive.loadGame(folder);
+				tournamentPanel.setTournamentStats(tournament);
 				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
 			}
 			catch (IOException e1)
