@@ -35,6 +35,7 @@ import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -62,7 +63,7 @@ public class SelectedLevelMenu extends InnerMenuPanel
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiTools.buttonTextHeight;
+		int buttonHeight = GuiSizeTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_LEVEL_BUTTON);
 		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 

@@ -61,6 +61,7 @@ import org.totalboumboum.gui.menus.profiles.ais.SelectedAiSplitPanel;
 import org.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -95,14 +96,14 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			EmptyContentPanel contentPanel = subPanel.getDataPanel();
 			contentPanel.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
 
-			int lineHeightEstimation = (subPanel.getDataHeight() - (LINE_COUNT+2)*GuiTools.subPanelMargin) / (LINE_COUNT+1);
-			int heightEstimation = (lineHeightEstimation*LINE_COUNT) + (LINE_COUNT+1)*GuiTools.subPanelMargin;
+			int lineHeightEstimation = (subPanel.getDataHeight() - (LINE_COUNT+2)*GuiSizeTools.subPanelMargin) / (LINE_COUNT+1);
+			int heightEstimation = (lineHeightEstimation*LINE_COUNT) + (LINE_COUNT+1)*GuiSizeTools.subPanelMargin;
 			editPanel = new LinesSubPanel(subPanel.getDataWidth(),heightEstimation,Mode.BORDER,LINE_COUNT,1,false);
 			editPanel.setOpaque(false);
 			int lineHeight = editPanel.getLineHeight();
 			int lineFontSize = editPanel.getLineFontSize();
 			int lineWidth = editPanel.getDataWidth();
-			int nameHeight = subPanel.getDataHeight() - heightEstimation - GuiTools.subPanelMargin;
+			int nameHeight = subPanel.getDataHeight() - heightEstimation - GuiSizeTools.subPanelMargin;
 			
 			// main panel
 			{	BoxLayout layout = new BoxLayout(contentPanel,BoxLayout.PAGE_AXIS); 
@@ -196,7 +197,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 						textPane = textArea;
 					}
 					
-					int nameWidth = lineWidth - nameHeight - GuiTools.subPanelMargin;
+					int nameWidth = lineWidth - nameHeight - GuiSizeTools.subPanelMargin;
 					Dimension dim = new Dimension(nameWidth,nameHeight);
 					textPane.setPreferredSize(dim);
 					textPane.setMinimumSize(dim);
@@ -217,7 +218,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				int col = 0;
-				int textWidth = lineWidth - 3*iconWidth - 4*GuiTools.subPanelMargin;
+				int textWidth = lineWidth - 3*iconWidth - 4*GuiSizeTools.subPanelMargin;
 				int packWidth = textWidth/2;
 				int nameWidth = textWidth - packWidth;
 				// icon
@@ -277,7 +278,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				int col = 0;
-				int textWidth = lineWidth - 2*iconWidth - 3*GuiTools.subPanelMargin;
+				int textWidth = lineWidth - 2*iconWidth - 3*GuiSizeTools.subPanelMargin;
 				int packWidth = textWidth/2;
 				int nameWidth = textWidth - packWidth;
 				// icon
@@ -325,7 +326,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				ln.addLabel(0);
-				int textWidth = lineWidth - 3*iconWidth - 3*GuiTools.subPanelMargin;
+				int textWidth = lineWidth - 3*iconWidth - 3*GuiSizeTools.subPanelMargin;
 				int col = 0;
 				// icon
 				{	ln.setLabelMinWidth(col,iconWidth);

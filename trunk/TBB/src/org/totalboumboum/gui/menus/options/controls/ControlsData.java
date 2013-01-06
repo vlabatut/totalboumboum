@@ -41,6 +41,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.classes.ClassTools;
 
@@ -131,8 +132,8 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 				}
 			}
 			int autofireWidth = keysPanel.getHeaderHeight();
-			int commandWidth = (keysPanel.getDataWidth() - 2*GuiTools.subPanelMargin - autofireWidth)/2;
-			int keyWidth = keysPanel.getDataWidth() - 2*GuiTools.subPanelMargin - autofireWidth - commandWidth;
+			int commandWidth = (keysPanel.getDataWidth() - 2*GuiSizeTools.subPanelMargin - autofireWidth)/2;
+			int keyWidth = keysPanel.getDataWidth() - 2*GuiSizeTools.subPanelMargin - autofireWidth - commandWidth;
 			keysPanel.setColSubMinWidth(0,commandWidth);
 			keysPanel.setColSubPrefWidth(0,commandWidth);
 			keysPanel.setColSubMaxWidth(0,commandWidth);

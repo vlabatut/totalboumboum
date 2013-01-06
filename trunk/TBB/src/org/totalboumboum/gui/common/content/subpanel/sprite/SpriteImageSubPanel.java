@@ -37,6 +37,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Column;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -103,10 +104,10 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		lines = colorValues.length/2;
 		if(colorValues.length%2 > 0)
 			lines++;
-		lineHeight = (getDataHeight() - (lines-1)*GuiTools.subPanelMargin)/lines;
-		int firstLineHeight = getDataHeight() - (lines-1)*GuiTools.subPanelMargin - (lines-1)*lineHeight;
+		lineHeight = (getDataHeight() - (lines-1)*GuiSizeTools.subPanelMargin)/lines;
+		int firstLineHeight = getDataHeight() - (lines-1)*GuiSizeTools.subPanelMargin - (lines-1)*lineHeight;
 		if(showColors)
-			rightWidth = getDataWidth() - 2*lineHeight - 2*GuiTools.subPanelMargin;
+			rightWidth = getDataWidth() - 2*lineHeight - 2*GuiSizeTools.subPanelMargin;
 		else
 			rightWidth = getDataWidth();
 

@@ -61,8 +61,7 @@ public class GuiTools
 	 * for a full GUI.
 	 */
 	public static void init()
-	{	initSizes();
-		initImages();
+	{	initImages();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -1481,63 +1480,7 @@ public class GuiTools
 			loadTableImages(folder,uses);
 		}
 	}
-				
-	/////////////////////////////////////////////////////////////////
-	// SIZE 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 
-	// margins
-	private final static float PANEL_MARGIN_RATIO = 0.025f; 
-	public static int panelMargin; // margin between the components of a frame
-	private final static float SUBPANEL_MARGIN_RATIO = 0.005f; 
-	public static int subPanelMargin;// margin between the components of a panel
-
-	// titles
-	private final static float SUBPANEL_TITLE_RATIO = 1.5f; // subpanel title height relatively to panel margin
-	public static int subPanelTitleHeight; // height of a subpanel title bar relatively to the height of a panel title
-	public final static float TABLE_HEADER_RATIO = 1.2f; //header height relatively to line height
-
-	// panel split
-	public final static float VERTICAL_SPLIT_RATIO = 0.25f;
-	public final static float HORIZONTAL_SPLIT_RATIO = 0.07f;
-
-	// modal dialog
-	public final static float MODAL_DIALOG_RATIO = 0.4f;
-	
-	// buttons
-	private final static float BUTTON_TEXT_HEIGHT_RATIO = 0.05f; // height of a button relatively to the panel height
-	public static int buttonTextHeight;
-	private final static float BUTTON_TEXT_WIDTH_RATIO = 0.33f; // width of a button relatively to the panel width
-	public static int buttonTextWidth;
-//	private final static float BUTTON_ICON_SIZE_RATIO = 0.07f; // height of a button relatively to the panel height
-//	public static int buttonIconSize;
-	private final static float BUTTON_HORIZONTAL_SPACE_RATIO = 0.025f; // space between buttons relatively to the panel width
-	public static int buttonHorizontalSpace;
-	private final static float BUTTON_VERTICAL_SPACE_RATIO = 0.025f; // space between buttons relatively to the panel height
-	public static int buttonVerticalSpace;
-	public final static float BUTTON_ICON_MARGIN_RATION = 0.9f;
-	
-	private static void initSizes()
-	{	// panel
-		Dimension panelDimension = Configuration.getVideoConfiguration().getPanelDimension();
-		int width = panelDimension.width;
-		int height = panelDimension.height;
-				
-		// margins
-		panelMargin = (int)(width*PANEL_MARGIN_RATIO);
-		subPanelMargin = (int)(height*SUBPANEL_MARGIN_RATIO);
-		
-		// titles
-		subPanelTitleHeight = (int)(panelMargin*SUBPANEL_TITLE_RATIO);
-		
-		// buttons
-		buttonTextHeight = (int)(height*BUTTON_TEXT_HEIGHT_RATIO);
-		buttonTextWidth = (int)(width*BUTTON_TEXT_WIDTH_RATIO);
-//		buttonIconSize = (int)(height*BUTTON_ICON_SIZE_RATIO);
-		buttonHorizontalSpace = (int)(width*BUTTON_HORIZONTAL_SPACE_RATIO);
-		buttonVerticalSpace = (int)(height*BUTTON_VERTICAL_SPACE_RATIO);
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

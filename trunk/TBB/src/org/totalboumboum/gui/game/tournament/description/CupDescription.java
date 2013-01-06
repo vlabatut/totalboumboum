@@ -34,6 +34,7 @@ import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -53,7 +54,7 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 				infoPanel.setLayout(layout);
 			}
 
-			int margin = GuiTools.panelMargin;
+			int margin = GuiSizeTools.panelMargin;
 			int rightWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int leftWidth = dataWidth - rightWidth - margin; 
 			infoPanel.setOpaque(false);

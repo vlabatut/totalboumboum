@@ -66,6 +66,7 @@ import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
@@ -106,7 +107,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 //buttonRecord.setEnabled(false);		
 		add(Box.createHorizontalGlue());
 		buttonMenu = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
 	    buttonDescription = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonDescription);
@@ -115,7 +116,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 //buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		buttonMatch = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);
 	}
 	

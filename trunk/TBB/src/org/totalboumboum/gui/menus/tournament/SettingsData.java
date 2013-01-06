@@ -41,6 +41,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -71,7 +72,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				mainPanel.setLayout(layout);
 			}
 			
-			int margin = GuiTools.panelMargin;
+			int margin = GuiSizeTools.panelMargin;
 			tournamentHeight = (int)(dataHeight*SPLIT_RATIO); 
 			miscHeight = dataHeight - tournamentHeight - margin;
 			mainPanel.setOpaque(false);
@@ -81,7 +82,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				mainPanel.add(tournamentPanel);
 			}
 			
-			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
+			mainPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.panelMargin,GuiSizeTools.panelMargin)));
 			
 			// misc panel
 			{	miscPanel = new TournamentMiscSubPanel(dataWidth,miscHeight,15);
@@ -163,7 +164,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	private TableSubPanel makeTournamentPanel(int width, int height)
 	{	int cols = 2;
 		int lines = 1;
-		int margin = GuiTools.subPanelMargin;
+		int margin = GuiSizeTools.subPanelMargin;
 		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,lines,cols,false);
 		@SuppressWarnings("unused")
 		int headerHeight = result.getHeaderHeight();

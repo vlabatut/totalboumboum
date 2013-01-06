@@ -38,6 +38,7 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.stream.file.archive.GameArchiveLoader;
@@ -71,7 +72,7 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 				mainPanel.setLayout(layout);
 			}
 			
-			int margin = GuiTools.panelMargin;
+			int margin = GuiSizeTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);

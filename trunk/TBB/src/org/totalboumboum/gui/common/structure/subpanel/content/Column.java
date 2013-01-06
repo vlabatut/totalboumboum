@@ -39,6 +39,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
@@ -75,7 +76,7 @@ public class Column extends ContentPanel
 		if(lines<=1)
 			lineHeight = height;
 		else
-			lineHeight = (height-GuiTools.subPanelMargin*(lines-1))/lines;
+			lineHeight = (height-GuiSizeTools.subPanelMargin*(lines-1))/lines;
 		lineFontSize = GuiFontTools.getFontSize(lineHeight*GuiFontTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		// content
@@ -161,9 +162,9 @@ public class Column extends ContentPanel
 	public void addLabel(int line)
 	{	// separator
 		if(line>0)
-			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*line-1);
+			add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)),2*line-1);
 		else if(lines>0)
-			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*line);
+			add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)),2*line);
 		// new label
 		String txt = null;
 		MyLabel lbl = new MyLabel(txt);

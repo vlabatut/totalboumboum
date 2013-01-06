@@ -35,6 +35,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.time.TimeTools;
@@ -85,11 +86,11 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		reinit(LINE_COUNT,1);
 		int iconWidth = getLineHeight();
 		int nameWidth = (int)(getDataWidth()*0.33);
-		int pointsRanksWidth = (getDataWidth() - nameWidth - GameData.CONTROL_COUNT*GuiTools.subPanelMargin) / GameData.CONTROL_COUNT;
-		int firstPointsRankWidth = getDataWidth() - nameWidth - GameData.CONTROL_COUNT*GuiTools.subPanelMargin - (GameData.CONTROL_COUNT-1)*pointsRanksWidth;
-		int pointsValuesWidth = pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
+		int pointsRanksWidth = (getDataWidth() - nameWidth - GameData.CONTROL_COUNT*GuiSizeTools.subPanelMargin) / GameData.CONTROL_COUNT;
+		int firstPointsRankWidth = getDataWidth() - nameWidth - GameData.CONTROL_COUNT*GuiSizeTools.subPanelMargin - (GameData.CONTROL_COUNT-1)*pointsRanksWidth;
+		int pointsValuesWidth = pointsRanksWidth - 2*GuiSizeTools.subPanelMargin - 2*iconWidth;
 //		getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
-		int firstPointsValuesWidth = firstPointsRankWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
+		int firstPointsValuesWidth = firstPointsRankWidth - 2*GuiSizeTools.subPanelMargin - 2*iconWidth;
 		
 		if(quickMatchConfiguration!=null)
 		{	// levels order
@@ -107,7 +108,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				}
 				// value
 				{	setLevelsOrder();
-					int valueWidth = getDataWidth() - nameWidth - GuiTools.subPanelMargin;
+					int valueWidth = getDataWidth() - nameWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -133,7 +134,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				}
 				// value
 				{	setPlayersLocation();
-					int valueWidth = getDataWidth() - nameWidth - GuiTools.subPanelMargin;
+					int valueWidth = getDataWidth() - nameWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -170,7 +171,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				}
 				// value
 				{	setTimeLimit();
-					int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiTools.subPanelMargin;
+					int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -291,7 +292,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				}
 				// value
 				{	setPointsShare();
-					int valueWidth = getDataWidth() - nameWidth - GuiTools.subPanelMargin;
+					int valueWidth = getDataWidth() - nameWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -317,7 +318,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				}
 				// value
 				{	setPointsDraw();
-					int valueWidth = getDataWidth() - nameWidth - GuiTools.subPanelMargin;
+					int valueWidth = getDataWidth() - nameWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -343,7 +344,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				}
 				// value
 				{	setSuddenDeathDisabled();
-					int valueWidth = getDataWidth() - nameWidth - GuiTools.subPanelMargin;
+					int valueWidth = getDataWidth() - nameWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);

@@ -58,42 +58,42 @@ public class GuiButtonTools
 		{	// normal icon
 			{	BufferedImage icon = GuiTools.getIcon(name+GuiTools.ICON_NORMAL);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*GuiTools.BUTTON_ICON_MARGIN_RATION,true);
+				icon = ImageTools.getResizedImage(icon,zoom*GuiSizeTools.BUTTON_ICON_MARGIN_RATIO,true);
 				ImageIcon ii = new ImageIcon(icon);
 				button.setIcon(ii);
 			}
 			// disabled icon
 			{	BufferedImage icon = GuiTools.getIcon(name+GuiTools.ICON_DISABLED);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*GuiTools.BUTTON_ICON_MARGIN_RATION,true);
+				icon = ImageTools.getResizedImage(icon,zoom*GuiSizeTools.BUTTON_ICON_MARGIN_RATIO,true);
 				ImageIcon ii = new ImageIcon(icon);
 				button.setDisabledIcon(ii);
 			}
 			// pressed icon
 			{	BufferedImage icon = GuiTools.getIcon(name+GuiTools.ICON_PRESSED);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*GuiTools.BUTTON_ICON_MARGIN_RATION,true);
+				icon = ImageTools.getResizedImage(icon,zoom*GuiSizeTools.BUTTON_ICON_MARGIN_RATIO,true);
 				ImageIcon ii = new ImageIcon(icon);
 				button.setPressedIcon(ii);
 			}
 			// selected icon
 			{	BufferedImage icon = GuiTools.getIcon(name+GuiTools.ICON_NORMAL_SELECTED);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*GuiTools.BUTTON_ICON_MARGIN_RATION,true);
+				icon = ImageTools.getResizedImage(icon,zoom*GuiSizeTools.BUTTON_ICON_MARGIN_RATIO,true);
 				ImageIcon ii = new ImageIcon(icon);
 				button.setSelectedIcon(ii);
 			}
 			// disabled selected icon
 			{	BufferedImage icon = GuiTools.getIcon(name+GuiTools.ICON_DISABLED_SELECTED);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*GuiTools.BUTTON_ICON_MARGIN_RATION,true);
+				icon = ImageTools.getResizedImage(icon,zoom*GuiSizeTools.BUTTON_ICON_MARGIN_RATIO,true);
 				ImageIcon ii = new ImageIcon(icon);
 				button.setDisabledSelectedIcon(ii);
 			}
 			// rollover icon
 			{	BufferedImage icon = GuiTools.getIcon(name+GuiTools.ICON_ROLLOVER);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*GuiTools.BUTTON_ICON_MARGIN_RATION,true);
+				icon = ImageTools.getResizedImage(icon,zoom*GuiSizeTools.BUTTON_ICON_MARGIN_RATIO,true);
 				ImageIcon ii = new ImageIcon(icon);
 				button.setRolloverEnabled(true);
 				button.setRolloverIcon(ii);
@@ -101,7 +101,7 @@ public class GuiButtonTools
 			// rollover selected icon
 			{	BufferedImage icon = GuiTools.getIcon(name+GuiTools.ICON_ROLLOVER_SELECTED);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-				icon = ImageTools.getResizedImage(icon,zoom*GuiTools.BUTTON_ICON_MARGIN_RATION,true);
+				icon = ImageTools.getResizedImage(icon,zoom*GuiSizeTools.BUTTON_ICON_MARGIN_RATIO,true);
 				ImageIcon ii = new ImageIcon(icon);
 				button.setRolloverSelectedIcon(ii);
 			}

@@ -52,6 +52,7 @@ import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
@@ -81,7 +82,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
 		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK,buttonWidth,buttonHeight,1,this);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
 	    buttonDescription = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 		buttonDescription.setSelected(true);
@@ -91,7 +92,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		buttonReplay = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_REPLAY,buttonWidth,buttonHeight,1,this);
 		buttonReplay.setEnabled(false);		
 		

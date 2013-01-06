@@ -37,6 +37,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -174,7 +175,7 @@ public class TournamentMiscSubPanel extends TableSubPanel
 		setColSubMinWidth(0,iconWidth);
 		setColSubPrefWidth(0,iconWidth);
 		setColSubMaxWidth(0,iconWidth);
-		int maxWidth = getDataWidth()-(COL_SUBS-1)*GuiTools.subPanelMargin - iconWidth;
+		int maxWidth = getDataWidth()-(COL_SUBS-1)*GuiSizeTools.subPanelMargin - iconWidth;
 		setColSubMinWidth(1,maxWidth);
 		setColSubPrefWidth(1,maxWidth);
 		setColSubMaxWidth(1,maxWidth);

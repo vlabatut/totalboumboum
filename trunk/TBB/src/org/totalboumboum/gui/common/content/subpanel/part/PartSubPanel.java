@@ -39,6 +39,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -79,8 +80,8 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			lines = 1+part.getPlayers().size();
 		reinit(lines,1);
 		int buttonWidth = getLineHeight();
-		int nameWidth = (int)((getWidth() - (2*buttonWidth + 5*GuiTools.subPanelMargin))*0.75);
-		int rankWidth = getWidth() - (2*buttonWidth + nameWidth + 5*GuiTools.subPanelMargin);
+		int nameWidth = (int)((getWidth() - (2*buttonWidth + 5*GuiSizeTools.subPanelMargin))*0.75);
+		int rankWidth = getWidth() - (2*buttonWidth + nameWidth + 5*GuiSizeTools.subPanelMargin);
 	
 		int line = 0;
 		// header

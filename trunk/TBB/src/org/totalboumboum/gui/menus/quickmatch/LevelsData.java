@@ -50,6 +50,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.ImageSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -85,9 +86,9 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 			}
 			
 			int listWidth = (int)(dataWidth*SPLIT_RATIO); 
-			int commandWidth = 2*GuiTools.panelMargin;		
-			int commandHeight = 2*(commandWidth-2*GuiTools.subPanelMargin) + 3*GuiTools.subPanelMargin;
-			int previewWidth = dataWidth - 2*listWidth - 1*GuiTools.panelMargin - commandWidth - 2*GuiTools.subPanelMargin; 
+			int commandWidth = 2*GuiSizeTools.panelMargin;		
+			int commandHeight = 2*(commandWidth-2*GuiSizeTools.subPanelMargin) + 3*GuiSizeTools.subPanelMargin;
+			int previewWidth = dataWidth - 2*listWidth - 1*GuiSizeTools.panelMargin - commandWidth - 2*GuiSizeTools.subPanelMargin; 
 			mainPanel.setOpaque(false);
 			
 			// selected levels
@@ -99,7 +100,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 				mainPanel.add(selectedPanel);
 			}
 			
-			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			mainPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			
 			// commands panel
 			{	commandsPanel = new TransferSubPanel(commandWidth,commandHeight);
@@ -107,7 +108,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 				mainPanel.add(commandsPanel);
 			}
 			
-			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			mainPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			
 			// selection panel
 			{	selectionPanel = new PackBrowserSubPanel(listWidth,dataHeight);
@@ -128,7 +129,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 				previewPanel.setOpaque(false);
 				
 				int upHeight = (int)(dataHeight*0.5); 
-				int downHeight = dataHeight - upHeight - GuiTools.panelMargin; 
+				int downHeight = dataHeight - upHeight - GuiSizeTools.panelMargin; 
 				
 				infosPanel = new LevelSubPanel(previewWidth,upHeight);
 				infosPanel.setShowTitle(false);

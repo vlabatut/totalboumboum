@@ -40,6 +40,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiStringTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
@@ -196,7 +197,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 		}
 		
 		// widths
-		{	int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin - 2*iconWidth - rankWidth;
+		{	int nameWidth = getDataWidth() - (cols-1)*GuiSizeTools.subPanelMargin - 2*iconWidth - rankWidth;
 			if(showControls)
 				nameWidth = nameWidth - controlWidth;
 			int col = 0;

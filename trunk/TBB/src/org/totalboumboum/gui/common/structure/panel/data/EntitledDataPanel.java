@@ -37,6 +37,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -60,10 +61,10 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		setOpaque(false);
 		
 		// size
-		titleHeight = 2*GuiTools.panelMargin;
+		titleHeight = 2*GuiSizeTools.panelMargin;
 		titleFontSize = GuiFontTools.getFontSize(titleHeight*GuiFontTools.FONT_RATIO);
-		dataHeight = height-3*GuiTools.panelMargin-titleHeight;
-		dataWidth = width-2*GuiTools.panelMargin;
+		dataHeight = height-3*GuiSizeTools.panelMargin-titleHeight;
+		dataWidth = width-2*GuiSizeTools.panelMargin;
 		
 		add(Box.createVerticalGlue());
 	

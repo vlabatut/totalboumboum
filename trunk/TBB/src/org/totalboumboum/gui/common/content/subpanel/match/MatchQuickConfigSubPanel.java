@@ -34,6 +34,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -101,7 +102,7 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					col++;
 				}
 				// value
-				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiTools.subPanelMargin;
+				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -145,7 +146,7 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					col++;
 				}
 				// value
-				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiTools.subPanelMargin;
+				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
