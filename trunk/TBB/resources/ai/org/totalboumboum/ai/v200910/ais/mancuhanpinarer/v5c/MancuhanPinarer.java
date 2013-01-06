@@ -714,7 +714,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private boolean isBombExists(AiTile bombTile) throws StopRequestException {
 		checkInterruption();
 		boolean result = true;
-		if (bombTile.getBombs().size() == 0)
+		if (bombTile!=null && bombTile.getBombs().size()==0)
 			result = false;
 		return result;
 	}

@@ -1198,25 +1198,27 @@ public class TirtilTomruk extends ArtificialIntelligence {
 					//On peut se sauver.
 					//Est-ce qu'il peut se sauver
 					int minPath = Integer.MAX_VALUE;
-					for(int m = hero.getTile().getCol() - 3; m <= hero.getTile().getCol() + 3; m++)
-					{
-						for(int n = hero.getTile().getLine() - 3; n <= hero.getTile().getLine() + 3; n++)
+					if(hero!=null && hero.getTile()!=null)
+					{	for(int m = hero.getTile().getCol() - 3; m <= hero.getTile().getCol() + 3; m++)
 						{
-						
-							if(m > 1 && n > 1 && m < zone.getWidth() - 1 && n < zone.getHeight() -1){
-							PathFinder pathFindRival = new PathFinder(zone,zoneDanger,hero.getTile(),zone.getTile(n,m),this,SearchModeEnum.BOMB_SIMULATION);
-							if(pathFindRival.getPath().size() < minPath || pathFindRival.getPath().isEmpty())
+							for(int n = hero.getTile().getLine() - 3; n <= hero.getTile().getLine() + 3; n++)
 							{
-								if(!hero.getTile().equals(zone.getTile(n,m)))
+							
+								if(m > 1 && n > 1 && m < zone.getWidth() - 1 && n < zone.getHeight() -1){
+								PathFinder pathFindRival = new PathFinder(zone,zoneDanger,hero.getTile(),zone.getTile(n,m),this,SearchModeEnum.BOMB_SIMULATION);
+								if(pathFindRival.getPath().size() < minPath || pathFindRival.getPath().isEmpty())
 								{
-									minPath = Integer.MAX_VALUE;
+									if(!hero.getTile().equals(zone.getTile(n,m)))
+									{
+										minPath = Integer.MAX_VALUE;
+									}
+									else
+									{
+										minPath = pathFindRival.getPath().size();
+									}
 								}
-								else
-								{
-									minPath = pathFindRival.getPath().size();
-								}
-							}
-						}}
+							}}
+						}
 					}
 					if(maxTile < minPath)
 					{
