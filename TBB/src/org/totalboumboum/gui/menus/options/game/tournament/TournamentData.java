@@ -34,6 +34,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -66,7 +67,7 @@ public class TournamentData extends EntitledDataPanel implements MouseListener
 			int h = getDataHeight();
 			optionsPanel = new LinesSubPanel(w,h,Mode.BORDER,LINE_COUNT,1,false);
 			int titleWidth = (int)(optionsPanel.getDataWidth()*0.66);
-			int iconWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+			int iconWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
 			
 			// #0 use last players
 			{	Line ln = optionsPanel.getLine(LINE_USE_PLAYERS);

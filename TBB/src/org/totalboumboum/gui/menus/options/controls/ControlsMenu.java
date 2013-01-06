@@ -42,6 +42,7 @@ import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
@@ -80,7 +81,7 @@ public class ControlsMenu extends InnerMenuPanel
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiTools.buttonTextHeight;
+		int buttonHeight = GuiSizeTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
 		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
@@ -88,9 +89,9 @@ public class ControlsMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());
 		buttonPrevious = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,fontSize,this);
 		buttonNext = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_NEXT,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 

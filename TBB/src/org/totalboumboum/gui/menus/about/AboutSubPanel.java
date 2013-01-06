@@ -52,6 +52,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 
@@ -86,7 +87,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 		int buttonsHeight = (int)(GuiFontTools.getPixelHeight(fontSize)/GuiFontTools.FONT_RATIO);
 		fontSize = fontSize*0.75f;
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		int textHeight = getDataHeight() - buttonsHeight - GuiTools.subPanelMargin;
+		int textHeight = getDataHeight() - buttonsHeight - GuiSizeTools.subPanelMargin;
 		
 		{	BoxLayout layout = new BoxLayout(getDataPanel(),BoxLayout.PAGE_AXIS); 
 			getDataPanel().setLayout(layout);
@@ -155,7 +156,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 			getDataPanel().add(textPanel);		
 		}
 		
-		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+		getDataPanel().add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 		
 		// buttons
 		{	// buttons panel

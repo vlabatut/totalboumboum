@@ -50,6 +50,7 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -120,11 +121,11 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonPlayersPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(buttonPublish);
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersNext);
 	}
 	
@@ -133,11 +134,11 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonSettingsPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(buttonSettingsNext);
 	}
 	

@@ -43,6 +43,7 @@ import org.totalboumboum.gui.data.language.Language;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 
@@ -110,7 +111,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -151,7 +152,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -192,7 +193,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);

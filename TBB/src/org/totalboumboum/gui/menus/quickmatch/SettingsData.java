@@ -35,6 +35,7 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -62,7 +63,7 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 				mainPanel.setLayout(layout);
 			}
 			
-			int panelHeight = (dataHeight - GuiTools.panelMargin)/2; 
+			int panelHeight = (dataHeight - GuiSizeTools.panelMargin)/2; 
 			mainPanel.setOpaque(false);
 			
 			// match
@@ -71,7 +72,7 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 				matchPanel.addListener(this);
 			}
 			
-			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
+			mainPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.panelMargin,GuiSizeTools.panelMargin)));
 			
 			// round panel
 			{	roundPanel = new RoundQuickConfigSubPanel(dataWidth,panelHeight);

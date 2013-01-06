@@ -47,6 +47,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiStringTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
@@ -129,7 +130,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		if(showReady)
 			readyWidth = headerHeight;
 		rankWidth = headerHeight;
-		int fixedSum = GuiTools.subPanelMargin*(cols-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth + readyWidth;
+		int fixedSum = GuiSizeTools.subPanelMargin*(cols-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth + readyWidth;
 		int nameWidth = getDataWidth() - fixedSum;
 		
 		// headers

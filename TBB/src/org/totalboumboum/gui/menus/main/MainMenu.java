@@ -50,6 +50,7 @@ import org.totalboumboum.gui.menus.tournament.TournamenuContainer;
 import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
@@ -71,28 +72,28 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		image = GuiConfiguration.getMiscConfiguration().getBackground();
 		
 		// sizes
-		int buttonWidth = GuiTools.buttonTextWidth;
-		int buttonHeight = GuiTools.buttonTextHeight;
+		int buttonWidth = GuiSizeTools.buttonTextWidth;
+		int buttonHeight = GuiSizeTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_MAIN_BUTTON);
 		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 		
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonOptions = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_OPTIONS,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonProfiles = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,buttonWidth,buttonHeight,fontSize,this);
 		buttonStats = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
 		buttonResources = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_RESOURCES,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonTournament = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
 		buttonNetworkGame = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_NETWORK,buttonWidth,buttonHeight,fontSize,this);
 //buttonNetworkGame.setEnabled(false);		
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonLoad = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
 		buttonReplay = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_REPLAY,buttonWidth,buttonHeight,fontSize,this);
 //buttonReplay.setEnabled(false);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonAbout = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		

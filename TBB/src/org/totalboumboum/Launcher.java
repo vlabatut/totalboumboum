@@ -47,6 +47,7 @@ import org.totalboumboum.gui.frames.NormalFrame;
 import org.totalboumboum.gui.frames.QuickFrame;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.tools.GameData;
@@ -143,6 +144,7 @@ public class Launcher
 		// initalize GUI
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
 		GuiFontTools.init();
+		GuiSizeTools.init();
 		GuiTools.init();
 		// load engine stats
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);

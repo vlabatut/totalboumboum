@@ -40,6 +40,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.gui.tools.GuiVideoTools;
 
@@ -118,7 +119,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 //						}
 //						ln.setLabelMaxWidth(col,maxWidth);
 //						ln.setLabelPreferredWidth(col,maxWidth);
-					int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+					int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -154,7 +155,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 //						int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE+GuiKeys.TOOLTIP); 
 //						ln.setLabelMaxWidth(col,txtWidth);
-					int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+					int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -180,7 +181,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					col++;
 				}
 				// value
-				{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+				{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
@@ -205,7 +206,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					col++;
 				}
 				// value
-				{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+				{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);

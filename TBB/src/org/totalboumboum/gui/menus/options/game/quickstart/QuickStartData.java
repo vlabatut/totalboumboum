@@ -51,6 +51,7 @@ import org.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfile
 import org.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
@@ -83,7 +84,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				mainPanel.setLayout(layout);
 			}
 			
-			int margin = GuiTools.panelMargin;
+			int margin = GuiSizeTools.panelMargin;
 			roundHeight = (int)(dataHeight*SPLIT_RATIO); 
 			playersHeight = dataHeight - roundHeight - margin;
 			mainPanel.setOpaque(false);
@@ -218,7 +219,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	private TableSubPanel makeRoundPanel(int width, int height)
 	{	int cols = 3;
 		int lines = 1;
-		int margin = GuiTools.subPanelMargin;
+		int margin = GuiSizeTools.subPanelMargin;
 		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,lines,cols,false);
 //		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();

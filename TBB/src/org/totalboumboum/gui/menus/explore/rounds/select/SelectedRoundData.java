@@ -51,6 +51,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.ImageSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
@@ -86,7 +87,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 				mainPanel.setLayout(layout);
 			}
 			
-			int margin = GuiTools.panelMargin;
+			int margin = GuiSizeTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);

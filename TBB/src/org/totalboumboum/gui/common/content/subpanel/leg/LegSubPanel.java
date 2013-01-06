@@ -45,6 +45,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -76,11 +77,11 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		int dataheight = getDataHeight();
 		int datawidth = getDataWidth();
 		int buttonsHeight = (int)(dataheight*0.06);
-		int partsHeight = dataheight - 2*GuiTools.subPanelMargin - 2*buttonsHeight;
+		int partsHeight = dataheight - 2*GuiSizeTools.subPanelMargin - 2*buttonsHeight;
 		int buttonsWidth = datawidth;
 		int partsWidth = datawidth;
-		int externalButtonsWidth = (buttonsWidth - 2*GuiTools.subPanelMargin)/3;
-		int centralButtonWidth = buttonsWidth - 2*GuiTools.subPanelMargin - 2*externalButtonsWidth;
+		int externalButtonsWidth = (buttonsWidth - 2*GuiSizeTools.subPanelMargin)/3;
+		int centralButtonWidth = buttonsWidth - 2*GuiSizeTools.subPanelMargin - 2*externalButtonsWidth;
 		
 		// buttons up panel
 		{	upPanel = new JPanel();
@@ -114,7 +115,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setMouseSensitive(true);
 				upPanel.add(label);
 			}
-			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			upPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// up
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -131,7 +132,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setMouseSensitive(true);
 				upPanel.add(label);
 			}
-			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			upPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// right
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -203,7 +204,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setMouseSensitive(true);
 				downPanel.add(label);
 			}
-			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			downPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// up
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -220,7 +221,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setMouseSensitive(true);
 				downPanel.add(label);
 			}
-			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			downPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// right
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -278,7 +279,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		int partsWidth = partsPanel.getPreferredSize().width;
 		int partsHeight = partsPanel.getPreferredSize().height;
 		int partWidth = partsWidth;
-		int partHeight = (int)(partsHeight - (partsPerPage-1)*GuiTools.subPanelMargin)/partsPerPage;
+		int partHeight = (int)(partsHeight - (partsPerPage-1)*GuiSizeTools.subPanelMargin)/partsPerPage;
 		
 		pageCount = getPageCount();
 		

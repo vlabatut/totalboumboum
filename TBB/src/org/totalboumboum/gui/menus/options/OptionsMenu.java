@@ -46,6 +46,7 @@ import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
@@ -88,7 +89,7 @@ public class OptionsMenu extends InnerMenuPanel
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiTools.buttonTextHeight;
+		int buttonHeight = GuiSizeTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
 		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
@@ -101,7 +102,7 @@ public class OptionsMenu extends InnerMenuPanel
 		buttonStatistics = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
 		buttonAis = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_AIS,buttonWidth,buttonHeight,fontSize,this);
 		buttonAdvanced = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 

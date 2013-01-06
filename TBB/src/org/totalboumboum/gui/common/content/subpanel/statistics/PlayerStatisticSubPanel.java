@@ -49,6 +49,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -93,17 +94,17 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		}
 		
 		// sizes
-		int buttonHeight = GuiTools.subPanelTitleHeight;
-		int regularButtonWidth = (getDataWidth() - 4*GuiTools.subPanelMargin)/5;
-		int centerButtonWidth = getDataWidth()- 4*regularButtonWidth - 4*GuiTools.subPanelMargin;
-		int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.subPanelMargin;
+		int buttonHeight = GuiSizeTools.subPanelTitleHeight;
+		int regularButtonWidth = (getDataWidth() - 4*GuiSizeTools.subPanelMargin)/5;
+		int centerButtonWidth = getDataWidth()- 4*regularButtonWidth - 4*GuiSizeTools.subPanelMargin;
+		int mainPanelHeight = getDataHeight() - buttonHeight - GuiSizeTools.subPanelMargin;
 		
 		// main panel
 		{	mainPanel = new TableSubPanel(getDataWidth(),mainPanelHeight,Mode.NOTHING,1,1,true);
 			dataPanel.add(mainPanel);
 		}
 		
-		dataPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+		dataPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 		
 		// buttons
 		{	// buttons panel
@@ -134,7 +135,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// type
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -151,7 +152,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// ranks
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -168,7 +169,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// sum/mean
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -185,7 +186,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
 			// down
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
@@ -378,7 +379,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		{	int colName = columns.indexOf(StatisticColumn.GENERAL_NAME);
 			// process name width
 			if(colName!=-1)
-			{	colWidths[colName] = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
+			{	colWidths[colName] = getDataWidth() - (cols-1)*GuiSizeTools.subPanelMargin;
 				for(int col=0;col<cols;col++)
 				{	if(col!=colName)
 						colWidths[colName] = colWidths[colName] - colWidths[col];

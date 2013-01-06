@@ -40,6 +40,7 @@ import org.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -61,7 +62,7 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 				infoPanel.setLayout(layout);
 			}
 
-			int margin = GuiTools.panelMargin;
+			int margin = GuiSizeTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);

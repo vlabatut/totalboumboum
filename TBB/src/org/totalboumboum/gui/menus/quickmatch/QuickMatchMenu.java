@@ -73,6 +73,7 @@ import org.totalboumboum.gui.menus.quickmatch.SettingsData;
 import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
@@ -149,11 +150,11 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonPlayersPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(buttonPublish);
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersNext);
 		refreshButtons();
 	}
@@ -163,11 +164,11 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonLevelsPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(buttonLevelsNext);
 		refreshButtons();
 	}
@@ -177,11 +178,11 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonSettingsPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(buttonSettingsNext);
 		refreshButtons();
 	}

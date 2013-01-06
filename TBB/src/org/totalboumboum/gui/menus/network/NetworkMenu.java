@@ -48,6 +48,7 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
@@ -113,11 +114,11 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonGamesPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(buttonGamesNext);
 	}
 	
@@ -127,11 +128,11 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonPlayersPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersValidate);
 	}
 	

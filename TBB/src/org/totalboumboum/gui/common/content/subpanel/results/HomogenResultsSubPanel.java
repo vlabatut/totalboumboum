@@ -40,6 +40,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
@@ -340,7 +341,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			}
 			
 			// col widths
-			nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
+			nameWidth = getDataWidth() - (cols-1)*GuiSizeTools.subPanelMargin;
 			col = 0;
 			if(showRank) 
 			{	setColSubMinWidth(col,rankWidth);

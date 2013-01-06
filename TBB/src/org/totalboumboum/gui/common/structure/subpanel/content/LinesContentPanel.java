@@ -34,6 +34,7 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -151,11 +152,11 @@ public class LinesContentPanel extends ContentPanel
 				headerFontSize = 0;
 		}
 		else
-		{	int margins = (lines-1)*GuiTools.subPanelMargin;
+		{	int margins = (lines-1)*GuiSizeTools.subPanelMargin;
 			// with header
 			if(header)
-			{	int lineHeight = (int)((height - margins)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
-				int headerHeight = (int)(lineHeight*GuiTools.TABLE_HEADER_RATIO);
+			{	int lineHeight = (int)((height - margins)/(lines+GuiSizeTools.TABLE_HEADER_RATIO-1));
+				int headerHeight = (int)(lineHeight*GuiSizeTools.TABLE_HEADER_RATIO);
 				headerFontSize = GuiFontTools.getFontSize(headerHeight*GuiFontTools.FONT_RATIO);
 				lineHeights.add(headerHeight);
 				for(int i=1;i<lines;i++)

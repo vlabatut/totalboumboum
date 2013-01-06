@@ -35,6 +35,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -70,7 +71,7 @@ public class InitialItemsSubPanel extends TableSubPanel
 		// widths
 		int lineHeight = getLineHeight();
 		int iconWidth = lineHeight;
-		int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiTools.subPanelMargin*(COL_SUBS*colGroups-1)))/colGroups;
+		int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiSizeTools.subPanelMargin*(COL_SUBS*colGroups-1)))/colGroups;
 		
 		if(levelPreview!=null)
 		{	if(levelPreview.getInitialItems().size()>lines*colGroups)

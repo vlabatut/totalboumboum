@@ -45,6 +45,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Column;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
@@ -92,8 +93,8 @@ public class TournamentEvolutionSubPanel extends ColumnsSubPanel implements Mous
 		{	// colors
 			{	PredefinedColor colorValues[] = PredefinedColor.values();		
 				colorLines = colorValues.length;
-				colorWidth = (getDataHeight() - (colorLines-1)*GuiTools.subPanelMargin) / colorLines;
-				int temp = getDataHeight() - (colorLines-1)*GuiTools.subPanelMargin - colorLines*colorWidth;
+				colorWidth = (getDataHeight() - (colorLines-1)*GuiSizeTools.subPanelMargin) / colorLines;
+				int temp = getDataHeight() - (colorLines-1)*GuiSizeTools.subPanelMargin - colorLines*colorWidth;
 				colorFirstLineHeight = colorWidth + temp/2;
 				colorLastLineHeight = colorWidth + (temp - temp/2);
 			}
@@ -101,13 +102,13 @@ public class TournamentEvolutionSubPanel extends ColumnsSubPanel implements Mous
 			// scores
 			{	Score scoreValues[] = Score.values();
 				scoreLines = scoreValues.length + 1;
-				scoreWidth = (getDataHeight() - (scoreLines-1)*GuiTools.subPanelMargin) / scoreLines;
-				scoreFirstLineHeight = getDataHeight() - (scoreLines-1)*GuiTools.subPanelMargin - (scoreLines-1)*scoreWidth;
+				scoreWidth = (getDataHeight() - (scoreLines-1)*GuiSizeTools.subPanelMargin) / scoreLines;
+				scoreFirstLineHeight = getDataHeight() - (scoreLines-1)*GuiSizeTools.subPanelMargin - (scoreLines-1)*scoreWidth;
 			}
 			
 			// plot
-			{	plotWidth = getDataWidth() - colorWidth - colorWidth - 2*GuiTools.subPanelMargin;
-//				plotWidth = getDataWidth() - scoreWidth - colorWidth - 2*GuiTools.subPanelMargin;
+			{	plotWidth = getDataWidth() - colorWidth - colorWidth - 2*GuiSizeTools.subPanelMargin;
+//				plotWidth = getDataWidth() - scoreWidth - colorWidth - 2*GuiSizeTools.subPanelMargin;
 			}
 		}
 		
