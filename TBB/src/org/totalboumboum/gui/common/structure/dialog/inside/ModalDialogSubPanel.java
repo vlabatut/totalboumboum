@@ -39,7 +39,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
@@ -66,7 +66,7 @@ public abstract class ModalDialogSubPanel extends EmptySubPanel implements Mouse
 		result.setForeground(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
 		result.setOpaque(true);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
-		BufferedImage icon = GuiTools.getIcon(key);
+		BufferedImage icon = GuiImageTools.getIcon(key);
 		ImageIcon icn = null;
 		if(icon!=null)
 		{	double zoom = buttonsHeight/(double)icon.getHeight();

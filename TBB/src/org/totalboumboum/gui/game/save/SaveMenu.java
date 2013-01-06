@@ -47,7 +47,7 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;

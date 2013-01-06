@@ -21,28 +21,12 @@ package org.totalboumboum.gui.tools;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JToggleButton;
-
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.gui.common.structure.ButtonAware;
-import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
@@ -51,76 +35,23 @@ import org.totalboumboum.tools.images.ImageTools;
  * 
  * @author Vincent Labatut
  */
-public class GuiTools
+public class GuiImageTools
 {	
-	/////////////////////////////////////////////////////////////////
-	// INIT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	/**
-	 * Initializes the fields in this class,
-	 * for a full GUI.
+	 * Initializes all images.
 	 */
 	public static void init()
-	{	initImages();
+	{	// absent
+		absentImage = ImageTools.getAbsentImage(64,64);
+		
+		// init
+		initButtonImages();
+		initHeaderImages();
+		initDataImages();		
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// STARTUP			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Startup message index */
-	public static final int STARTUP_XML = 0;
-	/** Startup message index */
-	public static final int STARTUP_CONFIG = 1;
-	/** Startup message index */
-	public static final int STARTUP_GUI = 2;
-	/** Startup message index */
-	public static final int STARTUP_INIT = 3;
-	/** Startup message index */
-	public static final int STARTUP_STATS = 4;
-	/** Startup message index */
-	public static final int STARTUP_DONE = 5;
-	/** Array of startup messages */
-	public static final String STARTUP_MESSAGES[] = 
-	{	"[Loading XML schemas]",
-		"[Loading configuration]",
-		"[Loading GUI]",
-		"[Initializing GUI]",
-		"[Loading statistics]",
-		"[Done]"
-	};
-	/** Copyright message */
-	public static final String STARTUP_LEGAL[] = 
-	{	"Total Boum Boum version "+GameData.VERSION,
-		new Character('\u00A9').toString()+" 2008-2013 Vincent Labatut",
-		"Licensed under the GPL v2"
-	};
-	
-	/////////////////////////////////////////////////////////////////
-	// HELP				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Help message */
-	public static final String OPTION_HELP_MESSAGE = "In-line parameters allowed for this software:";
-	/** Option index */
-	public static final int OPTION_HELP = 0;
-	/** Option index */
-	public static final int OPTION_QUICK = 1;
-	/** Option index */
-	public static final int OPTION_WINDOW = 2;
-	/** Options tags */
-	public static final String OPTIONS[] = 
-	{	"help",
-		"quick",
-		"window"
-	};
-	/** Option descriptions */
-	public static final String OPTIONS_HELP[] = 
-	{	"show this page (and does not launch the game)",
-		"launch the game in quick mode, i.e. with a minimal graphical interface, and allows playing only one predefined round",
-		"force the game to be displayed in a window, even if full screen is set in the game options"
-	};
 
 	/////////////////////////////////////////////////////////////////
-	// IMAGES			/////////////////////////////////////////////
+	// GENERAL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Part of an icon button file name */
 	protected static final String ICON_NORMAL = "normal";
@@ -136,11 +67,11 @@ public class GuiTools
 	protected static final String ICON_ROLLOVER_SELECTED = "rollover_selected";
 	/** Part of an icon button file name */
 	protected static final String ICON_PRESSED = "pressed";
-	/** Standard replacement image used when some image is missing */
-	protected static BufferedImage absentImage;	
 	/** List of images already loaded */
 	protected static final Map<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
-	
+	/** Standard replacement image used when some image is missing */
+	protected static BufferedImage absentImage;	
+		
 	/**
 	 * Get the image for the specified key.
 	 * 
@@ -194,18 +125,9 @@ public class GuiTools
 		return image;	
 	}
 	
-	/**
-	 * Initializes all images.
-	 */
-	private static void initImages()
-	{	// absent
-		absentImage = ImageTools.getAbsentImage(64,64);
-		// init
-		initButtonImages();
-		initHeaderImages();
-		initDataImages();		
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Load all images for a button.
 	 * 
@@ -360,6 +282,9 @@ public class GuiTools
 		}
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TABLES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Load the images for table-related icons.
 	 * 
@@ -1479,15 +1404,5 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public static int indexOfComponent(Container container, Component component)
-	{	Component[] components = container.getComponents();
-		List<Component> list = Arrays.asList(components);
-		int result = list.indexOf(component);
-		return result;
 	}
 }

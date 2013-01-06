@@ -45,8 +45,9 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 
@@ -334,7 +335,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private void refreshList()
 	{	EmptyContentPanel dataPanel = getDataPanel();
 		// remove the old panel
-		int index = GuiTools.indexOfComponent(dataPanel,mainPanel);
+		int index = GuiMiscTools.indexOfComponent(dataPanel,mainPanel);
 		dataPanel.remove(index);
 		
 		// put the new one
@@ -490,7 +491,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	MyLabel label = (MyLabel)e.getComponent();
-		int pos = GuiTools.indexOfComponent(buttonsPanel,label);
+		int pos = GuiMiscTools.indexOfComponent(buttonsPanel,label);
 		// bottom buttons
 		if(pos!=-1)
 		{	// previous page

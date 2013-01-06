@@ -73,8 +73,9 @@ import org.totalboumboum.gui.menus.quickmatch.SettingsData;
 import org.totalboumboum.gui.tools.GuiButtonTools;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -451,7 +452,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH))
 		{	// update buttons
 			buttonPlayersPrevious.setEnabled(false);
-			int index = GuiTools.indexOfComponent(this,buttonPublish);
+			int index = GuiMiscTools.indexOfComponent(this,buttonPublish);
 			remove(index);
 			add(buttonBlockPlayers,index);
 			revalidate();

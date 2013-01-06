@@ -41,7 +41,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.detailed.Score;
 
 /**
@@ -224,7 +224,7 @@ public class PointsSubPanel extends TableSubPanel
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.RANKPOINTS;
-			BufferedImage image = GuiTools.getIcon(name);
+			BufferedImage image = GuiImageTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
@@ -233,7 +233,7 @@ public class PointsSubPanel extends TableSubPanel
 				name = prefix+GuiKeys.DATA+GuiKeys.SHARE;
 			else
 				name = prefix+GuiKeys.DATA+GuiKeys.NO+GuiKeys.SHARE;
-			image = GuiTools.getIcon(name);
+			image = GuiImageTools.getIcon(name);
 			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
@@ -277,7 +277,7 @@ public class PointsSubPanel extends TableSubPanel
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.DISCRETIZE;
-			BufferedImage image = GuiTools.getIcon(name);
+			BufferedImage image = GuiImageTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);				
@@ -321,7 +321,7 @@ public class PointsSubPanel extends TableSubPanel
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.RANKINGS;
-			BufferedImage image = GuiTools.getIcon(name);
+			BufferedImage image = GuiImageTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			if(inverted)
 				name = prefix+GuiKeys.DATA+GuiKeys.INVERTED;
@@ -355,7 +355,7 @@ public class PointsSubPanel extends TableSubPanel
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.CONSTANT;
-		BufferedImage image = GuiTools.getIcon(name);
+		BufferedImage image = GuiImageTools.getIcon(name);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);
@@ -370,7 +370,7 @@ public class PointsSubPanel extends TableSubPanel
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.TOTAL;
-		BufferedImage image = GuiTools.getIcon(name);
+		BufferedImage image = GuiImageTools.getIcon(name);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);
@@ -386,7 +386,7 @@ public class PointsSubPanel extends TableSubPanel
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.SCORE;
-		BufferedImage image = GuiTools.getIcon(name);
+		BufferedImage image = GuiImageTools.getIcon(name);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);
@@ -417,7 +417,7 @@ public class PointsSubPanel extends TableSubPanel
 				name = prefix+GuiKeys.DATA+GuiKeys.TIME;
 				break;					
 		}
-		image = GuiTools.getIcon(name);
+		image = GuiImageTools.getIcon(name);
 		tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);

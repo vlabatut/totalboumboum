@@ -39,7 +39,7 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.stream.file.archive.GameArchiveLoader;
 import org.totalboumboum.tools.files.FileNames;

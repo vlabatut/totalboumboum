@@ -19,7 +19,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 import org.totalboumboum.gui.tools.GuiFontTools;
-import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * most of this class was adapted from a work by Adam Walker <adam@walkersoftware.net>
