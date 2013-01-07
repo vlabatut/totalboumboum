@@ -100,7 +100,6 @@ public class LeagueTournament extends AbstractTournament
 	@Override
 	public void rewind()
 	{	currentIndex = 0;
-		
 	}
 	
 	/////////////////////////////////////////////////////////////////

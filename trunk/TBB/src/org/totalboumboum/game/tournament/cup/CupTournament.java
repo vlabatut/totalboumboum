@@ -104,8 +104,6 @@ public class CupTournament extends AbstractTournament
 	@Override
 	public void rewind()
 	{	currentIndex = 0;
-// TODO seulement s'il y a un match terminé ou entammé. sinon faut renvoyer null.
-// >> pas obligé : suffit d'afficher des panels vides. (possible ?)
 		currentLeg = legs.get(currentIndex);
 		currentLeg.rewind();
 	}

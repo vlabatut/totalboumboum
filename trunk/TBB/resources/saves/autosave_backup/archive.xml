@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut
@@ -20,25 +20,25 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="0" rounds="4" />
-	<dates start="2013-01-07T18:24:20" save="2013-01-07T18:26:59" />
+	<played matches="15" rounds="1" />
+	<dates start="2013-01-07T20:33:42" save="2013-01-07T20:56:22" />
 	<players>
-		<player name="1112.Sakar+Yaşar" />
-		<player name="1112.Demirel+Öz" />
-		<player name="0910.Fındık+Şırın" />
-		<player name="0809.Kökciyan+Mazmanoğlu" />
-		<player name="1213.Alçar+Kaya+Yıldırım" />
-		<player name="0809.Dayioğlugil+Geçkalan" />
-		<player name="0708.Kurtuluş+Özsoy" />
-		<player name="0708.Demirkol+Doğan" />
-		<player name="1213.Besnili+Kangal" />
-		<player name="0809.Akpolat+Şener" />
-		<player name="0708.Çağlayan+Elmas" />
-		<player name="0708.Şahin+Yıldırım" />
-		<player name="1011.Çalışkan+Seven" />
-		<player name="1112.Arık+Köseoğlu" />
-		<player name="1011.Özdöker+Özen" />
-		<player name="1011.Kayuka+Yıldırım" />
+		<player name="1112.Cap+Munavarov" />
+		<player name="0708.Göksay+Köse" />
+		<player name="1112.Kayuka+Taşkın" />
+		<player name="1112.Çalışkan+Geçkalan+Seven" />
+		<player name="0708.Baydar+Camcı" />
+		<player name="0910.Aksoy+Tangay" />
+		<player name="1011.Avcı+Güngör" />
+		<player name="1213.Kart+Turgut" />
+		<player name="1213.Çıplak+Erakyol" />
+		<player name="0708.Keçer+Yaman" />
+		<player name="1213.Sağlam+Seven" />
+		<player name="0708.Cirit+Mutlu" />
+		<player name="Promeneur" />
+		<player name="1112.İlter+Kaya" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="0809.Çalışkan+Cap+Doğaner" />
 	</players>
 </archive>
 
