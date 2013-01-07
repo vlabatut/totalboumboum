@@ -42,7 +42,6 @@
   		<round local="true" name="roundEntrance" />
   		<round local="true" name="roundItems" />
   		<round local="true" name="roundLine" />
-  		<round local="true" name="roundPasaj" />
   		<round local="true" name="roundPower" />
   		<round local="true" name="roundReadysetgo" />
   	</rounds>
