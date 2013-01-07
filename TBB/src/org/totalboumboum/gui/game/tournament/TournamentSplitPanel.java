@@ -31,18 +31,30 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * This class is the main panel used
+ * when displaying the tournament
+ * during game. It contains a menu
+ * panel (bottom menu) and a data
+ * panel (actual content).
  * 
  * @author Vincent Labatut
- *
  */
 public class TournamentSplitPanel extends SplitMenuPanel
-{	private static final long serialVersionUID = 1L;
-
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Background image */
 	private BufferedImage image;
 
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel
+	 * @param parent
+	 * 		Parent menu.
+	 */
 	public TournamentSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiSizeTools.HORIZONTAL_SPLIT_RATIO);
 	
@@ -57,6 +69,10 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// REFRESH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Update the buttons depending on 
+	 * the tournament state.
+	 */
 	public void refreshButtons()
 	{	((TournamentMenu)menuPart).refreshButtons();
 	}
@@ -64,6 +80,12 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Automatically clicks on the appropriate
+	 * buttons in order to progress in the tournament.
+	 * Used to automatically chain many tournaments,
+	 * while evaluating agents.
+	 */
 	public void autoAdvance()
 	{	((TournamentMenu)menuPart).autoAdvance();
 	}

@@ -714,7 +714,8 @@
 				<text name="Description" value="Description" tooltip="Voir la description de la rencontre courante" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="Finish" value="Finir" tooltip="Finir la rencontre courante et revenir au tournoi courant" />
-				<text name="NextRound" value="Rencontre suivante" tooltip="Commencer la manche suivante" />
+				<text name="NextRound" value="Manche suivante" tooltip="Commencer la manche suivante" />
+				<text name="PreviousRound" value="Manche précédente" tooltip="Revenir à la manche précédente" />
 				<text name="RecordGames" value="Enregistrement des manches" tooltip="Enregistrement des manches pour les revoir plus tard" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels de la rencontre courante" />
 				<text name="Save" value="Enregistrer" tooltip="Enregistrer la partie courante" />
@@ -737,6 +738,7 @@
 				<text name="CurrentMatch" value="Rencontre courante" tooltip="Aller à la rencontre courante" />
 				<text name="Description" value="Description" tooltip="Voir la description de la manche courante" />
 				<text name="Finish" value="Finir" tooltip="Finir la manche courante et revenir à la rencontre courante" />
+				<text name="NextMatch" value="Rencontre suivante" tooltip="Aller au match suivant" />
 				<text name="Play" value="Jouer" tooltip="Commencer à jouer" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="RecordGames" value="Enregistrement des manches" tooltip="Enregistrement des manches pour les revoir plus tard" />
