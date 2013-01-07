@@ -68,7 +68,9 @@ public class KecerYaman extends ArtificialIntelligence {
 	{	action = AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)
-			firstTime = false;
+		{	firstTime = false;
+			AStar.init(getZoneMatrixDimY(),getZoneMatrixDimX());
+		}
 		else
 		{	
 		// initialization of our map that is used during 
@@ -364,9 +366,9 @@ public class KecerYaman extends ArtificialIntelligence {
 		else if ( getTimeBeforeShrink() > 1000 ){	
 			if ( bombPlanted() ){
 //				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
 //					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
+					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) <= VAL_EMPTY ){
 							min[0] = x;
 							min[1] = y;
@@ -376,9 +378,9 @@ public class KecerYaman extends ArtificialIntelligence {
 				}
 			}else{
 //				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
 //					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
+					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							updateGroupPoint ( x , y );
 						}
@@ -386,9 +388,9 @@ public class KecerYaman extends ArtificialIntelligence {
 				}
 				
 //				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
 //					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
+					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							updatePositionPoint ( x , y );
 						}
@@ -396,9 +398,9 @@ public class KecerYaman extends ArtificialIntelligence {
 				}
 				
 //				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 1 ; y <= getZoneMatrixDimY() ; y++ ){ //adjustment
+				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
 //					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 1 ; x <= getZoneMatrixDimX() ; x++ ){ //adjustment
+					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							if ( Map.getValue(x,y) < Map.getValue(min[0], min[1])){
 								min[0] = x;

@@ -118,7 +118,7 @@ public class AStar {
 	 * @param y
 	 */
 	public static void addToClosedList ( int x , int y ){
-		AStar.closedListCheck[ (x + 17*y) ] = true;
+		AStar.closedListCheck[ (x + width*y) ] = true;
 	}
 	/**
 	 * 
@@ -126,7 +126,7 @@ public class AStar {
 	 * @param y
 	 */
 	public static void addToOpenList ( int x , int y ){
-		AStar.openListCheck[ (x + 17*y) ] = true;
+		AStar.openListCheck[ (x + width*y) ] = true;
 	}
 	/**
 	 * 
@@ -134,7 +134,7 @@ public class AStar {
 	 * @param y
 	 */
 	public static void removeFromClosedList ( int x , int y ){
-		AStar.closedListCheck[ (x + 17*y) ] = false;
+		AStar.closedListCheck[ (x + width*y) ] = false;
 	}
 	/**
 	 * 
@@ -142,7 +142,7 @@ public class AStar {
 	 * @param y
 	 */
 	public static void removeFromOpenList ( int x , int y ){
-		AStar.openListCheck[ (x + 17*y) ] = false;
+		AStar.openListCheck[ (x + width*y) ] = false;
 	}
 	/**
 	 * 
@@ -152,7 +152,7 @@ public class AStar {
 	 * 		? 
 	 */
 	public static boolean isInClosedList ( int x , int y ){
-		return AStar.closedListCheck[ (x + 17*y) ];
+		return AStar.closedListCheck[ (x + width*y) ];
 	}
 	/**
 	 * 
@@ -180,7 +180,7 @@ public class AStar {
 	 * 		? 
 	 */
 	public static boolean isInOpenList ( int x , int y ){
-		return AStar.openListCheck[ (x + 17*y) ];
+		return AStar.openListCheck[ (x + width*y) ];
 	}
 	/**
 	 * 
@@ -225,5 +225,17 @@ public class AStar {
 		}
 //		this.startNode = startNode;
 		AStar.target = target;
+	}
+	
+	private static int width;
+	
+	/**
+	 * 
+	 * @param height
+	 * @param width
+	 */
+	public static void init(int height, int width)
+	{
+		AStar.width = width;
 	}
 }

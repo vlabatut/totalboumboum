@@ -339,7 +339,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		else if(mode==AiMode.COLLECTING)
 			bCoeff = 0;
 		Integer limit = maxUtilities.get(mode);
-		if(limit==0)
+		if(limit==null || limit==0)
 			limit = 50;
 		AiOutput output = ai.getOutput();
 		
