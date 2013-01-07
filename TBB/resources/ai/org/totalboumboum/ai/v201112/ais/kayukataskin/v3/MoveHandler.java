@@ -42,7 +42,7 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 		ai.checkInterruption();
 		
 		// on règle la sortie texte pour ce gestionnaire
-		verbose = true;
+		verbose = false;
 		zone = ai.getZone();
 		ownHero = zone.getOwnHero();
 	}

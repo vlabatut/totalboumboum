@@ -23,7 +23,7 @@ public class EnginSazan extends ArtificialIntelligence
 	 */
 	public EnginSazan()
 	{	// active/désactive la sortie texte
-		verbose = true;
+		verbose = false;
 	}
 	
 	@Override

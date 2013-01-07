@@ -87,7 +87,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 		ai.checkInterruption();
 		
 		// on règle la sortie texte pour ce gestionnaire
-		verbose = true;
+		verbose = false;
 		zone = ai.getZone();
 		ownHero = zone.getOwnHero();
 		

@@ -23,7 +23,7 @@ public class KayukaTaskin extends ArtificialIntelligence
 	{	checkInterruption();
 		
 		super.init();
-		verbose = true;
+		verbose = false;
 		
 		//  à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement, et qui

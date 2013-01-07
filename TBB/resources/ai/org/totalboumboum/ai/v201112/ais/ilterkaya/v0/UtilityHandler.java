@@ -39,7 +39,7 @@ public class UtilityHandler extends AiUtilityHandler<IlterKaya>
 		ai.checkInterruption();
 		
 		// on règle la sortie texte pour ce gestionnaire
-		verbose = true;
+		verbose = false;
 	
 		// à compléter
 	}

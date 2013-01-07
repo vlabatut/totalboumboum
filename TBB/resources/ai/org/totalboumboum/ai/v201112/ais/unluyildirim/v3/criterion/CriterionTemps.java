@@ -91,35 +91,36 @@ public class CriterionTemps extends AiUtilityCriterionBoolean
 			
 			zone_hero =zone.getRemainingOpponents();
 			i=0;
-			distance=zone.getTileDistance(zone_hero.get(0).getTile(),zone.getOwnHero().getTile());
-			AiHero hero_proche = zone_hero.get(0);
-			for(AiHero hero : zone_hero )
-			{
-				ai.checkInterruption();
-				distance_tile = zone.getTileDistance(hero.getTile(),zone.getOwnHero().getTile());
-				
-				i++;
-				if(distance_tile<distance)
-					{
+			if(!zone_hero.isEmpty())
+			{	distance=zone.getTileDistance(zone_hero.get(0).getTile(),zone.getOwnHero().getTile());
+				AiHero hero_proche = zone_hero.get(0);
+				for(AiHero hero : zone_hero )
+				{
 					ai.checkInterruption();
+					distance_tile = zone.getTileDistance(hero.getTile(),zone.getOwnHero().getTile());
 					
-						distance = distance_tile ;
-						hero_proche = hero ;
+					i++;
+					if(distance_tile<distance)
+						{
+						ai.checkInterruption();
 						
-						
-					}
-
-			}
-
-			if(zone.getTileDistance(tile, hero_proche.getTile()) <= myHero.getBombRange())
-			{
-			//Si le tile possede le plus proche item/adversaire , il renvoie true.
-				return true;
-			}
-			else
-				return false;
-		
+							distance = distance_tile ;
+							hero_proche = hero ;
+							
+							
+						}
 	
+				}
+	
+				if(zone.getTileDistance(tile, hero_proche.getTile()) <= myHero.getBombRange())
+				{
+				//Si le tile possede le plus proche item/adversaire , il renvoie true.
+					return true;
+				}
+				else
+					return false;
+			}
+			return true;
 	}
 
 		return result;

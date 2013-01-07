@@ -18,6 +18,7 @@ public class ModeHandler extends AiModeHandler<KartTurgut>
 {	
 	/** */
 	private AiHero notreHero;
+	
 	/**
 	 * Constructs a handler for the agent passed as a parameter.
 	 * 
@@ -31,10 +32,8 @@ public class ModeHandler extends AiModeHandler<KartTurgut>
     {	super(ai);
 		ai.checkInterruption();
 		
+    	notreHero = ai.getZone().getOwnHero();
 		verbose = false;
-		
-		
-		
 	}
 
     
@@ -42,9 +41,11 @@ public class ModeHandler extends AiModeHandler<KartTurgut>
 	protected boolean hasEnoughItems() throws StopRequestException
 	{
 		ai.checkInterruption();
-			if(notreHero.getBombNumberMax() > 2 && notreHero.getBombRange() >= 2)
+		if(notreHero==null)
+			return true;
+		else if(notreHero.getBombNumberMax() > 2 && notreHero.getBombRange() >= 2)
 	        return true;
-			else 
+		else 
 			return false;
 	             
 	}

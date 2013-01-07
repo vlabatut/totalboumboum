@@ -202,6 +202,7 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 		{
 			Set<AiUtilityCriterion<?>> criteria= new TreeSet<AiUtilityCriterion<?>>();
 			criteria.add(criterionFirst);
+criteria.add(criterionSecond);
 			caseCollectBonus=new AiUtilityCase("CASE_BONUS",criteria);
 			cases.put("CASE_BONUS",caseCollectBonus);
 		}
@@ -274,8 +275,9 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 		// possibles, donc ça faiut 15 combinaisons au total
 		// la définition de l'utilité de ces combinaisons
 		// se fait de la même façon que ci dessus
-		{	combi = new AiUtilityCombination(caseCollectBonus);
-			combi.setCriterionValue(criterionSecond,1);
+		{	combi = new AiUtilityCombination(caseAttack);
+//			combi = new AiUtilityCombination(caseCollectBonus);
+//			combi.setCriterionValue(criterionSecond,1);
 			combi.setCriterionValue(criterionThird,CriterionThird.VALUE1);
 			referenceUtilities.put(combi,utility);
 			utility++;

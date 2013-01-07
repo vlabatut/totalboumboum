@@ -32,103 +32,106 @@ public class BombHandler extends AiBombHandler<KartTurgut>
     {	super(ai);
     	ai.checkInterruption();
 		
-		
-		verbose = true;
+    	notreHero = ai.getZone().getOwnHero();
+		verbose = false;
 		
 		
 	}
 	/** */
 	private AiHero notreHero;
+	
     /////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	protected boolean considerBombing() throws StopRequestException
 	{	ai.checkInterruption();
-		boolean onPeutBomber=false;
-		boolean mur=false;
-		int flamme= notreHero.getBombRange();
-		AiTile notreTile = notreHero.getTile();
-	    		
-		if(notreHero.getBombNumberMax()>0){
-			if(onPeutBomber)
-			{
-				if(ai.modeHandler.isCollectPossible()){
-					
-					int i;
-					for(i=0;i<flamme;i++){
-		            	ai.checkInterruption();
-		            	if(notreTile.getNeighbor(Direction.UP).getBlocks()!=null){
-							mur=true;
-						}
-						notreTile=notreTile.getNeighbor(Direction.UP);
-					}
-					for(i=0;i<flamme;i++){
-						ai.checkInterruption();
-						if(notreTile.getNeighbor(Direction.DOWN).getBlocks()!=null){
-							mur=true;
-						}
-						notreTile=notreTile.getNeighbor(Direction.DOWN);
-					}
-					for(i=0;i<flamme;i++){
-						ai.checkInterruption();
-						if(notreTile.getNeighbor(Direction.LEFT).getBlocks()!=null){
-							mur=true;
-						}
-						notreTile=notreTile.getNeighbor(Direction.LEFT);
-					}
-					for(i=0;i<flamme;i++){
-						ai.checkInterruption();
-						if(notreTile.getNeighbor(Direction.RIGHT).getBlocks()!=null){
-							mur=true;
-						}
-						notreTile=notreTile.getNeighbor(Direction.RIGHT);
-					}
-					if(mur){
-						return true;
-					}
-					
-				}
-				else
+		if(notreHero!=null)
+		{	boolean onPeutBomber=false;
+			boolean mur=false;
+			int flamme= notreHero.getBombRange();
+			AiTile notreTile = notreHero.getTile();
+		    		
+			if(notreHero.getBombNumberMax()>0){
+				if(onPeutBomber)
 				{
-					int i;
-					for(i=0;i<flamme;i++){
-						ai.checkInterruption();
-						if(notreTile.getNeighbor(Direction.UP).getHeroes()!=null){
-							mur=true;
+					if(ai.modeHandler.isCollectPossible()){
+						
+						int i;
+						for(i=0;i<flamme;i++){
+			            	ai.checkInterruption();
+			            	if(notreTile.getNeighbor(Direction.UP).getBlocks()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.UP);
 						}
-						notreTile=notreTile.getNeighbor(Direction.UP);
-					}
-					for(i=0;i<flamme;i++){
-						ai.checkInterruption();
-						if(notreTile.getNeighbor(Direction.DOWN).getHeroes()!=null){
-							mur=true;
+						for(i=0;i<flamme;i++){
+							ai.checkInterruption();
+							if(notreTile.getNeighbor(Direction.DOWN).getBlocks()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.DOWN);
 						}
-						notreTile=notreTile.getNeighbor(Direction.DOWN);
-					}
-					for(i=0;i<flamme;i++){
-						ai.checkInterruption();
-						if(notreTile.getNeighbor(Direction.LEFT).getHeroes()!=null){
-							mur=true;
+						for(i=0;i<flamme;i++){
+							ai.checkInterruption();
+							if(notreTile.getNeighbor(Direction.LEFT).getBlocks()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.LEFT);
 						}
-						notreTile=notreTile.getNeighbor(Direction.LEFT);
-					}
-					for(i=0;i<flamme;i++){
-						ai.checkInterruption();
-						if(notreTile.getNeighbor(Direction.RIGHT).getHeroes()!=null){
-							mur=true;
+						for(i=0;i<flamme;i++){
+							ai.checkInterruption();
+							if(notreTile.getNeighbor(Direction.RIGHT).getBlocks()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.RIGHT);
 						}
-						notreTile=notreTile.getNeighbor(Direction.RIGHT);
+						if(mur){
+							return true;
+						}
+						
 					}
-					if(mur){
-						return true;
+					else
+					{
+						int i;
+						for(i=0;i<flamme;i++){
+							ai.checkInterruption();
+							if(notreTile.getNeighbor(Direction.UP).getHeroes()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.UP);
+						}
+						for(i=0;i<flamme;i++){
+							ai.checkInterruption();
+							if(notreTile.getNeighbor(Direction.DOWN).getHeroes()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.DOWN);
+						}
+						for(i=0;i<flamme;i++){
+							ai.checkInterruption();
+							if(notreTile.getNeighbor(Direction.LEFT).getHeroes()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.LEFT);
+						}
+						for(i=0;i<flamme;i++){
+							ai.checkInterruption();
+							if(notreTile.getNeighbor(Direction.RIGHT).getHeroes()!=null){
+								mur=true;
+							}
+							notreTile=notreTile.getNeighbor(Direction.RIGHT);
+						}
+						if(mur){
+							return true;
+						}
+						
 					}
-					
+	
 				}
-
+			
+			
 			}
-		
-		
 		}
 		
 		return false;

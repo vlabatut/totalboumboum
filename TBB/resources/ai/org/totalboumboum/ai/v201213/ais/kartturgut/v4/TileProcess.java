@@ -28,7 +28,7 @@ public class TileProcess {
 	/** */
 	AiZone zone;
 	/** */
-	AiHero notrehero;
+	AiHero notreHero;
 	/**
 	 * 
 	 * @param ai
@@ -36,6 +36,8 @@ public class TileProcess {
 	 */
 	public TileProcess(KartTurgut ai) throws StopRequestException {
 		ai.checkInterruption();
+		
+		notreHero = ai.getZone().getOwnHero();
 		this.ai = ai;
 
 	}
@@ -91,11 +93,11 @@ public class TileProcess {
 	public List<AiTile> getcanReachTiles() throws StopRequestException {
 		ai.checkInterruption();
 		zone = this.ai.getZone();
-		notrehero = zone.getOwnHero();
+		notreHero = zone.getOwnHero();
 		List<AiTile> canReachTilesList = new ArrayList<AiTile>();
 		for (AiTile canReachTiles : getsafeTiles()) {
 			ai.checkInterruption();
-			if (canReachTiles.isCrossableBy(notrehero))
+			if (canReachTiles.isCrossableBy(notreHero))
 				canReachTilesList.add(canReachTiles);
 
 		}

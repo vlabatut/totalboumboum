@@ -22,7 +22,7 @@ public class BombHandler extends AiBombHandler<BalCetin> {
 		super(ai);
 		ai.checkInterruption();
 
-		verbose = true;
+		verbose = false;
 
 	}
 
