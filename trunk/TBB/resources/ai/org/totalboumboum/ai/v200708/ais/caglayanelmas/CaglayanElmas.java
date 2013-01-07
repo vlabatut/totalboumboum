@@ -260,6 +260,8 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 		if ( !(target[0] == px && target[1] == py))	
 			return lastAction;
 		
+		else if(links==null)
+			return lastAction;
 		else
 		{		
 			// On est arrivé à une destination intermédiaire.
