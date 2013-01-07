@@ -383,7 +383,7 @@ public class TileControl {
 
 		}
 
-		if (result == null) {
+		if (result == null && !tiles.isEmpty()) {
 			result = as.zone.getDirection(tile, tiles.get(0));
 		}
 
