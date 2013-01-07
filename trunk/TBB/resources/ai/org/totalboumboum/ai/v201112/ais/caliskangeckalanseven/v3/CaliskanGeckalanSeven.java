@@ -23,7 +23,7 @@ public class CaliskanGeckalanSeven extends ArtificialIntelligence
 	{	checkInterruption();
 		
 		super.init();
-		verbose = true;
+		verbose = false;
 		
 	}
 	

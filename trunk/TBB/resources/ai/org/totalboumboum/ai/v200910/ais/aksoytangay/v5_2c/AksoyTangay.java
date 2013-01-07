@@ -214,8 +214,10 @@ public class AksoyTangay extends ArtificialIntelligence
 		}
 		else
 		{
-			
-					direction = bonusManager.getDirectionToCollectBonus();
+					if(bonusManager==null)
+						direction = Direction.NONE;
+					else
+						direction = bonusManager.getDirectionToCollectBonus();
 				
 					if(pathManager.temp == false)
 					{
@@ -268,7 +270,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	public boolean isDangerous(AiTile tile) throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
-		if(tile==null)
+		if(tile==null || zone==null)
 			return false;
 		
 		stateMatrix = zone.updateMatrix();

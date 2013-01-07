@@ -23,7 +23,7 @@ public class CetinIlter extends ArtificialIntelligence
 	 */
 	public CetinIlter()
 	{	// active/désactive la sortie texte
-		verbose = true;
+		verbose = false;
 	}
 	
 	@Override

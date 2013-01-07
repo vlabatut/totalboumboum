@@ -42,14 +42,17 @@ public class ModeHandler extends AiModeHandler<KayukaTaskin>
 	protected boolean hasEnoughItems() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		int range= ownHero.getBombRange();
-		int bomb= ownHero.getBombNumberMax();
+		if(ownHero!=null)
+		{	int range= ownHero.getBombRange();
+			int bomb= ownHero.getBombNumberMax();
     	
-		if(range>2 && bomb>2){
-			return true;
+			if(range>2 && bomb>2){
+				return true;
+			}
+			else
+				return false;
 		}
-		else
-			return false;
+		return true;
 		
 	}
 	

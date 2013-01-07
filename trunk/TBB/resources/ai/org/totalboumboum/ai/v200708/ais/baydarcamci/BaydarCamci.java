@@ -739,15 +739,16 @@ public class BaydarCamci extends ArtificialIntelligence
 	 * 		?
 	 */
 	public Integer getPutBombPosition(int x, int y)
-	{
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_DOWN)
-			return ArtificialIntelligence.AI_ACTION_GO_UP;
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_UP)
-			return ArtificialIntelligence.AI_ACTION_GO_DOWN;
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_LEFT)
-			return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_RIGHT)
-			return ArtificialIntelligence.AI_ACTION_GO_LEFT;
+	{	if(lastPreMove!=null)
+		{	if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_DOWN)
+				return ArtificialIntelligence.AI_ACTION_GO_UP;
+			if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_UP)
+				return ArtificialIntelligence.AI_ACTION_GO_DOWN;
+			if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_LEFT)
+				return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_RIGHT)
+				return ArtificialIntelligence.AI_ACTION_GO_LEFT;
+		}
 		return ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		
 	}

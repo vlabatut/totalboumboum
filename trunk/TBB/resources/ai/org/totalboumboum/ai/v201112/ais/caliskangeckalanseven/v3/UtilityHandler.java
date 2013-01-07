@@ -62,7 +62,7 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalanSeven> {
 
 
 		
-		verbose = true;
+		verbose = false;
 		zone = ai.getZone();
 		ownHero = zone.getOwnHero();
 		calculCommun = new CalculCommun(ai);

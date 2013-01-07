@@ -224,7 +224,7 @@ public class SaglamSeven extends ArtificialIntelligence
 	 */
 	public SaglamSeven()
 	{	// active/désactive la sortie texte
-		verbose = true;
+		verbose = false;
 	}
 	/**
 	 * 

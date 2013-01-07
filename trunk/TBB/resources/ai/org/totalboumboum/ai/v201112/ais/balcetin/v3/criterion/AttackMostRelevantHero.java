@@ -45,7 +45,7 @@ public class AttackMostRelevantHero extends AiUtilityCriterionBoolean {
 		boolean result = false;
 		HeroProcess hp = new HeroProcess(ai);
 		// checks if this tile is the tile of the most relevant hero for us.
-		if (tile == hp.mostRelevantHero().getTile())
+		if (hp.mostRelevantHero()!=null && tile == hp.mostRelevantHero().getTile())
 			result = true;
 
 		return result;

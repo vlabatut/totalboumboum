@@ -42,7 +42,7 @@ public class CapMunavarov extends ArtificialIntelligence
 	{	checkInterruption();
 		
 		super.init();
-		verbose = true;
+		verbose = false;
 		
 		zoneHeight=getZone().getHeight();
 		zoneWidth=getZone().getWidth();

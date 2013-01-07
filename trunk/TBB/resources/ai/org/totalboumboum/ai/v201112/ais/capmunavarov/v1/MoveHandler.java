@@ -34,7 +34,7 @@ public class MoveHandler extends AiMoveHandler<CapMunavarov>
 		ai.checkInterruption();
 		
 		// on règle la sortie texte pour ce gestionnaire
-		verbose = true;
+		verbose = false;
 		
 //		System.out.println("in Movehadnler ..."); 
 		// à compléter
