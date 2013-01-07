@@ -1,5 +1,6 @@
 package org.totalboumboum.ai.v201213.ais.saglamseven.v4.criterion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionInteger;
@@ -66,7 +67,7 @@ public class CriterDistance extends AiUtilityCriterionInteger<SaglamSeven>
     
 	ai.checkInterruption();
 	AiZone gameArea = ai.getZone();
-	List<AiHero> heros = gameArea.getHeroes();
+	List<AiHero> heros = new ArrayList<AiHero>(gameArea.getHeroes());
 	int distance = DISTANCE_LIMIT;
 	heros.remove(gameArea.getOwnHero());
 	if(heros!= null){
