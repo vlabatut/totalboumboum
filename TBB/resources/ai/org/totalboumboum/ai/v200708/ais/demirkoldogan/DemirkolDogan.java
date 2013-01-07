@@ -571,8 +571,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	public int[][] updateMatrix()
 	{
 		int[][] zoneMatrix = getZoneMatrix();
-		for (int i=1; i<16; i++) //horizontalement
-			for (int j=1; j<14; j++) //verticalement
+		for (int i=0; i<zoneMatrix.length; i++) //horizontalement
+			for (int j=0; j<zoneMatrix[0].length; j++) //verticalement
 				if (zoneMatrix[i][j] == AI_BLOCK_BOMB) //s'il y a une bombe
 				{
 					int range = getBombPowerAt(i, j);
