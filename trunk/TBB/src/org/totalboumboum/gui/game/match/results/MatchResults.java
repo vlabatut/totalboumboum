@@ -28,16 +28,21 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
+ * This class handles the display of the
+ * results of a match, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class MatchResults extends EntitledDataPanel
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
-	private HomogenResultsSubPanel resultsPanel;
-	
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public MatchResults(SplitMenuPanel container)
 	{	super(container);
 
@@ -55,13 +60,28 @@ public class MatchResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Match displayed by this panel */
 	private Match match;
 
+	/**
+	 * Changes the match displayed
+	 * in this panel.
+	 * 
+	 * @param match
+	 * 		New match.
+	 */
 	public void setMatch(Match match)
 	{	this.match = match;
 		resultsPanel.setStatisticHolder(match);
 	}
 	
+	/**
+	 * Returns the match currently
+	 * displayed in this panel.
+	 * 
+	 * @return
+	 * 		Current match.
+	 */
 	public Match getMatch()
 	{	return match;	
 	}
@@ -69,6 +89,9 @@ public class MatchResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/** Panel displaying the results */
+	private HomogenResultsSubPanel resultsPanel;
+
 	@Override
 	public void refresh()
 	{	setMatch(match);

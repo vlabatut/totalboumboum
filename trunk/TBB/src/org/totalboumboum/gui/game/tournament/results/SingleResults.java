@@ -28,16 +28,21 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
+ * This class handles the display of the
+ * result of a single tournament, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class SingleResults extends TournamentResults<SingleTournament>
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
-
-	private HomogenResultsSubPanel resultsPanel;
 	
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public SingleResults(SplitMenuPanel container)
 	{	super(container);
 
@@ -55,6 +60,7 @@ public class SingleResults extends TournamentResults<SingleTournament>
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void setTournament(SingleTournament tournament)
 	{	this.tournament = tournament;
 		Match match = tournament.getCurrentMatch();
@@ -64,6 +70,9 @@ public class SingleResults extends TournamentResults<SingleTournament>
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/** Panel displaying the results */
+	private HomogenResultsSubPanel resultsPanel;
+
 	@Override
 	public void refresh()
 	{	setTournament(tournament);

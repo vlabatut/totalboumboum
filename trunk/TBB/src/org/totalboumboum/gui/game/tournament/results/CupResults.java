@@ -33,17 +33,23 @@ import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPa
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * This class handles the display of the
+ * result of a cup, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class CupResults extends TournamentResults<CupTournament>
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public CupResults(SplitMenuPanel container)
 	{	super(container);
 		
@@ -82,9 +88,13 @@ public class CupResults extends TournamentResults<CupTournament>
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/** Split ratio */
 	private static final float SPLIT_RATIO = 0.5f;
+	/** Number of legs displayed by page */
 	private static final int LEGS_PER_PAGE = 2;
+	/** Panel displaying the results */
 	private HomogenResultsSubPanel resultsPanel;
+	/** Panel used to display legs */
 	private LegSubPanel legsPanel;
 
 	/////////////////////////////////////////////////////////////////

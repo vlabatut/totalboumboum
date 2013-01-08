@@ -28,16 +28,21 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
+ * This class handles the display of the
+ * results of a round, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class RoundResults extends EntitledDataPanel
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
-
-	private HomogenResultsSubPanel resultsPanel;
 	
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public RoundResults(SplitMenuPanel container)
 	{	super(container);
 
@@ -56,13 +61,27 @@ public class RoundResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Round displayed in this panel */
 	private Round round;
 
+	/**
+	 * Changes the round displayed in this panel.
+	 * 
+	 * @param round
+	 * 		The new round to display.
+	 */
 	public void setRound(Round round)
 	{	this.round = round;
 		resultsPanel.setStatisticHolder(round);
 	}
 	
+	/**
+	 * Returns the round displayed
+	 * in this panel.
+	 * 
+	 * @return
+	 * 		The current round.
+	 */
 	public Round getRound()
 	{	return round;	
 	}
@@ -70,6 +89,9 @@ public class RoundResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel displaying the results */
+	private HomogenResultsSubPanel resultsPanel;
+	
 	@Override
 	public void refresh()
 	{	setRound(round);

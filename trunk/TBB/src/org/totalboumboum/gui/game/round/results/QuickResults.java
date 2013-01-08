@@ -38,7 +38,6 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.gui.tools.SpringUtilities;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticRound;
@@ -46,20 +45,23 @@ import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
+ * This class handles the display of the
+ * results of a round, after a quick game.
  * 
  * @author Vincent Labatut
- *
  */
 public class QuickResults extends JPanel
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
-	private Font headerFont;
-	private Font regularFont;
-	private int columns = 0;
-	private int lines = 0;
-	private int tableMargin;
-	
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param dimen
+	 * 		Dimension of the panel.
+	 * @param round
+	 * 		Round to display.
+	 */
 	public QuickResults(Dimension dimen, Round round)
 	{	super();
 		
@@ -216,6 +218,27 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TABLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Font used for the table header */
+	private Font headerFont;
+	/** Font used for the table data */
+	private Font regularFont;
+	/** Number of columns */
+	private int columns = 0;
+	/** Number of rows */
+	private int lines = 0;
+	/** Margin around the table */
+	private int tableMargin;
+	
+	/**
+	 * Adds a new column to
+	 * the table.
+	 * 
+	 * @param index
+	 * 		Position of the new column.
+	 */
 	public void addColumn(int index)
 	{	columns++;
 		int start = 0;
@@ -250,6 +273,17 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 		SpringUtilities.makeCompactGrid(this,lines,columns,tableMargin,tableMargin,tableMargin,tableMargin);
 	}
 
+	/**
+	 * Retrieves the label at
+	 * the specified position.
+	 * 
+	 * @param line
+	 * 		Row of the label.
+	 * @param col
+	 * 		Column of the label.
+	 * @return
+	 * 		The requested label.
+	 */
 	public MyLabel getLabel(int line, int col)
 	{	MyLabel result = (MyLabel)getComponent(col+line*columns);;
 		return result;
