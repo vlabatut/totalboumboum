@@ -26,16 +26,21 @@ import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPa
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
 /**
+ * This class handles the display of the
+ * result of a sequence tournament, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class SequenceResults extends TournamentResults<SequenceTournament>
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
-
-	private HomogenResultsSubPanel resultsPanel;
 	
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public SequenceResults(SplitMenuPanel container)
 	{	super(container);
 		
@@ -58,6 +63,9 @@ public class SequenceResults extends TournamentResults<SequenceTournament>
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/** Panel displaying the results */
+	private HomogenResultsSubPanel resultsPanel;
+
 	@Override
 	public void refresh()
 	{	setTournament(tournament);
