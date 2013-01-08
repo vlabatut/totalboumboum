@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -86,10 +87,15 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if the match has begun */
+	protected boolean begun = false;
+	/** Indicates if the match is finished */
 	private boolean matchOver = false;
 	
 	public void init(List<Profile> profiles)
-	{	// are rounds in random order ?
+	{	begun = true;
+		
+		// are rounds in random order ?
     	if(randomOrder)
     		randomizeRounds();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
@@ -115,6 +121,17 @@ public class Match implements StatisticHolder, Serializable
 		stats.initStartDate();
 	}
 	
+	/**
+	 * Returns {@code true} iff
+	 * this match has begun.
+	 * 
+	 * @return
+	 * 		{@code true} iff the match has begun.
+	 */
+	public boolean hasBegun()
+	{	return begun;	
+	}
+
 	private void randomizeRounds()
 	{	Calendar cal = new GregorianCalendar();
 		long seed = cal.getTimeInMillis();
@@ -146,6 +163,26 @@ public class Match implements StatisticHolder, Serializable
 	 */
 	public void rewind()
 	{	currentIndex = 0;
+	}
+
+	/**
+	 * Goes to the previous match in
+	 * this match. Used for stat
+	 * browsing, not for actually playing
+	 * the tournament.
+	 */
+	public void regressStat()
+	{	currentIndex--;
+	}
+
+	/**
+	 * Goes to the next match in
+	 * this match. Used for stat
+	 * browsing, not for actually playing
+	 * the tournament.
+	 */
+	public void progressStat()
+	{	currentIndex++;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -184,6 +221,48 @@ public class Match implements StatisticHolder, Serializable
 	}
 	public void clearRounds()
 	{	rounds.clear();	
+	}
+
+	/**
+	 * Indicates if the specified round
+	 * corresponds to the first one played
+	 * in this match.
+	 * 
+	 * @param round
+	 * 		Round to be checked.
+	 * @return
+	 * 		{@code true} iff the specified round is the first one of the match.
+	 */
+	public boolean isFirstRound(Round round)
+	{	// TODO a corriger
+		Round firstRound = rounds.get(0);
+		boolean result = round==firstRound;
+		
+		return result;
+	}
+	
+	/**
+	 * Indicates if the specified round
+	 * corresponds to the last one played
+	 * in this match.
+	 * 
+	 * @param round
+	 * 		Round to be checked.
+	 * @return
+	 * 		{@code true} iff the specified round is the last one played during this match.
+	 */
+	public boolean isLastPlayedRound(Round round)
+	{	// TODO a corriger
+		Round lastRound = null;
+		Iterator<Round> it = new LinkedList<Round>(rounds).descendingIterator();
+		while(it.hasNext() && lastRound==null)
+		{	Round temp = it.next();
+			if(temp.isOver())
+				lastRound = temp;
+		}
+		boolean result = round==lastRound;
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

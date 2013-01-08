@@ -94,6 +94,22 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 */
 	public abstract void rewind();
 	
+	/**
+	 * Goes to the previous match in
+	 * this tournament. Used for stat
+	 * browsing, not for actually playing
+	 * the tournament.
+	 */
+	public abstract void regressStat();
+
+	/**
+	 * Goes to the next match in
+	 * this tournament. Used for stat
+	 * browsing, not for actually playing
+	 * the tournament.
+	 */
+	public abstract void progressStat();
+
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -144,6 +160,30 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 */
 	public abstract void roundOver();
 
+	/**
+	 * Indicates if the specified match
+	 * corresponds to the first match played
+	 * in this tournament.
+	 * 
+	 * @param match
+	 * 		Match to be checked.
+	 * @return
+	 * 		{@code true} iff the specified match is the first one of the tournament.
+	 */
+	public abstract boolean isFirstMatch(Match match);
+	
+	/**
+	 * Indicates if the specified match
+	 * corresponds to the last match played
+	 * in this tournament.
+	 * 
+	 * @param match
+	 * 		Match to be checked.
+	 * @return
+	 * 		{@code true} iff the specified match is the last one played during the tournament.
+	 */
+	public abstract boolean isLastPlayedMatch(Match match);
+	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

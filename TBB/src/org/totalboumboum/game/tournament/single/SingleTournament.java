@@ -156,6 +156,16 @@ public class SingleTournament extends AbstractTournament
 	{	
 	}
 
+	@Override
+	public void regressStat()
+	{	// nothing to do here
+	}
+
+	@Override
+	public void progressStat()
+	{	// nothing to do here
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -191,6 +201,21 @@ public class SingleTournament extends AbstractTournament
 
 	public void roundOver()
 	{	panel.roundOver();
+	}
+
+
+	@Override
+	public boolean isFirstMatch(Match match)
+	{	boolean result = this.match == match;
+		
+		return result;
+	}
+
+	@Override
+	public boolean isLastPlayedMatch(Match match)
+	{	boolean result = this.match == match;
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

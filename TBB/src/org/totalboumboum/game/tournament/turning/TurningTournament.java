@@ -92,4 +92,29 @@ public class TurningTournament extends AbstractTournament
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void regressStat()
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void progressStat()
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean isFirstMatch(Match match)
+	{	// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.totalboumboum.game.tournament.AbstractTournament#isLastPlayedMatch(org.totalboumboum.game.match.Match)
+	 */
+	@Override
+	public boolean isLastPlayedMatch(Match match) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

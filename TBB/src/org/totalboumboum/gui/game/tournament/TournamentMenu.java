@@ -485,7 +485,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	private TournamentStatistics<?> tournamentStatistics;
 
 	/**
-	 * Update the buttons of this menu.
+	 * Update the panels of this menu.
 	 */
 	private void refreshPanels()
 	{	tournamentDescription.refresh();
@@ -572,8 +572,8 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 			{	Match match = tournament.getCurrentMatch();		
 				if(matchPanel==null || ((MatchSplitPanel)matchPanel).getMatch()!=match)
 				{	MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
+					mPanel.setMatchStats(match);
 					matchPanel = mPanel;
-					mPanel.setMatch(match);
 				}
 				else
 					((MatchSplitPanel)matchPanel).refreshButtons();

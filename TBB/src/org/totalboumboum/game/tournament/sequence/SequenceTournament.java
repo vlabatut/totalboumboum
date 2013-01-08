@@ -100,16 +100,29 @@ public class SequenceTournament extends AbstractTournament
 	{	currentIndex = 0;
 	}
 	
+	@Override
+	public void regressStat()
+	{	currentIndex--;
+	}
+
+	@Override
+	public void progressStat()
+	{	currentIndex++;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// MATCHES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomizeMatches;
 	private List<Match> matches = new ArrayList<Match>();
+	private List<Match> playedMatches = new ArrayList<Match>();
 	private Match currentMatch;
 	private int currentIndex;
 
 	private void initMatches()
-	{	// are matches in random order ?
+	{	playedMatches.clear();
+		
+		// are matches in random order ?
 		if(randomizeMatches)
 			randomizeMatches();
 		
@@ -142,15 +155,20 @@ public class SequenceTournament extends AbstractTournament
 	
 	@Override
 	public void matchOver()
-	{	// stats
+	{	// matches
+		playedMatches.add(currentMatch);
+		
+		// stats
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
+		
 		// iterator
 		if(currentIndex>=matches.size())
 		{	if(randomizeMatches)
 				randomizeMatches();
 			currentIndex = 0;
 		}
+		
 		// limits
 		if(getLimits().testLimit(this))
 		{	float[] points = limits.processPoints(this);
@@ -171,6 +189,22 @@ public class SequenceTournament extends AbstractTournament
 
 	public void roundOver()
 	{	panel.roundOver();
+	}
+
+	@Override
+	public boolean isFirstMatch(Match match)
+	{	Match firstMatch = playedMatches.get(0);
+		boolean result = firstMatch == match;
+		
+		return result;
+	}
+
+	@Override
+	public boolean isLastPlayedMatch(Match match)
+	{	Match lastMatch = playedMatches.get(playedMatches.size()-1);
+		boolean result = lastMatch==match;
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

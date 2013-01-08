@@ -90,6 +90,18 @@ public class CupPart implements Serializable
 	}
 	
 	/**
+	 * Returns {@code true} iff
+	 * this part has begun.
+	 * 
+	 * @return
+	 * 		{@code true} iff the part has begun.
+	 */
+	public boolean hasBegun()
+	{	boolean result = match.hasBegun();
+		return result;
+	}
+
+	/**
 	 * Advances through this part (which
 	 * is likely to contain several rounds). 
 	 */

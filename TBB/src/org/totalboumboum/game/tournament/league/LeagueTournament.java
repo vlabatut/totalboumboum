@@ -26,6 +26,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -37,6 +39,8 @@ import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.cup.CupLeg;
+import org.totalboumboum.game.tournament.cup.CupPart;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -102,6 +106,16 @@ public class LeagueTournament extends AbstractTournament
 	{	currentIndex = 0;
 	}
 	
+	@Override
+	public void regressStat()
+	{	currentIndex--;
+	}
+
+	@Override
+	public void progressStat()
+	{	currentIndex++;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -330,7 +344,6 @@ public class LeagueTournament extends AbstractTournament
 		
 		// matches
 		playedMatches.add(currentMatch);
-
 		
 		// iterator
 		if(currentIndex>=matches.size())
@@ -363,5 +376,21 @@ public class LeagueTournament extends AbstractTournament
 	
 	public void roundOver()
 	{	panel.roundOver();
+	}
+
+	@Override
+	public boolean isFirstMatch(Match match)
+	{	Match firstMatch = playedMatches.get(0);
+		boolean result = firstMatch == match;
+		
+		return result;
+	}
+
+	@Override
+	public boolean isLastPlayedMatch(Match match)
+	{	Match lastMatch = playedMatches.get(playedMatches.size()-1);
+		boolean result = lastMatch==match;
+		
+		return result;
 	}
 }
