@@ -38,6 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundRenderPanel;
@@ -59,7 +60,6 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
@@ -68,13 +68,24 @@ import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
+ * This class handles the bottom menu used
+ * in the panel displaying the tournament
+ * during game.
  * 
  * @author Vincent Labatut
- *
  */
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,ClientGeneralConnectionListener
-{	private static final long serialVersionUID = 1L;
-	
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel
+	 * @param parent
+	 * 		Parent menu.
+	 */
 	public RoundMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
@@ -118,99 +129,34 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// BUTTONS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private JButton buttonQuit;
-	private JButton buttonSave;
-	private JToggleButton buttonRecord;
-	private JButton buttonMatch;
-	private JToggleButton buttonDescription;
-	private JToggleButton buttonResults;
-	private JToggleButton buttonStatistics;
-	private JButton buttonPlay;
-	
-	private Thread thread = null;
-	
-	public void refreshButtons()
-	{	if(round!=null)
-		{	if(round.isOver())
-			{	// play
-				buttonPlay.setEnabled(false);
-				// finish
-				GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
-			}
-			else
-			{	// play
-				buttonPlay.setEnabled(true);
-				// match
-				GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
-			}
-		}
-		else
-		{	// play
-			buttonPlay.setEnabled(false);
-		}
-	
-		// record game
-		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-		boolean connectionState = serverConnection==null && clientConnection==null;
-		buttonSave.setEnabled(connectionState);
-		
-		// record replay
-		boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
-		buttonRecord.setSelected(recordGames);
-//buttonRecord.setEnabled(false);		
-	}
-	
-	public void autoAdvance()
-	{	if(Configuration.getAisConfiguration().getAutoAdvance())
-		{	// play round
-			if(buttonPlay.isEnabled())
-			{	thread = new Thread("TBB.autoadvance")
-				{	public void run()
-					{	try
-						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
-							SwingUtilities.invokeLater(new Runnable()
-							{	public void run()
-								{	buttonPlay.doClick();
-								}
-							});				
-						}
-						catch (InterruptedException e)
-						{	//e.printStackTrace();
-						}
-					}			
-				};
-				thread.start();
-			}
-			// go back to match
-			else if(buttonMatch.isEnabled())
-			{	thread = new Thread("TBB.autoadvance")
-				{	public void run()
-					{	try
-						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
-							SwingUtilities.invokeLater(new Runnable()
-							{	public void run()
-								{	buttonMatch.doClick();
-								}
-							});				
-						}
-						catch (InterruptedException e)
-						{	//e.printStackTrace();
-						}
-					}			
-				};
-				thread.start();
-			}
-		}
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Round displayed by this panel */
 	private Round round;
+	/** Whether the user can play or only browse the results */
+	private boolean browseOnly = false;
 
+	/**
+	 * Sets up the interaction mode of this panel:
+	 * either the user can play normally, or he
+	 * can only browse the statistics of the 
+	 * rounds already played before.
+	 * 
+	 * @param browseOnly
+	 * 		If {@code true}, then the user can only browse
+	 * 		past results, and not play new rounds.
+	 */
+	public void setBrowseOnly(boolean browseOnly)
+	{	this.browseOnly = browseOnly;
+	}
+	
+	/**
+	 * Changes the round handled
+	 * by this menu.
+	 * 
+	 * @param round
+	 * 		New round.
+	 */
 	public void setRound(Round round)
 	{	// round
 		if(round!=null)
@@ -227,11 +173,20 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		refreshButtons();
 		
 		// connection
-		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.addListener(this);
+		if(!browseOnly)
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.addListener(this);
+		}
 	}
 	
+	/**
+	 * Returns the round currently
+	 * handled by this menu.
+	 * 
+	 * @return
+	 * 		Current round.
+	 */
 	public Round getRound()
 	{	return round;	
 	}
@@ -239,6 +194,10 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Quits the current tournament for good,
+	 * and go back to the main menu.
+	 */
 	private void quitTournament()
 	{	// end round
 		round.cancel();
@@ -251,13 +210,172 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
     }
 
 	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Definitely quits the tournament */
+	private JButton buttonQuit;
+	/** Records the current tournament */
+	private JButton buttonSave;
+	/** Whether rounds should be recorded or not */
+	private JToggleButton buttonRecord;
+	/** Goes back to the match pannel */
+	private JButton buttonMatch;
+	/** Displays the round detailed description */
+	private JToggleButton buttonDescription;
+	/** Displays the round results */ 
+	private JToggleButton buttonResults;
+	/** Displays the round stat plots */
+	private JToggleButton buttonStatistics;
+	/** Play the round */
+	private JButton buttonPlay;
+	/** Thread used for the auto-advance system */
+	private Thread thread = null;
+	
+	/**
+	 * Update the buttons depending on 
+	 * the round state.
+	 */
+	public void refreshButtons()
+	{	if(browseOnly)
+		{	if(round!=null)
+			{	Match match = round.getMatch();
+				buttonMatch.setEnabled(true);
+				buttonPlay.setEnabled(true);			
+				// previous button
+				{	// first match
+					if(match.isFirstRound(round))
+					{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
+					}
+					// otherwise
+					else
+					{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_PREVIOUS_ROUND, buttonMatch);
+					}
+				}
+				// next button
+				{	// last round of the match
+					if(match.isLastPlayedRound(round))
+					{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_MATCH, buttonPlay);
+						// very last round of the tournament
+						AbstractTournament tournament = match.getTournament();
+						if(tournament.isLastPlayedMatch(match))
+							buttonPlay.setEnabled(false);			
+					}
+					// otherwise
+					{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND, buttonPlay);
+					}
+				}
+			}
+			else
+			{	// play
+				buttonPlay.setEnabled(false);
+			}
+		
+			// record game & replay
+			buttonSave.setEnabled(false);
+			buttonRecord.setEnabled(false);
+			buttonRecord.setSelected(false);
+		}
+		else
+		{	if(round!=null)
+			{	if(round.isOver())
+				{	// play
+					buttonPlay.setEnabled(false);
+					// finish
+					GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
+				}
+				else
+				{	// play
+					buttonPlay.setEnabled(true);
+					// match
+					GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
+				}
+			}
+			else
+			{	// play
+				buttonPlay.setEnabled(false);
+			}
+		
+			// record game
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+			ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+			boolean connectionState = serverConnection==null && clientConnection==null;
+			buttonSave.setEnabled(connectionState);
+			
+			// record replay
+			boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
+			buttonRecord.setSelected(recordGames);
+//			buttonRecord.setEnabled(false);
+		}
+	}
+	
+	/**
+	 * Automatically clicks on the appropriate
+	 * buttons in order to progress in the tournament.
+	 * Used to automatically chain many tournaments,
+	 * while evaluating agents.
+	 */
+	public void autoAdvance()
+	{	if(Configuration.getAisConfiguration().getAutoAdvance())
+		{	// play round
+			if(buttonPlay.isEnabled())
+			{	thread = new Thread("TBB.autoadvance")
+				{	@Override
+					public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	@Override
+								public void run()
+								{	buttonPlay.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+			// go back to match
+			else if(buttonMatch.isEnabled())
+			{	thread = new Thread("TBB.autoadvance")
+				{	@Override
+					public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	@Override
+								public void run()
+								{	buttonMatch.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel displaying the engine loop */
 	private LoopPanel loopPanel;
+	/** Panel describing the round */
 	private RoundDescription roundDescription;
+	/** Panel containing the detailed results of the round */
 	private RoundResults roundResults;
+	/** Panel giving the evolution of the round statistics */
 	private RoundStatistics roundStatistics;
 
+	/**
+	 * Update the panels of this menu.
+	 */
 	private void refreshPanels()
 	{	roundDescription.refresh();
 		roundResults.refresh();
@@ -290,12 +408,14 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		{	parent.refresh();
 
 			// possibly updating client state
-			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection!=null)
-			{	if(round.getMatch().getTournament() instanceof SingleTournament)
-					connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
-				else
-					connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+			if(!browseOnly)
+			{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+				if(connection!=null)
+				{	if(round.getMatch().getTournament() instanceof SingleTournament)
+						connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+					else
+						connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+				}
 			}
 			
 			replaceWith(parent);
@@ -404,6 +524,27 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 				}
 			}
 	    }
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_PREVIOUS_ROUND))
+		{	Match match = round.getMatch();
+			match.regressStat();
+			Round round = match.getCurrentRound();
+			setRound(round);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_NEXT_MATCH))
+		{	Match match = round.getMatch();
+			AbstractTournament tournament = match.getTournament();
+			tournament.progressStat();
+			match = tournament.getCurrentMatch();
+			((MatchSplitPanel)parent).setMatch(match);
+
+			replaceWith(parent);
+		}
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND))
+		{	Match match = round.getMatch();
+			match.progressStat();
+			Round round = match.getCurrentRound();
+			setRound(round);
+		}
 	} 
 
 	/////////////////////////////////////////////////////////////////
@@ -418,13 +559,16 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 	/////////////////////////////////////////////////////////////////
 	// ROUND RENDER PANEL	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Progress bar used to display load progression */
 	private JProgressBar progressBar;
+	/** Index representing the position in the progress bar */
 	private final int progressBarPosition = 3; 
 	
 	@Override
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
+		{	@Override
+			public void run()
 			{	// remove progress bar
 				remove(progressBarPosition);
 				add(Box.createHorizontalGlue(),progressBarPosition);

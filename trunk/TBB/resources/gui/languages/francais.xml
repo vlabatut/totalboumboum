@@ -739,7 +739,9 @@
 				<text name="Description" value="Description" tooltip="Voir la description de la manche courante" />
 				<text name="Finish" value="Finir" tooltip="Finir la manche courante et revenir à la rencontre courante" />
 				<text name="NextMatch" value="Rencontre suivante" tooltip="Aller au match suivant" />
+				<text name="NextRound" value="Manche suivante" tooltip="Aller à la manche suivante" />
 				<text name="Play" value="Jouer" tooltip="Commencer à jouer" />
+				<text name="PreviousRound" value="Manche précédente" tooltip="Revenir à la manche précédente" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="RecordGames" value="Enregistrement des manches" tooltip="Enregistrement des manches pour les revoir plus tard" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats de la manche courante" />

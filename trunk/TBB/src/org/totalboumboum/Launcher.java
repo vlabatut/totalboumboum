@@ -1671,3 +1671,4 @@ public class Launcher
 // TODO le script ne compile pas à cause de UTF8
 // TODO virer le logo du tournoi neutre, en faire un deuxième moins neutre qui a différents niveaux
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
+// TODO une fois les plots recuperes, reformer playedMatch/rounds dans progressStat pour simplifier le beans

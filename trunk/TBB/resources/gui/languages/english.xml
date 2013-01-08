@@ -739,7 +739,9 @@
 				<text name="Description" value="Description" tooltip="See the description of the current round" />
 				<text name="Finish" value="Finish the Current Round" tooltip="Finish this round and back to the match" />
 				<text name="NextMatch" value="Next Match" tooltip="Go to the next match" />
+				<text name="NextRound" value="Next Round" tooltip="Go to the next round" />
 				<text name="Play" value="Play" tooltip="Start to play" />
+				<text name="PreviousRound" value="Previous Round" tooltip="Come back to the previous round" />
 				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to main menu" />
 				<text name="RecordGames" value="Record Games" tooltip="Record games to replay them later" />
 				<text name="Results" value="Results" tooltip="See the results of the current round" />

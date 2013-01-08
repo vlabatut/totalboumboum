@@ -77,7 +77,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	 * Builds a standard panel.
 	 * 
 	 * @param container
-	 * 		Container of the panel
+	 * 		Container of the panel.
 	 * @param parent
 	 * 		Parent menu.
 	 */
@@ -154,16 +154,18 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	 */
 	public void setMatch(Match match)
 	{	// match
-		if(match!=null && !browseOnly)
+		if(match!=null)
 		{	match.setPanel(null);
-			List<Profile> profiles = match.getProfiles();
-			List<Integer> controls = new ArrayList<Integer>();
-			for(Profile p: profiles)
-			{	int control = p.getControlSettingsIndex();
-				if(controls.contains(control))
-					p.setControlSettingsIndex(0);
-				else
-					controls.add(control);
+			if(!browseOnly)
+			{	List<Profile> profiles = match.getProfiles();
+				List<Integer> controls = new ArrayList<Integer>();
+				for(Profile p: profiles)
+				{	int control = p.getControlSettingsIndex();
+					if(controls.contains(control))
+						p.setControlSettingsIndex(0);
+					else
+						controls.add(control);
+				}
 			}
 		}
 		this.match = match;
@@ -279,7 +281,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	
 	/**
 	 * Update the buttons depending on 
-	 * the tournament state.
+	 * the match state.
 	 */
 	public void refreshButtons()
 	{	if(browseOnly)
@@ -348,16 +350,24 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 		}
 	}
 	
+	/**
+	 * Automatically clicks on the appropriate
+	 * buttons in order to progress in the tournament.
+	 * Used to automatically chain many tournaments,
+	 * while evaluating agents.
+	 */
 	public void autoAdvance()
 	{	if(Configuration.getAisConfiguration().getAutoAdvance())
 		{	// go to round
 			if(buttonRound.isEnabled())
 			{	thread = new Thread("TBB.autoadvance")
-				{	public void run()
+				{	@Override
+					public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
 							SwingUtilities.invokeLater(new Runnable()
-							{	public void run()
+							{	@Override
+								public void run()
 								{	buttonRound.doClick();
 								}
 							});				
@@ -372,11 +382,13 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 			// go back to tournament
 			else if(buttonTournament.isEnabled())
 			{	thread = new Thread("TBB.autoadvance")
-				{	public void run()
+				{	@Override
+					public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
 							SwingUtilities.invokeLater(new Runnable()
-							{	public void run()
+							{	@Override
+								public void run()
 								{	buttonTournament.doClick();
 								}
 							});				
@@ -394,11 +406,18 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel containing the round */
 	private RoundSplitPanel roundPanel;
+	/** Panel describing the match */
 	private MatchDescription matchDescription;
+	/** Panel containing the detailed results of the match */
 	private MatchResults matchResults;
+	/** Panel giving the evolution of the match statistics */
 	private MatchStatistics matchStatistics;
 		
+	/**
+	 * Update the panels of this menu.
+	 */
 	private void refreshPanels()
 	{	matchDescription.refresh();
 		matchResults.refresh();
@@ -431,9 +450,11 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 		{	parent.refresh();
 
 			// possibly updating client state
-			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection!=null)
-				connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+			if(!browseOnly)
+			{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+				if(connection!=null)
+					connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+			}
 			
 			replaceWith(parent);
 	    }
@@ -475,45 +496,70 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 			replaceWith(roundPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
-		{	try
-			{	match.progress();
+		{	if(!browseOnly)
+			{	Round round = match.getCurrentRound();
+				if(roundPanel==null || roundPanel.getRound()!=round)
+				{	roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
+					roundPanel.setRoundStats(round);
+				}
+				else
+					((RoundSplitPanel)roundPanel).refreshButtons();
 			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
+			else
+			{	try
+				{	match.progress();
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ClassNotFoundException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalAccessException e1)
+				{	e1.printStackTrace();
+				}
+				catch (NoSuchFieldException e1)
+				{	e1.printStackTrace();
+				}
+				roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
+				Round round = match.getCurrentRound();		
+				roundPanel.setRound(round);
+				roundPanel.autoAdvance();
+	
+				// possibly updating client state
+				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+				if(connection!=null)
+					connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
 			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IllegalAccessException e1)
-			{	e1.printStackTrace();
-			}
-			catch (NoSuchFieldException e1)
-			{	e1.printStackTrace();
-			}
-			roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
-			Round round = match.getCurrentRound();		
-			roundPanel.setRound(round);
-			roundPanel.autoAdvance();
-
-			// possibly updating client state
-			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection!=null)
-				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
 			
 			replaceWith(roundPanel);
 	    }
+		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_PREVIOUS_ROUND))
+		{	//if(!browseOnly)
+			{	AbstractTournament tournament = match.getTournament();
+				tournament.regressStat();
+				Match previousMatch = tournament.getCurrentMatch();
+				Round round = previousMatch.getCurrentRound();
+				if(roundPanel==null || roundPanel.getRound()!=round)
+				{	roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
+					roundPanel.setRoundStats(round);
+				}
+				else
+					((RoundSplitPanel)roundPanel).refreshButtons();
+			}
+		}
 	} 
 
 	/////////////////////////////////////////////////////////////////
@@ -531,7 +577,8 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	@Override
 	public void matchOver()
 	{	SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
+		{	@Override
+			public void run()
 			{	matchResults.refresh();
 //				saveTournament();
 				buttonResults.doClick();
@@ -542,7 +589,8 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	@Override
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
+		{	@Override
+			public void run()
 			{	matchResults.refresh();
 				matchStatistics.refresh();
 //				saveTournament();
