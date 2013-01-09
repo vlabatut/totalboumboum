@@ -165,7 +165,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		round.setPanel(this);
 		
 		// panels
-		roundDescription.setRound(round);
+//		roundDescription.setRound(round); TODO TODO
 		roundResults.setRound(round);
 		roundStatistics.setRound(round);	
 		
@@ -421,7 +421,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_FINISH))
-		{	round.finish();
+		{	//round.finish(); //NOTE in order to avoid getting empty round in the saves
 			parent.refresh();
 			if(parent instanceof MatchSplitPanel)
 				((MatchSplitPanel)parent).autoAdvance();
@@ -543,6 +543,13 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		{	Match match = round.getMatch();
 			match.progressStat();
 			Round round = match.getCurrentRound();
+//TODO TODO
+round = new Round(match);
+match.rounds.add(round);
+int index = match.getRounds().indexOf(round);
+round.stats = match.getStats().getStatisticRounds().get(index);
+round.match = match;
+round.currentPoints = round.stats.getPoints();
 			setRound(round);
 		}
 	} 

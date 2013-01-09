@@ -459,7 +459,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_FINISH))
-		{	match.finish();
+		{	//match.finish(); //NOTE in order to avoid getting empty matches in the saves
 			parent.refresh();
 			((TournamentSplitPanel)parent).autoAdvance();
 
@@ -496,8 +496,16 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 			replaceWith(roundPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
-		{	if(!browseOnly)
+		{	if(browseOnly)
 			{	Round round = match.getCurrentRound();
+//TODO TODO
+round = new Round(match);
+match.rounds.add(round);
+int index = match.getRounds().indexOf(round);
+round.stats = match.getStats().getStatisticRounds().get(index);
+round.match = match;
+round.currentPoints = round.stats.getPoints();
+			
 				if(roundPanel==null || roundPanel.getRound()!=round)
 				{	roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 					roundPanel.setRoundStats(round);
@@ -534,7 +542,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 				{	e1.printStackTrace();
 				}
 				roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
-				Round round = match.getCurrentRound();		
+				Round round = match.getCurrentRound();
 				roundPanel.setRound(round);
 				roundPanel.autoAdvance();
 	
