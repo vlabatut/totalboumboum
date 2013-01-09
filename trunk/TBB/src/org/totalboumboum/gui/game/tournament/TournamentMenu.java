@@ -25,8 +25,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,7 +37,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentRenderPanel;
@@ -574,14 +571,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
 		{	if(browseOnly)
-			{	Match match = tournament.getCurrentMatch();
-//TODO TODO
-match.stats = tournament.getStats().getStatisticMatches().get(1);
-List<Profile> profiles = new ArrayList<Profile>();
-for(int i=0;i<5;i++)
-	profiles.add(((CupTournament)tournament).getLegs().get(1).getPart(0).getProfileForIndex(i));
-match.profiles.addAll(profiles);
-match.tournament = tournament;
+			{	Match match = tournament.getCurrentMatch();		
 				if(matchPanel==null || ((MatchSplitPanel)matchPanel).getMatch()!=match)
 				{	MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
 					mPanel.setMatchStats(match);

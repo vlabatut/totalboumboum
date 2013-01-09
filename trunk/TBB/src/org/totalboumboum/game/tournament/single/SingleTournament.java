@@ -134,6 +134,7 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
+		playedMatches.clear();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
@@ -143,6 +144,7 @@ public class SingleTournament extends AbstractTournament
 	public void progress()
 	{	if(!isOver() && match.getProfiles().size()==0)
 		{	match.init(profiles);
+			playedMatches.add(match);
 		}
 	}
 
@@ -203,20 +205,6 @@ public class SingleTournament extends AbstractTournament
 	{	panel.roundOver();
 	}
 
-
-	@Override
-	public boolean isFirstMatch(Match match)
-	{	boolean result = this.match == match;
-		
-		return result;
-	}
-
-	@Override
-	public boolean isLastPlayedMatch(Match match)
-	{	boolean result = this.match == match;
-		
-		return result;
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////

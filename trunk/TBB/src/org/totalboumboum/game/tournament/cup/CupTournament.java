@@ -28,7 +28,6 @@ import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -67,6 +66,8 @@ public class CupTournament extends AbstractTournament
 	public void init()
 	{	begun = true;
 	
+		playedMatches.clear();
+	
 		// players distribution
 		initPlayerDistribution();
 		
@@ -91,6 +92,8 @@ public class CupTournament extends AbstractTournament
 		}
 		else
 			currentLeg.progress();
+		
+		playedMatches.add(getCurrentMatch());
 	}
 	
 	@Override
@@ -712,34 +715,5 @@ for(ArrayList<Integer> list: permutations)
 	@Override
 	public void roundOver()
 	{	panel.roundOver();
-	}
-
-	@Override
-	public boolean isFirstMatch(Match match)
-	{	CupLeg firstLeg = legs.get(0);
-		boolean result = firstLeg.isFirstMatch(match);
-	
-		return result;
-	}
-
-	@Override
-	public boolean isLastPlayedMatch(Match match)
-	{	boolean result = false;
-	
-		// get to the last leg played in this tournament
-		CupLeg lastLeg = null;
-		Iterator<CupLeg> it = new LinkedList<CupLeg>(legs).descendingIterator();
-		while(it.hasNext() && lastLeg==null)
-		{	CupLeg leg = it.next();
-			CupPart temp = leg.getPart(0);
-			if(temp.hasBegun())
-				lastLeg = leg;
-		}
-		
-		// look into the last leg
-		if(lastLeg!=null)
-			result = lastLeg.isLastPlayedMatch(match);
-		
-		return result;
 	}
 }

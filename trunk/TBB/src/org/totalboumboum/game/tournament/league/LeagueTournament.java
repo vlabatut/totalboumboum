@@ -246,7 +246,6 @@ public class LeagueTournament extends AbstractTournament
 	private int currentIndex;
 	private int matchCount;
 	private List<Set<Integer>> confrontations;
-	private List<Match> playedMatches = new ArrayList<Match>();
 
 	private void initMatches()
 	{	// matches
@@ -376,21 +375,5 @@ public class LeagueTournament extends AbstractTournament
 	
 	public void roundOver()
 	{	panel.roundOver();
-	}
-
-	@Override
-	public boolean isFirstMatch(Match match)
-	{	Match firstMatch = playedMatches.get(0);
-		boolean result = firstMatch == match;
-		
-		return result;
-	}
-
-	@Override
-	public boolean isLastPlayedMatch(Match match)
-	{	Match lastMatch = playedMatches.get(playedMatches.size()-1);
-		boolean result = lastMatch==match;
-		
-		return result;
 	}
 }

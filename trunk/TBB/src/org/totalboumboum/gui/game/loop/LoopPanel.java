@@ -49,24 +49,27 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.round.RoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * This class is used to paint the actual game
+ * (sprites and everything, not the menus).
  * 
  * @author Vincent Labatut
- *
  */
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
-{	private static final long serialVersionUID = 1L;
-	private VisibleLoop loop;
-	private BufferedImage backgroundImage;
-	private Color backgroundColor;
-	// 0=normal 1=VolatileImage 2=BufferStrategy
-	// apparently BuffereStrategy doesn't work when the canvas is in a swing container
-	private int mode = 1;
-	private Image image;
-	private BufferStrategy bufferStrategy;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a standard loop panel.
+	 * 
+	 * @param container
+	 * 		Swing container for this panel.
+	 * @param parent
+	 * 		Parent menu item.
+	 * @param loop
+	 * 		Game engine, which directly draws in this panel.
+	 */
 	public LoopPanel(MenuContainer container, MenuPanel parent, VisibleLoop loop)
 	{	super(container,parent);
 		setBackground(Color.BLACK);
@@ -91,6 +94,33 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		setFocusable(true);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// IMAGE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Game engine */
+	private VisibleLoop loop;
+	/** Color used to fill the screen before drawing the game (in the end: the border color) */
+	private Color backgroundColor;
+	/** if we want to draw an image instead of a plain (black) background */
+	private BufferedImage backgroundImage;
+	/**
+	 * Various types of buffering I tried:
+	 *  <ul>
+	 *  	<li>0=normal</li>
+	 *  	<li>1=VolatileImage</li>
+	 *  	<li>2=BufferStrategy</li>
+	 *  </ul>
+	 *  Apparently BuffereStrategy doesn't work when the canvas is in a swing container.
+	 */
+	private int mode = 1;
+	/** Image to draw into */
+	private Image image;
+	/** Buffering strategy (cache stuff) */
+	private BufferStrategy bufferStrategy;
+	
+	/**
+	 * Starts displaying the game.
+	 */
 	public void start()
 	{	requestFocus();
 		loop.setPanel(this);
@@ -110,6 +140,12 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		}
 	}
 
+	/**
+	 * Create the appropriate type of image.
+	 * 
+	 * @return
+	 * 		A volatile image.
+	 */
 	public VolatileImage createVolatileImage()
 	{	int width = getPreferredSize().width;
 		int height = getPreferredSize().height;
@@ -188,7 +224,8 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	@Override
 	public void loopOver()
 	{	SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
+		{	@Override
+			public void run()
 			{	//System.out.println("the round is over.");
 				parent.refresh();
 				if(parent instanceof RoundSplitPanel)

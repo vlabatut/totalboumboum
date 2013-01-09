@@ -498,14 +498,6 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	if(browseOnly)
 			{	Round round = match.getCurrentRound();
-//TODO TODO
-round = new Round(match);
-match.rounds.add(round);
-int index = match.getRounds().indexOf(round);
-round.stats = match.getStats().getStatisticRounds().get(index);
-round.match = match;
-round.currentPoints = round.stats.getPoints();
-			
 				if(roundPanel==null || roundPanel.getRound()!=round)
 				{	roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 					roundPanel.setRoundStats(round);

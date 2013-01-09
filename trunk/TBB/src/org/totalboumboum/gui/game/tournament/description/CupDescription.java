@@ -35,16 +35,23 @@ import org.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * This class handles the display of the
+ * description of a cup tournament, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class CupDescription extends TournamentDescription<CupTournament> implements LegSubPanelListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public CupDescription(SplitMenuPanel container)
 	{	super(container);
 		
@@ -79,14 +86,26 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/** Ratio used to split the scren */
 	private static final float SPLIT_RATIO = 0.5f;
+	/** Number of legs by page */
 	private static final int LEGS_PER_PAGE = 2;
+	/** Pannel displaying the list of players */
 	private PlayersListSubPanel playersPanel;
+	/** Panel displaying the tournament legs */
 	private LegSubPanel legsPanel;
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/**
+	 * Changes the tournament displayed
+	 * in this panel.
+	 * 
+	 * @param tournament
+	 * 		New tournament.
+	 */
+	@Override
 	public void setTournament(CupTournament tournament)
 	{	// init
 		this.tournament = tournament;

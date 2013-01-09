@@ -78,7 +78,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public AbstractTournament tournament;
+	private AbstractTournament tournament;
 	
 	public AbstractTournament getTournament()
 	{	return tournament;	
@@ -94,6 +94,8 @@ public class Match implements StatisticHolder, Serializable
 	
 	public void init(List<Profile> profiles)
 	{	begun = true;
+		
+		playedRounds.clear();
 		
 		// are rounds in random order ?
     	if(randomOrder)
@@ -145,6 +147,7 @@ public class Match implements StatisticHolder, Serializable
 			currentIndex++;
 			currentRound = round.copy();
 			currentRound.init();
+			playedRounds.add(round);
 		}
 	}
 
@@ -201,7 +204,8 @@ public class Match implements StatisticHolder, Serializable
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomOrder;
-	public final List<Round> rounds = new ArrayList<Round>();
+	private List<Round> rounds = new ArrayList<Round>();
+	private final List<Round> playedRounds = new ArrayList<Round>();
 
 	public boolean getRandomOrder()
 	{	return randomOrder;
@@ -234,8 +238,7 @@ public class Match implements StatisticHolder, Serializable
 	 * 		{@code true} iff the specified round is the first one of the match.
 	 */
 	public boolean isFirstRound(Round round)
-	{	// TODO a corriger
-		Round firstRound = rounds.get(0);
+	{	Round firstRound = playedRounds.get(0);
 		boolean result = round==firstRound;
 		
 		return result;
@@ -252,14 +255,7 @@ public class Match implements StatisticHolder, Serializable
 	 * 		{@code true} iff the specified round is the last one played during this match.
 	 */
 	public boolean isLastPlayedRound(Round round)
-	{	// TODO a corriger
-		Round lastRound = null;
-		Iterator<Round> it = new LinkedList<Round>(rounds).descendingIterator();
-		while(it.hasNext() && lastRound==null)
-		{	Round temp = it.next();
-			if(temp.isOver())
-				lastRound = temp;
-		}
+	{	Round lastRound = playedRounds.get(playedRounds.size()-1);
 		boolean result = round==lastRound;
 		
 		return result;
@@ -268,7 +264,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public final List<Profile> profiles = new ArrayList<Profile>();
+	private final List<Profile> profiles = new ArrayList<Profile>();
 
 	public void addProfile(Profile profile)
 	{	profiles.add(profile);
@@ -409,7 +405,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public StatisticMatch stats; //TODO TODO
+	private StatisticMatch stats;
 	
 	public StatisticMatch getStats()
 	{	return stats;
