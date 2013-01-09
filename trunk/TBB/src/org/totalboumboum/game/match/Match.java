@@ -78,7 +78,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AbstractTournament tournament;
+	public AbstractTournament tournament;
 	
 	public AbstractTournament getTournament()
 	{	return tournament;	
@@ -201,7 +201,7 @@ public class Match implements StatisticHolder, Serializable
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomOrder;
-	private List<Round> rounds = new ArrayList<Round>();
+	public final List<Round> rounds = new ArrayList<Round>();
 
 	public boolean getRandomOrder()
 	{	return randomOrder;
@@ -268,7 +268,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<Profile> profiles = new ArrayList<Profile>();
+	public final List<Profile> profiles = new ArrayList<Profile>();
 
 	public void addProfile(Profile profile)
 	{	profiles.add(profile);
@@ -390,14 +390,17 @@ public class Match implements StatisticHolder, Serializable
 	{	// rounds
 		currentRound = null;
 		rounds.clear();
+		
 		// limits
 //		limits.finish();
 		limits = null;
+		
 		// misc
 		panel = null;
 		profiles.clear();
 		stats = null;
 		tournament = null;
+		
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
@@ -406,7 +409,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StatisticMatch stats;
+	public StatisticMatch stats; //TODO TODO
 	
 	public StatisticMatch getStats()
 	{	return stats;
