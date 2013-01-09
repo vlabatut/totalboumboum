@@ -42,23 +42,23 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * This class handles the display of the
+ * description of a single tournament, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class SingleDescription extends TournamentDescription<SingleTournament> implements LimitsSubPanelListener
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
-	
-	private static final float SPLIT_RATIO = 0.6f;
-	
-	private PlayersListSubPanel playersPanel;
-	private LimitsSubPanel<MatchLimit> limitsPanel;
-	private PointsSubPanel pointsPanel;
-	
+
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public SingleDescription(SplitMenuPanel container)
 	{	super(container);
 	
@@ -114,8 +114,28 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// MATCH			/////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	/** Ratio used to split the scren */
+	private static final float SPLIT_RATIO = 0.6f;
+	/** Pannel displaying the list of players */
+	private PlayersListSubPanel playersPanel;
+	/** Panel displaying the limits */
+	private LimitsSubPanel<MatchLimit> limitsPanel;
+	/** Pannel displaying the point */
+	private PointsSubPanel pointsPanel;
+
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	/**
+	 * Changes the tournament displayed
+	 * in this panel.
+	 * 
+	 * @param tournament
+	 * 		New tournament.
+	 */
+	@Override
 	public void setTournament(SingleTournament tournament)
 	{	// init
 		this.tournament = tournament;

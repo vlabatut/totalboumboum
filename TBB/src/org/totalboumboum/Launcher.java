@@ -1668,7 +1668,6 @@ public class Launcher
 // TODO affichage ingame API : shift+F pour cycler affichage, F tout seul pour on/off (pour toutes les infos)
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
 // TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
-// TODO le script ne compile pas à cause de UTF8
-// TODO virer le logo du tournoi neutre, en faire un deuxième moins neutre qui a différents niveaux
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
 // TODO une fois les plots recuperes, reformer playedMatch/rounds dans progressStat pour simplifier le beans
+// TODO remettre une forme light de finish pour éviter de prendre de la place avec les sprites et cie

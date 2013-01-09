@@ -539,3 +539,4 @@
 		- méthode permettant d'accéder à l'effet qu'un item aurait sur un joueur (effet contextuel)
 	- divers:
 		- changement du copyright (2012 >> 2013)
+		- quelques erreurs corrigées dans les scripts de compilation

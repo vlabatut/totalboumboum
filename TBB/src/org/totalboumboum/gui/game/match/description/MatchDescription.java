@@ -42,23 +42,23 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * This class handles the display of the
+ * description of a match, during a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class MatchDescription extends EntitledDataPanel implements LimitsSubPanelListener
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
-	
-	private static final float SPLIT_RATIO = 0.6f;
-	
-	private PlayersListSubPanel playersPanel;
-	private LimitsSubPanel<MatchLimit> limitsPanel;
-	private PointsSubPanel pointsPanel;
-	
+
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of the panel.
+	 */
 	public MatchDescription(SplitMenuPanel container)
 	{	super(container);
 	
@@ -114,11 +114,30 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	/** Ratio used to split the scren */
+	private static final float SPLIT_RATIO = 0.6f;
+	/** Pannel displaying the list of players */
+	private PlayersListSubPanel playersPanel;
+	/** Panel displaying the limits */
+	private LimitsSubPanel<MatchLimit> limitsPanel;
+	/** Pannel displaying the point */
+	private PointsSubPanel pointsPanel;
+
+	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	@SuppressWarnings("unused")
+	/** Match displayed by this panel */
 	private Match match;
 	
+	/**
+	 * Changes the match displayed
+	 * in this panel.
+	 * 
+	 * @param match
+	 * 		New match.
+	 */
 	public void setMatch(Match match)
 	{	// init
 		this.match = match;
@@ -131,6 +150,17 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 		playersPanel.setPlayers(players);
 		// limits & points
 		limitsPanel.setLimits(limits);
+	}
+	
+	/**
+	 * Returns the match currently
+	 * displayed in this panel.
+	 * 
+	 * @return
+	 * 		Current match.
+	 */
+	public Match getMatch()
+	{	return match;
 	}
 	
 	/////////////////////////////////////////////////////////////////

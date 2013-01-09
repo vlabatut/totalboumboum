@@ -165,7 +165,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		round.setPanel(this);
 		
 		// panels
-//		roundDescription.setRound(round); TODO TODO
+		roundDescription.setRound(round);
 		roundResults.setRound(round);
 		roundStatistics.setRound(round);	
 		
@@ -543,13 +543,6 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		{	Match match = round.getMatch();
 			match.progressStat();
 			Round round = match.getCurrentRound();
-//TODO TODO
-round = new Round(match);
-match.rounds.add(round);
-int index = match.getRounds().indexOf(round);
-round.stats = match.getStats().getStatisticRounds().get(index);
-round.match = match;
-round.currentPoints = round.stats.getPoints();
 			setRound(round);
 		}
 	} 

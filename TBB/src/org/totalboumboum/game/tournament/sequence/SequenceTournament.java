@@ -85,6 +85,7 @@ public class SequenceTournament extends AbstractTournament
 			currentIndex++;
 			currentMatch = match.copy();
 			currentMatch.init(profiles);
+			playedMatches.add(currentMatch);
 		}
 	}
 
@@ -155,10 +156,7 @@ public class SequenceTournament extends AbstractTournament
 	
 	@Override
 	public void matchOver()
-	{	// matches
-		playedMatches.add(currentMatch);
-		
-		// stats
+	{	// stats
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		
@@ -189,22 +187,6 @@ public class SequenceTournament extends AbstractTournament
 
 	public void roundOver()
 	{	panel.roundOver();
-	}
-
-	@Override
-	public boolean isFirstMatch(Match match)
-	{	Match firstMatch = playedMatches.get(0);
-		boolean result = firstMatch == match;
-		
-		return result;
-	}
-
-	@Override
-	public boolean isLastPlayedMatch(Match match)
-	{	Match lastMatch = playedMatches.get(playedMatches.size()-1);
-		boolean result = lastMatch==match;
-		
-		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

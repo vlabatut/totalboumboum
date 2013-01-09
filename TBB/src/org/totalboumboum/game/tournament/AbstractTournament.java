@@ -139,6 +139,9 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// MATCHES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of matches already played */
+	protected final List<Match> playedMatches = new ArrayList<Match>();
+
 	/**
 	 * Returns the currently ongoing
 	 * match.
@@ -170,7 +173,12 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 * @return
 	 * 		{@code true} iff the specified match is the first one of the tournament.
 	 */
-	public abstract boolean isFirstMatch(Match match);
+	public final boolean isFirstMatch(Match match)
+	{	Match firstMatch = playedMatches.get(0);
+		boolean result = firstMatch == match;
+		
+		return result;
+	}
 	
 	/**
 	 * Indicates if the specified match
@@ -182,8 +190,13 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 * @return
 	 * 		{@code true} iff the specified match is the last one played during the tournament.
 	 */
-	public abstract boolean isLastPlayedMatch(Match match);
-	
+	public final boolean isLastPlayedMatch(Match match)
+	{	Match lastMatch = playedMatches.get(playedMatches.size()-1);
+		boolean result = lastMatch==match;
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -27,11 +27,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
-import org.totalboumboum.game.match.Match;
 
 /**
  * Represents the settings of a leg in a 
@@ -164,54 +161,6 @@ public class CupLeg implements Serializable
 			currentPart = parts.get(currentIndex);
 			currentPart.rewind();
 		}
-		return result;
-	}
-
-	/**
-	 * Indicates if the specified match
-	 * corresponds to the first match played
-	 * in this leg.
-	 * 
-	 * @param match
-	 * 		Match to be checked.
-	 * @return
-	 * 		{@code true} iff the specified match is the first one of the leg.
-	 */
-	public boolean isFirstMatch(Match match)
-	{	CupPart firstPart = parts.get(0);
-		Match firstMatch = firstPart.getCurrentMatch();
-		boolean result = match == firstMatch;
-	
-		return result;
-	}
-
-	/**
-	 * Indicates if the specified match
-	 * corresponds to the last match played
-	 * in this leg.
-	 * 
-	 * @param match
-	 * 		Match to be checked.
-	 * @return
-	 * 		{@code true} iff the specified match is the last one played during the leg.
-	 */
-	public boolean isLastPlayedMatch(Match match)
-	{	boolean result = false;
-		
-		// get to the last match played in this leg
-		Match lastMatch = null;
-		Iterator<CupPart> it = new LinkedList<CupPart>(parts).descendingIterator();
-		while(it.hasNext() && lastMatch==null)
-		{	CupPart part = it.next();
-			Match temp = part.getCurrentMatch();
-			if(temp.hasBegun())
-				lastMatch = temp;
-		}
-		
-		// compare with the specified match
-		if(lastMatch!=null)
-			result = match == lastMatch;
-		
 		return result;
 	}
 
