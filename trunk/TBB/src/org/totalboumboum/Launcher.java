@@ -1568,6 +1568,7 @@ public class Launcher
 	 * 
 	 * - prochaines étapes :
 	 * 		- league
+	 * 		- tournante
 	 * 		- instance TBB (>> pixel art)
 	 * 		- sons
 	 * 		- BM'83
@@ -1605,8 +1606,6 @@ public class Launcher
 	 *  
 	 *  - enregistrement d'une partie : au lieu d'utiliser data+xml, mettre les données
 	 *    xml dans le fichier de données aussi. (au début bien entendu)
-	 *    
-	 * - voir quels threads swing prennent toutes les ressources sur les niveaux très chargés
 	 */ 
 	
 	
@@ -1634,20 +1633,11 @@ public class Launcher
 	 * 		x adapter les traj des bombes 
 	 */
 
-/**
- * TODO faire des versions neutres des niveaux pour la super coupe (différents suivant le leg)
- * 		(avec bordure de sol différente (?) >> avec hardwalls con logo GSU
- */
-
 // TODO utilité dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de préférences ?
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
 // TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
 
 /* TODO
- * - ça serait pas mal soit de :
- * 		- visualiser les stats de chaque round pdt le tournoi (un peu long ? + pb d'échelle)
- * 		- enregistrer ces stats dans des fichiers textes (nécessite de pouvoir les rouvrir par la suite)
- * 		x enregistrer chaque round automatiquement et séparément (peut on charger et revenir au round ? >> non)
  * - évolution des stats globales
  * 		- rajouter un bouton dans le menu principal, sous g-2/sc/conf : table vs. graphique
  * 		- ça fait trois panels graphiques différents, chacun avec ses propres boutons
@@ -1666,8 +1656,9 @@ public class Launcher
  */
 
 // TODO affichage ingame API : shift+F pour cycler affichage, F tout seul pour on/off (pour toutes les infos)
-// TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
+// TODO affichage ingame API : temps détaillés >> afficher un agent à la fois (combi avec les touches numériques ?)
 // TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
-// TODO une fois les plots recuperes, reformer playedMatch/rounds dans progressStat pour simplifier le beans
 // TODO remettre une forme light de finish pour éviter de prendre de la place avec les sprites et cie
+// TODO normaliser les boutons utilisés pour naviguer dans les stats
+// TODO changer le bouton "charger" pour "jouer" 
