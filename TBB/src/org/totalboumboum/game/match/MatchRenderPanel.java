@@ -22,12 +22,20 @@ package org.totalboumboum.game.match;
  */
 
 /**
+ * Interface a panel displaying a match
+ * must implement.
  * 
  * @author Vincent Labatut
- *
  */
 public interface MatchRenderPanel
-{
+{	/**
+	 * Called when the match is over.
+	 */
 	public void matchOver();
+	
+	/**
+	 * Called when one round of this
+	 * match is over.
+	 */
 	public void roundOver();
 }

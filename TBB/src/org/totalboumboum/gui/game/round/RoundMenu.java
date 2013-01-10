@@ -164,10 +164,18 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 		this.round = round;
 		round.setPanel(this);
 		
+		// number
+		Integer number = null;
+		Match match = round.getMatch();
+		if(browseOnly)
+			number = match.getCurrentIndex() + 1;
+		else
+			number = match.getPlayedRounds().size();
+		
 		// panels
-		roundDescription.setRound(round);
-		roundResults.setRound(round);
-		roundStatistics.setRound(round);	
+		roundDescription.setRound(round,number);
+		roundResults.setRound(round,number);
+		roundStatistics.setRound(round,number);	
 		
 		// buttons
 		refreshButtons();

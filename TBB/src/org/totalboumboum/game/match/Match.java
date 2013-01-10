@@ -29,7 +29,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -51,13 +50,21 @@ import org.totalboumboum.tools.computing.CombinatoricsTools;
 import org.xml.sax.SAXException;
 
 /**
+ * This class represents a match,
+ * i.e. a set of rounds.
  * 
  * @author Vincent Labatut
- *
  */
 public class Match implements StatisticHolder, Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard match.
+	 * 
+	 * @param tournament
+	 * 		Tournament this match belongs to.
+	 */
 	public Match(AbstractTournament tournament)
 	{	this.tournament = tournament;
 	}
@@ -65,12 +72,27 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// NAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name given by the designer of this match */
 	private String name;
 	
+	/**
+	 * Returns the name given by the 
+	 * designer of this match.
+	 * 
+	 * @return
+	 * 		Name of this match.
+	 */
 	public String getName()
 	{	return name;
 	}
 
+	/**
+	 * Changes the name given by the 
+	 * designer of this match.
+	 * 
+	 * @param name
+	 * 		New name of this match.
+	 */
 	public void setName(String name)
 	{	this.name = name;
 	}
@@ -78,8 +100,16 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Tournament containing this match */
 	private AbstractTournament tournament;
 	
+	/**
+	 * Returns the tournament 
+	 * containing this match.
+	 * 
+	 * @return
+	 * 		Tournament containing this match.
+	 */
 	public AbstractTournament getTournament()
 	{	return tournament;	
 	}
@@ -92,15 +122,24 @@ public class Match implements StatisticHolder, Serializable
 	/** Indicates if the match is finished */
 	private boolean matchOver = false;
 	
+	/**
+	 * Initializes this match with the
+	 * specified profiles.
+	 * 
+	 * @param profiles
+	 * 		Players to participate in this match.
+	 */
 	public void init(List<Profile> profiles)
 	{	begun = true;
 		
+		// rounds
 		playedRounds.clear();
-		
+		currentIndex = 0;
 		// are rounds in random order ?
     	if(randomOrder)
     		randomizeRounds();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+    	
 		// profiles
     	this.profiles.addAll(profiles);
 /*    	
@@ -116,8 +155,6 @@ public class Match implements StatisticHolder, Serializable
 			}
 		}
 */		
-		// rounds
-    	currentIndex = 0;
 		// stats
 		stats = new StatisticMatch(this);
 		stats.initStartDate();
@@ -134,13 +171,26 @@ public class Match implements StatisticHolder, Serializable
 	{	return begun;	
 	}
 
-	private void randomizeRounds()
-	{	Calendar cal = new GregorianCalendar();
-		long seed = cal.getTimeInMillis();
-		Random random = new Random(seed);
-		Collections.shuffle(rounds,random);
-	}
-	
+	/**
+	 * Goes to the next round in this match.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while initializing the next round.
+	 * @throws SecurityException
+	 * 		Problem while initializing the next round.
+	 * @throws ParserConfigurationException
+	 * 		Problem while initializing the next round.
+	 * @throws SAXException
+	 * 		Problem while initializing the next round.
+	 * @throws IOException
+	 * 		Problem while initializing the next round.
+	 * @throws ClassNotFoundException
+	 * 		Problem while initializing the next round.
+	 * @throws IllegalAccessException
+	 * 		Problem while initializing the next round.
+	 * @throws NoSuchFieldException
+	 * 		Problem while initializing the next round.
+	 */
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	Round round = rounds.get(currentIndex);
@@ -151,10 +201,20 @@ public class Match implements StatisticHolder, Serializable
 		}
 	}
 
+	/**
+	 * Checks if this match is over,
+	 * i.e. all rounds have been played.
+	 * 
+	 * @return
+	 * 		{@code true} iff this match is over.
+	 */
 	public boolean isOver()
 	{	return matchOver;
 	}
 	
+	/**
+	 * Cancels the whole tournament.
+	 */
 	public void cancel()
 	{	// TODO à compléter (stats)
 		tournament.cancel();
@@ -173,7 +233,7 @@ public class Match implements StatisticHolder, Serializable
 	}
 
 	/**
-	 * Goes to the previous match in
+	 * Goes to the previous round in
 	 * this match. Used for stat
 	 * browsing, not for actually playing
 	 * the tournament.
@@ -184,7 +244,7 @@ public class Match implements StatisticHolder, Serializable
 	}
 
 	/**
-	 * Goes to the next match in
+	 * Goes to the next round in
 	 * this match. Used for stat
 	 * browsing, not for actually playing
 	 * the tournament.
@@ -197,41 +257,113 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// LIMITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Limits for this match */
 	private Limits<MatchLimit> limits;
 
+	/**
+	 * Gets the limits 
+	 * for this match.
+	 * 
+	 * @return
+	 * 		Limits of this match.
+	 */
 	public Limits<MatchLimit> getLimits()
 	{	return limits;
 	}
+
+	/**
+	 * Changes the limits 
+	 * for this match.
+	 * 
+	 * @param limits
+	 * 		New limits of this match.
+	 */
 	public void setLimits(Limits<MatchLimit> limits)
 	{	this.limits = limits;
 	}
 			
 	/////////////////////////////////////////////////////////////////
-	// ROUNDS			/////////////////////////////////////////////
+	// ROUND ORDER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Whether the rounds should be played in a random order or not */
 	private boolean randomOrder;
-	/** List of the round models (never instantiated) */
-	private List<Round> rounds = new ArrayList<Round>();
-	/** List of the rounds already played */
-	private final List<Round> playedRounds = new ArrayList<Round>();
-
+	
+	/**
+	 * Checks if the rounds should
+	 * ne played in random order.
+	 * 
+	 * @return
+	 * 		{@code true} iff the rounds must be played in random order.
+	 */
 	public boolean getRandomOrder()
 	{	return randomOrder;
 	}
+	
+	/**
+	 * Changes the flag indicating if the 
+	 * rounds should ne played in random order.
+	 * 
+	 * @param randomOrder
+	 * 		If {@code true}, then the rounds must be played in random order.
+	 */
 	public void setRandomOrder(boolean randomOrder)
 	{	this.randomOrder = randomOrder;
 	}
 	
+	/**
+	 * Randomly changes the order of the rounds.
+	 */
+	private void randomizeRounds()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(rounds,random);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ROUNDS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** List of the round models (never instantiated) */
+	private List<Round> rounds = new ArrayList<Round>();
+	/** List of the rounds already played */
+	private final List<Round> playedRounds = new ArrayList<Round>();
+	
+	/**
+	 * Adds a round to this match.
+	 * 
+	 * @param round
+	 * 		New round belonging to this match.
+	 */
 	public void addRound(Round round)
 	{	rounds.add(round);		
 	}
+	
+	/**
+	 * Gets the list of original rounds
+	 * constituting this match.
+	 * 
+	 * @return
+	 * 		Original rounds of this match.
+	 */
 	public List<Round> getRounds()
 	{	return rounds;	
 	}
+	
+	/**
+	 * Sets up the list of original rounds
+	 * for this match.
+	 * 
+	 * @param rounds
+	 * 		New rounds of this match.
+	 */
 	public void setRounds(List<Round> rounds)
 	{	this.rounds.addAll(rounds);			
 	}
+	
+	/**
+	 * Removes all the rounds from this
+	 * match.
+	 */
 	public void clearRounds()
 	{	rounds.clear();	
 	}
@@ -284,15 +416,32 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of profiles participating in this match */
 	private final List<Profile> profiles = new ArrayList<Profile>();
-
+	
+	/**
+	 * Adds a new player to this match.
+	 * 
+	 * @param profile
+	 * 		Profile of the additional player.
+	 */
 	public void addProfile(Profile profile)
 	{	profiles.add(profile);
 	}
+	
+	@Override
 	public List<Profile> getProfiles()
 	{	return profiles;	
 	}
 	
+	/**
+	 * Returns the various numbers of players
+	 * allowed for this match (which depend on
+	 * the rounds contained in this match).
+	 * 
+	 * @return
+	 * 		A set of integer values, each one representing an allowed number of players.
+	 */
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
 		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
@@ -313,8 +462,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
-	
+	@Override
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
 		// points
@@ -384,6 +532,20 @@ public class Match implements StatisticHolder, Serializable
 	{	return currentRound;	
 	}
 	
+	/**
+	 * Returns the index of the
+	 * round currently played.
+	 * 
+	 * @return
+	 * 		Index of the current round.
+	 */
+	public int getCurrentIndex()
+	{	return currentIndex;	
+	}
+	
+	/**
+	 * Called when the current round is over.
+	 */
 	public void roundOver()
 	{	// stats
 		StatisticRound statsRound = currentRound.getStats();
@@ -412,6 +574,10 @@ public class Match implements StatisticHolder, Serializable
 		}
 	}
 	
+	/**
+	 * Allows terminating this object
+	 * appropriately (memory-wise.
+	 */
 	public void finish()
 	{	// rounds
 		currentRound = null;
@@ -435,8 +601,10 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Stats associated to this match */
 	private StatisticMatch stats;
 	
+	@Override
 	public StatisticMatch getStats()
 	{	return stats;
 	}
@@ -444,12 +612,26 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// AUTHOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Author of this match */
 	private String author;
 	
+	/**
+	 * Returns the name of the designer
+	 * of this match.
+	 * 
+	 * @return
+	 * 		Author(s) of this match.
+	 */
 	public String getAuthor()
 	{	return author;
 	}
 	
+	/**
+	 * Changes the author of this match.
+	 * 
+	 * @param author
+	 * 		New author of this match.
+	 */
 	public void setAuthor(String author)
 	{	this.author = author;
 	}
@@ -457,11 +639,27 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel used to display the match */
 	transient private MatchRenderPanel panel;
 	
+	/**
+	 * Changes the panel used to
+	 * display this match.
+	 * 
+	 * @param panel
+	 * 		New panel.
+	 */
 	public void setPanel(MatchRenderPanel panel)
 	{	this.panel = panel;
 	}
+	
+	/**
+	 * Returns the panel used to
+	 * display this match.
+	 * 
+	 * @return
+	 * 		The panel used to display this match.
+	 */
 	public MatchRenderPanel getPanel()
 	{	return panel;	
 	}
@@ -469,16 +667,40 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Notes describing this match */
 	private final List<String> notes = new ArrayList<String>();
 
+	/**
+	 * Changes the notes describing this match.
+	 * 
+	 * @param notes
+	 * 		New description.
+	 */
 	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
+	
+	/**
+	 * Returns the notes describing this match.
+	 * 
+	 * @return
+	 * 		Description of this match.
+	 */
 	public List<String> getNotes()
 	{	return notes;
 	}
 	
-	
+	/**
+	 * Makes a copy of this match,
+	 * used to clone the match and use
+	 * the clone to perform the actual game.
+	 * The original object is kept in case
+	 * the same match needs to be played again
+	 * during the same tournament.
+	 * 
+	 * @return
+	 * 		A copy of this match.
+	 */
 	public Match copy()
 	{	Match result = new Match(tournament);
 		// rounds

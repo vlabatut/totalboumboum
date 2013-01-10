@@ -75,9 +75,7 @@ public class CupTournament extends AbstractTournament
 		
 		// NOTE check if the number of selected players fits
 		currentIndex = 0;
-		currentLeg = legs.get(currentIndex);
-		currentMatch = currentLeg.init();
-		playedMatches.add(currentMatch);
+		currentLeg = null;
 		
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
@@ -85,7 +83,11 @@ public class CupTournament extends AbstractTournament
 
 	@Override
 	public void progress()
-	{	if(currentLeg.isOver())
+	{	if(currentLeg == null)
+		{	currentLeg = legs.get(currentIndex);
+			currentMatch = currentLeg.init();
+		}
+		else if(currentLeg.isOver())
 		{	currentIndex++;
 			currentLeg = legs.get(currentIndex);
 			currentMatch = currentLeg.init();

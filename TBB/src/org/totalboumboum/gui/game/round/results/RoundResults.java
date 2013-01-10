@@ -25,6 +25,7 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
@@ -63,16 +64,31 @@ public class RoundResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	/** Round displayed in this panel */
 	private Round round;
+	/** Number of the round currently displayed */
+	private int number;
 
 	/**
 	 * Changes the round displayed in this panel.
 	 * 
 	 * @param round
 	 * 		The new round to display.
+	 * @param number
+	 * 		Number of the round in the current match.
 	 */
-	public void setRound(Round round)
+	public void setRound(Round round, Integer number)
 	{	this.round = round;
 		resultsPanel.setStatisticHolder(round);
+		
+		// title
+		this.number = number;
+		String key = GuiKeys.GAME_ROUND_RESULTS_TITLE;
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+		if(number!=null)
+		{	text = text + " " + number;
+			tooltip = tooltip + " " + number;
+		}
+		setTitleText(text,tooltip);
 	}
 	
 	/**
@@ -94,6 +110,6 @@ public class RoundResults extends EntitledDataPanel
 	
 	@Override
 	public void refresh()
-	{	setRound(round);
+	{	setRound(round,number);
 	}
 }

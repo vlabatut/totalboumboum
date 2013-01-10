@@ -39,25 +39,28 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.stream.file.archive.GameArchiveLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
 /**
+ * Panel used to save tournament data.
  * 
  * @author Vincent Labatut
- *
  */
 public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanelListener
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.5f;
 
-	@SuppressWarnings("unused")
-	private String baseFolder;
-	
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Container of this panel.
+	 * @param baseFolder
+	 * 		Folder
+	 */
 	public SaveData(SplitMenuPanel container, String baseFolder)
 	{	super(container);
 		this.baseFolder = baseFolder;
@@ -117,16 +120,20 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 			}
 			
 			setDataPart(mainPanel);
-			
 		}
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// PANELS				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel displaying the folder browser */
 	private FolderBrowserSubPanel folderPanel;
+	/** Panel displaying the general information */
 	private ArchiveMiscSubPanel miscPanel;
+	/** Panel displaying the players */
 	private ArchivePlayersSubPanel playersPanel;
+	/** Split ratio */
+	private static final float SPLIT_RATIO = 0.5f;
 
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
@@ -141,10 +148,29 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 	/////////////////////////////////////////////////////////////////
 	// SELECTED ARCHIVE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Selected game save */
 	private GameArchive selectedArchive = null;	
+	/** Folder */
+	private String baseFolder;
 
+	/**
+	 * Returns the selected game save.
+	 * 
+	 * @return
+	 * 		Selected game save.
+	 */
 	public GameArchive getSelectedGameArchive()
 	{	return selectedArchive;
+	}
+
+	/**
+	 * Returns the folder.
+	 * 
+	 * @return
+	 * 		Folder.
+	 */
+	public String getBaseFolder()
+	{	return baseFolder;
 	}
 	
 	/////////////////////////////////////////////////////////////////
