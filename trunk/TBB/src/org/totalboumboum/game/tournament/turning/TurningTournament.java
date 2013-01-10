@@ -28,13 +28,22 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
 
 /**
+ * This tournament is based on a round-robin system,
+ * in the sense every few rounds/matches, some of the
+ * playing players are put to rest, whereas some of the
+ * resting players enter game. The winner is the one
+ * with the most points at the end, or reaching a point
+ * limit first.
  * 
  * @author Vincent Labatut
- *
  */
 public class TurningTournament extends AbstractTournament
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a standard tournament.
+	 */
 	public TurningTournament()
 	{	
 	}
@@ -87,21 +96,5 @@ public class TurningTournament extends AbstractTournament
 	public Set<Integer> getAllowedPlayerNumbers() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void rewind() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void regressStat()
-	{	// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void progressStat()
-	{	// TODO Auto-generated method stub
 	}
 }

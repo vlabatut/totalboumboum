@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -219,7 +220,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 			}
 			else if(tournament instanceof SingleTournament)
 			{	if(!browseOnly)
-					tournament.progress();
+					tournament.progress();//TODO progressStats for browseOnly?
 				SingleTournament trnmt = (SingleTournament) tournament;
 				// create
 				SingleDescription trnmtDescription = new SingleDescription(container);
@@ -369,10 +370,9 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
 					}
 					else
-					{	buttonMatch.setEnabled(true);
-						Match match = tournament.getCurrentMatch();
+					{	List<Match> playedMatches = tournament.getPlayedMatches();
 						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch);
-						if(match==null)
+						if(playedMatches.isEmpty())
 							buttonMatch.setEnabled(false);
 						else
 							buttonMatch.setEnabled(true);
@@ -571,7 +571,8 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
 		{	if(browseOnly)
-			{	Match match = tournament.getCurrentMatch();		
+			{	//tournament.progressStat();
+				Match match = tournament.getCurrentMatch();		
 				if(matchPanel==null || ((MatchSplitPanel)matchPanel).getMatch()!=match)
 				{	MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
 					mPanel.setMatchStats(match);
@@ -599,6 +600,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	if(browseOnly)
 			{	Match match = tournament.getCurrentMatch();		
+				//match.progressStat();
 				Round round = match.getCurrentRound();
 				if(matchPanel==null || ((RoundSplitPanel)matchPanel).getRound()!=round)
 				{	RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);

@@ -54,9 +54,17 @@ public interface StatisticHolder
 	 * Returns the statuses of the players.
 	 * 
 	 * @return
-	 * 		The statistics of this tournament.
+	 * 		The statistics of this game.
 	 */
 	public List<Boolean> getPlayersStatus();
 	
+	/**
+	 * Returns the players in
+	 * an order which depends on
+	 * theirs results in this game.
+	 * 
+	 * @return
+	 * 		Ranked players.
+	 */
 	public Ranks getOrderedPlayers();
 }

@@ -26,8 +26,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -39,8 +37,6 @@ import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.game.tournament.cup.CupLeg;
-import org.totalboumboum.game.tournament.cup.CupPart;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -54,7 +50,8 @@ import org.totalboumboum.tools.computing.CombinatoricsTools;
  *
  */
 public class LeagueTournament extends AbstractTournament
-{	private static final long serialVersionUID = 1L;
+{	/** Clas id */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
@@ -92,6 +89,7 @@ public class LeagueTournament extends AbstractTournament
 			currentIndex++;
 			currentMatch = match.copy();
 			currentMatch.init(prof);
+			playedMatches.add(currentMatch);
 		}
 	}
 
@@ -99,21 +97,6 @@ public class LeagueTournament extends AbstractTournament
 	public void finish()
 	{	// points
 //		pointsProcessor = null;
-	}
-
-	@Override
-	public void rewind()
-	{	currentIndex = 0;
-	}
-	
-	@Override
-	public void regressStat()
-	{	currentIndex--;
-	}
-
-	@Override
-	public void progressStat()
-	{	currentIndex++;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -167,6 +150,14 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the ranks for this tournament.
+	 * 
+	 * @param pts
+	 * 		Points scored by the players.
+	 * @return
+	 * 		Corresponding player ranks.
+	 */
 	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
@@ -242,8 +233,6 @@ public class LeagueTournament extends AbstractTournament
 	private ConfrontationOrder confrontationOrder;
 	private boolean minimizeConfrontations;
 	private List<Match> matches = new ArrayList<Match>();
-	private Match currentMatch;
-	private int currentIndex;
 	private int matchCount;
 	private List<Set<Integer>> confrontations;
 
@@ -331,11 +320,6 @@ public class LeagueTournament extends AbstractTournament
 	}
 	
 	@Override
-	public Match getCurrentMatch()
-	{	return currentMatch;	
-	}
-
-	@Override
 	public void matchOver()
 	{	// stats
 		StatisticMatch statsMatch = currentMatch.getStats();
@@ -373,6 +357,7 @@ public class LeagueTournament extends AbstractTournament
 		}
 	}
 	
+	@Override
 	public void roundOver()
 	{	panel.roundOver();
 	}
