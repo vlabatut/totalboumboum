@@ -147,7 +147,7 @@ public class Match implements StatisticHolder, Serializable
 			currentIndex++;
 			currentRound = round.copy();
 			currentRound.init();
-			playedRounds.add(round);
+			playedRounds.add(currentRound);
 		}
 	}
 
