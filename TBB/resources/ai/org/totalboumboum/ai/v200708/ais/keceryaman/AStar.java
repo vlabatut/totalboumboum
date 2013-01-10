@@ -227,6 +227,7 @@ public class AStar {
 		AStar.target = target;
 	}
 	
+	/** Zone width */
 	private static int width;
 	
 	/**
