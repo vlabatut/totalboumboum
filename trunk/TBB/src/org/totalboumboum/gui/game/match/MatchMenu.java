@@ -574,6 +574,8 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 				}
 				else
 					((RoundSplitPanel)roundPanel).refreshButtons();
+				
+				replaceWith(roundPanel);
 			}
 		}
 	} 

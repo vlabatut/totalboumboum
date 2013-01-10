@@ -416,11 +416,18 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 			Configuration.getEngineConfiguration().setRecordRounds(recordGames);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH))
-		{	parent.refresh();
+		{	
+			if(browseOnly)
+			{	Match match = round.getMatch();
+				AbstractTournament tournament = match.getTournament();
+				match = tournament.getCurrentMatch();
+				((MatchSplitPanel)parent).setMatch(match);
+			}
+			else
+			{	parent.refresh();
 
-			// possibly updating client state
-			if(!browseOnly)
-			{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+				// possibly updating client state
+				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 				if(connection!=null)
 				{	if(round.getMatch().getTournament() instanceof SingleTournament)
 						connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
