@@ -317,8 +317,10 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 				buttonRound.setEnabled(true);
 			}
 			else
-			{	// play
+			{	buttonTournament.setEnabled(true);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament);
 				buttonRound.setEnabled(false);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound);
 			}
 		
 			// record game & replay

@@ -269,12 +269,15 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 							buttonPlay.setEnabled(false);			
 					}
 					// otherwise
+					else
 					{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND, buttonPlay);
 					}
 				}
 			}
 			else
-			{	// play
+			{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
+				buttonMatch.setEnabled(true);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_MATCH, buttonPlay);
 				buttonPlay.setEnabled(false);
 			}
 		
