@@ -171,10 +171,18 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 		this.match = match;
 		match.setPanel(this);
 		
+		// number
+		Integer number = null;
+		AbstractTournament tournament = match.getTournament();
+		if(browseOnly)
+			number = tournament.getCurrentIndex() + 1;
+		else
+			number = tournament.getPlayedMatches().size();
+		
 		// panels
-		matchDescription.setMatch(match);
-		matchResults.setMatch(match);
-		matchStatistics.setMatch(match);	
+		matchDescription.setMatch(match,number);
+		matchResults.setMatch(match,number);
+		matchStatistics.setMatch(match,number);	
 		
 		// buttons
 		refreshButtons();

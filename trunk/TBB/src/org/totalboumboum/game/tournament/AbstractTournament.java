@@ -171,6 +171,17 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	}
 	
 	/**
+	 * Returns the index of the
+	 * match currently played.
+	 * 
+	 * @return
+	 * 		Index of the current match.
+	 */
+	public int getCurrentIndex()
+	{	return currentIndex;	
+	}
+
+	/**
 	 * Method called when a match is
 	 * finished.
 	 */

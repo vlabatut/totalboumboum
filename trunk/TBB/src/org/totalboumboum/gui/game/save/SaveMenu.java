@@ -47,7 +47,6 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
@@ -59,7 +58,8 @@ import org.xml.sax.SAXException;
  *
  */
 public class SaveMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 	public SaveMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);

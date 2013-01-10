@@ -25,6 +25,7 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.subpanel.events.RoundEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
@@ -52,7 +53,7 @@ public class RoundStatistics extends EntitledDataPanel
 		// title
 		String key = GuiKeys.GAME_ROUND_STATISTICS_TITLE;
 		setTitleKey(key);
-	
+		
 		// data
 		{	evolutionPanel = new RoundEvolutionSubPanel(dataWidth,dataHeight);
 			setDataPart(evolutionPanel);
@@ -64,7 +65,9 @@ public class RoundStatistics extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	/** The round displayed in this panel */
 	private Round round;
-
+	/** Number of the round currently displayed */
+	private int number;
+	
 	/**
 	 * Changes the round displayed in this
 	 * panel, and updates all concerned GUI
@@ -72,10 +75,23 @@ public class RoundStatistics extends EntitledDataPanel
 	 * 
 	 * @param round
 	 * 		The new round to display.
+	 * @param number
+	 * 		Number of the round in the current match.
 	 */
-	public void setRound(Round round)
+	public void setRound(Round round, Integer number)
 	{	this.round = round;
 		evolutionPanel.setRound(round);
+		
+		// title
+		this.number = number;
+		String key = GuiKeys.GAME_ROUND_STATISTICS_TITLE;
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+		if(number!=null)
+		{	text = text + " " + number;
+			tooltip = tooltip + " " + number;
+		}
+		setTitleText(text,tooltip);
 	}
 	
 	/**
@@ -97,6 +113,6 @@ public class RoundStatistics extends EntitledDataPanel
 
 	@Override
 	public void refresh()
-	{	setRound(round);
+	{	setRound(round,number);
 	}
 }

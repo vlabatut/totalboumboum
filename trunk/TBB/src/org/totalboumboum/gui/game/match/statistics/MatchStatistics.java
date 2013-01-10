@@ -25,6 +25,7 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.gui.common.content.subpanel.events.MatchEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
@@ -64,6 +65,8 @@ public class MatchStatistics extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	/** The match displayed in this panel */
 	private Match match;
+	/** Number of the match currently displayed */
+	private int number;
 
 	/**
 	 * Changes the match displayed in this
@@ -72,10 +75,23 @@ public class MatchStatistics extends EntitledDataPanel
 	 * 
 	 * @param match
 	 * 		The new match to display.
+	 * @param number
+	 * 		Number of the round in the current match.
 	 */
-	public void setMatch(Match match)
+	public void setMatch(Match match, Integer number)
 	{	this.match = match;
 		evolutionPanel.setMatch(match);
+		
+		// title
+		this.number = number;
+		String key = GuiKeys.GAME_MATCH_STATISTICS_TITLE;
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+		if(number!=null)
+		{	text = text + " " + number;
+			tooltip = tooltip + " " + number;
+		}
+		setTitleText(text,tooltip);
 	}
 	
 	/**
@@ -97,6 +113,6 @@ public class MatchStatistics extends EntitledDataPanel
 
 	@Override
 	public void refresh()
-	{	setMatch(match);
+	{	setMatch(match,number);
 	}
 }

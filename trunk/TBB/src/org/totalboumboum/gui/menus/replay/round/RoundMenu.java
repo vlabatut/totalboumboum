@@ -149,9 +149,9 @@ buttonStatistics.setEnabled(false);
 		round.setPanel(this);
 		
 		// panels
-		roundDescription.setRound(round);
-		roundResults.setRound(round);
-		roundStatistics.setRound(round);	
+		roundDescription.setRound(round,null);
+		roundResults.setRound(round,null);
+		roundStatistics.setRound(round,null);	
 		
 		// buttons
 		refreshButtons();

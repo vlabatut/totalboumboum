@@ -40,6 +40,7 @@ import org.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 
@@ -130,6 +131,9 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 	/////////////////////////////////////////////////////////////////	
 	/** Match displayed by this panel */
 	private Match match;
+	/** Number of the match currently displayed */
+	@SuppressWarnings("unused")
+	private int number;
 	
 	/**
 	 * Changes the match displayed
@@ -137,17 +141,34 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 	 * 
 	 * @param match
 	 * 		New match.
+	 * @param number
+	 * 		Number of the round in the current match.
 	 */
-	public void setMatch(Match match)
+	public void setMatch(Match match, Integer number)
 	{	// init
 		this.match = match;
+		
+		// title
+		this.number = number;
+		String key = GuiKeys.GAME_MATCH_DESCRIPTION_TITLE;
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+		if(number!=null)
+		{	text = text + " " + number;
+			tooltip = tooltip + " " + number;
+		}
+		setTitleText(text,tooltip);
+
+		// limits
 		Limits<MatchLimit> limits = null;
 		if(match!=null)
 		{	limits = match.getLimits();
 		}
+		
 		// players
 		List<Profile> players = match.getProfiles();
 		playersPanel.setPlayers(players);
+		
 		// limits & points
 		limitsPanel.setLimits(limits);
 	}

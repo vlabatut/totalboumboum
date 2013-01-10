@@ -516,6 +516,7 @@
 		- inclusion de panels de statistiques pendant les parties, pour afficher décrire 
 		  l'évolution de tournois/rencontres/manches sous forme de graphiques
 		- possibilité de visualiser les résultats détaillés d'un tournoi passé (et enregistré).
+		- affichage des numéros des matches/rounds dans les titres des panels (pour une meilleure navigation)
 	- ressources : 
 		- Shirobon SBM4
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)

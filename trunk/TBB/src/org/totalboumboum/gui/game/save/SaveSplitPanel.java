@@ -31,7 +31,6 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 
@@ -39,7 +38,8 @@ import org.totalboumboum.gui.tools.GuiImageTools;
  *
  */
 public class SaveSplitPanel extends SplitMenuPanel
-{	private static final long serialVersionUID = 1L; 
+{	/** Class id */
+	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
