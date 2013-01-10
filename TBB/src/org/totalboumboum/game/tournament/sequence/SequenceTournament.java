@@ -45,22 +45,39 @@ import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 
 /**
+ * In this tournament, all selected
+ * players play a series of matches.
+ * kind of like a league, but all players
+ * play all matches.
  * 
  * @author Vincent Labatut
- *
  */
 public class SequenceTournament extends AbstractTournament
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Tournament limits */
 	private Limits<TournamentLimit> limits;
 
+	/**
+	 * Returns the tournament limits.
+	 *  
+	 * @return
+	 * 		Tournament limits.
+	 */
 	public Limits<TournamentLimit> getLimits()
 	{	return limits;
 	}
 	
+	/**
+	 * Changes the tournament limits.
+	 *  
+	 * @param limits
+	 * 		New tournament limits.
+	 */
 	public void setLimits(Limits<TournamentLimit> limits)
 	{	this.limits = limits;
 	}
@@ -71,8 +88,10 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
+		
 		// matches
 		initMatches();
+		
 		// stats
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
@@ -96,52 +115,37 @@ public class SequenceTournament extends AbstractTournament
 		limits = null;
 	}
 	
-	@Override
-	public void rewind()
-	{	currentIndex = 0;
-	}
-	
-	@Override
-	public void regressStat()
-	{	currentIndex--;
-	}
-
-	@Override
-	public void progressStat()
-	{	currentIndex++;
-	}
-
 	/////////////////////////////////////////////////////////////////
-	// MATCHES			/////////////////////////////////////////////
+	// MATCH ORDER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the matches should be played in a random order */ 
 	private boolean randomizeMatches;
-	private List<Match> matches = new ArrayList<Match>();
-	private List<Match> playedMatches = new ArrayList<Match>();
-	private Match currentMatch;
-	private int currentIndex;
 
-	private void initMatches()
-	{	playedMatches.clear();
-		
-		// are matches in random order ?
-		if(randomizeMatches)
-			randomizeMatches();
-		
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		currentIndex = 0;
-	}
-	
+	/**
+	 * Indicates if the match order
+	 * should be random or not.
+	 * 
+	 * @return
+	 * 		{@code true} iff matches should be played in a random order.
+	 */
 	public boolean getRandomizeMatches()
 	{	return randomizeMatches;
 	}
+	
+	/**
+	 * Changes the flag indicating if the match order
+	 * should be random or not.
+	 * 
+	 * @param randomOrder
+	 * 		If {@code true}, matches should be played in a random order.
+	 */
 	public void setRandomizeMatches(boolean randomOrder)
 	{	this.randomizeMatches = randomOrder;
 	}
 
-	public void addMatch(Match match)
-	{	matches.add(match);
-	}
-
+	/**
+	 * Set matches in a random order.
+	 */
 	private void randomizeMatches()
 	{	Calendar cal = new GregorianCalendar();
 		long seed = cal.getTimeInMillis();
@@ -149,11 +153,36 @@ public class SequenceTournament extends AbstractTournament
 		Collections.shuffle(matches,random);
 	}
 	
-	@Override
-	public Match getCurrentMatch()
-	{	return currentMatch;	
+	/////////////////////////////////////////////////////////////////
+	// MATCHES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** List of prototype matches */
+	private List<Match> matches = new ArrayList<Match>();
+
+	/**
+	 * Initializes the matches to
+	 * be played in this tournament.
+	 */
+	private void initMatches()
+	{	// are matches in random order ?
+		if(randomizeMatches)
+			randomizeMatches();
+		
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		currentIndex = 0;
+		playedMatches.clear();
 	}
 	
+	/**
+	 * Adds a new match to this tournament.
+	 * 
+	 * @param match
+	 * 		Match to add to this tournament.
+	 */
+	public void addMatch(Match match)
+	{	matches.add(match);
+	}
+
 	@Override
 	public void matchOver()
 	{	// stats
@@ -185,6 +214,7 @@ public class SequenceTournament extends AbstractTournament
 		}
 	}
 
+	@Override
 	public void roundOver()
 	{	panel.roundOver();
 	}
@@ -207,6 +237,14 @@ public class SequenceTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the ranks for this tournament.
+	 * 
+	 * @param pts
+	 * 		Points scored by the players.
+	 * @return
+	 * 		Corresponding player ranks.
+	 */
 	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)

@@ -92,7 +92,15 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 * Used to come back to the first match,
 	 * when browsing statistics (<i>a posteriori</i>).
 	 */
-	public abstract void rewind();
+	public void rewind()
+	{	currentIndex = 0;
+		for(Match match: playedMatches)
+			match.rewind();
+		if(playedMatches.isEmpty())
+			currentMatch = null;
+		else
+			currentMatch = playedMatches.get(0);
+	}
 	
 	/**
 	 * Goes to the previous match in
@@ -100,7 +108,10 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 * browsing, not for actually playing
 	 * the tournament.
 	 */
-	public abstract void regressStat();
+	public void regressStat()
+	{	currentIndex--;
+		currentMatch = playedMatches.get(currentIndex);
+	}
 
 	/**
 	 * Goes to the next match in
@@ -108,8 +119,11 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 * browsing, not for actually playing
 	 * the tournament.
 	 */
-	public abstract void progressStat();
-
+	public void progressStat()
+	{	currentIndex++;
+		currentMatch = playedMatches.get(currentIndex);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -139,17 +153,22 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// MATCHES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Match currently played */
+	protected Match currentMatch;
+	/** Position of the match currently played (or leg, for the cup tournament) */
+	protected int currentIndex;
 	/** List of matches already played */
 	protected final List<Match> playedMatches = new ArrayList<Match>();
-
+	
 	/**
-	 * Returns the currently ongoing
-	 * match.
+	 * Returns the currently ongoing match.
 	 * 
 	 * @return
 	 * 		The current match for this tournament.
 	 */
-	public abstract Match getCurrentMatch();
+	public Match getCurrentMatch()
+	{	return currentMatch;
+	}
 	
 	/**
 	 * Method called when a match is
@@ -197,6 +216,17 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 		return result;
 	}
 
+	/**
+	 * Returns the list of matches already played
+	 * (or at least started).
+	 * 
+	 * @return
+	 * 		List of played matches.
+	 */
+	public List<Match> getPlayedMatches()
+	{	return playedMatches;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

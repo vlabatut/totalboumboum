@@ -30,6 +30,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import org.totalboumboum.game.match.Match;
+
 /**
  * Represents the settings of a leg in a 
  * cup tournament. It is formed of several 
@@ -58,15 +60,19 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Initializes this leg before starting it.
+	 * 
+	 * @return
+	 * 		The first match of the leg.
 	 */
-	public void init()
+	public Match init()
 	{	// are parts in random order ?
 		if(randomizeParts)
 			randomizeParts();
 		
 		currentIndex = 0;
 		currentPart = parts.get(currentIndex);
-		currentPart.init();
+		Match result = currentPart.init();
+		return result;
 	}
 	
 	/**
@@ -85,15 +91,22 @@ public class CupLeg implements Serializable
 	/**
 	 * Triggers progress in this leg,
 	 * i.e. goes to the next part. 
+	 * 
+	 * @return
+	 * 		The next match of this leg.
 	 */
-	public void progress()
-	{	if(currentPart.isOver())
+	public Match progress()
+	{	Match result;
+		
+		if(currentPart.isOver())
 		{	currentIndex++;
 			currentPart = parts.get(currentIndex);
-			currentPart.init();
+			result = currentPart.init();
 		}
 		else
-			currentPart.progress();
+			result = currentPart.progress();
+		
+		return result;
 	}
 	
 	/**
@@ -115,53 +128,6 @@ public class CupLeg implements Serializable
 	{	currentPart.matchOver();
 		if(currentPart.isOver() && currentIndex==parts.size()-1)
 			setOver(true);			
-	}
-
-	/**
-	 * Used to come back to the first match,
-	 * when browsing statistics (<i>a posteriori</i>).
-	 */
-	public void rewind()
-	{	currentIndex = 0;
-		currentPart = parts.get(currentIndex);
-		currentPart.rewind();
-	}
-	
-	/**
-	 * Goes to the previous part in
-	 * this leg. Used for stat
-	 * browsing, not for actually playing
-	 * the tournament.
-	 * 
-	 * @return
-	 * 		-1 if there is no previous part in this leg.
-	 */
-	public int regressStat()
-	{	int result = -1;
-		if(currentIndex>0)
-		{	currentIndex--;
-			currentPart = parts.get(currentIndex);
-		}
-		return result;
-	}
-
-	/**
-	 * Goes to the next part in
-	 * this leg. Used for stat
-	 * browsing, not for actually playing
-	 * the tournament.
-	 * 
-	 * @return
-	 * 		-1 if there is no next part in this leg.
-	 */
-	public int progressStat()
-	{	int result = -1;
-		if(currentIndex<parts.size())
-		{	currentIndex++;
-			currentPart = parts.get(currentIndex);
-			currentPart.rewind();
-		}
-		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

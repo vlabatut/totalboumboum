@@ -68,7 +68,8 @@ import org.xml.sax.SAXException;
  *
  */
 public class Round implements StatisticHolder, Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 	public Round(Match match)
 	{	this.match = match;

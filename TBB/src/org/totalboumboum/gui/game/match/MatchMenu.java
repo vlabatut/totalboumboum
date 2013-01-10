@@ -299,6 +299,11 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 				}
 				// next button
 				{	GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound);
+					List<Round> playedRounds = match.getPlayedRounds();
+					if(playedRounds.isEmpty())
+						buttonRound.setEnabled(false);
+					else
+						buttonRound.setEnabled(true);
 				}
 				buttonTournament.setEnabled(true);
 				buttonRound.setEnabled(true);
@@ -497,7 +502,8 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,Client
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	if(browseOnly)
-			{	Round round = match.getCurrentRound();
+			{	//match.progressStat();
+				Round round = match.getCurrentRound();
 				if(roundPanel==null || roundPanel.getRound()!=round)
 				{	roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 					roundPanel.setRoundStats(round);

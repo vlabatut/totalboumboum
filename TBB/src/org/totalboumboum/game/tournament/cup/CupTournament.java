@@ -34,7 +34,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
@@ -77,7 +76,8 @@ public class CupTournament extends AbstractTournament
 		// NOTE check if the number of selected players fits
 		currentIndex = 0;
 		currentLeg = legs.get(currentIndex);
-		currentLeg.init();
+		currentMatch = currentLeg.init();
+		playedMatches.add(currentMatch);
 		
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
@@ -88,12 +88,12 @@ public class CupTournament extends AbstractTournament
 	{	if(currentLeg.isOver())
 		{	currentIndex++;
 			currentLeg = legs.get(currentIndex);
-			currentLeg.init();
+			currentMatch = currentLeg.init();
 		}
 		else
-			currentLeg.progress();
+			currentMatch = currentLeg.progress();
 		
-		playedMatches.add(getCurrentMatch());
+		playedMatches.add(currentMatch);
 	}
 	
 	@Override
@@ -103,32 +103,6 @@ public class CupTournament extends AbstractTournament
 //			leg.finish();
 		legs.clear();
 		currentLeg = null;
-	}
-	
-	@Override
-	public void rewind()
-	{	currentIndex = 0;
-		currentLeg = legs.get(currentIndex);
-		currentLeg.rewind();
-	}
-	
-	@Override
-	public void regressStat()
-	{	int result = currentLeg.regressStat();
-		if(result==-1)
-		{	currentIndex--;
-			currentLeg = legs.get(currentIndex);
-		}
-	}
-
-	@Override
-	public void progressStat()
-	{	int result = currentLeg.progressStat();
-		if(result==-1)
-		{	currentIndex++;
-			currentLeg = legs.get(currentIndex);
-			currentLeg.rewind();
-		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -598,8 +572,6 @@ for(ArrayList<Integer> list: permutations)
 	/////////////////////////////////////////////////////////////////
 	/** The legs composing this cup tournament */
 	private final List<CupLeg> legs = new ArrayList<CupLeg>();
-	/** Index of the current leg */
-	private int currentIndex;
 	/** Object representing the current leg */
 	private CupLeg currentLeg;
 	
@@ -683,16 +655,8 @@ for(ArrayList<Integer> list: permutations)
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public Match getCurrentMatch()
-	{	CupPart currentPart = currentLeg.getCurrentPart();
-		Match match = currentPart.getCurrentMatch();
-		return match;
-	}
-
-	@Override
 	public void matchOver()
 	{	// stats
-		Match currentMatch = getCurrentMatch();
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		

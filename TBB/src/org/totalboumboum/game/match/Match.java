@@ -166,6 +166,10 @@ public class Match implements StatisticHolder, Serializable
 	 */
 	public void rewind()
 	{	currentIndex = 0;
+		if(playedRounds.isEmpty())
+			currentRound = null;
+		else
+			currentRound = playedRounds.get(0);
 	}
 
 	/**
@@ -176,6 +180,7 @@ public class Match implements StatisticHolder, Serializable
 	 */
 	public void regressStat()
 	{	currentIndex--;
+		currentRound = playedRounds.get(currentIndex);
 	}
 
 	/**
@@ -186,6 +191,7 @@ public class Match implements StatisticHolder, Serializable
 	 */
 	public void progressStat()
 	{	currentIndex++;
+		currentRound = playedRounds.get(currentIndex);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -203,8 +209,11 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the rounds should be played in a random order or not */
 	private boolean randomOrder;
+	/** List of the round models (never instantiated) */
 	private List<Round> rounds = new ArrayList<Round>();
+	/** List of the rounds already played */
 	private final List<Round> playedRounds = new ArrayList<Round>();
 
 	public boolean getRandomOrder()
@@ -259,6 +268,17 @@ public class Match implements StatisticHolder, Serializable
 		boolean result = round==lastRound;
 		
 		return result;
+	}
+
+	/**
+	 * Returns the list of rounds already played
+	 * (or at least started).
+	 * 
+	 * @return
+	 * 		List of played rounds.
+	 */
+	public List<Round> getPlayedRounds()
+	{	return playedRounds;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -348,12 +368,22 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current round */
 	private Round currentRound;
+	/** Position of the current round in the list of rounds */
 	private int currentIndex;
 	
+	/**
+	 * Returns the round currently
+	 * played.
+	 * 
+	 * @return
+	 * 		The current round.
+	 */
 	public Round getCurrentRound()
 	{	return currentRound;	
 	}
+	
 	public void roundOver()
 	{	// stats
 		StatisticRound statsRound = currentRound.getStats();

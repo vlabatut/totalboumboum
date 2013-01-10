@@ -74,8 +74,11 @@ public class CupPart implements Serializable
 	
 	/**
 	 * Initializes this part.
+	 * 
+	 * @return 
+	 * 		The match of this part.
 	 */
-	public void init()
+	public Match init()
 	{	// match
 		currentMatch = match;
 		
@@ -87,6 +90,8 @@ public class CupPart implements Serializable
 				profiles.add(p);
 		}
 		currentMatch.init(profiles);
+		
+		return currentMatch;
 	}
 	
 	/**
@@ -104,9 +109,13 @@ public class CupPart implements Serializable
 	/**
 	 * Advances through this part (which
 	 * is likely to contain several rounds). 
+	 * 
+	 * @return
+	 * 		The next match in this part.
 	 */
-	public void progress()
+	public Match progress()
 	{	currentMatch = tieBreak.initMatch();
+		return currentMatch;
 	}
 	
 	/**
@@ -238,15 +247,6 @@ public class CupPart implements Serializable
 		return result;
 	}
 	
-	/**
-	 * Used to come back to the first match,
-	 * when browsing statistics (<i>a posteriori</i>).
-	 */
-	public void rewind()
-	{	currentMatch = match;
-		currentMatch.rewind();
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
