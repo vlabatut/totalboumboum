@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -264,6 +265,9 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		{	String folderName = levelsSelection.getFolderName(i);
 			String packName = levelsSelection.getPackName(i);
 			Round round = new Round(match);
+			round.setAuthor("QuickMatch");
+			round.setName("Round "+(i+1));
+			round.setNotes(Arrays.asList("QuickMatch"));
 			match.addRound(round);
 	    	try
 			{	HollowLevel hollowLevel = HollowLevelLoader.loadHollowLevel(packName,folderName);

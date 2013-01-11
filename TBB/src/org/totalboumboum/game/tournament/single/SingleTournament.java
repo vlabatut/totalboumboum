@@ -171,8 +171,9 @@ public class SingleTournament extends AbstractTournament
 
 	@Override
 	public void progress()
-	{	if(!isOver() && currentMatch.getProfiles().size()==0)
-		{	currentMatch.init(profiles);
+	{	if(!isOver())
+		{	if(currentMatch.getProfiles().size()==0)
+				currentMatch.init(profiles);
 			playedMatches.add(currentMatch);
 		}
 	}

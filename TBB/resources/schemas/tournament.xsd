@@ -83,7 +83,8 @@
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="RANDOM" />
-			<xsd:enumeration value="UNIFORM" />
+			<xsd:enumeration value="HOMOGENEOUS" />
+			<xsd:enumeration value="HETEROGENEOUS" />
 		</xsd:restriction>
 	</xsd:simpleType>
 

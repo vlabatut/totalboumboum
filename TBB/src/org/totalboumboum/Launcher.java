@@ -1644,6 +1644,7 @@ public class Launcher
  * 		- pb : comment choisir les joueurs a afficher ?
  * 			>> on pourrait simplement les selectionner en cliquant sur leur nom dans la table
  * 			>> mais alors, comment donner/changer la legende ?
+ * 			>> faut un bouton de couleur specifique, qu'on peut faire cycler
  * 		- nécessaire de changer le stockage des stats
  * 		- résolution temporelle ? rounds ? dates ? mises à jour G-2 ?
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
@@ -1655,10 +1656,10 @@ public class Launcher
  * 		- modifier le document pour présenter le parser à la fin, avec la checklist
  */
 
+// TODO l'affichage des results du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
 // TODO affichage ingame API : shift+F pour cycler affichage, F tout seul pour on/off (pour toutes les infos)
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois (combi avec les touches numériques ?)
-// TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
+// TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
 // TODO remettre une forme light de finish pour éviter de prendre de la place avec les sprites et cie
-// TODO normaliser les boutons utilisés pour naviguer dans les stats
-// TODO changer le bouton "charger" pour "jouer" 
+// TODO tester toutes les formes de tournois : jeu et visualisation des stats

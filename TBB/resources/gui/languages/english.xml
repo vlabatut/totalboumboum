@@ -588,9 +588,9 @@
 				<text name="Title" value="Load a Game" tooltip="Load a previous game" />
 				<group name="Button">
 					<text name="Cancel" value="Cancel" tooltip="Cancel and go back to the main menu" />
-					<text name="Confirm" value="Confirm" tooltip="Confirm and load your selection" />
+					<text name="Load" value="Play" tooltip="Load and play the selected game" />
 					<text name="Delete" value="Delete" tooltip="Delete the selected game" />
-					<text name="Statistics" value="Statistics" tooltip="Load the selection to browse its statistics" />
+					<text name="Statistics" value="Statistics" tooltip="Load the selected game and browse its statistics" />
 				</group>
 				<group name="Delete">
 					<text name="Question" value="Do you really want to delete this game ?" tooltip="Do you really want to delete this replay?" />

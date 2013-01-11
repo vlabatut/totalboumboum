@@ -37,12 +37,32 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 /**
+ * Loads an XML file representing a sequence tournament.
  * 
  * @author Vincent Labatut
- *
  */
 public class SequenceTournamentLoader
 {	
+	/**
+	 * Processes the main element of an XML
+	 * file representing a sequence tournament.
+	 * 
+	 * @param folder
+	 * 		Folder containing the XML file.
+	 * @param root
+	 * 		Root element of the tournament.
+	 * @return
+	 * 		The read tournament.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the XML file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the XML file.
+	 */
 	public static SequenceTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	SequenceTournament result = new SequenceTournament();
 		Element element;
@@ -58,6 +78,25 @@ public class SequenceTournamentLoader
 		return result;
 	}
 	
+	/**
+	 * Loads the XML element representing matches.
+	 * 
+	 * @param root
+	 * 		Root XML element.
+	 * @param folder
+	 * 		Folder containing the XML file.
+	 * @param result
+	 * 		The read tournament.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the XML file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the XML file.
+	 */
 	@SuppressWarnings("unchecked")
 	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// matches order
@@ -72,12 +111,48 @@ public class SequenceTournamentLoader
 			loadMatchElement(temp,folder,result);
 		}
 	}
-		
+	
+	/**
+	 * Loads an XML element representing a match.
+	 * 
+	 * @param root
+	 * 		Root XML element.
+	 * @param folder
+	 * 		Folder containing the XML file.
+	 * @param result
+	 * 		The read tournament.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the XML file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the XML file.
+	 */
 	private static void loadMatchElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Match match = TournamentLoader.loadMatchElement(root,folder,result);
 		result.addMatch(match);
 	}
 
+	/**
+	 * Loads an XML element representing the tournament limits.
+	 * 
+	 * @param root
+	 * 		Root XML element.
+	 * @param folder
+	 * 		Folder containing the XML file.
+	 * @return
+	 * 		A list of limits.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the XML file.
+	 */
 	@SuppressWarnings("unchecked")
 	public static Limits<TournamentLimit> loadLimitsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limits<TournamentLimit> result = new Limits<TournamentLimit>();
