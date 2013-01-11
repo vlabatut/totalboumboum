@@ -28,23 +28,32 @@ import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.game.tournament.turning.TurningTournament;
 
 /**
+ * This type represents the various types of tournaments.
  * 
  * @author Vincent Labatut
- *
  */
 public enum TournamentType
 {
-	/** knock-out type tournament (direct eliminations) */
+	/** Knock-out type tournament (direct eliminations) */
 	CUP,
-	/** round-robin tournament (each player meets all the others) */
+	/** Round-robin tournament (each player meets all the others) */
 	LEAGUE,
-	/** sequence of matches opposing the same players */
+	/** Sequence of matches opposing the same players */
 	SEQUENCE,
-	/** one single match */
+	/** One single match */
 	SINGLE,
-	/** around the table tournament (players alternatively play and wait) */ 
+	/** Around the table tournament (players alternatively play and wait) */ 
 	TURNING;
 	
+	/**
+	 * Returns the appropriate value depending
+	 * on the class of the specified tournament.
+	 * 
+	 * @param tournament
+	 * 		Considered tournament.
+	 * @return
+	 * 		Corresponding enum type.
+	 */
 	public static TournamentType getType(AbstractTournament tournament)
 	{	TournamentType result = null;
 		if(tournament instanceof CupTournament)

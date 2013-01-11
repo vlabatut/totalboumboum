@@ -349,19 +349,22 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		{	if(tournament!=null)
 			{	if(tournament instanceof SingleTournament)
 				{	if(!tournament.hasBegun())
-					{	buttonMatch.setEnabled(false);
+					{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND, buttonMatch);
+						buttonMatch.setEnabled(false);
 						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
+						buttonMenu.setEnabled(true);
 					}
 					else
 					{	buttonMatch.setEnabled(true);
 						Match match = tournament.getCurrentMatch();
 						Round round = match.getCurrentRound();
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonMatch);
+						GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND, buttonMatch);
 						if(round==null)
 							buttonMatch.setEnabled(false);
 						else
 							buttonMatch.setEnabled(true);
 						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
+						buttonMenu.setEnabled(true);
 					}				
 				}
 				else
@@ -371,17 +374,20 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 					}
 					else
 					{	List<Match> playedMatches = tournament.getPlayedMatches();
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch);
+						GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_MATCH, buttonMatch);
 						if(playedMatches.isEmpty())
 							buttonMatch.setEnabled(false);
 						else
 							buttonMatch.setEnabled(true);
 						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
+						buttonMenu.setEnabled(true);
 					}
 				}
 			}
 			else
 			{	buttonMatch.setEnabled(false);
+				GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
+				buttonMenu.setEnabled(true);
 			}
 		
 			// record game & replay
@@ -569,8 +575,8 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 			
 			replaceWith(matchPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
-		{	if(browseOnly)
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_NEXT_MATCH))
+		{	//if(browseOnly)
 			{	//tournament.progressStat();
 				Match match = tournament.getCurrentMatch();		
 				if(matchPanel==null || ((MatchSplitPanel)matchPanel).getMatch()!=match)
@@ -580,76 +586,79 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 				}
 				else
 					((MatchSplitPanel)matchPanel).refreshButtons();
+				
+				replaceWith(matchPanel);
 			}
-			else
-			{	tournament.progress();
-				MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
-				matchPanel = mPanel;
-				Match match = tournament.getCurrentMatch();		
-				mPanel.setMatch(match);
-				mPanel.autoAdvance();
-	
-				// possibly updating client state
-				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-				if(connection!=null)
-					connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
-			}
+		}
+		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
+		{	tournament.progress();
+			MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
+			matchPanel = mPanel;
+			Match match = tournament.getCurrentMatch();		
+			mPanel.setMatch(match);
+			mPanel.autoAdvance();
+					// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
 			
 			replaceWith(matchPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
-		{	if(browseOnly)
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND))
+		{	//if(browseOnly)
 			{	Match match = tournament.getCurrentMatch();		
 				//match.progressStat();
 				Round round = match.getCurrentRound();
 				if(matchPanel==null || ((RoundSplitPanel)matchPanel).getRound()!=round)
 				{	RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 					matchPanel = rPanel;
-					rPanel.setRound(round);
+					rPanel.setRoundStats(round);
 				}
 				else
 					((RoundSplitPanel)matchPanel).refreshButtons();
+				
+				replaceWith(matchPanel);
 			}
-			else
-			{	Match match = tournament.getCurrentMatch();		
-				try
-				{	match.progress();
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}
-				RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);
-				matchPanel = rPanel;
-				Round round = match.getCurrentRound();
-				rPanel.setRound(round);
-				rPanel.autoAdvance();
-	
-				// possibly updating client state
-				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-				if(connection!=null)
-					connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
+		}
+		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
+		{	Match match = tournament.getCurrentMatch();		
+			try
+			{	match.progress();
 			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+			RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);
+			matchPanel = rPanel;
+			Round round = match.getCurrentRound();
+			rPanel.setRound(round);
+			rPanel.autoAdvance();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
 			
 			replaceWith(matchPanel);
 	    }

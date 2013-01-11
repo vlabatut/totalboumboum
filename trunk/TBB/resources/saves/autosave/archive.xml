@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut
@@ -19,26 +19,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Coupe de test" type="CUP" />
-	<played matches="3" rounds="2" />
-	<dates start="2013-01-10T21:54:26" save="2013-01-10T22:09:17" />
+	<tournament name="N/A" type="SINGLE" />
+	<played matches="0" rounds="11" />
+	<dates start="2013-01-11T14:15:07" save="2013-01-11T14:20:53" />
 	<players>
+		<player name="1213.Besnili+Kangal" />
 		<player name="0708.Kurtuluş+Özsoy" />
-		<player name="0809.Kökciyan+Mazmanoğlu" />
-		<player name="1112.Ünlü+Yıldırım" />
-		<player name="1112.Bal+Çetin" />
-		<player name="0809.Akpolat+Şener" />
-		<player name="0708.Demirkol+Doğan" />
-		<player name="0708.Şahin+Yıldırım" />
-		<player name="0809.Medeni+Uluer" />
-		<player name="0708.Başman+Sandallı" />
-		<player name="0708.Okan+Yüksel" />
-		<player name="0809.Demirağ+Şagar" />
-		<player name="0708.Hanci+Toprak" />
-		<player name="Simplet" />
-		<player name="0708.Çamaş+Demirbaş" />
-		<player name="1011.Kayuka+Yıldırım" />
-		<player name="0910.Dane+Şatır" />
 	</players>
 </archive>
 
