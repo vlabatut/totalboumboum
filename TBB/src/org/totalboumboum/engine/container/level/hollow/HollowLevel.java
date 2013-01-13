@@ -71,12 +71,16 @@ import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
- * 
+ * Represents a level before its 
+ * sprites are actually loaded.
+ * Just the level properties and
+ * names of the sprites are stored.
+ *  
  * @author Vincent Labatut
- *
  */
 public class HollowLevel implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 	public HollowLevel()
 	{		
@@ -675,11 +679,28 @@ if(instance==null)
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void finish()
-    {	instance = null;
-    	level = null;
-    	levelInfo = null;
+	/**
+	 * Starts cleaning the useless fields
+	 * of this object. Should be completed
+	 * by calling {@link #finish()} later.
+	 */
+    public void clean()
+	{	instance = null;
+		level = null;
     	players = null;
+    	suddenDeathEvents = null;
+    	theme = null;
     	zone = null;
+	}
+    
+    /**
+     * Cleanly terminates this
+     * object, in order to free some memory.
+     * Should be called in complement to the
+     * {@link #clean()} method. 
+     */
+    public void finish()
+    {	itemCounts = null;
+    	levelInfo = null;
     }
 }

@@ -53,14 +53,22 @@ import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Menu used to save a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class SaveMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Swing container of this panel.
+	 * @param parent
+	 * 		Parent menu item.
+	 */
 	public SaveMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
@@ -97,18 +105,27 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Data panel */
 	private SaveData levelData;
 
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Button used to write on an existing save */
 	private JButton buttonConfirm;
+	/** Cancel button */
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
+	/** Button used to delete an existing file */
 	private JButton buttonDelete;
+	/** Button used to create a new file */
 	@SuppressWarnings("unused")
 	private JButton buttonNew;
-
+	
+	/**
+	 * Update the buttons depending on 
+	 * the file selection.
+	 */
 	private void refreshButtons()
 	{	GameArchive gameArchive = levelData.getSelectedGameArchive();
 		if(gameArchive==null)
@@ -124,9 +141,18 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current tournament */
 	private AbstractTournament tournament;
+	/** Folder browsed while selecting files */
 	private String baseFolder = FilePaths.getSavesPath();
 	
+	/**
+	 * Changes the tournament handled
+	 * by this menu.
+	 * 
+	 * @param tournament
+	 * 		New tournament.
+	 */
 	public void setTournament(AbstractTournament tournament)
 	{	this.tournament = tournament;
 	}
@@ -134,6 +160,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -169,6 +196,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void refresh()
 	{	
 	}
@@ -184,8 +212,11 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Modal dialog used to enter the name of a new file */
 	private InputModalDialogPanel inputModalNew = null;
+	/** Modal dialog used to confirm a deletion */
 	private QuestionModalDialogPanel questionModalDelete = null;
+	/** Modal dialog used to confirm a file replacement */
 	private QuestionModalDialogPanel questionModalConfirm = null;
 	
 	@Override

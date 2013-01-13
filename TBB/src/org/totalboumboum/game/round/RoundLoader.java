@@ -43,12 +43,31 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Loads a round object.
  * 
  * @author Vincent Labatut
- *
  */
 public class RoundLoader
 {	
+	/**
+	 * Loads a round object.
+	 * 
+	 * @param folderPath
+	 * 		Location of the round object.
+	 * @param match
+	 * 		Match containing the round.
+	 * @return
+	 * 		The loaded round.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the round.
+	 * @throws SAXException
+	 * 		Problem while loading the round.
+	 * @throws IOException
+	 * 		Problem while loading the round.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the round.
+	 */
 	public static Round loadRoundFromFolderPath(String folderPath, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
@@ -69,12 +88,50 @@ public class RoundLoader
 		return result;
     }
     
+	/**
+	 * Loads a round just using its name.
+	 * 
+	 * @param name
+	 * 		Name of the round.
+	 * @param match
+	 * 		Match containing the round.
+	 * @return
+	 * 		Loaded match.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the round.
+	 * @throws SAXException
+	 * 		Problem while loading the round.
+	 * @throws IOException
+	 * 		Problem while loading the round.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the round.
+	 */
 	public static Round loadRoundFromName(String name, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = FilePaths.getRoundsPath()+File.separator+name;
 		Round result = loadRoundFromFolderPath(individualFolder,match);
 		return result;
     }
 
+	/**
+	 * Loads the {@code round} element.
+	 * 
+	 * @param root
+	 * 		Root element.
+	 * @param folderPath
+	 * 		Folder containing the file.
+	 * @param result
+	 * 		Loaded match. 
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the match.
+	 * @throws SAXException
+	 * 		Problem while loading the match.
+	 * @throws IOException
+	 * 		Problem while loading the match.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the match.
+	 */
     private static void loadRoundElement(Element root, String folderPath, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
     	Element element;
@@ -101,6 +158,23 @@ public class RoundLoader
 		loadLevelElement(element,result);
 	}		
 		
+	/**
+	 * Loads the {@code level} element.
+	 * 
+	 * @param root
+	 * 		Root element.
+	 * @param result
+	 * 		Loaded match. 
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the match.
+	 * @throws SAXException
+	 * 		Problem while loading the match.
+	 * @throws IOException
+	 * 		Problem while loading the match.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the match.
+	 */
     private static void loadLevelElement(Element root, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// random locations
     	String randomLocationStr = root.getAttributeValue(XmlNames.RANDOM_LOCATION).trim();
@@ -116,6 +190,23 @@ public class RoundLoader
     	result.setHollowLevel(hollowLevel);
     }
     
+	/**
+	 * Loads the {@code limits} element.
+	 * 
+	 * @param root
+	 * 		Root element.
+	 * @param folder
+	 * 		Folder containing the limits file. 
+	 * @return 
+	 * 		The limits of the loaded round.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the match.
+	 * @throws SAXException
+	 * 		Problem while loading the match.
+	 * @throws IOException
+	 * 		Problem while loading the match.
+	 */
 	@SuppressWarnings("unchecked")
 	public static Limits<RoundLimit> loadLimitsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limits<RoundLimit> result = new Limits<RoundLimit>();
