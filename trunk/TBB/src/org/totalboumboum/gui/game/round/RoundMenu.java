@@ -420,8 +420,10 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 			if(browseOnly)
 			{	Match match = round.getMatch();
 				AbstractTournament tournament = match.getTournament();
-				match = tournament.getCurrentMatch();
-				((MatchSplitPanel)parent).setMatch(match);
+				if(!(tournament instanceof SingleTournament))
+				{	match = tournament.getCurrentMatch();
+					((MatchSplitPanel)parent).setMatch(match);
+				}
 			}
 			else
 			{	parent.refresh();
@@ -440,6 +442,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,Client
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_FINISH))
 		{	//round.finish(); //NOTE in order to avoid getting empty round in the saves
+round.clean();
 			parent.refresh();
 			if(parent instanceof MatchSplitPanel)
 				((MatchSplitPanel)parent).autoAdvance();

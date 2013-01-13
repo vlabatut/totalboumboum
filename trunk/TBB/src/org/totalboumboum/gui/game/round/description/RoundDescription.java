@@ -31,6 +31,7 @@ import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.engine.container.level.preview.LevelPreviewLoader;
 import org.totalboumboum.game.limit.Limit;
@@ -264,7 +265,10 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 			{	hollowLevel = round.getHollowLevel();
 				limits = round.getLimits();
 				try
-				{	levelPreview = LevelPreviewLoader.loadLevelPreview(hollowLevel.getLevelInfo().getPackName(),hollowLevel.getLevelInfo().getFolder());
+				{	LevelInfo levelInfo = hollowLevel.getLevelInfo();
+					String packName = levelInfo.getPackName();
+					String folder = levelInfo.getFolder();
+					levelPreview = LevelPreviewLoader.loadLevelPreview(packName,folder);
 					image = levelPreview.getVisualPreview();
 				}
 				catch (ParserConfigurationException e)

@@ -22,13 +22,26 @@ package org.totalboumboum.game.round;
  */
 
 /**
+ * Interface which must be implemented
+ * by the GUI object used to display a round info.
  * 
  * @author Vincent Labatut
- *
  */
 public interface RoundRenderPanel
-{
+{	/**
+	 * Method called when the round is finished.
+	 */
 	public void roundOver();
+	
+	/**
+	 * Method called when one step is performed
+	 * during the round loading.
+	 */
 	public void loadStepOver();
+	
+	/**
+	 * Method called when one step is performed
+	 * during the round simulation.
+	 */
 	public void simulationStepOver();
 }

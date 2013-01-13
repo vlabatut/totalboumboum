@@ -63,14 +63,21 @@ import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
+ * This class represents a round,
+ * i.e. the smalles division of a game.
  * 
  * @author Vincent Labatut
- *
  */
 public class Round implements StatisticHolder, Serializable
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard round.
+	 * 
+	 * @param match
+	 * 		Match this round belongs to.
+	 */
 	public Round(Match match)
 	{	this.match = match;
 	}
@@ -78,12 +85,27 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// NAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name given by the designer of this round */
 	private String name;
 	
+	/**
+	 * Returns the name given by the 
+	 * designer of this match.
+	 * 
+	 * @return
+	 * 		Name of this match.
+	 */
 	public String getName()
 	{	return name;
 	}
 
+	/**
+	 * Changes the name given by the 
+	 * designer of this match.
+	 * 
+	 * @param name
+	 * 		New name of this match.
+	 */
 	public void setName(String name)
 	{	this.name = name;
 	}
@@ -91,18 +113,48 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if the round is finished */
 	private boolean roundOver = false;
 	
+	/**
+	 * Called when one step is done,
+	 * during the loading phase.
+	 */
 	public void loadStepOver()
 	{	if(panel!=null)
 			panel.loadStepOver();		
 	}
 	
+	/**
+	 * Called when one step is done,
+	 * during the simulation phase.
+	 */
 	public void simulationStepOver()
 	{	if(panel!=null)
 			panel.simulationStepOver();		
 	}
 	
+	/**
+	 * Initializes this round.
+	 * Sprites are not loaded yet, though.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problems while loading the round data. 
+	 * @throws SAXException 
+	 * 		Problems while loading the round data. 
+	 * @throws IOException 
+	 * 		Problems while loading the round data. 
+	 * @throws ClassNotFoundException 
+	 * 		Problems while loading the round data. 
+	 * @throws IllegalArgumentException 
+	 * 		Problems while loading the round data. 
+	 * @throws SecurityException 
+	 * 		Problems while loading the round data. 
+	 * @throws IllegalAccessException 
+	 * 		Problems while loading the round data. 
+	 * @throws NoSuchFieldException 
+	 * 		Problems while loading the round data. 
+	 */
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	//stats
 		stats = new StatisticRound(this);
@@ -125,15 +177,47 @@ public class Round implements StatisticHolder, Serializable
 		Arrays.fill(currentPoints,0);
 	}
 	
+	/**
+	 * Checks if this round is over,
+	 * i.e. one limit has been reached.
+	 * 
+	 * @return
+	 * 		{@code true} iff this match is over.
+	 */
 	public boolean isOver()
 	{	return roundOver;
 	}
 	
+	/**
+	 * Cancels this round
+	 * (i.e. it is finished before
+	 * its regular limit).
+	 */
 	public void cancel()
 	{	// TODO à compléter
 		match.cancel();
 	}
 	
+	/**
+	 * Actually starts the round.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading the round.
+	 * @throws SecurityException
+	 * 		Problem while loading the round.
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the round.
+	 * @throws SAXException
+	 * 		Problem while loading the round.
+	 * @throws IOException
+	 * 		Problem while loading the round.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the round.
+	 * @throws IllegalAccessException
+	 * 		Problem while loading the round.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading the round.
+	 */
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
@@ -181,13 +265,22 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// TODO maybe should better be handled at a configuration level, like for the network connections
 	// TODO maybe all the round ingame stuff should be over there too
+	/** Server stream, for the network mode */
 	private FileServerStream fileOut = null;
+	/** Client stream, for the network mode */
 	private FileClientStream fileIn = null;
 /*	
 	public void setNetOutputGameStream(NetOutputServerStream netOut)
 	{	this.netOut = netOut;
 	}
 */	
+	/**
+	 * Changes the input stream,
+	 * for the network mode.
+	 * 
+	 * @param in
+	 * 		New input stream.
+	 */
 	public void setInputStream(FileClientStream in)
 	{	fileIn = in;
 	}
@@ -195,38 +288,73 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Cleanly terminates this object.
+	 */
 	public void finish()
-	{	// loop
-		loop.finish();
-		loop = null;
-		
+	{	
 		// level description
 		hollowLevel.finish();
 		hollowLevel = null;
 		
 		// misc
 		match = null;
-		panel = null;
-		playersStatus.clear();
+		author = null;
+		name = null;
+		notes.clear();
+		currentPoints = null;
+		limits = null;
 		stats = null;
-		RoundVariables.level = null;
-		RoundVariables.loop = null;
-		RoundVariables.instance = null;
 		
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
 	}
+	
+	/**
+	 * Remove some uneeded resources
+	 * from memory, so that they do not
+	 * accumulate in memory and block the game. 
+	 */
+	public void clean()
+	{	// loop
+		loop.finish();
+		loop = null;
 
+		// round variables
+		RoundVariables.level = null;
+		RoundVariables.loop = null;
+		RoundVariables.instance = null;
+		
+		// misc
+		hollowLevel.clean();
+		playersStatus.clear();
+		panel = null;
+
+		// garbage collect
+		Runtime rt = Runtime.getRuntime();
+		rt.gc(); 
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Game engine */
 	transient private Loop loop = null;
 	
+	/**
+	 * Returns the current game engine.
+	 * 
+	 * @return
+	 * 		Current game engine.
+	 */
 	public Loop getLoop()
 	{	return loop;
 	}	
 	
+	/**
+	 * Called when the round is over.
+	 */
 	public void loopOver()
 	{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
 		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
@@ -302,16 +430,31 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Statistics of this round */
 	private StatisticRound stats;
 
+	@Override
 	public StatisticRound getStats()
 	{	return stats;
 	}
 
+	/**
+	 * Changes the statistics of this round.
+	 * 
+	 * @param stats
+	 * 		New statistics of this round.
+	 */
 	public void setStats(StatisticRound stats)
 	{	this.stats = stats;	
 	}
 	
+	/**
+	 * Adds a new event to the statistics
+	 * of this round.
+	 * 
+	 * @param event
+	 * 		New statistical event.
+	 */
 	public void addStatisticEvent(StatisticEvent event)
 	{	if(!isOver())
 		{	stats.addStatisticEvent(event);
@@ -322,30 +465,73 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Match containing this round */
 	private Match match;
 	
+	/**
+	 * Returns the match containing this round.
+	 *  
+	 * @return
+	 * 		Match containing this round.
+	 */
 	public Match getMatch()
 	{	return match;	
 	}
 	
+	/**
+	 * Changes the match containing this round.
+	 *  
+	 * @param match
+	 * 		New match for this round.
+	 */
+	public void setMatch(Match match)
+	{	this.match = match;	
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Players still participating to the round */
 	private int remainingPlayers;
+	/** Status of all players */
 	private final List<Boolean> playersStatus = new ArrayList<Boolean>();
+	/** Whether players should start the round at random slots */ 
 	private boolean randomLocation;
 
+	/**
+	 * Indicates if players should start 
+	 * the round at random slots.
+	 * 
+	 * @return
+	 * 		{@code true} iff players should start the round at random slots.
+	 */
 	public boolean getRandomLocation()
 	{	return randomLocation;
 	}
+	
+	/**
+	 * Changes the flag indicating if players 
+	 * should start the round at random slots.
+	 * 
+	 * @param randomLocations
+	 * 		If {@code true}, players start the round at random slots.
+	 */
 	public void setRandomLocation(boolean randomLocations)
 	{	this.randomLocation = randomLocations;
 	}
-
+	
+	@Override 
 	public List<Boolean> getPlayersStatus()
 	{	return playersStatus;		
 	}
 	
+	/**
+	 * Returns the allowed numbers of players
+	 * for this round.
+	 * 
+	 * @return
+	 * 		Set of allowed numbers of players.
+	 */
 	public TreeSet<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
 		Iterator<Entry<Integer,PlayerLocation[]>> it = hollowLevel.getPlayers().getLocations().entrySet().iterator();
@@ -356,9 +542,19 @@ public class Round implements StatisticHolder, Serializable
 		return result;			
 	}
 	
+	@Override
 	public List<Profile> getProfiles()
 	{	return match.getProfiles();
 	}	
+	
+	/**
+	 * Returns the list of the colors,
+	 * for all players involved in this
+	 * round.
+	 * 
+	 * @return
+	 * 		List of the player colors.
+	 */
 	public List<PredefinedColor> getProfilesColors()
 	{	List<PredefinedColor> result = new ArrayList<PredefinedColor>();
 		for(Profile p: match.getProfiles())
@@ -366,6 +562,12 @@ public class Round implements StatisticHolder, Serializable
 		return result;
 	}	
 	
+	/**
+	 * Eliminates one player from the round.
+	 * 
+	 * @param index
+	 * 		Index of the eliminated player. 
+	 */
 	public void playerOut(int index)
 	{	if(!roundOver)
 		{	remainingPlayers --;
@@ -373,6 +575,13 @@ public class Round implements StatisticHolder, Serializable
 //System.out.println("player out "+index+"("+loop.getTotalTime()+")");			
 		}
 	}
+	
+	/**
+	 * Updates the current time of this round.
+	 * 
+	 * @param time
+	 * 		New current time.
+	 */
 	public void updateTime(long time)
 	{	if(!roundOver)
 		{	stats.updateTime(time,this);			
@@ -388,6 +597,9 @@ public class Round implements StatisticHolder, Serializable
 		}
 	}
 	
+	/**
+	 * Cancels this round.
+	 */
 	public void cancelGame()
 	{	if(roundOver!=true)
 		{	getLimits().selectLimit(0);
@@ -395,6 +607,11 @@ public class Round implements StatisticHolder, Serializable
 		}
 	}
 	
+	/**
+	 * Finializes the game
+	 * (process the points scored,
+	 * etc.).
+	 */
 	private void closeGame()
 	{	roundOver = true;
 		stats.finalizeTime(this);
@@ -403,6 +620,12 @@ public class Round implements StatisticHolder, Serializable
 		celebrate();		
 	}
 	
+	/**
+	 * Starts the celebration phase
+	 * (when players express joy or sadness
+	 * depending on their results) to
+	 * conclude the round.
+	 */
 	private void celebrate()
 	{	loop.initCelebration();
 		List<Integer> winners = getWinners();
@@ -418,12 +641,21 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Number of points scored by the players */
 	private float[] currentPoints;
 	
+	/**
+	 * Returns the current number
+	 * of points for each player.
+	 * 
+	 * @return
+	 * 		Points scored by the players.
+	 */
 	public float[] getCurrentPoints()
 	{	return currentPoints;		
 	}
 	
+	@Override
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
 		// points
@@ -474,6 +706,13 @@ public class Round implements StatisticHolder, Serializable
 		return result;
 	}
 	
+	
+	/**
+	 * Returns the winner(s) of this round.
+	 * 
+	 * @return
+	 * 		A list of indices corresponding to the winners.
+	 */
 	public List<Integer> getWinners()
 	{	float[] points = stats.getPoints();
 		List<Integer> result = CombinatoricsTools.getWinners(points);
@@ -483,11 +722,27 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel used to display this round (not the game itself, but the round info) */
 	transient private RoundRenderPanel panel;
-	
+
+	/**
+	 * Changes the panel used to
+	 * display this round.
+	 * 
+	 * @param panel
+	 * 		New panel displaying this round info.
+	 */
 	public void setPanel(RoundRenderPanel panel)
 	{	this.panel = panel;
 	}
+	
+	/**
+	 * Returns the panel used to
+	 * display this round.
+	 * 
+	 * @return
+	 * 		Panel displaying this round info.
+	 */
 	public RoundRenderPanel getPanel()
 	{	return panel;	
 	}
@@ -495,11 +750,25 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Text describing this round informally */
 	private final List<String> notes = new ArrayList<String>();
 
+	/**
+	 * Changes the text describing this round.
+	 * 
+	 * @param notes
+	 * 		New round description.
+	 */
 	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
+	
+	/**
+	 * Returns the text describing this round.
+	 * 
+	 * @return
+	 * 		Author's notes describing this round. 
+	 */
 	public List<String> getNotes()
 	{	return notes;
 	}
@@ -507,11 +776,25 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Limits for this round */
 	private Limits<RoundLimit> limits;
 
+	/**
+	 * Returns the limits for this round.
+	 * 
+	 * @return
+	 * 		Limits for this round.
+	 */
 	public Limits<RoundLimit> getLimits()
 	{	return limits;
 	}
+	
+	/**
+	 * Changes the limits for this round.
+	 * 
+	 * @param limits
+	 * 		New limits for this round.
+	 */
 	public void setLimits(Limits<RoundLimit> limits)
 	{	this.limits = limits;
 	}
@@ -519,12 +802,25 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// AUTHOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Designer of this round */
 	private String author;
 	
+	/**
+	 * Returns the author of this round.
+	 * 
+	 * @return
+	 * 		Designer of the round.
+	 */
 	public String getAuthor()
 	{	return author;
 	}
 	
+	/**
+	 * Changes the author of this round.
+	 * 
+	 * @param author
+	 * 		New designer of the round.
+	 */
 	public void setAuthor(String author)
 	{	this.author = author;
 	}
@@ -532,16 +828,40 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// HOLLOW LEVEL			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Structure storing all the data necessary to build the level */ 
 	private HollowLevel hollowLevel;
 	
+	/**
+	 * Returns the hollow level this
+	 * round will use when loading the zone.
+	 * 
+	 * @return
+	 * 		This round hollow level.
+	 */
 	public HollowLevel getHollowLevel()
 	{	return hollowLevel;	
 	}
+	
+	/**
+	 * Changes the hollow level this
+	 * round will use when loading the zone.
+	 * 
+	 * @param hollowLevel
+	 * 		New hollow level for this round.
+	 */
 	public void setHollowLevel(HollowLevel hollowLevel)
 	{	this.hollowLevel = hollowLevel;	
 	}
 
-	
+	/**
+	 * Creates a new round, which is a copy of this one.
+	 * This method is used to keep an untouched version
+	 * of the original roud, in match objects, in case
+	 * the same round should be played several times.
+	 * 
+	 * @return
+	 * 		A copy of this round.
+	 */
 	public Round copy()
 	{	Round result = new Round(match);
 		result.setNotes(notes);
@@ -561,13 +881,16 @@ public class Round implements StatisticHolder, Serializable
 		return result;
 	}
 	
-	public void setMatch(Match match)
-	{	this.match = match;	
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// SIMULATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Indicates if this round should be actually
+	 * played, or just simulated.
+	 * 
+	 * @return
+	 * 		{@code true} iff the round must be simulated.
+	 */
 	public boolean isSimulated()
 	{	AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
 		boolean result = aisConfiguration.getHideAllAis();
@@ -579,6 +902,9 @@ public class Round implements StatisticHolder, Serializable
 		return result;
 	}
 	
+	/**
+	 * Launch the simulation of this round.
+	 */
 	public void simulate()
 	{	if(!isOver())
 		{	loop = new SimulationLoop(this);

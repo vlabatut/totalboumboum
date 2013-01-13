@@ -33,16 +33,24 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 
 /**
+ * Main panel for the save tournament menu.
  * 
  * @author Vincent Labatut
- *
  */
 public class SaveSplitPanel extends SplitMenuPanel
 {	/** Class id */
 	private static final long serialVersionUID = 1L; 
-
+	/** Background image */
 	private BufferedImage image;
 
+	/**
+	 * Builds a standard panel.
+	 * 
+	 * @param container
+	 * 		Swing container of this panel.
+	 * @param parent
+	 * 		Parent menu item.
+	 */
 	public SaveSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiSizeTools.VERTICAL_SPLIT_RATIO);
 	
@@ -56,6 +64,13 @@ public class SaveSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Changes the tournament handled
+	 * by this menu.
+	 * 
+	 * @param tournament
+	 * 		New tournament.
+	 */
 	public void setTournament(AbstractTournament tournament)
 	{	((SaveMenu)getMenuPart()).setTournament(tournament);
 	}

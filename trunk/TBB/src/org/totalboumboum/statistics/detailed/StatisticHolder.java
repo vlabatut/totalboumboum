@@ -43,7 +43,8 @@ public interface StatisticHolder
 	public StatisticBase getStats();
 	
 	/**
-	 * Returns the list of involved players .
+	 * Returns the list of the profiles of
+	 * all players involved in this game.
 	 * 
 	 * @return
 	 * 		List of profiles.
@@ -51,10 +52,11 @@ public interface StatisticHolder
 	public List<Profile> getProfiles();
 	
 	/**
-	 * Returns the statuses of the players.
+	 * Returns the statuses of the players
+	 * (i.e. if they are eliminated from the game or not).
 	 * 
 	 * @return
-	 * 		The statistics of this game.
+	 * 		List of booleans indicating the status of each involved player.
 	 */
 	public List<Boolean> getPlayersStatus();
 	

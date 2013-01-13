@@ -1661,5 +1661,3 @@ public class Launcher
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois (combi avec les touches numériques ?)
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
 // TODO dégager les agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
-// TODO remettre une forme light de finish pour éviter de prendre de la place avec les sprites et cie
-// TODO tester toutes les formes de tournois : jeu et visualisation des stats
