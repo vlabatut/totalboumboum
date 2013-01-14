@@ -34,7 +34,7 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="d5cfb666-1c7a-4d92-b465-9b9ee218e70a" color="WHITE" controls="2" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="b4cf64b8-0338-4076-ae6d-f3bfc67f139c" color="ULTRAMARINE" controls="2" spritePack="superbomberman4" spriteFolder="shirobon" />
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
