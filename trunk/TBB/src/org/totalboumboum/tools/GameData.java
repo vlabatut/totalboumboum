@@ -38,6 +38,8 @@ public class GameData
 	public static final double TOLERANCE = 0.01;
 	/** Whether or node the game is executed in quickstart mode */
 	public static boolean quickMode;
+	/** Whether this is a production version */
+	public static boolean PRODUCTION = true;
 	
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////

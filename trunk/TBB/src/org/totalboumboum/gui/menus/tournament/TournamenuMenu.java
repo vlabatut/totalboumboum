@@ -57,6 +57,7 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
 /**
@@ -112,7 +113,7 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 		buttonSettingsPrevious = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
 		buttonSettingsNext = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		buttonPublish = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
-//buttonPublish.setEnabled(false);
+buttonPublish.setEnabled(!GameData.PRODUCTION);
 		buttonBlockPlayers = GuiButtonTools.createToggleButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}

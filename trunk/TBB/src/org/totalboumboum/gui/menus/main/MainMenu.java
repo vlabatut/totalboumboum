@@ -52,6 +52,7 @@ import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
 /**
@@ -88,11 +89,11 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		buttonTournament = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
 		buttonNetworkGame = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_NETWORK,buttonWidth,buttonHeight,fontSize,this);
-//buttonNetworkGame.setEnabled(false);		
+buttonNetworkGame.setEnabled(!GameData.PRODUCTION);		
 		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonLoad = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
 		buttonReplay = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_REPLAY,buttonWidth,buttonHeight,fontSize,this);
-//buttonReplay.setEnabled(false);
+buttonReplay.setEnabled(!GameData.PRODUCTION);
 		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonAbout = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
