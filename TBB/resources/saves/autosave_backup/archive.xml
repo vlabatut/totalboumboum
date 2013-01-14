@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut
@@ -19,18 +19,17 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Tournoi de Galatasaray VI" type="CUP" />
-	<played matches="3" rounds="6" />
-	<dates start="2013-01-14T10:36:17" save="2013-01-14T10:59:14" />
+	<tournament name="Super-coupe de Galatasaray V" type="CUP" />
+	<played matches="1" rounds="4" />
+	<dates start="2013-01-14T21:07:37" save="2013-01-14T21:16:59" />
 	<players>
-		<player name="1213.Balyer+Güven" />
-		<player name="1213.Çalışkan+Geçkalan" />
-		<player name="1213.Cınar+Yalçın" />
-		<player name="1213.Besnili+Kangal" />
-		<player name="1213.Erdem+Tayyar" />
 		<player name="1213.Oral+Özuğur" />
 		<player name="1213.Alçar+Kaya+Yıldırım" />
-		<player name="1213.Gergin+Özkanoğlu" />
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="1112.Coşkun+Özdemir" />
+		<player name="0809.Erişik+Pektaş" />
+		<player name="0910.Doruk+Küpelioğlu" />
+		<player name="1011.Kesimal+Varol" />
 	</players>
 </archive>
 

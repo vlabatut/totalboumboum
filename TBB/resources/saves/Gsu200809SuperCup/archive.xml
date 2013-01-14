@@ -21,12 +21,12 @@
 -->
 	<tournament name="Super-coupe de Galatasaray I" type="SINGLE" />
 	<played matches="0" rounds="0" />
-	<dates start="2012-11-27T11:27:34" save="2012-11-27T11:27:50" />
+	<dates start="2013-01-14T20:57:16" save="2013-01-14T20:57:22" />
 	<players>
 		<player name="0708.Bingöl+Ketenci" />
 		<player name="0708.Kılıç+Pala" />
-		<player name="0809.Altay+Basaranoğlu" />
 		<player name="0809.Erişik+Pektaş" />
+		<player name="0809.Altay+Basaranoğlu" />
 	</players>
 </archive>
 
