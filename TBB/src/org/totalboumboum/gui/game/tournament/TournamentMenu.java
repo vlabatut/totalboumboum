@@ -74,6 +74,7 @@ import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -115,7 +116,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		buttonQuit = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		buttonSave = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
 		buttonRecord = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
-//buttonRecord.setEnabled(false);		
+buttonRecord.setEnabled(!GameData.PRODUCTION);		
 		add(Box.createHorizontalGlue());
 		buttonMenu = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
@@ -125,7 +126,6 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	    buttonResults = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
 	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
-//buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
 		buttonMatch = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);

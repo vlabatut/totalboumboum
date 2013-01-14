@@ -1508,7 +1508,7 @@ public class Launcher
 	 * 
 	 * - pour diffusion publique :
 	 * 		- fichiers :
-	 * 			- recompiler le jeu	
+	 * 			- recompiler le jeu
 	 * 			- virer les fichiers sources
 	 * 			- virer les IA pas finies (source+profils)
 	 * 			- virer les versions intermédiaires des IA
@@ -1520,21 +1520,21 @@ public class Launcher
 	 * 			- les règles classiques
 	 * 
 	 *  - pour diffusion projet :
-	 * 		- réseau :
-	 * 			- bloquer le bouton "réseau" dans le menu principal
+	 * 		x réseau :
+	 * 			x bloquer le bouton "réseau" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonNetworkGame
-	 * 			- bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
+	 * 			x bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
 	 * 			  org.totalboumboum.gui.menus.tournament.TournamenuMenu.buttonPublish
 	 * 			  org.totalboumboum.gui.menus.quickmatch.QuickMatchMenu.buttonPublish
 	 * 			  
-	 * 		- replay :
-	 * 			- bloquer le bouton "replay" dans le menu principal
+	 * 		x replay :
+	 * 			x bloquer le bouton "replay" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonReplay
-	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
+	 * 			x bloquer le bouton "caméra" dans les menu tournoi/match/round
 	 * 			  org.totalboumboum.gui.game.tournament.TournamentMenu.buttonRecord
 	 * 			  org.totalboumboum.gui.game.match.MatchMenu.buttonRecord
 	 *			  org.totalboumboum.gui.game.round.RoundMenu.buttonRecord
-	 * 			- bloquer l'action dans les options avancées
+	 * 			x bloquer l'action dans les options avancées
 	 * 			  org.totalboumboum.gui.menus.options.advanced.AdvancedData ligne 'case LINE_RECORD_GAMES'
 	 * 		- options :
 	 * 			- afficher les exceptions

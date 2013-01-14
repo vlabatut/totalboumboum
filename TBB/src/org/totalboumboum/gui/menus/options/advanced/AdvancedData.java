@@ -39,6 +39,7 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.tools.GameData;
 
 /**
  * 
@@ -522,9 +523,11 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				break;			
 			// record games
 			case LINE_RECORD_GAMES:
-				boolean recordGames = !engineConfiguration.isRecordRounds();
-				engineConfiguration.setRecordRounds(recordGames);
-				setRecordGames();
+				if(!GameData.PRODUCTION)
+				{	boolean recordGames = !engineConfiguration.isRecordRounds();
+					engineConfiguration.setRecordRounds(recordGames);
+					setRecordGames();
+				}
 				break;
 		}
 	}
