@@ -33,13 +33,13 @@ public class GameData
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Version of the game */
-	public static final String VERSION = "1.beta.023.9";
+	public static final String VERSION = "1.beta.024";
 	/** Tolerance when comparing real values */
 	public static final double TOLERANCE = 0.01;
 	/** Whether or node the game is executed in quickstart mode */
 	public static boolean quickMode;
 	/** Whether this is a production version */
-	public static boolean PRODUCTION = true;
+	public static boolean PRODUCTION = false;
 	
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
