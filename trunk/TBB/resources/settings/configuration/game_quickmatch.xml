@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/game_quickmatch.xsd">
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut
@@ -34,7 +34,7 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="b4cf64b8-0338-4076-ae6d-f3bfc67f139c" color="ULTRAMARINE" controls="2" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
