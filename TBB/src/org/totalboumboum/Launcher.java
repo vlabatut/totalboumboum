@@ -1634,6 +1634,8 @@ public class Launcher
 	 */
 
 // TODO utilité dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de préférences ?
+// TODO du cp, utiliser une liste de liste plutot qu'une map.
+// TODO cette map doit etre statique, car c'est la meme pr toutes les instances de l'agent.
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
 // TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
 
@@ -1645,6 +1647,7 @@ public class Launcher
  * 			>> on pourrait simplement les selectionner en cliquant sur leur nom dans la table
  * 			>> mais alors, comment donner/changer la legende ?
  * 			>> faut un bouton de couleur specifique, qu'on peut faire cycler
+ * 			>> faire carrement une table de selection, avec le rang, le nom, la couleur et le type (hu/mach)
  * 		- nécessaire de changer le stockage des stats
  * 		- résolution temporelle ? rounds ? dates ? mises à jour G-2 ?
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
