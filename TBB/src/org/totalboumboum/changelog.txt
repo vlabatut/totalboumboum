@@ -519,7 +519,6 @@
 		- affichage des numéros des matches/rounds dans les titres des panels (pour une meilleure navigation)
 	- ressources : 
 		- Shirobon SBM4
-		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 		- morts subites dans les niveaux officiels de SBM1
 		- outils de niveaux pour générer programmatiquement des morts subites typiques
 		- thème pour le tournoi VI
@@ -541,3 +540,7 @@
 	- divers:
 		- changement du copyright (2012 >> 2013)
 		- quelques erreurs corrigées dans les scripts de compilation
+
++ beta.025
+	- ressources : 
+		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
