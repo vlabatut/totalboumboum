@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.game;
 
 /*
  * Total Boum Boum
@@ -26,86 +26,102 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.NumberFormat;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * Displays the current FPS.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplaySpeedChange implements Display
+public class DisplayFPS extends Display
 {
-	public DisplaySpeedChange()
-	{	
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
+	public DisplayFPS(VisibleLoop loop)
+	{	this.loop = loop;
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_FPS);
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Object used for displaying */
+	private VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** total display time */
-	private final long MESSAGE_DURATION = 1000;
-	/** remaining display time */
-	private long messageTime = 0;
+	/** Whether the information should be displayed or not */
+	private boolean show = false;
 	
 	@Override
 	public synchronized void switchShow(SystemControlEvent event)
-	{	messageTime = System.currentTimeMillis();
-	}
-
-	private synchronized long getElapsedTime()
-	{	long currentTime = System.currentTimeMillis();
-		long result = currentTime - messageTime;
-		return result;
+	{	show = !show;		
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
+	private synchronized boolean getShow()
+	{	return show;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY = "Display FPS/UPS";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide FPS/UPS";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
-	{	String message;
-		if(event.getName().equals(SystemControlEvent.REQUIRE_SPEED_UP))
-			message = "Increase game speed";
-		else //if(event.getName().equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
-			message = "Decrease game speed";
+	{	String message = null;
+		if(getShow())
+			message = MESSAGE_DISPLAY;
+		else
+			message = MESSAGE_HIDE;
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.REQUIRE_SPEED_UP,SystemControlEvent.REQUIRE_SLOW_DOWN));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	long elapsedTime = getElapsedTime();
-		if(elapsedTime<MESSAGE_DURATION)
+	{	if(getShow())
 		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
+			NumberFormat nf = NumberFormat.getInstance();
+			nf.setMaximumFractionDigits(2);
+			nf.setMinimumFractionDigits(2);
+			double fps = loop.getAverageFPS();
+			String fpsStr = nf.format(fps); 
+			double ups = loop.getAverageUPS();
+			String upsStr = nf.format(ups);
+			String thFps = Integer.toString(Configuration.getEngineConfiguration().getFps());
+			String text = "FPS/UPS/Th: "+fpsStr+"/"+upsStr+"/"+thFps;
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
-			int y = (int)Math.round(10+box.getHeight()/2);
-			int alpha = Math.round((1-elapsedTime/(float)MESSAGE_DURATION)*255);
-			Color background = new Color(0,0,0,alpha);
-			g.setColor(background);
+			int y = (int)Math.round(50+box.getHeight()/2);
+			g.setColor(Color.BLACK);
 			g.drawString(text,x+1,y+1);
-			Color foreground = new Color(255,200,0,alpha);
-			g.setColor(foreground);
+			g.setColor(Color.CYAN);
 			g.drawString(text,x,y);
 		}
 	}

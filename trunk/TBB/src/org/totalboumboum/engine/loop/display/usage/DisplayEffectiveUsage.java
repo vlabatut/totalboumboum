@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.usage;
 
 /*
  * Total Boum Boum
@@ -28,33 +28,45 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
 /**
+ * Displays how much effective processor time
+ * each artificial agent uses during the game.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayEffectiveUsage implements Display
+public class DisplayEffectiveUsage extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayEffectiveUsage(VisibleLoop loop)
 	{	this.loop = loop;
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_EFFECTIVE_USAGE);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object used for displaying */
 	private VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which information should be displayed */
 	private int show = 0;
+	/** Indicates how the information should be displayed */
 	private boolean mode = true;
 	
 	@Override
@@ -65,10 +77,24 @@ public class DisplayEffectiveUsage implements Display
 			mode = !mode;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized int getShow()
 	{	return show;
 	}
 
+	/**
+	 * Returns the value indicating how
+	 * the information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating how the information should be displayed.
+	 */
 	private synchronized boolean getMode()
 	{	return mode;
 	}
@@ -76,45 +102,48 @@ public class DisplayEffectiveUsage implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY_OVERALL = "Display effective overall usage";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ENGINE = "Display effective engine-only usage";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_AI = "Display effective AIs-only usage";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide all effective usages";
+	/** Units message */
+	private final String MESSAGE_UNIT_PERCENT = " in percents";
+	/** Units message */
+	private final String MESSAGE_UNIT_MS = " in ms";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
 		int s = getShow();
 		switch(s)
 		{	case 0:
-				message = "Hide all effective usages";
+				message = MESSAGE_HIDE;
 				break;
 			case 1: 
-				message = "Display effective overall usage";
+				message = MESSAGE_DISPLAY_OVERALL;
 				break;
 			case 2: 
-				message = "Display effective engine-only usage";
+				message = MESSAGE_DISPLAY_ENGINE;
 				break;
 			case 3:
-				message = "Display effective AIs-only usage";
+				message = MESSAGE_DISPLAY_AI;
 				break;
 		}
 		
 		if(s>0)
 		{	boolean m = getMode();
 			if(m)
-				message = message + " in percents";
+				message = message + MESSAGE_UNIT_PERCENT;
 			else
-				message = message + " in ms";
+				message = message + MESSAGE_UNIT_MS;
 		}
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_EFFECTIVE_USAGE));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

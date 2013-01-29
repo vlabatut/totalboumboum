@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.player;
 
 /*
  * Total Boum Boum
@@ -26,27 +26,35 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
- * 
+ * Displays a wait message,
+ * used in network mode.
+ *  
  * @author Vincent Labatut
- *
  */
-public class DisplayWaitMessage implements Display
+public class DisplayWaitMessage extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayWaitMessage(VisibleLoop loop)
 	{	this.loop = loop;
+		
+		eventNames.add(SystemControlEvent.SWITCH_ENGINE_PAUSE);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object used for displaying */
 	private VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
@@ -65,16 +73,6 @@ public class DisplayWaitMessage implements Display
 	{	return null;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_ENGINE_PAUSE));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

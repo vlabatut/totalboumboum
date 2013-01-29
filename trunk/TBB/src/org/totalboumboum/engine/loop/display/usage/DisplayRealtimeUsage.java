@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.usage;
 
 /*
  * Total Boum Boum
@@ -28,7 +28,6 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -36,31 +35,45 @@ import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
+ * Display how much real time
+ * each artificial agent uses
+ * during game.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayRealtimeUsage implements Display
+public class DisplayRealtimeUsage extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayRealtimeUsage(VisibleLoop loop)
 	{	this.players = loop.getPlayers();
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of players involved in the game */
 	private List<AbstractPlayer> players;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the information should be displayed or not */
 	private boolean show = false;
+	/** Indicates how the information should be displayed */
 	private boolean mode = true;
 	
 	@Override
@@ -71,10 +84,24 @@ public class DisplayRealtimeUsage implements Display
 			mode = !mode;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized boolean getShow()
 	{	return show;
 	}
 
+	/**
+	 * Returns the value indicating how
+	 * the information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating how the information should be displayed.
+	 */
 	private synchronized boolean getMode()
 	{	return mode;
 	}
@@ -82,6 +109,13 @@ public class DisplayRealtimeUsage implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY_AVERAGE = "Display averaged real-time AIs usage";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_INSTANT = "Display instant real-time AIs usage";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide all real-time usage";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
@@ -89,25 +123,15 @@ public class DisplayRealtimeUsage implements Display
 		if(s)
 		{	boolean m = getMode();
 			if(m)
-				message = "Display averaged real-time AIs usage";
+				message = MESSAGE_DISPLAY_AVERAGE;
 			else
-				message = "Display instant real-time AIs usage";
+				message = MESSAGE_DISPLAY_INSTANT;
 		}
 		else
-			message = "Hide all real-time usage";
+			message = MESSAGE_HIDE;
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

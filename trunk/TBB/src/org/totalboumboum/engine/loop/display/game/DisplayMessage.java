@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.game;
 
 /*
  * Total Boum Boum
@@ -25,32 +25,46 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.tools.images.MessageDisplayer;
 
 /**
+ * Displays the "ready, set, go!" messages
+ * right before starting the game.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayMessage implements Display
+public class DisplayMessage extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayMessage(VisibleLoop loop)
 	{	if(messageDisplayers == null)
 			initMessageDisplayers(loop);
+	
+		eventNames.add(SystemControlEvent.REQUIRE_NEXT_MESSAGE);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// DISPLAYED TEXT		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Messages to be displayed */
 	public static MessageDisplayer messageDisplayers[] = null;
 
+	/**
+	 * Initializes the messages to be displayed.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	private static void initMessageDisplayers(VisibleLoop loop)
 	{	String texts[] = loop.getEntryTexts();
 		messageDisplayers = new MessageDisplayer[texts.length];
@@ -79,6 +93,7 @@ public class DisplayMessage implements Display
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which information should be displayed */
 	private int show = -1;
 	
 	@Override
@@ -94,16 +109,6 @@ public class DisplayMessage implements Display
 	{	return null;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.REQUIRE_NEXT_MESSAGE));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.player;
 
 /*
  * Total Boum Boum
@@ -27,36 +27,48 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
 /**
+ * Displays the names of the
+ * players, near the corresponding
+ * sprites.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayPlayersNames implements Display
+public class DisplayPlayersNames extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayPlayersNames(VisibleLoop loop)
 	{	this.loop = loop;
 		this.players = loop.getPlayers();
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS			/////////////////////////////////////////////
+	// DATA			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object used for displaying */
 	private VisibleLoop loop;
+	/** List of players involved in the game */
 	private List<AbstractPlayer> players;	
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the information should be displayed or not */
 	private boolean show = false;
 	
 	@Override
@@ -64,6 +76,13 @@ public class DisplayPlayersNames implements Display
 	{	show = !show;		
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized boolean getShow()
 	{	return show;
 	}
@@ -71,26 +90,21 @@ public class DisplayPlayersNames implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY = "Display the players' names";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide the players' names";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
 		if(getShow())
-			message = "Display the players' names";
+			message = MESSAGE_DISPLAY;
 		else
-			message = "Hide the players' names";
+			message = MESSAGE_HIDE;
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

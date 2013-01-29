@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.time;
 
 /*
  * Total Boum Boum
@@ -26,34 +26,42 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
+ * Displays the current time.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayTime implements Display
+public class DisplayTime extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayTime(VisibleLoop loop)
 	{	this.loop = loop;
+	
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_TIME);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object used for displaying */
 	private VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which information should be displayed */
 	private int show = 0;
 	
 	@Override
@@ -61,6 +69,13 @@ public class DisplayTime implements Display
 	{	show = (show+1)%4;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized int getShow()
 	{	return show;
 	}
@@ -68,37 +83,36 @@ public class DisplayTime implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY_GAME = "Display game time";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ENGINE = "Display engine time";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_REAL = "Display real time";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide all times";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
 		int s = getShow();
 		switch(s)
 		{	case 0:
-				message = "Hide all times";
+				message = MESSAGE_HIDE;
 				break;
 			case 1: 
-				message = "Display game time";
+				message = MESSAGE_DISPLAY_GAME;
 				break;
 			case 2: 
-				message = "Display engine time";
+				message = MESSAGE_DISPLAY_ENGINE;
 				break;
 			case 3:
-				message = "Display real time";
+				message = MESSAGE_DISPLAY_REAL;
 				break;
 		}			
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_TIME));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

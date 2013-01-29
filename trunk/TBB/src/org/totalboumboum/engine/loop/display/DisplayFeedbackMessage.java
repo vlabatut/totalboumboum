@@ -34,22 +34,38 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * This class is used to display
+ * feedback messages, which gradually
+ * disappear form the game panel.
  * 
  * @author Vincent Labatut
- *
  */
 public class DisplayFeedbackMessage
 {
+	/**
+	 * Builds a standard message display object.
+	 */
 	public DisplayFeedbackMessage()
-	{	
+	{	// nothing to do here
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// MESSAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of messages to display */
 	private final LinkedList<String> messages = new LinkedList<String>();
+	/** List of corresponding times */
 	private final LinkedList<Long> times = new LinkedList<Long>();
 	
+	/**
+	 * Processes a new event, and update accordingly
+	 * the lists of messages and associated times.
+	 * 
+	 * @param event
+	 * 		Event to process.
+	 * @param display
+	 * 		Display object concerned by the event.
+	 */
 	public void processEvent(SystemControlEvent event, Display display)
 	{	String message = display.getMessage(event);
 		if(message!=null)
@@ -61,8 +77,15 @@ public class DisplayFeedbackMessage
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** How long a message must stay on screen (in total) */
 	private final long MESSAGE_DURATION = 10000;
 	
+	/**
+	 * Draws the messages in the game panel.
+	 * 
+	 * @param g
+	 * 		Grpahics object used for drawing.
+	 */
 	public void draw(Graphics g)
 	{	// init
 		Font font = new Font("Dialog", Font.PLAIN, 18);

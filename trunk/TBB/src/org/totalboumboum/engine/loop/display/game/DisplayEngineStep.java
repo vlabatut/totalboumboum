@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.game;
 
 /*
  * Total Boum Boum
@@ -21,98 +21,65 @@ package org.totalboumboum.engine.loop.display;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * Displays a message indicating one
+ * engine step was performed.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayFPS implements Display
+public class DisplayEngineStep extends Display
 {
-	public DisplayFPS(VisibleLoop loop)
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
+	public DisplayEngineStep(VisibleLoop loop)
 	{	this.loop = loop;
+		
+		eventNames.add(SystemControlEvent.REQUIRE_ENGINE_STEP);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object used for displaying */
 	private VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean show = false;
-	
 	@Override
 	public synchronized void switchShow(SystemControlEvent event)
-	{	show = !show;		
+	{	//
 	}
 	
-	private synchronized boolean getShow()
-	{	return show;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Message */
+	private final String MESSAGE = "Execute one engine iteration";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
-		if(getShow())
-			message = "Display FPS/UPS";
-		else
-			message = "Hide FPS/UPS";
+		if(loop.getEnginePause())
+			message = MESSAGE;
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_FPS));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(getShow())
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			NumberFormat nf = NumberFormat.getInstance();
-			nf.setMaximumFractionDigits(2);
-			nf.setMinimumFractionDigits(2);
-			double fps = loop.getAverageFPS();
-			String fpsStr = nf.format(fps); 
-			double ups = loop.getAverageUPS();
-			String upsStr = nf.format(ups);
-			String thFps = Integer.toString(Configuration.getEngineConfiguration().getFps());
-			String text = "FPS/UPS/Th: "+fpsStr+"/"+upsStr+"/"+thFps;
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(50+box.getHeight()/2);
-			g.setColor(Color.BLACK);
-			g.drawString(text,x+1,y+1);
-			g.setColor(Color.CYAN);
-			g.drawString(text,x,y);
-		}
+	{	// nothing to display
 	}
 }

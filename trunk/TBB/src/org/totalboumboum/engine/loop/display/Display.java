@@ -22,34 +22,70 @@ package org.totalboumboum.engine.loop.display;
  */
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * General class, in charge of displaying
+ * various data during the game.
  * 
  * @author Vincent Labatut
- *
  */
-public interface Display
+public abstract class Display
 {
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void switchShow(SystemControlEvent event);
+	/**
+	 * Changes the content this display
+	 * is drawing on the game panel.
+	 * 
+	 * @param event
+	 * 		Event received.
+	 */
+	public abstract void switchShow(SystemControlEvent event);
 	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public String getMessage(SystemControlEvent event);
+	/**
+	 * Returns the current message to be displayed.
+	 * 
+	 * @param event
+	 * 		Event used to update the message.
+	 * @return
+	 * 		Message to be displayed.
+	 */
+	public abstract String getMessage(SystemControlEvent event);
 	
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void draw(Graphics g);
+	/**
+	 * Updates the game panel with the
+	 * data associated to this display.
+	 * 
+	 * @param g
+	 * 		Graphical object used while drawing.
+	 */
+	public abstract void draw(Graphics g);
 
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public List<String> getEventNames();
+	/** Events this display reacts to */
+	protected final List<String> eventNames = new ArrayList<String>();
+	
+	/**
+	 * Returns the events this display 
+	 * reacts to.
+	 * 
+	 * @return
+	 * 		List of the names of the concerned events.
+	 */
+	public List<String> getEventNames()
+	{	return eventNames;
+	}
 }
