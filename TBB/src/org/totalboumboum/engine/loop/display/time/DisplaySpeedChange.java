@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.time;
 
 /*
  * Total Boum Boum
@@ -26,77 +26,90 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * Displays changes in the game speed.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayEnginePause implements Display
+public class DisplaySpeedChange extends Display
 {
-	public DisplayEnginePause(VisibleLoop loop)
-	{	//this.loop = loop;
+	/**
+	 * Builds a standard display object.
+	 */
+	public DisplaySpeedChange()
+	{	eventNames.add(SystemControlEvent.REQUIRE_SPEED_UP);
+		eventNames.add(SystemControlEvent.REQUIRE_SLOW_DOWN);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean show = false;
-
+	/** Total display time */
+	private final long MESSAGE_DURATION = 1000;
+	/** Remaining display time */
+	private long messageTime = 0;
+	
 	@Override
-	public void switchShow(SystemControlEvent event)
-	{	show = !show;
+	public synchronized void switchShow(SystemControlEvent event)
+	{	messageTime = System.currentTimeMillis();
 	}
 	
-	private synchronized boolean getShow()
-	{	return show;
+	/**
+	 * Returns the time elapsed since
+	 * the message has been displayed.
+	 * 
+	 * @return
+	 * 		A time expressed in ms.
+	 */
+	private synchronized long getElapsedTime()
+	{	long currentTime = System.currentTimeMillis();
+		long result = currentTime - messageTime;
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Increase message */
+	private final String MESSAGE_INCREASE = "Increase game speed";
+	/** Decrease message */
+	private final String MESSAGE_DECREASE = "Decrease game speed";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
-	{	String message = null;
-		if(getShow())
-			message = "Pause engine";
-		else
-			message = "Unpause engine";
+	{	String message;
+		if(event.getName().equals(SystemControlEvent.REQUIRE_SPEED_UP))
+			message = MESSAGE_INCREASE;
+		else //if(event.getName().equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
+			message = MESSAGE_DECREASE;
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_ENGINE_PAUSE));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(getShow())
+	{	long elapsedTime = getElapsedTime();
+		if(elapsedTime<MESSAGE_DURATION)
 		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Engine paused";
-			Rectangle2D box = metrics.getStringBounds(text,g);
+			String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
+			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.setColor(Color.BLACK);
+			int y = (int)Math.round(10+box.getHeight()/2);
+			int alpha = Math.round((1-elapsedTime/(float)MESSAGE_DURATION)*255);
+			Color background = new Color(0,0,0,alpha);
+			g.setColor(background);
 			g.drawString(text,x+1,y+1);
-			g.setColor(Color.MAGENTA);
+			Color foreground = new Color(255,200,0,alpha);
+			g.setColor(foreground);
 			g.drawString(text,x,y);
 		}
 	}

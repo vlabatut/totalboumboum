@@ -29,15 +29,23 @@ import java.util.List;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * This class is in charge of handling all the
+ * display objects during the game.
  * 
  * @author Vincent Labatut
- *
  */
 public class DisplayManager
 {	
 	/////////////////////////////////////////////////////////////////
 	// EVENT 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Fetch the specified event to the 
+	 * registered display objects.
+	 * 
+	 * @param event
+	 * 		Event to fetch to display objects.
+	 */
 	public void provessEvent(SystemControlEvent event)
 	{	List<Display> displays = displaysMap.get(event.getName());
 		if(displays!=null)
@@ -51,10 +59,19 @@ public class DisplayManager
 	/////////////////////////////////////////////////////////////////
 	// DISPLAYS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of registered display objects */
 	private List<Display> displaysList = new ArrayList<Display>();
+	/** Mapping of the event names to the concerned display objects */
 	private HashMap<String,List<Display>> displaysMap = new HashMap<String,List<Display>>();
+	/** Object used to display feedback messages */
 	private DisplayFeedbackMessage feedback = new DisplayFeedbackMessage();
 	
+	/**
+	 * Registers a new display object.
+	 * 
+	 * @param display
+	 * 		New display object.
+	 */
 	public void addDisplay(Display display)
 	{	// list
 		displaysList.add(display);
@@ -70,6 +87,12 @@ public class DisplayManager
 		}
 	}
 	
+	/**
+	 * Uregisters a display object.
+	 * 
+	 * @param display
+	 * 		Display object to unregister.
+	 */
 	public void removeDisplay(Display display)
 	{	// list
 		displaysList.remove(display);
@@ -89,6 +112,13 @@ public class DisplayManager
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Draws the appropriate information
+	 * in the game panel.
+	 * 
+	 * @param g
+	 * 		Object used for drawing.
+	 */
 	public void draw(Graphics g)
 	{	for(Display d: displaysList)
 			d.draw(g);

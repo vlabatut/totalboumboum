@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.position;
 
 /*
  * Total Boum Boum
@@ -27,8 +27,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.engine.container.level.Level;
@@ -41,30 +39,44 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * Displays the position of
+ * the sprites currently in the game.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplaySpritesPositions implements Display
+public class DisplaySpritesPositions extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplaySpritesPositions(VisibleLoop loop)
 	{	this.level = loop.getLevel();
-		this.sprites = level.getSprites();	
+		this.sprites = level.getSprites();
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current level */
 	private Level level;
+	/** Sprites of the current level */
 	private List<Sprite> sprites;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which information should be displayed*/
 	private int show = 0;
+	/** Indicates how the information should be displayed */
 	private boolean mode = true;
 	
 	@Override
@@ -75,10 +87,24 @@ public class DisplaySpritesPositions implements Display
 			mode = !mode;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized int getShow()
 	{	return show;
 	}
 	
+	/**
+	 * Returns the value indicating how
+	 * the information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating how the information should be displayed.
+	 */
 	private synchronized boolean getMode()
 	{	return mode;
 	}
@@ -86,55 +112,64 @@ public class DisplaySpritesPositions implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ALL = "Show all sprite coordinates";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ONLY_HEROES = "Show only hero coordinates";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ONLY_BLOCKS = "Show only block coordinates";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ONLY_BOMBS = "Show only bomb coordinates";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ONLY_ITEMS = "Show only item coordinates";
+	/** Display message */
+	private final String MESSAGE_DISPLAY_ONLY_FIRES = "Show only fire coordinates";
+	/** Display message */
+	private final String MESSAGE_UNIT_TILES = " (in tiles)";
+	/** Display message */
+	private final String MESSAGE_UNIT_PIXELS = " (in pixels)";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide all sprite coordinates";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
 		int s = getShow();
 		switch(s)
 		{	case 0: 
-				message = "Hide all sprites' coordinates";
+				message = MESSAGE_HIDE;
 				break;
 			case 1: 
-				message = "Show only heroes' coordinates";
+				message = MESSAGE_DISPLAY_ONLY_HEROES;
 				break;
 			case 2: 
-				message = "Show only blocks' coordinates";
+				message = MESSAGE_DISPLAY_ONLY_BLOCKS;
 				break;
 			case 3: 
-				message = "Show only bomb' coordinates";
+				message = MESSAGE_DISPLAY_ONLY_BOMBS;
 				break;
 			case 4: 
-				message = "Show only items' coordinates";
+				message = MESSAGE_DISPLAY_ONLY_ITEMS;
 				break;
 			case 5: 
-				message = "Show only fires' coordinates";
+				message = MESSAGE_DISPLAY_ONLY_FIRES;
 				break;
 			case 6: 
-				message = "Show all sprites' coordinates";
+				message = MESSAGE_DISPLAY_ALL;
 				break;
 		}
 		
 		boolean m = getMode();
 		if(s>0)
 		{	if(m)
-				message = message + " (in tiles)";
+				message = message + MESSAGE_UNIT_TILES;
 			else
-				message = message + " (in pixels)";
+				message = message + MESSAGE_UNIT_PIXELS;
 		}
 	
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

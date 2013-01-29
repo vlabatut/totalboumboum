@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.ais;
 
 /*
  * Total Boum Boum
@@ -28,7 +28,6 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
@@ -37,6 +36,7 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.loop.InteractiveLoop;
 import org.totalboumboum.engine.loop.Loop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
@@ -44,29 +44,41 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
+ * Displays the paths set
+ * by an artificial agent.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayAisPaths implements Display
+public class DisplayAisPaths extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayAisPaths(InteractiveLoop loop)
 	{	this.players = loop.getPlayers();
 		this.level = loop.getLevel();
 		
 		for(int i=0;i<players.size();i++)
 			show.add(false);
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_AIS_PATHS);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of players involved in the game */
 	private List<AbstractPlayer> players;
+	/** Current level */
 	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which information should be displayed */
 	private final List<Boolean> show = new ArrayList<Boolean>();
 
 	@Override
@@ -92,6 +104,16 @@ public class DisplayAisPaths implements Display
 			message = null;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed,
+	 * for the specified player.
+	 * 
+	 * @param index
+	 * 		Concerned player.
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized boolean getShow(int index)
 	{	return show.get(index);		
 	}
@@ -99,23 +121,16 @@ public class DisplayAisPaths implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
 	private final String MESSAGE_DISPLAY = "Display paths for player #";
+	/** Hide message */
 	private final String MESSAGE_HIDE = "Hide paths for player #";
+	/** Current message */
 	private String message = null;
 	
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	return message;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_AIS_PATHS));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
 	}
 	
 	/////////////////////////////////////////////////////////////////

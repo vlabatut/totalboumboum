@@ -1636,6 +1636,7 @@ public class Launcher
 // TODO utilité dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de préférences ?
 // TODO du cp, utiliser une liste de liste plutot qu'une map.
 // TODO cette map doit etre statique, car c'est la meme pr toutes les instances de l'agent.
+
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
 // TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
 

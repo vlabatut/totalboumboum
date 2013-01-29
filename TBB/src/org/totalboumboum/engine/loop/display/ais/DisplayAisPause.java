@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.ais;
 
 /*
  * Total Boum Boum
@@ -27,39 +27,51 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.InteractiveLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 
 /**
+ * Displays a message indicating
+ * an artificial agent is paused.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayAisPause implements Display
+public class DisplayAisPause extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayAisPause(InteractiveLoop loop)
 	{	this.loop = loop;
 		this.players = loop.getPlayers();
 		
 		for(int i=0;i<players.size();i++)
 			show.add(false);
+
+		eventNames.add(SystemControlEvent.SWITCH_AIS_PAUSE);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object used for displaying */
 	private InteractiveLoop loop;
+	/** List of players involved in the game */
 	private List<AbstractPlayer> players;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which information should be displayed */
 	private final List<Boolean> show = new ArrayList<Boolean>();
 
 	@Override
@@ -86,6 +98,16 @@ public class DisplayAisPause implements Display
 			message = null;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed,
+	 * for the specified player.
+	 * 
+	 * @param index
+	 * 		Concerned player.
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized boolean getShow(int index)
 	{	return show.get(index);		
 	}
@@ -93,8 +115,11 @@ public class DisplayAisPause implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
 	private final String MESSAGE_PAUSE = "Pause player #";
+	/** Hide message */
 	private final String MESSAGE_UNPAUSE = "Unpause player #";
+	/** Current message */
 	private String message = null;
 	
 	@Override
@@ -102,16 +127,6 @@ public class DisplayAisPause implements Display
 	{	return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_AIS_PAUSE));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

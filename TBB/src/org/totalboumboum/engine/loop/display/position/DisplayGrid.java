@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.position;
 
 /*
  * Total Boum Boum
@@ -23,39 +23,51 @@ package org.totalboumboum.engine.loop.display;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * Displays a grid above the sprites.
+ * This is meant to help localizing
+ * the sprites when debugging.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayGrid implements Display
+public class DisplayGrid extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayGrid(VisibleLoop loop)
 	{	this.level = loop.getLevel();
 		this.globalHeight = level.getGlobalHeight();
 		this.globalWidth = level.getGlobalWidth();
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_GRID);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current level */
 	private Level level;
+	/** Height of the current level (in tiles) */
 	private int globalHeight;
+	/** Width of the current level (in tiles) */
 	private int globalWidth;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the information should be displayed or not */
 	private boolean show = false;
 	
 	@Override
@@ -63,6 +75,13 @@ public class DisplayGrid implements Display
 	{	show = !show;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized boolean getShow()
 	{	return show;
 	}
@@ -70,26 +89,21 @@ public class DisplayGrid implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY = "Display grid";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide grid";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
 		if(getShow())
-			message = "Display grid";
+			message = MESSAGE_DISPLAY;
 		else
-			message = "Hide grid";
+			message = MESSAGE_HIDE;
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_GRID));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

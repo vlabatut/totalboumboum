@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.position;
 
 /*
  * Total Boum Boum
@@ -26,39 +26,51 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * Displays the position of
+ * all tiles constituting the level.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayTilesPositions implements Display
+public class DisplayTilesPositions extends Display
 {
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
 	public DisplayTilesPositions(VisibleLoop loop)
 	{	this.level = loop.getLevel();
 		this.globalHeight = level.getGlobalHeight();
 		this.globalWidth = level.getGlobalWidth();
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current level */ 
 	private Level level;
+	/** Height of the current level (in tiles) */
 	private int globalHeight;
+	/** Width of the current level (in tiles) */
 	private int globalWidth;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the information should be displayed or not */
 	private boolean show = false;
+	/** Indicates how the information should be displayed */
 	private boolean mode = true;
 	
 	@Override
@@ -69,10 +81,24 @@ public class DisplayTilesPositions implements Display
 			mode = !mode;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized boolean getShow()
 	{	return show;
 	}
 
+	/**
+	 * Returns the value indicating how
+	 * the information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating how the information should be displayed.
+	 */
 	private synchronized boolean getMode()
 	{	return mode;
 	}
@@ -80,32 +106,31 @@ public class DisplayTilesPositions implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Display message */
+	private final String MESSAGE_DISPLAY = "Display tile coordinates";
+	/** Display message */
+	private final String MESSAGE_UNIT_TILES = " (in tiles)";
+	/** Display message */
+	private final String MESSAGE_UNIT_PIXELS = " (in pixels)";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide tile coordinates";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
 		if(getShow())
-		{	message = "Display tiles' coordinates";
+		{	message = MESSAGE_DISPLAY;
 			if(getMode())
-				message = message + " (in tiles)";
+				message = message + MESSAGE_UNIT_TILES;
 			else
-				message = message + " (in pixels)";
+				message = message + MESSAGE_UNIT_PIXELS;
 		}
 		else
-			message = "Hide tiles' coordinates";
+			message = MESSAGE_HIDE;
 	
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

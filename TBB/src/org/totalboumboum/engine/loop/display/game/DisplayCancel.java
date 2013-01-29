@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.game;
 
 /*
  * Total Boum Boum
@@ -22,21 +22,23 @@ package org.totalboumboum.engine.loop.display;
  */
 
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * Displays a message indicating that the current
+ * game was canceled.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayCancel implements Display
-{
+public class DisplayCancel extends Display
+{	
+	/**
+	 * Builds a standard display object.
+	 */
 	public DisplayCancel()
-	{	
+	{	eventNames.add(SystemControlEvent.REQUIRE_CANCEL_ROUND);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -50,22 +52,15 @@ public class DisplayCancel implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Message */
+	private final String MESSAGE = "Game canceled";
+
 	@Override
 	public String getMessage(SystemControlEvent event)
-	{	String message = "Game canceled";
+	{	String message = MESSAGE;
 		return message;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.REQUIRE_CANCEL_ROUND));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

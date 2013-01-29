@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.display.ais;
 
 /*
  * Total Boum Boum
@@ -22,46 +22,59 @@ package org.totalboumboum.engine.loop.display;
  */
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.InteractiveLoop;
+import org.totalboumboum.engine.loop.Loop;
+import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
+import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * Displays the colors set
+ * by an artificial agent.
  * 
  * @author Vincent Labatut
- *
  */
-public class DisplayAisTexts implements Display
+public class DisplayAisColors extends Display
 {
-	public DisplayAisTexts(InteractiveLoop loop)
+	/**
+	 * Builds a standard display object.
+	 * 
+	 * @param loop
+	 * 		Object used for displaying.
+	 */
+	public DisplayAisColors(InteractiveLoop loop)
 	{	this.players = loop.getPlayers();
 		this.level = loop.getLevel();
 		
 		for(int i=0;i<players.size();i++)
 			show.add(false);
+		
+		eventNames.add(SystemControlEvent.SWITCH_DISPLAY_AIS_COLORS);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of players involved in the game */
 	private List<AbstractPlayer> players;
+	/** Current level */
 	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which information should be displayed */
 	private final List<Boolean> show = new ArrayList<Boolean>();
 
 	@Override
@@ -87,6 +100,16 @@ public class DisplayAisTexts implements Display
 			message = null;
 	}
 	
+	/**
+	 * Returns the value indicating which
+	 * information should be displayed,
+	 * for the specified player.
+	 * 
+	 * @param index
+	 * 		Concerned player.
+	 * @return
+	 * 		Value indicating which information should be displayed.
+	 */
 	private synchronized boolean getShow(int index)
 	{	return show.get(index);		
 	}
@@ -94,8 +117,11 @@ public class DisplayAisTexts implements Display
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final String MESSAGE_DISPLAY = "Display texts for player #";
-	private final String MESSAGE_HIDE = "Hide texts for player #";
+	/** Display message */
+	private final String MESSAGE_DISPLAY = "Display colored tiles for player #";
+	/** Hide message */
+	private final String MESSAGE_HIDE = "Hide colored tiles for player #";
+	/** Current message */
 	private String message = null;
 	
 	@Override
@@ -104,64 +130,29 @@ public class DisplayAisTexts implements Display
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<String> eventNames = new ArrayList<String>(Arrays.asList(SystemControlEvent.SWITCH_DISPLAY_AIS_TEXTS));
-	
-	@Override
-	public List<String> getEventNames()
-	{	return eventNames;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	for(int i=0;i<players.size();i++)
+	{	Graphics2D g2 = (Graphics2D)g;
+		double tileSize = RoundVariables.scaledTileDimension;
+		for(int i=0;i<players.size();i++)
 		{	AbstractPlayer player = players.get(i);
 			if(player instanceof AiPlayer)
 			{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
-				Color color = player.getColor().getColor();
-				// tile texts
+				// tile colors
 				if(getShow(i))
-				{	int type = Font.PLAIN;
-					boolean bold = aiMgr.isBold();
-					if(bold)
-						type = Font.BOLD;
-					Font font = new Font("Dialog",type,9);//TODO was 15
-					g.setFont(font);
-					FontMetrics metrics = g.getFontMetrics(font);
-					List<String>[][] texts = aiMgr.getTileTexts();
+				{	List<Color>[][] colors = aiMgr.getTileColors();
 					for(int row=0;row<level.getGlobalHeight();row++)
 					{	for(int col=0;col<level.getGlobalWidth();col++)
-						{	Tile tile = level.getTile(row,col);
-							List<String> textList = texts[row][col];
-							if(textList!=null && !textList.isEmpty())
-							{	List<Integer> xList = new ArrayList<Integer>();
-								List<Integer> boxHeights = new ArrayList<Integer>();
-								double total = 0;
-								for(int s=0;s<textList.size();s++)
-								{	String text = textList.get(s);
-									if(text==null)
-										text = "null";
-									Rectangle2D box = metrics.getStringBounds(text,g);
-									int boxHeight = (int)Math.round(box.getHeight());
-									boxHeights.add(boxHeight);
-									int x = (int)Math.round(tile.getPosX()-box.getWidth()/2);
-									xList.add(x);
-									total = total + box.getHeight();
-								}
-								int y = (int)Math.round(tile.getPosY()+total/2);
-								for(int s=textList.size()-1;s>=0;s--)
-								{	int x = xList.get(s);
-									String text = textList.get(s);
-									g.setColor(Color.BLACK);
-									g.drawString(text,x+1,y+1);
-									g.setColor(color);
-									g.drawString(text,x,y);
-									int boxHeight = boxHeights.get(s);
-									y = y - boxHeight;
+						{	for(Color color: colors[row][col])
+							{	if(color!=null)
+								{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),Loop.INFO_ALPHA_LEVEL);
+									g2.setPaint(paintColor);
+									Tile tile = level.getTile(row,col);
+									double x = tile.getPosX()-tileSize/2;
+									double y = tile.getPosY()-tileSize/2;
+									g2.fill(new Rectangle2D.Double(x,y,tileSize,tileSize));
 								}
 							}
 						}
