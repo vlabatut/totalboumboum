@@ -56,10 +56,15 @@ public class DisplayEnginePause extends Display
 	/////////////////////////////////////////////////////////////////
 	/** Whether the information should be displayed or not */
 	private boolean show = false;
+	/** How the information should be displayed */
+	private boolean mode = false;
 
 	@Override
 	public void switchShow(SystemControlEvent event)
-	{	show = !show;
+	{	if(event.getIndex()==SystemControlEvent.REGULAR)
+			show = !show;
+		else
+			mode = !mode;
 	}
 	
 	/**
@@ -73,41 +78,84 @@ public class DisplayEnginePause extends Display
 	{	return show;
 	}
 	
+	/**
+	 * Returns the value indicating how
+	 * the information should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating how the information should be displayed.
+	 */
+	private synchronized boolean getMode()
+	{	return mode;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Display message */
-	private final String MESSAGE_DISPLAY = "Pause engine";
-	/** Hide message */
-	private final String MESSAGE_HIDE = "Unpause engine";
+	/** Pause message */
+	private final String MESSAGE_PAUSE = "Pause engine";
+	/** Unpause message */
+	private final String MESSAGE_UNPAUSE = "Unpause engine";
+	/** Hiden message */
+	private final String MESSAGE_HIDEN = " (hiden)";
+	/** Visible message */
+	private final String MESSAGE_VISIBLE = "";
 
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
-		if(getShow())
-			message = MESSAGE_DISPLAY;
+		
+		boolean s = getShow();
+		if(s)
+			message = MESSAGE_PAUSE;
 		else
-			message = MESSAGE_HIDE;
+			message = MESSAGE_UNPAUSE;
+		
+		if(s)
+		{	boolean m = getMode();
+			if(m)
+				message = message + MESSAGE_HIDEN;
+			else
+				message = message + MESSAGE_VISIBLE;
+		}
+
 		return message;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Text displayed */
+	private final String TEXT_DISPLAY = "Engine paused";
+	/** Font used */
+	private final Font FONT = new Font("Dialog", Font.PLAIN, 18);
+	/** X position */
+	private Integer x = 10;
+	/** Y position */
+	private Integer y = null;
+	/** Drawing color */
+	private Color color = Color.MAGENTA;
+	/** Vertical offset */
+	private final int V_OFFSET = 70;
+	
 	@Override
 	public void draw(Graphics g)
-	{	if(getShow())
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Engine paused";
-			Rectangle2D box = metrics.getStringBounds(text,g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
+	{	boolean s = getShow();
+		boolean m = getMode();
+		if(s && !m)
+		{	// set font
+			g.setFont(FONT);
+			// possibly init position
+			if(y==null)
+			{	FontMetrics metrics = g.getFontMetrics(FONT);
+				Rectangle2D box = metrics.getStringBounds(TEXT_DISPLAY,g);
+				y = (int)Math.round(V_OFFSET+box.getHeight()/2);
+			}
+			// draw
 			g.setColor(Color.BLACK);
-			g.drawString(text,x+1,y+1);
-			g.setColor(Color.MAGENTA);
-			g.drawString(text,x,y);
+			g.drawString(TEXT_DISPLAY,x+1,y+1);
+			g.setColor(color);
+			g.drawString(TEXT_DISPLAY,x,y);
 		}
 	}
 }

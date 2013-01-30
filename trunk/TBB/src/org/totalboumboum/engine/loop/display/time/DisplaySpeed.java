@@ -88,16 +88,26 @@ public class DisplaySpeed extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog", Font.PLAIN, 18);
+	/** Text */
+	private final String TEXT = "Speed: ";
+	/** X position */
+	private Integer x = 10;
+	/** Y position */
+	private Integer y = null;
+	/** Vertical offset */
+	private final int V_OFFSET = 10;
+		
 	@Override
 	public void draw(Graphics g)
 	{	if(getShow())
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
+		{	g.setFont(FONT);
+			FontMetrics metrics = g.getFontMetrics(FONT);
+			String text = TEXT+Configuration.getEngineConfiguration().getSpeedCoeff();
 			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(10+box.getHeight()/2);
+			
+			y = (int)Math.round(V_OFFSET+box.getHeight()/2);
 			g.setColor(Color.BLACK);
 			g.drawString(text,x+1,y+1);
 			g.setColor(Color.CYAN);

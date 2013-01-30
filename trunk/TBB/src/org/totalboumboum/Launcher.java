@@ -1661,7 +1661,7 @@ public class Launcher
  */
 
 // TODO l'affichage des results du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
-// TODO affichage ingame API : shift+F pour cycler affichage, F tout seul pour on/off (pour toutes les infos)
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois (combi avec les touches numériques ?)
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
 // TODO dégager les threads des agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
+// TODO commande pour masquer certains sprites (genre: que les héros)

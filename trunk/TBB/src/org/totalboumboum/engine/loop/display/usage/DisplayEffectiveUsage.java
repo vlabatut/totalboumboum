@@ -147,6 +147,28 @@ public class DisplayEffectiveUsage extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog", Font.PLAIN, 18);
+	/** Drawn text */
+	private final String TEXT_ALL = "All";
+	/** Drawn text */
+	private final String TEXT_ENGINE = "Engine";
+	/** Drawn text */
+	private final String TEXT_AGENTS = "AIs";
+	/** Drawn text */
+	private final String ITEM_ENGINE = "Engine";
+	/** Drawn text */
+	private final String ITEM_SWING = "Swing";
+	/** Bars width */
+	private final int WIDTH = 200;
+	/** X location */
+    private Integer x = 10;
+    /** Y location */
+    private Integer y = null;
+	/** Vertical offset */
+	private final int V_OFFSET = 120;
+   
+
 	@Override
 	public void draw(Graphics g)
 	{	int s = getShow();
@@ -164,17 +186,16 @@ public class DisplayEffectiveUsage extends Display
 			String text = null;
 			switch(s)
 			{	case 1: 
-					text = "All";
+					text = TEXT_ALL;
 					break;
 				case 2:
-					text = "Engine";
+					text = TEXT_ENGINE;
 					break;
 				case 3:
-					text = "AIs";
+					text = TEXT_AGENTS;
 					break;
 			}
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			FontMetrics metrics = g.getFontMetrics(font);
+			FontMetrics metrics = g.getFontMetrics(FONT);
 			Rectangle2D box = metrics.getStringBounds(text,g);
 			int boxHeight = (int)box.getHeight();
 			int margin = boxHeight/8;
@@ -216,9 +237,7 @@ public class DisplayEffectiveUsage extends Display
 			
 			// init dimensions
 			int height = boxHeight+2*margin;
-			int width = 200;
-	        int y = 100;
-	        int x = 10;
+			y = V_OFFSET;
 	        
 			// init colors
 			List<Color> colors = new ArrayList<Color>();
@@ -249,16 +268,16 @@ public class DisplayEffectiveUsage extends Display
 			int widths[] = new int[values0.length];
 			int usedWidth = 0;
 			for(int i=1;i<values.length;i++)
-			{	widths[i] = (int)(width*values[i]);
+			{	widths[i] = (int)(WIDTH*values[i]);
 				usedWidth = usedWidth + widths[i];
 			}
-	        widths[0] = width - usedWidth;
+	        widths[0] = WIDTH - usedWidth;
 	        
 	        // draw the diagram
 			g.setColor(new Color(0,0,0,50));
-			g.fillRect(x,y-boxHeight/2,width,height);
+			g.fillRect(x,y-boxHeight/2,WIDTH,height);
 			g.setColor(Color.BLACK);
-			g.drawRect(x+1,y-boxHeight/2+1,width,height);
+			g.drawRect(x+1,y-boxHeight/2+1,WIDTH,height);
 			int offset = 0;
 			for(int i=0;i<colors.size();i++)
 			{	int w = widths[i];
@@ -268,11 +287,11 @@ public class DisplayEffectiveUsage extends Display
 				offset = offset + w;
 			}
 			g.setColor(Color.WHITE);
-			g.drawRect(x,y-boxHeight/2,width,height);
+			g.drawRect(x,y-boxHeight/2,WIDTH,height);
 			
 			// add the main text
 			g.setColor(new Color(255,255,255,50));
-			g.setFont(font);
+			g.setFont(FONT);
 			int yText = (int)Math.round(y+boxHeight/2-margin);
 			int xText = x+2*margin;
 			g.drawString(text,xText,yText);
@@ -304,10 +323,10 @@ public class DisplayEffectiveUsage extends Display
 					{	// init text
 						switch(i)
 						{	case 0:
-								text = "Swing"; 
+								text = ITEM_SWING; 
 								break;
 							case 1:
-								text = "Engine";
+								text = ITEM_ENGINE;
 								break;
 							default:
 								text = plrs.get(i-2).getName();

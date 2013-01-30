@@ -544,3 +544,6 @@
 + beta.025
 	- ressources : 
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
+	- gui :
+		- possibilité de masquer le message de pause
+		- bascule différente entre l'affichage des temps (mode débug)

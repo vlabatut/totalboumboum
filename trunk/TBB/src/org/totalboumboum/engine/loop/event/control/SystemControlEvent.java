@@ -56,6 +56,7 @@ public class SystemControlEvent
 
 	public SystemControlEvent(String name)
 	{	this.name = name;
+		index = REGULAR;
 	}
 	
 	public SystemControlEvent(String name, int index)

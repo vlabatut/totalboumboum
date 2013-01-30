@@ -27,12 +27,20 @@ import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * This class is used to handle the
+ * server-side system controls during 
+ * a network game.
  * 
  * @author Vincent Labatut
- *
  */
 public class ReplaySytemControl extends SystemControl
 {	
+	/**
+	 * Builds a standard control object.
+	 * 
+	 * @param loop
+	 * 		Loop to control.
+	 */
 	public ReplaySytemControl(ReplayLoop loop)
 	{	super(loop);
 	}
@@ -78,7 +86,11 @@ public class ReplaySytemControl extends SystemControl
 			}
 			// replay: pause/play
 			else if(keyCode == KeyEvent.VK_SPACE)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE);
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			
@@ -117,7 +129,11 @@ public class ReplaySytemControl extends SystemControl
 			}
 			// debug: time
 			else if(keyCode == KeyEvent.VK_F6)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME);
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			// debug: names

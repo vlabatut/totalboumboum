@@ -108,13 +108,23 @@ public class DisplayPlayersNames extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog",Font.BOLD,12);
+	/** Number format */
+	private NumberFormat nf = null;
+	
 	@Override
 	public void draw(Graphics g)
 	{	if(getShow())
-		{	//Graphics2D g2 = (Graphics2D) g;
-			Font font = new Font("Dialog",Font.BOLD,12);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
+		{	if(nf==null)
+			{	nf = NumberFormat.getPercentInstance();
+				nf.setMinimumIntegerDigits(2);
+				nf.setMaximumFractionDigits(2);
+			}
+			
+			//Graphics2D g2 = (Graphics2D) g;
+			g.setFont(FONT);
+			FontMetrics metrics = g.getFontMetrics(FONT);
 			for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
 				if(!player.isOut())
@@ -132,9 +142,6 @@ public class DisplayPlayersNames extends Display
 					double yMargin = nameBoxHeight/5;
 					
 					// process usage size
-					NumberFormat nf = NumberFormat.getPercentInstance();
-					nf.setMinimumIntegerDigits(2);
-					nf.setMaximumFractionDigits(2);
 					String usageText = nf.format(loop.getAverageCpuProportions()[i+2]);
 					//System.out.println(loop.getAverageCpu()[i+1]);					
 					Rectangle2D usageBox = metrics.getStringBounds(usageText,g);

@@ -93,17 +93,27 @@ public class DisplaySpeedChange extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog", Font.PLAIN, 18);
+	/** Text drawn */
+	private final String TEXT = "Speed: ";
+	/** X location */
+	private Integer x = 10;
+	/** Y location */
+	private Integer y = null;
+	/** Vertical offset */
+	private final int V_OFFSET = 10;
+	
 	@Override
 	public void draw(Graphics g)
 	{	long elapsedTime = getElapsedTime();
 		if(elapsedTime<MESSAGE_DURATION)
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
+		{	g.setFont(FONT);
+			FontMetrics metrics = g.getFontMetrics(FONT);
+			String text = TEXT+Configuration.getEngineConfiguration().getSpeedCoeff();
 			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(10+box.getHeight()/2);
+			
+			y = (int)Math.round( V_OFFSET+box.getHeight()/2);
 			int alpha = Math.round((1-elapsedTime/(float)MESSAGE_DURATION)*255);
 			Color background = new Color(0,0,0,alpha);
 			g.setColor(background);

@@ -101,24 +101,40 @@ public class DisplayFPS extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog", Font.PLAIN, 18);
+	/** Prefix text */
+	private final String PREFIX = "FPS/UPS/Th: ";
+	/** X position */
+	private Integer x = 10;
+	/** Y position */
+	private Integer y = null;
+	/** Number format */
+	private NumberFormat nf = null;
+	/** Vertical offset */
+	private final int V_OFFSET = 50;
+	
 	@Override
 	public void draw(Graphics g)
 	{	if(getShow())
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			NumberFormat nf = NumberFormat.getInstance();
-			nf.setMaximumFractionDigits(2);
-			nf.setMinimumFractionDigits(2);
+		{	if(nf==null)
+			{	nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(2);
+			}
+			
+			g.setFont(FONT);
+			FontMetrics metrics = g.getFontMetrics(FONT);
+			
 			double fps = loop.getAverageFPS();
 			String fpsStr = nf.format(fps); 
 			double ups = loop.getAverageUPS();
 			String upsStr = nf.format(ups);
 			String thFps = Integer.toString(Configuration.getEngineConfiguration().getFps());
-			String text = "FPS/UPS/Th: "+fpsStr+"/"+upsStr+"/"+thFps;
+			String text = PREFIX+fpsStr+"/"+upsStr+"/"+thFps;
+			
 			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(50+box.getHeight()/2);
+			y = (int)Math.round(V_OFFSET+box.getHeight()/2);
 			g.setColor(Color.BLACK);
 			g.drawString(text,x+1,y+1);
 			g.setColor(Color.CYAN);
