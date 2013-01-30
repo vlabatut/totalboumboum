@@ -6,7 +6,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
- * 
+ * 	
  * @author Fahri Cap
  * @author Suhrob Munavarov
  */
