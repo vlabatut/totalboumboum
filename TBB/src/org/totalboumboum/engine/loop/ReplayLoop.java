@@ -400,7 +400,9 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		{	switchBackward();
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
-		{	switchEnginePause();
+		{	int index = event.getIndex();
+			if(index==SystemControlEvent.REGULAR)
+				switchEnginePause();
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_FAST_FORWARD))
 		{	switchFastforward();

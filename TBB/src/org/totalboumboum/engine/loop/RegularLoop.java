@@ -258,7 +258,9 @@ public class RegularLoop extends LocalLoop
 			switchAiPause(index);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
-		{	switchEnginePause();
+		{	int index = event.getIndex();
+			if(index==SystemControlEvent.REGULAR)
+				switchEnginePause();
 		}
 	}
 }

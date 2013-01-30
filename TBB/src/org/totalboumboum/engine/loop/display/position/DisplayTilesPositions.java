@@ -134,6 +134,9 @@ public class DisplayTilesPositions extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog", Font.PLAIN, 12);
+	
 	@Override
 	public void draw(Graphics g)
 	{	boolean s = getShow();
@@ -141,9 +144,8 @@ public class DisplayTilesPositions extends Display
 		if(s)
 		{	// positions expressed in tiles
 			if(m)
-			{	Font font = new Font("Dialog", Font.PLAIN, 12);
-				g.setFont(font);
-				FontMetrics metrics = g.getFontMetrics(font);
+			{	g.setFont(FONT);
+				FontMetrics metrics = g.getFontMetrics(FONT);
 				for(int row=0;row<globalHeight;row++)
 				{	for(int col=0;col<globalWidth;col++)
 					{	Tile temp = level.getTile(row,col);
@@ -158,12 +160,12 @@ public class DisplayTilesPositions extends Display
 					}
 				}
 			}
+			
 			// positions expressed in pixels
 			else
 			{	// coordonnées
-				Font font = new Font("Dialog", Font.PLAIN, 12);
-				g.setFont(font);
-				FontMetrics metrics = g.getFontMetrics(font);
+				g.setFont(FONT);
+				FontMetrics metrics = g.getFontMetrics(FONT);
 				for(int row=0;row<globalHeight;row++)
 				{	for(int col=0;col<globalWidth;col++)
 					{	Tile temp = level.getTile(row,col);

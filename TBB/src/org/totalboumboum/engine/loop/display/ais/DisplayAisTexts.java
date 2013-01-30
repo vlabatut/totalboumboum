@@ -131,6 +131,9 @@ public class DisplayAisTexts extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Drawn text */
+	private final String TEXT_NULL = "null";
+	
 	@Override
 	public void draw(Graphics g)
 	{	for(int i=0;i<players.size();i++)
@@ -159,7 +162,7 @@ public class DisplayAisTexts extends Display
 								for(int s=0;s<textList.size();s++)
 								{	String text = textList.get(s);
 									if(text==null)
-										text = "null";
+										text = TEXT_NULL;
 									Rectangle2D box = metrics.getStringBounds(text,g);
 									int boxHeight = (int)Math.round(box.getHeight());
 									boxHeights.add(boxHeight);

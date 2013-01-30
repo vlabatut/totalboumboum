@@ -27,12 +27,19 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
+ * This class is used to handle the
+ * system controls during a local game.
  * 
  * @author Vincent Labatut
- *
  */
 public class LocalSytemControl extends SystemControl
 {	
+	/**
+	 * Builds a standard control object.
+	 * 
+	 * @param loop
+	 * 		Loop to control.
+	 */
 	public LocalSytemControl(VisibleLoop loop)
 	{	super(loop);
 	}
@@ -107,7 +114,11 @@ public class LocalSytemControl extends SystemControl
 			}
 			// debug: time
 			else if(keyCode == KeyEvent.VK_F6)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME);
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			// debug: names
@@ -118,7 +129,11 @@ public class LocalSytemControl extends SystemControl
 			
 			// debug: engine pause
 			else if(keyCode == KeyEvent.VK_END)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE);
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			else if(keyCode == KeyEvent.VK_HOME)

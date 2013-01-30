@@ -76,20 +76,31 @@ public class DisplayWaitMessage extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog", Font.PLAIN, 18);
+	/** Text drawn */
+	private final String TEXT = "Waiting for other players";
+	/** X position */
+	private Integer x = 10;
+	/** Y position */
+	private Integer y = null;
+	/** Vertical offset */
+	private final int V_OFFSET = 90;
+	
 	@Override
 	public void draw(Graphics g)
 	{	if(loop.getEnginePause())
-		{	Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Waiting for other players";
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
+		{	g.setFont(FONT);
+			if(y==null)
+			{	FontMetrics metrics = g.getFontMetrics(FONT);
+				Rectangle2D box = metrics.getStringBounds(TEXT, g);
+				y = (int)Math.round(V_OFFSET+box.getHeight()/2);
+			}
+			
 			g.setColor(Color.GRAY);
-			g.drawString(text,x+1,y+1);
+			g.drawString(TEXT,x+1,y+1);
 			g.setColor(Color.RED);
-			g.drawString(text,x,y);
+			g.drawString(TEXT,x,y);
 		}
 	}
 }

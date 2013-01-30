@@ -134,6 +134,7 @@ public class DisplaySpritesPositions extends Display
 	@Override
 	public String getMessage(SystemControlEvent event)
 	{	String message = null;
+		
 		int s = getShow();
 		switch(s)
 		{	case 0: 
@@ -159,9 +160,9 @@ public class DisplaySpritesPositions extends Display
 				break;
 		}
 		
-		boolean m = getMode();
 		if(s>0)
-		{	if(m)
+		{	boolean m = getMode();
+			if(m)
 				message = message + MESSAGE_UNIT_TILES;
 			else
 				message = message + MESSAGE_UNIT_PIXELS;
@@ -173,6 +174,9 @@ public class DisplaySpritesPositions extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Font used for drawing */
+	private final Font FONT = new Font("Dialog", Font.BOLD, 12);
+	
 	@Override
 	public void draw(Graphics g)
 	{	int s = getShow();
@@ -209,13 +213,13 @@ public class DisplaySpritesPositions extends Display
 						Tile tile = sprite.getTile();
 						int row = tile.getRow();
 						int col = tile.getCol();
-						Font font = new Font("Dialog", Font.BOLD, 12);
-						g.setFont(font);
-						FontMetrics metrics = g.getFontMetrics(font);
+						g.setFont(FONT);
+						FontMetrics metrics = g.getFontMetrics(FONT);
 						String text = "("+row+","+col+")";
 						Rectangle2D box = metrics.getStringBounds(text, g);
 						int x = (int)Math.round(sprite.getCurrentPosX()-box.getWidth()/2);
 						int y = (int)Math.round(sprite.getCurrentPosY()+box.getHeight()/2);
+						// draw
 						g.setColor(Color.BLACK);
 						g.drawString(text,x+1,y+1);
 						g.setColor(color);
@@ -223,9 +227,8 @@ public class DisplaySpritesPositions extends Display
 					}
 					else
 					{	// coordonnées
-						Font font = new Font("Dialog", Font.BOLD, 12);
-						g.setFont(font);
-						FontMetrics metrics = g.getFontMetrics(font);
+						g.setFont(FONT);
+						FontMetrics metrics = g.getFontMetrics(FONT);
 						DecimalFormat nf = new DecimalFormat("000.00") ;
 						String textX = nf.format(sprite.getCurrentPosX());
 						String textY = nf.format(sprite.getCurrentPosY());
