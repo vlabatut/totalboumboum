@@ -22,11 +22,12 @@ package org.totalboumboum.engine.log;
  */
 
 /**
+ * Class in charge of logging
+ * control events.
  * 
  * @author Vincent Labatut
- *
  */
 public class ControlsLog
 {
-	
+	//
 }

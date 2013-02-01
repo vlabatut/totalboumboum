@@ -837,7 +837,7 @@ final class AiSimZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette simulation (une fois que l'IA n'en a plus besoin).
+	 * Termine proprement cette simulation (une fois que l'IA n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

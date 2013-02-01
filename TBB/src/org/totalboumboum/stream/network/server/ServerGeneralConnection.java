@@ -941,6 +941,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	private Lock finishedLock = new ReentrantLock();
 	
@@ -952,6 +953,10 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		return result;
 	}
 	
+	/**
+	 * Cleanly finishes this object,
+	 * possibly freeing some memory.
+	 */
 	public void finish()
 	{	finishedLock.lock();
 		finished = true;

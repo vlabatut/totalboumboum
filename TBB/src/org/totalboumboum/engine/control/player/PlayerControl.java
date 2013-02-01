@@ -27,12 +27,21 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.player.ControlledPlayer;
 
 /**
+ * General class in charge of
+ * monitoring the players keys
+ * during game.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class PlayerControl implements KeyListener
 {	
+	/**
+	 * Builds an object monitoring
+	 * the specified player.
+	 * 
+	 * @param player
+	 * 		Player to monitor.
+	 */
 	public PlayerControl(ControlledPlayer player)
 	{	this.player = player;
 	}
@@ -40,8 +49,16 @@ public abstract class PlayerControl implements KeyListener
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Monitored player */
 	protected ControlledPlayer player;
 	
+	/**
+	 * Returns the sprite of the
+	 * monitored player.
+	 * 
+	 * @return
+	 * 		Sprite of the monitored player.
+	 */
 	public Sprite getSprite()
 	{	return player.getSprite();
 	}
@@ -49,8 +66,13 @@ public abstract class PlayerControl implements KeyListener
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether this object has been deleted or not */
 	protected boolean finished = false;
 	
+	/**
+	 * Cleanly finishes this object,
+	 * possibly freeing some memory.
+	 */
 	public void finish()
 	{	player = null;
 	}

@@ -33,12 +33,21 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 
 /**
- * Client side class : fetch local player's actions to the server
+ * Client side class in charge of
+ * fetching some local player's actions to 
+ * the server.
+ * 
  * @author Vincent Labatut
- *
  */
 public class NetworkPlayerControl extends PlayerControl 
 {	
+	/**
+	 * Builds an object monitoring the
+	 * specified player.
+	 * 
+	 * @param player
+	 * 		Player to monitor.
+	 */
 	public NetworkPlayerControl(ControlledPlayer player)
 	{	super(player);
 		connection = Configuration.getConnectionsConfiguration().getClientConnection();
@@ -47,11 +56,19 @@ public class NetworkPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// CONNECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Client connection */
 	private ClientGeneralConnection connection;
 	
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the control settings
+	 * of the monitored player.
+	 * 
+	 * @return
+	 * 		Control settings of the monitored player.
+	 */
 	public ControlSettings getControlSettings()
 	{	return player.getControlSettings();
 	}
@@ -59,8 +76,8 @@ public class NetworkPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	private final HashMap<Integer,Boolean> pressedKeys = new HashMap<Integer,Boolean>();
+	/** Records the keys currently pressed */
+	private final HashMap<Integer,Boolean> pressedKeys = new HashMap<Integer,Boolean>();	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	
 	@Override
 	public void keyPressed(KeyEvent e)
@@ -76,9 +93,7 @@ public class NetworkPlayerControl extends PlayerControl
 	    }
 	}
 
-/*
- * TODO non-system keys should not be listened to when in pause 
- */
+// TODO non-system keys should not be listened to when in pause 
 	
 	@Override
 	public void keyReleased(KeyEvent e)
@@ -99,6 +114,7 @@ public class NetworkPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void finish()
 	{	if(!finished)
 		{	finished = true;

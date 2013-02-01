@@ -764,7 +764,7 @@ public final class AiDataZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
+	 * Termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

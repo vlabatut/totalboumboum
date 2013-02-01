@@ -89,11 +89,15 @@ public class Limits<T extends Limit> implements Serializable
 	{	return limits.get(index);		
 	}
 	
-	public void finish()
-	{	limits.clear();		
-	}
-	
 	public int size()
 	{	return limits.size();	
+	}
+	
+	/**
+	 * Cleanly finishes this object,
+	 * possibly freeing some memory.
+	 */
+	public void finish()
+	{	limits.clear();		
 	}
 }

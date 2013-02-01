@@ -397,7 +397,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * libère les ressources occupées par l'IA
+	 * Libère les ressources occupées par l'IA.
 	 */
 	public void finish()
 	{	bombCounts = null;
