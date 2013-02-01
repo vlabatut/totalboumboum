@@ -113,10 +113,15 @@ public abstract class AbstractConnection implements OwnerInterface
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether this object has been deleted or not */
 	protected boolean finished = false;
 	protected Lock ioLock = new ReentrantLock();
 	protected boolean ioFinished = false;
 
+	/**
+	 * Cleanly finishes this object,
+	 * possibly freeing some memory.
+	 */
 	public void finish()
 	{	ioLock.lock();
 		{	if(!finished)

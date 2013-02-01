@@ -1480,7 +1480,7 @@ public final class AiSimZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette simulation (une fois que l'agent n'en a plus besoin).
+	 * Termine proprement cette simulation (une fois que l'agent n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

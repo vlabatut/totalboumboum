@@ -30,12 +30,20 @@ import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * This class is used to handle the
+ * player controls during a local game.
  * 
  * @author Vincent Labatut
- *
  */
 public class LocalPlayerControl extends PlayerControl 
 {	
+	/**
+	 * Builds a monitoring object
+	 * for the specified player.
+	 * 
+	 * @param player
+	 * 		Player to monitor.
+	 */
 	public LocalPlayerControl(ControlledPlayer player)
 	{	super(player);
 	}
@@ -43,6 +51,13 @@ public class LocalPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the control settings
+	 * of the monitored player.
+	 * 
+	 * @return
+	 * 		Control settings of the monitored player.
+	 */
 	public ControlSettings getControlSettings()
 	{	return player.getControlSettings();
 	}
@@ -50,8 +65,8 @@ public class LocalPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	private final HashMap<Integer,Boolean> pressedKeys = new HashMap<Integer,Boolean>();
+	/** Records the keys currently pressed */
+	private final HashMap<Integer,Boolean> pressedKeys = new HashMap<Integer,Boolean>(); // nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	
 	@Override
 	public void keyPressed(KeyEvent e)
@@ -66,9 +81,7 @@ public class LocalPlayerControl extends PlayerControl
 	    }
 	}
 
-/*
- * TODO non-system keys should not be listened to when in pause 
- */
+// TODO non-system keys should not be listened to when in pause 
 	
 	@Override
 	public void keyReleased(KeyEvent e)
@@ -88,6 +101,7 @@ public class LocalPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void finish()
 	{	if(!finished)
 		{	finished = true;

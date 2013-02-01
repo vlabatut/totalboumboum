@@ -113,8 +113,13 @@ public abstract class AbstractPlayer
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether this object has been deleted or not */
 	protected boolean finished = false;
 	
+	/**
+	 * Cleanly finishes this object,
+	 * possibly freeing some memory.
+	 */
 	public void finish()
 	{	finished = true;
 		color = null;

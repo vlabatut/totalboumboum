@@ -576,7 +576,7 @@ public class Match implements StatisticHolder, Serializable
 	
 	/**
 	 * Allows terminating this object
-	 * appropriately (memory-wise.
+	 * appropriately (memory-wise).
 	 */
 	public void finish()
 	{	// rounds

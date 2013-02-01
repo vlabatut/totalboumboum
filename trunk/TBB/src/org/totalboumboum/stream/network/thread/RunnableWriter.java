@@ -137,6 +137,7 @@ System.out.println("<<"+message);
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	private Lock finishLock = new ReentrantLock();
 	
@@ -149,6 +150,10 @@ System.out.println("<<"+message);
 		return result;
 	}
 	
+	/**
+	 * Cleanly finishes this object,
+	 * possibly freeing some memory.
+	 */
 	public void finish()
 	{	finishLock.lock();
 		{	finished = true;

@@ -28,12 +28,20 @@ import java.util.HashMap;
 import org.totalboumboum.engine.loop.VisibleLoop;
 
 /**
+ * General class in charge of
+ * monitoring the system keys
+ * during game.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class SystemControl implements KeyListener
 {	
+	/**
+	 * Builds a standard control object.
+	 * 
+	 * @param loop
+	 * 		Loop to control.
+	 */
 	public SystemControl(VisibleLoop loop)
 	{	this.loop = loop;
 		keysPressed = new HashMap<Integer,Boolean>();
@@ -42,8 +50,8 @@ public abstract class SystemControl implements KeyListener
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	protected HashMap<Integer,Boolean> keysPressed;
+	/** Records the keys currently pressed */
+	protected HashMap<Integer,Boolean> keysPressed; // nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 
 	@Override
 	public void keyPressed(KeyEvent e)
@@ -63,13 +71,18 @@ public abstract class SystemControl implements KeyListener
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object displaying the game */
 	protected VisibleLoop loop;
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	
+	/**
+	 * Cleanly finishes this object.
+	 */
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
