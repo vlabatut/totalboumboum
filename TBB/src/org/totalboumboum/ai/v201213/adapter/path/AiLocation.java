@@ -29,6 +29,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiLocation implements Comparable<AiLocation>
 {	

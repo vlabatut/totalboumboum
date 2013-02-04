@@ -30,6 +30,9 @@ package org.totalboumboum.ai.v201213.adapter.agent;
  * ne doit être ajouté ou retiré. Les modes sont imposés.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiMode
 {	

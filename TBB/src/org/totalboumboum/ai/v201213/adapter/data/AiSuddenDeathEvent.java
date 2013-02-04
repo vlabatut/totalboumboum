@@ -32,6 +32,9 @@ import java.util.List;
  * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEvent>
 {	

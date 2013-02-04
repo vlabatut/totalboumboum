@@ -90,25 +90,18 @@ public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> im
 	 * @param name
 	 * 		Nom du nouveau critère.
 	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 * @throws IllegalArgumentException
 	 * 		Un critère du même nom existe déjà.
 	 */
-	public AiUtilityCriterion(T ai, String name) throws StopRequestException
-	{	// vérifie l'unicité du nom
-		AiUtilityHandler<?> handler = ai.getUtilityHandler();
-		if(handler.checkCriterionName(name))
-		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
-			throw new IllegalArgumentException("A criterion with the same name ("+name+") already exists for this agent ("+color+" player).");
-		}
-		
-		// initialise le critère
+	protected AiUtilityCriterion(T ai, String name)
+	{	this.name = name;
 		this.ai = ai;
-		this.name = name;
-		
-		// ajoute à la liste du gestionnaire d'utilité
-		handler.insertCriterion(this);
+	}
+	
+	protected AiUtilityCriterion clone(T ai)
+	{
+		// TODO TODO
+		// à compléter
 	}
 	
     /////////////////////////////////////////////////////////////////

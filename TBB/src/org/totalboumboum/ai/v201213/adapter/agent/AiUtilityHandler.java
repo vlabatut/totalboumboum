@@ -74,6 +74,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * 		Classe de l'agent.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	
@@ -314,7 +317,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/////////////////////////////////////////////////////////////////
 	/** Map de tous les critères créés, à ne surtout pas modifier manuellement */
 	protected final Map<String,AiUtilityCriterion<?,?>> criterionMap = new HashMap<String,AiUtilityCriterion<?,?>>();
-	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
 
 	/**
 	 * Vérifie si un critère portant le nom passé
@@ -367,7 +369,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/////////////////////////////////////////////////////////////////
 	/** Map contenant tous les cas, à initialiser dans {@link #initCases} */
 	protected final Map<String,AiUtilityCase> caseMap = new HashMap<String,AiUtilityCase>();
-	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
 	
 	/**
 	 * Vérifie si un cas portant le nom passé

@@ -120,6 +120,7 @@ public final class AiUtilityCombination
 	 * 		Le nom du critère concerné par la valeur.
 	 * @param value
 	 * 		La valeur à affecter au critère.
+	 * TODO TODO illegalargumentexception
 	 */
 	public final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiUtilityCriterion<T,U> criterion, U value) 
 	{	if(!criteria.contains(criterion))

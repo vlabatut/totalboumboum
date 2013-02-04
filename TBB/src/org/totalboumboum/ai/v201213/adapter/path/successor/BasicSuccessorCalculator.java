@@ -79,6 +79,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * de côut disponibles. 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class BasicSuccessorCalculator extends SuccessorCalculator
 {

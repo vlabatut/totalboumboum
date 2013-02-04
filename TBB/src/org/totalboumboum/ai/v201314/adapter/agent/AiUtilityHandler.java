@@ -317,23 +317,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
 
 	/**
-	 * Vérifie si un critère portant le nom passé
-	 * en paramètre existe déjà.
-	 * <br/>
-	 * Cette méthode est destinée à un usage interne,
-	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
-	 * 
-	 * @param name
-	 * 		Nom à tester.
-	 * @return
-	 * 		{@code true} ssi un critère de ce nom existe déjà.
-	 */
-	final boolean checkCriterionName(String name)
-	{	boolean result = criterionMap.keySet().contains(name);
-		return result;
-	}
-	
-	/**
 	 * Ajoute un nouveau critère à la map.
 	 * <br/>
 	 * Cette méthode est destinée à un usage interne,
@@ -342,25 +325,12 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @param criterion
 	 * 		Le critère à ajouter.
 	 */
-	final void insertCriterion(AiUtilityCriterion<?, ?> criterion)
+	final void insertCriterion(AiUtilityCriterion<?, ?> criterion) throws IllegalArgumentException
 	{	String name = criterion.getName();
+		if(criterionMap.keySet().contains(name))
+			throw new IllegalArgumentException();//TODO
 		criterionMap.put(name,criterion);
 	}
-	
-	/**
-	 * Initialise tous les critères nécessaires à la définitions
-	 * des cas pour cet agent. Ces critères sont automatiquement
-	 * stockés dans la map {@link #criterionMap} (les clés 
-	 * {@code String} correspondent aux noms des critères).
-	 * <br/>
-	 * Bien entendu, cette initialisation est réalisée une seule
-	 * fois lors de la création de l'agent. On suppose donc
-	 * que les critères sont constants au cours d'une partie.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
-	 */
-	protected abstract void initCriteria() throws StopRequestException;
 	
 	/////////////////////////////////////////////////////////////////
 	// CASES	/////////////////////////////////////////////////////
@@ -369,23 +339,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	protected final Map<String,AiUtilityCase> caseMap = new HashMap<String,AiUtilityCase>();
 	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
 	
-	/**
-	 * Vérifie si un cas portant le nom passé
-	 * en paramètre existe déjà.
-	 * <br/>
-	 * Cette méthode est destinée à un usage interne,
-	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
-	 * 
-	 * @param name
-	 * 		Nom à tester.
-	 * @return
-	 * 		{@code true} ssi un cas de ce nom existe déjà.
-	 */
-	final boolean checkCaseName(String name)
-	{	boolean result = caseMap.keySet().contains(name);
-		return result;
-	}
-
 	/**
 	 * Ajoute un nouveau cas à la map.
 	 * <br/>
@@ -397,25 +350,10 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 */
 	final void insertCase(AiUtilityCase caze)
 	{	String name = caze.getName();
+		if(caseMap.keySet().contains(name))
+			throw new //TODO
 		caseMap.put(name,caze);
 	}
-	
-	/**
-	 * Initialise tous les cas nécessaires à cet agent. Ces 
-	 * cas sont automatiquement stockés dans la map 
-	 * {@link #caseMap} (les clés {@code String} correspondent 
-	 * aux noms des cas). Cette map contient tous les cas
-	 * sans distinction de mode (i.e. à la fois les cas de
-	 * collecte et ceux d'attaque).
-	 * <br/>
-	 * Bien entendu, cette initialisation est réalisée une seule
-	 * fois lors de la création de l'agent. On suppose donc
-	 * que les critères sont constants au cours d'une partie.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
-	 */
-	protected abstract void initCases() throws StopRequestException;
 	
 	/**
 	 * Cette méthode prend une case en paramètre, et identifie

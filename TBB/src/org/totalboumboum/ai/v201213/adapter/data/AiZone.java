@@ -1,3 +1,4 @@
+
 package org.totalboumboum.ai.v201213.adapter.data;
 
 /*
@@ -56,6 +57,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiZone
 {	

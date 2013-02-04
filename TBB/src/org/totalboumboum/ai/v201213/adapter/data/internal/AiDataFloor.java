@@ -30,6 +30,9 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataFloor extends AiDataSprite<Floor> implements AiFloor
 {

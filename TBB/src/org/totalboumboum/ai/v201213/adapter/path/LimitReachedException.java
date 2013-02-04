@@ -44,6 +44,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * plusieurs chemins pour aller à une même case.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class LimitReachedException extends Exception
 {	/** Numéro de série */

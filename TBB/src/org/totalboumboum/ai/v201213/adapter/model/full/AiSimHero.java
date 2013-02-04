@@ -40,6 +40,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * humain ou un agent.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimHero extends AiSimSprite implements AiHero
 {

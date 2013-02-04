@@ -49,6 +49,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * contrôlé par un joueur humain ou un agent.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 {
