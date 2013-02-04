@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.enginsazan.v0.EnginSazan;
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class CriterionSecond extends AiUtilityCriterionInteger<EnginSazan>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";
@@ -41,7 +42,7 @@ public class CriterionSecond extends AiUtilityCriterionInteger<EnginSazan>
 	{	ai.checkInterruption();
 		int result = 2;
 		
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 		
 		return result;
 	}

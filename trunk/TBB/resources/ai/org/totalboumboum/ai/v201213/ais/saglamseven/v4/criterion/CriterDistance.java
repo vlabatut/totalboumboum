@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201213.ais.saglamseven.v4.SaglamSeven;
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class CriterDistance extends AiUtilityCriterionInteger<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "DISTANCE";
@@ -41,7 +42,6 @@ public class CriterDistance extends AiUtilityCriterionInteger<SaglamSeven>
 	public CriterDistance(SaglamSeven ai) throws StopRequestException
 	{	super(ai,NAME,0,2);
 		ai.checkInterruption();
-		this.ai=ai;
 	}
 	
 	/**

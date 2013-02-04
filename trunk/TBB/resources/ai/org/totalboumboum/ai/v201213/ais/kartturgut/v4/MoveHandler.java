@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.kartturgut.v4;
 
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -16,11 +15,6 @@ import org.totalboumboum.ai.v201213.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201213.adapter.path.successor.TimePartialSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
-
 /**
  * Classe gérant le déplacement de l'agent.
  * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
@@ -29,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<KartTurgut>
 {	
 	/** */

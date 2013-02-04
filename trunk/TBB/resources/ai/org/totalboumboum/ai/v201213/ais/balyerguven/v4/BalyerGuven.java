@@ -25,7 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
-
+@SuppressWarnings("deprecation")
 public class BalyerGuven extends ArtificialIntelligence
 {
 	/** represents hero */

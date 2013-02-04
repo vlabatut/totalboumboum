@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class CriterionNombredeMur extends
 		AiUtilityCriterionInteger<CiplakErakyol> {
 	/** Nom de ce critère */
@@ -35,7 +36,6 @@ public class CriterionNombredeMur extends
 	public CriterionNombredeMur(CiplakErakyol ai) throws StopRequestException {
 		super(ai, NAME, 0, 4);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	// ///////////////////////////////////////////////////////////////

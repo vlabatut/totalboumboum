@@ -18,11 +18,12 @@ import org.totalboumboum.ai.v201213.ais.enginsazan.v0.criterion.CriterionThird;
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 {	
 	/**
@@ -41,7 +42,7 @@ public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
 	
-		// TODO à compléter
+		//  à compléter
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -51,7 +52,7 @@ public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 	protected void resetCustomData() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à surcharger si nécessaire, pour réinitialiser certaines
+		//  à surcharger si nécessaire, pour réinitialiser certaines
 		// structures de données à chaque itération
 		
 		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode
@@ -65,7 +66,7 @@ public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 	{	ai.checkInterruption();
 		Set<AiTile> result = new TreeSet<AiTile>();
 		
-		// TODO à compléter afin de sélectionner les cases
+		//  à compléter afin de sélectionner les cases
 		// dont on veut calculer l'utilité
 	
 		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode
@@ -80,7 +81,7 @@ public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 	protected void initCriteria() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter afin d'initialiser les critères 
+		//  à compléter afin d'initialiser les critères 
 		// la méthode est appelée une seule fois
 		
 		// le traitement défini ici utilise les classes
@@ -134,7 +135,7 @@ public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 	{	ai.checkInterruption();
 		AiUtilityCase result = null;
 		
-		// TODO à compléter pour identifier le cas associé
+		//  à compléter pour identifier le cas associé
 		// à la case passée en paramètre
 		
 		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode
@@ -261,6 +262,6 @@ public class UtilityHandler extends AiUtilityHandler<EnginSazan>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }

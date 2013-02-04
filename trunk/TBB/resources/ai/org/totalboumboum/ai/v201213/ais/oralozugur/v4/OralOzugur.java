@@ -31,6 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class OralOzugur extends ArtificialIntelligence {
 	/**
 	 * Instancie la classe principale de l'agent.

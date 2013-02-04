@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class Duree extends AiUtilityCriterionInteger<BesniliKangal>
 {
 	/** Nom de ce critère */
@@ -28,7 +29,6 @@ public class Duree extends AiUtilityCriterionInteger<BesniliKangal>
 	{
 		super( ai, NAME, MIN, MAX );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	/**

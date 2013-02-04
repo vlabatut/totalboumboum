@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * @author Bekir Cınar
  * @author Deniz Yalçın
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<CinarYalcin>
 {	
 	/**

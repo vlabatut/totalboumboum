@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
+@SuppressWarnings("deprecation")
 public class GerginOzkanoglu extends ArtificialIntelligence
 {
 

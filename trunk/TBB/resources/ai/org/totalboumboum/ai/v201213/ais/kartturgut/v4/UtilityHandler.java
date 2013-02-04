@@ -26,6 +26,7 @@ import org.totalboumboum.ai.v201213.ais.kartturgut.v4.criterion.Securite;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<KartTurgut>
 {	
 	/**

@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
  * @author Ecem Güven
  *
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<BalyerGuven>
 {
 	/** represents zone*/

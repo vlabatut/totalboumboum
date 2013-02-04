@@ -12,7 +12,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * The criteria that will evaluate the tile for the number of destructible walls
  * surrounding it.
@@ -21,6 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim>
 {	/** Nom de ce critère */
 	public static final String NAME = "NBR_ADJACENT_MURS";
@@ -45,19 +45,16 @@ public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim
 		super(ai,NAME,1,3);
 		ai.checkInterruption();
 		// init agent
-		this.ai1 = ai;
 	}
 
-	/** */
-	protected AlcarKayaYildirim ai1;
-    /////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Integer processValue( AiTile tile ) throws StopRequestException
 	{
-		ai1.checkInterruption();	
-		zone = this.ai1.getZone();
+		ai.checkInterruption();	
+		zone = this.ai.getZone();
 		ourhero = zone.getOwnHero();
 		ourtile = ourhero.getTile();
 		int result = 0;
@@ -73,7 +70,7 @@ public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim
 		AiTile right = tile.getNeighbor(Direction.RIGHT);
 		
 		while (obstacle[4] && (i <= bomb_range)) {
-			this.ai1.checkInterruption();
+			this.ai.checkInterruption();
 
 			List<AiBlock> blocks;
 
@@ -83,7 +80,7 @@ public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim
 					obstacle[0] = false;
 				else if (!blocks.isEmpty()) {
 					for (AiBlock block : blocks) {
-						this.ai1.checkInterruption();
+						this.ai.checkInterruption();
 						if (block.isDestructible())
 							result++;
 						obstacle[0] = false;
@@ -98,7 +95,7 @@ public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim
 					obstacle[1] = false;
 				else if (!blocks.isEmpty()) {
 					for (AiBlock block : blocks) {
-						this.ai1.checkInterruption();
+						this.ai.checkInterruption();
 						if (block.isDestructible())
 							result++;
 						obstacle[1] = false;
@@ -112,7 +109,7 @@ public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim
 					obstacle[2] = false;
 				else if (!blocks.isEmpty()) {
 					for (AiBlock block : blocks) {
-						this.ai1.checkInterruption();
+						this.ai.checkInterruption();
 						if (block.isDestructible())
 							result++;
 						obstacle[2] = false;
@@ -126,7 +123,7 @@ public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim
 					obstacle[3] = false;
 				else if (!blocks.isEmpty()) {
 					for (AiBlock block : blocks) {
-						this.ai1.checkInterruption();
+						this.ai.checkInterruption();
 						if (block.isDestructible())
 							result++;
 						obstacle[3] = false;

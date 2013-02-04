@@ -23,6 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class CriterMurDest extends AiUtilityCriterionInteger<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "MURDESTRUCTIBLE";
@@ -44,7 +45,6 @@ public class CriterMurDest extends AiUtilityCriterionInteger<SaglamSeven>
 	public CriterMurDest(SaglamSeven ai) throws StopRequestException
 	{	super(ai,NAME,1,3);
 		ai.checkInterruption();
-		this.ai=ai;
 	}
 
     /////////////////////////////////////////////////////////////////

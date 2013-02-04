@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.oralozugur.v4.criterion;
 
-
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -9,11 +7,12 @@ import org.totalboumboum.ai.v201213.ais.oralozugur.v4.OralOzugur;
 
 /**
  * Il retourne vrai pour les cases qui sont à côte des mur destructibles et l’autre face de
-mur est un tile libre.
+ * mur est un tile libre.
  * 
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class BestWall extends AiUtilityCriterionBoolean<OralOzugur>
 {	/** Nom de ce critère */
 	public static final String NAME = "BestWall";

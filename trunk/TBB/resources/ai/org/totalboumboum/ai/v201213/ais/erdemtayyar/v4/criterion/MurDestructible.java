@@ -15,6 +15,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * 
  */
+@SuppressWarnings("deprecation")
 public class MurDestructible extends AiUtilityCriterionInteger<ErdemTayyar> {
 	/**
 	 * name

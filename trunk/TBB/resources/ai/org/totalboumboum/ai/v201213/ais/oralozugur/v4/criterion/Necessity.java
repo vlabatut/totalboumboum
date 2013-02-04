@@ -18,6 +18,7 @@ alors, alors on besoin de 4 bombe.S’il est plus petite 3 bombe est suffisante.
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class Necessity extends AiUtilityCriterionBoolean<OralOzugur>
 {	/** Nom de ce critère */
 	public static final String NAME = "Necessity";

@@ -16,6 +16,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<ErdemTayyar> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

@@ -21,7 +21,6 @@ import org.totalboumboum.ai.v201213.ais.oralozugur.v4.criterion.NbMurDetrui;
 import org.totalboumboum.ai.v201213.ais.oralozugur.v4.criterion.Necessity;
 import org.totalboumboum.ai.v201213.ais.oralozugur.v4.criterion.PeutTuerEnnemi;
 
-
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
@@ -30,6 +29,7 @@ import org.totalboumboum.ai.v201213.ais.oralozugur.v4.criterion.PeutTuerEnnemi;
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<OralOzugur>
 {	
 	/**

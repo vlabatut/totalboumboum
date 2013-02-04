@@ -26,6 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tugce Gergin
  *
  */
+@SuppressWarnings("deprecation")
 public class PathCalculation {
 	
 	/**

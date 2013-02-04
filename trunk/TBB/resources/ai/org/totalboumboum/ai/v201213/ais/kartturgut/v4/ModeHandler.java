@@ -4,8 +4,6 @@ import org.totalboumboum.ai.v201213.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 
-
-
 /**
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
@@ -14,6 +12,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiHero;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<KartTurgut>
 {	
 	/** */

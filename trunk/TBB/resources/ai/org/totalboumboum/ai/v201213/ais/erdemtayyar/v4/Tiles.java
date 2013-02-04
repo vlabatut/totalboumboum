@@ -11,7 +11,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * 
  * This class is aimed to contain useful tile operations. This class's methods
@@ -24,7 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Zübeyir Tayyar
  */
-
+@SuppressWarnings("deprecation")
 public class Tiles {
 
 	// FIELD

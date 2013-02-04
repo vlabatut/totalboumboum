@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<OralOzugur> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

@@ -34,6 +34,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Bekir Cınar
  * @author Deniz Yalçın
  */
+@SuppressWarnings("deprecation")
 public class CinarYalcin extends ArtificialIntelligence
 {
 	

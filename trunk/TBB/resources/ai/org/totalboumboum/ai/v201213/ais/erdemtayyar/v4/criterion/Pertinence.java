@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "deprecation" })
 public class Pertinence extends AiUtilityCriterionBoolean {
 	/**
 	 * We affect the name of out criteria

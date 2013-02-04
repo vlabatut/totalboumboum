@@ -24,6 +24,7 @@ import org.totalboumboum.ai.v201213.adapter.path.successor.TimePartialSuccessorC
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class PathOperation
 {
 	/** Notre IA */

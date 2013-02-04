@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Besnili
  * @author Doruk Kangal
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<BesniliKangal>
 {
 	/**

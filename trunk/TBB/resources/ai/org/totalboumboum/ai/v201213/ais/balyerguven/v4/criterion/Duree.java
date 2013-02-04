@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class Duree extends AiUtilityCriterionBoolean<BalyerGuven>
 {	/** time */
 	public static final String NAME = "Duree";
@@ -29,7 +30,6 @@ public class Duree extends AiUtilityCriterionBoolean<BalyerGuven>
 	public Duree(BalyerGuven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     /////////////////////////////////////////////////////////////////

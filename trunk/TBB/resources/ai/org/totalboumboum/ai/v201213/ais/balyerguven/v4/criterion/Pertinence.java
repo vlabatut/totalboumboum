@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class Pertinence extends AiUtilityCriterionBoolean<BalyerGuven>
 {	/** pertinence */
 	public static final String NAME = "Pertinence";
@@ -33,7 +34,6 @@ public class Pertinence extends AiUtilityCriterionBoolean<BalyerGuven>
 	public Pertinence(BalyerGuven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     /////////////////////////////////////////////////////////////////

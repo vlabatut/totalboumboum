@@ -24,6 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class TileOperation
 {
 	/** Notre IA */

@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

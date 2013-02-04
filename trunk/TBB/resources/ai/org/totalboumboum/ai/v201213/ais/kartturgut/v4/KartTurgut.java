@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class KartTurgut extends ArtificialIntelligence
 {
 	

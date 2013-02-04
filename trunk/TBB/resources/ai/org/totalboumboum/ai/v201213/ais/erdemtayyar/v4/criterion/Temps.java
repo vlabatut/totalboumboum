@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.erdemtayyar.v4.ErdemTayyar;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "deprecation" })
 public class Temps extends AiUtilityCriterionBoolean {
 
 	/**

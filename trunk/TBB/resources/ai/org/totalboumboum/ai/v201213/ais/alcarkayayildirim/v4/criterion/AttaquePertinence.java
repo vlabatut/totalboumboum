@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class AttaquePertinence extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 {	/** Nom de ce critère */
 	public static final String NAME = "ATTAQUE_PERTINENCE";
@@ -37,19 +38,15 @@ public class AttaquePertinence extends AiUtilityCriterionBoolean<AlcarKayaYildir
 	public AttaquePertinence(AlcarKayaYildirim ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
 	
-	
-	/** */
-	protected AlcarKayaYildirim ai1;
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	ai1.checkInterruption();
-		AiZone zone = ai1.getZone();
+	{	ai.checkInterruption();
+		AiZone zone = ai.getZone();
 		AiHero ownHero=zone.getOwnHero();
 		boolean result = false;
 	

@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class malusDanger extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 {	/** Nom de ce critère */
 	public static final String NAME = "MALUS_DANGER";
@@ -27,20 +28,16 @@ public class malusDanger extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 	public malusDanger(AlcarKayaYildirim ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
 	
-	
-	/** */
-	protected AlcarKayaYildirim ai1;
-    /////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	ai1.checkInterruption();
+	{	ai.checkInterruption();
 	
-		if ( this.ai1.getCurrentDangerousTiles().contains(tile)){
+		if ( this.ai.getCurrentDangerousTiles().contains(tile)){
 			return true;
 		}
 	

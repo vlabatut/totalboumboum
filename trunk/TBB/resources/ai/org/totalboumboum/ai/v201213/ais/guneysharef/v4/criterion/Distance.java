@@ -9,11 +9,10 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v4.GuneySharef;
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class Distance extends AiUtilityCriterionBoolean<GuneySharef>
 {	/** Nom de ce critère */
 	public static final String NAME = "DISTANCE";
-
-
 
 	/**
 	 * Crée un nouveau critère binaire.
@@ -27,7 +26,6 @@ public class Distance extends AiUtilityCriterionBoolean<GuneySharef>
 	public Distance (GuneySharef ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai=ai;
 	}
 	
     /////////////////////////////////////////////////////////////////

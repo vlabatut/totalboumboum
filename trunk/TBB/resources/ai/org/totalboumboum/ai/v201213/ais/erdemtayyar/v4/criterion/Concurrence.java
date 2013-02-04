@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.erdemtayyar.v4.ErdemTayyar;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
+@SuppressWarnings("deprecation")
 public class Concurrence extends AiUtilityCriterionBoolean<ErdemTayyar> {
 	/** Nom de ce critère */
 	public static final String NAME = "Concurrence";

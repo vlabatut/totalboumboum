@@ -51,6 +51,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
 {	
 	/**

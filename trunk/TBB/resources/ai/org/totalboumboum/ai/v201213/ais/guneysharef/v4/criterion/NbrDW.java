@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v4.GuneySharef;
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class NbrDW extends AiUtilityCriterionInteger<GuneySharef>
 {	
 	/**
@@ -28,7 +29,6 @@ public class NbrDW extends AiUtilityCriterionInteger<GuneySharef>
 	public NbrDW(GuneySharef ai) throws StopRequestException
 	{	super(ai,NAME,0,3);
 		ai.checkInterruption();
-		this.ai=ai;
 	}
 
     /////////////////////////////////////////////////////////////////

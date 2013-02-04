@@ -6,13 +6,13 @@ import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
 
-
 /**
  * our adversaire class.
  * 
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class Adversaire extends AiUtilityCriterionBoolean<BalyerGuven>
 {	/** enemy */
 	public static final String NAME = "Adversaire";
@@ -30,7 +30,6 @@ public class Adversaire extends AiUtilityCriterionBoolean<BalyerGuven>
 	public Adversaire(BalyerGuven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     /////////////////////////////////////////////////////////////////

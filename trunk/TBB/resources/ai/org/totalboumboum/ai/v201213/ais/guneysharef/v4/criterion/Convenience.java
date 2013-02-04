@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v4.GuneySharef;
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class Convenience extends AiUtilityCriterionBoolean<GuneySharef>
 {	/** Nom de ce critère */
 	public static final String NAME = "PERTİNENCE";
@@ -35,7 +36,6 @@ public class Convenience extends AiUtilityCriterionBoolean<GuneySharef>
 	public Convenience(GuneySharef ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai=ai;
 	}
 	
 	@Override

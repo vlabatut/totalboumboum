@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.guneysharef.v4.criterion;
 
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionInteger;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -12,6 +11,7 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v4.GuneySharef;
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class DistA extends AiUtilityCriterionInteger<GuneySharef>
 {	/** Nom de ce critère */
 	public static final String NAME = "DisatanceAdversaire";

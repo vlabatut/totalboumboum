@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class PlusFacile extends AiUtilityCriterionBoolean<BesniliKangal>
 {
 	/** Nom de ce critère */
@@ -31,7 +32,6 @@ public class PlusFacile extends AiUtilityCriterionBoolean<BesniliKangal>
 	{
 		super( ai, NAME );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	/////////////////////////////////////////////////////////////////

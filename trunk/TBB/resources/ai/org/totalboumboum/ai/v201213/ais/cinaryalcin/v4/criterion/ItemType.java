@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v201213.ais.cinaryalcin.v4.CinarYalcin;
  * @author Bekir Cınar
  * @author Deniz Yalçın
  */
-
+@SuppressWarnings("deprecation")
 public class ItemType extends AiUtilityCriterionBoolean<CinarYalcin>
 {	/** Nom de ce critère */
 	public static final String NAME = "TypeItem";

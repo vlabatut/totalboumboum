@@ -28,6 +28,7 @@ import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v4.criterion.CriterionPert
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 {	
 	/**

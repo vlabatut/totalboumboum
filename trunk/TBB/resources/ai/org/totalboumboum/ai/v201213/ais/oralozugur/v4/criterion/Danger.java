@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.oralozugur.v4.OralOzugur;
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class Danger extends AiUtilityCriterionBoolean<OralOzugur> {
 	/** Nom de ce critère */
 	public static final String NAME = "Danger";

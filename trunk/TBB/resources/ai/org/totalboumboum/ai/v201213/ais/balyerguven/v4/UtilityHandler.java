@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201213.ais.balyerguven.v4.criterion.PertinentCaseVi
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<BalyerGuven>
 {	
 	/** verbose

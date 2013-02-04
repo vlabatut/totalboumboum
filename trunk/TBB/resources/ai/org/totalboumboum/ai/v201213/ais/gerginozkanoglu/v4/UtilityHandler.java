@@ -1,3 +1,4 @@
+
 package org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4;
 
 import java.util.Set;
@@ -25,6 +26,7 @@ import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.criterion.Time;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<GerginOzkanoglu> {
 	
 	/**

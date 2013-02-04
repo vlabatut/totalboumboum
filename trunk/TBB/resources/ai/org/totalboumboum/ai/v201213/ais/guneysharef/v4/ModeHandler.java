@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<GuneySharef>
 {	
 	/**

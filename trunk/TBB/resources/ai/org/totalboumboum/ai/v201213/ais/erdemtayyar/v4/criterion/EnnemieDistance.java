@@ -1,8 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.erdemtayyar.v4.criterion;
 
-
-
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -19,6 +16,7 @@ import org.totalboumboum.ai.v201213.ais.erdemtayyar.v4.ErdemTayyar;
  * @author Zübeyir Tayyar
  */
 
+@SuppressWarnings("deprecation")
 public class EnnemieDistance extends AiUtilityCriterionBoolean<ErdemTayyar> {
 
 	

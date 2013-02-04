@@ -27,6 +27,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<OralOzugur> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

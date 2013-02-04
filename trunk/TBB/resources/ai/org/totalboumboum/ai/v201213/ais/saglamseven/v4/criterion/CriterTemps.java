@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v201213.ais.saglamseven.v4.SaglamSeven;
  *  @author Esra Sağlam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class CriterTemps extends AiUtilityCriterionBoolean<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "TEMPS";
@@ -43,29 +44,25 @@ public class CriterTemps extends AiUtilityCriterionBoolean<SaglamSeven>
 	public CriterTemps(SaglamSeven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai=ai;
 	}
-     /**
-     * 
-     */
-    protected SaglamSeven ai1;
+
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	ai1.checkInterruption();
+	{	ai.checkInterruption();
 		boolean result = false;
-		AiZone gameZone = ai1.getZone();
+		AiZone gameZone = ai.getZone();
 		AiHero ownHero = gameZone.getOwnHero();
 		AiTile ownTile = ownHero.getTile();
 		int distanceAverage= gameZone.getTileDistance(ownTile, tile);
 		
-		if (this.ai1.modeHandler.getMode() == AiMode.COLLECTING) {
+		if (this.ai.modeHandler.getMode() == AiMode.COLLECTING) {
 			if (distanceAverage <= DISTANCE_BEST_COL)
 				result = true;
 		}
-		if (this.ai1.modeHandler.getMode() == AiMode.ATTACKING) {
+		if (this.ai.modeHandler.getMode() == AiMode.ATTACKING) {
 			if (distanceAverage <= DISTANCE_BEST_ATT)
 				result = true;
 		}

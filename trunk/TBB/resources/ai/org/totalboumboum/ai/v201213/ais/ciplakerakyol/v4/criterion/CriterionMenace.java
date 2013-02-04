@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v4.CiplakErakyol;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class CriterionMenace extends AiUtilityCriterionBoolean<CiplakErakyol>
 {	/** Nom de ce critère */
 	public static final String NAME = "Securite";

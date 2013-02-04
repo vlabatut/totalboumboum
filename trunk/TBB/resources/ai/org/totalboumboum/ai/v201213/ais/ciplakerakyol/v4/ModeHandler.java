@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<CiplakErakyol>
 {     
     /**

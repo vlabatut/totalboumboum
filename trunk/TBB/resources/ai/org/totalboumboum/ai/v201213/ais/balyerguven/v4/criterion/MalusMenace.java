@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class MalusMenace extends AiUtilityCriterionBoolean<BalyerGuven>
 {	/** danger of malus */
 	public static final String NAME = "MalusMenace";
@@ -28,7 +29,6 @@ public class MalusMenace extends AiUtilityCriterionBoolean<BalyerGuven>
 	public MalusMenace(BalyerGuven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     /////////////////////////////////////////////////////////////////

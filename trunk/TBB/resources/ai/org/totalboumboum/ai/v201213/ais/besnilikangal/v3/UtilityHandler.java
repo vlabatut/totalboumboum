@@ -26,6 +26,7 @@ import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.criterion.Threat;
  * @author Mustafa Besnili
  * @author Doruk Kangal
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<BesniliKangal>
 {	
 	/**

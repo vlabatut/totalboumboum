@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class MurVoiAdv extends AiUtilityCriterionBoolean<org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven>
 {	/** mur voisin de l'adversaire */
 	public static final String NAME = "MurVoiAdv";
@@ -28,7 +29,6 @@ public class MurVoiAdv extends AiUtilityCriterionBoolean<org.totalboumboum.ai.v2
 	public MurVoiAdv(BalyerGuven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     /////////////////////////////////////////////////////////////////

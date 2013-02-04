@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.saglamseven.v4;
 
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -36,11 +35,12 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
  * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Esra Sa?lam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<SaglamSeven>
 {	
 	
@@ -60,7 +60,7 @@ public class UtilityHandler extends AiUtilityHandler<SaglamSeven>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
 	
-		// TODO à compléter
+		//  à compléter
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ public class UtilityHandler extends AiUtilityHandler<SaglamSeven>
 	protected void resetCustomData() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à surcharger si nécessaire, pour réinitialiser certaines
+		//  à surcharger si nécessaire, pour réinitialiser certaines
 		// structures de données à chaque itération
 		
 		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode

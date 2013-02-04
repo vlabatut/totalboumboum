@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.guneysharef.v4;
 
-
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -22,6 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<GuneySharef>
 {	
 	/**

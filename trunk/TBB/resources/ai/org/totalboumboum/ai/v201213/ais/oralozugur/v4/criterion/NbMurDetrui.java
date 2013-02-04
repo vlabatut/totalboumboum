@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.oralozugur.v4.criterion;
 
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionInteger;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -12,6 +11,7 @@ import org.totalboumboum.ai.v201213.ais.oralozugur.v4.OralOzugur;
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class NbMurDetrui extends AiUtilityCriterionInteger<OralOzugur> {
 	/** Nom de ce critère */
 	public static final String NAME = "NbMurDetrui";

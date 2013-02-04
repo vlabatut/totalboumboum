@@ -5,8 +5,6 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
 
-
-
 /**
  * The criteria that will evaluate the tile for suitability to advance through a
  * non-accessible enemy.
@@ -16,6 +14,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class AvancePertinence extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 {	/** */
 	public static final String NAME = "AVANCE_PERTINENCE";
@@ -29,14 +28,7 @@ public class AvancePertinence extends AiUtilityCriterionBoolean<AlcarKayaYildiri
 	{
 		super(ai,NAME );
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
-
-	// ///////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE /////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** */
-	protected AlcarKayaYildirim	ai1;
 
 	// ///////////////////////////////////////////////////////////////
 	// PROCESS /////////////////////////////////////
@@ -44,12 +36,12 @@ public class AvancePertinence extends AiUtilityCriterionBoolean<AlcarKayaYildiri
 	@Override
 	public Boolean processValue( AiTile tile ) throws StopRequestException
 	{
-		ai1.checkInterruption();
+		ai.checkInterruption();
 		boolean result = false;
 
 		try
 		{
-			if ( this.ai1.getClosestAccDesWalltoEnemy().getNeighbors().contains( tile ) )
+			if ( this.ai.getClosestAccDesWalltoEnemy().getNeighbors().contains( tile ) )
 			{
 				result = true;
 			}

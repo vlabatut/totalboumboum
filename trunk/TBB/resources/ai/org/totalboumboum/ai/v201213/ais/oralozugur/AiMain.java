@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201213.ais.oralozugur.v4.OralOzugur;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

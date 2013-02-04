@@ -16,6 +16,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<GerginOzkanoglu> {
 	
 	/**

@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiZone;
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<BalyerGuven>
 {	
 	/**

@@ -39,6 +39,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<AlcarKayaYildirim>
 {	
 	/**

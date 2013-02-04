@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.cinaryalcin.v4.CinarYalcin;
  * @author Bekir Cınar
  * @author Deniz Yalçın
  */
+@SuppressWarnings("deprecation")
 public class Pertinent extends AiUtilityCriterionBoolean<CinarYalcin>
 {	/** Nom de ce critère */
 	public static final String NAME = "Pertinent";
@@ -34,7 +35,6 @@ public class Pertinent extends AiUtilityCriterionBoolean<CinarYalcin>
 	{	super(ai,NAME);
 		ai.checkInterruption();
 	}
-	
 	
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////

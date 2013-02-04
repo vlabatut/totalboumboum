@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class Threat extends AiUtilityCriterionInteger<BesniliKangal>
 {
 	/** Nom de ce critère */
@@ -31,7 +32,6 @@ public class Threat extends AiUtilityCriterionInteger<BesniliKangal>
 	{
 		super( ai, NAME, 1, THREAT_LIMIT );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	/////////////////////////////////////////////////////////////////

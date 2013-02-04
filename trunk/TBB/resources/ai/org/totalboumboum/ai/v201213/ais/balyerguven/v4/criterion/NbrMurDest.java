@@ -5,13 +5,13 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
 
-
 /**
  * our NbrMurDest class.
  * 
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class NbrMurDest extends AiUtilityCriterionBoolean<BalyerGuven>
 {	/** Number of destructible walls */
 	public static final String NAME = "NbrMurDest";
@@ -29,7 +29,6 @@ public class NbrMurDest extends AiUtilityCriterionBoolean<BalyerGuven>
 	public NbrMurDest(BalyerGuven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     /////////////////////////////////////////////////////////////////

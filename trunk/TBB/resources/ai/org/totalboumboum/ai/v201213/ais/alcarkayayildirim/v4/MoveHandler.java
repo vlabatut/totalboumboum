@@ -35,6 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<AlcarKayaYildirim> {
 	/** */
 	protected AiZone zone = null;

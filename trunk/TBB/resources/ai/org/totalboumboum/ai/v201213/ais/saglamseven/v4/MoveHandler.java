@@ -26,13 +26,11 @@ import org.totalboumboum.ai.v201213.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201213.adapter.path.successor.TimePartialSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
 /**
- * @author cihan.seven
+ * @author Cihan Adil Seven
  *
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 	/**
 	 * 
@@ -92,7 +90,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 	 */
 	protected MoveHandler(SaglamSeven ai) throws StopRequestException {
 		super(ai);
-		// TODO Auto-generated constructor stub
+		//  Auto-generated constructor stub
 		this.ai.checkInterruption();
 		ownHero = ai.getZone().getOwnHero();
 		gameZone = ai.getZone();
@@ -126,7 +124,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 
 	@Override
 	protected AiTile updateCurrentDestination() throws StopRequestException {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		this.ai.checkInterruption();
 		
 		//Set<AiTile> availableTiles = ai.utilityHandler.selectTiles();
@@ -189,7 +187,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 	
 	@Override
 	protected AiPath updateCurrentPath() throws StopRequestException {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 		this.ai.checkInterruption();
 		currentTile = ai.getZone().getOwnHero().getTile();
@@ -268,7 +266,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 
 	@Override
 	protected Direction updateCurrentDirection() throws StopRequestException {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 	/*
 		ai.checkInterruption();
 		Direction direction = null;
