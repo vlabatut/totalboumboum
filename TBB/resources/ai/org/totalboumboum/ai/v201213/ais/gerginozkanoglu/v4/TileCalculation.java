@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  *         It will be used in criterions' calculs.
  * 
  */
+@SuppressWarnings("deprecation")
 public class TileCalculation {
 
 

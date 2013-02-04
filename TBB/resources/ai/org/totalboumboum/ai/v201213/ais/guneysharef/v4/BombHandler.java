@@ -10,12 +10,12 @@ import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
 
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<GuneySharef>
 {	
 	/**

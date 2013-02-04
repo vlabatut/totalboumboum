@@ -20,6 +20,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<ErdemTayyar>
 {	
 	/**

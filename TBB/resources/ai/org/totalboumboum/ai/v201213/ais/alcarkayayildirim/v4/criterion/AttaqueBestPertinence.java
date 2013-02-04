@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.criterion;
 
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -14,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class AttaqueBestPertinence extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 {	/** Nom de ce critère */
 	public static final String NAME = "ATTAQUE_BEST_PERTINENCE";
@@ -30,19 +30,15 @@ public class AttaqueBestPertinence extends AiUtilityCriterionBoolean<AlcarKayaYi
 	public AttaqueBestPertinence(AlcarKayaYildirim ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
 	
-	
-	/** */
-	protected AlcarKayaYildirim ai1;
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
 	{	
-		ai1.checkInterruption();
+		ai.checkInterruption();
 		boolean result = false;
 
 		if ( tile.equals( this.ai.getClosestAttPertinentTile() ) )

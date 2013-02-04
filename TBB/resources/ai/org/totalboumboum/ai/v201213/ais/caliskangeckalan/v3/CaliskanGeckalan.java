@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class CaliskanGeckalan extends ArtificialIntelligence
 {
 	/**

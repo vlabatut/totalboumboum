@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201213.ais.saglamseven.v4.SaglamSeven;
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class CriterPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "PERTINENCE";
@@ -35,12 +36,8 @@ public class CriterPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 	public CriterPertinence(SaglamSeven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai1=ai;
 	}
-    /**
-     * 
-     */
-    protected SaglamSeven ai1;
+	
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -50,8 +47,7 @@ public class CriterPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 		ai.checkInterruption();
 		boolean result=false;
 		
-		
-		AiHero ownHero = ai1.getZone().getOwnHero();
+		AiHero ownHero = ai.getZone().getOwnHero();
 		int ourBmbNbr = ownHero.getBombNumberMax();
 		int ourFlmNbr = ownHero.getBombRange();
 		List<org.totalboumboum.ai.v201213.adapter.data.AiItem> item = tile.getItems();
@@ -61,7 +57,7 @@ public class CriterPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 			//Quelle bonus dont on a besoin
 			if(ourBmbNbr < 2){
 				for(int i=0;i<item.size();i++){
-					ai1.checkInterruption();
+					ai.checkInterruption();
 					if(item.get(i).getType().equals(AiItemType.EXTRA_BOMB))
 						result = true;
 				}
@@ -69,7 +65,7 @@ public class CriterPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 			
 			if(ourFlmNbr<2){
 				for(int i=0;i<item.size();i++){
-					ai1.checkInterruption();
+					ai.checkInterruption();
 					if(item.get(i).getType().equals(AiItemType.EXTRA_FLAME))
 						result = true;
 				}
@@ -78,6 +74,4 @@ public class CriterPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 		
 		return result;
 	}
-		
-	
 }

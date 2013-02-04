@@ -22,6 +22,7 @@ import org.totalboumboum.ai.v201213.ais.caliskangeckalan.v3.CaliskanGeckalan;
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class PertinentCollecteForBonus extends AiUtilityCriterionBoolean<CaliskanGeckalan>
 {	/** Nom de ce critère */
 	public static final String NAME = "PertinentCollecteForBonus";

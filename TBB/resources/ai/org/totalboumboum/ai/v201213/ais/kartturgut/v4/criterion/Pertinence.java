@@ -9,12 +9,11 @@ import org.totalboumboum.ai.v201213.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.kartturgut.v4.KartTurgut;
 
-
 /**
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-
+@SuppressWarnings("deprecation")
 public class Pertinence extends AiUtilityCriterionBoolean<KartTurgut>
 {	
 	/** */
@@ -32,7 +31,6 @@ public class Pertinence extends AiUtilityCriterionBoolean<KartTurgut>
 	{
 		super( ai,NAME );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 	
 	/**

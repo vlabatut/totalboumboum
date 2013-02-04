@@ -20,11 +20,12 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  *
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class SaglamSeven extends ArtificialIntelligence
 {
 	
@@ -40,7 +41,7 @@ public class SaglamSeven extends ArtificialIntelligence
 //	protected void initOthers() throws StopRequestException
 //	{	checkInterruption();
 //		
-//		// TODO à compléter si vous voulez créer des objets 
+//		//  à compléter si vous voulez créer des objets 
 //		// particuliers pour réaliser votre traitement, et qui
 //		// ne sont ni des gestionnaires (initialisés dans initHandlers)
 //		// ni des percepts (initialisés dans initPercepts).
@@ -58,7 +59,7 @@ public class SaglamSeven extends ArtificialIntelligence
 //	protected void initPercepts() throws StopRequestException
 //	{	checkInterruption();
 //	
-//		// TODO à compléter si vous voulez créer des objets 
+//		//  à compléter si vous voulez créer des objets 
 //		// particuliers pour réaliser votre traitement.
 //		// Ils peuvent être stockés dans cette classe ou dans
 //		// un gestionnaire quelconque. 
@@ -70,7 +71,7 @@ public class SaglamSeven extends ArtificialIntelligence
 //	protected void updatePercepts() throws StopRequestException
 //	{	checkInterruption();
 //		
-//		// TODO à compléter si vous avez des objets 
+//		//  à compléter si vous avez des objets 
 //		// à mettre à jour à chaque itération, e.g.
 //		// des objets créés par la méthode initPercepts().
 //	
@@ -99,7 +100,7 @@ public class SaglamSeven extends ArtificialIntelligence
 //		bombHandler = new BombHandler(this);
 //		moveHandler = new MoveHandler(this);
 //		
-//		// TODO à compléter si vous utilisez d'autres gestionnaires
+//		//  à compléter si vous utilisez d'autres gestionnaires
 //		// (bien sûr ils doivent aussi être déclarés ci-dessus)
 //		
 //		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
@@ -136,7 +137,7 @@ public class SaglamSeven extends ArtificialIntelligence
 //	protected void updateOutput() throws StopRequestException
 //	{	checkInterruption();
 //
-//		// TODO à compléter si vous voulez modifier l'affichage
+//		//  à compléter si vous voulez modifier l'affichage
 //		// ici, par défaut on affiche :
 //			// les chemins et destinations courants
 //			moveHandler.updateOutput();
@@ -244,7 +245,7 @@ public class SaglamSeven extends ArtificialIntelligence
 	protected void initOthers() throws StopRequestException
 	{	checkInterruption();
 		
-		// TODO à compléter si vous voulez créer des objets 
+		//  à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement, et qui
 		// ne sont ni des gestionnaires (initialisés dans initHandlers)
 		// ni des percepts (initialisés dans initPercepts).
@@ -262,7 +263,7 @@ public class SaglamSeven extends ArtificialIntelligence
 	protected void initPercepts() throws StopRequestException
 	{	checkInterruption();
 	
-		// TODO à compléter si vous voulez créer des objets 
+		//  à compléter si vous voulez créer des objets 
 		// particuliers pour réaliser votre traitement.
 		// Ils peuvent être stockés dans cette classe ou dans
 		// un gestionnaire quelconque. 
@@ -274,7 +275,7 @@ public class SaglamSeven extends ArtificialIntelligence
 	protected void updatePercepts() throws StopRequestException
 	{	checkInterruption();
 		
-		// TODO à compléter si vous avez des objets 
+		//  à compléter si vous avez des objets 
 		// à mettre à jour à chaque itération, e.g.
 		// des objets créés par la méthode initPercepts().
 	
@@ -303,7 +304,7 @@ public class SaglamSeven extends ArtificialIntelligence
 		bombHandler = new BombHandler(this);
 		moveHandler = new MoveHandler(this);
 		
-		// TODO à compléter si vous utilisez d'autres gestionnaires
+		//  à compléter si vous utilisez d'autres gestionnaires
 		// (bien sûr ils doivent aussi être déclarés ci-dessus)
 		
 		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
@@ -340,7 +341,7 @@ public class SaglamSeven extends ArtificialIntelligence
 	protected void updateOutput() throws StopRequestException
 	{	checkInterruption();
 
-		// TODO à compléter si vous voulez modifier l'affichage
+		//  à compléter si vous voulez modifier l'affichage
 		// ici, par défaut on affiche :
 			// les chemins et destinations courants
 			moveHandler.updateOutput();

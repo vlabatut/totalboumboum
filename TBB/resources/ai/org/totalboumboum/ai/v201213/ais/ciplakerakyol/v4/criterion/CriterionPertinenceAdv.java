@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v4.CiplakErakyol;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class CriterionPertinenceAdv extends
 		AiUtilityCriterionBoolean<CiplakErakyol> {
 	/** Nom de ce critère */
@@ -27,7 +28,6 @@ public class CriterionPertinenceAdv extends
 	public CriterionPertinenceAdv(CiplakErakyol ai) throws StopRequestException {
 		super(ai, NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	// protected CiplakErakyol ai;

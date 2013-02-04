@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v4.GuneySharef;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

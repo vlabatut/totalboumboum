@@ -21,6 +21,7 @@ import org.totalboumboum.ai.v201213.adapter.path.search.Dijkstra;
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<CaliskanGeckalan>
 {	
 	/**

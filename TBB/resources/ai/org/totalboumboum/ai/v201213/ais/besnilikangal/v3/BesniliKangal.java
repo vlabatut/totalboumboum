@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiHero;
  * @author Mustafa Besnili
  * @author Doruk Kangal
  */
+@SuppressWarnings("deprecation")
 public class BesniliKangal extends ArtificialIntelligence
 {
 	/** Represents this AI's hero */

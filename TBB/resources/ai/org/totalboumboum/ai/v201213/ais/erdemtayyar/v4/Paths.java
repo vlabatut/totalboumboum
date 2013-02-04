@@ -44,7 +44,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Zübeyir Tayyar
  */
-
+@SuppressWarnings("deprecation")
 public class Paths {
 
 	/**

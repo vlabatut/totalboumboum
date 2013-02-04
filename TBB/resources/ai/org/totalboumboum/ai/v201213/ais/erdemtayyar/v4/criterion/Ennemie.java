@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.erdemtayyar.v4.ErdemTayyar;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
+@SuppressWarnings("deprecation")
 public class Ennemie extends AiUtilityCriterionBoolean<ErdemTayyar> {
 	/**
 	 * name

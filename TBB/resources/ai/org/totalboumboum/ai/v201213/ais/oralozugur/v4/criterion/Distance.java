@@ -1,12 +1,10 @@
 package org.totalboumboum.ai.v201213.ais.oralozugur.v4.criterion;
 
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 //import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.oralozugur.v4.OralOzugur;
-
 
 /**
  * La critère vaut 0 si le distance entre l’agent et la case est plus grand qu’un rayon qui
@@ -16,6 +14,7 @@ Si le bonus est dans le rayon, alors il vaut 1.
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class Distance extends AiUtilityCriterionBoolean<OralOzugur>
 {	/** Nom de ce critère */
 	public static final String NAME = "DISTANCE";

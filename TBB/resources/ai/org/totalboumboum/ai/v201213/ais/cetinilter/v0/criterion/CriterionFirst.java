@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.cetinilter.v0.CetinIlter;
  * @author Hakan Çetin
  * @author Mustafa Kaan İlter
  */
+@SuppressWarnings("deprecation")
 public class CriterionFirst extends AiUtilityCriterionBoolean<CetinIlter>
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";

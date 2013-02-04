@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.kartturgut.v4;
 
-
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -16,7 +14,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<KartTurgut>
 {	
 	/**

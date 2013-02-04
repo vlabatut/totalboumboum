@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/**

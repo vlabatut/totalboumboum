@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201213.ais.saglamseven.v4.SaglamSeven;
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class CriterMenace extends AiUtilityCriterionBoolean<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "MENACE";
@@ -34,7 +35,6 @@ public class CriterMenace extends AiUtilityCriterionBoolean<SaglamSeven>
 	public CriterMenace(SaglamSeven ai) throws StopRequestException
 	{	super(ai, NAME);
 		ai.checkInterruption();
-	    this.ai=ai;
 	}
 
     /////////////////////////////////////////////////////////////////

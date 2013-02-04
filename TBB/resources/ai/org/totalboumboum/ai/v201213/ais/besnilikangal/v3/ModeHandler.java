@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiItem;
  * @author Mustafa Besnili
  * @author Doruk Kangal
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<BesniliKangal>
 {
 	/** La limite de la portée d'une bombe pour qu'on puisse passer en mode attaque */

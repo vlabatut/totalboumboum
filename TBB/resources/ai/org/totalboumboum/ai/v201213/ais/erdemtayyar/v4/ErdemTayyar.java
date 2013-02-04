@@ -23,6 +23,7 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
+@SuppressWarnings("deprecation")
 public class ErdemTayyar extends ArtificialIntelligence {
 	/**
 	 * Stores the utility map.

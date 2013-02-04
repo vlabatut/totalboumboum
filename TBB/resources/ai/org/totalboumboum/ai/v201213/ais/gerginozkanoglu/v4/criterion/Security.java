@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.TileCalculation;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
-
+@SuppressWarnings("deprecation")
 public class Security extends AiUtilityCriterionBoolean<GerginOzkanoglu> {
 	/** criterion's name */
 	public static final String NAME = "Security";

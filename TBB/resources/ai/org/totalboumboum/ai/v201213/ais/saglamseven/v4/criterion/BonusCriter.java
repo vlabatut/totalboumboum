@@ -5,13 +5,12 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.saglamseven.v4.SaglamSeven;
 
-
-
 /**
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  *
  */
+@SuppressWarnings("deprecation")
 public class BonusCriter extends AiUtilityCriterionBoolean<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "BONUS";

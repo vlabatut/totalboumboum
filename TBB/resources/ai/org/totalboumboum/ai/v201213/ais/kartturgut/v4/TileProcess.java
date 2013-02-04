@@ -12,14 +12,12 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.path.search.Astar;
 
-
-
 /**
  * Tile process class to get tile processes.
  * 
  * @author Adnan Bal
  */
-
+@SuppressWarnings("deprecation")
 public class TileProcess {
 	/** */
 	KartTurgut ai;

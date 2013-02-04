@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.kartturgut.v4.KartTurgut;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-
+@SuppressWarnings("deprecation")
 public class Securite extends AiUtilityCriterionBoolean<KartTurgut>
 {	/** */
 	public static final String	NAME	= "Securite";
@@ -27,10 +27,8 @@ public class Securite extends AiUtilityCriterionBoolean<KartTurgut>
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public Securite( KartTurgut ai ) throws StopRequestException
-	{
-		super( ai,NAME );
+	{	super( ai,NAME );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     @Override

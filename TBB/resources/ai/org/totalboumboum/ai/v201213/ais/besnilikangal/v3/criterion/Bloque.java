@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class Bloque extends AiUtilityCriterionInteger<BesniliKangal>
 {
 	/** Nom de ce critère */
@@ -30,7 +31,6 @@ public class Bloque extends AiUtilityCriterionInteger<BesniliKangal>
 	{
 		super( ai, NAME, 0, 4 );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	/////////////////////////////////////////////////////////////////

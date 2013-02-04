@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<GerginOzkanoglu>
 {	
 	

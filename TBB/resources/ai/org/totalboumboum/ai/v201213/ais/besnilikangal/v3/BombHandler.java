@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiHero;
  * @author Mustafa Besnili
  * @author Doruk Kangal
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<BesniliKangal>
 {
 	/**

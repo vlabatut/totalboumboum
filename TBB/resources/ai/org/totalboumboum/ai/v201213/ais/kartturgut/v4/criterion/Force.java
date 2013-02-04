@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v201213.ais.kartturgut.v4.KartTurgut;
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-
+@SuppressWarnings("deprecation")
 public class Force extends AiUtilityCriterionBoolean<KartTurgut>
 {	/** */
 	public static final String NAME = "Force";
@@ -28,7 +28,6 @@ public class Force extends AiUtilityCriterionBoolean<KartTurgut>
 	{	
 		super(ai,NAME);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
     @Override

@@ -7,12 +7,11 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.kartturgut.v4.KartTurgut;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /** 
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-
+@SuppressWarnings("deprecation")
 public class Nombredemurs extends AiUtilityCriterionInteger<KartTurgut>
 {	/** */
 	public static final String NAME = "Nombredemurs";
@@ -37,7 +36,6 @@ public class Nombredemurs extends AiUtilityCriterionInteger<KartTurgut>
 	{ 
 		super(ai,NAME,1,3);
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	@Override

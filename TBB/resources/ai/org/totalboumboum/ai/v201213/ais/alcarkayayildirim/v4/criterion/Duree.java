@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class Duree extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 {	/** Nom de ce critère */
 	public static final String NAME = "DUREE";
@@ -38,27 +39,25 @@ public class Duree extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 	public Duree(AlcarKayaYildirim ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
-	/** */
-	protected AlcarKayaYildirim ai1;
+
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	ai1.checkInterruption();
+	{	ai.checkInterruption();
 		boolean result = false;
-		AiZone gameZone = ai1.getZone();
+		AiZone gameZone = ai.getZone();
 		AiHero ownHero = gameZone.getOwnHero();
 		AiTile ownTile = ownHero.getTile();
 		int distanceAverage= gameZone.getTileDistance(ownTile, tile);
 		
-		if (this.ai1.modeHandler.getMode() == AiMode.COLLECTING) {
+		if (this.ai.modeHandler.getMode() == AiMode.COLLECTING) {
 			if (distanceAverage <= DISTANCE_UPPER_LIMIT_COL)
 				result = true;
 		}
-		if (this.ai1.modeHandler.getMode() == AiMode.ATTACKING) {
+		if (this.ai.modeHandler.getMode() == AiMode.ATTACKING) {
 			if (distanceAverage <= DISTANCE_UPPER_LIMIT_ATT)
 				result = true;
 		}

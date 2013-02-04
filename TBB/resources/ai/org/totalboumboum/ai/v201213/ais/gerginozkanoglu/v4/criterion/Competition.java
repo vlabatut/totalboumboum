@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.GerginOzkanoglu;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
+@SuppressWarnings("deprecation")
 public class Competition extends AiUtilityCriterionBoolean<GerginOzkanoglu> {
 	/** Criterion's name */
 	public static final String NAME = "Competition";

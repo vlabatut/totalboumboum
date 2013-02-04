@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<CiplakErakyol> {
 	/**
 	 * astar

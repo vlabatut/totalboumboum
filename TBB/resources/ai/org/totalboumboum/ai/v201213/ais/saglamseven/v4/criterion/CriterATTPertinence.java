@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.saglamseven.v4.criterion;
 
-
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -14,7 +12,7 @@ import org.totalboumboum.ai.v201213.ais.saglamseven.v4.SaglamSeven;
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
-
+@SuppressWarnings("deprecation")
 public class CriterATTPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 {	/** Nom de ce critère */
 	public static final String NAME = "ATTAQUE_PERTINENCE";
@@ -35,29 +33,25 @@ public class CriterATTPertinence extends AiUtilityCriterionBoolean<SaglamSeven>
 	public CriterATTPertinence(SaglamSeven ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
 	
-	
-	/** */
-	protected SaglamSeven ai1;
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	ai1.checkInterruption();
-		AiZone zone = ai1.getZone();
+	{	ai.checkInterruption();
+		AiZone zone = ai.getZone();
 		AiHero ownHero=zone.getOwnHero();
 
-	boolean result = false;
-
-	for ( AiHero currentEnemy : this.ai1.getZone().getRemainingOpponents() )
-	{
-		ai1.checkInterruption();
-
-		if ( this.ai1.getDangerousTilesOnBombPut( tile, ownHero.getBombRange() - CLOSING_LIMIT ).contains( currentEnemy.getTile() ) ) result = true;
-	}
+		boolean result = false;
+	
+		for ( AiHero currentEnemy : this.ai.getZone().getRemainingOpponents() )
+		{
+			ai.checkInterruption();
+	
+			if ( this.ai.getDangerousTilesOnBombPut( tile, ownHero.getBombRange() - CLOSING_LIMIT ).contains( currentEnemy.getTile() ) ) result = true;
+		}
 	
 		return result;
 	}

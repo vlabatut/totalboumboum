@@ -1,14 +1,9 @@
 package org.totalboumboum.ai.v201213.ais.guneysharef.v4;
 
-
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-
-
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201213.adapter.agent.AiMode;
@@ -27,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class GuneySharef extends ArtificialIntelligence
 {
 	/**

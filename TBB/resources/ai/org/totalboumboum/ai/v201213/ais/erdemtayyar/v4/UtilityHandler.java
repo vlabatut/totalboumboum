@@ -29,6 +29,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Banu Erdem
  * @author Zübeyir Tayyar
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<ErdemTayyar> {
 
 	/**

@@ -10,13 +10,10 @@ import org.totalboumboum.ai.v201213.ais.cinaryalcin.v4.CinarYalcin;
 /**
  * Returns the number of neighbors of selected tile.
  * 
- * 
- * 
- * 
- * 
  * @author Bekir Cınar
  * @author Deniz Yalçın
  */
+@SuppressWarnings("deprecation")
 public class AdjacentTile extends AiUtilityCriterionInteger<CinarYalcin>
 {	/** Nom de ce critère */
 	public static final String NAME = "AdjacentCase";

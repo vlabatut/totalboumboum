@@ -27,6 +27,7 @@ import org.totalboumboum.ai.v201213.adapter.path.successor.SuccessorCalculator;
  * @author Mustafa Çalışkan
  * @author Gökhan Geçkalan
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<CaliskanGeckalan>
 {	
 	/**

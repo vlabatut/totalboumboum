@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class AttaqueItemVisible extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 {	/** Nom de ce critère */
 	public static final String NAME = "AVANCE_ITEM";
@@ -27,18 +28,14 @@ public class AttaqueItemVisible extends AiUtilityCriterionBoolean<AlcarKayaYildi
 	public AttaqueItemVisible(AlcarKayaYildirim ai) throws StopRequestException
 	{	super(ai,NAME);
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
 	
-	
-	/** */
-	protected AlcarKayaYildirim ai1;
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
-	{	ai1.checkInterruption();
+	{	ai.checkInterruption();
 	
 		return !tile.getItems().isEmpty();
 	}

@@ -7,11 +7,12 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * Classe gérant les déplacements de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<EnginSazan>
 {	
 	/**
@@ -30,7 +31,7 @@ public class ModeHandler extends AiModeHandler<EnginSazan>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
 		
-		// TODO à compléter
+		//  à compléter
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -40,7 +41,7 @@ public class ModeHandler extends AiModeHandler<EnginSazan>
 	protected boolean hasEnoughItems() throws StopRequestException
 	{	ai.checkInterruption();
 		
-    	// TODO à compléter
+    	//  à compléter
 		
 		return true;
 	}
@@ -49,7 +50,7 @@ public class ModeHandler extends AiModeHandler<EnginSazan>
 	protected boolean isCollectPossible() throws StopRequestException
 	{	ai.checkInterruption();
 	
-   		// TODO à compléter
+   		//  à compléter
 		
 		return true;
 	}
@@ -66,6 +67,6 @@ public class ModeHandler extends AiModeHandler<EnginSazan>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

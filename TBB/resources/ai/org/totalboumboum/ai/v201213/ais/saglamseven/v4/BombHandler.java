@@ -11,11 +11,12 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant l'action de déposer une bombe pour l'agent. Cf. la
  * documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
+ *  Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Esra Sağlam
  * @author Cihan Adil Seven
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<SaglamSeven> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -33,7 +34,7 @@ public class BombHandler extends AiBombHandler<SaglamSeven> {
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
 
-		// TODO à compléter
+		//  à compléter
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -100,6 +101,6 @@ public class BombHandler extends AiBombHandler<SaglamSeven> {
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
 
-		// TODO à compléter, si vous voulez afficher quelque chose
+		//  à compléter, si vous voulez afficher quelque chose
 	}
 }

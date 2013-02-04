@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<CiplakErakyol>
 {	
 	/**

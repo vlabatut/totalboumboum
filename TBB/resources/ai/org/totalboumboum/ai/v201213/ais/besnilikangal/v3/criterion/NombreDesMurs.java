@@ -17,6 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class NombreDesMurs extends AiUtilityCriterionInteger<BesniliKangal>
 {
 	/** Nom de ce critère */
@@ -35,7 +36,6 @@ public class NombreDesMurs extends AiUtilityCriterionInteger<BesniliKangal>
 	{
 		super( ai, NAME, 0, DESTRUCTION_LIMIT );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.kartturgut.v4.criterion;
 
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -8,12 +7,11 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.ais.kartturgut.v4.KartTurgut;
 
-
 /**
  * @author Yunus Kart
  * @author Siyabend Turgut
  */
-
+@SuppressWarnings("deprecation")
 public class Nonconcurrence extends AiUtilityCriterionBoolean<KartTurgut>
 {	/** */
 	public static final String	NAME	= "Nonconcurrence";
@@ -36,7 +34,6 @@ public class Nonconcurrence extends AiUtilityCriterionBoolean<KartTurgut>
 	{
 		super( ai,NAME );
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	@Override

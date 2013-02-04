@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.TileCalculation;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
+@SuppressWarnings("deprecation")
 public class NumberOfDestructibleWalls extends AiUtilityCriterionInteger<GerginOzkanoglu>
 {	/** Criterion's name */
 	public static final String NAME = "NumberOfDestructibleWalls";

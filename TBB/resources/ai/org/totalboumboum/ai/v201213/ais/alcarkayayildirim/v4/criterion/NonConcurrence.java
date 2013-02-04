@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class NonConcurrence extends AiUtilityCriterionBoolean<AlcarKayaYildirim> {
 	/** Nom de ce critère */
 	public static final String NAME = "NON_CONCURRENCE";
@@ -28,27 +29,23 @@ public class NonConcurrence extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 	public NonConcurrence(AlcarKayaYildirim ai) throws StopRequestException {
 		super(ai, NAME);
 		ai.checkInterruption();
-		this.ai1 = ai;
 	}
-
-	/** */
-	protected AlcarKayaYildirim ai1;
 
 	// ///////////////////////////////////////////////////////////////
 	// PROCESS /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException {
-		ai1.checkInterruption();
-		AiZone zone = this.ai1.getZone();
+		ai.checkInterruption();
+		AiZone zone = this.ai.getZone();
 		boolean result = false;
 	
 		// If there is an enemy in a 5 tile range of the given tile then it
 		// returns true.
 		if (zone.getRemainingOpponents().isEmpty() != true) {
 			for (AiHero currentopponent : zone.getRemainingOpponents()) {
-				ai1.checkInterruption();
-				if (this.ai1.getDist(currentopponent.getTile(), tile) <= COMPETITITON_TRUE) {
+				ai.checkInterruption();
+				if (this.ai.getDist(currentopponent.getTile(), tile) <= COMPETITITON_TRUE) {
 					result = true;
 				} else
 					result = false;

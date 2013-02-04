@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
+@SuppressWarnings("deprecation")
 public class HeroOperation
 {
 	/** Notre IA */

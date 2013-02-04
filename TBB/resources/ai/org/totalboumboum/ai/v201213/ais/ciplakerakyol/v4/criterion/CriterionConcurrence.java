@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v4.CiplakErakyol;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class CriterionConcurrence extends AiUtilityCriterionBoolean<CiplakErakyol>
 {	/** Nom de ce critère */
 	public static final String NAME = "concurrence";
@@ -25,8 +26,7 @@ public class CriterionConcurrence extends AiUtilityCriterionBoolean<CiplakErakyo
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public CriterionConcurrence(CiplakErakyol ai) throws StopRequestException
-	{	
-		super(ai,NAME);
+	{	super(ai,NAME);
 		ai.checkInterruption();
 	}
 

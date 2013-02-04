@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<AlcarKayaYildirim>
 {	
 	/**

@@ -8,11 +8,10 @@ import org.totalboumboum.ai.v201213.ais.cinaryalcin.v4.CinarYalcin;
 /**
  * Controle si bomber cette case bloque des ennemies
  * 
- * 
- * 
  * @author Bekir Cınar
  * @author Deniz Yalçın
  */
+@SuppressWarnings("deprecation")
 public class BlockEnemy extends AiUtilityCriterionBoolean<CinarYalcin>
 {	/** Nom de ce critère */
 	public static final String NAME = "PeutTuer";

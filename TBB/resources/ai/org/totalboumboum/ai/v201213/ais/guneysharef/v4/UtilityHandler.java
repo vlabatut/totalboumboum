@@ -22,11 +22,11 @@ import org.totalboumboum.ai.v201213.ais.guneysharef.v4.criterion.Distance;
 import org.totalboumboum.ai.v201213.ais.guneysharef.v4.criterion.NbrDW;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * @author Melis Güney
  * @author Seli Sharef
  */
+@SuppressWarnings("deprecation")
 public class UtilityHandler extends AiUtilityHandler<GuneySharef>
 {	
 	/**

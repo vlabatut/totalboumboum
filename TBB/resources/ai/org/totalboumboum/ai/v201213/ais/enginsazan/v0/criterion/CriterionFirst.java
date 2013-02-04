@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.enginsazan.v0.EnginSazan;
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class CriterionFirst extends AiUtilityCriterionBoolean<EnginSazan>
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";
@@ -39,7 +40,7 @@ public class CriterionFirst extends AiUtilityCriterionBoolean<EnginSazan>
 	{	ai.checkInterruption();
 		boolean result = true;
 	
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 	
 		return result;
 	}

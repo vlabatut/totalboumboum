@@ -25,6 +25,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<AlcarKayaYildirim>
 {	
 	/** */

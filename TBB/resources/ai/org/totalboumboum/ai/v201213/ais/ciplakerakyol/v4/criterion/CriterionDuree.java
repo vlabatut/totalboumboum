@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v4.CiplakErakyol;
  * @author Hazal Çıplak
  * @author Şebnem Erakyol
  */
+@SuppressWarnings("deprecation")
 public class CriterionDuree extends AiUtilityCriterionInteger<CiplakErakyol> {
 	/** Nom de ce critère */
 	public static final String NAME = "Duree";
@@ -31,7 +32,6 @@ public class CriterionDuree extends AiUtilityCriterionInteger<CiplakErakyol> {
 	public CriterionDuree(CiplakErakyol ai) throws StopRequestException {
 		super(ai, NAME, 0, 2); // soit temp limit est 2
 		ai.checkInterruption();
-		this.ai = ai;
 	}
 
 	// protected CiplakErakyol ai;

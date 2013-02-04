@@ -12,13 +12,10 @@ import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.TileCalculation;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
+@SuppressWarnings("deprecation")
 public class Pertinence extends AiUtilityCriterionInteger<GerginOzkanoglu> {
 	/** Criterion's name */
 	public static final String NAME = "Pertinence";
-
-
-
-
 
 	/**
 	 * this will determine the maximum range of our bomb. if our range is less
@@ -34,8 +31,6 @@ public class Pertinence extends AiUtilityCriterionInteger<GerginOzkanoglu> {
 	public Pertinence(GerginOzkanoglu ai) throws StopRequestException {
 		super(ai, NAME, 0, 2);
 		ai.checkInterruption();
-
-
 	}
 
 	// ///////////////////////////////////////////////////////////////

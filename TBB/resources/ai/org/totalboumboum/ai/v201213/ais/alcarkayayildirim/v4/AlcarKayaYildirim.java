@@ -29,6 +29,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class AlcarKayaYildirim extends ArtificialIntelligence
 {
 	/** */

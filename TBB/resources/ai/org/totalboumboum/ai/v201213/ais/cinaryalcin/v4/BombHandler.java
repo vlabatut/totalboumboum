@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.cinaryalcin.v4;
 
-
 import java.util.ArrayList;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -13,11 +12,10 @@ import org.totalboumboum.ai.v201213.ais.cinaryalcin.v4.CinarYalcin;
  * Classe gérant l'action de déposer une bombe pour l'agent. 
  * Cf. la documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * 
- * 
  * @author Bekir Cınar
  * @author Deniz Yalçın
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<CinarYalcin>
 {	
 	

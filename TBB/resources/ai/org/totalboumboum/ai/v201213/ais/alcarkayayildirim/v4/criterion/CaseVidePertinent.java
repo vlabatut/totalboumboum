@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.AlcarKayaYildirim;
  * @author Ulaş Kaya
  * @author Yağmur Yıldırım
  */
+@SuppressWarnings("deprecation")
 public class CaseVidePertinent extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 {	/** Nom de ce critère */
 	public static final String NAME = "CASE_VİDE_PERTİNENCE";
@@ -29,17 +30,7 @@ public class CaseVidePertinent extends AiUtilityCriterionBoolean<AlcarKayaYildir
 	{	// init nom
 		super(ai,NAME);
 		ai.checkInterruption();
-		// init agent
-		this.ai1 = ai;
 	}
-
-	
-
-	/////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** */
-	protected AlcarKayaYildirim ai1;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS	 /////////////////////////////////////
@@ -47,15 +38,15 @@ public class CaseVidePertinent extends AiUtilityCriterionBoolean<AlcarKayaYildir
 	@Override
 	public Boolean processValue(AiTile tile) throws StopRequestException
 	{	
-	ai1.checkInterruption();
-	boolean result = false;
+		ai.checkInterruption();
+		boolean result = false;
+		
+		AiZone zone = ai.getZone();
+		AiHero ownHero = zone.getOwnHero();
 	
-	AiZone zone = ai1.getZone();
-	AiHero ownHero = zone.getOwnHero();
-
-	if(tile.getBlocks().isEmpty() && tile.getBombs().isEmpty() && tile.getFires().isEmpty() && (tile.getHeroes().isEmpty() || tile.getHeroes().contains(ownHero)))
-		result = true;
-
-	return result;
+		if(tile.getBlocks().isEmpty() && tile.getBombs().isEmpty() && tile.getFires().isEmpty() && (tile.getHeroes().isEmpty() || tile.getHeroes().contains(ownHero)))
+			result = true;
+	
+		return result;
 	}
 }

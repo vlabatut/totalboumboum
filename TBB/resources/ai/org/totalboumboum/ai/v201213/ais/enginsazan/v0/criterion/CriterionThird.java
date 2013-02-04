@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201213.ais.enginsazan.v0.EnginSazan;
  * @author Gözde Engin
  * @author Gökhan Sazan
  */
+@SuppressWarnings("deprecation")
 public class CriterionThird extends AiUtilityCriterionString<EnginSazan>
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";
@@ -63,7 +64,7 @@ public class CriterionThird extends AiUtilityCriterionString<EnginSazan>
 	{	ai.checkInterruption();
 		String result = VALUE3;
 		
-		// TODO à compléter par le traitement approprié
+		//  à compléter par le traitement approprié
 		
 		return result;
 	}

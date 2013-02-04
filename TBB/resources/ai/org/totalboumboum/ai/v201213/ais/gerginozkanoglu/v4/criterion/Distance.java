@@ -6,8 +6,6 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.GerginOzkanoglu;
 import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.TileCalculation;
 
-
-
 /**
  * This criterion is used by all cases of all modes. it will evaluate the tile
  * for its security status.
@@ -15,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.gerginozkanoglu.v4.TileCalculation;
  * @author Tuğçe Gergin
  * @author Seçil Özkanoğlu
  */
-
+@SuppressWarnings("deprecation")
 public class Distance extends AiUtilityCriterionBoolean<GerginOzkanoglu> {
 	/** criterion's name */
 	public static final String NAME = "Distance";

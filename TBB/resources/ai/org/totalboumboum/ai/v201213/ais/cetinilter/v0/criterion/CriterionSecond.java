@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201213.ais.cetinilter.v0.CetinIlter;
  * @author Hakan Çetin
  * @author Mustafa Kaan İlter
  */
+@SuppressWarnings("deprecation")
 public class CriterionSecond extends AiUtilityCriterionInteger<CetinIlter>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";

@@ -7,11 +7,12 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.oralozugur.v4.OralOzugur;
 
 /**
-Si un ennemi est plus proche que notre agent il vaut 1, sinon 0.
+ * Si un ennemi est plus proche que notre agent il vaut 1, sinon 0.
  * 
  * @author Buğra Oral
  * @author Ceyhun Özuğur
  */
+@SuppressWarnings("deprecation")
 public class Concurrence extends AiUtilityCriterionBoolean<OralOzugur>
 {	/** Nom de ce critère */
 	public static final String NAME = "Concurrence";

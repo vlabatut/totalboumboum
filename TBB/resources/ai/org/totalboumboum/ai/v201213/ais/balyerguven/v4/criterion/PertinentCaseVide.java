@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201213.ais.balyerguven.v4.BalyerGuven;
  * @author Leman Sebla Balyer
  * @author Ecem Güven
  */
+@SuppressWarnings("deprecation")
 public class PertinentCaseVide extends AiUtilityCriterionBoolean<BalyerGuven> {
 	/** le pertinent de case vide */
 	public static final String NAME = "PertinentCaseVide";
@@ -29,8 +30,6 @@ public class PertinentCaseVide extends AiUtilityCriterionBoolean<BalyerGuven> {
 																			// nom
 		super(ai, NAME);
 		ai.checkInterruption();
-		// init agent
-		this.ai = ai;
 	}
 
 	// ///////////////////////////////////////////////////////////////
