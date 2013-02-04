@@ -78,6 +78,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * donc son application est très rapide.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class ApproximateSuccessorCalculator extends SuccessorCalculator
 {

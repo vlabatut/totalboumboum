@@ -34,6 +34,9 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * 		Classe de l'agent concerné.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiBombHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	

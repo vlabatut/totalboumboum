@@ -33,6 +33,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * de classes {@link AiActionName} et {@link Direction}.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiAction
 {

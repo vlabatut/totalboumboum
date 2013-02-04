@@ -44,6 +44,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Simule une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimTile extends AiTile
 {	

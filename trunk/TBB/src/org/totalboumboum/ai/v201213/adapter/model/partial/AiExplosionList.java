@@ -36,6 +36,9 @@ import org.totalboumboum.ai.v201213.adapter.model.partial.AiPartialModel;
  * traversant la case au fil du temps.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiExplosionList extends TreeSet<AiExplosion>
 {	/** Numéro de série */

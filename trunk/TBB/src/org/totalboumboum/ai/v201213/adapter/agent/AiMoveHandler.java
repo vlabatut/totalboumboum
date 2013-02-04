@@ -53,6 +53,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 		Classe de l'agent.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	

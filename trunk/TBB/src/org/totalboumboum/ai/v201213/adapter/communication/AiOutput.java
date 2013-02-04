@@ -45,6 +45,9 @@ import org.totalboumboum.ai.v201213.adapter.path.AiPath;
  * pour avoir un affichage en continu.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiOutput
 {

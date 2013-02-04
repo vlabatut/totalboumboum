@@ -35,6 +35,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataState implements AiState
 {

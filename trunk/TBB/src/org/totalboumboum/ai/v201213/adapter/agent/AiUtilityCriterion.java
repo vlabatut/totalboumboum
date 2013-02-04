@@ -71,6 +71,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * 		Classe des objets renvoyés par ce critère.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> implements Comparable<AiUtilityCriterion<?,?>>
 {	

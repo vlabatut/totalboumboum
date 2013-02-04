@@ -28,6 +28,9 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * par l'item. Ce type est représentée par une valeur de type {@link AiItemType}.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public interface AiItem extends AiSprite
 {	

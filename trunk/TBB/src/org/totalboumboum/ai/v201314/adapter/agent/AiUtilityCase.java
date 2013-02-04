@@ -68,34 +68,12 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 * @param criteria
 	 * 		Ensemble des valeurs possible pour ce critère.
 	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 * @throws IllegalArgumentException
 	 * 		Si le même critère apparaît plusieurs fois.
 	 */
-	public AiUtilityCase(ArtificialIntelligence ai, String name, Set<AiUtilityCriterion<?,?>> criteria) throws StopRequestException
-	{	// vérifie l'unicité du nom
-		AiUtilityHandler<?> handler = ai.getUtilityHandler();
-		if(handler.checkCriterionName(name))
-		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
-			throw new IllegalArgumentException("A case with the same name ("+name+") already exists for this agent ("+color+" player).");
-		}
-		
-		// on initialise le nom
-		this.name = name;
-		
-		// on initialise les critères
-		for(AiUtilityCriterion<?,?> criterion: criteria)
-		{	if(this.criteria.contains(criterion))
-			{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
-				throw new IllegalArgumentException("A case ("+name+") cannot contain several times the same criterion (criterion="+criterion.getName()+", player="+color+").");
-			}
-			else
-				this.criteria.add(criterion);
-		}
-		
-		// on ajoute à la liste de cas du gestionnaire d'utilité
-		handler.insertCase(this);
+	public AiUtilityCase(String name, Set<AiUtilityCriterion<?,?>> criteria)
+	{	this.name = name;
+		this.criteria.addAll(criteria);
 	}
 	
     /////////////////////////////////////////////////////////////////

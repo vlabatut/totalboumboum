@@ -33,6 +33,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiStopType;
  * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimBlock extends AiSimSprite implements AiBlock
 {	

@@ -48,6 +48,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * correspondant. 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiUtilityCase implements Comparable<AiUtilityCase>
 {	
@@ -76,7 +79,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	public AiUtilityCase(ArtificialIntelligence ai, String name, Set<AiUtilityCriterion<?,?>> criteria) throws StopRequestException
 	{	// vérifie l'unicité du nom
 		AiUtilityHandler<?> handler = ai.getUtilityHandler();
-		if(handler.checkCriterionName(name))
+		if(handler.checkCaseName(name))
 		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
 			throw new IllegalArgumentException("A case with the same name ("+name+") already exists for this agent ("+color+" player).");
 		}

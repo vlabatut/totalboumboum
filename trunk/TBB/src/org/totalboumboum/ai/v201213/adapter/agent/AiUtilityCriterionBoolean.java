@@ -49,6 +49,9 @@ import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
  * 		Agent de référence.
  *  
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiUtilityCriterionBoolean<T extends ArtificialIntelligence> extends AiUtilityCriterion<T,Boolean>
 {	

@@ -43,6 +43,9 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
 {	

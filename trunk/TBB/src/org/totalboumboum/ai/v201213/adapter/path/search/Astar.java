@@ -71,6 +71,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Le but est d'introduire une part de hasard dans les agents, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class Astar extends AiAbstractSearchAlgorithm
 {	

@@ -35,6 +35,9 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 {
