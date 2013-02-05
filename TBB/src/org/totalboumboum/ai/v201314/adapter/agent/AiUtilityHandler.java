@@ -328,7 +328,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	final void insertCriterion(AiUtilityCriterion<?, ?> criterion) throws IllegalArgumentException
 	{	String name = criterion.getName();
 		if(criterionMap.keySet().contains(name))
-			throw new IllegalArgumentException();//TODO
+			throw new IllegalArgumentException("A criterion with the same name ("+name+") already exists for this agent.");
 		criterionMap.put(name,criterion);
 	}
 	

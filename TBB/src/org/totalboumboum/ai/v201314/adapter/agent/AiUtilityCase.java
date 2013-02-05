@@ -28,7 +28,6 @@ import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Cette classe permet de définir un cas,
