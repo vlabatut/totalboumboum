@@ -39,6 +39,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.totalboumboum.ai.AiAbstractManager;
+import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.tools.classes.ClassTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -123,81 +124,94 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 	
 	// IllegalArgumentException, ClassCastException
 	private void initCriteria(String aiName, String packName, T ai) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
-	{	// init qualified package name
-		String packageName = ClassTools.getTbbPackage()+ClassTools.CLASS_SEPARATOR+
-		FileNames.FILE_AI+ClassTools.CLASS_SEPARATOR+
-		packName+ClassTools.CLASS_SEPARATOR+
-		FileNames.FILE_AIS+ClassTools.CLASS_SEPARATOR+
-		aiName+ClassTools.CLASS_SEPARATOR+
-		FileNames.FILE_CRITERION;
-		
-		/*
-		 * TODO TODO
-		 * pq mettre des contraintes sur la localisation des critères ?
-		 * il suffit de chercher les classes héritant de critere général
-		 * dans tout le package de l'agent, et basta.
-		 */
-		
-//		Package classPackage = clazz.getPackage();
-//		String packageName = classPackage .getName()+ClassTools.CLASS_SEPARATOR+"criterion";
-//		Package critPackage = Package.getPackage(packageName);
-
-		// get the list of criterion classes
+	{	// get the agent main folder
 		String packagePath = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName+File.separator+FileNames.FILE_CRITERION;
 		File packageFolder = new File(packagePath);
 		if(!packageFolder.exists())
-			throw new FileNotFoundException("In package "+packageName+": package "+FileNames.FILE_CRITERION+" does not exist (it should contain all criterion classes).");
-		FileFilter filter = new FileFilter()
-		{	@Override
-			public boolean accept(File pathname)
-			{	String name = pathname.getName();
-				int length = name.length();
-				int extLength = FileNames.EXTENSION_CLASS.length();
-				String ext = name.substring(length-extLength,length);
-				return ext.equalsIgnoreCase(FileNames.EXTENSION_CLASS);
-			}			
-		};
-		File[] files = packageFolder.listFiles(filter);
+			throw new FileNotFoundException("In package "+packName+": package "+FileNames.FILE_CRITERION+" does not exist (it should contain all criterion classes).");
 
-		// process each one of them
-		for(File file: files)
-		{	// get the class name
-			String className = file.getName();
-			className = className.substring(0,className.length()-FileNames.EXTENSION_CLASS.length());
+		// process folder and subfolders
+		scanFolder(packageFolder, ai);
+	}
+
+	private void scanFolder(File packageFolder, T ai) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+	{	String folderPath = FilePaths.getAisPath()+File.separator;
+
+		// get the list of criterion classes
+		{	FileFilter filter = new FileFilter()
+			{	@Override
+				public boolean accept(File file)
+				{	String name = file.getName();
+					int length = name.length();
+					int extLength = FileNames.EXTENSION_CLASS.length();
+					String ext = name.substring(length-extLength,length);
+					return ext.equalsIgnoreCase(FileNames.EXTENSION_CLASS);
+				}			
+			};
+			File[] files = packageFolder.listFiles(filter);
+	
+			// process each criterion class
+			for(File file: files)
+			{	// get the class name
+				String className = file.getAbsolutePath();
+				// remove file extension
+				className = className.substring(0,className.length()-FileNames.EXTENSION_CLASS.length());
+				// remove folder
+				className = className.substring(folderPath.length(),className.length());
+				// replace '/' with '.'
+				className = className.replace(Character.toString(File.separatorChar),ClassTools.CLASS_SEPARATOR);
+				
+				// get the class
+				Class<?> tempClass = Class.forName(className);
+				// check if it is a criterion
+				if(AiUtilityCriterion.class.isAssignableFrom(tempClass))
+				{	// create an instance
+					AiUtilityCriterion<T, ?> criterion = null;
+					try
+					{	Constructor<?> constructor = tempClass.getConstructor();
+						criterion = (AiUtilityCriterion<T, ?>)constructor.newInstance(ai);
+					}
+					catch (NoSuchMethodException e)
+					{	throw new NoSuchMethodException("In class "+className+": No constructor could be found.");
+					}
+					catch (IllegalArgumentException e)
+					{	throw new IllegalArgumentException("In class "+className+": One constructor must be parameterless.");
+					}
+					catch (InstantiationException e)
+					{	throw new InstantiationException("In class "+className+": Cannot perform instantiation (maybe the class is abstract, or an interface, etc.)");
+					}
+					catch (IllegalAccessException e)
+					{	throw new IllegalAccessException("In class "+className+": Cannot access the constructor (maybe a visibility problem, e.g. private constructor).");
+					}
+//InvocationTargetException:::: "In class "+className+": The parameterless constructor threw an exception. 			
+					try
+					{	AiUtilityHandler<T> handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
+						handler.insertCriterion(criterion);
+					}
+					catch(IllegalArgumentException e)
+					{	throw new IllegalArgumentException("In class "+className+": "+e.getMessage());
+					}
+					catch (StopRequestException e)
+					{	// impossible during loading
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+		// get the list of folders
+		{	FileFilter filter = new FileFilter()
+			{	@Override
+				public boolean accept(File file)
+				{	boolean result = file.isDirectory();
+					return result;
+				}			
+			};
+			File[] folders = packageFolder.listFiles(filter);
 			
-			// load the class
-			String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+className;
-			Class<?> tempClass = Class.forName(classQualifiedName);
-			if(!AiUtilityCriterion.class.isAssignableFrom(tempClass))
-				throw new ClassCastException("In package "+packageName+": Class "+className+" is not a subclass of AiUtilityCriterion (this package must contain only criterion classes).");
-
-			// create an instance
-			AiUtilityCriterion<T, ?> criterion = null;
-			try
-			{	Constructor<?> constructor = tempClass.getConstructor();
-				criterion = (AiUtilityCriterion<T, ?>)constructor.newInstance(ai);
-			}
-			catch (NoSuchMethodException e)
-			{	throw new NoSuchMethodException("In class "+classQualifiedName+": No constructor could be found.");
-			}
-			catch (IllegalArgumentException e)
-			{	throw new IllegalArgumentException("In class "+classQualifiedName+": One constructor must be parameterless.");
-			}
-			catch (InstantiationException e)
-			{	throw new InstantiationException("In class "+classQualifiedName+": Cannot perform instantiation (maybe the class is abstract, or an interface, etc.)");
-			}
-			catch (IllegalAccessException e)
-			{	throw new IllegalAccessException("In class "+classQualifiedName+": Cannot access the constructor (maybe a visibility problem, e.g. private constructor).");
-			}
-//InvocationTargetException:::: "In class "+classQualifiedName+": The parameterless constructor threw an exception. 			
-			AiUtilityHandler<T> handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
-			try
-			{	handler.insertCriterion(criterion);
-			}
-			catch(IllegalArgumentException e)
-			{	throw new IllegalArgumentException("In class "+classQualifiedName+": A criterion with the same name ("+name+") already exists for this agent.");
-				// TODO à compléter
-			}
+			// process each folder
+			for(File folder: folders)
+				scanFolder(folder, ai);
 		}
 	}
 	
