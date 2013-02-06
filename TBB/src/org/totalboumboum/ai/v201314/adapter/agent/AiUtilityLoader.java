@@ -277,7 +277,7 @@ public class AiUtilityLoader
 	private static <T extends ArtificialIntelligence> void loadTablesElement(Element root, T ai, String errMsg)
 	{	List<Element> elements = root.getChildren(XmlNames.TABLE);
 		for(Element element: elements)
-			loadTableElement(element,ai,strMsg);
+			loadTableElement(element,ai,errMsg);
 	}
 	
 	/**
