@@ -332,6 +332,15 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		criterionMap.put(name,criterion);
 	}
 	
+	// TODO revoir les modes d'acces des méthodes, y compris pour les autres classes
+	
+	// TODO pq on n'utilise pas T dans les types de tous ces critères ?
+	
+	final AiUtilityCriterion<?,?> getCriterion(String name)
+	{	AiUtilityCriterion<?,?> result = criterionMap.get(name);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CASES	/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -355,6 +364,11 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		caseMap.put(name,caze);
 	}
 	
+	final AiUtilityCase getCategory(String name)
+	{	AiUtilityCase result = caseMap.get(name);
+		return result;
+	}
+
 	/**
 	 * Cette méthode prend une case en paramètre, et identifie
 	 * le cas correspondant. Bien sûr le traitement dépend

@@ -72,7 +72,7 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 */
 	public AiUtilityCase(String name, Set<AiUtilityCriterion<?,?>> criteria)
 	{	this.name = name;
-		this.criteria.addAll(criteria);
+		initCriteria(criteria);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -112,6 +112,15 @@ public final class AiUtilityCase implements Comparable<AiUtilityCase>
 	 */
 	public final Set<AiUtilityCriterion<?,?>> getCriteria()
 	{	return externalCriteria;
+	}
+	
+	// TODO IllegalArgumentException
+	private void initCriteria(Set<AiUtilityCriterion<?,?>> criteria)
+	{	for(AiUtilityCriterion<?,?> criterion: criteria)
+		{	if(this.criteria.contains(criterion))
+				throw new IllegalArgumentException("Trying to add criterion '"+criterion.getName()+"' twice while defining category '"+name+"' (each criterion must appear at most once).");
+			this.criteria.add(criterion);
+		}
 	}
 	
     /////////////////////////////////////////////////////////////////

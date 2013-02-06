@@ -1671,3 +1671,4 @@ public class Launcher
 // TODO rechercher les todos dans le source des étudiants (parser)
 // TODO plus généralement : voir ce qu'il est possible d'automatiser
 // TODO dans le document, justifier les différentes contraintes imposées pr le code source
+// TODO dans classe AI, faire directement des méthodes permettant de tester checkInterruption, utilité... et autres ?

@@ -71,7 +71,7 @@ public abstract class AiAbstractManager<V>
      */
 	public AiAbstractManager(Callable<V> ai)
     {	this.ai = ai;
-    	
+//TODO ai.loadUtilities(); ?    	
 	}
 
     /**
