@@ -54,7 +54,7 @@ import org.xml.sax.SAXException;
  *  
  * @author Vincent Labatut
  */
-public class AiUtilityLoader<T extends ArtificialIntelligence>
+public class AiUtilityLoader
 {
 	/**
 	 * Charge les informations décrivant un agent,
@@ -84,57 +84,53 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 	 * @throws NoSuchMethodException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 */
-	public void loadAiPreferences(String packName, String aiName, T ai) throws ParserConfigurationException, SAXException, IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
-	{	// init criteria
-		initCriteria(aiName, packName, ai);
-/*
- * TODO TODO
- * chargement statique : difficile à mettre en place sans changer profondément les classes d'utilité
- * 
- * - soit charger tout sous forme de texte, et réinstancier la table des préférences à chaque création d'agent
- * 
- * - soit charger directement les objets de façon statique
- * 		- mais alors on n'a pas accès à une instance d'agent 
- * 			>> faut changer les classes d'utilité
- * 			- mais peut etre plus besoin d'agent maintenant, si vérif est faite au chargement?
- * 			- au pire, on peut passer l'agent en paramètre à chaque appel
- * 		- critère = type énum?
- * 			- difficile à définir
- * 			- comment les manipuler dans les classes abstraites de l'API?
- * 		- pb: forcer les étudiants à implémenter certaines méthodes statiques dans leur classe
- * 			- définir des maps (clées=classe) gérées par l'API contenant tout ce qui est chargé
- * 			- à chaque instanciation, on copie dans l'objet les maps de critères etc.
- * 			- on peut même garder la référence à l'objet ai si on CLONE ces objets (methode clone prenant un ai en param)
- * 			- 
- * 
- * TODO TODO
- * 	- dans case, pas besoin d'ai 
- * 		(sauf si détermination du cas dans la classe du cas. là, on a besoin d'ai)
- * 		>> il faut faire le test d'unicité (du nom) lors de l'insertion
- *  - dans critère, besoin d'ai pour utilisation console durant calul du critère
- */
+	public static <T extends ArtificialIntelligence> void loadAiPreferences(String packName, String aiName, T ai) throws ParserConfigurationException, SAXException, IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+	{	// error message prefix
+		String errMsg = "Error while loading agent "+packName+"/"+aiName+": ";
+
+		// agent path
+		String agentPath = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName;
 		
-		String path = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName;
-		File dataFile = new File(path+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_XML);
+		// init criteria
+		initCriteria(agentPath, ai, errMsg);
+		
+		// load xml file
+		File dataFile = new File(agentPath+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		loadPreferencesElement(root, ai);
+		loadPreferencesElement(root, ai, errMsg);
 	}
 	
+	
+	/*
+	 * TODO TODO
+	 * 	- dans case, pas besoin d'ai 
+	 * 		(sauf si détermination du cas dans la classe du cas. là, on a besoin d'ai)
+	 * 		>> il faut faire le test d'unicité (du nom) lors de l'insertion
+	 *  - dans critère, besoin d'ai pour utilisation console durant calul du critère
+	 */
+	
+	
 	// IllegalArgumentException, ClassCastException
-	private void initCriteria(String aiName, String packName, T ai) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+	private static <T extends ArtificialIntelligence> void initCriteria(String agentPath, T ai, String errMsg) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
 	{	// get the agent main folder
-		String packagePath = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName+File.separator+FileNames.FILE_CRITERION;
-		File packageFolder = new File(packagePath);
-		if(!packageFolder.exists())
-			throw new FileNotFoundException("In package "+packName+": package "+FileNames.FILE_CRITERION+" does not exist (it should contain all criterion classes).");
+		File agentFolder = new File(agentPath);
+		if(!agentFolder.exists())
+			throw new FileNotFoundException(errMsg+"cannot find the agent folder "+agentPath);
 
 		// process folder and subfolders
-		scanFolder(packageFolder, ai);
+		scanFolderForCriteria(agentFolder, ai, errMsg);
 	}
 
-	private void scanFolder(File packageFolder, T ai) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+
+	/*
+	 * TODO TODO
+	 * dans la doc, rajouter toutes les exceptions possibles, avec leur cause,
+	 * dans la partie troubleshooting
+	 */
+	
+	private static <T extends ArtificialIntelligence> void scanFolderForCriteria(File packageFolder, T ai, String errMsg) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
 	{	String folderPath = FilePaths.getAisPath()+File.separator;
 
 		// get the list of criterion classes
@@ -172,27 +168,28 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 						criterion = (AiUtilityCriterion<T, ?>)constructor.newInstance(ai);
 					}
 					catch (NoSuchMethodException e)
-					{	throw new NoSuchMethodException("In class "+className+": No constructor could be found.");
+					{	throw new NoSuchMethodException(errMsg+"No constructor could be found for class '"+className+"'.");
 					}
 					catch (IllegalArgumentException e)
-					{	throw new IllegalArgumentException("In class "+className+": One constructor must be parameterless.");
+					{	throw new IllegalArgumentException(errMsg+"No approproate constructor could be found for class '"+className+"': need one constructor whose only parameter has the agent's main class as a type.");
 					}
 					catch (InstantiationException e)
-					{	throw new InstantiationException("In class "+className+": Cannot perform instantiation (maybe the class is abstract, or an interface, etc.)");
+					{	throw new InstantiationException(errMsg+"Cannot perform instantiation of class '"+className+"': maybe the class is abstract, or it is an interface, etc.");
 					}
 					catch (IllegalAccessException e)
-					{	throw new IllegalAccessException("In class "+className+": Cannot access the constructor (maybe a visibility problem, e.g. private constructor).");
+					{	throw new IllegalAccessException(errMsg+"Cannot access the constructor of class '"+className+"': it might be a visibility problem, e.g. a private constructor.");
 					}
-//InvocationTargetException:::: "In class "+className+": The parameterless constructor threw an exception. 			
+
+					// insert criterion in agent
 					try
 					{	AiUtilityHandler<T> handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
 						handler.insertCriterion(criterion);
 					}
 					catch(IllegalArgumentException e)
-					{	throw new IllegalArgumentException("In class "+className+": "+e.getMessage());
+					{	throw new IllegalArgumentException(errMsg+e.getMessage());
 					}
 					catch (StopRequestException e)
-					{	// impossible during loading
+					{	// theoretically impossible during loading
 						e.printStackTrace();
 					}
 				}
@@ -211,7 +208,7 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 			
 			// process each folder
 			for(File folder: folders)
-				scanFolder(folder, ai);
+				scanFolderForCriteria(folder, ai, errMsg);
 		}
 	}
 	
@@ -225,69 +222,62 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 	 * @param result
 	 * 		Objet à initialiser.
 	 */
-	private void loadPreferencesElement(Element root, T ai)
+	private static <T extends ArtificialIntelligence> void loadPreferencesElement(Element root, T ai, String errMsg)
 	{	// load categories
 		Element categoriesElt = root.getChild(XmlNames.CATEGORIES);
-		loadCategoriesElement(categoriesElt,ai);
+		loadCategoriesElement(categoriesElt,ai,errMsg);
 		
 		// load combinations
 		Element tablesElt = root.getChild(XmlNames.TABLES);
-		loadTablesElement(tablesElt, ai);
+		loadTablesElement(tablesElt, ai, errMsg);
 	}
 	
-	private void loadCategoriesElement(Element root, T ai)
+	private static <T extends ArtificialIntelligence> void loadCategoriesElement(Element root, T ai, String errMsg)
 	{	List<Element> elements = root.getChildren(XmlNames.CATEGORY);
 		for(Element element: elements)
-			loadCategoryElement(element,ai);
+			loadCategoryElement(element,ai,errMsg);
 	}
 	
 	// IllegalArgumentException
-	private void loadCategoryElement(Element root, T ai)
-	{	String name = root.getAttributeValue(XmlNames.NAME);
+	private static <T extends ArtificialIntelligence> void loadCategoryElement(Element root, T ai, String errMsg)
+	{	// retrieve the category name
+		String name = root.getAttributeValue(XmlNames.NAME);
 
-/* TODO TODO TODO
- * 	
- * - modifier case pour ne plus avoir besoin d'ai
- * - les critères doivent être instanciés une fois pour toutes (dans la 1ère méthode de chargement ?)
- * 	 et meme stockés dans la classe statique
- * 		- pour ça faut qu'ils soient chargés dynamiquement
- * 		- donc faut connaitre leur emplacement >> forcer l'utilisation du package 'criterion'
- * 		- les noms aussi doivent être standardisés
- * 		- faut une factory pour passer du nom string à la classe elle-même (ou on peut faire ça direct ici?)
- * - TODO plutot qu'en statique, il suffit de :
- * 		- charger toutes les classes d'un agent
- * 		- le mettre en cache dans le loader
- * 		- à chaque round avec cet agent, on le clone
- */
-		AiUtilityHandler<T> handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
+		// get the preference handler
+		AiUtilityHandler<T> handler = null;
+		try
+		{	handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
+		}
+		catch (StopRequestException e1)
+		{	// theoretically impossible here
+			e1.printStackTrace();
+		}
 	
 		// read criterion list
 		List<Element> elements = root.getChildren(XmlNames.CRITERION);
 		Set<AiUtilityCriterion<?,?>> categoryCriteria = new TreeSet<AiUtilityCriterion<?,?>>();
 		for(Element element: elements)
 		{	String critName = element.getAttributeValue(XmlNames.NAME);
-			AiUtilityCriterion<T,?> crit = handler.getCriterion.get(name);
-			if(categoryCriteria.contains(crit))
-				throw new IllegalArgumentException("In class "+clazz.getName()+": A category ("+name+") cannot contain the same criterion ("+critName+") more than once.");
+			AiUtilityCriterion<T,?> crit = (AiUtilityCriterion<T,?>)(handler.getCriterion(name));
+			if(crit==null)
+				throw new IllegalArgumentException(errMsg+"criterion '"+critName+"' used in category '"+name+"' is undefined (you must first define the criterion as a class, using '"+critName+"' as its name).");
 			categoryCriteria.add(crit);
 		}
 		
-/*
- * TODO TODO
- * 1) créer la liste de critères sans vérification
- * 2) controler les redondances à la création du cas
- * 3) controler l'unicité du nom du cas à l'insertion dans le handler		
- */
-		
 		// build category and complete map
-		AiUtilityCase category = new AiUtilityCase(name,categoryCriteria);
-		categories.put(name,category);
+		try
+		{	AiUtilityCase category = new AiUtilityCase(name,categoryCriteria);
+			handler.insertCase(category);
+		}
+		catch(IllegalArgumentException e)
+		{	throw new IllegalArgumentException(errMsg+e.getMessage());
+		}
 	}
 	
-	private void loadTablesElement(Element root, T ai)
+	private static <T extends ArtificialIntelligence> void loadTablesElement(Element root, T ai, String errMsg)
 	{	List<Element> elements = root.getChildren(XmlNames.TABLE);
 		for(Element element: elements)
-			loadTableElement(element,ai);
+			loadTableElement(element,ai,strMsg);
 	}
 	
 	/**
@@ -301,7 +291,7 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 	 * 		Objet à initialiser.
 	 */
 	@SuppressWarnings("unchecked")
-	private void loadTableElement(Element root, T ai)
+	private static <T extends ArtificialIntelligence> void loadTableElement(Element root, T ai, String errMsg)
 	{	// get the mode
 		String modeStr = root.getAttributeValue(XmlNames.MODE);
 		AiMode mode = AiMode.valueOf(modeStr);
@@ -309,20 +299,25 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 		// process combinations
 		List<Element> combiElts = root.getChildren(XmlNames.COMBINATION);
 		for(Element combiElt: combiElts)
-			loadCombinationElement(combiElt,mode,ai);
+			loadCombinationElement(combiElt,mode,ai,errMsg);
 	}
 	
-	/*
-	 * TODO TODO
-	 * normaliser les messages d'erreur : in class ou in package ou in agent?
-	 */
-	
-	private void loadCombinationElement(Element root, AiMode mode, T ai)
-	{	// get the category
+	private static <T extends ArtificialIntelligence> void loadCombinationElement(Element root, AiMode mode, T ai, String errMsg)
+	{	// get the preference handler
+		AiUtilityHandler<T> handler = null;
+		try
+		{	handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
+		}
+		catch (StopRequestException e1)
+		{	// theoretically impossible here
+			e1.printStackTrace();
+		}
+		
+		// get the category
 		String categoryStr = root.getAttributeValue(XmlNames.CATEGORY);
-		AiUtilityCase category = categories.get(categoryStr);
+		AiUtilityCase category = handler.getCategory(categoryStr);
 		if(category==null)
-			throw new IllegalArgumentException("In class ?????: A combination was defined for category "+categoryStr+", which was not declared before.");
+			throw new IllegalArgumentException(errMsg+"category '"+categoryStr+"' is used in a combination, but is is undefined (you must first define the category in the preference XML file).");
 		AiUtilityCombination combination = new AiUtilityCombination(category);
 		
 /*
@@ -335,9 +330,9 @@ public class AiUtilityLoader<T extends ArtificialIntelligence>
 		List<Element> valueElts = root.getChildren(XmlNames.VALUE);
 		for(Element valueElt: valueElts)
 		{	String criterionStr = valueElt.getAttributeValue(XmlNames.CRITERION);
-			AiUtilityCriterion<T,?> criterion = criteria.get(criterionStr);
+			AiUtilityCriterion<T,?> criterion = (AiUtilityCriterion<T,?>)(handler.getCriterion(criterionStr));
 			if(criterion==null)
-				throw new IllegalArgumentException("In class ?????: A criterion was specified for combination ?????, which was not declared before.");
+				throw new IllegalArgumentException(errMsg+"criterion '"+criterionStr+"' is used in a combination, but is is undefined (you must first define the criterion as a class, using '"+criterionStr+"' as its name).");
 			String valueStr = valueElt.getValue();
 			combination.setCriterionValue(criterion, valueStr);
 		}
