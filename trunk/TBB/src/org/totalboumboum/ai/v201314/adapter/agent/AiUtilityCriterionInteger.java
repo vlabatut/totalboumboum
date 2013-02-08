@@ -86,4 +86,19 @@ public abstract class AiUtilityCriterionInteger<T extends ArtificialIntelligence
 		for(int i=inf;i<=sup;i++)
 			this.domain.add(i);
 	}
+	
+    /////////////////////////////////////////////////////////////////
+	// DOMAIN			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected Integer convertString(String value) throws IllegalArgumentException
+	{	Integer result = null;
+		try
+		{	result = Integer.valueOf(value);
+		}
+		catch(NumberFormatException e)
+		{	throw new IllegalArgumentException("The value '"+value+"' provided for criterion '"+getName()+"' is invalid (should be an integer).");
+		}
+		return result;
+	}
 }

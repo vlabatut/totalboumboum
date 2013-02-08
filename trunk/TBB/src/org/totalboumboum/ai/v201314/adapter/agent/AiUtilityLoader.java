@@ -24,26 +24,20 @@ package org.totalboumboum.ai.v201314.adapter.agent;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.tools.classes.ClassTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
@@ -57,27 +51,29 @@ import org.xml.sax.SAXException;
 public class AiUtilityLoader
 {
 	/**
-	 * Charge les informations décrivant un agent,
+	 * Charge les préférences d'un agent,
 	 * stockés dans un fichier XML.
 	 * 
-	 * @param pack
-	 * 		Paquetage contenant l'agent.
-	 * @param folder
-	 * 		Dossier spécifique à l'agent.
-	 * @param agent
+	 * @param <T> 
 	 * 		Classe de l'agent concerné.
+	 * @param packName
+	 * 		Paquetage contenant l'agent.
+	 * @param aiName
+	 * 		Dossier spécifique à l'agent.
+	 * @param ai
+	 * 		Objet représentant l'agent concerné.
 	 * 
 	 * @throws ParserConfigurationException
 	 * 		Problème lors de l'accès au fichier XML.
 	 * @throws SAXException
 	 * 		Problème lors de l'accès au fichier XML.
 	 * @throws IOException
-	 * 		Problème lors de l'accès au fichier XML.
+	 * 		Problème lors de l'accès à un fichier.
+	 * @throws IllegalAccessException 
+	 * 		Problème lors du chargement des préférences.
 	 * @throws InvocationTargetException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws InstantiationException 
-	 * 		Problème lors de l'accès aux classes représentant des critères.
-	 * @throws IllegalAccessException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws ClassNotFoundException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
@@ -102,17 +98,35 @@ public class AiUtilityLoader
 		loadPreferencesElement(root, ai, errMsg);
 	}
 	
-	
-	/*
-	 * TODO TODO
-	 * 	- dans case, pas besoin d'ai 
-	 * 		(sauf si détermination du cas dans la classe du cas. là, on a besoin d'ai)
-	 * 		>> il faut faire le test d'unicité (du nom) lors de l'insertion
-	 *  - dans critère, besoin d'ai pour utilisation console durant calul du critère
-	 */
-	
-	
 	// IllegalArgumentException, ClassCastException
+	/**
+	 * Charge et instancie toutes les classes de l'agent
+	 * qui correspondent à des critères. L'intégralité
+	 * du package de l'agent est scanné à la recherche
+	 * de classes compatibles.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param agentPath 
+	 * 		Chemin du package de l'agent.
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalAccessException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws InvocationTargetException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws InstantiationException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws ClassNotFoundException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws NoSuchMethodException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws FileNotFoundException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 */
 	private static <T extends ArtificialIntelligence> void initCriteria(String agentPath, T ai, String errMsg) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
 	{	// get the agent main folder
 		File agentFolder = new File(agentPath);
@@ -130,6 +144,36 @@ public class AiUtilityLoader
 	 * dans la partie troubleshooting
 	 */
 	
+	/**
+	 * Méthode secondaire utilisée pour scanner le
+	 * package de l'agent à la recherche de classes
+	 * représentant des critères. Toutes les classes
+	 * de ce type qui sont détectées sont instanciées
+	 * et stockées dans le gestionnaire de l'agent.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param packageFolder 
+	 * 		Objet représentant le dossier contenant le code source de l'agent.
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalAccessException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws InvocationTargetException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws InstantiationException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws ClassNotFoundException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws NoSuchMethodException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws FileNotFoundException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 */
+	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void scanFolderForCriteria(File packageFolder, T ai, String errMsg) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
 	{	String folderPath = FilePaths.getAisPath()+File.separator;
 
@@ -213,14 +257,18 @@ public class AiUtilityLoader
 	}
 	
 	/**
-	 * Traite un élément XML pour en extraire l'information
+	 * Traite un élément XML pour en extraire les préférences
 	 * nécessaire à l'initialisation de l'objet représentant
 	 * l'agent.
 	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
 	 * @param root
 	 * 		Element à traiter.
-	 * @param result
-	 * 		Objet à initialiser.
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
 	 */
 	private static <T extends ArtificialIntelligence> void loadPreferencesElement(Element root, T ai, String errMsg)
 	{	// load categories
@@ -232,13 +280,42 @@ public class AiUtilityLoader
 		loadTablesElement(tablesElt, ai, errMsg);
 	}
 	
+	/**
+	 * Récupère la liste de catégories définies pour cet agent.
+	 * Celles-ci sont initialisées et stockées dans son gestionnaire.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param root
+	 * 		Element à traiter.
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
+	 */
 	private static <T extends ArtificialIntelligence> void loadCategoriesElement(Element root, T ai, String errMsg)
-	{	List<Element> elements = root.getChildren(XmlNames.CATEGORY);
+	{	@SuppressWarnings("unchecked")
+		List<Element> elements = root.getChildren(XmlNames.CATEGORY);
 		for(Element element: elements)
 			loadCategoryElement(element,ai,errMsg);
 	}
 	
+	/**
+	 * Analyse un élément décrivant une catégorie.
+	 * La catégorie est initialisée et stockée dans le
+	 * gestionnaire de l'agent.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param root
+	 * 		Element à traiter.
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
+	 */
 	// IllegalArgumentException
+	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void loadCategoryElement(Element root, T ai, String errMsg)
 	{	// retrieve the category name
 		String name = root.getAttributeValue(XmlNames.NAME);
@@ -267,28 +344,46 @@ public class AiUtilityLoader
 		// build category and complete map
 		try
 		{	AiUtilityCase category = new AiUtilityCase(name,categoryCriteria);
-			handler.insertCase(category);
+			handler.insertCategory(category);
 		}
 		catch(IllegalArgumentException e)
 		{	throw new IllegalArgumentException(errMsg+e.getMessage());
 		}
 	}
 	
+	/**
+	 * Analyse des listes de combinaisons (une
+	 * pour chaque mode) ordonnées par préférence 
+	 * décroissante.
+	 *  
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param root
+	 * 		Element à traiter.
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
+	 */
 	private static <T extends ArtificialIntelligence> void loadTablesElement(Element root, T ai, String errMsg)
-	{	List<Element> elements = root.getChildren(XmlNames.TABLE);
+	{	@SuppressWarnings("unchecked")
+		List<Element> elements = root.getChildren(XmlNames.TABLE);
 		for(Element element: elements)
 			loadTableElement(element,ai,errMsg);
 	}
 	
 	/**
-	 * Traite un élément XML pour en extraire l'information
-	 * nécessaire à l'initialisation de l'objet représentant
-	 * l'agent.
+	 * Analyse une liste de combinaisons ordonnées
+	 * par préférence décroissante, pour un mode donné.
 	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
 	 * @param root
 	 * 		Element à traiter.
-	 * @param result
-	 * 		Objet à initialiser.
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
 	 */
 	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void loadTableElement(Element root, T ai, String errMsg)
@@ -302,6 +397,21 @@ public class AiUtilityLoader
 			loadCombinationElement(combiElt,mode,ai,errMsg);
 	}
 	
+	/**
+	 * Charge une combinaison.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param root
+	 * 		Element à traiter.
+	 * @param mode
+	 * 		Mode de l'agent (attaque ou collecte).
+	 * @param ai 
+	 * 		Objet représentant l'agent.
+	 * @param errMsg 
+	 * 		Prefixe des messages d'erreur.
+	 */
+	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void loadCombinationElement(Element root, AiMode mode, T ai, String errMsg)
 	{	// get the preference handler
 		AiUtilityHandler<T> handler = null;
@@ -320,21 +430,31 @@ public class AiUtilityLoader
 			throw new IllegalArgumentException(errMsg+"category '"+categoryStr+"' is used in a combination, but is is undefined (you must first define the category in the preference XML file).");
 		AiUtilityCombination combination = new AiUtilityCombination(category);
 		
-/*
- * TODO TODO
- * - insérer directement la combinaison dans le gestionnaire
- * - dans le gestionnaire, vérifier la redondance de combinaison
- */
-		
 		// get the criterion values
 		List<Element> valueElts = root.getChildren(XmlNames.VALUE);
 		for(Element valueElt: valueElts)
-		{	String criterionStr = valueElt.getAttributeValue(XmlNames.CRITERION);
+		{	// get the string value
+			String criterionStr = valueElt.getAttributeValue(XmlNames.CRITERION);
+			// get the criterion
 			AiUtilityCriterion<T,?> criterion = (AiUtilityCriterion<T,?>)(handler.getCriterion(criterionStr));
 			if(criterion==null)
 				throw new IllegalArgumentException(errMsg+"criterion '"+criterionStr+"' is used in a combination, but is is undefined (you must first define the criterion as a class, using '"+criterionStr+"' as its name).");
+			// convert the string
 			String valueStr = valueElt.getValue();
-			combination.setCriterionValue(criterion, valueStr);
+			try
+			{	combination.setCriterionValue(criterion, valueStr);
+			}
+			catch(IllegalArgumentException e)
+			{	throw new IllegalArgumentException(errMsg+e.getMessage());
+			}
+		}
+		
+		// insert the combination in the handler
+		try
+		{	handler.insertCombination(mode,combination);
+		}
+		catch(IllegalArgumentException e)
+		{	throw new IllegalArgumentException(errMsg+e.getMessage());
 		}
 	}
 }

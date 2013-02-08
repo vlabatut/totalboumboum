@@ -27,7 +27,6 @@ import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Cette classe permet de définir un critère,
@@ -98,8 +97,8 @@ public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> im
 		this.ai = ai;
 	}
 	
-	protected AiUtilityCriterion clone(T ai)
-	{
+	protected AiUtilityCriterion<T,U> clone(T ai)
+	{	
 		// TODO TODO
 		// à compléter
 	}
@@ -163,6 +162,21 @@ public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> im
 	{	boolean result = domain.contains(value);
 		return result;
 	}
+	
+	/**
+	 * Reçoit une chaîne de caractère et la convertit
+	 * de manière à obtenir une valeur du type compatible
+	 * avec ce critère.
+	 *  
+	 * @param value
+	 * 		Chaîne de caractère à convertir en valeur.
+	 * @return
+	 * 		La valeur obtenue.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Si la chaîne de caractère ne représente pas une valeur appropriée.
+	 */
+	protected abstract U convertString(String value) throws IllegalArgumentException;
 	
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
