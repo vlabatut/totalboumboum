@@ -86,4 +86,13 @@ public abstract class AiUtilityCriterionString<T extends ArtificialIntelligence>
 		// init valeurs
 		this.domain.addAll(domain);
 	}
+
+	
+    /////////////////////////////////////////////////////////////////
+	// DOMAIN			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected String convertString(String value)
+	{	return value;
+	}
 }

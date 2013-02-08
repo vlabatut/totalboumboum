@@ -22,14 +22,10 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  */
 
 import java.awt.Color;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -110,41 +106,42 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	final void init() throws StopRequestException
 	{	print("    init utility handler");
    
-		// on initialise les maps de réference (vides pour l'instant)
-		createReference();
+//		// on initialise les maps de réference (vides pour l'instant)
+//		createReference();
+//		
+//    	// on initialise les critères une fois pour toutes
+//		{	long before = print("    > Entering initCriteria");
+//	    	initCriteria();
+//			long after = ai.getCurrentTime();
+//			long elapsed = after - before;
+//			print("    < Exiting initCriteria duration="+elapsed);
+//		}
+//		
+//    	// on initialise les cas une fois pour toutes
+//		{	long before = print("    > Entering initCases");
+//			initCases();
+//			long after = ai.getCurrentTime();
+//			long elapsed = after - before;
+//			print("    < Exiting initCases duration="+elapsed);
+//		}
+//		
+//    	// on initialise les utilités de réference une fois pour toutes
+//		{	long before = print("    > Entering initReference");
+//			initReferenceUtilities();
+//			long after = ai.getCurrentTime();
+//			long elapsed = after - before;
+//			print("    < Exiting initReference duration="+elapsed);
+//		}
+//		
+//		// on calcule les utilités maximales une fois pour toutes
+//		{	long before = print("    > Entering initMaxUtilities");
+//    		initMaxUtilities();
+//			long after = ai.getCurrentTime();
+//			long elapsed = after - before;
+//			print("    < Exiting initMaxUtilities duration="+elapsed);
+//		}
 		
-    	// on initialise les critères une fois pour toutes
-		{	long before = print("    > Entering initCriteria");
-	    	initCriteria();
-			long after = ai.getCurrentTime();
-			long elapsed = after - before;
-			print("    < Exiting initCriteria duration="+elapsed);
-		}
-		
-    	// on initialise les cas une fois pour toutes
-		{	long before = print("    > Entering initCases");
-			initCases();
-			long after = ai.getCurrentTime();
-			long elapsed = after - before;
-			print("    < Exiting initCases duration="+elapsed);
-		}
-		
-    	// on initialise les utilités de réference une fois pour toutes
-		{	long before = print("    > Entering initReference");
-			initReferenceUtilities();
-			long after = ai.getCurrentTime();
-			long elapsed = after - before;
-			print("    < Exiting initReference duration="+elapsed);
-		}
-		
-		// on calcule les utilités maximales une fois pour toutes
-		{	long before = print("    > Entering initMaxUtilities");
-    		initMaxUtilities();
-			long after = ai.getCurrentTime();
-			long elapsed = after - before;
-			print("    < Exiting initMaxUtilities duration="+elapsed);
-		}
-
+		// TODO cette méthode est-elle maintenant toujours nécessaire ?
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -192,9 +189,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// UTILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map contenant les valeurs d'utilité (les cases absentes sont inutiles) */
-	private final Map<AiTile,Float> utilitiesByTile = new HashMap<AiTile,Float>();
+	private final Map<AiTile,Integer> utilitiesByTile = new HashMap<AiTile,Integer>();
 	/** Map contenant les cases rangées par valeur d'utilité */
-	private final Map<Float,List<AiTile>> utilitiesByValue = new HashMap<Float,List<AiTile>>();
+	private final Map<Integer,List<AiTile>> utilitiesByValue = new HashMap<Integer,List<AiTile>>();
 
 	/**
 	 * Renvoie les utilités courantes, rangées par case.
@@ -203,7 +200,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @return
 	 * 		Une map contenant les utilités rangées par case.
 	 */
-	public final Map<AiTile, Float> getUtilitiesByTile()
+	public final Map<AiTile, Integer> getUtilitiesByTile()
 	{	return utilitiesByTile;
 	}
 
@@ -214,7 +211,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @return
 	 * 		Une map contenant les utilités rangées par valeur.
 	 */
-	public final Map<Float, List<AiTile>> getUtilitiesByValue()
+	public final Map<Integer, List<AiTile>> getUtilitiesByValue()
 	{	return utilitiesByValue;
 	}
 
@@ -276,7 +273,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			print("        < combination="+combination);
 			
 			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
-			float utility = retrieveUtilityValue(mode, combination);
+			int utility = retrieveUtilityValue(mode, combination);
 			print("        Result: utility="+utility);
 			
 			// on la rajoute dans les structures
@@ -313,8 +310,7 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	// CRITERIA	/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map de tous les critères créés, à ne surtout pas modifier manuellement */
-	protected final Map<String,AiUtilityCriterion<?,?>> criterionMap = new HashMap<String,AiUtilityCriterion<?,?>>();
-	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
+	private final Map<String,AiUtilityCriterion<T,?>> criterionMap = new HashMap<String,AiUtilityCriterion<T,?>>();
 
 	/**
 	 * Ajoute un nouveau critère à la map.
@@ -324,11 +320,14 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * 
 	 * @param criterion
 	 * 		Le critère à ajouter.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Si un critère de même nom existe déjà.
 	 */
-	final void insertCriterion(AiUtilityCriterion<?, ?> criterion) throws IllegalArgumentException
+	final void insertCriterion(AiUtilityCriterion<T, ?> criterion) throws IllegalArgumentException
 	{	String name = criterion.getName();
 		if(criterionMap.keySet().contains(name))
-			throw new IllegalArgumentException("A criterion with the same name ("+name+") already exists for this agent.");
+			throw new IllegalArgumentException("A criterion with the same name '"+name+"' already exists for this agent.");
 		criterionMap.put(name,criterion);
 	}
 	
@@ -336,34 +335,68 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	
 	// TODO pq on n'utilise pas T dans les types de tous ces critères ?
 	
-	final AiUtilityCriterion<?,?> getCriterion(String name)
-	{	AiUtilityCriterion<?,?> result = criterionMap.get(name);
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CASES	/////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Map contenant tous les cas, à initialiser dans {@link #initCases} */
-	protected final Map<String,AiUtilityCase> caseMap = new HashMap<String,AiUtilityCase>();
-	// TODO à rendre privé + méthode d'accès en lecture seule (pour éviter tout pb de modification abusive)
-	
 	/**
-	 * Ajoute un nouveau cas à la map.
+	 * Renvoie le critère dont le nom
+	 * est passé en paramètre (s'il
+	 * existe).
 	 * <br/>
 	 * Cette méthode est destinée à un usage interne,
 	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
 	 * 
-	 * @param caze
-	 * 		Le cas à ajouter.
+	 * @param name
+	 * 		Nom du critère demandé. 
+	 * @return 
+	 * 		Le critère correspondant, ou {@code null} s'il n'existe pas.
 	 */
-	final void insertCase(AiUtilityCase caze)
-	{	String name = caze.getName();
-		if(caseMap.keySet().contains(name))
-			throw new //TODO
-		caseMap.put(name,caze);
+	final AiUtilityCriterion<T,?> getCriterion(String name)
+	{	AiUtilityCriterion<T,?> result = criterionMap.get(name);
+		return result;
 	}
 	
+	/* TODO TODO
+	 * - remplacer "cas" par catégorie dans toute l'api (classes + coms)
+	 * - et aussi dans la doc !
+	 * - remplacer "utilité" par "préférences"
+	 */
+	
+	/////////////////////////////////////////////////////////////////
+	// CATEGORIES	/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map contenant tous les cas, à ne surtout pas modifier manuellement */
+	private final Map<String,AiUtilityCase> caseMap = new HashMap<String,AiUtilityCase>();
+	
+	/**
+	 * Ajoute une nouvelle catégorie à la map.
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
+	 * 
+	 * @param category
+	 * 		La catégorie à ajouter.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Si une catégorie de même nom existe déjà.
+	 */
+	final void insertCategory(AiUtilityCase category) throws IllegalArgumentException
+	{	String name = category.getName();
+		if(caseMap.keySet().contains(name))
+			throw new IllegalArgumentException("A category with the same name '"+name+"' already exists for this agent.");
+		caseMap.put(name,category);
+	}
+	
+	/**
+	 * Renvoie la catégorie dont le nom
+	 * est passé en paramètre (si elle
+	 * existe).
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
+	 * 
+	 * @param name
+	 * 		Nom de la catégorie demandée. 
+	 * @return 
+	 * 		La catégorie correspondant, ou {@code null} si elle n'existe pas.
+	 */
 	final AiUtilityCase getCategory(String name)
 	{	AiUtilityCase result = caseMap.get(name);
 		return result;
@@ -392,62 +425,8 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	/////////////////////////////////////////////////////////////////
 	// REFERENCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant l'utilité de chaque combinaison, à initialiser dans {@link #initReferenceUtilities} */
-	private final Map<AiMode, Map<AiUtilityCombination,Integer>> referenceUtilities = new HashMap<AiMode, Map<AiUtilityCombination,Integer>>();
-	/** Indique l'utilité maximale pour chaque mode (map automatiquement initialisée) */
-	private final Map<AiMode,Integer> maxReferenceUtilities = new HashMap<AiMode,Integer>();
-	
-	/**
-	 * Crée une map vide pour chaque mode. Ces
-	 * maps devront être remplies par la méthode
-	 * {@link #initReferenceUtilities}.
-	 * <br/>
-	 * Cette méthode est destinée à un usage interne,
-	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
-	 */
-	private final void createReference()
-	{	// pour chaque mode, on crée une map vide,
-		// qui devra être remplie par initReference()
-		for(AiMode mode: AiMode.values())
-		{	HashMap<AiUtilityCombination, Integer> map = new HashMap<AiUtilityCombination, Integer>();
-			referenceUtilities.put(mode,map);
-		}
-	}
-	
-	/**
-	 * Crée toutes les combinaisons possibles pour les
-	 * cas définis dans {@link #initCases()}, et les
-	 * insère dans la map {@link #referenceUtilities} en
-	 * associant à chacune une utilité unique.
-	 * <br/>
-	 * Les cas peuvent être récupérés à partir de leur
-	 * nom, en utilisant la map {@link #caseMap}.
-	 * <br/>
-	 * <b>Important</b> : utilisez la méthode {@link #defineUtilityValue}
-	 * pour insérer une combinaison et sa valeur d'utilité dans
-	 * la map {@link #referenceUtilities}. Ne le faites pas directement.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
-	 */
-	protected abstract void initReferenceUtilities() throws StopRequestException;
-	
-	/**
-	 * Calcule l'utilité de réference maximale pour chaque mode.
-	 * Ces valeurs sont utilisées lors de l'initialisation de
-	 * la sortie graphique (pour normaliser les valeurs d'utilité)
-	 * <br/>
-	 * Cette méthode est destinée à un usage interne,
-	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
-	 */
-	private final void initMaxUtilities()
-	{	for(AiMode mode: AiMode.values())
-		{	Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
-			Collection<Integer> utilities = map.values();
-			int max = Collections.max(utilities);
-			maxReferenceUtilities.put(mode, max);
-		}
-	}
+	/** Map contenant l'utilité de chaque combinaison, , à ne surtout pas modifier manuellement */
+	private final Map<AiMode, List<AiUtilityCombination>> referenceUtilities = new HashMap<AiMode, List<AiUtilityCombination>>();
 	
 	/**
 	 * Renvoie la valeur d'utilité associée à la
@@ -476,10 +455,10 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	 * @throws IllegalArgumentException
 	 * 		Si la combinaison passée en paramètre est introuvable dans {@link #referenceUtilities}.
 	 */
-	protected final int retrieveUtilityValue(AiMode mode, AiUtilityCombination combination)
-	{	Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
-		Integer result = map.get(combination);
-		if(result==null)
+	final int retrieveUtilityValue(AiMode mode, AiUtilityCombination combination)
+	{	List<AiUtilityCombination> list = referenceUtilities.get(mode);
+		Integer result = list.indexOf(combination);
+		if(result==-1)
 		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
 			throw new IllegalArgumentException("No utility value was associated to the specified combination (combination="+combination+", player="+color+").");
 		}
@@ -487,26 +466,31 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	}
 	
 	/**
-	 * Définit la valeur d'utilité de la combinaison passée en paramètre,
-	 * relativement au mode spécifié. Si une valeur a été déjà définie
-	 * pour ce mode et cette combinaison, alors l'ancienne valeur est
-	 * remplacée par celle spécifiée ici.
+	 * Ajoute la combinaison passée en paramètre à la liste interne de
+	 * ce gestionnaire, pour le mode spécifié. L'ordre dans lequel la 
+	 * combinaison est insérée détermine la préférence de l'agent. La 
+	 * première combinaison insérée étant la préférée.
 	 * <br/>
-	 * Vous devez obligatoirement utiliser cette méthode pour insérer
-	 * vos valeurs d'utilité dans {@link #referenceUtilities}, normalement
-	 * à partir de la méthode {@link #initReferenceUtilities()}.
+	 * Si la combinaison a déjà été insérée pour ce mode, alors une
+	 * {@link IllegalArgumentException} est levée.
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) n'avez (a priori)
+	 * pas besoin de l'utiliser.
 	 * 
 	 * @param mode
 	 * 		Le mode caractérisant cette combinaison.
 	 * @param combination
-	 * 		La combinaison dont on veut l'utilité.
-	 * @param utility
-	 * 		L'utilité de la combinaison passée en paramètre, 
-	 * 		pour le mode passé en paramètre.
+	 * 		La combinaison à insérer.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Si une combinaison similaire existe déjà pour le mode spécifié.
 	 */
-	protected final void defineUtilityValue(AiMode mode, AiUtilityCombination combination, int utility)
-	{	Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
-		map.put(combination,utility);
+	final void insertCombination(AiMode mode, AiUtilityCombination combination) throws IllegalArgumentException
+	{	List<AiUtilityCombination> list = referenceUtilities.get(mode);
+		if(list.contains(combination))
+			throw new IllegalArgumentException("Trying to insert combination '"+combination+"' for mode '"+mode+"', but this combination is already present (a combination cannot appear twice in the preferences).");
+		list.add(combination);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -595,9 +579,6 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	public void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		AiMode mode = ai.getModeHandler().getMode();
-		NumberFormat nf = NumberFormat.getInstance(Locale.FRENCH);
-		nf.setMinimumFractionDigits(2);
-		nf.setMaximumFractionDigits(2);
 
 		int rCoeff = 1;
 		int gCoeff = 1;
@@ -606,21 +587,21 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			rCoeff = 0;
 		else if(mode==AiMode.COLLECTING)
 			bCoeff = 0;
-		Integer limit = maxReferenceUtilities.get(mode);
+		Integer limit = referenceUtilities.get(mode).size();
 		if(limit==0)
 			limit = 50;
 		AiOutput output = ai.getOutput();
 		
-		for(Entry<AiTile,Float> entry: utilitiesByTile.entrySet())
+		for(Entry<AiTile,Integer> entry: utilitiesByTile.entrySet())
 		{	ai.checkInterruption();
 			AiTile tile = entry.getKey();
-			float value = entry.getValue();
+			int value = entry.getValue();
 			
 			// text
 			if(outputText)
 			{	String text = "-\u221E";
-				if(value!=Long.MAX_VALUE)
-					text = nf.format(value);
+				if(value!=Integer.MAX_VALUE)
+					text = Integer.toString(value);
 				output.setTileText(tile,text);
 			}
 			
@@ -640,7 +621,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 	}
 	
 	/**
-	 * Affiche une représentation textuelle des utilités déclarées.
+	 * Affiche une représentation textuelle des utilités
+	 * chargées à partir du fichier XML défini dans le
+	 * package de l'agent.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
@@ -651,22 +634,9 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 		
 		for(AiMode mode: AiMode.values())
 		{	print("      > Mode: ----- " + mode + " -------------------------------");
-			final Map<AiUtilityCombination,Integer> map = referenceUtilities.get(mode);
-			List<AiUtilityCombination> combis = new ArrayList<AiUtilityCombination>(map.keySet());
-			Collections.sort(combis,new Comparator<AiUtilityCombination>()
-			{	@Override
-				public int compare(AiUtilityCombination o1, AiUtilityCombination o2)
-				{	int u1 = map.get(o1);
-					int u2 = map.get(o2);
-					int result = u1 - u2;
-					return result;
-				}	
-			});
-			
-			for(AiUtilityCombination combi: combis)
-			{	int utility = map.get(combi);
-				print("      "+utility+"."+combi);
-			}
+			final List<AiUtilityCombination> list = referenceUtilities.get(mode);
+			for(int i=0;i<list.size();i++)
+				print("      "+i+"."+list.get(i));
 			print("      < Mode " + mode + " done");
 		}
 		print("    < Utilities done");

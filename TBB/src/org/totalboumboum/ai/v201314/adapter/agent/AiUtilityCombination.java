@@ -122,19 +122,50 @@ public final class AiUtilityCombination
 	 * 		La valeur à affecter au critère.
 	 * TODO TODO illegalargumentexception
 	 */
-	public final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiUtilityCriterion<T,U> criterion, U value) 
+	final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiUtilityCriterion<T,U> criterion, String value) throws IllegalArgumentException
+	{	if(!criteria.contains(criterion))
+			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+caze.getName()+"' associated to this combination.");
+		
+		U val = criterion.convertString(value);
+		
+		if(!criterion.hasValue(val))
+			throw new IllegalArgumentException("The specified value '"+val+"' does not belong to criterion '"+criterion.getName()+" definition domain.");
+
+		values.put(criterion,val);
+	}
+	
+	/**
+	 * Modifie la valeur associée au critère spécifié.
+	 * <br/>
+	 * Si le critère spécifié n'appartient pas au
+	 * cas associé à cette combinaison, ou bien si
+	 * la valeur spécifiée n'appartient pas au domaine
+	 * de définition du critère spécifié, une 
+	 * {@link IllegalArgumentException} est levée.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent.
+	 * @param <U> 
+	 * 		Classe du domaine de définition du critère.
+	 * 
+	 * @param criterion
+	 * 		Le nom du critère concerné par la valeur.
+	 * @param value
+	 * 		La valeur à affecter au critère.
+	 */
+	final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiUtilityCriterion<T,U> criterion, U value) 
 	{	if(!criteria.contains(criterion))
 		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
-			throw new IllegalArgumentException("The specified criterion ("+criterion.getName()+") is not defined for the case ("+caze.getName()+") associated to this combination ("+color+" player).");
+			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+caze.getName()+"' associated to this combination ("+color+" player).");
 		}
 		if(!criterion.hasValue(value))
 		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
-			throw new IllegalArgumentException("The specified value ("+value+") does not belong to the criterion ("+criterion.getName()+") definition domain ("+color+" player).");
+			throw new IllegalArgumentException("The specified value '"+value+"' does not belong to criterion '"+criterion.getName()+"' definition domain ("+color+" player).");
 		}
 
 		values.put(criterion,value);
 	}
-	
+
 	/**
 	 * Renvoie la valeur associée au critère spécifié
 	 * dans cette combinaison.

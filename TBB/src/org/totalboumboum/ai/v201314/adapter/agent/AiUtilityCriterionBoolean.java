@@ -81,4 +81,20 @@ public abstract class AiUtilityCriterionBoolean<T extends ArtificialIntelligence
 		domain.add(Boolean.FALSE);
 		domain.add(Boolean.TRUE);
 	}
+	
+    /////////////////////////////////////////////////////////////////
+	// DOMAIN			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected Boolean convertString(String value) throws IllegalArgumentException
+	{	Boolean result = null;
+		if(value.equalsIgnoreCase(Boolean.toString(true)))
+			result = true;
+		else if(value.equalsIgnoreCase(Boolean.toString(false)))
+			result = false;
+		else
+			throw new IllegalArgumentException("The value '"+value+"' provided for criterion '"+getName()+"' is invalid (should be a boolean)."); 
+		
+		return result;
+	}
 }
