@@ -232,7 +232,7 @@ public abstract class AiUtilityCriterion<T extends ArtificialIntelligence, U> im
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public final U fetchValue(AiTile tile) throws StopRequestException
-	{	AiUtilityHandler<?> utilityHandler = ai.getUtilityHandler();
+	{	AiUtilityHandler<?> utilityHandler = ai.getPreferenceHandler();
 		@SuppressWarnings("unchecked")
 		U result = (U)utilityHandler.getValueForCriterion(name,tile);
 		if(result==null)
