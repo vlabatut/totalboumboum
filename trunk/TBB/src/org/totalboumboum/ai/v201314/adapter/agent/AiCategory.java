@@ -48,7 +48,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
-public final class AiCase implements Comparable<AiCase>
+public final class AiCategory implements Comparable<AiCategory>
 {	
 	/**
 	 * Crée un nouveau cas à partir
@@ -68,7 +68,7 @@ public final class AiCase implements Comparable<AiCase>
 	 * @throws IllegalArgumentException
 	 * 		Si le même critère apparaît plusieurs fois.
 	 */
-	public AiCase(String name, Set<AiCriterion<?,?>> criteria)
+	public AiCategory(String name, Set<AiCriterion<?,?>> criteria)
 	{	this.name = name;
 		initCriteria(criteria);
 	}
@@ -189,15 +189,15 @@ public final class AiCase implements Comparable<AiCase>
 	@Override
 	public final boolean equals(Object o)
 	{	boolean result = false;
-		if(o!=null && o instanceof AiCase)
-		{	AiCase caze = (AiCase)o;
+		if(o!=null && o instanceof AiCategory)
+		{	AiCategory caze = (AiCategory)o;
 			result = compareTo(caze)==0;
 		}
 		return result;
 	}
 
 	@Override
-	public final int compareTo(AiCase caze)
+	public final int compareTo(AiCategory caze)
 	{	int result = name.compareTo(caze.getName());
 		return result;
 	}

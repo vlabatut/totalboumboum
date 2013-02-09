@@ -30,7 +30,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Cette classe permet de définir une combinaison,
- * en la décrivant par le cas ({@link AiCase})
+ * en la décrivant par le cas ({@link AiCategory})
  * auquel elle est associée, et un ensemble de valeurs.
  * <br/> 
  * Le cas détermine les critères ({@link AiCriterion})
@@ -53,7 +53,7 @@ public final class AiCombination
 	 * @param caze
 	 * 		Le cas associé à cette combinaison.
 	 */
-	public AiCombination(AiCase caze)
+	public AiCombination(AiCategory caze)
 	{	// le cas
 		this.caze = caze;
 		
@@ -81,7 +81,7 @@ public final class AiCombination
 	// CASE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Le cas dont dépend cette combinaison */
-	private AiCase caze;
+	private AiCategory caze;
 	/** Les critères du cas dont dépend cette combinaison */
 	private Set<AiCriterion<?,?>> criteria;
 	
@@ -92,7 +92,7 @@ public final class AiCombination
 	 * @return
 	 * 		Le cas correspondant à cette combinaison.
 	 */
-	public final AiCase getCase()
+	public final AiCategory getCase()
 	{	return caze;
 	}
 	

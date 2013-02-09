@@ -58,7 +58,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * ne pas faire de calcul inutile (cf. la documentation de {@link AiPreferenceHandler}.
  * <br/>
  * Le critère peut être utilisé pour construire
- * un ou plusieurs cas ({@link AiCase}). 
+ * un ou plusieurs cas ({@link AiCategory}). 
  * Une combinaison ({@link AiCombination}) contiendra
  * une ou plusieurs valeurs de différents critères. 
  * <br/>
