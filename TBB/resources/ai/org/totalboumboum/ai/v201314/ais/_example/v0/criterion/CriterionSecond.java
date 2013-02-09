@@ -1,6 +1,6 @@
 package org.totalboumboum.ai.v201314.ais._example.v0.criterion;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCriterionInteger;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._example.v0.Example;
@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201314.ais._example.v0.Example;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class CriterionSecond extends AiUtilityCriterionInteger<Example>
+public class CriterionSecond extends AiCriterionInteger<Example>
 {	/** Nom de ce critère */
 	public static final String NAME = "SECOND";
 	

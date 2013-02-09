@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v201314.ais._simplet;
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
@@ -148,7 +148,7 @@ public class Simplet extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiUtilityHandler<Simplet> getUtilityHandler() throws StopRequestException
+	protected AiPreferenceHandler<Simplet> getPreferenceHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}

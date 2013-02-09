@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCriterionString;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionString;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._example.v0.Example;
@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201314.ais._example.v0.Example;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class CriterionThird extends AiUtilityCriterionString<Example>
+public class CriterionThird extends AiCriterionString<Example>
 {	/** Nom de ce critère */
 	public static final String NAME = "THIRD";
 	/** Valeur du domaine de définition */

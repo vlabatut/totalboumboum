@@ -637,6 +637,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
  * 		x utilité >> préférence
  * 		x cas/caze >> catégorie
  * 		- adapter les classes agent de démo
+ * 		- que faire de init() dans AiPreferenceHandler
  * 		- revoir les modes d'acces des méthodes, en particulier pour le gestionnaire de préférences
  * 		- scanner toutes les classes à la recherche de TODOs
  * 		- voir si les coms sur les contraintes d'unicité sont toujours valides

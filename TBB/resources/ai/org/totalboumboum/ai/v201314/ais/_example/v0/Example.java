@@ -3,7 +3,7 @@ package org.totalboumboum.ai.v201314.ais._example.v0;
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 
@@ -102,7 +102,7 @@ public class Example extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiUtilityHandler<Example> getUtilityHandler() throws StopRequestException
+	protected AiPreferenceHandler<Example> getPreferenceHandler() throws StopRequestException
 	{	checkInterruption();
 		return utilityHandler;
 	}
