@@ -57,11 +57,9 @@ public final class AiCase implements Comparable<AiCase>
 	 * <br/>
 	 * <b>Attention </b>: chaque critère
 	 * ne peut apparaître qu'une seule fois
-	 * dans un cas donné. Dans le cas contraire, 
+	 * dans une catégorie donnée. Dans le cas contraire, 
 	 * la méthode lève une {@link IllegalArgumentException}.
 	 * 
-	 * @param ai 
-	 * 		Agent de référence.
 	 * @param name
 	 * 		Nom du nouveau critère.
 	 * @param criteria
@@ -113,9 +111,22 @@ public final class AiCase implements Comparable<AiCase>
 	public final Set<AiCriterion<?,?>> getCriteria()
 	{	return externalCriteria;
 	}
-	
-	// TODO IllegalArgumentException
-	private void initCriteria(Set<AiCriterion<?,?>> criteria)
+
+	/**
+	 * Initialise l'ensemble des critères de cette catégorie.
+	 * <br/>
+	 * <b>Attention </b>: chaque critère
+	 * ne peut apparaître qu'une seule fois
+	 * dans une catégorie donnée. Dans le cas contraire, 
+	 * la méthode lève une {@link IllegalArgumentException}.
+	 * 
+	 * @param criteria
+	 * 		Ensemble des critères à ajouter à cette catégorie.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Si  un critère apparait deux fois.
+	 */
+	private void initCriteria(Set<AiCriterion<?,?>> criteria) throws IllegalArgumentException
 	{	for(AiCriterion<?,?> criterion: criteria)
 		{	if(this.criteria.contains(criterion))
 				throw new IllegalArgumentException("Trying to add criterion '"+criterion.getName()+"' twice while defining category '"+name+"' (each criterion must appear at most once).");
@@ -128,7 +139,7 @@ public final class AiCase implements Comparable<AiCase>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Méthode calculant la combinaison décrivant
-	 * une case donnée, pour ce cas.
+	 * une case donnée, pour cette catégorie.
 	 * Cette méthode utilise indirectement
 	 * {@link AiCriterion#fetchValue}.
 	 * 

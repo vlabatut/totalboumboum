@@ -54,7 +54,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * doit obligatoirement être définie. Elle permet de calculer le critère
  * pour une case donnée. Cependant, <b>elle ne doit jamais être appelée
  * directement<b> par l'agent. Il faut utiliser la méthode {@link #fetchValue(AiTile)},
- * qui est plus efficace car elle utilise le cache du gestionnaire d'utilité pour
+ * qui est plus efficace car elle utilise le cache du gestionnaire de préférence pour
  * ne pas faire de calcul inutile (cf. la documentation de {@link AiPreferenceHandler}.
  * <br/>
  * Le critère peut être utilisé pour construire
@@ -96,12 +96,19 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	{	this.name = name;
 		this.ai = ai;
 	}
-	
-	protected AiCriterion<T,U> clone(T ai)
-	{	
-		// TODO TODO
-		// à compléter
-	}
+
+	/**
+	 * Construit un nouveau critère qui est la copie
+	 * de ce critère, à l'exception du fait que l'objet
+	 * représentant un agent est remplacé par l'instance
+	 * passée en paramètre.
+	 * 
+	 * @param ai
+	 * 		Nouvelle instance d'agent à considérer. 
+	 * @return
+	 * 		Copie de ce critère.
+	 */
+	protected abstract AiCriterion<T,U> clone(T ai);
 	
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
@@ -199,7 +206,7 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * Cette méthode n'est pas destinée à être appelée
 	 * par le concepteur. Elle est appelée automatiquement
 	 * par le système de cache géré par le gestionnaire
-	 * d'utilité. Ainsi, le calcul ne sera effectué que si
+	 * de préférence. Ainsi, le calcul ne sera effectué que si
 	 * nécessaire. Le concepteur de l'agent doit utiliser
 	 * la méthode {@link #fetchValue(AiTile)}, qui passe
 	 * automatiquement par le cache.
@@ -217,7 +224,7 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	/**
 	 * Méthode calculant la valeur de ce critère pour la case
 	 * passée en paramètre. La méthode utilise le cache du gestionnaire
-	 * d'utilité, ce qui lui permet de n'effectuer le calcul que si
+	 * de préférence, ce qui lui permet de n'effectuer le calcul que si
 	 * c'est nécessaire. Autrement dit, si le calcul a déjà été fait
 	 * lors de cette itération, la méthode ira chercher la valeur
 	 * précédemment calculée. Sinon, le calcul est effectué grâce
@@ -232,12 +239,12 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public final U fetchValue(AiTile tile) throws StopRequestException
-	{	AiPreferenceHandler<?> utilityHandler = ai.getPreferenceHandler();
+	{	AiPreferenceHandler<?> preferenceHandler = ai.getPreferenceHandler();
 		@SuppressWarnings("unchecked")
-		U result = (U)utilityHandler.getValueForCriterion(name,tile);
+		U result = (U)preferenceHandler.getValueForCriterion(name,tile);
 		if(result==null)
 		{	result = processValue(tile);
-			utilityHandler.putValueForCriterion(name,tile,result);
+			preferenceHandler.putValueForCriterion(name,tile,result);
 		}
 		return result;
 	}

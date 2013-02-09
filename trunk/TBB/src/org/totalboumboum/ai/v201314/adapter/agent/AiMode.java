@@ -20,7 +20,7 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-
+	
 /**
  * Ce type énuméré représente les différents modes
  * qu'un agent peut adopter : {@code COLLECTING}
