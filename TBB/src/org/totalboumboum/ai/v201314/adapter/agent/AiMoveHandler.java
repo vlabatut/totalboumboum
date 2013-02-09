@@ -98,7 +98,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * la case dans laquelle il veut aller. 
 	 * <br/>
 	 * Ce calcul dépend devrait dépendre au moins des valeurs 
-	 * d'utilité déjà calculées, et éventuellement d'autres 
+	 * de préférence déjà calculées, et éventuellement d'autres 
 	 * calculs supplémentaires.
 	 * 
 	 * @return
@@ -177,7 +177,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Méthode permettant de déterminer si l'agent
 	 * doit se déplacer, et dans quelle direction.
-	 * Cette décision dépend des valeurs d'utilité courantes.
+	 * Cette décision dépend des valeurs de préférence courantes.
 	 * <br/>
 	 * La méthode renvoie une {@link Direction} indiquant le
 	 * sens du déplacement, ou bien {@code null} ou {@link Direction#NONE}

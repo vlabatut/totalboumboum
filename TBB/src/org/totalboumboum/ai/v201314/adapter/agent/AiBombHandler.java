@@ -56,7 +56,7 @@ public abstract class AiBombHandler<T extends ArtificialIntelligence> extends Ai
 	/**
 	 * Méthode permettant de déterminer si l'agent
 	 * doit poser une bombe ou pas. Cette décision
-	 * dépend, entre autres, des valeurs d'utilité 
+	 * dépend, entre autres, des valeurs de préférence 
 	 * courantes, et éventuellement d'autres informations.
 	 * <br/>
 	 * La méthode renvoie {@code true} si l'agent doit 

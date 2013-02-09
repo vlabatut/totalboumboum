@@ -112,7 +112,7 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 				mode = AiMode.ATTACKING;
 		}
 	}
-	
+		
 	/**
 	 * Détermine si l'agent possède assez d'items,
 	 * ou bien s'il doit essayer d'en ramasser d'autres.

@@ -167,7 +167,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		// 
 		return result;
 	}
-	
+		
 	/**
 	 * Active les évènements nécessaires à l'arrêt du personnage.
 	 * Utilisé quand l'agent renvoie l'action "ne rien faire"

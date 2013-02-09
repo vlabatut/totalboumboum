@@ -36,25 +36,25 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * Classe gérant le calcul des valeurs d'utilité de l'agent.
+ * Classe gérant le calcul des valeurs de préférence de l'agent.
  * En particulier, elle implémente la méthode
  * {@link #update} de l'algorithme général.
  * <br/>
  * Cette classe contient 2 variables qui sont mises à 
  * jour par {@code update} :
  * <ul>
- * 		<li>{@link #utilitiesByTile} : map associant une valeur d'utilité à chaque case accessible ;</li>
- * 		<li>{@link #utilitiesByValue} : map associant à chaque valeur la liste des cases qui ont cette utilité.</li>
+ * 		<li>{@link #preferencesByTile} : map associant une valeur de préférence à chaque case traitée ;</li>
+ * 		<li>{@link #preferencesByValue} : map associant à chaque valeur la liste des cases qui ont cette preference.</li>
  * </ul>
  * Ces variables contiennent les mêmes informations, mais présentées
  * différemment afin d'y accéder rapidement dans tous les cas. Par exemple,
- * si on connait la case et qu'on veut l'utilité, on utilise la première map.
- * Si on veut toutes les cases d'utilité maximale, on cherche l'utilité maximale
+ * si on connait la case et qu'on veut la préférence, on utilise la première map.
+ * Si on veut toutes les cases de préférence maximale, on cherche la préférence maximale
  * dans les clés de la deuxième map, et on utilise cette même map pour
- * récupérer la liste des cases qui possèdent cette utilité.
+ * récupérer la liste des cases qui possèdent cette préférence.
  * <br/>
  * Elles sont notamment utilisées par la méthode {@link #updateOutput()}
- * qui est donnée ici en exemple afin d'afficher les valeurs d'utilité courantes.
+ * qui est donnée ici en exemple afin d'afficher les valeurs de préférence courantes.
  * <br/>
  * Cette classe est aussi solicitée lors de la création de cas et de critères,
  * afin de vérifier que leurs noms sont uniques pour cet agent (ceci afin
@@ -91,7 +91,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
     }
 	
 	/**
-	 * Initialise le gestionnaire d'utilité, en créant
+	 * Initialise le gestionnaire de préférence, en créant
 	 * les structures nécessaires ainsi que les cas,
 	 * critères et combinaisons.
 	 * <br/>
@@ -104,7 +104,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	final void init() throws StopRequestException
-	{	print("    init utility handler");
+	{	print("    init preference handler");
    
 //		// on initialise les maps de réference (vides pour l'instant)
 //		createReference();
@@ -125,7 +125,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 //			print("    < Exiting initCases duration="+elapsed);
 //		}
 //		
-//    	// on initialise les utilités de réference une fois pour toutes
+//    	// on initialise les préférences de réference une fois pour toutes
 //		{	long before = print("    > Entering initReference");
 //			initReferenceUtilities();
 //			long after = ai.getCurrentTime();
@@ -133,12 +133,12 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 //			print("    < Exiting initReference duration="+elapsed);
 //		}
 //		
-//		// on calcule les utilités maximales une fois pour toutes
-//		{	long before = print("    > Entering initMaxUtilities");
-//    		initMaxUtilities();
+//		// on calcule les préférences maximales une fois pour toutes
+//		{	long before = print("    > Entering initMaxPreferences");
+//    		initMaxPreferences();
 //			long after = ai.getCurrentTime();
 //			long elapsed = after - before;
-//			print("    < Exiting initMaxUtilities duration="+elapsed);
+//			print("    < Exiting initMaxPreferences duration="+elapsed);
 //		}
 		
 		// TODO cette méthode est-elle maintenant toujours nécessaire ?
@@ -162,9 +162,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	{	// le cache des critères
 		criterionCache.clear();
 		
-		// les valeurs d'utilité précédemment calculées.
-		utilitiesByTile.clear();
-		utilitiesByValue.clear();
+		// les valeurs de préférence précédemment calculées.
+		preferencesByTile.clear();
+		preferencesByValue.clear();
 	}
 	
 	/**
@@ -186,33 +186,33 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// UTILITIES		/////////////////////////////////////////////
+	// PREFERENCES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant les valeurs d'utilité (les cases absentes sont inutiles) */
-	private final Map<AiTile,Integer> utilitiesByTile = new HashMap<AiTile,Integer>();
-	/** Map contenant les cases rangées par valeur d'utilité */
-	private final Map<Integer,List<AiTile>> utilitiesByValue = new HashMap<Integer,List<AiTile>>();
+	/** Map contenant les valeurs de préférences (seulement pour les cases sélectionnées) */
+	private final Map<AiTile,Integer> preferencesByTile = new HashMap<AiTile,Integer>();
+	/** Map contenant les cases rangées par valeur de préférence */
+	private final Map<Integer,List<AiTile>> preferencesByValue = new HashMap<Integer,List<AiTile>>();
 
 	/**
-	 * Renvoie les utilités courantes, rangées par case.
+	 * Renvoie les préférences courantes, rangées par case.
 	 * Ces valeurs sont recalculées à chaque itération.
 	 * 
 	 * @return
-	 * 		Une map contenant les utilités rangées par case.
+	 * 		Une map contenant les préférences rangées par case.
 	 */
-	public final Map<AiTile, Integer> getUtilitiesByTile()
-	{	return utilitiesByTile;
+	public final Map<AiTile, Integer> getPreferencesByTile()
+	{	return preferencesByTile;
 	}
 
 	/**
-	 * Renvoie les utilités courantes, rangées par valeur.
+	 * Renvoie les préférences courantes, rangées par valeur.
 	 * Ces valeurs sont recalculées à chaque itération.
 	 * 
 	 * @return
-	 * 		Une map contenant les utilités rangées par valeur.
+	 * 		Une map contenant les préférences rangées par valeur.
 	 */
-	public final Map<Integer, List<AiTile>> getUtilitiesByValue()
-	{	return utilitiesByValue;
+	public final Map<Integer, List<AiTile>> getPreferencesByValue()
+	{	return preferencesByValue;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -220,9 +220,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Méthode permettant de mettre à jour
-	 * les valeurs d'utilité de l'agent. Ces valeurs
-	 * doivent être placées dans les deux maps {@link #utilitiesByTile}
-	 * et {@link #utilitiesByValue}. Le calcul de ces valeurs
+	 * les valeurs de préférence de l'agent. Ces valeurs
+	 * doivent être placées dans les deux maps {@link #preferencesByTile}
+	 * et {@link #preferencesByValue}. Le calcul de ces valeurs
 	 * est fonction de la zone, mais aussi du mode
 	 * courant de l'agent.
 	 * <br/>
@@ -244,7 +244,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		// on récupère le mode courant
 		AiMode mode = ai.getModeHandler().getMode();
 		
-		// on sélectionne les cases dont on veut calculer l'utilité
+		// on sélectionne les cases dont on veut calculer la préférence
 		long before = print("    > Entering selectTiles");
 		ArrayList<AiTile> selectedTiles = new ArrayList<AiTile>(selectTiles());
 		Collections.shuffle(selectedTiles); // on désordonne les cases pour introduire du hasard
@@ -252,7 +252,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		long elapsed = after - before;
 		print("    < Exiting selectTiles duration="+elapsed+" number="+selectedTiles.size());
 		
-		// on calcule l'utilité de chaque case
+		// on calcule la préférence de chaque case
 		before = print("    > Processing each tile");
 		for(AiTile tile: selectedTiles)
 		{	ai.checkInterruption();
@@ -272,16 +272,16 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 				throw new NullPointerException("The value returned by the method processCombination@"+color+" (for case "+caze.getName()+") is null. It should not.");
 			print("        < combination="+combination);
 			
-			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
-			int utility = retrieveUtilityValue(mode, combination);
-			print("        Result: utility="+utility);
+			// on calcule la valeur de préférence correspondant à cette combinaison (en fonction de son rang)
+			int preference = retrievePreferenceValue(mode, combination);
+			print("        Result: preference="+preference);
 			
 			// on la rajoute dans les structures
-			utilitiesByTile.put(tile,utility);
-			List<AiTile> tiles = utilitiesByValue.get(utility);
+			preferencesByTile.put(tile,preference);
+			List<AiTile> tiles = preferencesByValue.get(preference);
 			if(tiles==null)
 			{	tiles = new ArrayList<AiTile>();
-				utilitiesByValue.put(utility,tiles);
+				preferencesByValue.put(preference,tiles);
 			}
 			tiles.add(tile);
 			print("      < Tile "+tile+" processing finished");
@@ -294,12 +294,12 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	/**
 	 * Effectue une sélection sur les case de la zone de jeu,
 	 * car il n'est pas forcément nécessaire de calculer
-	 * l'utilité de chacune d'entre elles. Dans la méthode
-	 * {@link #update()}, l'utilité sera calculée seulement
+	 * la préférence de chacune d'entre elles. Dans la méthode
+	 * {@link #update()}, la préférence sera calculée seulement
 	 * pour cette sélection.
 	 * 
 	 * @return
-	 * 		L'ensemble des cases dont on veut calculer l'utilité.
+	 * 		L'ensemble des cases dont on veut calculer la préférence.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
@@ -331,14 +331,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		criterionMap.put(name,criterion);
 	}
 	
-	// TODO revoir les modes d'acces des méthodes, y compris pour les autres classes
-	
-	// TODO pq on n'utilise pas T dans les types de tous ces critères ?
-	
 	/**
 	 * Renvoie le critère dont le nom
-	 * est passé en paramètre (s'il
-	 * existe).
+	 * est passé en paramètre (s'il existe).
 	 * <br/>
 	 * Cette méthode est destinée à un usage interne,
 	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
@@ -352,12 +347,6 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	{	AiCriterion<T,?> result = criterionMap.get(name);
 		return result;
 	}
-	
-	/* TODO TODO
-	 * - remplacer "cas" par catégorie dans toute l'api (classes + coms)
-	 * - et aussi dans la doc !
-	 * - remplacer "utilité" par "préférences"
-	 */
 	
 	/////////////////////////////////////////////////////////////////
 	// CATEGORIES	/////////////////////////////////////////////////
@@ -425,14 +414,14 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	/////////////////////////////////////////////////////////////////
 	// REFERENCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant l'utilité de chaque combinaison, , à ne surtout pas modifier manuellement */
-	private final Map<AiMode, List<AiCombination>> referenceUtilities = new HashMap<AiMode, List<AiCombination>>();
+	/** Map contenant la préférence de chaque combinaison, , à ne surtout pas modifier manuellement */
+	private final Map<AiMode, List<AiCombination>> referencePreferences = new HashMap<AiMode, List<AiCombination>>();
 	
 	/**
-	 * Renvoie la valeur d'utilité associée à la
+	 * Renvoie la valeur de préférence associée à la
 	 * combinaison passée en paramètre. Si aucune
-	 * valeur d'utilité ne lui a été associée dans
-	 * {@link #referenceUtilities}, alors la
+	 * valeur de préférence ne lui a été associée dans
+	 * {@link #referencePreferences}, alors la
 	 * méthode lève une {@code IllegalArgumentException}.
 	 * <br/>
 	 * Un même cas peut être utilisé dans plusieurs modes
@@ -447,20 +436,20 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * @param mode
 	 * 		Le mode caractérisant cette combinaison.
 	 * @param combination
-	 * 		La combinaison dont on veut l'utilité.
+	 * 		La combinaison dont on veut la préférence.
 	 * @return
-	 * 		L'utilité de la combinaison passée en paramètre,
-	 * 		pour le mode passé en paramètre.
+	 * 		La préférence de la combinaison passée en paramètre,
+	 * 		pour le mode spécifié.
 	 * 
 	 * @throws IllegalArgumentException
-	 * 		Si la combinaison passée en paramètre est introuvable dans {@link #referenceUtilities}.
+	 * 		Si la combinaison passée en paramètre est introuvable dans {@link #referencePreferences}.
 	 */
-	final int retrieveUtilityValue(AiMode mode, AiCombination combination)
-	{	List<AiCombination> list = referenceUtilities.get(mode);
+	final int retrievePreferenceValue(AiMode mode, AiCombination combination)
+	{	List<AiCombination> list = referencePreferences.get(mode);
 		Integer result = list.indexOf(combination);
 		if(result==-1)
 		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
-			throw new IllegalArgumentException("No utility value was associated to the specified combination (combination="+combination+", player="+color+").");
+			throw new IllegalArgumentException("No preference value was associated to the specified combination (combination="+combination+", player="+color+").");
 		}
 		return result;
 	}
@@ -487,7 +476,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * 		Si une combinaison similaire existe déjà pour le mode spécifié.
 	 */
 	final void insertCombination(AiMode mode, AiCombination combination) throws IllegalArgumentException
-	{	List<AiCombination> list = referenceUtilities.get(mode);
+	{	List<AiCombination> list = referencePreferences.get(mode);
 		if(list.contains(combination))
 			throw new IllegalArgumentException("Trying to insert combination '"+combination+"' for mode '"+mode+"', but this combination is already present (a combination cannot appear twice in the preferences).");
 		list.add(combination);
@@ -560,11 +549,11 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * Met à jour les sorties graphiques de l'agent en considérant
 	 * les données de ce gestionnaire.
 	 * <br/>
-	 * Ici, on affiche la valeur numérique de l'utilité dans chaque,
-	 * et on colorie la case en fonction de cette valeur : la couleur
+	 * Ici, on affiche la valeur numérique de la préférence dans chaque
+	 * case, et on colorie la case en fonction de cette valeur : la couleur
 	 * dépend du mode (bleu pour la collecte, rouge pour l'attaque)
-	 * et son intensité dépend de l'utilité (clair pour une utilité
-	 * faible, foncé pour une utilité élevée).
+	 * et son intensité dépend de la préférence (clair pour une préférence
+	 * faible, foncé pour une préférence élevée).
 	 * <br/>
 	 * Cette méthode peut être surchargée si vous voulez afficher
 	 * les informations différemment, ou d'autres informations. A
@@ -587,12 +576,12 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			rCoeff = 0;
 		else if(mode==AiMode.COLLECTING)
 			bCoeff = 0;
-		Integer limit = referenceUtilities.get(mode).size();
+		Integer limit = referencePreferences.get(mode).size();
 		if(limit==0)
 			limit = 50;
 		AiOutput output = ai.getOutput();
 		
-		for(Entry<AiTile,Integer> entry: utilitiesByTile.entrySet())
+		for(Entry<AiTile,Integer> entry: preferencesByTile.entrySet())
 		{	ai.checkInterruption();
 			AiTile tile = entry.getKey();
 			int value = entry.getValue();
@@ -611,9 +600,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 					value = 0;
 				else if(value>limit)
 					value = limit;
-				int r = 255 - rCoeff*(int)(value/limit*255);
-				int g = 255 - gCoeff*(int)(value/limit*255);
-				int b = 255 - bCoeff*(int)(value/limit*255);
+				int r = 255 - rCoeff*(int)((limit-value)/limit*255);
+				int g = 255 - gCoeff*(int)((limit-value)/limit*255);
+				int b = 255 - bCoeff*(int)((limit-value)/limit*255);
 				Color color = new Color(r,g,b);
 				output.addTileColor(tile,color);
 			}
@@ -621,24 +610,24 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	}
 	
 	/**
-	 * Affiche une représentation textuelle des utilités
+	 * Affiche une représentation textuelle des préférences
 	 * chargées à partir du fichier XML défini dans le
 	 * package de l'agent.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public final void displayUtilities() throws StopRequestException
+	public final void displayPreferences() throws StopRequestException
 	{	ai.checkInterruption();
-		print("    > Declared utilities :");
+		print("    > Declared preferences :");
 		
 		for(AiMode mode: AiMode.values())
 		{	print("      > Mode: ----- " + mode + " -------------------------------");
-			final List<AiCombination> list = referenceUtilities.get(mode);
+			final List<AiCombination> list = referencePreferences.get(mode);
 			for(int i=0;i<list.size();i++)
 				print("      "+i+"."+list.get(i));
 			print("      < Mode " + mode + " done");
 		}
-		print("    < Utilities done");
+		print("    < Preferences done.");
 	}
 }

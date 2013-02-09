@@ -120,7 +120,10 @@ public final class AiCombination
 	 * 		Le nom du critère concerné par la valeur.
 	 * @param value
 	 * 		La valeur à affecter au critère.
-	 * TODO TODO illegalargumentexception
+	 * 
+	 * @throws	IllegalArgumentException
+	 * 		Soit le critère spécifié n'est pas défini pour la catégorie de cette combinaison,
+	 * 		soit la valeur associée à ce critère n'est pas contenue dans son domaine de validation.
 	 */
 	final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, String value) throws IllegalArgumentException
 	{	if(!criteria.contains(criterion))

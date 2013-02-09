@@ -44,11 +44,11 @@ import org.xml.sax.SAXException;
 
 /**
  * Classe dont le rôle est de charger un fichier
- * XML contenant les préférences (utilité) de l'agent.
+ * XML contenant les préférences de l'agent.
  *  
  * @author Vincent Labatut
  */
-public class AiUtilityLoader
+public class AiPreferenceLoader
 {
 	/**
 	 * Charge les préférences d'un agent,
@@ -137,13 +137,6 @@ public class AiUtilityLoader
 		scanFolderForCriteria(agentFolder, ai, errMsg);
 	}
 
-
-	/*
-	 * TODO TODO
-	 * dans la doc, rajouter toutes les exceptions possibles, avec leur cause,
-	 * dans la partie troubleshooting
-	 */
-	
 	/**
 	 * Méthode secondaire utilisée pour scanner le
 	 * package de l'agent à la recherche de classes
@@ -204,12 +197,12 @@ public class AiUtilityLoader
 				// get the class
 				Class<?> tempClass = Class.forName(className);
 				// check if it is a criterion
-				if(AiUtilityCriterion.class.isAssignableFrom(tempClass))
+				if(AiCriterion.class.isAssignableFrom(tempClass))
 				{	// create an instance
-					AiUtilityCriterion<T, ?> criterion = null;
+					AiCriterion<T, ?> criterion = null;
 					try
 					{	Constructor<?> constructor = tempClass.getConstructor();
-						criterion = (AiUtilityCriterion<T, ?>)constructor.newInstance(ai);
+						criterion = (AiCriterion<T, ?>)constructor.newInstance(ai);
 					}
 					catch (NoSuchMethodException e)
 					{	throw new NoSuchMethodException(errMsg+"No constructor could be found for class '"+className+"'.");
@@ -226,7 +219,7 @@ public class AiUtilityLoader
 
 					// insert criterion in agent
 					try
-					{	AiUtilityHandler<T> handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
+					{	AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)ai.getPreferenceHandler();
 						handler.insertCriterion(criterion);
 					}
 					catch(IllegalArgumentException e)
@@ -321,9 +314,9 @@ public class AiUtilityLoader
 		String name = root.getAttributeValue(XmlNames.NAME);
 
 		// get the preference handler
-		AiUtilityHandler<T> handler = null;
+		AiPreferenceHandler<T> handler = null;
 		try
-		{	handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
+		{	handler = (AiPreferenceHandler<T>)ai.getPreferenceHandler();
 		}
 		catch (StopRequestException e1)
 		{	// theoretically impossible here
@@ -332,10 +325,10 @@ public class AiUtilityLoader
 	
 		// read criterion list
 		List<Element> elements = root.getChildren(XmlNames.CRITERION);
-		Set<AiUtilityCriterion<?,?>> categoryCriteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		Set<AiCriterion<?,?>> categoryCriteria = new TreeSet<AiCriterion<?,?>>();
 		for(Element element: elements)
 		{	String critName = element.getAttributeValue(XmlNames.NAME);
-			AiUtilityCriterion<T,?> crit = (AiUtilityCriterion<T,?>)(handler.getCriterion(name));
+			AiCriterion<T,?> crit = (AiCriterion<T,?>)(handler.getCriterion(name));
 			if(crit==null)
 				throw new IllegalArgumentException(errMsg+"criterion '"+critName+"' used in category '"+name+"' is undefined (you must first define the criterion as a class, using '"+critName+"' as its name).");
 			categoryCriteria.add(crit);
@@ -343,7 +336,7 @@ public class AiUtilityLoader
 		
 		// build category and complete map
 		try
-		{	AiUtilityCase category = new AiUtilityCase(name,categoryCriteria);
+		{	AiCase category = new AiCase(name,categoryCriteria);
 			handler.insertCategory(category);
 		}
 		catch(IllegalArgumentException e)
@@ -414,9 +407,9 @@ public class AiUtilityLoader
 	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void loadCombinationElement(Element root, AiMode mode, T ai, String errMsg)
 	{	// get the preference handler
-		AiUtilityHandler<T> handler = null;
+		AiPreferenceHandler<T> handler = null;
 		try
-		{	handler = (AiUtilityHandler<T>)ai.getUtilityHandler();
+		{	handler = (AiPreferenceHandler<T>)ai.getPreferenceHandler();
 		}
 		catch (StopRequestException e1)
 		{	// theoretically impossible here
@@ -425,10 +418,10 @@ public class AiUtilityLoader
 		
 		// get the category
 		String categoryStr = root.getAttributeValue(XmlNames.CATEGORY);
-		AiUtilityCase category = handler.getCategory(categoryStr);
+		AiCase category = handler.getCategory(categoryStr);
 		if(category==null)
 			throw new IllegalArgumentException(errMsg+"category '"+categoryStr+"' is used in a combination, but is is undefined (you must first define the category in the preference XML file).");
-		AiUtilityCombination combination = new AiUtilityCombination(category);
+		AiCombination combination = new AiCombination(category);
 		
 		// get the criterion values
 		List<Element> valueElts = root.getChildren(XmlNames.VALUE);
@@ -436,7 +429,7 @@ public class AiUtilityLoader
 		{	// get the string value
 			String criterionStr = valueElt.getAttributeValue(XmlNames.CRITERION);
 			// get the criterion
-			AiUtilityCriterion<T,?> criterion = (AiUtilityCriterion<T,?>)(handler.getCriterion(criterionStr));
+			AiCriterion<T,?> criterion = (AiCriterion<T,?>)(handler.getCriterion(criterionStr));
 			if(criterion==null)
 				throw new IllegalArgumentException(errMsg+"criterion '"+criterionStr+"' is used in a combination, but is is undefined (you must first define the criterion as a class, using '"+criterionStr+"' as its name).");
 			// convert the string

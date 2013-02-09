@@ -47,7 +47,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * 		<li>initialisation</li>
  * 		<li>mise à jour des percepts</li>
  * 		<li>calcul du mode</li>
- * 		<li>mise à jour des valeurs d'utilité</li>
+ * 		<li>mise à jour des préférences</li>
  * 		<li>décision de poser une bombe ou pas</li>
  * 		<li>choix d'une direction de déplacement</li>
  * 		<li>mise à jour de la sortie graphique</li>
@@ -71,13 +71,13 @@ import org.totalboumboum.game.round.RoundVariables;
  * Enfin, la méthode {@link #updateOutput} se charge de mettre à jour la sortie
  * graphique de l'agent. Elle doit donc être surchargée si on veut afficher des 
  * informations en cours de jeu : cases colorées, texte, chemins, etc. Sinon,
- * par défaut, elle affiche les sorties des gestionnaires de déplacement et d'utilité.
+ * par défaut, elle affiche les sorties des gestionnaires de déplacement et de préférence.
  * <br/>
  * <br/>
  * Le reste du comportement de l'agent est implémenté dans des gestionnaires spécialisés,
- * qui prennent la forme de classes spécifiques. Les gestionnaires de mode, d'utilité,
+ * qui prennent la forme de classes spécifiques. Les gestionnaires de mode, de préférence,
  * de dépôt de bombe et de déplacement doivent respectivement hériter des classes 
- * {@link AiModeHandler}, {@link AiUtilityHandler}, {@link AiBombHandler} et {@link AiMoveHandler}. 
+ * {@link AiModeHandler}, {@link AiPreferenceHandler}, {@link AiBombHandler} et {@link AiMoveHandler}. 
  * Cf. leur documentation pour plus d'information.
  * <br/>
  * <br/>
@@ -256,7 +256,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * <b>Attention :</b> si cette méthode n'est pas redéfinie,
 	 * alors la sortie graphique par défaut consiste à 
 	 * afficher le chemin et la destination courants,
-	 * ainsi que les valeurs d'utilité courantes.
+	 * ainsi que les préférences courantes.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
@@ -265,8 +265,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	{	// affiche les chemins et destinations courants
 		getMoveHandler().updateOutput();
 		
-		// affiche les utilités courantes
-		getUtilityHandler().updateOutput();
+		// affiche les préférences courantes
+		getPreferenceHandler().updateOutput();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -295,17 +295,17 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	protected abstract AiModeHandler<?> getModeHandler() throws StopRequestException;
 	
 	/**
-	 * Renvoie le gestionnaire d'utilité de cet agent.
+	 * Renvoie le gestionnaire de préférence de cet agent.
 	 * Il doit avoir d'abord été créé dans la méthode
 	 * {@link #initHandlers()}.
 	 * 
 	 * @return
-	 * 		Le gestionnaire d'utilité de cet agent.
+	 * 		Le gestionnaire de préférence de cet agent.
 	 * 
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiUtilityHandler<?> getUtilityHandler() throws StopRequestException;
+	protected abstract AiPreferenceHandler<?> getPreferenceHandler() throws StopRequestException;
 	
 	/**
 	 * Renvoie le gestionnaire de posage de bombe de cet agent.
@@ -360,13 +360,13 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		
 		// initialisation des gestionnaires
 		initHandlers();
-		getUtilityHandler().init(); // l'initialisation de ce gestionnaire doit être terminée après sa création
+		getPreferenceHandler().init(); // l'initialisation de ce gestionnaire doit être terminée après sa création
 		
 		// autres initialisations
 		initOthers();
 		
-    	// on affiche éventuellement les utilités, ça peut servir
-		getUtilityHandler().displayUtilities();
+    	// on affiche éventuellement les préférences, ça peut servir
+		getPreferenceHandler().displayPreferences();
 	}
 
 	/**
@@ -428,13 +428,13 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 				stepDurations.put(MODE,elapsed);
 			}
 			
-			// mise à jour des valeurs d'utilité
-			{	before = print("  > Entering utility update");
-				getUtilityHandler().update();
+			// mise à jour des valeurs de préférence
+			{	before = print("  > Entering preference update");
+				getPreferenceHandler().update();
 				after = getCurrentTime();
 				elapsed = after - before;
-				print("  < Exiting utility update: duration="+elapsed+" ms");
-				stepDurations.put(UTILITY,elapsed);
+				print("  < Exiting preference update: duration="+elapsed+" ms");
+				stepDurations.put(PREFERENCES,elapsed);
 			}
 		}
 		
@@ -498,18 +498,18 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
 	protected final String PERCEPTS = "Percepts";
-	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de calcul du mode */
 	protected final String MODE = "Mode";
-	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
-	protected final String UTILITY = "Utility";
-	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de mise à jour des préférences */
+	protected final String PREFERENCES = "Preferences";
+	/** Champ utilisé par le moteur : étape de décision du dépôt de bombe */
 	protected final String BOMB = "Bomb";
-	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape de décision de déplacement */
 	protected final String MOVE = "Move";
-	/** Champ utilisé par le moteur : étape de mise à jour des percepts */
+	/** Champ utilisé par le moteur : étape d'affichage des sorties graphiques */
 	protected final String OUTPUT = "Output";
 	/** Champ utilisé par le moteur : les différentes étapes du traitement */
-	protected final List<String> stepNames = new ArrayList<String>(Arrays.asList(PERCEPTS,MODE,UTILITY,BOMB,MOVE,OUTPUT));
+	protected final List<String> stepNames = new ArrayList<String>(Arrays.asList(PERCEPTS,MODE,PREFERENCES,BOMB,MOVE,OUTPUT));
 	/** Champ utilisé par le moteur : temps réel total utilisé lors du dernier appel (en ms) */ 
 	private long totalDuration;
 	/** Champ utilisé par le moteur : temps réel de chaque étape (en ms) */
@@ -626,3 +626,17 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	{	zone = null;
 	}
 }
+
+/**
+ * TODO TODO
+ * - dans doc :
+ * 		- utilité >> préférence
+ * 		- cas >> catégorie
+ * 		- rajouter toutes les exceptions possibles, avec leur cause, dans la partie troubleshooting
+ * - code source :
+ * 		- utilité >> préférence
+ * 		- cas >> catégorie
+ * 		- adapter les classes agent de démo
+ * 		- revoir les modes d'acces des méthodes, en particulier pour le gestionnaire de préférences
+ * 		- scanner toutes les classes à la recherche de TODOs
+ */
