@@ -336,7 +336,7 @@ public class AiPreferenceLoader
 		
 		// build category and complete map
 		try
-		{	AiCase category = new AiCase(name,categoryCriteria);
+		{	AiCategory category = new AiCategory(name,categoryCriteria);
 			handler.insertCategory(category);
 		}
 		catch(IllegalArgumentException e)
@@ -418,7 +418,7 @@ public class AiPreferenceLoader
 		
 		// get the category
 		String categoryStr = root.getAttributeValue(XmlNames.CATEGORY);
-		AiCase category = handler.getCategory(categoryStr);
+		AiCategory category = handler.getCategory(categoryStr);
 		if(category==null)
 			throw new IllegalArgumentException(errMsg+"category '"+categoryStr+"' is used in a combination, but is is undefined (you must first define the category in the preference XML file).");
 		AiCombination combination = new AiCombination(category);

@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
  * pour ce critère). Ici, les valeurs sont booléennes.
  * <br/>
  * Le critère peut être utilisé pour construire
- * un ou plusieurs cas ({@link AiCase}). 
+ * un ou plusieurs cas ({@link AiCategory}). 
  * Une combinaison ({@link AiCombination}) contiendra
  * une ou plusieurs valeurs de différents critères. 
  * <br/>

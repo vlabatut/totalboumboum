@@ -260,7 +260,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			
 			// on identifie le cas de cette case (en fonction du mode)
 			print("        > Identifying the case");
-			AiCase caze = identifyCase(tile);
+			AiCategory caze = identifyCase(tile);
 			if(caze == null)
 				throw new NullPointerException("The value returned by the method identifyCase@"+color+" is null. It should not.");
 			print("        < case="+caze);
@@ -352,7 +352,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	// CATEGORIES	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map contenant tous les cas, à ne surtout pas modifier manuellement */
-	private final Map<String,AiCase> caseMap = new HashMap<String,AiCase>();
+	private final Map<String,AiCategory> caseMap = new HashMap<String,AiCategory>();
 	
 	/**
 	 * Ajoute une nouvelle catégorie à la map.
@@ -366,7 +366,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * @throws IllegalArgumentException 
 	 * 		Si une catégorie de même nom existe déjà.
 	 */
-	final void insertCategory(AiCase category) throws IllegalArgumentException
+	final void insertCategory(AiCategory category) throws IllegalArgumentException
 	{	String name = category.getName();
 		if(caseMap.keySet().contains(name))
 			throw new IllegalArgumentException("A category with the same name '"+name+"' already exists for this agent.");
@@ -386,8 +386,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * @return 
 	 * 		La catégorie correspondant, ou {@code null} si elle n'existe pas.
 	 */
-	final AiCase getCategory(String name)
-	{	AiCase result = caseMap.get(name);
+	final AiCategory getCategory(String name)
+	{	AiCategory result = caseMap.get(name);
 		return result;
 	}
 
@@ -409,7 +409,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected abstract AiCase identifyCase(AiTile tile) throws StopRequestException;
+	protected abstract AiCategory identifyCase(AiTile tile) throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// REFERENCE		/////////////////////////////////////////////
