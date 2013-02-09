@@ -1,6 +1,6 @@
 package org.totalboumboum.ai.v201314.ais._example.v0.criterion;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCriterionBoolean;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._example.v0.Example;
@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201314.ais._example.v0.Example;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class CriterionFirst extends AiUtilityCriterionBoolean<Example>
+public class CriterionFirst extends AiCriterionBoolean<Example>
 {	/** Nom de ce critère */
 	public static final String NAME = "FIRST";
 	

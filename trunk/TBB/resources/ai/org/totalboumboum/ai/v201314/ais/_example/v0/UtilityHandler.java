@@ -4,10 +4,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiMode;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCase;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCombination;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCriterion;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCombination;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCriterion;
+import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._example.v0.criterion.CriterionFirst;
@@ -16,14 +16,14 @@ import org.totalboumboum.ai.v201314.ais._example.v0.criterion.CriterionThird;
 
 /**
  * Classe gérant le calcul des valeurs d'utilité de l'agent.
- * Cf. la documentation de {@link AiUtilityHandler} pour plus de détails.
+ * Cf. la documentation de {@link AiPreferenceHandler} pour plus de détails.
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class UtilityHandler extends AiUtilityHandler<Example>
+public class UtilityHandler extends AiPreferenceHandler<Example>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -109,30 +109,30 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 	@Override
 	protected void initCases() throws StopRequestException
 	{	ai.checkInterruption();
-		Set<AiUtilityCriterion<?,?>> criteria;
+		Set<AiCriterion<?,?>> criteria;
 	
 		// on définit un premier cas utilisant les deux premiers critères
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		criteria = new TreeSet<AiCriterion<?,?>>();
 		criteria.add(criterionMap.get(CriterionFirst.NAME));
 		criteria.add(criterionMap.get(CriterionSecond.NAME));
-		new AiUtilityCase(ai,CASE_NAME1,criteria);
+		new AiCategory(ai,CASE_NAME1,criteria);
 			
 		// on définit un deuxième cas utilisant les deux derniers critères
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		criteria = new TreeSet<AiCriterion<?,?>>();
 		criteria.add(criterionMap.get(CriterionSecond.NAME));
 		criteria.add(criterionMap.get(CriterionThird.NAME));
-		new AiUtilityCase(ai,CASE_NAME2,criteria);
+		new AiCategory(ai,CASE_NAME2,criteria);
 
 		// on définit un troisième cas utilisant seulement le dernier critère
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		criteria = new TreeSet<AiCriterion<?,?>>();
 		criteria.add(criterionMap.get(CriterionThird.NAME));
-		new AiUtilityCase(ai,CASE_NAME3,criteria);
+		new AiCategory(ai,CASE_NAME3,criteria);
 	}
 
 	@Override
-	protected AiUtilityCase identifyCase(AiTile tile) throws StopRequestException
+	protected AiCategory identifyCategory(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
-		AiUtilityCase result = null;
+		AiCategory result = null;
 		
 		// TODO à compléter pour identifier le cas associé
 		// à la case passée en paramètre
@@ -151,7 +151,7 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 		
 		// on affecte les valeurs d'utilité
 		int utility;
-		AiUtilityCombination combi;
+		AiCombination combi;
 		AiMode mode;
 		
 		// on commence avec le mode collecte
@@ -163,7 +163,7 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 			// en respectant l'ordre des valeurs, mais bien sûr
 			// ce n'est pas du tout obligatoire
 			{	// on crée la combinaison (vide pour l'instant)
-				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+				combi = new AiCombination(caseMap.get(CASE_NAME1));
 				// on affecte les valeurs de chaque critère
 				combi.setCriterionValue((CriterionFirst)criterionMap.get(CriterionFirst.NAME),Boolean.FALSE);
 				combi.setCriterionValue((CriterionSecond)criterionMap.get(CriterionSecond.NAME),1);
@@ -172,31 +172,31 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 				// on incrémente l'utilité pour la combinaison suivante
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME1));
 				combi.setCriterionValue((CriterionFirst)criterionMap.get(CriterionFirst.NAME),Boolean.FALSE);
 				combi.setCriterionValue((CriterionSecond)criterionMap.get(CriterionSecond.NAME),2);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME1));
 				combi.setCriterionValue((CriterionFirst)criterionMap.get(CriterionFirst.NAME),Boolean.FALSE);
 				combi.setCriterionValue((CriterionSecond)criterionMap.get(CriterionSecond.NAME),3);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME1));
 				combi.setCriterionValue((CriterionFirst)criterionMap.get(CriterionFirst.NAME),Boolean.TRUE);
 				combi.setCriterionValue((CriterionSecond)criterionMap.get(CriterionSecond.NAME),1);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME1));
 				combi.setCriterionValue((CriterionFirst)criterionMap.get(CriterionFirst.NAME),Boolean.TRUE);
 				combi.setCriterionValue((CriterionSecond)criterionMap.get(CriterionSecond.NAME),2);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME1));
 				combi.setCriterionValue((CriterionFirst)criterionMap.get(CriterionFirst.NAME),Boolean.TRUE);
 				combi.setCriterionValue((CriterionSecond)criterionMap.get(CriterionSecond.NAME),3);
 				defineUtilityValue(mode, combi, utility);
@@ -208,7 +208,7 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 			// possibles, donc ça fait 15 combinaisons au total.
 			// la définition de l'utilité de ces combinaisons
 			// se fait de la même façon que ci dessus
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME2));
 				combi.setCriterionValue((CriterionSecond)criterionMap.get(CriterionSecond.NAME),1);
 				combi.setCriterionValue((CriterionThird)criterionMap.get(CriterionThird.NAME),CriterionThird.VALUE1);
 				defineUtilityValue(mode, combi, utility);
@@ -224,27 +224,27 @@ public class UtilityHandler extends AiUtilityHandler<Example>
 			utility = 1;
 			// pour simplifier, on ne met qu'un seul cas : le troisième
 			// il n'a qu'un seul critère, défini sur un domaine de 5 valeurs
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME3));
 				combi.setCriterionValue((CriterionThird)criterionMap.get(CriterionThird.NAME),CriterionThird.VALUE1);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME3));
 				combi.setCriterionValue((CriterionThird)criterionMap.get(CriterionThird.NAME),CriterionThird.VALUE2);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME3));
 				combi.setCriterionValue((CriterionThird)criterionMap.get(CriterionThird.NAME),CriterionThird.VALUE3);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME3));
 				combi.setCriterionValue((CriterionThird)criterionMap.get(CriterionThird.NAME),CriterionThird.VALUE4);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+			{	combi = new AiCombination(caseMap.get(CASE_NAME3));
 				combi.setCriterionValue((CriterionThird)criterionMap.get(CriterionThird.NAME),CriterionThird.VALUE5);
 				defineUtilityValue(mode, combi, utility);
 				utility++;

@@ -140,8 +140,6 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 //			long elapsed = after - before;
 //			print("    < Exiting initMaxPreferences duration="+elapsed);
 //		}
-		
-		// TODO cette méthode est-elle maintenant toujours nécessaire ?
 	}
 
 	/////////////////////////////////////////////////////////////////

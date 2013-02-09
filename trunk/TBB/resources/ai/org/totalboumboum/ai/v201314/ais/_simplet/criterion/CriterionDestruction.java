@@ -23,7 +23,7 @@ package org.totalboumboum.ai.v201314.ais._simplet.criterion;
 
 import java.util.Set;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCriterionInteger;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._simplet.CommonTools;
@@ -36,7 +36,7 @@ import org.totalboumboum.ai.v201314.ais._simplet.Simplet;
  * 
  * @author Vincent Labatut
  */
-public class CriterionDestruction extends AiUtilityCriterionInteger<Simplet>
+public class CriterionDestruction extends AiCriterionInteger<Simplet>
 {	/** Nom de ce critère */
 	public static final String NAME = "DESTRUCTION";
 	

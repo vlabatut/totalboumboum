@@ -28,7 +28,7 @@ import java.util.List;
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
@@ -479,7 +479,7 @@ public final class InitData
 			@Override
 			protected void initHandlers() throws StopRequestException{}
 			@Override
-			protected AiUtilityHandler<?> getUtilityHandler() throws StopRequestException{return null;}
+			protected AiPreferenceHandler<?> getPreferenceHandler() throws StopRequestException{return null;}
 			@Override
 			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
 			@Override

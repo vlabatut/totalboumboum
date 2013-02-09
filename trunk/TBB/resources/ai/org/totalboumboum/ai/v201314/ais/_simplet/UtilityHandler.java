@@ -31,10 +31,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiMode;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCase;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCombination;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityCriterion;
-import org.totalboumboum.ai.v201314.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCombination;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCriterion;
+import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
@@ -59,7 +59,7 @@ import org.totalboumboum.ai.v201314.ais._simplet.criterion.CriterionThreat;
  * 
  * @author Vincent Labatut
  */
-public class UtilityHandler extends AiUtilityHandler<Simplet>
+public class UtilityHandler extends AiPreferenceHandler<Simplet>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -254,31 +254,31 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 	protected void initCases() throws StopRequestException
 	{	// cas de collecte
 		{	// cas de l'item visible
-			Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+			Set<AiCriterion<?,?>> criteria = new TreeSet<AiCriterion<?,?>>();
 			criteria.add(criterionMap.get(CriterionLocality.NAME));
-			new AiUtilityCase(ai,CASE_COLLECT_VISIBLE_ITEM,criteria);
+			new AiCategory(ai,CASE_COLLECT_VISIBLE_ITEM,criteria);
 		}
 		{	// cas des autres cases
-			Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+			Set<AiCriterion<?,?>> criteria = new TreeSet<AiCriterion<?,?>>();
 			criteria.add(criterionMap.get(CriterionLocality.NAME));
 			criteria.add(criterionMap.get(CriterionDestruction.NAME));
-			new AiUtilityCase(ai,CASE_COLLECT_WALL_NEIGHBOR,criteria);
+			new AiCategory(ai,CASE_COLLECT_WALL_NEIGHBOR,criteria);
 		}
 		
 		// cas d'attaque
 		{	// un seul cas
-			Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+			Set<AiCriterion<?,?>> criteria = new TreeSet<AiCriterion<?,?>>();
 			criteria.add(criterionMap.get(CriterionLocality.NAME));
 			criteria.add(criterionMap.get(CriterionThreat.NAME));
-			new AiUtilityCase(ai,CASE_ATTACK,criteria);
+			new AiCategory(ai,CASE_ATTACK,criteria);
 		}
 	}
 
 	@Override
-	protected AiUtilityCase identifyCase(AiTile tile) throws StopRequestException
+	protected AiCategory identifyCategory(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 	
-		AiUtilityCase result = null;
+		AiCategory result = null;
 		// le cas dépend du mode
 		AiMode mode = ai.modeHandler.getMode();
 		
@@ -312,7 +312,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 	protected void initReferenceUtilities() throws StopRequestException
 	{	// on affecte les valeurs d'utilité
 		int utility = 1;
-		AiUtilityCombination combi;
+		AiCombination combi;
 		AiMode mode;
 		
 		// cas de collecte
@@ -323,7 +323,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 			for(int destruction=0;destruction<=CriterionDestruction.DESTRUCTION_LIMIT;destruction++)
 			{	ai.checkInterruption();	
 				
-				combi = new AiUtilityCombination(caseMap.get(CASE_COLLECT_WALL_NEIGHBOR));
+				combi = new AiCombination(caseMap.get(CASE_COLLECT_WALL_NEIGHBOR));
 				combi.setCriterionValue((CriterionLocality)criterionMap.get(CriterionLocality.NAME),locality);
 				combi.setCriterionValue((CriterionDestruction)criterionMap.get(CriterionDestruction.NAME),destruction);
 				defineUtilityValue(mode,combi,utility);
@@ -333,7 +333,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 		for(int locality=0;locality<=CriterionLocality.LOCALITY_LIMIT;locality++)
 		{	ai.checkInterruption();	
 			
-			combi = new AiUtilityCombination(caseMap.get(CASE_COLLECT_VISIBLE_ITEM));
+			combi = new AiCombination(caseMap.get(CASE_COLLECT_VISIBLE_ITEM));
 			combi.setCriterionValue((CriterionLocality)criterionMap.get(CriterionLocality.NAME),locality);
 			defineUtilityValue(mode,combi,utility);
 			utility++;
@@ -348,7 +348,7 @@ public class UtilityHandler extends AiUtilityHandler<Simplet>
 			for(int locality=0;locality<=CriterionLocality.LOCALITY_LIMIT;locality++)
 			{	ai.checkInterruption();	
 				
-				combi = new AiUtilityCombination(caseMap.get(CASE_ATTACK));
+				combi = new AiCombination(caseMap.get(CASE_ATTACK));
 				combi.setCriterionValue((CriterionLocality)criterionMap.get(CriterionLocality.NAME),locality);
 				combi.setCriterionValue((CriterionThreat)criterionMap.get(CriterionThreat.NAME),threat);
 				defineUtilityValue(mode,combi,utility);

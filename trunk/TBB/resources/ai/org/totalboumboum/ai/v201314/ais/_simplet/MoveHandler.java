@@ -197,7 +197,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		// destination courante obsolète
 		else
 		{	// on récupère les utilités par case
-			Map<AiTile,Float> utilitiesByTile = ai.utilityHandler.getUtilitiesByTile();
+			Map<AiTile,Float> utilitiesByTile = ai.utilityHandler.getPreferencesByTile();
 			// on récupère l'utilité de la destination courante
 			Float destinationUtility = utilitiesByTile.get(currentDestination);
 			
@@ -211,7 +211,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		if(changeDestination)
 		{	// on récupère simplement les utilités classées
 			print("      retrieve utilities");
-			Map<Float,List<AiTile>> utilitiesByValue = ai.utilityHandler.getUtilitiesByValue();
+			Map<Float,List<AiTile>> utilitiesByValue = ai.utilityHandler.getPreferencesByValue();
 			TreeSet<Float> values = new TreeSet<Float>(utilitiesByValue.keySet());
 			HashMap<AiTile,Boolean> bombTiles = ai.utilityHandler.bombTiles;
 			
