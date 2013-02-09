@@ -164,7 +164,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 				result.add(event);
 				break;
 		}
-		// 
+		//
 		return result;
 	}
 		

@@ -58,7 +58,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * ne pas faire de calcul inutile (cf. la documentation de {@link AiPreferenceHandler}.
  * <br/>
  * Le critère peut être utilisé pour construire
- * un ou plusieurs cas ({@link AiCategory}). 
+ * une ou plusieurs categorie ({@link AiCategory}). 
  * Une combinaison ({@link AiCombination}) contiendra
  * une ou plusieurs valeurs de différents critères. 
  * <br/>
@@ -127,7 +127,7 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * <br/>
 	 * Normalement, ce nom est supposé
 	 * être unique pour tous les critères
-	 * utilisés dans le même cas.
+	 * utilisés dans la même categorie.
 	 * 
 	 * @return
 	 * 		Le nom de ce critère.

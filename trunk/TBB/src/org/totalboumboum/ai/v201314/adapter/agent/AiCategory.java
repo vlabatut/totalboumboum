@@ -30,19 +30,19 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
 /**
- * Cette classe permet de définir un cas,
+ * Cette classe permet de définir une catégorie,
  * en le caractérisant par son nom et par
  * l'ensemble des critères {@link AiCriterion}
- * nécessaires pour le décrire.
+ * nécessaires pour la décrire.
  * <br/>
- * Un cas ne peut pas contenir plusieurs fois
- * le même critère. Deux cas ne peuvent pas avoir
+ * Une catégorie ne peut pas contenir plusieurs fois
+ * le même critère. Deux catégories ne peuvent pas avoir
  * le même nom.
  * <br/>
  * Une combinaison ({@link AiCombination})
- * correspond à un cas donné, et indique une
+ * correspond à une catégorie donnée, et indique une
  * valeur spécifique pour chacun des critères
- * décrivant le cas. Chaque valeur doit bien
+ * décrivant la catégorie. Chaque valeur doit bien
  * sûr appartenir au domaine de définition du critère
  * correspondant. 
  * 
@@ -51,7 +51,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 public final class AiCategory implements Comparable<AiCategory>
 {	
 	/**
-	 * Crée un nouveau cas à partir
+	 * Crée une nouvelle catégorie à partir
 	 * du nom et de l'ensemble de
 	 * critères passés en paramètres.
 	 * <br/>
@@ -61,9 +61,9 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * la méthode lève une {@link IllegalArgumentException}.
 	 * 
 	 * @param name
-	 * 		Nom du nouveau critère.
+	 * 		Nom de la nouvelle catégorie.
 	 * @param criteria
-	 * 		Ensemble des valeurs possible pour ce critère.
+	 * 		Ensemble des critères décrivant cette catégorie.
 	 * 
 	 * @throws IllegalArgumentException
 	 * 		Si le même critère apparaît plusieurs fois.
@@ -76,14 +76,14 @@ public final class AiCategory implements Comparable<AiCategory>
     /////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Le nom de ce cas */
+	/** Le nom de cette catégorie */
 	private String name;
 
 	/**
-	 * Renvoie le nom de ce cas.
+	 * Renvoie le nom de cette catégorie.
 	 * 
 	 * @return
-	 * 		Le nom de ce cas.
+	 * 		Le nom de cette catégorie.
 	 */
 	public final String getName()
 	{	return name;
@@ -92,21 +92,21 @@ public final class AiCategory implements Comparable<AiCategory>
     /////////////////////////////////////////////////////////////////
 	// CRITERIA			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Les critères servant à décrire ce cas */
+	/** Les critères servant à décrire cette catégorie */
 	private final Set<AiCriterion<?,?>> criteria = new TreeSet<AiCriterion<?,?>>();
 	/** Version immuable de l'ensemble de critères */
 	private final Set<AiCriterion<?,?>> externalCriteria = Collections.unmodifiableSet(criteria);
 	
 	/**
 	 * Renvoie l'ensemble des critères nécessaires
-	 * pour décrire ce cas.
+	 * pour décrire cette catégorie.
 	 * <br/>
 	 * <b>Attention :</b> l'ensemble renvoyé par cette méthode 
 	 * ne doit pas être modifié par l'agent. Toute tentative
 	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
-	 * 		L'ensemble des critères décrivant ce cas.
+	 * 		L'ensemble des critères décrivant cette catégorie.
 	 */
 	public final Set<AiCriterion<?,?>> getCriteria()
 	{	return externalCriteria;
@@ -190,15 +190,15 @@ public final class AiCategory implements Comparable<AiCategory>
 	public final boolean equals(Object o)
 	{	boolean result = false;
 		if(o!=null && o instanceof AiCategory)
-		{	AiCategory caze = (AiCategory)o;
-			result = compareTo(caze)==0;
+		{	AiCategory category = (AiCategory)o;
+			result = compareTo(category)==0;
 		}
 		return result;
 	}
 
 	@Override
-	public final int compareTo(AiCategory caze)
-	{	int result = name.compareTo(caze.getName());
+	public final int compareTo(AiCategory category)
+	{	int result = name.compareTo(category.getName());
 		return result;
 	}
 	
