@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
  * pour ce critère). Ici, les valeurs sont booléennes.
  * <br/>
  * Le critère peut être utilisé pour construire
- * un ou plusieurs cas ({@link AiCategory}). 
+ * une ou plusieurs categorie ({@link AiCategory}). 
  * Une combinaison ({@link AiCombination}) contiendra
  * une ou plusieurs valeurs de différents critères. 
  * <br/>
@@ -61,9 +61,9 @@ public abstract class AiCriterionBoolean<T extends ArtificialIntelligence> exten
 	 * <br/>
 	 * <b>Attention </b>: le nom du
 	 * critère doit être unique pour
-	 * un cas donné. Il ne peut pas
+	 * une categorie donnée. Il ne peut pas
 	 * y avoir deux critères de même
-	 * nom dans le même cas.
+	 * nom dans la même categorie.
 	 * 
 	 * @param ai 
 	 * 		Agent concerné.

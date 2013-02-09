@@ -226,7 +226,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	public boolean outputDestination = true;
 	/** Détermine si le gestionnaire affiche le chemin courant dans la sortie graphique */ 
 	public boolean outputPath = true;
-
+	
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
 	 * les données de ce gestionnaire.

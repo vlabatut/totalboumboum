@@ -56,7 +56,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Elles sont notamment utilisées par la méthode {@link #updateOutput()}
  * qui est donnée ici en exemple afin d'afficher les valeurs de préférence courantes.
  * <br/>
- * Cette classe est aussi solicitée lors de la création de cas et de critères,
+ * Cette classe est aussi solicitée lors de la création de catégories et de critères,
  * afin de vérifier que leurs noms sont uniques pour cet agent (ceci afin
  * d'éviter toute confusion).
  * <br/>
@@ -92,7 +92,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	
 	/**
 	 * Initialise le gestionnaire de préférence, en créant
-	 * les structures nécessaires ainsi que les cas,
+	 * les structures nécessaires ainsi que les catégories,
 	 * critères et combinaisons.
 	 * <br/>
 	 * Pour des raisons techniques, ces opérations
@@ -258,18 +258,18 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		{	ai.checkInterruption();
 			print("      > Processing tile "+tile);
 			
-			// on identifie le cas de cette case (en fonction du mode)
-			print("        > Identifying the case");
-			AiCategory caze = identifyCase(tile);
-			if(caze == null)
-				throw new NullPointerException("The value returned by the method identifyCase@"+color+" is null. It should not.");
-			print("        < case="+caze);
+			// on identifie la catégorie de cette case (en fonction du mode)
+			print("        > Identifying the category");
+			AiCategory category = identifyCategory(tile);
+			if(category == null)
+				throw new NullPointerException("The value returned by the method identifyCategory@"+color+" is null. It should not.");
+			print("        < category="+category);
 			
-			// on identifie la combinaison de valeurs des critères pour le cas détecté
+			// on identifie la combinaison de valeurs des critères pour la catégorie détectée
 			print("        > Processing the combination");
-			AiCombination combination = caze.processCombination(tile);
+			AiCombination combination = category.processCombination(tile);
 			if(combination == null)
-				throw new NullPointerException("The value returned by the method processCombination@"+color+" (for case "+caze.getName()+") is null. It should not.");
+				throw new NullPointerException("The value returned by the method processCombination@"+color+" (for category "+category.getName()+") is null. It should not.");
 			print("        < combination="+combination);
 			
 			// on calcule la valeur de préférence correspondant à cette combinaison (en fonction de son rang)
@@ -292,7 +292,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	}
 	
 	/**
-	 * Effectue une sélection sur les case de la zone de jeu,
+	 * Effectue une sélection sur les cases de la zone de jeu,
 	 * car il n'est pas forcément nécessaire de calculer
 	 * la préférence de chacune d'entre elles. Dans la méthode
 	 * {@link #update()}, la préférence sera calculée seulement
@@ -351,8 +351,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	/////////////////////////////////////////////////////////////////
 	// CATEGORIES	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant tous les cas, à ne surtout pas modifier manuellement */
-	private final Map<String,AiCategory> caseMap = new HashMap<String,AiCategory>();
+	/** Map contenant toutes les catégories, à ne surtout pas modifier manuellement */
+	private final Map<String,AiCategory> categoryMap = new HashMap<String,AiCategory>();
 	
 	/**
 	 * Ajoute une nouvelle catégorie à la map.
@@ -368,9 +368,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 */
 	final void insertCategory(AiCategory category) throws IllegalArgumentException
 	{	String name = category.getName();
-		if(caseMap.keySet().contains(name))
+		if(categoryMap.keySet().contains(name))
 			throw new IllegalArgumentException("A category with the same name '"+name+"' already exists for this agent.");
-		caseMap.put(name,category);
+		categoryMap.put(name,category);
 	}
 	
 	/**
@@ -387,13 +387,13 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * 		La catégorie correspondant, ou {@code null} si elle n'existe pas.
 	 */
 	final AiCategory getCategory(String name)
-	{	AiCategory result = caseMap.get(name);
+	{	AiCategory result = categoryMap.get(name);
 		return result;
 	}
 
 	/**
 	 * Cette méthode prend une case en paramètre, et identifie
-	 * le cas correspondant. Bien sûr le traitement dépend
+	 * la catégorie correspondante. Bien sûr le traitement dépend
 	 * à la fois de la zone de jeu et du mode courant, qui est
 	 * accessible grâce à la méthode {@link ArtificialIntelligence#getModeHandler()}.
 	 * <br/>
@@ -402,14 +402,14 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * appelée quand elle est nécessaire.
 	 * 
 	 * @param tile
-	 * 		La case dont on veut identifier le cas.
+	 * 		La case dont on veut identifier la catégorie.
 	 * @return
-	 * 		Un objet représentant le cas correspondant à cette case.
+	 * 		Un objet représentant la catégorie correspondant à cette case.
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected abstract AiCategory identifyCase(AiTile tile) throws StopRequestException;
+	protected abstract AiCategory identifyCategory(AiTile tile) throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// REFERENCE		/////////////////////////////////////////////
@@ -424,7 +424,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * {@link #referencePreferences}, alors la
 	 * méthode lève une {@code IllegalArgumentException}.
 	 * <br/>
-	 * Un même cas peut être utilisé dans plusieurs modes
+	 * Une même catégorie peut être utilisée dans plusieurs modes
 	 * différents, il est donc nécessaire de spécifier
 	 * en paramètre le mode qui caractérise la combinaison
 	 * à traiter.

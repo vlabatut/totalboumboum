@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
  * comprises dans un intervale défini à la construction.
  * <br/>
  * Le critère peut être utilisé pour construire
- * un ou plusieurs cas ({@link AiCategory}). 
+ * une ou plusieurs catégorie ({@link AiCategory}). 
  * Une combinaison ({@link AiCombination}) contiendra
  * une ou plusieurs valeurs de différents critères. 
  * <br/>
@@ -65,9 +65,9 @@ public abstract class AiCriterionString<T extends ArtificialIntelligence> extend
 	 * <br/>
 	 * <b>Attention </b>: le nom du
 	 * critère doit être unique pour
-	 * un cas donné. Il ne peut pas
+	 * une catégorie donnée. Il ne peut pas
 	 * y avoir deux critères de même
-	 * nom dans le même cas.
+	 * nom dans la même catégorie.
 	 * 
 	 * @param ai 
 	 * 		Agent concerné.

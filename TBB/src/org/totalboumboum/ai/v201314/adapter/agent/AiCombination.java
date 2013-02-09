@@ -30,10 +30,10 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Cette classe permet de définir une combinaison,
- * en la décrivant par le cas ({@link AiCategory})
- * auquel elle est associée, et un ensemble de valeurs.
+ * en la décrivant par la categorie ({@link AiCategory})
+ * à laquelle elle est associée, et un ensemble de valeurs.
  * <br/> 
- * Le cas détermine les critères ({@link AiCriterion})
+ * La categorie détermine les critères ({@link AiCriterion})
  * que doivent décrire ces valeurs. Chaque valeur
  * est associée à un critère particulier.
  * <br/>
@@ -46,19 +46,19 @@ public final class AiCombination
 {	
 	/**
 	 * Crée une nouvelle combinaison à partir
-	 * du cas passé en paramètre.
+	 * de la categorie passée en paramètre.
 	 * <br/>
 	 * Les valeurs sont à initialiser ultérieurement.
 	 * 
-	 * @param caze
-	 * 		Le cas associé à cette combinaison.
+	 * @param category
+	 * 		La categorie associée à cette combinaison.
 	 */
-	public AiCombination(AiCategory caze)
-	{	// le cas
-		this.caze = caze;
+	public AiCombination(AiCategory category)
+	{	// la categorie
+		this.category = category;
 		
-		// les critères du cas
-		criteria = caze.getCriteria();
+		// les critères de la categorie
+		criteria = category.getCriteria();
 	}
 	
 	/**
@@ -72,28 +72,28 @@ public final class AiCombination
 	 * 		La combinaison à recopier.
 	 */
 	public AiCombination(AiCombination combination)
-	{	caze = combination.caze;
+	{	category = combination.category;
 		criteria = combination.criteria;
 		values.putAll(combination.values);
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// CASE				/////////////////////////////////////////////
+	// CATEGORY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Le cas dont dépend cette combinaison */
-	private AiCategory caze;
-	/** Les critères du cas dont dépend cette combinaison */
+	/** La categorie dont dépend cette combinaison */
+	private AiCategory category;
+	/** Les critères de la categorie dont dépend cette combinaison */
 	private Set<AiCriterion<?,?>> criteria;
 	
 	/**
-	 * Renvoie le cas dont
+	 * Renvoie la categorie dont
 	 * dépend cette combinaison.
 	 * 
 	 * @return
-	 * 		Le cas correspondant à cette combinaison.
+	 * 		La categorie correspondant à cette combinaison.
 	 */
-	public final AiCategory getCase()
-	{	return caze;
+	public final AiCategory getCategory()
+	{	return category;
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -105,8 +105,8 @@ public final class AiCombination
 	/**
 	 * Modifie la valeur associée au critère spécifié.
 	 * <br/>
-	 * Si le critère spécifié n'appartient pas au
-	 * cas associé à cette combinaison, ou bien si
+	 * Si le critère spécifié n'appartient pas à
+	 * la categorie associée à cette combinaison, ou bien si
 	 * la valeur spécifiée n'appartient pas au domaine
 	 * de définition du critère spécifié, une 
 	 * {@link IllegalArgumentException} est levée.
@@ -127,7 +127,7 @@ public final class AiCombination
 	 */
 	final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, String value) throws IllegalArgumentException
 	{	if(!criteria.contains(criterion))
-			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+caze.getName()+"' associated to this combination.");
+			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+category.getName()+"' associated to this combination.");
 		
 		U val = criterion.convertString(value);
 		
@@ -140,8 +140,8 @@ public final class AiCombination
 	/**
 	 * Modifie la valeur associée au critère spécifié.
 	 * <br/>
-	 * Si le critère spécifié n'appartient pas au
-	 * cas associé à cette combinaison, ou bien si
+	 * Si le critère spécifié n'appartient pas à la
+	 * categorie associée à cette combinaison, ou bien si
 	 * la valeur spécifiée n'appartient pas au domaine
 	 * de définition du critère spécifié, une 
 	 * {@link IllegalArgumentException} est levée.
@@ -159,7 +159,7 @@ public final class AiCombination
 	final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, U value) 
 	{	if(!criteria.contains(criterion))
 		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
-			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+caze.getName()+"' associated to this combination ("+color+" player).");
+			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+category.getName()+"' associated to this combination ("+color+" player).");
 		}
 		if(!criterion.hasValue(value))
 		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
@@ -217,7 +217,7 @@ public final class AiCombination
 	@Override
 	public final String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append(caze.getName());
+		result.append(category.getName());
 		result.append("=(");
 		int i = 0;
 		for(AiCriterion<?,?> criterion: criteria)

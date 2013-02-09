@@ -35,7 +35,7 @@ public enum AiMode
 {	
 	/** L'agent n'a pas assez de puissance et essaie d'en obtenir plus */
 	COLLECTING,
-	
+		
 	/** 
 	 * Soit il ne reste plus d'item à ramasser, et l'agent n'a pas d'autre 
 	 * choix que d'attaquer les autres joueurs ; soit l'agent a assez de 

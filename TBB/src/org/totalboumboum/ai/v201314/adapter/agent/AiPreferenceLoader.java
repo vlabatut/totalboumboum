@@ -98,7 +98,6 @@ public class AiPreferenceLoader
 		loadPreferencesElement(root, ai, errMsg);
 	}
 	
-	// IllegalArgumentException, ClassCastException
 	/**
 	 * Charge et instancie toutes les classes de l'agent
 	 * qui correspondent à des critères. L'intégralité
