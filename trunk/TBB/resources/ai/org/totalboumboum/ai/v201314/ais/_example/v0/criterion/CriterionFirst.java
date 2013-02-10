@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201314.ais._example.v0.Example;
  */
 public class CriterionFirst extends AiCriterionBoolean<Example>
 {	/** Nom de ce critère */
-	public static final String NAME = "FIRST";
+	public static final String NAME = "FIRST_CRITERION";
 	
 	/**
 	 * Crée un nouveau critère binaire.
@@ -30,8 +30,8 @@ public class CriterionFirst extends AiCriterionBoolean<Example>
 	{	super(ai,NAME);
 		ai.checkInterruption();
 	}
-	
-    /////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -39,7 +39,11 @@ public class CriterionFirst extends AiCriterionBoolean<Example>
 	{	ai.checkInterruption();
 		boolean result = true;
 		
-		// TODO à compléter par le traitement approprié
+		/*
+		 *  TODO à compléter par le traitement approprié.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 	
 		return result;
 	}

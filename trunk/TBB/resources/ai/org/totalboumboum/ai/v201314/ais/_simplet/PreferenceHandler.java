@@ -59,7 +59,7 @@ import org.totalboumboum.ai.v201314.ais._simplet.criterion.CriterionThreat;
  * 
  * @author Vincent Labatut
  */
-public class UtilityHandler extends AiPreferenceHandler<Simplet>
+public class PreferenceHandler extends AiPreferenceHandler<Simplet>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -70,7 +70,7 @@ public class UtilityHandler extends AiPreferenceHandler<Simplet>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected UtilityHandler(Simplet ai) throws StopRequestException
+	protected PreferenceHandler(Simplet ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -225,19 +225,6 @@ public class UtilityHandler extends AiPreferenceHandler<Simplet>
 		}
 		
 		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CRITERIA					/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	protected void initCriteria() throws StopRequestException
-	{	ai.checkInterruption();
-
-		// on définit les critères
-		new CriterionLocality(ai);
-		new CriterionDestruction(ai);
-		new CriterionThreat(ai);
 	}
 
 	/////////////////////////////////////////////////////////////////

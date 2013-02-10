@@ -30,7 +30,11 @@ public class BombHandler extends AiBombHandler<Example>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
    	
-    	// TODO à compléter
+		/*
+		 *  TODO à compléter.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -40,7 +44,11 @@ public class BombHandler extends AiBombHandler<Example>
 	protected boolean considerBombing() throws StopRequestException
 	{	ai.checkInterruption();
 	
-		// TODO à compléter
+		/*
+		 *  TODO à compléter.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 	
 		return false;
 	}
@@ -58,6 +66,10 @@ public class BombHandler extends AiBombHandler<Example>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		/*
+		 *  TODO à compléter, si vous voulez afficher quelque chose.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 	}
 }

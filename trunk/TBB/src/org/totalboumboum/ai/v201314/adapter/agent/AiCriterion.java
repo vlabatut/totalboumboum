@@ -97,19 +97,6 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 		this.ai = ai;
 	}
 
-	/**
-	 * Construit un nouveau critère qui est la copie
-	 * de ce critère, à l'exception du fait que l'objet
-	 * représentant un agent est remplacé par l'instance
-	 * passée en paramètre.
-	 * 
-	 * @param ai
-	 * 		Nouvelle instance d'agent à considérer. 
-	 * @return
-	 * 		Copie de ce critère.
-	 */
-	protected abstract AiCriterion<T,U> clone(T ai);
-	
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
