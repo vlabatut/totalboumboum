@@ -634,10 +634,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
  * 		- cas >> catégorie
  * 		- rajouter toutes les exceptions possibles, avec leur cause, dans la partie troubleshooting
  * - code source :
- * 		- utilité >> préférence (agents)
- * 		- cas/caze >> catégorie (agents)
+ * 		x utilité >> préférence
+ * 		x cas/caze >> catégorie
  * 		x scanner toutes les classes à la recherche de TODOs
- * 		- adapter les classes agent de démo
+ * 		x adapter les classes agent de démo
  * 		- que faire de init() dans AiPreferenceHandler
  * 		- revoir les modes d'acces des méthodes, en particulier pour le gestionnaire de préférences
  * 		- voir si les coms sur les contraintes d'unicité sont toujours valides
