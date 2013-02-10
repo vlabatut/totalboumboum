@@ -547,3 +547,8 @@
 	- gui :
 		- possibilité de masquer le message de pause
 		- bascule différente entre l'affichage des temps (mode débug)
+	- ia :
+		- utilité/cas devient préférence/catégorie
+		- les préférences sont définies dans un fichier xml séparé
+		- les préférences sont initialisées une seule fois pour un agent donné,
+		  puis copiées à chacune de ses instantiations.

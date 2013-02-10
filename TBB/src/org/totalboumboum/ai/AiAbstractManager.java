@@ -22,8 +22,10 @@ package org.totalboumboum.ai;
  */
 
 import java.awt.Color;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,6 +38,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.engine.container.level.Level;
@@ -45,6 +49,7 @@ import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.RoundVariables;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -75,15 +80,32 @@ public abstract class AiAbstractManager<V>
 	}
 
     /**
-     * initialise le gestionnaire d'agent
+     * Initialise ce gestionnaire d'agent.
      * 
      * @param instance	
-     * 		instance utilisée dans ce round
+     * 		Instance utilisée dans ce round.
      * @param player	
-     * 		joueur contrôlé par l'agent
+     * 		Joueur contrôlé par l'agent.
+     * 
+     * @throws NoSuchMethodException
+     * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws ClassNotFoundException 
+     * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws IllegalAccessException 
+     * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws InstantiationException 
+     * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws InvocationTargetException 
+     * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws ParserConfigurationException 
+     * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws SAXException 
+     * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws IOException 
+     * 		Problème lors du chargement des préférences de l'agent. 
      */
     @SuppressWarnings("unchecked")
-	public void init(String instance, AiPlayer player)
+	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
 	{	// input
     	this.player = player;
 		
