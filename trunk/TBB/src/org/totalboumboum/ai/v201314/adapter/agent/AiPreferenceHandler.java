@@ -384,7 +384,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * @return 
 	 * 		La catégorie correspondant, ou {@code null} si elle n'existe pas.
 	 */
-	final AiCategory getCategory(String name)
+	protected final AiCategory getCategory(String name)
 	{	AiCategory result = categoryMap.get(name);
 		return result;
 	}

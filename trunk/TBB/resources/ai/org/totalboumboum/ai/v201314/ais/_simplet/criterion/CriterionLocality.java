@@ -32,12 +32,14 @@ import org.totalboumboum.ai.v201314.ais._simplet.Simplet;
  * Cette classe représente le critère de localité.
  * Il est entier : la valeur représente la distance
  * entre la case et l'agent, plafonnée à {@value #LOCALITY_LIMIT}.
+ * La valeur 0 représente une case très éloignée, la valeur
+ * {@value #LOCALITY_LIMIT} une case peu éloignée.
  * 
  * @author Vincent Labatut
  */
 public class CriterionLocality extends AiCriterionInteger<Simplet>
 {	/** Nom de ce critère */
-	public static final String NAME = "LOCAL";
+	public static final String NAME = "LOCALITY";
 	
 	/**
 	 * Crée un nouveau critère entier.

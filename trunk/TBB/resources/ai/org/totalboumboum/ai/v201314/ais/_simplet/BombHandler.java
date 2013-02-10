@@ -67,7 +67,7 @@ public class BombHandler extends AiBombHandler<Simplet>
 		// à noter qu'il est peut-être préférable de tester si on peut poser 
 		// une bombe même quand on n'est pas arrivé à destination (là on se
 		// contente de poser une bombe quand on est sur l'objectif sélectionné
-		// sur les valeurs d'utilité.
+		// sur les valeurs de préférence.
 		
 		boolean result = false;
 		AiTile currentTile = ownHero.getTile();
