@@ -22,6 +22,8 @@ package org.totalboumboum.ai.v201213.adapter.agent;
  */
 
 import java.awt.Color;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +32,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201213.adapter.communication.AiAction;
@@ -46,6 +50,7 @@ import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
+import org.xml.sax.SAXException;
 
 /**
  * Classe servant de traducteur entre le jeu et l'agent :
@@ -102,7 +107,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public final void init(String instance, AiPlayer player)
+	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
 	{	super.init(instance,player);
 	
 		loop = RoundVariables.loop;

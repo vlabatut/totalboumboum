@@ -619,25 +619,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Termine proprement l'agent afin de libérer les ressources 
-	 * qu'il occupait. Cette mméthode destinée au moteur.
+	 * qu'il occupait. Cette mméthode est destinée au moteur.
 	 */
 	final void finish()
 	{	zone = null;
 	}
 }
-
-/**
- * TODO TODO
- * - dans doc :
- * 		- utilité >> préférence
- * 		- cas >> catégorie
- * 		- rajouter toutes les exceptions possibles, avec leur cause, dans la partie troubleshooting
- * - code source :
- * 		x utilité >> préférence
- * 		x cas/caze >> catégorie
- * 		x scanner toutes les classes à la recherche de TODOs
- * 		x adapter les classes agent de démo
- * 		x que faire de init() dans AiPreferenceHandler
- * 		x revoir les modes d'acces des méthodes, en particulier pour le gestionnaire de préférences
- * 		x voir si les coms sur les contraintes d'unicité sont toujours valides
- */

@@ -85,6 +85,7 @@ public class AiLoader
 		
 		// build an instance
 		result = (AiAbstractManager<?>)tempClass.getConstructor().newInstance();
+		
 		return result;
 	}
 }
