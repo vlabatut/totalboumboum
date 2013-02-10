@@ -82,9 +82,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * <b>Attention</b> : cette approche est très mauvaise, et en plus elle
  * ne respecte pas l'algorithme général vu en cours. En effet, elle se
  * permet d'identifier des chemins de fuite qui deviennent prioritaires
- * sur l'objectif déterminé grâce aux valeurs d'utilité. Vous ne devez
+ * sur l'objectif déterminé grâce aux valeurs de préférence. Vous ne devez
  * pas utiliser cette approche, l'essentiel du travail doit se faire
- * lors du calcul d'utilité. Quand votre agent est en danger, il doit
+ * lors du calcul de préférence. Quand votre agent est en danger, il doit
  * bien sûr fuir mais cette fuite doit dépendre complètement de l'objectif.
  * En d'autres termes, le chemin de fuite doit l'amener à l'objectif. Ici,
  * ce n'est pas le cas (et c'est ça le problème) : quand il est en danger,
@@ -196,37 +196,37 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		}	
 		// destination courante obsolète
 		else
-		{	// on récupère les utilités par case
-			Map<AiTile,Float> utilitiesByTile = ai.utilityHandler.getPreferencesByTile();
-			// on récupère l'utilité de la destination courante
-			Float destinationUtility = utilitiesByTile.get(currentDestination);
+		{	// on récupère les préférences par case
+			Map<AiTile,Integer> preferencesByTile = ai.preferenceHandler.getPreferencesByTile();
+			// on récupère la préférence de la destination courante
+			Integer destinationPreference = preferencesByTile.get(currentDestination);
 			
 			// si la destination est obsolète, il faut la changer
-			if(destinationUtility==null)
+			if(destinationPreference==null)
 			{	changeDestination = true;
-				print("      current destination is obsolete and must be changed: destinationUtility="+destinationUtility);
+				print("      current destination is obsolete and must be changed: destinationPreference="+destinationPreference);
 			}
 		}
 		
 		if(changeDestination)
-		{	// on récupère simplement les utilités classées
-			print("      retrieve utilities");
-			Map<Float,List<AiTile>> utilitiesByValue = ai.utilityHandler.getPreferencesByValue();
-			TreeSet<Float> values = new TreeSet<Float>(utilitiesByValue.keySet());
-			HashMap<AiTile,Boolean> bombTiles = ai.utilityHandler.bombTiles;
+		{	// on récupère simplement les préférences classées
+			print("      retrieve preferences");
+			Map<Integer,List<AiTile>> preferencesByValue = ai.preferenceHandler.getPreferencesByValue();
+			TreeSet<Integer> values = new TreeSet<Integer>(preferencesByValue.keySet());
+			HashMap<AiTile,Boolean> bombTiles = ai.preferenceHandler.bombTiles;
 			
-			// on part de l'utilité maximale et on descend jusqu'à trouver une destination
-			Iterator<Float> it1 = values.descendingIterator();
+			// on part de la préférence maximale et on descend jusqu'à trouver une destination
+			Iterator<Integer> it1 = values.descendingIterator();
 			boolean goOn = true;
 			while(it1.hasNext() && goOn)
 			{	ai.checkInterruption();	
 				
-				// on récupère la valeur d'utilité
-				float utility = it1.next();
-				print("        processing utility="+utility);
+				// on récupère la valeur de préférence
+				int preference = it1.next();
+				print("        processing preference="+preference);
 			
-				// puis les cases qui possèdent cette utilité
-				List<AiTile> tiles = utilitiesByValue.get(utility);
+				// puis les cases qui possèdent cette préférence
+				List<AiTile> tiles = preferencesByValue.get(preference);
 				for(AiTile tile: tiles)
 				{	ai.checkInterruption();
 					

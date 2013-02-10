@@ -29,8 +29,10 @@ import org.totalboumboum.ai.v201314.ais._simplet.Simplet;
 
 /**
  * Cette classe représente le critère de menace envers l'adversaire.
- * Il est entier : la valeur comprise entre 0 et {@value #THREAT_LIMIT}
- * représente la distance entre la case et la cible.
+ * Il est entier : la valeur comprise entre 1 et {@value #THREAT_LIMIT}
+ * représente la distance entre la case et la cible. La valeur 1 représente
+ * une menace faible, alors que {@value #THREAT_LIMIT} correspond à une
+ * menace forte (exercée par notre agent).
  * 
  * @author Vincent Labatut
  */

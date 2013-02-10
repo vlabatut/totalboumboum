@@ -108,8 +108,8 @@ public class Simplet extends ArtificialIntelligence
 	protected TargetHandler targetHandler;
 	/** Gestionnaire chargé de calculer le mode de l'agent */
 	protected ModeHandler modeHandler;
-	/** Gestionnaire chargé de calculer les valeurs d'utilité de l'agent */
-	protected PreferenceHandler utilityHandler;
+	/** Gestionnaire chargé de calculer les valeurs de préference de l'agent */
+	protected PreferenceHandler preferenceHandler;
 	/** Gestionnaire chargé de décider si l'agent doit poser une bombe ou pas */
 	protected BombHandler bombHandler;
 	/** Gestionnaire chargé de décidé de la direction de déplacement de l'agent */
@@ -131,8 +131,8 @@ public class Simplet extends ArtificialIntelligence
 		modeHandler = new ModeHandler(this);
 		modeHandler.verbose = verbose && true;
 		
-		utilityHandler = new PreferenceHandler(this);
-		utilityHandler.verbose = verbose && true;
+		preferenceHandler = new PreferenceHandler(this);
+		preferenceHandler.verbose = verbose && true;
 		
 		bombHandler = new BombHandler(this);
 		bombHandler.verbose = verbose && true;
@@ -150,7 +150,7 @@ public class Simplet extends ArtificialIntelligence
 	@Override
 	protected AiPreferenceHandler<Simplet> getPreferenceHandler() throws StopRequestException
 	{	checkInterruption();
-		return utilityHandler;
+		return preferenceHandler;
 	}
 
 	@Override
@@ -174,6 +174,6 @@ public class Simplet extends ArtificialIntelligence
 		
 		targetHandler.updateOutput();
 		moveHandler.updateOutput();
-		utilityHandler.updateOutput();
+		preferenceHandler.updateOutput();
 	}
 }
