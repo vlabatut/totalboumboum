@@ -48,7 +48,7 @@ public final class AiCombination
 	 * Crée une nouvelle combinaison à partir
 	 * de la categorie passée en paramètre.
 	 * <br/>
-	 * Les valeurs sont à initialiser ultérieurement.
+	 * Les valeurs de chaque critère sont à initialiser ultérieurement.
 	 * 
 	 * @param category
 	 * 		La categorie associée à cette combinaison.
@@ -92,7 +92,7 @@ public final class AiCombination
 	 * @return
 	 * 		La categorie correspondant à cette combinaison.
 	 */
-	public final AiCategory getCategory()
+	public AiCategory getCategory()
 	{	return category;
 	}
 	
@@ -124,7 +124,7 @@ public final class AiCombination
 	 * @throws	IllegalArgumentException
 	 * 		La valeur associée au critère n'est pas contenue dans son domaine de validation.
 	 */
-	final <T extends ArtificialIntelligence,U>  void setCriterionValue(int index, String value) throws IllegalArgumentException
+	protected <T extends ArtificialIntelligence,U>  void setCriterionValue(int index, String value) throws IllegalArgumentException
 	{	@SuppressWarnings("unchecked")
 		AiCriterion<T,U> criterion = (AiCriterion<T,U>)criteria.get(index);
 		
@@ -155,7 +155,7 @@ public final class AiCombination
 	 * @param value
 	 * 		La valeur à affecter au critère.
 	 */
-	final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, U value) 
+	protected <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, U value) 
 	{	if(!criteria.contains(criterion))
 		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
 			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+category.getName()+"' associated to this combination ("+color+" player).");
@@ -179,7 +179,7 @@ public final class AiCombination
 	 * 		ou {@code null} si aucune valeur n'a encore
 	 * 		été associée au critère.
 	 */
-	public final Object getCriterionValue(AiCriterion<?,?> criterion)
+	public Object getCriterionValue(AiCriterion<?,?> criterion)
 	{	Object result = values.get(criterion);
 		return result;
 	}
@@ -188,7 +188,7 @@ public final class AiCombination
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public final boolean equals(Object o)
+	public boolean equals(Object o)
 	{	boolean result = false;
 		if(o!=null && o instanceof AiCombination)
 		{	AiCombination combination = (AiCombination)o;
@@ -205,7 +205,7 @@ public final class AiCombination
 	}
 	
 	@Override
-    public final int hashCode()
+    public int hashCode()
 	{	int result = toString().hashCode();
 		return result;
 	}
@@ -214,7 +214,7 @@ public final class AiCombination
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public final String toString()
+	public String toString()
 	{	StringBuffer result = new StringBuffer();
 		result.append(category.getName());
 		result.append("=(");
