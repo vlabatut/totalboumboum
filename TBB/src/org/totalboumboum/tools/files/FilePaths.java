@@ -34,9 +34,13 @@ public class FilePaths
 	{	return FileNames.FILE_RESOURCES;		
 	}
 	
-	public static String getAisPath()
+	public static String getAiPath()
 	{	return getResourcesPath() +
-			File.separator + FileNames.FILE_AI +
+		File.separator + FileNames.FILE_AI;
+	}
+	
+	public static String getAisPath()
+	{	return getAiPath() +
 			File.separator + FileNames.FILE_ORG +		
 			File.separator + FileNames.FILE_TOTALBOUMBOUM +		
 			File.separator + FileNames.FILE_AI;		
