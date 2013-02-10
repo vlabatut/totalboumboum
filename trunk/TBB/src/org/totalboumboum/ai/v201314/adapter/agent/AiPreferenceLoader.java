@@ -166,17 +166,23 @@ public class AiPreferenceLoader
 	 */
 	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void scanFolderForCriteria(File packageFolder, T ai, String errMsg) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
-	{	String folderPath = FilePaths.getAisPath()+File.separator;
-
+	{	String folderPath = FilePaths.getAiPath();
+		File temp = new File(folderPath);
+		folderPath = temp.getAbsolutePath()+File.separator;
+		
 		// get the list of criterion classes
 		{	FileFilter filter = new FileFilter()
 			{	@Override
 				public boolean accept(File file)
-				{	String name = file.getName();
-					int length = name.length();
+				{	boolean result = false;
+					String name = file.getName();
 					int extLength = FileNames.EXTENSION_CLASS.length();
-					String ext = name.substring(length-extLength,length);
-					return ext.equalsIgnoreCase(FileNames.EXTENSION_CLASS);
+					if(name.length()>extLength)
+					{	int length = name.length();
+						String ext = name.substring(length-extLength,length);
+						result = ext.equalsIgnoreCase(FileNames.EXTENSION_CLASS);
+					}
+					return result;
 				}			
 			};
 			File[] files = packageFolder.listFiles(filter);
@@ -199,7 +205,7 @@ public class AiPreferenceLoader
 				{	// create an instance
 					AiCriterion<T, ?> criterion = null;
 					try
-					{	Constructor<?> constructor = tempClass.getConstructor();
+					{	Constructor<?> constructor = tempClass.getConstructor(ai.getClass());
 						criterion = (AiCriterion<T, ?>)constructor.newInstance(ai);
 					}
 					catch (NoSuchMethodException e)
@@ -219,6 +225,7 @@ public class AiPreferenceLoader
 					try
 					{	AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)ai.getPreferenceHandler();
 						handler.insertCriterion(criterion);
+// TODO pb = handler pas encore initialisé à ce moment là...						
 					}
 					catch(IllegalArgumentException e)
 					{	throw new IllegalArgumentException(errMsg+e.getMessage());
