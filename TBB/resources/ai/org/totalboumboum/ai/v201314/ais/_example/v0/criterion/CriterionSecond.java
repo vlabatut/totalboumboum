@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v201314.ais._example.v0.Example;
  */
 public class CriterionSecond extends AiCriterionInteger<Example>
 {	/** Nom de ce critère */
-	public static final String NAME = "SECOND";
+	public static final String NAME = "SECOND_CRITERION";
 	
 	/**
 	 * Crée un nouveau critère entier.
@@ -41,7 +41,11 @@ public class CriterionSecond extends AiCriterionInteger<Example>
 	{	ai.checkInterruption();
 		int result = 2;
 		
-		// TODO à compléter par le traitement approprié
+		/*
+		 *  TODO à compléter par le traitement approprié.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 		
 		return result;
 	}

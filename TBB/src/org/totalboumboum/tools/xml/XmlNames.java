@@ -102,6 +102,7 @@ public class XmlNames
 	public static final String CONTROL = "control";
 	public static final String CONTROLS = "controls";
 	public static final String COUNT = "count";
+	public static final String CRITERIA = "criteria";
 	public static final String CRITERION = "criterion";
 	public static final String DATE = "date";
 	public static final String DATES = "dates";

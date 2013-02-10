@@ -30,7 +30,11 @@ public class ModeHandler extends AiModeHandler<Example>
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
 		
-		// TODO à compléter
+		/*
+		 *  TODO à compléter.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -40,7 +44,11 @@ public class ModeHandler extends AiModeHandler<Example>
 	protected boolean hasEnoughItems() throws StopRequestException
 	{	ai.checkInterruption();
 		
-    	// TODO à compléter
+		/*
+		 *  TODO à compléter.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 		
 		return true;
 	}
@@ -49,7 +57,11 @@ public class ModeHandler extends AiModeHandler<Example>
 	protected boolean isCollectPossible() throws StopRequestException
 	{	ai.checkInterruption();
 	
-   		// TODO à compléter
+		/*
+		 *  TODO à compléter.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 		
 		return true;
 	}
@@ -66,6 +78,10 @@ public class ModeHandler extends AiModeHandler<Example>
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// TODO à compléter, si vous voulez afficher quelque chose
+		/*
+		 *  TODO à compléter, si vous voulez afficher quelque chose.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 	}
 }

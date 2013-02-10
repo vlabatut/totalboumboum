@@ -109,7 +109,7 @@ public class Simplet extends ArtificialIntelligence
 	/** Gestionnaire chargé de calculer le mode de l'agent */
 	protected ModeHandler modeHandler;
 	/** Gestionnaire chargé de calculer les valeurs d'utilité de l'agent */
-	protected UtilityHandler utilityHandler;
+	protected PreferenceHandler utilityHandler;
 	/** Gestionnaire chargé de décider si l'agent doit poser une bombe ou pas */
 	protected BombHandler bombHandler;
 	/** Gestionnaire chargé de décidé de la direction de déplacement de l'agent */
@@ -131,7 +131,7 @@ public class Simplet extends ArtificialIntelligence
 		modeHandler = new ModeHandler(this);
 		modeHandler.verbose = verbose && true;
 		
-		utilityHandler = new UtilityHandler(this);
+		utilityHandler = new PreferenceHandler(this);
 		utilityHandler.verbose = verbose && true;
 		
 		bombHandler = new BombHandler(this);

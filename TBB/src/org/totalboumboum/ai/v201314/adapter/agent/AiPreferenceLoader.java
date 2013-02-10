@@ -27,9 +27,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -323,11 +322,11 @@ public class AiPreferenceLoader
 		}
 	
 		// read criterion list
-		List<Element> elements = root.getChildren(XmlNames.CRITERION);
-		Set<AiCriterion<?,?>> categoryCriteria = new TreeSet<AiCriterion<?,?>>();
-		for(Element element: elements)
-		{	String critName = element.getAttributeValue(XmlNames.NAME);
-			AiCriterion<T,?> crit = (AiCriterion<T,?>)(handler.getCriterion(name));
+		String criteriaStr = root.getAttributeValue(XmlNames.CRITERIA);
+		String criteriaTab[] = criteriaStr.split(" ");
+		List<AiCriterion<?,?>> categoryCriteria = new ArrayList<AiCriterion<?,?>>();
+		for(String critName: criteriaTab)
+		{	AiCriterion<T,?> crit = (AiCriterion<T,?>)(handler.getCriterion(name));
 			if(crit==null)
 				throw new IllegalArgumentException(errMsg+"criterion '"+critName+"' used in category '"+name+"' is undefined (you must first define the criterion as a class, using '"+critName+"' as its name).");
 			categoryCriteria.add(crit);
@@ -423,18 +422,13 @@ public class AiPreferenceLoader
 		AiCombination combination = new AiCombination(category);
 		
 		// get the criterion values
-		List<Element> valueElts = root.getChildren(XmlNames.VALUE);
-		for(Element valueElt: valueElts)
-		{	// get the string value
-			String criterionStr = valueElt.getAttributeValue(XmlNames.CRITERION);
-			// get the criterion
-			AiCriterion<T,?> criterion = (AiCriterion<T,?>)(handler.getCriterion(criterionStr));
-			if(criterion==null)
-				throw new IllegalArgumentException(errMsg+"criterion '"+criterionStr+"' is used in a combination, but is is undefined (you must first define the criterion as a class, using '"+criterionStr+"' as its name).");
-			// convert the string
-			String valueStr = valueElt.getValue();
+		String valuesStr = root.getAttributeValue(XmlNames.VALUES);
+		String valuesTab[] = valuesStr.split(" ");
+		for(int i=0;i<valuesTab.length;i++)
+		{	// convert the string
+			String valueStr = valuesTab[i];
 			try
-			{	combination.setCriterionValue(criterion, valueStr);
+			{	combination.setCriterionValue(i, valueStr);
 			}
 			catch(IllegalArgumentException e)
 			{	throw new IllegalArgumentException(errMsg+e.getMessage());

@@ -23,8 +23,8 @@ package org.totalboumboum.ai.v201314.adapter.agent;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -83,7 +83,7 @@ public final class AiCombination
 	/** La categorie dont dépend cette combinaison */
 	private AiCategory category;
 	/** Les critères de la categorie dont dépend cette combinaison */
-	private Set<AiCriterion<?,?>> criteria;
+	private List<AiCriterion<?,?>> criteria;
 	
 	/**
 	 * Renvoie la categorie dont
@@ -116,18 +116,17 @@ public final class AiCombination
 	 * @param <U> 
 	 * 		Classe du domaine de définition du critère.
 	 * 
-	 * @param criterion
-	 * 		Le nom du critère concerné par la valeur.
+	 * @param index
+	 * 		Le numéro du critère concerné par la valeur.
 	 * @param value
 	 * 		La valeur à affecter au critère.
 	 * 
 	 * @throws	IllegalArgumentException
-	 * 		Soit le critère spécifié n'est pas défini pour la catégorie de cette combinaison,
-	 * 		soit la valeur associée à ce critère n'est pas contenue dans son domaine de validation.
+	 * 		La valeur associée au critère n'est pas contenue dans son domaine de validation.
 	 */
-	final <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, String value) throws IllegalArgumentException
-	{	if(!criteria.contains(criterion))
-			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+category.getName()+"' associated to this combination.");
+	final <T extends ArtificialIntelligence,U>  void setCriterionValue(int index, String value) throws IllegalArgumentException
+	{	@SuppressWarnings("unchecked")
+		AiCriterion<T,U> criterion = (AiCriterion<T,U>)criteria.get(index);
 		
 		U val = criterion.convertString(value);
 		

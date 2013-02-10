@@ -21,25 +21,9 @@ import org.totalboumboum.ai.v201314.ais._example.v0.Example;
  */
 public class CriterionThird extends AiCriterionString<Example>
 {	/** Nom de ce critère */
-	public static final String NAME = "THIRD";
-	/** Valeur du domaine de définition */
-	public static final String VALUE1 = "une valeur";
-	/** Valeur du domaine de définition */
-	public static final String VALUE2 = "une autre valeur";
-	/** Valeur du domaine de définition */
-	public static final String VALUE3 = "encore une autre";
-	/** Valeur du domaine de définition */
-	public static final String VALUE4 = "et puis une autre";
-	/** Valeur du domaine de définition */
-	public static final String VALUE5 = "et enfin une dernière";
+	public static final String NAME = "THIRD_CRITERION";
 	/** Domaine de définition */
-	public static final Set<String> DOMAIN = new TreeSet<String>(Arrays.asList
-	(	VALUE1,
-		VALUE2,
-		VALUE3,
-		VALUE4,
-		VALUE5
-	));
+	public static final Set<String> DOMAIN = new TreeSet<String>(Arrays.asList("VALUE1","VALUE2","VALUE3","VALUE4","VALUE5"));
 	
 	/**
 	 * Crée un nouveau critère entier.
@@ -61,9 +45,13 @@ public class CriterionThird extends AiCriterionString<Example>
 	@Override
 	public String processValue(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
-		String result = VALUE3;
+		String result = DOMAIN.iterator().next(); // on renvoie une valeur arbitraire, pour l'exemple
 		
-		// TODO à compléter par le traitement approprié
+		/*
+		 *  TODO à compléter par le traitement approprié.
+		 *  
+		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
+		 */
 		
 		return result;
 	}

@@ -1,21 +1,23 @@
 package org.totalboumboum.ai.v201314.ais._example.v0;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
+import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.adapter.path.AiPath;
-import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Classe gérant le déplacement de l'agent.
- * Cf. la documentation de {@link AiMoveHandler} pour plus de détails.
+ * Classe gérant le calcul des valeurs de préférence de l'agent.
+ * Cf. la documentation de {@link AiPreferenceHandler} pour plus de détails.
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class MoveHandler extends AiMoveHandler<Example>
+public class PreferenceHandler extends AiPreferenceHandler<Example>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -26,13 +28,13 @@ public class MoveHandler extends AiMoveHandler<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected MoveHandler(Example ai) throws StopRequestException
+	protected PreferenceHandler(Example ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = true;
-		
+	
 		/*
 		 *  TODO à compléter.
 		 *  
@@ -41,51 +43,57 @@ public class MoveHandler extends AiMoveHandler<Example>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DESTINATION				/////////////////////////////////////
+	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected AiTile updateCurrentDestination() throws StopRequestException
+	protected void resetCustomData() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		/*
-		 *  TODO à compléter.
+		 *  TODO à surcharger si nécessaire, pour réinitialiser certaines structures de données à chaque itération.
 		 *  
 		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
 		 */
 		
-		return null;
+		// cf. la Javadoc dans AiPreferenceHandler pour une description de la méthode
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PATH						/////////////////////////////////////
+	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected AiPath updateCurrentPath() throws StopRequestException
+	protected Set<AiTile> selectTiles() throws StopRequestException
 	{	ai.checkInterruption();
+		Set<AiTile> result = new TreeSet<AiTile>();
 		
 		/*
-		 *  TODO à compléter.
+		 *  TODO à compléter afin de sélectionner les cases dont on veut calculer la préférence.
 		 *  
 		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
 		 */
+	
+		// cf. la Javadoc dans AiPreferenceHandler pour une description de la méthode
 		
-		return null;
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DIRECTION				/////////////////////////////////////
+	// CATEGORY					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected Direction updateCurrentDirection() throws StopRequestException
+	protected AiCategory identifyCategory(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
+		AiCategory result = null;
 		
 		/*
-		 *  TODO à compléter.
+		 *  TODO à compléter pour identifier le catégorie associée à la case passée en paramètre.
 		 *  
 		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
 		 */
 		
-		return Direction.NONE;
+		// cf. la Javadoc dans AiPreferenceHandler pour une description de la méthode
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

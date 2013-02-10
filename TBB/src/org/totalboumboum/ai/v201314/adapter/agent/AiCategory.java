@@ -21,10 +21,10 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -68,7 +68,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * @throws IllegalArgumentException
 	 * 		Si le même critère apparaît plusieurs fois.
 	 */
-	public AiCategory(String name, Set<AiCriterion<?,?>> criteria)
+	public AiCategory(String name, List<AiCriterion<?,?>> criteria)
 	{	this.name = name;
 		initCriteria(criteria);
 	}
@@ -93,9 +93,9 @@ public final class AiCategory implements Comparable<AiCategory>
 	// CRITERIA			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Les critères servant à décrire cette catégorie */
-	private final Set<AiCriterion<?,?>> criteria = new TreeSet<AiCriterion<?,?>>();
+	private final List<AiCriterion<?,?>> criteria = new ArrayList<AiCriterion<?,?>>();
 	/** Version immuable de l'ensemble de critères */
-	private final Set<AiCriterion<?,?>> externalCriteria = Collections.unmodifiableSet(criteria);
+	private final List<AiCriterion<?,?>> externalCriteria = Collections.unmodifiableList(criteria);
 	
 	/**
 	 * Renvoie l'ensemble des critères nécessaires
@@ -108,7 +108,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * @return
 	 * 		L'ensemble des critères décrivant cette catégorie.
 	 */
-	public final Set<AiCriterion<?,?>> getCriteria()
+	public final List<AiCriterion<?,?>> getCriteria()
 	{	return externalCriteria;
 	}
 
@@ -126,7 +126,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * @throws IllegalArgumentException
 	 * 		Si  un critère apparait deux fois.
 	 */
-	private void initCriteria(Set<AiCriterion<?,?>> criteria) throws IllegalArgumentException
+	private void initCriteria(List<AiCriterion<?,?>> criteria) throws IllegalArgumentException
 	{	for(AiCriterion<?,?> criterion: criteria)
 		{	if(this.criteria.contains(criterion))
 				throw new IllegalArgumentException("Trying to add criterion '"+criterion.getName()+"' twice while defining category '"+name+"' (each criterion must appear at most once).");
