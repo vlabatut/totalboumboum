@@ -85,7 +85,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * @return
 	 * 		Le nom de cette catégorie.
 	 */
-	public final String getName()
+	public String getName()
 	{	return name;
 	}
 	
@@ -98,22 +98,23 @@ public final class AiCategory implements Comparable<AiCategory>
 	private final List<AiCriterion<?,?>> externalCriteria = Collections.unmodifiableList(criteria);
 	
 	/**
-	 * Renvoie l'ensemble des critères nécessaires
-	 * pour décrire cette catégorie.
+	 * Renvoie la liste des critères nécessaires
+	 * pour décrire cette catégorie, dans l'ordre de
+	 * leur définition.
 	 * <br/>
-	 * <b>Attention :</b> l'ensemble renvoyé par cette méthode 
+	 * <b>Attention :</b> la liste renvoyé par cette méthode 
 	 * ne doit pas être modifié par l'agent. Toute tentative
 	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		L'ensemble des critères décrivant cette catégorie.
 	 */
-	public final List<AiCriterion<?,?>> getCriteria()
+	public List<AiCriterion<?,?>> getCriteria()
 	{	return externalCriteria;
 	}
 
 	/**
-	 * Initialise l'ensemble des critères de cette catégorie.
+	 * Initialise la liste des critères de cette catégorie.
 	 * <br/>
 	 * <b>Attention </b>: chaque critère
 	 * ne peut apparaître qu'une seule fois
@@ -151,7 +152,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public final AiCombination processCombination(AiTile tile) throws StopRequestException
+	public AiCombination processCombination(AiTile tile) throws StopRequestException
 	{	AiCombination result = new AiCombination(this);
 		for(AiCriterion<?,?> criterion: criteria)
 			processCombinationCriterion(criterion,tile,result);
@@ -176,7 +177,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	private final <T extends ArtificialIntelligence, U> 
+	private <T extends ArtificialIntelligence, U> 
 		void processCombinationCriterion(AiCriterion<T,U> criterion, AiTile tile, AiCombination result) 
 		throws StopRequestException
 	{	U value = criterion.fetchValue(tile);
@@ -187,7 +188,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public final boolean equals(Object o)
+	public boolean equals(Object o)
 	{	boolean result = false;
 		if(o!=null && o instanceof AiCategory)
 		{	AiCategory category = (AiCategory)o;
@@ -197,13 +198,13 @@ public final class AiCategory implements Comparable<AiCategory>
 	}
 
 	@Override
-	public final int compareTo(AiCategory category)
+	public int compareTo(AiCategory category)
 	{	int result = name.compareTo(category.getName());
 		return result;
 	}
 	
 	@Override
-    public final int hashCode()
+    public int hashCode()
 	{	int result = getName().hashCode();
 		return result;
 	}
@@ -212,7 +213,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public final String toString()
+	public String toString()
 	{	StringBuffer result = new StringBuffer();
 		result.append(name);
 		result.append("=(");

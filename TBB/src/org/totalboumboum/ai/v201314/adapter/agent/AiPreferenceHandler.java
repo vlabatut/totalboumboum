@@ -77,11 +77,6 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de 
 	 * celle-ci, grâce au mot-clé {@code super}.
-	 * <br/>
-	 * A la différence des autres gestionnaires, l'initisation
-	 * est réalisée dans une méthode séparée, qu'il faut penser
-	 * à appeler avoir créé l'object. Il s'agit de la méthode
-	 * {@link #init()}.
 	 * 
 	 * @param ai	
 	 * 		L'agent que cette classe doit gérer.
@@ -90,58 +85,6 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
     {	super(ai);
     }
 	
-	/**
-	 * Initialise le gestionnaire de préférence, en créant
-	 * les structures nécessaires ainsi que les catégories,
-	 * critères et combinaisons.
-	 * <br/>
-	 * Pour des raisons techniques, ces opérations
-	 * ne peuvent pas être faites à l'instanciation
-	 * de l'objet. Cette méthode est appelée automatique,
-	 * vous (le concepteur de l'agent) ne devez pas l'invoquer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
-	 */
-	final void init() throws StopRequestException
-	{	print("    init preference handler");
-   
-//		// on initialise les maps de réference (vides pour l'instant)
-//		createReference();
-//		
-//    	// on initialise les critères une fois pour toutes
-//		{	long before = print("    > Entering initCriteria");
-//	    	initCriteria();
-//			long after = ai.getCurrentTime();
-//			long elapsed = after - before;
-//			print("    < Exiting initCriteria duration="+elapsed);
-//		}
-//		
-//    	// on initialise les cas une fois pour toutes
-//		{	long before = print("    > Entering initCases");
-//			initCases();
-//			long after = ai.getCurrentTime();
-//			long elapsed = after - before;
-//			print("    < Exiting initCases duration="+elapsed);
-//		}
-//		
-//    	// on initialise les préférences de réference une fois pour toutes
-//		{	long before = print("    > Entering initReference");
-//			initReferenceUtilities();
-//			long after = ai.getCurrentTime();
-//			long elapsed = after - before;
-//			print("    < Exiting initReference duration="+elapsed);
-//		}
-//		
-//		// on calcule les préférences maximales une fois pour toutes
-//		{	long before = print("    > Entering initMaxPreferences");
-//    		initMaxPreferences();
-//			long after = ai.getCurrentTime();
-//			long elapsed = after - before;
-//			print("    < Exiting initMaxPreferences duration="+elapsed);
-//		}
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -188,29 +131,41 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	/////////////////////////////////////////////////////////////////
 	/** Map contenant les valeurs de préférences (seulement pour les cases sélectionnées) */
 	private final Map<AiTile,Integer> preferencesByTile = new HashMap<AiTile,Integer>();
+	/** Version immuable de la map des préférences */
+	private final Map<AiTile,Integer> externalPreferencesByTile = Collections.unmodifiableMap(preferencesByTile);
 	/** Map contenant les cases rangées par valeur de préférence */
 	private final Map<Integer,List<AiTile>> preferencesByValue = new HashMap<Integer,List<AiTile>>();
+	/** Version immuable de la map des préférences */
+	private final Map<Integer,List<AiTile>> externalPreferencesByValue = Collections.unmodifiableMap(preferencesByValue);
 
 	/**
 	 * Renvoie les préférences courantes, rangées par case.
 	 * Ces valeurs sont recalculées à chaque itération.
+	 * <br/>
+	 * <b>Attention :</b> la map renvoyé par cette méthode 
+	 * ne doit pas être modifié par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		Une map contenant les préférences rangées par case.
 	 */
 	public final Map<AiTile, Integer> getPreferencesByTile()
-	{	return preferencesByTile;
+	{	return externalPreferencesByTile;
 	}
 
 	/**
 	 * Renvoie les préférences courantes, rangées par valeur.
 	 * Ces valeurs sont recalculées à chaque itération.
+	 * <br/>
+	 * <b>Attention :</b> la map renvoyé par cette méthode 
+	 * ne doit pas être modifié par l'agent. Toute tentative
+	 * de modification provoquera une {@link UnsupportedOperationException}.
 	 * 
 	 * @return
 	 * 		Une map contenant les préférences rangées par valeur.
 	 */
 	public final Map<Integer, List<AiTile>> getPreferencesByValue()
-	{	return preferencesByValue;
+	{	return externalPreferencesByValue;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -311,7 +266,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	private final Map<String,AiCriterion<T,?>> criterionMap = new HashMap<String,AiCriterion<T,?>>();
 
 	/**
-	 * Ajoute un nouveau critère à la map.
+	 * Ajoute un nouveau critère à la map. Pour un agent donné,
+	 * deux critères ne doivent pas avoir le même nom.
 	 * <br/>
 	 * Cette méthode est destinée à un usage interne,
 	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
@@ -353,7 +309,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	private final Map<String,AiCategory> categoryMap = new HashMap<String,AiCategory>();
 	
 	/**
-	 * Ajoute une nouvelle catégorie à la map.
+	 * Ajoute une nouvelle catégorie à la map. Deux
+	 * catégories ne peuvent pas avoir le même nom
+	 * (du moins pour un agent donné). 
 	 * <br/>
 	 * Cette méthode est destinée à un usage interne,
 	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
@@ -459,7 +417,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * première combinaison insérée étant la préférée.
 	 * <br/>
 	 * Si la combinaison a déjà été insérée pour ce mode, alors une
-	 * {@link IllegalArgumentException} est levée.
+	 * {@link IllegalArgumentException} est levée. En effet, la même
+	 * combinaison ne peut pas avoir deux valeurs de préférence différentes.
 	 * <br/>
 	 * Cette méthode est destinée à un usage interne,
 	 * vous (le concepteur de l'agent) n'avez (a priori)

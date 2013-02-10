@@ -360,7 +360,6 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		
 		// initialisation des gestionnaires
 		initHandlers();
-		getPreferenceHandler().init(); // l'initialisation de ce gestionnaire doit être terminée après sa création
 		
 		// autres initialisations
 		initOthers();
@@ -638,7 +637,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
  * 		x cas/caze >> catégorie
  * 		x scanner toutes les classes à la recherche de TODOs
  * 		x adapter les classes agent de démo
- * 		- que faire de init() dans AiPreferenceHandler
- * 		- revoir les modes d'acces des méthodes, en particulier pour le gestionnaire de préférences
- * 		- voir si les coms sur les contraintes d'unicité sont toujours valides
+ * 		x que faire de init() dans AiPreferenceHandler
+ * 		x revoir les modes d'acces des méthodes, en particulier pour le gestionnaire de préférences
+ * 		x voir si les coms sur les contraintes d'unicité sont toujours valides
  */
