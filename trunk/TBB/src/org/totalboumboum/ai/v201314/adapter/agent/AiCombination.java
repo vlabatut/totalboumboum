@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -59,22 +60,6 @@ public final class AiCombination
 		
 		// les critères de la categorie
 		criteria = category.getCriteria();
-	}
-	
-	/**
-	 * Crée une nouvelle combinaison qui est une 
-	 * copie de celle passée en paramètre.
-	 * <br/>
-	 * Note : les valeurs contenues ne sont pas duppliquées
-	 * (les objets existants sont réutilisés).
-	 * 
-	 * @param combination
-	 * 		La combinaison à recopier.
-	 */
-	public AiCombination(AiCombination combination)
-	{	category = combination.category;
-		criteria = combination.criteria;
-		values.putAll(combination.values);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -155,7 +140,7 @@ public final class AiCombination
 	 * @param value
 	 * 		La valeur à affecter au critère.
 	 */
-	protected <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, U value) 
+	protected <T extends ArtificialIntelligence,U>  void setCriterionValue(AiCriterion<T,U> criterion, U value)
 	{	if(!criteria.contains(criterion))
 		{	PredefinedColor color = criterion.ai.getZone().getOwnHero().getColor();
 			throw new IllegalArgumentException("The specified criterion '"+criterion.getName()+"' is not defined for the category '"+category.getName()+"' associated to this combination ("+color+" player).");
@@ -210,6 +195,38 @@ public final class AiCombination
 		return result;
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Réalise une copie de cette combinaison,
+	 * en utilisant les critères et catégories passés 
+	 * en paramètres au lieu des originaux.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param categoryMap
+	 * 		Map des catégories à utiliser.
+	 * @return
+	 * 		Copie de cette combinaison, utilisant les nouveaux critères et catégories.
+	 */
+	protected <T extends ArtificialIntelligence> AiCombination clone(Map<String,AiCategory> categoryMap)
+	{	// create new combination
+		String name = category.getName();
+		AiCategory cat = categoryMap.get(name);
+		AiCombination result = new AiCombination(cat);
+		
+		// add values
+		for(Entry<AiCriterion<?,?>,Object> entry: values.entrySet())
+		{	AiCriterion<?,?> criterion = entry.getKey();
+			int index = criteria.indexOf(criterion);
+			Object value = entry.getValue();
+			result.setCriterionValue(index, value.toString());
+		}
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
