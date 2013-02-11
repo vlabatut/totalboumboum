@@ -83,6 +83,22 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 */
 	protected AiPreferenceHandler(T ai)
     {	super(ai);
+    	
+    	// initialise la map de référence
+    	List<AiCombination> list = new ArrayList<AiCombination>();
+    	referencePreferences.put(AiMode.COLLECTING,list);
+    	referencePreferences.put(AiMode.ATTACKING,list);
+    	
+    	
+    	
+    
+// TODO pb: le loader utilise le même constructeur    
+    	// on initialise les préférences à partir de ce qui avait déjà été chargé
+    	@SuppressWarnings("unchecked")
+		AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)AiPreferenceLoader.getHandler(ai);
+    	initCriteria(handler);
+    	initCategories(handler);
+    	initReference(handler);
     }
 	
 	/////////////////////////////////////////////////////////////////
@@ -302,6 +318,35 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		return result;
 	}
 	
+	/**
+	 * Initialise la map de critères en utilisant ceux
+	 * déjà présents dans le gestionnaire passé en paramètre.
+	 * Ce gestionnaire est le résultat du chargement effectué
+	 * dans la classe {@link AiPreferenceLoader}.
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
+	 * 
+	 * @param handler
+	 * 		Gestionnaire utilisé lors du chargement.
+	 */
+	private void initCriteria(AiPreferenceHandler<T> handler)
+	{	Map<String,AiCriterion<T,?>> crits = handler.criterionMap;
+		for(Entry<String,AiCriterion<T,?>> entry: crits.entrySet())
+		{	String name = entry.getKey();
+			AiCriterion<T,?> criterion = entry.getValue();
+			AiCriterion<T, ?> copy = null;
+			try
+			{	copy = criterion.clone(ai);
+			}
+			catch (StopRequestException e)
+			{	// théoriquement impossible
+				e.printStackTrace();
+			}
+			criterionMap.put(name,copy);
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CATEGORIES	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -366,6 +411,28 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	protected abstract AiCategory identifyCategory(AiTile tile) throws StopRequestException;
+
+	/**
+	 * Initialise la map de catégories en utilisant celles
+	 * déjà présentes dans le gestionnaire passé en paramètre.
+	 * Ce gestionnaire est le résultat du chargement effectué
+	 * dans la classe {@link AiPreferenceLoader}.
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
+	 * 
+	 * @param handler
+	 * 		Gestionnaire utilisé lors du chargement.
+	 */
+	private void initCategories(AiPreferenceHandler<T> handler)
+	{	Map<String,AiCategory> cats = handler.categoryMap;
+		for(Entry<String,AiCategory> entry: cats.entrySet())
+		{	String name = entry.getKey();
+			AiCategory category = entry.getValue();
+			AiCategory copy = category.clone(criterionMap);
+			categoryMap.put(name,copy);
+		}
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// REFERENCE		/////////////////////////////////////////////
@@ -439,6 +506,31 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		list.add(combination);
 	}
 	
+	/**
+	 * Initialise la map de préférences de référence en utilisant celle
+	 * déjà présentes dans le gestionnaire passé en paramètre.
+	 * Ce gestionnaire est le résultat du chargement effectué
+	 * dans la classe {@link AiPreferenceLoader}.
+	 * <br/>
+	 * Cette méthode est destinée à un usage interne,
+	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
+	 * 
+	 * @param handler
+	 * 		Gestionnaire utilisé lors du chargement.
+	 */
+	private void initReference(AiPreferenceHandler<T> handler)
+	{	Map<AiMode, List<AiCombination>> ref = handler.referencePreferences;
+		for(Entry<AiMode,List<AiCombination>> entry: ref.entrySet())
+		{	AiMode mode = entry.getKey();
+			List<AiCombination> combinations = entry.getValue();
+			List<AiCombination> combis = referencePreferences.get(mode);
+			for(AiCombination combination: combinations)
+			{	AiCombination copy = combination.clone(categoryMap);
+				combis.add(copy);
+			}
+		}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

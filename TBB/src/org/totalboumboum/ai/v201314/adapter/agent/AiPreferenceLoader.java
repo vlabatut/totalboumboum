@@ -28,12 +28,16 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.tools.classes.ClassTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -48,7 +52,30 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  */
 public class AiPreferenceLoader
-{
+{	
+    /////////////////////////////////////////////////////////////////
+	// HANDLERS					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map utilisée pour stocker les préférences des agents chargés */
+	private static final Map<Class<?>,AiPreferenceHandler<?>> handlers = new HashMap<Class<?>, AiPreferenceHandler<?>>();
+	
+	/**
+	 * Renvoie le gestionnaire pour la classe de l'agent spécifiée.
+	 * 
+	 * @param ai
+	 * 		Agent à traiter.
+	 * @return
+	 * 		Le gestionnaire de préférence correspondant.
+	 */
+	static AiPreferenceHandler<?> getHandler(ArtificialIntelligence ai)
+	{	Class<?> clazz = ai.getClass();
+		AiPreferenceHandler<?> result = handlers.get(clazz);
+		return result;
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// LOADING					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Charge les préférences d'un agent,
 	 * stockés dans un fichier XML.
@@ -80,21 +107,38 @@ public class AiPreferenceLoader
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 */
 	public static <T extends ArtificialIntelligence> void loadAiPreferences(String packName, String aiName, T ai) throws ParserConfigurationException, SAXException, IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
-	{	// error message prefix
-		String errMsg = "Error while loading agent "+packName+"/"+aiName+": ";
+	{	// check if already loaded
+		if(getHandler(ai)==null)
+		{	// set dummy handler
+			AiPreferenceHandler<T> handler = new AiPreferenceHandler<T>(ai)
+			{	@Override
+				protected Set<AiTile> selectTiles() throws StopRequestException
+				{	return null;
+				}
 
-		// agent path
-		String agentPath = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName;
-		
-		// init criteria
-		initCriteria(agentPath, ai, errMsg);
-		
-		// load xml file
-		File dataFile = new File(agentPath+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_XML);
-		String schemaFolder = FilePaths.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		loadPreferencesElement(root, ai, errMsg);
+				@Override
+				protected AiCategory identifyCategory(AiTile tile) throws StopRequestException
+				{	return null;
+				}	
+			};
+			handlers.put(ai.getClass(),handler);
+			
+			// set error message prefix
+			String errMsg = "Error while loading agent "+packName+"/"+aiName+": ";
+	
+			// agent path
+			String agentPath = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName;
+			
+			// init criteria
+			initCriteria(agentPath, ai, errMsg);
+			
+			// load xml file
+			File dataFile = new File(agentPath+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_XML);
+			String schemaFolder = FilePaths.getSchemasPath();
+			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_SCHEMA);
+			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+			loadPreferencesElement(root, ai, errMsg);
+		}
 	}
 	
 	/**
@@ -223,16 +267,11 @@ public class AiPreferenceLoader
 
 					// insert criterion in agent
 					try
-					{	AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)ai.getPreferenceHandler();
+					{	AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
 						handler.insertCriterion(criterion);
-// TODO pb = handler pas encore initialisé à ce moment là...						
 					}
 					catch(IllegalArgumentException e)
 					{	throw new IllegalArgumentException(errMsg+e.getMessage());
-					}
-					catch (StopRequestException e)
-					{	// theoretically impossible during loading
-						e.printStackTrace();
 					}
 				}
 			}
@@ -317,16 +356,8 @@ public class AiPreferenceLoader
 	private static <T extends ArtificialIntelligence> void loadCategoryElement(Element root, T ai, String errMsg)
 	{	// retrieve the category name
 		String name = root.getAttributeValue(XmlNames.NAME);
-
 		// get the preference handler
-		AiPreferenceHandler<T> handler = null;
-		try
-		{	handler = (AiPreferenceHandler<T>)ai.getPreferenceHandler();
-		}
-		catch (StopRequestException e1)
-		{	// theoretically impossible here
-			e1.printStackTrace();
-		}
+		AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
 	
 		// read criterion list
 		String criteriaStr = root.getAttributeValue(XmlNames.CRITERIA);
@@ -412,14 +443,7 @@ public class AiPreferenceLoader
 	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void loadCombinationElement(Element root, AiMode mode, T ai, String errMsg)
 	{	// get the preference handler
-		AiPreferenceHandler<T> handler = null;
-		try
-		{	handler = (AiPreferenceHandler<T>)ai.getPreferenceHandler();
-		}
-		catch (StopRequestException e1)
-		{	// theoretically impossible here
-			e1.printStackTrace();
-		}
+		AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
 		
 		// get the category
 		String categoryStr = root.getAttributeValue(XmlNames.CATEGORY);

@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * 
  */
 
+import java.lang.reflect.Constructor;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -96,7 +97,7 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	{	this.name = name;
 		this.ai = ai;
 	}
-
+	
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -261,6 +262,40 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 		return result;
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Réalise une copie de ce critère,
+	 * en utilisant l'agent passé en paramètre
+	 * au lieu de l'agent original.
+	 * 
+	 * @param ai
+	 * 		Nouvel agent à utiliser pour créer le nouveau critère.
+	 * @return
+	 * 		Une copie de ce critère utilisant le nouvel agent.
+	 * 
+	 * @throws StopRequestException 
+	 * 		Pour des raisons d'héritage.
+	 */
+	@SuppressWarnings("unchecked")
+	protected AiCriterion<T,U> clone(T ai) throws StopRequestException
+	{	AiCriterion<T,U> result = null;
+	
+		try
+		{	Class<?> clazz = getClass();
+			Constructor<?> constructor = clazz.getConstructor(ai.getClass());
+			result = (AiCriterion<T, U>)constructor.newInstance(ai);
+		}
+		catch(Exception e)
+		{	// théoriquement, aucune exception ne devrait se produire ici:
+			// s'il existe un problème, il doit survenir lors du chargement
+			e.printStackTrace();
+		}
+	
+		return result;
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

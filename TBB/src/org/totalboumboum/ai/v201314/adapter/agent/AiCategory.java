@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -210,6 +211,32 @@ public final class AiCategory implements Comparable<AiCategory>
 	}
 
     /////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Réalise une copie de cette catégorie,
+	 * en utilisant les critères passés en paramètre
+	 * au lieu des originaux.
+	 * 
+	 * @param <T> 
+	 * 		Classe de l'agent concerné.
+	 * @param criterionMap
+	 * 		Map des critères à utiliser.
+	 * @return
+	 * 		Copie de cette catégorie, utilisant les nouveaux critères.
+	 */
+	protected <T extends ArtificialIntelligence> AiCategory clone(Map<String,AiCriterion<T,?>> criterionMap)
+	{	List<AiCriterion<?,?>> crits = new ArrayList<AiCriterion<?,?>>();
+		for(AiCriterion<?,?> criterion: criteria)
+		{	String name = criterion.getName();
+			AiCriterion<?,?> crit = criterionMap.get(name);
+			crits.add(crit);
+		}
+		AiCategory result = new AiCategory(name, crits);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
