@@ -751,6 +751,11 @@ public class Launcher
 	 *  - quitter       : une croix (comme pour fermer une fenêtre) ou l'icone "quitter" du tournoi (?)
 	 */
 
+	/*
+	 * TODO faire apparaitre les données en cours de jeu (F-x) 
+	 * en faisant une animation, genre le bazard sort du bord de l'écran. 
+	 */
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // NETWORK - RÉSEAU		//////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1621,8 +1626,6 @@ public class Launcher
 	
 	// TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
 	
-	// TODO faire apparaitre les données en cours de jeu (F-x) en faisant une animation
-	// genre le bazard sort du bord de l'écran.
 	
 	/**
 	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
@@ -1632,10 +1635,6 @@ public class Launcher
 	 * 		x rajouter la modif sur le throughwall des items
 	 * 		x adapter les traj des bombes 
 	 */
-
-// TODO utilité dans fichier xml + juste l'ordre, pas les valeurs. parler donc plutot de préférences ?
-// TODO du cp, utiliser une liste de liste plutot qu'une map.
-// TODO cette map doit etre statique, car c'est la meme pr toutes les instances de l'agent.
 
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
 // TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
