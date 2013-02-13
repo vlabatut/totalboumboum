@@ -82,18 +82,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * 		L'agent que cette classe doit gérer.
 	 */
 	protected AiPreferenceHandler(T ai)
-    {	super(ai);
-    	
-    	// initialise la map de référence
-    	List<AiCombination> list = new ArrayList<AiCombination>();
-    	referencePreferences.put(AiMode.COLLECTING,list);
-    	referencePreferences.put(AiMode.ATTACKING,list);
-    	
-    	
-    	
-    
-// TODO pb: le loader utilise le même constructeur    
-    	// on initialise les préférences à partir de ce qui avait déjà été chargé
+	{   super(ai);
+	
+		// on initialise les préférences à partir de ce qui avait déjà été chargé
     	@SuppressWarnings("unchecked")
 		AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)AiPreferenceLoader.getHandler(ai);
     	initCriteria(handler);
@@ -101,6 +92,26 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
     	initReference(handler);
     }
 	
+	/**
+	 * Construit un gestionnaire pour l'agent passé en paramètre.
+	 * Cette méthode est utilisée par l'API lors du chargement
+	 * des préférences de l'agent.
+	 * 
+	 * @param ai	
+	 * 		L'agent que cette classe doit gérer.
+	 * @param flag 
+	 * 		Paramètre utilisé seulement pour distinguer les constructeurs (bidouille).
+	 */
+	protected AiPreferenceHandler(T ai, boolean flag)
+    {	super(ai);
+    	
+    	// initialise la map de référence
+    	List<AiCombination> list = new ArrayList<AiCombination>();
+    	referencePreferences.put(AiMode.COLLECTING,list);
+    	list = new ArrayList<AiCombination>();
+    	referencePreferences.put(AiMode.ATTACKING,list);
+    }
+    	
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -523,7 +534,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		for(Entry<AiMode,List<AiCombination>> entry: ref.entrySet())
 		{	AiMode mode = entry.getKey();
 			List<AiCombination> combinations = entry.getValue();
-			List<AiCombination> combis = referencePreferences.get(mode);
+			List<AiCombination> combis = new ArrayList<AiCombination>();
+			referencePreferences.put(mode,combis);
 			for(AiCombination combination: combinations)
 			{	AiCombination copy = combination.clone(categoryMap);
 				combis.add(copy);

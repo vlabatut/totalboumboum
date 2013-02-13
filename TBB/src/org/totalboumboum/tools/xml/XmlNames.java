@@ -78,8 +78,8 @@ public class XmlNames
 	public static final String CASE = "case";
 	public static final String CACHE = "cache";
 	public static final String CACHE_LIMIT = "cacheLimit";
-	public static final String CATEGORY = "category<";
-	public static final String CATEGORIES = "categories<";
+	public static final String CATEGORY = "category";
+	public static final String CATEGORIES = "categories";
 	public static final String CENTRAL = "central";
 	public static final String CHARACTER = "character";
 	public static final String COL = "col";

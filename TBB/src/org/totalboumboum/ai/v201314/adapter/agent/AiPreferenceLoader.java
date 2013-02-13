@@ -89,6 +89,8 @@ public class AiPreferenceLoader
 	 * @param ai
 	 * 		Objet représentant l'agent concerné.
 	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
 	 * @throws ParserConfigurationException
 	 * 		Problème lors de l'accès au fichier XML.
 	 * @throws SAXException
@@ -106,11 +108,11 @@ public class AiPreferenceLoader
 	 * @throws NoSuchMethodException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 */
-	public static <T extends ArtificialIntelligence> void loadAiPreferences(String packName, String aiName, T ai) throws ParserConfigurationException, SAXException, IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+	public static <T extends ArtificialIntelligence> void loadAiPreferences(String packName, String aiName, T ai) throws IllegalArgumentException, ParserConfigurationException, SAXException, IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
 	{	// check if already loaded
 		if(getHandler(ai)==null)
 		{	// set dummy handler
-			AiPreferenceHandler<T> handler = new AiPreferenceHandler<T>(ai)
+			AiPreferenceHandler<T> handler = new AiPreferenceHandler<T>(ai,true)
 			{	@Override
 				protected Set<AiTile> selectTiles() throws StopRequestException
 				{	return null;
@@ -156,6 +158,8 @@ public class AiPreferenceLoader
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
 	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws IllegalAccessException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws InvocationTargetException 
@@ -169,7 +173,7 @@ public class AiPreferenceLoader
 	 * @throws FileNotFoundException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 */
-	private static <T extends ArtificialIntelligence> void initCriteria(String agentPath, T ai, String errMsg) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+	private static <T extends ArtificialIntelligence> void initCriteria(String agentPath, T ai, String errMsg) throws IllegalArgumentException, NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
 	{	// get the agent main folder
 		File agentFolder = new File(agentPath);
 		if(!agentFolder.exists())
@@ -195,6 +199,8 @@ public class AiPreferenceLoader
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
 	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws IllegalAccessException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws InvocationTargetException 
@@ -209,7 +215,7 @@ public class AiPreferenceLoader
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 */
 	@SuppressWarnings("unchecked")
-	private static <T extends ArtificialIntelligence> void scanFolderForCriteria(File packageFolder, T ai, String errMsg) throws NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+	private static <T extends ArtificialIntelligence> void scanFolderForCriteria(File packageFolder, T ai, String errMsg) throws IllegalArgumentException, NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
 	{	String folderPath = FilePaths.getAiPath();
 		File temp = new File(folderPath);
 		folderPath = temp.getAbsolutePath()+File.separator;
@@ -306,8 +312,11 @@ public class AiPreferenceLoader
 	 * 		Objet représentant l'agent.
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		S'il y a un problème avec les critères, cas ou combinaisons.
 	 */
-	private static <T extends ArtificialIntelligence> void loadPreferencesElement(Element root, T ai, String errMsg)
+	private static <T extends ArtificialIntelligence> void loadPreferencesElement(Element root, T ai, String errMsg) throws IllegalArgumentException
 	{	// load categories
 		Element categoriesElt = root.getChild(XmlNames.CATEGORIES);
 		loadCategoriesElement(categoriesElt,ai,errMsg);
@@ -329,8 +338,11 @@ public class AiPreferenceLoader
 	 * 		Objet représentant l'agent.
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		S'il y a un problème avec les critères.
 	 */
-	private static <T extends ArtificialIntelligence> void loadCategoriesElement(Element root, T ai, String errMsg)
+	private static <T extends ArtificialIntelligence> void loadCategoriesElement(Element root, T ai, String errMsg) throws IllegalArgumentException
 	{	@SuppressWarnings("unchecked")
 		List<Element> elements = root.getChildren(XmlNames.CATEGORY);
 		for(Element element: elements)
@@ -350,10 +362,12 @@ public class AiPreferenceLoader
 	 * 		Objet représentant l'agent.
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		S'il y a un problème avec les critères.
 	 */
-	// IllegalArgumentException
 	@SuppressWarnings("unchecked")
-	private static <T extends ArtificialIntelligence> void loadCategoryElement(Element root, T ai, String errMsg)
+	private static <T extends ArtificialIntelligence> void loadCategoryElement(Element root, T ai, String errMsg) throws IllegalArgumentException
 	{	// retrieve the category name
 		String name = root.getAttributeValue(XmlNames.NAME);
 		// get the preference handler
@@ -364,7 +378,7 @@ public class AiPreferenceLoader
 		String criteriaTab[] = criteriaStr.split(" ");
 		List<AiCriterion<?,?>> categoryCriteria = new ArrayList<AiCriterion<?,?>>();
 		for(String critName: criteriaTab)
-		{	AiCriterion<T,?> crit = (AiCriterion<T,?>)(handler.getCriterion(name));
+		{	AiCriterion<T,?> crit = (AiCriterion<T,?>)handler.getCriterion(critName);
 			if(crit==null)
 				throw new IllegalArgumentException(errMsg+"criterion '"+critName+"' used in category '"+name+"' is undefined (you must first define the criterion as a class, using '"+critName+"' as its name).");
 			categoryCriteria.add(crit);
@@ -393,8 +407,11 @@ public class AiPreferenceLoader
 	 * 		Objet représentant l'agent.
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problème avec une valeur ou un critère.
 	 */
-	private static <T extends ArtificialIntelligence> void loadTablesElement(Element root, T ai, String errMsg)
+	private static <T extends ArtificialIntelligence> void loadTablesElement(Element root, T ai, String errMsg) throws IllegalArgumentException
 	{	@SuppressWarnings("unchecked")
 		List<Element> elements = root.getChildren(XmlNames.TABLE);
 		for(Element element: elements)
@@ -413,9 +430,12 @@ public class AiPreferenceLoader
 	 * 		Objet représentant l'agent.
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problème avec une valeur ou un critère.
 	 */
 	@SuppressWarnings("unchecked")
-	private static <T extends ArtificialIntelligence> void loadTableElement(Element root, T ai, String errMsg)
+	private static <T extends ArtificialIntelligence> void loadTableElement(Element root, T ai, String errMsg) throws IllegalArgumentException
 	{	// get the mode
 		String modeStr = root.getAttributeValue(XmlNames.MODE);
 		AiMode mode = AiMode.valueOf(modeStr);
@@ -439,9 +459,12 @@ public class AiPreferenceLoader
 	 * 		Objet représentant l'agent.
 	 * @param errMsg 
 	 * 		Prefixe des messages d'erreur.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problème avec une valeur ou un critère.
 	 */
 	@SuppressWarnings("unchecked")
-	private static <T extends ArtificialIntelligence> void loadCombinationElement(Element root, AiMode mode, T ai, String errMsg)
+	private static <T extends ArtificialIntelligence> void loadCombinationElement(Element root, AiMode mode, T ai, String errMsg) throws IllegalArgumentException
 	{	// get the preference handler
 		AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
 		
