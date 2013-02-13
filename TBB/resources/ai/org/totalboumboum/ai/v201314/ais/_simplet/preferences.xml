@@ -27,7 +27,7 @@
 	</categories>
 	
 	<tables>
-		<table mode="COLLECT">
+		<table mode="COLLECTING">
 			<combination category="COLLECT_VISIBLE_ITEM" values="5" />
 			<combination category="COLLECT_VISIBLE_ITEM" values="4" />
 			<combination category="COLLECT_VISIBLE_ITEM" values="3" />
@@ -66,7 +66,7 @@
 			<combination category="COLLECT_WALL_NEIGHBOR" values="1 0" />
 		</table>
 		
-		<table mode="ATTACK">
+		<table mode="ATTACKING">
 			<combination category="ATTACK" values="5 4" />
 			<combination category="ATTACK" values="4 4" />
 			<combination category="ATTACK" values="3 4" />
