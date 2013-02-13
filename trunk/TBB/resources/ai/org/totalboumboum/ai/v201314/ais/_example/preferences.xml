@@ -39,7 +39,7 @@
 		<!-- 
 			Table définissant les préférences du mode collecte
 		 -->
-		<table mode="COLLECT">
+		<table mode="COLLECTING">
 			<combination category="FIRST_CATEGORY" values="false 1" />
 			<combination category="FIRST_CATEGORY" values="false 2" />
 			<combination category="FIRST_CATEGORY" values="false 3" />
@@ -66,7 +66,7 @@
 		<!-- 
 			Table définissant les préférences du mode attaque
 		 -->
-		<table mode="ATTACK">
+		<table mode="ATTACKING">
 			<combination category="THIRD_CATEGORY" values="VALUE1" />
 			<combination category="THIRD_CATEGORY" values="VALUE2" />
 			<combination category="THIRD_CATEGORY" values="VALUE3" />
