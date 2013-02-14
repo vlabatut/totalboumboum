@@ -21,7 +21,10 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * 
  */
 
+import japa.parser.ParseException;
+
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -43,6 +46,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201314.tools.AiParser;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -370,5 +374,28 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 				}
 			}
 		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// VERIFICATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Effectue la vérification du code source pour
+	 * l'agent dont le chemin du package est passé
+	 * en paramètre.
+	 * 
+	 * @param packagePath
+	 * 		Chemin menant au package de l'agent à dont on 
+	 * 		veut vérifier le code source.
+	 * 
+	 * @throws IOException
+	 * 		Problème lors de l'accès aux fichiers. 
+	 * @throws ParseException 
+	 * 		Problème lors de l'analyse du code source.
+	 */
+	public static void checkSourceCode(String packagePath) throws ParseException, IOException
+	{	AiParser.IGNORED_PACKAGES.clear();
+		File folder = new File(packagePath);
+		AiParser.parseAi(folder);
 	}
 }
