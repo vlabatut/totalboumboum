@@ -101,6 +101,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		"compare",
 		"equals",
 		"hashCode",
+		"main",
 		"toString"
 	});
 	/** Exceptions à ne pas couvrir dans un bloc {@code try-catch} */
