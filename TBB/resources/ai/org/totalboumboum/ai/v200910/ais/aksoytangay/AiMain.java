@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200910.ais.aksoytangay;
  */
 
 import org.totalboumboum.ai.v200910.adapter.AiManager;
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2c.AksoyTangay;
 
 /**
@@ -33,10 +34,11 @@ import org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2c.AksoyTangay;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new AksoyTangay());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new AksoyTangay();
 	}
 }

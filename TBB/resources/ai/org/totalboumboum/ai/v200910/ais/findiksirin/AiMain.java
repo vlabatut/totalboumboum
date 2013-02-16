@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v200910.ais.findiksirin;
 
 import org.totalboumboum.ai.v200910.adapter.AiManager;
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.ais.findiksirin.v5c.FindikSirin;
 
 /**
@@ -12,10 +13,11 @@ import org.totalboumboum.ai.v200910.ais.findiksirin.v5c.FindikSirin;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new FindikSirin());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new FindikSirin();
 	}
 }
