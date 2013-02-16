@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200809.ais.bilginkarabag;
  */
 
 import org.totalboumboum.ai.v200809.adapter.AiManager;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.ais.bilginkarabag.v2.BilginKarabag;
 
 /**
@@ -32,11 +33,11 @@ import org.totalboumboum.ai.v200809.ais.bilginkarabag.v2.BilginKarabag;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new BilginKarabag());
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new BilginKarabag();
 	}
-
 }
