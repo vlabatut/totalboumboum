@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar;
  */
 
 import org.totalboumboum.ai.v200809.adapter.AiManager;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.ais.demiragsagar.v2.DemiragSagar;
 
 /**
@@ -30,13 +31,13 @@ import org.totalboumboum.ai.v200809.ais.demiragsagar.v2.DemiragSagar;
  *
  */
 @SuppressWarnings("deprecation")
-public class AiMain extends AiManager {
-
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain() {
-		super(new DemiragSagar());
+public class AiMain extends AiManager
+{
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new DemiragSagar();
 	}
-
 }

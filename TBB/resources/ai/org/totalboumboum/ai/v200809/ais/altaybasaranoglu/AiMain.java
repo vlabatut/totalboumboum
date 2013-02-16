@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200809.ais.altaybasaranoglu;
  */
 
 import org.totalboumboum.ai.v200809.adapter.AiManager;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.ais.altaybasaranoglu.v2.AltayBasaranoglu;
 
 /**
@@ -32,11 +33,11 @@ import org.totalboumboum.ai.v200809.ais.altaybasaranoglu.v2.AltayBasaranoglu;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new AltayBasaranoglu());
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new AltayBasaranoglu();
 	}
-
 }

@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v200809.ais._promeneur;
  * 
  */
 
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 
 /**
@@ -31,11 +32,11 @@ import org.totalboumboum.ai.v200809.adapter.AiManager;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new Promeneur());
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new Promeneur();
 	}
-	
 }

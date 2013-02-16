@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200809.ais.adatepe;
  */
 
 import org.totalboumboum.ai.v200809.adapter.AiManager;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.ais.adatepe.v1.Adatepe;
 
 /**
@@ -32,11 +33,11 @@ import org.totalboumboum.ai.v200809.ais.adatepe.v1.Adatepe;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new Adatepe());
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new Adatepe();
 	}
-
 }
