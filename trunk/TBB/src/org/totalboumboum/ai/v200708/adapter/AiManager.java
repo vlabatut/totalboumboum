@@ -60,15 +60,6 @@ import org.totalboumboum.game.round.RoundVariables;
 public abstract class AiManager extends AiAbstractManager<Integer>
 {	/** */
 	private boolean debug = false;
-
-	/**
-	 * 
-	 * @param ai
-	 */
-	public AiManager(ArtificialIntelligence ai)
-    {	super(ai);
-		controlKeys = new ArrayList<Integer>();		
-	}
 	
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
@@ -380,7 +371,7 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** simulates control keys */
-    private List<Integer> controlKeys;
+    private List<Integer> controlKeys = new ArrayList<Integer>();
 
 	@Override
 	public List<ControlEvent> convertReaction(Integer value)

@@ -71,20 +71,9 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  */
 public abstract class AiManager extends AiAbstractManager<AiAction>
-{	/**
-	 * Construit un gestionnaire pour l'agent passé en paramètre.
-	 * Cette méthode doit être appelée par une classe héritant de celle-ci,
-	 * et placée dans le package contenant l'agent. 
-	 * 
-	 * @param ai	
-	 * 		l'agent que cette classe doit gérer
-	 */
-	protected AiManager(ArtificialIntelligence ai)
-    {	super(ai);
-	}
-
-    /////////////////////////////////////////////////////////////////
-	// AI				/////////////////////////////////////////////
+{	
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Termine proprement le gestionnaire de manière à libérer les ressources 
