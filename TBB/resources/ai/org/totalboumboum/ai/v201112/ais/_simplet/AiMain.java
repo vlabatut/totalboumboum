@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v201112.ais._simplet;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
@@ -11,10 +12,11 @@ import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new Simplet());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new Simplet();
 	}
 }
