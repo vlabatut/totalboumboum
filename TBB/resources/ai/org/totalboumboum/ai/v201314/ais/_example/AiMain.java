@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.ais._example.v0.Example;
 import org.totalboumboum.tools.classes.ClassTools;
 
@@ -43,14 +44,12 @@ import org.totalboumboum.tools.classes.ClassTools;
  */
 public class AiMain extends AiManager
 {
-	/**
-	 * Constructeur utilisé pour créer une instance de l'IA.
-	 * <br/>
-	 * L'objet créé dans le constructeur de cette classe doit être de la
-	 * classe principale de l'agent.
-	 */
-	public AiMain()
-	{	super(new Example());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new Example();
 	}
 
 	/**
