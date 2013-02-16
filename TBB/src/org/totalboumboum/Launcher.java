@@ -1673,3 +1673,4 @@ public class Launcher
 // TODO dans classe AI, faire directement des méthodes permettant de tester checkInterruption, utilité... et autres ?
 // TODO doc : changer ParseAi en AiParser
 // TODO doc : parler de la méthode permettant de faire le check directement depuis l'agent
+// TODO vérifier que la classe de test de simplet marche toujours
