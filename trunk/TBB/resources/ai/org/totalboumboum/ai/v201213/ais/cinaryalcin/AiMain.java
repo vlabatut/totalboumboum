@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201213.ais.cinaryalcin;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.ais.cinaryalcin.v4.CinarYalcin;
 
 /**
@@ -37,12 +38,11 @@ import org.totalboumboum.ai.v201213.ais.cinaryalcin.v4.CinarYalcin;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * Constructeur utilisé pour créer une instance de l'IA.
-	 * L'objet créé dans le constructeur de cette classe doit être de la
-	 * classe principale de l'agent.
-	 */
-	public AiMain()
-	{	super(new CinarYalcin());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new CinarYalcin();
 	}
 }

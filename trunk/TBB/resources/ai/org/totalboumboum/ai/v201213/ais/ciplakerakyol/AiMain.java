@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201213.ais.ciplakerakyol;
  */
 
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v4.CiplakErakyol;
 
 /**
@@ -37,12 +38,11 @@ import org.totalboumboum.ai.v201213.ais.ciplakerakyol.v4.CiplakErakyol;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * Constructeur utilisé pour créer une instance de l'IA.
-	 * L'objet créé dans le constructeur de cette classe doit être de la
-	 * classe principale de l'agent.
-	 */
-	public AiMain()
-	{	super(new CiplakErakyol());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new CiplakErakyol();
 	}
 }
