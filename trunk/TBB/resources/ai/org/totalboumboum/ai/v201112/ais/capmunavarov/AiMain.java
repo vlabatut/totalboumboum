@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.ais.capmunavarov;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.ais.capmunavarov.v1.CapMunavarov;
 
 /**
@@ -34,10 +35,11 @@ import org.totalboumboum.ai.v201112.ais.capmunavarov.v1.CapMunavarov;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new CapMunavarov());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new CapMunavarov();
 	}
 }

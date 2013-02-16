@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201112.ais.sakaryasar;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.ais.sakaryasar.v3.SakarYasar;
 
 /**
@@ -34,10 +35,11 @@ import org.totalboumboum.ai.v201112.ais.sakaryasar.v3.SakarYasar;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new SakarYasar());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new SakarYasar();
 	}
 }
