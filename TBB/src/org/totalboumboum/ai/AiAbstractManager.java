@@ -51,7 +51,6 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
-
 /**
  * 
  * Classe servant d'interface entre le jeu et un agent.
@@ -66,17 +65,16 @@ import org.xml.sax.SAXException;
  */
 
 public abstract class AiAbstractManager<V>
-{	/**
-     * contruit un nouveau manager pour l'agent passé en paramètre.
-     * Ce constructeur est destiné à être appelé par le constructeur situé dans 
-     * la classe héritant de celle-ci et située dans le dossier de l'agent
-     *    
-     * @param 
-     * 		ai
+{	
+	/**
+     * Contruit un nouveau manager. L'agent concerné
+     * est récupé en utilisant la méthode {@link #instantiateAgent()},
+     * qui doit être surchargée dans le manager que le concepteur
+     * définit pour son agent. Ce système le laisse libre de choisir
+     * quelle version de son agent il veut utiliser (s'il y en a plusieurs).
      */
-	public AiAbstractManager(Callable<V> ai)
-    {	this.ai = ai;
-//TODO ai.loadUtilities(); ?    	
+	public AiAbstractManager()
+    {	this.ai = instantiateAgent();
 	}
 
     /**
@@ -146,7 +144,7 @@ public abstract class AiAbstractManager<V>
      * Renvoie l'agent géré par cette classe.
      * 
      * @return	
-     * 		L'agent géré par cette classe sous la forme d'un Callable
+     * 		L'agent géré par cette classe sous la forme d'un Callable.
      */
     public final Callable<V> getAi()
     {	return ai;    	
@@ -165,6 +163,17 @@ public abstract class AiAbstractManager<V>
     	// on lance un calcul bidon pour initialiser le thread
     	makeCall();
     }
+    
+	/**
+	 * Cette méthode doit renvoyer une instance de l'agent.
+	 * A implémenter par le concepteur de l'agent, car cela
+	 * lui permet de choisir parmi différentes versions de son
+	 * agent.
+	 * 
+	 * @return 
+	 * 		Renvoie une instance de l'agent.
+	 */
+    protected abstract Callable<V> instantiateAgent();
     
     /**
      * Utilise la classe d'agent associé à ce personnage pour mettre à jour les variables
