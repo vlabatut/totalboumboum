@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,6 +56,8 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.classes.ClassTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -75,6 +78,9 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// AGENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
+	public abstract ArtificialIntelligence instantiateAgent();
+
 	/**
 	 * Termine proprement le gestionnaire de manière à libérer les ressources 
 	 * qu'il occupait.
@@ -369,22 +375,81 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	// VERIFICATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Effectue la vérification du code source pour
-	 * l'agent dont le chemin du package est passé
-	 * en paramètre.
-	 * 
-	 * @param packagePath
-	 * 		Chemin menant au package de l'agent à dont on 
-	 * 		veut vérifier le code source.
+	 * Cette méthode permet d'appliquer le 
+	 * parser de l'API IA au code source
+	 * de cet agent.
 	 * 
 	 * @throws IOException
 	 * 		Problème lors de l'accès aux fichiers. 
 	 * @throws ParseException 
 	 * 		Problème lors de l'analyse du code source.
 	 */
-	public static void checkSourceCode(String packagePath) throws ParseException, IOException
-	{	AiParser.IGNORED_PACKAGES.clear();
-		File folder = new File(packagePath);
+	protected void parseSourceCode() throws ParseException, IOException
+	{	Class<?> clazz = getAi().getClass();
+		// on construit le chemin vers le code source
+		String path = clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String decodedPath = URLDecoder.decode(path, "UTF-8");
+		String pckg = clazz.getPackage().getName();
+		String temp[] = pckg.split("\\"+ClassTools.CLASS_SEPARATOR);
+		for(String t: temp)
+			decodedPath = decodedPath + "/" + t;
+		
+		// on applique le parser à ce chemin
+		AiParser.IGNORED_PACKAGES.clear();
+		File folder = new File(decodedPath);
 		AiParser.parseAi(folder);
+	}
+	
+	
+	/**
+	 * Cette méthode charge les préférences de l'agent
+	 * à partir du fichier XML approprié.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
+	 * @throws ParserConfigurationException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws SAXException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws IOException
+	 * 		Problème lors de l'accès à un fichier.
+	 * @throws IllegalAccessException 
+	 * 		Problème lors du chargement des préférences.
+	 * @throws InvocationTargetException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws InstantiationException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws ClassNotFoundException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws NoSuchMethodException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 */
+	protected void loadPreferences() throws IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	{	// init les ressources nécessaires
+		XmlTools.init();
+		
+		// on récupère les infos nécessairess
+		String pckg = getClass().getPackage().getName();
+		String temp[] = pckg.split("\\"+ClassTools.CLASS_SEPARATOR);
+		String aiName = temp[temp.length-1];
+		String packName = temp[temp.length-3];
+		ArtificialIntelligence ai = (ArtificialIntelligence)getAi();
+		
+		// on charge les préférences
+		System.out.println("Loading preferences for agent "+packName+"/"+aiName);
+		AiPreferenceLoader.loadAiPreferences(packName,aiName,ai);
+		System.out.println("Loading complete for agent "+packName+"/"+aiName);
+
+		// on les affiche pour vérification
+		System.out.println("Preference table for agent "+packName+"/"+aiName+": (from most to least preferred)");
+		AiPreferenceHandler<?> handler = AiPreferenceLoader.getHandler(ai);
+		Map<AiMode, List<AiCombination>> referencePreferences = handler.getReferencePreferences();
+		for(AiMode mode: AiMode.values())
+		{	System.out.println("  > Mode: ----- " + mode + " -------------------------------");
+			List<AiCombination> list = referencePreferences.get(mode);
+			for(int i=0;i<list.size();i++)
+				System.out.println("      "+i+"."+list.get(i));
+			System.out.println("  < Mode " + mode + " done");
+		}
 	}
 }

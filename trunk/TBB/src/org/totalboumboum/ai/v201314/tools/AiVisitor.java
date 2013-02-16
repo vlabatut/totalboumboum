@@ -101,6 +101,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		"compare",
 		"equals",
 		"hashCode",
+		"instantiateAgent",
 		"main",
 		"toString"
 	});
