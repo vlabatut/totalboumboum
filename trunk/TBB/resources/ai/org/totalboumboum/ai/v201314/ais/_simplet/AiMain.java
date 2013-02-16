@@ -1,17 +1,35 @@
 package org.totalboumboum.ai.v201314.ais._simplet;
 
+/*
+ * Total Boum Boum
+ * Copyright 2008-2013 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 import japa.parser.ParseException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URLDecoder;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceLoader;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.tools.classes.ClassTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -51,55 +69,35 @@ public class AiMain extends AiManager
 	 * 
 	 * @param args
 	 *		Aucun argument n'est nécessaire. 
+	 *
 	 * @throws IOException
 	 * 		Problème lors de l'accès aux fichiers. 
 	 * @throws ParseException 
 	 * 		Problème lors du parsing du code source.
+	 * @throws IllegalArgumentException 
+	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
+	 * @throws ParserConfigurationException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws SAXException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws IllegalAccessException 
+	 * 		Problème lors du chargement des préférences.
+	 * @throws InvocationTargetException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws InstantiationException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws ClassNotFoundException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws NoSuchMethodException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 */
-	public static void main(String args[]) throws ParseException, IOException
-	{	// on applique le parser
-		parseSourceCode();
+	public static void main(String args[]) throws ParseException, IOException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException
+	{	AiMain aiMain = new AiMain();
+		
+		// on applique le parser
+		aiMain.parseSourceCode();
 		
 		// on vérifie si les préférences se chargent normalement
-		loadPreferences();
-	}
-	
-	/**
-	 * Cette méthode permet d'appliquer le 
-	 * parser de l'API IA au code source
-	 * de cet agent.
-	 * 
-	 * @throws IOException
-	 * 		Problème lors de l'accès aux fichiers. 
-	 * @throws ParseException 
-	 * 		Problème lors de l'analyse du code source.
-	 */
-	private static void parseSourceCode() throws ParseException, IOException
-	{	// on construit le chemin vers le code source
-		String path = Simplet.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		String decodedPath = URLDecoder.decode(path, "UTF-8");
-		String pckg = Simplet.class.getPackage().getName();
-		String temp[] = pckg.split("\\"+ClassTools.CLASS_SEPARATOR);
-		for(String t: temp)
-			decodedPath = decodedPath + "/" + t;
-		
-		// on applique le parser à ce chemin
-		checkSourceCode(decodedPath);
-	}
-	
-	private static void loadPreferences() throws IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
-	{	// on construit le chemin vers le code source
-		String path = Simplet.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		String decodedPath = URLDecoder.decode(path, "UTF-8");
-		String pckg = AiMain.class.getPackage().getName();
-		String temp[] = pckg.split("\\"+ClassTools.CLASS_SEPARATOR);
-		for(String t: temp)
-			decodedPath = decodedPath + "/" + t;
-		
-		String packName ;
-		String aiName;
-		Simplet agent = new Simplet();
-		AiPreferenceLoader.loadAiPreferences(packName,aiName,agent);
-		// TODO afficher msg intro + la table de préfs
+		aiMain.loadPreferences();
 	}
 }
