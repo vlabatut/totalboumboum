@@ -452,6 +452,18 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	private final Map<AiMode, List<AiCombination>> referencePreferences = new HashMap<AiMode, List<AiCombination>>();
 	
 	/**
+	 * Renvoie la map des préférences de références,
+	 * chargées avant l'initialisation de l'agent
+	 * à partir du fichier XML approprié.
+	 * 
+	 * @return
+	 * 		La map contenant les préférences de référence.
+	 */
+	Map<AiMode, List<AiCombination>> getReferencePreferences()
+	{	return referencePreferences;
+	}
+	
+	/**
 	 * Renvoie la valeur de préférence associée à la
 	 * combinaison passée en paramètre. Si aucune
 	 * valeur de préférence ne lui a été associée dans
