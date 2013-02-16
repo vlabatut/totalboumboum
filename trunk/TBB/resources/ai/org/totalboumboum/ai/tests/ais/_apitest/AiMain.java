@@ -23,6 +23,7 @@ package org.totalboumboum.ai.tests.ais._apitest;
 
 import org.totalboumboum.ai.tests.ais._apitest.ApiTest;
 import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201213.adapter.agent.ArtificialIntelligence;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
@@ -31,12 +32,14 @@ import org.totalboumboum.ai.v201213.adapter.agent.AiManager;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new ApiTest());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new ApiTest();
 	}
 }
