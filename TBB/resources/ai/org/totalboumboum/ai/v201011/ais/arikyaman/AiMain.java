@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201011.ais.arikyaman;
  */
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
+import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201011.ais.arikyaman.v6.ArikYaman;
 
 /**
@@ -34,10 +35,11 @@ import org.totalboumboum.ai.v201011.ais.arikyaman.v6.ArikYaman;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new ArikYaman());	
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new ArikYaman();
 	}
 }
