@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200910.ais.dorukkupelioglu;
  */
 
 import org.totalboumboum.ai.v200910.adapter.AiManager;
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2c.DorukKupelioglu;
 
 /**
@@ -33,12 +34,11 @@ import org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2c.DorukKupelioglu;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-
-	/**
-	 * constructeur utilise pour creer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new DorukKupelioglu());
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new DorukKupelioglu();
 	}
-
 }
