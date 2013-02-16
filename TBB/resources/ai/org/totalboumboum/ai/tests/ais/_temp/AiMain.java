@@ -22,6 +22,7 @@ package org.totalboumboum.ai.tests.ais._temp;
  */
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
@@ -33,10 +34,11 @@ import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
 @SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/**
-	 * constructeur utilisé pour créer une instance de l'IA
-	 */
-	public AiMain()
-	{	super(new Temp());		
+	/////////////////////////////////////////////////////////////////
+	// AGENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public ArtificialIntelligence instantiateAgent()
+	{	return new Temp();
 	}
 }
