@@ -175,12 +175,13 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	protected AiTile updateCurrentDestination() throws StopRequestException
+	protected AiTile processCurrentDestination() throws StopRequestException
 	{	ai.checkInterruption();
 		zone = ai.getZone();
 		ownHero = zone.getOwnHero();
 		currentTile = ownHero.getTile();
-		print("      currentTile="+currentTile+" currentDestination="+currentDestination);
+		AiTile currentDestination = getCurrentDestination();
+		print("      currentTile="+currentTile+" currentDestination="+getCurrentDestination());
 		
 		// on détermine si on doit changer/initialiser la destination
 		boolean changeDestination = false;
@@ -297,13 +298,14 @@ if(!tiles.isEmpty())
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	protected AiPath updateCurrentPath() throws StopRequestException
+	protected AiPath processCurrentPath() throws StopRequestException
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		secondaryBombing = false;
 		boolean isThreatened = commonTools.isTileThreatened(currentTile);
+		AiTile currentDestination = getCurrentDestination();
 		// on réinitialise le chemin courant
-		currentPath = null;
+		AiPath currentPath = null;
 if(!zone.getTile(5,2).getBlocks().isEmpty())
 	System.out.print("");
 		// si on est menacé par une bombe
@@ -483,11 +485,12 @@ if(!zone.getTile(5,2).getBlocks().isEmpty())
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	protected Direction updateCurrentDirection() throws StopRequestException
+	protected Direction processCurrentDirection() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		// init
-		currentDirection = Direction.NONE;
+		Direction currentDirection = Direction.NONE;
+		AiPath currentPath = getCurrentPath();
 		
 		// si un chemin a été trouvé
 		if(currentPath!=null)
