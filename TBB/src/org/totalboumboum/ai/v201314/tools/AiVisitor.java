@@ -25,11 +25,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.tools.classes.ClassTools;
 
+import japa.parser.ast.BlockComment;
+import japa.parser.ast.LineComment;
 import japa.parser.ast.TypeParameter;
 import japa.parser.ast.body.BodyDeclaration;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.ast.body.ConstructorDeclaration;
+import japa.parser.ast.body.JavadocComment;
 import japa.parser.ast.body.MethodDeclaration;
 import japa.parser.ast.body.Parameter;
 import japa.parser.ast.expr.AnnotationExpr;
@@ -95,6 +99,8 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
 	/** Méthode recherchée */
 	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
+	/** Marqueur Eclipse */
+	private final static String ECLIPSE_TAG = "TODO";
 	/** Méthodes ignorées lors de l'analyse */
 	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
 	{	"AiMain",			
@@ -104,6 +110,13 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		"instantiateAgent",
 		"main",
 		"toString"
+	});
+	/** Méthodes interdites */
+	private final static List<String> PRINT_METHODS = Arrays.asList(new String[]
+	{	"System.out.print",
+		"System.out.println",
+		"System.err.print",
+		"System.err.println"
 	});
 	/** Exceptions à ne pas couvrir dans un bloc {@code try-catch} */
 	private final static List<String> FORBIDDEN_EXCEPTIONS = Arrays.asList(new String[]
@@ -154,7 +167,6 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					if(FORBIDDEN_EXCEPTIONS.contains(exceptionName))
 					{	printErr("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel à "+CHECK_INTERRUPTION_METHOD+"()");
 						errorCount++;
-						//NOTE à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
@@ -287,8 +299,18 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
         
         currentMethod = prevMethod;
     	indentLevel--;
-  }
+	}
 	
+    @Override
+    public void visit(MethodCallExpr n, Object arg)
+    {	String calledMethod = n.getScope()+ClassTools.CLASS_SEPARATOR+n.getName();
+    	if(PRINT_METHODS.contains(calledMethod))
+		{	int line = n.getBeginLine();
+			printErr("Erreur ligne "+line+" : il est interdit d'utiliser la méthode "+calledMethod+" ; à la place vous devez utiliser la méthode print de votre agent (héritant de ArtificialIntelligence) ou d'un gestionnaire (héritant de AiAbstractHandler)");
+			errorCount++;
+		}
+    }
+    
 	@Override
 	public void visit(DoStmt n, Object arg)
 	{	Statement statement = n.getBody();
@@ -359,13 +381,11 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 							if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
 			        		{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 			        			errorCount++;
-			        			//NOTE à compléter par la création d'un commentaire dans le code source
 			        		}
 						}
 						else
 						{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
-							//NOTE à compléter par la création d'un commentaire dans le code source
 						}
 					}
 					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
@@ -374,7 +394,6 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 						if(statements.size()<2)
 						{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
-							//NOTE à compléter par la création d'un commentaire dans le code source
 						}
 						else
 						{	line = firstStatement.getBeginLine();
@@ -388,13 +407,11 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 									if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
 					        		{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 					        			errorCount++;
-					        			//NOTE à compléter par la création d'un commentaire dans le code source
 					        		}
 								}
 								else
 								{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 				        			errorCount++;
-									//NOTE à compléter par la création d'un commentaire dans le code source
 								}
 							}
 						}
@@ -402,18 +419,15 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					else
 					{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 	        			errorCount++;
-						//NOTE à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
 				{	printErr("Attention ligne "+line+" : le bloc est vide !");
-					//NOTE à compléter par la création d'un commentaire dans le code source
 				}
 			}
 			else
 			{	printErr("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
 				errorCount++;
-				//NOTE à compléter par la création d'un commentaire dans le code source
 			}
 		}
 	}
@@ -435,6 +449,28 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		}
 		//NOTE ne traite pas le cas où on a plusieurs membres, e.g. @SuppressWarnings({"javadoc","xxxx"})
 	}
+
+	@Override
+    public void visit(BlockComment n, Object arg)
+	{	
+		System.out.println();
+    }
+	
+	@Override
+	public void visit(JavadocComment n, Object arg)
+	{	String content = n.getContent();
+		if(content.contains(ECLIPSE_TAG))
+		{	int line = n.getBeginLine();
+			printErr("Erreur ligne "+line+" : le commentaire contient un marqueur TODO. Vous devez tous les retirer avant de rendre votre agent.");
+			errorCount++;
+		}
+    }
+
+	@Override
+    public void visit(LineComment n, Object arg)
+	{	
+		System.out.println();
+    }
 	
 	/**
 	 * Affiche le message d'erreur spécifié

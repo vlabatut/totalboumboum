@@ -36,8 +36,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * En particulier, elle implémente la méthode
  * {@link #considerMoving} de l'algorithme général.
  * Cette méthode fait appel à trois méthodes pour 
- * réaliser son traitement : {@link #updateCurrentDestination()},
- * {@link #updateCurrentPath()} et {@link #updateCurrentDirection()}.
+ * réaliser son traitement : {@link #processCurrentDestination()},
+ * {@link #processCurrentPath()} et {@link #processCurrentDirection()}.
  * Ces trois méthodes doivent être surchargées.
  * <br/>
  * Ces trois méthodes permettent chacune de mettre à jour une variable : 
@@ -46,7 +46,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 		<li>{@link #currentPath} : le chemin courant (pour aller à la destination courante) ;</li>
  * 		<li>{@link #currentDirection} : la direction courante (qui dépend directement du chemin courant).</li>
  * </ul>
- * Ces variables sont notamment utilisées lors du traitement (méthode {@link #updateCurrentDestination()})
+ * Ces variables sont notamment utilisées lors du traitement (méthode {@link #processCurrentDestination()})
  * et de l'affichage (méthode {@link #updateOutput()}).
  * 
  * @param <T> 
@@ -81,7 +81,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	// DESTINATION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** La case objectif courante, i.e. celle dans laquelle on veut aller */ 
-	protected AiTile currentDestination = null;
+	private AiTile currentDestination = null;
 
 	/**
 	 * Renvoie la destination courante de l'agent.
@@ -94,7 +94,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	}
 	
 	/**
-	 * Met à jour l'objectif courant de l'agent, c'est à dire
+	 * Calcule l'objectif courant de l'agent, c'est à dire
 	 * la case dans laquelle il veut aller. 
 	 * <br/>
 	 * Ce calcul dépend devrait dépendre au moins des valeurs 
@@ -107,13 +107,13 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiTile updateCurrentDestination() throws StopRequestException;
+	protected abstract AiTile processCurrentDestination() throws StopRequestException;
 	
 	/////////////////////////////////////////////////////////////////
 	// PATH						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Le chemin courant, permettant d'aller dans la case de destination */ 
-	protected AiPath currentPath = null;
+	private AiPath currentPath = null;
 	
 	/**
 	 * Renvoie le chemin courant de l'agent.
@@ -126,7 +126,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	}
 	
 	/**
-	 * Met à jour le chemin courant de l'agent, c'est à dire 
+	 * Calcule le chemin courant de l'agent, c'est à dire 
 	 * la séquence de cases à parcourir pour atteindre
 	 * (directement ou indirectement) la case objectif.
 	 * <br/>
@@ -139,13 +139,13 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiPath updateCurrentPath() throws StopRequestException;
+	protected abstract AiPath processCurrentPath() throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** La direction à prendre pour suivre le chemin courant */ 
-	protected Direction currentDirection = null;
+	private Direction currentDirection = null;
 
 	/**
 	 * Renvoie la direction courante de l'agent.
@@ -158,7 +158,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	}
 
 	/**
-	 * Met à jour la direction courante suivie par l'agent.
+	 * Calcule la direction courante suivie par l'agent.
 	 * <br/>
 	 * Ce traitement devrait a priori dépendre du chemin courant,
 	 * et éventuellement d'autres informations. 
@@ -169,7 +169,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract Direction updateCurrentDirection() throws StopRequestException;
+	protected abstract Direction processCurrentDirection() throws StopRequestException;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
@@ -194,7 +194,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	
 		// si nécessaire, on change la destination courante
 		{	long before = print("    > entering updateCurrentDestination");
-			currentDestination = updateCurrentDestination();
+			currentDestination = processCurrentDestination();
 			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < exiting updateCurrentDestination duration="+elapsed);
@@ -202,7 +202,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 		
 		// on cherche un chemin vers cette destination
 		{	long before = print("    > entering updateCurrentPath");
-			currentPath = updateCurrentPath();
+			currentPath = processCurrentPath();
 			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < exiting updateCurrentPath duration="+elapsed);
@@ -210,7 +210,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 		
 		// on utilise le chemin pour déterminer la direction de déplacement
 		{	long before = print("    > entering updateCurrentDirection");
-			currentDirection = updateCurrentDirection();
+			currentDirection = processCurrentDirection();
 			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("    < exiting updateCurrentDirection duration="+elapsed);
@@ -247,7 +247,7 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 */
 	public void updateOutput() throws StopRequestException
 	{	AiOutput output = ai.getOutput();
-		AiMode mode = ai.getModeHandler().mode;
+		AiMode mode = ai.getModeHandler().getMode();
 		
 		// color
 		Color color = null;
