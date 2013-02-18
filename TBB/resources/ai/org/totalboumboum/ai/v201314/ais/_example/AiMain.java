@@ -99,6 +99,6 @@ public class AiMain extends AiManager
 		aiMain.parseSourceCode();
 		
 		// on vérifie si les préférences se chargent normalement
-		aiMain.loadPreferences();
+//		aiMain.loadPreferences();
 	}
 }

@@ -44,7 +44,7 @@ public class MoveHandler extends AiMoveHandler<Example>
 	// DESTINATION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected AiTile updateCurrentDestination() throws StopRequestException
+	protected AiTile processCurrentDestination() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		/*
@@ -60,7 +60,7 @@ public class MoveHandler extends AiMoveHandler<Example>
 	// PATH						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected AiPath updateCurrentPath() throws StopRequestException
+	protected AiPath processCurrentPath() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		/*
@@ -76,7 +76,7 @@ public class MoveHandler extends AiMoveHandler<Example>
 	// DIRECTION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected Direction updateCurrentDirection() throws StopRequestException
+	protected Direction processCurrentDirection() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		/*
