@@ -423,7 +423,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 				getModeHandler().update();
 				after = getCurrentTime();
 				elapsed = after - before;
-				print("  < Exiting mode update: duration="+elapsed+" ms result="+getModeHandler().mode);
+				print("  < Exiting mode update: duration="+elapsed+" ms result="+getModeHandler().getMode());
 				stepDurations.put(MODE,elapsed);
 			}
 			

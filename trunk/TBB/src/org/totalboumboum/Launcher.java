@@ -1654,12 +1654,19 @@ public class Launcher
  */
 
 /* TODO parser : 
- * 		- interdire d'utiliser printf dans l'agent >> utiliser print de l'api à la place
  * 		- vérifier que pas d'include sur d'autres package que l'api, les deux classes autorisées, les classes java standard, et l'agent lui-même
  * 		- modifier le document pour présenter le parser à la fin, avec la checklist
+ * 		- rechercher les todos dans le source des étudiants (parser)
+ * 		- voir comment les autres types d'annotation (que single) fonctionnent: p-ê faut il faire un appel spécial avant les méthodes au autres (i.e. p-ê pas auto)
  */
 
-// TODO l'affichage des results du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
+/* TODO document 
+ * 		- dans le document, justifier les différentes contraintes imposées pr le code source
+ * 		- reprendre la description des exceptions (nouvelles ? certaines plus d'actualité ?)
+ * 		- màj diag de classe pr agent-related
+ */
+
+// TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
 // 		>> comment ? combi avec les touches numériques ? (pas pratique. ou alors avec control droite >> pas possible)
 //		>> faire défiler ? (encore moins pratique)
@@ -1667,10 +1674,5 @@ public class Launcher
 // TODO dégager les threads des agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
 // TODO commande pour masquer certains sprites (genre: que les héros)
 // TODO dans l'évolution de la partie, afficher l'occupation processeur
-// TODO rechercher les todos dans le source des étudiants (parser)
-// TODO plus généralement : voir ce qu'il est possible d'automatiser
-// TODO dans le document, justifier les différentes contraintes imposées pr le code source
-// TODO dans classe AI, faire directement des méthodes permettant de tester checkInterruption, utilité... et autres ?
-// TODO doc : changer ParseAi en AiParser
-// TODO doc : parler de la méthode permettant de faire le check directement depuis l'agent
 // TODO vérifier que la classe de test de simplet marche toujours
+// TODO méthode pour générer le code source d'un groupe à partir de son nom et d'un code source générique
