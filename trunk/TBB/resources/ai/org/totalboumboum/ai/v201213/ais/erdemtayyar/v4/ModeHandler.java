@@ -87,6 +87,7 @@ public class ModeHandler extends AiModeHandler<ErdemTayyar> {
 	// ///////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();

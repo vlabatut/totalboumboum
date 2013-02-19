@@ -30,7 +30,9 @@ public class MurDestructible extends AiUtilityCriterionInteger<ErdemTayyar> {
 	 * définition est 0 ,1 ou 2. 0 s'İl n'y a pas de mur, 1 s'il existe 1, et 2 s'İl y a plusieurs murs destructibles.
 	 * 
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public MurDestructible(ErdemTayyar ai) throws StopRequestException {
 		super(ai, NAME, 0, 2);

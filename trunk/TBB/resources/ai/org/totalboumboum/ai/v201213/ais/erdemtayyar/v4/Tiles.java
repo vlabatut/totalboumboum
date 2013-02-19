@@ -155,6 +155,7 @@ public class Tiles {
 	/**
 	 * @return returns dangerous tiles
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public ArrayList<AiTile> getCurrentDangerousTiles()
 			throws StopRequestException{
@@ -631,6 +632,7 @@ public class Tiles {
 	/**
 	 * @return returns close accesible walls to the enemy.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getClosestAccDesWalltoEnemy() throws StopRequestException{
 		ai.checkInterruption();

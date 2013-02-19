@@ -78,10 +78,10 @@ public class Paths {
 	 * This method is for finding our path
 	 * 
 	 * @param ai
-	 * 
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
-
 	public Paths(ErdemTayyar ai) throws StopRequestException
 
 	{
@@ -172,7 +172,7 @@ public class Paths {
 	 * the start tile.
 	 * 
 	 * @param hero
-	 * 
+	 * 		information manquante !?	
 	 * 
 	 * 
 	 * @param endTile
@@ -182,8 +182,8 @@ public class Paths {
 	 * @return Next tile on path.
 	 * 
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
-	
 	protected AiTile getNextTileOnPath(AiHero hero, AiTile endTile)
 			throws StopRequestException
 
@@ -225,7 +225,7 @@ public class Paths {
 	 * tile to a given destination tile.
 	 * 
 	 * @param hero
-	 * 
+	 * 		information manquante !?	
 	 * 
 	 * 
 	 * @param endTile
