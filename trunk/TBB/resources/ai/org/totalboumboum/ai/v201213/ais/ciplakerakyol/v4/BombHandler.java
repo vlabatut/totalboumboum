@@ -155,6 +155,7 @@ public class BombHandler extends AiBombHandler<CiplakErakyol>
 	 * 
 	 * @return heros which are accessible
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	private AiHero getAdversaireAccessible() throws StopRequestException
 	{	ai.checkInterruption();

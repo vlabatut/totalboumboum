@@ -84,6 +84,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 	 * Method calcul tiles sont dans un scope de bomb 
 	 * @return safetile
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	private Set<AiTile> getAccessibleSafeTiles() throws StopRequestException
 	{
