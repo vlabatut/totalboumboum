@@ -54,7 +54,9 @@ public class ConjonctionMurs extends AiUtilityCriterionBoolean<CaliskanGeckalan>
 	
 	/**
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public ConjonctionMurs(CaliskanGeckalan ai) throws StopRequestException
 	{	// init nom

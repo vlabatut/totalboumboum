@@ -65,7 +65,9 @@ public class Concurrence extends AiUtilityCriterionBoolean<CaliskanGeckalan>
 	
 	/**
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Concurrence(CaliskanGeckalan ai) throws StopRequestException
 	{	// init nom

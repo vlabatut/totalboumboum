@@ -181,6 +181,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	/**
 	 * @return control of we can bomb. If we put a bomb, can we find a escape path
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Boolean canBomb() throws StopRequestException {
 		ai.checkInterruption();
@@ -216,6 +217,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	/**
 	 * @return get the safe tiles that we can go
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> safeZoneForBomb() throws StopRequestException {
 		ai.checkInterruption(); 	
@@ -241,6 +243,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	/**
 	 * @return the blast of our bombs
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> dangerZoneForBomb() throws StopRequestException {
 		ai.checkInterruption(); 	
@@ -254,6 +257,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	/**
 	 * @return all danger coordinates
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> dangerZone() throws StopRequestException {
 
@@ -273,8 +277,10 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 
 	/**
 	 * @param tile
+	 * 		information manquante !?	
 	 * @return the tile is in Danger
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public boolean isDanger(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -293,9 +299,11 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	
 	/**
 	 * @param map
+	 * 		information manquante !?	
 	 * @param deathTiles The tiles of mort subite tiles. 
 	 * @return the tiles of all Items accessible
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> getItemsAccessible(Map<AiTile,AiSearchNode> map,Set<AiTile> deathTiles) throws StopRequestException {
 		ai.checkInterruption();
@@ -323,9 +331,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	
 	/**
 	 * @param map
+	 * 		information manquante !?	
 	 * @param deathTiles 
+	 * 		information manquante !?	
 	 * @return all neighboors of murs
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> getMursNeighBoorsForCollecte(Map<AiTile,AiSearchNode> map, Set<AiTile> deathTiles) throws StopRequestException {
 		ai.checkInterruption();
@@ -358,9 +369,12 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	
 	/**
 	 * @param map 
+	 * 		information manquante !?	
 	 * @param deathTiles 
+	 * 		information manquante !?	
 	 * @return the rivals accessibles
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> getRivalsAccessible(Map<AiTile,AiSearchNode> map, Set<AiTile> deathTiles) throws StopRequestException {
 		ai.checkInterruption();
@@ -387,6 +401,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	/**
 	 * @return if we cant find a path for rivals, this method sets the mur tiles for the rivals using indirect path
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> getMursForRivals() throws StopRequestException {
 		ai.checkInterruption();
@@ -470,6 +485,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	/**
 	 * @return in this situation, if we drop a bomb, can we kill an enemy?
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public boolean canKill() throws StopRequestException {
 		ai.checkInterruption();
@@ -502,6 +518,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 	/**
 	 * @return the mort subite tiles
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> suddenDeathTiles() throws StopRequestException {
 		ai.checkInterruption();

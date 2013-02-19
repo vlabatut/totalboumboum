@@ -43,8 +43,10 @@ public class MenaceCollecte extends AiUtilityCriterionBoolean<CaliskanGeckalan>
 	
 	/**
 	 * @param ai 
-	 * @throws StopRequestException  */
-	
+	 * 		information manquante !?	
+	 * @throws StopRequestException
+	 * 		information manquante !?	
+	 */
 	public MenaceCollecte(CaliskanGeckalan ai) throws StopRequestException
 	{	// init nom
 		super(ai,NAME);
