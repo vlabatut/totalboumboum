@@ -86,7 +86,9 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 	
 	/**
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected MoveHandler(SaglamSeven ai) throws StopRequestException {
 		super(ai);
@@ -157,8 +159,11 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 
 	/**
 	 * @param tile
-	 * @return threatened : true if tile is threatened
+	 * 		description manquante !	
+	 * @return 
+	 * 		threatened : true if tile is threatened
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected boolean isTileThreatened (AiTile tile) throws StopRequestException{
 		
