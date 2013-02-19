@@ -25,9 +25,10 @@ public class Pertinence extends AiUtilityCriterionInteger<GerginOzkanoglu> {
 
 	/**
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
-
 	public Pertinence(GerginOzkanoglu ai) throws StopRequestException {
 		super(ai, NAME, 0, 2);
 		ai.checkInterruption();

@@ -77,7 +77,9 @@ public class TileCalculation {
 	 * constructor
 	 * 
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public TileCalculation(GerginOzkanoglu ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -119,6 +121,7 @@ public class TileCalculation {
 
 	/**
 	 * @param consideredTile
+	 * 		description manquante !	
 	 * @return control
 	 * @throws StopRequestException
 	 *             This method will be directly used by security criterion and
@@ -140,8 +143,10 @@ public class TileCalculation {
 	 * tile.
 	 * 
 	 * @param tile
+	 * 		description manquante !	
 	 * @return counter
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public int numberOfDestructibleWalls(AiTile tile)
 			throws StopRequestException {
@@ -164,8 +169,10 @@ public class TileCalculation {
 	 * we use this method in criterion of the case visible item.
 	 * 
 	 * @param tile
+	 * 		description manquante !	
 	 * @return result
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public int evaluateVisibleItem(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -223,8 +230,10 @@ public class TileCalculation {
 	 * this method will check the tile if there is an enemy or not.
 	 * 
 	 * @param tile
+	 * 		description manquante !	
 	 * @return boolean
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean existanceEnemy(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -243,6 +252,7 @@ public class TileCalculation {
 	 * @return result.
 	 *  return the tile with highest utility.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected AiTile mostValuableTile() throws StopRequestException {
 		ai.checkInterruption();
@@ -260,8 +270,10 @@ public class TileCalculation {
 	 * MAX_ACCESIBLE_TILES.
 	 * 
 	 * @param ourTile
+	 * 		description manquante !	
 	 * @return closestTiles
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected ArrayList<AiTile> closestAccesibleTiles(AiTile ourTile)
 			throws StopRequestException {
@@ -281,9 +293,12 @@ public class TileCalculation {
 	 * closest and safest tile after we put a bomb.
 	 * 
 	 * @param ourTile
+	 * 		description manquante !	
 	 * @param bombRange
+	 * 		description manquante !	
 	 * @return safest Tile
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected AiTile closestAndSafestTileAfterBombing(AiTile ourTile,
 			int bombRange) throws StopRequestException {
@@ -316,10 +331,12 @@ public class TileCalculation {
 
 	/**
 	 * @param tile
+	 * 		description manquante !	
 	 * @return boolean. This method check if there is a bomb in the considered
 	 *         tile. Actually, we will use it to check if we put a bomb in any
 	 *         tile.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected boolean isThereBomb(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -332,10 +349,13 @@ public class TileCalculation {
 
 	/**
 	 * @param tileConsidered
+	 * 		description manquante !	
 	 * @param rangeOfBomb
+	 * 		description manquante !	
 	 * @return this method will be used to calculate how many destructible walls
 	 *         can be destroyed.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> rangeOfOurBombForDestructible(
 			AiTile tileConsidered, int rangeOfBomb) throws StopRequestException {
@@ -431,11 +451,14 @@ public class TileCalculation {
 	
 	/**
 	 * @param tileOfBomb
+	 * 		description manquante !	
 	 * @param rangeOfBomb
+	 * 		description manquante !	
 	 * @return
 	 *    this method only counts the crossable tiles affected by a bomb and add them to a list
 	 *    The empty-crossable tiles in danger will be supposed as not-secure soon.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> rangeOfBombCrossableByHero(
 			AiTile tileOfBomb, int rangeOfBomb) throws StopRequestException {
@@ -500,9 +523,12 @@ public class TileCalculation {
 	/**
 	 * checks if there is an enemy in our range.
 	 * @param tile
+	 * 		description manquante !	
 	 * @param rangeOfBomb
+	 * 		description manquante !	
 	 * @return boolean 
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected boolean threatenEnemy(AiTile tile, int rangeOfBomb)
 			throws StopRequestException {
@@ -522,6 +548,7 @@ public class TileCalculation {
 
 	/**
 	 * @param sourceTile
+	 * 		description manquante !	
 	 * @throws StopRequestException
 	 *             All accessible tiles.
 	 */
@@ -565,8 +592,10 @@ public class TileCalculation {
 	/**
 	 * calculates all accessible tiles.
 	 * @param tile
+	 * 		description manquante !	
 	 * @return accesibleTiles
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> allAccesibleTiles(AiTile tile)
 			throws StopRequestException {
@@ -579,8 +608,10 @@ public class TileCalculation {
 	 * returns the closest and safest tile for an hero.
 	 * if there is not a safest tile, it will return null
 	  * @param hero
+	 * 		description manquante !	
 	  * @return safestTile 
 	  * @throws StopRequestException
+	 * 		description manquante !	
 	  */
 	 protected AiTile closestAndSafestTileForHero(AiHero hero) throws StopRequestException
 	 {
@@ -608,8 +639,10 @@ public class TileCalculation {
 	  */
 	 /**
 	  * @param ourTile
+	 * 		description manquante !	
 	  * @return boolean
 	  * @throws StopRequestException
+	 * 		description manquante !	
 	  */
 	protected boolean blockingEnemyIsPossible(AiTile ourTile)
 			throws StopRequestException {
@@ -850,8 +883,10 @@ public class TileCalculation {
 	/**
 	 * finds closest enemy to our agent.
 	 * @param ourTile
+	 * 		description manquante !	
 	 * @return AiHero
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiHero closestEnemyToUs(AiTile ourTile) throws StopRequestException 
 	{
@@ -873,9 +908,12 @@ public class TileCalculation {
 	/**
 	 * finds closest wall to enemy.
 	 * @param tile
+	 * 		description manquante !	
 	 * @param closestEnemy
+	 * 		description manquante !	
 	 * @return boolean
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean closestWallToEnemy(AiTile tile,AiHero closestEnemy) throws StopRequestException
 	{
@@ -955,8 +993,10 @@ public class TileCalculation {
 	/**
 	 * checks if there is an enemy in all accesible tiles or not
 	 * @param ourTile
+	 * 		description manquante !	
 	 * @return boolean
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isThereEnemyInAllAccessibleTiles(AiTile ourTile) throws StopRequestException
 	{
@@ -972,8 +1012,10 @@ public class TileCalculation {
 	/**
 	 * calculates number of malus items around a tile. We will bomb them in bomb handler.
 	 * @param currentTile
+	 * 		description manquante !	
 	 * @return integer.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected int malusItemsCount(AiTile currentTile) throws StopRequestException
 	{
@@ -994,9 +1036,12 @@ public class TileCalculation {
 	 * calculates a list of tiles which will become dangerous if a bomb is put on
 	 * given tile.
 	 * @param givenTile
+	 * 		description manquante !	
 	 * @param range
+	 * 		description manquante !	
 	 * @return arrayList
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getDangerousTilesOnBombPut( AiTile givenTile, int range ) throws StopRequestException
 	{
@@ -1056,8 +1101,10 @@ public class TileCalculation {
 	/**
 	 * checks if our hero can reach safely in a tile.
 	 * @param givenHero
+	 * 		description manquante !	
 	 * @return boolean
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected boolean canReachSafety( AiHero givenHero ) throws StopRequestException
 	{
@@ -1075,8 +1122,10 @@ public class TileCalculation {
 	/**
 	 * controls if there is sudden death in considered tile or not
 	 * @param consideredTile
+	 * 		description manquante !	
 	 * @return boolean 
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isThereSuddenDeathEventInTile(AiTile consideredTile) throws StopRequestException
     {
@@ -1090,6 +1139,7 @@ public class TileCalculation {
 	 * calculates closest accessible destructible wall to enemy
 	 * @return AiTile
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiTile getClosestAccDesWalltoEnemy() throws StopRequestException
 	{
@@ -1112,6 +1162,7 @@ public class TileCalculation {
 	 * calculates closest enemy to us.
 	 * @return AiHero
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiHero getClosestEnemy() throws StopRequestException
 	{
@@ -1134,8 +1185,10 @@ public class TileCalculation {
 	/**
 	 * calculates all accessible dest wall tiles.
 	 * @param heroTile
+	 * 		description manquante !	
 	 * @return ArrayList
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected ArrayList<AiTile> getAccessibleDestructibleWallTiles( AiTile heroTile ) throws StopRequestException
 	{
@@ -1162,9 +1215,12 @@ public class TileCalculation {
 	/**
 	 * calculates distance between two tile.
 	 * @param startTile
+	 * 		description manquante !	
 	 * @param endTile
+	 * 		description manquante !	
 	 * @return double
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public double getDistanceBetween( AiTile startTile, AiTile endTile ) throws StopRequestException
 	{

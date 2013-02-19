@@ -26,8 +26,9 @@ public class NumberOfDestructibleWalls extends AiUtilityCriterionInteger<GerginO
 	private static int MAX_DESTWALL = 2;
 	/**
 	 * @param ai
-	 * 
+	 * 		description manquante !	
 	 * @throws StopRequestException	
+	 * 		description manquante !	
 	 */
 	public NumberOfDestructibleWalls(GerginOzkanoglu ai) throws StopRequestException
 	{	super(ai,NAME,0,2);

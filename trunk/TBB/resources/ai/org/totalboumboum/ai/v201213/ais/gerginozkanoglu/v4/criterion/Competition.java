@@ -21,8 +21,9 @@ public class Competition extends AiUtilityCriterionBoolean<GerginOzkanoglu> {
 
 	/**
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
-	 * 
+	 * 		description manquante !	
 	 */
 	public Competition(GerginOzkanoglu ai) throws StopRequestException {
 		super(ai, NAME);

@@ -63,7 +63,9 @@ public class PathCalculation {
 	/**
 	 * constructor
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException 
+	 * 		description manquante !	
 	 */
 	public PathCalculation(GerginOzkanoglu ai) throws StopRequestException
 	{
@@ -73,10 +75,13 @@ public class PathCalculation {
     /**
      * 
      * @param agent
+	 * 		description manquante !	
      * @param target
+	 * 		description manquante !	
      * @return path
      *        this method returns the best path to the target tile by using A*.
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     public AiPath bestPath(AiHero agent, AiTile target) throws StopRequestException
     {
@@ -114,8 +119,10 @@ public class PathCalculation {
     /**
      * this method will control if best path is safe or not for collect mode
      * @param path
+	 * 		description manquante !	
      * @return boolean
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     protected boolean isPathSafe(AiPath path) throws StopRequestException
     {
@@ -134,8 +141,10 @@ public class PathCalculation {
     /**
      * returns the next tile on path.
      * @param endTile
+	 * 		description manquante !	
      * @return nextTileOnPath
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     protected AiTile getNextTileOnPath( AiTile endTile ) throws StopRequestException
 	{
@@ -159,8 +168,10 @@ public class PathCalculation {
     /**
      * returns the next direction on path
      * @param endTile
+	 * 		description manquante !	
      * @return nextDirectionOnPath
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     protected Direction getNextDirectionOnPath( AiTile endTile ) throws StopRequestException
 	{
@@ -175,6 +186,7 @@ public class PathCalculation {
      * calculates time To Access To Next Tile
      * @return double
      * @throws StopRequestException 
+	 * 		description manquante !	
      */
     protected long timeToAccessToNextTile() throws StopRequestException
     {
@@ -186,8 +198,10 @@ public class PathCalculation {
     /**
      * Calculates Time Remaining For Explosion
      * @param bomb
+	 * 		description manquante !	
      * @return long 
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     protected long timeRemainingForExplosion(AiBomb bomb) throws StopRequestException
     {
@@ -197,8 +211,10 @@ public class PathCalculation {
     /**
      * Calculates Shortest Time Remaining For Explosion
      * @param tile
+	 * 		description manquante !	
      * @return long 
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     protected long shortestTimeRemainingForExplosion(AiTile tile) throws StopRequestException
     {
@@ -220,8 +236,10 @@ public class PathCalculation {
     /**
      * controls if next tile on path safe or not via time calculations
      * @param nextTile
+	 * 		description manquante !	
      * @return boolean
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     protected boolean isNextTileOnPathSafe (AiTile nextTile) throws StopRequestException
     {
@@ -237,8 +255,10 @@ public class PathCalculation {
     /**
      * checks if there is sudden death in next tile or not.
      * @param nextTile
+	 * 		description manquante !	
      * @return boolean
      * @throws StopRequestException
+	 * 		description manquante !	
      */
     public boolean isThereSuddenDeathEventInNextTile(AiTile nextTile) throws StopRequestException
 	{

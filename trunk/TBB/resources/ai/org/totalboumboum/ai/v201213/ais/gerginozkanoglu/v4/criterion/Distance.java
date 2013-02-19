@@ -21,8 +21,9 @@ public class Distance extends AiUtilityCriterionBoolean<GerginOzkanoglu> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
-	 * 
+	 * 		description manquante !	
 	 */
 	public Distance(GerginOzkanoglu ai) throws StopRequestException {
 		super(ai, NAME);

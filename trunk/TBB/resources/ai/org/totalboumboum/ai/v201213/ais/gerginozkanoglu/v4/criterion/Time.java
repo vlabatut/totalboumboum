@@ -48,9 +48,9 @@ public class Time extends AiUtilityCriterionBoolean<GerginOzkanoglu> {
 	/**
 	 * 
 	 * @param ai
-	 * 
+	 * 		description manquante !	
 	 * @throws StopRequestException
-	 * 
+	 * 		description manquante !	
 	 */
 	public Time(GerginOzkanoglu ai) throws StopRequestException {
 		super(ai, NAME);
