@@ -73,6 +73,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return liste de tiles accessible
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 * */
 	public ArrayList<AiTile> getAccessibleTiles() throws StopRequestException {
 		checkInterruption();
@@ -247,6 +248,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return AiTile -> case qui a l'utilité maximal
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiTile getBiggestTile() throws StopRequestException {
 		this.checkInterruption();
@@ -323,6 +325,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * @param sourceTile la case qu'on veut savoir si elle contient des murs.
 	 * @return vrai s'il n'existe pas mur dans la case.
 	 * @throws StopRequestException 
+	 * 		description manquante !	
 	 */
 	public boolean isTileContainsWalls(AiTile sourceTile) throws StopRequestException
 	{
@@ -496,6 +499,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return vrai si on peut.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isSimInBlastSight(AiTile tile, AiHero enemy)// v2
 			throws StopRequestException {
@@ -516,8 +520,10 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * Control si on peut tuer un adversaire en posant une bombe dans cette tile
 	 * 
 	 * @param tile
+	 * 		description manquante !	
 	 * @return vrai si on peut tuer un ennemi en posant une bombe dans ce tile
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isInBlastSight(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -615,11 +621,12 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * dans cette tile
 	 * 
 	 * @param tile
-	 * 
+	 * 		description manquante !	
 	 * @param enemy
 	 *            l'ennemi qu'on veut eliminer
 	 * @return vrai si l'adversaire est dans notre portée
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isInBlastSight(AiTile tile, AiHero enemy)
 			throws StopRequestException {
@@ -711,6 +718,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return AiHero de l'ennemi plus proche
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiHero getNearestEnemy() throws StopRequestException {
 		checkInterruption();
@@ -751,9 +759,12 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * Une methode simple pour determiner distance de deux cases
 	 * 
 	 * @param tile1
+	 * 		description manquante !	
 	 * @param tile2
+	 * 		description manquante !	
 	 * @return la distance entre deux cases
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public int simpleTileDistance(AiTile tile1,AiTile tile2) throws StopRequestException
 	{
@@ -766,6 +777,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return vrai, s'il y a un adversaire accesible dans la zone
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isEnemiesAccessible() throws StopRequestException {
 		checkInterruption();
@@ -786,6 +798,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 *            le type d'item
 	 * @return vrai/faux
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean zoneHasItem(AiItemType itemtype) throws StopRequestException {
 		checkInterruption();
@@ -802,6 +815,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return vrai s'il y a un item accessible
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean accessiblesHaveBonus() throws StopRequestException {
 		checkInterruption();
@@ -822,10 +836,11 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * Control si l'item est bonus
 	 * 
 	 * @param item
+	 * 		description manquante !	
 	 * @return vrai si c'est un bonus
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
-
 	public boolean isBonus(AiItem item) throws StopRequestException {
 		checkInterruption();
 		AiItemType type = item.getType();
@@ -873,10 +888,8 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return nombre de route d'échappement simple
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
-
-	
-
 	public int possible_escaping_directions() throws StopRequestException {
 		checkInterruption();
 		AiHero hero = getZone().getOwnHero();
@@ -1010,6 +1023,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * @return ArrayListe: Les cases concernee de mort subite
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getSuddenDeathTiles() throws StopRequestException {
 		checkInterruption();
@@ -1040,6 +1054,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 *            Le case qu'on consider poser une bombe
 	 * @return ms(long)
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public long bombExplosionTime(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -1064,6 +1079,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * @return Le temps qui nous restera s'il est le chainage est posible, sinon
 	 *         0
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public long chainReactionTime(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -1096,6 +1112,7 @@ public class OralOzugur extends ArtificialIntelligence {
 	 * 
 	 * @return la seule bestwall dans le map
 	 * @throws StopRequestException 
+	 * 		description manquante !	
 	 */
 	private AiTile getBestWallIfAny() throws StopRequestException{
 		checkInterruption();
@@ -1163,8 +1180,10 @@ public class OralOzugur extends ArtificialIntelligence {
 	
 	/**Renvoie vrai si item est un contigious.
 	 * @param item 
+	 * 		description manquante !	
 	 * @return vrai ssi il est contigious
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isContagiousBonus(AiItem item) throws StopRequestException
 	{
@@ -1178,8 +1197,10 @@ public class OralOzugur extends ArtificialIntelligence {
 	}
 	/** Le control si la bombe donnée est accessible.
 	 * @param bomb
+	 * 		description manquante !	
 	 * @return vrai/faux
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean isbombInAccessible(AiBomb bomb) throws StopRequestException
 	{
@@ -1197,8 +1218,10 @@ public class OralOzugur extends ArtificialIntelligence {
 	/**Method serve à trouver une case peut nous proteger si on y pose une bombe. 
 	 * @param bomb le bomb on essaye d'échapper
 	 * @param givenHero
+	 * 		description manquante !	
 	 * @return le tile on doit poser une bomber pour échapper. Null s'il n'existe pas.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiTile findShieldingTile(AiBomb bomb,AiHero  givenHero) throws StopRequestException
 	{
@@ -1221,8 +1244,10 @@ public class OralOzugur extends ArtificialIntelligence {
 	}
 	/**Presque pareil celui de AiZone mais ici on seulement compte les mur, les bombes et les flames.
 	 * @param tile
+	 * 		description manquante !	
 	 * @return vrai si on peut se situe dans cette case.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean customIsCrossableBy(AiTile tile) throws StopRequestException
 	{

@@ -64,7 +64,9 @@ public class ModeHandler extends AiModeHandler<OralOzugur> {
 	 * Constructeur
 	 * 
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected ModeHandler(OralOzugur ai) throws StopRequestException {
 		super(ai);

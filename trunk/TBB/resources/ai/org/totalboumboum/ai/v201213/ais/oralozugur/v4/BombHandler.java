@@ -217,6 +217,7 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	 *            Le personage à tester
 	 * @return vrai ssi il existe 2 case à échapper
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean canReachSafetyAstar(AiHero givenHero)
 			throws StopRequestException {
@@ -275,6 +276,7 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	 *            Hero to calculate
 	 * @return true if the hero can reach a safe tile time
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean canReachSafetyDijkstra(AiHero givenHero)
 			throws StopRequestException {
@@ -322,6 +324,7 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	 *            List to calculate total pause time
 	 * @return The total pause time
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public long getTotalPauseTime(List<Long> pauses)
 			throws StopRequestException {
@@ -340,8 +343,10 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	 * Retourne un ArrayList qui contient les cases de locations.
 	 * 
 	 * @param locations
+	 * 		description manquante !	
 	 * @return ArrayList qui contient les cases de locations.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> locationListToTileArrayList(
 			List<AiLocation> locations) throws StopRequestException {
@@ -488,8 +493,10 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 
 	/**Method pour trouver s'i on deplace vers un adversaire dans un corridor
 	 * @param givenHero
+	 * 		description manquante !	
 	 * @return vrai ssi il existe un ennemi dans notre direction de mouvement et s'il n'existe pas de jonction
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean heroMovingInCorridorToEnemy(AiHero givenHero) throws StopRequestException{
 		this.ai.checkInterruption();
@@ -509,9 +516,12 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	}
 	/** Utilisé pour determiner s'il existe un adversaire dans un direction et dans notre portée+2 
 	 * @param direction
+	 * 		description manquante !	
 	 * @param givenHero
+	 * 		description manquante !	
 	 * @return vrai ssi il existe un ennemi qui assure ces conditions
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean directionConteinsHeros(Direction direction,AiHero givenHero) throws StopRequestException
 	{
@@ -535,8 +545,10 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	}
 	/**Method utilisé pour savoir si l'agent donné continue sa mouvement dans corridor sans jonctions.
 	 * @param givenHero
+	 * 		description manquante !	
 	 * @return vrai ssi il assure les condition expliqué au-dessus
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	private boolean HeroIsInCorridor(AiHero givenHero) throws StopRequestException{
 		this.ai.checkInterruption();
@@ -584,8 +596,10 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	/**
 	 * 
 	 * @param direction
+	 * 		description manquante !	
 	 * @return Les direction orthogonal à un direction donné.Donc cette chaine est toujour  longueur de deux.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public Direction[] getPerpendicularDirections(Direction direction) throws StopRequestException{
 		this.ai.checkInterruption();
@@ -612,9 +626,12 @@ public class BombHandler extends AiBombHandler<OralOzugur> {
 	}
 	/**Method pour trouver si un jouer s'est trouve dans quel direction selon un autre jouer.
 	 * @param hero
+	 * 		description manquante !	
 	 * @param enemy
+	 * 		description manquante !	
 	 * @return Les direction de base donc up,down,left,right. Direction.None s'il ne sont pas dans un direction de base.
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public Direction getSimpleDirection(AiHero hero,AiHero enemy)  throws StopRequestException
 	{

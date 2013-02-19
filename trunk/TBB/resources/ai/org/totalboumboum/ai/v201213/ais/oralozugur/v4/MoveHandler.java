@@ -60,7 +60,9 @@ public class MoveHandler extends AiMoveHandler<OralOzugur> {
 	 * Constructuer
 	 * 
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected MoveHandler(OralOzugur ai) throws StopRequestException {
 		super(ai);
