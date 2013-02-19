@@ -110,6 +110,7 @@ public final class AiUtilityCombination
 	 * est levée.
 	 * 
 	 * @param <T> 
+	 * 		?	
 	 * 
 	 * @param criterion
 	 * 		Le nom du critère concerné par la valeur.

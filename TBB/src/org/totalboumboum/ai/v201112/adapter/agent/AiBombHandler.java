@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * ne fait rien, donc l'agent ne posera jamais de bombe.
  * 
  * @param <T> 
+ * 		?	
  * 
  * @author Vincent Labatut
  * 

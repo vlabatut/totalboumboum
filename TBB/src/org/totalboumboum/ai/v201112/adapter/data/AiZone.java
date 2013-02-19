@@ -307,7 +307,7 @@ public abstract class AiZone
 	 * cette couleur est null.
 	 * 
 	 * @param color 
-	 * 
+	 * 		?	
 	 * @return	
 	 * 		une liste de bombe de la couleur passée en paramètre
 	 */
@@ -538,7 +538,7 @@ public abstract class AiZone
 	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés. 
 	 * 
 	 * @param color 
-	 * 
+	 * 		?	
 	 * @return	
 	 * 		le personnage dont la couleur est celle passée en paramètre
 	 */

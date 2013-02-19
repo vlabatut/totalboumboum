@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * Cf. les différentes spécialisations de cette classe.
  * 
  * @param <T> 
+ * 		?	
  * 
  * @author Vincent Labatut
  * 

@@ -62,6 +62,7 @@ public final class DijkstraUse
 {
 	/**
 	 * @param args
+	 * 		?	
 	 */
 	public static void main(String args[])
 	{	// utilisation de base

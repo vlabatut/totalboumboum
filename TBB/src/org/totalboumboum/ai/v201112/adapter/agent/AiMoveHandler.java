@@ -50,6 +50,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * la destination et le chemin courants.
  * 
  * @param <T> 
+ * 		?	
  * 
  * @author Vincent Labatut
  * 

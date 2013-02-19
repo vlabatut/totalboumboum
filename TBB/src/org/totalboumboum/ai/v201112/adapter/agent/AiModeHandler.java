@@ -38,6 +38,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
  * champ {@link #mode}.
  * 
  * @param <T> 
+ * 		?	
  * 
  * @author Vincent Labatut
  * 
