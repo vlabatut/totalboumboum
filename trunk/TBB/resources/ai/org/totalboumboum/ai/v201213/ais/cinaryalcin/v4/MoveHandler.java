@@ -108,7 +108,9 @@ public class MoveHandler extends AiMoveHandler<CinarYalcin>
 	/**
 	 * @return returns true if there is a tile secure 
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 * @throws LimitReachedException
+	 * 		information manquante !?	
 	 */
 	protected boolean getSafeTile2() throws StopRequestException, LimitReachedException{
 		ai.checkInterruption();
@@ -413,9 +415,11 @@ private double currentSpeed = 0;
 	
 	/**
 	 * @param tile
+	 * 		information manquante !?	
 	 * @return
 	 * 		returns true if selected tile is dangerous for passing by
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	

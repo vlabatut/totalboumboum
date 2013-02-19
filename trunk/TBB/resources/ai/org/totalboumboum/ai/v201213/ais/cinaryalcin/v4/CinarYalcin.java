@@ -210,6 +210,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	/**
 	 * @return get current mode
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	public AiMode getMode() throws StopRequestException
 	{
@@ -221,8 +222,10 @@ public class CinarYalcin extends ArtificialIntelligence
 	/**
 	 * sudden death will appear in our time limit
  	 * @param time
+	 * 		information manquante !?	
 	 * @return true if sudden death event is close
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	public boolean isSuddenDeathClose(long time) throws StopRequestException {
 		this.checkInterruption();
@@ -245,6 +248,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	/**
 	 * @return an ArrayList<AiTile> which get current dangerous tiles in all zone
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public ArrayList<AiTile> getCurrentDangerousTiles() throws StopRequestException
 	{
@@ -299,8 +303,10 @@ public class CinarYalcin extends ArtificialIntelligence
 	
 	/**
 	 * @param hero 
+	 * 		information manquante !?	
 	 * @return List of tile that given hero can reach
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> getTilesReachable(AiHero hero) throws StopRequestException
 	{	this.checkInterruption();
@@ -337,8 +343,10 @@ public class CinarYalcin extends ArtificialIntelligence
 	
 	/**
 	 * @param hero
+	 * 		information manquante !?	
 	 * @return List of tile that given hero can reach but it consideres bomb as a block
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> getTilesReachableWithBombs(AiHero hero) throws StopRequestException
 	{	this.checkInterruption();
@@ -378,6 +386,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	/**
 	 * @return List of tiles in my hero's bomb range
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	public ArrayList<AiTile> bombRangeTiles() throws StopRequestException
 	{
@@ -411,6 +420,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	 * @param x an integer who defines bomb range
 	 * @return check if there is an enemy in our x range
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public ArrayList<AiTile> bombRangeTiles2(int x) throws StopRequestException
 	{
@@ -447,6 +457,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	/**
 	 * @return number of block in our bomb range
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public ArrayList<AiTile> numberOfBlock() throws StopRequestException {
 		this.checkInterruption();
@@ -472,6 +483,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	/**
 	 * @return number of item in our hero's bomb range
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public int numberOfItems() throws StopRequestException {
 		this.checkInterruption();
@@ -499,6 +511,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	 * 
 	 * @return list of all wall who is threatened by a bomb
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	public ArrayList<AiTile> wallWillBeDestroyed() throws StopRequestException
 	{
@@ -534,6 +547,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	 * It uses a global variable 'ownZoneSearch' which contains reachable tiles and is defined before.
 	 * @return true if there is an enemy reachable in our hero's zone
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	public boolean anyEnemieInOurZone() throws StopRequestException {
 		this.checkInterruption();
@@ -553,8 +567,11 @@ public class CinarYalcin extends ArtificialIntelligence
 	
 	/**
 	 * @param aitile 
+	 * 		information manquante !?	
 	 * @return return true if selected tile in danger.if wall or items in this tile it will be destroyer.
-	 * @throws StopRequestException  */
+	 * @throws StopRequestException 
+	 * 		information manquante !?	
+	 */
 	public boolean willBeDestroyed(AiTile aitile) throws StopRequestException {
 		this.checkInterruption();
 		zone=getZone();
@@ -600,6 +617,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	 *  it will take your hero's tile as a parameter
 	 * @return true if your bomb's fire can reach an enemy.
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	public boolean possibleDangerForEnemy(AiTile tilec) throws StopRequestException
 	{
@@ -624,11 +642,13 @@ public class CinarYalcin extends ArtificialIntelligence
 	
 	/**
 	 * @param hero
+	 * 		information manquante !?	
 	 * @param tile when simulation process, bomb is dropped on that tile.
 	 * @param simulate boolean if a bombing simulation is wanted, must given true.
 	 * @param simulateAllHero all heros will pose a bomb and you will simulate it
 	 * @return finds all secure tiles for given hero
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public ArrayList<AiTile> updateSafeTiles(AiHero hero, AiTile tile, boolean simulate,boolean simulateAllHero)
 			throws StopRequestException {
@@ -712,8 +732,10 @@ public class CinarYalcin extends ArtificialIntelligence
 
 	/**
 	 * @param bomb
+	 * 		information manquante !?	
 	 * @return time to explode of processed bomb
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public long processBomb(AiBomb bomb) throws StopRequestException
 	{
@@ -742,6 +764,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	/**
 	 * @return finds your agent's nearest opponent
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public AiHero getNearestEnemy() throws StopRequestException {
 		this.checkInterruption();
@@ -771,6 +794,7 @@ public class CinarYalcin extends ArtificialIntelligence
 	 * @param aitile1 AiTile
 	 * @return get distance between aitile and aitile1 with Manhattan algorithm.
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public int getDist(AiTile aitile, AiTile aitile1)
 			throws StopRequestException {
@@ -782,8 +806,10 @@ public class CinarYalcin extends ArtificialIntelligence
 	
 	/**
 	 * @param tile
+	 * 		information manquante !?	
 	 * @return true if your bomb in given tile can block an enemy
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Boolean isBlockingEnemy(AiTile tile) throws StopRequestException {
 		this.checkInterruption();
@@ -885,9 +911,11 @@ public class CinarYalcin extends ArtificialIntelligence
 	}
 	/**
 	 * @param arrList
+	 * 		information manquante !?	
 	 * @return true if given list contains null element
 	 * 
 	 * @throws StopRequestException 
+	 * 		information manquante !?	
 	 */
 	public Boolean containsNull(ArrayList<AiTile> arrList) throws StopRequestException
 	{	checkInterruption();
