@@ -30,8 +30,9 @@ public class MoveHandler extends AiMoveHandler<CiplakErakyol> {
 
 	/**
 	 * @param ai
-	 * 
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	protected MoveHandler(CiplakErakyol ai) throws StopRequestException {
 		super(ai);

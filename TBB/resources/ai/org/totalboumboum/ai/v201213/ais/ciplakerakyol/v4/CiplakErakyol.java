@@ -127,8 +127,10 @@ public class CiplakErakyol extends ArtificialIntelligence
 
 	/**
 	 * @param sourceTile
+	 * 		information manquante !?	
 	 * @return accessibleTiles
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	protected Set<AiTile> getAccessibleTiles( AiTile sourceTile ) throws StopRequestException
 	{
@@ -204,8 +206,10 @@ public class CiplakErakyol extends ArtificialIntelligence
 	
 	/**
 	 * @param tile
+	 * 		information manquante !?	
 	 * @return en danger
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Boolean getDanger(AiTile tile) throws StopRequestException {
 		this.checkInterruption();
@@ -240,9 +244,12 @@ public class CiplakErakyol extends ArtificialIntelligence
 
 	/**
 	 * @param aitile
+	 * 		information manquante !?	
 	 * @param aitile1
+	 * 		information manquante !?	
 	 * @return distance
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public int getDist(AiTile aitile, AiTile aitile1) throws StopRequestException {
 		this.checkInterruption();
