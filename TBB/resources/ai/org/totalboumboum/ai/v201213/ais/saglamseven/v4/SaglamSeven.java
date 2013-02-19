@@ -352,8 +352,10 @@ public class SaglamSeven extends ArtificialIntelligence
 	}
 
 	/**
-	 * @return ?? 
+	 * @return
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getCurrentDangerousTiles() throws StopRequestException
 	{
@@ -394,6 +396,7 @@ public class SaglamSeven extends ArtificialIntelligence
 	/**
 	 * @return this.getDangerousTilesOnBombPut(ourtile, ourhero.getBombRange())
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getDangerousTilesOnBombPut() throws StopRequestException
 	{
@@ -406,9 +409,12 @@ public class SaglamSeven extends ArtificialIntelligence
 
 	/**
 	 * @param givenTile
+	 * 		description manquante !	
 	 * @param range
+	 * 		description manquante !	
 	 * @return dangerousTilesOnBombPut
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getDangerousTilesOnBombPut( AiTile givenTile, int range ) throws StopRequestException
 	{
@@ -470,12 +476,9 @@ public class SaglamSeven extends ArtificialIntelligence
 	}
 
 	/**
-	 * @return
-	 * @throws StopRequestException
-	 */
-	/**
 	 * @return this.accessibleTiles
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getAccessibleTiles() throws StopRequestException
 	{
@@ -491,8 +494,10 @@ public class SaglamSeven extends ArtificialIntelligence
 	
 	/**
 	 * @param sourceTile
+	 * 		description manquante !	
 	 * @return this.accessibleTiles
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public ArrayList<AiTile> getAccessibleTiles( AiTile sourceTile ) throws StopRequestException
 	{
@@ -504,8 +509,10 @@ public class SaglamSeven extends ArtificialIntelligence
 	}
 	/**
 	 * @param givenHero
+	 * 		description manquante !	
 	 * @return ( safeTileCount > SAFETY_TILE_COUNT_LIMIT )
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected boolean canReachSafety( AiHero givenHero ) throws StopRequestException
 	{
@@ -529,7 +536,9 @@ this.getCurrentDangerousTiles().contains( currentTile ) ) safeTileCount--;
 	private ArrayList<AiTile> accessibleTiles;
 	/**
 	 * @param sourceTile
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	private void fillAccessibleTilesBy( AiTile sourceTile ) throws StopRequestException
 	{
@@ -558,9 +567,13 @@ sourceTile.getNeighbor( Direction.RIGHT ) ) ) fillAccessibleTilesBy( sourceTile.
 	/**
 	 * 
 	 * @param aiTile
+	 * 		description manquante !	
 	 * @param direction
-	 * @return ?
+	 * 		description manquante !	
+	 * @return
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean destructibleMurCheck (AiTile aiTile, Direction direction) throws StopRequestException{
 		this.checkInterruption();

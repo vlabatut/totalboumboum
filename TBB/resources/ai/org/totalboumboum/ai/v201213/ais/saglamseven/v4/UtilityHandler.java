@@ -51,7 +51,9 @@ public class UtilityHandler extends AiUtilityHandler<SaglamSeven>
 	 
 	/**
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	protected UtilityHandler(SaglamSeven ai) throws StopRequestException
     {	super(ai);
