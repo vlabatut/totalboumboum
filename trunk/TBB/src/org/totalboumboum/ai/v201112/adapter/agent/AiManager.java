@@ -185,10 +185,10 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	/**
 	 * active les évènements nécessaires à un changement de direction,
 	 * en simulant un joueur humain qui appuierait sur des touches
-	 * @param 
-	 * 		result
-	 * @param 
-	 * 		direction
+	 * @param result
+	 * 		?	
+	 * @param direction
+	 * 		?	
 	 */
 	private void updateMove(List<ControlEvent> result, Direction direction)
 	{	// init

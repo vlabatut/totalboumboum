@@ -111,7 +111,7 @@ public abstract class HeuristicCalculator
 	 * doit être réalisé).
 	 * 
 	 * @param location 
-	 * 
+	 * 		?	
 	 * @return
 	 * 		La case de destination la plus proche.
 	 */

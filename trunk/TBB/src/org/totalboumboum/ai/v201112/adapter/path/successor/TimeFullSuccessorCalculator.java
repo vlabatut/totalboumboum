@@ -116,6 +116,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * @param hero
 	 * 		Personnage de référence pour calculer la durée des déplacements.
 	 * @param searchMode 
+	 * 		?	
 	 */
 	public TimeFullSuccessorCalculator(ArtificialIntelligence ai, AiHero hero, int searchMode)
 	{	super(ai);

@@ -60,6 +60,7 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * @param heuristicCalculator	
 	 * 		Fonction heuristique.
 	 * @param successorCalculator 
+	 * 		?	
 	 * 
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
@@ -538,6 +539,7 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 */
 	/**
 	 * @param node
+	 * 		?	
 	 * @return
 	 * 		résultat de la comparaison
 	 */

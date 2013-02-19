@@ -116,6 +116,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		Nouveau coût à affecter.
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public void setCost(int row, int col, double cost) throws StopRequestException
 	{	costMatrix[row][col] = cost;

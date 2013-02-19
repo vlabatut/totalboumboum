@@ -47,6 +47,7 @@ public class AiExplosionList extends TreeSet<AiExplosion>
 	/**
 	 * 
 	 * @param tile
+	 * 		?	
 	 */
 	public AiExplosionList(AiTile tile)
 	{	this.tile = tile;

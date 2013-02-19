@@ -668,6 +668,7 @@ public final class AiDataZone extends AiZone
 	 * supprimées de cette représentation.
 	 * 
 	 * @param <U> 
+	 * 		?	
 	 * @param <T>	
 	 * 		type de la liste à traiter
 	 * 
@@ -684,7 +685,9 @@ public final class AiDataZone extends AiZone
 	/**
 	 * méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
+	 * 
 	 * @param <U> 
+	 * 		?	
 	 * @param <T>
 	 * 		type de la liste à traiter
 	 * 

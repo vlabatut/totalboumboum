@@ -40,6 +40,7 @@ public class AiOutput
 {
 	/**
 	 * @param zone
+	 * 		?	
 	 */
 	@SuppressWarnings("unchecked")
 	public AiOutput(AiZone zone)

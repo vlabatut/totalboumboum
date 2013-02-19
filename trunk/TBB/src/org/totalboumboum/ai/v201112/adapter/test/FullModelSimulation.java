@@ -49,6 +49,7 @@ public final class FullModelSimulation
 	 * proposées par {@link AiFullModel}.
 	 * 
 	 * @param args 
+	 * 		?	
 	 */
 	public static void main(String args[])
 	{	AiSimZone zone = InitData.initZone();
