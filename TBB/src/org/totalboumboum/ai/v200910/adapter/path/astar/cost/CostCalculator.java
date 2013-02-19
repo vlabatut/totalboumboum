@@ -50,6 +50,7 @@ public abstract class CostCalculator
 	 * @return	le coût du déplacement
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
 	
@@ -58,10 +59,12 @@ public abstract class CostCalculator
 	 * consistant à passer d'une case du chemin à la suivante.
 	 * 
 	 * @param path
+	 * 		?	
 	 * @return
 	 * 		Le cout.
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;

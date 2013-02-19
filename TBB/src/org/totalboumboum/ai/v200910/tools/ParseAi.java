@@ -57,8 +57,11 @@ public class ParseAi
 	/**
 	 * 
 	 * @param args
+	 * 		?	
 	 * @throws IOException
+	 * 		?	
 	 * @throws ParseException
+	 * 		?	
 	 */
 	public static void main(String[] args) throws IOException, ParseException
 	{	String aiPack = "resources/ai/org/totalboumboum/ai/v200910/ais";
@@ -68,9 +71,13 @@ public class ParseAi
 	/**
 	 * 
 	 * @param file
+	 * 		?	
 	 * @param level
+	 * 		?	
 	 * @throws ParseException
+	 * 		?	
 	 * @throws IOException
+	 * 		?	
 	 */
 	private static void parseFile(File file, int level) throws ParseException, IOException
 	{	for(int i=0;i<level;i++)
@@ -103,9 +110,13 @@ public class ParseAi
 	/**
 	 * 
 	 * @param folder
+	 * 		?	
 	 * @param level
+	 * 		?	
 	 * @throws ParseException
+	 * 		?	
 	 * @throws IOException
+	 * 		?	
 	 */
 	private static void parseFolder(File folder, int level) throws ParseException, IOException
 	{	if(IGNORED_PACKAGES.contains(folder.getName()))
@@ -134,8 +145,11 @@ public class ParseAi
 	/**
 	 * 
 	 * @param aiPath
+	 * 		?	
 	 * @throws ParseException
+	 * 		?	
 	 * @throws IOException
+	 * 		?	
 	 */
 	public static void parseAi(String aiPath) throws ParseException, IOException
 	{	File aiFolder = new File(aiPath);
@@ -145,8 +159,11 @@ public class ParseAi
 	/**
 	 * 
 	 * @param aiFolder
+	 * 		?	
 	 * @throws ParseException
+	 * 		?	
 	 * @throws IOException
+	 * 		?	
 	 */
 	private static void parseAi(File aiFolder) throws ParseException, IOException
 	{	System.out.println("----------------------------------------------------------------------");
@@ -159,8 +176,11 @@ public class ParseAi
 	/**
 	 * 
 	 * @param aiPack
+	 * 		?	
 	 * @throws ParseException
+	 * 		?	
 	 * @throws IOException
+	 * 		?	
 	 */
 	public static void parseAiPack(String aiPack) throws ParseException, IOException
 	{	File folder = new File(aiPack);

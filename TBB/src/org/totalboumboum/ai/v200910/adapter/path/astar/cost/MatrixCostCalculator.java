@@ -51,6 +51,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 
 	 * @param costMatrix	la matrice de cout
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
 	{	setCostMatrix(costMatrix);			
@@ -69,6 +70,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * @param costMatrix	la matrice de cout
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public void setCostMatrix(double costMatrix[][]) throws StopRequestException
 	{	this.costMatrix = costMatrix;		
@@ -82,6 +84,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * @param cost	nouveau coût à affecter
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;

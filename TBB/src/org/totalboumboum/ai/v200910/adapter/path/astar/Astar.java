@@ -70,9 +70,13 @@ public class Astar
 	/**
 	 * 
 	 * @param ai
+	 * 		?	
 	 * @param hero
+	 * 		?	
 	 * @param costCalculator
+	 * 		?	
 	 * @param heuristicCalculator
+	 * 		?	
 	 */
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
 	{	this(ai,hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
@@ -81,10 +85,15 @@ public class Astar
 	/**
 	 * 
 	 * @param ai
+	 * 		?	
 	 * @param hero
+	 * 		?	
 	 * @param costCalculator
+	 * 		?	
 	 * @param heuristicCalculator
+	 * 		?	
 	 * @param successorCalculator
+	 * 		?	
 	 */
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	this.ai = ai;
@@ -130,6 +139,7 @@ public class Astar
 	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxHeight
+	 * 		?	
 	 */
 	public void setMaxHeight(int maxHeight)
 	{	this.maxHeight = maxHeight;	
@@ -165,7 +175,9 @@ public class Astar
 	 * @param startTile	la case de départ
 	 * @param endTile	la case d'arrivée
 	 * @return un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
+	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile) throws StopRequestException
 	{	List<AiTile> endTiles = new ArrayList<AiTile>();
@@ -187,7 +199,9 @@ public class Astar
 	 * @param startTile	la case de départ
 	 * @param endTiles	la liste des cases d'arrivée possibles
 	 * @return un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
+	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles) throws StopRequestException
 	{	if(verbose)
