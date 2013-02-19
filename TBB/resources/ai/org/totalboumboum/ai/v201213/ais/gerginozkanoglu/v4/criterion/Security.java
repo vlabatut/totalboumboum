@@ -21,8 +21,9 @@ public class Security extends AiUtilityCriterionBoolean<GerginOzkanoglu> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !	
 	 * @throws StopRequestException
-	 * 
+	 * 		description manquante !	
 	 */
 	public Security(GerginOzkanoglu ai) throws StopRequestException {
 		super(ai, NAME);
