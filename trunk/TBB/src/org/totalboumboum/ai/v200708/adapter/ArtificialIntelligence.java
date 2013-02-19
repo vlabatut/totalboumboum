@@ -150,6 +150,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * @return
 	 * 		Un code correspondant à l'action à effectuer.
 	 * @throws Exception 
+	 * 		?	
 	 */
 	protected abstract Integer processAction() throws Exception;
 	
@@ -360,10 +361,10 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * @param timeBeforeShrink	temps avant le début du shrink
 	 * @param nextShrinkPosition	prochain bloc qui va être shrinké
 	 * @param bombPosition	position relative de la bombe
-	 * @param ownFirePower 
-	 * @param ownBombCount 
-	 * @param firePowers 
-	 * @param bombCounts 
+	 * @param ownFirePower ? 
+	 * @param ownBombCount ?
+	 * @param firePowers ?
+	 * @param bombCounts ?
 	 */
 	public void setPercepts(int zoneMatrix[][],Vector<int[]> bombs,Vector<int[]> players,
 			Vector<Boolean> playersStates, int[] ownPosition, long timeBeforeShrink,
