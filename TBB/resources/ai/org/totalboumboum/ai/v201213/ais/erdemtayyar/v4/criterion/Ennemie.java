@@ -31,7 +31,9 @@ public class Ennemie extends AiUtilityCriterionBoolean<ErdemTayyar> {
 	 * Si l'adversaire est faible sa valeur est TRUE sinon FALSE.
 	 * 
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Ennemie(ErdemTayyar ai) throws StopRequestException {
 		super(ai, NAME);

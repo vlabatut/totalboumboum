@@ -40,7 +40,9 @@ public class Pertinence extends AiUtilityCriterionBoolean {
 	 * Si on a besoin d'un item sa valeur est TRUE sinon FALSE.
 	 * 
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	@SuppressWarnings("unchecked")
 	public Pertinence(ErdemTayyar ai) throws StopRequestException {

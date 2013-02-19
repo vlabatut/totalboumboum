@@ -28,9 +28,10 @@ public class EnnemieDistance extends AiUtilityCriterionBoolean<ErdemTayyar> {
 	/**
 	 * 
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
-	
 	public EnnemieDistance( ErdemTayyar ai ) throws StopRequestException
 	{
 		super(ai, NAME);
