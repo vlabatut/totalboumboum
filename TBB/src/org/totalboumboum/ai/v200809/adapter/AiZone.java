@@ -82,6 +82,7 @@ public class AiZone
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
 	 * @param elapsedTime 
+	 * 		?	
 	 */
 	void update(long elapsedTime)
 	{	updateTime(elapsedTime);
@@ -140,6 +141,7 @@ public class AiZone
 	/**
 	 * met à jour le temps écoulé depuis la dernière mise à jour
 	 * @param elapsedTime
+	 * 		?	
 	 */
 	private void updateTime(long elapsedTime)
 	{	this.elapsedTime = elapsedTime;		
@@ -240,6 +242,7 @@ public class AiZone
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param tile 
+	 * 		?	
 	 * @param direction	direction dans laquelle le voisin se trouve
 	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiquée
 	 */
@@ -558,6 +561,7 @@ public class AiZone
 	 * supprimées de cette représentation.
 	 * 
 	 * @param <U> 
+	 * 		?	
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
@@ -573,6 +577,7 @@ public class AiZone
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <U> 
+	 * 		?	
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
