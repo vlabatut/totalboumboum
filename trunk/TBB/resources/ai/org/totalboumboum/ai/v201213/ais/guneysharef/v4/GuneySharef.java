@@ -40,6 +40,7 @@ public class GuneySharef extends ArtificialIntelligence
 	/**
 	 * @return the hashmap
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public HashMap<AiTile,Integer> getHashMap() throws StopRequestException{
 		checkInterruption();
@@ -142,11 +143,13 @@ public class GuneySharef extends ArtificialIntelligence
 
 	/**
 	 * @param tile
+	 * 		description manquante !	
 	 * @param tile2
+	 * 		description manquante !	
 	 * @return distance entre les cases
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
-	
 	public int getDist(AiTile tile, AiTile tile2) throws StopRequestException {
 		this.checkInterruption();
 		int d= Math.abs(tile.getCol()-tile2.getCol())+Math.abs(tile.getRow()-tile2.getRow());
@@ -156,8 +159,10 @@ public class GuneySharef extends ArtificialIntelligence
 
 	/**
 	 * @param t
+	 * 		description manquante !	
 	 * @return Donne la plus proche case
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public Object getClosestTile(AiTile t) throws StopRequestException{
 		this.checkInterruption();
@@ -185,6 +190,7 @@ public class GuneySharef extends ArtificialIntelligence
 	/**
 	 * @return la meilleur case
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiTile getBiggestTile() throws StopRequestException{
 		this.checkInterruption();
@@ -206,10 +212,14 @@ public class GuneySharef extends ArtificialIntelligence
 	
 	/**
 	 * @param hero
+	 * 		description manquante !	
 	 * @param tile
+	 * 		description manquante !	
 	 * @param simulate
+	 * 		description manquante !	
 	 * @return les cases qui ne sont pas dangereuses
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public List<AiTile> getSafeTiles(AiHero hero, AiTile tile, boolean simulate)
 			throws StopRequestException {
@@ -279,9 +289,12 @@ public class GuneySharef extends ArtificialIntelligence
 	
 	/**
 	 * @param aitile
+	 * 		description manquante !	
 	 * @param direction
+	 * 		description manquante !	
 	 * @return a boolean. regarde si le mur est detructible
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean controlOfDestructibleBlock(AiTile aitile, Direction direction)
 			throws StopRequestException {
@@ -302,10 +315,14 @@ public class GuneySharef extends ArtificialIntelligence
 	
 	/**
 	 * @param aitile
+	 * 		description manquante !	
 	 * @param direction
+	 * 		description manquante !	
 	 * @param i
+	 * 		description manquante !	
 	 * @return a boolean. regarde s'il y a un ennemie dans la portée
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean getAnEnemyInMyRange(AiTile aitile, Direction direction, int i)
 			throws StopRequestException {
@@ -342,9 +359,12 @@ public class GuneySharef extends ArtificialIntelligence
 	
 	/**
 	 * @param aitile
+	 * 		description manquante !	
 	 * @param direction
+	 * 		description manquante !	
 	 * @return a boolean. regarde si sur la direction il y a un mur non destructible
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean controlOfBlocks(AiTile aitile, Direction direction)
 			throws StopRequestException {
@@ -362,9 +382,12 @@ public class GuneySharef extends ArtificialIntelligence
 	}
 	/**
 	 * @param aitile
+	 * 		description manquante !	
 	 * @param direction
+	 * 		description manquante !	
 	 * @return a boolean ragarde si dans la direction il y a un ennemi
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public boolean controlEnemy(AiTile aitile, Direction direction)
 			throws StopRequestException {
@@ -381,6 +404,7 @@ public class GuneySharef extends ArtificialIntelligence
 	/**
 	 * @return l'ennemi pret a notre agent
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public AiHero getNearestEnemy() throws StopRequestException {
 		this.checkInterruption();
@@ -405,8 +429,10 @@ public class GuneySharef extends ArtificialIntelligence
 
 	/**
 	 * @param tile
+	 * 		description manquante !	
 	 * @return a boolean regarde s'il y a un danger sur cette case
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public Boolean getDanger(AiTile tile) throws StopRequestException {
 		this.checkInterruption();
@@ -441,8 +467,10 @@ public class GuneySharef extends ArtificialIntelligence
 	
 	/**
 	 * @param tile
+	 * 		description manquante !	
 	 * @return si on peutbloquer un ennemie
 	 * @throws StopRequestException 
+	 * 		description manquante !	
 	 */
 	public Boolean block(AiTile tile) throws StopRequestException{
 		this.checkInterruption();
@@ -463,8 +491,8 @@ public class GuneySharef extends ArtificialIntelligence
 	/**
 	 * @return le mode
 	 * @throws StopRequestException 
+	 * 		description manquante !	
 	 */
-
 	public AiMode getMode() throws StopRequestException{
 		this.checkInterruption();
 		AiMode mode=modeHandler.getMode();

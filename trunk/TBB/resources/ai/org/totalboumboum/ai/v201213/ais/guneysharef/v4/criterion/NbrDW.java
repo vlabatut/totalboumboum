@@ -22,9 +22,9 @@ public class NbrDW extends AiUtilityCriterionInteger<GuneySharef>
 	
 	/**  
 	 * @param ai 
-	 * 
+	 * 		description manquante !	
 	 * @throws StopRequestException	
-	 * 		
+	 * 		description manquante !	
 	 */
 	public NbrDW(GuneySharef ai) throws StopRequestException
 	{	super(ai,NAME,0,3);
