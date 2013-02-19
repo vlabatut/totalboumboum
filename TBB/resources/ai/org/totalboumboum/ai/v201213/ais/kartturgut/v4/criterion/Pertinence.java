@@ -35,8 +35,10 @@ public class Pertinence extends AiUtilityCriterionBoolean<KartTurgut>
 	
 	/**
 	 * @param t
+	 * 		description manquante !	
 	 * @return resultat
 	 * @throws StopRequestException
+	 * 		description manquante !	
 	 */
 	public Boolean criterepertinence( AiItemType t ) throws StopRequestException
 	{
