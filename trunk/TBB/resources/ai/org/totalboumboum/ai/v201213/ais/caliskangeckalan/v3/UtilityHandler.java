@@ -218,6 +218,7 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
 	/**
 	 * @return if we cant find a path for rivals, this method sets the mur tiles for the rivals using indirect path
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public Set<AiTile> getMursForRivals() throws StopRequestException {
 		ai.checkInterruption();

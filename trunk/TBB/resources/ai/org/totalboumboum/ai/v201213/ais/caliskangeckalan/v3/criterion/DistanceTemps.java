@@ -52,9 +52,12 @@ public class DistanceTemps extends AiUtilityCriterionBoolean<CaliskanGeckalan>
 	protected AiTile safeDestination = null;
 	/** initialize a boolean for dropping bomb*/
 	protected boolean secondaryBombing = false;
+	
 	/**
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public DistanceTemps(CaliskanGeckalan ai) throws StopRequestException
 	{	// init nom

@@ -75,7 +75,9 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 	
 	/**
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	protected MoveHandler(CaliskanGeckalan ai) throws StopRequestException
     {	super(ai);
@@ -402,9 +404,11 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 	/**
 	 * 
 	 * @param path
+	 * 		information manquante !?	
 	 * @return check a path is safe and is crossable
 	 * 		?
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	private boolean checkPathValidity(AiPath path) throws StopRequestException
 	{	ai.checkInterruption();
@@ -426,6 +430,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 	 * @return all danger tiles
 	 * 		?
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
@@ -534,9 +539,11 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 	/**
 	 * 
 	 * @param tile
+	 * 		information manquante !?	
 	 * @return check a tile is safe
 	 * 		?
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();

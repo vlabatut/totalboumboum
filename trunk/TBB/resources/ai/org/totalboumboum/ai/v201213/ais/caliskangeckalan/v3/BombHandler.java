@@ -103,6 +103,7 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalan>
 	 * @return if we put a bomb, can we kill an enemy? controls is there any enemy
 	 * in our range, and return true or false 
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public boolean canKill() throws StopRequestException {
 		ai.checkInterruption();

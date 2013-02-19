@@ -55,9 +55,12 @@ public class PertinentCollecteForBonus extends AiUtilityCriterionBoolean<Caliska
 	protected AiTile safeDestination = null;
 	/** initialize a boolean for dropping bomb*/
 	protected boolean secondaryBombing = false;
+
 	/**
 	 * @param ai
+	 * 		information manquante !?	
 	 * @throws StopRequestException
+	 * 		information manquante !?	
 	 */
 	public PertinentCollecteForBonus(CaliskanGeckalan ai) throws StopRequestException
 	{	// init nom

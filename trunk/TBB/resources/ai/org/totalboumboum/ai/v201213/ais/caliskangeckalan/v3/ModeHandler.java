@@ -36,7 +36,10 @@ public class ModeHandler extends AiModeHandler<CaliskanGeckalan>
 	private CalculCommun calculCommun = null;
 	/**
 	 * @param ai 
-	 * @throws StopRequestException  */
+	 * 		information manquante !?	
+	 * @throws StopRequestException
+	 * 		information manquante !?	
+	 */
 	protected ModeHandler(CaliskanGeckalan ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
