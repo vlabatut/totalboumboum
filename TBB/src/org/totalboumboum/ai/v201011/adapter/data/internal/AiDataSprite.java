@@ -80,6 +80,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	 * @param tile
 	 * 		la nouvelle case contenant cette représentation
 	 * @param elapsedTime 
+	 * 		?	
 	 */
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	this.tile = tile;
@@ -163,6 +164,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/** 
 	 * initialise l'état dans lequel se trouve ce sprite
 	 * @param elapsedTime 
+	 * 		?	
 	 */
 	private void updateState(long elapsedTime)
 	{	state.update(elapsedTime);

@@ -48,16 +48,20 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
 	 * 
 	 * @param ai 
+	 * 		?	
 	 * @param tile	
 	 * 		case associée à ce noeud de recherche
 	 * @param hero 
+	 * 		?	
 	 * @param costCalculator	
 	 * 		fonction de cout
 	 * @param heuristicCalculator	
 	 * 		fonction heuristique
 	 * @param successorCalculator 
+	 * 		?	
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// ia
@@ -90,6 +94,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		noeud de recherche parent de ce noeud
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
 	{	// ia
@@ -249,7 +254,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		case à tester
 	 * @return	
 	 * 		vrai si la case a déjà été traitée
+	 * 
 	 * @throws StopRequestException
+	 * 		?	
 	 */
 	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
@@ -284,7 +291,9 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 
 	 * @return	
 	 * 		une liste contenant les fils de ce noeud
+	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public List<AstarNode> getChildren() throws StopRequestException
 	{	if(children==null)
@@ -298,6 +307,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * de la case courante.
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();

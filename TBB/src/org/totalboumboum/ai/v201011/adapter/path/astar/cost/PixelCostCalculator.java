@@ -56,8 +56,11 @@ public class PixelCostCalculator extends CostCalculator
 	/**
 	 * 
 	 * @param startTile
+	 * 		?	
 	 * @param startX
+	 * 		?	
 	 * @param startY
+	 * 		?	
 	 */
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
 	{	this.startTile = startTile;
