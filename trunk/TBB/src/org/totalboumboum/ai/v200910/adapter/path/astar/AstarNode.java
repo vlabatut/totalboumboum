@@ -48,14 +48,16 @@ public class AstarNode implements Comparable<AstarNode>
 	 * Les calculateurs passés en paramètres seront utilisés
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
 	 * @param ai 
-	 * 
+	 * 		?	
 	 * @param tile	case associée à ce noeud de recherche
 	 * @param hero 
+	 * 		?	
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
 	 * @param successorCalculator 
-	 * 
+	 * 		?	
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// ia
@@ -85,6 +87,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param parent	noeud de recherche parent de ce noeud
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
 	{	// ia
@@ -223,6 +226,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param tile	case à tester
 	 * @return	vrai si la case a déjà été traitée
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
@@ -256,6 +260,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * 
 	 * @return	une liste contenant les fils de ce noeud
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public List<AstarNode> getChildren() throws StopRequestException
 	{	if(children==null)
@@ -268,6 +273,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * i.e. pour déterminer quelles sont les cases que l'on peut atteindre à partir
 	 * de la case courante.
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();

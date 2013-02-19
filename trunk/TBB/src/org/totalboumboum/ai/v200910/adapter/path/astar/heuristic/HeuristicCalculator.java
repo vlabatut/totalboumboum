@@ -50,6 +50,7 @@ public abstract class HeuristicCalculator
 	 * @param endTiles	les cases terminant le chemin
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public void setEndTiles(List<AiTile> endTiles) throws StopRequestException
 	{	this.endTiles = endTiles;		
@@ -62,6 +63,7 @@ public abstract class HeuristicCalculator
 	 * @return	la liste des cases objectifs
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public List<AiTile> getEndTiles() throws StopRequestException
 	{	return endTiles;	
@@ -78,6 +80,7 @@ public abstract class HeuristicCalculator
 	 * @return	l'heuristique de la case
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public abstract double processHeuristic(AiTile tile) throws StopRequestException;
 }

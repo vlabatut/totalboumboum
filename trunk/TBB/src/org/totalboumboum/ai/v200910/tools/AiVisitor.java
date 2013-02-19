@@ -69,6 +69,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/**
 	 * 
 	 * @param initLevel
+	 * 		?	
 	 */
 	public AiVisitor(int initLevel)
 	{	indentLevel = initLevel;		
@@ -323,6 +324,7 @@ if(currentMethod.equals("PathFinder"))
 	/**
 	 * 
 	 * @param statement
+	 * 		?	
 	 */
 	private void checkBlock(Statement statement)
 	{	if(!IGNORED_METHODS.contains(currentMethod))

@@ -422,10 +422,13 @@ public class AiTile
 	 * la liste de sprite passée en paramètre)
 	 * 
 	 * @param <T> 
-	 * 
-	 * @param sprite	le sprite qui veut traverser cette case
-	 * @param list	les sprites de cette case à tester
-	 * @return	vrai si le sprite peut traverser tous les sprites de la liste
+	 * 		?	
+	 * @param sprite	
+	 * 		le sprite qui veut traverser cette case
+	 * @param list	
+	 * 		les sprites de cette case à tester
+	 * @return	vrai 
+	 * 		si le sprite peut traverser tous les sprites de la liste
 	 */
 	private <T extends AiSprite<?>> boolean isCrossableBy(AiSprite<?> sprite, List<T> list)
 	{	boolean result = true;

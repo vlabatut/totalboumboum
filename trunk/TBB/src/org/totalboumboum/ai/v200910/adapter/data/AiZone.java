@@ -87,6 +87,7 @@ public class AiZone
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
 	 * @param elapsedTime 
+	 * 		?	
 	 */
 	public void update(long elapsedTime)
 	{	updateTimes(elapsedTime);
@@ -138,6 +139,7 @@ public class AiZone
 	 * met à jour les données temporelles
 	 * 
 	 * @param elapsedTime
+	 * 		?	
 	 */
 	private void updateTimes(long elapsedTime)
 	{	// init
@@ -765,8 +767,11 @@ public class AiZone
 	 * supprimées de cette représentation.
 	 * 
 	 * @param <U> 
-	 * @param <T>	type de la liste à traiter
-	 * @param list	liste à traiter
+	 * 		?	
+	 * @param <T>	
+	 * 		type de la liste à traiter
+	 * @param list	
+	 * 		liste à traiter
 	 */
 	private <U extends Sprite, T extends AiSprite<?>> void uncheckAll(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -780,6 +785,7 @@ public class AiZone
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <U> 
+	 * 		?	
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
