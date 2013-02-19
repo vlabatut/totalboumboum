@@ -141,7 +141,7 @@ public class BombHandler extends AiBombHandler<KartTurgut>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !	
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
