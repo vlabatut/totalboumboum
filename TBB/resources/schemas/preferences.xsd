@@ -50,8 +50,8 @@
 
 	<xsd:simpleType name="tMode">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="ATTACK" />
-			<xsd:enumeration value="COLLECT" />
+			<xsd:enumeration value="ATTACKING" />
+			<xsd:enumeration value="COLLECTING" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
