@@ -172,7 +172,7 @@ public class MoveHandler extends AiMoveHandler<BesniliKangal>
 	 * bombe.
 	 * 
 	 * @param givenTile
-	 * 
+	 * 		information manquante !?	
 	 * @return long
 	 * 
 	 * @throws StopRequestException

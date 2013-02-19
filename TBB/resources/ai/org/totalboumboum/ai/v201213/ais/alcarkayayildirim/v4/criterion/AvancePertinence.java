@@ -22,7 +22,9 @@ public class AvancePertinence extends AiUtilityCriterionBoolean<AlcarKayaYildiri
 	/**
 	 * 
 	 * @param ai
+	 * 		?	
 	 * @throws StopRequestException
+	 * 		?	
 	 */
 	public AvancePertinence( AlcarKayaYildirim ai ) throws StopRequestException
 	{

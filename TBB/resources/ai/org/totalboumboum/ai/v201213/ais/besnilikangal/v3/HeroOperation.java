@@ -57,7 +57,7 @@ public class HeroOperation
 	 * Determiner la position en danger d'un ennemi passé par parametre
 	 * 
 	 * @param hero
-	 * 
+	 * 		information manquante !?	
 	 * @return Si l'ennemi passé par parametre est en danger
 	 * 
 	 * @throws StopRequestException
@@ -74,7 +74,7 @@ public class HeroOperation
 	 * surs
 	 * 
 	 * @param givenTile
-	 * 
+	 * 		information manquante !?	
 	 * @return s'il y a un ennemi dans un RADIUS.
 	 * 
 	 * @throws StopRequestException
@@ -115,7 +115,7 @@ public class HeroOperation
 	 * Controler s'il y a un ennemi dans les cases que notre IA peut atteindre.
 	 * 
 	 * @param ennemy
-	 * 
+	 * 		information manquante !?	
 	 * @return boolean
 	 * 
 	 * @throws StopRequestException

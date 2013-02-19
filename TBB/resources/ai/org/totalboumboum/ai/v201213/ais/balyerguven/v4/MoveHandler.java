@@ -187,11 +187,11 @@ public class MoveHandler extends AiMoveHandler<BalyerGuven>
 	 *
 	 * method for the next tile on our path
 	 * @param tile
-	 * 
+	 * 		?	
 	 * @return AiTile
-	 * 
+	 * 		?	
 	 * @throws StopRequestException
-	 *            If the engine demands the termination of the agent.
+	 *      If the engine demands the termination of the agent.
 	 */
 	public AiTile getNextTileOnPath( AiTile tile ) throws StopRequestException
 	{

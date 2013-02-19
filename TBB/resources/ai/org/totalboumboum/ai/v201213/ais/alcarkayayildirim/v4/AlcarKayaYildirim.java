@@ -989,7 +989,9 @@ public class AlcarKayaYildirim extends ArtificialIntelligence
 	 * Le recherhe de la case ou l'utilité est maximal
 	 * 
 	 * @return AiTile -> case qui a l'utilité maximal
+	 * 
 	 * @throws StopRequestException
+	 * 		?	
 	 */
 	public AiTile getBiggestTile() throws StopRequestException {
 		this.checkInterruption();
