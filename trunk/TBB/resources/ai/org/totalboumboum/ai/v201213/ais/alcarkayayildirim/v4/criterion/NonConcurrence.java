@@ -24,7 +24,9 @@ public class NonConcurrence extends AiUtilityCriterionBoolean<AlcarKayaYildirim>
 	/**
 	 * 
 	 * @param ai
+	 * 		?	
 	 * @throws StopRequestException
+	 * 		?	
 	 */
 	public NonConcurrence(AlcarKayaYildirim ai) throws StopRequestException {
 		super(ai, NAME);

@@ -118,7 +118,7 @@ public class ItemOperation
 	 * Determine pour un item donné, si cet item est utile pour nous.
 	 * 
 	 * @param item
-	 * 
+	 * 		information manquante !?	
 	 * @return boolean
 	 * 
 	 * @throws StopRequestException

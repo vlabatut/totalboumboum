@@ -137,10 +137,11 @@ public class BalyerGuven extends ArtificialIntelligence
 	 * method for getting the reachable tiles.
 	 * 
 	 * @param tile
-	 *            
-	 * @return list of tiles reachable
+	 * 		?	
+	 * @return 
+	 * 		list of tiles reachable
 	 * @throws StopRequestException
-	 *             If the engine demands the termination of the agent.
+	 *      If the engine demands the termination of the agent.
 	 */
 	protected ArrayList<AiTile> getReachableTiles( AiTile tile ) throws StopRequestException
 	{

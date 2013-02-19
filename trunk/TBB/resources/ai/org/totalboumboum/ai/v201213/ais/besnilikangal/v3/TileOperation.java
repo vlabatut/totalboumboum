@@ -304,7 +304,7 @@ public class TileOperation
 	 * Retourner les cases de l'ennemi en considerant notre flamme.
 	 * 
 	 * @param bombRange
-	 * 
+	 * 		?	
 	 * @return Set<AiTile>
 	 * 
 	 * @throws StopRequestException
@@ -444,7 +444,7 @@ public class TileOperation
 	 * Renvoyer toutes les cases(blast,fire,reaction chainé)
 	 * 
 	 * @param bomb
-	 * 
+	 * 		?	
 	 * @return Set<AiTile>
 	 * 
 	 * @throws StopRequestException
@@ -462,8 +462,11 @@ public class TileOperation
 	 * l'exploitation chainée.
 	 * 
 	 * @param bombs
+	 * 		?	
 	 * @param index
+	 * 		?	
 	 * @param blastTiles
+	 * 		?	
 	 * 
 	 * @return un set des cas qui sont en danger soit par une bombe
 	 *         directement,soit par l'exploitation chainée.
@@ -526,6 +529,7 @@ public class TileOperation
 	 * cible courante.
 	 * 
 	 * @param sourceTile
+	 * 		?	
 	 * @return int
 	 * 
 	 * @throws StopRequestException

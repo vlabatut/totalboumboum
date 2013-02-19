@@ -44,7 +44,7 @@ public class PathOperation
 	 * The AI doivent etre passé
 	 * 
 	 * @param ai
-	 * 
+	 * 		?	
 	 * @throws StopRequestException
 	 *             Au cas où le moteur demande la terminaison de l'agent.
 	 */
@@ -105,7 +105,7 @@ public class PathOperation
 	 * Trouve une chemin qui n'est pas accessible par notre IA.
 	 * 
 	 * @param targetTile
-	 * 
+	 * 		?	
 	 * @return AiPath s'il en a 
 	 * 
 	 * @throws StopRequestException
@@ -133,8 +133,9 @@ public class PathOperation
 	 * Renvoyer la prochaine case dans notre chemin
 	 * 
 	 * @param currentPath
+	 * 		information manquante !?	
 	 * @param givenTile
-	 * 
+	 * 		information manquante !?	
 	 * @return AiTile
 	 * 
 	 * @throws StopRequestException
@@ -157,7 +158,7 @@ public class PathOperation
 	 * Pour une case donnée,determine si notre chemin contient cette case.
 	 * 
 	 * @param currentTile
-	 * 
+	 * 		information manquante !?	
 	 * @return boolean
 	 * 
 	 * @throws StopRequestException

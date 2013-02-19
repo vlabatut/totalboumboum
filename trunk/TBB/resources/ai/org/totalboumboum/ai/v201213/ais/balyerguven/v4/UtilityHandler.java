@@ -36,7 +36,9 @@ public class UtilityHandler extends AiUtilityHandler<BalyerGuven>
 {	
 	/** verbose
 	 * @param ai
+	 * 		?	
 	 * @throws StopRequestException
+	 * 		?	
 	 */
 	protected UtilityHandler(BalyerGuven ai) throws StopRequestException
 	{	

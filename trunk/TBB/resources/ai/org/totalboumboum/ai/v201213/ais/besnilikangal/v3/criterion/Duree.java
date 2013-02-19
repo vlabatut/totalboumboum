@@ -35,7 +35,9 @@ public class Duree extends AiUtilityCriterionInteger<BesniliKangal>
 	 * @param ai
 	 *            l'agent concerné.
 	 * @param min
+	 * 		information manquante !?	
 	 * @param max
+	 * 		information manquante !?	
 	 * 
 	 * @throws StopRequestException
 	 *             Au cas où le moteur demande la terminaison de l'agent.

@@ -115,7 +115,9 @@ public class MoveHandler extends AiMoveHandler<AlcarKayaYildirim> {
 
 	/**
 	 * @return result
+	 * 		?	
 	 * @throws StopRequestException
+	 * 		?	
 	 */
 	protected boolean getSafeTile() throws StopRequestException {
 		ai.checkInterruption();

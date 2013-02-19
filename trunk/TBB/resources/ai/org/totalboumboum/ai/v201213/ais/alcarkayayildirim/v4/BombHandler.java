@@ -64,9 +64,10 @@ public class BombHandler extends AiBombHandler<AlcarKayaYildirim>
 	
 	/**
 	 * @param ai 
-	 * @throws StopRequestException  */
-
-	
+	 * 		?	
+	 * @throws StopRequestException
+	 * 		?	
+	 */
 	protected BombHandler(AlcarKayaYildirim ai) throws StopRequestException
     {	super(ai);
     	ai.checkInterruption();
@@ -84,8 +85,11 @@ public class BombHandler extends AiBombHandler<AlcarKayaYildirim>
 	
 	/**
 	 * @param tile
+	 * 		?	
 	 * @return result
+	 * 		?	
 	 * @throws StopRequestException
+	 * 		?	
 	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	

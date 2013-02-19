@@ -53,8 +53,10 @@ public class UtilityHandler extends AiUtilityHandler<AlcarKayaYildirim>
 	private final int NEAR_ENEMY_HERO_COUNT_LIMIT = 1;
 	
 	/**
-	 * @param ai	
+	 * @param ai
+	 * 		?	
 	 * @throws StopRequestException	
+	 * 		?	
 	 */
 	protected UtilityHandler(AlcarKayaYildirim ai) throws StopRequestException
 	{	
