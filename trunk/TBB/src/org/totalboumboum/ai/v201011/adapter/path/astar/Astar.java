@@ -143,6 +143,7 @@ public final class Astar
 	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxHeight
+	 * 		?	
 	 */
 	public void setMaxHeight(int maxHeight)
 	{	this.maxHeight = maxHeight;	
@@ -182,8 +183,11 @@ public final class Astar
 	 * 		la case d'arrivée
 	 * @return 
 	 * 		un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
+	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 * @throws LimitReachedException 
+	 * 		?	
 	 */
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile) throws StopRequestException, LimitReachedException
 	{	List<AiTile> endTiles = new ArrayList<AiTile>();
@@ -208,8 +212,11 @@ public final class Astar
 	 * 		la liste des cases d'arrivée possibles
 	 * @return 
 	 * 		un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
+	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 * @throws LimitReachedException 
+	 * 		?	
 	 */
 	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	if(verbose)

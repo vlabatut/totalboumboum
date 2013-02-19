@@ -297,6 +297,7 @@ if(target==null || source==null)
 	 * cette couleur est null.
 	 * 
 	 * @param color 
+	 * 		?	
 	 * @return	
 	 * 		une liste de bombe de la couleur passée en paramètre
 	 */
@@ -364,6 +365,7 @@ if(target==null || source==null)
 	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés.
 	 *  
 	 * @param color 
+	 * 		?	
 	 * @return	
 	 * 		le personnage dont la couleur est celle passée en paramètre
 	 */

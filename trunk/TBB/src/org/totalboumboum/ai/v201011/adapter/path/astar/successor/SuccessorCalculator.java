@@ -58,6 +58,7 @@ public abstract class SuccessorCalculator
 	 * 		la liste de cases accessibles
 	 * 
 	 * @throws StopRequestException 
+	 * 		?	
 	 */
 	public abstract List<AiTile> processSuccessors(AstarNode node) throws StopRequestException;
 }

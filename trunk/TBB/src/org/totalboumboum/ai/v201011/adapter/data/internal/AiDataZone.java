@@ -666,6 +666,7 @@ public final class AiDataZone extends AiZone
 	 * supprimées de cette représentation.
 	 * 
 	 * @param <U> 
+	 * 		?	
 	 * @param <T>	
 	 * 		type de la liste à traiter
 	 * 
@@ -684,6 +685,7 @@ public final class AiDataZone extends AiZone
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
 	 * @param <U> 
+	 * 		?	
 	 * @param <T>
 	 * 		type de la liste à traiter
 	 * 
