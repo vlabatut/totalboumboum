@@ -24,6 +24,7 @@ public class Matrix {
 	 * This class calculates the matrix according to the given values.
 	 * 
 	 * @param ai 
+	 * 		description manquante !
 	 * @param wfire this is the value of fire explosion
 	 * @param wblast this is the value of bomb blasts
 	 * @param wbomb this is the value of bomb numbers in game play
@@ -36,6 +37,7 @@ public class Matrix {
 	 * @return 
 	 * 		?
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] calculate(CaliskanSeven ai, int wfire, int wblast,
 			int wbomb, int wbonus, int wmalus, int whero, int wwall,
