@@ -38,9 +38,11 @@ public class CriterionPertinance extends AiUtilityCriterionBoolean{
 	/**
 	 * 
 	 * @param t
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isItemPertinant(AiItemType t) throws StopRequestException{
 		ai.checkInterruption();
