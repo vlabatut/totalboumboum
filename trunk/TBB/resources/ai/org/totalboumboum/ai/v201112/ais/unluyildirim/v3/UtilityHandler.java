@@ -46,7 +46,9 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected UtilityHandler(UnluYildirim ai) throws StopRequestException {
 		super(ai);

@@ -21,7 +21,9 @@ public class CriterionFaible extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CriterionFaible(UnluYildirim ai) throws StopRequestException
 	{	

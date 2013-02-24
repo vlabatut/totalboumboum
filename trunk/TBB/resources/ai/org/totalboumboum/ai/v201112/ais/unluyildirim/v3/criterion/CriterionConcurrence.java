@@ -27,7 +27,9 @@ public class CriterionConcurrence extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CriterionConcurrence(UnluYildirim ai) throws StopRequestException
 	{	

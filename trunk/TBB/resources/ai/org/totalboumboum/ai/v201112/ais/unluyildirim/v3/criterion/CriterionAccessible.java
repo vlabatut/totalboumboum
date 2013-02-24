@@ -31,7 +31,9 @@ public class CriterionAccessible extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CriterionAccessible(UnluYildirim ai) throws StopRequestException
 	{

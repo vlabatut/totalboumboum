@@ -42,7 +42,9 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected MoveHandler(UnluYildirim ai) throws StopRequestException {
 		super(ai);
@@ -252,9 +254,11 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean isDangerous(AiTile tile) throws StopRequestException {
 

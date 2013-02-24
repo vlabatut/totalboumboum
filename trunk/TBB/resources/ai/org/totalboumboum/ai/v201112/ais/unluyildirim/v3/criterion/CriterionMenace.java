@@ -23,7 +23,9 @@ public class CriterionMenace extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CriterionMenace(UnluYildirim ai) throws StopRequestException
 	{	
