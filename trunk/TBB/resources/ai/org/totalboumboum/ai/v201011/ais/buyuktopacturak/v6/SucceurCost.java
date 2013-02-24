@@ -24,8 +24,11 @@ public class SucceurCost extends SuccessorCalculator{
 	/**
 	 * 
 	 * @param bt
+	 * 		description manquante !
 	 * @param freeList
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public SucceurCost(BuyuktopacTurak bt, List<AiTile> freeList) throws StopRequestException{
 		bt.checkInterruption();

@@ -19,8 +19,11 @@ public class AStarCost extends CostCalculator{
 	/**
 	 * C'est un constructeur qui obtient la matrice de la mode.
 	 * @param bt 
+	 * 		description manquante !
 	 * @param matrix
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AStarCost(BuyuktopacTurak bt, double[][] matrix) throws StopRequestException{
 		bt.checkInterruption();

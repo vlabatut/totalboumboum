@@ -54,8 +54,11 @@ public class CollectionMatrix{
 	/**
 	 * C'est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
+	 * 		description manquante !
 	 * @param zone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CollectionMatrix(BuyuktopacTurak bt, AiZone zone) throws StopRequestException{
 		bt.checkInterruption();
@@ -67,6 +70,7 @@ public class CollectionMatrix{
 	/**
 	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void init()throws StopRequestException{
 		bt.checkInterruption();
@@ -89,6 +93,7 @@ public class CollectionMatrix{
 	/**
 	 * On crée et remplit la matrice.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void createMatrix()throws StopRequestException{
 		bt.checkInterruption();
@@ -107,6 +112,7 @@ public class CollectionMatrix{
 	 * avec le constant DESTRUCTIBLE ou INDESTRUCTIBLE. 
 	 * On utilise la méthode isRunnable().
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void putWalls() throws StopRequestException{
 		bt.checkInterruption();
@@ -166,6 +172,7 @@ public class CollectionMatrix{
 	 * On trouve tous les bonus et puis on les remplit avec le constant 
 	 * BONUSBOMB ou BONUSFLAME.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void putBonus() throws StopRequestException{
 		bt.checkInterruption();
@@ -191,6 +198,7 @@ public class CollectionMatrix{
 	/**
 	 * On trouve toutes les adversaires et puis on remplit les cases des entours des ennemies avec le constant RIVAL. 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void putHero() throws StopRequestException{
 		bt.checkInterruption();
@@ -218,6 +226,7 @@ public class CollectionMatrix{
 	 * renvoi matrix
 	 * @return double[][]
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] getMatrix()throws StopRequestException{
 		bt.checkInterruption();

@@ -35,8 +35,11 @@ public class PerfectStrangers {
 	/**
 	 * C'est un constructeur qui obtient des percepts de la zone et qui crée làobjet BuyuktopacTurak.
 	 * @param bt
+	 * 		description manquante !
 	 * @param zone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public PerfectStrangers(BuyuktopacTurak bt, AiZone zone) throws StopRequestException{
 		bt.checkInterruption();
@@ -48,9 +51,13 @@ public class PerfectStrangers {
 	/**
 	 * Trouver tous les cases accessibles actuellement par notre hero recursivement. 
 	 * @param tile
+	 * 		description manquante !
 	 * @param freeList
+	 * 		description manquante !
 	 * @return List<AiTile>
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 
 	public List<AiTile> putFree(AiTile tile, List<AiTile> freeList) throws StopRequestException
@@ -93,8 +100,11 @@ public class PerfectStrangers {
 	/**
 	 * Remplir le matrice par la distance de l'adversaire plus proche de la case.
 	 * @param freeList
+	 * 		description manquante !
 	 * @param matrix
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void putDistanceEnnemy(List<AiTile> freeList, double[][] matrix) throws StopRequestException
 	{
@@ -110,8 +120,11 @@ public class PerfectStrangers {
 	/** Butun matrisi doldurur
 	 * 
 	 * @param freeList
+	 * 		description manquante !
 	 * @param matrix
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void putDistanceHero(List<AiTile> freeList, double[][] matrix) throws StopRequestException
 	{
@@ -126,7 +139,9 @@ public class PerfectStrangers {
 	/**
 	 * On remplit toutes les cases dangereuses.
 	 * @param matrix
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void putBlast(double[][] matrix) throws StopRequestException{
 		bt.checkInterruption();
@@ -170,10 +185,15 @@ public class PerfectStrangers {
 	/**
 	 * On renvoie la liste des cases voisinages accessible par hero. 
 	 * @param tile
+	 * 		description manquante !
 	 * @param dir
+	 * 		description manquante !
 	 * @param range
+	 * 		description manquante !
 	 * @return List<AiTile>
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getONeighbour(AiTile tile, Direction dir, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -198,9 +218,13 @@ public class PerfectStrangers {
 	/**
 	 * On renvoie la liste des case qui définie la portée virtuelle de la bombe.
 	 * @param tile
+	 * 		description manquante !
 	 * @param range
+	 * 		description manquante !
 	 * @return List<AiTile>
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getBombRangeList(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -244,7 +268,9 @@ public class PerfectStrangers {
 	/**
 	 * On renvoie la liste des portées de toutes les bombes.
 	 * @return List<AiTile>
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getAllRangeList()throws StopRequestException{
 		bt.checkInterruption();
@@ -261,7 +287,9 @@ public class PerfectStrangers {
 	/**
 	 * Trouver des murs destructibles qui vont exploser et remplir la liste willBurnList avec ces cases.
 	 * @param willBurnWallsList
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void getWillBurnWalls(List<AiBlock> willBurnWallsList)throws StopRequestException{
 		bt.checkInterruption();
@@ -284,9 +312,13 @@ public class PerfectStrangers {
 	/**
 	 * Si on pose une bombe, notre hero peut trouve une/plusieurs case(s) sûre?
 	 * @param bomb
+	 * 		description manquante !
 	 * @param freeList 
+	 * 		description manquante !
 	 * @return boolean
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */	
 	public boolean isRunnable(AiTile bomb, List<AiTile> freeList) throws StopRequestException{
 		bt.checkInterruption();
@@ -324,9 +356,13 @@ public class PerfectStrangers {
 	/**
 	 * Si on pose une bombe, adversaire peut trouve une/plusieurs case(s) sûre?
 	 * @param hero
+	 * 		description manquante !
 	 * @param bomb
+	 * 		description manquante !
 	 * @return boolean
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isRunnableEnemy(AiHero hero, AiTile bomb) throws StopRequestException{
 		bt.checkInterruption();
@@ -363,8 +399,11 @@ public class PerfectStrangers {
 	/**
 	 * Trouver l'adversaire plus proche de la case. Retourne la distance de cette case.
 	 * @param tile
+	 * 		description manquante !
 	 * @return int
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int getMinDistance(AiTile tile) throws StopRequestException{
 		bt.checkInterruption();
