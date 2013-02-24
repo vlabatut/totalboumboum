@@ -34,6 +34,7 @@ public class ModeSelector
 	 *            AkbulutKupelioglu using this. (for checkInterruption())
 	 * @return the chosen Mode.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static Mode selectMode(AiZone myZone, AkbulutKupelioglu ia)
 			throws StopRequestException
@@ -61,6 +62,7 @@ public class ModeSelector
 	 * Resets the modes.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static void reset(AkbulutKupelioglu ia) throws StopRequestException
 	{

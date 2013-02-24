@@ -46,7 +46,9 @@ public class AttackMode extends Mode
 	/**
 	 * 
 	 * @param ia
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AttackMode(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -63,6 +65,7 @@ public class AttackMode extends Mode
 	 * @param ia AkbulutKupelioglu using this.
 	 * @return The AttackMode instance.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static AttackMode getInstance(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -79,6 +82,7 @@ public class AttackMode extends Mode
 	 * Resets this mode, destroying the instance.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static void reset(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -117,7 +121,9 @@ public class AttackMode extends Mode
 	/**
 	 * 
 	 * @param ownHero
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void processDestructibles(AiHero ownHero)
 			throws StopRequestException
@@ -142,7 +148,9 @@ public class AttackMode extends Mode
 	/**
 	 * 
 	 * @param ownHero
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void processBonus(AiHero ownHero) throws StopRequestException
 	{
@@ -163,7 +171,9 @@ public class AttackMode extends Mode
 	/**
 	 * 
 	 * @param ownHero
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void processEnemies(AiHero ownHero) throws StopRequestException
 	{

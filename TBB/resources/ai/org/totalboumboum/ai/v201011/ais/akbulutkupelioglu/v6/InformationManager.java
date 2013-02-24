@@ -20,8 +20,11 @@ public class InformationManager
 	/**
 	 * 
 	 * @param zone
+	 * 		description manquante !
 	 * @param ia
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public InformationManager(AiZone zone, AkbulutKupelioglu ia) throws StopRequestException
 	{

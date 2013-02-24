@@ -17,6 +17,7 @@ public class AttackStrategy extends Strategy
 	 * Creates a new AttackStrategy instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AttackStrategy(AkbulutKupelioglu ia) throws StopRequestException
 	{

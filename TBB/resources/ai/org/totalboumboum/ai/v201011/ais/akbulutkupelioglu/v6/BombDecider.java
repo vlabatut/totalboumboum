@@ -30,6 +30,7 @@ public class BombDecider
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private BombDecider() throws StopRequestException
 	{
@@ -42,6 +43,7 @@ public class BombDecider
 	 * @param ia The AkbulutKupeloglu using this.
 	 * @return The BombDecider instance.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static BombDecider getInstance(AiZone myZone, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -57,6 +59,7 @@ public class BombDecider
 	 * Decides whether or not the AI would want to drop a bomb.
 	 * @return The decision to drop a bomb.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean willBomb() throws StopRequestException
 	{

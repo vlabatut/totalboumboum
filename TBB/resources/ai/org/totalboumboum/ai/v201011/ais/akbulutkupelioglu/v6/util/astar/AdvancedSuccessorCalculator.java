@@ -29,8 +29,11 @@ public class AdvancedSuccessorCalculator extends SuccessorCalculator
 	/**
 	 * 
 	 * @param interest
+	 * 		description manquante !
 	 * @param monIa
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AdvancedSuccessorCalculator(Matrix interest, AkbulutKupelioglu monIa) throws StopRequestException
 	{

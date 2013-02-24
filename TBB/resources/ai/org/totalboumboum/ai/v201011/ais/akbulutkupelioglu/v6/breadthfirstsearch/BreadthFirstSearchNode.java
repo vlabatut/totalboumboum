@@ -36,6 +36,7 @@ public class BreadthFirstSearchNode
 	 * @param parent The parent node.
 	 * @param ia AkbulutKupelioglu using this object.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public BreadthFirstSearchNode(AiTile tile, BreadthFirstSearchNode parent, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -50,6 +51,7 @@ public class BreadthFirstSearchNode
 	 * Gets the tile to which this node corresponds.
 	 * @return The tile to which this node corresponds.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiTile getCurrentTile() throws StopRequestException
 	{
@@ -60,6 +62,7 @@ public class BreadthFirstSearchNode
 	/**Sets the tile to which this node corresponds.
 	 * @param currentTile The tile to be set.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setCurrentTile(AiTile currentTile) throws StopRequestException
 	{
@@ -71,6 +74,7 @@ public class BreadthFirstSearchNode
 	 * Gets the value associated with this node.
 	 * @return The associated value.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int getValue() throws StopRequestException
 	{
@@ -82,6 +86,7 @@ public class BreadthFirstSearchNode
 	 * Sets the value associated to this node.
 	 * @param value The value to be associated.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setValue(int value) throws StopRequestException
 	{
@@ -94,6 +99,7 @@ public class BreadthFirstSearchNode
 	 * the tile to which this node corresponds. The returned list may be empty.
 	 * @return A list containing the children of this node.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ArrayList<BreadthFirstSearchNode> getChildren() throws StopRequestException
 	{
@@ -123,6 +129,7 @@ public class BreadthFirstSearchNode
 	 * Gets the parent node of this node.
 	 * @return The parent node.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public BreadthFirstSearchNode getParent() throws StopRequestException
 	{
@@ -134,6 +141,7 @@ public class BreadthFirstSearchNode
 	 * Sets the parent node of this node.
 	 * @param parent The parent node.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setParent(BreadthFirstSearchNode parent) throws StopRequestException
 	{

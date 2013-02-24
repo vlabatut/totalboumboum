@@ -17,6 +17,7 @@ public class CollectStrategy extends Strategy
 	 * Creates a new CollectStrategy instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CollectStrategy(AkbulutKupelioglu ia) throws StopRequestException
 	{

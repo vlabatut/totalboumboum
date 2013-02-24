@@ -28,6 +28,7 @@ public class DestructibleSuccessorCalculator extends SuccessorCalculator
 	 * Creates a new instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public DestructibleSuccessorCalculator(AkbulutKupelioglu ia) throws StopRequestException
 	{
