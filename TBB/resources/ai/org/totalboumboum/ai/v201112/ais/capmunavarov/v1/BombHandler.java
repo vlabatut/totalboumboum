@@ -47,6 +47,7 @@ public class BombHandler extends AiBombHandler<CapMunavarov>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
