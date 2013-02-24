@@ -92,6 +92,7 @@ public class ModeHandler extends AiModeHandler<GungorKavus>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
