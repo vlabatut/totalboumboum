@@ -55,8 +55,11 @@ public class AttackMatrix{
 	/**
 	 * C'est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
+	 * 		description manquante !
 	 * @param zone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AttackMatrix(BuyuktopacTurak bt, AiZone zone) throws StopRequestException{	
 		bt.checkInterruption();
@@ -67,6 +70,7 @@ public class AttackMatrix{
 	/**
 	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void init()throws StopRequestException{
 		bt.checkInterruption();
@@ -93,6 +97,7 @@ public class AttackMatrix{
 	/**
 	 * On crée et remplit la matrice. 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void createMatrix()throws StopRequestException{
 		bt.checkInterruption();
@@ -127,6 +132,7 @@ public class AttackMatrix{
 	 * des murs avec le constant DESTRUCTIBLE ou INDESTRUCTIBLE. 
 	 * On utilise la méthode isRunnable().
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void putWalls() throws StopRequestException{
 		bt.checkInterruption();
@@ -180,6 +186,7 @@ public class AttackMatrix{
 	/**
 	 * on trouve tous les bonus et puis on les remplit avec le constant BONUS. 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void putBonus() throws StopRequestException{
 		bt.checkInterruption();
@@ -200,6 +207,7 @@ public class AttackMatrix{
 	 * on trouve toutes les adversaires et puis 
 	 * on remplit les cases des entours des ennemies avec le constant RIVALATTACK. 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void putHero() throws StopRequestException{
 		bt.checkInterruption();
@@ -231,6 +239,7 @@ public class AttackMatrix{
 	 * renvoi matrix
 	 * @return double[][]
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] getMatrix() throws StopRequestException{
 		bt.checkInterruption();

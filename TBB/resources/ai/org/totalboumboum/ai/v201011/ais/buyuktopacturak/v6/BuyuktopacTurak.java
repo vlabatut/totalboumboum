@@ -80,7 +80,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * 	 
 	 * @return result: AiAction deplacement ou posage de bombe
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws NullPointerException
+	 * 		description manquante !
 	 */
 	@Override
 	public AiAction processAction() throws StopRequestException, NullPointerException
@@ -145,7 +147,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	private void initFirst() throws StopRequestException
 	{	
@@ -157,6 +159,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * et puis on crée làobjet PerfectStrangers et Elements.
 	 * En fin, on met à jour de notre case.  
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private void initBT() throws StopRequestException
 	{	
@@ -179,6 +182,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * 
 	 * @return mode: boolean. notre mode
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean selectMode() throws StopRequestException{
 		checkInterruption();
@@ -216,8 +220,11 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * 
 	 * 
 	 * @param mode
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean controlBomb(boolean mode) throws StopRequestException{
 		checkInterruption();
@@ -323,7 +330,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return calcul
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private int calculateCalcul() throws StopRequestException{
 		checkInterruption();
@@ -351,10 +360,15 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * on calcule cost, heuristic et succes par la classe BasicXXXXXCalculator()
 	 * 
 	 * @param tile1
+	 * 		description manquante !
 	 * @param tile2
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws NullPointerException
+	 * 		description manquante !
 	 */
 	private AiPath aStarPath(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
 		checkInterruption();
@@ -389,10 +403,15 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * On utilise làalgorithme A*, on trouve le chemine vers les ennemies.
 	 * Si on trouve une chemine, on renvoie la direction de notre case à la case adversaire case par case. 
 	 * @param tile1 
+	 * 		description manquante !
 	 * @param tile2 
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * @throws NullPointerException 
+	 * 		description manquante !
 	 */
 	private Direction aStarDirection(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
 		checkInterruption();
@@ -439,11 +458,15 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * 	s'il y a une chemine, la distance est egale a la taille path.
 	 * 	sinon la distance est negative -1.
 	 * @param tile1
+	 * 		description manquante !
 	 * @param tile2
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws NullPointerException
+	 * 		description manquante !
 	 */
 	public int aStarDistance(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
 		checkInterruption();
@@ -470,6 +493,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * Cree collectionMatrix
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void getColMatrix() throws StopRequestException{
 		checkInterruption();
@@ -479,6 +503,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * Cree attackMatrix
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void getAttMatrix() throws StopRequestException{
 		checkInterruption();
@@ -490,6 +515,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	 * @return 
 	 * 		?
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] getMatrix() throws StopRequestException{
 		checkInterruption();
@@ -499,8 +525,11 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * On renvoie de la matrice de la mode.
 	 * @param mode
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private double[][] getSelectMatrix(boolean mode) throws StopRequestException{
 		checkInterruption();
@@ -517,8 +546,10 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * on trouve la case maximum valeur en utilisant la matrice actuelle.
-	 * @return ?
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiTile getMaxTile() throws StopRequestException{
 		checkInterruption();
@@ -547,6 +578,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * Miser a jour de la location
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updateLocation() throws StopRequestException
 	{	
@@ -556,7 +588,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * on trouve la nombre de actuelle bombe dont notre iA 
 	 * @return :int nombre actuelle bombe
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int getCurrentBomb() throws StopRequestException
 	{	
