@@ -124,10 +124,11 @@ public class MoveHandler extends AiMoveHandler<ArikKoseoglu>
 	/**
 	 *Calculate direciton 
 	 * @param loc 
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	private Direction calculateDirection(AiLocation loc) throws StopRequestException{
 		ai.checkInterruption();
@@ -166,10 +167,13 @@ public class MoveHandler extends AiMoveHandler<ArikKoseoglu>
 	/**
 	 * Calculate possibilite de passer tile precedent 
 	 * @param hero 
+	 * 		description manquante !
 	 * @param path 
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private boolean possibleDePasser(AiHero hero,AiPath path) throws StopRequestException{
 		ai.checkInterruption();
@@ -203,10 +207,13 @@ public class MoveHandler extends AiMoveHandler<ArikKoseoglu>
 	/**
 	 * Calculate possibilite de passer tile precedent 
 	 * @param next 
+	 * 		description manquante !
 	 * @param gameArea 
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private AiBomb inDangeraous(AiLocation next, AiZone gameArea) throws StopRequestException{
 		ai.checkInterruption();
