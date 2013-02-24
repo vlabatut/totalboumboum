@@ -21,7 +21,9 @@ public class NonConcurrence extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public NonConcurrence( CoskunOzdemir ai ) throws StopRequestException
 	{

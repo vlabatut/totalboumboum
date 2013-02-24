@@ -20,7 +20,9 @@ public class ColPertinence extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ColPertinence( CoskunOzdemir ai ) throws StopRequestException
 	{

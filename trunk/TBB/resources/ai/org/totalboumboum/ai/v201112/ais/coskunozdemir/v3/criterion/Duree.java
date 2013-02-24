@@ -26,7 +26,9 @@ public class Duree extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Duree( CoskunOzdemir ai ) throws StopRequestException
 	{

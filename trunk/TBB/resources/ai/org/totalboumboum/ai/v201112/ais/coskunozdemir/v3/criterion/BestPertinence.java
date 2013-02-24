@@ -20,7 +20,9 @@ public class BestPertinence extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public BestPertinence( CoskunOzdemir ai ) throws StopRequestException
 	{

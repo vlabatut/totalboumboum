@@ -29,7 +29,9 @@ public class AvanceItem extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AvanceItem( CoskunOzdemir ai ) throws StopRequestException
 	{

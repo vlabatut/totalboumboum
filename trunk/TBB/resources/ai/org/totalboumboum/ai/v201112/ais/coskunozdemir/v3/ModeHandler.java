@@ -65,6 +65,7 @@ public class ModeHandler extends AiModeHandler<CoskunOzdemir>
 	// ///////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{
