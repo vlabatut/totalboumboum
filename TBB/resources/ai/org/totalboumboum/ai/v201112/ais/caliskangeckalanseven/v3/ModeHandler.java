@@ -91,6 +91,7 @@ public class ModeHandler extends AiModeHandler<CaliskanGeckalanSeven>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();

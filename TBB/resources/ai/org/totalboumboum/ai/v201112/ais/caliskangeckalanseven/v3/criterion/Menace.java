@@ -62,8 +62,9 @@ public class Menace extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
@@ -172,9 +173,11 @@ public class Menace extends AiUtilityCriterionBoolean
 
 	/**
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();

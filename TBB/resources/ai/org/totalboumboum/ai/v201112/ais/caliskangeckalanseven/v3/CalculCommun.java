@@ -54,7 +54,9 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected CalculCommun(CaliskanGeckalanSeven ai)
 			throws StopRequestException {
@@ -84,6 +86,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void update() throws StopRequestException
 	{	ai.checkInterruption();
@@ -95,8 +98,9 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean danger() throws StopRequestException {
 		ai.checkInterruption();
@@ -111,8 +115,9 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Set<AiTile> safeZone() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE		
@@ -144,8 +149,9 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Set<AiTile> safeZoneForBomb() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE		
@@ -177,8 +183,9 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Boolean canBomb() throws StopRequestException {
 		ai.checkInterruption();
@@ -219,8 +226,9 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Set<AiTile> dangerZoneForBomb() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE	
@@ -290,8 +298,9 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Set<AiTile> dangerZone() throws StopRequestException {
 
@@ -401,9 +410,11 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @param path
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean checkPathValidity(AiPath path) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -424,9 +435,11 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();

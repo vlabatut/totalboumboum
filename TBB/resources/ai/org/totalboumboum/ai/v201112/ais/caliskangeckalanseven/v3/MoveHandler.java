@@ -80,7 +80,9 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected MoveHandler(CaliskanGeckalanSeven ai) throws StopRequestException
     {	super(ai);
@@ -127,8 +129,9 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
@@ -237,6 +240,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updateDestination() throws StopRequestException
 	{	ai.checkInterruption();
@@ -347,6 +351,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();
@@ -470,6 +475,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updateDirection() throws StopRequestException
 	{	ai.checkInterruption();
@@ -505,9 +511,11 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @param path
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean checkPathValidity(AiPath path) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -529,9 +537,11 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -545,8 +555,9 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean danger() throws StopRequestException {
 		ai.checkInterruption();
