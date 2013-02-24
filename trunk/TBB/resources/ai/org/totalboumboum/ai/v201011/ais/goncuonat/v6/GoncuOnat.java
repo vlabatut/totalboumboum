@@ -53,6 +53,7 @@ public class GoncuOnat extends ArtificialIntelligence
 	 * @param zone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void initialiseMatrice(double [][]matrice, AiZone zone)throws StopRequestException
 	{
@@ -80,8 +81,8 @@ public class GoncuOnat extends ArtificialIntelligence
 	 * @return la nouvelle action de notre hero dans ce chemin
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
-	
 	public AiAction action(AiPath nextMove) throws StopRequestException
 	{
 		checkInterruption();//APPEL OBLIGATOIRE
@@ -309,6 +310,7 @@ public class GoncuOnat extends ArtificialIntelligence
 	 * @param zone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void updateOutput(double [][]matrice, AiZone zone) throws StopRequestException
 	{	

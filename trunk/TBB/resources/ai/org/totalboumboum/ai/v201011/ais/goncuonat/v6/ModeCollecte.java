@@ -69,7 +69,9 @@ public class ModeCollecte
 	/**
 	 * 
 	 * @param ia
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ModeCollecte(GoncuOnat ia)throws StopRequestException
 	{
@@ -88,6 +90,7 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void valueBonusCollecte(double[][] matrice, AiZone zone)throws StopRequestException 
 	{
@@ -114,8 +117,8 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
-	
 	public void valueFiresCollecte(double[][] matrice, AiZone zone) throws StopRequestException
 	{
 		monia.checkInterruption();
@@ -138,8 +141,8 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
-	
 	public void valueRivalCollecte(double[][] matrice, AiZone zone)throws StopRequestException 
 	{
 		
@@ -172,6 +175,7 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void valueBlocksCollecte(double[][] matrice, AiZone zone) throws StopRequestException
 	{
@@ -203,6 +207,7 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void valueBombsCollecte(double[][] matrice, AiZone zone) throws StopRequestException
 	{
@@ -238,6 +243,7 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return result
 	 * 				le cout de la case
 	 */
@@ -257,6 +263,7 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return result
 	 * 				le cout de la case
 	 */
@@ -284,7 +291,7 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
-	 * 
+	 * 		description manquante !
 	 * @return result
 	 * 				la distance du chemin en cases.
 	 */
@@ -305,6 +312,7 @@ public class ModeCollecte
 	 * @param matrice
 	 *            La matrice de zone
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void matriceCollecte(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
@@ -476,12 +484,4 @@ public class ModeCollecte
 			}
 		}
 	}
-
-	
-	
-	
-	
-
-
-	
 }
