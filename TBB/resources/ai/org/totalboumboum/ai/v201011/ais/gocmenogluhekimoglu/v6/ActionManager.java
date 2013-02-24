@@ -27,7 +27,9 @@ public class ActionManager {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ActionManager(GocmenogluHekimoglu ai) throws StopRequestException{
 		ai.checkInterruption();
@@ -37,12 +39,19 @@ public class ActionManager {
 	/**
 	 * Finds a proper action, using the given matrix, target and mode
 	 * @param targetTile
+	 * 		description manquante !
 	 * @param attack
+	 * 		description manquante !
 	 * @param matrix
+	 * 		description manquante !
 	 * @param force_collect 
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws LimitReachedException
+	 * 		description manquante !
 	 */
 	AiAction findAction(AiTile targetTile,boolean attack,HashMap<AiTile,Double> matrix,boolean force_collect) throws StopRequestException, LimitReachedException{
 		ai.checkInterruption();

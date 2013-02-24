@@ -29,8 +29,11 @@ public class MatrixCalc {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @param paths
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public MatrixCalc(GocmenogluHekimoglu ai,Paths paths) throws StopRequestException{
 		ai.checkInterruption();
@@ -41,7 +44,9 @@ public class MatrixCalc {
 	/**
 	 * Debug function
 	 * @param tiles
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	void textTileMap(HashMap<AiTile,Double> tiles) throws StopRequestException{
 		ai.checkInterruption();
@@ -55,9 +60,13 @@ public class MatrixCalc {
 	/**
 	 * Round a double value to c decimal places
 	 * @param d
+	 * 		description manquante !
 	 * @param c
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	double roundTwoDecimals(double d, int c) throws StopRequestException {
 		ai.checkInterruption();
@@ -71,9 +80,13 @@ public class MatrixCalc {
 	 * unnecessary tiles in each step (by checking if a tile is,
 	 * accesible in the first place), saving lots of CPU time.
 	 * @param accesible
+	 * 		description manquante !
 	 * @param attack
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	HashMap<AiTile,Double> calculateMatrix(List<AiTile> accesible,boolean attack) throws StopRequestException{
 		ai.checkInterruption();
