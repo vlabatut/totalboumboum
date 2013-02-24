@@ -20,7 +20,9 @@ public class MyCostCalculator extends CostCalculator {
     /**
      * 
      * @param ay
+	 * 		description manquante !
      * @throws StopRequestException
+	 * 		description manquante !
      */
 	public MyCostCalculator(ArikYaman ay) throws StopRequestException
 	{	ay.checkInterruption();
