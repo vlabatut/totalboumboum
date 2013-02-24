@@ -33,7 +33,9 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public UtilityHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);

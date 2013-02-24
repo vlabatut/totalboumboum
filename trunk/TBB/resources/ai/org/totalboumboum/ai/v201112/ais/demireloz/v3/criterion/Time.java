@@ -21,7 +21,9 @@ public class Time extends AiUtilityCriterionBoolean {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Time(DemirelOz ai) throws StopRequestException {
 		super(NAME);

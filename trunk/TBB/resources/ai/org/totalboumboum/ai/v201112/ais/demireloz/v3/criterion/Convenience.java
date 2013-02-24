@@ -23,7 +23,9 @@ public class Convenience extends AiUtilityCriterionBoolean {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Convenience(DemirelOz ai) throws StopRequestException {
 		super(NAME);

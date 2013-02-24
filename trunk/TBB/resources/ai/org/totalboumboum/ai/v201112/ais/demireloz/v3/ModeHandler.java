@@ -20,7 +20,9 @@ public class ModeHandler extends AiModeHandler<DemirelOz> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected ModeHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);
@@ -94,6 +96,7 @@ public class ModeHandler extends AiModeHandler<DemirelOz> {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
