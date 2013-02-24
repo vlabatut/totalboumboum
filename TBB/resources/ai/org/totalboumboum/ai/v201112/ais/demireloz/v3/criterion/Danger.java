@@ -19,7 +19,9 @@ public class Danger extends AiUtilityCriterionBoolean {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Danger(DemirelOz ai) throws StopRequestException {
 		super(NAME);

@@ -36,7 +36,9 @@ public class BombHandler extends AiBombHandler<DemirelOz> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected BombHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);
@@ -223,6 +225,7 @@ public class BombHandler extends AiBombHandler<DemirelOz> {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();

@@ -26,7 +26,9 @@ public class MoveHandler extends AiMoveHandler<DemirelOz> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected MoveHandler(DemirelOz ai) throws StopRequestException {
 		super(ai);

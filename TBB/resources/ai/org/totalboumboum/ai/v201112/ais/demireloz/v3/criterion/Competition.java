@@ -22,7 +22,9 @@ public class Competition extends AiUtilityCriterionBoolean {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Competition(DemirelOz ai) throws StopRequestException {
 		super(NAME);

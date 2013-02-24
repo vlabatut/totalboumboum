@@ -22,7 +22,9 @@ public class IsEnemyReachable extends AiUtilityCriterionInteger
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public IsEnemyReachable(DemirelOz ai) throws StopRequestException
 	{	

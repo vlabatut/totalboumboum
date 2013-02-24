@@ -19,7 +19,9 @@ public class NbrAdjacentWall extends AiUtilityCriterionInteger {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public NbrAdjacentWall(DemirelOz ai) throws StopRequestException {
 		super(NAME, 0, 3);
