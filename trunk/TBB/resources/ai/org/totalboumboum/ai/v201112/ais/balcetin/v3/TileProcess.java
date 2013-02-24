@@ -27,7 +27,9 @@ public class TileProcess {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public TileProcess(BalCetin ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -41,6 +43,7 @@ public class TileProcess {
 	 * @return dangerous tiles list which are in danger by fires,bombs and
 	 *         bombs' blasts.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getDangerousTiles() throws StopRequestException {
 		ai.checkInterruption();
@@ -67,6 +70,7 @@ public class TileProcess {
 	 * 
 	 * @return safe tiles list which are cleaned from dangerous ones.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getsafeTiles() throws StopRequestException {
 		ai.checkInterruption();
@@ -82,6 +86,7 @@ public class TileProcess {
 	 * 
 	 * @return reacheable tiles list
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getcanReachTiles() throws StopRequestException {
 		ai.checkInterruption();
@@ -100,6 +105,7 @@ public class TileProcess {
 	 * 
 	 * @return A list of walkable tiles by our hero.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getwalkableTiles() throws StopRequestException {
 		ai.checkInterruption();
@@ -136,6 +142,7 @@ public class TileProcess {
 	 * 
 	 * @return tile with biggest utility
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiTile getBestTile() throws StopRequestException {
 		ai.checkInterruption();
@@ -158,6 +165,7 @@ public class TileProcess {
 	 * 
 	 * @return boolean , true if tile is in danger if we put a bomb on the tile.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isTileDangerousOnBombDrop() throws StopRequestException {
 		ai.checkInterruption();
@@ -178,6 +186,7 @@ public class TileProcess {
 	 * 
 	 * @return Tile list that will be dangerous if our agent drops a bombe.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getDangerousTilesOnBombDrop()
 			throws StopRequestException {

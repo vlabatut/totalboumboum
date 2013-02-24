@@ -21,7 +21,9 @@ public class AcceptableDistance extends AiUtilityCriterionBoolean {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AcceptableDistance(BalCetin ai) throws StopRequestException { // init
 																			// nom

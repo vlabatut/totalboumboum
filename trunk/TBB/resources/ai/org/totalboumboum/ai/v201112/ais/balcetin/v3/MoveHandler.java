@@ -32,7 +32,9 @@ public class MoveHandler extends AiMoveHandler<BalCetin> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected MoveHandler(BalCetin ai) throws StopRequestException {
 		super(ai);

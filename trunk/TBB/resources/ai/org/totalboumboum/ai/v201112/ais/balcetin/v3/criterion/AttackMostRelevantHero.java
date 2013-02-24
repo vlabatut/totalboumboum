@@ -20,7 +20,9 @@ public class AttackMostRelevantHero extends AiUtilityCriterionBoolean {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AttackMostRelevantHero(BalCetin ai) throws StopRequestException { // init
 																				// nom
