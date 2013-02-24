@@ -98,8 +98,9 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean danger() throws StopRequestException {
 		ai.checkInterruption();
@@ -115,8 +116,9 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
@@ -229,6 +231,7 @@ public class BombHandler extends AiBombHandler<CaliskanGeckalanSeven> {
 	// ///////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();
