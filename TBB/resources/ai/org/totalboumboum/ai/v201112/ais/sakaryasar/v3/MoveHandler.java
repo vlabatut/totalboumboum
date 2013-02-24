@@ -44,7 +44,9 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected MoveHandler(SakarYasar ai) throws StopRequestException {
 		super(ai);
@@ -97,7 +99,9 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * Setter method for current destination.
 	 * @param tile
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setCurrentDestination(AiTile tile) throws StopRequestException{
 		ai.checkInterruption();
@@ -107,9 +111,11 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * Method for testing if the given tile is in danger or not
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		,
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean isPassable(AiTile tile) throws StopRequestException{
 		ai.checkInterruption();
@@ -148,10 +154,13 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * this method tests the side d which is given by parameter while there is not any obstacle or bomb 
 	 * @param tile
+	 * 		description manquante !
 	 * @param d
+	 * 		description manquante !
 	 * @return
-	 * 		,
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private double checkSide(AiTile tile,Direction d) throws StopRequestException{
 		ai.checkInterruption();
@@ -191,6 +200,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * methode for changing destination if it is necessary
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void refreshDestination() throws StopRequestException {
 		ai.checkInterruption();
@@ -266,8 +276,9 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * check path if is there any tile that is dangerous
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isThereAnyUnsafeTileOnPath() throws StopRequestException{
 		ai.checkInterruption();
@@ -289,8 +300,9 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * find best destination from current position of our hero.
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiTile findDestination() throws StopRequestException{
 		ai.checkInterruption();
@@ -358,9 +370,11 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * method for finding a destination whose utility is 'value'
 	 * @param value
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiTile findDestinationInEnemyDanger(Float value) throws StopRequestException{
 		ai.checkInterruption();
@@ -398,9 +412,11 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * method who checks path for seeing if there is an enemy on the road.
 	 * @param path
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean checkPathForEnemmies(AiPath path) throws StopRequestException{
 		ai.checkInterruption();
@@ -435,9 +451,11 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * method for controlling bombs on the path
 	 * @param path
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean checkPathForBombs(AiPath path) throws StopRequestException{
 		ai.checkInterruption();
@@ -476,6 +494,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 	/**
 	 * method for updating direction in some special cases this method returns Direction.none
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void refreshDirection() throws StopRequestException{
 		ai.checkInterruption();

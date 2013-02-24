@@ -21,7 +21,9 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected Tools(SakarYasar ai) throws StopRequestException {
 		super(ai);
@@ -33,6 +35,7 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void update() throws StopRequestException
 	{	ai.checkInterruption();
@@ -57,9 +60,11 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 	/**
 	 * method for controlling if a tile is in danger or not
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isTileInDanger(AiTile tile) throws StopRequestException{		
 		ai.checkInterruption();
@@ -80,10 +85,13 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 	/**
 	 * method returns delay of bomb on the d side
 	 * @param tile
+	 * 		description manquante !
 	 * @param d
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double checkSide(AiTile tile,Direction d) throws StopRequestException{
 		ai.checkInterruption();
@@ -125,9 +133,11 @@ public class Tools extends AiAbstractHandler<SakarYasar>{
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isTilePassable(AiTile tile ) throws StopRequestException{
 		ai.checkInterruption();

@@ -79,10 +79,13 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * method for checking safet of tiles in direction d 
 	 * @param tile
+	 * 		description manquante !
 	 * @param d
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean checkSafety(AiTile tile, Direction d) throws StopRequestException {
 		ai.checkInterruption();
@@ -100,10 +103,13 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * method for checking safety of neighbors of a tile
 	 * @param tile
+	 * 		description manquante !
 	 * @param d
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean checkNeighbors(AiTile tile, Direction d) throws StopRequestException{
 		ai.checkInterruption();
@@ -135,9 +141,11 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * method for testing if dropping a bomb is safe or not
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean isSafeToDropBomb(AiTile tile) throws StopRequestException{
 		ai.checkInterruption();
@@ -152,10 +160,13 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * check the d for possible bombs.
 	 * @param tile
+	 * 		description manquante !
 	 * @param d
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean hasBomb(AiTile tile, Direction d) throws StopRequestException{
 		ai.checkInterruption();
@@ -187,10 +198,13 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @param d
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean hasBomb2(AiTile tile, Direction d) throws StopRequestException{
 		ai.checkInterruption();
@@ -218,8 +232,9 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * method for attacking strategies (naive)
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean attackBombing() throws StopRequestException{
 		ai.checkInterruption();
@@ -279,8 +294,9 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	 * is there any enemy danger on the 4 principal directions. that method must be 
 	 * improved because it is so naive
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isThereEnemyDanger() throws StopRequestException{
 		ai.checkInterruption();
@@ -325,10 +341,13 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/**
 	 * method for looking ennemies on 'd' direction
 	 * @param tile
+	 * 		description manquante !
 	 * @param d
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiHero isThereAnyEnemyOnDirection(AiTile tile, Direction d) throws StopRequestException{
 		ai.checkInterruption();
@@ -356,7 +375,7 @@ public class BombHandler extends AiBombHandler<SakarYasar>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	
