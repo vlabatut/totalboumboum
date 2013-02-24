@@ -70,7 +70,9 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param interest
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void outputMatrix(Matrix interest) throws StopRequestException
 	{
@@ -92,6 +94,7 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Gets the current strategy. 
 	 * @return The current strategy.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Strategy getStrategy() throws StopRequestException
 	{
@@ -103,6 +106,7 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Sets a new strategy.
 	 * @param strategy The strategy to be set.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setStrategy(Strategy strategy) throws StopRequestException
 	{
@@ -114,6 +118,7 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Gets the current mode.
 	 * @return The current mode.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Mode getMode() throws StopRequestException
 	{
@@ -125,6 +130,7 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Sets a new mode.
 	 * @param mode The mode to be set.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setMode(Mode mode) throws StopRequestException
 	{

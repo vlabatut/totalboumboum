@@ -26,8 +26,11 @@ public class CoordinateComparator implements Comparator<Coordinate>{
 	 * The constructor initializing the distance map using a HashMap containing
 	 * the distance values to corresponding coordinates.
 	 * @param ia 
+	 * 		description manquante !
 	 * @param dm
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	public CoordinateComparator(AkbulutKupelioglu ia,HashMap<Coordinate, Integer> dm) throws StopRequestException
 	{

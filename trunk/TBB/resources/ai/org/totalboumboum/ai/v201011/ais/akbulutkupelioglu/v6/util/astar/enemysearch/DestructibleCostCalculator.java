@@ -27,6 +27,7 @@ public class DestructibleCostCalculator extends CostCalculator
 	 * Creates a new instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public DestructibleCostCalculator(AkbulutKupelioglu ia) throws StopRequestException
 	{

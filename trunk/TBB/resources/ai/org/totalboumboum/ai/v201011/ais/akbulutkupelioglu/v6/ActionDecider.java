@@ -47,6 +47,7 @@ public class ActionDecider
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private ActionDecider() throws StopRequestException
 	{
@@ -60,6 +61,7 @@ public class ActionDecider
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @return An ActionDecider instance.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static ActionDecider getInstance(Matrix matrix, AiZone myZone,
 			AkbulutKupelioglu ia) throws StopRequestException
@@ -79,6 +81,7 @@ public class ActionDecider
 	 * @param bombIntention The intention of dropping a bomb.
 	 * @return An action to be executed by the game engine.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction decide(boolean bombIntention) throws StopRequestException
 	{
@@ -306,8 +309,11 @@ public class ActionDecider
 	/**
 	 * 
 	 * @param newStrategy
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiAction getActionFromStrategy(Strategy newStrategy) throws StopRequestException
 	{
@@ -337,11 +343,17 @@ public class ActionDecider
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @param ownHero
+	 * 		description manquante !
 	 * @param direction
+	 * 		description manquante !
 	 * @param matrix
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private List<AiTile> getSafeTilesCustom(AiTile tile, AiHero ownHero, Direction direction, Matrix matrix) throws StopRequestException
 	{
@@ -380,8 +392,11 @@ public class ActionDecider
 	/**
 	 * 
 	 * @param ownHero
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private List<AiTile> getSafeTiles(AiHero ownHero) throws StopRequestException
 	{
@@ -392,8 +407,11 @@ public class ActionDecider
 	/**
 	 * 
 	 * @param ownHero
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private List<AiTile> getSafeTilesWithSimulatedBomb(AiHero ownHero) throws StopRequestException
 	{

@@ -26,6 +26,7 @@ public class TileComparator implements Comparator<AiTile>
 	 * @param ownTile The player's tile.
 	 * @param ia AkbulutKupelioglu using this comparator.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public TileComparator(AiTile ownTile, AkbulutKupelioglu ia) throws StopRequestException
 	{

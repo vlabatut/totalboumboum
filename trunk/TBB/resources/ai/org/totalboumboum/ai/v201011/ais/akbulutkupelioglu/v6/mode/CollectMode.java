@@ -41,7 +41,9 @@ public class CollectMode extends Mode
 	/**
 	 * 
 	 * @param ia
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private CollectMode(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -58,6 +60,7 @@ public class CollectMode extends Mode
 	 * @param ia AkbulutKupelioglu using this.
 	 * @return The CollectMode instance.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static CollectMode getInstance(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -72,6 +75,7 @@ public class CollectMode extends Mode
 	 * Resets this mode, destroying the instance.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public static void reset(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -110,7 +114,9 @@ public class CollectMode extends Mode
 	/**
 	 * 
 	 * @param ownHero
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void processBonus(AiHero ownHero) throws StopRequestException
 	{
@@ -157,7 +163,9 @@ public class CollectMode extends Mode
 	/**
 	 * 
 	 * @param ownHero
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void processDestructibles(AiHero ownHero)
 			throws StopRequestException

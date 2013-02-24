@@ -39,6 +39,7 @@ public abstract class Strategy
 	 * Creates a new Strategy instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Strategy(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -51,6 +52,7 @@ public abstract class Strategy
 	 * Gets the waypoints to a certain goal.
 	 * @return A stack of StrategyStep objects, forming a waypoint.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Stack<StrategyStep> getWaypoints() throws StopRequestException
 	{
@@ -63,6 +65,7 @@ public abstract class Strategy
 	 * Gets the path associated to this strategy, if any.
 	 * @return The path associated, or null.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiPath getPath() throws StopRequestException
 	{
@@ -74,6 +77,7 @@ public abstract class Strategy
 	 * Sets the path associated to this strategy.
 	 * @param path The path to be set.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
@@ -84,10 +88,13 @@ public abstract class Strategy
 	/**
 	 * 
 	 * @param zone
+	 * 		description manquante !
 	 * @param mode
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Strategy update(AiZone zone, Mode mode) throws StopRequestException
 	{

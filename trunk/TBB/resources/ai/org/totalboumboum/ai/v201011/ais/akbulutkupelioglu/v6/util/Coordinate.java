@@ -33,6 +33,7 @@ public class Coordinate
 	 * @param y Column of the coordinate.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Coordinate(int x, int y, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -48,6 +49,7 @@ public class Coordinate
 	 * @param value Value of the coordinate.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Coordinate(int x, int y, int value, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -62,6 +64,7 @@ public class Coordinate
 	 * @param value Value of the coordinate.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Coordinate(AiTile tile, int value, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -76,6 +79,7 @@ public class Coordinate
 	 * @param tile The tile corresponding to the coordinate.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Coordinate(AiTile tile, AkbulutKupelioglu ia) throws StopRequestException
 	{
