@@ -30,7 +30,9 @@ public class WallController {
 		/**
 		 * 
 		 * @param ai
+		 * 		description manquante !
 		 * @throws StopRequestException
+		 * 		description manquante !
 		 */
 		public WallController(AvciGungor ai) throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -75,8 +77,9 @@ public class WallController {
 		 * S'il n'y a pas de case de destination, on considère que le personnage
 		 * est arrivé.
 		 * @return 
-		 * 		?
+	 * 		description manquante !
 		 * @throws StopRequestException 
+	 * 		description manquante !
 		 */
 		public boolean hasArrived() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -101,6 +104,7 @@ public class WallController {
 		/**
 		 * 
 		 * @throws StopRequestException
+	 * 		description manquante !
 		 */
 		private void updatePath() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -122,6 +126,7 @@ public class WallController {
 		 * Si le personnage n'est plus sur le chemin, alors le chemin
 		 * est vide après l'exécution de cette méthode.
 		 * @throws StopRequestException 
+		 * 		description manquante !
 		 */
 		private void checkIsOnPath() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -143,7 +148,7 @@ public class WallController {
 		 * case sure, elle ne sera pas prise en compte dans la trajectoire.
 		 * @return ?
 		 * @throws StopRequestException 
-		 * 
+	 * 		description manquante !
 		 */
 		private boolean checkPathValidity() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -191,8 +196,9 @@ public class WallController {
 		 * calcule la prochaine direction pour aller vers la destination 
 		 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 		 * @return 
-		 * 		?
+		 * 		description manquante !
 		 * @throws StopRequestException 
+		 * 		description manquante !
 		 * */
 		public Direction update() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -224,8 +230,9 @@ public class WallController {
 		/**
 		 * 
 		 * @return 
-		 * 		?
+		 * 		description manquante !
 		 * @throws StopRequestException
+		 * 		description manquante !
 		 */
 		public AiPath getPath() throws StopRequestException{
 			ai.checkInterruption();

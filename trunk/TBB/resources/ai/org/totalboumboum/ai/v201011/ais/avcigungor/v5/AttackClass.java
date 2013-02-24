@@ -42,7 +42,9 @@ public class AttackClass {
 	 /**
 	  * 
 	  * @param ai
+	 * 		description manquante !
 	  * @throws StopRequestException
+	 * 		description manquante !
 	  */
 	public AttackClass(AvciGungor ai)
 			throws StopRequestException {
@@ -98,7 +100,7 @@ public class AttackClass {
 
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	private void fillAttackMatrix() throws StopRequestException {
 		ai.checkInterruption();
@@ -245,6 +247,7 @@ public class AttackClass {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updateMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -257,8 +260,9 @@ public class AttackClass {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
