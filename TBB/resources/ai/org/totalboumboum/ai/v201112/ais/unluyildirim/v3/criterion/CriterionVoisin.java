@@ -23,7 +23,9 @@ public class CriterionVoisin extends AiUtilityCriterionInteger {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CriterionVoisin(UnluYildirim ai) throws StopRequestException {
 		super(NAME, 0, 3);

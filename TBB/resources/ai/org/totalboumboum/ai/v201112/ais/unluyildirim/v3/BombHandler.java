@@ -26,7 +26,9 @@ public class BombHandler extends AiBombHandler<UnluYildirim>
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected BombHandler(UnluYildirim ai) throws StopRequestException
     {	super(ai);
@@ -99,6 +101,7 @@ public class BombHandler extends AiBombHandler<UnluYildirim>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();

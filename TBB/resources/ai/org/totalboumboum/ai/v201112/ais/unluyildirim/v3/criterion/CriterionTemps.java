@@ -24,9 +24,9 @@ public class CriterionTemps extends AiUtilityCriterionBoolean
 	 * Ce critere renvoie une true si le tile possede le plus proche item/adversaire
 	 * 
 	 * @param ai 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException	
-	 * 		
+	 * 		description manquante !
 	 */
 	public CriterionTemps(UnluYildirim ai) throws StopRequestException
 	{	

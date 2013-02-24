@@ -23,7 +23,9 @@ public class CriterionFacile extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CriterionFacile(UnluYildirim ai) throws StopRequestException
 	{	

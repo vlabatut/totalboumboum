@@ -24,7 +24,9 @@ public class CriterionBesoin extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CriterionBesoin(UnluYildirim ai) throws StopRequestException
 	{	
