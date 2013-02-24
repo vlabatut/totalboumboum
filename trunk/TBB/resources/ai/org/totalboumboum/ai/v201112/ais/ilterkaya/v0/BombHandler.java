@@ -52,6 +52,7 @@ public class BombHandler extends AiBombHandler<IlterKaya>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();

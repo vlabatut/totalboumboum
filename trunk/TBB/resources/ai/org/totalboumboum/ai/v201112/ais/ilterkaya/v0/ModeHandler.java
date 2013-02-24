@@ -60,7 +60,7 @@ public class ModeHandler extends AiModeHandler<IlterKaya>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
