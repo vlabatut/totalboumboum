@@ -26,7 +26,9 @@ public class AttaPertinence extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AttaPertinence( CoskunOzdemir ai ) throws StopRequestException
 	{

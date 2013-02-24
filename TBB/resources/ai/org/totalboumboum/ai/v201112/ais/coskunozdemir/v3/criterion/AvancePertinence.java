@@ -20,7 +20,9 @@ public class AvancePertinence extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AvancePertinence( CoskunOzdemir ai ) throws StopRequestException
 	{

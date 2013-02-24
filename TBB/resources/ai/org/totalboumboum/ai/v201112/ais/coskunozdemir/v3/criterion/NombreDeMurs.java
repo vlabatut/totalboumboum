@@ -40,7 +40,9 @@ public class NombreDeMurs extends AiUtilityCriterionInteger
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public NombreDeMurs( CoskunOzdemir ai ) throws StopRequestException
 	{ // init nom + bornes du domaine de définition

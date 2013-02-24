@@ -109,6 +109,7 @@ public class BombHandler extends AiBombHandler<CoskunOzdemir>
 	// ///////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{

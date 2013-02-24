@@ -18,7 +18,9 @@ public class Securite extends AiUtilityCriterionBoolean
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Securite( CoskunOzdemir ai ) throws StopRequestException
 	{
