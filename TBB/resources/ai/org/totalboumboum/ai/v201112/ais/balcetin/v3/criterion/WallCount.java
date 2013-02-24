@@ -21,7 +21,9 @@ public class WallCount extends AiUtilityCriterionInteger {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public WallCount(BalCetin ai) throws StopRequestException {
 		// criterion domain

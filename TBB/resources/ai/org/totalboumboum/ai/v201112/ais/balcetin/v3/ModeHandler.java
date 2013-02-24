@@ -18,7 +18,9 @@ public class ModeHandler extends AiModeHandler<BalCetin> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected ModeHandler(BalCetin ai) throws StopRequestException {
 		super(ai);
@@ -74,6 +76,7 @@ public class ModeHandler extends AiModeHandler<BalCetin> {
 	// ///////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();

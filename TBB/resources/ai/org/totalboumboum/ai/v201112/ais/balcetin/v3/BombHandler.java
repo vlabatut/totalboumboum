@@ -16,7 +16,9 @@ public class BombHandler extends AiBombHandler<BalCetin> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected BombHandler(BalCetin ai) throws StopRequestException {
 		super(ai);
@@ -59,7 +61,7 @@ public class BombHandler extends AiBombHandler<BalCetin> {
 	// ///////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException {
 		ai.checkInterruption();

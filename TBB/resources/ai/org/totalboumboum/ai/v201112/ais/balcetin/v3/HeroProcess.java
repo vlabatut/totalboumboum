@@ -20,7 +20,9 @@ public class HeroProcess {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public HeroProcess(BalCetin ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -31,6 +33,7 @@ public class HeroProcess {
 	 * Gets Worst Hero which has the least points.
 	 * @return Hero which is the worst on the playground.(just counts alive heros)
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiHero getWorstHero() throws StopRequestException {
 		ai.checkInterruption();
@@ -52,6 +55,7 @@ public class HeroProcess {
 	 * 
 	 * @return Nearest hero to us.(just counts alive heros)
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiHero getNearestHero() throws StopRequestException {
 		ai.checkInterruption();
@@ -78,6 +82,7 @@ public class HeroProcess {
 	 * 
 	 * @return The least effective Hero alive.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiHero getTheLeastEffectiveHero() throws StopRequestException {
 		ai.checkInterruption();
@@ -106,6 +111,7 @@ public class HeroProcess {
 	 * 
 	 * @return Heros which we have direct acces by walking.(just counts alive heros)
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiHero> directlyAccessibleHeros() throws StopRequestException {
 		ai.checkInterruption();
@@ -130,6 +136,7 @@ public class HeroProcess {
 	 * 
 	 * @return if the hero is directly accessible, checks if he is the least effective or worst hero or nearest hero in this order. if not, than returns worst hero.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiHero mostRelevantHero() throws StopRequestException {
 		ai.checkInterruption();
@@ -156,6 +163,7 @@ public class HeroProcess {
 	 *  
 	 * @return possible dead hero count . (0 to 3 , just counts alive heros)
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int possibleDeadHeroCountOnPut() throws StopRequestException {
 		ai.checkInterruption();

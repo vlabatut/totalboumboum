@@ -30,7 +30,9 @@ public class UtilityHandler extends AiUtilityHandler<BalCetin> {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected UtilityHandler(BalCetin ai) throws StopRequestException {
 		super(ai);

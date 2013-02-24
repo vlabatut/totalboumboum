@@ -24,7 +24,9 @@ public class CollectRelevance extends AiUtilityCriterionBoolean {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CollectRelevance(BalCetin ai) throws StopRequestException { // init
 																		// nom

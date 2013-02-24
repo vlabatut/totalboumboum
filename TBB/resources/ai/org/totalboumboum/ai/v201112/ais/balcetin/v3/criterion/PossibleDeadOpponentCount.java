@@ -25,7 +25,9 @@ public class PossibleDeadOpponentCount extends AiUtilityCriterionInteger {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public PossibleDeadOpponentCount(BalCetin ai) throws StopRequestException {
 		// criterion domain
