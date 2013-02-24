@@ -225,9 +225,11 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Return possibilite de cross de bomb
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isPossibleCrossAdv(AiTile tile)throws StopRequestException
 	{	ai.checkInterruption();	
@@ -255,10 +257,13 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Return possibilite d'Hero
 	 * @param ownHero
+	 * 		description manquante !
 	 * @param gameArea
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected Boolean amIinDengeraous(AiHero ownHero, AiZone gameArea) throws StopRequestException{
 		ai.checkInterruption();
@@ -278,10 +283,13 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Calculate possibilite de passer tile precedent 
 	 * @param next
+	 * 		description manquante !
 	 * @param gameArea
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	 
 	protected AiBomb inDangeraous(AiLocation next, AiZone gameArea) throws StopRequestException{
@@ -301,12 +309,17 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Calculer possibilite de fuir si on pose bombe
 	 * @param center
+	 * 		description manquante !
 	 * @param gameArea
+	 * 		description manquante !
 	 * @param hero
+	 * 		description manquante !
 	 * @param tilesSelected 
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected boolean possibleFuir(AiTile center, AiZone gameArea, AiHero hero, List<AiTile> tilesSelected) throws StopRequestException {
 		ai.checkInterruption();
@@ -348,9 +361,11 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Calculate Direction
 	 * @param loc
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	Direction calculateDirection(AiLocation loc) throws StopRequestException{
 		ai.checkInterruption();
@@ -389,10 +404,13 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Calculate possibilite de passer tile precedent 
 	 * @param hero
+	 * 		description manquante !
 	 * @param path
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected boolean possibleDePasser(AiHero hero,AiPath path) throws StopRequestException{
 		ai.checkInterruption();
@@ -421,8 +439,11 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Method find tiles possibles d'arriver
 	 * @param result
+	 * 		description manquante !
 	 * @param tile
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */	
 	protected void possibleTiles(List<AiTile> result,AiTile tile) throws StopRequestException
 	{
@@ -443,10 +464,13 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Conttroler uniquement
 	 * @param result
+	 * 		description manquante !
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected boolean checkExisting(List<AiTile> result,AiTile tile)throws StopRequestException
 	{
@@ -463,7 +487,9 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * Calculer Safe Tiles
 	 * @param tiles
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void safeTiles(List<AiTile> tiles)throws StopRequestException
 	{
@@ -488,11 +514,15 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	/**
 	 * CalculerPossibilite Fuir
 	 * @param center
+	 * 		description manquante !
 	 * @param gameArea
+	 * 		description manquante !
 	 * @param hero
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private boolean isPossibleFuir(AiTile center, AiZone gameArea, AiHero hero) throws StopRequestException {
@@ -531,9 +561,11 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	
 	/**
 	 * @param tiles
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private  List<AiTile> supprimerDuplicate(List<AiTile> tiles)throws StopRequestException {
 		ai.checkInterruption();
@@ -553,8 +585,9 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	
 	/**
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected boolean isPossibleArriver() throws StopRequestException
 	{	
@@ -572,8 +605,9 @@ public class CommonTools extends AiAbstractHandler<DemirSazan>
 	
 	/**
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected boolean isPossibleRammaserBonus() throws StopRequestException
 	{	

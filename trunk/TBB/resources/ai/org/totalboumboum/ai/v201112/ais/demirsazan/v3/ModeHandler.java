@@ -15,7 +15,9 @@ public class ModeHandler extends AiModeHandler<DemirSazan>
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected ModeHandler(DemirSazan ai) throws StopRequestException
     {	super(ai);
@@ -57,6 +59,7 @@ public class ModeHandler extends AiModeHandler<DemirSazan>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();

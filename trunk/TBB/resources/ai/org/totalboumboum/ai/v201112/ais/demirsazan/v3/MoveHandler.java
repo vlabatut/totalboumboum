@@ -27,7 +27,9 @@ public class MoveHandler extends AiMoveHandler<DemirSazan>
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected MoveHandler(DemirSazan ai) throws StopRequestException
     {	super(ai);
