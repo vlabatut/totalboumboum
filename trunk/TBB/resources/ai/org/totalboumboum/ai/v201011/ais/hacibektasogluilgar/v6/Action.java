@@ -40,10 +40,15 @@ public class Action {
 	/**
 	 * 
 	 * @param hi
+	 * 		description manquante !
 	 * @param matriceZone
+	 * 		description manquante !
 	 * @param matriceTotal
+	 * 		description manquante !
 	 * @param cz
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Action(HacibektasogluIlgar hi,Etats[][] matriceZone,double[][] matriceTotal,CalculeZone cz) throws StopRequestException
 	{
@@ -66,14 +71,23 @@ public class Action {
 	 * desctructible ou bien autour d'une adversaire   
 	 *
 	 * @param tileActuelle
+	 * 		description manquante !
 	 * @param matrice
+	 * 		description manquante !
 	 * @param porte
+	 * 		description manquante !
 	 * @param direct
+	 * 		description manquante !
 	 * @param note
+	 * 		description manquante !
 	 * @param color
+	 * 		description manquante !
 	 * @param control
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private int voisinesParDirection(AiTile tileActuelle,double[][] matrice,int porte,Direction direct,int note,Color color,int control) throws StopRequestException  
 	{
@@ -117,12 +131,17 @@ public class Action {
 	/**
 	 * 
 	 * @param tileActuelle
+	 * 		description manquante !
 	 * @param matrice
+	 * 		description manquante !
 	 * @param note
+	 * 		description manquante !
 	 * @param color
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int calculeDapresPorte(AiTile tileActuelle,double[][] matrice,int note,Color color) throws StopRequestException
 	{
@@ -141,11 +160,15 @@ public class Action {
 	/**
 	 * cette methode calcule nouvelle matrice d'apres un bomb non-reel qu'on veut y mettre en position(line,col)
 	 * @param line
+	 * 		description manquante !
 	 * @param col
+	 * 		description manquante !
 	 * @param matriceTotal matrice reel qui est deja calcule pour jeu
 	 * @param matriceImaginaire 
+	 * 		description manquante !
 	 * @return matrice imaginaire
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int matricePourImaginaireBombe(int line,int col, double[][] matriceTotal,double[][] matriceImaginaire) throws StopRequestException
 	{
@@ -177,6 +200,7 @@ public class Action {
 	 * @param pathCible le chemin à controller
 	 * @return la resultat du control (true ou false)
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean pathCibleControl(AiPath pathCible) throws StopRequestException
 	{
@@ -216,10 +240,13 @@ public class Action {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws LimitReachedException
+	 * 		description manquante !
 	 */
 	public AiAction choisirLeMode(Etats matrice[][]) throws StopRequestException, LimitReachedException
 	{
@@ -287,7 +314,9 @@ public class Action {
 	 * methode affichante la matriceTotale en console et en zone de jeu à la fois
 	 * 
 	 * @param matriceTotal
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void afficherMatrice(double matriceTotal[][]) throws StopRequestException
 	{
