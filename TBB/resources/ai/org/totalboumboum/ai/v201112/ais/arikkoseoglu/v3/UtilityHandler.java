@@ -91,8 +91,11 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	/**
 	 * Method find tiles possibles d'arriver
 	 * @param result
+	 * 		description manquante !
 	 * @param tile
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */	
 	private void possibleAAriveTiles(List<AiTile> result,AiTile tile) throws StopRequestException
 	{
@@ -113,10 +116,13 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	/**
 	 * Method calcul unique tile in list 
 	 * @param result 
+	 * 		description manquante !
 	 * @param tile 
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private boolean checkExisting(List<AiTile> result,AiTile tile)throws StopRequestException
 	{
@@ -133,7 +139,9 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	/**
 	 * Method calcul tiles sont dans un scope de bomb 
 	 * @param tiles 
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private void safeTiles(List<AiTile> tiles)throws StopRequestException
 	{
@@ -158,7 +166,9 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	/**
 	 * 
 	 * @param tiles
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private void setPossibleFuirTiles(List<AiTile> tiles) throws StopRequestException {
@@ -178,11 +188,15 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	/**
 	* Method calculate possibilite de fuir
 	 * @param center 
+	 * 		description manquante !
 	 * @param gameArea 
+	 * 		description manquante !
 	 * @param hero 
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	*/
 	private boolean possibleFuir(AiTile center, AiZone gameArea, AiHero hero) throws StopRequestException {
 		ai.checkInterruption();
@@ -392,8 +406,9 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	 * Method qui calculer possibilite d'arriver ue adversaire 
 	 * 
 	 * @return
-	 * 		? 
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	public boolean getPossibilityArriver() throws StopRequestException
 	{	
@@ -412,8 +427,9 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	/**
 	 * Method qui calculer possibilite de rammaser le bonus
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private boolean getPossibilityRammaserBonus() throws StopRequestException
 	{	

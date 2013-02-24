@@ -42,10 +42,13 @@ public class DistanceAdversaireCriter extends AiUtilityCriterionInteger
 	/**
 	 * 
 	 * @param t1
+	 * 		description manquante !
 	 * @param t2
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected int getDistance(AiTile t1,AiTile t2) throws StopRequestException
 	{	ai.checkInterruption();
