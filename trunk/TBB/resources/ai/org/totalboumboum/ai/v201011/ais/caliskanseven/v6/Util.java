@@ -21,9 +21,13 @@ public class Util {
 	 * This function gives a list of all the bomb blasts in the map.
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @param acs attack mode
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	static List<AiTile> getBlastList(CaliskanSeven ai,boolean acs) throws StopRequestException{
 		ai.checkInterruption();
