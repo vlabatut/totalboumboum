@@ -68,8 +68,9 @@ public class ModeAttack
 	
 	/**
 	 * @param monia 
+	 * 		description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	public ModeAttack( GoncuOnat monia) throws StopRequestException
 	{	
@@ -85,8 +86,8 @@ public class ModeAttack
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
-	
 	public void valueFiresAttack(double[][] matrice, AiZone zone) throws StopRequestException
 	{
 		monia.checkInterruption(); // APPEL OBLIGATOIRE
@@ -122,6 +123,7 @@ public class ModeAttack
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void valueBonusAttack(double[][] matrice, AiZone zone)throws StopRequestException 
 	{
@@ -154,6 +156,7 @@ public class ModeAttack
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void valueBombsAttack(double[][] matrice, AiZone zone) throws StopRequestException{
 		monia.checkInterruption(); // APPEL OBLIGATOIRE
@@ -198,6 +201,7 @@ public class ModeAttack
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void valueRivalAttack(double[][] matrice, AiZone zone)throws StopRequestException 
     {
@@ -275,6 +279,7 @@ public class ModeAttack
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void valueBlocksAttack(double[][] matrice, AiZone zone) throws StopRequestException{
 		monia.checkInterruption(); // APPEL OBLIGATOIRE
@@ -313,6 +318,7 @@ public class ModeAttack
 	 * 				la zone du jeu
 	 *			 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * 
 	 * @return  endpoint
 	 * 			 La liste des cases que notre ia peut passer
@@ -353,7 +359,7 @@ public class ModeAttack
 	 * 
 	 * @return   Liste des valeurs des dernieres cases des chemins possibles.
 	 * @throws StopRequestException 
-	 * 			  
+	 * 		description manquante !
 	 */
 	public List<Double> endpointValue(List<AiTile> endPoint, double[][] matrice)throws StopRequestException 
 	{
@@ -384,7 +390,7 @@ public class ModeAttack
 	 *   @param matrice
 	 *				La matrice qui represent le zone
 	 * @throws StopRequestException
-	 * 
+	 * 		description manquante !
 	 * @return   shortestPathAttack.get(index)
 	 * 			  				Le chemin plus logique selon notre algorithm.
 	 */
@@ -449,7 +455,7 @@ public class ModeAttack
 	 *   @param matrice
 	 *				La matrice qui represent le zone
 	 * @throws StopRequestException
-	 * 
+	 * 		description manquante !
 	 * @return   shortestPathAttack.get(index)
 	 * 			  				Le chemin plus logique selon notre algorithm.
 	 */
@@ -506,9 +512,8 @@ public class ModeAttack
 	 * 				 La matrice de la zone
 	 *			 
 	 * @throws StopRequestException  
-	 * 			  
+	 * 		description manquante !
 	 */
-	
 	public void matriceAttack(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
 		monia.checkInterruption(); // APPEL OBLIGATOIRE

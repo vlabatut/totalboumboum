@@ -28,7 +28,9 @@ public class DropBomb
 	/**
 	 * 
 	 * @param monia
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public DropBomb(GoncuOnat monia) throws StopRequestException 
 	{
@@ -47,6 +49,7 @@ public class DropBomb
 	 * 				La zone du jeu 
 	 *			 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * 
 	 * @return  boolean  
 	 * 			true si on peut mettre un bombe
@@ -151,6 +154,7 @@ public class DropBomb
 	 * 
 	 *			 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * 
 	 * @return   boolean
 	 * 				renvoie true si la case se trove dans la liste.
@@ -176,6 +180,7 @@ public class DropBomb
 	 *            La zone du jeu
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * 
 	 * @return boolean
 	 * 				true si on peut mettre un bombe
@@ -316,6 +321,7 @@ public class DropBomb
 	 * 
 	 *			 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * 
 	 * @return   boolean
 	 * 			  

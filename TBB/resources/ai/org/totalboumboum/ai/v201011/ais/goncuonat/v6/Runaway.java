@@ -30,7 +30,9 @@ public class Runaway
 	/**
 	 * 
 	 * @param ia
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Runaway(GoncuOnat ia) throws StopRequestException 
 	{
@@ -50,10 +52,8 @@ public class Runaway
 	 * 				la zone du jeu
 	 *
 	 * @throws StopRequestException
-	 * 
-	 * 
+	 * 		description manquante !
 	 */
-	
 	public void runAwayAlgoAttack(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
 		
@@ -139,13 +139,8 @@ public class Runaway
 	 * @param list
 	 *			la liste des cases on puisse vouloir aller
 	 * @throws StopRequestException
-	 * 
-	 *
-	 * 
+	 * 		description manquante !
 	 */
-	
-	
-	
 	public void runAwayAlgoAttackCheck(double[][] matrice,AiZone zone, List<AiTile> list)throws StopRequestException 
 	{
 		monia.checkInterruption();//APPEL OBLIGATOIRE
@@ -205,6 +200,7 @@ public class Runaway
 	 * @param matrice
 	 *            La matrice de zone
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void runAwayAlgoCollecte(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
