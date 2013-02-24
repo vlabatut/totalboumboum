@@ -79,6 +79,7 @@ public class UtilityHandler extends AiUtilityHandler<KayukaTaskin>
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void initData() throws StopRequestException
 	{	ai.checkInterruption();
@@ -301,10 +302,13 @@ criteria.add(criterionSecond);
 	/**
 	 * 
 	 * @param center
+	 * 		description manquante !
 	 * @param hero
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Set<AiTile> getTilesForRadius(AiTile center, AiHero hero) throws StopRequestException
 	{	ai.checkInterruption();

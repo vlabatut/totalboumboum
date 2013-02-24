@@ -77,8 +77,9 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -138,7 +139,7 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 	
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private void updateDestination() throws StopRequestException
@@ -217,6 +218,7 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updatePath() throws StopRequestException
 	{

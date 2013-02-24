@@ -139,7 +139,7 @@ public class BombHandler extends AiBombHandler<KayukaTaskin>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	ai.checkInterruption();
