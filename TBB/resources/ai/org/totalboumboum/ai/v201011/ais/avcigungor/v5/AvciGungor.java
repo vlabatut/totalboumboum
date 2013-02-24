@@ -123,7 +123,9 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws LimitReachedException
+	 * 		description manquante !
 	 */
 	private void updatePath() throws StopRequestException, LimitReachedException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -134,8 +136,9 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -153,8 +156,9 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiTile getActualTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -164,6 +168,7 @@ public class AvciGungor extends ArtificialIntelligence {
 	/** on met a jour la matrice
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updateCollectMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -186,6 +191,7 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updateAttackMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -208,6 +214,7 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	void updateCostCalculator() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -223,10 +230,13 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param i
+	 * 		description manquante !
 	 * @param j
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double getCaseLevel(int i, int j) throws StopRequestException {
 		checkInterruption();
@@ -236,6 +246,7 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void chooseTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -256,8 +267,11 @@ public class AvciGungor extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceUpdate
+	 * 		description manquante !
 	 * @param aio
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void montrerLecran(double[][] matriceUpdate, AiOutput aio)
 			throws StopRequestException {
@@ -318,7 +332,5 @@ public class AvciGungor extends ArtificialIntelligence {
 				}
 			}
 		}
-
 	}
-
 }

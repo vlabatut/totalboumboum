@@ -47,7 +47,9 @@ public class CollecteClass {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public CollecteClass(AvciGungor ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -66,9 +68,11 @@ public class CollecteClass {
 	/**
 	 * 
 	 * @param origin
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> findItemsTiles(AiTile origin)
 			throws StopRequestException {
@@ -93,9 +97,11 @@ public class CollecteClass {
 	/**
 	 * 
 	 * @param origin
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> findSafeTiles(AiTile origin)
 			throws StopRequestException {
@@ -122,9 +128,11 @@ public class CollecteClass {
 	/**
 	 * 
 	 * @param origin
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> findWallTiles(AiTile origin)
 			throws StopRequestException {
@@ -163,6 +171,7 @@ public class CollecteClass {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillCollecteMatrix() throws StopRequestException {
 		ai.checkInterruption();
@@ -357,6 +366,7 @@ public class CollecteClass {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void updateMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -370,8 +380,9 @@ public class CollecteClass {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE

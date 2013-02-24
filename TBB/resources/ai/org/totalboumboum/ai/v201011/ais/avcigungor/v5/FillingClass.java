@@ -55,7 +55,9 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public FillingClass(AvciGungor ai) throws StopRequestException {
 		this.ai = ai;
@@ -74,8 +76,11 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void initialiseMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -96,8 +101,11 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void emplirBonus(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -122,8 +130,11 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void emplirHero(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -144,8 +155,11 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void emplirBombe(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -172,8 +186,11 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void emplirBlock(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -196,8 +213,11 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void emplirSur(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -219,8 +239,11 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillFiresMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -240,8 +263,9 @@ public class FillingClass {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -251,10 +275,13 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param i
+	 * 		description manquante !
 	 * @param j
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isBonus(int i, int j) throws StopRequestException {
 		ai.checkInterruption();
@@ -269,10 +296,13 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param i
+	 * 		description manquante !
 	 * @param j
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isSafe(int i, int j) throws StopRequestException {
 		ai.checkInterruption();
@@ -286,10 +316,13 @@ public class FillingClass {
 	/**
 	 * 
 	 * @param x1
+	 * 		description manquante !
 	 * @param y1
+	 * 		description manquante !
 	 * @return 
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean iswall(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -302,8 +335,5 @@ public class FillingClass {
 				resultat = true;
 		}
 		return resultat;
-
 	}
-
-	
 }
