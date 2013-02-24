@@ -425,9 +425,11 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 	
 	/**
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	
@@ -462,6 +464,7 @@ public class BombHandler extends AiBombHandler<GungorKavus>
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	protected void updateOutput() throws StopRequestException
 	{	

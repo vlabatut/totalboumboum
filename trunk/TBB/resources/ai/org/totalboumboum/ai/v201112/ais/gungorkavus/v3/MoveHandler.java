@@ -104,9 +104,9 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	 * 
 	 * getSafeTile2() On controle qu'il y a une tile sure autour de nous (5x5)
 	 * @return
-	 * 		? 
+	 * 		description manquante !
 	 * @throws StopRequestException 
-	 *  
+	 * 		description manquante !
 	 */
 	protected boolean getSafeTile2() throws StopRequestException{
 		ai.checkInterruption();
@@ -225,6 +225,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	 * 
 	 * updateDestination()
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	protected void updateDestination() throws StopRequestException{
 		this.ai.checkInterruption();
@@ -271,9 +272,11 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	
 	/**
 	 * @param tile
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	
@@ -305,7 +308,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 	 * 
 	 * updatePath()
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 */
 	protected void updatePath() throws StopRequestException {
 		this.ai.checkInterruption();
@@ -389,13 +392,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 
 	/**
 	 * @throws StopRequestException
-	 */
-	
-	/*
-	 * 
-	 * updateDirection()
-	 * 
-	 * 
+	 * 		description manquante !
 	 */
 	protected void updateDirection() throws StopRequestException{
 		this.ai.checkInterruption();
