@@ -83,9 +83,13 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile1
+	 * 		description manquante !
 	 * @param tile2
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private Direction actionDirection(AiTile tile1, AiTile tile2)
 			throws StopRequestException {
@@ -176,8 +180,11 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollecte
+	 * 		description manquante !
 	 * @param gameMap
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillCollecte(double[][] matriceCollecte, AiZone gameMap)
 			throws StopRequestException {
@@ -194,8 +201,11 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollecte
+	 * 		description manquante !
 	 * @param gameMap
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillAttaque(double[][] matriceCollecte, AiZone gameMap)
 			throws StopRequestException {
@@ -212,7 +222,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void initialiseMap(double[][] matriceCollect)
 			throws StopRequestException {
@@ -229,7 +241,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillwithInDes(double[][] matriceCollect)
 			throws StopRequestException {
@@ -248,7 +262,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillwithDes(double[][] matriceCollect)
 			throws StopRequestException {
@@ -276,7 +292,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillwithBombs(double[][] matriceCollect)
 			throws StopRequestException {
@@ -306,9 +324,13 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param l
+	 * 		description manquante !
 	 * @param c
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private int distancePlusProcheAdversaire(int l, int c)
 			throws StopRequestException {
@@ -336,7 +358,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillwithBns(double[][] matriceCollect)
 			throws StopRequestException {
@@ -385,7 +409,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void takeHeroes(double[][] matriceCollect)
 			throws StopRequestException {
@@ -405,7 +431,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void takeFireHoles(double[][] matriceCollect)
 			throws StopRequestException {
@@ -422,7 +450,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceCollect
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void printMatrixtoConsole(double[][] matriceCollect)
 			throws StopRequestException {
@@ -445,8 +475,11 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param out
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void printOnScreen(double[][] matrice, AiOutput out)
 			throws StopRequestException {
@@ -474,7 +507,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceAttaque
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void aFillWithBns(double[][] matriceAttaque)
 			throws StopRequestException {
@@ -523,9 +558,13 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param number
+	 * 		description manquante !
 	 * @param mod
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	int superMod(int number, int mod) throws StopRequestException {
 		checkInterruption();
@@ -543,7 +582,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param matriceAttaque
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void aTakeHeroes(double[][] matriceAttaque)
 			throws StopRequestException {
@@ -659,7 +700,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean poserBombeCollecte() throws StopRequestException {
 		checkInterruption();
@@ -683,7 +726,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean poserBombeAttack() throws StopRequestException {
 		checkInterruption();
@@ -702,9 +747,13 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @param range
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private List<AiHero> heroesInRange(AiTile tile, int range)
 			throws StopRequestException {
@@ -729,8 +778,11 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param hero
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean accessible(AiHero hero) throws StopRequestException {
 		checkInterruption();
@@ -751,7 +803,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private List<AiBlock> getWillBurnWalls() throws StopRequestException {
 		checkInterruption();
@@ -776,9 +830,13 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @param range
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getBombRangeList(AiTile tile, int range)
 			throws StopRequestException {
@@ -822,8 +880,11 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param bomb
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean runAway(AiTile bomb) throws StopRequestException {
 		checkInterruption();
@@ -871,7 +932,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getAllRangeList() throws StopRequestException {
 		checkInterruption();
@@ -888,10 +951,15 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @param dir
+	 * 		description manquante !
 	 * @param range
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> getONeighbour(AiTile tile, Direction dir, int range)
 			throws StopRequestException {
@@ -917,9 +985,13 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile1
+	 * 		description manquante !
 	 * @param tile2
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws NullPointerException
+	 * 		description manquante !
 	 */
 	private void getMouvementDirection(AiTile tile1, AiTile tile2)
 			throws StopRequestException, NullPointerException {
@@ -970,7 +1042,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiTile getMaxTile() throws StopRequestException {
 		checkInterruption();
@@ -1011,10 +1085,15 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param ownHero
+	 * 		description manquante !
 	 * @param startPoint
+	 * 		description manquante !
 	 * @param endPoints
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiPath shortestPath(AiHero ownHero, AiTile startPoint,
 			List<AiTile> endPoints) throws StopRequestException {
@@ -1035,7 +1114,9 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean isModeCollecte() throws StopRequestException {
 		checkInterruption();
@@ -1057,9 +1138,13 @@ public class KayukaYildirim extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @param range
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private List<AiBlock> listOfBlocksInBlast(AiTile tile, int range)
 			throws StopRequestException {
@@ -1091,5 +1176,4 @@ public class KayukaYildirim extends ArtificialIntelligence {
 		}
 		return blocksInBlast;
 	}
-
 }
