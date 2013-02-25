@@ -25,7 +25,9 @@ public class Escape {
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Escape(KayaYerinde onder) throws StopRequestException
 	{
@@ -38,7 +40,9 @@ public class Escape {
 	/**
 	 * 
 	 * @param matris
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
@@ -49,8 +53,9 @@ public class Escape {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction getNextAction() throws StopRequestException
 	{

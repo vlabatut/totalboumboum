@@ -32,7 +32,9 @@ public class Duvar {
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Duvar(KayaYerinde onder) throws StopRequestException
 	{
@@ -46,7 +48,9 @@ public class Duvar {
 	/**
 	 * 
 	 * @param matris
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
@@ -57,8 +61,9 @@ public class Duvar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
@@ -126,8 +131,9 @@ public class Duvar {
 	//eğer yol bulamamışsa matrisi ve astarı eski haline getirir.
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean incele() throws StopRequestException
 	{
@@ -174,6 +180,7 @@ public class Duvar {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void run() throws StopRequestException
 	{
@@ -184,8 +191,9 @@ public class Duvar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isRunning() throws StopRequestException
 	{
@@ -196,8 +204,9 @@ public class Duvar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Astar getAstar() throws StopRequestException
 	{

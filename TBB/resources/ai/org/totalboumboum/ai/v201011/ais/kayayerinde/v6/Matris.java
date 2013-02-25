@@ -62,7 +62,9 @@ public class Matris {
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Matris(KayaYerinde onder) throws StopRequestException
 	{
@@ -80,6 +82,7 @@ public class Matris {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void refresh() throws StopRequestException
 	{	
@@ -160,9 +163,13 @@ public class Matris {
 	/**
 	 * 
 	 * @param t
+	 * 		description manquante !
 	 * @param incele
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private List<AiTile> getBlast(AiTile t,boolean incele) throws StopRequestException
 	{
@@ -321,11 +328,17 @@ public class Matris {
 	 * passée en paramètre. Le terme "indirect" signifie que la fonction est récursive : 
 	 * si une case à portée de souffle contient une bombe, le souffle de cette bombe est rajouté
 	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
+	 * 
 	 * @param bomb 
+	 * 		description manquante !
 	 * @param blast 
+	 * 		description manquante !
 	 * @param bombs 
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	onder.checkInterruption(); 
@@ -353,8 +366,11 @@ public class Matris {
 
 	/**
 	 * traite la bombe passée en paramètre
+	 * 
 	 * @param bomb 
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -397,8 +413,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int[][] getVarlikMatrisi() throws StopRequestException
 	{
@@ -409,8 +426,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public double[][] getKalanZamanMatrisi() throws StopRequestException
 	{
@@ -421,8 +439,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean BonusVarMi() throws StopRequestException
 	{
@@ -435,7 +454,9 @@ public class Matris {
 	/**
 	 * 
 	 * @param t
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void hypoteticalBomb(AiTile t) throws StopRequestException
 	{
@@ -495,6 +516,7 @@ public class Matris {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void Undo() throws StopRequestException
 	{
@@ -508,8 +530,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int getHypoDuvar() throws StopRequestException
 	{
@@ -520,8 +543,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int getHypoBonus() throws StopRequestException
 	{
@@ -532,8 +556,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int getHypoRivals() throws StopRequestException
 	{
@@ -544,8 +569,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ArrayList<AiTile> getDest() throws StopRequestException
 	{
@@ -571,8 +597,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ArrayList<AiTile> getRivals() throws StopRequestException
 	{
@@ -590,9 +617,11 @@ public class Matris {
 	/**
 	 * 
 	 * @param t
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean etrafi(AiTile t) throws StopRequestException
 	{
@@ -610,8 +639,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ArrayList<AiTile> getFrees() throws StopRequestException
 	{
@@ -633,8 +663,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ArrayList<AiTile> getBonus() throws StopRequestException
 	{
@@ -653,9 +684,11 @@ public class Matris {
 	/**
 	 * 
 	 * @param list
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private ArrayList<AiTile> Sort(ArrayList<AiTile> list) throws StopRequestException
 	{
@@ -674,9 +707,13 @@ public class Matris {
 	 /**
 	  * 
 	  * @param list
+	 * 		description manquante !
 	  * @param value
+	 * 		description manquante !
 	  * @return ?
+	 * 		description manquante !
 	  * @throws StopRequestException
+	 * 		description manquante !
 	  */
 	private ArrayList<AiTile> quickSort(ArrayList<AiTile> list,ArrayList<Integer> value) throws StopRequestException
 	{
@@ -724,8 +761,9 @@ public class Matris {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ArrayList<AiTile> getRivalInf() throws StopRequestException
 	{
@@ -783,9 +821,11 @@ public class Matris {
 	/**
 	 * 
 	 * @param list
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private int[][] clone(int[][]list) throws StopRequestException
 	{
@@ -808,8 +848,11 @@ public class Matris {
 	/**
 	 * 
 	 * @param list
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private double[][] clone(double[][]list) throws StopRequestException
 	{
@@ -832,7 +875,9 @@ public class Matris {
 	/**
 	 * 
 	 * @param deger
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void print(int deger) throws StopRequestException
 	{
@@ -852,8 +897,4 @@ public class Matris {
 		}
 		System.out.println("");
 	}
-	
 }
-
-
-

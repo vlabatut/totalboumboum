@@ -19,7 +19,9 @@ public class Bomb {
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Bomb(KayaYerinde onder) throws StopRequestException
 	{

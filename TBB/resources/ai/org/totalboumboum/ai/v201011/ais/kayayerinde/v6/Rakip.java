@@ -32,7 +32,9 @@ public class Rakip {
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Rakip(KayaYerinde onder) throws StopRequestException
 	{
@@ -44,7 +46,9 @@ public class Rakip {
 	/**
 	 * 
 	 * @param matris
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
@@ -55,8 +59,9 @@ public class Rakip {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
@@ -103,7 +108,9 @@ public class Rakip {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean incele() throws StopRequestException
 	{
@@ -168,5 +175,4 @@ public class Rakip {
 		matris.Undo();
 		return false;
 	}
-
 }

@@ -33,7 +33,9 @@ public class Astar {
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Astar(KayaYerinde onder) throws StopRequestException
 	{
@@ -44,12 +46,17 @@ public class Astar {
 	/**
 	 * 
 	 * @param baslangic
+	 * 		description manquante !
 	 * @param son
+	 * 		description manquante !
 	 * @param gidilenTur
+	 * 		description manquante !
 	 * @param matris
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean yolBul(AiTile baslangic,AiTile son,int gidilenTur,Matris matris) throws StopRequestException
 	{
@@ -166,10 +173,15 @@ public class Astar {
 	/**
 	 * 
 	 * @param t1
+	 * 		description manquante !
 	 * @param t2
+	 * 		description manquante !
 	 * @param m
-	 * @return ?
+	 * 		description manquante !
+	 * @return 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private int mesafe(AiTile t1,AiTile t2,Matris m) throws StopRequestException
 	{
@@ -197,10 +209,13 @@ public class Astar {
 	/**
 	 * 
 	 * @param t1
+	 * 		description manquante !
 	 * @param t2
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int real(AiTile t1,AiTile t2) throws StopRequestException
 	{
@@ -213,8 +228,11 @@ public class Astar {
 	/**
 	 * 
 	 * @param list
+	 * 		description manquante !
 	 * @param eleman
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void siraliEkle(ArrayList<Node> list,Node eleman) throws StopRequestException
 	{
@@ -236,9 +254,13 @@ public class Astar {
 	/**
 	 * 
 	 * @param tile
+	 * 		description manquante !
 	 * @param list
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private Node tileListedeMi(AiTile tile,ArrayList<Node> list) throws StopRequestException
 	{
@@ -260,8 +282,9 @@ public class Astar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiPath getPath() throws StopRequestException
 	{
@@ -272,7 +295,9 @@ public class Astar {
 	/**
 	 * 
 	 * @param path
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
@@ -283,8 +308,9 @@ public class Astar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int getTur() throws StopRequestException
 	{
@@ -295,7 +321,9 @@ public class Astar {
 	/**
 	 * 
 	 * @param gidilenTur
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void setTur(int gidilenTur) throws StopRequestException
 	{
@@ -306,8 +334,9 @@ public class Astar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public int yoldaMi() throws StopRequestException
 	{
@@ -327,9 +356,11 @@ public class Astar {
 	/**
 	 * 
 	 * @param matris
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction getNextAction(Matris matris) throws StopRequestException
 	{
@@ -357,6 +388,7 @@ public class Astar {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void sictinAc() throws StopRequestException
 	{
@@ -367,6 +399,7 @@ public class Astar {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void sictinKapat() throws StopRequestException
 	{
@@ -393,10 +426,15 @@ public class Astar {
 		/**
 		 * 
 		 * @param own
+		 * 		description manquante !
 		 * @param parent
+		 * 		description manquante !
 		 * @param G
+		 * 		description manquante !
 		 * @param H
+		 * 		description manquante !
 		 * @throws StopRequestException
+	 	 * 		description manquante !
 		 */
 		public Node(AiTile own,Node parent,int G,int H) throws StopRequestException
 		{
@@ -410,7 +448,9 @@ public class Astar {
 		/**
 		 * 
 		 * @return ?
+		 * 		description manquante !
 		 * @throws StopRequestException
+	 	 * 		description manquante !
 		 */
 		public int getF() throws StopRequestException
 		{

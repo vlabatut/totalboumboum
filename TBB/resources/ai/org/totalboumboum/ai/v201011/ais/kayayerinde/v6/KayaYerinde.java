@@ -77,8 +77,9 @@ public class KayaYerinde extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{
