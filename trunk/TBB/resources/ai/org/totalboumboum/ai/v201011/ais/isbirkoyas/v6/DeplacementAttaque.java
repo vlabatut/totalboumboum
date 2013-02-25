@@ -38,7 +38,9 @@ public class DeplacementAttaque {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public DeplacementAttaque(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -53,9 +55,11 @@ public class DeplacementAttaque {
 	 * @param matriceAttaque
 	 *            la matrice attaque
 	 * @param resultat
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction algorithmAttaque(double[][] matriceAttaque,
 			AiZone gameZone, AiAction resultat) throws StopRequestException  {
@@ -646,6 +650,7 @@ public class DeplacementAttaque {
 	 * Cette méthode permet a s'enfuire apres le posage de bombe
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void senfuireApresPosage() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -671,6 +676,7 @@ public class DeplacementAttaque {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return deplacement commune
 	 */
 	public DeplacementCommune DeplacementCommune() throws StopRequestException {
@@ -682,6 +688,7 @@ public class DeplacementAttaque {
 	 * METHODE D'ACCES a la classe TraitementCommune
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return Traitementcommune
 	 */
 	public TraitementCommune traitementCommune() throws StopRequestException {

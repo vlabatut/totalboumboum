@@ -172,6 +172,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void mode(AiZone gameZone) throws StopRequestException {
 		checkInterruption();
@@ -195,6 +196,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return deplacementcommune
 	 */
 	public Securite Securite() throws StopRequestException {
@@ -207,6 +209,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return deplacementcommune
 	 */
 	public PosageBombe PosageBombe() throws StopRequestException {
@@ -219,6 +222,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return deplacementcommune
 	 */
 	public DeplacementCommune DeplacementCommune() throws StopRequestException {
@@ -230,6 +234,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCollecte
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return deplacementcollecte
 	 */
 	public DeplacementCollecte DeplacementCollecte()
@@ -242,6 +247,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementAttaque
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return deplacementAttaque
 	 */
 	public DeplacementAttaque DeplacementAttaque() throws StopRequestException {
@@ -253,6 +259,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe TraitementAttaque
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return traitementAttaque
 	 */
 	public TraitementAttaque TraitementAttaque() throws StopRequestException {
@@ -264,6 +271,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe TraitementCollect
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return traitementCollect
 	 */
 	public TraitementCollect TraitementCollect() throws StopRequestException {

@@ -24,7 +24,9 @@ public class TraitementCommune {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public TraitementCommune(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -44,6 +46,7 @@ public class TraitementCommune {
 	 *            la zone du jeu
 	 * @return la liste des points finaux.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> calculeLesPointsFinaux(double[][] matriceAttaque,
 			AiZone gameZone) throws StopRequestException {
@@ -84,8 +87,11 @@ public class TraitementCommune {
 	 * @param matrice
 	 *            La Matrice Attaque
 	 * @param endPoints
+	 * 		description manquante !
 	 * @param endPoints2
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void destinationAttaque(List<AiTile> endPoints,
 			List<AiTile> endPoints2, double[][] matrice)
@@ -149,6 +155,7 @@ public class TraitementCommune {
 	 *            la zone du jeu
 	 * @return la liste des points finaux.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> calculeLesPointsFinaux(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -193,8 +200,11 @@ public class TraitementCommune {
 	 * @param matrice
 	 *            La Matrice collecte
 	 * @param endPoints
+	 * 		description manquante !
 	 * @param endPoints2
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void destinationCollect(List<AiTile> endPoints,
 			List<AiTile> endPoints2, int[][] matrice)
@@ -240,6 +250,7 @@ public class TraitementCommune {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return deplacement commune
 	 */
 	public DeplacementCommune DeplacementCommune() throws StopRequestException {

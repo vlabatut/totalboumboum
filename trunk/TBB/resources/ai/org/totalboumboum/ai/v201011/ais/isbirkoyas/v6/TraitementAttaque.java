@@ -26,7 +26,9 @@ public class TraitementAttaque {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public TraitementAttaque(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -43,6 +45,7 @@ public class TraitementAttaque {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void initialiseMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -67,6 +70,7 @@ public class TraitementAttaque {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void attaqueMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -155,6 +159,7 @@ public class TraitementAttaque {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void affiche(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {

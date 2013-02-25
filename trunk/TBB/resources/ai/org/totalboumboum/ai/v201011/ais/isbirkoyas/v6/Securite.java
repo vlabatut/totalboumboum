@@ -28,7 +28,9 @@ public class Securite {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Securite(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -46,6 +48,7 @@ public class Securite {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return poserBombe
 	 */
 	public boolean plein(AiZone gameZone, AiTile tile)
@@ -79,6 +82,7 @@ public class Securite {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return casSurs
 	 */
 	public List<AiTile> posageControle(AiZone gameZone)
@@ -145,10 +149,11 @@ public class Securite {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @param bombe
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return casSurs2
 	 */
-
 	public List<AiTile> bombeControle(AiZone gameZone, AiBomb bombe)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -220,10 +225,13 @@ public class Securite {
 	 * deux arguments.
 	 * 
 	 * @param dx2
+	 * 		description manquante !
 	 * @param dy2
+	 * 		description manquante !
 	 * @return directions2
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<Direction> directionToute(int dx2, int dy2)
 			throws StopRequestException {
