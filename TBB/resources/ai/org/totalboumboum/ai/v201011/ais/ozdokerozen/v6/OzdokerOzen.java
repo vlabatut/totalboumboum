@@ -364,9 +364,13 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param matrice
+	 * 		description manquante !
 	 * @param notreHero
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean guvendemiyiz(int[][] matrice,AiHero notreHero)throws StopRequestException{
 		checkInterruption();
@@ -386,6 +390,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */	
 	private void initialiseMatrice(int[][] matrice, org.totalboumboum.ai.v201011.adapter.data.AiZone gameZone)
 	throws StopRequestException {
@@ -412,6 +417,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillBombsMatrice(int[][] matrice,AiZone gameZone)
 			throws StopRequestException {
@@ -451,6 +457,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillBlocksMatrice(int[][] matrice, AiZone gameZone)
 	throws StopRequestException {
@@ -479,6 +486,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillFiresMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -506,6 +514,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void fillItemsBonus(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -527,10 +536,15 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui retuorne la duration de bombe
 	 * @param tile
+	 * 		description manquante !
 	 * @param matrice
+	 * 		description manquante !
 	 * @param gameZone
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	long bombTime(AiTile tile,int[][] matrice,AiZone gameZone) throws StopRequestException{
 		checkInterruption();
@@ -552,10 +566,15 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui notre hero utilise pour deplacement dans le mode attack 
 	 * @param nextMove
+	 * 		description manquante !
 	 * @param uneHero
+	 * 		description manquante !
 	 * @param matrice
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiAction attackAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
 		checkInterruption();
@@ -661,10 +680,15 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui notre hero utilise pour deplacement dans le mode collecte
 	 * @param nextMove
+	 * 		description manquante !
 	 * @param uneHero
+	 * 		description manquante !
 	 * @param matrice
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiAction collecteAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
 		checkInterruption();
@@ -757,10 +781,15 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui notre hero utilise pour deplacement pour fuir
 	 * @param nextMove
+	 * 		description manquante !
 	 * @param uneHero
+	 * 		description manquante !
 	 * @param matrice
+	 * 		description manquante !
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiAction fuirAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
 		checkInterruption();
@@ -838,7 +867,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * Methode qui a alogrithm pour fuir
 	 * ça utilise aussi methode de fuirAction()
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private AiAction fuir() throws StopRequestException{
 		checkInterruption();
@@ -900,8 +931,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui retuorne un adversaire plus proche et possible de arrivée
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiHero adversairePlusProche() throws StopRequestException{
 		checkInterruption();
@@ -941,8 +973,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * Methode qui retuorne un adversaire plus proche dans le zone
 	 * il y a possiblite de ne pas arriver 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiHero adversairePlusProcheMaisPasArriver() throws StopRequestException{
 		checkInterruption();
@@ -977,9 +1010,11 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui retourne le bombe du tile scope qu'on est dessus
 	 * @param scope
+	 * 		description manquante !
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiBomb bombMemeDirection(AiTile scope) throws StopRequestException{
 		checkInterruption();
@@ -1001,11 +1036,11 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * methode qui ecrit les tiles dans le console
 	 * @param title
+	 * 		description manquante !
 	 * @param a
+	 * 		description manquante !
 	 */
 	public void p(String title,AiTile a){
 		//System.out.println(title+": "+a);
 	}
 }
-
-

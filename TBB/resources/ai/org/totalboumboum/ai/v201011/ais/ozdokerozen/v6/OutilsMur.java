@@ -25,54 +25,65 @@ public class OutilsMur {
 	/** */
 	AiHero notreHero;
 	/** */
-	List<AiTile> tilesPossible=new ArrayList<AiTile>();
-	
+	List<AiTile> tilesPossible = new ArrayList<AiTile>();
+
 	/** */
-	int MURDESTRUCTIBLE=5;
+	int MURDESTRUCTIBLE = 5;
 	/** */
-	int MURINDESTRUCTIBLE=0;
+	int MURINDESTRUCTIBLE = 0;
 	/** */
-	int FIRE=-2;
+	int FIRE = -2;
 	/** */
-	int SECURE=1;
+	int SECURE = 1;
 	/** */
-	int BONUS=10;
+	int BONUS = 10;
 	/** */
-	int SCOPE=-3;
-	
+	int SCOPE = -3;
+
 	/**
 	 * 
 	 * @param ai
+	 *            description manquante !
 	 * @param matrice
+	 *            description manquante !
 	 * @throws StopRequestException
+	 *             description manquante !
 	 */
-	public OutilsMur(OzdokerOzen ai,int matrice[][]) throws StopRequestException {
+	public OutilsMur(OzdokerOzen ai, int matrice[][])
+			throws StopRequestException {
 		ai.checkInterruption();
 		// initiliasation
-		tileControleur=new TileControleur(ai, matrice);
-		abc=ai;
-		gameZone=abc.getPercepts();
-		notreHero=gameZone.getOwnHero();
-		List<AiTile> scopes=new ArrayList<AiTile>();
-		tileControleur.tilePossibleArriveAvecRisk(notreHero.getTile(), tilesPossible, scopes, matrice);
+		tileControleur = new TileControleur(ai, matrice);
+		abc = ai;
+		gameZone = abc.getPercepts();
+		notreHero = gameZone.getOwnHero();
+		List<AiTile> scopes = new ArrayList<AiTile>();
+		tileControleur.tilePossibleArriveAvecRisk(notreHero.getTile(),
+				tilesPossible, scopes, matrice);
 	}
 
 	/**
-	 * Car on ne peut pas cree une path avec astar pour les murs, methode retourne le voisin qu'on peut arriver des murs
+	 * Car on ne peut pas cree une path avec astar pour les murs, methode
+	 * retourne le voisin qu'on peut arriver des murs
+	 * 
 	 * @param mur
+	 *            description manquante !
 	 * @param tilesPossible
+	 *            description manquante !
 	 * @return tilde de cible pour detruire le mur
-	 * @throws StopRequestException 
+	 * @throws StopRequestException
+	 *             description manquante !
 	 */
-	public AiTile cibleAstar(AiTile mur, List<AiTile> tilesPossible) throws StopRequestException{
+	public AiTile cibleAstar(AiTile mur, List<AiTile> tilesPossible)
+			throws StopRequestException {
 		abc.checkInterruption();
-		AiTile voisinDeMur=null;
-		if(mur!=null){
-			List<AiTile> voisins=mur.getNeighbors();
-			for(int i=0;i<voisins.size();i++){
+		AiTile voisinDeMur = null;
+		if (mur != null) {
+			List<AiTile> voisins = mur.getNeighbors();
+			for (int i = 0; i < voisins.size(); i++) {
 				abc.checkInterruption();
-				if(tilesPossible.contains(voisins.get(i))){
-					voisinDeMur=voisins.get(i);
+				if (tilesPossible.contains(voisins.get(i))) {
+					voisinDeMur = voisins.get(i);
 				}
 			}
 		}
