@@ -29,7 +29,9 @@ public class TraitementCollect {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public TraitementCollect(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -46,6 +48,7 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void initialiseMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -69,8 +72,8 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
-
 	public void collectMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -109,6 +112,7 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void affiche(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -135,6 +139,7 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return T
 	 */
 	public double dureeAllerBonus(AiZone gameZone, AiItem bonus)
@@ -161,6 +166,7 @@ public class TraitementCollect {
 	 * @param matrice
 	 *            La Matrice de collecte
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void plusProcheBombe(AiZone gameZone, AiItem bonus, int[][] matrice)
 			throws StopRequestException {
@@ -206,12 +212,13 @@ public class TraitementCollect {
 	 * adversaire et elle initialise cette case avec une valeur. Elle prend 3
 	 * arguments, la zone du jeu, les items du jeu et une matrice de type Int.
 	 * @param matrice 
-	 * 
+	 * 		description manquante !
 	 * @param bonus
 	 *            item bonus
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void plusProcheHero(int[][] matrice, AiZone gameZone, AiItem bonus)
 			throws StopRequestException {

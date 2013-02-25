@@ -39,7 +39,9 @@ public class DeplacementCommune {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public DeplacementCommune(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -61,6 +63,7 @@ public class DeplacementCommune {
 	 *            les cases cibles ou le hero peut aller
 	 * @return le chemin le plus court a parcourir
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiPath cheminLePlusCourt(AiHero ownHero, AiTile startPoint,
 			List<AiTile> endPoints) throws StopRequestException {
@@ -97,8 +100,11 @@ public class DeplacementCommune {
 	 * @param resultat
 	 *            resultat
 	 * @param endPoints2 
+	 * 		description manquante !
 	 * @return endPoints
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> detruire(AiZone gameZone, AiAction resultat,
 			List<AiTile> endPoints2) throws StopRequestException {
@@ -289,10 +295,11 @@ public class DeplacementCommune {
 	 * argument qui est un chemin (une séquence des cases).
 	 * 
 	 * @param nextMove
-	 * 
+	 * 		description manquante !
 	 * @return la nouvelle action de notre hero
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction newAction(AiPath nextMove) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -337,12 +344,18 @@ public class DeplacementCommune {
 	 * des calculs.
 	 * 
 	 * @param gauche
+	 * 		description manquante !
 	 * @param droit
+	 * 		description manquante !
 	 * @param haut
+	 * 		description manquante !
 	 * @param bas
+	 * 		description manquante !
 	 * @param gameZone 
+	 * 		description manquante !
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void nouvelleZone(int gauche, int droit, int haut, int bas,
 			AiZone gameZone) throws StopRequestException {
@@ -399,10 +412,13 @@ public class DeplacementCommune {
 	 * deux arguments.
 	 * 
 	 * @param dx2
+	 * 		description manquante !
 	 * @param dy2
+	 * 		description manquante !
 	 * @return directions2
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public List<Direction> directionToute(int dx2, int dy2)
 			throws StopRequestException {
@@ -459,11 +475,15 @@ public class DeplacementCommune {
 	 * arguments.
 	 * 
 	 * @param dx
+	 * 		description manquante !
 	 * @param dy
+	 * 		description manquante !
 	 * @param dir
+	 * 		description manquante !
 	 * @return dir
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Direction direction(Direction dir, int dx, int dy)
 			throws StopRequestException {
@@ -493,10 +513,11 @@ public class DeplacementCommune {
 	 * 2 arguments.
 	 * 
 	 * @param voisines
-	 * 
+	 * 		description manquante !
 	 * @param distances2
-	 * 
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void ordre(List<AiTile> voisines, int[] distances2)
 			throws StopRequestException {

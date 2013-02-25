@@ -23,7 +23,9 @@ public class PosageBombe {
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public PosageBombe(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -39,6 +41,7 @@ public class PosageBombe {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return poserBombe
 	 */
 	public boolean deciderPoserBombeCollect(AiZone gameZone)
@@ -72,6 +75,7 @@ public class PosageBombe {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return poserBombe
 	 */
 	public boolean deciderPoserBombeAttaque(AiZone gameZone)
@@ -94,6 +98,7 @@ public class PosageBombe {
 	 * METHODE D'ACCES a la classe Securite
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @return securite
 	 */
 	public Securite Securite() throws StopRequestException {
