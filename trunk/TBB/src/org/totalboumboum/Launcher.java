@@ -1664,6 +1664,7 @@ public class Launcher
  * 		- dans le document, justifier les différentes contraintes imposées pr le code source
  * 		- reprendre la description des exceptions (nouvelles ? certaines plus d'actualité ?)
  * 		- màj diag de classe pr agent-related
+ * 		- màj manuel TBB : écrans de statistiques
  */
 
 // TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
