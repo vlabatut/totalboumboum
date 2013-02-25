@@ -36,7 +36,7 @@ public class DropBomb
 	 * @param ai
 	 * 		AI correspondant
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public DropBomb(AiZone zone, int mode, ArtificialIntelligence ai) throws StopRequestException
 	{	
@@ -54,6 +54,7 @@ public class DropBomb
 	 * @return result
 	 * 		vrai si la decision est poser une bombe faux sinon
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	public boolean decisionOfBomb() throws StopRequestException
 	{
@@ -160,6 +161,7 @@ public class DropBomb
 	 * @return result
 	 * 		vraie s'il es bloque, faux sinon
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	private boolean blockade(AiHero ownHero) throws StopRequestException 
 	{
@@ -196,7 +198,7 @@ public class DropBomb
 	 * @return result
 	 * 		vrai s'elle est en danger, faux sinon
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{
@@ -233,6 +235,7 @@ public class DropBomb
 	 *@return result
 	 *		le nombre de murs accesible
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	public int wallAvaible(List<AiTile> tempBlast) throws StopRequestException
 	{
@@ -271,6 +274,7 @@ public class DropBomb
 	 *@return result
 	 *		l'hero accesible
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	public AiHero enemyAvaible(List<AiTile> tempBlast) throws StopRequestException
 	{
@@ -307,10 +311,13 @@ public class DropBomb
 	 * n'y en a pas, faux sinon 
 	 * 
 	 * @param tile1
+	 * 		description manquante !
 	 * @param tile2
+	 * 		description manquante !
 	 * @return result
 	 * 		vrai s'il n'y a pas d'obstacle entre deux tile, faux sinon.
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean noObstacle(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
@@ -346,7 +353,7 @@ public class DropBomb
 	 * @return restult
 	 * 		la liste des cases sur, sinon une liste null
 	 * @throws StopRequestException 
-	 * 			
+	 * 		description manquante !
 	 * */
 	public List<AiTile> safeArea(AiHero hero, int range, List<AiTile> blast) throws StopRequestException 
 	{
@@ -393,7 +400,7 @@ public class DropBomb
 	 * @return result
 	 * 		la liste des cases de la portee
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	
 	public List<AiTile> calculeBlast(int range) throws StopRequestException
@@ -451,6 +458,7 @@ public class DropBomb
 	 * @return tempo 
 	 *		la liste des cases de l'area
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	public List<AiTile> calculeArea(int range) throws StopRequestException
 	{
@@ -539,6 +547,7 @@ public class DropBomb
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws
 	 * 		StopRequestException
+	 * 		description manquante !
 	 */
 	public List<AiTile> accesibleArea(AiTile tile, List<AiTile> area, List<AiTile> safe) throws StopRequestException
 	{

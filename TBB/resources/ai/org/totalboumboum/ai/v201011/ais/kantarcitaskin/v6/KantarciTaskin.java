@@ -77,8 +77,9 @@ public class KantarciTaskin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiActionName action() throws StopRequestException
 	{

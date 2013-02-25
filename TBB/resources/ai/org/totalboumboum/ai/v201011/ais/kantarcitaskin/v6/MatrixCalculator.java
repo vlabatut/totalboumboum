@@ -56,8 +56,9 @@ public class MatrixCalculator
 	 * @param ai
 	 * 		AI	 * 
 	 * @param move 
+	 * 		description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public MatrixCalculator(AiZone zone, int mode, ArtificialIntelligence ai, Move move) throws StopRequestException
 	{
@@ -73,6 +74,7 @@ public class MatrixCalculator
 	 * Initialise la matrice puis ajoute les valeurs des item qui se trouve dans le jeu
 	 * 
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	public void matrixConstruction () throws StopRequestException
 	{
@@ -102,7 +104,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public void wallEffect(double[][] matrix) throws StopRequestException
 	{
@@ -167,7 +169,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public void heroEffect(double[][] matrix) throws StopRequestException
 	{
@@ -247,7 +249,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public void bombEffect(double[][] matrix) throws StopRequestException
 	{
@@ -285,6 +287,7 @@ public class MatrixCalculator
 	 * @return resutl
 	 * 		le temps d'explosion estimé
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	public double tempExplosion (AiBomb bomb) throws StopRequestException
 	{
@@ -305,7 +308,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public void bonusEffect(double[][] matrix) throws StopRequestException 
 	{
@@ -347,7 +350,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 
+	 * 		description manquante !
 	 * */
 	public void fireEffect(double[][] matrix) throws StopRequestException
 	{
@@ -371,7 +374,7 @@ public class MatrixCalculator
 	 * @param valeur
 	 * 		valeur calculé de cette cas
 	 * @throws StopRequestException 
-	 *
+	 * 		description manquante !
 	 * */
 	public void setDefItemValeurs(AiTile item, int valeur) throws StopRequestException
 	{
