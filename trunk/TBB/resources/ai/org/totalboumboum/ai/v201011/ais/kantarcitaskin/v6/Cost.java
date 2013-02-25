@@ -25,7 +25,9 @@ public class Cost extends CostCalculator
 	 * @param matrix
 	 * 		zone numerique du jeu
 	 * @param ai 
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * */
 	public Cost(double[][] matrix, ArtificialIntelligence ai) throws StopRequestException
 	{
@@ -72,15 +74,9 @@ public class Cost extends CostCalculator
 						else
 							resultat = 1;
 					}
-					
 				}
-				
 			}
-				
 		}
-		
 		return resultat;
 	}
-	
-	
 }
