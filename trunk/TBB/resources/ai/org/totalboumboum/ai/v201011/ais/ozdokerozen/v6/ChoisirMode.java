@@ -30,7 +30,9 @@ public class ChoisirMode{
 	/**
 	 * 
 	 * @param ai
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public ChoisirMode(OzdokerOzen ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -43,6 +45,7 @@ public class ChoisirMode{
 	 * Methode donne nous combien de bonus dans le total
 	 * @return total de bonus
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	int combienDeBonus() throws StopRequestException{
 		AI.checkInterruption();
@@ -63,6 +66,7 @@ public class ChoisirMode{
 	 * Methode calcule les valeurs BESOINMIN et BESOINMAX
 	 * Ces valeur precise notre point de vue dans la matrice 
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	void combienSuffisant() throws StopRequestException{
 		AI.checkInterruption();
@@ -76,6 +80,7 @@ public class ChoisirMode{
 	 * Methode precise le decision pour le mode
 	 * @return la decision de selection
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	boolean modeChoisir() throws StopRequestException{
 		AI.checkInterruption();
