@@ -33,7 +33,9 @@ public class Bonus {
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Bonus(KayaYerinde onder) throws StopRequestException
 	{
@@ -47,7 +49,9 @@ public class Bonus {
 	/**
 	 * 
 	 * @param matris
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
@@ -58,8 +62,9 @@ public class Bonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
@@ -106,7 +111,9 @@ public class Bonus {
 	/**
 	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private boolean incele() throws StopRequestException
 	{
@@ -143,6 +150,7 @@ public class Bonus {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public void run() throws StopRequestException
 	{
@@ -153,8 +161,9 @@ public class Bonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public boolean isRunning() throws StopRequestException
 	{
@@ -165,8 +174,9 @@ public class Bonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public Astar getAstar() throws StopRequestException
 	{

@@ -51,7 +51,9 @@ public class YolBulucu
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	public YolBulucu(KayaYerinde onder) throws StopRequestException
 	{
@@ -62,10 +64,15 @@ public class YolBulucu
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @param x
+	 * 		description manquante !
 	 * @param y
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws LimitReachedException
+	 * 		description manquante !
 	 */
 	public YolBulucu(KayaYerinde onder, double x, double y) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -77,9 +84,13 @@ public class YolBulucu
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @param destination
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 * @throws LimitReachedException
+	 * 		description manquante !
 	 */
 	public YolBulucu(KayaYerinde onder, AiTile destination) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -91,7 +102,9 @@ public class YolBulucu
 	/**
 	 * 
 	 * @param onder
+	 * 		description manquante !
 	 * @throws StopRequestException
+	 * 		description manquante !
 	 */
 	private void init(KayaYerinde onder) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -128,9 +141,13 @@ public class YolBulucu
 	 * modifie la case de destination du personnage,
 	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
+	 * 
 	 * @param destination 
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * @throws LimitReachedException 
+	 * 		description manquante !
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -146,10 +163,15 @@ public class YolBulucu
 	 * modifie les coordonnées de destination,
 	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
+	 * 
 	 * @param x 
+	 * 		description manquante !
 	 * @param y 
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * @throws LimitReachedException 
+	 * 		description manquante !
 	 */
 	public void setDestination(double x, double y) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -186,9 +208,11 @@ public class YolBulucu
 */
 	/**
 	 * détermine si le personnage est arrivé aux coordonnées de destination
+	 * 
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -221,7 +245,9 @@ public class YolBulucu
 	/**
 	 * met à jour la position précédente du personnage,
 	 * exprimée en pixels
+	 * 
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private void updatePrev() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -242,7 +268,9 @@ public class YolBulucu
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
+	 * 
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -291,8 +319,11 @@ public class YolBulucu
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
+	 * 
 	 * @return ?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -326,10 +357,13 @@ public class YolBulucu
 	/** 
 	 * calcule la prochonderne direction pour aller vers la destination 
 	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessonderre)
+	 *
 	 * @return
-	 * 		?
+	 * 		description manquante !
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 * @throws LimitReachedException 
+	 * 		description manquante !
 	 * */
 	public Direction update() throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -375,8 +409,10 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour la sortie graphique de l'IA en fonction du
-	 * chemin courant
+	 * chemin courant.
+	 * 
 	 * @throws StopRequestException 
+	 * 		description manquante !
 	 */
 	private void updateOutput() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
