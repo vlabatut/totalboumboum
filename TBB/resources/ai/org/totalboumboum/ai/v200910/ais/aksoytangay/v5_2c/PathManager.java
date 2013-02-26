@@ -42,8 +42,11 @@ public class PathManager {
 	/**
 	 * 
 	 * @param myAI
+	 * 		Description manquante !
 	 * @param percepts
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public PathManager(AksoyTangay myAI, AiZone percepts) throws StopRequestException
 	{
@@ -57,13 +60,14 @@ public class PathManager {
 	 * Methode qui calcule le chemin le plus court.
 	 * 
 	 * @param ownHero
-	 *           
+	 * 		Description manquante !
 	 * @param startTile
-	 *            
+	 * 		Description manquante !
 	 * @param endTiles
-	 *             
+	 * 		Description manquante !
 	 * @return le chemin le plus court
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getShortestPath(AiHero ownHero, AiTile startTile, 
 			List<AiTile> endTiles) throws StopRequestException{
@@ -92,13 +96,14 @@ public class PathManager {
 	 * Methode qui calcule le chemin le plus court.
 	 * 
 	 * @param ownHero
-	 *           
+	 * 		Description manquante !
 	 * @param startTile
-	 *            
+	 * 		Description manquante !
 	 * @param endTile
-	 *             
+	 * 		Description manquante !
 	 * @return le chemin le plus court
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getShortestPathToOneTile(AiHero ownHero, AiTile startTile, 
 			AiTile endTile) throws StopRequestException{
@@ -128,6 +133,7 @@ public class PathManager {
 	 * 
 	 * @return la liste des possible cases a aller
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getAvailibleTilesToEscape() throws StopRequestException
 	{
@@ -166,9 +172,10 @@ public class PathManager {
 	 * 
 	 * Methode qui renvoie le meilleur chemin sure.
 	 * @param availibleTiles 
-	 * 
+	 * 		Description manquante !
 	 * @return meilleur chemin
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getBestPathToEscape(List<AiTile> availibleTiles) throws StopRequestException
 	{
@@ -189,8 +196,9 @@ public class PathManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getAvailibleTilesDirectToCollectBonus() throws StopRequestException
 	{
@@ -222,8 +230,9 @@ public class PathManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getAvailibleTilesIndirectToCollectBonus() throws StopRequestException
 	{
@@ -271,10 +280,13 @@ public class PathManager {
 	/**
 	 * 
 	 * @param availibleTilesDirect
+	 * 		Description manquante !
 	 * @param availibleTilesIndirect
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getBestPathToCollectBonus(List<AiTile> availibleTilesDirect, List<AiTile> availibleTilesIndirect) throws StopRequestException
 	{
@@ -310,6 +322,4 @@ public class PathManager {
 		
 		return result;
 	}
-	
-	
 }

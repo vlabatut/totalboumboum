@@ -42,9 +42,13 @@ public class EscapeManager {
 	/**
 	 * 
 	 * @param myAI
+	 * 		Description manquante !
 	 * @param percepts
+	 * 		Description manquante !
 	 * @param pathManager
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public EscapeManager(AksoyTangay myAI, AiZone percepts, PathManager pathManager) throws StopRequestException
 	{
@@ -62,8 +66,9 @@ public class EscapeManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction getDirectionToEscape() throws StopRequestException
 	{
@@ -121,6 +126,7 @@ public class EscapeManager {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void removeUsedTilesOfPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -139,6 +145,7 @@ public class EscapeManager {
 	 * @return
 	 * 		?
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean finishedPath() throws StopRequestException
 	{
@@ -157,8 +164,9 @@ public class EscapeManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
@@ -182,8 +190,9 @@ public class EscapeManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getCurrentTile() throws StopRequestException {
 		myAI.checkInterruption();

@@ -58,8 +58,9 @@ public class Zone {
 	 * 
 	 * @param zone Aizone
 	 * @param myAI 
-	 * 
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Zone(AiZone zone, AksoyTangay myAI) throws StopRequestException
 	{
@@ -89,6 +90,7 @@ public class Zone {
 	 * zone.
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void fillMatrix() throws StopRequestException
 	{
@@ -196,9 +198,10 @@ public class Zone {
 	/**
 	 * La methode qui renvoie la matrice d'état.
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public State[][] getMatrix() throws StopRequestException
 	{	myAI.checkInterruption();
@@ -209,8 +212,9 @@ public class Zone {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public State[][] updateMatrix() throws StopRequestException
 	{
@@ -225,7 +229,9 @@ public class Zone {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setZone(AiZone zone) throws StopRequestException {
 		myAI.checkInterruption();
@@ -235,8 +241,9 @@ public class Zone {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException {
 		myAI.checkInterruption();
@@ -246,8 +253,9 @@ public class Zone {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Collection<AiBomb> getBombs() throws StopRequestException {
 		myAI.checkInterruption();
@@ -257,8 +265,9 @@ public class Zone {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Collection<AiItem> getItems() throws StopRequestException {
 		myAI.checkInterruption();
