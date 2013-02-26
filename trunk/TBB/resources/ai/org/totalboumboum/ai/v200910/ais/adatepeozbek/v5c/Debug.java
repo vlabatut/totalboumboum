@@ -20,8 +20,11 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 	/**
 	 * 
 	 * @param str
+	 * 		Description manquante !
 	 * @param ownAi
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public static void write(String str, ArtificialIntelligence ownAi) throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -32,8 +35,11 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 	/**
 	 * 
 	 * @param str
+	 * 		Description manquante !
 	 * @param ownAi
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public static void writeln(String str, ArtificialIntelligence ownAi) throws StopRequestException
 	{	ownAi.checkInterruption();

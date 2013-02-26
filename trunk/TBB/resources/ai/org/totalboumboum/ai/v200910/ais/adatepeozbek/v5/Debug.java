@@ -16,6 +16,7 @@ public class Debug
 	/**
 	 * 
 	 * @param str
+	 * 		Description manquante !
 	 */
 	public static void write(String str)
 	{
@@ -26,6 +27,7 @@ public class Debug
 	/***
 	 * 
 	 * @param str
+	 * 		Description manquante !
 	 */
 	public static void writeln(String str)
 	{

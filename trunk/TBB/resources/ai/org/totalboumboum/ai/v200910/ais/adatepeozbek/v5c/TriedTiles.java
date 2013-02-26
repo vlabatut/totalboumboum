@@ -24,7 +24,9 @@ public class TriedTiles
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TriedTiles(AdatepeOzbek ai)throws StopRequestException
 	{	ai.checkInterruption();
@@ -36,7 +38,9 @@ public class TriedTiles
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void add(AiTile tile) throws StopRequestException
 	{
@@ -48,6 +52,7 @@ public class TriedTiles
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void reset() throws StopRequestException
 	{

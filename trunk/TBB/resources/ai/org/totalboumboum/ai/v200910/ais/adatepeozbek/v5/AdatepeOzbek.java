@@ -99,8 +99,9 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiAction getActionToDo() throws StopRequestException
 	{
@@ -112,7 +113,9 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param action
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setActionToDo(AiAction action) throws StopRequestException
 	{
@@ -124,8 +127,9 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{
@@ -136,8 +140,9 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException
 	{
@@ -148,8 +153,9 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getPath() throws StopRequestException
 	{
@@ -160,7 +166,9 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param path
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
@@ -171,8 +179,9 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getPassedTiles() throws StopRequestException
 	{

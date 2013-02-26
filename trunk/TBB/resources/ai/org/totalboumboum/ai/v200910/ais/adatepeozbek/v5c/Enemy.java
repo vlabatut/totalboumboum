@@ -31,9 +31,13 @@ public class Enemy
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @param type
+	 * 		Description manquante !
 	 * @param ownAi
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Enemy(AiHero hero, EnemyTypes type,ArtificialIntelligence ownAi) throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -45,8 +49,9 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getHero() throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -56,8 +61,9 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public EnemyTypes getType() throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -67,7 +73,9 @@ public class Enemy
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void updateHero(AiHero hero) throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -77,8 +85,9 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getPosedBombs() throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -88,7 +97,9 @@ public class Enemy
 	/**
 	 * 
 	 * @param type
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setType(EnemyTypes type) throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -98,8 +109,9 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getSameTileCount() throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -109,7 +121,9 @@ public class Enemy
 	/**
 	 * 
 	 * @param ct
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void increasePosedBombs(int ct) throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -119,6 +133,7 @@ public class Enemy
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void increaseSameTileCount() throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -127,7 +142,9 @@ public class Enemy
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setLastCheck(long time) throws StopRequestException
 	{	ownAi.checkInterruption();
@@ -137,8 +154,9 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public long getLastCheck() throws StopRequestException
 	{	ownAi.checkInterruption();
