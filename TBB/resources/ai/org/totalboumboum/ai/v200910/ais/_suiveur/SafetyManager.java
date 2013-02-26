@@ -62,6 +62,7 @@ public class SafetyManager
 	/**
 	 * 
 	 * @param ai
+	 * 		Agent concerné.
 	 * @throws StopRequestException
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
@@ -107,7 +108,9 @@ public class SafetyManager
 	
 	/**
 	 * mise à jour de la matrice de sûreté
+	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -198,10 +201,15 @@ public class SafetyManager
 	 * sensibles au feu (elles n'explosent pas quand elles sont touchées par une explosion).
 	 * 
 	 * @param bomb 
+	 * 		Bombe dont on veut le blast.
 	 * @param blast 
+	 * 		Le blast de la bombe.
 	 * @param bombs 
-	 * @return ?
+	 * 		Bombes déjà traitées.
+	 * @return 
+	 * 		?
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -231,7 +239,9 @@ public class SafetyManager
 	/**
 	 * traite la bombe passée en paramètre
 	 * @param bomb 
+	 * 		Bombe à traiter.
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -362,6 +372,7 @@ public class SafetyManager
 	 * niveau de sûreté calculé
 	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

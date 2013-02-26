@@ -93,7 +93,9 @@ public class PathManager
 	 * initialise ce PathManager
 	 * 
 	 * @param ai 
+	 * 		Agent concerné.
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void init(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -232,6 +234,7 @@ public class PathManager
 	 * exprimée en pixels
 	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updatePrev() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -254,6 +257,7 @@ public class PathManager
 	 * est vide après l'exécution de cette méthode.
 	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -303,8 +307,10 @@ public class PathManager
 	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
 	 * 
-	 * @return ?
+	 * @return 
+	 * 		?
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -391,6 +397,7 @@ public class PathManager
 	 * chemin courant
 	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

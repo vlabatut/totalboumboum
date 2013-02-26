@@ -130,6 +130,7 @@ public class EscapeManager
 	
 	/**
 	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -145,6 +146,7 @@ public class EscapeManager
 	 * est vide après l'exécution de cette méthode.
 	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -165,9 +167,12 @@ public class EscapeManager
 	 * les changement concernant la sûreté des cases. En d'autres termes,
 	 * si une bombe apparait avant que le personnage d'ait atteint une
 	 * case sure, elle ne sera pas prise en compte dans la trajectoire.
-	 * @return ?
-	 * @throws StopRequestException 
 	 * 
+	 * @return 
+	 * 		?
+	 * 
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -196,6 +201,7 @@ public class EscapeManager
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -271,6 +277,7 @@ public class EscapeManager
 	 * chemin courant
 	 * 
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
