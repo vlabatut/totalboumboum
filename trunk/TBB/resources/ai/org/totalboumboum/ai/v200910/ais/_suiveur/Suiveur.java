@@ -101,7 +101,7 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -228,6 +228,7 @@ public class Suiveur extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updateLocation() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -249,6 +250,7 @@ public class Suiveur extends ArtificialIntelligence
 	 * @return 
 	 * 		Personnage contrôlé.
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -267,6 +269,7 @@ public class Suiveur extends ArtificialIntelligence
 	 * @return 
 	 * 		Zone de jeu.
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	public AiZone getZone() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -285,6 +288,7 @@ public class Suiveur extends ArtificialIntelligence
 	/**
 	 * choisit aléatoirement un joueur comme cible à suivre
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void chooseTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -301,6 +305,7 @@ public class Suiveur extends ArtificialIntelligence
 	/**
 	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
 	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private void updateTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
