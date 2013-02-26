@@ -57,11 +57,17 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @param myAI
+	 * 		Description manquante !
 	 * @param percepts
+	 * 		Description manquante !
 	 * @param zone
+	 * 		Description manquante !
 	 * @param pathManager
+	 * 		Description manquante !
 	 * @param escapeManager
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public StrategyManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager, EscapeManager escapeManager) throws StopRequestException
 	{
@@ -81,9 +87,9 @@ public class StrategyManager {
 	 * cette fonx retourn vrai si plusieurs bombe nous menace avec le type t, 
 	 * sinon(si le type de menace est I) elle renvoi faux
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	public Direction typeDefiningAndGettingDirection() throws StopRequestException
 	{
@@ -166,8 +172,9 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiBomb> bombsMenaceMe() throws StopRequestException
 	{
@@ -221,9 +228,11 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @param bombs
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile iTypeEscape(List<AiBomb> bombs) throws StopRequestException
 	{
@@ -258,9 +267,11 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @param bombs
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile tTypeEscape(List<AiBomb> bombs) throws StopRequestException
 	{
@@ -321,8 +332,9 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile tTypeEscapeWithOneNeighbor() throws StopRequestException
 	{
@@ -382,9 +394,11 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @param bombs
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile escapeFromOneOfBomb(List<AiBomb> bombs) throws StopRequestException
 	{
@@ -509,9 +523,11 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @param bombs
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean bombeHasExplosed(List<AiBomb> bombs) throws StopRequestException
 	{
@@ -525,7 +541,7 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public List<AiBomb> getBombs() {
 		return bombs;
@@ -535,9 +551,9 @@ public class StrategyManager {
 	//////////////////////BONUSSSSSS staratejileri            ///////////////////////////////////////////////
 	/**
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	public boolean hasExplosed() throws StopRequestException
 	{
@@ -584,9 +600,9 @@ public class StrategyManager {
 	
 	/**
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	public boolean finishedTTypeEscape() throws StopRequestException
 	{
@@ -601,8 +617,9 @@ public class StrategyManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean finishedPath() throws StopRequestException
 	{
@@ -613,6 +630,4 @@ public class StrategyManager {
 		return (lastTile == currentTile);
 			
 	}
-	
-	
 }

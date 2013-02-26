@@ -48,9 +48,13 @@ public class BonusManager {
 	/**
 	 * 
 	 * @param myAI
+	 * 		Description manquante !
 	 * @param percepts
+	 * 		Description manquante !
 	 * @param pathManager
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public BonusManager(AksoyTangay myAI, AiZone percepts, PathManager pathManager) throws StopRequestException
 	{
@@ -59,15 +63,14 @@ public class BonusManager {
 		this.myAI = myAI;
 		this.percepts = percepts;
 		this.pathManager = pathManager;
-		
-		
 	}
 	
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction getDirectionToCollectBonus() throws StopRequestException
 	{
@@ -108,6 +111,7 @@ public class BonusManager {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -123,8 +127,9 @@ public class BonusManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean finishedPath() throws StopRequestException
 	{
@@ -139,8 +144,9 @@ public class BonusManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
@@ -162,8 +168,9 @@ public class BonusManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean hasExplosed() throws StopRequestException
 	{

@@ -84,6 +84,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param heroToAttackTile
+	 * 		Description manquante !
 	 */
 	public void setHeroToAttackTile(AiTile heroToAttackTile) {
 		this.heroToAttackTile = heroToAttackTile;
@@ -92,7 +93,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiHero getHeroToAttack() {
 		return heroToAttack;
@@ -101,6 +102,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param heroToAttack
+	 * 		Description manquante !
 	 */
 	public void setHeroToAttack(AiHero heroToAttack) {
 		this.heroToAttack = heroToAttack;
@@ -109,7 +111,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiTile getNormalAttackTile() {
 		return normalAttackTile;
@@ -118,6 +120,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param normalAttackTile
+	 * 		Description manquante !
 	 */
 	public void setNormalAttackTile(AiTile normalAttackTile) {
 		this.normalAttackTile = normalAttackTile;
@@ -126,7 +129,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiTile getWhichTileToDropBomb() {
 		return whichTileToDropBomb;
@@ -135,6 +138,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param whichTileToDropBomb
+	 * 		Description manquante !
 	 */
 	public void setWhichTileToDropBomb(AiTile whichTileToDropBomb) {
 		this.whichTileToDropBomb = whichTileToDropBomb;
@@ -143,10 +147,15 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param myAI
+	 * 		Description manquante !
 	 * @param percepts
+	 * 		Description manquante !
 	 * @param zone
+	 * 		Description manquante !
 	 * @param pathManager
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AttackManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager) throws StopRequestException
 	{
@@ -164,12 +173,19 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param myAI
+	 * 		Description manquante !
 	 * @param percepts
+	 * 		Description manquante !
 	 * @param zone
+	 * 		Description manquante !
 	 * @param pathManager
+	 * 		Description manquante !
 	 * @param attackType
+	 * 		Description manquante !
 	 * @param nat
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AttackManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager, AttackType attackType, AiTile nat) throws StopRequestException
 	{
@@ -202,8 +218,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getHeroToAttackFonx() throws StopRequestException
 	{
@@ -268,8 +285,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction gettingAttackDirection() throws StopRequestException
 	{
@@ -299,9 +317,11 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param whichTileToDropBomb
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction endShootDirection(AiTile whichTileToDropBomb) throws StopRequestException
 	{
@@ -341,10 +361,13 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param ownTile
+	 * 		Description manquante !
 	 * @param heroTile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction normalAttack(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
@@ -454,10 +477,13 @@ public class AttackManager {
 	/** pour les  coins
 	 * 
 	 * @param ownTile
+	 * 		Description manquante !
 	 * @param heroTile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction lTypeAttackWithTwoOrThreeBombs(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
@@ -703,9 +729,11 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param first
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction goThere(AiTile first) throws StopRequestException
 	{
@@ -742,11 +770,15 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param first
+	 * 		Description manquante !
 	 * @param second
+	 * 		Description manquante !
 	 * @param third
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction dropThreeBomb(AiTile first, AiTile second, AiTile third) throws StopRequestException
  	{
@@ -765,10 +797,13 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param first
+	 * 		Description manquante !
 	 * @param third
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction dropTwoBomb(AiTile first, AiTile third) throws StopRequestException
 	{
@@ -792,8 +827,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AttackType attackTypeDefiner() throws StopRequestException
 	{
@@ -810,8 +846,9 @@ public class AttackManager {
 	/** gerer le chemin    ////////////
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean finishedPath() throws StopRequestException
 	{
@@ -830,8 +867,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean finishedOnePartOfPath() throws StopRequestException
 	{
@@ -845,8 +883,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
@@ -870,6 +909,7 @@ public class AttackManager {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void removeUsedTilesOfPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -890,8 +930,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isTherePath() throws StopRequestException
 	{
@@ -903,10 +944,13 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param startTile
+	 * 		Description manquante !
 	 * @param finishTile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("null")
 	public boolean isDangereousPath(AiTile startTile, AiTile finishTile) throws StopRequestException
@@ -974,8 +1018,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isDangerToAttack() throws StopRequestException
 	{
@@ -1035,9 +1080,11 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isDangerAtLine(AiTile tile) throws StopRequestException
 	{
@@ -1082,9 +1129,11 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isDangerAtCol(AiTile tile) throws StopRequestException
 	{
@@ -1129,10 +1178,13 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param startTile
+	 * 		Description manquante !
 	 * @param finishTile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int tilesSizeBetweenTwoTiles(AiTile startTile, AiTile finishTile) throws StopRequestException
 	{
@@ -1184,10 +1236,13 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param ownTile
+	 * 		Description manquante !
 	 * @param heroTile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile mirrorTile(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
@@ -1252,8 +1307,9 @@ public class AttackManager {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	//on regard si l'ennemi a change sa position
 	public boolean placeChanged() throws StopRequestException
@@ -1269,9 +1325,11 @@ public class AttackManager {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isAtCorner(AiTile tile) throws StopRequestException
 	{
@@ -1325,5 +1383,4 @@ public class AttackManager {
 		
 		return result;
 	}
-	
 }

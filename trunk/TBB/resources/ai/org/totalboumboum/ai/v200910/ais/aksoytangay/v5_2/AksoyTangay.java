@@ -261,6 +261,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	 *  @return la situation de danger de case
 	 *  
 	 *  @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isDangerous(AiTile tile) throws StopRequestException
 	{	// avant tout : test d'interruption
@@ -291,9 +292,11 @@ public class AksoyTangay extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean severalDangers(AiTile tile) throws StopRequestException
 	{	// avant tout : test d'interruption
@@ -324,8 +327,9 @@ public class AksoyTangay extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isHerosAccesible() throws StopRequestException
 	{
@@ -363,8 +367,9 @@ public class AksoyTangay extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isBonusClose() throws StopRequestException
 	{
@@ -392,6 +397,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException
 	{
@@ -414,9 +420,11 @@ public class AksoyTangay extends ArtificialIntelligence
 	
 	/**
 	 * @param tile 
-	 * @return ?
+	 * 		Description manquante !
+	 * @return 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
@@ -436,6 +444,4 @@ public class AksoyTangay extends ArtificialIntelligence
 		}
 		return result;
 	}
-	
-	
 }
