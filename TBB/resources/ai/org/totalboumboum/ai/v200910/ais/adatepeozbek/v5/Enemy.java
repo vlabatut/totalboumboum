@@ -27,7 +27,9 @@ public class Enemy
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @param type
+	 * 		Description manquante !
 	 */
 	public Enemy(AiHero hero, EnemyTypes type)
 	{
@@ -38,7 +40,7 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiHero getHero()
 	{
@@ -48,7 +50,7 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public EnemyTypes getType()
 	{
@@ -58,6 +60,7 @@ public class Enemy
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 */
 	public void updateHero(AiHero hero)
 	{
@@ -67,7 +70,7 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getPosedBombs()
 	{
@@ -77,6 +80,7 @@ public class Enemy
 	/**
 	 * 
 	 * @param type
+	 * 		Description manquante !
 	 */
 	public void setType(EnemyTypes type)
 	{
@@ -86,7 +90,7 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getSameTileCount()
 	{
@@ -96,6 +100,7 @@ public class Enemy
 	/**
 	 * 
 	 * @param ct
+	 * 		Description manquante !
 	 */
 	public void increasePosedBombs(int ct)
 	{
@@ -113,6 +118,7 @@ public class Enemy
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 */
 	public void setLastCheck(long time)
 	{
@@ -122,7 +128,7 @@ public class Enemy
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public long getLastCheck()
 	{

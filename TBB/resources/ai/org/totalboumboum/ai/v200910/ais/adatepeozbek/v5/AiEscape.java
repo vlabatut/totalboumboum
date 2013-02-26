@@ -72,7 +72,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiEscape(AdatepeOzbek ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -404,9 +406,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isHeroInRange(AiHero hero) throws StopRequestException
 	{ownAi.checkInterruption();
@@ -442,8 +446,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isHeroInRange() throws StopRequestException
 	{ownAi.checkInterruption();
@@ -481,8 +486,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean enoughArmed() throws StopRequestException
 	{ownAi.checkInterruption();
@@ -495,9 +501,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param type
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getHeroByType(EnemyTypes type) throws StopRequestException
 	{ownAi.checkInterruption();
@@ -515,9 +523,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public EnemyTypes getHeroType(AiHero hero) throws StopRequestException
 	{
@@ -536,9 +546,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Enemy getEnemy(AiHero hero) throws StopRequestException
 	{ownAi.checkInterruption();
@@ -557,6 +569,7 @@ public class AiEscape
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void updatePath() throws StopRequestException
 	{ownAi.checkInterruption();
@@ -574,6 +587,7 @@ public class AiEscape
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void evaluateOpposites() throws StopRequestException
 	{
@@ -660,8 +674,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getCloserHero() throws StopRequestException
 	{ownAi.checkInterruption();
@@ -688,9 +703,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double stuckCheck(AiTile tile) throws StopRequestException
 	{
@@ -726,8 +743,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean stuckAlgorithm() throws StopRequestException
 	{
@@ -785,6 +803,7 @@ public class AiEscape
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void initArrays() throws StopRequestException
 	{
@@ -802,6 +821,7 @@ public class AiEscape
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void updateCostArray() throws StopRequestException
 	{
@@ -819,9 +839,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isTileSafe(AiTile tile) throws StopRequestException
 	{
@@ -832,8 +854,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getShortestSafeTile() throws StopRequestException
 	{
@@ -870,8 +893,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getLongestSafeTile() throws StopRequestException
 	{
@@ -898,8 +922,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath findPathToGo() throws StopRequestException
 	{
@@ -927,8 +952,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getSafeTiles() throws StopRequestException
 	{
@@ -952,9 +978,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param from
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] copyTiles(double[][] from) throws StopRequestException
 	{
@@ -974,8 +1002,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile findStuckTile() throws StopRequestException
 	{
@@ -1032,6 +1061,7 @@ public class AiEscape
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void printTiles() throws StopRequestException
 	{
@@ -1050,7 +1080,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @param matrice
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void printTiles(double matrice[][]) throws StopRequestException
 	{
@@ -1069,8 +1101,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canTheyReachMe() throws StopRequestException
 	{
@@ -1102,9 +1135,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canHeReachMe(AiHero hero) throws StopRequestException
 	{
@@ -1123,8 +1158,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isThereBonusInTheTable() throws StopRequestException
 	{
@@ -1139,8 +1175,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canIEscapeIfIBomb() throws StopRequestException
 	{
@@ -1265,9 +1302,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerStuck(AiHero hero) throws StopRequestException
 	{
@@ -1291,9 +1330,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param len
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getReachableBonusInArea(int len) throws StopRequestException
 	{
@@ -1336,8 +1377,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiBlock getDestBlockInMyRange() throws StopRequestException
 	{
@@ -1388,8 +1430,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean goToShortestDestBlock() throws StopRequestException
 	{
@@ -1465,9 +1508,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param tileToGo
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath calculateNewPath(AiTile tileToGo) throws StopRequestException
 	{
@@ -1491,9 +1536,11 @@ public class AiEscape
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean checkNextTileIsCrossable(AiTile tile) throws StopRequestException
 	{
@@ -1507,8 +1554,9 @@ public class AiEscape
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean calculateNewPath() throws StopRequestException
 	{
@@ -1541,10 +1589,15 @@ public class AiEscape
 	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
 	 * 
 	 * @param bomb 
+	 * 		Description manquante !
 	 * @param blast 
+	 * 		Description manquante !
 	 * @param bombs 
-	 * @return ?
+	 * 		Description manquante !
+	 * @return 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
