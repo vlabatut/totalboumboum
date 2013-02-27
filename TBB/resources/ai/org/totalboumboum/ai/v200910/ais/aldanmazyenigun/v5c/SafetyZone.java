@@ -59,7 +59,9 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public SafetyZone(AldanmazYenigun ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -74,6 +76,7 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void fillSafetyMatrix() throws StopRequestException {
 		ai.checkInterruption();
@@ -249,6 +252,7 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void fillAttackMatrix() throws StopRequestException {
 		ai.checkInterruption();
@@ -406,8 +410,9 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] getMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -417,8 +422,9 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] getAttackMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -428,10 +434,13 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getCaseLevel(int line, int col) throws StopRequestException {
 		ai.checkInterruption();
@@ -441,9 +450,11 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getDangerLevel(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -456,10 +467,13 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isBonus(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -474,10 +488,13 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isSafe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -491,10 +508,13 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean abstractIsSafe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -508,10 +528,13 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isHero(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -525,10 +548,13 @@ public class SafetyZone {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean iswall(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();

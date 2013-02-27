@@ -326,6 +326,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/** initialisation
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -341,6 +342,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/** on met a jour la matrice
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -352,6 +354,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateLocation() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -364,9 +367,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * renvoi le niveau de danger de la case
 	 * @param tile 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public double getDangerLevel(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -377,9 +382,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * trouve les cases surs
 	 * @param origin 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findSafeTiles(AiTile origin)
 			throws StopRequestException {
@@ -406,9 +413,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * trouve les cases abstraites surs si on est en train de poser une bombe
 	 * @param origin 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findAbstractSafeTiles(AiTile origin)
 			throws StopRequestException {
@@ -432,9 +441,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * s'il y a une case sur, c'est true.
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean getThereIsSafeTile() throws StopRequestException {
 		checkInterruption();
@@ -444,9 +455,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * trouve les lieux des items
 	 * @param origin 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findItemsTiles(AiTile origin)
 			throws StopRequestException {
@@ -472,9 +485,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * trouve les lieux des heros
 	 * @param origin 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findHerosTiles(AiTile origin)
 			throws StopRequestException {
@@ -510,9 +525,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * trouve les lieux des murs
 	 * @param origin 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findWallTiles(AiTile origin)
 			throws StopRequestException {
@@ -551,8 +568,9 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -563,8 +581,9 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -575,8 +594,9 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getActualTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -587,8 +607,9 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public SafetyZone getZoneFormee() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -598,9 +619,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -618,8 +641,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
-	 * @return ?
+	 * 		Description manquante !
+	 * @return 
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isBonus(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -637,8 +663,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private boolean isWall(AiTile tile) throws StopRequestException {
@@ -657,8 +686,11 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isHero(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -676,6 +708,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void findIsBonusAccessible() throws StopRequestException {
 		checkInterruption();
@@ -701,7 +734,9 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void findIsHeroAccessible(AiHero hero) throws StopRequestException {
 		checkInterruption();
@@ -729,6 +764,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param accessible
+	 * 		Description manquante !
 	 */
 	public void setAccessible(boolean accessible) {
 		this.bonusAccessible = accessible;
@@ -737,7 +773,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean isBonusAccessible() {
 		return bonusAccessible;
@@ -746,6 +782,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param accessible
+	 * 		Description manquante !
 	 */
 	public void setHeroAccessible(boolean accessible) {
 		this.heroAccessible = accessible;
@@ -754,7 +791,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean isHeroAccessible() {
 		return heroAccessible;
@@ -764,6 +801,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	 * choisit aléatoirement un joueur comme cible à suivre
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void chooseTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -801,6 +839,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void updateTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -829,8 +868,9 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getTargetHero() throws StopRequestException {
 		checkInterruption();
