@@ -53,8 +53,11 @@ public class DangerZone {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DangerZone(AiZone zone, BektasMazilyah source) throws StopRequestException
 	{
@@ -77,6 +80,7 @@ public class DangerZone {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException {
 		
@@ -255,8 +259,9 @@ public class DangerZone {
 	/*******************************
 	 * La methode renvoie dangerZone
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public EtatEnum[][] getOurZone() throws StopRequestException {
 		source.checkInterruption();
@@ -266,9 +271,13 @@ public class DangerZone {
 	/***************************************************
 	 * La methode renvoie la valeur enumarate d'une tile
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return etatEnum
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public EtatEnum getValeur(int x, int y) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -278,8 +287,9 @@ public class DangerZone {
 	/***
 	 * La methode sert a trouver les tiles claires
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findSafeTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -308,7 +318,9 @@ public class DangerZone {
 	/*************************************
 	 * La methode sert a trouver les bonus
 	 * @return list
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findBonusTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -335,7 +347,9 @@ public class DangerZone {
 	/************************************************
 	 * La methode sert a trouver les tiles dangereux
 	 * @return list
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findDangerTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -365,7 +379,9 @@ public class DangerZone {
 	/******************************************************
 	 * La methode sert a preciser les tiles des adversaires
 	 * @return list
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findRivalsTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -393,8 +409,11 @@ public class DangerZone {
 	/********************************************************************************
 	 * La methode sert a trouver les tiles a deposer des bombe pour detruir des murs
 	 * @param neighbors
+	 * 		Description manquante !
 	 * @return list
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findTilesForDestruct(List<AiTile> neighbors) throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -420,7 +439,9 @@ public class DangerZone {
 	/**********************************************
 	 * La methode renvoie les tiles desctructibles
 	 * @return list
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findDesctructibleTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -446,9 +467,13 @@ public class DangerZone {
 	/*********************************************
 	 * pour preciser si on peut aller sur ce chemin
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return boolean
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isWalkable(int x2, int y2) throws StopRequestException {
 		source.checkInterruption();
@@ -461,9 +486,13 @@ public class DangerZone {
 	/**************************************************************
 	 * pour preciser si on peut aller a bonus sur une chemin secure
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return boolean
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canGoToBonus(int x2,int y2) throws StopRequestException
 	{
@@ -477,9 +506,13 @@ public class DangerZone {
 	/**********************************************************************************
 	 * La methode qu'on va utiliser pour connaitre si on peut aller vers une adversaire
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return boolean
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canGoRival(int x2, int y2) throws StopRequestException
 	{
