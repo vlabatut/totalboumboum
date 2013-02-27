@@ -156,6 +156,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/********************************************************************************
 	 * la méthode qui precise la tile prochaine pour atteindre a une adversaire
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 
 	private void goToRival() throws StopRequestException 
@@ -192,6 +193,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * La méthode qu'on va utiliser pour connaitre s'il ya une adversaire proche a nous
 	 * @return si rival est proche a nous
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isRivalInRange() throws StopRequestException
 	{
@@ -216,6 +218,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/************************
 	 * La methode qu'on va utiliser pour preciser si on doit prendre une bonus
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void mustTakeBonus() throws StopRequestException {
 		checkInterruption();
@@ -229,6 +232,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/******************************************************************************
 	 * La méthode qu'on va utiliser pour preciser la tile prochaine quand on suit
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void suivre() throws StopRequestException
 	{
@@ -265,6 +269,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * La methode qu'on va utiliser pour connaitre si on peut deposer une bombe a ce moment la
 	 * @return si on peut deposer une bombe
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canDrop() throws StopRequestException
 	{
@@ -330,6 +335,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * La methode qu'on va utiliser pour preciser les tiles qui se trouvent dans notre range
 	 * @return list des tiles in range
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	
 	private List<AiTile> preciserRange() throws StopRequestException
@@ -412,8 +418,10 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/*******************************************************************************
 	 * La methode qu'on va utiliser pour faire sortir une liste d'un autre list
 	 * @param list
+	 * 		Description manquante !
 	 * @return list des tiles
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	
 	private List<AiTile> removeFromList(List<AiTile> list) throws StopRequestException
@@ -435,9 +443,11 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/******************************************************************************************
 	 * La methode qui aligne des elements d'une liste
 	 * @param source
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> aligner(List<AiTile> source) throws StopRequestException
 	{
@@ -484,6 +494,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/***********************************************************************
 	 ****La methode qui precise la tile prochaine pour aller a une bonus****
 	 **** @throws StopRequestException**************************************
+	 * 		Description manquante !
 	 */
 	private void goToBonus() throws StopRequestException
 	{		
@@ -520,6 +531,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/*****************************************************************
 	 * La methode qui precise la tile prochaine pour aller a une bonus
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void detruir() throws StopRequestException
 	{
@@ -564,8 +576,11 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/********************************************************
 	 * La methode pour trouver les voisins claires d'une list  
 	 * @param list
+	 * 		Description manquante !
 	 * @return list
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findClearNeighbors(List<AiTile> list) throws StopRequestException
 	{
@@ -599,6 +614,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/*********************************************************************************
 	 * La methode qu'on va utiliser pour connaitre si on peut atteindre une adversaire
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void canGoToRival() throws StopRequestException
 	{
@@ -619,8 +635,11 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/*******************************************************
 	 * La methode sert a trouver une liste tile d'une chemin
 	 * @param deq
+	 * 		Description manquante !
 	 * @return list
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> pathTiles(Deque<Integer> deq) throws StopRequestException
 	{
@@ -643,7 +662,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/******************************************
 	 * La methode sert a trouver la tile target
 	 * @param deq
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void findTargetTile(Deque<Integer> deq) throws StopRequestException
 	{
@@ -661,8 +682,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/**
 	 * renvoie la case courante
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public AiTile getCurrentTile() throws StopRequestException {
 		checkInterruption();
@@ -672,6 +694,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/************************************************
 	 * La methode sert a initialiser notre algorithme
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void initMonAi() throws StopRequestException{
 		//APPEL OBLIGATOIRE
@@ -686,6 +709,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/************************************************
 	 * La methode sert a controler s'il y a un danger
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	void checkDanger() throws StopRequestException{
 		checkInterruption(); //Appel obligatoire
@@ -698,9 +722,12 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/***********************************************
 	 * La methode qui controle si la tile est claire
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return si la tile est claire
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isClear(int x,int y) throws StopRequestException {
 		
@@ -712,9 +739,12 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/*************************************************
 	 * La methode sert a controler si la tile est vide
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return si la tile est libre
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isLibre(int x,int y) throws StopRequestException
 	{
@@ -726,9 +756,12 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/************************************************************************
 	 * La methode sert a controler si la tile se trouve dans la range danger
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return si la tile est en danger
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isDanger(int x, int y) throws StopRequestException
 	{
@@ -740,9 +773,12 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/********************************************************
 	 * La methode sert a definir si la tile contient une bonus
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return si la tile contient une bonus
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isBonus(int x, int y) throws StopRequestException{
 		
@@ -754,9 +790,12 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/****************
 	 * La methode sert a controler si la tile est destructible
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return si la tile est destructible
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isDesctructible(int x, int y) throws StopRequestException{
 		
@@ -768,10 +807,13 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/****************************************************************
 	 * La methode sert a controler si la tile contient une adversaire
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isRival(int x, int y) throws StopRequestException{
 		
@@ -783,7 +825,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/********************************************************
 	 * La methode sert a mettre a jour la place de hero
 	 * @param currentTile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateLocation(AiTile currentTile) throws StopRequestException
 	{
@@ -794,7 +838,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/******************************************************
 	 * la methode sert a preciser s'il y a des bonus ouvert
 	 * @return s'il y a des bonus ouvert
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean bonusExiste () throws StopRequestException{
 		checkInterruption();
@@ -817,6 +863,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * La methode sert a preciser s'il y a des murs a detruir
 	 * @return s'il existe des murs a detruir
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean destructExiste () throws StopRequestException{
 		checkInterruption();
@@ -838,8 +885,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/****
 	 * La methode qui renvoi la dangerzone
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DangerZone getDangerZone() throws StopRequestException {
 		checkInterruption();
@@ -849,7 +897,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/***********************************
 	 * La methode qui renvoi zone de jeu
 	 * @return zone
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException{
 		checkInterruption();//Appel Obligatoire
@@ -859,8 +909,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/***********************************
 	 * La methode qui renvoie notre hero
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption();
