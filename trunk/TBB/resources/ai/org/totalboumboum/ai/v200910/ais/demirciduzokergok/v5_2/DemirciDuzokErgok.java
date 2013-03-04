@@ -327,6 +327,7 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 	/** Method for breaking walls when the enemie is not accessible.
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void Break_Walls_For_Enemie() throws StopRequestException {
 

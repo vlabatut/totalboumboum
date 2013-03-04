@@ -77,8 +77,11 @@ public class Safety_Map {
 	/** 
 	 * Constructer of the class Safety_Map
 	 * @param zone 
+	 * 		Description manquante !
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Safety_Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
@@ -102,6 +105,7 @@ public class Safety_Map {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void Fill_The_Matrix() throws StopRequestException {
 		ai.checkInterruption();
@@ -331,8 +335,9 @@ public class Safety_Map {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();

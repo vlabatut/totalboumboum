@@ -29,7 +29,9 @@ public class Can_escape_Manager {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Can_escape_Manager(DemirciDuzokErgok ai) throws StopRequestException{
 	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -71,6 +73,7 @@ public class Can_escape_Manager {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void updatePath_b() throws StopRequestException {
 
@@ -90,9 +93,11 @@ public class Can_escape_Manager {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> destinations_possibles_b(AiTile tile) throws StopRequestException {
 
