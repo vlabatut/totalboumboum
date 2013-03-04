@@ -28,9 +28,13 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public PathFinder(AiZone zone, AiTile target,DereliGeckalan source) throws StopRequestException
 	{
@@ -73,8 +77,9 @@ public class PathFinder {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public String ToStringPath() throws StopRequestException
 	{
@@ -94,6 +99,7 @@ public class PathFinder {
 	 * @param tab le tableau du jeu.
 	 * @param goal la case qu'on veut y arriver.
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void findPath(ZoneEnum[][] tab,int y,int x,Noeud goal) throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire
@@ -185,8 +191,9 @@ public class PathFinder {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings({ "unchecked", "unused" })
 	public LinkedList <AiTile> getPath() throws StopRequestException

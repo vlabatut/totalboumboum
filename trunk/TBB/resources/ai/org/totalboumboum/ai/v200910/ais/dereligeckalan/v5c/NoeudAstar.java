@@ -19,8 +19,11 @@ public class NoeudAstar implements Comparator<Noeud> {
 	
 	/**
 	 * @param goal
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public NoeudAstar(Noeud goal, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
