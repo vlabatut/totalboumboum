@@ -49,8 +49,11 @@ public class ZoneDangereux {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public ZoneDangereux(AiZone zone, DereliGeckalan source) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -71,6 +74,7 @@ public class ZoneDangereux {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException
 	{
@@ -243,8 +247,11 @@ public class ZoneDangereux {
 	/**
 	 * 
 	 * @param target
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private int nombreMur(AiTile target) throws StopRequestException {
 		source.checkInterruption();
@@ -280,8 +287,9 @@ public class ZoneDangereux {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire

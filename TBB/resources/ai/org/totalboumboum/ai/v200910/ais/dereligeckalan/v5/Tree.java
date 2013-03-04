@@ -27,8 +27,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Tree(Noeud courant, DereliGeckalan source) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -40,6 +43,7 @@ public class Tree {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void init() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -56,6 +60,7 @@ public class Tree {
 	 * 
 	 * @return la racine de l'arbre de recherche
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Noeud getRoot() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -70,6 +75,7 @@ public class Tree {
 	 * @param fils
 	 *            le noeud qu'on ajoute
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void addNoeud(Noeud pere, Noeud fils) throws StopRequestException { // on cree un lien entre le
 													// pere et le fils
@@ -88,6 +94,7 @@ public class Tree {
 	 *            le noeud à rechercher
 	 * @return vrai si l'arbre contient le noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public synchronized boolean containsNode(Noeud node) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -108,6 +115,7 @@ public class Tree {
 	 *            le noeud à traiter
 	 * @return un lien contenant le noeud en position target
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchLink getParentLink(Noeud node) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -132,6 +140,7 @@ public class Tree {
 	 *            le noeud à traiter
 	 * @return tous les liens où ce noeud est en position origin
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -155,6 +164,7 @@ public class Tree {
 	 *            le noeud à traiter
 	 * @return un vecteur de noeuds représentant le chemin depuis la racine
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public LinkedList<Noeud> getPath(Noeud node) throws StopRequestException { // la liste des noeuds qui
 													// se trouve sur le path
@@ -198,6 +208,7 @@ public class Tree {
 	 * @param link
 	 *            le lien à rajouter dans l'arbre
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void addLink(SearchLink link) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -212,6 +223,7 @@ public class Tree {
 	 * @param link
 	 *            le lien à ajouter
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private synchronized void addLinkSynch(SearchLink link) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire

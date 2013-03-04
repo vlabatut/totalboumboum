@@ -27,6 +27,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * décomposer le traitement en plusieurs classes, plus votre programme est
  * modulaire et plus il sera facile à débugger, modifier, relire, comprendre,
  * etc.
+ * 
  * @author Merih Inal Dereli
  * @author Gökhan Geçkalan
  */
@@ -126,11 +127,15 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * une méthode bidon pour l'exemple
-	 * @param source 
-	 * @param target 
-	 * @return ?
+	 * 
+	 * @param source
+	 *            Description manquante !
+	 * @param target
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private int distance(AiTile source, AiTile target)
@@ -147,8 +152,10 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private String toTileString(AiTile tile) throws StopRequestException {
@@ -163,8 +170,10 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private String toTileString2(LinkedList<AiTile> tile)
@@ -175,7 +184,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		while (it1.hasNext()) {
 			checkInterruption();
 			AiTile temp = it1.next();
-//			System.out.println(temp.toString() + "\n");
+			// System.out.println(temp.toString() + "\n");
 
 		}
 		return res;
@@ -184,6 +193,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private void initMatrice() throws StopRequestException {
@@ -320,10 +330,13 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return result;
 	}
 
-	/** finds the next tile that the agent can go (controls (uses the matrix) if the tile is safe and close to the agent)
-	 *  
-	 * @return ?
+	/**
+	 * finds the next tile that the agent can go (controls (uses the matrix) if
+	 * the tile is safe and close to the agent)
+	 * 
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private AiTile findNext2() throws StopRequestException {
 		checkInterruption();
@@ -441,8 +454,9 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private LinkedList<AiTile> surr() throws StopRequestException {
@@ -464,11 +478,14 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return res;
 	}
 
-	/** checks if there's tile which is not safe on the path
+	/**
+	 * checks if there's tile which is not safe on the path
 	 * 
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private boolean surPath(LinkedList<AiTile> tile)
 			throws StopRequestException {
@@ -488,10 +505,12 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return res;
 	}
 
-	/** finds the closest bonus to the agent
+	/**
+	 * finds the closest bonus to the agent
 	 * 
-	 * @return  ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private AiTile findNextbonus() throws StopRequestException {
 		checkInterruption();
@@ -528,8 +547,10 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private int nombreMur(AiTile tile) throws StopRequestException {
@@ -553,7 +574,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				right = right.getNeighbor(Direction.RIGHT);
-//				System.out.println("3");
+				// System.out.println("3");
 			}
 			if (i != x) {
 				res++;
@@ -563,7 +584,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				left = left.getNeighbor(Direction.LEFT);
-//				System.out.println("4");
+				// System.out.println("4");
 			}
 			if (i != x) {
 				res++;
@@ -573,7 +594,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				down = down.getNeighbor(Direction.DOWN);
-//				System.out.println("5");
+				// System.out.println("5");
 			}
 			if (i != x) {
 				res++;
@@ -583,7 +604,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				checkInterruption();
 				i++;
 				up = up.getNeighbor(Direction.UP);
-//				System.out.println("6");
+				// System.out.println("6");
 			}
 			if (i != x) {
 				res++;
@@ -594,10 +615,12 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return res;
 	}
 
-	/** returns the tiles of the blocks on the zone
+	/**
+	 * returns the tiles of the blocks on the zone
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private LinkedList<AiTile> blokZone() throws StopRequestException {
 		checkInterruption();
@@ -613,10 +636,12 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return res;
 	}
 
-	/** finds reachable closest tile that is safe
+	/**
+	 * finds reachable closest tile that is safe
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private AiTile findNext() throws StopRequestException {
 		checkInterruption();
@@ -649,8 +674,9 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private AiTile escapeTile() throws StopRequestException {
@@ -678,8 +704,10 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param bomb
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private LinkedList<AiTile> bombRange(AiBomb bomb)
@@ -690,10 +718,12 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return resultat;
 	}
 
-	/** checks if the agent is in danger
+	/**
+	 * checks if the agent is in danger
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private boolean danger() throws StopRequestException {
 		checkInterruption();
@@ -706,10 +736,13 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return danger;
 	}
 
-	/** finds a path to the given target tile
+	/**
+	 * finds a path to the given target tile
 	 * 
 	 * @param targettile
+	 *            Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private void pickNextTile(AiTile targettile) throws StopRequestException {
 		checkInterruption();
@@ -733,8 +766,9 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private List<Double> bombTimes() throws StopRequestException {
@@ -751,11 +785,12 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	}
 
-	
-	/** gives all the safe tiles on the zone
+	/**
+	 * gives all the safe tiles on the zone
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private LinkedList<AiTile> safeZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -786,8 +821,9 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private LinkedList<AiTile> safeZone2() throws StopRequestException {
@@ -823,8 +859,10 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private boolean isSur(AiTile tile) throws StopRequestException {
@@ -860,8 +898,9 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private LinkedList<AiTile> murZone() throws StopRequestException {
@@ -882,11 +921,14 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return res;
 	}
 
-	/** checks if the given tile is safe or not
+	/**
+	 * checks if the given tile is safe or not
 	 * 
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -898,10 +940,12 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return x;
 	}
 
-	/** gives the tiles that are dangereous
+	/**
+	 * gives the tiles that are dangereous
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
@@ -1011,8 +1055,10 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private LinkedList<AiTile> dangerZone1(AiTile tile)
@@ -1076,11 +1122,13 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		i = 0;
 		return res;
 	}
-	
-	/** gives the tiles of all bonus on the zone
+
+	/**
+	 * gives the tiles of all bonus on the zone
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private LinkedList<AiTile> bonusZone() throws StopRequestException {
 		checkInterruption();
@@ -1098,8 +1146,9 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private AiTile findNextbon() throws StopRequestException {
@@ -1144,8 +1193,10 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param target
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private boolean canGo(AiTile target) throws StopRequestException {
@@ -1174,11 +1225,14 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return res;
 	}
 
-	/** gives the time (in seconds) to get a given target
-	 *  
+	/**
+	 * gives the time (in seconds) to get a given target
+	 * 
 	 * @param target
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private int vitesse(AiTile target) throws StopRequestException {
 		checkInterruption();
