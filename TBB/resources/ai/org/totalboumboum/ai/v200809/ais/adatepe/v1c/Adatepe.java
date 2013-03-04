@@ -107,6 +107,7 @@ public class Adatepe extends ArtificialIntelligence
 	
 	/** Mets les blocs et les zones wides a la table
 	 * @throws StopRequestException 
+	 * 		Decription manquante ! 
 	 */
 	private void boarddraw() throws StopRequestException
 	{	
@@ -135,6 +136,7 @@ public class Adatepe extends ArtificialIntelligence
 	
 	/** Mets les bombes, les zones dangereux a traverser et les feus a la table
 	 * @throws StopRequestException 
+	 * 		Decription manquante ! 
 	 */
 	private void drawdangerzones() throws StopRequestException
 	{	
@@ -180,6 +182,7 @@ public class Adatepe extends ArtificialIntelligence
 	
 	/** Decide la destination suivante est dangereux ou pas 
 	 * @throws StopRequestException 
+	 * 		Decription manquante ! 
 	 */
 	private void checknexttilesafe() throws StopRequestException
 	{	checkInterruption(); 
@@ -210,6 +213,7 @@ public class Adatepe extends ArtificialIntelligence
 	}
 	/** Decide les coordonnes qu'on trouve est dangereux ou pas 
 	 * @throws StopRequestException 
+	 * 		Decription manquante ! 
 	 */
 	private void checksafety() throws StopRequestException
 	{	checkInterruption(); 
@@ -232,6 +236,7 @@ public class Adatepe extends ArtificialIntelligence
 	}
 	/** Esseye d'evider les bombes 
 	 * @throws StopRequestException 
+	 * 		Decription manquante ! 
 	 */
 	private void evade() throws StopRequestException
 	{	checkInterruption(); 
@@ -281,6 +286,7 @@ public class Adatepe extends ArtificialIntelligence
 	}
 	/** Esseye de tuer les autres joueurs 
 	 * @throws StopRequestException 
+	 * 		Decription manquante ! 
 	 */
 	private void aggro() throws StopRequestException
 	{	checkInterruption(); 
@@ -293,8 +299,11 @@ public class Adatepe extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
-	 * @return ?
+	 * 		Decription manquante ! 
+	 * @return
+	 * 		?
 	 * @throws StopRequestException
+	 * 		Decription manquante ! 
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -310,8 +319,11 @@ public class Adatepe extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
-	 * @return ?
+	 * 		Decription manquante ! 
+	 * @return 
+	 * 		?
 	 * @throws StopRequestException
+	 * 		Decription manquante ! 
 	 */
 	@SuppressWarnings("unused")
 	private List<AiTile> getClearNeighbor(AiTile tile) throws StopRequestException
