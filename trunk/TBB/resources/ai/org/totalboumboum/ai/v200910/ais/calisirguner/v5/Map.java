@@ -18,13 +18,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * on la pris des bleus de l'annee precedente et on la change un peu cf les flammes et es matrices de risque et accesibilite et murs
+ * on la pris des bleus de l'annee precedente et on la change un peu cf les
+ * flammes et es matrices de risque et accesibilite et murs
  * 
  * @version 5
  * 
  * @author Emre Çalışır
  * @author Burak Ozgen Güner
- *
+ * 
  */
 @SuppressWarnings("deprecation")
 public class Map {
@@ -68,8 +69,11 @@ public class Map {
 	/**
 	 * 
 	 * @param zone
+	 *            Description manquante !
 	 * @param source
+	 *            Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	public Map(AiZone zone, CalisirGuner source) throws StopRequestException {
 		this.map = zone;
@@ -86,10 +90,13 @@ public class Map {
 		remplir(zone);
 	}
 
-	/** nous remplaçons notre map
+	/**
+	 * nous remplaçons notre map
 	 * 
 	 * @param zone
+	 *            Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	protected void remplir(AiZone zone) throws StopRequestException {
 		source.checkInterruption();
@@ -172,7 +179,8 @@ public class Map {
 						} else
 							break;
 					}
-					// on augmente les valeurs de matrices pendant quon est en portee du bombe
+					// on augmente les valeurs de matrices pendant quon est en
+					// portee du bombe
 					for (int b = 1; b < bomberman.getBombRange(); b++) {
 						source.checkInterruption();
 						if (b + w < height
@@ -237,15 +245,17 @@ public class Map {
 					// on va utiliser pour trouver le meilleur case sur la
 					// matrice de risque
 					if (risque[feufutur.getCol()][feufutur.getLine()] < (int) b
-							.getTime() )
+							.getTime())
 						risque[feufutur.getCol()][feufutur.getLine()] = (int) b
-								.getTime() ;
+								.getTime();
 					// si cest proche a son explosion on le rend inaccessible
-					if (b.getTime() >= b.getNormalDuration() * 8 / 9 && b.isWorking())
+					if (b.getTime() >= b.getNormalDuration() * 8 / 9
+							&& b.isWorking())
 						accessibilite[feufutur.getCol()][feufutur.getLine()] = Etat.INACCESSIBLE;
-					else if(!b.isWorking() && b.getTime()>=(b.getNormalDuration()*14)/10)
+					else if (!b.isWorking()
+							&& b.getTime() >= (b.getNormalDuration() * 14) / 10)
 						accessibilite[feufutur.getCol()][feufutur.getLine()] = Etat.INACCESSIBLE;
-				 }
+				}
 			}
 		}
 
@@ -287,6 +297,7 @@ public class Map {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	public void getbombs() throws StopRequestException {
 		source.checkInterruption();
@@ -310,6 +321,7 @@ public class Map {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	public void getfires() throws StopRequestException {
 		source.checkInterruption();
@@ -330,12 +342,18 @@ public class Map {
 	/**
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
-	 * @param x1 
-	 * @param y1 
-	 * @param range 
-	 * @param bo 
+	 * 
+	 * @param x1
+	 *            Description manquante !
+	 * @param y1
+	 *            Description manquante !
+	 * @param range
+	 *            Description manquante !
+	 * @param bo
+	 *            Description manquante !
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	public void setbombeposs(int x1, int y1, int range, boolean bo)
 			throws StopRequestException {
@@ -425,11 +443,12 @@ public class Map {
 
 	}
 
-	/** ,l envoie la matrice de map
+	/**
+	 * ,l envoie la matrice de map
 	 * 
-	 * @return
-	 * 		?
+	 * @return Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	public Etat[][] returnMatrix() throws StopRequestException {
 		source.checkInterruption();
@@ -450,8 +469,7 @@ public class Map {
 
 	/**
 	 * 
-	 * @return
-	 * 		?
+	 * @return Description manquante !
 	 */
 	public String risquetoString() {
 		String result = "";
@@ -466,8 +484,7 @@ public class Map {
 
 	/**
 	 * 
-	 * @return
-	 * 		?
+	 * @return Description manquante !
 	 */
 	public String actoString() {
 		String result = "";
@@ -482,8 +499,7 @@ public class Map {
 
 	/**
 	 * 
-	 * @return
-	 * 		?
+	 * @return Description manquante !
 	 */
 	public String murstoString() {
 		String result = "";
@@ -499,9 +515,10 @@ public class Map {
 	/**
 	 * 
 	 * @param x1
+	 *            Description manquante !
 	 * @param y1
-	 * @return
-	 * 		?
+	 *            Description manquante !
+	 * @return Description manquante !
 	 */
 	public boolean isWalkable(int x1, int y1) {
 
@@ -513,13 +530,15 @@ public class Map {
 
 		return resultat;
 	}
-	
-	/** pour voir si on peut acceder a un adversaire en explosant les murs
+
+	/**
+	 * pour voir si on peut acceder a un adversaire en explosant les murs
 	 * 
 	 * @param x1
+	 *            Description manquante !
 	 * @param y1
-	 * @return
-	 * 		?
+	 *            Description manquante !
+	 * @return Description manquante !
 	 */
 	public boolean isReachable(int x1, int y1) {
 
@@ -538,8 +557,10 @@ public class Map {
 	/**
 	 * 
 	 * @param x
+	 *            Description manquante !
 	 * @param y
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 */
 	int return_risque(int x, int y) {
 		return risque[x][y];
@@ -547,7 +568,7 @@ public class Map {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 */
 	int[][] return_risque() {
 		return risque;
@@ -555,7 +576,7 @@ public class Map {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 */
 	Etat[][] return_accessibilite() {
 		return accessibilite;
@@ -563,7 +584,7 @@ public class Map {
 
 	/**
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 */
 	int[][] return_murs() {
 		return murs;
