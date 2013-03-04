@@ -47,8 +47,11 @@ public class Bomb {
 	/**
 	 * 
 	 * @param dk
+	 * 		Description manquante !
 	 * @param tile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Bomb(DorukKupelioglu dk,AiTile tile) throws StopRequestException
 	{
@@ -67,8 +70,11 @@ public class Bomb {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiPath findPath(AiTile tile)throws StopRequestException
 	{
@@ -93,7 +99,9 @@ public class Bomb {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void tempFIRE(AiTile tile)throws StopRequestException
 	{
@@ -194,8 +202,9 @@ public class Bomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction moveTo() throws StopRequestException
 	{
@@ -210,7 +219,9 @@ public class Bomb {
 	/***
 	 * 
 	 * @param dropped
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void changeDropped(boolean dropped)throws StopRequestException
 	{
@@ -221,8 +232,9 @@ public class Bomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean Dropped()throws StopRequestException
 	{
@@ -233,8 +245,9 @@ public class Bomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
@@ -247,8 +260,9 @@ public class Bomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean hasEnded()throws StopRequestException
 	{
@@ -259,8 +273,9 @@ public class Bomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isDroppable()throws StopRequestException
 	{

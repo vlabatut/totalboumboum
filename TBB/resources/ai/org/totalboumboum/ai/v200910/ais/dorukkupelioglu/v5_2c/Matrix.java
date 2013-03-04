@@ -49,7 +49,9 @@ public class Matrix
 	/**
 	 * 
 	 * @param dk
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Matrix(DorukKupelioglu dk)throws StopRequestException
 	{
@@ -62,6 +64,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init()throws StopRequestException
 	{
@@ -93,6 +96,7 @@ public class Matrix
 	 * putRIVAL ve putITEM fonksiyonları rival ve bonus array listlerini sırasız olarak 
 	 * dolduruyor. 
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void createAreaMatrix()throws StopRequestException
 	{
@@ -125,7 +129,7 @@ public class Matrix
 	
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	private void putFREE()throws StopRequestException//önce her yeri free yaptık
 	{	dk.checkInterruption();
@@ -143,6 +147,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void putDESTINDEST()throws StopRequestException
 	{
@@ -184,6 +189,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void putITEM()throws StopRequestException
 	{
@@ -213,6 +219,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void putRIVAL()throws StopRequestException
 	{
@@ -237,6 +244,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void putFIRE()throws StopRequestException
 	{
@@ -260,6 +268,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void putBLAST()throws StopRequestException
 	{
@@ -351,6 +360,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void findSafes()throws StopRequestException
 	{
@@ -371,6 +381,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void findDestructibles()throws StopRequestException
 	{
@@ -405,9 +416,13 @@ public class Matrix
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param list
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiHero> regulateHeroesList(AiTile tile,List<AiHero> list)throws StopRequestException
 	{
@@ -443,10 +458,13 @@ public class Matrix
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param list
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> regulateList(AiTile tile,List<AiTile> list)throws StopRequestException
 	{
@@ -465,9 +483,13 @@ public class Matrix
 	/** listedeki case lerdan tile case ine en yakın olanı gönderir
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param list
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile findNearestTile(AiTile tile,List<AiTile> list)throws StopRequestException
 	{
@@ -489,10 +511,13 @@ public class Matrix
 	/**
 	 * 
 	 * @param tile1
+	 * 		Description manquante !
 	 * @param tile2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private double findPixelDistance(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
@@ -502,10 +527,13 @@ public class Matrix
 	/**
 	 * 
 	 * @param tile1
+	 * 		Description manquante !
 	 * @param tile2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double ManhattanDistance(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
@@ -516,9 +544,13 @@ public class Matrix
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @param state
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void changeState(int line,int col,double state)throws StopRequestException
 	{
@@ -529,9 +561,13 @@ public class Matrix
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void changeTimeLeft(int line,int col,double time)throws StopRequestException
 	{
@@ -542,11 +578,15 @@ public class Matrix
 	/**
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @param blast
+	 * 		Description manquante !
 	 * @param bombs
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs)throws StopRequestException
 	{	
@@ -572,8 +612,9 @@ public class Matrix
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] getAreaMatrix()throws StopRequestException
 	{
@@ -584,8 +625,9 @@ public class Matrix
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] getTimeLeft()throws StopRequestException
 	{
@@ -596,8 +638,9 @@ public class Matrix
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiHero> getHeroes()throws StopRequestException
 	{
@@ -608,8 +651,9 @@ public class Matrix
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getRivals()throws StopRequestException
 	{
@@ -620,8 +664,9 @@ public class Matrix
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getBonus()throws StopRequestException
 	{
@@ -632,8 +677,9 @@ public class Matrix
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getSafes()throws StopRequestException
 	{
@@ -644,8 +690,9 @@ public class Matrix
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getDestructibles()throws StopRequestException
 	{
@@ -656,6 +703,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void printAreaMatrix()throws StopRequestException
 	{
@@ -675,6 +723,7 @@ public class Matrix
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void printTimeLeft()throws StopRequestException
 	{

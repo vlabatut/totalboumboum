@@ -37,7 +37,9 @@ public class TargetRival {
 	/**
 	 * 
 	 * @param dk
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TargetRival(DorukKupelioglu dk) throws StopRequestException
 	{
@@ -207,8 +209,9 @@ public class TargetRival {
 	/**
 	 * bomba bıraktığımda rakibe etki edecek yerleri bulur
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findAvailable()throws StopRequestException
 	{
@@ -289,8 +292,9 @@ public class TargetRival {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction moveTo()throws StopRequestException
 	{
@@ -307,8 +311,9 @@ public class TargetRival {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean pathAvailable() throws StopRequestException
 	{
@@ -321,8 +326,9 @@ public class TargetRival {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean succeed() throws StopRequestException
 	{

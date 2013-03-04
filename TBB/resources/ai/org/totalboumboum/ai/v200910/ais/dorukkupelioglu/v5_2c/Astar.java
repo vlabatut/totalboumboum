@@ -48,7 +48,9 @@ public class Astar
 	 * 
 	 * @param dk pour checkinterruption 
 	 * @param useTime 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Astar(DorukKupelioglu dk,boolean useTime)throws StopRequestException
 	{
@@ -63,8 +65,10 @@ public class Astar
 	 * Cette fonction trouve une chemin entre "start" et "end".
 	 * le chemin "path" contient la case "end" mais ne contient pas la case "start".
 	 * @param startTile 
+	 * 		Description manquante !
 	 * @param endTile la case ou le hero veut aller
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void findPath(AiTile startTile,AiTile endTile)throws StopRequestException
 	{
@@ -84,6 +88,7 @@ public class Astar
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void init()throws StopRequestException
 	{
@@ -99,8 +104,11 @@ public class Astar
 	 * Cette fonction trouve une chemin entre start et le premier case
 	 * ou elle peut creer une chemin
 	 * @param startTile
+	 * 		Description manquante !
 	 * @param listOfTarget
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void findPath(AiTile startTile,List<AiTile> listOfTarget)throws StopRequestException
 	{
@@ -160,10 +168,13 @@ public class Astar
 	/**
 	 * 
 	 * @param tile1
+	 * 		Description manquante !
 	 * @param tile2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int MannhattanDistance(AiTile tile1, AiTile tile2)throws StopRequestException
 	{
@@ -177,8 +188,11 @@ public class Astar
 	 * <p>ce site : http://www.policyalmanac.org/games/aStarTutorial.htm
 	 * nous a aide bien a construire cette algorithme.
 	 * @param node
+	 * 		Description manquante !
 	 * @param end
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void CreateClosedList(Node node,AiTile end)throws StopRequestException
 	{
@@ -290,6 +304,7 @@ public class Astar
 	 * 
 	 * @return "null" si la list est vide ou le noeud correspondant sinon
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private Node smallestF()throws StopRequestException
 	{
@@ -313,9 +328,12 @@ public class Astar
 	 * Cherche si la case "tile" est dans la list de noeud "list"
 	 * 
 	 * @param tile case a chercher
+	 * 		Description manquante !
 	 * @param list 
+	 * 		Description manquante !
 	 * @return "null" si la case "tile" n'est pas dans la list ou le noeud correspondant de case "tile" sinon
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private Node isTileInList(AiTile tile,List<Node> list)throws StopRequestException
 	{
@@ -336,8 +354,11 @@ public class Astar
 
 	/**
 	 * @param start
+	 * 		Description manquante !
 	 * @param endNode
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void NodePathToTilePath(AiTile start,Node endNode)throws StopRequestException
 	{
@@ -357,8 +378,9 @@ public class Astar
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getPath()throws StopRequestException
 	{
@@ -369,8 +391,9 @@ public class Astar
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getPathFValue()throws StopRequestException
 	{

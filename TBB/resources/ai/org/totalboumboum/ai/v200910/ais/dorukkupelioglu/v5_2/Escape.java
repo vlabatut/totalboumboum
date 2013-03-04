@@ -37,7 +37,9 @@ public class Escape {
 	/**
 	 * 
 	 * @param dk
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Escape(DorukKupelioglu dk)throws StopRequestException
 	{
@@ -89,8 +91,9 @@ public class Escape {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction moveTo()throws StopRequestException
 	{
@@ -108,8 +111,9 @@ public class Escape {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
@@ -149,8 +153,9 @@ public class Escape {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean hasEnded()throws StopRequestException
 	{
@@ -161,8 +166,9 @@ public class Escape {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean succeed()throws StopRequestException
 	{
