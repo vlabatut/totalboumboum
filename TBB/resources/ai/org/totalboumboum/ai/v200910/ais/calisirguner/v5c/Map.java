@@ -67,8 +67,11 @@ public class Map {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Map(AiZone zone, CalisirGuner source) throws StopRequestException {
 		source.checkInterruption();
@@ -89,7 +92,9 @@ public class Map {
 	/** nous remplaçons notre map
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	protected void remplir(AiZone zone) throws StopRequestException {
 		source.checkInterruption();
@@ -287,6 +292,7 @@ public class Map {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void getbombs() throws StopRequestException {
 		source.checkInterruption();
@@ -310,6 +316,7 @@ public class Map {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void getfires() throws StopRequestException {
 		source.checkInterruption();
@@ -332,11 +339,16 @@ public class Map {
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @param range 
+	 * 		Description manquante !
 	 * @param bo 
+	 * 		Description manquante !
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setbombeposs(int x1, int y1, int range, boolean bo)
 			throws StopRequestException {
@@ -429,8 +441,9 @@ public class Map {
 	/** ,l envoie la matrice de map
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Etat[][] returnMatrix() throws StopRequestException {
 		source.checkInterruption();
@@ -452,8 +465,9 @@ public class Map {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public String risquetoString() throws StopRequestException {
 		source.checkInterruption();
@@ -474,8 +488,9 @@ public class Map {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public String actoString() throws StopRequestException {
 		source.checkInterruption();
@@ -495,8 +510,9 @@ public class Map {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public String murstoString() throws StopRequestException {
 		source.checkInterruption();
@@ -516,10 +532,13 @@ public class Map {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isWalkable(int x1, int y1) throws StopRequestException {
 		source.checkInterruption();
@@ -535,10 +554,13 @@ public class Map {
 	/** pour voir si on peut acceder a un adversaire en explosant les murs
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isReachable(int x1, int y1) throws StopRequestException {
 		source.checkInterruption();
@@ -557,9 +579,13 @@ public class Map {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
-	 * @return ?
+	 * 		Description manquante !
+	 * @return 
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	int return_risque(int x, int y) throws StopRequestException {
 		source.checkInterruption();
@@ -569,7 +595,9 @@ public class Map {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	int[][] return_risque() throws StopRequestException {
 		source.checkInterruption();
@@ -579,7 +607,9 @@ public class Map {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	Etat[][] return_accessibilite() throws StopRequestException {
 		source.checkInterruption();
@@ -589,7 +619,9 @@ public class Map {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	int[][] return_murs() throws StopRequestException {
 		source.checkInterruption();

@@ -53,9 +53,13 @@ public final class Astar {
 		/** on cree les noeuds
 		 * 
 		 * @param x
+	 * 		Description manquante !
 		 * @param y
+	 * 		Description manquante !
 		 * @param ai
+	 * 		Description manquante !
 		 * @throws StopRequestException
+	 * 		Description manquante !
 		 */
 		public Node(int x, int y, ArtificialIntelligence ai) throws StopRequestException {
 			ai.checkInterruption();
@@ -69,6 +73,7 @@ public final class Astar {
 		/**
 		 * 
 		 * @throws StopRequestException
+	 * 		Description manquante !
 		 */
 		public void calculateHeuristic() throws StopRequestException {
 			ai.checkInterruption();
@@ -79,7 +84,9 @@ public final class Astar {
 		/**
 		 * 
 		 * @param parent
+	 * 		Description manquante !
 		 * @throws StopRequestException
+	 * 		Description manquante !
 		 */
 		public void setParent(Node parent) throws StopRequestException {
 			ai.checkInterruption();
@@ -137,12 +144,19 @@ public final class Astar {
 	/**
 	 * 
 	 * @param map
+	 * 		Description manquante !
 	 * @param originX
+	 * 		Description manquante !
 	 * @param originY
+	 * 		Description manquante !
 	 * @param destinationX
+	 * 		Description manquante !
 	 * @param destinationY
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Astar(Map map, int originX, int originY, int destinationX,
 			int destinationY, ArtificialIntelligence ai) throws StopRequestException {
@@ -174,9 +188,13 @@ public final class Astar {
 	 * </p>
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param parent
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void addToOpen(int x, int y, Node parent) throws StopRequestException {
 		ai.checkInterruption();
@@ -203,9 +221,13 @@ public final class Astar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param parent
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void addToOpenreach(int x, int y, Node parent) throws StopRequestException {
 		ai.checkInterruption();
@@ -233,8 +255,9 @@ public final class Astar {
 	 * Starts the algorithm and returns true if a valid path was found.
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean findPath() throws StopRequestException {
 		ai.checkInterruption();
@@ -257,8 +280,9 @@ public final class Astar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Deque<Integer> getPath() throws StopRequestException {
 		ai.checkInterruption();
@@ -281,8 +305,9 @@ public final class Astar {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean findPathreach() throws StopRequestException {
 		ai.checkInterruption();
@@ -306,9 +331,13 @@ public final class Astar {
 	 * Checks whether a node was already processed.
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private boolean isClosed(int x, int y) throws StopRequestException {
 		ai.checkInterruption();
@@ -326,7 +355,9 @@ public final class Astar {
 	 * </ul>
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void process(Node node) throws StopRequestException {
 		ai.checkInterruption();
@@ -357,7 +388,9 @@ public final class Astar {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void process_reach(Node node) throws StopRequestException {
 		ai.checkInterruption();
@@ -389,8 +422,11 @@ public final class Astar {
 	 * Sets the node at {@code x}, {@code y} to "already been processed".
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void setClosed(int x, int y) throws StopRequestException {
 		ai.checkInterruption();

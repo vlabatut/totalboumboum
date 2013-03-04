@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.calisirguner.v5c;
 
-
 //
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * et on sest profité des classes de groupe bleu de l'annee precedente
  * 
@@ -29,7 +27,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Emre Çalışır
  * @author Burak Ozgen Güner
- *
+ * 
  */
 @SuppressWarnings("deprecation")
 public class CalisirGuner extends ArtificialIntelligence {
@@ -66,7 +64,8 @@ public class CalisirGuner extends ArtificialIntelligence {
 	/** */
 	private AiHero bomberman;
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA
+	/**
+	 * méthode appelée par le moteur du jeu pour obtenir une action de votre IA
 	 */
 	@Override
 	public AiAction processAction() throws StopRequestException {
@@ -90,12 +89,13 @@ public class CalisirGuner extends ArtificialIntelligence {
 				// System.out.println(bomberman.getBombCount());
 			}
 			if (map.return_risque()[caseactuelle.getCol()][caseactuelle
-					.getLine()] < 1500
-					&& caseactuelle.getBombs().size() == 0) {
-				/*if (map.return_risque()[caseactuelle.getCol()][caseactuelle
-					.getLine()]!=1)
-				 System.out.println(map.return_risque()[caseactuelle.getCol()][caseactuelle
-				                                           					.getLine()]);*/
+					.getLine()] < 1500 && caseactuelle.getBombs().size() == 0) {
+				/*
+				 * if (map.return_risque()[caseactuelle.getCol()][caseactuelle
+				 * .getLine()]!=1)
+				 * System.out.println(map.return_risque()[caseactuelle
+				 * .getCol()][caseactuelle .getLine()]);
+				 */
 				attaque();
 
 			}
@@ -104,14 +104,15 @@ public class CalisirGuner extends ArtificialIntelligence {
 				attaque1();
 
 			}
-			if ((zone.getRemainingHeroes().size()<4 || !yatildest()) &&!bonus && test_sur(caseactuelle) && !attaque0) {
+			if ((zone.getRemainingHeroes().size() < 4 || !yatildest())
+					&& !bonus && test_sur(caseactuelle) && !attaque0) {
 				adversaires();
 				// System.out.println(adv);
 			}
 
 			if (!bonus && test_sur(caseactuelle) && !attaque0 && !adv) {
 				explosion();
-			       // System.out.println("ezplo");
+				// System.out.println("ezplo");
 			}
 			if (!bombe && pasprochain != null) {
 
@@ -125,13 +126,13 @@ public class CalisirGuner extends ArtificialIntelligence {
 			} else if (bombe) {
 				result = new AiAction(AiActionName.DROP_BOMB);
 
-			} else if (!bombe ) {
+			} else if (!bombe) {
 
 				result = new AiAction(AiActionName.NONE);
 				intersection();
 			}
-			//if (result.equals(AiActionName.NONE))
-               //   collection();
+			// if (result.equals(AiActionName.NONE))
+			// collection();
 			// System.out.println(map.murstoString());
 			bonus = false;
 			bombe = false;
@@ -141,9 +142,13 @@ public class CalisirGuner extends ArtificialIntelligence {
 		}
 		return result;
 	}
-	/** si qqn est proche de nous un max de 2 cases nous faisons nos controles et meetons un bombe
+
+	/**
+	 * si qqn est proche de nous un max de 2 cases nous faisons nos controles et
+	 * meetons un bombe
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	public void attaque1() throws StopRequestException {
 		checkInterruption();
@@ -177,88 +182,96 @@ public class CalisirGuner extends ArtificialIntelligence {
 		}
 
 	}
-/*
-private void attaque() throws StopRequestException { // avant tout : testd'interruption 
-		  checkInterruption(); AiTile at=null;
-	  
-	  
-	  for (int i=0;i<map.width;i++){ checkInterruption(); 
-	  for (int j=0;j<map.height;j++){ checkInterruption(); 
-	  map.setbombeposs(i, j,
-	  bomberman.getBombRange(),true);
-	  List<AiHero> hero = new ArrayList<AiHero>();
-	  hero=zone.getRemainingHeroes(); 
-	  Iterator<AiHero>it=hero.iterator();
-	  AiHero temp; 
-	  while (it.hasNext() && !attaque0){ //System.out.println(at);
-	  temp=it.next(); 
-	  if ((!test_chemin(zone.getTile(j, i))||
-	  longueur(bomberman.getCol(),bomberman.getLine(),i,j)<6 ) &&
-	  temp!=bomberman && cases_sures(temp.getTile()).isEmpty() &&
-	  !cases_sures(zone.getTile(j,i)).isEmpty()) { 
-		  at=zone.getTile(j, i);
-	  attaque0=true; 
-	  System.out.println("attag"+at);
-	  
-	  }
-	  
-	  }map.remplir(zone);}} 
-	  if (attaque0){ 
-		  if ( at!=null && at!=caseactuelle)
-	  {resultat=at; //System.out.println(at); 
-	  chemin(); } 
-		  else if(at==caseactuelle){ 
-			  map.setbombeposs(zone.getOwnHero().getCol(), zone.getOwnHero() .getLine(), bomberman.getBombRange(),true);
-	  
-	  if (!cases_sures(caseactuelle).isEmpty()) { 
-		  bombe = true;
-	  System.out.println("attaque0"); } }
-	  
-	  }
-	 
-	  
-	 }*/
 
-	/** si en laisssan t un bombe on laisse un adversaire entre les bombes et bombes nous le mettons si on pourra nous echapper
-	 * @throws StopRequestException 
+	/*
+	 * private void attaque() throws StopRequestException { // avant tout :
+	 * testd'interruption checkInterruption(); AiTile at=null;
 	 * 
+	 * 
+	 * for (int i=0;i<map.width;i++){ checkInterruption(); for (int
+	 * j=0;j<map.height;j++){ checkInterruption(); map.setbombeposs(i, j,
+	 * bomberman.getBombRange(),true); List<AiHero> hero = new
+	 * ArrayList<AiHero>(); hero=zone.getRemainingHeroes();
+	 * Iterator<AiHero>it=hero.iterator(); AiHero temp; while (it.hasNext() &&
+	 * !attaque0){ //System.out.println(at); temp=it.next(); if
+	 * ((!test_chemin(zone.getTile(j, i))||
+	 * longueur(bomberman.getCol(),bomberman.getLine(),i,j)<6 ) &&
+	 * temp!=bomberman && cases_sures(temp.getTile()).isEmpty() &&
+	 * !cases_sures(zone.getTile(j,i)).isEmpty()) { at=zone.getTile(j, i);
+	 * attaque0=true; System.out.println("attag"+at);
+	 * 
+	 * }
+	 * 
+	 * }map.remplir(zone);}} if (attaque0){ if ( at!=null && at!=caseactuelle)
+	 * {resultat=at; //System.out.println(at); chemin(); } else
+	 * if(at==caseactuelle){ map.setbombeposs(zone.getOwnHero().getCol(),
+	 * zone.getOwnHero() .getLine(), bomberman.getBombRange(),true);
+	 * 
+	 * if (!cases_sures(caseactuelle).isEmpty()) { bombe = true;
+	 * System.out.println("attaque0"); } }
+	 * 
+	 * }
+	 * 
+	 * 
+	 * }
 	 */
-	  private void attaque() throws StopRequestException { 
-		  checkInterruption();
-	  
-	  int i = bomberman.getCol(); int j = bomberman.getLine();
-	  
-	  List<AiHero> hero = new ArrayList<AiHero>(); 
-	  hero =zone.getRemainingHeroes(); Iterator<AiHero> it = hero.iterator(); 
-	  AiHero
-	  temp; while (it.hasNext() && !attaque0) { checkInterruption();
-	  // System.out.println(at);
-	  temp = it.next(); if
-	  (!cases_sures(temp.getTile()).isEmpty()) { map.setbombeposs(i, j,
-	  bomberman.getBombRange(), true); 
-	  //System.out.println(cases_sures(caseactuelle).toString()); 
-	  if (temp !=null && temp != bomberman && cases_sures(temp.getTile()).isEmpty() &&
-	  !test_sur(temp.getTile())) { attaque0 = true;
-	  //System.out.println(temp.getColor());
-	  
-	  } } }
-	  
-	  if (attaque0) {
-	  
-	  if (!cases_sures(caseactuelle).isEmpty()) { bombe = true; 
-	 // System.out.println("attaque0");
-	  
-	  } } else map.remplir(zone);
-	  
-	  }
-	 
 
-	 /** pour exploser les murs on trouve les case ou on pourra exploser un max des murs grace a notre matrice des murs
-	  //nous utilisons cette fonction qd nous avons plus de 2 adversaires car sinon il perd bcp de temps en mettant de bombes
-	  // et il ne les laisse pas par le but dacceder en adversaire
-	   * 
-	   * @throws StopRequestException
-	   */
+	/**
+	 * si en laisssan t un bombe on laisse un adversaire entre les bombes et
+	 * bombes nous le mettons si on pourra nous echapper
+	 * 
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
+	private void attaque() throws StopRequestException {
+		checkInterruption();
+
+		int i = bomberman.getCol();
+		int j = bomberman.getLine();
+
+		List<AiHero> hero = new ArrayList<AiHero>();
+		hero = zone.getRemainingHeroes();
+		Iterator<AiHero> it = hero.iterator();
+		AiHero temp;
+		while (it.hasNext() && !attaque0) {
+			checkInterruption();
+			// System.out.println(at);
+			temp = it.next();
+			if (!cases_sures(temp.getTile()).isEmpty()) {
+				map.setbombeposs(i, j, bomberman.getBombRange(), true);
+				// System.out.println(cases_sures(caseactuelle).toString());
+				if (temp != null && temp != bomberman
+						&& cases_sures(temp.getTile()).isEmpty()
+						&& !test_sur(temp.getTile())) {
+					attaque0 = true;
+					// System.out.println(temp.getColor());
+
+				}
+			}
+		}
+
+		if (attaque0) {
+
+			if (!cases_sures(caseactuelle).isEmpty()) {
+				bombe = true;
+				// System.out.println("attaque0");
+
+			}
+		} else
+			map.remplir(zone);
+
+	}
+
+	/**
+	 * pour exploser les murs on trouve les case ou on pourra exploser un max
+	 * des murs grace a notre matrice des murs //nous utilisons cette fonction
+	 * qd nous avons plus de 2 adversaires car sinon il perd bcp de temps en
+	 * mettant de bombes // et il ne les laisse pas par le but dacceder en
+	 * adversaire
+	 * 
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
 	private void explosion() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -297,14 +310,18 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 			if (!cases_sures(caseactuelle).isEmpty()) {
 				bombe = true;
-				 //System.out.println("asd");
+				// System.out.println("asd");
 				arrive = false;
 			}
 		}
 	}
-	/** il prend les adversaires dans la zone et essaie de les acceder, il les suit et qd il rencontre un mur il met un bombe etc..
+
+	/**
+	 * il prend les adversaires dans la zone et essaie de les acceder, il les
+	 * suit et qd il rencontre un mur il met un bombe etc..
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private void adversaires() throws StopRequestException {
 		checkInterruption();
@@ -335,13 +352,13 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 				if (res == null
 						|| longueur(bomberman.getCol(), bomberman.getLine(),
 								res.getCol(), res.getLine()) > longueur(
-								bomberman.getCol(), bomberman.getLine(), option
-										.getCol(), option.getLine()))
+								bomberman.getCol(), bomberman.getLine(),
+								option.getCol(), option.getLine()))
 					res = option;
 			}
 			if (res != null && res != caseactuelle) {
-				Astar dest = new Astar(map, bomberman.getCol(), bomberman
-						.getLine(), res.getCol(), res.getLine(),this);
+				Astar dest = new Astar(map, bomberman.getCol(),
+						bomberman.getLine(), res.getCol(), res.getLine(), this);
 				AiTile prochaine = null;
 
 				if (dest != null && dest.findPathreach()) {
@@ -362,8 +379,9 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 					}
 					if (map.returnMatrix()[prochaine.getCol()][prochaine
 							.getLine()] == Etat.DESTRUCTIBLES) {
-						map.setbombeposs(bomberman.getCol(), bomberman
-								.getLine(), bomberman.getBombRange(), false);
+						map.setbombeposs(bomberman.getCol(),
+								bomberman.getLine(), bomberman.getBombRange(),
+								false);
 						if (!cases_sures(caseactuelle).isEmpty()
 								&& bomberman.getBombCount() < 2) {
 							bombe = true;
@@ -378,9 +396,12 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		}
 	}
 
-	/** pour les bonus on lutilise qd on a moins de 3 bonus de nimporte quel bonus pour nee pas empecher lattaque
+	/**
+	 * pour les bonus on lutilise qd on a moins de 3 bonus de nimporte quel
+	 * bonus pour nee pas empecher lattaque
 	 * 
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private void collection() throws StopRequestException {
 		// avant tout : test d'interruption
@@ -424,30 +445,36 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 					else if (longueur(bomberman.getCol(), bomberman.getLine(),
 							resultat.getCol(), resultat.getLine()) > longueur(
-							bomberman.getCol(), bomberman.getLine(), option
-									.getCol(), option.getLine()))
+							bomberman.getCol(), bomberman.getLine(),
+							option.getCol(), option.getLine()))
 						resultat = option;
 				}
 			}
 			// System.out.println(resultat);
 			if (bonus)
 				chemin();
-			
+
 		}
 	}
-/** ppour nous enfuire
- * 
- * @throws StopRequestException
- */
+
+	/**
+	 * ppour nous enfuire
+	 * 
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
 	private void fuite() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		resultat = meilleur();
 		chemin();
 	}
-/** pour utiliser notre astar il nous donne le chemin a la case sur choisie
- * 
- * @throws StopRequestException
- */
+
+	/**
+	 * pour utiliser notre astar il nous donne le chemin a la case sur choisie
+	 * 
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
 	void chemin() throws StopRequestException {
 		checkInterruption();
 		// avant tout : test d'interruption
@@ -456,7 +483,8 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 		if (resultat != null && resultat != caseactuelle) {
 			Astar dest = new Astar(map, bomberman.getCol(),
-					bomberman.getLine(), resultat.getCol(), resultat.getLine(),this);
+					bomberman.getLine(), resultat.getCol(), resultat.getLine(),
+					this);
 
 			AiTile prochaine = null;
 
@@ -482,11 +510,13 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 	}
 
-	/** pour trover la case que le chemin est le plus sur on profite de matrice
-	// de risques quon a defini dans map
+	/**
+	 * pour trover la case que le chemin est le plus sur on profite de matrice
+	 * // de risques quon a defini dans map
 	 * 
 	 * @return ?
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private AiTile meilleur() throws StopRequestException {
 		checkInterruption();
@@ -506,8 +536,9 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 				option = iterator.next();
 				opt = 0;
 
-				meilleur_astar = new Astar(map, bomberman.getCol(), bomberman
-						.getLine(), option.getCol(), option.getLine(),this);
+				meilleur_astar = new Astar(map, bomberman.getCol(),
+						bomberman.getLine(), option.getCol(), option.getLine(),
+						this);
 				if (meilleur_astar.findPath()) {
 					Deque<Integer> deque = meilleur_astar.getPath();
 
@@ -524,26 +555,26 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 					} else if (opt == res) {
 						if (cases_sures(option).size() > cases_sures(
 								meilleur_resultat).size()
-								|| (ferme(meilleur_resultat) > ferme(option)))
-							{meilleur_resultat = option;
+								|| (ferme(meilleur_resultat) > ferme(option))) {
+							meilleur_resultat = option;
 
-					}
+						}
 
-					if (opt == res
-							&& cases_sures(option).size() == cases_sures(
-									meilleur_resultat).size()
-									&& (ferme(meilleur_resultat) == ferme(option))) {
+						if (opt == res
+								&& cases_sures(option).size() == cases_sures(
+										meilleur_resultat).size()
+								&& (ferme(meilleur_resultat) == ferme(option))) {
 
-						
-							if (longueur(bomberman.getCol(), bomberman.getLine(),
-									meilleur_resultat.getCol(), meilleur_resultat
-											.getLine()) > longueur(bomberman
-									.getCol(), bomberman.getLine(),
+							if (longueur(bomberman.getCol(),
+									bomberman.getLine(),
+									meilleur_resultat.getCol(),
+									meilleur_resultat.getLine()) > longueur(
+									bomberman.getCol(), bomberman.getLine(),
 									option.getCol(), option.getLine()))
 								meilleur_resultat = option;
-							
+
 							// System.out.println(res);
-							}
+						}
 					}
 
 				}
@@ -554,12 +585,17 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		return meilleur_resultat;
 
 	}
-/** on trouve les cases surs donc les cases qui ne sont pas menacés par des flammes bombes feus
- * 
- * @param tile
- * @return ?
- * @throws StopRequestException
- */
+
+	/**
+	 * on trouve les cases surs donc les cases qui ne sont pas menacés par des
+	 * flammes bombes feus
+	 * 
+	 * @param tile
+	 *            Description manquante !
+	 * @return ? Description manquante !
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
 	private Collection<AiTile> cases_sures(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -571,7 +607,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 				checkInterruption(); // APPEL OBLIGATOIRE
 				if (tile.getCol() != col || tile.getLine() != line) {
 					fuite = new Astar(map, tile.getCol(), tile.getLine(), col,
-							line,this);
+							line, this);
 
 					if (test_sur(zone.getTile(line, col))
 							&& zone.getTile(line, col).getBlocks().size() == 0) {
@@ -587,13 +623,18 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		return destination;
 
 	}
-/** si une case est entoure par des bombes et murs ce nest pas une case quon doit choisir donc nous utilisons
- * 
- * @param tile
- * @return ?
- * @throws StopRequestException
- */
-	//cette methode pour vor si la case est comme une impasse
+
+	/**
+	 * si une case est entoure par des bombes et murs ce nest pas une case quon
+	 * doit choisir donc nous utilisons
+	 * 
+	 * @param tile
+	 *            Description manquante !
+	 * @return ? Description manquante !
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
+	// cette methode pour vor si la case est comme une impasse
 	private int ferme(AiTile tile) throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -638,14 +679,20 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 	}
 
-	/** distance euclidien
+	/**
+	 * distance euclidien
 	 * 
 	 * @param x
+	 *            Description manquante !
 	 * @param y
+	 *            Description manquante !
 	 * @param x1
+	 *            Description manquante !
 	 * @param y2
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	int longueur(int x, int y, int x1, int y2) throws StopRequestException {
 		// avant tout : test d'interruption
@@ -655,11 +702,14 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 	}
 
-	/** pour controler si on est en securite
+	/**
+	 * pour controler si on est en securite
 	 * 
 	 * @param tile
-	 * @return ?
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
 	private boolean test_sur(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -676,12 +726,17 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		else
 			return true;
 	}
-/** sil ya des flammes dans le chmin cest pas la peine de nous risquer pour un adversaire u un  bonus
- * 
- * @param tile
- * @return ?
- * @throws StopRequestException
- */
+
+	/**
+	 * sil ya des flammes dans le chmin cest pas la peine de nous risquer pour
+	 * un adversaire u un bonus
+	 * 
+	 * @param tile
+	 *            Description manquante !
+	 * @return ? Description manquante !
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
 	private boolean test_chemin(AiTile tile) throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
@@ -691,8 +746,8 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 		}
 
-		Astar bonus_astar = new Astar(map, bomberman.getCol(), bomberman
-				.getLine(), tile.getCol(), tile.getLine(),this);
+		Astar bonus_astar = new Astar(map, bomberman.getCol(),
+				bomberman.getLine(), tile.getCol(), tile.getLine(), this);
 		if (bonus_astar != null && tile != caseactuelle
 				&& bonus_astar.findPath()) {
 			res = false;
@@ -712,29 +767,36 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		}
 		return res;
 	}
-	/** pour controler sil ya encore des murs destructibles quon peut acceder
+
+	/**
+	 * pour controler sil ya encore des murs destructibles quon peut acceder
 	 * 
-	 * @return ?
+	 * @return ? Description manquante !
 	 * @throws StopRequestException
+	 *             Description manquante !
 	 */
-	private boolean yatildest() throws StopRequestException{
+	private boolean yatildest() throws StopRequestException {
 		checkInterruption();
-		boolean res=false;
-		Iterator <AiBlock> it=zone.getBlocks().iterator();
-		while (it.hasNext() && !res)
-		{	checkInterruption();
-			AiBlock temp=it.next();
-			Astar a =new Astar (map,bomberman.getCol(),bomberman.getLine(),temp.getCol(),temp.getLine(),this);
-			if (temp.isDestructible() &&a.findPathreach()) 
-				res=true;
-			}
+		boolean res = false;
+		Iterator<AiBlock> it = zone.getBlocks().iterator();
+		while (it.hasNext() && !res) {
+			checkInterruption();
+			AiBlock temp = it.next();
+			Astar a = new Astar(map, bomberman.getCol(), bomberman.getLine(),
+					temp.getCol(), temp.getLine(), this);
+			if (temp.isDestructible() && a.findPathreach())
+				res = true;
+		}
 		return res;
 	}
-	
-/** si one est en intersection de deux bombes on choist daller a la portee de celui qui a encore plue de temps que lautre a son explosion
- * 
- * @throws StopRequestException
- */
+
+	/**
+	 * si one est en intersection de deux bombes on choist daller a la portee de
+	 * celui qui a encore plue de temps que lautre a son explosion
+	 * 
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
 	private void intersection() throws StopRequestException {
 		checkInterruption();
 		if (map.returnMatrix()[bomberman.getCol()][bomberman.getLine()] == Etat.DANGER) {
@@ -743,36 +805,33 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 			if (map.return_accessibilite()[bomberman.getCol() + 1][bomberman
 					.getLine()] == Etat.ACCESSIBLE
-					&& map.return_risque(bomberman.getCol() + 1, bomberman
-							.getLine()) < res) {
-				res = map.return_risque(bomberman.getCol() + 1, bomberman
-						.getLine());
+					&& map.return_risque(bomberman.getCol() + 1,
+							bomberman.getLine()) < res) {
+				res = map.return_risque(bomberman.getCol() + 1,
+						bomberman.getLine());
 				result = new AiAction(AiActionName.MOVE, Direction.RIGHT);
 			} else if (map.return_accessibilite()[bomberman.getCol()][bomberman
 					.getLine() + 1] == Etat.ACCESSIBLE
-					&& map.return_risque(bomberman.getCol(), bomberman
-							.getLine() + 1) < res) {
+					&& map.return_risque(bomberman.getCol(),
+							bomberman.getLine() + 1) < res) {
 				res = map.return_risque(bomberman.getCol(),
 						bomberman.getLine() + 1);
 				result = new AiAction(AiActionName.MOVE, Direction.DOWN);
 			} else if (map.return_accessibilite()[bomberman.getCol()][bomberman
 					.getLine() - 1] == Etat.ACCESSIBLE
-					&& map.return_risque(bomberman.getCol(), bomberman
-							.getLine() - 1) < res) {
+					&& map.return_risque(bomberman.getCol(),
+							bomberman.getLine() - 1) < res) {
 				res = map.return_risque(bomberman.getCol(),
 						bomberman.getLine() - 1);
 				result = new AiAction(AiActionName.MOVE, Direction.UP);
 			} else if (map.return_accessibilite()[bomberman.getCol() - 1][bomberman
 					.getLine()] == Etat.ACCESSIBLE
-					&& map.return_risque(bomberman.getCol() - 1, bomberman
-							.getLine()) < res) {
-				res = map.return_risque(bomberman.getCol() - 1, bomberman
-						.getLine());
+					&& map.return_risque(bomberman.getCol() - 1,
+							bomberman.getLine()) < res) {
+				res = map.return_risque(bomberman.getCol() - 1,
+						bomberman.getLine());
 				result = new AiAction(AiActionName.MOVE, Direction.LEFT);
 			}
-
 		}
-
 	}
-
 }
