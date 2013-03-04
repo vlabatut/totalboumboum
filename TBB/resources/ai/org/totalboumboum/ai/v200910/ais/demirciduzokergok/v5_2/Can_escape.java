@@ -69,6 +69,7 @@ public class Can_escape {
 	
 	/** Constructeur of the Can_escape
 	 * @param zone 
+	 * 		Description manquante !
 	 */
 	public Can_escape(AiZone zone){
 		this.our_zone=zone;

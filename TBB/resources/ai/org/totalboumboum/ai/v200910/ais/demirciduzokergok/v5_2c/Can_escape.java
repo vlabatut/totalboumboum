@@ -70,8 +70,11 @@ public class Can_escape {
 	/** Constructeur of the Can_escape
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Can_escape(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
@@ -95,6 +98,7 @@ public class Can_escape {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void Fill_The_Matrix() throws StopRequestException {
 		ai.checkInterruption();
@@ -333,8 +337,9 @@ public class Can_escape {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
