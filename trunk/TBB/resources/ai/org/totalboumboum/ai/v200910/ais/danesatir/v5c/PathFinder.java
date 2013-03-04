@@ -37,8 +37,11 @@ public class PathFinder {
 	/**
 	 * Default Constructor for Pathfinder 
 	 * @param ai
+	 * 		Description manquante !
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public PathFinder(DaneSatir ai, TimeMatrice time) throws StopRequestException {
 		this(ai,ai.getOwnHero(),time);
@@ -48,9 +51,13 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @param hero
+	 * 		Description manquante !
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
@@ -65,8 +72,11 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param target
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 * @throws NoWayException
+	 * 		Description manquante !
 	 */
 	public void calculPath(AiTile target) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
@@ -77,8 +87,11 @@ public class PathFinder {
 	/**
 	 * Build Path for Targets
 	 * @param targetList
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 * @throws NoWayException
+	 * 		Description manquante !
 	 */
 	public void calculPath(List<AiTile> targetList) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
@@ -103,8 +116,9 @@ public class PathFinder {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiPath getPath() throws StopRequestException {
 		ai.checkInterruption();
@@ -114,6 +128,7 @@ public class PathFinder {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void clearPath() throws StopRequestException {
 		ai.checkInterruption();
@@ -123,10 +138,13 @@ public class PathFinder {
 	/**
 	 * Get NextTile and check on arrive and other situations
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 * @throws PathOverException
+	 * 		Description manquante !
 	 * @throws NoWayException
+	 * 		Description manquante !
 	 */
 	public AiTile getNextTile() throws StopRequestException, PathOverException, NoWayException {
 		ai.checkInterruption();
@@ -168,6 +186,7 @@ public class PathFinder {
 	/**
 	 * Recalculate Path with TargetList
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void recalculPath() throws StopRequestException {
 		ai.checkInterruption();
@@ -184,9 +203,11 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param targetTile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isTarget(AiTile targetTile) throws StopRequestException {
 		ai.checkInterruption();
@@ -198,8 +219,9 @@ public class PathFinder {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isArrive() throws StopRequestException {
 		ai.checkInterruption();
@@ -209,8 +231,9 @@ public class PathFinder {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getTargets() throws StopRequestException {
 		ai.checkInterruption();
@@ -220,7 +243,9 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void updateTimeMatrice(TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();

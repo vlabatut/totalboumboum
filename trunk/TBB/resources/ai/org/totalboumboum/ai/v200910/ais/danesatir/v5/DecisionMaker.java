@@ -29,7 +29,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DecisionMaker(DaneSatir ai) throws StopRequestException {
 		this.ai=ai;
@@ -39,6 +41,7 @@ public class DecisionMaker {
 	/**
 	 * Check conditions and set state.
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void makeDecision() throws StopRequestException {
 		ai.checkInterruption();
@@ -63,6 +66,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private boolean isEnemyExist() {
 		if(this.ai.getPercepts().getHeroes().size()>1)
@@ -73,6 +77,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private boolean isHiddenItemExist() {
 		if(this.ai.getPercepts().getHiddenItemsCount()>0)
@@ -83,6 +88,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private boolean isItemExist() {
 		if(this.ai.getPercepts().getItems().size()>0)
@@ -93,7 +99,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isWayExistToEnemy() throws StopRequestException {
 		ai.checkInterruption();
@@ -109,6 +117,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private boolean isDanger() {
 		double dur = this.time.getTime();
@@ -120,6 +129,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private boolean isHaveBomb() {
 		AiHero hero = this.ai.getOwnHero();
@@ -132,7 +142,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public State getState() {
 		return state;
@@ -141,6 +151,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param state
+	 * 		Description manquante !
 	 */
 	public void setState(State state) {
 		this.state = state;
@@ -149,8 +160,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TimeMatrice getTime() throws StopRequestException {
 		setTime(new TimeMatrice(ai));
@@ -160,6 +172,7 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 */
 	private void setTime(TimeMatrice time) {
 		this.time = time;
@@ -168,9 +181,11 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canWeEscape(AiBomb bomb) throws StopRequestException {
 		return canWeEscape(bomb.getTile());
@@ -179,9 +194,11 @@ public class DecisionMaker {
 	/**
 	 * check we can escape, if we put bomb
 	 * @param bomb
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canWeEscape(AiTile bomb) throws StopRequestException {
 		ai.checkInterruption();

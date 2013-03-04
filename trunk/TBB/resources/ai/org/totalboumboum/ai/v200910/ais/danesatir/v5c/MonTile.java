@@ -25,9 +25,13 @@ public class MonTile {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param iter
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	MonTile(AiTile tile, int iter, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -39,7 +43,9 @@ public class MonTile {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void setTile(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -49,8 +55,9 @@ public class MonTile {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getTile() throws StopRequestException {
 		ai.checkInterruption();
@@ -60,7 +67,9 @@ public class MonTile {
 	/**
 	 * 
 	 * @param iter
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void setIter(int iter) throws StopRequestException {
 		ai.checkInterruption();
@@ -70,8 +79,9 @@ public class MonTile {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getIter() throws StopRequestException {
 		ai.checkInterruption();

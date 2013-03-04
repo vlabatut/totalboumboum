@@ -20,11 +20,15 @@ public class GeneralFuncs {
 	/**
 	 * 
 	 * @param tile1
+	 * 		Description manquante !
 	 * @param tile2
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public static boolean tileCompare(AiTile tile1,AiTile tile2,ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
@@ -36,8 +40,11 @@ public class GeneralFuncs {
 	/**
 	 * Print Bomb List
 	 * @param bombs
+	 * 		Description manquante !
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public static void printBombs(List<AiBomb> bombs,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -51,10 +58,15 @@ public class GeneralFuncs {
 	/**
 	 * Print Matrices with line and column size.
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @param matrice
+	 * 		Description manquante !
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public static void printMatrice(int line, int col, double[][] matrice,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -72,9 +84,13 @@ public class GeneralFuncs {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @param str
+	 * 		Description manquante !
 	 * @param v
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public static void printLog(DaneSatir ai,String str,VerboseLevel v) throws StopRequestException {
 		ai.checkInterruption();
@@ -85,9 +101,13 @@ public class GeneralFuncs {
 	/**
 	 * 
 	 * @param str
+	 * 		Description manquante !
 	 * @param v
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public static void printLog(String str,VerboseLevel v,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();

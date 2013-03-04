@@ -29,7 +29,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DecisionMaker(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -39,6 +41,7 @@ public class DecisionMaker {
 	/**
 	 * Check conditions and set state.
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void makeDecision() throws StopRequestException {
 		ai.checkInterruption();
@@ -63,7 +66,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isEnemyExist() throws StopRequestException {
 		ai.checkInterruption();
@@ -75,7 +80,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isHiddenItemExist() throws StopRequestException {
 		ai.checkInterruption();
@@ -87,7 +94,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isItemExist() throws StopRequestException {
 		ai.checkInterruption();
@@ -99,7 +108,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isWayExistToEnemy() throws StopRequestException {
 		ai.checkInterruption();
@@ -115,7 +126,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isDanger() throws StopRequestException {
 		ai.checkInterruption();
@@ -128,7 +141,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isHaveBomb() throws StopRequestException {
 		ai.checkInterruption();
@@ -142,8 +157,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public State getState() throws StopRequestException {
 		ai.checkInterruption();
@@ -153,7 +169,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param state
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setState(State state) throws StopRequestException {
 		ai.checkInterruption();
@@ -163,8 +181,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TimeMatrice getTime() throws StopRequestException {
 		ai.checkInterruption();
@@ -175,7 +194,9 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void setTime(TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
@@ -185,9 +206,11 @@ public class DecisionMaker {
 	/**
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canWeEscape(AiBomb bomb) throws StopRequestException {
 		ai.checkInterruption();
@@ -197,9 +220,11 @@ public class DecisionMaker {
 	/**
 	 * check we can escape, if we put bomb
 	 * @param bomb
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean canWeEscape(AiTile bomb) throws StopRequestException {
 		ai.checkInterruption();

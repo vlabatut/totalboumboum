@@ -30,7 +30,9 @@ public class WallSuccessor extends BasicSuccessorCalculator {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public WallSuccessor(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -40,6 +42,7 @@ public class WallSuccessor extends BasicSuccessorCalculator {
 	/**
 	 * Ignore Destructible walls
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	@Override
 	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException
