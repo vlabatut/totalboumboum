@@ -24,9 +24,13 @@ public class PathManagement {
 	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
 	 * exprimée en pixels
 	 * @param ai 
+	 * 		Description manquante !
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public PathManagement(EnhosKarapazar ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -39,8 +43,11 @@ public class PathManagement {
 	 * crée un PathManager chargé d'amener le personnage au centre de la case
 	 * passée en paramètre
 	 * @param ai 
+	 * 		Description manquante !
 	 * @param destination 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public PathManagement(EnhosKarapazar ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -52,7 +59,9 @@ public class PathManagement {
 	/**
 	 * initialise ce PathManager
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void init(EnhosKarapazar ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -88,7 +97,9 @@ public class PathManagement {
 	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
 	 * @param destination 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -105,8 +116,11 @@ public class PathManagement {
 	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -132,8 +146,9 @@ public class PathManagement {
 	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -168,8 +183,9 @@ public class PathManagement {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getLength() throws StopRequestException
 	{	
@@ -180,8 +196,9 @@ public class PathManagement {
 	/***
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  List<AiTile> getPathList() throws StopRequestException
 	{
@@ -192,8 +209,9 @@ public class PathManagement {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isWalkable() throws StopRequestException
 	{ 
@@ -207,6 +225,7 @@ public class PathManagement {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void printPath() throws StopRequestException
 	{
@@ -217,9 +236,13 @@ public class PathManagement {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean estCaseSure(int line, int col) throws StopRequestException
 	{

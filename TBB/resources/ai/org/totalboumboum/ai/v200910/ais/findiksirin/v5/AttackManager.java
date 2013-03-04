@@ -23,9 +23,13 @@ public class AttackManager
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @param posTarget
+	 * 		Description manquante !
 	 * @param posWalkable
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AttackManager(FindikSirin ai,Direction posTarget, Direction posWalkable) throws StopRequestException
 	{	ai.checkInterruption();
@@ -47,7 +51,9 @@ public class AttackManager
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> heroDestinations() throws StopRequestException{
 	ai.checkInterruption();
@@ -79,6 +85,7 @@ public class AttackManager
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -117,8 +124,9 @@ public class AttackManager
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean decidedToBomb() throws StopRequestException{
 		ai.checkInterruption();
@@ -139,10 +147,13 @@ public class AttackManager
 	/**
 	 * 
 	 * @param tile1
+	 * 		Description manquante !
 	 * @param tile2
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isOnLine(AiTile tile1, AiTile tile2) throws StopRequestException{
 		ai.checkInterruption();
@@ -178,8 +189,9 @@ public class AttackManager
 	/** retourne si on est arrive ou pas
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
@@ -205,7 +217,8 @@ public class AttackManager
 	*/
 	/** si on est sur le chemin calculé 
 	 * @throws StopRequestException 
-	 * */
+	 * 		Description manquante !
+	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -233,8 +246,9 @@ public class AttackManager
 	/** 
 	 * le process de decision
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
@@ -271,8 +285,11 @@ public class AttackManager
 	/**
 	 * 
 	 * @param posTarget
+	 * 		Description manquante !
 	 * @param posWalkable
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void setBombingPath(Direction posTarget, Direction posWalkable) throws StopRequestException{
 		ai.checkInterruption();

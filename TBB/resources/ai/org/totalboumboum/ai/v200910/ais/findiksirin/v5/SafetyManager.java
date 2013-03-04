@@ -25,7 +25,9 @@ public class SafetyManager
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public SafetyManager(FindikSirin ai) throws StopRequestException
 	{
@@ -51,8 +53,9 @@ public class SafetyManager
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption();
@@ -62,6 +65,7 @@ public class SafetyManager
 	/**
 	 * mise à jour de la matrice de sûreté
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption();
@@ -118,10 +122,15 @@ public class SafetyManager
 	/** la liste des blasts
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @param blast
+	 * 		Description manquante !
 	 * @param bombs
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ai.checkInterruption(); 
@@ -149,7 +158,9 @@ public class SafetyManager
 	/** le traitement avec les bombes
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	ai.checkInterruption();
@@ -187,9 +198,11 @@ public class SafetyManager
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
@@ -203,9 +216,11 @@ public class SafetyManager
 	/** si le cas est completement sur
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
@@ -218,9 +233,11 @@ public class SafetyManager
 	/** retourne la liste des cases surs
 	 * 
 	 * @param origin
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	ai.checkInterruption();
@@ -242,9 +259,11 @@ public class SafetyManager
 	/**
 	 * 
 	 * @param currentTile
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean hasNoWhereToGo(AiTile currentTile) throws StopRequestException {
 		ai.checkInterruption();
@@ -264,9 +283,11 @@ public class SafetyManager
 	/**
 	 * 
 	 * @param destinationTile
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isReachable(AiTile destinationTile) throws StopRequestException{
 		ai.checkInterruption();
@@ -284,6 +305,7 @@ public class SafetyManager
 	/** le processus
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE		

@@ -192,6 +192,7 @@ public class FindikSirin extends ArtificialIntelligence
 	/** initialisation
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException
 	{	checkInterruption();
@@ -209,8 +210,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption();
@@ -222,8 +224,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException
 	{	checkInterruption();	
@@ -250,8 +253,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean areYouSure() throws StopRequestException{
 		checkInterruption();
@@ -271,6 +275,7 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setOurBombs() throws StopRequestException{
 		checkInterruption();
@@ -318,8 +323,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean hasTargetAttackable() throws StopRequestException{
 		checkInterruption();
@@ -374,9 +380,9 @@ public class FindikSirin extends ArtificialIntelligence
 //LES METHODES D'ACCES DES GESTIONNAIRES DE TRAITEMENT
 	/**
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	public SafetyManager getSafetyManager() throws StopRequestException
 	{	checkInterruption();	
@@ -385,8 +391,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public EscapeManager getEscapeManager() throws StopRequestException
 	{	checkInterruption();	
@@ -395,8 +402,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public BonusManager getBonusManager() throws StopRequestException
 	{	checkInterruption();	
@@ -405,8 +413,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AttackManager getAttackManager() throws StopRequestException
 	{	checkInterruption();	
@@ -416,10 +425,11 @@ public class FindikSirin extends ArtificialIntelligence
 //LES METHODES DE CONTROLE DE SECURITE
 	/**
 	 * @param tile 
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption();	
@@ -428,9 +438,11 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -449,8 +461,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getCurrentTile() throws StopRequestException
 	{	checkInterruption();
@@ -460,8 +473,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getCurrentX() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -471,8 +485,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE	
@@ -482,6 +497,7 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateLocation() throws StopRequestException
 	{	checkInterruption();
@@ -493,8 +509,11 @@ public class FindikSirin extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param currentTile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private AiBomb getOurBomb(AiTile currentTile) throws StopRequestException{

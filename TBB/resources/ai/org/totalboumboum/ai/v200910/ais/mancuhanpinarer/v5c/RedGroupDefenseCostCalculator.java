@@ -23,7 +23,9 @@ public class RedGroupDefenseCostCalculator extends CostCalculator {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public RedGroupDefenseCostCalculator(ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();

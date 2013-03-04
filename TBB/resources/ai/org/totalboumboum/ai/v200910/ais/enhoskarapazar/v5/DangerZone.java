@@ -47,8 +47,11 @@ public class DangerZone {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DangerZone(AiZone zone, EnhosKarapazar source)
 			throws StopRequestException {
@@ -69,6 +72,7 @@ public class DangerZone {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -235,6 +239,7 @@ public class DangerZone {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void PrintDangerZone() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -251,10 +256,13 @@ public class DangerZone {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public ZoneEnum getEnum(int line, int col) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -265,11 +273,16 @@ public class DangerZone {
 	 * renvoi la direction ce qu'on va prendre si on pose une bombe a ce Tile
 	 * il fait ce control pour les Tile qui sont croisés
 	 * @param range 
+	 * 		Description manquante !
 	 * @param line 
+	 * 		Description manquante !
 	 * @param col 
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
-	 * @throws StopRequestException */
+	 * 		Description manquante !
+	 * @throws StopRequestException 
+	 * 		Description manquante !
+	 * */
 	public Direction crossControl(int range, int line, int col)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -431,11 +444,16 @@ public class DangerZone {
 	 * sinon il fait appel a la method cross control
 	 * Donc on fait tous les controles en ce method
 	 * @param range 
+	 * 		Description manquante !
 	 * @param line 
+	 * 		Description manquante !
 	 * @param col 
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
-	 * @throws StopRequestException */
+	 * 		Description manquante !
+	 * @throws StopRequestException 
+	 * 		Description manquante !
+	 * */
 	public Direction rangeControl(int range, int line, int col)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -497,9 +515,13 @@ public class DangerZone {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean canGo(int line, int col) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire

@@ -55,8 +55,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getCurrentTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -67,8 +68,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * renvoie l'abscisse courante (en pixels)
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int getCurrentX() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -79,8 +81,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * renvoie l'ordonnée courante (en pixels)
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int getCurrentY() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -91,6 +94,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * Update positions
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void updateLocation() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -105,8 +109,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * renvoie le personnage contrôlé par cette IA
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -117,8 +122,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * renvoie la zone de jeu
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -128,6 +134,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 *@return renvoi l'Action a faire en cas de danger
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction dangerAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -175,6 +182,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * @return renvoie drop Bomb Action pour tuer adversaire
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction dropBombAttackAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -206,6 +214,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * @return renvoie drop Bomb Action pour destruct des murs
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction dropBombDestructWallAction()
 			throws StopRequestException {
@@ -226,8 +235,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * @param target 
+	 * 		Description manquante !
 	 * @return renvoie l'Action a faire en cas de prendre Bonus Bombe
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction getBonusBombeAction(AiTile target)
 			throws StopRequestException {
@@ -249,8 +260,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * @param target 
+	 * 		Description manquante !
 	 * @return renvoie l'action a faire en cas de prendre Bonus Range
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction getBonusRangeAction(AiTile target)
 			throws StopRequestException {
@@ -272,8 +285,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * @param target 
+	 * 		Description manquante !
 	 * @return renvoie l'action a faire en cas de destruction des murs
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction wallDestructAction(AiTile target)
 			throws StopRequestException {
@@ -298,8 +313,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * @param target 
+	 * 		Description manquante !
 	 * @return renvoie l'action a faire en cas d'attaque
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction moveattackAction(AiTile target)
 			throws StopRequestException {
@@ -431,8 +448,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	 * control si la rival est assez proche et il est possible que le bombe peut
 	 * effectuer la rival
 	 * @param rival 
+	 * 		Description manquante !
 	 * @return renvoi true s'il est bien d'attaquer
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private boolean inAttackRange(AiTile rival) throws StopRequestException {
 		checkInterruption();
@@ -562,8 +581,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * control la Danger de la Direction ce qu'on va prendre
 	 * @param move 
+	 * 		Description manquante !
 	 * @return renvoi une direction plus sur
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private returnAction isDirectionSafe(returnAction move)
 			throws StopRequestException {
@@ -645,6 +666,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * Initialise
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -661,9 +683,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * Control la Tile , si elle est mur
 	 * @param line 
+	 * 		Description manquante !
 	 * @param col 
+	 * 		Description manquante !
 	 * @return renvoi true si ce Tile est mur
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean isWall(int line, int col) throws StopRequestException {
 		checkInterruption();
@@ -677,9 +702,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * Control la Danger
 	 * @param line 
+	 * 		Description manquante !
 	 * @param col 
+	 * 		Description manquante !
 	 * @return renvoi true si ce Tile est en danger
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean inDanger(int line, int col) throws StopRequestException {
 		checkInterruption();
@@ -693,9 +721,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * Control la Danger en utilisant temps d'explosion
 	 * @param line 
+	 * 		Description manquante !
 	 * @param col 
+	 * 		Description manquante !
 	 * @return renvoi true si ce Tile est en danger
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean inDangerLevel2(int line, int col)
 			throws StopRequestException {
@@ -731,9 +762,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * Tout cas sauf les bombs, flammes, feu et murs sont Safe
 	 * @param line 
+	 * 		Description manquante !
 	 * @param col 
+	 * 		Description manquante !
 	 * @return renvoi true si ce Tile est sur
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private boolean isSafe(int line, int col) throws StopRequestException {
 		checkInterruption();
@@ -748,6 +782,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * @return renvoie la Tile de la plus proche Bonus Range
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private AiTile findClosestBONUSRANGE() throws StopRequestException {
 		checkInterruption();
@@ -787,6 +822,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * @return renvoie la Tile de la plus proche Bonus Bombe
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private AiTile findClosestBONUSBOMBE() throws StopRequestException {
 		checkInterruption();
@@ -826,6 +862,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * @return renvoie la Tile plus proche et Safe
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private AiTile findClosestClearTile() throws StopRequestException {
 		checkInterruption();
@@ -865,6 +902,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * @return renvoie une Tile ou on peut detruir plus de murs destructible
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public AiTile findTileForDestructible() throws StopRequestException {
 		checkInterruption();
@@ -927,6 +965,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * @return renvoie la Tile de la plus proche adversaire
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private AiTile findRivalToAttack() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -961,10 +1000,13 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * @param line 
+	 * 		Description manquante !
 	 * @param col 
+	 * 		Description manquante !
 	 * @return renvoie le nombre de voisins qui vont detruire si on pose une bombe a
 	 * cette Tile
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int countDestructibleVoisins(int line, int col)
 			throws StopRequestException {
@@ -1023,8 +1065,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	/**
 	 * @param a 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	public void goTroughPath(List<AiTile> a) throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -1040,9 +1083,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * controle si on a la chance de fuir.
 	 * @param range 
+	 * 		Description manquante !
 	 * @param bomb 
+	 * 		Description manquante !
 	 * @return renvoi une direction pour a fuir. 
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private Direction isCleanDirection(int range, AiTile bomb)
 			throws StopRequestException {
@@ -1055,9 +1101,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * controle s'il y a une tile a fuir
 	 * @param range 
+	 * 		Description manquante !
 	 * @param bomb 
+	 * 		Description manquante !
 	 * @return renvoi true si on a la chance de fuir
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean isRangeClean(int range, AiTile bomb)
 			throws StopRequestException {
@@ -1074,8 +1123,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/**
 	 * controle la path s'il y a un danger
 	 * @param array 
+	 * 		Description manquante !
 	 * @return renvoi true si la path est en danger
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean pathInDanger(List<AiTile> array)
 			throws StopRequestException {

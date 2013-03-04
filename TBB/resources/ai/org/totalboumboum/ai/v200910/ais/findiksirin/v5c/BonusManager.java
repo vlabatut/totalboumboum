@@ -25,7 +25,9 @@ public class BonusManager
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public BonusManager(FindikSirin ai) throws StopRequestException
 	{	ai.checkInterruption();
@@ -58,7 +60,9 @@ public class BonusManager
 	/** creation de la liste des bonus
 	 *  
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> bonusDestinations() throws StopRequestException{
 	ai.checkInterruption();
@@ -80,8 +84,9 @@ public class BonusManager
 	/** si il n'y a pas un bonus Reachable sur la zone du jeu
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean noBonusReachable() throws StopRequestException{
 		ai.checkInterruption();
@@ -97,8 +102,9 @@ public class BonusManager
 	/** si il n'y a pas un bonus sur la zone du jeu
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean noBonus() throws StopRequestException{
 		ai.checkInterruption();
@@ -107,8 +113,9 @@ public class BonusManager
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isBonusOver() throws StopRequestException{
 		ai.checkInterruption();
@@ -118,8 +125,9 @@ public class BonusManager
 	/** si la liste des bombes est vide, on cree une liste des murs pour destruire
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> bonusDestructions() throws StopRequestException{
 		ai.checkInterruption();
@@ -168,6 +176,7 @@ public class BonusManager
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -205,8 +214,9 @@ public class BonusManager
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isOnBonusDestruction() throws StopRequestException{
 		ai.checkInterruption();
@@ -217,8 +227,9 @@ public class BonusManager
 	/** retourne si on est arrive ou pas
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
@@ -236,7 +247,9 @@ public class BonusManager
 		return arrived;
 	}
 	/** on met a jour le chemin qu'on a choisit 
-	 * @throws StopRequestException */
+	 * @throws StopRequestException
+	 * 		Description manquante !
+	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();		
 		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
@@ -244,7 +257,9 @@ public class BonusManager
 	}
 	
 	/** si on est sur le chemin calculé 
-	 * @throws StopRequestException */
+	 * @throws StopRequestException
+	 * 		Description manquante !
+	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -258,8 +273,9 @@ public class BonusManager
 	/**
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isPathSecure() throws StopRequestException{
 		ai.checkInterruption();
@@ -281,7 +297,9 @@ public class BonusManager
 	/** si le chemin est encore sure
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption();	
@@ -297,8 +315,9 @@ public class BonusManager
 	/** 
 	 * le process de decision
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
