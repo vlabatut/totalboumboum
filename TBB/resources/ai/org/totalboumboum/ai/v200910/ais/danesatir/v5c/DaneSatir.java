@@ -87,7 +87,9 @@ public class DaneSatir extends ArtificialIntelligence
 	
 	/**
 	 * Make calculation according to State
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void calculAction() throws StopRequestException {
 		// avant tout : test d'interruption
@@ -293,6 +295,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Initialize Variables
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException 	{	
 		// avant tout : test d'interruption
@@ -308,6 +311,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Update Variables
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateEnvironment() throws StopRequestException {
 		// avant tout : test d'interruption
@@ -325,8 +329,9 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption();
@@ -335,8 +340,11 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Getter for PathFinder
 	 * @return current PathFinder
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 * @see PathFinder 
+	 * 		Description manquante !
 	 */
 	public PathFinder getPathFinder() throws StopRequestException {
 		checkInterruption();
@@ -346,8 +354,11 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Getter for Result
 	 * @return current result
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 * @see AiActionName
+	 * 		Description manquante !
 	 */
 	public AiAction getResult() throws StopRequestException {
 		checkInterruption();
@@ -357,7 +368,9 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param result
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setResult(AiAction result) throws StopRequestException {
 		checkInterruption();
@@ -370,8 +383,10 @@ public class DaneSatir extends ArtificialIntelligence
 	
 	/**
 	 * Get enemies without us
-	 * @return      the image at the specified URL
+	 * @return      
+	 * 		the image at the specified URL
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getEnemies() throws StopRequestException {
 		checkInterruption();

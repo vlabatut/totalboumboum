@@ -31,7 +31,9 @@ public class WallSuccessor extends BasicSuccessorCalculator {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public WallSuccessor(DaneSatir ai) throws StopRequestException {
 		this.ai=ai;

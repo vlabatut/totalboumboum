@@ -23,8 +23,11 @@ public class MyCost extends CostCalculator {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	MyCost(TimeMatrice time, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -33,7 +36,9 @@ public class MyCost extends CostCalculator {
 	}
 	/**
 	 * Calculate cost with priority Bonus and depriority Fire.
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException {

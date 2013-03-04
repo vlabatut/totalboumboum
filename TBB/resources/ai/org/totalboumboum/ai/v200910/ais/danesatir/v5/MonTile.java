@@ -21,7 +21,9 @@ public class MonTile {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param iter
+	 * 		Description manquante !
 	 */
 	MonTile(AiTile tile, int iter) {
 		this.setTile(tile);
@@ -31,6 +33,7 @@ public class MonTile {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 */
 	private void setTile(AiTile tile) {
 		this.tile = tile;
@@ -39,7 +42,7 @@ public class MonTile {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiTile getTile() {
 		return tile;
@@ -48,6 +51,7 @@ public class MonTile {
 	/**
 	 * 
 	 * @param iter
+	 * 		Description manquante !
 	 */
 	private void setIter(int iter) {
 		this.iter = iter;
@@ -56,7 +60,7 @@ public class MonTile {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getIter() {
 		return iter;

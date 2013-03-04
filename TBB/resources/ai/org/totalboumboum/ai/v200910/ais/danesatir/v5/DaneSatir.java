@@ -88,6 +88,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Make calculation according to State
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void calculAction() throws StopRequestException {
 		// avant tout : test d'interruption
@@ -293,6 +294,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Initialize Variables
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException 	{	
 		// avant tout : test d'interruption
@@ -308,6 +310,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Update Variables
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateEnvironment() throws StopRequestException {
 		// avant tout : test d'interruption
@@ -351,6 +354,7 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param result
+	 * 		Description manquante !
 	 */
 	public void setResult(AiAction result) {
 		if(result == null)
@@ -364,6 +368,7 @@ public class DaneSatir extends ArtificialIntelligence
 	 * Get enemies without us
 	 * @return      the image at the specified URL
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getEnemies() throws StopRequestException {
 		checkInterruption();

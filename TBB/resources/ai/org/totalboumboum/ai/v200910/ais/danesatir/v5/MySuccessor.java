@@ -29,8 +29,11 @@ public class MySuccessor extends SuccessorCalculator{
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public MySuccessor(DaneSatir ai,TimeMatrice time) throws StopRequestException {
 		this.ai=ai;
@@ -40,7 +43,9 @@ public class MySuccessor extends SuccessorCalculator{
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public MySuccessor(DaneSatir ai) throws StopRequestException {
 		this(ai,new TimeMatrice(ai));

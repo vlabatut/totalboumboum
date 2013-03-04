@@ -19,6 +19,7 @@ public class MyCost extends CostCalculator {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 */
 	MyCost(TimeMatrice time) {
 		this.time = time;

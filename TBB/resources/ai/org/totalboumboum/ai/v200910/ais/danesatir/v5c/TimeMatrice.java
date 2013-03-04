@@ -37,7 +37,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TimeMatrice(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -54,6 +56,7 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void sortBombes() throws StopRequestException {
 		ai.checkInterruption();
@@ -64,7 +67,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param bombes
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void createMatrice(List<AiBomb> bombes) throws StopRequestException {
 		ai.checkInterruption();
@@ -77,7 +82,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void virExpandBomb(AiTile tile) throws StopRequestException{
 		ai.checkInterruption();
@@ -123,7 +130,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void expandBomb(AiBomb bomb) throws StopRequestException {
 		// avant tout : test d'interruption
@@ -150,9 +159,11 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param a
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getTime(AiTile a) throws StopRequestException {
 		ai.checkInterruption();
@@ -162,8 +173,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getTime() throws StopRequestException {
 		ai.checkInterruption();
@@ -175,8 +187,11 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param a
+	 * 		Description manquante !
 	 * @param duration
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setTime(AiTile a, double duration) throws StopRequestException {
 		ai.checkInterruption();
@@ -186,10 +201,13 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param a
+	 * 		Description manquante !
 	 * @param justZero
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile mostSafeCase(AiTile a, boolean justZero) throws StopRequestException {
 		// avant tout : test d'interruption
@@ -224,8 +242,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile mostSafeCase() throws StopRequestException {
 		ai.checkInterruption();
@@ -237,9 +256,11 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param a
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile mostSafeCase(AiTile a) throws StopRequestException {
 		ai.checkInterruption();
@@ -249,10 +270,13 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param a1
+	 * 		Description manquante !
 	 * @param a2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isSaferThan(AiTile a1, AiTile a2) throws StopRequestException {
 		ai.checkInterruption();
@@ -270,10 +294,13 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public static double getTimeToExplode(AiBomb bomb,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -289,11 +316,15 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 * @param a
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public static boolean isSafe(TimeMatrice time,AiTile a,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();

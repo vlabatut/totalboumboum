@@ -23,7 +23,9 @@ public class BombComparator implements Comparator<AiBomb> {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public BombComparator(ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
@@ -34,6 +36,7 @@ public class BombComparator implements Comparator<AiBomb> {
 	 * Compare two bombs with ETA to explosion
 	 * @return default comparator values
 	 * @see AiBomb
+	 * 		Description manquante !
 	 */
 	@Override
 	public int compare(AiBomb arg0, AiBomb arg1) {
