@@ -24,7 +24,9 @@ public class EscapeManager
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public EscapeManager(FindikSirin ai) throws StopRequestException
 	{	ai.checkInterruption();
@@ -58,6 +60,7 @@ public class EscapeManager
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -93,8 +96,9 @@ public class EscapeManager
 	/** retourne si on est arrive ou pas
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
@@ -109,7 +113,9 @@ public class EscapeManager
 		return arrived;
 	}
 	/** on met a jour le chemin qu'on a choisit 
-	 * @throws StopRequestException */
+	 * @throws StopRequestException
+	 * 		Description manquante !
+	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();		
 		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
@@ -117,7 +123,9 @@ public class EscapeManager
 	}
 	
 	/** si on est sur le chemin calculé 
-	 * @throws StopRequestException */
+	 * @throws StopRequestException
+	 * 		Description manquante !
+	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -130,7 +138,10 @@ public class EscapeManager
 	
 	/** si le chemin est encore sure 
 	 * @return ?
-	 * @throws StopRequestException */
+	 * 		Description manquante !
+	 * @throws StopRequestException 
+	 * 		Description manquante !
+	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption();	
 		boolean result = true;
@@ -145,8 +156,9 @@ public class EscapeManager
 	/** le process de decision
 	 * 
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
