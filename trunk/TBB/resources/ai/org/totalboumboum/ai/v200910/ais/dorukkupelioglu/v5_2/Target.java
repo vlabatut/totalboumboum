@@ -46,7 +46,9 @@ public class Target
 	/**
 	 * 
 	 * @param dk
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Target(DorukKupelioglu dk) throws StopRequestException
 	{
@@ -62,6 +64,7 @@ public class Target
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void init()throws StopRequestException
 	{
@@ -174,8 +177,9 @@ public class Target
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction moveTo() throws StopRequestException
 	{
@@ -193,8 +197,9 @@ public class Target
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
@@ -206,7 +211,7 @@ public class Target
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean pathWorks()
 	{
@@ -216,8 +221,9 @@ public class Target
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean targetEnded() throws StopRequestException
 	{
@@ -228,8 +234,9 @@ public class Target
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean succeed() throws StopRequestException
 	{
@@ -240,8 +247,9 @@ public class Target
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean dropBomb() throws StopRequestException
 	{

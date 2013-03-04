@@ -218,6 +218,7 @@ public class DorukKupelioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void initFirst()throws StopRequestException
 	{
@@ -231,6 +232,7 @@ public class DorukKupelioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void init()throws StopRequestException
 	{
@@ -242,8 +244,9 @@ public class DorukKupelioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiHero getHero()throws StopRequestException
 	{
@@ -253,8 +256,9 @@ public class DorukKupelioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Matrix getMatrix() throws StopRequestException
 	{

@@ -39,7 +39,9 @@ public class Node {
 	 * @param parent le noeud parent de ce noeud
 	 * @param areaMatrix cost hesabı yaparken incelenen tile da ne olduğunu öğrenmek için
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Node(AiTile tile,AiTile end,Node parent,double[][] areaMatrix, ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
@@ -55,6 +57,7 @@ public class Node {
 	/**
 	 * Cette fonction va trouver les valeurs des G:cost , H:heuristique, F:la totale
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void putValues() throws StopRequestException
 	{	ai.checkInterruption();
@@ -89,6 +92,7 @@ public class Node {
 	/**
 	 * @return la valeur G:cost du noeud correspondant
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public double getG() throws StopRequestException
 	{	ai.checkInterruption();
@@ -98,6 +102,7 @@ public class Node {
 	/**
 	 * @return la valeur H:heuristique du noeud correspondant
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public double getH() throws StopRequestException
 	{	ai.checkInterruption();
@@ -107,6 +112,7 @@ public class Node {
 	/**
 	 * @return la valeur F du noeud correspondant
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public double getF() throws StopRequestException
 	{	ai.checkInterruption();
@@ -116,6 +122,7 @@ public class Node {
 	/**
 	 * @return le noeud parent du noeud correspondant
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Node getParent() throws StopRequestException
 	{	ai.checkInterruption();
@@ -125,6 +132,7 @@ public class Node {
 	/**
 	 * @return la case base du ce noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public AiTile getTile() throws StopRequestException
 	{	ai.checkInterruption();

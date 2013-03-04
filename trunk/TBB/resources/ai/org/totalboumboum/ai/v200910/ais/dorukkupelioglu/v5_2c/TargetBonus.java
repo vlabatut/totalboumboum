@@ -37,7 +37,9 @@ public class TargetBonus {
 	/**
 	 * 
 	 * @param dk
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TargetBonus(DorukKupelioglu dk)throws StopRequestException
 	{
@@ -70,8 +72,9 @@ public class TargetBonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction moveTo()throws StopRequestException
 	{
@@ -86,8 +89,9 @@ public class TargetBonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean pathAvailable() throws StopRequestException
 	{
@@ -118,8 +122,9 @@ public class TargetBonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean pathWorks() throws StopRequestException
 	{	dk.checkInterruption();
@@ -129,8 +134,9 @@ public class TargetBonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean succeed() throws StopRequestException
 	{
@@ -141,8 +147,9 @@ public class TargetBonus {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int PathLength() throws StopRequestException
 	{	dk.checkInterruption();
