@@ -95,6 +95,7 @@ public class Promeneur extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Si le moteur demande une interruption.
 	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -108,6 +109,7 @@ public class Promeneur extends ArtificialIntelligence
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
 	 * être différente de la case précédemment occupée
 	 * @throws StopRequestException 
+	 * 		Si le moteur demande une interruption.
 	 */
 	private void pickNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -158,9 +160,11 @@ public class Promeneur extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
+	 * 		Case.
 	 * @return
 	 * 		?
 	 * @throws StopRequestException
+	 * 		Si le moteur demande une interruption.
 	 */
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -183,9 +187,11 @@ public class Promeneur extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
+	 * 		Case.
 	 * @return
 	 * 		?
 	 * @throws StopRequestException
+	 * 		Si le moteur demande une interruption.
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -201,6 +207,7 @@ public class Promeneur extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Si le moteur demande une interruption.
 	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
