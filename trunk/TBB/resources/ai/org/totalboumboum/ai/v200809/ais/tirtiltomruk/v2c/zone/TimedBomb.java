@@ -30,11 +30,17 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param bomb
+	 * 		Description manquante !
 	 * @param releaseTime
+	 * 		Description manquante !
 	 * @param time
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TimedBomb(AiZone zone,AiBomb bomb,long releaseTime, long time, ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
@@ -56,8 +62,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public ZoneEnum getDanger() throws StopRequestException {
 		ai.checkInterruption();
@@ -67,7 +74,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param danger
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setDanger(ZoneEnum danger) throws StopRequestException {
 		ai.checkInterruption();
@@ -77,8 +86,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public long getRemainingTime() throws StopRequestException
 	{	ai.checkInterruption();
@@ -125,8 +135,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException {
 		ai.checkInterruption();
@@ -136,7 +147,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setZone(AiZone zone) throws StopRequestException {
 		ai.checkInterruption();
@@ -145,8 +158,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiBomb getBomb() throws StopRequestException {
 		ai.checkInterruption();
@@ -155,7 +169,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setBomb(AiBomb bomb) throws StopRequestException {
 		ai.checkInterruption();
@@ -164,8 +180,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public long getReleaseTime() throws StopRequestException {
 		ai.checkInterruption();
@@ -174,7 +191,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param releaseTime
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setReleaseTime(long releaseTime) throws StopRequestException {
 		ai.checkInterruption();
@@ -199,7 +218,9 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setTime(long time) throws StopRequestException {
 		ai.checkInterruption();

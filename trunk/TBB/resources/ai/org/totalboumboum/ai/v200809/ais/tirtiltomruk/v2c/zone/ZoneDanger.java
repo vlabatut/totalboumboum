@@ -50,8 +50,11 @@ public class ZoneDanger {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unchecked")
 	public ZoneDanger(AiZone zone, TirtilTomruk source) throws StopRequestException
@@ -74,6 +77,7 @@ public class ZoneDanger {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException
 	{
@@ -259,8 +263,9 @@ public class ZoneDanger {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire

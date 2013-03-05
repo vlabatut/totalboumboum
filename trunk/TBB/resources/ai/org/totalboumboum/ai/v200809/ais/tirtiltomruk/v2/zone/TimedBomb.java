@@ -26,9 +26,13 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param bomb
+	 * 		Description manquante !
 	 * @param releaseTime
+	 * 		Description manquante !
 	 * @param time
+	 * 		Description manquante !
 	 */
 	public TimedBomb(AiZone zone,AiBomb bomb,long releaseTime, long time)
 	{
@@ -49,7 +53,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public ZoneEnum getDanger() {
 		return danger;
@@ -57,6 +61,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param danger
+	 * 		Description manquante !
 	 */
 	public void setDanger(ZoneEnum danger) {
 		this.danger = danger;
@@ -64,7 +69,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public long getRemainingTime()
 	{
@@ -93,7 +98,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiZone getZone() {
 		return zone;
@@ -101,6 +106,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 */
 	public void setZone(AiZone zone) {
 		this.zone = zone;
@@ -108,7 +114,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiBomb getBomb() {
 		return bomb;
@@ -116,6 +122,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param bomb
+	 * 		Description manquante !
 	 */
 	public void setBomb(AiBomb bomb) {
 		this.bomb = bomb;
@@ -123,7 +130,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public long getReleaseTime() {
 		return releaseTime;
@@ -131,6 +138,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param releaseTime
+	 * 		Description manquante !
 	 */
 	public void setReleaseTime(long releaseTime) {
 		this.releaseTime = releaseTime;
@@ -149,6 +157,7 @@ public class TimedBomb {
 	/**
 	 * 
 	 * @param time
+	 * 		Description manquante !
 	 */
 	public void setTime(long time) {
 		this.time = time;

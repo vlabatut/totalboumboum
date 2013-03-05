@@ -25,7 +25,9 @@ public class NoeudComparator implements Comparator<Noeud> {
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public NoeudComparator(Noeud goal, ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();

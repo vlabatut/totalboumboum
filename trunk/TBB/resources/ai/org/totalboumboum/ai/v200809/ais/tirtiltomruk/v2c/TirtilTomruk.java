@@ -254,6 +254,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void pickNextTile() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -317,7 +318,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	private void explodeForBonus() throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
@@ -332,6 +333,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void checkDanger() throws StopRequestException {
 		checkInterruption(); // Appel obligatoire
@@ -344,8 +346,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption(); // Appel obligatoire
@@ -359,7 +364,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private LinkedList<AiTile> getEscapePath() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -424,7 +431,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiAction deplace() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -479,6 +488,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void initAI() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -575,6 +585,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void refreshTimedBombes() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -603,9 +614,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param path
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unchecked")
 	public double getPathDanger(LinkedList<AiTile> path)
@@ -669,8 +682,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * Null dndrebilir ha.
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public AiTile bombTileForBonus() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -804,8 +818,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isThereBlocDest() throws StopRequestException
 	{
@@ -826,8 +841,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Vector<TimedBomb> getTimedBombes() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -837,8 +853,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public long getTime() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -848,8 +865,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isBonusAccessible() throws StopRequestException
 	{
@@ -880,8 +898,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public LinkedList<AiTile> getBonusPath() throws StopRequestException
 	{
@@ -918,6 +937,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void pickBonus() throws StopRequestException
 	{
@@ -957,9 +977,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getTileDanger(AiTile tile) throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
@@ -984,9 +1006,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile attackRivalBombTile(AiHero hero) throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
@@ -1067,7 +1091,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void attackRival(AiHero hero) throws StopRequestException
 	{
@@ -1090,7 +1116,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void attackRivalBeta(AiHero hero) throws StopRequestException
 	{
@@ -1155,7 +1183,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param hero
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void attackRivalAlpha(AiHero hero) throws StopRequestException
 	{	checkInterruption();

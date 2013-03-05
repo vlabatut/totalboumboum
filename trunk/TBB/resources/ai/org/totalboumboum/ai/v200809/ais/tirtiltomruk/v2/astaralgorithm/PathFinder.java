@@ -34,10 +34,15 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @param mode
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public PathFinder(AiZone zone, AiTile target, TirtilTomruk source,
 			SearchModeEnum mode) throws StopRequestException {
@@ -73,11 +78,17 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param depart
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @param mode
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public PathFinder(AiZone zone, AiTile depart, AiTile target,
 			TirtilTomruk source, SearchModeEnum mode)
@@ -117,12 +128,19 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param simulatedOrAdaptedZone
+	 * 		Description manquante !
 	 * @param depart
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @param mode
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public PathFinder(AiZone zone, ZoneEnum[][] simulatedOrAdaptedZone,
 			AiTile depart, AiTile target, TirtilTomruk source,
@@ -230,6 +248,7 @@ public class PathFinder {
 	 * @param goal
 	 *            la case qu'on veut y arriver.
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void findPath(ZoneEnum[][] tab, int x, int y, Noeud goal)
 			throws StopRequestException {
@@ -342,8 +361,9 @@ public class PathFinder {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unchecked")
 	public LinkedList<AiTile> getPath() throws StopRequestException {
@@ -368,10 +388,15 @@ public class PathFinder {
 	/**
 	 * 
 	 * @param noeud
+	 * 		Description manquante !
 	 * @param mode
+	 * 		Description manquante !
 	 * @param direction
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean getConditions(Noeud noeud, SearchModeEnum mode,
 			Direction direction) throws StopRequestException {
