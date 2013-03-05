@@ -365,8 +365,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	 * Prend l'intersection entre le chmein du enemie-item
 	 * et de nous-item
 	 * @param enemy 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiTile EnemyAtTheGate(AiTile enemy)
 	{
@@ -408,8 +409,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	 * On suppose de mettre une bombe
 	 * On regarde si on sera en danger
 	 * @param temp 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean supposerBombe(AiTile temp){
 		try {
@@ -443,7 +445,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/**
 	 * Mettre a jour les tiles des enemies
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public List<AiTile> getEnemiesTile() {
 		try {
@@ -522,6 +524,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 */
 	public void calculeZoneAspect(AiZone zone) {
 		try {
@@ -533,7 +536,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean seCacher(){
 		return seCacher(false);
@@ -541,8 +544,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/**
 	 * Chercher une case pour se cacher
 	 * @param poserBombe 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean seCacher(boolean poserBombe) {
 		try {
@@ -573,9 +577,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/**
 	 * Regarde si il existe un danger sur le chemin chosit
 	 * @param target 
+	 * 		Description manquante !
 	 * @param placerBombe 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) {
 		try {
@@ -602,7 +608,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/**
 	 * Regarde si nous sommes arrive a la case cible
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean estCaseCible() {
 		try {
@@ -621,7 +627,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/**
 	 * Compte les nombres des SoftWalls restant
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int FindSoftWallNumber() {
 		try {

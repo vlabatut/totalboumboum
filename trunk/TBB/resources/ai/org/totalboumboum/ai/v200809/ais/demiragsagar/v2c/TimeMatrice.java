@@ -37,9 +37,13 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param defaultPortee
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TimeMatrice(AiZone zone,int defaultPortee, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -55,7 +59,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param defaultPortee
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setDefaultPortee(int defaultPortee) throws StopRequestException {
 		ai.checkInterruption();
@@ -64,9 +70,13 @@ public class TimeMatrice {
 	/**
 	 * Donner une valeur a une case de la matrice du temps
 	 * @param col 
+	 * 		Description manquante !
 	 * @param line 
+	 * 		Description manquante !
 	 * @param time 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void putTime(int col,int line,long time) throws StopRequestException {
 		ai.checkInterruption();
@@ -77,10 +87,13 @@ public class TimeMatrice {
 	 * Une case contient 0 s'il n y'a aucun danger 
 	 * Sinon il contient le temps restant d'une bombe
 	 * @param col 
+	 * 		Description manquante !
 	 * @param line 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public long getTime(int col,int line) throws StopRequestException {
 		ai.checkInterruption();
@@ -88,8 +101,11 @@ public class TimeMatrice {
 	}
 	/**
 	 * @param tile
+	 * 		Description manquante !
 	 * @param time
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void putTime(AiTile tile,long time) throws StopRequestException {
 		ai.checkInterruption();
@@ -98,9 +114,11 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public long getTime(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
@@ -109,6 +127,7 @@ public class TimeMatrice {
 	/**
 	 * Création de la matrice du temps
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void createTimeMatrice() throws StopRequestException {
 		ai.checkInterruption();
@@ -131,9 +150,11 @@ public class TimeMatrice {
 	 * S'il ya un mur dans une case on voit -1 
 	 * On augmente la valeur d'une case selon le nombre des bombes qui affectent cette case
 	 * @param zone 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int[][] getBombMatrice(AiZone zone) throws StopRequestException {
 		ai.checkInterruption();
@@ -189,6 +210,7 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void printTimeMatrice() throws StopRequestException {
 		ai.checkInterruption();
@@ -197,7 +219,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param nouvelleBombes
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void updateTimeMatrice(List<AiTile> nouvelleBombes) throws StopRequestException {
 		ai.checkInterruption();
@@ -292,11 +316,17 @@ public class TimeMatrice {
 	/**
 	 * Controle si les effets des bombes sont vrais
 	 * @param col 
+	 * 		Description manquante !
 	 * @param lig 
+	 * 		Description manquante !
 	 * @param temp2 
+	 * 		Description manquante !
 	 * @param port 
+	 * 		Description manquante !
 	 * @param nombre 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) throws StopRequestException {
 		ai.checkInterruption();
@@ -363,7 +393,9 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param temp
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void placerNouvelleBombe(AiTile temp) throws StopRequestException {
 		ai.checkInterruption();
@@ -440,9 +472,13 @@ public class TimeMatrice {
 	/**
 	 * 
 	 * @param temp
+	 * 		Description manquante !
 	 * @param portee
+	 * 		Description manquante !
 	 * @param min
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void diffuseEffetMatrice(AiTile temp, int portee, long min) throws StopRequestException {
 		ai.checkInterruption();

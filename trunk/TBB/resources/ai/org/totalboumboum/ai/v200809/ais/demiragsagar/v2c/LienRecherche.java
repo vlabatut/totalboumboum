@@ -24,7 +24,9 @@ public class LienRecherche {
 	 * @param origin noeud parent
 	 * @param target noeud fils
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public LienRecherche(Node origin, Node target, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -38,6 +40,7 @@ public class LienRecherche {
 	 * 
 	 * @return le noeud parent
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Node getOrigin() throws StopRequestException {
 		ai.checkInterruption();
@@ -49,6 +52,7 @@ public class LienRecherche {
 	 * 
 	 * @return le noeud fils
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Node getTarget() throws StopRequestException {
 		ai.checkInterruption();
