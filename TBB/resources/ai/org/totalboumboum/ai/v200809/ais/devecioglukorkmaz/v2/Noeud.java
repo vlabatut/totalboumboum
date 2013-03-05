@@ -29,6 +29,7 @@ public class Noeud {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 */
 	public Noeud(AiTile tile) {
 		this.tile = tile;
@@ -48,6 +49,7 @@ public class Noeud {
 	/**
 	 * 
 	 * @param iteration
+	 * 		Description manquante !
 	 */
 	protected void markVisited(int iteration) {
 		visited = true;
@@ -85,8 +87,9 @@ public class Noeud {
 	/**
 	 * 
 	 * @param goal
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getHeuristic(Noeud goal) {
 		int result = 0;

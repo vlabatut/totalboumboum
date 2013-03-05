@@ -25,7 +25,9 @@ public class Noeud {
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Noeud(ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -38,8 +40,11 @@ public class Noeud {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Noeud(AiTile tile, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -52,8 +57,9 @@ public class Noeud {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getTile() throws StopRequestException {
 		ai.checkInterruption();
@@ -63,7 +69,9 @@ public class Noeud {
 	/**
 	 * 
 	 * @param iteration
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	protected void markVisited(int iteration) throws StopRequestException {
 		ai.checkInterruption();
@@ -74,8 +82,9 @@ public class Noeud {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isVisited() throws StopRequestException {
 		ai.checkInterruption();
@@ -85,8 +94,9 @@ public class Noeud {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getIteration() throws StopRequestException {
 		ai.checkInterruption();
@@ -118,9 +128,11 @@ public class Noeud {
 	/**
 	 * 
 	 * @param goal
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getHeuristic(Noeud goal) throws StopRequestException {
 		ai.checkInterruption();
