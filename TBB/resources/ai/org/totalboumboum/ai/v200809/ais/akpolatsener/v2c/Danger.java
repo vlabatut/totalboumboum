@@ -32,7 +32,9 @@ public class Danger {
 	/**
 	 * 
 	 * @param as
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Danger(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
@@ -45,7 +47,9 @@ public class Danger {
 	 * trouve le danger la plus proche à une case donnée
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	void findClosest(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
@@ -76,8 +80,9 @@ public class Danger {
 	 * retourne le danger la plus proche
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Object getClosestDanger() throws StopRequestException {
 		as.checkInterruption();
@@ -88,7 +93,9 @@ public class Danger {
 	 * retourne la bombe la plus proche à une case donnée
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	AiBomb findClosestBomb() throws StopRequestException {
 		as.checkInterruption();
@@ -118,7 +125,9 @@ public class Danger {
 	 * retourne la feu la plus proche à une case donnée
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	AiFire findClosestFire() throws StopRequestException {
 		as.checkInterruption();
@@ -149,9 +158,11 @@ public class Danger {
 	 * donnée
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getHypotenuseToDanger(AiTile tile)
 			throws StopRequestException {
@@ -174,8 +185,11 @@ public class Danger {
 	 * case donnée
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	double getManhattanToDanger(AiTile tile) throws StopRequestException {
 		as.checkInterruption();

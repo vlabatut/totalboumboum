@@ -27,7 +27,9 @@ public class TileControl {
 	/**
 	 * 
 	 * @param as
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public TileControl(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
@@ -37,9 +39,11 @@ public class TileControl {
 	/**
 	 * renvoie la liste des tous les voisins
 	 * @param tile 
+	 * 		Description manquante !
 	 * 
 	 * @return liste des voisins sans condition
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> findAllNeighbors(AiTile tile)
 			throws StopRequestException {
@@ -60,6 +64,7 @@ public class TileControl {
 	/**
 	 * filtre la liste des tous voisins d'apres les parametres
 	 * @param tile 
+	 * 		Description manquante !
 	 * 
 	 * @param bombDanger
 	 *            true quand on veut filtrer les voisins qui est sous danger
@@ -78,6 +83,7 @@ public class TileControl {
 	 *            true quand on veut filtrer les voisins qui a des bonuses
 	 * @return liste des voisins filtré
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<AiTile> filterNeighbors(AiTile tile, boolean bombDanger,
 			boolean bomb, boolean fire, boolean block, boolean enemy,
@@ -102,6 +108,7 @@ public class TileControl {
 	/**
 	 * controler une case
 	 * @param tile 
+	 * 		Description manquante !
 	 * 
 	 * @param bombDanger
 	 *            true quand on veut le controler s'il existe
@@ -118,8 +125,9 @@ public class TileControl {
 	 * @param bonus
 	 *            true quand on veut le controler s'il existe
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean checkTile(AiTile tile, boolean bombDanger, boolean bomb,
 			boolean fire, boolean block, boolean enemy, boolean softwall,
@@ -153,8 +161,10 @@ public class TileControl {
 	 * le nombre des voisins de la case donnée
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return le nombre des voisins de la case donnée
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getNeighborsCount(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
@@ -169,10 +179,12 @@ public class TileControl {
 	 * trier les cases d'apres la parametre
 	 * 
 	 * @param tiles
+	 * 		Description manquante !
 	 * @param targetOrDanger
 	 *            true si c'est pour la cible, false sinon.
 	 * @return la liste des cases triés
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	List<AiTile> sortTiles(List<AiTile> tiles, boolean targetOrDanger)
 			throws StopRequestException {
@@ -208,9 +220,12 @@ public class TileControl {
 	 * donne la distance directe entre deux cases
 	 * 
 	 * @param origin
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 * @return distance entre ces 2 cases
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getHypotenuseTo(AiTile origin, AiTile target)
 			throws StopRequestException {
@@ -227,9 +242,12 @@ public class TileControl {
 	 * renvoie le nombre de Manhattan entre deux cases..
 	 * 
 	 * @param origin
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 * @return Manhattan distance
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getManhattanTo(AiTile origin, AiTile target)
 			throws StopRequestException {
@@ -248,8 +266,10 @@ public class TileControl {
 	 * determine si une case est dans la portée d'une bombe
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return true si elle est, false sinon
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isInBombRange(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
@@ -271,9 +291,12 @@ public class TileControl {
 	 * controle la case dans une direction donnés
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param dir 
+	 * 		Description manquante !
 	 * @return true s'il n'ya pas de danger dans cette direction
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	boolean checkTilesInDirection(AiTile tile, Direction dir)
 			throws StopRequestException {
@@ -303,10 +326,13 @@ public class TileControl {
 	 * controle s'il y a de danger derrier à un coin
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param dir
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean checkDangerBehindCorner(AiTile tile, Direction dir)
 			throws StopRequestException {
@@ -339,9 +365,11 @@ public class TileControl {
 	 * donne la direction le mieux pour arriver à une case cible.
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Direction prisonBreak(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
