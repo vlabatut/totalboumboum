@@ -129,6 +129,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -142,9 +143,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
 	 * être différente de la case précédemment occupée
 	 * @param tile 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -167,9 +170,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -185,6 +190,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -213,7 +219,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	private void pickNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -267,8 +273,9 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 * renvoi la liste des bombes qui me menacent
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private List<AiBomb> dangerousBombs() throws StopRequestException{
 		
@@ -301,9 +308,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 *  isInDanger regarde a tile s'il y a danger
 	 * @param tile 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private boolean isInDanger(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -360,11 +369,15 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 *  est qu'il y a un block entre les deux line
 	 * @param tile1 
+	 * 		Description manquante !
 	 * @param tile2 
+	 * 		Description manquante !
 	 * @param zone 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private boolean isThereBlockBetween(AiTile tile1, AiTile tile2, AiZone zone)throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -414,9 +427,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 * regarde a direction entree comme un parametre (danger ou safe)
 	 * @param dir 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private boolean isItDangerousDir(Direction dir) throws StopRequestException{
 
@@ -448,9 +463,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/**
 	 * renvoi la liste des directions possibles
 	 * @param tile 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private List<Direction> getPossibleDirs(AiTile tile) throws StopRequestException{
 		
@@ -476,8 +493,9 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 	/**
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	// le comportement de promeneur
 	private AiAction getNextTile() throws StopRequestException
@@ -528,6 +546,4 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		result = new AiAction(AiActionName.MOVE,direction);
 	return result;
 	}
-	
-	
 }
