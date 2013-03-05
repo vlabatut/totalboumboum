@@ -29,9 +29,13 @@ public class CostTile  {
 	/**
 	 * 
 	 * @param CurrentAiTile
+	 * 		Description manquante !
 	 * @param currentcost
+	 * 		Description manquante !
 	 * @param ComparedAiTile
+	 * 		Description manquante !
 	 * @param FirstDirection
+	 * 		Description manquante !
 	 */
 	public CostTile(AiTile CurrentAiTile, int currentcost, AiTile ComparedAiTile,Direction FirstDirection){
 		
@@ -49,7 +53,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getCost(){
 		
@@ -60,7 +64,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getHeuristic(){
 		
@@ -71,7 +75,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiTile getAiTile(){
 		
@@ -88,7 +92,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public Direction getFirstDirection(){
 		
@@ -99,6 +103,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @param a
+	 * 		Description manquante !
 	 */
 	public void setmarkVisited(boolean a){
 	
@@ -109,7 +114,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean getmarkVisited(){
 		
@@ -120,6 +125,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @param danger
+	 * 		Description manquante !
 	 */
 	public void setinDanger(boolean danger){
 		
@@ -130,7 +136,7 @@ public class CostTile  {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean getinDanger(){
 		

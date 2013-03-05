@@ -20,7 +20,9 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 	/**
 	 * 
 	 * @param col
+	 * 		Description manquante !
 	 * @param line
+	 * 		Description manquante !
 	 */
 	public DangerPriorityCostTileComparator(int col, int line) {
 		super();

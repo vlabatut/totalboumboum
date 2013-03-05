@@ -22,9 +22,13 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 	/**
 	 * 
 	 * @param col
+	 * 		Description manquante !
 	 * @param line
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DangerPriorityCostTileComparator(int col, int line, ArtificialIntelligence  ai) throws StopRequestException {
 		ai.checkInterruption();

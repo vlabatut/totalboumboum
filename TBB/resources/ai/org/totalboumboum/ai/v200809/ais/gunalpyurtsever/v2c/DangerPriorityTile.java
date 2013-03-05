@@ -23,9 +23,13 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param dangerpriority
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DangerPriorityTile(AiTile tile, int dangerpriority,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();		
@@ -36,8 +40,9 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getTile() throws StopRequestException {
 		ai.checkInterruption();		
@@ -47,8 +52,9 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getDangerpriority() throws StopRequestException {
 		ai.checkInterruption();		
@@ -57,7 +63,9 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @param dangerpriority
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setDangerpriority(int dangerpriority) throws StopRequestException {
 		ai.checkInterruption();		
