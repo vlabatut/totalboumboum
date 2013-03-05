@@ -180,6 +180,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void init() throws StopRequestException{
 		checkInterruption();
@@ -266,8 +267,9 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 */
 	/**
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -355,7 +357,9 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private LinkedList<AiTile> safeZone() throws StopRequestException
 	{	checkInterruption(); // APPEL OBLIGATOIRE
@@ -413,8 +417,9 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	
 	/**
 	 * @param targettile 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	private void pickNextTile(AiTile targettile) throws StopRequestException {
 		checkInterruption();
@@ -459,7 +464,9 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile findPath() throws StopRequestException {
 		checkInterruption();
@@ -498,7 +505,9 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile getClosestDestructibleBlock() throws StopRequestException 
 	{	checkInterruption();
@@ -659,9 +668,11 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	
 	/**
 	 * @param tile 
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException 
 	{
@@ -705,8 +716,9 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean isThereBonusAccessible() throws StopRequestException
 	{
@@ -725,8 +737,9 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getClosestBonus() throws StopRequestException
 	{
