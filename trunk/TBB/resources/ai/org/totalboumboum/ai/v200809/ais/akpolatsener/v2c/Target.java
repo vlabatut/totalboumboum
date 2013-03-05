@@ -32,7 +32,9 @@ public class Target {
 	/**
 	 * 
 	 * @param as
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Target(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
@@ -46,7 +48,9 @@ public class Target {
 	 * trouve le cible la plus proche à une case donnée
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	void findClosest(AiTile tile) throws StopRequestException {
@@ -80,8 +84,9 @@ public class Target {
 	 * retourne le cible la plus proche
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Object getClosestTarget() throws StopRequestException {
 		as.checkInterruption();
@@ -92,7 +97,9 @@ public class Target {
 	 * retourne l'enemie la plus proche à une case donnée
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	AiHero findClosestEnemy() throws StopRequestException {
 		as.checkInterruption();
@@ -126,7 +133,9 @@ public class Target {
 	 * retourne le bonus la plus proche à une case donnée
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	AiItem findClosestBonus() throws StopRequestException {
 		as.checkInterruption();
@@ -157,9 +166,11 @@ public class Target {
 	 * donnée
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getHypotenuseToTarget(AiTile tile)
 			throws StopRequestException {
@@ -179,9 +190,11 @@ public class Target {
 	 * case donnée
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getManhattanToTarget(AiTile tile) throws StopRequestException {
 		as.checkInterruption();

@@ -31,7 +31,9 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 	 * pour que la comparaison soit d'apres d'une danger
 	 * 
 	 * @param as
+	 * 		Description manquante !
 	 * @param danger
+	 * 		Description manquante !
 	 */
 	public void addDanger(AkpolatSener as, Danger danger) {
 		this.as = as;
@@ -43,7 +45,9 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 	 * pour que la comparaison soit d'apres d'une cible
 	 * 
 	 * @param as
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 */
 	public void addTarget(AkpolatSener as, Target target) {
 		this.as = as;
