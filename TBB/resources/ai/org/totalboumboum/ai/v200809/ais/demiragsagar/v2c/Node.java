@@ -23,9 +23,13 @@ public class Node {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @param goal
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Node(AiTile courant, AiTile goal, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -37,7 +41,9 @@ public class Node {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Node(AiTile courant) throws StopRequestException {
 		ai.checkInterruption();
@@ -47,8 +53,11 @@ public class Node {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @param heuristic
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Node(AiTile courant,double heuristic) throws StopRequestException {
 		ai.checkInterruption();
@@ -59,8 +68,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getHeuristic() throws StopRequestException {
 		ai.checkInterruption();
@@ -70,7 +80,9 @@ public class Node {
 	/**
 	 * 
 	 * @param lastTile
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void calculeHeuristic(AiTile lastTile) throws StopRequestException {
 		ai.checkInterruption();
@@ -81,9 +93,11 @@ public class Node {
 	/**
 	 * 
 	 * @param test
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean memeCoordonnees(Node test) throws StopRequestException {
 		ai.checkInterruption();
@@ -95,8 +109,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTile getTile() throws StopRequestException
 	{	ai.checkInterruption();

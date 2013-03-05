@@ -19,7 +19,9 @@ public class Node {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @param goal
+	 * 		Description manquante !
 	 */
 	public Node(AiTile courant, AiTile goal) {
 		this.tile = courant;
@@ -28,6 +30,7 @@ public class Node {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 */
 	public Node(AiTile courant) {
 		this.tile = courant;
@@ -36,7 +39,9 @@ public class Node {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @param heuristic
+	 * 		Description manquante !
 	 */
 	public Node(AiTile courant,double heuristic) {
 		this.tile = courant;
@@ -45,7 +50,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public double getHeuristic() {
 		return heuristic;
@@ -54,6 +59,7 @@ public class Node {
 	/**
 	 * 
 	 * @param lastTile
+	 * 		Description manquante !
 	 */
 	public void calculeHeuristic(AiTile lastTile) {
 		//this.heuristic = (Math.pow(lastTile.getCol() - tile.getCol(), 2) + Math.pow(lastTile.getLine() - tile.getLine(), 2));
@@ -63,8 +69,9 @@ public class Node {
 	/**
 	 * 
 	 * @param test
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean memeCoordonnees(Node test) {
 		return this.getTile().getCol() == test.getTile().getCol()
@@ -75,7 +82,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiTile getTile()
 	{

@@ -35,9 +35,13 @@ public class AStar {
 	/**
 	 * 
 	 * @param start
+	 * 		Description manquante !
 	 * @param end
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AStar(AiTile start, AiTile end, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -50,9 +54,13 @@ public class AStar {
 	/**
 	 * 
 	 * @param start
+	 * 		Description manquante !
 	 * @param end
+	 * 		Description manquante !
 	 * @param debug
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AStar(AiTile start, AiTile end, boolean debug) throws StopRequestException {
 		ai.checkInterruption();
@@ -64,6 +72,7 @@ public class AStar {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void init() throws StopRequestException {
 		ai.checkInterruption();
@@ -73,8 +82,11 @@ public class AStar {
 	/**
 	 * 
 	 * @param parent
+	 * 		Description manquante !
 	 * @param fils
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void formeLien(Node parent, Node fils) throws StopRequestException {
 		ai.checkInterruption();
@@ -85,9 +97,11 @@ public class AStar {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Iterator<Node> developNode(AiTile courant) throws StopRequestException {
 		ai.checkInterruption();
@@ -134,6 +148,7 @@ public class AStar {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void formeArbre() throws StopRequestException {
 		ai.checkInterruption();
@@ -188,8 +203,9 @@ public class AStar {
 	/**
 	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException *
+	 * 		Description manquante !
 	 */
 	public LinkedList<Node> getPath() throws StopRequestException { 
 		ai.checkInterruption();
@@ -213,9 +229,11 @@ public class AStar {
 	/**
 	 * On trouve le parent d'un noeud 
 	 * @param child 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public LienRecherche getParentLink(Node child) throws StopRequestException {
 		ai.checkInterruption();
@@ -235,9 +253,11 @@ public class AStar {
 	/**
 	 * On trouve les fils d'un noeud
 	 * @param node 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public List<Node> getChildrenLinks(Node node) throws StopRequestException {
 		ai.checkInterruption();
@@ -256,8 +276,9 @@ public class AStar {
 	 *ou on peut poser des bombes
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public List<Node> getFils() throws StopRequestException
 	{	ai.checkInterruption();

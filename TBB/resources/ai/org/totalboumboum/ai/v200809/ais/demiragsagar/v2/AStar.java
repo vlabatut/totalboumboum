@@ -31,7 +31,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param start
+	 * 		Description manquante !
 	 * @param end
+	 * 		Description manquante !
 	 */
 	public AStar(AiTile start, AiTile end) {
 		this.firstTile = start;
@@ -42,8 +44,11 @@ public class AStar {
 	/**
 	 * 
 	 * @param start
+	 * 		Description manquante !
 	 * @param end
+	 * 		Description manquante !
 	 * @param debug
+	 * 		Description manquante !
 	 */
 	public AStar(AiTile start, AiTile end, boolean debug) {
 		this.firstTile = start;
@@ -61,7 +66,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param parent
+	 * 		Description manquante !
 	 * @param fils
+	 * 		Description manquante !
 	 */
 	public void formeLien(Node parent, Node fils) {
 		LienRecherche link = new LienRecherche(parent, fils);
@@ -71,8 +78,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public Iterator<Node> developNode(AiTile courant) {
 		Vector<Node> result = new Vector<Node>();
@@ -174,7 +182,7 @@ public class AStar {
 	/**
 	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public LinkedList<Node> getPath() { 
 		LinkedList<Node> path;
@@ -196,8 +204,9 @@ public class AStar {
 	/**
 	 * On trouve le parent d'un noeud 
 	 * @param child 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public LienRecherche getParentLink(Node child) {
 		LienRecherche result = null;
@@ -215,8 +224,9 @@ public class AStar {
 	/**
 	 * On trouve les fils d'un noeud
 	 * @param node 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public List <Node> getChildrenLinks(Node node) {
 		List <Node> result = new ArrayList<Node>();
@@ -233,7 +243,7 @@ public class AStar {
 	//ou on peut poser des bombes
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public List<Node> getFils()
 	{
