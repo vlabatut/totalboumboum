@@ -25,10 +25,15 @@ public class Link {
 	/**
 	 * 
 	 * @param p
+	 * 		Description manquante !
 	 * @param c
+	 * 		Description manquante !
 	 * @param a
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Link(Node p ,Node c, AiAction a, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
@@ -41,8 +46,9 @@ public class Link {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiAction getAction() throws StopRequestException {
 		ai.checkInterruption();
@@ -52,8 +58,9 @@ public class Link {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Node getParent() throws StopRequestException {
 		ai.checkInterruption();
@@ -63,8 +70,9 @@ public class Link {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Node getChild() throws StopRequestException {
 		ai.checkInterruption();

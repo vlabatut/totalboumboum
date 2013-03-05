@@ -32,12 +32,19 @@ public class Node {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @param cost
+	 * 		Description manquante !
 	 * @param t
+	 * 		Description manquante !
 	 * @param depth
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Node(int line, int col, double cost, Tree t, int depth, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -53,10 +60,13 @@ public class Node {
 	/**
 	 * 
 	 * @param start
+	 * 		Description manquante !
 	 * @param end
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  double getH(Node start, Node end) throws StopRequestException{
 		ai.checkInterruption();
@@ -93,8 +103,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  double getCost() throws StopRequestException {
 		ai.checkInterruption();
@@ -104,7 +115,9 @@ public class Node {
 	/**
 	 * 
 	 * @param cost
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  void setCost(int cost) throws StopRequestException {
 		ai.checkInterruption();
@@ -114,8 +127,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  boolean isVisited() throws StopRequestException {
 		ai.checkInterruption();
@@ -125,7 +139,9 @@ public class Node {
 	/**
 	 * 
 	 * @param visited
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  void setVisited(boolean visited) throws StopRequestException {
 		ai.checkInterruption();
@@ -135,8 +151,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  String getName() throws StopRequestException{
 		ai.checkInterruption();
@@ -147,8 +164,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  AiTile convertToTile() throws StopRequestException{
 		ai.checkInterruption();
@@ -159,8 +177,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  int getLine() throws StopRequestException {
 		ai.checkInterruption();
@@ -170,7 +189,9 @@ public class Node {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  void setLine(int line) throws StopRequestException {
 		ai.checkInterruption();
@@ -180,8 +201,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  int getCol() throws StopRequestException {
 		ai.checkInterruption();
@@ -191,7 +213,9 @@ public class Node {
 	/**
 	 * 
 	 * @param col
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  void setCol(int col) throws StopRequestException {
 		ai.checkInterruption();
@@ -201,8 +225,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getDepth() throws StopRequestException {
 		ai.checkInterruption();
@@ -212,7 +237,9 @@ public class Node {
 	/**
 	 * 
 	 * @param depth
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setDepth(int depth) throws StopRequestException {
 		ai.checkInterruption();

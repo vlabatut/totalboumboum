@@ -21,8 +21,11 @@ public class Link {
 	/**
 	 * 
 	 * @param p
+	 * 		Description manquante !
 	 * @param c
+	 * 		Description manquante !
 	 * @param a
+	 * 		Description manquante !
 	 */
 	public Link(Node p ,Node c, AiAction a){
 		

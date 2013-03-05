@@ -24,9 +24,13 @@ public class NodeComparator implements Comparator<Node>
 	/**
 	 * 
 	 * @param startNode
+	 * 		Description manquante !
 	 * @param endNode
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public NodeComparator(Node startNode, Node endNode, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();

@@ -33,9 +33,13 @@ public class Tree {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Tree(int line, int col, KokciyanMazmanoglu ai) throws StopRequestException{
 		ai.checkInterruption();
@@ -49,8 +53,9 @@ public class Tree {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Node getRoot() throws StopRequestException {
 		km.checkInterruption();
@@ -60,9 +65,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean containsNode(Node node) throws StopRequestException
 	{	km.checkInterruption();
@@ -79,10 +86,13 @@ public class Tree {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  Node getNodefromTree(int line, int col) throws StopRequestException
 	{	
@@ -105,9 +115,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  Link getParentLink(Node node) throws StopRequestException
 	{	
@@ -129,9 +141,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  Vector<Link> getPath(Node node) throws StopRequestException
 	{
@@ -155,7 +169,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  void markVisitedNod(Node node) throws StopRequestException{
 		km.checkInterruption();
@@ -165,9 +181,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  Iterator<Link> developNode(Node node) throws StopRequestException{
 		km.checkInterruption();
@@ -206,8 +224,9 @@ public class Tree {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  Node getFinalNode() throws StopRequestException {
 		km.checkInterruption();
@@ -217,7 +236,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param finalNode
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  void setFinalNode(Node finalNode) throws StopRequestException {
 		km.checkInterruption();
@@ -227,9 +248,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  boolean isFinalNode(Node node) throws StopRequestException{
 		km.checkInterruption();
@@ -240,9 +263,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  Node convertToNode(AiTile tile) throws StopRequestException{
 		km.checkInterruption();
@@ -255,8 +280,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param link
+	 * 		Description manquante !
 	 * @param vLink
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  void addLink(Link link, Vector<Link> vLink) throws StopRequestException {
 		km.checkInterruption();

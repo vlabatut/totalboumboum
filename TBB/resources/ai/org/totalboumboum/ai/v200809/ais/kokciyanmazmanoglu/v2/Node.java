@@ -29,10 +29,15 @@ public class Node {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 * @param col
+	 * 		Description manquante !
 	 * @param cost
+	 * 		Description manquante !
 	 * @param t
+	 * 		Description manquante !
 	 * @param depth
+	 * 		Description manquante !
 	 */
 	public Node(int line, int col, double cost, Tree t, int depth) {
 		super();
@@ -47,9 +52,11 @@ public class Node {
 	/**
 	 * 
 	 * @param start
+	 * 		Description manquante !
 	 * @param end
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public  double getH(Node start, Node end){
 		double result;
@@ -82,7 +89,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public  double getCost() {
 		return cost;
@@ -91,6 +98,7 @@ public class Node {
 	/**
 	 * 
 	 * @param cost
+	 * 		Description manquante !
 	 */
 	public  void setCost(int cost) {
 		this.cost = cost;
@@ -99,7 +107,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public  boolean isVisited() {
 		return visited;
@@ -108,6 +116,7 @@ public class Node {
 	/**
 	 * 
 	 * @param visited
+	 * 		Description manquante !
 	 */
 	public  void setVisited(boolean visited) {
 		this.visited = visited;
@@ -116,7 +125,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public  String getName(){
 		
@@ -126,8 +135,9 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public  AiTile convertToTile() throws StopRequestException{
 		tree.km.checkInterruption();
@@ -137,7 +147,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public  int getLine() {
 		return line;
@@ -146,6 +156,7 @@ public class Node {
 	/**
 	 * 
 	 * @param line
+	 * 		Description manquante !
 	 */
 	public  void setLine(int line) {
 		this.line = line;
@@ -154,7 +165,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public  int getCol() {
 		return col;
@@ -163,6 +174,7 @@ public class Node {
 	/**
 	 * 
 	 * @param col
+	 * 		Description manquante !
 	 */
 	public  void setCol(int col) {
 		this.col = col;
@@ -171,7 +183,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getDepth() {
 		return depth;
@@ -180,6 +192,7 @@ public class Node {
 	/**
 	 * 
 	 * @param depth
+	 * 		Description manquante !
 	 */
 	public void setDepth(int depth) {
 		this.depth = depth;

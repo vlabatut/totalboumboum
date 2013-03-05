@@ -18,7 +18,9 @@ public class NodeComparator implements Comparator<Node>
 	/**
 	 * 
 	 * @param startNode
+	 * 		Description manquante !
 	 * @param endNode
+	 * 		Description manquante !
 	 */
 	public NodeComparator(Node startNode, Node endNode){
 		this.start = startNode;
