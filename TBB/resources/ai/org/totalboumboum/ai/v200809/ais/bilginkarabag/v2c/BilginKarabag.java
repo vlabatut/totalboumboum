@@ -90,6 +90,7 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -105,6 +106,7 @@ public class BilginKarabag extends ArtificialIntelligence {
 	 * occupée
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void pickNextTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -166,8 +168,11 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
@@ -191,8 +196,11 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -208,6 +216,7 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void checkNextTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -233,8 +242,11 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean dangerous(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -267,9 +279,13 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tileFrom
+	 * 		Description manquante !
 	 * @param tileTo
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean foundBlock(AiTile tileFrom, AiTile tileTo)
 			throws StopRequestException {
@@ -320,8 +336,11 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param currentTile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile getSafeTile(AiTile currentTile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -400,9 +419,13 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param ownHero
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isThereBomb(AiZone zone, AiHero ownHero) throws StopRequestException {
 		checkInterruption();
@@ -449,9 +472,13 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param ownHero
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isThereWall(AiZone zone, AiHero ownHero) throws StopRequestException {
 		checkInterruption();
@@ -484,8 +511,11 @@ public class BilginKarabag extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isSettingBombSafe(AiZone zone) throws StopRequestException {
 		checkInterruption();
