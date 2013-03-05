@@ -54,6 +54,7 @@ public class Map {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 */
 	public Map(AiZone zone) {
 		this.map = zone;
@@ -319,9 +320,11 @@ public class Map {
 	 * cest le plus difficle condition a obtenir et naturellemnt cest le plus
 	 * sur
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean isWalkable(int x1, int y1) {
 
@@ -338,9 +341,11 @@ public class Map {
 
 	/** nous allons lutiliser pour senfuire car on peut passer par les flmmes 
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean isRunnable(int x1, int y1) {
 
@@ -365,9 +370,11 @@ public class Map {
 	 * on va utiliser cette methode pour voir sil ya qqch quon peut acceder en
 	 * laiissant des bombes car elle peut avoir des murs dest
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean isReachable(int x1, int y1) {
 
@@ -390,9 +397,11 @@ public class Map {
 	 * deux bombes en meme temps on //ne bouge pas car on voit comme on na pas
 	 * de lieu pour se cacher
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public boolean isNoWhereElse(int x1, int y1) {
 
@@ -416,8 +425,11 @@ public class Map {
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @param range 
+	 * 		Description manquante !
 	 */
 
 	public void setbombeposs(int x1, int y1, int range) {
@@ -510,7 +522,9 @@ public class Map {
 	/** qd on transforme un bombe possible a un bombe reele
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 */
 	public void setbombe(int x1, int y1) {
 		this.returnMatrix()[x1][y1] = Etat.BOMBE;

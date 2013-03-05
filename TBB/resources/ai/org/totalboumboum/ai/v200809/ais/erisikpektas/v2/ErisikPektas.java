@@ -224,7 +224,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	/**
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -236,8 +236,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/** pour laiisser de la bombe
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("static-access")
 	public AiAction laisser() throws StopRequestException {
@@ -275,6 +276,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * destructibles il laiise des bombes( exlploser()) sil existe un autre
 	 * heros proche au notre il laisse des bombes grace a la fonc alentours
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("static-access")
 	public void avancer() throws StopRequestException {
@@ -512,10 +514,11 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	/**
 	 * @param selection 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	public AiTile sidanger(boolean selection) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -551,6 +554,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * pour controler sil se trouve un bonus ou un adversaire dans le jeu quon
 	 * peut acceder en explosant les murs destructibles
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("static-access")
 	public void explosion() throws StopRequestException {
@@ -732,6 +736,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * cette fonction sert a controler sil se trouve un bonus ou adversaire quon
 	 * peut acceder en marchant par des cases sures
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("static-access")
 	public void choisir() throws StopRequestException {
@@ -862,6 +867,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * cest une fonc qui collecte les temps passe des la creation des bombes et
 	 * des flmmes feus
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("static-access")
 	private void setdangerous() throws StopRequestException {
@@ -915,10 +921,13 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param xx
+	 * 		Description manquante !
 	 * @param yy
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isdangerous(int xx, int yy) throws StopRequestException
 
@@ -941,10 +950,13 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/** pour prendre le temps ecoule depuis la creation de la bombe
 	 * 
 	 * @param xx
+	 * 		Description manquante !
 	 * @param yy
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private long getdangerous(int xx, int yy) throws StopRequestException
 
@@ -961,7 +973,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 	}
 
 	/** trouve le dern,er bombe mis 
-	 * @throws StopRequestException */
+	 * @throws StopRequestException 
+	 * 		Description manquante !
+	 * */
 	private void getnewest() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		moresafe = new LinkedList<AiTile>();
@@ -1014,8 +1028,11 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * la fonction qui controle la securite dune case grace a la fonc de //
 	 * isWalkable de la classe map
 	 * @param tile 
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private boolean controle2(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -1037,10 +1054,15 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * cases definies comme danger aussi sil est 2 on ne peut que passer par des
 	 * cases sures
 	 * @param c 
+	 * 		Description manquante !
 	 * @param l 
+	 * 		Description manquante !
 	 * @param selection 
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private Collection<AiTile> securite(int c, int l, int selection)
 			throws StopRequestException {
@@ -1091,9 +1113,11 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// burnir)
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean existe(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -1121,9 +1145,11 @@ public class ErisikPektas extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public boolean impasse(AiTile tile) throws StopRequestException {
 		// avant tout : test d'interruption
@@ -1161,7 +1187,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 	 * on simule une bombe et si ladversaire na pas dendroit pour senfuire et si
 	 * on la on met ce bombe
 	 * @param at 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void attaque(boolean at) throws StopRequestException {
 
@@ -1225,8 +1253,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// controler sil ya quelquun autour de nous
 	/**
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("static-access")
 	public boolean alentours() throws StopRequestException {
@@ -1271,7 +1300,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	/** la fonc qui sert a courir des dangers
 	 * @throws StopRequestException 
-	 * 
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("static-access")
 	private void court() throws StopRequestException {

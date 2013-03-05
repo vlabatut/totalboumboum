@@ -46,7 +46,9 @@ public final class Astar {
 		/** on cree les noeuds
 		 * 
 		 * @param x
+	 * 		Description manquante !
 		 * @param y
+	 * 		Description manquante !
 		 */
 		public Node(int x, int y) {
 			assert x >= 0 && x < map.width : "x = " + x;
@@ -68,6 +70,7 @@ public final class Astar {
 		/**
 		 * 
 		 * @param parent
+	 * 		Description manquante !
 		 */
 		public void setParent(Node parent) {
 			this.parent = parent;
@@ -128,10 +131,15 @@ public final class Astar {
 	/**
 	 * 
 	 * @param map
+	 * 		Description manquante !
 	 * @param originX
+	 * 		Description manquante !
 	 * @param originY
+	 * 		Description manquante !
 	 * @param destinationX
+	 * 		Description manquante !
 	 * @param destinationY
+	 * 		Description manquante !
 	 */
 	public Astar(Map map, int originX, int originY, int destinationX,
 			int destinationY) {
@@ -165,8 +173,11 @@ public final class Astar {
 	 * </p>
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param parent
+	 * 		Description manquante !
 	 */
 	private void addToOpen(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -191,8 +202,11 @@ public final class Astar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param parent
+	 * 		Description manquante !
 	 */
 	private void addToOpenchoix(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -217,8 +231,11 @@ public final class Astar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param parent
+	 * 		Description manquante !
 	 */
 	private void addToOpenexp(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -243,8 +260,11 @@ public final class Astar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param parent
+	 * 		Description manquante !
 	 */
 	private void addToOpendang(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -376,8 +396,11 @@ public final class Astar {
 	 * Checks whether a node was already processed.
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private boolean isClosed(int x, int y) {
 		int i = map.width * y + x;
@@ -394,6 +417,7 @@ public final class Astar {
 	 * </ul>
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 */
 	private void process(Node node) {
 		// no need to process it twice
@@ -421,6 +445,7 @@ public final class Astar {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 */
 	private void processchoix(Node node) {
 		// no need to process it twice
@@ -449,6 +474,7 @@ public final class Astar {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 */
 	private void processexp(Node node) {
 		// no need to process it twice
@@ -476,6 +502,7 @@ public final class Astar {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 */
 	private void processdang(Node node) {
 		// no need to process it twice
@@ -504,7 +531,9 @@ public final class Astar {
 	 * Sets the node at {@code x}, {@code y} to "already been processed".
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	private void setClosed(int x, int y) {
 		int i = map.width * y + x;
