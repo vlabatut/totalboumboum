@@ -30,7 +30,9 @@ public class SearchNode {
 	/**
 	 * Constructeur.
 	 * @param mu 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(MedeniUluer mu) throws StopRequestException {
 		super();
@@ -68,7 +70,9 @@ public class SearchNode {
 	 * @param valeur
 	 *            valeur du noeud
 	 * @param mu 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur, MedeniUluer mu) throws StopRequestException {
 		super();
@@ -91,7 +95,9 @@ public class SearchNode {
 	 * @param cout
 	 *            cout du noeud
 	 * @param mu 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur, int cout,MedeniUluer mu) throws StopRequestException {
 		super();

@@ -23,7 +23,9 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNodeComp(SearchNode goal, ArtificialIntelligence ai) throws StopRequestException
 	{
