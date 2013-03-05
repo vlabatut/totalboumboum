@@ -32,7 +32,9 @@ public class Noeud {
 	/**
 	 * Constructeur.
 	 * @param source 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Noeud(TirtilTomruk source) throws StopRequestException {
 		super();
@@ -53,7 +55,9 @@ public class Noeud {
 	 * @param cout
 	 *            cout du noeud
 	 * @param source 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, int cout,TirtilTomruk source) throws StopRequestException {
 		super();
@@ -75,7 +79,9 @@ public class Noeud {
 	 * @param valeur
 	 *            valeur du noeud
 	 * @param source 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, TirtilTomruk source) throws StopRequestException {
 		super();
@@ -91,6 +97,7 @@ public class Noeud {
 	 * 
 	 * @return coordonne x
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int getX() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -103,6 +110,7 @@ public class Noeud {
 	 * @param x
 	 *            coordonne x
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setX(int x) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -114,6 +122,7 @@ public class Noeud {
 	 * 
 	 * @return coordonne y
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int getY() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -126,6 +135,7 @@ public class Noeud {
 	 * @param y
 	 *            coordonne y
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setY(int y) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -137,6 +147,7 @@ public class Noeud {
 	 * 
 	 * @return valeur
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public ZoneEnum getValeur() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -149,6 +160,7 @@ public class Noeud {
 	 * @param valeur
 	 *            valeur du noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setValeur(ZoneEnum valeur) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -160,8 +172,8 @@ public class Noeud {
 	 * 
 	 * @return cout
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-
 	public int getCout() throws StopRequestException {
 		return cout;
 	}
@@ -172,6 +184,7 @@ public class Noeud {
 	 * @param cout
 	 *            cout du noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setCout(int cout) throws StopRequestException {
 		this.cout = cout;
@@ -219,8 +232,8 @@ public class Noeud {
 	 *            le noeud par rapport auquel qu'on trouve l'heuristique
 	 * @return l'heuristique du noeud par rapport au noeud goal
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-
 	public int getHeuristic(Noeud goal) throws StopRequestException {
 
 		int result = 0;
