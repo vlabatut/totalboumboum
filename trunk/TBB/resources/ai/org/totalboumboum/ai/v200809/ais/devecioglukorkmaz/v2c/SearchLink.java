@@ -21,9 +21,13 @@ public class SearchLink {
 	/**
 	 * 
 	 * @param origin
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public SearchLink(Noeud origin, Noeud target, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -35,8 +39,9 @@ public class SearchLink {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Noeud getOrigin() throws StopRequestException {
 		ai.checkInterruption();
@@ -46,8 +51,9 @@ public class SearchLink {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Noeud getTarget() throws StopRequestException {
 		ai.checkInterruption();

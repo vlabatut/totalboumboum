@@ -33,8 +33,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Tree(Noeud courant, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -45,6 +48,7 @@ public class Tree {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void init() throws StopRequestException {
 		ai.checkInterruption();
@@ -58,8 +62,9 @@ public class Tree {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Noeud getRoot() throws StopRequestException {
 		ai.checkInterruption();
@@ -69,8 +74,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param pere
+	 * 		Description manquante !
 	 * @param fils
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void addNoeud(Noeud pere, Noeud fils) throws StopRequestException {
 		ai.checkInterruption();
@@ -81,9 +89,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public synchronized boolean containsNode(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
@@ -99,9 +109,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public SearchLink getParentLink(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
@@ -122,9 +134,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
@@ -144,9 +158,11 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public LinkedList<Noeud> getPath(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
@@ -177,7 +193,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param link
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void addLink(SearchLink link) throws StopRequestException {
 		ai.checkInterruption();
@@ -188,7 +206,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param link
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private synchronized void addLinkSynch(SearchLink link) throws StopRequestException {
 		ai.checkInterruption();

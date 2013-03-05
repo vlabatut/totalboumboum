@@ -27,6 +27,7 @@ public class Tree {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 */
 	public Tree(Noeud courant) {
 		this.firstNode = courant;
@@ -56,7 +57,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param pere
+	 * 		Description manquante !
 	 * @param fils
+	 * 		Description manquante !
 	 */
 	public void addNoeud(Noeud pere, Noeud fils) {
 		SearchLink link = new SearchLink(pere, fils);
@@ -66,8 +69,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public synchronized boolean containsNode(Noeud node) {
 		boolean result = false;
@@ -80,8 +84,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public SearchLink getParentLink(Noeud node) {
 		SearchLink result = null;
@@ -100,8 +105,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) {
 		Vector<SearchLink> result = new Vector<SearchLink>();
@@ -118,8 +124,9 @@ public class Tree {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public LinkedList<Noeud> getPath(Noeud node) {
 		LinkedList<Noeud> result = new LinkedList<Noeud>();
@@ -148,6 +155,7 @@ public class Tree {
 	/**
 	 * 
 	 * @param link
+	 * 		Description manquante !
 	 */
 	public void addLink(SearchLink link) {
 		addLinkSynch(link);
@@ -157,6 +165,7 @@ public class Tree {
 	/**
 	 * 
 	 * @param link
+	 * 		Description manquante !
 	 */
 	private synchronized void addLinkSynch(SearchLink link) {
 		Noeud target = link.getTarget();

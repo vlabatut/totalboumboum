@@ -22,8 +22,11 @@ public class AiTileComparator implements Comparator<AiTile> {
 	/**
 	 * 
 	 * @param t
+	 * 		Description manquante !
 	 * @param dk
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public AiTileComparator(AiTile t, DeveciogluKorkmaz dk)
 			throws StopRequestException {

@@ -21,8 +21,11 @@ public class NoeudComparator implements Comparator<Noeud> {
 	/**
 	 * 
 	 * @param t
+	 * 		Description manquante !
 	 * @param dk
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public NoeudComparator(Noeud t, DeveciogluKorkmaz dk)
 			throws StopRequestException {

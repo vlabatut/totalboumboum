@@ -166,9 +166,11 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param target
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile setPath(AiTile target) throws StopRequestException {
 		checkInterruption();
@@ -223,9 +225,11 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param target
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile setPathNearestSafeTile(AiTile target)
 			throws StopRequestException {
@@ -280,8 +284,9 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile setNearestItem() throws StopRequestException {
 		checkInterruption();
@@ -320,8 +325,9 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile setNearestDestructible() throws StopRequestException {
 		checkInterruption();
@@ -365,8 +371,9 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile setNearestSafeTile() throws StopRequestException {
 		checkInterruption();
@@ -398,8 +405,9 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private Collection<AiTile> setDangerousTiles() throws StopRequestException {
 		checkInterruption();
@@ -452,8 +460,9 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile setNearestHero() throws StopRequestException {
 		checkInterruption();
@@ -489,10 +498,13 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param a
+	 * 		Description manquante !
 	 * @param b
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public double getDistance(AiTile a, AiTile b) throws StopRequestException {
 		checkInterruption();
@@ -505,9 +517,11 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
@@ -528,9 +542,11 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption();

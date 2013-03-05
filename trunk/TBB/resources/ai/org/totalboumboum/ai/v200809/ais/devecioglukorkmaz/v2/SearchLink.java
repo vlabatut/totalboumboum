@@ -15,7 +15,9 @@ public class SearchLink {
 	/**
 	 * 
 	 * @param origin
+	 * 		Description manquante !
 	 * @param target
+	 * 		Description manquante !
 	 */
 	public SearchLink(Noeud origin, Noeud target) {
 		this.origin = origin;
@@ -34,7 +36,7 @@ public class SearchLink {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public Noeud getTarget() {
 		return target;
