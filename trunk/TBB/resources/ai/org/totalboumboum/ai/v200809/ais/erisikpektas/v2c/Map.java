@@ -58,8 +58,11 @@ public class Map {
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -81,6 +84,7 @@ public class Map {
 	/** nous remplaçons notre map
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void remplir() throws StopRequestException {
 		ai.checkInterruption();
@@ -333,10 +337,13 @@ public class Map {
 	 * cest le plus difficle condition a obtenir et naturellemnt cest le plus
 	 * sur
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean isWalkable(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -353,10 +360,14 @@ public class Map {
 
 	/** nous allons lutiliser pour senfuire car on peut passer par les flmmes 
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
-	 * @throws StopRequestException */
+	 * 		Description manquante !
+	 * @throws StopRequestException 
+	 * 		Description manquante !
+	 * */
 	public boolean isRunnable(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -380,10 +391,13 @@ public class Map {
 	 * on va utiliser cette methode pour voir sil ya qqch quon peut acceder en
 	 * laiissant des bombes car elle peut avoir des murs dest
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean isReachable(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -406,10 +420,13 @@ public class Map {
 	 * deux bombes en meme temps on //ne bouge pas car on voit comme on na pas
 	 * de lieu pour se cacher
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public boolean isNoWhereElse(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -433,9 +450,13 @@ public class Map {
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
 	 * @param x1 
+	 * 		Description manquante !
 	 * @param y1 
+	 * 		Description manquante !
 	 * @param range 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 
 	public void setbombeposs(int x1, int y1, int range) throws StopRequestException {
@@ -517,6 +538,7 @@ public class Map {
 
 	/**
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setdanger() throws StopRequestException {
 		ai.checkInterruption();
@@ -534,8 +556,11 @@ public class Map {
 	/** qd on transforme un bombe possible a un bombe reele
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void setbombe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -547,6 +572,7 @@ public class Map {
 	 * si cest pas possible de trouver un lieu sur apres avoir laisser une bombe
 	 * imaginaire il faut lenlevere
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void removebombe() throws StopRequestException {
 		ai.checkInterruption();
@@ -558,6 +584,7 @@ public class Map {
 	 * au cas de danger il court a un bombe la cause est peut etre quil faut
 	 * tjrs mettre a jour le map donc on a cree ces fonc-la
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void getbombs() throws StopRequestException {
 		ai.checkInterruption();
@@ -578,6 +605,7 @@ public class Map {
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public void getfires() throws StopRequestException {
 		ai.checkInterruption();
@@ -598,8 +626,9 @@ public class Map {
 	/** ,l envoie la matrice de map
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Etat[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
