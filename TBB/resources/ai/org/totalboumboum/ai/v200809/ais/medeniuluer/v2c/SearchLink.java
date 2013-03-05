@@ -28,6 +28,7 @@ public class SearchLink
 	 * @param target	noeud fils
 	 * @param mu	action de transition
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchLink(SearchNode origin,SearchNode target,MedeniUluer mu) throws StopRequestException
 	{	
@@ -42,7 +43,9 @@ public class SearchLink
 	 * Renvoie le noeud parent du lien 
 	 * @return	le noeud parent
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode getOrigin() throws StopRequestException
 	{   
@@ -54,6 +57,7 @@ public class SearchLink
 	 * Renvoie le noeud fils du lien
 	 * @return	le noeud fils
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode getTarget() throws StopRequestException
 	{	mu.checkInterruption(); //Appel Obligatoire

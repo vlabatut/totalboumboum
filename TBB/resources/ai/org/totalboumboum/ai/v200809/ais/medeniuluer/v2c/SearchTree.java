@@ -33,8 +33,11 @@ public class SearchTree {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 * @param mu
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public SearchTree(SearchNode courant,MedeniUluer mu ) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -46,6 +49,7 @@ public class SearchTree {
 	/**
 	 * Initialise l'arbre
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void init() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -61,6 +65,7 @@ public class SearchTree {
 	 * 
 	 * @return la racine de l'arbre de recherche
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode getRoot() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -75,6 +80,7 @@ public class SearchTree {
 	 * @param fils
 	 *            le noeud qu'on ajoute
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void addSearchNode(SearchNode pere, SearchNode fils) throws StopRequestException { // on cree un lien entre le
 													// pere et le fils
@@ -93,6 +99,7 @@ public class SearchTree {
 	 *            le noeud à rechercher
 	 * @return vrai si l'arbre contient le noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public synchronized boolean containsNode(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -113,6 +120,7 @@ public class SearchTree {
 	 *            le noeud à traiter
 	 * @return un lien contenant le noeud en position target
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchLink getParentLink(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -137,6 +145,7 @@ public class SearchTree {
 	 *            le noeud à traiter
 	 * @return tous les liens où ce noeud est en position origin
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -160,6 +169,7 @@ public class SearchTree {
 	 *            le noeud à traiter
 	 * @return un vecteur de noeuds représentant le chemin depuis la racine
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public LinkedList<SearchNode> getPath(SearchNode node) throws StopRequestException { // la liste des noeuds qui
 													// se trouve sur le path
@@ -203,6 +213,7 @@ public class SearchTree {
 	 * @param link
 	 *            le lien à rajouter dans l'arbre
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void addLink(SearchLink link) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -217,6 +228,7 @@ public class SearchTree {
 	 * @param link
 	 *            le lien à ajouter
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	private synchronized void addLinkSynch(SearchLink link) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire

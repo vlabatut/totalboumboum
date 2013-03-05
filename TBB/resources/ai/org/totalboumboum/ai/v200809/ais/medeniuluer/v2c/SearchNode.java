@@ -30,7 +30,9 @@ public class SearchNode {
 	/**
 	 * Constructeur.
 	 * @param mu 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(MedeniUluer mu) throws StopRequestException {
 		super();
@@ -50,6 +52,7 @@ public class SearchNode {
 	 * @param cout
 	 *            cout du noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur, int cout) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -69,7 +72,9 @@ public class SearchNode {
 	 * @param valeur
 	 *            valeur du noeud
 	 * @param mu 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur, MedeniUluer mu) throws StopRequestException {
 		super();
@@ -92,7 +97,9 @@ public class SearchNode {
 	 * @param cout
 	 *            cout du noeud
 	 * @param mu 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur, int cout,MedeniUluer mu) throws StopRequestException {
 		super();
@@ -116,6 +123,7 @@ public class SearchNode {
 	 * @param valeur
 	 *            valeur du noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchNode(int x, int y, ZoneEnum valeur) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -129,6 +137,7 @@ public class SearchNode {
 	 * 
 	 * @return coordonne x
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int getX() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -141,6 +150,7 @@ public class SearchNode {
 	 * @param x
 	 *            coordonne x
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setX(int x) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -152,6 +162,7 @@ public class SearchNode {
 	 * 
 	 * @return coordonne y
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public int getY() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -164,6 +175,7 @@ public class SearchNode {
 	 * @param y
 	 *            coordonne y
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setY(int y) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -175,6 +187,7 @@ public class SearchNode {
 	 * 
 	 * @return valeur
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public ZoneEnum getValeur() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -187,6 +200,7 @@ public class SearchNode {
 	 * @param valeur
 	 *            valeur du noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setValeur(ZoneEnum valeur) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -197,9 +211,10 @@ public class SearchNode {
 	 * Renvoie le cout du noeud
 	 * 
 	 * @return cout
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-
 	public int getCout() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
 		return cout;
@@ -211,6 +226,7 @@ public class SearchNode {
 	 * @param cout
 	 *            cout du noeud
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public void setCout(int cout) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -259,8 +275,8 @@ public class SearchNode {
 	 *            le noeud par rapport auquel qu'on trouve l'heuristique
 	 * @return l'heuristique du noeud par rapport au noeud goal
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-
 	public int getHeuristic(SearchNode goal) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
 
@@ -284,5 +300,4 @@ public class SearchNode {
 		return resultat;
 
 	}
-
 }
