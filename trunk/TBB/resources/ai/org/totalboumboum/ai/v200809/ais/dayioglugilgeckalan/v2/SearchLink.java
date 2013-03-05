@@ -28,6 +28,7 @@ public class SearchLink
 	 * @param target	noeud fils
 	 * @param source	action de transition
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public SearchLink(Noeud origin,Noeud target,DayioglugilGeckalan source) throws StopRequestException
 	{	
@@ -51,6 +52,7 @@ public class SearchLink
 	 * Renvoie le noeud fils du lien
 	 * @return	le noeud fils
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public Noeud getTarget() throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire

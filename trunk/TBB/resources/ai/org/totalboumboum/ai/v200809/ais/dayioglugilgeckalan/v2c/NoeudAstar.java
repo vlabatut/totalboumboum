@@ -23,7 +23,9 @@ public class NoeudAstar implements Comparator<Noeud> {
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
 	 * @param ai 
+	 * 		Description manquante !
 	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
 	public NoeudAstar(Noeud goal, ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();

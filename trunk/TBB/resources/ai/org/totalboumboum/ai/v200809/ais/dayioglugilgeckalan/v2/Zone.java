@@ -46,8 +46,11 @@ public class Zone{
 	/**
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @param source
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public Zone(AiZone zone, DayioglugilGeckalan source) throws StopRequestException
 	{
@@ -68,6 +71,7 @@ public class Zone{
 	/**
 	 * 
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException
 	{
@@ -216,8 +220,9 @@ public class Zone{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -237,5 +242,4 @@ public class Zone{
 		
 		return result;
 	}
-	
 }
