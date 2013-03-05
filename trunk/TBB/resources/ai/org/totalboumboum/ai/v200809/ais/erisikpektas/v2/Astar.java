@@ -8,12 +8,12 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * cest un class Astar que lon a trouve par un site dintenet de 
- * forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929
+ * cest un class Astar que lon a trouve par un site dintenet de forum dadressse
+ * http://x86.sun.com/thread.jspa?messageID=10084929
  * 
  * @author Doğa Erişik
  * @author Abdurrahman Pektaş
- *
+ * 
  */
 public final class Astar {
 	/** */
@@ -43,12 +43,13 @@ public final class Astar {
 		/** */
 		int hcost;
 
-		/** on cree les noeuds
+		/**
+		 * on cree les noeuds
 		 * 
 		 * @param x
-	 * 		Description manquante !
+		 *            Description manquante !
 		 * @param y
-	 * 		Description manquante !
+		 *            Description manquante !
 		 */
 		public Node(int x, int y) {
 			assert x >= 0 && x < map.width : "x = " + x;
@@ -70,7 +71,7 @@ public final class Astar {
 		/**
 		 * 
 		 * @param parent
-	 * 		Description manquante !
+		 *            Description manquante !
 		 */
 		public void setParent(Node parent) {
 			this.parent = parent;
@@ -131,15 +132,15 @@ public final class Astar {
 	/**
 	 * 
 	 * @param map
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param originX
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param originY
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param destinationX
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param destinationY
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	public Astar(Map map, int originX, int originY, int destinationX,
 			int destinationY) {
@@ -163,8 +164,8 @@ public final class Astar {
 	}
 
 	/**
-	 * Adds the node at {@code x}, {@code y} to the open list, using {@code
-	 * parent} as the parent.
+	 * Adds the node at {@code x}, {@code y} to the open list, using
+	 * {@code parent} as the parent.
 	 * 
 	 * <p>
 	 * If the node was already added to the open list, the old value is either
@@ -173,11 +174,11 @@ public final class Astar {
 	 * </p>
 	 * 
 	 * @param x
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param y
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param parent
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void addToOpen(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -202,11 +203,11 @@ public final class Astar {
 	/**
 	 * 
 	 * @param x
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param y
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param parent
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void addToOpenchoix(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -231,11 +232,11 @@ public final class Astar {
 	/**
 	 * 
 	 * @param x
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param y
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param parent
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void addToOpenexp(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -260,11 +261,11 @@ public final class Astar {
 	/**
 	 * 
 	 * @param x
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param y
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param parent
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void addToOpendang(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -289,8 +290,7 @@ public final class Astar {
 	/**
 	 * Starts the algorithm and returns true if a valid path was found.
 	 * 
-	 * @return
-	 * 		?
+	 * @return ?
 	 */
 	public boolean findPath() {
 		Node current = origin;
@@ -310,8 +310,7 @@ public final class Astar {
 
 	/**
 	 * 
-	 * @return
-	 * 		?
+	 * @return ?
 	 */
 	public boolean findPathchoix() {
 		Node current = origin;
@@ -331,8 +330,7 @@ public final class Astar {
 
 	/**
 	 * 
-	 * @return
-	 * 		?
+	 * @return ?
 	 */
 	public boolean findPathexp() {
 		Node current = origin;
@@ -352,8 +350,7 @@ public final class Astar {
 
 	/**
 	 * 
-	 * @return
-	 * 		?
+	 * @return ?
 	 */
 	public boolean findPathdang() {
 		Node current = origin;
@@ -373,8 +370,7 @@ public final class Astar {
 
 	/**
 	 * 
-	 * @return
-	 * 		?
+	 * @return ?
 	 */
 	public Deque<Integer> getPath() {
 		assert destination.parent != null
@@ -396,11 +392,10 @@ public final class Astar {
 	 * Checks whether a node was already processed.
 	 * 
 	 * @param x
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param y
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
+	 *            Description manquante !
+	 * @return ? Description manquante !
 	 */
 	private boolean isClosed(int x, int y) {
 		int i = map.width * y + x;
@@ -417,7 +412,7 @@ public final class Astar {
 	 * </ul>
 	 * 
 	 * @param node
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void process(Node node) {
 		// no need to process it twice
@@ -445,7 +440,7 @@ public final class Astar {
 	/**
 	 * 
 	 * @param node
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void processchoix(Node node) {
 		// no need to process it twice
@@ -474,7 +469,7 @@ public final class Astar {
 	/**
 	 * 
 	 * @param node
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void processexp(Node node) {
 		// no need to process it twice
@@ -502,7 +497,7 @@ public final class Astar {
 	/**
 	 * 
 	 * @param node
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void processdang(Node node) {
 		// no need to process it twice
@@ -531,9 +526,9 @@ public final class Astar {
 	 * Sets the node at {@code x}, {@code y} to "already been processed".
 	 * 
 	 * @param x
-	 * 		Description manquante !
+	 *            Description manquante !
 	 * @param y
-	 * 		Description manquante !
+	 *            Description manquante !
 	 */
 	private void setClosed(int x, int y) {
 		int i = map.width * y + x;

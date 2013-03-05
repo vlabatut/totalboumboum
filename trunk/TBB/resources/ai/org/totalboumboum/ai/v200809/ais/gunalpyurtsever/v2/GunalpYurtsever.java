@@ -40,6 +40,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * Mise a jour la liste des bombes
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private void updateBombList()  throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -68,9 +69,13 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * Prend les neighbors de Tile qui sont traversable
 	 * Avec un option qui rende le feu comme traversable ou contraire
 	 * @param head
+	 * 		Description manquante !
 	 * @param fire
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -99,8 +104,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * Utilise dans la fonction getClearNeighbors
 	 * Pour prendre pas le feu comme traversable
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isAlsoFireClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -120,8 +128,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -146,8 +157,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * ou bien OwnHero ne peut pas approcher la cible
 	 * 
 	 * @param tileGone
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiAction AstarAlgorithm(AiTile tileGone) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -269,8 +283,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * Meme avec AstarAlgorithm mais pour avancer dans les tiles en danger pour s'enfuir
 	 * @param tileGone
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiAction simpleAstarAlgorithm(AiTile tileGone) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -359,8 +376,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	/**
 	 * Fonction obsolete pour approcher au hero cible
 	 * @param heroTile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private AiTile TargetTileCalculator(AiTile heroTile) throws StopRequestException
@@ -458,8 +478,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * fonction qui supersede TargetTileCalculator pour approcher au hero cible
 	 * 
 	 * @param heroTile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile TargetTileCalculator2(AiTile heroTile) throws StopRequestException
 	{
@@ -490,6 +513,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * Fonction pour garder les tiles en danger
 	 * @return dangertiles
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<AiTile> markDangerTiles() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -533,6 +557,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * 
 	 * @return ?
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private List<DangerPriorityTile> markDangerTileswithPriority() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -584,8 +609,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * fonction obsolete pour s'enfuir de danger
 	 * 
 	 * @param targetedHero
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	private AiTile ultimateRunaway(AiHero targetedHero) throws StopRequestException{
@@ -641,8 +669,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * fonction pour prendre la prorite dans un tile qui est danger
 	 * 
 	 * @param dangerTiles
+	 * 		Description manquante !
 	 * @param reqTile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int getpriorityValue(Collection<DangerPriorityTile> dangerTiles,AiTile reqTile){
 		
@@ -665,8 +696,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * fonction qui supersede ultimateRunaway le hero s'enfuit regardant la place du hero cible
 	 * 
 	 * @param chosentokillTile
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile ultimateRunaway2(AiTile chosentokillTile) throws StopRequestException{
 		
@@ -767,6 +801,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * 
 	 * @return returningTile
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile nearestHero() throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -800,7 +835,9 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 *		 2 si on detruit des murs
 	 * 
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private AiTile decideStrategy() throws StopRequestException{
 		
@@ -887,8 +924,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * cette fonction verifie la cas de suicider en placant un bombe que laisse aucun tile a s'enfuir
 	 * 
 	 * @param zone
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	private boolean bombCheck(AiZone zone) throws StopRequestException{
 		

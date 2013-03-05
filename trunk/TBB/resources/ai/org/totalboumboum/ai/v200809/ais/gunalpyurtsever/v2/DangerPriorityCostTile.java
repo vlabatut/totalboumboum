@@ -16,7 +16,9 @@ public class DangerPriorityCostTile {
 	/**
 	 * 
 	 * @param costTile
+	 * 		Description manquante !
 	 * @param priority
+	 * 		Description manquante !
 	 */
 	public DangerPriorityCostTile(CostTile costTile, int priority) {
 		this.costTile = costTile;

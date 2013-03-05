@@ -18,7 +18,9 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @param tile
+	 * 		Description manquante !
 	 * @param dangerpriority
+	 * 		Description manquante !
 	 */
 	public DangerPriorityTile(AiTile tile, int dangerpriority) {
 		
@@ -28,7 +30,7 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public AiTile getTile() {
 		return tile;
@@ -37,7 +39,7 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	public int getDangerpriority() {
 		return dangerpriority;
@@ -45,6 +47,7 @@ public class DangerPriorityTile{
 	/**
 	 * 
 	 * @param dangerpriority
+	 * 		Description manquante !
 	 */
 	public void setDangerpriority(int dangerpriority) {
 		this.dangerpriority = dangerpriority;

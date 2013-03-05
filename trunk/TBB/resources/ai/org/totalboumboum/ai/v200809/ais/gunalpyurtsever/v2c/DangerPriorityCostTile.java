@@ -22,9 +22,13 @@ public class DangerPriorityCostTile {
 	/**
 	 * 
 	 * @param costTile
+	 * 		Description manquante !
 	 * @param priority
+	 * 		Description manquante !
 	 * @param ai
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public DangerPriorityCostTile(CostTile costTile, int priority,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -35,8 +39,9 @@ public class DangerPriorityCostTile {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public CostTile getCostTile() throws StopRequestException {
 		ai.checkInterruption();
@@ -45,8 +50,9 @@ public class DangerPriorityCostTile {
 	/**
 	 * 
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws StopRequestException
+	 * 		Description manquante !
 	 */
 	public int getPriority() throws StopRequestException {
 		ai.checkInterruption();
