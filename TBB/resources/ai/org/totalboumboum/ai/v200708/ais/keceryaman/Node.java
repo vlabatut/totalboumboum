@@ -37,7 +37,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getCost (){
 		return cost;
@@ -51,7 +51,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getPathCost (){
 		return costPath;
@@ -59,6 +59,7 @@ public class Node {
 	/**
 	 * 
 	 * @param value
+	 * 		Description manquante !
 	 */
 	public void setPathCost ( int value ){
 		costPath = value;
@@ -66,8 +67,9 @@ public class Node {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public Node setParent ( Node node ){
 		parent = node;
@@ -77,7 +79,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public Node getParent (){
 		return parent;
@@ -85,7 +87,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int[] getPosition (){
 		int[] pos = {this.x,this.y};
@@ -94,7 +96,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getX (){
 		return x;
@@ -102,7 +104,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getY (){
 		return y;
@@ -158,9 +160,11 @@ public class Node {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int heuristic ( int x , int y  ){
 		int tx = AStar.target[0];
@@ -171,8 +175,9 @@ public class Node {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean equals ( Node node ){
 		if ( x == node.getX() && y == node.getY() ){
@@ -185,9 +190,11 @@ public class Node {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean equals ( int x , int y){
 		if ( x == this.x && y == this.y ){
@@ -200,10 +207,15 @@ public class Node {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param parent
+	 * 		Description manquante !
 	 * @param costPath
+	 * 		Description manquante !
 	 * @param costHeuristic
+	 * 		Description manquante !
 	 */
 	public Node( int x , int y , Node parent, int costPath , int costHeuristic ){
 		this.x = x;
