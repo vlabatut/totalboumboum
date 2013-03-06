@@ -16,7 +16,9 @@ public class Action
 	/**
 	 * 
 	 * @param action
+	 * 		Description manquante !
 	 * @param cost
+	 * 		Description manquante !
 	 */
 	public Action(int  action, double cost) {
 		this.action = action;
@@ -26,6 +28,7 @@ public class Action
 	/**
 	 * 
 	 * @param action
+	 * 		Description manquante !
 	 */
 	public Action(int action) {
 		this.action = action;

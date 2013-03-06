@@ -40,19 +40,33 @@ public class State
     /**
      * 
      * @param playerInMiddle
+	 * 		Description manquante !
      * @param playerFarPlayer
+	 * 		Description manquante !
      * @param playerFarBomb
+	 * 		Description manquante !
      * @param playerClosePlayer
+	 * 		Description manquante !
      * @param playerCloseBomb
+	 * 		Description manquante !
      * @param playerAlone
+	 * 		Description manquante !
      * @param bonusClose
+	 * 		Description manquante !
      * @param shrinkClose
+	 * 		Description manquante !
      * @param blockEmpty
+	 * 		Description manquante !
      * @param wallSoft
+	 * 		Description manquante !
      * @param wallHard
+	 * 		Description manquante !
      * @param playerCount2
+	 * 		Description manquante !
      * @param playerCount3
+	 * 		Description manquante !
      * @param playerCount4
+	 * 		Description manquante !
      */
 	public State(boolean playerInMiddle, boolean playerFarPlayer, boolean playerFarBomb, boolean playerClosePlayer, boolean playerCloseBomb, boolean playerAlone, boolean bonusClose, boolean shrinkClose, boolean blockEmpty, boolean wallSoft, boolean wallHard, boolean playerCount2, boolean playerCount3, boolean playerCount4) {
 		super();
@@ -74,7 +88,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isBlockEmpty() {
 		return blockEmpty;
@@ -82,6 +96,7 @@ public class State
 	/**
 	 * 
 	 * @param blockEmpty
+	 * 		Description manquante !
 	 */
 	public void setBlockEmpty(boolean blockEmpty) {
 		this.blockEmpty = blockEmpty;
@@ -97,6 +112,7 @@ public class State
 	/**
 	 * 
 	 * @param playerCount2
+	 * 		Description manquante !
 	 */
 	public void setPlayerCount2(boolean playerCount2) {
 		this.playerCount2 = playerCount2;
@@ -104,7 +120,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerCount3() {
 		return playerCount3;
@@ -112,6 +128,7 @@ public class State
 	/**
 	 * 
 	 * @param playerCount3
+	 * 		Description manquante !
 	 */
 	public void setPlayerCount3(boolean playerCount3) {
 		this.playerCount3 = playerCount3;
@@ -119,7 +136,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerCount4() {
 		return playerCount4;
@@ -127,6 +144,7 @@ public class State
 	/**
 	 * 
 	 * @param playerCount4
+	 * 		Description manquante !
 	 */
 	public void setPlayerCount4(boolean playerCount4) {
 		this.playerCount4 = playerCount4;
@@ -134,7 +152,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isWallHard() {
 		return wallHard;
@@ -142,6 +160,7 @@ public class State
 	/**
 	 * 
 	 * @param wallHard
+	 * 		Description manquante !
 	 */
 	public void setWallHard(boolean wallHard) {
 		this.wallHard = wallHard;
@@ -149,7 +168,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isWallSoft() {
 		return wallSoft;
@@ -157,6 +176,7 @@ public class State
 	/**
 	 * 
 	 * @param wallSoft
+	 * 		Description manquante !
 	 */
 	public void setWallSoft(boolean wallSoft) {
 		this.wallSoft = wallSoft;
@@ -164,7 +184,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isBonusClose() {
 		return bonusClose;
@@ -172,6 +192,7 @@ public class State
 	/**
 	 * 
 	 * @param bonusClose
+	 * 		Description manquante !
 	 */
 	public void setBonusClose(boolean bonusClose) {
 		this.bonusClose = bonusClose;
@@ -179,7 +200,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isShrinkClose() {
 		return shrinkClose;
@@ -187,6 +208,7 @@ public class State
 	/**
 	 * 
 	 * @param shrinkClose
+	 * 		Description manquante !
 	 */
 	public void setShrinkClose(boolean shrinkClose) {
 		this.shrinkClose = shrinkClose;
@@ -194,7 +216,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerAlone() {
 		return playerAlone;
@@ -203,6 +225,7 @@ public class State
 	/**
 	 * 
 	 * @param playerAlone
+	 * 		Description manquante !
 	 */
 	public void setPlayerAlone(boolean playerAlone) {
 		this.playerAlone = playerAlone;
@@ -210,7 +233,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerInMiddle() {
 		return playerInMiddle;
@@ -218,6 +241,7 @@ public class State
 	/**
 	 * 
 	 * @param playerInMiddle
+	 * 		Description manquante !
 	 */
 	public void setPlayerInMiddle(boolean playerInMiddle) {
 		this.playerInMiddle = playerInMiddle;
@@ -226,7 +250,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerCloseBomb() {
 		return playerCloseBomb;
@@ -234,6 +258,7 @@ public class State
 	/**
 	 * 
 	 * @param playerCloseBomb
+	 * 		Description manquante !
 	 */
 	public void setPlayerCloseBomb(boolean playerCloseBomb) {
 		this.playerCloseBomb = playerCloseBomb;
@@ -241,7 +266,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerClosePlayer() {
 		return playerClosePlayer;
@@ -249,6 +274,7 @@ public class State
 	/**
 	 * 
 	 * @param playerClosePlayer
+	 * 		Description manquante !
 	 */
 	public void setPlayerClosePlayer(boolean playerClosePlayer) {
 		this.playerClosePlayer = playerClosePlayer;
@@ -256,7 +282,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerFarBomb() {
 		return playerFarBomb;
@@ -264,6 +290,7 @@ public class State
 	/**
 	 * 
 	 * @param playerFarBomb
+	 * 		Description manquante !
 	 */
 	public void setPlayerFarBomb(boolean playerFarBomb) {
 		this.playerFarBomb = playerFarBomb;
@@ -271,7 +298,7 @@ public class State
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isPlayerFarPlayer() {
 		return playerFarPlayer;
@@ -279,6 +306,7 @@ public class State
 	/**
 	 * 
 	 * @param playerFarPlayer
+	 * 		Description manquante !
 	 */
 	public void setPlayerFarPlayer(boolean playerFarPlayer) {
 		this.playerFarPlayer = playerFarPlayer;
@@ -286,6 +314,7 @@ public class State
 	/**
 	 * 
 	 * @param point
+	 * 		Description manquante !
 	 */
 	public void setHeuristic(double point){
 		this.point=point;
