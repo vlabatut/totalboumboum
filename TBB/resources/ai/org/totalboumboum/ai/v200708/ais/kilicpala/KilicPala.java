@@ -481,9 +481,11 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int amIcloseToBomb(int x, int y) {
 		// x = getOwnPosition()[0];
@@ -499,11 +501,15 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int distance(int x1, int y1, int x2, int y2) {
 		int result = 0;
@@ -515,11 +521,15 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private double vraiDistance(int x1, int y1, int x2, int y2) {
 		double resulttemp = 0;
@@ -533,9 +543,11 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean amInearSoftWall(int x, int y) {
 		boolean result = false;
@@ -549,10 +561,13 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param blockType
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType) {
 		int minDistance = Integer.MAX_VALUE;
@@ -574,9 +589,11 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int[] getClosestPlayerPosition(int x, int y) {
 		int minDistance = Integer.MAX_VALUE;
@@ -596,10 +613,13 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean doYouHaveEmptyNeighbor(int x, int y, int move) {
 		boolean result = false;
@@ -645,9 +665,11 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param xPlayer
+	 * 		Description manquante !
 	 * @param yPlayer
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int getPlayerIndex(int xPlayer, int yPlayer) {
 		int result = -1;
@@ -665,12 +687,17 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isNextPosMoreFar(int x1, int y1, int x2, int y2, int move) {
 		boolean result = false;
@@ -706,11 +733,15 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int whichMoveMakesMeLeastFar(int x1, int y1, int x2, int y2) {
 
@@ -755,11 +786,15 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean amIonASafeCase(int x1, int y1, int x2, int y2) {
 		boolean result = true;
@@ -774,11 +809,15 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param xPlayer
+	 * 		Description manquante !
 	 * @param yPlayer
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isThereAnyWallBetween(int x1, int y1, int xPlayer,
 			int yPlayer) {
@@ -834,10 +873,13 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean doYouHaveWallNeighbor(int x, int y, int move) {
 		boolean result = false;
@@ -879,9 +921,11 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int howManyBombsAreThere(int x, int y) {
 		int result = 0;
@@ -905,10 +949,13 @@ public class KilicPala extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean doYouHaveEmptySideNeighbor(int x, int y, int move) {
 		boolean result = false;
