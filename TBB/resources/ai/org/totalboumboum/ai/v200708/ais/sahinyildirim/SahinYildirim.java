@@ -201,6 +201,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param x point_x de moi
 	 * @param y point_y de moi
 	 * @param result 
+	 * 		Description manquante !
 	 * @return l'action pour prendre le bonus
 	 */
 	private int bonusNearMe(int x,int y,int result)
@@ -229,7 +230,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 	
 	/**
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return vrai si au moins un person est dans la portee de mon bombe 
 	 */
 	private boolean putBomb(int x,int y)
@@ -505,9 +508,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return la distance entre deux points
 	 */
 	private int getDistance(int x1, int y1, int x2, int y2) {
@@ -518,7 +525,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/**
 	 * la methode pour ajouter l'action suivant au path
 	 * @param pointChild
+	 * 		Description manquante !
 	 * @param pointPere
+	 * 		Description manquante !
 	 * @return l'action 
  	 */
 	private int addToPath(PointFind pointChild, PointFind pointPere) {
@@ -543,6 +552,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * on ne regarde pas le point pere, on construit un pereChild donc on sait
 	 * le pere des points possibles. 
 	 * @param pointDev
+	 * 		Description manquante !
 	 * @return un iterator pour les actions possibles
 	 */
 	private Iterator<PointFind> developpeNode(PointFind pointDev) {
@@ -627,9 +637,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * 
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @param pereCost
+	 * 		Description manquante !
 	 * @return le cost de cette point
 	 */
 	private int getCost(int x, int y, int move, int pereCost) {
@@ -690,10 +704,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * 
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param bombs
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Vector<Integer> defence(int x, int y, List<Integer> bombs) {
 		int xB, yB;
@@ -1205,7 +1222,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/**Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, wallHard, lastPosition.
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return si il est possible
 	 */
 	private boolean isObstacleAStar(int x, int y) {
@@ -1238,10 +1257,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * possible pour un personnage situé en (x,y).
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isMovePossibleAStar(int x, int y, int move) {
 		boolean result;
@@ -1272,9 +1294,11 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * situé à la position (x,y)
 	 * 
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Vector<Integer> possibleAStarMoves(int x, int y) {
 		Vector<Integer> result = new Vector<Integer>();
@@ -1376,8 +1400,11 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * liste des block type qu'on veut
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param blockType
+	 * 		Description manquante !
 	 * @return un arraylist contient la position des blocks
 	 */
 	private List<Integer> getClosestBlockPosition(int x, int y,
