@@ -203,9 +203,13 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param blockType
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType) {
 		int minDistance = Integer.MAX_VALUE;
@@ -227,10 +231,15 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int distance(int x1, int y1, int x2, int y2) {
 		int result = 0;
@@ -242,10 +251,15 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param dangerX
+	 * 		Description manquante !
 	 * @param dangerY
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int[] getDirectionPreferences(int x, int y, int dangerX, int dangerY)
 	// On decide vers quelle direction notre personnage va avancer (ou reculer)
@@ -334,8 +348,11 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int goMiddle(int x, int y) {
 		// ---zone map---
@@ -405,8 +422,11 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int move(int x, int y) {
 		int result = AI_ACTION_DO_NOTHING;
@@ -445,9 +465,13 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param AI_BLOCK_ITEM_BONUS
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int[] getClosestBonusPosition(int x, int y, int AI_BLOCK_ITEM_BONUS) {
 		int minDistance = Integer.MAX_VALUE;
@@ -469,10 +493,15 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param bonusX
+	 * 		Description manquante !
 	 * @param bonusY
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int getBonus(int x, int y, int bonusX, int bonusY) {
 		int result;
@@ -600,8 +629,11 @@ public class KurtulusOzsoy extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return ?
+	 * 		Description manquante !
 	 */
 	private int[] getClosestPlayerPosition(int x, int y) {
 		int minDistance = Integer.MAX_VALUE;
