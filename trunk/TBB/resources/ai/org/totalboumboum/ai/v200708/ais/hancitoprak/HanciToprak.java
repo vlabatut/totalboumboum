@@ -282,10 +282,13 @@ public class HanciToprak extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param result
+	 * 		Description manquante !
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Integer hareket(Integer result, int x, int y) {
 
@@ -400,8 +403,10 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * @param x	position du personnage
 	 * @param y position du personnage
 	 * @param temp 
+	 * 		Description manquante !
 	 * @return	vrai si ce déplacement est possible
 	 * @throws Exception 
+	 * 		Description manquante !
 	 */
 	private Integer escapeFromBomb(int x, int y, Vector<Integer> temp)
 			throws Exception {
@@ -652,6 +657,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	/**
 	 * affiche du matrice
 	 * @param matrix 
+	 * 		Description manquante !
 	 */
 	public void printMatrix(int[][] matrix) {
 		
