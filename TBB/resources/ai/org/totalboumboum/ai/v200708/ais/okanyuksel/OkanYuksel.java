@@ -114,10 +114,14 @@ public class OkanYuksel extends ArtificialIntelligence
 
 	/** L'information d'un point 
 	 * @param xM 
+	 * 		Description manquante !
 	 * @param yM 
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
-	 * @throws Exception */
+	 * 		Description manquante !
+	 * @throws Exception 
+	 * 		Description manquante !
+	 * */
 	private int nokta(int xM, int yM) throws Exception
 	{
 		return getZoneMatrix()[xM][yM];
@@ -129,6 +133,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param yM coordonnée-y
 	 * @return Le list des informations des cases.  
 	 * @throws Exception 
+	 * 		Description manquante !
 	 * */
 	private int[] cevre(int xM, int yM) throws Exception
 	{
@@ -150,6 +155,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param yonu L'index de direction
 	 * @return true ou false
 	 * @throws Exception 
+	 * 		Description manquante !
 	 */
 	private boolean onuAcik(int xM, int yM, int yonu) throws Exception
 	{
@@ -174,6 +180,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param n2 point 2
 	 * @return true ou false
 	 * @throws Exception 
+	 * 		Description manquante !
 	 * */
 	private boolean yolAcik(int[] n1, int[] n2) throws Exception
 	{
@@ -245,6 +252,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param menzil distance
 	 * @return true ou false
 	 * @throws Exception 
+	 * 		Description manquante !
 	 */
 	private boolean yolAcikveMenzilde(int[] n1, int[] n2, int menzil) throws Exception
 	{
@@ -267,6 +275,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param kY coordonnée-y de la position de danger
 	 * @param menzil Puissance de danger(bombe)
 	 * @throws Exception 
+	 * 		Description manquante !
 	 */
 	private void kacisBul(int xM, int yM, int gYonu, int kX, int kY, int menzil) throws Exception
 	{
@@ -312,6 +321,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param yonu L'index de direction
 	 * @return une index de direction
 	 * @throws Exception 
+	 * 		Description manquante !
 	 * */
 	private int hedef(int xM, int yM, int yonu) throws Exception
 	{
@@ -344,6 +354,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param yM coordonnée-y
 	 * @return true ou false
 	 * @throws Exception 
+	 * 		Description manquante !
 	 * */
 	private boolean hedefVar(int xM, int yM) throws Exception
 	{
@@ -372,6 +383,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param arkanaBak Regarder d'arrière aussi
 	 * @return true ou false
 	 * @throws Exception 
+	 * 		Description manquante !
 	 */
 	private boolean tehlikeli(int xM, int yM, int yonu, boolean arkanaBak) throws Exception
 	{
@@ -491,6 +503,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param yonu L'index de direction
 	 * @return un index de direction
 	 * @throws Exception 
+	 * 		Description manquante !
 	 * */
 	private int daralmaTehlikesi(int xM, int yM, int yonu) throws Exception
 	{
@@ -564,8 +577,9 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param xM coordonnée-x
 	 * @param yM coordonnée-y
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 * @throws Exception 
+	 * 		Description manquante !
 	 * */
 	private int yonSec(int xM, int yM) throws Exception
 	{
