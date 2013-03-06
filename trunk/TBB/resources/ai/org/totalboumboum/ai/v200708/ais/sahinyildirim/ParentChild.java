@@ -37,6 +37,7 @@ public class ParentChild {
 	/**
 	 * Methode  pour  ajouter les fils dans un vector d'un point pere
 	 * @param point
+	 * 		Description manquante !
 	 */
 	public void addChild(PointFind point)
 	{
