@@ -205,9 +205,11 @@ public class ErenGokce extends ArtificialIntelligence {
 */
 	/**
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y 
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isObstacle(int x, int y)
 	{	int[][] matrix = getZoneMatrix();
@@ -229,10 +231,13 @@ public class ErenGokce extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isMovePossible(int x, int y, int move)
 	{	boolean result;
@@ -260,14 +265,21 @@ public class ErenGokce extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param up
+	 * 		Description manquante !
 	 * @param down
+	 * 		Description manquante !
 	 * @param left
+	 * 		Description manquante !
 	 * @param right
+	 * 		Description manquante !
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws ExecutionException
+	 * 		Description manquante !
 	 */
 	private int danger(boolean up,boolean down,boolean left,boolean right,int x,int y) throws ExecutionException
 	{
@@ -342,14 +354,21 @@ public class ErenGokce extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param up
+	 * 		Description manquante !
 	 * @param down
+	 * 		Description manquante !
 	 * @param left
+	 * 		Description manquante !
 	 * @param right
+	 * 		Description manquante !
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws ExecutionException
+	 * 		Description manquante !
 	 */
 	private int shrinkDanger(boolean up,boolean down,boolean left,boolean right,int x,int y) throws ExecutionException
 	{
@@ -551,10 +570,13 @@ public class ErenGokce extends ArtificialIntelligence {
 */	
 	/**
 	 * @param up 
+	 * 		Description manquante !
 	 * @param down 
+	 * 		Description manquante !
 	 * @param left 
+	 * 		Description manquante !
 	 * @param right 
-	 * 
+	 * 		Description manquante !
 	 */
 	private void whereDidIStart(boolean up,boolean down,boolean left,boolean right)
 	{

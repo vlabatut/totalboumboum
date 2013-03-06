@@ -20,6 +20,7 @@ public class Tree {
 	/**
 	 * 
 	 * @param root
+	 * 		Description manquante !
 	 */
 	//un noeud et ses fils potentiels
 	public Tree(Node root)

@@ -32,8 +32,11 @@ public class Node {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param father
+	 * 		Description manquante !
 	 */
 	public Node(int x,int y,Node father)
 	{
@@ -47,7 +50,9 @@ public class Node {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public Node(int x,int y)
 	{
@@ -59,7 +64,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getX() {
 		return x;
@@ -67,6 +72,7 @@ public class Node {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 */
 	public void setX(int x) {
 		this.x = x;
@@ -74,7 +80,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getY() {
 		return y;
@@ -82,6 +88,7 @@ public class Node {
 	/**
 	 * 
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public void setY(int y) {
 		this.y = y;
@@ -89,7 +96,7 @@ public class Node {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getAccessCost() {
 		return accessCost;
@@ -97,6 +104,7 @@ public class Node {
 	/**
 	 * 
 	 * @param accessCost
+	 * 		Description manquante !
 	 */
 	public void setAccessCost(int accessCost) {
 		this.accessCost = accessCost;

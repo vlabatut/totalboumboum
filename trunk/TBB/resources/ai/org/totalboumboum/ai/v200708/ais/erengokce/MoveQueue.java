@@ -28,7 +28,9 @@ public class MoveQueue {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public MoveQueue(int x,int y)
 	{
@@ -43,7 +45,7 @@ public class MoveQueue {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public Vector<Node> getWay()
 	{
@@ -53,7 +55,7 @@ public class MoveQueue {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public Vector<Integer> getActions()
 	{
@@ -100,11 +102,17 @@ public class MoveQueue {
 	/**
 	 * 
 	 * @param root
+	 * 		Description manquante !
 	 * @param bombx
+	 * 		Description manquante !
 	 * @param bomby
+	 * 		Description manquante !
 	 * @param power
+	 * 		Description manquante !
 	 * @param zoneMatrix
+	 * 		Description manquante !
 	 * @throws ExecutionException
+	 * 		Description manquante !
 	 */
 	//l'algorithme aEtoile utilise pour s'echapper du bombe ou du shrink
 	public synchronized void aStar(Node root,int bombx,int bomby,int power,int[][] zoneMatrix) throws ExecutionException
