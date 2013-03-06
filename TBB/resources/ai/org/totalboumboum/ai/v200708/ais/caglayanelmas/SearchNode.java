@@ -77,6 +77,7 @@ public class SearchNode
 	/**
 	 * Marque la visite pendant l'iteration "i"
 	 * @param i 
+	 * 		Description manquante !
 	 */
 	protected void markVisited(int i)
 	{	

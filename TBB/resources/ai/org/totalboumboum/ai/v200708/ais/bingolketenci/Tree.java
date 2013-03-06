@@ -27,6 +27,7 @@ public class Tree {
 	/**
 	 * 
 	 * @param courant
+	 * 		Description manquante !
 	 */
 	public Tree(Noeud courant) {
 		this.firstNode = courant;
