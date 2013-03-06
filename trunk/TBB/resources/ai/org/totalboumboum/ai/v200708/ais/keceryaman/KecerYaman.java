@@ -211,10 +211,15 @@ public class KecerYaman extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param bombPower
+	 * 		Description manquante !
 	 * @param wX
+	 * 		Description manquante !
 	 * @param wY
+	 * 		Description manquante !
 	 */
 	private void addFlamesToDirection ( int x , int y , int bombPower , int wX , int wY ){
 		boolean blocked = false;
@@ -246,9 +251,11 @@ public class KecerYaman extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param current
+	 * 		Description manquante !
 	 * @param next
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int calculateAction ( Node current , Node next ){
 		int currentX = current.getX();
@@ -308,6 +315,7 @@ public class KecerYaman extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 */
 	private void updatePath ( Node node ){
 		path.clear();
@@ -326,9 +334,11 @@ public class KecerYaman extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isInDanger ( int x , int y ){
 		if ( Map.getValue((x-1), y) == VAL_BOMB || 
@@ -419,7 +429,9 @@ public class KecerYaman extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	private void updateGroupPoint ( int x , int y ){
 		int value = Map.getValue(x, y);
@@ -449,9 +461,11 @@ public class KecerYaman extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int heuristic ( int x , int y  ){
 		int tx = getOwnPosition()[0];
@@ -463,7 +477,9 @@ public class KecerYaman extends ArtificialIntelligence {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	private void updatePositionPoint ( int x , int y ){
 		int heuristic = heuristic(x,y);

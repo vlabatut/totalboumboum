@@ -41,8 +41,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param nodenode
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public  List<Node> bestPath (Node nodenode){
 		// initialization
@@ -115,7 +116,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public static void addToClosedList ( int x , int y ){
 		AStar.closedListCheck[ (x + width*y) ] = true;
@@ -123,7 +126,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public static void addToOpenList ( int x , int y ){
 		AStar.openListCheck[ (x + width*y) ] = true;
@@ -131,7 +136,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public static void removeFromClosedList ( int x , int y ){
 		AStar.closedListCheck[ (x + width*y) ] = false;
@@ -139,7 +146,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public static void removeFromOpenList ( int x , int y ){
 		AStar.openListCheck[ (x + width*y) ] = false;
@@ -147,9 +156,11 @@ public class AStar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public static boolean isInClosedList ( int x , int y ){
 		return AStar.closedListCheck[ (x + width*y) ];
@@ -157,8 +168,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public static boolean isInClosedList ( Node node ){
 		return closedList.contains(node);
@@ -166,8 +178,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public static boolean isInOpenList ( Node node ){
 		return openList.contains(node);
@@ -175,9 +188,11 @@ public class AStar {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public static boolean isInOpenList ( int x , int y ){
 		return AStar.openListCheck[ (x + width*y) ];
@@ -212,8 +227,9 @@ public class AStar {
 	}
 	/**
 	 * @param startNode 
+	 * 		Description manquante !
 	 * @param target 
-	 * 
+	 * 		Description manquante !
 	 */
 	public AStar(Node startNode, int[] target){
 		int i = 0;
@@ -233,7 +249,9 @@ public class AStar {
 	/**
 	 * 
 	 * @param height
+	 * 		Description manquante !
 	 * @param width
+	 * 		Description manquante !
 	 */
 	public static void init(int height, int width)
 	{

@@ -18,9 +18,11 @@ public class Map {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public static int getValue( int x , int y ){
 		return map[x][y];
@@ -28,8 +30,11 @@ public class Map {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param value
+	 * 		Description manquante !
 	 */
 	public static void setValue(int x, int y, int value){
 		map[x][y]=value;
@@ -37,6 +42,7 @@ public class Map {
 	/**
 	 * 
 	 * @param matrix
+	 * 		Description manquante !
 	 */
 	public static void init ( int[][] matrix){
 		map = matrix.clone();
@@ -63,7 +69,7 @@ public class Map {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public static int[][] getMap() {
 		return map;
