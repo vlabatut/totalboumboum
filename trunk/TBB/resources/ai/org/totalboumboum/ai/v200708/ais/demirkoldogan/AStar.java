@@ -29,8 +29,11 @@ public class AStar {
 	/**
 	 * 
 	 * @param ownBlock
+	 * 		Description manquante !
 	 * @param targetBlock
+	 * 		Description manquante !
 	 * @param matrix
+	 * 		Description manquante !
 	 */
 	//CONSTRUCTEUR
 	public AStar(Block ownBlock, Block targetBlock, int[][] matrix) 
@@ -43,6 +46,7 @@ public class AStar {
 	/**
 	 * Methode qui develope un block. Elle ajoute & supprime les blocks sur les listes globales.
 	 * @param blockDeveloped
+	 * 		Description manquante !
 	 */
 	public void developBlock(Block blockDeveloped)
 	{

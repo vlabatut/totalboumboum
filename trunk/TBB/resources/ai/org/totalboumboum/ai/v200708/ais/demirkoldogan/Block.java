@@ -25,8 +25,11 @@ public class Block {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param cost
+	 * 		Description manquante !
 	 */
 	public Block (int x, int y, int cost) 
 	{
@@ -38,7 +41,9 @@ public class Block {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public Block (int x, int y) 
 	{
@@ -60,7 +65,9 @@ public class Block {
 	/**
 	 * 
 	 * @param targetX
+	 * 		Description manquante !
 	 * @param targetY
+	 * 		Description manquante !
 	 */
 	//methode qui met en jour la valeur heuristic
 	public void setHeuristic(int targetX, int targetY) {
@@ -71,7 +78,7 @@ public class Block {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	// GETTERS & SETTERS
 	public int getX() {
@@ -80,7 +87,7 @@ public class Block {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getY() {
 		return y;
@@ -88,7 +95,7 @@ public class Block {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getCost() {
 		return cost;
@@ -96,7 +103,7 @@ public class Block {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public Block getParentBlock() {
 		return parentBlock;
@@ -104,6 +111,7 @@ public class Block {
 	/**
 	 * 
 	 * @param parentBlock
+	 * 		Description manquante !
 	 */
 	public void setParentBlock(Block parentBlock) {
 		this.parentBlock = parentBlock;

@@ -438,7 +438,9 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	 * @param x	position de référence
 	 * @param y	position de référence
 	 * @param blockType 
+	 * 		Description manquante !
 	 * @param zoneMatrix 
+	 * 		Description manquante !
 	 * @return	position du joueur le plus proche
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType, int[][] zoneMatrix)
