@@ -51,7 +51,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getX() {
 		return x;
@@ -59,6 +59,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 */
 	public void setX(int x) {
 		this.x = x;
@@ -66,7 +67,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getY() {
 		return y;
@@ -74,6 +75,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @param y
+	 * 		Description manquante !
 	 */
 	public void setY(int y) {
 		this.y = y;
@@ -82,7 +84,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getCost() {
 		return cost;
@@ -90,6 +92,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @param cost
+	 * 		Description manquante !
 	 */
 	public void setCost(int cost) {
 		this.cost = cost;
@@ -97,7 +100,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getHeuristic() {
 		return heuristic;
@@ -105,6 +108,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @param heuristic
+	 * 		Description manquante !
 	 */
 	public void setHeuristic(int heuristic) {
 		this.heuristic = heuristic;
@@ -114,7 +118,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getF() {
 		return cost+heuristic;
@@ -122,6 +126,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @param f
+	 * 		Description manquante !
 	 */
 	public void setF(int f) {
 		this.f = f;
@@ -131,7 +136,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public HanciToprakNode getParent() {
 		return parent;
@@ -139,7 +144,7 @@ public class HanciToprakNode implements Comparable {
 	/**
 	 * 
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int getDepth() {
 		return depth;

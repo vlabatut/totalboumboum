@@ -50,7 +50,9 @@ public class HanciToprakAStar {
 	/**
 	 * 
 	 * @param debut
+	 * 		Description manquante !
 	 * @param fin
+	 * 		Description manquante !
 	 */
 	public HanciToprakAStar(HanciToprakNode debut, HanciToprakNode fin) {
 
@@ -87,6 +89,7 @@ public class HanciToprakAStar {
 	/**
 	 * 
 	 * @param debut
+	 * 		Description manquante !
 	 */
 	public void findPath(HanciToprakNode debut) {
 
@@ -280,7 +283,9 @@ public class HanciToprakAStar {
 	/**
 	 * 
 	 * @param courante
+	 * 		Description manquante !
 	 * @param adjacente
+	 * 		Description manquante !
 	 */
 	public void ajoutOuverte(HanciToprakNode courante, HanciToprakNode adjacente) {
 //		System.out.println("ajoutouvertteyim");
@@ -334,8 +339,11 @@ public class HanciToprakAStar {
 	/**
 	 * 
 	 * @param debut
+	 * 		Description manquante !
 	 * @param fin
+	 * 		Description manquante !
 	 * @param matrix
+	 * 		Description manquante !
 	 */
 	public void initialiser(HanciToprakNode debut, HanciToprakNode fin,
 			int[][] matrix) {
@@ -408,9 +416,11 @@ public class HanciToprakAStar {
 	/**
 	 * 
 	 * @param courante
+	 * 		Description manquante !
 	 * @param list
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean isInList(HanciToprakNode courante,
 			List<HanciToprakNode> list) {
@@ -436,9 +446,11 @@ public class HanciToprakAStar {
 	
 	/**
 	 * @param cF1 
+	 * 		Description manquante !
 	 * @param cF2 
+	 * 		Description manquante !
 	 * @return 
-	 * 		?
+	 * 		Description manquante !
 	 */
 	HanciToprakNode compareF(HanciToprakNode cF1, HanciToprakNode cF2) {
 		if (cF1.getF() < cF2.getF())
