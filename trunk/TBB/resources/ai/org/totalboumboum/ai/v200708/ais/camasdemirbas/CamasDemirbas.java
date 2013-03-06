@@ -173,10 +173,13 @@ public class CamasDemirbas extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param bX
+	 * 		Description manquante !
 	 * @param bY
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 * @throws InterruptedException
+	 * 		Description manquante !
 	 */
 	private Integer  checkAndRunAwayFromBomb(int bX, int bY) throws InterruptedException {
 		if(isRiskFromBomb(x,y,bX,bY)) {
@@ -203,11 +206,15 @@ public class CamasDemirbas extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param bX
+	 * 		Description manquante !
 	 * @param bY
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Path findRunAwayPathFromBomb(int x, int y, int bX, int bY) {
 		for(int index=0;index<=2*RUNINTERVAL;index++) {
@@ -256,11 +263,15 @@ public class CamasDemirbas extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param bX
+	 * 		Description manquante !
 	 * @param bY
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isAvailable(int x, int y, int bX, int bY) {
 		try {
@@ -282,7 +293,9 @@ public class CamasDemirbas extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param path
+	 * 		Description manquante !
 	 * @param pathMoves
+	 * 		Description manquante !
 	 */
 	private void loadMoves(Path path, Vector<Integer> pathMoves) {
 		int [] position = {-1,-1};
@@ -299,9 +312,11 @@ public class CamasDemirbas extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param position
+	 * 		Description manquante !
 	 * @param nextPosition
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Integer getMove(int[] position, int[] nextPosition) {
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
@@ -319,11 +334,15 @@ public class CamasDemirbas extends ArtificialIntelligence
 	/**
 	 * *
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param bX
+	 * 		Description manquante !
 	 * @param bY
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isRiskFromBomb(int x, int y, int bX, int bY) {
 		int fire = getBombPowerAt(bX, bY);
@@ -335,10 +354,13 @@ public class CamasDemirbas extends ArtificialIntelligence
 
 	/**
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param blockType
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType){
 		int minDistance = 6;
@@ -359,11 +381,15 @@ public class CamasDemirbas extends ArtificialIntelligence
 	
 	/**
 	 * @param x1
+	 * 		Description manquante !
 	 * @param y1
+	 * 		Description manquante !
 	 * @param x2
+	 * 		Description manquante !
 	 * @param y2
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int distance(int x1,int y1,int x2,int y2)
 	{	int result = 0;
@@ -374,10 +400,13 @@ public class CamasDemirbas extends ArtificialIntelligence
 	
 	/**
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isMovePossible(int x, int y, int move)
 	{	boolean result;
@@ -404,9 +433,11 @@ public class CamasDemirbas extends ArtificialIntelligence
 	
 	/**
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private boolean isObstacle(int x, int y)
 	{	int[][] matrix = getZoneMatrix();
@@ -427,9 +458,11 @@ public class CamasDemirbas extends ArtificialIntelligence
 	
 	/**
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Vector<Integer> getPossibleMoves(int x, int y)
 	{	Vector<Integer> result = new Vector<Integer>();
@@ -441,10 +474,13 @@ public class CamasDemirbas extends ArtificialIntelligence
 	
 	/**
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param move
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private int[] positionAfterMove(int x, int y, int move) {
 		int[] result= {-1,-1};
@@ -475,10 +511,13 @@ public class CamasDemirbas extends ArtificialIntelligence
 	
 	/**
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @param possibleMoves
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Integer getShortestMoveToMiddle(int x,int y, Vector<Integer> possibleMoves) {
 		int temp = Integer.MAX_VALUE;
@@ -498,8 +537,9 @@ public class CamasDemirbas extends ArtificialIntelligence
 	}	
 	/**
 	 * @param integer
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Integer inverse(Integer integer) {
 		Integer result = 0;
