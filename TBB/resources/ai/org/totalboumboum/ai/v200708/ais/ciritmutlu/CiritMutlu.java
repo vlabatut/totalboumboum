@@ -89,7 +89,9 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param y	   coordonne du joueur IA
 	 * @return l'action qui va etre realisee au prochain appel de la methode 'call()' 
 	 * @throws ImpossibleActionException
+	 * 		Description manquante !
 	 * @throws AbsentNodeException
+	 * 		Description manquante !
 	 */
 	public int makeTree(Problem problem,int x , int y) throws ImpossibleActionException, AbsentNodeException{
 		double point=0;
@@ -320,8 +322,9 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param x coordonne x de la bombe
 	 * @param y coordonne y de la bombe
 	 * @param action 
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */	
 	private boolean isObstacleBombFire (int x, int y,int action){
 		int bombPower=getBombPowerAt(x, y);
@@ -897,6 +900,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * 	Calcule le point que le joueur IA peut obtenir selon l'etat dans lequel il  
 	 * se trouve 
 	 * @param action 
+	 * 		Description manquante !
 	 * @param state   etat du joueur
 	 * @param x		  coordonne du joueur IA	
 	 * @param y		  coordonne du joueur IA
@@ -957,10 +961,14 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * en parametre.
 	 * @param state	l'etat d'origine
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y 
+	 * 		Description manquante !
 	 * @param action 
+	 * 		Description manquante !
 	 * @return	l'etat cible obtenu en appliquant l'action
 	 * @throws ImpossibleActionException
+	 * 		Description manquante !
 	 */
 	public State apply(State state,int x, int y , int action) throws ImpossibleActionException
 	{	
