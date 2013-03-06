@@ -719,6 +719,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	 * @param x		position à étudier
 	 * @param y		position à étudier
 	 * @param move 
+	 * 		Description manquante !
 	 * @return		la nouvelle position qui est le résultat de l'action
 	 * 				appliquée à la position (x,y)
 	 */

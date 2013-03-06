@@ -45,6 +45,7 @@ public class PathFinder
 	/**
 	 * 
 	 * @param ai
+	 * 		Description manquante !
 	 */
 	public PathFinder(CaglayanElmas ai)
 	{
@@ -57,7 +58,9 @@ public class PathFinder
 	/**
 	 * 
 	 * @param initialState
+	 * 		Description manquante !
 	 * @param finalState
+	 * 		Description manquante !
 	 */
 	public void setStates(int[] initialState, int[] finalState)
 	{
@@ -71,7 +74,9 @@ public class PathFinder
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @param iteration
+	 * 		Description manquante !
 	 */
 	public void markVisitedNode(SearchNode node, int iteration)
 	{	
@@ -81,9 +86,11 @@ public class PathFinder
 	/**
 	 * 
 	 * @param s1
+	 * 		Description manquante !
 	 * @param s2
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public int calculateHeuristic(int[] s1, int[] s2)
 	{
@@ -93,9 +100,11 @@ public class PathFinder
 	/**
 	 * 
 	 * @param x
+	 * 		Description manquante !
 	 * @param y
+	 * 		Description manquante !
 	 * @return
-	 * 		?
+	 * 		Description manquante !
 	 */
 	private Vector<Integer> getPossibleMoves(int x, int y)
 	{	
@@ -150,8 +159,9 @@ public class PathFinder
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public boolean containsNode(SearchNode node)
 	{	
@@ -169,8 +179,9 @@ public class PathFinder
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public Iterator<SearchLink> developNode(SearchNode node)
 	{	
@@ -202,8 +213,9 @@ public class PathFinder
 	/**
 	 * 
 	 * @param node
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 */
 	public Vector<SearchLink> getPath(SearchNode node)
 	{	

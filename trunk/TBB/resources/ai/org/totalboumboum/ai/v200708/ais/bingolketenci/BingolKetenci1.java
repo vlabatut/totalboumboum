@@ -260,6 +260,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 * @param tab
 	 *            le tableau du jeu
 	 * @param pos 
+	 * 		Description manquante !
 	 * @return action à faire quand le shrink commence
 	 */
 	private int shrinkMove(int tab[][], int x, int y, int pos) {
