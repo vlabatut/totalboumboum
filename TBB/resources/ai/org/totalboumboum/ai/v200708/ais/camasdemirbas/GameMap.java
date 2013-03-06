@@ -23,6 +23,7 @@ public class GameMap {
 	/**
 	 * créer une nouvelle carte avec la matrice de zone
 	 * @param zoneMatrix 
+	 * 		Description manquante !
 	 */
 	public GameMap(int[][] zoneMatrix) {
 		this.zoneMatrix = zoneMatrix;
@@ -44,10 +45,11 @@ public class GameMap {
 	
 	/**
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y 
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
-	 * 
+	 * 		Description manquante !
 	 */
 	public boolean visited(int x, int y) {
 		return visited[x][y];
@@ -66,10 +68,11 @@ public class GameMap {
 	
 	/**
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y 
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
-	 * 
+	 * 		Description manquante !
 	 */
 	public boolean blocked(int x, int y) {
 		int state = getTerrain(x, y);
@@ -83,12 +86,15 @@ public class GameMap {
 
 	/**
 	 * @param sx 
+	 * 		Description manquante !
 	 * @param sy 
+	 * 		Description manquante !
 	 * @param tx 
+	 * 		Description manquante !
 	 * @param ty 
+	 * 		Description manquante !
 	 * @return
-	 * 		? 
-	 * 
+	 * 		Description manquante !
 	 */
 	public float getCost(int sx, int sy, int tx, int ty) {
 		return 1;
@@ -96,7 +102,7 @@ public class GameMap {
 
 	/**
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 * 
 	 */
 	public int getHeightInTiles() {
@@ -105,7 +111,7 @@ public class GameMap {
 
 	/**
 	 * @return
-	 * 		? 
+	 * 		Description manquante !
 	 * 
 	 */
 	public int getWidthInTiles() {
@@ -114,8 +120,9 @@ public class GameMap {
 
 	/**
 	 * @param x 
+	 * 		Description manquante !
 	 * @param y 
-	 * 
+	 * 		Description manquante !
 	 */
 	public void pathFinderVisited(int x, int y) {
 		visited[x][y] = true;
