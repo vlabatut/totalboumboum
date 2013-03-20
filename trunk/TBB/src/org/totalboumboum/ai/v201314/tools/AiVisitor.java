@@ -99,8 +99,6 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
 	/** Méthode recherchée */
 	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
-	/** Marqueur Eclipse */
-	private final static String ECLIPSE_TAG = "TODO";
 	/** Méthodes ignorées lors de l'analyse */
 	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
 	{	"AiMain",			
@@ -452,24 +450,18 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 
 	@Override
     public void visit(BlockComment n, Object arg)
-	{	
-		System.out.println();
+	{	// NOTE ne marche pas (méthode jamais appelée)
     }
 	
 	@Override
 	public void visit(JavadocComment n, Object arg)
-	{	String content = n.getContent();
-		if(content.contains(ECLIPSE_TAG))
-		{	int line = n.getBeginLine();
-			printErr("Erreur ligne "+line+" : le commentaire contient un marqueur TODO. Vous devez tous les retirer avant de rendre votre agent.");
-			errorCount++;
-		}
+	{	// NOTE fonctionne, mais...
+		// déjà traité dans le parser
     }
 
 	@Override
     public void visit(LineComment n, Object arg)
-	{	
-		System.out.println();
+	{	// NOTE ne marche pas (méthode jamais appelée)
     }
 	
 	/**
@@ -478,7 +470,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	 * @param msg
 	 * 		Message d'erreur à afficher.
 	 */
-	private void printErr(String msg)
+	public void printErr(String msg)
 	{	for(int i=0;i<indentLevel;i++)
 			msg = ">>" + msg;
        	System.out.println(msg);
