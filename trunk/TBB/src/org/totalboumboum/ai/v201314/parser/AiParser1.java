@@ -40,7 +40,11 @@ import spoon.Launcher;
 import spoon.support.builder.CtResource;
 import spoon.support.builder.FileFactory;
 
+import com.martiansoftware.jsap.FlaggedOption;
+import com.martiansoftware.jsap.JSAP;
 import com.martiansoftware.jsap.JSAPException;
+import com.martiansoftware.jsap.Switch;
+import com.martiansoftware.jsap.stringparsers.FileStringParser;
 
 /**
  * This class implements an integrated command-line launcher for processing
@@ -100,7 +104,37 @@ public class AiParser1 extends Launcher
 	public AiParser1(String[] args) throws JSAPException
 	{	super(args);
 
-		addProcessor(AiProcessor.class.getCanonicalName());
+		addProcessor(AiMethodProcessor.class.getCanonicalName());
+		addProcessor(AiClassProcessor.class.getCanonicalName());
+	}
+
+	@Override
+	protected JSAP defineArgs() throws JSAPException {
+		JSAP jsap = super.defineArgs();
+		Switch sw1;
+		FlaggedOption opt2;
+		
+		// Verbose
+		sw1 = (Switch)jsap.getByLongFlag("verbose");
+sw1.setDefault("true");
+
+		// Super Verbose
+		sw1 = (Switch)jsap.getByLongFlag("vvv");
+sw1.setDefault("true");
+
+		// java compliance
+		opt2 = (FlaggedOption)jsap.getByLongFlag("compliance");
+		opt2.setDefault("6");
+
+		// Disable output generation
+		sw1 = (Switch)jsap.getByLongFlag("no");
+sw1.setDefault("true");
+
+		// Compile Output files
+		sw1 = (Switch)jsap.getByLongFlag("compile");
+		sw1.setDefault("false");
+
+		return jsap;
 	}
 
 	/**
@@ -115,51 +149,22 @@ public class AiParser1 extends Launcher
 	 * 
 	 * @throws Exception 
 	 */
-	private int parseFile(File file, int level) throws Exception
-	{	for(int i=0;i<level;i++)
-			System.out.print("..");
-		System.out.println("Analyse du fichier "+file.getPath());
+	private void parseFiles(List<File> files) throws Exception
+	{	System.out.println("Analyse des fichiers ");
 		
-		// on initialise le parser avec le fichier à traiter
+		// on initialise le parser avec les fichiers à traiter
 		getInputSources().clear();
-		CtResource input = FileFactory.createResource(file);
-		addInputResource(input);
+		for(File file: files)
+		{	CtResource input = FileFactory.createResource(file);
+			addInputResource(input);
+		}
 		
 		// on lance le traitement
 		run();
 
-		// on récup-re le nombre d'erreurs
+		// on récupère le nombre d'erreurs
 //		getProcessorTypes()
-		
-		
-		
-		
-		
-		
-		
-		// creates an input stream for the file to be parsed
-        FileInputStream in = new FileInputStream(file);
         
-        CompilationUnit cu;
-        try
-        {	// parse the file
-            cu = JavaParser.parse(in);
-        }
-        finally
-        {	in.close();
-        }
-
-        // display trace
-        AiVisitor visitor = new AiVisitor(level);
-        visitor.visit(cu,null);
-        int result = visitor.getErrorCount();
-        if(result>0)
-        {	for(int i=0;i<level;i++)
-				System.out.print("..");
-        	System.out.println("   total pour le fichier "+file.getName()+" : "+result);
-        }
-        
-        return result;
 	}
 	
 	/**
@@ -176,30 +181,35 @@ public class AiParser1 extends Launcher
 	 * 
 	 * @throws Exception 
 	 */
-	private int parseFolder(File folder, int level) throws Exception
-	{	int result = 0;
-		if(IGNORED_PACKAGES.contains(folder.getName()))
-			System.out.println("Paquetage "+folder.getPath()+" ignoré");
-		else
-		{	System.out.println("Analyse du paquetage "+folder.getPath());
+	private List<File> scanFolder(File folder) throws Exception
+	{	List<File> result = new ArrayList<File>();
+		String name = folder.getName();
 		
-			File[] files = folder.listFiles();
-			for(File file: files)
-			{	if(file.isDirectory())
-					result = result + parseFolder(file,level+1);
-				else
-				{	String filename = file.getName();
-					if(filename.endsWith(FileNames.EXTENSION_JAVA))
-						result = result + parseFile(file,level+1);
-					else if(VERBOSE)
-					{	for(int i=0;i<level;i++)
-							System.out.print("..");
-						System.out.println("Le fichier "+file.getPath()+" n'a pas été reconnu comme un fichier source Java");
+		// pour ignorer les dossiers svn
+		if(!name.contains(".svn"))
+		{	// packages à ignorer (versions antérieures)
+			if(IGNORED_PACKAGES.contains(name))
+				System.out.println("Paquetage "+folder.getPath()+" ignoré");
+			// analyse du package
+			else
+			{	System.out.println("Analyse du paquetage "+folder.getPath());
+			
+				File[] files = folder.listFiles();
+				for(File file: files)
+				{	if(file.isDirectory())
+						result.addAll(scanFolder(file));
+					else
+					{	String filename = file.getName();
+						if(filename.endsWith(FileNames.EXTENSION_JAVA))
+							result.add(file);
+						else if(VERBOSE)
+							System.out.println("Le fichier "+file.getPath()+" n'a pas été reconnu comme un fichier source Java");
 					}
 				}
 			}
+	    	System.out.println("total pour le paquetage "+name+" : "+result.size());
 		}
-    	System.out.println("total pour le paquetage "+folder.getName()+" : "+result);
+		
 		return result;
 	}
 
@@ -225,13 +235,16 @@ public class AiParser1 extends Launcher
 	 * @throws Exception 
 	 */
 	public void parseAi(File aiFolder) throws Exception
-	{	
-//		System.out.println("----------------------------------------------------------------------");
-//		System.out.println("Analyse de l'agent "+aiFolder.getPath());
-//		System.out.println("----------------------------------------------------------------------");
-		int errorCount = parseFolder(aiFolder,0);
+	{	if(!aiFolder.getName().contains(".svn"))
+		{	System.out.println("----------------------------------------------------------------------");
+			System.out.println("Analyse de l'agent "+aiFolder.getPath());
+			System.out.println("----------------------------------------------------------------------");
+			List<File> files = scanFolder(aiFolder);
+			parseFiles(files);
 //		System.out.println("total pour l'agent "+aiFolder.getName()+" : "+errorCount);
-//		System.out.print("\n\n");
+			// TODO
+			System.out.print("\n\n");
+		}
 	}
 	
 	/**

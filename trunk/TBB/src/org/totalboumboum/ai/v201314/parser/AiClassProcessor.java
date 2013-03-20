@@ -23,16 +23,18 @@ package org.totalboumboum.ai.v201314.parser;
 
 import spoon.processing.AbstractProcessor;
 import spoon.processing.Severity;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.ModifierKind;
 
-public class AiProcessor extends AbstractProcessor<CtMethod<?>>
+public class AiClassProcessor extends AbstractProcessor<CtClass<?>>
 {	
-    public void process(CtMethod<?> m)
+    @Override
+	public void process(CtClass<?> c)
     {
-        if (m.getModifiers().contains(ModifierKind.PUBLIC))
+        if (c.getModifiers().contains(ModifierKind.PUBLIC))
         {	
-           System.out.println("public method: "+m.getSimpleName());
+           System.out.println("public class: "+c.getSimpleName());
         }
     }
 }
