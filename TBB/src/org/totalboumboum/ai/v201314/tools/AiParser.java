@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201314.tools;
 
 import japa.parser.JavaParser;
 import japa.parser.ParseException;
+import japa.parser.ast.Comment;
 import japa.parser.ast.CompilationUnit;
 
 import java.io.File;
@@ -59,6 +60,8 @@ public class AiParser
 // 		"v4","v4_1","v4_2","v4_3",
 // 		"v5","v5_1"
  	}));
+	/** Marqueur Eclipse */
+	private final static String ECLIPSE_TAG = "TODO";
 	
 	/**
 	 * Programme principal.
@@ -116,12 +119,27 @@ public class AiParser
         AiVisitor visitor = new AiVisitor(level);
         visitor.visit(cu,null);
         int result = visitor.getErrorCount();
+        
+        // comments must be tested a posteriori
+        List<Comment> comments = cu.getComments();
+        for(Comment comment: comments)
+        {	// NOTE when there are several comments in a row,
+            // the parser might not detect them
+        	String content = comment.getContent();
+    		if(content.contains(ECLIPSE_TAG))
+    		{	int line = comment.getBeginLine();
+    			visitor.printErr("Erreur ligne "+line+" : le commentaire contient un marqueur TODO. Vous devez tous les retirer avant de rendre votre agent.");
+    			result++;
+    		}
+        }
+        
+        // display total
         if(result>0)
         {	for(int i=0;i<level;i++)
 				System.out.print("..");
         	System.out.println("   total pour le fichier "+file.getName()+" : "+result);
         }
-        
+
         return result;
 	}
 	
@@ -146,7 +164,7 @@ public class AiParser
 	{	int result = 0;
 		if(IGNORED_PACKAGES.contains(folder.getName()))
 			System.out.println("Paquetage "+folder.getPath()+" ignoré");
-		else
+		else if(!folder.getPath().contains(".svn"))
 		{	System.out.println("Analyse du paquetage "+folder.getPath());
 		
 			File[] files = folder.listFiles();
@@ -164,8 +182,9 @@ public class AiParser
 					}
 				}
 			}
+			
+	    	System.out.println("total pour le paquetage "+folder.getName()+" : "+result);
 		}
-    	System.out.println("total pour le paquetage "+folder.getName()+" : "+result);
 		return result;
 	}
 
@@ -197,12 +216,14 @@ public class AiParser
 	 * 		Erreur en ouvrant un des fichiers source.
 	 */
 	public static void parseAi(File aiFolder) throws ParseException, IOException
-	{	System.out.println("----------------------------------------------------------------------");
-		System.out.println("Analyse de l'agent "+aiFolder.getPath());
-		System.out.println("----------------------------------------------------------------------");
-		int errorCount = parseFolder(aiFolder,0);
-		System.out.println("total pour l'agent "+aiFolder.getName()+" : "+errorCount);
-		System.out.print("\n\n");
+	{	 if(!aiFolder.getPath().contains(".svn"))
+		{	System.out.println("----------------------------------------------------------------------");
+			System.out.println("Analyse de l'agent "+aiFolder.getPath());
+			System.out.println("----------------------------------------------------------------------");
+			int errorCount = parseFolder(aiFolder,0);
+			System.out.println("total pour l'agent "+aiFolder.getName()+" : "+errorCount);
+			System.out.print("\n\n");
+		}
 	}
 	
 	/**

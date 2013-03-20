@@ -1654,14 +1654,14 @@ public class Launcher
  */
 
 /* TODO parser : 
- * 		- vérifier que pas d'include sur d'autres package que l'api, les deux classes autorisées, les classes java standard, et l'agent lui-même
- * 		- modifier le document pour présenter le parser à la fin, avec la checklist
- * 		- rechercher les todos dans le source des étudiants (parser)
- * 		- voir comment les autres types d'annotation (que single) fonctionnent: p-ê faut il faire un appel spécial avant les méthodes au autres (i.e. p-ê pas auto)
+ * 		- vérifier que pas d'include sur d'autres package que :
+ * 			- l'api, 
+ * 			- les deux classes autorisées, 
+ * 			- les classes java standard, 
+ *			- l'agent lui-même
  */
 
 /* TODO document 
- * 		- dans le document, justifier les différentes contraintes imposées pr le code source
  * 		- reprendre la description des exceptions (nouvelles ? certaines plus d'actualité ?)
  * 		- màj diag de classe pr agent-related
  * 		- màj manuel TBB : écrans de statistiques
