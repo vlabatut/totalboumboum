@@ -62,7 +62,7 @@ public class AiParser2
 
 	public AiParser2()
 	{	processors = new ArrayList<Processor<?>>();
-		processors.add(new AiProcessor());
+		processors.add(new AiMethodProcessor());
 	}
 	
     /////////////////////////////////////////////////////////////////

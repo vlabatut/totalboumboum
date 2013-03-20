@@ -100,7 +100,7 @@ public class AiParser extends Launcher
 	public AiParser(String[] args) throws JSAPException
 	{	super(args);
 
-		addProcessor(AiProcessor.class.getCanonicalName());
+		addProcessor(AiMethodProcessor.class.getCanonicalName());
 	}
 
 	/**
@@ -138,26 +138,27 @@ public class AiParser extends Launcher
 		
 		
 		// creates an input stream for the file to be parsed
-        FileInputStream in = new FileInputStream(file);
-        
-        CompilationUnit cu;
-        try
-        {	// parse the file
-            cu = JavaParser.parse(in);
-        }
-        finally
-        {	in.close();
-        }
-
-        // display trace
-        AiVisitor visitor = new AiVisitor(level);
-        visitor.visit(cu,null);
-        int result = visitor.getErrorCount();
-        if(result>0)
-        {	for(int i=0;i<level;i++)
-				System.out.print("..");
-        	System.out.println("   total pour le fichier "+file.getName()+" : "+result);
-        }
+		int result = 0;
+//        FileInputStream in = new FileInputStream(file);
+//        
+//        CompilationUnit cu;
+//        try
+//        {	// parse the file
+//            cu = JavaParser.parse(in);
+//        }
+//        finally
+//        {	in.close();
+//        }
+//
+//        // display trace
+//        AiVisitor visitor = new AiVisitor(level);
+//        visitor.visit(cu,null);
+//        result = visitor.getErrorCount();
+//        if(result>0)
+//        {	for(int i=0;i<level;i++)
+//				System.out.print("..");
+//        	System.out.println("   total pour le fichier "+file.getName()+" : "+result);
+//        }
         
         return result;
 	}
@@ -225,12 +226,15 @@ public class AiParser extends Launcher
 	 * @throws Exception 
 	 */
 	public void parseAi(File aiFolder) throws Exception
-	{	System.out.println("----------------------------------------------------------------------");
-		System.out.println("Analyse de l'agent "+aiFolder.getPath());
-		System.out.println("----------------------------------------------------------------------");
-		int errorCount = parseFolder(aiFolder,0);
-		System.out.println("total pour l'agent "+aiFolder.getName()+" : "+errorCount);
-		System.out.print("\n\n");
+	{	if(!aiFolder.getName().contains(".svn"))
+		{	System.out.println("----------------------------------------------------------------------");
+			System.out.println("Analyse de l'agent "+aiFolder.getPath());
+			System.out.println("----------------------------------------------------------------------");
+//		int errorCount = parseFolder(aiFolder,0);
+			int errorCount = parseFile(aiFolder,0);
+			System.out.println("total pour l'agent "+aiFolder.getName()+" : "+errorCount);
+			System.out.print("\n\n");
+		}
 	}
 	
 	/**
