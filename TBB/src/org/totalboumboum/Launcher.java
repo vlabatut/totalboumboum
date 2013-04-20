@@ -1667,4 +1667,3 @@ public class Launcher
 // TODO commande pour masquer certains sprites (genre: que les héros)
 // TODO dans l'évolution de la partie, afficher l'occupation processeur
 // TODO vérifier que la classe de test de simplet marche toujours
-// TODO méthode pour générer le code source d'un groupe à partir de son nom et d'un code source générique

@@ -67,22 +67,24 @@ public class FileTools
 	}
 	
 	public static void copyDirectory(File source, File target) throws IOException
-	{	// recursively copy a directory
-		if (source.isDirectory())
-		{	if (!target.exists())
-				target.mkdir();
-            String[] files = source.list();
-            for(int i=0;i<files.length;i++)
-            {	String fileName = files[i];
-            	File src = new File(source, fileName);
-            	File trgt = new File(target, fileName);
-            	copyDirectory(src,trgt);
-            }
+	{	if(!source.getAbsolutePath().contains(".svn"))
+		{	// recursively copy a directory
+			if (source.isDirectory())
+			{	if (!target.exists())
+					target.mkdir();
+	            String[] files = source.list();
+	            for(int i=0;i<files.length;i++)
+	            {	String fileName = files[i];
+	            	File src = new File(source, fileName);
+	            	File trgt = new File(target, fileName);
+	            	copyDirectory(src,trgt);
+	            }
+			}
+			// or bit-to-bit copy a file
+			else
+			{	copyFile(source,target);
+	        }
 		}
-		// or bit-to-bit copy a file
-		else
-		{	copyFile(source,target);
-        }
 	}
 	
 	public static void copyFile(File source, File target) throws IOException

@@ -552,3 +552,5 @@
 		- les préférences sont définies dans un fichier xml séparé
 		- les préférences sont initialisées une seule fois pour un agent donné,
 		  puis copiées à chacune de ses instantiations.
+		- outil de vérification des agents plus complet : importations, commentaires, etc.
+		- outil de génération de code source (vide) à partir d'un agent générique
