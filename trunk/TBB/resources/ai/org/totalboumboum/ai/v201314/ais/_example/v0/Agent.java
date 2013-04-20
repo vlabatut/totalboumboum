@@ -16,12 +16,12 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class Example extends ArtificialIntelligence
+public class Agent extends ArtificialIntelligence
 {
 	/**
 	 * Instancie la classe principale de l'agent.
 	 */
-	public Example()
+	public Agent()
 	{	// active/désactive la sortie texte
 		verbose = true;
 	}
@@ -112,25 +112,25 @@ public class Example extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler<Example> getModeHandler() throws StopRequestException
+	protected AiModeHandler<Agent> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiPreferenceHandler<Example> getPreferenceHandler() throws StopRequestException
+	protected AiPreferenceHandler<Agent> getPreferenceHandler() throws StopRequestException
 	{	checkInterruption();
 		return preferenceHandler;
 	}
 
 	@Override
-	protected AiBombHandler<Example> getBombHandler() throws StopRequestException
+	protected AiBombHandler<Agent> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler<Example> getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<Agent> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

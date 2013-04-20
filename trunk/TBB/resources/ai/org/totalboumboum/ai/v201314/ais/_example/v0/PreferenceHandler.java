@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class PreferenceHandler extends AiPreferenceHandler<Example>
+public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -28,7 +28,7 @@ public class PreferenceHandler extends AiPreferenceHandler<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected PreferenceHandler(Example ai) throws StopRequestException
+	protected PreferenceHandler(Agent ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		

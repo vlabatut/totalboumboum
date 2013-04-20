@@ -30,7 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.ais._example.v0.Example;
+import org.totalboumboum.ai.v201314.ais._example.v0.Agent;
 import org.xml.sax.SAXException;
 
 /**
@@ -51,7 +51,7 @@ public class AiMain extends AiManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public ArtificialIntelligence instantiateAgent()
-	{	return new Example();
+	{	return new Agent();
 	}
 
 	/////////////////////////////////////////////////////////////////
