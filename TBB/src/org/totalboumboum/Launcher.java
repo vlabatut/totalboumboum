@@ -1654,14 +1654,14 @@ public class Launcher
  */
 
 /* TODO document 
- * 		- reprendre la description des exceptions (nouvelles ? certaines plus d'actualité ?)
- * 		- màj diag de classe pr agent-related
  * 		- màj manuel TBB : écrans de statistiques
  */
 
 // TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
-// 		>> comment ? combi avec les touches numériques ? (pas pratique. ou alors avec control droite >> pas possible)
+// 		>> comment (ergonomie) ? 
+//			combi avec les touches numériques ? >> pas pratique). 
+//			ou alors avec control droite >> pas possible
 //		>> faire défiler ? (encore moins pratique)
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
 // TODO dégager les threads des agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
