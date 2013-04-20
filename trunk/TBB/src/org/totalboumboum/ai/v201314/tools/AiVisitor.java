@@ -28,7 +28,9 @@ import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.tools.classes.ClassTools;
 
 import japa.parser.ast.BlockComment;
+import japa.parser.ast.ImportDeclaration;
 import japa.parser.ast.LineComment;
+import japa.parser.ast.PackageDeclaration;
 import japa.parser.ast.TypeParameter;
 import japa.parser.ast.body.BodyDeclaration;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
@@ -97,6 +99,10 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	/** Classe principale des agents */
 	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
+	/** Package contenant tous les agents pour une version donnée de l'API */
+	private final static String AGENTS_PACKAGE = "ais";
+	/** Package général du jeu */
+	private final static String GAME_PACKAGE = "org.totalboumboum";
 	/** Méthode recherchée */
 	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
 	/** Méthodes ignorées lors de l'analyse */
@@ -121,10 +127,19 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
  	{	"Exception",			
  		"StopRequestException"
  	});
+	/** Classe autorisées */
+	private final static List<String> ALLOWED_CLASSES = Arrays.asList(new String[]
+	{	GAME_PACKAGE+".tools.images.PredefinedColor",
+		GAME_PACKAGE+".engine.content.feature.Direction"
+	});
 	
 	/////////////////////////////////////////////////////////////////
 	// MISC VARIABLES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Package de l'agent courant */
+	private String agentPackage = null;
+	/** Package de l'API courante */
+	private String apiPackage = null;
 	/** Méthode courante */
 	private String currentMethod = null;
 	/** Niveau hiérarchique courant */
@@ -149,6 +164,19 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	{	return errorCount;	
 	}
 	
+	/**
+	 * Affiche le message d'erreur spécifié
+	 * 
+	 * @param msg
+	 * 		Message d'erreur à afficher.
+	 */
+	public void printErr(String msg)
+	{	for(int i=0;i<indentLevel;i++)
+			msg = ">>" + msg;
+       	System.out.println(msg);
+       	System.err.println(msg);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// VISITOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -449,31 +477,59 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	}
 
 	@Override
-    public void visit(BlockComment n, Object arg)
+    public void visit(BlockComment comment, Object arg)
 	{	// NOTE ne marche pas (méthode jamais appelée)
     }
 	
 	@Override
-	public void visit(JavadocComment n, Object arg)
+	public void visit(JavadocComment comment, Object arg)
 	{	// NOTE fonctionne, mais...
 		// déjà traité dans le parser
     }
 
 	@Override
-    public void visit(LineComment n, Object arg)
+    public void visit(LineComment comment, Object arg)
 	{	// NOTE ne marche pas (méthode jamais appelée)
     }
 	
-	/**
-	 * Affiche le message d'erreur spécifié
-	 * 
-	 * @param msg
-	 * 		Message d'erreur à afficher.
-	 */
-	public void printErr(String msg)
-	{	for(int i=0;i<indentLevel;i++)
-			msg = ">>" + msg;
-       	System.out.println(msg);
-       	System.err.println(msg);
+	@Override
+	public void visit(PackageDeclaration declaration, Object arg)
+	{	String pack = declaration.getName().toString();
+	
+		// on met à jour le package de l'API courante
+		apiPackage = "";
+		String temp[] = pack.split("\\.");
+		int i = 0;
+		while(!temp[i].equals(AGENTS_PACKAGE))
+		{	apiPackage = apiPackage + temp[i] + ClassTools.CLASS_SEPARATOR;
+			i++;
+		}
+		apiPackage = apiPackage.substring(0,apiPackage.length()-1);
+
+		// on met à jour le package de l'agent courant
+		agentPackage = apiPackage + ClassTools.CLASS_SEPARATOR + temp[i];		// apis
+		i++;
+		agentPackage = agentPackage + ClassTools.CLASS_SEPARATOR + temp[i];		// agent
+		i++;
+		if(i<temp.length && temp[i].startsWith("v"))
+			agentPackage = agentPackage + ClassTools.CLASS_SEPARATOR + temp[i];	// version
+	}
+	
+	@Override
+	public void visit(ImportDeclaration n, Object arg)
+	{	String name = n.getName().toString();
+		// s'agit-il d'une classe du jeu ?
+		if(name.startsWith(GAME_PACKAGE))
+		{	// s'agit-il d'une classe de l'API ?
+			if(!(name.startsWith(apiPackage) && !name.startsWith(apiPackage+ClassTools.CLASS_SEPARATOR+AGENTS_PACKAGE))
+			// s'agit-il d'une autre classe de l'agent ?
+			&& !name.startsWith(agentPackage)
+			// s'agit-il d'une classe du jeu autorisée ?
+			&& !ALLOWED_CLASSES.contains(name))
+			{	int line = n.getBeginLine();
+				printErr("Erreur ligne "+line+" : le package ou la classe importé(e) ("+name+") n'est pas autorisé(e) pour cet agent.");
+				errorCount++;
+			}
+		}
 	}
 }

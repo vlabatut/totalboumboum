@@ -1653,14 +1653,6 @@ public class Launcher
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
  */
 
-/* TODO parser : 
- * 		- vérifier que pas d'include sur d'autres package que :
- * 			- l'api, 
- * 			- les deux classes autorisées, 
- * 			- les classes java standard, 
- *			- l'agent lui-même
- */
-
 /* TODO document 
  * 		- reprendre la description des exceptions (nouvelles ? certaines plus d'actualité ?)
  * 		- màj diag de classe pr agent-related
