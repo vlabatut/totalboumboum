@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="org.totalboumboum.ai.AiAbstractManager" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/AiAbstractManager.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="-76" y="179" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.BombHandler" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/BombHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="387" y="187" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.AiMain" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/AiMain.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="-76" y="336" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.CommonTools" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/CommonTools.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="966" y="276" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.TargetHandler" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/TargetHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="1083" y="201" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.MoveHandler" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/MoveHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="609" y="182" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.ModeHandler" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/ModeHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="848" y="183" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.Simplet" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/Simplet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="609" y="257" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.PreferenceHandler" project="TBB" 
+    file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/PreferenceHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="151" y="188" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.criterion.CriterionLocality" 
+    project="TBB" file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/criterion/CriterionLocality.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position x="167" y="-176" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.criterion.CriterionDestruction" 
+    project="TBB" file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/criterion/CriterionDestruction.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position x="406" y="-176" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="org.totalboumboum.ai.v201314.ais._simplet.criterion.CriterionThreat" 
+    project="TBB" file="/TBB/resources/ai/org/totalboumboum/ai/v201314/ais/_simplet/criterion/CriterionThreat.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position x="-69" y="-174" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiManager" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiManager.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="-77" y="259" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiCriterion" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiCriterion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="150" y="-31" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiCriterionInteger.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="-70" y="-98" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiCriterionString" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiCriterionString.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="387" y="-95" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiCriterionBoolean.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="150" y="-97" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiCombination" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiCombination.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="387" y="-28" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiCategory" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiCategory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="150" y="39" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiPreferenceHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="150" y="110" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiAbstractHandler" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiAbstractHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="609" y="-23" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiBombHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="387" y="110" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiMoveHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="609" y="107" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiModeHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="847" y="106" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <enumeration id="25" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiMode" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiMode.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="847" y="15" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </enumeration>  
+  <class id="26" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceLoader" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/AiPreferenceLoader.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="-77" y="108" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201314/adapter/agent/ArtificialIntelligence.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position x="610" y="335" width="-1" height="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="29">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="30" name="criteria"/>      
+      <multiplicity id="31" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="33">    
+    <bendpoint x="1083" y="-23"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="34">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="35" name="targetHandler"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="38" name="mode"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="41" name="handlers"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="44" name="modeHandler"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="47" name="preferenceHandler"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="51">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="52" name="externalCriteria">        
+        <position x="-110" y="25" width="81" height="18"/>      
+      </attribute>      
+      <multiplicity id="53" minimum="0" maximum="2147483647">        
+        <position x="-41" y="-1" width="21" height="16"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="58">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="59">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="61">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="62" name="commonTools"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="64">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="65">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="66" name="category"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="68">    
+    <bendpoint x="966" y="-23"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <generalization id="70">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <association id="71">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="72" name="moveHandler"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="75">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="76" name="categoryMap"/>      
+      <multiplicity id="77" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="78">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="79">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="80">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="81" name="bombHandler"/>      
+      <multiplicity id="82" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false"/>    
+    <operations public="false" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
