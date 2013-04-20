@@ -581,9 +581,6 @@ public class UtilityHandler extends AiUtilityHandler<SaglamSeven>
 		            defineUtilityValue(mode, combi, 1);
 			}
 		}
-		
-		
-		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -595,6 +592,6 @@ public class UtilityHandler extends AiUtilityHandler<SaglamSeven>
 		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
-		// TODO à redéfinir, si vous voulez afficher d'autres informations
+		//  à redéfinir, si vous voulez afficher d'autres informations
 	}
 }
