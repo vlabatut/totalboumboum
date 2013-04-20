@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class ModeHandler extends AiModeHandler<Example>
+public class ModeHandler extends AiModeHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -23,7 +23,7 @@ public class ModeHandler extends AiModeHandler<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected ModeHandler(Example ai) throws StopRequestException
+	protected ModeHandler(Agent ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		

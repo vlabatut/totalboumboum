@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class BombHandler extends AiBombHandler<Example>
+public class BombHandler extends AiBombHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -23,7 +23,7 @@ public class BombHandler extends AiBombHandler<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected BombHandler(Example ai) throws StopRequestException
+	protected BombHandler(Agent ai) throws StopRequestException
     {	super(ai);
     	ai.checkInterruption();
 		

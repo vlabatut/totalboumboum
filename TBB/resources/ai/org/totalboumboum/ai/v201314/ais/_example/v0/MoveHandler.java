@@ -15,7 +15,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Xxxxxx
  * @author Yyyyyy
  */
-public class MoveHandler extends AiMoveHandler<Example>
+public class MoveHandler extends AiMoveHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -26,7 +26,7 @@ public class MoveHandler extends AiMoveHandler<Example>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected MoveHandler(Example ai) throws StopRequestException
+	protected MoveHandler(Agent ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		
