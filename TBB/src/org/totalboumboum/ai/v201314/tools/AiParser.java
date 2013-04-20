@@ -36,7 +36,7 @@ import java.util.List;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
- * Cette méthode parse les codes sources définissant un agent et vérifie
+ * Cette classe parse les codes sources définissant un agent et vérifie
  * que les appels à checkInterruption sont effectués correctement.
  * <br/>
  * La liste {@link #IGNORED_PACKAGES} permet, comme son nom l'indique, de spécifier
@@ -48,7 +48,7 @@ import org.totalboumboum.tools.files.FileNames;
  * @author Vincent Labatut
  */
 public class AiParser
-{	/** Active/désactive la sortie texte */
+{	/** Active/désactive la sortie texte <i>détaillée</i> */
 	public static boolean verbose = false;
 	/** Liste des versions à ignorer */
 	public final static List<String> IGNORED_PACKAGES = new ArrayList<String>(Arrays.asList(new String[]
