@@ -1653,10 +1653,6 @@ public class Launcher
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
  */
 
-/* TODO document 
- * 		- màj manuel TBB : écrans de statistiques
- */
-
 // TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
 // 		>> comment (ergonomie) ? 
