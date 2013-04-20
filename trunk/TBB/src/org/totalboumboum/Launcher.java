@@ -1659,8 +1659,11 @@ public class Launcher
 //			combi avec les touches numériques ? >> pas pratique). 
 //			ou alors avec control droite >> pas possible
 //		>> faire défiler ? (encore moins pratique)
+//		>> utiliser une fenêtre séparée ?
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
-// TODO dégager les threads des agents qui ont été éliminés (plus d'appel par le moteur, ràz des stats de temps pour les plots ingame)
+// TODO dégager les threads des agents qui ont été éliminés
+//		>> plus d'appel par le moteur
+//		>> ràz des stats de temps pour les plots ingame
 // TODO commande pour masquer certains sprites (genre: que les héros)
 // TODO dans l'évolution de la partie, afficher l'occupation processeur
 // TODO vérifier que la classe de test de simplet marche toujours

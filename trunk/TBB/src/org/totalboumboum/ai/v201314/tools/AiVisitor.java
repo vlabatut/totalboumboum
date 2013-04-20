@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201314.tools;
 import java.util.Arrays;
 import java.util.List;
 
+import org.totalboumboum.ai.AiTools;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.tools.classes.ClassTools;
 
@@ -99,8 +100,6 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	/** Classe principale des agents */
 	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
-	/** Package contenant tous les agents pour une version donnée de l'API */
-	private final static String AGENTS_PACKAGE = "ais";
 	/** Package général du jeu */
 	private final static String GAME_PACKAGE = "org.totalboumboum";
 	/** Méthode recherchée */
@@ -138,6 +137,8 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	/** Package de l'agent courant */
 	private String agentPackage = null;
+	/** Package du pack courant */
+	private String packPackage = null;
 	/** Package de l'API courante */
 	private String apiPackage = null;
 	/** Méthode courante */
@@ -497,22 +498,13 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	{	String pack = declaration.getName().toString();
 	
 		// on met à jour le package de l'API courante
-		apiPackage = "";
-		String temp[] = pack.split("\\.");
-		int i = 0;
-		while(!temp[i].equals(AGENTS_PACKAGE))
-		{	apiPackage = apiPackage + temp[i] + ClassTools.CLASS_SEPARATOR;
-			i++;
-		}
-		apiPackage = apiPackage.substring(0,apiPackage.length()-1);
+		apiPackage = AiTools.getApiPackage(pack);
 
+		// on met à jour le package du pack courante
+		packPackage = AiTools.getPackPackage(pack);
+		
 		// on met à jour le package de l'agent courant
-		agentPackage = apiPackage + ClassTools.CLASS_SEPARATOR + temp[i];		// apis
-		i++;
-		agentPackage = agentPackage + ClassTools.CLASS_SEPARATOR + temp[i];		// agent
-		i++;
-		if(i<temp.length && temp[i].startsWith("v"))
-			agentPackage = agentPackage + ClassTools.CLASS_SEPARATOR + temp[i];	// version
+		agentPackage = AiTools.getAgentPackage(pack,true);
 	}
 	
 	@Override
@@ -521,7 +513,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		// s'agit-il d'une classe du jeu ?
 		if(name.startsWith(GAME_PACKAGE))
 		{	// s'agit-il d'une classe de l'API ?
-			if(!(name.startsWith(apiPackage) && !name.startsWith(apiPackage+ClassTools.CLASS_SEPARATOR+AGENTS_PACKAGE))
+			if(!(name.startsWith(apiPackage) && !name.startsWith(packPackage))
 			// s'agit-il d'une autre classe de l'agent ?
 			&& !name.startsWith(agentPackage)
 			// s'agit-il d'une classe du jeu autorisée ?
