@@ -24,8 +24,10 @@ package org.totalboumboum.engine.container.tile;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -44,12 +46,27 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * This class represents a tile
+ * of the level.
  * 
  * @author Vincent Labatut
- *
  */
 public class Tile
-{		
+{	
+	/**
+	 * Creates a tile using the specified data.
+	 * 
+	 * @param level
+	 * 		Level containing this tile.
+	 * @param row
+	 * 		Row of this tile in the level.
+	 * @param col
+	 * 		Column of this tile in the level.
+	 * @param posX
+	 * 		X position of the tile in pixels. 
+	 * @param posY
+	 * 		Y position of the tile in pixels. 
+	 */
 	public Tile(Level level,int row, int col, double posX, double posY)
 	{	this.level = level;
 		this.posX = posX;
@@ -63,11 +80,23 @@ public class Tile
 		blocks = new ArrayList<Block>(0);
 		items = new ArrayList<Item>(0);
 		floors = new ArrayList<Floor>(0);
+		
+		// init draw switches (all true)
+		drawSwitches = new HashMap<Role, Boolean>();
+		for(Role role: Role.values())
+			drawSwitches.put(role,true);
 	}
 		
     /////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Updates all sprites having
+	 * the specified role.
+	 * 
+	 * @param role
+	 * 		Role of the targetted sprites.
+	 */
 	public void updateSprites(Role role)
 	{	if(role==Role.BLOCK)
 			updateSprites(blocks);
@@ -82,7 +111,15 @@ public class Tile
 		else if(role==Role.ITEM)
 			updateSprites(items);
 	}
-
+	
+	/**
+	 * Updates the specified list of sprites.
+	 * 
+	 * @param <T>
+	 * 		Type of sprite to be updated.
+	 * @param sprites
+	 * 		List of sprites to be updated.
+	 */
 	private <T extends Sprite> void updateSprites(List<T> sprites)
 	{	int i=0;
 		while(i<sprites.size())
@@ -97,6 +134,37 @@ public class Tile
     /////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates, for each role, if this kind of sprite should be drawn */
+	private Map<Role,Boolean> drawSwitches;
+
+	/**
+	 * Changes the flag regarding the drawing
+	 * of the specified kind of sprite.
+	 * 
+	 * @param role
+	 * 		Concerned kind of sprite.
+	 * @param value
+	 * 		Whether or not it should be drawn.
+	 */
+	public void setDrawSwitch(Role role, boolean value)
+	{	drawSwitches.put(role,value);
+	}
+	
+	/**
+	 * Draws the sprites corresponding to the
+	 * specified parameters.
+	 * 
+	 * @param role
+	 * 		Role of the types to be drawn.
+	 * @param g
+	 * 		Object used for drawing.
+	 * @param flat
+	 * 		Flat sprites (eg. items).
+	 * @param onGround
+	 * 		Sprites currently on-ground.
+	 * @param shadow
+	 * 		Whether the shadow should be drawn (or not).
+	 */
 	public void drawSprites(Role role, Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	if(role==Role.BLOCK)
 			drawSprites(blocks,g,flat,onGround,shadow);
@@ -112,6 +180,23 @@ public class Tile
 			drawSprites(items,g,flat,onGround,shadow);
 	}
 
+	/**
+	 * Draws the sprites corresponding to the
+	 * specified parameters.
+	 * 
+	 * @param <T>
+	 * 		Type of the sprites to be drawn.
+	 * @param sprites
+	 * 		List of the sprites to be drawn.
+	 * @param g
+	 * 		Object used for drawing.
+	 * @param flat
+	 * 		Flat sprites (eg. items).
+	 * @param onGround
+	 * 		Sprites currently on-ground.
+	 * @param shadow
+	 * 		Whether the shadow should be drawn (or not).
+	 */
 	private <T extends Sprite> void drawSprites(List<T> sprites, Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	for(int i=0;i<sprites.size();i++)
 		{	T tempS = sprites.get(i);
@@ -126,72 +211,18 @@ public class Tile
 	}
 
 	/**
-	 * dessine un sprite sans son ombre
+	 * Draws the sprites corresponding to the 
+	 * specified parameters.
+	 * 
+	 * @param g
+	 * 		Object used for drawing. 
+	 * @param flat
+	 * 		Flat sprites (ex. floors)
+	 * @param onGround
+	 * 		Currently on-ground sprites.
+	 * @param shadow
+	 * 		Whether the shadow should be drawn or not.
 	 */
-	private void drawSprite(Graphics g, Sprite s)
-	{	List<StepImage> images =  s.getCurrentImages();
-//if(images.size()>1)
-//	System.err.println("ligne");
-		for(int j=0;j<images.size();j++)
-		{	StepImage stepImage = images.get(j);
-			BufferedImage image = stepImage.getImage();
-			double xShift = stepImage.getXShift();
-			double yShift = stepImage.getYShift();
-			double pX = s.getCurrentPosX() + xShift;
-			double pY = s.getCurrentPosY() + yShift;
-			double pZ = s.getCurrentPosZ();
-			pX = pX - ((double)image.getWidth())/2;
-			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
-			//
-			List<Double> listX = new ArrayList<Double>(0);
-			List<Double> listY = new ArrayList<Double>(0);
-			listX.add(pX);
-			listY.add(pY);
-			// déborde à gauche
-			if(!level.isInsidePositionX(pX))
-			{	double temp = level.normalizePositionX(pX);
-				listX.add(temp);
-				listY.add(pY);			
-			}
-			// déborde à droite
-			if(!level.isInsidePositionX(pX+image.getWidth()))
-			{	double temp = level.normalizePositionX(pX+image.getWidth())-image.getWidth();
-				listX.add(temp);
-				listY.add(pY);			
-			}
-			// déborde en haut
-			if(!level.isInsidePositionY(pY))
-			{	double temp = level.normalizePositionY(pY);
-				int li = listX.size();
-				for(int i=0;i<li;i++)
-				{	listX.add(listX.get(i));
-					listY.add(temp);			
-				}
-			}
-			// déborde en bas
-			if(!level.isInsidePositionY(pY+image.getHeight()))
-			{	double temp = level.normalizePositionY(pY+image.getHeight())-image.getHeight();
-				int li = listX.size();
-				for(int i=0;i<li;i++)
-				{	listX.add(listX.get(i));
-					listY.add(temp);			
-				}
-			}
-			for(int i=0;i<listX.size();i++)
-				g.drawImage(image, new Double(listX.get(i)).intValue(), new Double(listY.get(i)-pZ).intValue(), null);		
-//				g.drawImage(image, new Long(Math.round(listX.get(i))).intValue(), new Long(Math.round(listY.get(i)-pZ)).intValue(), null);		
-		}
-
-		// bound sprites
-		if(s.hasBoundSprite())
-		{	Iterator<Sprite> i = s.getBoundSprites();
-			while(i.hasNext())
-			{	Sprite temp = i.next();
-				drawSprite(g,temp);
-			}			
-		}
-	}
-
 	public void drawSelection(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	// floor
 		drawSprites(Role.FLOOR,g,flat,onGround,shadow);
@@ -208,53 +239,136 @@ public class Tile
 	}	
 
 	/**
-	 * trace l'ombre d'un sprite (et pas le sprite)
+	 * Draws a sprite without its shadow.
+	 * 
+	 * @param g
+	 * 		Object used for drawing. 
+	 * @param s 
+	 * 		Sprite to be drawn.
+	 */
+	private void drawSprite(Graphics g, Sprite s)
+	{	Role role = s.getRole();
+		if(drawSwitches.get(role))
+		{	List<StepImage> images =  s.getCurrentImages();
+//if(images.size()>1)
+//	System.err.println("ligne");
+			for(int j=0;j<images.size();j++)
+			{	StepImage stepImage = images.get(j);
+				BufferedImage image = stepImage.getImage();
+				double xShift = stepImage.getXShift();
+				double yShift = stepImage.getYShift();
+				double pX = s.getCurrentPosX() + xShift;
+				double pY = s.getCurrentPosY() + yShift;
+				double pZ = s.getCurrentPosZ();
+				pX = pX - ((double)image.getWidth())/2;
+				pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
+				//
+				List<Double> listX = new ArrayList<Double>(0);
+				List<Double> listY = new ArrayList<Double>(0);
+				listX.add(pX);
+				listY.add(pY);
+				// déborde à gauche
+				if(!level.isInsidePositionX(pX))
+				{	double temp = level.normalizePositionX(pX);
+					listX.add(temp);
+					listY.add(pY);			
+				}
+				// déborde à droite
+				if(!level.isInsidePositionX(pX+image.getWidth()))
+				{	double temp = level.normalizePositionX(pX+image.getWidth())-image.getWidth();
+					listX.add(temp);
+					listY.add(pY);			
+				}
+				// déborde en haut
+				if(!level.isInsidePositionY(pY))
+				{	double temp = level.normalizePositionY(pY);
+					int li = listX.size();
+					for(int i=0;i<li;i++)
+					{	listX.add(listX.get(i));
+						listY.add(temp);			
+					}
+				}
+				// déborde en bas
+				if(!level.isInsidePositionY(pY+image.getHeight()))
+				{	double temp = level.normalizePositionY(pY+image.getHeight())-image.getHeight();
+					int li = listX.size();
+					for(int i=0;i<li;i++)
+					{	listX.add(listX.get(i));
+						listY.add(temp);			
+					}
+				}
+				for(int i=0;i<listX.size();i++)
+					g.drawImage(image, new Double(listX.get(i)).intValue(), new Double(listY.get(i)-pZ).intValue(), null);		
+	//				g.drawImage(image, new Long(Math.round(listX.get(i))).intValue(), new Long(Math.round(listY.get(i)-pZ)).intValue(), null);		
+			}
+		}
+	
+		// bound sprites
+		if(s.hasBoundSprite())
+		{	Iterator<Sprite> i = s.getBoundSprites();
+			while(i.hasNext())
+			{	Sprite temp = i.next();
+				drawSprite(g,temp);
+			}			
+		}
+	}
+
+	/**
+	 * Draws a sprite shadow, but not the sprite itself.
+	 * 
+	 * @param g
+	 * 		Object used for drawing. 
+	 * @param s 
+	 * 		Sprite whose shadow should be drawn.
 	 */
 	private void drawShadow(Graphics g, Sprite s)
-	{	StepImage stepImage = s.getShadow();
-		if(stepImage!=null)
-		{	BufferedImage image = stepImage.getImage();
-			double pX = s.getCurrentPosX()+stepImage.getXShift();
-			double pY = s.getCurrentPosY()+stepImage.getYShift();
-			pX = pX - ((double)image.getWidth())/2;
-			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
-			//
-			List<Double> listX = new ArrayList<Double>(0);
-			List<Double> listY = new ArrayList<Double>(0);
-			listX.add(pX);
-			listY.add(pY);
-			// déborde à gauche
-			if(!level.isInsidePositionX(pX))
-			{	double temp = level.normalizePositionX(pX);
-				listX.add(temp);
-				listY.add(pY);			
-			}
-			// déborde à droite
-			if(!level.isInsidePositionX(pX+image.getWidth()))
-			{	double temp = level.normalizePositionX(pX+image.getWidth())-image.getWidth();
-				listX.add(temp);
-				listY.add(pY);			
-			}
-			// déborde en haut
-			if(!level.isInsidePositionY(pY))
-			{	double temp = level.normalizePositionY(pY);
-				int li = listX.size();
-				for(int i=0;i<li;i++)
-				{	listX.add(listX.get(i));
-					listY.add(temp);			
+	{	Role role = s.getRole();
+		if(drawSwitches.get(role))
+		{	StepImage stepImage = s.getShadow();
+			if(stepImage!=null)
+			{	BufferedImage image = stepImage.getImage();
+				double pX = s.getCurrentPosX()+stepImage.getXShift();
+				double pY = s.getCurrentPosY()+stepImage.getYShift();
+				pX = pX - ((double)image.getWidth())/2;
+				pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
+				//
+				List<Double> listX = new ArrayList<Double>(0);
+				List<Double> listY = new ArrayList<Double>(0);
+				listX.add(pX);
+				listY.add(pY);
+				// déborde à gauche
+				if(!level.isInsidePositionX(pX))
+				{	double temp = level.normalizePositionX(pX);
+					listX.add(temp);
+					listY.add(pY);			
 				}
-			}
-			// déborde en bas
-			if(!level.isInsidePositionY(pY+image.getHeight()))
-			{	double temp = level.normalizePositionY(pY+image.getHeight())-image.getHeight();
-				int li = listX.size();
-				for(int i=0;i<li;i++)
-				{	listX.add(listX.get(i));
-					listY.add(temp);			
+				// déborde à droite
+				if(!level.isInsidePositionX(pX+image.getWidth()))
+				{	double temp = level.normalizePositionX(pX+image.getWidth())-image.getWidth();
+					listX.add(temp);
+					listY.add(pY);			
 				}
+				// déborde en haut
+				if(!level.isInsidePositionY(pY))
+				{	double temp = level.normalizePositionY(pY);
+					int li = listX.size();
+					for(int i=0;i<li;i++)
+					{	listX.add(listX.get(i));
+						listY.add(temp);			
+					}
+				}
+				// déborde en bas
+				if(!level.isInsidePositionY(pY+image.getHeight()))
+				{	double temp = level.normalizePositionY(pY+image.getHeight())-image.getHeight();
+					int li = listX.size();
+					for(int i=0;i<li;i++)
+					{	listX.add(listX.get(i));
+						listY.add(temp);			
+					}
+				}
+				for(int i=0;i<listX.size();i++)
+					g.drawImage(image, new Double(listX.get(i)).intValue(), new Double(listY.get(i)).intValue(), null);		
 			}
-			for(int i=0;i<listX.size();i++)
-				g.drawImage(image, new Double(listX.get(i)).intValue(), new Double(listY.get(i)).intValue(), null);		
 		}
 	}
 		

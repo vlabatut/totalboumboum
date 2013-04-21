@@ -59,9 +59,10 @@ import org.totalboumboum.engine.loop.display.game.DisplayCancel;
 import org.totalboumboum.engine.loop.display.game.DisplayFPS;
 import org.totalboumboum.engine.loop.display.game.DisplayMessage;
 import org.totalboumboum.engine.loop.display.player.DisplayPlayersNames;
-import org.totalboumboum.engine.loop.display.position.DisplayGrid;
-import org.totalboumboum.engine.loop.display.position.DisplaySpritesPositions;
-import org.totalboumboum.engine.loop.display.position.DisplayTilesPositions;
+import org.totalboumboum.engine.loop.display.sprites.DisplaySprites;
+import org.totalboumboum.engine.loop.display.sprites.DisplaySpritesPositions;
+import org.totalboumboum.engine.loop.display.tiles.DisplayGrid;
+import org.totalboumboum.engine.loop.display.tiles.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.time.DisplaySpeed;
 import org.totalboumboum.engine.loop.display.time.DisplaySpeedChange;
 import org.totalboumboum.engine.loop.display.time.DisplayTime;
@@ -415,6 +416,10 @@ System.out.println(hero+" "+hero.getId());
 	
 		// sprites positions
 		display = new DisplaySpritesPositions(this);
+		displayManager.addDisplay(display);
+	
+		// sprites
+		display = new DisplaySprites(this);
 		displayManager.addDisplay(display);
 	
 		// AIs paths

@@ -1664,5 +1664,5 @@ public class Launcher
 // TODO dégager les threads des agents qui ont été éliminés
 //		>> plus d'appel par le moteur
 //		>> ràz des stats de temps pour les plots ingame
-// TODO commande pour masquer certains sprites (genre: que les héros)
 // TODO dans l'évolution de la partie, afficher l'occupation processeur
+// TODO commande pour masquer certains sprites (genre: que les héros)
