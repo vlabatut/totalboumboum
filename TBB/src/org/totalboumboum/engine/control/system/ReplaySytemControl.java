@@ -117,18 +117,27 @@ public class ReplaySytemControl extends SystemControl
 					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
-			// debug: FPS/UPS
+			// debug: hide/display sprites
 			else if(keyCode == KeyEvent.VK_F4)
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES,SystemControlEvent.REGULAR);
+				loop.processEvent(controlEvent);
+			}
+			// debug: FPS/UPS
+			else if(keyCode == KeyEvent.VK_F5)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_FPS);
 				loop.processEvent(controlEvent);
 			}
 			// debug: speed coeff
-			else if(keyCode == KeyEvent.VK_F5)
+			else if(keyCode == KeyEvent.VK_F6)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPEED);
 				loop.processEvent(controlEvent);
 			}
 			// debug: time
-			else if(keyCode == KeyEvent.VK_F6)
+			else if(keyCode == KeyEvent.VK_F7)
 			{	SystemControlEvent controlEvent;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
 					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.MODE);
@@ -137,7 +146,7 @@ public class ReplaySytemControl extends SystemControl
 				loop.processEvent(controlEvent);
 			}
 			// debug: names
-			else if(keyCode == KeyEvent.VK_F7)
+			else if(keyCode == KeyEvent.VK_F8)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
 				loop.processEvent(controlEvent);
 			}

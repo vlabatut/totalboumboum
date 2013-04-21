@@ -38,24 +38,45 @@ import org.totalboumboum.tools.xml.XmlNames;
  */
 public enum Role implements Serializable
 {	/** no object required (likely: no target) */
-	NONE,
+	NONE ("None"),
 	/** the actor or target is a block sprite */
-	BLOCK,
+	BLOCK ("Block"),
 	/** the actor or target is a bomb sprite */
-	BOMB,
+	BOMB ("Bomb"),
 	/** the actor or target is a fire sprite */
-	FIRE,
+	FIRE ("Fire"),
 	/** the actor or target is a floor sprite */
-	FLOOR,
+	FLOOR ("Floor"),
 	/** the actor or target is a hero sprite */
-	HERO,
+	HERO ("Hero"),
 	/** the actor or target is an item sprite */
-	ITEM;
+	ITEM ("Item");
 
+	/** String form of the enum value */
+	public String name;
+	
 	/**
-	 * load a role value.
-	 * the XML value SOME represents any role except NONE. 
-	 * the XML value ANY represents any role including NONE. 
+	 * Builds a Role value.
+	 * 
+	 * @param name
+	 * 		String form of this value.
+	 */
+	Role(String name)
+	{	this.name = name;
+	}
+	
+	/**
+	 * Loads a role value.
+	 * <br/>
+	 * The XML value {@code SOME} represents any role except {@code NONE}. 
+	 * The XML value {@code ANY} represents any role including {@code NONE}.
+	 *  
+	 * @param root
+	 * 		Root of the XML file. 
+	 * @param attName 
+	 * 		Name of the attribute to be processed.
+	 * @return 
+	 * 		The {@code Role} read.
 	 */
 	public static List<Role> loadRolesAttribute(Element root, String attName)
 	{	List<Role> result = new ArrayList<Role>();

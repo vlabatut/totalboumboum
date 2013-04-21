@@ -537,6 +537,21 @@ public class Level
 				matrix[row][col].updateSprites(Role.HERO);		
 	}
 
+	/**
+	 * Changes the flag regarding the drawing
+	 * of the specified kind of sprite.
+	 * 
+	 * @param role
+	 * 		Concerned kind of sprite.
+	 * @param value
+	 * 		Whether or not it should be drawn.
+	 */
+	public void setDrawSwitch(Role role, boolean value)
+	{	for(int row=0;row<globalHeight;row++)
+			for(int col=0;col<globalWidth;col++)
+				matrix[row][col].setDrawSwitch(role,value);
+	}
+	
 	//NOTE optimisation : à effectuer seulement pour les tiles visibles
 	public void draw(Graphics g)
 	{	boolean flat = true;
