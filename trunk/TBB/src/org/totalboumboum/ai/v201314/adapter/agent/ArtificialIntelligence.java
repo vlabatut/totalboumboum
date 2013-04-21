@@ -34,6 +34,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
@@ -523,8 +524,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 		Temps écoulé, exprimé en ms.
 	 */
 	public final long getCurrentTime()
-	{	//long result = RoundVariables.loop.getTotalEngineTime();
-		long result = RoundVariables.loop.getTotalRealTime(); // otherwise, agents with short process times appear to have zero durations
+	{	VisibleLoop loop = RoundVariables.loop;
+		long result = 0;
+		if(loop!=null)
+//			loop.getTotalEngineTime();
+			loop.getTotalRealTime(); // otherwise, agents with short process times appear to have zero durations
 		return result;
 	}
 	
@@ -584,6 +588,17 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	protected String colorStr;
 	/** Indique si l'agent doit utiliser la sortie texte (pour le débogage) */
 	protected boolean verbose = false;
+
+	/**
+	 * Modifie la verbosité de l'agent.
+	 * 
+	 * @param verbose
+	 * 		Indique si l'agent doit ou pas afficher textuellement
+	 * 		son activité dans la console.
+	 */
+	public void setVerbose(boolean verbose)
+	{	this.verbose = verbose;
+	}
 	
 	/**
 	 * Cette méthode affiche à l'écran le message passé en paramètre,

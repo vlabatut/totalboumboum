@@ -230,6 +230,12 @@ public final class AiSimZone extends AiZone
 				tiles.add(aiTile);
 			}
 		}
+		for(int row=0;row<height;row++)
+		{	for(int col=0;col<width;col++)
+			{	AiSimTile tile = matrix[row][col];
+				tile.initNeighbors();
+			}
+		}
 		
 		// items
 		hiddenItemsCount = 0;

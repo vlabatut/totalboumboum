@@ -1666,4 +1666,3 @@ public class Launcher
 //		>> ràz des stats de temps pour les plots ingame
 // TODO commande pour masquer certains sprites (genre: que les héros)
 // TODO dans l'évolution de la partie, afficher l'occupation processeur
-// TODO vérifier que la classe de test de simplet marche toujours
