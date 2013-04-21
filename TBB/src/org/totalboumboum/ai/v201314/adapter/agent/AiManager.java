@@ -404,6 +404,9 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	/**
 	 * Cette méthode charge les préférences de l'agent
 	 * à partir du fichier XML approprié.
+	 * <br/>
+	 * Le but est ici de réaliser un test hors-ligne
+	 * de l'agent.
 	 * 
 	 * @throws IllegalArgumentException 
 	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
@@ -424,7 +427,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	 * @throws NoSuchMethodException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 */
-	protected void loadPreferences() throws IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	public void loadPreferences() throws IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
 	{	// init les ressources nécessaires
 		XmlTools.init();
 		

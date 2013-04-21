@@ -21,11 +21,17 @@ package org.totalboumboum.ai.v201314.ais._simplet;
  * 
  */
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimTile;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201314.adapter.test.InitData;
 import org.totalboumboum.tools.images.PredefinedColor;
+import org.xml.sax.SAXException;
 
 /**
  * Cette classe est un exemple de la manière de tester
@@ -51,8 +57,26 @@ public class SimpletTest
 	 * 		Pas pris en compte.
 	 * @throws StopRequestException
 	 * 		Pas pris en compte non plus.
+	 * @throws IOException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws SAXException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws ParserConfigurationException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws InvocationTargetException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws InstantiationException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws IllegalAccessException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws ClassNotFoundException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws NoSuchMethodException 
+	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws IllegalArgumentException 
+	 * 		Problème au chargement des préférences de l'agent.
 	 */
-	public static void main(String args[]) throws StopRequestException
+	public static void main(String args[]) throws StopRequestException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
 	{	// on initialise la zone (cf. InitData)
 		AiSimZone zone = InitData.initZone1();
 		
@@ -64,12 +88,19 @@ public class SimpletTest
 		zone.createHero(tile,color,bombNumber,bombRange,false);
 		
 		// on initialise l'agent
-		Simplet ai = new Simplet();
-		ai.setZone(zone);
+		AiMain aiMain = new AiMain();
+		aiMain.loadPreferences();
+		Simplet agent = (Simplet)aiMain.instantiateAgent();
+		agent.setZone(zone);
+		
+		// on veut afficher les calculs de l'agent
+		agent.setVerbose(true);
 		
 		// le premier appel initialise les gestionnaires
-		ai.call();
-		// le second demande à l'agent de calculer son action
-		ai.call();
+		agent.call();
+		// le deuxième sert à finaliser l'initialisation
+		agent.call();
+		// le troisième demande à l'agent de calculer son action
+		agent.call();
 	}
 }
