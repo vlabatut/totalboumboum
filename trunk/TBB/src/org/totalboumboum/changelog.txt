@@ -545,8 +545,9 @@
 	- ressources : 
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 	- gui :
-		- possibilité de masquer le message de pause
+		- possibilité de masquer le message de pause (pour captures d'écran)
 		- bascule différente entre l'affichage des temps (mode débug)
+		- possibiliré de masquer les sprites, par type (par ex. les persos pour faire des captures)
 	- ia :
 		- utilité/cas devient préférence/catégorie
 		- les préférences sont définies dans un fichier xml séparé
