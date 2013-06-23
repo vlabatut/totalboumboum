@@ -20,8 +20,8 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Super-coupe de Galatasaray V" type="CUP" />
-	<played matches="1" rounds="4" />
-	<dates start="2013-01-14T21:07:37" save="2013-01-14T21:16:59" />
+	<played matches="0" rounds="4" />
+	<dates start="2013-04-20T17:04:04" save="2013-04-20T17:07:41" />
 	<players>
 		<player name="1213.Oral+Özuğur" />
 		<player name="1213.Alçar+Kaya+Yıldırım" />
