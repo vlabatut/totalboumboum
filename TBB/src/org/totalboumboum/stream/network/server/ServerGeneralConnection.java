@@ -2,7 +2,7 @@ package org.totalboumboum.stream.network.server;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -104,11 +105,12 @@ public class ServerGeneralConnection implements Runnable
 				ControlSettings cs = controlSettings.get(j);
 				Profile p = null;
 				int index = 0;
-				while(p==null && index<playerProfiles.size())
-				{	Profile temp = playerProfiles.get(index);
+				int i = 0;
+				while(p==null && i<playerProfiles.size())
+				{	Profile temp = playerProfiles.get(i);
 					if(temp.getId().equals(id))
 						p = temp;
-					else //if(temp.isRemote())
+					else if(temp.isRemote())
 						index++;
 				}
 				this.controlSettings.set(index,cs);
@@ -719,15 +721,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	// GAME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Lock roundLock = new ReentrantLock();
-	private boolean allClientsReady = false;
-	
-	public boolean areAllClientsReady()
-	{	boolean result;
-		roundLock.lock();
-		result = allClientsReady;
-		roundLock.unlock();
-		return result;
-	}
+	private Condition roundCondition = roundLock.newCondition();
 	
 	public void startTournament(AbstractTournament tournament)
 	{	// announce the tournament is starting to concerned clients
@@ -778,40 +772,61 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		propagateMessage(message);
 	}
 	
-	protected void loadingComplete(ServerIndividualConnection connection)
-	{	boolean ready = true;
-		connectionsLock.lock();
-		{	// update this connection readyness
-			int index = individualConnections.indexOf(connection);
-			individualConnectionsReady.set(index,true);
-
-			// check if all clients are ready
+	public void waitForClients()
+	{	roundLock.lock();
+		{	// check if all clients are ready
+			boolean ready = true;
 			Iterator<Boolean> it = individualConnectionsReady.iterator();
 			while(it.hasNext() && ready)
 			{	boolean value = it.next();
 				ready = ready && value;
 			}
-		}
-		connectionsLock.unlock();
-		
-		// if it is the case (all clients ready):
-		if(ready)
-		{	// start all remote clients
-			NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
-			propagateMessage(message);
+			
+			// otherwise, wait for all clients to be ready
+			try
+			{	roundCondition.await();
+			}
+			catch (InterruptedException e)
+			{	e.printStackTrace();
+			}
 			
 			// set the controlSettings
 			connectionsLock.lock();
 			{	remotePlayerControl.setControlSettings(controlSettings);
 			}
 			connectionsLock.unlock();
-
-			// release the game thread
-			roundLock.lock();
-			{	allClientsReady = true;
-			}
-			roundLock.unlock();
 		}
+		roundLock.unlock();
+	}
+	
+	protected void loadingComplete(ServerIndividualConnection connection)
+	{	roundLock.lock();
+		{	boolean ready = true;
+			connectionsLock.lock();
+			{	// update this connection readyness
+				int index = individualConnections.indexOf(connection);
+				individualConnectionsReady.set(index,true);
+
+				// check if all clients are ready
+				Iterator<Boolean> it = individualConnectionsReady.iterator();
+				while(it.hasNext() && ready)
+				{	boolean value = it.next();
+					ready = ready && value;
+				}
+			}
+			connectionsLock.unlock();
+			
+			// if it is the case :
+			if(ready)
+			{	// start all remote clients
+				NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
+				propagateMessage(message);
+				
+				// wake up the game thread
+				roundCondition.signal();
+			}
+		}
+		roundLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -941,7 +956,6 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	private Lock finishedLock = new ReentrantLock();
 	
@@ -953,10 +967,6 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		return result;
 	}
 	
-	/**
-	 * Cleanly finishes this object,
-	 * possibly freeing some memory.
-	 */
 	public void finish()
 	{	finishedLock.lock();
 		finished = true;

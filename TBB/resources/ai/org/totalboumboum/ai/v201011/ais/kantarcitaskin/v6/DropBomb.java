@@ -12,18 +12,10 @@ import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201011.adapter.data.*;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Burcu Kantarcı
- * @author Ayça Taşkın
- */
-@SuppressWarnings("deprecation")
 public class DropBomb 
 {
-	/** */
 	ArtificialIntelligence ai;
-	/** */
 	AiZone zone;
-	/** */
 	int mode;
 	
 	
@@ -36,7 +28,7 @@ public class DropBomb
 	 * @param ai
 	 * 		AI correspondant
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public DropBomb(AiZone zone, int mode, ArtificialIntelligence ai) throws StopRequestException
 	{	
@@ -53,8 +45,6 @@ public class DropBomb
 	 * 
 	 * @return result
 	 * 		vrai si la decision est poser une bombe faux sinon
-	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public boolean decisionOfBomb() throws StopRequestException
 	{
@@ -161,7 +151,6 @@ public class DropBomb
 	 * @return result
 	 * 		vraie s'il es bloque, faux sinon
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	private boolean blockade(AiHero ownHero) throws StopRequestException 
 	{
@@ -198,7 +187,7 @@ public class DropBomb
 	 * @return result
 	 * 		vrai s'elle est en danger, faux sinon
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{
@@ -235,7 +224,6 @@ public class DropBomb
 	 *@return result
 	 *		le nombre de murs accesible
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public int wallAvaible(List<AiTile> tempBlast) throws StopRequestException
 	{
@@ -274,7 +262,6 @@ public class DropBomb
 	 *@return result
 	 *		l'hero accesible
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public AiHero enemyAvaible(List<AiTile> tempBlast) throws StopRequestException
 	{
@@ -307,17 +294,14 @@ public class DropBomb
 		return result;
 	}
 	/***
-	 * Regarde s'il existe des obstacles entre deux tile passées en parametre. Retourne vrai s'il 
+	 * Regarde s'il existe des obstacles entre deux tile pass�es en parametre. Retourne vrai s'il 
 	 * n'y en a pas, faux sinon 
 	 * 
 	 * @param tile1
-	 * 		description manquante !
 	 * @param tile2
-	 * 		description manquante !
 	 * @return result
 	 * 		vrai s'il n'y a pas d'obstacle entre deux tile, faux sinon.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public boolean noObstacle(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
@@ -338,8 +322,8 @@ public class DropBomb
 	
 	
 	/**
-	 * Teste s'il se trouve des cases sur à alles apres avois poser une bombe.
-	 * il prend une carée au tille de la range et enleve les cases de la portée virtuelle. puis 
+	 * Teste s'il se trouve des cases sur � alles apres avois poser une bombe.
+	 * il prend une car�e au tille de la range et enleve les cases de la port�e virtuelle. puis 
 	 * s'il se trouve des cases sur il calcule les cases surs. Alors elle retourne une liste
 	 * des cases sur ou bien une liste null.
 	 * 
@@ -353,7 +337,7 @@ public class DropBomb
 	 * @return restult
 	 * 		la liste des cases sur, sinon une liste null
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 			
 	 * */
 	public List<AiTile> safeArea(AiHero hero, int range, List<AiTile> blast) throws StopRequestException 
 	{
@@ -400,7 +384,7 @@ public class DropBomb
 	 * @return result
 	 * 		la liste des cases de la portee
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	
 	public List<AiTile> calculeBlast(int range) throws StopRequestException
@@ -451,14 +435,13 @@ public class DropBomb
 	
 
 	/**
-	 * Calcule la carée de taille range*range
+	 * Calcule la car�e de taille range*range
 	 * 
 	 * @param range
 	 * 		la portée de la bombe d'un hero
 	 * @return tempo 
 	 *		la liste des cases de l'area
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public List<AiTile> calculeArea(int range) throws StopRequestException
 	{
@@ -532,22 +515,21 @@ public class DropBomb
 	
 	
 	/**
-	 * Calcules recursivement les cases qu'un hero peut passer dans une carée déjà determineé. 
-	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associé ne
-	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associé peut 
+	 * Calcules recursivement les cases qu'un hero peut passer dans une car�e d�j� determine�. 
+	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associ� ne
+	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associ� peut 
 	 * acceder. S'il n'y a pas de case alors elle retourne null.
 	 * 
 	 * @param tile 
 	 * 		tile du hero qu'on veut trouve son chemin
-	 * @param area
-	 * 		une carée qu'on estime pour un hero pour qu'il puisse acceder à ses cases dans le temps d'explosion d'une bombe
+	 * @param 
+	 * 		une car�e qu'on estime pour un hero pour qu'il puisse acceder � ses cases dans le temps d'explosion d'une bombe
 	 * @param safe
-	 * 		liste des cases sur. Au début c'est null.
+	 * 		liste des cases sur. Au d�but c'est null.
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws
 	 * 		StopRequestException
-	 * 		description manquante !
 	 */
 	public List<AiTile> accesibleArea(AiTile tile, List<AiTile> area, List<AiTile> safe) throws StopRequestException
 	{

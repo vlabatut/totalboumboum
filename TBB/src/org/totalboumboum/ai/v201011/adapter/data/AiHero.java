@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,13 +24,11 @@ package org.totalboumboum.ai.v201011.adapter.data;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * reprÃ©sente un personnage du jeu, ie un sprite contrÃ´lÃ© par un joueur
+ * représente un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public interface AiHero extends AiSprite
 {
@@ -41,54 +39,54 @@ public interface AiHero extends AiSprite
 	 * renvoie un exemple de bombe que ce personnage peut poser
 	 * 
 	 * @return	
-	 * 		une reprÃ©sentation de la bombe
+	 * 		une représentation de la bombe
 	 */
 	public AiBomb getBombPrototype();
 
 	/**
-	 * renvoie la portÃ©e actuelle des bombes du personnage
+	 * renvoie la portée actuelle des bombes du personnage
 	 * 
 	 * @return	
-	 * 		la portÃ©e des bombes
+	 * 		la portée des bombes
 	 */
 	public int getBombRange();
 	
 	/**
-	 * renvoie la durÃ©e actuelle des bombes du personnage
-	 * (valide seulement pour les bombes Ã  retardement)
+	 * renvoie la durée actuelle des bombes du personnage
+	 * (valide seulement pour les bombes à retardement)
 	 * 
 	 * @return	
-	 * 		la durÃ©e de vie des bombes (i.e. temps entre la pose et l'explosion)
+	 * 		la durée de vie des bombes (i.e. temps entre la pose et l'explosion)
 	 */
 	public long getBombDuration();
 	
 	/**
-	 * renvoie la durÃ©e actuelle des explosions des bombes du personnage
+	 * renvoie la durée actuelle des explosions des bombes du personnage
 	 * 
 	 * @return	
-	 * 		la durÃ©e de l'explosion des bombes
+	 * 		la durée de l'explosion des bombes
 	 */
 	public long getExplosionDuration();
 	
 	/**
-	 * renvoie le nombre de bombes que le personnage peut poser simultanÃ©ment,
-	 * Ã  ce moment du jeu.
-	 * Ce nombre correspond Ã  la somme du nombre de bombes actuellement dÃ©jÃ  
-	 * posÃ©es (getBombNumberCurrent) plus le nombre de bombes que le joueur peut encore poser. 
+	 * renvoie le nombre de bombes que le personnage peut poser simultanément,
+	 * à ce moment du jeu.
+	 * Ce nombre correspond à la somme du nombre de bombes actuellement déjà 
+	 * posées (getBombNumberCurrent) plus le nombre de bombes que le joueur peut encore poser. 
 	 * 
 	 * @return	
-	 * 		le nombre de bombes simultanÃ©ment posables (en gÃ©nÃ©ral)
+	 * 		le nombre de bombes simultanément posables (en général)
 	 */
 	public int getBombNumberMax();
 	
 	/**
-	 * renvoie le nombre de bombes posÃ©es par le personnage Ã  ce moment-lÃ .
-	 * Ce nombre est limitÃ© par la valeur renvoyÃ©e par getBombNumberMax,
-	 * i.e. il ne peut pas Ãªtre plus grand puisque getBombNumberMax renvoie
-	 * le nombre de bombes maximal que le joueur peut poser en mÃªme temps. 
+	 * renvoie le nombre de bombes posées par le personnage à ce moment-là.
+	 * Ce nombre est limité par la valeur renvoyée par getBombNumberMax,
+	 * i.e. il ne peut pas être plus grand puisque getBombNumberMax renvoie
+	 * le nombre de bombes maximal que le joueur peut poser en même temps. 
 	 * 
 	 * @return	
-	 * 		nombre de bombes posÃ©es en ce moment
+	 * 		nombre de bombes posées en ce moment
 	 */
 	public int getBombNumberCurrent();
 	
@@ -99,7 +97,7 @@ public interface AiHero extends AiSprite
 	 * renvoie la couleur de ce personnage (et de ses bombes)
 	 * 
 	 * @return 
-	 * 		un symbole de type PredefinedColor reprÃ©sentant une couleur
+	 * 		un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor();
 	
@@ -107,13 +105,13 @@ public interface AiHero extends AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de dÃ©placement au sol de ce personnage,
-	 * exprimÃ©e en pixel/seconde. il ne s'agit pas de la vitesse 
-	 * de dÃ©placement courante, il s'agit de la vitesse du personnage
-	 * quand il marche. Cette vitesse peut Ãªtre modifiÃ©e par certains items.
+	 * renvoie la vitesse de déplacement au sol de ce personnage,
+	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
+	 * de déplacement courante, il s'agit de la vitesse du personnage
+	 * quand il marche. Cette vitesse peut être modifiée par certains items.
 	 * 
 	 * @return	
-	 * 		la vitesse de dÃ©placement de ce personnage
+	 * 		la vitesse de déplacement de ce personnage
 	 */
 	public double getWalkingSpeed();
 	
@@ -122,8 +120,8 @@ public interface AiHero extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Renvoie le classement de ce joueur, pour la manche en cours.
-	 * Ce classement est susceptible d'Ã©voluer d'ici la fin de la manche actuellement jouÃ©e, 
-	 * par exemple si ce joueur est Ã©liminÃ©.
+	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
+	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @return	
 	 * 		le classement de ce joueur dans la manche en cours
@@ -132,7 +130,7 @@ public interface AiHero extends AiSprite
 	
 	/**
 	 * Renvoie le classement de ce joueur, pour la rencontre en cours.
-	 * Ce classement n'Ã©volue pas pendant la manche actuellement jouÃ©e.
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @return	
 	 * 		le classement de ce joueur dans la rencontre en cours
@@ -140,11 +138,11 @@ public interface AiHero extends AiSprite
 	public int getMatchRank();
 	
 	/**
-	 * Renvoie le classement de ce joueur, dans le classement gÃ©nÃ©ral du jeu (Glicko-2)
-	 * Ce classement n'Ã©volue pas pendant la manche actuellement jouÃ©e.
+	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
 	 * @return	
-	 * 		le classement gÃ©nÃ©ral (Glicko-2) de ce joueur
+	 * 		le classement général (Glicko-2) de ce joueur
 	 */
 	public int getStatsRank();
 
@@ -152,9 +150,9 @@ public interface AiHero extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * teste si ce personnage est capable de passer Ã  travers les (certains) murs
-	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas Ãªtre utilisÃ©e directement par l'IA,
-	 * elle est destinÃ©e au calcul des modÃ¨les simulant l'Ã©volution du jeu.
+	 * teste si ce personnage est capable de passer à travers les (certains) murs
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -163,9 +161,9 @@ public interface AiHero extends AiSprite
 	public boolean hasThroughBlocks();
 
 	/**
-	 * teste si ce personnage est capable de passer Ã  travers les bombes
-	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas Ãªtre utilisÃ©e directement par l'IA,
-	 * elle est destinÃ©e au calcul des modÃ¨les simulant l'Ã©volution du jeu.
+	 * teste si ce personnage est capable de passer à travers les bombes
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -174,13 +172,13 @@ public interface AiHero extends AiSprite
 	public boolean hasThroughBombs();
 
 	/**
-	 * teste si ce personnage est capable de passer Ã  travers le feu sans brÃ»ler
-	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas Ãªtre utilisÃ©e directement par l'IA,
-	 * elle est destinÃ©e au calcul des modÃ¨les simulant l'Ã©volution du jeu.
+	 * teste si ce personnage est capable de passer à travers le feu sans brûler
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		vrai si le personnage rÃ©siste au feu
+	 * 		vrai si le personnage résiste au feu
 	 */
 	public boolean hasThroughFires();
 }

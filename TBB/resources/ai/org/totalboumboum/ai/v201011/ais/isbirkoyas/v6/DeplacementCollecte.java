@@ -11,48 +11,31 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 /**constructeur
  * 
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
+ * @param ai
+ * @throws StopRequestException
  */
-@SuppressWarnings("deprecation")
 public class DeplacementCollecte {
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
-	/** */
 	private Securite securite = null;
-	/** */
 	private DeplacementCommune deplacementCommune = null;
-	/** */
 	private TraitementCommune traitementCommune=null;
-	/** */
 	private boolean poserBombe2;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public DeplacementCollecte(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
 	}
 
 	/**
-	 * Cette mÃ©thode implÃ©mente l'algorithme de collecte. Elle prend 3 arguments
+	 * Cette méthode implémente l'algorithme de collecte. Elle prend 3 arguments
 	 * une matrice de type Int, la zone du jeu et une action.
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
-	 * @param matriceCollecte
+	 * @param matriceCollect
 	 *            la matrice collecte
-	 * @param resultat 
-	 * 		description manquante !
-	 * @return
-	 * 		?
+	 * @return resultat
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiAction algorithmCollect(int[][] matriceCollecte, AiZone gameZone,
 			AiAction resultat) throws StopRequestException {
@@ -149,7 +132,7 @@ public class DeplacementCollecte {
 
 								if (ai.print)
 									System.out
-											.println("Collect: IA pense Ã  poser bombe!");
+											.println("Collect: IA pense à poser bombe!");
 								poserBombe2 = true;
 								List<AiTile> casSurs = securite
 										.posageControle(gameZone);
@@ -199,7 +182,7 @@ public class DeplacementCollecte {
 									if (temps2 > temps) {
 										if (ai.print)
 											System.out
-													.println("Il n'y a pas du temps Ã  senfuire.");
+													.println("Il n'y a pas du temps à senfuire.");
 										poserBombe2 = false;
 									}
 								}
@@ -229,7 +212,7 @@ public class DeplacementCollecte {
 					} else {
 						if (ai.print) {
 							System.out
-									.println(": 1) On n'arrive pas Ã  la fin du chemin");
+									.println(": 1) On n'arrive pas à la fin du chemin");
 							System.out.println("Collect: 1) senfuire2:"
 									+ ai.senfuire2 + "ai.senfuire:"
 									+ ai.senfuire);
@@ -372,7 +355,7 @@ public class DeplacementCollecte {
 						}
 					}
 				}
-				// si on n'arrive pas Ã  la case suivant
+				// si on n'arrive pas à la case suivant
 				else {
 
 					// si on ne s'enfuit pas:
@@ -507,10 +490,9 @@ public class DeplacementCollecte {
 
 	
 	/**
-	 * Cette mÃ©thode permet a s'enfuire apres le posage de bombe
+	 * Cette méthode permet a s'enfuire apres le posage de bombe
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void senfuireApresPosage() throws StopRequestException {
 		ai.checkInterruption();
@@ -533,7 +515,6 @@ public class DeplacementCollecte {
 	 * METHODE D'ACCES a la classe Securite
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return securite
 	 */
 	public Securite Securite() throws StopRequestException {
@@ -545,7 +526,6 @@ public class DeplacementCollecte {
 	 * METHODE D'ACCES a la classe TraitementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacement commune
 	 */
 	public TraitementCommune traitementCommune() throws StopRequestException {
@@ -557,7 +537,6 @@ public class DeplacementCollecte {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacementcommune
 	 */
 	public DeplacementCommune DeplacementCommune() throws StopRequestException {

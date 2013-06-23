@@ -12,26 +12,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
- */
-@SuppressWarnings("deprecation")
 public class Securite {
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
-	/** */
 	public boolean secure;
-	/** */
 	public AiPath nextMove2 = null;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Securite(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -39,16 +24,15 @@ public class Securite {
 	}
 
 	/**
-	 * Cette mÃ©thode ContrÃ´le si la case cible est vide ou pas et elle retourne
-	 * un type boolÃ©enne (danger). Elle prend 2 arguments la zone du jeu et la
+	 * Cette méthode contrôle si la case cible est vide ou pas et elle retourne
+	 * un type booléenne (danger). Elle prend 2 arguments la zone du jeu et la
 	 * case cible.
 	 * 
-	 * @param tile
+	 * @param AiTile
 	 *            tile
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return poserBombe
 	 */
 	public boolean plein(AiZone gameZone, AiTile tile)
@@ -75,14 +59,13 @@ public class Securite {
 	}
 
 	/**
-	 * Cette mÃ©thode fait le ContrÃ´le de sÃ©curitÃ© du posage de la bombe de notre
-	 * IA c'est-a-dire ContrÃ´le si notre IA pose sa bombe ou pas. Elle prend un
+	 * Cette méthode fait le contrôle de sécurité du posage de la bombe de notre
+	 * IA c'est-a-dire contrôle si notre IA pose sa bombe ou pas. Elle prend un
 	 * seul argument,la zone du jeu et elle retourne une liste.
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return casSurs
 	 */
 	public List<AiTile> posageControle(AiZone gameZone)
@@ -141,19 +124,18 @@ public class Securite {
 	}
 
 	/**
-	 * Cette mÃ©thode fait le ContrÃ´le de sÃ©curitÃ© du posage de la bombe par
-	 * lÃ adversaire autour d'IA c'est-a-dire ContrÃ´le si notre IA tombe en
-	 * danger par la bombe de lÃ adversaire. Elle prend deux arguments la zone du
+	 * Cette méthode fait le contrôle de sécurité du posage de la bombe par
+	 * l’adversaire autour d’IA c’est-a-dire contrôle si notre IA tombe en
+	 * danger par la bombe de l’adversaire. Elle prend deux arguments la zone du
 	 * jeu et une bombe du jeu. Elle retourne une liste.
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @param bombe
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return casSurs2
 	 */
+
 	public List<AiTile> bombeControle(AiZone gameZone, AiBomb bombe)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -221,17 +203,14 @@ public class Securite {
 	}
 
 	/**
-	 * Cette mÃ©thode nous donne une liste de direction pour notre IA. Elle prend
+	 * Cette méthode nous donne une liste de direction pour notre IA. Elle prend
 	 * deux arguments.
 	 * 
 	 * @param dx2
-	 * 		description manquante !
 	 * @param dy2
-	 * 		description manquante !
 	 * @return directions2
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<Direction> directionToute(int dx2, int dy2)
 			throws StopRequestException {

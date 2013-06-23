@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,30 +37,32 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * simule la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale pour la simulation de l'Ã©volution du jeu.
- * <br/>
- * L'ensemble des objets reprÃ©sente un Ã©tat du jeu et ne peut 
- * Ãªtre modifiÃ© que via la classe AiModel.
+ * Il s'agit de la classe principale pour la simulation de l'évolution du jeu.</br>
+ * 
+ * L'ensemble des objets représente un état du jeu et ne peut 
+ * être modifié que via la classe AiModel.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiSimZone extends AiZone
 {	
 	/**
-	 * contruit une zone qui est une copie de celle passÃ©e en paramÃ¨tre.
-	 * si la paramÃ¨tre fullCopy est faux, les sprites ne sont pas copiÃ©s,
-	 * sinon tout est copiÃ©.
+	 * contruit une zone qui est une copie de celle passée en paramètre.
+	 * si la paramètre fullCopy est faux, les sprites ne sont pas copiés,
+	 * sinon tout est copié.
 	 * 
 	 * @param zone
-	 * 		la zone de rÃ©fÃ©rence
+	 * 		la zone de référence
+	 * @param fullCopy
+	 * 		indique si les sprites doivent aussi être copiés ou pas
+	 * @return	
+	 * 		une nouvelle zone vide de mêmes dimensions
 	 */
 	protected AiSimZone(AiZone zone)
 	{	// matrix and tiles
@@ -169,13 +171,13 @@ final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * crÃ©e une zone vide des dimensions spÃ©cifiÃ©es.
-	 * <b>Note :</b> constructeur utilisÃ© seulement pour tester AiModel.
+	 * crée une zone vide des dimensions spécifiées.
+	 * <b>Note :</b> constructeur utilisé seulement pour tester AiModel.
 	 * 
 	 * @param height
-	 * 		hauteur de la zone Ã  crÃ©er, en cases
+	 * 		hauteur de la zone à créer, en cases
 	 * @param width
-	 * 		largeur de la zone Ã  crÃ©er, en cases
+	 * 		largeur de la zone à créer, en cases
 	 */
 	protected AiSimZone(int height, int width)
 	{	this.height = height;
@@ -206,7 +208,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice reprÃ©sentant la zone et tous les sprites qu'elle contient */
+	/** matrice représentant la zone et tous les sprites qu'elle contient */
 	private AiSimTile[][] matrix;
 	
 	@Override
@@ -215,18 +217,18 @@ final class AiSimZone extends AiZone
 	}
 	
 	/** 
-	 * renvoie la case voisine de la case passÃ©e en paramÃ¨tre,
-	 * dans la direction spÃ©cifiÃ©e (en considÃ©rant le fait que le niveau
-	 * est fermÃ©.
+	 * renvoie la case voisine de la case passée en paramètre,
+	 * dans la direction spécifiée (en considérant le fait que le niveau
+	 * est fermé.
 	 *  
 	 *  @param line
-	 *  	ligne de la case Ã  traite
+	 *  	ligne de la case à traite
 	 *  @param col
-	 *  	colonne de la case Ã  traiter
+	 *  	colonne de la case à traiter
 	 *  @param direction
-	 *  	direction de la case voisine relativement Ã  la case de rÃ©fÃ©rence
+	 *  	direction de la case voisine relativement à la case de référence
 	 *  @return	
-	 *  	la case voisine dans la direction prÃ©cisÃ©e
+	 *  	la case voisine dans la direction précisée
 	 */
 	protected AiSimTile getNeighborTile(int line, int col, Direction direction)
 	{	AiSimTile result;
@@ -255,11 +257,11 @@ final class AiSimZone extends AiZone
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met Ã  jour les variables temporelles de cette zone.
-	 * (mÃ©thode utilisÃ©e seulement lors de la simulation)
+	 * met à jour les variables temporelles de cette zone.
+	 * (méthode utilisée seulement lors de la simulation)
 	 * 
 	 * @param duration
-	 * 		dÃ©lai depuis la derniÃ¨re simulation
+	 * 		délai depuis la dernière simulation
 	 */
 	protected void updateTime(long duration)
 	{	totalTime = totalTime + duration;
@@ -286,12 +288,12 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * permet de rajouter un sprite dans cette zone<br/>
-	 * <b>Attention :</b> le sprite a obligatoirement dÃ©jÃ  Ã©tÃ© affectÃ© Ã  une case 
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été affecté à une case 
 	 * lors de sa construction, donc il s'agit ici simplement de mettre
-	 * Ã  jour les listes de sprites de la zone
+	 * à jour les listes de sprites de la zone
 	 * 
 	 *  @param sprite
-	 *  	le sprite Ã  rajouter Ã  cette zone
+	 *  	le sprite à rajouter à cette zone
 	 */
 	protected void addSprite(AiSimSprite sprite)
 	{	AiSimTile tile = sprite.getTile();
@@ -333,14 +335,14 @@ final class AiSimZone extends AiZone
 	
 	/**
 	 * supprime un sprite de la zone et de la case correspondante.
-	 * s'il s'agit d'un joueur, il est supprimÃ© seulement de la case
+	 * s'il s'agit d'un joueur, il est supprimé seulement de la case
 	 * et de la liste des joueurs encore en jeu (mais la zone continue
-	 * Ã  le rÃ©fÃ©rencer dans la liste gÃ©nÃ©rale des joueurs, car le sprite
+	 * à le référencer dans la liste générale des joueurs, car le sprite
 	 * peut encore etre utile, par exemple pour obtenir le classement
 	 * de ce joueur)
 	 * 
 	 * @param sprite
-	 * 		le sprit Ã  supprimer de la zone
+	 * 		le sprit à supprimer de la zone
 	 */
 	protected void removeSprite(AiSimSprite sprite)
 	{	// sprite lists
@@ -381,16 +383,16 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de mÃªme numÃ©ro (id)
-	 * que celui passÃ© en paramÃ¨tre. Cette mÃ©thode permet
-	 * de suivre le mÃªme sprite Ã  travers diffÃ©rents Ã©tats
-	 * de la simulation, dans lesquels il est reprÃ©sentÃ©
-	 * par des objets diffÃ©rents.
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblÃ©
+	 * 		le sprite ciblé
 	 * @return	
-	 * 		sa reprÃ©sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimSprite getSpriteById(AiSprite sprite)
 	{	AiSimSprite result = null;
@@ -457,16 +459,16 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de mÃªme numÃ©ro (id)
-	 * que celui passÃ© en paramÃ¨tre. Cette mÃ©thode permet
-	 * de suivre le mÃªme sprite Ã  travers diffÃ©rents Ã©tats
-	 * de la simulation, dans lesquels il est reprÃ©sentÃ©
-	 * par des objets diffÃ©rents.
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblÃ©
+	 * 		le sprite ciblé
 	 * @return	
-	 * 		sa reprÃ©sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimBlock getSpriteById(AiBlock sprite)
 	{	AiSimBlock result = null;
@@ -504,16 +506,16 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de mÃªme numÃ©ro (id)
-	 * que celui passÃ© en paramÃ¨tre. Cette mÃ©thode permet
-	 * de suivre le mÃªme sprite Ã  travers diffÃ©rents Ã©tats
-	 * de la simulation, dans lesquels il est reprÃ©sentÃ©
-	 * par des objets diffÃ©rents.
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblÃ©
+	 * 		le sprite ciblé
 	 * @return	
-	 * 		sa reprÃ©sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimBomb getSpriteById(AiBomb sprite)
 	{	AiSimBomb result = null;
@@ -563,16 +565,16 @@ final class AiSimZone extends AiZone
 	}
 		
 	/**
-	 * renvoie la simulation de sprite de mÃªme numÃ©ro (id)
-	 * que celui passÃ© en paramÃ¨tre. Cette mÃ©thode permet
-	 * de suivre le mÃªme sprite Ã  travers diffÃ©rents Ã©tats
-	 * de la simulation, dans lesquels il est reprÃ©sentÃ©
-	 * par des objets diffÃ©rents.
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblÃ©
+	 * 		le sprite ciblé
 	 * @return	
-	 * 		sa reprÃ©sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimFire getSpriteById(AiFire sprite)
 	{	AiSimFire result = null;
@@ -610,16 +612,16 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de mÃªme numÃ©ro (id)
-	 * que celui passÃ© en paramÃ¨tre. Cette mÃ©thode permet
-	 * de suivre le mÃªme sprite Ã  travers diffÃ©rents Ã©tats
-	 * de la simulation, dans lesquels il est reprÃ©sentÃ©
-	 * par des objets diffÃ©rents.
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblÃ©
+	 * 		le sprite ciblé
 	 * @return	
-	 * 		sa reprÃ©sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimFloor getSpriteById(AiFloor sprite)
 	{	AiSimFloor result = null;
@@ -671,12 +673,12 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * retrouve l'objet simulant un personnage grÃ¢ce Ã  sa couleur
+	 * retrouve l'objet simulant un personnage grâce à sa couleur
 	 * 
 	 * @param color
-	 * 		couleur du personnage Ã  retrouver
+	 * 		couleur du personnage à retrouver
 	 * @return	
-	 * 		le personnage correspondant Ã  la couleur spÃ©cifiÃ©e
+	 * 		le personnage correspondant à la couleur spécifiée
 	 */
 	private AiSimHero getInternalHeroByColor(PredefinedColor color)
 	{	AiSimHero result = null;
@@ -702,16 +704,16 @@ final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * renvoie la simulation de sprite de mÃªme numÃ©ro (id)
-	 * que celui passÃ© en paramÃ¨tre. Cette mÃ©thode permet
-	 * de suivre le mÃªme sprite Ã  travers diffÃ©rents Ã©tats
-	 * de la simulation, dans lesquels il est reprÃ©sentÃ©
-	 * par des objets diffÃ©rents.
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblÃ©
+	 * 		le sprite ciblé
 	 * @return	
-	 * 		sa reprÃ©sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimHero getSpriteById(AiHero sprite)
 	{	AiSimHero result = null;
@@ -726,13 +728,13 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * insÃ»re un nouveau personnage dans la zone
-	 * (mÃ©thode utilisÃ©e lors de la simulation)
+	 * insère un nouveau personnage dans la zone
+	 * (méthode utilisée lors de la simulation)
 	 * 
 	 * @param hero
-	 * 		le personnage Ã  insÃ©rer
+	 * 		le personnage à insérer
 	 * @param 
-	 * 		isOwnHero	indique si le personnage Ã  insÃ©rer est celui contrÃ´lÃ© par l'IA
+	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'IA
 	 */
 	protected void addHero(AiSimHero hero, boolean isOwnHero)
 	{	// sprites
@@ -770,11 +772,11 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de diminuer le nombre d'items cachÃ©s,
+	 * permet de diminuer le nombre d'items cachés,
 	 * lors de la simulation
 	 * 
 	 * @param type
-	 * 		le type d'item qui a Ã©tÃ© dÃ©couvert
+	 * 		le type d'item qui a été découvert
 	 */
 	protected void updateHiddenItemsCount(AiItemType type)
 	{	Integer value = hiddenItemsCounts.get(type);
@@ -784,16 +786,16 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * renvoie la simulation de sprite de mÃªme numÃ©ro (id)
-	 * que celui passÃ© en paramÃ¨tre. Cette mÃ©thode permet
-	 * de suivre le mÃªme sprite Ã  travers diffÃ©rents Ã©tats
-	 * de la simulation, dans lesquels il est reprÃ©sentÃ©
-	 * par des objets diffÃ©rents.
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite ciblÃ©
+	 * 		le sprite ciblé
 	 * @return	
-	 * 		sa reprÃ©sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimItem getSpriteById(AiItem sprite)
 	{	AiSimItem result = null;
@@ -810,7 +812,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrÃ´lÃ© par l'IA */
+	/** le personnage contrôlé par l'IA */
 	private AiSimHero ownHero;
 
 	@Override
@@ -837,7 +839,7 @@ final class AiSimZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Termine proprement cette simulation (une fois que l'IA n'en a plus besoin).
+	 * termine proprement cette simulation (une fois que l'IA n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

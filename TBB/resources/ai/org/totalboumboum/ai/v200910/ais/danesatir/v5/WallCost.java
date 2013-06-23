@@ -11,10 +11,9 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class WallCost extends CostCalculator {
 	@Override
 	public double processCost(AiTile start, AiTile end) {

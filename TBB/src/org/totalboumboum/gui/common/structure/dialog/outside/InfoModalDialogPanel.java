@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.dialog.outside;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,8 +25,7 @@ import java.util.List;
 
 import org.totalboumboum.gui.common.structure.dialog.inside.InfoSubPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -37,7 +36,7 @@ public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
 {	private static final long serialVersionUID = 1L;
 
 	public InfoModalDialogPanel(MenuPanel parent, String key, List<String> text)
-	{	super(parent,new InfoSubPanel((int)(parent.getFrame().getMenuWidth()*GuiSizeTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiSizeTools.MODAL_DIALOG_RATIO),key,text));
+	{	super(parent,new InfoSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),key,text));
 		InfoSubPanel subPanel = getSubPanel();
 		subPanel.addListener(this);
 	}

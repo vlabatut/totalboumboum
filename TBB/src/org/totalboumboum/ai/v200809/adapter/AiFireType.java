@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.adapter;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,24 +26,22 @@ package org.totalboumboum.ai.v200809.adapter;
  * types de feux reconnus par l'IA.
  * 	
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public enum AiFireType
 {
 	/** feu normal */
 	NORMAL,
-	/** feu pÃ©nÃ©trant (pas arrÃ©tÃ© par les les objets destructibles) */
+	/** feu pénétrant (pas arrêté par les les objets destructibles) */
 	PENETRATION,
 	/** autre type de feu */
 	OTHER;	
 	
 	/**
-	 * calcule l'AiFireType correspondant au nom de feu passÃ© en paramÃ¨tre
+	 * calcule l'AiFireType correspondant au nom de feu passé en paramètre
 	 * 
-	 * @param name	nom du feu Ã  traiter
-	 * @return	symbole reprÃ©sentant ce type de feu
+	 * @param name	nom du feu à traiter
+	 * @return	symbole représentant ce type de feu
 	 */
 	public static AiFireType makeFireType(String name)
 	{	AiFireType result;

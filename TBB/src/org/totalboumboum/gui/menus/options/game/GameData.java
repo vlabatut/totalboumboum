@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.options.game;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -70,6 +70,6 @@ public class GameData extends InnerDataPanel
 	}
 
 	public void refresh()
-	{	// NOTE Ã  complÃ©ter
+	{	// NOTE à compléter
 	}
 }

@@ -14,24 +14,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Ali FÄ±ndÄ±k
- * @author GÃ¶knur ÅžÄ±rÄ±n
- */
-@SuppressWarnings("deprecation")
 public class AttackManager
 {
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @param posTarget
-	 * 		Description manquante !
-	 * @param posWalkable
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AttackManager(FindikSirin ai,Direction posTarget, Direction posWalkable) throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -49,13 +33,7 @@ public class AttackManager
 			setBombingPath(posTarget,posWalkable);
 	}
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	private List<AiTile> heroDestinations() throws StopRequestException{
 	ai.checkInterruption();
 	List<AiTile> dest = new ArrayList<AiTile>();
@@ -76,23 +54,18 @@ public class AttackManager
 	
 /////////////////////////////////////////////////////////////////////////////////////////
 //L'ALGORITHME ASTAR POUR CALCULER LE COUTS DES CHEMINS
-	/** classe implÃ©mentant l'algorithme A* */
+	/** classe implémentant l'algorithme A* */
 	private Astar astar;
-	/** classe implÃ©mentant la fonction heuristique */
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implÃ©mentant la fonction de coÃ»t */
+	/** classe implémentant la fonction de coût */
 	private MatrixCostCalculator costCalculator;
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// calcul de la matrice de coÃ»t : on prend l'opposÃ© du niveau de sÃ»retÃ©
-		// i.e. : plus le temps avant l'explosion est long, plus le coÃ»t est faible 
+		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
+		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -104,31 +77,22 @@ public class AttackManager
 		}
 	}	
 //////////////////////////////////////////////////////////////////////////////////////////
-	/** notre IA et la zone du jeu */
+	//notre IA et la zone du jeu
 	private FindikSirin ai;
-	/** */
 	private AiZone zone;
 
 
-	/** si on est arrive a la destination */
+	//si on est arrive a la destination
 	private boolean arrived;
 
-	/** */
 	private AiTile tileDest;
-	/** destinations potentielles
+	// destinations potentielles
 	//private List<AiTile> possibleDest;
 	//le chemin qu'on va suivre
-	 */
 	private AiPath path;
 
 
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public boolean decidedToBomb() throws StopRequestException{
 		ai.checkInterruption();
 		boolean result=false;
@@ -145,17 +109,6 @@ public class AttackManager
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param tile1
-	 * 		Description manquante !
-	 * @param tile2
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isOnLine(AiTile tile1, AiTile tile2) throws StopRequestException{
 		ai.checkInterruption();
 		boolean result=false;
@@ -187,13 +140,7 @@ public class AttackManager
 	}
 	
 	
-	/** retourne si on est arrive ou pas
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	// retourne si on est arrive ou pas
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
 		if(!arrived)
@@ -216,10 +163,7 @@ public class AttackManager
 		tileDest = path.getLastTile();
 	}
 	*/
-	/** si on est sur le chemin calculÃ© 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//si on est sur le chemin calculé
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -244,19 +188,14 @@ public class AttackManager
 		}
 		return result;
 	}	*/
-	/** le process de decision
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
+//le process de decision
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
 		// on met a jour la matrice de cout
 		updateCostCalculator();
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on verifie si on est arrivÃ©
+		{	// on verifie si on est arrivé
 			checkIsOnPath();
 			// si le chemin n'est pas vide si il est valide on reprend
 			//if(path.isEmpty() || !checkPathValidity())
@@ -275,21 +214,11 @@ public class AttackManager
 		return result;
 	}
 	
-	/** */
+
 	public AiTile bomb1Pos=null;
-	/** */
 	public AiTile bomb2Pos=null;
-	/** */
 	public AiTile bomb3Pos=null;
 
-	/**
-	 * @param posTarget 
-	 * 		Description manquante !
-	 * @param posWalkable 
-	 * 		Description manquante !
-	 * @throws StopRequestException  
-	 * 		Description manquante !
-	 */
 	private void setBombingPath(Direction posTarget, Direction posWalkable) throws StopRequestException{
 		ai.checkInterruption();
 		AiTile currentTile=ai.getCurrentTile();

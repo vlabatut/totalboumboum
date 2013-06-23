@@ -2,7 +2,7 @@ package org.totalboumboum.game.match;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,20 +22,12 @@ package org.totalboumboum.game.match;
  */
 
 /**
- * Interface a panel displaying a match
- * must implement.
  * 
  * @author Vincent Labatut
+ *
  */
 public interface MatchRenderPanel
-{	/**
-	 * Called when the match is over.
-	 */
+{
 	public void matchOver();
-	
-	/**
-	 * Called when one round of this
-	 * match is over.
-	 */
 	public void roundOver();
 }

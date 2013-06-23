@@ -26,56 +26,30 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5
  * 
  * @author Can Adatape
- * @author Sena Ã–zbek
+ * @author Sena Ozbek
  *
  */
-@SuppressWarnings("deprecation")
 public class AiEscape
 {		
-	/** */
 	private AdatepeOzbek ownAi;
-	/** */
 	private AiZone zone;
-	/** */
 	private List<AiBomb> bombs;
-	/** */
 	private List<AiFire> fires;
-	/** */
 	private List<AiHero> heroes;
-	/** */
 	private List<AiItem> items;
-	/** */
 	private List<AiBlock> blocks;
-	/** */
 	private AiAction actionToDo = null;
-	/** */
 	private double safeArray[][];
-	/** */
 	private List<AiBlock> indestBlocks;
-	/** */
 	private List<AiBlock> destBlocks;
-	/** */
 	private double costArray[][];
-	/** */
 	private static double SAFE = 10;
-	/** */
 	private static double NOT_SAFE = 0;
-	/** */
 	private static double STUCK = 7.5;
-	/** */
 	private static AiHero OWN_HERO;
-	/** */
 	private static AiTile CURRENT_TILE;
-	/** */
 	private AiPath path;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiEscape(AdatepeOzbek ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -403,15 +377,6 @@ public class AiEscape
 		}
 	}
 
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isHeroInRange(AiHero hero) throws StopRequestException
 	{ownAi.checkInterruption();
 	
@@ -443,13 +408,6 @@ public class AiEscape
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isHeroInRange() throws StopRequestException
 	{ownAi.checkInterruption();
 		int range = OWN_HERO.getBombRange();
@@ -483,13 +441,6 @@ public class AiEscape
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean enoughArmed() throws StopRequestException
 	{ownAi.checkInterruption();
 		if(OWN_HERO.getBombNumber() >= 5 && OWN_HERO.getBombRange() >= 5)
@@ -498,15 +449,6 @@ public class AiEscape
 			return false;		
 	}
 	
-	/**
-	 * 
-	 * @param type
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getHeroByType(EnemyTypes type) throws StopRequestException
 	{ownAi.checkInterruption();
 		for(int j=0; j<ownAi.enemies.size(); j++)
@@ -520,15 +462,6 @@ public class AiEscape
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public EnemyTypes getHeroType(AiHero hero) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -543,15 +476,6 @@ public class AiEscape
 		return EnemyTypes.UNKNOWN;
 	}
 	
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Enemy getEnemy(AiHero hero) throws StopRequestException
 	{ownAi.checkInterruption();
 		for(int j=0; j<ownAi.enemies.size(); j++)
@@ -566,11 +490,6 @@ public class AiEscape
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void updatePath() throws StopRequestException
 	{ownAi.checkInterruption();
 		if(path == null)
@@ -583,12 +502,6 @@ public class AiEscape
 		}
 		
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void evaluateOpposites() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -671,13 +584,6 @@ public class AiEscape
 			}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getCloserHero() throws StopRequestException
 	{ownAi.checkInterruption();
 		double minDist = Double.MAX_VALUE;
@@ -700,15 +606,6 @@ public class AiEscape
 		
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double stuckCheck(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -740,13 +637,6 @@ public class AiEscape
 			return NOT_SAFE;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean stuckAlgorithm() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -800,11 +690,6 @@ public class AiEscape
 		}
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void initArrays() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -818,11 +703,6 @@ public class AiEscape
 		}
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void updateCostArray() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -836,28 +716,12 @@ public class AiEscape
 		}
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isTileSafe(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
 		return safeArray[tile.getLine()][tile.getCol()] >= STUCK;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile getShortestSafeTile() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -890,13 +754,6 @@ public class AiEscape
 		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile getLongestSafeTile() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -919,13 +776,6 @@ public class AiEscape
 		return maxTile;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiPath findPathToGo() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -949,13 +799,6 @@ public class AiEscape
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getSafeTiles() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -975,15 +818,6 @@ public class AiEscape
 		return safeTiles;
 	}
 	
-	/**
-	 * 
-	 * @param from
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double[][] copyTiles(double[][] from) throws StopRequestException
 	{
 		double[][] to = new double[zone.getHeight()][zone.getWidth()];
@@ -999,13 +833,6 @@ public class AiEscape
 		return to;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile findStuckTile() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1058,11 +885,6 @@ public class AiEscape
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void printTiles() throws StopRequestException
 	{
 		Debug.writeln("LISTING MATRICE");
@@ -1077,13 +899,6 @@ public class AiEscape
 		}
 	}
 	
-	/**
-	 * 
-	 * @param matrice
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void printTiles(double matrice[][]) throws StopRequestException
 	{
 		Debug.writeln("LISTING MATRICE");
@@ -1098,13 +913,6 @@ public class AiEscape
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean canTheyReachMe() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1132,15 +940,6 @@ public class AiEscape
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean canHeReachMe(AiHero hero) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1155,13 +954,6 @@ public class AiEscape
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isThereBonusInTheTable() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1172,13 +964,6 @@ public class AiEscape
 			return false;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean canIEscapeIfIBomb() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1299,15 +1084,6 @@ public class AiEscape
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isPlayerStuck(AiHero hero) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1327,15 +1103,6 @@ public class AiEscape
 			return true;
 	}
 	
-	/**
-	 * 
-	 * @param len
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiPath getReachableBonusInArea(int len) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1374,13 +1141,6 @@ public class AiEscape
 		return minItemPath;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiBlock getDestBlockInMyRange() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1427,13 +1187,6 @@ public class AiEscape
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean goToShortestDestBlock() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1505,15 +1258,6 @@ public class AiEscape
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @param tileToGo
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiPath calculateNewPath(AiTile tileToGo) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1533,15 +1277,6 @@ public class AiEscape
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean checkNextTileIsCrossable(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1551,13 +1286,6 @@ public class AiEscape
 			return true;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean calculateNewPath() throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -1584,20 +1312,10 @@ public class AiEscape
 	
 	/**
 	 * calcule une liste de cases correspondant au souffle indirect de la bombe
-	 * passÃ©e en paramÃ¨tre. Le terme "indirect" signifie que la fonction est rÃ©cursive : 
-	 * si une case Ã  portÃ©e de souffle contient une bombe, le souffle de cette bombe est rajoutÃ©
-	 * dans la liste blast, et la bombe est rajoutÃ©e dans la liste bombs.
-	 * 
-	 * @param bomb 
-	 * 		Description manquante !
-	 * @param blast 
-	 * 		Description manquante !
-	 * @param bombs 
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * passée en paramètre. Le terme "indirect" signifie que la fonction est récursive : 
+	 * si une case à portée de souffle contient une bombe, le souffle de cette bombe est rajouté
+	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
+	 * Par Vincent Labatut
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
@@ -1605,7 +1323,7 @@ public class AiEscape
 		if(!bombs.contains(bomb))
 		{	bombs.add(bomb);
 		
-			// on rÃ©cupÃ©re le souffle
+			// on récupère le souffle
 			List<AiTile> tempBlast = bomb.getBlast();
 			blast.addAll(tempBlast);
 			

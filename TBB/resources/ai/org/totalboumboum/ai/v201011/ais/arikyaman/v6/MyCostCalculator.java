@@ -5,25 +5,12 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 
-/**
- * @author Furkan Arık
- * @author Çağdaş Yaman
- */
-@SuppressWarnings("deprecation")
+
 public class MyCostCalculator extends CostCalculator {
 
-	/** */
 	ArikYaman ay;
-	/** */
     int[][]	ProcessMatrix;
 	
-    /**
-     * 
-     * @param ay
-	 * 		description manquante !
-     * @throws StopRequestException
-	 * 		description manquante !
-     */
 	public MyCostCalculator(ArikYaman ay) throws StopRequestException
 	{	ay.checkInterruption();
 		
@@ -41,12 +28,11 @@ public class MyCostCalculator extends CostCalculator {
 		double y=(ay.getPercepts().getOwnHero().getPosY()-end.getPosY());
 		return Math.sqrt(x*x+y*y)/10;
 	}
-	
-	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	ay.checkInterruption();
 		
 		double result = path.getTileDistance();
 		return result;
 	}
+
 }

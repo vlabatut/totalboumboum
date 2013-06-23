@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.round.description;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,7 +31,6 @@ import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
-import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.engine.container.level.preview.LevelPreviewLoader;
 import org.totalboumboum.game.limit.Limit;
@@ -52,26 +51,26 @@ import org.totalboumboum.gui.common.structure.subpanel.container.ImageSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
 /**
- * This class handles the display of the
- * description of a round, during a game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class RoundDescription extends EntitledDataPanel implements LimitsSubPanelListener
 {	
-	/** Class id */
 	private static final long serialVersionUID = 1L;
+	private static final float SPLIT_RATIO = 0.4f;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
+	private ImageSubPanel imagePanel;
+	private InitialItemsSubPanel initialItemsPanel;
+	private AvailableItemsSubPanel availableItemsPanel;
+	private LimitsSubPanel<RoundLimit> limitsPanel;
+	private PointsSubPanel pointsPanel;
+	private LevelSubPanel miscPanel;
+	
 	public RoundDescription(SplitMenuPanel container)
 	{	super(container);
 	
@@ -86,7 +85,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 				infoPanel.setLayout(layout);
 			}
 			
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
@@ -201,112 +200,56 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PANELS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	/** Ratio used to split the scren */
-	private static final float SPLIT_RATIO = 0.4f;
-	/** Displays the round preview */
-	private ImageSubPanel imagePanel;
-	/** Displays the initial items */
-	private InitialItemsSubPanel initialItemsPanel;
-	/** Displays the zone items */
-	private AvailableItemsSubPanel availableItemsPanel;
-	/** Displays the round limits */
-	private LimitsSubPanel<RoundLimit> limitsPanel;
-	/** Displays the points information */
-	private PointsSubPanel pointsPanel;
-	/** Displays general information */
-	private LevelSubPanel miscPanel;
-
-	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** Round displayed in this panel */
 	private Round round;
-	/** Number of the round currently displayed */
-	private int number;
-	/** Level contained in the round */
 	private HollowLevel hollowLevel;
-	/** Level preview object */
 	private LevelPreview levelPreview;
 	
-	/**
-	 * Changes the round displayed in this panel.
-	 * 
-	 * @param round
-	 * 		The new round to display.
-	 * @param number
-	 * 		Number of the round in the current match.
-	 */
-	public void setRound(Round round, Integer number)
+	public void setRound(Round round)
 	{	// init
 		this.round = round;
-		
-		// title
-		{	this.number = number;
-			String key = GuiKeys.GAME_ROUND_DESCRIPTION_TITLE;
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
-			if(number!=null)
-			{	text = text + " " + number;
-				tooltip = tooltip + " " + number;
-			}
-			setTitleText(text,tooltip);
+		BufferedImage image = null;
+		Limits<RoundLimit> limits = null;
+		if(round==null)
+		{	hollowLevel = null;
+			levelPreview = null;
 		}
-		
-		// panels
-		{	BufferedImage image = null;
-			Limits<RoundLimit> limits = null;
-			if(round==null)
-			{	hollowLevel = null;
-				levelPreview = null;
+		else
+		{	hollowLevel = round.getHollowLevel();
+			limits = round.getLimits();
+			try
+			{	levelPreview = LevelPreviewLoader.loadLevelPreview(hollowLevel.getLevelInfo().getPackName(),hollowLevel.getLevelInfo().getFolder());
+				image = levelPreview.getVisualPreview();
 			}
-			else
-			{	hollowLevel = round.getHollowLevel();
-				limits = round.getLimits();
-				try
-				{	LevelInfo levelInfo = hollowLevel.getLevelInfo();
-					String packName = levelInfo.getPackName();
-					String folder = levelInfo.getFolder();
-					levelPreview = LevelPreviewLoader.loadLevelPreview(packName,folder);
-					image = levelPreview.getVisualPreview();
-				}
-				catch (ParserConfigurationException e)
-				{	e.printStackTrace();
-				}
-				catch (SAXException e)
-				{	e.printStackTrace();
-				}
-				catch (IOException e)
-				{	e.printStackTrace();
-				}
-				catch (ClassNotFoundException e)
-				{	e.printStackTrace();
-				}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
 			}
-			// image panel
-			String key = GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW+GuiKeys.TOOLTIP;
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-			imagePanel.setImage(image,tooltip);
-			// level
-			miscPanel.setLevelPreview(levelPreview,8);
-			// initial items panel
-			initialItemsPanel.setLevelPreview(levelPreview);
-			// available items panel
-			availableItemsPanel.setLevel(levelPreview,hollowLevel);
-			// limits & points
-			limitsPanel.setLimits(limits);
-//			limitSelectionChange();
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
 		}
+		// image panel
+		String key = GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW+GuiKeys.TOOLTIP;
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		imagePanel.setImage(image,tooltip);
+		// level
+		miscPanel.setLevelPreview(levelPreview,8);
+		// initial items panel
+		initialItemsPanel.setLevelPreview(levelPreview);
+		// available items panel
+		availableItemsPanel.setLevel(levelPreview,hollowLevel);
+		// limits & points
+		limitsPanel.setLimits(limits);
+//		limitSelectionChange();
 	}
 	
-	/**
-	 * Returns the round displayed
-	 * in this panel.
-	 * 
-	 * @return
-	 * 		The current round.
-	 */
 	public Round getRound()
 	{	return round;	
 	}
@@ -316,7 +259,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
-	{	setRound(round,number);
+	{	setRound(round);
 	}
 
 	/////////////////////////////////////////////////////////////////

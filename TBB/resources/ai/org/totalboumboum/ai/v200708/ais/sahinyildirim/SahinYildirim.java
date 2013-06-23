@@ -11,55 +11,34 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Serkan Åžahin
- * @author Mehmet YÄ±ldÄ±rÄ±m
+ * @author Serkan Sahin
+ * @author Mehmet Yildirim
  *
  */
-@SuppressWarnings("deprecation")
 public class SahinYildirim extends ArtificialIntelligence {
 
-	/** */
 	Runtime r = Runtime.getRuntime();
-	/** */
-	public static final long serialVersionUID = 1L;	
-	/** */
+	private static final long serialVersionUID = 1L;	
 	private Integer lastMove;	
-	/** */
 	boolean bombVar = false;
-	/** */
 	private int tryNum = 1;
 	
 	// A****************************
-	/** */
 	private List<Integer> path = new ArrayList<Integer>();
-	/** */
 	private Vector<ParentChild> perler = new Vector<ParentChild>();
    
-	/** */
 	int pathtoFait = 0;
-	/** */
 	int nextMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-	/** */
 	boolean lastMoveFromPutbomb = false;
 
-	/** */
 	Point lastPoint;
-	/** */
 	PointFind pointMeRoot;
-	/** */
 	PointFind pointFind;
-	/** */
 	PointFind pointShrink;
 	
-	/** */
-	int monIndex;
-	/** */
-	int closestPlayerIndex;
-	/** */
+	int monIndex,closestPlayerIndex;
 	int initialCost;
-	/** */
-//	private int bonusBomb = 0;
-	/** */
+	private int bonusBomb = 0;
 	private int bonusFire = 1;
 	
 	/**
@@ -70,12 +49,10 @@ public class SahinYildirim extends ArtificialIntelligence {
 		lastMove = ArtificialIntelligence.AI_ACTION_GO_UP;
 	}
 	
-	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
+	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
-	@Override
-	public Integer processAction() throws Exception
-	{
+	public Integer call() throws Exception {
 		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(firstTime)
 			firstTime = false;
@@ -89,8 +66,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 		pointMe = new Point(x, y);
 
-//		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_BOMB)
-//			bonusBomb++;
+		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_BOMB)
+			bonusBomb++;
 		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
 			bonusFire++;
 		
@@ -123,7 +100,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		  if(possibleMoves.contains(lastMove)) 
 			  result = lastMove;
 		  
-		  else { // on dÃ©termine alÃ©atoirement l'action qui va Ãªtre effectuÃ©e
+		  else { // on détermine aléatoirement l'action qui va être effectuée
 		  int index; do { index = (int)(Math.random()*(possibleMoves.size())); }
 		  while(index==possibleMoves.size());
 		 
@@ -201,7 +178,6 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param x point_x de moi
 	 * @param y point_y de moi
 	 * @param result 
-	 * 		Description manquante !
 	 * @return l'action pour prendre le bonus
 	 */
 	private int bonusNearMe(int x,int y,int result)
@@ -230,9 +206,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	
 	/**
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @return vrai si au moins un person est dans la portee de mon bombe 
 	 */
 	private boolean putBomb(int x,int y)
@@ -311,7 +285,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		
 			prq.offer(pointMeRoot);
 
-//		int count = 1;
+		int count = 1;
 		
 		int iteration =1;
 
@@ -350,15 +324,15 @@ public class SahinYildirim extends ArtificialIntelligence {
 						node.setNodeVisited(true);
 						// si le point suivant est un wall soft alors putBomb
 						if (prqFils.peek().isPointMure()) {
-//							count++;
+							count++;
 							path.add(addToPath(prqFils.peek(), node));
-//							count++;
+							count++;
 							path.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 							solution = pointFind;
 						} else {
 							if(prqFils.peek().equals(pointFind))
 								solution = new PointFind(pointFind.getRootPoint(),0,false);
-//							count++;
+							count++;
 							path.add(addToPath(prqFils.peek(), node));
 						}
 
@@ -396,7 +370,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 					
 								path.add(addToPath(prqFils.peek(), perler
 										.get(0).getPere()));
-//								count++;
+								count++;
 								path
 										.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 								solution = pointFind;
@@ -405,7 +379,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 										.equals(pointMeRoot.getRootPoint()))
 											path.add(addToPath(perler.get(0).getPere(),
 													pointMeRoot));
-//								count++;
+								count++;
 								if(prqFils.peek().equals(pointFind))
 									solution = new PointFind(pointFind.getRootPoint(),0,false);
 								
@@ -431,7 +405,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 						} else if (perler.get(1).getChildVector().contains(prqFils.peek())) {
 							if (prqFils.peek().isPointMure()) {
 							
-//								count++;
+								count++;
 								path.add(addToPath(prqFils.peek(), perler
 										.get(1).getPere()));
 
@@ -448,7 +422,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 								
 								path.add(addToPath(prqFils.peek(), perler
 										.get(1).getPere()));
-//								count++;
+								count++;
 								}
 							lastPoint = perler.get(1).getPere().getRootPoint();
 							prq.clear();
@@ -471,7 +445,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 					if (prqFils.peek().isPointMure()) {
 						path.add(addToPath(prqFils.peek(), node));
-//						count++;
+						count++;
 						path.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 						solution = pointFind;
 					} else {
@@ -508,13 +482,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * @param x1
-	 * 		Description manquante !
 	 * @param y1
-	 * 		Description manquante !
 	 * @param x2
-	 * 		Description manquante !
 	 * @param y2
-	 * 		Description manquante !
 	 * @return la distance entre deux points
 	 */
 	private int getDistance(int x1, int y1, int x2, int y2) {
@@ -525,9 +495,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/**
 	 * la methode pour ajouter l'action suivant au path
 	 * @param pointChild
-	 * 		Description manquante !
 	 * @param pointPere
-	 * 		Description manquante !
 	 * @return l'action 
  	 */
 	private int addToPath(PointFind pointChild, PointFind pointPere) {
@@ -552,7 +520,6 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * on ne regarde pas le point pere, on construit un pereChild donc on sait
 	 * le pere des points possibles. 
 	 * @param pointDev
-	 * 		Description manquante !
 	 * @return un iterator pour les actions possibles
 	 */
 	private Iterator<PointFind> developpeNode(PointFind pointDev) {
@@ -637,13 +604,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * 
 	 * 
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @param move
-	 * 		Description manquante !
 	 * @param pereCost
-	 * 		Description manquante !
 	 * @return le cost de cette point
 	 */
 	private int getCost(int x, int y, int move, int pereCost) {
@@ -704,13 +667,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * 
 	 * 
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @param bombs
-	 * 		Description manquante !
 	 * @return
-	 * 		Description manquante !
 	 */
 	private Vector<Integer> defence(int x, int y, List<Integer> bombs) {
 		int xB, yB;
@@ -735,7 +694,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 			yB = bombs.get(j + 1);// position y
 			bombPower[numBomb] = getBombPowerAt(xB, yB);
 			if (Math.abs(x - xB) >= Math.abs(y - yB))// si elle est proche 
-													 // a cotÃ© y
+													 // a coté y
 			{
 				if (y == yB) {
 					if (x == xB) {
@@ -1005,7 +964,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 				}
 
 			} else if (Math.abs(y - yB) > Math.abs(x - xB))// si elle est proche
-															// a cotÃ© x
+															// a coté x
 			{
 				if (x == xB)//si les abscisses sont egales
 				{
@@ -1219,12 +1178,10 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	}
 
-	/**Indique si la case situÃ©e Ã  la position passÃ©e en paramÃ¨tre constitue un
+	/**Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, wallHard, lastPosition.
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @return si il est possible
 	 */
 	private boolean isObstacleAStar(int x, int y) {
@@ -1253,17 +1210,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le dÃ©placement dont le code a Ã©tÃ© passÃ© en paramÃ¨tre est
-	 * possible pour un personnage situÃ© en (x,y).
+	 * Indique si le déplacement dont le code a été passé en paramètre est
+	 * possible pour un personnage situé en (x,y).
 	 * 
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @param move
-	 * 		Description manquante !
 	 * @return
-	 * 		Description manquante !
 	 */
 	private boolean isMovePossibleAStar(int x, int y, int move) {
 		boolean result;
@@ -1290,15 +1243,12 @@ public class SahinYildirim extends ArtificialIntelligence {
 		return result;
 	}
 
-	/** Renvoie la liste de tous les dÃ©placements possibles pour un personnage
-	 * situÃ© Ã  la position (x,y)
+	/** Renvoie la liste de tous les déplacements possibles pour un personnage
+	 * situé à la position (x,y)
 	 * 
 	 * @param x 
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @return
-	 * 		Description manquante !
 	 */
 	private Vector<Integer> possibleAStarMoves(int x, int y) {
 		Vector<Integer> result = new Vector<Integer>();
@@ -1310,13 +1260,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si la case situÃ©e Ã  la position passÃ©e en paramÃ¨tre constitue un
+	 * Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
-	 *            position Ã  Ã©tudier
+	 *            position à étudier
 	 * @param y
-	 *            position Ã  Ã©tudier
+	 *            position à étudier
 	 * @return vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y) {
@@ -1344,16 +1294,16 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le dÃ©placement dont le code a Ã©tÃ© passÃ© en paramÃ¨tre est
-	 * possible pour un personnage situÃ© en (x,y).
+	 * Indique si le déplacement dont le code a été passé en paramètre est
+	 * possible pour un personnage situé en (x,y).
 	 * 
 	 * @param x
 	 *            position du personnage
 	 * @param y
 	 *            position du personnage
 	 * @param move
-	 *            le dÃ©placement Ã  Ã©tudier
-	 * @return vrai si ce dÃ©placement est possible
+	 *            le déplacement à étudier
+	 * @return vrai si ce déplacement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move) {
 		boolean result;
@@ -1379,14 +1329,14 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Renvoie la liste de tous les dÃ©placements possibles pour un personnage
-	 * situÃ© Ã  la position (x,y)
+	 * Renvoie la liste de tous les déplacements possibles pour un personnage
+	 * situé à la position (x,y)
 	 * 
 	 * @param x
 	 *            position du personnage
 	 * @param y
 	 *            position du personnage
-	 * @return la liste des dÃ©placements possibles
+	 * @return la liste des déplacements possibles
 	 */
 	private Vector<Integer> getPossibleMoves(int x, int y) {
 		Vector<Integer> result = new Vector<Integer>();
@@ -1400,11 +1350,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * liste des block type qu'on veut
 	 * 
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @param blockType
-	 * 		Description manquante !
 	 * @return un arraylist contient la position des blocks
 	 */
 	private List<Integer> getClosestBlockPosition(int x, int y,
@@ -1430,7 +1377,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/**
 	 * Calcule et renvoie la distance de Manhattan (cf. :
 	 * http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29) entre le
-	 * point de coordonnÃ©es (x1,y1) et celui de coordonnÃ©es (x2,y2).
+	 * point de coordonnées (x1,y1) et celui de coordonnées (x2,y2).
 	 * 
 	 * @param x1
 	 *            position du premier point
@@ -1455,8 +1402,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * Renvoie la position du personnage si il est plus proche  
-	 * @param x	position de rÃ©fÃ©rence
-	 * @param y	position de rÃ©fÃ©rencepol
+	 * @param x	position de référence
+	 * @param y	position de référencepol
 	 * @return	position du joueur le plus proche
 	 */
 	private List<Integer> getClosestPlayerPosition(int x, int y) {

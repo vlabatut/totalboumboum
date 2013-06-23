@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -50,12 +50,10 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.system.LocalSytemControl;
 import org.totalboumboum.engine.loop.display.Display;
-import org.totalboumboum.engine.loop.display.game.DisplayEnginePause;
-import org.totalboumboum.engine.loop.display.game.DisplayEngineStep;
+import org.totalboumboum.engine.loop.display.DisplayEnginePause;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
@@ -138,7 +136,7 @@ public class RegularLoop extends LocalLoop
 		while(i.hasNext())
 		{	// location
 			PlayerLocation pl = initialPositions[j];
-			Tile tile = level.getTile(pl.getRow(),pl.getCol());
+			Tile tile = level.getTile(pl.getLine(),pl.getCol());
 			
 			// sprite
 			Profile profile = i.next();
@@ -148,16 +146,13 @@ public class RegularLoop extends LocalLoop
 			pauseAis.add(false);
 			lastActionAis.add(0l);
 			
-			// record/transmit creation event
-			SpriteCreationEvent creationEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
-			RoundVariables.writeEvent(creationEvent);
-			// record/transmit insertion event
-			SpriteInsertionEvent insertionEvent = new SpriteInsertionEvent(player.getSprite());
-			RoundVariables.writeEvent(insertionEvent);
+			// record/transmit event
+			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.writeEvent(spriteEvent);
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
-//			level.addHero(hero,pl.getRow(),pl.getCol());
+//			level.addHero(hero,pl.getLine(),pl.getCol());
 			
 			// initial items
 			for(Entry<String,Integer> entry: items.entrySet())
@@ -209,7 +204,6 @@ public class RegularLoop extends LocalLoop
 			updateLogs();
 			updateCelebration();
 			updateEntries();
-			updateSuddenDeath();
 			level.update();		
 			updateAis();
 			updateStats();
@@ -228,9 +222,6 @@ public class RegularLoop extends LocalLoop
 		// engine pause
 		display = new DisplayEnginePause(this);
 		displayManager.addDisplay(display);
-		// engine step
-		display = new DisplayEngineStep(this);
-		displayManager.addDisplay(display);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -238,9 +229,7 @@ public class RegularLoop extends LocalLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	super.processEvent(event);
-	
-		String name = event.getName();
+	{	String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
@@ -258,9 +247,10 @@ public class RegularLoop extends LocalLoop
 			switchAiPause(index);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
-		{	int index = event.getIndex();
-			if(index==SystemControlEvent.REGULAR)
-				switchEnginePause();
+		{	switchEnginePause();
+		}
+		else
+		{	super.processEvent(event);
 		}
 	}
 }

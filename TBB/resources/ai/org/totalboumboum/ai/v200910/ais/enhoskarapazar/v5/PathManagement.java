@@ -13,232 +13,171 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 
-/**
- * @author Sadettin EnhoÅŸ
- * @author Ali Can Karapazar
- */
-@SuppressWarnings("deprecation")
 public class PathManagement {
 
+	
 	/**
-	 * crÃ©e un PathManager chargÃ© d'amener le personnage Ã  la position (x,y)
-	 * exprimÃ©e en pixels
-	 * 
-	 * @param ai
-	 *            Description manquante !
-	 * @param x
-	 *            Description manquante !
-	 * @param y
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
+	 * exprimée en pixels
 	 */
-	public PathManagement(EnhosKarapazar ai, double x, double y)
-			throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	public PathManagement(EnhosKarapazar ai, double x, double y) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		init(ai);
-		setDestination(x, y);
+		setDestination(x,y);
 	}
-
+	
 	/**
-	 * crÃ©e un PathManager chargÃ© d'amener le personnage au centre de la case
-	 * passÃ©e en paramÃ¨tre
-	 * 
-	 * @param ai
-	 *            Description manquante !
-	 * @param destination
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * crée un PathManager chargé d'amener le personnage au centre de la case
+	 * passée en paramètre
 	 */
-	public PathManagement(EnhosKarapazar ai, AiTile destination)
-			throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	public PathManagement(EnhosKarapazar ai, AiTile destination) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		init(ai);
 		setDestination(destination);
 	}
-
+	
 	/**
 	 * initialise ce PathManager
-	 * 
-	 * @param ai
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
 	 */
-	private void init(EnhosKarapazar ai) throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	private void init(EnhosKarapazar ai) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
 		this.ai = ai;
 		zone = ai.getZone();
 		costCalculator = new BasicCostCalculator();
 		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai, ai.getOwnHero(), costCalculator,
-				heuristicCalculator);
-		// updatePrev();
+		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
+		//updatePrev();
 	}
-
-	// ///////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE /////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** l'IA concernÃ©e par ce gestionnaire de chemin */
+	
+	/////////////////////////////////////////////////////////////////
+	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** l'IA concernée par ce gestionnaire de chemin */
 	private EnhosKarapazar ai;
 	/** zone de jeu */
 	private AiZone zone;
-
-	// ///////////////////////////////////////////////////////////////
-	// DESTINATION /////////////////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** la case de destination sÃ©lectionnÃ©e */
+	
+	/////////////////////////////////////////////////////////////////
+	// DESTINATION	/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** la case de destination sélectionnée */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonnÃ©e de destination */
+	/** l'ordonnée de destination */
 	private double yDest;
-
+	
 	/**
-	 * modifie la case de destination du personnage, place les coordonnÃ©es de
-	 * destination au centre de cette case, et recalcule le chemin.
-	 * 
-	 * @param destination
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * modifie la case de destination du personnage,
+	 * place les coordonnées de destination au centre de cette case,
+	 * et recalcule le chemin.
 	 */
-	public void setDestination(AiTile destination) throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
+	public void setDestination(AiTile destination) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		tileDest = destination;
 		xDest = tileDest.getPosX();
 		yDest = tileDest.getPosY();
-		path = astar.processShortestPath(ai.getCurrentTile(), destination);
-		if (path.getLength() > 0)
+		path = astar.processShortestPath(ai.getCurrentTile(),destination);
+		if(path.getLength()>0)
 			path.removeTile(0);
 	}
 
 	/**
-	 * modifie les coordonnÃ©es de destination, met Ã  jour automatiquement la
-	 * case correspondante, et recalcule le chemin.
-	 * 
-	 * @param x
-	 *            Description manquante !
-	 * @param y
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * modifie les coordonnées de destination,
+	 * met à jour automatiquement la case correspondante,
+	 * et recalcule le chemin.
 	 */
-	public void setDestination(double x, double y) throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
+	public void setDestination(double x, double y) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		double normalized[] = zone.normalizePosition(x, y);
 		xDest = normalized[0];
 		yDest = normalized[1];
-		tileDest = zone.getTile(xDest, yDest);
-		path = astar.processShortestPath(ai.getCurrentTile(), tileDest);
-		if (path.getLength() > 0)
-			path.removeTile(0);
+		tileDest = zone.getTile(xDest,yDest);
+		path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
+		if(path.getLength()>0)	
+		path.removeTile(0);
 	}
 
-	// ///////////////////////////////////////////////////////////////
-	// PATH /////////////////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** le chemin Ã  suivre */
+
+	/////////////////////////////////////////////////////////////////
+	// PATH			/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** le chemin à suivre */
 	private AiPath path;
-
-	/**
-	 * teste si le chemin est toujours valide, i.e. s'il est toujours sÃ»r et si
-	 * aucun obstacle n'est apparu depuis la derniÃ¨re itÃ©ration
-	 * 
-	 * @return Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	
+	
+	/** 
+	 * teste si le chemin est toujours valide, i.e. s'il
+	 * est toujours sûr et si aucun obstacle n'est apparu
+	 * depuis la dernière itération
 	 */
-	public boolean checkPathValidity() throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	public boolean checkPathValidity() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		boolean result = true;
 		Iterator<AiTile> it = path.getTiles().iterator();
-		while (it.hasNext() && result) {
-			ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+		while(it.hasNext() && result)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			AiTile tile = it.next();
-			if (tile.isCrossableBy(ai.getOwnHero())
-					&& estCaseSure(tile.getLine(), tile.getCol()))
-				result = true;
+			if (tile.isCrossableBy(ai.getOwnHero()) && estCaseSure(tile.getLine(), tile.getCol())) 
+					result=true;
 			else
-				result = false;
+				result=false;
 		}
 		return result;
 	}
 
-	// ///////////////////////////////////////////////////////////////
-	// A STAR /////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** classe implÃ©mentant l'algorithme A* */
+	/////////////////////////////////////////////////////////////////
+	// A STAR					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** classe implémentant l'algorithme A* */
 	private Astar astar;
-	/** classe implÃ©mentant la fonction heuristique */
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implÃ©mentant la fonction de coÃ»t */
+	/** classe implémentant la fonction de coût */
 	private CostCalculator costCalculator;
 
-	/**
-	 * @return Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
-	 */
-	public int getLength() throws StopRequestException {
+	
+
+	
+	
+	public int getLength() throws StopRequestException
+	{	
 		return path.getLength();
 	}
-
-	/**
-	 * 
-	 * @return Description manquante !
-	 */
-	public List<AiTile> getPathList() {
-
+	public  List<AiTile> getPathList()
+	{
+		
 		return path.getTiles();
 	}
-
-	/**
-	 * 
-	 * @return Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
-	 */
-	public boolean isWalkable() throws StopRequestException {
-		if (path.getLength() > 0)
+	
+	public boolean isWalkable() throws StopRequestException
+	{ 
+		if(path.getLength()>0)
 			return true;
 		else
 			return false;
 	}
-
-	/**
-	 * 
-	 */
-	public void printPath() {
+	public void printPath()
+	{
 		System.out.println(path.getTiles().toString());
 	}
-
-	/**
-	 * 
-	 * @param line
-	 *            Description manquante !
-	 * @param col
-	 *            Description manquante !
-	 * @return Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
-	 */
-	private boolean estCaseSure(int line, int col) throws StopRequestException {
-
+	
+	private boolean estCaseSure(int line, int col) throws StopRequestException
+	{
+		
 		ai.checkInterruption();
-		boolean tempresult = true;
-		DangerZone dZone = new DangerZone(zone, ai);
-		if (dZone.getEnum(line, col) != ZoneEnum.FEU
-				&& dZone.getEnum(line, col) != ZoneEnum.FLAMMES
-				&& dZone.getEnum(line, col) != ZoneEnum.BOMBE)
-			tempresult = false;
-		dZone = null;
+		boolean tempresult =true;
+		DangerZone dZone=new DangerZone(zone, ai);
+		if( dZone.getEnum(line, col)!=ZoneEnum.FEU && dZone.getEnum(line, col)!=ZoneEnum.FLAMMES && dZone.getEnum(line, col)!=ZoneEnum.BOMBE)
+			tempresult=false;
+		dZone=null;
 		return tempresult;
 	}
+	
+	
 }

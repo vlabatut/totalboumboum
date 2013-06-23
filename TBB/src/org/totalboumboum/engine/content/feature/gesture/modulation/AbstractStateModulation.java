@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -52,7 +52,7 @@ public class AbstractStateModulation extends AbstractModulation
 	// MODULATE					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Modulates the specified ability. This ability is 
+	 * modulates the specified ability. This ability is 
 	 * supposed to concern the specified state ability.
 	 * The returned ability is a new object, with fields similar to
 	 * the specified parameter, excepted for the strength and frame,

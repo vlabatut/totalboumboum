@@ -9,25 +9,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.ais.isbirkoyas.v6.DeplacementCommune;
 import org.totalboumboum.ai.v201011.ais.isbirkoyas.v6.IsbirKoyas;
 
-/**
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
- */
-@SuppressWarnings("deprecation")
 public class TraitementCommune {
 
-	/** */
 	private DeplacementCommune deplacementCommune = null;
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public TraitementCommune(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -35,18 +21,17 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode forme une liste des cases cibles que notre IA peut aller
+	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode attaque. Elle prend deux arguments une matrice de type
-	 * double et la zone du jeu. Notre IA peut se dÃ©placer en traversant ces
+	 * double et la zone du jeu. Notre IA peut se déplacer en traversant ces
 	 * cases.
 	 * 
-	 * @param matriceAttaque
+	 * @param matrice
 	 *            La Matrice attaque
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @return la liste des points finaux.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<AiTile> calculeLesPointsFinaux(double[][] matriceAttaque,
 			AiZone gameZone) throws StopRequestException {
@@ -79,19 +64,17 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus Ã©levÃ©e. S'il y a plus d'une valeur Ã©levÃ©e Ã©gales alors
+	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
+	 * a la valeur plus élevée. S’il y a plus d’une valeur élevée égales alors
 	 * IA regarde au distance de ceux cases. Elle prend trois arguments une
 	 * matrice de type double et deux listes des cases.
 	 * 
 	 * @param matrice
 	 *            La Matrice Attaque
 	 * @param endPoints
-	 * 		description manquante !
 	 * @param endPoints2
-	 * 		description manquante !
+	 * @return la liste des points finaux.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void destinationAttaque(List<AiTile> endPoints,
 			List<AiTile> endPoints2, double[][] matrice)
@@ -144,10 +127,10 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode forme une liste des cases cibles que notre IA peut aller
+	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode collecte. Elle prend deux arguments, une matrice de type Int
 	 * et la zone du jeu. On prend aussi en compte les cases qui sont dans la
-	 * portÃ©e des bombes.
+	 * portée des bombes.
 	 * 
 	 * @param matrice
 	 *            La Matrice collecte
@@ -155,7 +138,6 @@ public class TraitementCommune {
 	 *            la zone du jeu
 	 * @return la liste des points finaux.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<AiTile> calculeLesPointsFinaux(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -192,19 +174,17 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus Ã©levÃ©e. S'il y a plus d'une valeur Ã©levÃ©e Ã©gales alors
+	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
+	 * a la valeur plus élevée. S’il y a plus d’une valeur élevée égales alors
 	 * IA regarde au distance de ceux cases .Elle prend trois arguments une
 	 * matrice de type Int et deux listes des cases.
 	 * 
 	 * @param matrice
 	 *            La Matrice collecte
 	 * @param endPoints
-	 * 		description manquante !
 	 * @param endPoints2
-	 * 		description manquante !
+	 * @return la liste des points finaux.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void destinationCollect(List<AiTile> endPoints,
 			List<AiTile> endPoints2, int[][] matrice)
@@ -250,7 +230,6 @@ public class TraitementCommune {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacement commune
 	 */
 	public DeplacementCommune DeplacementCommune() throws StopRequestException {

@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.info;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -155,10 +155,10 @@ public class LevelInfoLoader
     }
 	
 	private static void loadVisiblePositionElement(Element root, LevelInfo result)
-	{	// up row
-    	String upRowStr = root.getAttribute(XmlNames.UPLINE).getValue().trim();
-		int upRow = Integer.parseInt(upRowStr);
-		result.setVisiblePositionUpRow(upRow);
+	{	// up line
+    	String upLineStr = root.getAttribute(XmlNames.UPLINE).getValue().trim();
+		int upLine = Integer.parseInt(upLineStr);
+		result.setVisiblePositionUpLine(upLine);
 		// left column
 		String leftColStr = root.getAttribute(XmlNames.LEFTCOL).getValue().trim();
 		int leftCol = Integer.parseInt(leftColStr);

@@ -18,20 +18,15 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @version 5
  * 
- * @author CansÄ±n Aldanmaz
- * @author YalÃ§Ä±n YenigÃ¼n
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
  *
  */
-@SuppressWarnings("deprecation")
 public class AbstractBombController {
 	
 
 	/**
 	 * controle si on peut acceder a une case sur, si on met une bombe.
-	 * @param ai 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public AbstractBombController(AldanmazYenigun ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -56,7 +51,7 @@ public class AbstractBombController {
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concernÃ©e par ce gestionnaire de chemin */
+	/** l'IA concernée par ce gestionnaire de chemin */
 	private AldanmazYenigun ai;
 	/** zone de jeu */
 	private AiZone zone;	
@@ -64,21 +59,17 @@ public class AbstractBombController {
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arrivÃ© Ã  destination */
+	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sÃ©lectionnÃ©e pour la fuite */
+	/** la case de destination sélectionnée pour la fuite */
 	private AiTile tileDest;
 	/** destinations potentielles */
 	private List<AiTile> possibleDest;
 
 	/**
-	 * dÃ©termine si le personnage est arrivÃ© dans la case de destination.
-	 * S'il n'y a pas de case de destination, on considÃ¨re que le personnage
-	 * est arrivÃ©.
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * détermine si le personnage est arrivé dans la case de destination.
+	 * S'il n'y a pas de case de destination, on considère que le personnage
+	 * est arrivé.
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -97,14 +88,10 @@ public class AbstractBombController {
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin Ã  suivre */
+	/** le chemin à suivre */
 	private AiPath path;
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -113,12 +100,10 @@ public class AbstractBombController {
 	}
 	
 	/**
-	 * vÃ©rifie que le personnage est bien sur le chemin prÃ©-calculÃ©,
-	 * en supprimant si besoin les cases inutiles (car prÃ©cedant la case courante).
+	 * vérifie que le personnage est bien sur le chemin pré-calculé,
+	 * en supprimant si besoin les cases inutiles (car précedant la case courante).
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide aprÃ¨s l'exÃ©cution de cette mÃ©thode.
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * est vide après l'exécution de cette méthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -132,16 +117,13 @@ public class AbstractBombController {
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. si
-	 * aucun obstacle n'est apparu depuis la derniÃ¨re itÃ©ration.
+	 * aucun obstacle n'est apparu depuis la dernière itération.
 	 * Contrairement au PathManager, ici pour simplifier on ne teste
 	 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
-	 * les changement concernant la sÃ»retÃ© des cases. En d'autres termes,
+	 * les changement concernant la sûreté des cases. En d'autres termes,
 	 * si une bombe apparait avant que le personnage d'ait atteint une
 	 * case sure, elle ne sera pas prise en compte dans la trajectoire.
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * 
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -160,22 +142,18 @@ public class AbstractBombController {
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe implÃ©mentant l'algorithme A* */
+	/** classe implémentant l'algorithme A* */
 	private Astar astar;
-	/** classe implÃ©mentant la fonction heuristique */
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implÃ©mentant la fonction de coÃ»t */
+	/** classe implémentant la fonction de coût */
 	private MatrixCostCalculator costCalculator;
 
-	/**
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// calcul de la matrice de coÃ»t : on prend l'opposÃ© du niveau de sÃ»retÃ©
-		// i.e. : plus le temps avant l'explosion est long, plus le coÃ»t est faible 
+		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
+		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 	//	double dangerMatrix[][] = ai.getZoneFormee().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -192,21 +170,17 @@ public class AbstractBombController {
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun dÃ©placement n'est nÃ©cessaire)
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// on met d'abord Ã  jour la matrice de cout
+		// on met d'abord à jour la matrice de cout
 		updateCostCalculator();
 	
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on vÃ©rifie que le joueur est toujours sur le chemin
+		{	// on vérifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule.
 			if(path.isEmpty() || !checkPathValidity())
@@ -218,28 +192,21 @@ public class AbstractBombController {
 			// sinon, s'il ne reste qu'une seule case, on va au centre
 			else if(path.getLength()>0)
 				tile = path.getTile(0);
-			// on dÃ©termine la direction du prochain dÃ©placement
+			// on détermine la direction du prochain déplacement
 			if(tile!=null)
 				result = zone.getDirection(ai.getOwnHero(),tile);			
 		}
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isThereSafeTiles() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		boolean result = false;
-		// on met d'abord Ã  jour la matrice de cout
+		// on met d'abord à jour la matrice de cout
 		updateCostCalculator();
 		if(!hasArrived())
-		{	// on vÃ©rifie que le joueur est toujours sur le chemin
+		{	// on vérifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			
 			// si le chemin est vide ou invalide, on le recalcule.
@@ -258,7 +225,7 @@ public class AbstractBombController {
 			// sinon, s'il ne reste qu'une seule case, on va au centre
 			else if(path.getLength()>0)
 				tile = path.getTile(0);
-			// on dÃ©termine la direction du prochain dÃ©placement
+			// on détermine la direction du prochain déplacement
 			//if(tile!=null)
 			//	result = true;
 			//else 
@@ -268,12 +235,9 @@ public class AbstractBombController {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public AiPath getPath(){
 		return path;
 	}
+
+
 }

@@ -2,7 +2,7 @@ package org.totalboumboum.statistics.detailed;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -42,21 +42,17 @@ public abstract class StatisticBase implements Serializable
 	
 	public StatisticBase(StatisticHolder holder)
 	{	totalTime = 0;
-		
 		// players
 		for(Profile p: holder.getProfiles())
 		{	String playerId = p.getId();
 			playersIds.add(playerId);
 		}
-		
 		// points
 		points = new float[playersIds.size()];
 		Arrays.fill(points,0);
-		
 		// total
 		total = new float[playersIds.size()];
 		Arrays.fill(total,0);
-		
 		// scores
 		for(Score score : Score.values())
 		{	long[] sc = new long[playersIds.size()];
@@ -109,11 +105,6 @@ public abstract class StatisticBase implements Serializable
 	{	return total;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// STATISTIC EVENTS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public abstract List<StatisticEvent> getStatisticEvents();
-	
 	/////////////////////////////////////////////////////////////////
 	// CONFRONTATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@ package org.totalboumboum.ai;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,23 +25,15 @@ import java.util.concurrent.ThreadFactory;
 
 /**
  * 
- * Classe √©tendant ThreadFactory, pour permettre la cr√©ation de
- * threads d√©di√©s √† l'ex√©cution d'un agent.
+ * Classe Ètendant ThreadFactory, pour permettre la crÈation de
+ * threads dÈdiÈs ‡ l'exÈcution d'un agent.
  * 
  * @author Vincent Labatut
  *
  */
 public class AiThreadFactory implements ThreadFactory
-{	/** Nom des threads √† cr√©er */
-	private String name;
+{	private String name;
 
-	/**
-	 * Construit un {@link ThreadFactory} portant
-	 * le nom sp√©cifi√©.
-	 * 
-	 * @param name
-	 * 		Nom du thread.
-	 */
 	public AiThreadFactory(String name)
 	{	this.name = name;
 	}

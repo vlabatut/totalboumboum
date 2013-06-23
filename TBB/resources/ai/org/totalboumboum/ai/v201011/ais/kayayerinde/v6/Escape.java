@@ -7,28 +7,14 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings("deprecation")
+
+
 public class Escape {
-	/** */
 	private KayaYerinde onder;
-	/** */
 	private Matris matris;
-	/** */
 	private Astar astar;
-	/** */
 	private boolean running;
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Escape(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -37,33 +23,19 @@ public class Escape {
 		running=false;
 	}
 	
-	/**
-	 * 
-	 * @param matris
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();
 		AiAction result=new AiAction(AiActionName.NONE);
 		if(matris.getVarlikMatrisi()[onder.getOwnHero().getLine()][onder.getOwnHero().getCol()]<Matris.BONUSDANGER)
 			return result;
-//		System.out.println("bakıyorum");
+		System.out.println("bakıyorum");
 		if(running)
 		{
 			if(astar.yoldaMi()==1)

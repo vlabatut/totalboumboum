@@ -15,43 +15,22 @@ import org.totalboumboum.engine.content.feature.Direction;
  * listeden çıkarmak ve sonrasında
  * kalan safelerden bi tanesine 
  * gidebiliyor muyuz bunu incelemek
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
+ * @author user
  *
  */
-@SuppressWarnings("deprecation")
 public class Bomb {
 	
-	/** */
 	private DorukKupelioglu dk;
-	/** */
 	private Matrix matrix;
-	/** */
 	private Astar astar;
-	/** */
 	private AiPath path;
-	/** */
 	private AiZone zone;
-	/** */
 	private List<AiTile> safes;
-	/** */
 	private boolean hasPathFound;
-	/** */
 	private boolean dropped;
-	/** */
 	private boolean bombEnded;
-	/** */
 	private double BOMBWILLEXPLODE;
 	
-	/**
-	 * 
-	 * @param dk
-	 * 		Description manquante !
-	 * @param tile
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Bomb(DorukKupelioglu dk,AiTile tile) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -66,15 +45,6 @@ public class Bomb {
 		path=findPath(tile);
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiPath findPath(AiTile tile)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -95,13 +65,6 @@ public class Bomb {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void tempFIRE(AiTile tile)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -198,13 +161,7 @@ public class Bomb {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public Direction moveTo() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -215,39 +172,18 @@ public class Bomb {
 		return moveDir;
 	}
 
-	/**
-	 * 
-	 * @param dropped
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void changeDropped(boolean dropped)throws StopRequestException
 	{
 		dk.checkInterruption();
 		this.dropped=dropped;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean Dropped()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return dropped;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -256,26 +192,12 @@ public class Bomb {
 		return hasPathFound && !bombEnded;
 	}	
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean hasEnded()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return bombEnded;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isDroppable()throws StopRequestException
 	{
 		dk.checkInterruption();

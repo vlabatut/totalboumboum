@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.path.astar;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -34,30 +34,21 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
 
 /**
  * 
- * ReprÃ©sente un noeud dans l'arbre de recherche dÃ©veloppÃ© par l'algorithme A*
+ * Représente un noeud dans l'arbre de recherche développé par l'algorithme A*
  *  
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class AstarNode implements Comparable<AstarNode>
 {	
 	/**
-	 * Constructeur crÃ©ant un noeud racine non visitÃ©. 
-	 * Les calculateurs passÃ©s en paramÃ¨tres seront utilisÃ©s
+	 * Constructeur créant un noeud racine non visité. 
+	 * Les calculateurs passés en paramètres seront utilisés
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
-	 * @param ai 
-	 * 		?	
-	 * @param tile	case associÃ©e Ã  ce noeud de recherche
-	 * @param hero 
-	 * 		?	
+	 * 
+	 * @param tile	case associée à ce noeud de recherche
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
-	 * @param successorCalculator 
-	 * 		?	
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// ia
@@ -81,13 +72,10 @@ public class AstarNode implements Comparable<AstarNode>
 	}
 
 	/**
-	 * Constructeur crÃ©ant un noeud non visitÃ©, fils du noeud
-	 * passÃ© en paramÃ¨tre. 
-	 * @param tile	case associÃ©e Ã  ce noeud de recherche
+	 * Constructeur créant un noeud non visité, fils du noeud
+	 * passé en paramètre. 
+	 * @param tile	case associée à ce noeud de recherche
 	 * @param parent	noeud de recherche parent de ce noeud
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
 	{	// ia
@@ -114,14 +102,8 @@ public class AstarNode implements Comparable<AstarNode>
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private ArtificialIntelligence ai = null;
 	
-	/**
-	 * 
-	 * @return
-	 * 		L'agent.
-	 */
 	public ArtificialIntelligence getAi()
 	{	return ai;	
 	}
@@ -129,11 +111,11 @@ public class AstarNode implements Comparable<AstarNode>
     /////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case associÃ©e au noeud */
+	/** case associée au noeud */
 	private AiTile tile = null;
 	
 	/**
-	 * Renvoie la case associÃ©e au noeud de recherche.
+	 * Renvoie la case associée au noeud de recherche.
 	 * @return	une case
 	 */
 	public AiTile getTile()
@@ -157,14 +139,14 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** coÃ»t du noeud (calculÃ© depuis la racine) */
+	/** coût du noeud (calculé depuis la racine) */
 	private double cost = 0;
-	/** calculateur de coÃ»t */
+	/** calculateur de coût */
 	private CostCalculator costCalculator;
 	
 	/**
-	 * Renvoie le coÃ»t du noeud calculÃ© depuis la racine. 
-	 * @return	le coÃ»t
+	 * Renvoie le coût du noeud calculé depuis la racine. 
+	 * @return	le coût
 	 */
 	public double getCost()
 	{	return cost;
@@ -220,13 +202,12 @@ public class AstarNode implements Comparable<AstarNode>
 	}
 	
 	/**
-	 * dÃ©termine si la case passÃ©e en paramÃ¨tre a dÃ©jÃ  Ã©tÃ© traitÃ©e,
-	 * i.e. si elle apparait dans les noeuds de recherche ancÃªtres
+	 * détermine si la case passée en paramètre a déjà été traitée,
+	 * i.e. si elle apparait dans les noeuds de recherche ancêtres
 	 * 
-	 * @param tile	case Ã  tester
-	 * @return	vrai si la case a dÃ©jÃ  Ã©tÃ© traitÃ©e
+	 * @param tile	case à tester
+	 * @return	vrai si la case a déjà été traitée
 	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
@@ -256,11 +237,10 @@ public class AstarNode implements Comparable<AstarNode>
 	
 	/**
 	 * renvoie les fils de ce noeud de recherche
-	 * (ils sont Ã©ventuellement calculÃ©s si ce n'est pas dÃ©jÃ  fait)
+	 * (ils sont éventuellement calculés si ce n'est pas déjà fait)
 	 * 
 	 * @return	une liste contenant les fils de ce noeud
 	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	public List<AstarNode> getChildren() throws StopRequestException
 	{	if(children==null)
@@ -270,10 +250,9 @@ public class AstarNode implements Comparable<AstarNode>
 	
 	/**
 	 * utilise la fonction successeur pour calculer les enfants de ce noeud de recherche,
-	 * i.e. pour dÃ©terminer quelles sont les cases que l'on peut atteindre Ã  partir
+	 * i.e. pour déterminer quelles sont les cases que l'on peut atteindre à partir
 	 * de la case courante.
 	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();
@@ -281,8 +260,8 @@ public class AstarNode implements Comparable<AstarNode>
 		children = new ArrayList<AstarNode>();
 		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
 		for(AiTile neighbor: neighbors)
-		{	// on ne garde pas les Ã©tats qui appartiennent dÃ©jÃ  au chemin contenant le noeud de recherche courant
-			// i.e. les Ã©tats qui apparaissent dans des noeuds ancÃªtres du noeud courant
+		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
+			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
 			if(!hasBeenExplored(neighbor))
 			{	AstarNode node = new AstarNode(neighbor,this);
 				children.add(node);			
@@ -293,13 +272,13 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// HERO				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** personnage considÃ©rÃ© */
+	/** personnage considéré */
 	private AiHero hero = null;
 	
 	/**
-	 * renvoie le personnage de rÃ©fÃ©rence pour cette recherche
+	 * renvoie le personnage de référence pour cette recherche
 	 * 
-	 * @return	le personnage de rÃ©fÃ©rence
+	 * @return	le personnage de référence
 	 */
 	public AiHero getHero()
 	{	return hero;	
@@ -308,7 +287,6 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public boolean equals(Object object)
 	{	boolean result = false;
 		if(object instanceof AstarNode)
@@ -316,7 +294,6 @@ public class AstarNode implements Comparable<AstarNode>
 		return result;
 	}
 
-	@Override
 	public int compareTo(AstarNode node)
     {	int result = 0;
 		double f1 = cost+heuristic;
@@ -331,7 +308,6 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public String toString()
 	{	String result;
 		result = "<";
@@ -346,9 +322,6 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * 
-	 */
 	protected void finish()
 	{	// children
 		if(children!=null)

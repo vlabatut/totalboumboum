@@ -10,49 +10,22 @@ import org.totalboumboum.ai.v200910.adapter.data.*;
 
 
 
-/**
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
- */
-@SuppressWarnings("deprecation")
 public class Matrix 
 {
-	/** */
 	private DorukKupelioglu dk;
-	/** */
 	private AiZone zone; 
-	/** */
 	private AiHero ownHero; 
-	/** */
 	private List<AiTile> safes;
-	/** */
 	private List<AiTile> bonus; 
-	/** */
 	private List<AiTile> destructibles;
-	/** */
 	private List<AiTile> rivals;
-	/** */
 	private List<AiHero> heroes;
-	/** */
-	private int width;
-	/** */
-	private int height; 
-	/** */
-	private int col;
-	/** */
-	private int line;	//utilisation general
-	/** */
+	private int width,height; 
+	private int col,line;	//utilisation general
 	private double[][] areaMatrix; 
-	/** */
 	private double[][] timeLeft; 
 	
-	/**
-	 * 
-	 * @param dk
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public Matrix(DorukKupelioglu dk)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -61,11 +34,6 @@ public class Matrix
 		init();
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -95,8 +63,6 @@ public class Matrix
 	 * Cette fonction creer les matrices areaMatrix et timeLeft 
 	 * putRIVAL ve putITEM fonksiyonları rival ve bonus array listlerini sırasız olarak 
 	 * dolduruyor. 
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void createAreaMatrix()throws StopRequestException
 	{
@@ -127,10 +93,7 @@ public class Matrix
 	
 	/////Creation de la matrice de la region et du temps rest/////
 	
-	/**
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
+
 	private void putFREE()throws StopRequestException//önce her yeri free yaptık
 	{	dk.checkInterruption();
 		for (line = 0; line < zone.getHeight(); line++) 
@@ -144,11 +107,6 @@ public class Matrix
 	   	}
 	}	
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void putDESTINDEST()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -186,11 +144,6 @@ public class Matrix
 		}
 	}	
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void putITEM()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -216,11 +169,6 @@ public class Matrix
 		}
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void putRIVAL()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -241,11 +189,6 @@ public class Matrix
 		}
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void putFIRE()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -265,11 +208,6 @@ public class Matrix
 		}
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void putBLAST()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -357,11 +295,6 @@ public class Matrix
 		}
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void findSafes()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -378,11 +311,6 @@ public class Matrix
 	}
 	
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void findDestructibles()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -413,17 +341,6 @@ public class Matrix
 		}
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param list
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private List<AiHero> regulateHeroesList(AiTile tile,List<AiHero> list)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -455,17 +372,6 @@ public class Matrix
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param list
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> regulateList(AiTile tile,List<AiTile> list)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -480,17 +386,7 @@ public class Matrix
 		}
 		return result;
 	}
-	/** listedeki case lerdan tile case ine en yakın olanı gönderir
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param list
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//listedeki case lerdan tile case ine en yakın olanı gönderir
 	private AiTile findNearestTile(AiTile tile,List<AiTile> list)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -508,86 +404,30 @@ public class Matrix
 		}
 		return result;
 	}
-	/**
-	 * 
-	 * @param tile1
-	 * 		Description manquante !
-	 * @param tile2
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private double findPixelDistance(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
 		dk.checkInterruption();
 		return Math.abs(tile1.getPosX()-tile2.getPosX())+Math.abs(tile1.getPosY()-tile2.getPosY());
 	}
-	/**
-	 * 
-	 * @param tile1
-	 * 		Description manquante !
-	 * @param tile2
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double ManhattanDistance(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
 		dk.checkInterruption();
 		return Math.abs(tile1.getLine()-tile2.getLine())+Math.abs(tile1.getCol()-tile2.getCol());
 	}
 
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @param state
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void changeState(int line,int col,double state)throws StopRequestException
 	{
 		dk.checkInterruption();
 		areaMatrix[line][col]=state;
 	}
 	
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void changeTimeLeft(int line,int col,double time)throws StopRequestException
 	{
 		dk.checkInterruption();
 		timeLeft[line][col]=time;
 	}
 	
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 * @param blast
-	 * 		Description manquante !
-	 * @param bombs
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs)throws StopRequestException
 	{	
 		dk.checkInterruption();
@@ -609,102 +449,48 @@ public class Matrix
 		return blast;
 	}	
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double[][] getAreaMatrix()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return areaMatrix;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double[][] getTimeLeft()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return timeLeft;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiHero> getHeroes()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return heroes;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getRivals()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return rivals;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getBonus()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return bonus;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getSafes()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return safes;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getDestructibles()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return destructibles;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void printAreaMatrix()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -720,11 +506,7 @@ public class Matrix
 		}
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public void printTimeLeft()throws StopRequestException
 	{
 		dk.checkInterruption();

@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.sprite;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,62 +29,34 @@ import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * This class displays the various details
- * decribing some sprite (author, name, etc.).
  * 
  * @author Vincent Labatut
+ *
  */
 public class SpriteInfoSubPanel extends TableSubPanel
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
-	/** Number of lines in the panel */ 
+{	private static final long serialVersionUID = 1L;
 	private static final int LINES = 10;
-	/** Number of columns in each column group */
 	private static final int COL_SUBS = 2;
-	/** Number of column groups */
 	private static final int COL_GROUPS = 1;
 	
-	/**
-	 * Builds a standard sprite info panel.
-	 * 
-	 * @param width
-	 * 		Width in pixels.
-	 * @param height
-	 * 		Height in pixels.
-	 */
 	public SpriteInfoSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		setSpritePreview(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// SPRITE			/////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** The concerned sprite */
 	private SpritePreview spritePreview;
 
-	/**
-	 * Returns the sprite currently displayed.
-	 * 
-	 * @return
-	 * 		The sprite, or {@code null} for no sprite.
-	 */
 	public SpritePreview getSpritePreview()
 	{	return spritePreview;	
 	}
 	
-	/**
-	 * Change the currently displayed sprite.
-	 * 
-	 * @param spritePreview
-	 * 		New sprite to display.
-	 */
 	public void setSpritePreview(SpritePreview spritePreview)
 	{	this.spritePreview = spritePreview;
 		
@@ -119,7 +91,7 @@ public class SpriteInfoSubPanel extends TableSubPanel
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -127,13 +99,13 @@ public class SpriteInfoSubPanel extends TableSubPanel
 				{	String text = values.get(line);
 					String tooltip = text;
 					setLabelText(line,colSub,text,tooltip);
-					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,0,fg);
 					Color bg;
 					if(line>0)
-						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					else
-						bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -144,7 +116,7 @@ public class SpriteInfoSubPanel extends TableSubPanel
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -154,9 +126,9 @@ public class SpriteInfoSubPanel extends TableSubPanel
 					setLabelText(line,colSub,text,tooltip);
 					Color bg;
 					if(line>0)
-						bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 					else
-						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -168,7 +140,7 @@ public class SpriteInfoSubPanel extends TableSubPanel
 		setColSubMinWidth(0,iconWidth);
 		setColSubPrefWidth(0,iconWidth);
 		setColSubMaxWidth(0,iconWidth);
-		int maxWidth = getDataWidth()-(COL_SUBS-1)*GuiSizeTools.subPanelMargin-iconWidth;
+		int maxWidth = getDataWidth()-(COL_SUBS-1)*GuiTools.subPanelMargin-iconWidth;
 		setColSubMinWidth(1,maxWidth);
 		setColSubPrefWidth(1,maxWidth);
 		setColSubMaxWidth(1,maxWidth);
@@ -177,55 +149,23 @@ public class SpriteInfoSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether the sprite name should be displayed */
 	private boolean showName = true;
-	/** Whether the sprite pack should be displayed */
 	private boolean showPack = true;
-	/** Whether the sprite author should be displayed */
 	private boolean showAuthor = true;
-	/** Whether the sprite source should be displayed */
 	private boolean showSource = true;
 
-	/**
-	 * Changes the flag controling the
-	 * name display.
-	 * 
-	 * @param showName
-	 * 		Whether the sprite name should be displayed.
-	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 	}
 
-	/**
-	 * Changes the flag controling the
-	 * pack name display.
-	 * 
-	 * @param showPack
-	 * 		Whether the sprite pack name should be displayed.
-	 */
 	public void setShowPack(boolean showPack)
 	{	this.showPack = showPack;
 	}
 
-	/**
-	 * Changes the flag controling the
-	 * author display.
-	 * 
-	 * @param showAuthor
-	 * 		Whether the sprite author should be displayed.
-	 */
 	public void setShowAuthor(boolean showAuthor)
 	{	this.showAuthor = showAuthor;
 	}
 
-	/**
-	 * Changes the flag controling the
-	 * source display.
-	 * 
-	 * @param showSource
-	 * 		Whether the sprite source should be displayed.
-	 */
 	public void setShowSource(boolean showSource)
 	{	this.showSource = showSource;
 	}

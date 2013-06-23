@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.statistics;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,7 +26,6 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -44,7 +43,6 @@ public class StatisticsConfigurationSaver
 	public static void saveStatisticsConfiguration(StatisticsConfiguration statisticsConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveStatisticsElement(statisticsConfiguration);	
-		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -56,10 +54,6 @@ public class StatisticsConfigurationSaver
 	private static Element saveStatisticsElement(StatisticsConfiguration statisticsConfiguration)
 	{	Element result = new Element(XmlNames.STATISTICS); 
 		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-
 		// include quick starts
 		Element includeQuickStartsElement = saveIncludeQuickStartsElement(statisticsConfiguration);
 		result.addContent(includeQuickStartsElement);

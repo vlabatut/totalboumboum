@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.save;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -42,33 +42,21 @@ import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 /**
- * Menu used to save a game.
  * 
  * @author Vincent Labatut
+ *
  */
-public class SaveMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalDialogPanelListener
+{	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Swing container of this panel.
-	 * @param parent
-	 * 		Parent menu item.
-	 */
 	public SaveMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
@@ -77,22 +65,22 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiSizeTools.buttonTextHeight;
+		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.GAME_SAVE_BUTTON);
-		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_NEW,buttonWidth,buttonHeight,fontSize,this);
-		buttonDelete = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonConfirm = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonCancel = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonNew = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_NEW,buttonWidth,buttonHeight,fontSize,this);
+		buttonDelete = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonConfirm = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonCancel = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -105,27 +93,18 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Data panel */
 	private SaveData levelData;
 
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Button used to write on an existing save */
 	private JButton buttonConfirm;
-	/** Cancel button */
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
-	/** Button used to delete an existing file */
 	private JButton buttonDelete;
-	/** Button used to create a new file */
 	@SuppressWarnings("unused")
 	private JButton buttonNew;
-	
-	/**
-	 * Update the buttons depending on 
-	 * the file selection.
-	 */
+
 	private void refreshButtons()
 	{	GameArchive gameArchive = levelData.getSelectedGameArchive();
 		if(gameArchive==null)
@@ -141,18 +120,9 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Current tournament */
 	private AbstractTournament tournament;
-	/** Folder browsed while selecting files */
 	private String baseFolder = FilePaths.getSavesPath();
 	
-	/**
-	 * Changes the tournament handled
-	 * by this menu.
-	 * 
-	 * @param tournament
-	 * 		New tournament.
-	 */
 	public void setTournament(AbstractTournament tournament)
 	{	this.tournament = tournament;
 	}
@@ -160,7 +130,6 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -177,7 +146,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	    }
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_DELETE))
 		{	String key = GuiKeys.GAME_SAVE_DELETE_TITLE;
-			List<String> text = new ArrayList<String>();
+		List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_DELETE_QUESTION));
 			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionModalDelete.addListener(this);
@@ -185,7 +154,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	String key = GuiKeys.GAME_SAVE_CONFIRM_TITLE;
-			List<String> text = new ArrayList<String>();
+		List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_CONFIRM_QUESTION));
 			questionModalConfirm = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionModalConfirm.addListener(this);
@@ -196,7 +165,6 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void refresh()
 	{	
 	}
@@ -212,11 +180,8 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Modal dialog used to enter the name of a new file */
 	private InputModalDialogPanel inputModalNew = null;
-	/** Modal dialog used to confirm a deletion */
 	private QuestionModalDialogPanel questionModalDelete = null;
-	/** Modal dialog used to confirm a file replacement */
 	private QuestionModalDialogPanel questionModalConfirm = null;
 	
 	@Override

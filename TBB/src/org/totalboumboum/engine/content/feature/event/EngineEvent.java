@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.event;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -42,25 +42,25 @@ public class EngineEvent extends AbstractEvent
 	public static final String TRAJECTORY_OVER = "TRAJECTORY_OVER";
 
 	/** a sprite has just been collided */
-	public static final String COLLIDED_ON = "COLLIDED_ON"; // le sprite qui le reÃ§oit est percutÃ© par la source
+	public static final String COLLIDED_ON = "COLLIDED_ON"; // le sprite qui le reçoit est percuté par la source
 	/** a sprite is no longer collided */
 	public static final String COLLIDED_OFF = "COLLIDED_OFF";
 	/** a sprite just started colliding another one */
-	public static final String COLLIDING_ON = "COLLIDING_ON"; // le sprite qui le reÃ§oit est en train de percuter la cible
+	public static final String COLLIDING_ON = "COLLIDING_ON"; // le sprite qui le reçoit est en train de percuter la cible
 	/** a sprite stopped colliding another one */
 	public static final String COLLIDING_OFF = "COLLIDING_OFF";
 
 	/** two sprites started intersecting each-other */
-	public static final String INTERSECTION_ON = "INTERSECTION_ON"; // symÃ©trique pour les deux sprites concernÃ©s
+	public static final String INTERSECTION_ON = "INTERSECTION_ON"; // symétrique pour les deux sprites concernés
 	/** two sprites stopped intersecting each-other */
 	public static final String INTERSECTION_OFF = "INTERSECTION_OFF";
 	
 	/** a sprite is being flown over by another one */
-	public static final String OVERFLOWN_ON = "OVERFLOWN_ON"; // le sprite qui le reÃ§oit est survolÃ© par la source
+	public static final String OVERFLOWN_ON = "OVERFLOWN_ON"; // le sprite qui le reçoit est survolé par la source
 	/** a sprite is not flown over anymore */
 	public static final String OVERFLOWN_OFF = "OVERFLOWN_OFF";
 	/** a sprite just started flying over another one */
-	public static final String OVERFLYING_ON = "OVERFLYING_ON"; // le sprite qui le reÃ§oit survole la cible
+	public static final String OVERFLYING_ON = "OVERFLYING_ON"; // le sprite qui le reçoit survole la cible
 	/** a sprite stopped flying over another one */
 	public static final String OVERFLYING_OFF = "OVERFLYING_OFF";
 
@@ -92,8 +92,6 @@ public class EngineEvent extends AbstractEvent
 	/** the engine signals a sprite it must appear */
 //	public static final String SHOW_UP = "SHOW_UP";
 	
-	/** the engine makes the sprite fall from the skies (sudden death) */
-	public static final String START_FALL = "START_FALL";
 	/** the engine signals the sprite he as to finish itself */
 	public static final String END_SPRITE = "END_SPRITE";
 	

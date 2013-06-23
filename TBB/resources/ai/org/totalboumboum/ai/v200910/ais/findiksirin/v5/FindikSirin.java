@@ -20,16 +20,10 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
-/**
- * @author Ali Fındık
- * @author Göknur Şırın
- */
-@SuppressWarnings("deprecation")
 public class FindikSirin extends ArtificialIntelligence
 {		
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de notre IA */
-	@Override
+	/** m�thode appel�e par le moteur du jeu pour obtenir une action de notre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();
@@ -44,11 +38,11 @@ public class FindikSirin extends ArtificialIntelligence
 			updateLocation();
 			setOurBombs();
 			Direction moveDir = Direction.NONE;
-//			AiTile destinationTile=currentTile.getNeighbor(Direction.LEFT);
-//			System.out.println(zone.getPixelDistance(currentTile.getPosX(), currentTile.getPosY(), destinationTile.getPosX(), destinationTile.getPosY()));
-//			if(!ourBombs.isEmpty()){
-//				System.out.println(ourBombs.iterator().next().getBombs().iterator().next().getExplosionDuration());
-//			}
+			AiTile destinationTile=currentTile.getNeighbor(Direction.LEFT);
+			System.out.println(zone.getPixelDistance(currentTile.getPosX(), currentTile.getPosY(), destinationTile.getPosX(), destinationTile.getPosY()));
+			if(!ourBombs.isEmpty()){
+				System.out.println(ourBombs.iterator().next().getBombs().iterator().next().getExplosionDuration());
+			}
 			// on met a jour le safetyManager
 			safetyManager.update();
 			
@@ -59,13 +53,13 @@ public class FindikSirin extends ArtificialIntelligence
 			//t'as un chemin pour fuir?
 			if(escapeManager!=null)
 			{
-				//t'es arrive à la fin de chemin de fuir?
+				//t'es arrive � la fin de chemin de fuir?
 				if(escapeManager.hasArrived())
 				{
 					//initialiser le chemin de fuir
 					escapeManager=null;
 				}
-				//tu n'es pas arrive à la fin de chemin de fuir?
+				//tu n'es pas arrive � la fin de chemin de fuir?
 				else
 				{
 					//continuer sur le chemin de fuir
@@ -103,7 +97,7 @@ public class FindikSirin extends ArtificialIntelligence
 						posWalkable=null;
 						
 					}
-					//tu n'es pas arrive à la fin de chemin d'attaque?
+					//tu n'es pas arrive � la fin de chemin d'attaque?
 					else
 					{
 						if(attackManager.bomb2Pos==currentTile){
@@ -124,9 +118,9 @@ public class FindikSirin extends ArtificialIntelligence
 						attackManager = new AttackManager(this,posTarget,posWalkable);
 						dropBomb=true;
 						attackManager.update();
-//						System.out.println(attackManager.bomb1Pos.toString());
-//						System.out.println(attackManager.bomb2Pos.toString());
-//						System.out.println(attackManager.bomb3Pos.toString());
+						System.out.println(attackManager.bomb1Pos.toString());
+						System.out.println(attackManager.bomb2Pos.toString());
+						System.out.println(attackManager.bomb3Pos.toString());
 					}
 					//t'as pas d'assez bombes?
 					else
@@ -189,11 +183,7 @@ public class FindikSirin extends ArtificialIntelligence
 	}
 	
 
-	/** initialisation
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//initialisation
 	private void init() throws StopRequestException
 	{	checkInterruption();
 
@@ -205,58 +195,32 @@ public class FindikSirin extends ArtificialIntelligence
 	}
 
 	
-	/** notre personnage et son acces */
+//notre personnage et son acces
 	private AiHero ownHero = null;
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption();
 		return ownHero;
 	}
 
-	/** la zone de jeu */
+// la zone de jeu
 	private AiZone zone = null;
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiZone getZone() throws StopRequestException
 	{	checkInterruption();	
 		return zone;
 	}
 	
-	/** LES DEFINITIONS */ 
+///LES DEFINITIONS 
 	private EscapeManager escapeManager = null;
-	/** */
 	private SafetyManager safetyManager = null;
-	/** */
 	private BonusManager bonusManager = null;
-	/** */
 	private AttackManager attackManager = null;
 	
-	/** */
+//
 	private boolean dropBomb=false;
-	/** */
 	private List<AiTile> ourBombs=new ArrayList<AiTile>();
 	//private AiTile bombPos=null;
-	/** */
 	private boolean noWall=false;
 	
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean areYouSure() throws StopRequestException{
 		checkInterruption();
 		List <AiTile> safeTiles = safetyManager.findSafeTiles(currentTile);
@@ -272,11 +236,6 @@ public class FindikSirin extends ArtificialIntelligence
 		return safetyManager.isReachable(safest);
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setOurBombs() throws StopRequestException{
 		checkInterruption();
 		AiTile tile=null;
@@ -315,18 +274,9 @@ public class FindikSirin extends ArtificialIntelligence
 		return resultat;
 	}
 	*/
-	/** */
 	public Direction posTarget=null;
-	/** */
 	public Direction posWalkable=null;
 	
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean hasTargetAttackable() throws StopRequestException{
 		checkInterruption();
 		if(!currentTile.getNeighbor(Direction.LEFT).getNeighbor(Direction.LEFT).getHeroes().isEmpty() &&
@@ -378,72 +328,28 @@ public class FindikSirin extends ArtificialIntelligence
 
 	
 //LES METHODES D'ACCES DES GESTIONNAIRES DE TRAITEMENT
-	/**
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
 	public SafetyManager getSafetyManager() throws StopRequestException
 	{	checkInterruption();	
 		return safetyManager;		
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public EscapeManager getEscapeManager() throws StopRequestException
 	{	checkInterruption();	
 		return escapeManager;		
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public BonusManager getBonusManager() throws StopRequestException
 	{	checkInterruption();	
 		return bonusManager;		
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AttackManager getAttackManager() throws StopRequestException
 	{	checkInterruption();	
 		return attackManager;		
 	}
 
 //LES METHODES DE CONTROLE DE SECURITE
-	/**
-	 * @param tile 
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption();	
 		return safetyManager.getSafetyLevel(tile);		
 	}	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -451,54 +357,26 @@ public class FindikSirin extends ArtificialIntelligence
 	}
 	
 	
-	/** CASE ET POSITION OCCUPE (current tile and position) */
+//CASE ET POSITION OCCUPE (current tile and position)
 	private AiTile currentTile = null;
-	/** */
 	private double currentX;
-	/** */
 	private double currentY;
 	
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile getCurrentTile() throws StopRequestException
 	{	checkInterruption();
 		return currentTile;
 	}	
 
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double getCurrentX() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return currentX;
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE	
 		return currentY;
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void updateLocation() throws StopRequestException
 	{	checkInterruption();
 		currentTile = ownHero.getTile();
@@ -506,15 +384,6 @@ public class FindikSirin extends ArtificialIntelligence
 		currentY = ownHero.getPosY();				
 	}
 	
-	/**
-	 * 
-	 * @param currentTile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("unused")
 	private AiBomb getOurBomb(AiTile currentTile) throws StopRequestException{
 		checkInterruption();

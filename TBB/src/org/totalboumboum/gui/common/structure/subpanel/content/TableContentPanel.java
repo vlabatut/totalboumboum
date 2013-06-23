@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,8 +30,7 @@ import java.util.List;
 import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -181,8 +180,8 @@ public class TableContentPanel extends LinesContentPanel
 				lbl.setText(txt);
 				lbl.setFont(getHeaderFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
-				lbl.setForeground(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 				lbl.setOpaque(true);
 				if(minWidths.get(subIndex)!=null)
 					setLabelMinWidth(start,index,minWidths.get(subIndex));
@@ -204,8 +203,8 @@ public class TableContentPanel extends LinesContentPanel
 				lbl.setText(txt);
 				lbl.setFont(getLineFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-				lbl.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 				lbl.setOpaque(true);
 				if(minWidths.get(subIndex)!=null)
 					setLabelMinWidth(line,index,minWidths.get(subIndex));
@@ -231,8 +230,8 @@ public class TableContentPanel extends LinesContentPanel
 				lbl.setText(txt);
 				lbl.setFont(getHeaderFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
-				lbl.setForeground(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 				lbl.setOpaque(true);
 				if(minWidths.get(sub)!=null)
 					setLabelMinWidth(0,index,minWidths.get(sub));
@@ -254,8 +253,8 @@ public class TableContentPanel extends LinesContentPanel
 				lbl.setText(txt);
 				lbl.setFont(getLineFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-				lbl.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 				lbl.setOpaque(true);
 				if(minWidths.get(sub)!=null)
 					setLabelMinWidth(line,index,minWidths.get(sub));

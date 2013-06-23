@@ -20,19 +20,17 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Ali Bilgin
- * @author CaÄŸdas Emrah KarabaÄŸ
+ * @author Cagdas Emrah Karabag
  *
  */
-@SuppressWarnings("deprecation")
 public class BilginKarabag extends ArtificialIntelligence {
-	/** la case occupÃ©e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
-	/** la derniÃ¨re case par laquelle on est passÃ© */
+	/** la dernière case par laquelle on est passé */
 	private AiTile previousTile = null;
 
-	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -41,27 +39,27 @@ public class BilginKarabag extends ArtificialIntelligence {
 		AiAction result = new AiAction(AiActionName.NONE);
 
 		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
-		if (ownHero != null) { // on met Ã  jour la position de l'ia dans la zone
+		if (ownHero != null) { // on met à jour la position de l'ia dans la zone
 			currentTile = ownHero.getTile();
 
 			// premier appel : on initialise l'IA
 			if (nextTile == null)
 				init();
 
-			// arrivÃ© Ã  destination : on choisit une nouvelle destination
+			// arrivé à destination : on choisit une nouvelle destination
 			if (currentTile == nextTile)
 				pickNextTile();
-			// au cas ou quelqu'un prendrait le ContrÃ´le manuel du personnage
+			// au cas ou quelqu'un prendrait le contrôle manuel du personnage
 			else if (previousTile != currentTile) {
 				previousTile = currentTile;
 				pickNextTile();
 			}
-			// sinon (on garde la mÃªme direction) on vÃ©rifie qu'un obstacle (ex:
+			// sinon (on garde la même direction) on vérifie qu'un obstacle (ex:
 			// bombe) n'est pas apparu dans la case
 			else
 				checkNextTile();
 
-			// on calcule la direction Ã  prendre
+			// on calcule la direction à prendre
 			Direction direction = getPercepts().getDirection(currentTile,
 					nextTile);
 
@@ -87,11 +85,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -101,29 +94,28 @@ public class BilginKarabag extends ArtificialIntelligence {
 
 	/**
 	 * Choisit comme destination une case voisine de la case actuellement
-	 * occupÃ©e par l'IA. Cette case doit Ãªtre accessible (pas de mur ou de bombe
-	 * ou autre obstacle) et doit Ãªtre diffÃ©rente de la case prÃ©cÃ©demment
-	 * occupÃ©e
+	 * occupée par l'IA. Cette case doit être accessible (pas de mur ou de bombe
+	 * ou autre obstacle) et doit être différente de la case précédemment
+	 * occupée
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void pickNextTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		// liste des cases voisines accessibles
 		List<AiTile> tiles = getClearNeighbors(currentTile);
-		// on sort de la liste la case d'oÃ¹ l'on vient (pour Ã©viter de repasser
-		// au mÃªme endroit)
+		// on sort de la liste la case d'où l'on vient (pour éviter de repasser
+		// au même endroit)
 		boolean canGoBack = false;
 		if (tiles.contains(previousTile)) {
 			tiles.remove(previousTile);
 			canGoBack = true;
 		}
 		// s'il reste des cases dans la liste
-		if (tiles.size() > 0) { // si la liste contient la case situÃ©e dans la
-								// direction dÃ©placement prÃ©cedente,
-			// on Ã©vite de l'utiliser (je veux avancer en zig-zag et non pas en
+		if (tiles.size() > 0) { // si la liste contient la case située dans la
+								// direction déplacement précedente,
+			// on évite de l'utiliser (je veux avancer en zig-zag et non pas en
 			// ligne droite)
 			AiTile tempTile = null;
 			Direction dir = getPercepts().getDirection(previousTile,
@@ -149,13 +141,13 @@ public class BilginKarabag extends ArtificialIntelligence {
 				}
 				previousTile = currentTile;
 			}
-			// sinon (pas le choix) on continue dans la mÃªme direction
+			// sinon (pas le choix) on continue dans la même direction
 			else {
 				nextTile = tempTile;
 				previousTile = currentTile;
 			}
 		}
-		// sinon (pas le choix) on tente de revenir en arriÃ¨re
+		// sinon (pas le choix) on tente de revenir en arrière
 		else {
 			if (canGoBack) {
 				nextTile = previousTile;
@@ -165,20 +157,11 @@ public class BilginKarabag extends ArtificialIntelligence {
 		}
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		// liste des cases autour de la case de rÃ©fÃ©rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -193,15 +176,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -213,11 +187,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void checkNextTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -225,7 +194,7 @@ public class BilginKarabag extends ArtificialIntelligence {
 		// destination
 		if (!isClear(nextTile)) { // liste des cases voisines accessibles
 			List<AiTile> tiles = getClearNeighbors(currentTile);
-			// on sort l'ancienne destination (qui est maintenant bloquÃ©e) de la
+			// on sort l'ancienne destination (qui est maintenant bloquée) de la
 			// liste
 			if (tiles.contains(nextTile))
 				tiles.remove(nextTile);
@@ -239,15 +208,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		}
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean dangerous(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		boolean result = false;
@@ -276,17 +236,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tileFrom
-	 * 		Description manquante !
-	 * @param tileTo
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean foundBlock(AiTile tileFrom, AiTile tileTo)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -333,15 +282,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @param currentTile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiTile getSafeTile(AiTile currentTile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -416,17 +356,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		return targetTile;
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param ownHero
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isThereBomb(AiZone zone, AiHero ownHero) throws StopRequestException {
 		checkInterruption();
 		Collection<AiBomb> blocks = zone.getBombs();
@@ -469,17 +398,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param ownHero
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isThereWall(AiZone zone, AiHero ownHero) throws StopRequestException {
 		checkInterruption();
 		Collection<AiBlock> blocks = zone.getBlocks();
@@ -508,15 +426,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isSettingBombSafe(AiZone zone) throws StopRequestException {
 		checkInterruption();
 		Collection<AiBomb> bombs = zone.getBombs();

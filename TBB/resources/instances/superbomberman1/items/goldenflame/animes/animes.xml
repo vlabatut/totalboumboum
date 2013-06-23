@@ -2,25 +2,6 @@
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
 		scale="1" >
-<!-- 
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut 
-	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
 
 	<gestures>
 
@@ -42,24 +23,12 @@
 			</direction>
 		</gesture>
 
-		<gesture name="RELEASED" repeat="false" folder="standing" yShift="9">
+		<gesture name="RELEASED" repeat="false" folder="released" yShift="9">
 			<direction name="NONE">
-				<step duration="85" >
-					<image file="standing.gif" />
-					<imageref name="smoke1" yShift="9" />
-				</step>
-				<step duration="105" >
-					<image file="standing.gif" />
-					<imageref name="smoke2" yShift="9" />
-				</step>
-				<step duration="80" >
-					<image file="standing.gif" />
-					<imageref name="smoke3" yShift="9" />
-				</step>
-				<step duration="60" >
-					<image file="standing.gif" />
-					<imageref name="smoke4" yShift="9" />
-				</step>				
+				<step duration="85" file="1.gif" />
+				<step duration="105" file="2.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="60" file="4.gif" />
 			</direction>
 		</gesture>
 

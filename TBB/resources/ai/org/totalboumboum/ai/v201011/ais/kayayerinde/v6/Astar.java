@@ -8,56 +8,25 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings("deprecation")
+
+
 public class Astar {
 	
-	/** */
 	private KayaYerinde ky;
-	/** */
 	private AiPath path;
-	/** */
 	private int gidilenTur;
-	/** */
 	int i=0;
-	/** */
 	private boolean yaz;
-	/** */
 	private static final int ARA=10;
-	/** */
 	private boolean sictin;
 
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Astar(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.ky=onder;
 	}
 	
-	/**
-	 * 
-	 * @param baslangic
-	 * 		description manquante !
-	 * @param son
-	 * 		description manquante !
-	 * @param gidilenTur
-	 * 		description manquante !
-	 * @param matris
-	 * 		description manquante !
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+	
 	public boolean yolBul(AiTile baslangic,AiTile son,int gidilenTur,Matris matris) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -170,19 +139,7 @@ public class Astar {
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @param t1
-	 * 		description manquante !
-	 * @param t2
-	 * 		description manquante !
-	 * @param m
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+	
 	private int mesafe(AiTile t1,AiTile t2,Matris m) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -206,17 +163,6 @@ public class Astar {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param t1
-	 * 		description manquante !
-	 * @param t2
-	 * 		description manquante !
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public int real(AiTile t1,AiTile t2) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -225,15 +171,6 @@ public class Astar {
 		return (int)Math.sqrt(l*l+c*c);
 	}
 	
-	/**
-	 * 
-	 * @param list
-	 * 		description manquante !
-	 * @param eleman
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void siraliEkle(ArrayList<Node> list,Node eleman) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -251,17 +188,7 @@ public class Astar {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		description manquante !
-	 * @param list
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+
 	private Node tileListedeMi(AiTile tile,ArrayList<Node> list) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -279,65 +206,29 @@ public class Astar {
 		return node;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+
+	
 	public AiPath getPath() throws StopRequestException
 	{
 		ky.checkInterruption();
 		return path;
 	}
-	
-	/**
-	 * 
-	 * @param path
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
 		ky.checkInterruption();
 		this.path=path;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public int getTur() throws StopRequestException
 	{
 		ky.checkInterruption();
 		return gidilenTur;
 	}
-	
-	/**
-	 * 
-	 * @param gidilenTur
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void setTur(int gidilenTur) throws StopRequestException
 	{
 		ky.checkInterruption();
 		this.gidilenTur=gidilenTur;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public int yoldaMi() throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -352,16 +243,6 @@ public class Astar {
 			return 0;
 		return 1;
 	}
-	
-	/**
-	 * 
-	 * @param matris
-	 * 		description manquante !
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiAction getNextAction(Matris matris) throws StopRequestException
 	{
 		ky.checkInterruption();
@@ -385,57 +266,25 @@ public class Astar {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void sictinAc() throws StopRequestException
 	{
 		ky.checkInterruption();
 		sictin=true;
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void sictinKapat() throws StopRequestException
 	{
 		ky.checkInterruption();
 		sictin=false;
 	}
 	
-	/**
-	 * 
-	 *
-	 */
 	class Node
 	{
-		/** */
 		private int G;
-		/** */
 		private int H;
 		
-		/** */
 		private Node parent;
-		/** */
 		private AiTile own;
-
-		/**
-		 * 
-		 * @param own
-		 * 		description manquante !
-		 * @param parent
-		 * 		description manquante !
-		 * @param G
-		 * 		description manquante !
-		 * @param H
-		 * 		description manquante !
-		 * @throws StopRequestException
-	 	 * 		description manquante !
-		 */
+		
 		public Node(AiTile own,Node parent,int G,int H) throws StopRequestException
 		{
 			ky.checkInterruption();
@@ -445,13 +294,6 @@ public class Astar {
 			this.H=H;
 		}
 		
-		/**
-		 * 
-		 * @return ?
-		 * 		description manquante !
-		 * @throws StopRequestException
-	 	 * 		description manquante !
-		 */
 		public int getF() throws StopRequestException
 		{
 			ky.checkInterruption();

@@ -2,7 +2,7 @@ package org.totalboumboum.game.limit;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -89,15 +89,11 @@ public class Limits<T extends Limit> implements Serializable
 	{	return limits.get(index);		
 	}
 	
-	public int size()
-	{	return limits.size();	
-	}
-	
-	/**
-	 * Cleanly finishes this object,
-	 * possibly freeing some memory.
-	 */
 	public void finish()
 	{	limits.clear();		
+	}
+	
+	public int size()
+	{	return limits.size();	
 	}
 }

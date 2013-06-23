@@ -4,26 +4,15 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 
-/**
- * @author Onur BÃ¼yÃ¼ktopaÃ§
- * @author YiÄŸit Turak
- */
-@SuppressWarnings("deprecation")
 public class AStarCost extends CostCalculator{
 
-	/** */
 	private BuyuktopacTurak bt;
-	/** */
 	private double[][] matrix;
 	
 	/**
-	 * C'est un constructeur qui obtient la matrice de la mode.
-	 * @param bt 
-	 * 		description manquante !
+	 * C’est un constructeur qui obtient la matrice de la mode.
 	 * @param matrix
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AStarCost(BuyuktopacTurak bt, double[][] matrix) throws StopRequestException{
 		bt.checkInterruption();
@@ -32,9 +21,8 @@ public class AStarCost extends CostCalculator{
 	}
 
 	/**
-	 * Calcule le cout de lÃ action consistant Ã  aller de la case dÃ©part Ã  la case arrÃªt.
+	 * Calcule le cout de l’action consistant à aller de la case départ à la case arrêt.
 	 */
-	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException {
 		bt.checkInterruption();
 		//pour utiliser Astar, on calcule la version basic de la cost

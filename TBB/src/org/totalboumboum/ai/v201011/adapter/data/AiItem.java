@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -23,14 +23,12 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 
 /**
- * reprÃ©sente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractÃ©risÃ© par son type, reprÃ©sentant le pouvoir apportÃ© (ou enlevÃ©)
- * par l'item. Ce type est reprÃ©sentÃ©e par une valeur de type AiItemType.
+ * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
+ * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public interface AiItem extends AiSprite
 {	
@@ -38,7 +36,7 @@ public interface AiItem extends AiSprite
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le type de l'item reprÃ©sentÃ©
+	 * renvoie le type de l'item représenté
 	 * 
 	 * @return	
 	 * 		le type de l'item
@@ -49,24 +47,24 @@ public interface AiItem extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si cet item arrÃªte les explosions.
-	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas Ãªtre utilisÃ©e directement par l'IA,
-	 * elle est destinÃ©e au calcul des modÃ¨les simulant l'Ã©volution du jeu.
+	 * indique si cet item arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si cet item arrÃªte le feu
+	 * 		une valeur AiStopType indiquant si cet item arrête le feu
 	 */
 	public AiStopType hasStopFires();
 
 	/**
-	 * indique si cet item arrÃªte les bombes.
-	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas Ãªtre utilisÃ©e directement par l'IA,
-	 * elle est destinÃ©e au calcul des modÃ¨les simulant l'Ã©volution du jeu.
+	 * indique si cet item arrête les bombes.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si cet item arrÃªte les bombes
+	 * 		une valeur AiStopType indiquant si cet item arrête les bombes
 	 */
 	public AiStopType hasStopBombs();
 }

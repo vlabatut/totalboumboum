@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.tournament.load;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,7 +25,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
@@ -35,22 +34,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
-import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
-import org.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.save.SaveData;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
@@ -61,7 +52,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class LoadMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
+public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public LoadMenu(SplitMenuPanel container, MenuPanel parent)
@@ -72,22 +63,21 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiSizeTools.buttonTextHeight;
+		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON);
-		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonDelete = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
-		buttonStats = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonDelete = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -107,7 +97,6 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private JButton buttonConfirm;
-	private JButton buttonStats;
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 	private JButton buttonDelete;
@@ -117,12 +106,10 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 		if(gameArchive==null)
 		{	buttonDelete.setEnabled(false);
 			buttonConfirm.setEnabled(false);
-			buttonStats.setEnabled(false);
 		}
 		else
 		{	buttonDelete.setEnabled(true);
 			buttonConfirm.setEnabled(true);
-			buttonStats.setEnabled(true);
 		}
 	}
 	
@@ -144,39 +131,20 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 		{	replaceWith(parent);
 	    }
 		if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE))
-		{	String key = GuiKeys.MENU_TOURNAMENT_LOAD_DELETE_TITLE;
-			List<String> text = new ArrayList<String>();
-			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_TOURNAMENT_LOAD_DELETE_QUESTION));
-			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
-			questionModalDelete.addListener(this);
-			getFrame().setModalDialog(questionModalDelete);
+		{	GameArchive selectedArchive = levelData.getSelectedGameArchive();
+			if(selectedArchive!=null)
+			{	String folder = selectedArchive.getFolder();
+				String path = baseFolder+File.separator+folder;
+				File file = new File(path);
+				FileTools.deleteDirectory(file);
+				levelData.refresh();			
+			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM))
 		{	try
 			{	String folder = levelData.getSelectedGameArchive().getFolder();
 				AbstractTournament tournament = GameArchive.loadGame(folder);
 				tournamentPanel.setTournament(tournament);
-				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			replaceWith(tournamentPanel);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_STATISTICS))
-		{	try
-			{	String folder = levelData.getSelectedGameArchive().getFolder();
-				AbstractTournament tournament = GameArchive.loadGame(folder);
-				tournamentPanel.setTournamentStats(tournament);
 				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
 			}
 			catch (IOException e1)
@@ -208,29 +176,5 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private QuestionModalDialogPanel questionModalDelete = null;
-	
-	@Override
-	public void modalDialogButtonClicked(String buttonCode)
-	{	getFrame().unsetModalDialog();
-		if(questionModalDelete!=null)
-		{	questionModalDelete.removeListener(this);
-			questionModalDelete = null;				
-			GameArchive selectedArchive = levelData.getSelectedGameArchive();
-			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
-			{	if(selectedArchive!=null)
-				{	String folder = selectedArchive.getFolder();
-					String path = baseFolder+File.separator+folder;
-					File file = new File(path);
-					FileTools.deleteDirectory(file);
-					levelData.refresh();			
-				}			
-			}
-		}
 	}
 }

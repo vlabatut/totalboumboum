@@ -13,26 +13,12 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
- */
-@SuppressWarnings("deprecation")
 public class TraitementCollect {
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
-	/** */
+
 	public int DESTRUCTIBLEINIT = 200;
-	/** */
 	public final int BONUS = 1000;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public TraitementCollect(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -40,7 +26,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette mÃ©thode initialise la matrice collecte avec les '0'. Elle prend 2
+	 * Cette méthode initialise la matrice collecte avec les '0'. Elle prend 2
 	 * arguments, la zone du jeu et une matrice de type Int.
 	 * 
 	 * @param matrice
@@ -48,7 +34,6 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void initialiseMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -63,7 +48,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette mÃ©thode remplie la matrice collecte. Elle donne des valeurs aux
+	 * Cette méthode remplie la matrice collecte. Elle donne des valeurs aux
 	 * cases des bonus en fonction du temps et en fonction de la distance. Elle
 	 * prend 2 arguments, la zone du jeu et une matrice de type Int.
 	 * 
@@ -72,8 +57,8 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
+
 	public void collectMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -103,7 +88,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette mÃ©thode permet l'affichage de la matrice collecte en utilisant
+	 * Cette méthode permet l'affichage de la matrice collecte en utilisant
 	 * l'API fournie. Elle prend 2 arguments, la zone du jeu et une matrice de
 	 * type Int.
 	 * 
@@ -112,7 +97,6 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void affiche(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -130,7 +114,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette mÃ©thode calcule la durÃ©e nÃ©cessaire pour que notre IA arrive Ã  la
+	 * Cette méthode calcule la durée nécessaire pour que notre IA arrive à la
 	 * case du bonus cible. Elle prend deux arguments, la zone du jeu et les
 	 * items du jeu.
 	 * 
@@ -139,7 +123,6 @@ public class TraitementCollect {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return T
 	 */
 	public double dureeAllerBonus(AiZone gameZone, AiItem bonus)
@@ -154,8 +137,8 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette mÃ©thode trouve la case du plus proche bombe au bonus et elle
-	 * initialise cette case avec une valeur. Cette mÃ©thode ContrÃ´le les 4 cases
+	 * Cette méthode trouve la case du plus proche bombe au bonus et elle
+	 * initialise cette case avec une valeur. Cette méthode contrôle les 4 cases
 	 * voisines. Elle prend 3 arguments, la zone du jeu, les items du jeu et une
 	 * matrice de type Int.
 	 * 
@@ -166,7 +149,6 @@ public class TraitementCollect {
 	 * @param matrice
 	 *            La Matrice de collecte
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void plusProcheBombe(AiZone gameZone, AiItem bonus, int[][] matrice)
 			throws StopRequestException {
@@ -208,17 +190,15 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette mÃ©thode calcule le temps d'aller aux bonus du plus proche
+	 * Cette méthode calcule le temps d'aller aux bonus du plus proche
 	 * adversaire et elle initialise cette case avec une valeur. Elle prend 3
 	 * arguments, la zone du jeu, les items du jeu et une matrice de type Int.
-	 * @param matrice 
-	 * 		description manquante !
+	 * 
 	 * @param bonus
 	 *            item bonus
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void plusProcheHero(int[][] matrice, AiZone gameZone, AiItem bonus)
 			throws StopRequestException {

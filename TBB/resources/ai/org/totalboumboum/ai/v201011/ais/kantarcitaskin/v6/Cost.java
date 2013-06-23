@@ -5,17 +5,11 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 
-/**
- * @author Burcu Kantarcı
- * @author Ayça Taşkın
- */
-@SuppressWarnings("deprecation")
 public class Cost extends CostCalculator
 {
-	/** */
 	ArtificialIntelligence ai;
 	/**
-	 * Classe de la fonction de cout et utilisé par A* pour determiner le chemin plus courts 
+	 * Classe de la fonction de cout et utilis� par A* pour determiner le chemin plus courts 
 	 * d'un cible
 	 * 
 	 */
@@ -24,10 +18,7 @@ public class Cost extends CostCalculator
 	 * Constructeur de la classe 
 	 * @param matrix
 	 * 		zone numerique du jeu
-	 * @param ai 
-	 * 		description manquante !
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public Cost(double[][] matrix, ArtificialIntelligence ai) throws StopRequestException
 	{
@@ -45,7 +36,7 @@ public class Cost extends CostCalculator
 	 * 		la case cible
 	 * 
 	 * @return cost
-	 * 		le cost du chemin trouvé
+	 * 		le cost du chemin trouv�
 	 * 
 	 * */
 	public double processCost(AiTile start, AiTile end)throws StopRequestException {
@@ -74,9 +65,15 @@ public class Cost extends CostCalculator
 						else
 							resultat = 1;
 					}
+					
 				}
+				
 			}
+				
 		}
+		
 		return resultat;
 	}
+	
+	
 }

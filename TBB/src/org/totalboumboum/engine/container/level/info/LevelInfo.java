@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.info;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -164,14 +164,14 @@ public class LevelInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// VISIBLE POSITION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int visiblePositionUpRow;
+	private int visiblePositionUpLine;
 	private int visiblePositionLeftCol;
 
-	public int getVisiblePositionUpRow()
-	{	return visiblePositionUpRow;
+	public int getVisiblePositionUpLine()
+	{	return visiblePositionUpLine;
 	}
-	public void setVisiblePositionUpRow(int visiblePositionUpRow)
-	{	this.visiblePositionUpRow = visiblePositionUpRow;
+	public void setVisiblePositionUpLine(int visiblePositionUpLine)
+	{	this.visiblePositionUpLine = visiblePositionUpLine;
 	}
 	
 	public int getVisiblePositionLeftCol()

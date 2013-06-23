@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.single;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -55,46 +55,17 @@ import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
- * Represents a tournament containing
- * only one match, i.e. the simplest form
- * of tournament.
  * 
  * @author Vincent Labatut
+ *
  */
 public class SingleTournament extends AbstractTournament
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Builds a standard tournament.
-	 */
 	public SingleTournament()
 	{	
 	}
 
-	/**
-	 * Builds a tournament to replay
-	 * a game.
-	 * 
-	 * @param replay
-	 * 		The replay access. 
-	 * @throws IOException 
-	 * 		Problem while reading the file.
-	 * @throws ClassNotFoundException 
-	 * 		Problem while reading the file.
-	 * @throws IllegalArgumentException 
-	 * 		Problem while reading the file.
-	 * @throws SecurityException 
-	 * 		Problem while reading the file.
-	 * @throws ParserConfigurationException 
-	 * 		Problem while reading the file.
-	 * @throws SAXException 
-	 * 		Problem while reading the file.
-	 * @throws IllegalAccessException 
-	 * 		Problem while reading the file.
-	 * @throws NoSuchFieldException 
-	 * 		Problem while reading the file.
-	 */
 	public SingleTournament(FileClientStream replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	replay.initStreams();
 		replay.initRound();
@@ -163,18 +134,15 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
-		playedMatches.clear();
-		// NOTE vÃ©rifier si le nombre de joueurs sÃ©lectionnÃ©s correspond
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
 
 	@Override
 	public void progress()
-	{	if(!isOver())
-		{	if(currentMatch.getProfiles().size()==0)
-				currentMatch.init(profiles);
-			playedMatches.add(currentMatch);
+	{	if(!isOver() && match.getProfiles().size()==0)
+		{	match.init(profiles);
 		}
 	}
 
@@ -186,20 +154,21 @@ public class SingleTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Changes the currently ongoing match.
-	 * 
-	 * @param match
-	 * 		New current match for this tournament.
-	 */
+	private Match match = null;
+
 	public void setMatch(Match match)
-	{	this.currentMatch = match;
+	{	this.match = match;
 	}
 
 	@Override
+	public Match getCurrentMatch()
+	{	return match;	
+	}
+	
+	@Override
 	public void matchOver()
 	{	// stats
-		StatisticMatch statsMatch = currentMatch.getStats();
+		StatisticMatch statsMatch = match.getStats();
 		stats.addStatisticMatch(statsMatch);
 		float[] points = stats.getTotal();
 		stats.setPoints(points);
@@ -215,32 +184,24 @@ public class SingleTournament extends AbstractTournament
 			serverConnection.updateHostState(HostState.FINISHED);
 	}
 
-	@Override
 	public void roundOver()
 	{	panel.roundOver();
 	}
 
-
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
-	{	Set<Integer> result = currentMatch.getAllowedPlayerNumbers();
+	{	Set<Integer> result = match.getAllowedPlayerNumbers();
 		return result;			
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Returns the ranks for this tournament.
-	 * 
-	 * @param pts
-	 * 		Points scored by the players.
-	 * @return
-	 * 		Corresponding player ranks.
-	 */
+
 	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
@@ -258,7 +219,6 @@ public class SingleTournament extends AbstractTournament
 		return result;
 	}
 	
-	@Override
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
 		// points

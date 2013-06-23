@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.sprite;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,33 +35,19 @@ import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * This class is used to display sprites in the
- * resource browser. It includes a set of color
- * buttons, allowing to see the various version
- * of colored sprites such as characters and bombs.
  * 
  * @author Vincent Labatut
+ *
  */
 public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListener
-{	/** Class id for serialization */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Builds an empty panel.
-	 * 
-	 * @param width
-	 * 		Width of this panel, in pixels.
-	 * @param height
-	 * 		Height of this panel, in pixels.
-	 */
 	public SpriteImageSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,3);
 		setSpritePreview(null);
@@ -70,29 +56,16 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 	/////////////////////////////////////////////////////////////////
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Object containing the image to be displayed */
 	private SpritePreview spritePreview;
-	/** Currently selected color (can be {@code null}) */
+	private int lines;
+	private int lineHeight;
+	private int rightWidth;
 	private PredefinedColor selectedColor;
 	
-	/**
-	 * Returns the object containing
-	 * the currently displayed image.
-	 * 
-	 * @return
-	 * 		The current sprite preview object.
-	 */
 	public SpritePreview getSpritePreview()
 	{	return spritePreview;	
 	}
 	
-	/**
-	 * Changes the sprite displayed by
-	 * this panel.
-	 * 
-	 * @param spritePreview
-	 * 		The preview object for the new sprite.
-	 */
 	public void setSpritePreview(SpritePreview spritePreview)
 	{	this.spritePreview = spritePreview;
 		selectedColor = null;
@@ -104,10 +77,10 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		lines = colorValues.length/2;
 		if(colorValues.length%2 > 0)
 			lines++;
-		lineHeight = (getDataHeight() - (lines-1)*GuiSizeTools.subPanelMargin)/lines;
-		int firstLineHeight = getDataHeight() - (lines-1)*GuiSizeTools.subPanelMargin - (lines-1)*lineHeight;
+		lineHeight = (getDataHeight() - (lines-1)*GuiTools.subPanelMargin)/lines;
+		int firstLineHeight = getDataHeight() - (lines-1)*GuiTools.subPanelMargin - (lines-1)*lineHeight;
 		if(showColors)
-			rightWidth = getDataWidth() - 2*lineHeight - 2*GuiSizeTools.subPanelMargin;
+			rightWidth = getDataWidth() - 2*lineHeight - 2*GuiTools.subPanelMargin;
 		else
 			rightWidth = getDataWidth();
 
@@ -128,7 +101,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				label.addMouseListener(this);
 				label.setMouseSensitive(true);
 			}
-			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
 			col++;
 		}
@@ -149,7 +122,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				label.addMouseListener(this);
 				label.setMouseSensitive(true);
 			}
-			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
 			col++;
 		}
@@ -164,7 +137,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 			MyLabel label = cl.getLabel(line);
 			label.addMouseListener(this);
 			label.setMouseSensitive(true);
-			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
 			col++;
 		}
@@ -172,23 +145,6 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		selectColor(null);
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// COLORS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Numbers of lines of color buttons */
-	private int lines;
-	/** Height of the color buttons */
-	private int lineHeight;
-	/** Width of the color buttons */
-	private int rightWidth;
-
-	/**
-	 * Changes the color of the sprite
-	 * currently displayed (can be {@code null}.
-	 * 
-	 * @param color
-	 * 		New color.
-	 */
 	private void selectColor(PredefinedColor color)
 	{	BufferedImage image;
 		selectedColor = color;
@@ -216,7 +172,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		{	// colors
 			String text = null;
 			String tooltip = null;
-			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			if(colors[i])
 			{	String colorKey = colorValues[i].toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
@@ -234,7 +190,6 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				line++;
 			}
 		}
-		// image
 		MyLabel label = getLabel(0,2);
 		Dimension prefDim = label.getPreferredSize();
 		int imgWidth = (int)(prefDim.width*0.9);
@@ -249,10 +204,10 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 			label.setText(null);
 			Color bg;
 			if(selectedColor==null)
-				bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			else
 			{	Color clr = selectedColor.getColor();
-				int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				
 			}
@@ -261,7 +216,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		else
 		{	label.setIcon(null);
 			label.setText(null);
-			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			label.setBackground(bg);
 		}		
 	}
@@ -269,15 +224,8 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether or not color buttons should be displayed (i.e. only for colored sprites) */
 	private boolean showColors = true;
-	
-	/**
-	 * Hides/shows the color buttons.
-	 * 
-	 * @param showColors
-	 * 		{@code true} for show, {@code false} for hide.
-	 */
+
 	public void setShowColors(boolean showColors)
 	{	this.showColors = showColors;
 	}

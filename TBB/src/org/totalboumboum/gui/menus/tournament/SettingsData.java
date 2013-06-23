@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.tournament;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -39,10 +39,8 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -72,7 +70,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				mainPanel.setLayout(layout);
 			}
 			
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			tournamentHeight = (int)(dataHeight*SPLIT_RATIO); 
 			miscHeight = dataHeight - tournamentHeight - margin;
 			mainPanel.setOpaque(false);
@@ -82,7 +80,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				mainPanel.add(tournamentPanel);
 			}
 			
-			mainPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.panelMargin,GuiSizeTools.panelMargin)));
+			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
 			
 			// misc panel
 			{	miscPanel = new TournamentMiscSubPanel(dataWidth,miscHeight,15);
@@ -164,7 +162,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	private TableSubPanel makeTournamentPanel(int width, int height)
 	{	int cols = 2;
 		int lines = 1;
-		int margin = GuiSizeTools.subPanelMargin;
+		int margin = GuiTools.subPanelMargin;
 		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,lines,cols,false);
 		@SuppressWarnings("unused")
 		int headerHeight = result.getHeaderHeight();
@@ -180,7 +178,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				result.setColSubPrefWidth(col,fileWidth);
 				result.setColSubMaxWidth(col,fileWidth);
 				// color
-				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// next
 				col++;
@@ -194,7 +192,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				String key = GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT;
 				result.setLabelKey(line,col,key,true);
 				// color
-				Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// listener
 				MyLabel lbl = result.getLabel(line,col);

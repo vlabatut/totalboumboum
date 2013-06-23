@@ -5,26 +5,17 @@ import java.util.Comparator;
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
-/**
- * @author Merih Inal Dereli
- * @author G√∂khan Ge√ßkalan
- */
-@SuppressWarnings("deprecation")
+
 public class NoeudAstar implements Comparator<Noeud> {
-	/** */
 	private Noeud goal;
 
-	/** */
-	ArtificialIntelligence ai;
-	
 	/**
+	 * Constructeur.
+	 * 
 	 * @param goal
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
+	 *            noeud qu'on prend comme reference en comparant les noeuds
 	 */
+	ArtificialIntelligence ai;
 	public NoeudAstar(Noeud goal, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -32,9 +23,9 @@ public class NoeudAstar implements Comparator<Noeud> {
 	}
 
 	/**
-	 * Retourne une valeur servant √† comparer les noeuds. On fait la somme de
+	 * Retourne une valeur servant ‡ comparer les noeuds. On fait la somme de
 	 * l'heuristique et le cout de chaque noeud. On compare ces valeurs et on
-	 * tourne une valeur n√©gative si le premier a un plus petit valeur, une
+	 * tourne une valeur nÈgative si le premier a un plus petit valeur, une
 	 * valeur positive si le premier a une plus grande valeur
 	 * 
 	 * @param noeud1
@@ -47,7 +38,7 @@ public class NoeudAstar implements Comparator<Noeud> {
 	public int compare(Noeud noeud1, Noeud noeud2) {
 		int resultat;
 		// somme de l'heuristique et du cout pour chaque noeud
-		// on va utiliser pour l'algorithme de A_√©toile
+		// on va utiliser pour l'algorithme de A_Ètoile
 
 		int n_1, n_2;
 		try {

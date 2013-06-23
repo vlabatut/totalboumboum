@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.options.game.quickstart;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -49,10 +49,8 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -84,7 +82,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				mainPanel.setLayout(layout);
 			}
 			
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			roundHeight = (int)(dataHeight*SPLIT_RATIO); 
 			playersHeight = dataHeight - roundHeight - margin;
 			mainPanel.setOpaque(false);
@@ -208,9 +206,9 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 			int playersNumber = playersPanel.getPlayers().size();
 			Color bg;
 			if(allowedPlayers.contains(playersNumber))
-				bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			else
-				bg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
+				bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 			roundPanel.setLabelBackground(0,1,bg);
 		}
 		fireDataPanelSelectionChange(null);
@@ -219,7 +217,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	private TableSubPanel makeRoundPanel(int width, int height)
 	{	int cols = 3;
 		int lines = 1;
-		int margin = GuiSizeTools.subPanelMargin;
+		int margin = GuiTools.subPanelMargin;
 		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,lines,cols,false);
 //		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();
@@ -235,7 +233,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				result.setColSubPrefWidth(col,nameWidth);
 				result.setColSubMaxWidth(col,nameWidth);
 				// color
-				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// next
 				col++;
@@ -246,7 +244,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				result.setColSubPrefWidth(col,allowedPlayersWidth);
 				result.setColSubMaxWidth(col,allowedPlayersWidth);
 				// color
-				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// next
 				col++;
@@ -260,7 +258,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE;
 				result.setLabelKey(line,col,key,true);
 				// color
-				Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// listener
 				MyLabel lbl = result.getLabel(line,col);

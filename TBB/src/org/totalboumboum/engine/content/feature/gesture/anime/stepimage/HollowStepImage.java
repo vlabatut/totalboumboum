@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.gesture.anime.stepimage;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -42,8 +42,8 @@ public class HollowStepImage extends AbstractStepImage implements Serializable
 	{	super(xShift,yShift);
 		this.fileName = imageFileName;
 		this.colorRulesMap = colorRulesMap;
-//		if(colorRulesMap==null)
-//			System.out.println();
+		if(colorRulesMap==null)
+			System.out.println();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ public class HollowStepImage extends AbstractStepImage implements Serializable
 	{	
 //System.out.println(fileName);		
 		ColorRule colorRule = colorRulesMap.getColorRule(color);
-		BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(fileName,colorRule,zoom); 
+		BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(fileName,colorRule,zoom);
 		StepImage result = new StepImage(image,xShift*zoom,yShift*zoom);
 		
 		return result;

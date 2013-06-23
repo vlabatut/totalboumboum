@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.subpanel.container;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,11 +37,8 @@ import javax.swing.SwingConstants;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.ContentPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
@@ -56,7 +53,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 	{	super(width,height);
 	
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -69,8 +66,8 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 			title.setToolTipText(tooltip);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);						
-			title.setForeground(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
-			title.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+			title.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
+			title.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 			title.setOpaque(true);
 		}
 		// data
@@ -134,15 +131,15 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 		super.setDim(width,height);
 		
 		// content
-		titleWidth = width - 2*GuiSizeTools.subPanelMargin;
-		titleHeight = GuiSizeTools.subPanelTitleHeight;
-		titleFontSize = GuiFontTools.getFontSize(titleHeight*GuiFontTools.FONT_RATIO);
+		titleWidth = width - 2*GuiTools.subPanelMargin;
+		titleHeight = GuiTools.subPanelTitleHeight;
+		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)titleFontSize);
 		title.setFont(font);
 		Dimension dim;
 		switch(mode)
 		{	case TITLE:
-				dataHeight = height - 3*GuiSizeTools.subPanelMargin - titleHeight;
+				dataHeight = height - 3*GuiTools.subPanelMargin - titleHeight;
 				dataWidth = titleWidth;
 				dim = new Dimension(titleWidth,titleHeight);
 				title.setMinimumSize(dim);
@@ -150,8 +147,8 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 				title.setMaximumSize(dim);
 				break;
 			case BORDER:
-				dataHeight = height - 2*GuiSizeTools.subPanelMargin;
-				dataWidth = width - 2*GuiSizeTools.subPanelMargin;
+				dataHeight = height - 2*GuiTools.subPanelMargin;
+				dataWidth = width - 2*GuiTools.subPanelMargin;
 				break;
 			case NOTHING:
 				dataHeight = height;
@@ -174,7 +171,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
-		{	BufferedImage icon = GuiImageTools.getIcon(key);
+		{	BufferedImage icon = GuiTools.getIcon(key);
 			setTitleIcon(icon,tooltip);				
 		}
 		// if not : use text

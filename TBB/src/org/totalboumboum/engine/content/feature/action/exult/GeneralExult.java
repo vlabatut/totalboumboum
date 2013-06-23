@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.exult;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -47,8 +47,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralExult extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

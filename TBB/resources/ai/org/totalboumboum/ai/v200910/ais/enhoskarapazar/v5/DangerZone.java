@@ -14,45 +14,20 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Sadettin Enhoş
- * @author Ali Can Karapazar
- */
-@SuppressWarnings("deprecation")
 public class DangerZone {
 
-	/** */
 	private AiZone zone;
-	/** */
 	private Collection<AiHero> rivals;
-	/** */
 	private AiHero caractere;
-	/** */
 	private Collection<AiBomb> bombes;
-	/** */
 	private Collection<AiBlock> blocs;
-	/** */
 	private Collection<AiItem> objets;
-	/** */
 	private Collection<AiFire> feus;
-	/** */
 	private int xMax;
-	/** */
 	private int yMax;
-	/** */
 	private ZoneEnum[][] zoneArray;
-	/** */
 	private EnhosKarapazar source;
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param source
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public DangerZone(AiZone zone, EnhosKarapazar source)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -69,11 +44,6 @@ public class DangerZone {
 		init();
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		zoneArray = new ZoneEnum[yMax][xMax];
@@ -236,11 +206,6 @@ public class DangerZone {
 		
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void PrintDangerZone() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		for (int i = 0; i < zone.getWidth(); i++) {
@@ -253,17 +218,6 @@ public class DangerZone {
 		}
 	}
 
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public ZoneEnum getEnum(int line, int col) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		return zoneArray[line][col];
@@ -271,18 +225,7 @@ public class DangerZone {
 
 	/**
 	 * renvoi la direction ce qu'on va prendre si on pose une bombe a ce Tile
-	 * il fait ce control pour les Tile qui sont croisés
-	 * @param range 
-	 * 		Description manquante !
-	 * @param line 
-	 * 		Description manquante !
-	 * @param col 
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 * */
+	 * il fait ce control pour les Tile qui sont crois�s*/
 	public Direction crossControl(int range, int line, int col)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -442,18 +385,7 @@ public class DangerZone {
 	 * il fait ce control pour les Tile qui sont en meme direction avec 
 	 * la direction de flamme de bomb.
 	 * sinon il fait appel a la method cross control
-	 * Donc on fait tous les controles en ce method
-	 * @param range 
-	 * 		Description manquante !
-	 * @param line 
-	 * 		Description manquante !
-	 * @param col 
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 * */
+	 * Donc on fait tous les controles en ce method*/
 	public Direction rangeControl(int range, int line, int col)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
@@ -512,17 +444,6 @@ public class DangerZone {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean canGo(int line, int col) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		boolean ret = false;

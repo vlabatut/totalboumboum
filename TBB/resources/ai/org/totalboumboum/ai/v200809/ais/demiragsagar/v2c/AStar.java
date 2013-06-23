@@ -14,35 +14,18 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Doğus Burcu Demirağ
- * @author Zeynep Şagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
-@SuppressWarnings("deprecation")
 public class AStar {
 
-	/** */
 	AiTile firstTile;
-	/** */
 	AiTile lastTile;
-	/** */
 	Vector<LienRecherche> links;
-	/** */
 	boolean debug;
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param start
-	 * 		Description manquante !
-	 * @param end
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AStar(AiTile start, AiTile end, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -51,17 +34,6 @@ public class AStar {
 		this.debug = false;
 	}
 
-	/**
-	 * 
-	 * @param start
-	 * 		Description manquante !
-	 * @param end
-	 * 		Description manquante !
-	 * @param debug
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AStar(AiTile start, AiTile end, boolean debug) throws StopRequestException {
 		ai.checkInterruption();
 		this.firstTile = start;
@@ -69,40 +41,17 @@ public class AStar {
 		this.debug = debug;
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void init() throws StopRequestException {
 		ai.checkInterruption();
 		links = new Vector<LienRecherche>();
 	}
 
-	/**
-	 * 
-	 * @param parent
-	 * 		Description manquante !
-	 * @param fils
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void formeLien(Node parent, Node fils) throws StopRequestException {
 		ai.checkInterruption();
 		LienRecherche link = new LienRecherche(parent, fils,ai);
 		links.add(link);
 	}
 
-	/**
-	 * 
-	 * @param courant
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Iterator<Node> developNode(AiTile courant) throws StopRequestException {
 		ai.checkInterruption();
 		Vector<Node> result = new Vector<Node>();
@@ -144,12 +93,6 @@ public class AStar {
 			}
 		return result.iterator();
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void formeArbre() throws StopRequestException {
 		ai.checkInterruption();
 			init();
@@ -162,13 +105,13 @@ public class AStar {
 			PriorityQueue<Node> fifo = new PriorityQueue<Node>(1, monComp);
 			first=new Node(firstTile);
 			fifo.offer(first);
-//			int iteration = 1;
+			int iteration = 1;
 			while (!fifo.isEmpty() && solution == null) {
 				ai.checkInterruption();
 				Node node = fifo.poll();
 				
 				if (debug) System.out.println("Node qui sort du fifo: " + "("	+ node.tile.getCol() + "," + node.tile.getLine() + ")");
-//				iteration++;
+				iteration++;
 				if (node.memeCoordonnees(new Node(lastTile))) {
 					solution = node;
 					if (debug) System.out.println("Solution trouve : (" + solution.tile.getCol() + "," + solution.tile.getLine() + ")");
@@ -200,12 +143,8 @@ public class AStar {
 			}
 
 	}
-	/**
-	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException *
-	 * 		Description manquante !
+	/*
+	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A*
 	 */
 	public LinkedList<Node> getPath() throws StopRequestException { 
 		ai.checkInterruption();
@@ -226,14 +165,8 @@ public class AStar {
 		return path;
 		
 	}
-	/**
+	/*
 	 * On trouve le parent d'un noeud 
-	 * @param child 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public LienRecherche getParentLink(Node child) throws StopRequestException {
 		ai.checkInterruption();
@@ -250,14 +183,8 @@ public class AStar {
 		}
 		return result;
 	}
-	/**
+	/*
 	 * On trouve les fils d'un noeud
-	 * @param node 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<Node> getChildrenLinks(Node node) throws StopRequestException {
 		ai.checkInterruption();
@@ -272,14 +199,8 @@ public class AStar {
 		}
 		return result;
 	}
-	/** Il trouve les cases qui n'ont pas de fils
-	 *ou on peut poser des bombes
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//Il trouve les cases qui n'ont pas de fils
+	//ou on peut poser des bombes
 	public List<Node> getFils() throws StopRequestException
 	{	ai.checkInterruption();
 	List<Node> nodes=new ArrayList<Node>();

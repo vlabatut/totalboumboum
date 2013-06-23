@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.ability;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -61,9 +61,6 @@ public class StateAbilityName implements Serializable
 	/** cross (some?) walls */
 	public static final String SPRITE_TRAVERSE_WALL = "SPRITE_TRAVERSE_WALL";
 	
-	/** cross (some?) players (actually more about block crushing heroes, sudden-death-style) */
-	public static final String SPRITE_TRAVERSE_HERO = "SPRITE_TRAVERSE_HERO";
-	
 	/** the sprite is twinkling, the strenght corresponds to the twinkling color in RGB integer (0=no twinkling, <0=transparent twinkling) */
 	public static final String SPRITE_TWINKLE = "SPRITE_TWINKLE";	
 	/** time the sprite is colored (or hidden) when twinkling */
@@ -114,9 +111,9 @@ public class StateAbilityName implements Serializable
 	// HEROES ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** bomb constipation: the hero can't drop any bombs */
-//	public static final String HERO_BOMB_CONSTIPATION = "HERO_BOMB_CONSTIPATION";
+	public static final String HERO_BOMB_CONSTIPATION = "HERO_BOMB_CONSTIPATION";
 	
-	/** bomb diarrhea: the hero can't help dropping bombs */
+	/** bomb constipation: the hero can't help dropping bombs */
 	public static final String HERO_BOMB_DIARRHEA = "HERO_BOMB_DIARRHEA";
 	
 	/** minimal delay between two dropped bombs */
@@ -180,10 +177,10 @@ public class StateAbilityName implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ITEM ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indicates the item cancels all previous items from the specified group (using strength) */
+	/** indicates the item cancels all previous items from the specified group (using strength) */
 	public static final String ITEM_CANCEL_GROUP = "ITEM_CANCEL_GROUP";
 	
-	/** Type of contagion: 0=none 1=share as is 2=share with reinit 3=transmission as is 4=transmission with reinit*/
+	/** type of contagion: 0=none 1=share as is 2=share with reinit 3=transmission as is 4=transmission with reinit*/
 	public static final String ITEM_CONTAGION_MODE = "ITEM_CONTAGION_MODE";
 	public static final int ITEM_CONTAGION_NONE = 0;
 	public static final int ITEM_CONTAGION_SHARE_ONLY = 1;
@@ -191,22 +188,22 @@ public class StateAbilityName implements Serializable
 	public static final int ITEM_CONTAGION_GIVE_ONLY = 3;
 	public static final int ITEM_CONTAGION_GIVE_REINIT = 4;
 
-	/** Used for the crown mode (just counting points) */
+	/** used for the crown mode (just counting points) */
 	public static final String ITEM_CROWN = "ITEM_CROWN";
 
-	/** Indicates if the item is a part of a group (whose number corresponds to the strength) */
+	/** indicates if the item is a part of a group (whose number corresponds to the strength) */
 	public static final String ITEM_GROUP = "ITEM_GROUP";
 	
-	/** Used for the crown mode (just counting points) */
+	/** used for the crown mode (just counting points) */
 	public static final String ITEM_INDESTRUCTIBLE = "ITEM_INDESTRUCTIBLE";
 
-	/** Indicates what to do if the holder dies: 0=disapear 1=release as is 2=release with reinit */
+	/** indicates what to do if the holder dies: 0=disapear 1=release as is 2=release with reinit */
 	public static final String ITEM_ON_DEATH_ACTION = "ITEM_ON_DEATH_ACTION";
 	public static final int ITEM_ON_DEATH_DISAPEAR = 0;
 	public static final int ITEM_ON_DEATH_RELEASE_ONLY = 1;
 	public static final int ITEM_ON_DEATH_RELEASE_REINIT = 2;
 	
-	/** Indicates what to do if the item is canceled: 0=disapear 1=release as is 2=release with reinit */
+	/** indicates what to do if the item is canceled: 0=disapear 1=release as is 2=release with reinit */
 	public static final String ITEM_ON_CANCEL_ACTION = "ITEM_ON_CANCEL_ACTION";
 	public static final int ITEM_ON_CANCEL_DISAPEAR = 0;
 	public static final int ITEM_ON_CANCEL_RELEASE_ONLY = 1;

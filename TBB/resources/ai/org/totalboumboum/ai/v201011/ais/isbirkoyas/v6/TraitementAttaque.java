@@ -9,27 +9,12 @@ import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
-/**
- * @author Göksu İsbir
- * @author Ela Koyaş
- */
-@SuppressWarnings("deprecation")
 public class TraitementAttaque {
 
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
-	/** */
 	double BOUGER = 100;
-	/** */
 	double DISTANCE = 1000;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public TraitementAttaque(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -37,7 +22,7 @@ public class TraitementAttaque {
 	}
 
 	/**
-	 * Cette méthode initialise la matrice attaque avec les '0'. Elle prend 2
+	 * Cette m�thode initialise la matrice attaque avec les '0'. Elle prend 2
 	 * arguments, la zone du jeu et une matrice de type double.
 	 * 
 	 * @param matrice
@@ -45,7 +30,6 @@ public class TraitementAttaque {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void initialiseMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -61,7 +45,7 @@ public class TraitementAttaque {
 	}
 
 	/**
-	 * Cette méthode remplie la matrice attaque. .Elle donne des valeurs aux
+	 * Cette m�thode remplie la matrice attaque. .Elle donne des valeurs aux
 	 * cases des bombes, des adversaires en fonction du temps et de la vitesse.
 	 * Elle prend 2 arguments, la zone du jeu et une matrice de type double
 	 * 
@@ -70,7 +54,6 @@ public class TraitementAttaque {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void attaqueMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -150,7 +133,7 @@ public class TraitementAttaque {
 	}
 
 	/**
-	 * Cette méthode permet l'affichage de la matrice attaque en utilisant l'API
+	 * Cette m�thode permet l'affichage de la matrice attaque en utilisant l'API
 	 * fournie. Elle prend 2 arguments, la zone du jeu et une matrice de type
 	 * double.
 	 * 
@@ -159,7 +142,6 @@ public class TraitementAttaque {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void affiche(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {

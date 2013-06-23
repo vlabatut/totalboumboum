@@ -16,19 +16,17 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.State;
  * Representation d'un arbre de recherche.
  */
 public class SearchTree
-{	
-	/** */
-	public static final long serialVersionUID = 1L;
-	/** probleme traite */
+{	private static final long serialVersionUID = 1L;
+	// probleme traite
 	private Problem problem;
-	/** ensemble des noeuds composant l'arbre */
+	// ensemble des noeuds composant l'arbre
 	private Vector<SearchNode> nodes;
-	/** ensemble des liens composant l'arbre */
+	// ensemble des liens composant l'arbre
 	private Vector<SearchLink> links;
-	/** dernier noeud traite lors de la recherche */
+	// dernier noeud traite lors de la recherche
 	@SuppressWarnings("unused")
 	private SearchNode lastNode;
-	/** iteration courante lors de la recherche */
+	// iteration courante lors de la recherche
 	private int iteration;
 	
 	/**
@@ -80,7 +78,6 @@ public class SearchTree
 	 * @param node	le noeud  a traiter
 	 * @return	un lien contenant le noeud en position target
 	 * @throws AbsentNodeException
-	 * 		Description manquante !
 	 */
 	public SearchLink getParentLink(SearchNode node) throws AbsentNodeException
 	{	SearchLink result=null;
@@ -102,7 +99,6 @@ public class SearchTree
 	 * @param node	le noeud a traiter
 	 * @return	tous les liens oe ce noeud est en position origin
 	 * @throws AbsentNodeException
-	 * 		Description manquante !
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(SearchNode node) throws AbsentNodeException
 	{	Vector<SearchLink> result = new Vector<SearchLink>();
@@ -124,7 +120,6 @@ public class SearchTree
 	 * @param node	le noeud e traiter
 	 * @return	un vecteur de liens representant le chemin de puis la racine
 	 * @throws AbsentNodeException
-	 * 		Description manquante !
 	 */
 	public Vector<SearchLink> getPath(SearchNode node) throws AbsentNodeException
 	{	Vector<SearchLink> result;
@@ -145,9 +140,7 @@ public class SearchTree
 	 * Si le noeud target appartient deje au graphe, une ExistingNodeException est levee.
 	 * @param	link	le lien a rajouter dans l'arbre
 	 * @throws AbsentNodeException
-	 * 		Description manquante !
 	 * @throws ExistingNodeException
-	 * 		Description manquante !
 	 */
 	public void addLink(SearchLink link) throws AbsentNodeException, ExistingNodeException
 	{	addLinkSynch(link);
@@ -157,9 +150,7 @@ public class SearchTree
 	 * en mode synchronise.  
 	 * @param link	le lien a ajouter
 	 * @throws AbsentNodeException
-	 * 		Description manquante !
 	 * @throws ExistingNodeException
-	 * 		Description manquante !
 	 */
 	private synchronized void addLinkSynch(SearchLink link) throws AbsentNodeException, ExistingNodeException
 	{	SearchNode target = link.getTarget();
@@ -177,13 +168,10 @@ public class SearchTree
 	 * 3) cree les liens adequats, et 4) ajoute ces liens e l'arbre.
 	 * La liste des liens crees est renvoyee par la fonction. Une 
 	 * AbsentNodeException est levee si le noeud passe en parametre n'appartient pas a l'arbre.
-	 * @param targetState 
-	 * 		Description manquante !
 	 * 
 	 * @param node	le noeud a developpe
 	 * @return	un iterateur sur les liens vers les fils du noeud. 
 	 * @throws AbsentNodeException 
-	 * 		Description manquante !
 	 */
 	public Iterator<SearchLink> developNode(State targetState,SearchNode node) throws AbsentNodeException
 	{	if(!containsNode(node))
@@ -221,7 +209,6 @@ public class SearchTree
 	 * Ce chemin prend la forme d'un vecteur de noeuds de recherche.
 	 * @return	le chemin du dernier noeud visite
 	 * @throws AbsentNodeException
-	 * 		Description manquante !
 	 */
 	public synchronized Vector<SearchNode> getIterationPath() throws AbsentNodeException{	Vector<SearchNode> result = new Vector<SearchNode>();
 		SearchNode node = null;

@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.match.results;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,25 +25,19 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
- * This class handles the display of the
- * results of a match, during a game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class MatchResults extends EntitledDataPanel
-{	/** Class id */
+{	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
+	private HomogenResultsSubPanel resultsPanel;
+	
 	public MatchResults(SplitMenuPanel container)
 	{	super(container);
 
@@ -61,43 +55,13 @@ public class MatchResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Match displayed by this panel */
 	private Match match;
-	/** Number of the match currently displayed */
-	private int number;
 
-	/**
-	 * Changes the match displayed
-	 * in this panel.
-	 * 
-	 * @param match
-	 * 		New match.
-	 * @param number
-	 * 		Number of the round in the current match.
-	 */
-	public void setMatch(Match match, Integer number)
+	public void setMatch(Match match)
 	{	this.match = match;
 		resultsPanel.setStatisticHolder(match);
-		
-		// title
-		this.number = number;
-		String key = GuiKeys.GAME_MATCH_RESULTS_TITLE;
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
-		if(number!=null)
-		{	text = text + " " + number;
-			tooltip = tooltip + " " + number;
-		}
-		setTitleText(text,tooltip);
 	}
 	
-	/**
-	 * Returns the match currently
-	 * displayed in this panel.
-	 * 
-	 * @return
-	 * 		Current match.
-	 */
 	public Match getMatch()
 	{	return match;	
 	}
@@ -105,11 +69,8 @@ public class MatchResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** Panel displaying the results */
-	private HomogenResultsSubPanel resultsPanel;
-
 	@Override
 	public void refresh()
-	{	setMatch(match,number);
+	{	setMatch(match);
 	}
 }

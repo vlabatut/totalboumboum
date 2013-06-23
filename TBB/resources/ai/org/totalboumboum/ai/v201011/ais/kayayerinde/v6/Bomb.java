@@ -4,25 +4,14 @@ import java.util.ArrayList;
 
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings({ "unused", "deprecation" })
+
+
+@SuppressWarnings("unused")
 public class Bomb {
 	
-	/** */
 	private KayaYerinde onder;
-	/** */
 	private Astar astar;
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Bomb(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();

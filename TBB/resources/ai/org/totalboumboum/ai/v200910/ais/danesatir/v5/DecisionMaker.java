@@ -13,35 +13,22 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class DecisionMaker {
 
-	/** */
 	private DaneSatir ai;
-	/** */
 	private State state;
-	/** */
 	private TimeMatrice time;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public DecisionMaker(DaneSatir ai) throws StopRequestException {
 		this.ai=ai;
 		this.state=State.START;
 	}
-	
 	/**
 	 * Check conditions and set state.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public void makeDecision() throws StopRequestException {
 		ai.checkInterruption();
@@ -63,46 +50,24 @@ public class DecisionMaker {
 		}
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 */
 	private boolean isEnemyExist() {
 		if(this.ai.getPercepts().getHeroes().size()>1)
 			return true;
 		return false;
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 */
 	private boolean isHiddenItemExist() {
 		if(this.ai.getPercepts().getHiddenItemsCount()>0)
 			return true;
 		return false;
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 */
 	private boolean isItemExist() {
 		if(this.ai.getPercepts().getItems().size()>0)
 			return true;
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isWayExistToEnemy() throws StopRequestException {
 		ai.checkInterruption();
 		PathFinder temp = new PathFinder(ai, this.time);
@@ -114,23 +79,12 @@ public class DecisionMaker {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 */
 	private boolean isDanger() {
 		double dur = this.time.getTime();
 		if(dur>0)
 			return true;
 		return false;
 	}
-	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 */
 	private boolean isHaveBomb() {
 		AiHero hero = this.ai.getOwnHero();
 		int count=hero.getBombNumber()-hero.getBombCount();
@@ -138,67 +92,30 @@ public class DecisionMaker {
 			return true;
 		return false;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public State getState() {
 		return state;
 	}
 
-	/**
-	 * 
-	 * @param state
-	 * 		Description manquante !
-	 */
 	public void setState(State state) {
 		this.state = state;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public TimeMatrice getTime() throws StopRequestException {
 		setTime(new TimeMatrice(ai));
 		return time;
 	}
 
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 */
 	private void setTime(TimeMatrice time) {
 		this.time = time;
 	}
-	
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean canWeEscape(AiBomb bomb) throws StopRequestException {
 		return canWeEscape(bomb.getTile());
 	}
-	
 	/**
 	 * check we can escape, if we put bomb
 	 * @param bomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
+	 * @return 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public boolean canWeEscape(AiTile bomb) throws StopRequestException {
 		ai.checkInterruption();

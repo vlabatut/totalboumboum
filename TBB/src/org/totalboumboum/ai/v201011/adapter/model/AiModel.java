@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -40,44 +40,47 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Cette classe est chargÃ©e de simuler l'Ã©volution d'une zone.
- * Pour cela, une modÃ¨le doit d'abord Ãªtre initialisÃ© avec une zone de dÃ©part,
- * obtenue simplement Ã  partir des percepts de l'agent.<br/>
- * Pour prÃ¨server la cohÃ©rence de la zone, l'utilisateur ne peut 
- * pas la modifier directement, mais seulement Ã  travers les 
- * mÃ©thodes proposÃ©es dans cette classe. Il peut :<ul>
- * 		<li> rÃ©aliser un ou plusieurs pas de simulation et obtenir la zone rÃ©sultante.</li>
- * 		<li> demander Ã  un des joueurs de poser une bombe</li>
- * 		<li> modifier la direction de dÃ©placement d'un joueur, ou arrÃªter son dÃ©placement</li>
- * 		<li> demander Ã  une bombe d'exploser</li></ul>
- * Au cours de la simulation, une nouvelle zone est calculÃ©e et stockÃ©e
- * en interne : l'utilisateur peut alors y accÃ©der et l'utiliser. Si
- * de nouveaux pas de simulation sont effectuÃ©s, cette zone interne est 
- * remplacÃ©e par le rÃ©sultats de ces simulations.<br/>
- * L'utilisateur peut Ã©galement rÃ©cupÃ©rer le temps Ã©coulÃ© entre deux simulations.<br/>
- * Il faut souligner que les pas de simulation sont dÃ©terminÃ©s de faÃ§on Ã©vÃ¨nementielle.
- * En d'autres termes, un pas se termine quand un Ã©vÃ¨nement se produit. Les 
- * Ã©vÃ¨nements considÃ©rÃ©s par cette classe sont :<ul>
- * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosÃ©, un item qui apparait)
- * 		<li> un changement d'Ã©tat (ex : un mur qui commence Ã  brÃ»ler)
- * 		<li> un changement de case (ex : un joueur se dÃ©plaÃ§ant d'une case Ã  une autre)
- * 		<li> la fin d'un dÃ©placement (ex : un joueur qui se retrouve bloquÃ© par un mur)</ul>
- * DÃ¨s qu'un de ces Ã©vÃ¨nements se produit, le pas de simulation se termine.
- * Le modÃ¨le donne accÃ¨s Ã  la liste des sprites qui ont Ã©tÃ© impliquÃ©s dans un des Ã©vÃ¨nements
- * causant la fin du pas de simulation.
+ * Cette classe est chargée de simuler l'évolution d'une zone.
+ * Pour cela, une modèle doit d'abord être initialisé avec une zone de départ,
+ * obtenue simplement à partir des percepts de l'agent.<br/>
+ * Pour préserver la cohérence de la zone, l'utilisateur ne peut 
+ * pas la modifier directement, mais seulement à travers les 
+ * méthodes proposées dans cette classe. Il peut :<ul>
+ * 		<li> réaliser un ou plusieurs pas de simulation et obtenir la zone résultante.</li>
+ * 		<li> demander à un des joueurs de poser une bombe</li>
+ * 		<li> modifier la direction de déplacement d'un joueur, ou arrêter son déplacement</li>
+ * 		<li> demander à une bombe d'exploser</li></ul>
+ * Au cours de la simulation, une nouvelle zone est calculée et stockée
+ * en interne : l'utilisateur peut alors y accéder et l'utiliser. Si
+ * de nouveaux pas de simulation sont effectués, cette zone interne est 
+ * remplacée par le résultats de ces simulations.<br/>
+ * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.<br/>
+ * Il faut souligner que les pas de simulation sont déterminés de façon évènementielle.
+ * En d'autres termes, un pas se termine quand un évènement se produit. Les 
+ * évènements considérés par cette classe sont :<ul>
+ * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)
+ * 		<li> un changement d'état (ex : un mur qui commence à brûler)
+ * 		<li> un changement de case (ex : un joueur se déplaçant d'une case à une autre)
+ * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</ul>
+ * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
+ * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
+ * causant la fin du pas de simulation.<br/>
+ * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
+ * la classe AiModelTest. Notez toute fois que cette classe de test crée la zone
+ * en partant de rien, alors que les agents disposent de leurs percepts.
+ * Pour cette raison, elle utilise pour initialiser la zone des méthodes 
+ * auxquelles les agents n'ont pas accès.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class AiModel
 {	
 	/**
-	 * initialise le modÃ¨le avec la zone passÃ©e en paramÃ¨tre.
+	 * initialise le modèle avec la zone passée en paramètre.
 	 * 
 	 * @param currentZone
-	 * 		la zone courante, qui servira de point de dÃ©part Ã  la simulation
+	 * 		la zone courante, qui servira de point de départ à la simulation
 	 */
 	public AiModel(AiZone currentZone)
 	{	// init the model with a copy of the current zone
@@ -90,14 +93,14 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// PARAMETERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** fait apparaÃ®tre alÃ©atoirement des items lors de la destruction des murs */
+	/** fait apparaître aléatoirement des items lors de la destruction des murs */
 	private boolean simulateItemsAppearing = false;
 
 	/**
-	 * dÃ©termine si l'apparition d'items sera simulÃ©e lors de la destruction de murs.
-	 * Ã  noter que la probabilitÃ© d'apparition dÃ©pends du nombre de murs restants
-	 * et d'items cachÃ©s restant Ã  l'instant de l'explosion.
-	 * de mÃªme, le type d'item dÃ©pend de la distribution des items restants
+	 * détermine si l'apparition d'items sera simulée lors de la destruction de murs.
+	 * à noter que la probabilité d'apparition dépends du nombre de murs restants
+	 * et d'items cachés restant à l'instant de l'explosion.
+	 * de même, le type d'item dépend de la distribution des items restants
 	 * 
 	 * @param simulateItemsAppearing
 	 * 		si vrai, les items apparaitront lors de la simulation
@@ -109,26 +112,26 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// ZONES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** zone issue de la simulation prÃ©cÃ©dente */
+	/** zone issue de la simulation précédente */
 	private AiSimZone previous;
-	/** zone issue de la derniÃ¨re simulation */
+	/** zone issue de la dernière simulation */
 	private AiSimZone current;
 	
 	/**
-	 * renvoie la zone issue de la simulation prÃ©cÃ©dente
+	 * renvoie la zone issue de la simulation précédente
 	 * 
 	 * @return	
-	 * 		l'objet AiZone issu de la simulation prÃ©cÃ©dente 
+	 * 		l'objet AiZone issu de la simulation précédente 
 	 */
 	public AiZone getPreviousZone()
 	{	return previous;
 	}
 
 	/**
-	 * renvoie la zone issue de la derniÃ¨re simulation
+	 * renvoie la zone issue de la dernière simulation
 	 * 
 	 * @return	
-	 * 		l'objet AiZone issu de la derniÃ¨re simulation
+	 * 		l'objet AiZone issu de la dernière simulation
 	 */
 	public AiZone getCurrentZone()
 	{	return current;
@@ -137,12 +140,12 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des sprites dont le changement d'Ã©tat marque la fin de la derniÃ¨re simulation */
+	/** liste des sprites dont le changement d'état marque la fin de la dernière simulation */
 	private List<AiSimSprite> limitSprites;
 	
 	/**
-	 * renvoie la liste des sprites dont le changement d'Ã©tat
-	 * marque la fin de la derniÃ¨re simulation
+	 * renvoie la liste des sprites dont le changement d'état
+	 * marque la fin de la dernière simulation
 	 * 
 	 * @return	
 	 * 		une liste de sprites
@@ -155,14 +158,14 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// DURATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** durÃ©e Ã©coulÃ©e entre les zones previous et current */ 
+	/** durée écoulée entre les zones previous et current */ 
 	private long duration;
 	
 	/**
-	 * renvoie la durÃ©e Ã©coulÃ©e entre les zones previous et current
+	 * renvoie la durée écoulée entre les zones previous et current
 	 * 
 	 * @return	
-	 * 		un entier long reprÃ©sentant une durÃ©e
+	 * 		un entier long représentant une durée
 	 */
 	public long getDuration()
 	{	return duration;
@@ -173,17 +176,17 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * effectue des simulations, en gardant pour chaque sprite l'action courante,
-	 * et ce jusqu'Ã  ce que le personnage spÃ©cifiÃ© ait changÃ© d'Ã©tat.
-	 * Cette mÃ©thode est particuliÃ¨rement utile quand on veut savoir quel sera
-	 * l'Ã©tat estimÃ© de la zone quand le personnage que l'on controle passera
+	 * et ce jusqu'à ce que le personnage spécifié ait changé d'état.
+	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
+	 * l'état estimé de la zone quand le personnage que l'on controle passera
 	 * dans la case suivante.
-	 * <b>Attention:</b> le changement d'Ã©tat peut aussi Ãªtre dÃ» au fait que le 
-	 * personnage a commencÃ© Ã  brÃ»ler.
+	 * <b>Attention:</b> le changement d'état peut aussi être dû au fait que le 
+	 * personnage a commencé à brûler.
 	 * 
 	 * @param hero
 	 * 		le personnage sur lequel porte la condition
 	 * @return	
-	 * 		vrai si le changement d'Ã©tat est dÃ» Ã  un dÃ©placement (et pas Ã  un accident)
+	 * 		vrai si le changement d'état est dû à un déplacement (et pas à un accident)
 	 */
 	public boolean simulate(AiHero hero)
 	{	// init
@@ -223,11 +226,11 @@ public class AiModel
 	}
 	
 	/**
-	 * effectue une simulation pour la durÃ©e spÃ©cifiÃ©e.
+	 * effectue une simulation pour la durée spécifiée.
 	 * la zone obtenue est accessible par getCurrentZone.
 	 * 
 	 * @param requestedDuration
-	 * 		la durÃ©e de la simulation Ã  effectuer
+	 * 		la durée de la simulation à effectuer
 	 */
 	public void simulate(long requestedDuration)
 	{	// init
@@ -266,22 +269,25 @@ public class AiModel
 	}
 	
 	/**
-	 * calcule l'Ã©tat suivant de la zone si les Ã©tats spÃ©cifiÃ©s en paramÃ¨tres
-	 * sont appliquÃ©s Ã  la zone courante. en l'absence d'Ã©tat spÃ©cifiÃ©, le sprite
-	 * continue Ã  faire ce qu'il faisait dÃ©jÃ  (brÃ»ler, se dÃ©placer, etc.).
-	 * par consÃ©quent, la map contenant les Ã©tats spÃ©cifiÃ©s peut Ãªtre vide. 
-	 * La mÃ©thode renvoie l'Ã©tat obtenu Ã  la fin du prochain Ã©vÃ¨nement 
-	 * (i.e. celui qui se termine le plus vite). Les Ã©vÃ¨nement considÃ©rÃ©s sont :
-	 * 		- la disparition d'un sprite (ex : une bombe qui a explosÃ©)
-	 * 		- l'apparition d'un sprite (ex : un item qui apparait Ã  la suite de l'explosion d'un mur)
-	 * 		- un changement d'Ã©tat (ex : un mur qui commence Ã  brÃ»ler)
-	 * 		- un changement de case (ex : un joueur passant d'une case Ã  une autre)
-	 * 		- la fin d'un dÃ©placement (ex : un joueur qui se retrouve bloquÃ© par un mur)
-	 * Les modifications sont appliquÃ©es aux zones internes. l'utilisateur peut rÃ©cupÃ©rer
-	 * la nouvelle zone mise Ã  jour avec getCurrentZone. Il peut Ã©galement rÃ©cupÃ©rer la liste
-	 * de sprites qui ont provoquÃ© la fin de la mise Ã  jour Ã  la suite d'une action, avec getLimitSprites.
-	 * Il peut aussi rÃ©cupÃ©rer la durÃ©e qui s'est Ã©coulÃ©e (en temps simulÃ©) depuis la derniÃ¨re simulation, 
+	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
+	 * sont appliqués à la zone courante. en l'absence d'état spécifié, le sprite
+	 * continue à faire ce qu'il faisait déjà (brûler, se déplacer, etc.).
+	 * par conséquent, la map contenant les états spécifiés peut être vide. 
+	 * La méthode renvoie l'état obtenu à la fin du prochain évènement 
+	 * (i.e. celui qui se termine le plus vite). Les évènement considérés sont :
+	 * 		- la disparition d'un sprite (ex : une bombe qui a explosé)
+	 * 		- l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)
+	 * 		- un changement d'état (ex : un mur qui commence à brûler)
+	 * 		- un changement de case (ex : un joueur passant d'une case à une autre)
+	 * 		- la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)
+	 * Les modifications sont appliquées aux zones internes. l'utilisateur peut récupérer
+	 * la nouvelle zone mise à jour avec getCurrentZone. Il peut également récupérer la liste
+	 * de sprites qui ont provoqué la fin de la mise à jour à la suite d'une action, avec getLimitSprites.
+	 * Il peut aussi récupérer la durée qui s'est écoulée (en temps simulé) depuis la dernière simulation, 
 	 * avec getDuration.
+	 * 
+	 * @param specifiedStates	
+	 * 		map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
 	public void simulate()
 	{	// create a copy of the current zone
@@ -313,11 +319,11 @@ public class AiModel
 	}
 	
 	/**
-	 * Calcule le temps minimal avant le prochain changement d'Ã©tat de chaque sprite.
-	 * Ce laps de temps sera ensuite appliquÃ© uniformÃªment Ã  chaque sprite.
+	 * Calcule le temps minimal avant le prochain changement d'état de chaque sprite.
+	 * Ce laps de temps sera ensuite appliqué uniformément à chaque sprite.
 	 * 
 	 * @param sprites
-	 * 		liste des sprites Ã  traiter
+	 * 		liste des sprites à traiter
 	 */
 	private void processDuration(List<AiSimSprite> sprites)
 	{	// init
@@ -355,18 +361,18 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * calcule combien de temps il va falloir au sprite spÃ©cifiÃ© pour sortir
-	 * de son Ã©tat courant. si le sprite brÃ»le, il s'agit de savoir pendant
-	 * combien de temps encore. s'il se dÃ©place, il s'agit de savoir combien de
+	 * calcule combien de temps il va falloir au sprite spécifié pour sortir
+	 * de son état courant. si le sprite brûle, il s'agit de savoir pendant
+	 * combien de temps encore. s'il se déplace, il s'agit de savoir combien de
 	 * temps il va lui falloir pour changer de case. s'il ne fait rien, il n'y a
-	 * pas de limite particuliÃ©re Ã  son activitÃ© et la mÃ©thode renvoie Long.MAX_VALUE.
+	 * pas de limite particulière à son activité et la méthode renvoie Long.MAX_VALUE.
 	 * 
 	 * @param current	
 	 * 		la zone courante
 	 * @param sprite	
-	 * 		le sprite Ã  traiter
+	 * 		le sprite à traiter
 	 * @return	
-	 * 		la durÃ©e pendant laquelle le sprite va rester Ã  cet Ã©tat
+	 * 		la durée pendant laquelle le sprite va rester à cet état
 	 */
 	private long processChangeTime(AiSimZone current, AiSimSprite sprite)
 	{	long result = Long.MAX_VALUE;
@@ -391,7 +397,7 @@ if(sprite instanceof AiSimBomb)
 		{	if(direction==Direction.NONE)
 				result = Long.MAX_VALUE;
 			else
-			{	// simplification here: we suppose the levels are all grids, 
+			{	//NOTE simplification here: we suppose the levels are all grids, 
 				// meaning at least one coordinate is at the center of a tile
 				double speed = sprite.getCurrentSpeed();
 				if(sprite instanceof AiSimHero)
@@ -467,7 +473,7 @@ if(sprite instanceof AiSimBomb)
 	private int spriteId = Integer.MAX_VALUE; 
 
 	/**
-	 * permet de gÃ©nÃ©rer des id pour les sprites crÃ©Ã©s lors des simulation
+	 * permet de générer des id pour les sprites créés lors des simulation
 	 * 
 	 * @return
 	 * 		une nouvelle id de sprite
@@ -479,13 +485,13 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * calcule l'Ã©tat du sprite Ã  la fin de la durÃ©e spÃ©cifiÃ©e,
-	 * Ã  partir de l'Ã©tat courant.
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
 	 * 
-	 * @param sprites	
-	 * 		la liste des Ã©tats Ã  appliquer aux sprites (calculÃ©s automatiquement ou spÃ©cifiÃ©s par l'utilisateur)
+	 * @param statesMap	
+	 * 		la liste des états à appliquer aux sprites (calculés automatiquement ou spécifiés par l'utilisateur)
 	 * @param duration	
-	 * 		durÃ©e du pas de simulation
+	 * 		durée du pas de simulation
 	 */
 	private void updateSprites(List<AiSimSprite> sprites, long duration)
 	{	
@@ -539,16 +545,16 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * dÃ©place le sprite passÃ©e en paramÃ¨tre en fonction de sa direction courante,
-	 * et pour la durÃ©e de simulation spÃ©cifiÃ©e.
+	 * déplace le sprite passée en paramètre en fonction de sa direction courante,
+	 * et pour la durée de simulation spécifiée.
 	 * 
 	 * @param sprite
-	 * 		le sprite Ã  dÃ©placer
+	 * 		le sprite à déplacer
 	 * @param duration
-	 * 		la durÃ©e du pas de simulation
+	 * 		la durée du pas de simulation
 	 */
 	private void moveSprite(AiSimSprite sprite, long duration)
-	{	// same simplification than before: we suppose the levels are all grids, 
+	{	//NOTE same simplification than before: we suppose the levels are all grids, 
 		// meaning at least one coordinate is at the center of a tile
 		// plus the sprite moves in a primary direction (DOWN, LEFT, RIGHT, UP: no composite)
 		
@@ -645,13 +651,13 @@ if(sprite instanceof AiSimBomb)
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'Ã©tat du sprite Ã  la fin de la durÃ©e spÃ©cifiÃ©e,
-	 * Ã  partir de l'Ã©tat courant.
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param block
-	 * 		le sprite concernÃ© (sa reprÃ©sentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration	
-	 * 		la durÃ©e Ã  prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateBlock(AiSimBlock block, long duration)
 	{	// init
@@ -663,7 +669,7 @@ if(sprite instanceof AiSimBomb)
 		// block is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = block.getBurningDuration();
-			if(time>=burningDuration) // problem for re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -677,7 +683,7 @@ if(sprite instanceof AiSimBomb)
 		
 		// blocks can't move (at least for now)
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	//  useless for the moment
+		{	// NOTE useless for the moment
 			//moveSprite(block);
 		}
 		
@@ -692,11 +698,11 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * permet Ã  un bloc d'Ã©ventuellement libÃ©rer un item
-	 * Ã  la fin de sa destruction.
+	 * permet à un bloc d'éventuellement libérer un item
+	 * à la fin de sa destruction.
 	 * 
 	 * @param block
-	 * 		le bloc Ã  traiter
+	 * 		le bloc à traiter
 	 */
 	private void releaseItem(AiSimBlock block)
 	{	if(simulateItemsAppearing && current.getHiddenItemsCount()>0)
@@ -738,17 +744,16 @@ if(sprite instanceof AiSimBomb)
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private List<AiSimBomb> toBeDetonated = new ArrayList<AiSimBomb>();
 	
 	/**
-	 * calcule l'Ã©tat du sprite Ã  la fin de la durÃ©e spÃ©cifiÃ©e,
-	 * Ã  partir de l'Ã©tat courant.
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param bomb
-	 * 		le sprite concernÃ© (sa reprÃ©sentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la durÃ©e Ã  prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateBomb(AiSimBomb bomb, long duration)
 	{	// init
@@ -835,9 +840,9 @@ if(sprite instanceof AiSimBomb)
 	 * elle renvoie la valeur faux).
 	 * 
 	 * @param bomb
-	 * 		la bombe Ã  faire exploser
+	 * 		la bombe à faire exploser
 	 * @return
-	 * 		vrai si le modÃ¨le a pu faire exploser la bombe
+	 * 		vrai si le modèle a pu faire exploser la bombe
 	 */
 	public boolean applyDetonateBomb(AiBomb bomb)
 	{	boolean result = false;
@@ -859,9 +864,9 @@ if(sprite instanceof AiSimBomb)
 	 * elle renvoie la valeur faux).
 	 * 
 	 * @param bomb
-	 * 		la bombe Ã  faire exploser
+	 * 		la bombe à faire exploser
 	 * @return
-	 * 		vrai si le modÃ¨le a pu faire exploser la bombe
+	 * 		vrai si le modèle a pu faire exploser la bombe
 	 */
 	private boolean detonateBomb(AiSimBomb bomb)
 	{	// init
@@ -897,13 +902,13 @@ if(sprite instanceof AiSimBomb)
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'Ã©tat du sprite Ã  la fin de la durÃ©e spÃ©cifiÃ©e,
-	 * Ã  partir de l'Ã©tat courant.
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param fire
-	 * 		le sprite concernÃ© (sa reprÃ©sentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la durÃ©e Ã  prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateFire(AiSimFire fire, long duration)
 	{	// init
@@ -944,12 +949,12 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * brÃ»le une case et son contenu, Ã  la suite d'une explosion
+	 * brûle une case et son contenu, à la suite d'une explosion
 	 * 
 	 * @param tile
-	 * 		la case Ã  brÃ»ler
+	 * 		la case à brûler
 	 * @param detonatingBomb
-	 * 		la bombe qui a propovoquÃ© l'explosion
+	 * 		la bombe qui a propovoqué l'explosion
 	 */
 	private void burnTile(AiSimTile tile, AiSimBomb detonatingBomb)
 	{	AiFire firePrototype = detonatingBomb.getFirePrototype();
@@ -1010,13 +1015,13 @@ if(sprite instanceof AiSimBomb)
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'Ã©tat du sprite Ã  la fin de la durÃ©e spÃ©cifiÃ©e,
-	 * Ã  partir de l'Ã©tat courant.
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param floor
-	 * 		le sprite concernÃ© (sa reprÃ©sentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la durÃ©e Ã  prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateFloor(AiSimFloor floor, long duration)
 	{	// init
@@ -1028,7 +1033,7 @@ if(sprite instanceof AiSimBomb)
 		// floor is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = floor.getBurningDuration();
-			if(time>=burningDuration) // problem for re-spawning blocks (but it's only an approximation, after all...)
+			if(time>=burningDuration) //NOTE problem for re-spawning blocks (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1057,13 +1062,13 @@ if(sprite instanceof AiSimBomb)
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'Ã©tat du sprite Ã  la fin de la durÃ©e spÃ©cifiÃ©e,
-	 * Ã  partir de l'Ã©tat courant.
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param hero
-	 * 		le sprite concernÃ© (sa reprÃ©sentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la durÃ©e Ã  prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateHero(AiSimHero hero, long duration)
 	{	// init
@@ -1075,7 +1080,7 @@ if(sprite instanceof AiSimBomb)
 		// hero is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = hero.getBurningDuration();
-			if(time>=burningDuration) // problem for games in which heroes can be reborn
+			if(time>=burningDuration) //NOTE problem for games in which heroes can be reborn
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1105,17 +1110,17 @@ if(sprite instanceof AiSimBomb)
 
 	/**
 	 * permet de solliciter un personnage pour qu'il pose une bombe
-	 * dans la case spÃ©cifiÃ©e. La mÃ©thode renvoie la bombe posÃ©e,
-	 * ou bien null en cas d'impossibilitÃ©.
-	 * <b>Note :</b> cette mÃ©thode permet de poser des bombes
-	 * Ã  distance, ce qui peut s'avÃ©rer pratique dans certaines situations.
+	 * dans la case spécifiée. La méthode renvoie la bombe posée,
+	 * ou bien null en cas d'impossibilité.
+	 * <b>Note :</b> cette méthode permet de poser des bombes
+	 * à distance, ce qui peut s'avérer pratique dans certaines situations.
 	 * 
 	 * @param hero
 	 * 		le personnage que l'on veut voir poser une bombe
 	 * @param tile
 	 * 		la case qui devra contenir la bombe.
 	 * @return
-	 * 		la bombe qui a Ã©tÃ© posÃ©e, ou null si c'Ã©tait impossible.
+	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero, AiTile tile)
 	{	AiBomb result = null;
@@ -1136,21 +1141,21 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * crÃ©e une nouvelle bombe appartenant au personnage passÃ© en paramÃ¨tre.
-	 * La bombe est placÃ©e au centre de la case passÃ©e en paramÃ¨tre.
-	 * Le compteur de bombe du personnage est incrÃ©mentÃ©.
-	 * Si jamais la case contient dÃ©jÃ  un objet empÃªchant de poser la bombe,
-	 * celle-ci n'est pas crÃ©Ã©e et la fonction renvoie la valeur null.
-	 * Sinon (si la crÃ©ation est possible) alors la fonction renvoie la bombe crÃ©Ã©e.
+	 * Crée une nouvelle bombe appartenant au personnage passé en paramètre.
+	 * La bombe est placée au centre de la case passée en paramètre.
+	 * Le compteur de bombe du personnage est incrémenté.
+	 * Si jamais la case contient déjà un objet empêchant de poser la bombe,
+	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
+	 * Sinon (si la création est possible) alors la fonction renvoie la bombe créée.
 	 * Si jamais le personnage ne peut pas poser de bombes pour l'instant,
-	 * la bombe n'est pas crÃ©Ã©e et la valeur null est renvoyÃ©e. 
+	 * la bombe n'est pas créée et la valeur null est renvoyée. 
 	 * 
 	 * @param tile
-	 * 		case qui contiendra la bombe nouvellement crÃ©Ã©e
+	 * 		case qui contiendra la bombe nouvellement créée
 	 * @param hero
-	 * 		personnage Ã  qui la bombe appartiendra (ce qui dÃ©termine ses propriÃ©tÃ©s)
+	 * 		personnage à qui la bombe appartiendra (ce qui détermine ses propriétés)
 	 * @return
-	 * 		la bombe si elle a pu Ãªtre crÃ©Ã©e, ou null si ce n'est pas possible 
+	 * 		la bombe si elle a pu être créée, ou null si ce n'est pas possible 
 	 */
 	private AiSimBomb dropBomb(AiSimTile tile, AiSimHero hero)
 	{	AiSimBomb result = null;
@@ -1184,14 +1189,14 @@ if(sprite instanceof AiSimBomb)
 
 	/**
 	 * permet de solliciter un personnage pour qu'il pose une bombe
-	 * dans la case spÃ©cifiÃ©e. La mÃ©thode renvoie la bombe posÃ©e,
-	 * ou bien null en cas d'impossibilitÃ©. La bombe est posÃ©e
-	 * dans la case actuellement occupÃ©e par le personnage.
+	 * dans la case spécifiée. La méthode renvoie la bombe posée,
+	 * ou bien null en cas d'impossibilité. La bombe est posée
+	 * dans la case actuellement occupée par le personnage.
 	 * 
 	 * @param hero
 	 * 		le personnage que l'on veut voir poser une bombe
 	 * @return
-	 * 		la bombe qui a Ã©tÃ© posÃ©e, ou null si c'Ã©tait impossible.
+	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero)
 	{	AiBomb result = null;
@@ -1207,16 +1212,16 @@ if(sprite instanceof AiSimBomb)
 	
 	/**
 	 * permet de solliciter un changement de direction de la part du personnage.
-	 * si la direction n'est pas NONE, alors l'Ã©tat du personnage devient MOVING.
-	 * sinon, il devient STANDING. Bien sÃ»r, s'il y a des obstacles, le personnage
-	 * ne pourra pas effectivement se dÃ©placer dans la direction spÃ©cifiÃ©e.
+	 * si la direction n'est pas NONE, alors l'état du personnage devient MOVING.
+	 * sinon, il devient STANDING. Bien sûr, s'il y a des obstacles, le personnage
+	 * ne pourra pas effectivement se déplacer dans la direction spécifiée.
 	 * 
 	 * @param hero
-	 * 		le personnage Ã  dÃ©placer
+	 * 		le personnage à déplacer
 	 * @param direction
-	 * 		la direction du dÃ©placement
+	 * 		la direction du déplacement
 	 * @return
-	 * 		vrai si le changement de direction a pu Ãªtre effectuÃ©, faux sinon 
+	 * 		vrai si le changement de direction a pu être effectué, faux sinon 
 	 */
 	public boolean applyChangeHeroDirection(AiHero hero, Direction direction)
 	{	boolean result = false;
@@ -1243,14 +1248,14 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * implÃ©mente le comportement d'un personnage ramassant
+	 * implémente le comportement d'un personnage ramassant
 	 * un item qui se trouve dans la case dans laquelle il
 	 * vient d'entrer.
 	 *  
 	 * @param hero
 	 * 		le personnage entrant dans la case
 	 * @param item
-	 * 		l'item Ã  ramasser
+	 * 		l'item à ramasser
 	 */
 	private void pickItem(AiSimHero hero, AiSimItem item)
 	{	AiItemType type = item.getType();
@@ -1268,7 +1273,7 @@ if(sprite instanceof AiSimBomb)
 		{	// nothing to do
 		}
 		else if(type==AiItemType.PUNCH)
-		{	//  to be completed
+		{	// NOTE to be completed
 		}
 		
 		// remove item
@@ -1278,21 +1283,22 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * implÃ©mente le comportement d'un personnage relÃ¢chant tous 
-	 * ses items quand il est Ã©liminÃ©.
+	 * implémente le comportement d'un personnage relâchant tous 
+	 * ses items quand il est éliminé.
 	 * 
 	 * @param hero
-	 * 		le personnage relÃ¢chant tous ses items
+	 * 		le personnage relâchant tous ses items
 	 */
 	private void releaseItems(AiSimHero hero)
 	{
+		// NOTE items could be released here... (to be completed)
 	}
 	
 	/**
 	 * supprime tous les personnage de la zone.
 	 * ceci permet de la simplifier, et ainsi d'utiliser la zone
-	 * seulement pour prÃ©voir comment les explosions vont Ã©voluer,
-	 * sans se soucier des dÃ©placements des personnages.
+	 * seulement pour prévoir comment les explosions vont évoluer,
+	 * sans se soucier des déplacements des personnages.
 	 */
 	public void applyRemoveHeroes()
 	{	List<AiSimHero> heroes = current.getInternalHeroes();
@@ -1304,13 +1310,13 @@ if(sprite instanceof AiSimBomb)
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'Ã©tat du sprite Ã  la fin de la durÃ©e spÃ©cifiÃ©e,
-	 * Ã  partir de l'Ã©tat courant.
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param item
-	 * 		le sprite concernÃ© (sa reprÃ©sentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la durÃ©e Ã  prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateItem(AiSimItem item, long duration)
 	{	// init
@@ -1322,7 +1328,7 @@ if(sprite instanceof AiSimBomb)
 		// item is burning (too bad!)
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = item.getBurningDuration();
-			if(time>=burningDuration) // problem for re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;

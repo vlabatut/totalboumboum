@@ -14,32 +14,25 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
  * the engine, selects a mode, calculates a matrix, chooses an action and sends
  * it to the game engine.
  * 
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author Yasa Akbulut & Burcu Küpelioglu
  * 
  */
-@SuppressWarnings("deprecation")
 public class AkbulutKupelioglu extends ArtificialIntelligence
 {
-	/** */
+
 	private AiZone zone;
-	/** */
 	private AiOutput output;
-	/** */
 	private Strategy strategy = null;
-	/** */
 	private Mode mode = null;
 	//private InformationManager informationManager = null;
 
-	@Override
+	
 	public void init() throws StopRequestException {
 		checkInterruption();
 		ModeSelector.reset(this);
 	};
 	
-	/** method called by the game engine to get our action
-	 */
-	@Override
+	/** method called by the game engine to get our action*/
 	public AiAction processAction() throws StopRequestException
 	{
 		checkInterruption();
@@ -66,14 +59,6 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 		
 		return result;
 	}
-	
-	/**
-	 * 
-	 * @param interest
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void outputMatrix(Matrix interest) throws StopRequestException
 	{
 		checkInterruption();
@@ -94,7 +79,6 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Gets the current strategy. 
 	 * @return The current strategy.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Strategy getStrategy() throws StopRequestException
 	{
@@ -106,7 +90,6 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Sets a new strategy.
 	 * @param strategy The strategy to be set.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setStrategy(Strategy strategy) throws StopRequestException
 	{
@@ -118,7 +101,6 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Gets the current mode.
 	 * @return The current mode.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Mode getMode() throws StopRequestException
 	{
@@ -130,7 +112,6 @@ public class AkbulutKupelioglu extends ArtificialIntelligence
 	 * Sets a new mode.
 	 * @param mode The mode to be set.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setMode(Mode mode) throws StopRequestException
 	{

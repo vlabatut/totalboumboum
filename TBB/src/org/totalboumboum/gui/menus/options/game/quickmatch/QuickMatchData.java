@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.options.game.quickmatch;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,10 +32,8 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -66,7 +64,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 			int h = getDataHeight();
 			optionsPanel = new LinesSubPanel(w,h,Mode.BORDER,LINE_COUNT,1,false);
 			int titleWidth = (int)(optionsPanel.getDataWidth()*0.66);
-			int iconWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
+			int iconWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
 			
 			// #0 use last players
 			{	Line ln = optionsPanel.getLine(LINE_USE_PLAYERS);
@@ -87,7 +85,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
-				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				ln.setBackgroundColor(bg);
 			}
 
@@ -110,7 +108,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
-				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				ln.setBackgroundColor(bg);
 			}
 			
@@ -133,7 +131,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
-				Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				ln.setBackgroundColor(bg);
 			}
 

@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<!--
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut
-	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
--->
-	<tournament name="Super-coupe de Galatasaray V" type="CUP" />
-	<played matches="1" rounds="5" />
-	<dates start="2013-04-20T17:04:04" save="2013-04-20T17:09:21" />
+	<tournament name="Tournoi de Galatasaray I" type="CUP" />
+	<played matches="0" rounds="1" />
+	<dates start="2011-02-16T22:03:38" save="2011-02-16T23:37:14" />
 	<players>
-		<player name="1213.Oral+Özuğur" />
-		<player name="1213.Alçar+Kaya+Yıldırım" />
+		<player name="0708.Kurtuluş+Özsoy" />
+		<player name="0708.Eren+Gökçe" />
+		<player name="0708.Hanci+Toprak" />
+		<player name="0708.Çamaş+Demirbaş" />
+		<player name="0708.Şahin+Yıldırım" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="0708.Kılıç+Pala" />
+		<player name="0708.Keçer+Yaman" />
+		<player name="0708.Çağlayan+Elmas" />
+		<player name="0708.Demirkol+Doğan" />
+		<player name="0708.Cirit+Mutlu" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="0708.Göksay+Köse" />
 		<player name="0708.Bingöl+Ketenci" />
-		<player name="1112.Coşkun+Özdemir" />
-		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="1011.Kesimal+Varol" />
+		<player name="0708.Baydar+Camcı" />
+		<player name="0708.Başman+Sandallı" />
 	</players>
 </archive>
 

@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.itemset;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,7 +33,6 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
@@ -75,7 +74,7 @@ if(itemFactory==null)
 	System.err.println("makeItem: sprite '"+name+"' not found");
 		result = itemFactory.makeSprite(tile);
 
-		// record/transmit creation event
+		// record/transmit event
 		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
 		RoundVariables.writeEvent(event);
 

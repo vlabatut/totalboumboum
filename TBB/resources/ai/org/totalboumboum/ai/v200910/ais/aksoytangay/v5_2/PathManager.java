@@ -26,29 +26,17 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Necmi Murat Tangay
  *
  */
-@SuppressWarnings("deprecation")
 public class PathManager {
 	
-	/** variable pour faire de l'appel */
+	//variable pour faire de l'appel
 	private AksoyTangay myAI;
 	
-	/** */
 	private Zone zone;
 	
-	/** */
 	private AiZone percepts;
-	/** */
+	
 	public boolean temp = false;
 			
-	/**
-	 * 
-	 * @param myAI
-	 * 		Description manquante !
-	 * @param percepts
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public PathManager(AksoyTangay myAI, AiZone percepts) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -61,14 +49,15 @@ public class PathManager {
 	 * Methode qui calcule le chemin le plus court.
 	 * 
 	 * @param ownHero
-	 * 		Description manquante !
-	 * @param startTile
-	 * 		Description manquante !
-	 * @param endTiles
-	 * 		Description manquante !
+	 *           
+	 * @param startPoint
+	 *            
+	 * @param endPoints
+	 *            
+	 * @param myAI
+	 * 
 	 * @return le chemin le plus court
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public AiPath getShortestPath(AiHero ownHero, AiTile startTile, 
 			List<AiTile> endTiles) throws StopRequestException{
@@ -97,14 +86,15 @@ public class PathManager {
 	 * Methode qui calcule le chemin le plus court.
 	 * 
 	 * @param ownHero
-	 * 		Description manquante !
-	 * @param startTile
-	 * 		Description manquante !
-	 * @param endTile
-	 * 		Description manquante !
+	 *           
+	 * @param startPoint
+	 *            
+	 * @param endPoints
+	 *            
+	 * @param myAI
+	 * 
 	 * @return le chemin le plus court
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public AiPath getShortestPathToOneTile(AiHero ownHero, AiTile startTile, 
 			AiTile endTile) throws StopRequestException{
@@ -134,7 +124,6 @@ public class PathManager {
 	 * 
 	 * @return la liste des possible cases a aller
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> getAvailibleTilesToEscape() throws StopRequestException
 	{
@@ -172,11 +161,9 @@ public class PathManager {
 	/**
 	 * 
 	 * Methode qui renvoie le meilleur chemin sure.
-	 * @param availibleTiles 
-	 * 		Description manquante !
+	 * 
 	 * @return meilleur chemin
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public AiPath getBestPathToEscape(List<AiTile> availibleTiles) throws StopRequestException
 	{
@@ -194,12 +181,6 @@ public class PathManager {
 		return result;
 	}
 	
-	/**
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getAvailibleTilesDirectToCollectBonus() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -227,13 +208,6 @@ public class PathManager {
 		return availibleTiles;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getAvailibleTilesIndirectToCollectBonus() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -277,17 +251,7 @@ public class PathManager {
 	}
 	
 		
-	/**
-	 * 
-	 * @param availibleTilesDirect
-	 * 		Description manquante !
-	 * @param availibleTilesIndirect
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public AiPath getBestPathToCollectBonus(List<AiTile> availibleTilesDirect, List<AiTile> availibleTilesIndirect) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -322,4 +286,6 @@ public class PathManager {
 		
 		return result;
 	}
+	
+	
 }

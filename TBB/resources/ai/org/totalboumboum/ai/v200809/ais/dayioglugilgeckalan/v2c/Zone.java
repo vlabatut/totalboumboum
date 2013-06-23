@@ -14,44 +14,24 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Ali Batuhan Dayioğlugil
- * @author Gökhan Geçkalan
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
  *
  */
-@SuppressWarnings("deprecation")
 public class Zone{
 	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	//private AiZone zone;
-	/** */
 	private Collection <AiHero> rivals;
-	/** */
 	private AiHero caractere;
-	/** */
 	private Collection <AiBomb> bombes;
-	/** */
 	private Collection <AiBlock> blocs;
-	/** */
 	private Collection <AiItem> objets;
-	/** */
 	private Collection <AiFire> feus; 
-	/** */
 	private int xMax;
-	/** */
 	private int yMax;
-	/** */
 	private ZoneEnum [][] zoneArray;
-	/** */
 	private DayioglugilGeckalan source;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param source
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Zone(AiZone zone, DayioglugilGeckalan source) throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -68,11 +48,6 @@ public class Zone{
 		init();
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -217,19 +192,12 @@ public class Zone{
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		return zoneArray;
 	}
 
-	@Override
 	public String toString()
 	{	
 		String result = "";

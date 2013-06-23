@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop.event.control;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -56,16 +56,4 @@ public class RemotePlayerControlEvent extends StreamedEvent
 	public ControlCode getControlCode()
 	{	return controlCode;	
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// TO STRING			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public String toString()
-	{	String result = "RemotePlayerControlEvent("+time+":"+spriteId+"): " + controlCode;
-		return result;
-	}
 }
-
-//TODO pb: le numéro de controle est perdu lors de la synchro, car
-//le serveur n'a pas connaissance de la config locale...
-//faut améliorer la synchro coté client de manière à ne pas écraser les controles

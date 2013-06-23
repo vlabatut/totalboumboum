@@ -16,63 +16,39 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-/**
- * @author Elif GÃ¶ncÃ¼
- * @author YaÄŸÄ±z Onat
- */
-@SuppressWarnings("deprecation")
 public class ModeCollecte 
 {
 
-	/** notre hÃ©ro */
+	//notre héro
+	
 	private GoncuOnat monia;
 	
-	/** la case vide qui ne contient aucuns sprites
-	// est representÃ©e dans la matrice da la zone.
-	 * 
-	 */
+	// la case vide qui ne contient aucuns sprites
+	// est representée dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
-	/** la case qui contient le feu de la bombe pour le mode
-	// collecte est representÃ©e dans la matrice da la zone.
-	 * 
-	 */
+	// la case qui contient le feu de la bombe pour le mode
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_FIRE =-20 ;
-	/** la case qui contient un mur destructible pour le mode
-	// collecte est representÃ©e dans la matrice da la zone.
-	 * 
-	 */
+	// la case qui contient un mur destructible pour le mode
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_SOFTWALL = 2;
-	/** la case qui contient un bonus pour le mode
-	// collecte est representÃ©e dans la matrice da la zone.
-	 * 
-	 */
+	// la case qui contient un bonus pour le mode
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_BONUS= 10;
-	/** la case qui contient un hÃ©ro pour le mode
-	// collecte est representÃ©e dans la matrice da la zone.
-	 * 
-	 */
+	// la case qui contient un héro pour le mode
+	// collecte est representée dans la matrice da la zone.
 	private final int COLLECT_RIVAL = -10;
-	/** la case qui contient une bombe pour le mode
-	// collecte est representÃ©e dans la matrice da la zone.
-	 * 
-	 */
+	// la case qui contient une bombe pour le mode
+	// collecte est representée dans la matrice da la zone.
 	public final int COLLECT_BOMB = -20;
-	/** chemin asuivre pour s'enfuir du danger
+	// chemin asuivre pour s'enfuir du danger
 	// AiPath nextMove=null;
 	// chemin a suivre pour ramasser des bonus
-	 * 
-	 */
 	//public AiPath nextMoveBonus=null;
 	public boolean searchBonus = true;
 	
 	
-	/**
-	 * 
-	 * @param ia
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+
 	public ModeCollecte(GoncuOnat ia)throws StopRequestException
 	{
 		ia.checkInterruption();
@@ -90,7 +66,6 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void valueBonusCollecte(double[][] matrice, AiZone zone)throws StopRequestException 
 	{
@@ -117,8 +92,8 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
+	
 	public void valueFiresCollecte(double[][] matrice, AiZone zone) throws StopRequestException
 	{
 		monia.checkInterruption();
@@ -134,15 +109,15 @@ public class ModeCollecte
 	
 	/**
 	 * Methode remplissant les cases de notre matrice de zone en mode collecte par la valeur 
-	 * des cases possedant les hÃ©ros  
+	 * des cases possedant les héros  
 	 * 
 	 * @param matrice
 	 * 				La Matrice de Zone
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
+	
 	public void valueRivalCollecte(double[][] matrice, AiZone zone)throws StopRequestException 
 	{
 		
@@ -175,7 +150,6 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void valueBlocksCollecte(double[][] matrice, AiZone zone) throws StopRequestException
 	{
@@ -207,7 +181,6 @@ public class ModeCollecte
 	 * @param zone
 	 * 				la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void valueBombsCollecte(double[][] matrice, AiZone zone) throws StopRequestException
 	{
@@ -243,8 +216,7 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
-	 * 		description manquante !
-	 * @return result
+	 * @returns result
 	 * 				le cout de la case
 	 */
 	public double bestPathCost (double[][] matrice,AiPath nextMove) throws StopRequestException
@@ -263,8 +235,7 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
-	 * 		description manquante !
-	 * @return result
+	 * @returns result
 	 * 				le cout de la case
 	 */
 	public double shortestPathCost(double[][]matrice, AiPath nextMove)throws StopRequestException
@@ -291,8 +262,8 @@ public class ModeCollecte
 	 * @param nextMove
 	 * 				le chemin a suivre
 	 * @throws StopRequestException
-	 * 		description manquante !
-	 * @return result
+	 * 
+	 * @returns result
 	 * 				la distance du chemin en cases.
 	 */
 	public int getPathDistance(AiPath nextMove)throws StopRequestException
@@ -312,7 +283,6 @@ public class ModeCollecte
 	 * @param matrice
 	 *            La matrice de zone
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void matriceCollecte(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
@@ -484,4 +454,12 @@ public class ModeCollecte
 			}
 		}
 	}
+
+	
+	
+	
+	
+
+
+	
 }

@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
-<!-- 
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut 
-	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
 	
 	<abstractBlocks >
-		<block name="abstract_wall" folder="../../_common/wall" />
-		<block name="abstract_hardwall" folder="../../_common/hardwall" />
-		<block name="abstract_regular_hardwall" folder="../../_common/regular_hardwall" />
-		<block name="abstract_shrink_hardwall" folder="../../_common/shrink_hardwall" />
-		<block name="abstract_softwall" folder="../../_common/softwall" />
+		<block name="common" folder="_common" />
+		
+		<group name="hardwalls" folder="hardwalls">
+			<block name="common_hard" folder="_common"/>
+		</group>
 	</abstractBlocks>
 	
 	<concreteBlocks>
@@ -59,8 +40,6 @@
 			<block name="welcome4" folder="welcome4"/>
 			<block name="welcome5" folder="welcome5"/>
 			<block name="welcome6" folder="welcome6"/>
-
-			<block name="shrink" folder="shrink"/>
 		</group>
 	</concreteBlocks>
 	

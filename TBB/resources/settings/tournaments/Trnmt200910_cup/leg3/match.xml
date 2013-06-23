@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
+	
+ 	<notes>
+ 		<line value="Rencontre normale, utilisé lors des quarts, demis et classements." />
+ 		<line value="Date: 06-01-2009" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<limits>
+		<confrontation>
+			<points local="true" name="points" />
+			<threshold value="5" />			
+		</confrontation>
+	</limits>
+ 	
+ 	<rounds randomOrder="true" >
+  		<round local="true" name="roundClassic" />
+  		<round local="true" name="roundCroix" />
+  		<round local="true" name="roundEntrance" />
+  		<round local="true" name="roundHorizontal" />
+  		<round local="true" name="roundReadysetgo" />
+  	</rounds>
+	
+</match>

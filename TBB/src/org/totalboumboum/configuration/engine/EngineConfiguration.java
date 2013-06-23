@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.engine;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -74,7 +74,7 @@ public class EngineConfiguration
 	/** engine update persiod in nanoseconds */
 	private long nanoPeriod;
 	/** speed coefficient */
-	private double speedCoeff; //NOTE speedcoeff Ã  descendre au niveau de loop, car il peut dÃ©pendre du level
+	private double speedCoeff; //NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
 
 	public void setAutoFps(boolean autoFps)
 	{	this.autoFps = autoFps;		

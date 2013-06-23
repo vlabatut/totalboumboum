@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.modulation;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,7 +31,6 @@ import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
@@ -103,12 +102,6 @@ public abstract class ModulationManager
 	 */
 	public abstract TargetModulation getTargetModulation(SpecificAction action);
 	
-	/**
-	 * Like {@link #getTargetModulation(SpecificAction)}, but for a
-	 * gesture which is not necessarily the current one.
-	 */
-	public abstract TargetModulation getTargetModulation(SpecificAction action, GestureName gestureName);
-
 	/////////////////////////////////////////////////////////////////
 	// THIRD MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -121,8 +114,6 @@ public abstract class ModulationManager
 	public abstract ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances);
 
 	public abstract ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances);
-
-	public abstract ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName);
 
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES			/////////////////////////////////////////
@@ -142,12 +133,8 @@ public abstract class ModulationManager
 	public abstract boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances);
 
 	public abstract boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances);
-
-	public abstract boolean wouldThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName);
 	
 	public abstract boolean isTargetPreventing(SpecificAction action);
-	
-	public abstract boolean wouldTargetPreventing(SpecificAction action, GestureName gestureName);
 	
 	public abstract StateAbility modulateStateAbility(String name);
 

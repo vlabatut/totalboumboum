@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.explore.ais.select;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -41,10 +41,8 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TextSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.TextContentPanel;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -77,7 +75,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 				mainPanel.setLayout(layout);
 			}
 			
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
@@ -119,7 +117,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 				float fontSize = notesPanel.getTitleFontSize()/2;
 				notesPanel.setFontSize(fontSize);
 				TextContentPanel textPanel = notesPanel.getDataPanel();
-				textPanel.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				previewPanel.add(notesPanel);
 				
 				mainPanel.add(previewPanel);
@@ -138,12 +136,12 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 		// no player selected
 		if(selectedAi==null)
 		{	notesValues = new ArrayList<String>();
-			textPanel.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		}
 		// one player selected
 		else
 		{	notesValues = selectedAi.getNotes();
-			textPanel.setBackground(GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			textPanel.setBackground(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 		}
 		// refresh
 		String text = "";

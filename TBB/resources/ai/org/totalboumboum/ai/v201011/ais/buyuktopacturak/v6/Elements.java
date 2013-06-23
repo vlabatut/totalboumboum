@@ -12,34 +12,24 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * Cette classe contient les ContrÃ´les du posage de bombe. 
- * @author Onur B y ktopa  & Yigit Turak
+ * Cette classe contient les contrôles du posage de bombe. 
+ * @author Onur Büyüktopaç & Yigit Turak
  */
-@SuppressWarnings("deprecation")
 public class Elements {
-	/** */
 	private BuyuktopacTurak bt;
-	/** */
 	private PerfectStrangers ps;
-	/** */
 	private AiZone zone;		
-	/** */
 	private AiHero deepPurple;  
 	
-	/** */
 	private List<AiBlock> willBurnWallsList;//Les murs qui vont exploser
-	/** */
 	private List<AiItem> willBurnItemsList;//Les items qui vont exploser
 
 	
 	/**
-	 * C'est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * C’est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
-	 * 		description manquante !
 	 * @param zone
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Elements(BuyuktopacTurak bt, AiZone zone) throws StopRequestException{
 		bt.checkInterruption();
@@ -52,9 +42,7 @@ public class Elements {
 	/**
 	 * On renvoie la liste des murs destructibles qui vont exploser.
 	 * @return List<AiBlock>
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private List<AiBlock> getWillBurnWalls()throws StopRequestException{
 		bt.checkInterruption();
@@ -79,9 +67,7 @@ public class Elements {
 	/**
 	 * On renvoie la liste des bonus qui vont exploser.
 	 * @return List<AiItem>
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private List<AiItem> getWillBurnItems()throws StopRequestException{
 		bt.checkInterruption();
@@ -101,16 +87,12 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des murs destructibles qui ne vont pas d'exploser 
-	 * dans notre portÃ©e virtuelle de la bombe.
+	 * On renvoie la liste des murs destructibles qui ne vont pas d’exploser 
+	 * dans notre portée virtuelle de la bombe.
 	 * @param tile
-	 * 		description manquante !
 	 * @param range
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
+	 * @return List<AiBlock>
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private List<AiBlock> getRangeBombBlock(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -136,7 +118,7 @@ public class Elements {
 							willBurn = true;
 						}
 					}
-					//Patlamayacaksa biz patlatal m (bence)
+					//Patlamayacaksa biz patlatalým (bence)
 					if(willBurn == false){
 						inRangeWalls.add(r.getBlocks().get(0));
 					}
@@ -147,15 +129,12 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des bonus qui ne vont pas d'exploser 
-	 * dans notre portÃ©e virtuelle de la bombe.
+	 * On renvoie la liste des bonus qui ne vont pas d’exploser 
+	 * dans notre portée virtuelle de la bombe.
 	 * @param tile
-	 * 		description manquante !
 	 * @param range
-	 * 		description manquante !
 	 * @return List<AiItem>
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private List<AiItem> getRangeBombItem(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -190,20 +169,17 @@ public class Elements {
 	
 	/**
 	 * On renvoie la liste des adversaires qui sont 
-	 * dans notre portÃ©e virtuelle de la bombe.
+	 * dans notre portée virtuelle de la bombe.
 	 * @param tile
-	 * 		description manquante !
 	 * @param range
-	 * 		description manquante !
 	 * @return List<AiHero>
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private List<AiHero> getRangeBombHero(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
 		
 		List<AiTile> myBombRange = new ArrayList<AiTile>();
-		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki d  manlar  al r
+		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki düþmanlarý alýr
 		
 		myBombRange = ps.getBombRangeList(tile, range);
 		
@@ -221,14 +197,11 @@ public class Elements {
 	
 	/**
 	 * On renvoie la taille de la liste des murs destructibles 
-	 * qui ne vont pas d'exploser dans notre portÃ©e virtuelle de la bombe.
+	 * qui ne vont pas d’exploser dans notre portée virtuelle de la bombe.
 	 * @param tile
-	 * 		description manquante !
 	 * @param range
-	 * 		description manquante !
 	 * @return int
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getRangeBombBlockCounter(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -237,14 +210,11 @@ public class Elements {
 
 	/**
 	 * On renvoie la taille de la liste des bonus 
-	 * qui ne vont pas d'exploser dans notre portÃ©e virtuelle de la bombe.
+	 * qui ne vont pas d’exploser dans notre portée virtuelle de la bombe.
 	 * @param tile
-	 * 		description manquante !
 	 * @param range
-	 * 		description manquante !
 	 * @return int
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getRangeBombItemCounter(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -253,14 +223,11 @@ public class Elements {
 	
 	/**
 	 * On renvoie la taille de la liste des adversaires 
-	 * qui sont dans notre portÃ©e virtuelle de la bombe.
+	 * qui sont dans notre portée virtuelle de la bombe.
 	 * @param tile
-	 * 		description manquante !
 	 * @param range
-	 * 		description manquante !
 	 * @return int
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getRangeBombHeroCounter(AiTile tile, int range) throws StopRequestException{
 		bt.checkInterruption();
@@ -268,14 +235,11 @@ public class Elements {
 	}
 	
 	/**
-	 * On contient la control de la distance au bonus entre lÃ ennemie plus proche et notre hÃ©ro.
+	 * On contient la control de la distance au bonus entre l’ennemie plus proche et notre héro.
 	 * @param tile
-	 * 		description manquante !
 	 * @param range
-	 * 		description manquante !
 	 * @return boolean
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public boolean destroyBonus(AiTile tile, int range)throws StopRequestException{
 		bt.checkInterruption();
@@ -313,10 +277,8 @@ public class Elements {
 	/**
 	 * Controler s'il y a des bombes qui peuvent relacher la bombe virtuelle. 
 	 * @param tile
-	 * 		description manquante !
 	 * @return boolean
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public boolean rangeBombe(AiTile tile) throws StopRequestException{
 		bt.checkInterruption();

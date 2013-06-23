@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -40,19 +40,15 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.control.system.ReplaySytemControl;
 import org.totalboumboum.engine.loop.display.Display;
-import org.totalboumboum.engine.loop.display.game.DisplayCancel;
-import org.totalboumboum.engine.loop.display.game.DisplayEnginePause;
-import org.totalboumboum.engine.loop.display.game.DisplayEngineStep;
-import org.totalboumboum.engine.loop.display.game.DisplayFPS;
-import org.totalboumboum.engine.loop.display.game.DisplayMessage;
-import org.totalboumboum.engine.loop.display.player.DisplayPlayersNames;
-import org.totalboumboum.engine.loop.display.sprites.DisplaySprites;
-import org.totalboumboum.engine.loop.display.sprites.DisplaySpritesPositions;
-import org.totalboumboum.engine.loop.display.tiles.DisplayGrid;
-import org.totalboumboum.engine.loop.display.tiles.DisplayTilesPositions;
-import org.totalboumboum.engine.loop.display.time.DisplaySpeed;
-import org.totalboumboum.engine.loop.display.time.DisplaySpeedChange;
-import org.totalboumboum.engine.loop.display.time.DisplayTime;
+import org.totalboumboum.engine.loop.display.DisplayEnginePause;
+import org.totalboumboum.engine.loop.display.DisplayFPS;
+import org.totalboumboum.engine.loop.display.DisplayGrid;
+import org.totalboumboum.engine.loop.display.DisplayMessage;
+import org.totalboumboum.engine.loop.display.DisplayPlayersNames;
+import org.totalboumboum.engine.loop.display.DisplaySpeed;
+import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
+import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
+import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
@@ -60,7 +56,6 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.ReplayedPlayer;
 import org.totalboumboum.game.profile.Profile;
@@ -133,11 +128,11 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 			
 			// extract info from event
 			int col = event.getCol();
-			int row = event.getRow();
+			int line = event.getLine();
 			int id = event.getSpriteId();
 			
 			// location
-			Tile tile = level.getTile(row,col);
+			Tile tile = level.getTile(line,col);
 			
 			// sprite
 			Profile profile = i.next();
@@ -250,20 +245,12 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		
 				// process events
 				for(ReplayEvent event: events)
-				{	// sprite insertion
-					if(event instanceof SpriteInsertionEvent)
-					{	SpriteInsertionEvent siEvent = (SpriteInsertionEvent) event;
-						int id = siEvent.getSpriteId();
-						Sprite sprite = level.getSprite(id);
-						sprite.getTile().addSprite(sprite); // add to the tile (complete the below process)
-					}
-					
-					// sprite creation
-					else if(event instanceof SpriteCreationEvent)
+				{	// sprite creation
+					if(event instanceof SpriteCreationEvent)
 					{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
 						HollowLevel hollowLevel = round.getHollowLevel();
 						Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-						level.insertSpriteTile(sprite); // just add to the level lists, not in the tile
+						level.insertSpriteTile(sprite);
 					}
 					
 					// sprite anime change
@@ -309,19 +296,12 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		display = new DisplaySpritesPositions(this);
 		displayManager.addDisplay(display);
 	
-		// sprites
-		display = new DisplaySprites(this);
-		displayManager.addDisplay(display);
-	
 		// players names
 		display = new DisplayPlayersNames(this);
 		displayManager.addDisplay(display);
 		
 		// speed
 		display = new DisplaySpeed();
-		displayManager.addDisplay(display);
-		// change speed
-		display = new DisplaySpeedChange();
 		displayManager.addDisplay(display);
 		
 		// time
@@ -334,13 +314,6 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		
 		// engine pause
 		display = new DisplayEnginePause(this);
-		displayManager.addDisplay(display);
-		// engine step
-		display = new DisplayEngineStep(this);
-		displayManager.addDisplay(display);
-				
-		// cancel
-		display = new DisplayCancel();
 		displayManager.addDisplay(display);
 	}
 
@@ -389,9 +362,7 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	super.processEvent(event);
-	
-		String name = event.getName();
+	{	String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
@@ -405,12 +376,13 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		{	switchBackward();
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
-		{	int index = event.getIndex();
-			if(index==SystemControlEvent.REGULAR)
-				switchEnginePause();
+		{	switchEnginePause();
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_FAST_FORWARD))
 		{	switchFastforward();
+		}
+		else
+		{	super.processEvent(event);
 		}
 	}
 }

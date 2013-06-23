@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,32 +28,23 @@ import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.game.tournament.turning.TurningTournament;
 
 /**
- * This type represents the various types of tournaments.
  * 
  * @author Vincent Labatut
+ *
  */
 public enum TournamentType
 {
-	/** Knock-out type tournament (direct eliminations) */
+	/** knock-out type tournament (direct eliminations) */
 	CUP,
-	/** Round-robin tournament (each player meets all the others) */
+	/** round-robin tournament (each player meets all the others) */
 	LEAGUE,
-	/** Sequence of matches opposing the same players */
+	/** sequence of matches opposing the same players */
 	SEQUENCE,
-	/** One single match */
+	/** one single match */
 	SINGLE,
-	/** Around the table tournament (players alternatively play and wait) */ 
+	/** around the table tournament (players alternatively play and wait) */ 
 	TURNING;
 	
-	/**
-	 * Returns the appropriate value depending
-	 * on the class of the specified tournament.
-	 * 
-	 * @param tournament
-	 * 		Considered tournament.
-	 * @return
-	 * 		Corresponding enum type.
-	 */
 	public static TournamentType getType(AbstractTournament tournament)
 	{	TournamentType result = null;
 		if(tournament instanceof CupTournament)

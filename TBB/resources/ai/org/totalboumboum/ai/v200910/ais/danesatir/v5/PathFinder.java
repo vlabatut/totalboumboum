@@ -15,45 +15,27 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class PathFinder {
 	
-	/** */
 	private DaneSatir ai;
-	/** */
 	private AiHero hero;
-	/** */
 	private AiPath path;
-	/** */
 	private int curIndex;
-	/** */
 	private List<AiTile> targetList;
-	/** */
 	private TimeMatrice time;
 
 	/**
 	 * Default Constructor for Pathfinder 
 	 * @param ai
-	 * 		Description manquante !
 	 * @param time
-	 * 		Description manquante !
 	 */
 	public PathFinder(DaneSatir ai, TimeMatrice time) {
 		this(ai,ai.getOwnHero(),time);
 	}
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @param hero
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 */
 	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) {
 		this.ai=ai;
 		this.hero=hero;
@@ -63,15 +45,6 @@ public class PathFinder {
 		this.updateTimeMatrice(time);
 	}
 	
-	/**
-	 * 
-	 * @param target
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 * @throws NoWayException
-	 * 		Description manquante !
-	 */
 	public void calculPath(AiTile target) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
 		List<AiTile> targets = new ArrayList<AiTile>();
@@ -81,11 +54,8 @@ public class PathFinder {
 	/**
 	 * Build Path for Targets
 	 * @param targetList
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 * @throws NoWayException
-	 * 		Description manquante !
 	 */
 	public void calculPath(List<AiTile> targetList) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
@@ -107,31 +77,18 @@ public class PathFinder {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public AiPath getPath() {
 		return path;
 	}
-	
-	/**
-	 * 
-	 */
 	public void clearPath() {
 		this.path=null;
 	}
 	/**
 	 * Get NextTile and check on arrive and other situations
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 * @throws PathOverException
-	 * 		Description manquante !
 	 * @throws NoWayException
-	 * 		Description manquante !
 	 */
 	public AiTile getNextTile() throws StopRequestException, PathOverException, NoWayException {
 		ai.checkInterruption();
@@ -173,7 +130,6 @@ public class PathFinder {
 	/**
 	 * Recalculate Path with TargetList
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void recalculPath() throws StopRequestException {
 		ai.checkInterruption();
@@ -187,42 +143,20 @@ public class PathFinder {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param targetTile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean isTarget(AiTile targetTile) {
 		if (this.targetList == null)
 			return false;
 		return this.targetList.contains(targetTile);
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean isArrive() {
 		return this.isTarget(this.hero.getTile());
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getTargets() {
 		return this.targetList;
 	}
 
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 */
 	public void updateTimeMatrice(TimeMatrice time) {
 		this.time = time;
 	}

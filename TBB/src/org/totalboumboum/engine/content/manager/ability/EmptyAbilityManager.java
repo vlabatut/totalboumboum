@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.ability;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.manager.ability;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -66,12 +65,6 @@ public class EmptyAbilityManager extends AbilityManager
 		return result;
 	}
 
-	@Override
-	public List<StateAbility> getAbilitiesStartingWith(String name)
-	{	List<StateAbility> result = new ArrayList<StateAbility>();
-		return result;
-	}
-	
 	@Override
 	public ActionAbility getAbility(SpecificAction action)
 	{	ActionAbility result = new ActionAbility(action);

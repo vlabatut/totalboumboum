@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.explore.heroes.select;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,12 +31,8 @@ import javax.swing.JButton;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -59,17 +55,17 @@ public class SelectedHeroMenu extends InnerMenuPanel
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiSizeTools.buttonTextHeight;
+		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_HERO_BUTTON);
-		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_HERO_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_HERO_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

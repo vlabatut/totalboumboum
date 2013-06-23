@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,23 +26,16 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * reprÃ©sente une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public abstract class AiTile
 {	
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * 
-	 * @return 
-	 * 		La zone.
-	 */
 	public abstract AiZone getZone();
 	
 	/////////////////////////////////////////////////////////////////
@@ -54,7 +47,7 @@ public abstract class AiTile
 	protected int col;
 		
 	/** 
-	 * renvoie le numÃ©ro de la ligne contenant cette case
+	 * renvoie le numéro de la ligne contenant cette case
 	 * 
 	 * @return	
 	 * 		la ligne de cette case
@@ -64,7 +57,7 @@ public abstract class AiTile
 	}
 
 	/** 
-	 * renvoie le numÃ©ro de la colonne contenant cette case
+	 * renvoie le numéro de la colonne contenant cette case
 	 *  
 	 * @return	
 	 * 		la colonne de cette case
@@ -92,10 +85,10 @@ public abstract class AiTile
 	}
 	
 	/** 
-	 * renvoie l'ordonnÃ©e de la case en pixels
+	 * renvoie l'ordonnée de la case en pixels
 	 * 
 	 * @return	
-	 * 		l'ordonnÃ©e de cette case
+	 * 		l'ordonnée de cette case
 	 */
 	public double getPosY()
 	{	return posY;	
@@ -104,14 +97,14 @@ public abstract class AiTile
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** longueur d'un cÃ´tÃ© de la case en pixels */
+	/** longueur d'un côté de la case en pixels */
 	protected double size;
 		
 	/** 
 	 * renvoie la taille de la case en pixels
 	 * 
 	 * @return	
-	 * 		longueur d'un cÃ´tÃ© de la case en pixels
+	 * 		longueur d'un côté de la case en pixels
 	 */
 	public double getSize()
 	{	return size;	
@@ -122,34 +115,34 @@ public abstract class AiTile
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les blocks Ã©ventuellement contenus dans cette case
+	 * 		les blocks éventuellement contenus dans cette case
 	 */
 	public abstract List<AiBlock> getBlocks();
 
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les bombes Ã©ventuellement contenues dans cette case
+	 * 		les bombes éventuellement contenues dans cette case
 	 */
 	public abstract List<AiBomb> getBombs();
 
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les feux Ã©ventuellement contenus dans cette case
+	 * 		les feux éventuellement contenus dans cette case
 	 */
 	public abstract List<AiFire> getFires();
 
 	/** 
 	 * renvoie les sols de cette case 
-	 * (il y a forcÃ©ment au moins un sol)
+	 * (il y a forcément au moins un sol)
 	 * 
 	 * @return	
 	 * 		les sols contenus dans cette case
@@ -158,19 +151,19 @@ public abstract class AiTile
 
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les personnages Ã©ventuellement contenus dans cette case
+	 * 		les personnages éventuellement contenus dans cette case
 	 */
 	public abstract List<AiHero> getHeroes();
 
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les items Ã©ventuellement contenus dans cette case
+	 * 		les items éventuellement contenus dans cette case
 	 */
 	public abstract List<AiItem> getItems();
 	
@@ -178,44 +171,43 @@ public abstract class AiTile
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le sprite passÃ© en paramÃ¨tre est capable de traverser
+	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
 	 * obstacle que le personnage ne peut pas traverser. 
-	 * Tous les sprites ne sont pas sensibles aux mÃªmes obstacles,
-	 * cela dÃ©pend Ã  la fois du type des sprites considÃ©rÃ©s (Hero,
-	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer Ã  travers
-	 * les murs, passer Ã  travers les bombes, etc). Le feu peut constituer
-	 * un obstacle, notamment pour les sprite de type Hero.
-	 * <br/>
-	 * cf. les mÃ©thodes de mÃªme nom dans les classes filles de AiSprite
+	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
+	 * cela dépend à la fois du type des sprites considérés (Hero,
+	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
+	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
+	 * un obstacle, notamment pour les sprite de type Hero.</br>
+	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
 	 *  @param sprite
 	 *  	le sprite qui veut traverser cette case
 	 *  @param ignoreBlocks
-	 *  	si vrai, la fonction ne considÃ¨re pas les blocks comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les blocks comme des obstacles
 	 *  @param ignoreBombs
-	 *  	si vrai, la fonction ne considÃ¨re pas les bombes comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les bombes comme des obstacles
 	 *  @param ignoreFires
-	 *  	si vrai, la fonction ne considÃ¨re pas le feu comme un obstacle
+	 *  	si vrai, la fonction ne considère pas le feu comme un obstacle
 	 *  @param ignoreFloors
-	 *  	si vrai, la fonction ne considÃ¨re pas les sols comme des obstacles (ce qu'ils sont rarement, de toute faÃ§on)
+	 *  	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute façon)
 	 *  @param ignoreHeroes
-	 *  	si vrai, la fonction ne considÃ¨re pas les personnages comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les personnages comme des obstacles
 	 *  @param ignoreItems
-	 *  	si vrai, la fonction ne considÃ¨re pas les items comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les items comme des obstacles
 	 *  @return	
-	 *  	vrai ssi ce sprite , Ã  cet instant, peut traverser cette case
+	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
 	public abstract boolean isCrossableBy(AiSprite sprite, 
 			boolean ignoreBlocks, boolean ignoreBombs, boolean ignoreFires, boolean ignoreFloors, boolean ignoreHeroes, boolean ignoreItems);
 	
 	/**
-	 * Comme isCrossableBy, mais considÃ¨re toujours le feu
+	 * Comme isCrossableBy, mais considère toujours le feu
 	 * 
 	 *  @param sprite
 	 *  	le sprite qui veut traverser cette case
 	 *  @return	
-	 *  	vrai ssi ce sprite , Ã  cet instant, peut traverser cette case
+	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
 	public abstract boolean isCrossableBy(AiSprite sprite);
 	
@@ -223,37 +215,36 @@ public abstract class AiTile
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le voisin de cette case passÃ©e en paramÃ¨tre, situÃ© dans la direction
-	 * passÃ©e en paramÃ¨tre. 
+	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
+	 * passée en paramètre. 
 	 * <b>ATTENTION :</b> seulement les directions primaires sont
-	 * utilisÃ©es (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
-	 * Dans le cas contraire, la fonction renvoie null.
-	 * <br/>
+	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
+	 * Dans le cas contraire, la fonction renvoie null.</br>
 	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situÃ©e au bord du niveau est une case situÃ©e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situÃ©e
-	 * Ã  la position (ligne,0), le voisin de gauche est la case situÃ©e Ã  la position
-	 * (ligne,width-1). mÃªme chose pour les bordures haut et bas.
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction
 	 * 		direction dans laquelle le voisin se trouve
 	 * @return	
-	 * 		le voisin de cette case, situÃ© dans la direction indiquÃ©e (ou null si la direction n'est pas primaire)
+	 * 		le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
 	public abstract AiTile getNeighbor(Direction direction);
 	
 	/**
 	 * renvoie la liste des voisins de cette case.
-	 * Il s'agit des voisins directs situÃ©s en haut, Ã  gauche, en bas et Ã  droite.
-	 * <br/>
+	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
+	 * 
 	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situÃ©e au bord du niveau est une case situÃ©e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situÃ©e
-	 * Ã  la position (ligne,0), le voisin de gauche est la case situÃ©e Ã  la position
-	 * (ligne,width-1). mÃªme chose pour les bordures haut et bas.
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
 	 * @return	
-	 * 		la liste des voisins situÃ©s en haut, Ã  gauche, en bas et Ã  droite de la case passÃ©e en paramÃ¨tre
+	 * 		la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public abstract List<AiTile> getNeighbors();
 

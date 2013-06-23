@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.ai;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -116,7 +116,6 @@ public class AisConfiguration
 	private boolean hideAllAis = false;
 	/** drop a level bomb on players standing still (not doing anything) */
 	private long bombUselessAis = -1;
-	/** time probability */
 	
 	public boolean getHideAllAis()
 	{	return hideAllAis;

@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.floor;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -41,13 +41,10 @@ public class HollowFloorFactory extends HollowSpriteFactory<Floor>
 	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
 	{	// APPEARING
-		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
 		// BOUNCING
 		// BURNING
 		// CRYING
 		// EXULTING
-		// FALLING
-		animeReplacements.put(GestureName.FALLING,GestureName.STANDING);
 		// HIDING
 		// JUMPING
 		// LANDING

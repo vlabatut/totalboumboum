@@ -12,29 +12,14 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
 
 /**
  * A successor calculator taking into account the bombs, flames and our distance to them.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class AdvancedSuccessorCalculator extends SuccessorCalculator
 {
-	/** */
 	private Matrix interest = null;
-	/** */
 	private AkbulutKupelioglu monIa = null;
-	/** */
 	private final int TILE_TRAVERSAL_TIME = -460;
-	
-	/**
-	 * 
-	 * @param interest
-	 * 		description manquante !
-	 * @param monIa
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AdvancedSuccessorCalculator(Matrix interest, AkbulutKupelioglu monIa) throws StopRequestException
 	{
 		monIa.checkInterruption();

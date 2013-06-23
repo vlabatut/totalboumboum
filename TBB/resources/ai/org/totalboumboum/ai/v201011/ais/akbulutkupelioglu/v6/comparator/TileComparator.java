@@ -10,23 +10,19 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
  * A comparator used to compare tiles.
  * A tile is "less than" another, if its Manhattan distance to the player's tile is less than
  * that of the other tile. 
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class TileComparator implements Comparator<AiTile>
 {
-	/** */
+
 	AiTile ownTile = null;
-	/** */
 	AkbulutKupelioglu monIa;
 	/**
 	 * Creates a new TileComparator.
 	 * @param ownTile The player's tile.
 	 * @param ia AkbulutKupelioglu using this comparator.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public TileComparator(AiTile ownTile, AkbulutKupelioglu ia) throws StopRequestException
 	{

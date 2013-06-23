@@ -2,19 +2,19 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
 
 
 /**
- * ReprÃ©sente un lien orientÃ© dans un arbre de recherche.
- * Ce lien est dÃ©fini par les deux noeuds reliÃ©s : l'origine (parent)
- * et la cible (fils) ainsi que par l'action Ã  rÃ©aliser pour passer 
- * d'un Ã©tat Ã  l'autre.
+ * Représente un lien orienté dans un arbre de recherche.
+ * Ce lien est défini par les deux noeuds reliés : l'origine (parent)
+ * et la cible (fils) ainsi que par l'action à réaliser pour passer 
+ * d'un état à l'autre.
  * 
- * @author Gizem BingÃ¶l
- * @author Utku GÃ¶rkem Kentenci
+ * @author Gizem Bingol
+ * @author Utku Gorkem Kentenci
  *
  */
 public class SearchLink
-{	/** noeud parent */
+{	// noeud parent
 	private Noeud origin;
-	/** noeud fils */
+	// noeud fils
 	private Noeud target;
 
 	/**
@@ -22,6 +22,7 @@ public class SearchLink
 	 * 
 	 * @param origin	noeud parent
 	 * @param target	noeud fils
+	 * @param action	action de transition
 	 */
 	public SearchLink(Noeud origin,Noeud target)
 	{	this.origin = origin;
@@ -51,11 +52,10 @@ public class SearchLink
 
 	/**
 	 * Renvoie une valeur indiquant l'egalite de l'objet
-	 * vrai si l'objet passÃ© en parametre est egale Ã  cet objet
+	 * vrai si l'objet passé en parametre est egale à cet objet
 	 * false sinon 
 	 * @return result indique l'egalite	
 	 */
-	@Override
 	public boolean equals(Object object)
 	{	boolean result;
 		if(object == null)

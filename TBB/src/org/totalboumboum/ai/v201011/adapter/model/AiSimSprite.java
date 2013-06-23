@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,34 +26,32 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 
 /**
  * cette classe permet de simuler les sprites du jeu,
- * et un nombre restreint de leurs propriÃ©tÃ©s.
+ * et un nombre restreint de leurs propriétés.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 abstract class AiSimSprite implements AiSprite
 {	
 	/**
-	 * crÃ©e une nouvelle simulation d'un sprite
+	 * crée une nouvelle simulation d'un sprite
 	 * 
 	 * @param id
-	 * 		numÃ©ro d'identification du sprite
+	 * 		numéro d'identification du sprite
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param posX
 	 * 		abscisse du sprite
 	 * @param posY
-	 * 		ordonnÃ©e du sprite
+	 * 		ordonnée du sprite
 	 * @param posZ
 	 * 		hauteur du sprite
 	 * @param state
-	 * 		Ã©tat du sprite
+	 * 		état du sprite
 	 * @param burningDuration
-	 * 		durÃ©e de combustion du sprite
+	 * 		durée de combustion du sprite
 	 * @param currentSpeed
-	 * 		vitesse courante de dÃ©placement du sprite
+	 * 		vitesse courante de déplacement du sprite
 	 */
 	protected AiSimSprite(int id, AiSimTile tile, double posX, double posY, double posZ, 
 			AiSimState state, long burningDuration, double currentSpeed)
@@ -71,10 +69,10 @@ abstract class AiSimSprite implements AiSprite
 	}
 
 	/**
-	 * construit une simulation du sprite passÃ© en paramÃ¨tre
+	 * construit une simulation du sprite passé en paramètre
 	 * 
 	 * @param sprite	
-	 * 		sprite Ã  simuler
+	 * 		sprite à simuler
 	 * @param tile	
 	 * 		simulation de la case contenant le sprite
 	 */
@@ -105,7 +103,7 @@ abstract class AiSimSprite implements AiSprite
 	
 	/**
 	 * permet de modifier l'id de ce sprite.
-	 * mÃ©thode utilisÃ©e uniquement lors des simulations.
+	 * méthode utilisée uniquement lors des simulations.
 	 * 
 	 * @param id
 	 * 		nouvel id de ce sprite
@@ -117,7 +115,7 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Ã©tat dans lequel se trouve ce sprite */
+	/** état dans lequel se trouve ce sprite */
 	protected AiSimState state;
 
 	@Override
@@ -126,10 +124,10 @@ abstract class AiSimSprite implements AiSprite
 	}
 	
 	/**
-	 * modidifie l'Ã©tat de ce sprites
+	 * modidifie l'état de ce sprites
 	 * 
 	 * @param state
-	 * 		le nouvel Ã©tat Ã  affecter Ã  ce sprite
+	 * 		le nouvel état à affecter à ce sprite
 	 */
 	public void setState(AiSimState state)
 	{	this.state = state;
@@ -162,11 +160,11 @@ abstract class AiSimSprite implements AiSprite
 	}
 	
 	/**
-	 * permet de modifier la case occupÃ©e par ce sprite.
-	 * mÃ©thode utilisÃ©e uniquement lors des simulations.
+	 * permet de modifier la case occupée par ce sprite.
+	 * méthode utilisée uniquement lors des simulations.
 	 * 
 	 * @param tile
-	 * 		nouvelle case occupÃ©e par ce sprite
+	 * 		nouvelle case occupée par ce sprite
 	 */
 	protected void setTile(AiSimTile tile)
 	{	this.tile = tile;
@@ -177,7 +175,7 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	/** abscisse de ce sprite en pixels */
 	protected double posX;
-	/** ordonnÃ©e de ce sprite en pixels */
+	/** ordonnée de ce sprite en pixels */
 	protected double posY;
 	/** altitude de ce sprite en pixels */
 	protected double posZ;
@@ -198,13 +196,13 @@ abstract class AiSimSprite implements AiSprite
 	}
 	
 	/**
-	 * permet de modifier les coordonnÃ©es de ce sprite (exprimÃ©es en pixels).
-	 * mÃ©thode utilisÃ©e uniquement lors des simulations.
+	 * permet de modifier les coordonnées de ce sprite (exprimées en pixels).
+	 * méthode utilisée uniquement lors des simulations.
 	 * 
 	 * @param x
 	 * 		nouvelle abscisse
 	 * @param y
-	 * 		nouvelle ordonnÃ©e
+	 * 		nouvelle ordonnée
 	 * @param z
 	 * 		nouvelle hauteur
 	 */
@@ -217,7 +215,7 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps nÃ©cessaire au sprite pour brÃ»ler (Ã  condition qu'il puisse brÃ»ler) */
+	/** temps nécessaire au sprite pour brûler (à condition qu'il puisse brûler) */
 	protected long burningDuration = 0;
 	
 	@Override
@@ -228,7 +226,7 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de dÃ©placement courante en pixels/s (est nulle si le sprite ne bouge pas */
+	/** vitesse de déplacement courante en pixels/s (est nulle si le sprite ne bouge pas */
 	protected double currentSpeed = 0;
 	
 	@Override
@@ -237,11 +235,11 @@ abstract class AiSimSprite implements AiSprite
 	}
 
 	/**
-	 * permet de modifier la vitesse de dÃ©placement courante de ce sprite.
-	 * mÃ©thode utilisÃ©e uniquement lors des simulations.
+	 * permet de modifier la vitesse de déplacement courante de ce sprite.
+	 * méthode utilisée uniquement lors des simulations.
 	 * 
 	 * @param currentSpeed
-	 * 		nouvelle vitesse de dÃ©placement
+	 * 		nouvelle vitesse de déplacement
 	 */
 	protected void setCurrentSpeed(double currentSpeed)
 	{	this.currentSpeed = currentSpeed;
@@ -280,7 +278,7 @@ abstract class AiSimSprite implements AiSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement ce sprite et libÃ¨re les ressources qu'il occupait
+	 * termine proprement ce sprite et libère les ressources qu'il occupait
 	 */
 	protected void finish()
 	{	// state

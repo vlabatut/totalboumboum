@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,14 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
- * <br/>
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
+ * 
  * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
@@ -41,9 +41,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, à ne plus utiliser. 
+ *
  */
 public abstract class AiZone
 {	
@@ -207,16 +205,16 @@ public abstract class AiZone
 	/**
 	 * renvoie la direction de la case target relativement à la case source.
 	 * Par exemple, la case target de coordonnées (5,5) est à droite de
-	 * la case source de coordonnées (5,6).
-	 * <br/>
+	 * la case source de coordonnées (5,6).</br>
+	 * 
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
-	 * il faut se déplacer pour aller de la case source à la case target.
-	 * <br/>
+	 * il faut se déplacer pour aller de la case source à la case target.</br>
+	 * 
 	 * <b>ATTENTION 1 :</b> si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
 	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
-	 * la classe Direction pour plus d'informations sur ces valeurs.
-	 * <br/>
+	 * la classe Direction pour plus d'informations sur ces valeurs.</br>
+	 *  
 	 * <b>ATTENTION 2 :</b> comme les niveaux sont circulaires, il y a toujours deux directions possibles.
 	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
@@ -296,8 +294,6 @@ if(target==null || source==null)
 	 * la liste est vide si aucune bombe de cette couleur n'existe ou si 
 	 * cette couleur est null.
 	 * 
-	 * @param color 
-	 * 		?	
 	 * @return	
 	 * 		une liste de bombe de la couleur passée en paramètre
 	 */
@@ -362,10 +358,8 @@ if(target==null || source==null)
 	 * renvoie le personnage de la couleur passée en paramètre,
 	 * ou null si aucun personnage de cette couleur existe ou si 
 	 * cette couleur est null.
-	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés.
-	 *  
-	 * @param color 
-	 * 		?	
+	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés. 
+	 * 
 	 * @return	
 	 * 		le personnage dont la couleur est celle passée en paramètre
 	 */
@@ -566,8 +560,6 @@ if(target==null || source==null)
 	 * 		colonne de la seconde case
 	 * @param  direction
 	 * 		direction à considérer
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
 	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,direction,height,width);
@@ -590,8 +582,6 @@ if(target==null || source==null)
 	 * 		ligne de la seconde case
 	 * @param col2
 	 * 		colonne de la seconde case
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2)
 	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,height,width);
@@ -610,8 +600,6 @@ if(target==null || source==null)
 	 * 		première case
 	 * @param tile2
 	 * 		seconde case
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2)
 	{	int result = getTileDistance(tile1,tile2,Direction.NONE);
@@ -633,8 +621,6 @@ if(target==null || source==null)
 	 * 		seconde case
 	 * @param direction
 	 * 		direction à considérer
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
 	{	int line1 = tile1.getLine();
@@ -657,8 +643,6 @@ if(target==null || source==null)
 	 * 		premier sprite
 	 * @param sprite2
 	 * 		second sprite
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(AiSprite sprite1, AiSprite sprite2)
 	{	int result = getTileDistance(sprite1,sprite2,Direction.NONE);
@@ -680,8 +664,6 @@ if(target==null || source==null)
 	 * 		second sprite
 	 * @param direction
 	 * 		direction à considérer
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(AiSprite sprite1, AiSprite sprite2, Direction direction)
 	{	AiTile tile1 = sprite1.getTile();
@@ -765,8 +747,6 @@ if(target==null || source==null)
 	 * 		abscisse du second point
 	 * @param y2
 	 * 		ordonnée du second point
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
@@ -794,8 +774,6 @@ if(target==null || source==null)
 	 * 		ordonnée du second point
 	 * @param direction
 	 * 		direction à considérer
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
@@ -816,8 +794,6 @@ if(target==null || source==null)
 	 * 		premier sprite
 	 * @param sprite2
 	 * 		second sprite
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2)
 	{	double result = getPixelDistance(sprite1, sprite2,Direction.NONE);
@@ -838,8 +814,6 @@ if(target==null || source==null)
 	 * 		second sprite
 	 * @param direction
 	 * 		direction à considérer
-	 * @return
-	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2, Direction direction)
 	{	double x1 = sprite1.getPosX();
@@ -964,7 +938,7 @@ if(target==null || source==null)
 	 * 		la version normalisée de line
 	 */
 	public int normalizePositionLine(int line)
-	{	return LevelsTools.normalizePositionRow(line,height);
+	{	return LevelsTools.normalizePositionLine(line,height);
 	}
 	
 	/////////////////////////////////////////////////////////////////

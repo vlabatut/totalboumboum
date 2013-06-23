@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.game;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -43,11 +43,8 @@ import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiMiscTools;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 
@@ -70,7 +67,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		dataPanel.setOpaque(false);
 		
 		// background
-		{	Color bg = GuiColorTools.COLOR_COMMON_BACKGROUND;
+		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
 			setBackground(bg);
 		}
 		
@@ -80,17 +77,17 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		}
 		
 		// sizes
-		int buttonHeight = GuiSizeTools.subPanelTitleHeight;
-		int regularButtonWidth = (getDataWidth() - 2*GuiSizeTools.subPanelMargin)/3;
-		int centerButtonWidth = getDataWidth()- 2*regularButtonWidth - 2*GuiSizeTools.subPanelMargin;
-		int mainPanelHeight = getDataHeight() - buttonHeight - GuiSizeTools.subPanelMargin;
+		int buttonHeight = GuiTools.subPanelTitleHeight;
+		int regularButtonWidth = (getDataWidth() - 2*GuiTools.subPanelMargin)/3;
+		int centerButtonWidth = getDataWidth()- 2*regularButtonWidth - 2*GuiTools.subPanelMargin;
+		int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.subPanelMargin;
 		
 		// main panel
 		{	mainPanel = new TableSubPanel(getDataWidth(),mainPanelHeight,Mode.NOTHING,1,1,true);
 			dataPanel.add(mainPanel);
 		}
 		
-		dataPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
+		dataPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 		
 		// buttons
 		{	// buttons panel
@@ -108,7 +105,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			// up button
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -121,11 +118,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// central
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(centerButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -138,11 +135,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// down
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
-				label.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
@@ -307,7 +304,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		{	int colName = columns.indexOf(GameColumn.HOST_NAME);
 			// process name width
 			if(colName!=-1)
-			{	colWidths[colName] = getDataWidth() - (cols-1)*GuiSizeTools.subPanelMargin;
+			{	colWidths[colName] = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
 				for(int col=0;col<cols;col++)
 				{	if(col!=colName)
 						colWidths[colName] = colWidths[colName] - colWidths[col];
@@ -335,7 +332,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private void refreshList()
 	{	EmptyContentPanel dataPanel = getDataPanel();
 		// remove the old panel
-		int index = GuiMiscTools.indexOfComponent(dataPanel,mainPanel);
+		int index = GuiTools.indexOfComponent(dataPanel,mainPanel);
 		dataPanel.remove(index);
 		
 		// put the new one
@@ -371,7 +368,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			int line = indexOld%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
-			Color bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			panel.setLineBackground(line,bg);
 			// update selected id
 			selectedId = null;
@@ -392,7 +389,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			int line = indexNew%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
-			Color bg = GuiColorTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
 			panel.setLineBackground(line,bg);
 		}
 		
@@ -491,7 +488,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	MyLabel label = (MyLabel)e.getComponent();
-		int pos = GuiMiscTools.indexOfComponent(buttonsPanel,label);
+		int pos = GuiTools.indexOfComponent(buttonsPanel,label);
 		// bottom buttons
 		if(pos!=-1)
 		{	// previous page

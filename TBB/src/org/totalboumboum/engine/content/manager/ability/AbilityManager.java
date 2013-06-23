@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.ability;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -78,8 +78,6 @@ public abstract class AbilityManager
 	
 	public abstract StateAbility getAbility(String name);
 	
-	public abstract List<StateAbility> getAbilitiesStartingWith(String name);
-
 /*	public StateAbility getAbility(StateAbility ability)
 	{	return getAbility(ability.getName());
 	}

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.communication;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -23,22 +23,14 @@ package org.totalboumboum.ai.v200910.adapter.communication;
 
 /**
  * 
- * noms donn√©s aux diff√©rentes actions qu'une IA peut effectuer : 
- * NONE (ne rien faire), MOVE (se d√©placer, avec la direction √† pr√©ciser), 
+ * noms donnÈs aux diffÈrentes actions qu'une IA peut effectuer : 
+ * NONE (ne rien faire), MOVE (se dÈplacer, avec la direction ‡ prÈciser), 
  * DROP_BOMB (poser une bombe), PUNCH (frapper une bombe)... 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, √† ne plus utiliser. 
+ *
  */
 public enum AiActionName
-{	/** Poser une bombe */
-	DROP_BOMB,
-	/** Se d√©placer */
-	MOVE,
-	/** Ne rien faire */
-	NONE,
-	/** Frapper une bombe */
-	PUNCH;	
+{
+	DROP_BOMB,MOVE,NONE,PUNCH;	
 }

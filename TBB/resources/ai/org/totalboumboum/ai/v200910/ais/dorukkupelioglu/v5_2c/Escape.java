@@ -9,39 +9,18 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
-/**
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
- */
-@SuppressWarnings("deprecation")
 public class Escape {
 	
-	/** */
 	private DorukKupelioglu dk;
-	/** */
 	private Astar astar;
-	/** */
 	private AiPath path;
-	/** */
 	private boolean hasPathFound;
-	/** */
 	private boolean escapeEnded;
-	/** */
 	private boolean pathWorks;
-	/** */
 	private List<AiTile> safes;
-	/** */
 	private List<Double> pathStates;
-	/** */
 	private List<Double> pathStatesControl;
 	
-	/**
-	 * 
-	 * @param dk
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Escape(DorukKupelioglu dk)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -91,13 +70,8 @@ public class Escape {
 			hasPathFound=true;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
+	
 	public Direction moveTo()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -111,13 +85,6 @@ public class Escape {
 		return moveDir;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -143,38 +110,17 @@ public class Escape {
 		return hasPathFound && !escapeEnded;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean pathWorks() throws StopRequestException
 	{	dk.checkInterruption();
 		return pathWorks;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean hasEnded()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return escapeEnded;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean succeed()throws StopRequestException
 	{
 		dk.checkInterruption();

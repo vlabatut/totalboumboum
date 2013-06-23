@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop.event.replay.sprite;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,7 +37,7 @@ public abstract class SpriteEvent extends ReplayEvent
 	{	super();
 		spriteId = sprite.getId();
 		Tile tile = sprite.getTile();
-		spriteInfo = sprite.getName()+"@("+tile.getCol()+","+tile.getRow()+")";
+		spriteInfo = sprite.getName()+"@("+tile.getCol()+","+tile.getLine()+")";
 	}
 		
 	/////////////////////////////////////////////////////////////////

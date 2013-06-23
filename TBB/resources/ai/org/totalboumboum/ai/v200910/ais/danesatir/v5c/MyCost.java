@@ -10,25 +10,13 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class MyCost extends CostCalculator {
-	/** */
 	private TimeMatrice time;
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	MyCost(TimeMatrice time, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -36,9 +24,7 @@ public class MyCost extends CostCalculator {
 	}
 	/**
 	 * Calculate cost with priority Bonus and depriority Fire.
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException {

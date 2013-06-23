@@ -2,7 +2,7 @@ package org.totalboumboum;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -45,43 +45,19 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import org.totalboumboum.gui.frames.NormalFrame;
 import org.totalboumboum.gui.frames.QuickFrame;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
-import org.totalboumboum.gui.tools.GuiMiscTools;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
- * Class used to launch the game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class Launcher
 {	
-	/**
-	 * Launches the game. Three possible options:
-	 * <ul>
-	 * 		<li>{@code help}: displays a description of the command</li>
-	 * 		<li>{@code quick}: launches the game in quick mode</li>
-	 * 		<li>{@code window}: force the launch in windowed mode (even if the options are set to fullscreen)</li>
-	 * </ul>
-	 * If not options are precised, then the game is launched normally.
-	 * 
-	 * @param args
-	 * 		One out of 3 possible options.
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 * @throws IllegalArgumentException
-	 * @throws SecurityException
-	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException
-	 * @throws ClassNotFoundException
-	 */
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// set thread name
 		Thread thread = Thread.currentThread();
@@ -89,11 +65,11 @@ public class Launcher
 		
 		List<String> argList = Arrays.asList(args); 
 
-		if(argList.contains(GuiMiscTools.OPTIONS[GuiMiscTools.OPTION_HELP]))
+		if(argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_HELP]))
 			displayHelp();
 		else
-		{	forceWindow = argList.contains(GuiMiscTools.OPTIONS[GuiMiscTools.OPTION_WINDOW]);
-			if(argList.contains(GuiMiscTools.OPTIONS[GuiMiscTools.OPTION_QUICK]))
+		{	forceWindow = argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_WINDOW]);
+			if(argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_QUICK]))
 				quickLaunch();
 			else
 				normalLaunch();
@@ -103,61 +79,42 @@ public class Launcher
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Displays the help message (option {@code help}).
-	 */
 	private static void displayHelp()
-	{	System.out.println(GuiMiscTools.OPTION_HELP_MESSAGE);
-		for(int i=0;i<GuiMiscTools.OPTIONS.length;i++)
-			System.out.println("    ->"+GuiMiscTools.OPTIONS[i]+": "+GuiMiscTools.OPTIONS_HELP[i]);
+	{	System.out.println(GuiTools.OPTION_HELP_MESSAGE);
+		for(int i=0;i<GuiTools.OPTIONS.length;i++)
+			System.out.println("    ->"+GuiTools.OPTIONS[i]+": "+GuiTools.OPTIONS_HELP[i]);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// NORMAL LAUNCH	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Launches the game normally (no option specified),
-	 * i.e. not in quickmode.
-	 * 
-	 * @throws SAXException 
-	 * @throws ParserConfigurationException 
-	 * @throws IllegalArgumentException 
-	 * @throws SecurityException 
-	 * @throws IOException 
-	 * @throws IllegalAccessException 
-	 * @throws NoSuchFieldException 
-	 * @throws ClassNotFoundException 
-	 */
 	private static void normalLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// splashscreen
 		SplashScreen splash = SplashScreen.getSplashScreen();
 		
 		// load XML schemas
-		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_XML]);
+		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_XML]);
 		XmlTools.init();
 		// load configuration
-		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_CONFIG]);
+		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_CONFIG]);
 		Configuration.loadConfiguration();
 		// load GUI configuration
-		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_GUI]);
+		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_GUI]);
 		GuiConfiguration.loadConfiguration();
 		resolutionSelection();
 		// initalize GUI
-		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_INIT]);
-		GuiFontTools.init();
-		GuiSizeTools.init();
-		GuiImageTools.init();
+		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
+		GuiTools.init();
 		// load engine stats
-		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_STATS]);
+		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
 		GameStatistics.loadStatistics();
 		// startup finished
-		updateSplash(splash,GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_DONE]);
+		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
 		GameData.quickMode = false;
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
-		{	@Override
-			public void run()
+		{	public void run()
 			{	try
 				{	NormalFrame normalFrame = new NormalFrame();
 					if(fullScreen)
@@ -193,14 +150,6 @@ public class Launcher
 		});		
 	}
 	
-	/**
-	 * Updates the text displayed in the splash screen (normal launch only).
-	 * 
-	 * @param splash
-	 * 		The splash screen to update.
-	 * @param msg
-	 * 		The text message to display.
-	 */
 	private static void updateSplash(SplashScreen splash, String msg)
 	{	if(splash!=null)
 		{	Graphics2D g = (Graphics2D)splash.createGraphics();
@@ -210,9 +159,9 @@ public class Launcher
 			g.setPaintMode();
 			g.setFont(new Font("Arial",Font.PLAIN,10));
 			g.setColor(new Color(0,0,0,100));
-			for(int i=0;i<GuiMiscTools.STARTUP_LEGAL.length;i++)
-				g.drawString(GuiMiscTools.STARTUP_LEGAL[i],70,90+i*10);
-			g.setColor(GuiColorTools.COLOR_SPLASHSCREEN_TEXT);
+			for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
+				g.drawString(GuiTools.STARTUP_LEGAL[i],70,90+i*10);
+			g.setColor(GuiTools.COLOR_SPLASHSCREEN_TEXT);
 	        g.drawString(msg,70,315);
 	        splash.update();
 		}
@@ -221,52 +170,37 @@ public class Launcher
 	/////////////////////////////////////////////////////////////////
 	// QUICK LAUNCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
-	/**
-	 * Launches the game with a minimal graphical
-	 * interface ({@code quick} option).
-	 * 
-	 * @throws SAXException
-	 * @throws ParserConfigurationException
-	 * @throws IllegalArgumentException
-	 * @throws SecurityException
-	 * @throws IOException
-	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException
-	 * @throws ClassNotFoundException
-	 */
 	private static void quickLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// legal
-		for(int i=0;i<GuiMiscTools.STARTUP_LEGAL.length;i++)
-			System.out.println(GuiMiscTools.STARTUP_LEGAL[i]);
+		for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
+			System.out.println(GuiTools.STARTUP_LEGAL[i]);
 		System.out.println("--------------------------------");
 		// load XML schemas
-		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_XML]);
+		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_XML]);
 		XmlTools.init();
 		// load configuration 
-		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_CONFIG]);
+		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_CONFIG]);
 		Configuration.loadConfiguration();
 		// load GUI configuration
-		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_GUI]);
+		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_GUI]);
 		MiscConfiguration miscConfig = new MiscConfiguration();
 		miscConfig.setFont(null,new Font("Arial",Font.PLAIN,10));
 		GuiConfiguration.setMiscConfiguration(miscConfig);
 		resolutionSelection();
 		// initalize GUI
-		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_INIT]);
-		GuiFontTools.init();
+		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
+		GuiTools.quickInit();
 		// load engine stats
-		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_STATS]);
+		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
 		if(Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
 			GameStatistics.loadStatistics();
 		// done
-		System.out.println(GuiMiscTools.STARTUP_MESSAGES[GuiMiscTools.STARTUP_DONE]);
+		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
 		GameData.quickMode = true;
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
-		{	@Override
-			public void run()
+		{	public void run()
 			{	try
 				{	QuickFrame quickFrame = new QuickFrame();
 					if(fullScreen)
@@ -306,19 +240,11 @@ public class Launcher
 	/////////////////////////////////////////////////////////////////
 	// RESOLUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether or not the game should be forced in windowed mode */
 	private static boolean forceWindow;
-	/** Graphical devide */
 	private static GraphicsDevice device;
-	/** Graphical display mode */
 	private static DisplayMode newMode;
-	/** Whether or not the game should be displayed in fullscreen mode */
 	private static boolean fullScreen;
 
-	/**
-	 * Selects the graphical resolution depending
-	 * on the specified options.
-	 */
 	private static void resolutionSelection()
 	{	fullScreen = false;
 		// graphic conf
@@ -377,7 +303,6 @@ public class Launcher
 		}		
 	}
 	
-}
 	
 	
 	
@@ -402,24 +327,21 @@ public class Launcher
 	/*
 	 * TODO PARAMETRES MEMOIRE
 	 * -Xms32m -Xmx512m
-	 * sous Linux, pour eviter les problemes avec le garbage collector :
-	 * -XX:-UseConcMarkSweepGC
 	 */
 	
 	/* TODO conseils david :
 	 * 	- champ final pr forcer l'initialisation
-	 * 	- Ã©criture courte du for pour iterator
+	 * 	- écriture courte du for pour iterator
 	 */
 
 	/*
-	 * TODO rÃ¨gle pour les loaders :
-	 * 	- l'objet Ã  charger est crÃ©Ã© dans la premiÃ¨re mÃ©thode appelÃ©e lors du chargement
-	 *  - les mÃ©thode secondaires reÃ§oivent l'objet crÃ©Ã©, et le complÃ¨tent.
-	 *  - quand des objets secondaires sont chargÃ©s indÃ©pendamment, ie dans des mÃ©thodes publiques, 
-	 *    ils sont eux aussi crÃ©Ã©s dans la mÃ©thode appelÃ©e
+	 * TODO règle pour les loaders :
+	 * 	- l'objet à charger est créé dans la première méthode appelée lors du chargement
+	 *  - les méthode secondaires reçoivent l'objet créé, et le complètent.
+	 *  - quand des objets secondaires sont chargés indépendamment, ie dans des méthodes publiques, ils sont eux aussi créés dans la méthode appelée
 	 */
 
-	/* TODO mettre tout ce qui appelle du swing dans le thread adaptÃ©
+	/* TODO mettre tout ce qui appelle du swing dans le thread adapté
  		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	initGui();	
@@ -427,18 +349,1021 @@ public class Launcher
 		});
 	 */
 
-	/* TODO quand une classe est modifiÃ©e ou crÃ©Ã©e :
-	 * il faut implÃ©menter la fonction finish qui permet d'effacer toutes les rÃ©fÃ©rences qu'elle utilisait
+	/* TODO quand une classe est modifiée ou créée :
+	 * il faut implémenter la fonction finish qui permet d'effacer toutes les références qu'elle utilisait
 	 */
 	
 	/*
-	 * TODO Ã©lÃ©ments de la GUI
-	 * Split : reÃ§oit les paramÃ¨tres mais ne les met pas en cache
+	 * TODO GUI
+	 * Split : reçoit les paramètres mais ne les met pas en cache
 	 * Menu  : met les originaux en cache, envoie une copie au data
-	 * Data  : modifie les paramÃ¨tres reÃ§us. le menu se charge de les rÃ©cupÃ©rer, les comparer et Ã©ventuellement les sauver
+	 * Data  : modifie les paramètres reçus. le menu se charge de les récupérer, les comparer et éventuellement les sauver
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ARTIFICIAL INTELLIGENCE / TOURNAMENT	//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * TODO dans l'API IA il faut généraliser (tout en simplifiant) les propriétés des sprites, plutot que 
+	 * de définir des fonctions spécifiques à chaque fois.
+	 * ex : accéder aux propriétés via une fonction générique prenant le nom de la propriété en paramètre
 	 */
 	
 	/*
+	 * TODO type de tournoi plus adapté au réseau : hot potatoe
+	 * des joueurs jouent un match pendant que d'autres attendent 
+	 * à la fin du match, les n derniers joueurs sont relégués dans la salle d'attente
+	 * n joueurs qui attendaient sont qualifiés.
+	 * un classement permet de déterminer le leader provisoire
+	 */
+	
+	/*
+	 * TODO include dans l'API une fonction d'initialisation de l'IA, appelée lors de sa création
+	 * faudrait passer en paramètre le niveau et des infos style l'instance, etc.
+	 * ça permettrait par exemple, pour une IA qui apprend, de télécharger son fichier de sauvegarde
+	 * (dans son package)
+	 */
+	
+	/*
+	 * TODO evaluation du projet : pour la qualification, utiliser 
+	 * le temps nécessaire pour éliminer un/des adversaire(s) de référence
+	 */
+	
+	/*
+	 * TODO
+	 * plutot que de développer toute une API pour l'IA, il faudrait réutiliser les classes du jeu:
+	 * 	- faire une copie des données à chaque itération, pour des raisons de synchro
+	 *  - on suppose qu'une copie n'est pas modiée, donc on peut ne la calculer qu'une seule fois pour chaque IA
+	 *  - il faut définir des classes d'interface, des wrappers même, permettant aux IA d'accéder seulement aux méthodes autorisées
+	 *  - pour les pb de synchro quand on veut savoir les propriétés du feu qu'une bombe génèrerait, il suffit d'en construire un (feu) 
+	 *    et de le garder en cache le temps de la partie (en le màj si besoin de temps en temps)
+	 *  >> intérêt : pouvoir utiliser exactement les mêmes fonctions que dans le jeu
+	 *  (en fait, ça consiste à faire plus ou moins ce qui est déjà fait, sauf qu'au lieu de recopier les données dans des
+	 *  classes différentes, on les copies telles-quelles et on définit des classes wrappers
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MULTITHREADING	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO il ne faut pas exécuter toutes les IA dans un thread pool, mais au contraire les séparer
+	 * sinon, une seule IA bouclant à l'infini va consommer tous les threads dispo dans le treadpool
+	 * vont être successivement monopolisés par l'IA
+	 */
+	
+	/*
+	 * TODO une fois qu'on a déterminé les nombres de joueurs, y a moyen de gérer les threads de meilleure manière en :
+	 * 		- créant un executor au niveau du tournoi
+	 * 		- il doit contenir un pool de (nbre d'IA max pvant jouer à la fois)+1(pr loop)
+	 * 		- par la suite, au lieu de créer un thread pour chaque ia ou pour le chargement/loop, on en demande un à l'executor
+	 * http://java.sun.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html
+	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
+	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
+	 * >>> pb: si un thread entre en boucle infinie, il ne sera jamais terminé, donc l'executor devra créer/gérer un thread de plus
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BOMBS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO autoriser de poser une dernière bombe avant de mourir ? (i.e. dans le gesture burning) comme ds XBlast
+	 */						
+	
+	/*
+	 * TODO dans l'eventMgr de la bombe, quand elle oscille, il faut gérer les sprites
+	 * qui sont en train de la pousser, et non pas en simple contact.
+	 * de plus, il faut que les sprites aient le pouvoir de pousser, sinon ils ne comptent pas.
+	 */
+	
+	/*
+	 * TODO
+	 * quand des sprites de plusieurs cases seront définis, peut-être que les explosions
+	 * devront être définies en tant que sprites (paramétrables pour leur taille) de ce type ?
+	 * ce qui permettrait de les faire se déplacer.
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CONTROLS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO lors de l'implémentation du jeu en réseau,
+	 * une optimisation consiste à ne pas générer des évts par le controleur tant
+	 * qu'une touche est appuyée, car ça va faire bcp de choses à transmettre,
+	 * le controleur étant situé coté client.
+	 * plutot, il faut les générer dans le controlManager, qui est coté serveur.
+	 * et du cp aussi, il faut éviter d'utiliser ce mode de gestion des évènements
+	 * pour les autres types d'evts (ie non-controles)
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// EXPLOSION/FIRE	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	/*
+	 * TODO à faire sur le feu (long terme) :
+	 * - décomposer l'explosion en :
+	 * 		1)explode
+	 *		2)stay still
+	 *		3)implode
+	 * 	pr gérer le déplacement des flammes à la XBlast
+	 * 
+	 * ou alternativement :
+	 * - décomposer le feu en appearing+standing+disapearing, 
+	 * 	ce qui permettrait de le faire durer aussi longtemps qu'on veut
+	 */
+
+	/*
+	 * TODO explosion:
+	 * lorsque la flamme est construite, on teste si chaque case la laisse passer
+	 * mais il faut aussi le faire sur la case centrale (origine de l'explosion)
+	 * car différents facteurs peuvent limiter l'explosion à une portée de 0
+	 * (sans pour autant empêcher l'explosion) 
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GENERAL		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO getClass().getResource(IMAGE_DIR + fnm)
+	 * permettrait de trouver un path de façon plus propre ? 
+	 */    
+
+	/*
+	 * TODO dans SBM2, il faut gérer :
+	 * 	- les boss (dans les autres aussi, notamment SBM5)
+	 * 	- les espèces de chars d'assaut présent dans certains niveaux (utilisés par les créatures)
+	 */
+	
+	/*
+	 * TODO définir le shrink comme ça :
+	 * - séquence de steps, chacun caractérisé par :
+	 * - un délai à laisser écouler après le step précédent
+	 * - la liste des lignes/tiles qui doivent apparaître, avec le type de bloc devant apparaître
+	 */
+	
+	/*
+	 * TODO pour le débug de certains points, il faudra mettre en place un controleur
+	 * capable d'enregistrer une séquence de commandes, ce qui permettra de les rejouer
+	 * par la suite (style playback) tout en controlant en temps réel un autre perso
+	 */
+	
+	/*
+	 * TODO animes/trajectoire : permettre de définir des labels dans la séquence
+	 * et de faire des goto et des boucles (?)
+	 */
+	
+	/*
+	 * TODO dans l'avenir il serait p-ê nécessaire d'utiliser un actionManager,
+	 * qui recevrait une action en paramètre, et l'exécuterait.
+	 * intérêt : décomposition + utile pour un moteur qui serait seulement un player,
+	 * et ne devrait donc pas gérer les tirages aléatoires, mais seulement l'application
+	 * déterministe des actions (le tirage se ferait dans la fonction appelant l'actionMger,
+	 * ie généralement : l'eventMgr)
+	 */
+	
+	/*
+	 * TODO
+	 * il faut mieux gérer l'accès aux méthodes, utiliser plus protected.
+	 * surtout pour protéger les classes qui devraient être inaccessibles depuis l'IA
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MULTIPLAYER		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * TODO
+	 * y a un mode de tournoi plus adapté pour le multijoueur, défini chaiplus trop où (mails?)
+	 * avec une espèce de tournante : n joueurs, matches de k joueurs, les n-k derniers sont remplacés
+	 * par ceux qui attendent
+	 */
+	
+	/*
+	 * TODO
+	 * - pour faciliter la communication lors des parties réseaux :
+	 *   systèmes de bulles pour communiquer. le joueur affecte un message
+	 *   à une touche, et quand il appuie dessus, une bulle apparait à côté
+	 *   de son joueur pour signifier ce message aux autres joueurs (vraisemblablement
+	 *   distants)
+	 * - p-ê que pour rendre ça plus facile à utiliser, faudrait prédéfinir
+	 *   un certain nombre de messages et permettre au joueur d'en définir certains custom
+	 * - donner aussi la possibilité de cibler des joueurs en particulier
+	 * - exemple d'utilisation :
+	 * 		- appuyer sur la touche du joueur ciblé
+	 * 		- appuyer sur la touche de message
+	 * 		- appuyer sur la touche du joueur mentionné dans le message
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ITEMS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 * TODO
+	 * possibilité de faire varier le calcul des points
+	 * en fonction de la position de départ des joueurs : 
+	 * certaines positions sont plus difficiles que d'autres 
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ITEMS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO gérer le déplacement des items lors d'une explosion
+	 */
+	
+	/*
+	 * TODO
+	 * item spécial permettant de manger les bombes des autres, comme certains ennemis du jeu original en mode histoire
+	 * item spécial qui, quand un héros meurt, déclence automatiquement une explosion, éventuellement avec un effet de zone  
+	 */
+	
+	/*
+	 *  TODO malus pour les bombes :
+	 *  portée aléatoire : on sait pas à quelle distance ça va péter 
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// XML			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/* 
+	 * TODO à faire dans les XML : 
+	 * 		- faire respecter au maximum les contraintes avec les schémas
+	 * 		- ensuite seulement faire respecter les contraintes dans les loaders
+	 * 		- dans les loaders, penser à gérer les valeurs/structures par défaut
+	 * exemples :
+	 * 		- pour les animes: les noms des gestures doivent être différents entre eux et différents de default
+	 * 		- pour les thèmes : les noms des components doivent être différents
+	 */	
+
+    /* 
+     * TODO pour forcer l'unicité d'un attribut/élément, voir ici : 
+     * http://rangiroa.essi.fr/cours/internet/02-slides-xml/schema.htm
+     */		
+
+	// TODO dans schema de Level : contrainte d'unicité sur les positions des lignes et colonnes    
+
+	/*
+	 * TODO dans le fichier de trajectoire, tester que la valeur de durée de forçage 
+	 * de position n'est pas supérieure à la durée de la trajectoire
+	 * (et il y a surement de nombreux autres test de cohérence à effectuer)
+	 */					
+
+	/*
+	 * TODO à faire dans le chargement des fichiers XML
+	 * ANIME : 
+	 * - vérifier que si on utilise une ombre, elle a bien été déclarée dans le fichier XML
+	 * - vérifier que le mouvement par défaut existe bel et bien
+	 * LEVEL :
+	 * - matrice vide = que des floors
+	 * - vérifier que quand on fait référence à un bloc par son nom, il existe bien dans le fichier du thème
+	 */
+
+	/*
+	 * TODO lorsqu'on définit une animation ou une trajectoire qui est identique à une autre
+	 * plutot que de faire un copier-coller, permettre de nommer l'animation d'origine.
+	 * bien sur, il faudra vérifier que cette animation existe, comme pour celle par défaut. 
+	 */
+	
+	/*
+	 * TODO dans les fichiers XML, il faut préciser en attribut de la racine la version
+	 * du fichier utilisée (i.e. version du schéma).
+	 */
+	
+	/*
+	 * TODO il faut reprendre les fichiers XML en centralisant au maximum les types
+	 * par exemple y en a plein c des références vers des fichiers (attributs file et folder)
+	 * ça permettrait de centraliser le code également dans le XMLTools
+	 */
+	
+	/*
+	 * TODO les attributs doivent XML respecter la convention java, et non pas XML (avec tirets)
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// TRAJECTORIES		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MODULATIONS	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/* 
+	 * TODO
+	 * dans les modulations third et other, la portée est limitée à la case (ou aux cases). 
+	 * le contact et surtout le remote ne sont pas encore gérés.
+	 * idée pour centraliser le traitement en cas de portée sans limite:
+	 * 	- dès qu'un sprite change de gesture, ses nouvelles modulations sont analysées
+	 * 	- toutes celles qui sont sans limite de portée sont stockées dans un vecteur situé dans Level 
+	 * 		(et toutes celles de l'état précédent sont retirées de ce même vecteur)
+	 * 	- lors de la validation de 3rdMod, ce vecteur est systématiquement testé 
+	 * 		en plus des sprites situés près de l'acteur et de la cible 
+	 */
+	
+	/*
+	 * NOTE les modulations sont ordonnées par priorité dans le fichier XML.
+	 * dans le cas où plusieurs modulations peuvent être appliquées à une action, 
+	 * c'est la première définie dans le fichier XML qui est utilisée.
+	 * il faut donc l'organiser du plus spécifique au plus général.
+	*/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// THEMES/LEVELS	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * TODO rajouter des niveaux inédits en utilisant au maximum les parties inutilisées
+	 * des autres thèmes
+	 */
+	
+	/*
+	 * TODO dans le level, il faut gérer la distribution des items :
+	 * possibiliter de la paramétrer en fonction du nombre de joueurs ?
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ANIMES	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	/*
+	 * TODO lorsque l'anime attendue est censée s'arrêter (pas de répétition)
+	 * et que le moteur compte sur un evt de fin pour passer à l'anime suivante,
+	 * il y a blocage si l'anime n'est pas définie, et que l'anime par défaut est
+	 * répétée.
+	 * exemple : défaut=marcher, et il manque punch -> le bonhomme ne sort jamais de l'état punching
+	 * >>>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une durée à respecter
+	 * (ce qui permet d'uniformiser le beans pour tous les joueurs)
+	 */
+	
+	/*
+	 * TODO il faut sécuriser les animations : s'assurer qu'une anime censée
+	 * ne pas être ré-init est bien gaulée. par exemple, pushing doit être gaulée
+	 * comme walking (dans le XML) sinon p-ê pb (si pas même durée ou autres diff)
+	 * > à vérif
+	 */
+	
+	/*
+	 * TODO pour Prognathe, faire une anime de début de partie : quand le sprite apparait
+	 * idée : sortir du sol
+	 * idée : le corps est déjà en place, tient la tête en l'air et la fixe sur ses épaules comme un pilote enfile son casque
+	 * 
+	 */
+	
+	/*
+	 * TODO animes : permettre de définir plusieurs animes pour 1 gesture,
+	 * avec choix aléatoire
+	 *  
+	 */
+	
+	/*
+	 * TODO animes : il faut définir un système de substitution d'image
+	 * de manière à ce qu'il soit impossible d'être pris en défaut
+	 */
+	
+	/*
+	 * TODO introduire une anime/action supplémentaire : en jeu, un joueur
+	 * peut provoquer un autre joueur en déclenchant une animation spécifique.
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ABILITIES	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * TODO y a des trucs qui vont se recouper style :
+	 * le bloc doit il empêcher le joueur de poser une bombe
+	 * ou bien la bombe d'apparaître ?
+	 * >>> un bombe peut apparaître pour autre chose qu'un drop (eg teleport)
+	 */
+
+	/*
+	 * TODO
+	 * le fait qu'il y ait collision ou pas peut changer en fonction de la direction
+	 * de déplacement (puisque l'ablt à bloquer peut être configurée suivant la 
+	 * direction). donc dans la gestion des collisions sur directions composées,
+	 * il faut retester avec une requête si le fait de retirer une direction provoque
+	 * toujours une collision ou pas.
+	 */
+	
+	/*
+	 * TODO certaines ablt sont liées à la trajectoire, par ex : puissance de jump
+	 * influe sur la distance du saut.
+	 * il faut donc en tenir comtpe dans la trajectoire, en proposant l'utilisation
+	 * d'un paramètre externe (au fichier XML)
+	 */
+	
+	/*
+	 * TODO quand on calcule l'ablt composite, pour les directions composites :
+	 * l'abilité renvoyée peut contenir une direction simplifiée, en fonction 
+	 * des autorisations obtenues. 
+	 */
+	
+	/*
+	 * TODO pour bien faire, il faudrait lister pour chaque sprite (et chaque configuration)
+	 * les actions et les états possibles. les permissions représentent les autorisations
+	 * pour appliquer une action. il manque la définition des actions, indiquant dans quel
+	 * état un objet se retrouve après avoir effectué/subi/empeché une action donnée (ce qui 
+	 * dépend éventuellement de l'état précédent l'action). 
+	 */
+	
+	/*
+	 * TODO le système de gestion des actions est clairement à améliorer.
+	 * certaines actions comme gather sont automatiques. certaines actions ont un effet de zone 
+	 * (pr gather : la case).
+	 */
+	
+	/*
+	 * TODO chargement des niveaux
+	 * 	- commencer une partie rapide avec un seul niveau
+	 * 	- jouer un round
+	 * 	- changer les items par défaut pour ce niveau, directement dans le fichier XML
+	 * 	- joueur le round suivant: 
+	 * 		- la gui affiche la modif
+	 *		- mais la hollow level n'a pas été rechargé (mutualisation)
+	 *		- et donc la modif n'est pas prise en compte dans l'initialisation des joueurs 
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// STATS				//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 * TODO
+	 * définir des stats de jeu plus complètes :
+	 * 		- niveaux les plus utilisés
+	 * 		- voire détail de tout par niveau
+	 * 		- stats temporelles
+	 * 		- analyse du jeu du joueur en fonction du temps, performance par niveau
+	 * 
+	 */
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IDENTIFICATION		//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO
+	 * 
+	 * PB: est-ce qu'on autorise la création d'hote/joueur indépendemment du central, ou pas.
+	 * >> OUI,mais pas de mdp
+	 * 
+	 * HOTES
+	 * - chaque hôte est identifié par un UUID (http://www.javapractices.com/topic/TopicAction.do?Id=56)
+	 *   qui n'est jamais modifié après
+	 * - de plus, l'ensemble de toutes ses adresses MAC sont enregistrées
+	 *   (http://www.kodejava.org/examples/250.html 
+	 *    http://www.stratos.me/2008/07/find-mac-address-using-java
+	 *    http://www.kodejava.org/examples/250.html)
+	 * - cette liste est mise à jour à chaque démarrage
+	 * - si d'un démarrage à l'autre il n'y a aucune adresse commune, ça veut dire que ce n'est plus la même machine
+	 * - on génère alors un nouvel UUID qui écrase le précédent
+	 * - les mots de passe de tous les profils sont réinitialisés
+	 * 
+	 * JOUEURS
+	 * - chaque joueur est identifié par l'identifiant de l'hote sur lequel il est créé
+	 *   plus un identifiant unique pour cet hôte (on peut prendre un autre UUID)
+	 * - ce numéro ne change jamais, même quand il joue sur un autre hote (ce qui est possible)
+	 * - on a un truc du style : joueur@createur
+	 * - quand le profil est utilisé sur son hote de création, pas besoin de mot de passe
+	 * - sinon il faut un mot de passe, qu'on a la possibilité d'enregistrer
+	 * >> en fait pas besoin de voir l'hote, avec l'uDDi ça suffit
+	 *    chaque joueur doit entrer le mdp quel que soit l'hote (même créateur)
+	 *    si le joueur n'est pas enregistré sur le site, il ne peut pas être protégé par un mot de passe
+	 *    et de toute façon ses stats ne comptent pas
+	 * >> intérêt d'identifier de façon unique l'hote ??
+	 *    ah oui, pr les stats sur qui joue chez qui...
+	 *    
+	 * NOTE empecher le même joueur de joueur deux matches en même temps...
+	 * >> que les matches via central enregistrés dans les stats
+	 */
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// KNOWN, WAITING BUGS	//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	/*
+	 * TODO
+	 *	l'ombre des blocs de la dernière ligne est portée sur les blocs de la première ligne
+	 *	c'est normal. pour l'éviter, il faudrait traiter un cas assez particulier... à voir
+	 *	>> tentative de résolution mise en place, à voir
+	 */
+	
+	/*  
+	 *  TODO l'item kick ne marche pas
+	 */
+	
+	/*
+	 * TODO
+	 * quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
+	 * on est bloqué. ce n'est pas vraiment un pb en fait, plus un feature :P . mais les non-initiés peuvent prendre ça pour un bug.
+	 * (note : point mentionné dans le blog)
+	 */
+	
+	/* 
+	 * TODO
+	 * impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
+	 * 		>> ca viendrait de swing ou du clavier (pb matériel ou bas niveau)
+	 */
+	
+	/* 
+	 * TODO
+	 * cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
+	 * (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
+	 * ou bien : un héros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
+	 * >> en même temps, ça laisse le choix au joueur de ramasser l'item ou pas, c'est pas mal finalement (si c'est un malus par ex.)
+	 */
+	
+	/*
+	 * TODO
+	 * bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
+	 * >> pas trouvé la cause de ce beans... (et c'est pas faut d'avoir cherché !)
+	 */
+	
+	
+	
+	
+	
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/* TODO
+	 * + beta.021
+	 * - Moteur :
+	 * - GUI :
+	 * - IA :
+	 * - stats :
+	 * - Divers :
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BUGS				//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* TODO
+	 * 
+	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
+	 * 	 et la vie était fonctionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
+	 *   >> pas réussi à reproduire ça...
+	 * 
+	 * - la pause d'IA reste même si le joueur est mort, et je ne sais pas pq : au débug le moteur n'exécute pas le code affichant le texte !
+	 * 
+	 * - quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
+	 *   juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
+	 *   case où elle atterrit.
+	 *   
+	 * - pb de réinitialisation : 
+	 * 		- jouer un tournoi single (par ex supercup) en entier
+	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été réinit à null
+	 * 
+	 *  - apparemment, y a un pb avec les GeneralAction, dont certaines définies dans les fichiers XML ne sont pas compatibles 
+	 *    avec la classe (en termes de circonstances) mais qui sont quand même chargées et initialisées normalement
+	 *  
+	 *  - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// A FAIRE MOTEUR	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* TODO PRIORITÉ HAUTE
+	 * 
+	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
+	 * 
+	 * - étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
+	 * 
+	 * - gérer le shrink
+	 * 
+	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
+	 * 
+	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
+	 * 
+	 */
+	
+	/* TODO PRIORITÉ BASSE
+	 * 
+	 * - NBM2 : 
+	 * 		- item veste ignifugée (souffle de l'explosion pas implémenté)
+	 * 		  (s'apparente à un push sur un joueur adverse, intéressant pour les instances à venir)
+	 * 
+	 * - SBM1 : 
+	 * 		- le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
+	 * 		  en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
+	 * 		- le clignotement d'invincibilité est sensé ralentir quand le temps est presque terminé
+	 * 		- item clock : soit rajouter du temps normalement, soit faire un freeze très court?
+	 * 		- spawn : faut décomposer en plusieurs abilities : délay, proba de spawn, nbre de spawn, etc
+	 * 
+	 * - Évènements :
+	 * 		- envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
+	 * 
+	 * - Threads :
+	 * 		- pouvoir modifier l'UPS pour les IA (pour alléger le calcul)
+	 * 
+	 * - Images :
+	 * 		- modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
+	 * 
+	 * - TournamentsMatches/Rounds :
+	 * 		- possibilité de définir un nom pour tournament/match/round, 
+	 * 		  qui sera affiche en titre de présentation/stats etc. 
+	 * 		  si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
+	 * 		- besoin d'une méthode permettant d'exporter un tournoi/match/round, 
+	 * 		  ie de l'écrire entièrement en local (pas de référence à des composants existants)
+	 * 		- dans les fichiers xml, pour les points, plutot que local (vrai ou faux), utiliser round/match/tournament/game (permet de mieux mutualiser les fichiers)
+	 * 		- tournoi coupe : 
+	 * 			- pouvoir se qualifier depuis n'importe quel leg, pas forcement le précédent direct (nécessité de préciser le numéro du leg en plus du part, dans le doc XML et la class CupPlayer)
+	 * 			- y compris depuis le leg initial (prévoir une sous-classe pour distinguer initial des autres?)
+	 * 
+	 * - Items :
+	 * 		- définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
+	 * 
+	 * - Stats : 
+	 * 		- nombre de fois qu'un level a été joué
+	 * 
+	 * - Points : 
+	 * 		- calcul : introduire des variables comme le nombre de joueurs 
+	 *  	  (pour définir un bonus pr le joueur qui fait un perfect en survival)
+	 * 		- lors du calcul des points, il faut forcer la présence d'un classement: 
+	 * 		  ça facilite énormément de traitements en aval
+	 *   	  au pire, si le classement est inutile (ex: simple total), on définit un classement-identité 
+	 *   	  (pts utilisés pr le classement <=> pts marqués)
+	 *
+	 * - Limites/Modes de jeu :
+	 * 		- limites exprimées de façon relative (peindre 75% des cases, éliminer la moitié des joueurs...)
+	 * 		- items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
+	 * 		- possibilité de choisir entre le fait que le round s'arrête dès que tout le monde est mort 
+	 * 		  sauf 1, ou dernière flamme terminée
+	 * 		- reformater les modes de jeu : pour paint il suffit de définir des bombes spéciales qui peignent le sol
+	 * 	 	- pour painting, possibilité de définir quelles cases peuvent être repeintes, 
+	 * 		  ce qui permet de poser comme limite un %age de cases repeintes
+	 * 
+	 * - XML :
+	 * 		- voir si on peut mettre à jour le parser XML
+	 * 		- définir la liste de gestures pour chaque type de sprite
+	 *		- le XML des animes doit avoir soit :
+	 * 			- NONE seule
+	 *  		- primaries seules
+	 *  		- primaries+NONE
+	 *  		- primaries+COMPOSITES
+	 *  		- primaries+NONE+composite
+	 * 		- et les gestures définis doivent au moins contenir les nécessaires, et au plus les autorisés
+	 *  	  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
+	 * 
+	 * - Actions/Abilities/Modulations
+	 * 		- HIDING devrait être un gesture définit automatiquement, non ? pas d'image, sensible à rien, seule action autorisée=apparaitre...
+	 *  	- vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) possède bien l'ability (avec modulate)
+	 * 		- pour chaque gesture, fixer les actions autorisées 
+	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
+	 * 		- il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
+	 * 			- qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
+	 * 			- ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
+	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
+	 * 		- le coup de l'indestructibilité des items (le fait de réapparaitre ailleurs) pourrait être étendue à tous les sprites
+	 * 		  (en particulier les joueurs, ça serait un cas spécial de résistance au feu un peu pénalisante, utilisable un nombre limité de fois, par ex !)
+	 * 		- ça serait bien que les paramètres numériques des abilités puissent être définies 
+	 * 		  au chargement (force, durée, utilisation) de façon aléatoire, en fonction de certains paramètres. 
+	 * 		  on pourrait par ex utiliser une liste de valeur numériques : 1=déterministe, 2=bornes pour un tirage au sort
+	 * 		  utile par exemple pour déterminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
+	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spéciales)
+	 * 
+	 * - Niveaux
+	 * 		- outil pour découper une image (background) en nxm floors
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// A FAIRE GUI		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* TODO
+	 * 
+	 * - rajouter un bouton dans les options avancées pour vider manuellement le cache mémoire
+	 * 
+	 * - rajouter une confirmation (popup) quand on sort définitivement d'une partie (icone maison)
+	 * 
+	 * - 1ère exécution
+	 * 		- définir un popup d'informations
+	 * 		- guider l'utilisateur pas à pas pour créer son profile et commencer sa partie
+	 * 
+	 * - pour les tournois, le chargement/sélection du tournoi doit précéder le choix des joueurs
+	 * 
+	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implémenterait l'interface basicPanel
+	 * 
+	 * - profils: 
+	 * 		- simplifier, pas besoin de la double représentation default+selected.
+	 * 		- réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
+	 * 
+	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
+	 * 
+	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
+	 * 
+	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
+	 * 
+	 * - results panel : 
+	 * 		- faut afficher explicitement le classement à la fin d'une confrontation
+	 * 		- quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
+	 * 		- ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
+	 *   	  voire on définit explicitement un ordre d'affichage dans la compétition
+	 * 		- dans les résultats :
+	 * 			- afficher par défaut les 4 scores de base
+	 * 			- plus les scores utilisés dans les points et/ou les limites
+	 * 			- si les limites utilisent des points custom, les afficher aussi
+	 * 		- à la fin du round, faire apparaitre les résultats par transparence
+	 * 
+	 * - tournoi : 
+	 * 		1) on choisit les paramètres 
+	 * 		2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, 
+	 * 		   et restreint aussi les IA pour les mêmes raisons
+	 * 
+	 * - champ en plus 
+	 * 		- dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
+	 * 		- dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
+	 * 		- tout ça est fait simplement en rajoutant les informations adéquates dans les classes de stat
+	 * 
+	 * - lors de la sélection des commandes :
+	 * 		- cliquer sur le bouton d'action fait réagir quelque chose dans la ligne du joueur correspondant
+	 * 		- permet de vérifier qu'on a pris les bonnes commandes (celles qu'on pensait avoir prises)
+	 * 
+	 * - il faudrait séparer les joueurs IA et les joueurs humain dans leur gestion.
+	 * 		ca permettrait de sélectionner directement l'IA, au lieu du joueur, et donc de ne pas avoir à créer plusieurs
+	 * 		joueurs avec la même IA quand on veut jouer contre plusieurs versions de la même IA.
+	 * 		voire limiter le nombre de joueurs pour une IA à 1 seul, mais sélectionnable plusieurs fois ?
+	 *		 à voir...
+	 * 
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CLEANING PROCEDURE		//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * - source : 
+	 * 		- supprimer zgraphics
+	 * 		- supprimer tous les commentaires TODO et NOTE
+	 * 		- effacer le changelog
+	 * 		- virer les classes contenant un main()
+	 * - ressources :
+	 * 		- supprimer restmp
+	 * 		- réinitialiser les logstats
+	 * 		- recopier les stats (éventuellement)
+	 * 		- recréer les sauvegardes des tournois
+	 * - options :
+	 * 		- réinitialiser le joueur humain
+	 * 		- virer l'enchainement automatique
+	 * 
+	 * - pour diffusion publique :
+	 * 		- fichiers :
+	 * 			- recompiler le jeu	
+	 * 			- virer les fichiers sources
+	 * 			- virer les IA pas finies (source+profils)
+	 * 			- virer les versions intermédiaires des IA
+	 * 		- options :
+	 * 			- simulation des matches AI-only
+	 * 		- prérégler la partie rapide sur : 
+	 * 			- les meilleures IA 
+	 * 			- des niveaux compatibles
+	 * 			- les règles classiques
+	 * 
+	 *  - pour diffusion projet :
+	 * 		- réseau :
+	 * 			- bloquer le bouton "réseau" dans le menu principal
+	 * 			- bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
+	 * 		- replay :
+	 * 			- bloquer le bouton "replay" dans le menu principal
+	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
+	 * 			- bloquer l'action dans les options avancées
+	 * 		- options :
+	 * 			- afficher les exceptions
+	 * 		- ressources :
+	 * 			- redonner les host id corrects pour les deux étudiants modifiés pour tester le réseau (5, 13 et 20)
+	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrés
+	 * 
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// A FAIRE SITE		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	/**
+	 *	- IA :
+	 * 		- utilitaire permettant de controller les checkinterruptions dans les programmes des étudiants
+	 *	- stats :
+	 *		- possibilité d'importer/exporter les stats indépendemment de la version des classes
+	 *	- GUI : 
+	 *  - tournois :
+	 *  	- championnat
+	 *  - instances :
+	 *  
+	 *  x) utilitaire pour controler les IA des étudiants (partage 3/2)
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//EN COURS			//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * - percepts à rajouter
+	 * 		- bonus : indiquer précisément les types de bonus restants
+	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
+	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de détonation d'une bombe posée là (voire donnant un objet bombe)
+	 * 			>> définir une classe bombe virtuelle ? destinée à ce seul effet ?
+	 * 		- la notion de blast peut être imprécise quand plusieurs bombes sont concernées
+	 * 			>> ça empêche de calculer des réaction en chaine
+	 * 			>> faudrait associer le temps
+	 * 			>> ça permettrait d'implémenter une fonction calculant l'état des explosions dans le futur, utilisable à la fois pour les bombes normales et pour les bombes virtuelles
+	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
+	 * 		- pour faire un suivi d'une ia à travers plusieurs rounds :
+	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
+	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
+	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
+	 * 		- il faut gérer les chemins au niveau des pixels. les cases, c'est pas assez précis.
+	 * - définir une mesure factuelle (reposant sur des faits de jeu) évaluant l'agressivité des joueurs
+	 * 		- cible des bombes: rien, mur ou IA
+	 * 		- à pondérer avec le nombre de bombes posées par seconde (par ex)
+	 * 
+	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
+	 * - prochaines étapes :
+	 * 		- league
+	 * 		- instance TBB
+	 * 		- sons
+	 * 		- BM'83
+	 * 		- shrink (?)
+	 * 		- réseau
+	 * 		- revoir GUI (?)
+	 * 		- sortir de bêta
+	 * 
+	 *  - tournoi league :
+	 *  	- finir GUI
+	 *  	- finir sélection des matches
+	 *  	- ordonner les matches
+	 *  - tournoi coupe : 
+	 *  	- possiblité de définir un tie-break random
+	 *  	- possibilité de définir un tie-break classement stats
+	 *  	- possibilité de définir des matches de classement optionnels (?)
+	 *  
+	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
+	 *    (ou un autre format vectoriel, SVG p-ê ?)
+	 *  
+	 *  - options pour les stats ?
+	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
+	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
+	 *  	- forcer la fin de la période (now)
+	 *  - instance TBB
+	 *  	- autoriser un burning player à poser une dernière bombe...
+	 *  	- bombe sensible aux chocs : en forme d'oeuf
+	 *  	- bombe en fer, résiste aux autres explosions
+	 *  	- le feu passe-muraille doit être d'une autre couleur et/ou forme
+	 *  	- feu électrique : tente d'atteindre un adversaire dans la mesure de sa portée (prend des virages et tout)
+	 *  	- feu d'amour : 
+	 *  		- plein de petits coeurs qui contaminent ceux qu'ils touchent. 
+	 *  		- les bombes qu'ils posent sont alors aussi des bombes à coeurs. 
+	 *  		- elles ne tuent pas, elles contaminent. 
+	 *  		- le contaminateur initial est résistant
+	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
+	 *  	- apparition des items : fumée+légèrement sur-élevé, puis l'item tombe par terre... (comm bug après cache v2)
+	 *  
+	 *  - enregistrement d'une partie : au lieu d'utiliser data+xml, mettre les données
+	 *    xml dans le fichier de données aussi. (au début bien entendu)
+	 */ 
+	
+	/**
+	 * TODO
+	 * dans les fichiers XML animes et trajectoires : pr chaque dir/gesture,
+	 * possibilité (sous forme d'attribut) de redéfinir ou compléter
+	 * l'élément déjà défini dans un éventuel sprite abstrait. bien sur,
+	 * si pas déjà défini on fait un redefine pr défaut
+	 */
+	
+	/**
+	 * TODO
+	 * quand on interrompt un round,
+	 * les points sont calculés normalement pr les IA
+	 * et les joueurs humains sont tous ex-aequo derniers
+	 * (voire tout le monde ex-aequo?)
+	 */
+
+	/**
+	 * TODO faire une appli propre pour générer les niveaux
+	 * mettre une jolie doc en ligne de commande pour exécuter tout ça
+	 */
+
+	/*
+	 * TODO le caractère local d'un joueur s'oppose à ses commandes
+	 * à la fois dans l'interface graphique et dans le moteur
+	 */
+
+	/*
+	 * lors du chargement des sprites, ne charger que le nécessaire :
+	 * 	- blocks/floors
+	 * 	- items
+	 * 	- fires
+	 * 	- heroes gestures (?)
+	 */
+	
+	/**
+	 * TODO
+	 * 	1) définir un système d'enregistrement/replay
+	 * 	2) étendre au mode réseau, la seule différence étant que dans le preimier
+	 * 		cas on lit les evts dans un fichier, alors que dans le deuxième on les
+	 * 		reçoit à travers le réseau.
+	 * 
+	 * - on suppose que chaque joueur possède tous les fichiers nécessaires
+	 * - par conséquent, tout les sprites peuvent être chargés a priori, ainsi que l'aperçu du niveau
+	 * - mais la zone est générée partiellement aléatoirement, donc il faut la transmettre (sous forme d'évènements)
+	 * 		>> l'initialisation de la zone (loadTheme) doit différer dans les loops
+	 * - composant dans la loop player qui interprètera les évènements reçus :
+	 * 		- trucs individuels >> envoyés aux sprites concernés
+	 * 		- création: faite sur place. sprites avec des managers light
+	 * 
+	 * - certaines abilities ont un effet graphique, comme twinkle ou flat
+	 *   faudra penser à un système pour transmettre les changement les concernant
+	 */
+	
+	/**
+	 * TODO replay
+	 * 	- ajouter des commandes (avance rapide, vitesse, retour arrière)
+	 *  - enregistrer une image au pif en cours de jeu, histoire de l'enregistrer en tant que preview
+	 */
+	
+	/*
+	 * TODO interface
+	 * remplacer le menu actuel par des icones dont la taille représente l'importance
+	 * à gauche de l'icone, mettre le texte actuellement présent dans les boutons
+	 * il est aligné à droite et sa taille est proportionnelle à celle des boutons
+	 * 	- options       : engrenages
+	 * 	- profils       : une des icones de profil/joueur/etc
+	 * 	- stats         : icone stat utilisée en cours de jeu
+	 *  - ressources    : icone package
+	 *  - tournoi	    : coupe
+	 *  - partie rapide : éclair du bouton play
+	 *  - charger       : disquette avec flèche (inverse de sauvegarde)
+	 *  - revoir        : une télé ? un oeil ? une pellicule?
+	 *  - à propos      : un "?"
+	 *  - quitter       : une croix (comme pour fermer une fenêtre) ou l'icone "quitter" du tournoi (?)
+	 */
+	
+	// TODO toutes Loops >> effacer tous les objets inutiles dans finish()
+	
+	// TODO faut transmettre les abilities/modulations graphiques, elles sont nécessaires
+	//	>> faut donc un modulation manager, et un ability manager (?)
+	//	>> coute cher... autre solution ?
+	// pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
+	// solution : mise à jour locale (pas comme replay) et tant pis pr la puissance perdue et la possible dé-synchro
+	
+	// TODO dans la gui, faudrait gérer le texte comme les images :
+	// le même texte peut servir sur plusieurs éléments.
+	// ça économiserait du traitement et de la place dans les fichiers de traduction,
+	// qui seraient plus simples à maintenir.
+	// et en plus on pourrait garder des noms d'éléments correspondant aux composants GUI,
+	// sans se soucier de leur signification réelle (contenu textuel).
+	// du cp, les clés du texte pourraient être plus explicites (car indépendantes)
+	
+	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
+	//TODO voir pouquoi c'est si lent dans l'interface quand on règle le tournoi
+	
+	//TODO profiles options : reset passwords (automatically performed
+	//when the MAC address changes, anyway
+	
+	/* TODO la communication [moteur >> gui] devrait se faire par evts, y compris durant le jeu
+	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
+	 * >> faut définir un système d'évènement pour toute classe affichée directement par un composant graphique
+	 * >> ça permetrait de ne pas avoir à recréer les écrans. par ex, dans les options : si qqch est changé, c'est automatiquement màj en background
+	 * 		- sauf qu'en fait c'est un mvais ex car dans les options ce sont des clones qui sont utilisés
+	 *        mais il suffirait de ne pas recréer à chaque fois le panel, plutot de réutiliser le précédent en faisant un set et en affectant le listener
+	 *      - faudrait du cp faire attention à la gestion de la mémoire : 
+	 *      	- les objets finished devraient se débarasser de leurs listeners
+	 *      	- en réaction, les listeners mettent leur référence à null et n'affichent rien >> bon ça
+	 *      >> ça va poser des pb de gestion de la mémoire (?)
+	 * >>> à faire plus tard...
+	 */
+	
+	/**
 	 * utilisation de lock : mettre unlock dans un block finally
 	 * 
 	 * public class MaClasse
@@ -453,1215 +1378,159 @@ public class Launcher
 				}
 				...
 	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ARTIFICIAL INTELLIGENCE / TOURNAMENT	/ INTELLIGENCE ARTIFICIELLE / TOURNOI	//////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	/*
-	 * TODO dans l'API IA il faut gÃ©nÃ©raliser (tout en simplifiant) les propriÃ©tÃ©s des sprites, plutot que 
-	 * de dÃ©finir des fonctions spÃ©cifiques Ã  chaque fois.
-	 * ex : accÃ©der aux propriÃ©tÃ©s via une fonction gÃ©nÃ©rique prenant le nom de la propriÃ©tÃ© en paramÃ¨tre
-	 */
-	
-	/*
-	 * TODO include dans l'API une fonction d'initialisation de l'IA, appelÃ©e lors de sa crÃ©ation
-	 * faudrait passer en paramÃ¨tre le niveau et des infos style l'instance, etc.
-	 * Ã§a permettrait par exemple, pour une IA qui apprend, de tÃ©lÃ©charger son fichier de sauvegarde
-	 * (dans son package)
-	 */
-	
-	/*
-	 * TODO evaluation du projet : pour la qualification, utiliser 
-	 * le temps nÃ©cessaire pour Ã©liminer un/des adversaire(s) de rÃ©fÃ©rence
-	 */
-	
-	/*
-	 * TODO
-	 * plutot que de dÃ©velopper toute une API pour l'IA, il faudrait rÃ©utiliser les classes du jeu:
-	 * 	- faire une copie des donnÃ©es Ã  chaque itÃ©ration, pour des raisons de synchro
-	 *  - on suppose qu'une copie n'est pas modifiÃ©e, donc on peut ne la calculer qu'une seule fois pour chaque IA
-	 *  - il faut dÃ©finir des classes d'interface, des wrappers mÃªme, permettant aux IA d'accÃ©der seulement aux mÃ©thodes autorisÃ©es
-	 *  - pour les pb de synchro quand on veut savoir les propriÃ©tÃ©s du feu qu'une bombe gÃ©nÃ©rerait, il suffit d'en construire un (feu) 
-	 *    et de le garder en cache le temps de la partie (en le mÃ j si besoin de temps en temps)
-	 *  >> intÃ©rÃªt : pouvoir utiliser exactement les mÃªmes fonctions que dans le jeu
-	 *  (en fait, Ã§a consiste Ã  faire plus ou moins ce qui est dÃ©jÃ  fait, sauf qu'au lieu de recopier les donnÃ©es dans des
-	 *  classes diffÃ©rentes, on les copies telles-quelles et on dÃ©finit des classes wrappers
-	 */
-
-	/*
-	 * TODO
-	 * quand on interrompt un round,
-	 * les points sont calculÃ©s normalement pr les IA
-	 * et les joueurs humains sont tous ex-aequo derniers
-	 * (voire tout le monde ex-aequo?)
-	 */
-	
-	/*
-	 * TODO 
-	 *  - utiliser le calcul d'occupation CPU pour limiter les IA trop gourmandes
-	 *  - utiliser la limite sur yield dÃ©jÃ  dÃ©finie (cf classe config d'ia)
-	 *  - calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de rÃ©f pour le temps en cours de jeu
-	 */
-	
-	/*
-	 * TODO arrÃªter les threads dont les ia ont Ã©tÃ© Ã©liminÃ©es du jeu
-	 */
-	
-	/*
-	 * TODO bombe menaÃ§ant les agents
-	 * poser une bombe de plus en plus forte, au lieu de faire du hasard
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MULTITHREADING / MULTIPROCESSUS	//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * TODO il ne faut pas exÃ©cuter toutes les IA dans un thread pool, mais au contraire les sÃ©parer
-	 * sinon, une seule IA bouclant Ã  l'infini va monopoliser tous les threads dispo dans le treadpool
-	 */
-	
-	/*
-	 * TODO une fois qu'on a dÃ©terminÃ© les nombres de joueurs, y a moyen de gÃ©rer les threads de meilleure maniÃ¨re en :
-	 * 		- crÃ©ant un executor au niveau du tournoi
-	 * 		- il doit contenir un pool de (nbre d'IA max pvant jouer Ã  la fois)+1(pr loop)
-	 * 		- par la suite, au lieu de crÃ©er un thread pour chaque ia ou pour le chargement/loop, on en demande un Ã  l'executor
-	 * http://java.sun.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html
-	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
-	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
-	 * >>> pb: si un thread entre en boucle infinie, il ne sera jamais terminÃ©, donc l'executor devra crÃ©er/gÃ©rer un thread de plus
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// BOMBS / BOMBES	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * TODO autoriser de poser une derniÃ¨re bombe avant de mourir ? (i.e. dans le gesture burning) comme ds XBlast
-	 */						
-	
-	/*
-	 * TODO dans l'eventMgr de la bombe, quand elle oscille, il faut gÃ©rer les sprites
-	 * qui sont en train de la pousser, et non pas en simple contact.
-	 * de plus, il faut que les sprites aient le pouvoir de pousser, sinon ils ne comptent pas.
-	 */
-	
-	/*
-	 * TODO
-	 * quand des sprites de plusieurs cases seront dÃ©finis, peut-Ãªtre que les explosions
-	 * devront Ãªtre dÃ©finies en tant que sprites (paramÃ©trables pour leur taille) de ce type ?
-	 * ce qui permettrait de les faire se dÃ©placer.
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CONTROLS / COMMANDES		//////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// EXPLOSION /  FIRE / FEU	//////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-	/*
-	 * TODO Ã  faire sur le feu (long terme) :
-	 * - dÃ©composer l'explosion en :
-	 * 		1)explode
-	 *		2)stay still
-	 *		3)implode
-	 * 	pr gÃ©rer le dÃ©placement des flammes Ã  la XBlast
+	/**
+	 * NOTE règles générales
+	 * 	- une demande d'info auprès du serveur (voire client) ne doit pas être
+	 *    réalisée tant que la GUI n'est pas prête à traiter l'évènement de lecture associé
+	 *  - les méthodes des connexions générales susceptibles d'être appelées par les connexions
+	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
+	 *    ne demandent la même tâche en même temps, risquant une interférence
+	 *    
 	 * 
-	 * ou alternativement :
-	 * - dÃ©composer le feu en appearing+standing+disapearing, 
-	 * 	ce qui permettrait de le faire durer aussi longtemps qu'on veut
-	 */
-
-	/*
-	 * TODO explosion:
-	 * lorsque la flamme est construite, on teste si chaque case la laisse passer
-	 * mais il faut aussi le faire sur la case centrale (origine de l'explosion)
-	 * car diffÃ©rents facteurs peuvent limiter l'explosion Ã  une portÃ©e de 0
-	 * (sans pour autant empÃªcher l'explosion) 
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ORIGINAL VERSIONS RIP	//////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * TODO
-	 * il est possib que les ombres de Shirobon SBM2 soient Ã  dÃ©caler un peu vers le bas, 
-	 * Ã  voir comment Ã§a rend dans le jeu
-	 */
-	
-	/*
-	 * TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
-	 */
-	
-	/*
-	 * TODO apparemment les blocs qui tombent lors du shrink sont diffÃ©rents, au moins dans SBM1 & SBM2 
-	 *	>> Ã  ripper et vÃ©rifier pr les autres versions
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// GENERAL / GÃ‰NÃ‰RAL	//////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * TODO getClass().getResource(IMAGE_DIR + fnm)
-	 * permettrait de trouver un path de faÃ§on plus propre ? 
-	 */    
-
-	/*
-	 * TODO dans SBM2, il faut gÃ©rer :
-	 * 	- les boss (dans les autres aussi, notamment SBM5)
-	 * 	- les espÃ¨ces de chars d'assaut prÃ©sents dans certains niveaux (utilisÃ©s par les crÃ©atures)
-	 */
-	
-	/*
-	 * TODO dÃ©finir le shrink comme Ã§a :
-	 * - sÃ©quence de steps, chacun caractÃ©risÃ© par :
-	 * - un dÃ©lai Ã  laisser Ã©couler aprÃ¨s le step prÃ©cÃ©dent
-	 * - la liste des lignes/tiles qui doivent apparaÃ®tre, avec le type de bloc devant apparaÃ®tre
-	 */
-	
-	/*
-	 * TODO pour le dÃ©bug de certains points, il faudra mettre en place un controleur
-	 * capable d'enregistrer une sÃ©quence de commandes, ce qui permettra de les rejouer
-	 * par la suite (style playback) tout en controlant en temps rÃ©el un autre perso
-	 */
-	
-	/*
-	 * TODO animes/trajectoire : permettre de dÃ©finir des labels dans la sÃ©quence
-	 * et de faire des goto et des boucles (?)
-	 */
-	
-	/*
-	 * TODO
-	 * il faut mieux gÃ©rer l'accÃ¨s aux mÃ©thodes, utiliser plus protected.
-	 * surtout pour protÃ©ger les classes qui devraient Ãªtre inaccessibles depuis l'IA
-	 */
-	
-	/*
-	 * TODO
-	 * est-il vraiment nÃ©cessaire de gÃ©rer les floors en tant que sprites Ã  part entiÃ¨re, quand on peut y mettre plusieurs blocs?
-	 * on pourrait carrÃ©ment supprimer ce type de sprite et afficher l'image de base, sans test.
-	 * les sols de type ralentissement ou accÃ©lÃ©ration peuvent Ãªtre inclus sous forme de blocks spÃ©ciaux.
-	 */
-	
-	/*
-	 * TODO quand on tente de poser une bombe, le sprite est crÃ©Ã© et on tente de voir s'il peut apparaÃ®tre
-	 * question : est-il automatiquement insÃ©rÃ© dans le Level Ã  la crÃ©ation ? 
-	 * >> si oui, y en a surement un paillat au bout d'un moment;
-	 * 	  vu qu'en cas d'apparition impossible la bombe n'est pas retirÃ©e du Level (supposition)
-	 */
-	
-	/*
-	 * TODO lors du chargement des sprites, ne charger que le nÃ©cessaire :
-	 * 	- blocks/floors
-	 * 	- items
-	 * 	- fires
-	 * 	- heroes gestures (?)
-	 */
-	
-	/*
-	 * TODO replay
-	 * 	- ajouter des commandes (avance rapide, vitesse, retour arriÃ¨re)
-	 *  - enregistrer une image au pif en cours de jeu, histoire de l'enregistrer en tant que preview
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// GUI	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/* TODO la communication [moteur >> gui] devrait se faire par evts, y compris durant le jeu
-	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
-	 * >> faut dÃ©finir un systÃ¨me d'Ã©vÃ¨nement pour toute classe affichÃ©e directement par un composant graphique
-	 * >> Ã§a permetrait de ne pas avoir Ã  recrÃ©er les Ã©crans. par ex, dans les options : si qqch est changÃ©, c'est automatiquement mÃ j en background
-	 * 		- sauf qu'en fait c'est un mvais ex car dans les options ce sont des clones qui sont utilisÃ©s
-	 *        mais il suffirait de ne pas recrÃ©er Ã  chaque fois le panel, plutot de rÃ©utiliser le prÃ©cÃ©dent en faisant un set et en affectant le listener
-	 *      - faudrait du cp faire attention Ã  la gestion de la mÃ©moire : 
-	 *      	- les objets finished devraient se dÃ©barasser de leurs listeners
-	 *      	- en rÃ©action, les listeners mettent leur rÃ©fÃ©rence Ã  null et n'affichent rien >> bon Ã§a
-	 *      >> Ã§a va poser des pb de gestion de la mÃ©moire (?)
-	 * >>> Ã  faire plus tard...
-	 */
-	
-	/*
-	 * TODO rÃ©forme GUI
-	 * 	- certains pb de gestion de la GUI viennent du fait que des donnÃ©es temporaires sont stockÃ©es dans les classes de la GUI
-	 * 	  alors qu'elles seraient mieux controlÃ©es et intÃ©grÃ©es si elles Ã©taient du cÃ´tÃ© du jeu
-	 * 	  exemple: sÃ©lection temporaire de joueurs lors de la configuration d'un joueur. le fait que ces donnÃ©es soient dans la GUI
-	 * 	  pose des pb de mise Ã  jour du jeu en rÃ©seau, car on est alors obligÃ© de duppliquer les listes.
-	 * 	  >> rÃ©forme Ã  organiser conjointement Ã  la mise en place des Ã©vÃ¨nements
-	 * 	- GUI: 
-	 *  	- dans les cas oÃ¹ on a un panel affichant une liste et d'autres
-	 *    	  panels affichant l'Ã©lÃ©ment sÃ©lectionnÃ©, il faudrait que ces derniers Ã©coutent
-	 *    	  la liste afin de se mettre Ã  jour automatiquement quand nÃ©cessaire.
-	 *  	- en fait on peut faire une version simple des souspanels, et une version
-	 *    	  qui Ã©coute le panel principal et hÃ©rite de la version simple
-	 *  	- pour la configuration des parties, faut une structure gÃ©nÃ©rÃ©e au niveau de ConfigurationXxxx
-	 *    	  avec des sous classes pour le jeu en rÃ©seau (une pour client, une pour serveur)
-	 *    	  tout Ã§a doit implÃ©menter tout ce qui est dÃ©jÃ  implÃ©mentÃ© au niveau des panels, afin que la GUI
-	 *    	  ne fasse plus aucun traitement, mais se contente de transmettre les commandes de l'utilisateur au moteur
-	 *  - remarques : 
-	 *  	- l'intÃ©gralitÃ© du traitement devrait Ãªtre effectuÃ© cÃ´tÃ© moteur
-	 *    	  la gui ne devrait fonctionner que par requÃªte/rÃ©ponses synchrones (pour le local)
-	 *    	  ou asynchrones (pour le rÃ©seau). 
-	 *    	  voire asynchrones pour les deux, avec un systÃ¨me d'Ã©vÃ¨nements...
-	 *  	- faire un systÃ¨me par dÃ©lÃ©gation permettant d'associer un gestionnaire de listeners/evts
-	 *    	  Ã  tout objet du moteur. chaque composant graphique doit simplement implÃ©menter une interface,
-	 *    	  ce qui simplifie le beans. bien sur, chaque objet Ã©metteur doit du cp s'identifier pr chaque evt (source)
-	 *    	  et les fonctions d'Ã©coute seront un peu plus longue cotÃ© gui dans le cas de classes Ã©coutant
-	 *    	  plusieurs Ã©lÃ©ments du moteur.
-	 */
-
-	/* 
-	 * TODO rÃ¨gles gÃ©nÃ©rales
-	 * 	- une demande d'info auprÃ¨s du serveur (voire client) ne doit pas Ãªtre
-	 *    rÃ©alisÃ©e tant que la GUI n'est pas prÃªte Ã  traiter l'Ã©vÃ¨nement de lecture associÃ©
-	 *  - les mÃ©thodes des connexions gÃ©nÃ©rales susceptibles d'Ãªtre appelÃ©es par les connexions
-	 *    individuelles doivent Ãªtre synchro, afin d'Ã©viter par ex que plusieurs clients
-	 *    ne demandent la mÃªme tÃ¢che en mÃªme temps, risquant une interfÃ©rence
-	 */
-	
-	/* TODO dans la gui, faudrait gÃ©rer le texte comme les images :
-	 * le mÃªme texte peut servir sur plusieurs Ã©lÃ©ments.
-	 * Ã§a Ã©conomiserait du traitement et de la place dans les fichiers de traduction,
-	 * qui seraient plus simples Ã  maintenir.
-	 * et en plus on pourrait garder des noms d'Ã©lÃ©ments correspondant aux composants GUI,
-	 * sans se soucier de leur signification rÃ©elle (contenu textuel).
-	 * du cp, les clÃ©s du texte pourraient Ãªtre plus explicites (car indÃ©pendantes)
+	 * 
+	 * 
+	 * PROFIL
+	 * faut revoir la notion de profil:
+	 * 	- connecter directement les stats
+	 *  - introduire la distinction entre profil local et distant (fait)
+	 *  
+	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
+	 *  
+	 *  ca devrait pas être possible d'avoir un profil sans stats
+	 *  toutes les stats devraient être centralisées et chargées quand nécessaire
+	 *  y compris pour les rencontres locales (qui peuvent être stockées le temps d'avoir un accès réseau)
+	 * 
+	 * 
+	 * 
+	 * REMOTE 
+	 * propriété remote des joueurs : comment s'assurer qu'un joueur est bien identifié ?
+	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connecté
+	 * 	  si un joueur essaie de se connecter à partir d'un hôte différent, erreur et on demande au joueur de s'identifier
+	 * >> mais en fait c'est le central qui controle la véracité, c'est lui qui détient le dernier hote de connection
+	 *    donc on ne peut faire de partie enregistrée qu'en passant par le central, basta. sinon c'est du hors-piste, de l'amical.
+	 * 
 	 */ 
 	
-	/*
-	 * TODO renouvellement du menu principal
-	 * remplacer le menu actuel par des icones dont la taille reprÃ©sente l'importance
-	 * Ã  gauche de l'icone, mettre le texte actuellement prÃ¨sent dans les boutons
-	 * il est alignÃ© Ã  droite et sa taille est proportionnelle Ã  celle des boutons
-	 * 	- options       : engrenages
-	 * 	- profils       : une des icones de profil/joueur/etc
-	 * 	- stats         : icone stat utilisÃ©e en cours de jeu
-	 *  - ressources    : icone package
-	 *  - tournoi	    : coupe
-	 *  - partie rapide : Ã©clair du bouton play
-	 *  - charger       : disquette avec flÃ¢che (inverse de sauvegarde)
-	 *  - revoir        : une tÃ©lÃ© ? un oeil ? une pellicule?
-	 *  - Ã  propos      : un "?"
-	 *  - quitter       : une croix (comme pour fermer une fenÃªtre) ou l'icone "quitter" du tournoi (?)
-	 */
-
-	/*
-	 * TODO faire apparaitre les donnÃ©es en cours de jeu (F-x) 
-	 * en faisant une animation, genre le bazard sort du bord de l'Ã©cran. 
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// NETWORK - RÃ‰SEAU		//////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-	/*
-	 * TODO Ã  tester :
-	 *    - Ã  la fin d'un round, le client ne sort pas de Loop
-	 *    - changement effectif d'Ã©tat entre les diffÃ©rents types de browsing pour le client
-	 *    		>> besoin de voir Ã§a sur un tournoi complet
+	/**
+	 * à tester :
+	 *    - à la fin d'un round, le client ne sort pas de Loop
+	 *    - changement effectif d'état entre les différents types de browsing pour le client
+	 *    		>> besoin de voir ça sur un tournoi complet
 	 *    - tester le mode partie rapide
-	 *    - le serveur change bien d'Ã©tat Ã  chaque modification de la partie
-	 */
-	
-	/* TODO problÃ¨mes :
-	 *    - quand un client sÃ©lectionne des commandes : c'est pas conservÃ© quand le serveur valide la partie
-	 *    - impossible de bouger le perso cÃ´tÃ© client
-	 *    - jeu saccadÃ» cÃ´tÃ© client mÃªme en LAN >> faire de l'Ã©vÃ¨nementiel et pas du cosmÃ©tique
-	 *    - parfois une exception se produit liÃ©e Ã  GregorianCalendar
-	 */
-	
-	/*    
-	 * TODO Ã  faire :
-	 *  - la deconnection en cours de partie (et dc de jeu) doit Ãªtre traitÃ©e pour Ã©viter le blocage prolongÃ© du serveur, Ã  toutes les phases de la gui/du jeu
+	 *    - le serveur change bien d'état à chaque modification de la partie
+	 * problèmes :
+	 *    - quand un client sélectionne des commandes : c'est pas conservé quand le serveur valide la partie
+	 *    - impossible de bouger le perso côté client
+	 *    - jeu saccadé côté client même en LAN >> faire de l'évènementiel et pas du cosmétique
+	 *    - parfois une exception se produit liée à GregorianCalendar
+	 *    
+	 * à faire :
+	 *  - la deconnection en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur, à toutes les phases de la gui/du jeu
 	 *  
-	 *  - tout changement d'Ã©tat du client devrait Ãªtre :
-	 *  	- une requÃªte envoyÃ©e au serveur
-	 *  	- si celui-ci valide, alors les modifs nÃ©cessaires sont appliquÃ©es cotÃ© client
-	 *  	>> cf le passage de game selection Ã  players selection
-	 *  	>> pas tout changement en fait, par exemple l'exit de ce mÃªme Ã©tat est dÃ©cidÃ© unilatÃ©ralement
-	 *  - dÃ©terminer les ressources Ã  synchroniser et... le faire rigoureusement
-	 *  - penser Ã  tester systÃ©matiquement si l'Ã©tat du c/s qui reÃ§oit un evt est compatible avec le traitement de cet evt 
-	 *  - tout evt transmis Ã  la connection gÃ©nÃ©rale par l'indiv doit identifier l'indiv
-	 *    car pr client, il y a une diffÃ©rence, qui doit Ãªtre traitÃ©e, entre recevoir un evt donnÃ©
+	 *  - tout changement d'état du client devrait être :
+	 *  	- une requête envoyée au serveur
+	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
+	 *  	>> cf le passage de game selection à players selection
+	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est décidé unilatéralement
+	 *  - déterminer les ressources à synchroniser et... le faire rigoureusement
+	 *  - penser à tester systématiquement si l'état du c/s qui reçoit un evt est compatible avec le traitement de cet evt 
+	 *  - tout evt transmis à la connection générale par l'indiv doit identifier l'indiv
+	 *    car pr client, il y a une différence, qui doit être traitée, entre recevoir un evt donné
 	 *    d'une connection active ou d'une autre connection.
-	 *    plus gÃ©nÃ©ralement, le traitement dÃ©pend de l'Ã©tat du client pour le serveur correspondant
+	 *    plus généralement, le traitement dépend de l'état du client pour le serveur correspondant
 	 *  - quand la partie commence, faudrait :
-	 *  	- fermer toutes les connections inutiles cotÃ© client (i.e. autres serveurs)
-	 *  	- p-Ãª mettre les connections concernÃ©es par la partie dans une liste spÃ©ciale, cÃ´tÃ© serveur (pr optimiser les temps de transmission)
-	 */
-	
-	/* 
-	 * TODO
+	 *  	- fermer toutes les connections inutiles coté client (i.e. autres serveurs)
+	 *  	- p-ê mettre les connections concernées par la partie dans une liste spéciale, côté serveur (pr optimiser les temps de transmission)
+	 * 
+	 * 
+	 * 
+	 * réforme GUI
+	 * 	- certains pb de gestion de la GUI viennent du fait que des données temporaires sont stockées dans les classes de la GUI
+	 * 	  alors qu'elles seraient mieux controlées et intégrées si elles étaient du côté du jeu
+	 * 	  exemple: sélection temporaire de joueurs lors de la configuration d'un joueur. le fait que ces données soient dans la GUI
+	 * 	  pose des pb de mise à jour du jeu en réseau, car on est alors obligé de duppliquer les listes.
+	 * 	  >> réforme à organiser conjointement à la mise en place des évènements
+	 * 	- GUI: 
+	 *  	- dans les cas où on a un panel affichant une liste et d'autres
+	 *    	  panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
+	 *    	  la liste afin de se mettre à jour automatiquement quand nécessaire.
+	 *  	- en fait on peut faire une version simple des souspanels, et une version
+	 *    	  qui écoute le panel principal et hérite de la version simple
+	 *  	- pour la configuration des parties, faut une structure générée au niveau de ConfigurationXxxx
+	 *    	  avec des sous classes pour le jeu en réseau (une pour client, une pour serveur)
+	 *    	  tout ça doit implémenter tout ce qui est déjà implémenté au niveau des panels, afin que la GUI
+	 *    	  ne fasse plus aucun traitement, mais se contente de transmettre les commandes de l'utilisateur au moteur
+	 *  - remarques : 
+	 *  	- l'intégralité du traitement devrait être effectué côté moteur
+	 *    	  la gui ne devrait fonctionner que par requête/réponses synchrones (pour le local)
+	 *    	  ou asynchrones (pour le réseau). 
+	 *    	  voire asynchrones pour les deux, avec un système d'évènements...
+	 *  	- faire un système par délégation permettant d'associer un gestionnaire de listeners/evts
+	 *    	  à tout objet du moteur. chaque composant graphique doit simplement implémenter une interface,
+	 *    	  ce qui simplifie le beans. bien sur, chaque objet émetteur doit du cp s'identifier pr chaque evt (source)
+	 *    	  et les fonctions d'écoute seront un peu plus longue coté gui dans le cas de classes écoutant
+	 *    	  plusieurs éléments du moteur.
+	 *    
+	 *    
+	 *    
 	 *  - reconnection process:
 	 * 		- client connects and sends a REQUEST_RECONNECTION message, with its id
 	 * 		- server checks if the id's
 	 * 		- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
 	 *  	- if accepted, the server then sends the necessary updates to the client
-	 *  - Ã§a serait bien d'avoir un icone spÃ©cial (variante de remote) pr indiquer dans les menus qu'un joueur est dÃ©connectÃ©
-	 *  - liÃ© Ã  la reconnection : possibilitÃ© de dÃ©finir des open slots (pr server)
-	 *    et par la suite, des joueurs dÃ©sirant prendre la partie en cours peuvent le faire
-	 *    (similaire Ã  un joueur dÃ©connectÃ© qui aurait son slot rÃ©servÃ© et pourrait s'y reconnecter)
-	 *  - gestion de la dÃ©/re-connection :
-	 * 		- la connection individuelle est conservÃ©e cÃ´tÃ© serveur,
-	 * 	  	  avec un Ã©tat DISCONNECTED ou autre
-	 * 		- mÃªme les threads sont gardÃ©s, mais du cp le code doit Ãªtre modifiÃ©
-	 * 	  	  pour ne pas tenter d'Ã©crire/lire si la connection est morte
-	 * 		- quand le client tente de se reconnecter, si son id correspond Ã  
-	 * 	   	  celle d'une connection DISCONNECTED, alors on se contente de rÃ©initialiser les 
-	 * 	  	  streams dans le writer et le reader, et Ã§a roule.
-	 */
-	
-	/* 
-	 * TODO rÃ©seau:
-	 * - pb quand c'est un client qui clique sur le round en 1er: si sÃ©lection alÃ©atoire, 
-	 * 		alors le niveau est diffÃ©rent de celui du serveur!
-	 * - en fait, les clients ne devraient pas pouvoir avancer dans le tournoi avant le serveur
-	 * - faut un message indiquant qu'on attend les autres joueurs (et lesquels)
-	 */
-	
-	/* 
-	 * TODO y a surement un bug pr rezo+simulation (cÃ´tÃ© client)
-	 */
-
-	/*
-	 * TODO lors de l'implÃ©mentation du jeu en rÃ©seau,
-	 * une optimisation consiste Ã  ne pas gÃ©nÃ©rer des Ã©vts par le controleur tant
-	 * qu'une touche est appuyÃ©e, car Ã§a va faire bcp de choses Ã  transmettre,
-	 * le controleur Ã©tant situÃ© cotÃ© client.
-	 * plutot, il faut les gÃ©nÃ©rer dans le controlManager, qui est cotÃ© serveur.
-	 * et du cp aussi, il faut Ã©viter d'utiliser ce mode de gestion des Ã©vÃ¨nements
-	 * pour les autres types d'evts (ie non-controles)
-	 */
-	
-	/* TODO faut transmettre les abilities/modulations graphiques, elles sont nÃ©cessaires
-	 *	>> faut donc un modulation manager, et un ability manager (?)
-	 *	>> coute cher... autre solution ?
-	 * pb pr les IA remote : y a besoin de l'Ã©tat rÃ©el du niveau, pas seulement des graphismes
-	 * solution : mise Ã  jour locale (pas comme replay) et tant pis pr la puissance perdue et la possible dÃ©-synchro
-	 */
-	
-	/*
-	 * TODO certaines abilities ont un effet graphique, comme twinkle ou flat
-	 *    > faudra penser Ã  un systÃ¨me pour transmettre les changement les concernant via le rÃ©seau
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MULTIPLAYER / MULTIJOUEUR	//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/*
-	 * TODO
-	 * y a un mode de tournoi plus adaptÃ© pour le multijoueur, dÃ©fini chaiplus trop oÃ¹ (mails?)
-	 * avec une espÃ¨ce de tournante : n joueurs, matches de k joueurs, les n-k derniers sont remplacÃ©s
-	 * par ceux qui attendent
-	 * ----------
-	 * TODO type de tournoi plus adaptÃ© au rÃ©seau : hot potatoe
-	 * des joueurs jouent un match pendant que d'autres attendent 
-	 * Ã  la fin du match, les n derniers joueurs sont relÃ©guÃ©s dans la salle d'attente
-	 * n joueurs qui attendaient sont qualifiÃ©s.
-	 * un classement permet de dÃ©terminer le leader provisoire
-	 */
-	
-	
-	/*
-	 * TODO
-	 * - pour faciliter la communication lors des parties rÃ©seaux :
-	 *   systÃ¨mes de bulles pour communiquer. le joueur affecte un message
-	 *   Ã  une touche, et quand il appuie dessus, une bulle apparait Ã  cÃ©tÃ©
-	 *   de son joueur pour signifier ce message aux autres joueurs (vraisemblablement
-	 *   distants)
-	 * - p-Ãª que pour rendre Ã§a plus facile Ã  utiliser, faudrait prÃ©dÃ©finir
-	 *   un certain nombre de messages et permettre au joueur d'en dÃ©finir certains custom
-	 * - donner aussi la possibilitÃ© de cibler des joueurs en particulier
-	 * - exemple d'utilisation :
-	 * 		- appuyer sur la touche du joueur ciblÃ©
-	 * 		- appuyer sur la touche de message
-	 * 		- appuyer sur la touche du joueur mentionnÃ© dans le message
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// POINTS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*
-	 * TODO
-	 * possibilitÃ© de faire varier le calcul des points
-	 * en fonction de la position de dÃ©part des joueurs : 
-	 * certaines positions sont plus difficiles que d'autres 
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ITEMS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * TODO gÃ©rer le dÃ©placement des items lors d'une explosion
-	 */
-	
-	/*
-	 * TODO
-	 * - item spÃ©cial permettant de manger les bombes des autres, comme certains ennemis du jeu original en mode histoire
-	 * - item spÃ©cial qui, quand un hÃ©ros meurt, dÃ©clenche automatiquement une explosion, Ã©ventuellement avec un effet de zone  
-	 */
-	
-	/*
-	 *  TODO malus pour les bombes :
-	 *  - portÃ©e alÃ©atoire : on sait pas Ã  quelle distance Ã§a va pÃ©ter
-	 *  - portÃ©e nulle : permet quand mÃªme de bloquer les explosions des autres, donc aspect dÃ©fensif important 
-	 */
-	
-	/*
-	 * TODO grÃ¢ce au systÃ¨me de modulation:
-	 * 	 - mur ne se laissant traverser que par des joueurs ayant au moins 5 bombes
-	 *   - condition sur d'autres abilities? 
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// XML			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/* 
-	 * TODO Ã  faire dans les XML : 
-	 * 		- faire respecter au maximum les contraintes avec les schÃ©mas
-	 * 		- ensuite seulement faire respecter les contraintes dans les loaders
-	 * 		- dans les loaders, penser Ã  gÃ©rer les valeurs/structures par dÃ©faut
-	 * exemples :
-	 * 		- pour les animes: les noms des gestures doivent Ãªtre diffÃ©rents entre eux et diffÃ©rents de default
-	 * 		- pour les thÃ¨mes : les noms des components doivent Ãªtre diffÃ©rents
-	 */	
-
-    /* 
-     * TODO pour forcer l'unicitÃ© d'un attribut/Ã©lÃ©ment, voir ici : 
-     * http://rangiroa.essi.fr/cours/internet/02-slides-xml/schema.htm
-     */		
-
-	// TODO dans schema de Level : contrainte d'unicitÃ© sur les positions des lignes et colonnes    
-
-	/*
-	 * TODO dans le fichier de trajectoire, tester que la valeur de durÃ©e de forÃ§age 
-	 * de position n'est pas supÃ©rieure Ã  la durÃ©e de la trajectoire
-	 * (et il y a surement de nombreux autres test de cohÃ©rence Ã  effectuer)
-	 */					
-
-	/*
-	 * TODO Ã  faire dans le chargement des fichiers XML
-	 * ANIME : 
-	 * - vÃ©rifier que si on utilise une ombre, elle a bien Ã©tÃ© dÃ©clarÃ©e dans le fichier XML
-	 * - vÃ©rifier que le mouvement par dÃ©faut existe bel et bien
-	 * LEVEL :
-	 * - matrice vide = que des floors
-	 * - vÃ©rifier que quand on fait rÃ©fÃ©rence Ã  un bloc par son nom, il existe bien dans le fichier du thÃ¨me
-	 */
-
-	/*
-	 * TODO lorsqu'on dÃ©finit une animation ou une trajectoire qui est identique Ã  une autre
-	 * plutot que de faire un copier-coller, permettre de nommer l'animation d'origine.
-	 * bien sur, il faudra vÃ©rifier que cette animation existe, comme pour celle par dÃ©faut. 
-	 */
-	
-	/*
-	 * TODO dans les fichiers XML, il faut prÃ©ciser en attribut de la racine la version
-	 * du fichier utilisÃ©e (i.e. version du schÃ©ma).
-	 */
-	
-	/*
-	 * TODO il faut reprendre les fichiers XML en centralisant au maximum les types
-	 * par exemple y en a plein c des rÃ©fÃ©rences vers des fichiers (attributs file et folder)
-	 * Ã§a permettrait de centraliser le code Ã©galement dans le XMLTools
-	 */
-	
-	/*
-	 * TODO les attributs XML doivent respecter la convention java, et non pas XML (avec tirets)
-	 */
-	
-	/*
-	 * TODO
-	 * dans les fichiers XML animes et trajectoires : pr chaque dir/gesture,
-	 * possibilitÃ© (sous forme d'attribut) de redÃ©finir ou complÃ©ter
-	 * l'Ã©lÃ©ment dÃ©jÃ  dÃ©fini dans un Ã©ventuel sprite abstrait. bien sur,
-	 * si pas dÃ©jÃ  dÃ©fini on fait un redefine pr dÃ©faut
-	 */
-	
-	/*
-	 *  TODO dans les fichiers xml, gÃ©rer les images de faÃ§on unique, ce qui permettrait de dÃ©finir des transformations (flips, rotations)
-	 *	>> dÃ©finir des borders comme dans SBM sans avoir Ã  tout gÃ©nÃ©rer Ã  la main (pr blocs symÃ©triques)
-	 *	>> temps de chargement plus rapide (en supposant que la transfo est plus rapide que le re-chargement)
-	 */
-	
-	/*
-	 * TODO utiliser des chemins relatifs Ã  la racine du sprite Ã©viterait 
-	 * toutes les complications liÃ©es au nommage d'images/ombres
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TRAJECTORIES / TRAJECTOIRES	//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MODULATIONS	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/* 
-	 * TODO
-	 * dans les modulations third et other, la portÃ©e est limitÃ©e Ã  la case (ou aux cases). 
-	 * le contact et surtout le remote ne sont pas encore gÃ©rÃ©s.
-	 * idÃ©e pour centraliser le traitement en cas de portÃ©e sans limite:
-	 * 	- DÃ¨s qu'un sprite change de gesture, ses nouvelles modulations sont analysÃ©es
-	 * 	- toutes celles qui sont sans limite de portÃ©e sont stockÃ©es dans un vecteur situÃ© dans Level 
-	 * 		(et toutes celles de l'Ã©tat prÃ©cÃ©dent sont retirÃ©es de ce mÃªme vecteur)
-	 * 	- lors de la validation de 3rdMod, ce vecteur est systÃ©matiquement testÃ© 
-	 * 		en plus des sprites situÃ©s prÃ¨s de l'acteur et de la cible 
-	 */
-	
-	/*
-	 * NOTE les modulations sont ordonnÃ©es par prioritÃ© dans le fichier XML.
-	 * dans le cas oÃ¹ plusieurs modulations peuvent Ãªtre appliquÃ©es Ã  une action, 
-	 * c'est la premiÃ¨re dÃ©finie dans le fichier XML qui est utilisÃ©e.
-	 * il faut donc l'organiser du plus spÃ©cifique au plus gÃ©nÃ©ral.
-	*/
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// THEMES / LEVELS / NIVEAUX	//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/*
-	 * TODO rajouter des niveaux inÃ©dits en utilisant au maximum les parties inutilisÃ©es
-	 * des autres thÃ¨mes
-	 */
-	
-	/*
-	 * TODO dans le level, il faut gÃ©rer la distribution des items :
-	 * possibiliter de la paramÃ¨trer en fonction du nombre de joueurs ?
-	 */
-	
-	/*
-	 *  TODO dans belts, y a un bidule qui passe sur les rails sur les cÃ´tÃ©s...
-	 */
-	
-	/*
-	 * TODO faire une appli propre pour gÃ©nÃ©rer les niveaux
-	 * mettre une jolie doc en ligne de commande pour exÃ©cuter tout Ã§a 
-	 */
-	
-	/*
-	 * TODO bloc devant Ãªtre explosÃ© plusieurs fois avant de disparaitre
-	 */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ANIMES / ANIMATIONS	//////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-	/*
-	 * TODO lorsque l'anime attendue est censÃ©e s'arrÃªter (pas de rÃ©pÃ©tition)
-	 * et que le moteur compte sur un evt de fin pour passer Ã  l'anime suivante,
-	 * il y a blocage si l'anime n'est pas dÃ©finie, et que l'anime par dÃ©faut est
-	 * rÃ©pÃ©tÃ©e.
-	 * exemple : dÃ©faut=marcher, et il manque punch -> le bonhomme ne sort jamais de l'Ã©tat punching
-	 * 	>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une durÃ©e Ã  respecter
-	 * 	(ce qui permet d'uniformiser le beans pour tous les joueurs)
-	 */
-	
-	/*
-	 * TODO il faut sÃ©curiser les animations : s'assurer qu'une anime censÃ©e
-	 * ne pas Ãªtre rÃ©-init est bien gaulÃ©e. par exemple, pushing doit Ãªtre gaulÃ©e
-	 * comme walking (dans le XML) sinon p-Ãª pb (si pas mÃªme durÃ©e ou autres diff)
-	 * > Ã  vÃ©rif
-	 */
-	
-	/*
-	 * TODO permettre de dÃ©finir plusieurs animes pour 1 gesture,
-	 * avec choix alÃ©atoire
-	 *  
-	 */
-	
-	/*
-	 * TODO il faut dÃ©finir un systÃ¨me de substitution d'image
-	 * de maniÃ¨re Ã  ce qu'il soit impossible d'Ãªtre pris en dÃ©faut
-	 */
-	
-	/*
-	 * TODO introduire une anime/action supplÃ©mentaire : en jeu, un joueur
-	 * peut provoquer un autre joueur en dÃ©clenchant une animation spÃ©cifique.
-	 */
-
-	/*
-	 * TODO faire disparaitre progressivement les sprites Ã  la fin du burning (niveau d'alpha ? cf items thÃ¨me TBB)
-	 * 	>> implÃ©menter une gestion dynamique de l'alpha, depuis le fichier XML
-	 *  >> cohÃ©rent avec l'histoire de transformations (flip et tout Ã§a) Ã  dÃ©finir aussi dans XML
-	 */
-	
-	/*
-	 * TODO clignotements de sprites : mettre de la transparence dans les version coloriÃ©es
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ABILITIES / CAPACITÃ‰S	//////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/*
-	 * TODO y a des trucs qui vont se recouper style :
-	 * le bloc doit-il empÃªcher le joueur de poser une bombe
-	 * ou bien la bombe d'apparaÃ®tre ?
-	 * >>> un bombe peut apparaÃ®tre pour autre chose qu'un drop (ex : tÃ©lÃ©port)
-	 */
-
-	/*
-	 * TODO
-	 * le fait qu'il y ait collision ou pas peut changer en fonction de la direction
-	 * de dÃ©placement (puisque l'ablt Ã  bloquer peut Ãªtre configurÃ©e suivant la 
-	 * direction). donc dans la gestion des collisions sur directions composÃ©es,
-	 * il faut retester avec une requÃªte si le fait de retirer une direction provoque
-	 * toujours une collision ou pas.
-	 */
-	
-	/*
-	 * TODO certaines ablt sont liÃ©es Ã  la trajectoire, par ex : puissance de jump
-	 * influe sur la distance du saut.
-	 * il faut donc en tenir comtpe dans la trajectoire, en proposant l'utilisation
-	 * d'un paramÃ¨tre externe (au fichier XML)
-	 */
-	
-	/*
-	 * TODO quand on calcule l'ablt composite, pour les directions composites :
-	 * l'abilitÃ© renvoyÃ©e peut contenir une direction simplifiÃ©e, en fonction 
-	 * des autorisations obtenues. 
-	 */
-	
-	/*
-	 * TODO pour bien faire, il faudrait lister pour chaque sprite (et chaque configuration)
-	 * les actions et les Ã©tats possibles. les permissions reprÃ©sentent les autorisations
-	 * pour appliquer une action. il manque la dÃ©finition des actions, indiquant dans quel
-	 * Ã©tat un objet se retrouve aprÃ¨s avoir effectuÃ©/subi/empechÃ© une action donnÃ©e (ce qui 
-	 * dÃ©pend Ã©ventuellement de l'Ã©tat prÃ©cÃ©dent l'action). 
-	 */
-	
-	/*
-	 * TODO le systÃ¨me de gestion des actions est clairement Ã  amÃ©liorer.
-	 * certaines actions comme gather sont automatiques. certaines actions ont un effet de zone 
-	 * (pr gather : la case).
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// STATS / STATISTIQUES / STATISTICS	//////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*
-	 * TODO
-	 * dÃ©finir des stats de jeu plus complÃ¨tes :
-	 * 		- niveaux les plus utilisÃ©s
-	 * 		- voire dÃ©tail de tout par niveau
-	 * 		- stats temporelles
-	 * 		- analyse du jeu du joueur en fonction du temps, performance par niveau
-	 */
-
-	/*
-	 * TODO
-	 * utiliser une BD pour stocker toutes les donnÃ©es du jeu,
-	 * y compris la configuration (?)
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// PROFILES / IDENTIFICATION / PROFILS	//////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * TODO PB: est-ce qu'on autorise la crÃ©ation d'hote/joueur indÃ©pendemment du central, ou pas.
-	 * >> OUI,mais pas de mdp
-	 * 
-	 * HOTES
-	 * - chaque hÃ´te est identifiÃ© par un UUID (http://www.javapractices.com/topic/TopicAction.do?Id=56)
-	 *   qui n'est jamais modifiÃ© aprÃ¨s
-	 * - de plus, l'ensemble de toutes ses adresses MAC sont enregistrÃ©es
-	 *   (http://www.kodejava.org/examples/250.html 
-	 *    http://www.stratos.me/2008/07/find-mac-address-using-java
-	 *    http://www.kodejava.org/examples/250.html)
-	 * - cette liste est mise Ã  jour Ã  chaque dÃ©marrage
-	 * - si d'un dÃ©marrage Ã  l'autre il n'y a aucune adresse commune, Ã§a veut dire que ce n'est plus la mÃªme machine
-	 * - on gÃ©nÃ©re alors un nouvel UUID qui Ã©crase le prÃ©cÃ©dent
-	 * - les mots de passe de tous les profils sont rÃ©initialisÃ©s
-	 * 
-	 * JOUEURS
-	 * - chaque joueur est identifiÃ© par l'identifiant de l'hote sur lequel il est crÃ©Ã©
-	 *   plus un identifiant unique pour cet hÃ´te (on peut prendre un autre UUID)
-	 * - ce numÃ©ro ne change jamais, mÃªme quand il joue sur un autre hote (ce qui est possible)
-	 * - on a un truc du style : joueur@createur
-	 * - quand le profil est utilisÃ© sur son hote de crÃ©ation, pas besoin de mot de passe
-	 * - sinon il faut un mot de passe, qu'on a la possibilitÃ© d'enregistrer
-	 * >> en fait pas besoin de voir l'hote, avec l'uDDi Ã§a suffit
-	 *    chaque joueur doit entrer le mdp quel que soit l'hote (mÃªme crÃ©ateur)
-	 *    si le joueur n'est pas enregistrÃ© sur le site, il ne peut pas Ãªtre protÃ©gÃ© par un mot de passe
-	 *    et de toute faÃ§on ses stats ne comptent pas
-	 * >> intÃ©rÃªt d'identifier de faÃ§on unique l'hote ??
-	 *    ah oui, pr les stats sur qui joue chez qui...
+	 *  - ça serait bien d'avoir un icone spécial (variante de remote) pr indiquer dans les menus qu'un joueur est déconnecté
+	 *  - lié à la reconnection : possibilité de définir des open slots (pr server)
+	 *    et par la suite, des joueurs désirant prendre la partie en cours peuvent le faire
+	 *    (similaire à un joueur déconnecté qui aurait son slot réservé et pourrait s'y reconnecter)
+	 *  - gestion de la dé/re-connection :
+	 * 		- la connection individuelle est conservée côté serveur,
+	 * 	  	  avec un état DISCONNECTED ou autre
+	 * 		- même les threads sont gardés, mais du cp le code doit être modifié
+	 * 	  	  pour ne pas tenter d'écrire/lire si la connection est morte
+	 * 		- quand le client tente de se reconnecter, si son id correspond à 
+	 * 	   	  celle d'une connection DISCONNECTED, alors on se contete de réinitialiser les 
+	 * 	  	  streams dans le writer et le reader, et ça roule.
 	 *    
-	 * NOTE empecher le mÃªme joueur de jouer deux matches en mÃªme temps...
-	 * >> seulement les matches via central sont enregistrÃ©s dans les stats
-	 */
-
-	/*
-	 * TODO PROFIL
-	 * faut revoir la notion de profil:
-	 * 	- connecter directement les stats
-	 *  x introduire la distinction entre profil local et distant (fait)
+	 *    
+	 *    
+	 *  - IA:
+	 *  	- définir la fonction successeur version temporelle
+	 *  - à tester :
+	 *  	- vitesse renvoyée par l'API (pour déplacement joueurs)
+	 *  	- décompte des items
+	 *  	>> en fait : toutes les modifs depuis la version précédente
 	 *  
-	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
-	 *  
-	 *  ca devrait pas Ãªtre possible d'avoir un profil sans stats
-	 *  toutes les stats devraient Ãªtre centralisÃ©es et chargÃ©es quand nÃ©cessaire
-	 *  y compris pour les rencontres locales (qui peuvent Ãªtre stockÃ©es le temps d'avoir un accÃ¨s rÃ©seau)
 	 */
-	
-	/*
-	 * TODO profiles options : reset passwords (automatically performed
-	 * when the MAC address changes, anyway)
-	 */
-
-	/* 
-	 * TODO REMOTE 
-	 * propriÃ©tÃ© remote des joueurs : comment s'assurer qu'un joueur est bien identifiÃ© ?
-	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connectÃ©
-	 * 	  si un joueur essaie de se connecter Ã  partir d'un hÃ´te diffÃ©rent, erreur et on demande au joueur de s'identifier
-	 * >> mais en fait c'est le central qui controle la vÃ©racitÃ©, c'est lui qui dÃ©tient le dernier hote de connection
-	 *    donc on ne peut faire de partie enregistrÃ©e qu'en passant par le central, basta. sinon c'est du hors-piste, de l'amical.
-	 * 
-	 */ 
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// KNOWN, WAITING BUGS	/ BUGS EN ATTENTE	//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-	/*
-	 * TODO
-	 *	l'ombre des blocs de la derniÃ¨re ligne est portÃ©e sur les blocs de la premiÃ¨re ligne
-	 *	c'est normal. pour l'Ã©viter, il faudrait traiter un cas assez particulier...
-	 *	>> Ã  voir
-	 */
-	
-	/*  
-	 *  TODO l'item kick ne marche pas
-	 */
-	
-	/*
-	 * TODO
-	 * quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intÃ©rieur d'une des cases libres du mÃªme carrÃ©
-	 * on est bloquÃ©. ce n'est pas vraiment un pb en fait, plus un feature :P . mais les non-initiÃ©s peuvent prendre Ã§a pour un bug.
-	 * (note : point mentionnÃ© dans le blog)
-	 */
-	
-	/* 
-	 * TODO
-	 * impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
-	 * 		>> ca viendrait de swing ou du clavier (pb matÃ©riel ou bas niveau)
-	 */
-	
-	/* 
-	 * TODO
-	 * cas particulier : item apparaissant dans une explosion de bloc, avec un joueur dÃ©jÃ  sur le bloc 
-	 * (il a passe-muraille et rÃ©sistance au feu) : l'item doit Ãªtre ramassÃ© dÃ¨s qu'il a fini d'apparaitre, en thÃ©orie
-	 * ou bien : un hÃ©ros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
-	 * >> en mÃªme temps, Ã§a laisse le choix au joueur de ramasser l'item ou pas, c'est pas mal finalement (si c'est un malus par ex.)
-	 */
-	
-	/*
-	 * TODO
-	 * bug d'affichage dans les notes d'IA, les accents sont affichÃ©s avec la police par dÃ©faut
-	 * >> pas trouvÃ© la cause de ce problÃ¨me... (et c'est pas faut d'avoir cherchÃ© !)
-	 */
-	
-	
-	
-	
-	
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
-	
-	
-	
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// BUGS				//////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/* TODO
-	 * 
-	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
-	 * 	 et la vie Ã©tait fonctionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
-	 *   >> pas rÃ©ussi Ã  reproduire Ã§a...
-	 * 
-	 * - la pause d'IA reste mÃªme si le joueur est mort, et je ne sais pas pq : au dÃ©bug le moteur n'exÃ©cute pas le code affichant le texte !
-	 * 
-	 * - quand on balance une bombe, puis une autre, puis fait pÃ©ter la premiÃ¨re et enfin la seconde 
-	 *   juste Ã  la fin des flammes de la premiÃ¨re, alors l'explosion de la 2nde est circonsrite Ã  la
-	 *   case oÃ¹ elle atterrit.
-	 *   
-	 * - pb de rÃ©initialisation : 
-	 * 		- jouer un tournoi single (par ex supercup) en entier
-	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas Ã©tÃ© rÃ©init Ã  null
-	 * 
-	 *  - apparemment, y a un pb avec les GeneralAction, dont certaines dÃ©finies dans les fichiers XML ne sont pas compatibles 
-	 *    avec la classe (en termes de circonstances) mais qui sont quand mÃªme chargÃ©es et initialisÃ©es normalement
-	 *  
-	 *  - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mÃªmes...
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TO DO ENGINE / A FAIRE MOTEUR	//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/* TODO prioritÃ© HAUTE
-	 * 
-	 * - faut Ã©mettre un Ã©vt de sortie de case Ã  la disparition d'un sprite (mort, masquage, etc)
-	 * 
-	 * - Ã©tudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
-	 * 
-	 * - remplacer "Ã  vos marques" "pret" "boum!" par des graphismes prÃ©calculÃ©s
-	 * 
-	 * - Ã  la fin de la partie, faire disparaitre tout le niveau comme il apparait au dÃ©but
-	 * 
-	 */
-	
-	/* TODO prioritÃ© BASSE
-	 * 
-	 * - NBM2 : 
-	 * 		- item veste ignifugÃ©e (souffle de l'explosion pas implÃ©mentÃ©)
-	 * 		  (s'apparente Ã  un push sur un joueur adverse, intÃ©ressant pour les instances Ã  venir)
-	 * 
-	 * - SBM1 : 
-	 * 		- le dÃ©lai de retardement ne doit pas Ãªtre rÃ©initialisÃ© a la suite d'un punch
-	 * 		  en fait Ã§a reprend exactement oÃ¹ Ã§a ne Ã©tait au moment ou la bombe touche le sol
-	 * 		- le clignotement d'invincibilitÃ© est sensÃ© ralentir quand le temps est presque terminÃ©
-	 * 		- item clock : soit rajouter du temps normalement, soit faire un freeze trÃ¨s court?
-	 * 		- spawn : faut dÃ©composer en plusieurs abilities : dÃ©lai, proba de spawn, nbre de spawn, etc
-	 * 
-	 * - Ã©vÃ¨nements :
-	 * 		- envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
-	 * 
-	 * - Threads :
-	 * 		- pouvoir modifier l'UPS pour les IA (pour allÃ©ger le calcul)
-	 * 
-	 * - Images :
-	 * 		- modifier le loader d'image de maniÃ¨re Ã  ce qu'une image non-trouvÃ©e soit remplacÃ©e par la croix rouge
-	 * 
-	 * - TournamentsMatches/Rounds :
-	 * 		- possibilitÃ© de dÃ©finir un nom pour tournament/match/round, 
-	 * 		  qui sera affiche en titre de prÃ¨sentation/stats etc. 
-	 * 		  si pas de nom, utilisation d'un nom gÃ©nÃ©rique (Round 1 - Prensentation) etc
-	 * 		- besoin d'une mÃ©thode permettant d'exporter un tournoi/match/round, 
-	 * 		  ie de l'Ã©crire entiÃ¨rement en local (pas de rÃ©fÃ©rence Ã  des composants existants)
-	 * 		- dans les fichiers xml, pour les points, plutot que local (vrai ou faux), utiliser round/match/tournament/game (permet de mieux mutualiser les fichiers)
-	 * 		- tournoi coupe : 
-	 * 			- pouvoir se qualifier depuis n'importe quel leg, pas forcement le prÃ©cÃ©dent direct (nÃ©cessitÃ© de prÃ©ciser le numÃ©ro du leg en plus du part, dans le doc XML et la class CupPlayer)
-	 * 			- y compris depuis le leg initial (prÃ©voir une sous-classe pour distinguer initial des autres?)
-	 * 
-	 * - Items :
-	 * 		- dÃ©finir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramÃ¨tre de langue, et l'introduire dans le fichier de langue
-	 * 
-	 * - Stats : 
-	 * 		- nombre de fois qu'un level a Ã©tÃ© jouÃ©
-	 * 
-	 * - Points : 
-	 * 		- calcul : introduire des variables comme le nombre de joueurs 
-	 *  	  (pour dÃ©finir un bonus pr le joueur qui fait un perfect en survival)
-	 * 		- lors du calcul des points, il faut forcer la prÃ¨sence d'un classement: 
-	 * 		  Ã§a facilite Ã©normÃ©ment de traitements en aval
-	 *   	  au pire, si le classement est inutile (ex: simple total), on dÃ©finit un classement-identitÃ© 
-	 *   	  (pts utilisÃ©s pr le classement <=> pts marquÃ©s)
-	 *
-	 * - Limites/Modes de jeu :
-	 * 		- limites exprimÃ©es de faÃ§on relative (peindre 75% des cases, Ã©liminer la moitiÃ© des joueurs...)
-	 * 		- items: 1 item arrÃªtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
-	 * 		- possibilitÃ© de choisir entre le fait que le round s'arrÃªte DÃ¨s que tout le monde est mort 
-	 * 		  sauf 1, ou derniÃ¨re flamme terminÃ©e
-	 * 		- reformater les modes de jeu : pour paint il suffit de dÃ©finir des bombes spÃ©ciales qui peignent le sol
-	 * 	 	- pour painting, possibilitÃ© de dÃ©finir quelles cases peuvent Ãªtre repeintes, 
-	 * 		  ce qui permet de poser comme limite un %age de cases repeintes
-	 * 
-	 * - XML :
-	 * 		- voir si on peut mettre Ã  jour le parser XML
-	 * 		- dÃ©finir la liste de gestures pour chaque type de sprite
-	 *		- le XML des animes doit avoir soit :
-	 * 			- NONE seule
-	 *  		- primaries seules
-	 *  		- primaries+NONE
-	 *  		- primaries+COMPOSITES
-	 *  		- primaries+NONE+composite
-	 * 		- et les gestures dÃ©finis doivent au moins contenir les nÃ©cessaires, et au plus les autorisÃ©s
-	 *  	  il va falloir utiliser XSD 1.1 quand Ã§a sera possible, avec les assertions et associations, cf l'email.
-	 * 
-	 * - Actions/Abilities/Modulations
-	 * 		- HIDING devrait Ãªtre un gesture dÃ©finit automatiquement, non ? pas d'image, sensible Ã  rien, seule action autorisÃ©e=apparaitre...
-	 *  	- vÃ©rifier qu'avant d'exÃ©cuter une action, on vÃ©rifie si le sprite concernÃ© (actor) possÃ©de bien l'ability (avec modulate)
-	 * 		- pour chaque gesture, fixer les actions autorisÃ©es 
-	 * 		- Ã§a ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut rÃ©flÃ©chir Ã  un truc plus propre
-	 * 		- il faudrait documenter le comportement par dÃ©faut du moteur, i.e. pour chaque type de sprite:
-	 * 			- qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
-	 * 			- Ã§a permettra de savoir ce qui peut Ãªtre modulÃ© et ce qui ne peut pas l'Ãªtre
-	 * 		- un sprite n'est a priori pas un obstacle, tout est gÃ©rÃ© par modulation (y compris pour le feu)
-	 * 		- le coup de l'indestructibilitÃ© des items (le fait de rÃ©apparaitre ailleurs) pourrait Ãªtre Ã©tendue Ã  tous les sprites
-	 * 		  (en particulier les joueurs, Ã§a serait un cas spÃ©cial de rÃ©sistance au feu un peu pÃ©nalisante, utilisable un nombre limitÃ© de fois, par ex !)
-	 * 		- Ã§a serait bien que les paramÃ¨tres numÃ©riques des abilitÃ©s puissent Ãªtre dÃ©finies 
-	 * 		  au chargement (force, durÃ©e, utilisation) de faÃ§on alÃ©atoire, en fonction de certains paramÃ¨tres. 
-	 * 		  on pourrait par ex utiliser une liste de valeur numÃ©riques : 1=dÃ©terministe, 2=bornes pour un tirage au sort
-	 * 		  utile par exemple pour dÃ©terminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
-	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spÃ©ciales)
-	 * 
-	 * - Niveaux
-	 * 		- outil pour dÃ©couper une image (background) en (n x m) floors
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TO DO GUI / A FAIRE GUI	//////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/* TODO
-	 * 
-	 * - rajouter un bouton dans les options avancÃ©es pour vider manuellement le cache mÃ©moire
-	 * 
-	 * - rajouter une confirmation (popup) quand on sort dÃ©finitivement d'une partie (icone maison)
-	 * 
-	 * - 1Ã¨re exÃ©cution
-	 * 		- dÃ©finir un popup d'informations
-	 * 		- guider l'utilisateur pas Ã  pas pour crÃ©er son profile et commencer sa partie
-	 * 
-	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implÃ©menterait l'interface basicPanel
-	 * 
-	 * - profils: 
-	 * 		- simplifier, pas besoin de la double reprÃ©sentation default+selected.
-	 * 		- rÃ©organiser par rapport aux besoins: joueur pdt le jeu, joueur chargÃ© en dehors du jeu, joueur pas chargÃ© ?
-	 * 
-	 * - faire le classement lexicographique gÃ©rant les signes diacritiques partout oÃ¹ c'est nÃ©cessaire
-	 * 
-	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre Ã  virgule dans la colonne des points (dÃ©cimales cachÃ©es), etc.
-	 * 
-	 * - pb de dimension de l'image de fond en fonction de la rÃ©solution... (zones pas peintes)
-	 * 
-	 * - results panel : 
-	 * 		- faut afficher explicitement le classement Ã  la fin d'une confrontation
-	 * 		- quand il y a trop de rounds dans un match pour que Ã§a rentre Ã  l'Ã©cran, ne pas tout afficher
-	 * 		- Ã§a serait bien que les joueurs soient affichÃ©s dans l'ordre relatif aux points de la limite rencontrÃ©e
-	 *   	  voire on dÃ©finit explicitement un ordre d'affichage dans la compÃ©tition
-	 * 		- dans les rÃ©sultats :
-	 * 			- afficher par dÃ©faut les 4 scores de base
-	 * 			- plus les scores utilisÃ©s dans les points et/ou les limites
-	 * 			- si les limites utilisent des points custom, les afficher aussi
-	 * 		- Ã  la fin du round, faire apparaitre les rÃ©sultats par transparence
-	 * 
-	 * - champ en plus 
-	 * 		- dans les profils : le classement du joueur, nbre de rouds gagnÃ©s/nbre de rounds jouÃ©s
-	 * 		- dans les persos : % de rounds gagnÃ©s, ou bien nbre de rounds jouÃ©s
-	 * 		- tout Ã§a est fait simplement en rajoutant les informations adÃ©quates dans les classes de stat
-	 * 
-	 * - lors de la sÃ©lection des commandes :
-	 * 		- cliquer sur le bouton d'action fait rÃ©agir quelque chose dans la ligne du joueur correspondant
-	 * 		- permet de vÃ©rifier qu'on a pris les bonnes commandes (celles qu'on pensait avoir prises)
-	 * 
-	 * - il faudrait sÃ©parer les joueurs IA et les joueurs humain dans leur gestion.
-	 * 		ca permettrait de sÃ©lectionner directement l'IA, au lieu du joueur, et donc de ne pas avoir Ã  crÃ©er plusieurs
-	 * 		joueurs avec la mÃªme IA quand on veut jouer contre plusieurs versions de la mÃªme IA.
-	 * 		voire limiter le nombre de joueurs pour une IA Ã  1 seul, mais sÃ©lectionnable plusieurs fois ?
-	 *		 Ã  voir...
-	 * 
-	 * - dans les tables, il faudrait avoir la possibilitÃ© de dÃ©velopper/cacher des colonnes ou lignes en cliquant dessus
-	 *   Ã§a permettrait d'afficher des stats plus dÃ©taillÃ©es seulement au besoin, ou pour le calcul des points d'un match, etc.
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CLEANING PROCEDURE / PROCÃ‰DURE DE NETTOYAGE	//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 * - source :
-	 * 		- Ã©ventuellement mettre Ã  jour la version 
-	 * 		- supprimer zgraphics
-	 * 		- supprimer tous les commentaires TODO et NOTE
-	 * 		- effacer le changelog
-	 * 		- virer les classes contenant un main()
-	 * - ressources :
-	 * 		- supprimer restmp
-	 * 		- supprimer les agents de test
-	 * 		- rÃ©initialiser les logstats
-	 * 		- recopier les stats (Ã©ventuellement)
-	 * 		- recrÃ©er les sauvegardes des tournois
-	 * - options :
-	 * 		- virer l'enchainement automatique
-	 * 		- virer le bombage des IA inactives
-	 * - profils :
-	 * 		- supprimer les profils de test
-	 * 		- rÃ©initialiser les stats des joueurs humains ou autres
-	 * 
-	 * - pour diffusion publique :
-	 * 		- fichiers :
-	 * 			- recompiler le jeu
-	 * 			- virer les fichiers sources
-	 * 			- virer les IA pas finies (source+profils)
-	 * 			- virer les versions intermÃ©diaires des IA
-	 * 		- options :
-	 * 			- simulation des matches AI-only
-	 * 		- prÃ©rÃ©gler la partie rapide sur : 
-	 * 			- les meilleures IA 
-	 * 			- des niveaux compatibles
-	 * 			- les rÃ¨gles classiques
-	 * 
-	 *  - pour diffusion projet :
-	 * 		x rÃ©seau :
-	 * 			x bloquer le bouton "rÃ©seau" dans le menu principal
-	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonNetworkGame
-	 * 			x bloquer le bouton "rÃ©seau" dans le menu de config tournoi/partie rapide
-	 * 			  org.totalboumboum.gui.menus.tournament.TournamenuMenu.buttonPublish
-	 * 			  org.totalboumboum.gui.menus.quickmatch.QuickMatchMenu.buttonPublish
-	 * 			  
-	 * 		x replay :
-	 * 			x bloquer le bouton "replay" dans le menu principal
-	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonReplay
-	 * 			x bloquer le bouton "camÃ©ra" dans les menu tournoi/match/round
-	 * 			  org.totalboumboum.gui.game.tournament.TournamentMenu.buttonRecord
-	 * 			  org.totalboumboum.gui.game.match.MatchMenu.buttonRecord
-	 *			  org.totalboumboum.gui.game.round.RoundMenu.buttonRecord
-	 * 			x bloquer l'action dans les options avancÃ©es
-	 * 			  org.totalboumboum.gui.menus.options.advanced.AdvancedData ligne 'case LINE_RECORD_GAMES'
-	 * 		- options :
-	 * 			- afficher les exceptions
-	 * 			- prÃ©rÃ©gler la partie rapide 
-	 * 		- ressources :
-	 * 			- redonner les host id corrects pour les Ã©tudiants modifiÃ©s pour tester le rÃ©seau
-	 * 				- 0809.Akkaya+DanacioÄŸlu: 	0d3dfd83-6632-423f-b63e-d7e5743ad998
-	 * 				- 0809.Adatepe: 			26db3658-cf0e-4650-96f4-55080b4720f8
-	 * 				- Joueur Humain 2:			553c0fb4-5418-4e33-b244-d5f399ae40f2
-	 *		 	- virer le thÃ¨me/perso/niveaux TBB aprÃ¨s avoir virÃ© les joueurs utilisant les perso et prÃ©-enregistrÃ¨s
-	 * 
-	 * promeneur :	af92d497-7975-4dcf-b05d-89e706c3eec3
-	 * simplet : 	227b2e4d-bd7b-4153-962b-699bc909e5e1
-	 * suiveur :	cc207601-8afe-4c67-94d9-17cdc9bea77d
-	 */
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CURRENT STUFF / EN COURS		//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 * - percepts Ã  rajouter
-	 * 		- pour faire un suivi d'une ia Ã  travers plusieurs rounds :
-	 * 			- chemin permettant d'Ã©crire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
-	 * 			- avoir accÃ¨s Ã  l'identifiant de l'IA, et pas seulement Ã  sa couleur
-	 * 
-	 * - dÃ©finir une mesure factuelle (reposant sur des faits de jeu) Ã©valuant l'agressivitÃ© des joueurs
-	 * 		- cible des bombes: rien, mur ou IA
-	 * 		- Ã  pondÃ©rer avec le nombre de bombes posÃ©es par seconde (par ex)
-	 * 
-	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
-	 * 
-	 * - prochaines Ã©tapes :
-	 * 		- league
-	 * 		- tournante
-	 * 		- instance TBB (>> pixel art)
-	 * 		- sons
-	 * 		- BM'83
-	 * 		- rÃ©seau
-	 * 		- revoir GUI (?)
-	 * 		- sortir de bÃªta
-	 * 
-	 *  - tournoi league :
-	 *  	- finir GUI
-	 *  	- finir sÃ©lection des matches
-	 *  	- ordonner les matches
-	 *  - tournoi coupe : 
-	 *  	- possibilitÃ© de dÃ©finir un tie-break random
-	 *  	- possibilitÃ© de dÃ©finir un tie-break classement stats
-	 *  	- possibilitÃ© de dÃ©finir des matches de classement optionnels (?)
-	 *  
-	 *  - options pour les stats ?
-	 *  	- accÃ©lÃ©rer la fin des parties oÃ¹ tous les humains ont Ã©tÃ© Ã©liminÃ©s (p-e un popup ? et/ou une option : oui-non-demander)
-	 *  	- enregistrer l'Ã©volution des stats (sur plusieurs points temporels)
-	 *  	- forcer la fin de la pÃ©riode (now)
-	 *  
-	 *  - instance TBB
-	 *  	- autoriser un burning player Ã  poser une derniÃ¨re bombe...
-	 *  	- bombe sensible aux chocs : en forme d'oeuf
-	 *  	- bombe en fer, rÃ©siste aux autres explosions
-	 *  	- le feu passe-muraille doit Ãªtre d'une autre couleur et/ou forme
-	 *  	- feu Ã©lectrique : tente d'atteindre un adversaire dans la mesure de sa portÃ©e (prend des virages et tout)
-	 *  	- feu d'amour : 
-	 *  		- plein de petits coeurs qui contaminent ceux qu'ils touchent. 
-	 *  		- les bombes qu'ils posent sont alors aussi des bombes Ã  coeurs. 
-	 *  		- elles ne tuent pas, elles contaminent. 
-	 *  		- le contaminateur initial est rÃ©sistant (les coeurs sont de sa couleur)
-	 *  	- si le feu normal Ã©tait graphiquement un truc carrÃ© avec plein de flamÃ¨ches ?
-	 *  	- apparition des items : fumÃ©e+lÃ©gÃ¨rement surÃ©levÃ©, puis l'item tombe par terre... (comm bug aprÃ¨s cache v2)
-	 *  
-	 *  - enregistrement d'une partie : au lieu d'utiliser data+xml, mettre les donnÃ©es
-	 *    xml dans le fichier de donnÃ©es aussi. (au dÃ©but bien entendu)
-	 */ 
-	
-	
-
-
-	
-	
-	
-	
-	// TODO toutes Loops >> effacer tous les objets inutiles dans finish()
-	
-	
-	
-	// TODO tester les confs de tournois/partie rapide sans l'option "utiliser les rÃ©glages prÃ©cÃ©dents"
-	
 	
 	/**
-	 * TODO bug d'animation quand on accÃ©lÃ¨re le temps, pour les blocs rebondissant
-	 * 
-	 * TODO rÃ©viser les instances antÃ©rieures Ã  SBM1, mÃªme si pas de mort subite
-	 * 		x adapter les thÃ¨mes (blocs, sols)
-	 * 		x rajouter la modif sur le throughwall des items
-	 * 		x adapter les traj des bombes 
+	 * TODO chemins à généraliser
+	 * 	- associer un temps avec chaque case (attente) ?
+	 *  - structure abstraite, on peut accéder aux cases ou aux pixels
+	 *  - le chemin est entier, on passe le perso en paramètre et on nous dit la case suivante (null si pas sur le chemin)
+	 *    voire la direction à prendre pour suivre le chemin
+	 *  - à voir comment ça peut être représenté derrière...
 	 */
-
-// TODO ajouter un bouton "position" (rang) dans les plots d'Ã©volution (particuliÃ¨rement pertinent pour le tournoi championat ou tournant)
-// TODO les scores obtenus lors des tie breaks sont ils comptÃ©s dans les stats du tournoi?
-
-/* TODO
- * - Ã©volution des stats globales
- * 		- rajouter un bouton dans le menu principal, sous g-2/sc/conf : table vs. graphique
- * 		- Ã§a fait trois panels graphiques diffÃ©rents, chacun avec ses propres boutons
- * 		- pb : comment choisir les joueurs a afficher ?
- * 			>> on pourrait simplement les selectionner en cliquant sur leur nom dans la table
- * 			>> mais alors, comment donner/changer la legende ?
- * 			>> faut un bouton de couleur specifique, qu'on peut faire cycler
- * 			>> faire carrement une table de selection, avec le rang, le nom, la couleur et le type (hu/mach)
- * 		- nÃ©cessaire de changer le stockage des stats
- * 		- rÃ©solution temporelle ? rounds ? dates ? mises Ã  jour G-2 ?
- * 		  (on peut laisser le choix Ã  l'utilisateur, Ã§a dÃ©pend du stockage des donnÃ©es)
- */
-
-// TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
-// TODO affichage ingame API : temps dÃ©taillÃ©s >> afficher un agent Ã  la fois
-// 		>> comment (ergonomie) ? 
-//			combi avec les touches numÃ©riques ? >> pas pratique). 
-//			ou alors avec control droite >> pas possible
-//		>> faire dÃ©filer ? (encore moins pratique)
-//		>> utiliser une fenÃªtre sÃ©parÃ©e ?
-// TODO dÃ©gager les threads des agents qui ont Ã©tÃ© Ã©liminÃ©s
-//		>> plus d'appel par le moteur
-//		>> rÃ z des stats de temps pour les plots ingame
-// TODO dans l'Ã©volution de la partie, afficher l'occupation processeur
-//TODO faire un systÃ¨me automatique pour rÃ©pÃ©ter les tournois Ã  la chaine, 16 par 16, en filtrant les joueurs
+	
+	// TODO clignotements de sprites : mettre de la transparence dans les version coloriées
+	// TODO utiliser le calcul d'occupation CPU pour limiter les IA trop gourmandes
+	// 		utiliser la limite sur yield déjà définie (cf classe config d'ia)
+	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
+	// TODO arrêter les threads dont les ia ont été éliminées du jeu
+	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
+	// TODO finir IA
+	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
+	// TODO les flammes sont-elles censées traverser les bombes comme elles le font ?
+	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM2 >> à ripper et vérifier
+	// TODO gérer le tie-break du dernier tournoi
+	// TODO faire disparaitre progressivement les sprites à la fin du burning (niveau d'alpha ? cf items thème TBB)
+	//		>> en fait y a pas de gestion dynamique de l'alpha...
+	// TODO utiliser des chemins relatifs à la racine du sprite éviterait toutes les complications liées au nommage d'images/ombres
+	// TODO y a surement un bug pr rezo+simulation (cote client)
+	// TODO quand on tente de poser une bombe, le sprite est créé et on tente de voir s'il peut apparaître
+	// 	    question : est-il d'entrée inséré dans le Level ? si oui, y en a surement un paillat au bout d'un moment;
+	//		vu qu'en cas d'apparition impossible la bombe n'est pas retirée du Level (supposition)
+	// TODO il est possib que les ombres de Shirobon SBM2 soient à décaller un peu vers le bas, à voir comment ça rend dans le jeu
+	// TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
+	// TODO pb avec les instances de SBM1 et NES: les flammes ne doivent pas traverser les bombes
+}

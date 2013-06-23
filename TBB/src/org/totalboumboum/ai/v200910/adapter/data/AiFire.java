@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,22 +27,20 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * reprÃ©sente un feu du jeu, ie une projection mortelle rÃ©sultant (gÃ©nÃ©ralement) 
+ * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class AiFire extends AiSprite<Fire>
 {
 	/**
-	 * crÃ©e une reprÃ©sentation du feu passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite Ã  reprÃ©senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);
@@ -70,7 +68,7 @@ public class AiFire extends AiSprite<Fire>
 	
 	/**
 	 * teste si ce feu est capable de passer
-	 * Ã  travers les (certains) murs
+	 * à travers les (certains) murs
 	 * 
 	 * @return	vrai si le feu traverse les murs
 	 */
@@ -80,7 +78,7 @@ public class AiFire extends AiSprite<Fire>
 
 	/**
 	 * teste si ce feu est capable de passer
-	 * Ã  travers les bombes
+	 * à travers les bombes
 	 * 
 	 * @return	vrai si le feu traverse les bombes
 	 */
@@ -90,7 +88,7 @@ public class AiFire extends AiSprite<Fire>
 
 	/**
 	 * teste si ce feu est capable de passer
-	 * Ã  travers les items
+	 * à travers les items
 	 * 
 	 * @return	vrai si le feu traverse les items
 	 */
@@ -99,8 +97,8 @@ public class AiFire extends AiSprite<Fire>
 	}
 
 	/**
-	 * met Ã  jour les diverse propriÃ©tÃ©s de ce feu
-	 * liÃ©e Ã  la gestion des collisions
+	 * met à jour les diverse propriétés de ce feu
+	 * liée à la gestion des collisions
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();
@@ -116,11 +114,10 @@ public class AiFire extends AiSprite<Fire>
 		throughItems = ability.isActive();
 	}
 
-	@Override
 	public boolean isCrossableBy(AiSprite<?> sprite)
-	{	// par dÃ©faut, on bloque
+	{	// par défaut, on bloque
 		boolean result = false;
-		// si le sprite considÃ©rÃ© est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiHero)
 		{	AiHero hero = (AiHero) sprite;
 			result = hero.hasThroughFires();

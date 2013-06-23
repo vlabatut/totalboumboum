@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.gesture;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -60,13 +60,10 @@ public enum GestureName implements Serializable
 	/** the sprite is expressing its joy (hero winning a round) */
 	EXULTING,
 	
-	/** the sprite is falling from the skies (just before landing) */
-	FALLING,
-	
 	/** the sprite is being held by another sprite */
 //	HELD,
 	
-	/** the sprite is in the zone, but not visible (ex: wall before a spawn) */
+	/** the sprite is in the zone, but not visible (wall before a spawn) */
 	HIDING,
 	
 	/** the sprite is holding another sprite */

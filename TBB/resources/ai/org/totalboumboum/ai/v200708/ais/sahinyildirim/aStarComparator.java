@@ -4,13 +4,12 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Serkan Şahin
- * @author Mehmet Yıldırım
+ * @author Serkan Sahin
+ * @author Mehmet Yildirim
  *
  */
 public class aStarComparator implements Comparator<PointFind>
 {
-	@Override
 	public int compare(PointFind point1, PointFind point2) 
 	{
 		int result = -1;

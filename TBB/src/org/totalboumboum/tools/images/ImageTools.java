@@ -2,7 +2,7 @@ package org.totalboumboum.tools.images;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -272,17 +272,11 @@ if(xDim<0 || yDim<0)
     }
     
     /**
-     * Processes a new version of the image, which is darker 
-     * if {@code param}<1 and lighter if {@code param}>1. 
-     * <br>
-     * This method was taken from <a href="http://java.sun.com/developer/JDCTechTips/2004/tt0210.html">this web page</a>.
-     * 
+     * process a new version of the image, which is darker if param<1 and lighter if param>1
+     * method taken from here: http://java.sun.com/developer/JDCTechTips/2004/tt0210.html
      * @param image
-     * 		The image to process.
      * @param param
-     * 		How much darker/lighter it should be.
      * @return
-     * 		The darger/lighter image.
      */
     public static BufferedImage getDarkenedImage(BufferedImage image, float param)
     {	float[] brightKernel = {param};

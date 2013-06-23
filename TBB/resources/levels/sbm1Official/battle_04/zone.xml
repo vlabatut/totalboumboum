@@ -1,75 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd">
-	<!--
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut
+<?xml version="1.0" encoding="utf-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
 	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
--->
 	<variableTiles>
 		<variableTile name="tile1">
-			<value proba="0.2500000298023224" />
-			<value proba="0.15000002086162567">
-				<floor name="trampoline" />
+			<value proba="0.3" >
+				<block name="softwall" />
 			</value>
-			<value proba="0.30000004172325134">
-				<block group="default" name="softwall" />
+			<value proba="0.4" >
 			</value>
-			<value proba="0.04000000283122063">
-				<block group="default" name="softwall" />
+			<value proba="0.04" >
+				<block name="softwall" />
 				<item name="extrabomb" />
 			</value>
-			<value proba="0.04000000283122063">
-				<block group="default" name="softwall" />
+			<value proba="0.04" >
+				<block name="softwall" />
 				<item name="extraflame" />
 			</value>
-			<value proba="0.030000001192092896">
-				<block group="default" name="softwall" />
+			<value proba="0.03" >
+				<block name="softwall" />
 				<item name="disease" />
 			</value>
-			<value proba="0.030000001192092896">
-				<block group="default" name="softwall" />
+			<value proba="0.03" >
+				<block name="softwall" />
 				<item name="goldenflame" />
 			</value>
-			<value proba="0.04000000283122063">
-				<block group="default" name="softwall" />
+			<value proba="0.04" >
+				<block name="softwall" />
 				<item name="penetration" />
 			</value>
-			<value proba="0.030000001192092896">
-				<block group="default" name="softwall" />
+			<value proba="0.03" >
+				<block name="softwall" />
 				<item name="remotecontrol" />
 			</value>
-			<value proba="0.030000001192092896">
-				<block group="default" name="softwall" />
+			<value proba="0.03" >
+				<block name="softwall" />
 				<item name="speed" />
 			</value>
-			<value proba="0.020000001415610313">
-				<block group="default" name="softwall" />
+			<value proba="0.02" >
+				<block name="softwall" />
 				<item name="throughbombs" />
 			</value>
-			<value proba="0.020000001415610313">
-				<block group="default" name="softwall" />
+			<value proba="0.02" >
+				<block name="softwall" />
 				<item name="throughwalls" />
 			</value>
-			<value proba="0.020000001415610313">
-				<block group="default" name="softwall" />
+			<value proba="0.02" >
+				<block name="softwall" />
 				<item name="mystery" />
 			</value>
 		</variableTile>
 	</variableTiles>
+	
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
@@ -123,7 +105,8 @@
 			<tile pos="16">
 				<block group="hardwalls" name="outsidevertical" />
 			</tile>
-		</line>
+		</line>	
+		
 		<line pos="1">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftB" />
@@ -131,8 +114,10 @@
 			<tile pos="1">
 				<block group="hardwalls" name="insideleftup" />
 			</tile>
-			<tile pos="2" />
-			<tile pos="3" />
+			<tile pos="2">
+			</tile>
+			<tile pos="3">
+			</tile>
 			<tile pos="4">
 				<reference name="tile1" />
 			</tile>
@@ -160,8 +145,10 @@
 			<tile pos="12">
 				<reference name="tile1" />
 			</tile>
-			<tile pos="13" />
-			<tile pos="14" />
+			<tile pos="13">
+			</tile>
+			<tile pos="14">
+			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insiderightup" />
 			</tile>
@@ -169,6 +156,7 @@
 				<block group="hardwalls" name="outsiderightI" />
 			</tile>
 		</line>
+		
 		<line pos="2">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftC" />
@@ -176,7 +164,8 @@
 			<tile pos="1">
 				<block group="hardwalls" name="insideleft" />
 			</tile>
-			<tile pos="2" />
+			<tile pos="2">
+			</tile>
 			<tile pos="3">
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -210,7 +199,8 @@
 			<tile pos="13">
 				<block group="hardwalls" name="regular" />
 			</tile>
-			<tile pos="14" />
+			<tile pos="14">
+			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insideright" />
 			</tile>
@@ -218,6 +208,7 @@
 				<block group="hardwalls" name="outsiderightG" />
 			</tile>
 		</line>
+		
 		<line pos="3">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftD" />
@@ -271,6 +262,7 @@
 				<block group="hardwalls" name="outsiderightH" />
 			</tile>
 		</line>
+		
 		<line pos="4">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftE" />
@@ -324,6 +316,7 @@
 				<block group="hardwalls" name="outsiderightB" />
 			</tile>
 		</line>
+		
 		<line pos="5">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftF" />
@@ -377,6 +370,7 @@
 				<block group="hardwalls" name="outsiderightE" />
 			</tile>
 		</line>
+		
 		<line pos="6">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftG" />
@@ -430,6 +424,7 @@
 				<block group="hardwalls" name="outsiderightF" />
 			</tile>
 		</line>
+		
 		<line pos="7">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftH" />
@@ -483,6 +478,7 @@
 				<block group="hardwalls" name="outsiderightC" />
 			</tile>
 		</line>
+		
 		<line pos="8">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftB" />
@@ -536,6 +532,7 @@
 				<block group="hardwalls" name="outsidevertical" />
 			</tile>
 		</line>
+		
 		<line pos="9">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftC" />
@@ -589,6 +586,7 @@
 				<block group="hardwalls" name="outsidevertical" />
 			</tile>
 		</line>
+		
 		<line pos="10">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftI" />
@@ -596,7 +594,8 @@
 			<tile pos="1">
 				<block group="hardwalls" name="insideleft" />
 			</tile>
-			<tile pos="2" />
+			<tile pos="2">
+			</tile>
 			<tile pos="3">
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -630,7 +629,8 @@
 			<tile pos="13">
 				<block group="hardwalls" name="regular" />
 			</tile>
-			<tile pos="14" />
+			<tile pos="14">
+			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insideright" />
 			</tile>
@@ -638,6 +638,7 @@
 				<block group="hardwalls" name="outsiderightI" />
 			</tile>
 		</line>
+		
 		<line pos="11">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftH" />
@@ -645,8 +646,10 @@
 			<tile pos="1">
 				<block group="hardwalls" name="insideleft" />
 			</tile>
-			<tile pos="2" />
-			<tile pos="3" />
+			<tile pos="2">
+			</tile>
+			<tile pos="3">
+			</tile>
 			<tile pos="4">
 				<reference name="tile1" />
 			</tile>
@@ -674,8 +677,10 @@
 			<tile pos="12">
 				<reference name="tile1" />
 			</tile>
-			<tile pos="13" />
-			<tile pos="14" />
+			<tile pos="13">
+			</tile>
+			<tile pos="14">
+			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insideright" />
 			</tile>
@@ -683,6 +688,7 @@
 				<block group="hardwalls" name="outsiderightH" />
 			</tile>
 		</line>
+		
 		<line pos="12">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftB" />
@@ -735,443 +741,7 @@
 			<tile pos="16">
 				<block group="hardwalls" name="outsiderightB" />
 			</tile>
-		</line>
+		</line>	
 	</matrix>
-	<events duration="120000" relative="true">
-		<event time="60000">
-			<line pos="11">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="60492">
-			<line pos="10">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="60984">
-			<line pos="9">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="61476">
-			<line pos="8">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="61968">
-			<line pos="7">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="62460">
-			<line pos="6">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="62952">
-			<line pos="5">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="63444">
-			<line pos="4">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="63936">
-			<line pos="3">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="64428">
-			<line pos="2">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="64920">
-			<line pos="1">
-				<tile pos="2">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="65412">
-			<line pos="1">
-				<tile pos="3">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="65904">
-			<line pos="1">
-				<tile pos="4">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="66396">
-			<line pos="1">
-				<tile pos="5">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="66888">
-			<line pos="1">
-				<tile pos="6">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="67380">
-			<line pos="1">
-				<tile pos="7">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="67872">
-			<line pos="1">
-				<tile pos="8">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="68364">
-			<line pos="1">
-				<tile pos="9">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="68856">
-			<line pos="1">
-				<tile pos="10">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="69348">
-			<line pos="1">
-				<tile pos="11">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="69840">
-			<line pos="1">
-				<tile pos="12">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="70332">
-			<line pos="1">
-				<tile pos="13">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="70824">
-			<line pos="1">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="71316">
-			<line pos="2">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="71808">
-			<line pos="3">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="72300">
-			<line pos="4">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="72792">
-			<line pos="5">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="73284">
-			<line pos="6">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="73776">
-			<line pos="7">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="74268">
-			<line pos="8">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="74760">
-			<line pos="9">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="75252">
-			<line pos="10">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="75744">
-			<line pos="11">
-				<tile pos="14">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="76236">
-			<line pos="11">
-				<tile pos="13">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="76728">
-			<line pos="11">
-				<tile pos="12">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="77220">
-			<line pos="11">
-				<tile pos="11">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="77712">
-			<line pos="11">
-				<tile pos="10">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="78204">
-			<line pos="11">
-				<tile pos="9">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="78696">
-			<line pos="11">
-				<tile pos="8">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="79188">
-			<line pos="11">
-				<tile pos="7">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="79680">
-			<line pos="11">
-				<tile pos="6">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="80172">
-			<line pos="11">
-				<tile pos="5">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="80664">
-			<line pos="11">
-				<tile pos="4">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="81156">
-			<line pos="11">
-				<tile pos="3">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="81648">
-			<line pos="9">
-				<tile pos="3">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="82140">
-			<line pos="7">
-				<tile pos="3">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="82632">
-			<line pos="5">
-				<tile pos="3">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="83124">
-			<line pos="3">
-				<tile pos="3">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="83616">
-			<line pos="2">
-				<tile pos="4">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="84107">
-			<line pos="2">
-				<tile pos="6">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="84598">
-			<line pos="2">
-				<tile pos="8">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="85089">
-			<line pos="2">
-				<tile pos="10">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="85580">
-			<line pos="2">
-				<tile pos="12">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="86071">
-			<line pos="3">
-				<tile pos="13">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="86562">
-			<line pos="5">
-				<tile pos="13">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="87053">
-			<line pos="7">
-				<tile pos="13">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="87544">
-			<line pos="9">
-				<tile pos="13">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="88035">
-			<line pos="10">
-				<tile pos="12">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="88526">
-			<line pos="10">
-				<tile pos="10">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="89017">
-			<line pos="10">
-				<tile pos="8">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="89508">
-			<line pos="10">
-				<tile pos="6">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-		<event time="89999">
-			<line pos="10">
-				<tile pos="4">
-					<block group="hardwalls" name="shrink" />
-				</tile>
-			</line>
-		</event>
-	</events>
+	
 </zone>
-

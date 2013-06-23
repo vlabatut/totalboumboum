@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200708.adapter;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,18 +21,12 @@ package org.totalboumboum.ai.v200708.adapter;
  * 
  */
 
-import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-import org.totalboumboum.ai.AiAbstractManager;
-import org.totalboumboum.engine.container.level.hollow.HollowLevel;
-import org.totalboumboum.engine.container.level.hollow.SuddenDeathEvent;
+import org.totalboumboum.ai.AbstractAiManager;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -53,18 +47,19 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
-public abstract class AiManager extends AiAbstractManager<Integer>
-{	/** */
-	private boolean debug = false;
+public abstract class AiManager extends AbstractAiManager<Integer>
+{	private boolean debug = false;
+
+	public AiManager(ArtificialIntelligence ai)
+    {	super(ai);
+		controlKeys = new ArrayList<Integer>();		
+	}
 	
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void finishAi()
 	{	
 	}
@@ -72,29 +67,29 @@ public abstract class AiManager extends AiAbstractManager<Integer>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** percept Ã  envoyer Ã  l'IA : matrice reprÃ©sentant la zone de jeu */
+    /** percept à envoyer à l'IA : matrice représentant la zone de jeu */
     private int[][] zoneMatrix;;
-    /** percept Ã  envoyer Ã  l'IA : liste des bombes */
+    /** percept à envoyer à l'IA : liste des bombes */
     private Vector<int[]> bombs;
-    /** percept Ã  envoyer Ã  l'IA : liste des personnages */
+    /** percept à envoyer à l'IA : liste des personnages */
     private Vector<int[]> players;
-    /** percept Ã  envoyer Ã  l'IA : Ã©tats personnages */
+    /** percept à envoyer à l'IA : états personnages */
     private Vector<Boolean> playersStates;
-    /** percept Ã  envoyer Ã  l'IA : temps avant le dÃ©but du shrink */
+    /** percept à envoyer à l'IA : temps avant le début du shrink */
     private long timeBeforeShrink;
-    /** percept Ã  envoyer Ã  l'IA : prochaine position du shrink */
+    /** percept à envoyer à l'IA : prochaine position du shrink */
     private int nextShrinkPosition[];
-    /** percept Ã  envoyer Ã  l'IA : position du personnage de l'IA */
+    /** percept à envoyer à l'IA : position du personnage de l'IA */
     private int ownPosition[];
-    /** percept Ã  envoyer Ã  l'IA : position relative de la bombe */
+    /** percept à envoyer à l'IA : position relative de la bombe */
     private int bombPosition;
-    /** percept Ã  envoyer Ã  l'IA : la portee de la bombe */
+    /** percept à envoyer à l'IA : la portee de la bombe */
     private int ownFirePower;
-    /** percept Ã  envoyer Ã  l'IA : le nombre total de bombes */
+    /** percept à envoyer à l'IA : le nombre total de bombes */
     private int ownBombCount;
-    /** percept Ã  envoyer Ã  l'IA : la portee de la bombe */
+    /** percept à envoyer à l'IA : la portee de la bombe */
     private Vector<Integer> firePowers;
-    /** percept Ã  envoyer Ã  l'IA : le nombre total de bombes */
+    /** percept à envoyer à l'IA : le nombre total de bombes */
     private Vector<Integer> bombCounts;
 
 	@Override
@@ -105,36 +100,21 @@ public abstract class AiManager extends AiAbstractManager<Integer>
     	Tile[][] matrix = RoundVariables.level.getMatrix();
     	Sprite sprite = player.getSprite();
     	
-    	// Ã©tat du shrink
-    	long totalTime = loop.getTotalGameTime();
-    	HollowLevel hollowLevel = RoundVariables.loop.getRound().getHollowLevel();
-    	List<SuddenDeathEvent> suddenDeathEvents = hollowLevel.getSuddenDeathEvents();
+    	// état du shrink
+//NOTE à compléter    	
     	timeBeforeShrink = Long.MAX_VALUE;
-		nextShrinkPosition = new int[]{0,0};
-    	if(!suddenDeathEvents.isEmpty())
-    	{	// temps restant avant le shrink
-    		SuddenDeathEvent suddenDeathEvent = suddenDeathEvents.get(0);
-    		long time = suddenDeathEvent.getTime();
-    		timeBeforeShrink = time - totalTime;
-    		// position du prochain bloc shrinkÃ© (il peut y en avoir plusieurs, 
-    		// mais on ne prend que le premier par simplification)
-	    	Collection<List<Sprite>> sprites = suddenDeathEvent.getSprites().values();
-	    	if(!sprites.isEmpty())
-	    	{	List<Sprite> list = sprites.iterator().next();
-	    		if(!list.isEmpty())
-	    		{	Sprite s = list.get(0);
-	    			Tile t = s.getTile();
-	    			nextShrinkPosition = new int[]{t.getRow(),t.getCol()};
-	    		}
-	    	}
-    	}
+    	// position du prochain bloc shrinké
+//NOTE à compléter    	
+    	nextShrinkPosition = new int[2];
+    	nextShrinkPosition[0] = 0;
+    	nextShrinkPosition[1] = 0;
     	
     	// position du joueur
  		ownPosition = new int[2];
  		Tile tile = sprite.getTile();
         ownPosition[0] = tile.getCol();
-        ownPosition[1] = tile.getRow();
-        // propriÃ©tÃ©s du joueur
+        ownPosition[1] = tile.getLine();
+        // propriétés du joueur
         {	// bomb range
         	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
 			ownFirePower = (int)ab.getStrength();
@@ -157,7 +137,7 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 			ownBombCount = ownBombCount - sprite.getDroppedBombs().size();
         }
 
-        // position relative de l'Ã©ventuelle bombe
+        // position relative de l'éventuelle bombe
         bombPosition = ArtificialIntelligence.AI_DIR_NONE;
         List<Bomb> bombes = tile.getBombs();
         if(bombes.size()>0)
@@ -175,13 +155,13 @@ public abstract class AiManager extends AiAbstractManager<Integer>
         	}
         	// joueur pas parfaitement sur la bombe 
         	if(minX!=0 || minY!=0)
-        	{	// mÃªme ligne ?
+        	{	// même ligne ?
     	    	if(Math.abs(minX)>=Math.abs(minY))
     	    		if(minX>0)
     	    			bombPosition = ArtificialIntelligence.AI_DIR_LEFT;
     	    		else
     	    			bombPosition = ArtificialIntelligence.AI_DIR_RIGHT;
-    	    	// mÃªme colonne ?
+    	    	// même colonne ?
     	    	else
     	    		if(minY>0)
     	    			bombPosition = ArtificialIntelligence.AI_DIR_UP;
@@ -218,7 +198,7 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 	    		else if(temp.getBombs().size()>0)
 	    		{	zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_BOMB;
 	    			Bomb bomb = temp.getBombs().get(0);
-	    			int tempBombData[] = {temp.getCol(),temp.getRow(),bomb.getFlameRange()};
+	    			int tempBombData[] = {temp.getCol(),temp.getLine(),bomb.getFlameRange()};
 	    			bombs.add(tempBombData);
 	    		}
 	    		// feu
@@ -280,12 +260,12 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 		Iterator<AbstractPlayer> i = plyrs.iterator();
 		while(i.hasNext())
 		{	AbstractPlayer tempPlayer = i.next();
-			// le joueur reprÃ©sentÃ© par cet objet ne doit pas apparaitre dans cette liste
+			// le joueur représenté par cet objet ne doit pas apparaitre dans cette liste
 			if(tempPlayer!=player)
 			{	// position
 				Tile t = tempPlayer.getSprite().getTile();
 				int tempX = t.getCol();
-				int tempY = t.getRow();
+				int tempY = t.getLine();
 				// direction
 				Direction tempDir = tempPlayer.getSprite().getActualDirection();
 				int tempDirAI;
@@ -371,7 +351,7 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** simulates control keys */
-    private List<Integer> controlKeys = new ArrayList<Integer>();
+    private List<Integer> controlKeys;
 
 	@Override
 	public List<ControlEvent> convertReaction(Integer value)
@@ -676,46 +656,6 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 	}
 
     /////////////////////////////////////////////////////////////////
-	// TIME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	protected void initSteps()
-	{	// durations
-		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
-		HashMap<String,Float> averageDurations = getAverageDurations();
-		LinkedList<Long> list = new LinkedList<Long>();
-		for(int i=0;i<AVERAGE_SCOPE;i++)
-			list.add(0l);
-		instantDurations.put(TOTAL_DURATION,list);
-		averageDurations.put(TOTAL_DURATION,0f);
-		
-		// colors
-		HashMap<String,Color> stepColors = getStepColors();
-		stepColors.put(TOTAL_DURATION,Color.DARK_GRAY);
-	}
-
-	@Override
-	public void updateDurations()
-	{	// init
-		ArtificialIntelligence ai = (ArtificialIntelligence)getAi();
-		HashMap<String,LinkedList<Long>> instantDurations = getInstantDurations();
-		HashMap<String,Float> averageDurations = getAverageDurations();
-		
-		// instant durations
-		LinkedList<Long> list = instantDurations.get(TOTAL_DURATION);
-		list.poll();
-		long duration = ai.totalDuration;
-		list.offer(duration);
-
-		// average durations
-		float average = 0;
-		for(long value: list)
-			average = average + value;
-		average = average / AVERAGE_SCOPE;
-		averageDurations.put(TOTAL_DURATION,average);
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override

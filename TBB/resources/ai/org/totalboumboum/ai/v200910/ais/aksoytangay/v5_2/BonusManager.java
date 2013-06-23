@@ -17,45 +17,26 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Necmi Murat Tangay
  *
  */
-@SuppressWarnings("deprecation")
 public class BonusManager {
 
-	/** */
 	private AksoyTangay myAI; 
 	
-	/** */
 	private PathManager pathManager;
 	
-	/** */
 	private AiPath path;
 	
-	/** */
 	private AiTile currentTile;
 	
-	/** */
 	private AiTile lastTile;
 	
-	/** */
 	private AiZone percepts;
 	
 //	public List<AiTile> availibleTilesDirect;
 //	
 //	public List<AiTile> availibleTilesIndirect;
 		
-	/** */
 	private Zone zone;
 	
-	/**
-	 * 
-	 * @param myAI
-	 * 		Description manquante !
-	 * @param percepts
-	 * 		Description manquante !
-	 * @param pathManager
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public BonusManager(AksoyTangay myAI, AiZone percepts, PathManager pathManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -63,15 +44,10 @@ public class BonusManager {
 		this.myAI = myAI;
 		this.percepts = percepts;
 		this.pathManager = pathManager;
+		
+		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction getDirectionToCollectBonus() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -102,17 +78,12 @@ public class BonusManager {
 			//system.out.println("getDirection.escman" + result.name());
 		}
 		
-		////destructible olup olmamaya bakp ya bonusu direk al ya da bomba koyup al!!! bu direction da yaplrm???
+		////destructible olup olmamaya bakýp ya bonusu direk al ya da bomba koyup al!!! bu direction da yapýlýrmý???
 		
 		return result;
 		
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -124,13 +95,6 @@ public class BonusManager {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -141,13 +105,6 @@ public class BonusManager {
 			
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
 		myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -165,13 +122,6 @@ public class BonusManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean hasExplosed() throws StopRequestException
 	{
 		myAI.checkInterruption();

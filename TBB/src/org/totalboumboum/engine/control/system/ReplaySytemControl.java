@@ -2,7 +2,7 @@ package org.totalboumboum.engine.control.system;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,20 +27,12 @@ import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
- * This class is used to handle the
- * server-side system controls during 
- * a network game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class ReplaySytemControl extends SystemControl
 {	
-	/**
-	 * Builds a standard control object.
-	 * 
-	 * @param loop
-	 * 		Loop to control.
-	 */
 	public ReplaySytemControl(ReplayLoop loop)
 	{	super(loop);
 	}
@@ -86,11 +78,7 @@ public class ReplaySytemControl extends SystemControl
 			}
 			// replay: pause/play
 			else if(keyCode == KeyEvent.VK_SPACE)
-			{	SystemControlEvent controlEvent;
-				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.MODE);
-				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.REGULAR);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE);
 				loop.processEvent(controlEvent);
 			}
 			
@@ -117,36 +105,23 @@ public class ReplaySytemControl extends SystemControl
 					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
-			// debug: hide/display sprites
-			else if(keyCode == KeyEvent.VK_F4)
-			{	SystemControlEvent controlEvent;
-				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES,SystemControlEvent.MODE);
-				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES,SystemControlEvent.REGULAR);
-				loop.processEvent(controlEvent);
-			}
 			// debug: FPS/UPS
-			else if(keyCode == KeyEvent.VK_F5)
+			else if(keyCode == KeyEvent.VK_F4)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_FPS);
 				loop.processEvent(controlEvent);
 			}
 			// debug: speed coeff
-			else if(keyCode == KeyEvent.VK_F6)
+			else if(keyCode == KeyEvent.VK_F5)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPEED);
 				loop.processEvent(controlEvent);
 			}
 			// debug: time
-			else if(keyCode == KeyEvent.VK_F7)
-			{	SystemControlEvent controlEvent;
-				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.MODE);
-				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.REGULAR);
+			else if(keyCode == KeyEvent.VK_F6)
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME);
 				loop.processEvent(controlEvent);
 			}
 			// debug: names
-			else if(keyCode == KeyEvent.VK_F8)
+			else if(keyCode == KeyEvent.VK_F7)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
 				loop.processEvent(controlEvent);
 			}

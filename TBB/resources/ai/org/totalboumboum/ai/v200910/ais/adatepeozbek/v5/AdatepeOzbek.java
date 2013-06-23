@@ -17,37 +17,23 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
  * @version 5
  * 
  * @author Can Adatape
- * @author Sena Özbek
+ * @author Sena Ozbek
  *
  */
-@SuppressWarnings("deprecation")
 public class AdatepeOzbek extends ArtificialIntelligence 
 {	
-	/** */
 	private AiHero ownHero = null;
-	/** */
 	private AiZone zone = null;
-	/** */
 	private AiAction actionToDo = null;
-	/** */
 	private AiPath path = null;
-	/** */
 	private List<AiTile> allPassedTiles = null;
-	/** */
 	private boolean debug = false;
-	/** */
 	public boolean canTheyReachMe = false;
-	/** */
 	public TriedTiles triedTiles = null;
-	/** */
 	public List<Enemy> enemies = null;
-	/** */
 	public int urgentBombs = 0 ;
-	/** */
 	public AiTile lastBombedTile = null;
-	/** */
 	public long idleTime = 0;
-	/** */
 	public int privateRang = 0;
 	
 	@Override
@@ -76,7 +62,7 @@ public class AdatepeOzbek extends ArtificialIntelligence
 		if(!ownHero.hasEnded())
 		{
 			
-			// Ajoute toutes les cases visités dans le liste
+			// Ajoute toutes les cases visit�s dans le liste
 			if(allPassedTiles.size() > 0)
 			{
 				if(allPassedTiles.get(allPassedTiles.size()-1) != ownHero.getTile())
@@ -96,27 +82,13 @@ public class AdatepeOzbek extends ArtificialIntelligence
 		return actionToDo;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiAction getActionToDo() throws StopRequestException
 	{
 		checkInterruption();
 		
 		return actionToDo;
 	}
-
-	/**
-	 * 
-	 * @param action
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public void setActionToDo(AiAction action) throws StopRequestException
 	{
 		checkInterruption();
@@ -124,65 +96,30 @@ public class AdatepeOzbek extends ArtificialIntelligence
 		actionToDo = action;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{
 		checkInterruption();
 		return ownHero;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiZone getZone() throws StopRequestException
 	{
 		checkInterruption();
 		return zone;
 	}	
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiPath getPath() throws StopRequestException
 	{
 		checkInterruption();
 		return path;
 	}
 	
-	/**
-	 * 
-	 * @param path
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
 		checkInterruption();
 		this.path = path;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getPassedTiles() throws StopRequestException
 	{
 		checkInterruption();

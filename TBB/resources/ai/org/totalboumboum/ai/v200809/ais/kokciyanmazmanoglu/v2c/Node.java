@@ -6,46 +6,21 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
 *
-* @author Nadin Kökciyan
-* @author Hikmet Mazmanoğlu
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
 *
 */
-@SuppressWarnings("deprecation")
 public class Node {
 
-	/** */
 	private int line;
-	/** */
 	private int col;
-	/** */
 	private double cost;
-	/** */
 	private boolean visited;
-	/** */
 	private int depth;
 	
-	/** */
 	private Tree tree;
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @param cost
-	 * 		Description manquante !
-	 * @param t
-	 * 		Description manquante !
-	 * @param depth
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Node(int line, int col, double cost, Tree t, int depth, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -57,17 +32,7 @@ public class Node {
 		tree = t;
 	}
 	
-	/**
-	 * 
-	 * @param start
-	 * 		Description manquante !
-	 * @param end
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public  double getH(Node start, Node end) throws StopRequestException{
 		ai.checkInterruption();
 		double result;
@@ -85,7 +50,9 @@ public class Node {
         return  result;
 	}
 	
-	@Override
+	
+	
+	
 	public  boolean equals(Object object) {
 		Node node = (Node)object;
 		try {
@@ -100,147 +67,75 @@ public class Node {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
+
+
 	public  double getCost() throws StopRequestException {
 		ai.checkInterruption();
 		return cost;
 	}
 
-	/**
-	 * 
-	 * @param cost
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public  void setCost(int cost) throws StopRequestException {
 		ai.checkInterruption();
 		this.cost = cost;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public  boolean isVisited() throws StopRequestException {
 		ai.checkInterruption();
 		return visited;
 	}
 
-	/**
-	 * 
-	 * @param visited
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public  void setVisited(boolean visited) throws StopRequestException {
 		ai.checkInterruption();
 		this.visited = visited;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  String getName() throws StopRequestException{
 		ai.checkInterruption();
 		
 		return this.getCol() + " / " + this.getLine();
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  AiTile convertToTile() throws StopRequestException{
 		ai.checkInterruption();
 		tree.km.checkInterruption();
 		return tree.km.getPercepts().getTile(this.getLine(), this.getCol());
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public  int getLine() throws StopRequestException {
 		ai.checkInterruption();
 		return line;
 	}
 
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public  void setLine(int line) throws StopRequestException {
 		ai.checkInterruption();
 		this.line = line;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public  int getCol() throws StopRequestException {
 		ai.checkInterruption();
 		return col;
 	}
 
-	/**
-	 * 
-	 * @param col
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public  void setCol(int col) throws StopRequestException {
 		ai.checkInterruption();
 		this.col = col;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public int getDepth() throws StopRequestException {
 		ai.checkInterruption();
 		return depth;
 	}
 
-	/**
-	 * 
-	 * @param depth
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public void setDepth(int depth) throws StopRequestException {
 		ai.checkInterruption();
 		this.depth = depth;

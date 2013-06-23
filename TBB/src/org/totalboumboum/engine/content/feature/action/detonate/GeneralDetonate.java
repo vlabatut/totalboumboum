@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.detonate;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,31 +33,31 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action volontaire de brÃ»ler (par exemple explosion timer pr une bombe)
- * action de crÃ©er une explosion, alors que consume = fait de brÃ»ler(?)
- * ou detonate = bruler+explosion alors que consume=etre brulÃ©
+ * action volontaire de brûler (par exemple explosion timer pr une bombe)
+ * action de créer une explosion, alors que consume = fait de brûler(?)
+ * ou detonate = bruler+explosion alors que consume=etre brulé
  * INTRANSITIVE
  *  
  * <p>ABILITY PERFORM
- * 	<br>paramÃ¨tre: actor=self
- * 	<br>paramÃ¨tre: target=N/D
- * 	<br>paramÃ¨tre: direction=oui (permet de restreindre l'explosion d'une bombe ?)
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=oui (permet de restreindre l'explosion d'une bombe ?)
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
  * <p>ABILITY REFUSE
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramÃ¨tre: actor=oui
- * 	<br>paramÃ¨tre: target=N/D
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=oui
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  */
 /** 
  * producing an explosion, with flames and everything. 
@@ -74,8 +74,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralDetonate extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

@@ -19,46 +19,28 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Doğus Burcu Demirağ
- * @author Zeynep Şagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
-@SuppressWarnings("deprecation")
 public class DemiragSagar extends ArtificialIntelligence {
 
 	//les variables globales qui sont mise a jour a chaque iteration
-	/** */
 	private int state;
-	/** */
 	private Direction d;
-	/** */
 	private AiZone zone;
-	/** */
 	private AiHero ownHero;
-	/** */
 	private AiTile caseCourant;
-	/** */
 	private AiTile caseTarget;
-	/** */
 	private boolean debug;
-	/** */
 	private List<AiTile> caseEnemies;
-	/** */
 	private List<AiTile> caseBombes;
-	/** */
 	private List<AiTile> caseItems;
-	/** */
 	private TimeMatrice timeMatrice;
-	/** */
 	private long dangerTime;
-	/** */
 	private int distanceTarget;
-	/** */
 	private int counter;
 
-	/**
-	 * 
-	 */
 	public DemiragSagar() {
 		//l'initialisation des variables globales
 		this.state = 0;
@@ -361,13 +343,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return result;
 	}
 	
-	/**
+	/*
 	 * Prend l'intersection entre le chmein du enemie-item
 	 * et de nous-item
-	 * @param enemy 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
 	public AiTile EnemyAtTheGate(AiTile enemy)
 	{
@@ -405,13 +383,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		return result;
 	}
-	/**
+	/*
 	 * On suppose de mettre une bombe
 	 * On regarde si on sera en danger
-	 * @param temp 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
 	public boolean supposerBombe(AiTile temp){
 		try {
@@ -421,31 +395,24 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		int i,j;
 		boolean resultat=false;
-//		long nouveauTime [][]= new long[17][15];
-		long nouveauTime [][]= new long[zone.getWidth()][zone.getHeight()]; //adjustment
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+		long nouveauTime [][]= new long[17][15];
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
 			{
 				nouveauTime[i][j]=this.timeMatrice.getTime(i,j);
 			}
 		this.timeMatrice.placerNouvelleBombe(temp);
 		if(this.seCacher(true))
 			resultat=true;
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
 			{
 				this.timeMatrice.putTime(i,j,nouveauTime[i][j]);
 			}
 		return resultat;
 	}
-	/**
+	/*
 	 * Mettre a jour les tiles des enemies
-	 * @return
-	 * 		Description manquante !
 	 */
 	public List<AiTile> getEnemiesTile() {
 		try {
@@ -471,10 +438,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return monItera;
 	}
 
-	/**
+	/*
 	 * Mettre a jour les tiles des bombes
-	 * @return
-	 * 		?
 	 */
 	public List<AiTile> getBombesTile() {
 		List<AiTile> b = new ArrayList<AiTile>();
@@ -496,10 +461,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return b;
 	}
 
-	/**
+	/*
 	 * Mettre a jour les tiles des items
-	 * @return
-	 * 		?
 	 */
 	public List<AiTile> getItemsTile() {
 		List<AiTile> p = new ArrayList<AiTile>();
@@ -521,11 +484,6 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return p;
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 */
 	public void calculeZoneAspect(AiZone zone) {
 		try {
 			checkInterruption();
@@ -533,21 +491,13 @@ public class DemiragSagar extends ArtificialIntelligence {
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean seCacher(){
 		return seCacher(false);
 	}
-	/**
+	/*
 	 * Chercher une case pour se cacher
-	 * @param poserBombe 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
+	
 	public boolean seCacher(boolean poserBombe) {
 		try {
 			checkInterruption();
@@ -557,10 +507,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		AiTile petit = null;
 		boolean fuir = false;
 		int min = 10000, temp, i, j;
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
 				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant))
 					if ( this.timeMatrice.getTime(i,j)==0) {//bulacakkkk
 						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(j, i));
@@ -574,14 +522,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		this.caseTarget = petit;
 		return fuir;
 	}
-	/**
+	/*
 	 * Regarde si il existe un danger sur le chemin chosit
-	 * @param target 
-	 * 		Description manquante !
-	 * @param placerBombe 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
 	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) {
 		try {
@@ -605,10 +547,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return flag;
 	}
 
-	/**
+	/*
 	 * Regarde si nous sommes arrive a la case cible
-	 * @return
-	 * 		Description manquante !
 	 */
 	public boolean estCaseCible() {
 		try {
@@ -624,10 +564,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 
 	}
 
-	/**
+	/*
 	 * Compte les nombres des SoftWalls restant
-	 * @return
-	 * 		Description manquante !
 	 */
 	public int FindSoftWallNumber() {
 		try {
@@ -637,14 +575,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;
-//		for (j = 0; j < 15; j++)
-		for (int j = 0; j < zone.getHeight(); j++) //adjustment
-//			for (i = 0; i < 17; i++)
-			for (int i = 0; i < zone.getWidth(); i++) //adjustment
-//				if (mat[j][i] == -1) {
-				if (mat[i][j] == -1) { //adjustment
-//					AiTile temp = this.zone.getTile(i, j);
-					AiTile temp = this.zone.getTile(j, i); //adjustment
+		for (int i = 0; i < 15; i++)
+			for (int j = 0; j < 17; j++)
+				if (mat[j][i] == -1) {
+					AiTile temp = this.zone.getTile(i, j);
 					if (!temp.getBlock().isDestructible())
 						sommeHardWall++;
 				}

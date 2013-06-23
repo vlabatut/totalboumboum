@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.game.quickmatch;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -51,7 +51,6 @@ public class QuickMatchConfiguration
 		result.setPoints(points);
 		result.setPointsShare(pointsShare);
 		result.setPointsDraw(pointsDraw);
-		result.setSuddenDeathDisabled(suddenDeathDisabled);
 		
 		// levels
 		LevelsSelection levelsCopy = levelsSelection.copy();
@@ -124,7 +123,6 @@ public class QuickMatchConfiguration
 	private int limitTime = 60000;
 	private int limitPoints = 5;
 	private int limitRounds = -1;
-	private boolean suddenDeathDisabled = false;
 
 	public int getLimitTime()
 	{	return limitTime;
@@ -182,13 +180,6 @@ public class QuickMatchConfiguration
 	{	this.pointsDraw = pointsDraw;
 	}
 	
-	public boolean getSuddenDeathDisabled()
-	{	return suddenDeathDisabled;
-	}
-	public void setSuddenDeathDisabled(boolean suddenDeath)
-	{	this.suddenDeathDisabled = suddenDeath;
-	}
-	
 	public void reinitSettings()
 	{	levelsRandomOrder = false;
 		playersRandomLocation = false;
@@ -200,7 +191,6 @@ public class QuickMatchConfiguration
 		limitTime = 60000;
 		limitPoints = 5;
 		limitRounds = -1;
-		suddenDeathDisabled = false;
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -14,10 +14,9 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 /**
  * 
  * @author Cem Akpolat
- * @author Emre Åžener
+ * @author Emre Sener
  *
  */
-@SuppressWarnings("deprecation")
 public class Target {
 
 	/** la classe principal de notre IA */
@@ -29,13 +28,6 @@ public class Target {
 	/** l'objet de la cible le plus proche */
 	Object closestTarget;
 
-	/**
-	 * 
-	 * @param as
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Target(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
 		this.as = as;
@@ -45,12 +37,10 @@ public class Target {
 	}
 
 	/**
-	 * trouve le cible la plus proche Ã  une case donnÃ©e
+	 * trouve le cible la plus proche à une case donnée
 	 * 
 	 * @param tile
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	@SuppressWarnings("unused")
 	void findClosest(AiTile tile) throws StopRequestException {
@@ -84,9 +74,7 @@ public class Target {
 	 * retourne le cible la plus proche
 	 * 
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public Object getClosestTarget() throws StopRequestException {
 		as.checkInterruption();
@@ -94,12 +82,10 @@ public class Target {
 	}
 
 	/**
-	 * retourne l'enemie la plus proche Ã  une case donnÃ©e
+	 * retourne l'enemie la plus proche à une case donnée
 	 * 
-	 * @return ?
-	 * 		Description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	AiHero findClosestEnemy() throws StopRequestException {
 		as.checkInterruption();
@@ -130,12 +116,10 @@ public class Target {
 	}
 
 	/**
-	 * retourne le bonus la plus proche Ã  une case donnÃ©e
+	 * retourne le bonus la plus proche à une case donnée
 	 * 
-	 * @return ?
-	 * 		Description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	AiItem findClosestBonus() throws StopRequestException {
 		as.checkInterruption();
@@ -163,14 +147,11 @@ public class Target {
 
 	/**
 	 * retourne la distance directe entre la cible la plus proche et une case
-	 * donnÃ©e
+	 * donnée
 	 * 
 	 * @param tile
-	 * 		Description manquante !
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public double getHypotenuseToTarget(AiTile tile)
 			throws StopRequestException {
@@ -187,14 +168,11 @@ public class Target {
 
 	/**
 	 * retourne la distance de Manhattan entre la cible la plus proche et une
-	 * case donnÃ©e
+	 * case donnée
 	 * 
 	 * @param tile
-	 * 		Description manquante !
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public double getManhattanToTarget(AiTile tile) throws StopRequestException {
 		as.checkInterruption();

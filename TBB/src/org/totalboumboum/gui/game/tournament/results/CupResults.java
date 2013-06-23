@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament.results;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,24 +32,17 @@ import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * This class handles the display of the
- * result of a cup, during a game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class CupResults extends TournamentResults<CupTournament>
-{	/** Class id */
+{	
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
 	public CupResults(SplitMenuPanel container)
 	{	super(container);
 		
@@ -59,7 +52,7 @@ public class CupResults extends TournamentResults<CupTournament>
 				infoPanel.setLayout(layout);
 			}
 	
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			int rightWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int leftWidth = dataWidth - rightWidth - margin; 
 			infoPanel.setOpaque(false);
@@ -88,13 +81,9 @@ public class CupResults extends TournamentResults<CupTournament>
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** Split ratio */
 	private static final float SPLIT_RATIO = 0.5f;
-	/** Number of legs displayed by page */
 	private static final int LEGS_PER_PAGE = 2;
-	/** Panel displaying the results */
 	private HomogenResultsSubPanel resultsPanel;
-	/** Panel used to display legs */
 	private LegSubPanel legsPanel;
 
 	/////////////////////////////////////////////////////////////////

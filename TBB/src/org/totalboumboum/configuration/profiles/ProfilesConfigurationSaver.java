@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.profiles;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,7 +29,6 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -59,10 +58,6 @@ public class ProfilesConfigurationSaver
 	private static Element saveProfilesElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlNames.PROFILES);
 		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-
 		// general
 		Element generalElement = saveGeneralElement(profilesConfiguration);
 		result.addContent(generalElement);

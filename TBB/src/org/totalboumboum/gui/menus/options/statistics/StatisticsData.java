@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.options.statistics;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,10 +35,8 @@ import org.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -92,7 +90,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -100,7 +98,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 				
@@ -116,7 +114,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -124,7 +122,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 				
@@ -150,7 +148,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -165,7 +163,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 
@@ -191,7 +189,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -206,7 +204,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 
@@ -232,7 +230,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -247,7 +245,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 
@@ -273,7 +271,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -288,7 +286,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 
@@ -304,7 +302,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
@@ -312,7 +310,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
 				

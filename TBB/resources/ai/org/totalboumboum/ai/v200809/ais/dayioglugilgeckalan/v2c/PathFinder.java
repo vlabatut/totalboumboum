@@ -9,33 +9,17 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Ali Batuhan DayioÄŸlugil
- * @author GÃ¶khan GeÃ§kalan
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
  *
  */
-@SuppressWarnings("deprecation")
 public class PathFinder {
 
-	/** */
 	private LinkedList<Noeud> path;
-	/** */
 	private ZoneEnum tab[][];
-	/** */
 	private AiZone zone;
-	/** */
 	private DayioglugilGeckalan source;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param target
-	 * 		Description manquante !
-	 * @param source
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public PathFinder(AiZone zone, AiTile target,DayioglugilGeckalan source) throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -62,13 +46,6 @@ public class PathFinder {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public String ToStringPath() throws StopRequestException
 	{	source.checkInterruption();
 		return path.toString();
@@ -134,28 +111,27 @@ public class PathFinder {
 	} */
 	
 	/**
-	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A Ã©toile.
+	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A étoile.
 	 *(cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * @param x
-	 *           le coordonnÃ© de x de l'ia.
+	 *           le coordonné de x de l'ia.
 	 * @param y
-	 *            le coordonnÃ© de y de l'ia.
+	 *            le coordonné de y de l'ia.
 	 * @param tab le tableau du jeu.
 	 * @param goal la case qu'on veut y arriver.
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private void findPath(ZoneEnum[][] tab,int x,int y,Noeud goal) throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire
-		//Ã  chaque appel de la fonction,on efface les anciens valeurs.
+		//à chaque appel de la fonction,on efface les anciens valeurs.
 		path=new LinkedList<Noeud>();
 		
-		Noeud courant=new Noeud(x,y,tab[x][y],0,source);//case oÃ¹ se trouve ia.
+		Noeud courant=new Noeud(x,y,tab[x][y],0,source);//case où se trouve ia.
 		Tree tree=new Tree(courant,source);//on cree une arbre pour voir le path.
 		NoeudAstar comparator=new NoeudAstar(goal,source);//utilise pour l'algorithme Aetoile
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1,comparator);//les elements sont inseres en respectant l'ordre du cout et de l'heuristique.
 		LinkedList<Noeud> open=new LinkedList<Noeud>();//liste des elements qu'on regarde.
-		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dejÃ  regardÃ©.
+		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dejà regardé.
 		Noeud temp=new Noeud(source);
 	
 		Noeud solution = null;
@@ -166,7 +142,7 @@ public class PathFinder {
 			source.checkInterruption(); //Appel Obligatoire
 			temp=frange.poll();//on enleve de la frange
 			open.remove(open.indexOf(temp));//on enleve de la liste open.
-			closed.add(temp);//on met au liste des elements deja regardÃ©s.
+			closed.add(temp);//on met au liste des elements deja regardés.
 			
 			if(temp.equals(goal)){
 				solution=temp;
@@ -195,7 +171,7 @@ public class PathFinder {
 					}	
 				 
 				 }
-			//la case qui est Ã  droite de lui.
+			//la case qui est à droite de lui.
 				if((temp.getX()+1<=zone.getWidth()-1)&& (tab[temp.getX()+1][temp.getY()]!=ZoneEnum.FEU) && (tab[temp.getX()+1][temp.getY()]!=ZoneEnum.BOMBE)&&(tab[temp.getX()+1][temp.getY()]!=ZoneEnum.BLOCDEST)&&(tab[temp.getX()+1][temp.getY()]!=ZoneEnum.BLOCINDEST)){
 					right=new Noeud(temp.getX()+1,temp.getY(),tab[temp.getX()+1][temp.getY()],temp.getCout()+1,source);
 					if(!open.contains(right)  && !closed.contains(right)){
@@ -204,7 +180,7 @@ public class PathFinder {
 						frange.offer(right);
 					}	
 				}
-			//la case qui est en Ã  gauche de lui.
+			//la case qui est en à gauche de lui.
 				if((temp.getX()-1>=1)&& (tab[temp.getX()-1][temp.getY()]!=ZoneEnum.FEU)  && (tab[temp.getX()-1][temp.getY()]!=ZoneEnum.BOMBE)&&(tab[temp.getX()-1][temp.getY()]!=ZoneEnum.BLOCDEST)&&(tab[temp.getX()-1][temp.getY()]!=ZoneEnum.BLOCINDEST)) {	
 					left=new Noeud(temp.getX()-1,temp.getY(),tab[temp.getX()-1][temp.getY()],temp.getCout()+1,source);	
 					if(!open.contains(left)  && !closed.contains(left)){	
@@ -218,20 +194,13 @@ public class PathFinder {
 			
 		}// fin de while
 
-		if(solution!=null)//si on a trouvÃ© la solution sans finir tous les elements de la frange.
+		if(solution!=null)//si on a trouvé la solution sans finir tous les elements de la frange.
 			path=tree.getPath(solution);
 
 		frange=null;//on vide la frange.
 		tree=null;//on vide l'arbre.
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("unchecked")
 	public LinkedList <AiTile> getPath() throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire

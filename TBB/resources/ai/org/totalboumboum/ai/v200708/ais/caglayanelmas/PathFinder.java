@@ -14,39 +14,29 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
 
 /**
  * Module d'IA qui va trouver le plus court chemin
- * entre un case initial et un case final en considÃ©rant
+ * entre un case initial et un case final en considérant
  * les obstacles. On va utiliser A* avec une heuristique
- * Ã©tant Ã©gale Ã  la distance de Manhattan entre les deux
+ * étant égale à la distance de Manhattan entre les deux
  * cases.
  * 
- * @author Ozan Ã‡aÄŸlayan
+ * @author Ozan Caglayan
  * @author Arif Can Elmas
  *
  */
-@SuppressWarnings("deprecation")
 public class PathFinder
 {
-	/** L'objet qui reprÃ©sente notre IA. On utilise
-	// cette rÃ©fÃ©rence pour pouvoir appeler
-	// les mÃ©thodes isObstacle, isMovePossible,
-	// applyAction. */
+	// L'objet qui représente notre IA. On utilise
+	// cette référence pour pouvoir appeler
+	// les méthodes isObstacle, isMovePossible,
+	// applyAction.
 	private CaglayanElmas ai;
 	
-	/** */
 	private Vector<SearchNode> nodes;
-	/** */
 	private Vector<SearchLink> links;
 	
-	/** */
 	private int[] initialState;
-	/** */
 	private int[] finalState;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 */
 	public PathFinder(CaglayanElmas ai)
 	{
 		this.ai = (CaglayanElmas) ai;
@@ -55,13 +45,6 @@ public class PathFinder
 		this.links = new Vector<SearchLink>();
 	}
 	
-	/**
-	 * 
-	 * @param initialState
-	 * 		Description manquante !
-	 * @param finalState
-	 * 		Description manquante !
-	 */
 	public void setStates(int[] initialState, int[] finalState)
 	{
 		this.initialState = initialState.clone();
@@ -71,41 +54,16 @@ public class PathFinder
 									  this.calculateHeuristic(this.initialState, this.finalState)));
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @param iteration
-	 * 		Description manquante !
-	 */
 	public void markVisitedNode(SearchNode node, int iteration)
 	{	
 		node.markVisited(iteration);
 	}
 	
-	/**
-	 * 
-	 * @param s1
-	 * 		Description manquante !
-	 * @param s2
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public int calculateHeuristic(int[] s1, int[] s2)
 	{
 		return 10*(Math.abs(s1[0]-s2[0])+Math.abs(s1[1]-s2[1]));
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	private Vector<Integer> getPossibleMoves(int x, int y)
 	{	
 		Vector<Integer> result = new Vector<Integer>();
@@ -116,11 +74,6 @@ public class PathFinder
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		? 
-	 */
 	public Vector<SearchLink> findShortestPath()
 	{
 		PriorityQueue<SearchNode> fringe = new PriorityQueue<SearchNode>(1, new SearchNodeAStarComparator());
@@ -156,13 +109,6 @@ public class PathFinder
 		return getPath(new SearchNode(finalState,0,0,0));
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean containsNode(SearchNode node)
 	{	
 		boolean result = false;
@@ -176,13 +122,6 @@ public class PathFinder
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public Iterator<SearchLink> developNode(SearchNode node)
 	{	
 		Vector<SearchLink> result = new Vector<SearchLink>();
@@ -210,13 +149,6 @@ public class PathFinder
 		return result.iterator();
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public Vector<SearchLink> getPath(SearchNode node)
 	{	
 		Vector<SearchLink> result;

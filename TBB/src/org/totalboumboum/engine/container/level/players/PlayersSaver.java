@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.players;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,7 +29,6 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.tools.files.FileNames;
@@ -48,7 +47,6 @@ public class PlayersSaver
 	public static void savePlayers(String folder, Players players) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
 		Element root = savePlayersElement(players);	
-		
 		// save file
 		String individualFolder = folder;
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_PLAYERS+FileNames.EXTENSION_XML);
@@ -60,10 +58,6 @@ public class PlayersSaver
 	private static Element savePlayersElement(Players players)
 	{	Element result = new Element(XmlNames.PLAYERS);
 		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-
 		// locations
 		HashMap<Integer,PlayerLocation[]> locations = players.getLocations();
 		Element locationsElement = saveLocationsElement(locations);
@@ -113,9 +107,9 @@ public class PlayersSaver
 		int player = location.getNumber();
 		result.setAttribute(XmlNames.PLAYER,nf.format(player));
 		
-		// row
-		int row = location.getRow();
-		result.setAttribute(XmlNames.LINE,nf.format(row));
+		// line
+		int line = location.getLine();
+		result.setAttribute(XmlNames.LINE,nf.format(line));
 
 		// column
 		int col = location.getCol();

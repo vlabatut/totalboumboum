@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -174,18 +174,18 @@ public abstract class SpecificAction
 	 */
 /*	public ActionAbility computeAbility()
 	{	// actor original ability 
-		ActionAbility result = actor.getAbility(this); //TODO Ã©crire getAbility(action), les autres sont-ils utiles?
+		ActionAbility result = actor.getAbility(this); //TODO écrire getAbility(action), les autres sont-ils utiles?
 		result = (ActionAbility)result.copy();
 		
 		// actor modulation
 		if(result.isActive())
 		{	ActorModulation actorModulation = actor.getActorModulation(this);
-			if(actorModulation!=null) //TODO peut Ãªtre que c'est plus simple de renvoyer systÃ©matiquement une modulation, mais avec une puissance de 0?
-				result = actorModulation.modulate(result); //TODO Ã©crire cette mÃ©thode aussi, qui renvoie une nouvelle ability		
+			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systmétiquement une modulation, mais avec une puissance de 0?
+				result = actorModulation.modulate(result); //TODO écrire cette méthode aussi, qui renvoie une nouvelle ability		
 		}
 		
 		// target modulation (if there's one!)
-		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donnÃ©, Ã§a dÃ©pend de son gesture courant. si pas de gesture, alors il renvoie null
+		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
 		{	TargetModulation targetModulation = target.getTargetModulation(this);
 			if(targetModulation!=null)
 				result = targetModulation.modulate(result); 		

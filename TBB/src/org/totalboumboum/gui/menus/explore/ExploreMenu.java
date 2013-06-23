@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.explore;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -39,12 +39,8 @@ import org.totalboumboum.gui.menus.explore.levels.select.SelectedLevelSplitPanel
 import org.totalboumboum.gui.menus.explore.matches.select.SelectedMatchSplitPanel;
 import org.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundSplitPanel;
 import org.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentSplitPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -83,28 +79,28 @@ public class ExploreMenu extends InnerMenuPanel
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiSizeTools.buttonTextHeight;
+		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_BUTTON);
-		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonHeroes = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_HEROES,buttonWidth,buttonHeight,fontSize,this);
-		buttonAi = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_AI,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonInstances = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_INSTANCES,buttonWidth,buttonHeight,fontSize,this);
+		buttonHeroes = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_HEROES,buttonWidth,buttonHeight,fontSize,this);
+		buttonAi = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_AI,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonInstances = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_INSTANCES,buttonWidth,buttonHeight,fontSize,this);
 buttonInstances.setEnabled(false);
-		buttonLevels = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonRounds = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
-		buttonMatches = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
-		buttonTournaments = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonLevels = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonRounds = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
+		buttonMatches = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
+		buttonTournaments = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,47 +37,44 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.BasicSuccessorC
 import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
- * implÃ©ment de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adaptÃ© au
- * cas oÃ¹ on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
- * cette implÃ©ment correspond Ã  peu prÃ¨s Ã  un A* classique. Il y a quand mÃªme une modification,
- * puisque les noeuds d'Ã©tat apparaissant dÃ©jÃ  dans des noeuds de recherche ancÃªtre sont
- * Ã©cartÃ©s lorsqu'un noeud de recherche est dÃ©veloppÃ©. En d'autres termes, l'algorithme Ã©vite
- * de chercher des chemins qui passent plusieurs fois par la mÃªme case, ce qui l'empÃªche de
- * boucler Ã  l'infini.
- * <br/>
- * Cette implÃ©ment trouve donc le chemin le plus court entre deux cases,
- * en considÃ©rant les obstacles. Elle a besoin de quatre paramÃ¨tres :<ul>
- * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nÃ©cessaire afin de tester la traversabilitÃ© des cases).</li>
- * 		<li> Une fonction successeur, qui dÃ©finit les actions possibles Ã  partir d'un Ã©tat donnÃ©. Dans le cas prÃ¨sent, il s'agit de 
- * 			 restreindre les dÃ©placement possibles en considÃ©rant des facteurs supplÃ©mentaires par rapport Ã  la simple traversabilitÃ© courrante.</li>
- * 		<li> Une fonction de coÃ»t, qui permet de dÃ©finir combien coÃ»te une action (ici : le fait de passer d'une case Ã  l'autre).</li>
- * 		<li> Une fonction heuristique, qui permet d'estimer le coÃ»t du chemin restant Ã  parcourir.</li></ul>
+ * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
+ * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
+ * cette implémentation correspond à peu près à un A* classique. Il y a quand même une modification,
+ * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
+ * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
+ * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
+ * boucler à l'infini.</br>
  * 
- * A noter qu'il s'agit d'une implÃ©ment non-dÃ©terministe de l'algorithme.
- * Cela signifie que la mÃ©thode renverra toujours le chemin optimal (i.e. le plus court par
- * rapport au cout dÃ©fini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
- * renverra pas forcÃ©ment toujours la mÃªme (il en choisira une au hasard).
- * Le but est d'introduire une part de hasard dans les IA, de maniÃ¨re Ã  les rendre moins prÃ©visibles.
+ * Cette implémentation trouve donc le chemin le plus court entre deux cases,
+ * en considérant les obstacles. Elle a besoin de quatre paramètres :<ul>
+ * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilité des cases).</li>
+ * 		<li> Une fonction successeur, qui définit les actions possibles à partir d'un état donné. Dans le cas présent, il s'agit de 
+ * 			 restreindre les déplacement possibles en considérant des facteurs supplémentaires par rapport à la simple traversabilité courrante.</li>
+ * 		<li> Une fonction de coût, qui permet de définir combien coûte une action (ici : le fait de passer d'une case à l'autre).</li>
+ * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li></ul>
+ * 
+ * A noter qu'il s'agit d'une implémentation non-déterministe de l'algorithme.
+ * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
+ * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
+ * renverra pas forcément toujours la même (il en choisira une au hasard).
+ * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public final class Astar
-{	/** NumÃ©ro de sÃ©rie */
-	private static boolean verbose = false;
+{	private static boolean verbose = false;
 
 	/**
 	 * construit un objet permettant d'appliquer l'algorithme A*
-	 * en utilisant la fonction successeur dÃ©finie par dÃ©faut.
+	 * en utilisant la fonction successeur définie par défaut.
 	 * 
 	 * @param ai
 	 * 		l'AI invoquant A*
 	 * @param hero
-	 * 		le personnage Ã  considÃ©rer pour les dÃ©placements
+	 * 		le personnage à considérer pour les déplacements
 	 * @param costCalculator
-	 * 		la fonction de coÃ»t
+	 * 		la fonction de coût
 	 * @param heuristicCalculator
 	 * 		la fonction heuristique
 	 */
@@ -91,9 +88,9 @@ public final class Astar
 	 * @param ai
 	 * 		l'AI invoquant A*
 	 * @param hero
-	 * 		le personnage Ã  considÃ©rer pour les dÃ©placements
+	 * 		le personnage à considérer pour les déplacements
 	 * @param costCalculator
-	 * 		la fonction de coÃ»t
+	 * 		la fonction de coût
 	 * @param heuristicCalculator
 	 * 		la fonction heuristique
 	 * @param successorCalculator
@@ -118,45 +115,44 @@ public final class Astar
 	private SuccessorCalculator successorCalculator = null;
 	/** racine de l'arbre de recherche */
 	private AstarNode root = null;
-	/** personnage de rÃ©fÃ©rence */
+	/** personnage de référence */
 	private AiHero hero = null;
-	/** l'ai qui a rÃ©alisÃ© l'appel */
+	/** l'ai qui a réalisé l'appel */
 	private ArtificialIntelligence ai = null;
 
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de hauteur (nÃ©gatif = pas de limite) */
+	/** limite de hauteur (négatif = pas de limite) */
 	private int maxHeight = -1;
-	/** limite de coÃ»t (nÃ©gatif = pas de limite) */
+	/** limite de coût (négatif = pas de limite) */
 	private double maxCost = -1;
-	/** limite de nombre de noeuds (nÃ©gatif = pas de limite), pas configurable */
+	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
 	private int maxNodes = 10000;
 	
 	/**
-	 * limite l'arbre de recherche Ã  une hauteur de maxHeight,
-	 * i.e. quand le noeud courant a une profondeur correspondant Ã  maxHeight,
-	 * l'algorithme se termine et ne renvoie pas de solution (Ã©chec).
-	 * Dans des cas extrÃªmes, l'arbre peut avoir une hauteur considÃ©rable,
-	 * ce qui peut provoquer un dÃ©passement mÃ©moire. Ce paramÃ¨tre permet d'Ã©viter
-	 * de dÃ©clencher ce type d'exception. A noter qu'un paramÃ¨tre non-configurable
-	 * limite dÃ©jÃ  le nombre de noeuds dans l'arbre.
+	 * limite l'arbre de recherche à une hauteur de maxHeight,
+	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
+	 * l'algorithme se termine et ne renvoie pas de solution (échec).
+	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
+	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
+	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxHeight
-	 * 		?	
 	 */
 	public void setMaxHeight(int maxHeight)
 	{	this.maxHeight = maxHeight;	
 	}
 		
 	/**
-	 * limite l'arbre de recherche Ã  un certain cout maxCost, i.e. DÃ¨s que le
+	 * limite l'arbre de recherche à un certain cout maxCost, i.e. dès que le
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
-	 * renvoie pas de solution (Ã©chec)
-	 * Dans des cas extrÃªmes, l'arbre peut avoir une hauteur considÃ©rable,
-	 * ce qui peut provoquer un dÃ©passement mÃ©moire. Ce paramÃ¨tre permet d'Ã©viter
-	 * de dÃ©clencher ce type d'exception. A noter qu'un paramÃ¨tre non-configurable
-	 * limite dÃ©jÃ  le nombre de noeuds dans l'arbre.
+	 * renvoie pas de solution (échec)
+	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
+	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
+	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxCost	
 	 * 		le cout maximal que le noeud courant peut atteindre
@@ -169,25 +165,22 @@ public final class Astar
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * calcule le plus court chemin pour aller de la case startTile Ã  
+	 * calcule le plus court chemin pour aller de la case startTile à 
 	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
-	 * chemin n'est trouvÃ©, alors un chemin vide est renvoyÃ©. Si jamais
+	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
 	 * l'algorithme atteint une limite de cout/taille, la valeur null est
-	 * renvoyÃ©e. Dans ce cas lÃ , c'est qu'il y a gÃ©nÃ©ralement un problÃ¨me
-	 * dans le faÃ§on dont A* est employÃ© (mauvaise fonction de cout, par
+	 * renvoyée. Dans ce cas là, c'est qu'il y a généralement un problème
+	 * dans le façon dont A* est employé (mauvaise fonction de cout, par
 	 * exemple). 
 	 * 
 	 * @param startTile	
-	 * 		la case de dÃ©part
+	 * 		la case de départ
 	 * @param endTile	
-	 * 		la case d'arrivÃ©e
+	 * 		la case d'arrivée
 	 * @return 
-	 * 		un chemin pour aller de startTile Ã  endTile, ou un chemin vide, ou la valeur null
-	 * 
+	 * 		un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
 	 * @throws StopRequestException 
-	 * 		?	
 	 * @throws LimitReachedException 
-	 * 		?	
 	 */
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile) throws StopRequestException, LimitReachedException
 	{	List<AiTile> endTiles = new ArrayList<AiTile>();
@@ -197,26 +190,23 @@ public final class Astar
 	}
 	
 	/**
-	 * calcule le plus court chemin pour aller de la case startTile Ã  
+	 * calcule le plus court chemin pour aller de la case startTile à 
 	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
-	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvÃ© 
-	 * alors un chemin vide est renvoyÃ©. Si jamais l'algorithme atteint 
-	 * une limite de cout/taille, la valeur null est renvoyÃ©e. Dans ce 
-	 * cas-lÃ , c'est qu'il y a gÃ©nÃ©ralement un problÃ¨me dans le faÃ§on 
-	 * dont A* est employÃ© (mauvaise fonction de cout, par exemple).
-	 * La fonction renvoie Ã©galement null si la liste endTiles est vide.
+	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
+	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
+	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
+	 * cas-là, c'est qu'il y a généralement un problème dans le façon 
+	 * dont A* est employé (mauvaise fonction de cout, par exemple).
+	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
 	 * @param startTile	
-	 * 		la case de dÃ©part
+	 * 		la case de départ
 	 * @param endTiles	
-	 * 		la liste des cases d'arrivÃ©e possibles
+	 * 		la liste des cases d'arrivée possibles
 	 * @return 
-	 * 		un chemin pour aller de startTile Ã  une des cases de endTiles, ou un chemin vide, ou la valeur null
-	 * 
+	 * 		un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
 	 * @throws StopRequestException 
-	 * 		?	
 	 * @throws LimitReachedException 
-	 * 		?	
 	 */
 	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
 	{	if(verbose)
@@ -243,35 +233,35 @@ public final class Astar
 		if(!endTiles.isEmpty())
 		{	do
 			{	ai.checkInterruption();
-				// on prend le noeud situÃ© en tÃªte de file
+				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				if(verbose)
 				{	System.out.println("Visited : "+currentNode.toString());
 					System.out.println("Queue length: "+queue.size());
 				}
-				// on teste si on est arrivÃ© Ã  la fin de la recherche
+				// on teste si on est arrivé à la fin de la recherche
 				if(endTiles.contains(currentNode.getTile()))
 				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
 					finalNode = currentNode;
 					found = true;
 				}
-				// si l'arbre a atteint la hauteur maximale, on s'arrÃªte
+				// si l'arbre a atteint la hauteur maximale, on s'arrête
 				else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
 					limitReached = true;
-				// si le noeud courant a atteint le cout maximal, on s'arrÃªte
+				// si le noeud courant a atteint le cout maximal, on s'arrête
 				else if(maxCost>0 && currentNode.getCost()>=maxCost)
 					limitReached = true;
-				// si le nombre de noeuds dans la file est trop grand, on s'arrÃªte
+				// si le nombre de noeuds dans la file est trop grand, on s'arrête
 				else if(maxNodes>0 && queue.size()>=maxNodes)
 					limitReached = true;
 				else
-				{	// sinon on rÃ©cupÃ©re les noeuds suivants
+				{	// sinon on récupère les noeuds suivants
 					List<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
-					// on introduit du hasard en permuttant alÃ©atoirement les noeuds suivants
-					// pour cette raison, cette implÃ©ment d'A* ne renverra pas forcÃ©ment toujours le mÃªme rÃ©sultat :
-					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le mÃªme)
+					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
+					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
+					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
 					Collections.shuffle(successors);
-					// puis on les rajoute dans la file de prioritÃ©
+					// puis on les rajoute dans la file de priorité
 					for(AstarNode node: successors)
 						queue.offer(node);
 				}
@@ -323,7 +313,7 @@ public final class Astar
 			throw new IllegalArgumentException("endTiles list must not be empty");
 		
 		// finish path
-		if(startTile!=null && hero!=null && startTile.equals(hero.getTile()))
+		if(startTile.equals(hero.getTile()))
 		{	double startX = hero.getPosX();
 			double startY = hero.getPosY();
 			result.setStart(startX,startY);
@@ -336,7 +326,7 @@ public final class Astar
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cet objet quand il n'est plus utilisÃ©
+	 * termine proprement cet objet quand il n'est plus utilisé
 	 */
 	private void finish()
 	{	if(root!=null)

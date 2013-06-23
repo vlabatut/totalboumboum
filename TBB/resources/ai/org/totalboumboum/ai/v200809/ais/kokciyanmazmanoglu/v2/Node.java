@@ -5,40 +5,20 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
 *
-* @author Nadin Kökciyan
-* @author Hikmet Mazmanoğlu
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
 *
 */
-@SuppressWarnings("deprecation")
 public class Node {
 
-	/** */
 	private int line;
-	/** */
 	private int col;
-	/** */
 	private double cost;
-	/** */
 	private boolean visited;
-	/** */
 	private int depth;
 	
-	/** */
 	private Tree tree;
 	
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @param cost
-	 * 		Description manquante !
-	 * @param t
-	 * 		Description manquante !
-	 * @param depth
-	 * 		Description manquante !
-	 */
 	public Node(int line, int col, double cost, Tree t, int depth) {
 		super();
 		this.line = line;
@@ -49,15 +29,7 @@ public class Node {
 		tree = t;
 	}
 	
-	/**
-	 * 
-	 * @param start
-	 * 		Description manquante !
-	 * @param end
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
+	
 	public  double getH(Node start, Node end){
 		double result;
         
@@ -74,7 +46,9 @@ public class Node {
         return  result;
 	}
 	
-	@Override
+	
+	
+	
 	public  boolean equals(Object object) {
 		Node node = (Node)object;
 		if ((node.getLine() == this.getLine()) && (node.getCol() == this.getCol()))
@@ -86,115 +60,67 @@ public class Node {
 
 
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public  double getCost() {
 		return cost;
 	}
 
-	/**
-	 * 
-	 * @param cost
-	 * 		Description manquante !
-	 */
+
 	public  void setCost(int cost) {
 		this.cost = cost;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public  boolean isVisited() {
 		return visited;
 	}
 
-	/**
-	 * 
-	 * @param visited
-	 * 		Description manquante !
-	 */
+
 	public  void setVisited(boolean visited) {
 		this.visited = visited;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public  String getName(){
 		
 		return this.getCol() + " / " + this.getLine();
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  AiTile convertToTile() throws StopRequestException{
 		tree.km.checkInterruption();
 		return tree.km.getPercepts().getTile(this.getLine(), this.getCol());
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public  int getLine() {
 		return line;
 	}
 
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 */
+
 	public  void setLine(int line) {
 		this.line = line;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public  int getCol() {
 		return col;
 	}
 
-	/**
-	 * 
-	 * @param col
-	 * 		Description manquante !
-	 */
+
 	public  void setCol(int col) {
 		this.col = col;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public int getDepth() {
 		return depth;
 	}
 
-	/**
-	 * 
-	 * @param depth
-	 * 		Description manquante !
-	 */
+
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+
+
+
+	
 }

@@ -19,28 +19,16 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class TimeMatrice {
 
-	/** */
 	private double[][] matrice;
-	/** */
 	private AiZone zone;
-	/** */
 	private List<AiBomb> bombs;
-	/** */
 	private DaneSatir ai;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public TimeMatrice(DaneSatir ai) throws StopRequestException {
 		this.ai=ai;
 		this.zone=ai.getPercepts();
@@ -52,11 +40,6 @@ public class TimeMatrice {
 		return;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void sortBombes() throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
@@ -64,13 +47,6 @@ public class TimeMatrice {
 //		GeneralFuncs.printBombs(bombs);
 	}
 	
-	/**
-	 * 
-	 * @param bombes
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void createMatrice(List<AiBomb> bombes) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
@@ -80,13 +56,6 @@ public class TimeMatrice {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void virExpandBomb(AiTile tile) throws StopRequestException{
 		// avant tout : test d'interruption
 		ai.checkInterruption();
@@ -128,13 +97,6 @@ public class TimeMatrice {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void expandBomb(AiBomb bomb) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
@@ -157,50 +119,20 @@ public class TimeMatrice {
 		}
 	}
 
-	/**
-	 * 
-	 * @param a
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public double getTime(AiTile a) {
 		return this.matrice[a.getLine()][a.getCol()];
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public double getTime() {
 		AiHero hero = zone.getOwnHero();
 		AiTile tile = hero.getTile();
 		return getTime(tile);
 	}
 	
-	/**
-	 * 
-	 * @param a
-	 * 		Description manquante !
-	 * @param duration
-	 * 		Description manquante !
-	 */
 	public void setTime(AiTile a, double duration) {
 		this.matrice[a.getLine()][a.getCol()] = duration;
 	}
 	
-	/**
-	 * 
-	 * @param a
-	 * 		Description manquante !
-	 * @param justZero
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile mostSafeCase(AiTile a, boolean justZero) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
@@ -231,41 +163,15 @@ public class TimeMatrice {
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile mostSafeCase() throws StopRequestException {
 		AiHero hero = zone.getOwnHero();
 		AiTile tile = hero.getTile();
 		return mostSafeCase(tile);
 	}
-	
-	/**
-	 * 
-	 * @param a
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile mostSafeCase(AiTile a) throws StopRequestException {
 		return mostSafeCase(a,false);
 	}
 	
-	/**
-	 * 
-	 * @param a1
-	 * 		Description manquante !
-	 * @param a2
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean isSaferThan(AiTile a1, AiTile a2) {
 		double dur1=getTime(a1);
 		double dur2=getTime(a2);
@@ -278,13 +184,6 @@ public class TimeMatrice {
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public static double getTimeToExplode(AiBomb bomb) {
 		//
 		if( bomb.getNormalDuration() - bomb.getTime() < 0)
@@ -295,15 +194,6 @@ public class TimeMatrice {
 		return bomb.getNormalDuration() - bomb.getTime();
 	}
 	
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 * @param a
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public static boolean isSafe(TimeMatrice time,AiTile a) {
 		double dur = time.getTime(a);
 		List<AiBlock> blocks = a.getBlocks();

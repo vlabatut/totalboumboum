@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,10 +35,8 @@ import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
@@ -70,7 +68,7 @@ public class Line extends ContentPanel
 	public void setDim(int width, int height)
 	{	super.setDim(width,height);
 		// font
-		lineFontSize = GuiFontTools.getFontSize(height*GuiFontTools.FONT_RATIO);
+		lineFontSize = GuiTools.getFontSize(height*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		// content
 		updateLabelsHeights();
@@ -192,8 +190,8 @@ public class Line extends ContentPanel
 		lbl.setAlignmentY(CENTER_ALIGNMENT);
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl.setVerticalAlignment(SwingConstants.CENTER);
-		lbl.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		lbl.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+		lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 		lbl.setOpaque(true);
 //		Dimension dim = new Dimension(height,height);
 //		lbl.setPreferredSize(dim);
@@ -205,7 +203,7 @@ public class Line extends ContentPanel
 	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
-		{	BufferedImage icon = GuiImageTools.getIcon(key);
+		{	BufferedImage icon = GuiTools.getIcon(key);
 			setLabelIcon(col,icon,tooltip);		
 		}
 		// if not : use text

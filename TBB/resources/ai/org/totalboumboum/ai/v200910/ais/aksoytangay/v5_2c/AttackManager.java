@@ -22,157 +22,86 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Necmi Murat Tangay
  *
  */
-@SuppressWarnings("deprecation")
 public class AttackManager {
 
-	/** */
+	
 	private AksoyTangay myAI;
 	
-	/** */
 	private PathManager pathManager;
 	
-	/** */
 	private AiPath path = null;
 	
-	/** */
 	private AiTile currentTile;
 	
-	/** */
 	private AiTile lastTile;
-	/** */
+	
 	public AiTile firstTile;
-	/** */
+	
 	public AiTile secondTile;
-	/** */
+	
 	public AiTile thirdTile;
-	/** */
+	
 	public AiTile normalAttackTile = null;
 			
-	/** */
 	private AiZone percepts;
 	
-	/** */
 	private Zone zone;
-	/** */
+	
 	public List<AiBomb> bombs;
-	/** */
+	
 	public AiTile whichTileToDropBomb = null;
-	/** */
+	
 	public AiTile first;
-	/** */
+	
 	public AiTile second;
-	/** */
+	
 	public AiTile third;
-	/** */
+	
 	public AiHero heroToAttack = null;
-	/** */
+	
 	public AiTile heroToAttackTile = null;
-	/** */
+	
 	public List<AiTile> heroNeighborTiles;
-	/** */
+	
 	public AttackType attackType;
+	
+	
+	
+	
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile getHeroToAttackTile() throws StopRequestException {
 		myAI.checkInterruption();
 		return heroToAttackTile;
 	}
-	/**
-	 * 
-	 * @param heroToAttackTile
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setHeroToAttackTile(AiTile heroToAttackTile) throws StopRequestException {
 		myAI.checkInterruption();
 		this.heroToAttackTile = heroToAttackTile;
 	}	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getHeroToAttack() throws StopRequestException {
 		myAI.checkInterruption();
 		return heroToAttack;
 	}
-	/**
-	 * 
-	 * @param heroToAttack
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setHeroToAttack(AiHero heroToAttack) throws StopRequestException {
 		myAI.checkInterruption();
 		this.heroToAttack = heroToAttack;
-	}
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	}	
 	public AiTile getNormalAttackTile() throws StopRequestException {
 		myAI.checkInterruption();
 		return normalAttackTile;
 	}
-	/**
-	 * 
-	 * @param normalAttackTile
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setNormalAttackTile(AiTile normalAttackTile) throws StopRequestException {
 		myAI.checkInterruption();
 		this.normalAttackTile = normalAttackTile;
 	}
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile getWhichTileToDropBomb() throws StopRequestException {
 		myAI.checkInterruption();
 		return whichTileToDropBomb;
 	}
-	/**
-	 * 
-	 * @param whichTileToDropBomb
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setWhichTileToDropBomb(AiTile whichTileToDropBomb) throws StopRequestException {
 		myAI.checkInterruption();
 		this.whichTileToDropBomb = whichTileToDropBomb;
 	}
-	/**
-	 * 
-	 * @param myAI
-	 * 		Description manquante !
-	 * @param percepts
-	 * 		Description manquante !
-	 * @param zone
-	 * 		Description manquante !
-	 * @param pathManager
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public AttackManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -183,26 +112,9 @@ public class AttackManager {
 		this.pathManager = pathManager;
 		
 		heroToAttack = getHeroToAttackFonx();
-//		System.out.println("saldrcak adam : "+heroToAttack.toString());
+		System.out.println("saldýrýcak adam : "+heroToAttack.toString());
 	}
 	
-	/**
-	 * 
-	 * @param myAI
-	 * 		Description manquante !
-	 * @param percepts
-	 * 		Description manquante !
-	 * @param zone
-	 * 		Description manquante !
-	 * @param pathManager
-	 * 		Description manquante !
-	 * @param attackType
-	 * 		Description manquante !
-	 * @param nat
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AttackManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager, AttackType attackType, AiTile nat) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -222,7 +134,7 @@ public class AttackManager {
 		if(attackType == AttackType.NORMAL)
 		{
 			path = pathManager.getShortestPathToOneTile(myAI.getOwnHero(), myAI.getOwnHeroTile(), normalAttackTile);
-//			System.out.println(path.toString());
+			System.out.println(path.toString());
 		}
 		
 		if(attackType == AttackType.TWOORTHREEBOMBL)
@@ -231,13 +143,6 @@ public class AttackManager {
 		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getHeroToAttackFonx() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -245,7 +150,7 @@ public class AttackManager {
 		AiHero result = null;
 		
 		List<AiHero> heros = percepts.getHeroes();
-//		System.out.println(heros.toString());
+		System.out.println(heros.toString());
 		Iterator<AiHero> itrHero = heros.iterator();
 		AiHero tmpHero = null;
 			
@@ -297,13 +202,8 @@ public class AttackManager {
 		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
+
 	public Direction gettingAttackDirection() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -321,23 +221,14 @@ public class AttackManager {
 		System.out.println("direction attack : "+result.toString());
 		//si on ne peut pas atteindre a un hero sans exploser de murs
 		
-		//null olup olmadna bakcaz sonra
-		///bonus mant patlatmazsa biz patlatrz mur leri
+		//null olup olmadýðýna bakcaz sonra
+		///bonus mantýðý patlatmazsa biz patlatýrýz mur leri
 				
 		///retourne la direction
 		
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param whichTileToDropBomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction endShootDirection(AiTile whichTileToDropBomb) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -373,17 +264,7 @@ public class AttackManager {
 			
 	}
 	
-	/**
-	 * 
-	 * @param ownTile
-	 * 		Description manquante !
-	 * @param heroTile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public Direction normalAttack(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -481,24 +362,15 @@ public class AttackManager {
 			}
 		}
 		
-//		System.out.println("normal atack : "+result.toString());
+		System.out.println("normal atack : "+result.toString());
 		
 		return result;
 		
 	}
 	
 	
-	/** pour les  coins
-	 * 
-	 * @param ownTile
-	 * 		Description manquante !
-	 * @param heroTile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
+	//pour les  coins
 	public Direction lTypeAttackWithTwoOrThreeBombs(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -740,15 +612,6 @@ public class AttackManager {
 		
 	}
 	
-	/**
-	 * *
-	 * @param first
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction goThere(AiTile first) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -781,19 +644,6 @@ public class AttackManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param first
-	 * 		Description manquante !
-	 * @param second
-	 * 		Description manquante !
-	 * @param third
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction dropThreeBomb(AiTile first, AiTile second, AiTile third) throws StopRequestException
  	{
 		myAI.checkInterruption();
@@ -808,17 +658,6 @@ public class AttackManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param first
-	 * 		Description manquante !
-	 * @param third
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction dropTwoBomb(AiTile first, AiTile third) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -837,32 +676,22 @@ public class AttackManager {
 	}
 	
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
+	
 	public AttackType attackTypeDefiner() throws StopRequestException
 	{
 		myAI.checkInterruption();
 		
 		AttackType attackType = AttackType.NORMAL;
 		normalAttackTile = getHeroToAttackFonx().getTile();
-		//eer mur den adama gidemiosak bi hesap yapalm
-		//bi de adam ortalardaysa bi saldr dzenleyelim...
+		//eðer mur den adama gidemiosak bi hesap yapalým
+		//bi de adam ortalardaysa bi saldýrý düzenleyelim...
 		
 		return attackType;
 	}
 	
-	/** gerer le chemin    ////////////
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	///gerer le chemin    ////////////
+	
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -877,13 +706,6 @@ public class AttackManager {
 				
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean finishedOnePartOfPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -893,13 +715,6 @@ public class AttackManager {
 		return((currentTile == firstTile)||(currentTile == secondTile)||(currentTile == thirdTile)||(currentTile == normalAttackTile));
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
 		myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -919,11 +734,6 @@ public class AttackManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void removeUsedTilesOfPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -940,13 +750,6 @@ public class AttackManager {
 		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isTherePath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -954,17 +757,6 @@ public class AttackManager {
 		return(path!=null);
 	}
 	
-	/**
-	 * 
-	 * @param startTile
-	 * 		Description manquante !
-	 * @param finishTile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("null")
 	public boolean isDangereousPath(AiTile startTile, AiTile finishTile) throws StopRequestException
 	{
@@ -1028,14 +820,6 @@ public class AttackManager {
 		}		
 		return result;
 	}	
-	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isDangerToAttack() throws StopRequestException
 	{	myAI.checkInterruption();		
 		boolean result = true;		
@@ -1087,15 +871,6 @@ public class AttackManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isDangerAtLine(AiTile tile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -1136,15 +911,6 @@ public class AttackManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isDangerAtCol(AiTile tile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -1185,17 +951,6 @@ public class AttackManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param startTile
-	 * 		Description manquante !
-	 * @param finishTile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public int tilesSizeBetweenTwoTiles(AiTile startTile, AiTile finishTile) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -1247,23 +1002,12 @@ public class AttackManager {
 		return tiles.size();
 	}
 	
-	/**
-	 * 
-	 * @param ownTile
-	 * 		Description manquante !
-	 * @param heroTile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile mirrorTile(AiTile ownTile, AiTile heroTile) throws StopRequestException
 	{	myAI.checkInterruption();
 AttackType attackType = AttackType.NONE;
 		
 		heroToAttack = getHeroToAttackFonx();
-//		System.out.println("heroToAttack : "+heroToAttack.toString());
+		System.out.println("heroToAttack : "+heroToAttack.toString());
 		heroToAttackTile = heroToAttack.getTile();
 		
 		//definons une type d'attaque    ////////
@@ -1295,8 +1039,8 @@ AttackType attackType = AttackType.NONE;
 		//si le ennemi est dans un coin du jeu
 			if(attackType == AttackType.NONE)
 			{ 
-			//allttaki if e qualif 2 den geecek ekilde oyun alan skim kadarsa o kede deildir gibi baka koul konabilir
-			//her iki yan destructible olacak!! sÃ»re kat -- 7 tile geme filan gibi cond kat , kendimiz lmeyelim
+			//allttaki if e qualif 2 den geçecek þekilde oyun alaný skim kadarsa o köþede deðildir gibi baþka koþul konabilir
+			//her iki yaný destructible olacak!! süre kat -- 7 tile geçme filan gibi cond kat , kendimiz ölmeyelim
 				if(((Math.abs(heroToAttack.getTile().getCol()-myAI.getOwnHeroTile().getCol()) < myAI.getOwnHero().getBombRange()) ||
 						(Math.abs(heroToAttack.getTile().getLine()-myAI.getOwnHeroTile().getLine()) < myAI.getOwnHero().getBombRange())) &&
 						((Math.abs(heroToAttack.getTile().getCol()-myAI.getOwnHeroTile().getCol()) <= percepts.getWidth()/3) ||
@@ -1318,32 +1062,17 @@ AttackType attackType = AttackType.NONE;
 		return null;
 	}
 	
-	/** on regard si l'ennemi a change sa position
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//on regard si l'ennemi a change sa position
 	public boolean placeChanged() throws StopRequestException
 	{
 		myAI.checkInterruption();
 		
-//		System.out.println(heroToAttack.toString());				
+		System.out.println(heroToAttack.toString());				
 		return(heroToAttackTile == heroToAttack.getTile());
 		
 		
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isAtCorner(AiTile tile) throws StopRequestException
 	{	myAI.checkInterruption();
 		boolean result = false;
@@ -1396,4 +1125,5 @@ AttackType attackType = AttackType.NONE;
 		
 		return result;
 	}
+	
 }

@@ -8,34 +8,20 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 
 /**
  * 
- * @author DoÄŸus Burcu DemiraÄŸ
- * @author Zeynep Åžagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
-@SuppressWarnings("deprecation")
 public class TimeMatrice {
-	/** */
 	private List<AiTile> caseBombes;
-	/** */
 	private long timeMatrice[][];
-	/** */
 	private AiZone zone;
-	/** */
 	private int defaultPortee;
-	/** */
 	private long durationNormale;
-	/** */
 	private int extendTime;
-	/** */
 	private boolean debug;
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param defaultPortee
-	 * 		Description manquante !
-	 */
+	
 	public TimeMatrice(AiZone zone,int defaultPortee) {
 		this.zone=zone;
 		this.timeMatrice=new long[20][20];
@@ -45,91 +31,52 @@ public class TimeMatrice {
 		this.debug=false;
 		createTimeMatrice();
 	}
-	/**
-	 * 
-	 * @param defaultPortee
-	 * 		Description manquante !
-	 */
 	public void setDefaultPortee(int defaultPortee) {
 		this.defaultPortee=defaultPortee;
 	}
-	/**
+	/*
 	 * Donner une valeur a une case de la matrice du temps
-	 * @param col 
-	 * 		Description manquante !
-	 * @param line 
-	 * 		Description manquante !
-	 * @param time 
-	 * 		Description manquante !
 	 */
 	public void putTime(int col,int line,long time) {
 		this.timeMatrice[col][line]=time;
 	};
-	/**
-	 * Ã§a nous donne la matrice du temps
+	/*
+	 * Ça nous donne la matrice du temps
 	 * Une case contient 0 s'il n y'a aucun danger 
 	 * Sinon il contient le temps restant d'une bombe
-	 * @param col 
-	 * 		Description manquante !
-	 * @param line 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
 	public long getTime(int col,int line) {
 		return this.timeMatrice[col][line];
 	}
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 */
 	public void putTime(AiTile tile,long time) {
 		this.putTime(tile.getCol(),tile.getLine(),time);
 	}
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public long getTime(AiTile tile) {
 		return this.getTime(tile.getCol(),tile.getLine());
 	}
-	/**
-	 * CrÃ©ation de la matrice du temps
+	/*
+	 * Création de la matrice du temps
 	 */
 	public void createTimeMatrice() {
 		// ajout des murs dans la matrice pour une seule fois
 		int i, j;
-//		for (j = 0; j < 15; j++) {
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
 				if (Functions.hasWall(this.zone.getTile(j, i)))
 					this.putTime(i,j,-1);
 				else
 					this.putTime(i,j,0);
 	}
-	/**
+	/*
 	 * S'il ya un mur dans une case on voit -1 
 	 * On augmente la valeur d'une case selon le nombre des bombes qui affectent cette case
-	 * @param zone 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
 	public int[][] getBombMatrice(AiZone zone) {
 		int[][] maMatrice = new int[17][16];
 		int etki;
 		int i, j;
-//		for (j = 0; j < 15; j++) {
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
 				if (Functions.hasWall(zone.getTile(j, i)))
 					maMatrice[i][j] = -1;
 				else
@@ -171,17 +118,9 @@ public class TimeMatrice {
 		return maMatrice;
 
 	}
-	/**
-	 * 
-	 */
 	public void printTimeMatrice() {
 		Functions.printMatrice(this.timeMatrice);
 	}
-	/**
-	 * 
-	 * @param nouvelleBombes
-	 * 		Description manquante !
-	 */
 	public void updateTimeMatrice(List<AiTile> nouvelleBombes) {
 		if (this.debug)
 			this.printTimeMatrice();
@@ -192,10 +131,8 @@ public class TimeMatrice {
 		if(debug)
 			System.out.println("Elapsed time : "+elapsedTime);
 		if (elapsedTime > 0) {
-//			for (j = 0; j < 15; j++) {
-			for (j = 0; j < zone.getHeight(); j++) //adjustment
-//				for (i = 0; i < 17; i++)
-				for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (j = 0; j < 15; j++)
+				for (i = 0; i < 17; i++)
 					if(zone.getTile(j, i).getFires().isEmpty())
 					{						
 						if(this.getTime(i,j)==0 && this.caseBombes!=null)
@@ -263,19 +200,8 @@ public class TimeMatrice {
 			this.caseBombes = nouvelleBombes;
 		}
 	}
-	
-	/**
+	/*
 	 * Controle si les effets des bombes sont vrais
-	 * @param col 
-	 * 		Description manquante !
-	 * @param lig 
-	 * 		Description manquante !
-	 * @param temp2 
-	 * 		Description manquante !
-	 * @param port 
-	 * 		Description manquante !
-	 * @param nombre 
-	 * 		Description manquante !
 	 */
 	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) {
 		boolean up=true,down=true,left=true,right=true;
@@ -338,11 +264,6 @@ public class TimeMatrice {
 		down=true;	
 	}
 
-	/**
-	 * 
-	 * @param temp
-	 * 		Description manquante !
-	 */
 	public void placerNouvelleBombe(AiTile temp) {
 		if(this.debug) System.out.println("nouvelle bombe");
 		// bu 2400
@@ -363,7 +284,7 @@ public class TimeMatrice {
 					// stop
 					up = false;
 				else // Si 0 alors durationNormale
-				// dolu ise kucuk olan
+				// dolu ise kucuk olaný
 				// Si plein ,la petite 
 				if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == 0)
 					this.timeMatrice[temp.getCol()][temp.getLine() - step] = this.durationNormale;
@@ -410,15 +331,7 @@ public class TimeMatrice {
 
 	}
 	
-	/**
-	 * 
-	 * @param temp
-	 * 		Description manquante !
-	 * @param portee
-	 * 		Description manquante !
-	 * @param min
-	 * 		Description manquante !
-	 */
+
 	public void diffuseEffetMatrice(AiTile temp, int portee, long min) {
 		//Allez dans les 4 directions dans la longeur de la portee
 		boolean up = true, left = true, right = true, down = true;
@@ -509,4 +422,6 @@ public class TimeMatrice {
 			step++;
 		}
 	}
+
+
 }

@@ -2,7 +2,7 @@ package org.totalboumboum.engine.player;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -58,15 +58,15 @@ public class PlayerLocation implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ROW				/////////////////////////////////////////////
+	// LINE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int row;
+	private int line;
 
-	public int getRow()
-	{	return row;
+	public int getLine()
+	{	return line;
 	}
 	
-	public void setRow(int row)
-	{	this.row = row;
+	public void setLine(int line)
+	{	this.line = line;
 	}
 }

@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.block;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -42,18 +42,14 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	static
 	{	// APPEARING
 		// BOUNCING
-		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
 		// BURNING
 		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
 		// EXULTING
-		// FALLING
-		animeReplacements.put(GestureName.FALLING,GestureName.STANDING);
 		// HIDING
 		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING
 		// LANDING
-		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
 		// OSCILLATING
 		// OSCILLATING_FAILING
 		// PUNCHED

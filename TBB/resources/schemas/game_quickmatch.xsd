@@ -2,26 +2,6 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_game.xsd"/>
 
-<!-- 
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut 
-	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 	<xsd:simpleType name="tAllowedPlayers">
 	   <xsd:list itemType="xsd:integer"/>
 	</xsd:simpleType>
@@ -80,17 +60,12 @@
 		<xsd:attribute name="draw" type="tSettingsDraw" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tSuddenDeath">
-		<xsd:attribute name="disabled" type="xsd:boolean" use="required" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tSettings">
 		<xsd:sequence>
 			<xsd:element name="levels" type="tSettingsLevels" />
 			<xsd:element name="players" type="tSettingsPlayers" />
 			<xsd:element name="limits" type="tSettingsLimits" />
 			<xsd:element name="points" type="tSettingsPoints" />
-			<xsd:element name="suddenDeath" type="tSuddenDeath" />
 		</xsd:sequence>
 	</xsd:complexType>
 

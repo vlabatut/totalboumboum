@@ -6,26 +6,17 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 /**
  * Cette class est pour creer un noeud qui contient les valeur
  * <br><br>G : Cost <br>H : Heuristic <br>F = G + H 
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
+ * @author DorukKüpelioğlu
  *
  */
-@SuppressWarnings("deprecation")
 public class Node {
 	
-	/** */
 	private AiTile tile;//bu node un çekirdeği // oluşmasına neden olan Tile
-	/** */
 	private AiTile end; //bi anlamı yok sadece bir yerde kullanıldı
-	/** */
 	private double[][] areaMatrix;
-	/** */
 	private Node parent=null;// hangi node bu nodun anası 
-	/** */
 	private double Gvalue;//cost
-	/** */
 	private double Hvalue;//heuristic
-	/** */
 	private double Fvalue;//cost + heuristic
 
 	/**

@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.engine;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,7 +26,6 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -44,7 +43,6 @@ public class EngineConfigurationSaver
 	public static void saveEngineConfiguration(EngineConfiguration engineConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveEngineElement(engineConfiguration);	
-		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_ENGINE+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -55,10 +53,6 @@ public class EngineConfigurationSaver
 
 	private static Element saveEngineElement(EngineConfiguration engineConfiguration)
 	{	Element result = new Element(XmlNames.ENGINE); 
-
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
 
 		// timing
 		Element timingElement = saveTimingElement(engineConfiguration);

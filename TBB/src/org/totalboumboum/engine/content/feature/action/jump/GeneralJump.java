@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.jump;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,29 +33,29 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de sauter en l'air (hors dÃ©placement sur le plan, qui est liÃ© Ã  movehigh)
+ * action de sauter en l'air (hors déplacement sur le plan, qui est lié à movehigh)
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramÃ¨tre: actor=self
- * 	<br>paramÃ¨tre: target=N/D
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
  * <p>ABILITY REFUSE
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramÃ¨tre: actor=oui (hero)
- * 	<br>paramÃ¨tre: target=N/D
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  */
 /** 
  * begining an aerial move on its own (not peing punched)
@@ -72,8 +72,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralJump extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

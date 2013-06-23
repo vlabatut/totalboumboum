@@ -15,42 +15,22 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class MySuccessor extends SuccessorCalculator{
-	/** */
 	@SuppressWarnings("unused")
 	private DaneSatir ai;
-	/** */
 	private TimeMatrice time;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public MySuccessor(DaneSatir ai,TimeMatrice time) throws StopRequestException {
 		this.ai=ai;
 		this.time=time;
 	}
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public MySuccessor(DaneSatir ai) throws StopRequestException {
 		this(ai,new TimeMatrice(ai));
 	}
-	
 	/**
 	 * Expand current tile neighbors and check time with Depth
 	 */

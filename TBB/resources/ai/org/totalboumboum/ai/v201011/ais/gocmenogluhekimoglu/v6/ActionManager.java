@@ -13,24 +13,13 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
 /**
  * This class has functions related to action finding
- * @author Can GÃ¶Ã§menoÄŸlu
- * @author Irfan HekimoÄŸlu
+ * @author  Can Göçmenoðlu & Irfan Hekimoðlu
  *
  */
-@SuppressWarnings("deprecation")
 public class ActionManager {
-	/** */
 	GocmenogluHekimoglu ai;
-	/** */
 	public boolean force_collect_i;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public ActionManager(GocmenogluHekimoglu ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -39,19 +28,12 @@ public class ActionManager {
 	/**
 	 * Finds a proper action, using the given matrix, target and mode
 	 * @param targetTile
-	 * 		description manquante !
 	 * @param attack
-	 * 		description manquante !
 	 * @param matrix
-	 * 		description manquante !
 	 * @param force_collect 
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @throws LimitReachedException
-	 * 		description manquante !
 	 */
 	AiAction findAction(AiTile targetTile,boolean attack,HashMap<AiTile,Double> matrix,boolean force_collect) throws StopRequestException, LimitReachedException{
 		ai.checkInterruption();

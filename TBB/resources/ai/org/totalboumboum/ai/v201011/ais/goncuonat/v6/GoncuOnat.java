@@ -14,33 +14,21 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Elif GÃ¶ncÃ¼
- * @author YaÄŸÄ±z Onat
- */
-@SuppressWarnings("deprecation")
 public class GoncuOnat extends ArtificialIntelligence
-{ 
-	/** notre hero sur la zone */
+{
+	// notre hero sur la zone
 	public AiHero ourHero;
-	/** la case vide qui ne contient aucuns sprites
-	// est representÃ©e dans la matrice da la zone.
-	 * 
-	 */
+	// la case vide qui ne contient aucuns sprites
+	// est representée dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
-	/** chemin a suivre pour s'enfuir du danger */
+	// chemin a suivre pour s'enfuir du danger
 	public AiPath nextMove=null;
-	/** */
 	public AiPath nextMoveCheck=null;
-	/** */
 	public AiPath nextMoveBonus=null;
-	/** */
 	public AiPath nextMoveAttack=null;
-	/** */
 	public AiZone zone=null;
 
 	//private boolean searchAttack = true;
-	/** */
 	public boolean verbose=false;
 	
 	
@@ -50,10 +38,9 @@ public class GoncuOnat extends ArtificialIntelligence
 	 *
 	 * @param matrice
 	 *            La Matrice de Zone
-	 * @param zone
+	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void initialiseMatrice(double [][]matrice, AiZone zone)throws StopRequestException
 	{
@@ -81,8 +68,8 @@ public class GoncuOnat extends ArtificialIntelligence
 	 * @return la nouvelle action de notre hero dans ce chemin
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
+	
 	public AiAction action(AiPath nextMove) throws StopRequestException
 	{
 		checkInterruption();//APPEL OBLIGATOIRE
@@ -136,7 +123,7 @@ public class GoncuOnat extends ArtificialIntelligence
 
 	}
 	
-	/** mÃ©thode appelÃ©e par le moteur du jeu pour 
+	/** méthode appelée par le moteur du jeu pour 
 	 * obtenir une action de notre IA 
 	 * */
 	@Override
@@ -281,11 +268,11 @@ public class GoncuOnat extends ArtificialIntelligence
 							if (nextMoveBonus != null)
 							{
 								if(verbose)
-									System.out.println("null de ilse");
+									System.out.println("null deðilse");
 								if (nextMoveBonus.getLength() != 0)
 								{	
 									if(verbose)
-										System.out.println("length 0 de ilse");
+										System.out.println("length 0 deðilse");
 									result = this.action(nextMoveBonus);}
 							}
 						}
@@ -310,7 +297,6 @@ public class GoncuOnat extends ArtificialIntelligence
 	 * @param zone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void updateOutput(double [][]matrice, AiZone zone) throws StopRequestException
 	{	

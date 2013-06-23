@@ -3,53 +3,28 @@ package org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2c;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
- */
-@SuppressWarnings("deprecation")
 public class Target 
 {
-	/** */
 	private DorukKupelioglu dk;
 	
-	/** */
 	private TargetBonus bonus;
-	/** */
 	private TargetDestructible destructible;
-	/** */
 	private TargetRival rival;
 	
-	/** */
 	private boolean hasPathFound;
-	/** */
 	private boolean targetEnded;
-	/** */
 	private boolean pathWorks;
 
-	/** */
 	private static int noTarget=0;
-	/** */
 	private static int targetDest=1;
-	/** */
 	private static int targetBonus=2;
-	/** */
 	private static int targetRival=3;
 
-	/** */
 	private int currTarget;
-	/** */
 	private boolean dropBomb;
-	/** */
 	private int counter;
 	
-	/**
-	 * 
-	 * @param dk
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public Target(DorukKupelioglu dk) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -61,11 +36,6 @@ public class Target
 		counter=0;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void init()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -174,13 +144,6 @@ public class Target
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction moveTo() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -194,13 +157,6 @@ public class Target
 		return moveDir;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean pathAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -208,51 +164,23 @@ public class Target
 		return hasPathFound && !targetEnded;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean pathWorks() throws StopRequestException
 	{	dk.checkInterruption();
 		return pathWorks;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean targetEnded() throws StopRequestException
 	{
 		dk.checkInterruption();
 		return targetEnded;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean succeed() throws StopRequestException
 	{
 		dk.checkInterruption();
 		return hasPathFound;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean dropBomb() throws StopRequestException
 	{
 		dk.checkInterruption();

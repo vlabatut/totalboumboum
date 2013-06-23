@@ -2,7 +2,7 @@ package org.totalboumboum.stream.file.archive;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,7 +28,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.tools.files.FileNames;
@@ -47,8 +46,7 @@ public class GameArchiveSaver
 {	
 	public static void saveGameArchive(GameArchive gameArchive) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
-		Element root = saveArchiveElement(gameArchive);
-		
+		Element root = saveArchiveElement(gameArchive);	
 		// save file
 		String folder = FilePaths.getSavesPath()+File.separator+gameArchive.getFolder();
 		String path = folder + File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML;
@@ -59,11 +57,7 @@ public class GameArchiveSaver
 	}
 
 	private static Element saveArchiveElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlNames.ARCHIVE);
-		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
+	{	Element result = new Element(XmlNames.ARCHIVE); 
 		
 		// tournament
 		Element tournamentElement = saveTournamentElement(gameArchive);

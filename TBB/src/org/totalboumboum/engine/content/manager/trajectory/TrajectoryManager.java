@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.trajectory;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,7 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -46,7 +46,7 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite dirigÃ© par ce TrajectoryManager */
+	/** sprite dirigé par ce TrajectoryManager */
 	protected Sprite sprite;
 
 	/////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ public abstract class TrajectoryManager
 
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
-	 * Cette mÃ©thode doit impÃ©rativement Ãªtre appelÃ©e juste avant un changement de gesture.
+	 * Cette méthode doit impérativement être appelée juste avant un changement de gesture.
 	 * @param newSprite
 	 */
 	public abstract void setBoundToSprite(Sprite newSprite);
@@ -78,18 +78,18 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** position X prÃ©cÃ©dente (absolue) */
+	/** position X précédente (absolue) */
 	protected double previousPosX;
-	/** position Y prÃ©cÃ©dente (absolue) */
+	/** position Y précédente (absolue) */
 	protected double previousPosY;
-	/** position Z prÃ©cÃ©dente (absolue) */
+	/** position Z précédente (absolue) */
 	protected double previousPosZ;
 
 	/**
-	 * mÃ©thode appelÃ©e Ã  chaque itÃ©ration
-	 * met Ã  jour le dÃ©placement et la position relative.
-	 * attention : dans le cas d'une rÃ©pÃ©tition, le dernier point
-	 * de la trajectoire sert de premier point Ã  la rÃ©pÃ©tition suivante.
+	 * méthode appelée à chaque itération
+	 * met à jour le déplacement et la position relative.
+	 * attention : dans le cas d'une répétition, le dernier point
+	 * de la trajectoire sert de premier point à la répétition suivante.
 	 * donc si on veut un cycle parfait, il faut rajouter un dernier point ramenant ou premier 
 	 */
 	public abstract void update();
@@ -97,13 +97,13 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps total Ã©coulÃ© de puis le dÃ©but de la trajectoire */
+	/** temps total écoulé de puis le début de la trajectoire */
 	protected double currentTime = 0;
-	/** durÃ©e totale effective de la trajectoire */
+	/** durée totale effective de la trajectoire */
 	protected double totalDuration = 0;
 	
 	/**
-	 * renvoie la durÃ©e totale prÃ©vue pour la trajectoire.
+	 * renvoie la durée totale prévue pour la trajectoire.
 	 * @return
 	 */
 	public double getTotalDuration()
@@ -128,7 +128,7 @@ public abstract class TrajectoryManager
 	protected double currentPosY = 0;
 	/** position Z absolue (en fait : soit par rapport au niveau, soit par rapport au boundToSprite) */
 	protected double currentPosZ = 0;
-	/** indique si la trajectoire a impliquÃ© (pour le moment) que le sprite ait dÃ©collÃ© du sol */ 
+	/** indique si la trajectoire a impliqué (pour le moment) que le sprite ait décollé du sol */ 
 	protected boolean hasFlied;
 	
 	public double getCurrentPosX()
@@ -168,7 +168,7 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction de dÃ©placement courante */
+	/** direction de déplacement courante */
 	protected Direction currentDirection = Direction.NONE;
 
 	public Direction getActualDirection()

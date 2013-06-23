@@ -14,26 +14,22 @@ import org.totalboumboum.ai.v200809.ais.akpolatsener.v2.Target;
  * cibles
  * 
  * @author Cem Akpolat
- * @author Emre Şener
+ * @author Emre Sener
  *
  */
-@SuppressWarnings("deprecation")
 public class ComparatorByHypotenuse implements Comparator<AiTile> {
 	/** la classe principale de notre IA */
 	AkpolatSener as;
 
 	/** objet cible/danger pour les comparaisons */
 	Target target;
-	/** */
 	Danger danger;
 
 	/**
 	 * pour que la comparaison soit d'apres d'une danger
 	 * 
 	 * @param as
-	 * 		Description manquante !
 	 * @param danger
-	 * 		Description manquante !
 	 */
 	public void addDanger(AkpolatSener as, Danger danger) {
 		this.as = as;
@@ -45,9 +41,7 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 	 * pour que la comparaison soit d'apres d'une cible
 	 * 
 	 * @param as
-	 * 		Description manquante !
 	 * @param target
-	 * 		Description manquante !
 	 */
 	public void addTarget(AkpolatSener as, Target target) {
 		this.as = as;
@@ -55,7 +49,6 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 		danger = null;
 	}
 
-	@Override
 	public int compare(AiTile tile1, AiTile tile2) {
 		int result = 0;
 

@@ -12,53 +12,33 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Cette classe calcule la matrice de la mode collecte.
- * @author Onur BÃ¼yÃ¼ktopaÃ§
- * @author YiÄŸit Turak
+ * @author Onur Büyüktopaç & Yigit Turak
  */
-@SuppressWarnings("deprecation")
 public class CollectionMatrix{	
-	/** */
 	private BuyuktopacTurak bt;
-	/** */
 	private PerfectStrangers ps;
-	/** */
 	private AiZone zone;		
-	/** */
 	private AiHero deepPurple;
 	
-	/** */
-	private List<AiTile> freeList =new ArrayList<AiTile>(); //ula  labilir tile.lar	
-	/** */
+	private List<AiTile> freeList =new ArrayList<AiTile>(); //ulaþýlabilir tile.lar	
 	private List<AiItem> itemsList;
-	/** */
 	private List<AiTile> bonusList; 
-	/** */
 	private List<AiBlock> destWallsList;
-	/** */
 	private List<AiBlock> hardWallsList;
-	/** */
 	private List<AiHero> heroesList;
-	/** */
 	private List<AiBlock> willBurnWallsList;//Les murs qui vont exploser
 	
-	/** */
 	private double[][] matrix; 
-	/** */
 	private int width;
-	/** */
 	private int heigh;
 	
-	/** */
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**
-	 * C'est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * C’est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
-	 * 		description manquante !
 	 * @param zone
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public CollectionMatrix(BuyuktopacTurak bt, AiZone zone) throws StopRequestException{
 		bt.checkInterruption();
@@ -68,9 +48,8 @@ public class CollectionMatrix{
 	}
 	
 	/**
-	 * On obtient notre hÃ©ro, la dimension de la zone et crÃ©e les objets listes.
+	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void init()throws StopRequestException{
 		bt.checkInterruption();
@@ -91,9 +70,8 @@ public class CollectionMatrix{
 	}
 	
 	/**
-	 * On crÃ©e et remplit la matrice.
+	 * On crée et remplit la matrice.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void createMatrix()throws StopRequestException{
 		bt.checkInterruption();
@@ -110,9 +88,8 @@ public class CollectionMatrix{
 	/**
 	 * On trouve tous les murs et puis on remplit les cases des entours des murs 
 	 * avec le constant DESTRUCTIBLE ou INDESTRUCTIBLE. 
-	 * On utilise la mÃ©thode isRunnable().
+	 * On utilise la méthode isRunnable().
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void putWalls() throws StopRequestException{
 		bt.checkInterruption();
@@ -172,7 +149,6 @@ public class CollectionMatrix{
 	 * On trouve tous les bonus et puis on les remplit avec le constant 
 	 * BONUSBOMB ou BONUSFLAME.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void putBonus() throws StopRequestException{
 		bt.checkInterruption();
@@ -198,7 +174,6 @@ public class CollectionMatrix{
 	/**
 	 * On trouve toutes les adversaires et puis on remplit les cases des entours des ennemies avec le constant RIVAL. 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void putHero() throws StopRequestException{
 		bt.checkInterruption();
@@ -226,7 +201,6 @@ public class CollectionMatrix{
 	 * renvoi matrix
 	 * @return double[][]
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public double[][] getMatrix()throws StopRequestException{
 		bt.checkInterruption();

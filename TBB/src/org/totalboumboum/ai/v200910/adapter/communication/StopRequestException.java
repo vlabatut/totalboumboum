@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.communication;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -23,14 +23,11 @@ package org.totalboumboum.ai.v200910.adapter.communication;
 
 /**
  * 
- * exception levée par l'IA quand le moteur du jeu lui demande de se terminer.
+ * exception lev�e par l'IA quand le moteur du jeu lui demande de se terminer.
  *  
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, à ne plus utiliser. 
+ *
  */
 public class StopRequestException extends Exception
-{	/** Numéro de série */
-	private static final long serialVersionUID = 1L;	
+{	private static final long serialVersionUID = 1L;	
 }

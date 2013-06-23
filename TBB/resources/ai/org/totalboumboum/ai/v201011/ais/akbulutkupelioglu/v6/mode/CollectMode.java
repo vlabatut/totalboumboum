@@ -28,23 +28,14 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.astar.Advanced
  * The class representing the collect mode. This class is responsible for matrix
  * calculation in collect mode, as well as the strategies.
  * 
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  * 
  */
-@SuppressWarnings("deprecation")
 public class CollectMode extends Mode
 {
-	/** */
+
 	private static CollectMode instance = null;
 	
-	/**
-	 * 
-	 * @param ia
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private CollectMode(AkbulutKupelioglu ia) throws StopRequestException
 	{
 		ia.checkInterruption();
@@ -60,7 +51,6 @@ public class CollectMode extends Mode
 	 * @param ia AkbulutKupelioglu using this.
 	 * @return The CollectMode instance.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static CollectMode getInstance(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -75,7 +65,6 @@ public class CollectMode extends Mode
 	 * Resets this mode, destroying the instance.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static void reset(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -111,13 +100,7 @@ public class CollectMode extends Mode
 		return getInterest();
 	}
 
-	/**
-	 * 
-	 * @param ownHero
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+
 	private void processBonus(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -160,13 +143,6 @@ public class CollectMode extends Mode
 		}
 	}
 
-	/**
-	 * 
-	 * @param ownHero
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void processDestructibles(AiHero ownHero)
 			throws StopRequestException
 	{
@@ -199,7 +175,6 @@ public class CollectMode extends Mode
 		}
 	}
 
-	@Override
 	public Strategy getNewStrategy() throws StopRequestException
 	{
 		monIa.checkInterruption();

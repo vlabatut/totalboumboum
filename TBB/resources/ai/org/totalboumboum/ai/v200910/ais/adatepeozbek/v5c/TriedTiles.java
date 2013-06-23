@@ -11,23 +11,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * @version 5.c
  * 
  * @author Can Adatape
- * @author Sena Özbek
+ * @author Sena Ozbek
  *
  */
-@SuppressWarnings("deprecation")
 public class TriedTiles
-{	/** */
+{
 	public List<AiTile> visited = null;
-	/** */
 	private AdatepeOzbek ownAi;
-	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public TriedTiles(AdatepeOzbek ai)throws StopRequestException
 	{	ai.checkInterruption();
 		ownAi = ai;
@@ -35,13 +25,6 @@ public class TriedTiles
 		visited = new ArrayList<AiTile>();
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void add(AiTile tile) throws StopRequestException
 	{
 		ownAi.checkInterruption();
@@ -49,11 +32,6 @@ public class TriedTiles
 			visited.add(tile);
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void reset() throws StopRequestException
 	{
 		ownAi.checkInterruption();

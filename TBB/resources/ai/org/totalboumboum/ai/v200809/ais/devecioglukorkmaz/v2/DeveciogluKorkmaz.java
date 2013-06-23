@@ -13,7 +13,6 @@ import org.totalboumboum.ai.v200809.adapter.AiBlock;
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 import org.totalboumboum.ai.v200809.adapter.AiFire;
 import org.totalboumboum.ai.v200809.adapter.AiHero;
-import org.totalboumboum.ai.v200809.adapter.AiStateName;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
@@ -25,41 +24,26 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Eser Devecioğlu
- * @author lev Korkmaz
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
  *
  */
-@SuppressWarnings("deprecation")
 public class DeveciogluKorkmaz extends ArtificialIntelligence {
 
-	/** */
 	AiHero ownHero;
-	/** */
 	Collection<AiHero> enemies = new ArrayList<AiHero>();
-	/** */
 	Collection<AiBomb> bombs;
-	/** */
 	private AiTile currentTile;
-	/** */
 	AiZone zone;
-	/** */
 	Collection<AiTile> dangerousTiles;
-	/** */
 	AiTile safeTile;
-	/** */
 	AiTile nearestDestructible;
-	/** */
 	AiTile nearestItem;
-	/** */
 	AiTile nearestHero;
-	/** */
 	private LinkedList<Noeud> path;
-	/** */
 	Noeud cible;
-	/** */
 	int nombreHeroes;
 
-	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 		AiZone zone = getPercepts();
@@ -76,7 +60,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				checkInterruption();
 				temp = k.next();
 				if (!temp.equals(ownHero)
-						&& !temp.getState().getName().equals(AiStateName.BURNING))
+						&& !temp.getState().getName().name().equals("BURNING"))
 					enemies.add(temp);
 			}
 			// updating bombs
@@ -104,10 +88,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				while (i.hasNext()) {
 					checkInterruption();
 					AiBomb temp3 = i.next();
-					if (temp3!=null && temp3.getColor()!=null &&
-							temp3.getColor().
-							equals(ownHero.
-									getColor())) {
+					if (temp3.getColor().equals(ownHero.getColor())) {
 						myBombs++;
 					}
 				}
@@ -163,15 +144,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param target
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiTile setPath(AiTile target) throws StopRequestException {
 		checkInterruption();
 		Noeud cible = new Noeud(target);
@@ -222,15 +194,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param target
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiTile setPathNearestSafeTile(AiTile target)
 			throws StopRequestException {
 		checkInterruption();
@@ -281,13 +244,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiTile setNearestItem() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -299,13 +255,9 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		while (!fifo.isEmpty() && solution == null) {
 			checkInterruption();
 			AiTile node = fifo.poll();
-			if (node.getItem() != null && node.getItem().getState().getName()!=null) {
-				if (!node.
-						getItem().
-						getState().
-						getName().
-						equals(
-						AiStateName.BURNING))
+			if (node.getItem() != null) {
+				if (!node.getItem().getState().getName().name().equals(
+						"BURNING"))
 					solution = node;
 			} else {
 				visited.add(node);
@@ -322,13 +274,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiTile setNearestDestructible() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -368,13 +313,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiTile setNearestSafeTile() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -402,13 +340,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private Collection<AiTile> setDangerousTiles() throws StopRequestException {
 		checkInterruption();
 		Collection<AiTile> neigbourTiles;
@@ -457,13 +388,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiTile setNearestHero() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
@@ -495,17 +419,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return solution;
 	}
 
-	/**
-	 * 
-	 * @param a
-	 * 		Description manquante !
-	 * @param b
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double getDistance(AiTile a, AiTile b) throws StopRequestException {
 		checkInterruption();
 		int vertical = Math.abs(a.getCol() - b.getCol());
@@ -514,15 +427,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		// return Math.hypot(vertical, horizontal);
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption();
@@ -539,15 +443,6 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;

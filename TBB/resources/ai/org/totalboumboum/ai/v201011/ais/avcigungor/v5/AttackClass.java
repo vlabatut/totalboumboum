@@ -19,33 +19,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author Ibrahim AvcÄ±
- * @author Burak GÃ¼ngÃ¶r
- */
-@SuppressWarnings({ "unused", "deprecation" })
+@SuppressWarnings("unused")
 public class AttackClass {
 
-	/** */
 	AiZone gameZone;
-	/** */
 	FillingClass fillingClass ;
-	/** */
 	double matriceAttaque[][];
-	/** */
 	private AiOutput aio;
-	/** */
 	 AiHero ourHero;
-		/** */
 	 private AvciGungor ai;
-	 
-	 /**
-	  * 
-	  * @param ai
-	 * 		description manquante !
-	  * @throws StopRequestException
-	 * 		description manquante !
-	  */
 	public AttackClass(AvciGungor ai)
 			throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -86,22 +68,18 @@ public class AttackClass {
 	// ///////////////////////////////////////////////////////////////
 	// DESTINATION /////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-	/** indique si le personnage est arrivÃ© Ã  destination */
+	/** indique si le personnage est arrivé à destination */
 /*	private boolean arrived;
-	*//** la case de destination sÃ©lectionnÃ©e pour la fuite *//*
+	*//** la case de destination sélectionnée pour la fuite *//*
 	private AiTile tileDest;
 	*//** destinations potentielles *//*
 	private List<AiTile> possibleDest;
 	private Astar astar;
-	*//** classe implÃ©mentant la fonction heuristique *//*
+	*//** classe implémentant la fonction heuristique *//*
 	private HeuristicCalculator heuristicCalculator;
-	*//** classe implÃ©mentant la fonction de coÃ»t *//*
+	*//** classe implémentant la fonction de coût *//*
 	private MatrixCostCalculator costCalculator;*/
 
-	/**
-	 * @throws StopRequestException 
-	 * 		description manquante !
-	 */
 	private void fillAttackMatrix() throws StopRequestException {
 		ai.checkInterruption();
 
@@ -244,11 +222,6 @@ public class AttackClass {
 		}
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void updateMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -257,13 +230,6 @@ public class AttackClass {
 		fillingClass = new FillingClass(this.ai);
 		
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return matriceAttaque;

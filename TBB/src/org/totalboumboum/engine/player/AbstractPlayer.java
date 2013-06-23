@@ -2,7 +2,7 @@ package org.totalboumboum.engine.player;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -55,7 +55,6 @@ public abstract class AbstractPlayer
 		tempHeroFactory.setInstance(RoundVariables.instance);
 		sprite = tempHeroFactory.makeSprite(tile);
 		RoundVariables.level.insertSpriteTile(sprite);
-// NOTE should send a sprite creation event? what about insertion?		
 		
 		sprite.setPlayer(this);
 	}
@@ -113,13 +112,8 @@ public abstract class AbstractPlayer
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether this object has been deleted or not */
 	protected boolean finished = false;
 	
-	/**
-	 * Cleanly finishes this object,
-	 * possibly freeing some memory.
-	 */
 	public void finish()
 	{	finished = true;
 		color = null;

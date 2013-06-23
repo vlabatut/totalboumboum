@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.match.description;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -40,26 +40,24 @@ import org.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * This class handles the display of the
- * description of a match, during a game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class MatchDescription extends EntitledDataPanel implements LimitsSubPanelListener
-{	/** Class id */
+{	
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
+	
+	private static final float SPLIT_RATIO = 0.6f;
+	
+	private PlayersListSubPanel playersPanel;
+	private LimitsSubPanel<MatchLimit> limitsPanel;
+	private PointsSubPanel pointsPanel;
+	
 	public MatchDescription(SplitMenuPanel container)
 	{	super(container);
 	
@@ -73,7 +71,7 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 				infoPanel.setLayout(layout);
 			}
 			
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
@@ -115,73 +113,23 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PANELS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	/** Ratio used to split the scren */
-	private static final float SPLIT_RATIO = 0.6f;
-	/** Pannel displaying the list of players */
-	private PlayersListSubPanel playersPanel;
-	/** Panel displaying the limits */
-	private LimitsSubPanel<MatchLimit> limitsPanel;
-	/** Pannel displaying the point */
-	private PointsSubPanel pointsPanel;
-
-	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** Match displayed by this panel */
-	private Match match;
-	/** Number of the match currently displayed */
 	@SuppressWarnings("unused")
-	private int number;
+	private Match match;
 	
-	/**
-	 * Changes the match displayed
-	 * in this panel.
-	 * 
-	 * @param match
-	 * 		New match.
-	 * @param number
-	 * 		Number of the round in the current match.
-	 */
-	public void setMatch(Match match, Integer number)
+	public void setMatch(Match match)
 	{	// init
 		this.match = match;
-		
-		// title
-		this.number = number;
-		String key = GuiKeys.GAME_MATCH_DESCRIPTION_TITLE;
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
-		if(number!=null)
-		{	text = text + " " + number;
-			tooltip = tooltip + " " + number;
-		}
-		setTitleText(text,tooltip);
-
-		// limits
 		Limits<MatchLimit> limits = null;
 		if(match!=null)
 		{	limits = match.getLimits();
 		}
-		
 		// players
 		List<Profile> players = match.getProfiles();
 		playersPanel.setPlayers(players);
-		
 		// limits & points
 		limitsPanel.setLimits(limits);
-	}
-	
-	/**
-	 * Returns the match currently
-	 * displayed in this panel.
-	 * 
-	 * @return
-	 * 		Current match.
-	 */
-	public Match getMatch()
-	{	return match;
 	}
 	
 	/////////////////////////////////////////////////////////////////

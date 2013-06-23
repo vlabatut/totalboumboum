@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,8 +21,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
  * 
  */
 
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -34,6 +33,6 @@ public class EmptyContentPanel extends ContentPanel
 
 	public EmptyContentPanel(int width, int height)
 	{	super(width, height);
-		setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 	}
 }

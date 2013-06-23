@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.variabletile;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -63,7 +63,7 @@ public class VariableTilesLoader
     		String[] elts = ZoneLoader.loadBasicTileElement(temp);    	
         	float tProba = Float.valueOf(temp.getAttribute(XmlNames.PROBA).getValue().trim());
     		ValueTile vt = new ValueTile(elts[0],elts[1],elts[2],elts[3],tProba);
-    		// NOTE vÃ©rifier que les noms des blocks/items/itemvariables/floor rÃ©fÃ©rencÃ©s sont bien dÃ©finis
+    		// NOTE vérifier que les noms des blocks/items/itemvariables/floor référencés sont bien définis
         	sum = sum+tProba;
     		result.addValue(vt);
     	}

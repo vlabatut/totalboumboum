@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -293,8 +293,10 @@ public abstract class VisibleLoop extends Loop
 
 			beforeTime = System.currentTimeMillis();
 
-			// If frame animation is taking too long, update the game state
-			// without rendering it, to get the updates/sec nearer to the required FPS.
+			/* 
+			 * If frame animation is taking too long, update the game state
+			 * without rendering it, to get the updates/sec nearer to the required FPS.
+			 */
 			int skips = 0;
 			RoundVariables.setFilterEvents(true); // in this situation, we do not want to record certain events
 			while (excess>milliPeriod
@@ -308,11 +310,10 @@ public abstract class VisibleLoop extends Loop
 			RoundVariables.setFilterEvents(false);			
 			framesSkipped = framesSkipped + skips;
 			
-			long delta = afterTime - lastTime;
+			long delta = afterTime-lastTime;
 			totalEngineTime = totalEngineTime + delta;
 			if(!getEnginePause() && gameStarted && !gameOver)
-			{	//prevTotalGameTime = totalGameTime;
-				totalGameTime = totalGameTime + (long)(delta*Configuration.getEngineConfiguration().getSpeedCoeff());
+			{	totalGameTime = totalGameTime + (long)(delta*Configuration.getEngineConfiguration().getSpeedCoeff());
 				round.updateTime(totalGameTime);
 			}
 		}
@@ -334,9 +335,6 @@ public abstract class VisibleLoop extends Loop
 	/** total real time elapsed since the level started appearing */
 	protected long totalEngineTime = 0;
 	
-	/**
-	 * Initializes the time-related variales
-	 */
 	protected void initTimes()
 	{	gameStartTime = System.currentTimeMillis();
 		prevStatsTime = gameStartTime;
@@ -344,41 +342,14 @@ public abstract class VisibleLoop extends Loop
 		totalEngineTime = 0;
 	}
 	
-	/** 
-	 * Returns the total game time elapsed 
-	 * since the players took control. It ignores
-	 * the time spent in pause.
-	 * 
-	 * @return
-	 * 		Time spent since the player took control, excluding pauses.
-	 */
 	public long getTotalGameTime()
 	{	return totalGameTime;	
 	}
 	
-//	public long getPrevTotalGameTime()
-//	{	return prevTotalGameTime;	
-//	}
-	
-	/** 
-	 * Returns the total time elapsed 
-	 * since the level started appearing.
-	 * It includes the time spent in pause.
-	 * 
-	 * @return
-	 * 		Total time spent since the round started.
-	 */
 	public long getTotalEngineTime()
-	{	return totalEngineTime;
+	{	return totalEngineTime;	
 	}
 
-	/** 
-	 * Returns the total real time elapsed 
-	 * since the round started.
-	 * 
-	 * @return
-	 * 		Total real time spent since the round started.
-	 */
 	public long getTotalRealTime()
 	{	long result = System.currentTimeMillis() - gameStartTime;
 		return result;	
@@ -774,8 +745,7 @@ public abstract class VisibleLoop extends Loop
 	
 	protected void updateEngineStep()
 	{	if(getEngineStep())
-		{	//prevTotalGameTime = totalGameTime;
-			totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+		{	totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 			switchEngineStep(false);
 		}
 	}
@@ -805,9 +775,6 @@ public abstract class VisibleLoop extends Loop
 	protected int entryIndex = 0;
 	protected String[] entryTexts;
 	
-	/**
-	 * handles how sprites enter the zone
-	 */
 	protected void initEntries()
 	{	entryIndex = 0;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};

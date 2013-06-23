@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.save;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,29 +30,20 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * Main panel for the save tournament menu.
  * 
  * @author Vincent Labatut
+ *
  */
 public class SaveSplitPanel extends SplitMenuPanel
-{	/** Class id */
-	private static final long serialVersionUID = 1L; 
-	/** Background image */
+{	private static final long serialVersionUID = 1L; 
+
 	private BufferedImage image;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Swing container of this panel.
-	 * @param parent
-	 * 		Parent menu item.
-	 */
 	public SaveSplitPanel(MenuContainer container, MenuPanel parent)
-	{	super(container,parent,BorderLayout.LINE_START,GuiSizeTools.VERTICAL_SPLIT_RATIO);
+	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
@@ -64,13 +55,6 @@ public class SaveSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Changes the tournament handled
-	 * by this menu.
-	 * 
-	 * @param tournament
-	 * 		New tournament.
-	 */
 	public void setTournament(AbstractTournament tournament)
 	{	((SaveMenu)getMenuPart()).setTournament(tournament);
 	}

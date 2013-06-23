@@ -19,24 +19,16 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.tree.SearchTree;
  * @author Mine Mutlu
  *
  */
-@SuppressWarnings("deprecation")
 public class CiritMutlu extends ArtificialIntelligence {
-	/** */
 	private SearchTree tree;	// arbre de recherche a construire
-	/** */
 	private State tempState;	// etat temporaire qui va etre utilise pour l'action suvante
-	/** */
 	private Problem problem;	// le probleme a traiter lors de la construction de l'arbre
-	/** */
 	private int targetAction;   // l'action a realiser a l'appel suivant de la methode "call()"
-	/** */
 	private Vector<Integer> lastAction;  /* 	la derniere action realisee a l'etape precedente; elle  
 											est placee dans ce vecteur pour pouvoir baser l'action suivante
 									   		sur celle-ci
 									   */  
-	/** */
 	private Vector<State> states;   // vecteur d'etats qui sert a tenir compte des etats precedents du joueur IA
-	/** */
 	private Vector<Integer> lastPosition; // vecteur contenant des deux pernieres positions du joueur IA
 	
 	/**
@@ -50,18 +42,16 @@ public class CiritMutlu extends ArtificialIntelligence {
 		lastAction =new Vector<Integer>();
 	}
 	
-	/** */
-	public static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
-	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
+	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
 	/**
 	 *  La methode qui fait deplacer le joueur IA
 	 */
-	@Override
-	public Integer processAction() throws Exception
-	{		
+	public Integer call() throws Exception {
+		
 		if(firstTime)
 			firstTime = false;
 		else
@@ -89,9 +79,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param y	   coordonne du joueur IA
 	 * @return l'action qui va etre realisee au prochain appel de la methode 'call()' 
 	 * @throws ImpossibleActionException
-	 * 		Description manquante !
 	 * @throws AbsentNodeException
-	 * 		Description manquante !
 	 */
 	public int makeTree(Problem problem,int x , int y) throws ImpossibleActionException, AbsentNodeException{
 		double point=0;
@@ -138,8 +126,6 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param y  coordonne courant du joueur IA
 	 * @param targetAction  l'action qui va etre realisee par le joueur IA au prochain
 	 * 					 deplacement
-	 * @return
-	 * 		? 
 	*/
 	public boolean lastPositionComparator(int x, int y,int targetAction){
 		switch(targetAction)
@@ -171,7 +157,6 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param y coordonne de la position du joueur IA
 	 * @param action l'action pour laquelle on verifie la possibilite
 	 * @return
-	 * 		? 
 	 */
 	public boolean isPossibleAction(int x, int y,int action){
 		boolean done=false;
@@ -198,8 +183,6 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * parmi les actions possibles qu'il peut realiser selon les criteres externes en 
 	 * controlant leur cout. Le joueur choisit l'action qui possede le plus grand couts\ 
 	 * @param action   action a realiser par le joueur
-	 * @return
-	 * 		? 
 	 */
 	public int returnCost(int action){
 		// Coordonnnes du joueur IA dans la zone de matrice
@@ -290,8 +273,6 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param x  coordonne x de la direction d'une action possible 
 	 * @param y  coordonne y de la direction d'une action possible
 	 * @param action  action que le joueur peut faire en fonction des etats
-	 * @return 
-	 * 		?
 	 */
 	private boolean isMovePossible(int x, int y, int action)
 	{	
@@ -322,9 +303,6 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param x coordonne x de la bombe
 	 * @param y coordonne y de la bombe
 	 * @param action 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */	
 	private boolean isObstacleBombFire (int x, int y,int action){
 		int bombPower=getBombPowerAt(x, y);
@@ -410,7 +388,6 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param x coordonne de la case en question
 	 * @param y coordonne de la case en question
 	 * @return
-	 * 		?
 	 */
 	private boolean isThereWallSoft(int x, int y){
 		boolean done=false;
@@ -503,8 +480,6 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * @param x coordonne du joueur IA
 	 * @param y coordonne du joueur IA
 	 * @param blockType  le type des blocs aux alentours du joueur
-	 * @return
-	 * 		? 
 	 */
 	
 	private int[] getPlayerMatrix(int x, int y, int blockType){
@@ -899,13 +874,10 @@ public class CiritMutlu extends ArtificialIntelligence {
 	/**
 	 * 	Calcule le point que le joueur IA peut obtenir selon l'etat dans lequel il  
 	 * se trouve 
-	 * @param action 
-	 * 		Description manquante !
 	 * @param state   etat du joueur
 	 * @param x		  coordonne du joueur IA	
 	 * @param y		  coordonne du joueur IA
 	 * @return
-	 * 		? 
 	 */
 	public double getPoint(int action, State state,int x, int y){
 		double point=0;
@@ -960,15 +932,8 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 * Renvoie l'etat obtenu si on applique l'action a l'etat passe
 	 * en parametre.
 	 * @param state	l'etat d'origine
-	 * @param x 
-	 * 		Description manquante !
-	 * @param y 
-	 * 		Description manquante !
-	 * @param action 
-	 * 		Description manquante !
 	 * @return	l'etat cible obtenu en appliquant l'action
 	 * @throws ImpossibleActionException
-	 * 		Description manquante !
 	 */
 	public State apply(State state,int x, int y , int action) throws ImpossibleActionException
 	{	

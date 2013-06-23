@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.zone;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -43,6 +43,7 @@ import org.xml.sax.SAXException;
 /**
  * 
  * @author Vincent Labatut
+ *
  */
 public class ZoneLoader
 {	    
@@ -66,68 +67,26 @@ public class ZoneLoader
 		
 		// matrix
 		Element matrx = root.getChild(XmlNames.MATRIX);
-		loadMatrixElement(matrx,result);
-		
-		// events
-		Element events = root.getChild(XmlNames.EVENTS);
-		loadEventsElement(events,result);
-		
+		loadMatrixElement(matrx,globalHeight,globalWidth,result);
 		return result;
     }
         
-    private static void loadMatrixElement(Element root, Zone result)
-    {	loadLineElements(root, result, -1);
-    }
-    
-    private static void loadEventsElement(Element root, Zone result)
-    {	if(root!=null)
-    	{	// duration
-    		long totalDuration = 0;
-			{	Attribute attribute = root.getAttribute(XmlNames.DURATION);
-				totalDuration = Long.valueOf(attribute.getValue());
-				result.setEventsDuration(totalDuration);
-			}
-	    	
-	    	// relative
-			{	Attribute attribute = root.getAttribute(XmlNames.RELATIVE);
-				boolean relative = Boolean.valueOf(attribute.getValue());
-				result.setEventsRelative(relative);
-			}
-	    	
-	    	// process each event
-	    	List<Element> elements = root.getChildren(XmlNames.EVENT);
-	    	Iterator<Element> i = elements.iterator();
-	    	while(i.hasNext())
-	    	{	// get element
-	    		Element event = i.next();
-	    		// get time
-				Attribute attribute = event.getAttribute(XmlNames.TIME);
-				long time = Long.valueOf(attribute.getValue());
-				if(time>totalDuration)
-					throw new IndexOutOfBoundsException("Zone events: one of the time step values is larger than the total duration.");
-				// complete result
-				loadLineElements(event, result, time);
-	    	}
-    	}
-    }
-    
-   @SuppressWarnings("unchecked")
-   private static void loadLineElements(Element root, Zone result, long time)
+    @SuppressWarnings("unchecked")
+    private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, Zone result)
     {	// matrix
     	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
     	List<Element> elements = root.getChildren(XmlNames.LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
-    	{	Element row = i.next();
-    		int posL = Integer.parseInt(row.getAttribute(XmlNames.POSITION).getValue().trim());
-    		List<Element> elementsL = row.getChildren(XmlNames.TILE);
+    	{	Element line = i.next();
+    		int posL = Integer.parseInt(line.getAttribute(XmlNames.POSITION).getValue().trim());
+    		List<Element> elementsL = line.getChildren(XmlNames.TILE);
         	Iterator<Element> iL = elementsL.iterator();
         	while(iL.hasNext())
         	{	String[] content = {null,null,null,null};
         		Element tile = iL.next();
         		int posT = Integer.parseInt(tile.getAttribute(XmlNames.POSITION).getValue().trim());
-        		ZoneHollowTile zt = new ZoneHollowTile(posL,posT);
-        		
+        		ZoneTile zt = new ZoneTile(posL,posT);
         		// constant parts
         		content = loadBasicTileElement(tile);
     			// floor
@@ -142,8 +101,7 @@ public class ZoneLoader
     			// bombs
     			if(content[3]!=null)
     				zt.setBomb(content[3]);        		
-        		
-    			// variable part
+        		// variable part
         		Element elt = tile.getChild(XmlNames.REFERENCE);
         		if(elt!=null)
         		{	String name = elt.getAttribute(XmlNames.NAME).getValue();
@@ -151,10 +109,7 @@ public class ZoneLoader
         			VariableTile vt = variableTiles.get(name);
         			vt.incrementOccurrencesCount();
         		}
-        		if(time<0)
-        			result.addTile(zt);
-        		else
-        			result.addEvent(time, zt);
+        		result.addTile(zt);
         	}
     	}
     }

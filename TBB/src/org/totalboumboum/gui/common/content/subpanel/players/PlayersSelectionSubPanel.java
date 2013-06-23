@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.players;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -44,12 +44,9 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiStringTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
@@ -130,7 +127,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		if(showReady)
 			readyWidth = headerHeight;
 		rankWidth = headerHeight;
-		int fixedSum = GuiSizeTools.subPanelMargin*(cols-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth + readyWidth;
+		int fixedSum = GuiTools.subPanelMargin*(cols-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth + readyWidth;
 		int nameWidth = getDataWidth() - fixedSum;
 		
 		// headers
@@ -162,7 +159,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				setColSubMaxWidth(col,sizes.get(col));
 				if(keys.get(col)!=null)
 				{	setLabelKey(0,col,keys.get(col),true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(0,col,bg);
 				}
 			}
@@ -181,9 +178,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		{	for(int col=0;col<cols;col++)
 			{	Color bg;
 				if(!allowedPlayers.contains(line) && col==COL_PROFILE)
-					bg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 				else
-					bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 			}
 		}
@@ -203,7 +200,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			{	// content
 				setLabelKey(line,COL_DELETE,GuiKeys.COMMON_PLAYERS_SELECTION_DATA_DELETE,true);
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				setLabelBackground(line,COL_DELETE,bg);
 				// listener
 				MyLabel lbl = getLabel(line,COL_DELETE);
@@ -220,9 +217,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				//Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				Color bg;
 				if(allowedPlayers.contains(line))
-					bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				else
-					bg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 				setLabelBackground(line,COL_PROFILE,bg);
 				// mouse listener
 				MyLabel lbl = getLabel(line,COL_PROFILE);
@@ -239,7 +236,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_HUMAN;
 				setLabelKey(line,COL_TYPE,profileType,true);
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_TYPE,bg);
 			}
 			// hero
@@ -248,7 +245,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
 				setLabelIcon(line,COL_HERO,image,tooltip);
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_HERO,bg);
 				// mouse listener
 				MyLabel lbl = getLabel(line,COL_HERO);
@@ -273,7 +270,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				}
 				setLabelText(line,COL_RANK,text,tooltip);
 				// size
-				int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
+				int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
 				if(temp>rankWidth)
 				{	rankWidth = temp;
 					setColSubMinWidth(COL_RANK,rankWidth);
@@ -281,7 +278,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					setColSubMaxWidth(COL_RANK,rankWidth);
 				}
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_RANK,bg);
 				// mouse listener
 				MyLabel lbl = getLabel(line,COL_RANK);
@@ -296,7 +293,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				colorKey = GuiKeys.COMMON_COLOR+colorKey;
 				setLabelKey(line,COL_COLOR,colorKey,false);
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
 				setLabelBackground(line,COL_COLOR,bg);
 				// mouse listener
 				MyLabel lbl = getLabel(line,COL_COLOR);
@@ -320,7 +317,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					lbl.setMouseSensitive(true);
 				}
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				setLabelBackground(line,COL_CONTROLS,bg);
 			}
 			// ready
@@ -333,7 +330,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_UNCONFIRMED;
 				setLabelKey(line,COL_READY,profileType,true);
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_READY,bg);
 			}
 		}
@@ -348,9 +345,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				lbl.removeMouseListener(this);
 				Color bg;
 				if(!allowedPlayers.contains(line) && col==COL_PROFILE)
-					bg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 				else
-					bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 			}
 			if(index==players.size())
@@ -359,9 +356,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				setLabelKey(line,col,key,true);
 				Color bg;
 				if(!allowedPlayers.contains(line) && col==COL_PROFILE)
-					bg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 				else
-					bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 				MyLabel lbl = getLabel(line,col);
 				lbl.removeMouseListener(this); //just in case

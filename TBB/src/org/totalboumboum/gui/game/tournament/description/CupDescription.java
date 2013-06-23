@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament.description;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -34,24 +34,16 @@ import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * This class handles the display of the
- * description of a cup tournament, during a game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class CupDescription extends TournamentDescription<CupTournament> implements LegSubPanelListener
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
 	public CupDescription(SplitMenuPanel container)
 	{	super(container);
 		
@@ -61,7 +53,7 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 				infoPanel.setLayout(layout);
 			}
 
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			int rightWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int leftWidth = dataWidth - rightWidth - margin; 
 			infoPanel.setOpaque(false);
@@ -86,26 +78,14 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** Ratio used to split the scren */
 	private static final float SPLIT_RATIO = 0.5f;
-	/** Number of legs by page */
 	private static final int LEGS_PER_PAGE = 2;
-	/** Pannel displaying the list of players */
 	private PlayersListSubPanel playersPanel;
-	/** Panel displaying the tournament legs */
 	private LegSubPanel legsPanel;
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/**
-	 * Changes the tournament displayed
-	 * in this panel.
-	 * 
-	 * @param tournament
-	 * 		New tournament.
-	 */
-	@Override
 	public void setTournament(CupTournament tournament)
 	{	// init
 		this.tournament = tournament;

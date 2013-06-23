@@ -2,7 +2,7 @@ package org.totalboumboum.statistics.detailed;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,47 +24,18 @@ package org.totalboumboum.statistics.detailed;
 import java.io.Serializable;
 
 /**
- * This class represents all possible statistical
- * event. These are used to display the evolution
- * of games.
  * 
  * @author Vincent Labatut
+ *
  */
 public enum StatisticAction implements Serializable
 {	
-	/////////////////////////////////////////////////////////////////
-	// ITEMS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Item lost (for example when diying */
-	LOSE_ITEM, 
-	/** Item picked up from the floor */
-	GATHER_ITEM, 
-	/** Item given to another player */
-	TRANSMIT_ITEM, 
-	/** Item received from another player */
-	RECEIVE_ITEM,
-	
-	/////////////////////////////////////////////////////////////////
-	// BOMBS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Bomb dropped on the floor */
-	DROP_BOMB, 
-	/** Player killed by bombing */
-	BOMB_PLAYER,
-	
-	/////////////////////////////////////////////////////////////////
-	// PAINT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Tile won by painting it */
+	/* item related */
+	LOSE_ITEM, GATHER_ITEM, TRANSMIT_ITEM, RECEIVE_ITEM,
+	/* bomb related */
+	DROP_BOMB, BOMB_PLAYER,
+	/* paint */
 	WIN_TILE,
-	/** Tile lost because another player painted it */
-	LOSE_TILE,
-	
-	/////////////////////////////////////////////////////////////////
-	// CROWN			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Crown picked up */
-	GATHER_CROWN, 
-	/** Crown lost (gaven to another player, or through elimination) */ 
-	LOSE_CROWN;
+	/* crown */
+	GATHER_CROWN, LOSE_CROWN
 }

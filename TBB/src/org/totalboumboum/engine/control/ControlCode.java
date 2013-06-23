@@ -2,7 +2,7 @@ package org.totalboumboum.engine.control;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,24 +24,14 @@ package org.totalboumboum.engine.control;
 import java.io.Serializable;
 
 /**
- * Represents the activation/deactivation
- * of a specific keyby the user.
  * 
  * @author Vincent Labatut
+ *
  */
 public class ControlCode implements Serializable
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a control code with the specified
-	 * key and mode.
-	 * 
-	 * @param keyCode
-	 * 		Concerned key.
-	 * @param mode
-	 * 		Whether the key was pressed or released.
-	 */
+	
 	public ControlCode(int keyCode, boolean mode)
 	{	this.keyCode = keyCode;
 		this.mode = mode;
@@ -50,16 +40,8 @@ public class ControlCode implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// CODE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Code representing the concerned key */
 	private int keyCode;
 
-	/**
-	 * Returns the code representing 
-	 * the concerned key.
-	 * 
-	 * @return
-	 * 		Code representing the concerned key.
-	 */
 	public int getKeyCode()
 	{	return keyCode;
 	}
@@ -67,16 +49,8 @@ public class ControlCode implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// MODE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether the key was pressed or released */ 
 	private boolean mode;
 
-	/**
-	 * Returns {@code true} if the key is pressed
-	 * or {@code false} if it is released.
-	 * 
-	 * @return
-	 * 		A boolean representing the key state.
-	 */
 	public boolean getMode()
 	{	return mode;
 	}
@@ -84,24 +58,11 @@ public class ControlCode implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	
-	/**
-	 * Cleanly finishes this object.
-	 */
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
 		}
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// STRING				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
-	{	String result = keyCode + " " + mode;
-		return result;
 	}
 }

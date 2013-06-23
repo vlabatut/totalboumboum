@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.round.results;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -36,8 +36,7 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.gui.tools.SpringUtilities;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticRound;
@@ -45,23 +44,20 @@ import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
- * This class handles the display of the
- * results of a round, after a quick game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class QuickResults extends JPanel
-{	/** Class id */
+{	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param dimen
-	 * 		Dimension of the panel.
-	 * @param round
-	 * 		Round to display.
-	 */
+	private Font headerFont;
+	private Font regularFont;
+	private int columns = 0;
+	private int lines = 0;
+	private int tableMargin;
+	
 	public QuickResults(Dimension dimen, Round round)
 	{	super();
 		
@@ -79,7 +75,7 @@ public class QuickResults extends JPanel
 		setOpaque(false);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			
 		// layout
 		SpringLayout layout = new SpringLayout();
@@ -100,10 +96,10 @@ public class QuickResults extends JPanel
 //		Graphics g = bi.getGraphics();
 //		GuiTools.setGraphics(g);
 		int headerHeight = (int)(1.5*pHeight/(lines+0.5));
-		int headerSize = GuiFontTools.getFontSize(headerHeight);
+		int headerSize = GuiTools.getFontSize(headerHeight);
 		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(headerSize*0.8f); 
 		int lineHeight = (pHeight-headerHeight)/(lines-1);
-		int lineSize = GuiFontTools.getFontSize(lineHeight);
+		int lineSize = GuiTools.getFontSize(lineHeight);
 		regularFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(lineSize*0.8f); 
 		
 		// table
@@ -112,7 +108,7 @@ public class QuickResults extends JPanel
 		
 		// headers
 		{	String sc = null;
-/* TODO Ã  adapter
+/* TODO à adapter
 			switch(round.getPlayMode())
 			{	case CROWN:
 					sc = "Crowns";
@@ -159,7 +155,7 @@ sc = "Time";
 					String playerName = profile.getName();
 					nameLabel.setText(playerName);
 					nameLabel.setToolTipText(playerName);
-					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					nameLabel.setBackground(bg);
 					Dimension dimension = new Dimension(Integer.MAX_VALUE,lineHeight);
@@ -172,7 +168,7 @@ sc = "Time";
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(0);
 					String sc = "";
-/*	TODO Ã  adapter				
+/*	TODO à adapter				
 					switch(round.getPlayMode())
 					{	case CROWN:
 							sc = nf.format(stats.getScores(Score.CROWNS)[orderedPlayers[i]]);
@@ -197,7 +193,7 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 					for(int j=0;j<scores.length;j++)
 					{	MyLabel pointsLabel = getLabel(line, col++);
 						pointsLabel.setText(scores[j]);
-						int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						pointsLabel.setBackground(bg);
 					}
@@ -210,7 +206,7 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 					nf.setMinimumFractionDigits(0);
 					String txt = nf.format(pts);
 					pointsLabel.setText(txt);
-					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					pointsLabel.setBackground(bg);
 				}
@@ -218,27 +214,6 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 		}
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// TABLE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Font used for the table header */
-	private Font headerFont;
-	/** Font used for the table data */
-	private Font regularFont;
-	/** Number of columns */
-	private int columns = 0;
-	/** Number of rows */
-	private int lines = 0;
-	/** Margin around the table */
-	private int tableMargin;
-	
-	/**
-	 * Adds a new column to
-	 * the table.
-	 * 
-	 * @param index
-	 * 		Position of the new column.
-	 */
 	public void addColumn(int index)
 	{	columns++;
 		int start = 0;
@@ -249,8 +224,8 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 			MyLabel lbl = new MyLabel(txt);
 			lbl.setFont(headerFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
-			lbl.setForeground(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+			lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+			lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 			lbl.setOpaque(true);
 			add(lbl,index);		
 		}
@@ -261,8 +236,8 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 			MyLabel lbl = new MyLabel(txt);
 			lbl.setFont(regularFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			lbl.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 			lbl.setOpaque(true);
 			add(lbl,index+line*columns);
 		}
@@ -273,17 +248,6 @@ sc = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SEC
 		SpringUtilities.makeCompactGrid(this,lines,columns,tableMargin,tableMargin,tableMargin,tableMargin);
 	}
 
-	/**
-	 * Retrieves the label at
-	 * the specified position.
-	 * 
-	 * @param line
-	 * 		Row of the label.
-	 * @param col
-	 * 		Column of the label.
-	 * @return
-	 * 		The requested label.
-	 */
 	public MyLabel getLabel(int line, int col)
 	{	MyLabel result = (MyLabel)getComponent(col+line*columns);;
 		return result;

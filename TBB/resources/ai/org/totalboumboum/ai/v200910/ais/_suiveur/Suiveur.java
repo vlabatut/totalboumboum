@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais._suiveur;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,14 +35,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * cette classe impl√©mente une IA relativement stupide, qui choisit une cible
+ * cette classe implÈmente une IA relativement stupide, qui choisit une cible
  * (un autre joueur), puis essaie de la rejoindre, et enfin se contente de la
- * suivre partout o√π elle va.
+ * suivre partout o˘ elle va.
  * 
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class Suiveur extends ArtificialIntelligence 
 {	
 	/** interrupteur permettant d'afficher la trace du traitement */
@@ -58,15 +57,15 @@ public class Suiveur extends ArtificialIntelligence
 	
 		AiAction result = new AiAction(AiActionName.NONE);
 		
-		// si le personnage control√© a √©t√© √©limin√©, inutile de continuer
+		// si le personnage controlÈ a ÈtÈ ÈliminÈ, inutile de continuer
 		if(!ownHero.hasEnded())
-		{	// on met √† jour la position de l'ia dans la zone
+		{	// on met ‡ jour la position de l'ia dans la zone
 			updateLocation();
 			if(verbose)
 				System.out.println(ownHero.getColor()+": ("+currentTile.getLine()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
 			Direction moveDir = Direction.NONE;			
 			
-			// on met √† jour le gestionnaire de s√©curit√©
+			// on met ‡ jour le gestionnaire de sÈcuritÈ
 			safetyManager.update();
 			// si on est en train de fuir : on continue
 			if(escapeManager!=null)
@@ -76,20 +75,20 @@ public class Suiveur extends ArtificialIntelligence
 					moveDir = escapeManager.update();
 			}
 			
-			// sinon si on est en danger : on commence √† fuir
+			// sinon si on est en danger : on commence ‡ fuir
 			else if(!safetyManager.isSafe(currentTile))
 			{	escapeManager = new EscapeManager(this);
 				moveDir = escapeManager.update();
 			}
 			
-			// sinon on se d√©place vers la cible
+			// sinon on se dÈplace vers la cible
 			else
 			{	updateTarget();
 				if(target!=null)
 					moveDir = targetManager.update();
 			}
 			
-			// on met √† jour la direction renvoy√©e au moteur du jeu
+			// on met ‡ jour la direction renvoyÈe au moteur du jeu
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
@@ -99,10 +98,6 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
-	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
@@ -118,23 +113,19 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// PATH MANAGERS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe charg√©e du d√©placement vers la cible */
+	/** classe chargÈe du dÈplacement vers la cible */
 	private PathManager targetManager = null;
-	/** classe charg√©e de la fuite du personnage */
+	/** classe chargÈe de la fuite du personnage */
 	private EscapeManager escapeManager = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SAFETY MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe charg√©e de d√©terminer quelles cases sont s√ªres */
+	/** classe chargÈe de dÈterminer quelles cases sont s˚res */
 	private SafetyManager safetyManager = null;
 
 	/**
-	 * renvoie le gestionnaire de s√©curit√©.
-	 * @return 
-	 * 		Gestionnaire de s√©curit√©.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * renvoie le gestionnaire de sÈcuritÈ
 	 */
 	public SafetyManager getSafetyManager() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -143,13 +134,7 @@ public class Suiveur extends ArtificialIntelligence
 	}
 	
 	/**
-	 * renvoie le niveau de s√©curit√© de la case pass√©e en param√®tre
-	 * @param tile
-	 * 		Case √† traiter. 
-	 * @return 
-	 * 		Le niveau de s√©curit√©.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * renvoie le niveau de sÈcuritÈ de la case passÈe en paramËtre
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -158,13 +143,7 @@ public class Suiveur extends ArtificialIntelligence
 	}
 	
 	/**
-	 * d√©termine si la case pass√©e en param√®tre est s√ªre
-	 * @param tile 
-	 * 		Case √† traiter.
-	 * @return
-	 * 		{@code true} ssi la case est s√ªre. 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * dÈtermine si la case passÈe en paramËtre est s˚re
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -175,15 +154,11 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT TILE				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la case occup√©e actuellement par le personnage */
+	/** la case occupÈe actuellement par le personnage */
 	private AiTile currentTile = null;
 
 	/**
 	 * renvoie la case courante
-	 * @return 
-	 * 		Case courante.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	public AiTile getCurrentTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -194,17 +169,13 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT LOCATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la position en pixels occup√©e actuellement par le personnage */
+	/** la position en pixels occupÈe actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occup√©e actuellement par le personnage */
+	/** la position en pixels occupÈe actuellement par le personnage */
 	private double currentY;
 
 	/**
 	 * renvoie l'abscisse courante (en pixels)
-	 * @return 
-	 * 		Abscisse courante.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	public double getCurrentX() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -213,11 +184,7 @@ public class Suiveur extends ArtificialIntelligence
 	}
 	
 	/**
-	 * renvoie l'ordonn√©e courante (en pixels)
-	 * @return
-	 *  		Ordonn√©e courante.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * renvoie l'ordonnÈe courante (en pixels)
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -225,11 +192,6 @@ public class Suiveur extends ArtificialIntelligence
 		return currentY;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
-	 */
 	private void updateLocation() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -242,15 +204,11 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage dirig√© par cette IA */
+	/** le personnage dirigÈ par cette IA */
 	private AiHero ownHero = null;
 
 	/**
-	 * renvoie le personnage contr√¥l√© par cette IA
-	 * @return 
-	 * 		Personnage contr√¥l√©.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * renvoie le personnage contrÙlÈ par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -266,10 +224,6 @@ public class Suiveur extends ArtificialIntelligence
 
 	/**
 	 * renvoie la zone de jeu
-	 * @return 
-	 * 		Zone de jeu.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	public AiZone getZone() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -280,15 +234,13 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// TARGET					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la cible √† suivre (ou null si aucune cible n'existe) */
+	/** la cible ‡ suivre (ou null si aucune cible n'existe) */
 	private AiHero target;
-	/** case pr√©c√©dente de la cible */
+	/** case prÈcÈdente de la cible */
 	private AiTile targetPreviousTile;
 	
 	/**
-	 * choisit al√©atoirement un joueur comme cible √† suivre
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * choisit alÈatoirement un joueur comme cible ‡ suivre
 	 */
 	private void chooseTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -303,9 +255,7 @@ public class Suiveur extends ArtificialIntelligence
 	}
 
 	/**
-	 * met √† jour la cible, et √©ventuellement le chemin jusqu'√† elle
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * met ‡ jour la cible, et Èventuellement le chemin jusqu'‡ elle
 	 */
 	private void updateTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

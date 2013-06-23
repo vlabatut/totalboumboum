@@ -5,30 +5,15 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Eser Devecioğlu
- * @author lev Korkmaz
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
  *
  */
-@SuppressWarnings("deprecation")
 public class SearchLink {
-	/** */
 	private Noeud origin;
-	/** */
 	private Noeud target;
-	/** */
 	ArtificialIntelligence ai;
 
-	/**
-	 * 
-	 * @param origin
-	 * 		Description manquante !
-	 * @param target
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public SearchLink(Noeud origin, Noeud target, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -36,31 +21,16 @@ public class SearchLink {
 		this.target = target;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Noeud getOrigin() throws StopRequestException {
 		ai.checkInterruption();
 		return origin;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Noeud getTarget() throws StopRequestException {
 		ai.checkInterruption();
 		return target;
 	}
 
-	@Override
 	public boolean equals(Object object) {
 		boolean result = false;
 		if (object == null)

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.communication;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -34,17 +34,10 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 /**
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class AiOutput
 {
-	/**
-	 * 
-	 * @param zone
-	 * 		?	
-	 */
 	public AiOutput(AiZone zone)
 	{	this.zone = zone;
 		tileColors = new Color[zone.getHeight()][zone.getWidth()];
@@ -54,9 +47,6 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * 
-	 */
 	public void reinit()
 	{	reinitPaths();
 		reinitTileColors();
@@ -66,19 +56,18 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private AiZone zone;
 		
 	/////////////////////////////////////////////////////////////////
 	// PATHS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste de chemin Ã  afficher par dessus la zone de jeu */
+	/** liste de chemin à afficher par dessus la zone de jeu */
 	private final List<AiPath> paths = new ArrayList<AiPath>();
-	/** couleur des chemins Ã  afficher */
+	/** couleur des chemins à afficher */
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * rÃ©initialise les chemins Ã  afficher
+	 * réinitialise les chemins à afficher
 	 */
 	private void reinitPaths()
 	{	paths.clear();
@@ -86,12 +75,12 @@ public class AiOutput
 	}
 	
 	/**
-	 * rajoute un chemin dans la liste des chemins Ã  afficher.
-	 * La reprÃ©sentation graphique d'un chemin est une ligne
-	 * suivant les centres des cases traversÃ©es par le chemin 
+	 * rajoute un chemin dans la liste des chemins à afficher.
+	 * La représentation graphique d'un chemin est une ligne
+	 * suivant les centres des cases traversées par le chemin 
 	 * 
-	 * @param path	chemin Ã  afficher
-	 * @param color	couleur associÃ©e Ã  ce chemin
+	 * @param path	chemin à afficher
+	 * @param color	couleur associée à ce chemin
 	 */
 	public void addPath(AiPath path, Color color)
 	{	if(color!=null && path!=null && !path.isEmpty())
@@ -101,7 +90,7 @@ public class AiOutput
 	}
 	
 	/**
-	 * renvoie la liste des chemins Ã  afficher
+	 * renvoie la liste des chemins à afficher
 	 * 
 	 * @return	une liste de chemins
 	 */
@@ -111,7 +100,7 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie la liste des couleurs associÃ©es aux chemins
+	 * renvoie la liste des couleurs associées aux chemins
 	 * 
 	 * @return	une liste de couleurs
 	 */
@@ -137,11 +126,11 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie la couleur d'une case, qui sera affichÃ©e
+	 * modifie la couleur d'une case, qui sera affichée
 	 * en transparence par dessus la zone de jeu.
-	 * La valeur null correspond Ã  une absence de couleur.
+	 * La valeur null correspond à une absence de couleur.
 	 * 
-	 * @param tile	case Ã  colorier
+	 * @param tile	case à colorier
 	 * @param color	couleur du coloriage
 	 */
 	public void setTileColor(AiTile tile, Color color)
@@ -151,12 +140,12 @@ public class AiOutput
 	}
 
 	/**
-	 * modifie la couleur d'une case, qui sera affichÃ©e
+	 * modifie la couleur d'une case, qui sera affichée
 	 * en transparence par dessus la zone de jeu.
-	 * La valeur null correspond Ã  une absence de couleur.
+	 * La valeur null correspond à une absence de couleur.
 	 * 
-	 * @param line	ligne de la case Ã  colorier
-	 * @param col	colonne de la case Ã  colorier
+	 * @param line	ligne de la case à colorier
+	 * @param col	colonne de la case à colorier
 	 * @param color	couleur du coloriage
 	 */
 	public void setTileColor(int line, int col, Color color)
@@ -164,7 +153,7 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie les couleurs Ã  utiliser pour colorier les cases
+	 * renvoie les couleurs à utiliser pour colorier les cases
 	 * 
 	 * @return	une matrice de couleurs
 	 */
@@ -175,11 +164,11 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// TEXTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** texte Ã  afficher sur les cases de la zone de jeu */
+	/** texte à afficher sur les cases de la zone de jeu */
 	private String tileTexts[][];
 	
 	/**
-	 * rÃ©initialise les textes associÃ©s aux cases
+	 * réinitialise les textes associés aux cases
 	 */
 	private void reinitTileTexts()
 	{	for(int line=0;line<zone.getHeight();line++)
@@ -188,12 +177,12 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associÃ© Ã  une case. Permet
+	 * modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des couts
-	 * en temps rÃ©el.
+	 * en temps réel.
 	 * 
-	 * @param tile	case associÃ©e au texte
-	 * @param text	texte Ã  afficher sur cette case
+	 * @param tile	case associée au texte
+	 * @param text	texte à afficher sur cette case
 	 */
 	public void setTileText(AiTile tile, String text)
 	{	int line = tile.getLine();
@@ -202,20 +191,20 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associÃ© Ã  une case. Permet
+	 * modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des couts
-	 * en temps rÃ©el.
+	 * en temps réel.
 	 * 
-	 * @param line	ligne de la case associÃ©e au texte
-	 * @param col	colonne de la case associÃ©e au texte
-	 * @param text	texte Ã  afficher sur cette case
+	 * @param line	ligne de la case associée au texte
+	 * @param col	colonne de la case associée au texte
+	 * @param text	texte à afficher sur cette case
 	 */
 	public void setTileText(int line, int col, String text)
 	{	tileTexts[line][col] = text;	
 	}
 
 	/**
-	 * renvoie les textes Ã  afficher sur les cases
+	 * renvoie les textes à afficher sur les cases
 	 * 
 	 * @return	une matrice de textes
 	 */

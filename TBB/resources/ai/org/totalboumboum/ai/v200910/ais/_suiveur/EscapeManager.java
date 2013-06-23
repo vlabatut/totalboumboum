@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais._suiveur;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -39,25 +39,19 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * classe charg√©e d'impl√©menter un d√©placement de fuite,
- * (personnage menac√© par une ou plusieurs bombes) 
+ * classe chargÈe d'implÈmenter un dÈplacement de fuite,
+ * (personnage menacÈ par une ou plusieurs bombes) 
  * 
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class EscapeManager
 {
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 
 	/**
-	 * cr√©e un EscapeManager charg√© d'amener le personnage au centre d'une case s√ªre
-	 * 
-	 * @param ai
-	 * 		Agent √† traiter. 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * crÈe un EscapeManager chargÈ d'amener le personnage au centre d'une case s˚re
 	 */
 	public EscapeManager(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -82,7 +76,7 @@ public class EscapeManager
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concern√©e par ce gestionnaire de chemin */
+	/** l'IA concernÈe par ce gestionnaire de chemin */
 	private Suiveur ai;
 	/** zone de jeu */
 	private AiZone zone;	
@@ -90,22 +84,17 @@ public class EscapeManager
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arriv√© √† destination */
+	/** indique si le personnage est arrivÈ ‡ destination */
 	private boolean arrived;
-	/** la case de destination s√©lectionn√©e pour la fuite */
+	/** la case de destination sÈlectionnÈe pour la fuite */
 	private AiTile tileDest;
 	/** destinations potentielles */
 	private List<AiTile> possibleDest;
 
 	/**
-	 * d√©termine si le personnage est arriv√© dans la case de destination.
-	 * S'il n'y a pas de case de destination, on consid√®re que le personnage
-	 * est arriv√©.
-	 * 
-	 * @return
-	 *  	{@code true} ssi l'agent est arriv√© √† destination.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * dÈtermine si le personnage est arrivÈ dans la case de destination.
+	 * S'il n'y a pas de case de destination, on considËre que le personnage
+	 * est arrivÈ.
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -125,13 +114,9 @@ public class EscapeManager
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin √† suivre */
+	/** le chemin ‡ suivre */
 	private AiPath path;
 	
-	/**
-	 * @throws StopRequestException
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
-	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -140,13 +125,10 @@ public class EscapeManager
 	}
 	
 	/**
-	 * v√©rifie que le personnage est bien sur le chemin pr√©-calcul√©,
-	 * en supprimant si besoin les cases inutiles (car pr√©cedent la case courante).
+	 * vÈrifie que le personnage est bien sur le chemin prÈ-calculÈ,
+	 * en supprimant si besoin les cases inutiles (car prÈcedant la case courante).
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide apr√®s l'ex√©cution de cette m√©thode.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * est vide aprËs l'exÈcution de cette mÈthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -161,18 +143,13 @@ public class EscapeManager
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. si
-	 * aucun obstacle n'est apparu depuis la derni√®re it√©ration.
+	 * aucun obstacle n'est apparu depuis la derniËre itÈration.
 	 * Contrairement au PathManager, ici pour simplifier on ne teste
 	 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
-	 * les changement concernant la s√ªret√© des cases. En d'autres termes,
+	 * les changement concernant la s˚retÈ des cases. En d'autres termes,
 	 * si une bombe apparait avant que le personnage d'ait atteint une
 	 * case sure, elle ne sera pas prise en compte dans la trajectoire.
 	 * 
-	 * @return 
-	 * 		?
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -191,23 +168,18 @@ public class EscapeManager
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe impl√©mentant l'algorithme A* */
+	/** classe implÈmentant l'algorithme A* */
 	private Astar astar;
-	/** classe impl√©mentant la fonction heuristique */
+	/** classe implÈmentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe impl√©mentant la fonction de co√ªt */
+	/** classe implÈmentant la fonction de co˚t */
 	private MatrixCostCalculator costCalculator;
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
-	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// calcul de la matrice de co√ªt : on prend l'oppos√© du niveau de s√ªret√©
-		// i.e. : plus le temps avant l'explosion est long, plus le co√ªt est faible 
+		// calcul de la matrice de co˚t : on prend l'opposÈ du niveau de s˚retÈ
+		// i.e. : plus le temps avant l'explosion est long, plus le co˚t est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -226,22 +198,17 @@ public class EscapeManager
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun d√©placement n'est n√©cessaire)
-	 *
-	 * @return
-	 * 		La direction √† suivre. 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 *(ou renvoie Direction.NONE si aucun dÈplacement n'est nÈcessaire)
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// on met d'abord √† jour la matrice de cout
+		// on met d'abord ‡ jour la matrice de cout
 		updateCostCalculator();
 	
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on v√©rifie que le joueur est toujours sur le chemin
+		{	// on vÈrifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule.
 			if(path.isEmpty() || !checkPathValidity())
@@ -253,12 +220,12 @@ public class EscapeManager
 			// sinon, s'il ne reste qu'une seule case, on va au centre
 			else if(path.getLength()>0)
 				tile = path.getTile(0);
-			// on d√©termine la direction du prochain d√©placement
+			// on dÈtermine la direction du prochain dÈplacement
 			if(tile!=null)
 				result = zone.getDirection(ai.getOwnHero(),tile);			
 		}
 		
-		// mise √† jour de la sortie
+		// mise ‡ jour de la sortie
 		updateOutput();
 
 		if(verbose)
@@ -273,11 +240,8 @@ public class EscapeManager
 	// OUTPUT					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met √† jour la sortie graphique de l'IA en fonction du
+	 * met ‡ jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

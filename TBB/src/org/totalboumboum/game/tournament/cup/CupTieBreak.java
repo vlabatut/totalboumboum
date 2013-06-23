@@ -1,8 +1,19 @@
 package org.totalboumboum.game.tournament.cup;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.points.PointsRankings;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.rank.Ranks;
+
+
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,34 +32,14 @@ package org.totalboumboum.game.tournament.cup;
  * 
  */
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.points.PointsRankings;
-import org.totalboumboum.game.profile.Profile;
-import org.totalboumboum.game.rank.Ranks;
-
-
 /**
- * Represents a special match, played
- * in extra when needed, in order to
- * break ties.
  * 
  * @author Vincent Labatut
+ *
  */
 public class CupTieBreak implements Serializable
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard tie breaker.
-	 * 
-	 * @param part
-	 * 		The part containing this tie break.
-	 */
 	public CupTieBreak(CupPart part)
 	{	this.part = part;
 	}
@@ -56,26 +47,12 @@ public class CupTieBreak implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PART			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** The part containing this tie break */
 	private CupPart part;
 	
-	/**
-	 * Changes the part containing this tie break.
-	 * 
-	 * @param part
-	 * 		New part for this tie break.
-	 */
 	public void setPart(CupPart part)
 	{	this.part = part;
 	}	
 	
-	/**
-	 * Returns the part containing this
-	 * tie break.
-	 * 
-	 * @return
-	 * 		The part containing this tie break.
-	 */
 	public CupPart getPart()
 	{	return part;
 	}
@@ -83,35 +60,16 @@ public class CupTieBreak implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Match used to break the tie */
 	private Match match;
 	
-	/**
-	 * Changes the match used to break the tie.
-	 * 
-	 * @param match
-	 * 		New match used to break the tie.
-	 */
 	public void setMatch(Match match)
 	{	this.match = match;
 	}	
 	
-	/**
-	 * Returns the match used to break the tie.
-	 * 
-	 * @return
-	 * 		Match used to break the tie.
-	 */
 	public Match getMatch()
 	{	return match;
 	}
 	
-	/**
-	 * Initializes the match used to break the tie.
-	 * 
-	 * @return
-	 * 		The resulting initialized match object. 
-	 */
 	public Match initMatch()
 	{	// involved players
 		Ranks ranks = part.getOrderedPlayers();
@@ -129,38 +87,16 @@ public class CupTieBreak implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// RANKINGS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Points processor used to break the tie */
 	private PointsRankings pointsRankings;
 	
-	/**
-	 * Changes the points processor used to break the tie.
-	 * 
-	 * @param rankings
-	 * 		New points processor used to break the tie
-	 */
 	public void setPointsRankings(PointsRankings rankings)
 	{	this.pointsRankings = rankings;
 	}	
 	
-	/**
-	 * Returns the points processor used to break the tie
-	 * 
-	 * @return
-	 * 		Points processor used to break the tie.
-	 */
 	public PointsRankings getPointsRankings()
 	{	return pointsRankings;
 	}
 	
-	/**
-	 * Tries breaking the tie.
-	 *  
-	 * @return
-	 * 		{@code true} iff at least one player could
-	 * 		be removed from this tie situation (and it
-	 * 		therefore might require a new tie break for 
-	 * 		the remaining player to settle the score).
-	 */
 	public boolean breakTie()
 	{	boolean result;
 		int problematicTie = part.getProblematicTie();

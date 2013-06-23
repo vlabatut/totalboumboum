@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.cup;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,7 +28,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.PointsProcessor;
@@ -39,32 +38,12 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 /**
- * Loads an XML file representing a cup tournament.
  * 
  * @author Vincent Labatut
+ *
  */
 public class CupTournamentLoader
-{	
-	/**
-	 * Processes the main element of an XML
-	 * file representing a cup tournament.
-	 * 
-	 * @param folder
-	 * 		Folder containing the XML file.
-	 * @param root
-	 * 		Root element of the tournament.
-	 * @return
-	 * 		The read tournament.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
+{
 	public static CupTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	CupTournament result = new CupTournament();
 		Element element;
@@ -81,25 +60,6 @@ public class CupTournamentLoader
 		return result;
 	}
 
-	/**
-	 * Reads all the XML elements representing cup legs.
-	 * 
-	 * @param root
-	 * 		The main element of the list of legs.
-	 * @param folder
-	 * 		The folder containing the XML file.
-	 * @param result
-	 * 		The concerned resulting tournament.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	@SuppressWarnings("unchecked")
 	private static void loadLegsElement(Element root, String folder, CupTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	List<Element> legs = root.getChildren(XmlNames.LEG);
@@ -111,27 +71,6 @@ public class CupTournamentLoader
 		}
 	}
 
-	/**
-	 * Reads an XML element representing a cup leg.
-	 * 
-	 * @param root
-	 * 		The main leg element.
-	 * @param folder
-	 * 		The folder containing the XML file.
-	 * @param tournament
-	 * 		The concerned resulting tournament.
-	 * @return
-	 * 		The read leg.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	@SuppressWarnings("unchecked")
 	private static CupLeg loadLegElement(Element root, String folder, CupTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	CupLeg result = new CupLeg(tournament);
@@ -158,27 +97,6 @@ public class CupTournamentLoader
 		return result;
 	}
 	
-	/**
-	 * Reads an XML element representing a cup part.
-	 * 
-	 * @param root
-	 * 		The main leg element.
-	 * @param folder
-	 * 		The folder containing the XML file.
-	 * @param leg
-	 * 		The leg containing the read part.
-	 * @return
-	 * 		The read part.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	private static CupPart loadPartElement(Element root, String folder, CupLeg leg) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	CupPart result = new CupPart(leg);
 	
@@ -213,27 +131,6 @@ public class CupTournamentLoader
 		return result;
 	}
 	
-	/**
-	 * Reads an XML element representing a cup tie break.
-	 * 
-	 * @param root
-	 * 		The main leg element.
-	 * @param folder
-	 * 		The folder containing the XML file.
-	 * @param part
-	 * 		The part containing the read part.
-	 * @return
-	 * 		The read tie break.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	private static CupTieBreak loadTieBreakElement(Element root, String folder, CupPart part) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	CupTieBreak result = new CupTieBreak(part);
 	
@@ -252,16 +149,6 @@ public class CupTournamentLoader
 		return result;
 	}
 	
-	/**
-	 * Reads an XML element representing a list of cup players.
-	 * 
-	 * @param root
-	 * 		The main leg element.
-	 * @param folder
-	 * 		The folder containing the XML file.
-	 * @param result
-	 * 		The part containing the read players.
-	 */
 	@SuppressWarnings("unchecked")
 	private static void loadPlayersElement(Element root, String folder, CupPart result)
 	{	List<Element> parts = root.getChildren(XmlNames.PLAYER);
@@ -272,46 +159,20 @@ public class CupTournamentLoader
 			result.addPlayer(player);
 		}
 	}
-
-	/**
-	 * Reads an XML element representing a cup player.
-	 * 
-	 * @param root
-	 * 		The main leg element.
-	 * @param part
-	 * 		The part containing the read player.
-	 * @return
-	 * 		The read player.
-	 */
+	
 	private static CupPlayer loadPlayerElement(Element root, CupPart part)
 	{	CupPlayer result = new CupPlayer(part);
 	
+		// number
+		String partStr = root.getAttribute(XmlNames.PART).getValue().trim();
+		int prevPart = Integer.valueOf(partStr);
+		result.setPrevPart(prevPart);
+
 		// rank
 		String rankStr = root.getAttribute(XmlNames.RANK).getValue().trim();
 		int prevRank = Integer.valueOf(rankStr);
 		result.setPrevRank(prevRank);
 
-		// part
-		String partStr = root.getAttribute(XmlNames.PART).getValue().trim();
-		int prevPart = Integer.valueOf(partStr);
-		result.setPrevPart(prevPart);
-
-		// leg
-		int prevLeg;
-		Attribute legAttr = root.getAttribute(XmlNames.LEG);
-		if(legAttr!=null)
-		{	String legStr = legAttr.getValue().trim();
-			prevLeg = Integer.valueOf(legStr);
-		}
-		else
-		{	CupLeg previousLeg = part.getLeg().getPreviousLeg();
-			if(previousLeg==null)
-				prevLeg = -1;
-			else
-				prevLeg = previousLeg.getNumber();
-		}
-		result.setPrevLeg(prevLeg);
-		
 		return result;
 	}
 }

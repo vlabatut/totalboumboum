@@ -9,25 +9,18 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 /**
  * This class has some static functions that can be helpful in other classes.
- * 
- * @author Mustafa Çalışkan
- * @author Cihan Seven
+ * @author Cihan Adil SEVEN & Mustafa CALISKAN
  *
  */
-@SuppressWarnings("deprecation")
 public class Util {
 	
 	/**
 	 * This function gives a list of all the bomb blasts in the map.
 	 * 
 	 * @param ai
-	 * 		description manquante !
 	 * @param acs attack mode
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	static List<AiTile> getBlastList(CaliskanSeven ai,boolean acs) throws StopRequestException{
 		ai.checkInterruption();

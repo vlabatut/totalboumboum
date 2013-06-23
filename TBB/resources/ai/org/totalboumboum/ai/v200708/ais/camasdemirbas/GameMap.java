@@ -1,38 +1,31 @@
 package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 /**
- * Ceci tient l'Ã©tat et le contexte de chaque carreau sur la carte. 
+ * Ceci tient l'état et le contexte de chaque carreau sur la carte. 
  * 
- * @author GÃ¶khan Ã‡amaÅŸ
- * @author Ä°rem DemirbaÅŸ
+ * @author Gokhan Camas
+ * @author Irem Demirbas
  *
  */
 public class GameMap {
 	/** La largeur de carte dans les carreaux */
-//	public static final int WIDTH;
-	public static int WIDTH; // adjustment
+	public static final int WIDTH = 17;
 	/** La hauteur de carte dans les carreaux */
-//	public static final int HEIGHT = 15;	
-	public static int HEIGHT;	// adjustment
-	
+	public static final int HEIGHT = 15;	
 	/** Les cadres de terrain pour chaque carreau dans la carte */
 	private int[][] zoneMatrix = new int[WIDTH][HEIGHT];
-	/** L'indicateur si un carreau donnÃ© a Ã©tÃ© visitÃ© pendant la recherche */
+	/** L'indicateur si un carreau donné a été visité pendant la recherche */
 	private boolean[][] visited = new boolean[WIDTH][HEIGHT];
 	
 	/**
-	 * crÃ©er une nouvelle carte avec la matrice de zone
-	 * @param zoneMatrix 
-	 * 		Description manquante !
+	 * Créer une nouvelle carte avec la matrice de zone
 	 */
 	public GameMap(int[][] zoneMatrix) {
 		this.zoneMatrix = zoneMatrix;
-		WIDTH = zoneMatrix.length; // adjustment
-		HEIGHT = zoneMatrix[0].length; // adjustment
 	}
 	
 	/**
-	 * Eclaircir le tableau marquant quels carreaux ont Ã©tÃ© visted par path 
+	 * Eclaircir le tableau marquant quels carreaux ont été visted par path 
 	 * finder.
 	 */
 	public void clearVisited() {
@@ -44,35 +37,25 @@ public class GameMap {
 	}
 	
 	/**
-	 * @param x 
-	 * 		Description manquante !
-	 * @param y 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
+	 * 
 	 */
 	public boolean visited(int x, int y) {
 		return visited[x][y];
 	}
 	
 	/**
-	 * Obtenir le terrain Ã  un emplacement donnÃ©
+	 * Obtenir le terrain à un emplacement donné
 	 * 
-	 * @param x la coordonnÃ©e du carreau de terrain pour rapporter
-	 * @param y la coordonnÃ©e du carreau de terrain pour rapporter
-	 * @return Le carreau de terrain Ã  l'emplacement donnÃ©
+	 * @param x la coordonnée du carreau de terrain pour rapporter
+	 * @param y la coordonnée du carreau de terrain pour rapporter
+	 * @return Le carreau de terrain à l'emplacement donné
 	 */
 	public int getTerrain(int x, int y) {
 		return zoneMatrix[x][y];
 	}
 	
 	/**
-	 * @param x 
-	 * 		Description manquante !
-	 * @param y 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
+	 * 
 	 */
 	public boolean blocked(int x, int y) {
 		int state = getTerrain(x, y);
@@ -85,24 +68,13 @@ public class GameMap {
 		}		
 
 	/**
-	 * @param sx 
-	 * 		Description manquante !
-	 * @param sy 
-	 * 		Description manquante !
-	 * @param tx 
-	 * 		Description manquante !
-	 * @param ty 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
+	 * 
 	 */
 	public float getCost(int sx, int sy, int tx, int ty) {
 		return 1;
 	}
 
 	/**
-	 * @return
-	 * 		Description manquante !
 	 * 
 	 */
 	public int getHeightInTiles() {
@@ -110,8 +82,6 @@ public class GameMap {
 	}
 
 	/**
-	 * @return
-	 * 		Description manquante !
 	 * 
 	 */
 	public int getWidthInTiles() {
@@ -119,10 +89,7 @@ public class GameMap {
 	}
 
 	/**
-	 * @param x 
-	 * 		Description manquante !
-	 * @param y 
-	 * 		Description manquante !
+	 * 
 	 */
 	public void pathFinderVisited(int x, int y) {
 		visited[x][y] = true;

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,36 +25,34 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 
 /**
- * simule un sol du jeu, ie le graphisme affichÃ© en tant que premiÃ¨re couche de toute
- * case de la zone (et Ã©ventuellement recouvert par les autres types de sprites).
+ * simule un sol du jeu, ie le graphisme affiché en tant que première couche de toute
+ * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiSimFloor extends AiSimSprite implements AiFloor
 {
 	/**
-	 * crÃ©e une simulation du sol passÃ© en paramÃ¨tre,
-	 * avec les propriÃ©tÃ©s passÃ©es en paramÃ¨tres.
+	 * crée une simulation du sol passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numÃ©ro d'identification du sol
+	 * 		numéro d'identification du sol
 	 * @param tile
 	 * 		case contenant le sol
 	 * @param posX
 	 * 		abscisse du sol
 	 * @param posY
-	 * 		ordonnÃ©e du sol
+	 * 		ordonnée du sol
 	 * @param posZ
-	 * 		hauteur du sol (forcÃ©ment 0)
+	 * 		hauteur du sol (forcément 0)
 	 * @param state
-	 * 		Ã©tat du sol
+	 * 		état du sol
 	 * @param burningDuration
-	 * 		durÃ©e de combustion du sol
+	 * 		durée de combustion du sol
 	 * @param currentSpeed
-	 * 		vitesse courante de dÃ©placement du sol (inutile ici)
+	 * 		vitesse courante de déplacement du sol (inutile ici)
 	 */
 	protected AiSimFloor(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed)
@@ -62,11 +60,11 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	}	
 
 	/**
-	 * crÃ©e une simulation du sol passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une simulation du sol passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param floor
-	 * 		sprite Ã  simuler
+	 * 		sprite à simuler
 	 * @param tile
 	 * 		case contenant le sprite
 	 */

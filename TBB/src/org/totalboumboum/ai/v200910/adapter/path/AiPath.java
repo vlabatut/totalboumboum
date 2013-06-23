@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.path;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,16 +32,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 /**
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class AiPath
 {	
     /////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private final List<AiTile> tiles = new ArrayList<AiTile>();
 	
 	/**
@@ -54,41 +51,41 @@ public class AiPath
 	}
 	
 	/**
-	 * renvoie la case dont la position est passÃ©e en paramÃ¨tre
+	 * renvoie la case dont la position est passée en paramètre
 	 *
-	 * @param index	la position de la case demandÃ©e
-	 * @return	la case occupant la position indiquÃ©e dans ce chemin
+	 * @param index	la position de la case demandée
+	 * @return	la case occupant la position indiquée dans ce chemin
 	 */
 	public AiTile getTile(int index)
 	{	return tiles.get(index);	
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case passÃ©e en paramÃ¨tre, 
-	 * en l'insÃ©rant Ã  la fin de la sÃ©quence de cases
+	 * ajoute dans ce chemin la case passée en paramètre, 
+	 * en l'insérant à la fin de la séquence de cases
 	 * 
-	 * @param tile	la case Ã  insÃ©rer
+	 * @param tile	la case à insérer
 	 */
 	public void addTile(AiTile tile)
 	{	tiles.add(tile);		
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case passÃ©e en paramÃ¨tre, 
-	 * en l'insÃ©rant Ã  la position passÃ©e en paramÃ¨tre.
+	 * ajoute dans ce chemin la case passée en paramètre, 
+	 * en l'insérant à la position passée en paramètre.
 	 * 
-	 * @param index	position de la case Ã  insÃ©rer
-	 * @param tile	la case Ã  insÃ©rer
+	 * @param index	position de la case à insérer
+	 * @param tile	la case à insérer
 	 */
 	public void addTile(int index, AiTile tile)
 	{	tiles.add(index,tile);	
 	}
 	
 	/**
-	 * remplace la case dont la position est passÃ©e en paramÃ¨tre par
-	 * la case passÃ©e en paramÃ¨tre, dans ce chemin.
+	 * remplace la case dont la position est passée en paramètre par
+	 * la case passée en paramètre, dans ce chemin.
 	 * 
-	 * @param index	position de la case Ã  remplacer
+	 * @param index	position de la case à remplacer
 	 * @param tile	la nouvelle case
 	 */
 	public void setTile(int index, AiTile tile)
@@ -96,19 +93,14 @@ public class AiPath
 	}
 	
 	/**
-	 * supprime de ce chemin la case dont la position est passÃ©e en paramÃ¨tre
+	 * supprime de ce chemin la case dont la position est passée en paramètre
 	 * 
-	 * @param index	position de la case Ã  supprimer
+	 * @param index	position de la case à supprimer
 	 */
 	public void removeTile(int index)
 	{	tiles.remove(index);	
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		?	
-	 */
 	public void removeTile(AiTile tile)
 	{	tiles.remove(tile);		
 	}
@@ -132,10 +124,10 @@ public class AiPath
 	}
 	
 	/**
-	 * renvoie la derniÃ¨re case du chemin,
+	 * renvoie la dernière case du chemin,
 	 * ou null s'il n'y a pas de case dans ce chemin
 	 * 
-	 * @return	la derniÃ¨re case du chemin ou null en cas d'erreur
+	 * @return	la dernière case du chemin ou null en cas d'erreur
 	 */
 	public AiTile getLastTile()
 	{	AiTile result = null;
@@ -148,9 +140,9 @@ public class AiPath
 	// DISTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan, exprimÃ©e en cases, correspondant Ã  ce chemin
+	 * renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin
 	 * 
-	 * @return	un entier correspondant Ã  la distance totale du chemin en cases
+	 * @return	un entier correspondant à la distance totale du chemin en cases
 	 */
 	public int getTileDistance()
 	{	int result = 0;
@@ -160,9 +152,9 @@ public class AiPath
 	}
 
 	/**
-	 * renvoie la distance de Manhattan, exprimÃ©e en pixels, correspondant Ã  ce chemin
+	 * renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin
 	 * 
-	 * @return	un rÃ©el correspondant Ã  la distance totale du chemin en pixels
+	 * @return	un réel correspondant à la distance totale du chemin en pixels
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
@@ -188,15 +180,15 @@ public class AiPath
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule le temps approximatif nÃ©cessaire au personnage passÃ© en paramÃ¨tre
-	 * pour parcourir ce chemin. Le temps est exprimÃ© en millisecondes, et 
+	 * calcule le temps approximatif nécessaire au personnage passé en paramètre
+	 * pour parcourir ce chemin. Le temps est exprimé en millisecondes, et 
 	 * on suppose qu'il n'y a pas d'obstacle sur le chemin et que la vitesse
-	 * de dÃ©placement du joueur est constante. C'est donc une estimation du temps
-	 * qui sera rÃ©ellement nÃ©cessaire au joueur, puisque diffÃ©rents facteurs peuvent
-	 * venir invalider ces hypothÃ¨ses.
+	 * de déplacement du joueur est constante. C'est donc une estimation du temps
+	 * qui sera réellement nécessaire au joueur, puisque différents facteurs peuvent
+	 * venir invalider ces hypothèses.
 	 *   
 	 * @param hero	le personnage qui parcourt le chemin
-	 * @return	le temps nÃ©cessaire au personnage pour parcourir ce chemin
+	 * @return	le temps nécessaire au personnage pour parcourir ce chemin
 	 */
 	public long getDuration(AiHero hero)
 	{	long result = 0;
@@ -214,11 +206,11 @@ public class AiPath
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Compare ce chemin Ã  celui passÃ© en paramÃ¨tre, 
+	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus long que ce dernier.
 	 * 
-	 * @param path	le chemin Ã  comparer
-	 * @return	vrai ssi ce chemin est plus long que celui passÃ© en paramÃ¨tre
+	 * @param object	le chemin à comparer
+	 * @return	vrai ssi ce chemin est plus long que celui passé en paramètre
 	 */
 	public boolean isLongerThan(AiPath path)
 	{	int l1 = tiles.size();
@@ -228,11 +220,11 @@ public class AiPath
 	}
 
 	/**
-	 * Compare ce chemin Ã  celui passÃ© en paramÃ¨tre, 
+	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
 	 * 
-	 * @param path	le chemin Ã  comparer
-	 * @return	vrai ssi ce chemin est plus court que celui passÃ© en paramÃ¨tre
+	 * @param object	le chemin à comparer
+	 * @return	vrai ssi ce chemin est plus court que celui passé en paramètre
 	 */
 	public boolean isShorterThan(AiPath path)
 	{	int l1 = tiles.size();
@@ -242,11 +234,11 @@ public class AiPath
 	}
 
 	/**
-	 * Compare ce chemin Ã  celui passÃ© en paramÃ¨tre, 
+	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'ils sont parfaitement identiques.
 	 * 
-	 * @param object	le chemin Ã  comparer
-	 * @return	vrai ssi les 2 ce chemin est identique Ã  celui passÃ© en paramÃ¨tre
+	 * @param object	le chemin à comparer
+	 * @return	vrai ssi les 2 ce chemin est identique à celui passé en paramètre
 	 */
 	@Override
 	public boolean equals(Object object)
@@ -270,7 +262,6 @@ public class AiPath
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public String toString()
 	{	String result = "[";
 		for(AiTile tile: tiles)

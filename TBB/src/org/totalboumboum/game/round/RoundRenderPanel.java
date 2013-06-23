@@ -2,7 +2,7 @@ package org.totalboumboum.game.round;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,26 +22,13 @@ package org.totalboumboum.game.round;
  */
 
 /**
- * Interface which must be implemented
- * by the GUI object used to display a round info.
  * 
  * @author Vincent Labatut
+ *
  */
 public interface RoundRenderPanel
-{	/**
-	 * Method called when the round is finished.
-	 */
+{
 	public void roundOver();
-	
-	/**
-	 * Method called when one step is performed
-	 * during the round loading.
-	 */
 	public void loadStepOver();
-	
-	/**
-	 * Method called when one step is performed
-	 * during the round simulation.
-	 */
 	public void simulationStepOver();
 }

@@ -5,18 +5,16 @@ import java.util.List;
 
 /**
  * 
- * @author Serkan Keçer
+ * @author Serkan Kecer
  * @author Onur Yaman
  *
  */
 public class BinaryHeapList {
-	/** */
 	private List<Node> list;
 	
 	/**
 	 * Adding a new element to the list
 	 * @param node
-	 * 		Description manquante !
 	 */
 	public void add ( Node node ){
 		// firstly, we add the node to the end of the list
@@ -31,8 +29,6 @@ public class BinaryHeapList {
 	
 	/**
 	 * Get the first element of the list
-	 * @return
-	 * 		? 
 	 */
 	public Node getFirst (){
 		Node firstNode = list.get(1);
@@ -43,17 +39,11 @@ public class BinaryHeapList {
 	
 	/**
 	 * Get the length of the list
-	 * @return
-	 * 		? 
 	 */
 	public int length (){
 		return (list.size()-1);
 	}
-	/**
-	 * 
-	 * @return
-	 * 		? 
-	 */
+	
 	public int realLength (){
 		return list.size();
 	}
@@ -61,7 +51,6 @@ public class BinaryHeapList {
 	/**
 	 * Print out the costs of each element in the list
 	 */
-	@Override
 	public String toString(){
 		String strList = "[";
 		int length = length();
@@ -82,24 +71,11 @@ public class BinaryHeapList {
 		list.add(null);
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean contains(Node node){
 		return list.contains(node);
 	}
 	
-	/**
-	 *  
-	 * @param node
-	 * 		Description manquante !
-	 * @param parent
-	 * 		Description manquante !
-	 */
+	// 
 	public void compare(Node node,Node parent){
 		int length = length();
 		int i = 1;
@@ -118,7 +94,6 @@ public class BinaryHeapList {
 	/**
 	 * Sort the list (in the manner of a binary heap)
 	 * @param pos
-	 * 		Description manquante !
 	 */
 	private void sort ( int pos ){
 		// position of the element's parent
@@ -133,8 +108,7 @@ public class BinaryHeapList {
 	
 	/**
 	 * Reverse-sort the list (in the manner of a binary heap)
-	 * @param pos1
-	 * 		Description manquante !
+	 * @param pos
 	 */
 	private void reverseSort ( int pos1 ){
 		int pos = 1;
@@ -168,9 +142,7 @@ public class BinaryHeapList {
 	/**
 	 * Change two nodes
 	 * @param pos1
-	 * 		Description manquante !
 	 * @param pos2
-	 * 		Description manquante !
 	 */
 	private void change ( int pos1 , int pos2 ){
 		Node tempNode = list.get(pos1);
@@ -194,17 +166,15 @@ public class BinaryHeapList {
 	/**
 	 * Returns cost value of the node found in the given position of the list
 	 * @param pos
-	 * 		Description manquante !
 	 * @return
-	 * 		Description manquante !
 	 */
 	private int getValue ( int pos ){
 		return list.get(pos).getCost();
 	}
 	
-	/**
-	 * 
-	 */
+	//
+	// constructor
+	//
 	public BinaryHeapList(){
 		list = new ArrayList<Node>();
 		list.add(null);

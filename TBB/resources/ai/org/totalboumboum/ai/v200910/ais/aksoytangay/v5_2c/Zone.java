@@ -22,45 +22,36 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * @author Necmi Murat Tangay
  *
  */
-@SuppressWarnings("deprecation")
 public class Zone {
 	
-	/** variable pour faire de l'appel */
+	//variable pour faire de l'appel
 	private AksoyTangay myAI;
-	/** variable de la zone de jeu */
+	//variable de la zone de jeu
 	private AiZone zone;
-	/** variable de notre hÃ©ro */
+	//variable de notre héro
 	private AiHero ownHero;
 	
-	/** variables qu'on va utiliser pour tenir l'information de la zone */
+	//variables qu'on va utiliser pour tenir l'information de la zone
 	private Collection<AiHero> ennemies;
-	/** */
 	private Collection<AiBomb> bombs;
-	/** */
 	private Collection<AiTile> tiles;
-	/** */
 	private Collection<AiFire> fires;
-	/** */
 	private Collection<AiBlock> blocks;
-	/** */
 	private Collection<AiItem> items;
 	
-	/** variables des taille de la zone */
+	//variables des taille de la zone
 	public int width;
-	/** */
 	public int height;
 	
-	/** variable qu'on va remplir avec les collections */
+	//variable qu'on va remplir avec les collections
 	private State matrix[][];
 	
 	/**
 	 * La methode constructeur.
 	 * 
-	 * @param zone Aizone
-	 * @param myAI 
-	 * 		Description manquante !
+	 * @param zone: Aizone
+	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public Zone(AiZone zone, AksoyTangay myAI) throws StopRequestException
 	{
@@ -79,18 +70,17 @@ public class Zone {
 		width = zone.getWidth();
 		height = zone.getHeight();
 		
-		//on rempli la matrice d'Ã©tat par rapport aux ces infos
+		//on rempli la matrice d'état par rapport aux ces infos
 		fillMatrix();
 		
 	}
 	
 	
 	/**
-	 * La methode qui rempli la matrice d'Ã©tat avec les valeurs qui vient de la
+	 * La methode qui rempli la matrice d'état avec les valeurs qui vient de la
 	 * zone.
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void fillMatrix() throws StopRequestException
 	{
@@ -107,7 +97,7 @@ public class Zone {
 			}
 		}
 		
-		//maintenant commenÃ§ons a remplir la matrice avec les autres valeurs
+		//maintenant commençons a remplir la matrice avec les autres valeurs
 		
 		// ENNEMIES 					/////////////////////////////////////
 		Iterator<AiHero> itrHero = ennemies.iterator();
@@ -196,12 +186,9 @@ public class Zone {
 	}
 	
 	/**
-	 * La methode qui renvoie la matrice d'Ã©tat.
-	 * @return
-	 * 		Description manquante !
+	 * La methode qui renvoie la matrice d'état.
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public State[][] getMatrix() throws StopRequestException
 	{	myAI.checkInterruption();
@@ -209,13 +196,6 @@ public class Zone {
 		return matrix;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public State[][] updateMatrix() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -226,49 +206,21 @@ public class Zone {
 		return matrix;
 	}
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setZone(AiZone zone) throws StopRequestException {
 		myAI.checkInterruption();
 		this.zone = zone;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiZone getZone() throws StopRequestException {
 		myAI.checkInterruption();
 		return zone;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Collection<AiBomb> getBombs() throws StopRequestException {
 		myAI.checkInterruption();
 		return bombs;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Collection<AiItem> getItems() throws StopRequestException {
 		myAI.checkInterruption();
 		return items;

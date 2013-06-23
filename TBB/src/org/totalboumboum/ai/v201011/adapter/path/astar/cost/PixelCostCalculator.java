@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.cost;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,41 +27,30 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * Classe Ã©tendant la classe abstraite CostCalculator de la maniÃ¨re Ã  dÃ©terminer
- * le coÃ»t en fonction de la distance en pixel entre les cases.
- * Cela ne change rien pour toutes les cases sauf la premiÃ¨re, car en fonction
- * de la position du point de dÃ©part, deux chemins peuvent correspondre Ã  la mÃªme
- * distance si on considÃ¨re les cases, mais une distance diffÃ©rente si on considÃ¨re
+ * Classe étendant la classe abstraite CostCalculator de la manière à déterminer
+ * le coût en fonction de la distance en pixel entre les cases.
+ * Cela ne change rien pour toutes les cases sauf la première, car en fonction
+ * de la position du point de départ, deux chemins peuvent correspondre à la même
+ * distance si on considère les cases, mais une distance différente si on considère
  * les pixels.
- * <b>Attention :</b> le point de dÃ©part doit obligatoirement Ãªtre mis Ã  
- * jour avant chaque nouvel appel Ã  A*. 
+ * <b>Attention :</b> le point de départ doit obligatoirement être mis à 
+ * jour avant chaque nouvel appel à A*. 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class PixelCostCalculator extends CostCalculator
 {	
 	/////////////////////////////////////////////////////////////////
 	// STARTING POINT			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case de dÃ©part du chemin en cours de recherche */
+	/** case de départ du chemin en cours de recherche */
 	private AiTile startTile;
-	/** abscisse de dÃ©part (doit Ãªtre contenue dans la case de dÃ©part) */
+	/** abscisse de départ (doit être contenue dans la case de départ) */
 	private double startX;
-	/** ordonnÃ©e de dÃ©part (doit Ãªtre contenue dans la case de dÃ©part) */
+	/** ordonnée de départ (doit être contenue dans la case de départ) */
 	private double startY;
 	
-	/**
-	 * 
-	 * @param startTile
-	 * 		?	
-	 * @param startX
-	 * 		?	
-	 * @param startY
-	 * 		?	
-	 */
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
 	{	this.startTile = startTile;
 		this.startX = startX;
@@ -72,16 +61,16 @@ public class PixelCostCalculator extends CostCalculator
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux cases sont supposÃ©es Ãªtre voisines, 
+	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer la distance en pixels entre leurs centres.
-	 * Sauf si la case start correspond Ã  la premiÃ¨re case
-	 * du chemin : lÃ , on renvoie la distance entre le point
-	 * de dÃ©part et le centre de la case suivante.
+	 * Sauf si la case start correspond à la première case
+	 * du chemin : là, on renvoie la distance entre le point
+	 * de départ et le centre de la case suivante.
 	 * 
 	 * @param start	
-	 * 		la case de dÃ©part
+	 * 		la case de départ
 	 * @param end	
-	 * 		la case d'arrivÃ©e
+	 * 		la case d'arrivée
 	 * @return 
 	 * 		la distance entre ces cases
 	 */ 
@@ -107,15 +96,14 @@ public class PixelCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le coÃ»t d'un chemin correspond ici Ã  sa distance 
-	 * exprimÃ©e en pixels.
+	 * le coût d'un chemin correspond ici à sa distance 
+	 * exprimée en pixels.
 	 * 
 	 * @param path
-	 * 		chemin Ã  traiter
+	 * 		chemin à traiter
 	 * @return
-	 * 		le coÃ»t de ce chemin
+	 * 		le coût de ce chemin
 	 */
-	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getPixelDistance();
 		return result;

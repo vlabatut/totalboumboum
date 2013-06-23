@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament.statistics;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,59 +27,41 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
- * This abstract class was designed to display
- * plots describing the evolution of
- * a tournament.
- * 
- * @param <T>
- * 		Type of tournament handled by this panel. 
  * 
  * @author Vincent Labatut
+ *
  */
-public abstract class TournamentStatistics<T extends AbstractTournament> extends EntitledDataPanel
-{	/** Class id */
+public class TournamentStatistics extends EntitledDataPanel
+{	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard panel to display
-	 * plots describing the evolution of
-	 * a tournament.
-	 * 
-	 * @param container
-	 * 		The GUI component containing this panel.
-	 */
 	public TournamentStatistics(SplitMenuPanel container)
 	{	super(container);
 
 		// title
 		String key = GuiKeys.GAME_TOURNAMENT_STATISTICS_TITLE;
 		setTitleKey(key);
+	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** The tournament displayed in this panel */
-	protected T tournament;
+	private AbstractTournament tournament;
 
-	/**
-	 * Changes the tournament displayed in this
-	 * panel, and updates all concerned GUI
-	 * components.
-	 * 
-	 * @param tournament
-	 * 		The new tournament to display.
-	 */
-	public abstract void setTournament(T tournament);
+	public void setTournament(AbstractTournament tournament)
+	{	this.tournament = tournament;
+	}
 	
-	/**
-	 * Returns the tournament currently
-	 * displayed.
-	 * 
-	 * @return
-	 * 		The current tournament.
-	 */
-	public T getTournament()
+	public AbstractTournament getTournament()
 	{	return tournament;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void refresh()
+	{	// nothing to do here
 	}
 }

@@ -1,4 +1,7 @@
+
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2c;
+
+
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -14,68 +17,50 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
+
+
+
+
+
 /**
  * This class is for calculating if we can find a secured place if we pose a bomb.
- * 
- * @author Mustafa Göktuğ Düzok
- * 
+ * @author MGoktug
+ *
  */
-@SuppressWarnings("deprecation")
+
+
+
+
 public class Can_escape {
-	/** */
 	@SuppressWarnings("unused")
 	private AiZone our_zone;
-	/** */
 	private AiHero our_hero;
-	/** */
 	@SuppressWarnings("unused")
 	private Collection<AiHero> enemies;
 	
-	/** */
 	private Collection<AiBlock> blocks;
 
-	/** */
 	private Collection<AiFire> fires;
-	/** */
 	private Collection<AiBomb> bombs;
 	
-	/** */
 	public int width;
-	/** */
 	public int height;
-	/** */
 	private int pos_x;
-	/** */
 	private int pos_y;
 	
-	/** */
 	public  double BONUS=-300;
-	/** */
 	public  double WALL=-10;
-	/** */
 	public double SAFE_CASE=-1000;
-	/** */
 	public  double FIRE= 1000000;
-	/** */
 	public  double BOMB=500000;
-	/** */
 	public double ENEMIE=0;
 	
 
-	/** */
+	
 	public double security_matrix[][];
-	/** */
 	ArtificialIntelligence ai;
 	
-	/** Constructeur of the Can_escape
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	/* Constructeur of the Can_escape*/
 	public Can_escape(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -95,11 +80,6 @@ public class Can_escape {
 		Fill_The_Matrix();
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void Fill_The_Matrix() throws StopRequestException {
 		ai.checkInterruption();
 		//First of all, we fill the matrce with safe cases.
@@ -334,13 +314,7 @@ public class Can_escape {
 	}
 	
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public double[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
 		return security_matrix;

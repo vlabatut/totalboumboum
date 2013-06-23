@@ -12,33 +12,19 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
 *
-* @author Nadin Kökciyan
-* @author Hikmet Mazmanoğlu
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
 *
 */
-@SuppressWarnings("deprecation")
 public class Tree {
 
-	/** */
 	KokciyanMazmanoglu km;
-	/** */
 	private Vector<Node> nodes;
-	/** */
 	private Vector<Link> links;
-	/** */
 	private Node currentNode;
-	/** */
 	private Node finalNode;
 	
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 */
+	
 	public Tree(int line, int col, KokciyanMazmanoglu ai){
 		nodes = new Vector<Node>();
 		links = new Vector<Link>();
@@ -47,23 +33,12 @@ public class Tree {
 		currentNode = convertToNode(ai.getCurrentTile());
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
+	
 	public Node getRoot() {
 		return currentNode;
 	}
 	
 
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean containsNode(Node node)
 	{	boolean result=false;
 		Iterator<Node> i = nodes.iterator();
@@ -74,17 +49,6 @@ public class Tree {
 		return result;		
 	}
 
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  Node getNodefromTree(int line, int col) throws StopRequestException
 	{	
 		km.checkInterruption();
@@ -102,15 +66,6 @@ public class Tree {
 		return result;		
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  Link getParentLink(Node node) throws StopRequestException
 	{	
 		km.checkInterruption();
@@ -127,15 +82,6 @@ public class Tree {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  Vector<Link> getPath(Node node) throws StopRequestException
 	{
 		km.checkInterruption();
@@ -155,25 +101,12 @@ public class Tree {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 */
 	public  void markVisitedNod(Node node){
 		node.setVisited(true);
 	}
 	
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public  Iterator<Link> developNode(Node node) throws StopRequestException{
 		km.checkInterruption();
 		Vector<Link> vLink = new Vector<Link>();
@@ -208,60 +141,28 @@ public class Tree {
 		return vLink.iterator();
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
 	public  Node getFinalNode() {
 		return finalNode;
 	}
 
-	/**
-	 * 
-	 * @param finalNode 
-	 * 		Description manquante !
-	 */
+
 	public  void setFinalNode(Node finalNode) {
 		this.finalNode = finalNode;
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  boolean isFinalNode(Node node) throws StopRequestException{
 		km.checkInterruption();
 		Node fNode = getFinalNode();
 		return (node.getLine() == fNode.getLine()) && (node.getCol() == fNode.getCol());
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public  Node convertToNode(AiTile tile){
 		Node nd = null;
 		if(tile != null)
 			nd = new Node(tile.getLine(),tile.getCol(),km.getFieldMatrix()[tile.getLine()][tile.getCol()],this,0);
 		return nd; 
 	}
-
-	/**
-	 * 
-	 * @param link
-	 * 		Description manquante !
-	 * @param vLink
-	 * 		Description manquante !
-	 */
+	
 	public  void addLink(Link link, Vector<Link> vLink) {
 		links.add(link);
 		nodes.add(link.getChild());

@@ -24,25 +24,15 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**constructeur
  * 
- *
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
+ * @param ai
+ * @throws StopRequestException
  */
-@SuppressWarnings("deprecation")
 public class DeplacementCommune {
 
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
-	/** la direction de la case d'attaque */
+	// la direction de la case d'attaque
 	Direction dir2 = Direction.NONE;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public DeplacementCommune(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -50,9 +40,9 @@ public class DeplacementCommune {
 
 	/**
 	 * 
-	 * Cette mÃ©thode calcule le chemin le plus court que notre IA peut suivre et
+	 * Cette méthode calcule le chemin le plus court que notre IA peut suivre et
 	 * elle retourne le plus court chemin (shortestPath). Elle prend 3
-	 * arguments, notre IA, une liste des items du jeu et AiTile (reprÃ©sente une
+	 * arguments, notre IA, une liste des items du jeu et AiTile (représente une
 	 * case du jeu, avec tous les spirites qu'elle contient).
 	 * 
 	 * @param ownHero
@@ -63,7 +53,6 @@ public class DeplacementCommune {
 	 *            les cases cibles ou le hero peut aller
 	 * @return le chemin le plus court a parcourir
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiPath cheminLePlusCourt(AiHero ownHero, AiTile startPoint,
 			List<AiTile> endPoints) throws StopRequestException {
@@ -90,21 +79,17 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode forme une liste des murs qui peuvent se dÃ©truire c'est Ã 
-	 * dire elle ContrÃ´le si la case est destructible ou indestructibles et il y
-	 * a possÃ©de du danger ou pas . Elle prend 2 arguments la zone du jeu et une
+	 * Cette méthode forme une liste des murs qui peuvent se détruire c’est à
+	 * dire elle contrôle si la case est destructible ou indestructibles et il y
+	 * a possède du danger ou pas . Elle prend 2 arguments la zone du jeu et une
 	 * action.
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
-	 * @param resultat
+	 * @param AiAction
 	 *            resultat
-	 * @param endPoints2 
-	 * 		description manquante !
 	 * @return endPoints
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<AiTile> detruire(AiZone gameZone, AiAction resultat,
 			List<AiTile> endPoints2) throws StopRequestException {
@@ -268,7 +253,7 @@ public class DeplacementCommune {
 			if (voisines.size() > 1)
 				ordre(voisines, distances);
 
-			// on trouve la plus proche case "detruit" Ã  la case "attaque".
+			// on trouve la plus proche case "detruit" à la case "attaque".
 			// Cette case est accessible
 			int i = 0;
 			AiPath path = null;
@@ -291,15 +276,14 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode permet Ã  dÃ©cider la nouvelle action. Elle prend un seul
-	 * argument qui est un chemin (une sÃ©quence des cases).
+	 * Cette méthode permet à décider la nouvelle action. Elle prend un seul
+	 * argument qui est un chemin (une séquence des cases).
 	 * 
 	 * @param nextMove
-	 * 		description manquante !
+	 * 
 	 * @return la nouvelle action de notre hero
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiAction newAction(AiPath nextMove) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -340,22 +324,15 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode nous donne une nouvelle zone pour pour minimiser le nombre
+	 * Cette méthode nous donne une nouvelle zone pour pour minimiser le nombre
 	 * des calculs.
 	 * 
 	 * @param gauche
-	 * 		description manquante !
 	 * @param droit
-	 * 		description manquante !
 	 * @param haut
-	 * 		description manquante !
 	 * @param bas
-	 * 		description manquante !
-	 * @param gameZone 
-	 * 		description manquante !
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void nouvelleZone(int gauche, int droit, int haut, int bas,
 			AiZone gameZone) throws StopRequestException {
@@ -408,17 +385,14 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode nous donne une liste de direction pour notre IA. Elle prend
+	 * Cette méthode nous donne une liste de direction pour notre IA. Elle prend
 	 * deux arguments.
 	 * 
 	 * @param dx2
-	 * 		description manquante !
 	 * @param dy2
-	 * 		description manquante !
 	 * @return directions2
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<Direction> directionToute(int dx2, int dy2)
 			throws StopRequestException {
@@ -471,19 +445,15 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode nous donne la direction de notre IA. Elle prend 3
+	 * Cette méthode nous donne la direction de notre IA. Elle prend 3
 	 * arguments.
 	 * 
-	 * @param dx
-	 * 		description manquante !
-	 * @param dy
-	 * 		description manquante !
+	 * @param dx2
+	 * @param dy2
 	 * @param dir
-	 * 		description manquante !
 	 * @return dir
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Direction direction(Direction dir, int dx, int dy)
 			throws StopRequestException {
@@ -509,15 +479,14 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette mÃ©thode met en ordre la liste des direction de notre IA. Elle prend
+	 * Cette méthode met en ordre la liste des direction de notre IA. Elle prend
 	 * 2 arguments.
 	 * 
 	 * @param voisines
-	 * 		description manquante !
+	 * 
 	 * @param distances2
-	 * 		description manquante !
+	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void ordre(List<AiTile> voisines, int[] distances2)
 			throws StopRequestException {

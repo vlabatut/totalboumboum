@@ -2,7 +2,7 @@ package org.totalboumboum.stream.file.replay;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -258,13 +258,8 @@ public class FileClientStream
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 
-	/**
-	 * Cleanly finishes this object,
-	 * possibly freeing some memory.
-	 */
 	public void finish()
 	{	if(!finished)
 		{	finished = true;

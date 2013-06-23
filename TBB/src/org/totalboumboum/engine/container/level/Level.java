@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -36,7 +36,7 @@ import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 
 /**
  * 
@@ -61,8 +61,8 @@ public class Level
 	// THEME				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 /*
- TODO semblait inutile, dc dÃ©sactivÃ© 
- (Ã©galement dans HollowLevel.loadTheme() et Level.finish())
+ TODO semblait inutile, dc désactivé 
+ (également dans HollowLevel.loadTheme() et Level.finish())
 	private Theme theme;
 
 	public void setTheme(Theme theme)
@@ -133,9 +133,9 @@ public class Level
 	
 	public void initTileList()
 	{	tileList = new ArrayList<Tile>();
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				tileList.add(matrix[row][col]);		
+				tileList.add(matrix[line][col]);		
 	}
 	
 	public List<Tile> getTileList()
@@ -189,11 +189,11 @@ public class Level
 	{	return LevelsTools.getTileDistance(tile1,tile2,globalHeight,globalWidth);
 	}
 
-	public int getTileDistance(int row1, int col1, int row2, int col2, Direction direction)
-	{	return LevelsTools.getTileDistance(row1,col1,row2,col2,direction,globalHeight,globalWidth);
+	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
+	{	return LevelsTools.getTileDistance(line1,col1,line2,col2,direction,globalHeight,globalWidth);
 	}
-	public int getTileDistance(int row1, int col1, int row2, int col2)
-	{	return LevelsTools.getTileDistance(row1,col1,row2,col2,globalHeight,globalWidth);
+	public int getTileDistance(int line1, int col1, int line2, int col2)
+	{	return LevelsTools.getTileDistance(line1,col1,line2,col2,globalHeight,globalWidth);
 	}
 
 	public int getHorizontalTileDistance(int col1, int col2, Direction direction)
@@ -203,11 +203,11 @@ public class Level
 	{	return LevelsTools.getHorizontalTileDistance(col1,col2,globalWidth);
 	}
 	
-	public double getVerticalTileDistance(int row1, int row2, Direction direction)
-	{	return LevelsTools.getVerticalTileDistance(row1,row2,direction,globalHeight);
+	public double getVerticalTileDistance(int line1, int line2, Direction direction)
+	{	return LevelsTools.getVerticalTileDistance(line1,line2,direction,globalHeight);
 	}
-	public double getVerticalTileDistance(int row1, int row2)
-	{	return LevelsTools.getVerticalTileDistance(row1,row2,globalHeight);
+	public double getVerticalTileDistance(int line1, int line2)
+	{	return LevelsTools.getVerticalTileDistance(line1,line2,globalHeight);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -259,10 +259,10 @@ public class Level
 		//TODO should be called any time a sprite is supressed from the game
 	}
 /*	
-	public void addHero(Hero hero, int row, int col)
-	{	matrix[row][col].addSprite(hero);
-		hero.setCurrentPosX(matrix[row][col].getPosX());
-		hero.setCurrentPosY(matrix[row][col].getPosY());
+	public void addHero(Hero hero, int line, int col)
+	{	matrix[line][col].addSprite(hero);
+		hero.setCurrentPosX(matrix[line][col].getPosX());
+		hero.setCurrentPosY(matrix[line][col].getPosY());
 	}
 */	
 	/**
@@ -272,19 +272,6 @@ public class Level
 	{	spritesList.add(sprite);
 		spritesMap.put(sprite.getId(),sprite);
 		sprite.getTile().addSprite(sprite);
-	}
-
-	/**
-	 * Like insertSpriteTile, but no insertion
-	 * in the tile (the sprite is not really
-	 * a part of the game, yet).
-	 * 
-	 * @param sprite
-	 * 		The sprite to be inserted.
-	 */
-	public void addSprite(Sprite sprite)
-	{	spritesList.add(sprite);
-		spritesMap.put(sprite.getId(),sprite);
 	}
 	
 	public List<Sprite> getSprites()
@@ -407,33 +394,33 @@ public class Level
 		return result;
 	}
 	
-	public Tile getNeighborTile(int row, int col, Direction direction)
-	{	int[] coord = LevelsTools.getNeighborTile(row,col,direction,globalHeight,globalWidth);
+	public Tile getNeighborTile(int line, int col, Direction direction)
+	{	int[] coord = LevelsTools.getNeighborTile(line,col,direction,globalHeight,globalWidth);
 		Tile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
 	
-	public List<Tile> getNeighborTiles(int row, int col)
+	public List<Tile> getNeighborTiles(int line, int col)
 	{	List<Tile> resultat = new ArrayList<Tile>();
-		resultat.add(getNeighborTile(row, col, Direction.LEFT));
-		resultat.add(getNeighborTile(row, col, Direction.DOWNLEFT));
-		resultat.add(getNeighborTile(row, col, Direction.DOWN));
-		resultat.add(getNeighborTile(row, col, Direction.DOWNRIGHT));
-		resultat.add(getNeighborTile(row, col, Direction.RIGHT));
-		resultat.add(getNeighborTile(row, col, Direction.UPRIGHT));
-		resultat.add(getNeighborTile(row, col, Direction.UPLEFT));
-		resultat.add(getNeighborTile(row, col, Direction.UP));		
+		resultat.add(getNeighborTile(line, col, Direction.LEFT));
+		resultat.add(getNeighborTile(line, col, Direction.DOWNLEFT));
+		resultat.add(getNeighborTile(line, col, Direction.DOWN));
+		resultat.add(getNeighborTile(line, col, Direction.DOWNRIGHT));
+		resultat.add(getNeighborTile(line, col, Direction.RIGHT));
+		resultat.add(getNeighborTile(line, col, Direction.UPRIGHT));
+		resultat.add(getNeighborTile(line, col, Direction.UPLEFT));
+		resultat.add(getNeighborTile(line, col, Direction.UP));		
 		return resultat;
 	}	
 
-	public int[] normalizePosition(int row, int col)
-	{	return LevelsTools.normalizePosition(row,col,globalHeight,globalWidth);
+	public int[] normalizePosition(int line, int col)
+	{	return LevelsTools.normalizePosition(line,col,globalHeight,globalWidth);
 	}
-	public int normalizePositionRow(int row)
-	{	return LevelsTools.normalizePositionRow(row,globalHeight);
+	public int normalizePositionLine(int line)
+	{	return LevelsTools.normalizePositionLine(line,globalHeight);
 	}
 	public int normalizePositionCol(int col)
-	{	return LevelsTools.normalizePositionRow(col,globalHeight);
+	{	return LevelsTools.normalizePositionLine(col,globalHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -507,52 +494,37 @@ public class Level
 //time = time + getConfiguration().getMilliPeriod();
 //if(startTime<0) startTime = System.currentTimeMillis();
 		// update floors
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].updateSprites(Role.FLOOR);		
+				matrix[line][col].updateSprites(Role.FLOOR);		
 
 		// update items
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].updateSprites(Role.ITEM);		
+				matrix[line][col].updateSprites(Role.ITEM);		
 
 		// update blocks
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].updateSprites(Role.BLOCK);		
+				matrix[line][col].updateSprites(Role.BLOCK);		
 
 		// update bombs
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].updateSprites(Role.BOMB);		
+				matrix[line][col].updateSprites(Role.BOMB);		
 
 		// update fires
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].updateSprites(Role.FIRE);		
+				matrix[line][col].updateSprites(Role.FIRE);		
 
 		// update heroes
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].updateSprites(Role.HERO);		
+				matrix[line][col].updateSprites(Role.HERO);		
 	}
 
-	/**
-	 * Changes the flag regarding the drawing
-	 * of the specified kind of sprite.
-	 * 
-	 * @param role
-	 * 		Concerned kind of sprite.
-	 * @param value
-	 * 		Whether or not it should be drawn.
-	 */
-	public void setDrawSwitch(Role role, boolean value)
-	{	for(int row=0;row<globalHeight;row++)
-			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].setDrawSwitch(role,value);
-	}
-	
-	//NOTE optimisation : Ã  effectuer seulement pour les tiles visibles
+	//NOTE optimisation : à effectuer seulement pour les tiles visibles
 	public void draw(Graphics g)
 	{	boolean flat = true;
 		boolean onGround = true;
@@ -562,26 +534,26 @@ public class Level
 		flat = true;
 		onGround = true;
 		shadow = false;
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSelection(g,flat,onGround,shadow);
+				matrix[line][col].drawSelection(g,flat,onGround,shadow);
 		
-		// the rest row by row
-		// first: ground shadows from the last row (for graphical reasons)
+		// the rest line by line
+		// first: ground shadows from the last line (for graphical reasons)
 		flat = false;
 		onGround = true;
 		shadow = true;
 		for(int col=0;col<globalWidth;col++)
 			matrix[globalHeight-1][col].drawSelection(g,flat,onGround,shadow);
 		// then the rest
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 		{	// shadows from the non-flat on-ground sprites
 			flat = false;
 			onGround = true;
 			shadow = true;
-			if(row<globalHeight-1)
+			if(line<globalHeight-1)
 			{	for(int col=0;col<globalWidth;col++)
-					matrix[row][col].drawSelection(g,flat,onGround,shadow);
+					matrix[line][col].drawSelection(g,flat,onGround,shadow);
 			}
 			/*
 			 * the non-flat on-ground sprites themselves:
@@ -592,35 +564,35 @@ public class Level
 			shadow = false;
 			// floor
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSprites(Role.FLOOR,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.FLOOR,g,flat,onGround,shadow);
 			// fires
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSprites(Role.FIRE,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.FIRE,g,flat,onGround,shadow);
 			// item
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSprites(Role.ITEM,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.ITEM,g,flat,onGround,shadow);
 			// block
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSprites(Role.BLOCK,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.BLOCK,g,flat,onGround,shadow);
 			// bombs
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSprites(Role.BOMB,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.BOMB,g,flat,onGround,shadow);
 			// heroes
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSprites(Role.HERO,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.HERO,g,flat,onGround,shadow);
 			
 			// shadows from the in-air sprites
 			flat = false;
 			onGround = false;
 			shadow = true;
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSelection(g,flat,onGround,shadow);
+				matrix[line][col].drawSelection(g,flat,onGround,shadow);
 			// the in-air sprites themselves
 			flat = false;
 			onGround = false;
 			shadow = false;
 			for(int col=0;col<globalWidth;col++)
-				matrix[row][col].drawSelection(g,flat,onGround,shadow);
+				matrix[line][col].drawSelection(g,flat,onGround,shadow);
 		}
 	}
 /*	
@@ -646,18 +618,18 @@ public class Level
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void spreadEvent(AbstractEvent event)
-	{	for(int row=0;row<globalHeight;row++)
+	{	for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
-			{	Tile tile = matrix[row][col];
+			{	Tile tile = matrix[line][col];
 				tile.spreadEvent(event);
 			}
 		}
 	}
 
 	public void spreadEvent(AbstractEvent event, Role role)
-	{	for(int row=0;row<globalHeight;row++)
+	{	for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
-			{	Tile tile = matrix[row][col];
+			{	Tile tile = matrix[line][col];
 				tile.spreadEvent(event,role);
 			}
 		}
@@ -668,9 +640,9 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	public double getEntryDuration(Role role)
 	{	double result = 0;
-		for(int row=0;row<globalHeight;row++)
+		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
-			{	Tile tile = matrix[row][col];
+			{	Tile tile = matrix[line][col];
 				List<Sprite> list = tile.getSprites(role);
 				for(Sprite sprite: list)
 				{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);

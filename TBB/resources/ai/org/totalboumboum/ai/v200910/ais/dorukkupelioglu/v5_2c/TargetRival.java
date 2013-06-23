@@ -8,39 +8,19 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
- */
-@SuppressWarnings("deprecation")
+
 public class TargetRival {
 
-	/** */
 	private DorukKupelioglu dk;
-	/** */
 	private Bomb bomb;
-	/** */
 	private Astar astar;
-	/** */
 	private AiPath path;
-	/** */
 	private List<AiTile> rivals;
-	/** */
 	private List<AiTile> available;
-	/** */
 	private boolean hasPathFound;
-	/** */
 	private boolean targetRivalEnded;
-	/** */
 	private int[][] rivalavailable;
 	
-	/**
-	 * 
-	 * @param dk
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public TargetRival(DorukKupelioglu dk) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -209,9 +189,7 @@ public class TargetRival {
 	/**
 	 * bomba bıraktığımda rakibe etki edecek yerleri bulur
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findAvailable()throws StopRequestException
 	{
@@ -289,13 +267,6 @@ public class TargetRival {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction moveTo()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -308,13 +279,6 @@ public class TargetRival {
 		return moveDir;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean pathAvailable() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -323,13 +287,7 @@ public class TargetRival {
 		return hasPathFound && !targetRivalEnded;
 	}	
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public boolean succeed() throws StopRequestException
 	{
 		dk.checkInterruption();

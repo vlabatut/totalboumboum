@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v5c;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,75 +37,57 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @version 5.c
  * 
- * @author CansÄ±n Aldanmaz
- * @author YalÃ§Ä±n YenigÃ¼n
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
  *
  */
-@SuppressWarnings("deprecation")
 public class AldanmazYenigun extends ArtificialIntelligence {
 
-	/** */
 	private AiHero ownHero = null; //notre joueur
 
-	/** */
 	private AiZone zone = null;
 
-	/** */
 	private AiTile caseActuelle = null; //la case actuelle du joueur
 
-	/** */
 	private AvoidController escapeManager = null; //la classe qui controlle la case sur.
 
-	/** */
 	private ItemController safeManager = null; //pour controller les items
 
-	/** */
 	private ItemController abstractSafeManager = null;
 
-	/** */
 	private WallController putBombController = null;
 
-	/** */
 	private AbstractBombController abstractBombController = null;
 
-	/** */
 	private HeroController abstractHeroController = null;
 
-	/** */
 	private AiTile targetPreviousTile;
 
-	/** */
+
 	private AiHero targetHero = null;
 
-	/** classe chargÃ©e de dÃ©terminer quelles cases sont sÃ»res */
+	/** classe chargée de déterminer quelles cases sont sûres */
 	private SafetyZone safetyZone = null;
 
-	/** */
 	private boolean thereIsSafeTile = true;
 
-	/** */
 	private boolean bonusAccessible = true;
 
-	/** */
 	private boolean heroAccessible = true;
 
-	/** */
 	private boolean assezArmee = false;
 
 	// private boolean isThereAnyHeroInBombeRange = false;
 
-	/** */
 	private boolean hasArrivedButDanger = false;
 
-	/** les coordonnÃ©es de notre hero */
+	/** les coordonnées de notre hero */
 	@SuppressWarnings("unused")
 	private double x;
 
-	/** */
 	@SuppressWarnings( { "unused" })
 	private double y;
 
-	/** */
 	private PathController targetManager = null;
 
 	@Override
@@ -123,7 +105,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		boolean start = false;
 		if (!ownHero.hasEnded()) { 
 
-			updateLocation(); // on met Ã  jour la position de l'ia dans la zone
+			updateLocation(); // on met à jour la position de l'ia dans la zone
 			Direction moveDir = Direction.NONE;
 			findIsBonusAccessible(); //on trouve si il y a un bonus accessible
 			
@@ -138,7 +120,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 					moveDir = escapeManager.update();
 				result = new AiAction(AiActionName.MOVE, moveDir);
 			}
-			// sinon si on est en danger : on commence Ã  fuir
+			// sinon si on est en danger : on commence à fuir
 			else if (!isSafe(caseActuelle)) {
 				escapeManager = new AvoidController(this);
 				moveDir = escapeManager.update();
@@ -159,7 +141,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 			}
 			// sinon si on n'est pas sur le bonus et s'il y a les bonus accessibles et 
-			// si on n'est pas assez armee: on commence Ã  collecter les bonus
+			// si on n'est pas assez armee: on commence à collecter les bonus
 			else if (!isBonus(caseActuelle)
 					&& !findItemsTiles(caseActuelle).isEmpty()
 					&& bonusAccessible && !assezArmee) {
@@ -167,7 +149,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 				moveDir = safeManager.update();
 				result = new AiAction(AiActionName.MOVE, moveDir);
 			}
-			//si le rival est accessible et on est assez armÃ© on l'attaque
+			//si le rival est accessible et on est assez arméé on l'attaque
 			else if (heroAccessible) {
 				updateTarget();
 
@@ -322,10 +304,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
-	/** initialisation 
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
+	//initialisation
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -336,11 +315,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 		targetManager = new PathController(this, caseActuelle);
 	}
-	/** on met a jour la matrice
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//on met a jour la matrice
 	private void updateMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -348,11 +323,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		safetyZone = new SafetyZone(this);
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void updateLocation() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -363,12 +333,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * renvoi le niveau de danger de la case
-	 * @param tile 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public double getDangerLevel(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -378,12 +342,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les cases surs
-	 * @param origin 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findSafeTiles(AiTile origin)
 			throws StopRequestException {
@@ -409,12 +367,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les cases abstraites surs si on est en train de poser une bombe
-	 * @param origin 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findAbstractSafeTiles(AiTile origin)
 			throws StopRequestException {
@@ -438,10 +390,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * s'il y a une case sur, c'est true.
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public boolean getThereIsSafeTile() throws StopRequestException {
 		checkInterruption();
@@ -450,12 +398,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les lieux des items
-	 * @param origin 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findItemsTiles(AiTile origin)
 			throws StopRequestException {
@@ -480,12 +422,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les lieux des heros
-	 * @param origin 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findHerosTiles(AiTile origin)
 			throws StopRequestException {
@@ -520,12 +456,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	/**
 	 * trouve les lieux des murs
-	 * @param origin 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findWallTiles(AiTile origin)
 			throws StopRequestException {
@@ -561,66 +491,30 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return ownHero;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiZone getZone() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return zone;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile getActualTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return caseActuelle;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public SafetyZone getZoneFormee() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		return safetyZone;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;
@@ -630,15 +524,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isBonus(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;
@@ -648,15 +533,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("unused")
 	private boolean isWall(AiTile tile) throws StopRequestException {
 		checkInterruption();
@@ -666,15 +542,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isHero(AiTile tile) throws StopRequestException {
 		checkInterruption();
 		boolean result = false;
@@ -683,12 +550,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		
 		return result;
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	private void findIsBonusAccessible() throws StopRequestException {
 		checkInterruption();
 
@@ -710,13 +572,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		}
 	}
 
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void findIsHeroAccessible(AiHero hero) throws StopRequestException {
 		checkInterruption();
 
@@ -737,60 +592,36 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		}
 	}
 
-	/**
-	 * 
-	 * @param accessible
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
+
+
+
 	public void setAccessible(boolean accessible) throws StopRequestException {
 		checkInterruption(); 
 		this.bonusAccessible = accessible;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isBonusAccessible() throws StopRequestException {
 		checkInterruption(); 
 		return bonusAccessible;
 	}
 
-	/**
-	 * 
-	 * @param accessible
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setHeroAccessible(boolean accessible) throws StopRequestException {
 		checkInterruption(); 
 		this.heroAccessible = accessible;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isHeroAccessible() throws StopRequestException {
 		checkInterruption(); 
 		return heroAccessible;
 	}
 
 	/**
-	 * choisit alÃ©atoirement un joueur comme cible Ã  suivre
+	 * choisit aléatoirement un joueur comme cible à suivre
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
+
 	private void chooseTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -825,9 +656,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	}
 
 	/**
-	 * met Ã  jour la cible, et Ã©ventuellement le chemin jusqu'Ã  elle
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
 	 */
 	private void updateTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -853,13 +682,6 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getTargetHero() throws StopRequestException {
 		checkInterruption();
 		return targetHero;

@@ -18,45 +18,28 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Doğus Burcu Demirağ
- * @author Zeynep Şagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
-@SuppressWarnings("deprecation")
 public class DemiragSagar extends ArtificialIntelligence {
 
-	/** les variables globales qui sont mise a jour a chaque iteration */
+	//les variables globales qui sont mise a jour a chaque iteration
 	private int state;
-	/** */
 	private Direction d;
-	/** */
 	private AiZone zone;
-	/** */
 	private AiHero ownHero;
-	/** */
 	private AiTile caseCourant;
-	/** */
 	private AiTile caseTarget;
-	/** */
 	private boolean debug;
-	/** */
 	private List<AiTile> caseEnemies;
-	/** */
 	private List<AiTile> caseBombes;
-	/** */
 	private List<AiTile> caseItems;
-	/** */
 	private TimeMatrice timeMatrice;
-	/** */
 	private long dangerTime;
-	/** */
 	private int distanceTarget;
-	/** */
 	private int counter;
 
-	/**
-	 * 
-	 */
 	public DemiragSagar(){
 		//l'initialisation des variables globales
 		this.state = 0;
@@ -361,15 +344,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return result;
 	}
 	
-	/**
+	/*
 	 * Prend l'intersection entre le chmein du enemie-item
 	 * et de nous-item
-	 * @param enemy 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public AiTile EnemyAtTheGate(AiTile enemy) throws StopRequestException
 	{	checkInterruption();
@@ -403,26 +380,18 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		return result;
 	}
-	/**
+	/*
 	 * On suppose de mettre une bombe
 	 * On regarde si on sera en danger
-	 * @param temp 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public boolean supposerBombe(AiTile temp) throws StopRequestException{
 		checkInterruption();
 		int i,j;
 		boolean resultat=false;
-		long nouveauTime [][]= new long[zone.getWidth()][zone.getHeight()];
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) // adjustment
+		long nouveauTime [][]= new long[17][15];
+		for (j = 0; j < 15; j++)
 		{	checkInterruption();
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (i = 0; i < 17; i++)
 			{	checkInterruption();
 				nouveauTime[i][j]=this.timeMatrice.getTime(i,j);
 			}
@@ -430,23 +399,17 @@ public class DemiragSagar extends ArtificialIntelligence {
 		this.timeMatrice.placerNouvelleBombe(temp);
 		if(this.seCacher(true))
 			resultat=true;
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) // adjustment
+		for (j = 0; j < 15; j++)
 		{	checkInterruption();
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (i = 0; i < 17; i++)
 			{	checkInterruption();
 				this.timeMatrice.putTime(i,j,nouveauTime[i][j]);
 			}
 		}
 		return resultat;
 	}
-	/**
+	/*
 	 * Mettre a jour les tiles des enemies
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> getEnemiesTile() throws StopRequestException {
 		checkInterruption();
@@ -464,12 +427,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return monItera;
 	}
 
-	/**
+	/*
 	 * Mettre a jour les tiles des bombes
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> getBombesTile() throws StopRequestException {
 		checkInterruption();
@@ -483,12 +442,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return b;
 	}
 
-	/**
+	/*
 	 * Mettre a jour les tiles des items
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> getItemsTile() throws StopRequestException {
 		checkInterruption();
@@ -502,46 +457,25 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return p;
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void calculeZoneAspect(AiZone zone) throws StopRequestException {
 		checkInterruption();
 	}
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean seCacher() throws StopRequestException{
 		checkInterruption();
 		return seCacher(false);
 	}
-	/**
+	/*
 	 * Chercher une case pour se cacher
-	 * @param poserBombe 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+	
 	public boolean seCacher(boolean poserBombe) throws StopRequestException {
 		checkInterruption();
 		AiTile petit = null;
 		boolean fuir = false;
 		int min = 10000, temp, i, j;
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) // adjustment
+		for (j = 0; j < 15; j++)
 		{	checkInterruption();
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (i = 0; i < 17; i++)
 			{	checkInterruption();
 				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant,this))
 					if ( this.timeMatrice.getTime(i,j)==0) {//bulacakkkk
@@ -558,16 +492,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		this.caseTarget = petit;
 		return fuir;
 	}
-	/**
+	/*
 	 * Regarde si il existe un danger sur le chemin chosit
-	 * @param target 
-	 * 		Description manquante !
-	 * @param placerBombe 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) throws StopRequestException {
 		checkInterruption();
@@ -588,12 +514,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 		return flag;
 	}
 
-	/**
+	/*
 	 * Regarde si nous sommes arrive a la case cible
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public boolean estCaseCible() throws StopRequestException {
 		checkInterruption();
@@ -605,27 +527,19 @@ public class DemiragSagar extends ArtificialIntelligence {
 
 	}
 
-	/**
+	/*
 	 * Compte les nombres des SoftWalls restant
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public int FindSoftWallNumber() throws StopRequestException {
 		checkInterruption();
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;
-//		for (int i = 0; i < 15; i++)
-		for (int i = 0; i < zone.getWidth(); i++) //adjustment
+		for (int i = 0; i < 15; i++)
 		{	checkInterruption();
-//			for (int j = 0; j < 17; j++)
-			for (int j = 0; j < zone.getHeight(); j++) //adjustment
+			for (int j = 0; j < 17; j++)
 			{	checkInterruption();
-//				if (mat[j][i] == -1) { 
-				if (mat[i][j] == -1) { //adjustment
-//					AiTile temp = this.zone.getTile(i, j);
-					AiTile temp = this.zone.getTile(j, i); //adjustment
+				if (mat[j][i] == -1) {
+					AiTile temp = this.zone.getTile(i, j);
 					if (!temp.getBlock().isDestructible())
 						sommeHardWall++;
 				}

@@ -19,12 +19,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author AnÄ±l Ã‡alÄ±ÅŸkan
- * @author FahrÄ± Cap
- * @author Sedat DoÄŸaner
+ * @author Anil Çaliskan
+ * @author Fahri Cap
+ * @author Sedat Doganer
  *
  */
-@SuppressWarnings("deprecation")
 public class CaliskanCapDoganer extends ArtificialIntelligence
 {
 	/*
@@ -33,18 +32,14 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		return result;
 	}*/
 	/*private boolean secondMoveAfterBomb;*/
-	/** la case occupÃ©e actuellement par le personnage*/
+	/** la case occupée actuellement par le personnage*/
 	private AiTile bombedTile = null;
-	/** */
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
-	/** la derniÃ¨re case par laquelle on est passÃ© */ 
+	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
-	/** */
 	private static int i=1;
-
-	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -59,7 +54,7 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		}
 		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
 		else if(ownHero != null)
-		{	// on met Ã  jour la position de l'ia dans la zone
+		{	// on met à jour la position de l'ia dans la zone
 			i++;
 			currentTile = ownHero.getTile();
 			
@@ -67,19 +62,19 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 			if(nextTile == null)
 				init();
 			
-			// arrivÃ© Ã  destination : on choisit une nouvelle destination
+			// arrivé à destination : on choisit une nouvelle destination
 			if(currentTile == nextTile)
 				pickNextTile();
-			// au cas ou quelqu'un prendrait le ContrÃ´le manuel du personnage
+			// au cas ou quelqu'un prendrait le contrôle manuel du personnage
 			else if(previousTile != currentTile)
 			{	previousTile = currentTile;
 				pickNextTile();			
 			}
-			// sinon (on garde la mÃªme direction) on vÃ©rifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
+			// sinon (on garde la même direction) on vérifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
 			else
 				checkNextTile();
 			
-			// on calcule la direction Ã  prendre
+			// on calcule la direction à prendre
 			Direction direction = getPercepts().getDirection(currentTile,nextTile);
 	
 			// on calcule l'action
@@ -89,11 +84,6 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		return result;
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -102,11 +92,10 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Choisit comme destination une case voisine de la case actuellement occupÃ©e par l'IA.
-	 * Cette case doit Ãªtre accessible (pas de mur ou de bombe ou autre obstacle) et doit
-	 * Ãªtre diffÃ©rente de la case prÃ©cÃ©demment occupÃ©e
+	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
+	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
+	 * être différente de la case précédemment occupée
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private void pickNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -114,7 +103,7 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		// liste des cases voisines accessibles	
 		List<AiTile> tiles = getClearNeighbors(currentTile);
 		
-		// on sort de la liste la case d'oÃ¹ l'on vient (pour Ã©viter de repasser au mÃªme endroit)
+		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 		boolean canGoBack = false;
 		if(tiles.contains(previousTile))
 		{	tiles.remove(previousTile);
@@ -122,8 +111,8 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		}
 		// s'il reste des cases dans la liste
 		if(tiles.size() > 0)
-		{	// si la liste contient la case situÃ©e dans la direction dÃ©placement prÃ©cedente,
-			// on Ã©vite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
+		{	// si la liste contient la case située dans la direction déplacement précedente,
+			// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
 			AiTile tempTile = null;
 			Direction dir = getPercepts().getDirection(previousTile,currentTile);
 			if(dir != Direction.NONE)
@@ -143,7 +132,7 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 						
 				previousTile = currentTile;
 			}
-			// sinon (pas le choix) on continue dans la mÃªme direction
+			// sinon (pas le choix) on continue dans la même direction
 			else
 			{	nextTile = tempTile;
 				if (!CheckAvailability())
@@ -157,7 +146,7 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 				previousTile = currentTile;
 			}
 		}
-		// sinon (pas le choix) on tente de revenir en arriÃ¨re
+		// sinon (pas le choix) on tente de revenir en arrière
 		else
 		{	if(canGoBack)
 			{	nextTile = previousTile;
@@ -167,19 +156,10 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		}
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de rÃ©fÃ©rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -194,15 +174,6 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -214,11 +185,6 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -226,7 +192,7 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
 			List<AiTile> tiles = getClearNeighbors(currentTile);
-			// on sort l'ancienne destination (qui est maintenant bloquÃ©e) de la liste
+			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
 			// s'il reste des cases dans la liste : on en tire une au hasard
@@ -239,13 +205,6 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean CheckAvailability() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		

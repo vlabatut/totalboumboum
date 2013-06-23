@@ -6,43 +6,27 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.*;
 import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
 import org.totalboumboum.engine.content.feature.Direction;
-
-/**
- * @author Burcu KantarcÄ±
- * @author AyÃ§a TaÅŸkÄ±n
- */
-@SuppressWarnings("deprecation")
 public class MatrixCalculator
 {
 	
-	/** La classe qui calcule les matrice en mode collect et en mode attaque */
+	/**
+	 * La classe qui calcule les matrice en mode collect et en mode attaque
+	 * 
+	 * */
 	//Les contantes
-	/** */
 	int BOMB = -400;
-	/** */
 	int FIRE = -200;
-	/** */
 	int BLAST = -100;
-	/** */
 	int WALL = 10;
-	/** */
 	int ENEMY1 = -20;
-	/** */
 	int BONUS_COLLECT = 20;
-	/** */
 	int BONUS_ATTACK = 5;
-	/** */
 	int ENEMY2= 100;
-	/** */
 	int ENEMY_ATTACK= 100;
-	/** */
 	int mode;
 	//LEs percepts
-	/** */
 	ArtificialIntelligence ai;
-	/** */
 	AiZone zone;
-	/** */
 	Move move;
 	
 	
@@ -55,10 +39,8 @@ public class MatrixCalculator
 	 * 		la mode de l'hero
 	 * @param ai
 	 * 		AI	 * 
-	 * @param move 
-	 * 		description manquante !
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public MatrixCalculator(AiZone zone, int mode, ArtificialIntelligence ai, Move move) throws StopRequestException
 	{
@@ -73,8 +55,9 @@ public class MatrixCalculator
 	/**
 	 * Initialise la matrice puis ajoute les valeurs des item qui se trouve dans le jeu
 	 * 
+	 * @return matrix
+	 * 		la matrice numerique qui represent la zone du jeu
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public void matrixConstruction () throws StopRequestException
 	{
@@ -104,7 +87,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public void wallEffect(double[][] matrix) throws StopRequestException
 	{
@@ -169,7 +152,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public void heroEffect(double[][] matrix) throws StopRequestException
 	{
@@ -249,7 +232,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public void bombEffect(double[][] matrix) throws StopRequestException
 	{
@@ -283,11 +266,10 @@ public class MatrixCalculator
 	 * Calcule le temps d'explosion estime d'une bombe
 	 * 
 	 * @param bomb
-	 * 		la bombe dont le temps d'explosion est calculÃ©
+	 * 		la bombe dont le temps d'explosion est calculé
 	 * @return resutl
-	 * 		le temps d'explosion estimÃ©
+	 * 		le temps d'explosion estimé
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public double tempExplosion (AiBomb bomb) throws StopRequestException
 	{
@@ -308,7 +290,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public void bonusEffect(double[][] matrix) throws StopRequestException 
 	{
@@ -350,7 +332,7 @@ public class MatrixCalculator
 	 * @param matrix
 	 * 		la matrice representant la zone du jeu
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public void fireEffect(double[][] matrix) throws StopRequestException
 	{
@@ -367,14 +349,16 @@ public class MatrixCalculator
 	}
 
 	/**
-	 * Donne la valeur envoyÃ© Ã  la case qu'on indique
+	 * Donne la valeur envoyé à la case qu'on indique
 	 * 
 	 * @param item
 	 * 		l'item, prorietaire de valeur
 	 * @param valeur
-	 * 		valeur calculÃ© de cette cas
+	 * 		valeur calculé de cette cas
+	 * @param matrix
+	 * 		matrice representant la zone du jeu 
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 *
 	 * */
 	public void setDefItemValeurs(AiTile item, int valeur) throws StopRequestException
 	{

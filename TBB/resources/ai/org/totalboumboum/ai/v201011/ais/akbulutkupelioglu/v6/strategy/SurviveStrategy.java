@@ -6,21 +6,17 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 
 /**
  * A survive strategy, used to survive.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class SurviveStrategy extends Strategy
 {
-	/** */
+
 	Strategy lastStrategy = null;
-	
 	/**
 	 * Creates a new SurviveStrategy instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */	
 	public SurviveStrategy(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -34,7 +30,6 @@ public class SurviveStrategy extends Strategy
 	 * Gets the last active strategy before this AI switched to this strategy.
 	 * @return The last actvie strategy.
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 */
 	public Strategy getLastStrategy() throws StopRequestException
 	{
@@ -46,7 +41,6 @@ public class SurviveStrategy extends Strategy
 	 * Sets the lastStrategy field, to let the AI return to it upon completion of this strategy.
 	 * @param lastStrategy The current strategy.
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 */
 	public void setLastStrategy(Strategy lastStrategy) throws StopRequestException
 	{

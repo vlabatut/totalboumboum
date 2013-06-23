@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.match;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,10 +32,8 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -88,8 +86,8 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_TITLE,false);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
-					ln.setLabelForeground(col,GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// minus button
@@ -98,16 +96,16 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 				// value
-				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiSizeTools.subPanelMargin;
+				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
-					ln.setLabelForeground(col,GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
 				// plus button
@@ -116,7 +114,7 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 			}
@@ -132,8 +130,8 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_TITLE,false);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
-					ln.setLabelForeground(col,GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// minus button
@@ -142,16 +140,16 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 				// value
-				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiSizeTools.subPanelMargin;
+				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiTools.subPanelMargin;
 					ln.setLabelMinWidth(col,valueWidth);
 					ln.setLabelPrefWidth(col,valueWidth);
 					ln.setLabelMaxWidth(col,valueWidth);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
-					ln.setLabelForeground(col,GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
 				// plus button
@@ -160,7 +158,7 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
-					ln.setLabelBackground(col,GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 			}
@@ -220,12 +218,12 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 	{	// set colors
 		Color hbg,dbg;
 		if(quickMatchConfiguration.getLimitPoints()<=0 && quickMatchConfiguration.getLimitRounds()<=0)
-		{	hbg = GuiColorTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
-			dbg = GuiColorTools.COLOR_TABLE_SELECTED_BACKGROUND;
+		{	hbg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
+			dbg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 		}
 		else
-		{	hbg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
-			dbg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		{	hbg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			dbg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 		}
 		// set background
 		Line line = getLine(LINE_LIMIT_POINTS);

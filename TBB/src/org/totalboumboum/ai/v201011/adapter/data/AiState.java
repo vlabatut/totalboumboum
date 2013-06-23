@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,16 +25,14 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * dÃ©crit un Ã©tat dans lequel un sprite peut se trouver, c'est
- * Ã  dire essentiellement l'action que le sprite rÃ©alise ou qu'il subit.
- * Cet Ã©tat est dÃ©crit par le nom de cette action, et Ã©ventuellement la
- * direction dans laquelle elle est effectuÃ©e (pour les actions orientÃ©es
- * comme le dÃ©placement, par exemple).
+ * Décrit un état dans lequel un sprite peut se trouver, c'est
+ * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
+ * Cet état est décrit par le nom de cette action, et éventuellement la
+ * direction dans laquelle elle est effectuée (pour les actions orientées
+ * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public interface AiState
 {
@@ -42,10 +40,10 @@ public interface AiState
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le nom associÃ© Ã  l'Ã©tat
+	 * renvoie le nom associé à l'état
 	 * 
 	 * @return	
-	 * 		nom associÃ© Ã  l'Ã©tat
+	 * 		nom associé à l'état
 	 */
 	public AiStateName getName();
 	
@@ -53,11 +51,11 @@ public interface AiState
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la direction associÃ©e Ã  l'Ã©tat,
-	 * qui peut Ãªtre NONE, c'est Ã  dire : l'Ã©tat n'est pas orientÃ©
+	 * renvoie la direction associée à l'état,
+	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
 	 * 
 	 * @return	
-	 * 		direction associÃ©e Ã  l'Ã©tat
+	 * 		direction associée à l'état
 	 */
 	public Direction getDirection();
 
@@ -65,10 +63,10 @@ public interface AiState
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la durÃ©e que le sprite a passÃ© dans l'Ã©tat courant
+	 * renvoie la durée que le sprite a passé dans l'état courant
 	 * 
 	 * @return	
-	 * 		une durÃ©e exprimÃ©e en ms
+	 * 		une durée exprimée en ms
 	 */
 	public long getTime();
 }

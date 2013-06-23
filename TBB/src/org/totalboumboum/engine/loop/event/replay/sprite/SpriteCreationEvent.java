@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop.event.replay.sprite;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,12 +35,12 @@ public class SpriteCreationEvent extends SpriteEvent
 {	private static final long serialVersionUID = 1L;
 
 /*
-	public SpriteCreationEvent(int id, long time, String name, Role role, int row, int col)
+	public SpriteCreationEvent(int id, long time, String name, Role role, int line, int col)
 	{	this.id = id;
 		this.time = time;
 		this.name = name;
 		this.role = role;
-		this.row = row;
+		this.line = line;
 		this.col = col;
 	}
 */
@@ -58,7 +58,7 @@ public class SpriteCreationEvent extends SpriteEvent
 		
 		// location
 		Tile tile = sprite.getTile();
-		this.row = tile.getRow();
+		this.line = tile.getLine();
 		this.col = tile.getCol();
 		
 		// send event
@@ -95,11 +95,11 @@ public class SpriteCreationEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int row;
+	private int line;
 	private int col;
 	
-	public int getRow()
-	{	return row;
+	public int getLine()
+	{	return line;
 	}
 
 	public int getCol()
@@ -112,7 +112,7 @@ public class SpriteCreationEvent extends SpriteEvent
 	public String toString()
 	{	String result = "SpriteCreationEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		result = result + name + " [" + color + "," + role + "] ";
-		result = result + "@(" + row + "," + col + ")";
+		result = result + "@(" + line + "," + col + ")";
 		return result;
 	}
 }

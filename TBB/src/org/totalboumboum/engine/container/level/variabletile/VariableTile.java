@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.variabletile;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -99,7 +99,6 @@ public class VariableTile implements Serializable
 	 * respect of the probability distribution, by monitoring the generated values, but the resulting 
 	 * zone is always the same ! So a mixture of these two methods is used : half the values are 
 	 * generated completely randomly, and the rest is generated in a controlled way. 
-	 * 
 	 * @return	a value generated randomly
 	 */
 	public ValueTile getNext()

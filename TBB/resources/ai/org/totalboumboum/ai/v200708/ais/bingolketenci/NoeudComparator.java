@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Gizem Bing√∂l
- * @author Utku G√∂rkem Kentenci
+ * @author Gizem Bingol
+ * @author Utku Gorkem Kentenci
  *
  */
 public class NoeudComparator implements Comparator<Noeud> {
@@ -26,9 +26,9 @@ public class NoeudComparator implements Comparator<Noeud> {
 	}
 
 	/**
-	 * Retourne une valeur servant √† comparer les noeuds.
+	 * Retourne une valeur servant ‡ comparer les noeuds.
 	 * On fait la somme de l'heuristique et le cout de chaque noeud.
-	 * On compare ces valeurs et on tourne une valeur n√©gative si le premier a un plus petit valeur,
+	 * On compare ces valeurs et on tourne une valeur nÈgative si le premier a un plus petit valeur,
 	 * une valeur positive si le premier a une plus grande valeur
 	 * @param noeud1 
 	 *            noeud qu'on va comparer
@@ -41,7 +41,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 		//  Auto-generated method stub
 		int resultat;
 	//somme de l'heuristique et du cout pour chaque noeud
-	//on va utiliser pour l'algorithme de A_√©toile
+	//on va utiliser pour l'algorithme de A_Ètoile
 	int n_1=noeud1.getHeuristic(goal)+  noeud1.getCout();
 	int n_2=noeud2.getHeuristic(goal)+  noeud2.getCout();
 	

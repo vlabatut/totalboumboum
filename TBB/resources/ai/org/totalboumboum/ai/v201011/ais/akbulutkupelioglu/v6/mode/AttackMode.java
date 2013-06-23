@@ -28,28 +28,17 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * The class representing the attack mode. This class is responsible for matrix
  * calculation in attack mode, as well as the strategies.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class AttackMode extends Mode
 {
-	/** */
+
 	private final int ENEMY_VALUE = 50;
-	/** */
 	private final int UNREACHABLE_ENEMY_VALUE = 200;
 
-	/** */
 	private static AttackMode instance = null;
 	
-	/**
-	 * 
-	 * @param ia
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private AttackMode(AkbulutKupelioglu ia) throws StopRequestException
 	{
 		ia.checkInterruption();
@@ -65,7 +54,6 @@ public class AttackMode extends Mode
 	 * @param ia AkbulutKupelioglu using this.
 	 * @return The AttackMode instance.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static AttackMode getInstance(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -82,7 +70,6 @@ public class AttackMode extends Mode
 	 * Resets this mode, destroying the instance.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static void reset(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -118,13 +105,6 @@ public class AttackMode extends Mode
 		return getInterest();
 	}
 
-	/**
-	 * 
-	 * @param ownHero
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void processDestructibles(AiHero ownHero)
 			throws StopRequestException
 	{
@@ -145,13 +125,6 @@ public class AttackMode extends Mode
 		}
 	}
 
-	/**
-	 * 
-	 * @param ownHero
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void processBonus(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -168,13 +141,6 @@ public class AttackMode extends Mode
 		}
 	}
 
-	/**
-	 * 
-	 * @param ownHero
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void processEnemies(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();

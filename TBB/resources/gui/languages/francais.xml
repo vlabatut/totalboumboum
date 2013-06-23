@@ -2,25 +2,6 @@
 <language
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../schemas/language.xsd">
-<!-- 
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut 
-	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
 	
 	<group name="Menu" >
 <!-- MAIN MENU -->
@@ -427,7 +408,7 @@
 			</group>
 
 			<group name="Delete">
-				<text name="Question" value="Êtes-vous sûr(e) de vouloir supprimer ce profil ?" tooltip="Êtes-vous sûr de vouloir supprimer ce profil ?" />
+				<text name="Question" value="Êtes-vous sûr de vouloir supprimer ce profil ?" tooltip="Êtes-vous sûr de vouloir supprimer ce profil ?" />
 				<text name="Title" value="Suppression de profil" tooltip="Suppression de profil" />
 			</group>
 
@@ -537,11 +518,6 @@
 						<text name="Plus" value="Plus" tooltip="Augmenter la limite de temps" />
 					</group>			
 				</group>			
-				<group name="SuddenDeath">
-					<text name="Title" value="Mort subite" tooltip="Force la désactivation de la mort subite" />
-					<text name="Var" value="Normal" tooltip="La mort subite est activée si le niveau est prévu pour" />
-					<text name="Yok" value="Sans" tooltip="La mort subite est désactivée" />
-				</group>
 			</group>
 		</group>	
 
@@ -553,10 +529,6 @@
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au menu principal" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer et revoir la manche sélectionnée" />
 					<text name="Delete" value="Supprimer" tooltip="Supprimer le fichier sélectionné" />
-				</group>
-				<group name="Delete">
-					<text name="Title" value="Supprimession de vidéo" tooltip="Supprimession de vidéo" />
-					<text name="Question" value="Êtes-vous sûr(e) de vouloir supprimer cette vidéo ?" tooltip="Êtes-vous sûr(e) de vouloir supprimer cette vidéo ?" />
 				</group>
 			</group>
 			<group name="Controls">
@@ -588,13 +560,8 @@
 				<text name="Title" value="Charger une partie" tooltip="Charger une partie précédemment enregistrée" />
 				<group name="Button">
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au menu principal" />
-					<text name="Confirm" value="Jouer" tooltip="Charger la partie sélectionnée, pour la continuer" />
+					<text name="Confirm" value="Confirmer" tooltip="Confirmer et charger la partie sélectionnée" />
 					<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
-					<text name="Statistics" value="Statistiques" tooltip="Charger la partie sélectionnée, pour revoir ses statistiques" />
-				</group>
-				<group name="Delete">
-					<text name="Title" value="Supprimession de partie" tooltip="Supprimession de partie" />
-					<text name="Question" value="Êtes-vous sûr(e) de vouloir supprimer cette partie ?" tooltip="Êtes-vous sûr(e) de vouloir supprimer cette partie ?" />
 				</group>
 			</group>
 			<group name="Players">
@@ -714,8 +681,7 @@
 				<text name="Description" value="Description" tooltip="Voir la description de la rencontre courante" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="Finish" value="Finir" tooltip="Finir la rencontre courante et revenir au tournoi courant" />
-				<text name="NextRound" value="Manche suivante" tooltip="Commencer la manche suivante" />
-				<text name="PreviousRound" value="Manche précédente" tooltip="Revenir à la manche précédente" />
+				<text name="NextRound" value="Rencontre suivante" tooltip="Commencer la manche suivante" />
 				<text name="RecordGames" value="Enregistrement des manches" tooltip="Enregistrement des manches pour les revoir plus tard" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels de la rencontre courante" />
 				<text name="Save" value="Enregistrer" tooltip="Enregistrer la partie courante" />
@@ -738,10 +704,7 @@
 				<text name="CurrentMatch" value="Rencontre courante" tooltip="Aller à la rencontre courante" />
 				<text name="Description" value="Description" tooltip="Voir la description de la manche courante" />
 				<text name="Finish" value="Finir" tooltip="Finir la manche courante et revenir à la rencontre courante" />
-				<text name="NextMatch" value="Rencontre suivante" tooltip="Aller au match suivant" />
-				<text name="NextRound" value="Manche suivante" tooltip="Aller à la manche suivante" />
 				<text name="Play" value="Jouer" tooltip="Commencer à jouer" />
-				<text name="PreviousRound" value="Manche précédente" tooltip="Revenir à la manche précédente" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="RecordGames" value="Enregistrement des manches" tooltip="Enregistrement des manches pour les revoir plus tard" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats de la manche courante" />
@@ -838,27 +801,6 @@
 		<group name="Dialog">
 			<text name="Cancel" value="Annuler"  tooltip="Annuler l'opération et fermer cette fenêtre" />
 			<text name="Confirm" value="Confirmer"  tooltip="Confirmer l'opération et fermer cette fenêtre" />
-		</group>
-
-<!-- EVOLUTION -->
-		<group name="Evolution" >
-			<group name="Button">
-				<text name="Bombeds" value="Bombé" tooltip="Nombre de fois que le joueur a été éliminé" />
-				<text name="Bombings" value="Bombeur" tooltip="Nombre de fois que le joueur en a éliminé un autre" />
-				<text name="Bombs" value="Bombes" tooltip="Nombre de bombes posées" />
-				<text name="Crowns" value="Couronnes" tooltip="Nombre de couronnes ramassées" />
-				<text name="Items" value="Items" tooltip="Nombres d'items ramassés" />
-				<text name="Paintings" value="Peinture" tooltip="Nombre de cases peintes" />
-				<text name="Points" value="Points" tooltip="Nombre de points marqués" />
-				<text name="SelfBombings" value="Auto-bombages" tooltip="Nombre de fois que le joueur s'est auto-éliminé" />
-				<text name="Time" value="Temps" tooltip="Temps de jeu" />
-			</group>
-			<group name="Label">
-				<text name="Match" value="Rencontre" tooltip="Rencontres jouées" />
-				<text name="MatchPrefix" value="R" tooltip="Rencontre" />
-				<text name="Round" value="Manche" tooltip="Manches jouées" />
-				<text name="RoundPrefix" value="M" tooltip="Manche" />
-			</group>
 		</group>
 								
 <!-- GAME INFO -->

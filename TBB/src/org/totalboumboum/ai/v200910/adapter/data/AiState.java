@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,26 +26,25 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * dÃ©crit un Ã©tat dans lequel un sprite peut se trouver, c'est
- * Ã  dire essentiellement l'action que le sprite rÃ©alise ou qu'il subit.
- * Cet Ã©tat est dÃ©crit par le nom de cette action, et Ã©ventuellement la
- * direction dans laquelle elle est effectuÃ©e (pour les actions orientÃ©es
- * comme le dÃ©placement, par exemple).
+ * Décrit un état dans lequel un sprite peut se trouver, c'est
+ * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
+ * Cet état est décrit par le nom de cette action, et éventuellement la
+ * direction dans laquelle elle est effectuée (pour les actions orientées
+ * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
+
 public class AiState 
 {
-	/** sprite dont l'Ã©tat est reprÃ©sentÃ© */
+	/** sprite dont l'état est représenté */
 	private Sprite sprite;
 	
 	/**
-	 * construit un objet reprÃ©sentant l'Ã©tat du sprite passÃ© en paramÃ¨tre
+	 * construit un objet représentant l'état du sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite dont on veut reprÃ©senter l'Ã©tat
+	 * @param sprite	sprite dont on veut représenter l'état
 	 */
 	AiState(Sprite sprite)
 	{	this.sprite = sprite;
@@ -55,7 +54,7 @@ public class AiState
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met Ã  jour cet Ã©tat en fonction de l'Ã©volution du sprite de rÃ©fÃ©rence
+	 * met à jour cet état en fonction de l'évolution du sprite de référence
 	 */
 	void update()
 	{	// direction
@@ -68,22 +67,19 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associÃ©e Ã  l'Ã©tat */
+	/** nom associée à l'état */
 	private AiStateName name;
 	
 	
 	/**
-	 * renvoie le nom associÃ© Ã  l'Ã©tat
+	 * renvoie le nom associé à l'état
 	 * 
-	 * @return	nom associÃ© Ã  l'Ã©tat
+	 * @return	nom associé à l'état
 	 */
 	public AiStateName getName()
 	{	return name;
 	}
 	
-	/**
-	 *
-	 */
 	void setEnded()
 	{	name = AiStateName.ENDED;		
 	}
@@ -91,14 +87,14 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associÃ©e Ã  l'Ã©tat (peut Ãªtre NONE, c'est Ã  dire : l'Ã©tat n'est pas orientÃ©) */
+	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
 	private Direction direction;
 	
 	/**
-	 * renvoie la direction associÃ©e Ã  l'Ã©tat,
-	 * qui peut Ãªtre NONE, c'est Ã  dire : l'Ã©tat n'est pas orientÃ©
+	 * renvoie la direction associée à l'état,
+	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
 	 * 
-	 * @return	direction associÃ©e Ã  l'Ã©tat
+	 * @return	direction associée à l'état
 	 */
 	public Direction getDirection()
 	{	return direction;
@@ -136,7 +132,7 @@ public class AiState
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine cet objet et libÃ¨re les ressources occupÃ©es
+	 * termine cet objet et libère les ressources occupées
 	 */
 	void finish()
 	{	sprite = null;

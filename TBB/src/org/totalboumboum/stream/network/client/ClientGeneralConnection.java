@@ -2,7 +2,7 @@ package org.totalboumboum.stream.network.client;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -315,7 +315,7 @@ public class ClientGeneralConnection
 		for(ClientIndividualConnection connection: list)
 		{	if(connection.getGameInfo()==gameInfo)
 			{	activeConnection = connection;
-//TODO en fait Ã§a devrait Ãªtre une requÃªte, Ã  valider par le serveur...			
+//TODO en fait ça devrait être une requête, à valider par le serveur...			
 				connection.setState(ClientState.SELECTING_PLAYERS);
 				NetworkMessage message = new NetworkMessage(MessageName.ENTERING_PLAYERS_SELECTION,true);
 				connection.writeMessage(message);

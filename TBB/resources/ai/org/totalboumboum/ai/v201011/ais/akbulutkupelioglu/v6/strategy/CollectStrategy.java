@@ -5,11 +5,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 
 /**
  * A collect strategy, used to destroy walls and search for bonus.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class CollectStrategy extends Strategy
 {
 
@@ -17,7 +15,6 @@ public class CollectStrategy extends Strategy
 	 * Creates a new CollectStrategy instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public CollectStrategy(AkbulutKupelioglu ia) throws StopRequestException
 	{

@@ -16,46 +16,25 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.TirtilTomruk;
 
 /**
 *
-* @author Abdullah Tırtıl
+* @author Abdullah Tirtil
 * @author Mert Tomruk
 *
 */
-@SuppressWarnings("deprecation")
 public class Zone {
-	/** Une personnalisation generale du AiZone */
+	// Une personnalisation generale du AiZone
 	private AiZone zone;
-	/** */
 	private Collection<AiHero> rivals;
-	/** */
 	private AiHero caractere;
-	/** */
 	private Collection<AiBomb> bombes;
-	/** */
 	private Collection<AiBlock> blocs;
-	/** */
 	private Collection<AiItem> objets;
-	/** */
 	private Collection<AiFire> feus;
-	/** */
 	private int xMax;
-	/** */
 	private int yMax;
-	/** */
 	private ZoneEnum[][] zoneArray;
-	/** */
 	private TirtilTomruk source;
-	/** */
 	private int lastSimulatedBombExplodes;
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param source
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Zone(AiZone zone, TirtilTomruk source) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		this.source = source;
@@ -71,11 +50,6 @@ public class Zone {
 		init();
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		zoneArray = new ZoneEnum[xMax][yMax];
@@ -202,19 +176,11 @@ public class Zone {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		return zoneArray;
 	}
 
-	@Override
 	public String toString() {
 		String result = "";
 		for (int i = 0; i < yMax; i++) {
@@ -236,15 +202,6 @@ public class Zone {
 		 */
 	}
 
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public ZoneEnum[][] simulateBomb(AiTile bomb) throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
 		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeight()];
@@ -325,11 +282,6 @@ public class Zone {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
 	public int getLastSimulatedBombExplodes() {
 		return lastSimulatedBombExplodes;
 	}

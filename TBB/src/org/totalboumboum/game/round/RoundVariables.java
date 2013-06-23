@@ -2,7 +2,7 @@ package org.totalboumboum.game.round;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -36,44 +36,30 @@ import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 
 /**
- * Sets of common variables
- * used when handling the current round.
- *  
+ * 
  * @author Vincent Labatut
+ *
  */
 public class RoundVariables
 {
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE PATH		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Location of the round instance */
 	public static Instance instance;
 	
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Level used in this round */
 	public static Level level;
-	/** Engine used to play the round */
 	public static VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SCALE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Zoom coefficient */
-	public static double zoomFactor = 1;
-	/** Tolerance value */
-	public static double toleranceCoefficient = GameData.TOLERANCE;
-	/** Dimension of a (scaled) tile */
-	public static double scaledTileDimension = GameData.STANDARD_TILE_DIMENSION;
+	public static double zoomFactor;
+	public static double toleranceCoefficient = 1;
+	public static double scaledTileDimension;
 
-	/**
-	 * Changes the zoom coefficient 
-	 * for the current round.
-	 * 
-	 * @param zoomFactor
-	 * 		New zoom coefficient.
-	 */
 	public static void setZoomFactor(double zoomFactor)
 	{	RoundVariables.zoomFactor = zoomFactor;
 		toleranceCoefficient = zoomFactor*GameData.TOLERANCE;
@@ -83,21 +69,13 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** File input stream for the network mode */
 	public static FileClientStream fileIn = null;
 
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** File output stream for the network mode */
 	public static FileServerStream fileOut = null;
 	
-	/**
-	 * Write a replay event in the output stream.
-	 * 
-	 * @param event
-	 * 		Replay event to be written.
-	 */
 	public static void writeEvent(ReplayEvent event)
 	{	if(fileOut!=null && event.getSendEvent())
 			fileOut.writeEvent(event);
@@ -108,27 +86,12 @@ public class RoundVariables
 		}
 	}
 
-	/**
-	 * Write a control event in the output stream.
-	 * 
-	 * @param event
-	 * 		Control event to be written.
-	 */
 	public static void writeEvent(RemotePlayerControlEvent event)
 	{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 		if(connection!=null)
 			connection.sendControl(event);
 	}
 	
-	/**
-	 * Write the zoom coefficient in the output stream.
-	 * 
-	 * @param zoomCoef
-	 * 		Zoom coefficient to be written.
-	 * 
-	 * @throws IOException
-	 * 		Problem while writing the zoom coefficient in the output stream.
-	 */
 	public static void writeZoomCoef(double zoomCoef) throws IOException
 	{	if(fileOut!=null)
 			fileOut.writeZoomCoef(zoomCoef);
@@ -138,14 +101,7 @@ public class RoundVariables
 		{	connection.updateZoomCoef(zoomCoef);
 		}
 	}
-	
-	/**
-	 * Changes the way events are filtered
-	 * before writing them in the output streams.
-	 *  
-	 * @param flag
-	 * 		The new filter flag.
-	 */
+
 	public static void setFilterEvents(boolean flag)
 	{	if(fileOut!=null)
 			fileOut.setFilterEvents(flag);
@@ -153,13 +109,6 @@ public class RoundVariables
 //NOTE NET			netServerOut.setFilterEvents(flag);
 	}
 
-	/**
-	 * Returns the way events are filtered
-	 * before writing them in the output streams.
-	 * 
-	 * @return
-	 * 		Current filter.
-	 */
 	public static boolean getFilterEvents()
 	{	boolean result = false;
 		if(fileOut!=null)

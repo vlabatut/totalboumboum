@@ -7,38 +7,26 @@ import java.util.Vector;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
- * ReprÃ©sente un arbre de recherche. Les noeuds sont liÃ©s avec des SearchLink
+ * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  *
  * @author Ekin Medeni
- * @author PÄ±nar Uluer
+ * @author Pinar Uluer
  *
  */
-@SuppressWarnings("deprecation")
 public class SearchTree {
 
-	/** ensemble des noeuds dans l'arbre */
+	// ensemble des noeuds dans l'arbre
 	private Vector<SearchNode> nodes;
-	/** ensemble des liens dans l'arbre */
+	// ensemble des liens dans l'arbre
 	private Vector<SearchLink> links;
 
-	/** dernier noeud traitÃ© lors de la recherche */
+	// dernier noeud traité lors de la recherche
 	@SuppressWarnings("unused")
 	private SearchNode lastNode;
-	/** */
 	private SearchNode firstNode;
-	/** */
 	private MedeniUluer mu;
 	
-	/**
-	 * 
-	 * @param courant
-	 * 		Description manquante !
-	 * @param mu
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public SearchTree(SearchNode courant,MedeniUluer mu ) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
 		this.mu = mu;
@@ -49,7 +37,6 @@ public class SearchTree {
 	/**
 	 * Initialise l'arbre
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void init() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -65,7 +52,6 @@ public class SearchTree {
 	 * 
 	 * @return la racine de l'arbre de recherche
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public SearchNode getRoot() throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -73,33 +59,31 @@ public class SearchTree {
 	}
 
 	/**
-	 * Ajoute un noeud Ã  l'arbre
+	 * Ajoute un noeud à l'arbre
 	 * 
 	 * @param pere
 	 *            le pere du noeud qu'on va ajouter
 	 * @param fils
 	 *            le noeud qu'on ajoute
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void addSearchNode(SearchNode pere, SearchNode fils) throws StopRequestException { // on cree un lien entre le
 													// pere et le fils
 		mu.checkInterruption(); //Appel Obligatoire
 		SearchLink link = new SearchLink(pere, fils,mu);
-		// on ajoute le lien Ã  l'arbre,on appelle la methode addLink qui
+		// on ajoute le lien à l'arbre,on appelle la methode addLink qui
 		// lui-meme ajoute le noeud
 		addLink(link);
 
 	}
 
 	/**
-	 * dÃ©termine si l'arbre contient le noeud passÃ© en paramÃ¨tre.
+	 * Détermine si l'arbre contient le noeud passé en paramètre.
 	 * 
 	 * @param node
-	 *            le noeud Ã  rechercher
+	 *            le noeud à rechercher
 	 * @return vrai si l'arbre contient le noeud
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public synchronized boolean containsNode(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -114,13 +98,13 @@ public class SearchTree {
 	}
 
 	/**
-	 * Renvoie le lien liant le noeud passÃ© en paramÃ¨tre Ã  son pÃ¨re.
+	 * Renvoie le lien liant le noeud passé en paramètre à son père.
 	 * 
 	 * @param node
-	 *            le noeud Ã  traiter
+	 *            le noeud à traiter
 	 * @return un lien contenant le noeud en position target
 	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * @throws AbsentNodeException
 	 */
 	public SearchLink getParentLink(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -139,13 +123,13 @@ public class SearchTree {
 	}
 
 	/**
-	 * Renvoie tous les liens partant du noeud passÃ© en paramÃ¨tre.
+	 * Renvoie tous les liens partant du noeud passé en paramètre.
 	 * 
 	 * @param node
-	 *            le noeud Ã  traiter
-	 * @return tous les liens oÃ¹ ce noeud est en position origin
+	 *            le noeud à traiter
+	 * @return tous les liens où ce noeud est en position origin
 	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * @throws AbsentNodeException
 	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(SearchNode node) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -162,14 +146,13 @@ public class SearchTree {
 	}
 
 	/**
-	 * Renvoie une sÃ©quence de noeuds reprÃ©sentant un chemin allant de la racine
-	 * au noeud passÃ© en paramÃ¨tre.
+	 * Renvoie une séquence de noeuds représentant un chemin allant de la racine
+	 * au noeud passé en paramètre.
 	 * 
 	 * @param node
-	 *            le noeud Ã  traiter
-	 * @return un vecteur de noeuds reprÃ©sentant le chemin depuis la racine
+	 *            le noeud à traiter
+	 * @return un vecteur de noeuds représentant le chemin depuis la racine
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public LinkedList<SearchNode> getPath(SearchNode node) throws StopRequestException { // la liste des noeuds qui
 													// se trouve sur le path
@@ -205,15 +188,14 @@ public class SearchTree {
 	}
 
 	/**
-	 * crÃ©e un nouveau lien dans l'arbre. Le noeud origin doit Ãªtre prÃ¨sent dans
-	 * le graphe. Le noeud target doit Ãªtre absent de l'arbre. Si le noeud
-	 * origin n'appartient pas au graphe. Si le noeud target appartient dÃ©jÃ  au
+	 * Crée un nouveau lien dans l'arbre. Le noeud origin doit être présent dans
+	 * le graphe. Le noeud target doit être absent de l'arbre. Si le noeud
+	 * origin n'appartient pas au graphe. Si le noeud target appartient déjà au
 	 * graphe.
 	 * 
 	 * @param link
-	 *            le lien Ã  rajouter dans l'arbre
+	 *            le lien à rajouter dans l'arbre
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void addLink(SearchLink link) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire
@@ -222,13 +204,12 @@ public class SearchTree {
 	}
 
 	/**
-	 * mÃ©thode utilisÃ©e par addLink pour des opÃ©rations devant Ãªtre effectuÃ©es
-	 * en mode synchronisÃ©.
+	 * Méthode utilisée par addLink pour des opérations devant être effectuées
+	 * en mode synchronisé.
 	 * 
 	 * @param link
-	 *            le lien Ã  ajouter
+	 *            le lien à ajouter
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private synchronized void addLinkSynch(SearchLink link) throws StopRequestException {
 		mu.checkInterruption(); //Appel Obligatoire

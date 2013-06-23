@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.zone;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -23,17 +23,13 @@ package org.totalboumboum.engine.container.level.zone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.totalboumboum.engine.container.level.variabletile.ValueTile;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
-import org.totalboumboum.game.round.RoundVariables;
 
 /**
  * 
@@ -85,27 +81,27 @@ public class Zone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<ZoneHollowTile> tiles = new ArrayList<ZoneHollowTile>();
+	private List<ZoneTile> tiles = new ArrayList<ZoneTile>();
 	
-	public void addTile(ZoneHollowTile tile)
+	public void addTile(ZoneTile tile)
 	{	tiles.add(tile);
 	}
 	
-	public void removeTile(ZoneHollowTile tile)
+	public void removeTile(ZoneTile tile)
 	{	tiles.remove(tile);
 	}
 	
-	public List<ZoneHollowTile> getTiles()
+	public List<ZoneTile> getTiles()
 	{	return tiles;
 	}
 	
-	public ZoneHollowTile getTile(int row, int col)
-	{	ZoneHollowTile result = null;
+	public ZoneTile getTile(int line, int col)
+	{	ZoneTile result = null;
 		
-		Iterator<ZoneHollowTile> it = tiles.iterator();
+		Iterator<ZoneTile> it = tiles.iterator();
 		while(result==null && it.hasNext())
-		{	ZoneHollowTile temp = it.next();
-			if(temp.getRow()==row && temp.getCol()==col)
+		{	ZoneTile temp = it.next();
+			if(temp.getLine()==line && temp.getCol()==col)
 				result = temp;
 		}
 		
@@ -113,146 +109,36 @@ public class Zone implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// EVENTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** List of modifications to be applied after the round has begun */
-	private HashMap<Long,List<ZoneHollowTile>> events = new HashMap<Long,List<ZoneHollowTile>>();
-	/** List of initialized events */
-	private HashMap<Long,List<ZoneTile>> eventsInit;
-
-	/** Indicates if the step times are relative to the total duration, or are fixed */
-	private boolean eventsRelative = false;
-	/** Indicates the total duration. Always used if the game is set to no limit. Otherwise, can be overriden by game settings */
-	private long eventsDuration = -1;
-		
-	/**
-	 * Indicates if the event times are relative
-	 * to the total duration (or not).
-	 * 
-	 * @return
-	 * 		Event times relative or not.
-	 */
-	public boolean isEventsRelative()
-	{	return eventsRelative;
-	}
-
-	/**
-	 * Change the fact the event times are relative
-	 * to the total duration (or not).
-	 * 
-	 * @param eventsRelative
-	 * 		New value.
-	 */
-	public void setEventsRelative(boolean eventsRelative)
-	{	this.eventsRelative = eventsRelative;
-	}
-
-	/**
-	 * Returns the total duration for
-	 * this game. Can be overriden by 
-	 * game settings, but is used to process
-	 * events times.
-	 * 
-	 * @return
-	 * 		Total duration (in ms).
-	 */
-	public long getEventsDuration()
-	{	return eventsDuration;
-	}
-
-	/**
-	 * Change the total duration.
-	 *  
-	 * @param eventsDuration
-	 * 		New total duration (in ms).
-	 */
-	public void setEventsDuration(long eventsDuration)
-	{	this.eventsDuration = eventsDuration;
-	}
-
-	/**
-	 * Add a new modification to the map.
-	 * 
-	 * @param time
-	 * 		Time of the modification.
-	 * @param tile
-	 * 		Nature of the modification.
-	 */
-	public void addEvent(Long time, ZoneHollowTile tile)
-	{	List<ZoneHollowTile> list = events.get(time);
-		if(list==null)
-		{	list = new ArrayList<ZoneHollowTile>();
-			events.put(time,list);
-		}
-		list.add(tile);
-	}
-
-	/**
-	 * Add a new modification to the map.
-	 * 
-	 * @param time
-	 * 		Time of the modification.
-	 * @param tiles
-	 * 		Nature of the modification.
-	 */
-	public void addEvents(Long time, List<ZoneHollowTile> tiles)
-	{	List<ZoneHollowTile> list = events.get(time);
-		if(list==null)
-		{	list = new ArrayList<ZoneHollowTile>();
-			events.put(time,list);
-		}
-		list.addAll(tiles);
-	}
-
-	/**
-	 * Used to disable sudden death, depending
-	 * on quickmatch configuration.
-	 */
-	public void resetSuddenDeath()
-	{	events.clear();
-	}
-	
-	/**
-	 * Returns the list of non-initialized sudden
-	 * death events.
-	 * 
-	 * @return
-	 * 		A list of {@link ZoneHollowTile}.
-	 */
-	public HashMap<Long, List<ZoneHollowTile>> getEvents()
-	{	return events;
-	}
-	
-	/**
-	 * Returns all remaining sudden death events.
-	 * 
-	 * @return
-	 * 		A map containing all remaining sudden death events.
-	 */
-	public HashMap<Long,List<ZoneTile>> getEventsInit()
-	{	return eventsInit;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// ZONE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Matrix representing the content of this zone */
-	private ZoneTile[][] matrix;
+	private List<String[][]> matrices;
 	
-	public ZoneTile[][] getMatrix()
-	{	return matrix;		
+	/**
+	 * 0: floors
+	 * 1: blocks
+	 * 2: items
+	 * 3: bombs
+	 * @return
+	 */
+	public List<String[][]> getMatrices()
+	{	return matrices;		
 	}
-	
-	public void makeMatrix(long timeLimit)
-	{	// init matrix
-		matrix = new ZoneTile[globalHeight][globalWidth];
+	public void makeMatrix()
+	{	// init
+		matrices = new ArrayList<String[][]>();
+		String[][] floors = new String[globalHeight][globalWidth];
+		String[][] blocks = new String[globalHeight][globalWidth];
+		String[][] items = new String[globalHeight][globalWidth];
+		String[][] bombs = new String[globalHeight][globalWidth];
 		for(int i=0;i<globalHeight;i++)
 		{	for(int j=0;j<globalWidth;j++)
-			{	matrix[i][j] = null;
+			{	floors[i][j] = null;
+	        	blocks[i][j] = null;
+	        	items[i][j] = null;
+	        	bombs[i][j] = null;
 			}
 		}
 		
-		// init variables
 		Iterator<Entry<String,VariableTile>> iter = variableTiles.entrySet().iterator();
 		while(iter.hasNext())
 		{	Entry<String,VariableTile> temp = iter.next();
@@ -260,110 +146,72 @@ public class Zone implements Serializable
 			value.init();
 		}
 		
-		// populate matrix
-    	Iterator<ZoneHollowTile> it = tiles.iterator();
+		// matrix
+    	Iterator<ZoneTile> it = tiles.iterator();
     	while(it.hasNext())
-    	{	ZoneHollowTile tile = it.next();
-    		ZoneTile instance = initTile(tile);
-        	matrix[instance.getRow()][instance.getCol()] = instance;
-    	}
-		
-    	// init events
-    	double factor = 1;
-		if(eventsRelative && timeLimit != Long.MAX_VALUE)
-			factor = timeLimit / (double)eventsDuration;
-    	//long maxTime = Collections.max(events.keySet());
-    	eventsInit = new HashMap<Long,List<ZoneTile>>();
-    	for(Entry<Long, List<ZoneHollowTile>> entry: events.entrySet())
-    	{	// get the step
-    		long time = Math.round(entry.getKey()*factor);
-    		List<ZoneHollowTile> list = entry.getValue();
-    		
-    		// init
-    		List<ZoneTile> listInit = new ArrayList<ZoneTile>();
-    		for(ZoneHollowTile tile: list)
-    		{	ZoneTile instance = initTile(tile);
-    			listInit.add(instance);
+    	{	String[] content = {null,null,null,null};
+    		ZoneTile tile = it.next();
+    		int col = tile.getCol();
+    		int line = tile.getLine();
+    		// constant parts
+    		content[0] = tile.getFloor();
+   			content[1] = tile.getBlock();
+   			content[2] = tile.getItem();     			
+   			content[3] = tile.getBomb();     			
+    		// variable part
+    		String name = tile.getVariable();
+    		if(name!=null)
+    		{	VariableTile vt = variableTiles.get(name);
+    			ValueTile vit = vt.getNext();
+    			String itm = vit.getItem();
+				String blck = vit.getBlock();
+				String flr = vit.getFloor();
+				String bmb = vit.getBomb();
+				if(content[0]==null)
+					content[0] = flr;
+				if(content[1]==null)
+					content[1] = blck;
+				if(content[2]==null)
+					content[2] = itm;
+				if(content[3]==null)
+					content[3] = bmb;
     		}
-    		eventsInit.put(time, listInit);
+    		// values
+			{	// floor
+				floors[line][col] = content[0];
+				// block
+				blocks[line][col] = content[1];
+				// item
+				items[line][col] = content[2];
+				// bomb
+				bombs[line][col] = content[3];
+    		}
     	}
+		
+		// result
+    	matrices.add(floors);
+    	matrices.add(blocks);
+    	matrices.add(items);
+    	matrices.add(bombs);
 	}
 	
-	private ZoneTile initTile(ZoneHollowTile tile)
-	{	// init instance tile
-		int col = tile.getCol();
-		int row = tile.getRow();
-		ZoneTile result = new ZoneTile(row, col);
-		
-		// constant parts
-		result.setFloor(tile.getFloor());
-		result.setBlock(tile.getBlock());
-		result.setItem(tile.getItem());
-		result.setBomb(tile.getBomb());
-		
-		// variable part
-		String name = tile.getVariable();
-		if(name!=null)
-		{	VariableTile vt = variableTiles.get(name);
-			ValueTile vit = vt.getNext();
-			String itm = vit.getItem();
-			String blck = vit.getBlock();
-			String flr = vit.getFloor();
-			String bmb = vit.getBomb();
-			if(result.getFloor()==null)
-				result.setFloor(flr);
-			if(result.getBlock()==null)
-				result.setBlock(blck);
-			if(result.getItem()==null)
-				result.setItem(itm);
-			if(result.getBomb()==null)
-				result.setBomb(bmb);
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Returns the number of items (both visible en hidden)
-	 * in this zone. Items appearing during the sudden death
-	 * are not counted.
-	 *  
-	 * @return
-	 * 		The numbers of items in this zone.
-	 */
 	public HashMap<String,Integer> getItemCount()
 	{	HashMap<String,Integer> result = new HashMap<String,Integer>();
-	
-		// matrix
+		String[][] matrix = matrices.get(2);
 		for(int i=0;i<globalHeight;i++)
 		{	for(int j=0;j<globalWidth;j++)
-			{	ZoneTile tile = matrix[i][j];
-				if(tile!=null)
-					updateItemCount(tile,result);
+			{	if(matrix[i][j]!=null)
+				{	int value;
+					if(result.containsKey(matrix[i][j]))
+					{	value = result.get(matrix[i][j]);
+						value ++;
+					}
+					else
+						value = 1;
+					result.put(matrix[i][j],value);
+				}
 			}
 		}
-		
-		// events
-//		for(List<ZoneTile> list: eventsInit.values())
-//    	{	for(ZoneTile tile: list)
-//	    	{	updateItemCount(tile,result);
-//	    	}
-//		}
-		
 		return result;
-	}
-	
-	private void updateItemCount(ZoneTile tile, HashMap<String,Integer> result)
-	{	String item = tile.getItem();
-		if(item!=null)
-		{	int value;
-			if(result.containsKey(item))
-			{	value = result.get(item);
-				value ++;
-			}
-			else
-				value = 1;
-			result.put(item,value);
-		}
 	}
 }

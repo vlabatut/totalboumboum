@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.players;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -47,15 +47,15 @@ public class PlayersLoader
 	{	
     	/* 
 		 * NOTE tester ici si le level est suffisamment grand
-		 * NOTE faut qu'il y ait au moins une config, Ã  dÃ©finir dans XSD
-		 * attention, le numÃ©ro des joueurs ne doit pas dÃ©passer maxPlayer-1
-		 * NOTE il faut tester qu'il y a bien autant de locations de que de players indiquÃ© dans la situation
+		 * NOTE faut qu'il y ait au moins une config, à définir dans XSD
+		 * attention, le numéro des joueurs ne doit pas dépasser maxPlayer-1
+		 * NOTE il faut tester qu'il y a bien autant de locations de que de players indiqué dans la situation
 		 */
 
 		/*
 		 * si le level ne supporte pas explicitement le nbre n de joueurs voulu,
-		 * on prend la config pour la taille au dessus, et on utilise les n premiÃ¨res
-		 * positions dÃ©finies
+		 * on prend la config pour la taille au dessus, et on utilise les n premières
+		 * positions définies
 		 */
 
     	// init
@@ -132,10 +132,10 @@ public class PlayersLoader
 		int col = Integer.valueOf(str);
 		result.setCol(col);
 		
-		// row
+		// line
 		str = root.getAttribute(XmlNames.LINE).getValue().trim();
-		int row = Integer.valueOf(str);
-		result.setRow(row);
+		int line = Integer.valueOf(str);
+		result.setLine(line);
     }
     
     @SuppressWarnings("unchecked")

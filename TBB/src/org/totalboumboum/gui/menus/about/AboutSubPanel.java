@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.about;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -38,10 +38,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.JTextComponent;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -49,11 +47,8 @@ import javax.swing.text.StyledDocument;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.dialog.inside.ModalDialogSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
@@ -83,71 +78,49 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 	
 	public void setContent(List<String> text)
 	{	// sizes
-		float fontSize = getTitleFontSize()*GuiFontTools.FONT_TEXT_RATIO;
-		int buttonsHeight = (int)(GuiFontTools.getPixelHeight(fontSize)/GuiFontTools.FONT_RATIO);
+		float fontSize = getTitleFontSize()*GuiTools.FONT_TEXT_RATIO;
+		int buttonsHeight = (int)(GuiTools.getPixelHeight(fontSize)/GuiTools.FONT_RATIO);
 		fontSize = fontSize*0.75f;
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		int textHeight = getDataHeight() - buttonsHeight - GuiSizeTools.subPanelMargin;
+		int textHeight = getDataHeight() - buttonsHeight - GuiTools.subPanelMargin;
 		
 		{	BoxLayout layout = new BoxLayout(getDataPanel(),BoxLayout.PAGE_AXIS); 
 			getDataPanel().setLayout(layout);
 		}
 		
 		// message
-		{	JTextComponent pane = null;
-			
-			boolean useJTextPane = false;
-			// for some reason, using a JTextPane is very slow
-			// (at least for the first call). couldn't find why.
-			if(useJTextPane)
-			{	JTextPane textPane = new JTextPane();
-				textPane.setEditable(false);
-				textPane.setHighlighter(null);
-				textPane.setOpaque(true);
-				//textPane.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-					
-				// styles
-				StyledDocument doc = textPane.getStyledDocument();
-				SimpleAttributeSet sa = new SimpleAttributeSet();
-				// alignment
-				StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
-				// font size
-				StyleConstants.setFontFamily(sa,"Courier");
-				StyleConstants.setFontSize(sa,font.getSize());
-				doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
-				// color
-				Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
-				StyleConstants.setForeground(sa,fg);
-				// set
-				doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
-				// text
-				try
-				{	doc.remove(0,doc.getLength());
-					for(String txt: text)
-						doc.insertString(doc.getLength(),txt+"\n",sa);
-				}
-				catch (BadLocationException e)
-				{	e.printStackTrace();
-				}
-				textPane.setCaretPosition(0);
-				pane = textPane;
-			}
-			// much faster when using a JTextArea instead of the JTextPane
-			else
-			{	JTextArea textArea = new JTextArea();
-				textArea.setEditable(false);
-				textArea.setHighlighter(null);
-				textArea.setOpaque(true);
-				textArea.setLineWrap(true);
-				textArea.setWrapStyleWord(true);
-				textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, font.getSize()));
+		{	JTextPane textPane = new JTextPane();
+			textPane.setEditable(false);
+			textPane.setHighlighter(null);
+			textPane.setOpaque(true);
+			textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+	
+			// styles
+			StyledDocument doc = textPane.getStyledDocument();
+			SimpleAttributeSet sa = new SimpleAttributeSet();
+			// alignment
+			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
+			// font size
+			StyleConstants.setFontFamily(sa,"Courier");
+			StyleConstants.setFontSize(sa,font.getSize());
+			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+			// color
+			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+			StyleConstants.setForeground(sa,fg);
+			// set
+			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+			// text
+			try
+			{	doc.remove(0,doc.getLength());
 				for(String txt: text)
-					textArea.append(txt+"\n");
-				textArea.setCaretPosition(0);
-				pane = textArea;
+					doc.insertString(doc.getLength(),txt+"\n",sa);
 			}
+			catch (BadLocationException e)
+			{	e.printStackTrace();
+			}
+			textPane.setCaretPosition(0);
 			
-			JScrollPane textPanel = new JScrollPane(pane);
+			JScrollPane textPanel = new JScrollPane(textPane);
 			textPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			Dimension dim = new Dimension(getDataWidth(),textHeight);
 			textPanel.setPreferredSize(dim);
@@ -156,7 +129,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 			getDataPanel().add(textPanel);		
 		}
 		
-		getDataPanel().add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)));
+		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 		
 		// buttons
 		{	// buttons panel

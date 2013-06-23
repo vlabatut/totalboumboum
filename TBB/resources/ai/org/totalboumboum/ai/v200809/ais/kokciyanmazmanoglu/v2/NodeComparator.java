@@ -4,30 +4,20 @@ import java.util.Comparator;
 
 /**
 *
-* @author Nadin Kökciyan
-* @author Hikmet Mazmanoğlu
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
 *
 */
 public class NodeComparator implements Comparator<Node>
 {
-	/** */
 	private Node start;
-	/** */
 	private Node end;
 	
-	/**
-	 * 
-	 * @param startNode
-	 * 		Description manquante !
-	 * @param endNode
-	 * 		Description manquante !
-	 */
 	public NodeComparator(Node startNode, Node endNode){
 		this.start = startNode;
 		this.end = endNode;
 	}
 	
-	@Override
 	public int compare(Node n1, Node n2)
 	{	int res = 0;
 		

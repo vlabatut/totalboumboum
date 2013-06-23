@@ -6,11 +6,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 
 /**
  * Represents a coordinate. A coordinate is a tile within the level, with a value associated to it.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class Coordinate
 {
 
@@ -33,7 +31,6 @@ public class Coordinate
 	 * @param y Column of the coordinate.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Coordinate(int x, int y, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -49,7 +46,6 @@ public class Coordinate
 	 * @param value Value of the coordinate.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Coordinate(int x, int y, int value, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -64,7 +60,6 @@ public class Coordinate
 	 * @param value Value of the coordinate.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Coordinate(AiTile tile, int value, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -79,7 +74,6 @@ public class Coordinate
 	 * @param tile The tile corresponding to the coordinate.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Coordinate(AiTile tile, AkbulutKupelioglu ia) throws StopRequestException
 	{

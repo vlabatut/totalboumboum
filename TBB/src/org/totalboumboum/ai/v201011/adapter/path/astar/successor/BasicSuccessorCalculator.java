@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.successor;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,19 +31,17 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.AstarNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * implÃ©ment la plus simple d'une fonction successeur : 
+ * implémentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
- * par le personnage considÃ©rÃ©.
- * Une version plus complexe et plus efficace consisterait Ã  utiliser la profondeur
- * du noeud de recherche pour calculer le temps nÃ©cessaire pour arriver jusqu'Ã  la case
- * courante, et Ã  vÃ©rifier qu'aucune bombe ne sera en train d'exploser dans les cases voisines
+ * par le personnage considéré.
+ * Une version plus complexe et plus efficace consisterait à utiliser la profondeur
+ * du noeud de recherche pour calculer le temps nécessaire pour arriver jusqu'à la case
+ * courante, et à vérifier qu'aucune bombe ne sera en train d'exploser dans les cases voisines
  * quand le joueur y sera. En d'autres termes, on peut calculer si le joueur a le temps
  * de passer sur une case avant qu'elle ne soit prise dans une explosion.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class BasicSuccessorCalculator extends SuccessorCalculator
 {
@@ -52,8 +50,8 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * fonction successeur la plus simple: on considÃ¨re les 4 cases voisines de la case courante,
-	 * en ne conservant que les cases que le personnage de rÃ©fÃ©rence peut traverser 
+	 * fonction successeur la plus simple: on considère les 4 cases voisines de la case courante,
+	 * en ne conservant que les cases que le personnage de référence peut traverser 
 	 * 
 	 * @param node	
 	 * 		le noeud de recherche courant

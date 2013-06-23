@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.video;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,7 +28,6 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -46,7 +45,6 @@ public class VideoConfigurationSaver
 	public static void saveVideoConfiguration(VideoConfiguration videoConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveVideoElement(videoConfiguration);	
-		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_VIDEO+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -57,27 +55,19 @@ public class VideoConfigurationSaver
 
 	private static Element saveVideoElement(VideoConfiguration videoConfiguration)
 	{	Element result = new Element(XmlNames.VIDEO); 
-		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-		
 		// full screen
 		Element fullScreenElement = saveFullScreenElement(videoConfiguration);
 		result.addContent(fullScreenElement);
-		
 		// smoothing
 		Element smoothingElement = saveSmoothGraphicsElement(videoConfiguration);
 		result.addContent(smoothingElement);
-		
 		// panel dimension
 		Element panelElement = savePanelDimensionElement(videoConfiguration);
 		result.addContent(panelElement);
-		
 		// border color
 		Element borderElement = saveBorderElement(videoConfiguration);
 		result.addContent(borderElement);
-		
+		//
 		return result;
 	}
 	

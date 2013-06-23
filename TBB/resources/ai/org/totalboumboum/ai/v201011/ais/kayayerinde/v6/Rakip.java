@@ -9,33 +9,17 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings("deprecation")
+
+
 public class Rakip {
-	/** */
 	private KayaYerinde onder;
-	/** */
 	private Matris matris;
-	/** */
 	private Astar astar;
-	/** */
 	private boolean kaciyor;
-	/** */
-//	private boolean yaz;
+	private boolean yaz;
 	
-	/** */
 	int i=0;
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Rakip(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -43,26 +27,12 @@ public class Rakip {
 		astar=new Astar(onder);
 	}
 	
-	/**
-	 * 
-	 * @param matris
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -73,8 +43,8 @@ public class Rakip {
 		if(rivals.contains(onder.getOwnHero().getTile()))
 			if(incele())
 			{
-//				if(yaz)
-//					System.out.println("rakipte bomba bıraktı "+onder.getOwnHero().getTile());
+				if(yaz)
+					System.out.println("rakipte bomba bıraktı "+onder.getOwnHero().getTile());
 				if(onder.getOwnHero().getTile().getBombs().size()==0)
 					return new AiAction(AiActionName.DROP_BOMB);
 			}
@@ -105,13 +75,7 @@ public class Rakip {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+	
 	private boolean incele() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -175,4 +139,5 @@ public class Rakip {
 		matris.Undo();
 		return false;
 	}
+
 }

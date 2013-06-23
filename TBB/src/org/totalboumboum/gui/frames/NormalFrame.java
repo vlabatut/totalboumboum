@@ -2,7 +2,7 @@ package org.totalboumboum.gui.frames;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,9 +21,7 @@ package org.totalboumboum.gui.frames;
  * 
  */
 
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.RepaintManager;
 import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,7 +38,6 @@ import org.xml.sax.SAXException;
 
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -75,7 +72,7 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	@SuppressWarnings("unused")
 	private void saveConfiguration()
-	{	// TODO en fait c'est la partie qu'il faut enregistrer, car la conf est d√©j√† enregistr√©e si elle a √©t√© modifi√©e
+	{	// TODO en fait c'est la partie qu'il faut enregistrer, car la conf est dÈj‡ enregistrÈe si elle a ÈtÈ modifiÈe
 		try
 		{	Configuration.saveConfiguration();
 		}
@@ -174,10 +171,6 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		JLayeredPane layeredPane = getLayeredPane();
 //		layeredPane.setLayout(new BoxLayout(layeredPane,BoxLayout.PAGE_AXIS));
 		layeredPane.add(modalDialogPanel,JLayeredPane.MODAL_LAYER);
-//JPanel panel = new JPanel();
-//panel.setBackground(Color.RED);
-//panel.add(new JLabel("32516546dsfjklm sdfoksd fosdk cmlwxck wmxlckopqsdfkqsojkfopdwjcvfmjdowopdwjcvpowj"));
-//layeredPane.add(panel);
 	}
 	
 	public void unsetModalDialog()

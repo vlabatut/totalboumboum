@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.statistics.players;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -34,12 +34,8 @@ import javax.swing.JToggleButton;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -65,26 +61,26 @@ public class PlayerStatisticsMenu extends InnerMenuPanel
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiSizeTools.buttonTextHeight;
+		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON);
-		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
 	    ButtonGroup group = new ButtonGroup();
-	    buttonGlicko2 = GuiButtonTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2,buttonWidth,buttonHeight,fontSize,this);
+	    buttonGlicko2 = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2,buttonWidth,buttonHeight,fontSize,this);
 	    buttonGlicko2.setSelected(true);
 	    group.add(buttonGlicko2);
-		buttonScores = GuiButtonTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES,buttonWidth,buttonHeight,fontSize,this);
+		buttonScores = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES,buttonWidth,buttonHeight,fontSize,this);
 	    group.add(buttonScores);
-		buttonConfrontations = GuiButtonTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfrontations = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS,buttonWidth,buttonHeight,fontSize,this);
 	    group.add(buttonConfrontations);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());
 
 		// panels

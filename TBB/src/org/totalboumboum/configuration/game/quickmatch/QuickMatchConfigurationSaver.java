@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.game.quickmatch;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.configuration.profiles.ProfilesSelectionSaver;
@@ -47,7 +46,6 @@ public class QuickMatchConfigurationSaver
 	public static void saveQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveGameQuickMatchElement(quickMatchConfiguration);	
-		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_GAME_QUICKMATCH+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -59,10 +57,6 @@ public class QuickMatchConfigurationSaver
 	private static Element saveGameQuickMatchElement(QuickMatchConfiguration quickMatchConfiguration)
 	{	Element result = new Element(XmlNames.GAME_QUICKMATCH); 
 		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-	
 		// options
 		Element optionsElement = saveQuickMatchOptionsElement(quickMatchConfiguration);
 		result.addContent(optionsElement);
@@ -155,13 +149,6 @@ public class QuickMatchConfigurationSaver
 				String points = Integer.toString(values.get(r));
 				valueElement.setAttribute(XmlNames.POINTS,points);
 			}
-		}
-		// sudden death
-		{	Element suddenDeathElement = new Element(XmlNames.SUDDEN_DEATH);
-			result.addContent(suddenDeathElement);
-			// disabled
-			String disabled = Boolean.toString(quickMatchConfiguration.getSuddenDeathDisabled());
-			suddenDeathElement.setAttribute(XmlNames.DISABLED,disabled);
 		}
 
 		return result;

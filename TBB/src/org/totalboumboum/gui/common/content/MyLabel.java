@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,9 +31,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
@@ -73,8 +72,8 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Sets a label's icon or text. For an icon, the label preferred size
-	 * <b>must be set before</b> calling this method.
+	 * set a label's icon or text. for an icon, the label's PREFERRED SIZE
+	 * MUST BE SET before calling this method.
 	 * @param label
 	 * @param key
 	 * @param imageFlag
@@ -83,7 +82,7 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
-		{	BufferedImage icon = GuiImageTools.getIcon(key);
+		{	BufferedImage icon = GuiTools.getIcon(key);
 			setIcon(icon,tooltip);		
 		}
 		// if not : use text
@@ -97,10 +96,7 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	{	ImageIcon icn = null;
 		if(icon!=null)
 		{	int h = getPreferredSize().height;
-			double zoomH = h/(double)icon.getHeight();
-			int w = getPreferredSize().width;
-			double zoomW = w/(double)icon.getWidth();
-			double zoom = Math.min(zoomH, zoomW);
+			double zoom = h/(double)icon.getHeight();
 			icon = ImageTools.getResizedImage(icon,zoom,true);
 			icn = new ImageIcon(icon);
 		}
@@ -130,7 +126,7 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	@Override
 	public void setBackground(Color background)
 	{	originalBackground = background;
-		darkerBackground = GuiColorTools.changeColorAlpha(background,GuiColorTools.ALPHA_DARKER_CHANGE);
+		darkerBackground = GuiTools.changeColorAlpha(background,GuiTools.ALPHA_DARKER_CHANGE);
 		switchBackground(darkSwitch);
 	}
 	

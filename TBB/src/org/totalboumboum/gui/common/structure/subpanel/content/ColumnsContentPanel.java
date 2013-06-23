@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,8 +30,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -43,7 +42,7 @@ public class ColumnsContentPanel extends ContentPanel
 
 	public ColumnsContentPanel(int width, int height, int cols)
 	{	super(width,height);
-//		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+//		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		setOpaque(false);
 		
 		// layout
@@ -86,7 +85,7 @@ public class ColumnsContentPanel extends ContentPanel
 		{	colWidth = width;			
 		}
 		else
-		{	colWidth = (int)((width - (cols-1)*GuiSizeTools.subPanelMargin)/((float)cols));
+		{	colWidth = (int)((width - (cols-1)*GuiTools.subPanelMargin)/((float)cols));
 		}
 		colHeight = height;
 		
@@ -117,9 +116,9 @@ public class ColumnsContentPanel extends ContentPanel
 	
 	public void addColumn(int index)
 	{	if(index>0)
-			add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)),2*index-1);
+			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index-1);
 		else if(cols>0)
-			add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)),2*index);
+			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index);
 			
 		cols++;
 		Column column;		

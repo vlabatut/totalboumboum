@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,33 +30,20 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * This class is the main panel used
- * when displaying the tournament
- * during game. It contains a menu
- * panel (bottom menu) and a data
- * panel (actual content).
  * 
  * @author Vincent Labatut
+ *
  */
 public class TournamentSplitPanel extends SplitMenuPanel
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
-	/** Background image */
+{	private static final long serialVersionUID = 1L;
+
 	private BufferedImage image;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel
-	 * @param parent
-	 * 		Parent menu.
-	 */
 	public TournamentSplitPanel(MenuContainer container, MenuPanel parent)
-	{	super(container,parent,BorderLayout.PAGE_END,GuiSizeTools.HORIZONTAL_SPLIT_RATIO);
+	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
@@ -69,10 +56,6 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// REFRESH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Update the buttons depending on 
-	 * the tournament state.
-	 */
 	public void refreshButtons()
 	{	((TournamentMenu)menuPart).refreshButtons();
 	}
@@ -80,12 +63,6 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Automatically clicks on the appropriate
-	 * buttons in order to progress in the tournament.
-	 * Used to automatically chain many tournaments,
-	 * while evaluating agents.
-	 */
 	public void autoAdvance()
 	{	((TournamentMenu)menuPart).autoAdvance();
 	}
@@ -93,35 +70,10 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Sets a tournament loaded in order
-	 * to go on playing (and not just
-	 * browse its statistics, like {@link #setTournamentStats}).
-	 * 
-	 * @param tournament
-	 * 		The loaded tournament.
-	 */
 	public void setTournament(AbstractTournament tournament)
-	{	TournamentMenu tm = (TournamentMenu)getMenuPart();
-		tm.setBrowseOnly(false);
-		if(!tournament.hasBegun())
+	{	if(!tournament.hasBegun())
 			tournament.init();
-		tm.setTournament(tournament);
-	}
-	
-	/**
-	 * Sets a tournament loaded in order
-	 * to browse its statistics (and not
-	 * to go on playing, like {@link #setTournament}).
-	 * 
-	 * @param tournament
-	 * 		The loaded tournament.
-	 */
-	public void setTournamentStats(AbstractTournament tournament)
-	{	TournamentMenu tm = (TournamentMenu)getMenuPart();
-		tm.setBrowseOnly(true);
-		tournament.rewind();
-		tm.setTournament(tournament);
+		((TournamentMenu)getMenuPart()).setTournament(tournament);
 	}
 
 	/////////////////////////////////////////////////////////////////

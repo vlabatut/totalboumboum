@@ -17,45 +17,24 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 /**
 *
 * @author Ekin Medeni
-* @author Pınar Uluer
+* @author Pinar Uluer
 *
 */
-@SuppressWarnings("deprecation")
 public class Zone {
-	/** Une personnalisation generale du AiZone */
+	// Une personnalisation generale du AiZone
 	private AiZone zone;
-	/** */
 	private Collection<AiHero> rivals;
-	/** */
 	private AiHero hero;
-	/** */
 	private Collection<AiBomb> bombs;
-	/** */
 	private Collection<AiBlock> blocs;
-	/** */
 	private Collection<AiItem> objects;
-	/** */
 	private Collection<AiFire> fires;
-	/** */
 	private int xMax;
-	/** */
 	private int yMax;
-	/** */
 	private ZoneEnum[][] zoneArray;
-	/** */
 	private MedeniUluer mu;
-	/** */
 	private int lastSimulatedBombExplodes;
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param mu
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Zone(AiZone zone, MedeniUluer mu) throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		this.mu = mu;
@@ -71,11 +50,6 @@ public class Zone {
 		init();
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		zoneArray = new ZoneEnum[xMax][yMax];
@@ -188,19 +162,11 @@ public class Zone {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		return zoneArray;
 	}
 
-	@Override
 	public String toString() {
 		String result = "";
 		for (int i = 0; i < yMax; i++) {
@@ -214,15 +180,6 @@ public class Zone {
 		
 	}
 
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public ZoneEnum[][] simulateBomb(AiTile bomb) throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
 		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeight()];
@@ -318,11 +275,6 @@ public class Zone {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
 	public int getLastSimulatedBombExplodes() {
 		return lastSimulatedBombExplodes;
 	}

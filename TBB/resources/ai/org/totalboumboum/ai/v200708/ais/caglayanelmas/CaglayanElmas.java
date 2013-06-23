@@ -13,59 +13,48 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * Projet d'Intelligence Artificielle (2007-2008) : Bomberman
  * Equipe : CAGLAYAN Ozan, ELMAS Can
  * 
- * @author Ozan √áaƒülayan
+ * @author Ozan Caglayan
  * @author Arif Can Elmas
  *
  */
-@SuppressWarnings("deprecation")
 public class CaglayanElmas extends ArtificialIntelligence
 {
-	/** */
-	public static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
-	// Constantes qui d√©finissent l'√©tat du bomberman
-	/** */
+	// Constantes qui dÈfinissent l'Ètat du bomberman
 	private final static int DOING_NOTHING = 0;
-	/** */
 	private final static int RUNNING_FROM_BOMB = 1;
-	/** */
 	private final static int COLLECTING_BONUS = 2;
-	/** */
 	private final static int DESTRUCTING_WALLS = 3;
-	/** */
 	private final static int ATTACKING = 4;
 	
-	/** Contient la zone du tour pr√©c√©dente */
+	// Contient la zone du tour prÈcÈdente
 	private int[][] lastMatrix;
-	/** Repr√©sente une destination √† aller */
+	// ReprÈsente une destination ‡ aller
 	private int[] target;
-	/** Contient la position de la derni√®re bombe */
+	// Contient la position de la derniËre bombe
 	private int[] lastBomb;
-	/** Repr√©sente l'√©tat du bomberman avec les constantes d√©finies ci-dessus */
+	// ReprÈsente l'Ètat du bomberman avec les constantes dÈfinies ci-dessus
 	private int state;
-	/** Combien de fois on a mis une bombe pour d√©truire des murs */
+	// Combien de fois on a mis une bombe pour dÈtruire des murs
 	private int destructionCount;
-	/** Contient la derni√®re action renvoy√©e par call() */
+	// Contient la derniËre action renvoyÈe par call()
 	private Integer lastAction;
-	/** Le vecteur contenant des liens entre les cases */
-	/** qui d√©finissent le chemin le plus court entre A et B */
+	// Le vecteur contenant des liens entre les cases
+	// qui dÈfinissent le chemin le plus court entre A et B
 	private Vector<SearchLink> links;
-	/** Le vecteur qui contient les cases accessibles */
+	// Le vecteur qui contient les cases accessibles
 	private Vector<int[]> playableCases;
-	/** Si vrai, il existe une action qui reste des tours pr√©c√©dentes */
+	// Si vrai, il existe une action qui reste des tours prÈcÈdentes
 	private boolean savedMove;
-	/** */
 	private boolean startedToAttack;
 
-	/**
-	 * 
-	 */
 	public CaglayanElmas()
 	{
-		// Notre IA est appel√©e "Smart"
+		// Notre IA est appelÈ "Smart"
 		super("CaglynElms");
 		
-		// Initialisation n√©cessaires
+		// Initialisation nÈcessaires
 		target = new int[2];
 		target[0] = target[1] = -1;
 		
@@ -76,8 +65,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 		savedMove = false;
 		
 		playableCases = new Vector<int[]>();
-//		lastMatrix = new int[17][15];
-lastMatrix = null; // adjustment
+		lastMatrix = new int[17][15];
 		
 		state = DOING_NOTHING;
 		startedToAttack = false;
@@ -86,22 +74,19 @@ lastMatrix = null; // adjustment
 	}
 	
 	
-	/** indicateur de premi√®re invocation (pour la compatibilit√© */
+	/** indicateur de premiËre invocation (pour la compatibilitÈ */
 	private boolean firstTime = true;
 
 	/**
-	 * d√©termine la prochaine action que l'IA va effectuer
+	 * DÈtermine la prochaine action que l'IA va effectuer
 	 * (Bouger, ne rien faire, poser une bombe)
 	 * 
 	 * @return AI_ACTION_XXXX
 	 */
-	@Override
-	public Integer processAction() throws Exception
+	public Integer call() throws Exception
 	{
 		if(firstTime)
-		{	firstTime = false;
-lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
-		}
+			firstTime = false;
 		else
 		{	
 		// Notre position
@@ -149,11 +134,11 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 			}
 		}
 		
-		// On effectue les actions qui restent des tours pr√©c√©dentes.
+		// On effectue les actions qui restent des tours prÈcÈdentes.
 		if (savedMove)
 			return handleSavedMove(px, py);
 			
-		// On attend jusqu'a ce que la bombe d√©j√† pos√©e s'explose.
+		// On attend jusqu'a ce que la bombe dÈj‡ posÈe s'explose.
 		if (!isBombExploded())
 		{
 			state = DOING_NOTHING;
@@ -186,7 +171,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 		int[] opponent = getNearestOpponentPosition(px, py, false);
 		if (opponent[0] != -1)
 		{	
-			// Modifie notre √©tat.
+			// Modifie notre Ètat.
 			state = ATTACKING;
 			startedToAttack = true;
 			
@@ -211,7 +196,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 		else
 		{
 			// On ne peut pas atteindre l'ennemi le plus proche.
-			// Donc, collectons un peu de bonus en d√©truisant
+			// Donc, collectons un peu de bonus en dÈtruisant
 			// les murs proches.
 			state = DESTRUCTING_WALLS;
 			int[] block = getNearestBlockToPutBomb(px, py);
@@ -221,7 +206,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 			
 			else if (block[0] == px && block[1] == py)
 			{
-				// On est d√©j√† l√†.
+				// On est dÈj‡ l‡.
 				savedMove = true;
 				target = block.clone();
 				return AI_ACTION_DO_NOTHING;
@@ -245,9 +230,9 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine l'action suivante pour arriver
-	 * √† la destination d√©finie dans les tours pr√©c√©dentes.
-	 * Renvoie -1 si le bomberman est bloqu√© dans une case
+	 * DÈtermine l'action suivante pour arriver
+	 * ‡ la destination dÈfinie dans les tours prÈcÈdentes.
+	 * Renvoie -1 si le bomberman est bloquÈ dans une case
 	 * par une bombe confondue et ne peut pas aller vers
 	 * la destination.
 	 * @param px	position de notre personnage
@@ -256,15 +241,13 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	 */
 	public Integer handleSavedMove(int px, int py)
 	{
-		// Pas encore arriv√© √† la destination "target".
+		// Pas encore arrivÈ ‡ la destination "target".
 		if ( !(target[0] == px && target[1] == py))	
 			return lastAction;
 		
-		else if(links==null)
-			return lastAction;
 		else
 		{		
-			// On est arriv√© √† une destination interm√©diaire.
+			// On est arrivÈ ‡ une destination intermÈdiaire.
 			// On change l'action qui va nous guider vers notre nouvelle
 			// destination.
 			if (links.size() != 0)
@@ -279,8 +262,8 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 			}
 			else
 			{				
-				// L'action finale d√©pend de notre but. Si on attaque ou
-				// d√©truit des murs on retourne AI_ACTION_PUT_BOMB sinon
+				// L'action finale dÈpend de notre but. Si on attaque ou
+				// dÈtruit des murs on retourne AI_ACTION_PUT_BOMB sinon
 				// AI_ACTION_DO_NOTHING
 				lastAction = decideNextAction(px, py);			
 				state = DOING_NOTHING;
@@ -290,8 +273,8 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine l'action suivante selon
-	 * l'√©tat du bomberman.
+	 * DÈtermine l'action suivante selon
+	 * l'Ètat du bomberman.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
 	 * @return		L'action qu'il faut commettre
@@ -344,7 +327,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * D√©t√©rmine les cases accessibles √† notre personnage
+	 * DÈtÈrmine les cases accessibles ‡ notre personnage
 	 * et les gardent dans le vecteur playableCases.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
@@ -367,7 +350,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	
 	/**
 	 * Indique si la case (x,y) est accessible
-	 * √† notre personnage.
+	 * ‡ notre personnage.
 	 * @param x		position de la case qu'on cherche
 	 * @param y		position de la case qu'on cherche
 	 * @return		vrai si le vecteur playableCases contient la case (x,y)
@@ -385,7 +368,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * Indique si la zone est chang√©e depuis la derni√®re copie.
+	 * Indique si la zone est changÈe depuis la derniËre copie.
 	 * @return vrai si la zone a subit une modification
 	 */
 	public boolean isZoneMatrixChanged()
@@ -404,13 +387,13 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * Indique si la derni√®re bombe pos√©e est explos√©e ou non.
-	 * @return vrai si la bombe n'est pas encore explos√©e
+	 * Indique si la derniËre bombe posÈe est explosÈe ou non.
+	 * @return vrai si la bombe n'est pas encore explosÈe
 	 */
 	public boolean isBombExploded()
 	{
 		// Attention, quand la bombe s'explose, la case correspondante
-		// devient d'abord AI_BLOCK_FIRE et apr√®s tous devient AI_BLOCK_EMPTY!
+		// devient d'abord AI_BLOCK_FIRE et aprËs tous devient AI_BLOCK_EMPTY!
 		return !(lastBomb[0] != -1 &&
 				((getZoneMatrix()[lastBomb[0]][lastBomb[1]] == AI_BLOCK_BOMB) ||
 				(getZoneMatrix()[lastBomb[0]][lastBomb[1]] == AI_BLOCK_FIRE)));
@@ -418,11 +401,11 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine la case √† la quelle on doit aller pour fuire de la bombe.
+	 * DÈtermine la case ‡ la quelle on doit aller pour fuire de la bombe.
 	 * Retourne (-1,-1) si c'est impossible de fuire. 
 	 * @param px 	position de notre personnage
 	 * @param py	position de notre personnage
-	 * @return la case √† la quelle on doit aller pour fuire de la bombe
+	 * @return la case ‡ la quelle on doit aller pour fuire de la bombe
 	 */
 	public int[] escapeFromAllBombs(int px, int py)
 	{
@@ -432,10 +415,8 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 		
 		Vector<int[]> bombs = new Vector<int[]>();
 		
-//		for (int i = 1; i <= 15; i++)
-		for (int i = 1; i <= getZoneMatrixDimX(); i++) // adjustment
-//			for (int j = 1; j <= 13; j++)
-			for (int j = 1; j <= getZoneMatrixDimY(); j++) // adjustment
+		for (int i = 1; i <= 15; i++)
+			for (int j = 1; j <= 13; j++)
 				if ( (power = getBombPowerAt(i, j)) != -1 )
 				{
 					int[] bomb = {i, j, power};
@@ -450,18 +431,16 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 			// Est-ce que c[] est dangereux?
 			for (int i = 0; i < bombs.size() && canBeSolution; i++)
 			{
-				// La position et la port√©e de la bombe courante.
+				// La position et la portÈe de la bombe courante.
 				int x = bombs.get(i)[0];
 				int y = bombs.get(i)[1];
 				int p = bombs.get(i)[2];
 				
 				// Les limites de la recherche
 				int sx = (x-p<1)?1:x-p;
-//				int ex = (x+p>15)?15:x+p;
-				int ex = (x+p>getZoneMatrixDimX())?getZoneMatrixDimX():x+p; // adjustment
+				int ex = (x+p>15)?15:x+p;
 				int sy = (y-p<1)?1:y-p;
-//				int ey = (y+p>13)?13:y+p;
-				int ey = (y+p>getZoneMatrixDimY())?getZoneMatrixDimY():y+p; // adjustment
+				int ey = (y+p>13)?13:y+p;
 				
 				for (int j = sx; j <= ex & canBeSolution; j++)
 					canBeSolution = !(c[0] == j && c[1] == y);
@@ -488,7 +467,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine si il existe une bombe qui peut nous tuer en traversant
+	 * DÈtermine si il existe une bombe qui peut nous tuer en traversant
 	 * l'horizontale et la verticale qui coupe notre personnage.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
@@ -550,7 +529,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine la position du bonus plus proche et accessible √† nous.
+	 * DÈtermine la position du bonus plus proche et accessible ‡ nous.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
 	 * @return		position du bonus ou (-1,-1)
@@ -558,7 +537,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	public int[] getNearestBonusPosition(int px, int py)
 	{
 		// Si la distance au bonus plus proche est > 10,
-		// on ne fatigue pas aller l√†-bas.
+		// on ne fatigue pas aller l‡-bas.
 		int dist = 11;
 		int[] result = {-1, -1};
 		
@@ -582,7 +561,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine le nombre de murs destructibles au voisinage
+	 * DÈtermine le nombre de murs destructibles au voisinage
 	 * de la case (cx, cy).
 	 * @param cx	position de la case
 	 * @param cy	position de la case
@@ -605,14 +584,14 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine la case la plus proche √† mettre une bombe.
+	 * DÈtermine la case la plus proche ‡ mettre une bombe.
 	 * Si le bomberman a suffisamment pris le bonus qui
-	 * augmente la port√©e, cette m√©thode retourne des cases
-	 * qui vont faciliter l'acc√®s √† l'ennemi quand les murs
-	 * au voisinage sont d√©truits.
+	 * augmente la portÈe, cette mÈthode retourne des cases
+	 * qui vont faciliter l'accËs ‡ l'ennemi quand les murs
+	 * au voisinage sont dÈtruits.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
-	 * @return		position de la case √† poser la bombe
+	 * @return		position de la case ‡ poser la bombe
 	 */
 	public int[] getNearestBlockToPutBomb(int px, int py)
 	{
@@ -620,8 +599,8 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 		
 		if (evaluateBlock(px, py) != 0)
 		{
-			// On peut poser la bombe directement ici, √† (px,py)
-			// car il y a au moins un mur destructible √† cot√© de nous.
+			// On peut poser la bombe directement ici, ‡ (px,py)
+			// car il y a au moins un mur destructible ‡ cotÈ de nous.
 			result[0] = px;
 			result[1] = py;
 		}
@@ -639,9 +618,9 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 				
 				if (evaluateBlock(to[0], to[1]) >= 1)
 				{			
-					// Si on a suffisamment d√©truit les murs,
-					// on d√©cide alors √† attaquer directement vers l'ennemi
-					// plus proche. Pour cela, on va maintenant d√©truire les murs
+					// Si on a suffisamment dÈtruit les murs,
+					// on dÈcide alors ‡ attaquer directement vers l'ennemi
+					// plus proche. Pour cela, on va maintenant dÈtruire les murs
 					// qui vont nous ouvrir la chemin.
 					if (destructionCount > Math.random()*5+3)
 					{
@@ -654,7 +633,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 					}
 					else
 					{
-						// Continue √† d√©truire les murs plus proches.
+						// Continue ‡ dÈtruire les murs plus proches.
 						PathFinder pf = new PathFinder(this);
 						pf.setStates(from, to);
 						Vector<SearchLink> t = pf.findShortestPath();
@@ -671,7 +650,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine la position de l'ennemi plus proche √† nous.
+	 * DÈtermine la position de l'ennemi plus proche ‡ nous.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
 	 * @param 		returnWhatever Si vrai, retourne la position de l'ennemi
@@ -697,10 +676,10 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine les nouveaux positions √† partir d'un case initial
+	 * DÈtermine les nouveaux positions ‡ partir d'un case initial
 	 * (x,y) et 4 actions.
-	 * @param x		position √† √©tudier
-	 * @param y		position √† √©tudier
+	 * @param x		position ‡ Ètudier
+	 * @param y		position ‡ Ètudier
 	 * @return		vecteur contenant les nouveaux positions
 	 */
 	public Vector<int[]> getPossiblePositions(int x, int y)
@@ -714,14 +693,12 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine la nouvelle position qui r√©sulte de l'application
-	 * de l'action "move" √† la position (x,y).
-	 * @param x		position √† √©tudier
-	 * @param y		position √† √©tudier
-	 * @param move 
-	 * 		Description manquante !
-	 * @return		la nouvelle position qui est le r√©sultat de l'action
-	 * 				appliqu√©e √† la position (x,y)
+	 * DÈtermine la nouvelle position qui rÈsulte de l'application
+	 * de l'action "move" ‡ la position (x,y).
+	 * @param x		position ‡ Ètudier
+	 * @param y		position ‡ Ètudier
+	 * @return		la nouvelle position qui est le rÈsultat de l'action
+	 * 				appliquÈe ‡ la position (x,y)
 	 */
 	public int[] applyAction(int x, int y, int move)
 	{
@@ -748,9 +725,9 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * d√©termine l'action qui s'oppose √† la direction d.
+	 * DÈtermine l'action qui s'oppose ‡ la direction d.
 	 * @param d		direction (AI_DIR_XXXX)
-	 * @return		l'action qui s'oppose √† la direction d
+	 * @return		l'action qui s'oppose ‡ la direction d
 	 */
 	public Integer getOppositeDirection(int d)
 	{
@@ -774,12 +751,12 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * Indique si le d√©placement dont le code a √©t√© pass√© en param√®tre 
-	 * est possible pour un personnage situ√© en (x,y).
+	 * Indique si le dÈplacement dont le code a ÈtÈ passÈ en paramËtre 
+	 * est possible pour un personnage situÈ en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le d√©placement √† √©tudier
-	 * @return	vrai si ce d√©placement est possible
+	 * @param move	le dÈplacement ‡ Ètudier
+	 * @return	vrai si ce dÈplacement est possible
 	 */
 	public boolean isMovePossible(int x, int y, int move)
 	{	
@@ -806,10 +783,10 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 	}
 	
 	/**
-	 * Indique si la case situ√©e √† la position pass√©e en param√®tre
+	 * Indique si la case situÈe ‡ la position passÈe en paramËtre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position √† √©tudier
-	 * @param y	position √† √©tudier
+	 * @param x	position ‡ Ètudier
+	 * @param y	position ‡ Ètudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	public boolean isObstacle(int x, int y)
@@ -836,7 +813,7 @@ lastMatrix = new int[getZoneMatrixDimX()][getZoneMatrixDimY()]; // adjustment
 
 	/**
 	 * Calcule et renvoie la distance de Manhattan 
-	 * entre le point de coordonn√©es (x1,y1) et celui de coordonn√©es (x2,y2). 
+	 * entre le point de coordonnÈes (x1,y1) et celui de coordonnÈes (x2,y2). 
 	 * @param x1	position du premier point
 	 * @param y1	position du premier point
 	 * @param x2	position du second point

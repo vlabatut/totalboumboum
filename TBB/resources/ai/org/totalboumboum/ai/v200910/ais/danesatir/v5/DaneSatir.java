@@ -18,39 +18,30 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * classe principale de l'IA, qui dÃ©finit son comportement.
- * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile Ã 
- * dÃ©bugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui définit son comportement.
+ * n'hésitez pas à décomposer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile à
+ * débugger, modifier, relire, comprendre, etc.
  * 
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can ÅžatÄ±r
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class DaneSatir extends ArtificialIntelligence
 {
-	/** */
 	private AiZone zone;
-	/** */
 	private AiHero myHero;
-	/** */
 	private PathFinder p;
-	/** */
 	private BonusCollector bonus;
-	/** */
 	private DecisionMaker dec;
-	/** */
 	private AiAction result;
-	/** */
-//	private int moveCount;
-	/** */
+	private int moveCount;
 	private int waitCount;
 
 	
-	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
+	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
 	@Override
 	public AiAction processAction() throws StopRequestException {	
 		// avant tout : test d'interruption
@@ -88,7 +79,6 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Make calculation according to State
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void calculAction() throws StopRequestException {
 		// avant tout : test d'interruption
@@ -293,15 +283,13 @@ public class DaneSatir extends ArtificialIntelligence
 	
 	/**
 	 * Initialize Variables
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private void init() throws StopRequestException 	{	
 		// avant tout : test d'interruption
 		checkInterruption();
 		zone = getPercepts();
 		myHero = zone.getOwnHero();
-	//	this.moveCount = 0;
+		this.moveCount = 0;
 		this.bonus = new BonusCollector(this);
 		this.dec = new DecisionMaker(this);
 		this.p = new PathFinder(this,dec.getTime());
@@ -310,12 +298,11 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Update Variables
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void updateEnvironment() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();
-	//	this.moveCount++;
+		this.moveCount++;
 		this.setResult(null);
 		this.p.updateTimeMatrice(this.dec.getTime());
 		Limits.tileDistance = (this.myHero.getTile().getSize()/this.myHero.getWalkingSpeed());
@@ -325,11 +312,6 @@ public class DaneSatir extends ArtificialIntelligence
 			this.dec.setState(State.START);
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
 	public AiHero getOwnHero() {
 		return this.myHero;
 	}
@@ -351,11 +333,6 @@ public class DaneSatir extends ArtificialIntelligence
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param result
-	 * 		Description manquante !
-	 */
 	public void setResult(AiAction result) {
 		if(result == null)
 			dec.setState(State.START);
@@ -367,8 +344,6 @@ public class DaneSatir extends ArtificialIntelligence
 	/**
 	 * Get enemies without us
 	 * @return      the image at the specified URL
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiTile> getEnemies() throws StopRequestException {
 		checkInterruption();

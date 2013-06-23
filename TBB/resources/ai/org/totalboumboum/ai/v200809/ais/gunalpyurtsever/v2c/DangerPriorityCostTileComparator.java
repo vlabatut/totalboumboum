@@ -7,36 +7,25 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Ozan Günalp
- * @author Sinan Yürtsever
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
  *
  */
-@SuppressWarnings("deprecation")
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {
 
-	/** */
 	private int col;
-	/** */
 	private int line;
 	
-	/**
-	 * 
-	 * @param col
-	 * 		Description manquante !
-	 * @param line
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
+
 	public DangerPriorityCostTileComparator(int col, int line, ArtificialIntelligence  ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.col = col;
 		this.line = line;
 	}
 
-	@Override
+
+
 	public int compare(DangerPriorityCostTile tile1, DangerPriorityCostTile tile2){
 		
 		

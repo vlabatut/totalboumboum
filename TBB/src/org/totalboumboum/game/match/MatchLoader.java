@@ -2,7 +2,7 @@ package org.totalboumboum.game.match;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -43,31 +43,12 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
- * Loads a match object.
  * 
  * @author Vincent Labatut
+ *
  */
 public class MatchLoader
 {	
-	/**
-	 * Loads a match object.
-	 * 
-	 * @param folderPath
-	 * 		Location of the match object.
-	 * @param tournament
-	 * 		Tournament containing the match.
-	 * @return
-	 * 		The loaded match.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while loading the match.
-	 * @throws SAXException
-	 * 		Problem while loading the match.
-	 * @throws IOException
-	 * 		Problem while loading the match.
-	 * @throws ClassNotFoundException
-	 * 		Problem while loading the match.
-	 */
 	public static Match loadMatchFromFolderPath(String folderPath, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
@@ -88,52 +69,12 @@ public class MatchLoader
 		return result;
     }
     
-	/**
-	 * Loads a match just using its name.
-	 * 
-	 * @param name
-	 * 		Name of the match.
-	 * @param tournament
-	 * 		Tournament containing the match.
-	 * @return
-	 * 		Loaded match.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while loading the match.
-	 * @throws SAXException
-	 * 		Problem while loading the match.
-	 * @throws IOException
-	 * 		Problem while loading the match.
-	 * @throws ClassNotFoundException
-	 * 		Problem while loading the match.
-	 */
 	public static Match loadMatchFromName(String name, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = FilePaths.getMatchesPath()+File.separator+name;
 		Match result = loadMatchFromFolderPath(individualFolder,tournament);
 		return result;
     }
 
-	/**
-	 * Loads the {@code match} element.
-	 * 
-	 * @param root
-	 * 		Root element.
-	 * @param folderPath
-	 * 		Folder containing the file.
-	 * @param tournament
-	 * 		Tournament containing the match.
-	 * @param result
-	 * 		Loaded match. 
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while loading the match.
-	 * @throws SAXException
-	 * 		Problem while loading the match.
-	 * @throws IOException
-	 * 		Problem while loading the match.
-	 * @throws ClassNotFoundException
-	 * 		Problem while loading the match.
-	 */
     private static void loadMatchElement(Element root, String folderPath, AbstractTournament tournament, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
     	Element element;
@@ -160,14 +101,6 @@ public class MatchLoader
 		loadRoundsElement(element,folderPath,result);
 	}		
 		
-    /**
- 	 * Loads the {@code notes} element.
-     * 
-     * @param root
- 	 * 		Root element.
-     * @return
-     * 		Notes under the form of a list of strings.
-     */
     @SuppressWarnings("unchecked")
 	public static List<String> loadNotesElement(Element root)
     {	List<String> result = new ArrayList<String>();
@@ -183,25 +116,6 @@ public class MatchLoader
     	return result;
     }
 
-    /**
- 	 * Loads the {@code rounds} element.
-     * 
-     * @param root
- 	 * 		Root element.
-     * @param folder
- 	 * 		Folder containing the file.
-    * @param result
- 	 * 		Loaded match. 
-    * 
-     * @throws ParserConfigurationException
-	 * 		Problem while loading the match.
-     * @throws SAXException
-	 * 		Problem while loading the match.
-     * @throws IOException
-	 * 		Problem while loading the match.
-     * @throws ClassNotFoundException
-	 * 		Problem while loading the match.
-     */
     @SuppressWarnings("unchecked")
 	private static void loadRoundsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// rounds order
@@ -218,25 +132,6 @@ public class MatchLoader
     	}
     }
     
-    /**
- 	 * Loads the {@code round} element.
-     * 
-     * @param root
- 	 * 		Root element.
-     * @param folder
- 	 * 		Folder containing the file.
-     * @param result
- 	 * 		Loaded match. 
-     * 
-     * @throws ParserConfigurationException
-	 * 		Problem while loading the match.
-     * @throws SAXException
-	 * 		Problem while loading the match.
-     * @throws IOException
-	 * 		Problem while loading the match.
-     * @throws ClassNotFoundException
-	 * 		Problem while loading the match.
-     */
     private static void loadRoundElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Round round;
 		
@@ -257,23 +152,6 @@ public class MatchLoader
 		result.addRound(round);
 	}
     
-    /**
- 	 * Loads the {@code limits} element.
-     * 
-     * @param root
- 	 * 		Root element.
-     * @param folder
- 	 * 		Folder containing the file.
-     * @return
- 	 * 		Loaded match. 
-     * 
-     * @throws ParserConfigurationException
-	 * 		Problem while loading the match.
-     * @throws SAXException
-	 * 		Problem while loading the match.
-     * @throws IOException
-	 * 		Problem while loading the match.
-     */
 	@SuppressWarnings("unchecked")
 	public static Limits<MatchLimit> loadLimitsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limits<MatchLimit> result = new Limits<MatchLimit>();

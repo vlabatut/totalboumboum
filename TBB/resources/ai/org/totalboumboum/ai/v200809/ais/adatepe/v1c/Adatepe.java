@@ -22,30 +22,24 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Can Adatepe
  *
  */
-@SuppressWarnings("deprecation")
 public class Adatepe extends ArtificialIntelligence 
 {
 	
-	/** la case occupÃ©e actuellement par le personnage*/
+	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
-//	/** la derniÃ¨re case par laquelle on est passÃ© */ 
+//	/** la dernière case par laquelle on est passé */ 
 //	private AiTile previousTile = null;
 	/** Representation de la
 	 *  table du jeu : 0 = Empty, 1 = Wall, 
 	 *  2 = Bomb, 3 = Yellow Zone, 4 = Red Zone */
-	private int[][] boardTiles;
-	/** */
+	private int[][] boardTiles; 
 	private Collection <AiBomb> bomb;
-	/** */
 	private Collection <AiBlock> wall;
-	/** */
 	private Collection <AiFire> fire;
-	/** */
 	@SuppressWarnings("unused")
 	private Collection <AiHero> hero;
-	/** */
 	private Collection <AiZone> zone;
 	/** Decide si on doit mettre un bombe ou pas */
 	boolean dropbomb = false;
@@ -56,7 +50,7 @@ public class Adatepe extends ArtificialIntelligence
 	/** La direction qu'on veut aller */
 	Direction direction;
 	
-	@Override
+	
 	public AiAction processAction() throws StopRequestException
 {	
 	checkInterruption();
@@ -73,7 +67,7 @@ public class Adatepe extends ArtificialIntelligence
 		drawdangerzones();
 		if(nextTile == null)
 			nextTile = currentTile;
-		// arrivÃ© Ã  destination : on choisit une nouvelle destination
+		// arrivé à destination : on choisit une nouvelle destination
 		if(currentTile==nextTile)
 		{
 			checksafety();
@@ -105,10 +99,7 @@ public class Adatepe extends ArtificialIntelligence
 	return result;
 }
 	
-	/** Mets les blocs et les zones wides a la table
-	 * @throws StopRequestException 
-	 * 		Decription manquante ! 
-	 */
+	/** Mets les blocs et les zones wides a la table*/
 	private void boarddraw() throws StopRequestException
 	{	
 		checkInterruption(); 
@@ -134,10 +125,7 @@ public class Adatepe extends ArtificialIntelligence
 		
 	
 	
-	/** Mets les bombes, les zones dangereux a traverser et les feus a la table
-	 * @throws StopRequestException 
-	 * 		Decription manquante ! 
-	 */
+	/** Mets les bombes, les zones dangereux a traverser et les feus a la table*/
 	private void drawdangerzones() throws StopRequestException
 	{	
 		checkInterruption(); 
@@ -180,10 +168,7 @@ public class Adatepe extends ArtificialIntelligence
 	}
 	
 	
-	/** Decide la destination suivante est dangereux ou pas 
-	 * @throws StopRequestException 
-	 * 		Decription manquante ! 
-	 */
+	/** Decide la destination suivante est dangereux ou pas */
 	private void checknexttilesafe() throws StopRequestException
 	{	checkInterruption(); 
 	int x3 = currentTile.getLine();
@@ -211,10 +196,7 @@ public class Adatepe extends ArtificialIntelligence
 	}
 		
 	}
-	/** Decide les coordonnes qu'on trouve est dangereux ou pas 
-	 * @throws StopRequestException 
-	 * 		Decription manquante ! 
-	 */
+	/** Decide les coordonnes qu'on trouve est dangereux ou pas */
 	private void checksafety() throws StopRequestException
 	{	checkInterruption(); 
 	
@@ -234,10 +216,7 @@ public class Adatepe extends ArtificialIntelligence
 		}
 		
 	}
-	/** Esseye d'evider les bombes 
-	 * @throws StopRequestException 
-	 * 		Decription manquante ! 
-	 */
+	/** Esseye d'evider les bombes */
 	private void evade() throws StopRequestException
 	{	checkInterruption(); 
 	
@@ -284,10 +263,7 @@ public class Adatepe extends ArtificialIntelligence
 		direction = Direction.UP;
 	}	
 	}
-	/** Esseye de tuer les autres joueurs 
-	 * @throws StopRequestException 
-	 * 		Decription manquante ! 
-	 */
+	/** Esseye de tuer les autres joueurs */
 	private void aggro() throws StopRequestException
 	{	checkInterruption(); 
 	
@@ -296,15 +272,6 @@ public class Adatepe extends ArtificialIntelligence
 		
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Decription manquante ! 
-	 * @return
-	 * 		?
-	 * @throws StopRequestException
-	 * 		Decription manquante ! 
-	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -316,20 +283,11 @@ public class Adatepe extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Decription manquante ! 
-	 * @return 
-	 * 		?
-	 * @throws StopRequestException
-	 * 		Decription manquante ! 
-	 */
 	@SuppressWarnings("unused")
 	private List<AiTile> getClearNeighbor(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de rÃ©fÃ©rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbor= getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();

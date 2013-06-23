@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,24 +26,22 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 
 /**
- * reprÃ©sente un sol du jeu, ie le graphisme affichÃ© en tant que premiÃ¨re couche de toute
- * case de la zone (et Ã©ventuellement recouvert par les autres types de sprites).
+ * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
+ * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiDataFloor extends AiDataSprite<Floor> implements AiFloor
 {
 	/**
-	 * crÃ©e une reprÃ©sentation du sol passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une représentation du sol passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite Ã  reprÃ©senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataFloor(AiDataTile tile, Floor sprite)
 	{	super(tile,sprite);		

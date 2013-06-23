@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,52 +27,50 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * simule un personnage du jeu, ie un sprite contrÃ´lÃ© par un joueur
+ * simule un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiSimHero extends AiSimSprite implements AiHero
 {
 	/**
-	 * crÃ©e une simulation du personnage passÃ© en paramÃ¨tre,
-	 * avec les propriÃ©tÃ©s passÃ©es en paramÃ¨tres.
+	 * crée une simulation du personnage passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numÃ©ro d'identification du personnage
+	 * 		numéro d'identification du personnage
 	 * @param tile
 	 * 		case contenant le personnage
 	 * @param posX
 	 * 		abscisse du personnage
 	 * @param posY
-	 * 		ordonnÃ©e du personnage
+	 * 		ordonnée du personnage
 	 * @param posZ
 	 * 		hauteur du personnage
 	 * @param state
-	 * 		Ã©tat du personnage
+	 * 		état du personnage
 	 * @param burningDuration
-	 * 		durÃ©e de combustion du personnage
+	 * 		durée de combustion du personnage
 	 * @param currentSpeed
-	 * 		vitesse courante de dÃ©placement du personnage
+	 * 		vitesse courante de déplacement du personnage
 	 * @param bombPrototype
 	 * 		exemple de bombe que le personnage peut poser
 	 * @param bombNumber
 	 * 		nombre de bombes que le personnage peut poser
 	 * @param bombCount
-	 * 		nombre de bombes actuellement posÃ©es
+	 * 		nombre de bombes actuellement posées
 	 * @param throughBlocks
-	 * 		capacitÃ© du personnage Ã  traverser les blocs
+	 * 		capacité du personnage à traverser les blocs
 	 * @param throughBombs
-	 * 		capacitÃ© du personnage Ã  traverser les bombes
+	 * 		capacité du personnage à traverser les bombes
 	 * @param throughFires
-	 * 		capacitÃ© du personnage Ã  traverser le feu (sans mourir !)
+	 * 		capacité du personnage à traverser le feu (sans mourir !)
 	 * @param color
 	 * 		couleur du personnage
 	 * @param walkingSpeed
-	 * 		vitesse de dÃ©placement au sol du personnage
+	 * 		vitesse de déplacement au sol du personnage
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -97,13 +95,13 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	}	
 
 	/**
-	 * crÃ©e une simulation du joueur passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une simulation du joueur passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	
 	 * 		case contenant le sprite
 	 * @param hero	
-	 * 		sprite Ã  simuler
+	 * 		sprite à simuler
 	 */
 	protected AiSimHero(AiHero hero, AiSimTile tile)
 	{	super(hero,tile);
@@ -128,9 +126,9 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	/** exemple de bombe que le personnage peut poser */
 	private AiBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultanÃ©ment (en gÃ©nÃ©ral) */
+	/** nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumberMax;
-	/** nombre de bombes que le personnage a actuellement posÃ©es */
+	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
 	
 	@Override
@@ -144,10 +142,10 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	/**
-	 * met Ã  jour la portÃ©e des bombes posÃ©es par ce joueur
+	 * met à jour la portée des bombes posées par ce joueur
 	 * 
 	 * @param delta
-	 * 		la modification Ã  apporter Ã  la portÃ©e des bombes
+	 * 		la modification à apporter à la portée des bombes
 	 */
 	protected void updateBombRange(int delta)
 	{	AiSimBomb proto = new AiSimBomb(bombPrototype,null);
@@ -166,10 +164,10 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	/**
-	 * met Ã  jour le nombre de bombes posables simultanÃ©ment par ce joueur
+	 * met à jour le nombre de bombes posables simultanément par ce joueur
 	 * 
 	 * @param delta
-	 * 		la modification Ã  apporter au nombre de bombes
+	 * 		la modification à apporter au nombre de bombes
 	 */
 	protected void updateBombNumberMax(int delta)
 	{	bombNumberMax = bombNumberMax + delta;
@@ -181,11 +179,11 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	/**
-	 * met Ã  jour le nombre de bombes actuellement en jeu et appartenant
-	 * Ã  ce joueur
+	 * met à jour le nombre de bombes actuellement en jeu et appartenant
+	 * à ce joueur
 	 * 
 	 * @param delta
-	 * 		la modification Ã  apporter au nombre de bombes
+	 * 		la modification à apporter au nombre de bombes
 	 */
 	protected void updateBombNumberCurrent(int delta)
 	{	bombNumberCurrent = bombNumberCurrent + delta;
@@ -210,7 +208,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de dÃ©placement au sol du personnage, exprimÃ©e en pixel/seconde */
+	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
 	private double walkingSpeed;
 	
 	@Override
@@ -225,7 +223,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	private boolean throughBlocks;
 	/** indique si le personnage peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le personnage peut traverser le feu (sans brÃ»ler) */
+	/** indique si le personnage peut traverser le feu (sans brûler) */
 	private boolean throughFires;
 	
 	@Override
@@ -247,7 +245,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	public boolean isCrossableBy(AiSprite sprite)
 	{	boolean result = false;
 		
-		// feu : jamais arrÃ©tÃ© par un personnage
+		// feu : jamais arrêté par un personnage
 		if(sprite instanceof AiSimFire)
 			result = true;
 		

@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,10 +32,7 @@ import javax.swing.BoxLayout;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -51,7 +48,7 @@ public class LinesContentPanel extends ContentPanel
 	
 	public LinesContentPanel(int width, int height, int lines, int cols, boolean header)
 	{	super(width,height);
-//		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+//		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		setOpaque(false);
 		
 		this.header = header;
@@ -147,17 +144,17 @@ public class LinesContentPanel extends ContentPanel
 		
 		if(lines==0)
 		{	if(header)
-				headerFontSize = GuiFontTools.getFontSize(getHeaderHeight()*GuiFontTools.FONT_RATIO);
+				headerFontSize = GuiTools.getFontSize(getHeaderHeight()*GuiTools.FONT_RATIO);
 			else
 				headerFontSize = 0;
 		}
 		else
-		{	int margins = (lines-1)*GuiSizeTools.subPanelMargin;
+		{	int margins = (lines-1)*GuiTools.subPanelMargin;
 			// with header
 			if(header)
-			{	int lineHeight = (int)((height - margins)/(lines+GuiSizeTools.TABLE_HEADER_RATIO-1));
-				int headerHeight = (int)(lineHeight*GuiSizeTools.TABLE_HEADER_RATIO);
-				headerFontSize = GuiFontTools.getFontSize(headerHeight*GuiFontTools.FONT_RATIO);
+			{	int lineHeight = (int)((height - margins)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
+				int headerHeight = (int)(lineHeight*GuiTools.TABLE_HEADER_RATIO);
+				headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
 				lineHeights.add(headerHeight);
 				for(int i=1;i<lines;i++)
 					lineHeights.add(lineHeight);
@@ -183,7 +180,7 @@ public class LinesContentPanel extends ContentPanel
 			}			
 		}
 
-		lineFontSize = GuiFontTools.getFontSize(getLineHeight()*GuiFontTools.FONT_RATIO);
+		lineFontSize = GuiTools.getFontSize(getLineHeight()*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		lineWidth = width;
 		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
@@ -226,8 +223,8 @@ public class LinesContentPanel extends ContentPanel
 		// header
 		if(header && index==0)
 		{	line = new Line(headerWidth,getHeaderHeight(),cols);
-			line.setBackgroundColor(GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND);
-			line.setForegroundColor(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+			line.setBackgroundColor(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+			line.setForegroundColor(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 		}
 		//data
 		else

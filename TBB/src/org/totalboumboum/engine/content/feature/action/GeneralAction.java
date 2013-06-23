@@ -14,7 +14,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -57,18 +57,18 @@ public abstract class GeneralAction implements Serializable
 	/*NOTE
 	 * 
 	 * il semble qu'on a parfois besoin d'une position sous forme de case.
-	 * dans ce cas l√†, on peut passer la case (ou ses coordonn√©es) lors de la cr√©ation de l'action,
-	 * qui initialise ses champs en cons√©quence.
+	 * dans ce cas l‡, on peut passer la case (ou ses coordonnÈes) lors de la crÈation de l'action,
+	 * qui initialise ses champs en consÈquence.
 	 * 
-	 * il semble logique de laisser la gestion compl√®te des autorisations de transition aux modulations
+	 * il semble logique de laisser la gestion complËte des autorisations de transition aux modulations
 	 * donc pas la peine de les coder en dur comme c'est actuellement fait dans les event managers
 	 * 
 	 * ability fait-elle partie de isPossible ? a priori, je dirais oui.
-	 * donc: 	isPossible=compatibilit√© avec l'action g√©n√©rale + ability
+	 * donc: 	isPossible=compatibilitÈ avec l'action gÈnÈrale + ability
 	 * 			isAllowed=modulation
-	 * en fait non, c'est trop li√© aux modulations. il vaut mieux faire:
-	 * 		isPossible=compatiblit√© avec l'action g√©n√©rale
-	 * 		isAllowed=ability modul√©e
+	 * en fait non, c'est trop liÈ aux modulations. il vaut mieux faire:
+	 * 		isPossible=compatiblitÈ avec l'action gÈnÈrale
+	 * 		isAllowed=ability modulÈe
 	 * 
 	 */
 	

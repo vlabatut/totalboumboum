@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,21 +27,19 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * dÃ©crit un Ã©tat simulÃ© dans lequel un sprite peut se trouver, c'est
- * Ã  dire essentiellement l'action que le sprite rÃ©alise ou qu'il subit.
- * Cet Ã©tat est dÃ©crit par le nom de cette action, et Ã©ventuellement la
- * direction dans laquelle elle est effectuÃ©e (pour les actions orientÃ©es
- * comme le dÃ©placement, par exemple).
+ * Décrit un état simulé dans lequel un sprite peut se trouver, c'est
+ * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
+ * Cet état est décrit par le nom de cette action, et éventuellement la
+ * direction dans laquelle elle est effectuée (pour les actions orientées
+ * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiSimState  implements AiState
 {
 	/**
-	 * construit un objet simulant l'Ã©tat d'un sprite qui vient d'Ãªtre crÃ©Ã©,
+	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
 	 * i.e. qui ne fait rien (STANDING) dans une direction neutre (NONE).
 	 */
 	protected AiSimState()
@@ -51,15 +49,15 @@ final class AiSimState  implements AiState
 	}
 
 	/**
-	 * construit un objet simulant l'Ã©tat d'un sprite qui vient d'Ãªtre crÃ©Ã©,
-	 * en utilisant les valeurs passÃ©es en paramÃ¨tres
+	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
+	 * en utilisant les valeurs passées en paramètres
 	 * 
 	 * @param name
-	 * 		nom de l'Ã©tat
+	 * 		nom de l'état
 	 * @param direction	
 	 * 		direction de l'action
 	 * @param time	
-	 * 		durÃ©e courante de l'Ã©tat
+	 * 		durée courante de l'état
 	 */
 	protected AiSimState(AiStateName name, Direction direction, long time)
 	{	this.name = name;
@@ -68,10 +66,10 @@ final class AiSimState  implements AiState
 	}
 
 	/**
-	 * construit un objet simulant l'Ã©tat du sprite passÃ© en paramÃ¨tre
+	 * construit un objet simulant l'état du sprite passé en paramètre
 	 * 
 	 * @param sprite	
-	 * 		sprite dont on veut simuler l'Ã©tat
+	 * 		sprite dont on veut simuler l'état
 	 */
 	protected AiSimState(AiSprite sprite)
 	{	AiState state = sprite.getState();
@@ -81,10 +79,10 @@ final class AiSimState  implements AiState
 	}
 
 	/**
-	 * construit un objet simulant l'Ã©tat passÃ© en paramÃ¨tre
+	 * construit un objet simulant l'état passé en paramètre
 	 * 
 	 * @param state
-	 * 		Ã©tat Ã  reproduire
+	 * 		état à reproduire
 	 */
 	protected AiSimState(AiState state)
 	{	name = state.getName();
@@ -95,7 +93,7 @@ final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associÃ©e Ã  l'Ã©tat */
+	/** nom associée à l'état */
 	private AiStateName name;
 	
 	@Override
@@ -103,9 +101,6 @@ final class AiSimState  implements AiState
 	{	return name;
 	}
 	
-	/**
-	 * 
-	 */
 	protected void setEnded()
 	{	name = AiStateName.ENDED;		
 	}
@@ -113,7 +108,7 @@ final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associÃ©e Ã  l'Ã©tat (peut Ãªtre NONE, c'est Ã  dire : l'Ã©tat n'est pas orientÃ©) */
+	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
 	private Direction direction;
 	
 	@Override
@@ -124,7 +119,7 @@ final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** compte combien de temps le sprite a passÃ© dans l'Ã©tat courant */
+	/** compte combien de temps le sprite a passé dans l'état courant */
 	private long time = 0;
 	
 	@Override
@@ -133,11 +128,11 @@ final class AiSimState  implements AiState
 	}
 	
 	/**
-	 * permet de modifier le temps passÃ© dans cet Ã©tat.
-	 * mÃ©thode utilisÃ©e exclusivement lors des simulations
+	 * permet de modifier le temps passé dans cet état.
+	 * méthode utilisée exclusivement lors des simulations
 	 * 
 	 * @param time	
-	 * 		le nouveau temps passÃ© dans cet Ã©tat
+	 * 		le nouveau temps passé dans cet état
 	 */
 	protected void setTime(long time)
 	{	this.time = time;
@@ -174,10 +169,6 @@ final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * @return
-	 * 	 	La copie de cet Ã©tat.
-	 */
 	public AiSimState copy()
 	{	AiSimState result = new AiSimState();
 		result.direction = direction;
@@ -189,7 +180,7 @@ final class AiSimState  implements AiState
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine cet objet et libÃ¨re les ressources occupÃ©es
+	 * termine cet objet et libère les ressources occupées
 	 */
 	protected void finish()
 	{	direction = null;

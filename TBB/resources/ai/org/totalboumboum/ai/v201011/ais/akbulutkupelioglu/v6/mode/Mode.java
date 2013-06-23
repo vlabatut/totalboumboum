@@ -28,11 +28,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Matrix;
 /**
  * Represents a mode the artificial intelligence can be in. All the modes the IA can use
  * should extend this class.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public abstract class Mode
 {
 	/**
@@ -76,9 +74,7 @@ public abstract class Mode
 	 * Calculates the interest matrix for the corresponding mode.
 	 * 
 	 * @return the interest matrix of the corresponding mode.
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public abstract Matrix calculateMatrix() throws StopRequestException;
 
@@ -92,7 +88,6 @@ public abstract class Mode
 	 * @param tile2 The second tile.
 	 * @return the distance in pixels.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public double calculatePixelDistance(AiHero hero, AiTile tile1, AiTile tile2)
 			throws StopRequestException
@@ -108,7 +103,6 @@ public abstract class Mode
 	 * @param tile2 The second tile.
 	 * @return The pixel distance between the tiles.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public double calculatePixelDistance(AiTile tile1, AiTile tile2)
 			throws StopRequestException
@@ -124,7 +118,6 @@ public abstract class Mode
 	 * @param tile2 The second tile.
 	 * @return The pixel distance between the tiles.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int calculateTileDistance(AiTile centerTile, AiTile tile2) throws StopRequestException
 	{
@@ -143,7 +136,6 @@ public abstract class Mode
 	 * @param tile The tile to which the distance should be calculated.
 	 * @return The pixel distance between the tiles.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int calculateTileDistance(AiHero hero, AiTile centerTile, AiTile tile) throws StopRequestException
 	{
@@ -164,7 +156,6 @@ public abstract class Mode
 	 * in the interest matrix accordingly. 
 	 * @param ownHero The hero using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void processIndestructibles(AiHero ownHero) throws StopRequestException
 	{
@@ -181,7 +172,6 @@ public abstract class Mode
 	 * in the interest matrix accordingly. 
 	 * @param ownHero The hero using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void processFlames(AiHero ownHero) throws StopRequestException
 	{
@@ -202,7 +192,6 @@ public abstract class Mode
 	 * in the interest matrix accordingly. Chained bombs are also taken in consideration.
 	 * @param ownHero The hero using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void processBombs(AiHero ownHero) throws StopRequestException
 	{
@@ -281,7 +270,6 @@ public abstract class Mode
 	 * @param ownHero The hero using this.
 	 * @return A custom interest matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Matrix getCustom(AiHero ownHero) throws StopRequestException
 	{
@@ -328,7 +316,6 @@ public abstract class Mode
 	 * @param ownHero The hero using this.
 	 * @return A value, between 0 and 4, indicating the "openness" of a tile.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getTileValue(AiTile tile, AiHero ownHero) throws StopRequestException
 	{
@@ -351,7 +338,6 @@ public abstract class Mode
 	 * Returns the interest matrix.
 	 * @return The interest matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Matrix getInterest() throws StopRequestException
 	{
@@ -362,7 +348,6 @@ public abstract class Mode
 	 * Sets the interest matrix.
 	 * @param m The interest matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setInterest(Matrix m) throws StopRequestException
 	{
@@ -373,7 +358,6 @@ public abstract class Mode
 	 * Gets the zone associated with this mode.
 	 * @return The associated zone.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiZone getZone() throws StopRequestException
 	{
@@ -384,7 +368,6 @@ public abstract class Mode
 	 * Sets the zone associated with this mode.
 	 * @param zone The zone to be set.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setZone(AiZone zone) throws StopRequestException
 	{
@@ -394,7 +377,6 @@ public abstract class Mode
 	/**
 	 * Initializes the interest matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void resetMatrix() throws StopRequestException
 	{
@@ -409,7 +391,6 @@ public abstract class Mode
 	 * @param width The width of the new matrix.
 	 * @param height The height of the new matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void resetMatrix(int width, int height) throws StopRequestException
 	{
@@ -421,7 +402,6 @@ public abstract class Mode
 	 * Gets a new strategy, regarding the current state of the game.
 	 * @return The new strategy.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public abstract Strategy getNewStrategy() throws StopRequestException;
 	
@@ -429,7 +409,6 @@ public abstract class Mode
 	 * Decides whether or not a strategy change is needed, regarding the current state of the game.
 	 * @return The decision.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public abstract boolean strategyChangeNeeded() throws StopRequestException;
 	
@@ -439,7 +418,6 @@ public abstract class Mode
 	 * Sets the strategy change flag, making it possible to override the decision to change strategy.
 	 * @param b The value to be set.
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 */
 	public void setStrategyChangeNeeded(boolean b) throws StopRequestException
 	{

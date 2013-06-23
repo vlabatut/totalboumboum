@@ -17,53 +17,29 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Doğa Erişik
- * @author Abdurrahman Pektaş
+ * @author Doga Erisik
+ * @author Abdurrahman Pektas
  *
  */
-@SuppressWarnings("deprecation")
 public class Map {
 
-	/** */
 	@SuppressWarnings("unused")
 	private AiZone map;
-	/** */
 	private Collection<AiHero> adversaires;
 
-	/** */
 	private AiHero bomberman;
 
-	/** */
 	private Collection<AiBomb> bombes;
-	/** */
 	private Collection<AiBlock> blocks;
-	/** */
 	private Collection<AiItem> objets;
-	/** */
 	private Collection<AiFire> feu;
-	/** */
 	public int width;
-	/** */
 	public int height;
 
-	/** */
-	private int xadversaire;
-	/** */
-	private int yadversaire;
-	/** */
+	private int xadversaire, yadversaire;
 	private Etat matrix[][];
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -81,11 +57,7 @@ public class Map {
 		remplir();
 	}
 
-	/** nous remplaçons notre map
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	// nous rempla�ons notre map
 	private void remplir() throws StopRequestException {
 		ai.checkInterruption();
 		// premieremnt on met letat libre pour partout
@@ -124,7 +96,7 @@ public class Map {
 
 		this.getfires();
 
-		// remplaçons les bonus
+		// rempla�ons les bonus
 
 		Iterator<AiItem> itemit = objets.iterator();
 		AiItem item;
@@ -336,14 +308,7 @@ public class Map {
 	/**
 	 * cest le plus difficle condition a obtenir et naturellemnt cest le plus
 	 * sur
-	 * @param x1 
-	 * 		Description manquante !
-	 * @param y1 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public boolean isWalkable(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -359,15 +324,7 @@ public class Map {
 	}
 
 	/** nous allons lutiliser pour senfuire car on peut passer par les flmmes 
-	 * @param x1 
-	 * 		Description manquante !
-	 * @param y1 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 * */
+	 * @throws StopRequestException */
 	public boolean isRunnable(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -390,14 +347,7 @@ public class Map {
 	/**
 	 * on va utiliser cette methode pour voir sil ya qqch quon peut acceder en
 	 * laiissant des bombes car elle peut avoir des murs dest
-	 * @param x1 
-	 * 		Description manquante !
-	 * @param y1 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public boolean isReachable(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -419,14 +369,7 @@ public class Map {
 	 * on peut passer par des danger et des flammes on la cree car qd qqn met
 	 * deux bombes en meme temps on //ne bouge pas car on voit comme on na pas
 	 * de lieu pour se cacher
-	 * @param x1 
-	 * 		Description manquante !
-	 * @param y1 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public boolean isNoWhereElse(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
@@ -449,14 +392,7 @@ public class Map {
 	/**
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
-	 * @param x1 
-	 * 		Description manquante !
-	 * @param y1 
-	 * 		Description manquante !
-	 * @param range 
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 
 	public void setbombeposs(int x1, int y1, int range) throws StopRequestException {
@@ -536,10 +472,6 @@ public class Map {
 
 	}
 
-	/**
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setdanger() throws StopRequestException {
 		ai.checkInterruption();
 		for (int i = 0; i < width; i++) {
@@ -553,15 +485,7 @@ public class Map {
 		}
 	}
 
-	/** qd on transforme un bombe possible a un bombe reele
-	 * 
-	 * @param x1
-	 * 		Description manquante !
-	 * @param y1
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	// qd on transforme un bombe possible a un bombe reele
 	public void setbombe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		this.returnMatrix()[x1][y1] = Etat.BOMBE;
@@ -572,7 +496,6 @@ public class Map {
 	 * si cest pas possible de trouver un lieu sur apres avoir laisser une bombe
 	 * imaginaire il faut lenlevere
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void removebombe() throws StopRequestException {
 		ai.checkInterruption();
@@ -584,7 +507,6 @@ public class Map {
 	 * au cas de danger il court a un bombe la cause est peut etre quil faut
 	 * tjrs mettre a jour le map donc on a cree ces fonc-la
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void getbombs() throws StopRequestException {
 		ai.checkInterruption();
@@ -602,11 +524,6 @@ public class Map {
 		}
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void getfires() throws StopRequestException {
 		ai.checkInterruption();
 		Iterator<AiFire> itfeu = feu.iterator();
@@ -623,19 +540,12 @@ public class Map {
 		}
 	}
 
-	/** ,l envoie la matrice de map
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	// ,l envoie la matrice de map
 	public Etat[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
 		return matrix;
 	}
 
-	@Override
 	public String toString() {
 		String result = "";
 		for (int i = 0; i < height; i++) {

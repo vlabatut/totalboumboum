@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.match;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,33 +30,20 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * This class is the main panel used
- * when displaying the match
- * during game. It contains a menu
- * panel (bottom menu) and a data
- * panel (actual content).
  * 
  * @author Vincent Labatut
+ *
  */
 public class MatchSplitPanel extends SplitMenuPanel
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
-	/** Background image */
+{	private static final long serialVersionUID = 1L;
+
 	private BufferedImage image;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel
-	 * @param parent
-	 * 		Parent menu.
-	 */
 	public MatchSplitPanel(MenuContainer container, MenuPanel parent)
-	{	super(container,parent,BorderLayout.PAGE_END,GuiSizeTools.HORIZONTAL_SPLIT_RATIO);
+	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
@@ -69,10 +56,6 @@ public class MatchSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// REFRESH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Update the buttons depending on 
-	 * the match state.
-	 */
 	public void refreshButtons()
 	{	((MatchMenu)menuPart).refreshButtons();
 	}
@@ -80,12 +63,6 @@ public class MatchSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Automatically clicks on the appropriate
-	 * buttons in order to progress in the tournament.
-	 * Used to automatically chain many tournaments,
-	 * while evaluating agents.
-	 */
 	public void autoAdvance()
 	{	((MatchMenu)menuPart).autoAdvance();
 	}
@@ -93,41 +70,10 @@ public class MatchSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Changes the match displayed in this panel,
-	 * in order to go on playing (and not just
-	 * browse its statistics, like {@link #setMatchStats}).
-	 * 
-	 * @param match
-	 * 		The new match to display.
-	 */
 	public void setMatch(Match match)
-	{	MatchMenu tm = (MatchMenu)getMenuPart();
-		tm.setMatch(match);
+	{	((MatchMenu)menuPart).setMatch(match);
 	}
 	
-	/**
-	 * Sets a match loaded in order
-	 * to browse its statistics (and not
-	 * to go on playing, like {@link #setMatch}).
-	 * 
-	 * @param match
-	 * 		The loaded match.
-	 */
-	public void setMatchStats(Match match)
-	{	MatchMenu tm = (MatchMenu)getMenuPart();
-		tm.setBrowseOnly(true);
-		//match.rewind();
-		tm.setMatch(match);
-	}
-
-	/**
-	 * Returns the match displayed
-	 * in this panel.
-	 * 
-	 * @return
-	 * 		The current match.
-	 */
 	public Match getMatch()
 	{	return ((MatchMenu)menuPart).getMatch();	
 	}

@@ -6,21 +6,17 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author AslÄ±han Hanci
+ * @author Aslihan Hanci
  * @author Emine Canan Toprak
  *
  */
-@SuppressWarnings("deprecation")
 public class HanciToprak extends ArtificialIntelligence {
-	/** */
-	public static final long serialVersionUID = 1L;
-	/** le dernier dÃ©placement effectuÃ© */
+	private static final long serialVersionUID = 1L;
+	/** le dernier déplacement effectué */
 	private Integer lastMove = null;
-	/** */
 //	private final int DELAY = 100;
-	/** */
+
 //	private int artma = 0;
-	/** */
     int temp_putbomb = 0;
 
 	/**
@@ -30,52 +26,36 @@ public class HanciToprak extends ArtificialIntelligence {
 		super("HanciToprk");
 	}
 
-	/** */
 	int index;
-	/** */
 //	private int durma = 0;
-	/** */
 	private int durma_art = 0;
-	/** */
 //	private int yy = 0;
 
-	/** */
 	private int x1 = 0;
-	/** */
 	private int y1 = 0;
-	/** */
 	private boolean condition = true;
-	/** */
 	private boolean condition_1 = true;
 
-	/** */
 	private Integer lastMove_ = null;
 
-	/** */
 //	private int bomb_portee = 0;
-	/** */
 //	private int bombakoydum = 0;
 
-	/** */
 	private int[][] costMatrix = null;
-	/** */
 //	private int[][] costMatrix_ = null;
 
-	/** */
 	private int hasno_bomb = 0;
-	/** */
 	private int danger=0;
 	
-	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
+	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
 	/**
-	 * la methode ContrÃ´le le mouvement du personnage pour chaque itÃ©ration 
+	 * la methode contrôle le mouvement du personnage pour chaque itération 
 	*/
 
-	@Override
-	public Integer processAction() throws Exception
-	{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	public Integer call() throws Exception {
+		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)
 			firstTime = false;
@@ -83,17 +63,17 @@ public class HanciToprak extends ArtificialIntelligence {
 		{	
 		index = 0;
 
-		// on dÃ©termine la position actuelle
+		// on détermine la position actuelle
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
 		
-        // on dÃ©termine les dÃ©placements possibles
+        // on détermine les déplacements possibles
 		Vector<Integer> possibleMoves = getPossibleMoves(x, y);
 
 //		costMatrix_ = costMatrix;
-		costMatrix = getZoneMatrix();//initialisation du costMatrix(matrix Ã  utiliser pour prendre dÃ©cision)
+		costMatrix = getZoneMatrix();//initialisation du costMatrix(matrix à utiliser pour prendre décision)
 		
-		Decision();//pour chaque itÃ©ration on renouvele le costMatrix (les couts)
+		Decision();//pour chaque itération on renouvele le costMatrix (les couts)
 		
 
 		if (condition_1) {
@@ -279,17 +259,6 @@ public class HanciToprak extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param result
-	 * 		Description manquante !
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	private Integer hareket(Integer result, int x, int y) {
 
 		
@@ -332,13 +301,13 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * la methode Ã  utiliser pour faire AI prendre dÃ©cision 
+	 * la methode à utiliser pour faire AI prendre décision 
 	 * si il ya un danger du fire.
 	 * Si le resultat d'un de ses mouvements possibles est un domaine dangereux
 	 * la methode le sors de ses mouvements possibles
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param possibleMoves du personnages
+	 * @param Vector<Integer> temp possiblemoves du personnages
 	 * @return	au nouveau les moves possibles du peronnage. 
 	 */
 
@@ -369,7 +338,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * @param x	position du personnage
 	 * @param y position du personnage
 	 * @param move le mouvement prochain du personnage
-	 * @return les coordonnees de la case du personnage apres qu'il a realisÃ© son deplacement prochain
+	 * @return les coordonnees de la case du personnage apres qu'il a realisé son deplacement prochain
 	 */
 	private int[] resultMovePosition(int x, int y, int move) {
 		int[] result = { 5, 5 };
@@ -398,15 +367,12 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * la methode Ã  utiliser pour faire AI prendre decision 
+	 * la methode à utiliser pour faire AI prendre decision 
 	 * si il ya un danger du bombe
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param temp 
-	 * 		Description manquante !
-	 * @return	vrai si ce dÃ©placement est possible
-	 * @throws Exception 
-	 * 		Description manquante !
+	 * @param Vector<Integer> temp possiblemoves du personnages apres qu'il a mis du bombe
+	 * @return	vrai si ce déplacement est possible
 	 */
 	private Integer escapeFromBomb(int x, int y, Vector<Integer> temp)
 			throws Exception {
@@ -455,10 +421,10 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Renvoie la direction opposÃ© du dernier mouvement
+	 * Renvoie la direction opposé du dernier mouvement
 	 * 
 	 * @param lastmove direction du dernier mouvement 
-	 * @return	direction opposÃ© du dernier movement
+	 * @return	direction opposé du dernier movement
 	 */
 	private Integer opposite_dirextion(Integer lastmove) {
 
@@ -478,11 +444,11 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Renvoie la liste de tous les dÃ©placements possibles
-	 * pour un personnage situÃ© Ã  la position (x,y)
+	 * Renvoie la liste de tous les déplacements possibles
+	 * pour un personnage situé à la position (x,y)
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @return	la liste des dÃ©placements possibles
+	 * @return	la liste des déplacements possibles
 	 */
 
 	private Vector<Integer> getPossibleMoves(int x, int y) {
@@ -494,12 +460,12 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si le dÃ©placement dont le code a Ã©tÃ© passÃ© en paramÃ¨tre 
-	 * est possible pour un personnage situÃ© en (x,y).
+	 * Indique si le déplacement dont le code a été passé en paramètre 
+	 * est possible pour un personnage situé en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le dÃ©placement Ã  Ã©tudier
-	 * @return	vrai si ce dÃ©placement est possible
+	 * @param move	le déplacement à étudier
+	 * @return	vrai si ce déplacement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move) {
 		boolean result;		
@@ -525,10 +491,10 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si la case situÃ©e Ã  la position passÃ©e en paramÃ¨tre
+	 * Indique si la case située à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position Ã  Ã©tudier
-	 * @param y	position Ã  Ã©tudier
+	 * @param x	position à étudier
+	 * @param y	position à étudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y) {
@@ -556,9 +522,9 @@ public class HanciToprak extends ArtificialIntelligence {
 
 	
 	/**
-	 * controle les cases oÃ¹ se trouvent les bombes.
+	 * controle les cases où se trouvent les bombes.
 	 * Initialise les  couts
-	 * grÃ¢ce auxquels AI prends dÃ©cision. 
+	 * grâce auxquels AI prends décision. 
 	 * 
 	 */
 	private void Decision() {//  initialisation de costMatrix pour prendre decision 
@@ -656,9 +622,8 @@ public class HanciToprak extends ArtificialIntelligence {
 	
 	/**
 	 * affiche du matrice
-	 * @param matrix 
-	 * 		Description manquante !
 	 */
+
 	public void printMatrix(int[][] matrix) {
 		
 //		for (int i1 = 0; i1 < matrix[0].length; i1++) {

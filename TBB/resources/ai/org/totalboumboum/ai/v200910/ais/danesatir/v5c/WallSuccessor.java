@@ -17,23 +17,13 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class WallSuccessor extends BasicSuccessorCalculator {
-	/** */
 	private DaneSatir ai;
-	/** */
 	private TimeMatrice time;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public WallSuccessor(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
@@ -42,7 +32,6 @@ public class WallSuccessor extends BasicSuccessorCalculator {
 	/**
 	 * Ignore Destructible walls
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	@Override
 	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException

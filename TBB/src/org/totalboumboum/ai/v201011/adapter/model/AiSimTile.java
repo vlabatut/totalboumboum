@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -40,14 +40,12 @@ import org.totalboumboum.game.round.RoundVariables;
  * simule une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiSimTile extends AiTile
 {	
 	/**
-	 * construit une simulation de case Ã  partir des coordonnÃ©es passÃ©es en paramÃ¨tres
+	 * construit une simulation de case à partir des coordonnées passées en paramètres
 	 * 
 	 * @param zone
 	 * 		zone contenant la simulation
@@ -58,7 +56,7 @@ final class AiSimTile extends AiTile
 	 * @param posX
 	 * 		abscisse de la case
 	 * @param posY
-	 * 		ordonnÃ©e de la case
+	 * 		ordonnée de la case
 	 */
 	protected AiSimTile(AiSimZone zone, int line, int col, double posX, double posY)
 	{	this.zone = zone;
@@ -75,7 +73,7 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** simulation de la zone Ã  laquelle cette case appartient */
+	/** simulation de la zone à laquelle cette case appartient */
 	private AiSimZone zone;
 	
 	@Override
@@ -86,10 +84,7 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * @param sprite
-	 * 		?	
-	 */
+	// TODO comment
 	protected void addSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -123,11 +118,7 @@ final class AiSimTile extends AiTile
 		}
 	}
 	
-	/**
-	 * 
-	 * @param sprite
-	 * 		?	
-	 */
+	// TODO comment
 	protected void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -164,9 +155,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste Ã  usage interne des blocks Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des blocks éventuellement contenus dans cette case */
 	private final List<AiSimBlock> internalBlocks = new ArrayList<AiSimBlock>();
-	/** liste Ã  usage externe des blocks Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des blocks éventuellement contenus dans cette case */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
 	
 	@Override
@@ -176,10 +167,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les blocks Ã©ventuellement contenus dans cette case
+	 * 		les blocks éventuellement contenus dans cette case
 	 */
 	protected List<AiSimBlock> getInternalBlocks()
 	{	return internalBlocks;	
@@ -188,9 +179,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste Ã  usage interne des bombes Ã©ventuellement contenues dans cette case */
+	/** liste à usage interne des bombes éventuellement contenues dans cette case */
 	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
-	/** liste Ã  usage externe des bombes Ã©ventuellement contenues dans cette case */
+	/** liste à usage externe des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
 	
 	@Override
@@ -200,10 +191,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les bombes Ã©ventuellement contenues dans cette case
+	 * 		les bombes éventuellement contenues dans cette case
 	 */
 	protected List<AiSimBomb> getInternalBombs()
 	{	return internalBombs;	
@@ -212,9 +203,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste Ã  usage interne des feux Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des feux éventuellement contenus dans cette case */
 	private final List<AiSimFire> internalFires = new ArrayList<AiSimFire>();
-	/** liste Ã  usage externe des feux Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des feux éventuellement contenus dans cette case */
 	private final List<AiFire> externalFires = new ArrayList<AiFire>();
 	
 	@Override
@@ -224,10 +215,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les feux Ã©ventuellement contenus dans cette case
+	 * 		les feux éventuellement contenus dans cette case
 	 */
 	protected List<AiSimFire> getInternalFires()
 	{	return internalFires;	
@@ -236,9 +227,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste Ã  usage interne des sols Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des sols éventuellement contenus dans cette case */
 	private final List<AiSimFloor> internalFloors = new ArrayList<AiSimFloor>();
-	/** liste Ã  usage externe des sols Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des sols éventuellement contenus dans cette case */
 	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
 	
 	@Override
@@ -248,7 +239,7 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie les sols de cette case 
-	 * (il y a forcÃ©ment au moins un sol)
+	 * (il y a forcément au moins un sol)
 	 * 
 	 * @return	
 	 * 		les sols contenus dans cette case
@@ -260,9 +251,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste Ã  usage interne des personnages Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des personnages éventuellement contenus dans cette case */
 	private final List<AiSimHero> internalHeroes = new ArrayList<AiSimHero>();
-	/** liste Ã  usage externe des personnages Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
 	
 	@Override
@@ -272,10 +263,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les personnages Ã©ventuellement contenus dans cette case
+	 * 		les personnages éventuellement contenus dans cette case
 	 */
 	protected List<AiSimHero> getInternalHeroes()
 	{	return internalHeroes;	
@@ -284,9 +275,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste Ã  usage interne des items Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des items éventuellement contenus dans cette case */
 	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
-	/** liste Ã  usage externe des items Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des items éventuellement contenus dans cette case */
 	private final List<AiItem> externalItems = new ArrayList<AiItem>();
 
 	@Override
@@ -296,10 +287,10 @@ final class AiSimTile extends AiTile
 
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les items Ã©ventuellement contenus dans cette case
+	 * 		les items éventuellement contenus dans cette case
 	 */
 	protected List<AiSimItem> getInternalItems()
 	{	return internalItems;	
@@ -340,17 +331,15 @@ final class AiSimTile extends AiTile
 	}
 
 	/**
-	 * fonction auxiliaire utilisÃ©e pour dÃ©terminer si cette
-	 * case est traversable par le sprite passÃ© en paramÃ¨tre.
-	 * (cette fonction rÃ©alise le traitement relativement Ã  
-	 * la liste de sprite passÃ©e en paramÃ¨tre)
+	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * case est traversable par le sprite passé en paramètre.
+	 * (cette fonction réalise le traitement relativement à 
+	 * la liste de sprite passée en paramètre)
 	 * 
-	 * @param <T> 
-	 * 		?	
 	 * @param sprite
 	 * 		le sprite qui veut traverser cette case
 	 * @param list
-	 * 		les sprites de cette case Ã  tester
+	 * 		les sprites de cette case à tester
 	 * @return	
 	 * 		vrai si le sprite peut traverser tous les sprites de la liste
 	 */
@@ -405,16 +394,12 @@ final class AiSimTile extends AiTile
 	}
 
 	/**
-	 * termine les simulations de sprites passÃ©es en paramÃ¨tres
+	 * termine les simulations de sprites passées en paramètres
 	 * 
 	 * @param <T>
 	 * 		type de simulation
-	 * @param <U> 
-	 * 		?	
 	 * @param internalList
 	 * 		liste de simulations
-	 * @param externalList 
-	 * 		?	
 	 */
 	private <T extends AiSimSprite, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();

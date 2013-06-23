@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -67,26 +67,21 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.display.Display;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisColors;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisPaths;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisPause;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisTexts;
-import org.totalboumboum.engine.loop.display.game.DisplayCancel;
-import org.totalboumboum.engine.loop.display.game.DisplayFPS;
-import org.totalboumboum.engine.loop.display.game.DisplayMessage;
-import org.totalboumboum.engine.loop.display.player.DisplayPlayersNames;
-import org.totalboumboum.engine.loop.display.sprites.DisplaySprites;
-import org.totalboumboum.engine.loop.display.sprites.DisplaySpritesPositions;
-import org.totalboumboum.engine.loop.display.tiles.DisplayGrid;
-import org.totalboumboum.engine.loop.display.tiles.DisplayTilesPositions;
-import org.totalboumboum.engine.loop.display.time.DisplaySpeed;
-import org.totalboumboum.engine.loop.display.time.DisplaySpeedChange;
-import org.totalboumboum.engine.loop.display.time.DisplayTime;
-import org.totalboumboum.engine.loop.display.usage.DisplayEffectiveUsage;
-import org.totalboumboum.engine.loop.display.usage.DisplayRealtimeUsage;
+import org.totalboumboum.engine.loop.display.DisplayAisColors;
+import org.totalboumboum.engine.loop.display.DisplayAisPaths;
+import org.totalboumboum.engine.loop.display.DisplayAisPause;
+import org.totalboumboum.engine.loop.display.DisplayAisTexts;
+import org.totalboumboum.engine.loop.display.DisplayFPS;
+import org.totalboumboum.engine.loop.display.DisplayGrid;
+import org.totalboumboum.engine.loop.display.DisplayMessage;
+import org.totalboumboum.engine.loop.display.DisplayPlayersNames;
+import org.totalboumboum.engine.loop.display.DisplaySpeed;
+import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
+import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
+import org.totalboumboum.engine.loop.display.DisplayTime;
+import org.totalboumboum.engine.loop.display.DisplayUsage;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.PlayerLocation;
@@ -165,7 +160,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		while(i.hasNext())
 		{	// location
 			PlayerLocation pl = initialPositions[j];
-			Tile tile = level.getTile(pl.getRow(),pl.getCol());
+			Tile tile = level.getTile(pl.getLine(),pl.getCol());
 			
 			// sprite
 			Profile profile = i.next();
@@ -175,16 +170,13 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			pauseAis.add(false);
 			lastActionAis.add(0l);
 			
-			// record/transmit creation event
-			SpriteCreationEvent creationEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
-			RoundVariables.writeEvent(creationEvent);
-			// record/transmit insertion event
-			SpriteInsertionEvent insertionEvent = new SpriteInsertionEvent(player.getSprite());
-			RoundVariables.writeEvent(insertionEvent);
+			// record/transmit event
+			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.writeEvent(spriteEvent);
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
-//			level.addHero(hero,pl.getRow(),pl.getCol());
+//			level.addHero(hero,pl.getLine(),pl.getCol());
 			
 			// initial items
 			for(Entry<String,Integer> entry: items.entrySet())
@@ -348,16 +340,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							lastAction = 0;
 						else
 							lastAction = lastAction + milliPeriod;
-						long bombUselessAis = Configuration.getAisConfiguration().getBombUselessAis();
-						// we want slightly different times to avoid draws
-						double imprecision = (Math.random()-0.5)/5;
-						bombUselessAis = (long)(bombUselessAis*(1+imprecision));
-						if(bombUselessAis>0 && lastAction>=bombUselessAis)
+						if(lastAction>=Configuration.getAisConfiguration().getBombUselessAis())
 						{	int range = 0;
-							// we occasionally increase the range
-							double extraRangeProba = Math.random();
-							if(extraRangeProba>0.95)
-								range = 1;
 							int duration = 3000;
 							Tile tile = player.getSprite().getTile();
 							HollowLevel hollowLevel = round.getHollowLevel();
@@ -368,9 +352,6 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							ActionAbility actionAbility = bomb.modulateAction(appearAction);
 							if(actionAbility.isActive())
 							{	level.insertSpriteTile(bomb);
-								SpriteInsertionEvent event = new SpriteInsertionEvent(bomb);
-								RoundVariables.writeEvent(event);
-								//
 								SpecificDrop dropAction = new SpecificDrop(tile,bomb);
 								ActionEvent evt = new ActionEvent(dropAction);
 								bomb.processEvent(evt);
@@ -426,10 +407,6 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		display = new DisplaySpritesPositions(this);
 		displayManager.addDisplay(display);
 
-		// sprites
-		display = new DisplaySprites(this);
-		displayManager.addDisplay(display);
-	
 		// AIs paths
 		display = new DisplayAisPaths(this);
 		displayManager.addDisplay(display);
@@ -442,11 +419,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		// AIs pauses
 		display = new DisplayAisPause(this);
 		displayManager.addDisplay(display);
-		// AIs effective usage
-		display = new DisplayEffectiveUsage(this);
-		displayManager.addDisplay(display);
-		// AIs real-time usage
-		display = new DisplayRealtimeUsage(this);
+		// AIs CPU usage
+		display = new DisplayUsage(this);
 		displayManager.addDisplay(display);
 		
 		// players names
@@ -456,9 +430,6 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		// speed
 		display = new DisplaySpeed();
 		displayManager.addDisplay(display);
-		// change speed
-		display = new DisplaySpeedChange();
-		displayManager.addDisplay(display);
 		
 		// time
 		display = new DisplayTime(this);
@@ -467,18 +438,6 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		// FPS
 		display = new DisplayFPS(this);
 		displayManager.addDisplay(display);
-		
-		// cancel
-		display = new DisplayCancel();
-		displayManager.addDisplay(display);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CELEBRATION		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void updateSuddenDeath()
-	{	HollowLevel hollowLevel = round.getHollowLevel();
-		hollowLevel.applySuddenDeath(totalGameTime);
 	}
 	
 	/////////////////////////////////////////////////////////////////

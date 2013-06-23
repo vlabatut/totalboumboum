@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament.description;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -41,24 +41,23 @@ import org.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
- * This class handles the display of the
- * description of a single tournament, during a game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class SingleDescription extends TournamentDescription<SingleTournament> implements LimitsSubPanelListener
-{	/** Class id */
+{	
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
+	
+	private static final float SPLIT_RATIO = 0.6f;
+	
+	private PlayersListSubPanel playersPanel;
+	private LimitsSubPanel<MatchLimit> limitsPanel;
+	private PointsSubPanel pointsPanel;
+	
 	public SingleDescription(SplitMenuPanel container)
 	{	super(container);
 	
@@ -72,7 +71,7 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 				infoPanel.setLayout(layout);
 			}
 			
-			int margin = GuiSizeTools.panelMargin;
+			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
@@ -114,28 +113,8 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PANELS			/////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** Ratio used to split the scren */
-	private static final float SPLIT_RATIO = 0.6f;
-	/** Pannel displaying the list of players */
-	private PlayersListSubPanel playersPanel;
-	/** Panel displaying the limits */
-	private LimitsSubPanel<MatchLimit> limitsPanel;
-	/** Pannel displaying the point */
-	private PointsSubPanel pointsPanel;
-
-	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	/**
-	 * Changes the tournament displayed
-	 * in this panel.
-	 * 
-	 * @param tournament
-	 * 		New tournament.
-	 */
-	@Override
 	public void setTournament(SingleTournament tournament)
 	{	// init
 		this.tournament = tournament;

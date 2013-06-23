@@ -27,72 +27,60 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Cette classe implemente l'AI du groupe rouge. Actuellement, la strategie de
  * defense et le bonus sont implementes.
  * 
- * @author Koray Mançuhan
- * @author Özgün Pınarer
+ * 
+ * @author Koray Mancuhan/Ozgun Pinarer
+ * 
  */
-@SuppressWarnings("deprecation")
 public class MancuhanPinarer extends ArtificialIntelligence {
-	/** la case accessible et qui n'est pas dans la portee de la bombe est
-	// represente dans la matrice da la zone. */
+	// la case accessible et qui n'est pas dans la portee de la bombe est
+	// represente dans la matrice da la zone.
 	private final int CASE_SUR = 0;
-	/** le mur non-destructible represente dans la matrice de la zone */
+	// le mur non-destructible represente dans la matrice de la zone
 	private final int CASE_INACCESSIBLE = 1;
-	/** la portee d'une bombe represente dans la matrice de la zone */
+	// la portee d'une bombe represente dans la matrice de la zone
 	private final int CASE_SCOPE = 2;
 
-	/** */
 	private final int CASE_BOMBE = 3;
-	/** la mur destructible represente dans la matrice de la zone */
+	// la mur destructible represente dans la matrice de la zone
 	private final int MUR_DESTRUCTIBLE = 4;
-	/** l'item represente dans la matrice de la zone */
+	// l'item represente dans la matrice de la zone
 	private final int CASE_BONUS = 5;
 
-	/** */
 	private final int ADVERSAIRE = 7;
-	/** chemin a suivre pour l'algo defense */
+	// chemin a suivre pour l'algo defense
 	private AiPath nextMove = null;
-	/** chemin a suivre pour ramasser le bonus */
+	// chemin a suivre pour ramasser le bonus
 	private AiPath nextMoveBonus = null;
-	/** notre hero sur la zone */
+	// notre hero sur la zone
 	private AiHero ourHero;
 
-	/** */
 	private boolean checkPath = true;
 
-	/** Les variables de classes attaque. */
+	// Les variables de classes attaque.
 	private AiPath nextMoveAttack = null;
-	/** verifie s'il faut poser la bombe quand on attaque. */
+	//verifie s'il faut poser la bombe quand on attaque.
 	private boolean accomplished = false;
 
-	/** */
 	private AiHero chosenEnemy = null;
 
-	/** */
 	private int dropBombLimit;
-	/** verifie s'il faut poser la bombe quand on attaque pour ouvrir un chemin. */
+	//verifie s'il faut poser la bombe quand on attaque pour ouvrir un chemin.
 	private boolean openPath;
 
-	/** */
 	private boolean badPath;
 	
-	/** */
 	private boolean checkBomb = false;
 
-	/** */
 	private AiBomb openBomb = null;
 
-	/** */
 	private AiTile openBombTile = null;
 
-	/** */
 	private List<AiTile> pathTiles = new ArrayList<AiTile>();
 
 	// le booleen pour determiner s'il est necessaire d'entrer dans l'algo de
 	// bonus.
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA 
-	 */
-	@Override
+	/** m�thode appel�e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException {
 		// avant tout: test d'interruption
 		checkInterruption();
@@ -195,20 +183,20 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 				if (gameZone.getRemainingHeroes().size() > 1) {
 					this.nextMove = null;
 					this.nextMoveBonus = null;
-//					int scopeCount = 0;
-//					int blockCount = 0;
+					int scopeCount = 0;
+					int blockCount = 0;
 					List<AiTile> neighboors = ourHero.getTile().getNeighbors();
 					for (int i = 0; i < neighboors.size(); i++) {
 						checkInterruption();
 						if (matrice[neighboors.get(i).getLine()][neighboors
 								.get(i).getCol()] == CASE_SCOPE) {
-//							scopeCount++;
+							scopeCount++;
 						}
 						if (matrice[neighboors.get(i).getLine()][neighboors
 								.get(i).getCol()] == MUR_DESTRUCTIBLE
 								|| matrice[neighboors.get(i).getLine()][neighboors
 										.get(i).getCol()] == CASE_INACCESSIBLE) {
-//							blockCount++;
+							blockCount++;
 						}
 					}
 					boolean isDead = false;
@@ -267,7 +255,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void initialiseMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -293,7 +280,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void fillBombsMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -323,7 +309,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void fillBlocksMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -349,7 +334,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void fillFiresMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -372,7 +356,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void fillItemsBonus(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -395,7 +378,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void fillHerosMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -422,7 +404,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 *            la zone du jeu
 	 * @return la liste des points finaux.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 
 	private List<AiTile> calculateEndPoints(int[][] matrice, AiZone gameZone)
@@ -455,7 +436,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			Vrai si la distance de manhatten entre
 	 * 			l'ennemi et notre hero est cinq cases ou plus.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private boolean checkDistance(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -486,7 +466,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param matrice
 	 * 			La matrice representant la zone du jeu.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void attackAlgorithm(AiZone gameZone, int[][] matrice)
 			throws StopRequestException {
@@ -638,7 +617,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return
 	 * 			Vrai 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private boolean isSecurePathExists(AiZone gameZone, int[][] matrice,
 			AiHero enemy) throws StopRequestException {
@@ -733,7 +711,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return
 	 * 			vrai si l'hero est accessible
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private boolean isAccessibleEnemy(AiHero enemy) throws StopRequestException {
 		checkInterruption();
@@ -779,7 +756,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return
 	 * 			L'hero accessible
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private AiHero accessibleEnemyExists(AiZone gameZone)
 			throws StopRequestException {
@@ -817,7 +793,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			L'hero le plus proche
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private AiHero closestHero(AiZone gameZone) throws StopRequestException {
 		checkInterruption();
@@ -853,7 +828,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			la liste des cases voisines aux murs destructibles accessibles
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private List<AiTile> accessibleDestructibleTiles(AiZone gameZone,
 			int[][] matrice) throws StopRequestException {
@@ -904,7 +878,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return
 	 * 			la case la plus proche.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private AiTile closestTileToEnemy(AiZone gameZone,
 			List<AiTile> destructibleTiles, AiHero enemy)
@@ -932,7 +905,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @param matrice
 	 *            La matrice de zone
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void bonusAlgorithm(AiZone gameZone, int[][] matrice)
 			throws StopRequestException {
@@ -1021,10 +993,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
-	 * @param matrice 
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void defenseAlgorithm(AiZone gameZone, int[][] matrice)
 			throws StopRequestException {
@@ -1107,14 +1076,13 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 
 	/**
 	 * L'ordonne le temps d'explosion des bombes dont la portee
-	 * contient notre héro.
+	 * contient notre h�ro.
 	 * 
 	 * @param gameZone
 	 * 			La zone du jeu.
 	 * @return
 	 * 			La liste des bombes.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private List<AiBomb> orderBombTimes(AiZone gameZone)
 			throws StopRequestException {
@@ -1149,7 +1117,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			Le chemin a suivre
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private AiPath calculateDangerousPath(List<AiBomb> bombList)
 			throws StopRequestException {
@@ -1185,7 +1152,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return 
 	 * 		le chemin le plus court a parcourir
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private AiPath calculateShortestOffensePath(AiHero ownHero,
 			AiTile startPoint, List<AiTile> endPoints)
@@ -1220,7 +1186,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return 
 	 * 		le chemin le plus court a parcourir
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private AiPath calculateShortestPath(AiHero ownHero, AiTile startPoint,
 			List<AiTile> endPoints) throws StopRequestException {
@@ -1247,7 +1212,6 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return la nouvelle action de notre hero dans ce chemin
 	 * 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private AiAction newAction(AiPath nextMove) throws StopRequestException {
 		checkInterruption();

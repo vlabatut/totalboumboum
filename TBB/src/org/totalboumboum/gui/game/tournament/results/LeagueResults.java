@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament.results;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,21 +26,16 @@ import org.totalboumboum.gui.common.content.subpanel.results.LeagueResultsSubPan
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
 /**
- * This class handles the display of the
- * result of a league, during a game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class LeagueResults extends TournamentResults<LeagueTournament>
-{	/** Class id */
+{	
 	private static final long serialVersionUID = 1L;
+
+	private LeagueResultsSubPanel resultsPanel;
 	
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
 	public LeagueResults(SplitMenuPanel container)
 	{	super(container);
 		
@@ -63,9 +58,6 @@ public class LeagueResults extends TournamentResults<LeagueTournament>
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** Panel displaying the results */
-	private LeagueResultsSubPanel resultsPanel;
-	
 	@Override
 	public void refresh()
 	{	setTournament(tournament);

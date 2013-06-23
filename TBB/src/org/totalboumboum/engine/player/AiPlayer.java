@@ -2,7 +2,7 @@ package org.totalboumboum.engine.player;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,7 +26,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.AiAbstractManager;
+import org.totalboumboum.ai.AbstractAiManager;
 import org.totalboumboum.ai.AiLoader;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
@@ -55,7 +55,7 @@ public class AiPlayer extends ControlledPlayer
 	// AI				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** artificial intelligence */
-	private AiAbstractManager<?> ai = null;
+	private AbstractAiManager<?> ai = null;
 	
 	public boolean updateAi(boolean aisPause)
 	{	boolean result = ai.update(aisPause);
@@ -66,14 +66,13 @@ public class AiPlayer extends ControlledPlayer
 	{	ai.initAgent();
 	}
 	
-	public AiAbstractManager<?> getArtificialIntelligence()
+	public AbstractAiManager<?> getArtificialIntelligence()
 	{	return ai;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

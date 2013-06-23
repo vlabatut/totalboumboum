@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.gesture.anime;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -61,7 +61,7 @@ public class HollowAnimesLoader
 			String schemaFolder = FilePaths.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-
+			
 			// loading existing animes
 			loadAnimesElement(root,folderPath,pack);
 			
@@ -245,8 +245,6 @@ public class HollowAnimesLoader
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
 				shadowName = localFilePath+shadowName;
-//			else
-//				shadowName = shadowFilename;
 		}
 		
 		// shadow horizontal shift
@@ -323,8 +321,6 @@ public class HollowAnimesLoader
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
 				shadowName = localFilePath+shadowName;
-//			else
-//				shadowName = shadowFilename;
 		}
 		
 		// shadow horizontal shift
@@ -389,9 +385,7 @@ public class HollowAnimesLoader
 		{	shadowName = attribute.getValue().trim();
 			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
-				shadowName = filePath+shadowName;
-//			else
-//				shadowName = shadowFilename;
+				shadowName = filePath+attribute.getValue().trim();
 
 			// shadow horizontal shift
 			attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);

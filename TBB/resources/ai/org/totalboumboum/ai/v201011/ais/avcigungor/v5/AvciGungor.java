@@ -30,53 +30,36 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 
 /**
- * @author Ibrahim Avcı
- * @author Burak Güngör
+ * 
+ * @author AVCI/GUNGOR
+ * 
  */
-@SuppressWarnings({ "unused", "deprecation" })
+
+@SuppressWarnings("unused")
 public class AvciGungor extends ArtificialIntelligence {
 
 	// notre hero sur la zone
 	// private AiOutput aio;
-	/** */
 	double matrice[][];
-	/** */
 	double matriceUpdate[][];
-	/** */
 	private AiZone gameZone;
-	/** */
 	private AiHero ourHero;
-	/** */
 	public CollecteClass collectC;
-	/** */
 	public AttackClass attackC;
-	/** */
 	public FillingClass fc;
-	/** */
 	AiOutput aio;
-	/** */
 	private AiHero targetHero;
-	/** */
 	private Astar astar;
-	/** */
 	private AiPath path;
-	/** */
 	private AiTile tileDest;
-	/** */
 	private List<AiTile> possibleDest;
-	/** */
 	private Direction moveDir;
-	/** */
 	private WallController putBombController;
-	/** */
 	private HeuristicCalculator heuristicCalculator;
-	/** */
 	private MatrixCostCalculator costCalculator;
-	/** */
 	private boolean arrived;
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
-	@Override
+	/** m�thode appel�e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 
@@ -120,26 +103,12 @@ public class AvciGungor extends ArtificialIntelligence {
 
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 * @throws LimitReachedException
-	 * 		description manquante !
-	 */
 	private void updatePath() throws StopRequestException, LimitReachedException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
 		path = astar.processShortestPath(getActualTile(),possibleDest);
 		tileDest = path.getLastTile();
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public boolean hasArrived() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -153,23 +122,12 @@ public class AvciGungor extends ArtificialIntelligence {
 		}		
 		return arrived;
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiTile getActualTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		return ourHero.getTile();
 	}
-	/** on met a jour la matrice
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+	// on met a jour la matrice
 	private void updateCollectMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -178,21 +136,15 @@ public class AvciGungor extends ArtificialIntelligence {
 		collectC = new CollecteClass(this);
 		matriceUpdate = collectC.getMatrice();
 
-//		for (int i = 0; i < gameZone.getHeight(); i++) {
-//			for (int j = 0; j < gameZone.getWidth(); j++) {
-//				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
-//			}
-//			System.out.print("\n");
-//		}
-//		System.out.print("-----\n");
+		for (int i = 0; i < gameZone.getHeight(); i++) {
+			for (int j = 0; j < gameZone.getWidth(); j++) {
+				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
+			}
+			System.out.print("\n");
+		}
+		System.out.print("-----\n");
 
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void updateAttackMatrix() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -201,21 +153,15 @@ public class AvciGungor extends ArtificialIntelligence {
 		attackC = new AttackClass(this);
 		matriceUpdate = attackC.getMatrice();
 
-//		for (int i = 0; i < gameZone.getHeight(); i++) {
-//			for (int j = 0; j < gameZone.getWidth(); j++) {
-//				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
-//			}
-//			System.out.print("\n");
-//		}
-//		System.out.print("-----\n");
+		for (int i = 0; i < gameZone.getHeight(); i++) {
+			for (int j = 0; j < gameZone.getWidth(); j++) {
+				System.out.print("[" + (int)matriceUpdate[i][j] + "]");
+			}
+			System.out.print("\n");
+		}
+		System.out.print("-----\n");
 
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	void updateCostCalculator() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		for(int i=0;i<gameZone.getHeight();i++)
@@ -227,27 +173,10 @@ public class AvciGungor extends ArtificialIntelligence {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @param i
-	 * 		description manquante !
-	 * @param j
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public double getCaseLevel(int i, int j) throws StopRequestException {
 		checkInterruption();
 		return (+1)*matriceUpdate[i][j];
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void chooseTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -264,15 +193,6 @@ public class AvciGungor extends ArtificialIntelligence {
 
 	}
 
-	/**
-	 * 
-	 * @param matriceUpdate
-	 * 		description manquante !
-	 * @param aio
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void montrerLecran(double[][] matriceUpdate, AiOutput aio)
 			throws StopRequestException {
 		checkInterruption();
@@ -332,5 +252,7 @@ public class AvciGungor extends ArtificialIntelligence {
 				}
 			}
 		}
+
 	}
+
 }

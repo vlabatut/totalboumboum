@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.consume;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,35 +33,35 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de faire brÃ»ler un autre objet
+ * action de faire brûler un autre objet
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramÃ¨tre: actor=self
- * 	<br>paramÃ¨tre: target=oui (gÃ©nÃ©ral: toutes les classes)
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (général: toutes les classes)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
  * <p>ABILITY REFUSE
- * 	<br>paramÃ¨tre: actor=oui (fire?)
- * 	<br>paramÃ¨tre: target=N/D
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=oui (fire?)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramÃ¨tre: actor=oui
- * 	<br>paramÃ¨tre: target=oui
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=oui
+ * 	<br>paramètre: target=oui
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  */	
 /** 
  * putting fire to another object, usually performed by fire (but not necessarily).
@@ -78,8 +78,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralConsume extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

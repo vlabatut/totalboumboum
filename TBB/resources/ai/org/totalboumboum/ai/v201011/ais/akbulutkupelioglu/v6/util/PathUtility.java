@@ -1,4 +1,3 @@
-
 package org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util;
 
 import java.util.ArrayList;
@@ -11,11 +10,9 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 
 /**
  * Contains tools regarding paths.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class PathUtility
 {
 
@@ -25,7 +22,6 @@ public class PathUtility
 	 * @param monIa The AkbulutKupelioglu using this.
 	 * @return The first destructible tile.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static AiTile getFirstDestructibleOnPath(AiPath path, AkbulutKupelioglu monIa) throws StopRequestException
 	{
@@ -45,7 +41,6 @@ public class PathUtility
 	 * @param monIa The AkbulutKupelioglu using this.
 	 * @return A list of destructibles on the path.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static List<AiTile> getDestructiblesOnPath(AiPath path, AkbulutKupelioglu monIa) throws StopRequestException
 	{
@@ -66,7 +61,6 @@ public class PathUtility
 	 * @param monIa The AkbulutKupelioglu using this.
 	 * @return A list of tiles before the destructibles.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static List<AiTile> getDestructibleNeighboursOnPath(AiPath path, AkbulutKupelioglu monIa) throws StopRequestException
 	{

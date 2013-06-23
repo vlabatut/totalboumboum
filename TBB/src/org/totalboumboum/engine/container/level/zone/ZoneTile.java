@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,8 +32,8 @@ public class ZoneTile implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	public ZoneTile(int row, int col)
-	{	this.row = row;
+	public ZoneTile(int line, int col)
+	{	this.line = line;
 		this.col = col;
 	}
 	
@@ -50,17 +50,29 @@ public class ZoneTile implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ROW				/////////////////////////////////////////////
+	// LINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int row;
+	private int line;
 	
-	public int getRow()
-	{	return row;
+	public int getLine()
+	{	return line;
 	}
-	public void setRow(int row)
-	{	this.row = row;
+	public void setLine(int line)
+	{	this.line = line;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// LINE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String variable = null;
+
+	public String getVariable()
+	{	return variable;
+	}
+	public void setVariable(String variable)
+	{	this.variable = variable;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// BLOCK			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.league;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,32 +35,12 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 /**
- * Loads an XML file representing a league tournament.
  * 
  * @author Vincent Labatut
+ *
  */
 public class LeagueTournamentLoader
 {
-	/**
-	 * Processes the main element of an XML
-	 * file representing a league tournament.
-	 * 
-	 * @param folder
-	 * 		Folder containing the XML file.
-	 * @param root
-	 * 		Root element of the tournament.
-	 * @return
-	 * 		The read tournament.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	public static LeagueTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	LeagueTournament result = new LeagueTournament();
 		Element element;
@@ -93,25 +73,6 @@ public class LeagueTournamentLoader
 		return result;
 	}
 
-	/**
-	 * Loads the XML element representing matches.
-	 * 
-	 * @param root
-	 * 		Root XML element.
-	 * @param folder
-	 * 		Folder containing the XML file.
-	 * @param result
-	 * 		The read tournament.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	@SuppressWarnings("unchecked")
 	private static void loadMatchesElement(Element root, String folder, LeagueTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// matches order
@@ -126,26 +87,7 @@ public class LeagueTournamentLoader
 			loadMatchElement(temp,folder,result);
 		}
 	}
-	
-	/**
-	 * Loads an XML element representing a match.
-	 * 
-	 * @param root
-	 * 		Root XML element.
-	 * @param folder
-	 * 		Folder containing the XML file.
-	 * @param result
-	 * 		The read tournament.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
+		
 	private static void loadMatchElement(Element root, String folder, LeagueTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Match match = TournamentLoader.loadMatchElement(root,folder,result);
 		result.addMatch(match);

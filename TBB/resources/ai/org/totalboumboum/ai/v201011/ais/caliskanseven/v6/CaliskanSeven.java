@@ -18,21 +18,15 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
  * collecting mode),make the ai to choose the optimum tile and time to place the
  * bomb,simulate the path that ai can reach.
  * 
- * @author Mustafa Çalışkan
- * @author Cihan Seven
+ * @author Cihan Adil SEVEN & Mustafa CALISKAN
  */
-@SuppressWarnings({ "unused", "deprecation" })
+@SuppressWarnings("unused")
 public class CaliskanSeven extends ArtificialIntelligence {
 
-	/** */
 	AiTile oldtarget = null;
-	/** */
 	AiPath oldpath = null;
-	/** */
 	boolean collecte = true;
-	/** */
 	int targetcounter = 0;
-	/** */
 	boolean debug = false;
 
 	@Override

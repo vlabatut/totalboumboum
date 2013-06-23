@@ -12,25 +12,19 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Coordinate;
  * If a HashMap containing the distances to a certain tile is supplied,
  * the comparison is made according to those distances.
  * Else, the comparison is based solely on the values of coordinates.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class CoordinateComparator implements Comparator<Coordinate>{
 
-	/** */
+	
 	private HashMap<Coordinate, Integer> distanceMap = null;
 	
 	/**
 	 * The constructor initializing the distance map using a HashMap containing
 	 * the distance values to corresponding coordinates.
-	 * @param ia 
-	 * 		description manquante !
 	 * @param dm
-	 * 		description manquante !
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 */
 	public CoordinateComparator(AkbulutKupelioglu ia,HashMap<Coordinate, Integer> dm) throws StopRequestException
 	{

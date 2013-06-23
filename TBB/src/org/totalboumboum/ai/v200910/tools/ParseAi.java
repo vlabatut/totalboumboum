@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.tools;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -34,18 +34,13 @@ import java.util.List;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
- * cette m√©thode parse les codes sources d√©finissant une IA et v√©rifie
- * que les appels √† checkInterruption sont effectu√©s correctement
+ * cette mÈthode parse les codes sources dÈfinissant une IA et vÈrifie
+ * que les appels ‡ checkInterruption sont effectuÈs correctement
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, √† ne plus utiliser. 
  */
 public class ParseAi
-{	/** Num√©ro de s√©rie */
-	private static boolean verbose = false;
-	/** */
+{	private static boolean verbose = false;
 	private final static List<String> IGNORED_PACKAGES = Arrays.asList(new String[]
  	{	"v1","v1_1","v1_2","v1_3",
  		"v2","v2_1","v2_2","v2_3",
@@ -54,31 +49,11 @@ public class ParseAi
  		"v5_1"
  	});
 	
-	/**
-	 * 
-	 * @param args
-	 * 		?	
-	 * @throws IOException
-	 * 		?	
-	 * @throws ParseException
-	 * 		?	
-	 */
 	public static void main(String[] args) throws IOException, ParseException
 	{	String aiPack = "resources/ai/org/totalboumboum/ai/v200910/ais";
 		parseAiPack(aiPack);
 	}
 	
-	/**
-	 * 
-	 * @param file
-	 * 		?	
-	 * @param level
-	 * 		?	
-	 * @throws ParseException
-	 * 		?	
-	 * @throws IOException
-	 * 		?	
-	 */
 	private static void parseFile(File file, int level) throws ParseException, IOException
 	{	for(int i=0;i<level;i++)
 			System.out.print("..");
@@ -107,20 +82,9 @@ public class ParseAi
         }
 	}
 	
-	/**
-	 * 
-	 * @param folder
-	 * 		?	
-	 * @param level
-	 * 		?	
-	 * @throws ParseException
-	 * 		?	
-	 * @throws IOException
-	 * 		?	
-	 */
 	private static void parseFolder(File folder, int level) throws ParseException, IOException
 	{	if(IGNORED_PACKAGES.contains(folder.getName()))
-			System.out.println("Paquetage "+folder.getPath()+" ignor√©");
+			System.out.println("Paquetage "+folder.getPath()+" ignorÈ");
 		else
 		{	System.out.println("Analyse du paquetage "+folder.getPath());
 		
@@ -135,36 +99,17 @@ public class ParseAi
 					else if(verbose)
 					{	for(int i=0;i<level;i++)
 							System.out.print("..");
-						System.out.println("Le fichier "+file.getPath()+" n'a pas √©t√© reconnu comme un source Java");
+						System.out.println("Le fichier "+file.getPath()+" n'a pas ÈtÈ reconnu comme un source Java");
 					}
 				}
 			}
 		}
 	}
 
-	/**
-	 * 
-	 * @param aiPath
-	 * 		?	
-	 * @throws ParseException
-	 * 		?	
-	 * @throws IOException
-	 * 		?	
-	 */
 	public static void parseAi(String aiPath) throws ParseException, IOException
 	{	File aiFolder = new File(aiPath);
 		parseAi(aiFolder);
 	}
-	
-	/**
-	 * 
-	 * @param aiFolder
-	 * 		?	
-	 * @throws ParseException
-	 * 		?	
-	 * @throws IOException
-	 * 		?	
-	 */
 	private static void parseAi(File aiFolder) throws ParseException, IOException
 	{	System.out.println("----------------------------------------------------------------------");
 		System.out.println("Analyse de l'AI "+aiFolder.getPath());
@@ -173,15 +118,6 @@ public class ParseAi
 		System.out.print("\n\n");
 	}
 	
-	/**
-	 * 
-	 * @param aiPack
-	 * 		?	
-	 * @throws ParseException
-	 * 		?	
-	 * @throws IOException
-	 * 		?	
-	 */
 	public static void parseAiPack(String aiPack) throws ParseException, IOException
 	{	File folder = new File(aiPack);
 		File[] files = folder.listFiles();

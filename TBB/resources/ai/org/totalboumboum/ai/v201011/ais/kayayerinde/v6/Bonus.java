@@ -9,34 +9,17 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings("deprecation")
+
+
 public class Bonus {
-	/** */
 	private KayaYerinde onder;
-	/** */
 	private Matris matris;
-	/** */
 	private Astar astar;
-	/** */
 	private AiTile gittigim;
-	/** */
 	private AiTile incelenecek;
-	/** */
 	private boolean running;
-	/** */
-//	private boolean yaz;
+	private boolean yaz;
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Bonus(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -46,26 +29,12 @@ public class Bonus {
 		running=false;
 	}
 
-	/**
-	 * 
-	 * @param matris
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -78,8 +47,8 @@ public class Bonus {
 				incelenecek=own;
 				if(incele())
 				{
-//					if(yaz)
-//						System.out.println("bonusta bomba bıraktı "+onder.getOwnHero().getTile());
+					if(yaz)
+						System.out.println("bonusta bomba bıraktı "+onder.getOwnHero().getTile());
 					return new AiAction(AiActionName.DROP_BOMB);
 				}
 			}
@@ -108,13 +77,6 @@ public class Bonus {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private boolean incele() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -147,37 +109,17 @@ public class Bonus {
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void run() throws StopRequestException
 	{
 		onder.checkInterruption();
 		running=true;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public boolean isRunning() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return running;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Astar getAstar() throws StopRequestException
 	{
 		onder.checkInterruption();

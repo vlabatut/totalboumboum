@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.items;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,10 +33,8 @@ import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -71,7 +69,7 @@ public class InitialItemsSubPanel extends TableSubPanel
 		// widths
 		int lineHeight = getLineHeight();
 		int iconWidth = lineHeight;
-		int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiSizeTools.subPanelMargin*(COL_SUBS*colGroups-1)))/colGroups;
+		int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiTools.subPanelMargin*(COL_SUBS*colGroups-1)))/colGroups;
 		
 		if(levelPreview!=null)
 		{	if(levelPreview.getInitialItems().size()>lines*colGroups)
@@ -102,15 +100,15 @@ public class InitialItemsSubPanel extends TableSubPanel
 				//
 				int colSub = 0;
 				{	setLabelIcon(line,colGroup,colSub,image,tooltip);
-					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,colGroup,colSub,fg);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}
 				{	String text = value;
 					setLabelText(line,colGroup,colSub,text,tooltip);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}

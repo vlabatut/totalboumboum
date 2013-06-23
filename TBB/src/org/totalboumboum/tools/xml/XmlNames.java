@@ -6,7 +6,7 @@ import javax.xml.parsers.DocumentBuilder;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -78,8 +78,6 @@ public class XmlNames
 	public static final String CASE = "case";
 	public static final String CACHE = "cache";
 	public static final String CACHE_LIMIT = "cacheLimit";
-	public static final String CATEGORY = "category";
-	public static final String CATEGORIES = "categories";
 	public static final String CENTRAL = "central";
 	public static final String CHARACTER = "character";
 	public static final String COL = "col";
@@ -87,7 +85,6 @@ public class XmlNames
 	public static final String COLORS = "colors";
 	public static final String COLORMAP = "colormap";
 	public static final String COLORSPRITE = "colorsprite";
-	public static final String COMBINATION = "combination";
 	public static final String COMPARATOR = "comparator";
 	public static final String CONCRETE_BLOCKS = "concreteBlocks";
 	public static final String CONCRETE_BOMBS = "concreteBombs";
@@ -102,8 +99,6 @@ public class XmlNames
 	public static final String CONTROL = "control";
 	public static final String CONTROLS = "controls";
 	public static final String COUNT = "count";
-	public static final String CRITERIA = "criteria";
-	public static final String CRITERION = "criterion";
 	public static final String DATE = "date";
 	public static final String DATES = "dates";
 	public static final String DEFAULT = "default";
@@ -113,7 +108,6 @@ public class XmlNames
 	public static final String DELAY = "delay";
 	public static final String DIRECT = "direct";
 	public static final String DIRECTION = "direction";
-	public static final String DISABLED = "disabled";
 	public static final String DISCRETIZE = "discretize";
 	public static final String DISPLAY = "display";
 	public static final String DISPLAY_EXCEPTIONS = "displayExceptions";
@@ -122,7 +116,6 @@ public class XmlNames
 	public static final String DURATION = "duration";
 	public static final String ENGINE = "engine";
 	public static final String EVENT = "event";
-	public static final String EVENTS = "events";
 	public static final String EXAEQUO_SHARE = "exaequoShare";
 	public static final String EXPLOSION = "explosion";
 	public static final String EXPLOSIONS = "explosions";
@@ -214,7 +207,6 @@ public class XmlNames
 	public static final String MINIMIZE_CONFRONTATIONS = "minimizeConfrontations";
 	public static final String MINIMUM = "minimum";
 	public static final String MISC = "misc";
-	public static final String MODE = "mode";
 	public static final String MODULATION = "modulation";
 	public static final String MULTIPLICATION = "multiplication";
 	public static final String NAME = "name";
@@ -268,7 +260,6 @@ public class XmlNames
 	public static final String RED = "red";
 	public static final String REFERENCE = "reference";
 	public static final String REGULAR_LAUNCH = "regularLaunch";
-	public static final String RELATIVE = "relative";
 	public static final String REPEAT = "repeat";
 	public static final String REPLAY = "replay";
 	public static final String ROUND = "round";
@@ -302,11 +293,8 @@ public class XmlNames
 	public static final String STEPS = "steps";
 	public static final String STRENGTH = "strength";
 	public static final String SUBTRACTION = "subtraction";
-	public static final String SUDDEN_DEATH = "suddenDeath";
 	public static final String SUMMATION = "summation";
 	public static final String SUP = "sup";
-	public static final String TABLE = "table";
-	public static final String TABLES = "tables";
 	public static final String TARGET = "target";
 	public static final String TARGET_CIRCUMSTANCES = "targetCircumstances";
 	public static final String TARGET_CONTACT = "targetContact";

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,42 +26,40 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 
 /**
- * Simule un bloc du jeu, c'est Ã  dire gÃ©nÃ©ralement un mur
- * (pouvant Ãªtre dÃ©truit ou pas). 
+ * Simule un bloc du jeu, c'est à dire généralement un mur
+ * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiSimBlock extends AiSimSprite implements AiBlock
 {
 	/**
-	 * crÃ©e une simulation du bloc passÃ© en paramÃ¨tre,
-	 * avec les propriÃ©tÃ©s passÃ©es en paramÃ¨tres.
+	 * crée une simulation du bloc passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
-	 * 		numÃ©ro d'identification du bloc
+	 * 		numéro d'identification du bloc
 	 * @param tile
 	 * 		case contenant le bloc
 	 * @param posX
 	 * 		abscisse du bloc
 	 * @param posY
-	 * 		ordonnÃ©e du bloc
+	 * 		ordonnée du bloc
 	 * @param posZ
 	 * 		hauteur du bloc
 	 * @param state
-	 * 		Ã©tat du bloc
+	 * 		état du bloc
 	 * @param burningDuration
-	 * 		durÃ©e de combustion du bloc
+	 * 		durée de combustion du bloc
 	 * @param currentSpeed
-	 * 		vitesse courante de dÃ©placement du bloc (a priori il est immobile)
+	 * 		vitesse courante de déplacement du bloc (a priori il est immobile)
 	 * @param destructible
-	 * 		sensibilitÃ© au feu
+	 * 		sensibilité au feu
 	 * @param stopHeroes
-	 * 		capacitÃ© Ã  bloquer les personnages
+	 * 		capacité à bloquer les personnages
 	 * @param stopFires
-	 * 		capacitÃ© Ã  bloquer le feu
+	 * 		capacité à bloquer le feu
 	 */
 	protected AiSimBlock(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -74,11 +72,11 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	}	
 
 	/**
-	 * crÃ©e une simulation du bloc passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une simulation du bloc passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param block
-	 * 		sprite Ã  simuler
+	 * 		sprite à simuler
 	 * @param tile
 	 * 		case contenant le sprite
 	 */
@@ -93,7 +91,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut Ãªtre dÃ©truit par une bombe */
+	/** indique si ce bloc peut être détruit par une bombe */
 	private boolean destructible;
 
 	@Override
@@ -102,10 +100,10 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	}
 	
 	/**
-	 * modifie la destructibilitÃ© de ce mur
+	 * modifie la destructibilité de ce mur
 	 * 
 	 * @param destructible
-	 * 		nouvelle valeur de l'indicateur de destructibilitÃ© du mur
+	 * 		nouvelle valeur de l'indicateur de destructibilité du mur
 	 */
 	public void setDestructible(boolean destructible)
 	{	this.destructible = destructible;
@@ -131,10 +129,10 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	// par dÃ©faut, on bloque
+	{	// par défaut, on bloque
 		boolean result = false;
 		
-		// si le sprite considÃ©rÃ© est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -147,7 +145,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 				result = false;
 		}
 		
-		// si le sprite considÃ©rÃ© est un feu
+		// si le sprite considéré est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

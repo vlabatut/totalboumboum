@@ -12,21 +12,18 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.util.Coordinate;
 /**
  * Class used to find out the distances of accessible tiles from a given tile,
  * using breadth-first search. 
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class BreadthFirstSearch
 {
-	/** */
+	
 	private AkbulutKupelioglu monIa;
 	
 	/**
 	 * Creates a new BreadthFirstSearch instance.
 	 * @param ia the AkbulutKupelioglu using this BreadthFirstDistance
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public BreadthFirstSearch(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -39,7 +36,6 @@ public class BreadthFirstSearch
 	 * @param tile The starting tile.
 	 * @return A coordinate list containing all the accessible tiles and their respective distances.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public ArrayList<Coordinate> search(AiTile tile) throws StopRequestException
 	{

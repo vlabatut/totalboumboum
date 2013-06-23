@@ -2,14 +2,14 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
 
 /**
  * 
- * @author Doğus Burcu Demirağ
- * @author Zeynep Şagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
 public class LienRecherche {
-	/** noeud parent */
+	// noeud parent
 	private Node origin;
-	/** noeud fils */
+	// noeud fils
 	private Node target;
 
 	/**
@@ -17,6 +17,7 @@ public class LienRecherche {
 	 * 
 	 * @param origin noeud parent
 	 * @param target noeud fils
+	 * @param action action de transition
 	 */
 	public LienRecherche(Node origin, Node target) {
 		this.origin = origin;
@@ -44,7 +45,7 @@ public class LienRecherche {
 	/**
 	 * Renvoie l'action de transition
 	 * 
-	 * @return l'action associée au lien
+	 * @return l'action associ�e au lien
 	 */
 
 	@Override

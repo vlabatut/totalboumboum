@@ -2,28 +2,19 @@ package org.totalboumboum.ai.v200910.ais.dereligeckalan.v5;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
-/**
- * @author Merih Inal Dereli
- * @author Gökhan Geçkalan
- */
-@SuppressWarnings("deprecation")
 public class SearchLink {
-	/** */
 	private Noeud origin;
-	/** noeud fils */
+	// noeud fils
 	private Noeud target;
 
-	/** */
 	private DereliGeckalan source;
 	/**
 	 * Constructeur.
 	 * 
 	 * @param origin	noeud parent
 	 * @param target	noeud fils
-	 * @param source 
-	 * 		Description manquante !
+	 * @param action	action de transition
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public SearchLink(Noeud origin,Noeud target,DereliGeckalan source) throws StopRequestException
 	{	
@@ -37,6 +28,7 @@ public class SearchLink {
 	/**
 	 * Renvoie le noeud parent du lien 
 	 * @return	le noeud parent
+	 * @throws StopRequestException 
 	 */
 	public Noeud getOrigin()
 	{   
@@ -47,7 +39,6 @@ public class SearchLink {
 	 * Renvoie le noeud fils du lien
 	 * @return	le noeud fils
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public Noeud getTarget() throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire
@@ -59,11 +50,10 @@ public class SearchLink {
 
 	/**
 	 * Renvoie une valeur indiquant l'egalite de l'objet
-	 * vrai si l'objet passé en parametre est egale à cet objet
+	 * vrai si l'objet pass� en parametre est egale � cet objet
 	 * false sinon 
 	 * @return result indique l'egalite	
 	 */
-	@Override
 	public boolean equals(Object object)
 	{		boolean result;
 		if(object == null)

@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.points;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -38,10 +38,8 @@ import org.totalboumboum.game.points.PointsTotal;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
 
 /**
@@ -92,12 +90,12 @@ public class PointsSubPanel extends TableSubPanel
 
 		if(pointsProcessor==null)
 		{	// title
-			Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			setTitleBackground(bg);
 		}
 		else
 		{	// title
-			{	Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				setTitleBackground(bg);
 			}
 		
@@ -113,9 +111,9 @@ public class PointsSubPanel extends TableSubPanel
 				int colSub = 0;
 				// left
 				{	String tooltip = tempTt.get(colSub);
-					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,colGroup,colSub,fg);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					if(tempDt.get(colSub) instanceof BufferedImage)
 					{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
@@ -137,7 +135,7 @@ public class PointsSubPanel extends TableSubPanel
 					{	String text = (String)tempDt.get(colSub);
 						setLabelText(line,colGroup,colSub,text,tooltip);
 					}
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}
@@ -154,7 +152,7 @@ public class PointsSubPanel extends TableSubPanel
 		setColSubMinWidth(0,iconWidth);
 		setColSubPrefWidth(0,iconWidth);
 		setColSubMaxWidth(0,iconWidth);
-		int textWidth = getDataWidth() - (COL_SUBS-1)*GuiSizeTools.subPanelMargin - iconWidth;
+		int textWidth = getDataWidth() - (COL_SUBS-1)*GuiTools.subPanelMargin - iconWidth;
 		setColSubMinWidth(1,textWidth);
 		setColSubPrefWidth(1,textWidth);
 		setColSubMaxWidth(1,textWidth);
@@ -224,7 +222,7 @@ public class PointsSubPanel extends TableSubPanel
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.RANKPOINTS;
-			BufferedImage image = GuiImageTools.getIcon(name);
+			BufferedImage image = GuiTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
@@ -233,7 +231,7 @@ public class PointsSubPanel extends TableSubPanel
 				name = prefix+GuiKeys.DATA+GuiKeys.SHARE;
 			else
 				name = prefix+GuiKeys.DATA+GuiKeys.NO+GuiKeys.SHARE;
-			image = GuiImageTools.getIcon(name);
+			image = GuiTools.getIcon(name);
 			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
@@ -277,7 +275,7 @@ public class PointsSubPanel extends TableSubPanel
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.DISCRETIZE;
-			BufferedImage image = GuiImageTools.getIcon(name);
+			BufferedImage image = GuiTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);				
@@ -321,7 +319,7 @@ public class PointsSubPanel extends TableSubPanel
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.RANKINGS;
-			BufferedImage image = GuiImageTools.getIcon(name);
+			BufferedImage image = GuiTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			if(inverted)
 				name = prefix+GuiKeys.DATA+GuiKeys.INVERTED;
@@ -355,7 +353,7 @@ public class PointsSubPanel extends TableSubPanel
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.CONSTANT;
-		BufferedImage image = GuiImageTools.getIcon(name);
+		BufferedImage image = GuiTools.getIcon(name);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);
@@ -370,7 +368,7 @@ public class PointsSubPanel extends TableSubPanel
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.TOTAL;
-		BufferedImage image = GuiImageTools.getIcon(name);
+		BufferedImage image = GuiTools.getIcon(name);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);
@@ -386,7 +384,7 @@ public class PointsSubPanel extends TableSubPanel
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.SCORE;
-		BufferedImage image = GuiImageTools.getIcon(name);
+		BufferedImage image = GuiTools.getIcon(name);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);
@@ -417,7 +415,7 @@ public class PointsSubPanel extends TableSubPanel
 				name = prefix+GuiKeys.DATA+GuiKeys.TIME;
 				break;					
 		}
-		image = GuiImageTools.getIcon(name);
+		image = GuiTools.getIcon(name);
 		tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 		dt.add(image);
 		tt.add(tooltip);

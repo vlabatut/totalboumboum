@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.communication;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,23 +24,21 @@ package org.totalboumboum.ai.v201011.adapter.communication;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Classe reprÃ©sentant une action qu'un joueur peut effectuer.
- * Elle est utilisÃ©e pour indiquer au jeu quelle est la prochaine
- * action que l'IA veut rÃ©aliser.
+ * Classe représentant une action qu'un joueur peut effectuer.
+ * Elle est utilisée pour indiquer au jeu quelle est la prochaine
+ * action que l'IA veut réaliser.
  * <p>
- * L'action est dÃ©crite par un nom et Ã©ventuellement une direction.
+ * L'action est décrite par un nom et éventuellement une direction.
  * L'action et la direction sont toutes les deux constantes, respectivement
  * de classes AiActionName et Direction.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class AiAction
 {
 	/**
-	 * construit une action non-orientÃ©e (DROP_BOMB,NONE,PUNCH...)
+	 * construit une action non-orientée (DROP_BOMB,NONE,PUNCH...)
 	 * @param name	le nom de l'action
 	 */
 	public AiAction(AiActionName name)
@@ -48,7 +46,7 @@ public class AiAction
 	}
 	
 	/**
-	 * construit une action orientÃ©e (MOVE...)
+	 * construit une action orientée (MOVE...)
 	 * @param name	le nom de l'action
 	 * @param direction	la direction de l'action
 	 */
@@ -62,11 +60,11 @@ public class AiAction
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associÃ© Ã  l'action */
+	/** nom associé à l'action */
 	private AiActionName name;
 	
 	/**
-	 * renvoie le nom associÃ© Ã  l'action
+	 * renvoie le nom associé à l'action
 	 * 
 	 * @return	le nom de l'action
 	 */
@@ -77,11 +75,11 @@ public class AiAction
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associÃ©e Ã  l'action */
+	/** direction associée à l'action */
 	private Direction direction;
 	
 	/**
-	 * renvoie la direction associÃ©e Ã  l'action
+	 * renvoie la direction associée à l'action
 	 * @return	la direction de l'action
 	 */
 	public Direction getDirection()

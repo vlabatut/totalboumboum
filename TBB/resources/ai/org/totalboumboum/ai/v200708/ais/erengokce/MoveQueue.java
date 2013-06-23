@@ -7,31 +7,20 @@ import java.util.concurrent.ExecutionException;
 /**
  * 
  * @author Can Eren
- * @author Mustafa Mert Gökçe
+ * @author Mustafa Mert Gokce
  *
  */
 public class MoveQueue {
 
-	/** */
 	Vector<Node> way;
-	/** les graphes pour aEtoile */
+	//les graphes pour aEtoile
 	Vector<Node> open;
-	/** */
 	Vector<Node> closed;
-	/** les actions */
+	//les actions
 	Vector<Integer> actions;
-	/** les coordonnes du noeud racine pour ne pas s'eloigner, optimiser l'algorithme */
-	int xorg;
-	/** */
-	int yorg;
+	//les coordonnes du noeud racine pour ne pas s'eloigner, optimiser l'algorithme
+	int xorg,yorg;
 	
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 */
 	public MoveQueue(int x,int y)
 	{
 		this.open=new Vector<Node>();
@@ -42,29 +31,17 @@ public class MoveQueue {
 		yorg=y;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public Vector<Node> getWay()
 	{
 		return way;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public Vector<Integer> getActions()
 	{
 		return actions;
 	}
 	
-	/**
-	 * 
-	 */
+	
 	public void getActionsFromWay()
 	{
 		if(!way.isEmpty())
@@ -99,21 +76,6 @@ public class MoveQueue {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param root
-	 * 		Description manquante !
-	 * @param bombx
-	 * 		Description manquante !
-	 * @param bomby
-	 * 		Description manquante !
-	 * @param power
-	 * 		Description manquante !
-	 * @param zoneMatrix
-	 * 		Description manquante !
-	 * @throws ExecutionException
-	 * 		Description manquante !
-	 */
 	//l'algorithme aEtoile utilise pour s'echapper du bombe ou du shrink
 	public synchronized void aStar(Node root,int bombx,int bomby,int power,int[][] zoneMatrix) throws ExecutionException
 	{

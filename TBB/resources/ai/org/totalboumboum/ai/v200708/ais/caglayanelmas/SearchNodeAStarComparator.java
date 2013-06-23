@@ -11,12 +11,11 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
  * 
  * Compare deux noeuds de recherche en fonction de leur heuristique et de leur cout.
  * 
- * @author Ozan Çağlayan
+ * @author Ozan Caglayan
  *
  */
 public class SearchNodeAStarComparator implements Comparator<SearchNode>
 {	
-	@Override
 	public int compare(SearchNode n1, SearchNode n2)
 	{
 		double r1 = n1.getHeuristic() + n1.getCost();

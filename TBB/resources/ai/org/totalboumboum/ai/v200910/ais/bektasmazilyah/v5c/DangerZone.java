@@ -20,45 +20,35 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @version 5.c
  * 
- * @author Erdem Bektaş
+ * @author Erdem Bektas
  * @author Nedim Mazilyah
  *
  */
-@SuppressWarnings("deprecation")
 public class DangerZone {
 	
-	/** code source */
+	// code source
 	private BektasMazilyah source;
-	/** zone du jeu */
+	// zone du jeu
 	private AiZone map;
-	/** notre own hero */
+	// notre own hero
 	private AiHero hero;
-	/** les adversaires */
+	// les adversaires
 	private Collection<AiHero> rivals;
-	/** les murs */
+	// les murs
 	private Collection<AiBlock> blocs;
-	/** les bombes */
+	// les bombes
  	private Collection<AiBomb> bombes;
- 	/** les feus */
+ 	// les feus
  	private Collection <AiFire> feus;
- 	/** les items */
+ 	// les items
 	private Collection<AiItem> objets;
-	/** dangerZone */
+	// dangerZone
 	private EtatEnum [][] ourZone;
-	/** width de la zone */ 
+	// width de la zone
 	int x;
-	/** height de la zone */
+	// height de la zone
 	int y;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param source
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public DangerZone(AiZone zone, BektasMazilyah source) throws StopRequestException
 	{
 		source.checkInterruption(); // appel obligatoire
@@ -77,11 +67,6 @@ public class DangerZone {
 
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException {
 		
 		source.checkInterruption();
@@ -259,9 +244,7 @@ public class DangerZone {
 	/*******************************
 	 * La methode renvoie dangerZone
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public EtatEnum[][] getOurZone() throws StopRequestException {
 		source.checkInterruption();
@@ -271,13 +254,9 @@ public class DangerZone {
 	/***************************************************
 	 * La methode renvoie la valeur enumarate d'une tile
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @return etatEnum
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public EtatEnum getValeur(int x, int y) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -287,9 +266,7 @@ public class DangerZone {
 	/***
 	 * La methode sert a trouver les tiles claires
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findSafeTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -318,9 +295,7 @@ public class DangerZone {
 	/*************************************
 	 * La methode sert a trouver les bonus
 	 * @return list
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findBonusTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -347,9 +322,7 @@ public class DangerZone {
 	/************************************************
 	 * La methode sert a trouver les tiles dangereux
 	 * @return list
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findDangerTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -379,9 +352,7 @@ public class DangerZone {
 	/******************************************************
 	 * La methode sert a preciser les tiles des adversaires
 	 * @return list
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findRivalsTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -409,11 +380,8 @@ public class DangerZone {
 	/********************************************************************************
 	 * La methode sert a trouver les tiles a deposer des bombe pour detruir des murs
 	 * @param neighbors
-	 * 		Description manquante !
 	 * @return list
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findTilesForDestruct(List<AiTile> neighbors) throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -439,9 +407,7 @@ public class DangerZone {
 	/**********************************************
 	 * La methode renvoie les tiles desctructibles
 	 * @return list
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> findDesctructibleTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
@@ -467,13 +433,9 @@ public class DangerZone {
 	/*********************************************
 	 * pour preciser si on peut aller sur ce chemin
 	 * @param x2
-	 * 		Description manquante !
 	 * @param y2
-	 * 		Description manquante !
 	 * @return boolean
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public boolean isWalkable(int x2, int y2) throws StopRequestException {
 		source.checkInterruption();
@@ -486,13 +448,9 @@ public class DangerZone {
 	/**************************************************************
 	 * pour preciser si on peut aller a bonus sur une chemin secure
 	 * @param x2
-	 * 		Description manquante !
 	 * @param y2
-	 * 		Description manquante !
 	 * @return boolean
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public boolean canGoToBonus(int x2,int y2) throws StopRequestException
 	{
@@ -506,13 +464,9 @@ public class DangerZone {
 	/**********************************************************************************
 	 * La methode qu'on va utiliser pour connaitre si on peut aller vers une adversaire
 	 * @param x2
-	 * 		Description manquante !
 	 * @param y2
-	 * 		Description manquante !
 	 * @return boolean
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public boolean canGoRival(int x2, int y2) throws StopRequestException
 	{

@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.gesture;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -50,7 +50,7 @@ public abstract class AbstractGesturePack<T extends AbstractGesture<?,?>>
 	
 	public T getGesture(GestureName name)
 	{	T result = gestures.get(name);
-		//NOTE crÃ©er le gesture s'il est manquant?
+		//NOTE créer le gesture s'il est manquant?
 		return result;
 	}
 

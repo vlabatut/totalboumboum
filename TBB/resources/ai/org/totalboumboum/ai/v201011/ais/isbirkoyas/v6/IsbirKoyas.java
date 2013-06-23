@@ -9,79 +9,46 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
+ * @author Ela Koyas
+ * @author Goksu Isbir
+ * 
  */
-@SuppressWarnings("deprecation")
 public class IsbirKoyas extends ArtificialIntelligence {
 
-	/** */
 	private Securite securite = null;
-	/** */
 	private DeplacementCommune deplacementCommune = null;
-	/** */
 	private DeplacementAttaque deplacementAttaque = null;
-	/** */
 	private DeplacementCollecte deplacementCollecte = null;
-	/** */
 	private TraitementAttaque traitementAttaque = null;
-	/** */
 	private TraitementCollect traitementCollect = null;
-	/** */
 	private PosageBombe posageBombe = null;
-	/** */
 	public AiPath nextMove = null;
-	/** */
 	public AiPath nextMove2 = null;
-	/** */
 	public AiPath nextMove3 = null;
-	/** */
 	public AiHero ourHero;
-	
-	/** */
+
 	public final double DEPLACEMENT = 1000;
-	/** */
 	public final int ATTAQUE = 1;
-	/** */
 	public int bonusInit;
-	/** */
 	public boolean modeCollect = false;
-	/** */
 	public boolean modeAttaque = false;
-	/** */
 	public boolean senfuire = false;
-	/** */
 	public boolean senfuire2 = false;
-	/** */
 	public boolean poserBombe;// poserbombe2=true;
-	/** */
 	public boolean attaqueBombe;
-	/** */
 	public boolean collectBombe;
-	/** */
-	public boolean print = false;
-	/** */
-	public boolean print2 = false;
-	/** */
+	public boolean print = false, print2 = false;
 	public boolean courir;
-	/** */
 	public boolean jeu = true;
-	/** */
-	int i = 0;
-	/** */
-	int k = 1;
-	/** */
-	int compteur = 0;
-	/** */
+	int i = 0, k = 1, compteur = 0;
 	double t;
 
 	/**
-	 * mCette mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de
-	 * notre IA .Ici on fait appelle aux autres mÃ©thodes des autres classes.
+	 * mCette méthode appelée par le moteur du jeu pour obtenir une action de
+	 * notre IA .Ici on fait appelle aux autres méthodes des autres classes.
 	 * 
 	 * @return resultat
 	 * */
-	@Override
 	public AiAction processAction() throws StopRequestException {
 		// avant tout: test d'interruption
 		checkInterruption();
@@ -107,7 +74,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 		if (!ourHero.getTile().getItems().isEmpty()) {
 			compteur++;
 			if (print)
-				System.out.println("Notre IA a collectÃ© un bonus! Compteur: "
+				System.out.println("Notre IA a collecté un bonus! Compteur: "
 						+ compteur);
 		}
 		// DÃ©termination du mode
@@ -165,14 +132,14 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Cette mÃ©thode fait la dÃ©cision du mode collecte ou attaque en fonction du
+	 * Cette méthode fait la décision du mode collecte ou attaque en fonction du
 	 * nombre de bombes de notre IA et la zone du jeu. Elle prend un seul
 	 * argument qui est la zone du jeu.
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
+	 * @return true ou false
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void mode(AiZone gameZone) throws StopRequestException {
 		checkInterruption();
@@ -196,7 +163,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacementcommune
 	 */
 	public Securite Securite() throws StopRequestException {
@@ -209,7 +175,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacementcommune
 	 */
 	public PosageBombe PosageBombe() throws StopRequestException {
@@ -222,7 +187,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacementcommune
 	 */
 	public DeplacementCommune DeplacementCommune() throws StopRequestException {
@@ -234,7 +198,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementCollecte
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacementcollecte
 	 */
 	public DeplacementCollecte DeplacementCollecte()
@@ -247,7 +210,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe DeplacementAttaque
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacementAttaque
 	 */
 	public DeplacementAttaque DeplacementAttaque() throws StopRequestException {
@@ -259,7 +221,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe TraitementAttaque
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return traitementAttaque
 	 */
 	public TraitementAttaque TraitementAttaque() throws StopRequestException {
@@ -271,7 +232,6 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	 * METHODE D'ACCES a la classe TraitementCollect
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return traitementCollect
 	 */
 	public TraitementCollect TraitementCollect() throws StopRequestException {

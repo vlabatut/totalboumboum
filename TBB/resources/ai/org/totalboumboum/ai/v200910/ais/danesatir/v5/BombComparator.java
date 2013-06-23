@@ -9,10 +9,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class BombComparator implements Comparator<AiBomb> {
 
 	/**

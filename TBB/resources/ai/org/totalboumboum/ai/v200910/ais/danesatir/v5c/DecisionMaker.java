@@ -13,26 +13,15 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class DecisionMaker {
 
-	/** */
 	private DaneSatir ai;
-	/** */
 	private State state;
-	/** */
 	private TimeMatrice time;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public DecisionMaker(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
@@ -41,7 +30,6 @@ public class DecisionMaker {
 	/**
 	 * Check conditions and set state.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public void makeDecision() throws StopRequestException {
 		ai.checkInterruption();
@@ -63,13 +51,6 @@ public class DecisionMaker {
 		}
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isEnemyExist() throws StopRequestException {
 		ai.checkInterruption();
 		if(this.ai.getPercepts().getHeroes().size()>1)
@@ -77,13 +58,6 @@ public class DecisionMaker {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isHiddenItemExist() throws StopRequestException {
 		ai.checkInterruption();
 		if(this.ai.getPercepts().getHiddenItemsCount()>0)
@@ -91,13 +65,6 @@ public class DecisionMaker {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isItemExist() throws StopRequestException {
 		ai.checkInterruption();
 		if(this.ai.getPercepts().getItems().size()>0)
@@ -105,13 +72,6 @@ public class DecisionMaker {
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isWayExistToEnemy() throws StopRequestException {
 		ai.checkInterruption();
 		PathFinder temp = new PathFinder(ai, this.time);
@@ -123,13 +83,6 @@ public class DecisionMaker {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isDanger() throws StopRequestException {
 		ai.checkInterruption();
 		double dur = this.time.getTime();
@@ -137,14 +90,6 @@ public class DecisionMaker {
 			return true;
 		return false;
 	}
-	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isHaveBomb() throws StopRequestException {
 		ai.checkInterruption();
 		AiHero hero = this.ai.getOwnHero();
@@ -153,78 +98,35 @@ public class DecisionMaker {
 			return true;
 		return false;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public State getState() throws StopRequestException {
 		ai.checkInterruption();
 		return state;
 	}
 
-	/**
-	 * 
-	 * @param state
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setState(State state) throws StopRequestException {
 		ai.checkInterruption();
 		this.state = state;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public TimeMatrice getTime() throws StopRequestException {
 		ai.checkInterruption();
 		setTime(new TimeMatrice(ai));
 		return time;
 	}
 
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void setTime(TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
 		this.time = time;
 	}
-	
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean canWeEscape(AiBomb bomb) throws StopRequestException {
 		ai.checkInterruption();
 		return canWeEscape(bomb.getTile());
 	}
-	
 	/**
 	 * check we can escape, if we put bomb
 	 * @param bomb
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
+	 * @return 
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public boolean canWeEscape(AiTile bomb) throws StopRequestException {
 		ai.checkInterruption();

@@ -10,26 +10,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.AstarNode;
 import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Onur Büyüktopaç
- * @author Yiğit Turak
- */
-@SuppressWarnings("deprecation")
 public class SucceurCost extends SuccessorCalculator{
-	/** */
 	private List<AiTile> freeList;
-	/** */
 	private BuyuktopacTurak bt;
-	
-	/**
-	 * 
-	 * @param bt
-	 * 		description manquante !
-	 * @param freeList
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public SucceurCost(BuyuktopacTurak bt, List<AiTile> freeList) throws StopRequestException{
 		bt.checkInterruption();
 		this.bt = bt;

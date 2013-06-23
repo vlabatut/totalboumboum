@@ -2,7 +2,7 @@ package org.totalboumboum.tools.files;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,16 +22,12 @@ package org.totalboumboum.tools.files;
  */
 
 /**
- * Constants corresponding to
- * file or folder names.
  * 
  * @author Vincent Labatut
+ *
  */
 public class FileNames
-{	
-	/////////////////////////////////////////////////////////////////
-	// FILE EXTENSIONS		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+{
 	public static final String EXTENSION_BACKUP = ".backup";
 	public static final String EXTENSION_CLASS = ".class";
 	public static final String EXTENSION_DATA = ".data";
@@ -43,10 +39,7 @@ public class FileNames
 	public static final String EXTENSION_SCHEMA = ".xsd";
 	public static final String EXTENSION_TEXT = ".txt";
 	public static final String EXTENSION_XML = ".xml";
-	
-	/////////////////////////////////////////////////////////////////
-	// FILE/FOLDER NAMES	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	//
 	public static final String FILE_ABILITIES = "abilities";
 	public static final String FILE_ABOUT = "about";
 	public static final String FILE_AI = "ai";
@@ -71,7 +64,6 @@ public class FileNames
 	public static final String FILE_CONFIGURATION = "configuration";
 	public static final String FILE_CONNECTIONS = "connections";
 	public static final String FILE_CONTROLS = "controls";
-	public static final String FILE_CRITERION = "criterion";
 	public static final String FILE_DATA = "data";
 	public static final String FILE_DETAILED = "detailed";
 	public static final String FILE_ENGINE = "engine";
@@ -123,7 +115,6 @@ public class FileNames
 	public static final String FILE_POINT = "point";
 	public static final String FILE_POINTS = "points";
 	public static final String FILE_PORTRAITS = "portraits";
-	public static final String FILE_PREFERENCES = "preferences";
 	public static final String FILE_PREVIEW = "preview";
 	public static final String FILE_PROFILE = "profile";
 	public static final String FILE_PROFILES = "profiles";

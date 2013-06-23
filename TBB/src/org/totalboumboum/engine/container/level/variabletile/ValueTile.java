@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.variabletile;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,6 +30,7 @@ import java.io.Serializable;
  */
 public class ValueTile implements Serializable
 {	private static final long serialVersionUID = 1L;
+
 	
 	public ValueTile(String floor, String block, String item, String bomb, float proba)
 	{	this.block = block;

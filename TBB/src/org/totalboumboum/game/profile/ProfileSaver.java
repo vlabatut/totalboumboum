@@ -2,7 +2,7 @@ package org.totalboumboum.game.profile;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,7 +24,6 @@ package org.totalboumboum.game.profile;
 import java.io.File;
 import java.io.IOException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -40,8 +39,7 @@ public class ProfileSaver
 {	
 	public static void saveProfile(Profile profile, String id) throws IOException
 	{	// build document
-		Element root = saveProfileElement(profile);
-		
+		Element root = saveProfileElement(profile);	
 		// save file
 		String file = FilePaths.getProfilesPath()+File.separator+id+FileNames.EXTENSION_XML;
 		File dataFile = new File(file);
@@ -53,10 +51,6 @@ public class ProfileSaver
 	private static Element saveProfileElement(Profile profile)
 	{	Element result = new Element(XmlNames.PROFILE);
 		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-
 		// general properties
 		Element generalElement = saveGeneralElement(profile);
 		result.addContent(generalElement);

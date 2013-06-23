@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.quickmatch;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,8 +35,7 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -63,7 +62,7 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 				mainPanel.setLayout(layout);
 			}
 			
-			int panelHeight = (dataHeight - GuiSizeTools.panelMargin)/2; 
+			int panelHeight = (dataHeight - GuiTools.panelMargin)/2; 
 			mainPanel.setOpaque(false);
 			
 			// match
@@ -72,9 +71,9 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 				matchPanel.addListener(this);
 			}
 			
-			mainPanel.add(Box.createRigidArea(new Dimension(GuiSizeTools.panelMargin,GuiSizeTools.panelMargin)));
+			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
 			
-			// round panel
+			// commands panel
 			{	roundPanel = new RoundQuickConfigSubPanel(dataWidth,panelHeight);
 				mainPanel.add(roundPanel);
 				roundPanel.addListener(this);

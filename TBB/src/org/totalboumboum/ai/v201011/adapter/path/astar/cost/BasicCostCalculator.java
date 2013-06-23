@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.cost;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,14 +26,12 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * Classe Ã©tendant la classe abstraite CostCalculator de la maniÃ¨re la plus simple possible.
- * Ici, le coÃ»t pour passer d'une case Ã  l'autre est simplement 1, quelles que soient
- * les cases considÃ©rÃ©es.
+ * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
+ * Ici, le coût pour passer d'une case à l'autre est simplement 1, quelles que soient
+ * les cases considérées.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class BasicCostCalculator extends CostCalculator
 {
@@ -41,14 +39,14 @@ public class BasicCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux cases sont supposÃ©es Ãªtre voisines, 
+	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer leur distance
-	 * (exprimÃ©e en cases, donc forcÃ©ment 1).
+	 * (exprimée en cases, donc forcément 1).
 	 * 
 	 * @param start	
-	 * 		la case de dÃ©part
+	 * 		la case de départ
 	 * @param end	
-	 * 		la case d'arrivÃ©e
+	 * 		la case d'arrivée
 	 * @return 
 	 * 		la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
 	 */ 
@@ -58,15 +56,14 @@ public class BasicCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le coÃ»t d'un chemin correspond ici Ã  sa distance exprimÃ©e
+	 * le coût d'un chemin correspond ici à sa distance exprimée
 	 * en cases.
 	 * 
 	 * @param path
-	 * 		chemin Ã  traiter
+	 * 		chemin à traiter
 	 * @return
-	 * 		le coÃ»t de ce chemin
+	 * 		le coût de ce chemin
 	 */
-	@Override
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getTileDistance();
 		return result;

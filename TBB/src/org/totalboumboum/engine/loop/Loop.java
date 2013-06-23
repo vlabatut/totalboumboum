@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -86,13 +86,8 @@ public abstract class Loop implements Runnable, Serializable
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	
-	/**
-	 * Cleanly finishes this object,
-	 * possibly freeing some memory.
-	 */
 	public void finish()
 	{	if(!finished)
 		{	finished = true;	

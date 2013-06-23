@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.controls;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,7 +21,6 @@ package org.totalboumboum.configuration.controls;
  * 
  */
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,12 +32,11 @@ import java.util.Map.Entry;
  * @author Vincent Labatut
  *
  */
-public class ControlSettings implements Serializable
-{	private static final long serialVersionUID = 1L;
-
-	/////////////////////////////////////////////////////////////////
+public class ControlSettings
+{	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+
 	private void addKey(int key, String event, boolean on)
 	{	// init
 		HashMap<Integer,List<String>> keys;

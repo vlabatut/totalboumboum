@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -51,23 +51,19 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.control.system.LocalSytemControl;
 import org.totalboumboum.engine.loop.display.Display;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisColors;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisPaths;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisPause;
-import org.totalboumboum.engine.loop.display.ais.DisplayAisTexts;
-import org.totalboumboum.engine.loop.display.game.DisplayCancel;
-import org.totalboumboum.engine.loop.display.game.DisplayFPS;
-import org.totalboumboum.engine.loop.display.game.DisplayMessage;
-import org.totalboumboum.engine.loop.display.player.DisplayPlayersNames;
-import org.totalboumboum.engine.loop.display.sprites.DisplaySprites;
-import org.totalboumboum.engine.loop.display.sprites.DisplaySpritesPositions;
-import org.totalboumboum.engine.loop.display.tiles.DisplayGrid;
-import org.totalboumboum.engine.loop.display.tiles.DisplayTilesPositions;
-import org.totalboumboum.engine.loop.display.time.DisplaySpeed;
-import org.totalboumboum.engine.loop.display.time.DisplaySpeedChange;
-import org.totalboumboum.engine.loop.display.time.DisplayTime;
-import org.totalboumboum.engine.loop.display.usage.DisplayEffectiveUsage;
-import org.totalboumboum.engine.loop.display.usage.DisplayRealtimeUsage;
+import org.totalboumboum.engine.loop.display.DisplayAisColors;
+import org.totalboumboum.engine.loop.display.DisplayAisPaths;
+import org.totalboumboum.engine.loop.display.DisplayAisPause;
+import org.totalboumboum.engine.loop.display.DisplayAisTexts;
+import org.totalboumboum.engine.loop.display.DisplayFPS;
+import org.totalboumboum.engine.loop.display.DisplayGrid;
+import org.totalboumboum.engine.loop.display.DisplayMessage;
+import org.totalboumboum.engine.loop.display.DisplayPlayersNames;
+import org.totalboumboum.engine.loop.display.DisplaySpeed;
+import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
+import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
+import org.totalboumboum.engine.loop.display.DisplayTime;
+import org.totalboumboum.engine.loop.display.DisplayUsage;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
@@ -75,7 +71,6 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
@@ -151,11 +146,11 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 			
 			// extract info from event
 			int col = event.getCol();
-			int row = event.getRow();
+			int line = event.getLine();
 			int id = event.getSpriteId();
 			
 			// location
-			Tile tile = level.getTile(row,col);
+			Tile tile = level.getTile(line,col);
 			
 			// sprite
 			Profile profile = i.next();
@@ -167,7 +162,6 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 			// level
 			Hero hero = (Hero)player.getSprite();
 			level.changeSpriteId(hero,id);
-System.out.println(hero+" "+hero.getId());
 			
 			// next player...
 			loadStepOver();
@@ -185,21 +179,19 @@ System.out.println(hero+" "+hero.getId());
 					controlSettings.add(map.get(index));
 			}
 		}
-		clientConnection.sendControlSettings(controlSettings);
 	}
 	
 	@Override
 	protected void startLoopInit()
 	{	super.startLoopInit();
 		initEvent();
-		initAis();
 	}
 
 	@Override
 	protected void finishLoopInit()
 	{	super.finishLoopInit();
-		//ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		clientConnection.loadingComplete();
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		connection.loadingComplete();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -219,8 +211,6 @@ System.out.println(hero+" "+hero.getId());
 	@Override
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
-//		if(profile.isRemote())
-//			profile.setControlSettingsIndex(0);
 		if(profile.hasAi())
 			result = new AiPlayer(profile,base,tile);
 		else
@@ -270,15 +260,6 @@ System.out.println(hero+" "+hero.getId());
 			}
 		}
 	}
-	
-	protected void initAis()
-	{	for(int i=0;i<players.size();i++)
-		{	AbstractPlayer player = players.get(i);
-			if(player instanceof AiPlayer)
-				((AiPlayer)player).initAi();
-		}
-	}
-	
 
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
@@ -305,7 +286,6 @@ System.out.println(hero+" "+hero.getId());
 			updateEvents();
 			updateAis();
 			updateStats();
-//System.err.println("XXXXXXXXXXXXXXXXXXXXXXX update");
 		}
 	}
 
@@ -355,20 +335,12 @@ System.out.println(hero+" "+hero.getId());
 			{	if(VERBOSE)
 					System.out.print("["+event.getTime()+"<"+getTotalEngineTime()+"]");		
 				
-				// sprite insertion
-				if(event instanceof SpriteInsertionEvent)
-				{	SpriteInsertionEvent siEvent = (SpriteInsertionEvent) event;
-					int id = siEvent.getSpriteId();
-					Sprite sprite = level.getSprite(id);
-					sprite.getTile().addSprite(sprite); // add to the tile (complete the below process)
-				}
-				
 				// sprite creation
-				else if(event instanceof SpriteCreationEvent)
+				if(event instanceof SpriteCreationEvent)
 				{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
 					HollowLevel hollowLevel = round.getHollowLevel();
 					Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-					level.addSprite(sprite); // just add to the level lists, not in the tile
+					level.insertSpriteTile(sprite);
 				}
 				
 				// sprite anime change
@@ -387,8 +359,6 @@ System.out.println(hero+" "+hero.getId());
 					Sprite sprite = level.getSprite(id);
 					sprite.processChangePositionEvent(scpEvent,zoomCoefficient);
 				}
-				
-				// finished
 				else if(event instanceof StopReplayEvent)
 				{	setOver(true);
 				}
@@ -418,10 +388,6 @@ System.out.println(hero+" "+hero.getId());
 		display = new DisplaySpritesPositions(this);
 		displayManager.addDisplay(display);
 	
-		// sprites
-		display = new DisplaySprites(this);
-		displayManager.addDisplay(display);
-	
 		// AIs paths
 		display = new DisplayAisPaths(this);
 		displayManager.addDisplay(display);
@@ -434,11 +400,8 @@ System.out.println(hero+" "+hero.getId());
 		// AIs pauses
 		display = new DisplayAisPause(this);
 		displayManager.addDisplay(display);
-		// AIs effective usage
-		display = new DisplayEffectiveUsage(this);
-		displayManager.addDisplay(display);
-		// AIs real-time usage
-		display = new DisplayRealtimeUsage(this);
+		// AIs CPU usage
+		display = new DisplayUsage(this);
 		displayManager.addDisplay(display);
 		
 		// players names
@@ -448,9 +411,6 @@ System.out.println(hero+" "+hero.getId());
 		// speed
 		display = new DisplaySpeed();
 		displayManager.addDisplay(display);
-		// change speed
-		display = new DisplaySpeedChange();
-		displayManager.addDisplay(display);
 		
 		// time
 		display = new DisplayTime(this);
@@ -458,10 +418,6 @@ System.out.println(hero+" "+hero.getId());
 		
 		// FPS
 		display = new DisplayFPS(this);
-		displayManager.addDisplay(display);
-		
-		// cancel
-		display = new DisplayCancel();
 		displayManager.addDisplay(display);
 	}
 
@@ -529,15 +485,16 @@ System.out.println(hero+" "+hero.getId());
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	super.processEvent(event);
-		
-		String name = event.getName();
+	{	String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
 			switchAiPause(index);
+		}
+		else
+		{	super.processEvent(event);
 		}
 	}
 }

@@ -21,22 +21,17 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.comparator.Coordina
  */
 /**
  * Represents a matrix. Used for interest matrices.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class Matrix implements Cloneable
 {
-	/** */
+
 	private AkbulutKupelioglu monIa = null;
 
-	/** */
 	private int width;
-	/** */
 	private int height;
 
-	/** */
 	private int[][] matrix;
 
 	/**
@@ -49,7 +44,6 @@ public class Matrix implements Cloneable
 	 * @param ia
 	 *            AkbulutKupelioglu using this matrix. (for checkInterruption())
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Matrix(int width, int height, AkbulutKupelioglu ia)
 			throws StopRequestException
@@ -66,7 +60,6 @@ public class Matrix implements Cloneable
 	 * 
 	 * @return width of the matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getWidth() throws StopRequestException
 	{
@@ -79,7 +72,6 @@ public class Matrix implements Cloneable
 	 * 
 	 * @return height of the matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getHeight() throws StopRequestException
 	{
@@ -96,7 +88,6 @@ public class Matrix implements Cloneable
 	 *            the column in which the element is stored
 	 * @return the element at the specified index
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getElement(int x, int y) throws StopRequestException
 	{
@@ -111,7 +102,6 @@ public class Matrix implements Cloneable
 	 *            the AiTile corresponding to the coordinates of the element
 	 * @return the element at the specified coordinate
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getElement(AiTile tile) throws StopRequestException
 	{
@@ -132,7 +122,6 @@ public class Matrix implements Cloneable
 	 * @param value
 	 *            the value to be stored
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setElement(int x, int y, int value) throws StopRequestException
 	{
@@ -148,7 +137,6 @@ public class Matrix implements Cloneable
 	 * @param value
 	 *            value to be stored
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setElement(AiTile tile, int value) throws StopRequestException
 	{
@@ -166,7 +154,6 @@ public class Matrix implements Cloneable
 	 * @param value
 	 *            the value by which the element will be incremented
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void addToElement(int x, int y, int value)
 			throws StopRequestException
@@ -183,7 +170,6 @@ public class Matrix implements Cloneable
 	 * @param value
 	 *            the value by which the element will be incremented
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void addToElement(AiTile tile, int value)
 			throws StopRequestException
@@ -195,10 +181,8 @@ public class Matrix implements Cloneable
 	/**
 	 * Resets the matrix, setting all values to 0.
 	 * @param ia 
-	 * 		description manquante !
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void resetMatrix(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -220,7 +204,6 @@ public class Matrix implements Cloneable
 	 * Gets the coordinates of the element having the maximum value.
 	 * @return The coordinates of the element with the maximum value.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Coordinate getMaxElementCoords() throws StopRequestException
 	{
@@ -252,7 +235,6 @@ public class Matrix implements Cloneable
 	 * @param dm The distance matrix.
 	 * @return The elements with the highest values.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<Coordinate> getMax(int count, DistanceMatrix dm) throws StopRequestException
 	{
@@ -283,7 +265,6 @@ public class Matrix implements Cloneable
 	 * Gets all the positive elements.
 	 * @return A list of positive elements.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Coordinate[] getSafe() throws StopRequestException
 	{
@@ -307,7 +288,6 @@ public class Matrix implements Cloneable
 	 * Gets a copy of this matrix.
 	 * @return The copied Matrix.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Matrix getCopy() throws StopRequestException
 	{

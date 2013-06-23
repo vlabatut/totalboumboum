@@ -8,33 +8,18 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Turkalp GÃ¶ker Demirkol
- * @author Emre DoÄŸan
+ * @author Turkalp Goker Demirkol
+ * @author Emre Dogan
  *
  */
-@SuppressWarnings("deprecation")
 public class AStar {
 	
-	/** */
 	private Block ownBlock;   //point de depart
-	/** */
 	private Block targetBlock;//point d'arrivee
-	/** */
 	private PriorityQueue<Block> openList; //liste qui contient les block a controller
-	/** */
 	private Vector<Block> closedList; //contient les noeuds controlles
-	/** */
-	private int[][] matrix; //zone matrix amÃ©liorÃ©
+	private int[][] matrix; //zone matrix amélioré
     
-	/**
-	 * 
-	 * @param ownBlock
-	 * 		Description manquante !
-	 * @param targetBlock
-	 * 		Description manquante !
-	 * @param matrix
-	 * 		Description manquante !
-	 */
 	//CONSTRUCTEUR
 	public AStar(Block ownBlock, Block targetBlock, int[][] matrix) 
 	{
@@ -46,7 +31,6 @@ public class AStar {
 	/**
 	 * Methode qui develope un block. Elle ajoute & supprime les blocks sur les listes globales.
 	 * @param blockDeveloped
-	 * 		Description manquante !
 	 */
 	public void developBlock(Block blockDeveloped)
 	{
@@ -57,7 +41,7 @@ public class AStar {
 			newBlock = new Block(blockDeveloped.getX()+1, blockDeveloped.getY(), blockDeveloped.getCost()+1 );
 			newBlock.setHeuristic(this.targetBlock.getX(), this.targetBlock.getY());
 			newBlock.setParentBlock(blockDeveloped);
-			if (!closedListContains(newBlock)) //si on n'a pas controlÃ© ce block
+			if (!closedListContains(newBlock)) //si on n'a pas controlé ce block
 				this.openList.offer(newBlock); //on va le controller
 		}
 		if (!isObstacle(blockDeveloped.getX()-1, blockDeveloped.getY()))
@@ -85,7 +69,7 @@ public class AStar {
 				this.openList.offer(newBlock);
 		}
 		
-		//on ajoute le block developpÃ© au liste
+		//on ajoute le block developpé au liste
 		this.closedList.add(blockDeveloped);
 		
 		
@@ -102,7 +86,7 @@ public class AStar {
 		//une liste qui contient les blocks a developper
 		this.openList = new PriorityQueue<Block>(1, comparator);
 		this.openList.offer(this.ownBlock);
-		//une liste qui contient les blocks dÃ©ja developpÃ©s.
+		//une liste qui contient les blocks déja developpés.
 		this.closedList = new Vector<Block>();
 		//le path en inverse
 		Vector<Block> pathReverse = new Vector<Block>();
@@ -133,7 +117,7 @@ public class AStar {
 	
 	/**
 	 * Methode controllant si un block est dans "openList"
-	 * @param b block controllÃ©
+	 * @param b block controllé
 	 * @return vrai si la liste contient, faux sinon
 	 */
 	public boolean openListContains(Block b)
@@ -152,7 +136,7 @@ public class AStar {
 	
 	/**
 	 * Methode controllant si un block est dans "closedList"
-	 * @param b block controllÃ©
+	 * @param b block controllé
 	 * @return vrai si la liste contient, faux sinon
 	 */
 	public boolean closedListContains(Block b)
@@ -170,10 +154,10 @@ public class AStar {
 	}
 	
 	/**
-	 * Indique si la case situÃ©e Ã  la position passÃ©e en paramÃ¨tre
+	 * Indique si la case située à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position Ã  Ã©tudier
-	 * @param y	position Ã  Ã©tudier
+	 * @param x	position à étudier
+	 * @param y	position à étudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y)

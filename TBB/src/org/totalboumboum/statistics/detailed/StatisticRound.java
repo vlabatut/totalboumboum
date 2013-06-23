@@ -2,7 +2,7 @@ package org.totalboumboum.statistics.detailed;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -56,9 +56,6 @@ public class StatisticRound extends StatisticBase
 			s.process(this, event);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// CONFRONTATIONS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	@Override
 	public int getConfrontationCount()
 	{	// useless for round
@@ -73,7 +70,7 @@ public class StatisticRound extends StatisticBase
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TIME		/////////////////////////////////////////////////////
+	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void updateTime(long time, Round round)
 	{	setTotalTime(time);

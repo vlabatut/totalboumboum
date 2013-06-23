@@ -1,5 +1,7 @@
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2;
 
+
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -18,59 +20,42 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * This class is for calculating if we can find a secured place if we pose a bomb.
- * 
- * @author Mustafa Göktuğ Düzok
- * 
+ * @author MGoktug
+ *
  */
-@SuppressWarnings("deprecation")
+
+
+
+
 public class Can_escape {
-	/** */
 	@SuppressWarnings("unused")
 	private AiZone our_zone;
-	/** */
 	private AiHero our_hero;
-	/** */
 	@SuppressWarnings("unused")
 	private Collection<AiHero> enemies;
 	
-	/** */
 	private Collection<AiBlock> blocks;
 
-	/** */
 	private Collection<AiFire> fires;
-	/** */
 	private Collection<AiBomb> bombs;
 	
-	/** */
 	public int width;
-	/** */
 	public int height;
-	/** */
 	private int pos_x;
-	/** */
 	private int pos_y;
 	
-	/** */
 	public  double BONUS=-300;
-	/** */
 	public  double WALL=-10;
-	/** */
 	public double SAFE_CASE=-1000;
-	/** */
 	public  double FIRE= 1000000;
-	/** */
 	public  double BOMB=500000;
-	/** */
 	public double ENEMIE=0;
 	
 
-	/** */
+	
 	public double security_matrix[][];
 	
-	/** Constructeur of the Can_escape
-	 * @param zone 
-	 * 		Description manquante !
-	 */
+	/* Constructeur of the Can_escape*/
 	public Can_escape(AiZone zone){
 		this.our_zone=zone;
 		this.blocks=zone.getBlocks();
@@ -88,9 +73,6 @@ public class Can_escape {
 		Fill_The_Matrix();
 	}
 
-	/**
-	 * 
-	 */
 	public void Fill_The_Matrix() {
 		//First of all, we fill the matrce with safe cases.
 		int x,y;
@@ -313,11 +295,7 @@ public class Can_escape {
 	}
 	
 
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
+	
 	public double[][] returnMatrix() {
 		return security_matrix;
 	}

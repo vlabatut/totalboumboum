@@ -19,23 +19,18 @@ import org.totalboumboum.engine.content.feature.Direction;
  * In this class,according to our path calculation algorithm,our AI tries to
  * find the most valuable path to walk.
  * 
- * @author Mustafa Çalışkan
- * @author Cihan Seven
+ * @author Cihan Adil SEVEN & Mustafa CALISKAN
  * 
  */
-@SuppressWarnings("deprecation")
 public class PathFinding {
 	/**
 	 * 
-	 * @param ai 
-	 * 		description manquante !
 	 * @param t1
 	 *            AiTile Colon
 	 * @param t2
 	 *            AiTile Line
 	 * @return returns the tile which we want to go
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static int tiledist(CaliskanSeven ai, AiTile t1, AiTile t2)
 			throws StopRequestException {
@@ -49,14 +44,6 @@ public class PathFinding {
 	 * moment. We get the lists of heroes and simulate paths to them if they
 	 * are reachable. If at least one of them is reachable this methode
 	 * returns true otherwise returns false.
-	 * @param ai 
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
-	 * @throws LimitReachedException 
-	 * 		description manquante !
 	 */
 	public boolean canReachHeros(CaliskanSeven ai) throws StopRequestException,
 			LimitReachedException {
@@ -100,18 +87,6 @@ public class PathFinding {
 
 	/**
 	 * this method returns the path of shortest way with using Astar.
-	 * @param ai 
-	 * 		description manquante !
-	 * @param target 
-	 * 		description manquante !
-	 * @param matrix 
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
-	 * @throws LimitReachedException 
-	 * 		description manquante !
 	 */
 	public AiPath findPath(CaliskanSeven ai, AiTile target, double[][] matrix)
 			throws StopRequestException, LimitReachedException {
@@ -129,15 +104,8 @@ public class PathFinding {
 	 * This function returns a true or false value if our way is closed with a
 	 * bomb. If there is a bomb in our way, we add the bomb range to the list as
 	 * closed tile.
-	 * @param ai 
-	 * 		description manquante !
-	 * @param closed 
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public boolean canEscapeBomb(CaliskanSeven ai, List<AiTile> closed)
 			throws StopRequestException {
@@ -156,12 +124,6 @@ public class PathFinding {
 	 * In this method we create two lists (open and closed) and we add tiles to
 	 * open list or closed list according to the situation of that moment.The
 	 * open list is our way to escape from danger.
-	 * @param ai 
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
 	 */
 	public List<AiTile> listEscapeBomb(CaliskanSeven ai)
 			throws StopRequestException {
@@ -237,13 +199,9 @@ public class PathFinding {
 	 * This function finds a target tile using the  matrix given.
 	 * 
 	 * @param ai
-	 * 		description manquante !
 	 * @param matrix
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiTile findTarget(CaliskanSeven ai, double matrix[][])
 			throws StopRequestException {

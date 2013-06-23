@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.item;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -49,8 +49,6 @@ public class HollowItemFactory extends HollowSpriteFactory<Item>
 		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
 		// EXULTING
-		// FALLING
-		animeReplacements.put(GestureName.FALLING,GestureName.STANDING);
 		// HIDING
 		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING

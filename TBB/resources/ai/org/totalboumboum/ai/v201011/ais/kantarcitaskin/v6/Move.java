@@ -19,20 +19,14 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Burcu Kantarcı
- * @author Ayça Taşkın
- */
-@SuppressWarnings("deprecation")
 public class Move 
 {
-	/** Classe qui calcule la direction de movement en trouvant le chemin le plus court */
+	/**
+	 * Classe qui calcule la direction de movement en trouvant le chemin le plus court
+	 * */
 	AiZone zone;
-	/** */
 	int mode;
-	/** */
 	ArtificialIntelligence ai;
-	/** */
 	double[][] matrix;
 		
 	/**
@@ -40,12 +34,12 @@ public class Move
 	 * 
 	 * @param zone
 	 * 		la zone du jeu
-	 * @param mode 
-	 * 		description manquante !
+	 * @param matrix
+	 * 		la zone numerique du jeu
 	 * @param ai
 	 * 		AI
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public Move(AiZone zone, int mode, ArtificialIntelligence ai) throws StopRequestException
 	{
@@ -64,8 +58,6 @@ public class Move
 	 *
 	 * @return resultat
 	 * 		la direction de l'action se deplacer
-	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * */
 	public Direction getDirection() throws StopRequestException
 	{	
@@ -265,9 +257,9 @@ public class Move
 	 * 
 	 * @return resultat
 	 * 		la case dont la valeur est plus eleve ou bien la case de l'hero
-	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
+	
 	public AiTile targetTile() throws StopRequestException
 	{
 		ai.	checkInterruption();
@@ -319,7 +311,7 @@ public class Move
 	 * @return result
 	 * 		vrai s'elle est en danger, faux sinon
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{
@@ -370,7 +362,7 @@ public class Move
 	 * @return tempo
 	 * 		la liste des cases de la portee
 	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * 
 	 * */	
 	public List<AiTile> calculeBlast(int range) throws StopRequestException
 	{
@@ -489,7 +481,6 @@ public class Move
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<AiTile> accesibleArea(AiTile tile, List<AiTile> area, List<AiTile> safe) throws StopRequestException
 	{
@@ -536,7 +527,6 @@ public class Move
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public List<AiTile> accesibleArea(AiTile tile, List<AiTile> safe) throws StopRequestException
 	{
@@ -579,7 +569,6 @@ public class Move
 	 * @param target
 	 * 		La case interessant
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void wallEffect(AiTile target) throws StopRequestException
 	{
@@ -686,7 +675,6 @@ public class Move
 	 * @param matrix
 	 * 		matrice represantant la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setDefItemValeurs(AiTile item, int valeur, double[][] matrix) throws StopRequestException
 	{
@@ -707,7 +695,6 @@ public class Move
 	 * @return control 
 	 * 		vrai si oui, faux sinon
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 */
 	public boolean onBomb (AiHero hero) throws StopRequestException
 	{
@@ -725,4 +712,5 @@ public class Move
 			
 		return control;
 	}
+	
 }

@@ -4,13 +4,12 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Doğus Burcu Demirağ
- * @author Zeynep Şagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
 public class NoeudComparator implements Comparator<Node> {
 
-	@Override
 	public int compare(Node noeud1, Node noeud2) {
 		int resultat;
 		double n_1 = noeud1.getHeuristic();

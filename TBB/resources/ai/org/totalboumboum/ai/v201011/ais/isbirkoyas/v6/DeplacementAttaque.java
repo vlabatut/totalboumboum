@@ -14,52 +14,29 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
- */
-@SuppressWarnings("deprecation")
 public class DeplacementAttaque {
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
-	/** */
 	private DeplacementCommune deplacementCommune = null;
-	/** */
 	private TraitementCommune traitementCommune=null;
-	/** */
 	boolean poserBombe2;
-	/** */
 	boolean attaque = false;
-	/** */
 	boolean detruire = false;
-	/** */
 	boolean blockage = false;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public DeplacementAttaque(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
 	}
 	/**
-	 * Cette mÃ©thode implÃ©mente l'algorithme d'attaque. Elle prend 3 arguments
+	 * Cette méthode implémente l'algorithme d'attaque. Elle prend 3 arguments
 	 * une matrice de type double, la zone du jeu et une action.
 	 * 
 	 * @param gameZone	
 	 *            la zone du jeu
 	 * @param matriceAttaque
 	 *            la matrice attaque
-	 * @param resultat
-	 * 		description manquante !
-	 * @return
-	 * 		description manquante !
+	 * @return resultat
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiAction algorithmAttaque(double[][] matriceAttaque,
 			AiZone gameZone, AiAction resultat) throws StopRequestException  {
@@ -109,7 +86,7 @@ public class DeplacementAttaque {
 					detruire = false;
 					attaque = true;
 				}
-			// si on ne peut pas aller a cette case, Ã§a veut dire on est bloque
+			// si on ne peut pas aller a cette case, ça veut dire on est bloque
 			// Donc il faut detruire les murs
 			// Detruire
 			if (ai.nextMove == null && ai.senfuire == false && !blockage) {
@@ -269,7 +246,7 @@ public class DeplacementAttaque {
 															// OBLIGATOIRE
 									if (ai.print)
 										System.out
-												.println("Il n'y a pas du temps Ã  senfuire.");
+												.println("Il n'y a pas du temps ï¿½ senfuire.");
 									poserBombe2 = false;
 								}
 							}
@@ -327,7 +304,7 @@ public class DeplacementAttaque {
 						if (!ai.senfuire && !ai.senfuire2) {
 						
 
-							// on calcule si notre case cible est changÃ©e
+							// on calcule si notre case cible est changée
 							if (!endPoints.contains(ai.nextMove.getLastTile())
 									&& !endPoints.isEmpty()) {
 							
@@ -484,7 +461,7 @@ public class DeplacementAttaque {
 					}
 				}
 
-				// si on n'arrive pas Ã  la case suivant
+				// si on n'arrive pas à la case suivant
 				else {
 				
 					if (ai.print) {
@@ -647,10 +624,9 @@ public class DeplacementAttaque {
 	
 
 	/**
-	 * Cette mÃ©thode permet a s'enfuire apres le posage de bombe
+	 * Cette méthode permet a s'enfuire apres le posage de bombe
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void senfuireApresPosage() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -676,7 +652,6 @@ public class DeplacementAttaque {
 	 * METHODE D'ACCES a la classe DeplacementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return deplacement commune
 	 */
 	public DeplacementCommune DeplacementCommune() throws StopRequestException {
@@ -688,7 +663,6 @@ public class DeplacementAttaque {
 	 * METHODE D'ACCES a la classe TraitementCommune
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return Traitementcommune
 	 */
 	public TraitementCommune traitementCommune() throws StopRequestException {

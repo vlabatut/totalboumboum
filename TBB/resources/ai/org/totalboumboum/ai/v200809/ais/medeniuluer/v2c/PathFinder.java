@@ -11,36 +11,17 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
 *
 * @author Ekin Medeni
-* @author PÄ±nar Uluer
+* @author Pinar Uluer
 *
 */
-@SuppressWarnings("deprecation")
 public class PathFinder {
 	
-	/** */
 	private LinkedList<SearchNode> path;
-	/** */
 	private ZoneEnum tab[][];
-	/** */
 	private AiZone zone;
-	/** */
 	private MedeniUluer mu;
-	/** */
 	private SearchEnum mode;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param target
-	 * 		Description manquante !
-	 * @param mu
-	 * 		Description manquante !
-	 * @param mode
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public PathFinder(AiZone zone, AiTile target, MedeniUluer mu,SearchEnum mode) throws StopRequestException 
 	{
 		mu.checkInterruption(); // Appel Obligatoire
@@ -71,21 +52,6 @@ public class PathFinder {
 		}
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param depart
-	 * 		Description manquante !
-	 * @param target
-	 * 		Description manquante !
-	 * @param mu
-	 * 		Description manquante !
-	 * @param mode
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public PathFinder(AiZone zone, AiTile depart, AiTile target,MedeniUluer mu, SearchEnum mode)throws StopRequestException 
 	{
 		mu.checkInterruption(); // Appel Obligatoire
@@ -117,23 +83,6 @@ public class PathFinder {
 		}
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param simulatedOrAdaptedZone
-	 * 		Description manquante !
-	 * @param depart
-	 * 		Description manquante !
-	 * @param target
-	 * 		Description manquante !
-	 * @param mu
-	 * 		Description manquante !
-	 * @param mode
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public PathFinder(AiZone zone, ZoneEnum[][] simulatedOrAdaptedZone,
 			AiTile depart, AiTile target, MedeniUluer mu,
 			SearchEnum mode) throws StopRequestException {
@@ -192,13 +141,6 @@ public class PathFinder {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public String toStringPath() throws StopRequestException {
 		mu.checkInterruption();
 		return path.toString();
@@ -207,18 +149,17 @@ public class PathFinder {
 	
 	/**
 	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de
-	 * A Ã©toile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
+	 * A étoile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * 
 	 * @param x
-	 *            le coordonnÃ© de x de l'ia.
+	 *            le coordonné de x de l'ia.
 	 * @param y
-	 *            le coordonnÃ© de y de l'ia.
+	 *            le coordonné de y de l'ia.
 	 * @param tab
 	 *            le tableau du jeu.
 	 * @param goal
 	 *            la case qu'on veut y arriver.
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void findPath(ZoneEnum[][] tab, int x, int y, SearchNode goal)
 			throws StopRequestException {
@@ -312,13 +253,6 @@ public class PathFinder {
 		tree = null;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("unchecked")
 	public LinkedList<AiTile> getPath() throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
@@ -344,19 +278,6 @@ public class PathFinder {
 		return resultat;
 	}
 
-	/**
-	 * 
-	 * @param noeud
-	 * 		Description manquante !
-	 * @param mode
-	 * 		Description manquante !
-	 * @param direction
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean getConditions(SearchNode noeud, SearchEnum mode,Direction direction) throws StopRequestException 
 	{
 		mu.checkInterruption();

@@ -7,48 +7,31 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Turkalp GÃ¶ker Demirkol
- * @author Emre DoÄŸan
+ * @author Turkalp Goker Demirkol
+ * @author Emre Dogan
  *
  */
-@SuppressWarnings("deprecation")
 public class DemirkolDogan extends ArtificialIntelligence{
 
 	
 	//FIELDS
-	/** */
-	private Vector<Block> zoneAccessible; //les block qu'on a accÃ¨s
-	/** */
+	private Vector<Block> zoneAccessible; //les block qu'on a accés
 	private Vector<Block> path; //la serie des block qu'on doit passer pour arriver a targetBlock
-	/** */
 	private int[] oldPosition; //la position de l'IA dans la derniere appel
-	/** */
 	private Integer oldAction; //l'action de l'IA dans la derniere appel
-	/** */
 	private int actionMode;   //le mode de l'action
-	/** */
 	private int lastActionMode; //le mode de l'action de l'IA dans la derniere appel
 	
 	//CONSTANTS
-	/** */
 	private final static int DD_DANGER_POINT = 7;
-	/** */
 	private final static int DD_MODE_HIDE = 1;
-	/** */
 	private final static int DD_MODE_GET_BONUS = 2;
-	/** */
 	private final static int DD_MODE_ATTACK = 3;
-	/** */
 	private final static int DD_MODE_SHRINK = 4;
-	/** */
 	private final static int DD_TRACKING_CONSTANT = 10;
-	/** */
 	private final static long DD_SHRINK_TIME_LIMIT = 10000;
 	
 	//CONSTRUCTOR
-	/**
-	 * 
-	 */
 	public DemirkolDogan() {
 		//initalization
 		super("DoganDmrkl");
@@ -63,15 +46,14 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	}
 
 
-	/** */
-	public static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
 	
-	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
+	/** indicateur de première invocation (pour la compatibilité */
 	private boolean firstTime = true;
 
-	@Override
-	public Integer processAction() throws Exception
-	{		
+	public Integer call() throws Exception {
+		
 		//Les variables locaux
 		//----------------------------------------
 		Integer result = AI_ACTION_DO_NOTHING;
@@ -80,7 +62,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 		else
 		{	
 		
-		int[][] matrix = this.updateMatrix(); //matrice ameliorÃ©
+		int[][] matrix = this.updateMatrix(); //matrice amelioré
 		int[] ownPosition = getOwnPosition(); //le position de l'IA
 		int[] bonusPosition; //si il y a une bonus, ceci contiendra sa position
 		int[] bombPosition;  //si il y a une bombe, ceci contiendra sa position
@@ -88,7 +70,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 		int bombDirection = 0; //la position du bombe relative a IA
 	    int ownFirePower = getOwnFirePower(); //la portee du bombe de l'IA
 	    int trackDistance = ownFirePower + DD_TRACKING_CONSTANT; //limite pour suivre un adversaire
-		boolean foundOpponent = false; //vrai si un adversaire est trouvÃ©
+		boolean foundOpponent = false; //vrai si un adversaire est trouvé
 		Block targetBlock; //block cible
 		Block ownBlock = new Block(ownPosition[0], ownPosition[1], 0); //block qu'on se trouve
 	    //----------------------------------------
@@ -141,7 +123,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 		}
 		
 		// --------------------------------------------------------
-		// Si on n'a pas completÃ© la derniere action de deplacement
+		// Si on n'a pas completé la derniere action de deplacement
 		// --------------------------------------------------------
 		if (this.oldPosition[0] == ownPosition[0] && this.oldPosition[1]==ownPosition[1])
 			if (this.oldAction != AI_ACTION_DO_NOTHING 
@@ -155,7 +137,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 		
 		
 		//--------------------------------------------------------
-		// Si on a changÃ© le mode d'action, on nettoie le path
+		// Si on a changé le mode d'action, on nettoie le path
 		if (this.actionMode != this.lastActionMode || this.actionMode==DD_MODE_HIDE){
 			this.path.removeAllElements();
 		}
@@ -244,7 +226,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 		else // si le path est vide
 			if (this.actionMode == DD_MODE_ATTACK || 
 					(this.actionMode == DD_MODE_SHRINK && (ownPosition[0]!=getZoneMatrixDimX()/2 || ownPosition[1]!=getZoneMatrixDimY()/2)))
-			// si on est arrivÃ© a un block qu'on veut mettre une bombe
+			// si on est arrivé a un block qu'on veut mettre une bombe
 			{
 				result = AI_ACTION_PUT_BOMB;
 			}
@@ -267,7 +249,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 *  Methode qui trouve un block secure qui est plus proche de l'IA 
 	 *  parmi les block qu'on a acces
-	 * @param matrix : la zoneMatrix amÃ©liorÃ©
+	 * @param matrix : la zoneMatrix amélioré
 	 * @param ownBlock : le block qu'on se trouve
 	 * @return un Block qui est secure
 	 */
@@ -309,7 +291,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	
 	/**
 	 * Methode qui trouve le bonus plus proche parmi les block qu'on a acces
-	 * @param matrix la zoneMatrix amÃ©liorÃ©
+	 * @param matrix: la zoneMatrix amélioré
 	 * @param ownBlock : le block qu'on se trouve
 	 * @return un Block qui contient un bonus
 	 */
@@ -343,11 +325,11 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	}
 	
 	/**
-	 * Methode qui trouve le block plus proche qui est entourÃ© par un soft_wall, 
+	 * Methode qui trouve le block plus proche qui est entouré par un soft_wall, 
 	 * qu'on veut mettre une bombe pour avancer, parmi les blocks qu'on a acces
-	 * @param ownBlock le block qu'on se trouve
-	 * @param matrix la zoneMatrix amÃ©liorÃ©
-	 * @return un Block qui est entourÃ© par un soft_wall
+	 * @param ownBlock: le block qu'on se trouve
+	 * @param matrix: la zoneMatrix amélioré
+	 * @return un Block qui est entouré par un soft_wall
 	 */
 	public Block findAccessibleSoftWall(Block ownBlock, int[][] matrix)
 	{
@@ -383,8 +365,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Cette methode ressemble a "findAccessibleSoftWall", mais il essaie
 	 * de choisir un block qui est proche au centre du zone
-	 * @param matrix la zoneMatrix amÃ©liorÃ©
-	 * @return un Block qui est entourÃ© par un soft_wall proche au centre du zone
+	 * @param matrix: la zoneMatrix amélioré
+	 * @return un Block qui est entouré par un soft_wall proche au centre du zone
 	 */
 	public Block findBlockToAvoidShrink(int[][] matrix)
 	{
@@ -415,8 +397,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Une modification du methode "isObstacle" qui controle si un block
 	 * est mur ou pas
-	 * @param x coordonnÃ© horizontale du block
-	 * @param y coordonnÃ© verticale du block
+	 * @param x: coordonné horizontale du block
+	 * @param y: coordonné verticale du block
 	 * @return vrai si ce block est mur, faux sinon.
 	 */
 	private boolean isWall(int x, int y)
@@ -434,13 +416,9 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	
 	/**
 	 * Renvoie la position du personnage le plus proche de la
-	 * position passÃ©e en paramÃ¨tres. 
-	 * @param x	position de rÃ©fÃ©rence
-	 * @param y	position de rÃ©fÃ©rence
-	 * @param blockType 
-	 * 		Description manquante !
-	 * @param zoneMatrix 
-	 * 		Description manquante !
+	 * position passée en paramètres. 
+	 * @param x	position de référence
+	 * @param y	position de référence
 	 * @return	position du joueur le plus proche
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType, int[][] zoneMatrix)
@@ -462,7 +440,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Calcule et renvoie la distance de Manhattan 
 	 * (cf. : http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29)
-	 * entre le point de coordonnÃ©es (x1,y1) et celui de coordonnÃ©es (x2,y2). 
+	 * entre le point de coordonnées (x1,y1) et celui de coordonnées (x2,y2). 
 	 * @param x1	position du premier point
 	 * @param y1	position du premier point
 	 * @param x2	position du second point
@@ -566,15 +544,15 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	}
 
 	/**
-	 * Methode qui amÃ©liore la zoneMatrix. 
+	 * Methode qui améliore la zoneMatrix. 
 	 * Si il y a une bombe, on marque les block autour de ceci avec une valeur.
-	 * @return Un matrix amÃ©liorÃ©
+	 * @return Un matrix amélioré
 	 */
 	public int[][] updateMatrix()
 	{
 		int[][] zoneMatrix = getZoneMatrix();
-		for (int i=0; i<zoneMatrix.length; i++) //horizontalement
-			for (int j=0; j<zoneMatrix[0].length; j++) //verticalement
+		for (int i=1; i<16; i++) //horizontalement
+			for (int j=1; j<14; j++) //verticalement
 				if (zoneMatrix[i][j] == AI_BLOCK_BOMB) //s'il y a une bombe
 				{
 					int range = getBombPowerAt(i, j);
@@ -639,11 +617,11 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	}
 
 	/**
-	 * Methode qui controle si un block est entourÃ© par un type de block donnÃ©e.
+	 * Methode qui controle si un block est entouré par un type de block donnée.
 	 * @param center Block qu'on veut controller
 	 * @param blockType le type du block
-	 * @param matrix matrix amÃ©liorÃ©
-	 * @return vrai si il existe un block de type blockType autour de block donnÃ©e,
+	 * @param matrix matrix amélioré
+	 * @return vrai si il existe un block de type blockType autour de block donnée,
 	 * faux sinon
 	 */
 	public boolean isSurroundedBy (Block center, int blockType, int[][] matrix)
@@ -663,7 +641,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	 * dans le cas on est meme block qu'un bombe
 	 * @param ownPosition Block qu'on se trouve
 	 * @param bombDirection direction relative du bombe
-	 * @param matrix matrix amÃ©liorÃ©
+	 * @param matrix matrix amélioré
 	 * @return le Block adjacent
 	 */
 	public Block getAdjacentBlock(int[] ownPosition, int bombDirection, int[][] matrix)

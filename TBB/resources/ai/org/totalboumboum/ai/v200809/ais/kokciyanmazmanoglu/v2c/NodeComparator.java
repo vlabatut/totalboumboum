@@ -7,31 +7,16 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
 *
-* @author Nadin Kökciyan
-* @author Hikmet Mazmanoğlu
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
 *
 */
-@SuppressWarnings("deprecation")
 public class NodeComparator implements Comparator<Node>
 {
-	/** */
 	private Node start;
-	/** */
 	private Node end;
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param startNode
-	 * 		Description manquante !
-	 * @param endNode
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public NodeComparator(Node startNode, Node endNode, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -39,7 +24,6 @@ public class NodeComparator implements Comparator<Node>
 		this.end = endNode;
 	}
 	
-	@Override
 	public int compare(Node n1, Node n2)
 	{	int res = 0;
 		

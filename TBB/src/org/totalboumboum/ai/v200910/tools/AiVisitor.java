@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.tools;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -49,28 +49,21 @@ import japa.parser.ast.type.Type;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 /**
- * cette mÃ©thode parse les codes sources dÃ©finissant une IA et vÃ©rifie
- * que les appels Ã  checkInterruption sont effectuÃ©s correctement, c'est Ã  dire :
- * 	- un appel Ã  chaque dÃ©but de boucle (for, while, do)
- * 	- un appel Ã  chaque dÃ©but de mÃ©thode, sauf :
+ * cette méthode parse les codes sources définissant une IA et vérifie
+ * que les appels à checkInterruption sont effectués correctement, c'est à dire :
+ * 	- un appel à chaque début de boucle (for, while, do)
+ * 	- un appel à chaque début de méthode, sauf :
  * 		- dans un constructeur :
- * 			- en cas d'appel Ã  super() : checkInterruption() est appelÃ© en deuxiÃ¨me (et non pas en premier)
- * 			- dans une classe implÃ©mentant l'interface ArtificialIntelligence
- * 		- dans une mÃ©thode dont on ne ContrÃ´le pas l'interface (du type toString, equals, compare, etc.)
- * 	- l'appel ne doit pas Ãªtre placÃ© dans un try-catch qui annulerait son effet
+ * 			- en cas d'appel à super() : checkInterruption() est appelé en deuxième (et non pas en premier)
+ * 			- dans une classe implémentant l'interface ArtificialIntelligence
+ * 		- dans une méthode dont on ne contrôle pas l'interface (du type toString, equals, compare, etc.)
+ * 	- l'appel ne doit pas être placé dans un try-catch qui annulerait son effet
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
  */
 public class AiVisitor extends VoidVisitorAdapter<Object>
 {	
-	/**
-	 * 
-	 * @param initLevel
-	 * 		?	
-	 */
+
 	public AiVisitor(int initLevel)
 	{	indentLevel = initLevel;		
 	}
@@ -78,18 +71,14 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// MISC	CONSTANTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
-	/** */
 	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
-	/** */
 	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
 	{	"AiMain",			
 		"compare",
 		"equals",
 		"toString"
 	});
-	/** */
 	private final static List<String> FORBIDDEN_EXCEPTIONS = Arrays.asList(new String[]
  	{	"Exception",			
  		"StopRequestException"
@@ -98,24 +87,15 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// MISC VARIABLES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private String currentMethod = null;
-	/** */
 	private int indentLevel;
-	/** */
 	private boolean checkConstructor;
 	
 	/////////////////////////////////////////////////////////////////
 	// ERROR COUNT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private int errorCount = 0;
 	
-	/**
-	 * 
-	 * @return
-	 * 		Nombre d'erreurs.
-	 */
 	public int getErrorCount()
 	{	return errorCount;	
 	}
@@ -136,16 +116,17 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					if(FORBIDDEN_EXCEPTIONS.contains(exceptionName))
 					{	for(int i=0;i<indentLevel;i++)
 							System.out.print(">>");
-				       	System.out.println("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel Ã  "+CHECK_INTERRUPTION_METHOD+"()");
+				       	System.out.println("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel à "+CHECK_INTERRUPTION_METHOD+"()");
 						errorCount++;
+						//TODO à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
-				{	System.out.print(">>11111111111 problÃ¨me : exception non conforme ("+t2.getClass()+")");
+				{	System.out.print(">>11111111111 problème : exception non conforme ("+t2.getClass()+")");
 				}
 			}
 	    	else
-			{	System.out.print(">>222222222 problÃ¨me : exception non conforme ("+t.getClass()+")");
+			{	System.out.print(">>222222222 problème : exception non conforme ("+t.getClass()+")");
 	    	}
     	}
     	e.accept(this, arg);
@@ -266,7 +247,7 @@ if(currentMethod.equals("PathFinder"))
 //	System.out.println();
         	for(int i=0;i<indentLevel;i++)
 				System.out.print("..");
-        	System.out.println("Analyse de la mÃ©thode "+currentMethod);
+        	System.out.println("Analyse de la méthode "+currentMethod);
         	checkBlock(block);  
         	block.accept(this, arg);
         }
@@ -321,11 +302,6 @@ if(currentMethod.equals("PathFinder"))
 		statement.accept(this, arg);
     }
 
-	/**
-	 * 
-	 * @param statement
-	 * 		?	
-	 */
 	private void checkBlock(Statement statement)
 	{	if(!IGNORED_METHODS.contains(currentMethod))
 		{	int line = statement.getBeginLine();
@@ -345,27 +321,30 @@ if(currentMethod.equals("PathFinder"))
 			        		{	// erreur
 								for(int i=0;i<indentLevel;i++)
 									System.out.print(">>");
-						       	System.out.println("Erreur ligne "+line+" : la premiÃ¨re instruction du bloc n'est pas un appel Ã  "+CHECK_INTERRUPTION_METHOD+"()");
+						       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 			        			errorCount++;
+			        			//TODO à compléter par la création d'un commentaire dans le code source
 			        		}
 						}
 						else
 						{	// erreur
 							for(int i=0;i<indentLevel;i++)
 								System.out.print(">>");
-					       	System.out.println("Erreur ligne "+line+" : la premiÃ¨re instruction du bloc n'est pas un appel Ã  "+CHECK_INTERRUPTION_METHOD+"()");
+					       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
+							//TODO à compléter par la création d'un commentaire dans le code source
 						}
 					}
 					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
-					{	// c'est un appel Ã  super/this, donc Ã§a doit forcÃ©ment Ãªtre au dÃ©but
-						// mais la deuxiÃ¨me instruction doit Ãªtre un appel Ã  checkInterruption()
+					{	// c'est un appel à super/this, donc ça doit forcément être au début
+						// mais la deuxième instruction doit être un appel à checkInterruption()
 						if(statements.size()<2)
 						{	// erreur
 							for(int i=0;i<indentLevel;i++)
 								System.out.print(">>");
-					       	System.out.println("Erreur ligne "+line+" : la deuxiÃ¨me instruction du bloc n'est pas un appel Ã  "+CHECK_INTERRUPTION_METHOD+"()");
+					       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
+							//TODO à compléter par la création d'un commentaire dans le code source
 						}
 						else
 						{	line = firstStatement.getBeginLine();
@@ -380,16 +359,18 @@ if(currentMethod.equals("PathFinder"))
 					        		{	// erreur
 										for(int i=0;i<indentLevel;i++)
 											System.out.print(">>");
-								       	System.out.println("Erreur ligne "+line+" : la deuxiÃ¨me instruction du bloc n'est pas un appel Ã  "+CHECK_INTERRUPTION_METHOD+"()");
+								       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 					        			errorCount++;
+					        			//TODO à compléter par la création d'un commentaire dans le code source
 					        		}
 								}
 								else
 								{	// erreur
 									for(int i=0;i<indentLevel;i++)
 										System.out.print(">>");
-							       	System.out.println("Erreur ligne "+line+" : la deuxiÃ¨me instruction du bloc n'est pas un appel Ã  "+CHECK_INTERRUPTION_METHOD+"()");
+							       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 				        			errorCount++;
+									//TODO à compléter par la création d'un commentaire dans le code source
 								}
 							}
 						}
@@ -398,8 +379,9 @@ if(currentMethod.equals("PathFinder"))
 					{	// erreur
 						for(int i=0;i<indentLevel;i++)
 							System.out.print(">>");
-				       	System.out.println("Erreur ligne "+line+" : la premiÃ¨re instruction du bloc n'est pas un appel Ã  "+CHECK_INTERRUPTION_METHOD+"()");
+				       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 	        			errorCount++;
+						//TODO à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
@@ -407,14 +389,16 @@ if(currentMethod.equals("PathFinder"))
 					for(int i=0;i<indentLevel;i++)
 						System.out.print("--");
 			       	System.out.println("Attention ligne "+line+" : le bloc est vide !");
+					//TODO à compléter par la création d'un commentaire dans le code source
 				}
 			}
 			else
 			{	// erreur
 				for(int i=0;i<indentLevel;i++)
 					System.out.print(">>");
-		       	System.out.println("Erreur ligne "+line+" : bloc manquant, appel Ã  "+CHECK_INTERRUPTION_METHOD+"() manquant Ã©galement");
+		       	System.out.println("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
 				errorCount++;
+				//TODO à compléter par la création d'un commentaire dans le code source
 			}
 		}
 	}

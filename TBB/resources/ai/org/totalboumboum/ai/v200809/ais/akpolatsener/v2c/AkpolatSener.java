@@ -15,17 +15,14 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Cem Akpolat
- * @author Emre Şener
+ * @author Emre Sener
  *
  */
-@SuppressWarnings("deprecation")
 public class AkpolatSener extends ArtificialIntelligence {
 
 	/** les cases actuel, precedent et prochain */
 	AiTile currentTile = null;
-	/** */
 	AiTile previousTile = null;
-	/** */
 	AiTile nextTile = null;
 
 	/** zone du jeu */
@@ -37,7 +34,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	/** direction du cas actuel vers le prochain */
 	Direction direction;
 
-	/** action de resultat à renvoyer */
+	/** action de resultat � renvoyer */
 	AiAction result = new AiAction(AiActionName.NONE);
 
 	/** objet pour les operations sur les cases */
@@ -45,7 +42,6 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 	/** objets de danger et de cible */
 	Danger danger;
-	/** */
 	Target target;
 
 	/**
@@ -53,7 +49,6 @@ public class AkpolatSener extends ArtificialIntelligence {
 	 * 
 	 * @return action d'IA
 	 */
-	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 

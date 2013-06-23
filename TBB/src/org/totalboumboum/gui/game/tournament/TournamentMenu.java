@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,7 +25,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -61,43 +60,27 @@ import org.totalboumboum.gui.game.tournament.results.LeagueResults;
 import org.totalboumboum.gui.game.tournament.results.SequenceResults;
 import org.totalboumboum.gui.game.tournament.results.SingleResults;
 import org.totalboumboum.gui.game.tournament.results.TournamentResults;
-import org.totalboumboum.gui.game.tournament.statistics.OthersStatistics;
-import org.totalboumboum.gui.game.tournament.statistics.SingleStatistics;
 import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
-import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
- * This class handles the bottom menu used
- * in the panel displaying the tournament
- * during game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel,ClientGeneralConnectionListener
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel
-	 * @param parent
-	 * 		Parent menu.
-	 */
+{	private static final long serialVersionUID = 1L;
+		
 	public TournamentMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
@@ -106,60 +89,36 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
 		// sizes
 		int buttonWidth = getHeight();
 		int buttonHeight = getHeight();
 
 		// buttons
-		buttonQuit = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonSave = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
-		buttonRecord = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
-buttonRecord.setEnabled(!GameData.PRODUCTION);		
+		buttonQuit = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonSave = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
+		buttonRecord = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
-		buttonMenu = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		buttonMenu = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
-	    buttonDescription = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
+	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonDescription);
-	    buttonResults = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
+	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
-	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
+	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
+buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
-		buttonMatch = GuiButtonTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		buttonMatch = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Tournament displayed by this panel */
 	private AbstractTournament tournament;
-	/** Whether the user can play or only browse the results */
-	private boolean browseOnly = false;
 
-	/**
-	 * Sets up the interaction mode of this panel:
-	 * either the user can play normally, or he
-	 * can only browse the statistics of the 
-	 * rounds already played before.
-	 * 
-	 * @param browseOnly
-	 * 		If {@code true}, then the user can only browse
-	 * 		past results, and not play new rounds.
-	 */
-	public void setBrowseOnly(boolean browseOnly)
-	{	this.browseOnly = browseOnly;
-	}
-	
-	/**
-	 * Changes the tournament handled
-	 * by this menu.
-	 * 
-	 * @param tournament
-	 * 		New tournament.
-	 */
 	public void setTournament(AbstractTournament tournament)
 	{	buttonDescription.setSelected(true);
 		matchPanel = null;
@@ -168,7 +127,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		this.tournament = tournament;
 		if(tournament==null)
 		{
-			// nothing to do here
+			
 		}
 		else
 		{	// panels
@@ -181,12 +140,11 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				container.setDataPart(tournamentDescription);
 				SequenceResults trnmtResults = new SequenceResults(container);
 				tournamentResults = trnmtResults;
-				OthersStatistics ts = new OthersStatistics(container);
-				tournamentStatistics = ts;
+				tournamentStatistics = new TournamentStatistics(container);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				ts.setTournament(trnmt);	
+				tournamentStatistics.setTournament(trnmt);	
 			}
 			else if(tournament instanceof CupTournament)
 			{	CupTournament trnmt = (CupTournament) tournament;
@@ -196,12 +154,11 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				container.setDataPart(tournamentDescription);
 				CupResults trnmtResults = new CupResults(container);
 				tournamentResults = trnmtResults;
-				OthersStatistics ts = new OthersStatistics(container);
-				tournamentStatistics = ts;
+				tournamentStatistics = new TournamentStatistics(container);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				ts.setTournament(trnmt);	
+				tournamentStatistics.setTournament(trnmt);	
 			}
 			else if(tournament instanceof LeagueTournament)
 			{	LeagueTournament trnmt = (LeagueTournament) tournament;
@@ -211,16 +168,14 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				container.setDataPart(tournamentDescription);
 				LeagueResults trnmtResults = new LeagueResults(container);
 				tournamentResults = trnmtResults;
-				OthersStatistics ts = new OthersStatistics(container);
-				tournamentStatistics = ts;
+				tournamentStatistics = new TournamentStatistics(container);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				ts.setTournament(trnmt);	
+				tournamentStatistics.setTournament(trnmt);	
 			}
 			else if(tournament instanceof SingleTournament)
-			{	if(!browseOnly)
-					tournament.progress();//TODO progressStats for browseOnly?
+			{	tournament.progress();
 				SingleTournament trnmt = (SingleTournament) tournament;
 				// create
 				SingleDescription trnmtDescription = new SingleDescription(container);
@@ -228,14 +183,13 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				container.setDataPart(tournamentDescription);
 				SingleResults trnmtResults = new SingleResults(container);
 				tournamentResults = trnmtResults;
-				SingleStatistics ts = new SingleStatistics(container);
-				tournamentStatistics = ts;
+				tournamentStatistics = new TournamentStatistics(container);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
-				ts.setTournament(trnmt);
+				tournamentStatistics.setTournament(trnmt);
 				// change button
-				GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonMatch);
+				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonMatch);
 			}
 			tournament.setPanel(this);
 		}
@@ -243,27 +197,15 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		refreshButtons();
 		
 		// connection
-		if(!browseOnly)
-		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection!=null)
-				connection.addListener(this);
-		}
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.addListener(this);
 	}
 	
-	/**
-	 * Returns the tournament currently
-	 * handled by this menu.
-	 * 
-	 * @return
-	 * 		Current tournament.
-	 */
 	public AbstractTournament getTournament()
 	{	return tournament;	
 	}
 
-	/**
-	 * Save the current tournament.
-	 */
 	private void saveTournament()
 	{	TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
 		AbstractTournament tournamentConf = tournamentConfiguration.getTournament();
@@ -301,15 +243,10 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		}
 	}
 
-	/**
-	 * Quits the current tournament for good,
-	 * and go back to the main menu.
-	 */
 	private void quitTournament()
 	{	// end tournament
 		tournament.cancel();
-		tournament.finish();
-
+		
 		// end possible connection
 		Configuration.getConnectionsConfiguration().terminateConnection();
 		
@@ -320,152 +257,78 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Definitely quits the tournament */
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
-	/** Records the current tournament */
 	private JButton buttonSave;
-	/** Whether rounds should be recorded or not */
 	private JToggleButton buttonRecord;
-	/** Goes to the main menu without quitting the tournament */
 	private JButton buttonMenu;
-	/** Displays the tournament detailed description */
 	private JToggleButton buttonDescription;
-	/** Displays the tournament results */ 
 	private JToggleButton  buttonResults;
-	/** Displays the tournament stat plots */
 	private JToggleButton  buttonStatistics;
-	/** Goes to the next match */
 	private JButton buttonMatch;
-	/** Thread used for the auto-advance system */
+	
 	private Thread thread = null;
 
-	/**
-	 * Update the buttons depending on 
-	 * the tournament state.
-	 */
 	public void refreshButtons()
-	{	if(browseOnly)
-		{	if(tournament!=null)
-			{	if(tournament instanceof SingleTournament)
-				{	if(!tournament.hasBegun())
-					{	GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND, buttonMatch);
-						buttonMatch.setEnabled(false);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
-						buttonMenu.setEnabled(true);
-					}
-					else
-					{	buttonMatch.setEnabled(true);
-						Match match = tournament.getCurrentMatch();
-						Round round = match.getCurrentRound();
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND, buttonMatch);
-						if(round==null)
-							buttonMatch.setEnabled(false);
-						else
-							buttonMatch.setEnabled(true);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
-						buttonMenu.setEnabled(true);
-					}				
+	{	if(tournament!=null)
+		{	if(tournament instanceof SingleTournament)
+			{	if(tournament.isOver())
+				{	buttonMatch.setEnabled(false);
+					GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
 				}
 				else
-				{	if(!tournament.hasBegun())
-					{	buttonMatch.setEnabled(false);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
-					}
+				{	buttonMatch.setEnabled(true);
+					Match match = tournament.getCurrentMatch();
+					Round round = match.getCurrentRound();
+					if(round==null || round.isOver())
+						GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonMatch);
 					else
-					{	List<Match> playedMatches = tournament.getPlayedMatches();
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_NEXT_MATCH, buttonMatch);
-						if(playedMatches.isEmpty())
-							buttonMatch.setEnabled(false);
-						else
-							buttonMatch.setEnabled(true);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
-						buttonMenu.setEnabled(true);
-					}
-				}
+						GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonMatch);
+					GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
+				}				
 			}
 			else
-			{	buttonMatch.setEnabled(false);
-				GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
-				buttonMenu.setEnabled(true);
+			{	if(tournament.isOver())
+				{	buttonMatch.setEnabled(false);
+					GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
+				}
+				else
+				{	buttonMatch.setEnabled(true);
+					Match match = tournament.getCurrentMatch();
+					if(match==null || match.isOver())
+						GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch);
+					else
+						GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch);
+					GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
+				}
 			}
-		
-			// record game & replay
-			buttonSave.setEnabled(false);
-			buttonMenu.setEnabled(true);
-			buttonRecord.setSelected(false);
-			buttonRecord.setEnabled(false);
+		}
+		else
+		{	buttonMatch.setEnabled(false);
 		}
 	
-		else
-		{	if(tournament!=null)
-			{	if(tournament instanceof SingleTournament)
-				{	if(tournament.isOver())
-					{	buttonMatch.setEnabled(false);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
-					}
-					else
-					{	buttonMatch.setEnabled(true);
-						Match match = tournament.getCurrentMatch();
-						Round round = match.getCurrentRound();
-						if(round==null || round.isOver())
-							GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonMatch);
-						else
-							GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonMatch);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
-					}				
-				}
-				else
-				{	if(tournament.isOver())
-					{	buttonMatch.setEnabled(false);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
-					}
-					else
-					{	buttonMatch.setEnabled(true);
-						Match match = tournament.getCurrentMatch();
-						if(match==null || match.isOver())
-							GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch);
-						else
-							GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch);
-						GuiButtonTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
-					}
-				}
-			}
-			else
-			{	buttonMatch.setEnabled(false);
-			}
+		// record game
+		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		boolean connectionState = serverConnection==null && clientConnection==null;
+		buttonSave.setEnabled(connectionState);
+		buttonMenu.setEnabled(connectionState);
 		
-			// record game
-			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-			ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-			boolean connectionState = serverConnection==null && clientConnection==null;
-			buttonSave.setEnabled(connectionState);
-			buttonMenu.setEnabled(connectionState);
-			
-			// record replay
-			boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
-			buttonRecord.setSelected(recordGames);
-		}
+		// record replay
+		boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
+		buttonRecord.setSelected(recordGames);
 	}
 	
-	/**
-	 * Automatically clicks on the appropriate
-	 * buttons in order to progress in the tournament.
-	 * Used to automatically chain many tournaments,
-	 * while evaluating agents.
-	 */
 	public void autoAdvance()
-	{	if(Configuration.getAisConfiguration().getAutoAdvance() && !browseOnly)
+	{	if(Configuration.getAisConfiguration().getAutoAdvance())
 		{	// go to match
 			if(buttonMatch.isEnabled())
 			{	thread = new Thread("TBB.autoadvance")
-				{	@Override
-					public void run()
+				{	public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
 							SwingUtilities.invokeLater(new Runnable()
-							{	@Override
-								public void run()
+							{	public void run()
 								{	buttonMatch.doClick();
 								}
 							});				
@@ -483,18 +346,11 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Panel containing the match (or the round, for a single tournament) */
 	private MenuPanel matchPanel;
-	/** Panel describing the tournament */
 	private TournamentDescription<?> tournamentDescription;
-	/** Panel containing the detailed results of the tournament */
 	private TournamentResults<?> tournamentResults;
-	/** Panel giving the evolution of the tournament statistics */
-	private TournamentStatistics<?> tournamentStatistics;
+	private TournamentStatistics tournamentStatistics;
 
-	/**
-	 * Update the panels of this menu.
-	 */
 	private void refreshPanels()
 	{	tournamentDescription.refresh();
 		tournamentResults.refresh();
@@ -575,21 +431,6 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			
 			replaceWith(matchPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_NEXT_MATCH))
-		{	//if(browseOnly)
-			{	//tournament.progressStat();
-				Match match = tournament.getCurrentMatch();		
-				if(matchPanel==null || ((MatchSplitPanel)matchPanel).getMatch()!=match)
-				{	MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
-					mPanel.setMatchStats(match);
-					matchPanel = mPanel;
-				}
-				else
-					((MatchSplitPanel)matchPanel).refreshButtons();
-				
-				replaceWith(matchPanel);
-			}
-		}
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
 		{	tournament.progress();
 			MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
@@ -597,29 +438,14 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			Match match = tournament.getCurrentMatch();		
 			mPanel.setMatch(match);
 			mPanel.autoAdvance();
-					// possibly updating client state
+
+			// possibly updating client state
 			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 			if(connection!=null)
 				connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
 			
 			replaceWith(matchPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_NEXT_ROUND))
-		{	//if(browseOnly)
-			{	Match match = tournament.getCurrentMatch();		
-				//match.progressStat();
-				Round round = match.getCurrentRound();
-				if(matchPanel==null || ((RoundSplitPanel)matchPanel).getRound()!=round)
-				{	RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);
-					matchPanel = rPanel;
-					rPanel.setRoundStats(round);
-				}
-				else
-					((RoundSplitPanel)matchPanel).refreshButtons();
-				
-				replaceWith(matchPanel);
-			}
-		}
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	Match match = tournament.getCurrentMatch();		
 			try
@@ -682,8 +508,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		// refresh only the Single match tournaments
 		if(tournament instanceof SingleTournament)
 		{	SwingUtilities.invokeLater(new Runnable()
-			{	@Override
-				public void run()
+			{	public void run()
 				{	tournamentResults.refresh();
 					buttonResults.doClick();
 				}
@@ -695,8 +520,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	public void matchOver()
 	{	saveTournament();
 		SwingUtilities.invokeLater(new Runnable()
-		{	@Override
-			public void run()
+		{	public void run()
 			{	tournamentResults.refresh();
 				buttonResults.doClick();
 			}
@@ -706,8 +530,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	@Override
 	public void tournamentOver()
 	{	SwingUtilities.invokeLater(new Runnable()
-		{	@Override
-			public void run()
+		{	public void run()
 			{	tournamentResults.refresh();
 				saveTournament();
 				buttonResults.doClick();

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.successor;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,13 +28,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.AstarNode;
 
 /**
- * permet de dÃ©finir une fonction successeur utilisÃ©e par l'algorithme
- * A* lors de la recherche d'un plus court chemin, pour dÃ©velopper un Ã©tat
+ * permet de définir une fonction successeur utilisée par l'algorithme
+ * A* lors de la recherche d'un plus court chemin, pour développer un état
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public abstract class SuccessorCalculator
 {
@@ -42,23 +40,20 @@ public abstract class SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * calcule tous les Ã©tats accessibles Ã  partir du noeud de recherche
-	 * passÃ© en paramÃ¨tre. On prend un noeud de recherche et non pas
-	 * un Ã©tat en paramÃ¨tre, car le noeud de recherche contient des informations
-	 * susceptibles d'Ã©liminer certains successeurs potentiels. 
-	 * Par exemple, si le cout correspond au temps de dÃ©placement, alors le cout du noeud
-	 * de recherche courant correspond au temps nÃ©cessaire pour arriver Ã  l'Ã©tat
-	 * correspondant. Certaines des cases accessibles depuis cet Ã©tat peuvent Ãªtre
-	 * menacÃ©e par du feu, et le temps est une information cruciale pour dÃ©terminer
-	 * si le personnage peut ou pas traverser une case avant qu'elle ne brÃ»le.
+	 * calcule tous les états accessibles à partir du noeud de recherche
+	 * passé en paramètre. On prend un noeud de recherche et non pas
+	 * un état en paramètre, car le noeud de recherche contient des informations
+	 * susceptibles d'éliminer certains successeurs potentiels. 
+	 * Par exemple, si le cout correspond au temps de déplacement, alors le cout du noeud
+	 * de recherche courant correspond au temps nécessaire pour arriver à l'état
+	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être
+	 * menancée par du feu, et le temps est une information cruciale pour déterminer
+	 * si le personnage peut ou pas traverser une case avant qu'elle ne brûle.
 	 * 
 	 * @param node	
 	 * 		le noeud de recherche courant 
 	 * @return	
 	 * 		la liste de cases accessibles
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	public abstract List<AiTile> processSuccessors(AstarNode node) throws StopRequestException;
 }

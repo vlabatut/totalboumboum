@@ -27,51 +27,31 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
 *
-* @author Abdullah TÄ±rtÄ±l
+* @author Abdullah Tirtil
 * @author Mert Tomruk
 *
 */
-@SuppressWarnings("deprecation")
 public class TirtilTomruk extends ArtificialIntelligence {
-	/** */
 	private AiZone zone;
-	/** */
 	private AiHero caractere;
-	/** */
 	private Vector<AiHero> rivals;
-	/** */
 	private AiAction action;
-	/** */
 	private AiTile targetDeplacement;
-	/** */
 	private AiTile currentTile;
-	/** */
 	private AiTile nextTile;
-	/** */
 	private AiTile previousTile;
-	/** */
 	private LinkedList<AiTile> path;
-	/** */
 	private boolean danger = false;
-	/** */
 	private Zone zoneAdapted;
 	
-	/** */
 	private Vector<TimedBomb> timedBombes;
-	/** */
 	private boolean dropBombe = false;
-	/** */
 	private boolean init = false;
-	/** */
 	private long time;
-	/** */
 	private boolean isAlone = true;
-	/** */
 	private boolean isBlocDest = true;
-	/** */
 	private boolean isBonus = false;
-
-	@Override
+	
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 
@@ -251,11 +231,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void pickNextTile() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		if (!danger) {
@@ -316,10 +291,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	}
 	*/
 
-	/**
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
 	private void explodeForBonus() throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
 		AiTile temp = bombTileForBonus();
@@ -330,11 +301,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 				this.targetDeplacement = temp;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void checkDanger() throws StopRequestException {
 		checkInterruption(); // Appel obligatoire
 		if (!isClear(currentTile) || !isClear(nextTile)) {
@@ -343,15 +309,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			danger = false;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isClear(AiTile tile) throws StopRequestException {
 		checkInterruption(); // Appel obligatoire
 		if (tile == null)
@@ -361,13 +318,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return !(temp == ZoneEnum.FEU || temp == ZoneEnum.FEUPOSSIBLE || temp == ZoneEnum.BOMBE);
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private LinkedList<AiTile> getEscapePath() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		Vector<AiTile> escapeTiles = new Vector<AiTile>();
@@ -428,16 +378,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiAction deplace() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
-		if (caractere != null) { // on met Ã  jour la position de l'ia dans la
+		if (caractere != null) { // on met à jour la position de l'ia dans la
 									// zone
 			currentTile = caractere.getTile();
 
@@ -447,16 +390,16 @@ public class TirtilTomruk extends ArtificialIntelligence {
 				previousTile = currentTile;
 			}
 
-			// arrivÃ© Ã  destination : on choisit une nouvelle destination
+			// arrivé à destination : on choisit une nouvelle destination
 			if (currentTile == nextTile)
 				pickNextTile();
-			// au cas ou quelqu'un prendrait le ContrÃ´le manuel du personnage
+			// au cas ou quelqu'un prendrait le contrôle manuel du personnage
 			else if (previousTile != currentTile) {
 				previousTile = currentTile;
 				pickNextTile();
 			}
 
-			// on calcule la direction Ã  prendre
+			// on calcule la direction à prendre
 			Direction direction = getPercepts().getDirection(currentTile,
 					nextTile);
 
@@ -485,11 +428,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			return new AiAction(AiActionName.NONE);
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void initAI() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		if (!init) {
@@ -582,11 +520,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		// System.out.print(this.timedBombes + "\n");
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void refreshTimedBombes() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		Collection<AiBomb> bombes = this.zone.getBombs();
@@ -611,15 +544,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		this.timedBombes = newTimedBombes;
 	}
 
-	/**
-	 * 
-	 * @param path
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("unchecked")
 	public double getPathDanger(LinkedList<AiTile> path)
 			throws StopRequestException {
@@ -679,12 +603,8 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	}
 	
 
-	/**
-	 * Null dndrebilir ha.
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	/*
+	 * Null döndürebilir ha.
 	 */
 	public AiTile bombTileForBonus() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
@@ -815,13 +735,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return maxBlocksTile;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public boolean isThereBlocDest() throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -838,37 +752,19 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return !blocksDestructibles.isEmpty();
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public Vector<TimedBomb> getTimedBombes() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		return timedBombes;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public long getTime() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire
 		return time;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public boolean isBonusAccessible() throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -895,13 +791,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return false;
 	}
 		
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public LinkedList<AiTile> getBonusPath() throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -934,11 +824,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return minDistBonusPath;
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public void pickBonus() throws StopRequestException
 	{
 		
@@ -974,15 +860,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		this.targetDeplacement = minDistBonus;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public int getTileDanger(AiTile tile) throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
 		checkInterruption(); // Appel Obligatoire
@@ -1003,15 +880,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		return minDist;
 	}		
 		
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public AiTile attackRivalBombTile(AiHero hero) throws StopRequestException
 	{checkInterruption(); // Appel Obligatoire
 		int maxPath = 0;
@@ -1087,14 +956,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	
 		return maxTile;
 	}
-	
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public void attackRival(AiHero hero) throws StopRequestException
 	{
 		checkInterruption(); // Appel Obligatoire
@@ -1113,13 +975,6 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		}		
 	}
 
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void attackRivalBeta(AiHero hero) throws StopRequestException
 	{
 		
@@ -1180,13 +1035,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param hero
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public void attackRivalAlpha(AiHero hero) throws StopRequestException
 	{
 		
@@ -1228,27 +1077,25 @@ public class TirtilTomruk extends ArtificialIntelligence {
 					//On peut se sauver.
 					//Est-ce qu'il peut se sauver
 					int minPath = Integer.MAX_VALUE;
-					if(hero!=null && hero.getTile()!=null)
-					{	for(int m = hero.getTile().getCol() - 3; m <= hero.getTile().getCol() + 3; m++)
+					for(int m = hero.getTile().getCol() - 3; m <= hero.getTile().getCol() + 3; m++)
+					{
+						for(int n = hero.getTile().getLine() - 3; n <= hero.getTile().getLine() + 3; n++)
 						{
-							for(int n = hero.getTile().getLine() - 3; n <= hero.getTile().getLine() + 3; n++)
+						
+							if(m > 1 && n > 1 && m < zone.getWidth() - 1 && n < zone.getHeight() -1){
+							PathFinder pathFindRival = new PathFinder(zone,zoneDanger,hero.getTile(),zone.getTile(n,m),this,SearchModeEnum.BOMB_SIMULATION);
+							if(pathFindRival.getPath().size() < minPath || pathFindRival.getPath().isEmpty())
 							{
-							
-								if(m > 1 && n > 1 && m < zone.getWidth() - 1 && n < zone.getHeight() -1){
-								PathFinder pathFindRival = new PathFinder(zone,zoneDanger,hero.getTile(),zone.getTile(n,m),this,SearchModeEnum.BOMB_SIMULATION);
-								if(pathFindRival.getPath().size() < minPath || pathFindRival.getPath().isEmpty())
+								if(!hero.getTile().equals(zone.getTile(n,m)))
 								{
-									if(!hero.getTile().equals(zone.getTile(n,m)))
-									{
-										minPath = Integer.MAX_VALUE;
-									}
-									else
-									{
-										minPath = pathFindRival.getPath().size();
-									}
+									minPath = Integer.MAX_VALUE;
 								}
-							}}
-						}
+								else
+								{
+									minPath = pathFindRival.getPath().size();
+								}
+							}
+						}}
 					}
 					if(maxTile < minPath)
 					{

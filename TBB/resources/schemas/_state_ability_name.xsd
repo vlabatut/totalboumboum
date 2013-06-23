@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<!-- 
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut 
-	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 	<xsd:simpleType name="tStateAbilityPredefined">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="SPRITE_ABOVE" />
@@ -49,7 +29,7 @@
 			<xsd:enumeration value="BOMB_TRIGGER_TIMER" />
 			
 			<xsd:enumeration value="HERO_BOMB_DIARRHEA" />
-<!--			<xsd:enumeration value="HERO_BOMB_CONSTIPATION" /> -->
+			<xsd:enumeration value="HERO_BOMB_CONSTIPATION" />
 			<xsd:enumeration value="HERO_BOMB_DROP_LATENCY" />
 			<xsd:enumeration value="HERO_BOMB_NUMBER" />
 				<xsd:enumeration value="HERO_BOMB_NUMBER_MAX" />
@@ -74,7 +54,6 @@
 				<xsd:enumeration value="HERO_WALK_SPEED_M7" />
 				<xsd:enumeration value="HERO_WALK_SPEED_M8" />
 				<xsd:enumeration value="HERO_WALK_SPEED_M9" />
-				<xsd:enumeration value="HERO_WALK_SPEED_M99" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P1" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P2" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P3" />
@@ -84,7 +63,6 @@
 				<xsd:enumeration value="HERO_WALK_SPEED_P7" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P8" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P9" />
-				<xsd:enumeration value="HERO_WALK_SPEED_P49" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P99" />
 				
 				<xsd:enumeration value="ITEM_CANCEL_GROUP" />

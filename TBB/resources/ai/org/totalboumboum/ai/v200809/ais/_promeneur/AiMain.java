@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.ais._promeneur;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,7 +21,6 @@ package org.totalboumboum.ai.v200809.ais._promeneur;
  * 
  */
 
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 
 /**
@@ -29,14 +28,11 @@ import org.totalboumboum.ai.v200809.adapter.AiManager;
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/////////////////////////////////////////////////////////////////
-	// AGENT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public ArtificialIntelligence instantiateAgent()
-	{	return new Promeneur();
+
+	public AiMain()
+	{	super(new Promeneur());
 	}
+	
 }

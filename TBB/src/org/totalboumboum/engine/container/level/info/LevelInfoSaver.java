@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.info;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,7 +26,6 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -56,10 +55,6 @@ public class LevelInfoSaver
 	private static Element saveLevelElement(LevelInfo levelInfo)
 	{	Element result = new Element(XmlNames.LEVEL);
 		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-	
 		// title
 		Element titleElement = new Element(XmlNames.TITLE);
 		titleElement.setAttribute(XmlNames.VALUE,levelInfo.getTitle());
@@ -98,7 +93,7 @@ public class LevelInfoSaver
 		result.addContent(visibledimElement);
 		// visible position
 		Element visibleposeElement = new Element(XmlNames.VISIBLE_POSITION);
-		visibleposeElement.setAttribute(XmlNames.UPLINE,Integer.toString(levelInfo.getVisiblePositionUpRow()));
+		visibleposeElement.setAttribute(XmlNames.UPLINE,Integer.toString(levelInfo.getVisiblePositionUpLine()));
 		visibleposeElement.setAttribute(XmlNames.LEFTCOL,Integer.toString(levelInfo.getVisiblePositionLeftCol()));
 		result.addContent(visibleposeElement);
 		// display

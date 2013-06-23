@@ -16,41 +16,28 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
  * Cette class est pour trouver une chemin 
  * de la case actuelle du hero vers la case
  * correspondante
- * @author Oktay Doruk
+ * @author DorukKüpelioğlu
  *
  */
-@SuppressWarnings("deprecation")
 public class Astar 
 {	
-	/** */
 	private DorukKupelioglu dk;
-	/** */
 	private Matrix matrix;
-	/** */
 	private AiPath path;
-	/** */
 	private AiHero hero;
-	/** */
 	private AiTile start;
-	/** */
 	private List<Node> closed;
-	/** */
 	private List<Node> open;
-	/** */
 	private boolean stop;
-	/** */
 	private boolean useTime;
-	/** */
 	private double PathFValue;
 
 	/**
 	 * Constructeur pour initialiser les valeurs
 	 * 
 	 * @param dk pour checkinterruption 
-	 * @param useTime 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * @param matrix est la matrice qu'on utilise
+	 * @param hero hızını hesaba katacağımız hero
 	 */
 	public Astar(DorukKupelioglu dk,boolean useTime)throws StopRequestException
 	{
@@ -64,11 +51,8 @@ public class Astar
 	/**
 	 * Cette fonction trouve une chemin entre "start" et "end".
 	 * le chemin "path" contient la case "end" mais ne contient pas la case "start".
-	 * @param startTile 
-	 * 		Description manquante !
 	 * @param endTile la case ou le hero veut aller
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * @return la chemin trouvee
 	 */
 	public void findPath(AiTile startTile,AiTile endTile)throws StopRequestException
 	{
@@ -85,11 +69,7 @@ public class Astar
 		}
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public void init()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -104,11 +84,8 @@ public class Astar
 	 * Cette fonction trouve une chemin entre start et le premier case
 	 * ou elle peut creer une chemin
 	 * @param startTile
-	 * 		Description manquante !
 	 * @param listOfTarget
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * @return
 	 */
 	public void findPath(AiTile startTile,List<AiTile> listOfTarget)throws StopRequestException
 	{
@@ -165,17 +142,7 @@ public class Astar
 		}
 	}
 	
-	/**
-	 * 
-	 * @param tile1
-	 * 		Description manquante !
-	 * @param tile2
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public int MannhattanDistance(AiTile tile1, AiTile tile2)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -188,11 +155,7 @@ public class Astar
 	 * <p>ce site : http://www.policyalmanac.org/games/aStarTutorial.htm
 	 * nous a aide bien a construire cette algorithme.
 	 * @param node
-	 * 		Description manquante !
 	 * @param end
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private void CreateClosedList(Node node,AiTile end)throws StopRequestException
 	{
@@ -303,8 +266,6 @@ public class Astar
 	 * Cherche le noeud a la plus petite valeur dans la list "open"
 	 * 
 	 * @return "null" si la list est vide ou le noeud correspondant sinon
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private Node smallestF()throws StopRequestException
 	{
@@ -328,12 +289,8 @@ public class Astar
 	 * Cherche si la case "tile" est dans la list de noeud "list"
 	 * 
 	 * @param tile case a chercher
-	 * 		Description manquante !
 	 * @param list 
-	 * 		Description manquante !
 	 * @return "null" si la case "tile" n'est pas dans la list ou le noeud correspondant de case "tile" sinon
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private Node isTileInList(AiTile tile,List<Node> list)throws StopRequestException
 	{
@@ -352,14 +309,6 @@ public class Astar
 		return node;
 	}
 
-	/**
-	 * @param start
-	 * 		Description manquante !
-	 * @param endNode
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void NodePathToTilePath(AiTile start,Node endNode)throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -375,26 +324,12 @@ public class Astar
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiPath getPath()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return path;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double getPathFValue()throws StopRequestException
 	{
 		dk.checkInterruption();

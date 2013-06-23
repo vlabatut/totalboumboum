@@ -9,20 +9,14 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
  * Represents a step to be executed to achieve a certain goal determined by a strategy.
  * It consists of an action to be executed, a tile where that action should be executed, and a
  * value, which can be used to give weights to certain strategies.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class StrategyStep
 {
-	/** */
 	private AiTile tile;
-	/** */
 	private AiAction action;
-	/** */
 	private int value;
-	/** */
 	private AkbulutKupelioglu monIa;
 	
 	
@@ -32,7 +26,6 @@ public class StrategyStep
 	 * @param action The action to take when the hero travels to the tile.
 	 * @param ia AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public StrategyStep(AiTile tile, AiAction action, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -47,7 +40,6 @@ public class StrategyStep
 	 * Gets the goal tile.
 	 * @return The goal tile.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiTile getTile() throws StopRequestException
 	{
@@ -60,7 +52,6 @@ public class StrategyStep
 	 * Sets the goal tile.
 	 * @param tile The tile to be set as goal tile.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setTile(AiTile tile) throws StopRequestException
 	{
@@ -73,7 +64,6 @@ public class StrategyStep
 	 * Gets the action to be executed.
 	 * @return The action to be executed.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiAction getAction() throws StopRequestException
 	{
@@ -86,7 +76,6 @@ public class StrategyStep
 	 * Sets the action to be executed.
 	 * @param action The action to be set.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setAction(AiAction action) throws StopRequestException
 	{
@@ -99,7 +88,6 @@ public class StrategyStep
 	 * Gets the value of this step.
 	 * @return The value of this step.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public int getValue() throws StopRequestException
 	{
@@ -112,7 +100,6 @@ public class StrategyStep
 	 * Sets the value of this step.
 	 * @param value The value to be set.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setValue(int value) throws StopRequestException
 	{

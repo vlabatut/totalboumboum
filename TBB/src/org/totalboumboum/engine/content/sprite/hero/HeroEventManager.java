@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.hero;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,7 +32,6 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
-import org.totalboumboum.engine.content.feature.action.crush.SpecificCrush;
 import org.totalboumboum.engine.content.feature.action.cry.SpecificCry;
 import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.feature.action.exult.SpecificExult;
@@ -84,8 +83,6 @@ public class HeroEventManager extends EventManager
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
-		else if(event.getAction() instanceof SpecificCrush)
-			actionCrush(event);
 		else if(event.getAction() instanceof SpecificTransmit)
 			actionTransmit(event);
 	}
@@ -118,40 +115,6 @@ public class HeroEventManager extends EventManager
 				}
 				// stats
 				StatisticAction statAction = StatisticAction.BOMB_PLAYER;
-				long statTime = sprite.getLoopTime();
-				String statActor = explosedBy;
-				String statTarget = sprite.getPlayer().getId();
-				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
-				sprite.addStatisticEvent(statEvent);
-				// other lifes remaining?
-				StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.HERO_LIFE);
-				if(stateAbility.isActive())
-				{	// if the life ability is present, then its use is necessarily >0 (else the manager would've removed it
-					sprite.modifyUse(stateAbility,-1);
-				}
-				else
-				{	AbstractPlayer player = sprite.getPlayer(); 
-					if(player!=null)
-						player.setOut();
-				}
-				// state
-				gesture = GestureName.BURNING;
-				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
-			}
-		}
-	}
-
-	private void actionCrush(ActionEvent event)
-	{	if(gesture.equals(GestureName.PUNCHING) 
-			|| gesture.equals(GestureName.PUSHING) 
-			|| gesture.equals(GestureName.WAITING) 
-			|| gesture.equals(GestureName.STANDING) 
-			|| gesture.equals(GestureName.WALKING))
-		{	//StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_FIRE_PROTECTION); //NOTE maybe should check for life or another protection
-			//if(!ability.isActive())
-			{	
-				// stats
-				StatisticAction statAction = StatisticAction.BOMB_PLAYER; //NOTE maybe a new statistical event should be defined for being crushed
 				long statTime = sprite.getLoopTime();
 				String statActor = explosedBy;
 				String statTarget = sprite.getPlayer().getId();
@@ -277,22 +240,26 @@ public class HeroEventManager extends EventManager
 				double currentTime = RoundVariables.loop.getTotalGameTime();
 				double elapsedTime = currentTime - lastDropTime;
 				if(elapsedTime>ablt.getStrength())
-				{	Bomb bomb = sprite.makeBomb();
-					SpecificDrop action = new SpecificDrop(sprite,bomb);
-					ActionAbility ability = sprite.modulateAction(action);
+				{	ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_CONSTIPATION);
+//System.out.println("constipation ("+sprite.getCurrentPosX()+"): "+ablt.isActive());		
+					if(!ablt.isActive())
+					{	Bomb bomb = sprite.makeBomb();
+						SpecificDrop action = new SpecificDrop(sprite,bomb);
+						ActionAbility ability = sprite.modulateAction(action);
 //System.out.println("drop ("+sprite.getCurrentPosX()+"): "+ablt.isActive());
 //if(!ablt.isActive())
 //	System.out.println();
-					if(ability.isActive())
-					{	lastDropTime = currentTime;
-						sprite.dropBomb(action);
-						if(gesture.equals(GestureName.WAITING))
-						{	setWaitDelay();
-							gesture = GestureName.STANDING;
-							sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
+						if(ability.isActive())
+						{	lastDropTime = currentTime;
+							sprite.dropBomb(action);
+							if(gesture.equals(GestureName.WAITING))
+							{	setWaitDelay();
+								gesture = GestureName.STANDING;
+								sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
+							}
+							else if(gesture.equals(GestureName.STANDING))
+								setWaitDelay();
 						}
-						else if(gesture.equals(GestureName.STANDING))
-							setWaitDelay();
 					}
 				}
 			}
@@ -371,7 +338,7 @@ public class HeroEventManager extends EventManager
 	{	//if(gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
 		//	 || gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
 		if(event.getMode())
-		{	// cette mÃ©thode se charge des controles nÃ©cessaires
+		{	// cette méthode se charge des controles nécessaires
 			sprite.triggerBomb(); 
 		}
 	}
@@ -590,13 +557,13 @@ public class HeroEventManager extends EventManager
 			// the sprite is not allowed to land
 			else
 				gesture = GestureName.BOUNCING;
-			// si pas de direction bloquÃ©e, alors celles du sprite de du controle n'ont pas changÃ© (sont toujours correctes)
+			// si pas de direction bloquée, alors celles du sprite de du controle n'ont pas changï¿½ (sont toujours correctes)
 			if(blockedDirection==Direction.NONE)
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
-			// sinon on prend celle qui est bloquÃ©e, car celles du controle/sprite ont pu changer
+			// sinon on prend celle qui est bloquée, car celles du controle/sprite ont pu changer
 			else
 				sprite.setGesture(gesture,blockedDirection,blockedDirection,true);
-			// on met Ã©ventuellement Ã  jour pour le rebond 
+			// on met ï¿½ventuellement à jour pour le rebond 
 			if(gesture.equals(GestureName.BOUNCING) && blockedDirection==Direction.NONE)
 				blockedDirection = spriteDirection;											
 		}

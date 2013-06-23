@@ -9,31 +9,14 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-/**
- * @author Elif Göncü
- * @author Yağız Onat
- */
-@SuppressWarnings("deprecation")
 public class Runaway 
 {
-	/** */
 	private GoncuOnat monia;
-	/** */
 	public final int CASE_EMPTY=0;
-	/** */
 	public final int COLLECT_SOFTWALL = 2;
-	/** */
 	public final int COLLECT_BONUS= 10;
-	/** */
 	public final int COLLECT_FIRE =-20 ;
 	
-	/**
-	 * 
-	 * @param ia
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Runaway(GoncuOnat ia) throws StopRequestException 
 	{
 		ia.checkInterruption();
@@ -52,8 +35,10 @@ public class Runaway
 	 * 				la zone du jeu
 	 *
 	 * @throws StopRequestException
-	 * 		description manquante !
+	 * 
+	 * 
 	 */
+	
 	public void runAwayAlgoAttack(double[][] matrice,AiZone zone)throws StopRequestException 
 	{
 		
@@ -139,8 +124,13 @@ public class Runaway
 	 * @param list
 	 *			la liste des cases on puisse vouloir aller
 	 * @throws StopRequestException
-	 * 		description manquante !
+	 * 
+	 *
+	 * 
 	 */
+	
+	
+	
 	public void runAwayAlgoAttackCheck(double[][] matrice,AiZone zone, List<AiTile> list)throws StopRequestException 
 	{
 		monia.checkInterruption();//APPEL OBLIGATOIRE
@@ -200,7 +190,6 @@ public class Runaway
 	 * @param matrice
 	 *            La matrice de zone
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void runAwayAlgoCollecte(double[][] matrice,AiZone zone)throws StopRequestException 
 	{

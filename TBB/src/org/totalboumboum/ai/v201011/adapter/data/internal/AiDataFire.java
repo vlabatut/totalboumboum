@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,24 +29,22 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * reprÃ©sente un feu du jeu, ie une projection mortelle rÃ©sultant (gÃ©nÃ©ralement) 
+ * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 {
 	/**
-	 * crÃ©e une reprÃ©sentation du feu passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite Ã  reprÃ©senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataFire(AiDataTile tile, Fire sprite)
 	{	super(tile,sprite);
@@ -89,8 +87,8 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	}
 
 	/**
-	 * met Ã  jour les diverse propriÃ©tÃ©s de ce feu
-	 * liÃ©e Ã  la gestion des collisions
+	 * met à jour les diverse propriétés de ce feu
+	 * liée à la gestion des collisions
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();
@@ -108,16 +106,16 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	// par dÃ©faut, on bloque
+	{	// par défaut, on bloque
 		boolean result = false;
 		
-		// si le sprite considÃ©rÃ© est un personnage : peut traverser le feu seulement s'il a une protection
+		// si le sprite considéré est un personnage : peut traverser le feu seulement s'il a une protection
 		if(sprite instanceof AiDataHero)
 		{	AiDataHero hero = (AiDataHero) sprite;
 			result = hero.hasThroughFires();
 		}
 		
-		// si c'est une bombe : peut traverser le feu seulement si elle n'explose pas Ã  son contact
+		// si c'est une bombe : peut traverser le feu seulement si elle n'explose pas à son contact
 		else if(sprite instanceof AiDataHero)
 		{	AiDataBomb bomb = (AiDataBomb) sprite;
 			result = !bomb.hasExplosionTrigger();
@@ -129,7 +127,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps Ã©coulÃ© depuis que le feu existe, exprimÃ© en ms */
+	/** temps écoulé depuis que le feu existe, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -138,7 +136,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	}
 
 	/**
-	 * met Ã  jour le temps Ã©coulÃ© depuis que le feu existe
+	 * met à jour le temps écoulé depuis que le feu existe
 	 */
 	private void updateTime()
 	{	long elapsedTime = getTile().getZone().getElapsedTime();

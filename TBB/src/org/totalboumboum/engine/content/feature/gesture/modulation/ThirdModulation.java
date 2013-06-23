@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -98,7 +98,7 @@ public class ThirdModulation extends AbstractActionModulation
 	 * tests if this modulation is related to the specified action
 	 */
 	public boolean isConcerningAction(SpecificAction specificAction, Circumstance actorCircumstances, Circumstance targetCircumstances) 
-//TODO vÃ©rififier dans le mod mgr que c bien cette mÃ©thode (et pas la parente) qui est appelÃ©e
+//TODO vérififier dans le mod mgr que c bien cette méthode (et pas la parente) qui est appelée
 	{	boolean result = super.isConcerningAction(specificAction);
 		if(result)
 			result = this.actorCircumstance.subsume(actorCircumstances);

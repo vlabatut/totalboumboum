@@ -16,46 +16,25 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.TirtilTomruk;
 
 /**
 *
-* @author Abdullah Tırtıl
+* @author Abdullah Tirtil
 * @author Mert Tomruk
 *
 */
-@SuppressWarnings("deprecation")
 public class ZoneDanger {
-	/** Une personnalisation du AiZone qui se specifie sur les dangers de la zone */
+	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	private AiZone zone;
-	/** */
 	private Collection <AiHero> rivals;
-	/** */
 	private AiHero caractere;
-	/** */
 	private Collection <AiBomb> bombes;
-	/** */
 	private Vector <TimedBomb> timedBombes;
-	/** */
 	private Collection <AiBlock> blocs;
-	/** */
 	private Collection <AiItem> objets;
-	/** */
 	private Collection <AiFire> feus; 
-	/** */
 	private int xMax;
-	/** */
 	private int yMax;
-	/** */
 	private ZoneEnum [][] zoneArray;
-	/** */
 	private TirtilTomruk source;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param source
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("unchecked")
 	public ZoneDanger(AiZone zone, TirtilTomruk source) throws StopRequestException
 	{
@@ -74,11 +53,7 @@ public class ZoneDanger {
 		init();
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	private void init() throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -260,19 +235,12 @@ public class ZoneDanger {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		return zoneArray;
 	}
 
-	@Override
 	public String toString()
 	{	
 		String result = "";

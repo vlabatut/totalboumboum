@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.network;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -45,11 +45,8 @@ import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.client.ClientState;
@@ -73,7 +70,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// buttons
 		initButtons();	
@@ -100,11 +97,11 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	{	buttonWidth = getHeight();
 		buttonHeight = getHeight();
 
-		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_NETWORK_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonGamesPrevious = GuiButtonTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonGamesNext = GuiButtonTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonPlayersPrevious = GuiButtonTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonPlayersValidate = GuiButtonTools.createToggleButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_NETWORK_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonGamesPrevious = GuiTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonGamesNext = GuiTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonPlayersValidate = GuiTools.createToggleButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}
 	
@@ -114,11 +111,11 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonGamesPrevious);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonGamesNext);
 	}
 	
@@ -128,11 +125,11 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonPlayersPrevious);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersValidate);
 	}
 	

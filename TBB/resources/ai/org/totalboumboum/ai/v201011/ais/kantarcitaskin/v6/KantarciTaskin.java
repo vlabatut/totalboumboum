@@ -17,10 +17,9 @@ import org.totalboumboum.ai.v201011.adapter.data.*;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * @author Burcu Kantarcı
- * @author Ayça Taşkın
+ * @author Kantarci Taskin
+ *
  */
-@SuppressWarnings("deprecation")
 public class KantarciTaskin extends ArtificialIntelligence
 {	
 	/**
@@ -29,18 +28,16 @@ public class KantarciTaskin extends ArtificialIntelligence
 	 * */
 
 	/***
-	 * Variable qui determine la direction du deplacement et calculé par la méthode action.
+	 * Variable qui determine la direction du deplacement et calcul� par la m�thode action.
 	 */
 	Direction direction = Direction.NONE;
-	/** */
 	AiZone zone;
 	
 	/**
-	 * Calcule l'action pour un instant donné
+	 * Calcule l'action pour un instant donn�
 	 * @return restult
 	 * 		action de l'hero dans cette iteration
 	 * */	
-	@Override
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();
@@ -61,26 +58,17 @@ public class KantarciTaskin extends ArtificialIntelligence
 	 * la mode et puis d'apres la mode elle decide de poser une bombe ou pas. sinon on calcule
 	 * la matrice et trouve un chemin pour se deplacer. si on se deplace la methode 
 	 * calcule aussi le valeur de la variable direction.
-	 */
+	 * 
+	 * @return resultat
+	 * 		le nome d'action
+	 * */
 	public List<AiBlock> blocks;
-	/** */
 	public List<AiBlock> destructibles ;
-	/** */
 	public List<AiBomb> bombs ;
-	/** */
 	public List<AiHero> heroes;
-	/** */
 	public List<AiFire> fires;
-	/** */
 	public List<AiItem> bonus; 
 
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiActionName action() throws StopRequestException
 	{
 		checkInterruption();
@@ -158,4 +146,10 @@ public class KantarciTaskin extends ArtificialIntelligence
 		
 		return resultat;
 	}	
+	
+	
 }
+
+
+
+

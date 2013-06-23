@@ -16,23 +16,12 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 
-/**
- * 
- * @author Osman Demirci
- * @author Mustafa Göktuğ Düzok
- * @author Hatice Esra Ergök
- * 
- */
-@SuppressWarnings("deprecation")
+
+
+
 public class Can_escape_Manager {
 
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public Can_escape_Manager(DemirciDuzokErgok ai) throws StopRequestException{
 	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -57,11 +46,7 @@ public class Can_escape_Manager {
 	
 
 
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
+	
 	public int getPathLength(){
 		return path_b.getLength();		
 		
@@ -70,11 +55,7 @@ public class Can_escape_Manager {
 
 	
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public void updatePath_b() throws StopRequestException {
 
 
@@ -90,15 +71,7 @@ public class Can_escape_Manager {
 		
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public List<AiTile> destinations_possibles_b(AiTile tile) throws StopRequestException {
 
 
@@ -130,28 +103,27 @@ public class Can_escape_Manager {
 		
 	}
 
-	/** */
 	private DemirciDuzokErgok ai;
-	/** */
 	private AiZone zone;
-	/** */
 	private Can_escape safe_map;
-	/** */
 	@SuppressWarnings("unused")
 	private AiTile arrived_tile_b;
-	/** */
 	private List<AiTile> possibleDest_b;
-	/** */
 	@SuppressWarnings("unused")
 	private boolean arrived_b;
-	/** */
 	private AiPath path_b;
 	
-	/** */
 	private Astar star_b;
-	/** */
 	private HeuristicCalculator hcalcul_b;
-	/** */
 	private MatrixCostCalculator costCalculator_b;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 

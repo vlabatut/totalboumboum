@@ -1,4 +1,7 @@
+
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2c;
+
+
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,74 +18,52 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
+
+
+
+
+
 /**
  * This class is for expriming the zone of the game with a matrix placing different danger
  * levels to each case.
  * 
- * @author Mustafa Göktuğ Düzok
+ * @author MGoktug
  *
  */
-@SuppressWarnings("deprecation")
+
 public class Safety_Map {
-	/** */
 	private AiZone our_zone;
-	/** */
 	@SuppressWarnings("unused")
 	private AiHero our_hero;
-	/** */
 	private Collection<AiHero> enemies;
 	
-	/** */
 	private Collection<AiBlock> blocks;
-	/** */
 	private Collection<AiItem> bonus;
-	/** */
 	private Collection<AiFire> fires;
-	/** */
 	private Collection<AiBomb> bombs;
 	
-	/** */
 	public int width;
-	/** */
 	public int height;
-	/** */
 	private int pos_x;
-	/** */
 	private int pos_y;
 	//Different exprimes for the cases possible. The more secured places will be
 	//exprimed with negative numbers and the dangerous cases will be exprimed with positive ones.
 	//enemies will be exprimed with zero.
-	/** */
 	public  double BONUS=-300;
-	/** */
 	public  double DEST_WALL=-50;
-	/** */
 	public  double INDEST_WALL=-10;
-	/** */
 	public double SAFE_CASE=-1000;
-	/** */
 	public  double FIRE= 1000000;
-	/** */
 	public  double BOMB=500000;
-	/** */
 	public double ENEMIE=0;
 	
 
 	//matrix stocking the danger levels:
-	/** */
 	public double security_matrix[][];
-	/** */
 	ArtificialIntelligence ai;
 	
-	/** 
-	 * Constructer of the class Safety_Map
-	 * @param zone 
-	 * 		Description manquante !
-	 * @param ai 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
+	/** Constructer of the class Safety_Map
+	 * @throws StopRequestException */
 	public Safety_Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -102,11 +83,6 @@ public class Safety_Map {
 		Fill_The_Matrix();
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void Fill_The_Matrix() throws StopRequestException {
 		ai.checkInterruption();
 		//firstly we place all the matrice with SAFE_CASE:
@@ -332,13 +308,7 @@ public class Safety_Map {
 	}
 	
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public double[][] returnMatrix() throws StopRequestException {
 		ai.checkInterruption();
 		return security_matrix;

@@ -5,8 +5,8 @@ import java.util.List;
 /**
  * A PathFinder can find a path between two indexed nodes in a Map.
  * 
- * @author Ayça Selva Baydar
- * @author Ayfer Camcı
+ * @author Ayca Selva Baydar
+ * @author Ayfer Camci
  *
  */
 public interface PathFinder {
@@ -26,26 +26,19 @@ public interface PathFinder {
 	
 	/**
 	 * Perform the next step in the search.
-	 * @return 
-	 * SEARCH_STATE_SUCCEEDED if the search has found a path
-	 * SEARCH_STATE_FAILED if no path could be found
-	 * SEARCH_STATE_INVALID if the search is not complete yet
-	 * SEARCH_STATE_NOT_INITIALIZED if you forgot to call findPath()
+	 * @return SEARCH_STATE_SUCCEEDED if the search has found a path
+	 * @return SEARCH_STATE_FAILED if no path could be found
+	 * @return SEARCH_STATE_INVALID if the search is not complete yet
+	 * @return SEARCH_STATE_NOT_INITIALIZED if you forgot to call findPath()
 	 */
 	public int nextStep();
 	
 	// Search states
-	/** */
 	public static final int SEARCH_STATE_SUCCEEDED = 1;
-	/** */
 	public static final int SEARCH_STATE_FAILED = 2;
-	/** */
 	public static final int SEARCH_STATE_NOT_INITIALIZED = 3;
-	/** */
 	public static final int SEARCH_STATE_INVALID = 4;
-	/** */
 	public static final int SEARCH_STATE_CANCELLED = 5;
-	/** */
 	public static final int SEARCH_STATE_SEARCHING = 6;
 
 }

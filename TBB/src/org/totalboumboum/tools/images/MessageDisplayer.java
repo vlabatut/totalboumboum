@@ -18,8 +18,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
-import org.totalboumboum.gui.tools.GuiFontTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * most of this class was adapted from a work by Adam Walker <adam@walkersoftware.net>
@@ -60,7 +59,7 @@ public class MessageDisplayer
 	{	shape = null;
 		outline = null;
 		
-		Graphics2D g = (Graphics2D)GuiFontTools.getGraphics();
+		Graphics2D g = (Graphics2D)GuiTools.getGraphics();
 		Stroke bs = new BasicStroke(fatten);
 		GlyphVector gv = font.createGlyphVector(g.getFontRenderContext(),text);
 		GeneralPath path = new GeneralPath();

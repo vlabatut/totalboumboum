@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.fireset;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,7 +31,6 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
@@ -77,11 +76,11 @@ if(fireFactory==null)
 	System.out.println(name);
 		result = fireFactory.makeSprite(tile);
 		
-		// record/transmit creation event
+		// record/transmit event
 		String eventName = getName()+"/"+name;
-		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		SpriteCreationEvent event = new SpriteCreationEvent(result,eventName);
 		RoundVariables.writeEvent(event);
-		
+
 		return result;
 	}
 }

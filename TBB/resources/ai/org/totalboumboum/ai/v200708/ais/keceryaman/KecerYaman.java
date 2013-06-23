@@ -7,70 +7,57 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * 
- * @author Serkan Ke√ßer
+ * @author Serkan Kecer
  * @author Onur Yaman
  *
  */
-@SuppressWarnings("deprecation")
 public class KecerYaman extends ArtificialIntelligence {
 	/********************************************************************************/
-	public static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
-	/** les points des objets differents */
+	/**
+	 * les points des objets differents
+	 */
 	private int VAL_HARD = AI_BLOCK_WALL_HARD;
-	/** */
 	private int VAL_BOMB = 500;
-	/** */
 	private int VAL_FLAME = VAL_BOMB;
 //	private int VAL_SHRINK = VAL_BOMB;
 //	private int VAL_SHRINK_CST = 7;
-	/** */
 	private int VAL_SOFT = 200;
-	/** */
 	private int VAL_PLAYER = -1000;
-	/** */
 	private int VAL_PLAYER_CST = 7;
-	/** */
 	private int VAL_EMPTY = 0;
-	/** */
 	private int VAL_BONUS = -10;
-	/** */
 	private int VAL_UNKNOWN = 50000;
-	/** */
 	private int VAL_HEURISTIC = 3;
-	/** */
 	private int[][] AREA = {{7,7},{8,7},{7,8},{8,8}};
-	/** */
 	private int[] GROUP_POINTS = {0,0,0,0};
-	/** algorithm pour trouver le mieux chemin 	 */
+	/**
+	 * algorithm pour trouver le mieux chemin
+	 */
 	private AStar bestPath;
-	/** */
 	private List<Node> path = new ArrayList<Node>();
-	/** */
 	private Node currentNode;
-	/** */
 	private Node nextNode;
 	
-	/** temporary variables */
+	/**
+	 * temporary variables
+	 */
 	private boolean started = false;
-	/** */
 	private boolean bombPlanted = false;
-	/** */
 	private int action;
 	
 	/********************************************************************************/
 	
-	/** indicateur de premi√®re invocation (pour la compatibilit√© */
+	/** indicateur de premiËre invocation (pour la compatibilitÈ */
 	private boolean firstTime = true;
 
 	@Override
-	public Integer processAction() throws Exception
-	{	action = AI_ACTION_DO_NOTHING;
+	public Integer call() throws Exception {
+		action = AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)
-		{	firstTime = false;
-			AStar.init(getZoneMatrixDimY(),getZoneMatrixDimX());
-		}
+			firstTime = false;
 		else
 		{	
 		// initialization of our map that is used during 
@@ -172,10 +159,8 @@ public class KecerYaman extends ArtificialIntelligence {
 		int value;
 		
 		// for each square in the map (except the outside boundries)
-//		for ( int y = 1 ; y <= 13 ; y ++ ){
-		for ( int y = 0 ; y < getZoneMatrixDimY() ; y ++ ){ //adjustment
-//			for ( int x = 1 ; x <=15 ; x++ ){
-			for ( int x = 0 ; x <getZoneMatrixDimX() ; x++ ){ //adjustment
+		for ( int y = 1 ; y <= 13 ; y ++ ){
+			for ( int x = 1 ; x <=15 ; x++ ){
 				value = Map.getValue(x, y);
 				if ( value == AI_BLOCK_BOMB || value == VAL_PLAYER ){
 					bombPower = getBombPowerAt(x, y);
@@ -208,19 +193,6 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @param bombPower
-	 * 		Description manquante !
-	 * @param wX
-	 * 		Description manquante !
-	 * @param wY
-	 * 		Description manquante !
-	 */
 	private void addFlamesToDirection ( int x , int y , int bombPower , int wX , int wY ){
 		boolean blocked = false;
 		int i = 0;
@@ -228,10 +200,8 @@ public class KecerYaman extends ArtificialIntelligence {
 		
 		while ( i < bombPower && !blocked ){
 			// boundry check
-//			if ( x > 0 && x < 17 ) x += wX;
-			if ( x > 0 && x < getZoneMatrixDimX() ) x += wX; //adjustment
-//			if ( y > 0 && y < 15 ) y += wY;
-			if ( y > 0 && y < getZoneMatrixDimY() ) y += wY; //adjustment
+			if ( x > 0 && x < 17 ) x += wX;
+			if ( y > 0 && y < 15 ) y += wY;
 			
 			// does anything blocks the flames?
 			value = Map.getValue(x, y);
@@ -248,15 +218,6 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param current
-	 * 		Description manquante !
-	 * @param next
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	private int calculateAction ( Node current , Node next ){
 		int currentX = current.getX();
 		int nextX = next.getX();
@@ -287,36 +248,20 @@ public class KecerYaman extends ArtificialIntelligence {
 		return action;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
 	private boolean bombPlanted (){
 		boolean temp = bombPlanted;
 		setBombNotPlanted();
 		return temp;
 	}
 	
-	/**
-	 * 
-	 */
 	private void setBombPlanted (){
 		bombPlanted = true;
 	}
 	
-	/**
-	 * 
-	 */
 	private void setBombNotPlanted (){
 		bombPlanted = false;
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 */
 	private void updatePath ( Node node ){
 		path.clear();
 		bestPath.setTargetNotAdded();
@@ -331,15 +276,6 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	private boolean isInDanger ( int x , int y ){
 		if ( Map.getValue((x-1), y) == VAL_BOMB || 
 			 Map.getValue((x-1), y) == VAL_FLAME ||
@@ -375,10 +311,8 @@ public class KecerYaman extends ArtificialIntelligence {
 		 */
 		else if ( getTimeBeforeShrink() > 1000 ){	
 			if ( bombPlanted() ){
-//				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
-//					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
+				for ( int y = 1 ; y <= 13 ; y++ ){
+					for ( int x = 1 ; x <= 15 ; x++ ){
 						if ( Map.getValue(x, y) <= VAL_EMPTY ){
 							min[0] = x;
 							min[1] = y;
@@ -387,30 +321,24 @@ public class KecerYaman extends ArtificialIntelligence {
 					}
 				}
 			}else{
-//				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
-//					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
+				for ( int y = 1 ; y <= 13 ; y++ ){
+					for ( int x = 1 ; x <= 15 ; x++ ){
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							updateGroupPoint ( x , y );
 						}
 					}
 				}
 				
-//				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
-//					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
+				for ( int y = 1 ; y <= 13 ; y++ ){
+					for ( int x = 1 ; x <= 15 ; x++ ){
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							updatePositionPoint ( x , y );
 						}
 					}
 				}
 				
-//				for ( int y = 1 ; y <= 13 ; y++ ){
-				for ( int y = 0 ; y < getZoneMatrixDimY() ; y++ ){ //adjustment
-//					for ( int x = 1 ; x <= 15 ; x++ ){
-					for ( int x = 0 ; x < getZoneMatrixDimX() ; x++ ){ //adjustment
+				for ( int y = 1 ; y <= 13 ; y++ ){
+					for ( int x = 1 ; x <= 15 ; x++ ){
 						if ( Map.getValue(x, y) != VAL_HARD ){
 							if ( Map.getValue(x,y) < Map.getValue(min[0], min[1])){
 								min[0] = x;
@@ -426,13 +354,6 @@ public class KecerYaman extends ArtificialIntelligence {
 		AStar.target[1] = (int) min[1];
 	}
 	
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 */
 	private void updateGroupPoint ( int x , int y ){
 		int value = Map.getValue(x, y);
 		
@@ -458,15 +379,6 @@ public class KecerYaman extends ArtificialIntelligence {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	private int heuristic ( int x , int y  ){
 		int tx = getOwnPosition()[0];
 		int ty = getOwnPosition()[1];
@@ -474,13 +386,6 @@ public class KecerYaman extends ArtificialIntelligence {
 		return VAL_HEURISTIC * ( Math.abs( tx - x ) + Math.abs( ty - y ) );
 	}
 	
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 */
 	private void updatePositionPoint ( int x , int y ){
 		int heuristic = heuristic(x,y);
 		Map.setValue(x,y,Map.getValue(x,y) + heuristic);

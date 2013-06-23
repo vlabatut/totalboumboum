@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.ais.erisikpektas;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v200809.ais.erisikpektas;
  */
 
 import org.totalboumboum.ai.v200809.adapter.AiManager;
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.ais.erisikpektas.v2.ErisikPektas;
 
 /**
@@ -30,14 +29,11 @@ import org.totalboumboum.ai.v200809.ais.erisikpektas.v2.ErisikPektas;
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/////////////////////////////////////////////////////////////////
-	// AGENT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public ArtificialIntelligence instantiateAgent()
-	{	return new ErisikPektas();
+
+	public AiMain()
+	{	super(new ErisikPektas());
 	}
+
 }

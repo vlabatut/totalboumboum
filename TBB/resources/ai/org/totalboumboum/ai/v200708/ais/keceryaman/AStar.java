@@ -6,45 +6,28 @@ import java.util.List;
 
 /**
  * 
- * @author Serkan Keçer
+ * @author Serkan Kecer
  * @author Onur Yaman
  *
  */
 public class AStar {
-	/** Class fields */
+	/**
+	 * Class fields
+	 */
 	public static BinaryHeapList openList = new BinaryHeapList(); // open list (nodes to be visited)
-	/** */
 	public static List<Node> closedList = new ArrayList<Node>(); // closed list (visited nodes)
-	/** */
 	private Node current; // current node
-	/** */
 	private Node neighbor; // a neighbor node (changes during a loop)
-	/** */
 	private Node targetNode;
-	/** */
 //	private Node startNode;
-	/** */
 	public static int[] target; // target node
-	/** */
 	private Iterator<Node> nodes;
-	/** */
 	private List<Node> path = new ArrayList<Node>();
-	/** */
 	public static boolean[] closedListCheck = new boolean[255];
-	/** */
-	public static boolean[] openListCheck = new boolean[255];
-	/** */
+	public static boolean[] openListCheck = new boolean[255]; 
 	public static boolean[] openListValues = new boolean[255];
-	/** */
 	private boolean targetAdded = false;
 	
-	/**
-	 * 
-	 * @param nodenode
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public  List<Node> bestPath (Node nodenode){
 		// initialization
 		openList.clear();
@@ -52,11 +35,11 @@ public class AStar {
 		closedList.clear();
 		clearClosedListCheck();
 		openList.add(nodenode);
-//		int i = 0;
+		int i = 0;
 		int[] coordinates = null;
 		// main loop
 		while ( !targetAdded && openList.length() > 0 /*&& i++ < 10*/ ){
-//			i++;
+			i++;
 			// get the first item of the open list and remove it
 			current = openList.getFirst();
 			// move to the closed list
@@ -101,7 +84,6 @@ public class AStar {
 		return path;
 	}
 	
-	@Override
 	public String toString (){
 		Node node = targetNode;
 		String path = "";
@@ -113,124 +95,60 @@ public class AStar {
 		
 		return path;
 	}
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 */
+	
 	public static void addToClosedList ( int x , int y ){
-		AStar.closedListCheck[ (x + width*y) ] = true;
+		AStar.closedListCheck[ (x + 17*y) ] = true;
 	}
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 */
+	
 	public static void addToOpenList ( int x , int y ){
-		AStar.openListCheck[ (x + width*y) ] = true;
+		AStar.openListCheck[ (x + 17*y) ] = true;
 	}
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 */
+	
 	public static void removeFromClosedList ( int x , int y ){
-		AStar.closedListCheck[ (x + width*y) ] = false;
+		AStar.closedListCheck[ (x + 17*y) ] = false;
 	}
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 */
+	
 	public static void removeFromOpenList ( int x , int y ){
-		AStar.openListCheck[ (x + width*y) ] = false;
+		AStar.openListCheck[ (x + 17*y) ] = false;
 	}
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
+	
 	public static boolean isInClosedList ( int x , int y ){
-		return AStar.closedListCheck[ (x + width*y) ];
+		return AStar.closedListCheck[ (x + 17*y) ];
 	}
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
+	
 	public static boolean isInClosedList ( Node node ){
 		return closedList.contains(node);
 	}
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
+	
 	public static boolean isInOpenList ( Node node ){
 		return openList.contains(node);
 	}
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
+	
 	public static boolean isInOpenList ( int x , int y ){
-		return AStar.openListCheck[ (x + width*y) ];
+		return AStar.openListCheck[ (x + 17*y) ];
 	}
-	/**
-	 * 
-	 */
+	
 	public void clearOpenListCheck (){
 		for ( int i = 0 ; i < 255 ; i++ ){
 			openListCheck[i] = false;
 		}
 	}
-	/**
-	 * 
-	 */
+	
 	public void clearClosedListCheck (){
 		for ( int i = 0 ; i < 255 ; i++ ){
 			closedListCheck[i] = false;
 		}
 	}
-	/**
-	 * 
-	 */
 	public void setTargetAdded (){
 		targetAdded = true;
 	}
-	/**
-	 * 
-	 */
+	
 	public void setTargetNotAdded (){
 		targetAdded = false;
 	}
-	/**
-	 * @param startNode 
-	 * 		Description manquante !
-	 * @param target 
-	 * 		Description manquante !
-	 */
+	//
+	// constructor
+	//
 	public AStar(Node startNode, int[] target){
 		int i = 0;
 		for ( i = 0 ; i < 255 ; i ++ ){
@@ -241,20 +159,5 @@ public class AStar {
 		}
 //		this.startNode = startNode;
 		AStar.target = target;
-	}
-	
-	/** Zone width */
-	private static int width;
-	
-	/**
-	 * 
-	 * @param height
-	 * 		Description manquante !
-	 * @param width
-	 * 		Description manquante !
-	 */
-	public static void init(int height, int width)
-	{
-		AStar.width = width;
 	}
 }

@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.fire;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -106,25 +106,12 @@ public class FireFactory extends SpriteFactory<Fire>
 	/////////////////////////////////////////////////////////////////
 	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Name of this fireset */
 	private String firesetName;
 
-	/**
-	 * Changes the name of this fireset.
-	 *  
-	 * @param firesetName
-	 * 		The new name.
-	 */
 	public void setFiresetName(String firesetName)
 	{	this.firesetName = firesetName;	
 	}
 	
-	/**
-	 * Returns the name of this fireset.
-	 * 
-	 * @return
-	 * 		The name of this fireset.
-	 */
 	public String getFiresetName()
 	{	return firesetName;
 	}

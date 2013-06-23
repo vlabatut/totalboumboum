@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.heuristic;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,13 +27,11 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
- * permet de dÃ©finir une fonction heuristique utilisÃ©e par l'algorithme
+ * permet de définir une fonction heuristique utilisée par l'algorithme
  * A* lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public abstract class HeuristicCalculator
 {
@@ -45,13 +43,10 @@ public abstract class HeuristicCalculator
 
 	/**
 	 * initialise/modifie la liste de cases 
-	 * pouvant terminer le chemin recherchÃ©
+	 * pouvant terminer le chemin recherché
 	 * 
 	 * @param endTiles	
 	 * 		les cases terminant le chemin
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	public void setEndTiles(List<AiTile> endTiles) throws StopRequestException
 	{	this.endTiles = endTiles;		
@@ -59,13 +54,10 @@ public abstract class HeuristicCalculator
 
 	/**
 	 * renvoie la liste de cases objectifs (i.e. les cases terminant
-	 * le chemin recherchÃ©)
+	 * le chemin recherché)
 	 * 
 	 * @return	
 	 * 		la liste des cases objectifs
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	public List<AiTile> getEndTiles() throws StopRequestException
 	{	return endTiles;	
@@ -76,15 +68,12 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * calcule la valeur heuristique de la case tile,
-	 * le but Ã©tant de se rendre dans une des cases objectifs
+	 * le but étant de se rendre dans une des cases objectifs
 	 * 
 	 * @param tile	
-	 * 		la case concernÃ©e 
+	 * 		la case concernée 
 	 * @return	
 	 * 		l'heuristique de la case
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	public abstract double processHeuristic(AiTile tile) throws StopRequestException;
 }

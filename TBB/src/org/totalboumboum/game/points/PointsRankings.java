@@ -2,7 +2,7 @@ package org.totalboumboum.game.points;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,12 +33,13 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * This PointsProcessor calculates some rankings in function of the results 
  * coming from the source PointsProcessor objects. The position of the source
  * in the list determines its priority while evaluating the rankings.
- * <br/>
+ * 
  * For example, if the sources were {12,5,5} and {0,4,6} then the rankings would be {1,3,2} 
- * <br/>
- * <b>Note:</b> the order can be normal (ie. increasing) or inverted (ie. decreasing).
+ * 
+ * Note : the order can be normal (ie. increasing) or inverted (ie. decreasing)
  * 
  * @author Vincent Labatut
+ *
  */
 public class PointsRankings extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;

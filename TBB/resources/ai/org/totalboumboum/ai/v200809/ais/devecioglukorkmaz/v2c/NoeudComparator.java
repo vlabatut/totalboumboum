@@ -6,27 +6,15 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Eser Devecioğlu
- * @author lev Korkmaz
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
  *
  */
-@SuppressWarnings("deprecation")
 public class NoeudComparator implements Comparator<Noeud> {
 
-	/** */
 	private Noeud t;
-	/** */
 	DeveciogluKorkmaz dk;
 
-	/**
-	 * 
-	 * @param t
-	 * 		Description manquante !
-	 * @param dk
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public NoeudComparator(Noeud t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
 		dk.checkInterruption();
@@ -34,7 +22,6 @@ public class NoeudComparator implements Comparator<Noeud> {
 		this.dk = dk;
 	}
 
-	@Override
 	public int compare(Noeud n1, Noeud n2) {
 		//dk.checkInterruption();
 		int resultat = 0;

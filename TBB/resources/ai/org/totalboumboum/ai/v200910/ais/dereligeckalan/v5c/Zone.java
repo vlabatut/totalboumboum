@@ -13,42 +13,24 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Merih Inal Dereli
- * @author Gökhan Geçkalan
- */
-@SuppressWarnings("deprecation")
+
+
+
+
+
+
+
 public class Zone {
-	/** */
 	private Collection <AiHero> rivals;
-	/** */
 	private AiHero caractere;
-	/** */
 	private Collection <AiBomb> bombes;
-	/** */
 	private Collection <AiBlock> blocs;
-	/** */
 	private Collection <AiItem> objets;
-	/** */
 	private Collection <AiFire> feus; 
-	/** */
 	private int xMax;
-	/** */
 	private int yMax;
-	/** */
 	private ZoneEnum [][] zoneArray;
-	/** */
 	private DereliGeckalan source;
-	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param source
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Zone(AiZone zone, DereliGeckalan source) throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -65,12 +47,6 @@ public class Zone {
 		init();
 				
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
@@ -242,19 +218,12 @@ public class Zone {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
 		return zoneArray;
 	}
 
-	@Override
 	public String toString()
 	{	
 		String result = "";

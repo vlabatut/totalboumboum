@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.panel.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -34,11 +34,8 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -61,10 +58,10 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		setOpaque(false);
 		
 		// size
-		titleHeight = 2*GuiSizeTools.panelMargin;
-		titleFontSize = GuiFontTools.getFontSize(titleHeight*GuiFontTools.FONT_RATIO);
-		dataHeight = height-3*GuiSizeTools.panelMargin-titleHeight;
-		dataWidth = width-2*GuiSizeTools.panelMargin;
+		titleHeight = 2*GuiTools.panelMargin;
+		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
+		dataHeight = height-3*GuiTools.panelMargin-titleHeight;
+		dataWidth = width-2*GuiTools.panelMargin;
 		
 		add(Box.createVerticalGlue());
 	
@@ -73,8 +70,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 			title = new JLabel(text);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(titleFontSize);
-			title.setForeground(GuiColorTools.COLOR_TITLE_FOREGROUND);
-			title.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+			title.setForeground(GuiTools.COLOR_TITLE_FOREGROUND);
+			title.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -89,7 +86,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		
 		// data panel
 		{	dataPart = new EmptySubPanel(dataWidth,dataHeight);
-			dataPart.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+			dataPart.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			add(dataPart);
 		}
 		

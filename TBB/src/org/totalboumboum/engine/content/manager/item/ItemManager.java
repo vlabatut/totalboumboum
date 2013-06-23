@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.item;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -63,21 +63,6 @@ public abstract class ItemManager
 	public abstract void addInitialItem(Item item);
 	
 	public abstract void reinitInitialItems();
-	
-	/**
-	 * Required by the AI API, in order to determine
-	 * which contagious items the player has.
-	 * 
-	 * @return
-	 * 		The list of all items.
-	 */
-	public List<Item> getAllItems()
-	{	List<Item> result = new ArrayList<Item>();
-		result.addAll(initialItems);
-		result.addAll(collectedItems);
-		result.addAll(receivedItems);
-		return result;
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// COLLECTED ITEMS			/////////////////////////////////////

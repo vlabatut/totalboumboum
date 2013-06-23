@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.path.astar.heuristic;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,14 +29,12 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 /**
  * 
- * implÃ©ment la plus simple d'une heuristique : 
- * on utilise la distance de Manhattan entre la case de dÃ©part et 
- * la plus proche des cases d'arrivÃ©e.
+ * implémentation la plus simple d'une heuristique : 
+ * on utilise la distance de Manhattan entre la case de départ et 
+ * la plus proche des cases d'arrivée.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {
@@ -45,11 +43,11 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * l'heuristique la plus simple consiste Ã  prendre la distance
-	 * de Manhattan entre la case courante tile et la case d'arrivÃ©e endTile.
+	 * l'heuristique la plus simple consiste à prendre la distance
+	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
 	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
 	 * 
-	 * @param tile	la case concernÃ©e 
+	 * @param tile	la case concernée 
 	 * @return	la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */
 	@Override

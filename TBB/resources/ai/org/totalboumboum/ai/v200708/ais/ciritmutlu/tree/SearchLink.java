@@ -10,11 +10,11 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.Action;
  * d'un etat e l'autre.
  */
 public class SearchLink
-{	/** noeud parent */
+{	// noeud parent
 	private SearchNode origin;
-	/** noeud fils */
+	// noeud fils
 	private SearchNode target;
-	/** action de transition */
+	// action de transition
 	private Action action;
 
 	/**
@@ -54,7 +54,6 @@ public class SearchLink
 	{	return action;
 	}
 
-	@Override
 	public boolean equals(Object object)
 	{	boolean result;
 		if(object == null)

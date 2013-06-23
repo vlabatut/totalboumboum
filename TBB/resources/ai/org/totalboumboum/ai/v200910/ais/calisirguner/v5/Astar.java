@@ -12,47 +12,28 @@ import java.util.Queue;
  * 
  * @version 5
  * 
- * @author Emre Çalışır
- * @author Burak Ozgen Güner
+ * @author Emre Calisir
+ * @author Burak Ozgen Guner
  *
  */
 public final class Astar {
-	/**
-	 * 
-	 *
-	 */
 	private static class CostComparator implements Comparator<Node> {
-		@Override
+		//
 		public int compare(Node nodeA, Node nodeB) {
 
 			return (nodeA.gcost + nodeA.hcost) - (nodeB.gcost + nodeB.hcost);
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 */
 	class Node {
-		/** */
 		final int x;
-		/** */
 		final int y;
 
-		/** */
 		Node parent;
-		/** */
 		int gcost;
-		/** */
 		int hcost;
 
-		/**
-		 *  on cree les noeuds
-		 * @param x
-	 * 		Description manquante !
-		 * @param y
-	 * 		Description manquante !
-		 */
+		// on cree les noeuds
 		public Node(int x, int y) {
 			assert x >= 0 && x < map.width : "x = " + x;
 			assert y >= 0 && y < map.height : "y = " + y;
@@ -61,20 +42,12 @@ public final class Astar {
 			this.y = y;
 		}
 
-		/**
-		 * 
-		 */
 		public void calculateHeuristic() {
 
 			hcost = (Math.abs(x - destination.x) + Math.abs(y - destination.y))
 					* (VERTICAL_COST + HORIZONTAL_COST) / 2;
 		}
 
-		/**
-		 * 
-		 * @param parent
-	 * 		Description manquante !
-		 */
 		public void setParent(Node parent) {
 			this.parent = parent;
 			// on se profite de matrice de risque qui envoie le danger des cases
@@ -91,53 +64,30 @@ public final class Astar {
 			}
 		}
 
-		@Override
+		//
 		public String toString() {
 			return "(" + x + ", " + y + " : " + super.toString() + ')';
 		}
 	}
 
-	/** */
 	private static final CostComparator COST_CMP = new CostComparator();
 
-	/** */
 	private final int VERTICAL_COST = 10;
 
-	/** */
 	private final int HORIZONTAL_COST = 10;
 
-	/** */
 	private final int DIAGONAL_COST = (int) Math.rint(Math.sqrt(VERTICAL_COST
 			* VERTICAL_COST + HORIZONTAL_COST * HORIZONTAL_COST));
 
-	/** */
 	private final Map map;
-	/** */
 	private final Node origin;
-	/** */
 	private final Node destination;
 
-	/** */
 	private final Queue<Node> open;
-	/** */
 	private final Queue<Node> openreach;
 
-	/** */
 	private final int[] closed;
 
-	/**
-	 * 
-	 * @param map
-	 * 		Description manquante !
-	 * @param originX
-	 * 		Description manquante !
-	 * @param originY
-	 * 		Description manquante !
-	 * @param destinationX
-	 * 		Description manquante !
-	 * @param destinationY
-	 * 		Description manquante !
-	 */
 	public Astar(Map map, int originX, int originY, int destinationX,
 			int destinationY) {
 		assert map != null : "map = " + map;
@@ -166,11 +116,8 @@ public final class Astar {
 	 * </p>
 	 * 
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 * @param parent
-	 * 		Description manquante !
 	 */
 	private void addToOpen(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
@@ -192,15 +139,6 @@ public final class Astar {
 		open.add(openNode);
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @param parent
-	 * 		Description manquante !
-	 */
 	private void addToOpenreach(int x, int y, Node parent) {
 		Node openNode = new Node(x, y);
 		openNode.setParent(parent);
@@ -225,7 +163,6 @@ public final class Astar {
 	 * Starts the algorithm and returns true if a valid path was found.
 	 * 
 	 * @return
-	 * 		Description manquante !
 	 */
 	public boolean findPath() {
 		Node current = origin;
@@ -243,11 +180,6 @@ public final class Astar {
 		// return true;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public Deque<Integer> getPath() {
 		assert destination.parent != null
 				|| (destination.x == origin.x && destination.y == origin.y);
@@ -264,11 +196,6 @@ public final class Astar {
 		return path;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean findPathreach() {
 		Node current = origin;
 		while (current != null
@@ -289,11 +216,8 @@ public final class Astar {
 	 * Checks whether a node was already processed.
 	 * 
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
+	 * @return
 	 */
 	private boolean isClosed(int x, int y) {
 		int i = map.width * y + x;
@@ -310,7 +234,6 @@ public final class Astar {
 	 * </ul>
 	 * 
 	 * @param node
-	 * 		Description manquante !
 	 */
 	private void process(Node node) {
 		// no need to process it twice
@@ -335,11 +258,6 @@ public final class Astar {
 		}
 	}
 
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 */
 	private void process_reach(Node node) {
 		// no need to process it twice
 		setClosed(node.x, node.y);
@@ -367,9 +285,7 @@ public final class Astar {
 	 * Sets the node at {@code x}, {@code y} to "already been processed".
 	 * 
 	 * @param x
-	 * 		Description manquante !
 	 * @param y
-	 * 		Description manquante !
 	 */
 	private void setClosed(int x, int y) {
 		int i = map.width * y + x;

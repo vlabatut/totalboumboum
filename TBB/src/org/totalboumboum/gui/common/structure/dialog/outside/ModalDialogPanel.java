@@ -3,7 +3,7 @@ package org.totalboumboum.gui.common.structure.dialog.outside;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,8 +37,7 @@ import org.totalboumboum.gui.common.structure.panel.ContentPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.frames.NormalFrame;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -66,7 +65,7 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 		{	BoxLayout layout = new BoxLayout(interPanel,BoxLayout.PAGE_AXIS); 
 			interPanel.setLayout(layout);
 		}
-		interPanel.setBackground(GuiColorTools.COLOR_DIALOG_BACKGROUND);
+		interPanel.setBackground(GuiTools.COLOR_DIALOG_BACKGROUND);
 		interPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 		interPanel.addMouseListener(this);
 		add(interPanel);

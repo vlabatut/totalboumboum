@@ -12,53 +12,26 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
-/**
- * @author Ibrahim Avcı
- * @author Burak Güngör
- */
-@SuppressWarnings("deprecation")
 public class FillingClass {
-	/** */
 	private final double FOSSE = 0;
-	/** */
 	private final double MUR_INDESTRUCTIBLE = 1;
-	/** */
 	private final double MUR_DESTRUCTIBLE = 2;
-	/** */
 	private final double BOMBE = 3;
-	/** */
 	private final double BLAST = 4;
-	/** */
 	private final double BONUS_EXTRA_BOMBE = 5;
-	/** */
 	private final double BONUS_EXTRA_BLAST = 6;
-	/** */
 	private final double CASE_SUR = 7;
-	/** */
 	private final double ADVERSAIRE = 8;
-	/** */
 	private final double NOUS = 9;
-	/** */
 	private final double FLAMME = 10;
 
-	/** */
 	public double matrice[][];
 
-	/** */
 	AvciGungor ai;
 
-	/** */
 	AiZone gameZone;
-	/** */
 	private AiHero ourHero;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public FillingClass(AvciGungor ai) throws StopRequestException {
 		this.ai = ai;
 		gameZone = ai.getPercepts();
@@ -73,15 +46,6 @@ public class FillingClass {
 		this.fillFiresMatrice(matrice, gameZone);
 	}
 
-	/**
-	 * 
-	 * @param matrice
-	 * 		description manquante !
-	 * @param gameZone
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void initialiseMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -98,15 +62,6 @@ public class FillingClass {
 
 	}
 
-	/**
-	 * 
-	 * @param matrice
-	 * 		description manquante !
-	 * @param gameZone
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void emplirBonus(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -127,15 +82,6 @@ public class FillingClass {
 		}
 	}
 
-	/**
-	 * 
-	 * @param matrice
-	 * 		description manquante !
-	 * @param gameZone
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void emplirHero(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -152,15 +98,6 @@ public class FillingClass {
 
 	}
 
-	/**
-	 * 
-	 * @param matrice
-	 * 		description manquante !
-	 * @param gameZone
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void emplirBombe(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -183,15 +120,6 @@ public class FillingClass {
 
 	}
 
-	/**
-	 * 
-	 * @param matrice
-	 * 		description manquante !
-	 * @param gameZone
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void emplirBlock(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -210,15 +138,6 @@ public class FillingClass {
 		}
 	}
 
-	/**
-	 * 
-	 * @param matrice
-	 * 		description manquante !
-	 * @param gameZone
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void emplirSur(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -236,15 +155,6 @@ public class FillingClass {
 
 	}
 
-	/**
-	 * 
-	 * @param matrice
-	 * 		description manquante !
-	 * @param gameZone
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void fillFiresMatrice(double[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		ai.checkInterruption();
@@ -260,29 +170,10 @@ public class FillingClass {
 		}
 	}
 
-	/**
-	 * 
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public double[][] getMatrice() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return matrice;
 	}
-	
-	/**
-	 * 
-	 * @param i
-	 * 		description manquante !
-	 * @param j
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public boolean isBonus(int i, int j) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -292,18 +183,6 @@ public class FillingClass {
 		
 		return resultat;
 	}
-	
-	/**
-	 * 
-	 * @param i
-	 * 		description manquante !
-	 * @param j
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public boolean isSafe(int i, int j) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -312,18 +191,6 @@ public class FillingClass {
 			resultat = true;
 		return resultat;
 	}
-	
-	/**
-	 * 
-	 * @param x1
-	 * 		description manquante !
-	 * @param y1
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public boolean iswall(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -335,5 +202,8 @@ public class FillingClass {
 				resultat = true;
 		}
 		return resultat;
+
 	}
+
+	
 }

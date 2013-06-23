@@ -10,32 +10,15 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings("deprecation")
+
 public class Duvar {
-	/** */
 	private KayaYerinde onder;
-	/** */
 	private Matris matris;
-	/** */
 	private Astar astar;
-	/** */
 	private boolean running;
-	/** */
 	private AiTile incelenecek;
-	/** */
 	private boolean yaz;	
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Duvar(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -45,26 +28,12 @@ public class Duvar {
 		running=false;
 	}
 
-	/**
-	 * 
-	 * @param matris
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void matrisAyarla(Matris matris) throws StopRequestException
 	{
 		onder.checkInterruption();
 		this.matris=matris;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiAction getNextAction() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -122,19 +91,13 @@ public class Duvar {
 	}
 
 	
-	/** bulunduğum yere bomba bıraksam; 
+	//bulunduğum yere bomba bıraksam; 
 	//1)herhangi bir bombanın etkisi altında olmayan bir kırılır duvara etki eder mi?
 	//2)kaçabilir miyim
 	//her ikisini de yapabiliyorsa true, aksi halde false gönderir
 	//işlem yaparken hayali bir bomba bırakıp matrisi değiştirir, etki alanına göre hareket eder
 	//astarda daha önceden bulunmuş olan yol ve tür değerlerini değiştirir.
 	//eğer yol bulamamışsa matrisi ve astarı eski haline getirir.
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private boolean incele() throws StopRequestException
 	{
 		onder.checkInterruption();
@@ -177,37 +140,16 @@ public class Duvar {
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public void run() throws StopRequestException
 	{
 		onder.checkInterruption();
 		running=true;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public boolean isRunning() throws StopRequestException
 	{
 		onder.checkInterruption();
 		return running;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Astar getAstar() throws StopRequestException
 	{
 		onder.checkInterruption();

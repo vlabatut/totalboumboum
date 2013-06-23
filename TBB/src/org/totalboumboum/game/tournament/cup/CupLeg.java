@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.cup;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,27 +30,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.totalboumboum.game.match.Match;
-
 /**
- * Represents the settings of a leg in a 
- * cup tournament. It is formed of several 
- * parts. The tournament itself is made up 
- * of several legs.
  * 
  * @author Vincent Labatut
  *
  */
 public class CupLeg implements Serializable
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard cup leg.
-	 * 
-	 * @param tournament
-	 * 		The tournament containing this leg.
-	 */
 	public CupLeg(CupTournament tournament)
 	{	this.tournament = tournament;	
 	}
@@ -58,60 +45,26 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Initializes this leg before starting it.
-	 * 
-	 * @return
-	 * 		The first match of the leg.
-	 */
-	public Match init()
+	public void init()
 	{	// are parts in random order ?
 		if(randomizeParts)
 			randomizeParts();
 		
 		currentIndex = 0;
 		currentPart = parts.get(currentIndex);
-		Match result = currentPart.init();
-		return result;
+		currentPart.init();
 	}
 	
-	/**
-	 * Returns {@code true} iff
-	 * this leg has begun.
-	 * 
-	 * @return
-	 * 		{@code true} iff the leg has begun.
-	 */
-	public boolean hasBegun()
-	{	CupPart part = parts.get(0);
-		boolean result = part.hasBegun();
-		return result;
-	}
-
-	/**
-	 * Triggers progress in this leg,
-	 * i.e. goes to the next part. 
-	 * 
-	 * @return
-	 * 		The next match of this leg.
-	 */
-	public Match progress()
-	{	Match result;
-		
-		if(currentPart.isOver())
+	public void progress()
+	{	if(currentPart.isOver())
 		{	currentIndex++;
 			currentPart = parts.get(currentIndex);
-			result = currentPart.init();
+			currentPart.init();
 		}
 		else
-			result = currentPart.progress();
-		
-		return result;
+			currentPart.progress();
 	}
 	
-	/**
-	 * Cleanly finishes this object.
-	 */
 	public void finish()
 	{	// misc
 		tournament = null;
@@ -119,11 +72,6 @@ public class CupLeg implements Serializable
 		parts.clear();
 	}
 	
-	/**
-	 * Signals to the current part
-	 * that its match has just finished,
-	 * in order to trigger an update.
-	 */
 	public void matchOver()
 	{	currentPart.matchOver();
 		if(currentPart.isOver() && currentIndex==parts.size()-1)
@@ -133,13 +81,6 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// LEG				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Returns the previous leg in the tournament,
-	 * or {@code null} if this one is the first.
-	 * 
-	 * @return
-	 * 		Previous leg in the tournament.
-	 */
 	public CupLeg getPreviousLeg()
 	{	CupLeg result = null;
 		if(number>0)
@@ -147,13 +88,6 @@ public class CupLeg implements Serializable
 		return result;
 	}
 	
-	/**
-	 * Returns the next leg in the tournament,
-	 * or {@code null} if this is the last one.
-	 * 
-	 * @return
-	 * 		The next leg in the tournament.
-	 */
 	public CupLeg getNextLeg()
 	{	CupLeg result = null;
 		if(number<tournament.getLegs().size()-1)
@@ -165,27 +99,11 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indicates if this leg is finished */
 	private boolean legOver = false;
 
-	/**
-	 * Indices whether this leg is finished
-	 * or not.
-	 * 
-	 * @return
-	 * 		{@code true} iff this leg is finished.
-	 */
 	public boolean isOver()
 	{	return legOver;
 	}
-	
-	/**
-	 * Changes the flag indicating if this
-	 * leg is finished.
-	 * 
-	 * @param legOver
-	 * 		New value for the flag.
-	 */
 	public void setOver(boolean legOver)
 	{	this.legOver = legOver;
 	}
@@ -193,25 +111,12 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Tournament containing this leg */
 	private CupTournament tournament;
 	
-	/**
-	 * Returns the tournament containing this leg.
-	 *  
-	 * @return
-	 * 		The tournament containing this leg.
-	 */
 	public CupTournament getTournament()
 	{	return tournament;
 	}
 	
-	/**
-	 * Changes the tournament containing this leg.
-	 * 
-	 * @param tournament
-	 * 		New tournament containing this leg.
-	 */
 	public void setTournament(CupTournament tournament)
 	{	this.tournament = tournament;
 	}
@@ -219,61 +124,27 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PARTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** List of parts constituting this leg */
 	private final List<CupPart> parts = new ArrayList<CupPart>();
-	/** Number of the current part */
 	private int currentIndex;
-	/** Part currently played */
 	private CupPart currentPart;
-	/**  Indicates if the parts should be played in a random order */
 	private boolean randomizeParts;
 	
-	/**
-	 * Returns the list of parts constituting this leg.
-	 * 
-	 * @return
-	 * 		The list of parts constituting this leg.
-	 */
 	public List<CupPart> getParts()
 	{	return parts;
 	}
 	
-	/**
-	 * Returns the part whose position
-	 * is specified.
-	 * 
-	 * @param index
-	 * 		Position of the part of interest.
-	 * @return
-	 * 		The requested part.
-	 */
 	public CupPart getPart(int index)
 	{	return parts.get(index);
 	}
 	
-	/**
-	 * Adds a new part to this leg.
-	 * 
-	 * @param part
-	 * 		The new part.
-	 */
 	public void addPart(CupPart part)
 	{	parts.add(part);
 	}
 
-	/**
-	 * Returns the part currently played.
-	 * 
-	 * @return
-	 * 		The current part.
-	 */
 	public CupPart getCurrentPart()
 	{	return currentPart;
 	}
 
-	/**
-	 * Shuffles the parts.
-	 */
 	private void randomizeParts()
 	{	Calendar cal = new GregorianCalendar();
 		long seed = cal.getTimeInMillis();
@@ -281,37 +152,13 @@ public class CupLeg implements Serializable
 		Collections.shuffle(parts,random);
 	}
 	
-	/**
-	 * Returns the flag indicating if the
-	 * parts should be played in a random order.
-	 * 
-	 * @return
-	 * 		{@code true} iff the part are randomized.
-	 */
 	public boolean getRandomizeParts()
 	{	return randomizeParts;
 	}
-	
-	/**
-	 * Changes the flag indicating if the
-	 * parts should be played in a random order.
-	 * 
-	 * @param randomizeParts
-	 * 		New value for the flat.
-	 */
 	public void setRandomizeParts(boolean randomizeParts)
 	{	this.randomizeParts = randomizeParts;
 	}
 
-	/**
-	 * Returns the part corresponding to the
-	 * specified final rank.
-	 * 
-	 * @param rank
-	 * 		Final rank of the part of interest.
-	 * @return
-	 * 		The corresponding part.
-	 */
 	public CupPart getPartFromRank(int rank)
 	{	CupPart result = null;
 		Iterator<CupPart> it = parts.iterator();
@@ -326,12 +173,6 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Returns the list of players appearing in this leg.
-	 * 
-	 * @return
-	 * 		A list of cup player involved in this leg.
-	 */
 	public List<CupPlayer> getAllUsedPlayers()
 	{	List<CupPlayer> result = new ArrayList<CupPlayer>();
 		for(CupPart part: parts)
@@ -344,122 +185,70 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NUMBER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Number of this leg in the tournament */
 	private int number;
 
-	/**
-	 * Changes the number of this leg in the tournament.
-	 * 
-	 * @param number
-	 * 		New number for this leg.
-	 */
 	public void setNumber(int number)
 	{	this.number = number;
 	}
 
-	/**
-	 * Returns the number of this leg in the tournament.
-	 * 
-	 * @return
-	 * 		Number of this leg in the tournament.
-	 */
 	public int getNumber()
 	{	return number;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PLAYER DISTRIBUTION	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Counts the number of matches in this leg
-	 * which includes players involved in their very
-	 * first match of the tournament.
-	 * 
-	 * @return
-	 * 		Number of matches in the leg accepting
-	 * 		new players. 
-	 */
-	protected int countEntryMatches()
-	{	int result = 0;
-		
-		for(CupPart part: parts)
-		{	if(part.isEntryMatch())
-				result++;
-		}
-		
-		return result;
-	}
-
-	/**
-	 * Returns the parts in this leg
-	 * which includes players involved in their very
-	 * first match of the tournament.
-	 * 
-	 * @return
-	 * 		List of parts in the leg accepting
-	 * 		new players. 
-	 */
-	protected List<CupPart> getEntryParts()
-	{	List<CupPart> result = new ArrayList<CupPart>();
-		
-		for(CupPart part: parts)
-		{	if(part.isEntryMatch())
-				result.add(part);
-		}
-		
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Simulates how some players would progress through the whole
-	 * tournament. This updates various objects, including cup players.
-	 * The results of this simulation are then used to sort the players
-	 * in order to get seeds.
-	 * 
-	 *  @param distribution
-	 *  	How the players are distributed in this leg.
-	 *  @return
-	 *  	{@code true} iff the distribution is allowed.
-	 */
 	public boolean simulatePlayerProgression(List<Integer> distribution)
 	{	boolean result = true;
 		
 		// this leg parts
-		Iterator<CupPart> it = parts.iterator();
-		while(it.hasNext() && result)
-		{	CupPart part = it.next();
-			result = part.simulatePlayerProgression(distribution);
+		int i = 0;
+		while(i<distribution.size() && result)
+		{	CupPart part = parts.get(i);
+			int nbr = distribution.get(i);
+			result = part.simulatePlayerProgression(nbr);
+			i++;
 		}
 	
 		// next leg
 		if(result)
 		{	CupLeg nextLeg = getNextLeg();
 			if(nextLeg!=null)
-				result = nextLeg.simulatePlayerProgression(distribution);
+				result = nextLeg.simulatePlayerProgression();
 		}
 		
 		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// FINAL RANKS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Resets the actual final ranks of the players,
-	 * in each part of this leg.
-	 */
-	public void resetPlayersActualFinalRanks()
+	public boolean simulatePlayerProgression()
+	{	boolean result = true;
+		
+		// this leg parts
+		int i = 0;
+		while(i<parts.size() && result)
+		{	CupPart part = parts.get(i);
+			result = part.simulatePlayerProgression();
+			i++;
+		}
+	
+		// next leg
+		if(result)
+		{	CupLeg nextLeg = getNextLeg();
+			if(nextLeg!=null)
+				result = nextLeg.simulatePlayerProgression();
+		}
+		
+		return result;
+	}
+
+	public void reinitPlayersActualFinalRanks()
 	{	for(CupPart part: parts)
-			part.resetPlayersActualFinalRanks();
+			part.reinitPlayersActualFinalRanks();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public String toString()
 	{	String result = "";
 		result = result + ">> leg " + number + "\n";

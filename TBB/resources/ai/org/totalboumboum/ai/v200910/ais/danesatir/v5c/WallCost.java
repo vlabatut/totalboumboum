@@ -13,21 +13,13 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class WallCost extends CostCalculator {
-	/** */
+
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public WallCost(ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
 		this.ai = ai;

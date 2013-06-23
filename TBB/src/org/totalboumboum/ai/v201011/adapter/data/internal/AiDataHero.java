@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,24 +35,22 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * reprÃ©sente un personnage du jeu, ie un sprite contrÃ´lÃ© par un joueur
+ * représente un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 {
 	/**
-	 * crÃ©e une reprÃ©sentation du joueur passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une représentation du joueur passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite Ã  reprÃ©senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataHero(AiDataTile tile, Hero sprite)
 	{	super(tile,sprite);
@@ -78,9 +76,9 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	/** exemple de bombe que le personnage peut poser */
 	private AiDataBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultanÃ©ment (en gÃ©nÃ©ral) */
+	/** nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumberMax;
-	/** nombre de bombes que le personnage a actuellement posÃ©es */
+	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
 	
 	@Override
@@ -114,7 +112,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	}
 	
 	/**
-	 * met Ã  jour les paramÃ¨tres dÃ©crivant les bombes que ce personnage peut poser
+	 * met à jour les paramètres décrivant les bombes que ce personnage peut poser
 	 */
 	private void updateBombParam()
 	{	Hero sprite = getSprite();
@@ -165,7 +163,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de dÃ©placement au sol du personnage, exprimÃ©e en pixel/seconde */
+	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
 	private double walkingSpeed;
 	
 	@Override
@@ -196,7 +194,7 @@ if(walkingSpeed==0)
 	private boolean throughBlocks;
 	/** indique si le personnage peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le personnage peut traverser le feu (sans brÃ»ler) */
+	/** indique si le personnage peut traverser le feu (sans brûler) */
 	private boolean throughFires;
 	
 	@Override
@@ -215,7 +213,7 @@ if(walkingSpeed==0)
 	}
 
 	/**
-	 * met Ã  jour les divers pouvoirs du personnage
+	 * met à jour les divers pouvoirs du personnage
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();

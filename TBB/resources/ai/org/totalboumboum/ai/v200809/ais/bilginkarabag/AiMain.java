@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.ais.bilginkarabag;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v200809.ais.bilginkarabag;
  */
 
 import org.totalboumboum.ai.v200809.adapter.AiManager;
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.ais.bilginkarabag.v2.BilginKarabag;
 
 /**
@@ -30,14 +29,11 @@ import org.totalboumboum.ai.v200809.ais.bilginkarabag.v2.BilginKarabag;
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/////////////////////////////////////////////////////////////////
-	// AGENT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public ArtificialIntelligence instantiateAgent()
-	{	return new BilginKarabag();
+
+	public AiMain()
+	{	super(new BilginKarabag());
 	}
+
 }

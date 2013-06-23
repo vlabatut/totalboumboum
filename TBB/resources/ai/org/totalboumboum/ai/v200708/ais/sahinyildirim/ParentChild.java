@@ -9,22 +9,22 @@ import java.util.Vector;
  * cette classe prendre un pointFind dans le constructor qui nous sert a trouver
  * les fils d'un point 
  * 
- * @author Serkan Şahin
- * @author Mehmet Yıldırım
+ * @author Serkan Sahin
+ * @author Mehmet Yildirim
  *
  */
 public class ParentChild {
 	
-	/** */
+	
 	private PointFind parent;
 	
 
-	/** vector pour deposer les fils de ce point */
+	//vector pour deposer les fils de ce point
 	private Vector<PointFind> child;
 	
 	
 	/**Constructor
-	 * @param parent le point pere
+	 * @param PointFind parent le point pere
 	 */
 	public ParentChild(PointFind parent)
 	{
@@ -36,8 +36,7 @@ public class ParentChild {
 	
 	/**
 	 * Methode  pour  ajouter les fils dans un vector d'un point pere
-	 * @param point
-	 * 		Description manquante !
+	 * @param PointFind point
 	 */
 	public void addChild(PointFind point)
 	{

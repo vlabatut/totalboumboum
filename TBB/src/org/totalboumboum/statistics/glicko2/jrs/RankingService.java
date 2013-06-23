@@ -302,7 +302,7 @@ public class RankingService implements Serializable {
                 while (teamMemberIds.hasNext()) {
                 	String teamMemberId = teamMemberIds.next();
 
-                    // TODO added by Vincent to keep track of the rounds played since last update
+                    // NOTE added by Vincent to keep track of the rounds played since last update
                 	{	PlayerRating playerRating = getPlayerRating(teamMemberId);
                 		playerRating.incrementRoundcount();
                 	}
@@ -337,7 +337,7 @@ public class RankingService implements Serializable {
             while (playerIds.hasNext()) {
             	String playerId = playerIds.next();
             	
-            	// TODO added by Vincent to keep track of the rounds played since last update
+            	// NOTE added by Vincent to keep track of the rounds played since last update
             	{	PlayerRating playerRating = getPlayerRating(playerId);
             		playerRating.incrementRoundcount();
             	}
@@ -411,13 +411,11 @@ public class RankingService implements Serializable {
         while (playerIds.hasNext()) {
             
         	String playerId = playerIds.next();
-//if(playerId.equals("227b2e4d-bd7b-4153-962b-699bc909e5e1"))
-//if(playerId.equals("0f7cb6bb-5a8e-479c-acf9-7a3e2da3e919"))
-//	System.out.print("");
             PlayerRating prePeriodPlayerRating = (PlayerRating)prePeriodRatings.get(playerId);
             
-        	// TODO added by Vincent to keep track of the rounds played since last update
+        	// NOTE added by Vincent to keep track of the rounds played since last update
             prePeriodPlayerRating.reinitRoundcount();
+            
             
             // Convert the ratings and RDs onto the Glicko-2 scale.
             double rating = prePeriodPlayerRating.getGlicko2Rating();
@@ -474,7 +472,6 @@ public class RankingService implements Serializable {
                 // Determine the new value of the volatility using iteration.
                 double t = ratingDeviation;
                 double s = ratingVolatility;
-//System.out.println(playerId+": "+s);                
                 double v = variance;
                 double D = improvement;
                 double a = Math.log(s*s);
@@ -546,21 +543,16 @@ public class RankingService implements Serializable {
         return postPeriodPlayerRatings;
     }
     
-    /** 
-     * Function used internally by the Glicko-2 algorithm.
-     * Corresponds to function <i>g</i> in M. Glickman's
-     * <a href="http://www.glicko.net/glicko/glicko2.pdf">descripton</a>.
-     * 
-     * @param ratingDeviation
-     * @return 
-     */
+    /** Function used internally by the Glicko-2 algorithm.
+      * 
+      * @param ratingDeviation 
+      * @return 
+      */
     private double g(double ratingDeviation) {
         return 1 / Math.sqrt(1 + ((3 * ratingDeviation * ratingDeviation) / (Math.PI * Math.PI)));
     }
     
     /** Function used internally by the Glicko-2 algorithm.
-     * Corresponds to function <i>E</i> in M. Glickman's
-     * <a href="http://www.glicko.net/glicko/glicko2.pdf">descripton</a>.
       * 
       * @param playerRating 
       * @param opponentRating 

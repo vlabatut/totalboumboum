@@ -7,15 +7,12 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 
 /**
  * A cost calculator used to find a path passing through the least obstacles.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class DestructibleCostCalculator extends CostCalculator
 {
 
-	/** */
 	AkbulutKupelioglu monIa;
 	//calculate that
 	/**
@@ -27,7 +24,6 @@ public class DestructibleCostCalculator extends CostCalculator
 	 * Creates a new instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public DestructibleCostCalculator(AkbulutKupelioglu ia) throws StopRequestException
 	{

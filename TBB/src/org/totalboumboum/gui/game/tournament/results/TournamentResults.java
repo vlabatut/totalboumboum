@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.tournament.results;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,27 +24,21 @@ package org.totalboumboum.gui.game.tournament.results;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
 /**
- * This class handles the display of the
- * result of a match, during a game.
  * 
- * @param <T>
- * 		Type or tournament displayed by this class.
- *  
  * @author Vincent Labatut
+ *
  */
 public abstract class TournamentResults<T extends AbstractTournament> extends EntitledDataPanel
-{	/** Class id */
+{	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Builds a standard panel.
-	 * 
-	 * @param container
-	 * 		Container of the panel.
-	 */
+	@SuppressWarnings("unused")
+	private BasicPanel resultsPanel;
+	
 	public TournamentResults(SplitMenuPanel container)
 	{	super(container);
 		
@@ -56,25 +50,10 @@ public abstract class TournamentResults<T extends AbstractTournament> extends En
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Tournament displayed by this panel */
 	protected T tournament;
 
-	/**
-	 * Changes the tournament displayed
-	 * in this panel.
-	 * 
-	 * @param tournament
-	 * 		New tournament.
-	 */
 	public abstract void setTournament(T tournament);
 	
-	/**
-	 * Returns the tournament currently
-	 * displayed in this panel.
-	 * 
-	 * @return
-	 * 		Current tournament.
-	 */
 	public AbstractTournament getTournament()
 	{	return tournament;	
 	}

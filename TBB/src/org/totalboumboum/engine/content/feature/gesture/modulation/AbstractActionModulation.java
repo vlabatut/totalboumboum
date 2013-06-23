@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -52,7 +52,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// ACTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** action concernÃ©e par cette permission */
+	/** action concernée par cette permission */
 	protected GeneralAction action;
 	
 	public GeneralAction getAction()
@@ -62,7 +62,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// ACTOR RESTRICTIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abilitÃ©s necessaires Ã  l'acteur pour que la modulation soit appliquÃ©e */
+	/** abilités necessaires à l'acteur pour que la modulation soit appliquée */
 	protected final List<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addActorRestriction(AbstractAbility ability)
@@ -72,7 +72,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// TARGET RESTRICTIONS		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abilitÃ©s necessaires Ã  la cible pour que la modulation soit appliquÃ©e */
+	/** abilités necessaires à la cible pour que la modulation soit appliquée */
 	protected final List<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addTargetRestriction(AbstractAbility ability)
@@ -122,15 +122,12 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		{	Sprite actor = specificAction.getActor();
 			Iterator<AbstractAbility> i = actorRestrictions.iterator();
 			while(i.hasNext() && result)
-			{	AbstractAbility ab1 = i.next();
-				AbstractAbility ab2 = null;
-				if(ab1 instanceof ActionAbility)
-					ab2 = actor.getAbility(((ActionAbility)ab1).getAction());
+			{	AbstractAbility ab = i.next();
+				if(ab instanceof ActionAbility)
+					ab = actor.getAbility(((ActionAbility)ab).getAction());
 				else
-					ab2 = actor.modulateStateAbility(((StateAbility)ab1).getName());
-				
-				//result = ab2.isActive();
-				result = ab2.isAsStrong(ab1);
+					ab = actor.modulateStateAbility(((StateAbility)ab).getName());
+				result = ab.isActive();
 			}
 		}
 		
@@ -139,14 +136,12 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		{	Sprite target = specificAction.getTarget();
 			Iterator<AbstractAbility> i = targetRestrictions.iterator();
 			while(i.hasNext() && result)
-			{	AbstractAbility ab1 = i.next();
-				AbstractAbility ab2 = null;
-				if(ab1 instanceof ActionAbility)
-					ab2 = target.getAbility(((ActionAbility)ab1).getAction());
+			{	AbstractAbility ab = i.next();
+				if(ab instanceof ActionAbility)
+					ab = target.getAbility(((ActionAbility)ab).getAction());
 				else
-					ab2 = target.modulateStateAbility(((StateAbility)ab1).getName());
-				//result = ab.isActive();
-				result = ab2.isAsStrong(ab1);
+					ab = target.modulateStateAbility(((StateAbility)ab).getName());
+				result = ab.isActive();
 			}
 		}
 
@@ -154,77 +149,16 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	}
 	public boolean isConcerningAction(GeneralAction generalAction, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties)
 	{	boolean result;
-	
 		// action
 		result = action.subsume(generalAction);
-		
 		// actor restrictions
 		if(result)
-		{	Iterator<AbstractAbility> i = actorRestrictions.iterator();
-			while(i.hasNext() && result)
-			{	AbstractAbility ab1 = i.next();
-				AbstractAbility ab2 = null;
-				if(ab1 instanceof ActionAbility)
-					ab2 = getAbility(actorProperties, ((ActionAbility)ab1).getAction());
-				else
-					ab2 = getAbility(actorProperties, ((StateAbility)ab1).getName());
-				
-				//result = ab2.isActive();
-				result = ab2.isAsStrong(ab1);
-			}
-			//result = actorProperties.containsAll(actorRestrictions);
-		}
-		
+			result = actorProperties.containsAll(actorRestrictions);
 		// target restrictions
 		if(result)
-		{	Iterator<AbstractAbility> i = targetRestrictions.iterator();
-			while(i.hasNext() && result)
-			{	AbstractAbility ab1 = i.next();
-				AbstractAbility ab2 = null;
-				if(ab1 instanceof ActionAbility)
-					ab2 = getAbility(targetProperties, ((ActionAbility)ab1).getAction());
-				else
-					ab2 = getAbility(targetProperties, ((StateAbility)ab1).getName());
-				
-				//result = ab2.isActive();
-				result = ab2.isAsStrong(ab1);
-			}
-			//result = targetProperties.containsAll(targetRestrictions);
-		}
-			
+			result = actorProperties.containsAll(targetRestrictions);
+		//	
 		return result;		
-	}
-	
-	public StateAbility getAbility(List<AbstractAbility> abilities, String name)
-	{	StateAbility result = null;
-		Iterator<AbstractAbility> i = abilities.iterator();
-		while(i.hasNext() && result==null)
-		{	AbstractAbility ab = i.next();
-			if(ab instanceof StateAbility)
-			{	StateAbility ablt = (StateAbility)ab;
-				if(ablt.getName().equals(name))
-					result = ablt;
-			}
-		}
-		if(result==null)
-			result = new StateAbility(name);
-		return result;
-	}
-
-	public ActionAbility getAbility(List<AbstractAbility> abilities, GeneralAction action)
-	{	ActionAbility result = null;
-		Iterator<AbstractAbility> i = abilities.iterator();
-		while(i.hasNext() && result==null)
-		{	AbstractAbility ab = i.next();
-			if(ab instanceof ActionAbility)
-			{	ActionAbility ablt = (ActionAbility)ab;
-				if(ablt.getAction().subsume(action))
-					result = ablt;
-			}
-		}
-		if(result==null)
-			result = new ActionAbility(action);
-		return result;
 	}
 	
 	/**

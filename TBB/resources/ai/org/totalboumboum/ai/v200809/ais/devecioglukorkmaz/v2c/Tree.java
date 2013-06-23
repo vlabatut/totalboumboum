@@ -8,48 +8,28 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
- * ReprÃ©sente un arbre de recherche. Les noeuds sont liÃ©s avec des SearchLink
+ * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  * 
- * @author Eser DevecioÄŸlu
- * @author lev Korkmaz
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
  *
  */
-@SuppressWarnings("deprecation")
 public class Tree {
 
-	/** */
 	private Vector<Noeud> nodes;
-	/** */
 	private Vector<SearchLink> links;
-	/** */
 	@SuppressWarnings("unused")
 	private Noeud lastNode;
-	/** */
 	private Noeud firstNode;
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param courant
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Tree(Noeud courant, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.firstNode = courant;
 		init();
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void init() throws StopRequestException {
 		ai.checkInterruption();
 		nodes = new Vector<Noeud>();
@@ -59,42 +39,17 @@ public class Tree {
 		links = new Vector<SearchLink>();
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Noeud getRoot() throws StopRequestException {
 		ai.checkInterruption();
 		return nodes.get(0);
 	}
 
-	/**
-	 * 
-	 * @param pere
-	 * 		Description manquante !
-	 * @param fils
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void addNoeud(Noeud pere, Noeud fils) throws StopRequestException {
 		ai.checkInterruption();
 		SearchLink link = new SearchLink(pere, fils,ai);
 		addLink(link);
 	}
 
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public synchronized boolean containsNode(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		boolean result = false;
@@ -106,15 +61,6 @@ public class Tree {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public SearchLink getParentLink(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		SearchLink result = null;
@@ -131,15 +77,6 @@ public class Tree {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		
@@ -155,15 +92,6 @@ public class Tree {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param node
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public LinkedList<Noeud> getPath(Noeud node) throws StopRequestException {
 		ai.checkInterruption();
 		LinkedList<Noeud> result = new LinkedList<Noeud>();
@@ -190,26 +118,12 @@ public class Tree {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param link
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void addLink(SearchLink link) throws StopRequestException {
 		ai.checkInterruption();
 		addLinkSynch(link);
 
 	}
 
-	/**
-	 * 
-	 * @param link
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private synchronized void addLinkSynch(SearchLink link) throws StopRequestException {
 		ai.checkInterruption();
 		Noeud target = link.getTarget();

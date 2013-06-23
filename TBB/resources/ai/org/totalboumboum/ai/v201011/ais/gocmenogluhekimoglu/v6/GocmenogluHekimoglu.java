@@ -12,21 +12,14 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
 /**
  * 
- * @author Can GÃ¶Ã§menoÄŸlu
- * @author Irfan HekimoÄŸlu
+ * @author Can Göçmenoðlu & Irfan Hekimoðlu
  *
  */
-@SuppressWarnings("deprecation")
 public class GocmenogluHekimoglu extends ArtificialIntelligence {
-	/** */
 	boolean force_collect;
-	/** */
 	boolean debug;
-	/** */
 	MatrixCalc matrixCalc;
-	/** */
 	Paths paths;
-	/** */
 	ActionManager actionMan;
 
 	@Override

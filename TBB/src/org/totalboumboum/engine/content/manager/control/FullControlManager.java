@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.control;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -202,7 +202,7 @@ public class FullControlManager extends ControlManager
 		{	ControlEvent temp = i.next();
 			i.remove();
 			sprite.processEvent(temp);
-//System.out.println("reÃ§u:"+temp.getName()+","+temp.getMode());			
+//System.out.println("reçu:"+temp.getName()+","+temp.getMode());			
 		}
 	}
 

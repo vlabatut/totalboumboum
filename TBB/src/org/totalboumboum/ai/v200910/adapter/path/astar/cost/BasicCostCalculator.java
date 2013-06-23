@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.path.astar.cost;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,23 +26,21 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
  * 
- * Classe Ã©tendant la classe abstraite CostCalculator de la maniÃ¨re la plus simple possible.
- * Ici, le cout pour passer d'une case Ã  l'autre est simplement 1, quelles que soient
- * les cases considÃ©rÃ©es.
+ * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
+ * Ici, le cout pour passer d'une case à l'autre est simplement 1, quelles que soient
+ * les cases considérées.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class BasicCostCalculator extends CostCalculator
 {
 	/** 
-	 * Les deux cases sont supposÃ©es Ãªtre voisines, 
+	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer leur distance.
 	 * 
-	 * @param start	la case de dÃ©part
-	 * @param end	la case d'arrivÃ©e
+	 * @param start	la case de départ
+	 * @param end	la case d'arrivée
 	 * @return la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
 	 */ 
 	@Override

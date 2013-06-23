@@ -4,33 +4,25 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Ozan Günalp
- * @author Sinan Yürtsever
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
  *
  */
-@SuppressWarnings("deprecation")
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {
 
-	/** */
 	private int col;
-	/** */
 	private int line;
 	
 	
-	/**
-	 * 
-	 * @param col
-	 * 		Description manquante !
-	 * @param line
-	 * 		Description manquante !
-	 */
+
 	public DangerPriorityCostTileComparator(int col, int line) {
 		super();
 		this.col = col;
 		this.line = line;
 	}
 
-	@Override
+
+
 	public int compare(DangerPriorityCostTile tile1, DangerPriorityCostTile tile2){
 		
 		

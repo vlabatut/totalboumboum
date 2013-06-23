@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -39,18 +39,17 @@ import org.totalboumboum.game.round.RoundVariables;
 
 
 /**
- * reprÃ©sente une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
+
 public class AiTile
 {	/**
-	 * construit une reprÃ©sentation de la case passÃ©e en paramÃ¨tre
-	 * @param tile	case reprÃ©sentÃ©e
-	 * @param zone	zone contenant la reprÃ©sentation
+	 * construit une représentation de la case passée en paramètre
+	 * @param tile	case représentée
+	 * @param zone	zone contenant la représentation
 	 */
 	AiTile(Tile tile, AiZone zone)
 	{	this.zone = zone;
@@ -65,7 +64,7 @@ public class AiTile
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met Ã  jour cette case et son contenu
+	 * met à jour cette case et son contenu
 	 */
 	void update()
 	{	updateSprites();		
@@ -74,14 +73,9 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** reprÃ©sentation de la zone Ã  laquelle cette case appartient */
+	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;
 	
-	/**
-	 * 
-	 * @return
-	 * 		La zone.
-	 */
 	public AiZone getZone()
 	{	return zone;	
 	}
@@ -89,14 +83,9 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case du jeu que cette classe reprÃ©sente */
+	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
-	/**
-	 * 
-	 * @return
-	 * 		La case.
-	 */
 	Tile getTile()
 	{	return tile;
 	}
@@ -110,7 +99,7 @@ public class AiTile
 	private int col;
 		
 	/** 
-	 * renvoie le numÃ©ro de la ligne contenant cette case
+	 * renvoie le numéro de la ligne contenant cette case
 	 * 
 	 * @return	la ligne de cette case
 	 */
@@ -118,7 +107,7 @@ public class AiTile
 	{	return line;	
 	}
 	/** 
-	 * renvoie le numÃ©ro de la colonne contenant cette case
+	 * renvoie le numéro de la colonne contenant cette case
 	 *  
 	 * @return	la colonne de cette case
 	 */
@@ -127,10 +116,10 @@ public class AiTile
 	}
 	
 	/** 
-	 * initialise les numÃ©ros de ligne et colonne de cette case 
+	 * initialise les numéros de ligne et colonne de cette case 
 	 */
 	private void initTileLocation()
-	{	line = tile.getRow();
+	{	line = tile.getLine();
 		col = tile.getCol();
 	}
 
@@ -152,9 +141,9 @@ public class AiTile
 	}
 	
 	/** 
-	 * renvoie l'ordonnÃ©e de la case en pixels
+	 * renvoie l'ordonnée de la case en pixels
 	 * 
-	 * @return	l'ordonnÃ©e de cette case
+	 * @return	l'ordonnée de cette case
 	 */
 	public double getPosY()
 	{	return posY;	
@@ -171,13 +160,13 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** longueur d'un cÃ´tÃ© de la case en pixels */
+	/** longueur d'un côté de la case en pixels */
 	private double size;
 		
 	/** 
 	 * renvoie la taille de la case en pixels
 	 * 
-	 * @return	longueur d'un cÃ´tÃ© de la case en pixels
+	 * @return	longueur d'un côté de la case en pixels
 	 */
 	public double getSize()
 	{	return size;	
@@ -186,49 +175,49 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des blocks Ã©ventuellement contenus dans cette case */
+	/** liste des blocks éventuellement contenus dans cette case */
 	private final List<AiBlock> blocks = new ArrayList<AiBlock>();
-	/** liste des bombes Ã©ventuellement contenues dans cette case */
+	/** liste des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> bombs = new ArrayList<AiBomb>();
-	/** liste des feux Ã©ventuellement contenus dans cette case */
+	/** liste des feux éventuellement contenus dans cette case */
 	private final List<AiFire> fires = new ArrayList<AiFire>();
-	/** liste des sols Ã©ventuellement contenus dans cette case */
+	/** liste des sols éventuellement contenus dans cette case */
 	private final List<AiFloor> floors = new ArrayList<AiFloor>();
-	/** liste des personnages Ã©ventuellement contenus dans cette case */
+	/** liste des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> heroes = new ArrayList<AiHero>();
-	/** liste des items Ã©ventuellement contenus dans cette case */
+	/** liste des items éventuellement contenus dans cette case */
 	private final List<AiItem> items = new ArrayList<AiItem>();
 
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les blocks Ã©ventuellement contenus dans cette case
+	 * @return	les blocks éventuellement contenus dans cette case
 	 */
 	public List<AiBlock> getBlocks()
 	{	return blocks;	
 	}
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les bombes Ã©ventuellement contenues dans cette case
+	 * @return	les bombes éventuellement contenues dans cette case
 	 */
 	public List<AiBomb> getBombs()
 	{	return bombs;	
 	}
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les feux Ã©ventuellement contenus dans cette case
+	 * @return	les feux éventuellement contenus dans cette case
 	 */
 	public List<AiFire> getFires()
 	{	return fires;	
 	}
 	/** 
 	 * renvoie les sols de cette case 
-	 * (il y a forcÃ©ment au moins un sol)
+	 * (il y a forcément au moins un sol)
 	 * 
 	 * @return	les sols contenus dans cette case
 	 */
@@ -237,25 +226,25 @@ public class AiTile
 	}
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les personnages Ã©ventuellement contenus dans cette case
+	 * @return	les personnages éventuellement contenus dans cette case
 	 */
 	public List<AiHero> getHeroes()
 	{	return heroes;	
 	}
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les items Ã©ventuellement contenus dans cette case
+	 * @return	les items éventuellement contenus dans cette case
 	 */
 	public List<AiItem> getItems()
 	{	return items;	
 	}
 	
 	/** 
-	 * met Ã  jour les reprÃ©sentations des sprites contenus dans cette case
+	 * met à jour les représentations des sprites contenus dans cette case
 	 */
 	private void updateSprites()
 	{	// block
@@ -380,19 +369,18 @@ public class AiTile
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le sprite passÃ© en paramÃ¨tre est capable de traverser
+	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
 	 * obstacle que le personnage ne peut pas traverser. 
-	 * Tous les sprites ne sont pas sensibles aux mÃªmes obstacles,
-	 * cela dÃ©pend Ã  la fois du type des sprites considÃ©rÃ©s (Hero,
-	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer Ã  travers
-	 * les murs, passer Ã  travers les bombes, etc). Le feu peut constituer
-	 * un obstacle, notamment pour les sprite de tyep Hero.
-	 * <br/>
-	 * cf. les mÃ©thodes de mÃªme nom dans les classes filles de AiSprite
+	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
+	 * cela dépend à la fois du type des sprites considérés (Hero,
+	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
+	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
+	 * un obstacle, notamment pour les sprite de tyep Hero.</br>
+	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
 	 *  @param sprite	le sprite qui veut traverser cette case
-	 *  @return	vrai ssi ce sprite , Ã  cet instant, peut traverser cette case
+	 *  @return	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	boolean result = true;
@@ -416,19 +404,14 @@ public class AiTile
 	}
 	
 	/**
-	 * fonction auxiliaire utilisÃ©e pour dÃ©terminer si cette
-	 * case est traversable par le sprite passÃ© en paramÃ¨tre.
-	 * (cette fonction rÃ©alise le traitement relativement Ã  
-	 * la liste de sprite passÃ©e en paramÃ¨tre)
+	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * case est traversable par le sprite passé en paramètre.
+	 * (cette fonction réalise le traitement relativement à 
+	 * la liste de sprite passée en paramètre)
 	 * 
-	 * @param <T> 
-	 * 		?	
-	 * @param sprite	
-	 * 		le sprite qui veut traverser cette case
-	 * @param list	
-	 * 		les sprites de cette case Ã  tester
-	 * @return	vrai 
-	 * 		si le sprite peut traverser tous les sprites de la liste
+	 * @param sprite	le sprite qui veut traverser cette case
+	 * @param list	les sprites de cette case à tester
+	 * @return	vrai si le sprite peut traverser tous les sprites de la liste
 	 */
 	private <T extends AiSprite<?>> boolean isCrossableBy(AiSprite<?> sprite, List<T> list)
 	{	boolean result = true;
@@ -450,14 +433,14 @@ public class AiTile
 	
 	/**
 	 * initialise une fois pour toutes les voisins de la case,
-	 * pour ne pas avoir Ã  les recalculer Ã  chaque appel de la mÃ©thode
+	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
 	 * getNeighbors.
 	 */
 	void initNeighbors()
 	{	List<Direction> directions = Direction.getPrimaryValues();
 		for(Direction direction: directions)
 		{	Tile neighbor = tile.getNeighbor(direction);
-			int line = neighbor.getRow();
+			int line = neighbor.getLine();
 			int col = neighbor.getCol();
 			AiTile aiNeighbor = getZone().getTile(line,col);
 			neighbors.put(direction,aiNeighbor);
@@ -465,19 +448,18 @@ public class AiTile
 	}
 	
 	/**
-	 * renvoie le voisin de cette case passÃ©e en paramÃ¨tre, situÃ© dans la direction
-	 * passÃ©e en paramÃ¨tre. Attention, seulement les directions primaires sont
-	 * utilisÃ©es (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
-	 * Dans le cas contraire, la fonction renvoie null.
-	 * <br/>
+	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
+	 * passée en paramètre. Attention, seulement les directions primaires sont
+	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
+	 * Dans le cas contraire, la fonction renvoie null.</br>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situÃ©e au bord du niveau est une case situÃ©e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situÃ©e
-	 * Ã  la position (ligne,0), le voisin de gauche est la case situÃ©e Ã  la position
-	 * (ligne,width-1). mÃªme chose pour les bordures haut et bas.
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de cette case, situÃ© dans la direction indiquÃ©e (ou null si la direction n'est pas primaire)
+	 * @return	le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
 	public AiTile getNeighbor(Direction direction)
 	{	return neighbors.get(direction);		
@@ -485,15 +467,15 @@ public class AiTile
 	
 	/**
 	 * renvoie la liste des voisins de cette case.
-	 * Il s'agit des voisins directs situÃ©s en haut, Ã  gauche, en bas et Ã  droite.
-	 * <br/>
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situÃ©e au bord du niveau est une case situÃ©e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situÃ©e
-	 * Ã  la position (ligne,0), le voisin de gauche est la case situÃ©e Ã  la position
-	 * (ligne,width-1). mÃªme chose pour les bordures haut et bas.
+	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
 	 * 
-	 * @return	la liste des voisins situÃ©s en haut, Ã  gauche, en bas et Ã  droite de la case passÃ©e en paramÃ¨tre
+	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
+	 * 
+	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public List<AiTile> getNeighbors()
 	{	List<AiTile> result = new ArrayList<AiTile>();
@@ -546,10 +528,10 @@ public class AiTile
 	}
 
 	/**
-	 * termine les reprÃ©sentations de sprites passÃ©es en paramÃ¨tres
+	 * termine les représentations de sprites passées en paramètres
 	 * 
-	 * @param <T>	type de reprÃ©sentation
-	 * @param list	liste de reprÃ©sentations
+	 * @param <T>	type de représentation
+	 * @param list	liste de représentations
 	 */
 	private <T extends AiSprite<?>> void finishSprites(List<T> list)
 	{	Iterator<T> it = list.iterator();

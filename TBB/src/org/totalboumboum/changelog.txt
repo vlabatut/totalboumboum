@@ -1,557 +1,465 @@
 + alpha.37
-- mise en place d'icones √† la place des menus horizontaux
-- am√©lioration de l'affichage des r√©sultats
+- mise en place d'icones ‡ la place des menus horizontaux
+- amÈlioration de l'affichage des rÈsultats
 - icones + plus grandes + play en rouge
-- revoir le titre des r√©sultats : plus gros, et carr√© blanc transparent (comme tableau)
-- compl√©ter le layout des r√©sultats
+- revoir le titre des rÈsultats : plus gros, et carrÈ blanc transparent (comme tableau)
+- complÈter le layout des rÈsultats
 
 + alpha.38
-- mettre une barre d'√©volution pdt le chargement du niveau
-- optimisation du chargement : ne charger qu'une seule fois les caract√©ristiques des joueurs !
-- correction de quelques bugs graphiques dans les th√©mes de SBM1
-- am√©lioration graphique des icones/boutons du menu horizontal
-- optimisation du chargement : 1 thread au lieu d'une s√©quence de 2 !
+- mettre une barre d'Èvolution pdt le chargement du niveau
+- optimisation du chargement : ne charger qu'une seule fois les caractÈristiques des joueurs !
+- correction de quelques bugs graphiques dans les thËmes de SBM1
+- amÈlioration graphique des icones/boutons du menu horizontal
+- optimisation du chargement : 1 thread au lieu d'une sÈquence de 2 !
 - correction d'un bug sur le control manuel d'un perso
 
 + alpha.39
-- modification de la fen√™tre de r√©sultats du round, de mani√®re √† afficher les scores (deaths, etc)
-- modication de la fen√™tre de r√©sultats, pour gagner de la place : icones dans les en-t√™tes (√† la place du texte) 
-- correction d'un bug de synchronisation du gestionnaire de d√©lais
-- il FAUT un pointProcessor pour le tournament, pour g√©rer les √©galit√©s
-- modification du syst√®me de points de mani√®re √† pouvoir effectuer un classement en consid√©rant plusieurs param√®tres compl√®tement ordonn√©s
-- g√©rer le partage des points en cas d'√©galit√©
-- pb lors de l'affichage du r√©sultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
-- quand un h√©ro re√ßoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
-- correction d'un bug quand l'animation de victoire/d√©faite ne peut pas √™tre activ√©e : il ne faut pas base la fin de la boucle sur la fin de l'animation, mais sur la fin d'un d√©lai ind√©pendant et √©quivalent
+- modification de la fenÍtre de rÈsultats du round, de maniËre ‡ afficher les scores (deaths, etc)
+- modication de la fenÍtre de rÈsultats, pour gagner de la place : icones dans les en-tÍtes (‡ la place du texte) 
+- correction d'un bug de synchronisation du gestionnaire de dÈlais
+- il FAUT un pointProcessor pour le tournament, pour gÈrer les ÈgalitÈs
+- modification du systËme de points de maniËre ‡ pouvoir effectuer un classement en considÈrant plusieurs paramËtres complËtement ordonnÈs
+- gÈrer le partage des points en cas d'ÈgalitÈ
+- pb lors de l'affichage du rÈsultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
+- quand un hÈro reÁoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
+- correction d'un bug quand l'animation de victoire/dÈfaite ne peut pas Ítre activÈe : il ne faut pas base la fin de la boucle sur la fin de l'animation, mais sur la fin d'un dÈlai indÈpendant et Èquivalent
 
   + alpha.40
 - image de fond du menu principal
 - blocage des boutons quit et match pendant le chargement du round
-- bug corrig√© : collision bizarre, les flammes ne peuvent pas se croiser...
-- changement du syst√®me de touches de controle du jeu (debug) : inversion de F3 et F4 et ESC pour arr√™ter pr√©matur√©ment une partie
-- pb de temps NEGATIF quand j'arr√™te la partie avec esc, plus bouton encore actif
-- pb d'affichage des r√©sultats quand trop de rounds : taille minimale du nom fix√©e √† la taille de l'icone, et tooltip avec le nom complet
+- bug corrigÈ : collision bizarre, les flammes ne peuvent pas se croiser...
+- changement du systËme de touches de controle du jeu (debug) : inversion de F3 et F4 et ESC pour arrÍter prÈmaturÈment une partie
+- pb de temps NEGATIF quand j'arrÍte la partie avec esc, plus bouton encore actif
+- pb d'affichage des rÈsultats quand trop de rounds : taille minimale du nom fixÈe ‡ la taille de l'icone, et tooltip avec le nom complet
 - tout petit pb de synchronisation de l'animation de fin de partie avec la fin effective du panel d'animation
-- correction du bug qui faisait activer le GC et ramer le jeu au cours du deuxi√®me match.
-- la taille minimale du nom dans les r√©sultats est la largeur de l'icone
-- mutualisation des √©l√©ments de la GUI : tableaux, etc
-- r√©organisation de la partie language
+- correction du bug qui faisait activer le GC et ramer le jeu au cours du deuxiËme match.
+- la taille minimale du nom dans les rÈsultats est la largeur de l'icone
+- mutualisation des ÈlÈments de la GUI : tableaux, etc
+- rÈorganisation de la partie language
 - correction d'un bug d'affichage dans le raffraichissement des boutons
 - assombrir l'image de fond quand y a des tables par dessus
 
   + alpha.41
-- correction de quelques bugs d'affichage concernant les th√®mes et apparaissant √† haute r√©solution
-- gestion des limites plus d√©taill√©e, que ce soit pour le tournoi, le match ou le round
-- d√©finition des rounds dans des fichiers s√©par√©s
-- lors du match : clonage de round pour pouvoir les r√©utiliser (si la limite de confrontation est sup√©rieure au nombre de rounds pr√©vus)
-- diff√©renciation des limites de tournoi/match/round : interfaces diff√©rentes, types xsd diff√©rents
+- correction de quelques bugs d'affichage concernant les thËmes et apparaissant ‡ haute rÈsolution
+- gestion des limites plus dÈtaillÈe, que ce soit pour le tournoi, le match ou le round
+- dÈfinition des rounds dans des fichiers sÈparÈs
+- lors du match : clonage de round pour pouvoir les rÈutiliser (si la limite de confrontation est supÈrieure au nombre de rounds prÈvus)
+- diffÈrenciation des limites de tournoi/match/round : interfaces diffÈrentes, types xsd diffÈrents
 - dans le round, la limite de temps devient une limite normale
-- dans le tournoi s√©quence, on g√©re l'ordre al√©atoire de matches
-- dans le match, il faut g√©rer diff√©remment la limite : 
-- les capacit√©s initiales ont √©t√© transform√©es en items initiaux
-- les levels contiennent maintenant un certain nombre d'items initiaux, donn√©s √† chaque joueur au d√©but du round
-- modification du syst√®me de points, de mani√®re √† consid√©rer √† part un classement auquel on associe les points finaux
-- syst√®me permettant d'afficher le calcul des points sous forme textuelle (sera notamment utilis√© par la GUI)
+- dans le tournoi sÈquence, on gËre l'ordre alÈatoire de matches
+- dans le match, il faut gÈrer diffÈremment la limite : 
+- les capacitÈs initiales ont ÈtÈ transformÈes en items initiaux
+- les levels contiennent maintenant un certain nombre d'items initiaux, donnÈs ‡ chaque joueur au dÈbut du round
+- modification du systËme de points, de maniËre ‡ considÈrer ‡ part un classement auquel on associe les points finaux
+- systËme permettant d'afficher le calcul des points sous forme textuelle (sera notamment utilisÈ par la GUI)
 
 + alpha.42
-- mise en place d'un syst√®me de previews pour les Levels et Sprites
-- refonte du chargement de niveau pour l'adapter au syst√®me de preview
-- correction d'un bug qui affectait le d√©compte de kills et de deaths au cours d'un round
-- correction d'un probl√®me d'affichage (je sais pas trop comment, d'ailleurs...) : le niveau est coup√© en fonction du mode d'affichage, mais pas de fa√ßon sym√©trique (le haut n'est pas coup√©, seulement le bas)
-- mise en place du fond d'√©cran du jeu √† la place des bordures unies lors des parties
-- correction d'un bug d'optimisation : le format des images n'√©tait pas compatible avec l'environnement graphique, ce qui ralentissait le raffraichissement
-- correction d'un bug : nanoTime est bugg√© quand on utilise des syst√®mes multicoeurs : j'ai utilis√© currentTimeMillis √† la place
-- mise en place de l'acc√©l√©ration graphique avec l'utilisation d'une VolatileImage pour le panel
+- mise en place d'un systËme de previews pour les Levels et Sprites
+- refonte du chargement de niveau pour l'adapter au systËme de preview
+- correction d'un bug qui affectait le dÈcompte de kills et de deaths au cours d'un round
+- correction d'un problËme d'affichage (je sais pas trop comment, d'ailleurs...) : le niveau est coupÈ en fonction du mode d'affichage, mais pas de faÁon symÈtrique (le haut n'est pas coupÈ, seulement le bas)
+- mise en place du fond d'Ècran du jeu ‡ la place des bordures unies lors des parties
+- correction d'un bug d'optimisation : le format des images n'Ètait pas compatible avec l'environnement graphique, ce qui ralentissait le raffraichissement
+- correction d'un bug : nanoTime est buggÈ quand on utilise des systËmes multicoeurs : j'ai utilisÈ currentTimeMillis ‡ la place
+- mise en place de l'accÈlÈration graphique avec l'utilisation d'une VolatileImage pour le panel
 - mise en place d'un compteur FPS/UPS
-- correction d'un bug dans le d√©compte du temps effectu√© dans la boucle principale
-- correction d'un bug : les items distribu√©s au d√©but du match √©taient compt√©s dans les stats
-- d√©finition du paneau de pr√©sentation pour les rounds
-- modification de la police pour y faire appara√™tre les caract√®res manquants (essentiellement des op√©rateurs math√®matiques)
-- correction d'un bug graphique qui faisait appara√™tre l'ombre de la derni√®re ligne de blocs par dessus la premi√®re
-- correction d'un bug XML dans le th√®me superbomberman1.duel
+- correction d'un bug dans le dÈcompte du temps effectuÈ dans la boucle principale
+- correction d'un bug : les items distribuÈs au dÈbut du match Ètaient comptÈs dans les stats
+- dÈfinition du paneau de prÈsentation pour les rounds
+- modification de la police pour y faire apparaÓtre les caractËres manquants (essentiellement des opÈrateurs mathÈmatiques)
+- correction d'un bug graphique qui faisait apparaÓtre l'ombre de la derniËre ligne de blocs par dessus la premiËre
+- correction d'un bug XML dans le thËme superbomberman1.duel
 
 + alpha.43
-- Modification	: am√©lioration du syst√®me al√©atoire de g√©n√©ration des niveaux (les distributions doivent √™tre contr√¥l√©es car les s√©ries g√©n√©r√©es sont trop courtes pour que les distributions soient respect√©es)
-- Modification	: r√©organisation du projet Eclipse de mani√®re √† placer les classes d'ia dans le dossier resources
-- Modification	: r√©vision du syst√®me d'adaptateur pour les IA de 2007-08
-- Modification	: FPS baiss√© de 100 √† 50, afin d'√©conomiser les ressources et d'√©viter que √ßa rame trop sur des petites machines (ou pas acc√©l√©r√©es)
-- nouveaut√©		: adaptateur sp√©cial pour les IA 2008-09
-- Correction 	: petit bug dans la GUI, les dimensions des niveaux √©taient fausses
+- Modification	: amÈlioration du systËme alÈatoire de gÈnÈration des niveaux (les distributions doivent Ítre contrÙlÈes car les sÈries gÈnÈrÈes sont trop courtes pour que les distributions soient respectÈes)
+- Modification	: rÈorganisation du projet Eclipse de maniËre ‡ placer les classes d'ia dans le dossier resources
+- Modification	: rÈvision du systËme d'adaptateur pour les IA de 2007-08
+- Modification	: FPS baissÈ de 100 ‡ 50, afin d'Èconomiser les ressources et d'Èviter que Áa rame trop sur des petites machines (ou pas accÈlÈrÈes)
+- NouveautÈ		: adaptateur spÈcial pour les IA 2008-09
+- Correction 	: petit bug dans la GUI, les dimensions des niveaux Ètaient fausses
 
 + alpha.44
-- Modification	: am√©lioration de la structure de donn√©es destin√©es aux IA 2008-09 et repr√©sentant la zone et son contenu
-- nouveaut√© 	: IA d'exemple pour le package 2008-09
-- Correction	: bug qui emp√™chait un bon d√©compte des kills/deaths (diff√©rent du premier!)
-- nouveaut√©		: niveau plus petit pour tester la nouvelle IA
-- nouveaut√©		: syst√®me pour controler que le thread d'une IA ne reste pas bloqu√© dans une bloucle infinite (ou autre)
+- Modification	: amÈlioration de la structure de donnÈes destinÈes aux IA 2008-09 et reprÈsentant la zone et son contenu
+- NouveautÈ 	: IA d'exemple pour le package 2008-09
+- Correction	: bug qui empÍchait un bon dÈcompte des kills/deaths (diffÈrent du premier!)
+- NouveautÈ		: niveau plus petit pour tester la nouvelle IA
+- NouveautÈ		: systËme pour controler que le thread d'une IA ne reste pas bloquÈ dans une bloucle infinite (ou autre)
 - Modification	: plus d'icones dans la GUI notamment pour les points processors
-- nouveaut√©		: cr√©ation d'un splash screen, qui √©num√®re les √©tapes d'initialisation et permet d'avoir un Graphics pour l'init de la GUI avant de faire appara√™tre le frame
-- Modification	: meilleure d√©composition du fichier de langue, en plusieurs sections plus lisibles
-- Modification	: changement d'ic√¥ne pour les points, les stats et les points custom
-- Modification	: centrage de la fen√™tre principale √† la cr√©ation
+- NouveautÈ		: crÈation d'un splash screen, qui ÈnumÈre les Ètapes d'initialisation et permet d'avoir un Graphics pour l'init de la GUI avant de faire apparaÓtre le frame
+- Modification	: meilleure dÈcomposition du fichier de langue, en plusieurs sections plus lisibles
+- Modification	: changement d'icÙne pour les points, les stats et les points custom
+- Modification	: centrage de la fenÍtre principale ‡ la crÈation
 
 + alpha.45
-- nouveaut√©		: scripts de lancement/compilation pour Windows et BASH
-- Correction	: utilisation dans la GUI d'une m√©thode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. m√©thode alternative employ√©e √† la place.
-- nouveaut√©		: documents relatifs √† la licence GPL
-- nouveaut√©		: fichiers d'information dans la racine du projet
-- nouveaut√©		: modification de l'API d'IA demani√®re √† refl√©ter les diff√©rents types de bombes, items et flammes  
-- nouveaut√©		: commentaires complets des classes d'IA
-- nouveaut√©		: tournoi simple (ne contenant qu'un seul match)
+- NouveautÈ		: scripts de lancement/compilation pour Windows et BASH
+- Correction	: utilisation dans la GUI d'une mÈthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. MÈthode alternative employÈe ‡ la place.
+- NouveautÈ		: documents relatifs ‡ la licence GPL
+- NouveautÈ		: fichiers d'information dans la racine du projet
+- NouveautÈ		: modification de l'API d'IA demaniËre ‡ reflÈter les diffÈrents types de bombes, items et flammes  
+- NouveautÈ		: commentaires complets des classes d'IA
+- NouveautÈ		: tournoi simple (ne contenant qu'un seul match)
 - Correction	: bug dans la barre de progression lors du chargement du round
-- nouveaut√©		: mode quicklaunch pour jouer un round tr√®s rapidement (pas de GUI)
-- nouveaut√©		: affichage du score dans le QuickLaunch
-- nouveaut√©		: ajustement automatique du FPS en fonction de la machine
-- Correction	: probl√®me de collision quand on change de vitesse ou quand on baisse trop l'UPS : partiellement r√©solu (direction simple), partiellement contourn√© (direction compos√©e)
-- Correction	: bug graphique : une bombe en panne ne doit plus √™tre anim√©e dans l'instance SBM1
-- Correction	: bug de GUI : dans le mode quicklaunch, le niveau √©tait coup√© verticalement car affich√© derri√®re la barre de titre de la fen√™tre
-- nouveaut√©		: traduction du fichier de langue en fran√ßais
-- Modification	: ajout dans la police de caract√®res des voyelles accentu√©es, c√©dille et autres
-- Correction	: bug lors du d√©compte des items au d√©but du round
-- Correction	: bug dans le TrajectoryMgr qui emp√™chait une bombe atterrissant dans des flammes d'exploser normalement  
+- NouveautÈ		: mode quicklaunch pour jouer un round trËs rapidement (pas de GUI)
+- NouveautÈ		: affichage du score dans le QuickLaunch
+- NouveautÈ		: ajustement automatique du FPS en fonction de la machine
+- Correction	: problËme de collision quand on change de vitesse ou quand on baisse trop l'UPS : partiellement rÈsolu (direction simple), partiellement contournÈ (direction composÈe)
+- Correction	: bug graphique : une bombe en panne ne doit plus Ítre animÈe dans l'instance SBM1
+- Correction	: bug de GUI : dans le mode quicklaunch, le niveau Ètait coupÈ verticalement car affichÈ derriËre la barre de titre de la fenÍtre
+- NouveautÈ		: traduction du fichier de langue en franÁais
+- Modification	: ajout dans la police de caractËres des voyelles accentuÈes, cÈdille et autres
+- Correction	: bug lors du dÈcompte des items au dÈbut du round
+- Correction	: bug dans le TrajectoryMgr qui empÍchait une bombe atterrissant dans des flammes d'exploser normalement  
 
 + beta.001
-- modification	: jeu nettoy√© de toutes les ressources qui ne sont pas encore utilis√©es
-- correction	: bug dans la GUI lorsqu'on utilise une r√©solution carr√©e : les itemset et initialitem dans la pr√©sentation des rounds sont coup√©s (certains items sont hors-√©cran)
-- correction	: bug graphique >> les textes des boutons sont coup√©s
-- correction	: bug de gameplay dans SBM1 : le temps de latence des bombes √©tait deux fois trop court
-- modification 	: dans la GUI, les boutons pas encore impl√©ment√©s sont d√©sactiv√©s
-- nouveaut√© 	: activation et impl√©mentation de l'option quickmatch dans le menu principal, gestion de la coh√©rence avec l'option tournament
-- correction 	: quelques bugs concernant la taille des diff√©rents √©l√©ments graphiques dans la GUI
-- nouveaut√© 	: les tooltips apparaissent plus rapidement (200 ms)
+- modification	: jeu nettoyÈ de toutes les ressources qui ne sont pas encore utilisÈes
+- correction	: bug dans la GUI lorsqu'on utilise une rÈsolution carrÈe : les itemset et initialitem dans la prÈsentation des rounds sont coupÈs (certains items sont hors-Ècran)
+- correction	: bug graphique >> les textes des boutons sont coupÈs
+- correction	: bug de gameplay dans SBM1 : le temps de latence des bombes Ètait deux fois trop court
+- modification 	: dans la GUI, les boutons pas encore implÈmentÈs sont dÈsactivÈs
+- nouveautÈ 	: activation et implÈmentation de l'option quickmatch dans le menu principal, gestion de la cohÈrence avec l'option tournament
+- correction 	: quelques bugs concernant la taille des diffÈrents ÈlÈments graphiques dans la GUI
+- nouveautÈ 	: les tooltips apparaissent plus rapidement (200 ms)
 
 + beta.002
 - modification : noms des joueurs
-- nouveaut√© : IA vierge √† compl√®ter par les √©tudiants
+- nouveautÈ : IA vierge ‡ complÈter par les Ètudiants
 
 + beta.003
-- modification : repr√©sentation de la zone de jeu par une matrice dans l'API d'IA (au lieu d'une liste de listes).
+- modification : reprÈsentation de la zone de jeu par une matrice dans l'API d'IA (au lieu d'une liste de listes).
 
 + beta.004
-- correction : bug du au Locale par d√©faut lors de la transformation d'une chaine de caract√®res en majuscules, quand la chaine contient des I ou des i et que la langue est le turc.
+- correction : bug du au Locale par dÈfaut lors de la transformation d'une chaine de caractËres en majuscules, quand la chaine contient des I ou des i et que la langue est le turc.
 
 + beta.005
-- modification : round d√©di√© √† l'√©valuation de la partie 1
-- modification : sch√©ma de zone permettant de ne pas forc√©ment d√©finir de variables de cases, et adaptation en cons√©quence de la classe chargeant ces variables
+- modification : round dÈdiÈ ‡ l'Èvaluation de la partie 1
+- modification : schÈma de zone permettant de ne pas forcÈment dÈfinir de variables de cases, et adaptation en consÈquence de la classe chargeant ces variables
 
 + beta.006
-- modification : m√©thode permettant d'avoir le temps √©coul√© entre deux mises √† jour de l'IA dans AiZone
+- modification : mÈthode permettant d'avoir le temps ÈcoulÈ entre deux mises ‡ jour de l'IA dans AiZone
 
 + beta.007
-- modification : acc√®s √† la dur√©e normale d'une bombe (avant explosion) depuis la classe AiBomb
-- correction : bug dans l'API d'IA qui faisait un punch juste apr√®s chaque drop.
-- modification : l'IA peut demander √† se d√©placer dans des directions composites et non plus seulement des directions simples
+- modification : accËs ‡ la durÈe normale d'une bombe (avant explosion) depuis la classe AiBomb
+- correction : bug dans l'API d'IA qui faisait un punch juste aprËs chaque drop.
+- modification : l'IA peut demander ‡ se dÈplacer dans des directions composites et non plus seulement des directions simples
 
 + beta.008
-- modification : utilisation d'une image plus fonc√©e pour les fonds de tous les menus sauf le principal
+- modification : utilisation d'une image plus foncÈe pour les fonds de tous les menus sauf le principal
 - modification : correction de quelques bugs dans l'API des IA
-- modification : r√©organisation de la gestion des controles
-- nouveaut√© : √©cran de configuration des controles
-- nouveaut√© : enregistrement de la modification des controles
-- modification : mise √† jour de la police de caract√®res du jeu
-- nouveaut√© : affichage du type de joueur dans la pr√©sentation des tournois et matches
-- nouveaut√© : possibilit√© de choisir les commandes des joueurs dans la pr√©sentation des matches
-- modification : d√©coupage modulaire de la configuration
-- nouveaut√© : possibilit√© de configurer les options graphiques depuis la GUI
-- nouveaut√© : red√©marrage de l'application quand on modifie la r√©solution
-- nouveaut√© : configuration des param√®tres avanc√©s
-- nouveaut√© : visualisation et √©dition des profils
-- modification : informations l√©gales dans le splashscreen
-- nouveaut√© : personnage : shirobon de SBM5
-- nouveaut√© : personnage : assistant pirate de SBM5
-- nouveaut√© : traduction des couleurs dans l'interface
-- nouveaut√© : visualisation des IA
-- nouveaut√© : possibilit√© de ranger les 16 couleurs par ordre de pr√©f√©rence (au lieu de d√©finir une seule couleur dans son profil)
-- nouveaut√© : visualisation des personnages
-- nouveaut√© : visualisation des niveaux
-- nouveaut√© : s√©lection des joueurs avant une partie rapide
-- modification : dans la police de caract√®res : i minuscule et barre du sept
-- nouveaut√© : visualisation des matches
-- modification : calcul du nombre de joueurs n√©cessaires pour un match et pour un round
+- modification : rÈorganisation de la gestion des controles
+- nouveautÈ : Ècran de configuration des controles
+- nouveautÈ : enregistrement de la modification des controles
+- modification : mise ‡ jour de la police de caractËres du jeu
+- nouveautÈ : affichage du type de joueur dans la prÈsentation des tournois et matches
+- nouveautÈ : possibilitÈ de choisir les commandes des joueurs dans la prÈsentation des matches
+- modification : dÈcoupage modulaire de la configuration
+- nouveautÈ : possibilitÈ de configurer les options graphiques depuis la GUI
+- nouveautÈ : redÈmarrage de l'application quand on modifie la rÈsolution
+- nouveautÈ : configuration des paramËtres avancÈs
+- nouveautÈ : visualisation et Èdition des profils
+- modification : informations lÈgales dans le splashscreen
+- nouveautÈ : personnage : shirobon de SBM5
+- nouveautÈ : personnage : assistant pirate de SBM5
+- nouveautÈ : traduction des couleurs dans l'interface
+- nouveautÈ : visualisation des IA
+- nouveautÈ : possibilitÈ de ranger les 16 couleurs par ordre de prÈfÈrence (au lieu de dÈfinir une seule couleur dans son profil)
+- nouveautÈ : visualisation des personnages
+- nouveautÈ : visualisation des niveaux
+- nouveautÈ : sÈlection des joueurs avant une partie rapide
+- modification : dans la police de caractËres : i minuscule et barre du sept
+- nouveautÈ : visualisation des matches
+- modification : calcul du nombre de joueurs nÈcessaires pour un match et pour un round
 - modification : un pointprocesssor par limite
 - modification : fonctions toString pour visualiser les sprites dans l'API pour l'IA
 - correction : bug graphique sur la progress bar lors du chargement d'un round
-- nouveaut√© : configuration du round rapide
-- modification : simplification du profil, impossible de d√©finir plus couleurs dor√©navant
+- nouveautÈ : configuration du round rapide
+- modification : simplification du profil, impossible de dÈfinir plus couleurs dorÈnavant
 
 + beta.009
-- modification : mutualisation des classes codant les √©l√©ments de la GUI
+- modification : mutualisation des classes codant les ÈlÈments de la GUI
 - modification : fusion des launchers
-- nouveaut√© : d√©finition d'un ensemble de param√®tres en ligne de commande pour le launcher
-- nouveaut√© : mode plein √©cran
-- nouveaut√© : √©cran de s√©lection des niveaux pour le quick match
-- nouveaut√© : √©cran des options pour le quick match
-- nouveaut√© : gestion compl√®te d'un quick match
-- nouveaut√© : placement al√©atoire des joueurs en d√©but de round
-- modification : chargement adapt√© des preview de levels (temps de chargement plus court, ce qui n'est pas n√©cessaire n'est plus charg√©)
-- modification : menu de configuration du tournoi enti√®rement refait
+- nouveautÈ : dÈfinition d'un ensemble de paramËtres en ligne de commande pour le launcher
+- nouveautÈ : mode plein Ècran
+- nouveautÈ : Ècran de sÈlection des niveaux pour le quick match
+- nouveautÈ : Ècran des options pour le quick match
+- nouveautÈ : gestion complËte d'un quick match
+- nouveautÈ : placement alÈatoire des joueurs en dÈbut de round
+- modification : chargement adaptÈ des preview de levels (temps de chargement plus court, ce qui n'est pas nÈcessaire n'est plus chargÈ)
+- modification : menu de configuration du tournoi entiËrement refait
 - correction : bug graphique dans la liste des joueurs en cours de jeu
-- correction : bug de raffraichissement des √©crans tournoi/rencontre/manche en cours de partie
+- correction : bug de raffraichissement des Ècrans tournoi/rencontre/manche en cours de partie
 - modification : unification des classes d'affichage des parties (package game)
-- correction : bug emp√™chant de sortir d√©finitivement d'un tournoi
+- correction : bug empÍchant de sortir dÈfinitivement d'un tournoi
 - correction : bug de placement des joueurs de gauche dans le niveau testAI
-- nouveaut√© : bouton d'enregistrement en cours de partie
-- nouveaut√© : enregistrement √† la demande
+- nouveautÈ : bouton d'enregistrement en cours de partie
+- nouveautÈ : enregistrement ‡ la demande
 - modification : test sur le nombre de joueurs dans les options quickstart
-- correction : activation/d√©sactivation des boutons dans les menus quand c'est n√©cessaire
-- nouveaut√© : possibilit√© de supprimer un slot d'enregistrement existant
+- correction : activation/dÈsactivation des boutons dans les menus quand c'est nÈcessaire
+- nouveautÈ : possibilitÈ de supprimer un slot d'enregistrement existant
 - modification : check sur le nombre de joueurs dans tournament settings + quickmatch
-- correction : probl√®me avec les boutons dans les settings du match rapide
+- correction : problËme avec les boutons dans les settings du match rapide
 - modification : bloquer le match rapide si aucune limite de match
-- nouveaut√© : chargement d'une partie pr√©alablement enregistr√©e
-- nouveaut√© : autosave & autoload dans les options
-- nouveaut√© : enregistrement automatique
-- nouveaut√© : chargement automatique
-- nouveaut√© : choix effectif du fond d'√©cran au cours du jeu
-- nouveaut√© : possibilit√© de cr√©er un nouveau slot d'enregistrement
-- nouveaut√© : th√®me sp√©cial pour le tournoi, avec logo GS√ú au sol
-- nouveaut√© : niveaux sp√©ciaux pour le tournoi
-- correction : bug dans l'API d'IA dans la m√©thode renvoyant la direction entre deux cases : le cas du niveau circulaire n'√©tait pas pris en compte
+- nouveautÈ : chargement d'une partie prÈalablement enregistrÈe
+- nouveautÈ : autosave & autoload dans les options
+- nouveautÈ : enregistrement automatique
+- nouveautÈ : chargement automatique
+- nouveautÈ : choix effectif du fond d'Ècran au cours du jeu
+- nouveautÈ : possibilitÈ de crÈer un nouveau slot d'enregistrement
+- nouveautÈ : thËme spÈcial pour le tournoi, avec logo GS‹ au sol
+- nouveautÈ : niveaux spÈciaux pour le tournoi
+- correction : bug dans l'API d'IA dans la mÈthode renvoyant la direction entre deux cases : le cas du niveau circulaire n'Ètait pas pris en compte
 - correction : bug dans la GUI lors de l'initialisation d'un match rapide (limite de confrontations)
-- modification : optimisation de l'API IA : les ArrayLists de sprites ont √©t√© remplac√©es par des HashMaps
-- modification : l'enregistrement automatique r√©alise aussi une copie de sauvegarde
+- modification : optimisation de l'API IA : les ArrayLists de sprites ont ÈtÈ remplacÈes par des HashMaps
+- modification : l'enregistrement automatique rÈalise aussi une copie de sauvegarde
 
 + beta.010
-- nouveaut√© : tournoi de type coupe 
-- nouveaut√© : GUI du tournoi-coupe
-- correction : possibilit√© de conflit dans les controles quand les joueurs d'un match sont diff√©rents de ceux d'un tournoi (ex: coupe) >> test et reinit en d√©but de match
-- modification : d√©finition d'une classe sp√©ciale pour repr√©senter le classement √† l'issue d'une confrontation
-- nouveaut√© : bad bomber (nouveau personnage)
-- correction : bug dans l'ordonnancement des joueurs √† la fin d'un round
+- nouveautÈ : tournoi de type coupe 
+- nouveautÈ : GUI du tournoi-coupe
+- correction : possibilitÈ de conflit dans les controles quand les joueurs d'un match sont diffÈrents de ceux d'un tournoi (ex: coupe) >> test et reinit en dÈbut de match
+- modification : dÈfinition d'une classe spÈciale pour reprÈsenter le classement ‡ l'issue d'une confrontation
+- nouveautÈ : bad bomber (nouveau personnage)
+- correction : bug dans l'ordonnancement des joueurs ‡ la fin d'un round
 - correction : bug d'affichage dans la dimension maximale de la liste des browsers (common contents)
-- correction : bug emp√™chant de jouer √† moins de 16 √† un tournoi-coupe
+- correction : bug empÍchant de jouer ‡ moins de 16 ‡ un tournoi-coupe
 - modification : quand des joueurs manquent en coupe, on essaie de s'organiser pour que les joueurs manquants finissent en bas de tableau
-- modification : quand plusieurs distributions de joueurs sont possibles et de qualit√© √©quivalente (cf ci-dessus) on en prend une au hasard (au lieu de prendre syst. la 1√®re)
-- modification : les threads des IA ont maintenant une priorit√© inf√©rieure √† celle du moteur
+- modification : quand plusieurs distributions de joueurs sont possibles et de qualitÈ Èquivalente (cf ci-dessus) on en prend une au hasard (au lieu de prendre syst. la 1Ëre)
+- modification : les threads des IA ont maintenant une prioritÈ infÈrieure ‡ celle du moteur
 
 + beta.011
-- nouveaut√© : sauvegarde automatique modifi√©e pour √©viter les conflits de version avec SVN
+- nouveautÈ : sauvegarde automatique modifiÈe pour Èviter les conflits de version avec SVN
 - correction : un bug lors de la sauvegarde automatique d'un tournoi simple (pas de panel de match => pas de sauvegarde)
-- nouveaut√© : personnage Shirobon de Nes Bomberman 2
-- nouveaut√© : instance de NES Bomberman 2
-- nouveaut√© : niveaux de NBM2
-- nouveaut√© : niveaux custom pour NBM2
+- nouveautÈ : personnage Shirobon de Nes Bomberman 2
+- nouveautÈ : instance de NES Bomberman 2
+- nouveautÈ : niveaux de NBM2
+- nouveautÈ : niveaux custom pour NBM2
 - modification : organisation des subpanels
 - correction : bugs dans l'affichage des tables : lignes/colonnes de taille non-maximale 
-- modification : calculer en dur les largeurs limites de toutes les colonnes utilis√©es dans toutes les tables
+- modification : calculer en dur les largeurs limites de toutes les colonnes utilisÈes dans toutes les tables
 
 + beta.012
-- nouveau syst√®me de gestion des collisions dans le trajectory manager
-- correction du bug d'animation/collision : push ne se d√©clenche pas
-- correction du bug d'animation : quand le bonhomme va √† droite et qu'on appuie sur gauche, y a une esp√®ce de passage droite-gauche tr√®s rapide au niveau de l'animation, insuportable
-- mise √† niveau du gestionnaire de trajectoires
-- simplification de la structure du moteur du jeu (Loop et Level accessibles de fa√ßon statique)
-- optimisation de l'organisation des sprites dans les ressources : gain de place sur disque, gain de m√©moire en cours de jeu et gain de temps lors du chargement
+- nouveau systËme de gestion des collisions dans le trajectory manager
+- correction du bug d'animation/collision : push ne se dÈclenche pas
+- correction du bug d'animation : quand le bonhomme va ‡ droite et qu'on appuie sur gauche, y a une espËce de passage droite-gauche trËs rapide au niveau de l'animation, insuportable
+- mise ‡ niveau du gestionnaire de trajectoires
+- simplification de la structure du moteur du jeu (Loop et Level accessibles de faÁon statique)
+- optimisation de l'organisation des sprites dans les ressources : gain de place sur disque, gain de mÈmoire en cours de jeu et gain de temps lors du chargement
 - les permissions des sprites sont devenues des modulations
 - simplification et externalisation partielle (XML) de la gestion des collisions 
 
 + beta.013
 - correction d'un bug lors du chargement des animations des bombes
-- correction d'un bug lors du chargement des animations mutualis√©es
-- modification d'un th√®me de NES-BM2 (th√®me battle, nouveau sol plus lisible, animations d'apparition)
+- correction d'un bug lors du chargement des animations mutualisÈes
+- modification d'un thËme de NES-BM2 (thËme battle, nouveau sol plus lisible, animations d'apparition)
 - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
-- le gesture ENDED n'est plus d√©fini en XML, mais en dur car il est constant : pas d'animation, pas de trajectoire, modulations acteur/target toutes n√©gatives, aucune autre modulation
-- pareil pour NONE, sauf que l'action APPEAR est autoris√©e (en tant qu'acteur)
-- introduction des gestures ENTERING et PREPARED, correspondant √† APPEARING et STANDING, mais seulement utilis√©s pour le d√©but du round
-- g√©n√©ralisation (aux autres sprites) de l'Ability permettant de contraindre le temps mis par les heros pour apparaitre au d√©but de la partie.
-- modification dans le moteur : un sprite dans l'√©tat NONE est quand m√™me associ√© √† une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
+- le gesture ENDED n'est plus dÈfini en XML, mais en dur car il est constant : pas d'animation, pas de trajectoire, modulations acteur/target toutes nÈgatives, aucune autre modulation
+- pareil pour NONE, sauf que l'action APPEAR est autorisÈe (en tant qu'acteur)
+- introduction des gestures ENTERING et PREPARED, correspondant ‡ APPEARING et STANDING, mais seulement utilisÈs pour le dÈbut du round
+- gÈnÈralisation (aux autres sprites) de l'Ability permettant de contraindre le temps mis par les heros pour apparaitre au dÈbut de la partie.
+- modification dans le moteur : un sprite dans l'Ètat NONE est quand mÍme associÈ ‡ une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
 - correction d'un bug dans la gestion des animations et trajectoires proportionnelles
-- correction d'un bug dans la g√©n√©ration des explosions en croix (flamme trop longue)
-- d√©finition d'un syst√®me permettant au niveau d'appara√™tre graduellement au d√©but du round
-- simplification de l'initialisation des actions afin de ne plus avoir √† sp√©cifier une tile (le cas o√π la tile manquait a √©t√© supprim√©)
-- apparition de messages au d√©but du round (ready-set-go), avec graphismes basiques puis am√©lior√©s
-- mise en place d'un fond noir dans le loop panel avant que le niveau ne commence √† apparaitre (juste avant le chargement)
-- possibilit√© de d√©finir des niveaux contenant des bombes, soit directement sur le sol, soit dans des blocks
-- d√©finition des animations d'apparition pour tous les th√®mes de SBM1 et NBM2
-- d√©finition d'un syst√®me de clignotement pour les sprites
-- d√©finition d'un syst√®me al√©atoire de d√©finition des abilit√©s associ√©es √† un item (pour les malus et les surprise)
-- impl√©mentation de l'inversion des commandes
-- impl√©mentation de la gestion des vies, g√©n√©ralisation du moteur pour permettre au joueur de revenir en jeu
-- impl√©mentation des modificateurs de vitesse de d√©placement au sol pour les h√©ros
-- impl√©mentation de la r√©sistance au feu
-- nouveau syst√®me de maximum pour les StateAbilities (avec une ability supp contenant le suffixe _MAX)
-- correction d'un bug concernant la pr√©c√©dence temporelle de certains √©v√®nements, en particulier quand deux joueurs br√ªlent au cours de la m√™me explosion
-- impl√©mentation de la constipation bombique
-- correction d'un gros bug dans le calcul de distances entre sprites situ√©s dans la classe Level
-- possibilit√© d'avoir plusieurs blocs, floors et items dans une m√™me case (par souci de g√©n√©ralisation)
-- syst√®me permettant de relacher les items √† la mort du joueur
-- correction dans le calcul de la direction entre deux sprites (le c√¥t√© circulaire des niveaux n'√©tait pas pris en compte)
-- syst√®me de contagion des malus
-- syst√®me de gu√©rison des malus
-- possibilit√© de faire exploser les bombes pos√©es par un joueur quand celui-ci br√ªle
+- correction d'un bug dans la gÈnÈration des explosions en croix (flamme trop longue)
+- dÈfinition d'un systËme permettant au niveau d'apparaÓtre graduellement au dÈbut du round
+- simplification de l'initialisation des actions afin de ne plus avoir ‡ spÈcifier une tile (le cas o˘ la tile manquait a ÈtÈ supprimÈ)
+- apparition de messages au dÈbut du round (ready-set-go), avec graphismes basiques puis amÈliorÈs
+- mise en place d'un fond noir dans le loop panel avant que le niveau ne commence ‡ apparaitre (juste avant le chargement)
+- possibilitÈ de dÈfinir des niveaux contenant des bombes, soit directement sur le sol, soit dans des blocks
+- dÈfinition des animations d'apparition pour tous les thËmes de SBM1 et NBM2
+- dÈfinition d'un systËme de clignotement pour les sprites
+- dÈfinition d'un systËme alÈatoire de dÈfinition des abilitÈs associÈes ‡ un item (pour les malus et les surprise)
+- implÈmentation de l'inversion des commandes
+- implÈmentation de la gestion des vies, gÈnÈralisation du moteur pour permettre au joueur de revenir en jeu
+- implÈmentation des modificateurs de vitesse de dÈplacement au sol pour les hÈros
+- implÈmentation de la rÈsistance au feu
+- nouveau systËme de maximum pour les StateAbilities (avec une ability supp contenant le suffixe _MAX)
+- correction d'un bug concernant la prÈcÈdence temporelle de certains ÈvËnements, en particulier quand deux joueurs br˚lent au cours de la mÍme explosion
+- implÈmentation de la constipation bombique
+- correction d'un gros bug dans le calcul de distances entre sprites situÈs dans la classe Level
+- possibilitÈ d'avoir plusieurs blocs, floors et items dans une mÍme case (par souci de gÈnÈralisation)
+- systËme permettant de relacher les items ‡ la mort du joueur
+- correction dans le calcul de la direction entre deux sprites (le cÙtÈ circulaire des niveaux n'Ètait pas pris en compte)
+- systËme de contagion des malus
+- systËme de guÈrison des malus
+- possibilitÈ de faire exploser les bombes posÈes par un joueur quand celui-ci br˚le
 - touche END permettant de pauser le jeu
-- meilleure gestion de l'exultation/pleur √† la fin des manches
-- capacit√© de r√©sistance au feu pour les items (l'item est d√©plac√© au lieu d'√™tre d√©truit)
+- meilleure gestion de l'exultation/pleur ‡ la fin des manches
+- capacitÈ de rÈsistance au feu pour les items (l'item est dÈplacÈ au lieu d'Ítre dÈtruit)
 - blocs laissant passer les flammes mais pas les joueurs ni les bombes (cf niveau story/custom de SBM1)
-- instance SBM1 plus compl√®te (items, niveaux officiels, nouveaux niveaux custom)
-- meilleure gestion des items initiaux (effectivement distribu√©s au start)
+- instance SBM1 plus complËte (items, niveaux officiels, nouveaux niveaux custom)
+- meilleure gestion des items initiaux (effectivement distribuÈs au start)
 - correction dans les gestion des blocs spawn
-- mise √† jour et r√©vision de la strucutre de donn√©es de l'API d'IA
-- impl√©mentation de A* dans l'API d'IA
+- mise ‡ jour et rÈvision de la strucutre de donnÈes de l'API d'IA
+- implÈmentation de A* dans l'API d'IA
 - pause individuelle des IA
-- affichage de donn√©es relatives aux IA : chemins, vision de la zone de jeu, valeurs case par case, etc.
-- touche sp√©ciale permettant d'ex√©cuter seulement une it√©ration du moteur
-- IA suiveuse : IA de d√©monstration qui choisit un autre joueur puis le suit
-- gestion des IA : mise en place d'UPS, limit√© par d√©faut √† 10 Hz, afin de d√©charger le moteur du jeu
-- r√©vision des tournois/rencontres/manches existants
-- correction d'un bug dans la GUI qui emp√™chait l'affichage automatique des r√©sultats pour les tournois simples
-- correction d'un bug dans la GUI qui emp√™chait l'affichage complet de la description d'un tournoi de type coupe
-- correction d'un bug dans la GUI : dans les tooltips du tableau des r√©sultats, il manquait les num√©ros des manches
-- correction d'un bug dans la GUI : dans les r√©sultats, certaines colonnes n'√©taient pas assez larges
-- correction d'une erreur dans le cassage d'√©galit√© lors d'un tournoi de type coupe
-- correction d'un bug dans les menus qui emp√™chait de revenir √† une partie rapide abandonn√©e avant la fin des options
-- correction d'un bug dans le dialogue modal de question : le bouton annuler √©tait d√©sactiv√©
-- ajout d'un menu modal demandant le nom lors de la cr√©ation d'un nouveau profil
+- affichage de donnÈes relatives aux IA : chemins, vision de la zone de jeu, valeurs case par case, etc.
+- touche spÈciale permettant d'exÈcuter seulement une itÈration du moteur
+- IA suiveuse : IA de dÈmonstration qui choisit un autre joueur puis le suit
+- gestion des IA : mise en place d'UPS, limitÈ par dÈfaut ‡ 10 Hz, afin de dÈcharger le moteur du jeu
+- rÈvision des tournois/rencontres/manches existants
+- correction d'un bug dans la GUI qui empÍchait l'affichage automatique des rÈsultats pour les tournois simples
+- correction d'un bug dans la GUI qui empÍchait l'affichage complet de la description d'un tournoi de type coupe
+- correction d'un bug dans la GUI : dans les tooltips du tableau des rÈsultats, il manquait les numÈros des manches
+- correction d'un bug dans la GUI : dans les rÈsultats, certaines colonnes n'Ètaient pas assez larges
+- correction d'une erreur dans le cassage d'ÈgalitÈ lors d'un tournoi de type coupe
+- correction d'un bug dans les menus qui empÍchait de revenir ‡ une partie rapide abandonnÈe avant la fin des options
+- correction d'un bug dans le dialogue modal de question : le bouton annuler Ètait dÈsactivÈ
+- ajout d'un menu modal demandant le nom lors de la crÈation d'un nouveau profil
 - ajout d'un menu modal de confirmation de suppression de sauvegarde, pareil pour les profils
-- ajout d'un menu modal de confirmation d'√©crasement de sauvegarde
-- ajout d'un menu modal lorsque les options demandant un red√©marrage du jeu sont modifi√©es
+- ajout d'un menu modal de confirmation d'Ècrasement de sauvegarde
+- ajout d'un menu modal lorsque les options demandant un redÈmarrage du jeu sont modifiÈes
 - correction d'une erreur dans la traduction anglaise de l'interface
 - correction de quelques erreurs dans AiBomb
-- am√©lioration de l'impl√©mentation d'A* pour ne pas consid√©rer les chemins qui passent plusieurs fois par la m√™me case
+- amÈlioration de l'implÈmentation d'A* pour ne pas considÈrer les chemins qui passent plusieurs fois par la mÍme case
 
 + beta.014
 - nouvelle version de shirobon issu de NBM1
 - nouvelle instance : NES Bomberman 1
 - 2 nouveaux niveaux pour illustrer l'instance NBM1
 - API IA : 
-		- A* modifi√© pour pouvoir utiliser n'importe quelle fonction successeur
-		- acc√®s √† la taille des cases
-		- AiBomb contient une m√©thode permettant de savoir la dur√©e de l'explosion √† venir, le temps de latence de la bombe et sa proba de panne
+		- A* modifiÈ pour pouvoir utiliser n'importe quelle fonction successeur
+		- accËs ‡ la taille des cases
+		- AiBomb contient une mÈthode permettant de savoir la durÈe de l'explosion ‡ venir, le temps de latence de la bombe et sa proba de panne
 		- AiPath a une fonction renvoyant la distance totale en pixels 
-		- AiPath a une fonction renvoyant la temps n√©cessaire √† joueur pour le parcourir
-		- AiZone permet de r√©cup√©rer le classement courant de tous les joueurs, pour le round et le match en cours
-		- AiZone permet maintenant de savoir combien il reste d'items planqu√©s sous les blocs destructibles 
-- ajout du syst√®me Glicko2
+		- AiPath a une fonction renvoyant la temps nÈcessare ‡ joueur pour le parcourir
+		- AiZone permet de rÈcupÈrer le classement courant de tous les joueurs, pour le round et le match en cours
+		- AiZone permet maintenant de savoir combien il reste d'items planquÈs sous les blocs destructibles 
+- ajout du systËme Glicko2
 - adaptation de Glicko2 :
 		- serializable
-		- utilisation d'une cl√© enti√®re pour repr√©senter les joueurs
-		- utilisation de la g√©n√©ricit√©
-		- nouvelles m√©thodes pour obtenir le classement des joueurs 
-   	- suivi du nombre de matchs jou√©s depuis la derni√®re mise √† jour
-   	- impl√©mentation de la fonction permettant de d√©-registrer un joueur
+		- utilisation d'une clÈ entiËre pour reprÈsenter les joueurs
+		- utilisation de la gÈnÈricitÈ
+		- nouvelles mÈthodes pour obtenir le classement des joueurs 
+   	- suivi du nombre de matchs jouÈs depuis la derniËre mise ‡ jour
+   	- implÈmentation de la fonction permettant de dÈ-registrer un joueur
 - ajout du rang dans les panels affichant la liste des joueurs d'un tournoi/match
-- nouvelles classes pour g√©rer les statistiques globales du jeu : nombre de rounds jou√©s par joueur, nombre de bombes pos√©es, etc.
-- quelques bugs corrig√©s dans l'interface graphique, notamment en ce qui concerne le calcul des largeurs de colonnes dans certaines tables
+- nouvelles classes pour gÈrer les statistiques globales du jeu : nombre de rounds jouÈs par joueur, nombre de bombes posÈes, etc.
+- quelques bugs corrigÈs dans l'interface graphique, notamment en ce qui concerne le calcul des largeurs de colonnes dans certaines tables
 - GUI : affichage des statistiques : classement glicko2, confrontations, scores
-- GUI : possibilit√© de changer le crit√®re de classement dans l'√©cran de stats
-- GUI : possibilit√© d'enregistrer/d√©registrer des joueurs dans l'√©cran de stats
-- encha√Ænement automatique des matches d'un tournoi, par ex. pour faire tourner des IA sur tout un tournoi automatiquement
-- GUI : nouvel √©cran d'options d√©di√© √† la configuration de la gestion des IA
-- GUI : nouvel √©cran d'options pour configurer le traitement des stats
-- possibilit√© de s√©lectionner les joueurs al√©atoirement avant un tournoi/partie rapide/quick start
-- possibilit√© de s√©lectionner les joueurs les plus proches d'un joueur donn√©
-- possibilit√© de d√©s√©lectionner tous les joueurs d'un seul clic (avant un tournoi/partie rapide/quick start)
-- possibilit√© de d√©s√©lectionner tous les joueurs sans classement en cliquant sur "-"
-- possibilit√© de simuler les rounds qui n'impliquent que des IA
-- affichage du rang dans l'√©cran r√©capitulant les joueurs s√©lectionn√©s avant le d√©but d'une partie
-- affichage du nom des joueurs par dessus les sprites en mode d√©bug
-- joueurs identifi√©s par un entier unique (au lieu d'une chaine de caract√®res) dans les stats d√©taill√©es
-- bufferisation de tous les acc√®s au fichiers avec l'utilisation de BufferedInput et BufferedOutput
-- affichage des stats : possibilit√© de masquer en fonction du type de profil (IA/humain) et du rang (class√©/pas class√©)
+- GUI : possibilitÈ de changer le critËre de classement dans l'Ècran de stats
+- GUI : possibilitÈ d'enregistrer/dÈregistrer des joueurs dans l'Ècran de stats
+- enchaÓnement automatique des matches d'un tournoi, par ex. pour faire tourner des IA sur tout un tournoi automatiquement
+- GUI : nouvel Ècran d'options dÈdiÈ ‡ la configuration de la gestion des IA
+- GUI : nouvel Ècran d'options pour configurer le traitement des stats
+- possibilitÈ de sÈlectionner les joueurs alÈatoirement avant un tournoi/partie rapide/quick start
+- possibilitÈ de sÈlectionner les joueurs les plus proches d'un joueur donnÈ
+- possibilitÈ de dÈsÈlectionner tous les joueurs d'un seul clic (avant un tournoi/partie rapide/quick start)
+- possibilitÈ de dÈsÈlectionner tous les joueurs sans classement en cliquant sur "-"
+- possibilitÈ de simuler les rounds qui n'impliquent que des IA
+- affichage du rang dans l'Ècran rÈcapitulant les joueurs sÈlectionnÈs avant le dÈbut d'une partie
+- affichage du nom des joueurs par dessus les sprites en mode dÈbug
+- joueurs identifiÈs par un entier unique (au lieu d'une chaine de caractËres) dans les stats dÈtaillÈes
+- bufferisation de tous les accËs au fichiers avec l'utilisation de BufferedInput et BufferedOutput
+- affichage des stats : possibilitÈ de masquer en fonction du type de profil (IA/humain) et du rang (classÈ/pas classÈ)
 - GUI : changement de couleur de type "mouse over" pour les boutons de la GUI
-- GUI : le rang des joueurs apparait maintenant dans l'√©cran de s√©lection des profils
-- scores : les suicides sont maintenant s√©par√©s des bombeurs/bomb√©s
-- syst√®me de log : log des controles, que ce soit pour les humains ou les IA
-- un nouvel icone couronne de laurier a √©t√© d√©fini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
-- nouvelle option "t√™te de s√©rie" pour les tournois de type coupe : utilise le classement Glicko-2 pour √©viter que les meilleurs joueurs se rencontrent trop t√¥t
-- les constantes √©l√©ments/attributs ont √©t√© renomm√©es de mani√®re √† supprimer les pr√©fixes ATT_ et ELT_ (pr √©viter les r√©p√©titions)
-- moteur : mise √† jour des points en temps r√©el, en prenant la premi√®re limite disponible (utile pour les rounds)
-- am√©lioration du d√©compte du temps : le temps du jeu est arr√™t√© s'il est en pause, et le temps r√©el est d√©compt√© s√©par√©ment
-- tournoi de type championnat impl√©ment√©
-- correction d'un bug lors de la cr√©ation/suppression de profil, √† la fois dans la GUI et le moteur
-- modification de l'identifiant des joueurs dans le moteur : c'est maintenant un entier et non plus une chaine de caract√®res contenant un entier
-- cr√©ation d'une classe sp√©cifique pour les labels, impl√©mentant le rollover
+- GUI : le rang des joueurs apparait maintenant dans l'Ècran de sÈlection des profils
+- scores : les suicides sont maintenant sÈparÈs des bombeurs/bombÈs
+- systËme de log : log des controles, que ce soit pour les humains ou les IA
+- un nouvel icone couronne de laurier a ÈtÈ dÈfini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
+- nouvelle option "tÍte de sÈrie" pour les tournois de type coupe : utilise le classement Glicko-2 pour Èviter que les meilleurs joueurs se rencontrent trop tÙt
+- les constantes ÈlÈments/attributs ont ÈtÈ renommÈes de maniËre ‡ supprimer les prÈfixes ATT_ et ELT_ (pr Èviter les rÈpÈtitions)
+- moteur : mise ‡ jour des points en temps rÈel, en prenant la premiËre limite disponible (utile pour les rounds)
+- amÈlioration du dÈcompte du temps : le temps du jeu est arrÍtÈ s'il est en pause, et le temps rÈel est dÈcomptÈ sÈparÈment
+- tournoi de type championnat implÈmentÈ
+- correction d'un bug lors de la crÈation/suppression de profil, ‡ la fois dans la GUI et le moteur
+- modification de l'identifiant des joueurs dans le moteur : c'est maintenant un entier et non plus une chaine de caractËres contenant un entier
+- crÈation d'une classe spÈcifique pour les labels, implÈmentant le rollover
 - correction du bug concernant le rollover des labels
 
 + beta.015
 - Moteur :
 		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
-		- possibilit√© d'enregistrer automatiquement un objet Zone, via une m√©thode s'appelant hors du jeu (pour faciliter la cr√©ation de niveaux)
-		- pareil avec les fichiers level et players, ce qui permet de d√©finir automatiquement des niveaux (basiques, √† compl√®ter manuellement)
-		- bug corrig√© dans la gestion des tournois de type coupe
-		- bug corrig√© dans l'autosave des tournoi (le backup ne se faisait pas)
+		- possibilitÈ d'enregistrer automatiquement un objet Zone, via une mÈthode s'appelant hors du jeu (pour faciliter la crÈation de niveaux)
+		- pareil avec les fichiers level et players, ce qui permet de dÈfinir automatiquement des niveaux (basiques, ‡ complÈter manuellement)
+		- bug corrigÈ dans la gestion des tournois de type coupe
+		- bug corrigÈ dans l'autosave des tournoi (le backup ne se faisait pas)
 - GUI :
-		- correction d'un bug concernant les proportions des panels dans l'√©cran de pr√©sentation d'une manche
-		- correction d'un bug concernant l'√©dition de profil en g√©n√©ral
-		- correction d'un bug lors du choix de la couleur (l'option "pas de couleur" √©tait rest√©e de la premi√®re version de la GUI)
-		- correction d'un bug apparaissant lors de la suppression d'un joueur pas enregistr√© dans Glicko-2
-		- am√©lioration de la suppression de profil : c'est le profil pr√©c√©dent qui est alors s√©lectionn√© (au lieu de revenir au d√©but)
-		- la liste de noms est raffraichie quand un profil est modifi√©
-		- les 3 configurations de jeu sont √©ventuellement mises √† jour quand un profil est supprim√©
+		- correction d'un bug concernant les proportions des panels dans l'Ècran de prÈsentation d'une manche
+		- correction d'un bug concernant l'Èdition de profil en gÈnÈral
+		- correction d'un bug lors du choix de la couleur (l'option "pas de couleur" Ètait restÈe de la premiËre version de la GUI)
+		- correction d'un bug apparaissant lors de la suppression d'un joueur pas enregistrÈ dans Glicko-2
+		- amÈlioration de la suppression de profil : c'est le profil prÈcÈdent qui est alors sÈlectionnÈ (au lieu de revenir au dÈbut)
+		- la liste de noms est raffraichie quand un profil est modifiÈ
+		- les 3 configurations de jeu sont Èventuellement mises ‡ jour quand un profil est supprimÈ
 - IA :
-		- prise en compte du coefficient de vitesse pour les valeurs li√©es au temps
-		- acc√®s au classement Glicko-2 (en plus de round et match d√©j√† pr√©sents)
-		- nouvelle option du jeu permettant de masquer les exceptions provoqu√©es par les IA
+		- prise en compte du coefficient de vitesse pour les valeurs liÈes au temps
+		- accËs au classement Glicko-2 (en plus de round et match dÈj‡ prÈsents)
+		- nouvelle option du jeu permettant de masquer les exceptions provoquÈes par les IA
 		- option pour logger les exceptions des IA
-		- ajout de l'appel √† Thread.yield() dans la m√©thode checkInterruption d'ArtificialIntelligence : √ßa permet de mettre en sourdin les IA trop gourmandes en temps pro√ß
-		- meilleure gestion de A* en ce qui concerne les objets √† traiter par le ramasse-miettes
-		- A* renvoie une exception en cas de param√®tres inadapt√©s 
+		- ajout de l'appel ‡ Thread.yield() dans la mÈthode checkInterruption d'ArtificialIntelligence : Áa permet de mettre en sourdin les IA trop gourmandes en temps proÁ
+		- meilleure gestion de A* en ce qui concerne les objets ‡ traiter par le ramasse-miettes
+		- A* renvoie une exception en cas de paramËtres inadaptÈs 
 - stats :
-		- classe sp√©cifique pour r√©initialiser toutes les stats en dehors du jeu
-		- m√©thode pour r√©initialiser les stats g√©n√©rales d'un joueur en particulier (appel√©e hors du jeu)
-		- les stats de lancement qui n'√©taient pas √† leur place dans les logs ont √©t√© mises dans le fichier de config des stats
+		- classe spÈcifique pour rÈinitialiser toutes les stats en dehors du jeu
+		- mÈthode pour rÈinitialiser les stats gÈnÈrales d'un joueur en particulier (appelÈe hors du jeu)
+		- les stats de lancement qui n'Ètaient pas ‡ leur place dans les logs ont ÈtÈ mises dans le fichier de config des stats
 - Divers :
-		- correction d'un bug dans les scripts de compilation (classes non r√©f√©renc√©es dans les adaptateurs d'IA)
-		- mise √† jour du perso Prognathe
-		- mise √† jour du syst√®me de log pour permettre de ne pas √©craser toujours le m√™me fichier, mais de cr√©er √† chaque fois un fichier diff√©rent et dat√©
+		- correction d'un bug dans les scripts de compilation (classes non rÈfÈrencÈes dans les adaptateurs d'IA)
+		- mise ‡ jour du perso Prognathe
+		- mise ‡ jour du systËme de log pour permettre de ne pas Ècraser toujours le mÍme fichier, mais de crÈer ‡ chaque fois un fichier diffÈrent et datÈ
 		- nouveaux niveaux pour le tournoi 3
 
 + beta.016
 	- Moteur :
-		- cr√©ation d'une classe Instance pour g√©rer de fa√ßon plus pratique les feux/bombes/items
- 		- g√©n√©ralisation du chargement des explosions (mutualis√© plutot que de recommencer √† chaque sprite)
+		- crÈation d'une classe Instance pour gÈrer de faÁon plus pratique les feux/bombes/items
+ 		- gÈnÈralisation du chargement des explosions (mutualisÈ plutot que de recommencer ‡ chaque sprite)
  		- correction d'un bug dans le chargement des tournois simples
 	- IA :
-			- utilitaire permettant de controller les checkinterruptions dans les programmes des √©tudiants
+			- utilitaire permettant de controller les checkinterruptions dans les programmes des Ètudiants
 	- stats :
-			- possibilit√© d'exporter/importer les stats sous forme de fichier texte (pour quand on change les classes stat)
+			- possibilitÈ d'exporter/importer les stats sous forme de fichier texte (pour quand on change les classes stat)
 	- Divers :
 			- renommage du package principal de fr.free.totalboumboum en org.totalboumboum
-			- mise √† jour de l'ann√©e du copyright de 2008-2009 en 2008-2010
+			- mise ‡ jour de l'annÈe du copyright de 2008-2009 en 2008-2010
 
 + beta.017
 	- Moteur :
-			- nouveau syst√®me de mise en cache utilisant des fichiers : pas efficace, c'est aussi long que de tout charger direct
-			- nouveau syst√®me de cache m√©moire : un peu plus rapide que le chargement normal
-			- possibilit√© de d√©finir des items al√©atoires √† partir d'intems existant (et plus uniquement en r√©p√©tant des propri√©t√©s)
+			- nouveau systËme de mise en cache utilisant des fichiers : pas efficace, c'est aussi long que de tout charger direct
+			- nouveau systËme de cache mÈmoire : un peu plus rapide que le chargement normal
+			- possibilitÈ de dÈfinir des items alÈatoires ‡ partir d'intems existant (et plus uniquement en rÈpÈtant des propriÈtÈs)
 			- correction d'un bug lorsque le round n'a pas de limite de temps
 			- correction d'un bug lors du calcul des scores quand un joueur se fait tuer par le niveau (i.e. bombe anonyme)
-			- nouveau syst√®me de cache : image et sprites sont cach√©s s√©par√©ment
-			- nouveau syst√®me permettant de d√©finir des sprites comme des empilement de couches s√©par√©es
-			- simplification du syst√®me de suppression d'outil (on laisse le ramasse miette en faire plus, pas la peine de s'en charger manuellement)
-			- les sprites sans couleurs index√©es peuvent maintenant avoir une couleur "NONE" (pr les bombes des niveaux)
+			- nouveau sytËme de cache : image et sprites sont cachÈs sÈparÈment
+			- nouveau systËme permettant de dÈfinir des sprites comme des empilement de couches sÈparÈes
+			- simplification du systËme de suppression d'outil (on laisse le ramasse miette en faire plus, pas la peine de s'en charger manuellement)
+			- les sprites sans couleurs indexÈes peuvent maintenant avoir une couleur "NONE" (pr les bombes des niveaux)
 	- GUI :
-			- correction d'un bug dans le menu des options avanc√©es
-			- options avanc√©es : (d√©s)activation du cache, r√©glage de la taille du cache
+			- correction d'un bug dans le menu des options avancÈes
+			- options avancÈes : (dÈs)activation du cache, rÈglage de la taille du cache
 	- Divers :
 			- outils de conception de niveaux (mais pas d'interface pour l'instant)
 			- instance Total Boum Boum
 + beta.018
-	- essentiellement une version interm√©diaire sortie pour le projet d'IA
+	- essentiellement une version intermÈdiaire sortie pour le projet d'IA
 
 + beta.019
 	- Moteur :
-		- refonte de l'affichage : tout est maintenant d√©l√©gu√© √† un ensemble de classes Display
-		- distinction entre diff√©rents types de joueurs (humain, ia, distant) via des classes sp√©cifiques
+		- refonte de l'affichage : tout est maintenant dÈlÈguÈ ‡ un ensemble de classes Display
+		- distinction entre diffÈrents types de joueurs (humain, ia, distant) via des classes spÈcifiques
 		- nouvelle classe de Loop pour le replay, meilleure structuration des Loop
-		- nouveaux managers vides, entre autres destin√©s aux sprites du mode replay
+		- nouveaux managers vides, entre autres destinÈs aux sprites du mode replay
 		- nouvelle classe Replay, rendant le replay fonctionnel
 	- GUI :
 		- nouvelle option de replay dans le menu principal
-		- (d√©s)activation de l'enregistrement du replay dans les options
-		- m√™me chose dans le menu des tournois/parties rapides (en tant que raccourci)
+		- (dÈs)activation de l'enregistrement du replay dans les options
+		- mÍme chose dans le menu des tournois/parties rapides (en tant que raccourci)
 	- Divers :
-		- nettoyage du code par rapport √† l'utilisation de ArrayList (remplac√© par List partout o√π c'√©tait possible)
-	- R√©seau :
-		- interface compl√®te
-		- m√©canismes de connexion presque complets (manque la r√©cup√©ration de d√©connexion, etc.)
-		- m√©canismes de jeu termin√©s mais le syst√®me √©v√®nementiel est √† refaire enti√®rement pour √©conomiser la BP
+		- nettoyage du code par rapport ‡ l'utilisation de ArrayList (remplacÈ par List partout o˘ c'Ètait possible)
+	- RÈseau :
+		- interface complËte
+		- mÈcanismes de connexion presque complets (manque la rÈcupÈration de dÈconnexion, etc.)
+		- mÈcanismes de jeu terminÈs mais le systËme ÈvËnementiel est ‡ refaire entiËrement pour Èconomiser la BP
 
 + beta.020
 	- Moteur :
-		- correction d'un bug dans le chargement des bombes (compl√®tion des gestures)
+		- correction d'un bug dans le chargement des bombes (complÈtion des gestures)
 	- GUI :
 		- indicateur d'occupation de CPU
 	- IA :
-		- mod√®le de simulation
+		- modËle de simulation
 		- bombage automatique des IA inactives, avec inclusion dans les options de la GUI
 	- stats :
 		- correction d'un bug concernant le classement des joueurs en fonctions du type
 	- Divers :
-		- √©bauche de mode r√©seau
+		- Èbauche de mode rÈseau
 		- animation d'apparition des bombes
-		- nouveau th√®me pour le tournoi 4
+		- nouveau thËme pour le tournoi 4
 		- nouveaux niveaux pour la qualif et le tournoi: bombfest, qualif4, hurry
-		- mise √† jour de l'ann√©e du copyright de 2009-2010 en 2010-2011
-
-+ beta.021
-	- GUI :
-		- message console pendant le jeu
-		- occupation temps r√©el des IA
-	- IA :
-		- mod√®le all√©g√© de simulation
-		- extension de A* consid√©rant le temps
-		- impl√©mentation de l'algo de Dijkstra
-		- nouvelles fonctions permettant une approximation √† travers les obstacles
-		- pr√©cision de l'algorithme g√©n√©ral
-		- syst√©matisation de la sortie texte
-		- syst√©matisation de la mesure du temps pour les appels de m√©thodes
-		- syst√©matisation de la sortie graphique
-		- syst√®me de cas/crit√®res/combinaisons pour le calcul d'utilit√©
-		- affichage de toutes les combinaisons d√©finies, avec leur valeur d'utilit√©
-		- nouvelle IA de test : Simplet
-		- possibilit√© de tester l'agent hors-ligne
-	- stats :
-	- ressources :
-		- th√®mes SBM1 arena, circles, hal, power, speed & warp
-		- tous les niveaux des modes histoire et ar√®ne
-	- Divers :
-		- nouveau th√®me pour le tournoi 5
-		- nouveau tournoi pour la 5√®me √©dition
-		- mise √† jour de l'ann√©e du copyright de 2010-2011 en 2011-2012
-		
-+ beta.022
-	- nouveaux agents
-	- nouveau tournoi
-	- int√©gration de toutes les m√†j successives des version 21.x
-	
-+ beta.023
-	- l√©ger hasard dans le tirage au sort du temps des bombes mena√ßant les IA
-	- l√©ger hasard dans le tirage au sort de la puissance de ces m√™mes bombes
-	- nouveaux profils pour le tournoi 2012-13
-	- correction du bug qui faisait que le panel "about" mettait deux plombes √† s'afficher :
-	  remplacement de JTextPane par JTextArea.
-	
-+ beta.024
- 	- moteur :
- 		- quelques bugs corrig√©s
-		- syst√®me de mort subite inclus dans le moteur
-		- am√©lioration du tournoi coupe : possibilit√© de faire entrer des joueurs apr√®s le 1er tour
-	- GUI :
-		- nouvelle option permettant d'activer/d√©sactiver la mort subite sur une partie rapide
-		- r√©solution du bug qui rendait l'apparition de menus modaux tr√®s lente
-		- correction de certains menus modaux, toujours tr√®s lents
-		- ajout des menus modaux manquant
-		- correction de probl√®mes de traduction dans la version anglaise
-		- inclusion de panels de statistiques pendant les parties, pour afficher d√©crire 
-		  l'√©volution de tournois/rencontres/manches sous forme de graphiques
-		- possibilit√© de visualiser les r√©sultats d√©taill√©s d'un tournoi pass√© (et enregistr√©).
-		- affichage des num√©ros des matches/rounds dans les titres des panels (pour une meilleure navigation)
-	- ressources : 
-		- Shirobon SBM4
-		- morts subites dans les niveaux officiels de SBM1
-		- outils de niveaux pour g√©n√©rer programmatiquement des morts subites typiques
-		- th√®me pour le tournoi VI
-		- niveaux pour le tournoi VI
-		- tournoi VI et super-coupe V
-	- API IA :
-		- quelques bugs corrig√©s
-		- m√©thode initOthers dans ArtificialIntelligence, permettant d'initialiser des objets apr√®s les gestionnaires.
-		- v√©rification de l'unicit√© des noms de cas pour un agent
-		- cache automatique pour le calcul de crit√®res
-		- v√©rification de l'unicit√© des noms de crit√®res pour un agent
-		- utilit√©s de r√©f√©rence stock√©es dans des maps diff√©rentes pour chaque mode
-		- d√©composition du traitement plus avanc√©e dans le MoveHandler
-		- repr√©sentation et acc√®s aux √©v√®nements de mort subite
-		- simulation des √©v√®nements de mort subite
-		- repr√©sentation et acc√®s aux items contagieux et √† effet temporaire
-		- simulation des items contagieux et √† effet temporaire
-		- m√©thode permettant d'acc√©der √† l'effet qu'un item aurait sur un joueur (effet contextuel)
-	- divers:
-		- changement du copyright (2012 >> 2013)
-		- quelques erreurs corrig√©es dans les scripts de compilation
-
-+ beta.025
-	- ressources : 
-		- TODO nettoyage des th√®mes (moins d'images √† charger, mutualisation/normalisation des fichiers xml)
-	- gui :
-		- possibilit√© de masquer le message de pause (pour captures d'√©cran)
-		- bascule diff√©rente entre l'affichage des temps (mode d√©bug)
-		- possibilir√© de masquer les sprites, par type (par ex. les persos pour faire des captures)
-	- ia :
-		- utilit√©/cas devient pr√©f√©rence/cat√©gorie
-		- les pr√©f√©rences sont d√©finies dans un fichier xml s√©par√©
-		- les pr√©f√©rences sont initialis√©es une seule fois pour un agent donn√©,
-		  puis copi√©es √† chacune de ses instantiations.
-		- outil de v√©rification des agents plus complet : importations, commentaires, etc.
-		- outil de g√©n√©ration de code source (vide) √† partir d'un agent g√©n√©rique
+		- mise ‡ jour de l'annÈe du copyright de 2008-2010 en 2008-2011

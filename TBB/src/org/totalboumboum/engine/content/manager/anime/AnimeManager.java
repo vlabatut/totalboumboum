@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.anime;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -54,7 +54,7 @@ public class AnimeManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite possÃ©dant ce manager */
+	/** sprite possédant ce manager */
 	protected Sprite sprite;
 	
 	/////////////////////////////////////////////////////////////////
@@ -64,23 +64,23 @@ public class AnimeManager
 	protected AnimeDirection currentAnime;
 	
 	/**
-	 * Change l'animation en cours pour le sprite considÃ©rÃ©.
-	 * paramÃ¨tres :
+	 * Change l'animation en cours pour le sprite considéré.
+	 * Paramètres :
 	 * 	- reinit : 
-	 * 		- remet currentTime (le temps Ã©coulÃ©) Ã  0 et recalcule le durationCoeff.
-	 * 		- ceci permet de passer d'une anime Ã  une autre sans repartir Ã  zÃ©ro, par exemple pour un changement de direction pendant walking.
-	 * 		- on suppose alors que les deux animes ont exactement les mÃªmes caractÃ©ristiques (mÃªme durÃ©e, proportion, etc), car elles ne sont pas rÃ©initialisÃ©es.
+	 * 		- remet currentTime (le temps écoulé) à 0 et recalcule le durationCoeff.
+	 * 		- ceci permet de passer d'une anime à une autre sans repartir à zéro, par exemple pour un changement de direction pendant walking.
+	 * 		- on suppose alors que les deux animes ont exactement les mêmes caractéristiques (même durée, proportion, etc), car elles ne sont pas réinitialisées.
 	 * 	- forcedDuration : 
-	 * 		- si >0 : force l'animation Ã  durer le temps passÃ© en paramÃ¨tre :
-	 * 			- si l'animation est dÃ©finie comme proportionnelle, la durÃ©e de chaque pas est modifiÃ©e (linÃ©airement) pour coller Ã  forcedDuration
-	 * 			- sinon, l'animation est jouÃ©e normalement, mais :
+	 * 		- si >0 : force l'animation à durer le temps passé en paramètre :
+	 * 			- si l'animation est définie comme proportionnelle, la durée de chaque pas est modifiée (linéairement) pour coller à forcedDuration
+	 * 			- sinon, l'animation est jouée normalement, mais :
 	 * 				- interrompue si elle est plus longue que forcedDuration
-	 * 				- reste bloquÃ©e sur la derniÃ¨re image si elle est plus courte que forcedDuration  
-	 * 		- si =0 : la durÃ©e de l'animation n'est pas forcÃ©e, on utilise celle dÃ©finie dans le fichier xml
-	 * 		- si <0 : force  l'animation Ã  durer le mÃªme temps que le sprite liÃ© (s'il existe, sinon c'est comme si forcedDuration==0)
+	 * 				- reste bloquée sur la dernière image si elle est plus courte que forcedDuration  
+	 * 		- si =0 : la durée de l'animation n'est pas forcée, on utilise celle définie dans le fichier xml
+	 * 		- si <0 : force  l'animation à durer le même temps que le sprite lié (s'il existe, sinon c'est comme si forcedDuration==0)
 	 * 
 	 * Remarques : 
-	 * 	- une 'animation fixe' (une seule image ou pas d'image) sera en gÃ©nÃ©ral associÃ©e Ã  totalDuration=0 et repeat=true.
+	 * 	- une 'animation fixe' (une seule image ou pas d'image) sera en général associée à totalDuration=0 et repeat=true.
 	 * 	- s'il n'y a pas reinit, forcedDuration n'est pas pris en compte...  
 	 */
 	public void updateGesture(Gesture gesture, Direction direction, boolean reinit, double forcedDuration)
@@ -105,7 +105,7 @@ public class AnimeManager
 			currentAnime.setGestureName(gesture.getName());
 			AnimeStep as = new AnimeStep();
 			currentAnime.add(as);
-			//TODO Ã  supprimer si le chargement d'animations est finalisÃ© de maniÃ¨re Ã  Ã©viter cette situation (= anime vide)
+			//TODO à supprimer si le chargement d'animations est finalisé de manière à éviter cette situation (= anime vide)
 		}
 		if(reinit)
 		{	isTerminated = false;
@@ -168,8 +168,8 @@ public class AnimeManager
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * mÃ©thode appelÃ©e Ã  chaque itÃ©ration : 
-	 * met Ã  jour l'image Ã  afficher
+	 * méthode appelée à chaque itération : 
+	 * met à jour l'image à afficher
 	 */
 	public void update()
 	{	updateTime();
@@ -200,7 +200,7 @@ public class AnimeManager
 	protected AnimeStep currentStep;
 
 	/**
-	 * calcule l'Ã©tape courante de l'animation, en fonction du temps courant
+	 * calcule l'étape courante de l'animation, en fonction du temps courant
 	 */
 	private void updateStep()
 	{	// process current displayable image
@@ -216,19 +216,19 @@ public class AnimeManager
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps total Ã©coulÃ© de puis le dÃ©but de l'animation */
+	/** temps total écoulé de puis le début de l'animation */
 	protected double currentTime;
-	/** temps normalisÃ© Ã©coulÃ© de puis le dÃ©but de l'animation (rÃ©initialisÃ© par un repeat) */
+	/** temps normalisé écoulé de puis le début de l'animation (réinitialisé par un repeat) */
 	protected double animeTime;
-	/** durÃ©e totale originale de l'animation */
+	/** durée totale originale de l'animation */
 	protected double animeDuration;
-	/** durÃ©e totale effective de l'animation */
+	/** durée totale effective de l'animation */
 	protected double totalDuration = 0;
-	/** coefficient de mofication du temps dÃ» au dÃ©lai imposÃ© */
+	/** coefficient de mofication du temps dû au délai imposé */
 	protected double forcedDurationCoeff = 1;
 	
 	/**
-	 * met Ã  jour les diffÃ©rentes variables gÃ©rant le temps
+	 * met à jour les différentes variables gérant le temps
 	 */
 	private void updateTime()
 	{	// update current time
@@ -291,7 +291,7 @@ public class AnimeManager
 	}
 	
 	/**
-	 * renvoie la durÃ©e totale prÃ©vue pour l'animation.
+	 * renvoie la durée totale prévue pour l'animation.
 	 * @return
 	 */
 	public double getTotalDuration()
@@ -354,7 +354,7 @@ public class AnimeManager
 	// MISC					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie l'image Ã  afficher 
+	 * renvoie l'image à afficher 
 	 * @return
 	 */
 	public List<StepImage> getCurrentImages()
@@ -385,7 +385,7 @@ public class AnimeManager
 	/////////////////////////////////////////////////////////////////
 	// TERMINATED			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique que l'animation est finie (on reste sur la derniÃ¨re image) */
+	/** indique que l'animation est finie (on reste sur la dernière image) */
 	protected boolean isTerminated;
 	
 	public boolean isTerminated()

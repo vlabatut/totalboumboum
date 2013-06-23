@@ -2,7 +2,7 @@ package org.totalboumboum.statistics.detailed;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,46 +27,14 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 
 /**
- * Implemented by objects able to generate
- * data to process statistics.
  * 
  * @author Vincent Labatut
+ *
  */
 public interface StatisticHolder
 {
-	/**
-	 * Returns the statistics for the associated game.
-	 * 
-	 * @return
-	 * 		Some statistics.
-	 */
 	public StatisticBase getStats();
-	
-	/**
-	 * Returns the list of the profiles of
-	 * all players involved in this game.
-	 * 
-	 * @return
-	 * 		List of profiles.
-	 */
 	public List<Profile> getProfiles();
-	
-	/**
-	 * Returns the statuses of the players
-	 * (i.e. if they are eliminated from the game or not).
-	 * 
-	 * @return
-	 * 		List of booleans indicating the status of each involved player.
-	 */
 	public List<Boolean> getPlayersStatus();
-	
-	/**
-	 * Returns the players in
-	 * an order which depends on
-	 * theirs results in this game.
-	 * 
-	 * @return
-	 * 		Ranked players.
-	 */
 	public Ranks getOrderedPlayers();
 }

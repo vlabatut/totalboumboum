@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -51,11 +51,9 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.control.system.ServerSytemControl;
-import org.totalboumboum.engine.loop.display.player.DisplayWaitMessage;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
@@ -143,7 +141,7 @@ public class ServerLoop extends LocalLoop
 		while(i.hasNext())
 		{	// location
 			PlayerLocation pl = initialPositions[j];
-			Tile tile = level.getTile(pl.getRow(),pl.getCol());
+			Tile tile = level.getTile(pl.getLine(),pl.getCol());
 			
 			// sprite
 			Profile profile = i.next();
@@ -153,16 +151,13 @@ public class ServerLoop extends LocalLoop
 			pauseAis.add(false);
 			lastActionAis.add(0l);
 			
-			// record/transmit creation event
-			SpriteCreationEvent creationEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
-			RoundVariables.writeEvent(creationEvent);
-			// record/transmit insertion event
-			SpriteInsertionEvent insertionEvent = new SpriteInsertionEvent(player.getSprite());
-			RoundVariables.writeEvent(insertionEvent);
-
+			// record/transmit event
+			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.writeEvent(spriteEvent);
+			
 			// level
 			Hero hero = (Hero)player.getSprite();
-//			level.addHero(hero,pl.getRow(),pl.getCol());
+//			level.addHero(hero,pl.getLine(),pl.getCol());
 			
 			// initial items
 			for(Entry<String,Integer> entry: items.entrySet())
@@ -193,39 +188,8 @@ public class ServerLoop extends LocalLoop
 	@Override
 	protected void finishLoopInit()
 	{	super.finishLoopInit();
-		waitForClients();
-	}
-	
-	/**
-	 * some kind of simplified display loop
-	 */
-	private void waitForClients()
-	{	// add message to display manager
-		DisplayWaitMessage waitMessage = new DisplayWaitMessage(this);
-		displayManager.addDisplay(waitMessage);
-		
 		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		while(!connection.areAllClientsReady())
-		{	// sleep a bit
-			try
-			{	Thread.sleep(100);
-			}
-			catch (InterruptedException ex)
-			{	//ex.printStackTrace();
-			}
-
-			level.update(); // not really usefull since it's supposedly all black
-			updateWaitMessage();
-			panel.paintScreen();
-		}
-		
-		// remove message
-		displayManager.removeDisplay(waitMessage);
-	}
-	
-	private void updateWaitMessage()
-	{
-		//TODO not used for now
+		connection.waitForClients();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -256,8 +220,6 @@ public class ServerLoop extends LocalLoop
 			updateLogs();
 			updateCelebration();
 			updateEntries();
-			updateSuddenDeath();
-			remoteControls.update();
 			level.update();		
 			updateAis();
 			updateStats();
@@ -269,15 +231,16 @@ public class ServerLoop extends LocalLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(SystemControlEvent event)
-	{	super.processEvent(event);
-		
-		String name = event.getName();
+	{	String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
 			switchAiPause(index);
+		}
+		else
+		{	super.processEvent(event);
 		}
 	}
 

@@ -24,45 +24,37 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * GROUPE ROUGE
+ * Lara Özdöker && Sercan Özen
  * 
- * classe principale de l'IA, qui dÃ©finit son comportement.
+ * classe principale de l'IA, qui définit son comportement.
  * 
  * 
- * @author Gizem Lara Ã–zdÃ¶ker
- * @author Sercan Ã–zen
+ * @author Lara Ozdoker
+ * @author Sercan Ozen
  *
  */
-@SuppressWarnings("deprecation")
 public class OzdokerOzen extends ArtificialIntelligence
 {	
-	/** pour l'aire */
+	//pour l'aire
 	AiZone gameZone;
 	
 	 //pour les sortie dans API
 	
-	/** pour notre hero */
+	//pour notre hero
 	private AiHero notreHero;
 	
 	//pour nos cibles
-	/** */
 	AiTile notreCible=null;
-	/** */
 	AiTile notreCibleMur=null;
-	/** */
 	AiTile notreCibleBonus=null;
-	/** */
 	AiTile notreCibleEnemy=null;
-	/** */
 	AiTile notreCibleEnemyFirstTile=null;
-	/** */
 	AiTile adversairePrecise=null;
 	
 	/** les listes pour on va poser bombe */
 	int notreCibleSize;
-	/** */
 	int special=1;
 	
-	/** */
 	List<AiTile> bomBom=new ArrayList<AiTile>();
 	/** tiles pour fuir! */
 	List<AiTile> tilesFuir=new ArrayList<AiTile>(); 
@@ -71,9 +63,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/** l'index de notre cible dans cette list */
 	int indexCibleAdversaire=0;
 	
-	/** wait */
+	//wait
 	boolean wait=false;
-	/** risk */
+	//risk
 	boolean risk=false;
 	
 	/** longueur de la zone */
@@ -90,13 +82,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	/** autorisations de poser bombe et deplacement */
 	private boolean permissionPoseBombe=false;
-	/** */
 	boolean attackAdversaire=false;
-	/** */
 	boolean detruireMur=false;
-	/** */
 	boolean collecteBonus=false;
-	/** */
 	boolean arriverACible=false;
 	
 	/**Cost calculateur*/
@@ -122,13 +110,12 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**un object de class OutilesMur */
 	OutilsMur outilesMur;
 	
-	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
-	@Override
+	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		// avant tout : test d'interruption
 		checkInterruption();		
-		//on a reÃ§u la zone du jeu
+		//on a reçu la zone du jeu
 		gameZone = getPercepts();
 
 		//on painte l'ecran
@@ -153,8 +140,8 @@ public class OzdokerOzen extends ArtificialIntelligence
 		
 		// initialisation et calculation de matrice de la collecte avec des fonctions
 		//de gorupe rouge l'annee dernier.
-		//ATTETION: cettes initialitions ne sont pas compliquÃ©s
-		//elles seulement donnent les valeurs Ã  la matrice
+		//ATTETION: cettes initialitions ne sont pas compliqués
+		//elles seulement donnent les valeurs à la matrice
 		this.initialiseMatrice(matrice, gameZone);
 		this.fillBombsMatrice(matrice, gameZone);
 		this.fillBlocksMatrice(matrice, gameZone);
@@ -193,7 +180,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 		//System.out.println("---------~~~~~~~------------");
 		//System.out.println("permisin bombe: " +permissionPoseBombe);
 		//System.out.println("attack adver "+attackAdversaire+" detruire mur: "+ detruireMur);
-		//System.out.println("k  eye : "+outilesAttaque.avoirSurUnBaril(adversairePrecise,special));
+		//System.out.println("köþeye : "+outilesAttaque.avoirSurUnBaril(adversairePrecise,special));
 		//System.out.println("kodidor : "+outilesAttaque.avoirSurUnCoridor(adversairePrecise,special));
 		//System.out.println("Special: "+special);
 		//System.out.println("Arriver a cible: "+arriverACible);
@@ -291,7 +278,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 					AiHero enemy=adversairePlusProche();
 					
 					if(enemy!=null){ //System.out.println("9");
-						//On peut arriver Ã  l'adversaire
+						//On peut arriver à l'adversaire
 						//Attaquer adversaire 
 						adversairePrecise=enemy.getTile();
 						//Si on doit calcule nouveaux cibles
@@ -364,13 +351,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * 
 	 * @param matrice
-	 * 		description manquante !
 	 * @param notreHero
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private boolean guvendemiyiz(int[][] matrice,AiHero notreHero)throws StopRequestException{
 		checkInterruption();
@@ -390,7 +373,6 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */	
 	private void initialiseMatrice(int[][] matrice, org.totalboumboum.ai.v201011.adapter.data.AiZone gameZone)
 	throws StopRequestException {
@@ -401,7 +383,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 				for (int j = 0; j < width; j++) {
 					checkInterruption();
-					//butun alanlar  guvenli dusunuyoruz! 
+					//butun alanlarý guvenli dusunuyoruz! 
 					matrice[i][j] = 1;
 				}
 		}
@@ -417,7 +399,6 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void fillBombsMatrice(int[][] matrice,AiZone gameZone)
 			throws StopRequestException {
@@ -429,7 +410,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiBomb bomb = iteratorBombs.next();
 			matrice[bomb.getLine()][bomb.getCol()] = -1;
 			
-			//pour les API, on a donnÃ© une color
+			//pour les API, on a donné une color
 			//ecran.setTileColor(bomb.getLine(), bomb.getCol(), Color.CYAN);
 			//ecran.setTileText(bomb.getLine(), bomb.getCol(), "BOMBA");
 			
@@ -457,7 +438,6 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void fillBlocksMatrice(int[][] matrice, AiZone gameZone)
 	throws StopRequestException {
@@ -469,7 +449,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	AiBlock block = iteratorBlocks.next();
 	if (block.isDestructible()){
 		matrice[block.getLine()][block.getCol()] = 5;
-		//pour les API, on a donnÃ© une color
+		//pour les API, on a donné une color
 		//ecran.setTileColor(block.getLine(), block.getCol(), Color.LIGHT_GRAY);
 		}else{
 			matrice[block.getLine()][block.getCol()] = 0;
@@ -486,7 +466,6 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void fillFiresMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -498,7 +477,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiFire fire = iteratorFires.next();
 			matrice[fire.getLine()][fire.getCol()] = -2;
 			/**
-			//pour les API, on a donnÃ© une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(fire.getLine(), fire.getCol(), Color.white);
 			ecran.setTileText(fire.getTile(), "BOMB!");
 			*/
@@ -514,7 +493,6 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private void fillItemsBonus(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
@@ -526,7 +504,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiItem item = iteratorItems.next();
 			matrice[item.getLine()][item.getCol()] = 10;
 			/**
-			//pour les API, on a donnÃ© une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(item.getLine(), item.getCol(), Color.CYAN);
 			ecran.setTileText(item.getTile(), "BONUS!");
 			*/
@@ -536,15 +514,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui retuorne la duration de bombe
 	 * @param tile
-	 * 		description manquante !
 	 * @param matrice
-	 * 		description manquante !
 	 * @param gameZone
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException 
-	 * 		description manquante !
 	 */
 	long bombTime(AiTile tile,int[][] matrice,AiZone gameZone) throws StopRequestException{
 		checkInterruption();
@@ -566,15 +539,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui notre hero utilise pour deplacement dans le mode attack 
 	 * @param nextMove
-	 * 		description manquante !
 	 * @param uneHero
-	 * 		description manquante !
 	 * @param matrice
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private AiAction attackAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
 		checkInterruption();
@@ -610,15 +578,15 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path BoÃ¹ BoÃ¹ BO ");
+			//System.out.println("Path BOÞ BOÞ BOÞ");
 
 		}
-		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arrivÃ© Ã  notre cible? 
+		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
 			if(nextMove.getTiles().size()==1){// oui, on l'est arrive
 				permissionPoseBombe=true;
 				arriverACible=true;
 				check=false;
-			}else{//Non, on n'est pas arrivÃ© Ã  notre cible
+			}else{//Non, on n'est pas arrivé à notre cible
 				cible=nextMove.getLastTile();
 				//on prend le tile avant pour controler des dangeurs
 				if(nextMove.getTiles().size()>1)
@@ -638,7 +606,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 						check=false;
 				}else{
 					//Alez-y
-					if(attackAdversaire){//on deplace Ã  notre adversaire 
+					if(attackAdversaire){//on deplace à notre adversaire 
 						check=true;
 						dx = (controlTile.getLine()) - (notreHero.getLine());
 						dy = (controlTile.getCol()) - (notreHero.getCol());
@@ -680,15 +648,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui notre hero utilise pour deplacement dans le mode collecte
 	 * @param nextMove
-	 * 		description manquante !
 	 * @param uneHero
-	 * 		description manquante !
 	 * @param matrice
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private AiAction collecteAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
 		checkInterruption();
@@ -718,28 +681,28 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path BoÃ¹ BoÃ¹ BO ");
+			//System.out.println("Path BOÞ BOÞ BOÞ");
 
 		}
-		else{ //Oui il y a de path,mais est-ce que on est arrivÃ© Ã  notre cible? 
+		else{ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
 			if(nextMove.getTiles().size()==1){// oui, on l'est arrive
 				if(!collecteBonus){
 					permissionPoseBombe=true;
 				}
 				arriverACible=true;
 				check=false;
-			}else{//Non, on n'est pas arrivÃ© Ã  notre cible
+			}else{//Non, on n'est pas arrivé à notre cible
 				@SuppressWarnings("unused")
 				AiTile cible=nextMove.getLastTile();
 				//on prend le tile avant pour controler des dangeurs
 				controlTile=nextMove.getTile(1);
 				if(!risk && matrice[controlTile.getLine()][controlTile.getCol()]==tileControleur.SCOPE){
 					//arreter car il y a des risk
-					//ge er ge mez hesaab  yap lcak unutma///
+					//geçer geçmez hesaabý yapýlcak unutma///
 					check=false;
 				}else{
 					//Alez-y
-					if(collecteBonus){//on deplace Ã  notre adversaire 
+					if(collecteBonus){//on deplace à notre adversaire 
 						check=true;
 						dx = (controlTile.getLine()) - (notreHero.getLine());
 						dy = (controlTile.getCol()) - (notreHero.getCol());
@@ -781,15 +744,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui notre hero utilise pour deplacement pour fuir
 	 * @param nextMove
-	 * 		description manquante !
 	 * @param uneHero
-	 * 		description manquante !
 	 * @param matrice
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private AiAction fuirAction(AiPath nextMove,AiHero uneHero,int[][] matrice) throws StopRequestException {
 		checkInterruption();
@@ -818,10 +776,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path BoÃ¹ BoÃ¹ BO ");
+			//System.out.println("Path BOÞ BOÞ BOÞ");
 
 		}
-		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arrivÃ© Ã  notre cible? 
+		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
 				cible=nextMove.getLastTile();
 				AiTile controlTile;
 				if(nextMove.getTiles().size()>1)
@@ -865,16 +823,14 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	/**
 	 * Methode qui a alogrithm pour fuir
-	 * Ã§a utilise aussi methode de fuirAction()
-	 * @return ?
-	 * 		description manquante !
+	 * Ça utilise aussi methode de fuirAction()
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	private AiAction fuir() throws StopRequestException{
 		checkInterruption();
 		risk=true;
-		//System.out.println("Kacma fonksiyonu  al Ã©tÃ©");
+		//System.out.println("Kacma fonksiyonu çalýþtý");
 		permissionPoseBombe=false;		
 		//on cree les lists des tiles pour utiliser apres
 		List<AiTile> tilesAvecRisk=new ArrayList<AiTile>();
@@ -883,7 +839,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 		//on prend les tiles secures, mais cettes tiles avant qu'on pose bombe 
 		tileControleur.tilePossibleArriveAvecRisk(debut, tilesAvecRisk, scopes, matrice);	
 		//On cree une list tile qui on peut passer
-		//pour Ã§a, on ajouter le tile de notre hero(Si on est dessus le bomb,on n'est pas dans secure!)
+		//pour ça, on ajouter le tile de notre hero(Si on est dessus le bomb,on n'est pas dans secure!)
 		//Et tiles scopes,et tiles possible
 		
 		for(int i=0;i<scopes.size();i++){
@@ -904,7 +860,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			tileControleur.tierLesTilesParDistanceEtAccebilite(tilesAvecRisk, notreCibleBonus);
 		else
 			tileControleur.tierLesTilesParDistanceEtAccebilite(tilesAvecRisk);
-		//System.out.println("bomba say s  :"+notreHero.getBombNumberCurrent());
+		//System.out.println("bomba sayýsý :"+notreHero.getBombNumberCurrent());
 			if(tilesFuir==null){
 				if(tilesAvecRisk.size()==0){
 					AiAction b=new AiAction(AiActionName.NONE);
@@ -912,7 +868,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 				}else{
 				//on cree un path 
 				pathAmeliorer=tileControleur.calculateShortestPath(notreHero, debut, tilesAvecRisk.get(0));
-				p("g venliyer",tilesAvecRisk.get(0));
+				p("güvenliyer",tilesAvecRisk.get(0));
 				AiAction a=fuirAction(pathAmeliorer,notreHero,matrice);
 				return a;}
 			}else{
@@ -929,11 +885,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Methode qui retuorne un adversaire plus proche et possible de arrivÃ©e
+	 * Methode qui retuorne un adversaire plus proche et possible de arrivée
 	 * @return
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiHero adversairePlusProche() throws StopRequestException{
 		checkInterruption();
@@ -973,9 +927,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	 * Methode qui retuorne un adversaire plus proche dans le zone
 	 * il y a possiblite de ne pas arriver 
 	 * @return
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiHero adversairePlusProcheMaisPasArriver() throws StopRequestException{
 		checkInterruption();
@@ -1010,11 +962,8 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * Methode qui retourne le bombe du tile scope qu'on est dessus
 	 * @param scope
-	 * 		description manquante !
 	 * @return
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiBomb bombMemeDirection(AiTile scope) throws StopRequestException{
 		checkInterruption();
@@ -1036,11 +985,11 @@ public class OzdokerOzen extends ArtificialIntelligence
 	/**
 	 * methode qui ecrit les tiles dans le console
 	 * @param title
-	 * 		description manquante !
 	 * @param a
-	 * 		description manquante !
 	 */
 	public void p(String title,AiTile a){
 		//System.out.println(title+": "+a);
 	}
 }
+
+

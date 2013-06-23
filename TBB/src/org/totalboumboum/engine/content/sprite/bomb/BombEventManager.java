@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.bomb;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,7 +31,6 @@ import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
-import org.totalboumboum.engine.content.feature.action.crush.SpecificCrush;
 import org.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
 import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.feature.action.land.SpecificLand;
@@ -71,8 +70,6 @@ public class BombEventManager extends EventManager
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
-		else if(event.getAction() instanceof SpecificCrush)
-			actionCrush(event);
 		else if(event.getAction() instanceof SpecificDrop)
 			actionDrop(event);
 		else if(event.getAction() instanceof SpecificPunch)
@@ -103,16 +100,6 @@ public class BombEventManager extends EventManager
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 				sprite.makeExplosion(false);
 			}
-		}
-	}
-	
-	private void actionCrush(ActionEvent event)
-	{	// crushed by a block: just disappear
-		if(gesture.equals(GestureName.APPEARING)
-			|| gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING) 
-			|| gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING_FAILING) 
-			|| gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING))
-		{	endSprite();
 		}
 	}
 	
@@ -184,8 +171,6 @@ public class BombEventManager extends EventManager
 			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
-		else if(event.getName().equals(EngineEvent.START_FALL))
-			engStartFall(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
@@ -355,9 +340,9 @@ public class BombEventManager extends EventManager
 			}
 			else
 			{
-				//NOTE prÃ©voir le cas oÃ¹ la bombe ne peut pas pÃ©ter, il faut le remettre au prochain instant
-				// sauf que certains Ã©tats prÃ©voient une rÃ©init du timer au changement d'Ã©tat (ex : bouncing)
-				// >> en fait pas ds toutes les instances. -> mettre un paramÃ¨tre (ability)
+				//NOTE prévoir le cas où la bombe ne peut pas péter, il faut le remettre au prochain instant
+				// sauf que certains états prévoient une réinit du timer au changement d'état (ex : bouncing)
+				// >> en fait pas ds toutes les instances. -> mettre un paramètre (ability)
 			}
 		}
 		// flame-caused explosion
@@ -389,27 +374,14 @@ public class BombEventManager extends EventManager
 			ActionAbility ability = sprite.modulateAction(specificAction);
 			// the sprite is allowed to land
 			if(ability.isActive())
-				gesture = GestureName.LANDING;
+			{	gesture = GestureName.LANDING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			}
 			// the sprite is not allowed to land
 			else
-				gesture = GestureName.BOUNCING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
-		// the sprite is falling (sudden death)
-		else if(gesture.equals(GestureName.FALLING))
-		{	SpecificAction action = new SpecificLand(sprite);
-			ActionAbility a = sprite.modulateAction(action);
-			// the sprite is allowed to land
-			if(a.isActive())
-			{	gesture = GestureName.LANDING;
-				spriteDirection = Direction.DOWN;
-			}
-			else
 			{	gesture = GestureName.BOUNCING;
-				// bounces in a random direction
-				spriteDirection = Direction.getRandomPrimaryDirection();
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 		// the sprite is landing
 		else if(gesture.equals(GestureName.LANDING))
@@ -445,7 +417,7 @@ public class BombEventManager extends EventManager
 			}
 			// cannot appear >> wait for next iteration
 			else
-			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
+			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);		
 			}
 		}
 	}
@@ -459,13 +431,6 @@ public class BombEventManager extends EventManager
 		}
 	}
 
-	private void engStartFall(EngineEvent event)
-	{	if(gesture.equals(GestureName.NONE))
-		{	gesture = GestureName.FALLING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
-	}
-// TODO TODO que fait on pour le contraire, ie un autre objet te tombe dessus
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	

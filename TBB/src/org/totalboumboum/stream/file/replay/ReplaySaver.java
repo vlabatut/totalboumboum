@@ -2,7 +2,7 @@ package org.totalboumboum.stream.file.replay;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,7 +28,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -59,10 +58,6 @@ public class ReplaySaver
 
 	private static Element saveReplayElement(FileServerStream replay)
 	{	Element result = new Element(XmlNames.REPLAY); 
-		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
 		
 		// level
 		Element tournamentElement = saveLevelElement(replay);

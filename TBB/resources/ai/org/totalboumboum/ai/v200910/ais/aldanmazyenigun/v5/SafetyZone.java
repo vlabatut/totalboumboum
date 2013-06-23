@@ -14,56 +14,38 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * on cree la matrice de sÃ©curitÃ© et matrice d'attaque dans cette classe. 
+ * on cree la matrice de sécurité et matrice d'attaque dans cette classe. 
  * 
  * @version 5
  * 
- * @author CansÄ±n Aldanmaz
- * @author YalÃ§Ä±n YenigÃ¼n
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
  *
  */
-@SuppressWarnings("deprecation")
 public class SafetyZone {
 
-	/** */
 	AldanmazYenigun ai;
 
-	/** */
 	AiZone zone;
 
-	/** */
 	private double matrix[][];
 	
-	/** */
 	private double attackMatrix[][];
 
-	/** */
 	private double SAFE = 0;
 
-	/** */
 	private double FIRE = 10000;
 
-	/** */
 	private double BLOCKDEST = 80000;
-	/** */
 	private double BLOCKINDEST =81111;
 	
 
-	/** */
 	private double BOMB = 11;
-	/** */
 	private double BONUS =-1;
 	
-	/** */
 	private double HERO = -2;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public SafetyZone(AldanmazYenigun ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -74,11 +56,6 @@ public class SafetyZone {
 		fillAttackMatrix();
 	}
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void fillSafetyMatrix() throws StopRequestException {
 		ai.checkInterruption();
 
@@ -104,12 +81,12 @@ public class SafetyZone {
 				Collection<AiBlock> blocks = tile.getBlocks();
 				Collection<AiItem> items= tile.getItems();
 
-				// s'il y a du feu : valeur zÃ©ro (il ne reste pas de temps avant
+				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant
 				// l'explosion)
 				if (!fires.isEmpty()) {
 					matrix[line][col] = FIRE;
 				}
-				// s'il y a un mur en train de brÃ»ler : pareil
+				// s'il y a un mur en train de brûler : pareil
 				/*
 				 * else if(!heros.isEmpty()) matrix[line][col]=1;
 				 */
@@ -249,12 +226,6 @@ public class SafetyZone {
 				}
 			}
 		}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void fillAttackMatrix() throws StopRequestException {
 		ai.checkInterruption();
 
@@ -281,7 +252,7 @@ public class SafetyZone {
 				Collection<AiHero> heros = tile.getHeroes();
 				AiHero ownHero = zone.getOwnHero();
 
-				// s'il y a du feu : valeur zÃ©ro (il ne reste pas de temps avant
+				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant
 				// l'explosion)
 				if (!fires.isEmpty()) {
 					attackMatrix[line][col] = FIRE;
@@ -295,7 +266,7 @@ public class SafetyZone {
 					else
 						attackMatrix[line][col] =BLOCKINDEST;
 				}
-				// s'il y a un mur en train de brÃ»ler : pareil
+				// s'il y a un mur en train de brûler : pareil
 				/*
 				 * else if(!heros.isEmpty()) matrix[line][col]=1;
 				 */
@@ -408,52 +379,20 @@ public class SafetyZone {
 		}
 	}
 			
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double[][] getMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return matrix;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double[][] getAttackMatrix() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		return attackMatrix;
 	}
 
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public double getCaseLevel(int line, int col) {
 		return matrix[line][col];
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public double getDangerLevel(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 		int line = tile.getLine();
@@ -462,17 +401,6 @@ public class SafetyZone {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param x1
-	 * 		Description manquante !
-	 * @param y1
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isBonus(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -483,17 +411,6 @@ public class SafetyZone {
 		return resultat;
 	}
 
-	/**
-	 * 
-	 * @param x1
-	 * 		Description manquante !
-	 * @param y1
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isSafe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -503,17 +420,6 @@ public class SafetyZone {
 		return resultat;
 	}
 	
-	/**
-	 * 
-	 * @param x1
-	 * 		Description manquante !
-	 * @param y1
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean abstractIsSafe(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -523,17 +429,6 @@ public class SafetyZone {
 		return resultat;
 	}
 	
-	/**
-	 * 
-	 * @param x1
-	 * 		Description manquante !
-	 * @param y1
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isHero(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -543,17 +438,6 @@ public class SafetyZone {
 		return resultat;
 	}
 	
-	/**
-	 * 
-	 * @param x1
-	 * 		Description manquante !
-	 * @param y1
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean iswall(int x1, int y1) throws StopRequestException {
 		ai.checkInterruption();
 		boolean resultat = false;
@@ -565,5 +449,6 @@ public class SafetyZone {
 				resultat = true;
 		}
 		return resultat;
+
 	}
 }

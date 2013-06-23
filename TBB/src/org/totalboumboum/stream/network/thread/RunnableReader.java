@@ -2,7 +2,7 @@ package org.totalboumboum.stream.network.thread;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -142,7 +142,6 @@ System.out.println(">>"+message);
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	private Lock finishLock = new ReentrantLock();
 		
@@ -155,10 +154,6 @@ System.out.println(">>"+message);
 		return result;
 	}
 	
-	/**
-	 * Cleanly finishes this object,
-	 * possibly freeing some memory.
-	 */
 	public void finish()
 	{	finishLock.lock();
 		{	finished = true;

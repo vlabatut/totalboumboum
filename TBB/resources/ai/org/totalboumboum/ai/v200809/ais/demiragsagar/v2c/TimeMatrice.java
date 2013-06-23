@@ -10,41 +10,21 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author DoÄŸus Burcu DemiraÄŸ
- * @author Zeynep Åžagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
-@SuppressWarnings("deprecation")
 public class TimeMatrice {
-	/** */
 	private List<AiTile> caseBombes;
-	/** */
 	private long timeMatrice[][];
-	/** */
 	private AiZone zone;
-	/** */
 	private int defaultPortee;
-	/** */
 	private long durationNormale;
-	/** */
 	private int extendTime;
-	/** */
 	private boolean debug;
 	
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param defaultPortee
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public TimeMatrice(AiZone zone,int defaultPortee, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -56,88 +36,44 @@ public class TimeMatrice {
 		this.debug=false;
 		createTimeMatrice();
 	}
-	/**
-	 * 
-	 * @param defaultPortee
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setDefaultPortee(int defaultPortee) throws StopRequestException {
 		ai.checkInterruption();
 		this.defaultPortee=defaultPortee;
 	}
-	/**
+	/*
 	 * Donner une valeur a une case de la matrice du temps
-	 * @param col 
-	 * 		Description manquante !
-	 * @param line 
-	 * 		Description manquante !
-	 * @param time 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void putTime(int col,int line,long time) throws StopRequestException {
 		ai.checkInterruption();
 		this.timeMatrice[col][line]=time;
 	};
-	/**
-	 * Ã§a nous donne la matrice du temps
+	/*
+	 * Ça nous donne la matrice du temps
 	 * Une case contient 0 s'il n y'a aucun danger 
 	 * Sinon il contient le temps restant d'une bombe
-	 * @param col 
-	 * 		Description manquante !
-	 * @param line 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public long getTime(int col,int line) throws StopRequestException {
 		ai.checkInterruption();
 		return this.timeMatrice[col][line];
 	}
-	/**
-	 * @param tile
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void putTime(AiTile tile,long time) throws StopRequestException {
 		ai.checkInterruption();
 		this.putTime(tile.getCol(),tile.getLine(),time);
 	}
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public long getTime(AiTile tile) throws StopRequestException {
 		ai.checkInterruption();
 		return this.getTime(tile.getCol(),tile.getLine());
 	}
-	/**
-	 * CrÃ©ation de la matrice du temps
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	/*
+	 * Création de la matrice du temps
 	 */
 	public void createTimeMatrice() throws StopRequestException {
 		ai.checkInterruption();
 		// ajout des murs dans la matrice pour une seule fois
 		int i, j;
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) // adjustment
+		for (j = 0; j < 15; j++)
 		{	ai.checkInterruption();
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (i = 0; i < 17; i++)
 			{	ai.checkInterruption();
 				if (Functions.hasWall(this.zone.getTile(j, i),ai))
 					this.putTime(i,j,-1);
@@ -146,26 +82,18 @@ public class TimeMatrice {
 			}
 		}
 	}
-	/**
+	/*
 	 * S'il ya un mur dans une case on voit -1 
 	 * On augmente la valeur d'une case selon le nombre des bombes qui affectent cette case
-	 * @param zone 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public int[][] getBombMatrice(AiZone zone) throws StopRequestException {
 		ai.checkInterruption();
 		int[][] maMatrice = new int[17][16];
 		int etki;
 		int i, j;
-//		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) // adjustment
+		for (j = 0; j < 15; j++)
 		{	ai.checkInterruption();
-//			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (i = 0; i < 17; i++)
 			{	ai.checkInterruption();
 				if (Functions.hasWall(zone.getTile(j, i),ai))
 					maMatrice[i][j] = -1;
@@ -207,22 +135,10 @@ public class TimeMatrice {
 		return maMatrice;
 
 	}
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void printTimeMatrice() throws StopRequestException {
 		ai.checkInterruption();
 		Functions.printMatrice(this.timeMatrice,ai);
 	}
-	/**
-	 * 
-	 * @param nouvelleBombes
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void updateTimeMatrice(List<AiTile> nouvelleBombes) throws StopRequestException {
 		ai.checkInterruption();
 		if (this.debug)
@@ -234,11 +150,9 @@ public class TimeMatrice {
 		if(debug)
 			System.out.println("Elapsed time : "+elapsedTime);
 		if (elapsedTime > 0) {
-//			for (j = 0; j < 15; j++)
-			for (j = 0; j < zone.getHeight(); j++) // adjustment
+			for (j = 0; j < 15; j++)
 			{	ai.checkInterruption();
-//				for (i = 0; i < 17; i++)
-				for (i = 0; i < zone.getWidth(); i++) //adjustment
+				for (i = 0; i < 17; i++)
 				{	ai.checkInterruption();
 					if(zone.getTile(j, i).getFires().isEmpty())
 					{						
@@ -313,20 +227,8 @@ public class TimeMatrice {
 			this.caseBombes = nouvelleBombes;
 		}
 	}
-	/**
+	/*
 	 * Controle si les effets des bombes sont vrais
-	 * @param col 
-	 * 		Description manquante !
-	 * @param lig 
-	 * 		Description manquante !
-	 * @param temp2 
-	 * 		Description manquante !
-	 * @param port 
-	 * 		Description manquante !
-	 * @param nombre 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) throws StopRequestException {
 		ai.checkInterruption();
@@ -390,13 +292,6 @@ public class TimeMatrice {
 		down=true;	
 	}
 
-	/**
-	 * 
-	 * @param temp
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void placerNouvelleBombe(AiTile temp) throws StopRequestException {
 		ai.checkInterruption();
 		if(this.debug) System.out.println("nouvelle bombe");
@@ -419,7 +314,7 @@ public class TimeMatrice {
 					// stop
 					up = false;
 				else // Si 0 alors durationNormale
-				// dolu ise kucuk olan
+				// dolu ise kucuk olaný
 				// Si plein ,la petite 
 				if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == 0)
 					this.timeMatrice[temp.getCol()][temp.getLine() - step] = this.durationNormale;
@@ -469,17 +364,7 @@ public class TimeMatrice {
 
 	}
 	
-	/**
-	 * 
-	 * @param temp
-	 * 		Description manquante !
-	 * @param portee
-	 * 		Description manquante !
-	 * @param min
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	public void diffuseEffetMatrice(AiTile temp, int portee, long min) throws StopRequestException {
 		ai.checkInterruption();
 		//Allez dans les 4 directions dans la longeur de la portee

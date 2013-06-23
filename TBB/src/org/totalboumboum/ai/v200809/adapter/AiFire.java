@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.adapter;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,22 +24,20 @@ package org.totalboumboum.ai.v200809.adapter;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * reprÃ©sente un feu du jeu, ie une projection mortelle rÃ©sultant (gÃ©nÃ©ralement) 
+ * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class AiFire extends AiSprite<Fire>
 {
 	/**
-	 * crÃ©e une reprÃ©sentation du feu passÃ© en paramÃ¨tre, et contenue dans 
-	 * la case passÃ©e en paramÃ¨tre.
+	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite Ã  reprÃ©senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);
@@ -74,7 +72,7 @@ public class AiFire extends AiSprite<Fire>
 	
 	/**
 	 * renvoie le type du feu
-	 * @return	une valeur de type AiFireType reprÃ©sentant le type de feu
+	 * @return	une valeur de type AiFireType représentant le type de feu
 	 */
 	public AiFireType getType()
 	{	return type;	

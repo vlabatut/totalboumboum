@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import org.totalboumboum.engine.content.feature.action.consume.GeneralConsume;
-import org.totalboumboum.engine.content.feature.action.crush.GeneralCrush;
 import org.totalboumboum.engine.content.feature.action.cry.GeneralCry;
 import org.totalboumboum.engine.content.feature.action.detonate.GeneralDetonate;
 import org.totalboumboum.engine.content.feature.action.drop.GeneralDrop;
@@ -33,9 +32,6 @@ public enum ActionName implements Serializable
 	/** burning another object, usually performed by fire */
 	CONSUME,
 	
-	/** destroy an object by landing on it (e.g.: block falling during the sudden-death */
-	CRUSH,
-	
 	/** crying for a defeat, at the end of a round. always performed by a hero */
 	CRY,
 	
@@ -54,7 +50,7 @@ public enum ActionName implements Serializable
 	/** begining an aerial move (hero jumping) */
 	JUMP,
 	
-	/** finishing an aerial move (hero/bomb/block landing on the ground) */
+	/** finishing an aerial move (hero or bomb landing on the ground) */
 	LAND,
 	
 	/** in-air moving (in the plane) */ 
@@ -88,8 +84,6 @@ public enum ActionName implements Serializable
 			result = new GeneralAppear();
 		else if(this==CONSUME)
 			result = new GeneralConsume();
-		else if(this==CRUSH)
-			result = new GeneralCrush();
 		else if(this==CRY)
 			result = new GeneralCry();
 		else if(this==DETONATE)

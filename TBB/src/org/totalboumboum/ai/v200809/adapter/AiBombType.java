@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.adapter;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,28 +26,26 @@ package org.totalboumboum.ai.v200809.adapter;
  * types de bombes reconnus par l'IA.
  * 	
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public enum AiBombType
 {
 	/** bombe normale */
 	NORMAL,
-	/** bombe pÃ©nÃ©trante (la flamme n'est pas arrÃ©tÃ©e par les les objets destructibles) */
+	/** bombe pénétrante (la flamme n'est pas arrêtée par les les objets destructibles) */
 	PENETRATION,
-	/** bombe tÃ©lÃ©commandÃ©e par le joueur (elle explose quand le joueur le lui demande) */
+	/** bombe télécommandée par le joueur (elle explose quand le joueur le lui demande) */
 	REMOTE,
-	/** bombe Ã  la fois pÃ©nÃ©trante et tÃ©lÃ©commandÃ©e */
+	/** bombe à la fois pénétrante et télécommandée */
 	REMOTE_PENTRATION,
 	/** autre type de bombes */
 	OTHER;	
 	
 	/**
-	 * calcule l'AiBombType correspondant au nom de bombe passÃ© en paramÃ¨tre
+	 * calcule l'AiBombType correspondant au nom de bombe passé en paramètre
 	 * 
-	 * @param name	nom de la bombe Ã  traiter
-	 * @return	symbole reprÃ©sentant ce type de bombe
+	 * @param name	nom de la bombe à traiter
+	 * @return	symbole représentant ce type de bombe
 	 */
 	public static AiBombType makeBombType(String name)
 	{	AiBombType result;

@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.profiles.edit;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -36,13 +36,11 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import javax.swing.text.JTextComponent;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -59,10 +57,8 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.menus.profiles.ais.SelectedAiSplitPanel;
 import org.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -94,16 +90,16 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		// data
 		{	EmptySubPanel subPanel = (EmptySubPanel)dataPart;
 			EmptyContentPanel contentPanel = subPanel.getDataPanel();
-			contentPanel.setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+			contentPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
-			int lineHeightEstimation = (subPanel.getDataHeight() - (LINE_COUNT+2)*GuiSizeTools.subPanelMargin) / (LINE_COUNT+1);
-			int heightEstimation = (lineHeightEstimation*LINE_COUNT) + (LINE_COUNT+1)*GuiSizeTools.subPanelMargin;
+			int lineHeightEstimation = (subPanel.getDataHeight() - (LINE_COUNT+2)*GuiTools.subPanelMargin) / (LINE_COUNT+1);
+			int heightEstimation = (lineHeightEstimation*LINE_COUNT) + (LINE_COUNT+1)*GuiTools.subPanelMargin;
 			editPanel = new LinesSubPanel(subPanel.getDataWidth(),heightEstimation,Mode.BORDER,LINE_COUNT,1,false);
 			editPanel.setOpaque(false);
 			int lineHeight = editPanel.getLineHeight();
 			int lineFontSize = editPanel.getLineFontSize();
 			int lineWidth = editPanel.getDataWidth();
-			int nameHeight = subPanel.getDataHeight() - heightEstimation - GuiSizeTools.subPanelMargin;
+			int nameHeight = subPanel.getDataHeight() - heightEstimation - GuiTools.subPanelMargin;
 			
 			// main panel
 			{	BoxLayout layout = new BoxLayout(contentPanel,BoxLayout.PAGE_AXIS); 
@@ -129,12 +125,12 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					label.setPreferredSize(dim);
 					label.setMaximumSize(dim);
 					label.setOpaque(true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					label.setBackground(bg);
 					String key = GuiKeys.MENU_PROFILES_EDIT_NAME;
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 					label.setToolTipText(tooltip);
-					BufferedImage icon = GuiImageTools.getIcon(key);
+					BufferedImage icon = GuiTools.getIcon(key);
 					double zoom = nameHeight/(double)icon.getHeight();
 					icon = ImageTools.getResizedImage(icon,zoom,true);
 					ImageIcon icn = new ImageIcon(icon);
@@ -144,68 +140,38 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				}				
 				namePanel.add(Box.createGlue());
 				// text pane
-				{	Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
-					if(useJTextPane)
-					{	JTextPane pane = new JTextPane()
-						{	private static final long serialVersionUID = 1L;
-							public void paintComponent(Graphics g)
-						    {	Graphics2D g2 = (Graphics2D) g;
-					        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-					        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-					        	super.paintComponent(g2);
-						    }			
-						};
-						pane.setEditable(true);
-						pane.setOpaque(true);
-						pane.setAlignmentX(Component.CENTER_ALIGNMENT);
-						sa = new SimpleAttributeSet();
-						StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER/*JUSTIFIED*/);
-						Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
-						StyleConstants.setFontFamily(sa,font.getFamily());
-						StyleConstants.setFontSize(sa,font.getSize());
-						StyleConstants.setForeground(sa,fg);
-						StyledDocument docu = pane.getStyledDocument();
-						docu.setParagraphAttributes(0,docu.getLength()+1,sa,true);
-						docu.addDocumentListener(this);
-						namePanel.add(pane);
-						textPane = pane;
-						doc = docu;
-					}
-					// much faster when using a JTextArea instead of the JTextPane
-					else
-					{	JTextArea textArea = new JTextArea()
-						{	private static final long serialVersionUID = 1L;
-							public void paintComponent(Graphics g)
-						    {	Graphics2D g2 = (Graphics2D) g;
-					        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-					        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-					        	super.paintComponent(g2);
-						    }			
-						};
-						textArea.setEditable(true);
-						textArea.setOpaque(true);
-						textArea.setLineWrap(true);
-						textArea.setWrapStyleWord(true);
-						Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
-						textArea.setFont(font);
-						textArea.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-						textArea.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
-						doc = textArea.getDocument();
-						doc.addDocumentListener(this);
-						namePanel.add(textArea);
-						textPane = textArea;
-					}
-					
-					int nameWidth = lineWidth - nameHeight - GuiSizeTools.subPanelMargin;
+				{	textPane = new JTextPane()
+					{	private static final long serialVersionUID = 1L;
+						public void paintComponent(Graphics g)
+					    {	Graphics2D g2 = (Graphics2D) g;
+				        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+				        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+				        	super.paintComponent(g2);
+					    }			
+					};
+					textPane.setEditable(true);
+					textPane.setOpaque(true);
+					int nameWidth = lineWidth - nameHeight - GuiTools.subPanelMargin;
 					Dimension dim = new Dimension(nameWidth,nameHeight);
 					textPane.setPreferredSize(dim);
 					textPane.setMinimumSize(dim);
 					textPane.setMaximumSize(dim);
+					textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					textPane.setBackground(bg);
+					Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 					textPane.setForeground(fg);
+					sa = new SimpleAttributeSet();
+					StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER/*JUSTIFIED*/);
+					Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
+					StyleConstants.setFontFamily(sa,font.getFamily());
+					StyleConstants.setFontSize(sa,font.getSize());
+					StyleConstants.setForeground(sa,fg);
+					doc = textPane.getStyledDocument();
+					doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
+					doc.addDocumentListener(this);
+					namePanel.add(textPane);
 				}
-				
 				namePanel.add(Box.createGlue());
 				contentPanel.add(namePanel);
 			}
@@ -218,7 +184,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				int col = 0;
-				int textWidth = lineWidth - 3*iconWidth - 4*GuiSizeTools.subPanelMargin;
+				int textWidth = lineWidth - 3*iconWidth - 4*GuiTools.subPanelMargin;
 				int packWidth = textWidth/2;
 				int nameWidth = textWidth - packWidth;
 				// icon
@@ -226,7 +192,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI,true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -234,7 +200,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,packWidth);
 					ln.setLabelPrefWidth(col,packWidth);
 					ln.setLabelMaxWidth(col,packWidth);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -242,7 +208,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,nameWidth);
 					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelMaxWidth(col,nameWidth);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -251,7 +217,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_RESET,true);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(LINE_AI,col);
 					label.addMouseListener(this);
@@ -263,7 +229,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_CHANGE,true);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(LINE_AI,col);
 					label.addMouseListener(this);
@@ -278,7 +244,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				int col = 0;
-				int textWidth = lineWidth - 2*iconWidth - 3*GuiSizeTools.subPanelMargin;
+				int textWidth = lineWidth - 2*iconWidth - 3*GuiTools.subPanelMargin;
 				int packWidth = textWidth/2;
 				int nameWidth = textWidth - packWidth;
 				// icon
@@ -286,7 +252,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO,true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -294,7 +260,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,packWidth);
 					ln.setLabelPrefWidth(col,packWidth);
 					ln.setLabelMaxWidth(col,packWidth);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -302,7 +268,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	ln.setLabelMinWidth(col,nameWidth);
 					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelMaxWidth(col,nameWidth);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -311,7 +277,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelPrefWidth(col,iconWidth);
 					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO_CHANGE,true);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(LINE_HERO,col);
 					label.addMouseListener(this);
@@ -326,7 +292,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				ln.addLabel(0);
-				int textWidth = lineWidth - 3*iconWidth - 3*GuiSizeTools.subPanelMargin;
+				int textWidth = lineWidth - 3*iconWidth - 3*GuiTools.subPanelMargin;
 				int col = 0;
 				// icon
 				{	ln.setLabelMinWidth(col,iconWidth);
@@ -334,7 +300,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR;
 					ln.setLabelKey(col,key,true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
@@ -350,7 +316,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS;
 					ln.setLabelKey(col,key,true);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(line,col);
 					label.addMouseListener(this);
@@ -363,7 +329,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT;
 					ln.setLabelKey(col,key,true);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					MyLabel label = editPanel.getLabel(line,col);
 					label.addMouseListener(this);
@@ -480,7 +446,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	{	PredefinedColor color = profile.getDefaultSprite().getColor();
 		String text = null;
 		String tooltip = null;
-		Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 		if(color!=null)
 		{	String colorKey = color.toString();
 			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
@@ -488,7 +454,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			tooltip = text;
 			Color clr = color.getColor();
-			int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 		}
 		editPanel.setLabelText(LINE_COLOR,1,text,tooltip);
@@ -499,21 +465,13 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	{	// name
 		String text = profile.getName();
 		String tooltip = text;
-		
-		if(useJTextPane)
-		{	try
-			{	StyledDocument docu = (StyledDocument)doc;
-				docu.remove(0,docu.getLength());
-				docu.insertString(0,text,sa);
-				docu.setParagraphAttributes(0,docu.getLength()+1,sa,true);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
+		try
+		{	doc.remove(0,doc.getLength());
+			doc.insertString(0,text,sa);
+			doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
 		}
-		else
-		{
-			textPane.setText(text);
+		catch (BadLocationException e)
+		{	e.printStackTrace();
 		}
 		textPane.setToolTipText(tooltip);		
 	}
@@ -557,9 +515,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	/////////////////////////////////////////////////////////////////
 	// DOCUMENT LISTENER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean useJTextPane = false;
-	private JTextComponent textPane;
-	private Document doc;
+	private JTextPane textPane;
+	private StyledDocument doc;
 	private SimpleAttributeSet sa;
 
 	@Override

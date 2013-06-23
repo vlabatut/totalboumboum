@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.fireset;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -85,7 +85,7 @@ public class FiresetMapLoader
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				original = (HollowFiresetMap)oIn.readObject(); //TODO fonction Ã  surcharger
+				original = (HollowFiresetMap)oIn.readObject(); //TODO fonction à surcharger
 				//result.setInstance(instance); 
 				oIn.close();
 			}

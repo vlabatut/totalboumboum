@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.trigger;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,25 +37,25 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramÃ¨tre: actor=self
- * 	<br>paramÃ¨tre: target=oui (bombe)
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (bombe)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY REFUSE (gÃ©nÃ©ralement pas utilisÃ©, mais possible)
+ * <p>ABILITY REFUSE (généralement pas utilisé, mais possible)
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramÃ¨tre: actor=oui (hero)
- * 	<br>paramÃ¨tre: target=all
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=all
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  */
 /** 
  * asking a remote bomb to explode.
@@ -72,8 +72,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralTrigger extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

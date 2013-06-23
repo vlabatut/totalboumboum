@@ -10,23 +10,11 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 
-/**
- * @author Koray Mançuhan
- * @author Özgün Pınarer
- */
-@SuppressWarnings("deprecation")
+
 public class RedGroupDefenseCostCalculator extends CostCalculator {
 
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public RedGroupDefenseCostCalculator(ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
 		this.ai = ai;

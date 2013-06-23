@@ -23,81 +23,56 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Ismail Gökhan Altay
- * @author Ertuğrul Basaranoğlu
+ * @author Ismail Gokhan Altay
+ * @author Ertugrul Basaranoglu
  *
  */
-@SuppressWarnings("deprecation")
 public class AltayBasaranoglu extends ArtificialIntelligence {
-	/** la case occupée actuellement par le personnage */
+	/** la case occup�e actuellement par le personnage */
 	private AiTile currentTile;
 
 
 	//***************DEFENCE CONSTANTS****************\\
-	/** */
 	private static final int HERO = -6;
-	/** */
 	private final int BLOCK_INDEST = -5;
-	/** */
 	private final int BLOCK_DEST = -4;
-	/** */
 	private final int FIRE = -3;
-	/** */
 	private final int BOMB = -2;
-	/** */
 	private final int ITEM=-1;
-	/** */
 	private final int SAFE = 0;
-	/** */
 	private int CONSTANT_RUN_AWAY=100;
-	/** */
 	private final int DEFENCE_CONSTANT=200;
 	// Si'il ya danger dans care, matrice prendra une valeur superieur a 0
 	
 	//**********CONSTANTS POUR FONCTIONS RECURSIVES********************\\
-	/** */
 	private final int NON_VISITED = 0;
-	/** */
 	private final int VISITED = 1;
 
 	// VARIABLES DE STRATEGIE
-	/** */
 	private boolean DEFENCE = true;
-	/** */
 	private AiTile tilePrev=null;
 	// LA ZONE
-	/** */
 	private int col;
-	/** */
 	private int line;
 
 	// LES VARIABLES D'ATTACK
 	
 	//MATRICE A MAINTENIR DES TEMPS LES BOMBS SONT POSE
-	/** */
 	private boolean initMatrixBombTimes = false;
-	/** */
 	private static final int NON_BOMB = -1;
 
 
 	
-	/** */
 	private long matrixBombTimes[][][];
 	
-	/** */
 	private final int AVAILABLE = 0;
-	/** */
 	private final int NON_AVAILABLE = -1;
-	/** */
 	private final int INITIAL = -2;
-	/** */
 	private final int DANGER_THRESHOLD=1000;
 	
 	
-	/** */
 	private final int BONUS_STEP=64;
-
-	@Override
+	
 	public AiAction processAction() throws StopRequestException
 	{
 		checkInterruption();
@@ -579,17 +554,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param matrixBonus
-	 * 		Description manquante !
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiAction moveToHigherValue(int[][] matrixBonus, AiTile tile) throws StopRequestException{
 		checkInterruption();
 		AiAction result= new AiAction(AiActionName.NONE);
@@ -614,24 +578,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		result =  new AiAction(AiActionName.MOVE,dir);
 		return result;	
 	}
-	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @param matrixBombing
-	 * 		Description manquante !
-	 * @param matrixBonus
-	 * 		Description manquante !
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiAction moveToHigherValueAttack(AiZone zone, int[][][] matriceDefence, int[][] matrixBombing, int matrixBonus[][], AiTile tile) throws StopRequestException{
 		checkInterruption();
 		int up, right, left, down, now;
@@ -678,12 +624,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		}
 		return result;	
 	}
-	
-	/***
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void initVisit() throws StopRequestException {
 		checkInterruption();
 		for (int i = 0; i < line; i++) {
@@ -695,17 +635,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		}
 	}
 	
-	/** ca marche avec l'algorithme qu'on a appris en FIT 2 pour painter une cadre
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param matrixDefence
-	 * 		Description manquante !
-	 * @param matrixAvailable
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//ca marche avec l'algorithme qu'on a appris en FIT 2 pour painter une cadre
 	private void fillMatrixAvailable(AiTile tile, int[][][] matrixDefence, int[][] matrixAvailable) throws StopRequestException{
 		checkInterruption();
 		int tileLine = tile.getLine();
@@ -725,17 +655,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param matrix
-	 * 		Description manquante !
-	 * @param valeur
-	 * 		Description manquante !
-	 * @param tile
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void fillMatrix(int[][] matrix, int valeur, AiTile tile) throws StopRequestException{
 		checkInterruption();
 			int tileLine = tile.getLine();
@@ -757,12 +676,9 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 			}
 			
 	}
+	
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	private void initMatrixBombTimes() throws StopRequestException {
 		checkInterruption();
 		matrixBombTimes= new long[line][col][2];	
@@ -777,13 +693,18 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		
 	}
 	
+
+	
+		
+
+
+	
 	/**
 	 * @param matriceDefence matrice a regarder pour decision
 	 * @param bomb1 le premier bomb
 	 * @param bomb2 le seconde bomb
 	 * @return true si l'un des bombs exploit l'autre 
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private boolean noObstacle(int[][][] matriceDefence, AiBomb bomb1,AiBomb bomb2) throws StopRequestException {
 		checkInterruption();
@@ -824,23 +745,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @param matrixBonus
-	 * 		Description manquante !
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @param zone
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private AiAction findSafePlace(int[][][] matriceDefence, int[][] matrixBonus, int line, int col,
 			AiZone zone) throws StopRequestException {
 		checkInterruption();
@@ -928,20 +832,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		return result;
 
 	}
-	
-	/**
-	 * 
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @param bomb
-	 * 		Description manquante !
-	 * @param zone
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private long getRealTimes(int[][][] matriceDefence, AiBomb bomb, AiZone zone) throws StopRequestException{
 		checkInterruption();
 		markVisited(matrixBombTimes, bomb.getLine(), bomb.getCol());
@@ -980,55 +870,18 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 
 	}
 
-	/**
-	 * 
-	 * @param matrixBombTimes
-	 * 		Description manquante !
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isVisited(long[][][] matrixBombTimes, int line, int col) throws StopRequestException {
 		//  Auto-generated method stub
 		checkInterruption();
 		return matrixBombTimes[line][col][1] == VISITED;
 	}
 
-	/**
-	 * 
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isVisited(int[][][] matriceDefence, int line, int col)
 			throws StopRequestException {
 		checkInterruption();
 		return matriceDefence[line][col][1] == VISITED;
 	}
 
-	/**
-	 * 
-	 * @param matrixBombTimes
-	 * 		Description manquante !
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void markVisited(long[][][] matrixBombTimes, int line, int col) throws StopRequestException {
 		//  Auto-generated method stub
 		checkInterruption();
@@ -1036,38 +889,12 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		
 	}
 
-	/**
-	 * 
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void markVisited(int[][][] matriceDefence, int line, int col)
 			throws StopRequestException {
 		checkInterruption();
 		matriceDefence[line][col][1] = VISITED;
 	}
 
-	/**
-	 * 
-	 * @param aiTile
-	 * 		Description manquante !
-	 * @param previousTile
-	 * 		Description manquante !
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @param zone
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private int calculateCost(AiTile aiTile, AiTile previousTile,
 			int[][][] matriceDefence, AiZone zone) throws StopRequestException {
 		checkInterruption();
@@ -1119,22 +946,11 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private Collection<AiTile> getClearNeighbors(AiTile tile,
 			int[][][] matriceDefence) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de r�f�rence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -1149,17 +965,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param matriceDefence
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isClear(AiTile tile, int[][][] matriceDefence)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -1169,12 +974,10 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 
 	/**
 	 * @param matriceDefence
-	 * 		Description manquante !
 	 * @param line ligne de taille de requete
 	 * @param col coloumn de taille de requete
 	 * @return true s'il y'a pas de danger au taille ou c'est un bonus
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private boolean isSafe(int matriceDefence[][][], int line, int col)
 			throws StopRequestException {
@@ -1187,11 +990,8 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 	/**
 	 * @param matriceDefence matrice de defence
 	 * @param zone le table de jeu
-	 * @param tile 
-	 * 		Description manquante !
 	 * @return la result de teste si on met un bombe, est-ce qu'on peut fuire
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private boolean checkSafety(int[][][] matriceDefence, AiZone zone, AiTile tile)
 			throws StopRequestException {

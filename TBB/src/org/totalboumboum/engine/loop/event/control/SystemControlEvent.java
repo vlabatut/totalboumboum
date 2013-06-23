@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop.event.control;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -43,12 +43,10 @@ public class SystemControlEvent
 	public final static String SWITCH_DISPLAY_GRID = "SWITCH_DISPLAY_GRID";
 	public final static String SWITCH_DISPLAY_PLAYERS_NAMES = "SWITCH_DISPLAY_PLAYERS_NAMES";
 	public final static String SWITCH_DISPLAY_SPEED = "SWITCH_DISPLAY_SPEED";
-	public final static String SWITCH_DISPLAY_SPRITES = "SWITCH_DISPLAY_SPRITES";
 	public final static String SWITCH_DISPLAY_SPRITES_POSITIONS = "SWITCH_DISPLAY_SPRITES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TILES_POSITIONS = "SWITCH_DISPLAY_TILES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TIME = "SWITCH_DISPLAY_TIME";
-	public final static String SWITCH_DISPLAY_EFFECTIVE_USAGE = "SWITCH_DISPLAY_EFFECTIVE_USAGE";
-	public final static String SWITCH_DISPLAY_REALTIME_USAGE = "SWITCH_DISPLAY_REALTIME_USAGE";
+	public final static String SWITCH_DISPLAY_USAGE = "SWITCH_DISPLAY_USAGE";
 	public final static String SWITCH_ENGINE_PAUSE = "SWITCH_ENGINE_PAUSE";
 	public final static String SWITCH_FAST_FORWARD = "SWITCH_FAST_FORWARD";
 	
@@ -57,7 +55,6 @@ public class SystemControlEvent
 
 	public SystemControlEvent(String name)
 	{	this.name = name;
-		index = REGULAR;
 	}
 	
 	public SystemControlEvent(String name, int index)
@@ -85,13 +82,5 @@ public class SystemControlEvent
 	
 	public int getIndex()
 	{	return index;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// TO STRING			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public String toString()
-	{	String result = "SystemControlEvent("+name+":"+index;
-		return result;
 	}
 }

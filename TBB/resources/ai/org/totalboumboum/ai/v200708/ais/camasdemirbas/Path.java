@@ -4,158 +4,133 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Un chemin rÃ©solu par quelque algorithme de conclusion de chemin. Un
- * feuilleton d'Ã©tapes de l'emplacement commenÃ§ant Ã  l'emplacement de cible.
- * Ceci inclut une Ã©tape pour l'emplacement initial.
+ * Un chemin résolu par quelque algorithme de conclusion de chemin. 
+ * Un feuilleton d'étapes de l'emplacement commençant à l'emplacement de cible. 
+ * Ceci inclut une étape pour l'emplacement initial. 
  * 
- * @author GÃ¶khan Ã‡amaÅŸ
- * @author Ä°rem DemirbaÅŸ
- * 
+ * @author Gokhan Camas
+ * @author Irem Demirbas
+ *
  */
 @SuppressWarnings("unchecked")
 public class Path {
-	/** La liste d'Ã©tapes dÃ©veloppant ce chemin */
+	/** La liste d'étapes développant ce chemin */
 	@SuppressWarnings("rawtypes")
 	private List steps = new ArrayList();
-
+	
 	/**
-	 * crÃ©er un chemin vide
+	 * Créer un chemin vide
 	 */
 	public Path() {
-
+		
 	}
 
 	/**
-	 * Obtenir la longueur du chemin, c.-Ã -d. le nombre d'Ã©tapes
+	 * Obtenir la longueur du chemin, c.-à-d. le nombre d'étapes
 	 * 
-	 * @return Le nombre d'Ã©tapes dans ce chemin
+	 * @return Le nombre d'étapes dans ce chemin
 	 */
 	public int getLength() {
 		return steps.size();
 	}
-
+	
 	/**
-	 * Obtenir l'Ã©tape Ã  un index donnÃ© dans le chemin
+	 * Obtenir l'étape à un index donné dans le chemin
 	 * 
-	 * @param index
-	 *            L'index de l'Ã©tape pour rapporter.
-	 * @return L'information d'Ã©tape, la position sur la carte
+	 * @param index L'index de l'étape pour rapporter.
+	 * @return L'information d'étape, la position sur la carte
 	 */
 	public Step getStep(int index) {
 		return (Step) steps.get(index);
 	}
-
+	
 	/**
-	 * Obtenir la coordonnÃ©e de x pour l'Ã©tape Ã  l'index donnÃ©
+	 * Obtenir la coordonnée de x pour l'étape à l'index donné
 	 * 
-	 * @param index
-	 *            L'index de l'Ã©tape dont x la coordonnÃ©e devrait Ãªtre rapportÃ©e
-	 * @return x coordonnÃ©e Ã  l'Ã©tape
+	 * @param L'index de l'étape dont x la coordonnée devrait être rapportée
+	 * @return x coordonnée à l'étape
 	 */
 	public int getX(int index) {
 		return getStep(index).x;
 	}
 
 	/**
-	 * Obtenir la coordonnÃ©e de y pour l'Ã©tape Ã  l'index donnÃ©
+	 * Obtenir  la coordonnée de y pour l'étape à l'index donné
 	 * 
-	 * @param index
-	 *            l'index de l'Ã©tape dont y la coordonnÃ©e devrait Ãªtre rapportÃ©e
+	 * @param l'index de l'étape dont y la coordonnée devrait être rapportée
 	 * @return y
 	 */
 	public int getY(int index) {
 		return getStep(index).y;
 	}
-
+	
 	/**
-	 * Ajouter une Ã©tape au chemin.
+	 * Ajouter une étape au chemin.  
 	 * 
-	 * @param x
-	 *            la coordonnÃ©ede x de la nouvelle Ã©tape
-	 * @param y
-	 *            la coordonnÃ©ede y de la nouvelle Ã©tape
+	 * @param x  la coordonnéede x de la nouvelle étape
+	 * @param y la coordonnéede y de la nouvelle étape
 	 */
 	public void appendStep(int x, int y) {
-		steps.add(new Step(x, y));
+		steps.add(new Step(x,y));
 	}
 
 	/**
-	 * Prepend une Ã©tape au chemin.
+	 * Prepend une étape au chemin.   
 	 * 
-	 * @param x
-	 *            la coordonnÃ©ede x de la nouvelle Ã©tape
-	 * @param y
-	 *            la coordonnÃ©ede y de la nouvelle Ã©tape
+	 * @param x la coordonnéede x de la nouvelle étape
+	 * @param y la coordonnéede y de la nouvelle étape
 	 */
 	public void prependStep(int x, int y) {
 		steps.add(0, new Step(x, y));
 	}
-
+	
 	/**
-	 * Le ContrÃ´le si ce chemin contient l'Ã©tape donnÃ©e
+	 * Le contrôle si ce chemin contient l'étape donnée
 	 * 
-	 * @param x
-	 *            The x coordinate of the step to check for
-	 * @param y
-	 *            The y coordinate of the step to check for
+	 * @param x The x coordinate of the step to check for
+	 * @param y The y coordinate of the step to check for
 	 * @return True if the path contains the given step
 	 */
 	public boolean contains(int x, int y) {
-		return steps.contains(new Step(x, y));
+		return steps.contains(new Step(x,y));
 	}
-
+	
 	/**
-	 * Une Ã©tape seule dans le chemin
+	 * Une étape seule dans le chemin
 	 * 
 	 * @author Gokhan Camas -- Irem Demirbas
 	 */
 	public class Step {
-		/** */
 		private int x;
-		/** */
 		private int y;
 
-		/**
-		 * 
-		 * @param x
-		 *            Description manquante !
-		 * @param y
-		 *            Description manquante !
-		 */
 		public Step(int x, int y) {
 			this.x = x;
 			this.y = y;
 		}
+		
 
-		/**
-		 * 
-		 * @return ?
-		 */
 		public int getX() {
 			return x;
 		}
 
-		/**
-		 * 
-		 * @return ?
-		 */
+
 		public int getY() {
 			return y;
 		}
+		
 
-		@Override
 		public int hashCode() {
-			return x * y;
+			return x*y;
 		}
 
-		@Override
 		public boolean equals(Object other) {
 			if (other instanceof Step) {
 				Step o = (Step) other;
-
+				
 				return (o.x == x) && (o.y == y);
 			}
-
+			
 			return false;
 		}
 	}

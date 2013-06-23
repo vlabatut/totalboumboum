@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.explosion;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,6 @@ import java.util.List;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
@@ -38,7 +37,6 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
@@ -67,13 +65,10 @@ public class FullExplosionManager extends ExplosionManager
 	}
 	
 	/**
-	 * Create the explosion and returns the list of concerned tiles.
+	 * create the explosion and returns the list of concerned tiles
 	 * 
-	 * @param fake	
-	 * 		{@code true} if one just wants the tile list 
-	 * 		and not the actual explosion.
-	 * @return	
-	 * 		the list of tiles to be put on fire
+	 * @param fake	false if one just wants the tile list and not the actual explosion
+	 * @return	the list of tiles to be put on fire
 	 */
 	@Override
 	public List<Tile> makeExplosion(boolean fake)
@@ -95,15 +90,12 @@ public class FullExplosionManager extends ExplosionManager
 			fire.setOwner(owner);
 			SpecificAction specificAction = new SpecificAppear(fire,Direction.NONE);
 			AbstractAbility ability = fire.modulateAction(specificAction);
-			if(!ability.isActive())
-			{	fire.consumeTile(tile,fake);
-			}
-			else
-			{	if(!fake)
+			if(!fake)
+			{	if(!ability.isActive())
+				{	fire.consumeTile(tile);
+				}
+				else
 				{	RoundVariables.level.insertSpriteTile(fire);
-					SpriteInsertionEvent event = new SpriteInsertionEvent(fire);
-					RoundVariables.writeEvent(event);
-					//
 					SpecificDetonate detonateAction = new SpecificDetonate(sprite,Direction.NONE);
 					ActionEvent evt = new ActionEvent(detonateAction);
 					fire.processEvent(evt);
@@ -131,35 +123,32 @@ public class FullExplosionManager extends ExplosionManager
 						tiles[i] = tempTile;
 						if(!processed.contains(tempTile))
 						{	processed.add(tempTile);
-							boolean inRange = false;
 							Fire fire;
 							if(length==flameRange)
-								fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractÃ¨res par des valeurs Ã©numÃ©rÃ©es
+								fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractères par des valeurs énumérées
 							else
 								fire = explosion.makeFire("inside",tempTile);
 							fire.setOwner(owner);
 							SpecificAction specificAction = new SpecificAppear(fire,direction);
 							AbstractAbility ability = fire.modulateAction(specificAction);
 							blocked[i] = !ability.isActive();
-							if(blocked[i])
-							{	inRange = fire.consumeTile(tempTile,fake);
-								//blocked[i] = true;
-							}
-							else
-							{	goOn = true;
-								inRange = true;
-								if(!fake)
-								{	RoundVariables.level.insertSpriteTile(fire);
-									SpriteInsertionEvent event = new SpriteInsertionEvent(fire);
-									RoundVariables.writeEvent(event);
-									//
+							if(!fake)
+							{	if(blocked[i])
+								{	fire.consumeTile(tempTile);
+									//blocked[i] = true;
+								}
+								else
+								{	goOn = true;
+									RoundVariables.level.insertSpriteTile(fire);
 									SpecificDetonate detonateAction = new SpecificDetonate(sprite,direction);
 									ActionEvent evt = new ActionEvent(detonateAction);
 									fire.processEvent(evt);
 								}
 							}
-							if(inRange)
-								result.add(tempTile);
+							else
+							{	goOn = goOn || !blocked[i];
+							}
+							result.add(tempTile);
 						}
 					}
 				}
@@ -172,10 +161,10 @@ public class FullExplosionManager extends ExplosionManager
 	
 	// NOTE workaround needed by the AI API
 	public boolean isPenetrating()
-	{	Tile tile = sprite.getTile();
+	{	boolean result = false;
+		Tile tile = sprite.getTile();
 		Fire fire = explosion.makeFire("outside",tile);
-		StateAbility ability = fire.getAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
-		boolean result = ability.isActive();
+		fire.getAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
 		return result;
 	}
 

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais._suiveur;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -39,33 +39,25 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 
 /**
- * classe charg√©e d'extraire de la zone les informations
- * permettant de d√©terminer le niveau de s√ªret√© des cases.
- * Une matrice de r√©els repr√©sente la zone de jeu, chaque case
- * √©tant repr√©sent√©e par le temps restant avant qu'une flamme ne la
- * traverse. Donc plus le temps est long, et plus la case est s√ªre. 
- * La valeur maximale (Double.MAX_VALUE) signifie que la case n'est pas menac√©e par une
+ * classe chargÈe d'extraire de la zone les informations
+ * permettant de dÈterminer le niveau de s˚retÈ des cases.
+ * Une matrice de rÈels reprÈsente la zone de jeu, chaque case
+ * Ètant reprÈsentÈe par le temps restant avant qu'une flamme ne la
+ * traverse. Donc plus le temps est long, et plus la case est s˚re. 
+ * La valeur maximale (Double.MAX_VALUE) signifie que la case n'est pas menacÈe par une
  * bombe. Une valeur nulle signifie que la case est actuellement en feu.
- * Une valeur n√©gative signifie que la case est menac√©e par une bombe
- * t√©l√©command√©e, qui peut exploser n'importe quand (la valeur absolue
- * de la valeur correspond au temps depuis lequel la bombe a √©t√© pos√©e)
+ * Une valeur nÈgative signifie que la case est menacÈe par une bombe
+ * tÈlÈcommandÈe, qui peut exploser n'importe quand (la valeur absolue
+ * de la valeur correspond au temps depuis lequel la bombe a ÈtÈ posÈe)
  * 
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class SafetyManager
 {	
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Agent concern√©.
-	 * @throws StopRequestException
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
-	 */
 	public SafetyManager(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -78,27 +70,23 @@ public class SafetyManager
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** IA associ√©e √† ce gestionnaire de s√ªret√© */
+	/** IA associÈe ‡ ce gestionnaire de s˚retÈ */
 	private Suiveur ai;
 
 	/////////////////////////////////////////////////////////////////
 	// MATRIX	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** valeur pour une case compl√®tement s√ªre (temps restant avant explosion : maximal) */
+	/** valeur pour une case complËtement s˚re (temps restant avant explosion : maximal) */
 	public static double SAFE = Double.MAX_VALUE;
-	/** valeur pour une case pas du tout s√ªre (temps restant avant explosion : aucun) */
+	/** valeur pour une case pas du tout s˚re (temps restant avant explosion : aucun) */
 	public static double FIRE = 0;
-	/** matrice contenant les valeurs de s√ªret√© */
+	/** matrice contenant les valeurs de s˚retÈ */
 	private double matrix[][];
 	/** zone de jeu */
 	private AiZone zone;
 	
 	/**
-	 * renvoie la matrice de suret√©
-	 * @return 
-	 * 		Matrice de r√©els.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * renvoie la matrice de suretÈ
 	 */
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -107,17 +95,14 @@ public class SafetyManager
 	}
 	
 	/**
-	 * mise √† jour de la matrice de s√ªret√©
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * mise ‡ jour de la matrice de s˚retÈ
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 
 		processedBombs.clear();
 		
-		// on initialise la matrice : toutes les cases sont s√ªres
+		// on initialise la matrice : toutes les cases sont s˚res
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -129,7 +114,7 @@ public class SafetyManager
 		}
 		
 		AiHero ownHero = ai.getOwnHero();
-		// si le personnage est sensible au feu, on tient compte des explosions en cours et √† venir
+		// si le personnage est sensible au feu, on tient compte des explosions en cours et ‡ venir
 		if(!ownHero.hasThroughFires())
 		{	for(int line=0;line<zone.getHeight();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -141,17 +126,17 @@ public class SafetyManager
 					Collection<AiFire> fires = tile.getFires();
 					Collection<AiBomb> bombs = tile.getBombs();
 					Collection<AiBlock> blocks = tile.getBlocks();
-					// s'il y a du feu : valeur z√©ro (il ne reste pas de temps avant l'explosion)
+					// s'il y a du feu : valeur zÈro (il ne reste pas de temps avant l'explosion)
 					if(!fires.isEmpty())
 					{	matrix[line][col] = FIRE;				
 					}
-					// s'il y a un mur en train de br√ªler : pareil
+					// s'il y a un mur en train de br˚ler : pareil
 					else if(!blocks.isEmpty())
 					{	AiBlock block = blocks.iterator().next();
 						if(block.getState().getName()==AiStateName.BURNING)
 							matrix[line][col] = FIRE;
 					}
-					// s'il y a une bombe : pour sa port√©e, la valeur correspond au temps th√©orique restant avant son explosion
+					// s'il y a une bombe : pour sa portÈe, la valeur correspond au temps thÈorique restant avant son explosion
 					// (plus ce temps est court et plus la bombe est dangereuse)
 					else if(bombs.size()>0)
 					{	AiBomb bomb = bombs.iterator().next();
@@ -184,32 +169,21 @@ public class SafetyManager
 	/////////////////////////////////////////////////////////////////
 	// BOMBS		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des bombes trait√©es au cours de cette it√©ration (pour ne pas les traiter plusieurs fois) */
+	/** liste des bombes traitÈes au cours de cette itÈration (pour ne pas les traiter plusieurs fois) */
 	private List<AiBomb> processedBombs;
 	
 	/**
 	 * calcule une liste de cases correspondant au souffle indirect de la bombe
-	 * pass√©e en param√®tre. Le terme "indirect" signifie que la fonction est r√©cursive : 
-	 * si une case √† port√©e de souffle contient une bombe, le souffle de cette bombe est rajout√©
-	 * dans la liste blast, et la bombe est rajout√©e dans la liste bombs.
+	 * passÈe en paramËtre. Le terme "indirect" signifie que la fonction est rÈcursive : 
+	 * si une case ‡ portÈe de souffle contient une bombe, le souffle de cette bombe est rajoutÈ
+	 * dans la liste blast, et la bombe est rajoutÈe dans la liste bombs.
 	 * 
-	 * <b>Avertissement :</b> la fonction est simpliste, et pas compl√®tement fiable.
-	 * Ainsi, elle consid√®re que si une bombe peut en faire exploser une autre,
-	 * alors le contraire est vrai (la seconde peut faire exploser la premi√®re),
-	 * mais ceci n'est pas toujours vrai (cela d√©pend de la port√©e des bombes).
+	 * <b>Avertissement :</b> la fonction est simpliste, et pas complËtement fiable.
+	 * Ainsi, elle considËre que si une bombe peut en faire exploser une autre,
+	 * alors le contraire est vrai (la seconde peut faire exploser la premiËre),
+	 * mais ceci n'est pas toujours vrai (cela dÈpend de la portÈe des bombes).
 	 * De plus, elle ne prend pas en compte le fait que certaines bombes ne sont pas
-	 * sensibles au feu (elles n'explosent pas quand elles sont touch√©es par une explosion).
-	 * 
-	 * @param bomb 
-	 * 		Bombe dont on veut le blast.
-	 * @param blast 
-	 * 		Le blast de la bombe.
-	 * @param bombs 
-	 * 		Bombes d√©j√† trait√©es.
-	 * @return 
-	 * 		?
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * sensibles au feu (elles n'explosent pas quand elles sont touchÈes par une explosion).
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -217,7 +191,7 @@ public class SafetyManager
 		if(!bombs.contains(bomb))
 		{	bombs.add(bomb);
 		
-			// on r√©cup√©re le souffle
+			// on rÈcupËre le souffle
 			List<AiTile> tempBlast = bomb.getBlast();
 			blast.addAll(tempBlast);
 			
@@ -237,41 +211,37 @@ public class SafetyManager
 	}	
 
 	/**
-	 * traite la bombe pass√©e en param√®tre
-	 * @param bomb 
-	 * 		Bombe √† traiter.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * traite la bombe passÈe en paramËtre
 	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		if(!processedBombs.contains(bomb))
-		{	// r√©cup√©ration des cases √† port√©e
+		{	// rÈcupÈration des cases ‡ portÈe
 			List<AiTile> blast = new ArrayList<AiTile>();
 			List<AiBomb> bombs = new ArrayList<AiBomb>();
 			getBlast(bomb,blast,bombs);
 			processedBombs.addAll(bombs);
 			
-			// on d√©termine quelle est la bombe la plus dangereuse (temps le plus court)
+			// on dÈtermine quelle est la bombe la plus dangereuse (temps le plus court)
 			double value = SAFE;
 			for(AiBomb b: bombs)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				
-				// calcul du temps restant th√©oriquement avant l'explosion
+				// calcul du temps restant thÈoriquement avant l'explosion
 				double time = b.getNormalDuration() - b.getTime();
-				// m√†j de value
+				// m‡j de value
 				if(time<value)
 					value = time;
 			}
 			
-			// on met √† jour toutes les cases situ√©es √† port√©e
+			// on met ‡ jour toutes les cases situÈes ‡ portÈe
 			for(AiTile t: blast)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				
 				int l = t.getLine();
 				int c = t.getCol();
-				// on modifie seulement si la case n'a pas d√©j√† un niveau de s√©curit√© inf√©rieur
+				// on modifie seulement si la case n'a pas dÈj‡ un niveau de sÈcuritÈ infÈrieur
 				if(matrix[l][c]>value)
 					matrix[l][c] = value;						
 			}
@@ -282,14 +252,8 @@ public class SafetyManager
 	// TILES		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le niveau de s√©curit√© de la case pass√©e en param√®tre
+	 * renvoie le niveau de sÈcuritÈ de la case passÈe en paramËtre
 	 * (i.e. le temps restant avant explosion)
-	 * @param tile 
-	 * 		Case √† traiter.
-	 * @return 
-	 * 		Niveau de s√©curit√©.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -301,16 +265,10 @@ public class SafetyManager
 	}
 
 	/**
-	 * d√©termine si le niveau de s√©curit√© de la case pass√©e en param√®tre
-	 * est maximal (ce traitement n'est pas tr√®s subtil : en cas d'explosion potentielle,
-	 * on pourrait calculer le temps n√©cessaire pour atteindre la case et 
-	 * d√©terminer si c'est possible de passer dessus avant l'explosion)
-	 * @param tile 
-	 * 		Case √† traiter.
-	 * @return
-	 * 		{@code true} ssi la case est s√ªre. 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * dÈtermine si le niveau de sÈcuritÈ de la case passÈe en paramËtre
+	 * est maximal (ce traitement n'est pas trËs subtil : en cas d'explosion potentielle,
+	 * on pourrait calculer le temps nÈcessaire pour atteindre la case et 
+	 * dÈterminer si c'est possible de passer dessus avant l'explosion)
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -320,15 +278,6 @@ public class SafetyManager
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param origin
-	 * 		Case de d√©part.
-	 * @return
-	 * 		Lise de cases s√ªres.
-	 * @throws StopRequestException
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
-	 */
 	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -352,10 +301,7 @@ public class SafetyManager
 	// PROCESS		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met √† jour la matrice de s√ªret√©
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * met ‡ jour la matrice de s˚retÈ
 	 */
 	public void update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -368,11 +314,8 @@ public class SafetyManager
 	// OUTPUT		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * met √† jour la sortie graphique de l'IA en fonction du
-	 * niveau de s√ªret√© calcul√©
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * met ‡ jour la sortie graphique de l'IA en fonction du
+	 * niveau de s˚retÈ calculÈ
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

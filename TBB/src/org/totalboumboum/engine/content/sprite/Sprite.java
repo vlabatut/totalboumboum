@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,7 +22,6 @@ package org.totalboumboum.engine.content.sprite;
  */
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -73,13 +72,13 @@ import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /** 
- * Sprite possÃ©dant un status :
+ * Sprite possédant un status :
  * softwall, hero, bomb, item...
  * 
  * @author Vincent Labatut
  *
  */
-public abstract class Sprite implements Comparable<Sprite>
+public abstract class Sprite
 {	
 	public Sprite()
 	{	this(idCount);
@@ -98,7 +97,6 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	this.tile = tile;
 		center();
 		eventManager.initGesture();
-		initGroundSpeedIndices();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -113,15 +111,6 @@ public abstract class Sprite implements Comparable<Sprite>
 
 	public void setId(int id)
 	{	this.id = id;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// COMPARABLE		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-    public int compareTo(Sprite sprite)
-	{	int result = id - sprite.getId();
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -158,7 +147,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	/*
 	 * change le gesture, la direction de l'animation et la direction des touches
-	 * l'animation n'est rÃ©initialisÃ©e que si le gesture est modifiÃ©
+	 * l'animation n'est réinitialisée que si le gesture est modifié
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// record event
@@ -241,7 +230,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	String result;
 		result = getClass().getSimpleName();
 		if(tile!=null)
-			result = result+"["+name+"]("+tile.getRow()+","+tile.getCol()+")";
+			result = result+"["+name+"]("+tile.getLine()+","+tile.getCol()+")";
 		result = result+"("+getCurrentPosX()+","+getCurrentPosY()+","+getCurrentPosZ()+")";
 		return result;
 	}
@@ -253,7 +242,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	public Sprite getOwner()
 	{	return owner;
-		//NOTE Ã  modifier pour recherche rÃ©cursivement l'owner final (mais peut Ãªtre est-ce dÃ©jÃ  fait ailleurs)
+		//NOTE à modifier pour recherche récursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
 	}
 	
 	public void setOwner(Sprite owner)
@@ -274,20 +263,20 @@ public abstract class Sprite implements Comparable<Sprite>
 	}
 	
 	public void setBoundToSprite(Sprite boundToSprite)
-	{	// traitement seulement si le nouveau boundToSprite liÃ© est diffÃ©rent de l'ancien
+	{	// traitement seulement si le nouveau boundToSprite lié est différent de l'ancien
 		if(this.boundToSprite!=boundToSprite)
-		{	// on met Ã  jour le trajectoryManager
+		{	// on met à jour le trajectoryManager
 			trajectoryManager.setBoundToSprite(boundToSprite);
-			// s'il n'y a pas d'ancien boundToSprite : on dÃ©connecte ce sprite de sa tile
+			// s'il n'y a pas d'ancien boundToSprite : on déconnecte ce sprite de sa tile
 			if(this.boundToSprite==null)
 				changeTile(null);
-			// s'il y a un ancien boundToSprite : on dÃ©connecte ce sprite de ce boundToSprite 
+			// s'il y a un ancien boundToSprite : on déconnecte ce sprite de ce boundToSprite 
 			else
 				setToBeRemovedFromSprite(this.boundToSprite);
-			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite Ã  une Tile
+			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile
 			if(boundToSprite==null)
 				changeTile(RoundVariables.level.getTile(getCurrentPosX(),getCurrentPosY()));
-			// s'il y a un nouveau boundToSprite : on connecte ce sprite Ã  ce boundToSprite
+			// s'il y a un nouveau boundToSprite : on connecte ce sprite à ce boundToSprite
 			else
 				boundToSprite.addBoundSprite(this);
 			this.boundToSprite = boundToSprite;
@@ -329,11 +318,11 @@ public abstract class Sprite implements Comparable<Sprite>
 		animeManager.update();
 		trajectoryManager.update();
 		/*
-		 * NOTE : il est important que le trajectoryManager soit updatÃ© en dernier
-		 * comme Ã§a, un changement de case arrive aprÃ¨s avoir traitÃ© tous les Ã©vÃ¨nements
+		 * NOTE : il est important que le trajectoryManager soit updaté en dernier
+		 * comme ça, un changement de case arrive après avoir traité tous les évènements
 		 * (raisons de synchro)
 		 */
-//System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getRow()+";"+tile.getCol());
+//System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());
 		Iterator<Sprite> i = boundSprites.iterator();
 		while(i.hasNext())
 		{	Sprite temp = i.next();
@@ -409,59 +398,13 @@ public abstract class Sprite implements Comparable<Sprite>
 	/////////////////////////////////////////////////////////////////
 	// SPEED COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Index for the speed */
 	protected double speedAbility = 1;
-	/** Actual speed (corresponding to the above index), expressed in pixel/s*/
 	protected double speedAbilityCoef = 1;
-	/** List of all defined speed indices for this sprite */
-	protected List<Integer> walkingSpeedIndices;
 	
 	/**
-	 * Initializes all possible ground speed indices
-	 * for this sprite.
-	 */
-	private void initGroundSpeedIndices()
-	{	// init
-		walkingSpeedIndices = new ArrayList<Integer>();
-		
-		// bonuses
-		List<StateAbility> bonuses = getAbilitiesStartingWith(StateAbilityName.HERO_WALK_SPEED_P);
-		for(StateAbility ability: bonuses)
-		{	String name = ability.getName();
-			String str = name.substring(StateAbilityName.HERO_WALK_SPEED_P.length(),name.length());
-			int index = Integer.parseInt(str);
-			walkingSpeedIndices.add(index);
-		}
-		
-		// maluses
-		List<StateAbility> maluses = getAbilitiesStartingWith(StateAbilityName.HERO_WALK_SPEED_M);
-		for(StateAbility ability: maluses)
-		{	String name = ability.getName();
-			String str = name.substring(StateAbilityName.HERO_WALK_SPEED_M.length(),name.length());
-			int index = -Integer.parseInt(str);
-			walkingSpeedIndices.add(index);
-		}
-		
-		// sort
-		Collections.sort(walkingSpeedIndices);
-	}
-	
-	/**
-	 * Returns the list of defined speed
-	 * indices for this sprite.
-	 * 
-	 * @return
-	 * 		A list of integers.
-	 */
-	public List<Integer> getGroundSpeedIndices()
-	{	return walkingSpeedIndices;
-	}
-	
-	/**
-	 * S'il y  a un boundToSprite, son speedCoeff est renvoyÃ©.
+	 * S'il y  a un boundToSprite, son speedCoeff est renvoyé.
 	 * Sinon, c'est le produit entre le speedCoeff du sprite
 	 * et celui du jeu.
-	 * 
 	 * @return
 	 */
 	public double getCurrentSpeedCoeff()
@@ -486,58 +429,33 @@ public abstract class Sprite implements Comparable<Sprite>
 		return result;
 	}
 	
-	/**
-	 * Returns data relative to the current
-	 * speed on the ground.
-	 * 
-	 * @return
-	 * 		A double array containing two values: 
-	 * 		the speed and the corresponding index.
-	 */
 	public double[] getGroundSpeedCoeff()
 	{	double[] result = new double[2];
-		
-		// get the current speed ability
+	
 		StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
-		int speedIndex = (int)ability.getStrength();
-		
-		// if the speed ability didn't change since last time it was checked
-		if(speedIndex==speedAbility)
+		int speed = (int)ability.getStrength();
+		if(speed==speedAbility)
 		{	result[0] = speedAbilityCoef;
 			result[1] = speedAbility;
 		}
-		
-		// otherwise it must be updated
 		else
-		{	// increased speed
-			if(speedIndex>0)
-			{	int i = walkingSpeedIndices.indexOf(1);
-				while(i<walkingSpeedIndices.size() && walkingSpeedIndices.get(i)<=speedIndex)
-					i++;
-				i--;
-				speedIndex = walkingSpeedIndices.get(i);
+		{	double speedAbility = speed;
+			double speedAbilityCoef = 1;
+			int delta = -(int)Math.signum(speed);
+			String name;
+			do
+			{	name = StateAbilityName.getHeroWalkSpeed(speed);
+				if(name!=null) // i.e. if speed is not zero
+				{	ability = modulateStateAbility(name);
+					if(ability.isActive())
+						speedAbilityCoef = ability.getStrength();
+					else
+						speed = speed + delta;
+				}
 			}
-			
-			// decreased speed
-			else if(speedIndex<0)
-			{	int i = walkingSpeedIndices.indexOf(1);
-				while(i>=0 && walkingSpeedIndices.get(i)>=speedIndex)
-					i--;
-				i++;
-				speedIndex = walkingSpeedIndices.get(i);
-			}
-			
-			// update speed info
-			if(speedIndex==0)
-			{	result[0] = 1;
-				result[1] = speedIndex;
-			}
-			else
-			{	String name = StateAbilityName.getHeroWalkSpeed(speedIndex);
-				ability = modulateStateAbility(name);
-				result[0] = ability.getStrength();
-				result[1] = speedIndex;
-			}
+			while(name!=null && !ability.isActive());
+			result[0] = speedAbilityCoef;
+			result[1] = speedAbility;
 		}
 		
 		return result;
@@ -563,10 +481,6 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return abilityManager.getAbility(ability);
 	}
 	
-	public List<StateAbility> getAbilitiesStartingWith(String name)
-	{	return abilityManager.getAbilitiesStartingWith(name);
-	}
-
 /*	public StateAbility getAbility(String name)
 	{	return abilityManager.getAbility(name);
 	}
@@ -803,17 +717,6 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return itemManager.getItemAbilities();	
 	}
 	
-	/**
-	 * Returns the list of all items this player
-	 * has at this moment of the game.
-	 * 
-	 * @return
-	 * 		A list of items.
-	 */
-	public List<Item> getAllItems()
-	{	return itemManager.getAllItems();	
-	}
-	
 	public void reinitInitialItems()
 	{	itemManager.reinitInitialItems();	
 	}
@@ -851,18 +754,11 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return modulationManager.getTargetModulation(action);
 	}
 	
-	public TargetModulation getTargetModulation(SpecificAction action, GestureName gestureName)
-	{	return modulationManager.getTargetModulation(action,gestureName);
-	}
-	
 	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.getThirdModulation(action,actorCircumstances,targetCircumstances);
 	}
 	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
-	}
-	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
-	{	return modulationManager.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances,gestureName);
 	}
 	
 	public StateAbility modulateStateAbility(String name)
@@ -877,18 +773,11 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	return modulationManager.isTargetPreventing(action);
 	}
 
-	public boolean wouldTargetPreventing(SpecificAction action, GestureName gestureName)
-	{	return modulationManager.wouldTargetPreventing(action,gestureName);
-	}
-
 	public boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.isThirdPreventing(action,actorCircumstances,targetCircumstances);
 	}
 	public boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.isThirdPreventing(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
-	}
-	public boolean wouldThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
-	{	return modulationManager.wouldThirdPreventing(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances,gestureName);
 	}
 	
 /*	

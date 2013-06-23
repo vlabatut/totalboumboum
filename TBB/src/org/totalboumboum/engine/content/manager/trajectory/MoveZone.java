@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.trajectory;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -245,13 +245,13 @@ public class MoveZone
 		// process
 		int width = RoundVariables.level.getGlobalWidth();
 		int height = RoundVariables.level.getGlobalHeight();
-		int sRow = upleftTile.getRow();
-		int tRow = (downrightTile.getRow()+1)%height;
+		int sLine = upleftTile.getLine();
+		int tLine = (downrightTile.getLine()+1)%height;
 		int sCol = upleftTile.getCol();
 		int tCol = (downrightTile.getCol()+1)%width;
-		for(int row=sRow;row!=tRow;row=(row+1)%height)
+		for(int line=sLine;line!=tLine;line=(line+1)%height)
 		{	for(int col=sCol;col!=tCol;col=(col+1)%width)
-			{	Tile temp = RoundVariables.level.getTile(row,col);
+			{	Tile temp = RoundVariables.level.getTile(line,col);
 				result.add(temp);
 			}
 		}
@@ -571,11 +571,11 @@ public class MoveZone
 			else
 			{	// else : must solve equation (intersection point)
 				// 		line: y' = ax' + b
-				//		circle: (x'-x)Â²+(y'-y)Â² = fuelÂ²
-				//		>> (x'-x)Â²+(ax'+b-y)Â² = fuelÂ²
-				//		>> x'Â²+xÂ²-2x'x+(ax'+b)Â²+yÂ²-2(ax'+b)y - fuelÂ² = 0
-				//		>> x'Â²+xÂ²-2x'x+aÂ²x'Â²+bÂ²+2abx'+yÂ²-2ax'y-2by - fuelÂ² = 0
-				//		>> x'Â²(1+aÂ²) + x'(2ab-2x-2ay) + (xÂ²+yÂ²+bÂ²-2by-fuelÂ²) = 0
+				//		circle: (x'-x)²+(y'-y)² = fuel²
+				//		>> (x'-x)²+(ax'+b-y)² = fuel²
+				//		>> x'²+x²-2x'x+(ax'+b)²+y²-2(ax'+b)y - fuel² = 0
+				//		>> x'²+x²-2x'x+a²x'²+b²+2abx'+y²-2ax'y-2by - fuel² = 0
+				//		>> x'²(1+a²) + x'(2ab-2x-2ay) + (x²+y²+b²-2by-fuel²) = 0
 				double discA = a*a + 1;
 				double discB = 2*a*b - 2*currentX - 2*a*currentY;
 				double discC = currentX*currentX + currentY*currentY + b*b - 2*b*currentY - fuel*fuel;

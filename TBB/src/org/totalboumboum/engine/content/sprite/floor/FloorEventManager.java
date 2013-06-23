@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.floor;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,11 +21,9 @@ package org.totalboumboum.engine.content.sprite.floor;
  * 
  */
 
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
-import org.totalboumboum.engine.content.feature.action.crush.SpecificCrush;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -50,15 +48,7 @@ public class FloorEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ActionEvent event)
-	{	if(event.getAction() instanceof SpecificCrush)
-			actionCrush(event);
-	}
-
-	private void actionCrush(ActionEvent event)
-	{	// crushed by another floor: just disappear
-		if(gesture.equals(GestureName.STANDING))
-		{	endSprite();
-		}
+	{	
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -82,10 +72,6 @@ public class FloorEventManager extends EventManager
 			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
-		else if(event.getName().equals(EngineEvent.START_FALL))
-			engStartFall(event);
-		else if(event.getName().equals(EngineEvent.TILE_LOW_ENTER))
-			engTileLowEnter(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
@@ -96,15 +82,6 @@ public class FloorEventManager extends EventManager
 		else if(gesture.equals(GestureName.ENTERING))
 		{	gesture = GestureName.PREPARED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
-		else if(gesture.equals(GestureName.FALLING))
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-			EngineEvent e = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection());
-			Tile tile = sprite.getTile();
-			tile.spreadEvent(e);
-			Floor floor = (Floor)sprite;
-			floor.crushTile(tile);
 		}
 	}
 	
@@ -136,23 +113,6 @@ public class FloorEventManager extends EventManager
 		else if(gesture.equals(GestureName.ENTERING))
 		{	sprite.addIterDelay(DelayManager.DL_START,1);			
 		}
-	}
-
-	private void engStartFall(EngineEvent event)
-	{	if(gesture.equals(GestureName.NONE))
-		{	gesture = GestureName.FALLING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
-	}
-
-	private void engTileLowEnter(EngineEvent event)
-	{	
-/*		if(gesture.equals(GestureName.STANDING))
-		{	// another floor has been set: remove the current one
-			if(event.getSource()!=sprite && event.getSource() instanceof Floor)
-				endSprite();
-		}
-*/
 	}
 
 	/////////////////////////////////////////////////////////////////

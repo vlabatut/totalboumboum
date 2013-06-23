@@ -13,22 +13,18 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * A successor calculator used to find a path passing through the least obstacles.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class DestructibleSuccessorCalculator extends SuccessorCalculator
 {
 
-	/** */
 	AkbulutKupelioglu monIa;
 	
 	/**
 	 * Creates a new instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public DestructibleSuccessorCalculator(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -37,7 +33,6 @@ public class DestructibleSuccessorCalculator extends SuccessorCalculator
 		// 
 	}
 	
-	@Override
 	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException
 	{
 		monIa.checkInterruption();

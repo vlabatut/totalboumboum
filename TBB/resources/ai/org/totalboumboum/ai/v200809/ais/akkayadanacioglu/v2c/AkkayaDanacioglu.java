@@ -21,20 +21,19 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Huseyin Akkaya
- * @author Hayko DanacioÄŸlu
+ * @author Hayko Danacioglu
  *
  */
-@SuppressWarnings("deprecation")
 public class AkkayaDanacioglu extends ArtificialIntelligence
 {
 	
-	/** la case occupÃ©e actuellement par le personnage*/
+	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
 	
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
 	
-	/** la derniÃ¨re case par laquelle on est passÃ© */ 
+	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 	
 	/*Methode Main de jeu
@@ -42,7 +41,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	 * (non-Javadoc)
 	 * @see fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence#processAction()
 	 */
-	@Override
+	
 	public AiAction processAction() throws StopRequestException
 	{	
 		
@@ -55,7 +54,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
 		if(ownHero!=null)
 		{	
-			// on met Ã  jour la position de l'ia dans la zone
+			// on met à jour la position de l'ia dans la zone
 			currentTile = ownHero.getTile();
 			
 			// premier appel : on initialise l'IA	
@@ -109,12 +108,12 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 			// s'il y a au minimum un bombe
 			if(dangerousBombs().size()>=1){	
 				
-				// si mon case est en securitÃ©
+				// si mon case est en securité
 				if(!isInDanger(currentTile)){
 					// on fait rien
 					result=new AiAction(AiActionName.NONE);	
 				}
-				// si mon case n'est pas en secutitÃ©
+				// si mon case n'est pas en secutité
 				else{
 					// random action
 					
@@ -126,11 +125,6 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -139,22 +133,16 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Choisit comme destination une case voisine de la case actuellement occupÃ©e par l'IA.
-	 * Cette case doit Ãªtre accessible (pas de mur ou de bombe ou autre obstacle) et doit
-	 * Ãªtre diffÃ©rente de la case prÃ©cÃ©demment occupÃ©e
-	 * 
-	 * @param tile 
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * 
+	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
+	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
+	 * être différente de la case précédemment occupée
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+	
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de rÃ©fÃ©rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -169,15 +157,6 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -189,11 +168,6 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -201,7 +175,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
 			List<AiTile> tiles = getClearNeighbors(currentTile);
-			// on sort l'ancienne destination (qui est maintenant bloquÃ©e) de la liste
+			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
 			// s'il reste des cases dans la liste : on en tire une au hasard
@@ -219,16 +193,13 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	// comportement par hasard 
 	
 	
-	/**
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
+	
 	private void pickNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 	// liste des cases voisines accessibles	
 	List<AiTile> tiles = getClearNeighbors(currentTile);
-	// on sort de la liste la case d'oÃ¹ l'on vient (pour Ã©viter de repasser au mÃªme endroit)
+	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
 	{	tiles.remove(previousTile);
@@ -236,8 +207,8 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 	// s'il reste des cases dans la liste
 	if(tiles.size()>0)
-	{	// si la liste contient la case situÃ©e dans la direction dÃ©placement prÃ©cedente,
-		// on Ã©vite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
+	{	// si la liste contient la case située dans la direction déplacement précedente,
+		// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
 		AiTile tempTile = null;
 		Direction dir = getPercepts().getDirection(previousTile,currentTile);
 		if(dir!=Direction.NONE)
@@ -253,13 +224,13 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 			nextTile = tiles.get(index);
 			previousTile = currentTile;
 		}
-		// sinon (pas le choix) on continue dans la mÃªme direction
+		// sinon (pas le choix) on continue dans la même direction
 		else
 		{	nextTile = tempTile;
 			previousTile = currentTile;
 		}
 	}
-	// sinon (pas le choix) on tente de revenir en arriÃ¨re
+	// sinon (pas le choix) on tente de revenir en arrière
 	else
 	{	if(canGoBack)
 		{	nextTile = previousTile;
@@ -272,12 +243,8 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	// la methode qui renvoie la liste des bombes proche a notre hero
 	
 	
-	/**
+	/*
 	 * renvoi la liste des bombes qui me menacent
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private List<AiBomb> dangerousBombs() throws StopRequestException{
 		
@@ -307,15 +274,10 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 
 	
-	/**
+	/*
 	 *  isInDanger regarde a tile s'il y a danger
-	 * @param tile 
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+		
 	private boolean isInDanger(AiTile tile) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		boolean result = false;
@@ -346,7 +308,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		
 		
 		
-		// liste des cases autour de la case de rÃ©fÃ©rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighborgs = getPercepts().getNeighborTiles(currentTile);
 		// on garde les cases sans bloc ni bombe ni feu
 		
@@ -368,19 +330,10 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 	
 	
-	/**
+	/*
 	 *  est qu'il y a un block entre les deux line
-	 * @param tile1 
-	 * 		Description manquante !
-	 * @param tile2 
-	 * 		Description manquante !
-	 * @param zone 
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+
 	private boolean isThereBlockBetween(AiTile tile1, AiTile tile2, AiZone zone)throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		int col1 = tile1.getCol();
@@ -426,14 +379,8 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 		
 	
-	/**
+	/*
 	 * regarde a direction entree comme un parametre (danger ou safe)
-	 * @param dir 
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private boolean isItDangerousDir(Direction dir) throws StopRequestException{
 			checkInterruption();
@@ -463,20 +410,14 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 	
 	
-	/**
+	/*
 	 * renvoi la liste des directions possibles
-	 * @param tile 
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private List<Direction> getPossibleDirs(AiTile tile) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// liste des cases autour de la case de rÃ©fÃ©rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> tiles = getClearNeighbors(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<Direction> result = new ArrayList<Direction>();
@@ -492,13 +433,9 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		return result;
 	}
 	
-	/** le comportement de promeneur
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
+	
+	// le comportement de promeneur
 	private AiAction getNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -523,22 +460,22 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		}
 		
 	}
-	// arrivÃ© Ã  destination : on choisit une nouvelle destination
+	// arrivé à destination : on choisit une nouvelle destination
 	if(currentTile==nextTile)
 		pickNextTile();
 	
-	// au cas ou quelqu'un prendrait le ContrÃ´le manuel du personnage
+	// au cas ou quelqu'un prendrait le contrôle manuel du personnage
 	
 	else if(previousTile!=currentTile)
 	{	previousTile = currentTile;
 		pickNextTile();			
 	}
 	
-	// sinon (on garde la mÃªme direction) on vÃ©rifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
+	// sinon (on garde la même direction) on vérifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
 	else
 		checkNextTile();
 			
-	// on calcule la direction Ã  prendre
+	// on calcule la direction à prendre
 	
 	Direction direction = getPercepts().getDirection(currentTile,nextTile);
 
@@ -547,4 +484,6 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		result = new AiAction(AiActionName.MOVE,direction);
 	return result;
 	}
+	
+	
 }

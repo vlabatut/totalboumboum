@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.theme;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -107,8 +107,7 @@ public class BlocksetLoader
     private static void loadBlockElement(Element root, String individualFolder, String groupName, HollowTheme result, HashMap<String,HollowBlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue();
-//if(name.equalsIgnoreCase("common_soft"))
-//	System.out.println();
+		
 		// folder
     	String localFilePath = individualFolder;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);

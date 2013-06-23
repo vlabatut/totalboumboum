@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais.adatepeozbek;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,23 +22,20 @@ package org.totalboumboum.ai.v200910.ais.adatepeozbek;
  */
 
 import org.totalboumboum.ai.v200910.adapter.AiManager;
-import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5c.AdatepeOzbek;
 
 /**
- * Classe utilisÃ©e par le moteur du jeu pour retrouver les IA
+ * Classe utilisée par le moteur du jeu pour retrouver les IA
  * 
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
-	/////////////////////////////////////////////////////////////////
-	// AGENT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public ArtificialIntelligence instantiateAgent()
-	{	return new AdatepeOzbek();
+	/**
+	 * Constructeur utilisé pour créer une instance de l'IA
+	 */
+	public AiMain()
+	{	super(new AdatepeOzbek());
 	}
 }

@@ -5,31 +5,26 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
  * Manages informations in a way to avoid recalculations. Currently not used.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class InformationManager
 {
-	/** */
+
 	AkbulutKupelioglu monIa;
-	/** */
 	AiZone zone;
+
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		description manquante !
-	 * @param ia
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+	
 	public InformationManager(AiZone zone, AkbulutKupelioglu ia) throws StopRequestException
 	{
 		ia.checkInterruption();
 		monIa = ia;
 		this.zone = zone;		
 	}
+	
+
+	
+	
+	
 }

@@ -15,50 +15,29 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class PathFinder {
 	
-	/** */
 	private DaneSatir ai;
-	/** */
 	private AiHero hero;
-	/** */
 	private AiPath path;
-	/** */
 	private int curIndex;
-	/** */
 	private List<AiTile> targetList;
-	/** */
 	private TimeMatrice time;
 
 	/**
 	 * Default Constructor for Pathfinder 
 	 * @param ai
-	 * 		Description manquante !
 	 * @param time
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public PathFinder(DaneSatir ai, TimeMatrice time) throws StopRequestException {
 		this(ai,ai.getOwnHero(),time);
 		ai.checkInterruption();
 	}
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @param hero
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
@@ -69,15 +48,6 @@ public class PathFinder {
 		this.updateTimeMatrice(time);
 	}
 	
-	/**
-	 * 
-	 * @param target
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 * @throws NoWayException
-	 * 		Description manquante !
-	 */
 	public void calculPath(AiTile target) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
 		List<AiTile> targets = new ArrayList<AiTile>();
@@ -87,11 +57,8 @@ public class PathFinder {
 	/**
 	 * Build Path for Targets
 	 * @param targetList
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 * @throws NoWayException
-	 * 		Description manquante !
 	 */
 	public void calculPath(List<AiTile> targetList) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
@@ -113,38 +80,20 @@ public class PathFinder {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiPath getPath() throws StopRequestException {
 		ai.checkInterruption();
 		return path;
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void clearPath() throws StopRequestException {
 		ai.checkInterruption();
 		this.path=null;
 	}
-	
 	/**
 	 * Get NextTile and check on arrive and other situations
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 * @throws PathOverException
-	 * 		Description manquante !
 	 * @throws NoWayException
-	 * 		Description manquante !
 	 */
 	public AiTile getNextTile() throws StopRequestException, PathOverException, NoWayException {
 		ai.checkInterruption();
@@ -186,7 +135,6 @@ public class PathFinder {
 	/**
 	 * Recalculate Path with TargetList
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private void recalculPath() throws StopRequestException {
 		ai.checkInterruption();
@@ -200,15 +148,6 @@ public class PathFinder {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param targetTile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isTarget(AiTile targetTile) throws StopRequestException {
 		ai.checkInterruption();
 		if (this.targetList == null)
@@ -216,37 +155,16 @@ public class PathFinder {
 		return this.targetList.contains(targetTile);
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isArrive() throws StopRequestException {
 		ai.checkInterruption();
 		return this.isTarget(this.hero.getTile());
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiTile> getTargets() throws StopRequestException {
 		ai.checkInterruption();
 		return this.targetList;
 	}
 
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void updateTimeMatrice(TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
 		this.time = time;

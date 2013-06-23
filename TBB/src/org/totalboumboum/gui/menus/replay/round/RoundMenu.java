@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.replay.round;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -48,12 +48,8 @@ import org.totalboumboum.gui.game.loop.LoopPanel;
 import org.totalboumboum.gui.game.round.description.RoundDescription;
 import org.totalboumboum.gui.game.round.results.RoundResults;
 import org.totalboumboum.gui.game.round.statistics.RoundStatistics;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -72,28 +68,28 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
 		// sizes
 		int buttonWidth = getHeight();
 		int buttonHeight = getHeight();
 
 		// buttons
-		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
-		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK,buttonWidth,buttonHeight,1,this);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK,buttonWidth,buttonHeight,1,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
-	    buttonDescription = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
+	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-	    buttonResults = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
+	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
-	    buttonStatistics = GuiButtonTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
+	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
-		buttonReplay = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_REPLAY,buttonWidth,buttonHeight,1,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		buttonReplay = GuiTools.createButton(GuiKeys.MENU_REPLAY_ROUND_BUTTON_REPLAY,buttonWidth,buttonHeight,1,this);
 		buttonReplay.setEnabled(false);		
 		
 		// panels
@@ -121,13 +117,13 @@ buttonStatistics.setEnabled(false);
 			{	// play
 				buttonReplay.setEnabled(false);
 				// finish
-				GuiButtonTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT, buttonQuit);
+				GuiTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT, buttonQuit);
 			}
 			else
 			{	// play
 				buttonReplay.setEnabled(true);
 				// match
-				GuiButtonTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK, buttonBack);
+				GuiTools.setButtonContent(GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK, buttonBack);
 			}
 		}
 		else
@@ -149,9 +145,9 @@ buttonStatistics.setEnabled(false);
 		round.setPanel(this);
 		
 		// panels
-		roundDescription.setRound(round,null);
-		roundResults.setRound(round,null);
-		roundStatistics.setRound(round,null);	
+		roundDescription.setRound(round);
+		roundResults.setRound(round);
+		roundStatistics.setRound(round);	
 		
 		// buttons
 		refreshButtons();
@@ -210,7 +206,7 @@ buttonStatistics.setEnabled(false);
 			buttonReplay.setEnabled(false);
 			buttonQuit.setEnabled(false);
 			buttonBack.setEnabled(false);
-			int fontSize = GuiFontTools.getFontSize(getHeight()*0.6);
+			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 			int width = Integer.MAX_VALUE;
 			int height = getHeight();

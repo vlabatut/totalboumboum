@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.adapter;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -39,23 +39,22 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 
 
 /**
- * reprÃ©sente une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
+
 public class AiTile
-{	/** reprÃ©sentation de la zone Ã  laquelle cette case appartient */
+{	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;
-	/** case du jeu que cette classe reprÃ©sente */
+	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
 	/**
-	 * construit une reprÃ©sentation de la case passÃ©e en paramÃ¨tre
-	 * @param tile	case reprÃ©sentÃ©e
-	 * @param zone	zone contenant la reprÃ©sentation
+	 * construit une représentation de la case passée en paramètre
+	 * @param tile	case représentée
+	 * @param zone	zone contenant la représentation
 	 */
 	AiTile(Tile tile, AiZone zone)
 	{	this.zone = zone;
@@ -65,7 +64,7 @@ public class AiTile
 	}
 	
 	/**
-	 * met Ã  jour cette case et son contenu
+	 * met à jour cette case et son contenu
 	 */
 	void update()
 	{	updateSprites();		
@@ -126,7 +125,7 @@ public class AiTile
 	private int col;
 		
 	/** 
-	 * renvoie le numÃ©ro de la ligne contenant cette case
+	 * renvoie le numéro de la ligne contenant cette case
 	 * 
 	 * @return	la ligne de cette case
 	 */
@@ -134,7 +133,7 @@ public class AiTile
 	{	return line;	
 	}
 	/** 
-	 * renvoie le numÃ©ro de la colonne contenant cette case
+	 * renvoie le numéro de la colonne contenant cette case
 	 *  
 	 * @return	la colonne de cette case
 	 */
@@ -143,43 +142,43 @@ public class AiTile
 	}
 	
 	/** 
-	 * initialise les numÃ©ros de ligne et colonne de cette case 
+	 * initialise les numéros de ligne et colonne de cette case 
 	 */
 	private void initLocation()
-	{	this.line = tile.getRow();
+	{	this.line = tile.getLine();
 		this.col = tile.getCol();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** block Ã©ventuellement contenu dans cette case */
+	/** block éventuellement contenu dans cette case */
 	private AiBlock block = null;
-	/** liste des bombes Ã©ventuellement contenues dans cette case */
+	/** liste des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> bombs = new ArrayList<AiBomb>();
-	/** liste des feux Ã©ventuellement contenus dans cette case */
+	/** liste des feux éventuellement contenus dans cette case */
 	private final List<AiFire> fires = new ArrayList<AiFire>();
 	/** sol de cette case */
 	private AiFloor floor = null;
-	/** liste des personnages Ã©ventuellement contenus dans cette case */
+	/** liste des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> heroes = new ArrayList<AiHero>();
-	/** item Ã©ventuellement contenu dans cette case */
+	/** item éventuellement contenu dans cette case */
 	private AiItem item = null;
 
 	/** 
 	 * renvoie le block contenu dans cette case 
 	 * ou null s'il n'y a pas de block dans cette case
 	 * 
-	 * @return	le bloc Ã©ventuellement contenu dans cette case
+	 * @return	le bloc éventuellement contenu dans cette case
 	 */
 	public AiBlock getBlock()
 	{	return block;	
 	}
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les bombes Ã©ventuellement contenues dans cette case
+	 * @return	les bombes éventuellement contenues dans cette case
 	 */
 	public Collection<AiBomb> getBombs()
 	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
@@ -187,9 +186,9 @@ public class AiTile
 	}
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les feux Ã©ventuellement contenus dans cette case
+	 * @return	les feux éventuellement contenus dans cette case
 	 */
 	public Collection<AiFire> getFires()
 	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
@@ -197,7 +196,7 @@ public class AiTile
 	}
 	/** 
 	 * renvoie le sol de cette case 
-	 * (il y a forcÃ©ment un sol)
+	 * (il y a forcément un sol)
 	 * 
 	 * @return	le sol contenu dans cette case
 	 */
@@ -206,9 +205,9 @@ public class AiTile
 	}
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut Ãªtre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les personnages Ã©ventuellement contenus dans cette case
+	 * @return	les personnages éventuellement contenus dans cette case
 	 */
 	public Collection<AiHero> getHeroes()
 	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
@@ -218,14 +217,14 @@ public class AiTile
 	 * renvoie l'item (apparent) contenu dans cette case 
 	 * ou null s'il n'y a pas d'item apparent dans cette case
 	 * 
-	 * @return	l'item Ã©ventuellement contenu dans cette case
+	 * @return	l'item éventuellement contenu dans cette case
 	 */
 	public AiItem getItem()
 	{	return item;	
 	}
 	
 	/** 
-	 * met Ã  jour les reprÃ©sentations des sprites contenus dans cette case
+	 * met à jour les représentations des sprites contenus dans cette case
 	 */
 	private void updateSprites()
 	{	// block
@@ -337,9 +336,9 @@ public class AiTile
 		}
 	}
 	/**
-	 * termine les reprÃ©sentations de sprites passÃ©es en paramÃ¨tre
-	 * @param <T>	type de reprÃ©sentation
-	 * @param list	liste de reprÃ©sentations
+	 * termine les représentations de sprites passées en paramètre
+	 * @param <T>	type de représentation
+	 * @param list	liste de représentations
 	 */
 	private <T extends AiSprite<?>> void finishSprites(List<T> list)
 	{	Iterator<T> it = list.iterator();
@@ -355,16 +354,16 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 
 	/**
-	 * renvoie le voisin de cette case passÃ©e en paramÃ¨tre, situÃ© dans la direction
-	 * passÃ©e en paramÃ¨tre.
+	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
+	 * passée en paramètre.
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situÃ©e au bord du niveau est une case situÃ©e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situÃ©e
-	 * Ã  la position (ligne,0), le voisin de gauche est la case situÃ©e Ã  la position
-	 * (ligne,width-1). mÃªme chose pour les bordures haut et bas.
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de cette case, situÃ© dans la direction indiquÃ©e
+	 * @return	le voisin de cette case, situé dans la direction indiquée
 	 */
 	public AiTile getNeighbor(Direction direction)
 	{	AiTile result;

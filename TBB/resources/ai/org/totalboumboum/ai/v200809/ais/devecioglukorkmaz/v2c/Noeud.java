@@ -6,29 +6,16 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Eser Devecioğlu
- * @author lev Korkmaz
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
  *
  */
-@SuppressWarnings("deprecation")
 public class Noeud {
-
-	/** */
 	private AiTile tile;
-	/** */
 	private boolean visited;
-	/** */
 	private int iteration;
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Noeud(ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -37,15 +24,6 @@ public class Noeud {
 		visited = false;
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Noeud(AiTile tile, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
@@ -54,56 +32,27 @@ public class Noeud {
 		visited = false;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile getTile() throws StopRequestException {
 		ai.checkInterruption();
 		return tile;
 	}
 
-	/**
-	 * 
-	 * @param iteration
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	protected void markVisited(int iteration) throws StopRequestException {
 		ai.checkInterruption();
 		visited = true;
 		this.iteration = iteration;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isVisited() throws StopRequestException {
 		ai.checkInterruption();
 		return visited;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public int getIteration() throws StopRequestException {
 		ai.checkInterruption();
 		return iteration;
 	}
 
-	@Override
 	public boolean equals(Object object) {
 		Noeud noeud=null;
 		try {
@@ -125,15 +74,6 @@ public class Noeud {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @param goal
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public int getHeuristic(Noeud goal) throws StopRequestException {
 		ai.checkInterruption();
 		int result = 0;

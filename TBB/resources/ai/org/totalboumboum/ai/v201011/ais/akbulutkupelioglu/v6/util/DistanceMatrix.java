@@ -8,25 +8,20 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.breadthfirstsearch.
 
 /**
  * A matrix used to represent distances to a certain tile.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class DistanceMatrix extends Matrix
 {
-	/** */
+
 	private AiTile centerTile;
-	/** */
 	private AkbulutKupelioglu monIa;
-	
 	/**
 	 * Creates a new distance matrix.
 	 * @param width Width of the matrix.
 	 * @param height Height of the matrix.
 	 * @param ia the AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public DistanceMatrix(int width, int height, AkbulutKupelioglu ia)
 			throws StopRequestException
@@ -41,7 +36,6 @@ public class DistanceMatrix extends Matrix
 	 * Gets the center tile of this distance matrix.
 	 * @return The center tile.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiTile getCenterTile() throws StopRequestException
 	{
@@ -53,7 +47,6 @@ public class DistanceMatrix extends Matrix
 	 * Sets the center tile of this distance matrix.
 	 * @param centerTile The center tile.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setCenterTile(AiTile centerTile) throws StopRequestException
 	{
@@ -65,7 +58,6 @@ public class DistanceMatrix extends Matrix
 	 * Recalculates the matrix for a given tile. The tile is registered as the center tile.
 	 * @param centerTile The tile for which the distances will be calculated.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void recalculate(AiTile centerTile) throws StopRequestException
 	{

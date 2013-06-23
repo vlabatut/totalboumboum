@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.drop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,29 +33,29 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /**
- * action de dÃ©poser un objet (une bombe)
+ * action de déposer un objet (une bombe)
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramÃ¨tre: actor=self
- * 	<br>paramÃ¨tre: target=oui (bomb)
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=type de bombe
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (bomb)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=type de bombe
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  *  
  * <p>ABILITY REFUSE
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramÃ¨tre: actor=oui (hero)
- * 	<br>paramÃ¨tre: target=oui (bomb)
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=type de bombe
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=oui (bomb)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=type de bombe
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  */
 /** 
  * putting an object on the ground.
@@ -72,8 +72,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralDrop extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

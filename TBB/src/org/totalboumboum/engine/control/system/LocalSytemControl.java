@@ -2,7 +2,7 @@ package org.totalboumboum.engine.control.system;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,19 +27,12 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
- * This class is used to handle the
- * system controls during a local game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class LocalSytemControl extends SystemControl
 {	
-	/**
-	 * Builds a standard control object.
-	 * 
-	 * @param loop
-	 * 		Loop to control.
-	 */
 	public LocalSytemControl(VisibleLoop loop)
 	{	super(loop);
 	}
@@ -47,7 +40,7 @@ public class LocalSytemControl extends SystemControl
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// nÃ©cessaire pour Ã©viter d'Ã©mettre des Ã©vÃ¨nements de faÃ§on rÃ©pÃ©titive pour un seul pressage de touche
+	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
@@ -65,7 +58,7 @@ public class LocalSytemControl extends SystemControl
 			
 			// faire renaitre le bonhomme
 //			else if(keyCode == KeyEvent.VK_1)
-//			{	//NOTE Ã  adapter car Ã§a peut Ãªtre intÃ©ressant pour le dÃ©bug
+//			{	//NOTE à adapter car ça peut être intéressant pour le débug
 				//loop.rebirth();
 //			}
 
@@ -102,47 +95,30 @@ public class LocalSytemControl extends SystemControl
 					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
-			// debug: hide/display sprites
-			else if(keyCode == KeyEvent.VK_F4)
-			{	SystemControlEvent controlEvent;
-				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES,SystemControlEvent.MODE);
-				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES,SystemControlEvent.REGULAR);
-				loop.processEvent(controlEvent);
-			}
 			// debug: FPS/UPS
-			else if(keyCode == KeyEvent.VK_F5)
+			else if(keyCode == KeyEvent.VK_F4)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_FPS);
 				loop.processEvent(controlEvent);
 			}
 			// debug: speed coeff
-			else if(keyCode == KeyEvent.VK_F6)
+			else if(keyCode == KeyEvent.VK_F5)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPEED);
 				loop.processEvent(controlEvent);
 			}
 			// debug: time
-			else if(keyCode == KeyEvent.VK_F7)
-			{	SystemControlEvent controlEvent;
-				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.MODE);
-				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME,SystemControlEvent.REGULAR);
+			else if(keyCode == KeyEvent.VK_F6)
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME);
 				loop.processEvent(controlEvent);
 			}
 			// debug: names
-			else if(keyCode == KeyEvent.VK_F8)
+			else if(keyCode == KeyEvent.VK_F7)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
 				loop.processEvent(controlEvent);
 			}
 			
 			// debug: engine pause
 			else if(keyCode == KeyEvent.VK_END)
-			{	SystemControlEvent controlEvent;
-				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.MODE);
-				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE,SystemControlEvent.REGULAR);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE);
 				loop.processEvent(controlEvent);
 			}
 			else if(keyCode == KeyEvent.VK_HOME)
@@ -170,23 +146,13 @@ public class LocalSytemControl extends SystemControl
 				loop.processEvent(controlEvent);
 			}
 			
-			// debug: CPU effective usage
-			else if(keyCode == KeyEvent.VK_F9)
+			// debug: CPU usage
+			else if(keyCode == KeyEvent.VK_F8)
 			{	SystemControlEvent controlEvent;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_EFFECTIVE_USAGE,SystemControlEvent.MODE);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_USAGE,SystemControlEvent.MODE);
 				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_EFFECTIVE_USAGE,SystemControlEvent.REGULAR);
-				loop.processEvent(controlEvent);
-			}
-
-			// debug: real-time usage
-			else if(keyCode == KeyEvent.VK_F10)
-			{	SystemControlEvent controlEvent;
-				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE,SystemControlEvent.MODE);
-				else
-					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE,SystemControlEvent.REGULAR);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_USAGE,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 		}

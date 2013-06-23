@@ -8,19 +8,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
-/**
- * @author Engin Hacıbektaşoğlu
- * @author Elif Nurdan İlgar
- */
-@SuppressWarnings("deprecation")
 public class HacibektasogluIlgar extends ArtificialIntelligence {
 	
-	/** */
 	 AiZone zone;
-		/** */
 	 AiHero notreHero;
 	
-		@Override
 	public AiAction processAction() throws StopRequestException {
 		// avant tout : test d'interruption
 		checkInterruption();

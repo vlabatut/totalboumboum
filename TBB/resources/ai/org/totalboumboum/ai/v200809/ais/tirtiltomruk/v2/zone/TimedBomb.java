@@ -5,35 +5,18 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 
 /**
 *
-* @author Abdullah Tırtıl
+* @author Abdullah Tirtil
 * @author Mert Tomruk
 *
 */
-@SuppressWarnings("deprecation")
 public class TimedBomb {
 	
-	/** */
 	private AiZone zone;
-	/** */
 	private AiBomb bomb;
-	/** */
 	private long releaseTime;
-	/** */
 	private long time;
-	/** */
 	private ZoneEnum danger;
 	
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 * @param bomb
-	 * 		Description manquante !
-	 * @param releaseTime
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 */
 	public TimedBomb(AiZone zone,AiBomb bomb,long releaseTime, long time)
 	{
 		this.zone = zone;
@@ -50,27 +33,14 @@ public class TimedBomb {
 			this.danger = ZoneEnum.FEUPOSSIBLE_TRESDANGEREUX;		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public ZoneEnum getDanger() {
 		return danger;
 	}
-	/**
-	 * 
-	 * @param danger
-	 * 		Description manquante !
-	 */
+
 	public void setDanger(ZoneEnum danger) {
 		this.danger = danger;
 	}
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public long getRemainingTime()
 	{
 		if(this.bomb.isWorking())
@@ -79,7 +49,6 @@ public class TimedBomb {
 			return -1;
 	}
 	
-	@Override
 	public boolean equals(Object timedBomb)
 	{
 		if(!TimedBomb.class.isInstance(timedBomb))
@@ -95,56 +64,30 @@ public class TimedBomb {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public AiZone getZone() {
 		return zone;
 	}
-	/**
-	 * 
-	 * @param zone
-	 * 		Description manquante !
-	 */
+
 	public void setZone(AiZone zone) {
 		this.zone = zone;
 	}
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public AiBomb getBomb() {
 		return bomb;
 	}
-	/**
-	 * 
-	 * @param bomb
-	 * 		Description manquante !
-	 */
+
 	public void setBomb(AiBomb bomb) {
 		this.bomb = bomb;
 	}
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
+
 	public long getReleaseTime() {
 		return releaseTime;
 	}
-	/**
-	 * 
-	 * @param releaseTime
-	 * 		Description manquante !
-	 */
+
 	public void setReleaseTime(long releaseTime) {
 		this.releaseTime = releaseTime;
 	}
 		
-	@Override
 	public String toString()
 	{
 		String result = "";
@@ -153,12 +96,7 @@ public class TimedBomb {
 		result += "/ Release Time:" + this.releaseTime;
 		return result;
 	}
-	
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 */
+
 	public void setTime(long time) {
 		this.time = time;
 		this.danger = ZoneEnum.FEUPOSSIBLE_PASDANGEREUX;

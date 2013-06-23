@@ -10,17 +10,18 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.State;
  * ce noeud a ete visite par l'algorithme). 
  */
 public class SearchNode
-{	/** etat du probleme associe au noeud */
+{	// etat du probleme associe au noeud
 	private State state;
-	/** cout du noeud (calcule depuis la racine) */
+	// cout du noeud (calcule depuis la racine)
 	private double cost;
-	/** iteration de visite (ou -1 si le noeud n'a pas encore ete visite) */
+	// iteration de visite (ou -1 si le noeud n'a pas encore ete visite)
 	private int iteration;
 
 	/**
 	 * Constructeur creant un noeud non visite, d'iteration -1, caracterise par
 	 * les donnees passees en parametres. 
 	 * @param state	etat du probleme associe au noeud de recherche
+	 * @param depth	profondeur du noeud
 	 * @param cost	coet calcule depuis la racine
 	 */
 	public SearchNode(State state,double cost)
@@ -55,7 +56,6 @@ public class SearchNode
 	{	return iteration;
 	}
 	
-	@Override
 	public boolean equals(Object object)
 	{	return object == this;		
 	}

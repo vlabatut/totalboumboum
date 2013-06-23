@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -47,22 +47,20 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
- * reprÃ©sente une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 final class AiDataTile extends AiTile
 {	
 	/**
-	 * construit une reprÃ©sentation de la case passÃ©e en paramÃ¨tre
+	 * construit une représentation de la case passée en paramètre
 	 * 
 	 * @param tile
-	 * 		case reprÃ©sentÃ©e
+	 * 		case représentée
 	 * @param zone
-	 * 		zone contenant la reprÃ©sentation
+	 * 		zone contenant la représentation
 	 */
 	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
@@ -77,10 +75,7 @@ final class AiDataTile extends AiTile
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met Ã  jour cette case et son contenu
-	 * 
-	 * @param elapsedTime 
-	 * 		?	
+	 * met à jour cette case et son contenu
 	 */
 	protected void update(long elapsedTime)
 	{	updateSprites(elapsedTime);		
@@ -89,7 +84,7 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** reprÃ©sentation de la zone Ã  laquelle cette case appartient */
+	/** représentation de la zone à laquelle cette case appartient */
 	private AiDataZone zone;
 	
 	@Override
@@ -100,14 +95,14 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case du jeu que cette classe reprÃ©sente */
+	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
 	/**
-	 * renvoie la case rÃ©elle reprÃ©sentÃ©e par cet objet
+	 * renvoie la case réelle représentée par cet objet
 	 * 
 	 * @return
-	 * 		la case rÃ©elle reprÃ©sentÃ©e par cet objet
+	 * 		la case réelle représentée par cet objet
 	 */
 	protected Tile getTile()
 	{	return tile;
@@ -117,10 +112,10 @@ final class AiDataTile extends AiTile
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * initialise les numÃ©ros de ligne et colonne de cette case 
+	 * initialise les numéros de ligne et colonne de cette case 
 	 */
 	private void initTileLocation()
-	{	line = tile.getRow();
+	{	line = tile.getLine();
 		col = tile.getCol();
 	}
 
@@ -138,29 +133,29 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste Ã  usage interne des blocks Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des blocks éventuellement contenus dans cette case */
 	private final List<AiDataBlock> internalBlocks = new ArrayList<AiDataBlock>();
-	/** liste Ã  usage externe des blocks Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des blocks éventuellement contenus dans cette case */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
-	/** liste Ã  usage interne des bombes Ã©ventuellement contenues dans cette case */
+	/** liste à usage interne des bombes éventuellement contenues dans cette case */
 	private final List<AiDataBomb> internalBombs = new ArrayList<AiDataBomb>();
-	/** liste Ã  usage externe des bombes Ã©ventuellement contenues dans cette case */
+	/** liste à usage externe des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
-	/** liste Ã  usage interne des feux Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des feux éventuellement contenus dans cette case */
 	private final List<AiDataFire> internalFires = new ArrayList<AiDataFire>();
-	/** liste Ã  usage externe des feux Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des feux éventuellement contenus dans cette case */
 	private final List<AiFire> externalFires = new ArrayList<AiFire>();
-	/** liste Ã  usage interne des sols Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des sols éventuellement contenus dans cette case */
 	private final List<AiDataFloor> internalFloors = new ArrayList<AiDataFloor>();
-	/** liste Ã  usage externe des sols Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des sols éventuellement contenus dans cette case */
 	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
-	/** liste Ã  usage interne des personnages Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des personnages éventuellement contenus dans cette case */
 	private final List<AiDataHero> internalHeroes = new ArrayList<AiDataHero>();
-	/** liste Ã  usage externe des personnages Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
-	/** liste Ã  usage interne des items Ã©ventuellement contenus dans cette case */
+	/** liste à usage interne des items éventuellement contenus dans cette case */
 	private final List<AiDataItem> internalItems = new ArrayList<AiDataItem>();
-	/** liste Ã  usage externe des items Ã©ventuellement contenus dans cette case */
+	/** liste à usage externe des items éventuellement contenus dans cette case */
 	private final List<AiItem> externalItems = new ArrayList<AiItem>();
 
 	@Override
@@ -194,10 +189,10 @@ final class AiDataTile extends AiTile
 	}
 	
 	/** 
-	 * met Ã  jour les reprÃ©sentations des sprites contenus dans cette case
+	 * met à jour les représentations des sprites contenus dans cette case
 	 * 
 	 * @param elapsedTime
-	 * 		temps Ã©coulÃ© depuis la derniÃ¨re mise Ã  jour
+	 * 		temps écoulé depuis la dernière mise à jour
 	 */
 	private void updateSprites(long elapsedTime)
 	{	// block
@@ -364,17 +359,15 @@ final class AiDataTile extends AiTile
 	}
 
 	/**
-	 * fonction auxiliaire utilisÃ©e pour dÃ©terminer si cette
-	 * case est traversable par le sprite passÃ© en paramÃ¨tre.
-	 * (cette fonction rÃ©alise le traitement relativement Ã  
-	 * la liste de sprite passÃ©e en paramÃ¨tre)
+	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * case est traversable par le sprite passé en paramètre.
+	 * (cette fonction réalise le traitement relativement à 
+	 * la liste de sprite passée en paramètre)
 	 * 
-	 * @param <T> 
-	 * 		?	
 	 * @param sprite
 	 * 		le sprite qui veut traverser cette case
 	 * @param list
-	 * 		les sprites de cette case Ã  tester
+	 * 		les sprites de cette case à tester
 	 * @return	
 	 * 		vrai si le sprite peut traverser tous les sprites de la liste
 	 */
@@ -398,14 +391,14 @@ final class AiDataTile extends AiTile
 	
 	/**
 	 * initialise une fois pour toutes les voisins de la case,
-	 * pour ne pas avoir Ã  les recalculer Ã  chaque appel de la mÃ©thode
+	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
 	 * getNeighbors.
 	 */
 	protected void initNeighbors()
 	{	List<Direction> directions = Direction.getPrimaryValues();
 		for(Direction direction: directions)
 		{	Tile neighbor = tile.getNeighbor(direction);
-			int line = neighbor.getRow();
+			int line = neighbor.getLine();
 			int col = neighbor.getCol();
 			AiDataTile aiNeighbor = getZone().getTile(line,col);
 			neighbors.put(direction,aiNeighbor);
@@ -447,16 +440,12 @@ final class AiDataTile extends AiTile
 	}
 
 	/**
-	 * termine les simulations de sprites passÃ©es en paramÃ¨tres
+	 * termine les simulations de sprites passées en paramètres
 	 * 
 	 * @param <T>
 	 * 		type de simulation
-	 * @param <U> 
-	 * 		?	
 	 * @param internalList
 	 * 		liste de simulations
-	 * @param externalList 
-	 * 		?	
 	 */
 	private <T extends AiDataSprite<?>, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();

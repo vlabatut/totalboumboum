@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.modulation;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,8 +30,6 @@ import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
@@ -79,11 +77,6 @@ public class EmptyModulationManager extends ModulationManager
 	{	return targetModulation;
 	}
 	
-	@Override
-	public TargetModulation getTargetModulation(SpecificAction action, GestureName gestureName)
-	{	return targetModulation;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// THIRD MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -96,11 +89,6 @@ public class EmptyModulationManager extends ModulationManager
 	
 	@Override
 	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
-	{	return thirdModulation;
-	}
-
-	@Override
-	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
 	{	return thirdModulation;
 	}
 
@@ -126,12 +114,6 @@ public class EmptyModulationManager extends ModulationManager
 	}
 	
 	@Override
-	public boolean wouldThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances, GestureName gestureName)
-	{	boolean result = false;
-		return result;
-	}
-
-	@Override
 	public boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	boolean result = false;
 		return result;
@@ -143,12 +125,6 @@ public class EmptyModulationManager extends ModulationManager
 		return result;
 	}
 	
-	@Override
-	public boolean wouldTargetPreventing(SpecificAction action, GestureName gestureName)
-	{	boolean result = false;
-		return result;
-	}
-
 	public StateAbility modulateStateAbility(String name)
 	{	//StateAbility result = sprite.getAbility(name);
 		return stateAbility;

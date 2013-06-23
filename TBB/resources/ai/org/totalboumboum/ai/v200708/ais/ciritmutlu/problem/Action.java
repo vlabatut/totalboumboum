@@ -7,29 +7,15 @@ package org.totalboumboum.ai.v200708.ais.ciritmutlu.problem;
  */
 public class Action 
 {	
-	/** */
 	@SuppressWarnings("unused")
 	private int action;
-	/** */
 	private double cost;
 	
-	/**
-	 * 
-	 * @param action
-	 * 		Description manquante !
-	 * @param cost
-	 * 		Description manquante !
-	 */
 	public Action(int  action, double cost) {
 		this.action = action;
 		this.cost = cost;
 	}
 	
-	/**
-	 * 
-	 * @param action
-	 * 		Description manquante !
-	 */
 	public Action(int action) {
 		this.action = action;
 		this.cost = 0;

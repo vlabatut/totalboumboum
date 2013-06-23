@@ -14,14 +14,11 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.mode.Mode;
  */
 /**
  * Selects a mode based on the current state of the game.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class ModeSelector
 {
-	/** */
 	private static final int BONUS_THRESHOLD = 2; //minimum number of remaining items
 
 	/**
@@ -34,7 +31,6 @@ public class ModeSelector
 	 *            AkbulutKupelioglu using this. (for checkInterruption())
 	 * @return the chosen Mode.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static Mode selectMode(AiZone myZone, AkbulutKupelioglu ia)
 			throws StopRequestException
@@ -62,7 +58,6 @@ public class ModeSelector
 	 * Resets the modes.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static void reset(AkbulutKupelioglu ia) throws StopRequestException
 	{

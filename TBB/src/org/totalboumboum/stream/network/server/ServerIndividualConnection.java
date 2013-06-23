@@ -2,7 +2,7 @@ package org.totalboumboum.stream.network.server;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -325,7 +325,7 @@ public class ServerIndividualConnection extends AbstractConnection
 				reader.finish();
 				writer.finish();
 				
-				//TODO Ã  completer
+				//TODO à completer
 				if(state==ClientState.SELECTING_GAME)
 				{	generalConnection.removeConnection(this);
 				}
@@ -345,7 +345,6 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

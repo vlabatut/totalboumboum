@@ -17,24 +17,14 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class WallSuccessor extends BasicSuccessorCalculator {
-	/** */
 	@SuppressWarnings("unused")
 	private DaneSatir ai;
-	/** */
 	private TimeMatrice time;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public WallSuccessor(DaneSatir ai) throws StopRequestException {
 		this.ai=ai;
 		this.time=new TimeMatrice(ai);

@@ -20,54 +20,29 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Necmi Murat Tangay
  *
  */
-@SuppressWarnings("deprecation")
 public class StrategyManager {
 
-	/** */
 	private AksoyTangay myAI;
 	
-	/** */
 	private PathManager pathManager;
 	
-	/** */
 	private EscapeManager escapeManager;
 	
-	/** */
 	private AiPath path;
 	
-	/** */
 	private AiTile currentTile;
 	
-	/** */
 	private AiTile lastTile;
 	
-	/** */
 	AiTile tTypeEscapeTile = null;
 		
-	/** */
 	private AiZone percepts;
 	
-	/** */
 	private Zone zone;
 	
-	/** */
 	List<AiBomb> bombs;
 		
-	/**
-	 * 
-	 * @param myAI
-	 * 		Description manquante !
-	 * @param percepts
-	 * 		Description manquante !
-	 * @param zone
-	 * 		Description manquante !
-	 * @param pathManager
-	 * 		Description manquante !
-	 * @param escapeManager
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public StrategyManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager, EscapeManager escapeManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -82,14 +57,11 @@ public class StrategyManager {
 	}
 	
 	//////////////////////Defans staratejileri            ///////////////////////////////////////////////
-	/**
+	/*
 	 * cette fonx retourn vrai si plusieurs bombe nous menace avec le type t, 
 	 * sinon(si le type de menace est I) elle renvoi faux
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+	
 	public Direction typeDefiningAndGettingDirection() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -97,7 +69,7 @@ public class StrategyManager {
 		Direction result = Direction.NONE;
 		
 		bombs = bombsMenaceMe();
-		//system.out.println("bombe size!! : "+bombs.size()+" ve onlar unlar : "+bombs.toString());
+		//system.out.println("bombe size!! : "+bombs.size()+" ve onlar þunlar : "+bombs.toString());
 		
 		List<AiTile> tmpTiles = new ArrayList<AiTile>();
 		Iterator<AiBomb> itrBomb = bombs.iterator();
@@ -117,17 +89,17 @@ public class StrategyManager {
 			
 			AiTile tTile;
 			
-			//si les colonnes ou les lignes des deux bombes sont la meme, Ã§a veut dire I ou - type, pas t ou L type.
+			//si les colonnes ou les lignes des deux bombes sont la meme, ça veut dire I ou - type, pas t ou L type.
 			if((tmpTiles.get(0).getCol() == tmpTiles.get(1).getCol()) || (tmpTiles.get(0).getLine() == tmpTiles.get(1).getLine()))
 			{
 				tTile = iTypeEscape(bombs);
 				result = percepts.getDirection(myAI.getOwnHero(), tTile);
-				//system.out.println("index hatas verilen yerde if bloundaym");
+				//system.out.println("index hatasý verilen yerde if bloðundayým");
 			}
 			//sinon c'est la menace de t ou L type
 			else
 			{
-				//system.out.println("index hatas verilen yerde else bloundaym");
+				//system.out.println("index hatasý verilen yerde else bloðundayým");
 				
 				//si les deux bombes sont loins que nous plus d'1 cas
 				if(!escapeManager.getCurrentTile().getNeighbors().contains(tmpTiles.get(0)) && 
@@ -168,13 +140,7 @@ public class StrategyManager {
 	}
 	
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public List<AiBomb> bombsMenaceMe() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -203,14 +169,14 @@ public class StrategyManager {
 				
 //				if(tmpTile == escapeManager.getCurrentTile())
 //				{
-//					//system.out.println("bombay ekliyoruz!!!!!!!!");
+//					//system.out.println("bombayý ekliyoruz!!!!!!!!");
 //					System.out.println("current tile : "+escapeManager.getCurrentTile());
 //					result.add(tmpBomb);
 //				}
 				
 				if(tmpTile == myAI.getOwnHeroTile())
 				{
-					//system.out.println("bombay ekliyoruz!!!!!!!!");
+					//system.out.println("bombayý ekliyoruz!!!!!!!!");
 					//system.out.println("current tile : "+myAI.getOwnHeroTile().toString());
 					result.add(tmpBomb);
 				}
@@ -224,15 +190,7 @@ public class StrategyManager {
 		
 	}
 	
-	/**
-	 * 
-	 * @param bombs
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public AiTile iTypeEscape(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -263,15 +221,6 @@ public class StrategyManager {
 		return tTypeEscapeTile;		
 	}
 	
-	/**
-	 * 
-	 * @param bombs
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile tTypeEscape(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -328,13 +277,7 @@ public class StrategyManager {
 		return tTypeEscapeTile;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public AiTile tTypeEscapeWithOneNeighbor() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -390,15 +333,6 @@ public class StrategyManager {
 		return tTypeEscapeTile;
 	}
 	
-	/**
-	 * 
-	 * @param bombs
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTile escapeFromOneOfBomb(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -519,15 +453,7 @@ public class StrategyManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param bombs
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public boolean bombeHasExplosed(List<AiBomb> bombs) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -537,13 +463,6 @@ public class StrategyManager {
 		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public List<AiBomb> getBombs() throws StopRequestException {
 		myAI.checkInterruption();
 		return bombs;
@@ -551,12 +470,6 @@ public class StrategyManager {
 	
 	
 	//////////////////////BONUSSSSSS staratejileri            ///////////////////////////////////////////////
-	/**
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
 	public boolean hasExplosed() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -600,12 +513,7 @@ public class StrategyManager {
 	//////////////////////GENERALLLLL            ///////////////////////////////////////////////
 	
 	
-	/**
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
+
 	public boolean finishedTTypeEscape() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -616,13 +524,6 @@ public class StrategyManager {
 		return (tTypeEscapeTile == currentTile);
 	}
 	
-	/**
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -630,5 +531,8 @@ public class StrategyManager {
 		currentTile = myAI.getOwnHero().getTile();
 		
 		return (lastTile == currentTile);
+			
 	}
+	
+	
 }

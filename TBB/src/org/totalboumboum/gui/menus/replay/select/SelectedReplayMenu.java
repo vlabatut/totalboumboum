@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.replay.select;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,7 +25,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
@@ -36,22 +35,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.single.SingleTournament;
-import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
-import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
-import org.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.menus.replay.round.RoundSplitPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
-import org.totalboumboum.stream.file.archive.GameArchive;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
@@ -62,7 +52,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
+public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public SelectedReplayMenu(SplitMenuPanel container, MenuPanel parent)
@@ -73,21 +63,21 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiSizeTools.buttonTextHeight;
+		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_REPLAY_LOAD_BUTTON);
-		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonDelete = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonConfirm = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonCancel = GuiButtonTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonDelete = GuiTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonCancel = GuiTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -131,12 +121,14 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		{	replaceWith(parent);
 	    }
 		if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE))
-		{	String key = GuiKeys.MENU_REPLAY_LOAD_DELETE_TITLE;
-			List<String> text = new ArrayList<String>();
-			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_REPLAY_LOAD_DELETE_QUESTION));
-			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
-			questionModalDelete.addListener(this);
-			getFrame().setModalDialog(questionModalDelete);
+		{	FileClientStream selectedReplay = levelData.getSelectedReplay();
+			if(selectedReplay!=null)
+			{	String folder = selectedReplay.getFolder();
+				String path = baseFolder + File.separator + folder;
+				File file = new File(path);
+				FileTools.deleteDirectory(file);
+				levelData.refresh();			
+			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM))
 		{	RoundSplitPanel roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
@@ -188,29 +180,5 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private QuestionModalDialogPanel questionModalDelete = null;
-	
-	@Override
-	public void modalDialogButtonClicked(String buttonCode)
-	{	getFrame().unsetModalDialog();
-		if(questionModalDelete!=null)
-		{	questionModalDelete.removeListener(this);
-			questionModalDelete = null;
-			FileClientStream selectedReplay = levelData.getSelectedReplay();
-			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
-			{	if(selectedReplay!=null)
-				{	String folder = selectedReplay.getFolder();
-					String path = baseFolder + File.separator + folder;
-					File file = new File(path);
-					FileTools.deleteDirectory(file);
-					levelData.refresh();			
-				}			
-			}
-		}
 	}
 }

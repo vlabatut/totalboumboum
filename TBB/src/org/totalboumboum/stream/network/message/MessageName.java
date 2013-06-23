@@ -2,7 +2,7 @@ package org.totalboumboum.stream.network.message;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -81,7 +81,7 @@ public enum MessageName
 		REQUESTING_PLAYERS_SET,
 		
 		/** server requests client current state */ 
-//		REQUESTING_CLIENT_STATE, //pas nÃ©cessaire, Ã  Ã©viter mÃªme
+//		REQUESTING_CLIENT_STATE, //pas nécessaire, à éviter même
 		/** server sends game information */ 
 		UPDATING_GAME_INFO,
 		/** server sends players list */

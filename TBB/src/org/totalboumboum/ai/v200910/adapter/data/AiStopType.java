@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,15 +26,13 @@ package org.totalboumboum.ai.v200910.adapter.data;
  * types de blocages possibles pour un sprite
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, à ne plus utiliser. 
+ *
  */
 public enum AiStopType
 {
 	/** laisse passer n'importe quel sprite */
 	NO_STOP,
-	/** laisse passer seulement les sprites ayant un pouvoir spécial */
+	/** laisse passer seulement les sprites ayant un pouvoir sp�cial */
 	WEAK_STOP,
 	/** ne laisse passer aucun sprite */
 	STRONG_STOP;		

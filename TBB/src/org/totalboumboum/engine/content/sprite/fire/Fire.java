@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.fire;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,7 +35,6 @@ import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.hero.Hero;
 
 /**
  * 
@@ -71,27 +70,21 @@ public class Fire extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public boolean consumeTile(Tile tile, boolean fake)
-	{	boolean result = false;
-//if(!fake)
-//	System.out.println();
-		List<Sprite> sprites = tile.getSprites();
+	public void consumeTile(Tile tile)
+	{	List<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();
 		while(i.hasNext())
 		{	Sprite ts = i.next();
-			result = consumeSprite(ts,fake) || result;
-		}
-		return result || sprites.isEmpty();
+			consumeSprite(ts);
+		}	
 	}
 	
-	public boolean consumeSprite(Sprite sprite, boolean fake)
+	public void consumeSprite(Sprite sprite)
 	{	SpecificAction specificAction = new SpecificConsume(this,sprite,Direction.NONE,Contact.INTERSECTION,TilePosition.SAME,Orientation.NEUTRAL);
 		ActionAbility ability = modulateAction(specificAction);
-		boolean result = ability.isActive();
-		if(result && !fake)
+		if(ability.isActive())
 		{	ActionEvent e = new ActionEvent(specificAction);
 			sprite.processEvent(e);
 		}
-		return result;
 	}
 }

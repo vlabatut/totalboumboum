@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.players;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,12 +37,9 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiStringTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.GameData;
@@ -132,7 +129,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				Profile profile = i.next();
 				// color
 				Color clr = profile.getSpriteColor().getColor();
-				int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				setLineBackground(line,bg);
 				// portrait
@@ -185,7 +182,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 					{	text = Integer.toString(playerRank);
 						tooltip = text;
 					}
-					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>rankWidth)
 						rankWidth = temp;
 					setLabelText(line,col,text,tooltip);
@@ -197,7 +194,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 		}
 		
 		// widths
-		{	int nameWidth = getDataWidth() - (cols-1)*GuiSizeTools.subPanelMargin - 2*iconWidth - rankWidth;
+		{	int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin - 2*iconWidth - rankWidth;
 			if(showControls)
 				nameWidth = nameWidth - controlWidth;
 			int col = 0;

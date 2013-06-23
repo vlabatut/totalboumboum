@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level.players;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -50,7 +50,7 @@ public class Players implements Serializable
 	{	return locations;	
 	}
 	
-	public boolean isOccupied(int row, int col)
+	public boolean isOccupied(int line, int col)
 	{	boolean result = false;
 		Iterator<PlayerLocation[]> it = locations.values().iterator();
 		while(!result && it.hasNext())
@@ -58,7 +58,7 @@ public class Players implements Serializable
 			int i = 0;
 			while(!result && i<temp.length)
 			{	PlayerLocation pl = temp[i];
-				result = pl.getRow()==row && pl.getCol()==col;
+				result = pl.getLine()==line && pl.getCol()==col;
 				i++;
 			}
 		}

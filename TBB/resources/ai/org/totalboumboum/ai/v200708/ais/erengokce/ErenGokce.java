@@ -8,69 +8,46 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 /**
  * 
  * @author Can Eren
- * @author Mustafa Mert G√∂k√ße
+ * @author Mustafa Mert Gokce
  *
  */
-@SuppressWarnings("deprecation")
 public class ErenGokce extends ArtificialIntelligence {
 
-	/** variable controleur(calcul une seul fois) du fonction ou ai-je commence? whereDidIStart() */
-	int once=0;
-	/** les positions du shrink */
-	int shrinkx=1000;
-	/** */
-	int shrinky=1000;
-	/** les booleens indiquant si les positons but sont acquris */ 
-	boolean xaccomplished=false;
-	/** */
-	boolean yaccomplished=false;
-	/** */
-//	int startx = 15;
-	int startx; // adjustment
-	/** */
-//	int starty = 13;
-	int starty; // adjustment
-	/** right top corner, left top corner, ..etc la position du joueur au debut */
-	boolean rtc=false;
-	/** */
-	boolean ltc=false;
-	/** */
-	boolean rdc=false;
-	/** */
-	boolean ldc=false;
-	/** */
-	public static final long serialVersionUID = 1L; 
-	/** shrink a-t-elle commenc√© ou pas, y-a-t-il une bombe ou pas */
-	boolean mybomb=false;
-	/** */
-	boolean shrink=false;
-	/** position du bombe, dernier mouvement */
-	int[] bombpos=new int[2];
-	/** */
-	int lastmove;
-	/** */
-	int i=0;
-	
 	/**
 	 * 
 	 */
+	//variable controleur(calcul une seul fois) du fonction ou ai-je commence? whereDidIStart()
+	int once=0;
+	//les positions du shrink
+	int shrinkx=1000;
+	int shrinky=1000;
+	//les booleens indiquant si les positons but sont acquris 
+	boolean xaccomplished=false,yaccomplished=false;
+	int startx=15;
+	int starty=13;
+	//right top corner, left top corner, ..etc la position du joueur au debut
+	boolean rtc=false,ltc=false,rdc=false,ldc=false;
+	private static final long serialVersionUID = 1L; 
+	//shrink a-t-elle commencÈ ou pas, y-a-t-il une bombe ou pas
+	boolean mybomb=false,shrink=false;
+	//position du bombe, dernier mouvement
+	int[] bombpos=new int[2];
+	int lastmove;
+	int i=0;
 	public ErenGokce() {
 			super("GokceEren");
 		//  Auto-generated constructor stub
 	}
 	
-	/** indicateur de premi√®re invocation (pour la compatibilit√© */
+	/** indicateur de premiËre invocation (pour la compatibilitÈ */
 	private boolean firstTime = true;
 
 	@Override
-	public Integer processAction() throws Exception
-	{	Integer result=AI_ACTION_DO_NOTHING;
+	public Integer call() throws Exception {
+		Integer result=AI_ACTION_DO_NOTHING;
 		
 		if(firstTime)
-		{	firstTime = false;
-			startx = getZoneMatrixDimX(); // adjustment
-			starty = getZoneMatrixDimY(); // adjustment
-		}
+			firstTime = false;
 		else
 		{	
 		//controle shrink
@@ -203,14 +180,6 @@ public class ErenGokce extends ArtificialIntelligence {
 		
 	}
 */
-	/**
-	 * @param x 
-	 * 		Description manquante !
-	 * @param y 
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 */
 	private boolean isObstacle(int x, int y)
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
@@ -228,17 +197,6 @@ public class ErenGokce extends ArtificialIntelligence {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @param move
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	private boolean isMovePossible(int x, int y, int move)
 	{	boolean result;
 		// calcum
@@ -261,26 +219,6 @@ public class ErenGokce extends ArtificialIntelligence {
 		}
 		return result;
 	}
-	
-	/**
-	 * 
-	 * @param up
-	 * 		Description manquante !
-	 * @param down
-	 * 		Description manquante !
-	 * @param left
-	 * 		Description manquante !
-	 * @param right
-	 * 		Description manquante !
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws ExecutionException
-	 * 		Description manquante !
-	 */
 	private int danger(boolean up,boolean down,boolean left,boolean right,int x,int y) throws ExecutionException
 	{
 		//implementation des structures
@@ -351,25 +289,6 @@ public class ErenGokce extends ArtificialIntelligence {
 	return action;
 	}
 	
-	/**
-	 * 
-	 * @param up
-	 * 		Description manquante !
-	 * @param down
-	 * 		Description manquante !
-	 * @param left
-	 * 		Description manquante !
-	 * @param right
-	 * 		Description manquante !
-	 * @param x
-	 * 		Description manquante !
-	 * @param y
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws ExecutionException
-	 * 		Description manquante !
-	 */
 	private int shrinkDanger(boolean up,boolean down,boolean left,boolean right,int x,int y) throws ExecutionException
 	{
 		//on traite le shrink comme un bombe a pouvoir 4
@@ -568,16 +487,6 @@ public class ErenGokce extends ArtificialIntelligence {
 		return action;
 	}
 */	
-	/**
-	 * @param up 
-	 * 		Description manquante !
-	 * @param down 
-	 * 		Description manquante !
-	 * @param left 
-	 * 		Description manquante !
-	 * @param right 
-	 * 		Description manquante !
-	 */
 	private void whereDidIStart(boolean up,boolean down,boolean left,boolean right)
 	{
 		if(once<=0)

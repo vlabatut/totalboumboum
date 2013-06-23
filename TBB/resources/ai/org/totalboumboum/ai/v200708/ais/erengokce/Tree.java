@@ -3,25 +3,13 @@ package org.totalboumboum.ai.v200708.ais.erengokce;
 /**
  * 
  * @author Can Eren
- * @author Mustafa Mert Gökçe
+ * @author Mustafa Mert Gokce
  *
  */
 public class Tree {
-	/** */
+
 	Node root;
-	/** */
-	Node fils1;
-	/** */
-	Node fils2;
-	/** */
-	Node fils3;
-	/** */
-	Node fils4;
-	/**
-	 * 
-	 * @param root
-	 * 		Description manquante !
-	 */
+	Node fils1,fils2,fils3,fils4;
 	//un noeud et ses fils potentiels
 	public Tree(Node root)
 	{
@@ -46,9 +34,6 @@ public class Tree {
 			fils4=new Node(500,500,root);
 	}
 	
-	/**
-	 * 
-	 */
 	public void constructTree()
 	{
 		

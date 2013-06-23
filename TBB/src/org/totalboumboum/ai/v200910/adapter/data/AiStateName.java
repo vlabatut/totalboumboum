@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -24,24 +24,23 @@ package org.totalboumboum.ai.v200910.adapter.data;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
 /**
- * reprÃ©sente un nom associÃ© Ã  un Ã©tat, c'est Ã  dire : l'action
- * effectuÃ©e par le sprite concernÃ©, ou bien l'action qu'il subit.
- * Ces actions sont diffÃ©rentes des 'gestes' utilisÃ©s dans le jeu,
- * car elles sont plus simples : une de ces actions peut correspondre Ã  
- * plusieurs gestes diffÃ©rents. Par exemple, ce STANDING-ci
- * peut correspondre Ã  un joueur qui marche (WALKING), ou bien Ã  une bombe 
- * en train de glisser (SLIDING), ou bien Ã  un joueur en train de pousser 
+ * représente un nom associé à un état, c'est à dire : l'action
+ * effectuée par le sprite concerné, ou bien l'action qu'il subit.
+ * Ces actions sont différentes des 'gestes' utilisés dans le jeu,
+ * car elles sont plus simples : une de ces actions peut correspondre à 
+ * plusieurs gestes différents. Par exemple, ce STANDING-ci
+ * peut correspondre à un joueur qui marche (WALKING), ou bien à une bombe 
+ * en train de glisser (SLIDING), ou bien à un joueur en train de pousser 
  * une bombe (PUSHING), etc.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
+
 public enum AiStateName
 {
 	// equivalent gesture: BURNING
-	/** le sprite est en train de brÃ»ler */
+	/** le sprite est en train de brûler */
 	BURNING,
 	// equivalent gesture: ENDED
 	/** le sprite n'est plus en jeu */
@@ -50,19 +49,19 @@ public enum AiStateName
 	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
 	// equivalent gesture: APPEARING, CRYING, ENTERING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PREPARED, PUNCHING, STANDING, STANDING_FAILING, WAITING
-	/** le sprite ne fait rien ou bien rÃ©alise une action qui ne nÃ©cessite pas de dÃ©placement */ 
+	/** le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
 	STANDING,
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
-	/** le sprite se dÃ©place sur le sol */
+	/** le sprite se déplace sur le sol */
 	MOVING;
 	
 	// unused gestures: NONE, HIDING
 	
 	/**
-	 * convertit une chaine de caractÃ¨res correspondant Ã  un geste du jeu
-	 * en un objet correspondant Ã  une action telle qu'elle est perÃ§ue par l'IA.
+	 * convertit une chaine de caractères correspondant à un geste du jeu
+	 * en un objet correspondant à une action telle qu'elle est perçue par l'IA.
 	 * 
-	 * @param gesture	geste Ã  convertir
+	 * @param gesture	geste à convertir
 	 * @return	le symbole de l'action correspondante 
 	 */
 	public static AiStateName makeNameFromGesture(GestureName gesture)

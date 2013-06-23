@@ -7,27 +7,15 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
- * @author Eser Devecioğlu
- * @author lev Korkmaz
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
  *
  */
-@SuppressWarnings("deprecation")
 public class AiTileComparator implements Comparator<AiTile> {
 
-	/** */
 	AiTile t;
-	/** */
 	DeveciogluKorkmaz dk;
 
-	/**
-	 * 
-	 * @param t
-	 * 		Description manquante !
-	 * @param dk
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiTileComparator(AiTile t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
 
@@ -36,7 +24,6 @@ public class AiTileComparator implements Comparator<AiTile> {
 		this.dk = dk;
 	}
 
-	@Override
 	public int compare(AiTile n1, AiTile n2) {
 		try {
 			dk.checkInterruption();

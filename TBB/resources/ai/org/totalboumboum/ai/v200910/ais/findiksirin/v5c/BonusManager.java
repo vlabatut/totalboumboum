@@ -15,20 +15,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Ali FÄ±ndÄ±k
- * @author GÃ¶knur ÅžÄ±rÄ±n
- */
-@SuppressWarnings("deprecation")
 public class BonusManager
 {
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public BonusManager(FindikSirin ai) throws StopRequestException
 	{	ai.checkInterruption();
 	
@@ -57,13 +45,7 @@ public class BonusManager
 	}
 	
 	
-	/** creation de la liste des bonus
-	 *  
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//creation de la liste des bonus 
 	private List<AiTile> bonusDestinations() throws StopRequestException{
 	ai.checkInterruption();
 	List<AiTile> dest = new ArrayList<AiTile>();
@@ -81,13 +63,7 @@ public class BonusManager
 	return dest;
 	}
 	
-	/** si il n'y a pas un bonus Reachable sur la zone du jeu
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//si il n'y a pas un bonus Reachable sur la zone du jeu
 	public boolean noBonusReachable() throws StopRequestException{
 		ai.checkInterruption();
 		if(bonusDestinations().isEmpty())
@@ -99,36 +75,18 @@ public class BonusManager
 		}
 	}
 	
-	/** si il n'y a pas un bonus sur la zone du jeu
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//si il n'y a pas un bonus sur la zone du jeu
 	public boolean noBonus() throws StopRequestException{
 		ai.checkInterruption();
 		return bonusDestinations().isEmpty();
 	}
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isBonusOver() throws StopRequestException{
 		ai.checkInterruption();
 		return bonusDestructions().isEmpty();
 	}
 	
-	/** si la liste des bombes est vide, on cree une liste des murs pour destruire
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
+	//si la liste des bombes est vide, on cree une liste des murs pour destruire
 	public List<AiTile> bonusDestructions() throws StopRequestException{
 		ai.checkInterruption();
 		List<AiTile> destructibles = new ArrayList<AiTile>();
@@ -166,23 +124,18 @@ public class BonusManager
 	
 /////////////////////////////////////////////////////////////////////////////////////////
 //L'ALGORITHME ASTAR POUR CALCULER LE COUTS DES CHEMINS
-	/** classe implÃ©mentant l'algorithme A* */
+	/** classe implémentant l'algorithme A* */
 	private Astar astar;
-	/** classe implÃ©mentant la fonction heuristique */
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implÃ©mentant la fonction de coÃ»t */
+	/** classe implémentant la fonction de coût */
 	private MatrixCostCalculator costCalculator;
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// calcul de la matrice de coÃ»t : on prend l'opposÃ© du niveau de sÃ»retÃ©
-		// i.e. : plus le temps avant l'explosion est long, plus le coÃ»t est faible 
+		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
+		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -194,43 +147,29 @@ public class BonusManager
 		}
 	}	
 //////////////////////////////////////////////////////////////////////////////////////////
-	/** notre IA et la zone du jeu */
+	//notre IA et la zone du jeu
 	private FindikSirin ai;
-	/** */
 	private AiZone zone;
 	
-	/** */
 	private boolean OnBonusDestruction;
 
-	/** si on est arrive a la destination */
+	//si on est arrive a la destination
 	private boolean arrived;
-	/** la case de destination choisit pour la fuite */
+	// la case de destination choisit pour la fuite
 	private AiTile tileDest;
-	/** destinations potentielles */
+	// destinations potentielles
 	private List<AiTile> possibleDest;
-	/** le chemin qu'on va suivre */
+	//le chemin qu'on va suivre
 	private AiPath path;
 
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//
 	public boolean isOnBonusDestruction() throws StopRequestException{
 		ai.checkInterruption();
 		return OnBonusDestruction;
 	}
 	
 	
-	/** retourne si on est arrive ou pas
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	// retourne si on est arrive ou pas
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption();
 		if(!arrived)
@@ -246,20 +185,14 @@ public class BonusManager
 		}
 		return arrived;
 	}
-	/** on met a jour le chemin qu'on a choisit 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//on met a jour le chemin qu'on a choisit
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();		
 		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
 		tileDest = path.getLastTile();
 	}
 	
-	/** si on est sur le chemin calculÃ© 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	//si on est sur le chemin calculé
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -270,13 +203,7 @@ public class BonusManager
 		}
 	}
 	
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public boolean isPathSecure() throws StopRequestException{
 		ai.checkInterruption();
 		AiTile temp=null;
@@ -294,13 +221,7 @@ public class BonusManager
 	}
 	
 	
-	/** si le chemin est encore sure
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+//si le chemin est encore sure
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption();	
 		boolean result = true;
@@ -312,20 +233,14 @@ public class BonusManager
 		}
 		return result;
 	}	
-	/** 
-	 * le process de decision
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+//le process de decision
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption();
 		// on met a jour la matrice de cout
 		updateCostCalculator();
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on verifie si on est arrivÃ©
+		{	// on verifie si on est arrivé
 			checkIsOnPath();
 			// si le chemin n'est pas vide si il est valide on reprend
 			if(path.isEmpty() || !checkPathValidity())

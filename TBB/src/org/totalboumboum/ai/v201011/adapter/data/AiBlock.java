@@ -3,7 +3,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -23,13 +23,11 @@ package org.totalboumboum.ai.v201011.adapter.data;
  */
 
 /**
- * ReprÃ©sente un bloc du jeu, c'est Ã  dire gÃ©nÃ©ralement un mur
- * (pouvant Ãªtre dÃ©truit ou pas). 
+ * Représente un bloc du jeu, c'est à dire généralement un mur
+ * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public interface AiBlock extends AiSprite
 {
@@ -37,24 +35,24 @@ public interface AiBlock extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si ce bloc arrÃªte les personnages.
-	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas Ãªtre utilisÃ©e directement par l'IA,
-	 * elle est destinÃ©e au calcul des modÃ¨les simulant l'Ã©volution du jeu.
+	 * indique si ce bloc arrête les personnages.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrÃªte les personnages
+	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
 	public AiStopType hasStopHeroes();
 	
 	/**
-	 * indique si ce bloc arrÃªte les explosions.
-	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas Ãªtre utilisÃ©e directement par l'IA,
-	 * elle est destinÃ©e au calcul des modÃ¨les simulant l'Ã©volution du jeu.
+	 * indique si ce bloc arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrÃªte le feu
+	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
 	public AiStopType hasStopFires();
 
@@ -62,10 +60,10 @@ public interface AiBlock extends AiSprite
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie vrai si ce bloc peut Ãªtre dÃ©truit par une bombe, et faux sinon
+	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
 	 * 
 	 * @return	
-	 * 		l'indicateur de destructibilitÃ© du mur
+	 * 		l'indicateur de destructibilité du mur
 	 */
 	public boolean isDestructible();
 }

@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.cost;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,13 +26,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * permet de dÃ©finir une fonction de coÃ»t utilisÃ©e lors de la recherche
+ * permet de définir une fonction de coût utilisée lors de la recherche
  * avec l'algorithme A*
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public abstract class CostCalculator
 {
@@ -40,36 +38,30 @@ public abstract class CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * calcule le coÃ»t de l'action consistant Ã  aller de la case
-	 * start Ã  la case end, sachant que ces deux cases sont voisines.
-	 * Il est possible de dÃ©finir des coÃ»ts Ã©voluÃ©s, en tenant compte par exemple des
-	 * influences nÃ©gatives dans ces cases (pour le joueur) comme la prÃ¨sence de bombes 
-	 * Ã  proximitÃ©, etc., et des influences positives telles que la prÃ¨sence de bonus.
-	 * Si les deux cases ne sont pas voisines, le rÃ©sultat est indÃ©terminÃ©.
+	 * calcule le coût de l'action consistant à aller de la case
+	 * start à la case end, sachant que ces deux cases sont voisines.
+	 * Il est possible de définir des coûts évolués, en tenant compte par exemple des
+	 * influences négatives dans ces cases (pour le joueur) comme la présence de bombes 
+	 * à proximité, etc., et des influences positives telles que la présence de bonus.
+	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
 	 * @param start	
-	 * 		la case de dÃ©part 
+	 * 		la case de départ 
 	 * @param end	
-	 * 		la case d'arrivÃ©e (qui doit Ãªtre voisine)
+	 * 		la case d'arrivée (qui doit être voisine)
 	 * @return	
-	 * 		le coÃ»t du dÃ©placement
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
+	 * 		le coût du déplacement
 	 */
 	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
 	
 	/**
-	 * calcule le coÃ»t d'un chemin, i.e. la somme des coÃ»ts des actions
-	 * consistant Ã  passer d'une case du chemin Ã  la suivante.
+	 * calcule le coût d'un chemin, i.e. la somme des coûts des actions
+	 * consistant à passer d'une case du chemin à la suivante.
 	 * 
 	 * @param path
-	 * 		chemin Ã  traiter
+	 * 		chemin à traiter
 	 * @return
-	 * 		le coÃ»t de ce chemin
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
+	 * 		le coût de ce chemin
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;

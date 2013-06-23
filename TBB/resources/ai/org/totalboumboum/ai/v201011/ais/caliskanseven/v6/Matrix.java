@@ -14,17 +14,14 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
  * This is the matrix class of our AI.
- * @author Mustafa Çalışkan
- * @author Cihan Seven
+ * @author Cihan Adil SEVEN & Mustafa CALISKAN
  */
-@SuppressWarnings("deprecation")
 public class Matrix {
 	
 	/**
 	 * This class calculates the matrix according to the given values.
 	 * 
 	 * @param ai 
-	 * 		description manquante !
 	 * @param wfire this is the value of fire explosion
 	 * @param wblast this is the value of bomb blasts
 	 * @param wbomb this is the value of bomb numbers in game play
@@ -34,10 +31,8 @@ public class Matrix {
 	 * @param wwall this is the value of walls
 	 * @param closed unused
 	 * @param wclosed unused
-	 * @return 
-	 * 		?
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public double[][] calculate(CaliskanSeven ai, int wfire, int wblast,
 			int wbomb, int wbonus, int wmalus, int whero, int wwall,
@@ -86,7 +81,7 @@ public class Matrix {
 			ai.checkInterruption();
 			
 			//checking the bomb if it's ours
-			if(bomb.getOwner()!=null && bomb.getOwner().equals(ai.getPercepts().getOwnHero())){
+			if(bomb.getOwner().equals(ai.getPercepts().getOwnHero())){
 				if(bomb.getTime()<lastbombdur)
 					lastbombdur = bomb.getTime();
 			}

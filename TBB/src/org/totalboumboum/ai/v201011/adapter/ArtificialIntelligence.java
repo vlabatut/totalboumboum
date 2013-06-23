@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -30,54 +30,45 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * classe dont chaque IA doit h√©riter. La m√©thode processAction est la m√©thode 
- * appel√©e par le gestionnaire d'IA pour l'interroger que la prochaine action 
- * √† effectuer.
+ * classe dont chaque IA doit hÈriter. La mÈthode processAction est la mÈthode 
+ * appelÈe par le gestionnaire d'IA pour l'interroger que la prochaine action 
+ * ‡ effectuer.
  * <p>
- * <b>ATTENTION :</b> remarque tr√®s importante.
- * A la fin de la partie, le jeu demande √† l'IA de s'arr√™ter. Dans certaines
- * conditions, l'IA ne voudra pas s'arr√™ter (par exemple si elle est dans une
- * boucle infinie, ou bloqu√©e dans un traitement r√©cursif). Pour √©viter ce 
- * genre de probl√®me, CHAQUE m√©thode d√©finie dans l'IA doit :
- * 	- CONTENIR A SON TOUT DEBUT un appel √† la m√©thode checkInterruption()
- *  - faire suivre (mot-cl√© throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
- * De plus, cette fonction doit √©galement appara√Ætre au d√©but de chaque boucle
- * d√©finie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
+ * <b>ATTENTION :</b> remarque trËs importante.
+ * A la fin de la partie, le jeu demande ‡ l'IA de s'arrÍter. Dans certaines
+ * conditions, l'IA ne voudra pas s'arrÍter (par exemple si elle est dans une
+ * boucle infinie, ou bloquÈe dans un traitement rÈcursif). Pour Èviter ce 
+ * genre de problËme, CHAQUE mÈthode dÈfinie dans l'IA doit :
+ * 	- CONTENIR A SON TOUT DEBUT un appel ‡ la mÈthode checkInterruption()
+ *  - faire suivre (mot-clÈ throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
+ * De plus, cette fonction doit Ègalement apparaÓtre au dÈbut de chaque boucle
+ * dÈfinie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, √† ne plus utiliser. 
+ *
  */
 public abstract class ArtificialIntelligence implements Callable<AiAction>
 {	
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indicateur de demande de terminaison de l'IA (activ√© par le jeu √† la fin de la partie) */
+	/** indicateur de demande de terminaison de l'IA (activÈ par le jeu ‡ la fin de la partie) */
 	private boolean stopRequest = false;
-	/** temps total √©coul√© */
-	protected long totalDuration = 0;
-	/** Indique s'il s'agit du tout premier appel du thread (avant le d√©but du jeu) */
-	private boolean blank = true;
 
 	/**
-	 * m√©thode appel√©e par le jeu pour demander la fin de l'IA.
+	 * mÈthode appelÈe par le jeu pour demander la fin de l'IA.
 	 * Elle modifie la valeur de l'indcateur stopRequest, ce qui permettra
-	 * de lever une StopRequestException au prochain appel de la m√©thode checkInterruption.
+	 * de lever une StopRequestException au prochain appel de la mÈthode checkInterruption.
 	 */
 	public synchronized final void stopRequest()
 	{	stopRequest = true;		
 	}
 	
 	/**
-	 * m√©thode testant si le jeu a demand√© la terminaison de l'IA.
-	 * Si c'est le cas, une exception est lev√©e, qui sera propag√©e jusqu'√† call
-	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas √™tre
-	 * intercept√©e localement par un try/catch. 
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
+	 * mÈthode testant si le jeu a demandÈ la terminaison de l'IA.
+	 * Si c'est le cas, une exception est levÈe, qui sera propagÈe jusqu'‡ call
+	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas Ítre
+	 * interceptÈe localement par un try/catch. 
 	 */
 	public synchronized final void checkInterruption() throws StopRequestException
 	{	Thread.yield();
@@ -87,72 +78,57 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	@Override
 	public final AiAction call()
-	{	long before = System.currentTimeMillis();
-		
-		AiAction result;
-		// on r√©initialise la sortie de l'IA
+	{	AiAction result;
+		// on rÈinitialise la sortie de l'IA
 		reinitOutput();
-		
-		// tout premier appel (avant le d√©but de la partie)
-		if(blank)
-		{	blank = false;
-			result = new AiAction(AiActionName.NONE);
-		}
-		
-		// cas g√©n√©ral (appel en cours de jeu)
-		else
-		{	try
-			{	// on initialise l'IA si besoin
-				if(!initialized)
-				{	initialized = true;
-					init();
-					result = new AiAction(AiActionName.NONE);
-				}
-				
-				// on calcule la prochaine action √† effectuer
-				else
-					result = processAction();		
+		try
+		{	// on initialise l'IA si besoin
+			if(!initialized)
+			{	initialized = true;
+				init();
+				result = new AiAction(AiActionName.NONE);
 			}
-			catch (StopRequestException e)
-			{	result = new AiAction(AiActionName.NONE);
-			}
+			
+			// on calcule la prochaine action ‡ effectuer
+			else
+				result = processAction();		
 		}
-		
-		long after = System.currentTimeMillis();
-		totalDuration = after - before;
+		catch (StopRequestException e)
+		{	result = new AiAction(AiActionName.NONE);
+		}
 		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Les percepts auxquels l'IA a acc√®s */
+	/** les percepts auxquels l'IA a accËs */
 	private AiZone percepts;
 	
 	/**
-	 * m√©thode impl√©mentant le traitement effectu√© par l'IA sur les percepts,
-	 * et renvoyant une action en r√©action.
+	 * mÈthode implÈmentant le traitement effectuÈ par l'IA sur les percepts,
+	 * et renvoyant une action en rÈaction.
 	 * 
 	 * @return	
-	 * 		action que l'IA a d√©cider d'effectuer
+	 * 		action que l'IA a dÈcider d'effectuer
 	 * @throws StopRequestException	
-	 * 		au cas o√π le moteur demande la terminaison de l'IA
+	 * 		au cas o˘ le moteur demande la terminaison de l'IA
 	 */
 	public abstract AiAction processAction() throws StopRequestException;
 
 	/**
-	 * Renvoie les percepts auxquels l'IA a acc√®s
+	 * renvoie les percepts auxquels l'IA a accËs
 	 * @return	
-	 * 		une AiZone repr√©sentant tous les percepts utilisables par l'IA
+	 * 		une AiZone reprÈsentant tous les percepts utilisables par l'IA
 	 */
 	public final AiZone getPercepts()
 	{	return percepts;
 	}
 	/**
-	 * m√©thode utilis√©e par le moteur du jeu pour initialiser les percepts de l'IA. 
+	 * mÈthode utilisÈe par le moteur du jeu pour initialiser les percepts de l'IA. 
 	 * 
 	 * @param percepts	
-	 * 		l'objet repr√©sentant les percepts auxquels l'IA aura acc√®s
+	 * 		l'objet reprÈsentant les percepts auxquels l'IA aura accËs
 	 */
 	public final void setPercepts(AiZone percepts)
 	{	this.percepts = percepts;
@@ -160,7 +136,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * Termine proprement l'IA afin de lib√©rer les ressources qu'elle occupait.
+	 * termine proprement l'IA afin de libÈrer les ressources qu'elle occupait.
 	 */
 	final void finish()
 	{	percepts = null;
@@ -169,13 +145,13 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Sortie graphique de l'IA */
+	/** sortie graphique de l'IA */
 	private AiOutput output;
 	
 	/** 
-	 * Renvoie la sortie graphique de l'IA, 
+	 * renvoie la sortie graphique de l'IA, 
 	 * afin d'afficher des informations par dessus la zone de jeu
-	 * (utile lors du d√©bogage). Le programme peut modifier cet objet
+	 * (utile lors du dÈbogage). Le programme peut modifier cet objet
 	 * pour colorer des cases et afficher des chemins ou du texte
 	 * 
 	 * @return	
@@ -186,8 +162,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * r√©initialise la sortie graphique de l'IA.
-	 * m√©thode appel√©e automatiquement avant chaque it√©ration de l'IA.
+	 * rÈinitialise la sortie graphique de l'IA.
+	 * MÈthode appelÈe automatiquement avant chaque itÈration de l'IA.
 	 */
 	private final void reinitOutput()
 	{	output.reinit();
@@ -196,19 +172,12 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** */
 	private boolean initialized = false;
-	
 	/**
-	 * m√©thode √† surcharger s'il est n√©cessaire que l'agent soit
-	 * initialis√©. Toute op√©ration d√©finie dans cette fonction
-	 * sera r√©alis√©e une fois, juste avant le d√©but de la partie.
-	 * A noter que les percepts ont n√©anmoins d√©j√† √©t√© mis √† jour.
-	 * Si aucune m√©thode init n'est d√©finie dans l'agent, alors celle
-	 * ci sera ex√©cut√©e (qui ne fait rien du tout).
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
+	 * mÈthode ‡ surcharger s'il est nÈcessaire que l'agent soit
+	 * initialisÈ. Toute opÈration dÈfinie dans cette fonction
+	 * sera rÈalisÈe une fois, juste avant le dÈbut de la partie.
+	 * A noter que les percepts ont nÈanmoins dÈj‡ ÈtÈ mis ‡ jour.
 	 */
 	public void init() throws StopRequestException
 	{	

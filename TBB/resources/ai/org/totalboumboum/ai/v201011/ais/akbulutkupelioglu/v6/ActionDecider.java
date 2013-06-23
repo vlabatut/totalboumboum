@@ -26,29 +26,17 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Decides what to do next.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class ActionDecider
 {
-	/** */
 	private static ActionDecider instance = null;
-	/** */
 	private static AkbulutKupelioglu monIa = null;
-	/** */
 	private static AiZone zone = null;
-	/** */
 	private static Matrix interest = null;
-	/** */
 	private static Mode mode = null;
 
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private ActionDecider() throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -61,7 +49,6 @@ public class ActionDecider
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @return An ActionDecider instance.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static ActionDecider getInstance(Matrix matrix, AiZone myZone,
 			AkbulutKupelioglu ia) throws StopRequestException
@@ -81,7 +68,6 @@ public class ActionDecider
 	 * @param bombIntention The intention of dropping a bomb.
 	 * @return An action to be executed by the game engine.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiAction decide(boolean bombIntention) throws StopRequestException
 	{
@@ -306,15 +292,8 @@ public class ActionDecider
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param newStrategy
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+	
+
 	private AiAction getActionFromStrategy(Strategy newStrategy) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -340,21 +319,6 @@ public class ActionDecider
 		return new AiAction(AiActionName.MOVE, direction);
 	}
 
-	/**
-	 * 
-	 * @param tile
-	 * 		description manquante !
-	 * @param ownHero
-	 * 		description manquante !
-	 * @param direction
-	 * 		description manquante !
-	 * @param matrix
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private List<AiTile> getSafeTilesCustom(AiTile tile, AiHero ownHero, Direction direction, Matrix matrix) throws StopRequestException
 	{
 		monIa.checkInterruption();
@@ -389,30 +353,12 @@ public class ActionDecider
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param ownHero
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private List<AiTile> getSafeTiles(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();	
 		return getSafeTilesCustom(ownHero.getTile(), ownHero, null, interest);
 	}
 	
-	/**
-	 * 
-	 * @param ownHero
-	 * 		description manquante !
-	 * @return 
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private List<AiTile> getSafeTilesWithSimulatedBomb(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();

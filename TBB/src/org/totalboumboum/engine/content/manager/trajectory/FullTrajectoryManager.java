@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.trajectory;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,11 +32,9 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.block.Block;
-import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -141,7 +139,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 			if(forcedPositionTime>0)
 				correctForcedShifts();
 			/* NOTE en cas de trajectoire repeat : 
-			 * ne faut-il pas rÃ©initialiser la position forcÃ©e Ã  chaque rÃ©pÃ©tition ?
+			 * ne faut-il pas réinitialiser la position forcée à chaque répétition ?
 			 */
 		}
 	}
@@ -149,21 +147,21 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// FORCED SHIFTS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** deplacement X forcÃ© total */
+	/** deplacement X forcé total */
 	private double forcedTotalXShift = 0;
-	/** deplacement Y forcÃ© total */
+	/** deplacement Y forcé total */
 	private double forcedTotalYShift = 0;
-	/** deplacement Z forcÃ© total */
+	/** deplacement Z forcé total */
 	private double forcedTotalZShift = 0;
 
 	/**
-	 * si on a dÃ©passÃ© le forcedPositionDuration, il faut :  
-	 * 		- calculer la position virtuelle Ã  ce temps lÃ  (ce qui implique de calculer le point de dÃ©part en rÃ©fÃ©rence)
-	 * 		- vÃ©rifier si elle colle Ã  la position forcÃ©e
+	 * si on a dépassé le forcedPositionDuration, il faut :  
+	 * 		- calculer la position virtuelle à ce temps là (ce qui implique de calculer le point de départ en référence)
+	 * 		- vérifier si elle colle à la position forcée
 	 * 		- si elle ne colle pas : la corriger
-	 * si on ne l'a pas encore dÃ©passÃ©e : Ã  peu prÃ¨s pareil
+	 * si on ne l'a pas encore dépassée : à peu près pareil
 	 * 		- calculer la position initiale
-	 * 		- calculer la position forcÃ©e correspondante
+	 * 		- calculer la position forcée correspondante
 	 * 		- corriger  
 	 */
 	private void correctForcedShifts()
@@ -171,9 +169,9 @@ public class FullTrajectoryManager extends TrajectoryManager
 		double initX = currentPosX - relativePosX;
 		double initY = currentPosY - relativePosY;
 		double initZ = currentPosZ - relativePosZ;
-		// calcul des nouvelles positions forcÃ©es
+		// calcul des nouvelles positions forcées
 		processForcedShifts(initX,initY,initZ);
-		// calcul des positions thÃ©oriques Ã  l'instant prÃ¨sent
+		// calcul des positions théoriques à l'instant présent
 		Sprite boundToSprite = getBoundToSprite();
 		// process the step
 		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
@@ -216,8 +214,8 @@ public class FullTrajectoryManager extends TrajectoryManager
 		double gapX = theoreticalX - currentPosX;
 		double gapY = theoreticalY - currentPosY;
 		double gapZ = theoreticalZ - currentPosZ;
-		/* NOTE on pourrait Ã©chelonner la correction, mais on choisit l'approche brutale
-		 * quitte Ã  affiner par la suite si nÃ©cessaire
+		/* NOTE on pourrait échelonner la correction, mais on choisit l'approche brutale
+		 * quitte à affiner par la suite si nécessaire
 		 */
 		currentPosX = currentPosX + gapX;
 		currentPosY = currentPosY + gapY;
@@ -225,11 +223,11 @@ public class FullTrajectoryManager extends TrajectoryManager
 	}
 	
 	/**
-	 * 1) on calcule la position relative originale (XML) Ã  t=forcedTime
-	 * 2) on l'utilise pour calculer la position absolue originale Ã  t=forcedTime
-	 * 3) on relativise cette position par rapport Ã  la rÃ©fÃ©rence courante : tile ou boundToSprite
-	 * 4) on calcule l'Ã©cart avec la forcedPosition
-	 * cet Ã©cart sera rÃ©pandu sur le dÃ©but de la trajectoire correspondant Ã  forcedTime 
+	 * 1) on calcule la position relative originale (XML) à t=forcedTime
+	 * 2) on l'utilise pour calculer la position absolue originale à t=forcedTime
+	 * 3) on relativise cette position par rapport à la référence courante : tile ou boundToSprite
+	 * 4) on calcule l'écart avec la forcedPosition
+	 * cet écart sera répandu sur le début de la trajectoire correspondant à forcedTime 
 	 */
 	private void processForcedShifts(double initX, double initY, double initZ)
 	{	forcedTotalXShift = 0;
@@ -297,7 +295,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
-	 * Cette mÃ©thode doit impÃ©rativement Ãªtre appelÃ©e juste avant un changement de gesture.
+	 * Cette méthode doit impérativement être appelée juste avant un changement de gesture.
 	 * @param newSprite
 	 */
 	@Override
@@ -322,7 +320,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 				currentPosY = currentPosY+oldSprite.getCurrentPosY();
 				currentPosZ = currentPosZ+oldSprite.getCurrentPosZ();
 			}
-			// avant:oui - maintenant:oui (mais pas le mÃªme sprite)
+			// avant:oui - maintenant:oui (mais pas le même sprite)
 			else if(newSprite!=oldSprite)
 			{	currentPosX = 0;
 				currentPosY = 0;
@@ -352,20 +350,20 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique que la trajectoire est terminÃ©e (plus de dÃ©placement) */
+	/** indique que la trajectoire est terminée (plus de déplacement) */
 	private boolean isTerminated;
-		/** modification de position X (utilisÃ©e lors de la mise Ã  jour de la position) */
+		/** modification de position X (utilisée lors de la mise à jour de la position) */
 	double shiftX = 0;
-	/** modification de position Y (utilisÃ©e lors de la mise Ã  jour de la position) */
+	/** modification de position Y (utilisée lors de la mise à jour de la position) */
 	double shiftY = 0;
-	/** modification de position Z (utilisÃ©e lors de la mise Ã  jour de la position) */
+	/** modification de position Z (utilisée lors de la mise à jour de la position) */
 	double shiftZ = 0;
 
 	/**
-	 * mÃ©thode appelÃ©e Ã  chaque itÃ©ration
-	 * met Ã  jour le dÃ©placement et la position relative.
-	 * attention : dans le cas d'une rÃ©pÃ©tition, le dernier point
-	 * de la trajectoire sert de premier point Ã  la rÃ©pÃ©tition suivante.
+	 * méthode appelée à chaque itération
+	 * met à jour le déplacement et la position relative.
+	 * attention : dans le cas d'une répétition, le dernier point
+	 * de la trajectoire sert de premier point à la répétition suivante.
 	 * donc si on veut un cycle parfait, il faut rajouter un dernier point ramenant ou premier 
 	 */
 	@Override
@@ -389,24 +387,15 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double speedCoeff = sprite.getCurrentSpeedCoeff();
 		shiftX = xMove*currentTrajectory.getXInteraction()*milliPeriod*speedCoeff/1000;
-		shiftY = yMove*currentTrajectory.getYInteraction()*milliPeriod*speedCoeff/1000;
-		shiftZ = 0;
 //if(sprite instanceof Hero)
-//if(sprite instanceof Block && sprite.getTile().getCol()==8 && sprite.getTile().getRow()==8 )
-//{	System.out.println("currentPosX: "+currentPosX);
-//	System.out.println("currentPosY: "+currentPosY);
-//	System.out.println("currentPosZ: "+currentPosZ);
-//	System.out.println("xMove: "+xMove);
-//	System.out.println("yMove: "+yMove);
-//	System.out.println("shiftX: "+shiftX);
-//	System.out.println("shiftY: "+shiftY);
-//	System.out.println("shiftZ: "+shiftZ);
+//{	System.out.println("xMove: "+xMove);
 //	System.out.println("currentTrajectory.getXInteraction(): "+currentTrajectory.getXInteraction());
-//	System.out.println("currentTrajectory.getYInteraction(): "+currentTrajectory.getYInteraction());
 //	System.out.println("milliPeriod: "+milliPeriod);
 //	System.out.println("speedCoeff: "+speedCoeff);
 //	System.out.println("----------------------------");
 //}
+		shiftY = yMove*currentTrajectory.getYInteraction()*milliPeriod*speedCoeff/1000;
+		shiftZ = 0;
 		
 		// is the trajectory terminated ?
 		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
@@ -428,7 +417,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		
 		// collisions management
 		if(!isBoundToSprite())
-		{	// calcul de la direction de dÃ©placement effective du sprite par rapport Ã  la position prÃ©cÃ©dente
+		{	// calcul de la direction de déplacement effective du sprite par rapport à la position précédente
 			double dx = currentPosX-previousPosX;
 			double dy = currentPosY-previousPosY;
 			Direction moveDir = Direction.getCompositeFromDouble(dx, dy);
@@ -441,7 +430,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			if(moveDir!=Direction.NONE)			
 			{	
 //if(sprite instanceof Hero)
-//	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getRow()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getRow()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
+//	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
 
 				double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
 //if(sprite instanceof Hero)
@@ -495,8 +484,8 @@ System.out.println();
 				sprite.getTile().spreadEvent(e);
 			}				
 		}
-//if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
-//	System.out.println("AZDSOIPEPMJP");
+if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
+	System.out.println("AZDSOIP¨PMJP");
 	
 		// updating the tile
 		updateTile();
@@ -508,15 +497,15 @@ System.out.println();
 	/////////////////////////////////////////////////////////////////
 	// RELATIVE POSITIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** position X relativement Ã  la trajectoire courante */
+	/** position X relativement à la trajectoire courante */
 	private double relativePosX;
-	/** position Y relativement Ã  la trajectoire courante */
+	/** position Y relativement à la trajectoire courante */
 	private double relativePosY;
-	/** position Z relativement Ã  la trajectoire courante */
+	/** position Z relativement à la trajectoire courante */
 	private double relativePosZ;
 
 	/**
-	 * met Ã  jour la position relative Ã  la trajectoire ou au sprite liant
+	 * met à jour la position relative à la trajectoire ou au sprite liant
 	 */
 	private void updateRelativePos()
 	{	Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
@@ -527,9 +516,9 @@ System.out.println();
 		{	TrajectoryStep trajectoryStep = i.next();
 			nextTime = nextTime + trajectoryStep.getDuration();
 			nextStep = trajectoryStep;
-			nextX = nextX + nextStep.getXShift();
-			nextY = nextY + nextStep.getYShift();				
-			nextZ = nextZ + nextStep.getZShift(getBoundToSprite());				
+			nextX = nextX+nextStep.getXShift();
+			nextY = nextY+nextStep.getYShift();				
+			nextZ = nextZ+nextStep.getZShift(getBoundToSprite());				
 		}
 		while(nextTime<trajectoryTime && i.hasNext());
 		// round
@@ -557,11 +546,11 @@ System.out.println();
 	/////////////////////////////////////////////////////////////////
 	// RELATIVE FORCED POSITIONS	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** position X exprimÃ©e relativement au centre de la case courante */
+	/** position X exprimée relativement au centre de la case courante */
 	private double relativeForcedPosX = 0;
-	/** position Y exprimÃ©e relativement au centre de la case courante */
+	/** position Y exprimée relativement au centre de la case courante */
 	private double relativeForcedPosY = 0;
-	/** position Z exprimÃ©e relativement au centre de la case courante */
+	/** position Z exprimée relativement au centre de la case courante */
 	private double relativeForcedPosZ = 0;
 
 	private void updateRelativeForcedPos()
@@ -617,13 +606,13 @@ System.out.println();
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps normalisÃ© Ã©coulÃ© de puis le dÃ©but de la trajectoire */
+	/** temps normalisé écoulé de puis le début de la trajectoire */
 	private double trajectoryTime;
-	/** durÃ©e totale originale de la trajectoire */
+	/** durée totale originale de la trajectoire */
 	private double trajectoryDuration = 0;
-	/** coefficient de mofication du temps dÃ» au dÃ©lai imposÃ© */
+	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff = 1;
-	/** temps imparti pour atteindre la position forcÃ©e (tient compte du dÃ©lai imposÃ© Ã  la trajectoire) */
+	/** temps imparti pour atteindre la position forcée (tient compte du délai imposé à la trajectoire) */
 	private double forcedPositionTime = 0;
 
 	private void updateTime()

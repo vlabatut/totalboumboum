@@ -21,10 +21,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * classe principale de l'IA, qui dÃ©finit son comportement.
- * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile Ã 
- * dÃ©bugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui définit son comportement.
+ * n'hésitez pas à décomposer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile à
+ * débugger, modifier, relire, comprendre, etc.
  * 
  * @version 5.2.c
  * 
@@ -32,75 +32,52 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Necmi Murat Tangay
  *
  */
-@SuppressWarnings("deprecation")
 public class AksoyTangay extends ArtificialIntelligence
 {	
-	/** */
+	
 	private Zone zone = null;
 	
-	/** */
 	private AiHero ownHero = null;
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption();
 		return ownHero;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
+	
 	public AiTile getOwnHeroTile() throws StopRequestException {
 		checkInterruption();
 		return ownHeroTile;
 	}
 
 
-	/** */
+
 	private AiZone percepts = null;
 	
-	/** */
 	@SuppressWarnings("unused")
 	private State stateMatrix[][] = null;
 	
-	/** */
 	private EscapeManager escapeManager = null;
 	
-	/** */
 	private PathManager pathManager = null;
 	
-	/** */
 	private BonusManager bonusManager = null;
 	
-	/** */
 	private StrategyManager strategyManager = null;
-	/** */
+	
 	public AttackManager attackManager = null;
 	
-	/** */
 	private boolean attackVariable = false;
 	
-	/** */
 	@SuppressWarnings("unused")
 	private AttackManager attackManager2 = null;
 	
-	/** */
 	private boolean keyBomb = true;
 	
-	/** */
 	private AiTile ownHeroTile;
 	
-	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action d'IA */
+	/** méthode appelée par le moteur du jeu pour obtenir une action d'IA */
 	@Override
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
@@ -113,10 +90,10 @@ public class AksoyTangay extends ArtificialIntelligence
 		Direction direction = Direction.NONE;
 			
 		ownHeroTile = ownHero.getTile();
-//		System.out.println("reel tile: "+ownHeroTile);
+		System.out.println("reel tile: "+ownHeroTile);
 		
 		
-//		System.out.println(ownHero.getWalkingSpeed());
+		System.out.println(ownHero.getWalkingSpeed());
 		
 		
 		//algo commence
@@ -184,7 +161,7 @@ public class AksoyTangay extends ArtificialIntelligence
 			else if(attackManager.finishedOnePartOfPath())
 			{
 				result = new AiAction(AiActionName.DROP_BOMB);
-				//System.out.println("bombaloz");
+				//System.out.println("bombalýoz");
 				if(attackManager.finishedPath())
 					attackManager = null;
 								
@@ -216,10 +193,8 @@ public class AksoyTangay extends ArtificialIntelligence
 		}
 		else
 		{
-					if(bonusManager==null)
-						direction = Direction.NONE;
-					else
-						direction = bonusManager.getDirectionToCollectBonus();
+			
+					direction = bonusManager.getDirectionToCollectBonus();
 				
 					if(pathManager.temp == false)
 					{
@@ -231,7 +206,7 @@ public class AksoyTangay extends ArtificialIntelligence
 							keyBomb = true;
 							if(bonusManager.finishedPath())
 							{
-							//system.out.println("!!");
+							//system.out.println("üç!!");
 								result = new AiAction(AiActionName.DROP_BOMB);
 								//keyBomb = false;
 							}
@@ -268,12 +243,11 @@ public class AksoyTangay extends ArtificialIntelligence
 	 *  @return la situation de danger de case
 	 *  
 	 *  @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public boolean isDangerous(AiTile tile) throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
-		if(tile==null || zone==null)
+		if(tile==null)
 			return false;
 		
 		stateMatrix = zone.updateMatrix();
@@ -296,15 +270,6 @@ public class AksoyTangay extends ArtificialIntelligence
 		
 	}
 	
-	/**
-	 * 
-	 * @param tile
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean severalDangers(AiTile tile) throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
@@ -331,13 +296,6 @@ public class AksoyTangay extends ArtificialIntelligence
 		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isHerosAccesible() throws StopRequestException
 	{
 		checkInterruption();
@@ -354,7 +312,7 @@ public class AksoyTangay extends ArtificialIntelligence
 			{	
 				tmpHero = itrHero.next();
 				
-//				System.out.println("hero tile : "+tmpHero.getTile().toString());
+				System.out.println("hero tile : "+tmpHero.getTile().toString());
 				
 				AiPath tmpPath = pathManager.getShortestPathToOneTile(getOwnHero(), getOwnHeroTile(), tmpHero.getTile());
 				if(tmpPath != null)
@@ -371,13 +329,6 @@ public class AksoyTangay extends ArtificialIntelligence
 		return result;		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isBonusClose() throws StopRequestException
 	{
 		checkInterruption();
@@ -402,10 +353,6 @@ public class AksoyTangay extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * @throws StopRequestException 
-	 * 		Description manquante !
-	 */
 	private void init() throws StopRequestException
 	{
 		checkInterruption();
@@ -425,19 +372,11 @@ public class AksoyTangay extends ArtificialIntelligence
 	
 	//silinecek!!
 	
-	/**
-	 * @param tile 
-	 * 		Description manquante !
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException  
-	 * 		Description manquante !
-	 */
 	@SuppressWarnings("unused")
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de rÃ©fÃ©rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getTile(tile.getLine(), tile.getCol()).getNeighbors();
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -451,4 +390,6 @@ public class AksoyTangay extends ArtificialIntelligence
 		}
 		return result;
 	}
+	
+	
 }

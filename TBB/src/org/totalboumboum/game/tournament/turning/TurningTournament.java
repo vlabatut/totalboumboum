@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.turning;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,22 +28,13 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
 
 /**
- * This tournament is based on a round-robin system,
- * in the sense every few rounds/matches, some of the
- * playing players are put to rest, whereas some of the
- * resting players enter game. The winner is the one
- * with the most points at the end, or reaching a point
- * limit first.
  * 
  * @author Vincent Labatut
+ *
  */
 public class TurningTournament extends AbstractTournament
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Builds a standard tournament.
-	 */
 	public TurningTournament()
 	{	
 	}
@@ -56,8 +47,6 @@ public class TurningTournament extends AbstractTournament
 
 	@Override
 	public void init() {
-		playedMatches.clear();
-		
 		// TODO Auto-generated method stub
 		
 	}
@@ -97,4 +86,5 @@ public class TurningTournament extends AbstractTournament
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

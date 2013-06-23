@@ -13,25 +13,17 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.mode.Mode;
 
 /**
  * Decides whether or not it's profitable to drop a bomb.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public class BombDecider
 {
-	/** */
+
 	private static BombDecider instance = null;
-	/** */
 	private static AkbulutKupelioglu monIA = null; 
-	/** */
 	private static AiZone zone = null;
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
+	
 	private BombDecider() throws StopRequestException
 	{
 		monIA.checkInterruption();
@@ -43,7 +35,6 @@ public class BombDecider
 	 * @param ia The AkbulutKupeloglu using this.
 	 * @return The BombDecider instance.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public static BombDecider getInstance(AiZone myZone, AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -59,7 +50,6 @@ public class BombDecider
 	 * Decides whether or not the AI would want to drop a bomb.
 	 * @return The decision to drop a bomb.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public boolean willBomb() throws StopRequestException
 	{

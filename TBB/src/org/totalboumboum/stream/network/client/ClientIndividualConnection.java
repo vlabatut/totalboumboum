@@ -2,7 +2,7 @@ package org.totalboumboum.stream.network.client;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -252,7 +252,18 @@ System.out.println(state);
 
 	private void playersListReceived(List<Profile> playerProfiles)
 	{	// update controls
-		updateControls(playerProfiles);
+		for(Profile p2: playerProfiles)
+		{	String id2 = p2.getId();
+			int cs = 0;
+			Iterator<Profile> it = this.playerProfiles.iterator();
+			while(cs!=0 && it.hasNext())
+			{	Profile p1 = it.next();
+				String id1 = p1.getId();
+				if(id1.equals(id2))
+					cs = p1.getControlSettingsIndex();
+			}
+			p2.setControlSettingsIndex(cs);
+		}
 		
 		// update profile list
 		this.playerProfiles = playerProfiles;
@@ -311,28 +322,6 @@ System.out.println(state);
 		generalConnection.profilesChanged(this);
 	}
 
-	/**
-	 * Substitutes no control (0) to the control
-	 * selected for remote players, and the local
-	 * settings for the local players.
-	 */
-	private void updateControls(List<Profile> playerProfiles)
-	{	for(Profile p2: playerProfiles)
-		{	int cs = 0;
-			if(!p2.isRemote())
-			{	String id2 = p2.getId();
-				Iterator<Profile> it = this.playerProfiles.iterator();
-				while(cs==0 && it.hasNext())
-				{	Profile p1 = it.next();
-					String id1 = p1.getId();
-					if(id1.equals(id2))
-						cs = p1.getControlSettingsIndex();
-				}
-			}
-			p2.setControlSettingsIndex(cs);
-		}
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT 				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -340,7 +329,6 @@ System.out.println(state);
 
 	private void tournamentStarted(AbstractTournament tournament)
 	{	this.tournament = tournament;
-		updateControls(tournament.getProfiles());
 		generalConnection.tournamentStarted(this,tournament);
 	}
 
@@ -498,7 +486,7 @@ System.out.println(state);
 				reader.finish();
 				writer.finish();
 
-				//TODO Ã  completer
+				//TODO à completer
 
 				reader = null;
 				writer = null;
@@ -513,7 +501,6 @@ System.out.println(state);
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

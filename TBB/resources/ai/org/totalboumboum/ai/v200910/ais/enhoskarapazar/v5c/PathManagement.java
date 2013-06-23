@@ -13,24 +13,12 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 
-/**
- * @author Sadettin EnhoÅŸ
- * @author Ali Can Karapazar
- */
-@SuppressWarnings("deprecation")
 public class PathManagement {
+
 	
 	/**
-	 * crÃ©e un PathManager chargÃ© d'amener le personnage Ã  la position (x,y)
-	 * exprimÃ©e en pixels
-	 * @param ai 
-	 * 		Description manquante !
-	 * @param x 
-	 * 		Description manquante !
-	 * @param y 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
+	 * exprimée en pixels
 	 */
 	public PathManagement(EnhosKarapazar ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -40,14 +28,8 @@ public class PathManagement {
 	}
 	
 	/**
-	 * crÃ©e un PathManager chargÃ© d'amener le personnage au centre de la case
-	 * passÃ©e en paramÃ¨tre
-	 * @param ai 
-	 * 		Description manquante !
-	 * @param destination 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * crée un PathManager chargé d'amener le personnage au centre de la case
+	 * passée en paramètre
 	 */
 	public PathManagement(EnhosKarapazar ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -58,10 +40,6 @@ public class PathManagement {
 	
 	/**
 	 * initialise ce PathManager
-	 * @param ai 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	private void init(EnhosKarapazar ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -77,7 +55,7 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concernÃ©e par ce gestionnaire de chemin */
+	/** l'IA concernée par ce gestionnaire de chemin */
 	private EnhosKarapazar ai;
 	/** zone de jeu */
 	private AiZone zone;
@@ -85,21 +63,17 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la case de destination sÃ©lectionnÃ©e */
+	/** la case de destination sélectionnée */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonnÃ©e de destination */
+	/** l'ordonnée de destination */
 	private double yDest;
 	
 	/**
 	 * modifie la case de destination du personnage,
-	 * place les coordonnÃ©es de destination au centre de cette case,
+	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
-	 * @param destination 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -112,15 +86,9 @@ public class PathManagement {
 	}
 
 	/**
-	 * modifie les coordonnÃ©es de destination,
-	 * met Ã  jour automatiquement la case correspondante,
+	 * modifie les coordonnées de destination,
+	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
-	 * @param x 
-	 * 		Description manquante !
-	 * @param y 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -137,18 +105,14 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin Ã  suivre */
+	/** le chemin à suivre */
 	private AiPath path;
 	
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours sÃ»r et si aucun obstacle n'est apparu
-	 * depuis la derniÃ¨re itÃ©ration
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException 
-	 * 		Description manquante !
+	 * est toujours sûr et si aucun obstacle n'est apparu
+	 * depuis la dernière itération
 	 */
 	public boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -170,49 +134,28 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe implÃ©mentant l'algorithme A* */
+	/** classe implémentant l'algorithme A* */
 	private Astar astar;
-	/** classe implÃ©mentant la fonction heuristique */
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implÃ©mentant la fonction de coÃ»t */
+	/** classe implémentant la fonction de coût */
 	private CostCalculator costCalculator;
 
 	
 
 	
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public int getLength() throws StopRequestException
 	{	
 		ai.checkInterruption();
 		return path.getLength();
 	}
-	
-	/***
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public  List<AiTile> getPathList() throws StopRequestException
 	{
 		ai.checkInterruption();
 		return path.getTiles();
 	}
 	
-	/**
-	 * 
-	 * @return 
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean isWalkable() throws StopRequestException
 	{ 
 		ai.checkInterruption();
@@ -221,29 +164,12 @@ public class PathManagement {
 		else
 			return false;
 	}
-	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void printPath() throws StopRequestException
 	{
 		ai.checkInterruption();
 		System.out.println(path.getTiles().toString());
 	}
 	
-	/**
-	 * 
-	 * @param line
-	 * 		Description manquante !
-	 * @param col
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private boolean estCaseSure(int line, int col) throws StopRequestException
 	{
 		

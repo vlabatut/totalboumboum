@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.fire;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -108,12 +108,12 @@ public class FireEventManager extends EventManager
 			// fire enters a new tile
 			if(event.getSource()==sprite)
 			{	Tile tile = sprite.getTile();
-				fire.consumeTile(tile,false);
+				fire.consumeTile(tile);
 			}
 			// another sprite enters the fire's tile
 			else
 			{	Sprite s = event.getSource();
-				fire.consumeSprite(s,false);
+				fire.consumeSprite(s);
 			}
 		}
 	}

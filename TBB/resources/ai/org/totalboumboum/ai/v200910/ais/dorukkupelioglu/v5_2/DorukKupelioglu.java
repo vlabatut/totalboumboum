@@ -12,39 +12,22 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
- */
-@SuppressWarnings("deprecation")
+
 public class DorukKupelioglu extends ArtificialIntelligence 
 {
-	/** */
 	private Matrix matrix;
-	/** */
 	private Escape escape=null;
-	/** */
 	private Target target=null;
-	/** */
 	private Bomb bomb=null;
-	/** */
 	private AiTile currentTile=null;
-	/** */
 	private AiTile nextTile=null;
-	/** */
 	private AiHero dk=null;
-	/** */
 	private AiAction result;
-	/** */
 	private Direction moveDir=Direction.NONE;
-	/** */
 	private double time;
-	/** */
 	private double tilePixel;
-	/** */
 	private boolean wait=false;
 	
-	@Override
 	public AiAction processAction() throws StopRequestException
 	{
 		checkInterruption(); 
@@ -214,11 +197,6 @@ public class DorukKupelioglu extends ArtificialIntelligence
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void initFirst()throws StopRequestException
 	{
 		checkInterruption();
@@ -228,11 +206,6 @@ public class DorukKupelioglu extends ArtificialIntelligence
 		tilePixel=nextTile.getSize();
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void init()throws StopRequestException
 	{
 		checkInterruption();
@@ -240,26 +213,11 @@ public class DorukKupelioglu extends ArtificialIntelligence
 		matrix.createAreaMatrix();
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiHero getHero()throws StopRequestException
 	{
 		checkInterruption();
 		return dk;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Matrix getMatrix() throws StopRequestException
 	{
 		checkInterruption();

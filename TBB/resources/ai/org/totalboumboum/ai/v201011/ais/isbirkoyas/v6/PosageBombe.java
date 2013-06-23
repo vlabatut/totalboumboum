@@ -8,25 +8,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
-/**
- * @author GÃ¶ksu Ä°sbir
- * @author Ela KoyaÅŸ
- */
-@SuppressWarnings("deprecation")
 public class PosageBombe {
-	/** */
 	IsbirKoyas ai = new IsbirKoyas();
 
-	/** */
 	private Securite securite = null;
 
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public PosageBombe(IsbirKoyas ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		this.ai = ai;
@@ -34,14 +20,13 @@ public class PosageBombe {
 	}
 
 	/**
-	 * Cette mÃ©thode fait la dÃ©cision de poser la bombe en mode collecte aprÃ¨s
-	 * avoir choisi le mode s'il ya des murs destructibles elle retourne true.
+	 * Cette méthode fait la décision de poser la bombe en mode collecte après
+	 * avoir choisi le mode s’il ya des murs destructibles elle retourne true.
 	 * Elle prend un seul argument qui est la zone du jeu.
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return poserBombe
 	 */
 	public boolean deciderPoserBombeCollect(AiZone gameZone)
@@ -68,14 +53,13 @@ public class PosageBombe {
 	}
 
 	/**
-	 * Cette mÃ©thode fait la dÃ©cision de poser la bombe en mode attaque aprÃ¨s
-	 * avoir choisi le mode s'il ya une case libre sans danger elle retourne
+	 * Cette méthode fait la décision de poser la bombe en mode attaque après
+	 * avoir choisi le mode s’il ya une case libre sans danger elle retourne
 	 * true. Elle prend un seul argument qui est la zone du jeu.
 	 * 
 	 * @param gameZone
 	 *            la zone du jeu
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return poserBombe
 	 */
 	public boolean deciderPoserBombeAttaque(AiZone gameZone)
@@ -98,7 +82,6 @@ public class PosageBombe {
 	 * METHODE D'ACCES a la classe Securite
 	 * 
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @return securite
 	 */
 	public Securite Securite() throws StopRequestException {

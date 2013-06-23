@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais._suiveur;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -39,30 +39,20 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * classe charg√©e d'impl√©menter un d√©placement, 
- * en respectant un chemin donn√©
+ * classe chargÈe d'implÈmenter un dÈplacement, 
+ * en respectant un chemin donnÈ
  * 
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("deprecation")
 public class PathManager
 {
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 
 	/**
-	 * cr√©e un PathManager charg√© d'amener le personnage √† la position (x,y)
-	 * exprim√©e en pixels
-	 * 
-	 * @param ai 
-	 * 		Agent √† traiter.
-	 * @param x 
-	 * 		Abscisse.
-	 * @param y 
-	 * 		Ordonn√©e.
-	 * @throws StopRequestException
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * crÈe un PathManager chargÈ d'amener le personnage ‡ la position (x,y)
+	 * exprimÈe en pixels
 	 */
 	public PathManager(Suiveur ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -72,15 +62,8 @@ public class PathManager
 	}
 	
 	/**
-	 * cr√©e un PathManager charg√© d'amener le personnage au centre de la case
-	 * pass√©e en param√®tre
-	 * 
-	 * @param ai 
-	 * 		Agent √† traiter.
-	 * @param destination 
-	 * 		Case de destination.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * crÈe un PathManager chargÈ d'amener le personnage au centre de la case
+	 * passÈe en paramËtre
 	 */
 	public PathManager(Suiveur ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -91,11 +74,6 @@ public class PathManager
 	
 	/**
 	 * initialise ce PathManager
-	 * 
-	 * @param ai 
-	 * 		Agent concern√©.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	private void init(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -111,7 +89,7 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concern√©e par ce gestionnaire de chemin */
+	/** l'IA concernÈe par ce gestionnaire de chemin */
 	private Suiveur ai;
 	/** zone de jeu */
 	private AiZone zone;
@@ -119,24 +97,19 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arriv√© √† destination */
+	/** indique si le personnage est arrivÈ ‡ destination */
 	private boolean arrived;
-	/** la case de destination s√©lectionn√©e */
+	/** la case de destination sÈlectionnÈe */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonn√©e de destination */
+	/** l'ordonnÈe de destination */
 	private double yDest;
 	
 	/**
 	 * modifie la case de destination du personnage,
-	 * place les coordonn√©es de destination au centre de cette case,
+	 * place les coordonnÈes de destination au centre de cette case,
 	 * et recalcule le chemin.
-	 * 
-	 * @param destination 
-	 * 		Case de destination.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -149,16 +122,9 @@ public class PathManager
 	}
 
 	/**
-	 * modifie les coordonn√©es de destination,
-	 * met √† jour automatiquement la case correspondante,
+	 * modifie les coordonnÈes de destination,
+	 * met ‡ jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
-	 * 
-	 * @param x
-	 * 		Abscisse en pixels. 
-	 * @param y 
-	 * 		Ordonn√©e en pixels.
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -182,8 +148,8 @@ public class PathManager
 */	
 
 	/**
-	 * d√©termine si le personnage est arriv√© au centre de la case
-	 * pass√©e en param√®tre
+	 * dÈtermine si le personnage est arrivÈ au centre de la case
+	 * passÈe en paramËtre
 	 */
 /*	private boolean hasArrived(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -194,23 +160,18 @@ public class PathManager
 	}
 */
 	/**
-	 * d√©termine si le personnage est arriv√© aux coordonn√©es de destination
-	 * 
-	 * @return
-	 * 		{@code true} ssi l'agent est arriv√© √† destination. 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * dÈtermine si le personnage est arrivÈ aux coordonnÈes de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 //		if(!arrived)
-		{	// on teste si le personnage est √† peu pr√®s situ√© √† la position de destination 
+		{	// on teste si le personnage est ‡ peu prËs situÈ ‡ la position de destination 
 			AiHero ownHero = ai.getOwnHero();
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
 			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
-			// cas particulier : oscillation autour du point d'arriv√©e
+			// cas particulier : oscillation autour du point d'arrivÈe
 			if(!arrived && path.getLength()==1)
 			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
 				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
@@ -224,17 +185,14 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// PREVIOUS LOCATION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse pr√©c√©dente */
+	/** abscisse prÈcÈdente */
 	private double xPrev;
-	/** ordonn√©e pr√©c√©dente */
+	/** ordonnÈe prÈcÈdente */
 	private double yPrev;	
 	
 	/**
-	 * met √† jour la position pr√©c√©dente du personnage,
-	 * exprim√©e en pixels
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * met ‡ jour la position prÈcÈdente du personnage,
+	 * exprimÈe en pixels
 	 */
 	private void updatePrev() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -247,17 +205,14 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin √† suivre */
+	/** le chemin ‡ suivre */
 	private AiPath path;
 	
 	/**
-	 * v√©rifie que le personnage est bien sur le chemin pr√©-calcul√©,
+	 * vÈrifie que le personnage est bien sur le chemin prÈ-calculÈ,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide apr√®s l'ex√©cution de cette m√©thode.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * est vide aprËs l'exÈcution de cette mÈthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -271,7 +226,7 @@ public class PathManager
 	}
 	
 	/**
-	 * d√©termine si le personnage a d√©pass√© la premi√®re case du chemin
+	 * dÈtermine si le personnage a dÈpassÈ la premiËre case du chemin
 	 * en direction de la seconde case
 	 */
 /*	private boolean hasCrossed(AiTile tile) throws StopRequestException
@@ -304,13 +259,8 @@ public class PathManager
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours s√ªr et si aucun obstacle n'est apparu
-	 * depuis la derni√®re it√©ration
-	 * 
-	 * @return 
-	 * 		?
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 * est toujours s˚r et si aucun obstacle n'est apparu
+	 * depuis la derniËre itÈration
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -331,11 +281,11 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe impl√©mentant l'algorithme A* */
+	/** classe implÈmentant l'algorithme A* */
 	private Astar astar;
-	/** classe impl√©mentant la fonction heuristique */
+	/** classe implÈmentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe impl√©mentant la fonction de co√ªt */
+	/** classe implÈmentant la fonction de co˚t */
 	private CostCalculator costCalculator;
 
 	/////////////////////////////////////////////////////////////////
@@ -343,19 +293,14 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun d√©placement n'est n√©cessaire)
-	 *
-	 * @return
-	 * 		La direction √† suivre. 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
+	 *(ou renvoie Direction.NONE si aucun dÈplacement n'est nÈcessaire)
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on v√©rifie que le joueur est toujours sur le chemin
+		{	// on vÈrifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())
@@ -376,9 +321,9 @@ public class PathManager
 			}
 		}
 		
-		// mise √† jour de la position pr√©c√©dente
+		// mise ‡ jour de la position prÈcÈdente
 		updatePrev();
-		// mise √† jour de la sortie
+		// mise ‡ jour de la sortie
 		updateOutput();
 		
 		if(verbose)
@@ -393,11 +338,8 @@ public class PathManager
 	// OUTPUT					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met √† jour la sortie graphique de l'IA en fonction du
+	 * met ‡ jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas o√π le moteur demande la terminaison de l'agent.
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

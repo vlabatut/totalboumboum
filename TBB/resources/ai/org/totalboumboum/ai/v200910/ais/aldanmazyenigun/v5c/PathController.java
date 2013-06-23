@@ -15,293 +15,246 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * classe chargÃ©e d'implÃ©menter un dÃ©placement, en respectant un chemin donnÃ©
+ * classe chargée d'implémenter un déplacement, 
+ * en respectant un chemin donné
  * 
  * @version 5.c
  * 
- * @author CansÄ±n Aldanmaz
- * @author YalÃ§Ä±n YenigÃ¼n
- * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
  */
-@SuppressWarnings("deprecation")
-public class PathController {
-	/**
-	 * crÃ©e un PathManager chargÃ© d'amener le personnage Ã  la position (x,y)
-	 * exprimÃ©e en pixels
-	 * 
-	 * @param ai
-	 *            Description manquante !
-	 * @param x
-	 *            Description manquante !
-	 * @param y
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
-	 */
-	public PathController(AldanmazYenigun ai, double x, double y)
-			throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
+public class PathController
+{
 
+
+	/**
+	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
+	 * exprimée en pixels
+	 */
+	public PathController(AldanmazYenigun ai, double x, double y) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		init(ai);
-		setDestination(x, y);
+		setDestination(x,y);
 	}
-
+	
 	/**
-	 * crÃ©e un PathManager chargÃ© d'amener le personnage au centre de la case
-	 * passÃ©e en paramÃ¨tre
-	 * 
-	 * @param ai
-	 *            Description manquante !
-	 * @param destination
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * crée un PathManager chargé d'amener le personnage au centre de la case
+	 * passée en paramètre
 	 */
-	public PathController(AldanmazYenigun ai, AiTile destination)
-			throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	public PathController(AldanmazYenigun ai, AiTile destination) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		init(ai);
 		setDestination(destination);
 	}
-
+	
 	/**
 	 * initialise ce PathManager
-	 * 
-	 * @param ai
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
 	 */
-	private void init(AldanmazYenigun ai) throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	private void init(AldanmazYenigun ai) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
 		this.ai = ai;
 		zone = ai.getZone();
 		costCalculator = new BasicCostCalculator();
 		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai, ai.getOwnHero(), costCalculator,
-				heuristicCalculator);
+		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
 		updatePrev();
 	}
-
-	// ///////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE /////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** l'IA concernÃ©e par ce gestionnaire de chemin */
+	
+	/////////////////////////////////////////////////////////////////
+	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** l'IA concernée par ce gestionnaire de chemin */
 	private AldanmazYenigun ai;
 	/** zone de jeu */
 	private AiZone zone;
-
-	// ///////////////////////////////////////////////////////////////
-	// DESTINATION /////////////////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** indique si le personnage est arrivÃ© Ã  destination */
+	
+	/////////////////////////////////////////////////////////////////
+	// DESTINATION	/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sÃ©lectionnÃ©e */
+	/** la case de destination sélectionnée */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonnÃ©e de destination */
+	/** l'ordonnée de destination */
 	private double yDest;
-
+	
 	/**
-	 * modifie la case de destination du personnage, place les coordonnÃ©es de
-	 * destination au centre de cette case, et recalcule le chemin.
-	 * 
-	 * @param destination
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * modifie la case de destination du personnage,
+	 * place les coordonnées de destination au centre de cette case,
+	 * et recalcule le chemin.
 	 */
-	public void setDestination(AiTile destination) throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	public void setDestination(AiTile destination) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
 		arrived = false;
 		tileDest = destination;
 		xDest = tileDest.getPosX();
 		yDest = tileDest.getPosY();
-		path = astar.processShortestPath(ai.getActualTile(), destination);
+		path = astar.processShortestPath(ai.getActualTile(),destination);
 	}
 
 	/**
-	 * modifie les coordonnÃ©es de destination, met Ã  jour automatiquement la
-	 * case correspondante, et recalcule le chemin.
-	 * 
-	 * @param x
-	 *            Description manquante !
-	 * @param y
-	 *            Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * modifie les coordonnées de destination,
+	 * met à jour automatiquement la case correspondante,
+	 * et recalcule le chemin.
 	 */
-	public void setDestination(double x, double y) throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	public void setDestination(double x, double y) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
 		arrived = false;
 		double normalized[] = zone.normalizePosition(x, y);
 		xDest = normalized[0];
 		yDest = normalized[1];
-		tileDest = zone.getTile(xDest, yDest);
-		path = astar.processShortestPath(ai.getActualTile(), tileDest);
+		tileDest = zone.getTile(xDest,yDest);
+		path = astar.processShortestPath(ai.getActualTile(),tileDest);
 	}
 
+	
 	/**
-	 * dÃ©termine si le personnage est arrivÃ© aux coordonnÃ©es de destination
-	 * 
-	 * @return Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * détermine si le personnage est arrivé aux coordonnées de destination
 	 */
-	public boolean hasArrived() throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
-		// if(!arrived)
-		{ // on teste si le personnage est Ã  peu prÃ¨s situÃ© Ã  la position de
-			// destination
+	public boolean hasArrived() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
+//		if(!arrived)
+		{	// on teste si le personnage est à peu près situé à la position de destination 
 			AiHero ownHero = ai.getOwnHero();
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
-			arrived = zone.hasSamePixelPosition(xCurrent, yCurrent, xDest,
-					yDest);
-			// cas particulier : oscillation autour du point d'arrivÃ©e
-			if (!arrived && path.getLength() == 1) {
-				Direction prevDir = zone.getDirection(xPrev, yPrev, xDest,
-						yDest);
-				Direction currentDir = zone.getDirection(xCurrent, yCurrent,
-						xDest, yDest);
-				arrived = prevDir.getOpposite() == currentDir;
+			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
+			// cas particulier : oscillation autour du point d'arrivée
+			if(!arrived && path.getLength()==1)
+			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
+				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
+				arrived = prevDir.getOpposite()==currentDir;
 			}
 		}
-
+		
 		return arrived;
 	}
 
-	// ///////////////////////////////////////////////////////////////
-	// PREVIOUS LOCATION /////////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** abscisse prÃ©cÃ©dente */
+	/////////////////////////////////////////////////////////////////
+	// PREVIOUS LOCATION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** abscisse précédente */
 	private double xPrev;
-	/** ordonnÃ©e prÃ©cÃ©dente */
-	private double yPrev;
-
+	/** ordonnée précédente */
+	private double yPrev;	
+	
 	/**
-	 * met Ã  jour la position prÃ©cÃ©dente du personnage, exprimÃ©e en pixels
-	 * 
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * met à jour la position précédente du personnage,
+	 * exprimée en pixels
 	 */
-	private void updatePrev() throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	private void updatePrev() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		AiHero hero = ai.getOwnHero();
 		xPrev = hero.getPosX();
-		yPrev = hero.getPosY();
+		yPrev = hero.getPosY();		
 	}
 
-	// ///////////////////////////////////////////////////////////////
-	// PATH /////////////////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** le chemin Ã  suivre */
+	/////////////////////////////////////////////////////////////////
+	// PATH			/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** le chemin à suivre */
 	private AiPath path;
-
+	
 	/**
-	 * vÃ©rifie que le personnage est bien sur le chemin prÃ©-calculÃ©, en
-	 * supprimant si besoin les cases inutiles. Si le personnage n'est plus sur
-	 * le chemin, alors le chemin est vide aprÃ¨s l'exÃ©cution de cette mÃ©thode.
-	 * 
-	 * @throws StopRequestException
-	 *             Description manquante !
+	 * vérifie que le personnage est bien sur le chemin pré-calculé,
+	 * en supprimant si besoin les cases inutiles.
+	 * Si le personnage n'est plus sur le chemin, alors le chemin
+	 * est vide après l'exécution de cette méthode.
 	 */
-	private void checkIsOnPath() throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	private void checkIsOnPath() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		AiTile currentTile = ai.getActualTile();
-		while (!path.isEmpty() && path.getTile(0) != currentTile) {
-			ai.checkInterruption(); // APPEL OBLIGATOIRE
+		while(!path.isEmpty() && path.getTile(0)!=currentTile)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			path.removeTile(0);
 		}
 	}
-
+	
 	/**
-	 * dÃ©termine si le personnage a dÃ©passÃ© la premiÃ¨re case du chemin en
-	 * direction de la seconde case
-	 * 
-	 * 
-	 * /** teste si le chemin est toujours valide, i.e. s'il est toujours sÃ»r et
-	 * si aucun obstacle n'est apparu depuis la derniÃ¨re itÃ©ration
-	 * 
-	 * @return ? Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
-	 */
-	private boolean checkPathValidity() throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
+	 * détermine si le personnage a dépassé la première case du chemin
+	 * en direction de la seconde case
 
+	
+	/** 
+	 * teste si le chemin est toujours valide, i.e. s'il
+	 * est toujours sûr et si aucun obstacle n'est apparu
+	 * depuis la dernière itération
+	 */
+	private boolean checkPathValidity() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
 		boolean result = true;
 		Iterator<AiTile> it = path.getTiles().iterator();
-		while (it.hasNext() && result) {
-			ai.checkInterruption(); // APPEL OBLIGATOIRE
+		while(it.hasNext() && result)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tile = it.next();
-			result = tile.isCrossableBy(ai.getOwnHero())
-					&& ai.getZoneFormee().isSafe(tile.getCol(), tile.getLine());
+			result = tile.isCrossableBy(ai.getOwnHero()) && ai.getZoneFormee().isSafe(tile.getCol(),tile.getLine());
 
 		}
 		return result;
 	}
 
-	// ///////////////////////////////////////////////////////////////
-	// A STAR /////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/** classe implÃ©mentant l'algorithme A* */
+	/////////////////////////////////////////////////////////////////
+	// A STAR					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** classe implémentant l'algorithme A* */
 	private Astar astar;
-	/** classe implÃ©mentant la fonction heuristique */
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implÃ©mentant la fonction de coÃ»t */
+	/** classe implémentant la fonction de coût */
 	private CostCalculator costCalculator;
 
-	// ///////////////////////////////////////////////////////////////
-	// PROCESS /////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////
-	/**
-	 * calcule la prochaine direction pour aller vers la destination (ou renvoie
-	 * Direction.NONE si aucun dÃ©placement n'est nÃ©cessaire)
-	 * 
-	 * @return Description manquante !
-	 * @throws StopRequestException
-	 *             Description manquante !
+	/////////////////////////////////////////////////////////////////
+	// PROCESS					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	/** 
+	 * calcule la prochaine direction pour aller vers la destination 
+	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 	 * */
-	public Direction update() throws StopRequestException {
-		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
+	public Direction update() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
 		Direction result = Direction.NONE;
-		if (!hasArrived()) { // on vÃ©rifie que le joueur est toujours sur le
-								// chemin
+		if(!hasArrived())
+		{	// on vérifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
-			if (path.isEmpty() || !checkPathValidity())
-				path = astar.processShortestPath(ai.getActualTile(), tileDest);
-			if (checkPathValidity()) { // s'il reste deux cases au moins dans le
-										// chemin, on se dirige vers la suivante
-				if (path.getLength() > 1) {
-					AiTile tile = path.getTile(1);
-					result = zone.getDirection(ai.getOwnHero(), tile);
+			if(path.isEmpty() || !checkPathValidity())
+				path = astar.processShortestPath(ai.getActualTile(),tileDest);
+			if(checkPathValidity())
+			{	// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
+				if(path.getLength()>1)
+				{	AiTile tile = path.getTile(1);
+					result = zone.getDirection(ai.getOwnHero(),tile);	
 				}
 				// sinon, s'il ne reste qu'une seule case, on va au centre
-				else if (path.getLength() > 0) {
-					AiHero ownHero = ai.getOwnHero();
+				else if(path.getLength()>0)
+				{	AiHero ownHero = ai.getOwnHero();
 					double x1 = ownHero.getPosX();
 					double y1 = ownHero.getPosY();
-					result = zone.getDirection(x1, y1, xDest, yDest);
+					result = zone.getDirection(x1,y1,xDest,yDest);
 				}
 			}
 		}
-
-		// mise Ã  jour de la position prÃ©cÃ©dente
+		
+		// mise à jour de la position précédente
 		updatePrev();
-		// mise Ã  jour de la sortie
-		// updateOutput();
-
+		// mise à jour de la sortie
+		//updateOutput();
+		
 		return result;
 	}
 }
+	
+

@@ -2,12 +2,12 @@
 ::
 :: This is an MS-DOS script, it works only on Windows operating systems.
 :: It (re)compiles the whole TBB game (and all AIs located in resources/ai).
-:: v.0.5
+:: v.0.4
 ::
 :: -------------------------------------------------------------------
 ::
 :: Total Boum Boum
-:: Copyright 2008-2013 Vincent Labatut 
+:: Copyright 2008-2011 Vincent Labatut 
 :: 
 :: This file is part of Total Boum Boum.
 :: 
@@ -26,6 +26,8 @@
 :: 
 :: -------------------------------------------------------------------
 
+
+	
 	@echo off
 	Setlocal
 
@@ -36,14 +38,9 @@
 	Set ai=%aib%\org\totalboumboum\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
-	Set japa=.\resources\lib\javaparser-1.0.8.jar
-	Set gral=.\resources\lib\gral-core-0.9-SNAPSHOT.jar
-	Set cp=%bin%;%jdom%;%japa%;%gral%
+	Set japa=.\resources\lib\javaparser-1.0.7.jar
+	Set cp=%bin%;%jdom%;%japa%
 	Set sp=.\src
-:: define compile options
-	Set warnings=-nowarn
-	Set encoding=-encoding UTF8
-	Set options=%warnings% %encoding%
 
 :: create directory for .class files
 	If exist %bin% goto EXISTS
@@ -55,7 +52,7 @@
 :: (re)compile the game
 :COMPILE	
 	echo compiling the game...
-	javac %options% -sourcepath %sp% -classpath %cp% %main%\Launcher.java -d %bin%
+	javac -nowarn -sourcepath %sp% -classpath %cp% %main%\Launcher.java -d %bin%
 
 :: (re)compile the AI classes inside the game
 	echo compiling the AI classes inside the game...
@@ -64,7 +61,7 @@
 		dir %%f\*.java /b /s /x > sources.txt
 		For /f "delims=;" %%g In (sources.txt) Do (
 			echo 		%%g
-			javac %options% -sourcepath %sp% -classpath %cp% "%%g" -d %bin%
+			javac -nowarn -sourcepath %sp% -classpath %cp% "%%g" -d %bin%
 		)
 	)
 	del sources.txt
@@ -75,7 +72,7 @@
 		echo 	%%f
 		For /d %%g In (%%f\ais\*) Do ( 
 			echo 	 	%%g
-			javac %options% -sourcepath %sp%;%aib% -classpath %cp%;%aib% %%g\*.java
+			javac -nowarn -sourcepath %sp%;%aib% -classpath %cp%;%aib% %%g\*.java
 		)
 	)
 

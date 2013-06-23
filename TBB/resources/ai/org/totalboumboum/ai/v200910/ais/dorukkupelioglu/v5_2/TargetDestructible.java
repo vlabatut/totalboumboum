@@ -9,48 +9,22 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Burcu Küpelioğlu
- * @author Oktay Doruk
- */
-@SuppressWarnings("deprecation")
 public class TargetDestructible {
 
-	/** */
 	private DorukKupelioglu dk;
-	/** */
 	private Astar astar;
-	/** */
 	private Bomb bomb;
-	/** */
 	private AiPath path;
-	/** */
 	private AiPath[] pathesOwnHero;
-	/** */
 	private double[] FvaluesOwnHero;
-	/** */
 	private List<AiTile> destructibles;
-	/** */
 	private List<Double> pathStates;
-	/** */
 	private List<Double> pathStatesControl;
-	/** */
 	private boolean hasPathFound;
-	/** */
 	private boolean targetDestructibleEnded;
-	/** */
-	/** */
 	private boolean pathWorks;
-	/** */
 	private int MAX_DEST;
 	
-	/**
-	 * 
-	 * @param dk
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public TargetDestructible(DorukKupelioglu dk) throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -91,13 +65,6 @@ public class TargetDestructible {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction moveTo()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -109,13 +76,7 @@ public class TargetDestructible {
 	}
 	
 	
-	/**
-	 * 
-	 * @return ?
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+
 	private int findDestructible()throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -168,13 +129,6 @@ public class TargetDestructible {
 		return indextile;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean pathAvailable() throws StopRequestException
 	{
 		dk.checkInterruption();
@@ -202,34 +156,17 @@ public class TargetDestructible {
 		return hasPathFound && !targetDestructibleEnded;
 	}	
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public boolean pathWorks()
 	{
 		return pathWorks;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean succeed() throws StopRequestException
 	{
 		dk.checkInterruption();
 		return hasPathFound;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public int PathLength()
 	{
 		return path.getLength();

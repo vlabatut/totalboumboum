@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.controls;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,7 +31,6 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.classes.ClassTools;
 import org.totalboumboum.tools.files.FileNames;
@@ -50,7 +49,6 @@ public class ControlSettingsSaver
 	public static void saveControlSettings(String fileName, ControlSettings controlSettings) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	// build document
 		Element root = saveControlElement(controlSettings);	
-		
 		// save file
 		String controlFile = FilePaths.getControlsPath()+File.separator+fileName+FileNames.EXTENSION_XML;
 		File dataFile = new File(controlFile);
@@ -61,11 +59,6 @@ public class ControlSettingsSaver
 
 	private static Element saveControlElement(ControlSettings controlSettings)
 	{	Element result = new Element(XmlNames.CONTROLS);
-	
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-
 		HashMap<String,Integer> onEvents = controlSettings.getOnEvents();
 		Iterator<Entry<String,Integer>> onIt = onEvents.entrySet().iterator();
 		while(onIt.hasNext())

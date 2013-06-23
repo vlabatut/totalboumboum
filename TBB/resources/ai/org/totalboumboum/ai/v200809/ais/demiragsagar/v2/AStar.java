@@ -12,76 +12,38 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * @author Doğus Burcu Demirağ
- * @author Zeynep Şagar
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
  *
  */
-@SuppressWarnings("deprecation")
 public class AStar {
 
-	/** */
 	AiTile firstTile;
-	/** */
 	AiTile lastTile;
-	/** */
 	Vector<LienRecherche> links;
-	/** */
 	boolean debug;
-	
-	/**
-	 * 
-	 * @param start
-	 * 		Description manquante !
-	 * @param end
-	 * 		Description manquante !
-	 */
+
 	public AStar(AiTile start, AiTile end) {
 		this.firstTile = start;
 		this.lastTile = end;
 		this.debug = false;
 	}
 
-	/**
-	 * 
-	 * @param start
-	 * 		Description manquante !
-	 * @param end
-	 * 		Description manquante !
-	 * @param debug
-	 * 		Description manquante !
-	 */
 	public AStar(AiTile start, AiTile end, boolean debug) {
 		this.firstTile = start;
 		this.lastTile = end;
 		this.debug = debug;
 	}
 
-	/**
-	 * 
-	 */
 	public void init() {
 		links = new Vector<LienRecherche>();
 	}
 
-	/**
-	 * 
-	 * @param parent
-	 * 		Description manquante !
-	 * @param fils
-	 * 		Description manquante !
-	 */
 	public void formeLien(Node parent, Node fils) {
 		LienRecherche link = new LienRecherche(parent, fils);
 		links.add(link);
 	}
 
-	/**
-	 * 
-	 * @param courant
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
-	 */
 	public Iterator<Node> developNode(AiTile courant) {
 		Vector<Node> result = new Vector<Node>();
 		Node temp;
@@ -126,9 +88,6 @@ public class AStar {
 		}
 		return result.iterator();
 	}
-	/**
-	 * 
-	 */
 	public void formeArbre() {
 		try {
 			init();
@@ -141,12 +100,12 @@ public class AStar {
 			PriorityQueue<Node> fifo = new PriorityQueue<Node>(1, monComp);
 			first=new Node(firstTile);
 			fifo.offer(first);
-//			int iteration = 1;
+			int iteration = 1;
 			while (!fifo.isEmpty() && solution == null) {
 				Node node = fifo.poll();
 				
 				if (debug) System.out.println("Node qui sort du fifo: " + "("	+ node.tile.getCol() + "," + node.tile.getLine() + ")");
-//				iteration++;
+				iteration++;
 				if (node.memeCoordonnees(new Node(lastTile))) {
 					solution = node;
 					if (debug) System.out.println("Solution trouve : (" + solution.tile.getCol() + "," + solution.tile.getLine() + ")");
@@ -179,10 +138,8 @@ public class AStar {
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A
-	 * @return
-	 * 		Description manquante !
+	/*
+	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A*
 	 */
 	public LinkedList<Node> getPath() { 
 		LinkedList<Node> path;
@@ -201,12 +158,8 @@ public class AStar {
 		return path;
 		
 	}
-	/**
+	/*
 	 * On trouve le parent d'un noeud 
-	 * @param child 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
 	public LienRecherche getParentLink(Node child) {
 		LienRecherche result = null;
@@ -221,12 +174,8 @@ public class AStar {
 		}
 		return result;
 	}
-	/**
+	/*
 	 * On trouve les fils d'un noeud
-	 * @param node 
-	 * 		Description manquante !
-	 * @return
-	 * 		Description manquante !
 	 */
 	public List <Node> getChildrenLinks(Node node) {
 		List <Node> result = new ArrayList<Node>();
@@ -239,12 +188,8 @@ public class AStar {
 		}
 		return result;
 	}
-	/** Il trouve les cases qui n'ont pas de fils
+	//Il trouve les cases qui n'ont pas de fils
 	//ou on peut poser des bombes
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 */
 	public List<Node> getFils()
 	{
 		List<Node> nodes=new ArrayList<Node>();

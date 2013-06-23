@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.tournament;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -47,17 +47,12 @@ import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiMiscTools;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
-import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
 /**
@@ -76,7 +71,7 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// buttons
 		initButtons();	
@@ -107,14 +102,13 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 	{	buttonWidth = getHeight();
 		buttonHeight = getHeight();
 
-		buttonQuit = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonPlayersPrevious = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonPlayersNext = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonSettingsPrevious = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonSettingsNext = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonPublish = GuiButtonTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
-buttonPublish.setEnabled(!GameData.PRODUCTION);
-		buttonBlockPlayers = GuiButtonTools.createToggleButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonSettingsPrevious = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonPublish = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
+		buttonBlockPlayers = GuiTools.createToggleButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}
 	
@@ -123,11 +117,11 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonPlayersPrevious);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(buttonPublish);
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersNext);
 	}
 	
@@ -136,11 +130,11 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonSettingsPrevious);
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiSizeTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonSettingsNext);
 	}
 	
@@ -278,7 +272,7 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH))
 		{	// update buttons
 			buttonPlayersPrevious.setEnabled(false);
-			int index = GuiMiscTools.indexOfComponent(this,buttonPublish);
+			int index = GuiTools.indexOfComponent(this,buttonPublish);
 			remove(index);
 			add(buttonBlockPlayers,index);
 			revalidate();

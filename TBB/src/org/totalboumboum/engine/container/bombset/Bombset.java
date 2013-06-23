@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.bombset;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -41,7 +41,6 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteInsertionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
@@ -83,12 +82,9 @@ public class Bombset extends AbstractBombset
 	}
 	
 	/**
-	 * Only for player-generated bombs.
-	 * 
+	 * only for player-generated bombs
 	 * @param sprite
-	 * 		The sprite creating the bomb.
 	 * @return
-	 * 		The created bomb.
 	 */
 	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
@@ -118,8 +114,8 @@ public class Bombset extends AbstractBombset
 			// record/transmit event
 			String name = bf.getBombName();
 			name = name + "/" + bf.getColor();
-			SpriteCreationEvent creationEvent = new SpriteCreationEvent(result,name);
-			RoundVariables.writeEvent(creationEvent);
+			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
 		}
 
 		return result;
@@ -151,8 +147,7 @@ public class Bombset extends AbstractBombset
 	
 	
 	/**
-	 * Only for level-generated bombs
-	 * 
+	 * only for level-generated bombs
 	 * @param tile
 	 * 		tile where the bomb should be dropped
 	 * @param name
@@ -161,10 +156,8 @@ public class Bombset extends AbstractBombset
 	 * 		bomb range
 	 * @param duration
 	 * 		time bomb duration (can be negative if not a time bomb)
-	 * @param insert
-	 * 		sprite not inserted in the level (for the AI API).
 	 * @return
-	 * 		The generated bomb.
+	 * @throws IOException 
 	 */
 	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration)
 	{	Bomb result = null;
@@ -189,7 +182,7 @@ public class Bombset extends AbstractBombset
 				ability.setFrame(true);
 				result.addDirectAbility(ability);
 			}
-			
+			// record/transmit event
 			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
 			RoundVariables.writeEvent(event);
 		}

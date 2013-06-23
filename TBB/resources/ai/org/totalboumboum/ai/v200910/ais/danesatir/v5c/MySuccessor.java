@@ -15,49 +15,27 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class MySuccessor extends SuccessorCalculator{
-	/** */
 	private DaneSatir ai;
-	/** */
 	private TimeMatrice time;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @param time
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public MySuccessor(DaneSatir ai,TimeMatrice time) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
 		this.time=time;
 	}
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public MySuccessor(DaneSatir ai) throws StopRequestException {
 		this(ai,new TimeMatrice(ai));
 		ai.checkInterruption();		
 	}
-	
 	/**
 	 * Expand current tile neighbors and check time with Depth
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	@Override
 	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException

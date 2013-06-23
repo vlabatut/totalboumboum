@@ -8,19 +8,11 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
  * @version 5
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class MyCost extends CostCalculator {
-	/** */
 	private TimeMatrice time;
-
-	/**
-	 * 
-	 * @param time
-	 * 		Description manquante !
-	 */
 	MyCost(TimeMatrice time) {
 		this.time = time;
 	}

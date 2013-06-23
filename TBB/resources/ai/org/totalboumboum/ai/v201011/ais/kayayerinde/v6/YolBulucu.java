@@ -38,42 +38,18 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings("deprecation")
+
+
 public class YolBulucu
 {
-	/** */
 	private boolean verbose = false;
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public YolBulucu(KayaYerinde onder) throws StopRequestException
 	{
 		onder.checkInterruption();
 		init(onder);
 	}
 
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @param x
-	 * 		description manquante !
-	 * @param y
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 * @throws LimitReachedException
-	 * 		description manquante !
-	 */
 	public YolBulucu(KayaYerinde onder, double x, double y) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -81,17 +57,6 @@ public class YolBulucu
 		setDestination(x,y);
 	}
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @param destination
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 * @throws LimitReachedException
-	 * 		description manquante !
-	 */
 	public YolBulucu(KayaYerinde onder, AiTile destination) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -99,13 +64,6 @@ public class YolBulucu
 		setDestination(destination);
 	}
 	
-	/**
-	 * 
-	 * @param onder
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	private void init(KayaYerinde onder) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -120,7 +78,7 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concernée par ce gestionnonderre de chemin */
+	/** l'IA concern�e par ce gestionnonderre de chemin */
 	private KayaYerinde onder;
 	/** zone de jeu */
 	private AiZone zone;
@@ -128,26 +86,20 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arrivé à destination */
+	/** indique si le personnage est arriv� � destination */
 	private boolean arrived;
-	/** la case de destination sélectionnée */
+	/** la case de destination s�lectionn�e */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonnée de destination */
+	/** l'ordonn�e de destination */
 	private double yDest;
 	
 	/**
 	 * modifie la case de destination du personnage,
-	 * place les coordonnées de destination au centre de cette case,
+	 * place les coordonn�es de destination au centre de cette case,
 	 * et recalcule le chemin.
-	 * 
-	 * @param destination 
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * @throws LimitReachedException 
-	 * 		description manquante !
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -160,18 +112,10 @@ public class YolBulucu
 	}
 
 	/**
-	 * modifie les coordonnées de destination,
-	 * met à jour automatiquement la case correspondante,
+	 * modifie les coordonn�es de destination,
+	 * met � jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
-	 * 
-	 * @param x 
-	 * 		description manquante !
-	 * @param y 
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
 	 * @throws LimitReachedException 
-	 * 		description manquante !
 	 */
 	public void setDestination(double x, double y) throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -195,8 +139,8 @@ public class YolBulucu
 */	
 
 	/**
-	 * détermine si le personnage est arrivé au centre de la case
-	 * passée en paramètre
+	 * d�termine si le personnage est arriv� au centre de la case
+	 * pass�e en param�tre
 	 */
 /*	private boolean hasArrived(AiTile tile) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -207,23 +151,18 @@ public class YolBulucu
 	}
 */
 	/**
-	 * détermine si le personnage est arrivé aux coordonnées de destination
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * d�termine si le personnage est arriv� aux coordonn�es de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 		
 //		if(!arrived)
-		{	// on teste si le personnage est à peu près situé à la position de destination 
+		{	// on teste si le personnage est � peu pr�s situ� � la position de destination 
 			AiHero ownHero = zone.getOwnHero();
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
 			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
-			// cas particulier : oscillation autour du point d'arrivée
+			// cas particulier : oscillation autour du point d'arriv�e
 			if(!arrived && path.getLength()==1)
 			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
 				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
@@ -237,17 +176,14 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// PREVIOUS LOCATION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse précédente */
+	/** abscisse pr�c�dente */
 	private double xPrev;
-	/** ordonnée précédente */
+	/** ordonn�e pr�c�dente */
 	private double yPrev;	
 	
 	/**
-	 * met à jour la position précédente du personnage,
-	 * exprimée en pixels
-	 * 
-	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * met � jour la position pr�c�dente du personnage,
+	 * exprim�e en pixels
 	 */
 	private void updatePrev() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -260,17 +196,14 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin à suivre */
+	/** le chemin � suivre */
 	private AiPath path;
 	
 	/**
-	 * vérifie que le personnage est bien sur le chemin pré-calculé,
+	 * v�rifie que le personnage est bien sur le chemin pr�-calcul�,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide après l'exécution de cette méthode.
-	 * 
-	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * est vide apr�s l'ex�cution de cette m�thode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -284,7 +217,7 @@ public class YolBulucu
 	}
 	
 	/**
-	 * détermine si le personnage a dépassé la première case du chemin
+	 * d�termine si le personnage a d�pass� la premi�re case du chemin
 	 * en direction de la seconde case
 	 */
 /*	private boolean hasCrossed(AiTile tile) throws StopRequestException
@@ -317,13 +250,8 @@ public class YolBulucu
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours sûr et si aucun obstacle n'est apparu
-	 * depuis la dernière itération
-	 * 
-	 * @return ?
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * est toujours s�r et si aucun obstacle n'est apparu
+	 * depuis la derni�re it�ration
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -344,11 +272,11 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe implémentant l'algorithme A* */
+	/** classe impl�mentant l'algorithme A* */
 	private org.totalboumboum.ai.v201011.adapter.path.astar.Astar astar;
-	/** classe implémentant la fonction heuristique */
+	/** classe impl�mentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
+	/** classe impl�mentant la fonction de co�t */
 	private CostCalculator costCalculator;
 
 	/////////////////////////////////////////////////////////////////
@@ -356,21 +284,15 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochonderne direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessonderre)
-	 *
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException 
-	 * 		description manquante !
+	 *(ou renvoie Direction.NONE si aucun d�placement n'est n�cessonderre)
 	 * @throws LimitReachedException 
-	 * 		description manquante !
 	 * */
 	public Direction update() throws StopRequestException, LimitReachedException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on vérifie que le joueur est toujours sur le chemin
+		{	// on v�rifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())
@@ -391,9 +313,9 @@ public class YolBulucu
 			}
 		}
 		
-		// mise à jour de la position précédente
+		// mise � jour de la position pr�c�dente
 		updatePrev();
-		// mise à jour de la sortie
+		// mise � jour de la sortie
 		updateOutput();
 		
 		if(verbose)
@@ -408,11 +330,8 @@ public class YolBulucu
 	// OUTPUT					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour la sortie graphique de l'IA en fonction du
-	 * chemin courant.
-	 * 
-	 * @throws StopRequestException 
-	 * 		description manquante !
+	 * met � jour la sortie graphique de l'IA en fonction du
+	 * chemin courant
 	 */
 	private void updateOutput() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE

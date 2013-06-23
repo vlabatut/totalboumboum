@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.options;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -42,12 +42,8 @@ import org.totalboumboum.gui.menus.options.game.GameSplitPanel;
 import org.totalboumboum.gui.menus.options.gui.GuiSplitPanel;
 import org.totalboumboum.gui.menus.options.statistics.StatisticsSplitPanel;
 import org.totalboumboum.gui.menus.options.video.VideoSplitPanel;
-import org.totalboumboum.gui.tools.GuiButtonTools;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -85,25 +81,25 @@ public class OptionsMenu extends InnerMenuPanel
 		setLayout(layout);
 		
 		// background
-		setBackground(GuiColorTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// sizes
 		int buttonWidth = getWidth();
-		int buttonHeight = GuiSizeTools.buttonTextHeight;
+		int buttonHeight = GuiTools.buttonTextHeight;
 		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
-		int fontSize = GuiFontTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonControls = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,buttonWidth,buttonHeight,fontSize,this);
-		buttonGameplay = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAME,buttonWidth,buttonHeight,fontSize,this);
-		buttonVideo = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,buttonWidth,buttonHeight,fontSize,this);
-		buttonGui = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,buttonWidth,buttonHeight,fontSize,this);
-		buttonStatistics = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
-		buttonAis = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_AIS,buttonWidth,buttonHeight,fontSize,this);
-		buttonAdvanced = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
-		buttonBack = GuiButtonTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonControls = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,buttonWidth,buttonHeight,fontSize,this);
+		buttonGameplay = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAME,buttonWidth,buttonHeight,fontSize,this);
+		buttonVideo = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,buttonWidth,buttonHeight,fontSize,this);
+		buttonGui = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,buttonWidth,buttonHeight,fontSize,this);
+		buttonStatistics = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
+		buttonAis = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_AIS,buttonWidth,buttonHeight,fontSize,this);
+		buttonAdvanced = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -248,7 +244,7 @@ public class OptionsMenu extends InnerMenuPanel
 			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GAME))
-		{	// TODO certainement Ã  complÃ©ter
+		{	// TODO certainement à compléter
 			GameSplitPanel gamePanel = new GameSplitPanel(container.getMenuContainer(),container);
 			replaceWith(gamePanel);
 	    }

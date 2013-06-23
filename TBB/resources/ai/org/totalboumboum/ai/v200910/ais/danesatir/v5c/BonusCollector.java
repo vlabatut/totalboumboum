@@ -19,23 +19,18 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class BonusCollector {
 	
-	/** */
 	private DaneSatir ai;
-	/** */
 	private AiItem nearestItem;
 	
 	/**
 	 * default constructor we need our instance for handling checkInterruption
 	 * @param ai
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public BonusCollector(DaneSatir ai) throws StopRequestException {
 		ai.checkInterruption();
@@ -46,7 +41,6 @@ public class BonusCollector {
 	 * Return raw item list
 	 * @return AiItem list
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public List<AiItem> getItems() throws StopRequestException {
 		ai.checkInterruption();
@@ -56,9 +50,7 @@ public class BonusCollector {
 	/**
 	 * Turn Item list to AiTile from AiItem
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public List<AiTile> getItemsTiles() throws StopRequestException {
 		// avant tout : test d'interruption
@@ -73,11 +65,8 @@ public class BonusCollector {
 	/**
 	 * Find nearest item for hero with Astar (target tiles from getItemTiles)
 	 * @param hero
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 * @throws NoWayException
-	 * 		Description manquante !
 	 */
 	public void findNearestItem(AiHero hero) throws StopRequestException, NoWayException {
 		// avant tout : test d'interruption
@@ -102,9 +91,7 @@ public class BonusCollector {
 	/**
 	 * Find Nearest Item for our hero
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 * @throws NoWayException
-	 * 		Description manquante !
 	 */
 	public void findNearestItem() throws StopRequestException, NoWayException {
 		ai.checkInterruption();
@@ -115,7 +102,6 @@ public class BonusCollector {
 	 * Find a wall to explode
 	 * @return wall to explode
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public AiTile findWallToExplode() throws StopRequestException {
 		ai.checkInterruption();
@@ -134,26 +120,11 @@ public class BonusCollector {
 		
 		return path.getTile(path.getLength()-2);
 	}
-	
-	/**
-	 * 
-	 * @param nearestItem
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public void setNearestItem(AiItem nearestItem) throws StopRequestException {
 		ai.checkInterruption();
 		this.nearestItem = nearestItem;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public AiItem getNearestItem() throws StopRequestException {
 		ai.checkInterruption();
 		return nearestItem;
@@ -163,7 +134,6 @@ public class BonusCollector {
 	 *  Find all destructible and not burning walls.
 	 * @return list of walls' tiles
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	private List<AiTile> getWallsTiles() throws StopRequestException {
 		ai.checkInterruption();

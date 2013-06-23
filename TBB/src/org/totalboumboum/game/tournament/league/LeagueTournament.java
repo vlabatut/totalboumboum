@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.league;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -42,19 +42,15 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
- * This class represents a tournament in which
- * all players must play against each other at
- * some point, possibly several time. It is
- * based on the league model used in most sports.
  * 
  * @author Vincent Labatut
+ *
  */
 public class LeagueTournament extends AbstractTournament
-{	/** Class id */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
@@ -92,48 +88,7 @@ public class LeagueTournament extends AbstractTournament
 			currentIndex++;
 			currentMatch = match.copy();
 			currentMatch.init(prof);
-			playedMatches.add(currentMatch);
 		}
-	}
-
-	@Override
-	public void matchOver()
-	{	// stats
-		StatisticMatch statsMatch = currentMatch.getStats();
-		stats.addStatisticMatch(statsMatch);
-		
-		// iterator
-		if(currentIndex>=matches.size())
-		{	if(randomizeMatches)
-				randomizeMatches();
-			currentIndex = 0;
-		}
-		
-		// limits
-		if(matchCount==confrontations.size()-1)
-		{	float[] points;
-			if(pointsProcessor!=null)
-				points = pointsProcessor.process(this);
-			else
-				points = stats.getTotal();
-			stats.setPoints(points);
-			setOver(true);
-			panel.tournamentOver();
-			stats.initEndDate();
-			
-			// server connection
-			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(serverConnection!=null)
-				serverConnection.updateHostState(HostState.FINISHED);
-		}
-		else
-		{	panel.matchOver();		
-		}
-	}
-	
-	@Override
-	public void roundOver()
-	{	panel.roundOver();
 	}
 
 	@Override
@@ -145,25 +100,12 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Used to process points for this tournament */
 	private PointsProcessor pointsProcessor;
 		
-	/**
-	 * Returns the point processor of this tournament.
-	 * 
-	 * @return
-	 * 		Point processor of this tournament.
-	 */
 	public PointsProcessor getPointsProcessor()
 	{	return pointsProcessor;
 	}
 
-	/**
-	 * Changes the point processor of this tournament.
-	 * 
-	 * @param pointsProcessor
-	 * 		New point processor of this tournament.
-	 */
 	public void setPointsProcessor(PointsProcessor pointsProcessor)
 	{	this.pointsProcessor = pointsProcessor;
 	}
@@ -171,38 +113,16 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether the players should be used in a random order */ 
 	private boolean randomizePlayers;
 	
-	/**
-	 * Indicates if the player order
-	 * should be random or not.
-	 * 
-	 * @return
-	 * 		{@code true} iff players should be used in a random order.
-	 */
 	public boolean getRandomizePlayers()
 	{	return randomizePlayers;
 	}
 
-	/**
-	 * Changes the flag indicating if the player order
-	 * should be random or not.
-	 * 
-	 * @param randomizePlayers
-	 * 		If {@code true}, players should be used in a random order.
-	 */
 	public void setRandomizePlayers(boolean randomizePlayers)
 	{	this.randomizePlayers = randomizePlayers;
 	}
 
-	/**
-	 * Returns the allowed number of players
-	 * for the matches of this tournament.
-	 * 
-	 * @return
-	 * 		Set of allowed number of players.
-	 */
 	public Set<Integer> getMatchesAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
 		for(int i=2;i<=GameData.MAX_PROFILES_COUNT;i++)
@@ -228,14 +148,6 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Returns the ranks for this tournament.
-	 * 
-	 * @param pts
-	 * 		Points scored by the players.
-	 * @return
-	 * 		Corresponding player ranks.
-	 */
 	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
@@ -305,60 +217,22 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// MATCH ORDER		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Whether the matches should be played in a random order */ 
-	private boolean randomizeMatches;
-
-	/**
-	 * Indicates if the match order
-	 * should be random or not.
-	 * 
-	 * @return
-	 * 		{@code true} iff matches should be played in a random order.
-	 */
-	public boolean getRandomizeMatches()
-	{	return randomizeMatches;
-	}
-	
-	/**
-	 * Changes the flag indicating if the match order
-	 * should be random or not.
-	 * 
-	 * @param randomizeMatches
-	 * 		If {@code true}, matches should be played in a random order.
-	 */
-	public void setRandomizeMatches(boolean randomizeMatches)
-	{	this.randomizeMatches = randomizeMatches;
-	}
-
-	/**
-	 * Set matches in a random order.
-	 */
-	private void randomizeMatches()
-	{	Calendar cal = new GregorianCalendar();
-		long seed = cal.getTimeInMillis();
-		Random random = new Random(seed);
-		Collections.shuffle(matches,random);
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// MATCHES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Prototype matches for this tournament */ 
+	private boolean randomizeMatches;
+	private ConfrontationOrder confrontationOrder;
+	private boolean minimizeConfrontations;
 	private List<Match> matches = new ArrayList<Match>();
-	/** Number of match played until now */
+	private Match currentMatch;
+	private int currentIndex;
 	private int matchCount;
+	private List<Set<Integer>> confrontations;
 
-	/**
-	 * Initializes the matches of this tournament.
-	 */
 	private void initMatches()
 	{	// matches
 		if(randomizeMatches)
 			randomizeMatches();
 		currentIndex = 0;
-		playedMatches.clear();
 		
 		// confrontations
 		int n = profiles.size();
@@ -382,82 +256,43 @@ public class LeagueTournament extends AbstractTournament
 		}
 		if(confrontationOrder==ConfrontationOrder.RANDOM)
 			randomizeConfrontations();
-		else if(confrontationOrder==ConfrontationOrder.HOMOGENEOUS)
-			homogenizeConfrontations();
-		else if(confrontationOrder==ConfrontationOrder.HETEROGENEOUS)
+		else if(confrontationOrder==ConfrontationOrder.UNIFORM)
 			heterogenizeConfrontations();
 		matchCount = 0;
 	}
 
-	/**
-	 * Adds a match to this tournament.
-	 * 
-	 * @param match
-	 * 		The additional match.
-	 */
-	public void addMatch(Match match)
-	{	matches.add(match);
+	public boolean getRandomizeMatches()
+	{	return randomizeMatches;
+	}
+	public void setRandomizeMatches(boolean randomizeMatches)
+	{	this.randomizeMatches = randomizeMatches;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// CONFRONTATIONS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** How player confrontations affect match order */
-	private ConfrontationOrder confrontationOrder;
-	/** Whether we should try to minimize the number of times two players meet */
-	private boolean minimizeConfrontations;
-	/** List of confrontations */
-	private List<Set<Integer>> confrontations;
-
-	/**
-	 * Returns the way confrontations
-	 * affect match order.
-	 * 
-	 * @return
-	 * 		Confrontation ordering type.
-	 */
 	public ConfrontationOrder getConfrontationOrder()
 	{	return confrontationOrder;
 	}
-	
-	/**
-	 * Changes the way confrontations
-	 * affect match order.
-	 * 
-	 * @param confrontationOrder
-	 * 		New confrontation ordering type.
-	 */
 	public void setConfrontationOrder(ConfrontationOrder confrontationOrder)
 	{	this.confrontationOrder = confrontationOrder;
 	}
 
-	/**
-	 * Indicates whether we should try to minimize 
-	 * the number of times two players meet.
-	 * 
-	 * @return
-	 * 		{@code true} iff the minization flag is on.
-	 */
 	public boolean getMinimizeConfrontations()
 	{	return minimizeConfrontations;
 	}
-	
-	/**
-	 * Changes the flag indicating whether we should try to minimize 
-	 * the number of times two players meet.
-	 * 
-	 * @param minimizeConfrontations
-	 * 		New minimization flag value.
-	 */
 	public void setMinimizeConfrontations(boolean minimizeConfrontations)
 	{	this.minimizeConfrontations = minimizeConfrontations;
 	}
 
-	/**
-	 * Makes confrontations randomly distributed
-	 * (consecutive match may or may not involve
-	 * the same players).
-	 */
+	public void addMatch(Match match)
+	{	matches.add(match);
+	}
+
+	private void randomizeMatches()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(matches,random);
+	}
+
 	private void randomizeConfrontations()
 	{	Calendar cal = new GregorianCalendar();
 		long seed = cal.getTimeInMillis();
@@ -465,37 +300,55 @@ public class LeagueTournament extends AbstractTournament
 		Collections.shuffle(confrontations,random);
 	}
 
-	/**
-	 * Makes confrontations distributed
-	 * in an heterogeneous way (consecutive
-	 * matches do not involve the same players).
-	 */
 	private void heterogenizeConfrontations()
 	{	// TODO		
 	}
 	
-	/**
-	 * Makes confrontations distributed
-	 * in an homogeneous way (consecutive
-	 * matches involve roughly the same players).
-	 */
-	private void homogenizeConfrontations()
-	{	// TODO		
+	public enum ConfrontationOrder
+	{	AS_IS,
+		RANDOM,
+		UNIFORM		
 	}
 	
-	/**
-	 * Represents the order of the confrontations.
-	 * 
-	 * @author Vincent Labatut
-	 */
-	public enum ConfrontationOrder
-	{	/** Keeps the order as defined by the designer */
-		AS_IS,
-		/** Randomizes the order */
-		RANDOM,
-		/** (Tries to) distribute confrontations homogeneously over matches */
-		HOMOGENEOUS,
-		/** (Tries to) distribute confrontations heterogeneously over matches */
-		HETEROGENEOUS;
+	@Override
+	public Match getCurrentMatch()
+	{	return currentMatch;	
+	}
+
+	@Override
+	public void matchOver()
+	{	// stats
+		StatisticMatch statsMatch = currentMatch.getStats();
+		stats.addStatisticMatch(statsMatch);
+		// iterator
+		if(currentIndex>=matches.size())
+		{	if(randomizeMatches)
+				randomizeMatches();
+			currentIndex = 0;
+		}
+		// limits
+		if(matchCount==confrontations.size()-1)
+		{	float[] points;
+			if(pointsProcessor!=null)
+				points = pointsProcessor.process(this);
+			else
+				points = stats.getTotal();
+			stats.setPoints(points);
+			setOver(true);
+			panel.tournamentOver();
+			stats.initEndDate();
+			
+			// server connection
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(serverConnection!=null)
+				serverConnection.updateHostState(HostState.FINISHED);
+		}
+		else
+		{	panel.matchOver();		
+		}
+	}
+	
+	public void roundOver()
+	{	panel.roundOver();
 	}
 }

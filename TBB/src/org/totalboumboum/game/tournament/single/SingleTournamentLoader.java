@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.single;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,32 +32,12 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 /**
- * Loads an XML file representing a league tournament.
  * 
  * @author Vincent Labatut
+ *
  */
 public class SingleTournamentLoader
 {
-	/**
-	 * Processes the main element of an XML
-	 * file representing a single tournament.
-	 * 
-	 * @param folder
-	 * 		Folder containing the XML file.
-	 * @param root
-	 * 		Root element of the tournament.
-	 * @return
-	 * 		The read tournament.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	public static SingleTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	SingleTournament result = new SingleTournament();
 		Element element;
@@ -68,25 +48,6 @@ public class SingleTournamentLoader
 		return result;
 	}
 	
-	/**
-	 * Loads the XML element representing the only match
-	 * in this tournament.
-	 * @param root
-	 * 		Root element of the tournament.
-	 * @param folder
-	 * 		Folder containing the XML file.
-	 * @param result
-	 * 		The concerned resulting tournament.
-	 * 
-	 * @throws ParserConfigurationException
-	 * 		Problem while accessing the XML file.
-	 * @throws SAXException
-	 * 		Problem while accessing the XML file.
-	 * @throws IOException
-	 * 		Problem while accessing the XML file.
-	 * @throws ClassNotFoundException
-	 * 		Problem while accessing the XML file.
-	 */
 	private static void loadMatchElement(Element root, String folder, SingleTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Match match = TournamentLoader.loadMatchElement(root,folder,result);
 		result.setMatch(match);

@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.ai;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,10 +29,8 @@ import org.totalboumboum.ai.AiPreview;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -98,7 +96,7 @@ public class AiSubPanel extends TableSubPanel
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -106,13 +104,13 @@ public class AiSubPanel extends TableSubPanel
 				{	String text = values.get(line);
 					String tooltip = text;
 					setLabelText(line,colSub,text,tooltip);
-					Color fg = GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND;
+					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,0,fg);
 					Color bg;
 					if(line>0)
-						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					else
-						bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -123,7 +121,7 @@ public class AiSubPanel extends TableSubPanel
 			{	// header
 				int colSub = 0;
 				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -133,9 +131,9 @@ public class AiSubPanel extends TableSubPanel
 					setLabelText(line,colSub,text,tooltip);
 					Color bg;
 					if(line>0)
-						bg = GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 					else
-						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
@@ -147,7 +145,7 @@ public class AiSubPanel extends TableSubPanel
 		setColSubMinWidth(0,iconWidth);
 		setColSubPrefWidth(0,iconWidth);
 		setColSubMaxWidth(0,iconWidth);
-		int maxWidth = getDataWidth()-(COL_SUBS-1)*GuiSizeTools.subPanelMargin-iconWidth;
+		int maxWidth = getDataWidth()-(COL_SUBS-1)*GuiTools.subPanelMargin-iconWidth;
 		setColSubMinWidth(1,maxWidth);
 		setColSubPrefWidth(1,maxWidth);
 		setColSubMaxWidth(1,maxWidth);

@@ -6,10 +6,8 @@ package org.totalboumboum.ai.v200708.ais.ciritmutlu.exceptions;
  *
  */
 public class ExistingLinkException extends Exception
-{	
-	/** */
-	private static final long serialVersionUID = 1L;
-	/** le lien provoquant l'exeption */
+{	private static final long serialVersionUID = 1L;
+	// le lien provoquant l'exeption
 	private Object link;
 
 	/**

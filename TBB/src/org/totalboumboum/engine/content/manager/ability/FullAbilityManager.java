@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.ability;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.manager.ability;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class FullAbilityManager extends AbilityManager
 		{	ActionAbility ab = (ActionAbility)copy;
 			ab.getAction().addActor(sprite.getRole());
 		}
-		directAbilities.add(copy);	//NOTE pourquoi toutes ces copies? la question est: qu'est-ce qui est modifiÃ© exactement dans l'ability. p-e qu'il n'est pas nÃ©cessaire de copier l'action
+		directAbilities.add(copy);	//NOTE pourquoi toutes ces copies? la question est: qu'est-ce qui est modifié exactement dans l'ability. p-e qu'il n'est pas nécessaire de copier l'action
 		currentAbilities.add(copy.copy());
 	}
 	
@@ -82,19 +81,6 @@ public class FullAbilityManager extends AbilityManager
 		}
 		if(result==null)
 			result = new StateAbility(name);
-		return result;
-	}
-
-	@Override
-	public List<StateAbility> getAbilitiesStartingWith(String name)
-	{	List<StateAbility> result = new ArrayList<StateAbility>();
-		for(AbstractAbility ab: currentAbilities)
-		{	if(ab instanceof StateAbility)
-			{	StateAbility ablt = (StateAbility)ab;
-				if(ablt.getName().startsWith(name))
-					result.add(ablt);
-			}
-		}
 		return result;
 	}
 

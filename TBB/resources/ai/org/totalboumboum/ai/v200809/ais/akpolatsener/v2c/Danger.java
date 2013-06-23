@@ -14,10 +14,9 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 /**
  * 
  * @author Cem Akpolat
- * @author Emre Åžener
+ * @author Emre Sener
  *
  */
-@SuppressWarnings("deprecation")
 public class Danger {
 
 	/** la classe principal de notre IA */
@@ -29,13 +28,6 @@ public class Danger {
 	/** l'objet de la danger le plus proche */
 	Object closestDanger;
 
-	/**
-	 * 
-	 * @param as
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Danger(AkpolatSener as) throws StopRequestException {
 		as.checkInterruption();
 		this.as = as;
@@ -44,12 +36,10 @@ public class Danger {
 	}
 
 	/**
-	 * trouve le danger la plus proche Ã  une case donnÃ©e
+	 * trouve le danger la plus proche à une case donnée
 	 * 
 	 * @param tile
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	void findClosest(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
@@ -80,9 +70,7 @@ public class Danger {
 	 * retourne le danger la plus proche
 	 * 
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public Object getClosestDanger() throws StopRequestException {
 		as.checkInterruption();
@@ -90,12 +78,10 @@ public class Danger {
 	}
 
 	/**
-	 * retourne la bombe la plus proche Ã  une case donnÃ©e
+	 * retourne la bombe la plus proche à une case donnée
 	 * 
-	 * @return ?
-	 * 		Description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	AiBomb findClosestBomb() throws StopRequestException {
 		as.checkInterruption();
@@ -122,12 +108,10 @@ public class Danger {
 	}
 
 	/**
-	 * retourne la feu la plus proche Ã  une case donnÃ©e
+	 * retourne la feu la plus proche à une case donnée
 	 * 
-	 * @return ?
-	 * 		Description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	AiFire findClosestFire() throws StopRequestException {
 		as.checkInterruption();
@@ -155,14 +139,11 @@ public class Danger {
 
 	/**
 	 * retourne la distance directe entre la danger la plus proche et une case
-	 * donnÃ©e
+	 * donnée
 	 * 
 	 * @param tile
-	 * 		Description manquante !
 	 * @return
-	 * 		Description manquante !
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	public double getHypotenuseToDanger(AiTile tile)
 			throws StopRequestException {
@@ -182,14 +163,11 @@ public class Danger {
 
 	/**
 	 * retourne la distance de Manhattan entre la danger la plus proche et une
-	 * case donnÃ©e
+	 * case donnée
 	 * 
 	 * @param tile
-	 * 		Description manquante !
-	 * @return ?
-	 * 		Description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		Description manquante !
 	 */
 	double getManhattanToDanger(AiTile tile) throws StopRequestException {
 		as.checkInterruption();

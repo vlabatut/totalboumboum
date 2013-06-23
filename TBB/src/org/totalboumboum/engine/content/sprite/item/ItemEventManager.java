@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.item;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -115,8 +115,6 @@ public class ItemEventManager extends EventManager
 			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
-		else if(event.getName().equals(EngineEvent.START_FALL))
-			engStartFall(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
@@ -191,21 +189,6 @@ public class ItemEventManager extends EventManager
 		if(gesture.equals(GestureName.PREPARED))
 		{	gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
-	}
-
-	private void engStartFall(EngineEvent event)
-	{	if(gesture.equals(GestureName.NONE))
-		{	SpecificAction action = new SpecificAppear(sprite);
-			ActionAbility actionAbility = sprite.modulateAction(action);
-			// can appear >> then, appears
-			if(actionAbility.isActive())
-			{	appear();
-			}
-			// cannot appear >> wait for next iteration
-			else
-			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
-			}
 		}
 	}
 

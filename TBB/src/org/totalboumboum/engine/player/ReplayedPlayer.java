@@ -2,7 +2,7 @@ package org.totalboumboum.engine.player;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -44,7 +44,6 @@ public class ReplayedPlayer extends AbstractPlayer
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

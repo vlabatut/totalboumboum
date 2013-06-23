@@ -6,26 +6,17 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 
-/**
- * @author Önder Kaya
- * @author Nezaket Yerinde
- */
-@SuppressWarnings({ "unused", "deprecation" })
+
+
+@SuppressWarnings("unused")
 public class KayaYerinde extends ArtificialIntelligence{
 	
-	/** */
 	private Matris matris;
-	/** */
 	private Rakip rakip;
-	/** */
 	private Bonus bonus;
-	/** */
 	private Duvar duvar;
-	/** */
 	private Escape escape;
-	/** */
 	private AiHero ownHero;
-	/** */
 	private long time;
 	
 	@Override
@@ -74,13 +65,6 @@ public class KayaYerinde extends ArtificialIntelligence{
 		
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{
 		checkInterruption();

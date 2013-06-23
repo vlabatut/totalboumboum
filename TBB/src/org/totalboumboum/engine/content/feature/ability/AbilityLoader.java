@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.ability;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -53,7 +53,7 @@ public class AbilityLoader
 		String strengthStr = root.getAttribute(XmlNames.STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
 		float strength;
 		if(strengthStr.equals(XmlNames.VAL_MAX))
-			strength = Float.MAX_VALUE; //NOTE format de donnÃ©es Ã  inclure dans le XSD (>> actually I removed it)
+			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD (>> actually I removed it)
 		else
 			strength = Float.parseFloat(strengthStr);
     	// frame

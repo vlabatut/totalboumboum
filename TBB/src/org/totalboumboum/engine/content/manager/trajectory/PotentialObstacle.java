@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.manager.trajectory;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.action.movehigh.SpecificMoveHigh
 import org.totalboumboum.engine.content.feature.action.movelow.SpecificMoveLow;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -316,9 +316,9 @@ public class PotentialObstacle
 			specificAction = new SpecificMoveHigh(source,usedDirection);
 		
 		// testing the action
-		//	TODO Ã§a serait plus logique d'utiliser le rÃ©sultat de la modulation
-		//	(Ã§a tiendrait compte d'interactions entre les diffÃ©rents modulateurs). 
-		//	mais Ã§a serait aussi plus long, donc Ã  voir...
+		//	TODO ça serait plus logique d'utiliser le résultat de la modulation
+		//	(ça tiendrait compte d'interactions entre les différents modulateurs). 
+		//	mais ça serait aussi plus long, donc à voir...
 		result = sprite.isThirdPreventing(specificAction,actorCircumstance,targetCircumstance);
 				
 /* NOTE OLD VERSION		
@@ -338,9 +338,9 @@ public class PotentialObstacle
 					specificAction = new SpecificMoveLow(source,usedDirection);
 				else
 					specificAction = new SpecificMoveHigh(source,usedDirection);
-				//  TODO Ã§a serait plus logique d'utiliser le rÃ©sultat de la modulation (Ã§a tiendrait
-				//  compte d'interactions entre les diffÃ©rents modulateurs). mais Ã§a serait aussi plus long,
-				//  donc Ã  voir... (mÃªme remarque 20 lignes dessous)
+				//  TODO ça serait plus logique d'utiliser le résultat de la modulation (ça tiendrait
+				//  compte d'interactions entre les différents modulateurs). mais ça serait aussi plus long,
+				//  donc à voir... (même remarque 20 lignes dessous)
 				if(sprite.isThirdPreventing(specificAction))
 				{	double deltaX = GameVariables.level.getDeltaX(moveZone.getCurrentX(),sprite.getCurrentPosX());
 					double deltaY = GameVariables.level.getDeltaY(moveZone.getCurrentY(),sprite.getCurrentPosY());

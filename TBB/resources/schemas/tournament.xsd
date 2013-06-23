@@ -4,31 +4,10 @@
 <xsd:include schemaLocation="_notes.xsd"/>
 <xsd:include schemaLocation="_points.xsd"/>
 
-<!-- 
-	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut 
-	
-	This file is part of Total Boum Boum.
-	
-	Total Boum Boum is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-	
-	Total Boum Boum is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <!-- CUP -->
 	<xsd:complexType name="tPlayer">
 		<xsd:attribute name="rank" type="xsd:integer" use="required"/>
 		<xsd:attribute name="part" type="xsd:integer" use="required"/>
-		<xsd:attribute name="leg" type="xsd:integer" use="optional"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="tPlayers">
@@ -83,8 +62,7 @@
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="RANDOM" />
-			<xsd:enumeration value="HOMOGENEOUS" />
-			<xsd:enumeration value="HETEROGENEOUS" />
+			<xsd:enumeration value="UNIFORM" />
 		</xsd:restriction>
 	</xsd:simpleType>
 

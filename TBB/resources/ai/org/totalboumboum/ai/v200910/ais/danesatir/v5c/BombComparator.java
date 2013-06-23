@@ -11,22 +11,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
  * @version 5.c
  * 
  * @author Levent Dane
- * @author Tolga Can Şatır
+ * @author Tolga Can Satir
  *
  */
-@SuppressWarnings("deprecation")
 public class BombComparator implements Comparator<AiBomb> {
 
-	/** */
 	ArtificialIntelligence ai;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public BombComparator(ArtificialIntelligence ai) throws StopRequestException
 	{	ai.checkInterruption();
 		this.ai = ai;		
@@ -36,7 +27,6 @@ public class BombComparator implements Comparator<AiBomb> {
 	 * Compare two bombs with ETA to explosion
 	 * @return default comparator values
 	 * @see AiBomb
-	 * 		Description manquante !
 	 */
 	@Override
 	public int compare(AiBomb arg0, AiBomb arg1) {

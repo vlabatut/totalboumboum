@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.adapter.path.astar.cost;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,32 +26,28 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
  * 
- * Classe Ã©tendant la classe abstraite CostCalculator grÃ¢ce Ã  une matrice de coÃ»ts.
- * Ici, le cout pour passer d'une case Ã  l'autre dÃ©pend uniquement de la case
- * de destination. Ce cout est Ã©gal Ã  la valeur associÃ©e Ã  la case dans la matrice
- * de cout fournie. Cette matrice doit faire la mÃªme taille que la zone de jeu.
- * <br/>
+ * Classe étendant la classe abstraite CostCalculator grâce à une matrice de coûts.
+ * Ici, le cout pour passer d'une case à l'autre dépend uniquement de la case
+ * de destination. Ce cout est égal à la valeur associée à la case dans la matrice
+ * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
+ * </br>
  * Cette classe est utilie si on veut calculer des couts plus fins qu'avec BasicCostCalculator,
- * qui considÃ¨re seulement la distance. Par exemple, on peut donner un coup plus important
- * aux cases qui sont Ã  portÃ©e d'une bombe susceptibles d'exploser, ou bien 
+ * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
+ * aux cases qui sont à portée d'une bombe susceptibles d'exploser, ou bien 
  * un cout infini (avec Double.POSITIVE_INFINITY) aux cases qu'on veut interdire
  * au personnage parce qu'elles sont trop dangereuses. 
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public class MatrixCostCalculator extends CostCalculator
 {
 	/**
 	 * initialise la fonction de cout. On doit obligatoirement
 	 * fournir la matrice de cout correspondante.
-	 * Attention : cette matrice doit avoir la mÃªme taille que la zone de jeu.
+	 * Attention : cette matrice doit avoir la même taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	la matrice de cout
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
 	{	setCostMatrix(costMatrix);			
@@ -60,31 +56,25 @@ public class MatrixCostCalculator extends CostCalculator
 	/////////////////////////////////////////////////////////////////
 	// COST MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice de cout utilisÃ©e pour dÃ©terminer le cout d'une action */
+	/** matrice de cout utilisée pour déterminer le cout d'une action */
 	private double costMatrix[][];
 	
 	/**
 	 * initialise la matrice de cout. Attention : cette matrice doit avoir
-	 * la mÃªme taille que la zone de jeu.
+	 * la même taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	la matrice de cout
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
 	 */
 	public void setCostMatrix(double costMatrix[][]) throws StopRequestException
 	{	this.costMatrix = costMatrix;		
 	}
 	
 	/**
-	 * met Ã  jour un coÃ»t dans la matrice
+	 * met à jour un coût dans la matrice
 	 * 
-	 * @param line	ligne de la case Ã  mettre Ã  jour
-	 * @param col	colonne de la case Ã  mettre Ã  jour
-	 * @param cost	nouveau coÃ»t Ã  affecter
-	 * 
-	 * @throws StopRequestException 
-	 * 		?	
+	 * @param line	ligne de la case à mettre à jour
+	 * @param col	colonne de la case à mettre à jour
+	 * @param cost	nouveau coût à affecter
 	 */
 	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;
@@ -94,15 +84,15 @@ public class MatrixCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * La case de dÃ©part n'est pas considÃ©rÃ©e, on renvoie seulement la valeur
-	 * correspondant Ã  la case d'arrivÃ©e dans la matrice de cout.
+	 * La case de départ n'est pas considérée, on renvoie seulement la valeur
+	 * correspondant à la case d'arrivée dans la matrice de cout.
 	 * Attention : si la matrice de cout est trop petite, la valeur maximale
-	 * possible est renvoyÃ©e (Double.POSITIVE_INFINITY), et un message 
-	 * d'avertissement est affichÃ© dans la sortie standard d'erreur.
+	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
+	 * d'avertissement est affiché dans la sortie standard d'erreur.
 	 * 
-	 * @param start	la case de dÃ©part
-	 * @param end	la case d'arrivÃ©e
-	 * @return le cout correspondant Ã  la case d'arrivÃ©e dans la matrice de cout
+	 * @param start	la case de départ
+	 * @param end	la case d'arrivée
+	 * @return le cout correspondant à la case d'arrivée dans la matrice de cout
 	 */ 
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException

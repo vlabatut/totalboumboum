@@ -2,7 +2,7 @@ package org.totalboumboum.configuration.connections;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -57,10 +56,6 @@ public class ConnectionsConfigurationSaver
 	private static Element saveConnectionsElement(ConnectionsConfiguration connectionsConfiguration)
 	{	Element result = new Element(XmlNames.CONNECTIONS); 
 
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-	
 		// central
 		Element centralElement = saveCentralElement(connectionsConfiguration);
 		result.addContent(centralElement);

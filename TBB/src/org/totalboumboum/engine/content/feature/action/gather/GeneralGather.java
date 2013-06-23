@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.gather;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,35 +33,35 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de rÃ©colter (un item)
+ * action de récolter (un item)
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramÃ¨tre: actor=self
- * 	<br>paramÃ¨tre: target=oui (item)
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (item)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY REFUSE (ex: item qui ne peut pas Ãªtre rÃ©coltÃ© en permanence)
- * 	<br>paramÃ¨tre: actor=oui (hero)
- * 	<br>paramÃ¨tre: target=self
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=N/D
+ * <p>ABILITY REFUSE (ex: item qui ne peut pas être récolté en permanence)
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=self
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY PREVENT (ex: un bloc qui empÃªche par intermitence les heros de rÃ©colter l'item)
- * 	<br>paramÃ¨tre: actor=oui (hero)
- * 	<br>paramÃ¨tre: target=oui (item)
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=N/D
- * 	<br>paramÃ¨tre: restriction=Ã©ventuellement
+ * <p>ABILITY PREVENT (ex: un bloc qui empêche par intermitence les heros de récolter l'item)
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=oui (item)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=éventuellement
  */
 /** 
  * picking an object just by walking on it (unlike picking a bomb to carry it). 
@@ -78,8 +78,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralGather extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

@@ -19,22 +19,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * This class has functions related to pathfinding
- * @author Can GÃ¶Ã§menoÄŸlu
- * @author Irfan HekimoÄŸlu
+ * @author  Can Göçmenoðlu & Irfan Hekimoðlu
  *
  */
-@SuppressWarnings("deprecation")
 public class Paths {
-	/** */
 	GocmenogluHekimoglu ai;
 	
-	/**
-	 * 
-	 * @param ai
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Paths(GocmenogluHekimoglu ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
@@ -43,11 +33,8 @@ public class Paths {
 	/**
 	 * Debug function, colors tiles in the list
 	 * @param tiles
-	 * 		description manquante !
 	 * @param c
-	 * 		description manquante !
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	void colorTiles(List<AiTile> tiles,Color c) throws StopRequestException{
 		ai.checkInterruption();
@@ -60,13 +47,9 @@ public class Paths {
 	/**
 	 * Find the k. highest valued tile in the given hashmap
 	 * @param accesibleTiles
-	 * 		description manquante !
 	 * @param k
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	AiTile kthHighestTile(HashMap<AiTile,Double> accesibleTiles,int k) throws StopRequestException{
 		ai.checkInterruption();
@@ -93,13 +76,9 @@ public class Paths {
 	/**
 	 * calculate a path to the target using A-star algorithm
 	 * @param target
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 * @throws LimitReachedException
-	 * 		description manquante !
 	 */
 	AiPath findPath(AiTile target) throws StopRequestException, LimitReachedException{
 		ai.checkInterruption();
@@ -117,11 +96,8 @@ public class Paths {
 	/**
 	 * check if we have any enemies in the given list of tiles
 	 * @param accesibleTiles
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	boolean areEnemiesAccesible(List<AiTile> accesibleTiles) throws StopRequestException{
 		ai.checkInterruption();
@@ -139,10 +115,8 @@ public class Paths {
 	
 	/**
 	 * check if we are in the blast area of any bomb currently on the map
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	boolean isOnFire() throws StopRequestException{
 		ai.checkInterruption();
@@ -161,10 +135,8 @@ public class Paths {
 	 * @param hero hero to be used
 	 * @param simBomb simulate our hero's prototype bomb
 	 * @param expBombs calculate as if all the bombs have exploded
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	List<AiTile> accesibleTiles(AiHero hero,boolean simBomb,boolean expBombs) throws StopRequestException{
 		ai.checkInterruption();
@@ -254,13 +226,9 @@ public class Paths {
 	/**
 	 * Find the distance between two tiles, but using a non cyclic method
 	 * @param tile1
-	 * 		description manquante !
 	 * @param tile2
-	 * 		description manquante !
-	 * @return ?
-	 * 		description manquante !
+	 * @return
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	int tileDistNonCyc(AiTile tile1,AiTile tile2) throws StopRequestException{
 		ai.checkInterruption();

@@ -4,13 +4,12 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Ozan Günalp
- * @author Sinan Yürtsever
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
  *
  */
 public class AstarComparator implements Comparator<CostTile> {
 	
-	@Override
 	public int compare(CostTile tile1, CostTile tile2){
 		
 		int i = tile1.getCost() + tile1.getHeuristic() - tile2.getCost() - tile2.getHeuristic() ;

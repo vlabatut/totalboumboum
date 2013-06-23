@@ -2,7 +2,7 @@ package org.totalboumboum.statistics.detailed;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -123,20 +123,6 @@ public class StatisticTournament extends StatisticBase
 		setTotalTime(time);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// STATISTIC EVENTS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public List<StatisticEvent> getStatisticEvents()
-	{	List<StatisticEvent> result = new ArrayList<StatisticEvent>();
-		//for(StatisticMatch match: matches) TODO
-			
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CONFRONTATIONS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	@Override
 	public int getConfrontationCount()
 	{	int result = matches.size();

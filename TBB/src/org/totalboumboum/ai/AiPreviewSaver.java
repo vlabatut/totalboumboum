@@ -2,7 +2,7 @@ package org.totalboumboum.ai;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,6 @@ import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -36,30 +35,15 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
- * Classe charger d'enregistrer la description
- * d'un agent, sous la forme d'un fichier XML.
  * 
  * @author Vincent Labatut
  *
  */
 public class AiPreviewSaver
 {	
-	/**
-	 * Enregistre le fichier XML décrivant un agent.
-	 * 
-	 * @param aiPreview
-	 * 		L'objet décrivant l'agent.
-	 * @throws ParserConfigurationException
-	 * 		Problème à la création du fichier XML.
-	 * @throws SAXException
-	 * 		Problème à la création du fichier XML.
-	 * @throws IOException
-	 * 		Problème à la création du fichier XML.
-	 */
 	public static void saveAiPreview(AiPreview aiPreview) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveAiElement(aiPreview);	
-		
 		// save file
 		String path = FilePaths.getAisPath()+File.separator+aiPreview.getPack()+File.separator+FileNames.FILE_AIS+File.separator+aiPreview.getFolder();
 		String engineFile = path+File.separator+FileNames.FILE_AI+FileNames.EXTENSION_XML;
@@ -69,40 +53,18 @@ public class AiPreviewSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	/**
-	 * Crée un des élements du fichier XML.
-	 * 
-	 * @param aiPreview
-	 * 		Objet décrivant l'agent.
-	 * @return
-	 * 		L'élément XML créé.
-	 */
 	private static Element saveAiElement(AiPreview aiPreview)
 	{	Element result = new Element(XmlNames.AI); 
-		
-		// GPL comment
-		Comment gplComment = XmlTools.getGplComment();
-		result.addContent(gplComment);
-		
 		// notes
 		Element notesElement = saveNotesElement(aiPreview);
 		result.addContent(notesElement);
-		
 		// authors
 		Element authorsElement = saveAuthorsElement(aiPreview);
 		result.addContent(authorsElement);
-
+		//
 		return result;
 	}
 	
-	/**
-	 * Crée un des élements du fichier XML.
-	 * 
-	 * @param aiPreview
-	 * 		Objet décrivant l'agent.
-	 * @return
-	 * 		L'élément XML créé.
-	 */
 	private static Element saveNotesElement(AiPreview aiPreview)
 	{	Element result = new Element(XmlNames.NOTES);
 		Iterator<String> it = aiPreview.getNotes().iterator();
@@ -115,14 +77,6 @@ public class AiPreviewSaver
 		return result;
 	}
 	
-	/**
-	 * Crée un des élements du fichier XML.
-	 * 
-	 * @param aiPreview
-	 * 		Objet décrivant l'agent.
-	 * @return
-	 * 		L'élément XML créé.
-	 */
 	private static Element saveAuthorsElement(AiPreview aiPreview)
 	{	Element result = new Element(XmlNames.AUTHORS);
 		Iterator<String> it = aiPreview.getAuthors().iterator();

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
+
+	<title value="Mouvement-Collecte n°1" />
+	<author value="Göksu İsbir / Ela Koyaş" />
+	<source value="Original" />
+	<preview file="preview.jpg" />
+
+	<instance name="superbomberman1" />
+	<theme name="normal"/>
+
+	<globalDimension height="7" width="7" />
+	<visibleDimension height="11" width="13" />
+	<visiblePosition upLine="1" leftCol="1" />
+	<display forceAll="true" maximize="true" />
+
+</level>

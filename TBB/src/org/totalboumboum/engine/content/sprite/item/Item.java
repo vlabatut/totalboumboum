@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.sprite.item;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,6 @@ import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.manager.ability.AbilityManager;
 import org.totalboumboum.engine.content.manager.anime.AnimeManager;
 import org.totalboumboum.engine.content.manager.bombset.BombsetManager;
@@ -41,15 +40,12 @@ import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * Represents an item sprite.
  * 
  * @author Vincent Labatut
+ *
  */
 public class Item extends Sprite
 {	
-	/**
-	 * Builds a new item sprite.
-	 */
 	public Item()
 	{	super();
 		itemAbilities = new ArrayList<AbstractAbility>();
@@ -65,81 +61,15 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// ITEM ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Original abilities given by this item (used to reset the item) */
+	/** original abilities given by this item */
 	private List<AbstractAbility> originalItemAbilities;
-	/** Current abilities given by this item */
+	/** working abilities given by this item */
 	private List<AbstractAbility> itemAbilities;
 	
-	/**
-	 * Returns the original state ability whose name
-	 * is specified as a paramter, or {@code null} if
-	 * it could not be found.
-	 *  
-	 * @param name
-	 * 		Name of the desired ability.
-	 * @return
-	 * 		The requested ability, or {@code null}. 
-	 */
-	public StateAbility getOriginalItemAbility(String name)
-	{	StateAbility result = null;
-		Iterator<AbstractAbility> i = originalItemAbilities.iterator();
-		while(i.hasNext() && result==null)
-		{	AbstractAbility ab = i.next();
-			if(ab instanceof StateAbility)
-			{	StateAbility ablt = (StateAbility)ab;
-				if(ablt.getName().equals(name))
-					result = ablt;
-			}
-		}
-		if(result==null)
-			result = new StateAbility(name);
-		return result;
-	}
-	
-	/**
-	 * Returns the current state ability whose name
-	 * is specified as a paramter, or {@code null} if
-	 * it could not be found.
-	 *  
-	 * @param name
-	 * 		Name of the desired ability.
-	 * @return
-	 * 		The requested ability, or {@code null}. 
-	 */
-	public StateAbility getCurrentItemAbility(String name)
-	{	StateAbility result = null;
-		Iterator<AbstractAbility> i = itemAbilities.iterator();
-		while(i.hasNext() && result==null)
-		{	AbstractAbility ab = i.next();
-			if(ab instanceof StateAbility)
-			{	StateAbility ablt = (StateAbility)ab;
-				if(ablt.getName().equals(name))
-					result = ablt;
-			}
-		}
-		if(result==null)
-			result = new StateAbility(name);
-		return result;
-	}
-
-	/**
-	 * Returns the list of abilities currently
-	 * provided by this item.
-	 * 
-	 * @return
-	 * 		List of abilities.
-	 */
 	public List<AbstractAbility> getItemAbilities()
 	{	return itemAbilities;
 	}
 	
-	/**
-	 * Initializes the abilities provided by this item.
-	 * The specified abilities are added (no copy).
-	 * 
-	 * @param abilities
-	 * 		The ability this item will provide.
-	 */
 	public void initItemAbilities(List<AbstractAbility> abilities)
 	{	originalItemAbilities = abilities;
 		Iterator<AbstractAbility> i = abilities.iterator();
@@ -147,22 +77,11 @@ public class Item extends Sprite
 			addItemAbility(i.next());
 	}
 
-	/**
-	 * Adds a new provided ability to this item.
-	 * The ability is copied.
-	 * 
-	 * @param ability
-	 * 		The concerned ability.
-	 */
 	private void addItemAbility(AbstractAbility ability)
 	{	AbstractAbility copy = ability.copy();
 		itemAbilities.add(copy);
 	}
 
-	/**
-	 * Reset the abilities provided by this item
-	 * to their initial values.
-	 */
 	public void reinitItemAbilities()
 	{	// NOTE maybe the old abilities should be killed?
 		itemAbilities.clear();
@@ -172,25 +91,12 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// ITEM NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Name of this item */
 	private String itemName;
 	
-	/**
-	 * Returns the name of this item.
-	 * 
-	 * @return
-	 * 		The item name.
-	 */
 	public String getItemName()
 	{	return itemName;
 	}
 	
-	/**
-	 * Changes the name of this item.
-	 * 
-	 * @param itemName
-	 * 		New name.
-	 */
 	public void setItemName(String itemName)
 	{	this.itemName = itemName;
 	}	
@@ -203,12 +109,9 @@ public class Item extends Sprite
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Copies this item, which is supposed to be hidden 
-	 * (or to have no gesture), have no delay, no items, 
-	 * etc.
-	 * 
-	 * @return 
-	 *  	A copy of this item.
+	 * copy this item, which is supposed to be hidden (or to have no gesture),
+	 * have no delay, no items, etc.
+	 *  
 	 */
 	public Item copy()
 	{	Item result = new Item();

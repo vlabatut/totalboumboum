@@ -10,16 +10,13 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.mode.Mode;
 
 /**
  * Represents a strategy to be executed by the AI.
- * @author Yasa Akbulut
- * @author Burcu Küpelioğlu
+ * @author yasa
  *
  */
-@SuppressWarnings("deprecation")
 public abstract class Strategy
 {
-	/** */
+
 	public final int STRATEGY_UPDATE_RATE = 500; //strategy update time, in ms
-	/** */
 	public double lastUpdateTime = 0;
 	
 	/**
@@ -39,7 +36,6 @@ public abstract class Strategy
 	 * Creates a new Strategy instance.
 	 * @param ia The AkbulutKupelioglu using this.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Strategy(AkbulutKupelioglu ia) throws StopRequestException
 	{
@@ -52,7 +48,6 @@ public abstract class Strategy
 	 * Gets the waypoints to a certain goal.
 	 * @return A stack of StrategyStep objects, forming a waypoint.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public Stack<StrategyStep> getWaypoints() throws StopRequestException
 	{
@@ -65,7 +60,6 @@ public abstract class Strategy
 	 * Gets the path associated to this strategy, if any.
 	 * @return The path associated, or null.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public AiPath getPath() throws StopRequestException
 	{
@@ -77,7 +71,6 @@ public abstract class Strategy
 	 * Sets the path associated to this strategy.
 	 * @param path The path to be set.
 	 * @throws StopRequestException
-	 * 		description manquante !
 	 */
 	public void setPath(AiPath path) throws StopRequestException
 	{
@@ -85,17 +78,6 @@ public abstract class Strategy
 		this.path = path;
 	}
 
-	/**
-	 * 
-	 * @param zone
-	 * 		description manquante !
-	 * @param mode
-	 * 		description manquante !
-	 * @return
-	 * 		description manquante !
-	 * @throws StopRequestException
-	 * 		description manquante !
-	 */
 	public Strategy update(AiZone zone, Mode mode) throws StopRequestException
 	{
 		monIa.checkInterruption();

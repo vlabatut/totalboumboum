@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.part;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -37,10 +37,8 @@ import org.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * 
@@ -80,15 +78,15 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			lines = 1+part.getPlayers().size();
 		reinit(lines,1);
 		int buttonWidth = getLineHeight();
-		int nameWidth = (int)((getWidth() - (2*buttonWidth + 5*GuiSizeTools.subPanelMargin))*0.75);
-		int rankWidth = getWidth() - (2*buttonWidth + nameWidth + 5*GuiSizeTools.subPanelMargin);
+		int nameWidth = (int)((getWidth() - (2*buttonWidth + 5*GuiTools.subPanelMargin))*0.75);
+		int rankWidth = getWidth() - (2*buttonWidth + nameWidth + 5*GuiTools.subPanelMargin);
 	
 		int line = 0;
 		// header
 		{	Line ln = getLine(line);
 			for(int i=0;i<3;i++)
 				ln.addLabel(0);
-			ln.setForegroundColor(GuiColorTools.COLOR_TABLE_HEADER_FOREGROUND);
+			ln.setForegroundColor(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 			int col = 0;
 			// empty
 			{	ln.setLabelMaxWidth(col,buttonWidth);
@@ -101,7 +99,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			{	ln.setLabelMaxWidth(col,nameWidth);
 				ln.setLabelPrefWidth(col,nameWidth);
 				ln.setLabelKey(col,GuiKeys.COMMON_PART_PLAYER,true);
-				Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				ln.setLabelBackground(col,bg);				
 				col++;
 			}
@@ -109,7 +107,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			{	ln.setLabelMaxWidth(col,rankWidth);
 				ln.setLabelPrefWidth(col,rankWidth);
 				ln.setLabelKey(col,GuiKeys.COMMON_PART_RANK,true);
-				Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				ln.setLabelBackground(col,bg);
 				col++;
 			}
@@ -134,13 +132,13 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			{	Line ln = getLine(line);
 				for(int i=0;i<3;i++)
 					ln.addLabel(0);
-				ln.setForegroundColor(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				ln.setForegroundColor(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 				int col = 0;
 				// before button
 				{	ln.setLabelMaxWidth(col,buttonWidth);
 					ln.setLabelPrefWidth(col,buttonWidth);
 					ln.setLabelKey(col,GuiKeys.COMMON_PART_BEFORE,true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
@@ -161,7 +159,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 				{	ln.setLabelMaxWidth(col,buttonWidth);
 					ln.setLabelPrefWidth(col,buttonWidth);
 					ln.setLabelKey(col,GuiKeys.COMMON_PART_AFTER,true);
-					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
@@ -174,13 +172,13 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			setTitleText("N/A","N/A");
 			
 			// colors
-			setLabelBackground(line,1,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			setLabelBackground(line,2,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			setLabelBackground(line,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			setLabelBackground(line,2,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			for(int i=0;i<5;i++)
-			{	setLabelBackground(line,2,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
-				setLabelBackground(line,2,GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-				setLabelBackground(line,2,GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-				setLabelBackground(line,2,GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			{	setLabelBackground(line,2,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+				setLabelBackground(line,2,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				setLabelBackground(line,2,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				setLabelBackground(line,2,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			}
 		}
 	}
@@ -199,14 +197,14 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 		// profile known
 		if(profile!=null)
 		{	Color clr = profile.getSpriteColor().getColor();
-			int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 			text = profile.getName();
 			tooltip = text;
 		}
 		// profile unknown yet
 		else
-		{	bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			String key = GuiKeys.COMMON_PART_UNDECIDED;
 			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 			CupLeg previousLeg = part.getLeg().getPreviousLeg();
@@ -257,11 +255,11 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 		// color
 		if(profile!=null)
 		{	Color clr = profile.getSpriteColor().getColor();
-			int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);					
 		}
 		else
-			bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 
 		// rank
 		Ranks ranks = part.getOrderedPlayers();
@@ -291,12 +289,12 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 	public void setSelected(boolean select)
 	{	Color hBg,dBg;
 		if(select)
-		{	hBg = GuiColorTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
-			dBg = GuiColorTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
+		{	hBg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
+			dBg = GuiTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
 		}
 		else
-		{	hBg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
-			dBg = GuiColorTools.COLOR_COMMON_BACKGROUND;
+		{	hBg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			dBg = GuiTools.COLOR_COMMON_BACKGROUND;
 		}
 		setTitleBackground(hBg);
 		setLineBackground(0,hBg);
@@ -361,12 +359,12 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			switch(pos[1])
 			{	// before button
 				case COL_BEFORE:
-					{	CupPlayer p = part.getPlayerForProfile(profile);
-						int partNumber = p.getPrevPart();
-						// doesn't work for entry players 
-						if(partNumber!=-1)
-						{	int legNumber = p.getPrevLeg();
-							CupLeg previousLeg = part.getTournament().getLeg(legNumber);
+					{	CupLeg leg = part.getLeg();
+						CupLeg previousLeg = leg.getPreviousLeg();
+						// doesn't work for the first leg 
+						if(previousLeg!=null)
+						{	CupPlayer p = part.getPlayerForProfile(profile);
+							int partNumber = p.getPrevPart();
 							CupPart previousPart = previousLeg.getPart(partNumber);
 							fireBeforeClicked(previousPart);
 						}

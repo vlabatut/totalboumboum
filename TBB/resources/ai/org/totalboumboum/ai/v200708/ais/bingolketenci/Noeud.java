@@ -2,13 +2,13 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
 
 
 /**
- * Repr√©sente un noeud dans un arbre de recherche.
+ * ReprÈsente un noeud dans un arbre de recherche.
  * Chaque noeud est defini avec les coordonnees x et y
  * chaque noeud possede aussi une valeur entiere 
  * et un cout.
  * 
- * @author Gizem Bing√∂l
- * @author Utku G√∂rkem Kentenci
+ * @author Gizem Bingol
+ * @author Utku Gorkem Kentenci
  *
  */
 public class Noeud {
@@ -145,13 +145,13 @@ public class Noeud {
 	}
 
 	/**
-	 * Controle l'√©galit√© de l'objet √† un autre objet
+	 * Controle l'ÈgalitÈ de l'objet ‡ un autre objet
 	 * 
 	 * @param object
 	 *            objet qu'on va comparer
-	 * @return true si l'objet est √©gal √† l'objet pass√© en parametre
+	 * @return true si l'objet est Ègal ‡ l'objet passÈ en parametre
 	 */
-	@Override
+
 	public boolean equals(Object object) {
 
 		Noeud noeud = new Noeud();
@@ -166,10 +166,10 @@ public class Noeud {
 	}
 
 	/**
-	 * Calcule l'heuristique du noeud par rapport √† un autre noeud pass√© en
+	 * Calcule l'heuristique du noeud par rapport ‡ un autre noeud passÈ en
 	 * parametre Il fait le calcul en utilisant la distance du Manhattan * (cf. :
 	 * http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29) entre le
-	 * point de coordonn√©es du noeud et celui du noeud goal.
+	 * point de coordonnÈes du noeud et celui du noeud goal.
 	 * 
 	 * @param goal
 	 *            le noeud par rapport auquel qu'on trouve l'heuristique
@@ -192,7 +192,6 @@ public class Noeud {
 	 * @return string les coordonnees du noeud et sa valeur sour forme de texte
 	 */
 
-	@Override
 	public String toString() {
 		String resultat;
 		resultat = x + "  " + y + "  " + valeur;

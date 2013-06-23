@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -22,7 +22,6 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
@@ -36,11 +35,8 @@ import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiColorTools;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
@@ -76,8 +72,8 @@ public class Column extends ContentPanel
 		if(lines<=1)
 			lineHeight = height;
 		else
-			lineHeight = (height-GuiSizeTools.subPanelMargin*(lines-1))/lines;
-		lineFontSize = GuiFontTools.getFontSize(lineHeight*GuiFontTools.FONT_RATIO);
+			lineHeight = (height-GuiTools.subPanelMargin*(lines-1))/lines;
+		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		// content
 		updateLabelsWidths();
@@ -152,19 +148,15 @@ public class Column extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	
 	public MyLabel getLabel(int line)
-	{	MyLabel result = null;
-		Component temp = getComponent(line*2);
-		if(temp instanceof MyLabel)
-			result = (MyLabel)temp;
-		return result;
+	{	return (MyLabel)getComponent(line*2);
 	}
 	
 	public void addLabel(int line)
 	{	// separator
 		if(line>0)
-			add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)),2*line-1);
+			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*line-1);
 		else if(lines>0)
-			add(Box.createRigidArea(new Dimension(GuiSizeTools.subPanelMargin,GuiSizeTools.subPanelMargin)),2*line);
+			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*line);
 		// new label
 		String txt = null;
 		MyLabel lbl = new MyLabel(txt);
@@ -172,8 +164,8 @@ public class Column extends ContentPanel
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl.setAlignmentX(CENTER_ALIGNMENT);
 		lbl.setAlignmentY(CENTER_ALIGNMENT);
-		lbl.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		lbl.setForeground(GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND);
+		lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 		lbl.setOpaque(true);
 //		Dimension dim = new Dimension(height,height);
 //		lbl.setPreferredSize(dim);
@@ -185,7 +177,7 @@ public class Column extends ContentPanel
 	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
-		{	BufferedImage icon = GuiImageTools.getIcon(key);
+		{	BufferedImage icon = GuiTools.getIcon(key);
 			setLabelIcon(line,icon,tooltip);		
 		}
 		// if not : use text

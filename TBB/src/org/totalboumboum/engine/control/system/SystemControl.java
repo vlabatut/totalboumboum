@@ -2,7 +2,7 @@ package org.totalboumboum.engine.control.system;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -28,20 +28,12 @@ import java.util.HashMap;
 import org.totalboumboum.engine.loop.VisibleLoop;
 
 /**
- * General class in charge of
- * monitoring the system keys
- * during game.
  * 
  * @author Vincent Labatut
+ *
  */
 public abstract class SystemControl implements KeyListener
 {	
-	/**
-	 * Builds a standard control object.
-	 * 
-	 * @param loop
-	 * 		Loop to control.
-	 */
 	public SystemControl(VisibleLoop loop)
 	{	this.loop = loop;
 		keysPressed = new HashMap<Integer,Boolean>();
@@ -50,8 +42,8 @@ public abstract class SystemControl implements KeyListener
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Records the keys currently pressed */
-	protected HashMap<Integer,Boolean> keysPressed; // nÃ©cessaire pour Ã©viter d'Ã©mettre des Ã©vÃ¨nements de faÃ§on rÃ©pÃ©titive pour un seul pressage de touche
+	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
+	protected HashMap<Integer,Boolean> keysPressed;
 
 	@Override
 	public void keyPressed(KeyEvent e)
@@ -71,18 +63,13 @@ public abstract class SystemControl implements KeyListener
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Object displaying the game */
 	protected VisibleLoop loop;
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Whether this object has been deleted or not */
 	private boolean finished = false;
 	
-	/**
-	 * Cleanly finishes this object.
-	 */
 	public void finish()
 	{	if(!finished)
 		{	finished = true;

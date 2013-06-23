@@ -5,16 +5,15 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.TirtilTomruk;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.zone.ZoneEnum;
 
 /**
- * ReprÃ©sente un noeud dans un arbre de recherche.
+ * Représente un noeud dans un arbre de recherche.
  *Chaque noeud est defini avec les coordonnees x et y
  *chaque noeud possede aussi une valeur entiere 
  *et un cout.
  *
- * @author Abdullah TÄ±rtÄ±l
+ * @author Abdullah Tirtil
  * @author Mert Tomruk
  *
  */
-@SuppressWarnings("deprecation")
 public class Noeud {
 
 	/** la coordonnee x du noeud */
@@ -26,16 +25,12 @@ public class Noeud {
 	/** le cout du noeud */
 	private int cout = 0;
 
-	/** */
 	private TirtilTomruk source;
-	
 	/**
 	 * Constructeur.
-	 * @param source 
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+
 	public Noeud(TirtilTomruk source) throws StopRequestException {
 		super();
 		source.checkInterruption(); //Appel Obligatoire
@@ -54,10 +49,7 @@ public class Noeud {
 	 *            valeur du noeud
 	 * @param cout
 	 *            cout du noeud
-	 * @param source 
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, int cout,TirtilTomruk source) throws StopRequestException {
 		super();
@@ -78,10 +70,7 @@ public class Noeud {
 	 *            coordonne y du noeud
 	 * @param valeur
 	 *            valeur du noeud
-	 * @param source 
-	 * 		Description manquante !
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, TirtilTomruk source) throws StopRequestException {
 		super();
@@ -97,7 +86,6 @@ public class Noeud {
 	 * 
 	 * @return coordonne x
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public int getX() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -110,7 +98,6 @@ public class Noeud {
 	 * @param x
 	 *            coordonne x
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void setX(int x) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -122,7 +109,6 @@ public class Noeud {
 	 * 
 	 * @return coordonne y
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public int getY() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -135,7 +121,6 @@ public class Noeud {
 	 * @param y
 	 *            coordonne y
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void setY(int y) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -147,7 +132,6 @@ public class Noeud {
 	 * 
 	 * @return valeur
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public ZoneEnum getValeur() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -160,7 +144,6 @@ public class Noeud {
 	 * @param valeur
 	 *            valeur du noeud
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void setValeur(ZoneEnum valeur) throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
@@ -172,8 +155,8 @@ public class Noeud {
 	 * 
 	 * @return cout
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+
 	public int getCout() throws StopRequestException {
 		return cout;
 	}
@@ -184,20 +167,19 @@ public class Noeud {
 	 * @param cout
 	 *            cout du noeud
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public void setCout(int cout) throws StopRequestException {
 		this.cout = cout;
 	}
 
 	/**
-	 * Controle l'Ã©galitÃ© de l'objet Ã  un autre objet
+	 * Controle l'égalité de l'objet à un autre objet
 	 * 
 	 * @param object
 	 *            objet qu'on va comparer
-	 * @return true si l'objet est Ã©gal Ã  l'objet passÃ© en parametre
+	 * @return true si l'objet est égal à l'objet passé en parametre
 	 */
-	@Override
+
 	public boolean equals(Object object) {
 
 		Noeud noeud;
@@ -223,17 +205,17 @@ public class Noeud {
 	}
 
 	/**
-	 * Calcule l'heuristique du noeud par rapport Ã  un autre noeud passÃ© en
+	 * Calcule l'heuristique du noeud par rapport à un autre noeud passé en
 	 * parametre Il fait le calcul en utilisant la distance du Manhattan * (cf. :
 	 * http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29) entre le
-	 * point de coordonnÃ©es du noeud et celui du noeud goal.
+	 * point de coordonnées du noeud et celui du noeud goal.
 	 * 
 	 * @param goal
 	 *            le noeud par rapport auquel qu'on trouve l'heuristique
 	 * @return l'heuristique du noeud par rapport au noeud goal
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
+
 	public int getHeuristic(Noeud goal) throws StopRequestException {
 
 		int result = 0;
@@ -249,7 +231,7 @@ public class Noeud {
 	 * 
 	 * @return string les coordonnees du noeud et sa valeur sour forme de texte
 	 */
-	@Override
+
 	public String toString() {
 		String resultat;
 		resultat = x + "  " + y + "  " + valeur;

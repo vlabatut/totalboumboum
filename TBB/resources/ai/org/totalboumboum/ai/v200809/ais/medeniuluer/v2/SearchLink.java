@@ -4,23 +4,21 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 
 /**
- * ReprÃ©sente un lien orientÃ© dans un arbre de recherche.
- * Ce lien est dÃ©fini par les deux noeuds reliÃ©s : l'origine (parent)
- * et la cible (fils) ainsi que par l'action Ã  rÃ©aliser pour passer 
- * d'un Ã©tat Ã  l'autre.
+ * Représente un lien orienté dans un arbre de recherche.
+ * Ce lien est défini par les deux noeuds reliés : l'origine (parent)
+ * et la cible (fils) ainsi que par l'action à réaliser pour passer 
+ * d'un état à l'autre.
  *
  * @author Ekin Medeni
- * @author PÄ±nar Uluer
+ * @author Pinar Uluer
  *
  */
-@SuppressWarnings("deprecation")
 public class SearchLink
-{	/** noeud parent */
+{	// noeud parent
 	private SearchNode origin;
-	/** noeud fils */
+	// noeud fils
 	private SearchNode target;
 
-	/** */
 	private MedeniUluer mu;
 	
 	/**
@@ -28,9 +26,8 @@ public class SearchLink
 	 * 
 	 * @param origin	noeud parent
 	 * @param target	noeud fils
-	 * @param mu	action de transition
+	 * @param action	action de transition
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public SearchLink(SearchNode origin,SearchNode target,MedeniUluer mu) throws StopRequestException
 	{	
@@ -44,6 +41,7 @@ public class SearchLink
 	/**
 	 * Renvoie le noeud parent du lien 
 	 * @return	le noeud parent
+	 * @throws StopRequestException 
 	 */
 	public SearchNode getOrigin()
 	{   
@@ -54,7 +52,6 @@ public class SearchLink
 	 * Renvoie le noeud fils du lien
 	 * @return	le noeud fils
 	 * @throws StopRequestException 
-	 * 		Description manquante !
 	 */
 	public SearchNode getTarget() throws StopRequestException
 	{	mu.checkInterruption(); //Appel Obligatoire
@@ -63,11 +60,10 @@ public class SearchLink
 
 	/**
 	 * Renvoie une valeur indiquant l'egalite de l'objet
-	 * vrai si l'objet passÃ© en parametre est egale Ã  cet objet
+	 * vrai si l'objet passé en parametre est egale à cet objet
 	 * false sinon 
 	 * @return result indique l'egalite	
 	 */
-	@Override
 	public boolean equals(Object object)
 	{		boolean result;
 		if(object == null)

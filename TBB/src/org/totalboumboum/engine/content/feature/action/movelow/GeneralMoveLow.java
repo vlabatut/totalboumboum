@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.movelow;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de se dÃ©placer sur le sol
+ * action de se déplacer sur le sol
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
@@ -43,13 +43,13 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramÃ¨tre: actor=oui (hero, bomb)
- * 	<br>paramÃ¨tre: target=N/D
- * 	<br>paramÃ¨tre: direction=oui
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=oui
- * 	<br>paramÃ¨tre: restriction=SPRITE_TRAVERSE
+ * 	<br>paramètre: actor=oui (hero, bomb)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=oui
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=oui
+ * 	<br>paramètre: restriction=SPRITE_TRAVERSE
  */
 /** 
  * on ground (normal) move.
@@ -66,8 +66,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralMoveLow extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

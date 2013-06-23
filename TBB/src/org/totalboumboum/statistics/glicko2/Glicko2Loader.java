@@ -2,7 +2,7 @@ package org.totalboumboum.statistics.glicko2;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -54,7 +54,7 @@ public class Glicko2Loader
 		RankingService result = (RankingService) in.readObject();
 		in.close();
 		return result;		
-		// TODO: if problem while reading the file, should restore and use the backup 
+		// TODO: if problem while reading the file, should restaure and use the backup 
 	}
 
 	public static RankingService importGlicko2Statistics() throws FileNotFoundException

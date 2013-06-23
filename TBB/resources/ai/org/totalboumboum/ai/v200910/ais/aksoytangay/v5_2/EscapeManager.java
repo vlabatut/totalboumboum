@@ -18,38 +18,22 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Necmi Murat Tangay
  *
  */
-@SuppressWarnings("deprecation")
 public class EscapeManager {
 	
-	/** */
 	private AksoyTangay myAI; 
 	
-	/** */
 	private PathManager pathManager;
-	/** */
+	
 	public AiPath path = null;
 	
-	/** */
 	private AiTile currentTile;
 		
-	/** */
 	private AiTile lastTile;
 	
-	/** */
 	private AiZone percepts;
 	
 	
-	/**
-	 * 
-	 * @param myAI
-	 * 		Description manquante !
-	 * @param percepts
-	 * 		Description manquante !
-	 * @param pathManager
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
+	
 	public EscapeManager(AksoyTangay myAI, AiZone percepts, PathManager pathManager) throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -63,13 +47,6 @@ public class EscapeManager {
 		lastTile = path.getLastTile();
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public Direction getDirectionToEscape() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -98,7 +75,7 @@ public class EscapeManager {
 //				boolean res1 = path.isEmpty();
 //				boolean res2 = modifiedPath();
 //				if(res1&&res2)
-//					System.out.println("bloa girdi...isEmpty&modPathIsTrue");
+//					System.out.println("bloða girdi...isEmpty&modPathIsTrue");
 //				else if(res1&&!res2)
 //					System.out.println("sadece isEmptyTrue");
 //				else
@@ -123,11 +100,6 @@ public class EscapeManager {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	private void removeUsedTilesOfPath() throws StopRequestException
 	{	myAI.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -140,13 +112,6 @@ public class EscapeManager {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean finishedPath() throws StopRequestException
 	{
 		myAI.checkInterruption();
@@ -161,13 +126,6 @@ public class EscapeManager {
 				
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * 		Description manquante !
-	 * @throws StopRequestException
-	 * 		Description manquante !
-	 */
 	public boolean modifiedPath() throws StopRequestException
 	{
 		myAI.checkInterruption(); //APPEL OBLIGATOIRE
@@ -187,11 +145,6 @@ public class EscapeManager {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * 		?
-	 */
 	public AiTile getCurrentTile() {
 		return myAI.getOwnHero().getTile();
 	}

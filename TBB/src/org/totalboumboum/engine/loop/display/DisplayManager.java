@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop.display;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -29,100 +29,37 @@ import java.util.List;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
- * This class is in charge of handling all the
- * display objects during the game.
  * 
  * @author Vincent Labatut
+ *
  */
 public class DisplayManager
-{	
+{
 	/////////////////////////////////////////////////////////////////
 	// EVENT 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Fetch the specified event to the 
-	 * registered display objects.
-	 * 
-	 * @param event
-	 * 		Event to fetch to display objects.
-	 */
 	public void provessEvent(SystemControlEvent event)
-	{	List<Display> displays = displaysMap.get(event.getName());
-		if(displays!=null)
-		{	for(Display display: displays)
-			{	display.switchShow(event);
-				feedback.processEvent(event,display);
-			}
-		}
+	{	Display d = displaysMap.get(event.getName());
+		if(d!=null)
+			d.switchShow(event);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// DISPLAYS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** List of registered display objects */
 	private List<Display> displaysList = new ArrayList<Display>();
-	/** Mapping of the event names to the concerned display objects */
-	private HashMap<String,List<Display>> displaysMap = new HashMap<String,List<Display>>();
-	/** Object used to display feedback messages */
-	private DisplayFeedbackMessage feedback = new DisplayFeedbackMessage();
+	private HashMap<String,Display> displaysMap = new HashMap<String, Display>();
 	
-	/**
-	 * Registers a new display object.
-	 * 
-	 * @param display
-	 * 		New display object.
-	 */
-	public void addDisplay(Display display)
-	{	// list
-		displaysList.add(display);
-		
-		// map
-		List<String> events = display.getEventNames();
-		for(String event: events)
-		{	List<Display> displays = displaysMap.get(event);
-			if(displays==null)
-				displays = new ArrayList<Display>();
-			displays.add(display);
-			displaysMap.put(event,displays);
-		}
-	}
-	
-	/**
-	 * Uregisters a display object.
-	 * 
-	 * @param display
-	 * 		Display object to unregister.
-	 */
-	public void removeDisplay(Display display)
-	{	// list
-		displaysList.remove(display);
-		
-		// map
-		List<String> events = display.getEventNames();
-		for(String event: events)
-		{	List<Display> displays = displaysMap.get(event);
-			displays.remove(display);
-			if(displays.isEmpty())
-				displaysMap.remove(event);
-			else
-				displaysMap.put(event,displays);
-		}
+	public void addDisplay(Display d)
+	{	displaysList.add(d);
+		displaysMap.put(d.getEventName(),d);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Draws the appropriate information
-	 * in the game panel.
-	 * 
-	 * @param g
-	 * 		Object used for drawing.
-	 */
 	public void draw(Graphics g)
 	{	for(Display d: displaysList)
-			d.draw(g);
-		if(!displaysList.isEmpty())
-			feedback.draw(g);
+			d.draw(g);		
 	}
 }

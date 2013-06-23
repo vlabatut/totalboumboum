@@ -2,7 +2,7 @@ package org.totalboumboum.engine.content.feature.action.appear;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action d'apparaitre de nulle part (suite Ã  tÃ©lÃ©port, ou drop) 
+ * action d'apparaitre de nulle part (suite à téléport, ou drop) 
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
@@ -43,13 +43,13 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *  <br>N/D
  *  
  * <p>ABILITY PREVENT
- * 	<br>paramÃ¨tre: actor=oui
- * 	<br>paramÃ¨tre: target=oui (floor)
- * 	<br>paramÃ¨tre: direction=N/D
- * 	<br>paramÃ¨tre: strength=bool
- * 	<br>paramÃ¨tre: kind=N/D
- * 	<br>paramÃ¨tre: scope=oui
- * 	<br>paramÃ¨tre: restriction=SPRITE_TRAVERSE
+ * 	<br>paramètre: actor=oui
+ * 	<br>paramètre: target=oui (floor)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=oui
+ * 	<br>paramètre: restriction=SPRITE_TRAVERSE
  */	
 /** 
  * appearing in a tile, coming from nowhere
@@ -69,8 +69,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *
  */
 public class GeneralAppear extends GeneralAction
-{	/** Serial */
-	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

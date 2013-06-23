@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -52,14 +52,14 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
- * <br/>
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
+ * 
  * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
@@ -68,9 +68,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, à ne plus utiliser. 
+ *
  */
 public final class AiDataZone extends AiZone
 {	
@@ -639,7 +637,7 @@ public final class AiDataZone extends AiZone
 	/**
 	 * permet de modifier le nombre d'items encore cachés dans ce niveau
 	 * 
-	 * @param type
+	 * @param hiddenItemsCount
 	 * 		le nouveau nombre d'items cachés dans le niveau
 	 */
 	protected void signalHiddenItem(AiItemType type)
@@ -665,11 +663,8 @@ public final class AiDataZone extends AiZone
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprimées de cette représentation.
 	 * 
-	 * @param <U> 
-	 * 		?	
 	 * @param <T>	
 	 * 		type de la liste à traiter
-	 * 
 	 * @param list
 	 * 		liste à traiter
 	 */
@@ -684,11 +679,8 @@ public final class AiDataZone extends AiZone
 	 * méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
-	 * @param <U> 
-	 * 		?	
 	 * @param <T>
 	 * 		type de la liste à traiter
-	 * 
 	 * @param list
 	 * 		liste à traiter
 	 */
@@ -766,7 +758,7 @@ public final class AiDataZone extends AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
+	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

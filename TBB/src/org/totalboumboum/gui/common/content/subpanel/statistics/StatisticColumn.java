@@ -2,7 +2,7 @@ package org.totalboumboum.gui.common.content.subpanel.statistics;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.game.profile.Portraits;
@@ -35,9 +34,8 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
-import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
+import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -47,85 +45,38 @@ import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
- * This class represents one column
- * in the table displaying player
- * statistics.
  * 
  * @author Vincent Labatut
+ *
  */
 public enum StatisticColumn
-{	
-	/////////////////////////////////////////////////////////////////
-	// GENERAL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Button to register/unregister player */
+{	// general
 	GENERAL_BUTTON,
-	/** Overall ranking */
 	GENERAL_RANK,
-	/** Evolution since last ranking */
 	GENERAL_EVOLUTION,
-	/** Player portrait */
 	GENERAL_PORTRAIT,
-	/** Player type */
 	GENERAL_TYPE,
-	/** Player Name */
 	GENERAL_NAME,
-	
-	/////////////////////////////////////////////////////////////////
-	// GLICKO-2			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Current Glicko-2 mean */
+	// glicko-2
 	GLICKO_MEAN,
-	/** Current Glicko-2 deviation */
 	GLICKO_DEVIATION,
-	/** Current Glicko-2 volatility */
 	GLICKO_VOLATILITY,
-	/** Number of rounds played since last Glicko-2 update */
 	GLICKO_ROUNDCOUNT,
-	
-	/////////////////////////////////////////////////////////////////
-	// SCORES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Number of bombs dropped */
+	// scores
 	SCORE_BOMBS,
-	/** Number of kills */
 	SCORE_BOMBINGS,
-	/** Number of times killed */
 	SCORE_BOMBEDS,
-	/** Number of items picked up */
 	SCORE_ITEMS,
-	/** Number of crowns picked up */
 	SCORE_CROWNS,
-	/** Number of tiles painted */
 	SCORE_PAINTINGS,
-	/** Number of self-kills */
 	SCORE_SELF_BOMBINGS,
-	/** Amount of time played */
 	SCORE_TIME,
-	
-	/////////////////////////////////////////////////////////////////
-	// CONFRONTATIONS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** Number of rounds played */
+	// confrontations
 	ROUNDS_PLAYED,
-	/** Number of rounds won */
 	ROUNDS_WON,
-	/** Number of rounds drawn */
 	ROUNDS_DRAWN,
-	/** Number of rounds lost */
 	ROUNDS_LOST;
 
-	/////////////////////////////////////////////////////////////////
-	// SORT			/////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Indicates if this column sort
-	 * should be inverted to get
-	 * a natural result.
-	 * 
-	 * @return 
-	 * 		{@code true} if this column should be inverted.
-	 */
 	public boolean isInverted()
 	{	boolean result = false;			
 		// general
@@ -178,13 +129,6 @@ public enum StatisticColumn
 		return result;
 	}
 	
-	/**
-	 * Returns the GUI key for the
-	 * header of this column.
-	 * 
-	 * @return
-	 * 		A GUI key.
-	 */
 	public String getHeaderKey()
 	{	String result = null;			
 		// general
@@ -239,32 +183,6 @@ public enum StatisticColumn
 		return result;
 	}
 	
-	/**
-	 * Appropriately sets the specified label
-	 * for this column in the specified table,
-	 * given the specified context.
-	 * 
-	 * @param container
-	 * 		Panel containing the table.
-	 * @param panel
-	 * 		Table containing the column.
-	 * @param colWidths
-	 * 		Size of the columns.
-	 * @param line
-	 * 		Row for the considered label.
-	 * @param col
-	 * 		Position of this column.
-	 * @param playerId
-	 * 		Id of the considered player.
-	 * @param playerRank
-	 * 		Rank of the considered player.
-	 * @param profile
-	 * 		Profile of the considered player.
-	 * @param playerRating
-	 * 		Glicko-2 rating of the considered player.
-	 * @param playerStats
-	 * 		Detailed stats of the considered player.
-	 */
 	public void setLabelContent(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats)
 	{	// general
 		if(this==GENERAL_BUTTON)
@@ -283,7 +201,7 @@ public enum StatisticColumn
 			{	String text = Integer.toString(playerRank);
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -319,12 +237,12 @@ public enum StatisticColumn
 				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);			
 			}
 			if(key!=null)
-			{	BufferedImage icon = GuiImageTools.getIcon(key);
+			{	BufferedImage icon = GuiTools.getIcon(key);
 				panel.setLabelIcon(line,col,icon,tooltip);	
 			}
 /*
  * TODO 
- * Ã©ventuellement regÃ©nÃ©rer les stats pour complÃ©ter le nouveau champ
+ * éventuellement regénérer les stats pour compléter le nouveau champ
  * 			
  */
 		}
@@ -360,7 +278,7 @@ public enum StatisticColumn
 				nfTooltip.setMaximumFractionDigits(6);
 				String tooltip = nfTooltip.format(mean);
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -375,7 +293,7 @@ public enum StatisticColumn
 				nfTooltip.setMaximumFractionDigits(6);
 				String tooltip = nfTooltip.format(stdev);
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -391,7 +309,7 @@ public enum StatisticColumn
 				nfTooltip.setMaximumFractionDigits(6);
 				String tooltip = nfTooltip.format(variability);
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -402,7 +320,7 @@ public enum StatisticColumn
 				String text = Integer.toString(roundcount);
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
@@ -443,7 +361,7 @@ public enum StatisticColumn
 				tooltip = TimeTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);							
 			}
 			panel.setLabelText(line,col,text,tooltip);
-			int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 			if(temp>colWidths[col])
 				colWidths[col] = temp;
 			col++;
@@ -467,33 +385,6 @@ public enum StatisticColumn
 		}
 	}
 
-	/**
-	 * Sets the content of a label containing
-	 * a score.
-	 * 
-	 * @param container
-	 * 		Panel containing the table.
-	 * @param panel
-	 * 		Table containing the column.
-	 * @param colWidths
-	 * 		Size of the columns.
-	 * @param line
-	 * 		Row for the considered label.
-	 * @param col
-	 * 		Position of this column.
-	 * @param playerId
-	 * 		Id of the considered player.
-	 * @param playerRank
-	 * 		Rank of the considered player.
-	 * @param profile
-	 * 		Profile of the considered player.
-	 * @param playerRating
-	 * 		Glicko-2 rating of the considered player.
-	 * @param playerStats
-	 * 		Detailed stats of the considered player.
-	 * @param score
-	 * 		Score of the considered player.
-	 */
 	private void setScoreLabel(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, Score score)
 	{	long scoreValue = playerStats.getScore(score);
 		String text;
@@ -516,38 +407,11 @@ public enum StatisticColumn
 			tooltip = text;
 		}
 		panel.setLabelText(line,col,text,tooltip);
-		int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+		int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 		if(temp>colWidths[col])
 			colWidths[col] = temp;
 	}
 	
-	/**
-	 * Sets the content of a label containing
-	 * a confrontation stat.
-	 * 
-	 * @param container
-	 * 		Panel containing the table.
-	 * @param panel
-	 * 		Table containing the column.
-	 * @param colWidths
-	 * 		Size of the columns.
-	 * @param line
-	 * 		Row for the considered label.
-	 * @param col
-	 * 		Position of this column.
-	 * @param playerId
-	 * 		Id of the considered player.
-	 * @param playerRank
-	 * 		Rank of the considered player.
-	 * @param profile
-	 * 		Profile of the considered player.
-	 * @param playerRating
-	 * 		Glicko-2 rating of the considered player.
-	 * @param playerStats
-	 * 		Detailed stats of the considered player.
-	 * @param confrontations
-	 * 		Confrontations of the considered player.
-	 */
 	private void setConfrontationsLabel(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, long confrontations)
 	{	String text = Long.toString(confrontations);
 		String tooltip = text;
@@ -564,24 +428,13 @@ public enum StatisticColumn
 			tooltip = nfTooltip.format(value)+"%";
 		}
 		panel.setLabelText(line,col,text,tooltip);
-		int temp = GuiFontTools.getPixelWidth(panel.getLineFontSize(),text);
+		int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 		if(temp>colWidths[col])
 			colWidths[col] = temp;
 	}
 	
-	/**
-	 * Sort the players depending on this column.
-	 * 
-	 * @param container
-	 * 		Panel containing the table.
-	 * @param playersScores
-	 * 		Detailed stats of the players.
-	 * @param rankingService
-	 * 		Glicko-2 rankings.
-	 * @param profilesMap
-	 * 		Map of all registered player profiles.
-	 */
-	public void updateValues(PlayerStatisticSubPanel container, Map<String,List<Comparable<?>>> playersScores, RankingService rankingService, Map<String,Profile> profilesMap)
+	@SuppressWarnings("rawtypes")
+	public void updateValues(PlayerStatisticSubPanel container, HashMap<String,List<Comparable>> playersScores, RankingService rankingService, HashMap<String,Profile> profilesMap)
 	{	playersScores.clear();
 		for(Entry<String,Profile> entry: profilesMap.entrySet())
 		{	// init
@@ -594,7 +447,7 @@ public enum StatisticColumn
 			//int playersCount = rankingService.getPlayers().size();
 			int previousRank = playerStats.getPreviousRank();
 			long totalRoundsPlayed = playerStats.getRoundsPlayed();
-			List<Comparable<?>> list = new ArrayList<Comparable<?>>();
+			List<Comparable> list = new ArrayList<Comparable>();
 			// process
 			if(this==GENERAL_BUTTON || this==GENERAL_RANK)
 			{	int rank = Integer.MAX_VALUE;

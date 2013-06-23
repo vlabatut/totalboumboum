@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200809.adapter;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -26,9 +26,7 @@ package org.totalboumboum.ai.v200809.adapter;
  * types d'items reconnus par l'IA.
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, Ã  ne plus utiliser. 
+ *
  */
 public enum AiItemType
 {
@@ -42,26 +40,21 @@ public enum AiItemType
 	OTHER;	
 	
 	/**
-	 * calcule l'AiItemType correspondant au nom d'item passÃ© en paramÃ¨tre
+	 * calcule l'AiItemType correspondant au nom d'item passé en paramètre
 	 * 
-	 * @param name	nom de l'item Ã  traiter
-	 * @return	symbole reprÃ©sentant ce type d'item
+	 * @param name	nom de l'item à traiter
+	 * @return	symbole représentant ce type d'item
 	 */
 	public static AiItemType makeItemType(String name)
 	{	AiItemType result;
-	
-		if(name.equalsIgnoreCase("extrabomb") || name.equalsIgnoreCase("goldenbomb"))
+		if(name.equalsIgnoreCase("extrabomb"))
 			result = EXTRA_BOMB;
-		
-		else if(name.equalsIgnoreCase("extraflame") || name.equalsIgnoreCase("goldenflame"))
+		else if(name.equalsIgnoreCase("extraflame"))
 			result = EXTRA_FLAME;
-		
 		else if(name.equalsIgnoreCase("punch"))
 			result = PUNCH;
-		
 		else
 			result = OTHER;
-		
 		return result;
 	}
 }
