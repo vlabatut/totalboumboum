@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<variableTiles>
+		<variableTile name="tile1">
+			<value proba="0.3" >
+				<block name="softwall" />
+			</value>
+			<value proba="0.1" >
+				<block name="softwall" />
+				<item name="extrabomb" />
+			</value>
+			<value proba="0.1" >
+				<block name="softwall" />
+				<item name="extraflame" />
+			</value>
+			<value proba="0.01" >
+				<block name="softwall" />
+				<item name="remotecontrol" />
+			</value>
+			<value proba="0.04" >
+				<block name="softwall" />
+				<item name="throughbombs" />
+			</value>
+			<value proba="0.05" >
+				<block name="softwall" />
+				<item name="throughwalls" />
+			</value>
+			<value proba="0.4" >
+			</value>
+		</variableTile>
+	</variableTiles>
+	
+	<matrix>
+		<line pos="0">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="2" >
+				<item name="extraflame" />
+			</tile>
+			<tile pos="3" >
+				<item name="fireproof" />
+			</tile>
+			<tile pos="4" >
+				<item name="remotecontrol" />
+			</tile>
+			<tile pos="5" >
+				<item name="random" />
+			</tile>
+			<tile pos="6" >
+				<item name="stage" />
+			</tile>
+			<tile pos="7" >
+				<item name="speed" />
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="1">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+			</tile>
+			<tile pos="2" >
+			</tile>
+			<tile pos="3" >
+				<item name="throughbombs" />
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+				<item name="throughwalls" />
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="2">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+			</tile>
+			<tile pos="2" >
+			</tile>
+			<tile pos="3" >
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="3">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="2" >
+			</tile>
+			<tile pos="3" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="4">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="2" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="4" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="6" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="7" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="5">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="2" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="4" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="6" >
+				<block name="softwall" />
+				<bomb name="normal" range="2" />
+			</tile>
+			<tile pos="7" >
+				<block name="hardwall" />
+			</tile>
+			<tile pos="8" >
+				<bomb name="normal" range="6" duration="5000" />
+			</tile>
+		</line>
+		
+		<line pos="6">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+			</tile>
+			<tile pos="2" >
+			</tile>
+			<tile pos="3" >
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+	</matrix>
+
+</zone>

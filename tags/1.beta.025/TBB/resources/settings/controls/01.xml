@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\controls.xsd">
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+	<event name="DROPBOMB" autofire="true">
+		<on key="VK_Q" />
+		<off key="VK_Q" />
+	</event>
+	<event name="PUNCHBOMB" autofire="false">
+		<on key="VK_X" />
+		<off key="VK_X" />
+	</event>
+	<event name="RIGHT" autofire="true">
+		<on key="VK_RIGHT" />
+		<off key="VK_RIGHT" />
+	</event>
+	<event name="DOWN" autofire="true">
+		<on key="VK_DOWN" />
+		<off key="VK_DOWN" />
+	</event>
+	<event name="UP" autofire="true">
+		<on key="VK_UP" />
+		<off key="VK_UP" />
+	</event>
+	<event name="LEFT" autofire="true">
+		<on key="VK_LEFT" />
+		<off key="VK_LEFT" />
+	</event>
+	<event name="TRIGGERBOMB" autofire="false">
+		<on key="VK_S" />
+		<off key="VK_S" />
+	</event>
+</controls>
+

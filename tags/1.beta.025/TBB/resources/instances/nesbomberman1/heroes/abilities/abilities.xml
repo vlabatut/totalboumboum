@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../schemas/abilities.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+		<!-- STATE -->
+<!--	SPRITE_ENTRY_DURATION --> 
+		<ability strength="1000" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_ENTRY_DURATION" />
+		</ability>
+<!-- 	SPRITE_MOVE_ASSISTANCE -->
+		<ability strength="0.33" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_MOVE_ASSISTANCE"/>
+		</ability>
+<!-- 	SPRITE_TRAVERSE_ITEM -->
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TRAVERSE_ITEM"/>
+		</ability>
+<!--  	HERO_BOMB_DROP_LATENCY --> 
+		<ability strength="100" frame="false" time="-1" uses="-1">
+			<name value="HERO_BOMB_DROP_LATENCY" />
+		</ability>		
+<!--  	HERO_BOMB_NUMBER_MAX --> 
+		<ability strength="10" frame="false" time="-1" uses="-1">
+			<name value="HERO_BOMB_NUMBER_MAX" />
+		</ability>
+<!--  	HERO_BOMB_RANGE_MAX --> 
+		<ability strength="10" frame="false" time="-1" uses="-1">
+			<name value="HERO_BOMB_RANGE_MAX" />
+		</ability>
+<!--  	HERO_BOMB_TIMER_COEFFICIENT --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="HERO_BOMB_TIMER_COEFFICIENT" />
+		</ability>
+<!--  	HERO_CELEBRATION_DURATION --> 
+		<ability strength="4000" frame="false" time="-1" uses="-1">
+			<name value="HERO_CELEBRATION_DURATION" />
+		</ability>
+<!--  	HERO_PUNCH_DURATION --> 
+		<ability strength="230" frame="false" time="-1" uses="-1">
+			<name value="HERO_PUNCH_DURATION" />
+		</ability>
+<!--  	HERO_REBIRTH_DELAY --> 
+		<ability strength="500" frame="false" time="-1" uses="-1">
+			<name value="HERO_REBIRTH_DELAY" />
+		</ability>
+<!--  	HERO_REBIRTH_DURATION --> 
+		<ability strength="3000" frame="false" time="-1" uses="-1">
+			<name value="HERO_REBIRTH_DURATION" />
+		</ability>
+<!--  	HERO_WAIT_DURATION --> 
+		<ability strength="4000" frame="false" time="-1" uses="-1">
+			<name value="HERO_WAIT_DURATION" />
+		</ability>
+<!--  	HERO_WALK_SPEED --> 
+		<ability strength="1.25" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_P1" />
+		</ability>
+			
+		<!-- ACTION -->
+<!--  	APPEAR --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="APPEAR" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	CRY --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="CRY" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	DROP --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="DROP" contact="ANY" direction="ANY"
+				orientation="ANY" target="BOMB" tilePosition="ANY" />
+		</ability>
+<!--  	EXULT --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="EXULT" contact="ANY" direction="ANY"
+				orientation="ANY" target="NONE" tilePosition="ANY" />
+		</ability>
+<!--  	GATHER --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="GATHER" contact="ANY" direction="ANY"
+				orientation="ANY" target="ITEM" tilePosition="SAME" />
+		</ability>
+<!--  	LAND --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="LAND" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	MOVEHIGH --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="MOVEHIGH" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	MOVELOW --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="MOVELOW" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	RELEASE --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="RELEASE" contact="ANY" direction="ANY"
+				orientation="ANY" target="ITEM" tilePosition="ANY" />
+		</ability>
+<!--  	TRANSMIT --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="TRANSMIT" contact="INTERSECTION" direction="ANY"
+				orientation="ANY" target="HERO" tilePosition="ANY" />
+		</ability>
+<!--  	TRIGGER --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="TRIGGER" contact="ANY" direction="ANY"
+				orientation="ANY" target="BOMB" tilePosition="ANY" />
+		</ability>
+
+</abilities>

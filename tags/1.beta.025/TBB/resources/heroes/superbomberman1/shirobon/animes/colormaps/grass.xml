@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<color index="13" red="126" green="204" blue="072" /> <!-- casque normal -->
+	<color index="11" red="248" green="184" blue="120" /> <!-- visage -->
+	<color index="04" red="240" green="048" blue="048" /> <!-- visière -->
+	<color index="03" red="184" green="048" blue="040" /> <!-- chaussures foncé -->
+	<color index="05" red="048" green="072" blue="016" /> <!-- casque très foncé -->
+	<color index="10" red="064" green="120" blue="008" /> <!-- casque foncé -->
+	<color index="09" red="240" green="176" blue="112" /> <!-- bras foncé -->
+	<color index="01" red="056" green="100" blue="004" /> <!-- corps foncé -->
+	<color index="02" red="104" green="176" blue="024" /> <!-- corps normal -->
+	<color index="06" red="203" green="085" blue="078" /> <!-- chaussures clair -->
+	<color index="08" red="126" green="204" blue="072" /> <!-- corps clair -->
+	<color index="14" red="248" green="248" blue="248" /> <!-- reflet (blanc) -->
+	<color index="12" red="252" green="209" blue="166" /> <!-- bras clair -->
+	<color index="07" red="160" green="136" blue="080" /> <!-- boucle ceinture -->
+	<color index="00" red="000" green="000" blue="000" /> <!-- sombre (noir) -->
+
+</colormap>

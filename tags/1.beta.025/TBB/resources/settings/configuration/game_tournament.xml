@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
+	<!--
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
+	<tournament name="Trnmt201213_2.supercup" />
+	<players>
+		<player file="d5437bdc-e1e0-4778-b2a1-d95f086ae957" color="RED" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="3f1ca4a0-6c9e-44b4-811a-a24cbac8c758" color="BLUE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="dd226be2-5b7a-4017-a415-963b546bb716" color="CYAN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+	</players>
+</gameTournament>
+

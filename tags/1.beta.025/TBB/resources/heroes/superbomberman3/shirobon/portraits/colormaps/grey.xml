@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<color index="04" red="180" green="180" blue="180" /> <!-- corps -->
+	<color index="05" red="222" green="085" blue="118" /> <!-- poings + antenne -->
+	<color index="09" red="120" green="120" blue="120" /> <!-- ombre -->
+	<color index="10" red="248" green="160" blue="032" /> <!-- visage -->
+	<color index="12" red="152" green="152" blue="152" /> <!-- casque + membres -->
+
+</colormap>

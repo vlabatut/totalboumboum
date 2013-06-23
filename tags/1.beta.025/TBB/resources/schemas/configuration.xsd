@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:complexType name="tFps">
+		<xsd:attribute name="value" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSpeed">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSmoothGraphics">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tDimension">
+		<xsd:attribute name="height" type="xsd:integer" use="required" />
+		<xsd:attribute name="width" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tProfile">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tProfiles">
+		<xsd:sequence>
+			<xsd:element name="profile" type="tProfile" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tTournament">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tQuickmatch">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tQuickstart">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tConfiguration">
+		<xsd:sequence>
+			<xsd:element name="fps" type="tFps" />
+			<xsd:element name="speed" type="tSpeed" />
+			<xsd:element name="smoothGraphics" type="tSmoothGraphics" />
+			<xsd:element name="panelDimension" type="tDimension" />
+			<xsd:element name="profiles" type="tProfiles" />
+			<xsd:element name="tournament" type="tTournament" minOccurs="0"/>
+			<xsd:element name="quickmatch" type="tQuickmatch" minOccurs="0"/>
+			<xsd:element name="quickstart" type="tQuickstart" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="configuration" type="tConfiguration" />
+
+</xsd:schema>

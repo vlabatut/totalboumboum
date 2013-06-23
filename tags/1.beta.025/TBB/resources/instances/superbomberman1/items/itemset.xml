@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<itemset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/itemset.xsd">
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+	<abstractItems>
+		<item name="common" folder="_common"/>
+	</abstractItems>
+
+	<concreteItems>
+		<item name="disease" folder="disease" >
+			<!-- bomb constipation -->
+			<abilities>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="20000" strength="-1000" >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="extrabomb" folder="extrabomb">	
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="extraflame" folder="extraflame">
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="goldenflame" folder="goldenflame">
+			<abilities>
+				<ability strength="10" >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="kick" folder="kick" >
+			<abilities>
+				<ability >
+					<action name="PUSH" target="BOMB" direction="ANY" 
+					contact="COLLISION" orientation="FACE" tilePosition="NEIGHBOR"/>
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="life" folder="life">
+			<abilities>
+				<ability uses="1">
+					<name value="HERO_LIFE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="mystery" folder="question" >
+			<item name="extrabomb" />
+			<item name="extraflame" />
+			<item name="goldenflame" />
+			<item name="kick" />
+			<item name="life" />
+			<item name="penetration" />
+			<item name="punch" />
+			<item name="remotecontrol" />
+			<item name="speed" />
+			<item name="throughbombs" />
+			<item name="throughwalls" />
+			<item name="vest" />
+		</item>
+		
+		<item name="penetration" folder="penetration" >
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="punch" folder="punch" >
+			<abilities>
+				<ability >
+					<action name="PUNCH" target="BOMB" direction="ANY"
+					contact="COLLISION INTERSECTION" orientation="FACE" tilePosition="ANY"/>
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="remotecontrol" folder="remotecontrol" >
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="speed" folder="speed" >
+			<abilities>
+				<ability strength="1">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="superspeed" folder="superspeed" >
+			<abilities >
+				<ability strength="49" frame="true" >
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="throughbombs" folder="throughbombs" >
+			<abilities>
+				<ability strength="1" frame="true" >
+					<name value="SPRITE_TRAVERSE_BOMB" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="throughwalls" folder="throughwalls" >
+			<abilities>
+				<ability strength="1" frame="true" >
+					<name value="SPRITE_TRAVERSE_WALL" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="vest" folder="vest">
+			<abilities>
+				<ability strength="90" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16777215" frame="true" time="15000" > <!-- #FFFFFF = white -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="15000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>		
+		<item name="vestart" folder="vestart">
+			<abilities>
+				<ability strength="90" frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90" frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16777215" frame="true" time="3000" > <!-- #FFFFFF = white -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="3000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>		
+	</concreteItems>
+
+</itemset>

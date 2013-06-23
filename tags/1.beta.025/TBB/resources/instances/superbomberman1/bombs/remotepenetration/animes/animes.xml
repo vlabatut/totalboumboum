@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
+		scale="1" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+		
+	<colors folder="colormaps" >
+		<colormap name="BLACK" file="black" />
+		<colormap name="BLUE" file="blue" />
+		<colormap name="BROWN" file="brown" />
+		<colormap name="CYAN" file="cyan" />
+		<colormap name="GRASS" file="grass" />
+		<colormap name="GREEN" file="green" />
+		<colormap name="GREY" file="grey" />
+		<colormap name="INDIGO" file="indigo" />
+		<colormap name="ORANGE" file="orange" />
+		<colormap name="PINK" file="pink" />
+		<colormap name="PURPLE" file="purple" />
+		<colormap name="RED" file="red" />
+		<colormap name="RUST" file="rust" />
+		<colormap name="ULTRAMARINE" file="ultramarine" />
+		<colormap name="WHITE" file="white" />
+		<colormap name="YELLOW" file="yellow" />
+	</colors>
+	
+	<shadows folder="pictures">
+ 		<shadow name="shadow" file="shadow.png" />
+	</shadows>
+	
+	<gestures folder="pictures">
+		<gesture name="APPEARING" folder="appearing" repeat="false" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="75" file="1.gif" />
+				<step duration="75" file="2.gif" />
+				<step duration="75" file="3.gif" />
+			</direction>
+		</gesture>
+		<gesture name="BOUNCING" folder="standing" repeat="true" shadow="shadow" shadowYShift="-3">
+			<direction name="NONE">
+				<step duration="300" file="1.gif" />
+				<step duration="300" file="2.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="BURNING" folder="standing" repeat="false">
+			<direction name="NONE">
+				<step duration="100" />
+			</direction>
+		</gesture>
+		
+		<gesture name="FALLING" folder="standing" repeat="true" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="300" file="1.gif" />
+				<step duration="300" file="2.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="LANDING" folder="standing" repeat="true" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="300" file="1.gif" />
+				<step duration="300" file="2.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="PUNCHED" folder="standing" repeat="true" shadow="shadow">
+			<direction name="NONE">
+				<step duration="300" file="1.gif" />
+				<step duration="300" file="2.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="SLIDING" folder="standing" repeat="true" shadow="shadow">
+			<direction name="NONE">
+				<step duration="300" file="1.gif" />
+				<step duration="300" file="2.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STANDING" folder="standing" repeat="true" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="300" file="1.gif" />
+				<step duration="300" file="2.gif" />
+			</direction>
+		</gesture>
+		
+	</gestures>		
+</animes>

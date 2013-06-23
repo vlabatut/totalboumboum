@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:complexType name="tOnOff">
+		<xsd:attribute name="key" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tEvent">
+		<xsd:sequence>
+			<xsd:element name="on" type="tOnOff" minOccurs="0" />
+			<xsd:element name="off" type="tOnOff" minOccurs="0" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="autofire" type="xsd:boolean" default="false" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tControls">
+		<xsd:sequence>
+			<xsd:element name="event" type="tEvent" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="controls" type="tControls" />
+
+</xsd:schema>

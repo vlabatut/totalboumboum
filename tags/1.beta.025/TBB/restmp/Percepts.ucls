@@ -1,0 +1,473 @@
+<class-diagram version="1.0.7" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <enumeration id="1" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiStateName" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiStateName.java" binary="false">    
+    <position x="1072" y="622" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </enumeration>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiTile" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiTile.java" binary="false">    
+    <position x="1587" y="549" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <enumeration id="3" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiStopType" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiStopType.java" binary="false">    
+    <position x="952" y="477" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </enumeration>  
+  <interface id="4" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiFloor" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiFloor.java" binary="false">    
+    <position x="1939" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="5" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiFire" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiFire.java" binary="false">    
+    <position x="1448" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiSprite" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiSprite.java" binary="false">    
+    <position x="1317" y="153" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="7" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiBlock" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiBlock.java" binary="false">    
+    <position x="952" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiZone" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiZone.java" binary="false">    
+    <position x="1864" y="549" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <enumeration id="9" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiItemType" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiItemType.java" binary="false">    
+    <position x="709" y="477" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </enumeration>  
+  <interface id="10" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiItem" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiItem.java" binary="false">    
+    <position x="709" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="11" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiState" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiState.java" binary="false">    
+    <position x="1317" y="622" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="12" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiBomb" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiBomb.java" binary="false">    
+    <position x="1189" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="13" corner="BOTTOM_RIGHT" language="java" name="org.totalboumboum.ai.v201112.adapter.data.AiHero" 
+    project="TBB" file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/AiHero.java" binary="false">    
+    <position x="1692" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <class id="14" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataSprite" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataSprite.java" binary="false">    
+    <position x="1317" y="477" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="15" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataBlock" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataBlock.java" binary="false">    
+    <position x="952" y="314" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="16" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataState" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataState.java" binary="false">    
+    <position x="1317" y="549" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="17" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataFire" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataFire.java" binary="false">    
+    <position x="1449" y="314" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="18" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataItem" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataItem.java" binary="false">    
+    <position x="709" y="314" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="19" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataFloor" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataFloor.java" binary="false">    
+    <position x="1940" y="314" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="20" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataBomb" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataBomb.java" binary="false">    
+    <position x="1190" y="314" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="21" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataTile" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataTile.java" binary="false">    
+    <position x="1587" y="477" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="22" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataZone" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataZone.java" binary="false">    
+    <position x="1865" y="477" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="23" corner="BOTTOM_RIGHT" language="java" 
+    name="org.totalboumboum.ai.v201112.adapter.data.internal.AiDataHero" project="TBB" 
+    file="/TBB/src/org/totalboumboum/ai/v201112/adapter/data/internal/AiDataHero.java" binary="false">    
+    <position x="1693" y="314" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <realization id="24">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <realization id="26">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <realization id="27">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="28">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="29" name="tile"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="31">    
+    <bendpoint x="1587" y="421"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="32" name="internalItems"/>      
+      <multiplicity id="33" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="35" name="stopHeroes"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="37">    
+    <bendpoint x="1865" y="396"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="38" name="itemMap"/>      
+      <multiplicity id="39" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="41" name="name"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="21" navigable="true">      
+      <attribute id="44" name="zone"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true">      
+      <attribute id="46" name="matrix"/>      
+      <multiplicity id="47" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="48">    
+    <bendpoint x="1865" y="396"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="49" name="blockMap"/>      
+      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="51">    
+    <bendpoint x="1587" y="423"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="52" name="internalFires"/>      
+      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="55">    
+    <bendpoint x="1587" y="423"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="56" name="internalFloors"/>      
+      <multiplicity id="57" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="58">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <realization id="59">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="61">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="62" name="stopBombs"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="64">    
+    <bendpoint x="1865" y="397"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="65" name="ownHero"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="67">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="70">    
+    <bendpoint x="1865" y="396"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="71" name="fireMap"/>      
+      <multiplicity id="72" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="75">    
+    <bendpoint x="1865" y="396"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="76" name="floorMap"/>      
+      <multiplicity id="77" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="78">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="79">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="80" name="type"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="82">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <realization id="83">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="84">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="85">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="86" name="tiles"/>      
+      <multiplicity id="87" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="88">    
+    <bendpoint x="1587" y="422"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="89" name="internalBombs"/>      
+      <multiplicity id="90" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="91">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="92">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="93" name="state"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="95">    
+    <bendpoint x="1865" y="396"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="96" name="bombMap"/>      
+      <multiplicity id="97" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="98">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <generalization id="99">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="100">    
+    <bendpoint x="1587" y="421"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="101" name="internalHeroes"/>      
+      <multiplicity id="102" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="104">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="105" name="stopFires"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="107">    
+    <bendpoint x="1587" y="422"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="108" name="internalBlocks"/>      
+      <multiplicity id="109" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false"/>    
+    <operations public="false" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+		
+	<color index="00" red="000" green="000" blue="000" /> <!-- sombre (noir) -->
+	<color index="01" red="040" green="000" blue="072" /> <!-- corps foncé -->
+	<color index="02" red="096" green="000" blue="120" /> <!-- corps normal -->
+	<color index="03" red="040" green="000" blue="056" /> <!-- casque très foncé -->
+	<color index="04" red="200" green="000" blue="000" /> <!-- chaussures foncé -->
+	<color index="05" red="219" green="058" blue="058" /> <!-- chaussures clair -->
+	<color index="06" red="080" green="000" blue="096" /> <!-- casque foncé -->
+	<color index="07" red="248" green="184" blue="144" /> <!-- visage -->
+	<color index="08" red="136" green="040" blue="160" /> <!-- bras clair -->
+	<color index="09" red="120" green="000" blue="152" /> <!-- casque normal -->
+	<color index="10" red="248" green="248" blue="248" /> <!-- reflet (blanc) -->
+
+</colormap>

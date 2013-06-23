@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<itemset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/itemset.xsd">
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+	<abstractItems>
+		<item name="common" folder="_common" />	
+	</abstractItems>
+	
+	<concreteItems>	
+		<item name="extrabomb" folder="extrabomb">	
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="extraflame" folder="extraflame">
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="fireproof" folder="fireproof">
+			<abilities>
+				<ability strength="50"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="50"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="-1" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="15000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="life" folder="life">
+			<abilities>
+				<ability uses="1">
+					<name value="HERO_LIFE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="malus" folder="malus" >
+			<!-- bomb constipation -->
+			<abilities>
+				<ability strength="150"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="300"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="30000" strength="-1000" >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+			<!-- bomb diarrhea-->
+			<abilities>
+				<ability strength="150"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="300"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="30000" >
+					<name value="HERO_BOMB_DIARRHEA" />
+				</ability>
+			</abilities>
+			<!-- bomb short fuse -->
+			<abilities>
+				<ability strength="150"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="300"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="-0.5" time="30000" >
+					<name value="HERO_BOMB_TIMER_COEFFICIENT" />
+				</ability>
+			</abilities>
+			<!-- bomb long fuse -->
+			<abilities>
+				<ability strength="150"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="300"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="1" time="30000" >
+					<name value="HERO_BOMB_TIMER_COEFFICIENT" />
+				</ability>
+			</abilities>
+			<!-- control inversion -->
+			<abilities>
+				<ability strength="150"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="300"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="30000" >
+					<name value="HERO_CONTROL_INVERSION" />
+				</ability>
+			</abilities>
+			<!-- invisibility -->
+			<abilities>
+				<ability time="30000" >
+					<name value="SPRITE_INVISIBLE" />
+				</ability>
+			</abilities>
+			<!-- slow down -->
+			<abilities>
+				<ability strength="150"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="300"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="-1" time="30000" frame="true">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+			<!-- speed up -->
+			<abilities>
+				<ability strength="150"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="300"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="100" time="30000" frame="true">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="points" folder="points" >
+			<abilities>
+				<ability >
+					<name value="ITEM_CROWN" />
+				</ability>
+			</abilities>
+		</item>
+
+		<item name="random" folder="random" >
+			<item name="extrabomb" />
+			<item name="extraflame" />
+			<item name="fireproof" />
+			<item name="life" />
+			<item name="remotecontrol" />
+			<item name="speed" />
+			<item name="throughbombs" />
+			<item name="throughwalls" />
+		</item>
+		
+		<item name="remotecontrol" folder="remotecontrol" >
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="speed" folder="speed" >
+			<abilities>
+				<ability strength="1" >
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+				<!-- 				
+				<ability strength="250"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="250"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16711680" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				 -->			
+			</abilities>
+		</item>
+		
+		<item name="throughbombs" folder="throughbombs" >
+			<abilities>
+				<ability strength="1" frame="true">
+					<name value="SPRITE_TRAVERSE_BOMB" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="throughwalls" folder="throughwalls" >
+			<abilities>
+				<ability strength="1" frame="true">
+					<name value="SPRITE_TRAVERSE_WALL" />
+				</ability>
+			</abilities>
+		</item>
+
+		<item name="vest" folder="vest" >
+			<abilities>
+				<ability strength="50"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="50"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="-1" frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="30000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>
+		<item name="vestart" folder="vestart" >
+			<abilities>
+				<ability strength="50"  frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="50"  frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="-1" frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="3000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>
+	</concreteItems>
+
+
+</itemset>

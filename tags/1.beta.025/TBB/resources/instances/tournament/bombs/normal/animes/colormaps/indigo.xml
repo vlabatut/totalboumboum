@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../schemas/colormap.xsd" >		
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<color index="00" red="040" green="000" blue="056" /> <!-- contours -->
+	<color index="01" red="080" green="000" blue="096" /> <!-- corps très foncé -->
+	<color index="02" red="096" green="000" blue="120" /> <!-- corps foncé -->
+	<color index="03" red="151" green="029" blue="183" /> <!-- corps clair -->
+	<color index="04" red="120" green="000" blue="152" /> <!-- corps normal -->
+	<color index="05" red="189" green="070" blue="221" /> <!-- corps très clair -->
+	<color index="09" red="229" green="176" blue="243" /> <!-- corps très très clair -->
+	<color index="14" red="250" green="250" blue="250" /> <!-- reflets (blanc cassé) -->
+
+</colormap>

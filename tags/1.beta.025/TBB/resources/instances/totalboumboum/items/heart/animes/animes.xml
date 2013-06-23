@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
+		scale="4" preview="preview.png" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+	<gestures>
+
+		<gesture name="APPEARING" proportional="true" >
+			<direction name="NONE">
+				<step duration="30" name="appearing1" />
+				<step duration="30" name="appearing2" />
+				<step duration="30" name="appearing3" />
+				<step duration="30" name="appearing4" />
+				<step duration="30">
+					<imageref name="permanent1" /> 
+					<image file="icon.png" />
+				</step>
+			</direction>
+		</gesture>
+
+		<gesture name="DISAPPEARING" repeat="false" >
+			<direction name="NONE">
+				<step duration="30" name="appearing4" />
+				<step duration="30" name="appearing3" />
+				<step duration="30" name="appearing2" />
+				<step duration="30" name="appearing1" />
+			</direction>
+		</gesture>
+
+		<gesture name="RELEASED" repeat="false" >
+			<direction name="NONE">
+				<step duration="85" >
+					<imageref name="permanent1" />
+					<image file="icon.png" />
+					<imageref name="smoke1" yShift="4" />
+				</step>
+				<step duration="105" >
+					<imageref name="permanent1" />
+					<image file="icon.png" />
+					<imageref name="smoke2" yShift="4" />
+				</step>
+				<step duration="80" >
+					<imageref name="permanent1" />
+					<image file="icon.png" />
+					<imageref name="smoke3" yShift="4" />
+				</step>
+				<step duration="60" >
+					<imageref name="permanent1" />
+					<image file="icon.png" />
+					<imageref name="smoke4" yShift="4" />
+				</step>				
+			</direction>
+		</gesture>
+
+		<gesture name="STANDING" repeat="true" >
+			<direction name="NONE">
+				<step duration="200">
+					<imageref name="permanent1" /> 
+					<image file="icon.png" />
+				</step>
+				<step duration="200">
+					<imageref name="permanent2" /> 
+					<image file="icon.png" />
+				</step>
+			</direction>
+		</gesture>
+
+
+		
+	</gestures>		
+</animes>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_game.xsd"/>
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:simpleType name="tAllowedPlayers">
+	   <xsd:list itemType="xsd:integer"/>
+	</xsd:simpleType>
+ 
+	<xsd:complexType name="tLevel">
+		<xsd:attribute name="pack" type="xsd:string" use="required" />
+		<xsd:attribute name="folder" type="xsd:string" use="required" />
+		<xsd:attribute name="allowedPlayers" type="tAllowedPlayers" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLevels">
+		<xsd:sequence>
+			<xsd:element name="level" type="tLevel" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tOptions">
+		<xsd:attribute name="useLastPlayers" type="xsd:boolean" use="required" />
+		<xsd:attribute name="useLastLevels" type="xsd:boolean" use="required" />
+		<xsd:attribute name="useLastSettings" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsLevels">
+		<xsd:attribute name="randomOrder" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsPlayers">
+		<xsd:attribute name="randomLocation" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsLimits">
+		<xsd:attribute name="time" type="xsd:integer" use="required" />
+		<xsd:attribute name="rounds" type="xsd:integer" use="required" />
+		<xsd:attribute name="points" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsValue">
+		<xsd:attribute name="rank" type="xsd:integer" use="required" />
+		<xsd:attribute name="points" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="tSettingsDraw">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="BOTH" />
+			<xsd:enumeration value="TIME" />
+			<xsd:enumeration value="AUTOKILL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tSettingsPoints">
+		<xsd:sequence>
+			<xsd:element name="value" type="tSettingsValue"  maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="share" type="xsd:boolean" use="required" />
+		<xsd:attribute name="draw" type="tSettingsDraw" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSuddenDeath">
+		<xsd:attribute name="disabled" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettings">
+		<xsd:sequence>
+			<xsd:element name="levels" type="tSettingsLevels" />
+			<xsd:element name="players" type="tSettingsPlayers" />
+			<xsd:element name="limits" type="tSettingsLimits" />
+			<xsd:element name="points" type="tSettingsPoints" />
+			<xsd:element name="suddenDeath" type="tSuddenDeath" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tQuickmatch">
+		<xsd:sequence>
+			<xsd:element name="options" type="tOptions" />
+			<xsd:element name="settings" type="tSettings" />
+			<xsd:element name="players" type="tPlayers" />
+			<xsd:element name="levels" type="tLevels" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="gameQuickmatch" type="tQuickmatch" />
+
+</xsd:schema>

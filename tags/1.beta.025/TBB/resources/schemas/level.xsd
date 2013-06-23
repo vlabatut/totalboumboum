@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:complexType name="tTitle">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSource">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tPreview">
+		<xsd:attribute name="file" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tDisplay">
+		<xsd:attribute name="forceAll" type="xsd:boolean" use="required" />
+		<xsd:attribute name="maximize" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tGlobalDimension">
+		<xsd:attribute name="height" type="xsd:integer" use="required" />
+		<xsd:attribute name="width" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVisibleDimension">
+		<xsd:attribute name="height" type="xsd:integer" use="required" />
+		<xsd:attribute name="width" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVisiblePosition">
+		<xsd:attribute name="leftCol" type="xsd:integer" use="required" />
+		<xsd:attribute name="upLine" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tTheme">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tInstance">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLevel">
+		<xsd:sequence>
+			<xsd:element name="title" type="tTitle" />
+			<xsd:element name="author" type="tAuthor" />
+			<xsd:element name="source" type="tSource" />
+			<xsd:element name="preview" type="tPreview" />
+			
+			<xsd:element name="instance" type="tInstance" />
+			<xsd:element name="theme" type="tTheme" />
+			<xsd:element name="globalDimension" type="tGlobalDimension" />
+			<xsd:element name="visibleDimension" type="tVisibleDimension" />
+			<xsd:element name="visiblePosition" type="tVisiblePosition" />
+			<xsd:element name="display" type="tDisplay" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="level" type="tLevel" />
+
+</xsd:schema>

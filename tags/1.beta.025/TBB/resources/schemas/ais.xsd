@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:complexType name="tUps">
+		<xsd:attribute name="value" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAutoAdvance">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+		<xsd:attribute name="delay" type="xsd:long" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tHideAllAis">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tBombUselessAis">
+		<xsd:attribute name="value" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tDisplayExceptions">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLogExceptions">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAis">
+		<xsd:sequence>
+			<xsd:element name="ups" type="tUps" />
+			<xsd:element name="autoAdvance" type="tAutoAdvance" />
+			<xsd:element name="hideAllAis" type="tHideAllAis" />
+			<xsd:element name="bombUselessAis" type="tBombUselessAis" />
+			<xsd:element name="displayExceptions" type="tDisplayExceptions" />
+			<xsd:element name="logExceptions" type="tLogExceptions" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="ais" type="tAis" />
+
+</xsd:schema>

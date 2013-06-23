@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_action.xsd"/>
+<xsd:include schemaLocation="_state_ability_name.xsd"/>
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:complexType name="tAbilityName">
+		<xsd:attribute name="value" type="tStateAbilityName" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAbility">
+		<xsd:choice>
+			<xsd:element name="name" type="tAbilityName" />
+			<xsd:element name="action" type="tActionActor" />
+		</xsd:choice>
+		<xsd:attribute name="strength" type="xsd:float" use="optional" default="1" />
+		<xsd:attribute name="frame" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="uses" type="xsd:integer" use="optional" default="-1" />
+		<xsd:attribute name="time" type="xsd:integer" use="optional" default="-1" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tStateAbility">
+		<xsd:complexContent>
+			<xsd:restriction base="tAbility">
+				<xsd:choice>
+					<xsd:element name="name" type="tAbilityName" />
+				</xsd:choice>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tActionAbility">
+		<xsd:complexContent>
+			<xsd:restriction base="tAbility">
+				<xsd:choice>
+					<xsd:element name="action" type="tActionActor" />
+				</xsd:choice>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+</xsd:schema>

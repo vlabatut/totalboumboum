@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<color index="01" red="086" green="168" blue="030" /> <!-- primaire tres sombre -->
+	<color index="04" red="126" green="204" blue="072" /> <!-- primaire sombre -->
+	<color index="05" red="155" green="227" blue="106" /> <!-- primaire normal -->
+	<color index="07" red="185" green="234" blue="151" /> <!-- primaire clair -->
+	<color index="11" red="211" green="246" blue="186" /> <!-- primaire tres clair -->
+	<color index="02" red="072" green="000" blue="053" /> <!-- secondaire tres fonce -->
+	<color index="03" red="136" green="000" blue="102" /> <!-- secondaire fonce -->
+	<color index="06" red="184" green="032" blue="111" /> <!-- secondaire normal-->
+	<color index="09" red="216" green="096" blue="175" /> <!-- secondaire clair -->
+	<color index="12" red="248" green="184" blue="229" /> <!-- secondaire tres clair -->
+	<color index="10" red="255" green="120" blue="184" /> <!-- tertiaire normal -->
+	<color index="13" red="249" green="166" blue="215" /> <!-- tertiaire clair -->
+	<color index="08" red="168" green="048" blue="121" /> <!-- boucle ceinture -->
+	<color index="00" red="003" green="060" blue="000" /> <!-- noirs (contours) -->
+	<color index="14" red="248" green="248" blue="248" /> <!-- blanc (reflets) -->
+
+</colormap>

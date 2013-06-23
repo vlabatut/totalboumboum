@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:complexType name="tBlock">
+		<xsd:attribute name="group" type="xsd:string" use="optional" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tFloor">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tItem">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tBomb">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="range" type="xsd:integer" use="optional" default="3" />
+		<!-- only for time bombs. value -1 means: use default level settings -->
+		<xsd:attribute name="duration" type="xsd:integer" use="optional" default="-1" />
+	</xsd:complexType>
+
+	<xsd:group name="gBasicTile">
+		<xsd:sequence>
+			<!--  no floor defined means default floor -->
+			<xsd:element name="floor" type="tFloor" minOccurs="0" />
+			<!--  no block defined means no block at all -->
+			<xsd:element name="block" type="tBlock" minOccurs="0" />
+			<!--  there can also be bombs, items, etc. -->
+			<xsd:element name="item" type="tItem" minOccurs="0" />
+			<xsd:element name="bomb" type="tBomb" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:complexType name="tTileReference">
+		<xsd:attribute name="name" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tTileType">
+		<xsd:sequence>
+			<xsd:group ref="gBasicTile" />
+			<xsd:element name="reference" type="tTileReference" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="pos" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLine">
+		<xsd:sequence>
+			<xsd:element name="tile" type="tTileType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="pos" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatrix">
+		<xsd:sequence>
+			<xsd:element name="line" type="tLine" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tValue">
+		<xsd:group ref="gBasicTile" />
+		<xsd:attribute name="proba" type="xsd:float" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVariableTile">
+		<xsd:sequence>
+			<xsd:element name="value" type="tValue" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVariableTiles">
+		<xsd:sequence>
+			<xsd:element name="variableTile" type="tVariableTile" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tEvent">
+		<xsd:sequence>
+			<xsd:element name="line" type="tLine" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<!-- time expressed in function of the total duration -->
+		<xsd:attribute name="time" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tEvents">
+		<xsd:sequence>
+			<xsd:element name="event" type="tEvent" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<!-- Total duration of the event sequence. This is used if the game is set to no time limit -->
+		<xsd:attribute name="duration" type="xsd:integer" use="required" />
+		<!-- If true, then the step times are always normalized relatively to the round duration
+			 set in the game. Otherwise, the time steps are used as they are. -->
+		<xsd:attribute name="relative" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tZone">
+		<xsd:sequence>
+			<xsd:element name="variableTiles" type="tVariableTiles"  minOccurs="0"/>
+			<xsd:element name="matrix" type="tMatrix" />
+			<xsd:element name="events" type="tEvents"  minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="zone" type="tZone" />
+
+</xsd:schema>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/match.xsd">
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+ 	<notes>
+ 		<line value="This long match uses only SBM1 official levels." />
+ 		<line value="It has 7 rounds." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 25-09-2009" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<limits>
+
+		<confrontation>
+			<points local="false" name="MatchBasic" />
+			<threshold value="7" />
+		</confrontation>
+	
+ <!-- 		
+		<points value="5" >
+			<points local="false" name="frags" />
+		</points>
+ -->			
+<!-- 		  		
+		<total value="100" />
+		<score value="5" type="bombings" win="true" />
+
+		<score value="15" type="bombeds" win="false" />
+		<score value="99" type="items" win="false" />
+		<score value="105" type="bombs" win="false" />
+		<confrontation value="7" />
+  -->			
+	</limits>
+
+ 	
+ 	<rounds randomOrder="true" >
+  		<round local="false" name="round12" />
+  		<round local="false" name="round13" />
+  		<round local="false" name="round14" />
+  	</rounds>
+	
+</match>

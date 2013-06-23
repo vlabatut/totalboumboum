@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+		<!-- STATE -->
+<!--  	BOMB_EXPLOSION_LATENCY --> 
+		<ability strength="140" frame="false" time="-1" uses="-1">
+			<name value="BOMB_EXPLOSION_LATENCY" />
+		</ability>
+<!--  	BOMB_TRIGGER_COMBUSTION --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="BOMB_TRIGGER_COMBUSTION" />
+		</ability>
+		
+<!--  	SPRITE_ENTRY_DURATION --> 
+		<ability strength="500" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_ENTRY_DURATION" />
+		</ability>
+			
+		<!-- ACTION -->
+<!--  	APPEAR -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+		</ability> 
+<!--  	DETONATE -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="DETONATE" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
+		</ability> 
+<!--  	LAND -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="LAND" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
+		</ability> 
+<!--  	MOVEHIGH -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="MOVEHIGH" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
+		</ability> 
+<!--  	MOVELOW -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
+		</ability> 
+
+</abilities>

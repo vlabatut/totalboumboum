@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	<!--
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
+	<played matches="0" rounds="0" />
+	<dates start="2013-01-14T21:01:02" save="2013-01-14T21:01:13" />
+	<players>
+		<player name="1011.Kesimal+Varol" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+		<player name="1011.Çalışkan+Seven" />
+		<player name="1011.Akbulut+Küpelioğlu" />
+		<player name="1011.Hacıbektaşoğlu+İlgar" />
+		<player name="1011.Büyüktopaç+Turak" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="1011.Özdöker+Özen" />
+	</players>
+</archive>
+
