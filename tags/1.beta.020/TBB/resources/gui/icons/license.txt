@@ -1,5 +1,0 @@
-Total Boum Boum icons
-Author: 
-	Drawings: Vincent Labatut (http://www.totalboumboum.org)
-	Characters: Times New Roman font
-License	: GPLv2 (GNU General Public License)

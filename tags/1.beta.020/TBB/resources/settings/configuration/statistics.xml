@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\statistics.xsd">
-	<includeQuickStarts value="false" />
-	<includeSimulations value="false" />
-	<glicko2 defaultRating="1500" defaultRatingDeviation="350" defaultRatingVolatility="0.06" gamesPerPeriod="5" />
-	<regularLaunch count="344" time="1289714665" />
-	<quickLaunch count="2" time="95" />
-</statistics>
-
