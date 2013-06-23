@@ -188,12 +188,13 @@ public class UtilityHandler extends AiUtilityHandler<OralOzugur>
 								item.getType().equals(AiItemType.GOLDEN_SPEED) ||
 								item.getType().equals(AiItemType.RANDOM_EXTRA))
 							{
-								Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-								criteria.add(criterionMap.get(Distance.NAME));
-								criteria.add( criterionMap.get(Danger.NAME) );
-								criteria.add( criterionMap.get(Necessity.NAME) );
-								criteria.add( criterionMap.get(Concurrence.NAME) );
-								result = new AiUtilityCase(ai, BONUS_VISIBLE, criteria);
+//								Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//								criteria.add(criterionMap.get(Distance.NAME));
+//								criteria.add( criterionMap.get(Danger.NAME) );
+//								criteria.add( criterionMap.get(Necessity.NAME) );
+//								criteria.add( criterionMap.get(Concurrence.NAME) );
+//								result = new AiUtilityCase(ai, BONUS_VISIBLE, criteria);
+								result = caseMap.get(BONUS_VISIBLE);
 								bonus_check=true;
 							}
 					
@@ -201,20 +202,21 @@ public class UtilityHandler extends AiUtilityHandler<OralOzugur>
 						}
 						
 						 if(!bonus_check){
-							Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-							criteria.add( criterionMap.get(Danger.NAME) );
-							result = new AiUtilityCase(ai, MALUS_VISIBLE, criteria);
+//							Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//							criteria.add( criterionMap.get(Danger.NAME) );
+//							result = new AiUtilityCase(ai, MALUS_VISIBLE, criteria);
+							result = caseMap.get(MALUS_VISIBLE);
 						}
 					}
 
 					else
 					{
-						Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-						criteria.add (criterionMap.get(Distance.NAME) );
-						criteria.add(criterionMap.get(Danger.NAME));
-						criteria.add( criterionMap.get(NbMurDetrui.NAME) );
-						result = new AiUtilityCase(ai, RECHERCHE_ITEM, criteria );
-
+//						Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//						criteria.add (criterionMap.get(Distance.NAME) );
+//						criteria.add(criterionMap.get(Danger.NAME));
+//						criteria.add( criterionMap.get(NbMurDetrui.NAME) );
+//						result = new AiUtilityCase(ai, RECHERCHE_ITEM, criteria );
+						result = caseMap.get(RECHERCHE_ITEM);
 					}
 
 				}
@@ -223,18 +225,19 @@ public class UtilityHandler extends AiUtilityHandler<OralOzugur>
 				{
 					
 					if (this.ai.enemy_accessible) {
-								Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-								criteria.add (criterionMap.get(PeutTuerEnnemi.NAME) );
-								criteria.add(criterionMap.get(Danger.NAME));
-								result = new AiUtilityCase(ai, QUARTIER_ENNEMI, criteria );
-							
+//							Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//							criteria.add (criterionMap.get(PeutTuerEnnemi.NAME) );
+//							criteria.add(criterionMap.get(Danger.NAME));
+//							result = new AiUtilityCase(ai, QUARTIER_ENNEMI, criteria );
+							result = caseMap.get(QUARTIER_ENNEMI);
 						}
 					 else {
-						Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-						criteria.add(criterionMap.get(BestWall.NAME));
-						criteria.add(criterionMap.get(Danger.NAME));
-						criteria.add(criterionMap.get(Distance.NAME));
-						result = new AiUtilityCase(ai, AVANCE_ENNEMI, criteria );
+//						Set<AiUtilityCriterion<?,?>> criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//						criteria.add(criterionMap.get(BestWall.NAME));
+//						criteria.add(criterionMap.get(Danger.NAME));
+//						criteria.add(criterionMap.get(Distance.NAME));
+//						result = new AiUtilityCase(ai, AVANCE_ENNEMI, criteria );
+						result = caseMap.get(AVANCE_ENNEMI);
 					}
 					
 					
