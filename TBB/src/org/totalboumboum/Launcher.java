@@ -1525,22 +1525,24 @@ public class Launcher
 	 * 			- les règles classiques
 	 * 
 	 *  - pour diffusion projet :
-	 * 		x réseau :
-	 * 			x bloquer le bouton "réseau" dans le menu principal
+	 * 		- réseau :
+	 * 			- bloquer le bouton "réseau" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonNetworkGame
-	 * 			x bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
+	 * 			- bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
 	 * 			  org.totalboumboum.gui.menus.tournament.TournamenuMenu.buttonPublish
 	 * 			  org.totalboumboum.gui.menus.quickmatch.QuickMatchMenu.buttonPublish
+	 * 			>> simplement utiliser PRODUCTION dans la classe org.totalboumboum.tools.GameData
 	 * 			  
-	 * 		x replay :
-	 * 			x bloquer le bouton "replay" dans le menu principal
+	 * 		- replay :
+	 * 			- bloquer le bouton "replay" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonReplay
-	 * 			x bloquer le bouton "caméra" dans les menu tournoi/match/round
+	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
 	 * 			  org.totalboumboum.gui.game.tournament.TournamentMenu.buttonRecord
 	 * 			  org.totalboumboum.gui.game.match.MatchMenu.buttonRecord
 	 *			  org.totalboumboum.gui.game.round.RoundMenu.buttonRecord
-	 * 			x bloquer l'action dans les options avancées
+	 * 			- bloquer l'action dans les options avancées
 	 * 			  org.totalboumboum.gui.menus.options.advanced.AdvancedData ligne 'case LINE_RECORD_GAMES'
+	 * 			>> simplement utiliser PRODUCTION dans la classe org.totalboumboum.tools.GameData
 	 * 		- options :
 	 * 			- afficher les exceptions
 	 * 			- prérégler la partie rapide 
