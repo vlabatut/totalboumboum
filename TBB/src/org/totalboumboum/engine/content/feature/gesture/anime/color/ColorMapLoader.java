@@ -47,7 +47,14 @@ public class ColorMapLoader
 		File dataFile = new File(individualFolder+FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_COLORMAP+FileNames.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		Element root = null;
+		try
+		{	root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		}
+		catch(Exception e)
+		{	System.err.println(dataFile);
+			e.printStackTrace();
+		}
 		// loading
 		ColorMap result = new ColorMap(color);
 		loadColorsElement(root, result);

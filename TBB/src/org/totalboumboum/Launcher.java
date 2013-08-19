@@ -1666,4 +1666,6 @@ public class Launcher
 //		>> plus d'appel par le moteur
 //		>> ràz des stats de temps pour les plots ingame
 // TODO dans l'évolution de la partie, afficher l'occupation processeur
-//TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
+// TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
+// TODO faire apparaitre graphiquement les résultats d'un round en surimpression sur la zone de jeu
+// TODO insérer une animation optionnelle de présentation des participants au round
