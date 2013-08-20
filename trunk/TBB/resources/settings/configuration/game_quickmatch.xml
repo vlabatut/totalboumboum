@@ -21,9 +21,9 @@
 -->
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
-		<levels randomOrder="true" />
+		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="14" time="90000" />
+		<limits points="0" rounds="22" time="90000" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -40,20 +40,12 @@
 		<player file="3f1ca4a0-6c9e-44b4-811a-a24cbac8c758" color="BLUE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201213" folder="classic" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="carrefour" allowedPlayers="2 3 4" />
-		<level pack="tournament201213" folder="compromis" allowedPlayers="1 2 3 4" />
-		<level pack="tournament201213" folder="croix" allowedPlayers="2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201213" folder="entrance" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201213" folder="goldrush" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201213" folder="horizontal" allowedPlayers="2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201213" folder="items" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201213" folder="limitsiz" allowedPlayers="2 3 4" />
-		<level pack="tournament201213" folder="line" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="pasaj" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201213" folder="power" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="readysetgo" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201213" folder="vite" allowedPlayers="1 2 3 4" />
+		<level pack="tournament201314neutral" folder="entrance" allowedPlayers="2 3 4 5 6" />
+		<level pack="tournament201314neutral" folder="items" allowedPlayers="2 3 4 5 6" />
+		<level pack="tournament201314neutral" folder="line" allowedPlayers="2 3 4 5" />
+		<level pack="tournament201314neutral" folder="pasaj" allowedPlayers="2 3 4 5 6" />
+		<level pack="tournament201314neutral" folder="power" allowedPlayers="2 3 4 5" />
+		<level pack="tournament201314neutral" folder="readysetgo" allowedPlayers="2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 
