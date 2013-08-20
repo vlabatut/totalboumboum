@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/animes.xsd" 
+		scale="1" >
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut 
@@ -21,8 +22,12 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
-	<general name="Tournament6" version="1" />
-	<author value="Vincent Labatut" />
-	<source value="Super Bomberman 1"/>
+	<shadows>
+		<shadow name="standShadow" file="shadow_standing.png" />
+		<shadow name="fallShadow" file="shadow_falling.png" />
+	</shadows>
 	
-</theme>
+	<gestures>
+	</gestures>
+	
+</animes>
