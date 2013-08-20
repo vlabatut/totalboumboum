@@ -542,8 +542,6 @@
 		- quelques erreurs corrigées dans les scripts de compilation
 
 + beta.025
-	- ressources : 
-		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 	- gui :
 		- possibilité de masquer le message de pause (pour captures d'écran)
 		- bascule différente entre l'affichage des temps (mode débug)
@@ -555,3 +553,11 @@
 		  puis copiées à chacune de ses instantiations.
 		- outil de vérification des agents plus complet : importations, commentaires, etc.
 		- outil de génération de code source (vide) à partir d'un agent générique
+
++ beta.026
+	- ressources : 
+		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
+		- Thème du tournoi 2013/14
+		- Pretty Bomberman de SBM3
+		- Niveaux du tournoi 2013/14
+		- Tournoi de qualification 2013/14
