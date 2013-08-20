@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd">
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut
@@ -88,7 +88,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -139,7 +139,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -209,7 +209,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="2">
 				<floor name="00_02" />
@@ -255,7 +255,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -264,7 +264,7 @@
 		</line>
 		<line pos="4">
 			<tile pos="0">
-				<floor name="regular" />
+				<floor name="01_00" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
@@ -324,7 +324,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="02_01" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="2">
 				<floor name="02_02" />
@@ -370,7 +370,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="02_13" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="14">
 				<floor name="02_14" />
@@ -379,7 +379,7 @@
 		</line>
 		<line pos="6">
 			<tile pos="0">
-				<floor name="03_00" />
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
@@ -434,12 +434,12 @@
 		</line>
 		<line pos="7">
 			<tile pos="0">
-				<floor name="04_00" />
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="04_01" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="2">
 				<floor name="04_02" />
@@ -485,7 +485,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="04_13" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="14">
 				<floor name="04_14" />
@@ -554,7 +554,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="2">
 				<floor name="06_02" />
@@ -600,7 +600,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="06_13" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="14">
 				<floor name="06_14" />
@@ -669,7 +669,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -715,7 +715,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -785,7 +785,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -836,7 +836,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<bomb name="normal" range="6" duration="120000"/>
+				<bomb name="normal" range="6" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
