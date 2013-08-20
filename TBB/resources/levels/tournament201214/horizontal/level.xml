@@ -24,7 +24,7 @@
 	<source value="Original" />
 	<preview file="preview.jpg" />
 	<instance name="tournament" />
-	<theme name="tournament6" />
+	<theme name="tournament7" />
 	<globalDimension height="13" width="18" />
 	<visibleDimension height="5" width="18" />
 	<visiblePosition upLine="4" leftCol="0" />
