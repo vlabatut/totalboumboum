@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd">
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut
@@ -499,7 +499,7 @@
 				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="4">
-				<floor name="regular" />
+				<floor name="01_00" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
@@ -672,7 +672,7 @@
 				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="4">
-				<floor name="03_00" />
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">
@@ -762,7 +762,7 @@
 				<block group="hardwalls" name="filling" />
 			</tile>
 			<tile pos="4">
-				<floor name="04_00" />
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="5">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd">
+<level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\level.xsd">
 	<!--
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut
