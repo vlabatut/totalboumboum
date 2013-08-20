@@ -40,12 +40,7 @@
 		<player file="3f1ca4a0-6c9e-44b4-811a-a24cbac8c758" color="BLUE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201314neutral" folder="entrance" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201314neutral" folder="items" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201314neutral" folder="line" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201314neutral" folder="pasaj" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201314neutral" folder="power" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201314neutral" folder="readysetgo" allowedPlayers="2 3 4 5" />
+		<level pack="tournament201213" folder="bombfest" allowedPlayers="2 3 4" />
 	</levels>
 </gameQuickmatch>
 
