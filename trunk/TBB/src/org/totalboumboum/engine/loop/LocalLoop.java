@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -113,7 +114,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	// INITIALIZING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
+	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException, URISyntaxException
 	{	// init
 		List<Profile> profiles = round.getProfiles();
 		HollowLevel hollowLevel = round.getHollowLevel();
