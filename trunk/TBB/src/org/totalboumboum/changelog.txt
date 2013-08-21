@@ -561,3 +561,6 @@
 		- Pretty Bomberman de SBM3
 		- Niveaux du tournoi 2013/14
 		- Tournoi de qualification 2013/14
+	- ia :
+		- possibilité de découper le code source de l'agent en deux projets (TBB vs. versions des agents)
+		 
