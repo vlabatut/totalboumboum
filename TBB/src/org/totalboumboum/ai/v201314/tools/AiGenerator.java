@@ -64,7 +64,6 @@ public class AiGenerator
 		//String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201314/ais";
 	
 		// on définit les noms des auteurs du nouvel agent
-		@SuppressWarnings("unchecked")
 		List<List<String>> newNames = Arrays.asList(
 			Arrays.asList("Prénom1","Nom1"),
 			Arrays.asList("Prénom2","Nom2")

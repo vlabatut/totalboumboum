@@ -473,11 +473,11 @@ public final class InitData
 	public static ArtificialIntelligence initAi()
 	{	ArtificialIntelligence result = new ArtificialIntelligence()
 		{	@Override
-			protected void updatePercepts() throws StopRequestException{}
+			protected void updatePercepts() throws StopRequestException{/* */}
 			@Override
-			protected void initPercepts() throws StopRequestException{}
+			protected void initPercepts() throws StopRequestException{/* */}
 			@Override
-			protected void initHandlers() throws StopRequestException{}
+			protected void initHandlers() throws StopRequestException{/* */}
 			@Override
 			protected AiPreferenceHandler<?> getPreferenceHandler() throws StopRequestException{return null;}
 			@Override
