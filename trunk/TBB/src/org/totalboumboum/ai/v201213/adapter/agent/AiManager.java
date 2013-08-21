@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201213.adapter.agent;
 import java.awt.Color;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -96,7 +97,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
 	{	super.init(instance,player);
 	
 		loop = RoundVariables.loop;
@@ -345,8 +346,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 				List<Tile> path = new ArrayList<Tile>();
 				enginePaths.add(path);
 				for(AiLocation location: aiPath.getLocations())
-				{	// TODO should be adapted so that the pixel coordinates are used instead of the tiles'
-					AiTile aiTile = location.getTile();
+				{	AiTile aiTile = location.getTile();
 					int row = aiTile.getRow();
 					int col = aiTile.getCol();
 					Tile tile = level.getTile(row,col);
