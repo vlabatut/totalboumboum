@@ -31,6 +31,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,7 +105,7 @@ public abstract class VisibleLoop extends Loop
 		panel.playerOut(index);	
 	}
 	
-	public abstract AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException;
+	public abstract AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, URISyntaxException;
 
 	/////////////////////////////////////////////////////////////////
 	// CANCELATION		/////////////////////////////////////////////
@@ -135,7 +136,7 @@ public abstract class VisibleLoop extends Loop
 	protected Lock loadLock = new ReentrantLock();
 	protected Condition cond = loadLock.newCondition();
 
-	protected abstract void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
+	protected abstract void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException, URISyntaxException;
 
 	public void loadStepOver()
 	{	round.loadStepOver();
@@ -236,6 +237,9 @@ public abstract class VisibleLoop extends Loop
 		{	e.printStackTrace();
 		}
 		catch (NoSuchMethodException e)
+		{	e.printStackTrace();
+		}
+		catch (URISyntaxException e)
 		{	e.printStackTrace();
 		}
 		loadLock.unlock();

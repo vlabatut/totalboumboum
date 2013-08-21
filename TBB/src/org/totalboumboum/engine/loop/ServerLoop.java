@@ -24,6 +24,7 @@ package org.totalboumboum.engine.loop;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -85,7 +86,7 @@ public class ServerLoop extends LocalLoop
 	// INITIALIZING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
+	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException, URISyntaxException
 	{	// control
 		systemControl = new ServerSytemControl(this);
 
@@ -232,7 +233,7 @@ public class ServerLoop extends LocalLoop
 	// PLAYERS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, URISyntaxException
 	{	AbstractPlayer result;
 		if(profile.isRemote())
 		{	result = new RemotePlayer(profile,base,tile,remoteControls);
