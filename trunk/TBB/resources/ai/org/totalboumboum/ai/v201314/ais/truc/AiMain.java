@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._simplet;
+package org.totalboumboum.ai.v201314.ais.truc;
 
 /*
  * Total Boum Boum
@@ -25,12 +25,12 @@ import japa.parser.ParseException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URISyntaxException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201314.ais.truc.v0.Truc;
 import org.xml.sax.SAXException;
 
 /**
@@ -51,9 +51,9 @@ public class AiMain extends AiManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public ArtificialIntelligence instantiateAgent()
-	{	return new Agent();
+	{	return new Truc();
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// VERIFICATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -91,16 +91,14 @@ public class AiMain extends AiManager
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws NoSuchMethodException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
-	 * @throws URISyntaxException 
-	 * 		Problème lors de la localisation du fichier de préférences.
 	 */
-	public static void main(String args[]) throws ParseException, IOException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, URISyntaxException
+	public static void main(String args[]) throws ParseException, IOException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException
 	{	AiMain aiMain = new AiMain();
 		
 		// on applique le parser
 		aiMain.parseSourceCode();
 		
 		// on vérifie si les préférences se chargent normalement
-		aiMain.loadPreferences();
+//		aiMain.loadPreferences();
 	}
 }

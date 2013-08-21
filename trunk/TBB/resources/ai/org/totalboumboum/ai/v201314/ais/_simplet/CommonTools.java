@@ -44,7 +44,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public class CommonTools extends AiAbstractHandler<Simplet>
+public class CommonTools extends AiAbstractHandler<Agent>
 {	
 	/**
 	 * Initialise la classe avec l'IA
@@ -56,7 +56,7 @@ public class CommonTools extends AiAbstractHandler<Simplet>
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected CommonTools(Simplet ai) throws StopRequestException
+	protected CommonTools(Agent ai) throws StopRequestException
 	{	super(ai);
 		ai.checkInterruption();
 		

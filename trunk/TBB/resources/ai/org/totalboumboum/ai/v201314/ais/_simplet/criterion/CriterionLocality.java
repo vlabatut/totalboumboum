@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.ais._simplet.CommonTools;
-import org.totalboumboum.ai.v201314.ais._simplet.Simplet;
+import org.totalboumboum.ai.v201314.ais._simplet.Agent;
 
 /**
  * Cette classe représente le critère de localité.
@@ -37,7 +37,7 @@ import org.totalboumboum.ai.v201314.ais._simplet.Simplet;
  * 
  * @author Vincent Labatut
  */
-public class CriterionLocality extends AiCriterionInteger<Simplet>
+public class CriterionLocality extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "LOCALITY";
 	
@@ -50,7 +50,7 @@ public class CriterionLocality extends AiCriterionInteger<Simplet>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionLocality(Simplet ai) throws StopRequestException
+	public CriterionLocality(Agent ai) throws StopRequestException
 	{	// init nom
 		super(ai,NAME,0,LOCALITY_LIMIT);
 		ai.checkInterruption();

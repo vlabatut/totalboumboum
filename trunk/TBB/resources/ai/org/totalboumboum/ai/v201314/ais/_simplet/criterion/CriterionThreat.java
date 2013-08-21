@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._simplet.CommonTools;
-import org.totalboumboum.ai.v201314.ais._simplet.Simplet;
+import org.totalboumboum.ai.v201314.ais._simplet.Agent;
 
 /**
  * Cette classe représente le critère de menace envers l'adversaire.
@@ -36,7 +36,7 @@ import org.totalboumboum.ai.v201314.ais._simplet.Simplet;
  * 
  * @author Vincent Labatut
  */
-public class CriterionThreat extends AiCriterionInteger<Simplet>
+public class CriterionThreat extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "THREAT";
 	
@@ -49,7 +49,7 @@ public class CriterionThreat extends AiCriterionInteger<Simplet>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionThreat(Simplet ai) throws StopRequestException
+	public CriterionThreat(Agent ai) throws StopRequestException
 	{	// init nom
 		super(ai,NAME,1,THREAT_LIMIT);
 		ai.checkInterruption();
