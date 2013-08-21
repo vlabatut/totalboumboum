@@ -23,6 +23,7 @@ package org.totalboumboum.engine.player;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -41,7 +42,7 @@ import org.xml.sax.SAXException;
  */
 public class AiPlayer extends ControlledPlayer
 {	
-	public AiPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	public AiPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, URISyntaxException
 	{	super(profile,base,tile);
 
 		// artificial intelligence
