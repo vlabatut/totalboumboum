@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -101,9 +102,13 @@ public abstract class AiAbstractManager<V>
      * 		Problème lors du chargement des préférences de l'agent. 
      * @throws IOException 
      * 		Problème lors du chargement des préférences de l'agent. 
+     * @throws URISyntaxException 
+	 * 		Problème lors de la localisation du fichier de préférences.
+     * @throws IllegalArgumentException 
+	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
      */
     @SuppressWarnings("unchecked")
-	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
 	{	// input
     	this.player = player;
 		
