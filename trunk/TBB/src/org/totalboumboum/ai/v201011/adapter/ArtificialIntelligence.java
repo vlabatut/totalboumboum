@@ -211,6 +211,6 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 		?	
 	 */
 	public void init() throws StopRequestException
-	{	
+	{	//
 	}
 }

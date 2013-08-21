@@ -1285,7 +1285,7 @@ if(sprite instanceof AiSimBomb)
 	 * 		le personnage relâchant tous ses items
 	 */
 	private void releaseItems(AiSimHero hero)
-	{
+	{	//
 	}
 	
 	/**
