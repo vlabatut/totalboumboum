@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,7 +105,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
 	{	super.init(instance,player);
 	
 		// init fields
@@ -426,8 +427,10 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws NoSuchMethodException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws URISyntaxException 
+	 * 		Problème lors de la localisation du fichier de préférences.
 	 */
-	public void loadPreferences() throws IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	public void loadPreferences() throws IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{	// init les ressources nécessaires
 		XmlTools.init();
 		

@@ -27,6 +27,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,8 +109,10 @@ public class AiPreferenceLoader
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws NoSuchMethodException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws URISyntaxException 
+	 * 		Problème lors de la localisation du fichier de préférences.
 	 */
-	public static <T extends ArtificialIntelligence> void loadAiPreferences(String packName, String aiName, T ai) throws IllegalArgumentException, ParserConfigurationException, SAXException, IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
+	public static <T extends ArtificialIntelligence> void loadAiPreferences(String packName, String aiName, T ai) throws IllegalArgumentException, ParserConfigurationException, SAXException, IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, URISyntaxException
 	{	// check if already loaded
 		if(getHandler(ai)==null)
 		{	// set dummy handler
@@ -128,14 +132,20 @@ public class AiPreferenceLoader
 			// set error message prefix
 			String errMsg = "Error while loading agent "+packName+"/"+aiName+": ";
 	
-			// agent path
-			String agentPath = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName;
+			// version path
+			//String agentPath = FilePaths.getAisPath()+File.separator+packName+File.separator+FileNames.FILE_AIS+File.separator+aiName;
+			String filename = FileNames.FILE_PREFERENCES+FileNames.EXTENSION_XML;
+			URL url = ai.getClass().getResource(filename);
+			if(url==null)
+				throw new FileNotFoundException(errMsg+"cannot find the agent preference file for "+url);
+			File tempFile = new File(url.toURI());
+			String agentPath = tempFile.getParentFile().getPath();
 			
 			// init criteria
 			initCriteria(agentPath, ai, errMsg);
 			
 			// load xml file
-			File dataFile = new File(agentPath+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_XML);
+			File dataFile = new File(agentPath+File.separator+filename);
 			String schemaFolder = FilePaths.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PREFERENCES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
@@ -216,9 +226,14 @@ public class AiPreferenceLoader
 	 */
 	@SuppressWarnings("unchecked")
 	private static <T extends ArtificialIntelligence> void scanFolderForCriteria(File packageFolder, T ai, String errMsg) throws IllegalArgumentException, NoSuchMethodException, FileNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException
-	{	String folderPath = FilePaths.getAiPath();
-		File temp = new File(folderPath);
-		folderPath = temp.getAbsolutePath()+File.separator;
+	{	//String folderPath = FilePaths.getAiPath();
+		//File temp = new File(folderPath);
+		//folderPath = temp.getAbsolutePath()+File.separator;
+		String folderPath = packageFolder.getAbsolutePath();
+		int idx = folderPath.indexOf(FileNames.FILE_ORG);
+		if(idx==-1)
+			throw new FileNotFoundException(errMsg+"invalid agent source code: no 'org' found in the package name "+folderPath);
+		folderPath = folderPath.substring(0,idx);
 		
 		// get the list of criterion classes
 		{	FileFilter filter = new FileFilter()
