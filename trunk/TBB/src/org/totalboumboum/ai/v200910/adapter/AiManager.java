@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v200910.adapter;
 import java.awt.Color;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -88,7 +89,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
 	{	super.init(instance,player);
 	
 		loop = RoundVariables.loop;
