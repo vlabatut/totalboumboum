@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201314.ais._simplet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -48,7 +49,7 @@ import org.xml.sax.SAXException;
  *
  * @author Vincent Labatut
  */
-public class SimpletTest
+public class Test
 {
 	/**
 	 * Méthode de test.
@@ -75,8 +76,10 @@ public class SimpletTest
 	 * 		Problème au chargement des préférences de l'agent.
 	 * @throws IllegalArgumentException 
 	 * 		Problème au chargement des préférences de l'agent.
+	 * @throws URISyntaxException 
+	 * 		Problème lors de la localisation du fichier de préférences.
 	 */
-	public static void main(String args[]) throws StopRequestException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException
+	public static void main(String args[]) throws StopRequestException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{	// on initialise la zone (cf. InitData)
 		AiSimZone zone = InitData.initZone1();
 		
@@ -90,7 +93,7 @@ public class SimpletTest
 		// on initialise l'agent
 		AiMain aiMain = new AiMain();
 		aiMain.loadPreferences();
-		Simplet agent = (Simplet)aiMain.instantiateAgent();
+		Agent agent = (Agent)aiMain.instantiateAgent();
 		agent.setZone(zone);
 		
 		// on veut afficher les calculs de l'agent

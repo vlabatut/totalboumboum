@@ -52,12 +52,12 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
  *
  * @author Vincent Labatut
  */
-public class Simplet extends ArtificialIntelligence
+public class Agent extends ArtificialIntelligence
 {
 	/**
 	 * Instancie la classe principale de l'agent.
 	 */
-	public Simplet()
+	public Agent()
 	{	verbose = false;
 	}
 	
@@ -142,25 +142,25 @@ public class Simplet extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler<Simplet> getModeHandler() throws StopRequestException
+	protected AiModeHandler<Agent> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiPreferenceHandler<Simplet> getPreferenceHandler() throws StopRequestException
+	protected AiPreferenceHandler<Agent> getPreferenceHandler() throws StopRequestException
 	{	checkInterruption();
 		return preferenceHandler;
 	}
 
 	@Override
-	protected AiBombHandler<Simplet> getBombHandler() throws StopRequestException
+	protected AiBombHandler<Agent> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler<Simplet> getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<Agent> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}

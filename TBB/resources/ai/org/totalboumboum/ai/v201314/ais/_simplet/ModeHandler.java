@@ -34,7 +34,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * 
  * @author Vincent Labatut
  */
-public class ModeHandler extends AiModeHandler<Simplet>
+public class ModeHandler extends AiModeHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -45,7 +45,7 @@ public class ModeHandler extends AiModeHandler<Simplet>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected ModeHandler(Simplet ai) throws StopRequestException
+	protected ModeHandler(Agent ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		

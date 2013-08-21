@@ -35,7 +35,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
-public class BombHandler extends AiBombHandler<Simplet>
+public class BombHandler extends AiBombHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -46,7 +46,7 @@ public class BombHandler extends AiBombHandler<Simplet>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected BombHandler(Simplet ai) throws StopRequestException
+	protected BombHandler(Agent ai) throws StopRequestException
     {	super(ai);
     	ai.checkInterruption();
 		

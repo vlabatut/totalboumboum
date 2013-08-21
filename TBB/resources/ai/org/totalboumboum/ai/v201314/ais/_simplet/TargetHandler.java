@@ -39,7 +39,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * 
  * @author Vincent Labatut
  */
-public class TargetHandler extends AiAbstractHandler<Simplet>
+public class TargetHandler extends AiAbstractHandler<Agent>
 {	
 	/**
 	 * Initialise la classe avec l'IA
@@ -51,7 +51,7 @@ public class TargetHandler extends AiAbstractHandler<Simplet>
 	 * @throws StopRequestException
 	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected TargetHandler(Simplet ai) throws StopRequestException
+	protected TargetHandler(Agent ai) throws StopRequestException
 	{	super(ai);
 		ai.checkInterruption();
 		

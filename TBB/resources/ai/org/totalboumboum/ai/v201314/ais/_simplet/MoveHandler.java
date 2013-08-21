@@ -93,7 +93,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public class MoveHandler extends AiMoveHandler<Simplet>
+public class MoveHandler extends AiMoveHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
@@ -104,7 +104,7 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected MoveHandler(Simplet ai) throws StopRequestException
+	protected MoveHandler(Agent ai) throws StopRequestException
     {	super(ai);
 		ai.checkInterruption();
 		
