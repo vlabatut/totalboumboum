@@ -1644,28 +1644,32 @@ public class Launcher
 /* TODO
  * - évolution des stats globales
  * 		- rajouter un bouton dans le menu principal, sous g-2/sc/conf : table vs. graphique
- * 		- ça fait trois panels graphiques différents, chacun avec ses propres boutons
- * 		- pb : comment choisir les joueurs a afficher ?
- * 			>> on pourrait simplement les selectionner en cliquant sur leur nom dans la table
- * 			>> mais alors, comment donner/changer la legende ?
- * 			>> faut un bouton de couleur specifique, qu'on peut faire cycler
- * 			>> faire carrement une table de selection, avec le rang, le nom, la couleur et le type (hu/mach)
+ * 			- ça fait trois panels graphiques différents, chacun avec ses propres "boutons"
+ * 		- encore en dessous : bouton sélection
+ * 			- affiche une table simplifiée permettant de sélectionner jusqu'à 16 joueurs
+ * 			- croix vs. mark, rang, type (hu/mach), nom, couleur dans le graphique (cyclable)
+ * 			- le classement est conservé quand on passe à cet écran (par rapport aux tables plus complète)
  * 		- nécessaire de changer le stockage des stats
  * 		- résolution temporelle ? rounds ? dates ? mises à jour G-2 ?
  * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
  */
 
 // TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
+
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
 // 		>> comment (ergonomie) ? 
 //			combi avec les touches numériques ? >> pas pratique). 
 //			ou alors avec control droite >> pas possible
 //		>> faire défiler ? (encore moins pratique)
 //		>> utiliser une fenêtre séparée ?
+
 // TODO dégager les threads des agents qui ont été éliminés
 //		>> plus d'appel par le moteur
 //		>> ràz des stats de temps pour les plots ingame
-// TODO dans l'évolution de la partie, afficher l'occupation processeur
+
+// TODO dans les stats d'évolution de la partie, afficher l'occupation processeur
+
 // TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
+
 // TODO faire apparaitre graphiquement les résultats d'un round en surimpression sur la zone de jeu
 // TODO insérer une animation optionnelle de présentation des participants au round
