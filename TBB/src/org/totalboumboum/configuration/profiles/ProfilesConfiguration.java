@@ -419,9 +419,6 @@ public class ProfilesConfiguration
 		addAllProfiles(profiles,additionalProfiles);
 	}
 	
-	/** Marks the last player used by the auto-advance complete method */
-	private static int autoAdvanceIndex = 0;
-	
 	/**
 	 * Automatically selects player for the 
 	 * tournament mode of the auto-advance
@@ -450,7 +447,9 @@ public class ProfilesConfiguration
 	 * 		Problem while loading a profile. 
 	 */
 	public static List<Profile> autoAdvanceComplete() throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, ParserConfigurationException, SAXException, IOException
-	{	// get player ranks
+	{	int autoAdvanceIndex = Configuration.getGameConfiguration().getTournamentConfiguration().getAutoAdvanceIndex();
+		
+		// get player ranks
 		RankingService rankingService = GameStatistics.getRankingService();
 		Set<String> playerIds = rankingService.getPlayers();
 		String playerRanks[] = new String[playerIds.size()];
@@ -462,7 +461,7 @@ public class ProfilesConfiguration
 		// fill a list with 16 players starting from the index
 		List<Profile> temp = new ArrayList<Profile>();
 		int i = 0;
-		while(i<16 && autoAdvanceIndex<playerIds.size())
+		while(i<GameData.MAX_PROFILES_COUNT && autoAdvanceIndex<playerIds.size())
 		{	String playerId = playerRanks[autoAdvanceIndex];
 			Profile profile = ProfileLoader.loadProfile(playerId);
 			temp.add(profile);
@@ -473,6 +472,7 @@ public class ProfilesConfiguration
 		// possibly reset the index
 		if(autoAdvanceIndex==playerIds.size())
 			autoAdvanceIndex = 0;
+		Configuration.getGameConfiguration().getTournamentConfiguration().setAutoAdvanceIndex(autoAdvanceIndex);
 		
 		// create selection
 		List<Profile> result = new ArrayList<Profile>();
