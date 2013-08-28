@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,15 +48,16 @@ import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
+import org.totalboumboum.tools.GameData;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
@@ -409,6 +411,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	 */
 	private void refreshList()
 	{	EmptyContentPanel dataPanel = getDataPanel();
+		
 		// remove the old panel
 		int index = GuiMiscTools.indexOfComponent(dataPanel,mainPanel);
 		dataPanel.remove(index);
@@ -569,17 +572,17 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
@@ -643,6 +646,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				}
 			}
 		}
+		
 		// table buttons
 		else
 		{	int[] p = mainPanel.getLabelPositionSimple(label);
@@ -654,51 +658,158 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			}
 			// add/remove
 			else if(p[1]==0)
-			{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
-				RankingService rankingService = GameStatistics.getRankingService();
-				Set<String> playersIds = rankingService.getPlayers();
-				if(playersIds.contains(playerId))
-					GameStatistics.getRankingService().deregisterPlayer(playerId);
-				else
-					GameStatistics.getRankingService().registerPlayer(playerId);
-				// save the new rankings
-				try
-				{	GameStatistics.saveStatistics();
+			{	String buttonKey = label.getKey();
+				// register/unregister
+				if(buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER) || buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER))
+				{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
+					RankingService rankingService = GameStatistics.getRankingService();
+					Set<String> playersIds = rankingService.getPlayers();
+					if(playersIds.contains(playerId))
+						GameStatistics.getRankingService().deregisterPlayer(playerId);
+					else
+						GameStatistics.getRankingService().registerPlayer(playerId);
+					// save the new rankings
+					try
+					{	GameStatistics.saveStatistics();
+					}
+					catch (IllegalArgumentException e1)
+					{	e1.printStackTrace();
+					}
+					catch (SecurityException e1)
+					{	e1.printStackTrace();
+					}
+					catch (IOException e1)
+					{	e1.printStackTrace();
+					}
+					catch (ParserConfigurationException e1)
+					{	e1.printStackTrace();
+					}
+					catch (SAXException e1)
+					{	e1.printStackTrace();
+					}
+					catch (IllegalAccessException e1)
+					{	e1.printStackTrace();
+					}
+					catch (NoSuchFieldException e1)
+					{	e1.printStackTrace();
+					}
+					catch (ClassNotFoundException e1)
+					{	e1.printStackTrace();
+					}
+					refresh();
 				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
+				else if(buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SELECT) || buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNSELECT))
+				{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
+					HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					PlayerStats playerStats = playersStats.get(playerId);
+					if(playerStats.isSelected())
+						playerStats.setSelectedColor(null);
+					else
+					{	// check number of selected players
+						int selectedNbr = 0;
+						for(PlayerStats playerStat: playersStats.values())
+						{	PredefinedColor c = playerStat.getSelectedColor();
+							if(c!=null)
+								selectedNbr++;
+						}
+						if(selectedNbr<GameData.MAX_PROFILES_COUNT)
+						{	// select player
+							Profile profile = profilesMap.get(playerId);
+							PredefinedColor color = profile.getSpriteColor();
+							if(!isFreeColor(color))
+								color = getNextFreeColor(color);
+							playerStats.setSelectedColor(color);
+						}
+					}
+					// TODO save stats, to keep selection? can save only data, faster
+					refresh();
 				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
+			}
+			else
+			{	String buttonKey = label.getKey();
+			
+				if(buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_COLOR))
+				{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
+					HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					PlayerStats playerStats = playersStats.get(playerId);
+					PredefinedColor color = playerStats.getSelectedColor();
+					if(color!=null)
+					{	color = getNextFreeColor(color);
+						playerStats.setSelectedColor(color);
+						refresh();
+					}
 				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				refresh();
 			}
 		}
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// COLORS								/////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the next color not already used (by a selected player),
+	 * using the specified color as a starting point.
+	 * 
+	 * @param color
+	 * 		Starting point (for cycling).
+	 * @return
+	 * 		Next free color.
+	 */
+	public PredefinedColor getNextFreeColor(PredefinedColor color)
+	{	PredefinedColor result = null;
+		
+		// used colors
+		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		List<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
+		for(PlayerStats p: playersStats.values())
+		{	PredefinedColor clr = p.getSelectedColor();
+			if(clr!=null)
+				usedColors.add(clr);
+		}
+		
+		// preferred colors
+		List<PredefinedColor> preferredColors = new ArrayList<PredefinedColor>();
+		for(PredefinedColor c: PredefinedColor.values())
+		{	if(c==color || (!usedColors.contains(c) && !preferredColors.contains(c)))
+				preferredColors.add(c);
+		}
+		
+		// select a color
+		int currentColorIndex = preferredColors.indexOf(color);
+		int index = (currentColorIndex+1) % preferredColors.size();
+		if(index<preferredColors.size())
+			result = preferredColors.get(index);
+		
+		return result;
+	}
+
+	/**
+	 * Determines if the specified color
+	 * is already used by another selected player.
+	 * 
+	 * @param color
+	 * 		Color to be checked.
+	 * @return
+	 * 		{@code true} iff the color is not currently used
+	 * 		by any other selected player. 
+	 */
+	public boolean isFreeColor(PredefinedColor color)
+	{	boolean result = true;
+		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		Iterator<PlayerStats> it = playersStats.values().iterator();
+		while(it.hasNext() && result)
+		{	PlayerStats p = it.next();
+			PredefinedColor clr = p.getSelectedColor();
+			result = clr!=color;
+		}
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY								/////////////////////////
 	/////////////////////////////////////////////////////////////////
