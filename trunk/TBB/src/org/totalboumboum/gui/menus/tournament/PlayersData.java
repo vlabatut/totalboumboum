@@ -31,6 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
@@ -43,21 +44,26 @@ import org.totalboumboum.gui.menus.tournament.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.stream.network.data.game.GameInfo;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
-import org.totalboumboum.stream.network.server.ServerGeneralConnectionListener;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexionListener;
 import org.xml.sax.SAXException;
 
 /**
+ * Tihs class allows selecting players
+ * for a tournament.
  * 
  * @author Vincent Labatut
- *
  */
-public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, ServerGeneralConnectionListener
-{	
+public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, ServerGeneralConnexionListener
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 	
-	private PlayersSelectionSubPanel playersPanel;
-	
+	/**
+	 * Creates a new panel to select players for a tournament.
+	 * 
+	 * @param container
+	 * 		Container of this panel.
+	 */
 	public PlayersData(SplitMenuPanel container)
 	{	super(container);
 		
@@ -74,6 +80,9 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel displaying the player selection table */
+	private PlayersSelectionSubPanel playersPanel;
+
 	@Override
 	public void refresh()
 	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
@@ -85,9 +94,16 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT CONFIGURATION		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current tournament configuration */
 	private TournamentConfiguration tournamentConfiguration;
 //	private ArrayList<Profile> players;
 	
+	/**
+	 * Setup the tournament configuration.
+	 * 
+	 * @param tournamentConfiguration
+	 * 		Tournament configuration to set up.
+	 */
 	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
 	{	this.tournamentConfiguration = tournamentConfiguration;
 		AbstractTournament tournament = tournamentConfiguration.getTournament();
@@ -133,10 +149,61 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
 	}
 	
+	/**
+	 * Returns the players selected
+	 * for this tournament.
+	 * 
+	 * @return
+	 * 		A list of player profiles.
+	 */
 	public List<Profile> getSelectedProfiles()
 	{	return playersPanel.getPlayers();	
 	}
 
+	public void autoSelectPlayers()
+	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
+		Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
+		
+		List<Profile> profiles = new ArrayList<Profile>();
+		try
+		{	profiles = ProfilesConfiguration.autoAdvanceComplete();
+		}
+		catch (IllegalArgumentException e)
+		{	e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{	e.printStackTrace();
+		}
+		catch (NoSuchFieldException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		
+		// remove distant profiles
+		Iterator<Profile> it = profiles.iterator();
+		while(it.hasNext())
+		{	Profile profile = it.next();
+			if(profile.isRemote())
+				it.remove();
+		}
+		
+		playersPanel.setPlayers(profiles,allowedPlayers);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PLAYER SELECTION LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -155,9 +222,9 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
-	{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(connection!=null)
-			connection.profileRemoved(index);
+	{	ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		if(connexion!=null)
+			connexion.profileRemoved(index);
 		fireDataPanelSelectionChange(null);
 	}
 
@@ -170,17 +237,17 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void playerSelectionPlayersAdded()
 	{	// NOTE this would be so much cleaner with an events system...
-		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(connection!=null)
-			connection.profilesAdded(playersPanel.getPlayers());
+		ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		if(connexion!=null)
+			connexion.profilesAdded(playersPanel.getPlayers());
 	}
 
 	@Override
 	public void playerSelectionColorSet(int index)
 	{	Profile profile = playersPanel.getPlayer(index);
-		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(connection!=null)
-			connection.profileModified(profile);
+		ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		if(connexion!=null)
+			connexion.profileModified(profile);
 	}
 
 	@Override
@@ -191,12 +258,16 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	// SERVER CONNECTION LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ServerGeneralConnection connection = null;
+	/** Online connexion of this tournament */
+	private ServerGeneralConnexion connexion = null;
 	
-	public void setConnection()
-	{	connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(connection!=null)
-		{	connection.addListener(this);
+	/**
+	 * Set up the connexion for an online game.
+	 */
+	public void setConnexion()
+	{	connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		if(connexion!=null)
+		{	connexion.addListener(this);
 			List<Profile> players = playersPanel.getPlayers();
 			Set<Integer> allowedPlayers = playersPanel.getAllowedPlayers();
 			playersPanel.setPlayers(players, allowedPlayers);
@@ -206,8 +277,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void profileAdded(int index, Profile profile)
 	{	// NOTE ugly fix
-		List<Profile> profiles = connection.getPlayerProfiles();
-		GameInfo gameInfo = connection.getGameInfo();
+		List<Profile> profiles = connexion.getPlayerProfiles();
+		GameInfo gameInfo = connexion.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
 		// menu might have to update button
 		fireDataPanelSelectionChange(profile);
@@ -216,8 +287,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void profileRemoved(Profile profile)
 	{	// NOTE ugly fix
-		List<Profile> profiles = connection.getPlayerProfiles();
-		GameInfo gameInfo = connection.getGameInfo();
+		List<Profile> profiles = connexion.getPlayerProfiles();
+		GameInfo gameInfo = connexion.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
 		// menu might have to update button
 		fireDataPanelSelectionChange(profile);
@@ -226,8 +297,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void profileModified(Profile profile)
 	{	// NOTE ugly fix
-		List<Profile> profiles = connection.getPlayerProfiles();
-		GameInfo gameInfo = connection.getGameInfo();
+		List<Profile> profiles = connexion.getPlayerProfiles();
+		GameInfo gameInfo = connexion.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
 		// menu might have to update button
 		fireDataPanelSelectionChange(profile);
@@ -236,8 +307,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void profileSet(int index, Profile profile)
 	{	// NOTE ugly fix
-		List<Profile> profiles = connection.getPlayerProfiles();
-		GameInfo gameInfo = connection.getGameInfo();
+		List<Profile> profiles = connexion.getPlayerProfiles();
+		GameInfo gameInfo = connexion.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
 		// menu might have to update button
 		fireDataPanelSelectionChange(profile);

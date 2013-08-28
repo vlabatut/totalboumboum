@@ -29,6 +29,7 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.game.tournament.TournamentMenu;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
@@ -71,5 +72,18 @@ public class TournamenuSplitPanel extends SplitMenuPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// AUTO ADVANCE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Automatically clicks on the appropriate
+	 * buttons in order to progress in the tournament.
+	 * Used to automatically chain many tournaments,
+	 * while evaluating agents.
+	 */
+	public void autoAdvance()
+	{	((TournamenuMenu)menuPart).autoAdvance();
 	}
 }

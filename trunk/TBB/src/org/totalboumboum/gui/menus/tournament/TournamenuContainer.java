@@ -38,13 +38,23 @@ import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
 /**
+ * Class containing both tournament settings and actual tournament panels.
  * 
  * @author Vincent Labatut
- *
  */
 public class TournamenuContainer extends MenuPanel implements MenuContainer
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Creates a new container for tournament
+	 * setting/playing.
+	 * 
+	 * @param container
+	 * 		Container of this panel.
+	 * @param parent
+	 * 		Parent menu of this menu.
+	 */
 	public TournamenuContainer(MenuContainer container, MenuPanel parent)
 	{	super(container.getMenuWidth(),container.getMenuHeight());
 		
@@ -58,7 +68,7 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		this.container = container;
 		this.parent = parent;
 		
-		// split panel
+		// split panels
 		tournamentSplitPanel = new TournamentSplitPanel(this,parent);
 		menuSplitPanel = new TournamenuSplitPanel(this,parent);
 		menuSplitPanel.setTournamentPanel(tournamentSplitPanel);
@@ -66,7 +76,6 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		loadSplitPanel.setTournamentPanel(tournamentSplitPanel);
 		setMenuPanel(menuSplitPanel);
 	}	
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// REFRESH			/////////////////////////////////////////////
@@ -86,16 +95,23 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 	
 */
 	
-	
-	
 	/////////////////////////////////////////////////////////////////
 	// SPLIT PANELS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel used to setup the tournament */
 	private TournamenuSplitPanel menuSplitPanel;
+	/** Panel used to display the tournament */
 	private TournamentSplitPanel tournamentSplitPanel;
+	/** Panel used to load some previously started tournament */
 	private LoadSplitPanel loadSplitPanel;
+	/** First time a tournament is launched in this session (might load previous settings) */
 	private boolean firstTime = true;
 	
+	/**
+	 * Initializes the panel: decides whether some settings
+	 * (new tournament) or actual tournament (already started tournament)
+	 * should be displayed in this container. 
+	 */
 	public void initTournament()
 	{	TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
 		if(tournamentConfiguration.getAutoLoad() && firstTime)
@@ -133,6 +149,11 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		}
 	}
 	
+	/**
+	 * Initializes the loading panel,
+	 * allowing to continue a previously
+	 * started tournament.
+	 */
 	public void initLoad()
 	{	loadSplitPanel.refresh();
 		setMenuPanel(loadSplitPanel);
@@ -141,6 +162,7 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// MENU CONTAINER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Menu of this container */
 	protected MenuPanel menuPart;
 
 	@Override
@@ -164,4 +186,18 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		repaint();		
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// AUTO ADVANCE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Automatically clicks on the appropriate
+	 * buttons in order to progress in the tournament.
+	 * Used to automatically chain many tournaments,
+	 * while evaluating agents.
+	 */
+	public void autoAdvance()
+	{	// we only transmit the order to the tournament menu
+		if(this.menuPart==menuSplitPanel)
+			((TournamenuSplitPanel)menuPart).autoAdvance();
+	}
 }
