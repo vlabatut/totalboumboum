@@ -31,8 +31,8 @@ import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.stream.file.replay.FileServerStream;
-import org.totalboumboum.stream.network.client.ClientGeneralConnection;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.totalboumboum.tools.GameData;
 
 /**
@@ -102,9 +102,9 @@ public class RoundVariables
 	{	if(fileOut!=null && event.getSendEvent())
 			fileOut.writeEvent(event);
 	
-		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(connection!=null && event.getSendEvent())
-		{	connection.sendReplay(event);
+		ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		if(connexion!=null && event.getSendEvent())
+		{	connexion.sendReplay(event);
 		}
 	}
 
@@ -115,9 +115,9 @@ public class RoundVariables
 	 * 		Control event to be written.
 	 */
 	public static void writeEvent(RemotePlayerControlEvent event)
-	{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.sendControl(event);
+	{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		if(connexion!=null)
+			connexion.sendControl(event);
 	}
 	
 	/**
@@ -133,9 +133,9 @@ public class RoundVariables
 	{	if(fileOut!=null)
 			fileOut.writeZoomCoef(zoomCoef);
 	
-		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(connection!=null)
-		{	connection.updateZoomCoef(zoomCoef);
+		ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		if(connexion!=null)
+		{	connexion.updateZoomCoef(zoomCoef);
 		}
 	}
 	
