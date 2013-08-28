@@ -29,11 +29,16 @@
 		<xsd:attribute name="autosave" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tAutoAdvance">
+		<xsd:attribute name="index" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tTournament">
 		<xsd:sequence>
 			<xsd:element name="options" type="tOptions" />
 			<xsd:element name="tournament" type="tConfrontation" />
 			<xsd:element name="players" type="tPlayers" />
+			<xsd:element name="autoAdvance" type="tAutoAdvance" />
 			</xsd:sequence>
 	</xsd:complexType>
 	
