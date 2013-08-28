@@ -32,6 +32,7 @@ import java.util.*;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 class PairWiseGameResultsList extends ArrayList<PairWiseGameResult> {
     private static final long serialVersionUID = 1L;
     
@@ -43,7 +44,8 @@ class PairWiseGameResultsList extends ArrayList<PairWiseGameResult> {
       * @param o 
       * @return 
       */
-    public boolean add(PairWiseGameResult o) {
+    @Override
+	public boolean add(PairWiseGameResult o) {
         numberOfPairWiseGameResults++;
         return super.add(o);
     }

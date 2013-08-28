@@ -62,6 +62,7 @@ import org.totalboumboum.statistics.GameStatistics;
   * @author Derek Hilder
   * @author Vincent Labatut
   */
+@SuppressWarnings("javadoc")
 public class RankingService implements Serializable {
     private static final long serialVersionUID = 1L;
         

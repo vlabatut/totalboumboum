@@ -44,13 +44,38 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * This class is in charge for recording the Glicko-2 statistics,
+ * for all the registered players.
  * 
  * @author Vincent Labatut
- *
  */
 public class Glicko2Saver
-{	private static final boolean verbose = false;
+{	/** Mute or display debug messages */
+	private static final boolean verbose = false;
 
+	/**
+	 * Record the Glicko-2 statistics as a serialized java object.
+	 * 
+	 * @param rankingService
+	 * 		Glicko-2 statistics to be recorded.
+	 * 
+	 * @throws IOException
+	 * 		Problem while recording the serialized file.
+	 * @throws IllegalArgumentException
+	 * 		Problem while recording the serialized file.
+	 * @throws SecurityException
+	 * 		Problem while recording the serialized file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while recording the serialized file.
+	 * @throws SAXException
+	 * 		Problem while recording the serialized file.
+	 * @throws IllegalAccessException
+	 * 		Problem while recording the serialized file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while recording the serialized file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while recording the serialized file.
+	 */
 	public static void saveGlicko2Statistics(RankingService rankingService) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
 		String path = FilePaths.getGlicko2Path()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
@@ -91,6 +116,29 @@ public class Glicko2Saver
 		}
 	}
 
+	/**
+	 * (Re)Initializes the Glicko-2 stats of all registered players.
+	 * 
+	 * @return
+	 * 		Glicko-2 statistics.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while recording the serialized file.
+	 * @throws SecurityException
+	 * 		Problem while recording the serialized file.
+	 * @throws IOException
+	 * 		Problem while recording the serialized file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while recording the serialized file.
+	 * @throws SAXException
+	 * 		Problem while recording the serialized file.
+	 * @throws IllegalAccessException
+	 * 		Problem while recording the serialized file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while recording the serialized file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while recording the serialized file.
+	 */
 	public static ResultsBasedRankingService initGlicko2Statistics() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// change ranking properties
 		
@@ -113,7 +161,13 @@ public class Glicko2Saver
 	}
 
 	/**
-	 * export glicko2 stats as text (for stats maintenance through classes changes)
+	 * Export Glicko-2 stats as text (for stats maintenance through classes changes).
+	 * 
+	 * @param rankingService
+	 * 		Stats to be exported.
+	 * 
+	 * @throws FileNotFoundException
+	 * 		Problem while accessing the text file. 
 	 */
 	public static void exportGlicko2Statistics(RankingService rankingService) throws FileNotFoundException
 	{	// open the file

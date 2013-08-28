@@ -33,6 +33,7 @@ import java.util.Iterator;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 public class TimerBasedRankingService extends RankingService {
     private static final long serialVersionUID = 1L;
 
@@ -66,7 +67,8 @@ public class TimerBasedRankingService extends RankingService {
 
         // Start a timer thread to do periodic updates of player ratings
         updateTimer = new Thread("Glicko2.Timer") {
-            public void run() {
+            @Override
+			public void run() {
                 updating = true;
                 while (updating) {
 
@@ -82,7 +84,7 @@ public class TimerBasedRankingService extends RankingService {
                     try {
                         Thread.sleep(TimerBasedRankingService.this.updatePeriod * 1000);
                     }
-                    catch (InterruptedException ie) {
+                    catch (InterruptedException ie) {//
                     }
 
                     if (!paused) {
@@ -109,7 +111,8 @@ public class TimerBasedRankingService extends RankingService {
       * on the results posted during the period, then a new rating period will
       * begin.
       */
-    public void endPeriod() {
+    @Override
+	public void endPeriod() {
         updateTimer.interrupt();
     }
     
@@ -129,7 +132,7 @@ public class TimerBasedRankingService extends RankingService {
         try {
             updateTimer.join();
         }
-        catch (InterruptedException ie) {
+        catch (InterruptedException ie) {//
         }
     }
     

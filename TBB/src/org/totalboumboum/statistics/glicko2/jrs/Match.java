@@ -30,6 +30,7 @@ import java.io.Serializable;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 public class Match implements Comparable<Match>, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -64,7 +65,8 @@ public class Match implements Comparable<Match>, Serializable {
       * @return 
       *     <code>true</code> if the objects are equal.
       */
-    public boolean equals(Object o) {
+    @Override
+	public boolean equals(Object o) {
         boolean result = false;
     	if(o instanceof Match)
         {	Match m = (Match)o;
@@ -86,7 +88,8 @@ public class Match implements Comparable<Match>, Serializable {
       *     An int greater than 0 indicates this object is greater than the object specified.
       *     0 indicates the objects are equal.
       */
-    public int compareTo(Match m) {
+    @Override
+	public int compareTo(Match m) {
         return (new Double(probabilityOfDraw).compareTo(new Double(m.probabilityOfDraw))) * -1;
     }
 

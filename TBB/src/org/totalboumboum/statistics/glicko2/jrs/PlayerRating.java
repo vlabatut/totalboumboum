@@ -38,6 +38,7 @@ import java.util.Scanner;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 public class PlayerRating implements Comparable<PlayerRating>, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -278,7 +279,8 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       * @return 
       *     <code>true</code> if the objects are equal.
       */
-    public boolean equals(Object o) {
+    @Override
+	public boolean equals(Object o) {
         boolean result = false;
     	if(o instanceof PlayerRating)
         {	PlayerRating other = (PlayerRating)o;
@@ -303,7 +305,8 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       *     <code>0</code> if it is equal to the specified object, and
       *     <code>1</code> if it is greater than the specified object.
       */
-    public int compareTo(PlayerRating other) {
+    @Override
+	public int compareTo(PlayerRating other) {
         if (this.rating < other.rating) {
             return 1;
         }

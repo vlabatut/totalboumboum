@@ -4,6 +4,7 @@ package org.totalboumboum.statistics.glicko2.jrs;
  *
  * @author Derek Hilder
  */
+@SuppressWarnings("javadoc")
 public class TestProba {
 
 	/**
