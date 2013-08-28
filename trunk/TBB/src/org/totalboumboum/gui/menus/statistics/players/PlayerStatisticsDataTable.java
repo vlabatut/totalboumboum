@@ -42,14 +42,14 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class PlayerStatisticsData extends EntitledDataPanel
+public class PlayerStatisticsDataTable extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 	
 	private static final int LINES = 16;
 	private PlayerStatisticSubPanel mainPanel;
 	
-	public PlayerStatisticsData(SplitMenuPanel container)
+	public PlayerStatisticsDataTable(SplitMenuPanel container)
 	{	super(container);
 
 		// title
@@ -106,7 +106,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 	public void setView(String view)
 	{	List<StatisticColumn> columns = new ArrayList<StatisticColumn>();
 		if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
-		{	columns.add(StatisticColumn.GENERAL_BUTTON);
+		{	columns.add(StatisticColumn.GENERAL_REG_BUTTON);
 			columns.add(StatisticColumn.GENERAL_RANK);
 			columns.add(StatisticColumn.GENERAL_EVOLUTION);
 			columns.add(StatisticColumn.GENERAL_TYPE);
@@ -116,7 +116,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			columns.add(StatisticColumn.GLICKO_ROUNDCOUNT);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES))
-		{	columns.add(StatisticColumn.GENERAL_BUTTON);
+		{	columns.add(StatisticColumn.GENERAL_REG_BUTTON);
 			columns.add(StatisticColumn.GENERAL_RANK);
 			columns.add(StatisticColumn.GENERAL_TYPE);
 			columns.add(StatisticColumn.GENERAL_NAME);
@@ -127,7 +127,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			columns.add(StatisticColumn.SCORE_BOMBINGS);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))
-		{	columns.add(StatisticColumn.GENERAL_BUTTON);
+		{	columns.add(StatisticColumn.GENERAL_REG_BUTTON);
 			columns.add(StatisticColumn.GENERAL_RANK);
 			columns.add(StatisticColumn.GENERAL_TYPE);
 			columns.add(StatisticColumn.GENERAL_NAME);
@@ -136,6 +136,13 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			columns.add(StatisticColumn.ROUNDS_DRAWN);
 			columns.add(StatisticColumn.ROUNDS_LOST);
 			columns.add(StatisticColumn.SCORE_TIME);
+		}
+		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SELECTION))
+		{	columns.add(StatisticColumn.GENERAL_SELECT_BUTTON);
+			columns.add(StatisticColumn.GENERAL_RANK);
+			columns.add(StatisticColumn.GENERAL_TYPE);
+			columns.add(StatisticColumn.GENERAL_NAME);
+			columns.add(StatisticColumn.GENERAL_COLOR_BUTTON);
 		}
 		mainPanel.setColumns(columns);
 	}
