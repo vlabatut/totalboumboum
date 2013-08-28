@@ -23,6 +23,8 @@ package org.totalboumboum.statistics.detailed;
 
 import java.util.List;
 
+import org.totalboumboum.statistics.overall.PlayerStats.Value;
+
 /**
  * 
  * @author Vincent Labatut
@@ -30,21 +32,25 @@ import java.util.List;
  */
 public enum Score
 {	/** number of bombs dropped */
-	BOMBS, 
+	BOMBS(Value.BOMBS), 
 	/** number of crowns picked up */
-	CROWNS, 
+	CROWNS(Value.CROWNS), 
 	/** number of times bombed by other players */
-	BOMBEDS,
+	BOMBEDS(Value.BOMBEDS),
 	/** number of items picked up */
-	ITEMS, 
+	ITEMS(Value.ITEMS), 
 	/** number of other players bombed */
-	BOMBINGS,
+	BOMBINGS(Value.BOMBINGS),
 	/** number of tiles painted */
-	PAINTINGS, 
+	PAINTINGS(Value.PAINTINGS), 
 	/** number of times the player bombed himself */
-	SELF_BOMBINGS, 
+	SELF_BOMBINGS(Value.SELF_BOMBINGS), 
 	/** time played */
-	TIME;
+	TIME(Value.TIME);
+	
+	Score(Value value)
+	{	this.value = value;
+	}
 	
 	public long[] process(StatisticRound stats, StatisticEvent event)
 	{	long[] result = new long[stats.getPlayersIds().size()];
@@ -190,5 +196,11 @@ public enum Score
 		raw = raw.toLowerCase();
 		result.append(raw.substring(1,raw.length()));
 		return result.toString();
+	}
+
+	private Value value = null;
+	
+	public Value getValue()
+	{	return value;
 	}
 }
