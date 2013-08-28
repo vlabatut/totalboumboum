@@ -778,7 +778,7 @@ public class Launcher
 	
 	/*    
 	 * TODO à faire :
-	 *  - la deconnection en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur, à toutes les phases de la gui/du jeu
+	 *  - la deconnexion en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur, à toutes les phases de la gui/du jeu
 	 *  
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
@@ -787,33 +787,33 @@ public class Launcher
 	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est décidé unilatéralement
 	 *  - déterminer les ressources à synchroniser et... le faire rigoureusement
 	 *  - penser à tester systématiquement si l'état du c/s qui reçoit un evt est compatible avec le traitement de cet evt 
-	 *  - tout evt transmis à la connection générale par l'indiv doit identifier l'indiv
+	 *  - tout evt transmis à la connexion générale par l'indiv doit identifier l'indiv
 	 *    car pr client, il y a une différence, qui doit être traitée, entre recevoir un evt donné
-	 *    d'une connection active ou d'une autre connection.
+	 *    d'une connexion active ou d'une autre connexion.
 	 *    plus généralement, le traitement dépend de l'état du client pour le serveur correspondant
 	 *  - quand la partie commence, faudrait :
-	 *  	- fermer toutes les connections inutiles coté client (i.e. autres serveurs)
-	 *  	- p-ê mettre les connections concernées par la partie dans une liste spéciale, côté serveur (pr optimiser les temps de transmission)
+	 *  	- fermer toutes les connexions inutiles coté client (i.e. autres serveurs)
+	 *  	- p-ê mettre les connexions concernées par la partie dans une liste spéciale, côté serveur (pr optimiser les temps de transmission)
 	 */
 	
 	/* 
 	 * TODO
-	 *  - reconnection process:
+	 *  - reconnexion process:
 	 * 		- client connects and sends a REQUEST_RECONNECTION message, with its id
 	 * 		- server checks if the id's
 	 * 		- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
 	 *  	- if accepted, the server then sends the necessary updates to the client
 	 *  - ça serait bien d'avoir un icone spécial (variante de remote) pr indiquer dans les menus qu'un joueur est déconnecté
-	 *  - lié à la reconnection : possibilité de définir des open slots (pr server)
+	 *  - lié à la reconnexion : possibilité de définir des open slots (pr server)
 	 *    et par la suite, des joueurs désirant prendre la partie en cours peuvent le faire
 	 *    (similaire à un joueur déconnecté qui aurait son slot réservé et pourrait s'y reconnecter)
-	 *  - gestion de la dé/re-connection :
-	 * 		- la connection individuelle est conservée côté serveur,
+	 *  - gestion de la dé/re-connexion :
+	 * 		- la connexion individuelle est conservée côté serveur,
 	 * 	  	  avec un état DISCONNECTED ou autre
 	 * 		- même les threads sont gardés, mais du cp le code doit être modifié
-	 * 	  	  pour ne pas tenter d'écrire/lire si la connection est morte
+	 * 	  	  pour ne pas tenter d'écrire/lire si la connexion est morte
 	 * 		- quand le client tente de se reconnecter, si son id correspond à 
-	 * 	   	  celle d'une connection DISCONNECTED, alors on se contente de réinitialiser les 
+	 * 	   	  celle d'une connexion DISCONNECTED, alors on se contente de réinitialiser les 
 	 * 	  	  streams dans le writer et le reader, et ça roule.
 	 */
 	
@@ -1225,7 +1225,7 @@ public class Launcher
 	 * propriété remote des joueurs : comment s'assurer qu'un joueur est bien identifié ?
 	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connecté
 	 * 	  si un joueur essaie de se connecter à partir d'un hôte différent, erreur et on demande au joueur de s'identifier
-	 * >> mais en fait c'est le central qui controle la véracité, c'est lui qui détient le dernier hote de connection
+	 * >> mais en fait c'est le central qui controle la véracité, c'est lui qui détient le dernier hote de connexion
 	 *    donc on ne peut faire de partie enregistrée qu'en passant par le central, basta. sinon c'est du hors-piste, de l'amical.
 	 * 
 	 */ 
@@ -1547,7 +1547,7 @@ public class Launcher
 	 * 			- afficher les exceptions
 	 * 			- prérégler la partie rapide 
 	 * 		- ressources :
-	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau
+	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau (3d169eaa-303e-4abe-8220-0261dbc79db9)
 	 * 				- 0809.Akkaya+Danacioğlu: 	0d3dfd83-6632-423f-b63e-d7e5743ad998
 	 * 				- 0809.Adatepe: 			26db3658-cf0e-4650-96f4-55080b4720f8
 	 * 				- Joueur Humain 2:			553c0fb4-5418-4e33-b244-d5f399ae40f2
@@ -1642,16 +1642,12 @@ public class Launcher
 // TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
 
 /* TODO
- * - évolution des stats globales
- * 		- rajouter un bouton dans le menu principal, sous g-2/sc/conf : table vs. graphique
- * 			- ça fait trois panels graphiques différents, chacun avec ses propres "boutons"
- * 		- encore en dessous : bouton sélection
- * 			- affiche une table simplifiée permettant de sélectionner jusqu'à 16 joueurs
- * 			- croix vs. mark, rang, type (hu/mach), nom, couleur dans le graphique (cyclable)
- * 			- le classement est conservé quand on passe à cet écran (par rapport aux tables plus complète)
- * 		- nécessaire de changer le stockage des stats
- * 		- résolution temporelle ? rounds ? dates ? mises à jour G-2 ?
- * 		  (on peut laisser le choix à l'utilisateur, ça dépend du stockage des données)
+ * graphiques intéressant :
+ * 	- plutot qu'évolution : stats joueur par joueur.
+ * 		camembert avec les proportion de qui l'a bombé / qui il a bombé
+ * TODO >> individual vs. collectif (pr les courbes) 
+ * TODO 
+ * 		- bouton de colonne dans table sélection : désélectionner tous les joueurs (?)
  */
 
 // TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
@@ -1669,7 +1665,15 @@ public class Launcher
 
 // TODO dans les stats d'évolution de la partie, afficher l'occupation processeur
 
-// TODO faire un système automatique pour répéter les tournois à la chaine, 16 par 16, en filtrant les joueurs
-
 // TODO faire apparaitre graphiquement les résultats d'un round en surimpression sur la zone de jeu
 // TODO insérer une animation optionnelle de présentation des participants au round
+
+// TODO auto-advance: afficher un logo qq part pour indiquer ça ?
+/*
+ * articles à écrire sur le blog:
+ * 		- pretty bomber
+ * 		- évolution des stats globales
+ * 		- enchainement des tournois (montrer l'évolution des stats, du coup?)
+ */
+
+//TODO bug: le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
