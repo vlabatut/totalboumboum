@@ -37,19 +37,57 @@ import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
 import org.xml.sax.SAXException;
 
+/**
+ * CLass used to convert from the previous
+ * type of player id. Not used anymore,
+ * kept only as a reference.
+ * 
+ * @deprecated This class is not useful anymore.
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ConvertIds
 {
+	/**
+	 * Converts old to new ids.
+	 * 
+	 * @param args
+	 * 		None needed.
+	 * @throws IOException
+	 * 		--
+	 * @throws ClassNotFoundException
+	 * 		--
+	 * @throws IllegalArgumentException
+	 * 		--
+	 * @throws SecurityException
+	 * 		--
+	 * @throws ParserConfigurationException
+	 * 		--
+	 * @throws SAXException
+	 * 		--
+	 * @throws IllegalAccessException
+	 * 		--
+	 * @throws NoSuchFieldException
+	 * 		--
+	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	displayNewId();
 		//generateIds();
 		//convertIds();
 	}
 	
+	/**
+	 * Display some new id (test).
+	 */
 	private static void displayNewId()
 	{	UUID id = UUID.randomUUID();
 		System.out.println(id);
 	}
 	
+	/**
+	 * Generates new ids (test).
+	 */
 	@SuppressWarnings("unused")
 	private static void generateIds()
 	{	// generate new ids
@@ -60,6 +98,12 @@ public class ConvertIds
 		System.out.println(getUUIDs().size());
 	}
 	
+	/** 
+	 * Maps old to new ids.
+	 *  
+	 * @return
+	 * 		Id map. 
+	 */
 	private static HashMap<String,UUID> getUUIDs()
 	{	HashMap<String,UUID> result = new HashMap<String, UUID>();
 		result.put("1", UUID.fromString("d6aa991b-f803-4074-8259-220e648a8cd5"));
@@ -114,6 +158,26 @@ public class ConvertIds
 		return result;
 	}
 	
+	/**
+	 * Converts old to new ids.
+	 * 
+	 * @throws IOException
+	 * 		--
+	 * @throws ClassNotFoundException
+	 * 		--
+	 * @throws IllegalArgumentException
+	 * 		--
+	 * @throws SecurityException
+	 * 		--
+	 * @throws ParserConfigurationException
+	 * 		--
+	 * @throws SAXException
+	 * 		--
+	 * @throws IllegalAccessException
+	 * 		--
+	 * @throws NoSuchFieldException
+	 * 		--
+	 */
 	@SuppressWarnings("unused")
 	private static void convertIds() throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	// load stats

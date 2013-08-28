@@ -96,7 +96,7 @@ public class XmlNames
 	public static final String CONCRETE_ITEMS = "concreteItems";
 	public static final String CONFRONTATION = "confrontation";
 	public static final String CONFRONTATIONS_ORDER = "confrontationsOrder";
-	public static final String CONNECTIONS = "connections";
+	public static final String CONNECTIONS = "connexions";
 	public static final String CONSTANT = "constant";
 	public static final String CONTACT = "contact";
 	public static final String CONTROL = "control";
