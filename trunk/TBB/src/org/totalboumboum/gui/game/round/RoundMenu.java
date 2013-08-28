@@ -37,6 +37,7 @@ import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.ai.AisConfiguration.AutoAdvance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
@@ -60,11 +61,11 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.stream.network.client.ClientGeneralConnection;
-import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
-import org.totalboumboum.stream.network.client.ClientIndividualConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnexion;
 import org.totalboumboum.stream.network.client.ClientState;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
@@ -75,7 +76,7 @@ import org.xml.sax.SAXException;
  * 
  * @author Vincent Labatut
  */
-public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,ClientGeneralConnectionListener
+public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,ClientGeneralConnexionListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
@@ -180,11 +181,11 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		// buttons
 		refreshButtons();
 		
-		// connection
+		// connexion
 		if(!browseOnly)
-		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection!=null)
-				connection.addListener(this);
+		{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+			if(connexion!=null)
+				connexion.addListener(this);
 		}
 	}
 	
@@ -210,8 +211,8 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	{	// end round
 		round.cancel();
 		
-		// end possible connection
-		Configuration.getConnectionsConfiguration().terminateConnection();
+		// end possible connexion
+		Configuration.getConnexionsConfiguration().terminateConnexion();
 		
 		// set main menu frame
 		getFrame().setMainMenuPanel();
@@ -236,8 +237,6 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	private JToggleButton buttonStatistics;
 	/** Play the round */
 	private JButton buttonPlay;
-	/** Thread used for the auto-advance system */
-	private Thread thread = null;
 	
 	/**
 	 * Update the buttons depending on 
@@ -307,10 +306,10 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			}
 		
 			// record game
-			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-			ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-			boolean connectionState = serverConnection==null && clientConnection==null;
-			buttonSave.setEnabled(connectionState);
+			ServerGeneralConnexion serverConnexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			ClientGeneralConnexion clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+			boolean connexionState = serverConnexion==null && clientConnexion==null;
+			buttonSave.setEnabled(connexionState);
 			
 			// record replay
 			boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
@@ -319,6 +318,12 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		}
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// AUTO ADVANCE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Thread used for the auto-advance system */
+	private Thread thread = null;
+
 	/**
 	 * Automatically clicks on the appropriate
 	 * buttons in order to progress in the tournament.
@@ -326,7 +331,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	 * while evaluating agents.
 	 */
 	public void autoAdvance()
-	{	if(Configuration.getAisConfiguration().getAutoAdvance())
+	{	if(Configuration.getAisConfiguration().getAutoAdvance()!=AutoAdvance.NONE)
 		{	// play round
 			if(buttonPlay.isEnabled())
 			{	thread = new Thread("TBB.autoadvance")
@@ -429,12 +434,12 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			{	parent.refresh();
 
 				// possibly updating client state
-				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-				if(connection!=null)
+				ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+				if(connexion!=null)
 				{	if(round.getMatch().getTournament() instanceof SingleTournament)
-						connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+						connexion.getActiveConnexion().setState(ClientState.BROWSING_TOURNAMENT);
 					else
-						connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+						connexion.getActiveConnexion().setState(ClientState.BROWSING_MATCH);
 				}
 			}
 			
@@ -450,12 +455,12 @@ round.clean();
 				((TournamentSplitPanel)parent).autoAdvance();
 
 			// possibly updating client state
-			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection!=null)
+			ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+			if(connexion!=null)
 			{	if(round.getMatch().getTournament() instanceof SingleTournament)
-					connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+					connexion.getActiveConnexion().setState(ClientState.BROWSING_TOURNAMENT);
 				else
-					connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+					connexion.getActiveConnexion().setState(ClientState.BROWSING_MATCH);
 			}
 			
 			replaceWith(parent);
@@ -658,34 +663,34 @@ round.clean();
 	// CLIENT GENERAL CONNECTION	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
-	public void connectionAdded(ClientIndividualConnection connection, int index)
+	public void connexionAdded(ClientIndividualConnexion connexion, int index)
 	{	// useless here
 	}
 
 	@Override
-	public void connectionRemoved(ClientIndividualConnection connection, int index)
-	{	
+	public void connexionRemoved(ClientIndividualConnexion connexion, int index)
+	{	//
 	}
 
 	@Override
-	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
+	public void connexionGameInfoChanged(ClientIndividualConnexion connexion, int index, String oldId)
 	{	// useless here
 	}
 
 	@Override
-	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
-	{	// TODO maybe a reconnection can be worked out...
-		if(connection.getState()==ClientState.BROWSING_ROUND)
+	public void connexionActiveConnexionLost(ClientIndividualConnexion connexion, int index)
+	{	// TODO maybe a reconnexion can be worked out...
+		if(connexion.getState()==ClientState.BROWSING_ROUND)
 			quitTournament();
 	}
 
 	@Override
-	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
+	public void connexionProfilesChanged(ClientIndividualConnexion connexion, int index)
 	{	// useless here
 	}
 
 	@Override
-	public void connectionTournamentStarted(AbstractTournament tournament)
+	public void connexionTournamentStarted(AbstractTournament tournament)
 	{	// useless here
 	}
 }
