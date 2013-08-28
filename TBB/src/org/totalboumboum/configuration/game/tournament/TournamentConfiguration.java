@@ -56,6 +56,9 @@ public class TournamentConfiguration
 		ProfilesSelection tournamentCopy = profilesSelection.copy();
 		result.setProfilesSelection(tournamentCopy);
 
+		// auto-advance
+		result.autoAdvanceIndex = autoAdvanceIndex;
+		
 		return result;
 	}
 	
