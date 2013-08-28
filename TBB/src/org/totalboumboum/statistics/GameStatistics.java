@@ -21,10 +21,14 @@ package org.totalboumboum.statistics;
  * 
  */
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -40,6 +44,7 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.OverallStatsLoader;
 import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
+import org.totalboumboum.statistics.overall.PlayerStats.Value;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
 import org.xml.sax.SAXException;
 
@@ -64,20 +69,20 @@ public class GameStatistics
 	{	// overall statistics
 		OverallStatsSaver.saveOverallStatistics(playersStats);
 		// glicko2 ranking service
-		Glicko2Saver.saveGlicko2Statistics(rankingService);		
+		Glicko2Saver.saveGlicko2Statistics(rankingService);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static void update(StatisticRound stats)
-	{	// update
-		updatePlayersStats(stats);
-		updateRankingService(stats);
+	{	try
+		{	// update
+			updatePlayersStats(stats);
+			updateRankingService(stats);
 		
-		// save
-		try
-		{	saveStatistics();
+			// save
+			saveStatistics();
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
@@ -131,8 +136,27 @@ public class GameStatistics
 	}
 
 	/**
-	 * used when a profile is definitely removed
+	 * Used when a profile is definitely removed.
+	 * 
 	 * @param playerId
+	 * 		Id of the player to remove.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while removing the player. 
+	 * @throws SecurityException 
+	 * 		Problem while removing the player. 
+	 * @throws IOException 
+	 * 		Problem while removing the player. 
+	 * @throws ParserConfigurationException 
+	 * 		Problem while removing the player. 
+	 * @throws SAXException 
+	 * 		Problem while removing the player. 
+	 * @throws IllegalAccessException 
+	 * 		Problem while removing the player. 
+	 * @throws NoSuchFieldException 
+	 * 		Problem while removing the player. 
+	 * @throws ClassNotFoundException 
+	 * 		Problem while removing the player. 
 	 */
 	public static void deletePlayer(String playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	boolean changed = false;
@@ -145,7 +169,11 @@ public class GameStatistics
 			rankingService.deregisterPlayer(playerId);
 		}
 		if(changed)
+		{	// update overall and glicko-2 stats
 			saveStatistics();
+			// remove player history
+			OverallStatsSaver.removePlayer(playerId);
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -162,14 +190,16 @@ public class GameStatistics
 	{	return playersStats;	
 	}
 	
-	public static void updatePlayersStats(StatisticRound stats)
+	public static void updatePlayersStats(StatisticRound stats) throws FileNotFoundException
 	{	float[] points = stats.getPoints();
 		List<Integer> winners = CombinatoricsTools.getWinners(points);
+		Date date = stats.getStartDate();
 		
 		for(int index=0;index<stats.getPlayersIds().size();index++)
 		{	// init
 			String id = stats.getPlayersIds().get(index);
 			PlayerStats playerStats = playersStats.get(id);
+			Map<Value,Float> values = new HashMap<PlayerStats.Value, Float>();
 			
 			// scores
 			for(Score score: Score.values())
@@ -177,23 +207,40 @@ public class GameStatistics
 				long delta = scores[index];
 				long value = playerStats.getScore(score);
 				playerStats.setScore(score,value+delta);
+				
+				Value valueName = score.getValue();
+				values.put(valueName,(float)delta);
 			}
 			
 			// rounds
 			long roundsPlayed = playerStats.getRoundsPlayed();
 			playerStats.setRoundsPlayed(roundsPlayed+1);
+			values.put(Value.CONFR_TOTAL,1f);
 			if(winners.size()==0 || winners.size()==points.length)
 			{	long roundsDrawn = playerStats.getRoundsDrawn();
 				playerStats.setRoundsDrawn(roundsDrawn+1);
+				values.put(Value.CONFR_DRAW,1f);
 			}
 			else if(winners.contains(index))
 			{	long roundsWon = playerStats.getRoundsWon();
 				playerStats.setRoundsWon(roundsWon+1);
+				values.put(Value.CONFR_WON,1f);
 			}
 			else
 			{	long roundsLost = playerStats.getRoundsLost();
 				playerStats.setRoundsLost(roundsLost+1);
+				values.put(Value.CONFR_LOST,1f);
 			}
+			
+			// history
+			PlayerRating rating = rankingService.getPlayerRating(id);
+			if(rating!=null)
+			{	float rank = rankingService.getPlayerRank(id);
+				values.put(Value.RANK,rank);
+				values.put(Value.MEAN,(float)rating.getRating());
+				values.put(Value.STDEV,(float)rating.getRatingDeviation());
+			}
+			playerStats.appendToHistory(date, values);
 		}
 	}
 	
