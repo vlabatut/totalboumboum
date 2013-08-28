@@ -46,7 +46,7 @@ import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
-import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
 import org.xml.sax.SAXException;
 
 /**
@@ -106,8 +106,8 @@ public class SelectHeroMenu extends InnerMenuPanel
 		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
 			if(heroPreview!=null)
 			{	// NOTE this would be so much cleaner with an events system...
-				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-				if(connection==null)
+				ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+				if(connexion==null)
 				{	// update profile
 					SpriteInfo spriteInfo = profile.getSelectedSprite();
 					String spriteName = heroPreview.getName();
@@ -143,7 +143,7 @@ public class SelectHeroMenu extends InnerMenuPanel
 					spriteInfo.setFolder(spriteFolder);
 					String spritePack = heroPreview.getPack();
 					spriteInfo.setPack(spritePack);
-					connection.requestPlayersChangeHero(copy);
+					connexion.requestPlayersChangeHero(copy);
 				}
 			}
 			parent.refresh();
