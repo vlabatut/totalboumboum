@@ -46,7 +46,7 @@ import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.xml.sax.SAXException;
 
 /**
@@ -131,9 +131,9 @@ public class SelectHeroMenu extends InnerMenuPanel
 			parent.refresh();
 			
 			// NOTE this would be so much cleaner with an events system...
-			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(connection!=null)
-				connection.profileModified(profile);
+			ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(connexion!=null)
+				connexion.profileModified(profile);
 
 			replaceWith(parent);
 	    }
