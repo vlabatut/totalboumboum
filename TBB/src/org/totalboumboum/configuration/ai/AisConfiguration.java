@@ -89,9 +89,50 @@ public class AisConfiguration
 	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** during a tournament/match, automatically advances to the next match/round */
-	private boolean autoAdvance = false;
+	private AutoAdvance autoAdvance = AutoAdvance.NONE;
 	/** delay (in ms) before the auto system advances to the next round */
 	private long autoAdvanceDelay = 1000;
+	
+	/**
+	 * Represents the various possible
+	 * values for the auto-advance option.
+	 * 
+	 * @author Vincent Labatut
+	 */
+	public enum AutoAdvance
+	{	/** No auto-advance at all */
+		NONE,
+		/** Simply advance through the tournament */
+		SIMPLE,
+		/** Like simple, and additionally select players and repeat the tournament automatically */
+		TOURNAMENT;
+		
+		/**
+		 * Cycle through the various values
+		 * of this enum type.
+		 * 
+		 * @return
+		 * 		The next value.
+		 */
+		public AutoAdvance getNext()
+		{	int index = (this.ordinal() + 1) % AutoAdvance.values().length;
+			AutoAdvance result = AutoAdvance.values()[index];
+			return result;
+		}
+		
+		/**
+		 * Cycle through the various values
+		 * of this enum type.
+		 * 
+		 * @return
+		 * 		The previous value.
+		 */
+		public AutoAdvance getPrevious()
+		{	int index = (this.ordinal() - 1 + AutoAdvance.values().length) % AutoAdvance.values().length;
+			AutoAdvance result = AutoAdvance.values()[index];
+			return result;
+		}
+	}
 	
 	public long getAutoAdvanceDelay()
 	{	return autoAdvanceDelay;
@@ -101,11 +142,11 @@ public class AisConfiguration
 	{	this.autoAdvanceDelay = autoAdvanceDelay;
 	}
 
-	public boolean getAutoAdvance()
+	public AutoAdvance getAutoAdvance()
 	{	return autoAdvance;
 	}
 
-	public void setAutoAdvance(boolean autoAdvance)
+	public void setAutoAdvance(AutoAdvance autoAdvance)
 	{	this.autoAdvance = autoAdvance;
 	}
 
