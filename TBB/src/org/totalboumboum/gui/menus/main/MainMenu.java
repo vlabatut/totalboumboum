@@ -31,8 +31,11 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.ai.AisConfiguration.AutoAdvance;
 import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -147,7 +150,11 @@ buttonReplay.setEnabled(!GameData.PRODUCTION);
 	// ACTION LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_OPTIONS))
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
+		
+		if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_OPTIONS))
 		{	OptionsSplitPanel optionsMenuPanel = new OptionsSplitPanel(getMenuContainer(),this);
 			replaceWith(optionsMenuPanel);
 	    }
@@ -180,6 +187,7 @@ buttonReplay.setEnabled(!GameData.PRODUCTION);
 		{	if(tournamentContainer==null)
 				tournamentContainer = new TournamenuContainer(getMenuContainer(),this);
 			tournamentContainer.initTournament();
+			tournamentContainer.autoAdvance();
 			replaceWith(tournamentContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
@@ -221,5 +229,40 @@ buttonReplay.setEnabled(!GameData.PRODUCTION);
 	@Override
 	public void modalDialogButtonClicked(String buttonCode)
 	{	getFrame().unsetModalDialog();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// AUTO ADVANCE					/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Thread used for the auto-advance system */
+	private Thread thread = null;
+
+	/**
+	 * Automatically clicks on the appropriate
+	 * buttons in order to start a new tournament.
+	 * Used to automatically chain many tournaments,
+	 * while evaluating agents.
+	 */
+	public void autoAdvance()
+	{	if(Configuration.getAisConfiguration().getAutoAdvance()==AutoAdvance.TOURNAMENT)
+		{	thread = new Thread("TBB.autoadvance")
+			{	@Override
+				public void run()
+				{	try
+					{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+						SwingUtilities.invokeLater(new Runnable()
+						{	@Override
+							public void run()
+							{	buttonTournament.doClick();
+							}
+						});				
+					}
+					catch (InterruptedException e)
+					{	//e.printStackTrace();
+					}
+				}			
+			};
+			thread.start();
+		}
 	}
 }
