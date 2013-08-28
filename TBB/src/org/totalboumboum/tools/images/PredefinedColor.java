@@ -25,84 +25,71 @@ import java.awt.Color;
 import java.io.Serializable;
 
 /**
+ * This class represents all the
+ * color which can be assigned
+ * to a player.
  * 
  * @author Vincent Labatut
- *
  */
 public enum PredefinedColor implements Serializable
-{
-	BLACK,
-	BLUE,
-	BROWN,
-	CYAN,
-	GRASS,
-	GREEN,
-	GREY,
-	INDIGO,
-	ORANGE,
-	PINK,
-	PURPLE,
-	RED,
-	RUST,
-	ULTRAMARINE,
-	WHITE,
-	YELLOW;
+{	/** Black */
+	BLACK(new Color(0,0,0)),
+	/** Blue */
+	BLUE(new Color(3,3,250)),
+	/** Brown */
+	BROWN(new Color(82,33,14)),
+	/** Cyan blue */
+	CYAN(new Color(9,240,252)),
+	/** Light green */
+	GRASS(new Color(73,229,41)),
+	/** Green */
+	GREEN(new Color(24,109,9)),
+	/** Grey */
+	GREY(new Color(115,106,108)),
+	/** Indigo */
+	INDIGO(new Color(65,11,169)),
+	/** Orange */
+	ORANGE(new Color(255,118,6)),
+	/** Pink */
+	PINK(new Color(209,76,117)),
+	/** Purple */
+	PURPLE(new Color(149,114,234)),
+	/** Red */
+	RED(new Color(236,34,38)),
+	/** Dark orange */
+	RUST(new Color(196,57,2)),
+	/** Dark blue */
+	ULTRAMARINE(new Color(10,10,78)),
+	/** White */
+	WHITE(new Color(253,253,253)),
+	/** Yellow */
+	YELLOW(new Color(253,217,0));
 	
+	/**
+	 * Builds a new color symbol,
+	 * with the specified actual color.
+	 * 
+	 * @param color
+	 * 		Actual color associated with the symbol.
+	 */
+	PredefinedColor(Color color)
+	{	this.color = color;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COLOR		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Actual color associated to this symbol */
+	private Color color = null;
+
+	/**
+	 * Returns the actual color
+	 * associated to this symbol.
+	 * 
+	 * @return
+	 * 		Actual color.
+	 */
 	public Color getColor()
-	{	Color result;
-		switch(this)
-		{	case BLACK:
-				result = new Color(0,0,0);
-				break;
-			case BLUE:
-				result = new Color(3,3,250);
-				break;
-			case BROWN:
-				result = new Color(82,33,14);
-				break;
-			case CYAN:
-				result = new Color(9,240,252);
-				break;
-			case GRASS:
-				result = new Color(73,229,41);
-				break;
-			case GREEN:
-				result = new Color(24,109,9);
-				break;
-			case GREY:
-				result = new Color(115,106,108);
-				break;
-			case INDIGO:
-				result = new Color(65,11,169);
-				break;
-			case ORANGE:
-				result = new Color(255,118,6);
-				break;
-			case PINK:
-				result = new Color(209,76,117);
-				break;
-			case PURPLE:
-				result = new Color(149,114,234);
-				break;
-			case RED:
-				result = new Color(236,34,38);
-				break;
-			case RUST:
-				result = new Color(196,57,2);
-				break;
-			case ULTRAMARINE:
-				result = new Color(10,10,78);
-				break;
-			case WHITE:
-				result = new Color(253,253,253);
-				break;
-			case YELLOW:
-				result = new Color(253,217,0);
-				break;
-			default:
-				result = Color.WHITE;
-				break;
-		}
-		return result;
+	{	return color;
 	}
 }
