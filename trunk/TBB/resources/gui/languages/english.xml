@@ -152,8 +152,11 @@
 				<group name="Line">
 					<group name="AutoAdvance">
 						<text name="Title" value="Auto-advance" tooltip="Automatically advances to the next round (for large-scale AIs testing)" />
-						<text name="Disabled" value="Disabled" tooltip="Automatic advance is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="Automatic advance is enabled" />
+						<text name="None" value="None" tooltip="Automatic advance is disabled" />
+						<text name="Simple" value="Simple" tooltip="Finish automatically the current tournament" />
+						<text name="Tournament" value="Tournament" tooltip="Automatically select players and repeat tournament" />
+						<text name="Next" value="Next" tooltip="Next auto-advance mode" />
+						<text name="Previous" value="Previous" tooltip="Previous auto-advance mode" />
 					</group>
 					<group name="AutoAdvanceDelay">
 						<text name="Title" value="Auto-advance Delay" tooltip="Delay (in seconds) before auto-advance" />
@@ -448,9 +451,12 @@
 			<group name="Player">
 				<text name="Title" value="Players Rankings" tooltip="Rankings for locally registered players" />
 				<group name="Button">
-					<text name="Glicko2" value="Glicko-2" tooltip="Glicko-2 rankings for locally registered players" />
-					<text name="Scores" value="Scores" tooltip="Score rankings" />
 					<text name="Confrontations" value="Confrontations" tooltip="Confrontation rankings" />
+					<text name="Glicko2" value="Glicko-2" tooltip="Glicko-2 rankings for locally registered players" />
+					<text name="Plot" value="Plot" tooltip="Display stats as a plot containing only the selected players" />
+					<text name="Scores" value="Scores" tooltip="Score rankings" />
+					<text name="Selection" value="Selection" tooltip="Select a few players for plotting" />
+					<text name="Table" value="Table" tooltip="Display stats as a table containing all players" />
 				</group>
 			</group>
 		</group>
@@ -1295,10 +1301,12 @@
 			<group name="Player">
 				<group name="Common">
 					<group name="Header">
+						<text name="Color" value="Color"  tooltip="Color used to display the player" />
+						<text name="Evolution" value="Evolution"  tooltip="Change compared to last rating" />
 						<text name="Name" value="Name"  tooltip="Player name" />
 						<text name="Portrait" value="Character"  tooltip="Player character" />
 						<text name="Rank" value="#"  tooltip="Player ranking" />
-						<text name="Evolution" value="Evolution"  tooltip="Change compared to last rating" />
+						<text name="Select" value="Selection"  tooltip="Players selected for stats plotting" />
 						<text name="Type" value="Human/Computer"  tooltip="Human or computer-controlled" />
 					</group>
 					<group name="Data">
@@ -1327,6 +1335,24 @@
 						<text name="AllRanks" value="Ranked Players"  tooltip="Display only ranked players" />
 						<text name="NoRanks" value="Non-ranked Players"  tooltip="Display only non-ranked players" />
 						<text name="All" value="All Players"  tooltip="Display all players" />
+						<text name="Select" value="Select"  tooltip="Select the player for plot display" />
+						<text name="Unselect" value="Unselect"  tooltip="Unselect the player for plot display" />
+						<text name="Color" value="Color"  tooltip="Change player color in plot display" />
+						<text name="Ranks" value="Ranks"  tooltip="Display rank evolution" />
+						<text name="Means" value="Means"  tooltip="Display mean Glicko-2 evolution" />
+						<text name="Stdevs" value="Stdevs"  tooltip="Display standard-deviation Glicko-2 evolution" />
+						<text name="Bombeds" value="Bombeds"  tooltip="Display the number of times the player was eliminated" />
+						<text name="SelfBombings" value="Self-Bombings"  tooltip="Display the number of times the player eliminated himself" />
+						<text name="Bombings" value="Bombings"  tooltip="Display the number of times the player eliminated an oponent" />
+						<text name="Items" value="Items"  tooltip="Display the number of items the player gathered" />
+						<text name="Bombs" value="Bombs"  tooltip="Display the number of bombs the player dropped" />
+						<text name="Paintings" value="Paintings"  tooltip="Display the number of tiles the player painted" />
+						<text name="Crowns" value="Crowns"  tooltip="Display the number of crowns the player gathered" />
+						<text name="Total" value="Rounds played"  tooltip="Display the total number of rounds played" />
+						<text name="Won" value="Rounds won"  tooltip="Display the number of rounds won by the player" />
+						<text name="Drawn" value="Rounds drawn"  tooltip="Display the number of rounds ending in a draw for the player" />
+						<text name="Lost" value="Rounds lost"  tooltip="Display the number of rounds lost by the player" />
+						<text name="Time" value="Time played"  tooltip="Display the total time played" />
 					</group>
 				</group>
 

@@ -152,8 +152,11 @@
 				<group name="Line">
 					<group name="AutoAdvance">
 						<text name="Title" value="Enchaînement automatique" tooltip="Enchaîne automatiquement les manches (permet de tester les IA intensément)" />
-						<text name="Disabled" value="Désactivé" tooltip="Enchaînement automatique désactivé" />
-						<text name="Enabled" value="Activé" tooltip="Enchaînement automatique activé" />
+						<text name="None" value="None" tooltip="Enchaînement automatique désactivé" />
+						<text name="Simple" value="Simple" tooltip="Finit automatiquement le tournoi en cours" />
+						<text name="Tournament" value="Tournoi" tooltip="Sélectionne les joueurs et répète le tournoi automatiquement" />
+						<text name="Next" value="Suivant" tooltip="Mode d'enchaînement suivant" />
+						<text name="Previous" value="Précédent" tooltip="Mode d'enchaînement précédent" />
 					</group>
 					<group name="AutoAdvanceDelay">
 						<text name="Title" value="Délai d'enchaînement" tooltip="Délai (en secondes) avant l'enchaînement automatique" />
@@ -448,9 +451,12 @@
 			<group name="Player">
 				<text name="Title" value="Classement des joueurs" tooltip="Classement des joueurs enregistrés localement" />
 				<group name="Button">
-					<text name="Glicko2" value="Glicko-2" tooltip="Classement des joueurs enregistrés localement" />
-					<text name="Scores" value="Score" tooltip="Classement des joueurs en fonction de leurs scores" />
 					<text name="Confrontations" value="Confrontations" tooltip="Classement des joueurs en fonction de leurs résultats" />
+					<text name="Glicko2" value="Glicko-2" tooltip="Classement des joueurs enregistrés localement" />
+					<text name="Plot" value="Graphique" tooltip="Affiche les stats sour forme d'un graphique contenant les joueurs sélectionnés" />
+					<text name="Scores" value="Score" tooltip="Classement des joueurs en fonction de leurs scores" />
+					<text name="Selection" value="Sélection" tooltip="Sélection des joueurs affichés dans le graphiques" />
+					<text name="Table" value="Table" tooltip="Affiche les stats sous forme d'une table contenant tous les joueurs" />
 				</group>
 			</group>
 		</group>
@@ -1303,10 +1309,12 @@
 			<group name="Player">
 				<group name="Common">
 					<group name="Header">
+						<text name="Color" value="Couleur"  tooltip="Couleur utilisée pour représenter le joueur" />
+						<text name="Evolution" value="Évolution"  tooltip="Évolution par rapport au classement précédent" />
 						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 						<text name="Portrait" value="Personnage"  tooltip="Personnage choisi par le joueur" />
 						<text name="Rank" value="n°"  tooltip="Classement du joueur" />
-						<text name="Evolution" value="Évolution"  tooltip="Évolution par rapport au classement précédent" />
+						<text name="Select" value="Sélection"  tooltip="Joueurs sélectionnés pour l'affichage graphique des stats" />
 						<text name="Type" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
 					</group>
 					<group name="Data">
@@ -1335,6 +1343,24 @@
 						<text name="AllRanks" value="Joueurs classés"  tooltip="Afficher seulement les joueurs classés" />
 						<text name="NoRanks" value="Joueurs non-classés"  tooltip="Afficher seulement les joueurs non-classés" />
 						<text name="All" value="Tous les joueurs"  tooltip="Afficher tous les joueurs" />
+						<text name="Select" value="Sélectionner"  tooltip="Sélectionner le joueur pour l'affichage graphique des stats" />
+						<text name="Unselect" value="Désélectionner"  tooltip="Désélectionner le joueur pour l'affichage graphique des stats" />
+						<text name="Color" value="Couleur"  tooltip="Changer la couleur utilisée pour afficher les stats du joueur dans l'affichage graphique" />
+						<text name="Ranks" value="Classements"  tooltip="Afficher l'évolution des rangs" />
+						<text name="Means" value="Moyennes"  tooltip="Afficher l'évolution des moyennes Glicko-2" />
+						<text name="Stdevs" value="Écarts-types"  tooltip="Afficher l'évolution des écarts-types Glicko-2" />
+						<text name="Bombeds" value="Bombé" tooltip="Nombre de fois que le joueur a été éliminé" />
+						<text name="SelfBombings" value="Auto-bombages" tooltip="Nombre de fois que le joueur s'est auto-éliminé" />
+						<text name="Bombings" value="Bombeur" tooltip="Nombre de fois que le joueur en a éliminé un autre" />
+						<text name="Items" value="Items" tooltip="Nombres d'items ramassés" />
+						<text name="Bombs" value="Bombes" tooltip="Nombre de bombes posées" />
+						<text name="Paintings" value="Peinture" tooltip="Nombre de cases peintes" />
+						<text name="Crowns" value="Couronnes" tooltip="Nombre de couronnes ramassées" />
+						<text name="Total" value="Manches jouées"  tooltip="Nombre de manches jouées" />
+						<text name="Won" value="Manches gagnées"  tooltip="Nombre de manches gagnées" />
+						<text name="Drawn" value="Manches à égalité"  tooltip="Nombre de manches terminées par une égalité" />
+						<text name="Lost" value="Manches perdues"  tooltip="Nombre de manches perdues" />
+						<text name="Time" value="Temps" tooltip="Temps de jeu" />
 					</group>
 				</group>
 
