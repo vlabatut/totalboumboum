@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
+import org.totalboumboum.configuration.ai.AisConfiguration.AutoAdvance;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
@@ -34,6 +35,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.data.language.Language;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
@@ -121,6 +123,8 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				// #1 AUTO ADVANCE
 				{	Line ln = optionsPanel.getLine(LINE_AUTO_ADVANCE);
 					ln.addLabel(0);
+					ln.addLabel(0);
+					ln.addLabel(0);
 					int col = 0;
 					// name
 					{	ln.setLabelMinWidth(col,titleWidth);
@@ -129,12 +133,27 @@ public class AisData extends EntitledDataPanel implements MouseListener
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_TITLE,false);
 						col++;
 					}
+					// previous button
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_PREVIOUS,true);
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
 					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiSizeTools.subPanelMargin - 2*iconWidth;
 						ln.setLabelMinWidth(col,valueWidth);
 						ln.setLabelPrefWidth(col,valueWidth);
 						ln.setLabelMaxWidth(col,valueWidth);
 						setAutoAdvance();
+						col++;
+					}
+					// next button
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_NEXT,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -314,13 +333,11 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	}
 	
 	private void setAutoAdvance()
-	{	boolean autoAdvance = aisConfiguration.getAutoAdvance();
-		String key;
-		if(autoAdvance)
-			key = GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_ENABLED;
-		else
-			key = GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DISABLED;
-		optionsPanel.getLine(LINE_AUTO_ADVANCE).setLabelKey(1,key,true);
+	{	AutoAdvance autoAdvance = aisConfiguration.getAutoAdvance();
+		String aaStr = autoAdvance.toString();
+		String text = aaStr.toUpperCase().substring(0,1)+aaStr.toLowerCase().substring(1,aaStr.length());
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+text+GuiKeys.TOOLTIP); 
+		optionsPanel.getLine(LINE_AUTO_ADVANCE).setLabelText(2,text,tooltip);
 	}
 	
 	private void setAutoAdvanceDelay()
@@ -434,7 +451,16 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				break;
 			// auto advance
 			case LINE_AUTO_ADVANCE:
-				boolean autoAdvance = !aisConfiguration.getAutoAdvance();
+				AutoAdvance autoAdvance = aisConfiguration.getAutoAdvance();
+				// previous
+				if(pos[1]==1)
+				{	autoAdvance = autoAdvance.getPrevious();
+				}
+				// next
+				else //if(pos[1]==3)
+				{	autoAdvance = autoAdvance.getNext();
+				}
+				// common
 				aisConfiguration.setAutoAdvance(autoAdvance);
 				setAutoAdvance();
 				break;
@@ -496,6 +522,6 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 }
