@@ -160,13 +160,18 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	{	return playersPanel.getPlayers();	
 	}
 
+	/**
+	 * Used to automatically select players
+	 * when the auto-advance option is enabled
+	 * with the "tournament" mode.
+	 */
 	public void autoSelectPlayers()
 	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
 		Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
 		
 		List<Profile> profiles = new ArrayList<Profile>();
 		try
-		{	profiles = ProfilesConfiguration.autoAdvanceComplete();
+		{	profiles = ProfilesConfiguration.autoAdvanceComplete(tournamentConfiguration);
 		}
 		catch (IllegalArgumentException e)
 		{	e.printStackTrace();
