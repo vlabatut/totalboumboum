@@ -41,13 +41,39 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * This class is in charge for recording the overall statistics,
+ * i.e. those not already handled by the Glicko-2 system
+ * (especially scores).
  * 
  * @author Vincent Labatut
- *
  */
 public class OverallStatsSaver
-{	private static final boolean verbose = false;
+{	/** Mute or display debug messages */
+	private static final boolean verbose = false;
 
+	/**
+	 * Record the overall statistics as a serialized java object.
+	 * 
+	 * @param playersStats
+	 * 		Overall statistics to be recorded.
+	 * 
+	 * @throws IOException
+	 * 		Problem while recording the serialized file.
+	 * @throws IllegalArgumentException
+	 * 		Problem while recording the serialized file.
+	 * @throws SecurityException
+	 * 		Problem while recording the serialized file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while recording the serialized file.
+	 * @throws SAXException
+	 * 		Problem while recording the serialized file.
+	 * @throws IllegalAccessException
+	 * 		Problem while recording the serialized file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while recording the serialized file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while recording the serialized file.
+	 */
 	public static void saveOverallStatistics(HashMap<String,PlayerStats> playersStats) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
 		String path = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
@@ -79,6 +105,29 @@ public class OverallStatsSaver
 		}
 	}
 
+	/**
+	 * (Re)Initializes the overall stats of all players.
+	 * 
+	 * @return
+	 * 		Overall statistics.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while recording the serialized file.
+	 * @throws SecurityException
+	 * 		Problem while recording the serialized file.
+	 * @throws IOException
+	 * 		Problem while recording the serialized file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while recording the serialized file.
+	 * @throws SAXException
+	 * 		Problem while recording the serialized file.
+	 * @throws IllegalAccessException
+	 * 		Problem while recording the serialized file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while recording the serialized file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while recording the serialized file.
+	 */
 	public static HashMap<String,PlayerStats> initOverallStatistics() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// create stats map
 		HashMap<String,PlayerStats> result = new HashMap<String, PlayerStats>();
@@ -86,7 +135,7 @@ public class OverallStatsSaver
 		// get ids list
 	    List<String> idsList = ProfileLoader.getIdsList();
 
-		// register all existing players
+		// init stats for all existing players
 		for(String id: idsList)
 		{	if(verbose)
 				System.out.println(id);
@@ -100,9 +149,13 @@ public class OverallStatsSaver
 	}
 	
 	/**
-	 * export overall stats as text (for stats maintenance through classes changes)
+	 * Export overall stats as text (for stats maintenance through classes changes).
+	 * 
 	 * @param playersStats
-	 * @throws FileNotFoundException 
+	 * 		Stats to be exported.
+	 * 
+	 * @throws FileNotFoundException
+	 * 		Problem while accessing the text file. 
 	 */
 	public static void exportOverallStatistics(HashMap<String,PlayerStats> playersStats) throws FileNotFoundException
 	{	// open the file
@@ -118,5 +171,21 @@ public class OverallStatsSaver
 			ps.exportToText(writer);
 		
 		writer.close();
+	}
+	
+	/**
+	 * Remove the history file corresponding
+	 * to the specified player. This operation
+	 * is performed only when the player profile is
+	 * definitely removed from the game.
+	 * 
+	 * @param playerId
+	 * 		Id of the removed player.
+	 */
+	public static void removePlayer(String playerId)
+	{	String historyFolder = FilePaths.getDetailedStatisticsPath();
+		File dataFile = new File(historyFolder+File.separator+playerId+FileNames.EXTENSION_TEXT);
+		if(dataFile.exists())
+			dataFile.delete();
 	}
 }
