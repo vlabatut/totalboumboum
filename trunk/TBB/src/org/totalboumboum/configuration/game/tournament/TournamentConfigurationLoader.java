@@ -67,6 +67,12 @@ public class TournamentConfigurationLoader
 		Element playersElement = root.getChild(XmlNames.PLAYERS);
 		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(tournamentSelected);
+
+		// auto advance
+		Element aaElement = root.getChild(XmlNames.AUTO_ADVANCE);
+		String aaIndexStr = aaElement.getAttribute(XmlNames.INDEX).getValue().trim();
+		int aaIndex = Integer.parseInt(aaIndexStr);
+		result.setAutoAdvanceIndex(aaIndex);
 	}
 	
 	private static void loadOptionsElement(Element root, TournamentConfiguration result)

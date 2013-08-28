@@ -173,4 +173,34 @@ public class TournamentConfiguration
 	public void reinitPlayers()
 	{	profilesSelection = new ProfilesSelection();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// AUTO ADVANCE			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Marks the last player used by the auto-advance complete method */
+	private int autoAdvanceIndex = 0;
+	
+	/**
+	 * Returns the current value of
+	 * the index used by the "tournament"
+	 * mode of the auto-advance option.
+	 * 
+	 * @return
+	 * 		The current index.
+	 */
+	public int getAutoAdvanceIndex()
+	{	return autoAdvanceIndex;
+	}
+	
+	/**
+	 * Changes the value of
+	 * the index used by the "tournament"
+	 * mode of the auto-advance option.
+	 * 
+	 * @param index
+	 * 		The new index.
+	 */
+	public void setAutoAdvanceIndex(int index)
+	{	autoAdvanceIndex = index;
+	}
 }
