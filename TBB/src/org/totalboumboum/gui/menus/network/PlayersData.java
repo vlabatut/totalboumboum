@@ -34,16 +34,16 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.menus.network.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.network.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.stream.network.client.ClientGeneralConnection;
-import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
-import org.totalboumboum.stream.network.client.ClientIndividualConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnexion;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, ClientGeneralConnectionListener
+public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, ClientGeneralConnexionListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -52,9 +52,9 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	public PlayersData(SplitMenuPanel container)
 	{	super(container);
 		
-		connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.addListener(this);
+		connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		if(connexion!=null)
+			connexion.addListener(this);
 		
 		// title
 		String key = GuiKeys.MENU_NETWORK_PLAYERS_TITLE;
@@ -110,9 +110,9 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	public void playerSelectionPlayerRemoved(int index)
 	{	// supposedly for a local player
 		Profile profile = playersPanel.getPlayer(index);
-		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.requestPlayersRemove(profile);
+		ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		if(connexion!=null)
+			connexion.requestPlayersRemove(profile);
 		//fireDataPanelSelectionChange();
 	}
 
@@ -131,9 +131,9 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void playerSelectionColorSet(int index)
 	{	Profile profile = playersPanel.getPlayer(index);
-		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.requestPlayersChangeColor(profile);
+		ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		if(connexion!=null)
+			connexion.requestPlayersChangeColor(profile);
 	}
 
 	@Override
@@ -144,37 +144,37 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	// CLIENT CONNECTION LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ClientGeneralConnection connection = null;
+	private ClientGeneralConnexion connexion = null;
 
 	@Override
-	public void connectionAdded(ClientIndividualConnection connection, int index)
+	public void connexionAdded(ClientIndividualConnexion connexion, int index)
 	{	// nothing to do here
 	}
 
 	@Override
-	public void connectionRemoved(ClientIndividualConnection connection,int index)
+	public void connexionRemoved(ClientIndividualConnexion connexion,int index)
 	{	// nothing to do here
 	}
 
 	@Override
-	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
+	public void connexionGameInfoChanged(ClientIndividualConnexion connexion, int index, String oldId)
 	{	// nothing to do here
 	}
 
 	@Override
-	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
-	{	fireDataPanelSelectionChange(connection);
+	public void connexionActiveConnexionLost(ClientIndividualConnexion connexion, int index)
+	{	fireDataPanelSelectionChange(connexion);
 	}
 
 	@Override
-	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
-	{	Set<Integer> allowedPlayers = connection.getGameInfo().getAllowedPlayers();
-		List<Profile> selectedProfiles = connection.getPlayerProfiles();
+	public void connexionProfilesChanged(ClientIndividualConnexion connexion, int index)
+	{	Set<Integer> allowedPlayers = connexion.getGameInfo().getAllowedPlayers();
+		List<Profile> selectedProfiles = connexion.getPlayerProfiles();
 		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
 	}
 
 	@Override
-	public void connectionTournamentStarted(AbstractTournament tournament)
+	public void connexionTournamentStarted(AbstractTournament tournament)
 	{	fireDataPanelSelectionChange(tournament);
 	}
 }
