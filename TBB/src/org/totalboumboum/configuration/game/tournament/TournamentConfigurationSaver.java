@@ -78,6 +78,13 @@ public class TournamentConfigurationSaver
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
 		result.addContent(playersElement);
 		
+		// name
+		Element aaElement = new Element(XmlNames.AUTO_ADVANCE);
+		int aaIndex = tournamentConfiguration.getAutoAdvanceIndex();
+		String aaIndexStr = Integer.toString(aaIndex);
+		aaElement.setAttribute(XmlNames.INDEX,aaIndexStr);
+		result.addContent(aaElement);
+
 		return result;
 	}
 
