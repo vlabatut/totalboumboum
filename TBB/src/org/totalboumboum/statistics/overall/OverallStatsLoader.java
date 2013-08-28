@@ -35,12 +35,25 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
 /**
+ * This class is in charge for loading the overall statistics,
+ * i.e. those not already handled by the Glicko-2 system
+ * (especially scores).
  * 
  * @author Vincent Labatut
- *
  */
 public class OverallStatsLoader
 {
+	/**
+	 * Loads the overall statistics from a serialized java file.
+	 * 
+	 * @return
+	 * 		Overall statistics.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing the serialized file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the serialized file.
+	 */
 	@SuppressWarnings("unchecked")
 	public static HashMap<String,PlayerStats> loadOverallStatistics() throws IOException, ClassNotFoundException
 	{	// init path
@@ -54,9 +67,18 @@ public class OverallStatsLoader
 		HashMap<String,PlayerStats> result = (HashMap<String,PlayerStats>) in.readObject();
 		in.close();
 		return result;		
-		// TODO: if problem while reading the file, should restaure and use the backup 
+		// TODO: if problem while reading the file, should restore and use the backup 
 	}
 
+	/**
+	 * Retrieves the overall statistics from a text file.
+	 * 
+	 * @return
+	 * 		Overall statistics.
+	 * 
+	 * @throws FileNotFoundException
+	 * 		Problem while accessing the text file.
+	 */
 	public static HashMap<String,PlayerStats> importOverallStatistics() throws FileNotFoundException
 	{	HashMap<String,PlayerStats> result = new HashMap<String, PlayerStats>();
 	
