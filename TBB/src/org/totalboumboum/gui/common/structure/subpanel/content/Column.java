@@ -324,4 +324,10 @@ public class Column extends ContentPanel
 			}
 		}		
 	}
+	
+	public void clear()
+	{	// TODO remove listeners before removing labels?
+		removeAll();
+		this.lines = 0;
+	}
 }

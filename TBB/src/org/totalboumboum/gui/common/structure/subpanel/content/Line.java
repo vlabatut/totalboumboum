@@ -202,7 +202,10 @@ public class Line extends ContentPanel
 	}
 
 	public void setLabelKey(int col, String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+	{	MyLabel label = getLabel(col);
+		label.setOnlyKey(key);
+		
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiImageTools.getIcon(key);
