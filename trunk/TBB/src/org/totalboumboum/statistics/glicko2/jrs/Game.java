@@ -32,6 +32,7 @@ import java.util.Set;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 public interface Game {
     
     /** Get the ID of the game. This should uniquely identify the game to

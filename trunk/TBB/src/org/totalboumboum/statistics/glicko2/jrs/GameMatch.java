@@ -35,6 +35,7 @@ import java.util.Set;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 public class GameMatch implements Comparable<GameMatch>, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -73,7 +74,8 @@ public class GameMatch implements Comparable<GameMatch>, Serializable {
       *     An int greater than 0 indicates this object is greater than the object specified.
       *     0 indicates the objects are equal.
       */
-    public int compareTo(GameMatch gm) {
+    @Override
+	public int compareTo(GameMatch gm) {
         return (new Double(aveProbabilityOfDraw).compareTo(new Double(gm.aveProbabilityOfDraw))) * -1;
     }
 

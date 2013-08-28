@@ -37,6 +37,7 @@ import java.util.Iterator;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 public class ResultsBasedRankingService extends RankingService {
     private static final long serialVersionUID = 1L;
 
@@ -54,7 +55,8 @@ public class ResultsBasedRankingService extends RankingService {
       * @param gameResults
       *     An instance of GameResults indicating the results of a game.
       */
-    public synchronized void postResults(GameResults gameResults) {
+    @Override
+	public synchronized void postResults(GameResults gameResults) {
 
         super.postResults(gameResults);
         

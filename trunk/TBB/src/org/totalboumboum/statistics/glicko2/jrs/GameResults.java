@@ -36,6 +36,7 @@ import java.util.Set;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 public class GameResults implements Serializable {
     private static final long serialVersionUID = 1L;
     

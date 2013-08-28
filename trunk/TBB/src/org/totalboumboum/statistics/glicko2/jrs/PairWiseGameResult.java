@@ -33,6 +33,7 @@ import java.util.Scanner;
   *
   * @author Derek Hilder
   */
+@SuppressWarnings("javadoc")
 class PairWiseGameResult implements Serializable {
     private static final long serialVersionUID = 1L;
     

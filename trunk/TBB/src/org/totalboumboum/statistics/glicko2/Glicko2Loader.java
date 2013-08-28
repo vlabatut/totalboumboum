@@ -36,12 +36,24 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
 /**
+ * This class is in charge for loading the Glicko-2 statistics
+ * for all registered players.
  * 
  * @author Vincent Labatut
- *
  */
 public class Glicko2Loader
 {
+	/**
+	 * Loads the Glicko-2 statistics from a serialized java file.
+	 * 
+	 * @return
+	 * 		Glicko-2 statistics.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing the serialized file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the serialized file.
+	 */
 	public static RankingService loadGlicko2Statistics() throws IOException, ClassNotFoundException
 	{	// init path
 		String path = FilePaths.getGlicko2Path()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
@@ -57,6 +69,15 @@ public class Glicko2Loader
 		// TODO: if problem while reading the file, should restore and use the backup 
 	}
 
+	/**
+	 * Retrieves the Glicko-2 statistics from a text file.
+	 * 
+	 * @return
+	 * 		Glicko-2 statistics.
+	 * 
+	 * @throws FileNotFoundException
+	 * 		Problem while accessing the text file.
+	 */
 	public static RankingService importGlicko2Statistics() throws FileNotFoundException
 	{	RankingService result = new ResultsBasedRankingService();
 	

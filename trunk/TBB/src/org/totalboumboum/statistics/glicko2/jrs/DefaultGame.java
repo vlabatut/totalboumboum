@@ -37,6 +37,7 @@ import java.util.UUID;
   * @author Derek Hilder
   * @author Vincent Labatut
   */
+@SuppressWarnings("javadoc")
 public class DefaultGame implements Game, Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -97,7 +98,8 @@ public class DefaultGame implements Game, Serializable {
       * @return 
       *     An Object representing the game's unique ID.
       */
-    public String getId() {
+    @Override
+	public String getId() {
         return id;
     }
 
@@ -107,7 +109,8 @@ public class DefaultGame implements Game, Serializable {
       *     A Set of Objects representing the IDs of the players participating
       *     in the game.
       */
-    public Set<String> getParticipantIds() {
+    @Override
+	public Set<String> getParticipantIds() {
         return participantIds;
     }
 }
