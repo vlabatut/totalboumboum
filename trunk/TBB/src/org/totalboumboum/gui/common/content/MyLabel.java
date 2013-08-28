@@ -72,6 +72,30 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** The unique key of this label */
+	private String key = null;
+	
+	/**
+	 * Returns the key associated to this label.
+	 * 
+	 * @return
+	 * 		A string representing the key of this label.
+	 */
+	public String getKey()
+	{	return key;
+	}
+
+	/**
+	 * Changes only the key field,
+	 * not the content of the label.
+	 * 
+	 * @param key
+	 * 		New key for this label.
+	 */
+	public void setOnlyKey(String key)
+	{	this.key = key;
+	}
+	
 	/**
 	 * Sets a label's icon or text. For an icon, the label preferred size
 	 * <b>must be set before</b> calling this method.
@@ -80,7 +104,8 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 	 * @param imageFlag
 	 */
 	public void setKey(String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+	{	this.key = key;
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiImageTools.getIcon(key);
