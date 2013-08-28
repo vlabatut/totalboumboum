@@ -561,6 +561,12 @@
 		- Pretty Bomberman de SBM3
 		- Niveaux du tournoi 2013/14
 		- Tournoi de qualification 2013/14
+	- stats
+		- Évolution des stats sur l'ensemble des joueurs, pour l'ensemble des manches et des types de stats
+		- Enregistrement de l'historique des joueurs, pour chaque manche jouée
 	- ia :
 		- possibilité de découper le code source de l'agent en deux projets (TBB vs. versions des agents)
-		 
+	- options :
+		- Possibilité d'enchainer les tournois automatiquement, avec sélection automatique des joueurs. 
+		- Menu options modifié en conséquence (maintenant trois modes différents d'enchainement automatique)
+ 
