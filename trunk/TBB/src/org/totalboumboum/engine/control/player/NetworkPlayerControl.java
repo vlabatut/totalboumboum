@@ -30,7 +30,7 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
 
 /**
  * Client side class in charge of
@@ -50,14 +50,14 @@ public class NetworkPlayerControl extends PlayerControl
 	 */
 	public NetworkPlayerControl(ControlledPlayer player)
 	{	super(player);
-		connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONNECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Client connection */
-	private ClientGeneralConnection connection;
+	/** Client connexion */
+	private ClientGeneralConnexion connexion;
 	
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////
@@ -88,7 +88,7 @@ public class NetworkPlayerControl extends PlayerControl
 			if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOnKey(keyCode))
 		    {	ControlCode controlCode = new ControlCode(keyCode,true);
 		    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
-		    	connection.sendControl(event);
+		    	connexion.sendControl(event);
 		    }
 	    }
 	}
@@ -102,7 +102,7 @@ public class NetworkPlayerControl extends PlayerControl
 		if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOffKey(keyCode))
 	    {	ControlCode controlCode = new ControlCode(keyCode,false);
 	    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
-	    	connection.sendControl(event);
+	    	connexion.sendControl(event);
 	    }
 	}
 
@@ -120,7 +120,7 @@ public class NetworkPlayerControl extends PlayerControl
 		{	finished = true;
 			super.finish();
 			
-			connection = null;
+			connexion = null;
 		}
 	}
 }
