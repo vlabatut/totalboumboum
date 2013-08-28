@@ -83,7 +83,7 @@ import org.totalboumboum.engine.player.HumanPlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -117,8 +117,8 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-		zoomCoefficient = RoundVariables.zoomFactor / clientConnection.getZoomCoef();
+		clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		zoomCoefficient = RoundVariables.zoomFactor / clientConnexion.getZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
@@ -186,7 +186,7 @@ System.out.println(hero+" "+hero.getId());
 					controlSettings.add(map.get(index));
 			}
 		}
-		clientConnection.sendControlSettings(controlSettings);
+		clientConnexion.sendControlSettings(controlSettings);
 	}
 	
 	@Override
@@ -199,8 +199,8 @@ System.out.println(hero+" "+hero.getId());
 	@Override
 	protected void finishLoopInit()
 	{	super.finishLoopInit();
-		//ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		clientConnection.loadingComplete();
+		//ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		clientConnexion.loadingComplete();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -322,7 +322,7 @@ System.out.println(hero+" "+hero.getId());
 	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ClientGeneralConnection clientConnection;
+	private ClientGeneralConnexion clientConnexion;
 	
 	/**
 	 * always returns an event.
@@ -330,7 +330,7 @@ System.out.println(hero+" "+hero.getId());
 	 */
 	@Override
 	public ReplayEvent retrieveEvent()
-	{	ReplayEvent result = clientConnection.retrieveEvent();
+	{	ReplayEvent result = clientConnexion.retrieveEvent();
 		return result;
 	}
 	
@@ -349,7 +349,7 @@ System.out.println(hero+" "+hero.getId());
 	{	if(!isOver())
 		{	if(VERBOSE)
 				System.out.println("/////////////////////////////////////////");		
-			List<ReplayEvent> events = clientConnection.retrieveEventList(getTotalEngineTime());
+			List<ReplayEvent> events = clientConnexion.retrieveEventList(getTotalEngineTime());
 	
 			// process events
 			for(ReplayEvent event: events)

@@ -65,7 +65,7 @@ import org.totalboumboum.engine.player.RemotePlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -205,8 +205,8 @@ public class ServerLoop extends LocalLoop
 		DisplayWaitMessage waitMessage = new DisplayWaitMessage(this);
 		displayManager.addDisplay(waitMessage);
 		
-		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		while(!connection.areAllClientsReady())
+		ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		while(!connexion.areAllClientsReady())
 		{	// sleep a bit
 			try
 			{	Thread.sleep(100);
