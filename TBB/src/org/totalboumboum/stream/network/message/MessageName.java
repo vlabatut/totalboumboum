@@ -51,7 +51,7 @@ public enum MessageName
 		 * >must send its id in the message
 		 * >possible causes:
 		 * 		- client connects for the first time
-		 * 		- client tries to reconnect (after accidental disconnection)
+		 * 		- client tries to reconnect (after accidental disconnexion)
 		 * 		- a manual refresh was performed
 		 * 		- central checks for progress
 		 * >behavior:
@@ -136,10 +136,10 @@ public enum MessageName
 	/* 
 	 * common
 	 */
-		/** server accept/reject reconnection */
+		/** server accept/reject reconnexion */
 		ANSWERING_RECONNECTION,
-		/** client asks for reconnection */
+		/** client asks for reconnexion */
 		REQUESTING_RECONNECTION,
-		/** client or server asks for disconnection*/
+		/** client or server asks for disconnexion*/
 		REQUESTING_DISCONNECTION
 }

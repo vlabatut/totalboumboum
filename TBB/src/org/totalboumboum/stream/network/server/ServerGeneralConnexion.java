@@ -35,7 +35,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
+import org.totalboumboum.configuration.connexions.ConnexionsConfiguration;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
@@ -61,16 +61,16 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class ServerGeneralConnection implements Runnable
+public class ServerGeneralConnexion implements Runnable
 {	
-	public ServerGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles, boolean direct, boolean central)
+	public ServerGeneralConnexion(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles, boolean direct, boolean central)
 	{	// set data
 		initPlayerProfiles(playerProfiles);
 		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles,direct,central);
 		
 		// launch thread
 		Thread thread = new Thread(this);
-		thread.setName("TBB.serverconnection");
+		thread.setName("TBB.serverconnexion");
 		thread.start();
 	}
 		
@@ -85,17 +85,17 @@ public class ServerGeneralConnection implements Runnable
 	{	this.remotePlayerControl = remotePlayerControl;
 	}
 	
-	protected void controlSettingsReceived(List<ControlSettings> controlSettings, ServerIndividualConnection connection)
-	{	// get the ids of the profiles corresponding to the specified connection
+	protected void controlSettingsReceived(List<ControlSettings> controlSettings, ServerIndividualConnexion connexion)
+	{	// get the ids of the profiles corresponding to the specified connexion
 		List<String> ids = new ArrayList<String>();
-		connectionsLock.lock();
-		{	for(String id: playerConnections.keySet())
-			{	ServerIndividualConnection cx = playerConnections.get(id);
-				if(cx==connection)
+		connexionsLock.lock();
+		{	for(String id: playerConnexions.keySet())
+			{	ServerIndividualConnexion cx = playerConnexions.get(id);
+				if(cx==connexion)
 					ids.add(id);
 			}
 		}
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 		
 		// update the controlSettings for the corresponding profiles
 		controlsLock.lock();
@@ -143,7 +143,7 @@ public class ServerGeneralConnection implements Runnable
 			gameInfo.setTournamentType(tournamentType);
 	
 			// host info
-			HostInfo hostInfo = Configuration.getConnectionsConfiguration().getLocalHostInfo();
+			HostInfo hostInfo = Configuration.getConnexionsConfiguration().getLocalHostInfo();
 //			result.setLastIp(lastIp);	// TODO info locale au client
 //			result.setPreferred(preferred); // TODO info locale au client
 //			result.setUses(uses); 		// TODO info locale au client
@@ -183,7 +183,7 @@ public class ServerGeneralConnection implements Runnable
 	// PROFILES		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final List<Profile> playerProfiles = new ArrayList<Profile>();
-	private final HashMap<String,ServerIndividualConnection> playerConnections = new HashMap<String, ServerIndividualConnection>(); 
+	private final HashMap<String,ServerIndividualConnexion> playerConnexions = new HashMap<String, ServerIndividualConnexion>(); 
 	private Lock profileLock = new ReentrantLock();
 	
 	public void switchPlayersSelection()
@@ -216,7 +216,7 @@ public class ServerGeneralConnection implements Runnable
 	{	profileLock.lock();
 		{	this.playerProfiles.addAll(playerProfiles);
 			for(Profile profile: playerProfiles)
-			{	playerConnections.put(profile.getId(),null);
+			{	playerConnexions.put(profile.getId(),null);
 				profile.setReady(!profile.isRemote());
 			}
 		}
@@ -240,7 +240,7 @@ public class ServerGeneralConnection implements Runnable
 		return result;
 	}
 	
-	public void profileAdded(Profile profile, ServerIndividualConnection connection)
+	public void profileAdded(Profile profile, ServerIndividualConnexion connexion)
 	{	if(!containsProfile(profile))
 		{	profileLock.lock();
 			{	int size = playerProfiles.size();
@@ -269,7 +269,7 @@ public class ServerGeneralConnection implements Runnable
 			
 				// update players list
 				playerProfiles.add(profile);
-				playerConnections.put(profile.getId(),connection);
+				playerConnexions.put(profile.getId(),connexion);
 				
 				// send the appropriate message
 				NetworkMessage message = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,playerProfiles);
@@ -295,7 +295,7 @@ public class ServerGeneralConnection implements Runnable
 	/**
 	 * some profile was switched for another one
 	 */
-	public void profileSet(int index, Profile profile, ServerIndividualConnection connection)
+	public void profileSet(int index, Profile profile, ServerIndividualConnexion connexion)
 	{	if(!containsProfile(profile))
 		{	profileLock.lock();
 			{	Profile oldProfile = playerProfiles.get(index);
@@ -324,8 +324,8 @@ public class ServerGeneralConnection implements Runnable
 				gameInfoLock.unlock();
 			
 				// update profiles list
-				playerConnections.remove(oldProfile.getId());
-				playerConnections.put(profile.getId(),connection);
+				playerConnexions.remove(oldProfile.getId());
+				playerConnexions.put(profile.getId(),connexion);
 				playerProfiles.set(index,profile);
 				
 				// send the appropriate message 
@@ -388,7 +388,7 @@ public class ServerGeneralConnection implements Runnable
 		
 			// update players list
 			playerProfiles.remove(profile);
-			playerConnections.remove(profile.getId());
+			playerConnexions.remove(profile.getId());
 			
 			// send the appropriate message
 			NetworkMessage message = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,playerProfiles);
@@ -408,12 +408,12 @@ public class ServerGeneralConnection implements Runnable
 //	}
 //	while(it.hasNext() && !found);
 	
-	public void playerSelectionExited(ServerIndividualConnection connection)
+	public void playerSelectionExited(ServerIndividualConnexion connexion)
 	{	profileLock.lock();
 		{	List<Profile> temp = new ArrayList<Profile>(playerProfiles);
 			for(Profile profile: temp)
-			{	ServerIndividualConnection ct = playerConnections.get(profile.getId());
-				if(ct==connection)
+			{	ServerIndividualConnexion ct = playerConnexions.get(profile.getId());
+				if(ct==connexion)
 				{	profileRemoved(profile);
 					fireProfileRemoved(profile);
 				}
@@ -422,12 +422,12 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.unlock();
 	}
 	
-	public void playerSelectionConfirmed(ServerIndividualConnection connection, boolean confirmation)
+	public void playerSelectionConfirmed(ServerIndividualConnexion connexion, boolean confirmation)
 	{	profileLock.lock();
 		{	List<Profile> temp = new ArrayList<Profile>(playerProfiles);
 			for(Profile profile: temp)
-			{	ServerIndividualConnection ct = playerConnections.get(profile.getId());
-				if(ct==connection)
+			{	ServerIndividualConnexion ct = playerConnexions.get(profile.getId());
+				if(ct==connexion)
 				{	profile.setReady(confirmation);
 					fireProfileModified(profile);
 					profileModified(profile);
@@ -437,7 +437,7 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.unlock();
 	}
 	
-	public void playersAddRequested(Profile profile, ServerIndividualConnection connection)
+	public void playersAddRequested(Profile profile, ServerIndividualConnexion connexion)
 	{	
 //		Set<Integer> allowedPlayers;
 		int index;
@@ -494,7 +494,7 @@ public class ServerGeneralConnection implements Runnable
 				catch (ClassNotFoundException e)
 				{	e.printStackTrace();
 				}
-				profileAdded(profile,connection);
+				profileAdded(profile,connexion);
 			}
 			index = playerProfiles.indexOf(profile);
 //		}
@@ -503,7 +503,7 @@ public class ServerGeneralConnection implements Runnable
 		fireProfileAdded(index,profile);
 	}
 	
-	public void playersChangeRequestedColor(Profile profile, ServerIndividualConnection connection)
+	public void playersChangeRequestedColor(Profile profile, ServerIndividualConnexion connexion)
 	{	profileLock.lock();
 		{	String id = profile.getId();
 			Profile prof = null;
@@ -515,7 +515,7 @@ public class ServerGeneralConnection implements Runnable
 			}
 			while(it.hasNext() && prof==null);
 			
-			if(prof!=null && connection==playerConnections.get(id))
+			if(prof!=null && connexion==playerConnexions.get(id))
 			{	PredefinedColor color = profile.getSpriteColor();
 				color = Configuration.getProfilesConfiguration().getNextFreeColor(playerProfiles,prof,color);
 				prof.getSelectedSprite().setColor(color);
@@ -544,7 +544,7 @@ public class ServerGeneralConnection implements Runnable
 		fireProfileModified(profile);
 	}
 	
-	public void playersChangeRequestedHero(Profile profile, ServerIndividualConnection connection)
+	public void playersChangeRequestedHero(Profile profile, ServerIndividualConnexion connexion)
 	{	profileLock.lock();
 		{	String id = profile.getId();
 			Profile prof = null;
@@ -556,7 +556,7 @@ public class ServerGeneralConnection implements Runnable
 			}
 			while(it.hasNext() && prof==null);
 			
-			if(prof!=null && connection==playerConnections.get(id))
+			if(prof!=null && connexion==playerConnexions.get(id))
 			{	try
 				{	// images must be loaded because they did not pass the stream	
 					ProfileLoader.reloadPortraits(profile);
@@ -582,7 +582,7 @@ public class ServerGeneralConnection implements Runnable
 		fireProfileModified(profile);
 	}
 	
-	public void playersRemoveRequested(String id, ServerIndividualConnection connection)
+	public void playersRemoveRequested(String id, ServerIndividualConnexion connexion)
 	{	Profile profile = null;
 	
 		profileLock.lock();
@@ -594,7 +594,7 @@ public class ServerGeneralConnection implements Runnable
 			}
 			while(it.hasNext() && profile==null);
 			
-			if(profile!=null && connection==playerConnections.get(id))
+			if(profile!=null && connexion==playerConnexions.get(id))
 				profileRemoved(profile);
 		}
 		profileLock.unlock();
@@ -602,7 +602,7 @@ public class ServerGeneralConnection implements Runnable
 		fireProfileRemoved(profile);
 	}
 	
-	public void playersSetRequested(String id, Profile profile, ServerIndividualConnection connection)
+	public void playersSetRequested(String id, Profile profile, ServerIndividualConnexion connexion)
 	{	int index;
 		
 		profileLock.lock();
@@ -616,7 +616,7 @@ public class ServerGeneralConnection implements Runnable
 			while(it.hasNext() && oldProfile==null);
 			
 			index = playerProfiles.indexOf(oldProfile);
-			if(oldProfile!=null && connection==playerConnections.get(id))
+			if(oldProfile!=null && connexion==playerConnexions.get(id))
 			{	// images must be loaded because they did not pass the stream	
 				try
 				{	ProfileLoader.reloadPortraits(profile);
@@ -661,7 +661,7 @@ public class ServerGeneralConnection implements Runnable
 				catch (ClassNotFoundException e)
 				{	e.printStackTrace();
 				}
-				profileSet(index,profile,connection);
+				profileSet(index,profile,connexion);
 			}
 		}
 		profileLock.unlock();
@@ -690,8 +690,8 @@ public class ServerGeneralConnection implements Runnable
 	@Override
 	public void run()
 	{	// init
-		ConnectionsConfiguration connectionConfiguration = Configuration.getConnectionsConfiguration();
-		int port = connectionConfiguration.getPort();
+		ConnexionsConfiguration connexionConfiguration = Configuration.getConnexionsConfiguration();
+		int port = connexionConfiguration.getPort();
 		
 		// create socket
 		ServerSocket serverSocket = null;
@@ -703,11 +703,11 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		{	e.printStackTrace();
 		}
 		
-		// wait for new connections
+		// wait for new connexions
 		while(!isFinished())
 		{	try
 			{	Socket socket = serverSocket.accept();
-				createConnection(socket);
+				createConnexion(socket);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -757,42 +757,42 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	}
 	
 	public void updateZoomCoef(double zoomCoef)
-	{	// init connection readyness
-		connectionsLock.lock();
-		{	individualConnectionsReady.clear();
-			for(int i=0;i<individualConnections.size();i++)
-				individualConnectionsReady.add(false);
+	{	// init connexion readyness
+		connexionsLock.lock();
+		{	individualConnexionsReady.clear();
+			for(int i=0;i<individualConnexions.size();i++)
+				individualConnexionsReady.add(false);
 		}
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 
 		// init controlSettings list
-		connectionsLock.lock();
+		connexionsLock.lock();
 		{	controlSettings = new ArrayList<ControlSettings>();
 			for(int i=0;i<playerProfiles.size();i++)
 				controlSettings.add(null);
 		}
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 		
 		// propagate message to client
 		NetworkMessage message = new NetworkMessage(MessageName.UPDATING_ZOOM_COEFF,zoomCoef);
 		propagateMessage(message);
 	}
 	
-	protected void loadingComplete(ServerIndividualConnection connection)
+	protected void loadingComplete(ServerIndividualConnexion connexion)
 	{	boolean ready = true;
-		connectionsLock.lock();
-		{	// update this connection readyness
-			int index = individualConnections.indexOf(connection);
-			individualConnectionsReady.set(index,true);
+		connexionsLock.lock();
+		{	// update this connexion readyness
+			int index = individualConnexions.indexOf(connexion);
+			individualConnexionsReady.set(index,true);
 
 			// check if all clients are ready
-			Iterator<Boolean> it = individualConnectionsReady.iterator();
+			Iterator<Boolean> it = individualConnexionsReady.iterator();
 			while(it.hasNext() && ready)
 			{	boolean value = it.next();
 				ready = ready && value;
 			}
 		}
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 		
 		// if it is the case (all clients ready):
 		if(ready)
@@ -801,10 +801,10 @@ System.out.println(serverSocket.getLocalSocketAddress());
 			propagateMessage(message);
 			
 			// set the controlSettings
-			connectionsLock.lock();
+			connexionsLock.lock();
 			{	remotePlayerControl.setControlSettings(controlSettings);
 			}
-			connectionsLock.unlock();
+			connexionsLock.unlock();
 
 			// release the game thread
 			roundLock.lock();
@@ -817,55 +817,55 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	/////////////////////////////////////////////////////////////////
 	// CONNECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<ServerIndividualConnection> individualConnections = new ArrayList<ServerIndividualConnection>();
-	private final List<Boolean> individualConnectionsReady = new ArrayList<Boolean>();
-	private Lock connectionsLock = new ReentrantLock();
+	private final List<ServerIndividualConnexion> individualConnexions = new ArrayList<ServerIndividualConnexion>();
+	private final List<Boolean> individualConnexionsReady = new ArrayList<Boolean>();
+	private Lock connexionsLock = new ReentrantLock();
 	
-	public void terminateConnection()
-	{	connectionsLock.lock();
-		for(ServerIndividualConnection connection: individualConnections)
-			connection.finish();
-		connectionsLock.unlock();
+	public void terminateConnexion()
+	{	connexionsLock.lock();
+		for(ServerIndividualConnexion connexion: individualConnexions)
+			connexion.finish();
+		connexionsLock.unlock();
 	}
 	
 	public void propagateMessage(NetworkMessage message)
-	{	connectionsLock.lock();
-		{	for(ServerIndividualConnection connection: individualConnections)
-				connection.propagateMessage(message);
+	{	connexionsLock.lock();
+		{	for(ServerIndividualConnexion connexion: individualConnexions)
+				connexion.propagateMessage(message);
 		}
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 	}
 	
-	public void createConnection(Socket socket)
-	{	connectionsLock.lock();
+	public void createConnexion(Socket socket)
+	{	connexionsLock.lock();
 		{	try
-			{	ServerIndividualConnection individualConnection = new ServerIndividualConnection(this,socket);
-				individualConnections.add(individualConnection);
+			{	ServerIndividualConnexion individualConnexion = new ServerIndividualConnexion(this,socket);
+				individualConnexions.add(individualConnexion);
 			}
 			catch (IOException e)
-			{	System.err.println("java.net.SocketException: Connection reset while creating streams");
+			{	System.err.println("java.net.SocketException: Connexion reset while creating streams");
 				//e.printStackTrace();
 			}
 		}
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 	}
 	
-	public void removeConnection(ServerIndividualConnection connection)
-	{	connectionsLock.lock();
+	public void removeConnexion(ServerIndividualConnexion connexion)
+	{	connexionsLock.lock();
 	
-		connection.finish();
-		individualConnections.remove(connection);
+		connexion.finish();
+		individualConnexions.remove(connexion);
 		
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 	}
 	
-	public ServerIndividualConnection getConnection(int index)
-	{	ServerIndividualConnection result;
-		connectionsLock.lock();
+	public ServerIndividualConnexion getConnexion(int index)
+	{	ServerIndividualConnexion result;
+		connexionsLock.lock();
 		
-		result = individualConnections.get(index);
+		result = individualConnexions.get(index);
 	
-		connectionsLock.unlock();
+		connexionsLock.unlock();
 		
 		return result;
 	}
@@ -880,10 +880,10 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<ServerGeneralConnectionListener> listeners = new ArrayList<ServerGeneralConnectionListener>();
+	private List<ServerGeneralConnexionListener> listeners = new ArrayList<ServerGeneralConnexionListener>();
 	private Lock listenersLock = new ReentrantLock();
 	
-	public void addListener(ServerGeneralConnectionListener listener)
+	public void addListener(ServerGeneralConnexionListener listener)
 	{	listenersLock.lock();
 		{	if(!listeners.contains(listener))
 				listeners.add(listener);
@@ -891,7 +891,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		listenersLock.unlock();
 	}
 	
-	public void removeListener(ServerGeneralConnectionListener listener)
+	public void removeListener(ServerGeneralConnexionListener listener)
 	{	listenersLock.lock();
 		{	listeners.remove(listener);
 		}
@@ -899,42 +899,42 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	}
 	
 	private void fireProfileRemoved(Profile profile)
-	{	List<ServerGeneralConnectionListener> list;
+	{	List<ServerGeneralConnexionListener> list;
 		listenersLock.lock();
-		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		{	list = new ArrayList<ServerGeneralConnexionListener>(listeners);
 		}
 		listenersLock.unlock();
-		for(ServerGeneralConnectionListener listener: list)
+		for(ServerGeneralConnexionListener listener: list)
 			listener.profileRemoved(profile);
 	}
 
 	private void fireProfileAdded(int index, Profile profile)
-	{	List<ServerGeneralConnectionListener> list;
+	{	List<ServerGeneralConnexionListener> list;
 		listenersLock.lock();
-		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		{	list = new ArrayList<ServerGeneralConnexionListener>(listeners);
 		}
 		listenersLock.unlock();
-		for(ServerGeneralConnectionListener listener: list)
+		for(ServerGeneralConnexionListener listener: list)
 			listener.profileAdded(index,profile);
 	}
 
 	private void fireProfileModified(Profile profile)
-	{	List<ServerGeneralConnectionListener> list;
+	{	List<ServerGeneralConnexionListener> list;
 		listenersLock.lock();
-		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		{	list = new ArrayList<ServerGeneralConnexionListener>(listeners);
 		}
 		listenersLock.unlock();
-		for(ServerGeneralConnectionListener listener: list)
+		for(ServerGeneralConnexionListener listener: list)
 			listener.profileModified(profile);
 	}
 
 	private void fireProfileSet(int index, Profile profile)
-	{	List<ServerGeneralConnectionListener> list;
+	{	List<ServerGeneralConnexionListener> list;
 		listenersLock.lock();
-		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		{	list = new ArrayList<ServerGeneralConnexionListener>(listeners);
 		}
 		listenersLock.unlock();
-		for(ServerGeneralConnectionListener listener: list)
+		for(ServerGeneralConnexionListener listener: list)
 			listener.profileSet(index,profile);
 	}
 

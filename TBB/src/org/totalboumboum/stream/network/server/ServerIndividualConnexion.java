@@ -29,7 +29,7 @@ import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.profile.Profile;
-import org.totalboumboum.stream.network.AbstractConnection;
+import org.totalboumboum.stream.network.AbstractConnexion;
 import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -41,18 +41,18 @@ import org.totalboumboum.stream.network.message.NetworkMessage;
  * @author Vincent Labatut
  *
  */
-public class ServerIndividualConnection extends AbstractConnection
+public class ServerIndividualConnexion extends AbstractConnexion
 {
-	public ServerIndividualConnection(ServerGeneralConnection generalConnection, Socket socket) throws IOException
-	{	this.generalConnection = generalConnection;
+	public ServerIndividualConnexion(ServerGeneralConnexion generalConnexion, Socket socket) throws IOException
+	{	this.generalConnexion = generalConnexion;
 	
-		initConnection(socket,true);
+		initConnexion(socket,true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL CONNECTION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ServerGeneralConnection generalConnection;
+	private ServerGeneralConnexion generalConnexion;
 
 	/////////////////////////////////////////////////////////////////
 	// CLIENT STATE			/////////////////////////////////////////
@@ -85,7 +85,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	HostState state = generalConnection.getGameInfo().getHostInfo().getState();
+	{	HostState state = generalConnexion.getGameInfo().getHostInfo().getState();
 		
 		if(message.getInfo().equals(MessageName.REQUESTING_GAME_INFO))
 			gameInfoRequested(message);
@@ -202,7 +202,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	private void gameInfoRequested(NetworkMessage message)
 	{	hostId = (String)message.getData();
-		GameInfo gameInfo = generalConnection.getGameInfo();
+		GameInfo gameInfo = generalConnexion.getGameInfo();
 		NetworkMessage msg = new NetworkMessage(MessageName.UPDATING_GAME_INFO,gameInfo);
 		writer.addMessage(msg);
 	}
@@ -218,7 +218,7 @@ public class ServerIndividualConnection extends AbstractConnection
 		{	// update state
 			state = ClientState.SELECTING_PLAYERS;
 			// send back players list
-			NetworkMessage msg = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,generalConnection.getPlayerProfiles());
+			NetworkMessage msg = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,generalConnexion.getPlayerProfiles());
 			writeMessage(msg);
 		}
 		else
@@ -229,39 +229,39 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	boolean local = (Boolean) message.getData();
 		state = ClientState.SELECTING_GAME;
 		if(local)
-		{	generalConnection.playerSelectionExited(this);
+		{	generalConnexion.playerSelectionExited(this);
 		}
 	}
 	
 	private void confirmsPlayersSelection(NetworkMessage message)
 	{	state = ClientState.WAITING_TOURNAMENT;
-		generalConnection.playerSelectionConfirmed(this,true);
+		generalConnexion.playerSelectionConfirmed(this,true);
 	}
 	
 	private void unconfirmsPlayersSelection(NetworkMessage message)
 	{	state = ClientState.SELECTING_PLAYERS;
-		generalConnection.playerSelectionConfirmed(this,false);
+		generalConnexion.playerSelectionConfirmed(this,false);
 	}
 	
 	private void playersAddRequested(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
 		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
-			generalConnection.playersAddRequested(profile,this);
+			generalConnexion.playersAddRequested(profile,this);
 	}
 	
 	private void playersChangeRequestedColor(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
 		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
-			generalConnection.playersChangeRequestedColor(profile,this);
+			generalConnexion.playersChangeRequestedColor(profile,this);
 	}
 	
 	private void playersChangeRequestedHero(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
 		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
-			generalConnection.playersChangeRequestedHero(profile,this);
+			generalConnexion.playersChangeRequestedHero(profile,this);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -272,7 +272,7 @@ public class ServerIndividualConnection extends AbstractConnection
 		p2.setControlSettingsIndex(0);
 		String id = p1.getId();
 		if(p1.getLastHost().equals(hostId) && p2.getLastHost().equals(hostId))
-			generalConnection.playersSetRequested(id,p2,this);
+			generalConnexion.playersSetRequested(id,p2,this);
 	}
 	
 	private void playersRemoveRequested(NetworkMessage message)
@@ -280,7 +280,7 @@ public class ServerIndividualConnection extends AbstractConnection
 		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
 		{	String id = profile.getId();
-			generalConnection.playersRemoveRequested(id,this);
+			generalConnexion.playersRemoveRequested(id,this);
 		}
 	}
 
@@ -298,26 +298,26 @@ public class ServerIndividualConnection extends AbstractConnection
 	@SuppressWarnings("unchecked")
 	private void controlSettingsReceived(NetworkMessage message)
 	{	List<ControlSettings> controlSettings = (List<ControlSettings>)message.getData();
-		generalConnection.controlSettingsReceived(controlSettings,this);
+		generalConnexion.controlSettingsReceived(controlSettings,this);
 	}
 	
 	private void loadingComplete(NetworkMessage message)
 	{	//state = ClientState.WAITING_ROUND;
-		generalConnection.loadingComplete(this);
+		generalConnexion.loadingComplete(this);
 	}
 	
 	private void controlReceived(NetworkMessage message)
 	{	StreamedEvent event = (StreamedEvent) message.getData();
 		if(event instanceof RemotePlayerControlEvent)
 		{	RemotePlayerControlEvent evt = (RemotePlayerControlEvent) event;
-			generalConnection.controlReceived(evt);
+			generalConnexion.controlReceived(evt);
 		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OWNER INTERFACE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void connectionLost()
+	public void connexionLost()
 	{	ioLock.lock();
 		{	if(!ioFinished)
 			{	ioFinished = true;
@@ -327,12 +327,12 @@ public class ServerIndividualConnection extends AbstractConnection
 				
 				//TODO à completer
 				if(state==ClientState.SELECTING_GAME)
-				{	generalConnection.removeConnection(this);
+				{	generalConnexion.removeConnexion(this);
 				}
 				else if(state==ClientState.SELECTING_PLAYERS
 					|| state==ClientState.WAITING_TOURNAMENT)
-				{	generalConnection.playerSelectionExited(this);
-					generalConnection.removeConnection(this);
+				{	generalConnexion.playerSelectionExited(this);
+					generalConnexion.removeConnexion(this);
 				}
 				
 				reader = null;
@@ -350,7 +350,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	if(!finished)
 		{	super.finish();
 			
-			generalConnection = null;
+			generalConnexion = null;
 		}
 	}
 }

@@ -40,18 +40,18 @@ import org.totalboumboum.stream.network.thread.RunnableWriter;
  * @author Vincent Labatut
  *
  */
-public abstract class AbstractConnection implements OwnerInterface
+public abstract class AbstractConnexion implements OwnerInterface
 {	
-	public AbstractConnection()
+	public AbstractConnexion()
 	{	writer = new RunnableWriter(this);
 		reader = new RunnableReader(this);
 	}
 	
-//	public AbstractConnection(Socket socket) throws IOException
-//	{	initConnection(socket);
+//	public AbstractConnexion(Socket socket) throws IOException
+//	{	initConnexion(socket);
 //	}
 
-	protected void initConnection(Socket socket, boolean order) throws IOException
+	protected void initConnexion(Socket socket, boolean order) throws IOException
 	{	// init streams
 		ObjectInputStream in;
 		ObjectOutputStream out;
@@ -76,7 +76,7 @@ public abstract class AbstractConnection implements OwnerInterface
 	
 		// init reader
 		reader.setStream(in);
-		reader.setConnection(this);
+		reader.setConnexion(this);
 		Thread readThread = new Thread(reader);
 		readThread.setName("TBB.netreader");
 		readThread.start();
