@@ -554,9 +554,9 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				// update gui
 				updateGame(gameInfo);
 			}
-			// add/remove from direct connection list
+			// add/remove from direct connexion list
 			else if(rc.equals(GameColumn.BUTTON))
-			{	// change direct connection
+			{	// change direct connexion
 				String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
 				GameInfo gameInfo = gamesMap.get(gameId);
 				HostInfo hostInfo = gameInfo.getHostInfo();
