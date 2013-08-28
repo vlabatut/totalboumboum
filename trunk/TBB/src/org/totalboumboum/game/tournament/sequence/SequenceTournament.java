@@ -41,7 +41,7 @@ import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.network.data.host.HostState;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.totalboumboum.tools.GameData;
 
 /**
@@ -204,10 +204,10 @@ public class SequenceTournament extends AbstractTournament
 			panel.tournamentOver();
 			stats.initEndDate();
 			
-			// server connection
-			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(serverConnection!=null)
-				serverConnection.updateHostState(HostState.FINISHED);
+			// server connexion
+			ServerGeneralConnexion serverConnexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(serverConnexion!=null)
+				serverConnexion.updateHostState(HostState.FINISHED);
 		}
 		else
 		{	panel.matchOver();		
