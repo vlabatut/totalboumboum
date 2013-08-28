@@ -21,6 +21,7 @@ package org.totalboumboum.gui.common.content.subpanel.statistics;
  * 
  */
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.NumberFormat;
@@ -35,6 +36,7 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
+import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiImageTools;
@@ -43,6 +45,7 @@ import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
@@ -58,8 +61,6 @@ public enum StatisticColumn
 	/////////////////////////////////////////////////////////////////
 	// GENERAL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Button to register/unregister player */
-	GENERAL_BUTTON,
 	/** Overall ranking */
 	GENERAL_RANK,
 	/** Evolution since last ranking */
@@ -71,6 +72,16 @@ public enum StatisticColumn
 	/** Player Name */
 	GENERAL_NAME,
 	
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Button to register/unregister a player */
+	GENERAL_REG_BUTTON,
+	/** Button to select/unselect a player */
+	GENERAL_SELECT_BUTTON,
+	/** Button to the change the color associated to a selected player */
+	GENERAL_COLOR_BUTTON,
+
 	/////////////////////////////////////////////////////////////////
 	// GLICKO-2			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -129,7 +140,7 @@ public enum StatisticColumn
 	public boolean isInverted()
 	{	boolean result = false;			
 		// general
-		if(this==GENERAL_BUTTON || this==GENERAL_RANK)
+		if(this==GENERAL_RANK)
 			result = false;
 		else if(this==GENERAL_EVOLUTION)
 			result = false;
@@ -138,6 +149,13 @@ public enum StatisticColumn
 		else if(this==GENERAL_TYPE)
 			result = false;
 		else if(this==GENERAL_NAME)
+			result = false;
+		// buttons
+		else if(this==GENERAL_REG_BUTTON)
+			result = false;
+		else if(this==GENERAL_SELECT_BUTTON)
+			result = false;
+		else if(this==GENERAL_COLOR_BUTTON)
 			result = false;
 		// glicko-2
 		else if(this==GLICKO_MEAN)
@@ -188,9 +206,7 @@ public enum StatisticColumn
 	public String getHeaderKey()
 	{	String result = null;			
 		// general
-		if(this==GENERAL_BUTTON)
-			result = null;
-		else if(this==GENERAL_RANK)
+		if(this==GENERAL_RANK)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK;
 		else if(this==GENERAL_EVOLUTION)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION;
@@ -200,6 +216,13 @@ public enum StatisticColumn
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_TYPE;
 		else if(this==GENERAL_NAME)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_NAME;
+		// buttons
+		else if(this==GENERAL_REG_BUTTON)
+			result = null;
+		else if(this==GENERAL_SELECT_BUTTON)
+			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_SELECT;
+		else if(this==GENERAL_COLOR_BUTTON)
+			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_COLOR;
 		// glicko-2
 		else if(this==GLICKO_MEAN)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_MEAN;
@@ -267,18 +290,7 @@ public enum StatisticColumn
 	 */
 	public void setLabelContent(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats)
 	{	// general
-		if(this==GENERAL_BUTTON)
-		{	String key;
-			if(playerRating==null)
-				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER;
-			else
-				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
-			panel.setLabelKey(line,col,key,true);
-			MyLabel label = panel.getLabel(line,col);
-			label.addMouseListener(container);
-			label.setMouseSensitive(true);
-		}
-		else if(this==GENERAL_RANK)
+		if(this==GENERAL_RANK)
 		{	if(playerRating!=null)
 			{	String text = Integer.toString(playerRank);
 				String tooltip = text;
@@ -348,6 +360,56 @@ public enum StatisticColumn
 		{	String text = profile.getName();
 			String tooltip = profile.getName();
 			panel.setLabelText(line,col,text,tooltip);
+		}
+		// buttons
+		else if(this==GENERAL_REG_BUTTON)
+		{	String key;
+			if(playerRating==null)
+				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER;
+			else
+				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
+			panel.setLabelKey(line,col,key,true);
+			MyLabel label = panel.getLabel(line,col);
+			label.addMouseListener(container);
+			label.setMouseSensitive(true);
+		}
+		else if(this==GENERAL_SELECT_BUTTON)
+		{	String key;
+			if(playerStats.isSelected())
+			{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNSELECT;
+				panel.setLabelKey(line,col,key,true);
+			}
+			else
+			{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SELECT;
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+				panel.setLabelText(line,col,null,tooltip);
+				MyLabel label = panel.getLabel(line,col);
+				label.setOnlyKey(key);
+			}
+			MyLabel label = panel.getLabel(line,col);
+			label.addMouseListener(container);
+			label.setMouseSensitive(true);
+		}
+		else if(this==GENERAL_COLOR_BUTTON)
+		{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_COLOR;
+			if(playerStats.isSelected())
+			{	PredefinedColor color = playerStats.getSelectedColor();
+				MyLabel label = panel.getLabel(line,col);
+				Color clr = color.getColor();
+				int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+				label.setBackground(bg);
+			}
+			else
+			{	MyLabel label = panel.getLabel(line,col);
+				label.setBackground(GuiColorTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			}
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+			panel.setLabelText(line,col,null,tooltip);
+			MyLabel label = panel.getLabel(line,col);
+			label.addMouseListener(container);
+			label.setMouseSensitive(true);
+			label.setOnlyKey(key);
 		}
 		// glicko-2
 		else if(this==GLICKO_MEAN)
@@ -596,7 +658,7 @@ public enum StatisticColumn
 			long totalRoundsPlayed = playerStats.getRoundsPlayed();
 			List<Comparable<?>> list = new ArrayList<Comparable<?>>();
 			// process
-			if(this==GENERAL_BUTTON || this==GENERAL_RANK)
+			if(this==GENERAL_RANK)
 			{	int rank = Integer.MAX_VALUE;
 				if(playerRating!=null)
 					rank = rankingService.getPlayerRank(playerId);
@@ -642,6 +704,24 @@ public enum StatisticColumn
 			{	String name = profile.getName();
 				list.add(name);
 				list.add(playerId);
+			}
+			// buttons
+			else if(this==GENERAL_REG_BUTTON)
+			{	int rank = Integer.MAX_VALUE;
+				if(playerRating!=null)
+					rank = rankingService.getPlayerRank(playerId);
+				list.add(rank);
+				list.add(playerId);
+			}
+			else if(this==GENERAL_SELECT_BUTTON)
+			{	boolean selected = playerStats.isSelected();
+				list.add(selected);
+			}
+			else if(this==GENERAL_SELECT_BUTTON)
+			{	int colorIdx = Integer.MAX_VALUE;
+				if(playerStats.isSelected())
+					colorIdx = playerStats.getSelectedColor().ordinal();
+				list.add(colorIdx);
 			}
 			// glicko-2
 			else if(this==GLICKO_MEAN)
