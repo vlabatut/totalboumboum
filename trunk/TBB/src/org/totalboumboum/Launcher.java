@@ -1677,3 +1677,4 @@ public class Launcher
  */
 
 //TODO bug: le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
+//TODO réset des stats: faut effacer les fichiers de stats individuelles
