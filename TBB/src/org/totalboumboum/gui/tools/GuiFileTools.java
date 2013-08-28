@@ -53,7 +53,7 @@ public class GuiFileTools
 	public final static String FILE_DOWN = "down.png";
 	public final static String FILE_DIMENSION = "dimension.png";
 	public final static String FILE_DIRECT = "direct.png";
-	public final static String FILE_DISCONNECTION = "disconnection.png";
+	public final static String FILE_DISCONNECTION = "disconnexion.png";
 	public final static String FILE_DISCRETIZE = "discretize.png";
 	public final static String FILE_DRAW = "draw.png";
 	public final static String FILE_EDIT = "edit.png";

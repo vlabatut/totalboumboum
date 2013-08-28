@@ -38,551 +38,288 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("javadoc")
 public class GuiKeys
 {
 	/////////////////////////////////////////////////////////////////
 	// INDIVIDUAL WORDS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Individual word used to define GUI keys */
 	public static final String ABOUT = "About";
-	/** Individual word used to define GUI keys */
 	public static final String ADD = "Add";
-	/** Individual word used to define GUI keys */
 	public static final String ADJUST = "Adjust";
-	/** Individual word used to define GUI keys */
 	public static final String ADVANCE = "Advance";
-	/** Individual word used to define GUI keys */
 	public static final String ADVANCED = "Advanced";
-	/** Individual word used to define GUI keys */
 	public static final String AFTER = "After";
-	/** Individual word used to define GUI keys */
 	public static final String AI = "Ai";
-	/** Individual word used to define GUI keys */
 	public static final String AIS = "Ais";
-	/** Individual word used to define GUI keys */
 	public static final String ALL = "All";
-	/** Individual word used to define GUI keys */
 	public static final String ALLOWED = "Allowed";
-	/** Individual word used to define GUI keys */
 	public static final String ARCHIVE = "Archive";
-	/** Individual word used to define GUI keys */
 	public static final String AUTHOR = "Author";
-	/** Individual word used to define GUI keys */
 	public static final String AUTO = "Auto";
-	/** Individual word used to define GUI keys */
 	public static final String AUTOKILL = "Autokill";
-	/** Individual word used to define GUI keys */
 	public static final String AUTOLOAD = "Autoload";
-	/** Individual word used to define GUI keys */
 	public static final String AUTOSAVE = "Autosave";
-	/** Individual word used to define GUI keys */
 	public static final String AVAILABLE = "Available";
-	/** Individual word used to define GUI keys */
 	public static final String AVERAGE = "Average";
-	/** Individual word used to define GUI keys */
 	public static final String BACK = "Back";
-	/** Individual word used to define GUI keys */
 	public static final String BACKWARD = "Backward";
-	/** Individual word used to define GUI keys */
 	public static final String BACKGROUND = "Background";
-	/** Individual word used to define GUI keys */
 	public static final String BEFORE = "Before";
-	/** Individual word used to define GUI keys */
 	public static final String BLACK = "Black";
-	/** Individual word used to define GUI keys */
 	public static final String BLOCK = "Block";
-	/** Individual word used to define GUI keys */
 	public static final String BLUE = "Blue";
-	/** Individual word used to define GUI keys */
 	public static final String BOMBEDS = "Bombeds";
-	/** Individual word used to define GUI keys */
 	public static final String BOMBINGS = "Bombings";
-	/** Individual word used to define GUI keys */
 	public static final String BOMB = "Bomb";
-	/** Individual word used to define GUI keys */
 	public static final String BOMBS = "Bombs";
-	/** Individual word used to define GUI keys */
 	public static final String BOMBSET = "Bombset";
-	/** Individual word used to define GUI keys */
 	public static final String BOTH = "Both";
-	/** Individual word used to define GUI keys */
 	public static final String BROWN = "Brown";
-	/** Individual word used to define GUI keys */
 	public static final String BROWSE = "Browse";
-	/** Individual word used to define GUI keys */
 	public static final String BROWSER = "Browser";
-	/** Individual word used to define GUI keys */
 	public static final String BUTTON = "Button";
-	/** Individual word used to define GUI keys */
 	public static final String CACHE = "Cache";
-	/** Individual word used to define GUI keys */
 	public static final String CANCEL = "Cancel";
-	/** Individual word used to define GUI keys */
 	public static final String CENTRAL = "Central";
-	/** Individual word used to define GUI keys */
 	public static final String CHANGE = "Change";
-	/** Individual word used to define GUI keys */
 	public static final String CLOSED = "Closed";
-	/** Individual word used to define GUI keys */
 	public static final String COLOR = "Color";
-	/** Individual word used to define GUI keys */
 	public static final String COLORS = "Colors";
-	/** Individual word used to define GUI keys */
 	public static final String COMMON = "Common";
-	/** Individual word used to define GUI keys */
 	public static final String COMPLETE = "Complete";
-	/** Individual word used to define GUI keys */
 	public static final String COMPUTER = "Computer";
-	/** Individual word used to define GUI keys */
 	public static final String CONFIRM = "Confirm";
-	/** Individual word used to define GUI keys */
 	public static final String CONFIRMED = "Confirmed";
-	/** Individual word used to define GUI keys */
 	public static final String CONFRONTATION = "Confrontation";
-	/** Individual word used to define GUI keys */
 	public static final String CONFRONTATIONS = "Confrontations";
-	/** Individual word used to define GUI keys */
 	public static final String CONSTANT = "Constant";
-	/** Individual word used to define GUI keys */
 	public static final String CONTROLS = "Controls";
-	/** Individual word used to define GUI keys */
 	public static final String COUNT = "Count";
-	/** Individual word used to define GUI keys */
 	public static final String CROWNS = "Crowns";
-	/** Individual word used to define GUI keys */
 	public static final String CUP = "Cup";
-	/** Individual word used to define GUI keys */
 	public static final String CURRENT = "Current";
-	/** Individual word used to define GUI keys */
 	public static final String CYAN = "Cyan";
-	/** Individual word used to define GUI keys */
 	public static final String CUSTOM = "Custom";
-	/** Individual word used to define GUI keys */
 	public static final String DATA = "Data";
-	/** Individual word used to define GUI keys */
 	public static final String DEFAULT = "Default";
-	/** Individual word used to define GUI keys */
 	public static final String DELAY = "Delay";
-	/** Individual word used to define GUI keys */
 	public static final String DELETE = "Delete";
-	/** Individual word used to define GUI keys */
 	public static final String DESCRIPTION = "Description";
-	/** Individual word used to define GUI keys */
 	public static final String DEVIATION = "Deviation";
-	/** Individual word used to define GUI keys */
 	public static final String DIALOG = "Dialog";
-	/** Individual word used to define GUI keys */
 	public static final String DIMENSION = "Dimension";
-	/** Individual word used to define GUI keys */
 	public static final String DIRECT = "Direct";
-	/** Individual word used to define GUI keys */
 	public static final String DISABLED = "Disabled";
-	/** Individual word used to define GUI keys */
 	public static final String DISCRETIZE = "Discretize";
-	/** Individual word used to define GUI keys */
 	public static final String DISPLAY = "Display";
-	/** Individual word used to define GUI keys */
 	public static final String DO = "Do";
-	/** Individual word used to define GUI keys */
 	public static final String DONE = "Done";
-	/** Individual word used to define GUI keys */
 	public static final String DOWN = "Down";
-	/** Individual word used to define GUI keys */
 	public static final String DRAW = "Draw";
-	/** Individual word used to define GUI keys */
 	public static final String DRAWN = "Drawn";
-	/** Individual word used to define GUI keys */
 	public static final String EDIT = "Edit";
-	/** Individual word used to define GUI keys */
 	public static final String ENABLED = "Enabled";
-	/** Individual word used to define GUI keys */
 	public static final String ENTER = "Enter";
-	/** Individual word used to define GUI keys */
 	public static final String ENTRY = "Entry";
-	/** Individual word used to define GUI keys */
 	public static final String EVOLUTION = "Evolution";
-	/** Individual word used to define GUI keys */
 	public static final String EXCEPTIONS = "Exceptions";
-	/** Individual word used to define GUI keys */
 	public static final String EXIT = "Exit";
-	/** Individual word used to define GUI keys */
 	public static final String FALSE = "False";
-	/** Individual word used to define GUI keys */
 	public static final String FASTER = "Faster";
-	/** Individual word used to define GUI keys */
 	public static final String FAV = "Fav";
-	/** Individual word used to define GUI keys */
 	public static final String FILE = "File";
-	/** Individual word used to define GUI keys */
 	public static final String FINISH = "Finish";
-	/** Individual word used to define GUI keys */
 	public static final String FINISHED = "Finished";
-	/** Individual word used to define GUI keys */
 	public static final String FIRESETMAP = "Firesetmap";
-	/** Individual word used to define GUI keys */
 	public static final String FIXED = "Fixed";
-	/** Individual word used to define GUI keys */
 	public static final String FOLDER = "Folder";
-	/** Individual word used to define GUI keys */
 	public static final String FONT = "Font";
-	/** Individual word used to define GUI keys */
 	public static final String FORWARD = "Forward";
-	/** Individual word used to define GUI keys */
 	public static final String FPS = "Fps";
-	/** Individual word used to define GUI keys */
 	public static final String FULL = "Full";
-	/** Individual word used to define GUI keys */
 	public static final String GAME = "Game";
-	/** Individual word used to define GUI keys */
 	public static final String GAMES = "Games";
-	/** Individual word used to define GUI keys */
 	public static final String GLICKO2 = "Glicko2";
-	/** Individual word used to define GUI keys */
 	public static final String GO = "Go";
-	/** Individual word used to define GUI keys */
 	public static final String GRAPHICS = "Graphics";
-	/** Individual word used to define GUI keys */
 	public static final String GRASS = "Grass";
-	/** Individual word used to define GUI keys */
 	public static final String GREEN = "Green";
-	/** Individual word used to define GUI keys */
 	public static final String GREY = "Grey";
-	/** Individual word used to define GUI keys */
 	public static final String GUI = "Gui";
-	/** Individual word used to define GUI keys */
 	public static final String HEADER = "Header";
-	/** Individual word used to define GUI keys */
 	public static final String HERO = "Hero";
-	/** Individual word used to define GUI keys */
 	public static final String HEROES = "Heroes";
-	/** Individual word used to define GUI keys */
 	public static final String HIDE = "Hide";
-	/** Individual word used to define GUI keys */
 	public static final String HOST = "Host";
-	/** Individual word used to define GUI keys */
 	public static final String HUMAN = "Human";
-	/** Individual word used to define GUI keys */
 	public static final String IMAGE = "Image";
-	/** Individual word used to define GUI keys */
 	public static final String INCLUDE = "Include";
-	/** Individual word used to define GUI keys */
 	public static final String INDIGO = "Indigo";
-	/** Individual word used to define GUI keys */
 	public static final String INFO = "Info";
-	/** Individual word used to define GUI keys */
 	public static final String INITIAL = "Initial";
-	/** Individual word used to define GUI keys */
 	public static final String INSTANCE = "Instance";
-	/** Individual word used to define GUI keys */
 	public static final String INSTANCES = "Instances";
-	/** Individual word used to define GUI keys */
 	public static final String INVERTED = "Inverted";
-	/** Individual word used to define GUI keys */
 	public static final String IP = "Ip";
-	/** Individual word used to define GUI keys */
 	public static final String ITEMS = "Items";
-	/** Individual word used to define GUI keys */
 	public static final String ITEMSET = "Itemset";
-	/** Individual word used to define GUI keys */
 	public static final String LABEL = "Label";
-	/** Individual word used to define GUI keys */
 	public static final String LANGUAGE = "Language";
-	/** Individual word used to define GUI keys */
 	public static final String LAST_STANDING = "LastStanding";
-	/** Individual word used to define GUI keys */
 	public static final String LEAGUE = "League";
-	/** Individual word used to define GUI keys */
 	public static final String LEFT = "Left";
-	/** Individual word used to define GUI keys */
 	public static final String LEG = "Leg";
-	/** Individual word used to define GUI keys */
 	public static final String LEVEL = "Level";
-	/** Individual word used to define GUI keys */
 	public static final String LEVELS = "Levels";
-	/** Individual word used to define GUI keys */
 	public static final String LIMIT = "Limit";
-	/** Individual word used to define GUI keys */
 	public static final String LINE = "Line";
-	/** Individual word used to define GUI keys */
 	public static final String LIST = "List";
-	/** Individual word used to define GUI keys */
 	public static final String LOAD = "Load";
-	/** Individual word used to define GUI keys */
 	public static final String LOCATION = "Location";
-	/** Individual word used to define GUI keys */
 	public static final String LOG = "Log";
-	/** Individual word used to define GUI keys */
 	public static final String LOST = "Lost";
-	/** Individual word used to define GUI keys */
 	public static final String MAIN = "Main";
-	/** Individual word used to define GUI keys */
 	public static final String MATCH = "Match";
-	/** Individual word used to define GUI keys */
 	public static final String MATCHES = "Matches";
-	/** Individual word used to define GUI keys */
 	public static final String MEAN = "Mean";
-	/** Individual word used to define GUI keys */
+	public static final String MEANS = "Means";
 	public static final String MENU = "Menu";
-	/** Individual word used to define GUI keys */
 	public static final String MESSAGES = "Messages";
-	/** Individual word used to define GUI keys */
 	public static final String MINUS = "Minus";
-	/** Individual word used to define GUI keys */
 	public static final String MODIFY = "Modify";
-	/** Individual word used to define GUI keys */
 	public static final String NAME = "Name";
-	/** Individual word used to define GUI keys */
 	public static final String NETWORK = "Network";
-	/** Individual word used to define GUI keys */
 	public static final String NEW = "New";
-	/** Individual word used to define GUI keys */
 	public static final String NEXT = "Next";
-	/** Individual word used to define GUI keys */
 	public static final String NO = "No";
-	/** Individual word used to define GUI keys */
 	public static final String NON = "Non";
-	/** Individual word used to define GUI keys */
 	public static final String NONE = "None";
-	/** Individual word used to define GUI keys */
 	public static final String NOTES = "Notes";
-	/** Individual word used to define GUI keys */
 	public static final String OPEN = "Open";
-	/** Individual word used to define GUI keys */
 	public static final String OPTIONS = "Options";
-	/** Individual word used to define GUI keys */
 	public static final String ORANGE = "Orange";
-	/** Individual word used to define GUI keys */
 	public static final String ORDER = "Order";
-	/** Individual word used to define GUI keys */
 	public static final String PACK = "Pack";
-	/** Individual word used to define GUI keys */
 	public static final String PACKAGE = "Package";
-	/** Individual word used to define GUI keys */
 	public static final String PAGEDOWN = "PageDown";
-	/** Individual word used to define GUI keys */
 	public static final String PAGEUP = "PageUp";
-	/** Individual word used to define GUI keys */
 	public static final String PAINTINGS = "Paintings";
-	/** Individual word used to define GUI keys */
 	public static final String PANEL = "Panel";
-	/** Individual word used to define GUI keys */
 	public static final String PARENT = "Parent";
-	/** Individual word used to define GUI keys */
 	public static final String PART = "Part";
-	/** Individual word used to define GUI keys */
 	public static final String PARTIAL = "Partial";
-	/** Individual word used to define GUI keys */
 	public static final String PER = "Per";
-	/** Individual word used to define GUI keys */
 	public static final String PERIOD = "Period";
-	/** Individual word used to define GUI keys */
 	public static final String PINK = "Pink";
-	/** Individual word used to define GUI keys */
 	public static final String PLAY = "Play";
-	/** Individual word used to define GUI keys */
 	public static final String PLAYED = "Played";
-	/** Individual word used to define GUI keys */
 	public static final String PLAYER = "Player";
-	/** Individual word used to define GUI keys */
 	public static final String PLAYERS = "Players";
-	/** Individual word used to define GUI keys */
 	public static final String PLAYING = "Playing";
-	/** Individual word used to define GUI keys */
+	public static final String PLOT = "Plot";
 	public static final String PLUS = "Plus";
-	/** Individual word used to define GUI keys */
 	public static final String POINTS = "Points";
-	/** Individual word used to define GUI keys */
 	public static final String PORTRAIT = "Portrait";
-	/** Individual word used to define GUI keys */
 	public static final String PREFERRED = "Preferred";
-	/** Individual word used to define GUI keys */
 	public static final String PREFIX = "Prefix";
-	/** Individual word used to define GUI keys */
 	public static final String PREVIEW = "Preview";
-	/** Individual word used to define GUI keys */
 	public static final String PREVIOUS = "Previous";
-	/** Individual word used to define GUI keys */
 	public static final String PROFILE = "Profile";
-	/** Individual word used to define GUI keys */
 	public static final String PROFILES = "Profiles";
-	/** Individual word used to define GUI keys */
 	public static final String PROGRESSBAR = "Progressbar";
-	/** Individual word used to define GUI keys */
 	public static final String PUBLISH = "Publish";
-	/** Individual word used to define GUI keys */
 	public static final String PURPLE = "Purple";
-	/** Individual word used to define GUI keys */
 	public static final String QUESTION = "Question";
-	/** Individual word used to define GUI keys */
 	public static final String QUICKMATCH = "Quickmatch";
-	/** Individual word used to define GUI keys */
 	public static final String QUICKSTART = "Quickstart";
-	/** Individual word used to define GUI keys */
 	public static final String QUIT = "Quit";
-	/** Individual word used to define GUI keys */
 	public static final String RANDOM = "Random";
-	/** Individual word used to define GUI keys */
 	public static final String RANK = "Rank";
-	/** Individual word used to define GUI keys */
 	public static final String RANKS = "Ranks";
-	/** Individual word used to define GUI keys */
 	public static final String RANKINGS = "Rankings";
-	/** Individual word used to define GUI keys */
 	public static final String RANKPOINTS = "Rankpoints";
-	/** Individual word used to define GUI keys */
 	public static final String RATING = "Rating";
-	/** Individual word used to define GUI keys */
 	public static final String READY = "Ready";
-	/** Individual word used to define GUI keys */
 	public static final String RECORD = "Record";
-	/** Individual word used to define GUI keys */
 	public static final String RED = "Red";
-	/** Individual word used to define GUI keys */
 	public static final String REGISTER = "Register";
-	/** Individual word used to define GUI keys */
 	public static final String REGULAR = "Regular";
-	/** Individual word used to define GUI keys */
 	public static final String REINIT = "Reinit";
-	/** Individual word used to define GUI keys */
 	public static final String REMOTE = "Remote";
-	/** Individual word used to define GUI keys */
 	public static final String REMOVE = "Remove";
-	/** Individual word used to define GUI keys */
 	public static final String REPLAY = "Replay";
-	/** Individual word used to define GUI keys */
 	public static final String RESET = "Reset";
-	/** Individual word used to define GUI keys */
 	public static final String RESOURCES = "Resources";
-	/** Individual word used to define GUI keys */
 	public static final String RESULTS = "Results";
-	/** Individual word used to define GUI keys */
 	public static final String RETRIEVING = "Retrieving";
-	/** Individual word used to define GUI keys */
 	public static final String RIGHT = "Right";
-	/** Individual word used to define GUI keys */
 	public static final String ROUND = "Round";
-	/** Individual word used to define GUI keys */
 	public static final String ROUNDS = "Rounds";
-	/** Individual word used to define GUI keys */
 	public static final String RUST = "Rust";
-	/** Individual word used to define GUI keys */
 	public static final String SAME = "Same";
-	/** Individual word used to define GUI keys */
 	public static final String SAVE = "Save";
-	/** Individual word used to define GUI keys */
 	public static final String SCORE = "Score";
-	/** Individual word used to define GUI keys */
 	public static final String SCORES = "Scores";
-	/** Individual word used to define GUI keys */
 	public static final String SCREEN = "Screen";
-	/** Individual word used to define GUI keys */
 	public static final String SELECT = "Select";
-	/** Individual word used to define GUI keys */
 	public static final String SELECTION = "Selection";
-	/** Individual word used to define GUI keys */
 	public static final String SELF = "Self";
-	/** Individual word used to define GUI keys */
 	public static final String SEQUENCE = "Sequence";
-	/** Individual word used to define GUI keys */
 	public static final String SET = "Set";
-	/** Individual word used to define GUI keys */
 	public static final String SETTINGS = "Settings";
-	/** Individual word used to define GUI keys */
 	public static final String SHARE = "Share";
-	/** Individual word used to define GUI keys */
+	public static final String SIMPLE = "Simple";
 	public static final String SIMULATION = "Simulation";
-	/** Individual word used to define GUI keys */
 	public static final String SINGLE = "Single";
-	/** Individual word used to define GUI keys */
 	public static final String SIZE = "Size";
-	/** Individual word used to define GUI keys */
 	public static final String SLOWER = "Slower";
-	/** Individual word used to define GUI keys */
 	public static final String SMOOTH = "Smooth";
-	/** Individual word used to define GUI keys */
 	public static final String SOURCE = "Source";
-	/** Individual word used to define GUI keys */
-	/** Individual word used to define GUI keys */
 	public static final String SPEED = "Speed";
-	/** Individual word used to define GUI keys */
 	public static final String SPRITE = "Sprite";
-	/** Individual word used to define GUI keys */
 	public static final String STANDARD = "Standard";
-	/** Individual word used to define GUI keys */
 	public static final String START = "Start";
-	/** Individual word used to define GUI keys */
 	public static final String STATE = "State";
-	/** Individual word used to define GUI keys */
 	public static final String STATISTICS = "Statistics";
-	/** Individual word used to define GUI keys */
+	public static final String STDEVS = "Stdevs";
 	public static final String SUDDEN_DEATH = "SuddenDeath";
-	/** Individual word used to define GUI keys */
 	public static final String SUM = "Sum";
-	/** Individual word used to define GUI keys */
+	public static final String TABLE = "Table";
 	public static final String TEXT = "Text";
-	/** Individual word used to define GUI keys */
 	public static final String THEME = "Theme";
-	/** Individual word used to define GUI keys */
 	public static final String TIME = "Time";
-	/** Individual word used to define GUI keys */
 	public static final String TITLE = "Title";
-	/** Individual word used to define GUI keys */
 	public static final String TOOLTIP = "Tooltip";
-	/** Individual word used to define GUI keys */
 	public static final String TOTAL = "Total";
-	/** Individual word used to define GUI keys */
 	public static final String TOURNAMENT = "Tournament";
-	/** Individual word used to define GUI keys */
 	public static final String TOURNAMENTS = "Tournaments";
-	/** Individual word used to define GUI keys */
 	public static final String TRANSFER = "Transfer";
-	/** Individual word used to define GUI keys */
 	public static final String TRUE = "True";
-	/** Individual word used to define GUI keys */
 	public static final String TURNING = "Turning";
-	/** Individual word used to define GUI keys */
 	public static final String TYPE = "Type";
-	/** Individual word used to define GUI keys */
 	public static final String TYPES = "Types";
-	/** Individual word used to define GUI keys */
 	public static final String ULTRAMARINE = "Ultramarine";
-	/** Individual word used to define GUI keys */
 	public static final String UNCONFIRMED = "Unconfirmed";
-	/** Individual word used to define GUI keys */
 	public static final String UNDECIDED = "Undecided";
-	/** Individual word used to define GUI keys */
 	public static final String UNKNOWN = "Unknown";
-	/** Individual word used to define GUI keys */
 	public static final String UNREGISTER = "Unregister";
-	/** Individual word used to define GUI keys */
+	public static final String UNSELECT = "Unselect";
 	public static final String UP = "Up";
-	/** Individual word used to define GUI keys */
 	public static final String UPS = "Ups";
-	/** Individual word used to define GUI keys */
 	public static final String USE = "Use";
-	/** Individual word used to define GUI keys */
 	public static final String USELESS = "Useless";
-	/** Individual word used to define GUI keys */
 	public static final String VALIDATE = "Validate";
-	/** Individual word used to define GUI keys */
 	public static final String VALUE = "Value";
-	/** Individual word used to define GUI keys */
 	public static final String VALUES = "Values";
-	/** Individual word used to define GUI keys */
 	public static final String VAR = "Var";
-	/** Individual word used to define GUI keys */
 	public static final String VIDEO = "Video";
-	/** Individual word used to define GUI keys */
 	public static final String VOLATILITY = "Volatility";
-	/** Individual word used to define GUI keys */
 	public static final String WHITE = "White";
-	/** Individual word used to define GUI keys */
 	public static final String WON = "Won";
-	/** Individual word used to define GUI keys */
 	public static final String YELLOW = "Yellow";
-	/** Individual word used to define GUI keys */
 	public static final String YOK = "Yok";
-	
+
 	/////////////////////////////////////////////////////////////////
 	// MENUS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -747,8 +484,11 @@ public class GuiKeys
 				/** AUTO ADVANCE */
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE = MENU_OPTIONS_AIS_LINE+AUTO+ADVANCE;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_TITLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+TITLE;
-				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DISABLED = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+DISABLED;
-				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_ENABLED = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+ENABLED;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_NONE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+NONE;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_SIMPLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+SIMPLE;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_TOURNAMENT = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+TOURNAMENT;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_NEXT = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+NEXT;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_PREVIOUS = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+PREVIOUS;
 				/** AUTO ADVANCE DELAY */
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY = MENU_OPTIONS_AIS_LINE+AUTO+ADVANCE+DELAY;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_TITLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+TITLE;
@@ -983,7 +723,10 @@ public class GuiKeys
 			public static final String MENU_STATISTICS_PLAYER_BUTTON = MENU_STATISTICS_PLAYER+BUTTON;
 			public static final String MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS = MENU_STATISTICS_PLAYER_BUTTON+CONFRONTATIONS;
 			public static final String MENU_STATISTICS_PLAYER_BUTTON_GLICKO2 = MENU_STATISTICS_PLAYER_BUTTON+GLICKO2;
+			public static final String MENU_STATISTICS_PLAYER_BUTTON_PLOT = MENU_STATISTICS_PLAYER_BUTTON+PLOT;
 			public static final String MENU_STATISTICS_PLAYER_BUTTON_SCORES = MENU_STATISTICS_PLAYER_BUTTON+SCORES;
+			public static final String MENU_STATISTICS_PLAYER_BUTTON_SELECTION = MENU_STATISTICS_PLAYER_BUTTON+SELECTION;
+			public static final String MENU_STATISTICS_PLAYER_BUTTON_TABLE = MENU_STATISTICS_PLAYER_BUTTON+TABLE;
 		
 	/** QUICKMATCH */	
 	public static final String MENU_QUICKMATCH = MENU+QUICKMATCH;
@@ -1795,6 +1538,8 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK = COMMON_STATISTICS_PLAYER_COMMON_HEADER+RANK;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION= COMMON_STATISTICS_PLAYER_COMMON_HEADER+EVOLUTION;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_TYPE = COMMON_STATISTICS_PLAYER_COMMON_HEADER+TYPE;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_COLOR = COMMON_STATISTICS_PLAYER_COMMON_HEADER+COLOR;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_SELECT = COMMON_STATISTICS_PLAYER_COMMON_HEADER+SELECT;
 				/** DATA */
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA = COMMON_STATISTICS_PLAYER_COMMON+DATA;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER = COMMON_STATISTICS_PLAYER_COMMON_DATA+COMPUTER;
@@ -1822,6 +1567,24 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+ALL+RANKS;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NORANKS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+NO+RANKS;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALL = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+ALL;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SELECT = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+SELECT;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNSELECT = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+UNSELECT;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_COLOR = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+COLOR;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_RANKS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+RANKS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEANS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+MEANS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_STDEVS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+STDEVS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_BOMBEDS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+BOMBEDS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SELF_BOMBINGS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+SELF+BOMBINGS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_BOMBINGS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+BOMBINGS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ITEMS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+ITEMS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_BOMBS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+BOMBS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_PAINTINGS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+PAINTINGS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_CROWNS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+CROWNS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_TOTAL = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+TOTAL;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_WON = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+WON;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_DRAWN = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+DRAWN;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_LOST = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+LOST;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_TIME = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+TIME;
 			/** GLICKO2 */
 			public static final String COMMON_STATISTICS_PLAYER_GLICKO2 = COMMON_STATISTICS_PLAYER+GLICKO2;
 			public static final String COMMON_STATISTICS_PLAYER_GLICKO2_TITLE = COMMON_STATISTICS_PLAYER_GLICKO2+TITLE;
