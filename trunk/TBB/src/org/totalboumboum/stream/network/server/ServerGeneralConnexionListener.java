@@ -28,7 +28,7 @@ import org.totalboumboum.game.profile.Profile;
  * @author Vincent Labatut
  *
  */
-public interface ServerGeneralConnectionListener
+public interface ServerGeneralConnexionListener
 {
 	public void profileAdded(int index, Profile profile);
 	public void profileRemoved(Profile profile);

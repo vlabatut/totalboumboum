@@ -40,7 +40,7 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticRound;
-import org.totalboumboum.stream.network.AbstractConnection;
+import org.totalboumboum.stream.network.AbstractConnexion;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -53,10 +53,10 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class ClientIndividualConnection extends AbstractConnection implements Runnable
+public class ClientIndividualConnexion extends AbstractConnexion implements Runnable
 {
-	public ClientIndividualConnection(ClientGeneralConnection generalConnection, HostInfo hostInfo)
-	{	this.generalConnection = generalConnection;
+	public ClientIndividualConnexion(ClientGeneralConnexion generalConnexion, HostInfo hostInfo)
+	{	this.generalConnexion = generalConnexion;
 		
 		this.gameInfo = new GameInfo();
 		gameInfo.setHostInfo(hostInfo);
@@ -84,9 +84,9 @@ System.out.println(state);
 	private Condition socketCondition = socketLock.newCondition();
 	
 	/**
-	 * for the GUI to ask for a manual retry regarding the connection to this server
+	 * for the GUI to ask for a manual retry regarding the connexion to this server
 	 */
-	public void retryConnection()
+	public void retryConnexion()
 	{	socketLock.lock();
 		{	retry = true;
 			socketCondition.signalAll();
@@ -103,7 +103,7 @@ System.out.println(state);
 				{	retry = false;
 					HostInfo hostInfo = gameInfo.getHostInfo();
 					hostInfo.setState(HostState.RETRIEVING);
-					generalConnection.gameInfoChanged(this,null);
+					generalConnexion.gameInfoChanged(this,null);
 					String address = hostInfo.getLastIp();
 					int port = hostInfo.getLastPort();
 					try
@@ -112,7 +112,7 @@ System.out.println(state);
 					catch(ConnectException e)
 					{	System.err.println("ConnectException: address "+address+" doesn't respond");
 						hostInfo.setState(HostState.UNKOWN);
-						generalConnection.gameInfoChanged(this,null);
+						generalConnexion.gameInfoChanged(this,null);
 					}
 //					catch(UnknownHostException e)
 //					{	System.err.println("UnknownHostException: address "+address+" doesn't respond");
@@ -120,7 +120,7 @@ System.out.println(state);
 					catch(IOException e)
 					{	e.printStackTrace();
 						hostInfo.setState(HostState.UNKOWN);
-						generalConnection.gameInfoChanged(this,null);
+						generalConnexion.gameInfoChanged(this,null);
 					}
 				}
 			}
@@ -137,14 +137,14 @@ System.out.println(state);
 		}
 		
 		try
-		{	initConnection(socket,false);
+		{	initConnexion(socket,false);
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
 		}
 		
 		// ask for the game info
-		String id = Configuration.getConnectionsConfiguration().getHostId();
+		String id = Configuration.getConnexionsConfiguration().getHostId();
 		NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_GAME_INFO,id);
 		writeMessage(message);
 	}
@@ -154,14 +154,14 @@ System.out.println(state);
 	/////////////////////////////////////////////////////////////////	
 	protected void initSocket()
 	{	Thread thread = new Thread(this);
-		thread.setName("TBB.clientconnection");
+		thread.setName("TBB.clientconnexion");
 		thread.start();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL CONNECTION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ClientGeneralConnection generalConnection;
+	private ClientGeneralConnexion generalConnexion;
 
 	/////////////////////////////////////////////////////////////////
 	// GAME INFO	/////////////////////////////////////////////////
@@ -240,13 +240,13 @@ System.out.println(state);
 			//hostInfo.setLastPort(hi.getLastPort());
 			hostInfo.setCentral(hi.isCentral());
 			hostInfo.setDirect(hi.isDirect());
-			Configuration.getConnectionsConfiguration().synchronizeHost(hostInfo);
-			// propagate new connection
-			generalConnection.gameInfoChanged(this,oldId);
+			Configuration.getConnexionsConfiguration().synchronizeHost(hostInfo);
+			// propagate new connexion
+			generalConnexion.gameInfoChanged(this,oldId);
 		}
 		else
 		{	// propagate modifications
-			generalConnection.gameInfoChanged(this,null);
+			generalConnexion.gameInfoChanged(this,null);
 		}
 	}
 
@@ -308,7 +308,7 @@ System.out.println(state);
 			state = ClientState.SELECTING_PLAYERS;
 		
 		// propagate modification
-		generalConnection.profilesChanged(this);
+		generalConnexion.profilesChanged(this);
 	}
 
 	/**
@@ -341,7 +341,7 @@ System.out.println(state);
 	private void tournamentStarted(AbstractTournament tournament)
 	{	this.tournament = tournament;
 		updateControls(tournament.getProfiles());
-		generalConnection.tournamentStarted(this,tournament);
+		generalConnexion.tournamentStarted(this,tournament);
 	}
 
 	public AbstractTournament getTournament()
@@ -395,7 +395,7 @@ System.out.println(state);
 	}
 	
 	private void replayReceived(ReplayEvent event)
-	{	generalConnection.replayReceived(event);
+	{	generalConnexion.replayReceived(event);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -490,7 +490,7 @@ System.out.println(state);
 	/////////////////////////////////////////////////////////////////
 	// OWNER INTERFACE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void connectionLost()
+	public void connexionLost()
 	{	ioLock.lock();
 		{	if(!ioFinished)
 			{	ioFinished = true;
@@ -506,7 +506,7 @@ System.out.println(state);
 		}
 		ioLock.unlock();
 		
-		generalConnection.connectionLost(this);
+		generalConnexion.connexionLost(this);
 		//gameInfo.getHostInfo().setState(HostState.UNKOWN);
 	}
 	
@@ -519,7 +519,7 @@ System.out.println(state);
 		{	super.finish();
 			
 			gameInfo = null;
-			generalConnection = null;
+			generalConnexion = null;
 		}
 	}
 }

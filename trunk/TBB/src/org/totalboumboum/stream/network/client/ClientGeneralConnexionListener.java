@@ -28,12 +28,12 @@ import org.totalboumboum.game.tournament.AbstractTournament;
  * @author Vincent Labatut
  *
  */
-public interface ClientGeneralConnectionListener
+public interface ClientGeneralConnexionListener
 {
-	public void connectionAdded(ClientIndividualConnection connection, int index);
-	public void connectionRemoved(ClientIndividualConnection connection, int index);
-	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId);
-	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index);
-	public void connectionProfilesChanged(ClientIndividualConnection connection, int index);
-	public void connectionTournamentStarted(AbstractTournament tournament);
+	public void connexionAdded(ClientIndividualConnexion connexion, int index);
+	public void connexionRemoved(ClientIndividualConnexion connexion, int index);
+	public void connexionGameInfoChanged(ClientIndividualConnexion connexion, int index, String oldId);
+	public void connexionActiveConnexionLost(ClientIndividualConnexion connexion, int index);
+	public void connexionProfilesChanged(ClientIndividualConnexion connexion, int index);
+	public void connexionTournamentStarted(AbstractTournament tournament);
 }

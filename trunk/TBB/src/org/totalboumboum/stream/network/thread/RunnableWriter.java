@@ -83,8 +83,8 @@ System.out.println("<<"+message);
 				}
 				catch(SocketException e)
 				{	// stream broken
-					System.err.println("SocketException: connection lost");
-					owner.connectionLost();
+					System.err.println("SocketException: connexion lost");
+					owner.connexionLost();
 				}
 				catch(IOException e)
 				{	e.printStackTrace();
@@ -102,7 +102,7 @@ System.out.println("<<"+message);
 		catch(SocketException e)
 		{	// stream broken
 			System.err.println("SocketException: socket already closed");
-			owner.connectionLost();
+			owner.connexionLost();
 		}
 		catch (IOException e)
 		{	e.printStackTrace();

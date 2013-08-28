@@ -29,5 +29,5 @@ package org.totalboumboum.stream.network.thread;
  */
 public interface OwnerInterface
 {
-	public void connectionLost();
+	public void connexionLost();
 }
