@@ -1679,3 +1679,4 @@ public class Launcher
 //TODO bug: le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
 //TODO réset des stats: faut effacer les fichiers de stats individuelles
 //TODO vérifier qu'on n'utiliser jamais 16 et toujours GameData.MAX_PROFILES_COUNT
+//TODO réinit l'index d'auto-avancement quand on sélectionne un nouveau tournoi
