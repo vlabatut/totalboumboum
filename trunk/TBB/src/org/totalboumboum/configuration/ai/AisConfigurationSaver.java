@@ -98,7 +98,7 @@ public class AisConfigurationSaver
 	{	Element result = new Element(XmlNames.AUTO_ADVANCE);
 	
 		// switch
-		String autoAdvance = Boolean.toString(aisConfiguration.getAutoAdvance());
+		String autoAdvance = aisConfiguration.getAutoAdvance().toString();
 		result.setAttribute(XmlNames.VALUE,autoAdvance);
 		
 		// delay

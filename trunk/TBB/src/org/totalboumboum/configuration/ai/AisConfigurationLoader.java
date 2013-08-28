@@ -27,6 +27,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
+import org.totalboumboum.configuration.ai.AisConfiguration.AutoAdvance;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -86,9 +87,9 @@ public class AisConfigurationLoader
 	}
 	
 	private static void loadAutoAdvanceElement(Element root, AisConfiguration result)
-	{	// switch
+	{	// mode
 		{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
-			boolean autoAdvance = Boolean.valueOf(value);
+			AutoAdvance autoAdvance = AutoAdvance.valueOf(value);
 			result.setAutoAdvance(autoAdvance);
 		}
 		// delay
