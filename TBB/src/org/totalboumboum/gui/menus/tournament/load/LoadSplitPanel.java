@@ -31,7 +31,6 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 

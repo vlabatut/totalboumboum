@@ -32,9 +32,11 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.ai.AisConfiguration.AutoAdvance;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
@@ -52,22 +54,30 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
 /**
+ * Menu allowing to set a new tournament.
  * 
  * @author Vincent Labatut
- *
  */
 public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Creates the tournament menu.
+	 * 
+	 * @param container
+	 * 		Container for this panel.
+	 * @param parent
+	 * 		Menu parent of this menu.
+	 */
 	public TournamenuMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
@@ -93,16 +103,28 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Definitely quit the tournament */
 	private JButton buttonQuit;
+	/** Go to the panel preceeding players selection */
 	private JButton buttonPlayersPrevious;
+	/** Go to the panel following players selection */
 	private JButton buttonPlayersNext;
+	/** Go to the panel preceeding settings definition */
 	private JButton buttonSettingsPrevious;
+	/** Go to the panel following settings definition */
 	private JButton buttonSettingsNext;
+	/** Publish tournament online */
 	private JButton buttonPublish;
+	/** Block selection of online players */
 	private JToggleButton buttonBlockPlayers;
+	/** Width of all buttons */
 	private int buttonWidth;
+	/** Height of all buttons */
 	private int buttonHeight;
 
+	/**
+	 * Creates all necessary buttons.
+	 */
 	private void initButtons()
 	{	buttonWidth = getHeight();
 		buttonHeight = getHeight();
@@ -118,6 +140,9 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		removeAll();
 	}
 	
+	/**
+	 * Displays buttons of the players selection panel.
+	 */
 	private void setButtonsPlayers()
 	{	removeAll();
 		add(buttonQuit);
@@ -131,6 +156,9 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		add(buttonPlayersNext);
 	}
 	
+	/**
+	 * Displays buttons of the settings panel.
+	 */
 	private void setButtonsSettings()
 	{	removeAll();
 		add(buttonQuit);
@@ -144,13 +172,14 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		add(buttonSettingsNext);
 	}
 	
+	/** Appropriately enable/disable buttons */
 	private void refreshButtons()
 	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
 		if(tournament==null || !tournament.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
 			buttonPlayersNext.setEnabled(false);
 		else
-		{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(connection==null || connection.areAllPlayersReady())
+		{	ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(connexion==null || connexion.areAllPlayersReady())
 				buttonPlayersNext.setEnabled(true);
 			else
 				buttonPlayersNext.setEnabled(false);
@@ -160,8 +189,12 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Configuration of the tournament (settings, selected players...) */
 	private TournamentConfiguration tournamentConfiguration;
 	
+	/**
+	 * Initializes the tournament configuration panels.
+	 */
 	public void initTournament()
 	{	// init configuration
 		tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
@@ -193,23 +226,39 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		setButtonsSettings();
 	}
 
+	/**
+	 * Changes the selected players
+	 * for the tournament.
+	 */
 	private void setTournamentPlayers()
 	{	List<Profile> selectedProfiles = playersData.getSelectedProfiles();
 		AbstractTournament tournament = tournamentConfiguration.getTournament();
 		tournament.setProfiles(selectedProfiles);
 	}
 	
+	/**
+	 * Changes the general settings of the tournament.
+	 */
 	private void setTournamentSettings()
-	{				
+	{	//	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TournamentSplitPanel tournamentPanel;
-	private PlayersData playersData;
+	/** Panel displaying general tournament settings */
 	private SettingsData settingsData;
+	/** Panel displaying the players selection */
+	private PlayersData playersData;
+	/** Panel displaying the actual tournament */
+	private TournamentSplitPanel tournamentPanel;
 	
+	/**
+	 * Change the panel displaying the tournament.
+	 *  
+	 * @param tournamentPanel
+	 * 		New panel displaying the tournament.
+	 */
 	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
 	{	this.tournamentPanel = tournamentPanel;
 	}
@@ -217,8 +266,13 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT))
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
+		
+		if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT))
 		{	AbstractTournament tournament = null;
 			tournamentConfiguration.setTournament(tournament);
 			getFrame().setMainMenuPanel();
@@ -260,12 +314,13 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			AbstractTournament tournament = tournamentConfiguration.getTournament();
 			
 			// send to possible clients
-			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(connection!=null)
-				connection.startTournament(tournament);
+			ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(connexion!=null)
+				connexion.startTournament(tournament);
 			
 			// tournament panel
 			tournamentPanel.setTournament(tournament);
+			tournamentPanel.autoAdvance();
 			replaceWith(tournamentPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
@@ -273,6 +328,9 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			playersData.setTournamentConfiguration(tournamentConfiguration);
 			setButtonsPlayers();
 			refresh();
+			if(Configuration.getAisConfiguration().getAutoAdvance()==AutoAdvance.TOURNAMENT)
+				playersData.autoSelectPlayers();
+			autoAdvance();
 			container.setDataPart(playersData);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH))
@@ -283,12 +341,12 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			add(buttonBlockPlayers,index);
 			revalidate();
 			
-			// set up the connection
+			// set up the connexion
 /*			try
 			{	AbstractTournament tournament = tournamentConfiguration.getTournament();
-				connectionManager = new ConfigurationServerConnectionManager(tournament);
-				connectionManager.addListener(this);
-				ConfigurationServerConnectionThread thread = new ConfigurationServerConnectionThread(connectionManager);
+				connexionManager = new ConfigurationServerConnexionManager(tournament);
+				connexionManager.addListener(this);
+				ConfigurationServerConnexionThread thread = new ConfigurationServerConnexionThread(connexionManager);
 				thread.start();
 			}
 			catch (IOException e1)
@@ -312,15 +370,15 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			}
 			boolean direct = true; 		// TODO should be decided by a button or something
 			boolean central = false;	// TODO same thing as above
-			ServerGeneralConnection connection = new ServerGeneralConnection(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles,direct,central);
-			Configuration.getConnectionsConfiguration().setServerConnection(connection);
-			playersData.setConnection();
+			ServerGeneralConnexion connexion = new ServerGeneralConnexion(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles,direct,central);
+			Configuration.getConnexionsConfiguration().setServerConnexion(connexion);
+			playersData.setConnexion();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS))
 		{	// close/open players selection to client
-			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(connection!=null)
-			{	connection.switchPlayersSelection();
+			ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(connexion!=null)
+			{	connexion.switchPlayersSelection();
 			}
 	    }
 	} 
@@ -328,6 +386,7 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void refresh()
 	{	refreshButtons();
 	}
@@ -338,5 +397,64 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// AUTO ADVANCE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Thread used for the auto-advance system */
+	private Thread thread = null;
+
+	/**
+	 * Automatically clicks on the appropriate
+	 * buttons in order to progress in the tournament.
+	 * Used to automatically chain many tournaments,
+	 * while evaluating agents.
+	 */
+	public void autoAdvance()
+	{	if(Configuration.getAisConfiguration().getAutoAdvance()==AutoAdvance.TOURNAMENT)
+		{	// go to players selection
+			if(buttonSettingsNext.getParent()!=null && buttonSettingsNext.isEnabled()) //NOTE is getParent enough?
+			{	thread = new Thread("TBB.autoadvance")
+				{	@Override
+					public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	@Override
+								public void run()
+								{	buttonSettingsNext.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+			// start tournament
+			else if(buttonPlayersNext.getParent()!=null && buttonPlayersNext.isEnabled()) //NOTE is getParent enough?
+			{	thread = new Thread("TBB.autoadvance")
+				{	@Override
+					public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	@Override
+								public void run()
+								{	buttonPlayersNext.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+		}
 	}
 }
