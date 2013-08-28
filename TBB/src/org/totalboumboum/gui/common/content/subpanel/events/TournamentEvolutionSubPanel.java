@@ -46,7 +46,6 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
@@ -654,17 +653,17 @@ public class TournamentEvolutionSubPanel extends ColumnsSubPanel implements Mous
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
@@ -707,6 +706,6 @@ public class TournamentEvolutionSubPanel extends ColumnsSubPanel implements Mous
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 }

@@ -47,7 +47,6 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticRound;
@@ -473,7 +472,7 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	 * 		New selected score.
 	 */
 	private void updateScoreButtons(Score score)
-	{	// unselected previously selected score
+	{	// unselect previously selected score
 		{	int pos = getLineForScore(selectedScore);
 			Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			setLabelBackground(pos,COL_SCORES,bg);
@@ -636,17 +635,17 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
@@ -689,6 +688,6 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 }
