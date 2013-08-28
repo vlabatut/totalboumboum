@@ -426,6 +426,8 @@ public class ProfilesConfiguration
 	 * the best 16 players, the second the 16
 	 * next ones, and so on.
 	 * 
+	 * @param tournamentConfiguration
+	 * 		Object to used to store the auto-advance index
 	 * @return
 	 * 		List of selected profiles.
 	 * 
@@ -446,8 +448,9 @@ public class ProfilesConfiguration
 	 * @throws IllegalArgumentException 
 	 * 		Problem while loading a profile. 
 	 */
-	public static List<Profile> autoAdvanceComplete() throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, ParserConfigurationException, SAXException, IOException
-	{	int autoAdvanceIndex = Configuration.getGameConfiguration().getTournamentConfiguration().getAutoAdvanceIndex();
+	public static List<Profile> autoAdvanceComplete(TournamentConfiguration tournamentConfiguration) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, ParserConfigurationException, SAXException, IOException
+	{	int autoAdvanceIndex = tournamentConfiguration.getAutoAdvanceIndex();
+//		int autoAdvanceIndex = Configuration.getGameConfiguration().getTournamentConfiguration().getAutoAdvanceIndex();
 		
 		// get player ranks
 		RankingService rankingService = GameStatistics.getRankingService();
@@ -472,6 +475,7 @@ public class ProfilesConfiguration
 		// possibly reset the index
 		if(autoAdvanceIndex==playerIds.size())
 			autoAdvanceIndex = 0;
+		tournamentConfiguration.setAutoAdvanceIndex(autoAdvanceIndex);
 		Configuration.getGameConfiguration().getTournamentConfiguration().setAutoAdvanceIndex(autoAdvanceIndex);
 		
 		// create selection
