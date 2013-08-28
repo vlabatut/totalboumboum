@@ -25,8 +25,16 @@
 		<xsd:attribute name="value" type="xsd:integer" use="required" />
 	</xsd:complexType>
 
+	<xsd:simpleType name="tAutoAdvanceMode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="SIMPLE" />
+			<xsd:enumeration value="TOURNAMENT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
 	<xsd:complexType name="tAutoAdvance">
-		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+		<xsd:attribute name="value" type="tAutoAdvanceMode" use="required" />
 		<xsd:attribute name="delay" type="xsd:long" use="required" />
 	</xsd:complexType>
 
