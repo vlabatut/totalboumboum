@@ -99,7 +99,7 @@ public class ProfilesConfiguration
 		
 		// create profile
 		Profile newProfile = new Profile();
-		String hostId = Configuration.getConnectionsConfiguration().getHostId();
+		String hostId = Configuration.getConnexionsConfiguration().getHostId();
 		newProfile.setLastHost(hostId);
 		newProfile.setName(name);
 		SpriteInfo spriteInfo = newProfile.getDefaultSprite();
@@ -258,6 +258,33 @@ public class ProfilesConfiguration
 		return result;
 	}
 	
+	/**
+	 * Randomly completes the specified list of profiles,
+	 * in order to get a list containing the specified 
+	 * number of players.
+	 * 
+	 * @param profiles
+	 * 		List to be completed.
+	 * @param number
+	 * 		Desired number of profiles in the complete list.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading profiles.
+	 * @throws SAXException
+	 * 		Problem while loading profiles.
+	 * @throws IOException
+	 * 		Problem while loading profiles.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading profiles.
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading profiles.
+	 * @throws SecurityException
+	 * 		Problem while loading profiles.
+	 * @throws IllegalAccessException
+	 * 		Problem while loading profiles.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading profiles.
+	 */
 	public static void randomlyCompleteProfiles(List<Profile> profiles, int number) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	// list of ids minus already selected players 
 		List<String> playersIds = ProfileLoader.getIdsList();
@@ -280,6 +307,25 @@ public class ProfilesConfiguration
 		addAllProfiles(profiles,additionalProfiles);
 	}
 	
+	/**
+	 * Adds all the specified profile to the
+	 * specified selection, so that there
+	 * is no incompatibility in terms of colors.
+	 * 
+	 * @param profiles
+	 * 		Base selection.
+	 * @param additionalProfiles
+	 * 		Profiles to add to the selection.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading a profile. 
+	 * @throws SAXException
+	 * 		Problem while loading a profile. 
+	 * @throws IOException
+	 * 		Problem while loading a profile. 
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading a profile. 
+	 */
 	private static void addAllProfiles(List<Profile> profiles, List<Profile> additionalProfiles) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 
@@ -309,6 +355,35 @@ public class ProfilesConfiguration
 		}			
 	}
 
+	/**
+	 * Complete the specified selection
+	 * with some players whose Glicko-2 ranking
+	 * is related.
+	 * 
+	 * @param profiles
+	 * 		Incomplete profile selection.
+	 * @param number
+	 * 		Size of the final selection.
+	 * @param reference
+	 * 		Player of reference (in terms of Glicko-2 ranking).
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading a profile. 
+	 * @throws SAXException
+	 * 		Problem while loading a profile. 
+	 * @throws IOException
+	 * 		Problem while loading a profile. 
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading a profile. 
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading a profile. 
+	 * @throws SecurityException
+	 * 		Problem while loading a profile. 
+	 * @throws IllegalAccessException
+	 * 		Problem while loading a profile. 
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading a profile. 
+	 */
 	public static void rankCompleteProfiles(List<Profile> profiles, int number, Profile reference) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	// list of previously selected players
 		List<String> profilesIds = new ArrayList<String>();
@@ -344,4 +419,64 @@ public class ProfilesConfiguration
 		addAllProfiles(profiles,additionalProfiles);
 	}
 	
+	/** Marks the last player used by the auto-advance complete method */
+	private static int autoAdvanceIndex = 0;
+	
+	/**
+	 * Automatically selects player for the 
+	 * tournament mode of the auto-advance
+	 * system. The first tournament involves
+	 * the best 16 players, the second the 16
+	 * next ones, and so on.
+	 * 
+	 * @return
+	 * 		List of selected profiles.
+	 * 
+	 * @throws IOException
+	 * 		Problem while loading a profile. 
+	 * @throws SAXException 
+	 * 		Problem while loading a profile. 
+	 * @throws ParserConfigurationException 
+	 * 		Problem while loading a profile. 
+	 * @throws ClassNotFoundException 
+	 * 		Problem while loading a profile. 
+	 * @throws NoSuchFieldException 
+	 * 		Problem while loading a profile. 
+	 * @throws IllegalAccessException 
+	 * 		Problem while loading a profile. 
+	 * @throws SecurityException 
+	 * 		Problem while loading a profile. 
+	 * @throws IllegalArgumentException 
+	 * 		Problem while loading a profile. 
+	 */
+	public static List<Profile> autoAdvanceComplete() throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, ParserConfigurationException, SAXException, IOException
+	{	// get player ranks
+		RankingService rankingService = GameStatistics.getRankingService();
+		Set<String> playerIds = rankingService.getPlayers();
+		String playerRanks[] = new String[playerIds.size()];
+		for(String playerId: playerIds)
+		{	int rank = rankingService.getPlayerRank(playerId);
+			playerRanks[rank-1] = playerId;
+		}
+		
+		// fill a list with 16 players starting from the index
+		List<Profile> temp = new ArrayList<Profile>();
+		int i = 0;
+		while(i<16 && autoAdvanceIndex<playerIds.size())
+		{	String playerId = playerRanks[autoAdvanceIndex];
+			Profile profile = ProfileLoader.loadProfile(playerId);
+			temp.add(profile);
+			autoAdvanceIndex++;
+			i++;
+		}
+		
+		// possibly reset the index
+		if(autoAdvanceIndex==playerIds.size())
+			autoAdvanceIndex = 0;
+		
+		// create selection
+		List<Profile> result = new ArrayList<Profile>();
+		addAllProfiles(result,temp);
+		return result;
+	}
 }
