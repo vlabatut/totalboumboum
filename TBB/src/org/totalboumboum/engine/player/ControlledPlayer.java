@@ -33,7 +33,7 @@ import org.totalboumboum.engine.control.player.LocalPlayerControl;
 import org.totalboumboum.engine.control.player.NetworkPlayerControl;
 import org.totalboumboum.engine.control.player.PlayerControl;
 import org.totalboumboum.game.profile.Profile;
-import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
 import org.xml.sax.SAXException;
 
 /**
@@ -54,8 +54,8 @@ public abstract class ControlledPlayer extends AbstractPlayer
 		sprite.setControlSettings(controlSettings);
 		
 		// set controls
-		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(clientConnection==null)
+		ClientGeneralConnexion clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		if(clientConnexion==null)
 			spriteControl = new LocalPlayerControl(this);
 		else
 			spriteControl = new NetworkPlayerControl(this);
