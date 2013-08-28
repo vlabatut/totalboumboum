@@ -81,7 +81,7 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
@@ -210,8 +210,8 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		if(tournament==null || !levelsSelection.getAllowedPlayerNumbers().contains(playerNumber))
 			buttonPlayersNext.setEnabled(false);
 		else
-		{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(connection==null || connection.areAllPlayersReady())
+		{	ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(connexion==null || connexion.areAllPlayersReady())
 				buttonPlayersNext.setEnabled(true);
 			else
 				buttonPlayersNext.setEnabled(false);
@@ -428,9 +428,9 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			Configuration.getGameConfiguration().setQuickMatchConfiguration(quickMatchConfiguration);
 			
 			// send to possible clients
-			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(connection!=null)
-				connection.startTournament(tournament);
+			ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(connexion!=null)
+				connexion.startTournament(tournament);
 
 			// match panel
 			tournamentPanel.setTournament(tournament);
@@ -462,7 +462,7 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			add(buttonBlockPlayers,index);
 			revalidate();
 			
-			// set up the connection
+			// set up the connexion
 			//AbstractTournament tournament = quickMatchConfiguration.getTournament();
 			Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
 			String tournamentName = tournament.getName();
@@ -481,15 +481,15 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			}
 			boolean direct = true; 		// TODO should be decided by a button or something
 			boolean central = false;	// TODO same thing as above
-			ServerGeneralConnection connection = new ServerGeneralConnection(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles,direct,central);
-			Configuration.getConnectionsConfiguration().setServerConnection(connection);
-			playersData.setConnection();
+			ServerGeneralConnexion connexion = new ServerGeneralConnexion(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles,direct,central);
+			Configuration.getConnexionsConfiguration().setServerConnexion(connexion);
+			playersData.setConnexion();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS))
 		{	// close/open players selection to client
-			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(connection!=null)
-			{	connection.switchPlayersSelection();
+			ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+			if(connexion!=null)
+			{	connexion.switchPlayersSelection();
 			}
 	    }
 	} 
