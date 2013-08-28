@@ -51,7 +51,7 @@ import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.stream.network.data.host.HostState;
-import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
 import org.xml.sax.SAXException;
 
 /**
@@ -209,10 +209,10 @@ public class SingleTournament extends AbstractTournament
 			stats.initEndDate();		
 		}
 //NOTE ou bien : panel.matchOver();		
-		// server connection
-		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(serverConnection!=null)
-			serverConnection.updateHostState(HostState.FINISHED);
+		// server connexion
+		ServerGeneralConnexion serverConnexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		if(serverConnexion!=null)
+			serverConnexion.updateHostState(HostState.FINISHED);
 	}
 
 	@Override
