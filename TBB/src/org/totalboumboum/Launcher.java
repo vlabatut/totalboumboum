@@ -1684,7 +1684,7 @@ public class Launcher
 //TODO pb dans l'enchainement des tournois, quand on décide de changer le tournoi joué
 //TODO voir ce qui prend du temps à l'ouverture des stats
 //TODO voir ce qui cause inéluctablement des ralentissements
-//TODO bug: malgré la désactivation de l'affichace des exceptions, j'ai eu droit à:
+//TODO bug: malgré la désactivation de l'affichace des exceptions, j'ai eu droit à (tjrs avec gungorkavus ?):
 /*
 org.totalboumboum.ai.v201112.adapter.path.LimitReachedException: The search algorithm developped a tree too costly/deep/large according to the predefined limits.
 at org.totalboumboum.ai.v201112.adapter.path.search.Astar.continueProcess(Astar.java:453)
