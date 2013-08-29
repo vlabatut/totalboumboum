@@ -1685,6 +1685,7 @@ public class Launcher
 //TODO voir ce qui prend du temps à l'ouverture des stats
 //TODO voir ce qui cause inéluctablement des ralentissements
 //TODO bug: malgré la désactivation de l'affichace des exceptions, j'ai eu droit à :
+//TODO gérer le cas où il n'y a pas assez de joueurs pour compléter le tournoi (prendre ceux relatifs au premier sélectionné)
 /*
 org.totalboumboum.ai.v201112.adapter.path.LimitReachedException: The search algorithm developped a tree too costly/deep/large according to the predefined limits.
 at org.totalboumboum.ai.v201112.adapter.path.search.Astar.continueProcess(Astar.java:453)
