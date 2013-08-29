@@ -451,7 +451,8 @@ public class ProfilesConfiguration
 	public static List<Profile> autoAdvanceComplete(TournamentConfiguration tournamentConfiguration) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, ParserConfigurationException, SAXException, IOException
 	{	int autoAdvanceIndex = tournamentConfiguration.getAutoAdvanceIndex();
 //		int autoAdvanceIndex = Configuration.getGameConfiguration().getTournamentConfiguration().getAutoAdvanceIndex();
-		
+		Set<Integer> allowedNbr = tournamentConfiguration.getTournament().getAllowedPlayerNumbers();
+	
 		// get player ranks
 		RankingService rankingService = GameStatistics.getRankingService();
 		Set<String> playerIds = rankingService.getPlayers();
@@ -471,6 +472,8 @@ public class ProfilesConfiguration
 			autoAdvanceIndex++;
 			i++;
 		}
+		
+		//TODO too much or too many players
 		
 		// possibly reset the index
 		if(autoAdvanceIndex==playerIds.size())
