@@ -1678,5 +1678,27 @@ public class Launcher
 
 //TODO bug: le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
 //TODO réset des stats: faut effacer les fichiers de stats individuelles
+//		>> suppresssion de profil : pareil
 //TODO vérifier qu'on n'utiliser jamais 16 et toujours GameData.MAX_PROFILES_COUNT
 //TODO réinit l'index d'auto-avancement quand on sélectionne un nouveau tournoi
+//TODO pb dans l'enchainement des tournois, quand on décide de changer le tournoi joué
+//TODO voir ce qui prend du temps à l'ouverture des stats
+//TODO voir ce qui cause inéluctablement des ralentissements
+//TODO bug: malgré la désactivation de l'affichace des exceptions, j'ai eu droit à:
+/*
+org.totalboumboum.ai.v201112.adapter.path.LimitReachedException: The search algorithm developped a tree too costly/deep/large according to the predefined limits.
+at org.totalboumboum.ai.v201112.adapter.path.search.Astar.continueProcess(Astar.java:453)
+at org.totalboumboum.ai.v201112.adapter.path.search.Astar.processShortestPath(Astar.java:284)
+at org.totalboumboum.ai.v201112.adapter.path.search.Astar.processShortestPath(Astar.java:186)
+at org.totalboumboum.ai.v201112.adapter.path.search.Astar.processShortestPath(Astar.java:148)
+at org.totalboumboum.ai.v201112.ais.gungorkavus.v3.MoveHandler.updatePath(MoveHandler.java:366)
+at org.totalboumboum.ai.v201112.ais.gungorkavus.v3.MoveHandler.considerMoving(MoveHandler.java:475)
+at org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence.processAction(ArtificialIntelligence.java:434)
+at org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence.call(ArtificialIntelligence.java:164)
+at org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence.call(ArtificialIntelligence.java:1)
+at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+at java.util.concurrent.FutureTask.run(Unknown Source)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.lang.Thread.run(Unknown Source)
+*/
