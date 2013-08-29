@@ -20,25 +20,25 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="11" rounds="3" />
-	<dates start="2013-08-29T07:41:28" save="2013-08-29T08:23:29" />
+	<played matches="11" rounds="4" />
+	<dates start="2013-08-29T10:42:54" save="2013-08-29T11:13:20" />
 	<players>
-		<player name="0910.Mançuhan+Pınarer" />
-		<player name="0708.Okan+Yüksel" />
-		<player name="0708.Cirit+Mutlu" />
-		<player name="1213.Çalışkan+Geçkalan" />
-		<player name="1213.Alçar+Kaya+Yıldırım" />
-		<player name="1213.Gergin+Özkanoğlu" />
-		<player name="1112.Çalışkan+Geçkalan+Seven" />
-		<player name="0910.Aldanmaz+Yenigün" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="1112.Ünlü+Yıldırım" />
-		<player name="0708.Kılıç+Pala" />
-		<player name="0708.Başman+Sandallı" />
-		<player name="1213.Çetin+İlter" />
-		<player name="1112.Güngör+Kavuz" />
-		<player name="0809.Akpolat+Şener" />
 		<player name="1112.Bal+Çetin" />
+		<player name="Simplet" />
+		<player name="0910.Dane+Şatır" />
+		<player name="0708.Keçer+Yaman" />
+		<player name="1112.Cap+Munavarov" />
+		<player name="1112.Çalışkan+Geçkalan+Seven" />
+		<player name="1213.Erdem+Tayyar" />
+		<player name="0708.Göksay+Köse" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="0809.Çalışkan+Cap+Doğaner" />
+		<player name="0809.Kökciyan+Mazmanoğlu" />
+		<player name="0708.Cirit+Mutlu" />
+		<player name="0708.Hanci+Toprak" />
+		<player name="1213.Gergin+Özkanoğlu" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="1011.Avcı+Güngör" />
 	</players>
 </archive>
 
