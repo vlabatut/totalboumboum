@@ -34,7 +34,7 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman3" spriteFolder="pretty" />
 		<player file="0ff9f846-9767-42c7-b662-05dd6e851c6d" color="GRASS" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 		<player file="d5437bdc-e1e0-4778-b2a1-d95f086ae957" color="RED" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
 		<player file="3f1ca4a0-6c9e-44b4-811a-a24cbac8c758" color="BLUE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
