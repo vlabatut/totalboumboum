@@ -1,5 +1,7 @@
 package org.totalboumboum.gui.common.structure.panel.data;
 
+import java.awt.event.MouseEvent;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -22,11 +24,28 @@ package org.totalboumboum.gui.common.structure.panel.data;
  */
 
 /**
+ * This interface must be implemented
+ * by classes listening to data panels.
  * 
  * @author Vincent Labatut
- *
  */
 public interface DataPanelListener
-{
+{	
+	/**
+	 * Fires an event when the data
+	 * selected in the panel changes.
+	 * 
+	 * @param object
+	 * 		Object representing the event.
+	 */
 	public void dataPanelSelectionChanged(Object object);
+	
+	/**
+	 * Fires an event when the mouse
+	 * is pressed in the listened panel.
+	 * 
+	 * @param e
+	 * 		Associated mouse event.
+	 */
+	public void mousePressed(MouseEvent e);
 }

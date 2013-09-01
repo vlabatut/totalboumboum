@@ -21,6 +21,7 @@ package org.totalboumboum.gui.common.structure.panel.data;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,5 +76,10 @@ public abstract class InnerDataPanel extends ContentPanel
 	protected void fireDataPanelSelectionChange(Object object)
 	{	for(DataPanelListener listener: listeners)
 			listener.dataPanelSelectionChanged(object);
+	}
+	
+	protected void fireMousePressed(MouseEvent e)
+	{	for(DataPanelListener listener: listeners)
+			listener.mousePressed(e);
 	}
 }
