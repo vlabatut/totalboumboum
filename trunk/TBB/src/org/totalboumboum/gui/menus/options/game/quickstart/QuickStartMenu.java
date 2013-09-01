@@ -24,6 +24,7 @@ package org.totalboumboum.gui.menus.options.game.quickstart;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -174,5 +175,10 @@ public class QuickStartMenu extends InnerMenuPanel implements DataPanelListener
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 }
