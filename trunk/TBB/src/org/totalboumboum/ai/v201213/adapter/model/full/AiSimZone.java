@@ -46,6 +46,7 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -774,7 +775,7 @@ public final class AiSimZone extends AiZone
 		boolean penetrating = false;
 		boolean working = true;
 		double currentSpeed = 0;
-		double slidingSpeed = (140*RoundVariables.zoomFactor)/16;
+		double slidingSpeed = (140*RoundVariables.zoomFactor)/GameData.STANDARD_TILE_DIMENSION;
 		AiStopType stopHeroes = AiStopType.WEAK_STOP;
 		AiStopType stopFires = AiStopType.WEAK_STOP;
 		AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,elapsedTime);
@@ -1314,7 +1315,7 @@ public final class AiSimZone extends AiZone
 			boolean penetrating = false;
 			boolean working = true;
 			double currentSpeed = 0;
-			double slidingSpeed = (140*RoundVariables.zoomFactor)/16 * 1000;
+			double slidingSpeed = (140*RoundVariables.zoomFactor)/GameData.STANDARD_TILE_DIMENSION * 1000;
 			AiStopType stopHeroes = AiStopType.WEAK_STOP;
 			AiStopType stopFires = AiStopType.WEAK_STOP;
 			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
