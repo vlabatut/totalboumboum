@@ -21,6 +21,7 @@ package org.totalboumboum.gui.menus.quickmatch;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -181,6 +182,11 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void playerSelectionControlsSet(int index)
 	{	// not used here
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 
 	/////////////////////////////////////////////////////////////////
