@@ -23,6 +23,7 @@ package org.totalboumboum.gui.game.save;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -198,7 +199,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	
+	{	//
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -207,6 +208,11 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 	
 	/////////////////////////////////////////////////////////////////
