@@ -21,6 +21,8 @@ package org.totalboumboum.statistics;
  * 
  */
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +51,8 @@ import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
 import org.totalboumboum.statistics.overall.PlayerStats.Value;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
@@ -115,6 +119,7 @@ public class GameStatistics
 	
 	public static void reset() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	resetPlayersStats();
+		resetHistories();
 		resetRankingService();
 		resetTournamentAutoAdvance();
 	}
@@ -328,5 +333,29 @@ public class GameStatistics
 		// update rankings
 		if(gameResults!=null)
 			rankingService.postResults(gameResults);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// HISTORY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Deletes all files containing the players stat history
+	 * and present in the corresponding folder.
+	 */
+	private static void resetHistories()
+	{	String path = FilePaths.getDetailedStatisticsPath();
+		File folder = new File(path);
+		FileFilter filter = new FileFilter()
+		{	@Override
+			public boolean accept(File pathname)
+			{	String fileName = pathname.getName();
+				String extension = fileName.substring(fileName.length()-FileNames.EXTENSION_TEXT.length(), fileName.length());
+				boolean result = extension.equalsIgnoreCase(FileNames.EXTENSION_TEXT);
+				return result;
+			}
+		};
+		File files[] = folder.listFiles(filter);
+		for(File file: files)
+			file.delete();
 	}
 }
