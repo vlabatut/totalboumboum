@@ -41,6 +41,7 @@ import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.SpringUtilities;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticRound;
+import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
@@ -66,7 +67,7 @@ public class QuickResults extends JPanel
 	{	super();
 		
 		// init
-		lines = 16+1;
+		lines = GameData.STANDARD_TILE_DIMENSION+1;
 		int cols = 1+5+1;			
 		int width = dimen.width;
 		int height = dimen.height;
