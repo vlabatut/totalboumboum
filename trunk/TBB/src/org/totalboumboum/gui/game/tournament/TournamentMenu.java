@@ -23,6 +23,7 @@ package org.totalboumboum.gui.game.tournament;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -47,6 +48,7 @@ import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.match.MatchSplitPanel;
@@ -88,7 +90,7 @@ import org.xml.sax.SAXException;
  * 
  * @author Vincent Labatut
  */
-public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel,ClientGeneralConnexionListener
+public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel,ClientGeneralConnexionListener,DataPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
@@ -138,7 +140,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	/////////////////////////////////////////////////////////////////
 	/** Tournament displayed by this panel */
 	private AbstractTournament tournament;
-	/** Whether the user can play or only browse the results */
+	/** Whether the user can play or only browses the results */
 	private boolean browseOnly = false;
 
 	/**
@@ -180,11 +182,14 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				// create
 				SequenceDescription trnmtDescription = new SequenceDescription(container);
 				tournamentDescription = trnmtDescription;
+				tournamentDescription.addListener(this);
 				container.setDataPart(tournamentDescription);
 				SequenceResults trnmtResults = new SequenceResults(container);
 				tournamentResults = trnmtResults;
+				tournamentResults.addListener(this);
 				OthersStatistics ts = new OthersStatistics(container);
 				tournamentStatistics = ts;
+				tournamentStatistics.addListener(this);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
@@ -195,11 +200,14 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				// create
 				CupDescription trnmtDescription = new CupDescription(container);
 				tournamentDescription = trnmtDescription;
+				tournamentDescription.addListener(this);
 				container.setDataPart(tournamentDescription);
 				CupResults trnmtResults = new CupResults(container);
 				tournamentResults = trnmtResults;
+				tournamentResults.addListener(this);
 				OthersStatistics ts = new OthersStatistics(container);
 				tournamentStatistics = ts;
+				tournamentStatistics.addListener(this);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
@@ -210,11 +218,14 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				// create
 				LeagueDescription trnmtDescription = new LeagueDescription(container);
 				tournamentDescription = trnmtDescription;
+				tournamentDescription.addListener(this);
 				container.setDataPart(tournamentDescription);
 				LeagueResults trnmtResults = new LeagueResults(container);
 				tournamentResults = trnmtResults;
+				tournamentResults.addListener(this);
 				OthersStatistics ts = new OthersStatistics(container);
 				tournamentStatistics = ts;
+				tournamentStatistics.addListener(this);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
@@ -227,11 +238,14 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				// create
 				SingleDescription trnmtDescription = new SingleDescription(container);
 				tournamentDescription = trnmtDescription;
+				tournamentDescription.addListener(this);
 				container.setDataPart(tournamentDescription);
 				SingleResults trnmtResults = new SingleResults(container);
 				tournamentResults = trnmtResults;
+				tournamentResults.addListener(this);
 				SingleStatistics ts = new SingleStatistics(container);
 				tournamentStatistics = ts;
+				tournamentStatistics.addListener(this);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
@@ -775,5 +789,20 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	@Override
 	public void connexionTournamentStarted(AbstractTournament tournament)
 	{	// useless here
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER			/////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void dataPanelSelectionChanged(Object object)
+	{	// not used here
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
 	}
 }

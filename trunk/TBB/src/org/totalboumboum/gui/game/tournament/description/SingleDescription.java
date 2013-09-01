@@ -21,6 +21,7 @@ package org.totalboumboum.gui.game.tournament.description;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.Box;
@@ -169,5 +170,10 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }

@@ -21,6 +21,7 @@ package org.totalboumboum.gui.game.tournament.description;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.Box;
@@ -77,6 +78,7 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 			// legs panel
 			{	legsPanel = new LegSubPanel(rightWidth,dataHeight);
 				legsPanel.setLeg(null,LEGS_PER_PAGE);
+				legsPanel.addListener(this);
 				infoPanel.add(legsPanel);
 			}
 
@@ -120,7 +122,6 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -129,19 +130,23 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 	/////////////////////////////////////////////////////////////////
 	// LEG PANEL LISTENER 	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void legSelectionChanged()
-	{	
+	{	//	
 	}
 
 	@Override
 	public void legAfterClicked()
-	{	
+	{	//
 	}
 
 	@Override
 	public void legBeforeClicked()
-	{	
+	{	//
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }

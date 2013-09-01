@@ -22,6 +22,7 @@ package org.totalboumboum.gui.game.tournament.statistics;
  */
 
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.gui.common.content.subpanel.events.EvolutionSubPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
@@ -36,7 +37,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
  * 
  * @author Vincent Labatut
  */
-public abstract class TournamentStatistics<T extends AbstractTournament> extends EntitledDataPanel
+public abstract class TournamentStatistics<T extends AbstractTournament> extends EntitledDataPanel implements EvolutionSubPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
