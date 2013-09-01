@@ -39,6 +39,7 @@ import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
+import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
@@ -49,7 +50,7 @@ import org.totalboumboum.tools.time.TimeUnit;
  */
 public class LeagueResultsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
-	private static final int LINES = 16+1;
+	private static final int LINES = GameData.STANDARD_TILE_DIMENSION+1;
 	private static final int COLS = 0;
 	
 
