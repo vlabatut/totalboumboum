@@ -21,7 +21,10 @@ package org.totalboumboum.gui.game.round.statistics;
  * 
  */
 
+import java.awt.event.MouseEvent;
+
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.gui.common.content.subpanel.events.EvolutionSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.events.RoundEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
@@ -35,7 +38,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
  * 
  * @author Vincent Labatut
  */
-public class RoundStatistics extends EntitledDataPanel
+public class RoundStatistics extends EntitledDataPanel implements EvolutionSubPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
@@ -56,6 +59,7 @@ public class RoundStatistics extends EntitledDataPanel
 		
 		// data
 		{	evolutionPanel = new RoundEvolutionSubPanel(dataWidth,dataHeight);
+			evolutionPanel.addListener(this);
 			setDataPart(evolutionPanel);
 		}
 	}
@@ -114,5 +118,13 @@ public class RoundStatistics extends EntitledDataPanel
 	@Override
 	public void refresh()
 	{	setRound(round,number);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVOLUTION SUB PANEL LISTENER		/////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }
