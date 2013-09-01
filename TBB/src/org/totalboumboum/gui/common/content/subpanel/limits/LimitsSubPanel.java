@@ -37,6 +37,7 @@ import org.totalboumboum.game.limit.LimitScore;
 import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.gui.common.content.MyLabel;
+import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
@@ -256,7 +257,9 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	// init
+	{	fireMousePressed(e);
+		
+		// init
 		MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionMultiple(label);
 		// unselect
@@ -271,7 +274,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	// 
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -291,5 +294,10 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	private void fireLimitSelectionChange()
 	{	for(LimitsSubPanelListener listener: listeners)
 			listener.limitSelectionChanged();
+	}
+
+	private void fireMousePressed(MouseEvent e)
+	{	for(LimitsSubPanelListener listener: listeners)
+			listener.mousePressed(e);
 	}
 }

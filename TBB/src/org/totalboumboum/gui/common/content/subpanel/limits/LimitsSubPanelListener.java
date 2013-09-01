@@ -1,5 +1,7 @@
 package org.totalboumboum.gui.common.content.subpanel.limits;
 
+import java.awt.event.MouseEvent;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -29,4 +31,5 @@ package org.totalboumboum.gui.common.content.subpanel.limits;
 public interface LimitsSubPanelListener
 {
 	public void limitSelectionChanged();
+	public void mousePressed(MouseEvent e);
 }
