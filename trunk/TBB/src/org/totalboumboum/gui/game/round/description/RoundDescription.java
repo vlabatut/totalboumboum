@@ -22,6 +22,7 @@ package org.totalboumboum.gui.game.round.description;
  */
 
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -329,5 +330,10 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }

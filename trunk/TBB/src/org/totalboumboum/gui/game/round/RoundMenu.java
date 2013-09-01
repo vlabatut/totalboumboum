@@ -24,6 +24,7 @@ package org.totalboumboum.gui.game.round;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -46,6 +47,7 @@ import org.totalboumboum.game.round.RoundRenderPanel;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -76,7 +78,7 @@ import org.xml.sax.SAXException;
  * 
  * @author Vincent Labatut
  */
-public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,ClientGeneralConnexionListener
+public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,ClientGeneralConnexionListener,DataPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
@@ -124,9 +126,12 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		
 		// panels
 		roundDescription = new RoundDescription(container);
+		roundDescription.addListener(this);
 		container.setDataPart(roundDescription);
 		roundResults = new RoundResults(container);
+		roundResults.addListener(this);
 		roundStatistics = new RoundStatistics(container);
+		roundStatistics.addListener(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -692,5 +697,20 @@ round.clean();
 	@Override
 	public void connexionTournamentStarted(AbstractTournament tournament)
 	{	// useless here
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER			/////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void dataPanelSelectionChanged(Object object)
+	{	// not used here
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
 	}
 }
