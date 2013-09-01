@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.profiles.heroes;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.Box;
@@ -138,5 +139,10 @@ public class SelectedHeroMenu extends InnerMenuPanel implements DataPanelListene
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 }
