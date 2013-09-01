@@ -34,6 +34,9 @@ import java.util.SortedSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.statistics.glicko2.Glicko2Loader;
@@ -113,8 +116,20 @@ public class GameStatistics
 	public static void reset() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	resetPlayersStats();
 		resetRankingService();
+		resetTournamentAutoAdvance();
 	}
 
+	/**
+	 * Reset the auto-advance index to zero.
+	 * This value is used when the tournament
+	 * mode of the auto-advance options is
+	 * enabled.
+	 */
+	private static void resetTournamentAutoAdvance()
+	{	TournamentConfiguration tc = Configuration.getGameConfiguration().getTournamentConfiguration();
+		tc.resetAutoAdvanceIndex();
+	}
+	
 	/**
 	 * used when a new profile is created
 	 * @param playerId
