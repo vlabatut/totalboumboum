@@ -86,7 +86,7 @@ public class Round implements StatisticHolder, Serializable
 	// NAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Name given by the designer of this round */
-	private String name;
+	private String name = null;
 	
 	/**
 	 * Returns the name given by the 
