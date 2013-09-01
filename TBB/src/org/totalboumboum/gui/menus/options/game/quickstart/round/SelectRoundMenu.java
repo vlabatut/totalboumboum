@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.options.game.quickstart.round;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -140,5 +141,10 @@ public class SelectRoundMenu extends InnerMenuPanel implements DataPanelListener
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 }
