@@ -443,7 +443,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	MyLabel label = (MyLabel)e.getComponent();
+	{	fireMousePressed(e);
+		
+		MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionMultiple(label);
 		ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
 		switch(pos[2])
@@ -620,7 +622,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -670,5 +672,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	public void fireControlsSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionControlsSet(index);
+	}
+
+	public void fireMousePressed(MouseEvent e)
+	{	for(PlayersSelectionSubPanelListener listener: listeners)
+			listener.mousePressed(e);
 	}
 }
