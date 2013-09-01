@@ -81,13 +81,16 @@ public class MatchResults extends EntitledDataPanel
 		
 		// title
 		this.number = number;
-		String key = GuiKeys.GAME_MATCH_RESULTS_TITLE;
+		String name = match.getName();
+		String key = GuiKeys.GAME_MATCH_DESCRIPTION_TITLE;
 		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		if(number!=null)
 		{	text = text + " " + number;
 			tooltip = tooltip + " " + number;
 		}
+		if(name!=null)
+			text = name;
 		setTitleText(text,tooltip);
 	}
 	

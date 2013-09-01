@@ -21,7 +21,10 @@ package org.totalboumboum.gui.game.match.statistics;
  * 
  */
 
+import java.awt.event.MouseEvent;
+
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.gui.common.content.subpanel.events.EvolutionSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.events.MatchEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
@@ -35,7 +38,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
  * 
  * @author Vincent Labatut
  */
-public class MatchStatistics extends EntitledDataPanel
+public class MatchStatistics extends EntitledDataPanel implements EvolutionSubPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
@@ -56,6 +59,7 @@ public class MatchStatistics extends EntitledDataPanel
 
 		// data
 		{	evolutionPanel = new MatchEvolutionSubPanel(dataWidth,dataHeight);
+			evolutionPanel.addListener(this);
 			setDataPart(evolutionPanel);
 		}
 	}
@@ -84,13 +88,16 @@ public class MatchStatistics extends EntitledDataPanel
 		
 		// title
 		this.number = number;
-		String key = GuiKeys.GAME_MATCH_STATISTICS_TITLE;
+		String name = match.getName();
+		String key = GuiKeys.GAME_MATCH_DESCRIPTION_TITLE;
 		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		if(number!=null)
 		{	text = text + " " + number;
 			tooltip = tooltip + " " + number;
 		}
+		if(name!=null)
+			text = name;
 		setTitleText(text,tooltip);
 	}
 	
@@ -114,5 +121,13 @@ public class MatchStatistics extends EntitledDataPanel
 	@Override
 	public void refresh()
 	{	setMatch(match,number);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVOLUTION SUB PANEL LISTENER		/////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }

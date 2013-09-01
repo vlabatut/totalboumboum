@@ -24,6 +24,7 @@ package org.totalboumboum.gui.game.match;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.match.description.MatchDescription;
@@ -71,7 +73,7 @@ import org.xml.sax.SAXException;
  * 
  * @author Vincent Labatut
  */
-public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,ClientGeneralConnexionListener
+public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel,ClientGeneralConnexionListener,DataPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 		
@@ -117,11 +119,13 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		buttonRound = GuiButtonTools.createButton(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonWidth,buttonHeight,1,this);
 		
 		// panels
-		{	matchDescription = new MatchDescription(container);
-			container.setDataPart(matchDescription);
-			matchResults = new MatchResults(container);
-			matchStatistics = new MatchStatistics(container);		
-		}
+		matchDescription = new MatchDescription(container);
+		matchDescription.addListener(this);
+		container.setDataPart(matchDescription);
+		matchResults = new MatchResults(container);
+		matchResults.addListener(this);
+		matchStatistics = new MatchStatistics(container);		
+		matchStatistics.addListener(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -666,5 +670,20 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	@Override
 	public void connexionTournamentStarted(AbstractTournament tournament)
 	{	// useless here
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER			/////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void dataPanelSelectionChanged(Object object)
+	{	// not used here
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
 	}
 }
