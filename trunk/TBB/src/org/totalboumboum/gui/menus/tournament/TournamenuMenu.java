@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.tournament;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -399,6 +400,13 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 	{	refreshButtons();
 	}
 	
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
