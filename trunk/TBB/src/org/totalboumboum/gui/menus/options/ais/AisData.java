@@ -335,9 +335,8 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	private void setAutoAdvance()
 	{	AutoAdvance autoAdvance = aisConfiguration.getAutoAdvance();
 		String aaStr = autoAdvance.toString();
-		String text = aaStr.toUpperCase().substring(0,1)+aaStr.toLowerCase().substring(1,aaStr.length());
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+text+GuiKeys.TOOLTIP); 
-		optionsPanel.getLine(LINE_AUTO_ADVANCE).setLabelText(2,text,tooltip);
+		String key = GuiKeys.MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+aaStr.toUpperCase().substring(0,1)+aaStr.toLowerCase().substring(1,aaStr.length());
+		optionsPanel.getLine(LINE_AUTO_ADVANCE).setLabelKey(2,key,false);
 	}
 	
 	private void setAutoAdvanceDelay()
