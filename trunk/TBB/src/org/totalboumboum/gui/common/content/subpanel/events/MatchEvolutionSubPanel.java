@@ -40,6 +40,7 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.MyLabel;
+import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
@@ -650,7 +651,9 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	int[] pos = {0,COL_PLOT};
+	{	fireMousePressed(e);
+		
+		int[] pos = {0,COL_PLOT};
 		if(e.getComponent() instanceof MyLabel)
 		{	MyLabel label = (MyLabel)e.getComponent();
 			pos = getLabelPosition(label);
@@ -689,5 +692,24 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	//
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<EvolutionSubPanelListener> listeners = new ArrayList<EvolutionSubPanelListener>();
+	
+	public void addListener(EvolutionSubPanelListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(EvolutionSubPanelListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	private void fireMousePressed(MouseEvent e)
+	{	for(EvolutionSubPanelListener listener: listeners)
+			listener.mousePressed(e);
 	}
 }
