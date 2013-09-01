@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.quickmatch;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -507,5 +508,10 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 }
