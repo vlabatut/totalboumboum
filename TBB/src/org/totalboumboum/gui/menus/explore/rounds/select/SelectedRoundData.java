@@ -22,6 +22,7 @@ package org.totalboumboum.gui.menus.explore.rounds.select;
  */
 
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -233,6 +234,11 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	//
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -22,6 +22,7 @@ package org.totalboumboum.gui.menus.explore.matches.select;
  */
 
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -185,7 +186,6 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	/////////////////////////////////////////////////////////////////
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
@@ -195,6 +195,11 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 		pointsPanel.setPointsProcessor(pointsProcessor);
 	}
 	
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	//
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////

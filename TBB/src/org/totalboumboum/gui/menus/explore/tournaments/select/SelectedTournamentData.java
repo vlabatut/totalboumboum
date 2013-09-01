@@ -22,6 +22,7 @@ package org.totalboumboum.gui.menus.explore.tournaments.select;
  */
 
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -168,7 +169,6 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 	/////////////////////////////////////////////////////////////////
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
@@ -176,6 +176,11 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	//
 	}
 	
 	/////////////////////////////////////////////////////////////////
