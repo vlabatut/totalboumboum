@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentLoader;
@@ -205,5 +206,33 @@ public class TournamentConfiguration
 	 */
 	public void setAutoAdvanceIndex(int index)
 	{	autoAdvanceIndex = index;
+	}
+	
+	/**
+	 * Reset the auto-advance index to zero.
+	 * This value is used when the tournament
+	 * mode of the auto-advance options is
+	 * enabled.
+	 */
+	public void resetAutoAdvanceIndex()
+	{	setAutoAdvanceIndex(0);
+		try
+		{	TournamentConfigurationSaver.saveTournamentConfiguration(this);
+		}
+		catch (IllegalArgumentException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SecurityException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
 	}
 }
