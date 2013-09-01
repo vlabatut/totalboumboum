@@ -401,22 +401,24 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	// init
+	{	fireMousePressed(e);
+		
+		// init
 		MyLabel label = (MyLabel)e.getComponent();
 		boolean up = true;
 		int index = GuiMiscTools.indexOfComponent(upPanel,label);
@@ -470,7 +472,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -500,6 +502,11 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	private void fireLegAfterClicked()
 	{	for(LegSubPanelListener listener: listeners)
 			listener.legAfterClicked();
+	}
+
+	private void fireMousePressed(MouseEvent e)
+	{	for(LegSubPanelListener listener: listeners)
+			listener.mousePressed(e);
 	}
 
 	/////////////////////////////////////////////////////////////////

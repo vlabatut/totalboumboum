@@ -1,5 +1,7 @@
 package org.totalboumboum.gui.common.content.subpanel.leg;
 
+import java.awt.event.MouseEvent;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -31,4 +33,6 @@ public interface LegSubPanelListener
 	public void legSelectionChanged();
 	public void legBeforeClicked();
 	public void legAfterClicked();
+	
+	public void mousePressed(MouseEvent e);
 }
