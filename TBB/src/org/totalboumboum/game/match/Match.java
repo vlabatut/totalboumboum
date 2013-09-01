@@ -73,7 +73,7 @@ public class Match implements StatisticHolder, Serializable
 	// NAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Name given by the designer of this match */
-	private String name;
+	private String name = null;
 	
 	/**
 	 * Returns the name given by the 
