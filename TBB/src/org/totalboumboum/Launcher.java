@@ -1668,7 +1668,6 @@ public class Launcher
 // TODO faire apparaitre graphiquement les résultats d'un round en surimpression sur la zone de jeu
 // TODO insérer une animation optionnelle de présentation des participants au round
 
-// TODO auto-advance: afficher un logo qq part pour indiquer ça ?
 /*
  * articles à écrire sur le blog:
  * 		- pretty bomber
@@ -1676,25 +1675,21 @@ public class Launcher
  * 		- enchainement des tournois (montrer l'évolution des stats, du coup?)
  */
 
-//TODO bug: le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//		pb: le nom chargé n'est pas celui donné par le tournoi >> à corriger
-//		appliquer aux trois panels concernés par les matches
-
-//TODO reset des stats: faut effacer les fichiers de stats individuelles
-//		>> suppresssion de profil : pareil
-
 //TODO voir ce qui prend du temps à l'ouverture des stats
 //TODO voir ce qui cause inéluctablement des ralentissements lors du premier round
 
-//TODO pb dans l'enchainement des tournois, quand on décide de changer le tournoi joué
-//		>> faut détecter les clics sur les boutons autres que ceux de la barre du bas
-//		   (possible,y a déjà des évènements transmettant cette info)
+//TODO auto-advance: afficher un logo qq part pour indiquer ça ?
 
-//TODO reset des stats: remettre l'index du tournoi à zéro
-//		>> à tester
 
-//TODO bug: dans les options IA, les modes AA sont affichés en anglais (mais pas les TTips!)
+
+//TODO à tester
+//	- reset des stats: remettre l'index du tournoi à zéro
+//	- dans les options IA, les modes AA sont affichés en anglais (mais pas les TTips!)
+//	- reset des stats: faut effacer les fichiers de stats individuelles
+//	- suppresssion de profil: faut effacer les fichiers de stats individuelles
+//	- le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
+//	- désactivation de l'enchainement auto quand un subpanel est cliqué
+
 
 //TODO bug: malgré la désactivation de l'affichage des exceptions, j'ai eu droit à :
 /*

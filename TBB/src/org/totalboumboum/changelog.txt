@@ -569,4 +569,6 @@
 	- options :
 		- Possibilité d'enchainer les tournois automatiquement, avec sélection automatique des joueurs. 
 		- Menu options modifié en conséquence (maintenant trois modes différents d'enchainement automatique)
- 
+ 	- gui :
+ 		- Correction d'un bug empêchant l'affichage correct des noms des matches lors des coupes
+ 		
