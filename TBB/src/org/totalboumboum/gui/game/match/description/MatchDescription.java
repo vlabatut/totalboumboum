@@ -21,6 +21,7 @@ package org.totalboumboum.gui.game.match.description;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.Box;
@@ -205,5 +206,10 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }
