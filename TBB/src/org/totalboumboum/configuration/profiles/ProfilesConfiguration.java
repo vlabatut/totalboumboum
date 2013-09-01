@@ -27,7 +27,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NavigableSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
 import java.util.Map.Entry;
 
@@ -451,8 +453,8 @@ public class ProfilesConfiguration
 	public static List<Profile> autoAdvanceComplete(TournamentConfiguration tournamentConfiguration) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, ParserConfigurationException, SAXException, IOException
 	{	int autoAdvanceIndex = tournamentConfiguration.getAutoAdvanceIndex();
 //		int autoAdvanceIndex = Configuration.getGameConfiguration().getTournamentConfiguration().getAutoAdvanceIndex();
-		Set<Integer> allowedNbr = tournamentConfiguration.getTournament().getAllowedPlayerNumbers();
-	
+		int previousAaIndex = autoAdvanceIndex;
+		
 		// get player ranks
 		RankingService rankingService = GameStatistics.getRankingService();
 		Set<String> playerIds = rankingService.getPlayers();
@@ -462,18 +464,54 @@ public class ProfilesConfiguration
 			playerRanks[rank-1] = playerId;
 		}
 		
-		// fill a list with 16 players starting from the index
-		List<Profile> temp = new ArrayList<Profile>();
+		// select an appropriate number of players depending on the tournament
+		Set<Integer> allowedNbr = tournamentConfiguration.getTournament().getAllowedPlayerNumbers();
+		int limit;
+		int remaining = playerIds.size() - autoAdvanceIndex;
+		TreeSet<Integer> sortedAllowed = new TreeSet<Integer>(allowedNbr);
+		NavigableSet<Integer> temp = sortedAllowed.tailSet(remaining, true);
+		if(temp.isEmpty())
+		{	if(sortedAllowed.isEmpty())
+				limit = 0;
+			else
+				limit = sortedAllowed.last();
+		}
+		else
+		{	temp = sortedAllowed.headSet(temp.first(), true);
+			Iterator<Integer> it = temp.descendingIterator();
+			int tempLimit;
+			do
+			{	tempLimit = it.next();
+			}
+			while(playerIds.size()<tempLimit && it.hasNext());
+			if(playerIds.size()<tempLimit)
+				limit = 0;
+			else
+				limit = tempLimit;
+		}
+		
+		// fill a list with the appropriate number of players starting from the index
+		List<Profile> selectedProfiles = new ArrayList<Profile>();
 		int i = 0;
-		while(i<GameData.MAX_PROFILES_COUNT && autoAdvanceIndex<playerIds.size())
+		while(i<limit && autoAdvanceIndex<playerIds.size())
 		{	String playerId = playerRanks[autoAdvanceIndex];
 			Profile profile = ProfileLoader.loadProfile(playerId);
-			temp.add(profile);
+			selectedProfiles.add(profile);
 			autoAdvanceIndex++;
 			i++;
 		}
 		
-		//TODO too much or too many players
+		// possibly complete with randomly selected players
+		List<String> possiblePlayers = new ArrayList<String>();
+		for(int j=0;j<previousAaIndex;j++)
+			possiblePlayers.add(playerRanks[j]);
+		for(int k=i;k<limit;k++)
+		{	int index = (int)(Math.random()*possiblePlayers.size());
+			String playerId = possiblePlayers.get(index);
+			possiblePlayers.remove(index);
+			Profile profile = ProfileLoader.loadProfile(playerId);
+			selectedProfiles.add(profile);
+		}
 		
 		// possibly reset the index
 		if(autoAdvanceIndex==playerIds.size())
@@ -483,7 +521,7 @@ public class ProfilesConfiguration
 		
 		// create selection
 		List<Profile> result = new ArrayList<Profile>();
-		addAllProfiles(result,temp);
+		addAllProfiles(result,selectedProfiles);
 		return result;
 	}
 }
