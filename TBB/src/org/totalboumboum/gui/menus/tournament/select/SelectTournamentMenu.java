@@ -106,14 +106,18 @@ public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelLis
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_CONFIRM))
-		{	String tFile = tournamentData.getSelectedTournamentFile();
-			if(tFile!=null)
-			{	tournamentConfiguration.setTournamentName(new StringBuffer(tFile));
+		{	String newName = tournamentData.getSelectedTournamentFile();
+			if(newName!=null)
+			{	StringBuffer oldName = tournamentConfiguration.getTournamentName();
+				if(oldName!=null && !oldName.toString().equals(newName))
+					tournamentConfiguration.resetAutoAdvanceIndex();
+				tournamentConfiguration.setTournamentName(new StringBuffer(newName));
 				AbstractTournament tournament = tournamentData.getSelectedTournament();
 				tournamentConfiguration.setTournament(tournament);
 			}
