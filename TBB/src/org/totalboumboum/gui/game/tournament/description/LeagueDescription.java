@@ -22,6 +22,7 @@ package org.totalboumboum.gui.game.tournament.description;
  */
 
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.Box;
@@ -156,9 +157,8 @@ public class LeagueDescription extends TournamentDescription<LeagueTournament> i
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LIMITS 			/////////////////////////////////////////////
+	// LIMITS LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
@@ -166,5 +166,11 @@ public class LeagueDescription extends TournamentDescription<LeagueTournament> i
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }

@@ -21,6 +21,8 @@ package org.totalboumboum.gui.game.tournament.statistics;
  * 
  */
 
+import java.awt.event.MouseEvent;
+
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.subpanel.events.TournamentEvolutionSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -49,6 +51,7 @@ public class OthersStatistics extends TournamentStatistics<AbstractTournament>
 
 		// data
 		{	evolutionPanel = new TournamentEvolutionSubPanel(dataWidth,dataHeight);
+			evolutionPanel.addListener(this);
 			setDataPart(evolutionPanel);
 		}
 	}
@@ -71,5 +74,13 @@ public class OthersStatistics extends TournamentStatistics<AbstractTournament>
 	@Override
 	public void refresh()
 	{	setTournament(tournament);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVOLUTION SUB PANEL LISTENER		/////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }

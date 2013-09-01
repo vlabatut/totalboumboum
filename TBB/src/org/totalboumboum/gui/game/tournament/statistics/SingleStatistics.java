@@ -21,6 +21,8 @@ package org.totalboumboum.gui.game.tournament.statistics;
  * 
  */
 
+import java.awt.event.MouseEvent;
+
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.content.subpanel.events.MatchEvolutionSubPanel;
@@ -50,6 +52,7 @@ public class SingleStatistics extends TournamentStatistics<SingleTournament>
 	
 		// data
 		{	evolutionPanel = new MatchEvolutionSubPanel(dataWidth,dataHeight);
+			evolutionPanel.addListener(this);
 			setDataPart(evolutionPanel);
 		}
 	}
@@ -73,5 +76,13 @@ public class SingleStatistics extends TournamentStatistics<SingleTournament>
 	@Override
 	public void refresh()
 	{	setTournament(tournament);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVOLUTION SUB PANEL LISTENER		/////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }
