@@ -150,6 +150,7 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 		
 		// title
 		this.number = number;
+		String name = match.getName();
 		String key = GuiKeys.GAME_MATCH_DESCRIPTION_TITLE;
 		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
@@ -157,6 +158,8 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 		{	text = text + " " + number;
 			tooltip = tooltip + " " + number;
 		}
+		if(name!=null)
+			text = name;
 		setTitleText(text,tooltip);
 
 		// limits
