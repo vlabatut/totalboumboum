@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.network;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -298,5 +299,10 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 				}
 			}
 		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 }
