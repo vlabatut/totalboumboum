@@ -21,6 +21,7 @@ package org.totalboumboum.gui.menus.network;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Set;
 
@@ -138,6 +139,11 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionControlsSet(int index)
+	{	// nothing to do here
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
 	{	// nothing to do here
 	}
 
