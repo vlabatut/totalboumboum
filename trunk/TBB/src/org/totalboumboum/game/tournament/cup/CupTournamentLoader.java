@@ -200,6 +200,8 @@ public class CupTournamentLoader
 		Element matchElt = root.getChild(XmlNames.MATCH);
 		Match match = TournamentLoader.loadMatchElement(matchElt,folder,leg.getTournament());
 		result.setMatch(match);
+		if(name!=null)
+			match.setName(name);
 		
 		// tie break
 		Element tieBreakElt = root.getChild(XmlNames.TIE_BREAK);
