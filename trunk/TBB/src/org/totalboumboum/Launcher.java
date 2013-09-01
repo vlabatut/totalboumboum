@@ -1639,7 +1639,7 @@ public class Launcher
 	 */
 
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
-// TODO les scores obtenus lors des tie breaks sont ils comptés dans les stats du tournoi?
+// TODO les scores obtenus lors des tie breaks sont-ils comptés dans les stats du tournoi?
 
 /* TODO
  * graphiques intéressant :
@@ -1677,15 +1677,26 @@ public class Launcher
  */
 
 //TODO bug: le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
-//TODO réset des stats: faut effacer les fichiers de stats individuelles
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//		pb: le nom chargé n'est pas celui donné par le tournoi >> à corriger
+//		appliquer aux trois panels concernés par les matches
+
+//TODO reset des stats: faut effacer les fichiers de stats individuelles
 //		>> suppresssion de profil : pareil
-//TODO vérifier qu'on n'utiliser jamais 16 et toujours GameData.MAX_PROFILES_COUNT
-//TODO réinit l'index d'auto-avancement quand on sélectionne un nouveau tournoi
-//TODO pb dans l'enchainement des tournois, quand on décide de changer le tournoi joué
+
 //TODO voir ce qui prend du temps à l'ouverture des stats
-//TODO voir ce qui cause inéluctablement des ralentissements
-//TODO bug: malgré la désactivation de l'affichace des exceptions, j'ai eu droit à :
-//TODO gérer le cas où il n'y a pas assez de joueurs pour compléter le tournoi (prendre ceux relatifs au premier sélectionné)
+//TODO voir ce qui cause inéluctablement des ralentissements lors du premier round
+
+//TODO pb dans l'enchainement des tournois, quand on décide de changer le tournoi joué
+//		>> faut détecter les clics sur les boutons autres que ceux de la barre du bas
+//		   (possible,y a déjà des évènements transmettant cette info)
+
+//TODO reset des stats: remettre l'index du tournoi à zéro
+//		>> à tester
+
+//TODO bug: dans les options IA, les modes AA sont affichés en anglais (mais pas les TTips!)
+
+//TODO bug: malgré la désactivation de l'affichage des exceptions, j'ai eu droit à :
 /*
 org.totalboumboum.ai.v201112.adapter.path.LimitReachedException: The search algorithm developped a tree too costly/deep/large according to the predefined limits.
 at org.totalboumboum.ai.v201112.adapter.path.search.Astar.continueProcess(Astar.java:453)
