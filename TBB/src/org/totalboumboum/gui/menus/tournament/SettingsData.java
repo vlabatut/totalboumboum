@@ -42,23 +42,23 @@ import org.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * This class allows selecting
+ * the tournament to be played.
  * 
  * @author Vincent Labatut
- *
  */
 public class SettingsData extends EntitledDataPanel implements MouseListener
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.06f;
-	
-	private TournamentMiscSubPanel miscPanel;
-	private TableSubPanel tournamentPanel;
-	private int tournamentHeight;
-	private int miscHeight;
-	
+		
+	/**
+	 * Creates a new panel to select a tournament.
+	 * 
+	 * @param container
+	 * 		Container of this panel.
+	 */
 	public SettingsData(SplitMenuPanel container)
 	{	super(container);
 		
@@ -112,40 +112,56 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	SelectTournamentSplitPanel selectTournamentPanel = new SelectTournamentSplitPanel(container.getMenuContainer(),container,tournamentConfiguration);
+	{	fireMousePressed(e);
+		
+		SelectTournamentSplitPanel selectTournamentPanel = new SelectTournamentSplitPanel(container.getMenuContainer(),container,tournamentConfiguration);
 		getMenuContainer().replaceWith(selectTournamentPanel);
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current tournament configuration */
 	private TournamentConfiguration tournamentConfiguration;
 
+	/**
+	 * Sets up the tournament configuration.
+	 * 
+	 * @param tournamentConfiguration
+	 * 		Tournament configuration to set up.
+	 */
 	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
 	{	this.tournamentConfiguration = tournamentConfiguration;
 		refresh();
 	}
 	
+	/**
+	 * Returns the current configuration
+	 * for this tournament.
+	 * 
+	 * @return
+	 * 		The current tournament configuration.
+	 */
 	public TournamentConfiguration getTournamentConfiguration()
 	{	return tournamentConfiguration;	
 	}
@@ -153,6 +169,22 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Ratio between both parts of the panel */
+	private static final float SPLIT_RATIO = 0.06f;
+	/** Panel displaying various data regarding the tournament */
+	private TournamentMiscSubPanel miscPanel;
+	/** Panel letting the user select the tournament */
+	private TableSubPanel tournamentPanel;
+	/** Height of the tournament panel */
+	private int tournamentHeight;
+	/** Height of the information panel */
+	private int miscHeight;
+
+	/**
+	 * Updates the information displayed
+	 * in this pabel, after a change
+	 * in the tournament configuration.
+	 */
 	private void refreshTournament()
 	{	String tournamentFile = tournamentConfiguration.getTournamentName().toString();
 		if(tournamentFile!=null)
@@ -161,6 +193,18 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 			tournamentPanel.setLabelText(0,0,null,null);
 	}
 
+	/**
+	 * Builds and initializes the panel
+	 * displaying the current tournament
+	 * configuration.
+	 * 
+	 * @param width
+	 * 		Width of the panel to be built.
+	 * @param height
+	 * 		Height of the panel to be built.
+	 * @return
+	 * 		The resulting panel.
+	 */
 	private TableSubPanel makeTournamentPanel(int width, int height)
 	{	int cols = 2;
 		int lines = 1;

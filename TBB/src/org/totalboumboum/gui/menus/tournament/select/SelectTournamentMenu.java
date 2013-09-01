@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.tournament.select;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.Box;
@@ -41,7 +42,6 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.files.FilePaths;
 
 /**
@@ -129,6 +129,7 @@ public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelLis
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void refresh()
 	{	//
 	}
@@ -139,5 +140,10 @@ public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelLis
 	@Override
 	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// nothing to do here
 	}
 }

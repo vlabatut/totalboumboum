@@ -21,6 +21,7 @@ package org.totalboumboum.gui.menus.tournament;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -99,7 +100,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 //	private ArrayList<Profile> players;
 	
 	/**
-	 * Setup the tournament configuration.
+	 * Sets up the tournament configuration.
 	 * 
 	 * @param tournamentConfiguration
 	 * 		Tournament configuration to set up.
@@ -258,6 +259,12 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void playerSelectionControlsSet(int index)
 	{	// not used here
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) 
+	{	// we just fetch the event to listeners
+		fireMousePressed(e);
 	}
 
 	/////////////////////////////////////////////////////////////////
