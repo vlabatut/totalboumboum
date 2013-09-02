@@ -1708,6 +1708,6 @@ public class Launcher
 //TODO auto-advance: afficher un logo qq part pour indiquer ça ?
 
 
+
 //TODO màj des stats Glicko seulement lors des màj du classement? (éviter graphiques en escalier)
 //TODO décider à l'avance de la répartition de tous joueurs dans le tournoi auto ? (pb si des profils sont supprimés/ajoutés)
-//TODO compléter document avec nouveaux menus/stats, etc.
