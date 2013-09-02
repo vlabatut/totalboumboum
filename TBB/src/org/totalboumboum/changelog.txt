@@ -566,6 +566,8 @@
 		- Enregistrement de l'historique des joueurs, pour chaque manche jouée
 	- ia :
 		- possibilité de découper le code source de l'agent en deux projets (TBB vs. versions des agents)
+		- correction d'un bug dans les anciens agents : ils affichaient certaines exceptions (malgré l'option du jeu)
+		- ajout dans le checker de code source de l'API : ne pas utiliser printStackTrace
 	- options :
 		- Possibilité d'enchainer les tournois automatiquement, avec sélection automatique des joueurs. 
 		- Menu options modifié en conséquence (maintenant trois modes différents d'enchainement automatique)
