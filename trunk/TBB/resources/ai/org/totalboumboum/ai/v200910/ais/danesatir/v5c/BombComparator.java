@@ -46,6 +46,7 @@ public class BombComparator implements Comparator<AiBomb> {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		double arg1time=0;
 		try {
@@ -53,6 +54,7 @@ public class BombComparator implements Comparator<AiBomb> {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		if(arg0time < arg1time)
 			return -1;

@@ -249,6 +249,7 @@ public class SearchNode {
 		} catch (StopRequestException e) {
 			//  Auto-generated catch block
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		node = (SearchNode) object;
 		try {
@@ -261,8 +262,9 @@ public class SearchNode {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
-		return false;
+//		return false;
 	}
 
 	/**

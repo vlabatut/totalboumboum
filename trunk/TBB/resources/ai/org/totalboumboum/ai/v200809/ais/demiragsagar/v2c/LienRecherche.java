@@ -80,6 +80,7 @@ public class LienRecherche {
 			} catch (StopRequestException e) {
 				// 
 				//e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 		return result;
@@ -93,6 +94,7 @@ public class LienRecherche {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		result = result + "] )->";
 		result = result + "[";
@@ -101,6 +103,7 @@ public class LienRecherche {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		result = result + "]";
 		return result;

@@ -95,6 +95,7 @@ public class Link {
 			} catch (StopRequestException e) {
 				// 
 				//e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 		return result;

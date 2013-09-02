@@ -172,18 +172,21 @@ public class Enemy
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		try {
 			result.append(" - posedBombs.: "+ getPosedBombs());
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		try {
 			result.append(" - totalTime.: "+ getLastCheck());
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		return result.toString();
 	}

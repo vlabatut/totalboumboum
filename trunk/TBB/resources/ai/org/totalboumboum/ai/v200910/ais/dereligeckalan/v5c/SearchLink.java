@@ -83,6 +83,7 @@ public class SearchLink {
 			} catch (StopRequestException e) {
 				//
 				//e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 		return result;

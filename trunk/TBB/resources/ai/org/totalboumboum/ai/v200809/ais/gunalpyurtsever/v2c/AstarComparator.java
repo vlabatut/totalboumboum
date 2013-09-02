@@ -24,6 +24,7 @@ public class AstarComparator implements Comparator<CostTile> {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		
 		

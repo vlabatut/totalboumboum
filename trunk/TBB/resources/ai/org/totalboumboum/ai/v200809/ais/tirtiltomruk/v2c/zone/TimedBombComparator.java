@@ -36,8 +36,9 @@ public class TimedBombComparator implements Comparator<TimedBomb>{
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
-		return 0;
+//		return 0;
 	}
 
 }

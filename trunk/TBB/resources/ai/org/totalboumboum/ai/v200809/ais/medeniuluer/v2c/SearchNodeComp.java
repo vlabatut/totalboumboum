@@ -55,6 +55,7 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	} catch (StopRequestException e) {
 		// 
 		//e.printStackTrace();
+		throw new RuntimeException();
 	}
 	int n_2=0;
 	try {
@@ -62,6 +63,7 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	} catch (StopRequestException e) {
 		// 
 		//e.printStackTrace();
+		throw new RuntimeException();
 	}
 	
 	
