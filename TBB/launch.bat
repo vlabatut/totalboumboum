@@ -42,7 +42,7 @@
 	Set splash=.\resources\gui\images\splash.png
 
 :: launch the game
-	java -Xmx256m -splash:%splash% -classpath %cp% %launcher%
+	java -Xmx512m -splash:%splash% -classpath %cp% %launcher%
 
 :: 	pause
 
