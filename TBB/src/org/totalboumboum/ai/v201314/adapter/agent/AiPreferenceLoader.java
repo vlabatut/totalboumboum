@@ -38,7 +38,6 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.tools.classes.ClassTools;
 import org.totalboumboum.tools.files.FileNames;
@@ -118,12 +117,12 @@ public class AiPreferenceLoader
 		{	// set dummy handler
 			AiPreferenceHandler<T> handler = new AiPreferenceHandler<T>(ai,true)
 			{	@Override
-				protected Set<AiTile> selectTiles() throws StopRequestException
+				protected Set<AiTile> selectTiles()
 				{	return null;
 				}
 
 				@Override
-				protected AiCategory identifyCategory(AiTile tile) throws StopRequestException
+				protected AiCategory identifyCategory(AiTile tile)
 				{	return null;
 				}	
 			};

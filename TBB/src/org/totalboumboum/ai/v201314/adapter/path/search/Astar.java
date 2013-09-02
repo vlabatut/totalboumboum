@@ -30,7 +30,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
@@ -134,13 +133,11 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @return 
 	 * 		Un chemin pour aller de {@code startTile} à {@code endTile}, ou un chemin vide, ou la valeur {@code null}.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath startProcess(AiLocation startLocation, AiTile endTile) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(AiLocation startLocation, AiTile endTile) throws LimitReachedException
 	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
 		endTiles.add(endTile);
 		AiPath result = startProcess(startLocation,endTiles);
@@ -165,13 +162,11 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		un chemin pour aller de {@code startTile} à une des cases de {@code endTiles},
 	 * 		ou un chemin vide, ou la valeur {@code null}.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath startProcess(AiLocation startLocation, Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(AiLocation startLocation, Set<AiTile> endTiles) throws LimitReachedException
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		heuristicCalculator.setEndTiles(endTiles);
@@ -207,13 +202,11 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		Un chemin pour aller à {@code endTile}, 
 	 * 		ou un chemin vide, ou la valeur {@code null}.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath startProcess(AiTile endTile) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(AiTile endTile) throws LimitReachedException
 	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
 		endTiles.add(endTile);
 		AiPath result = startProcess(endTiles);
@@ -242,13 +235,11 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		Un chemin pour aller à l'une des cases de {@code endTiles},
 	 * 		ou un chemin vide, ou la valeur {@code null}.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath startProcess(Set<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath startProcess(Set<AiTile> endTiles) throws LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
 		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
 		if(root==null)
@@ -298,13 +289,11 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @return 
 	 * 		Un chemin différent de celui renvoyé par {@code processShortestPath}.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath continueProcess() throws StopRequestException, LimitReachedException
+	public AiPath continueProcess() throws LimitReachedException
 	{	//verbose
 		long before = print("      > Starting/resuming A* +++++++++++++++++++++");
 		String msg = "         searching paths from "+startLocation+" to [";

@@ -31,7 +31,6 @@ import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
@@ -100,11 +99,8 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected MoveHandler(Agent ai) throws StopRequestException
+	protected MoveHandler(Agent ai)
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -170,12 +166,9 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	 * c'est très simple et très peu efficace : on garde tout
 	 * le temps le même objectif jusqu'à ce qu'il soit complètement
 	 * obsolète. 
-	 * 
-	 * @throws StopRequestException 
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	protected AiTile processCurrentDestination() throws StopRequestException
+	protected AiTile processCurrentDestination()
 	{	ai.checkInterruption();
 		zone = ai.getZone();
 		ownHero = zone.getOwnHero();
@@ -293,12 +286,9 @@ if(!tiles.isEmpty())
 	 * 					- on cherche un chemin direct vers la case bloquée
 	 * <b>Algorithme non-conforme avec ce qui est demandé dans le projet,
 	 * donc à ne pas utiliser pour vos agents.</b>
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	protected AiPath processCurrentPath() throws StopRequestException
+	protected AiPath processCurrentPath()
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		secondaryBombing = false;
@@ -480,12 +470,9 @@ if(!zone.getTile(5,2).getBlocks().isEmpty())
 	/**
 	 * Met à jour la direction de déplacement en fonction
 	 * du chemin courant.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	protected Direction processCurrentDirection() throws StopRequestException
+	protected Direction processCurrentDirection()
 	{	ai.checkInterruption();
 		
 		// init
@@ -529,7 +516,7 @@ if(!zone.getTile(5,2).getBlocks().isEmpty())
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void updateOutput() throws StopRequestException
+	public void updateOutput()
 	{	ai.checkInterruption();
 		
 		// d'abord on fait le traitement par défaut

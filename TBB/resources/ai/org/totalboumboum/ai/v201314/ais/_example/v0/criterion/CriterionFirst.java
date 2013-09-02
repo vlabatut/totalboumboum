@@ -1,7 +1,6 @@
 package org.totalboumboum.ai.v201314.ais._example.v0.criterion;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._example.v0.Agent;
 
@@ -22,11 +21,8 @@ public class CriterionFirst extends AiCriterionBoolean<Agent>
 	 * 
 	 * @param ai
 	 * 		l'agent concerné. 
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionFirst(Agent ai) throws StopRequestException
+	public CriterionFirst(Agent ai)
 	{	super(ai,NAME);
 		ai.checkInterruption();
 	}
@@ -35,7 +31,7 @@ public class CriterionFirst extends AiCriterionBoolean<Agent>
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public Boolean processValue(AiTile tile) throws StopRequestException
+	public Boolean processValue(AiTile tile)
 	{	ai.checkInterruption();
 		boolean result = true;
 		

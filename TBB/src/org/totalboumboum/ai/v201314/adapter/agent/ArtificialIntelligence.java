@@ -125,11 +125,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à {@link #call()}
 	 * et forcera la terminaison de l'agent. Cette exception ne doit surtout pas être
 	 * interceptée localement par un {@code try/catch}.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public synchronized final void checkInterruption() throws StopRequestException
+	public synchronized final void checkInterruption()
 	{	Thread.yield();
 		if(stopRequest)
 			throw new StopRequestException();
@@ -206,22 +203,16 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * les percepts de l'agent, c'est-à-dire
 	 * les différents objets stockés en interne
 	 * dans ses classes.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract void initPercepts() throws StopRequestException;
+	protected abstract void initPercepts();
 
 	/**
 	 * Méthode permettant de mettre à jour
 	 * les percepts de l'agent, c'est-à-dire
 	 * les différents objets stockés en interne
 	 * dans ses classes.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract void updatePercepts() throws StopRequestException;
+	protected abstract void updatePercepts();
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUTS			/////////////////////////////////////////////
@@ -258,11 +249,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * alors la sortie graphique par défaut consiste à 
 	 * afficher le chemin et la destination courants,
 	 * ainsi que les préférences courantes.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	// affiche les chemins et destinations courants
 		getMoveHandler().updateOutput();
 		
@@ -276,11 +264,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/**
 	 * Cette méthode a pour but d'initialiser les gestionnaires.
 	 * Elle doit obligatoirement être surchargée.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract void initHandlers() throws StopRequestException;
+	protected abstract void initHandlers();
 
 	/**
 	 * Renvoie le gestionnaire de mode de cet agent.
@@ -289,11 +274,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @return
 	 * 		Le gestionnaire de mode de cet agent.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiModeHandler<?> getModeHandler() throws StopRequestException;
+	protected abstract AiModeHandler<?> getModeHandler();
 	
 	/**
 	 * Renvoie le gestionnaire de préférence de cet agent.
@@ -302,11 +284,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @return
 	 * 		Le gestionnaire de préférence de cet agent.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiPreferenceHandler<?> getPreferenceHandler() throws StopRequestException;
+	protected abstract AiPreferenceHandler<?> getPreferenceHandler();
 	
 	/**
 	 * Renvoie le gestionnaire de posage de bombe de cet agent.
@@ -315,11 +294,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @return
 	 * 		Le gestionnaire de posage de bombe de cet agent.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiBombHandler<?> getBombHandler() throws StopRequestException;
+	protected abstract AiBombHandler<?> getBombHandler();
 	
 	/**
 	 * Renvoie le gestionnaire de déplacement de cet agent.
@@ -328,11 +304,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @return
 	 * 		Le gestionnaire de déplacement de cet agent.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiMoveHandler<?> getMoveHandler() throws StopRequestException;
+	protected abstract AiMoveHandler<?> getMoveHandler();
 	
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZATION	/////////////////////////////////////////////
@@ -351,11 +324,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * avec {@link #initHandlers()}. Si d'autres initialisations
 	 * sont nécessaires, il est possible de surcharger la méthode
 	 * {@link #initOthers()}, qui ne fait rien par défaut.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected final void init() throws StopRequestException
+	protected final void init()
 	{	// initialisation des percepts
 		initPercepts();
 		
@@ -378,11 +348,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * ou des objets qu'ils ont créés (ce qui n'est pas le cas de 
 	 * {@link #initPercepts()}, qui est elle appelée avant la création des
 	 * gestionnaires).
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void initOthers() throws StopRequestException
+	protected void initOthers()
 	{
 		// à surcharger, si nécessaire
 	}
@@ -398,11 +365,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @return	
 	 * 		Action que l'agent a décidé d'effectuer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public final AiAction processAction() throws StopRequestException
+	public final AiAction processAction()
 	{	checkInterruption();
 		resetDurations();
 		long before,after,elapsed,afterAll,elapsedAll;

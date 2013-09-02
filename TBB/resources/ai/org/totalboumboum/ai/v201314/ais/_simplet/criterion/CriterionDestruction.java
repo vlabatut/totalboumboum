@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201314.ais._simplet.criterion;
 import java.util.Set;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._simplet.CommonTools;
 import org.totalboumboum.ai.v201314.ais._simplet.Agent;
@@ -45,11 +44,8 @@ public class CriterionDestruction extends AiCriterionInteger<Agent>
 	 * 
 	 * @param ai
 	 * 		L'agent concerné. 
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionDestruction(Agent ai) throws StopRequestException
+	public CriterionDestruction(Agent ai)
 	{	// init nom
 		super(ai,NAME,0,DESTRUCTION_LIMIT);
 		ai.checkInterruption();
@@ -62,7 +58,7 @@ public class CriterionDestruction extends AiCriterionInteger<Agent>
 	public static final int DESTRUCTION_LIMIT = 4;
 
 	@Override
-	public Integer processValue(AiTile tile) throws StopRequestException
+	public Integer processValue(AiTile tile)
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		

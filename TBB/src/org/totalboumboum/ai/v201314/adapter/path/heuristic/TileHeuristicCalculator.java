@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201314.adapter.path.heuristic;
 import java.util.Set;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
@@ -108,12 +107,9 @@ public class TileHeuristicCalculator extends HeuristicCalculator
 	 * @return	
 	 * 		la distance de Manhattan entre l'emplacement passé en paramètre
 	 * 		et la plus proche des cases contenues dans le champ {@code endTiles}.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	public double processHeuristic(AiLocation location) throws StopRequestException
+	public double processHeuristic(AiLocation location)
 	{	// init
 		AiTile startTile = location.getTile();
 		Set<AiTile> endTiles = getEndTiles();

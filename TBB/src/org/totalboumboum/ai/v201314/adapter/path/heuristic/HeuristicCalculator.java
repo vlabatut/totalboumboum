@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
@@ -126,9 +125,6 @@ public abstract class HeuristicCalculator
 	 * 		L'emplacement concernée 
 	 * @return	
 	 * 		La valeur heuristique de cet emplacement.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public abstract double processHeuristic(AiLocation location) throws StopRequestException;
+	public abstract double processHeuristic(AiLocation location);
 }

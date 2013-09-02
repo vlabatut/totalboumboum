@@ -1,7 +1,6 @@
 package org.totalboumboum.ai.v201314.ais._example.v0;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 
 /**
  * Classe gérant les déplacements de l'agent. 
@@ -19,11 +18,8 @@ public class ModeHandler extends AiModeHandler<Agent>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected ModeHandler(Agent ai) throws StopRequestException
+	protected ModeHandler(Agent ai)
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -41,7 +37,7 @@ public class ModeHandler extends AiModeHandler<Agent>
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected boolean hasEnoughItems() throws StopRequestException
+	protected boolean hasEnoughItems()
 	{	ai.checkInterruption();
 		
 		/*
@@ -54,7 +50,7 @@ public class ModeHandler extends AiModeHandler<Agent>
 	}
 	
 	@Override
-	protected boolean isCollectPossible() throws StopRequestException
+	protected boolean isCollectPossible()
 	{	ai.checkInterruption();
 	
 		/*
@@ -71,11 +67,8 @@ public class ModeHandler extends AiModeHandler<Agent>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Met à jour la sortie graphique.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	ai.checkInterruption();
 		
 		/*

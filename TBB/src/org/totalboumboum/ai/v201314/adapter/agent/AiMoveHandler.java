@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v201314.adapter.agent;
 import java.awt.Color;
 
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
@@ -103,11 +102,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		La case correspondant à la destination courante de l'agent.
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiTile processCurrentDestination() throws StopRequestException;
+	protected abstract AiTile processCurrentDestination();
 	
 	/////////////////////////////////////////////////////////////////
 	// PATH						/////////////////////////////////////
@@ -135,11 +131,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		Le chemin courant suivant par l'agent.
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract AiPath processCurrentPath() throws StopRequestException;
+	protected abstract AiPath processCurrentPath();
 
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION				/////////////////////////////////////
@@ -165,11 +158,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		La direction courante de l'agent.
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract Direction processCurrentDirection() throws StopRequestException;
+	protected abstract Direction processCurrentDirection();
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
@@ -185,11 +175,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		Renvoie une direction indiquant le sens (ou l'absence) de déplacement de l'agent.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected final Direction considerMoving() throws StopRequestException
+	protected final Direction considerMoving()
 	{	ai.checkInterruption();
 	
 		// si nécessaire, on change la destination courante
@@ -241,11 +228,8 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * noter que cette méthode n'est pas appelée automatiquement : 
 	 * elle doit l'être par {@link ArtificialIntelligence#updateOutput()}
 	 * si vous désirez l'utiliser. 
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public void updateOutput() throws StopRequestException
+	public void updateOutput()
 	{	AiOutput output = ai.getOutput();
 		AiMode mode = ai.getModeHandler().getMode();
 		

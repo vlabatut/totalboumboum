@@ -5,7 +5,6 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 
 /**
  * Classe principale de votre agent, que vous devez compléter.
@@ -27,7 +26,7 @@ public class Agent extends ArtificialIntelligence
 	}
 	
 	@Override
-	protected void initOthers() throws StopRequestException
+	protected void initOthers()
 	{	checkInterruption();
 		
 		/*
@@ -49,7 +48,7 @@ public class Agent extends ArtificialIntelligence
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void initPercepts() throws StopRequestException
+	protected void initPercepts()
 	{	checkInterruption();
 	
 		/*
@@ -65,7 +64,7 @@ public class Agent extends ArtificialIntelligence
 	}
 	
 	@Override
-	protected void updatePercepts() throws StopRequestException
+	protected void updatePercepts()
 	{	checkInterruption();
 		
 		/*
@@ -92,7 +91,7 @@ public class Agent extends ArtificialIntelligence
 	protected MoveHandler moveHandler;
 	
 	@Override
-	protected void initHandlers() throws StopRequestException
+	protected void initHandlers()
 	{	checkInterruption();
 		
 		// création des gestionnaires standard (obligatoires)
@@ -112,25 +111,25 @@ public class Agent extends ArtificialIntelligence
 	}
 
 	@Override
-	protected AiModeHandler<Agent> getModeHandler() throws StopRequestException
+	protected AiModeHandler<Agent> getModeHandler()
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiPreferenceHandler<Agent> getPreferenceHandler() throws StopRequestException
+	protected AiPreferenceHandler<Agent> getPreferenceHandler()
 	{	checkInterruption();
 		return preferenceHandler;
 	}
 
 	@Override
-	protected AiBombHandler<Agent> getBombHandler() throws StopRequestException
+	protected AiBombHandler<Agent> getBombHandler()
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler<Agent> getMoveHandler() throws StopRequestException
+	protected AiMoveHandler<Agent> getMoveHandler()
 	{	checkInterruption();
 		return moveHandler;
 	}
@@ -139,7 +138,7 @@ public class Agent extends ArtificialIntelligence
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	checkInterruption();
 
 		/*

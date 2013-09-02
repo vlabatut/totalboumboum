@@ -23,8 +23,6 @@ package org.totalboumboum.ai.v201314.adapter.agent;
 
 import java.util.Set;
 
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
-
 /**
  * Cette classe permet de définir un critère,
  * en le caractérisant par son nom et par
@@ -75,11 +73,8 @@ public abstract class AiCriterionString<T extends ArtificialIntelligence> extend
 	 * 		Nom du nouveau critère.
 	 * @param domain
 	 * 		Ensemble des valeurs possible pour ce critère.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public AiCriterionString(T ai, String name, Set<String> domain) throws StopRequestException
+	public AiCriterionString(T ai, String name, Set<String> domain)
 	{	// init
 		super(ai,name);
 		

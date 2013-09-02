@@ -33,7 +33,6 @@ import java.util.TreeSet;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMode;
 import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
 import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -61,11 +60,8 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected PreferenceHandler(Agent ai) throws StopRequestException
+	protected PreferenceHandler(Agent ai)
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -89,11 +85,8 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 
 	/**
 	 * Permet d'initialiser certains objets une fois pour toutes.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	private void initData() throws StopRequestException
+	private void initData()
 	{	ai.checkInterruption();
 		
 		zone = ai.getZone();
@@ -108,7 +101,7 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 	}
 	
 	@Override
-	protected void resetCustomData() throws StopRequestException
+	protected void resetCustomData()
 	{	ai.checkInterruption();
 		
 		bombTiles.clear();
@@ -118,7 +111,7 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected Set<AiTile> selectTiles() throws StopRequestException
+	protected Set<AiTile> selectTiles()
 	{	ai.checkInterruption();
 		Set<AiTile> result = new TreeSet<AiTile>();
 		Map<AiTile,AiSearchNode> map = null;
@@ -226,7 +219,7 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 	// CATEGORY					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected AiCategory identifyCategory(AiTile tile) throws StopRequestException
+	protected AiCategory identifyCategory(AiTile tile)
 	{	ai.checkInterruption();
 	
 		AiCategory result = null;
@@ -260,7 +253,7 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void updateOutput() throws StopRequestException
+	public void updateOutput()
 	{	ai.checkInterruption();
 		
 		// ici on se contente de faire le traitement par défaut

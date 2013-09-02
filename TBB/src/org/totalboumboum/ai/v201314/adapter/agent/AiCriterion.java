@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
 /**
@@ -203,11 +202,8 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * 		La case à traiter.
 	 * @return
 	 * 		La valeur de ce critère pour la case spécifiée.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract U processValue(AiTile tile) throws StopRequestException;
+	protected abstract U processValue(AiTile tile);
 	
 	/**
 	 * Méthode calculant la valeur de ce critère pour la case
@@ -222,11 +218,8 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * 		La case à traiter.
 	 * @return
 	 * 		La valeur de ce critère pour la case spécifiée.
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public final U fetchValue(AiTile tile) throws StopRequestException
+	public final U fetchValue(AiTile tile)
 	{	AiPreferenceHandler<?> preferenceHandler = ai.getPreferenceHandler();
 		@SuppressWarnings("unchecked")
 		U result = (U)preferenceHandler.getValueForCriterion(name,tile);
@@ -274,12 +267,9 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * 		Nouvel agent à utiliser pour créer le nouveau critère.
 	 * @return
 	 * 		Une copie de ce critère utilisant le nouvel agent.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Pour des raisons d'héritage.
 	 */
 	@SuppressWarnings("unchecked")
-	protected AiCriterion<T,U> clone(T ai) throws StopRequestException
+	protected AiCriterion<T,U> clone(T ai)
 	{	AiCriterion<T,U> result = null;
 	
 		try

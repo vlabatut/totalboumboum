@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v201314.ais._simplet;
  */
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 
@@ -41,11 +40,8 @@ public class ModeHandler extends AiModeHandler<Agent>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected ModeHandler(Agent ai) throws StopRequestException
+	protected ModeHandler(Agent ai)
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -62,7 +58,7 @@ public class ModeHandler extends AiModeHandler<Agent>
 	private AiHero ownHero;
 	
 	@Override
-	protected boolean hasEnoughItems() throws StopRequestException
+	protected boolean hasEnoughItems()
 	{	ai.checkInterruption();
 		
 		int range = ownHero.getBombRange();
@@ -78,7 +74,7 @@ public class ModeHandler extends AiModeHandler<Agent>
 	}
 	
 	@Override
-	protected boolean isCollectPossible() throws StopRequestException
+	protected boolean isCollectPossible()
 	{	ai.checkInterruption();
 		
 		// on vérifie s'il reste des items apparents
@@ -97,11 +93,8 @@ public class ModeHandler extends AiModeHandler<Agent>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Mise à jour de la sortie graphique.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	ai.checkInterruption();
 		
 		// rien de spécial à afficher ici

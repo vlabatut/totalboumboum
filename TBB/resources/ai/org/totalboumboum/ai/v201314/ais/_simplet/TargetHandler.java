@@ -26,7 +26,6 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiAbstractHandler;
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
@@ -47,11 +46,8 @@ public class TargetHandler extends AiAbstractHandler<Agent>
 	 * 
 	 * @param ai
 	 * 		IA de référence.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected TargetHandler(Agent ai) throws StopRequestException
+	protected TargetHandler(Agent ai)
 	{	super(ai);
 		ai.checkInterruption();
 		
@@ -73,11 +69,8 @@ public class TargetHandler extends AiAbstractHandler<Agent>
 	 * On met à jour la cible si c'est nécessaire,
 	 * i.e. : si on est en mode attaque, et si la cible
 	 * actuelle est inexistante ou éliminée.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected void update() throws StopRequestException
+	protected void update()
 	{	ai.checkInterruption();
 		
 		// on ne change d'adversaire que s'il est null ou déjà éliminé
@@ -123,11 +116,8 @@ public class TargetHandler extends AiAbstractHandler<Agent>
 	
 	/**
 	 * Met à jour les sorties graphiques de ce gestionnaire.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	ai.checkInterruption();
 		
 		AiOutput output = ai.getOutput();

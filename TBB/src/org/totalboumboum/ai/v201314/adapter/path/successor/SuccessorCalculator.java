@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
 
@@ -122,11 +121,8 @@ public abstract class SuccessorCalculator
 	 * 		Le noeud de recherche courant.
 	 * @return	
 	 * 		La liste de noeuds fils obtenus.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public abstract List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException;
+	public abstract List<AiSearchNode> processSuccessors(AiSearchNode node);
 	
 	/**
 	 * Détermine si la case du noeud passé en paramètre est menacé par une

@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v201314.ais._simplet;
  */
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -42,11 +41,8 @@ public class BombHandler extends AiBombHandler<Agent>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected BombHandler(Agent ai) throws StopRequestException
+	protected BombHandler(Agent ai)
     {	super(ai);
     	ai.checkInterruption();
 		
@@ -61,7 +57,7 @@ public class BombHandler extends AiBombHandler<Agent>
 	private AiHero ownHero;
 	
 	@Override
-	protected boolean considerBombing() throws StopRequestException
+	protected boolean considerBombing()
 	{	ai.checkInterruption();
 		
 		// à noter qu'il est peut-être préférable de tester si on peut poser 
@@ -113,11 +109,8 @@ public class BombHandler extends AiBombHandler<Agent>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Mise à jour de la sortie graphique.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	ai.checkInterruption();
 		
 		// rien à afficher ici...

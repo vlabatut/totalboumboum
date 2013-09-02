@@ -1,7 +1,6 @@
 package org.totalboumboum.ai.v201314.ais._example.v0;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -22,11 +21,8 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected MoveHandler(Agent ai) throws StopRequestException
+	protected MoveHandler(Agent ai)
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -44,7 +40,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	// DESTINATION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected AiTile processCurrentDestination() throws StopRequestException
+	protected AiTile processCurrentDestination()
 	{	ai.checkInterruption();
 		
 		/*
@@ -60,7 +56,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	// PATH						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected AiPath processCurrentPath() throws StopRequestException
+	protected AiPath processCurrentPath()
 	{	ai.checkInterruption();
 		
 		/*
@@ -76,7 +72,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	// DIRECTION				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected Direction processCurrentDirection() throws StopRequestException
+	protected Direction processCurrentDirection()
 	{	ai.checkInterruption();
 		
 		/*
@@ -92,7 +88,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void updateOutput() throws StopRequestException
+	public void updateOutput()
 	{	ai.checkInterruption();
 		
 		// ici on se contente de faire le traitement par défaut

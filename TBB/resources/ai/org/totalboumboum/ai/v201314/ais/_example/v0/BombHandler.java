@@ -1,7 +1,6 @@
 package org.totalboumboum.ai.v201314.ais._example.v0;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent. 
@@ -19,11 +18,8 @@ public class BombHandler extends AiBombHandler<Agent>
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected BombHandler(Agent ai) throws StopRequestException
+	protected BombHandler(Agent ai)
     {	super(ai);
     	ai.checkInterruption();
 		
@@ -41,7 +37,7 @@ public class BombHandler extends AiBombHandler<Agent>
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected boolean considerBombing() throws StopRequestException
+	protected boolean considerBombing()
 	{	ai.checkInterruption();
 	
 		/*
@@ -59,11 +55,8 @@ public class BombHandler extends AiBombHandler<Agent>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Met à jour la sortie graphique.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	ai.checkInterruption();
 		
 		/*
