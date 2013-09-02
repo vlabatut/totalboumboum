@@ -216,7 +216,7 @@ public class PathFinder {
 		}
 		if(resultat  == null)
 		{
-			
+			//
 		}
 		return resultat;
 	}

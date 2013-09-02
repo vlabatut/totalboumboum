@@ -189,7 +189,7 @@ public class Matrix implements Cloneable {
 								position[0], position[1]));
 						regionEmplacementImportanceMatrix[position[0]][position[1]].importance += 1;
 					} catch (ArrayIndexOutOfBoundsException e) {
-
+						//
 					}
 					y += stepY;
 				} while (Math.abs(y) < Math.abs(vY));

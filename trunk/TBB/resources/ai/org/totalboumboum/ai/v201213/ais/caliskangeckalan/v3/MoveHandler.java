@@ -175,7 +175,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 									}
 								}
 								
-							} catch (LimitReachedException e) {
+							} catch (LimitReachedException e) {//
 							}
 							
 						}
@@ -221,7 +221,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 									}
 								}
 								
-							} catch (LimitReachedException e) {	
+							} catch (LimitReachedException e) {	//
 							}
 							
 						}
@@ -256,7 +256,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 				currentPath = dijkstra.processEscapePath(startLocation);
 			}
 			catch (LimitReachedException e)
-			{
+			{//
 			}
 			if(currentPath!=null && !currentPath.isEmpty())
 			{
@@ -278,7 +278,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 					currentPath = dijkstra.processEscapePath(new AiLocation(currentTile));
 					safeDestination = currentPath.getLastLocation().getTile();
 					print("updateCurrentPath thlikedeyiz yol bulma currentTile.equals(safeDestination)" +" safeDestination:"+safeDestination);
-				} catch (LimitReachedException e) {
+				} catch (LimitReachedException e) {//
 				}
 			}
 			
@@ -294,7 +294,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 					}
 				}
 				catch (LimitReachedException e)
-				{	
+				{	//
 				}
 			}	
 		}
@@ -305,7 +305,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 			{	currentPath = astarPrecise.startProcess(startLocation,currentDestination);
 			}
 			catch (LimitReachedException e)
-			{	
+			{	//
 			}
 			
 			if(currentPath!=null && !currentPath.isEmpty())
@@ -320,7 +320,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 					{	indirectPath = astarApproximation.startProcess(startLocation,currentDestination);
 					}
 					catch (LimitReachedException e)
-					{	
+					{	//
 					}
 					
 				}
@@ -356,7 +356,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalan>
 									currentPath = astarPrecise.startProcess(startLocation,safeDestination);
 								}
 								catch (LimitReachedException e)
-								{	
+								{	//
 								}
 							}
 						}

@@ -213,7 +213,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			if(!attackAdversaire){
 				try{
 				tilesFuir.add(tileControleur.tileBFS(debut));
-				}catch (NullPointerException e) {
+				}catch (NullPointerException e) {//
 				}
 			}
 		}else{ //non, on ne la pose pas

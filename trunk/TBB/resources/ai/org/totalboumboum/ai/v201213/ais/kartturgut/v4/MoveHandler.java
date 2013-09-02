@@ -78,7 +78,7 @@ public class MoveHandler extends AiMoveHandler<KartTurgut>
 				notreTile = path.getLocation(1).getTile();
 			} else
 				notreTile = path.getLocation(0).getTile();
-		} catch (NullPointerException e) {
+		} catch (NullPointerException e) {//
 
 		}
 

@@ -268,7 +268,7 @@ public class GokselMenges extends ArtificialIntelligence {
 						result = pathToGo.get(i1);
 
 					} catch (Exception ex) {
-
+						//
 					}
 					if (checkNextMoveOK(result) == true) {
 

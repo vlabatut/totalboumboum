@@ -81,7 +81,7 @@ public class MoveHandler extends AiMoveHandler<BalCetin> {
 			} else
 				destTile = path.getLocation(0).getTile();
 		} catch (NullPointerException e) {
-
+			//
 		}
 
 		// if there is no destination.Stay still.

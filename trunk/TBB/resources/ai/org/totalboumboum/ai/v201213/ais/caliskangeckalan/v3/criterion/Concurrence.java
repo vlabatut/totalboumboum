@@ -101,7 +101,7 @@ public class Concurrence extends AiUtilityCriterionBoolean<CaliskanGeckalan>
 		Astar astar = new Astar(ai, ai.getZone().getOwnHero(), costCalculator, heuristicCalculator, successorCalculator);
 		try {
 			path = astar.startProcess(new AiLocation(currentTile), tile);
-		} catch (LimitReachedException e) {
+		} catch (LimitReachedException e) {//
 		}
 		if(path!=null) {
 			lengthOfPathOwn = path.getLength();
@@ -121,7 +121,7 @@ public class Concurrence extends AiUtilityCriterionBoolean<CaliskanGeckalan>
 				Astar astarOthers = new Astar(ai, heroesNext, costCalculatorOthers, heuristicCalculatorOthers, successorCalculatorOthers);
 				try {
 					pathOthers = astarOthers.startProcess(new AiLocation(heroesNext), tile);
-				} catch (LimitReachedException e) {
+				} catch (LimitReachedException e) {//
 				}
 				if(pathOthers!=null) {
 					lenghtOfPathOthers = pathOthers.getLength();

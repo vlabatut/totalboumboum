@@ -179,7 +179,7 @@ public class Path {
 			}
 
 		} else if (longueur == 0 || matrice[line][col] <= -100
-				|| !zone.getTile(line, col).isCrossableBy(notreHeros)) {
+				|| !zone.getTile(line, col).isCrossableBy(notreHeros)) {//
 		} else {
 			plusProcheAccesible(mod(line - 1, height), col, matriceEtat,
 					matrice, longueur - 1, path);

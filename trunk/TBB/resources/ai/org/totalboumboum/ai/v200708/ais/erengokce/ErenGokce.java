@@ -105,7 +105,7 @@ public class ErenGokce extends ArtificialIntelligence {
 			}
 			else
 			{
-
+				//
 			}
 		}
 		//une bombe

@@ -192,7 +192,7 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 				}
 
 				if (hero_path == null || hero_path.isEmpty()) {
-					
+					//
 				}
 				
 			
