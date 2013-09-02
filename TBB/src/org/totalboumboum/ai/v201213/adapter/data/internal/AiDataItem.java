@@ -281,7 +281,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	 */
 	private void updateDurations()
 	{	Item item = getSprite();
-		// NOTE we suppose the temporary item makes the player blink
+		// we suppose the temporary item makes the player blink
 		StateAbility ability = item.getOriginalItemAbility(StateAbilityName.SPRITE_TWINKLE_COLOR);
 		if(ability.isActive())
 		{	normalDuration = (long)ability.getTime();

@@ -42,7 +42,7 @@ public class CriterionSecond extends AiUtilityCriterionInteger<CetinIlter>
 	{	ai.checkInterruption();
 		int result = 2;
 		
-		// TODO à compléter par le traitement approprié
+		// à compléter par le traitement approprié
 		
 		return result;
 	}
