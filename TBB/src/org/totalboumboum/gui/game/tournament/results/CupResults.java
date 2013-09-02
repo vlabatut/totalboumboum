@@ -21,6 +21,7 @@ package org.totalboumboum.gui.game.tournament.results;
  * 
  */
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.Box;
@@ -29,6 +30,7 @@ import javax.swing.BoxLayout;
 import org.totalboumboum.game.tournament.cup.CupLeg;
 import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
@@ -40,7 +42,7 @@ import org.totalboumboum.gui.tools.GuiSizeTools;
  * 
  * @author Vincent Labatut
  */
-public class CupResults extends TournamentResults<CupTournament>
+public class CupResults extends TournamentResults<CupTournament> implements LegSubPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 	
@@ -78,6 +80,7 @@ public class CupResults extends TournamentResults<CupTournament>
 			// legs panel
 			{	legsPanel = new LegSubPanel(rightWidth,dataHeight);
 				legsPanel.setLeg(null,LEGS_PER_PAGE);
+				legsPanel.addListener(this);
 				infoPanel.add(legsPanel);
 			}
 	
@@ -116,5 +119,28 @@ public class CupResults extends TournamentResults<CupTournament>
 	public void refresh()
 	{	setTournament(tournament);
 		legsPanel.setLeg(tournament.getCurrentLeg(),LEGS_PER_PAGE);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LEG PANEL LISTENER 	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void legSelectionChanged()
+	{	//	
+	}
+
+	@Override
+	public void legAfterClicked()
+	{	//
+	}
+
+	@Override
+	public void legBeforeClicked()
+	{	//
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireMousePressed(e);
 	}
 }
