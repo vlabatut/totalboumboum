@@ -166,7 +166,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 		try {
 			 kontrol= astarPrecise.processShortestPath(ownLoca, ilk);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		if(bombL.isEmpty())
@@ -187,7 +187,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 		try {
 			 kontrol= astarPrecise.processShortestPath(ownLoca, ilk);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		
@@ -328,7 +328,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 			
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 			
 			
@@ -355,7 +355,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 				
 				
 			} catch (LimitReachedException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			}
 		}
@@ -367,7 +367,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 			
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 			if(currentPath==null || currentPath.isEmpty())
 			{
@@ -379,7 +379,7 @@ public class MoveHandler extends AiMoveHandler<GungorKavus>
 					
 					}
 					catch (LimitReachedException e)
-					{	e.printStackTrace();
+					{	//e.printStackTrace();
 					}
 				}
 			

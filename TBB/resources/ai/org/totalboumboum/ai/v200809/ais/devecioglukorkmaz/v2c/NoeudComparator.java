@@ -46,7 +46,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 					.getDistance(t.getTile(), n2.getTile()))
 				resultat = -1;
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return resultat;
 	}

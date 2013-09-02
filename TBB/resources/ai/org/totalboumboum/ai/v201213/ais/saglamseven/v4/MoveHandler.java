@@ -208,7 +208,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 			
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 			
 			
@@ -235,7 +235,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 				
 				
 			} catch (LimitReachedException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			}
 		}
@@ -247,7 +247,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 			
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 			if(currentPath==null || currentPath.isEmpty())
 			{
@@ -258,7 +258,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 						currentPath = aStarApproximation.startProcess(heroLocation, currentDestination);
 					}
 					catch (LimitReachedException e)
-					{	e.printStackTrace();
+					{	//e.printStackTrace();
 					}
 				}
 			

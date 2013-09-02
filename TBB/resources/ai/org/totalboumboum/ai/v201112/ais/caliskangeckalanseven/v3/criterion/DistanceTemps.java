@@ -95,7 +95,7 @@ public class DistanceTemps extends AiUtilityCriterionBoolean
 		try {
 			path = astar.processShortestPath(new AiLocation(tile), currentTile);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if(path!=null && path.getLength()<4 ) {
 			result = true;

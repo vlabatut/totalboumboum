@@ -86,7 +86,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence {
 			return result;
 		} catch (LimitReachedException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		// Worst case scenario :)

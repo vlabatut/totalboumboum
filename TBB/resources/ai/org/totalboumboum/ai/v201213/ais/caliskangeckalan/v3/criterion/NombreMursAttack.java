@@ -99,7 +99,7 @@ public class NombreMursAttack extends AiUtilityCriterionBoolean<CaliskanGeckalan
 		try {
 			path = astar.startProcess(new AiLocation(currentTile), tile);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if(path!=null) {
 			for(int i=0; i< path.getLength(); i++) {

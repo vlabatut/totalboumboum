@@ -306,7 +306,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			tiles = getClearNeighbors(head.getAiTile(),true);
 		} catch (StopRequestException e) {
 			
-			e.printStackTrace();
+			//e.printStackTrace();
 			
 		}
 
@@ -334,7 +334,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 				
 				} catch (StopRequestException e) {
 				
-					e.printStackTrace();
+					//e.printStackTrace();
 				
 				}
 				while(!tiles.isEmpty()){

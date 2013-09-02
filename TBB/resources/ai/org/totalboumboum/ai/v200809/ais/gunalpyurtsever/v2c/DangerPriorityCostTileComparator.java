@@ -54,7 +54,7 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 				}
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return i;

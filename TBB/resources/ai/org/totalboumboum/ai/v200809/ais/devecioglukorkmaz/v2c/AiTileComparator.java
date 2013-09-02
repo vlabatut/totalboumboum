@@ -45,7 +45,7 @@ public class AiTileComparator implements Comparator<AiTile> {
 			else if (dk.getDistance(t, n1) < dk.getDistance(t, n2))
 				resultat = -1;
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return resultat;
 	}

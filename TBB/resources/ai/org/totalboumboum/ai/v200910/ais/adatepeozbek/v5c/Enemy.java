@@ -171,19 +171,19 @@ public class Enemy
 			result.append(" - sameTile.: "+ getSameTileCount());
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		try {
 			result.append(" - posedBombs.: "+ getPosedBombs());
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		try {
 			result.append(" - totalTime.: "+ getLastCheck());
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return result.toString();
 	}

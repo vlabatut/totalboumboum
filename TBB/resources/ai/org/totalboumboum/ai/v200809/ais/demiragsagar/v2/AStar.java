@@ -122,7 +122,7 @@ public class AStar {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return result.iterator();
 	}
@@ -176,7 +176,7 @@ public class AStar {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	/**

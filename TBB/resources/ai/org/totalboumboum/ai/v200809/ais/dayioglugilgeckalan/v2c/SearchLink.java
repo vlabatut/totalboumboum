@@ -84,7 +84,7 @@ public class SearchLink
 				result = temp.getOrigin() == getOrigin();
 			} catch (StopRequestException e) {
 				// 
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		return result;

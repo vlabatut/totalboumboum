@@ -338,7 +338,7 @@ public class TileControleur {
 				return shortestPath;
 			} catch (LimitReachedException e) {
 				//
-				e.printStackTrace();
+				//e.printStackTrace();
 				return null;
 			}
 		} else
@@ -603,7 +603,7 @@ public class TileControleur {
 			}
 		} catch (LimitReachedException e) {
 			//
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return result;
 

@@ -120,7 +120,7 @@ public class ActionDecider
 				}catch(LimitReachedException e)
 				{
 					// 
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				if(path.getLength()>1)
 				{
@@ -147,7 +147,7 @@ public class ActionDecider
 						pathToNextTile.checkStartingPoint();
 					}catch(LimitReachedException e)
 					{
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 					int distanceToNextTile = pathToNextTile.getLength();
 					double pixelDistanceToNextTile = distanceToNextTile * ownTile.getSize();
@@ -184,7 +184,7 @@ public class ActionDecider
 						}catch(LimitReachedException e)
 						{
 							// 
-							e.printStackTrace();
+							//e.printStackTrace();
 						}
 
 						if(path.getLength() <= 1)
@@ -278,7 +278,7 @@ public class ActionDecider
 				}catch(LimitReachedException e)
 				{
 					// 
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				if(path.getLength()<=1)
 				{
@@ -330,7 +330,7 @@ public class ActionDecider
 		}catch(LimitReachedException e)
 		{
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if(path.getLength()<=1)
 			return new AiAction(AiActionName.NONE);

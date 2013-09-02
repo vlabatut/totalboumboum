@@ -83,7 +83,7 @@ public class MoveHandler extends AiMoveHandler<SakarYasar> {
 				this.currentPath = astarPath.processShortestPath(start,
 						this.currentDestination);
 			} catch (LimitReachedException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 	
 		}

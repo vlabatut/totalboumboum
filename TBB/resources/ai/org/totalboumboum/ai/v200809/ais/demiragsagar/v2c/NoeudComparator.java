@@ -21,14 +21,14 @@ public class NoeudComparator implements Comparator<Node> {
 			n_1 = noeud1.getHeuristic();
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		double n_2=0;
 		try {
 			n_2 = noeud2.getHeuristic();
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		if (n_1 < n_2)

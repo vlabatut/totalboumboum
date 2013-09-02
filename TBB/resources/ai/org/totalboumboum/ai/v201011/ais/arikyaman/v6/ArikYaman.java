@@ -184,7 +184,10 @@ public class ArikYaman extends ArtificialIntelligence
 		result=new AiAction(AiActionName.MOVE,direction);
 		}}
 		}
-	    catch(LimitReachedException e){e.printStackTrace();}	
+	    catch(LimitReachedException e)
+	    {
+	    	//e.printStackTrace();
+	    }	
 		return result;
 	}
 

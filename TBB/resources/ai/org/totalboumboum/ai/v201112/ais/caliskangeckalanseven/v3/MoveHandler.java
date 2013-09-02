@@ -367,7 +367,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 				currentPath = dijkstra.processEscapePath(startLocation);
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 			if(currentPath!=null && !currentPath.isEmpty())
 			{
@@ -389,7 +389,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 				{	currentPath = astarPrecise.processShortestPath(startLocation,safeDestination);
 				}
 				catch (LimitReachedException e)
-				{	e.printStackTrace();
+				{	//e.printStackTrace();
 				}
 			}
 			
@@ -422,7 +422,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 				{	indirectPath = astarApproximation.processShortestPath(startLocation,currentDestination);
 				}
 				catch (LimitReachedException e)
-				{	e.printStackTrace();
+				{	//e.printStackTrace();
 				}
 				
 			}
@@ -463,7 +463,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 						{	currentPath = astarPrecise.processShortestPath(startLocation,safeDestination);
 						}
 						catch (LimitReachedException e)
-						{	e.printStackTrace();
+						{	//e.printStackTrace();
 						}
 					}
 				}

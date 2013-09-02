@@ -136,7 +136,8 @@ public class UtilityHandler extends AiUtilityHandler<UnluYildirim> {
 							result.add(tile1);
 					}
 
-				} catch (LimitReachedException e) { // e.printStackTrace();
+				} catch (LimitReachedException e) { 
+					// e.printStackTrace();
 				}
 
 			} else {// S'il y a des items ouverts dans la zone

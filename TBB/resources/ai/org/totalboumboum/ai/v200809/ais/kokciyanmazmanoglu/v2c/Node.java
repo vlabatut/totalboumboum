@@ -95,7 +95,7 @@ public class Node {
 				return false;
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return false;
 	}

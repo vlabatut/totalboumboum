@@ -105,7 +105,7 @@ public class TimedBomb {
 		ai.checkInterruption();
 	} catch (StopRequestException e) {
 		// 
-		e.printStackTrace();
+		//e.printStackTrace();
 	}
 	
 		if(!TimedBomb.class.isInstance(timedBomb))
@@ -117,13 +117,13 @@ public class TimedBomb {
 				condition = this.bomb.equals((((TimedBomb)timedBomb).getBomb()));
 			} catch (StopRequestException e) {
 				// 
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			try {
 				condition = condition && this.zone.equals((((TimedBomb)timedBomb).getZone()));
 			} catch (StopRequestException e) {
 				// 
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			if(condition)
 				return true;
@@ -209,7 +209,7 @@ public class TimedBomb {
 			result += "Time Remaining:" + this.getRemainingTime();
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		result += "/ Release Time:" + this.releaseTime;
 		return result;

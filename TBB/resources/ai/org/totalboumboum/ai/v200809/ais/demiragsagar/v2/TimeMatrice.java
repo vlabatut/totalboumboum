@@ -163,7 +163,7 @@ public class TimeMatrice {
 							up = true;
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 		}

@@ -61,7 +61,7 @@ public class CaliskanSeven extends ArtificialIntelligence {
 				mtx_final = mtx_collecte;
 		} catch (LimitReachedException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 			mtx_final = mtx_collecte;
 		}
 
@@ -111,7 +111,7 @@ public class CaliskanSeven extends ArtificialIntelligence {
 			}
 		} catch (LimitReachedException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		if (debug) {

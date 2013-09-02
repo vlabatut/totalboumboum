@@ -85,7 +85,7 @@ public class MoveHandler extends AiMoveHandler<DemirSazan>
 						return this.currentDirection;
 					}
 				} catch (LimitReachedException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				this.currentDestination = hedef;
 				if(this.currentPath != null){

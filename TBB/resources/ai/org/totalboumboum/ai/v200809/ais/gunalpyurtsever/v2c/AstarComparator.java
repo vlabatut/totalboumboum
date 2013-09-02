@@ -23,7 +23,7 @@ public class AstarComparator implements Comparator<CostTile> {
 				i =tile1.toString().compareTo(tile2.toString());
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		

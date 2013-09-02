@@ -383,7 +383,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 			path = astar.processShortestPath(tile1, tile2);
 		} 
 		catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		if(path!=null){
@@ -438,7 +438,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 					try {
 						tempPath1 = astar.processShortestPath(tile1, tile);
 					} catch (LimitReachedException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					} 
 					if(tempPath1!=null && tempPath1.getTiles().size()!=0 && tempPath1.compareTo(tempPath2)<0)
 						tempPath2 = tempPath1;

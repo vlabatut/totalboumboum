@@ -1005,7 +1005,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 			this.path = this.astar.processShortestPath(tile1, tile2);
 		} catch (LimitReachedException e1) {
 			//
-			e1.printStackTrace();
+			//e1.printStackTrace();
 		}
 
 		if (this.path.getTiles().size() != 0) {
@@ -1024,7 +1024,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 						tempPath1 = this.astar.processShortestPath(tile1, tile);
 					} catch (LimitReachedException e) {
 						//
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 
 					if (tempPath1.getTiles().size() != 0
@@ -1068,7 +1068,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 							ourOwnHero.getTile(), gameMap.getTile(line, col));
 				} catch (LimitReachedException e) {
 					//
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 
 				if (matrix[line][col] > max && path.getTiles().size() != 0) {
@@ -1106,7 +1106,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 		try {
 			shortestPath = astar.processShortestPath(startPoint, endPoints);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return shortestPath;
 	}

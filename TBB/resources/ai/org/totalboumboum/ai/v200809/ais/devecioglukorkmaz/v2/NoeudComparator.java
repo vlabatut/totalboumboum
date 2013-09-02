@@ -39,7 +39,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 		try {
 			dk.checkInterruption();
 		} catch (StopRequestException e1) {
-			e1.printStackTrace();
+			//e1.printStackTrace();
 		}
 		int resultat = 0;
 		try {
@@ -50,7 +50,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 					.getDistance(t.getTile(), n2.getTile()))
 				resultat = -1;
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return resultat;
 	}
