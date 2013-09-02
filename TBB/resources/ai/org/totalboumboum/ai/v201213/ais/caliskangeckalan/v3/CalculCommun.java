@@ -206,7 +206,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 					}
 				}
 					
-				catch (LimitReachedException e) {
+				catch (LimitReachedException e) {//
 				}
 				
 			}
@@ -235,7 +235,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 				if(!dangerZoneForBomb.contains(tile))
 					safeZone.add(tile);
 			}
-		} catch (LimitReachedException e) {
+		} catch (LimitReachedException e) {//
 		}
 		return safeZone;
 
@@ -475,7 +475,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalan>
 				}
 			}
 				
-			catch (LimitReachedException e) {
+			catch (LimitReachedException e) {//
 			}	
 		}
 		

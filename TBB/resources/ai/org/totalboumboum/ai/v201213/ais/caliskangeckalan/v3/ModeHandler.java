@@ -104,7 +104,7 @@ public class ModeHandler extends AiModeHandler<CaliskanGeckalan>
 		try { //find all tile that we can go
 			map = dijkstra.startProcess(new AiLocation(ai.getZone().getOwnHero().getTile()));
 		}
-		catch (LimitReachedException e1) {
+		catch (LimitReachedException e1) {//
 		}
 		if(calculCommun.getItemsAccessible(map,null).size()>0) //getting the items accesible tiles
 			result = true;

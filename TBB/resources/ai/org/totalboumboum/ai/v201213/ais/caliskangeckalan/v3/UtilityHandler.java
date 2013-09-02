@@ -180,12 +180,12 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
 		try { //find all tile that we can go
 			map = dijkstra.startProcess(startLocation);
 		}
-		catch (LimitReachedException e1) {
+		catch (LimitReachedException e1) {//
 		}
 		if(map.isEmpty()) { //if the result is empty or over maxlimit, get the tiles with djikstraSimple
 			try {
 				map = dijkstraSimple.startProcess(startLocation);
-			} catch (LimitReachedException e) {
+			} catch (LimitReachedException e) {//
 			}
 		}
 		if (mode.equals(AiMode.COLLECTING)) { 
@@ -232,7 +232,7 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
 		Map<AiTile, AiSearchNode> map = new HashMap<AiTile, AiSearchNode>();
 		try {
 			map = dijkstraSimple.startProcess(new AiLocation(currentTile));
-		} catch (LimitReachedException e) {
+		} catch (LimitReachedException e) {//
 		}
 		tilesCanGo = calculCommun.getMursNeighBoorsForCollecte(map,deathTiles); // get all mur neighboors that we can go
 		while(rivalsIt.hasNext()) {
@@ -298,7 +298,7 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
 				}
 				
 					
-				catch (LimitReachedException e) {
+				catch (LimitReachedException e) {//
 				}	
 			}
 		}
@@ -380,12 +380,12 @@ public class UtilityHandler extends AiUtilityHandler<CaliskanGeckalan>
 	Map<AiTile, AiSearchNode> map = new HashMap<AiTile, AiSearchNode>();
 	try {
 		map = dijkstra.startProcess(startLocation);
-	} catch (LimitReachedException e1) {
+	} catch (LimitReachedException e1) {//
 	}
 	if(map.isEmpty()) {
 		try {
 			map = dijkstraSimple.startProcess(startLocation);
-		} catch (LimitReachedException e) {
+		} catch (LimitReachedException e) {//
 		}		
 	}
 	if(mode.equals(AiMode.COLLECTING)) {

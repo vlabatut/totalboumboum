@@ -155,10 +155,14 @@ public class ModeHandler extends AiModeHandler<OralOzugur> {
 			{
 				if(this.ai.zoneHasItem(AiItemType.EXTRA_BOMB)||this.ai.zoneHasItem(AiItemType.GOLDEN_BOMB) 
 						|| this.ai.zoneHasItem(AiItemType.EXTRA_FLAME)||this.ai.zoneHasItem(AiItemType.GOLDEN_FLAME))
-				{}
+				{
+					//
+				}
 				else if((zone.getHiddenItemsCount(AiItemType.EXTRA_BOMB) > 0 || zone.getHiddenItemsCount(AiItemType.GOLDEN_BOMB) > 0) 
 						|| (zone.getHiddenItemsCount(AiItemType.EXTRA_FLAME) > 0 || zone.getHiddenItemsCount(AiItemType.GOLDEN_FLAME) > 0))
-				{}
+				{
+					//
+				}
 				else 
 					extraBombFlame_done=true;
 			}
@@ -178,11 +182,11 @@ public class ModeHandler extends AiModeHandler<OralOzugur> {
 			{
 				if(this.ai.zoneHasItem(AiItemType.EXTRA_SPEED)||this.ai.zoneHasItem(AiItemType.GOLDEN_SPEED))
 				{
-					
+					//
 				}
 				else if((zone.getHiddenItemsCount(AiItemType.EXTRA_SPEED) > 0 || zone.getHiddenItemsCount(AiItemType.GOLDEN_SPEED) > 0))
 				{
-					
+					//
 				}
 				else 
 					extraSpeed_done=true;

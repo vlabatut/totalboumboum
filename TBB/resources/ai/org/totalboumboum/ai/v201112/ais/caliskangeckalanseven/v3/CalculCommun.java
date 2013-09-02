@@ -214,7 +214,7 @@ public class CalculCommun extends AiAbstractHandler<CaliskanGeckalanSeven>{
 						}
 					}
 					
-				catch (LimitReachedException e) {
+				catch (LimitReachedException e) {//
 				}
 				
 			}

@@ -284,7 +284,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 									}
 								}
 								
-							} catch (LimitReachedException e) {
+							} catch (LimitReachedException e) {//
 							}
 							
 						}
@@ -333,7 +333,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 									}
 								}
 								
-							} catch (LimitReachedException e) {
+							} catch (LimitReachedException e) {//
 							}
 							
 						}
@@ -404,7 +404,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 		{	currentPath = astarPrecise.processShortestPath(startLocation,currentDestination);
 		}
 		catch (LimitReachedException e)
-		{	
+		{	//
 		}
 		
 		if(currentPath!=null && !currentPath.isEmpty())
@@ -490,7 +490,7 @@ public class MoveHandler extends AiMoveHandler<CaliskanGeckalanSeven>
 		
 		if(currentPath.getLength()<2 || wait>0)
 		{
-			
+			//
 		}
 		else {
 

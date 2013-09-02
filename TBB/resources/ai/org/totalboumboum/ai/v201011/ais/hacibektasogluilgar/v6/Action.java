@@ -94,7 +94,7 @@ public class Action {
 		hi.checkInterruption();
 		
 		if(porte==0 || !tileActuelle.isCrossableBy(notreHeros) || control==-1)
-		{
+		{	//
 		}
 		else
 		{
@@ -114,7 +114,7 @@ public class Action {
 				}
 				if(note>=0)
 				{
-					
+					//
 				}
 			}
 			

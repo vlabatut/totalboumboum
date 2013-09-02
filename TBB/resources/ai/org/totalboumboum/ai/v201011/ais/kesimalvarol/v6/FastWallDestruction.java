@@ -131,9 +131,9 @@ public class FastWallDestruction {
 										willPlayNaturally = false;
 									}
 								} catch (NullPointerException e) {
-
+									//
 								} catch (LimitReachedException e) {
-
+									//
 								}
 							}
 

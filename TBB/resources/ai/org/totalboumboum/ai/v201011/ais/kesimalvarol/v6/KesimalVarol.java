@@ -647,7 +647,7 @@ public class KesimalVarol extends ArtificialIntelligence {
 					Long.valueOf(1250)); // 500 //Ignoree pour 1.25 secondes
 			if (m.regionEmplacementImportanceMatrix[selfHero.getLine()][selfHero
 					.getCol()].forEnemy) {
-
+				//
 			}
 		}
 		return ret;

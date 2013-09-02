@@ -104,7 +104,10 @@ public class BinaryHeapList {
 		int length = length();
 		int i = 1;
 		boolean bool = false;
-		while ( i++ < length && !(bool = list.get(i).getX() == node.getX() && list.get(i).getY() == node.getY()) ){}
+		while ( i++ < length && !(bool = list.get(i).getX() == node.getX() && list.get(i).getY() == node.getY()) )
+		{
+			//
+		}
 		
 		if ( bool && (list.get(i).getPathCost() > node.getPathCost() ) ){
 			node.setParent(parent);

@@ -86,13 +86,13 @@ public class MoveHandler extends AiMoveHandler<DemirelOz> {
 					return direction = this.ai.getZone().getDirection(location,
 							target);
 
-				} else {
+				} else {//
 
 				}
-			} catch (LimitReachedException e) {
+			} catch (LimitReachedException e) {//
 			}
 		} else {
-
+			//
 		}
 		return result;
 	}

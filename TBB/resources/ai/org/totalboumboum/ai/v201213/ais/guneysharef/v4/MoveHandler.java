@@ -126,7 +126,7 @@ public class MoveHandler extends AiMoveHandler<GuneySharef>
 				AiPath aipath = a.startProcess(l, this.ai.getBiggestTile());
 				globalAiPath = aipath;
 				
-			} catch(LimitReachedException e) {
+			} catch(LimitReachedException e) {//
 		}
 		}
 		return globalAiPath;
