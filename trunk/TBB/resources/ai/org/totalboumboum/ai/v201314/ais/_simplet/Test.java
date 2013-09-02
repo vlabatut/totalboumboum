@@ -27,7 +27,6 @@ import java.net.URISyntaxException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimTile;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201314.adapter.test.InitData;
@@ -56,8 +55,6 @@ public class Test
 	 * 
 	 * @param args
 	 * 		Pas pris en compte.
-	 * @throws StopRequestException
-	 * 		Pas pris en compte non plus.
 	 * @throws IOException 
 	 * 		Problème au chargement des préférences de l'agent.
 	 * @throws SAXException 
@@ -79,7 +76,7 @@ public class Test
 	 * @throws URISyntaxException 
 	 * 		Problème lors de la localisation du fichier de préférences.
 	 */
-	public static void main(String args[]) throws StopRequestException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
+	public static void main(String args[]) throws IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{	// on initialise la zone (cf. InitData)
 		AiSimZone zone = InitData.initZone1();
 		

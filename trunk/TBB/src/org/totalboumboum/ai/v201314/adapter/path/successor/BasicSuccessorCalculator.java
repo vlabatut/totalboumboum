@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -122,12 +121,9 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	 * 		Le noeud de recherche courant
 	 * @return	
 	 * 		La liste des noeuds fils.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	public List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException
+	public List<AiSearchNode> processSuccessors(AiSearchNode node)
 	{	// init
 		List<AiSearchNode> result = new ArrayList<AiSearchNode>();
 		AiTile tile = node.getLocation().getTile();

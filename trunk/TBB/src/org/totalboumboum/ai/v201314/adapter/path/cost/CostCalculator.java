@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v201314.adapter.path.cost;
  */
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -142,11 +141,8 @@ public abstract class CostCalculator
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le coût du déplacement entre les deux emplacements.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public abstract double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException;
+	public abstract double processCost(AiSearchNode currentNode, AiLocation nextLocation);
 	
 	/**
 	 * Calcule le coût d'un chemin, i.e. la somme des coûts des actions
@@ -156,11 +152,8 @@ public abstract class CostCalculator
 	 * 		Chemin à traiter
 	 * @return
 	 * 		Le coût de ce chemin.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-/*	public double processCost(AiPath path) throws StopRequestException
+/*	public double processCost(AiPath path)
 	{	double result = 0;
 		AiTile previous = null;
 		

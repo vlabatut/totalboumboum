@@ -31,7 +31,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -144,11 +143,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * <br/>
 	 * Cette méthode est appelée automatiquement, vous (le 
 	 * concepteur de l'agent) n'avez pas besoin de l'appeler.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void resetCustomData() throws StopRequestException
+	protected void resetCustomData()
 	{
 		// peut être surchargée par le concepteur de l'agent
 	}
@@ -208,11 +204,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * <br/>
 	 * Cette méthode implémente l'algorithme imposé et
 	 * ne peut donc être ni modifiée, ni surchargée.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected final void update() throws StopRequestException
+	protected final void update()
 	{	ai.checkInterruption();
 		PredefinedColor color = ai.getZone().getOwnHero().getColor();
 	
@@ -280,11 +273,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * 
 	 * @return
 	 * 		L'ensemble des cases dont on veut calculer la préférence.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected abstract Set<AiTile> selectTiles() throws StopRequestException;
+	protected abstract Set<AiTile> selectTiles();
 
 	/////////////////////////////////////////////////////////////////
 	// CRITERIA	/////////////////////////////////////////////////////
@@ -347,13 +337,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		{	String name = entry.getKey();
 			AiCriterion<T,?> criterion = entry.getValue();
 			AiCriterion<T, ?> copy = null;
-			try
-			{	copy = criterion.clone(ai);
-			}
-			catch (StopRequestException e)
-			{	// théoriquement impossible
-				e.printStackTrace();
-			}
+			copy = criterion.clone(ai);
 			criterionMap.put(name,copy);
 		}
 	}
@@ -417,11 +401,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * 		La case dont on veut identifier la catégorie.
 	 * @return
 	 * 		Un objet représentant la catégorie correspondant à cette case.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected abstract AiCategory identifyCategory(AiTile tile) throws StopRequestException;
+	protected abstract AiCategory identifyCategory(AiTile tile);
 
 	/**
 	 * Initialise la map de catégories en utilisant celles
@@ -634,11 +615,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * elle doit l'être par la fonction surchargeant 
 	 * {@link ArtificialIntelligence#updateOutput()}
 	 * si vous désirez l'utiliser. 
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public void updateOutput() throws StopRequestException
+	public void updateOutput()
 	{	ai.checkInterruption();
 		AiMode mode = ai.getModeHandler().getMode();
 
@@ -686,11 +664,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * Affiche une représentation textuelle des préférences
 	 * chargées à partir du fichier XML défini dans le
 	 * package de l'agent.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public final void displayPreferences() throws StopRequestException
+	public final void displayPreferences()
 	{	ai.checkInterruption();
 		print("    > Declared preferences :");
 		

@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.model.partial.AiExplosion;
@@ -213,12 +212,9 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	 * 		Le noeud de recherche courant.
 	 * @return	
 	 * 		La liste des noeuds fils.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 	@Override
-	public List<AiSearchNode> processSuccessors(AiSearchNode node) throws StopRequestException
+	public List<AiSearchNode> processSuccessors(AiSearchNode node)
 	{	ai.checkInterruption();
 		
 		// init
@@ -355,11 +351,8 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	 * 		Modèle à considérer.
 	 * @return
 	 * 		Un entier long représentant le temps d'attente minimal.	
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	private long getWaitDuration(AiPartialModel model) throws StopRequestException
+	private long getWaitDuration(AiPartialModel model)
 	{	// init
 		long result = Long.MAX_VALUE;
 		AiTile tile = model.getCurrentLocation().getTile();

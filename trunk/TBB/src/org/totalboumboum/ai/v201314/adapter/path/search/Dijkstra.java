@@ -31,7 +31,6 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
@@ -126,13 +125,11 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * @return 
 	 * 		Une map associant un noeud de recherche à chaque case accessible.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public Map<AiTile,AiSearchNode> startProcess(AiLocation startLocation) throws StopRequestException, LimitReachedException
+	public Map<AiTile,AiSearchNode> startProcess(AiLocation startLocation) throws LimitReachedException
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
@@ -158,13 +155,11 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * @return 
 	 * 		Une map associant un noeud de recherche à chaque case accessible.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public Map<AiTile,AiSearchNode> startProcess() throws StopRequestException, LimitReachedException
+	public Map<AiTile,AiSearchNode> startProcess() throws LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
 		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
 		if(root==null)
@@ -199,12 +194,11 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * 		Position de départ.
 	 * @return
 	 * 		Le chemin calculé.
-	 * @throws StopRequestException
-	 * 		Si le moteur a demandé l'arrêt de l'agent.
+	 * 
 	 * @throws LimitReachedException
 	 * 		L'algorithme de recherche a atteint les limites fixées.
 	 */
-	public AiPath processEscapePath(AiLocation startLocation) throws StopRequestException, LimitReachedException
+	public AiPath processEscapePath(AiLocation startLocation) throws LimitReachedException
 	{	// on indique la condition de fin pour l'exploration de la zone
 		stopWhenSafe = true;
 		
@@ -226,13 +220,11 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * @return 
 	 * 		Une map associant un noeud de recherche à chaque case accessible.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public Map<AiTile,AiSearchNode> continueProcess() throws StopRequestException, LimitReachedException
+	public Map<AiTile,AiSearchNode> continueProcess() throws LimitReachedException
 	{	long before = print("      > Starting/resuming Dijkstra +++++++++++++++++++++");
 		print("         searching paths starting from "+startLocation);
 		

@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
@@ -164,12 +163,9 @@ public class ApproximateCostCalculator extends CostCalculator
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le temps nécessaire pour aller du départ à l'arrivée.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
-	public double processCost(AiSearchNode current, AiLocation next) throws StopRequestException
+	public double processCost(AiSearchNode current, AiLocation next)
 	{	AiTile destination = next.getTile();
 		double result = crossTileDuration;
 		

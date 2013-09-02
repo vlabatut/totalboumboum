@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionString;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais._example.v0.Agent;
 
@@ -30,11 +29,8 @@ public class CriterionThird extends AiCriterionString<Agent>
 	 * 
 	 * @param ai
 	 * 		l'agent concerné. 
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionThird(Agent ai) throws StopRequestException
+	public CriterionThird(Agent ai)
 	{	super(ai,NAME,DOMAIN);
 		ai.checkInterruption();
 	}
@@ -43,7 +39,7 @@ public class CriterionThird extends AiCriterionString<Agent>
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public String processValue(AiTile tile) throws StopRequestException
+	public String processValue(AiTile tile)
 	{	ai.checkInterruption();
 		String result = DOMAIN.iterator().next(); // on renvoie une valeur arbitraire, pour l'exemple
 		

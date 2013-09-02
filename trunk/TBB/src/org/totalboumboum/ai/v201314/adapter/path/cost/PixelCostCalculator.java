@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -89,12 +88,9 @@ public class PixelCostCalculator extends CostCalculator
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		La distance en pixels entre l'emplacement de départ et celui d'arrivée.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
-	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
+	public double processCost(AiSearchNode currentNode, AiLocation nextLocation)
 	{	// on calcule simplement la distance en pixels
 		AiLocation currentLocation = currentNode.getLocation();
 		AiZone zone = currentLocation.getZone();
@@ -135,12 +131,9 @@ public class PixelCostCalculator extends CostCalculator
 	 * 		Chemin à traiter.
 	 * @return
 	 * 		Le coût de ce chemin.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
 /*	@Override
-	public double processCost(AiPath path) throws StopRequestException
+	public double processCost(AiPath path)
 	{	double result = path.getPixelDistance();
 		return result;
 	}

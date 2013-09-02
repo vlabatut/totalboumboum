@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
 /**
@@ -149,11 +148,8 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * 		La case à évaluer.
 	 * @return
 	 * 		Combinaison décrivant la case. 
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public AiCombination processCombination(AiTile tile) throws StopRequestException
+	public AiCombination processCombination(AiTile tile)
 	{	AiCombination result = new AiCombination(this);
 		for(AiCriterion<?,?> criterion: criteria)
 			processCombinationCriterion(criterion,tile,result);
@@ -174,13 +170,9 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * 		La case à évaluer.
 	 * @param result
 	 * 		La combinaison à mettre à jour.
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
 	private <T extends ArtificialIntelligence, U> 
 		void processCombinationCriterion(AiCriterion<T,U> criterion, AiTile tile, AiCombination result) 
-		throws StopRequestException
 	{	U value = criterion.fetchValue(tile);
 		result.setCriterionValue(criterion,value);
 	}

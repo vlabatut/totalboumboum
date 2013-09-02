@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -89,12 +88,9 @@ public class TileCostCalculator extends CostCalculator
 	 * 		L'emplacement d'arrivée (case voisine de la case courante).
 	 * @return	
 	 * 		Le coût du déplacement entre les deux emplacements (ici : 1).
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */ 
 	@Override
-	public double processCost(AiSearchNode currentNode, AiLocation nextLocation) throws StopRequestException
+	public double processCost(AiSearchNode currentNode, AiLocation nextLocation)
 	{	// on suppose que la case est voisine, donc le coût est toujours de 1
 		double result = 1;
 		
@@ -136,7 +132,7 @@ public class TileCostCalculator extends CostCalculator
 	 * 		Le coût de ce chemin.
 	 */
 /*	@Override
-	public double processCost(AiPath path) throws StopRequestException
+	public double processCost(AiPath path)
 	{	double result = path.getTileDistance();
 		return result;
 	}

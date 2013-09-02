@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
@@ -60,11 +59,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 		Fonction heuristique.
 	 * @param successorCalculator 
 	 * 		Fonction successeur.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public AiSearchNode(ArtificialIntelligence ai, AiLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
+	public AiSearchNode(ArtificialIntelligence ai, AiLocation location, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	// agent
 		this.ai = ai;
 		
@@ -107,11 +103,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 		Emplacement associé à ce noeud de recherche.
 	 * @param parent	
 	 * 		Noeud de recherche parent de ce noeud.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public AiSearchNode(AiLocation location, AiSearchNode parent) throws StopRequestException
+	public AiSearchNode(AiLocation location, AiSearchNode parent)
 	{	// agent
 		this.ai = parent.getAi();
 		
@@ -160,11 +153,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 		Zone correspondante au noeud de recherche.
 	 * @param parent	
 	 * 		Noeud de recherche parent de ce noeud.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public AiSearchNode(long wait, AiZone zone, AiSearchNode parent) throws StopRequestException
+	public AiSearchNode(long wait, AiZone zone, AiSearchNode parent)
 	{	// agent
 		this.ai = parent.getAi();
 		
@@ -333,11 +323,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	/**
 	 * Met à jour toutes les heuristiques (méthode
 	 * utilisée en cas de changement de destination).
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public void updateHeuristic() throws StopRequestException
+	public void updateHeuristic()
 	{	// this node
 		heuristic = heuristicCalculator.processHeuristic(location);
 
@@ -426,11 +413,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 		Case à tester
 	 * @return	
 	 * 		{@code true} ssi la case a déjà été traitée.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-/*	public boolean hasBeenExplored(AiTile tile) throws StopRequestException
+/*	public boolean hasBeenExplored(AiTile tile)
 	{	ai.checkInterruption();
 		
 		boolean result = location.getTile().equals(tile);
@@ -452,11 +436,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 		Case à tester
 	 * @return	
 	 * 		{@code true} ssi la case a déjà été traitée.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-/*	public boolean hasBeenExploredSincePause(AiTile tile) throws StopRequestException
+/*	public boolean hasBeenExploredSincePause(AiTile tile)
 	{	ai.checkInterruption();
 		
 		boolean result = location.getTile().equals(tile);
@@ -496,11 +477,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 
 	 * @return	
 	 * 		Une liste contenant les fils de ce noeud.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public List<AiSearchNode> getChildren() throws StopRequestException
+	public List<AiSearchNode> getChildren()
 	{	ai.checkInterruption();
 		
 		if(!childrenProcessed)

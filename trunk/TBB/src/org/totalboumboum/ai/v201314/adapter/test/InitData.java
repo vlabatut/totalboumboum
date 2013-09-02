@@ -30,7 +30,6 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
@@ -473,19 +472,19 @@ public final class InitData
 	public static ArtificialIntelligence initAi()
 	{	ArtificialIntelligence result = new ArtificialIntelligence()
 		{	@Override
-			protected void updatePercepts() throws StopRequestException{/* */}
+			protected void updatePercepts(){/* */}
 			@Override
-			protected void initPercepts() throws StopRequestException{/* */}
+			protected void initPercepts(){/* */}
 			@Override
-			protected void initHandlers() throws StopRequestException{/* */}
+			protected void initHandlers(){/* */}
 			@Override
-			protected AiPreferenceHandler<?> getPreferenceHandler() throws StopRequestException{return null;}
+			protected AiPreferenceHandler<?> getPreferenceHandler(){return null;}
 			@Override
-			protected AiMoveHandler<?> getMoveHandler() throws StopRequestException{return null;}
+			protected AiMoveHandler<?> getMoveHandler(){return null;}
 			@Override
-			protected AiModeHandler<?> getModeHandler() throws StopRequestException{return null;}
+			protected AiModeHandler<?> getModeHandler(){return null;}
 			@Override
-			protected AiBombHandler<?> getBombHandler() throws StopRequestException{return null;}
+			protected AiBombHandler<?> getBombHandler(){return null;}
 		};
 		return result;
 	}

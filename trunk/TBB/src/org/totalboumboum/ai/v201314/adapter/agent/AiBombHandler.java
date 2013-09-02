@@ -21,8 +21,6 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * 
  */
 
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
-
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent.
  * <br/>
@@ -64,9 +62,6 @@ public abstract class AiBombHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		Renvoie {@code true} ssi l'agent doit poser une bombe.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract boolean considerBombing() throws StopRequestException;
+	protected abstract boolean considerBombing();
 }

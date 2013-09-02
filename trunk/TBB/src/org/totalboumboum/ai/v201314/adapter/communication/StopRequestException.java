@@ -26,7 +26,7 @@ package org.totalboumboum.ai.v201314.adapter.communication;
  * 
  * @author Vincent Labatut
  */
-public class StopRequestException extends Exception
+public class StopRequestException extends RuntimeException
 {	/** numéro de serie */
 	private static final long serialVersionUID = 1L;	
 }

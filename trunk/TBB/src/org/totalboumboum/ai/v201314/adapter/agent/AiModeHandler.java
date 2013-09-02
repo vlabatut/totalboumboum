@@ -21,8 +21,6 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * 
  */
 
-import org.totalboumboum.ai.v201314.adapter.communication.StopRequestException;
-
 /**
  * Classe gérant le mode de l'agent. Elle
  * implémente la méthode {@link #update}, utilisée pour 
@@ -82,11 +80,8 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * ou {@link AiMode#COLLECTING}.
 	 * <br/>
 	 * <b>Attention :</b> cette méthode ne peut pas être redéfinie.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected final void update() throws StopRequestException
+	protected final void update()
 	{	// si l'agent a assez d'items, on attaque
 		long before = print("    > Entering hasEnoughItems");
 		boolean enoughItems = hasEnoughItems();
@@ -124,11 +119,8 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		{@code true} ssi l'agent possède assez d'items.
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract boolean hasEnoughItems() throws StopRequestException;
+	protected abstract boolean hasEnoughItems();
 	
 	/**
 	 * Détermine si l'agent a la possibilité de ramasser
@@ -140,9 +132,6 @@ public abstract class AiModeHandler<T extends ArtificialIntelligence> extends Ai
 	 * 
 	 * @return
 	 * 		{@code true} ssi l'agent a la possibilité de ramasser des items.
-	 * 
-	 * @throws StopRequestException
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected abstract boolean isCollectPossible() throws StopRequestException;
+	protected abstract boolean isCollectPossible();
 }
