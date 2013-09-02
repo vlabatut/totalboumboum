@@ -115,11 +115,12 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		"toString"
 	});
 	/** Méthodes interdites */
-	private final static List<String> PRINT_METHODS = Arrays.asList(new String[]
+	private final static List<String> FORBIDDEN_METHODS = Arrays.asList(new String[]
 	{	"System.out.print",
 		"System.out.println",
 		"System.err.print",
-		"System.err.println"
+		"System.err.println",
+		"printStackTrace"
 	});
 	/** Exceptions à ne pas couvrir dans un bloc {@code try-catch} */
 	private final static List<String> FORBIDDEN_EXCEPTIONS = Arrays.asList(new String[]
@@ -135,6 +136,8 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// MISC VARIABLES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Classe mère de l'agent courant */
+	private String agentClass = null;
 	/** Package de l'agent courant */
 	private String agentPackage = null;
 	/** Package du pack courant */
@@ -330,8 +333,9 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	
     @Override
     public void visit(MethodCallExpr n, Object arg)
-    {	String calledMethod = n.getScope()+ClassTools.CLASS_SEPARATOR+n.getName();
-    	if(PRINT_METHODS.contains(calledMethod))
+    {	String name = n.getName();
+    	String calledMethod = n.getScope()+ClassTools.CLASS_SEPARATOR+name;
+    	if(FORBIDDEN_METHODS.contains(calledMethod) || FORBIDDEN_METHODS.contains(name))
 		{	int line = n.getBeginLine();
 			printErr("Erreur ligne "+line+" : il est interdit d'utiliser la méthode "+calledMethod+" ; à la place vous devez utiliser la méthode print de votre agent (héritant de ArtificialIntelligence) ou d'un gestionnaire (héritant de AiAbstractHandler)");
 			errorCount++;
@@ -500,22 +504,28 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		// on met à jour le package de l'API courante
 		apiPackage = AiTools.getApiPackage(pack);
 
-		// on met à jour le package du pack courante
+		// on met à jour le package du pack courant
 		packPackage = AiTools.getPackPackage(pack);
 		
 		// on met à jour le package de l'agent courant
 		agentPackage = AiTools.getAgentPackage(pack,true);
+		
+		// on met à jour la classe mère de l'agent courant
+		agentClass = AiTools.getAgentPackage(pack,false) + ClassTools.CLASS_SEPARATOR + "AiMain";
 	}
 	
 	@Override
 	public void visit(ImportDeclaration n, Object arg)
 	{	String name = n.getName().toString();
+	
 		// s'agit-il d'une classe du jeu ?
 		if(name.startsWith(GAME_PACKAGE))
 		{	// s'agit-il d'une classe de l'API ?
 			if(!(name.startsWith(apiPackage) && !name.startsWith(packPackage))
 			// s'agit-il d'une autre classe de l'agent ?
 			&& !name.startsWith(agentPackage)
+			// s'agit-il de la classe AiMain de l'agent ?
+			&& !name.equals(agentClass)
 			// s'agit-il d'une classe du jeu autorisée ?
 			&& !ALLOWED_CLASSES.contains(name))
 			{	int line = n.getBeginLine();
