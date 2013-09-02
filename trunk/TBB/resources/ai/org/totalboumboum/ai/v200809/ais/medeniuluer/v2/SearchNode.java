@@ -220,7 +220,7 @@ public class SearchNode {
 			node = new SearchNode(mu);
 		} catch (StopRequestException e) {
 			//  Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		node = (SearchNode) object;
 		if ((node.getX() == x) && (node.getY() == y))

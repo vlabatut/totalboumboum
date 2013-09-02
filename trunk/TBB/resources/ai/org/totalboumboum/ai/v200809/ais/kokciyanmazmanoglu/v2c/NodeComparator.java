@@ -49,14 +49,14 @@ public class NodeComparator implements Comparator<Node>
 			val1 = n1.getCost()+n1.getH(start, end);
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		double val2 = 0;
 		try {
 			val2 = n2.getCost()+n2.getH(start, end);
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if(val1<val2)res = -1;
 		else if(val1>val2)res = 1;
@@ -65,7 +65,7 @@ public class NodeComparator implements Comparator<Node>
 				res = n1.getName().compareTo(n2.getName());
 			} catch (StopRequestException e) {
 				// 
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			
 		}

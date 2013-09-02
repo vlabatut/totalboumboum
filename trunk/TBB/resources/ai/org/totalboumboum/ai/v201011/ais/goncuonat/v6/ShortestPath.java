@@ -65,7 +65,7 @@ public class ShortestPath {
 		try {
 			shortestPath = astar.processShortestPath(startPoint, endPoints);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return shortestPath;
 	}
@@ -110,7 +110,7 @@ public class ShortestPath {
 					result.add(null);
 			}
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return result;
 	}
@@ -150,7 +150,7 @@ public class ShortestPath {
 			shortestPath = astar.processShortestPath(startPoint, endPoint);
 			result = shortestPath;
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return result;
 	}

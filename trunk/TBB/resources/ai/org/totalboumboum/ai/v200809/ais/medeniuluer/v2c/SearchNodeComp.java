@@ -54,14 +54,14 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 		n_1 = node1.getHeuristic(goal)+  node1.getCout();
 	} catch (StopRequestException e) {
 		// 
-		e.printStackTrace();
+		//e.printStackTrace();
 	}
 	int n_2=0;
 	try {
 		n_2 = node2.getHeuristic(goal)+  node2.getCout();
 	} catch (StopRequestException e) {
 		// 
-		e.printStackTrace();
+		//e.printStackTrace();
 	}
 	
 	

@@ -201,7 +201,7 @@ public class SearchTree
 				addLink(link);
 			}
 			catch (ExistingNodeException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 		}
 		return result.iterator();

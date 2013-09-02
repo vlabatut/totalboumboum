@@ -87,7 +87,7 @@ public class BombHandler extends AiBombHandler<UnluYildirim>
 		Thread.sleep(myhero.getBombDuration()/10);
 	} catch (InterruptedException e) {
 		
-		e.printStackTrace();
+		//e.printStackTrace();
 	}        	 
 	return false;
 		

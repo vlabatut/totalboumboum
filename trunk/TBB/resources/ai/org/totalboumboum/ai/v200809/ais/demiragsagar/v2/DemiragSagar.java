@@ -374,7 +374,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		AiTile result=null;
 		AStar arbre1=new AStar(this.ownHero.getTile(),this.caseTarget);
@@ -417,7 +417,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		int i,j;
 		boolean resultat=false;
@@ -451,7 +451,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		List<AiTile> monItera = new ArrayList<AiTile>();
@@ -462,7 +462,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 			try {
 				checkInterruption();
 			} catch (StopRequestException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			if (i.getColor() != this.ownHero.getColor())
 				if (i != null)
@@ -481,14 +481,14 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if (this.zone.getBombs() != null)
 			for (AiBomb i : this.zone.getBombs()) {
 				try {
 					checkInterruption();
 				} catch (StopRequestException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				if(!i.getTile().getBombs().isEmpty())
 					b.add(i.getTile());
@@ -506,14 +506,14 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if (this.zone.getItems() != null)
 			for (AiItem i : this.zone.getItems()) {
 				try {
 					checkInterruption();
 				} catch (StopRequestException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				if(i.getTile().getItem()!=null)
 					p.add(i.getTile());
@@ -530,7 +530,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	/**
@@ -552,7 +552,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		AiTile petit = null;
 		boolean fuir = false;
@@ -587,7 +587,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		boolean flag=false;
 		AStar arbre=new AStar(this.caseCourant,target);
@@ -614,7 +614,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		// fonction verifiant si l'ia est arrive a la case cible
 		boolean resultat = false;
@@ -633,7 +633,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;

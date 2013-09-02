@@ -248,7 +248,7 @@ public class SearchNode {
 			node = new SearchNode(mu);
 		} catch (StopRequestException e) {
 			//  Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		node = (SearchNode) object;
 		try {
@@ -260,7 +260,7 @@ public class SearchNode {
 				return false;
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return false;
 	}

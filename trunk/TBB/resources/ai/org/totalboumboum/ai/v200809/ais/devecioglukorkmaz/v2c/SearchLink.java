@@ -74,7 +74,7 @@ public class SearchLink {
 						&& temp.getTarget() == getTarget();
 			} catch (StopRequestException e) {
 				// 
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		return result;

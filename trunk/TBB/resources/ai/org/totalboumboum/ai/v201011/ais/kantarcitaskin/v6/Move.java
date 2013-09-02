@@ -199,7 +199,7 @@ public class Move
 					path = astar.processShortestPath(zone.getOwnHero().getTile(), target);
 				} catch (LimitReachedException e) {
 					// 
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			
 		}
@@ -214,7 +214,7 @@ public class Move
 					path = astar.processShortestPath(zone.getOwnHero().getTile(), target2);
 			} catch (LimitReachedException e) {
 				// 
-				e.printStackTrace();
+				//e.printStackTrace();
 			}	
 			
 		}

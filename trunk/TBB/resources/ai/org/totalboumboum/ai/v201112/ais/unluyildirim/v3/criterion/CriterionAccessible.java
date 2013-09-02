@@ -81,7 +81,7 @@ public class CriterionAccessible extends AiUtilityCriterionBoolean
 	{	path = astar.processShortestPath(startlocation,tile);
 	}
 	catch (LimitReachedException e)
-	{	e.printStackTrace();
+	{	//e.printStackTrace();
 	}
 	
 	if(path==null || path.isEmpty())

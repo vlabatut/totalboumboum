@@ -94,7 +94,7 @@ public class Link {
 					&& temp.getAction() == getAction();
 			} catch (StopRequestException e) {
 				// 
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		return result;

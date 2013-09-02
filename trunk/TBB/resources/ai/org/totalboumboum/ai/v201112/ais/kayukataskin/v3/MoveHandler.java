@@ -228,7 +228,7 @@ public class MoveHandler extends AiMoveHandler<KayukaTaskin>
 		try {
 			path = astar.processShortestPath(firstLocat, endTiles);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		tileDest = path.getLastLocation().getTile();
 		

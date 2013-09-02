@@ -238,7 +238,7 @@ public class GokselMenges extends ArtificialIntelligence {
 						pt = minimumCostCalculation(MoveablePoints,
 								MoveablePointDistances)[1];
 					} catch (RuntimeException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 						return AI_ACTION_DO_NOTHING;
 					}
 

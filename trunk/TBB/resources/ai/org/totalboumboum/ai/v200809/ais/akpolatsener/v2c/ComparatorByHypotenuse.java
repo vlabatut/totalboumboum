@@ -70,7 +70,7 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 					result = -1;
 			} catch (StopRequestException e) {
 				//  Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		} else {
 			try {
@@ -81,7 +81,7 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 					result = 1;
 			} catch (StopRequestException e) {
 				//  Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		return result;

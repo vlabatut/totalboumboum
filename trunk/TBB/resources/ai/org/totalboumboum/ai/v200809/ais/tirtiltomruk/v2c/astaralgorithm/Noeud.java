@@ -206,7 +206,7 @@ public class Noeud {
 			noeud = new Noeud(source);
 		} catch (StopRequestException e) {
 			//  Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		noeud = (Noeud) object;
 		try{

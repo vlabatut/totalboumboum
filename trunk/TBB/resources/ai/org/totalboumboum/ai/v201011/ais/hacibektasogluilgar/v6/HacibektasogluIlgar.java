@@ -36,7 +36,7 @@ public class HacibektasogluIlgar extends ArtificialIntelligence {
 			result=act.choisirLeMode(cz.matriceZone);
 		} catch (LimitReachedException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		cz.afficherMatrice(cz.matriceTotal, cz.matriceZone);

@@ -154,7 +154,7 @@ public class MoveHandler extends AiMoveHandler<CinarYalcin>
 		try {
 			 kontrol= astarPrecise.startProcess(ownLoca, ilk);
 		} catch (LimitReachedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		if(bombL.isEmpty())
@@ -174,7 +174,7 @@ public class MoveHandler extends AiMoveHandler<CinarYalcin>
 			try{
 				kontrol= astarPrecise.startProcess(ownLoca, ilk);
 			}catch(LimitReachedException e){
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		
 		{
@@ -468,7 +468,7 @@ if(isTileThreatened(currentTile) && safeTile==null)
 	
 	}
 	catch (LimitReachedException e)
-	{	e.printStackTrace();
+	{	//e.printStackTrace();
 	}
 	
 	
@@ -495,7 +495,7 @@ if(safeTile!=null)
 		
 		
 	} catch (LimitReachedException e) {
-		e.printStackTrace();
+		//e.printStackTrace();
 	}
 	}
 }
@@ -519,7 +519,7 @@ if(safeTile==null)
 			
 			}
 			catch (LimitReachedException e)
-			{	e.printStackTrace();
+			{	//e.printStackTrace();
 			}
 	}
 	

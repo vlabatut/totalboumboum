@@ -275,7 +275,8 @@ public class FastWallDestruction {
 			} catch (NullPointerException e) // a la fin du jeu.
 			{
 				if (monIA.verbose)
-					e.printStackTrace();
+				{	//e.printStackTrace();				
+				}
 			}
 			if (monIA.verbose)
 				System.out.println("cpath done");

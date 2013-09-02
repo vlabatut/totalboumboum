@@ -291,7 +291,7 @@ public class AttackMode extends Mode
 				}catch(LimitReachedException e)
 				{
 					// 
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			}
 		}

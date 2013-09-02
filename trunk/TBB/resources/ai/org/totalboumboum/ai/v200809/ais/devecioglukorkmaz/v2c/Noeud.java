@@ -110,7 +110,7 @@ public class Noeud {
 			noeud = new Noeud(ai);
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		noeud = (Noeud) object;
 		try {
@@ -120,7 +120,7 @@ public class Noeud {
 				return false;
 		} catch (StopRequestException e) {
 			// 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return false;
 	}
