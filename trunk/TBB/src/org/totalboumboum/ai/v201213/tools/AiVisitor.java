@@ -155,7 +155,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					if(FORBIDDEN_EXCEPTIONS.contains(exceptionName))
 					{	printErr("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel à "+CHECK_INTERRUPTION_METHOD+"()");
 						errorCount++;
-						//NOTE à compléter par la création d'un commentaire dans le code source
+						//
 					}
 				}
 				else
@@ -360,13 +360,13 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 							if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
 			        		{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 			        			errorCount++;
-			        			//NOTE à compléter par la création d'un commentaire dans le code source
+			        			//
 			        		}
 						}
 						else
 						{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
-							//NOTE à compléter par la création d'un commentaire dans le code source
+							//
 						}
 					}
 					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
@@ -375,7 +375,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 						if(statements.size()<2)
 						{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
-							//NOTE à compléter par la création d'un commentaire dans le code source
+							//
 						}
 						else
 						{	line = firstStatement.getBeginLine();
@@ -389,13 +389,13 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 									if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
 					        		{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 					        			errorCount++;
-					        			//NOTE à compléter par la création d'un commentaire dans le code source
+					        			//
 					        		}
 								}
 								else
 								{	printErr("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 				        			errorCount++;
-									//NOTE à compléter par la création d'un commentaire dans le code source
+									//
 								}
 							}
 						}
@@ -403,18 +403,18 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					else
 					{	printErr("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 	        			errorCount++;
-						//NOTE à compléter par la création d'un commentaire dans le code source
+						//
 					}
 				}
 				else
 				{	printErr("Attention ligne "+line+" : le bloc est vide !");
-					//NOTE à compléter par la création d'un commentaire dans le code source
+					//
 				}
 			}
 			else
 			{	printErr("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
 				errorCount++;
-				//NOTE à compléter par la création d'un commentaire dans le code source
+				//
 			}
 		}
 	}
@@ -434,7 +434,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 				}
 			}
 		}
-		//NOTE ne traite pas le cas où on a plusieurs membres, e.g. @SuppressWarnings({"javadoc","xxxx"})
+		//
 	}
 	
 	/**

@@ -123,7 +123,7 @@ public final class AiSimZone extends AiZone
 					addSprite(simFire);
 				}
 				// floors
-// NOTE to gain a few ms...				
+// to gain a few ms...				
 //				List<AiFloor> floors = tile.getFloors();
 //				for(AiFloor floor: floors)
 //				{	AiSimFloor simFloor = new AiSimFloor(floor,simTile);
