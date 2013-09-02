@@ -1707,7 +1707,8 @@ public class Launcher
 //TODO auto-advance: afficher un logo qq part pour indiquer ça ?
 
 
-//TODO bug avec F10
+//TODO bug: navigation leg n'empêche pas auto-advance dans tournoi
+//TODO bug: avec F10 faut appuyer plusieurs fois
 //TODO compléter document avec nouveaux menus/stats, etc.
 //TODO bug: malgré la désactivation de l'affichage des exceptions, j'ai eu droit à :
 /*
