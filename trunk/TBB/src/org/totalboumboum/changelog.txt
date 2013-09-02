@@ -575,3 +575,5 @@
  		- Correction d'un bug empêchant l'affichage correct des noms des matches lors des coupes
  		- Correction d'un bug empêchant de changer un joueur quant il y en a déjà 16 (en raison d'un 
  		  blocage provoqué par le choix de la couleur) 
+ 		- Correction d'un bug lié à l'utilisation de F10 sous Win7
+ 		

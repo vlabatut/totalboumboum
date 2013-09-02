@@ -1577,6 +1577,7 @@ public class Launcher
 	 * 				- 0809.Adatepe: 			26db3658-cf0e-4650-96f4-55080b4720f8
 	 * 				- Joueur Humain 2:			553c0fb4-5418-4e33-b244-d5f399ae40f2
 	 *		 	- virer le thème/perso/niveaux TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
+	 *			- re-générer le fichier exécutable windows à partir du batch (?)
 	 * 
 	 * promeneur :	af92d497-7975-4dcf-b05d-89e706c3eec3
 	 * simplet : 	227b2e4d-bd7b-4153-962b-699bc909e5e1
@@ -1707,30 +1708,6 @@ public class Launcher
 //TODO auto-advance: afficher un logo qq part pour indiquer ça ?
 
 
-//TODO bug: navigation leg n'empêche pas auto-advance dans tournoi
-//TODO bug: avec F10 faut appuyer plusieurs fois
+//TODO màj des stats Glicko seulement lors des màj du classement? (éviter graphiques en escalier)
+//TODO décider à l'avance de la répartition de tous joueurs dans le tournoi auto ? (pb si des profils sont supprimés/ajoutés)
 //TODO compléter document avec nouveaux menus/stats, etc.
-//TODO bug: malgré la désactivation de l'affichage des exceptions, j'ai eu droit à :
-/*
-org.totalboumboum.ai.v201112.adapter.path.LimitReachedException: The search algorithm developped a tree too costly/deep/large according to the predefined limits.
-at org.totalboumboum.ai.v201112.adapter.path.search.Astar.continueProcess(Astar.java:453)
-at org.totalboumboum.ai.v201112.adapter.path.search.Astar.processShortestPath(Astar.java:284)
-at org.totalboumboum.ai.v201112.adapter.path.search.Astar.processShortestPath(Astar.java:186)
-at org.totalboumboum.ai.v201112.adapter.path.search.Astar.processShortestPath(Astar.java:148)
-at org.totalboumboum.ai.v201112.ais.gungorkavus.v3.MoveHandler.updatePath(MoveHandler.java:366)
-at org.totalboumboum.ai.v201112.ais.gungorkavus.v3.MoveHandler.considerMoving(MoveHandler.java:475)
-at org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence.processAction(ArtificialIntelligence.java:434)
-at org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence.call(ArtificialIntelligence.java:164)
-at org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence.call(ArtificialIntelligence.java:1)
-at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
-at java.util.concurrent.FutureTask.run(Unknown Source)
-at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-at java.lang.Thread.run(Unknown Source)
-
-> v201112.ais.arikkoseoglu
-> v201112.ais.demirsazan
-> v201112.ais.gungorkavus
-> v201112.ais.sakaryasar
-> v201011.ais.kayukayildirim
-*/
