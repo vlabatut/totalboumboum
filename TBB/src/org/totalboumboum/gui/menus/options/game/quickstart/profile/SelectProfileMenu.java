@@ -46,7 +46,6 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -112,6 +111,7 @@ public class SelectProfileMenu extends InnerMenuPanel implements DataPanelListen
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -120,7 +120,12 @@ public class SelectProfileMenu extends InnerMenuPanel implements DataPanelListen
 		{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 			Profile profile = profileData.getSelectedProfile();
 			if(profile!=null && !profiles.contains(profile))
-			{	// check if color is free
+			{	// possibly remove existing profile from selection
+				boolean newSlot = index>=profiles.size();
+				if(!newSlot)
+					profiles.remove(index);
+				
+				// check if color is free
 				PredefinedColor selectedColor = profile.getSpriteColor();
 				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
 					selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
@@ -140,9 +145,10 @@ public class SelectProfileMenu extends InnerMenuPanel implements DataPanelListen
 				catch (ClassNotFoundException e1)
 				{	e1.printStackTrace();
 				}
+				
 				// add to profiles list
-				if(index<profiles.size())
-					profiles.set(index,profile);
+				if(!newSlot)
+					profiles.add(index,profile);
 				else
 					profiles.add(profile);
 			}
@@ -154,6 +160,7 @@ public class SelectProfileMenu extends InnerMenuPanel implements DataPanelListen
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void refresh()
 	{	//
 	}
