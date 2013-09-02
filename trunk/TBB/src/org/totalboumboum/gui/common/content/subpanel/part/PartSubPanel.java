@@ -22,10 +22,13 @@ package org.totalboumboum.gui.common.content.subpanel.part;
  */
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JLabel;
 
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
@@ -40,7 +43,6 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
  * 
@@ -337,27 +339,31 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	MyLabel label = (MyLabel)e.getComponent();
-		int[] pos = getLabelPosition(label);
-		if(pos==null)
+	{	Component component = e.getComponent();
+		
+		if(component instanceof JLabel)
 			fireTitleClicked(part);
-		else
-		{	Profile profile = getProfileForLine(pos[0]);
+		
+		if(component instanceof MyLabel)
+		{	MyLabel label = (MyLabel)component;
+			int[] pos = getLabelPosition(label);
+			
+			Profile profile = getProfileForLine(pos[0]);
 			switch(pos[1])
 			{	// before button
 				case COL_BEFORE:
@@ -389,6 +395,6 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 }

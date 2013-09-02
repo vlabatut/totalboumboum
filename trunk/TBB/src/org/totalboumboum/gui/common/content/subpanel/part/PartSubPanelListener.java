@@ -24,13 +24,38 @@ import org.totalboumboum.game.tournament.cup.CupPart;
  */
 
 /**
+ * Classes implementing this interface can
+ * be informed of event occuring inside a cup part
+ * panel.
  * 
  * @author Vincent Labatut
- *
  */
 public interface PartSubPanelListener
 {
+	/**
+	 * The button pointing at the next part
+	 * as been clicked.
+	 *  
+	 * @param part
+	 * 		The concerned part.
+	 */
 	public void partAfterClicked(CupPart part);
+
+	/**
+	 * The button pointing at the previous part
+	 * as been clicked.
+	 *  
+	 * @param part
+	 * 		The concerned part.
+	 */
 	public void partBeforeClicked(CupPart part);
+
+	/**
+	 * The part has been selected by
+	 * clicking on its title.
+	 *  
+	 * @param part
+	 * 		The concerned part.
+	 */
 	public void partTitleClicked(CupPart part);
 }
