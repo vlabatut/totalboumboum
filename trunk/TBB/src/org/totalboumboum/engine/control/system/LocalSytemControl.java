@@ -181,7 +181,7 @@ public class LocalSytemControl extends SystemControl
 			}
 
 			// debug: real-time usage
-			else if(keyCode == KeyEvent.VK_F10)
+			else if(keyCode == KeyEvent.VK_F11)//TODO not F10, because it is intercepted by Win7
 			{	SystemControlEvent controlEvent;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
 					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE,SystemControlEvent.MODE);
