@@ -69,18 +69,27 @@ public class Launcher
 	 * 		<li>{@code quick}: launches the game in quick mode</li>
 	 * 		<li>{@code window}: force the launch in windowed mode (even if the options are set to fullscreen)</li>
 	 * </ul>
-	 * If not options are precised, then the game is launched normally.
+	 * If no option is precised, then the game is launched normally.
 	 * 
 	 * @param args
 	 * 		One out of 3 possible options.
+	 * 
 	 * @throws ParserConfigurationException
+	 * 		Problem while loading the game.
 	 * @throws SAXException
+	 * 		Problem while loading the game.
 	 * @throws IOException
+	 * 		Problem while loading the game.
 	 * @throws IllegalArgumentException
+	 * 		Problem while running the game.
 	 * @throws SecurityException
+	 * 		Problem while running the game.
 	 * @throws IllegalAccessException
+	 * 		Problem while running the game.
 	 * @throws NoSuchFieldException
+	 * 		Problem while running the game.
 	 * @throws ClassNotFoundException
+	 * 		Problem while running the game.
 	 */
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// set thread name
@@ -120,13 +129,21 @@ public class Launcher
 	 * i.e. not in quickmode.
 	 * 
 	 * @throws SAXException 
+	 * 		Problem while loading the game.
 	 * @throws ParserConfigurationException 
+	 * 		Problem while loading the game.
 	 * @throws IllegalArgumentException 
+	 * 		Problem while running the game.
 	 * @throws SecurityException 
+	 * 		Problem while loading the game.
 	 * @throws IOException 
+	 * 		Problem while loading the game.
 	 * @throws IllegalAccessException 
+	 * 		Problem while running the game.
 	 * @throws NoSuchFieldException 
+	 * 		Problem while running the game.
 	 * @throws ClassNotFoundException 
+	 * 		Problem while running the game.
 	 */
 	private static void normalLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// splashscreen
@@ -227,13 +244,21 @@ public class Launcher
 	 * interface ({@code quick} option).
 	 * 
 	 * @throws SAXException
+	 * 		Problem while loading the game.
 	 * @throws ParserConfigurationException
+	 * 		Problem while loading the game.
 	 * @throws IllegalArgumentException
+	 * 		Problem while running the game.
 	 * @throws SecurityException
+	 * 		Problem while loading the game.
 	 * @throws IOException
+	 * 		Problem while loading the game.
 	 * @throws IllegalAccessException
+	 * 		Problem while running the game.
 	 * @throws NoSuchFieldException
+	 * 		Problem while running the game.
 	 * @throws ClassNotFoundException
+	 * 		Problem while running the game.
 	 */
 	private static void quickLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// legal
@@ -1675,22 +1700,15 @@ public class Launcher
  * 		- enchainement des tournois (montrer l'évolution des stats, du coup?)
  */
 
-//TODO voir ce qui prend du temps à l'ouverture des stats
-//TODO voir ce qui cause inéluctablement des ralentissements lors du premier round
+//TODO JProfiler:
+//	- voir ce qui prend du temps à l'ouverture des stats
+//	- voir ce qui cause inéluctablement des ralentissements lors du premier round
 
 //TODO auto-advance: afficher un logo qq part pour indiquer ça ?
 
 
-
-//TODO à tester
-//	- reset des stats: remettre l'index du tournoi à zéro
-//	- dans les options IA, les modes AA sont affichés en anglais (mais pas les TTips!)
-//	- reset des stats: faut effacer les fichiers de stats individuelles
-//	- suppresssion de profil: faut effacer les fichiers de stats individuelles
-//	- le jeu n'affiche pas le nom officiel des matches, mais leur numéro (coupe)
-//	- désactivation de l'enchainement auto quand un subpanel est cliqué
-
-
+//TODO bug avec F10
+//TODO compléter document avec nouveaux menus/stats, etc.
 //TODO bug: malgré la désactivation de l'affichage des exceptions, j'ai eu droit à :
 /*
 org.totalboumboum.ai.v201112.adapter.path.LimitReachedException: The search algorithm developped a tree too costly/deep/large according to the predefined limits.
@@ -1709,8 +1727,9 @@ at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 at java.lang.Thread.run(Unknown Source)
 
-> v201112.ais.sakaryasar
 > v201112.ais.arikkoseoglu
+> v201112.ais.demirsazan
+> v201112.ais.gungorkavus
+> v201112.ais.sakaryasar
 > v201011.ais.kayukayildirim
-> gungorkavus
 */
