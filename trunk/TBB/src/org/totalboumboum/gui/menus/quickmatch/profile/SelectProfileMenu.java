@@ -105,7 +105,12 @@ public class SelectProfileMenu extends InnerMenuPanel
 		{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 			Profile profile = profileData.getSelectedProfile();
 			if(profile!=null && !profiles.contains(profile) && !profile.isRemote())
-			{	// check if color is free
+			{	// possibly remove existing profile from selection
+				boolean newSlot = index>=profiles.size();
+				if(!newSlot)
+					profiles.remove(index);
+				
+				// check if color is free
 				PredefinedColor selectedColor = profile.getSpriteColor();
 				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
 					selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
@@ -127,8 +132,8 @@ public class SelectProfileMenu extends InnerMenuPanel
 				}
 				// add to profiles list
 				ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
-				if(index<profiles.size())
-				{	profiles.set(index,profile);
+				if(!newSlot)
+				{	profiles.add(index,profile);
 					// NOTE this would be so much cleaner with an events system...
 					if(connexion!=null)
 						connexion.profileSet(index,profile,null);
