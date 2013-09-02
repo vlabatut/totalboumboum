@@ -106,6 +106,7 @@ public class TimedBomb {
 	} catch (StopRequestException e) {
 		// 
 		//e.printStackTrace();
+		throw new RuntimeException();
 	}
 	
 		if(!TimedBomb.class.isInstance(timedBomb))
@@ -118,12 +119,14 @@ public class TimedBomb {
 			} catch (StopRequestException e) {
 				// 
 				//e.printStackTrace();
+				throw new RuntimeException();
 			}
 			try {
 				condition = condition && this.zone.equals((((TimedBomb)timedBomb).getZone()));
 			} catch (StopRequestException e) {
 				// 
 				//e.printStackTrace();
+				throw new RuntimeException();
 			}
 			if(condition)
 				return true;
@@ -210,6 +213,7 @@ public class TimedBomb {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		result += "/ Release Time:" + this.releaseTime;
 		return result;

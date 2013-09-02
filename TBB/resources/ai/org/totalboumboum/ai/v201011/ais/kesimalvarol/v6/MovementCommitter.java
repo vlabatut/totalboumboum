@@ -596,7 +596,7 @@ public class MovementCommitter {
 										+ target);
 						}
 					} catch (NullPointerException e) {
-						System.out.println("Case Nullptr " + e);
+//						System.out.println("Case Nullptr " + e);
 					}
 				}
 			} catch (LimitReachedException e) {

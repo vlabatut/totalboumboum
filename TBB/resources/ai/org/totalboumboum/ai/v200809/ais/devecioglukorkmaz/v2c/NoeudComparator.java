@@ -47,6 +47,7 @@ public class NoeudComparator implements Comparator<Noeud> {
 				resultat = -1;
 		} catch (StopRequestException e) {
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		return resultat;
 	}

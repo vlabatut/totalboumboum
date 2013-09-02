@@ -207,6 +207,7 @@ public class Noeud {
 		} catch (StopRequestException e) {
 			//  Auto-generated catch block
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		noeud = (Noeud) object;
 		try{
@@ -219,7 +220,8 @@ public class Noeud {
 		}
 		catch(StopRequestException e)
 		{
-			return false;
+			throw new RuntimeException();
+//			return false;
 		}
 	}
 

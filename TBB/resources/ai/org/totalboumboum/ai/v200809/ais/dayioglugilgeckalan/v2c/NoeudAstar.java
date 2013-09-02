@@ -58,6 +58,7 @@ public class NoeudAstar implements Comparator<Noeud> {
 		//  Auto-generated catch block
 		n_1 = 0;
 		n_2 = 0;
+		throw new RuntimeException();
 	}
 	
 	

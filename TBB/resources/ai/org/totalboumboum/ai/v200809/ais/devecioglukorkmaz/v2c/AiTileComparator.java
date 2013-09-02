@@ -46,6 +46,7 @@ public class AiTileComparator implements Comparator<AiTile> {
 				resultat = -1;
 		} catch (StopRequestException e) {
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		return resultat;
 	}

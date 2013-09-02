@@ -96,8 +96,9 @@ public class Node {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
-		return false;
+//		return false;
 	}
 
 	/**

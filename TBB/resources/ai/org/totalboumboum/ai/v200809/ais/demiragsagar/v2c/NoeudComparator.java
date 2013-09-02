@@ -22,6 +22,7 @@ public class NoeudComparator implements Comparator<Node> {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		double n_2=0;
 		try {
@@ -29,6 +30,7 @@ public class NoeudComparator implements Comparator<Node> {
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 
 		if (n_1 < n_2)

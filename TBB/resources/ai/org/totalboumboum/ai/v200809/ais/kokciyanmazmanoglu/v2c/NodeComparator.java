@@ -50,6 +50,7 @@ public class NodeComparator implements Comparator<Node>
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		double val2 = 0;
 		try {
@@ -57,6 +58,7 @@ public class NodeComparator implements Comparator<Node>
 		} catch (StopRequestException e) {
 			// 
 			//e.printStackTrace();
+			throw new RuntimeException();
 		}
 		if(val1<val2)res = -1;
 		else if(val1>val2)res = 1;
@@ -66,6 +68,7 @@ public class NodeComparator implements Comparator<Node>
 			} catch (StopRequestException e) {
 				// 
 				//e.printStackTrace();
+				throw new RuntimeException();
 			}
 			
 		}

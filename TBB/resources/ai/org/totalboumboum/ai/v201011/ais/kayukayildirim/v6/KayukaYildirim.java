@@ -147,7 +147,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 				else
 					result = new AiAction(AiActionName.NONE, this.moveDir);
 			} catch (NullPointerException e) {
-				e.getStackTrace();
+				//e.getStackTrace();
 			}
 
 		}
@@ -167,7 +167,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 					else
 						result = new AiAction(AiActionName.NONE, moveDir);
 				} catch (NullPointerException e) {
-					e.getStackTrace();
+					//e.getStackTrace();
 				}
 			}
 		}
