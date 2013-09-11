@@ -1672,8 +1672,6 @@ public class Launcher
  * 	- plutot qu'évolution : stats joueur par joueur.
  * 		camembert avec les proportion de qui l'a bombé / qui il a bombé
  * TODO >> individual vs. collectif (pr les courbes) 
- * TODO 
- * 		- bouton de colonne dans table sélection : désélectionner tous les joueurs (?)
  */
 
 // TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
@@ -1683,11 +1681,7 @@ public class Launcher
 //			combi avec les touches numériques ? >> pas pratique). 
 //			ou alors avec control droite >> pas possible
 //		>> faire défiler ? (encore moins pratique)
-//		>> utiliser une fenêtre séparée ?
-
-// TODO dégager les threads des agents qui ont été éliminés
-//		>> plus d'appel par le moteur
-//		>> ràz des stats de temps pour les plots ingame
+//		>> utiliser une fenêtre séparée ? > semble être la meilleure solution
 
 // TODO dans les stats d'évolution de la partie, afficher l'occupation processeur
 
@@ -1696,8 +1690,6 @@ public class Launcher
 
 /*
  * articles à écrire sur le blog:
- * 		- pretty bomber
- * 		- évolution des stats globales
  * 		- enchainement des tournois (montrer l'évolution des stats, du coup?)
  */
 
@@ -1705,9 +1697,10 @@ public class Launcher
 //	- voir ce qui prend du temps à l'ouverture des stats
 //	- voir ce qui cause inéluctablement des ralentissements lors du premier round
 
-//TODO auto-advance: afficher un logo qq part pour indiquer ça ?
-
 
 
 //TODO màj des stats Glicko seulement lors des màj du classement? (éviter graphiques en escalier)
 //TODO décider à l'avance de la répartition de tous joueurs dans le tournoi auto ? (pb si des profils sont supprimés/ajoutés)
+//TODO stats confrontations: sélectionner les victoires par défaut
+//TODO rajouter options tournoi auto
+//TODO faire des tests qu'avec 09/10 (p-ê une option de sélection des agents par package pr tournoi auto ?)
