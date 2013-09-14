@@ -33,9 +33,20 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 
+	<xsd:simpleType name="tTournamentAutoAdvanceMode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CONFRONTATIONS" />
+			<xsd:enumeration value="PACK" />
+			<xsd:enumeration value="RANDOM" />
+			<xsd:enumeration value="RANKS" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
 	<xsd:complexType name="tAutoAdvance">
 		<xsd:attribute name="value" type="tAutoAdvanceMode" use="required" />
 		<xsd:attribute name="delay" type="xsd:long" use="required" />
+		<xsd:attribute name="tournament" type="tTournamentAutoAdvanceMode" use="required" />
+		<xsd:attribute name="pack" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tHideAllAis">
