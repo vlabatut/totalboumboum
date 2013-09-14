@@ -151,7 +151,7 @@
 				<text name="Title" value="Intelligences artificielles" tooltip="Modifier les paramètres des IA" />
 				<group name="Line">
 					<group name="AutoAdvance">
-						<text name="Title" value="Enchaînement automatique" tooltip="Enchaîne automatiquement les manches (permet de tester les IA intensément)" />
+						<text name="Title" value="Enchaînement automatique" tooltip="Enchaîne automatiquement les manches (permet de tester les IA de façon intensive)" />
 						<text name="None" value="Désactivé" tooltip="Enchaînement automatique désactivé" />
 						<text name="Simple" value="Simple" tooltip="Finit automatiquement le tournoi en cours" />
 						<text name="Tournament" value="Tournoi" tooltip="Sélectionne les joueurs et répète le tournoi automatiquement" />
@@ -162,6 +162,20 @@
 						<text name="Title" value="Délai d'enchaînement" tooltip="Délai (en secondes) avant l'enchaînement automatique" />
 						<text name="Plus" value="Plus" tooltip="Augmente le délai d'enchaînement" />
 						<text name="Minus" value="Moins" tooltip="Diminue le délai d'enchaînement" />
+					</group>
+					<group name="TournamentAutoAdvanceMode">
+						<text name="Title" value="Mode enchaînement tournoi" tooltip="Mode d'enchaînement automatique des tournois" />
+						<text name="Confrontations" value="Manches" tooltip="Priorité aux agents qui ont joué moins de manches que les autres" />
+						<text name="Pack" value="Pack" tooltip="Priorité aux agents du pack spécifié ci-dessous" />
+						<text name="Random" value="Random" tooltip="Sélection aléatoire des agents" />
+						<text name="Rank" value="Rank" tooltip="Sélection itérative en fonction des classements Glicko-2 des joueurs" />
+						<text name="Next" value="Next" tooltip="Mode d'enchaînement de tournoi suivant" />
+						<text name="Previous" value="Previous" tooltip="Mode d'enchaînement de tournoi précédent" />
+					</group>
+					<group name="TournamentAutoAdvancePack">
+						<text name="Title" value="Pack enchaînement tournoi" tooltip="Pack utilisé pour le mode d'enchainement automatique de tournoi de type pack" />
+						<text name="Next" value="Next" tooltip="Pack suivant" />
+						<text name="Previous" value="Previous" tooltip="Pack précédent" />
 					</group>
 					<group name="Ups">
 						<text name="Title" value="UPS" tooltip="Taux de mise à jour des IA, par seconde" />
