@@ -163,6 +163,20 @@
 						<text name="Plus" value="Plus" tooltip="Increase the delay before auto-advance" />
 						<text name="Minus" value="Minus" tooltip="Decrease the delay before auto-advance" />
 					</group>
+					<group name="TournamentAutoAdvanceMode">
+						<text name="Title" value="Tournament AA Mode" tooltip="Mode used when tournament auto-advance is selected" />
+						<text name="Confrontations" value="Rounds" tooltip="Priority to agents having played less rounds than others" />
+						<text name="Pack" value="Pack" tooltip="Priority to agents from the pack specified below" />
+						<text name="Random" value="Random" tooltip="All players are randomly selected" />
+						<text name="Rank" value="Rank" tooltip="Iteratively selects players with close Glicko-2 rankings" />
+						<text name="Next" value="Next" tooltip="Next tournament auto-advance mode" />
+						<text name="Previous" value="Previous" tooltip="Previous tournament auto-advance mode" />
+					</group>
+					<group name="TournamentAutoAdvancePack">
+						<text name="Title" value="Tournament AA Pack" tooltip="Which pack to use when the tournament auto-advance pack mode is selected" />
+						<text name="Next" value="Next" tooltip="Next pack" />
+						<text name="Previous" value="Previous" tooltip="Previous pack" />
+					</group>
 					<group name="Ups">
 						<text name="Title" value="UPS" tooltip="AI udates per second rate" />
 						<text name="Plus" value="Plus" tooltip="Increase the updates per second rate" />
