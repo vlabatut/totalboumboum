@@ -283,8 +283,10 @@ public abstract class AiAbstractSearchAlgorithm
 	protected int maxHeight = -1;
 	/** Limite de coût (négatif = pas de limite) */
 	protected double maxCost = -1;
-	/** Limite de nombre de noeuds (négatif = pas de limite), pas configurable */
-	protected int maxNodes = 10000;
+	/** Limite de nombre de noeuds par défaut */
+	public int MAX_NODES = 200;
+	/** Limite de nombre de noeuds (négatif = pas de limite) */
+	protected int maxNodes = MAX_NODES;
 	
 	/**
 	 * Limite l'arbre de recherche à une hauteur de {@code maxHeight},
@@ -317,13 +319,36 @@ public abstract class AiAbstractSearchAlgorithm
 	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
 	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite déjà le nombre de noeuds dans l'arbre.
+	 * limite déjà le nombre de noeuds dans la frange.
 	 * 
 	 * @param maxCost	
 	 * 		Le coût maximal que le noeud courant peut atteindre.
 	 */
 	public void setMaxCost(int maxCost)
 	{	this.maxCost = maxCost;
+	}
+		
+	/**
+	 * Limite la taille de la frange, i.e. la file ou la pile de données utilisée par
+	 * l'algorithme de recherche. Dès que la frange courante atteint cette taille maximale, 
+	 * l'algorithme se termine et ne renvoie pas de solution (échec).
+	 * <br/>
+	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
+	 * et la frange aussi, ce qui peut provoquer un dépassement mémoire. Ce paramètre 
+	 * permet d'éviter de déclencher ce type d'exception.
+	 * <br/>
+	 * Ce paramètre est initialisé avec une valeur par défaut de {@link #MAX_NODES}.
+	 * Il n'est pas possible de le modifier pour une valeur plus grande, sinon
+	 * une {@link IllegalArgumentException} est levée. 
+	 * 
+	 * @param maxNodes	
+	 * 		Nombre maximal de noeuds dans la frange.
+	 */
+	public void setMaxNodes(int maxNodes)
+	{	if(maxNodes<=MAX_NODES)
+			this.maxNodes = maxNodes;
+		else
+			throw new IllegalArgumentException("It is forbidden to set a node number limit above the default value ("+MAX_NODES+")");
 	}
 		
 	/////////////////////////////////////////////////////////////////

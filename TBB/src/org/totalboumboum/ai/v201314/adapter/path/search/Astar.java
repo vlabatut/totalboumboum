@@ -259,7 +259,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 			root.updateHeuristic();
 		}
 
-		// file
+		// comparateur de noeuds
 		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
 		{	@Override
 			public int compare(AiSearchNode o1, AiSearchNode o2)
@@ -312,7 +312,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	
 		// initialisation
 		int it = 0;
-		AiPath result = null;
+		AiPath result = new AiPath();
 		AiSearchNode finalNode = null;
 		lastSearchNode = null;
 		boolean found = false;

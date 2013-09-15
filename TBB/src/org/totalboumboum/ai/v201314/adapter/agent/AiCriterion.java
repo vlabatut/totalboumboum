@@ -139,10 +139,10 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * @return
 	 * 		L'ensemble des valeurs possibles pour ce critère.
 	 */
-/*	public Set<Comparable<?>> getDomain()
+	protected Set<U> getDomain()
 	{	return domain;
 	}
-*/	
+	
 	/**
 	 * Indique si le domaine de définition de ce
 	 * critère contient la valeur passée en paramètre.

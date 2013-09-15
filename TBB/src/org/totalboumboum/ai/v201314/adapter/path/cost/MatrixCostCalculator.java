@@ -35,13 +35,20 @@ import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201314.adapter.path.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Classe étendant la classe abstraite {@link CostCalculator} grâce à une matrice de coûts.
  * Ici, le coût pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce coût est égal à la valeur associée à la case dans la matrice
- * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
- * En d'autres termes, le coût d'un déplacement dépend ici uniquement de la case de destination.
+ * de cout fournie. En d'autres termes, le coût d'un déplacement dépend ici uniquement 
+ * de la case de destination.
+ * <br/>
+ * Cette matrice doit faire la même taille que la zone de jeu. De plus, il faut bien noter
+ * que la matrice utilisée lors de l'initialisation n'est pas utilisée telle quelle : elle
+ * est copiée dans ce CostCalculator. En conséquence, toute modification de la matrice
+ * originale n'affectera pas ce CostCalculator (à la différence des versions précédentes
+ * de l'API). 
  * <br/>
  * Cette classe est utile si on veut calculer des coûts plus fins qu'avec BasicCostCalculator,
  * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
@@ -72,7 +79,15 @@ public class MatrixCostCalculator extends CostCalculator
 	 * Initialise la fonction de coût. On doit obligatoirement
 	 * fournir la matrice de cout correspondante.
 	 * <br/>
-	 * <b>Attention :</b> cette matrice doit avoir la même taille que la zone de jeu.
+	 * <b>Attention :</b>cette matrice doit avoir 
+	 * la même taille que la zone de jeu. De plus,
+	 * elle est copiée dans la matrice interne de
+	 * ce {@link CostCalculator} : elle n'est
+	 * pas utilisée telle quelle. Autrement dit, 
+	 * si vous modifiez la matrice originale,
+	 * cela n'influera pas ce CostCalculator.
+	 * (à la différence des versions précédentes
+	 * de l'API).
 	 * 
 	 * @param ai
 	 * 		Agent de référence.
@@ -94,13 +109,33 @@ public class MatrixCostCalculator extends CostCalculator
 	 * Initialise la matrice de coût.
 	 * <br/>
 	 * <b>Attention :</b>cette matrice doit avoir 
-	 * la même taille que la zone de jeu.
+	 * la même taille que la zone de jeu. De plus,
+	 * elle est copiée dans la matrice interne de
+	 * ce {@link CostCalculator} : elle n'est
+	 * pas utilisée telle quelle. Autrement dit, 
+	 * si vous modifiez la matrice originale,
+	 * cela n'influera pas ce CostCalculator
+	 * (à la différence des versions précédentes
+	 * de l'API).
 	 * 
 	 * @param costMatrix	
-	 * 		la matrice de coût
+	 * 		La matrice de coût.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Si l'un des coûts passés en paramètre est négatif.
 	 */
 	public void setCostMatrix(double costMatrix[][])
-	{	this.costMatrix = costMatrix;		
+	{	this.costMatrix = new double[costMatrix.length][costMatrix[0].length];
+		for(int i=0;i<costMatrix.length;i++)
+		{	for(int j=0;j<costMatrix[0].length;j++)
+			{	if(costMatrix[i][j]<0)
+				{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+					throw new IllegalArgumentException("No cost in CostCalculator can be negative ("+color+" player).");
+				}
+				else
+					this.costMatrix[i][j] = costMatrix[i][j];
+			}
+		}
 	}
 	
 	/**
@@ -112,9 +147,17 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 		Colonne de la case à mettre à jour.
 	 * @param cost	
 	 * 		Nouveau coût à affecter.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Si le coût passé en paramètre est négatif.
 	 */
 	public void setCost(int row, int col, double cost)
-	{	costMatrix[row][col] = cost;
+	{	if(cost<0)
+		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
+			throw new IllegalArgumentException("No cost in CostCalculator can be negative ("+color+" player).");
+		}
+		else
+			costMatrix[row][col] = cost;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -123,6 +166,7 @@ public class MatrixCostCalculator extends CostCalculator
 	/** 
 	 * La case de départ n'est pas considérée, on renvoie seulement la valeur
 	 * correspondant à la case d'arrivée dans la matrice de coût.
+	 * <br/>
 	 * <b>ATTENTION :</b> si la matrice de coût est trop petite, la valeur maximale
 	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
 	 * d'avertissement est affiché dans la sortie standard d'erreur.

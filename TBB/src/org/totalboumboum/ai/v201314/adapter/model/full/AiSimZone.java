@@ -285,28 +285,39 @@ public final class AiSimZone extends AiZone
 	public AiSimTile getNeighborTile(int row, int col, Direction direction)
 	{	if(direction.isComposite())
 		{	PredefinedColor color = ownHero.getColor();
-			throw new IllegalArgumentException("method getNeighborTile does not handle composite directions ("+color+" player).");
+				throw new IllegalArgumentException("method getNeighborTile does not handle composite directions ("+color+" player).");
 		}
+//		else if(direction==Direction.NONE)
+//		{	PredefinedColor color = ownHero.getColor();
+//				throw new IllegalArgumentException("method getNeighborTile does not handle direction NONE ("+color+" player).");
+//		}
 	
 		AiSimTile result;
-		int c,l;
-		Direction p[] = direction.getPrimaries(); 
-
-		if(p[0]==Direction.LEFT)
-			c = (col+width-1)%width;
-		else if(p[0]==Direction.RIGHT)
-			c = (col+1)%width;
+		
+		if(direction==Direction.NONE)
+			result = matrix[row][col];
+		
 		else
-			c = col;
-
-		if(p[1]==Direction.UP)
-			l = (row+height-1)%height;
-		else if(p[1]==Direction.DOWN)
-			l = (row+1)%height;
-		else
-			l = row;
-
-		result = matrix[l][c];
+		{	int c,l;
+			Direction p[] = direction.getPrimaries(); 
+	
+			if(p[0]==Direction.LEFT)
+				c = (col+width-1)%width;
+			else if(p[0]==Direction.RIGHT)
+				c = (col+1)%width;
+			else
+				c = col;
+	
+			if(p[1]==Direction.UP)
+				l = (row+height-1)%height;
+			else if(p[1]==Direction.DOWN)
+				l = (row+1)%height;
+			else
+				l = row;
+	
+			result = matrix[l][c];
+		}
+		
 		return result;
 	}
 

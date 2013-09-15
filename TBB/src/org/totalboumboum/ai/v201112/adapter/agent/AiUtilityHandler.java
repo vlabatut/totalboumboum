@@ -193,15 +193,17 @@ public abstract class AiUtilityHandler<T extends ArtificialIntelligence> extends
 			print("        < combination="+combination);
 			
 			// on calcule la valeur d'utilité correspondant à cette combinaison (en fonction de son rang)
-			float utility = referenceUtilities.get(combination);
+			Integer utility = referenceUtilities.get(combination);
+			if(utility==null)
+				throw new NullPointerException("There is no utility value defined for combination "+combination+"). There should be one!");
 			print("        Result: utility="+utility);
 			
 			// on la rajoute dans les structures
-			utilitiesByTile.put(tile,utility);
+			utilitiesByTile.put(tile,new Float(utility));
 			List<AiTile> tiles = utilitiesByValue.get(utility);
 			if(tiles==null)
 			{	tiles = new ArrayList<AiTile>();
-				utilitiesByValue.put(utility,tiles);
+				utilitiesByValue.put(new Float(utility),tiles);
 			}
 			tiles.add(tile);
 			print("      < Tile "+tile+" processing finished");
