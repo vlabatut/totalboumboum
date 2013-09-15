@@ -168,7 +168,7 @@
 						<text name="Confrontations" value="Manches" tooltip="Priorité aux agents qui ont joué moins de manches que les autres" />
 						<text name="Pack" value="Pack" tooltip="Priorité aux agents du pack spécifié ci-dessous" />
 						<text name="Random" value="Random" tooltip="Sélection aléatoire des agents" />
-						<text name="Rank" value="Rank" tooltip="Sélection itérative en fonction des classements Glicko-2 des joueurs" />
+						<text name="Ranks" value="Ranks" tooltip="Sélection itérative en fonction des classements Glicko-2 des joueurs" />
 						<text name="Next" value="Next" tooltip="Mode d'enchaînement de tournoi suivant" />
 						<text name="Previous" value="Previous" tooltip="Mode d'enchaînement de tournoi précédent" />
 					</group>
