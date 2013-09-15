@@ -33,6 +33,7 @@ import java.util.Set;
 
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
+import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.sets.SetTools;
 
@@ -67,6 +68,12 @@ import org.totalboumboum.tools.sets.SetTools;
  * d'une même itération. Afin de ne pas les recalculer à chaque fois, ils sont
  * donc stockés en mémoire, dans une structure qui est réinitialisée à chaque
  * itération.
+ * <br/>
+ * Les préférences elles-mêmes sont stockées dans un fichier XML spécifique.
+ * L'ordre des combinaisons dans ce fichier détermine directement leur préférence.
+ * Ainsi, la première combinaison est la préférée et la dernière est la moins préférée.
+ * Par conséquent, une valeur minimale correspond à une préférence maximale, au contraire
+ * des années précédentes.
  * 
  * @param <T> 
  * 		Classe de l'agent.
@@ -223,10 +230,15 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 		// on sélectionne les cases dont on veut calculer la préférence
 		long before = print("    > Entering selectTiles");
 		ArrayList<AiTile> selectedTiles = new ArrayList<AiTile>(selectTiles());
-		Collections.shuffle(selectedTiles); // on désordonne les cases pour introduire du hasard
+		Collections.shuffle(selectedTiles); // on mélange les cases pour forcer l'introduction de hasard
 		long after = ai.getCurrentTime();
 		long elapsed = after - before;
 		print("    < Exiting selectTiles duration="+elapsed+" number="+selectedTiles.size());
+		
+		// on en déduit les cases non-sélectionnées
+		AiZone zone = ai.getZone();
+		List<AiTile> nonSelectedTiles = new ArrayList<AiTile>(zone.getTiles());
+		nonSelectedTiles.removeAll(selectedTiles);
 		
 		// on calcule la préférence de chaque case
 		before = print("    > Processing each tile");
@@ -262,6 +274,15 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			tiles.add(tile);
 			print("      < Tile "+tile+" processing finished");
 		}
+		
+		// on complete les maps avec les cases filtrées 
+		// (qui reçoivent automatiquement la pire valeur de préférence : k pour une table de k combinaisons)
+		List<AiCombination> reference = referencePreferences.get(mode);
+		int worstPref = reference.size();
+		preferencesByValue.put(worstPref,nonSelectedTiles);
+		for(AiTile tile: nonSelectedTiles)
+			preferencesByTile.put(tile,worstPref);
+		
 		after = ai.getCurrentTime();
 		elapsed = after - before;
 		print("    < Tile processing finished duration="+elapsed);
@@ -272,7 +293,10 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * car il n'est pas forcément nécessaire de calculer
 	 * la préférence de chacune d'entre elles. Dans la méthode
 	 * {@link #update()}, la préférence sera calculée seulement
-	 * pour cette sélection.
+	 * pour cette sélection. Les cases non sélectionnées ont
+	 * automatiquement la pire préférence possible, i.e. pour
+	 * une table de k combinaisons, la valeur k (la meilleure étant
+	 * la valeur 0).
 	 * 
 	 * @return
 	 * 		L'ensemble des cases dont on veut calculer la préférence.
@@ -512,7 +536,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	final void insertCombination(AiMode mode, AiCombination combination) throws IllegalArgumentException
 	{	List<AiCombination> list = referencePreferences.get(mode);
 		if(list.contains(combination))
-			throw new IllegalArgumentException("Trying to insert combination '"+combination+"' for mode '"+mode+"', but this combination is already present (a combination cannot appear twice in the preferences).");
+			throw new IllegalArgumentException("Trying to insert combination '"+combination+"' for mode '"+mode+"', but this combination is already present (a combination cannot appear twice in the preferences for a give mode).");
 		list.add(combination);
 	}
 	
@@ -544,7 +568,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	
 	/**
 	 * Vérifie que les combinaisons stockées dans la table
-	 * de préférences sont complètes, i.e. que chaque combinaison
+	 * de préférence sont complètes, i.e. que chaque combinaison
 	 * possible pour tous les cas et tous les modes est bien
 	 * représentée dans la table. En cas de combinaison manquante,
 	 * il faut compléter le fichier XML correspondant à l'agent concerné.
