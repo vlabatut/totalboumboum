@@ -20,10 +20,10 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<ups value="50" />
-	<autoAdvance value="TOURNAMENT" delay="3000" />
+	<autoAdvance value="TOURNAMENT" delay="3000" tournament="RANKS" pack="v200910" />
 	<hideAllAis value="false" />
 	<bombUselessAis value="3000" />
-	<displayExceptions value="false" />
+	<displayExceptions value="true" />
 	<logExceptions value="false" />
 </ais>
 
