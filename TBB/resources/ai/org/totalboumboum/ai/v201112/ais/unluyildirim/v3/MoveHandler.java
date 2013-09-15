@@ -31,7 +31,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 @SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 	/** */
-	AiTile hero_destination = null;
+	AiTile heroDestination = null;
 	/** */
 	Boolean isBombing = false;
 	/** */
@@ -91,12 +91,14 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 		AiTile safe_tile = null;
 		{
 			ai.checkInterruption();
-            float utility = it1.next();
-			List<AiTile> tiles = utilitiesByValue.get(utility);
-			hero_destination = tiles.get(0);
+			if(it1.hasNext())
+            {	float utility = it1.next();
+				List<AiTile> tiles = utilitiesByValue.get(utility);
+				heroDestination = tiles.get(0);
+            }
 		}
 
-		if ((isDangerous(hero_tile) || isDangerous(hero_destination) || !hero_tile.getBombs().isEmpty()) && safe_tile==null  ) {
+		if ((isDangerous(hero_tile) || isDangerous(heroDestination) || !hero_tile.getBombs().isEmpty()) && safe_tile==null  ) {
 
 			AiLocation startLocation = new AiLocation(myhero);
 			{
@@ -175,7 +177,7 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 
 		else {
 			
-			if (hero_destination == hero_tile)
+			if (heroDestination == hero_tile)
 
 			{// Si l'agent a arrivé le destination , il retourne NONE.
 
@@ -186,8 +188,10 @@ public class MoveHandler extends AiMoveHandler<UnluYildirim> {
 			} else {
 				
 				try {
-					
-					hero_path = astar.processShortestPath(hero_location,hero_destination);
+					if(heroDestination!=null)
+						hero_path = astar.processShortestPath(hero_location,heroDestination);
+					else
+						return Direction.NONE;
 				} catch (LimitReachedException e) { // e.printStackTrace();
 				}
 

@@ -293,7 +293,7 @@ criteria.add(criterionSecond);
 		
 		//  à compléter pour identifier le cas associé
 		// à la case passée en paramètre
-		
+		result = cases.get("CASE_BONUS");
 		// cf. la Javadoc dans AiUtilityHandler pour une description de la méthode
 		
 		return result;

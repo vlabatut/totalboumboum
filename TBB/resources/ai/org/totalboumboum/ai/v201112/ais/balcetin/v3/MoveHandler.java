@@ -55,34 +55,32 @@ public class MoveHandler extends AiMoveHandler<BalCetin> {
 
 		AiTile destTile = null;
 
+		AiLocation myLoc = new AiLocation(this.ai.getZone().getOwnHero()
+				.getTile());
+		AiPath path = null;
+
+		CostCalculator costCalculator = new TimeCostCalculator(ai, ai
+				.getZone().getOwnHero());
+		costCalculator.setOpponentCost(1000);
+		HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(
+				ai, ai.getZone().getOwnHero());
+		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(
+				ai, TimePartialSuccessorCalculator.MODE_NOTREE);
+		astar = new Astar(ai, ai.getZone().getOwnHero(), costCalculator,
+				heuristicCalculator, successorCalculator);
+
 		try {
-			AiLocation myLoc = new AiLocation(this.ai.getZone().getOwnHero()
-					.getTile());
-			AiPath path = null;
+			path = astar.processShortestPath(myLoc, tp.getBestTile());
 
-			CostCalculator costCalculator = new TimeCostCalculator(ai, ai
-					.getZone().getOwnHero());
-			costCalculator.setOpponentCost(1000);
-			HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(
-					ai, ai.getZone().getOwnHero());
-			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(
-					ai, TimePartialSuccessorCalculator.MODE_NOTREE);
-			astar = new Astar(ai, ai.getZone().getOwnHero(), costCalculator,
-					heuristicCalculator, successorCalculator);
-
-			try {
-				path = astar.processShortestPath(myLoc, tp.getBestTile());
-
-			} catch (LimitReachedException e) {
-				return Direction.NONE;
-			}
-			if (path.getLength() > 1) {
-				destTile = path.getLocation(1).getTile();
-			} else
-				destTile = path.getLocation(0).getTile();
-		} catch (NullPointerException e) {
-			//
+		} catch (LimitReachedException e) {
+			return Direction.NONE;
 		}
+		if(path==null)
+			return Direction.NONE;
+		else if (path.getLength() > 1) {
+			destTile = path.getLocation(1).getTile();
+		} else
+			destTile = path.getLocation(0).getTile();
 
 		// if there is no destination.Stay still.
 		if (destTile == null) {

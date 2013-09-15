@@ -305,28 +305,14 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir>
 		{
 			combiC = new AiUtilityCombination( CasVoisinageMurDest );
 			combiC.setCriterionValue( duree, false );
-			combiC.setCriterionValue( securite, false );
-			combiC.setCriterionValue( nombreDeMurs, 3 );
-			referenceUtilities.put( combiC, 11 );
-		}
-		{
-			combiC = new AiUtilityCombination( CasVoisinageMurDest );
-			combiC.setCriterionValue( duree, false );
 			combiC.setCriterionValue( securite, true );
 			combiC.setCriterionValue( nombreDeMurs, 2 );
 			referenceUtilities.put( combiC, 14 );
 		}
 		{
 			combiC = new AiUtilityCombination( CasVoisinageMurDest );
-			combiC.setCriterionValue( duree, true );
-			combiC.setCriterionValue( securite, false );
-			combiC.setCriterionValue( nombreDeMurs, 3 );
-			referenceUtilities.put( combiC, 18 );
-		}
-		{
-			combiC = new AiUtilityCombination( CasVoisinageMurDest );
 			combiC.setCriterionValue( duree, false );
-			combiC.setCriterionValue( securite, true );
+			combiC.setCriterionValue( securite, false );
 			combiC.setCriterionValue( nombreDeMurs, 2 );
 			referenceUtilities.put( combiC, 19 );
 		}
@@ -336,6 +322,20 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir>
 			combiC.setCriterionValue( securite, true );
 			combiC.setCriterionValue( nombreDeMurs, 2 );
 			referenceUtilities.put( combiC, 22 );
+		}
+		{
+			combiC = new AiUtilityCombination( CasVoisinageMurDest );
+			combiC.setCriterionValue( duree, false );
+			combiC.setCriterionValue( securite, false );
+			combiC.setCriterionValue( nombreDeMurs, 3 );
+			referenceUtilities.put( combiC, 11 );
+		}
+		{
+			combiC = new AiUtilityCombination( CasVoisinageMurDest );
+			combiC.setCriterionValue( duree, true );
+			combiC.setCriterionValue( securite, false );
+			combiC.setCriterionValue( nombreDeMurs, 3 );
+			referenceUtilities.put( combiC, 18 );
 		}
 		{
 			combiC = new AiUtilityCombination( CasVoisinageMurDest );
@@ -493,15 +493,15 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir>
 		ai.checkInterruption();
 		AiUtilityCase result = null;
 		int heroCount = 0;
-		ColPertinence colPertinence = new ColPertinence( ai );
-		Duree duree = new Duree( ai );
-		Securite securite = new Securite( ai );
-		NonConcurrence nonConcurrence = new NonConcurrence( ai );
-		NombreDeMurs nombreDeMurs = new NombreDeMurs( ai );
-		AttaPertinence attaPertinence = new AttaPertinence( ai );
-		AvancePertinence avancePertinence = new AvancePertinence( ai );
-		BestPertinence bestPertinence = new BestPertinence( ai );
-		AvanceItem avanceItem = new AvanceItem( ai );
+//		ColPertinence colPertinence = new ColPertinence( ai );
+//		Duree duree = new Duree( ai );
+//		Securite securite = new Securite( ai );
+//		NonConcurrence nonConcurrence = new NonConcurrence( ai );
+//		NombreDeMurs nombreDeMurs = new NombreDeMurs( ai );
+//		AttaPertinence attaPertinence = new AttaPertinence( ai );
+//		AvancePertinence avancePertinence = new AvancePertinence( ai );
+//		BestPertinence bestPertinence = new BestPertinence( ai );
+//		AvanceItem avanceItem = new AvanceItem( ai );
 
 		int count = HERO_COUNT;
 
@@ -531,28 +531,30 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir>
 		{
 			if ( !tile.getItems().isEmpty() )
 			{
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add( colPertinence );
-				criteria.add( duree );
-				criteria.add( securite );
-				criteria.add( nonConcurrence );
-				result = new AiUtilityCase( ItemVisible, criteria );
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add( colPertinence );
+//				criteria.add( duree );
+//				criteria.add( securite );
+//				criteria.add( nonConcurrence );
+//				result = new AiUtilityCase( ItemVisible, criteria );
+				result = cases.get(ItemVisible);
 			}
 
 			else if ( count != HERO_COUNT )
 			{
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add( duree );
-				criteria.add( securite );
-				criteria.add( nombreDeMurs );
-				result = new AiUtilityCase( VoisinageMurDest, criteria );
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add( duree );
+//				criteria.add( securite );
+//				criteria.add( nombreDeMurs );
+//				result = new AiUtilityCase( VoisinageMurDest, criteria );
+				result = cases.get(VoisinageMurDest);
 			}
 			else
 			{
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add( nombreDeMurs );
-				result = new AiUtilityCase( cNull, criteria );
-
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add( nombreDeMurs );
+//				result = new AiUtilityCase( cNull, criteria );
+				result = cases.get(cNull);
 			}
 
 		}
@@ -569,20 +571,21 @@ public class UtilityHandler extends AiUtilityHandler<CoskunOzdemir>
 			if ( heroCount > NEAR_ENEMY_HERO_COUNT_LIMIT )
 			{
 
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add( bestPertinence );
-				criteria.add( attaPertinence );
-				criteria.add( securite );
-				result = new AiUtilityCase( QuartierEnnemi, criteria );
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add( bestPertinence );
+//				criteria.add( attaPertinence );
+//				criteria.add( securite );
+//				result = new AiUtilityCase( QuartierEnnemi, criteria );
+				result = cases.get(QuartierEnnemi);
 			}
 			else
 			{
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add( securite );
-				criteria.add( avancePertinence );
-				criteria.add( avanceItem );
-				result = new AiUtilityCase( AvanceEnnemi, criteria );
-
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add( securite );
+//				criteria.add( avancePertinence );
+//				criteria.add( avanceItem );
+//				result = new AiUtilityCase( AvanceEnnemi, criteria );
+				result = cases.get(AvanceEnnemi);
 			}
 
 		}

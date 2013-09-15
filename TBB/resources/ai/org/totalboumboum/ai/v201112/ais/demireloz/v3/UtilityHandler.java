@@ -467,12 +467,12 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 
 		AiUtilityCase result = null;
 
-		Time time = new Time(ai);
-		Convenience convenience = new Convenience(ai);
-		Competition competition = new Competition(ai);
-		NbrAdjacentWall nbradjacentwall = new NbrAdjacentWall(ai);
-		IsEnemyReachable isenemyreachable = new IsEnemyReachable(ai);
-		Danger danger = new Danger(ai);
+//		Time time = new Time(ai);
+//		Convenience convenience = new Convenience(ai);
+//		Competition competition = new Competition(ai);
+//		NbrAdjacentWall nbradjacentwall = new NbrAdjacentWall(ai);
+//		IsEnemyReachable isenemyreachable = new IsEnemyReachable(ai);
+//		Danger danger = new Danger(ai);
 
 		boolean herocontrol = true;
 		// We control if we have enemies in the list of tiles returned by
@@ -496,13 +496,12 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 			// Visible item identification
 			if (tile.getItems().contains(AiItemType.EXTRA_BOMB)
 					|| tile.getItems().contains(AiItemType.EXTRA_FLAME)) {
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-
-				criteria.add(time);
-				criteria.add(convenience);
-				criteria.add(competition);
-
-				return result = new AiUtilityCase(caseName1, criteria);
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add(time);
+//				criteria.add(convenience);
+//				criteria.add(competition);
+//				return result = new AiUtilityCase(caseName1, criteria);
+				return cases.get(caseName1);
 			}
 
 			for (Direction direction : Direction.getPrimaryValues()) {
@@ -512,10 +511,11 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 				boolean value = this.ai.getWallInDanger(currentNeighbor);
 				// Destructible wall in danger identification
 				if (value) {
-					Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-					criteria.add(time);
-					criteria.add(competition);
-					return result = new AiUtilityCase(caseName2, criteria);
+//					Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//					criteria.add(time);
+//					criteria.add(competition);
+//					return result = new AiUtilityCase(caseName2, criteria);
+					return cases.get(caseName2);
 				}
 
 			}
@@ -527,21 +527,23 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 					ai.checkInterruption();
 					// Destructible wall identification
 					if (currentBlock.isDestructible()) {
-						Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-						criteria = new TreeSet<AiUtilityCriterion<?>>();
-						criteria.add(time);
-						criteria.add(nbradjacentwall);
-						return result = new AiUtilityCase(caseName3, criteria);
+//						Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//						criteria = new TreeSet<AiUtilityCriterion<?>>();
+//						criteria.add(time);
+//						criteria.add(nbradjacentwall);
+//						return result = new AiUtilityCase(caseName3, criteria);
+						return cases.get(caseName3);
 					}
 				}
 			}
 
 			{
 				// Dumb tile collect identification
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add(time);
-				return result = new AiUtilityCase(caseName4, criteria);
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add(time);
+//				return result = new AiUtilityCase(caseName4, criteria);
+				return cases.get(caseName4);
 			}
 
 		}
@@ -550,19 +552,21 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 		if (mode == AiMode.ATTACKING) {
 			// Block enemy identification
 			if (this.ai.simBlock(tile)) {
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add(danger);
-				return result = new AiUtilityCase(caseName5, criteria);
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add(danger);
+//				return result = new AiUtilityCase(caseName5, criteria);
+				return cases.get(caseName5);
 			}
 			// Tile in range of an enemy identification
 			for (Direction direction : Direction.getPrimaryValues()) {
 				ai.checkInterruption();
 				if (this.ai.getAnEnemyInMyRange(tile, direction, 0)) {
-					Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-					criteria = new TreeSet<AiUtilityCriterion<?>>();
-					criteria.add(nbradjacentwall);
-					criteria.add(danger);
-					return result = new AiUtilityCase(caseName6, criteria);
+//					Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//					criteria = new TreeSet<AiUtilityCriterion<?>>();
+//					criteria.add(nbradjacentwall);
+//					criteria.add(danger);
+//					return result = new AiUtilityCase(caseName6, criteria);
+					return cases.get(caseName6);
 				}
 			}
 
@@ -571,21 +575,21 @@ public class UtilityHandler extends AiUtilityHandler<DemirelOz> {
 				ai.checkInterruption();
 				if (herocontrol
 						&& this.ai.controlOfDestructibleBlock(tile, direction) == true) {
-
-					Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-
-					criteria = new TreeSet<AiUtilityCriterion<?>>();
-					criteria.add(isenemyreachable);
-					criteria.add(time);
-					return result = new AiUtilityCase(caseName8, criteria);
+//					Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//					criteria = new TreeSet<AiUtilityCriterion<?>>();
+//					criteria.add(isenemyreachable);
+//					criteria.add(time);
+//					return result = new AiUtilityCase(caseName8, criteria);
+					return cases.get(caseName8);
 				}
 			}
 			// Dumb tile attack identification
 			{
-				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add(time);
-				return result = new AiUtilityCase(caseName7, criteria);
+//				Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add(time);
+//				return result = new AiUtilityCase(caseName7, criteria);
+				return cases.get(caseName7);
 			}
 		}
 

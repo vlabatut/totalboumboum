@@ -37,17 +37,19 @@ public class HeroProcess {
 	 */
 	public AiHero getWorstHero() throws StopRequestException {
 		ai.checkInterruption();
+		AiHero targetHero = null;
 		AiZone zone = ai.getZone();
 		List<AiHero> opponentHeros = zone.getRemainingOpponents();
-		AiHero targetHero = opponentHeros.get(0);
-		for (int i = 1; i < opponentHeros.size(); i++) {
-			ai.checkInterruption();
-			if (opponentHeros.get(i).getMatchRank() > targetHero.getMatchRank())
-				targetHero = opponentHeros.get(i);
+		if(opponentHeros!=null && !opponentHeros.isEmpty())
+		{	targetHero = opponentHeros.get(0);
+			for (int i = 1; i < opponentHeros.size(); i++) {
+				ai.checkInterruption();
+				if (opponentHeros.get(i).getMatchRank() > targetHero.getMatchRank())
+					targetHero = opponentHeros.get(i);
+			}
 		}
-
+		
 		return targetHero;
-
 	}
 
 	/**

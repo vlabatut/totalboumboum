@@ -379,12 +379,15 @@ public class TileOperation
 		double distance = Double.MAX_VALUE;
 		AiTile result = null;
 		for ( AiTile currentTile : this.getAccessibleDestructibleWallTiles( this.ai.getHero().getTile() ) )
-		{
-			ai.checkInterruption();
-			if ( this.getDistanceBetween( currentTile, this.getClosestEnemy().getTile() ) < distance )
-			{
-				result = currentTile;
-				distance = this.getDistanceBetween( currentTile, this.getClosestEnemy().getTile() );
+		{	ai.checkInterruption();
+			AiHero cl = this.getClosestEnemy();
+			if(cl!=null)
+			{	AiTile enTile = cl.getTile();
+				double distance0 = this.getDistanceBetween(currentTile, enTile );
+				if (distance0  < distance )
+				{	result = currentTile;
+					distance = distance0;
+				}
 			}
 		}
 		return result;
