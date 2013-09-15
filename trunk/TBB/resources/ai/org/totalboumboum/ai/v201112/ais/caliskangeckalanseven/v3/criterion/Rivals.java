@@ -1,10 +1,9 @@
 package org.totalboumboum.ai.v201112.ais.caliskangeckalanseven.v3.criterion;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
@@ -85,7 +84,7 @@ public class Rivals extends AiUtilityCriterionBoolean
 	{	ai.checkInterruption();
 		boolean result = false;
 		Collection<AiBlock> blocks = zone.getBlocks();
-		Set<AiTile> heroesTiles = new TreeSet<AiTile>();
+		List<AiTile> heroesTiles = new ArrayList<AiTile>();
 		List<AiHero> remainingHeroes = zone.getRemainingOpponents();
 		Iterator<AiHero> it = remainingHeroes.iterator();
 		while(it.hasNext()) {
@@ -97,11 +96,11 @@ public class Rivals extends AiUtilityCriterionBoolean
 		if(heroesTiles.size()>0)  {
 			if(heroesTiles.contains(tile))
 				return true;
-			Iterator<AiTile> it2 = heroesTiles.iterator();
+			int v = 0;
 			int k = ownHero.getBombRange();
-			while (it2.hasNext()) {
+			while (v<heroesTiles.size()) {
 				ai.checkInterruption();
-				AiTile tempTile = it2.next();
+				AiTile tempTile = heroesTiles.get(v);
 				AiTile tempTile2 = tempTile;
 				int i = 0;
 				while (i < k && !blocks.contains(tempTile)) {
@@ -109,7 +108,8 @@ public class Rivals extends AiUtilityCriterionBoolean
 					AiTile tile2 = tempTile.getNeighbor(Direction.DOWN);
 					tempTile = tile2;
 					if (!blocks.contains(tile2)) {
-						heroesTiles.add(tile2);
+						if(!heroesTiles.contains(tile2))
+							heroesTiles.add(tile2);
 					} else
 						break;
 					i++;
@@ -121,7 +121,8 @@ public class Rivals extends AiUtilityCriterionBoolean
 					AiTile tile2 = tempTile.getNeighbor(Direction.UP);
 					tempTile = tile2;
 					if (!blocks.contains(tile2)) {
-						heroesTiles.add(tile2);
+						if(!heroesTiles.contains(tile2))
+							heroesTiles.add(tile2);
 					} else
 						break;
 					i++;
@@ -133,7 +134,8 @@ public class Rivals extends AiUtilityCriterionBoolean
 					AiTile tile2 = tempTile.getNeighbor(Direction.RIGHT);
 					tempTile = tile2;
 					if (!blocks.contains(tile2)) {
-						heroesTiles.add(tile2);
+						if(!heroesTiles.contains(tile2))
+							heroesTiles.add(tile2);
 					} else
 						break;
 					i++;
@@ -145,7 +147,8 @@ public class Rivals extends AiUtilityCriterionBoolean
 					AiTile tile2 = tempTile.getNeighbor(Direction.LEFT);
 					tempTile = tile2;
 					if (!blocks.contains(tile2)) {
-						heroesTiles.add(tile2);
+						if(!heroesTiles.contains(tile2))
+							heroesTiles.add(tile2);
 					} else
 						break;
 					i++;
@@ -157,9 +160,6 @@ public class Rivals extends AiUtilityCriterionBoolean
 				return true;
 		}
 		
-		
-		
 		return result;
 	}
-
 }

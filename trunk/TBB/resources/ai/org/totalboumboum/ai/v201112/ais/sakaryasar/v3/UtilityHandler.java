@@ -114,11 +114,13 @@ public class UtilityHandler extends AiUtilityHandler<SakarYasar>
 		criteria.add(crPertinance);
 		criteria.add(crEnemies);
 		AiUtilityCase case1 = new AiUtilityCase(caseName1,criteria);
+		cases.put(caseName1,case1);
 
 		criteria = new TreeSet<AiUtilityCriterion<?>>();
 		criteria.add(crDanger);
 		criteria.add(crWalls);
 		AiUtilityCase case2 = new AiUtilityCase(caseName2,criteria);
+		cases.put(caseName2,case2);
 		
 		criteria = new TreeSet<AiUtilityCriterion<?>>();
 		criteria.add(crDanger);
@@ -126,8 +128,7 @@ public class UtilityHandler extends AiUtilityHandler<SakarYasar>
 		criteria.add(crEnemyDirection);
 		criteria.add(crWalls);
 		AiUtilityCase case3 = new AiUtilityCase(caseName3,criteria);
-
-		cases.put(caseName1,case1);
+		cases.put(caseName3,case3);
 		
 		int utility = 10;
 		AiUtilityCombination combi;
@@ -468,39 +469,42 @@ public class UtilityHandler extends AiUtilityHandler<SakarYasar>
 	{	
 		ai.checkInterruption();
 
-		AiUtilityCase result ;
+		AiUtilityCase result = cases.get(caseName1);
 		
 
-		CriterionPertinance crPertinance = new CriterionPertinance(ai);
-		CriterionChaineReaction crReaction = new CriterionChaineReaction(ai);
-		CriterionDanger crDanger = new CriterionDanger(ai);
-		CriterionDestructibleWalls crWalls = new CriterionDestructibleWalls(ai);
-		CriterionEnemies  crEnemies = new CriterionEnemies(ai);
-		CriterionEnemyDirection crEnemyDirection = new CriterionEnemyDirection(ai);
+//		CriterionPertinance crPertinance = new CriterionPertinance(ai);
+//		CriterionChaineReaction crReaction = new CriterionChaineReaction(ai);
+//		CriterionDanger crDanger = new CriterionDanger(ai);
+//		CriterionDestructibleWalls crWalls = new CriterionDestructibleWalls(ai);
+//		CriterionEnemies  crEnemies = new CriterionEnemies(ai);
+//		CriterionEnemyDirection crEnemyDirection = new CriterionEnemyDirection(ai);
 		
-		Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
+//		Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
 		if(ai.getModeHandler().getMode() == AiMode.COLLECTING){
 
 			if(!tile.getItems().isEmpty()){
-				criteria.add(crDanger);
-				criteria.add(crPertinance);
-				criteria.add(crEnemies);
-				result = new AiUtilityCase(caseName1,criteria);
+//				criteria.add(crDanger);
+//				criteria.add(crPertinance);
+//				criteria.add(crEnemies);
+//				result = new AiUtilityCase(caseName1,criteria);
+				result = cases.get(caseName1);
 			}
 			else{
-				criteria = new TreeSet<AiUtilityCriterion<?>>();
-				criteria.add(crDanger);
-				criteria.add(crWalls);
-				result = new AiUtilityCase(caseName2,criteria);
+//				criteria = new TreeSet<AiUtilityCriterion<?>>();
+//				criteria.add(crDanger);
+//				criteria.add(crWalls);
+//				result = new AiUtilityCase(caseName2,criteria);
+				result = cases.get(caseName2);
 			}
 		}
 		else{
-			criteria = new TreeSet<AiUtilityCriterion<?>>();
-			criteria.add(crDanger);
-			criteria.add(crReaction);
-			criteria.add(crEnemyDirection);
-			criteria.add(crWalls);
-			result = new AiUtilityCase(caseName3,criteria);
+//			criteria = new TreeSet<AiUtilityCriterion<?>>();
+//			criteria.add(crDanger);
+//			criteria.add(crReaction);
+//			criteria.add(crEnemyDirection);
+//			criteria.add(crWalls);
+//			result = new AiUtilityCase(caseName3,criteria);
+			result = cases.get(caseName3);
 		}
 
 		return result;

@@ -82,7 +82,7 @@ public class PathOperation
 	protected AiPath getShortestPath( AiHero hero, AiTile endTile ) throws StopRequestException
 	{
 		ai.checkInterruption();
-		AiPath path;
+		AiPath path = new AiPath();
 		CostCalculator costCalculator = new TimeCostCalculator( ai, this.ai.getHero() );
 		costCalculator.setOpponentCost( ASTAR_COST );
 		HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator( ai, this.ai.getHero() );
@@ -92,15 +92,17 @@ public class PathOperation
 		AiLocation loc = new AiLocation( hero.getTile() );
 
 		// Shortest path calculation
-		try
-		{
-			path = astarPrecise.processShortestPath( loc, endTile );
+		if(endTile!=null)
+		{	try
+			{
+				path = astarPrecise.processShortestPath( loc, endTile );
+			}
+			catch ( LimitReachedException e )
+			{	
+				path = new AiPath();
+				path.addLocation( new AiLocation( this.ai.getHero().getTile() ) );
+			}
 		}
-		catch ( LimitReachedException e )
-		{
-			path = new AiPath();
-			path.addLocation( new AiLocation( this.ai.getHero().getTile() ) );
-		}	
 		return path;
 	}
 
@@ -138,17 +140,20 @@ public class PathOperation
 	 * 		description manquante !
 	 */
 	protected AiTile getNextTileOnPath( AiHero hero, AiTile endTile ) throws StopRequestException
-	{
-		ai.checkInterruption();
-		if ( hero.getTile().equals( endTile ) ) return hero.getTile();
-		try
-		{
-			return this.getShortestPath( hero, endTile ).getLocation( NEXT_TILE_INDEX ).getTile();
+	{	ai.checkInterruption();
+		
+		AiTile result = hero.getTile();
+		if ( !hero.getTile().equals( endTile ) ) 
+		{	
+			AiPath path = this.getShortestPath( hero, endTile );
+			if(path!=null && path.getLength()>NEXT_TILE_INDEX)
+			{	AiLocation location = path.getLocation( NEXT_TILE_INDEX );
+				if(location!=null)
+					result = location.getTile();
+			}
 		}
-		catch ( NullPointerException e )
-		{
-			return hero.getTile();
-		}
+		
+		return result;
 	}
 
 	/**
