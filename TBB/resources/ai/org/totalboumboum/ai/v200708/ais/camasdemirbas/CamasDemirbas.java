@@ -274,8 +274,9 @@ public class CamasDemirbas extends ArtificialIntelligence
 	 * 		Description manquante !
 	 */
 	private boolean isAvailable(int x, int y, int bX, int bY) {
-		try {
-			int state = getZoneMatrix()[x][y];
+		int matrix[][] = getZoneMatrix();
+		if(x>=0 && x<matrix.length && y>=0 && y<matrix[0].length)
+		{	int state = matrix[x][y];
 			if(state ==0 || state == 5 || state == 6 ) {
 				if(isRiskFromBomb(x,y,bX,bY)) 
 					return false;
@@ -284,10 +285,9 @@ public class CamasDemirbas extends ArtificialIntelligence
 				}
 			else 
 				return false;
-			
-		} catch (Exception e) {
+		}
+		else
 			return false;
-		}						
 	}
 		
 	/**

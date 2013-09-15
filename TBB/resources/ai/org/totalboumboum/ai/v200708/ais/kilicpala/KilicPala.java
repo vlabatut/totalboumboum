@@ -30,7 +30,7 @@ public class KilicPala extends ArtificialIntelligence {
 	private boolean firstTime = true;
 
 	@Override
-	public synchronized Integer processAction() throws Exception {
+	public Integer processAction() throws Exception {
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 
 		if (firstTime)
@@ -312,60 +312,51 @@ public class KilicPala extends ArtificialIntelligence {
 					if (amIonASafeCase(posBomb[0], posBomb[1], x, y))
 						result = AI_ACTION_DO_NOTHING;
 					else
-						try {
-							if (isNextPosMoreFar(posBomb[0], posBomb[1], x, y,
-									possibleMoves.get(0)))
+					{		if (possibleMoves.size()>0 && isNextPosMoreFar(posBomb[0], posBomb[1], x, y,possibleMoves.get(0)))
 								result = possibleMoves.get(0);
-							else if (isNextPosMoreFar(posBomb[0], posBomb[1],
-									x, y, possibleMoves.get(1)))
+							else if (possibleMoves.size()>1 && isNextPosMoreFar(posBomb[0], posBomb[1],x, y, possibleMoves.get(1)))
 								result = possibleMoves.get(1);
-							else if (isNextPosMoreFar(posBomb[0], posBomb[1],
-									x, y, possibleMoves.get(2)))
+							else if (possibleMoves.size()>2 && isNextPosMoreFar(posBomb[0], posBomb[1],x, y, possibleMoves.get(2)))
 								result = possibleMoves.get(2);
-							else if (isNextPosMoreFar(posBomb[0], posBomb[1],
-									x, y, possibleMoves.get(3)))
+							else if (possibleMoves.size()>3 && isNextPosMoreFar(posBomb[0], posBomb[1],x, y, possibleMoves.get(3)))
 								result = possibleMoves.get(3);
 							else {
-								int index;
-								do {
-									index = (int) (Math.random() * (possibleMoves
-											.size()));
-								} while (index == possibleMoves.size());
-								result = possibleMoves.get(index);
+								if(!possibleMoves.isEmpty())
+								{	int index;
+									do {
+										index = (int) (Math.random() * (possibleMoves.size()));
+									} while (index == possibleMoves.size());
+									result = possibleMoves.get(index);
+								}
+								else
+									result = AI_ACTION_DO_NOTHING;
 							}
-						} catch (Exception e) {
-							// handle exception
-						}
+				}
 				} else
 					try {
 
-						if (isNextPosMoreFar(posBomb[0], posBomb[1], x, y,
-								possibleMoves.get(0))
-								&& possibleMoves.get(0) == whichMoveMakesMeLeastFar(
-										posBomb[0], posBomb[1], x, y))
+						if (possibleMoves.size()>0 && isNextPosMoreFar(posBomb[0], posBomb[1], x, y,possibleMoves.get(0))
+								&& possibleMoves.get(0) == whichMoveMakesMeLeastFar(posBomb[0], posBomb[1], x, y))
 							result = possibleMoves.get(0);
-						else if (isNextPosMoreFar(posBomb[0], posBomb[1], x, y,
-								possibleMoves.get(1))
-								&& possibleMoves.get(1) == whichMoveMakesMeLeastFar(
-										posBomb[0], posBomb[1], x, y))
+						else if (possibleMoves.size()>1 && isNextPosMoreFar(posBomb[0], posBomb[1], x, y,possibleMoves.get(1))
+								&& possibleMoves.get(1) == whichMoveMakesMeLeastFar(posBomb[0], posBomb[1], x, y))
 							result = possibleMoves.get(1);
-						else if (isNextPosMoreFar(posBomb[0], posBomb[1], x, y,
-								possibleMoves.get(2))
-								&& possibleMoves.get(2) == whichMoveMakesMeLeastFar(
-										posBomb[0], posBomb[1], x, y))
+						else if (possibleMoves.size()>2 && isNextPosMoreFar(posBomb[0], posBomb[1], x, y,possibleMoves.get(2))
+								&& possibleMoves.get(2) == whichMoveMakesMeLeastFar(posBomb[0], posBomb[1], x, y))
 							result = possibleMoves.get(2);
-						else if (isNextPosMoreFar(posBomb[0], posBomb[1], x, y,
-								possibleMoves.get(3))
-								&& possibleMoves.get(3) == whichMoveMakesMeLeastFar(
-										posBomb[0], posBomb[1], x, y))
+						else if (possibleMoves.size()>3 && isNextPosMoreFar(posBomb[0], posBomb[1], x, y,possibleMoves.get(3))
+								&& possibleMoves.get(3) == whichMoveMakesMeLeastFar(posBomb[0], posBomb[1], x, y))
 							result = possibleMoves.get(3);
 						else {
-							int index;
-							do {
-								index = (int) (Math.random() * (possibleMoves
-										.size()));
-							} while (index == possibleMoves.size());
-							result = possibleMoves.get(index);
+							if(!possibleMoves.isEmpty())
+							{	int index;
+								do {
+									index = (int) (Math.random() * (possibleMoves.size()));
+								} while (index == possibleMoves.size());
+								result = possibleMoves.get(index);
+							}
+							else
+								result = AI_ACTION_DO_NOTHING;
 						}
 					} catch (Exception e) {
 						// handle exception
@@ -932,8 +923,8 @@ public class KilicPala extends ArtificialIntelligence {
 
 		int matrix[][] = getZoneMatrix();
 
-		for (int i = x - 2; i <= x + 2; i++)
-			for (int j = y - 2; j <= y + 2; j++) {
+		for (int i = Math.max(0,x - 2); i <= Math.min(matrix.length-1,x + 2); i++)
+			for (int j = Math.max(0,y - 2); j <= Math.min(matrix[0].length-1,y + 2); j++) {
 				try {
 					if (matrix[i][j] == AI_BLOCK_BOMB)
 						result++;

@@ -89,7 +89,14 @@ public class OkanYuksel extends ArtificialIntelligence
 			 */
 			if (hedefVar(xM, yM) && getOwnBombCount()>0)
 			{
-				kacisBul(xM, yM, -1, xM, yM, getOwnFirePower());
+				try
+				{	kacisBul(xM, yM, -1, xM, yM, getOwnFirePower());
+				}
+				catch(StackOverflowError e)
+				{
+					return AI_ACTION_DO_NOTHING;
+				}
+				
 				if (!kacisR.isEmpty())
 				{
 					return AI_ACTION_PUT_BOMB;
@@ -611,14 +618,26 @@ public class OkanYuksel extends ArtificialIntelligence
 				else
 				{
 					//s'il y a une danger, trouve une route.
-					kacisBul(xM, yM, yonum, tBombaKx, tBombaKy, tBombaG);
+					try
+					{	kacisBul(xM, yM, yonum, tBombaKx, tBombaKy, tBombaG);
+					}
+					catch(StackOverflowError e)
+					{
+						return AI_ACTION_DO_NOTHING;
+					}
 				}
 			}
 			else if (cevrem[syc] == AI_BLOCK_WALL_SOFT && getOwnBombCount()>0)
 			{//ou est-ce que DECCAL peut detruire cette bloc?
 				
 				//D'abord trouve une route
-				kacisBul(xM, yM, -1, xM, yM, getOwnFirePower());
+				try
+				{	kacisBul(xM, yM, -1, xM, yM, getOwnFirePower());
+				}
+				catch(StackOverflowError e)
+				{
+					return AI_ACTION_DO_NOTHING;
+				}
 				//s'il n'y a pas de possible route, DECCAL ne posera pas de bombe.
 				if (!kacisR.isEmpty())
 				{

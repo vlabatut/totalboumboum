@@ -125,8 +125,7 @@ public class GameMap {
 	 * 		Description manquante !
 	 */
 	public void pathFinderVisited(int x, int y) {
-		visited[x][y] = true;
+		if(x<visited.length && y<visited[0].length)
+			visited[x][y] = true;
 	}
-	
-	
 }

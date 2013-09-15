@@ -25,7 +25,10 @@ public class Map {
 	 * 		Description manquante !
 	 */
 	public static int getValue( int x , int y ){
-		return map[x][y];
+		if(x>=0 && x<map.length && y>=0 && y<map[0].length)
+			return map[x][y];
+		else
+			return 0;
 	}
 	/**
 	 * 
@@ -37,7 +40,8 @@ public class Map {
 	 * 		Description manquante !
 	 */
 	public static void setValue(int x, int y, int value){
-		map[x][y]=value;
+		if(x>=0 && x<map.length && y>=0 && y<map[0].length)
+			map[x][y]=value;
 	}
 	/**
 	 * 

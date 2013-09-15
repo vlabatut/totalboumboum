@@ -35,9 +35,11 @@ public class BinaryHeapList {
 	 * 		? 
 	 */
 	public Node getFirst (){
-		Node firstNode = list.get(1);
+		Node firstNode = list.get(0);
 		remove();
-		AStar.removeFromOpenList(firstNode.getX(), firstNode.getY());
+		if(firstNode!=null)
+		{	AStar.removeFromOpenList(firstNode.getX(), firstNode.getY());
+		}
 		return firstNode;
 	}
 	
@@ -104,17 +106,19 @@ public class BinaryHeapList {
 		int length = length();
 		int i = 1;
 		boolean bool = false;
-		while ( i++ < length && !(bool = list.get(i).getX() == node.getX() && list.get(i).getY() == node.getY()) )
-		{
-			//
-		}
-		
-		if ( bool && (list.get(i).getPathCost() > node.getPathCost() ) ){
-			node.setParent(parent);
-			node.setPathCost(parent.getPathCost()+10*Map.getValue(node.getX(), node.getY()));
-			node.updateCost();
-			sort( length() );
-//			System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCC");
+		if(list!=null && !list.isEmpty() && list.get(0)!=null)
+		{	while ( i++ < length && !(bool = list.get(i).getX() == node.getX() && list.get(i).getY() == node.getY()) )
+			{
+				//
+			}
+			
+			if ( bool && (list.get(i).getPathCost() > node.getPathCost() ) ){
+				node.setParent(parent);
+				node.setPathCost(parent.getPathCost()+10*Map.getValue(node.getX(), node.getY()));
+				node.updateCost();
+				sort( length() );
+	//			System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCC");
+			}
 		}
 	}
 	
@@ -202,7 +206,11 @@ public class BinaryHeapList {
 	 * 		Description manquante !
 	 */
 	private int getValue ( int pos ){
-		return list.get(pos).getCost();
+		Node node = list.get(pos);
+		if(node!=null)
+			return node.getCost();
+		else
+			return 0;
 	}
 	
 	/**
