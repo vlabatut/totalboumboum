@@ -212,7 +212,8 @@ public abstract class AiCriterion<T extends ArtificialIntelligence, U> implement
 	 * c'est nécessaire. Autrement dit, si le calcul a déjà été fait
 	 * lors de cette itération, la méthode ira chercher la valeur
 	 * précédemment calculée. Sinon, le calcul est effectué grâce
-	 * à {@link #processValue(AiTile)}, puis mis en cache et renvoyé.
+	 * à {@link #processValue(AiTile)}, puis son résultat est mis en cache 
+	 * et renvoyé.
 	 * 
 	 * @param tile
 	 * 		La case à traiter.
