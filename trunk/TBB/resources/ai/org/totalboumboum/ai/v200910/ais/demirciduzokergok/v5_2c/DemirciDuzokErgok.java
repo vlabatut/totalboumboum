@@ -10,6 +10,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
+import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -30,31 +34,31 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class DemirciDuzokErgok extends ArtificialIntelligence {
 
 	/** */
-	private AiZone IA_ZONE;
+	private AiZone IA_ZONE = null;
 
 	/** */
-	private AiHero our_bomberman;
+	private AiHero ourBomberman = null;
 
 	/** */
-	private AiTile our_tile;
+	private AiTile ourTile = null;
 	/** */
 	private int q = 0;
 	/** */
-	private int q_test = 0;
+	private int qTest = 0;
 	/** */
-	private int our_x;
+	private int ourX;
 	/** */
-	private int our_y;
+	private int ourY;
 	/** */
-	private Safety_Map safe_map;
+	private SafetyMap safeMap;
 
 	/** */
-	int numb_bonus = 0;
+	int numbBonus = 0;
 
 	/** */
-	List<AiTile> possibleDest_w;
+	List<AiTile> possibleDestW;
 	/** */
-	List<AiTile> possible_Dest_bonus;
+	List<AiTile> possibleDestBonus;
 
 	/**
 	 * we declared the global variable to seperate the actions exploring the
@@ -69,40 +73,92 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 	 * The classes for defense,collecting bonus,exploring walls and ,attacking
 	 * the enemies
 	 */
-	private Bonus_Manager bonusmanager = null;
+	private BonusManager bonusManager = null;
 	/** */
-	private Escape_Manager escapemanager = null;
+	private EscapeManager escapeManager = null;
 	/** */
-	private Wall_Manager wallmanager = null;
+	private WallManager wallManager = null;
 	/** */
-	private Enemie_Manager enemiemanager = null;
+	private EnemyManager enemyManager = null;
 	/** */
-	private Wall_Manager_2 wallmanager2 = null;
+	private WallManager2 wallManager2 = null;
 
 	/** */
-	AiPath path_b;
+	AiPath pathB;
+	/** */
+	public Astar aStar;
+	/** */
+	public static int aStarQueueSize = 0;
+	/** */
+	public HeuristicCalculator heuristicCalculator;
+	/** */
+	public MatrixCostCalculator costCalculator;
 
+	/////////////////////////////////////////////////////////////////
+	// INITIALISATION			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * @throws StopRequestException 
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 */
+	private void init() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+
+		IA_ZONE = getPercepts();
+		ourBomberman = IA_ZONE.getOwnHero();
+		
+		// init A*
+		double costMatrix[][] = new double[IA_ZONE.getHeight()][IA_ZONE.getWidth()];
+		for(int i=0;i<IA_ZONE.getHeight();i++)
+			for(int j=0;j<IA_ZONE.getWidth();j++)
+				costMatrix[i][j] = 1;
+		costCalculator = new MatrixCostCalculator(costMatrix);
+		heuristicCalculator = new BasicHeuristicCalculator();
+		aStar = new Astar(this, ourBomberman, costCalculator, heuristicCalculator);
+		aStar.setMaxNodes(50);
+		
+		// init managers
+		escapeManager = null;
+		wallManager = null;
+		enemyManager = null;
+		wallManager2 = null;
+	}
+
+	/**
+	 * Test : maintains the maximal frange size.
+	 * 
+	 * @throws StopRequestException
+	 * 		Description manquante !
+	 */
+	public void updateAstarQueueSize() throws StopRequestException
+	{	int newSize = aStar.getQueueMaxSize();
+		if(newSize>aStarQueueSize)
+		{	aStarQueueSize = newSize;
+//			System.out.println(">>>>>>> DemirciDuzokErgok: "+aStarQueueSize+"("+IA_ZONE.getHeight()+"x"+IA_ZONE.getWidth()+")");
+		}
+	}
+	
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
 	@Override
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
+		
+		if(ourBomberman==null)
+			init();
+		
+		ourTile = ourBomberman.getTile();
 
-		IA_ZONE = getPercepts();
-
-		our_bomberman = IA_ZONE.getOwnHero();
-		our_tile = our_bomberman.getTile();
-
-		our_x = our_tile.getCol();
-		our_y = our_tile.getLine();
+		ourX = ourTile.getCol();
+		ourY = ourTile.getLine();
 
 		AiAction result = new AiAction(AiActionName.NONE);
 
-		if (our_bomberman.hasEnded() == false) {
+		if (ourBomberman.hasEnded() == false) {
 
 			q = 0;
-			q_test = 0;
+			qTest = 0;
 			moveDir = Direction.NONE;
-			safe_map = new Safety_Map(IA_ZONE, this);
+			safeMap = new SafetyMap(IA_ZONE, this);
 
 //			int k = 0;
 			for (int i = 0; i < IA_ZONE.getHeight(); i++) {
@@ -117,15 +173,15 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 			/*
 			 * If we are not in safe case, we will escape:
 			 */
-			if (escapemanager != null) {
+			if (escapeManager != null) {
 
-				if (escapemanager.arrive_or_not() == true) {
+				if (escapeManager.arrive_or_not() == true) {
 
-					escapemanager = null;
+					escapeManager = null;
 
 				} else {
 
-					moveDir = escapemanager.direcition_updt();
+					moveDir = escapeManager.direcition_updt();
 					// System.out.println("kacisa devam");
 				}
 			}
@@ -135,18 +191,18 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 			 * attacking the enemie we collect the bonuses: For us,to be enough
 			 * armored to attack an enemie is to have 3 bombs.
 			 */
-			else if (safe_map.returnMatrix()[our_bomberman.getLine()][our_bomberman
-					.getCol()] != safe_map.SAFE_CASE
-					&& safe_map.returnMatrix()[our_bomberman.getLine()][our_bomberman
-							.getCol()] != safe_map.ENEMIE) {
+			else if (safeMap.returnMatrix()[ourBomberman.getLine()][ourBomberman
+					.getCol()] != safeMap.SAFE_CASE
+					&& safeMap.returnMatrix()[ourBomberman.getLine()][ourBomberman
+							.getCol()] != safeMap.ENEMIE) {
 
-				escapemanager = new Escape_Manager(this);
-				moveDir = escapemanager.direcition_updt();
+				escapeManager = new EscapeManager(this);
+				moveDir = escapeManager.direcition_updt();
 
 			}
 
-			else if (safe_map.returnMatrix()[our_y][our_x] == safe_map.SAFE_CASE
-					&& (our_bomberman.getBombNumber() < 3)/*
+			else if (safeMap.returnMatrix()[ourY][ourX] == safeMap.SAFE_CASE
+					&& (ourBomberman.getBombNumber() < 3)/*
 														 * && k>0 &&
 														 * our_bomberman
 														 * .getBombCount()<2
@@ -158,7 +214,7 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 					checkInterruption();
 					for (int j = 0; j < IA_ZONE.getWidth(); j++) {
 						checkInterruption();
-						if (safe_map.returnMatrix()[i][j] == safe_map.BONUS)
+						if (safeMap.returnMatrix()[i][j] == safeMap.BONUS)
 							r = true;
 					}
 				}
@@ -166,28 +222,28 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 				/*
 				 * If we can access bonus directly,we will go to collect it
 				 */
-				if (r == true && q_test == 0) {
+				if (r == true && qTest == 0) {
 
-					if (bonusmanager != null) {
-						if (bonusmanager.accessiblePath() == true) {
-							if (bonusmanager.hasArrived_b()) {
+					if (bonusManager != null) {
+						if (bonusManager.accessiblePath() == true) {
+							if (bonusManager.hasArrivedB()) {
 
-								bonusmanager = null;
+								bonusManager = null;
 
 							} else {
 
-								moveDir = bonusmanager.direcition_updt_b();
+								moveDir = bonusManager.directionUpdtB();
 
 							}
 						} else {
-							q_test = 1;
-							bonusmanager = null;
+							qTest = 1;
+							bonusManager = null;
 
 						}
 					} else {
 						// q_test=1;
-						bonusmanager = new Bonus_Manager(this);
-						moveDir = bonusmanager.direcition_updt_b();
+						bonusManager = new BonusManager(this);
+						moveDir = bonusManager.directionUpdtB();
 						// System.out.println("c");
 					}
 
@@ -199,34 +255,34 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 				 * try to access for it, so we break walls to find new bonus
 				 * which are not dangerous.
 				 */
-				if (r == true && q_test == 1) {
-					bonusmanager = null;
-					if (wallmanager != null) {
+				if (r == true && qTest == 1) {
+					bonusManager = null;
+					if (wallManager != null) {
 
-						if (wallmanager.hasArrived_b()) {
+						if (wallManager.hasArrivedB()) {
 
-							if (wallmanager.canesc() == true) {
+							if (wallManager.canesc() == true) {
 
 								q = 1;
 
-								wallmanager = null;
+								wallManager = null;
 							} else {
 								q = 0;
-								wallmanager = null;
+								wallManager = null;
 							}
 
 						}
 
 						else {
 							// System.out.println("b");
-							moveDir = wallmanager.direcition_updt_b();
+							moveDir = wallManager.direcitionUpdtB();
 
 						}
 
 					} else {
 						q = 0;
-						wallmanager = new Wall_Manager(this);
-						moveDir = wallmanager.direcition_updt_b();
+						wallManager = new WallManager(this);
+						moveDir = wallManager.direcitionUpdtB();
 
 					}
 				}
@@ -236,34 +292,34 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 				 * break walls to find bonus
 				 */
 
-				else if (r == false && our_bomberman.getBombCount() < 3) {
+				else if (r == false && ourBomberman.getBombCount() < 3) {
 
-					if (wallmanager != null) {
+					if (wallManager != null) {
 
-						if (wallmanager.hasArrived_b()) {
+						if (wallManager.hasArrivedB()) {
 
-							if (wallmanager.canesc() == true) {
+							if (wallManager.canesc() == true) {
 
 								q = 1;
-								wallmanager = null;
+								wallManager = null;
 							} else {
 								q = 0;
 
-								wallmanager = null;
+								wallManager = null;
 							}
 
 						}
 
 						else {
 
-							moveDir = wallmanager.direcition_updt_b();
+							moveDir = wallManager.direcitionUpdtB();
 
 						}
 
 					} else {
 						q = 0;
-						wallmanager = new Wall_Manager(this);
-						moveDir = wallmanager.direcition_updt_b();
+						wallManager = new WallManager(this);
+						moveDir = wallManager.direcitionUpdtB();
 
 					}
 				}
@@ -275,33 +331,33 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 			 */
 
 			else if (IA_ZONE.getOwnHero().getBombCount() < 3) {
-				if (enemiemanager != null) {
+				if (enemyManager != null) {
 
-					if (enemiemanager.accessiblePath() == false && kkk != 1) {
+					if (enemyManager.accessiblePath() == false && kkk != 1) {
 
 						// This Method is for breaking walls when the enemie is
 						// not accessible
-						Break_Walls_For_Enemie();
+						breakWallsForEnemy();
 					}
 					// We can access the enemie so we attack:
 					else {
 						kkk = 1;
 
-						if (enemiemanager.hasArrived_b()) {
+						if (enemyManager.hasArrivedB()) {
 
-							if (enemiemanager.canesc() == true) {
+							if (enemyManager.canesc() == true) {
 
 								q = 1;
-								enemiemanager = null;
+								enemyManager = null;
 
 							} else {
 								q = 0;
-								enemiemanager = null;
+								enemyManager = null;
 
 							}
 						} else {
 
-							moveDir = enemiemanager.direcition_updt_b();
+							moveDir = enemyManager.direcitionUpdtB();
 							q = 0;
 						}
 
@@ -310,8 +366,8 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 				}
 
 				else {
-					enemiemanager = new Enemie_Manager(this);
-					moveDir = enemiemanager.direcition_updt_b();
+					enemyManager = new EnemyManager(this);
+					moveDir = enemyManager.direcitionUpdtB();
 					q = 0;
 
 				}
@@ -330,36 +386,36 @@ public class DemirciDuzokErgok extends ArtificialIntelligence {
 	 * @throws StopRequestException
 	 * 		Description manquante !
 	 */
-	private void Break_Walls_For_Enemie() throws StopRequestException {
+	private void breakWallsForEnemy() throws StopRequestException {
 
 		checkInterruption();
 
-		if (wallmanager2 != null && IA_ZONE.getOwnHero().getBombCount() < 2) {
+		if (wallManager2 != null && IA_ZONE.getOwnHero().getBombCount() < 2) {
 
-			if (wallmanager2.hasArrived_b()) {
+			if (wallManager2.hasArrivedB()) {
 
-				if (wallmanager2.canesc() == true) {
+				if (wallManager2.canesc() == true) {
 					q = 1;
-					enemiemanager = null;
-					wallmanager2 = null;
+					enemyManager = null;
+					wallManager2 = null;
 				} else {
 					q = 0;
-					enemiemanager = null;
-					wallmanager2 = null;
+					enemyManager = null;
+					wallManager2 = null;
 				}
 
 			}
 
 			else {
-				moveDir = wallmanager2.direcition_updt_b();
+				moveDir = wallManager2.direcitionUpdtB();
 
 				q = 0;
 			}
 
 		} else {
 			q = 0;
-			wallmanager2 = new Wall_Manager_2(this);
-			moveDir = wallmanager2.direcition_updt_b();
+			wallManager2 = new WallManager2(this);
+			moveDir = wallManager2.direcitionUpdtB();
 
 		}
 	}

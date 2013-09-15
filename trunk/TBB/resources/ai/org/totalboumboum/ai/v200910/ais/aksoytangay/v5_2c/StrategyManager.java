@@ -476,18 +476,26 @@ public class StrategyManager {
 			
 			//on regard ou dans quelle coordonne il existe un bombe (colonne ou ligne)
 			if(sameColumnBombs.size() == 1)
-			{
-				if(sameColumnBombs.get(0).getCol()<escapeManager.getCurrentTile().getCol())
-					result = percepts.getTile(escapeManager.getCurrentTile().getLine(), escapeManager.getCurrentTile().getCol()+1);
+			{	if(sameColumnBombs!=null && !sameColumnBombs.isEmpty())
+				{	AiBomb bomb = sameColumnBombs.get(0);
+					if(bomb.getCol()<escapeManager.getCurrentTile().getCol())
+						result = percepts.getTile(escapeManager.getCurrentTile().getLine(), escapeManager.getCurrentTile().getCol()+1);
+					else
+						result = percepts.getTile(escapeManager.getCurrentTile().getLine(), escapeManager.getCurrentTile().getCol()-1);
+				}
 				else
-					result = percepts.getTile(escapeManager.getCurrentTile().getLine(), escapeManager.getCurrentTile().getCol()-1);
+					result = currentTile;
 			}
 			else
-			{
-				if(sameLineBombs.get(0).getLine()<escapeManager.getCurrentTile().getLine())
-					result = percepts.getTile(escapeManager.getCurrentTile().getLine()+1, escapeManager.getCurrentTile().getCol());
+			{	if(sameLineBombs!=null && !sameLineBombs.isEmpty())
+				{	AiBomb bomb = sameLineBombs.get(0);
+					if(bomb.getLine()<escapeManager.getCurrentTile().getLine())
+						result = percepts.getTile(escapeManager.getCurrentTile().getLine()+1, escapeManager.getCurrentTile().getCol());
+					else
+						result = percepts.getTile(escapeManager.getCurrentTile().getLine()-1, escapeManager.getCurrentTile().getCol());
+				}
 				else
-					result = percepts.getTile(escapeManager.getCurrentTile().getLine()-1, escapeManager.getCurrentTile().getCol());
+					result = currentTile;
 			}
 		}
 		//s'il ya quatre bombes autour de nous

@@ -9,21 +9,18 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * This class is for breaking the walls when there is no bonus visible in the
- * game zone.
+ * We use this class for breaking the walls near us to access the enemy when the
+ * enemies are not accessibles.
  * 
  * @author Mustafa Göktuğ Düzok
  * 
+ * 
  */
 @SuppressWarnings("deprecation")
-public class Wall_Manager {
+public class WallManager2 {
 
 	/**
 	 * 
@@ -32,25 +29,18 @@ public class Wall_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public Wall_Manager(DemirciDuzokErgok ai) throws StopRequestException {
+	public WallManager2(DemirciDuzokErgok ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
+		// safe_map=new Safety_Map(zone);
 		this.ai = ai;
 		zone = ai.getPercepts();
-		safe_map = new Safety_Map(zone, ai);
+		safeMap = new SafetyMap(zone, ai);
 
-		// initialise a star
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator_b = new MatrixCostCalculator(costMatrix);
-		hcalcul_b = new BasicHeuristicCalculator();
-		star_b = new Astar(ai, ai.getPercepts().getOwnHero(), costCalculator_b,
-				hcalcul_b);
-
-		esc = new Can_escape_Manager(ai);
-
-		// initialise destinations
-		arrived_b = false;
-		possibleDest_b = destinations_possibles_b(zone.getOwnHero().getTile());
-		updatePath_b();
+		esc = new CanEscapeManager(ai);
+		arrivedB = false;
+		// initialising the destinations
+		possibleDestB = destinationsPossiblesB(zone.getOwnHero().getTile());
+		updatePathB();
 	}
 
 	/**
@@ -62,27 +52,32 @@ public class Wall_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public Direction direcition_updt_b() throws StopRequestException {
+	public Direction direcitionUpdtB() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
-
-		// on met d'abord à jour la matrice de cout
-		updateCostCalculator_b();
-		safe_map = new Safety_Map(zone, ai);
+		// update the cost method
+		updateCostCalculatorB();
+		safeMap = new SafetyMap(zone, ai);
 		Direction result = Direction.NONE;
-		if (!hasArrived_b()) {
-			checkIsOnPath_b();
+		// if we didnt arrive yet we will decide if we will make deplacement to
+		// the next case or not:
+		if (!hasArrivedB()) {
+			checkIsOnPathB();
 
-			if (path_b.isEmpty() || !checkPathValidity_b()) {
-				updatePath_b();
+			if (pathB.isEmpty() || !checkPathValidityB()) {
+				updatePathB();
 			}
 
 			else {
 
 				AiTile tile = null;
-				if (path_b.getLength() > 1) {
-					tile = path_b.getTile(1);
-				} else if (path_b.getLength() > 0)
-					tile = path_b.getTile(0);
+				if (pathB.getLength() > 1) {
+					// if one of the cases on the path for accessing the walls
+					// is not secure, we stop to make our movement.
+					if (safeMap.returnMatrix()[pathB.getTile(1).getLine()][pathB
+							.getTile(1).getCol()] <= 0)
+						tile = pathB.getTile(1);
+				} else if (pathB.getLength() > 0)
+					tile = pathB.getTile(0);
 
 				if (tile != null)
 					result = zone.getDirection(zone.getOwnHero(), tile);
@@ -102,10 +97,10 @@ public class Wall_Manager {
 		ai.checkInterruption();
 		int m = 0;
 		int stop = 1;
-		while (m < path_b.getLength() && path_b.isEmpty() == false && stop == 1) {
+		while (m < pathB.getLength() && pathB.isEmpty() == false && stop == 1) {
 			ai.checkInterruption();
-			if (safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b
-					.getTile(m).getCol()] != safe_map.SAFE_CASE) {
+			if (safeMap.returnMatrix()[pathB.getTile(m).getLine()][pathB
+					.getTile(m).getCol()] != safeMap.SAFE_CASE) {
 				stop = 0;
 			}
 			m++;
@@ -127,7 +122,7 @@ public class Wall_Manager {
 	 */
 	public boolean canesc() throws StopRequestException {
 		ai.checkInterruption();
-		esc = new Can_escape_Manager(ai);
+		esc = new CanEscapeManager(ai);
 		boolean res = true;
 		if (esc.getPathLength() < 3 || esc.getPathLength() > 6) {
 
@@ -147,12 +142,12 @@ public class Wall_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public boolean checkPathValidity_b() throws StopRequestException {
+	public boolean checkPathValidityB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		boolean result = true;
-		Iterator<AiTile> it = path_b.getTiles().iterator();
+		Iterator<AiTile> it = pathB.getTiles().iterator();
 		while (it.hasNext() && result) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -164,91 +159,91 @@ public class Wall_Manager {
 	}
 
 	/**
-	 * Checks if we are on the path which we decided to make the movement.
+	 * Verifies if we on the path chosen to access the wall.
 	 * 
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void checkIsOnPath_b() throws StopRequestException {
+	public void checkIsOnPathB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		AiTile currentTile = zone.getOwnHero().getTile();
-		while (!path_b.isEmpty() && path_b.getTile(0) != currentTile) {
+		while (!pathB.isEmpty() && pathB.getTile(0) != currentTile) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-			path_b.removeTile(0);
+			pathB.removeTile(0);
 		}
-
 	}
 
 	/**
-	 * Verifies if we arrived the final case or not:
+	 * Verifies if we arrived or not to the final destination.
 	 * 
 	 * @return Description manquante !
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public boolean hasArrived_b() throws StopRequestException {
+	public boolean hasArrivedB() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		if (arrived_b == false) {
-			if (arrived_tile_b == null) {
-				// System.out.println("ssssss");
-				arrived_b = true;
+		if (arrivedB == false) {
+			if (arrivedTileB == null) {
+				arrivedB = true;
 			} else {
 
 				AiTile currentTile = ai.getPercepts().getOwnHero().getTile();
-				arrived_b = currentTile == arrived_tile_b;
+				arrivedB = currentTile == arrivedTileB;
 			}
+
 		}
 
-		return arrived_b;
+		return arrivedB;
 	}
 
 	/**
-	 * Updates the cost:
+	 * Method for updating the cost.
 	 * 
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void updateCostCalculator_b() throws StopRequestException {
+	public void updateCostCalculatorB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		double safetyMatrix_b[][] = safe_map.returnMatrix();
+		double safetyMatrix_b[][] = safeMap.returnMatrix();
 		for (int line = 0; line < zone.getHeight(); line++) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 			for (int col = 0; col < zone.getWidth(); col++) {
 				ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-				double cost_b = safetyMatrix_b[line][col];
-				costCalculator_b.setCost(line, col, cost_b);
+				double costB = safetyMatrix_b[line][col];
+				ai.costCalculator.setCost(line, col, Math.abs(costB));
 
 			}
 		}
 	}
 
 	/**
-	 * This method takes the path to make the movement using the astar
-	 * algorithme.
+	 * This method takes the possible destinations and chooses a path to access
+	 * next to the walls.
 	 * 
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void updatePath_b() throws StopRequestException {
+	public void updatePathB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		path_b = star_b.processShortestPath(zone.getOwnHero().getTile(),
-				possibleDest_b);
-		arrived_tile_b = path_b.getLastTile();
+		pathB = ai.aStar.processShortestPath(zone.getOwnHero().getTile(),possibleDestB);
+		ai.updateAstarQueueSize();
+		arrivedTileB = pathB.getLastTile();
 	}
 
 	/**
-	 * The possible destinations to make the deplacement(Gets the positions of
-	 * the safe cases neighbor to the breakable walls)
+	 * This method chooses the possible destinations and places them into the
+	 * list. In this method we take the safe cases and the bonuses next to the
+	 * breakable walls.
 	 * 
 	 * @param tile
 	 *            Description manquante !
@@ -256,7 +251,7 @@ public class Wall_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public List<AiTile> destinations_possibles_b(AiTile tile)
+	public List<AiTile> destinationsPossiblesB(AiTile tile)
 			throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -264,42 +259,47 @@ public class Wall_Manager {
 		AiTile tile_dest_b = null;
 		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiBlock> block_iterator = zone.getBlocks().iterator();
-		safe_map = new Safety_Map(zone, ai);
+		safeMap = new SafetyMap(zone, ai);
 		AiBlock blck;
 		while (block_iterator.hasNext() == true) {
 			ai.checkInterruption();
 			blck = block_iterator.next();
 			if (blck.isDestructible()) {
-				if (safe_map.returnMatrix()[blck.getLine()][blck.getCol() + 1] == safe_map.SAFE_CASE
-						|| safe_map.returnMatrix()[blck.getLine()][blck
-								.getCol() + 1] == safe_map.BONUS) {
+				if (safeMap.returnMatrix()[blck.getLine()][blck.getCol() + 1] == safeMap.SAFE_CASE
+						|| safeMap.returnMatrix()[blck.getLine()][blck
+								.getCol() + 1] == safeMap.BONUS) {
 					tile_dest_b = zone.getTile(blck.getLine(),
 							blck.getCol() + 1);
-					result.add(tile_dest_b);
+					if (zone.getOwnHero().getTile() != tile_dest_b)
+						result.add(tile_dest_b);
 				}
-				if (safe_map.returnMatrix()[blck.getLine()][blck.getCol() - 1] == safe_map.SAFE_CASE
-						|| safe_map.returnMatrix()[blck.getLine()][blck
-								.getCol() - 1] == safe_map.BONUS) {
+				if (safeMap.returnMatrix()[blck.getLine()][blck.getCol() - 1] == safeMap.SAFE_CASE
+						|| safeMap.returnMatrix()[blck.getLine()][blck
+								.getCol() - 1] == safeMap.BONUS) {
 					tile_dest_b = zone.getTile(blck.getLine(),
 							blck.getCol() - 1);
-					result.add(tile_dest_b);
+					if (zone.getOwnHero().getTile() != tile_dest_b)
+						result.add(tile_dest_b);
 				}
-				if (safe_map.returnMatrix()[blck.getLine() + 1][blck.getCol()] == safe_map.SAFE_CASE
-						|| safe_map.returnMatrix()[blck.getLine() + 1][blck
-								.getCol()] == safe_map.BONUS) {
+				if (safeMap.returnMatrix()[blck.getLine() + 1][blck.getCol()] == safeMap.SAFE_CASE
+						|| safeMap.returnMatrix()[blck.getLine() + 1][blck
+								.getCol()] == safeMap.BONUS) {
 					tile_dest_b = zone.getTile(blck.getLine() + 1,
 							blck.getCol());
-					result.add(tile_dest_b);
+					if (zone.getOwnHero().getTile() != tile_dest_b)
+						result.add(tile_dest_b);
 				}
-				if (safe_map.returnMatrix()[blck.getLine() - 1][blck.getCol()] == safe_map.SAFE_CASE
-						|| safe_map.returnMatrix()[blck.getLine() - 1][blck
-								.getCol()] == safe_map.BONUS) {
+				if (safeMap.returnMatrix()[blck.getLine() - 1][blck.getCol()] == safeMap.SAFE_CASE
+						|| safeMap.returnMatrix()[blck.getLine() - 1][blck
+								.getCol()] == safeMap.BONUS) {
 					tile_dest_b = zone.getTile(blck.getLine() - 1,
 							blck.getCol());
-					result.add(tile_dest_b);
+					if (zone.getOwnHero().getTile() != tile_dest_b)
+						result.add(tile_dest_b);
 				}
 
 			}
+
 		}
 
 		return result;
@@ -317,12 +317,12 @@ public class Wall_Manager {
 		int stop = 0;
 		boolean x = false;
 		int m = 0;
-		while (m < path_b.getLength() && stop == 0) {
+		while (m < pathB.getLength() && stop == 0) {
 			ai.checkInterruption();
-			if (safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b
-					.getTile(m).getCol()] != safe_map.SAFE_CASE
-					|| safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b
-							.getTile(m).getCol()] == safe_map.BONUS) {
+			if (safeMap.returnMatrix()[pathB.getTile(m).getLine()][pathB
+					.getTile(m).getCol()] != safeMap.SAFE_CASE
+					|| safeMap.returnMatrix()[pathB.getTile(m).getLine()][pathB
+							.getTile(m).getCol()] == safeMap.BONUS) {
 				x = true;
 				stop = 1;
 			}
@@ -337,21 +337,15 @@ public class Wall_Manager {
 	/** */
 	private AiZone zone;
 	/** */
-	private Safety_Map safe_map;
+	private SafetyMap safeMap;
 	/** */
-	private AiTile arrived_tile_b;
+	private AiTile arrivedTileB;
 	/** */
-	private List<AiTile> possibleDest_b;
+	private List<AiTile> possibleDestB;
 	/** */
-	private boolean arrived_b;
+	private boolean arrivedB;
 	/** */
-	private AiPath path_b;
+	private AiPath pathB;
 	/** */
-	private Astar star_b;
-	/** */
-	private HeuristicCalculator hcalcul_b;
-	/** */
-	private MatrixCostCalculator costCalculator_b;
-	/** */
-	private Can_escape_Manager esc;
+	private CanEscapeManager esc;
 }

@@ -9,10 +9,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -23,7 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  */
 @SuppressWarnings("deprecation")
-public class Bonus_Manager {
+public class BonusManager {
 
 	/**
 	 * 
@@ -32,28 +28,21 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public Bonus_Manager(DemirciDuzokErgok ai) throws StopRequestException {
+	public BonusManager(DemirciDuzokErgok ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		this.ai = ai;
 		zone = ai.getPercepts();
 		// safe_map=new Safety_Map(zone);
 
-		// init A*
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator_b = new MatrixCostCalculator(costMatrix);
-		hcalcul_b = new BasicHeuristicCalculator();
-		star_b = new Astar(ai, ai.getPercepts().getOwnHero(), costCalculator_b,
-				hcalcul_b);
-
 		// init destinations
-		arrived_b = false;
+		arrivedB = false;
 		// safe_map=new Safety_Map(zone);
 		AiHero our_bomberman = zone.getOwnHero();
-		possibleDest_b = destinations_possibles_b(our_bomberman.getTile());
-		updatePath_b();
+		possibleDestB = destinationsPossiblesB(our_bomberman.getTile());
+		updatePathB();
 	}
-
+	
 	/**
 	 * Method for deplacement according to the path chosen.
 	 * 
@@ -61,27 +50,27 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public Direction direcition_updt_b() throws StopRequestException {
+	public Direction directionUpdtB() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		updateCostCalculator_b();
+		updateCostCalculatorB();
 
 		Direction result = Direction.NONE;
-		if (!hasArrived_b()) {
-			checkIsOnPath_b();
+		if (!hasArrivedB()) {
+			checkIsOnPathB();
 
-			if (path_b.isEmpty() || !checkPathValidity_b()) {
-				updatePath_b();
+			if (pathB.isEmpty() || !checkPathValidityB()) {
+				updatePathB();
 			}
 
 			else {
 
 				AiTile tile = null;
-				if (path_b.getLength() > 1)
-					tile = path_b.getTile(1);
+				if (pathB.getLength() > 1)
+					tile = pathB.getTile(1);
 
-				else if (path_b.getLength() > 0)
-					tile = path_b.getTile(0);
+				else if (pathB.getLength() > 0)
+					tile = pathB.getTile(0);
 
 				if (tile != null)
 					result = zone.getDirection(zone.getOwnHero(), tile);
@@ -100,12 +89,12 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public boolean checkPathValidity_b() throws StopRequestException {
+	public boolean checkPathValidityB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		boolean result = true;
-		Iterator<AiTile> it = path_b.getTiles().iterator();
+		Iterator<AiTile> it = pathB.getTiles().iterator();
 		while (it.hasNext() && result) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -122,15 +111,15 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void checkIsOnPath_b() throws StopRequestException {
+	public void checkIsOnPathB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		AiTile currentTile = zone.getOwnHero().getTile();
-		while (!path_b.isEmpty() && path_b.getTile(0) != currentTile) {
+		while (!pathB.isEmpty() && pathB.getTile(0) != currentTile) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-			path_b.removeTile(0);
+			pathB.removeTile(0);
 		}
 
 	}
@@ -142,35 +131,35 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public boolean hasArrived_b() throws StopRequestException {
+	public boolean hasArrivedB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		if (arrived_b == false) {
-			if (arrived_tile_b == null)
-				arrived_b = true;
+		if (arrivedB == false) {
+			if (arrivedTileB == null)
+				arrivedB = true;
 			else {
 				AiTile cur_Tile = zone.getOwnHero().getTile();
-				arrived_b = (cur_Tile == arrived_tile_b);
+				arrivedB = (cur_Tile == arrivedTileB);
 			}
 
 			boolean x = true;
 			int m = 0;
-			while (m < path_b.getLength() - 1 && path_b.isEmpty() == false) {
+			while (m < pathB.getLength() - 1 && pathB.isEmpty() == false) {
 				ai.checkInterruption();
-				if (safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b
-						.getTile(m).getCol()] != safe_map.SAFE_CASE)
+				if (safeMap.returnMatrix()[pathB.getTile(m).getLine()][pathB
+						.getTile(m).getCol()] != safeMap.SAFE_CASE)
 					x = false;
 
 				m++;
 			}
 
 			if (x == false)
-				arrived_b = true;
+				arrivedB = true;
 
 		}
 
-		return arrived_b;
+		return arrivedB;
 
 	}
 
@@ -180,20 +169,20 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void updateCostCalculator_b() throws StopRequestException {
+	public void updateCostCalculatorB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		safe_map = new Safety_Map(zone, ai);
-		double safetyMatrix_b[][] = safe_map.returnMatrix();
+		safeMap = new SafetyMap(zone, ai);
+		double safetyMatrix_b[][] = safeMap.returnMatrix();
 		for (int line = 0; line < zone.getHeight(); line++) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 			for (int col = 0; col < zone.getWidth(); col++) {
 				ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-				double cost_b = safetyMatrix_b[line][col];
-				costCalculator_b.setCost(line, col, cost_b);
+				double costB = safetyMatrix_b[line][col];
+				ai.costCalculator.setCost(line, col, Math.abs(costB));
 
 			}
 		}
@@ -207,13 +196,13 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void updatePath_b() throws StopRequestException {
+	public void updatePathB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		path_b = star_b.processShortestPath(ai.getPercepts().getOwnHero()
-				.getTile(), possibleDest_b);
-		arrived_tile_b = path_b.getLastTile();
+		pathB = ai.aStar.processShortestPath(ai.getPercepts().getOwnHero().getTile(), possibleDestB);
+		ai.updateAstarQueueSize();
+		arrivedTileB = pathB.getLastTile();
 
 	}
 
@@ -226,7 +215,7 @@ public class Bonus_Manager {
 	 */
 	public boolean accessiblePath() throws StopRequestException {
 		ai.checkInterruption();
-		if (path_b.isEmpty() == false)
+		if (pathB.isEmpty() == false)
 			return true;
 		else
 			return false;
@@ -242,11 +231,11 @@ public class Bonus_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public List<AiTile> destinations_possibles_b(AiTile tile)
+	public List<AiTile> destinationsPossiblesB(AiTile tile)
 			throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
-		safe_map = new Safety_Map(zone, ai);
+		safeMap = new SafetyMap(zone, ai);
 		AiTile tile_dest_b;
 		List<AiTile> result_b = new ArrayList<AiTile>();
 
@@ -256,7 +245,7 @@ public class Bonus_Manager {
 			for (int pos_x = 0; pos_x < zone.getWidth(); pos_x++) {
 				ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-				if (safe_map.returnMatrix()[pos_y][pos_x] == safe_map.BONUS) {
+				if (safeMap.returnMatrix()[pos_y][pos_x] == safeMap.BONUS) {
 					tile_dest_b = zone.getTile(pos_y, pos_x);
 					result_b.add(tile_dest_b);
 				}
@@ -274,21 +263,14 @@ public class Bonus_Manager {
 	/** */
 	private AiZone zone;
 	/** */
-	private Safety_Map safe_map;
+	private SafetyMap safeMap;
 	/** */
-	private AiTile arrived_tile_b;
+	private AiTile arrivedTileB;
 	/** */
-	private List<AiTile> possibleDest_b;
+	private List<AiTile> possibleDestB;
 	/** */
-	private boolean arrived_b;
+	private boolean arrivedB;
 	/** */
-	private AiPath path_b;
-
-	/** */
-	private Astar star_b;
-	/** */
-	private HeuristicCalculator hcalcul_b;
-	/** */
-	private MatrixCostCalculator costCalculator_b;
+	private AiPath pathB;
 
 }

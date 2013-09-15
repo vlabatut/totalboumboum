@@ -67,8 +67,8 @@ public class Zone {
 		// avant tout : test d'interruption
 		myAI.checkInterruption();
 		//on prend les infos de la zone du jeu
-		this.setZone(zone);
 		this.myAI = myAI;
+		this.setZone(zone);
 		ownHero = zone.getOwnHero();
 		ennemies = zone.getHeroes();
 		bombs = zone.getBombs();

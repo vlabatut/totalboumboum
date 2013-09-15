@@ -101,16 +101,20 @@ public class PathFinder {
 				new BasicHeuristicCalculator(),
 				new MySuccessor(this.ai,this.time)
 				);
-		AiPath temppath = astar.processShortestPath(hero.getTile(), targetList);
+		if(targetList!=null && !targetList.isEmpty() && targetList.get(0)!=null)
+		{	AiPath temppath = astar.processShortestPath(hero.getTile(), targetList);
 		
-		if(temppath.isEmpty())
-			throw new NoWayException();
-		
-		if(path==null || temppath.getLength() < path.getLength()-curIndex) {
-			this.curIndex=0;
-			this.path=temppath;
-			this.targetList=targetList;
+			if(temppath.isEmpty())
+				throw new NoWayException();
+			
+			if(path==null || temppath.getLength() < path.getLength()-curIndex) {
+				this.curIndex=0;
+				this.path=temppath;
+				this.targetList=targetList;
+			}
 		}
+		else
+			throw new NoWayException();
 	}
 	
 	/**

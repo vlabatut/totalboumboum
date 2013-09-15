@@ -918,15 +918,18 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			List<AiTile> destructibleTiles, AiHero enemy)
 			throws StopRequestException {
 		checkInterruption();
-		AiTile closestTile = destructibleTiles.get(0);
-		int distance = gameZone.getTileDistance(closestTile, enemy.getTile());
-		for (int i = 1; i < destructibleTiles.size(); i++) {
-			checkInterruption();
-			AiTile temp = destructibleTiles.get(i);
-			int tempDis = gameZone.getTileDistance(temp, enemy.getTile());
-			if (tempDis < distance) {
-				distance = tempDis;
-				closestTile = temp;
+		AiTile closestTile = ourHero.getTile();
+		if(!destructibleTiles.isEmpty())
+		{	closestTile = destructibleTiles.get(0);
+			int distance = gameZone.getTileDistance(closestTile, enemy.getTile());
+			for (int i = 1; i < destructibleTiles.size(); i++) {
+				checkInterruption();
+				AiTile temp = destructibleTiles.get(i);
+				int tempDis = gameZone.getTileDistance(temp, enemy.getTile());
+				if (tempDis < distance) {
+					distance = tempDis;
+					closestTile = temp;
+				}
 			}
 		}
 		return closestTile;

@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class DereliGeckalan extends ArtificialIntelligence {
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
-	private int matris[][] = null;
+	private int matris[][] = null; 
 	/** */
 	private AiTile nextTile;
 	/** */

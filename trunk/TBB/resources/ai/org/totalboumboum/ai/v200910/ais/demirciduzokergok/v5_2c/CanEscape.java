@@ -10,32 +10,30 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 import org.totalboumboum.ai.v200910.adapter.data.AiFire;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
-import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * This class is for expriming the zone of the game with a matrix placing different danger
- * levels to each case.
+ * This class is for calculating if we can find a secured place if we pose a bomb.
  * 
  * @author Mustafa Göktuğ Düzok
- *
+ * 
  */
 @SuppressWarnings("deprecation")
-public class Safety_Map {
-	/** */
-	private AiZone our_zone;
+public class CanEscape {
 	/** */
 	@SuppressWarnings("unused")
-	private AiHero our_hero;
+	private AiZone ourZone;
 	/** */
+	private AiHero ourHero;
+	/** */
+	@SuppressWarnings("unused")
 	private Collection<AiHero> enemies;
 	
 	/** */
 	private Collection<AiBlock> blocks;
-	/** */
-	private Collection<AiItem> bonus;
+
 	/** */
 	private Collection<AiFire> fires;
 	/** */
@@ -46,18 +44,14 @@ public class Safety_Map {
 	/** */
 	public int height;
 	/** */
-	private int pos_x;
+	private int posX;
 	/** */
-	private int pos_y;
-	//Different exprimes for the cases possible. The more secured places will be
-	//exprimed with negative numbers and the dangerous cases will be exprimed with positive ones.
-	//enemies will be exprimed with zero.
+	private int posY;
+	
 	/** */
 	public  double BONUS=-300;
 	/** */
-	public  double DEST_WALL=-50;
-	/** */
-	public  double INDEST_WALL=-10;
+	public  double WALL=-10;
 	/** */
 	public double SAFE_CASE=-1000;
 	/** */
@@ -68,37 +62,36 @@ public class Safety_Map {
 	public double ENEMIE=0;
 	
 
-	//matrix stocking the danger levels:
 	/** */
 	public double security_matrix[][];
 	/** */
 	ArtificialIntelligence ai;
 	
-	/** 
-	 * Constructer of the class Safety_Map
-	 * @param zone 
+	/** Constructeur of the Can_escape
+	 * 
+	 * @param zone
 	 * 		Description manquante !
-	 * @param ai 
+	 * @param ai
 	 * 		Description manquante !
-	 * @throws StopRequestException 
+	 * @throws StopRequestException
 	 * 		Description manquante !
 	 */
-	public Safety_Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
+	public CanEscape(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();
 		this.ai = ai;
-		this.our_zone=zone;
+		this.ourZone=zone;
 		this.blocks=zone.getBlocks();
-		this.bonus=zone.getItems();
+
 		this.fires=zone.getFires();
 		this.bombs=zone.getBombs();
-		//All the heros in the zone:
-		this.enemies=zone.getRemainingHeroes();
+		//Notre bomberman est incluce aussi:
+		this.enemies=zone.getHeroes();
 		
-		this.our_hero=zone.getOwnHero();
+		this.ourHero=zone.getOwnHero();
 		
 		this.width=zone.getWidth();
 		this.height=zone.getHeight();
-		//Method for Filling the matrix:
+		/*Avec la fonction Fill_The_Matrix,on remplir la matrice */
 		Fill_The_Matrix();
 	}
 
@@ -109,7 +102,7 @@ public class Safety_Map {
 	 */
 	public void Fill_The_Matrix() throws StopRequestException {
 		ai.checkInterruption();
-		//firstly we place all the matrice with SAFE_CASE:
+		//First of all, we fill the matrce with safe cases.
 		int x,y;
 		security_matrix=new double[height][width];
 		for(y=0;y<height;y++){
@@ -120,49 +113,36 @@ public class Safety_Map {
 			}
 		}
 	
-		//placing the walls:
+		/*Placing the walls */
 		Iterator<AiBlock> block_iterator=blocks.iterator();
 		AiBlock blck;
 		while(block_iterator.hasNext()==true){
 			ai.checkInterruption();
 			blck=block_iterator.next();
-			pos_x=blck.getCol();
-			pos_y=blck.getLine();
-			if(blck.isDestructible())
-				security_matrix[pos_y][pos_x]=DEST_WALL;
-			else
-				security_matrix[pos_y][pos_x]=INDEST_WALL;
+			posX=blck.getCol();
+			posY=blck.getLine();
+
+			
+				security_matrix[posY][posX]=WALL;
 		}
 	
 	
+				
 		
-		//placing the bonus:
-		Iterator<AiItem> bonus_iterator = bonus.iterator();
-		AiItem item_bonus;
-
-		while (bonus_iterator.hasNext()) {
-			ai.checkInterruption();
-			item_bonus = bonus_iterator.next();
-
-			pos_x = item_bonus.getCol();
-			pos_y = item_bonus.getLine();
-
-			security_matrix[pos_y][pos_x]=BONUS;
-
-		}		
-					
-		
-		//placing the fire:
+			/*Placing fire*/
 		Iterator<AiFire> fire_iterator=fires.iterator();
 		AiFire fr;
 		while(fire_iterator.hasNext()){
 			ai.checkInterruption();
 			fr=fire_iterator.next();
-			pos_x=fr.getCol();
-			pos_y=fr.getLine();
-			security_matrix[pos_y][pos_x]=FIRE;
+			posX=fr.getCol();
+			posY=fr.getLine();
+			security_matrix[posY][posX]=FIRE;
 		}
-	
+		
+		/*Placing the different danger levels according the time left before explosion
+		 * More time left is much secure and it is exprimed in smaller numbers than the bombs
+		 * which has less time left before its explosion */
 		
 		
 		double time_left;
@@ -177,17 +157,13 @@ public class Safety_Map {
 		
 		
 		
-		
-		//placing the different danger levels:
-		
 		while(iterate_bombs.hasNext()==true){
 			ai.checkInterruption();
 			bmb=iterate_bombs.next();
 			
-			pos_x=bmb.getCol();
-			pos_y=bmb.getLine();
-			//calculating the time left before the explosion of the bomb and placing this result(
-			// we want to express the less time left with a bigger level so we used:(1/timeleft)*100000)
+			posX=bmb.getCol();
+			posY=bmb.getLine();
+			//calculating the time left before the explosion of the bombs:
 			
 				
 			if(bmb.getNormalDuration()-bmb.getTime()>0){		
@@ -195,11 +171,10 @@ public class Safety_Map {
 	
 			danger_level=(1/(time_left))*100000;
 			}
-			//bomb should explore if it is working:
+			//Bomb should explore if it is working
 			else if(bmb.getNormalDuration()-bmb.getTime()==0)
 				time_left=1000000;
-			
-			//if not, we are making a countdown and calculating a danger level for it:
+		//If it is not working, we make count down from 1500 ms.
 			else {		
 				time_left=1500+(bmb.getNormalDuration()-bmb.getTime());
 				if(time_left<0)
@@ -210,7 +185,7 @@ public class Safety_Map {
 					
 					
 			
-				//placing the danger levels to the matrix:
+		//Here we place the danger levels according the calculations made:		
 				
 			Block_Tile=bmb.getTile();
 			
@@ -222,17 +197,17 @@ public class Safety_Map {
 			if(blocks_right.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
 					ai.checkInterruption();
-					if( (pos_x+k<width) && ((security_matrix[pos_y][pos_x+k]==SAFE_CASE))){
-						security_matrix[pos_y][pos_x+k]=danger_level;
+					if( (posX+k<width) && ((security_matrix[posY][posX+k]==SAFE_CASE))){
+						security_matrix[posY][posX+k]=danger_level;
 					}
 					else{
-						if( (pos_x+k<width) && (security_matrix[pos_y][pos_x+k]==FIRE))
-							security_matrix[pos_y][pos_x+k]=FIRE;
-						else if(pos_x+k<width && security_matrix[pos_y][pos_x+k]==BOMB)
-							security_matrix[pos_y][pos_x+k]=BOMB;
+						if( (posX+k<width) && (security_matrix[posY][posX+k]==FIRE))
+							security_matrix[posY][posX+k]=FIRE;
+						else if(posX+k<width && security_matrix[posY][posX+k]==BOMB)
+							security_matrix[posY][posX+k]=BOMB;
 						else{
-							if((pos_x+k<width) && security_matrix[pos_y][pos_x+k]< danger_level)
-								security_matrix[pos_y][pos_x+k]=danger_level;
+							if((posX+k<width) && security_matrix[posY][posX+k]< danger_level)
+								security_matrix[posY][posX+k]=danger_level;
 						}		
 					}	
 				}
@@ -241,17 +216,17 @@ public class Safety_Map {
 			if(blocks_left.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
 					ai.checkInterruption();
-					if( (pos_x-k>0) && ((security_matrix[pos_y][pos_x-k]==SAFE_CASE)||(security_matrix[pos_y][pos_x-k]==BONUS))){
-						security_matrix[pos_y][pos_x-k]=danger_level;
+					if( (posX-k>0) && ((security_matrix[posY][posX-k]==SAFE_CASE)||(security_matrix[posY][posX-k]==BONUS))){
+						security_matrix[posY][posX-k]=danger_level;
 					}
 					else{
-						if( (pos_x-k>0) && (security_matrix[pos_y][pos_x-k]==FIRE))
-							security_matrix[pos_y][pos_x-k]=FIRE;
-						else if(pos_x-k>0 && security_matrix[pos_y][pos_x-k]==BOMB)
-							security_matrix[pos_y][pos_x-k]=BOMB;
+						if( (posX-k>0) && (security_matrix[posY][posX-k]==FIRE))
+							security_matrix[posY][posX-k]=FIRE;
+						else if(posX-k>0 && security_matrix[posY][posX-k]==BOMB)
+							security_matrix[posY][posX-k]=BOMB;
 						else{
-							if((pos_x-k>0) && security_matrix[pos_y][pos_x-k]< danger_level)
-								security_matrix[pos_y][pos_x-k]=danger_level;
+							if((posX-k>0) && security_matrix[posY][posX-k]< danger_level)
+								security_matrix[posY][posX-k]=danger_level;
 						}		
 					}	
 				}
@@ -261,17 +236,17 @@ public class Safety_Map {
 			if(blocks_down.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
 					ai.checkInterruption();
-					if( (pos_y+k<height) && ((security_matrix[pos_y+k][pos_x]==SAFE_CASE))){
-						security_matrix[pos_y+k][pos_x]=danger_level;
+					if( (posY+k<height) && ((security_matrix[posY+k][posX]==SAFE_CASE))){
+						security_matrix[posY+k][posX]=danger_level;
 					}
 					else{
-						if( (pos_y+k<height) && (security_matrix[pos_y+k][pos_x]==FIRE))
-							security_matrix[pos_y+k][pos_x]=FIRE;
-						else if(pos_y+k<height && security_matrix[pos_y+k][pos_x]==BOMB)
-							security_matrix[pos_y+k][pos_x]=BOMB;
+						if( (posY+k<height) && (security_matrix[posY+k][posX]==FIRE))
+							security_matrix[posY+k][posX]=FIRE;
+						else if(posY+k<height && security_matrix[posY+k][posX]==BOMB)
+							security_matrix[posY+k][posX]=BOMB;
 						else{
-							if((pos_y+k<height) && security_matrix[pos_y+k][pos_x]< danger_level)
-								security_matrix[pos_y+k][pos_x]=danger_level;
+							if((posY+k<height) && security_matrix[posY+k][posX]< danger_level)
+								security_matrix[posY+k][posX]=danger_level;
 						}		
 					}	
 				}
@@ -280,24 +255,26 @@ public class Safety_Map {
 			if(blocks_up.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
 					ai.checkInterruption();
-					if( (pos_y-k>0) && ((security_matrix[pos_y-k][pos_x]==SAFE_CASE))){
-						security_matrix[pos_y-k][pos_x]=danger_level;
+					if( (posY-k>0) && ((security_matrix[posY-k][posX]==SAFE_CASE))){
+						security_matrix[posY-k][posX]=danger_level;
 					}
 					else{
-						if( (pos_y-k>0) && (security_matrix[pos_y-k][pos_x]==FIRE))
-							security_matrix[pos_y-k][pos_x]=FIRE;
-						else if(pos_y-k>0 && security_matrix[pos_y-k][pos_x]==BOMB)
-							security_matrix[pos_y-k][pos_x]=BOMB;
+						if( (posY-k>0) && (security_matrix[posY-k][posX]==FIRE))
+							security_matrix[posY-k][posX]=FIRE;
+						else if(posY-k>0 && security_matrix[posY-k][posX]==BOMB)
+							security_matrix[posY-k][posX]=BOMB;
 						else{
-							if((pos_y-k>0) && security_matrix[pos_y-k][pos_x]< danger_level)
-								security_matrix[pos_y-k][pos_x]=danger_level;
+							if((posY-k>0) && security_matrix[posY-k][posX]< danger_level)
+								security_matrix[posY-k][posX]=danger_level;
 						}		
 					}	
 				}
 			}
 		}
 	
-		//placing the bombs:
+
+		
+		//Placing the bombs
 		
 		Iterator<AiBomb> it_bmb = bombs.iterator();
 		AiBomb bm;
@@ -305,28 +282,53 @@ public class Safety_Map {
 		while (it_bmb.hasNext()) {
 			ai.checkInterruption();
 			bm = it_bmb.next();
-			pos_x = bm.getCol();
-			pos_y = bm.getLine();
-			if(security_matrix[pos_y][pos_x]!= FIRE)
-			security_matrix[pos_y][pos_x] = BOMB;	
+			posX = bm.getCol();
+			posY = bm.getLine();
+			if(security_matrix[posY][posX]!= FIRE)
+			security_matrix[posY][posX] = BOMB;	
 	}
 	
+		int i=0;
 		
-		//placing the heros
-		Iterator<AiHero> it_hero=enemies.iterator();
-		AiHero hr;
-		while(it_hero.hasNext()){
+		//Here we suppose that our bomberman is a bomb and we get the range of the bomb
+		//We calculate the possible places which will be affected when the bomb is posed
+		//and in the Can_escape_Manager we will find the safe cases to escape(if they exist)
+		//according to this part of this class.
+		
+		while(ourHero.getBombRange()>i){
 			ai.checkInterruption();
-			hr=it_hero.next();
-			pos_x=hr.getCol();
-			pos_y=hr.getLine();
-			if(hr!=our_zone.getOwnHero()){
-				if(security_matrix[pos_y][pos_x] <=0)
-					security_matrix[pos_y][pos_x]=ENEMIE;
-				
+			posY=ourHero.getLine();
+			posX=ourHero.getCol();
+			if(i==0){
+				security_matrix[posY][posX]=BOMB;
+			
 			}
+			else{
+			if(posX+i<width)
+			{
+				if(security_matrix[posY][posX+i]!=WALL)
+					security_matrix[posY][posX+i]=FIRE;
+			}
+			if(posX-i>0)
+			{
+				if(security_matrix[posY][posX-i]!=WALL)
+					security_matrix[posY][posX-i]=FIRE;
+			}
+			if(posY-i>0)
+			{
+				if(security_matrix[posY-i][posX]!=WALL)
+					security_matrix[posY-i][posX]=FIRE;
+			}
+			if(posY+i<height)
+			{
+				if(security_matrix[posY+i][posX]!=WALL)
+					security_matrix[posY+i][posX]=FIRE;
+			}
+			}
+			i++;
+			
+			
 		}
-		
 		
 	
 	}

@@ -187,6 +187,12 @@ public class FindikSirin extends ArtificialIntelligence
 		return result;
 	}
 	
+	/** classe implémentant l'algorithme A* */
+	public Astar astar;
+	/** classe implémentant la fonction heuristique */
+	public HeuristicCalculator heuristicCalculator;
+	/** classe implémentant la fonction de coût */
+	public MatrixCostCalculator costCalculator;
 
 	/**
 	 * initialisation
@@ -195,10 +201,18 @@ public class FindikSirin extends ArtificialIntelligence
 	 */
 	private void init() throws StopRequestException
 	{	checkInterruption();
-
+		
 		zone = getPercepts();
 		ownHero = zone.getOwnHero();
 		updateLocation();
+		
+		// initialisation de A*
+		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
+		costCalculator = new MatrixCostCalculator(costMatrix);
+		heuristicCalculator = new BasicHeuristicCalculator();
+		astar = new Astar(this,ownHero,costCalculator,heuristicCalculator);
+		astar.setMaxNodes(100);
+		
 		safetyManager = new SafetyManager(this);
 		//setOurBombs();
 	}
@@ -257,15 +271,13 @@ public class FindikSirin extends ArtificialIntelligence
 	public boolean areYouSure() throws StopRequestException{
 		checkInterruption();
 		List <AiTile> safeTiles = safetyManager.findSafeTiles(currentTile);
-		Astar astar;
-		HeuristicCalculator heuristicCalculator;
-		MatrixCostCalculator costCalculator;
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator = new MatrixCostCalculator(costMatrix);
-		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(this,ownHero,costCalculator,heuristicCalculator);
-		AiPath path=astar.processShortestPath(currentTile, safeTiles);
-		AiTile safest= path.getLastTile();
+//		HeuristicCalculator heuristicCalculator = new BasicHeuristicCalculator();
+//		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
+//		MatrixCostCalculator costCalculator = new MatrixCostCalculator(costMatrix);
+//		Astar astar = new Astar(this,ownHero,costCalculator,heuristicCalculator);
+		AiPath path = astar.processShortestPath(currentTile, safeTiles);
+		
+		AiTile safest = path.getLastTile();
 		return safetyManager.isReachable(safest);
 	}
 	

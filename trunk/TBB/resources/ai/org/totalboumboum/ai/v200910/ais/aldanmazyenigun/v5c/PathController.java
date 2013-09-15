@@ -7,11 +7,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.BasicCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -78,10 +73,6 @@ public class PathController {
 
 		this.ai = ai;
 		zone = ai.getZone();
-		costCalculator = new BasicCostCalculator();
-		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai, ai.getOwnHero(), costCalculator,
-				heuristicCalculator);
 		updatePrev();
 	}
 
@@ -117,11 +108,12 @@ public class PathController {
 	public void setDestination(AiTile destination) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
+		updateCostCalculator();
 		arrived = false;
 		tileDest = destination;
 		xDest = tileDest.getPosX();
 		yDest = tileDest.getPosY();
-		path = astar.processShortestPath(ai.getActualTile(), destination);
+		path = ai.astar.processShortestPath(ai.getActualTile(), destination);
 	}
 
 	/**
@@ -138,12 +130,13 @@ public class PathController {
 	public void setDestination(double x, double y) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
+		updateCostCalculator();
 		arrived = false;
 		double normalized[] = zone.normalizePosition(x, y);
 		xDest = normalized[0];
 		yDest = normalized[1];
 		tileDest = zone.getTile(xDest, yDest);
-		path = astar.processShortestPath(ai.getActualTile(), tileDest);
+		path = ai.astar.processShortestPath(ai.getActualTile(), tileDest);
 	}
 
 	/**
@@ -251,14 +244,28 @@ public class PathController {
 	}
 
 	// ///////////////////////////////////////////////////////////////
-	// A STAR /////////////////////////////////////
+	// COST CALCULATOR			 /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-	/** classe implémentant l'algorithme A* */
-	private Astar astar;
-	/** classe implémentant la fonction heuristique */
-	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
-	private CostCalculator costCalculator;
+	/**
+	 * @throws StopRequestException
+	 *             Description manquante !
+	 */
+	private void updateCostCalculator() throws StopRequestException {
+		ai.checkInterruption(); // APPEL OBLIGATOIRE
+
+		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
+		// i.e. : plus le temps avant l'explosion est long, plus le coût est
+		// faible
+		// double dangerMatrix[][] = ai.getZoneFormee().getMatrix();
+		for (int line = 0; line < zone.getHeight(); line++) {
+			ai.checkInterruption(); // APPEL OBLIGATOIRE
+			for (int col = 0; col < zone.getWidth(); col++) {
+				ai.checkInterruption(); // APPEL OBLIGATOIRE
+				double cost = 1;
+				ai.costCalculator.setCost(line, col, cost);
+			}
+		}
+	}
 
 	// ///////////////////////////////////////////////////////////////
 	// PROCESS /////////////////////////////////////
@@ -274,13 +281,15 @@ public class PathController {
 	public Direction update() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
+		updateCostCalculator();
+		
 		Direction result = Direction.NONE;
 		if (!hasArrived()) { // on vérifie que le joueur est toujours sur le
 								// chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if (path.isEmpty() || !checkPathValidity())
-				path = astar.processShortestPath(ai.getActualTile(), tileDest);
+				path = ai.astar.processShortestPath(ai.getActualTile(), tileDest);
 			if (checkPathValidity()) { // s'il reste deux cases au moins dans le
 										// chemin, on se dirige vers la suivante
 				if (path.getLength() > 1) {

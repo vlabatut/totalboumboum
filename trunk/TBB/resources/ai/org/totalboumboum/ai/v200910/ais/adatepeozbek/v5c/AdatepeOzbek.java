@@ -11,6 +11,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.*;
+import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 
 /**
  * 
@@ -29,6 +32,8 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	private AiZone zone = null;
 	/** */
 	private AiAction actionToDo = null;
+	/** */
+	protected Astar astar = null;
 	/** */
 	private AiPath path = null;
 	/** */
@@ -49,14 +54,17 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	public long idleTime = 0;
 	/** */
 	public int privateRang = 0;
+	/** */
+	public static int aStarQueueSize = 0;
+	/** */
+	protected double costArray[][];
 	
 	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
-		zone = getPercepts();
-		ownHero = zone.getOwnHero();
-		allPassedTiles = new ArrayList<AiTile>();
+		if(ownHero==null)
+			init();
 		
 		if(triedTiles == null)
 			triedTiles = new TriedTiles(this);
@@ -96,6 +104,37 @@ public class AdatepeOzbek extends ArtificialIntelligence
 		return actionToDo;
 	}
 	
+	/**
+	 * @throws StopRequestException 
+	 * 		Description manquante !
+	 */
+	private void init() throws StopRequestException
+	{	zone = getPercepts();
+		ownHero = zone.getOwnHero();
+		allPassedTiles = new ArrayList<AiTile>();
+		
+		costArray = new double[zone.getHeight()][zone.getWidth()];
+		for(int i=0;i<zone.getHeight();i++)
+			for(int j=0;j<zone.getWidth();j++)
+				costArray[i][j] = 1;
+		astar = new Astar(this,ownHero, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
+		astar.setMaxNodes(50);
+	}
+	
+	/**
+	 * Test : maintains the maximal frange size.
+	 * 
+	 * @throws StopRequestException 
+	 * 		Description manquante !
+	 */
+	public void updateAstarQueueSize() throws StopRequestException
+	{	int newSize = astar.getQueueMaxSize();
+		if(newSize>aStarQueueSize)
+		{	aStarQueueSize = newSize;
+//			System.out.println(">>>>>>> AdatepeOzbek: "+aStarQueueSize+"("+zone.getHeight()+"x"+zone.getWidth()+")");
+		}
+	}
+
 	/**
 	 * 
 	 * @return
