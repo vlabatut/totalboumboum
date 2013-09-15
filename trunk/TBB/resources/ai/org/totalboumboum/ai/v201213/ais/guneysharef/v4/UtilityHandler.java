@@ -27,563 +27,692 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Seli Sharef
  */
 @SuppressWarnings("deprecation")
-public class UtilityHandler extends AiUtilityHandler<GuneySharef>
-{	
+public class UtilityHandler extends AiUtilityHandler<GuneySharef> {
 	/**
 	 * boolean
 	 */
-	boolean herocontrol=true;
+	boolean herocontrol = true;
+
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * 
-	 * @param ai	
-	 * 		l'agent que cette classe doit gérer.
+	 * @param ai
+	 *            l'agent que cette classe doit gérer.
 	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
+	 * @throws StopRequestException
+	 *             Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	
-	protected UtilityHandler(GuneySharef ai) throws StopRequestException
-    {	super(ai);
+
+	protected UtilityHandler(GuneySharef ai) throws StopRequestException {
+		super(ai);
 		ai.checkInterruption();
-		
+
 		// on règle la sortie texte pour ce gestionnaire
 		verbose = false;
-	
-		
+
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// DATA						/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
+	// DATA /////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
 	@Override
 	/**
 	 * Réinitialise les structures de données modifiées à chaque itération
 	 */
-	protected void resetCustomData() throws StopRequestException
-	{	ai.checkInterruption();
-		
+	protected void resetCustomData() throws StopRequestException {
+		ai.checkInterruption();
+
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// PROCESSING				/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
+	// PROCESSING /////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
 	/**
 	 * pour la selection des cases qu'on veut calculer l'utilité
 	 */
 	@Override
-	protected Set<AiTile> selectTiles() throws StopRequestException
-	{	ai.checkInterruption();
+	protected Set<AiTile> selectTiles() throws StopRequestException {
+		ai.checkInterruption();
 		Set<AiTile> result = new TreeSet<AiTile>();
-		AiHero h=this.ai.getZone().getOwnHero();
-		AiTile t=h.getTile();
-		AiTile t2=t;
-		
+		AiHero h = this.ai.getZone().getOwnHero();
+		AiTile t = h.getTile();
+		AiTile t2 = t;
+
 		Queue<AiTile> q = new LinkedList<AiTile>();
 		q.add(t2);
-		while(!q.isEmpty()){
+		while (!q.isEmpty()) {
 			ai.checkInterruption();
-			t2=q.poll();
-			for(Direction direction : Direction.getPrimaryValues()){
+			t2 = q.poll();
+			for (Direction direction : Direction.getPrimaryValues()) {
 				ai.checkInterruption();
-				if(t2.getNeighbor(direction).getBombs().isEmpty()
-						&&t2.getNeighbor(direction).getBlocks().isEmpty()
-						&&!q.contains(t2.getNeighbor(direction))
-						&&!result.contains(t2.getNeighbor(direction))
-						&&!t2.getNeighbor(direction).equals(t)){
+				if (t2.getNeighbor(direction).getBombs().isEmpty()
+						&& t2.getNeighbor(direction).getBlocks().isEmpty()
+						&& !q.contains(t2.getNeighbor(direction))
+						&& !result.contains(t2.getNeighbor(direction))
+						&& !t2.getNeighbor(direction).equals(t)) {
 					q.add(t2.getNeighbor(direction));
 				}
 			}
-			if(!q.isEmpty()){
-				t2=q.peek();
+			if (!q.isEmpty()) {
+				t2 = q.peek();
 				result.add(t2);
-				
-			}
-			else
+
+			} else
 				break;
 		}
 		result.add(t);
-		
-		
-		
+
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// CRITERIA					/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
+	// CRITERIA /////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
 	@Override
 	/**
 	 * Initialise tous les critères
 	 */
-	protected void initCriteria() throws StopRequestException
-	{	ai.checkInterruption();
-		
-	new Competition(ai);
-	new Distance(ai);
-	new Convenience(ai);
-	new NbrDW(ai);
-	new DistA(ai);
+	protected void initCriteria() throws StopRequestException {
+		ai.checkInterruption();
 
+		new Competition(ai);
+		new Distance(ai);
+		new Convenience(ai);
+		new NbrDW(ai);
+		new DistA(ai);
 
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CASE						/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**Mode de collecte */
+
+	// ///////////////////////////////////////////////////////////////
+	// CASE /////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
+	/** Mode de collecte */
 	private final String CASE_NAME1 = "Visible item";
 	/** */
 	private final String CASE_NAME2 = "Tile close to a destructible wall(s)";
 	/** */
 	private final String CASE_NAME3 = "Tile close to indestructible wall(s)";
-	
-	/**Mode d'attaque*/
+
+	/** Mode d'attaque */
 	private final String CASE_NAME4 = "Tile close to an enemy";
 	/** */
 	private final String CASE_NAME5 = "Block enemy";
-	
+
 	/**
 	 * 
 	 */
 	private final String CASE_NAME6 = "Empty tile";
+
 	/**
 	 * on determine les criteres pour chaque cas
 	 */
 	@Override
-	protected void initCases() throws StopRequestException
-	{	ai.checkInterruption();
-		Set<AiUtilityCriterion<?,?>> criteria;
-	
+	protected void initCases() throws StopRequestException {
+		ai.checkInterruption();
+		Set<AiUtilityCriterion<?, ?>> criteria;
 
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
 		criteria.add(criterionMap.get(Distance.NAME));
 		criteria.add(criterionMap.get(Competition.NAME));
 		criteria.add(criterionMap.get(Convenience.NAME));
-		AiUtilityCase case1=new AiUtilityCase(ai,CASE_NAME1,criteria);
-			
+		AiUtilityCase case1 = new AiUtilityCase(ai, CASE_NAME1, criteria);
 
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
 		criteria.add(criterionMap.get(Distance.NAME));
 		criteria.add(criterionMap.get(Competition.NAME));
 		criteria.add(criterionMap.get(NbrDW.NAME));
-		AiUtilityCase case2=new AiUtilityCase(ai,CASE_NAME2,criteria);
+		AiUtilityCase case2 = new AiUtilityCase(ai, CASE_NAME2, criteria);
 
-
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
 		criteria.add(criterionMap.get(Distance.NAME));
 		criteria.add(criterionMap.get(Competition.NAME));
-		AiUtilityCase case3=new AiUtilityCase(ai,CASE_NAME3,criteria);
-		
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		AiUtilityCase case3 = new AiUtilityCase(ai, CASE_NAME3, criteria);
+
+		criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
 		criteria.add(criterionMap.get(DistA.NAME));
-		AiUtilityCase case4=new AiUtilityCase(ai,CASE_NAME4,criteria);
-		
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		AiUtilityCase case4 = new AiUtilityCase(ai, CASE_NAME4, criteria);
+
+		criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
 		criteria.add(criterionMap.get(Distance.NAME));
-		AiUtilityCase case5=new AiUtilityCase(ai,CASE_NAME5,criteria);
-		
-		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+		AiUtilityCase case5 = new AiUtilityCase(ai, CASE_NAME5, criteria);
+
+		criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
 		criteria.add(criterionMap.get(Distance.NAME));
-		AiUtilityCase case6=new AiUtilityCase(ai,CASE_NAME6,criteria);
-		
+		AiUtilityCase case6 = new AiUtilityCase(ai, CASE_NAME6, criteria);
+
 		caseMap.put(CASE_NAME1, case1);
 		caseMap.put(CASE_NAME2, case2);
 		caseMap.put(CASE_NAME3, case3);
 		caseMap.put(CASE_NAME4, case4);
 		caseMap.put(CASE_NAME5, case5);
 		caseMap.put(CASE_NAME6, case6);
-		
+
 	}
-	
 
 	@Override
 	/**
 	 * prend une case en paramètre, et identifie le cas correspondant
 	 */
-	protected AiUtilityCase identifyCase(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption();
+	protected AiUtilityCase identifyCase(AiTile tile)
+			throws StopRequestException {
+		ai.checkInterruption();
 		AiUtilityCase result = null;
-		
 
-		
-		
-		if(!this.ai.getZone().getRemainingOpponents().isEmpty()){
-			for(AiHero h :this.ai.getZone().getRemainingOpponents()){
+		if (!this.ai.getZone().getRemainingOpponents().isEmpty()) {
+			for (AiHero h : this.ai.getZone().getRemainingOpponents()) {
 				ai.checkInterruption();
-				if(this.ai.utilityHandler.selectTiles().contains(h.getTile())){
-					herocontrol=false;
+				if (this.ai.utilityHandler.selectTiles().contains(h.getTile())) {
+					herocontrol = false;
 					break;
 				}
 			}
 		}
-		
-		AiMode m=this.ai.modeHandler.getMode();
-		if(m.equals(AiMode.COLLECTING)){
-			if(tile.getItems().contains(AiItemType.EXTRA_BOMB)||tile.getItems().contains(AiItemType.EXTRA_FLAME)){
-				
 
-				return result= caseMap.get(CASE_NAME1);
-				
+		AiMode m = this.ai.modeHandler.getMode();
+		if (m.equals(AiMode.COLLECTING)) {
+			if (tile.getItems().contains(AiItemType.EXTRA_BOMB)
+					|| tile.getItems().contains(AiItemType.EXTRA_FLAME)) {
+
+				return result = caseMap.get(CASE_NAME1);
+
 			}
-			for(Direction direction: Direction.getPrimaryValues()){
+			for (Direction direction : Direction.getPrimaryValues()) {
 				ai.checkInterruption();
-				for(AiBlock b:tile.getNeighbor(direction).getBlocks()){
+				for (AiBlock b : tile.getNeighbor(direction).getBlocks()) {
 					ai.checkInterruption();
-					if(b.isDestructible()){
-						
-					
-						return result= caseMap.get(CASE_NAME2);
+					if (b.isDestructible()) {
+
+						return result = caseMap.get(CASE_NAME2);
 					}
 				}
 			}
-			
-			for(Direction direction: Direction.getPrimaryValues()){
+
+			for (Direction direction : Direction.getPrimaryValues()) {
 				ai.checkInterruption();
-				for(AiBlock b:tile.getNeighbor(direction).getBlocks()){
+				for (AiBlock b : tile.getNeighbor(direction).getBlocks()) {
 					ai.checkInterruption();
-					if(!b.isDestructible()){
-					
-						return result= caseMap.get(CASE_NAME3);
+					if (!b.isDestructible()) {
+
+						return result = caseMap.get(CASE_NAME3);
 					}
 				}
 			}
-			
-			return result= caseMap.get(CASE_NAME6);
+
+			return result = caseMap.get(CASE_NAME6);
 		}
-		
-		if(m.equals(AiMode.ATTACKING)){
-			for(Direction direction: Direction.getPrimaryValues()){
+
+		if (m.equals(AiMode.ATTACKING)) {
+			for (Direction direction : Direction.getPrimaryValues()) {
 				ai.checkInterruption();
-					if(this.ai.getAnEnemyInMyRange(tile, direction, 0)){
-					
-						return result= caseMap.get(CASE_NAME4);
-					}
-				
+				if (this.ai.getAnEnemyInMyRange(tile, direction, 0)) {
+
+					return result = caseMap.get(CASE_NAME4);
+				}
+
 			}
-			if(this.ai.block(tile)){
-	
-				return result= caseMap.get(CASE_NAME5);
+			if (this.ai.block(tile)) {
+
+				return result = caseMap.get(CASE_NAME5);
 			}
-			
-			
-			return result= caseMap.get(CASE_NAME6);
-		
-		
+
+			return result = caseMap.get(CASE_NAME6);
+
 		}
-		
+
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// REFERENCE		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
+	// REFERENCE /////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
 	@Override
 	/**
 	 * on identifier les conbinaisons
 	 */
-	protected void initReferenceUtilities() throws StopRequestException
-	{	ai.checkInterruption();
-	
+	protected void initReferenceUtilities() throws StopRequestException {
+		ai.checkInterruption();
+
 		// on affecte les valeurs d'utilité
 		int utility;
 		AiUtilityCombination combi;
 		AiMode mode;
-		
+
 		// on commence avec le mode collecte
-		{	mode = AiMode.COLLECTING;
+		{
+			mode = AiMode.COLLECTING;
 			utility = 1;
-			
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),1);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),2);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),3);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),1);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),2);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),3);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),1);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),2);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		    }
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),3);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
+
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
 			}
 			{
-			combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.FALSE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
 			}
-			{	
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME3));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 1);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 2);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 3);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 1);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 2);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 3);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 1);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 2);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 3);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.FALSE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
 				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
 
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-				combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-				combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.FALSE);
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.FALSE);
 
 				defineUtilityValue(mode, combi, utility);
 
 				utility++;
 			}
-			{	
+			{
 				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
 
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-				combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-				combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.FALSE);
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.FALSE);
 
 				defineUtilityValue(mode, combi, utility);
 
 				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),1);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 1);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 2);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue((NbrDW) criterionMap.get(NbrDW.NAME), 3);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.TRUE);
+
+				defineUtilityValue(mode, combi, utility);
+
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.TRUE);
+
+				defineUtilityValue(mode, combi, utility);
+
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.FALSE);
+
+				defineUtilityValue(mode, combi, utility);
+
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.TRUE);
+
+				defineUtilityValue(mode, combi, utility);
+
+				utility++;
+			}
+
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
+
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				combi.setCriterionValue(
+						(Competition) criterionMap.get(Competition.NAME),
+						Boolean.FALSE);
+				combi.setCriterionValue(
+						(Convenience) criterionMap.get(Convenience.NAME),
+						Boolean.TRUE);
+
+				defineUtilityValue(mode, combi, utility);
+
+				utility++;
+			}
+
 		}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),2);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME2));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-			combi.setCriterionValue((NbrDW)criterionMap.get(NbrDW.NAME),3);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-			{	
-				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
 
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-				combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-				combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.TRUE);
-
-				defineUtilityValue(mode, combi, utility);
-
-				utility++;
-			}
-			{	
-				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
-
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-				combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.TRUE);
-				combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.TRUE);
-
-				defineUtilityValue(mode, combi, utility);
-
-				utility++;
-			}
-			{	
-				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
-
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-				combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-				combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.FALSE);
-
-				defineUtilityValue(mode, combi, utility);
-
-				utility++;
-			}
-			{	
-				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
-
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-				combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-				combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.TRUE);
-
-				defineUtilityValue(mode, combi, utility);
-
-				utility++;
-			}
-
-			{	
-				combi = new AiUtilityCombination(caseMap.get(CASE_NAME1));
-
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-				combi.setCriterionValue((Competition)criterionMap.get(Competition.NAME),Boolean.FALSE);
-				combi.setCriterionValue((Convenience)criterionMap.get(Convenience.NAME),Boolean.TRUE);
-
-				defineUtilityValue(mode, combi, utility);
-
-				utility++;
-			}
-
-
-		}
-		
 		// on traite maintenant le mode attaque
-		{	mode = AiMode.ATTACKING;
+		{
+			mode = AiMode.ATTACKING;
 			utility = 1;
 
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME6));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
 			}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME5));
-			combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.FALSE);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
-			combi.setCriterionValue((DistA)criterionMap.get(DistA.NAME),1);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
-			combi.setCriterionValue((DistA)criterionMap.get(DistA.NAME),2);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
-			combi.setCriterionValue((DistA)criterionMap.get(DistA.NAME),3);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
-			combi.setCriterionValue((DistA)criterionMap.get(DistA.NAME),1);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
-			combi.setCriterionValue((DistA)criterionMap.get(DistA.NAME),2);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
-			combi.setCriterionValue((DistA)criterionMap.get(DistA.NAME),3);
-			defineUtilityValue(mode, combi, utility);
-			utility++;
-		}
-
-
-			{	combi = new AiUtilityCombination(caseMap.get(CASE_NAME5));
-				combi.setCriterionValue((Distance)criterionMap.get(Distance.NAME),Boolean.TRUE);
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME5));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.FALSE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
+				combi.setCriterionValue((DistA) criterionMap.get(DistA.NAME), 1);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
+				combi.setCriterionValue((DistA) criterionMap.get(DistA.NAME), 2);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
+				combi.setCriterionValue((DistA) criterionMap.get(DistA.NAME), 3);
 				defineUtilityValue(mode, combi, utility);
 				utility++;
 			}
 
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
+				combi.setCriterionValue((DistA) criterionMap.get(DistA.NAME), 1);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
+				combi.setCriterionValue((DistA) criterionMap.get(DistA.NAME), 2);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME4));
+				combi.setCriterionValue((DistA) criterionMap.get(DistA.NAME), 3);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
 
-
-
-
-
-
-
-
-			
+			{
+				combi = new AiUtilityCombination(caseMap.get(CASE_NAME5));
+				combi.setCriterionValue(
+						(Distance) criterionMap.get(Distance.NAME),
+						Boolean.TRUE);
+				defineUtilityValue(mode, combi, utility);
+				utility++;
+			}
 
 		}
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// OUTPUT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
+	// OUTPUT /////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
 	@Override
 	/**
 	 * met a jours les sorties graphiques de l'agent
 	 */
-	public void updateOutput() throws StopRequestException
-	{	ai.checkInterruption();
-		
+	public void updateOutput() throws StopRequestException {
+		ai.checkInterruption();
+
 		// ici on se contente de faire le traitement par défaut
-		super.updateOutput();		
+		super.updateOutput();
 	}
 }

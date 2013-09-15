@@ -500,7 +500,7 @@ if(safeTile!=null)
 	}
 }
 
-if(safeTile==null)
+if(safeTile==null && currentDestination!=null)
 {
 	try
 	{	currentPath = astarPrecise.startProcess(ownLocation,currentDestination);

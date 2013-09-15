@@ -192,31 +192,34 @@ public class UtilityHandler extends AiUtilityHandler<ErdemTayyar> {
 
 
 		// Mode Collecte
-		Set<AiUtilityCriterion<?, ?>> criteria;
+//		Set<AiUtilityCriterion<?, ?>> criteria;
 		if (this.ai.getModeHandler().getMode().equals(AiMode.COLLECTING)) {
 			
 			if (!tile.getItems().isEmpty()) {
-				criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
-				criteria.add(criterionMap.get(Securite.NAME));
-				criteria.add(criterionMap.get(Pertinence.NAME));
-				criteria.add(criterionMap.get(Concurrence.NAME));
-				criteria.add(criterionMap.get(Temps.NAME));
-				return new AiUtilityCase(ai, CASE_NAME1, criteria);
+//				criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
+//				criteria.add(criterionMap.get(Securite.NAME));
+//				criteria.add(criterionMap.get(Pertinence.NAME));
+//				criteria.add(criterionMap.get(Concurrence.NAME));
+//				criteria.add(criterionMap.get(Temps.NAME));
+//				return new AiUtilityCase(ai, CASE_NAME1, criteria);
+				return(caseMap.get(CASE_NAME1));
 			}
 		
 			else if (count != Hcount) {
-			criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
-			criteria.add(criterionMap.get(Securite.NAME));
-			criteria.add(criterionMap.get(MurDestructible.NAME));
-			criteria.add(criterionMap.get(Temps.NAME));
-			return new AiUtilityCase(ai, CASE_NAME2, criteria);
+//			criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
+//			criteria.add(criterionMap.get(Securite.NAME));
+//			criteria.add(criterionMap.get(MurDestructible.NAME));
+//			criteria.add(criterionMap.get(Temps.NAME));
+//			return new AiUtilityCase(ai, CASE_NAME2, criteria);
+			return(caseMap.get(CASE_NAME2));
 		}
 			
 		else if (tile.getItems().isEmpty())
 		{
-			criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
-			criteria.add(criterionMap.get(Securite.NAME));
-			return new AiUtilityCase(ai, CASE_NAME5, criteria);
+//			criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
+//			criteria.add(criterionMap.get(Securite.NAME));
+//			return new AiUtilityCase(ai, CASE_NAME5, criteria);
+			return(caseMap.get(CASE_NAME5));
 		}
 		}
 			
@@ -234,19 +237,20 @@ public class UtilityHandler extends AiUtilityHandler<ErdemTayyar> {
 			}
 
 			if (heroCount > HcountLimit) {
-				criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
-				criteria.add(criterionMap.get(Securite.NAME));
-				criteria.add(criterionMap.get(Ennemie.NAME));
-				criteria.add(criterionMap.get(Temps.NAME));
-				return new AiUtilityCase(ai, CASE_NAME3, criteria);
+//				criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
+//				criteria.add(criterionMap.get(Securite.NAME));
+//				criteria.add(criterionMap.get(Ennemie.NAME));
+//				criteria.add(criterionMap.get(Temps.NAME));
+//				return new AiUtilityCase(ai, CASE_NAME3, criteria);
+				return(caseMap.get(CASE_NAME3));
 
 			}
 			else {
-				criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
-				criteria.add(criterionMap.get(Securite.NAME));
-				criteria.add(criterionMap.get(EnnemieDistance.NAME));
-				return new AiUtilityCase(ai, CASE_NAME4, criteria);
-
+//				criteria = new TreeSet<AiUtilityCriterion<?, ?>>();
+//				criteria.add(criterionMap.get(Securite.NAME));
+//				criteria.add(criterionMap.get(EnnemieDistance.NAME));
+//				return new AiUtilityCase(ai, CASE_NAME4, criteria);
+				return(caseMap.get(CASE_NAME4));
 			}
 
 		}

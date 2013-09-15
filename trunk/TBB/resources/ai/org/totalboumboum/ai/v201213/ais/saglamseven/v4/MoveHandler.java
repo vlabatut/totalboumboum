@@ -314,7 +314,7 @@ public class MoveHandler extends AiMoveHandler<SaglamSeven>{
 		if (controlBombNextTile >= 1 && controlBombCurrentTile == 0) {
 			currentDirection = Direction.NONE;
 		}
-		if (!nextTile.getFires().isEmpty() || nextTile.equals(currentTile)){
+		if (nextTile==null || !nextTile.getFires().isEmpty() || nextTile.equals(currentTile)){
 			currentDirection = Direction.NONE;
 		}
 		return currentDirection;

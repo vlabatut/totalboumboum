@@ -541,12 +541,16 @@ public class AlcarKayaYildirim extends ArtificialIntelligence
 		double distance = Double.MAX_VALUE;
 		AiTile result = null;
 		for ( AiTile currentTile : this.getAccessibleDestructibleWallTiles(ourtile ) )
-		{
-			this.checkInterruption();
-			if ( this.getDist( currentTile, this.getClosestEnemy().getTile() ) < distance )
-			{
-				result = currentTile;
-				distance = this.getDist( currentTile, this.getClosestEnemy().getTile() );
+		{	this.checkInterruption();
+			AiHero cl = this.getClosestEnemy();
+			if(cl!=null)
+			{	AiTile clTile = cl.getTile();
+				int distance0 = this.getDist( currentTile, clTile );
+				if ( distance0 < distance )
+				{
+					result = currentTile;
+					distance = distance0;
+				}
 			}
 		}
 		return result;

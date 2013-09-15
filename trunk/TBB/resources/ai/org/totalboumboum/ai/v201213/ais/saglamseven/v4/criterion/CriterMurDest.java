@@ -99,6 +99,8 @@ public class CriterMurDest extends AiUtilityCriterionInteger<SaglamSeven> {
 		if (murs.size() > MUR_LIMIT) {
 			return MUR_LIMIT;
 		}
+		if(murs.isEmpty())
+			return 1;
 		return murs.size();
 	}
 }

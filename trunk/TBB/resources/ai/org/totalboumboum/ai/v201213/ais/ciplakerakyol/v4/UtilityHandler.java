@@ -126,19 +126,19 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 	/**
 	 * ItemVisible , utilisé dans {@link #initCases}
 	 * */
-	private final String ItemVisible = "ItemVisible";
+	private final String itemVisible = "ItemVisible";
 	/**
 	 * VoisinageMurDest, utilisé dans {@link #initCases}
 	 * */
-	private final String VoisinageMurDest = "VoisinageMurDest";
+	private final String voisinageMurDest = "VoisinageMurDest";
 	/**
 	 * VoisinageAdversaire, utilisé dans {@link #initCases}
 	 * */
-	private final String VoisinageAdversaire = "VoisinageAdversaire";
+	private final String voisinageAdversaire = "VoisinageAdversaire";
 	/**
 	 * AdverseireLoin, utilisé dans {@link #initCases}
 	 * */
-	private final String AdverseireLoin = "AdverseireLoin";
+	private final String adversaireLoin = "AdverseireLoin";
 	
 
 	@Override
@@ -152,27 +152,27 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 		criteria.add(criterionMap.get(CriterionItemPertinent.NAME));
 		criteria.add(criterionMap.get(CriterionDuree.NAME));
 		criteria.add(criterionMap.get(CriterionConcurrence.NAME));
-		new AiUtilityCase(ai,ItemVisible,criteria);
+		new AiUtilityCase(ai,itemVisible,criteria);
 		
 		// on définit le cas "Voisinage de murs dest."
 		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
 		criteria.add(criterionMap.get(CriterionMenace.NAME));
 		criteria.add(criterionMap.get(CriterionDuree.NAME));
 		criteria.add(criterionMap.get(CriterionNombredeMur.NAME));
-		new AiUtilityCase(ai,VoisinageMurDest,criteria);
+		new AiUtilityCase(ai,voisinageMurDest,criteria);
 
 		// on définit le cas "Voisinage de l'adversaire"
 		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
 		criteria.add(criterionMap.get(CriterionMenace.NAME));
 		criteria.add(criterionMap.get(CriterionPertinenceAdv.NAME));
-		new AiUtilityCase(ai,VoisinageAdversaire,criteria);
+		new AiUtilityCase(ai,voisinageAdversaire,criteria);
 		
 		// on définit le cas "l'adversaire loin"
 		criteria = new TreeSet<AiUtilityCriterion<?,?>>();
 		criteria.add(criterionMap.get(CriterionMenace.NAME));
 		criteria.add(criterionMap.get(CriterionDuree.NAME));
 		criteria.add(criterionMap.get(CriterionPertinenceAdv.NAME));
-		new AiUtilityCase(ai,AdverseireLoin,criteria);
+		new AiUtilityCase(ai,adversaireLoin,criteria);
 		
 
 	}
@@ -184,29 +184,29 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 	{	
 		ai.checkInterruption();
 		AiUtilityCase result = null;
-		Set<AiUtilityCriterion<?, ?>> criteria;
+//		Set<AiUtilityCriterion<?, ?>> criteria;
 
 		// mode is collecting
 		if ( ai.getModeHandler().getMode().equals( AiMode.COLLECTING ) )
 		{
 			if ( !tile.getItems().isEmpty() )
 			{
-				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-				criteria.add(criterionMap.get(CriterionMenace.NAME));
-				criteria.add(criterionMap.get(CriterionItemPertinent.NAME));
-				criteria.add(criterionMap.get(CriterionDuree.NAME));
-				criteria.add(criterionMap.get(CriterionConcurrence.NAME));
-				
-				result = new AiUtilityCase(ai,ItemVisible,criteria);
+//				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//				criteria.add(criterionMap.get(CriterionMenace.NAME));
+//				criteria.add(criterionMap.get(CriterionItemPertinent.NAME));
+//				criteria.add(criterionMap.get(CriterionDuree.NAME));
+//				criteria.add(criterionMap.get(CriterionConcurrence.NAME));
+//				result = new AiUtilityCase(ai,ItemVisible,criteria);
+				result = caseMap.get(itemVisible);
 			}
 			else
 			{
-				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-				criteria.add(criterionMap.get(CriterionMenace.NAME));
-				criteria.add(criterionMap.get(CriterionDuree.NAME));
-				criteria.add(criterionMap.get(CriterionNombredeMur.NAME));
-				
-				result = new AiUtilityCase(ai,VoisinageMurDest,criteria);
+//				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//				criteria.add(criterionMap.get(CriterionMenace.NAME));
+//				criteria.add(criterionMap.get(CriterionDuree.NAME));
+//				criteria.add(criterionMap.get(CriterionNombredeMur.NAME));
+//				result = new AiUtilityCase(ai,VoisinageMurDest,criteria);
+				result = caseMap.get(voisinageMurDest);
 			}
 		}
 		// mode is attacking
@@ -223,20 +223,20 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 
 			if( !isAdversaireLoin )
 			{
-				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-				criteria.add(criterionMap.get(CriterionMenace.NAME));
-				criteria.add(criterionMap.get(CriterionPertinenceAdv.NAME));
-			
-				result = new AiUtilityCase(ai,VoisinageAdversaire,criteria);
+//				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//				criteria.add(criterionMap.get(CriterionMenace.NAME));
+//				criteria.add(criterionMap.get(CriterionPertinenceAdv.NAME));
+//				result = new AiUtilityCase(ai,VoisinageAdversaire,criteria);
+				result = caseMap.get(voisinageAdversaire);
 			}
 			else
 			{
-				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
-				criteria.add(criterionMap.get(CriterionMenace.NAME));
-				criteria.add(criterionMap.get(CriterionDuree.NAME));
-				criteria.add(criterionMap.get(CriterionPertinenceAdv.NAME));
-				
-				result = new AiUtilityCase(ai,AdverseireLoin,criteria);
+//				criteria = new TreeSet<AiUtilityCriterion<?,?>>();
+//				criteria.add(criterionMap.get(CriterionMenace.NAME));
+//				criteria.add(criterionMap.get(CriterionDuree.NAME));
+//				criteria.add(criterionMap.get(CriterionPertinenceAdv.NAME));
+//				result = new AiUtilityCase(ai,AdverseireLoin,criteria);
+				result = caseMap.get(adversaireLoin);
 			}
 		}
 		return result;
@@ -257,7 +257,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 
 			// item visible
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -266,7 +266,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -274,7 +274,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 23);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -282,7 +282,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 22);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -290,7 +290,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 21);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -298,7 +298,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 20);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -306,7 +306,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 19);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -314,7 +314,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 18);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -322,7 +322,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 17);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -330,7 +330,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 16);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -338,7 +338,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 15);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -346,7 +346,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 14);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -354,7 +354,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 13);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -362,7 +362,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 12);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -370,7 +370,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 11);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -378,7 +378,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 10);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -386,7 +386,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 9);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -394,7 +394,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 8);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -402,7 +402,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 7);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -410,7 +410,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 6);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -418,7 +418,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 5);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -426,7 +426,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 4);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
@@ -434,7 +434,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 3);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
@@ -442,7 +442,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 				defineUtilityValue(mode, combiA, 2);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(ItemVisible));
+				combiA = new AiUtilityCombination(caseMap.get(itemVisible));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionItemPertinent)criterionMap.get(CriterionItemPertinent.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
@@ -452,21 +452,21 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 	
 			// murdestructible
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),3);
 				defineUtilityValue(mode, combiB, 28);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),2);
 				defineUtilityValue(mode, combiB, 27);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),1);
@@ -475,7 +475,7 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			
 			
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),3);
@@ -484,14 +484,14 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			
 			
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),2);
 				defineUtilityValue(mode, combiB, 24);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),1);
@@ -499,56 +499,56 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			}
 		
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),2);
 				defineUtilityValue(mode, combiB, 22);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),1);
 				defineUtilityValue(mode, combiB, 21);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),3);
 				defineUtilityValue(mode, combiB, 20);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),2);
 				defineUtilityValue(mode, combiB, 19);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),1);
 				defineUtilityValue(mode, combiB, 18);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),3);
 				defineUtilityValue(mode, combiB, 17);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),2);
 				defineUtilityValue(mode, combiB, 16);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),1);
@@ -556,28 +556,28 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			}
 			
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),0);
 				defineUtilityValue(mode, combiB, 14);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),0);
 				defineUtilityValue(mode, combiB, 13);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),0);
 				defineUtilityValue(mode, combiB, 12);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),3);
@@ -585,21 +585,21 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			}
 		
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),3);
 				defineUtilityValue(mode, combiB, 10);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),2);
 				defineUtilityValue(mode, combiB, 9);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),1);
@@ -610,21 +610,21 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 					//null
 			
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),0);
 				defineUtilityValue(mode, combiB, 0);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),0);
 				defineUtilityValue(mode, combiB, 0);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),0);
@@ -632,42 +632,42 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			}
 			
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),4);
 				defineUtilityValue(mode, combiB, 0);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),4);
 				defineUtilityValue(mode, combiB, 0);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),4);
 				defineUtilityValue(mode, combiB, 0);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),4);
 				defineUtilityValue(mode, combiB, 0);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),4);
 				defineUtilityValue(mode, combiB, 0);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(VoisinageMurDest));
+				combiB = new AiUtilityCombination(caseMap.get(voisinageMurDest));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionNombredeMur)criterionMap.get(CriterionNombredeMur.NAME),4);
@@ -682,25 +682,25 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			
 			// voisinage
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(VoisinageAdversaire));
+				combiA = new AiUtilityCombination(caseMap.get(voisinageAdversaire));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiA, 3);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(VoisinageAdversaire));
+				combiA = new AiUtilityCombination(caseMap.get(voisinageAdversaire));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiA.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);
 				defineUtilityValue(mode, combiA, 2);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(VoisinageAdversaire));
+				combiA = new AiUtilityCombination(caseMap.get(voisinageAdversaire));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiA, 1);
 			}
 			{	
-				combiA = new AiUtilityCombination(caseMap.get(VoisinageAdversaire));
+				combiA = new AiUtilityCombination(caseMap.get(voisinageAdversaire));
 				combiA.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiA.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);
 				defineUtilityValue(mode, combiA, 0);
@@ -709,84 +709,84 @@ public class UtilityHandler extends AiUtilityHandler<CiplakErakyol>
 			//AdversaireLoin
 			
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiB, 12);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiB, 11);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);
 				defineUtilityValue(mode, combiB, 10);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);
 				defineUtilityValue(mode, combiB, 9);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiB, 8);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.FALSE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);
 				defineUtilityValue(mode, combiB, 7);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiB, 6);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiB, 5);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.TRUE);
 				defineUtilityValue(mode, combiB, 4);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),2);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);
 				defineUtilityValue(mode, combiB, 3);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),1);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);
 				defineUtilityValue(mode, combiB, 2);
 			}
 			{	
-				combiB = new AiUtilityCombination(caseMap.get(AdverseireLoin));
+				combiB = new AiUtilityCombination(caseMap.get(adversaireLoin));
 				combiB.setCriterionValue((CriterionMenace)criterionMap.get(CriterionMenace.NAME),Boolean.TRUE);
 				combiB.setCriterionValue((CriterionDuree)criterionMap.get(CriterionDuree.NAME),0);
 				combiB.setCriterionValue((CriterionPertinenceAdv)criterionMap.get(CriterionPertinenceAdv.NAME),Boolean.FALSE);

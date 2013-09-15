@@ -28,7 +28,7 @@ public class CriterDistance extends AiUtilityCriterionInteger<SaglamSeven>
 	/**
 	 * 
 	 */
-	public static final int DISTANCE_LIMIT=2;
+	public static final int DISTANCE_LIMIT = 2;
 	
 	/**
 	 * Crée un nouveau critère entier.

@@ -1145,15 +1145,19 @@ public class TileCalculation {
 	{
 		ai.checkInterruption();
 		double distance = Double.MAX_VALUE;
-		AiTile result = null;
 		AiHero ourHero = this.ai.getZone().getOwnHero();
-		for ( AiTile currentTile : this.getAccessibleDestructibleWallTiles( ourHero.getTile() ) )
-		{
-			ai.checkInterruption();
-			if ( this.getDistanceBetween( currentTile, this.getClosestEnemy().getTile() ) < distance )
+		AiTile result = ourHero.getTile();
+		AiHero closestEnemy = this.getClosestEnemy();
+		
+		if(closestEnemy!=null)
+		{	for ( AiTile currentTile : this.getAccessibleDestructibleWallTiles( ourHero.getTile() ) )
 			{
-				result = currentTile;
-				distance = this.getDistanceBetween( currentTile, this.getClosestEnemy().getTile() );
+				ai.checkInterruption();
+				if (this.getDistanceBetween( currentTile, closestEnemy.getTile() ) < distance )
+				{
+					result = currentTile;
+					distance = this.getDistanceBetween( currentTile, this.getClosestEnemy().getTile() );
+				}
 			}
 		}
 		return result;

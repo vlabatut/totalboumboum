@@ -48,7 +48,7 @@ public class BombHandler extends AiBombHandler<BesniliKangal>
 					result = true;
 				else if ( ai.heroOperation.canDestroyMalus() )
 					result = true;
-				else if ( ai.modeHandler.getMode() == AiMode.COLLECTING && ai.utilityHandler.casName == ai.utilityHandler.VoisinageMurDest )
+				else if ( ai.modeHandler.getMode() == AiMode.COLLECTING && ai.utilityHandler.casName == ai.utilityHandler.voisinageMurDest )
 					result = ( ai.tileOperation.getBiggestTile() == ownHero.getTile() );
 			}
 		}

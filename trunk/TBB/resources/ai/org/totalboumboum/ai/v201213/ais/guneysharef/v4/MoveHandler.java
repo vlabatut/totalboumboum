@@ -142,16 +142,14 @@ public class MoveHandler extends AiMoveHandler<GuneySharef>
 	protected Direction updateCurrentDirection() throws StopRequestException
 	{	
 		ai.checkInterruption();
-		
 				
 		try{
-			if (globalAiPath != null) {
+			if (globalAiPath != null && !globalAiPath.isEmpty()) {
 				long wait = globalAiPath.getFirstPause();
 				if (globalAiPath.getLength() < 2 || wait > 0) {
 
 					direction = Direction.NONE;
 					return direction;
-
 				}
 
 				AiLocation target = globalAiPath.getLocation(1);
@@ -163,12 +161,6 @@ public class MoveHandler extends AiMoveHandler<GuneySharef>
 	
 	}
 		
-		
-
-	
-
-
-
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
