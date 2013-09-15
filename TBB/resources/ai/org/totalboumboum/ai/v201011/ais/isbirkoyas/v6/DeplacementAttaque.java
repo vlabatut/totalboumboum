@@ -87,7 +87,7 @@ public class DeplacementAttaque {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 				ai.nextMove = deplacementCommune.cheminLePlusCourt(ai.ourHero,
 						startPoint, heroTiles);
-				if (ai.nextMove.getLength() == 0 && ai.nextMove!=null)
+				if (ai.nextMove!=null && ai.nextMove.getLength() == 0)
 					ai.nextMove = null;
 				if (ai.nextMove != null) {
 					
@@ -101,7 +101,7 @@ public class DeplacementAttaque {
 					if (ai.print)
 						System.out.println("Attaque: NORMAL NextMove:"
 								+ ai.nextMove);
-					if (ai.nextMove.getLength() == 0) {
+					if (ai.nextMove==null || ai.nextMove.getLength() == 0) {
 						
 						ai.nextMove = null;
 					}
@@ -196,32 +196,21 @@ public class DeplacementAttaque {
 									List<AiTile> tileList = new ArrayList<AiTile>();
 									if (casSurs.size() > 1 && attaque) {
 										for (int i = 0; i < casSurs.size(); i++) {
-											ai.checkInterruption(); // APPEL
-																	// OBLIGATOIRE
+											ai.checkInterruption(); // APPEL OBLIGATOIRE
 											tileList.add(casSurs.get(i));
-											AiTile tile = deplacementCommune
-													.cheminLePlusCourt(
-															ai.ourHero,
-															ai.ourHero
-																	.getTile(),
-															tileList)
-													.getFirstTile();
-											Direction dir = gameZone
-													.getDirection(ai.ourHero,
-															tile);
-											AiTile tile2 = chemin
-													.getFirstTile();
-											Direction dir2 = gameZone
-													.getDirection(ai.ourHero,
-															tile2);
-											if (dir == dir2) {
-
-												tileList.remove(casSurs.get(i));
+											AiPath path = deplacementCommune.cheminLePlusCourt(ai.ourHero,ai.ourHero.getTile(),tileList);
+											if(path!=null && path.isEmpty())
+											{	AiTile tile = path.getFirstTile();
+												Direction dir = gameZone.getDirection(ai.ourHero,tile);
+												AiTile tile2 = chemin.getFirstTile();
+												Direction dir2 = gameZone.getDirection(ai.ourHero,tile2);
+												if (dir == dir2) 
+												{	tileList.remove(casSurs.get(i));
+												}
 											}
 										}
-										if (!tileList.isEmpty()) {
-											ai.checkInterruption(); // APPEL
-																	// OBLIGATOIRE
+										if (!tileList.isEmpty())
+										{	ai.checkInterruption(); // APPEL OBLIGATOIRE
 											casSurs = tileList;
 										}
 									}
@@ -334,7 +323,7 @@ public class DeplacementAttaque {
 								AiPath path = deplacementCommune
 										.cheminLePlusCourt(ai.ourHero,
 												startPoint, endPoints);
-								if (!path.isEmpty())
+								if (path!=null && !path.isEmpty())
 										//&& securite.nextMoveSecurite(
 											//	ai.ourHero, gameZone, path))
 									ai.nextMove = path;

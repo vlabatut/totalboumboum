@@ -432,9 +432,11 @@ public class ModeAttack
 				index=j;
 			}
 		}
-		
+		index = Math.min(index, shortestPathAttack.size()-1);
+		if(shortestPathAttack!=null && index>=0 && index<shortestPathAttack.size())
 			return shortestPathAttack.get(index);
-
+		else
+			return new AiPath();
 	}
 	
 	
@@ -469,36 +471,42 @@ public class ModeAttack
 	    AiTile closestOne =spath.closestEnemy(monia.zone);
 		List<Double> distanceToEnemy=spath.tileToClosestEnemy(closestOne, check, monia.zone);
 		for(int i=0;i<endpointValue.size();i++)
-		{
-			monia.checkInterruption();
-			if(distanceToEnemy.get(i)!=null && (distanceToEnemy.get(i)!=0) && (shortestPathAttack.get(i)!=null && shortestPathAttack.get(i).getLength()!=0 ))
-
+		{	monia.checkInterruption();
+			if(i<shortestPathAttack.size())
+			{	if(distanceToEnemy.get(i)!=null && 
+						(distanceToEnemy.get(i)!=0) && 
+						(shortestPathAttack.get(i)!=null && 
+						shortestPathAttack.get(i).getLength()!=0 ))
 				{	
 					temp=(((endpointValue.get(i)/(distanceToEnemy.get(i)))/*/monia.ourHero.getWalkingSpeed()*/));
 					result.add(temp);
 				}
-			else 
-			{
-				temp=0;
-				result.add(temp);
+				else 
+				{
+					temp=0;
+					result.add(temp);
+				}
 			}
 			
 		}
-		double tempmax=result.get(0);
-		double temp2=tempmax;
-		int index=0;
-		for(int j=0;j<result.size();j++)
-		{
-			monia.checkInterruption();
-			temp2=result.get(j);
-			if(temp2>tempmax)
+		if(result!=null && !result.isEmpty())
+		{	double tempmax = result.get(0);
+			double temp2=tempmax;
+			int index=0;
+			for(int j=0;j<result.size();j++)
 			{
-				tempmax=temp2;
-				index=j;
+				monia.checkInterruption();
+				temp2=result.get(j);
+				if(temp2>tempmax)
+				{
+					tempmax=temp2;
+					index=j;
+				}
 			}
+			return shortestPathAttack.get(index);
 		}
-		return shortestPathAttack.get(index);
-
+		else
+			return new AiPath();
 	}
 	
 	/**

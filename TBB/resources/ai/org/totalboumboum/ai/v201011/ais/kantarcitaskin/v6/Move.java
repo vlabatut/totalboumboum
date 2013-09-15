@@ -218,7 +218,7 @@ public class Move
 			}	
 			
 		}
-		if(path.getTiles().size()!=0)
+		if(path!=null && path.getTiles().size()!=0)
 		{
 			org.totalboumboum.ai.v201011.adapter.communication.AiOutput output = this.ai.getOutput();
 			Color color = Color.BLACK;

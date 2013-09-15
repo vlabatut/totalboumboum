@@ -558,15 +558,18 @@ public class TileControleur {
 			return -1;
 		else {
 			temp = calculateShortestPath(hero, hero.getTile(), espacePourFuir);
-			// Bu de eri alamad g m z i in sabit
-			double durationBombe = 2400;
-			// System.out.println("Bomba zaman "+hero.getBombDuration());
-			if (durationBombe > temp.getDuration(hero)) {
-				return 0;
-			} else {
+			if(temp==null)
 				return -1;
+			else
+			{// Bu de eri alamad g m z i in sabit
+				double durationBombe = 2400;
+				// System.out.println("Bomba zaman "+hero.getBombDuration());
+				if (durationBombe > temp.getDuration(hero)) {
+					return 0;
+				} else {
+					return -1;
+				}
 			}
-
 		}
 	}
 

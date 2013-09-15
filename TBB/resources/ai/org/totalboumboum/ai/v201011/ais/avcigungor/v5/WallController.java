@@ -39,7 +39,7 @@ public class WallController {
 		
 			this.ai=ai;
 			AiZone gameZone = ai.getPercepts();
-			
+			ourHero = gameZone.getOwnHero();
 			
 			// init A*
 			double costMatrix[][] = new double[gameZone.getHeight()][gameZone.getWidth()];
@@ -49,7 +49,6 @@ public class WallController {
 			
 			// init destinations
 			arrived = false;
-			ourHero = gameZone.getOwnHero();
 			possibleDest = ai.collectC.findWallTiles(ourHero.getTile());
 			updatePath();
 		}
@@ -59,8 +58,6 @@ public class WallController {
 		/////////////////////////////////////////////////////////////////
 		/** l'IA concernée par ce gestionnaire de chemin */
 		private AvciGungor ai;
-		/** gameZone de jeu */
-		private AiZone gameZone;	
 		
 		/////////////////////////////////////////////////////////////////
 		// DESTINATION	/////////////////////////////////////////////////
@@ -222,7 +219,7 @@ public class WallController {
 					tile = path.getTile(0);
 				// on détermine la direction du prochain déplacement
 				if(tile!=null)
-					result = gameZone.getDirection(ourHero,tile);			
+					result = ai.gameZone.getDirection(ourHero,tile);			
 			}
 			return result;
 		}

@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v201011.ais.kesimalvarol.v6;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
+import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.ai.v201011.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
@@ -166,9 +167,13 @@ public class FastWallDestruction {
 				while (tries < 4) {
 					monIA.checkInterruption();
 					AiTile referTile = monIA.getSelfHero().getTile();
-					Direction[] toTarget = monIA.getZone()
-							.getDirection(referTile, target.getTile())
-							.getPrimaries();
+					AiZone zone = monIA.getZone();
+					Direction[] toTarget = {Direction.NONE, Direction.NONE};
+					if(target!=null)
+					{	AiTile targetTile = target.getTile();
+						Direction dir = zone.getDirection(referTile, targetTile);
+						toTarget = dir.getPrimaries();
+					}
 					followCandidate = new AiPath();
 					boolean obstacleFound = false;
 

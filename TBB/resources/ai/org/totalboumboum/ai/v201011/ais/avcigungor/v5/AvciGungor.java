@@ -43,7 +43,7 @@ public class AvciGungor extends ArtificialIntelligence {
 	/** */
 	double matriceUpdate[][];
 	/** */
-	private AiZone gameZone;
+	public AiZone gameZone;
 	/** */
 	private AiHero ourHero;
 	/** */

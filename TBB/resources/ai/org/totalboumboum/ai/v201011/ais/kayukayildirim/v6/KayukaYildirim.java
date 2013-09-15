@@ -141,11 +141,18 @@ public class KayukaYildirim extends ArtificialIntelligence {
 			getMouvementDirection(ourOwnHero.getTile(), maxTile);
 
 			try {
-				if (matrice[ourOwnHero.getTile().getNeighbor(moveDir).getLine()][gameMap
-						.getOwnHero().getTile().getNeighbor(moveDir).getCol()] > -250)
-					result = new AiAction(AiActionName.MOVE, this.moveDir);
+				AiTile ourTile = ourOwnHero.getTile();
+				AiTile neighTile = ourTile.getNeighbor(moveDir);
+				if(neighTile!=null)
+				{	int neighLine = neighTile.getLine();
+					int neighCol = neighTile.getCol();
+					if (matrice[neighLine][neighCol] > -250)
+						result = new AiAction(AiActionName.MOVE, this.moveDir);
+					else
+						result = new AiAction(AiActionName.NONE, this.moveDir);
+				}
 				else
-					result = new AiAction(AiActionName.NONE, this.moveDir);
+					result = new AiAction(AiActionName.NONE);
 			} catch (NullPointerException e) {
 				//e.getStackTrace();
 			}
@@ -160,12 +167,18 @@ public class KayukaYildirim extends ArtificialIntelligence {
 				getMouvementDirection(this.gameMap.getOwnHero().getTile(),
 						getMaxTile());
 				try {
-					if (matrice[ourOwnHero.getTile().getNeighbor(moveDir)
-							.getLine()][gameMap.getOwnHero().getTile()
-							.getNeighbor(moveDir).getCol()] > -250)
-						result = new AiAction(AiActionName.MOVE, this.moveDir);
+					AiTile ourTile = ourOwnHero.getTile();
+					AiTile neighTile = ourTile.getNeighbor(moveDir);
+					if(neighTile!=null)
+					{	int neighLine = neighTile.getLine();
+						int neighCol = neighTile.getCol();
+						if (matrice[neighLine][neighCol] > -250)
+							result = new AiAction(AiActionName.MOVE, this.moveDir);
+						else
+							result = new AiAction(AiActionName.NONE, moveDir);
+					}
 					else
-						result = new AiAction(AiActionName.NONE, moveDir);
+						result = new AiAction(AiActionName.NONE);
 				} catch (NullPointerException e) {
 					//e.getStackTrace();
 				}
