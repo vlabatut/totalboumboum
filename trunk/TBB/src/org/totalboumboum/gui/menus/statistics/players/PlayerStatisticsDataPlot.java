@@ -112,6 +112,7 @@ public class PlayerStatisticsDataPlot extends EntitledDataPanel
 		{	values.add(Value.RANK);
 			values.add(Value.MEAN);
 			values.add(Value.STDEV);
+			mainPanel.setAvailableValues(values);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES))
 		{	values.add(Value.BOMBEDS);
@@ -121,6 +122,7 @@ public class PlayerStatisticsDataPlot extends EntitledDataPanel
 			values.add(Value.BOMBS);
 			values.add(Value.PAINTINGS);
 			values.add(Value.CROWNS);
+			mainPanel.setAvailableValues(values);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))
 		{	values.add(Value.CONFR_TOTAL);
@@ -128,7 +130,8 @@ public class PlayerStatisticsDataPlot extends EntitledDataPanel
 			values.add(Value.CONFR_DRAW);
 			values.add(Value.CONFR_LOST);
 			values.add(Value.TIME);
+			mainPanel.setAvailableValues(values);
+			mainPanel.setValue(Value.CONFR_WON);
 		}
-		mainPanel.setAvailableValues(values);
 	}
 }
