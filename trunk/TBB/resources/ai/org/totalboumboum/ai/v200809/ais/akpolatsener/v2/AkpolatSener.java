@@ -67,9 +67,8 @@ public class AkpolatSener extends ArtificialIntelligence {
 		if (ownHero != null) {
 			if (control.checkTile(currentTile, true, true, true, false, false,
 					false, false)) {
-
-				if ((direction = control.prisonBreak(currentTile))
-						.isComposite())
+				direction = control.prisonBreak(currentTile);
+				if (direction==null || direction.isComposite())
 					result = new AiAction(AiActionName.NONE);
 				else
 					result = new AiAction(AiActionName.MOVE, direction);

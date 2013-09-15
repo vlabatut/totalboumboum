@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import org.totalboumboum.ai.v200809.adapter.AiHero;
 import org.totalboumboum.ai.v200809.adapter.AiItem;
+import org.totalboumboum.ai.v200809.adapter.AiSprite;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
@@ -28,7 +29,7 @@ public class Target {
 	TileControl control;
 
 	/** l'objet de la cible le plus proche */
-	Object closestTarget;
+	AiSprite<?> closestTarget;
 
 	/**
 	 * 
@@ -53,7 +54,6 @@ public class Target {
 	 * @throws StopRequestException
 	 * 		Description manquante !
 	 */
-	@SuppressWarnings("unused")
 	void findClosest(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
 
@@ -61,8 +61,6 @@ public class Target {
 
 		AiHero enemy = findClosestEnemy();
 		AiItem bonus = findClosestBonus();
-
-		distToEnemy = control.getHypotenuseTo(tile, enemy.getTile());
 
 		if (bonus != null)
 			distToBonus = control.getHypotenuseTo(tile, bonus.getTile());
@@ -87,7 +85,7 @@ public class Target {
 	 * @return
 	 * 		?
 	 */
-	public Object getClosestTarget() {
+	public AiSprite<?> getClosestTarget() {
 		return closestTarget;
 	}
 
@@ -171,14 +169,10 @@ public class Target {
 	public double getHypotenuseToTarget(AiTile tile)
 			throws StopRequestException {
 		as.checkInterruption();
-
-		if (closestTarget instanceof AiHero)
-			return control.getHypotenuseTo(tile, ((AiHero) closestTarget)
-					.getTile());
+		if(closestTarget!=null)
+			return control.getHypotenuseTo(tile, closestTarget.getTile());
 		else
-			return control.getHypotenuseTo(tile, ((AiItem) closestTarget)
-					.getTile());
-
+			return 0;
 	}
 
 	/**
@@ -195,12 +189,10 @@ public class Target {
 	public double getManhattanToTarget(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
 
-		if (closestTarget instanceof AiHero)
-			return control.getManhattanTo(tile, ((AiHero) closestTarget)
-					.getTile());
+		if (closestTarget !=null)
+			return control.getManhattanTo(tile, closestTarget.getTile());
 		else
-			return control.getManhattanTo(tile, ((AiItem) closestTarget)
-					.getTile());
+			return 0;
 	}
 
 }
