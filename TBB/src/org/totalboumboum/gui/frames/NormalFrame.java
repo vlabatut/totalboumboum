@@ -21,9 +21,7 @@ package org.totalboumboum.gui.frames;
  * 
  */
 
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.RepaintManager;
 import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,25 +35,41 @@ import org.totalboumboum.gui.tools.FullRepaintManager;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
-
-
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
 /**
+ * Main GUI class for the normal mode.
  * 
  * @author Vincent Labatut
- *
  */
 public class NormalFrame extends AbstractFrame implements MenuContainer
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	private MainMenu mainMenuPanel;
-
+	/**
+	 * Builds a new frame.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the game data.
+	 * @throws SAXException
+	 * 		Problem while accessing the game data.
+	 * @throws IOException
+	 * 		Problem while accessing the game data.
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the game data.
+	 * @throws SecurityException
+	 * 		Problem while accessing the game data.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the game data.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the game data.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the game data.
+	 */
 	public NormalFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super("TBB v."+GameData.VERSION);
@@ -73,6 +87,9 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Records the current game configuration.
+	 */
 	@SuppressWarnings("unused")
 	private void saveConfiguration()
 	{	// TODO en fait c'est la partie qu'il faut enregistrer, car la conf est déjà enregistrée si elle a été modifiée
@@ -113,6 +130,9 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// MENU PANEL		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel used to display the main menu */
+	private MainMenu mainMenuPanel;
+	/** Panel currently displayed in this frame */
 	private MenuPanel currentPanel;
 
 	@Override
@@ -126,6 +146,10 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		contentPane.repaint();
 	}
 	
+	/**
+	 * Changes the panel used to display
+	 * the main menu.
+	 */
 	public void setMainMenuPanel()
 	{	setMenuPanel(mainMenuPanel);	
 	}
@@ -143,6 +167,9 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Restarts the game.
+	 */
 	public void restart()
 	{	// reinit resolution
 		revertFullScreen();
@@ -155,7 +182,7 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		String splash = "."+File.separator+"resources"+File.separator+"gui"+File.separator+"images"+File.separator+"splash.png";
 		Runtime runtime = Runtime.getRuntime();
 		try
-		{	runtime.exec("java -Xmx128m -splash:"+splash+" -classpath "+cp+" "+launcher);
+		{	runtime.exec("java -Xmx512m -splash:"+splash+" -classpath "+cp+" "+launcher);
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
@@ -166,8 +193,15 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// MODAL DIALOG		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Custom modal dialog */
 	private ModalDialogPanel<?> modalDialogPanel;
 	
+	/**
+	 * Adds a modal dialog to the screen.
+	 * 
+	 * @param modalDialogPanel
+	 * 		Modal dialog to add.
+	 */
 	public void setModalDialog(ModalDialogPanel<?> modalDialogPanel)
 	{	this.modalDialogPanel = modalDialogPanel;
 		modalDialogPanel.setBounds(0,0,modalDialogPanel.getWidth(),modalDialogPanel.getHeight());
@@ -180,6 +214,9 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 //layeredPane.add(panel);
 	}
 	
+	/**
+	 * Removes the current modal dialog.
+	 */
 	public void unsetModalDialog()
 	{	JLayeredPane layeredPane = getLayeredPane();
 		layeredPane.remove(modalDialogPanel);
