@@ -172,7 +172,13 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		
 		List<Profile> profiles = new ArrayList<Profile>();
 		try
-		{	profiles = ProfilesConfiguration.autoAdvanceComplete(tournamentConfiguration);
+		{	
+//			profiles = ProfilesConfiguration.completeProfilesByPack(tournamentConfiguration,"v200910");
+//			profiles = ProfilesConfiguration.completeProfilesByRank(tournamentConfiguration);
+//			profiles = ProfilesConfiguration.selectProfilesByConfrontations(tournamentConfiguration);
+//			profiles = ProfilesConfiguration.completeProfilesByGlicko(tournamentConfiguration);
+//			profiles = ProfilesConfiguration.completeProfilesRandomly(tournamentConfiguration);
+			profiles = ProfilesConfiguration.selectProfiles(tournamentConfiguration);
 		}
 		catch (IllegalArgumentException e)
 		{	e.printStackTrace();

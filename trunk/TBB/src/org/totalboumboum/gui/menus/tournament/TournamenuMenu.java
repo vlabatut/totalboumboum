@@ -330,7 +330,9 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			setButtonsPlayers();
 			refresh();
 			if(Configuration.getAisConfiguration().getAutoAdvance()==AutoAdvance.TOURNAMENT)
-				playersData.autoSelectPlayers();
+			{	playersData.autoSelectPlayers();
+				refreshButtons();
+			}
 			autoAdvance();
 			container.setDataPart(playersData);
 	    }
