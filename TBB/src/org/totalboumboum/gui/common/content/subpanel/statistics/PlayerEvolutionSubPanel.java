@@ -234,8 +234,12 @@ public class PlayerEvolutionSubPanel extends ColumnsSubPanel implements MouseLis
 			for(String id: selectedPlayers)
 			{	PlayerStats playerStats = playersStats.get(id);
 				PredefinedColor color = playerStats.getSelectedColor();
+if(color==null)
+	System.out.println();
 				colors.add(color);
 			}
+if(colors.size()<selectedPlayers.size() )
+	System.out.println();
 			
 			// setting data series
 			for(int i=0;i<selectedPlayers.size();i++)
@@ -403,7 +407,7 @@ public class PlayerEvolutionSubPanel extends ColumnsSubPanel implements MouseLis
 	 * @param value
 	 * 		New value type to display in the plot.
 	 */
-	private void setValue(Value value)
+	public void setValue(Value value)
 	{	//if(value!=selectedValue)
 		{	updateValueButtons(value);
 			updatePlot();
@@ -416,7 +420,7 @@ public class PlayerEvolutionSubPanel extends ColumnsSubPanel implements MouseLis
 	 * @param value
 	 * 		New selected value.
 	 */
-	private void updateValueButtons(Value value)
+	public void updateValueButtons(Value value)
 	{	// unselect previously selected value (if there's one)
 		{	int pos = availableValues.indexOf(selectedValue);
 			if(pos>=0)
@@ -496,7 +500,8 @@ public class PlayerEvolutionSubPanel extends ColumnsSubPanel implements MouseLis
 		Value value = null;
 		if(!values.isEmpty())
 			value = values.get(0);
-		setValue(value);
+		//setValue(value);
+		updateValueButtons(value);
 		
 		// update content
 		updateSelectedPlayers();
