@@ -43,13 +43,38 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * Methods and fields common to
+ * both normal and quick modes.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class AbstractFrame extends JFrame implements WindowListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new frame.
+	 * 
+	 * @param title
+	 * 		Title of the window.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the game data.
+	 * @throws SecurityException
+	 * 		Problem while accessing the game data.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the game data.
+	 * @throws SAXException
+	 * 		Problem while accessing the game data.
+	 * @throws IOException
+	 * 		Problem while accessing the game data.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the game data.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the game data.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the game data.
+	 */
 	public AbstractFrame(String title) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super(title);
@@ -73,9 +98,19 @@ public abstract class AbstractFrame extends JFrame implements WindowListener
 	/////////////////////////////////////////////////////////////////
 	// VIDEO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current display mode */
 	private DisplayMode originalMode;
+	/** Component used for diaplsy */
 	private GraphicsDevice device;
 
+	/**
+	 * Changes display mode.
+	 * 
+	 * @param device
+	 * 		Where to display.
+	 * @param newMode
+	 * 		How to display.
+	 */
 	public void makeVisible(GraphicsDevice device, DisplayMode newMode)
 	{	try
 		{	this.device = device;
@@ -92,6 +127,10 @@ public abstract class AbstractFrame extends JFrame implements WindowListener
 			makeVisible();
 		}
 	}
+	
+	/**
+	 * Display the GUI.
+	 */
 	public void makeVisible()
 	{	device = null;
 		originalMode = null;
@@ -115,6 +154,9 @@ public abstract class AbstractFrame extends JFrame implements WindowListener
 		repaint();
 	}
 	
+	/**
+	 * Get out of full screen mode.
+	 */
 	public void revertFullScreen()
 	{	if(device!=null)
 			device.setDisplayMode(originalMode);
@@ -123,33 +165,45 @@ public abstract class AbstractFrame extends JFrame implements WindowListener
 	/////////////////////////////////////////////////////////////////
 	// WINDOW LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void windowActivated(WindowEvent e)
-	{	
+	{	//	
 	}
 
+	@Override
 	public void windowDeactivated(WindowEvent e)
-	{	
+	{	//	
 	}
 
+	@Override
 	public void windowDeiconified(WindowEvent e)
-	{	
+	{	//	
 	}
 
+	@Override
 	public void windowIconified(WindowEvent e)
-	{	
+	{		//
 	}
 
+	@Override
 	public void windowClosed(WindowEvent e)
-	{
+	{	//
 	}
 
+	@Override
 	public void windowOpened(WindowEvent e)
-	{
+	{	//
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Quits the game.
+	 * 
+	 * @param quicklaunch
+	 * 		Whether the game has been quicklaunched.
+	 */
 	public void exit(boolean quicklaunch)
 	{	// cancel fullscreen
 		revertFullScreen();

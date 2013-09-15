@@ -60,21 +60,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Main GUI class for the quickmode
+ * (simplified interface).
  * 
  * @author Vincent Labatut
- *
  */
 public class QuickFrame extends AbstractFrame implements ActionListener, LoopRenderPanel, RoundRenderPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	private BufferStrategy bufferStrategy;
-	private RegularLoop loop;
-	private JProgressBar loadProgressBar;
-	private Canvas canvas;
-	
-	private AbstractTournament tournament;
-	private Round round;
-	
+	/**
+	 * Builds a new frame.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the game data.
+	 * @throws SecurityException
+	 * 		Problem while accessing the game data.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the game data.
+	 * @throws SAXException
+	 * 		Problem while accessing the game data.
+	 * @throws IOException
+	 * 		Problem while accessing the game data.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the game data.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the game data.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the game data.
+	 */
 	public QuickFrame() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super("TBB v."+GameData.VERSION+" (Quicklaunch)");
@@ -127,6 +141,26 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Starts the game.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the game data.
+	 * @throws SecurityException
+	 * 		Problem while accessing the game data.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the game data.
+	 * @throws SAXException
+	 * 		Problem while accessing the game data.
+	 * @throws IOException
+	 * 		Problem while accessing the game data.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the game data.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the game data.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the game data.
+	 */
 	public void begin() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	Match match = tournament.getCurrentMatch();
 	    Round round = match.getCurrentRound();
@@ -136,9 +170,18 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	/////////////////////////////////////////////////////////////////
 	// LOOP RENDERER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Component used for drawing */
+	private Canvas canvas;
+	/** Progress bar updated during loading */
+	private JProgressBar loadProgressBar;
+	/** Option for painting */
+	private BufferStrategy bufferStrategy;
+	/** Game main loop */
+	private RegularLoop loop;
+
 	@Override
 	public void loopOver()
-	{	
+	{	//
 	}
 
 	@Override
@@ -157,8 +200,9 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	@Override
 	public void playerOut(int index)
 	{	SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
-			{	
+		{	@Override
+			public void run()
+			{	//
 			}
 		});	
 	}
@@ -166,6 +210,11 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	/////////////////////////////////////////////////////////////////
 	// ROUND RENDERER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current tournament */
+	private AbstractTournament tournament;
+	/** Current round */
+	private Round round;
+
 	@Override
 	public void loadStepOver()
 	{	int val = loadProgressBar.getValue();
