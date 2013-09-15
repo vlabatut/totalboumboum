@@ -419,6 +419,12 @@ public final class AiSimTile extends AiTile
 		{	PredefinedColor color = getZone().getOwnHero().getColor();
 			throw new IllegalArgumentException("method getNeighbor does not handle composite directions ("+color+" player).");
 		}
+		
+//		else if(direction==Direction.NONE)
+//		{	PredefinedColor color = getZone().getOwnHero().getColor();
+//				throw new IllegalArgumentException("method getNeighbor does not handle direction NONE ("+color+" player).");
+//		}
+	
 		AiSimTile result = neighborMap.get(direction);
 if(result==null)
 	System.out.print("");

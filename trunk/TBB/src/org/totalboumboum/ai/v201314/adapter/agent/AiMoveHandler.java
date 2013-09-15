@@ -99,6 +99,10 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * Ce calcul dépend devrait dépendre au moins des valeurs 
 	 * de préférence déjà calculées, et éventuellement d'autres 
 	 * calculs supplémentaires.
+	 * <br/>
+	 * Le résultat de ce calcul est utilisé pour automatiquement
+	 * mettre à jour une variable interne, accessible ensuite via
+	 * la méthode {@link #getCurrentDestination()}.
 	 * 
 	 * @return
 	 * 		La case correspondant à la destination courante de l'agent.
@@ -127,7 +131,13 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * (directement ou indirectement) la case objectif.
 	 * <br/>
 	 * Ce traitement devrait a priori faire usage des méthodes
-	 * et classes de l'API permettant de rechercher des chemins. 
+	 * et classes de l'API permettant de rechercher des chemins.
+	 * <br/>
+	 * Le résultat de ce calcul est utilisé pour automatiquement
+	 * mettre à jour une variable interne, accessible ensuite via
+	 * la méthode {@link #getCurrentPath()}. Pour calculer ce chemin,
+	 * vous avez, bien entendu, besoin de la valeur renvoyée
+	 * par {@link #getCurrentDestination()}.
 	 * 
 	 * @return
 	 * 		Le chemin courant suivant par l'agent.
@@ -154,7 +164,16 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	 * Calcule la direction courante suivie par l'agent.
 	 * <br/>
 	 * Ce traitement devrait a priori dépendre du chemin courant,
-	 * et éventuellement d'autres informations. 
+	 * et éventuellement d'autres informations. Si votre méthode
+	 * renvoie {@code null}, alors l'agent interprétera cette
+	 * valeur comme {@link Direction#NONE} et ne se déplacera donc pas.
+	 * <br/>
+	 * Le résultat de ce calcul est utilisé pour automatiquement
+	 * mettre à jour une variable interne, accessible ensuite via
+	 * la méthode {@link #getCurrentDirection()}. Pour calculer ce chemin,
+	 * vous avez, bien entendu, besoin de la valeur renvoyée
+	 * par la méthode  {@link #getCurrentPath()}, voire aussi par la 
+	 * méthode {@link #getCurrentDestination()}.
 	 * 
 	 * @return
 	 * 		La direction courante de l'agent.

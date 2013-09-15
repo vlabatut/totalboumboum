@@ -23,9 +23,11 @@ package org.totalboumboum.ai.v201314.adapter.agent;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
@@ -133,6 +135,71 @@ public final class AiCategory implements Comparable<AiCategory>
 				throw new IllegalArgumentException("Trying to add criterion '"+criterion.getName()+"' twice while defining category '"+name+"' (each criterion must appear at most once).");
 			this.criteria.add(criterion);
 		}
+	}
+	
+	/**
+	 * Renvoie la liste de toutes les combinaisons possibles
+	 * pour cette catégories. Celles-ci sont générées en se
+	 * basant sur les domaines des critères déclarés pour
+	 * cette catégorie.
+	 * <br/>
+	 * Le concepteur d'un agent n'a, a priori, pas besoin
+	 * de cette méthode, qui est utilisée pour faire une
+	 * vérification lors du chargement des préférences d'un
+	 * agent.
+	 * 
+	 * @return
+	 * 		Liste de combinaisons.
+	 */
+	protected Set<AiCombination> getAllCombinations()
+	{	Set<AiCombination> result = new HashSet<AiCombination>();
+		
+		int indices[] = new int[criteria.size()];
+		for(int i=0;i<indices.length;i++) indices[i] = 0;
+		boolean goOn = true;
+		
+		while(goOn)
+		{	// on crée une nouvelle combinaison
+			AiCombination combination = new AiCombination(this);
+			
+			// on passe en revue chaque critère lié à sa categorie
+			for(int i=0;i<indices.length;i++)
+			{	// on récupère le critère et son domaine
+				AiCriterion<?,?> criterion = criteria.get(i);
+				Set<?> domain = criterion.getDomain();
+				// on récupère la valeur appropriée
+				Iterator<?> it = domain.iterator();
+				String valueStr = null;
+				for(int j=0;j<=indices[i];j++)
+					valueStr = it.next().toString();
+				// on la met dans la combinaison
+				combination.setCriterionValue(i, valueStr);
+			}
+			
+			// on ajoute la combinaison à l'ensemble résultat
+			result.add(combination);
+			
+			// on met à jour les indices correspondants
+			boolean stop = false;
+			int i = indices.length - 1;
+			while(!stop && i>=0)
+			{	// on màj l'indice
+				indices[i]++;
+				stop = true;
+				// on récupère le domaine correspondant
+				AiCriterion<?,?> criterion = criteria.get(i);
+				Set<?> domain = criterion.getDomain();
+				// si on arrive à la fin du domaine, on màj les autres indices
+				if(indices[i]==domain.size())
+				{	indices[i] = 0;	
+					stop = false;
+					i--;
+				}
+			}
+			goOn = i>=0;
+		}
+		
+		return result;
 	}
 	
     /////////////////////////////////////////////////////////////////

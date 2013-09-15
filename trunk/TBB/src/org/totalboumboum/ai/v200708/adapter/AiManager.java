@@ -379,6 +379,10 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 		ControlEvent event;
 		if(debug)
 			System.out.print("action:");
+		
+		if(value==null)
+			value = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		
 		switch(value)
 		{	case ArtificialIntelligence.AI_ACTION_DO_NOTHING :
 				if(debug)

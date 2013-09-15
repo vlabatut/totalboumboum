@@ -127,13 +127,11 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	@Override
 	public Integer call() throws Exception
 	{	long before = System.currentTimeMillis();
-		int result;
+		Integer result = AI_ACTION_DO_NOTHING;
 	
 		// tout premier appel (avant le début de la partie)
 		if(blank)
-		{	blank = false;
-			result = AI_ACTION_DO_NOTHING;
-		}
+			blank = false;
 		
 		// cas général (appel en cours de jeu)
 		else

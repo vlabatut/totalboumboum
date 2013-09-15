@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -33,6 +34,7 @@ import java.util.Set;
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.tools.images.PredefinedColor;
+import org.totalboumboum.tools.sets.SetTools;
 
 /**
  * Classe gérant le calcul des valeurs de préférence de l'agent.
@@ -55,9 +57,10 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Elles sont notamment utilisées par la méthode {@link #updateOutput()}
  * qui est donnée ici en exemple afin d'afficher les valeurs de préférence courantes.
  * <br/>
- * Cette classe est aussi solicitée lors de la création de catégories et de critères,
+ * Cette classe est aussi sollicitée lors de la création de catégories et de critères,
  * afin de vérifier que leurs noms sont uniques pour cet agent (ceci afin
- * d'éviter toute confusion).
+ * d'éviter toute confusion). Elle est aussi utilisée lors du chargement de la
+ * table de préférences, afin de vérifier qu'aucune combinaison ne manque.
  * <br/>
  * Cette classe contient un système de cache utilisé lors du calcul des critères.
  * En effet, certains critères peuvent être utilisés à plusieurs reprises lors
@@ -373,14 +376,12 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * Renvoie la catégorie dont le nom
 	 * est passé en paramètre (si elle
 	 * existe).
-	 * <br/>
-	 * Cette méthode est destinée à un usage interne,
-	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
 	 * 
 	 * @param name
 	 * 		Nom de la catégorie demandée. 
 	 * @return 
-	 * 		La catégorie correspondant, ou {@code null} si elle n'existe pas.
+	 * 		La catégorie correspondant, ou {@code null} si elle le
+	 * 		nom spécifié n'a pas été associé à une catégorie.
 	 */
 	protected final AiCategory getCategory(String name)
 	{	AiCategory result = categoryMap.get(name);
@@ -389,13 +390,18 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 
 	/**
 	 * Cette méthode prend une case en paramètre, et identifie
-	 * la catégorie correspondante. Bien sûr le traitement dépend
+	 * la catégorie correspondante. Bien sûr, le traitement dépend
 	 * à la fois de la zone de jeu et du mode courant, qui est
 	 * accessible grâce à la méthode {@link ArtificialIntelligence#getModeHandler()}.
 	 * <br/>
 	 * Vous devez définir cette méthode, mais vous n'avez (a
 	 * priori) pas besoin de l'utiliser, elle est automatiquement
 	 * appelée quand elle est nécessaire.
+	 * <br/>
+	 * <b>Attention :</b> vous ne devez pas instancier un nouvel objet 
+	 * catégorie comme résultat de cette méthode. Vous devez réutiliser
+	 * l'un des objets déjà existant, et stocké de façon interne,
+	 * en utilisant la méthode {@link #getCategory(String)}.
 	 * 
 	 * @param tile
 	 * 		La case dont on veut identifier la catégorie.
@@ -534,6 +540,49 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 				combis.add(copy);
 			}
 		}
+	}
+	
+	/**
+	 * Vérifie que les combinaisons stockées dans la table
+	 * de préférences sont complètes, i.e. que chaque combinaison
+	 * possible pour tous les cas et tous les modes est bien
+	 * représentée dans la table. En cas de combinaison manquante,
+	 * il faut compléter le fichier XML correspondant à l'agent concerné.
+	 * 
+	 * @param mode 
+	 * 		Mode de la table à traitrer. 
+	 * @return 
+	 * 		Un ensemble contenant toutes les combinaisons manquantes 
+	 * 		pour le mode spécifié. 
+	 */
+	protected Set<AiCombination> checkPreferences(AiMode mode)
+	{	Set<AiCombination> result = new HashSet<AiCombination>();
+		
+		// on se concentre sur les combinaisons correspondant au mode traité
+		List<AiCombination> combinations = referencePreferences.get(mode);
+		
+		// pour chaque catégorie, on vérifie sa présence dans la table
+		for(AiCategory category: categoryMap.values())
+		{	// on récupère la liste des combinaisons correspondant à la catégorie traitée
+			Set<AiCombination> definedCombinations = new HashSet<AiCombination>();
+			for(AiCombination combi: combinations)
+			{	AiCategory cat = combi.getCategory();
+				if(cat.equals(category))
+					definedCombinations.add(combi);
+			}
+			
+			// si la liste est vide, c'est que la catégorie ne concerne pas le mode traité
+			if(!definedCombinations.isEmpty())
+			{	// on génère la liste de tous les combinaisons possibles pour la catégorie traitée
+				Set<AiCombination> possibleCombis = category.getAllCombinations();
+				// on compare cette liste et celle extraite des préférences
+				Set<AiCombination> complement = SetTools.processComplement(possibleCombis, definedCombinations);
+				// on rajoute à la liste résultat
+				result.addAll(complement);
+			}
+		}
+	
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

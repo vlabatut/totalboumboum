@@ -458,8 +458,14 @@ public class AiPreferenceLoader
 		List<Element> combiElts = root.getChildren(XmlNames.COMBINATION);
 		for(Element combiElt: combiElts)
 			loadCombinationElement(combiElt,mode,ai,errMsg);
+		
+		// check missing combinations
+		AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
+		Set<AiCombination> missingCombinations = handler.checkPreferences(mode);
+		if(!missingCombinations.isEmpty())
+			throw new IllegalArgumentException(errMsg+"some combinations are missing in the "+mode+" preference table:"+missingCombinations.toString());
 	}
-	
+
 	/**
 	 * Charge une combinaison.
 	 * 

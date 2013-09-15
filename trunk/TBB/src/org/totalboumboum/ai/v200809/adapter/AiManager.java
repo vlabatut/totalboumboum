@@ -119,8 +119,13 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	@Override
 	public List<ControlEvent> convertReaction(AiAction value)
 	{	List<ControlEvent> result = new ArrayList<ControlEvent>();
+		
+		if(value==null)
+			value = new AiAction(AiActionName.NONE);
+		
 		AiActionName name = value.getName();
 		Direction direction = value.getDirection();
+		
 		ControlEvent event;
 		switch(name)
 		{	case NONE:

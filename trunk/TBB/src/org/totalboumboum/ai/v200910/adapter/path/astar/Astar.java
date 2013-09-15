@@ -38,7 +38,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
 
 /**
  * 
- * implément de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
+ * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
@@ -68,6 +68,7 @@ public class Astar
 	private static boolean verbose = false;
 
 	/**
+	 * ?
 	 * 
 	 * @param ai
 	 * 		?	
@@ -83,6 +84,7 @@ public class Astar
 	}
 	
 	/**
+	 * ?
 	 * 
 	 * @param ai
 	 * 		?	
@@ -130,7 +132,7 @@ public class Astar
 	private int maxNodes = 10000;
 	
 	/**
-	 * limite l'arbre de recherche à une hauteur de maxHeight,
+	 * Limite l'arbre de recherche à une hauteur de maxHeight,
 	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
 	 * l'algorithme se termine et ne renvoie pas de solution (échec).
 	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
@@ -146,7 +148,7 @@ public class Astar
 	}
 		
 	/**
-	 * limite l'arbre de recherche à un certain cout maxCost, i.e. Dès que le
+	 * Limite l'arbre de recherche à un certain cout maxCost, i.e. Dès que le
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
 	 * renvoie pas de solution (échec)
 	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
@@ -160,11 +162,27 @@ public class Astar
 	{	this.maxCost = maxCost;
 	}
 		
+	/**
+	 * Limite l'arbre de recherche à un certain nombre de noeuds. Dès que le
+	 * noeud courant atteint cette limite, l'algorithme se termine et ne
+	 * renvoie pas de solution (échec).
+	 * La valeur ne peut pas être supérieure à celle définie par défaut
+	 * (10000), auquel cas une IllegalArgumentException est renvoyée.
+	 * 
+	 * @param maxNodes	le cout maximal que le noeud courant peut atteindre
+	 */
+	public void setMaxNodes(int maxNodes)
+	{	if(maxNodes<=10000)
+			this.maxNodes = maxNodes;
+		else
+			throw new IllegalArgumentException("It is forbidden to set a node number limit larger than the default value.");
+	}
+		
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * calcule le plus court chemin pour aller de la case startTile à 
+	 * Calcule le plus court chemin pour aller de la case startTile à 
 	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
 	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
 	 * l'algorithme atteint une limite de cout/taille, la valeur null est
@@ -187,7 +205,7 @@ public class Astar
 	}
 	
 	/**
-	 * calcule le plus court chemin pour aller de la case startTile à 
+	 * Calcule le plus court chemin pour aller de la case startTile à 
 	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
 	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
@@ -213,7 +231,8 @@ public class Astar
 		int maxh = 0;
 		double maxc = 0;
 		int maxn = 0;
-
+		queueMaxSize = 0;
+			
 		// initialisation
 		boolean found = false;
 		boolean limitReached = false;
@@ -228,6 +247,7 @@ public class Astar
 		if(!endTiles.isEmpty())
 		{	do
 			{	ai.checkInterruption();
+				queueMaxSize = Math.max(queueMaxSize,queue.size());
 				// on prend le noeud situé en tête de file
 				AstarNode currentNode = queue.poll();
 				if(verbose)
@@ -308,6 +328,20 @@ public class Astar
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Maximal size of the queue during the last search */
+	private int queueMaxSize = 0;
+	
+	/**
+	 * Returns the maximal size of
+	 * the queue during the last search.
+	 * 
+	 * @return
+	 * 		Queue max size.
+	 */
+	public int getQueueMaxSize()
+	{	return queueMaxSize;
+	}
+
 	/**
 	 * 
 	 */
@@ -315,6 +349,6 @@ public class Astar
 	{	if(root!=null)
 		{	root.finish();
 			root = null;
-		}		
+		}
 	}
 }
