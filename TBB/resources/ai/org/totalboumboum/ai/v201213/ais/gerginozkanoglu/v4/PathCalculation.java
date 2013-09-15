@@ -86,32 +86,34 @@ public class PathCalculation {
     public AiPath bestPath(AiHero agent, AiTile target) throws StopRequestException
     {
     	ai.checkInterruption();
-    	AiHero ourHero = this.ai.getZone().getOwnHero();
-    	AiPath path;
-    	CostCalculator costCalculator = new TimeCostCalculator(ai,ourHero);
-    	if(this.ai.getModeHandler().getMode().equals(AiMode.ATTACKING))
-    		costCalculator.setOpponentCost(MIN_COST);
-    	else
-    		costCalculator.setOpponentCost(MAX_COST);
-    	costCalculator.setMalusCost(MAX_COST);
-    	HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(this.ai,ourHero);
-    	SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(this.ai, TimePartialSuccessorCalculator.MODE_NOTREE);
-    	Astar astarAlgo = new Astar(this.ai,ourHero, costCalculator, heuristicCalculator, successorCalculator);
-    	AiLocation ourLocation = new AiLocation(ourHero);
-    	try
-    	{
-    		path = astarAlgo.startProcess(ourLocation, target);
-    
-    	}
-    	catch(LimitReachedException e)
-    	{
-    		path = new AiPath();
-    		path.addLocation(new AiLocation(ourHero.getTile()));
-    	}
-    	catch(NullPointerException e)
-    	{
-    		path = new AiPath();
-    		path.addLocation(new AiLocation(ourHero.getTile()));
+    	AiPath path = new AiPath();
+    	if(target!=null)
+    	{	AiHero ourHero = this.ai.getZone().getOwnHero();
+	    	CostCalculator costCalculator = new TimeCostCalculator(ai,ourHero);
+	    	if(this.ai.getModeHandler().getMode().equals(AiMode.ATTACKING))
+	    		costCalculator.setOpponentCost(MIN_COST);
+	    	else
+	    		costCalculator.setOpponentCost(MAX_COST);
+	    	costCalculator.setMalusCost(MAX_COST);
+	    	HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(this.ai,ourHero);
+	    	SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(this.ai, TimePartialSuccessorCalculator.MODE_NOTREE);
+	    	Astar astarAlgo = new Astar(this.ai,ourHero, costCalculator, heuristicCalculator, successorCalculator);
+	    	AiLocation ourLocation = new AiLocation(ourHero);
+	    	try
+	    	{
+	    		path = astarAlgo.startProcess(ourLocation, target);
+	    
+	    	}
+	    	catch(LimitReachedException e)
+	    	{
+	    		path = new AiPath();
+	    		path.addLocation(new AiLocation(ourHero.getTile()));
+	    	}
+	    	catch(NullPointerException e)
+	    	{
+	    		path = new AiPath();
+	    		path.addLocation(new AiLocation(ourHero.getTile()));
+	    	}
     	}
     	return path;
 		
@@ -128,13 +130,14 @@ public class PathCalculation {
     {
     	ai.checkInterruption();
     	TileCalculation calculation = new TileCalculation(this.ai);
-    	
-    	for(AiLocation location :path.getLocations())
-    	{
-    		ai.checkInterruption();
-    		AiTile tile = location.getTile();
-    		if(calculation.isDangerous(tile))
-    			return false;
+    	if(path!=null)
+    	{	for(AiLocation location :path.getLocations())
+	    	{
+	    		ai.checkInterruption();
+	    		AiTile tile = location.getTile();
+	    		if(calculation.isDangerous(tile))
+	    			return false;
+	    	}
     	}
     	return true;
     }
@@ -153,7 +156,11 @@ public class PathCalculation {
 			return this.ai.getZone().getOwnHero().getTile();
 		try
 		{
-			return this.bestPath(this.ai.getZone().getOwnHero(), endTile).getLocation( NEXT_TILE_INDEX ).getTile();
+			AiPath path = this.bestPath(this.ai.getZone().getOwnHero(), endTile);
+			if(path!=null && !path.isEmpty())
+				return path.getLocation( NEXT_TILE_INDEX ).getTile();
+			else
+				return this.ai.getZone().getOwnHero().getTile();
 		}
 		catch(IndexOutOfBoundsException e)
 		{

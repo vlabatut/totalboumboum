@@ -196,9 +196,14 @@ public class Paths {
 		try
 
 		{
-            
-			return this.getPath(hero,endTile).getLocation(NEXT_TILE_INDEX).getTile();
-
+            AiPath path = this.getPath(hero,endTile);
+            if(path!=null && path.getLength()>NEXT_TILE_INDEX)
+            {	AiLocation location = path.getLocation(NEXT_TILE_INDEX);
+            	AiTile tile = location.getTile();
+            	return tile;
+            }
+            else
+            	return hero.getTile();
 		}
 
 		catch (NullPointerException e)
@@ -257,8 +262,10 @@ public class Paths {
 			try
 
 			{
-
-				path = astarPrecise.startProcess(loc, endTile);
+				if(endTile!=null)
+					path = astarPrecise.startProcess(loc, endTile);
+				else
+					path = new AiPath();
 
 			}
 

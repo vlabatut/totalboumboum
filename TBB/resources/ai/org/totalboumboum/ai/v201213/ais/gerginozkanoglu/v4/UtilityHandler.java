@@ -183,77 +183,81 @@ public class UtilityHandler extends AiUtilityHandler<GerginOzkanoglu> {
 			throws StopRequestException {
 		ai.checkInterruption();
 		AiUtilityCase result = null;
-		Security security = (Security) (criterionMap.get(Security.NAME));
-		Time time =(Time) (criterionMap.get(Time.NAME));
-		Pertinence pertinence =(Pertinence) (criterionMap.get(Pertinence.NAME));
-		Competition competition = (Competition) (criterionMap.get(Competition.NAME));
-		NumberOfDestructibleWalls numberOfDestructibleWalls =(NumberOfDestructibleWalls) (criterionMap.get(NumberOfDestructibleWalls.NAME));
-		Distance distance = (Distance) (criterionMap.get(Distance.NAME));
+//		Security security = (Security) (criterionMap.get(Security.NAME));
+//		Time time =(Time) (criterionMap.get(Time.NAME));
+//		Pertinence pertinence =(Pertinence) (criterionMap.get(Pertinence.NAME));
+//		Competition competition = (Competition) (criterionMap.get(Competition.NAME));
+//		NumberOfDestructibleWalls numberOfDestructibleWalls =(NumberOfDestructibleWalls) (criterionMap.get(NumberOfDestructibleWalls.NAME));
+//		Distance distance = (Distance) (criterionMap.get(Distance.NAME));
 		TileCalculation calculate = new TileCalculation(this.ai);
 		//our agent's mode is collecting.
 		if(this.ai.getModeHandler().getMode().equals(AiMode.COLLECTING))
 		{
 			if(!tile.getItems().isEmpty()) // criteria is visible item
 			{
-             Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
-             criterion.add(security);
-             criterion.add(time);
-             criterion.add(pertinence);
-             criterion.add(competition);
-             result = new AiUtilityCase(this.ai,VISIBLE_ITEM, criterion);
+//             Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
+//             criterion.add(security);
+//             criterion.add(time);
+//             criterion.add(pertinence);
+//             criterion.add(competition);
+//             result = new AiUtilityCase(this.ai,VISIBLE_ITEM, criterion);
+				result = caseMap.get(VISIBLE_ITEM);
 			}
 			else if(calculate.numberOfDestructibleWalls(tile) > DESTWALL_COUNT)
 			{
 				//then we are in the case "Neighborhood of dest wall"
-				 Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
-				 criterion.add(security);
-				 criterion.add(time);
-				 criterion.add(numberOfDestructibleWalls);
-				 result = new AiUtilityCase(this.ai, NEIGHBORHOOD_WALL, criterion);
+//				 Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
+//				 criterion.add(security);
+//				 criterion.add(time);
+//				 criterion.add(numberOfDestructibleWalls);
+//				 result = new AiUtilityCase(this.ai, NEIGHBORHOOD_WALL, criterion);
+				result = caseMap.get(NEIGHBORHOOD_WALL);
 			}
 			else
 			{
-				Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
-				criterion.add(security);
-				criterion.add(time);
-				result =  new AiUtilityCase(this.ai, C_CASE_NULL, criterion);
-				
+//				Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
+//				criterion.add(security);
+//				criterion.add(time);
+//				result =  new AiUtilityCase(this.ai, C_CASE_NULL, criterion);
+				result = caseMap.get(C_CASE_NULL);
 			}
 		}
 		else // mode is attacking.
 		{
 			if(calculate.blockingEnemyIsPossible(tile))
 			   {
-			    Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
-			    criterion.add(security);
-			    criterion.add(time);
-			    result =  new AiUtilityCase(this.ai,BLOCKING_ENEMY, criterion);
+//			    Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
+//			    criterion.add(security);
+//			    criterion.add(time);
+//			    result =  new AiUtilityCase(this.ai,BLOCKING_ENEMY, criterion);
+				result = caseMap.get(BLOCKING_ENEMY);
 			   }
 			else 
 			{
 //				//closest enemy
 				if(calculate.threatenEnemy(tile, this.ai.getZone().getOwnHero().getBombRange()))
 				{
-					Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
-					criterion.add(security);
-					criterion.add(time);
-					result =  new AiUtilityCase(this.ai,CLOSEST_ENEMY, criterion);
-					
+//					Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
+//					criterion.add(security);
+//					criterion.add(time);
+//					result =  new AiUtilityCase(this.ai,CLOSEST_ENEMY, criterion);
+					result = caseMap.get(CLOSEST_ENEMY);
 				}
 				else if(!calculate.isThereEnemyInAllAccessibleTiles(this.ai.getZone().getOwnHero().getTile()))
 				{
-					Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
-					criterion.add(security);
-					criterion.add(distance);
-					result =  new AiUtilityCase(this.ai,UNREACHABLE_ENEMY, criterion);
+//					Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
+//					criterion.add(security);
+//					criterion.add(distance);
+//					result =  new AiUtilityCase(this.ai,UNREACHABLE_ENEMY, criterion);
+					result = caseMap.get(UNREACHABLE_ENEMY);
 				}
 				else
 				{
-					Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
-					criterion.add(security);
-					criterion.add(time);
-					result =  new AiUtilityCase(this.ai,A_CASE_NULL, criterion);
-					
+//					Set<AiUtilityCriterion<?,?>> criterion = new TreeSet<AiUtilityCriterion<?, ?>>();
+//					criterion.add(security);
+//					criterion.add(time);
+//					result =  new AiUtilityCase(this.ai,A_CASE_NULL, criterion);
+					result = caseMap.get(A_CASE_NULL);
 				}
 				
 			}

@@ -58,14 +58,17 @@ public class MoveHandler extends AiMoveHandler<CiplakErakyol> {
 	protected AiTile updateCurrentDestination() throws StopRequestException {
 		ai.checkInterruption();
 		Boolean control = false;
-		AiTile target = ai.getTileWithBiggestUtility();
 		AiHero ownHero = ai.getZone().getOwnHero();
-		control = ai.getTileWithBiggestUtility().isCrossableBy(ownHero);
-		Direction direction = Direction.NONE;
-		if (control == true)
-			target = ai.getTileWithBiggestUtility();
-		else
-			target = ai.getTileWithBiggestUtility().getNeighbor(direction);
+		AiTile target = ownHero.getTile();
+		AiTile tile = ai.getTileWithBiggestUtility();
+		if(tile!=null)
+		{	control = tile.isCrossableBy(ownHero);
+			Direction direction = Direction.NONE;
+			if (control == true)
+				target = tile;
+			else
+				target = tile.getNeighbor(direction);
+		}
 		return target;
 	}
 

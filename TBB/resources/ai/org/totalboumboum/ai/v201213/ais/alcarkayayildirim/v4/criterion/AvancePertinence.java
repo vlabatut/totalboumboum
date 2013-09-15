@@ -1,5 +1,7 @@
 package org.totalboumboum.ai.v201213.ais.alcarkayayildirim.v4.criterion;
 
+import java.util.List;
+
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
@@ -41,16 +43,12 @@ public class AvancePertinence extends AiUtilityCriterionBoolean<AlcarKayaYildiri
 		ai.checkInterruption();
 		boolean result = false;
 
-		try
-		{
-			if ( this.ai.getClosestAccDesWalltoEnemy().getNeighbors().contains( tile ) )
-			{
-				result = true;
+		AiTile cl = this.ai.getClosestAccDesWalltoEnemy();
+		if(cl!=null)
+		{	List<AiTile> neigh = cl.getNeighbors();
+			if (neigh.contains( tile ) )
+			{	result = true;
 			}
-		}
-		catch ( NullPointerException e )
-		{
-			result = false;
 		}
 		
 		return result;

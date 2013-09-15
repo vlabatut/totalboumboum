@@ -92,7 +92,7 @@ public class BombHandler extends AiBombHandler<GerginOzkanoglu> {
 									AiPath pathToSafestTile = pc.bestPath(this.ai
 											.getZone().getOwnHero(),
 											closestAndSafestTile);
-									if (pc.isPathSafe(pathToSafestTile))
+									if (pathToSafestTile!=null && pc.isPathSafe(pathToSafestTile))
 										return true;
 									else
 										return false;

@@ -412,7 +412,7 @@ public class MoveHandler extends AiMoveHandler<AlcarKayaYildirim> {
 		}
 
 		
-		if (!nextTile.getFires().isEmpty() || nextTile.equals(currentTile)) {
+		if (nextTile!=null && (!nextTile.getFires().isEmpty() || nextTile.equals(currentTile))) {
 			currentDirection = Direction.NONE;
 		}		
 		

@@ -74,6 +74,8 @@ public class MoveHandler extends AiMoveHandler<KartTurgut>
 			} catch (LimitReachedException e) {
 				return Direction.NONE;
 			}
+			if(path==null || path.isEmpty())
+				return Direction.NONE;
 			if (path.getLength() > 1) {
 				notreTile = path.getLocation(1).getTile();
 			} else
