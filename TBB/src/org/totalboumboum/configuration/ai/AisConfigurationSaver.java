@@ -35,12 +35,26 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Class used to record AI-related settings.
  * 
  * @author Vincent Labatut
- *
  */
 public class AisConfigurationSaver
 {	
+	/**
+	 * Records the AI-related settings
+	 * in an XML file/
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the AI settings XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the AI settings XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the AI settings XML file.
+	 */
 	public static void saveAisConfiguration(AisConfiguration aisConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveAisElement(aisConfiguration);	
@@ -53,6 +67,15 @@ public class AisConfigurationSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
+	/**
+	 * Builds an XML element representing
+	 * AI-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveAisElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.AIS); 
 	
@@ -87,17 +110,37 @@ public class AisConfigurationSaver
 		return result;
 	}
 	
+	/**
+	 * Builds an XML element representing
+	 * UPS-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveUpsElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.UPS);
+		
 		String ups = Integer.toString(aisConfiguration.getAiUps());
 		result.setAttribute(XmlNames.VALUE,ups);
+		
 		return result;
 	}
 
+	/**
+	 * Builds an XML element representing
+	 * auto advance-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveAutoAdvanceElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.AUTO_ADVANCE);
 	
-		// switch
+		// mode
 		String autoAdvance = aisConfiguration.getAutoAdvance().toString();
 		result.setAttribute(XmlNames.VALUE,autoAdvance);
 		
@@ -105,34 +148,86 @@ public class AisConfigurationSaver
 		String autoAdvanceDelay = Long.toString(aisConfiguration.getAutoAdvanceDelay());
 		result.setAttribute(XmlNames.DELAY,autoAdvanceDelay);
 
+		// tournament mode
+		String tournamentAutoAdvanceMode = aisConfiguration.getTournamentAutoAdvanceMode().toString();
+		result.setAttribute(XmlNames.TOURNAMENT,tournamentAutoAdvanceMode);
+		
+		// delay
+		String tournamentAudoAdvancePack = aisConfiguration.getTournamentAutoAdvancePack();
+		result.setAttribute(XmlNames.PACK,tournamentAudoAdvancePack);
+
 		return result;
 	}
 	
+	/**
+	 * Builds an XML element representing
+	 * hide/show AI rounds-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveHideAllAisElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.HIDE_ALLAIS);
+		
 		String hideAllAis = Boolean.toString(aisConfiguration.getHideAllAis());
 		result.setAttribute(XmlNames.VALUE,hideAllAis);
+		
 		return result;
 	}
 
+	/**
+	 * Builds an XML element representing
+	 * AI theatening-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveBombUselessAisElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.BOMB_USELESS_AIS);
+		
 		String bombUselessAis = Long.toString(aisConfiguration.getBombUselessAis());
 		result.setAttribute(XmlNames.VALUE,bombUselessAis);
+		
 		return result;
 	}
 
+	/**
+	 * Builds an XML element representing
+	 * exception display-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveDisplayExceptionsElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.DISPLAY_EXCEPTIONS);
+		
 		String displayExceptions = Boolean.toString(aisConfiguration.getDisplayExceptions());
 		result.setAttribute(XmlNames.VALUE,displayExceptions);
+		
 		return result;
 	}
 
+	/**
+	 * Builds an XML element representing
+	 * exception logging-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveLogExceptionsElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlNames.LOG_EXCEPTIONS);
+		
 		String logExceptions = Boolean.toString(aisConfiguration.getLogExceptions());
 		result.setAttribute(XmlNames.VALUE,logExceptions);
+		
 		return result;
 	}
 }

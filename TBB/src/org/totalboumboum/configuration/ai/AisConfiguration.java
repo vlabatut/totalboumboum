@@ -33,12 +33,20 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 
 /**
+ * This class handles all options regarding
+ * the artificial intelligence aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class AisConfiguration
 {
+	/**
+	 * Copy the current configuration,
+	 * to be able to restore it later.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public AisConfiguration copy()
 	{	AisConfiguration result = new AisConfiguration();
 
@@ -46,6 +54,8 @@ public class AisConfiguration
 		
 		result.setAutoAdvance(autoAdvance);
 		result.setAutoAdvanceDelay(autoAdvanceDelay);
+		result.setTournamentAutoAdvanceMode(tournamentAutoAdvanceMode);
+		result.setTournamentAutoAdvancePack(tournamentAutoAdvancePack);
 		
 		result.setHideAllAis(hideAllAis);
 		result.setBombUselessAis(bombUselessAis);
@@ -61,26 +71,50 @@ public class AisConfiguration
 	/////////////////////////////////////////////////////////////////
 	// TIMING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** ai updates per second */
+	/** AI updates per second */
 	private int aiUps = 50;
-	/** ai update period */
+	/** AI update period */
 	private long aiPeriod = (long)(1000.0/aiUps);
-	/** ai yield period (experimental) */
+	/** AI yield period (experimental) */
 	private long aiYieldPeriod = (long)50;
 
+	/**
+	 * Returns the number of AI updates per second.
+	 * 
+	 * @return
+	 * 		AI updates per second
+	 */
 	public int getAiUps()
 	{	return aiUps;
 	}
 	
+	/**
+	 * Changes the number of AI updates per second.
+	 * 
+	 * @param aiUps
+	 * 		New number of AI updates per second.
+	 */
 	public void setAiUps(int aiUps)
 	{	this.aiUps = aiUps;
 		aiPeriod = (long) (1000.0/aiUps);
 	}
 	
+	/***
+	 * Returns the AI update period.
+	 * 
+	 * @return
+	 * 		AI update period.
+	 */
 	public long getAiPeriod()
 	{	return aiPeriod;
 	}
 
+	/**
+	 * Returns the AI yield period (experimental).
+	 * 
+	 * @return
+	 * 		AI yield period.
+	 */
 	public long getAiYieldPeriod()
 	{	return aiYieldPeriod;
 	}
@@ -88,10 +122,14 @@ public class AisConfiguration
 	/////////////////////////////////////////////////////////////////
 	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** during a tournament/match, automatically advances to the next match/round */
+	/** During a tournament/match, automatically advances to the next match/round */
 	private AutoAdvance autoAdvance = AutoAdvance.NONE;
-	/** delay (in ms) before the auto system advances to the next round */
+	/** Delay (in ms) before the auto system advances to the next round */
 	private long autoAdvanceDelay = 1000;
+	/** Mode of the tournament auto-advance */
+	private TournamentAutoAdvance tournamentAutoAdvanceMode = TournamentAutoAdvance.RANKS;
+	/** Pack selected for the "pack" type of tournament auto-advance */
+	private String tournamentAutoAdvancePack = "v200708";
 	
 	/**
 	 * Represents the various possible
@@ -134,43 +172,181 @@ public class AisConfiguration
 		}
 	}
 	
+	/**
+	 * Represents the various possible
+	 * values for the tournamanet auto-
+	 * mode advance option.
+	 * 
+	 * @author Vincent Labatut
+	 */
+	public enum TournamentAutoAdvance
+	{	/** Priority to players with less confrontations */
+		CONFRONTATIONS,
+		/** Priority to players of a specified pack */
+		PACK,
+		/** Players are picked randomly */
+		RANDOM,
+		/** Players of similar rank are iteratively selected */
+		RANKS;
+		
+		/**
+		 * Cycle through the various values
+		 * of this enum type.
+		 * 
+		 * @return
+		 * 		The next value.
+		 */
+		public TournamentAutoAdvance getNext()
+		{	int index = (this.ordinal() + 1) % TournamentAutoAdvance.values().length;
+			TournamentAutoAdvance result = TournamentAutoAdvance.values()[index];
+			return result;
+		}
+		
+		/**
+		 * Cycle through the various values
+		 * of this enum type.
+		 * 
+		 * @return
+		 * 		The previous value.
+		 */
+		public TournamentAutoAdvance getPrevious()
+		{	int index = (this.ordinal() - 1 + TournamentAutoAdvance.values().length) % TournamentAutoAdvance.values().length;
+			TournamentAutoAdvance result = TournamentAutoAdvance.values()[index];
+			return result;
+		}
+	}
+
+	/**
+	 * Returns the delay used for auto-advance.
+	 * 
+	 * @return
+	 * 		Auto-advance delay in ms.
+	 */
 	public long getAutoAdvanceDelay()
 	{	return autoAdvanceDelay;
 	}
 
+	/**
+	 * Changes the delay used for auto-advance.
+	 * 
+	 * @param autoAdvanceDelay
+	 * 		New auto-advance delay in ms.
+	 */
 	public void setAutoAdvanceDelay(long autoAdvanceDelay)
 	{	this.autoAdvanceDelay = autoAdvanceDelay;
 	}
 
+	/**
+	 * Returns the current auto-advance option.
+	 * 
+	 * @return
+	 * 		Auto advance option (an enum value).
+	 */
 	public AutoAdvance getAutoAdvance()
 	{	return autoAdvance;
 	}
 
+	/**
+	 * Changes the current auto-advance option.
+	 * 
+	 * @param autoAdvance
+	 * 		New auto-advance option (an enum value).
+	 */
 	public void setAutoAdvance(AutoAdvance autoAdvance)
 	{	this.autoAdvance = autoAdvance;
+	}
+
+	/**
+	 * Returns the mode set for tournament
+	 * auto advance (enum value).
+	 * 
+	 * @return
+	 * 		Mode set for tournament auto advance.
+	 */
+	public TournamentAutoAdvance getTournamentAutoAdvanceMode()
+	{	return tournamentAutoAdvanceMode;
+	}
+
+	/**
+	 * Changes the mode set for tournament
+	 * auto advance (enum value).
+	 * 
+	 * @param tournamentAutoAdvanceMode
+	 * 		New mode for tournament auto advance.
+	 */
+	public void setTournamentAutoAdvanceMode(TournamentAutoAdvance tournamentAutoAdvanceMode)
+	{	this.tournamentAutoAdvanceMode = tournamentAutoAdvanceMode;
+	}
+
+	/**
+	 * Returns the pack selected for the pack
+	 * mode of tournament auto advance.
+	 * 
+	 * @return
+	 * 		Selected pack.
+	 */
+	public String getTournamentAutoAdvancePack()
+	{	return tournamentAutoAdvancePack;
+	}
+
+	/**
+	 * Changes the pack selected for the pack
+	 * mode of tournament auto advance.
+	 * 
+	 * @param tournamentAutoAdvancePack
+	 * 		New pack.
+	 */
+	public void setTournamentAutoAdvancePack(String tournamentAutoAdvancePack)
+	{	this.tournamentAutoAdvancePack = tournamentAutoAdvancePack;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** during a tournament/match, only show rounds with at least a human player */
+	/** During a tournament/match, only show rounds with at least a human player */
 	private boolean hideAllAis = false;
-	/** drop a level bomb on players standing still (not doing anything) */
+	/** Drop a level bomb on players standing still (not doing anything) */
 	private long bombUselessAis = -1;
-	/** time probability */
+	/** Time probability */
 	
+	/**
+	 * Indicates if the AIs rounds should
+	 * be displayed or only simulated.
+	 *  
+	 * @return
+	 * 		{@code true} for simulating, {@code false} for showing.
+	 */
 	public boolean getHideAllAis()
 	{	return hideAllAis;
 	}
 
+	/**
+	 * Changes the AIs simulation option.
+	 * 
+	 * @param hideAllAis
+	 * 		{@code true} for simulating, {@code false} for showing.
+	 */
 	public void setHideAllAis(boolean hideAllAis)
 	{	this.hideAllAis = hideAllAis;
 	}
 
+	/**
+	 * Indicates if idle AIs should be threaten
+	 * by level bombs.
+	 * 
+	 * @return
+	 * 		{@code true} iff the threatening option is enabled.
+	 */
 	public long getBombUselessAis()
 	{	return bombUselessAis;
 	}
-
+	
+	/**
+	 * Change the AIs threatening option.
+	 * 
+	 * @param bombUselessPlayers
+	 * 		{@code true} iff the threatening option is enabled.
+	 */
 	public void setBombUselessAis(long bombUselessPlayers)
 	{	this.bombUselessAis = bombUselessPlayers;
 	}
@@ -178,13 +354,27 @@ public class AisConfiguration
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY EXCEPTIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** show exceptions onscren during game */
+	/** Shows exceptions onscren during game */
 	private boolean displayExceptions = true;
 	
+	/**
+	 * Indicates if the exceptions thrown by agent threads
+	 * should be shown in the console during game.
+	 * 
+	 * @return
+	 * 		{@code true} iff the exceptions are shown.
+	 */
 	public boolean getDisplayExceptions()
 	{	return displayExceptions;
 	}
 
+	/**
+	 * Changes the option regarding agent exception
+	 * display.
+	 * 
+	 * @param displayExceptions
+	 * 		{@code true} to display the agent exceptions.
+	 */
 	public void setDisplayExceptions(boolean displayExceptions)
 	{	this.displayExceptions = displayExceptions;
 	}
@@ -192,22 +382,50 @@ public class AisConfiguration
 	/////////////////////////////////////////////////////////////////
 	// EXCEPTIONS LOG	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if agent exceptions should be logged in a file */
 	private boolean logExceptions = false;
+	/** Indicates if logged exceptions should be separated by agent */
 	private boolean logExceptionsSeparately = false;
+	/** Stream used for logging */
 	private OutputStream exceptionsLogStream;
 
+	/**
+	 * Indicates if agent exceptions should be logged in a file.
+	 * 
+	 * @return
+	 * 		{@code true} to log exceptions.
+	 */
 	public boolean getLogExceptions()
 	{	return logExceptions;
 	}
 	
+	/**
+	 * Changes the option regarding agent exceptions logging.
+	 * 
+	 * @param logExceptions
+	 * 		{@code true} to log exceptions.
+	 */
 	public void setLogExceptions(boolean logExceptions)
 	{	this.logExceptions = logExceptions;
 	}
 	
+	/**
+	 * Changes the option regarding separate agent
+	 * exception logging.
+	 * 
+	 * @param logExceptionsSeparately
+	 * 		{@code true} to log exceptions separately for each agent.
+	 */
 	public void setLogExceptionsSeparately(boolean logExceptionsSeparately)
 	{	this.logExceptionsSeparately = logExceptionsSeparately;
 	}
 	
+	/**
+	 * Creates a stream for exception logging.
+	 * 
+	 * @throws FileNotFoundException
+	 * 		Problem while creating the stream.
+	 */
 	public void initExceptionsLogStream() throws FileNotFoundException
 	{	// init path
 		String path = FilePaths.getLogsPath()+File.separator;
@@ -224,10 +442,23 @@ public class AisConfiguration
 		exceptionsLogStream = new BufferedOutputStream(fileOut);
 	}
 	
+	/**
+	 * Close the exceptions stream.
+	 * 
+	 * @throws IOException
+	 * 		Problem while closing the stream.
+	 */
 	public void closeExceptionsLogStream() throws IOException
 	{	exceptionsLogStream.close();		
 	}
 	
+	/**
+	 * Returns the (previously opened) exception
+	 * stream.
+	 * 
+	 * @return
+	 * 		Stream used to log agent exceptions.
+	 */
 	public OutputStream getExceptionsLogOutput()
 	{	return exceptionsLogStream;
 	}
