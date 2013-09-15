@@ -139,10 +139,11 @@ public class TimeMatrice {
 					maMatrice[i][j] = -1;
 				else
 					maMatrice[i][j] = 0;
-		for (AiTile t : this.caseBombes) {
-			int x = t.getCol();
-			int y = t.getLine();
-			try {
+		if(caseBombes!=null)
+		{	for (AiTile t : this.caseBombes) 
+			{
+				int x = t.getCol();
+				int y = t.getLine();
 				boolean up = false, down = false, left = false, right = false;
 				maMatrice[x][y]++;
 				for (etki = 1; etki <= 5; etki++) {
@@ -167,10 +168,7 @@ public class TimeMatrice {
 						else
 							up = true;
 				}
-			} catch (Exception e) {
-				//e.printStackTrace();
 			}
-
 		}
 
 		return maMatrice;
