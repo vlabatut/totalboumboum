@@ -45,8 +45,6 @@ public class Adatepe extends ArtificialIntelligence
 	/** */
 	@SuppressWarnings("unused")
 	private Collection <AiHero> hero;
-	/** */
-	private Collection <AiZone> zone;
 	/** Decide si on doit mettre un bombe ou pas */
 	boolean dropbomb = false;
 	/** Decide si on est en danger ou pas */
@@ -56,16 +54,23 @@ public class Adatepe extends ArtificialIntelligence
 	/** La direction qu'on veut aller */
 	Direction direction;
 	
+	/** */
+	AiHero ownHero = null;
+	/** */
+	AiZone zone = null;
 	
 	@Override
 	public AiAction processAction() throws StopRequestException
 {	
 	checkInterruption();
-	AiZone zone = getPercepts();
-	AiHero ownHero = zone.getOwnHero();
 	AiAction result = new AiAction(AiActionName.NONE);
 	
-	if(ownHero!=null)
+	if(ownHero==null)
+	{	zone = getPercepts();
+		ownHero = zone.getOwnHero();
+		boardTiles = new int[zone.getHeight()][zone.getWidth()];
+	}
+	else
 		{
 		if (!(dropbomb))
 	{	
@@ -114,8 +119,8 @@ public class Adatepe extends ArtificialIntelligence
 	{	
 		checkInterruption(); 
 		AiZone zone = getPercepts();
-		int xMax = zone.getWidth();
-		int yMax = zone.getHeight();
+		int xMax = zone.getHeight();
+		int yMax = zone.getWidth();
 		int i,j;
 		for(i = 0; i < xMax; i++)
 		{
@@ -129,7 +134,7 @@ public class Adatepe extends ArtificialIntelligence
 		while(itBlocs.hasNext())
 		{
 			AiBlock temp = itBlocs.next();
-			boardTiles[temp.getCol()][temp.getLine()] = 1;
+			boardTiles[temp.getLine()][temp.getCol()] = 1;
 		}
 	}
 		
@@ -142,7 +147,7 @@ public class Adatepe extends ArtificialIntelligence
 	private void drawdangerzones() throws StopRequestException
 	{	
 		checkInterruption(); 
-		this.bomb = ((AiZone) zone).getBombs();
+		this.bomb = zone.getBombs();
 		Iterator <AiBomb> itBombes = bomb.iterator();
 		while(itBombes.hasNext())
 		{
@@ -150,28 +155,28 @@ public class Adatepe extends ArtificialIntelligence
 			boardTiles[temp.getCol()][temp.getLine()] = 2;
 			int y1 = temp.getCol();
 			int x1 = temp.getLine();
-			while (boardTiles[x1+1][y1] != 1 && (x1 < (temp.getLine() + temp.getRange())))
+			while (x1<boardTiles.length-1 && boardTiles[x1+1][y1] != 1 && (x1 < (temp.getLine() + temp.getRange())))
 			{
 				boardTiles[x1+1][y1] = 2;
 				x1 = x1 + 1;
 			}
-			while (boardTiles[x1-1][y1] != 1 && (x1 < (temp.getLine() - temp.getRange())))
+			while (x1>0 && boardTiles[x1-1][y1] != 1 && (x1 < (temp.getLine() - temp.getRange())))
 			{
 				boardTiles[x1-1][y1] = 2;
 				x1 = x1 - 1;
 			}
-			while (boardTiles[x1][y1+1] != 1 && y1 < (temp.getCol() + temp.getRange()))
+			while (y1<boardTiles[0].length-1 && boardTiles[x1][y1+1] != 1 && y1 < (temp.getCol() + temp.getRange()))
 			{
 				boardTiles[x1][y1+1] = 2;
 				y1 = y1 + 1;
 			}
-			while (boardTiles[x1][y1+1] != 1 && y1 < (temp.getCol() - temp.getRange()))
+			while (y1>0 && boardTiles[x1][y1+1] != 1 && y1 < (temp.getCol() - temp.getRange()))
 			{
 				boardTiles[x1][y1-1] = 2;
 				y1 = y1 - 1;
 			}
 		}
-		this.fire = ((AiZone) zone).getFires();
+		this.fire = zone.getFires();
 		Iterator <AiFire> itFire = fire.iterator();
 		while(itFire.hasNext())
 		{
@@ -221,11 +226,12 @@ public class Adatepe extends ArtificialIntelligence
 	
 		int x2 = currentTile.getLine();
 		int y2 = currentTile.getCol();
-		if (boardTiles[x2][y2] != 3 && boardTiles[x2+1][y2] !=3 && 
+		if (x2<zone.getHeight()-2 && x2>1 && y2<zone.getWidth()-2 && y2>1
+			&& (boardTiles[x2][y2] != 3 && boardTiles[x2+1][y2] !=3 && 
 			boardTiles[x2+2][y2] !=3 && boardTiles[x2-1][y2] !=3 &&
 			boardTiles[x2-2][y2] !=3 && boardTiles[x2][y2+1] !=3 &&
 			boardTiles[x2][y2+2] !=3 && boardTiles[x2][y2-1] != 3 && 
-			boardTiles[x2+1][y2-2] !=3)
+			boardTiles[x2+1][y2-2] !=3))
 		{
 			wearesafe = true;
 		}

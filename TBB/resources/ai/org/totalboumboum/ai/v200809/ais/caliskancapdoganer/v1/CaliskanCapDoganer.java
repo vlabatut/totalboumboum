@@ -69,11 +69,23 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 			
 			// arrivé à destination : on choisit une nouvelle destination
 			if(currentTile == nextTile)
-				pickNextTile();
+			{	try
+				{	pickNextTile();
+				}
+				catch(StackOverflowError e)
+				{	//
+				}
+			
+			}
 			// au cas ou quelqu'un prendrait le Contrôle manuel du personnage
 			else if(previousTile != currentTile)
 			{	previousTile = currentTile;
-				pickNextTile();			
+				try
+				{	pickNextTile();
+				}
+				catch(StackOverflowError e)
+				{	//
+				}			
 			}
 			// sinon (on garde la même direction) on vérifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
 			else
@@ -139,7 +151,8 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 				nextTile = tiles.get(index);
 								
 				if (!CheckAvailability())
-					pickNextTile();
+				{	pickNextTile();
+				}
 						
 				previousTile = currentTile;
 			}
@@ -147,12 +160,7 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 			else
 			{	nextTile = tempTile;
 				if (!CheckAvailability())
-                {
-                    try{
-					    pickNextTile();
-                    }catch(Exception e){
-                       // e.printStackTrace();      //on ne montre pas d'erreurs
-                    }
+                {	pickNextTile();
                 }
 				previousTile = currentTile;
 			}
@@ -253,17 +261,18 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 		int previousTileLine = previousTile.getLine();
 		int nextTileCol = nextTile.getCol();
 		int nextTileLine = nextTile.getLine();
-		int bombedTileCol = bombedTile.getCol();
-		int bombedTileLine = bombedTile.getLine();
-		
-		if ((nextTileCol > bombedTileCol && bombedTileCol > previousTileCol) ||
-			(nextTileCol < bombedTileCol && bombedTileCol < previousTileCol) ||
-			(nextTileLine > bombedTileLine && bombedTileLine > previousTileLine) ||
-			(nextTileLine < bombedTileLine && bombedTileLine < previousTileLine) ||
-			(nextTileCol == bombedTileCol) ||
-			(nextTileLine == bombedTileLine))
-			return false;
-		
+		if(bombedTile != null)
+		{	int bombedTileCol = bombedTile.getCol();
+			int bombedTileLine = bombedTile.getLine();
+			
+			if ((nextTileCol > bombedTileCol && bombedTileCol > previousTileCol) ||
+				(nextTileCol < bombedTileCol && bombedTileCol < previousTileCol) ||
+				(nextTileLine > bombedTileLine && bombedTileLine > previousTileLine) ||
+				(nextTileLine < bombedTileLine && bombedTileLine < previousTileLine) ||
+				(nextTileCol == bombedTileCol) ||
+				(nextTileLine == bombedTileLine))
+				return false;
+		}
 		return true;
 	}
 }

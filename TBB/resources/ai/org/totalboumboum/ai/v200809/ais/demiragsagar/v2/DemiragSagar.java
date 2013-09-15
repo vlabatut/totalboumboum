@@ -110,7 +110,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 			 */
 			//seulement a l'inisialisation
 			//on creer la matrice de temps restant des bombes
-			this.timeMatrice=new TimeMatrice(this.zone,ownHero.getBombRange());
+			this.timeMatrice=new TimeMatrice(this,this.zone,ownHero.getBombRange());
 			this.timeMatrice.updateTimeMatrice(caseBombes);
 			this.state=4;
 			break;
@@ -412,13 +412,13 @@ public class DemiragSagar extends ArtificialIntelligence {
 	 * 		Description manquante !
 	 * @return
 	 * 		Description manquante !
+	 * 
+	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-	public boolean supposerBombe(AiTile temp){
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			//e.printStackTrace();
-		}
+	public boolean supposerBombe(AiTile temp) throws StopRequestException{
+		checkInterruption();
+		
 		int i,j;
 		boolean resultat=false;
 //		long nouveauTime [][]= new long[17][15];

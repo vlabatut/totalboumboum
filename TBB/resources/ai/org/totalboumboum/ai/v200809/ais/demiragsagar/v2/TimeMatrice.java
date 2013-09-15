@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * 
@@ -28,15 +29,19 @@ public class TimeMatrice {
 	private int extendTime;
 	/** */
 	private boolean debug;
-
+	/** */
+	private DemiragSagar ai;
 	/**
 	 * 
+	 * @param ai 
+	 * 		Description manquante !
 	 * @param zone
 	 * 		Description manquante !
 	 * @param defaultPortee
 	 * 		Description manquante !
 	 */
-	public TimeMatrice(AiZone zone,int defaultPortee) {
+	public TimeMatrice(DemiragSagar ai, AiZone zone,int defaultPortee) {
+		this.ai = ai;
 		this.zone=zone;
 		this.timeMatrice=new long[20][20];
 		this.defaultPortee=defaultPortee;
@@ -181,8 +186,10 @@ public class TimeMatrice {
 	 * 
 	 * @param nouvelleBombes
 	 * 		Description manquante !
+	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-	public void updateTimeMatrice(List<AiTile> nouvelleBombes) {
+	public void updateTimeMatrice(List<AiTile> nouvelleBombes) throws StopRequestException {
 		if (this.debug)
 			this.printTimeMatrice();
 		// update matrice
@@ -226,11 +233,15 @@ public class TimeMatrice {
 								else{
 									if(!zone.getTile(j, i).getBombs().iterator().next().isWorking()){
 										this.putTime(i,j,this.extendTime);
-										this.diffuseEffetMatrice(zone.getTile(j, i), zone.getTile(j, i).getBombs().iterator().next().getRange(),this.extendTime);
+										try
+										{	this.diffuseEffetMatrice(zone.getTile(j, i), zone.getTile(j, i).getBombs().iterator().next().getRange(),this.extendTime);
+										}
+										catch(StackOverflowError e)
+										{	//
+										}
 									}
 									
 								}
-								
 							}
 						}
 						else if (this.getTime(i,j) == -1 && Functions.hasWall(this.zone.getTile(j, i))){
@@ -342,8 +353,11 @@ public class TimeMatrice {
 	 * 
 	 * @param temp
 	 * 		Description manquante !
+	 * 
+	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-	public void placerNouvelleBombe(AiTile temp) {
+	public void placerNouvelleBombe(AiTile temp) throws StopRequestException {
 		if(this.debug) System.out.println("nouvelle bombe");
 		// bu 2400
 		int portee = this.defaultPortee;
@@ -405,8 +419,14 @@ public class TimeMatrice {
 
 		} 
 		else if (this.timeMatrice[temp.getCol()][temp.getLine()] > 0)
-			this.diffuseEffetMatrice(temp, portee, this.timeMatrice[temp.getCol()][temp.getLine()]);
-		//this.printTimeMatrice(this.timeMatrice);
+		{	try
+			{	this.diffuseEffetMatrice(temp, portee, this.timeMatrice[temp.getCol()][temp.getLine()]);
+				//	this.printTimeMatrice(this.timeMatrice);
+			}
+			catch(StackOverflowError e)
+			{	//
+			}
+		}
 
 	}
 	
@@ -418,12 +438,16 @@ public class TimeMatrice {
 	 * 		Description manquante !
 	 * @param min
 	 * 		Description manquante !
+	 * @throws StopRequestException 
+	 * 		Description manquante !
 	 */
-	public void diffuseEffetMatrice(AiTile temp, int portee, long min) {
+	public void diffuseEffetMatrice(AiTile temp, int portee, long min) throws StopRequestException {
+		ai.checkInterruption();
 		//Allez dans les 4 directions dans la longeur de la portee
 		boolean up = true, left = true, right = true, down = true;
 		int step = 1;
 		while (up && step <= portee) {			
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == -1)
 				// stop
 				up = false;
@@ -446,6 +470,7 @@ public class TimeMatrice {
 		}
 		step = 1;
 		while (down && step <= portee) {
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol()][temp.getLine() + step] == -1)
 				down = false;
 			else if (this.caseBombes.contains(this.zone.getTile(temp.getLine()
@@ -466,6 +491,7 @@ public class TimeMatrice {
 		}
 		step = 1;
 		while (left && step <= portee) {
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol() - step][temp.getLine()] == -1)
 				// stop
 				left = false;
@@ -488,7 +514,7 @@ public class TimeMatrice {
 		}
 		step = 1;
 		while (right && step <= portee) {
-
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol() + step][temp.getLine()] == -1)
 				right = false;
 			else // Est-ce qu'il ya une bombe?
