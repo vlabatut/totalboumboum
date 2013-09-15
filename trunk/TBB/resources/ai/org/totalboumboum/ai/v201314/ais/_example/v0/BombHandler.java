@@ -39,6 +39,7 @@ public class BombHandler extends AiBombHandler<Agent>
 	@Override
 	protected boolean considerBombing()
 	{	ai.checkInterruption();
+		boolean result = false;
 	
 		/*
 		 *  TODO à compléter.
@@ -46,7 +47,7 @@ public class BombHandler extends AiBombHandler<Agent>
 		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
 		 */
 	
-		return false;
+		return result;
 	}
 
 

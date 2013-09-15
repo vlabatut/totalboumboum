@@ -393,6 +393,7 @@ if(!zone.getTile(5,2).getBlocks().isEmpty())
 					}
 					catch (LimitReachedException e)
 					{	//e.printStackTrace();
+						indirectPath = new AiPath();
 					}
 					after = ai.getCurrentTime();
 					elapsed = after - before;
@@ -480,7 +481,7 @@ if(!zone.getTile(5,2).getBlocks().isEmpty())
 		AiPath currentPath = getCurrentPath();
 		
 		// si un chemin a été trouvé
-		if(currentPath!=null)
+		if(currentPath!=null && !currentPath.isEmpty())
 		{	print("      processing the path currentPath="+currentPath);
 			
 			// temps d'attente éventuel

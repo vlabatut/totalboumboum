@@ -39,6 +39,7 @@ public class ModeHandler extends AiModeHandler<Agent>
 	@Override
 	protected boolean hasEnoughItems()
 	{	ai.checkInterruption();
+		boolean result = true;
 		
 		/*
 		 *  TODO à compléter.
@@ -46,12 +47,13 @@ public class ModeHandler extends AiModeHandler<Agent>
 		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
 		 */
 		
-		return true;
+		return result;
 	}
 	
 	@Override
 	protected boolean isCollectPossible()
 	{	ai.checkInterruption();
+		boolean result = true;
 	
 		/*
 		 *  TODO à compléter.
@@ -59,7 +61,7 @@ public class ModeHandler extends AiModeHandler<Agent>
 		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
 		 */
 		
-		return true;
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
