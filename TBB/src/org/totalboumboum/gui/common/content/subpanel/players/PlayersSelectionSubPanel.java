@@ -490,7 +490,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					{	// only if not a client
 						if(connexion==null)
 						{	try
-							{	ProfilesConfiguration.randomlyCompleteProfiles(players,LINES-1);
+							{	ProfilesConfiguration.completeProfilesRandomly(players,LINES-1);
 								refresh();
 								firePlayersAdded();
 							}
@@ -557,7 +557,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 						}
 						else
 						{	try
-							{	ProfilesConfiguration.rankCompleteProfiles(players,LINES-1,profile);
+							{	ProfilesConfiguration.completeProfilesByGlicko(players,LINES-1,profile);
 								refresh();
 								firePlayersAdded();
 							}
