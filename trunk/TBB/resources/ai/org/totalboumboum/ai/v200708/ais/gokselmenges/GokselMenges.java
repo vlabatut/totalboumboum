@@ -1,7 +1,8 @@
 package org.totalboumboum.ai.v200708.ais.gokselmenges;
 
 import java.awt.Point;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
@@ -28,9 +29,9 @@ public class GokselMenges extends ArtificialIntelligence {
 	int MIDDLE;
 
 	/** */
-	int CoutInitial = 0;
+	int coutInitial = 0;
 	/** */
-	Vector<Integer> Costs = new Vector<Integer>();
+	List<Integer> costs = new ArrayList<Integer>();
 	/** */
 	int x = 0;
 	/** */
@@ -46,11 +47,11 @@ public class GokselMenges extends ArtificialIntelligence {
 	/** */
 	int path1 = -1;
 	/** */
-	int BombNumber = 1;
+	int bombNumber = 1;
 	/** */
 	boolean escaping = false;
 	/** */
-	boolean BombNumberIncremented = false;
+	boolean bombNumberIncremented = false;
 
 	/** */
 	boolean escapingFromBombIteratorNumber100 = false;
@@ -58,28 +59,28 @@ public class GokselMenges extends ArtificialIntelligence {
 	/** */
 	int[][] oldSituation = null;
 	/** */
-	Vector<Point> bombPosition = new Vector<Point>();
+	List<Point> bombPosition = new ArrayList<Point>();
 	/** */
 	int getPlayerCount = -1;
 	/** */
-	Vector<Point> blockPoints = new Vector<Point>();
+	List<Point> blockPoints = new ArrayList<Point>();
 
 	/** */
 	boolean poserBombe = false;
 
 	/** */
-	Vector<Point> MoveCosts = new Vector<Point>();
+	List<Point> moveCosts = new ArrayList<Point>();
 	/** */
-	Vector<Point> ZoneAccessible = new Vector<Point>();
+	List<Point> zoneAccessible = new ArrayList<Point>();
 	/** */
-	Vector<Point> ZoneAccessible2 = new Vector<Point>();
+	List<Point> zoneAccessible2 = new ArrayList<Point>();
 
 	/** */
-	Vector<Point> ZoneAccessibleEscapeBomb = new Vector<Point>();
+	List<Point> zoneAccessibleEscapeBomb = new ArrayList<Point>();
 	/** */
-	Vector<Point> MovedPoints = new Vector<Point>();
+	List<Point> movedPoints = new ArrayList<Point>();
 	/** */
-	Vector<Integer> pathToGo = new Vector<Integer>();
+	List<Integer> pathToGo = new ArrayList<Integer>();
 
 	/** les couts pour l'algorithm A* pour trouver le meilleur chemin */
 	final int cost_empty = 1;
@@ -125,19 +126,19 @@ public class GokselMenges extends ArtificialIntelligence {
 
 			Point CurrentPlayerPos = new Point(x, y);
 
-			BombNumber += isBombExploded();
+			bombNumber += isBombExploded();
 
 			if (path == false) {
 
 				Goal = getClosestPlayerPositionAlive(CurrentPlayerPos);
 
-				ZoneAccessible.clear();
+				zoneAccessible.clear();
 
 				getZoneAccessible(CurrentPlayerPos);
 
-				Goal = getObjective(ZoneAccessible);
-				MovedPoints.clear();
-				CoutInitial = 0;
+				Goal = getObjective(zoneAccessible);
+				movedPoints.clear();
+				coutInitial = 0;
 
 				if (Goal == null) {
 
@@ -145,7 +146,7 @@ public class GokselMenges extends ArtificialIntelligence {
 
 					if (CurrentPlayerPos != Goal) {
 						path = true;
-						if (BombNumber > 0) {
+						if (bombNumber > 0) {
 							poserBombe = true;
 
 							oldSituation = getZoneMatrix();
@@ -154,7 +155,7 @@ public class GokselMenges extends ArtificialIntelligence {
 										&& (getZoneMatrix()[CurrentPlayerPos.x][CurrentPlayerPos.y] != 7)) {
 
 									bombPosition.add(CurrentPlayerPos);
-									BombNumber--;
+									bombNumber--;
 
 									return AI_ACTION_PUT_BOMB;
 								} else {
@@ -179,7 +180,7 @@ public class GokselMenges extends ArtificialIntelligence {
 
 			} else {
 				if (poserBombe == true) {
-					MovedPoints.clear();
+					movedPoints.clear();
 					pathToGo.clear();
 					Goal = getObjectiveRunFromBomb(
 							CurrentPlayerPos,
@@ -190,20 +191,20 @@ public class GokselMenges extends ArtificialIntelligence {
 						return AI_ACTION_DO_NOTHING;
 
 					getPathBomb(CurrentPlayerPos, Goal);
-					pathToGo = refine(MovedPoints);
-					MovedPoints.clear();
+					pathToGo = refine(movedPoints);
+					movedPoints.clear();
 					path = true;
 					poserBombe = false;
 					escapingFromBombIteratorNumber100 = true;
 
 				}
 
-				Costs.clear();
-				MoveCosts.clear();
+				costs.clear();
+				moveCosts.clear();
 			}
 
 			// int i = 0;
-			MovedPoints.add(CurrentPlayerPos);
+			movedPoints.add(CurrentPlayerPos);
 
 			if (path == false) {
 
@@ -226,10 +227,10 @@ public class GokselMenges extends ArtificialIntelligence {
 						&& (pathIterationCounter < pathIterationCounterFinish)) {
 					pathIterationCounter++;
 
-					Vector<Point> MoveablePoints = new Vector<Point>();
-					Vector<Point> temp = getPossibleMoves(x, y, false);
+					List<Point> MoveablePoints = new ArrayList<Point>();
+					List<Point> temp = getPossibleMoves(x, y, false);
 					MoveablePoints.addAll(temp);
-					Vector<Integer> MoveablePointDistances = getPointDistances(
+					List<Integer> MoveablePointDistances = getPointDistances(
 							MoveablePoints, Goal);
 
 					int pt;
@@ -242,20 +243,20 @@ public class GokselMenges extends ArtificialIntelligence {
 						return AI_ACTION_DO_NOTHING;
 					}
 
-					x = MoveCosts.get(pt).x;
-					y = MoveCosts.get(pt).y;
+					x = moveCosts.get(pt).x;
+					y = moveCosts.get(pt).y;
 
 					// i++;
 
-					RemoveFromVector(pt);
+					RemoveFromList(pt);
 
 					MoveablePoints.clear();
 					MoveablePointDistances.clear();
 
 				}
 
-				pathToGo = refine(MovedPoints);
-				MovedPoints.clear();
+				pathToGo = refine(movedPoints);
+				movedPoints.clear();
 
 				path = true;
 
@@ -290,10 +291,10 @@ public class GokselMenges extends ArtificialIntelligence {
 				path = false;
 				i1 = 0;
 				j1 = 0;
-				if (BombNumberIncremented == true) {
+				if (bombNumberIncremented == true) {
 
-					BombNumber++;
-					BombNumberIncremented = false;
+					bombNumber++;
+					bombNumberIncremented = false;
 				}
 
 			}
@@ -330,7 +331,7 @@ public class GokselMenges extends ArtificialIntelligence {
 			Point temp = new Point(x, y - 1);
 			// BOMBNUMBER
 			if (BetterMatrix()[x][y - 1] == AI_BLOCK_ITEM_BOMB) {
-				BombNumberIncremented = true;
+				bombNumberIncremented = true;
 			}
 
 			if (!CurrentPos.equals(temp)) {
@@ -347,7 +348,7 @@ public class GokselMenges extends ArtificialIntelligence {
 			Point temp = new Point(x, y + 1);
 			// BOMBNUMBER
 			if (BetterMatrix()[x][y + 1] == AI_BLOCK_ITEM_BOMB) {
-				BombNumberIncremented = true;
+				bombNumberIncremented = true;
 			}
 
 			if (!CurrentPos.equals(temp)) {
@@ -365,7 +366,7 @@ public class GokselMenges extends ArtificialIntelligence {
 			// BOMBNUMBER
 			if (BetterMatrix()[x - 1][y] == AI_BLOCK_ITEM_BOMB) {
 
-				BombNumberIncremented = true;
+				bombNumberIncremented = true;
 			}
 
 			if (!CurrentPos.equals(temp)) {
@@ -383,7 +384,7 @@ public class GokselMenges extends ArtificialIntelligence {
 			// BOMBNUMBER
 			if (BetterMatrix()[x + 1][y] == AI_BLOCK_ITEM_BOMB) {
 
-				BombNumberIncremented = true;
+				bombNumberIncremented = true;
 			}
 
 			if (!CurrentPos.equals(temp)) {
@@ -448,45 +449,44 @@ public class GokselMenges extends ArtificialIntelligence {
 
 		Point result = new Point();
 
-		ZoneAccessible.clear();
+		zoneAccessible.clear();
 		getZoneAccessibleForBomb(CurrentPlayerPos);
 
-		for (int i = 0; i < ZoneAccessible.size(); i++)
-			if (getDistance(CurrentPlayerPos, ZoneAccessible.get(i)) == 0)
-				ZoneAccessible.remove(i);
+		for (int i = 0; i < zoneAccessible.size(); i++)
+			if (getDistance(CurrentPlayerPos, zoneAccessible.get(i)) == 0)
+				zoneAccessible.remove(i);
 
 		if (seven == true) {
-			ZoneAccessible2.addAll(ZoneAccessible);
+			zoneAccessible2.addAll(zoneAccessible);
 
-			for (int i = 0; i < ZoneAccessible.size(); i++) {
+			for (int i = 0; i < zoneAccessible.size(); i++) {
 
-				if (BetterMatrix()[ZoneAccessible.get(i).x][ZoneAccessible
+				if (BetterMatrix()[zoneAccessible.get(i).x][zoneAccessible
 						.get(i).y] == 7) {
 
-					ZoneAccessible.remove(i);
+					zoneAccessible.remove(i);
 					i--;
 				}
 			}
 		}
 
-		int temp;
+		int temp = 0;
 
-		try {
-			temp = getDistance(CurrentPlayerPos, ZoneAccessible.get(0));
-		} catch (Exception e) {
+		if(zoneAccessible!=null && !zoneAccessible.isEmpty())
+			temp = getDistance(CurrentPlayerPos, zoneAccessible.get(0));
+		else
 			return new Point(-10, -10);
-		}
-
+		
 		int tempind = 0;
 
-		for (int i = 0; i < ZoneAccessible.size(); i++) {
-			if (temp > getDistance(CurrentPlayerPos, ZoneAccessible.get(i))) {
-				temp = getDistance(CurrentPlayerPos, ZoneAccessible.get(i));
+		for (int i = 0; i < zoneAccessible.size(); i++) {
+			if (temp > getDistance(CurrentPlayerPos, zoneAccessible.get(i))) {
+				temp = getDistance(CurrentPlayerPos, zoneAccessible.get(i));
 				tempind = i;
 			}
 		}
 
-		result = ZoneAccessible.get(tempind);
+		result = zoneAccessible.get(tempind);
 
 		return result;
 	}
@@ -500,10 +500,10 @@ public class GokselMenges extends ArtificialIntelligence {
 	// @param p les coordonnees de la bombe
 	public void getZoneAccessibleForBomb(Point p) {
 
-		if (!ZoneAccessible.contains(p))
-			ZoneAccessible.add(p);
+		if (!zoneAccessible.contains(p))
+			zoneAccessible.add(p);
 
-		Vector<Point> result = getPossibleMovesForBomb(p.x, p.y, ZoneAccessible);
+		List<Point> result = getPossibleMovesForBomb(p.x, p.y, zoneAccessible);
 
 		for (int i = 0; i < result.size(); i++) {
 			getZoneAccessibleForBomb(result.get(i));
@@ -523,61 +523,54 @@ public class GokselMenges extends ArtificialIntelligence {
 	 */
 	// change le vecteur contenant les pas possibles.
 	// @param p les coordonnees de la bombe
-	public Vector<Point> getPossibleMovesForBomb2(int x, int y,
-			Vector<Point> zone) {
+	public List<Point> getPossibleMovesForBomb2(int x, int y,
+			List<Point> zone) {
 
 		int[] direction = new int[4];
 
-		Vector<Point> points = new Vector<Point>();
+		List<Point> points = new ArrayList<Point>();
 
-		try {
-			direction[0] = BetterMatrix()[x][y - 1]; // UP
-		} catch (RuntimeException e) {
+		int mat[][] = BetterMatrix();
+		if(y-1>=0)
+			direction[0] = mat[x][y - 1]; // UP
+		else
 			direction[0] = -1;
-
-		}
-		try {
-			direction[1] = BetterMatrix()[x][y + 1]; // DOWN
-		} catch (RuntimeException e) {
+		if(y+1<mat[0].length)
+			direction[1] = mat[x][y + 1]; // DOWN
+		else
 			direction[1] = -1;
-
-		}
-		try {
-			direction[2] = BetterMatrix()[x - 1][y]; // LEFT
-		} catch (RuntimeException e) {
+		if(x-1>=0)
+			direction[2] = mat[x - 1][y]; // LEFT
+		else
 			direction[2] = -1;
-
-		}
-		try {
-			direction[3] = BetterMatrix()[x + 1][y]; // RIGHT
-		} catch (RuntimeException e) {
+		if(x+1<mat.length)
+			direction[3] = mat[x + 1][y]; // RIGHT
+		else
 			direction[3] = -1;
 
-		}
-
 		if ((zone.contains(new Point(x, y - 1)))) {
-			if (!MovedPoints.contains(new Point(x, y - 1))) {
+			if (!movedPoints.contains(new Point(x, y - 1))) {
 				if ((direction[0] == 0) || (direction[0] == 5)
 						|| (direction[0] == 6) || (direction[0] == 7))
 					points.add(new Point(x, y - 1));
 			}
 		}
 		if (zone.contains(new Point(x, y + 1))) {
-			if (!MovedPoints.contains(new Point(x, y + 1))) {
+			if (!movedPoints.contains(new Point(x, y + 1))) {
 				if ((direction[1] == 0) || (direction[1] == 5)
 						|| (direction[1] == 6) || (direction[1] == 7))
 					points.add(new Point(x, y + 1));
 			}
 		}
 		if (zone.contains(new Point(x - 1, y))) {
-			if (!MovedPoints.contains(new Point(x - 1, y))) {
+			if (!movedPoints.contains(new Point(x - 1, y))) {
 				if ((direction[2] == 0) || (direction[2] == 5)
 						|| (direction[2] == 6) || (direction[2] == 7))
 					points.add(new Point(x - 1, y));
 			}
 		}
 		if (zone.contains(new Point(x + 1, y))) {
-			if (!MovedPoints.contains(new Point(x + 1, y))) {
+			if (!movedPoints.contains(new Point(x + 1, y))) {
 				if ((direction[3] == 0) || (direction[3] == 5)
 						|| (direction[3] == 6) || (direction[3] == 7))
 					points.add(new Point(x + 1, y));
@@ -601,12 +594,12 @@ public class GokselMenges extends ArtificialIntelligence {
 	 */
 	// change le vecteur contenant les pas possibles.
 	// @param p les coordonnees de la bombe
-	public Vector<Point> getPossibleMovesForBomb(int x, int y,
-			Vector<Point> zone) {
+	public List<Point> getPossibleMovesForBomb(int x, int y,
+			List<Point> zone) {
 
 		int[] direction = new int[4];
 
-		Vector<Point> points = new Vector<Point>();
+		List<Point> points = new ArrayList<Point>();
 
 		try {
 			direction[0] = oldSituation[x][y - 1]; // UP
@@ -667,23 +660,25 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * @return ?
 	 * 		Description manquante !
 	 */
-	public Vector<Point> getPathBomb(Point CurrentPlayerPos, Point Goal) {
+	public List<Point> getPathBomb(Point CurrentPlayerPos, Point Goal) {
 
-		MovedPoints.clear();
-		Vector<Point> result = new Vector<Point>();
+		movedPoints.clear();
+		List<Point> result = new ArrayList<Point>();
 		// int i = 0;
 		pathToGo.clear();
-		MovedPoints.add(CurrentPlayerPos);
+		movedPoints.add(CurrentPlayerPos);
 		int x = CurrentPlayerPos.x;
 		int y = CurrentPlayerPos.y;
-		while ((x != Goal.x) || (y != Goal.y)) {
+		boolean changed = true;
+		while (((x != Goal.x) || (y != Goal.y)) && changed) {
 
-			Vector<Point> MoveablePoints = new Vector<Point>();
+			changed = false;
+			List<Point> MoveablePoints = new ArrayList<Point>();
 			MoveablePoints.clear();
 
-			Vector<Point> temp = getPossibleMovesForBomb2(x, y, ZoneAccessible2);
+			List<Point> temp = getPossibleMovesForBomb2(x, y, zoneAccessible2);
 
-			Vector<Point> temp2 = new Vector<Point>();
+			List<Point> temp2 = new ArrayList<Point>();
 			temp2.addAll(temp);
 
 			temp.clear();
@@ -699,28 +694,21 @@ public class GokselMenges extends ArtificialIntelligence {
 			}
 
 			MoveablePoints.addAll(temp);
-			Vector<Integer> MoveablePointDistances = getPointDistances(
+			List<Integer> MoveablePointDistances = getPointDistances(
 					MoveablePoints, Goal);
-
-			int pt;
-			try {
-				pt = minimumCostCalculation(MoveablePoints,
-						MoveablePointDistances)[1];
-			} catch (RuntimeException e) {
-				return null;
+			int pts[] = minimumCostCalculation(MoveablePoints,MoveablePointDistances);
+			if(pts!=null && pts.length>0)
+			{	x = moveCosts.get(pts[1]).x;
+				y = moveCosts.get(pts[1]).y;
+				changed = true;
+				//System.out.println("x: "+x+"y: "+y);
+				RemoveFromList(pts[1]);
 			}
-
-			x = MoveCosts.get(pt).x;
-			y = MoveCosts.get(pt).y;
-
-			RemoveFromVector(pt);
-
 			MoveablePoints.clear();
 			MoveablePointDistances.clear();
-
 			// i++;
 		}
-		result = MovedPoints;
+		result = movedPoints;
 
 		return result;
 	}
@@ -733,10 +721,10 @@ public class GokselMenges extends ArtificialIntelligence {
 	// retourne la zone accessible a partir d'un point donné.
 	// @param p point actuel de notre bonhomme
 	public void getZoneAccessible(Point p) {
-		if (!ZoneAccessible.contains(p))
-			ZoneAccessible.add(p);
+		if (!zoneAccessible.contains(p))
+			zoneAccessible.add(p);
 
-		Vector<Point> result = getPossibleMoves(p.x, p.y, true);
+		List<Point> result = getPossibleMoves(p.x, p.y, true);
 
 		for (int i = 0; i < result.size(); i++) {
 			getZoneAccessible(result.get(i));
@@ -751,10 +739,10 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * @return ?
 	 * 		Description manquante !
 	 */
-	public Point getObjective(Vector<Point> zoneAccessible) {
+	public Point getObjective(List<Point> zoneAccessible) {
 		Point result = new Point();
-		Vector<Point> objectives = new Vector<Point>();
-		Vector<Integer> objectivesCost = new Vector<Integer>();
+		List<Point> objectives = new ArrayList<Point>();
+		List<Integer> objectivesCost = new ArrayList<Integer>();
 		int[][] matrix = BetterMatrix();
 		Point myPos = new Point(getOwnPosition()[0], getOwnPosition()[1]);
 		Point ennemiPos = new Point(getClosestPlayerPositionAlive(myPos));
@@ -849,15 +837,15 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * @return ?
 	 * 		Description manquante !
 	 */
-	public Vector<Integer> refine(Vector<Point> MovedPoints) {
+	public List<Integer> refine(List<Point> MovedPoints) {
 
-		Vector<Integer> result = new Vector<Integer>();
-		Vector<Point> preresult = new Vector<Point>();
-		Vector<Point> temp = new Vector<Point>();
+		List<Integer> result = new ArrayList<Integer>();
+		List<Point> preresult = new ArrayList<Point>();
+		List<Point> temp = new ArrayList<Point>();
 
 		preresult.add(MovedPoints.get(MovedPoints.size() - 1));
 		int j = 1;
-		for (int i = MovedPoints.size() - 1; i > 0; i--) {
+		for (int i = MovedPoints.size() - 1; i-j >= 0; i--) {
 			try {
 				if (isAdjacent(MovedPoints.get(i), MovedPoints.get(i - j))) {
 					preresult.add(MovedPoints.get(i - j));
@@ -905,11 +893,11 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * @return ?
 	 * 		Description manquante !
 	 */
-	public Vector<Point> getPossibleMoves(int x, int y, boolean objORnot) {
+	public List<Point> getPossibleMoves(int x, int y, boolean objORnot) {
 
 		int[] direction = new int[4];
 
-		Vector<Point> points = new Vector<Point>();
+		List<Point> points = new ArrayList<Point>();
 
 		try {
 			direction[0] = BetterMatrix()[x][y - 1]; // UP
@@ -938,51 +926,51 @@ public class GokselMenges extends ArtificialIntelligence {
 
 		if (objORnot == true) {
 
-			if (!ZoneAccessible.contains(new Point(x, y - 1))) {
+			if (!zoneAccessible.contains(new Point(x, y - 1))) {
 				if ((direction[0] == 0) || (direction[0] == 5)
 						|| (direction[0] == 6))
 					points.add(new Point(x, y - 1));
 			}
-			if (!ZoneAccessible.contains(new Point(x, y + 1))) {
+			if (!zoneAccessible.contains(new Point(x, y + 1))) {
 				if ((direction[1] == 0) || (direction[1] == 5)
 						|| (direction[1] == 6))
 					points.add(new Point(x, y + 1));
 			}
-			if (!ZoneAccessible.contains(new Point(x - 1, y))) {
+			if (!zoneAccessible.contains(new Point(x - 1, y))) {
 				if ((direction[2] == 0) || (direction[2] == 5)
 						|| (direction[2] == 6))
 					points.add(new Point(x - 1, y));
 			}
-			if (!ZoneAccessible.contains(new Point(x + 1, y))) {
+			if (!zoneAccessible.contains(new Point(x + 1, y))) {
 				if ((direction[3] == 0) || (direction[3] == 5)
 						|| (direction[3] == 6))
 					points.add(new Point(x + 1, y));
 			}
 
 		} else {
-			if ((ZoneAccessible.contains(new Point(x, y - 1)))) {
-				if (!MovedPoints.contains(new Point(x, y - 1))) {
+			if ((zoneAccessible.contains(new Point(x, y - 1)))) {
+				if (!movedPoints.contains(new Point(x, y - 1))) {
 					if ((direction[0] == 0) || (direction[0] == 5)
 							|| (direction[0] == 6))
 						points.add(new Point(x, y - 1));
 				}
 			}
-			if (ZoneAccessible.contains(new Point(x, y + 1))) {
-				if (!MovedPoints.contains(new Point(x, y + 1))) {
+			if (zoneAccessible.contains(new Point(x, y + 1))) {
+				if (!movedPoints.contains(new Point(x, y + 1))) {
 					if ((direction[1] == 0) || (direction[1] == 5)
 							|| (direction[1] == 6))
 						points.add(new Point(x, y + 1));
 				}
 			}
-			if (ZoneAccessible.contains(new Point(x - 1, y))) {
-				if (!MovedPoints.contains(new Point(x - 1, y))) {
+			if (zoneAccessible.contains(new Point(x - 1, y))) {
+				if (!movedPoints.contains(new Point(x - 1, y))) {
 					if ((direction[2] == 0) || (direction[2] == 5)
 							|| (direction[2] == 6))
 						points.add(new Point(x - 1, y));
 				}
 			}
-			if (ZoneAccessible.contains(new Point(x + 1, y))) {
-				if (!MovedPoints.contains(new Point(x + 1, y))) {
+			if (zoneAccessible.contains(new Point(x + 1, y))) {
+				if (!movedPoints.contains(new Point(x + 1, y))) {
 					if ((direction[3] == 0) || (direction[3] == 5)
 							|| (direction[3] == 6))
 						points.add(new Point(x + 1, y));
@@ -1020,11 +1008,11 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * @return ?
 	 * 		Description manquante !
 	 */
-	public Vector<Integer> getPointDistances(Vector<Point> points, Point Goal) {
-		Vector<Integer> result = new Vector<Integer>();
+	public List<Integer> getPointDistances(List<Point> points, Point Goal) {
+		List<Integer> result = new ArrayList<Integer>();
 
 		for (int i = 0; i < points.size(); i++) {
-			result.add(getDistance(points.elementAt(i), Goal));
+			result.add(getDistance(points.get(i), Goal));
 		}
 		return result;
 
@@ -1059,12 +1047,12 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * @param MinimumIndice
 	 * 		Description manquante !
 	 */
-	public void RemoveFromVector(int MinimumIndice) {
+	public void RemoveFromList(int MinimumIndice) {
 
-		MovedPoints.add(MoveCosts.get(MinimumIndice));
+		movedPoints.add(moveCosts.get(MinimumIndice));
 
-		Costs.remove(MinimumIndice);
-		MoveCosts.remove(MinimumIndice);
+		costs.remove(MinimumIndice);
+		moveCosts.remove(MinimumIndice);
 	}
 
 	/**
@@ -1078,33 +1066,31 @@ public class GokselMenges extends ArtificialIntelligence {
 	 */
 	// calcule le cout minimal en considerant les points a ou le bonhomme peut
 	// aller.
-	public int[] minimumCostCalculation(Vector<Point> MoveablePoints,
-			Vector<Integer> MoveablePointDistances) {
+	public int[] minimumCostCalculation(List<Point> MoveablePoints,
+			List<Integer> MoveablePointDistances) {
 		int[] MinimumCost = new int[2];
 
-		int TempCost = CoutInitial;
+		int TempCost = coutInitial;
 
 		for (int i = 0; i < MoveablePoints.size(); i++) {
 
-			Costs.add(TempCost + cost_empty + MoveablePointDistances.get(i));
-			MoveCosts.add(MoveablePoints.get(i));
+			costs.add(TempCost + cost_empty + MoveablePointDistances.get(i));
+			moveCosts.add(MoveablePoints.get(i));
 
 		}
 
 		int TempMini;
-		try {
-			TempMini = Costs.get(0);
-		} catch (RuntimeException e) {
+		if(costs!=null && !costs.isEmpty())
+			TempMini = costs.get(0);
+		else
 			return null;
 
-		}
-
 		int MiniIndice = 0;
-		for (int i = 0; i < Costs.size(); i++) {
-			if (Costs.get(i) < TempMini)
+		for (int i = 0; i < costs.size(); i++) {
+			if (costs.get(i) < TempMini)
 
 			{
-				TempMini = Costs.get(i);
+				TempMini = costs.get(i);
 				MiniIndice = i;
 			}
 		}
@@ -1112,7 +1098,7 @@ public class GokselMenges extends ArtificialIntelligence {
 		MinimumCost[0] = TempMini;
 		MinimumCost[1] = MiniIndice;
 
-		CoutInitial = TempCost + cost_empty;
+		coutInitial = TempCost + cost_empty;
 
 		return MinimumCost;
 
@@ -1129,10 +1115,10 @@ public class GokselMenges extends ArtificialIntelligence {
 	 */
 	// calcule le cout minimal en considerant les points a ou le bonhomme peut
 	// aller.
-	public int[] calculateMinimumCost(Vector<Point> MoveablePoints,
-			Vector<Integer> MoveablePointDistances) {
+	public int[] calculateMinimumCost(List<Point> MoveablePoints,
+			List<Integer> MoveablePointDistances) {
 		int[] MinimumCost = new int[2];
-		int TempCost = CoutInitial;
+		int TempCost = coutInitial;
 
 		for (int i = 0; i < MoveablePoints.size(); i++) {
 			int[][] tempo = BetterMatrix();
@@ -1140,54 +1126,54 @@ public class GokselMenges extends ArtificialIntelligence {
 
 			switch (cost) {
 			case 0:
-				Costs.add(TempCost + cost_empty + cost_distance_multiplier
+				costs.add(TempCost + cost_empty + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 			case 1:
-				Costs.add(TempCost + cost_softwall + cost_distance_multiplier
+				costs.add(TempCost + cost_softwall + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 			case 2:
-				Costs.add(TempCost + cost_hardwall + cost_distance_multiplier
+				costs.add(TempCost + cost_hardwall + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 			case 3:
-				Costs.add(TempCost + cost_feu + cost_distance_multiplier
+				costs.add(TempCost + cost_feu + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 			case 4:
-				Costs.add(TempCost + cost_bomba + cost_distance_multiplier
+				costs.add(TempCost + cost_bomba + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 			case 5:
-				Costs.add(TempCost + cost_bonus + cost_distance_multiplier
+				costs.add(TempCost + cost_bonus + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 			case 6:
-				Costs.add(TempCost + cost_bonus + cost_distance_multiplier
+				costs.add(TempCost + cost_bonus + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 			case 7:
-				Costs.add(TempCost + cost_portee + cost_distance_multiplier
+				costs.add(TempCost + cost_portee + cost_distance_multiplier
 						* MoveablePointDistances.get(i));
-				MoveCosts.add(MoveablePoints.get(i));
+				moveCosts.add(MoveablePoints.get(i));
 				break;
 
 			}
 		}
 
-		int TempMini = Costs.get(0);
+		int TempMini = costs.get(0);
 		int MiniIndice = 0;
-		for (int i = 0; i < Costs.size(); i++) {
-			if (Costs.get(i) < TempMini) {
-				TempMini = Costs.get(i);
+		for (int i = 0; i < costs.size(); i++) {
+			if (costs.get(i) < TempMini) {
+				TempMini = costs.get(i);
 				MiniIndice = i;
 			}
 		}
@@ -1195,7 +1181,7 @@ public class GokselMenges extends ArtificialIntelligence {
 		MinimumCost[0] = TempMini;
 		MinimumCost[1] = MiniIndice;
 
-		CoutInitial = CoutInitial + MinimumCost[0];
+		coutInitial = coutInitial + MinimumCost[0];
 
 		return MinimumCost;
 
@@ -1205,12 +1191,12 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * 
 	 * @return ?
 	 */
-	// prend les donnees de getZoneMatris et renvoi une matrice amelioré en
+	// prend les donnees de getZoneMatris et renvoi une matrice ameliorée en
 	// l'ajoutant les couts specifiques.
 	public int[][] BetterMatrix() {
 		int[][] ZoneMatrix = getZoneMatrix();
 
-		Vector<Point> BombPos = new Vector<Point>();
+		List<Point> BombPos = new ArrayList<Point>();
 		blockPoints.clear();
 		BombPos = BringAllBlockPositions(AI_BLOCK_BOMB);
 
@@ -1274,7 +1260,7 @@ public class GokselMenges extends ArtificialIntelligence {
 	 * @return ?
 	 * 		Description manquante !
 	 */
-	private Vector<Point> BringAllBlockPositions(int blockType) {
+	private List<Point> BringAllBlockPositions(int blockType) {
 
 		int[][] matrix = getZoneMatrix();
 		for (int i = 0; i < getZoneMatrixDimX(); i++) {

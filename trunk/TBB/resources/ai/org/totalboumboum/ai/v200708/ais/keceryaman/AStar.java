@@ -59,42 +59,44 @@ public class AStar {
 //			i++;
 			// get the first item of the open list and remove it
 			current = openList.getFirst();
-			// move to the closed list
-			closedList.add(current);
-			AStar.addToClosedList(current.getX(),current.getY());
-			if ( current.getX() == target[0] && current.getY() == target[1] ){
+			if(current!=null)
+			{	// move to the closed list
 				closedList.add(current);
 				AStar.addToClosedList(current.getX(),current.getY());
-				targetNode = current;
-				setTargetAdded();
-			}else{
-				current.findNeighbors();
-				// iterator for the neighbors
-				nodes = current.neighbors.iterator();
-				// for each neighbor of the current node
-				while ( nodes.hasNext() ){
-					neighbor = nodes.next();
-					coordinates = neighbor.getPosition();
-					// if the neighbor is already visited, just ignore it
-					if ( isInClosedList(coordinates[0],coordinates[1]) ){
-						continue;
-					}
-					// if it's never visited and is not in the open list, add it to the open list
-					else if ( !isInOpenList(coordinates[0], coordinates[1]) ){
-						openList.add(neighbor);
-						AStar.addToOpenList(coordinates[0],coordinates[1]);
-						neighbor.setParent(current);
-					}
-					// if it's never visited; but is in the open list, compare it with the one in the open list
-					else{
-						openList.compare(neighbor,current);
-					}
-				}// end: while
+				if ( current.getX() == target[0] && current.getY() == target[1] ){
+					closedList.add(current);
+					AStar.addToClosedList(current.getX(),current.getY());
+					targetNode = current;
+					setTargetAdded();
+				}else{
+					current.findNeighbors();
+					// iterator for the neighbors
+					nodes = current.neighbors.iterator();
+					// for each neighbor of the current node
+					while ( nodes.hasNext() ){
+						neighbor = nodes.next();
+						coordinates = neighbor.getPosition();
+						// if the neighbor is already visited, just ignore it
+						if ( isInClosedList(coordinates[0],coordinates[1]) ){
+							continue;
+						}
+						// if it's never visited and is not in the open list, add it to the open list
+						else if ( !isInOpenList(coordinates[0], coordinates[1]) ){
+							openList.add(neighbor);
+							AStar.addToOpenList(coordinates[0],coordinates[1]);
+							neighbor.setParent(current);
+						}
+						// if it's never visited; but is in the open list, compare it with the one in the open list
+						else{
+							openList.compare(neighbor,current);
+						}
+					}// end: while
+				}
 			}
 		}// end: while
 		// save the path
 		
-		while ( current.getParent() != null ){
+		while ( current!=null && current.getParent() != null ){
 			path.add(current);
 			current = current.getParent();
 		}
@@ -121,7 +123,9 @@ public class AStar {
 	 * 		Description manquante !
 	 */
 	public static void addToClosedList ( int x , int y ){
-		AStar.closedListCheck[ (x + width*y) ] = true;
+		int index = x + width*y;
+		if(index >= 0 && index < closedListCheck.length)
+			AStar.closedListCheck[ index ] = true;
 	}
 	/**
 	 * 
@@ -131,7 +135,9 @@ public class AStar {
 	 * 		Description manquante !
 	 */
 	public static void addToOpenList ( int x , int y ){
-		AStar.openListCheck[ (x + width*y) ] = true;
+		int index = x + width*y;
+		if(index >= 0 && index < openListCheck.length)
+			AStar.openListCheck[ index ] = true;
 	}
 	/**
 	 * 
@@ -141,7 +147,9 @@ public class AStar {
 	 * 		Description manquante !
 	 */
 	public static void removeFromClosedList ( int x , int y ){
-		AStar.closedListCheck[ (x + width*y) ] = false;
+		int index = x + width*y;
+		if(index >= 0 && index < closedListCheck.length)
+			AStar.closedListCheck[ index ] = false;
 	}
 	/**
 	 * 
@@ -151,7 +159,9 @@ public class AStar {
 	 * 		Description manquante !
 	 */
 	public static void removeFromOpenList ( int x , int y ){
-		AStar.openListCheck[ (x + width*y) ] = false;
+		int index = x + width*y;
+		if(index >= 0 && index < openListCheck.length)
+			AStar.openListCheck[ index ] = false;
 	}
 	/**
 	 * 
@@ -163,7 +173,11 @@ public class AStar {
 	 * 		Description manquante !
 	 */
 	public static boolean isInClosedList ( int x , int y ){
-		return AStar.closedListCheck[ (x + width*y) ];
+		int index = x + width*y;
+		if(index >= 0 && index < closedListCheck.length)
+			return AStar.closedListCheck[ index ];
+		else
+			return false;
 	}
 	/**
 	 * 
@@ -195,7 +209,11 @@ public class AStar {
 	 * 		Description manquante !
 	 */
 	public static boolean isInOpenList ( int x , int y ){
-		return AStar.openListCheck[ (x + width*y) ];
+		int index = x + width*y;
+		if(index>=0 && index<openListCheck.length)
+			return AStar.openListCheck[ index ];
+		else
+			return false;
 	}
 	/**
 	 * 

@@ -124,11 +124,16 @@ public class SahinYildirim extends ArtificialIntelligence {
 			  result = lastMove;
 		  
 		  else { // on détermine aléatoirement l'action qui va être effectuée
-		  int index; do { index = (int)(Math.random()*(possibleMoves.size())); }
-		  while(index==possibleMoves.size());
-		 
-		 
-		  result = possibleMoves.get(index);
+		  int index; 
+//		  do 
+		  if(!possibleMoves.isEmpty())
+		  { 
+			  index = (int)(Math.random()*(possibleMoves.size())); 
+			  result = possibleMoves.get(index);
+		  }
+//		  while(index==possibleMoves.size());
+		  else
+			  result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		 
 		 lastMove = result; 
 		 }
@@ -729,7 +734,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		int j = 0;
 		int numBomb = 0;
 
-		while (j < bombs.size()) {
+		while (j < bombs.size() && numBomb<bombPower.length) {
 
 			xB = bombs.get(j);// position x du bomb
 			yB = bombs.get(j + 1);// position y
